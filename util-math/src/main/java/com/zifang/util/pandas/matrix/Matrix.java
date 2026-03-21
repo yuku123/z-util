@@ -61,4 +61,7 @@ public class Matrix {
         return null;
     }
 
+    public int size() {
+        throw new RuntimeException();
+    }
 }

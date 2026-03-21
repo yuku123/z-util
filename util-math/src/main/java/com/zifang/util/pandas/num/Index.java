@@ -55,7 +55,7 @@ public class Index {
         }
     }
 
-    private Index(String[] labels) {
+    public Index(String[] labels) {
         this.isRangeIndex = false;
         this.start = 0;
         this.step = 1;

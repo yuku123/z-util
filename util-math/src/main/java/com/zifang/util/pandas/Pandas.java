@@ -284,13 +284,6 @@ public class Pandas {
 
     // ==================== 数据转换操作 ====================
 
-    /**
-     * 数据透视表 - 创建类似 Excel 的数据透视表
-     * 将长格式数据转换为宽格式
-     */
-    public static DataFrame pivot(DataFrame df, String index, String columns, String values) {
-        return com.zifang.util.pandas.transform.Reshaper.pivot(df, index, columns, values);
-    }
 
     /**
      * 带聚合函数的数据透视表
@@ -352,6 +345,99 @@ public class Pandas {
      */
     public static DataFrame T(DataFrame df) {
         return transpose(df);
+    }
+
+    // ==================== 插值操作 ====================
+
+    /**
+     * 对 Series 进行线性插值
+     */
+    public static Series interpolate(Series series) {
+        return com.zifang.util.pandas.interpolate.Interpolator.linear(series);
+    }
+
+    /**
+     * 对 Series 进行指定方法的插值
+     */
+    public static Series interpolate(Series series, String method) {
+        switch (method.toLowerCase()) {
+            case "forward":
+            case "ffill":
+                return com.zifang.util.pandas.interpolate.Interpolator.forward(series);
+            case "backward":
+            case "bfill":
+                return com.zifang.util.pandas.interpolate.Interpolator.backward(series);
+            case "linear":
+            default:
+                return com.zifang.util.pandas.interpolate.Interpolator.linear(series);
+        }
+    }
+
+    /**
+     * 对 DataFrame 进行线性插值
+     */
+    public static DataFrame interpolate(DataFrame df) {
+        return df.interpolate("linear");
+    }
+
+    /**
+     * 对 DataFrame 进行指定方法的插值
+     */
+    public static DataFrame interpolate(DataFrame df, String method) {
+        return df.interpolate(method);
+    }
+
+    // ==================== 统计分析和相关性 ====================
+
+    /**
+     * 计算 DataFrame 的相关系数矩阵
+     */
+    public static DataFrame corr(DataFrame df) {
+        return com.zifang.util.pandas.stats.Correlation.corr(df);
+    }
+
+    /**
+     * 计算两个 Series 的 Pearson 相关系数
+     */
+    public static double corr(Series x, Series y) {
+        return com.zifang.util.pandas.stats.Correlation.corr(
+            new DataFrame(java.util.Collections.singletonMap("x", x.toArray()))
+                .addColumn("y", y.toArray())
+        ).get("y").toArray()[0];
+    }
+
+    /**
+     * 计算 DataFrame 的协方差矩阵
+     */
+    public static DataFrame cov(DataFrame df) {
+        return com.zifang.util.pandas.stats.Correlation.cov(df);
+    }
+
+    // ==================== 数据离散化和分箱 ====================
+
+    /**
+     * 等宽分箱 (cut)
+     * 将数据分成等宽的区间
+     */
+    public static Series cut(Series series, int bins) {
+        return com.zifang.util.pandas.discretize.Discretizer.cut(series, bins);
+    }
+
+    /**
+     * 等频分箱 (qcut)
+     * 将数据分成每个箱子中样本数量相等的区间
+     */
+    public static Series qcut(Series series, int q) {
+        return com.zifang.util.pandas.discretize.Discretizer.qcut(series, q);
+    }
+
+    // ==================== 数据转换快捷方法 ====================
+
+    /**
+     * 数据透视表的快捷方法
+     */
+    public static DataFrame pivot(DataFrame df, String index, String columns, String values) {
+        return com.zifang.util.pandas.transform.Reshaper.pivot(df, index, columns, values);
     }
 
     // ==================== 常量 ====================

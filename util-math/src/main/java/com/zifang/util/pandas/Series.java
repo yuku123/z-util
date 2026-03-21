@@ -4,6 +4,7 @@ import com.zifang.util.pandas.num.DType;
 import com.zifang.util.pandas.num.Index;
 import com.zifang.util.pandas.num.Num;
 import com.zifang.util.pandas.num.Nums;
+import com.zifang.util.pandas.window.EWM;
 
 import java.util.*;
 import java.util.function.Function;
@@ -83,7 +84,7 @@ public class Series {
      * @param values 可变参数值列表
      * @return 新创建的 Series 对象
      */
-    public static Series of(String... values) {
+    public static Series of(String[] values) {
         // 将字符串值转换为数值索引，同时保留字符串信息
         double[] numericValues = new double[values.length];
         for (int i = 0; i < values.length; i++) {
@@ -95,29 +96,18 @@ public class Series {
                 numericValues[i] = i;
             }
         }
-        return new Series(numericValues, values, "string_series", null);
+        return new Series(numericValues, Index.of(values), "string_series", null);
     }
 
-    /**
-     * 数值类型的便捷工厂方法
-     */
-    public static Series of(double... values) {
-        return new Series(values);
-    }
 
     /**
      * 整数类型的便捷工厂方法
      */
-    public static Series of(int... values) {
+    public static Series of(int[] values) {
         return new Series(values);
     }
 
-    /**
-     * 带索引的便捷工厂方法
-     */
-    public static Series of(String[] index, double[] values) {
-        return new Series(values, index);
-    }
+
 
     public static Series fromMap(Map<String, ?> map) {
         String[] keys = map.keySet().toArray(new String[0]);
@@ -133,43 +123,16 @@ public class Series {
         return new Series(values, keys);
     }
 
-    /**
-     * 创建 Series 的便捷工厂方法（对标 pandas.Series）
-     * @param values 可变参数字符串值列表
-     * @return 新创建的 Series 对象
-     */
-    public static Series of(String... values) {
-        // 将字符串值转换为数值索引，同时保留字符串信息
-        double[] numericValues = new double[values.length];
-        for (int i = 0; i < values.length; i++) {
-            try {
-                // 尝试将字符串解析为数字
-                numericValues[i] = Double.parseDouble(values[i]);
-            } catch (NumberFormatException e) {
-                // 如果不是数字，使用索引作为值
-                numericValues[i] = i;
-            }
-        }
-        return new Series(numericValues, values, "string_series", null);
-    }
 
     /**
      * 数值类型的便捷工厂方法
      * @param values 可变参数数值列表
      * @return 新创建的 Series 对象
      */
-    public static Series of(double... values) {
+    public static Series of(double[] values) {
         return new Series(values);
     }
 
-    /**
-     * 整数类型的便捷工厂方法
-     * @param values 可变参数整数列表
-     * @return 新创建的 Series 对象
-     */
-    public static Series of(int... values) {
-        return new Series(values);
-    }
 
     /**
      * 带索引的便捷工厂方法
@@ -211,7 +174,7 @@ public class Series {
             values[i] = data[indices[i]];
             newIndex[i] = index.get(indices[i]);
         }
-        return new Series(values, newIndex, name, dtype);
+        return new Series(values, Index.of(newIndex), name, dtype);
     }
 
     public Series slice(int start, int stop) {
@@ -244,7 +207,7 @@ public class Series {
             }
         }
         return new Series(values.stream().mapToDouble(Double::doubleValue).toArray(),
-                         newIndex.toArray(new String[0]), name, dtype);
+                Index.of(newIndex.toArray(new String[0])), name, dtype);
     }
 
     public Series where(Function<Double, Boolean> condition, double thenValue, double elseValue) {
@@ -735,7 +698,7 @@ public class Series {
      * @return EWM 窗口对象
      */
     public com.zifang.util.pandas.window.EWM ewmCom(double com) {
-        return com.zifang.util.pandas.window.EWM.com(this, com);
+        return EWM.com(this, com);
     }
 
     /**

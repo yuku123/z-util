@@ -2,6 +2,7 @@ package com.zifang.util.pandas.transform;
 
 import com.zifang.util.pandas.DataFrame;
 import com.zifang.util.pandas.Series;
+import com.zifang.util.pandas.num.Index;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -162,7 +163,7 @@ public class ReshaperTest {
         // 创建一个堆叠的 Series
         double[] values = new double[]{1.0, 3.0, 2.0, 4.0};
         String[] index = new String[]{"row1_A", "row1_B", "row2_A", "row2_B"};
-        Series stacked = new Series(values, index, "stacked", null);
+        Series stacked = new Series(values, Index.of(index), "stacked", null);
 
         DataFrame unstacked = Reshaper.unstack(stacked);
 

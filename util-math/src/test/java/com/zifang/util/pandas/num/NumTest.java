@@ -70,19 +70,19 @@ public class NumTest {
     public void testShape1DArray() {
         int[] array = {1, 2, 3, 4, 5};
         Num num = new Num(array);
-        Integer[] shape = num.shape();
+        int[] shape = num.shape();
         assertEquals(1, shape.length);
-        assertEquals(Integer.valueOf(5), shape[0]);
+        assertEquals(5, shape[0]);
     }
 
     @Test
     public void testShape2DArray() {
         int[][] array = {{1, 2, 3}, {4, 5, 6}};
         Num num = new Num(array);
-        Integer[] shape = num.shape();
+        int[] shape = num.shape();
         assertEquals(2, shape.length);
-        assertEquals(Integer.valueOf(2), shape[0]);
-        assertEquals(Integer.valueOf(3), shape[1]);
+        assertEquals(2, shape[0]);
+        assertEquals(3, shape[1]);
     }
 
     @Test

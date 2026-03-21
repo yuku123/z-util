@@ -18,7 +18,7 @@ public class StringAccessorTest {
     @Before
     public void setUp() {
         // 创建字符串测试数据
-        stringSeries = Series.of("Hello World", "JAVA Programming", "  Test String  ", "lowercase", "123-456-789");
+        stringSeries = Series.of(new String[]{"Hello World", "JAVA Programming", "  Test String  ", "lowercase", "123-456-789"});
 
         // 创建数值测试数据（会被转换为字符串）
         double[] nums = {123.45, 678.90, 111.22};

@@ -48,10 +48,10 @@ public class NumsTest {
         // 测试形状计算
         int[][] twoDim = {{1, 2, 3}, {4, 5, 6}};
         Num num = Nums.array(twoDim);
-        Integer[] shape = num.shape();
+        int[] shape = num.shape();
         assertEquals(2, shape.length);
-        assertEquals(Integer.valueOf(2), shape[0]);
-        assertEquals(Integer.valueOf(3), shape[1]);
+        assertEquals(2, shape[0]);
+        assertEquals(3, shape[1]);
     }
 
     @Test

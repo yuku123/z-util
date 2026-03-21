@@ -459,6 +459,50 @@ public class DataFrame {
         return this.slice(start, end);
     }
 
+    /**
+     * 插值填充缺失值
+     * 使用线性插值方法填充 NaN 值
+     * @return 插值后的 DataFrame
+     */
+    public DataFrame interpolate() {
+        return interpolate("linear");
+    }
+
+    /**
+     * 使用指定方法进行插值
+     * @param method 插值方法："linear", "forward", "backward"
+     * @return 插值后的 DataFrame
+     */
+    public DataFrame interpolate(String method) {
+        DataFrame result = new DataFrame();
+        result.index = this.index;
+        result.columnNames = new ArrayList<>(this.columnNames);
+
+        for (String col : this.columnNames) {
+            Series series = this.columns.get(col);
+            Series interpolated;
+
+            switch (method.toLowerCase()) {
+                case "forward":
+                case "ffill":
+                    interpolated = com.zifang.util.pandas.interpolate.Interpolator.forward(series);
+                    break;
+                case "backward":
+                case "bfill":
+                    interpolated = com.zifang.util.pandas.interpolate.Interpolator.backward(series);
+                    break;
+                case "linear":
+                default:
+                    interpolated = com.zifang.util.pandas.interpolate.Interpolator.linear(series);
+                    break;
+            }
+
+            result.columns.put(col, interpolated);
+        }
+
+        return result;
+    }
+
     public DataFrame dropDuplicates() {
         // 简化实现：基于所有列去重
         Set<List<Double>> seen = new LinkedHashSet<>();
@@ -541,7 +585,7 @@ public class DataFrame {
         }
 
         public DataFrame count() {
-            return aggregate(Series::count);
+            return aggregate(series -> Double.valueOf(series.count()));
         }
 
         public DataFrame min() {

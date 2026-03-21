@@ -1,5 +1,6 @@
 package com.zifang.util.pandas;
 
+import com.zifang.util.pandas.matrix.Linalg;
 import com.zifang.util.pandas.num.*;
 import org.junit.Test;
 

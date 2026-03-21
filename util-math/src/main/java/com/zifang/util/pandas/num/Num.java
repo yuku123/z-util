@@ -73,6 +73,10 @@ public class Num {
         return new Num(array);
     }
 
+    public static Num eye(int i) {
+        throw new RuntimeException();
+    }
+
     // ==================== 算术运算 ====================
 
     public Num add(Num other) {
@@ -375,7 +379,7 @@ public class Num {
         throw new UnsupportedOperationException("Reduction operations for this shape not yet implemented");
     }
 
-    private Num apply(java.util.function.DoubleUnaryOperator op) {
+    public Num apply(java.util.function.DoubleUnaryOperator op) {
         if (array instanceof double[]) {
             double[] a = (double[]) array;
             double[] result = new double[a.length];
