@@ -46,6 +46,18 @@ public class Series {
             this.data = Nums.array(data);
         } else if (data instanceof List) {
             this.data = Nums.array((List<?>) data);
+        } else if (data instanceof String[]) {
+            // 将字符串数组转换为数值索引
+            String[] strArray = (String[]) data;
+            double[] numericValues = new double[strArray.length];
+            for (int i = 0; i < strArray.length; i++) {
+                try {
+                    numericValues[i] = Double.parseDouble(strArray[i]);
+                } catch (NumberFormatException e) {
+                    numericValues[i] = i; // 如果无法解析为数字，使用索引作为值
+                }
+            }
+            this.data = new Num(numericValues);
         } else {
             throw new IllegalArgumentException("Unsupported data type: " + data.getClass());
         }
@@ -66,6 +78,47 @@ public class Series {
 
     // ==================== 静态工厂方法 ====================
 
+    /**
+     * 创建 Series 的便捷工厂方法（对标 pandas.Series）
+     * @param values 可变参数值列表
+     * @return 新创建的 Series 对象
+     */
+    public static Series of(String... values) {
+        // 将字符串值转换为数值索引，同时保留字符串信息
+        double[] numericValues = new double[values.length];
+        for (int i = 0; i < values.length; i++) {
+            try {
+                // 尝试将字符串解析为数字
+                numericValues[i] = Double.parseDouble(values[i]);
+            } catch (NumberFormatException e) {
+                // 如果不是数字，使用索引作为值
+                numericValues[i] = i;
+            }
+        }
+        return new Series(numericValues, values, "string_series", null);
+    }
+
+    /**
+     * 数值类型的便捷工厂方法
+     */
+    public static Series of(double... values) {
+        return new Series(values);
+    }
+
+    /**
+     * 整数类型的便捷工厂方法
+     */
+    public static Series of(int... values) {
+        return new Series(values);
+    }
+
+    /**
+     * 带索引的便捷工厂方法
+     */
+    public static Series of(String[] index, double[] values) {
+        return new Series(values, index);
+    }
+
     public static Series fromMap(Map<String, ?> map) {
         String[] keys = map.keySet().toArray(new String[0]);
         double[] values = new double[map.size()];
@@ -78,6 +131,54 @@ public class Series {
             }
         }
         return new Series(values, keys);
+    }
+
+    /**
+     * 创建 Series 的便捷工厂方法（对标 pandas.Series）
+     * @param values 可变参数字符串值列表
+     * @return 新创建的 Series 对象
+     */
+    public static Series of(String... values) {
+        // 将字符串值转换为数值索引，同时保留字符串信息
+        double[] numericValues = new double[values.length];
+        for (int i = 0; i < values.length; i++) {
+            try {
+                // 尝试将字符串解析为数字
+                numericValues[i] = Double.parseDouble(values[i]);
+            } catch (NumberFormatException e) {
+                // 如果不是数字，使用索引作为值
+                numericValues[i] = i;
+            }
+        }
+        return new Series(numericValues, values, "string_series", null);
+    }
+
+    /**
+     * 数值类型的便捷工厂方法
+     * @param values 可变参数数值列表
+     * @return 新创建的 Series 对象
+     */
+    public static Series of(double... values) {
+        return new Series(values);
+    }
+
+    /**
+     * 整数类型的便捷工厂方法
+     * @param values 可变参数整数列表
+     * @return 新创建的 Series 对象
+     */
+    public static Series of(int... values) {
+        return new Series(values);
+    }
+
+    /**
+     * 带索引的便捷工厂方法
+     * @param index 索引数组
+     * @param values 数值数组
+     * @return 新创建的 Series 对象
+     */
+    public static Series of(String[] index, double[] values) {
+        return new Series(values, index);
     }
 
     // ==================== 数据访问 ====================
@@ -99,7 +200,7 @@ public class Series {
         for (int i = 0; i < labels.length; i++) {
             values[i] = get(labels[i]);
         }
-        return new Series(values, labels, name, dtype);
+        return new Series(values, Index.of(labels), name, dtype);
     }
 
     public Series get(int[] indices) {
@@ -598,6 +699,62 @@ public class Series {
             }
         }
         return true;
+    }
+
+    // ==================== 窗口操作 ====================
+
+    /**
+     * 创建滚动窗口对象
+     * @param window 窗口大小
+     * @return Rolling 窗口对象
+     */
+    public com.zifang.util.pandas.window.Rolling rolling(int window) {
+        return new com.zifang.util.pandas.window.Rolling(this, window);
+    }
+
+    /**
+     * 创建扩展窗口对象
+     * @return Expanding 窗口对象
+     */
+    public com.zifang.util.pandas.window.Expanding expanding() {
+        return new com.zifang.util.pandas.window.Expanding(this);
+    }
+
+    /**
+     * 创建指数加权移动窗口对象
+     * @param alpha 衰减因子
+     * @return EWM 窗口对象
+     */
+    public com.zifang.util.pandas.window.EWM ewm(double alpha) {
+        return new com.zifang.util.pandas.window.EWM(this, alpha);
+    }
+
+    /**
+     * 使用 COM 创建 EWM
+     * @param com 质心
+     * @return EWM 窗口对象
+     */
+    public com.zifang.util.pandas.window.EWM ewmCom(double com) {
+        return com.zifang.util.pandas.window.EWM.com(this, com);
+    }
+
+    /**
+     * 使用跨度创建 EWM
+     * @param span 跨度
+     * @return EWM 窗口对象
+     */
+    public com.zifang.util.pandas.window.EWM ewmSpan(double span) {
+        return com.zifang.util.pandas.window.EWM.span(this, span);
+    }
+
+    // ==================== 字符串操作 ====================
+
+    /**
+     * 获取字符串访问器，用于执行字符串操作
+     * @return StringAccessor 字符串操作访问器
+     */
+    public com.zifang.util.pandas.str.StringAccessor str() {
+        return new com.zifang.util.pandas.str.StringAccessor(this);
     }
 
     // ==================== apply 和 map ====================
