@@ -732,4 +732,8 @@ public class Series {
             throw new IllegalArgumentException("Series must have the same length for this operation");
         }
     }
+
+    public int length() {
+        return index.size();
+    }
 }

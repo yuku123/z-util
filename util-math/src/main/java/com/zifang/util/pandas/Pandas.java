@@ -282,6 +282,78 @@ public class Pandas {
         return Linalg.matrix_rank(a);
     }
 
+    // ==================== 数据转换操作 ====================
+
+    /**
+     * 数据透视表 - 创建类似 Excel 的数据透视表
+     * 将长格式数据转换为宽格式
+     */
+    public static DataFrame pivot(DataFrame df, String index, String columns, String values) {
+        return com.zifang.util.pandas.transform.Reshaper.pivot(df, index, columns, values);
+    }
+
+    /**
+     * 带聚合函数的数据透视表
+     */
+    public static DataFrame pivot(DataFrame df, String index, String columns, String values, String aggFunc) {
+        return com.zifang.util.pandas.transform.Reshaper.pivot(df, index, columns, values, aggFunc);
+    }
+
+    /**
+     * 数据融合 - 将宽格式数据转换为长格式
+     * pivot 的逆操作
+     */
+    public static DataFrame melt(DataFrame df, List<String> idVars, List<String> valueVars,
+                                  String varName, String valueName) {
+        return com.zifang.util.pandas.transform.Reshaper.melt(df, idVars, valueVars, varName, valueName);
+    }
+
+    /**
+     * 简化版 melt - 使用默认列名
+     */
+    public static DataFrame melt(DataFrame df, List<String> idVars, List<String> valueVars) {
+        return com.zifang.util.pandas.transform.Reshaper.melt(df, idVars, valueVars);
+    }
+
+    /**
+     * 堆叠操作 - 将列索引转换为行索引
+     * 将 DataFrame 转换为 Series（多级索引）
+     */
+    public static Series stack(DataFrame df) {
+        return com.zifang.util.pandas.transform.Reshaper.stack(df);
+    }
+
+    /**
+     * 取消堆叠操作 - 将行索引转换为列索引
+     * 将 Series（多级索引）转换为 DataFrame
+     */
+    public static DataFrame unstack(Series series) {
+        return com.zifang.util.pandas.transform.Reshaper.unstack(series);
+    }
+
+    /**
+     * 交叉表 - 创建列联表
+     * 统计两个分类变量的频数分布
+     */
+    public static DataFrame crosstab(DataFrame df, String rowVar, String colVar) {
+        return com.zifang.util.pandas.transform.Reshaper.crosstab(df, rowVar, colVar);
+    }
+
+    /**
+     * 转置 DataFrame
+     * 行列互换
+     */
+    public static DataFrame transpose(DataFrame df) {
+        return com.zifang.util.pandas.transform.Reshaper.transpose(df);
+    }
+
+    /**
+     * 简化版转置 - 使用 T 别名
+     */
+    public static DataFrame T(DataFrame df) {
+        return transpose(df);
+    }
+
     // ==================== 常量 ====================
 
     public static final double PI = Math.PI;
