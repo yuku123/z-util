@@ -2,6 +2,7 @@ package com.zifang.util.pandas;
 
 import com.zifang.util.pandas.io.CSVReader;
 import com.zifang.util.pandas.io.CSVWriter;
+import com.zifang.util.pandas.matrix.Linalg;
 import com.zifang.util.pandas.num.*;
 
 import java.io.File;

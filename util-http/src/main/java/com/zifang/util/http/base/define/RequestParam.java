@@ -7,4 +7,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface RequestParam {
     String value();
+
+    boolean required() default true;
 }
