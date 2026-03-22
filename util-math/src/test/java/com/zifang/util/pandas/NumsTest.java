@@ -14,7 +14,7 @@ public class NumsTest {
 
         assert num.nDim() == 3;
         // assert ArraysUtil.isDeeplyEqual(new int[]{3, 2, 2}, num.shape());
-        assert num.size() == 8;
+        assert num.size() == 12;
         System.out.println(num);
     }
 
@@ -24,6 +24,4 @@ public class NumsTest {
         System.out.println(num);
         System.out.println();
     }
-
-
 }
