@@ -1,4 +1,9 @@
 package com.zifang.util.http.base.define;
 
-public class PutMapping {
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
+public @interface PutMapping {
+    String value();
 }

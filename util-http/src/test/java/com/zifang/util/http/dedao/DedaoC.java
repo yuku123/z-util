@@ -25,7 +25,7 @@ import java.util.Map;
 public class DedaoC {
 
 
-    public static String base = "D:\\workplace\\dedao";
+    public static String base = "/Users/zifang/Downloads/dedao";
     @Test
     public void test() throws IOException {
 

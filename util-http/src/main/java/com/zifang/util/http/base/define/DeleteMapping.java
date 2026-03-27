@@ -1,4 +1,6 @@
 package com.zifang.util.http.base.define;
 
-public class DeleteMapping {
+public @interface DeleteMapping {
+    String value();
+
 }

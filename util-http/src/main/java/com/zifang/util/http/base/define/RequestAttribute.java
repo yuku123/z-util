@@ -1,4 +1,4 @@
 package com.zifang.util.http.base.define;
 
-public class RequestAttribute {
+public @interface RequestAttribute {
 }

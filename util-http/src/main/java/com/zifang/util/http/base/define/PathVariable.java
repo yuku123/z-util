@@ -1,4 +1,5 @@
 package com.zifang.util.http.base.define;
 
-public class PathVariable {
+public @interface PathVariable {
+    String value();
 }

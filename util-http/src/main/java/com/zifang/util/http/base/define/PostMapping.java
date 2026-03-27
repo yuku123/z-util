@@ -7,5 +7,7 @@ import java.lang.annotation.*;
 @Documented
 @RequestMapping(method = RequestMethod.GET)
 public @interface PostMapping {
-    String[] value() default {};
+    String[] values() default {};
+    String value() default "";
+
 }
