@@ -25,9 +25,9 @@ import java.util.Map;
 
 public class DedaoE {
 
-    public static String base = "D:\\workplace\\dedao";
+    public static String base = "/Users/zifang/Downloads/dedao";
 
-    public static String baseTaget = "D:\\workplace\\dedao_target";
+    public static String baseTaget = "/Users/zifang/Downloads/dedao_target";
     @Test
     public void test() throws IOException {
 
@@ -46,7 +46,7 @@ public class DedaoE {
                 String year = localDateTime.getYear()+"";
                 String month = localDateTime.getMonthValue()+"";
 
-                String targetFolder = baseTaget+"\\"+year+"\\"+year+"-"+month;
+                String targetFolder = baseTaget+"/"+year+"/"+year+"-"+month;
                 File targetFolderFile = new File(targetFolder);
                 if(!targetFolderFile.exists()){
                     targetFolderFile.mkdirs();
@@ -64,7 +64,7 @@ public class DedaoE {
                     }
                 }
 
-                File targetFile = new File(targetFolder+"\\"+file.getName().replace(".json","")+".md");
+                File targetFile = new File(targetFolder+"/"+file.getName().replace(".json","")+".md");
                 FileUtil.write(targetFile, mdContent,"utf-8");
             }catch (Exception E){
                 System.out.println(file.getName());

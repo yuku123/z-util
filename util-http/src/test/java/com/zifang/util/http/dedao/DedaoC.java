@@ -70,7 +70,7 @@ public class DedaoC {
                     context.put("bookDescribeInfo",bookDescribeInfo);
                     context.put("bookDetail",bookDetail);
 
-                    FileUtil.write(new File(base+"\\"+booName+".json"), JSON.toJSONString(context, SerializerFeature.PrettyFormat),"utf-8");
+                    FileUtil.write(new File(base+"/"+booName+".json"), JSON.toJSONString(context, SerializerFeature.PrettyFormat),"utf-8");
                     System.out.println("----开始写出+"+booName );
                 }catch (Exception e){
                     e.printStackTrace();
