@@ -85,7 +85,7 @@ public class ZipUtil {
         }
     }
 
-    public static void zipFolder(String folder, String targetFolder, String zipFileName) {
+    public static void zipFolder(String folder, String targetFolder, String zipFileName) throws IOException {
 
         File zipFolder = new File(folder);
 
@@ -95,6 +95,23 @@ public class ZipUtil {
 
         if (!zipFolder.exists()) {
             throw new RuntimeException("folder：" + folder + " is not Exist");
+        }
+
+        // 确保目标目录存在
+        File targetDir = new File(targetFolder);
+        if (!targetDir.exists()) {
+            targetDir.mkdirs();
+        }
+
+        // 创建 zip 文件路径
+        String zipFilePath = targetFolder + File.separator + zipFileName;
+        if (!zipFileName.endsWith(ZIP_FILE_SUFFIX)) {
+            zipFilePath = targetFolder + File.separator + zipFileName + ZIP_FILE_SUFFIX;
+        }
+
+        // 创建 ZipOutputStream
+        try (ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFilePath)))) {
+            compressedFile(out, zipFolder, "");
         }
     }
 

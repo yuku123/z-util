@@ -88,8 +88,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 
     @Override
     public String toString() {
-        return null;
-//        return toString(CharsetUtil.defaultCharset());
+        return new String(toByteArray(), java.nio.charset.StandardCharsets.UTF_8);
     }
 
     /**
@@ -99,8 +98,7 @@ public class FastByteArrayOutputStream extends OutputStream {
      * @return 字符串
      */
     public String toString(String charsetName) {
-        return null;
-//        return toString(CharsetUtil.charset(charsetName));
+        return new String(toByteArray(), java.nio.charset.Charset.forName(charsetName));
     }
 
     /**
@@ -109,10 +107,11 @@ public class FastByteArrayOutputStream extends OutputStream {
      * @param charset 编码,null表示默认编码
      * @return 字符串
      */
-    public String toString(Charset charset) {
-        return null;
-//        return new String(toByteArray(),
-//                ObjectUtil.defaultIfNull(charset, CharsetUtil.defaultCharset()));
+    public String toString(java.nio.charset.Charset charset) {
+        if (charset == null) {
+            charset = java.nio.charset.StandardCharsets.UTF_8;
+        }
+        return new String(toByteArray(), charset);
     }
 
 }

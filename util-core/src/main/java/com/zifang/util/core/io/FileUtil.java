@@ -1137,12 +1137,11 @@ public class FileUtil {
      * @return
      */
     public static String getFileName(String type, String prefix, String suffix) {
-//        String date = DateUtils.getCurrentTime("yyyyMMddHH24mmss");   //当前时间
-//        String random = RandomUtil.generateNumberString(10);   //10位随机数
-//
-//        //返回文件名
-//        return prefix + date + random + suffix + "." + type;
-        return "";
+        String date = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+        String random = String.valueOf((int) ((Math.random() * 9 + 1) * 1000000000));   //10位随机数
+
+        //返回文件名
+        return prefix + date + random + suffix + "." + type;
     }
 
 
@@ -1152,12 +1151,11 @@ public class FileUtil {
      * @return
      */
     public static String getFileName() {
-//        String date = DateUtils.getCurrentTime("yyyyMMddHH24mmss");   //当前时间
-//        String random = RandomUtil.generateNumberString(10);   //10位随机数
-//
-//        //返回文件名
-//        return date + random;
-        return "";
+        String date = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+        String random = String.valueOf((int) ((Math.random() * 9 + 1) * 1000000000));   //10位随机数
+
+        //返回文件名
+        return date + random;
     }
 
     /**
