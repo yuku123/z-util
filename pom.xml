@@ -38,7 +38,6 @@
         <module>util-proxy</module>
         <module>util-ch</module>
         <module>util-json</module>
-        <module>util-llm</module>
     </modules>
 
     <dependencyManagement>
