@@ -92,7 +92,7 @@ public class HttpServerBuilderTest {
                 .start();
 
         // 给服务器一点时间启动
-        Thread.sleep(1000);
+        Thread.sleep(1000000);
 
         System.out.println("Server started. You can test with curl:");
         System.out.println("  curl http://localhost:8080/user1/users");

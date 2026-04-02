@@ -202,8 +202,8 @@ public class HttpServerBuilder {
      * @return 正则表达式模式
      */
     private Pattern compilePathPattern(String path) {
-        // 将路径参数 {id} 转换为正则表达式组
-        String regex = path.replaceAll("\\{([^}]+)\\}", "(?<$1>[^/]+)");
+        // 将路径参数 {id} 转换为正则表达式组（使用数字组，而非命名组，兼容性更好）
+        String regex = path.replaceAll("\\{([^}]+)\\}", "([^/]+)");
         // 处理查询参数（移除它们，只匹配路径部分）
         if (regex.contains("?")) {
             regex = regex.substring(0, regex.indexOf("?"));
