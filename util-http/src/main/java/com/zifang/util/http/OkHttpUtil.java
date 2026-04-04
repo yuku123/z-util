@@ -2,152 +2,139 @@ package com.zifang.util.http;
 
 import com.zifang.util.http.client.HttpClientResult;
 import okhttp3.*;
+import okhttp3.sse.EventSource;
+import okhttp3.sse.EventSourceListener;
+import okhttp3.sse.EventSources;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-/**
- * OkHttp3 封装 HTTP 工具类
- * 与原 Apache HttpUtil 方法名、参数完全一致，可无缝替换
- */
 public class OkHttpUtil {
 
-    // 编码格式
-    private static final String ENCODING = StandardCharsets.UTF_8.name();
+    private static final int CONNECT_TIMEOUT = 10;
+    private static final int READ_TIMEOUT = 60;
+    private static final int WRITE_TIMEOUT = 10;
 
-    // 超时时间
-    private static final int CONNECT_TIMEOUT = 6;
-    private static final int READ_TIMEOUT = 6;
-    private static final int WRITE_TIMEOUT = 6;
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    public static final MediaType FORM = MediaType.parse("application/x-www-form-urlencoded");
+    public static final MediaType FILE = MediaType.parse("application/octet-stream");
 
-    // 单例 OkHttpClient（OkHttp 官方强制推荐）
-    private static final OkHttpClient OK_HTTP_CLIENT;
+    private static final OkHttpClient CLIENT = new OkHttpClient.Builder()
+            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
+            .connectionPool(new ConnectionPool(10, 5, TimeUnit.MINUTES))
+            .retryOnConnectionFailure(true)
+            .build();
 
-    static {
-        OK_HTTP_CLIENT = new OkHttpClient.Builder()
-                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
-                // 连接池复用，避免频繁创建关闭
-                .connectionPool(new ConnectionPool(5, 5, TimeUnit.MINUTES))
+    // ==================== Basic Auth ====================
+    public static String basicAuth(String user, String pwd) {
+        String str = user + ":" + pwd;
+        return "Basic " + java.util.Base64.getEncoder().encodeToString(str.getBytes(StandardCharsets.UTF_8));
+    }
+
+    // ==================== GET ====================
+    public static HttpClientResult get(String url) throws IOException {
+        return get(url, null, null);
+    }
+
+    public static HttpClientResult get(String url, Map<String, String> params) throws IOException {
+        return get(url, null, params);
+    }
+
+    public static HttpClientResult get(String url, Map<String, String> headers, Map<String, String> params) throws IOException {
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
+        if (params != null) params.forEach(urlBuilder::addQueryParameter);
+        Request.Builder req = new Request.Builder().url(urlBuilder.build());
+        if (headers != null) headers.forEach(req::addHeader);
+        try (Response res = CLIENT.newCall(req.build()).execute()) {
+            return new HttpClientResult(res.code(), res.body() == null ? "" : res.body().string());
+        }
+    }
+
+    // ==================== POST JSON ====================
+    public static HttpClientResult postJson(String url, String json) throws IOException {
+        return postJson(url, null, json);
+    }
+
+    public static HttpClientResult postJson(String url, Map<String, String> headers, String json) throws IOException {
+        RequestBody body = RequestBody.create(json, JSON);
+        Request.Builder req = new Request.Builder().url(url).post(body);
+        if (headers != null) headers.forEach(req::addHeader);
+        try (Response res = CLIENT.newCall(req.build()).execute()) {
+            return new HttpClientResult(res.code(), res.body() == null ? "" : res.body().string());
+        }
+    }
+
+    // ==================== POST FORM ====================
+    public static HttpClientResult postForm(String url, Map<String, String> params) throws IOException {
+        return postForm(url, null, params);
+    }
+
+    public static HttpClientResult postForm(String url, Map<String, String> headers, Map<String, String> params) throws IOException {
+        FormBody.Builder form = new FormBody.Builder(StandardCharsets.UTF_8);
+        if (params != null) params.forEach(form::add);
+        Request.Builder req = new Request.Builder().url(url).post(form.build());
+        if (headers != null) headers.forEach(req::addHeader);
+        try (Response res = CLIENT.newCall(req.build()).execute()) {
+            return new HttpClientResult(res.code(), res.body() == null ? "" : res.body().string());
+        }
+    }
+
+    // ==================== 异步请求 ====================
+    public static void async(Request request, Callback callback) {
+        CLIENT.newCall(request).enqueue(callback);
+    }
+
+    // ==================== 异步 POST JSON ====================
+    public static void asyncPostJson(String url, String json, Callback callback) {
+        asyncPostJson(url, null, json, callback);
+    }
+
+    public static void asyncPostJson(String url, Map<String, String> headers, String json, Callback callback) {
+        RequestBody body = RequestBody.create(json, JSON);
+        Request.Builder req = new Request.Builder().url(url).post(body);
+        if (headers != null) headers.forEach(req::addHeader);
+        async(req.build(), callback);
+    }
+
+    // ==================== ✅ 正确 SSE（无 connect()）====================
+    public static EventSource sse(String url, EventSourceListener listener) {
+        return sse(url, null, listener);
+    }
+
+    public static EventSource sse(String url, Map<String, String> headers, EventSourceListener listener) {
+        Request.Builder req = new Request.Builder().url(url)
+                .addHeader("Accept", "text/event-stream")
+                .addHeader("Cache-Control", "no-cache")
+                .addHeader("Connection", "keep-alive");
+
+        if (headers != null) {
+            headers.forEach(req::addHeader);
+        }
+
+        // 官方正确写法 → 自动连接，不需要 .connect()
+        EventSource.Factory factory = EventSources.createFactory(CLIENT);
+        return factory.newEventSource(req.build(), listener);
+    }
+
+    // ==================== 文件上传 ====================
+    public static HttpClientResult upload(String url, String fileField, File file) throws IOException {
+        return upload(url, null, fileField, file);
+    }
+
+    public static HttpClientResult upload(String url, Map<String, String> headers, String fileField, File file) throws IOException {
+        MultipartBody body = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart(fileField, file.getName(), RequestBody.create(file, FILE))
                 .build();
-    }
-
-    /**
-     * 生成 BasicAuth 请求头
-     */
-    public static String toBasicAuthValue(String username, String password) {
-        return "Basic " + java.util.Base64.getEncoder()
-                .encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
-    }
-
-    // ====================== GET ======================
-    public static HttpClientResult doGet(String url) throws IOException {
-        return doGet(url, null, null);
-    }
-
-    public static HttpClientResult doGet(String url, Map<String, String> params) throws IOException {
-        return doGet(url, null, params);
-    }
-
-    public static HttpClientResult doGet(String url, Map<String, String> headers, Map<String, String> params) throws IOException {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-        if (params != null) {
-            params.forEach(urlBuilder::addQueryParameter);
-        }
-
-        Request.Builder requestBuilder = new Request.Builder().url(urlBuilder.build());
-        setHeaders(requestBuilder, headers);
-
-        Request request = requestBuilder.get().build();
-        return execute(request);
-    }
-
-    // ====================== POST ======================
-    public static HttpClientResult doPost(String url) throws IOException {
-        return doPost(url, null, null);
-    }
-
-    public static HttpClientResult doPost(String url, Map<String, String> params) throws IOException {
-        return doPost(url, null, params);
-    }
-
-    public static HttpClientResult doPost(String url, Map<String, String> headers, Map<String, String> params) throws IOException {
-        FormBody.Builder formBuilder = new FormBody.Builder(StandardCharsets.UTF_8);
-        if (params != null) {
-            params.forEach(formBuilder::add);
-        }
-
-        Request.Builder requestBuilder = new Request.Builder().url(url).post(formBuilder.build());
-        setHeaders(requestBuilder, headers);
-
-        return execute(requestBuilder.build());
-    }
-
-    // ====================== PUT ======================
-    public static HttpClientResult doPut(String url) throws IOException {
-        return doPut(url, null, null);
-    }
-
-    public static HttpClientResult doPut(String url, Map<String, String> params) throws IOException {
-        return doPut(url, null, params);
-    }
-
-    public static HttpClientResult doPut(String url, Map<String, String> headers, Map<String, String> params) throws IOException {
-        FormBody.Builder formBuilder = new FormBody.Builder(StandardCharsets.UTF_8);
-        if (params != null) {
-            params.forEach(formBuilder::add);
-        }
-
-        Request.Builder requestBuilder = new Request.Builder().url(url).put(formBuilder.build());
-        setHeaders(requestBuilder, headers);
-
-        return execute(requestBuilder.build());
-    }
-
-    // ====================== DELETE ======================
-    public static HttpClientResult doDelete(String url) throws IOException {
-        return doDelete(url, null, null);
-    }
-
-    public static HttpClientResult doDelete(String url, Map<String, String> params) throws IOException {
-        return doDelete(url, null, params);
-    }
-
-    public static HttpClientResult doDelete(String url, Map<String, String> headers, Map<String, String> params) throws IOException {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-        if (params != null) {
-            params.forEach(urlBuilder::addQueryParameter);
-        }
-
-        Request.Builder requestBuilder = new Request.Builder().url(urlBuilder.build()).delete();
-        setHeaders(requestBuilder, headers);
-
-        return execute(requestBuilder.build());
-    }
-
-    // ====================== 工具方法 ======================
-
-    /**
-     * 设置请求头
-     */
-    private static void setHeaders(Request.Builder builder, Map<String, String> headers) {
-        if (headers == null || headers.isEmpty()) {
-            return;
-        }
-        headers.forEach(builder::addHeader);
-    }
-
-    /**
-     * 统一执行请求
-     */
-    private static HttpClientResult execute(Request request) throws IOException {
-        try (Response response = OK_HTTP_CLIENT.newCall(request).execute()) {
-            int code = response.code();
-            String body = response.body() == null ? "" : response.body().string();
-            return new HttpClientResult(code, body);
+        Request.Builder req = new Request.Builder().url(url).post(body);
+        if (headers != null) headers.forEach(req::addHeader);
+        try (Response res = CLIENT.newCall(req.build()).execute()) {
+            return new HttpClientResult(res.code(), res.body() == null ? "" : res.body().string());
         }
     }
 }
