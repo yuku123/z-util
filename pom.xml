@@ -19,10 +19,10 @@
 
     <modules>
         <module>z-util-core</module>
-        <module>util-office</module>
-        <module>util-media</module>
-        <module>util-expression</module>
-        <module>util-crawler</module>
+        <module>z-util-office</module>
+        <module>z-util-media</module>
+        <module>z-util-expression</module>
+        <module>z-util-crawler</module>
         <module>z-util-workflow</module>
         <module>z-util-visualization</module>
         <module>z-util-jdbc</module>
@@ -30,13 +30,13 @@
         <module>z-util-http</module>
         <module>z-util-math</module>
         <module>z-util-ai</module>
-        <module>util-extra</module>
-        <module>util-monitor</module>
-        <module>util-devops</module>
-        <module>util-source</module>
-        <module>util-distribute</module>
+        <module>z-util-extra</module>
+        <module>z-util-monitor</module>
+        <module>z-util-devops</module>
+        <module>z-util-source</module>
+        <module>z-util-distribute</module>
         <module>z-util-proxy</module>
-        <module>util-ch</module>
+        <module>z-util-ch</module>
         <module>z-util-json</module>
     </modules>
 
@@ -49,24 +49,10 @@
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
-                <artifactId>util-db</artifactId>
+                <artifactId>z-util-monitor</artifactId>
                 <version>${util.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-cache</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-aop</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-monitor</artifactId>
-                <version>${util.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-json</artifactId>
@@ -76,48 +62,6 @@
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-math</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-ql</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-script</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-xml</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-source</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-web</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-pool</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>util-serializer</artifactId>
                 <version>${util.version}</version>
             </dependency>
 
@@ -157,6 +101,7 @@
                 <artifactId>junit-jupiter-engine</artifactId>
                 <version>5.5.2</version>
             </dependency>
+
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-module-junit4</artifactId>
@@ -167,17 +112,18 @@
                 <artifactId>deeptestutils</artifactId>
                 <version>1.9.0</version>
             </dependency>
-
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.8.1</version>
             </dependency>
+
             <dependency>
                 <groupId>commons-dbutils</groupId>
                 <artifactId>commons-dbutils</artifactId>
                 <version>1.6</version>
             </dependency>
+
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
@@ -195,6 +141,7 @@
                 <artifactId>javax.el-api</artifactId>
                 <version>3.0.0</version>
             </dependency>
+
             <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
@@ -242,7 +189,6 @@
                 <artifactId>dom4j</artifactId>
                 <version>1.6.1</version>
             </dependency>
-
 
             <dependency>
                 <groupId>com.google.inject</groupId>
@@ -336,17 +282,18 @@
                 <version>2.10.0</version>
                 <scope>compile</scope>
             </dependency>
+
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
                 <version>2.10.0</version>
                 <scope>compile</scope>
             </dependency>
+
             <dependency>
                 <groupId>commons-net</groupId>
                 <artifactId>commons-net</artifactId>
                 <version>3.6</version>
-                <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -383,7 +330,6 @@
                 <artifactId>activation</artifactId>
                 <version>1.1.1</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -450,7 +396,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>

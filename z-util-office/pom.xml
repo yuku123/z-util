@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>util-office</artifactId>
+    <artifactId>z-util-office</artifactId>
     <version>${util.version}</version>
 
     <dependencies>

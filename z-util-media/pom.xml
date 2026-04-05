@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>util-media</artifactId>
+    <artifactId>z-util-media</artifactId>
     <version>${util.version}</version>
 
     <dependencies>

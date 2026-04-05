@@ -10,7 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>util-ch</artifactId>
+    <artifactId>z-util-ch</artifactId>
     <version>${util.version}</version>
 
     <properties>

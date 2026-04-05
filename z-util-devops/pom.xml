@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>util-devops</artifactId>
+    <artifactId>z-util-devops</artifactId>
     <version>${util.version}</version>
 
     <dependencies>

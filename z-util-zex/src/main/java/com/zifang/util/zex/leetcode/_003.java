@@ -5,6 +5,7 @@ import sun.reflect.Reflection;
 
 
 public class _003 {
+
     public int lengthOfLongestSubstring(String s) {
         int max=0;
         int count=0;

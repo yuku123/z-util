@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>util-monitor</artifactId>
+    <artifactId>z-util-monitor</artifactId>
     <version>${util.version}</version>
 
     <dependencies>
