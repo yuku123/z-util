@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.zifang</groupId>
-        <artifactId>util-parent</artifactId>
+        <artifactId>z-util</artifactId>
         <version>${util.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>util-proxy</artifactId>
+    <artifactId>z-util-proxy</artifactId>
     <version>${util.version}</version>
 
     <properties>
@@ -28,7 +28,7 @@
 
         <dependency>
             <groupId>com.zifang</groupId>
-            <artifactId>util-core</artifactId>
+            <artifactId>z-util-core</artifactId>
         </dependency>
 
         <dependency>

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zifang</groupId>
-    <artifactId>util-parent</artifactId>
+    <artifactId>z-util</artifactId>
     <packaging>pom</packaging>
     <version>${util.version}</version>
 
@@ -18,33 +18,33 @@
     </properties>
 
     <modules>
-        <module>util-core</module>
+        <module>z-util-core</module>
         <module>util-office</module>
         <module>util-media</module>
         <module>util-expression</module>
         <module>util-crawler</module>
-        <module>util-workflow</module>
-        <module>util-visualization</module>
-        <module>util-jdbc</module>
-        <module>util-zex</module>
-        <module>util-http</module>
-        <module>util-math</module>
-        <module>util-ai</module>
+        <module>z-util-workflow</module>
+        <module>z-util-visualization</module>
+        <module>z-util-jdbc</module>
+        <module>z-util-zex</module>
+        <module>z-util-http</module>
+        <module>z-util-math</module>
+        <module>z-util-ai</module>
         <module>util-extra</module>
         <module>util-monitor</module>
         <module>util-devops</module>
         <module>util-source</module>
         <module>util-distribute</module>
-        <module>util-proxy</module>
+        <module>z-util-proxy</module>
         <module>util-ch</module>
-        <module>util-json</module>
+        <module>z-util-json</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.zifang</groupId>
-                <artifactId>util-core</artifactId>
+                <artifactId>z-util-core</artifactId>
                 <version>${util.version}</version>
             </dependency>
             <dependency>
@@ -69,13 +69,13 @@
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
-                <artifactId>util-json</artifactId>
+                <artifactId>z-util-json</artifactId>
                 <version>${util.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zifang</groupId>
-                <artifactId>util-math</artifactId>
+                <artifactId>z-util-math</artifactId>
                 <version>${util.version}</version>
             </dependency>
 
@@ -123,7 +123,7 @@
 
             <dependency>
                 <groupId>com.zifang</groupId>
-                <artifactId>util-proxy</artifactId>
+                <artifactId>z-util-proxy</artifactId>
                 <version>${util.version}</version>
             </dependency>
 
