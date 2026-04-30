@@ -17,6 +17,13 @@
         <junit.version>4.12</junit.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/yuku123/z-maven-repo</url>
+        </repository>
+    </distributionManagement>
+
     <modules>
         <module>z-util-core</module>
         <module>z-util-office</module>
