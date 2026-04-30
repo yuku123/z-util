@@ -38,6 +38,7 @@
         <module>z-util-proxy</module>
         <module>z-util-ch</module>
         <module>z-util-json</module>
+        <module>z-util-all</module>
     </modules>
 
     <dependencyManagement>
