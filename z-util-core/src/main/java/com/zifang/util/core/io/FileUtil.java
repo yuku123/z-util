@@ -2,7 +2,8 @@ package com.zifang.util.core.io;
 
 import com.zifang.util.core.lang.regex.RegexUtil;
 import com.zifang.util.core.lang.validator.Checker;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -25,8 +26,9 @@ import java.util.regex.Pattern;
 /**
  * 文件相关的工具类
  */
-@Slf4j
 public class FileUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(FileUtil.class);
 
     /**
      * 利用FileChannel直接实现文件的对拷,对于大文件速度特别明显

@@ -1,7 +1,5 @@
 package com.zifang.util.core.parser.xml;
 
-import lombok.Data;
-
 import javax.xml.bind.annotation.XmlElement;
 
 /**
@@ -10,7 +8,6 @@ import javax.xml.bind.annotation.XmlElement;
  * @author xuejiangtao
  * Jul 25, 2013 9:34:16 PM
  */
-@Data
 public class SmsBody {
 
     /**
@@ -55,5 +52,24 @@ public class SmsBody {
         this.destAddr = destAddr;
     }
 
+    @Override
+    public String toString() {
+        return "SmsBody{content=" + content + ", sourceAddr=" + sourceAddr + ", destAddr=" + destAddr + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SmsBody smsBody = (SmsBody) o;
+        return java.util.Objects.equals(content, smsBody.content) &&
+                java.util.Objects.equals(sourceAddr, smsBody.sourceAddr) &&
+                java.util.Objects.equals(destAddr, smsBody.destAddr);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(content, sourceAddr, destAddr);
+    }
 
 }

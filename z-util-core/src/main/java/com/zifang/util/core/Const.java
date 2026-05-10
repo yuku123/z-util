@@ -1,7 +1,5 @@
 package com.zifang.util.core;
 
-import lombok.Data;
-
 import java.util.List;
 
 /**
@@ -48,7 +46,6 @@ public class Const {
         public static String RIGHT_BRACKET = ")";
     }
 
-    @Data
     public static class OperateSystem implements EnumCollectors<OperateSystem> {
 
         private final String system;
@@ -68,6 +65,14 @@ public class Const {
             this.lowerSystem = lowerSystem;
         }
 
+        public String getSystem() {
+            return system;
+        }
+
+        public String getLowerSystem() {
+            return lowerSystem;
+        }
+
         public OperateSystem getOperateSystem(String info) {
             return getList().stream()
                     .filter(system -> info.toLowerCase().contains(system.getLowerSystem()))
@@ -78,6 +83,25 @@ public class Const {
         @Override
         public List<OperateSystem> getList() {
             return null;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            OperateSystem that = (OperateSystem) o;
+            return java.util.Objects.equals(system, that.system) &&
+                    java.util.Objects.equals(lowerSystem, that.lowerSystem);
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(system, lowerSystem);
+        }
+
+        @Override
+        public String toString() {
+            return "OperateSystem{system=" + system + ", lowerSystem=" + lowerSystem + "}";
         }
     }
 
@@ -92,15 +116,41 @@ public class Const {
     byte FALSE = 0;
     byte TRUE = 1;
 
-    @Data
     public static class Statics{
         /** Unicode 基本汉字编码范围0x4e00~0x9fa5 共 20902个 */
         int CHINESE_CHARACTER_LENGTH = 20902;
         /** 汉字起始值 */
         int CHINESE_CHARACTER_START = 0x4e00;
+
+        public int getChineseCharacterLength() {
+            return CHINESE_CHARACTER_LENGTH;
+        }
+
+        public int getChineseCharacterStart() {
+            return CHINESE_CHARACTER_START;
+        }
+
+        @Override
+        public String toString() {
+            return "Statics{CHINESE_CHARACTER_LENGTH=" + CHINESE_CHARACTER_LENGTH +
+                    ", CHINESE_CHARACTER_START=" + CHINESE_CHARACTER_START + "}";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Statics statics = (Statics) o;
+            return CHINESE_CHARACTER_LENGTH == statics.CHINESE_CHARACTER_LENGTH &&
+                    CHINESE_CHARACTER_START == statics.CHINESE_CHARACTER_START;
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Objects.hash(CHINESE_CHARACTER_LENGTH, CHINESE_CHARACTER_START);
+        }
     }
 
-    @Data
     public static class Charset{
         public static final String US_ASCII = "US-ASCII";
         public static final String ISO_8859_1 = "ISO-8859-1";
@@ -110,9 +160,31 @@ public class Const {
         public static final String UTF_16 = "UTF-16";
         public static final String GBK = "GBK";
         public static final String GB2312 = "GB2312";
+
+        public Charset() {
+        }
+
+        @Override
+        public String toString() {
+            return "Charset{US_ASCII=" + US_ASCII + ", ISO_8859_1=" + ISO_8859_1 +
+                    ", UTF_8=" + UTF_8 + ", UTF_16BE=" + UTF_16BE + ", UTF_16LE=" + UTF_16LE +
+                    ", UTF_16=" + UTF_16 + ", GBK=" + GBK + ", GB2312=" + GB2312 + "}";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Charset charset = (Charset) o;
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return 0;
+        }
     }
 
-    @Data
     public static class JvmProperties{
         public static final String JVM_VERSION = "java.version";
         public static final String JVM_ENCODING = "file.encoding";
@@ -168,6 +240,33 @@ public class Const {
          * 系统换行符key
          */
         public static final String SYS_LINE_SEPARATOR = "line.separator";
+
+        public JvmProperties() {
+        }
+
+        @Override
+        public String toString() {
+            return "JvmProperties{JVM_VERSION=" + JVM_VERSION + ", JVM_ENCODING=" + JVM_ENCODING +
+                    ", JVM_TEMPDIR=" + JVM_TEMPDIR + ", HTTP_PROXY_HOST=" + HTTP_PROXY_HOST +
+                    ", HTTP_PROXY_PORT=" + HTTP_PROXY_PORT + ", HTTP_PROXY_USER=" + HTTP_PROXY_USER +
+                    ", HTTP_PROXY_PASSWORD=" + HTTP_PROXY_PASSWORD + ", SYS_OS_ARCH=" + SYS_OS_ARCH +
+                    ", SYS_OS_NAME=" + SYS_OS_NAME + ", SYS_OS_VERSION=" + SYS_OS_VERSION +
+                    ", SYS_SUN_DESKTOP=" + SYS_SUN_DESKTOP + ", SYS_FILE_SEPARATOR=" + SYS_FILE_SEPARATOR +
+                    ", SYS_PATH_SEPARATOR=" + SYS_PATH_SEPARATOR + ", SYS_LINE_SEPARATOR=" + SYS_LINE_SEPARATOR + "}";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            JvmProperties that = (JvmProperties) o;
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return 0;
+        }
     }
 
     /**

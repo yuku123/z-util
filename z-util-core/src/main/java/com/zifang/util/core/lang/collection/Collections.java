@@ -2,7 +2,8 @@ package com.zifang.util.core.lang.collection;
 
 
 import com.zifang.util.core.lang.validator.Checker;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,8 +13,9 @@ import java.util.stream.Collectors;
  *
  * @author zifang
  */
-@Slf4j
 public class Collections {
+
+    private static final Logger log = LoggerFactory.getLogger(Collections.class);
 
     public static <E> Collection<E> union(Collection<E>... collection) {
         Collection<E> base = new ArrayList<>();

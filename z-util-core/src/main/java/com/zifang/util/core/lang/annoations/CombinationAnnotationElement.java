@@ -1,7 +1,6 @@
 package com.zifang.util.core.lang.annoations;
 
 import com.zifang.util.core.lang.collection.Sets;
-import lombok.NonNull;
 
 import java.io.Serializable;
 import java.lang.annotation.*;
@@ -51,24 +50,28 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
     }
 
     @Override
-    public boolean isAnnotationPresent(@NonNull Class<? extends Annotation> annotationClass) {
+    public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
+
         return annotationMap.containsKey(annotationClass);
+
     }
 
     @Override
-    public <T extends Annotation> T getAnnotation(@NonNull Class<T> annotationClass) {
+    public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
         Annotation annotation = annotationMap.get(annotationClass);
         return (annotation == null) ? null : (T) annotation;
     }
 
     @Override
     public Annotation[] getAnnotations() {
+
         final Collection<Annotation> annotations = this.annotationMap.values();
         return annotations.toArray(new Annotation[annotations.size()]);
     }
 
     @Override
     public Annotation[] getDeclaredAnnotations() {
+
         final Collection<Annotation> annotations = this.declaredAnnotationMap.values();
         return annotations.toArray(new Annotation[annotations.size()]);
     }
@@ -79,16 +82,20 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
      * @param element 元素
      */
     private void init(AnnotatedElement element) {
+
         final Annotation[] declaredAnnotations = element.getDeclaredAnnotations();
         this.declaredAnnotationMap = new HashMap<>();
         parseDeclared(declaredAnnotations);
 
         final Annotation[] annotations = element.getAnnotations();
         if (Arrays.equals(declaredAnnotations, annotations)) {
+
             this.annotationMap = this.declaredAnnotationMap;
         } else {
+
             this.annotationMap = new HashMap<>();
             parse(annotations);
+
         }
     }
 
@@ -101,9 +108,12 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
         Class<? extends Annotation> annotationType;
         // 直接注解
         for (Annotation annotation : annotations) {
+
             annotationType = annotation.annotationType();
             if (!META_ANNOTATIONS.contains(annotationType)) {
+
                 declaredAnnotationMap.put(annotationType, annotation);
+
                 parseDeclared(annotationType.getDeclaredAnnotations());
             }
         }
@@ -115,11 +125,14 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
      * @param annotations Class, Method, Field等
      */
     private void parse(Annotation[] annotations) {
+
         Class<? extends Annotation> annotationType;
         for (Annotation annotation : annotations) {
             annotationType = annotation.annotationType();
             if (!META_ANNOTATIONS.contains(annotationType)) {
+
                 annotationMap.put(annotationType, annotation);
+
                 parse(annotationType.getAnnotations());
             }
         }

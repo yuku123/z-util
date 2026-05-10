@@ -2,7 +2,6 @@ package com.zifang.util.core.lang.exception;
 
 import com.zifang.util.core.meta.Result;
 import com.zifang.util.core.meta.StatusCode;
-import lombok.Getter;
 
 import static com.zifang.util.core.meta.Result.buildMessage;
 
@@ -13,7 +12,6 @@ public class BaseException extends RuntimeException {
 
     private static final long serialVersionUID = 2059913032332171665L;
 
-    @Getter
     private final StatusCode statusCode;
     private final String message;
 
@@ -76,6 +74,10 @@ public class BaseException extends RuntimeException {
                 return result.getMessage();
             }
         });
+    }
+
+    public StatusCode getStatusCode() {
+        return statusCode;
     }
 
     public int getCode() {

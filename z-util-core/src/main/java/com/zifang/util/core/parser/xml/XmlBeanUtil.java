@@ -1,6 +1,7 @@
 package com.zifang.util.core.parser.xml;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -9,8 +10,9 @@ import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-@Slf4j
 public class XmlBeanUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(XmlBeanUtil.class);
 
     public static String beanToXml(Object obj, Class<?> load) {
         String xmlStr = null;

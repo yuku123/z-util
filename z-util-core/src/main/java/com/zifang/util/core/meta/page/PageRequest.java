@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.zifang.util.core.meta.BaseRequest;
 import com.zifang.util.core.meta.KeepLongSerializer;
 import com.zifang.util.core.meta.SortField;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +12,6 @@ import java.util.function.Predicate;
 /**
  * 分页请求
  */
-@Data
-@EqualsAndHashCode(callSuper = true)
 public class PageRequest extends BaseRequest {
     private static final long serialVersionUID = -8059516751569851680L;
 
@@ -26,6 +22,33 @@ public class PageRequest extends BaseRequest {
     private Long size = 10L;
 
     private List<SortField> orders = new ArrayList<>();
+
+    public PageRequest() {
+    }
+
+    public Long getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Long current) {
+        this.current = current;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    public List<SortField> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<SortField> orders) {
+        this.orders = orders;
+    }
 
     public static PageRequest of(Long current, Long size){
         PageRequest pageRequest = new PageRequest();
@@ -80,4 +103,23 @@ public class PageRequest extends BaseRequest {
         return columns.toArray(new String[0]);
     }
 
+    @Override
+    public String toString() {
+        return "PageRequest{current=" + current + ", size=" + size + ", orders=" + orders + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PageRequest that = (PageRequest) o;
+        return java.util.Objects.equals(current, that.current) &&
+                java.util.Objects.equals(size, that.size) &&
+                java.util.Objects.equals(orders, that.orders);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(current, size, orders);
+    }
 }

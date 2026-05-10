@@ -1,7 +1,7 @@
 package com.zifang.util.core.system;
 
-
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.Enumeration;
@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-@Slf4j
 public final class PropertiesUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(PropertiesUtil.class);
 
     /**
      * 从系统属性文件中获取相应的值

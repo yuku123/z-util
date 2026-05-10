@@ -2,7 +2,8 @@ package com.zifang.util.core.lang.reflect;
 
 import com.zifang.util.core.lang.ArraysUtil;
 import com.zifang.util.core.lang.validator.Validator;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.lang.annotation.Annotation;
@@ -16,10 +17,9 @@ import java.util.jar.JarFile;
 
 import static com.zifang.util.core.lang.reflect.ClassLoaderUtil.loadClass;
 
-@Slf4j
 public class ClassUtil {
 
-    private static final String CLASS_SUFFIX = ".class";
+    private static final Logger log = LoggerFactory.getLogger(ClassUtil.class);
     private static final String JAR = "jar";
     private static final String FILE = "file";
     private static final String defaultClassPath = ClassUtil.class.getResource("/").getPath();

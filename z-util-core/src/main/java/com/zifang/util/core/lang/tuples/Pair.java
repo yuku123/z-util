@@ -1,16 +1,21 @@
 package com.zifang.util.core.lang.tuples;
 
-import lombok.Data;
-
 /**
  * @author zifang
  */
-@Data
 public class Pair<A, B> extends Unit<A> {
     protected B b;
 
     public Pair(A a, B b) {
         super(a);
+        this.b = b;
+    }
+
+    public B getB() {
+        return b;
+    }
+
+    public void setB(B b) {
         this.b = b;
     }
 
@@ -25,5 +30,10 @@ public class Pair<A, B> extends Unit<A> {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(a, b);
     }
 }

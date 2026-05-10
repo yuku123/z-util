@@ -2,7 +2,8 @@ package com.zifang.util.core.lang.converter.converters;
 
 import com.zifang.util.core.lang.PrimitiveUtil;
 import com.zifang.util.core.lang.converter.IConverter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,8 +11,9 @@ import java.lang.reflect.Method;
 /**
  * @author zifang
  */
-@Slf4j
 public class DefaultConverter<F,T> implements IConverter<F,T> {
+
+    private static final Logger log = LoggerFactory.getLogger(DefaultConverter.class);
 
     @Override
     public T to(F value, T defaultValue) {

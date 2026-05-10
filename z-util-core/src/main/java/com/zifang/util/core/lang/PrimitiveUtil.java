@@ -1,6 +1,7 @@
 package com.zifang.util.core.lang;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -12,8 +13,9 @@ import java.util.Map;
  *
  * @author zifang
  */
-@Slf4j
 public class PrimitiveUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(PrimitiveUtil.class);
 
     public static final Map<Class<?>, Object> primitiveTypeDefaults = new LinkedHashMap<Class<?>, Object>() {
         {
