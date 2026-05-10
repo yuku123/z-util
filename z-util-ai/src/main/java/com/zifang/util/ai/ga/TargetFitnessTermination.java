@@ -12,7 +12,7 @@ public class TargetFitnessTermination implements TerminationCondition {
     }
 
     @Override
-    public boolean isTerminated(int generation, Population<?> population) {
+    public boolean isTerminated(int generation, Population population) {
         return population.getFittest().getFitness() >= targetFitness;
     }
 }

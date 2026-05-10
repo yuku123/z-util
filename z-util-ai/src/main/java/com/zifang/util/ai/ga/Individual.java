@@ -4,50 +4,41 @@ import java.util.Objects;
 
 /**
  * 个体 - 代表种群中的单个成员
- *
- * @param <T> 基因类型
  */
-public class Individual<T> implements Genotype<T> {
+public class Individual {
 
-    private final T[] chromosome;
+    private final Object[] chromosome;
     private double fitness = -1;
 
-    @SuppressWarnings("unchecked")
     public Individual(int length) {
-        this.chromosome = (T[]) new Object[length];
+        this.chromosome = new Object[length];
     }
 
-    public Individual(T[] chromosome) {
+    public Individual(Object[] chromosome) {
         this.chromosome = Objects.requireNonNull(chromosome);
     }
 
-    @Override
     public int length() {
         return chromosome.length;
     }
 
-    @Override
-    public T getGene(int index) {
+    public Object getGene(int index) {
         return chromosome[index];
     }
 
-    @Override
-    public void setGene(int index, T gene) {
+    public void setGene(int index, Object gene) {
         chromosome[index] = gene;
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public Individual<T> copy() {
-        Individual<T> copy = new Individual<>(this.chromosome.length);
+    public Individual copy() {
+        Individual result = new Individual(this.chromosome.length);
         for (int i = 0; i < chromosome.length; i++) {
-            copy.setGene(i, this.chromosome[i]);
+            result.setGene(i, this.chromosome[i]);
         }
-        copy.fitness = this.fitness;
-        return copy;
+        result.fitness = this.fitness;
+        return result;
     }
 
-    @Override
     public void randomize() {
         throw new UnsupportedOperationException("Subclass must implement randomize()");
     }
@@ -63,7 +54,7 @@ public class Individual<T> implements Genotype<T> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (T gene : chromosome) {
+        for (Object gene : chromosome) {
             sb.append(gene);
         }
         return sb.toString();

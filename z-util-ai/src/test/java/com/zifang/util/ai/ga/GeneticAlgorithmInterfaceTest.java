@@ -28,7 +28,7 @@ public class GeneticAlgorithmInterfaceTest {
             if (gene == 0) hasZero = true;
             if (gene == 1) hasOne = true;
         }
-        assertTrue(hasZero && hasOne, "Should have both 0s and 1s after randomization");
+        assertTrue(hasZero && hasOne);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class GeneticAlgorithmInterfaceTest {
         original.setGene(4, 1);
         original.setFitness(0.8);
 
-        BinaryGenotype copy = (BinaryGenotype) original.copy();
+        Individual copy = original.copy();
 
         assertEquals(original.length(), copy.length());
         for (int i = 0; i < 5; i++) {
@@ -52,7 +52,7 @@ public class GeneticAlgorithmInterfaceTest {
 
     @Test
     void testPopulationOperations() {
-        Population<BinaryGenotype> population = new Population<>(3);
+        Population population = new Population(3);
 
         for (int i = 0; i < 3; i++) {
             BinaryGenotype genotype = new BinaryGenotype(5);
@@ -67,21 +67,32 @@ public class GeneticAlgorithmInterfaceTest {
 
     @Test
     void testSinglePointCrossover() {
-        SinglePointCrossover<Integer> crossover = new SinglePointCrossover<>();
+        SinglePointCrossover crossover = new SinglePointCrossover();
 
-        Integer[] parent1 = new Integer[]{1, 1, 1, 1, 1};
-        Integer[] parent2 = new Integer[]{0, 0, 0, 0, 0};
+        BinaryGenotype parent1 = new BinaryGenotype(5);
+        parent1.setGene(0, 1);
+        parent1.setGene(1, 1);
+        parent1.setGene(2, 1);
+        parent1.setGene(3, 1);
+        parent1.setGene(4, 1);
 
-        Integer[] children = crossover.crossover(parent1, parent2);
+        BinaryGenotype parent2 = new BinaryGenotype(5);
+        parent2.setGene(0, 0);
+        parent2.setGene(1, 0);
+        parent2.setGene(2, 0);
+        parent2.setGene(3, 0);
+        parent2.setGene(4, 0);
+
+        Individual[] children = crossover.crossover(parent1, parent2);
 
         assertEquals(2, children.length);
-        assertEquals(5, children[0].length);
-        assertEquals(5, children[1].length);
+        assertEquals(5, children[0].length());
+        assertEquals(5, children[1].length());
     }
 
     @Test
-    void testFlipBitMutation() {
-        FlipBitMutation<BinaryGenotype> mutation = new FlipBitMutation<>();
+    void testBinaryMutation() {
+        BinaryMutation mutation = new BinaryMutation();
 
         BinaryGenotype genotype = new BinaryGenotype(10);
         genotype.setGene(0, 1);
@@ -98,8 +109,7 @@ public class GeneticAlgorithmInterfaceTest {
         mutation.mutate(genotype, 1.0);
 
         for (int i = 0; i < 10; i++) {
-            assertEquals(i % 2 == 0 ? 0 : 1, genotype.getGene(i),
-                    "Gene at index " + i + " should be flipped");
+            assertEquals(i % 2 == 0 ? 0 : 1, genotype.getGene(i));
         }
     }
 
@@ -107,7 +117,7 @@ public class GeneticAlgorithmInterfaceTest {
     void testTargetFitnessTermination() {
         TerminationCondition condition = new TargetFitnessTermination(0.9);
 
-        Population<BinaryGenotype> population = new Population<>(1);
+        Population population = new Population(1);
         BinaryGenotype genotype = new BinaryGenotype(5);
         genotype.setFitness(0.85);
         population.addIndividual(genotype);
@@ -120,21 +130,21 @@ public class GeneticAlgorithmInterfaceTest {
 
     @Test
     void testGeneticAlgorithmEngineBuilder() {
-        GeneticAlgorithmEngine<Integer> engine = GeneticAlgorithmEngine.<Integer>builder()
+        GeneticAlgorithmEngine engine = GeneticAlgorithmEngine.builder()
                 .populationSize(50)
                 .mutationRate(0.1)
                 .crossoverRate(0.8)
                 .elitismCount(2)
-                .genotypeFactory(() -> new BinaryGenotype(10))
+                .individualFactory(() -> new BinaryGenotype(10))
                 .fitnessFunction(ind -> {
                     int count = 0;
                     for (int i = 0; i < ind.length(); i++) {
-                        if (ind.getGene(i) == 1) count++;
+                        if (ind.getGene(i).equals(1)) count++;
                     }
                     return (double) count / ind.length();
                 })
-                .crossoverOperator(new SinglePointCrossover<>())
-                .mutationOperator(new FlipBitMutation<>())
+                .crossoverOperator(new SinglePointCrossover())
+                .mutationOperator(new BinaryMutation())
                 .terminationCondition(new TargetFitnessTermination(0.99))
                 .build();
 

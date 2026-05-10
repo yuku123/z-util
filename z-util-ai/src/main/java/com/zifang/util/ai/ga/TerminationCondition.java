@@ -12,5 +12,5 @@ public interface TerminationCondition {
      * @param population 当前种群
      * @return true表示应该终止
      */
-    boolean isTerminated(int generation, Population<?> population);
+    boolean isTerminated(int generation, Population population);
 }
