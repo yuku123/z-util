@@ -2,11 +2,12 @@ package com.zifang.util.workflow.engine.interfaces;
 
 import com.zifang.util.workflow.config.ExecutableWorkflowNode;
 import com.zifang.util.workflow.conponents.WorkFlowApplicationContext;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Data
+import java.util.Objects;
+
+/**
+ * 执行引擎服务的抽象类
+ */
 public abstract class AbstractEngineService {
 
     /**
@@ -22,11 +23,48 @@ public abstract class AbstractEngineService {
     /**
      * 一个service只会包裹一个dataset
      */
-//    protected Dataset<Row> dataset;
+    //    protected Dataset<Row> dataset;
 
     /**
      * 执行引擎服务的执行
      */
     public abstract void exec(ExecutableWorkflowNode executableWorkflowNode);
 
+    public AbstractEngineService() {
+    }
+
+    public WorkFlowApplicationContext getWorkFlowApplicationContext() {
+        return workFlowApplicationContext;
+    }
+
+    public void setWorkFlowApplicationContext(WorkFlowApplicationContext workFlowApplicationContext) {
+        this.workFlowApplicationContext = workFlowApplicationContext;
+    }
+
+    public Object getInvokeParameter() {
+        return invokeParameter;
+    }
+
+    public void setInvokeParameter(Object invokeParameter) {
+        this.invokeParameter = invokeParameter;
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractEngineService{workFlowApplicationContext=" + workFlowApplicationContext + ", invokeParameter=" + invokeParameter + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractEngineService that = (AbstractEngineService) o;
+        return Objects.equals(workFlowApplicationContext, that.workFlowApplicationContext) &&
+                Objects.equals(invokeParameter, that.invokeParameter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(workFlowApplicationContext, invokeParameter);
+    }
 }

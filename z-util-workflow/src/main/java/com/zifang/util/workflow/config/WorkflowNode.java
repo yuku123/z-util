@@ -1,13 +1,11 @@
 package com.zifang.util.workflow.config;
 
-import lombok.Data;
-
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * 描述业务流节点的最小单元定义
  */
-@Data
 public class WorkflowNode {
 
     /**
@@ -52,6 +50,80 @@ public class WorkflowNode {
 
     private HashMap<String, String> cache;
 
+    public WorkflowNode() {
+    }
+
+    public String getNodeId() {
+        return nodeId;
+    }
+
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getServiceUnit() {
+        return serviceUnit;
+    }
+
+    public void setServiceUnit(String serviceUnit) {
+        this.serviceUnit = serviceUnit;
+    }
+
+    public String getInvokeDynamic() {
+        return invokeDynamic;
+    }
+
+    public void setInvokeDynamic(String invokeDynamic) {
+        this.invokeDynamic = invokeDynamic;
+    }
+
+    public Object getInvokeParameter() {
+        return invokeParameter;
+    }
+
+    public void setInvokeParameter(Object invokeParameter) {
+        this.invokeParameter = invokeParameter;
+    }
+
+    public Connector getConnector() {
+        return connector;
+    }
+
+    public void setConnector(Connector connector) {
+        this.connector = connector;
+    }
+
+    public HashMap<String, String> getCache() {
+        return cache;
+    }
+
+    public void setCache(HashMap<String, String> cache) {
+        this.cache = cache;
+    }
 
     /**
      * 防止重复添加值
@@ -69,5 +141,31 @@ public class WorkflowNode {
         if (!connector.getPre().contains(nodeId) && !this.nodeId.equals(nodeId)) {
             connector.getPre().add(nodeId);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "WorkflowNode{nodeId=" + nodeId + ", groupId=" + groupId + ", name=" + name + ", type=" + type + ", serviceUnit=" + serviceUnit + ", invokeDynamic=" + invokeDynamic + ", invokeParameter=" + invokeParameter + ", connector=" + connector + ", cache=" + cache + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkflowNode that = (WorkflowNode) o;
+        return Objects.equals(nodeId, that.nodeId) &&
+                Objects.equals(groupId, that.groupId) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(serviceUnit, that.serviceUnit) &&
+                Objects.equals(invokeDynamic, that.invokeDynamic) &&
+                Objects.equals(invokeParameter, that.invokeParameter) &&
+                Objects.equals(connector, that.connector) &&
+                Objects.equals(cache, that.cache);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodeId, groupId, name, type, serviceUnit, invokeDynamic, invokeParameter, connector, cache);
     }
 }

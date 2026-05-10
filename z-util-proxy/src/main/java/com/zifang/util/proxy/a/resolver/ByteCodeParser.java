@@ -5,14 +5,13 @@ import com.zifang.util.proxy.a.resolver.parser.struct.ConstantFloat;
 import com.zifang.util.proxy.a.resolver.parser.struct.ConstantInteger;
 import com.zifang.util.proxy.a.resolver.parser.struct.ConstantUtf8;
 import com.zifang.util.proxy.a.resolver.parser.util.ByteScanner;
-import lombok.Data;
 
 import java.io.FileInputStream;
+import java.util.Objects;
 
 /**
  * @author zifang
  */
-@Data
 public class ByteCodeParser {
 
     private ByteScanner scanner;
@@ -20,6 +19,46 @@ public class ByteCodeParser {
     private ClassFile classFile;
 
     private MethodAttributeHandler methodAttributeHandler = new MethodAttributeHandler();
+
+    public ByteScanner getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(ByteScanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public ClassFile getClassFile() {
+        return classFile;
+    }
+
+    public void setClassFile(ClassFile classFile) {
+        this.classFile = classFile;
+    }
+
+    public MethodAttributeHandler getMethodAttributeHandler() {
+        return methodAttributeHandler;
+    }
+
+    @Override
+    public String toString() {
+        return "ByteCodeParser{scanner=" + scanner + ", classFile=" + classFile + ", methodAttributeHandler=" + methodAttributeHandler + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ByteCodeParser that = (ByteCodeParser) o;
+        return Objects.equals(scanner, that.scanner) &&
+                Objects.equals(classFile, that.classFile) &&
+                Objects.equals(methodAttributeHandler, that.methodAttributeHandler);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(scanner, classFile, methodAttributeHandler);
+    }
 
 
     public void thisClass() throws Exception {

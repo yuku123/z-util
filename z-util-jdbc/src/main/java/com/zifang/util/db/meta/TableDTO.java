@@ -1,7 +1,5 @@
 package com.zifang.util.db.meta;
 
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,7 +7,6 @@ import java.util.Objects;
 /**
  * 表DTO
  */
-@Data
 public class TableDTO {
     public final String tableName;
     public final String entityName;
@@ -51,5 +48,47 @@ public class TableDTO {
         System.out.println("entityName: " + entityName);
         System.out.println("字段数: " + columns.size());
         System.out.println("===================");
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public String getEntityName() {
+        return entityName;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public ColumnDTO getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(ColumnDTO primaryKey) {
+        this.primaryKey = primaryKey;
+    }
+
+    @Override
+    public String toString() {
+        return "TableDTO{tableName=" + tableName + ", entityName=" + entityName + ", comment=" + comment + ", columns=" + columns + ", primaryKey=" + primaryKey + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TableDTO tableDTO = (TableDTO) o;
+        return Objects.equals(tableName, tableDTO.tableName) &&
+                Objects.equals(entityName, tableDTO.entityName) &&
+                Objects.equals(comment, tableDTO.comment) &&
+                Objects.equals(columns, tableDTO.columns) &&
+                Objects.equals(primaryKey, tableDTO.primaryKey);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tableName, entityName, comment, columns, primaryKey);
     }
 }

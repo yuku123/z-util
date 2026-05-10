@@ -1,6 +1,7 @@
 package com.zifang.util.proxy.compliler;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.tools.FileObject;
 import javax.tools.ForwardingJavaFileManager;
@@ -11,8 +12,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-@Slf4j
 public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
+    private static final Logger log = LoggerFactory.getLogger(CFJavaFileManager.class);
 
     public Map<String, BytesJavaFileObject> getFileObjectHashMap() {
         return fileObjectHashMap;

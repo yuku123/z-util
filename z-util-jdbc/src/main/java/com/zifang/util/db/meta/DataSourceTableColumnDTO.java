@@ -1,12 +1,12 @@
 package com.zifang.util.db.meta;
 
 import com.zifang.util.core.meta.Description;
-import lombok.Data;
+
+import java.util.Objects;
 
 /**
  * @author zifang
  */
-@Data
 public class DataSourceTableColumnDTO {
 
     @Description("列id")
@@ -32,5 +32,85 @@ public class DataSourceTableColumnDTO {
 
     public String nativeSignature() {
         return tableName + ":" + columnType + ":" + columnComment;
+    }
+
+    public Long getDatasourceTableColumnId() {
+        return datasourceTableColumnId;
+    }
+
+    public void setDatasourceTableColumnId(Long datasourceTableColumnId) {
+        this.datasourceTableColumnId = datasourceTableColumnId;
+    }
+
+    public String getDatasourceCode() {
+        return datasourceCode;
+    }
+
+    public void setDatasourceCode(String datasourceCode) {
+        this.datasourceCode = datasourceCode;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getColumnName() {
+        return columnName;
+    }
+
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
+
+    public String getColumnType() {
+        return columnType;
+    }
+
+    public void setColumnType(String columnType) {
+        this.columnType = columnType;
+    }
+
+    public String getColumnLength() {
+        return columnLength;
+    }
+
+    public void setColumnLength(String columnLength) {
+        this.columnLength = columnLength;
+    }
+
+    public String getColumnComment() {
+        return columnComment;
+    }
+
+    public void setColumnComment(String columnComment) {
+        this.columnComment = columnComment;
+    }
+
+    @Override
+    public String toString() {
+        return "DataSourceTableColumnDTO{datasourceTableColumnId=" + datasourceTableColumnId + ", datasourceCode=" + datasourceCode + ", tableName=" + tableName + ", columnName=" + columnName + ", columnType=" + columnType + ", columnLength=" + columnLength + ", columnComment=" + columnComment + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DataSourceTableColumnDTO that = (DataSourceTableColumnDTO) o;
+        return Objects.equals(datasourceTableColumnId, that.datasourceTableColumnId) &&
+                Objects.equals(datasourceCode, that.datasourceCode) &&
+                Objects.equals(tableName, that.tableName) &&
+                Objects.equals(columnName, that.columnName) &&
+                Objects.equals(columnType, that.columnType) &&
+                Objects.equals(columnLength, that.columnLength) &&
+                Objects.equals(columnComment, that.columnComment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(datasourceTableColumnId, datasourceCode, tableName, columnName, columnType, columnLength, columnComment);
     }
 }

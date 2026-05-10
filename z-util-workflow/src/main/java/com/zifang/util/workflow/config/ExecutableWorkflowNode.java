@@ -2,16 +2,15 @@ package com.zifang.util.workflow.config;
 
 import com.zifang.util.workflow.engine.interfaces.AbstractEngine;
 import com.zifang.util.workflow.engine.interfaces.AbstractEngineService;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
-
-@Setter
-@Getter
+/**
+ * 可执行的工作流节点
+ */
 public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycle {
 
     // 描述当前节点的状态
@@ -49,6 +48,9 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
     //0是没有被call,1是被call了
     private volatile int isCalled = 0;
 
+    public ExecutableWorkflowNode() {
+    }
+
     //初始化，将节点信息同步到可执行node内部
     public ExecutableWorkflowNode(WorkflowNode workflowNode) {
         super.setNodeId(workflowNode.getNodeId());
@@ -64,6 +66,85 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
         this.init();
     }
 
+    // -------- Getter and Setter for this class --------
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public AbstractEngine getAbstractEngine() {
+        return abstractEngine;
+    }
+
+    public void setAbstractEngine(AbstractEngine abstractEngine) {
+        this.abstractEngine = abstractEngine;
+    }
+
+    public AbstractEngineService getAbstractEngineService() {
+        return abstractEngineService;
+    }
+
+    public void setAbstractEngineService(AbstractEngineService abstractEngineService) {
+        this.abstractEngineService = abstractEngineService;
+    }
+
+    public CountDownLatch getCountDownLatch() {
+        return countDownLatch;
+    }
+
+    public void setCountDownLatch(CountDownLatch countDownLatch) {
+        this.countDownLatch = countDownLatch;
+    }
+
+    public List<CountDownLatch> getPostCountDownLatchList() {
+        return postCountDownLatchList;
+    }
+
+    public void setPostCountDownLatchList(List<CountDownLatch> postCountDownLatchList) {
+        this.postCountDownLatchList = postCountDownLatchList;
+    }
+
+    public List<ExecutableWorkflowNode> getPost() {
+        return post;
+    }
+
+    public void setPost(List<ExecutableWorkflowNode> post) {
+        this.post = post;
+    }
+
+    public List<ExecutableWorkflowNode> getPre() {
+        return pre;
+    }
+
+    public void setPre(List<ExecutableWorkflowNode> pre) {
+        this.pre = pre;
+    }
+
+    public int getIsCalled() {
+        return isCalled;
+    }
+
+    public void setIsCalled(int isCalled) {
+        this.isCalled = isCalled;
+    }
+
+    // -------- Methods from NodeLifeCycle interface --------
+    @Override
+    public void preExecute() {
+    }
+
+    @Override
+    public void postExecute() {
+    }
+
+    @Override
+    public void init() {
+    }
+
+    // -------- Other methods --------
     //开始执行
     public void exec() {
         //默认为同步执行操作
@@ -129,27 +210,28 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
     }
 
     @Override
-    public String getStatus() {
-        return null;
+    public String toString() {
+        return "ExecutableWorkflowNode{status=" + status + ", abstractEngine=" + abstractEngine + ", abstractEngineService=" + abstractEngineService + ", countDownLatch=" + countDownLatch + ", postCountDownLatchList=" + postCountDownLatchList + ", post=" + post + ", pre=" + pre + ", isCalled=" + isCalled + "}";
     }
 
     @Override
-    public void preExecute() {
-
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ExecutableWorkflowNode that = (ExecutableWorkflowNode) o;
+        return isCalled == that.isCalled &&
+                Objects.equals(status, that.status) &&
+                Objects.equals(abstractEngine, that.abstractEngine) &&
+                Objects.equals(abstractEngineService, that.abstractEngineService) &&
+                Objects.equals(countDownLatch, that.countDownLatch) &&
+                Objects.equals(postCountDownLatchList, that.postCountDownLatchList) &&
+                Objects.equals(post, that.post) &&
+                Objects.equals(pre, that.pre);
     }
 
     @Override
-    public void postExecute() {
-
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void setStatus(String status) {
-        this.status = status;
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), status, abstractEngine, abstractEngineService, countDownLatch, postCountDownLatchList, post, pre, isCalled);
     }
 }

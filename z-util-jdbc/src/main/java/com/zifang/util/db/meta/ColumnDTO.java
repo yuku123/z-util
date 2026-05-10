@@ -1,11 +1,8 @@
 package com.zifang.util.db.meta;
 
-import lombok.Data;
-
 import java.util.Objects;
 
 
-@Data
 public class ColumnDTO {
     private final String columnName;
     private final String javaFieldName;
@@ -111,5 +108,30 @@ public class ColumnDTO {
 
     public String getComment() {
         return comment;
+    }
+
+    @Override
+    public String toString() {
+        return "ColumnDTO{columnName=" + columnName + ", javaFieldName=" + javaFieldName + ", dataType=" + dataType + ", javaType=" + javaType + ", columnSize=" + columnSize + ", nullable=" + nullable + ", isPrimaryKey=" + isPrimaryKey + ", comment=" + comment + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ColumnDTO that = (ColumnDTO) o;
+        return columnSize == that.columnSize &&
+                nullable == that.nullable &&
+                isPrimaryKey == that.isPrimaryKey &&
+                Objects.equals(columnName, that.columnName) &&
+                Objects.equals(javaFieldName, that.javaFieldName) &&
+                Objects.equals(dataType, that.dataType) &&
+                Objects.equals(javaType, that.javaType) &&
+                Objects.equals(comment, that.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(columnName, javaFieldName, dataType, javaType, columnSize, nullable, isPrimaryKey, comment);
     }
 }

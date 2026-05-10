@@ -11,7 +11,8 @@ import com.zifang.util.proxy.a.resolver2.method.MethodTable;
 import com.zifang.util.proxy.a.resolver2.readtype.U1;
 import com.zifang.util.proxy.a.resolver2.readtype.U2;
 import com.zifang.util.proxy.a.resolver2.readtype.U4;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 import java.io.File;
@@ -20,8 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 
-@Slf4j
 public class Testddd {
+    private static final Logger log = LoggerFactory.getLogger(Testddd.class);
 
     @Test
     public void sss() throws FileNotFoundException {

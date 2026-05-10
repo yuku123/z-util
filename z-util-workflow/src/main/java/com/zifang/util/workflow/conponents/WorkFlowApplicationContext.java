@@ -9,8 +9,8 @@ import com.zifang.util.workflow.engine.interfaces.AbstractEngine;
 import com.zifang.util.workflow.engine.interfaces.AbstractEngineService;
 import com.zifang.util.workflow.engine.interfaces.EngineFactory;
 import com.zifang.util.workflow.engine.spark.CacheEngineService;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.*;
@@ -20,9 +20,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 每个工作流的上下文，是工作引擎的工作子单元。工作引擎只负责发布命令，调度资源，调度任务相关功能
  */
-@Data
-@Slf4j
 public class WorkFlowApplicationContext {
+
+    private static final Logger log = LoggerFactory.getLogger(WorkFlowApplicationContext.class);
 
     private volatile AtomicInteger nodeId = new AtomicInteger(0);
 
@@ -62,6 +62,116 @@ public class WorkFlowApplicationContext {
         initial();
     }
 
+    // -------- Getter and Setter --------
+    public AtomicInteger getNodeId() {
+        return nodeId;
+    }
+
+    public void setNodeId(AtomicInteger nodeId) {
+        this.nodeId = nodeId;
+    }
+
+    public Integer getWorkFlowApplicationContextId() {
+        return workFlowApplicationContextId;
+    }
+
+    public void setWorkFlowApplicationContextId(Integer workFlowApplicationContextId) {
+        this.workFlowApplicationContextId = workFlowApplicationContextId;
+    }
+
+    public AbstractEngine getAbstractEngine() {
+        return abstractEngine;
+    }
+
+    public void setAbstractEngine(AbstractEngine abstractEngine) {
+        this.abstractEngine = abstractEngine;
+    }
+
+    public CacheEngineService getCacheEngineService() {
+        return cacheEngineService;
+    }
+
+    public void setCacheEngineService(CacheEngineService cacheEngineService) {
+        this.cacheEngineService = cacheEngineService;
+    }
+
+    public Map<String, WorkflowNode> getWorkflowNodeMap() {
+        return workflowNodeMap;
+    }
+
+    public void setWorkflowNodeMap(Map<String, WorkflowNode> workflowNodeMap) {
+        this.workflowNodeMap = workflowNodeMap;
+    }
+
+    public List<ExecutableWorkflowNode> getExecutableWorkNodes() {
+        return executableWorkNodes;
+    }
+
+    public void setExecutableWorkNodes(List<ExecutableWorkflowNode> executableWorkNodes) {
+        this.executableWorkNodes = executableWorkNodes;
+    }
+
+    public Map<String, ExecutableWorkflowNode> getExecutableWorkNodeIdMap() {
+        return executableWorkNodeIdMap;
+    }
+
+    public void setExecutableWorkNodeIdMap(Map<String, ExecutableWorkflowNode> executableWorkNodeIdMap) {
+        this.executableWorkNodeIdMap = executableWorkNodeIdMap;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public WorkflowConfiguration getWorkflowConfiguration() {
+        return workflowConfiguration;
+    }
+
+    public void setWorkflowConfiguration(WorkflowConfiguration workflowConfiguration) {
+        this.workflowConfiguration = workflowConfiguration;
+    }
+
+    // -------- toString, equals, hashCode --------
+    @Override
+    public String toString() {
+        return "WorkFlowApplicationContext{nodeId=" + nodeId + ", workFlowApplicationContextId=" + workFlowApplicationContextId + ", abstractEngine=" + abstractEngine + ", cacheEngineService=" + cacheEngineService + ", workflowNodeMap=" + workflowNodeMap + ", executableWorkNodes=" + executableWorkNodes + ", executableWorkNodeIdMap=" + executableWorkNodeIdMap + ", filePath=" + filePath + ", task=" + task + ", workflowConfiguration=" + workflowConfiguration + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WorkFlowApplicationContext that = (WorkFlowApplicationContext) o;
+        return Objects.equals(nodeId, that.nodeId) &&
+                Objects.equals(workFlowApplicationContextId, that.workFlowApplicationContextId) &&
+                Objects.equals(abstractEngine, that.abstractEngine) &&
+                Objects.equals(cacheEngineService, that.cacheEngineService) &&
+                Objects.equals(workflowNodeMap, that.workflowNodeMap) &&
+                Objects.equals(executableWorkNodes, that.executableWorkNodes) &&
+                Objects.equals(executableWorkNodeIdMap, that.executableWorkNodeIdMap) &&
+                Objects.equals(filePath, that.filePath) &&
+                Objects.equals(task, that.task) &&
+                Objects.equals(workflowConfiguration, that.workflowConfiguration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodeId, workFlowApplicationContextId, abstractEngine, cacheEngineService, workflowNodeMap, executableWorkNodes, executableWorkNodeIdMap, filePath, task, workflowConfiguration);
+    }
+
+    // -------- Business Methods --------
     public void initialByLocalFilePath(String filePath) {
 
         try {

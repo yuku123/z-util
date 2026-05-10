@@ -52,27 +52,4 @@ public class BaseResponse {
     public int hashCode() {
         return java.util.Objects.hash(message, code);
     }
-
-    public static class Builder {
-        private String message;
-        private ResultCode code = ResultCode.SUCCESS;
-
-        public Builder message(String message) {
-            this.message = message;
-            return this;
-        }
-
-        public Builder code(ResultCode code) {
-            this.code = code;
-            return this;
-        }
-
-        public BaseResponse build() {
-            return new BaseResponse(message, code);
-        }
-    }
-
-    public static BaseResponse builder() {
-        return new Builder().build();
-    }
 }

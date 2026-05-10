@@ -212,9 +212,14 @@ public class DynamicLexer implements Lexer {
     private int findMatchingBracket(String s, int start) {
         int depth = 0;
         for (int i = start; i < s.length(); i++) {
+            if (s.charAt(i) == '\\' && i + 1 < s.length()) {
+                // 转义序列，跳过下一个字符
+                i++;
+                continue;
+            }
             if (s.charAt(i) == '[') depth++;
             else if (s.charAt(i) == ']') {
-                if (depth == 0) return i;
+                if (depth == 1) return i;  // found matching ]
                 depth--;
             }
         }

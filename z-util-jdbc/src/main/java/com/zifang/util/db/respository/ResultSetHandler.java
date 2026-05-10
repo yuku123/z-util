@@ -1,7 +1,6 @@
 package com.zifang.util.db.respository;
 
 import com.zifang.util.core.lang.converter.Converters;
-import lombok.Data;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import javax.persistence.Column;
@@ -15,8 +14,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-@Data
 public class ResultSetHandler {
 
     private Type targetType;
@@ -132,5 +131,49 @@ public class ResultSetHandler {
             li.add(map);
         }
         return li;
+    }
+
+    public Type getTargetType() {
+        return targetType;
+    }
+
+    public void setTargetType(Type targetType) {
+        this.targetType = targetType;
+    }
+
+    public ResultSet getResultSet() {
+        return resultSet;
+    }
+
+    public void setResultSet(ResultSet resultSet) {
+        this.resultSet = resultSet;
+    }
+
+    public ResultSetMetaData getResultSetMetaData() {
+        return resultSetMetaData;
+    }
+
+    public void setResultSetMetaData(ResultSetMetaData resultSetMetaData) {
+        this.resultSetMetaData = resultSetMetaData;
+    }
+
+    @Override
+    public String toString() {
+        return "ResultSetHandler{targetType=" + targetType + ", resultSet=" + resultSet + ", resultSetMetaData=" + resultSetMetaData + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ResultSetHandler that = (ResultSetHandler) o;
+        return Objects.equals(targetType, that.targetType) &&
+                Objects.equals(resultSet, that.resultSet) &&
+                Objects.equals(resultSetMetaData, that.resultSetMetaData);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(targetType, resultSet, resultSetMetaData);
     }
 }

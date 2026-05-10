@@ -4,11 +4,11 @@ import com.zifang.util.core.lang.exception.BusinessException;
 import com.zifang.util.core.meta.BaseStatusCode;
 import com.zifang.util.db.meta.DataSourceTableColumnDTO;
 import com.zifang.util.db.meta.DataSourceTableDTO;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -19,14 +19,15 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
  * @author zifang
  */
-@Slf4j
-@Data
 public class SqlExecutor {
+
+    private static final Logger log = LoggerFactory.getLogger(SqlExecutor.class);
 
     private static Map<String, DataSource> dataSourceCache = new LinkedHashMap<>();
 
@@ -127,7 +128,7 @@ public class SqlExecutor {
                 targetTableName
         );
 
-        String sql2 = String.format("alter TABLE %s comment '%s';",
+        String sql2 = String.format("alter TABLE %s comment '%s'",
                 tableName,
                 targetTableComments
         );
@@ -251,5 +252,28 @@ public class SqlExecutor {
                 e.printStackTrace();
             }
         }
+    }
+
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
+    @Override
+    public String toString() {
+        return "SqlExecutor{dataSourceCache=" + dataSourceCache + ", dataSource=" + dataSource + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SqlExecutor that = (SqlExecutor) o;
+        return Objects.equals(dataSourceCache, that.dataSourceCache) &&
+                Objects.equals(dataSource, that.dataSource);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dataSourceCache, dataSource);
     }
 }

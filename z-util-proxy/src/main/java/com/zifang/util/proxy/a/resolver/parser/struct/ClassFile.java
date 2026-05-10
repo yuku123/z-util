@@ -1,14 +1,12 @@
 package com.zifang.util.proxy.a.resolver.parser.struct;
 
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author zifang
  */
-@Data
 public class ClassFile {
 
     /**
@@ -33,6 +31,72 @@ public class ClassFile {
         items = new ArrayList<>();
         fields = new ArrayList<>();
         items.add(new ConstantPoolItem(this, 0));
+    }
+
+    public int getMagic() {
+        return magic;
+    }
+
+    public void setMagic(int magic) {
+        this.magic = magic;
+    }
+
+    public int getMinorVersion() {
+        return minorVersion;
+    }
+
+    public void setMinorVersion(int minorVersion) {
+        this.minorVersion = minorVersion;
+    }
+
+    public int getMajorVersion() {
+        return majorVersion;
+    }
+
+    public void setMajorVersion(int majorVersion) {
+        this.majorVersion = majorVersion;
+    }
+
+    public int getAccessFlags() {
+        return accessFlags;
+    }
+
+    public void setAccessFlags(int accessFlags) {
+        this.accessFlags = accessFlags;
+    }
+
+    public List<? super ConstantPoolItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<? super ConstantPoolItem> items) {
+        this.items = items;
+    }
+
+    public List<Field> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<Field> fields) {
+        this.fields = fields;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ClassFile classFile = (ClassFile) o;
+        return magic == classFile.magic &&
+                minorVersion == classFile.minorVersion &&
+                majorVersion == classFile.majorVersion &&
+                accessFlags == classFile.accessFlags &&
+                Objects.equals(items, classFile.items) &&
+                Objects.equals(fields, classFile.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(magic, minorVersion, majorVersion, accessFlags, items, fields);
     }
 
     public void addConstantInteger(ClassFile classFile, int index, int value) {
