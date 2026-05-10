@@ -1,6 +1,5 @@
 package com.zifang.util.zex.bust.ex;
 
-import lombok.Data;
 import org.junit.Test;
 
 import java.io.*;
@@ -27,8 +26,41 @@ public class SerializableTest {
     }
 }
 
-@Data
 class User implements Serializable {
     private String name;
     private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{name=" + name + ", age=" + age + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return age == user.age && java.util.Objects.equals(name, user.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(name, age);
+    }
 }

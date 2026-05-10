@@ -177,27 +177,36 @@ public class G4FileParser {
     }
     
     /**
-     * 从给定位置开始查找分号（考虑字符串和括号嵌套）
+     * 从给定位置开始查找分号（考虑字符串、字符类和括号嵌套）
      */
     private static int findSemicolon(String s, int start) {
         int depth = 0;
         boolean inString = false;
         char stringChar = 0;
+        boolean inCharClass = false;
         
         for (int i = start; i < s.length(); i++) {
             char ch = s.charAt(i);
             
-            if (!inString && (ch == '\'' || ch == '"')) {
+            // String delimiters are only recognized outside char classes
+            if (!inString && !inCharClass && (ch == '\'' || ch == '"')) {
                 inString = true;
                 stringChar = ch;
             } else if (inString && ch == '\\' && i + 1 < s.length()) {
                 i++; // skip escaped
             } else if (inString && ch == stringChar) {
                 inString = false;
-            } else if (!inString) {
-                if (ch == '(' || ch == '[' || ch == '{') {
+            } else if (!inString && !inCharClass && ch == '[') {
+                // 字符类开始
+                inCharClass = true;
+            } else if (!inString && inCharClass && ch == '\\' && i + 1 < s.length()) {
+                i++; // skip escaped in char class
+            } else if (!inString && inCharClass && ch == ']') {
+                inCharClass = false;
+            } else if (!inString && !inCharClass) {
+                if (ch == '(' || ch == '{') {
                     depth++;
-                } else if (ch == ')' || ch == ']' || ch == '}') {
+                } else if (ch == ')' || ch == '}') {
                     depth--;
                 } else if (ch == ';' && depth == 0) {
                     return i;

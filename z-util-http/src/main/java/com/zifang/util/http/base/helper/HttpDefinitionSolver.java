@@ -7,8 +7,6 @@ import com.zifang.util.http.base.pojo.HttpRequestBody;
 import com.zifang.util.http.base.pojo.HttpRequestDefinition;
 import com.zifang.util.http.base.pojo.HttpRequestHeader;
 import com.zifang.util.http.base.pojo.HttpRequestLine;
-import lombok.Getter;
-
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
@@ -38,8 +36,11 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
     private List<ParameterValuePair> parameterValuePairList = new ArrayList<>();
 
     // 标准定义实例
-    @Getter
     private HttpRequestDefinition httpRequestDefinition = new HttpRequestDefinition();
+
+    public HttpRequestDefinition getHttpRequestDefinition() {
+        return httpRequestDefinition;
+    }
 
     public void set(Class<?> target, Object proxy, Method method, Object[] args, Map<String,Object> contextParams) {
         this.target = target;

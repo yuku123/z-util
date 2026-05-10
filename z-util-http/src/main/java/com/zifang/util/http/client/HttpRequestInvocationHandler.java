@@ -5,17 +5,18 @@ import com.zifang.util.http.base.helper.HttpDefinitionSolver;
 import com.zifang.util.http.base.pojo.HttpRequestDefinition;
 import com.zifang.util.http.base.helper.HttpRequestProducer;
 import com.zifang.util.core.util.GsonUtil;
-import lombok.Data;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-@Data
+/**
+ * http请求 handler
+ */
 public class HttpRequestInvocationHandler implements InvocationHandler {
 
     // 调用过程中需要的上下文参数
-    private Map<String,Object> contextParams;
+    private Map<String, Object> contextParams;
 
     // 代理的接口类
     private final Class<?> target;
@@ -24,7 +25,7 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
         this.target = requestInterface;
     }
 
-    public HttpRequestInvocationHandler(Class<?> requestInterface, Map<String,Object> contextParams) {
+    public HttpRequestInvocationHandler(Class<?> requestInterface, Map<String, Object> contextParams) {
         this.target = requestInterface;
         this.contextParams = contextParams;
     }
@@ -55,5 +56,39 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
         if (!target.isAnnotationPresent(RestController.class)) {
             throw new RuntimeException(target.getName() + "类没有RestController注解");
         }
+    }
+
+    public Map<String, Object> getContextParams() {
+        return contextParams;
+    }
+
+    public void setContextParams(Map<String, Object> contextParams) {
+        this.contextParams = contextParams;
+    }
+
+    public Class<?> getTarget() {
+        return target;
+    }
+
+    @Override
+    public String toString() {
+        return "HttpRequestInvocationHandler{contextParams=" + contextParams + ", target=" + target + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HttpRequestInvocationHandler that = (HttpRequestInvocationHandler) o;
+        if (contextParams != null ? !contextParams.equals(that.contextParams) : that.contextParams != null)
+            return false;
+        return target != null ? target.equals(that.target) : that.target == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = contextParams != null ? contextParams.hashCode() : 0;
+        result = 31 * result + (target != null ? target.hashCode() : 0);
+        return result;
     }
 }

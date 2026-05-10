@@ -1,9 +1,10 @@
 package com.zifang.util.zex.bust.chapter6;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 public class LogTest {
+    private static final Logger log = LoggerFactory.getLogger(LogTest.class);
     public static void main(String[] args) {
         log.info("打印info日志");
         log.debug("打印debug日志");

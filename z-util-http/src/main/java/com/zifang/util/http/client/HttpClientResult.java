@@ -1,15 +1,10 @@
 package com.zifang.util.http.client;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 
 /**
  * Description: 封装httpClient响应结果
  */
-@Data
 public class HttpClientResult implements Serializable {
 
     private static final long serialVersionUID = 2168152194164783950L;
@@ -39,9 +34,40 @@ public class HttpClientResult implements Serializable {
         this.content = content;
     }
 
-    @Override
-    public String toString() {
-        return "HttpClientResult [code=" + code + ", content=" + content + "]";
+    public int getCode() {
+        return code;
     }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "HttpClientResult{code=" + code + ", content=" + content + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HttpClientResult that = (HttpClientResult) o;
+        if (code != that.code) return false;
+        return content != null ? content.equals(that.content) : that.content == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = code;
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        return result;
+    }
 }

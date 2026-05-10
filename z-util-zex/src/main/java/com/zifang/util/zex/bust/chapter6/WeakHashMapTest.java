@@ -1,14 +1,15 @@
 package com.zifang.util.zex.bust.chapter6;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 import java.util.WeakHashMap;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
-@Slf4j
 public class WeakHashMapTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(WeakHashMapTest.class);
 
      class WeakHashMapTest2{
         private String a;
