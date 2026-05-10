@@ -31,6 +31,11 @@ public interface Layer {
      */
     LayerType getLayerType();
 
+    /**
+     * 获取神经元数量
+     */
+    int getNeuronCount();
+
     enum LayerType {
         INPUT,
         HIDDEN,

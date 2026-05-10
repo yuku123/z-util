@@ -183,8 +183,10 @@ public class DynamicLexer implements Lexer {
                     int end = findMatchingBracket(s, i);
                     if (end == -1) throw new RuntimeException("Unclosed bracket after ~ at " + i);
                     String charClass = s.substring(i, end + 1);
-                    // 转换 ~[abc] 为 [^abc]
-                    String inner = charClass.substring(2, charClass.length() - 1); // strip ~[
+                    System.err.println("DEBUG ~: charClass='" + charClass + "'");
+                    // charClass like ~["\\\r\n]
+                    String inner = charClass.substring(2, charClass.length() - 1); // strip ~[ and ]
+                    System.err.println("DEBUG ~: inner='" + inner + "'");
                     result.append("[^").append(escapeCharClass(inner)).append("]");
                     i = end + 1;
                 } else {
@@ -281,35 +283,30 @@ public class DynamicLexer implements Lexer {
     private int findMatchingBracket(String s, int start) {
         int depth = 0;
         for (int i = start; i < s.length(); i++) {
-            if (s.charAt(i) == '\\' && i + 1 < s.length()) {
-                // 转义序列，跳过下一个字符
-                i++;
-                continue;
-            }
+            if (s.charAt(i) == '\\' && i + 1 < s.length()) { i++; continue; }
+            if (s.charAt(i) == '\'') { int end = findMatchingQuote(s, i + 1); if (end != -1) i = end; continue; }
             if (s.charAt(i) == '[') depth++;
-            else if (s.charAt(i) == ']') {
-                if (depth == 1) return i;  // found matching ]
-                depth--;
-            }
+            else if (s.charAt(i) == ']') { if (depth == 1) return i; if (depth > 0) depth--; }
         }
         return -1;
     }
-    
+
     private int findMatchingParen(String s, int start) {
         int depth = 0;
         for (int i = start; i < s.length(); i++) {
-            if (s.charAt(i) == '\\' && i + 1 < s.length()) {
-                i++; continue;
-            }
+            if (s.charAt(i) == '\\' && i + 1 < s.length()) { i++; continue; }
+            if (s.charAt(i) == '\'') { int end = findMatchingQuote(s, i + 1); if (end != -1) i = end; continue; }
+            if (s.charAt(i) == '[') { int end = findMatchingBracket(s, i); if (end != -1) i = end; continue; }
             if (s.charAt(i) == '(') depth++;
             else if (s.charAt(i) == ')') {
-                if (depth == 0) return i;
+                if (depth == 0) return i;  // unmatched ), error
                 depth--;
+                if (depth == 0) return i;  // just closed the outermost paren
             }
         }
         return -1;
     }
-    
+
     private String escapeRegex(String literal) {
         // 转义正则特殊字符
         StringBuilder sb = new StringBuilder();

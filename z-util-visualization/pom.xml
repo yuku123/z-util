@@ -14,6 +14,11 @@
     <artifactId>z-util-visualization</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-ai</artifactId>
+            <version>${util.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
