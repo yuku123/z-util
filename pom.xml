@@ -80,6 +80,13 @@
             </dependency>
 
             <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-all</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+
+
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.30</version>
