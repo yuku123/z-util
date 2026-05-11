@@ -6,7 +6,8 @@
     <parent>
         <groupId>com.zifang</groupId>
         <artifactId>z-util</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>${util.version}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>z-util-all</artifactId>

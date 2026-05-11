@@ -14,6 +14,8 @@ public class G4Rule {
     private RuleType type;
     private String body;        // 原始规则体
     private boolean isFragment;
+    private boolean hidden;     // 是否为HIDDEN channel
+
     
     public G4Rule() {
     }
@@ -62,7 +64,15 @@ public class G4Rule {
     public void setFragment(boolean fragment) {
         isFragment = fragment;
     }
-    
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
     @Override
     public String toString() {
         return "G4Rule{" +

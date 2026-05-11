@@ -130,10 +130,15 @@ public class G4FileParser {
         }
         
         body = line.substring(sepIdx + (colon2Idx >= 0 && colon2Idx == sepIdx ? 2 : 1), semiIdx).trim();
-        
-        // 剥离 -> channel(HIDDEN) 等动作
+
+        // 剥离 -> channel(HIDDEN) 等动作，并检测HIDDEN标记
+        boolean isHidden = false;
         int actionIdx = body.indexOf("->");
         if (actionIdx >= 0) {
+            String action = body.substring(actionIdx + 2).trim();
+            if (action.contains("HIDDEN")) {
+                isHidden = true;
+            }
             body = body.substring(0, actionIdx).trim();
         }
         
@@ -144,6 +149,7 @@ public class G4FileParser {
         }
         
         G4Rule rule = new G4Rule(name, type, body, isFragment);
+        rule.setHidden(isHidden);
         return rule;
     }
     

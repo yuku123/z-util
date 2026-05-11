@@ -41,15 +41,19 @@ public class DynamicLexer implements Lexer {
     
     // Fragment规则（不直接产生Token）
     private Map<String, String> fragmentRules;
-    
+
+    // HIDDEN channel的token名称集合
+    private Set<String> hiddenTokenNames;
+
     // 解析结果
     private List<Token> tokens;
     
     public DynamicLexer() {
         this.tokenDefinitions = new ArrayList<>();
-        this.compiledPatterns = new HashMap<>();
+        this.compiledPatterns = new LinkedHashMap<>();
         this.tokenTypeMap = new HashMap<>();
         this.fragmentRules = new HashMap<>();
+        this.hiddenTokenNames = new HashSet<>();
         this.nextTypeId = 1;
     }
     
@@ -76,13 +80,17 @@ public class DynamicLexer implements Lexer {
             
             // 转换G4规则为正则表达式
             String pattern = convertToRegex(rule.getBody());
-            
+
             TokenDefinition def = new TokenDefinition(
                 rule.getName(),
                 pattern,
                 tokenDefinitions.size()
             );
             def.setFragment(false);
+            def.setHidden(rule.isHidden());
+            if (rule.isHidden()) {
+                hiddenTokenNames.add(rule.getName());
+            }
             tokenDefinitions.add(def);
             
             // 编译正则表达式
@@ -107,13 +115,49 @@ public class DynamicLexer implements Lexer {
             throw new RuntimeException("Failed to load G4 file: " + filePath, e);
         }
     }
-
     /**
      * 将G4规则体转换为Java正则表达式
      */
     private String convertToRegex(String body) {
         String regex = body.trim();
-        return convertExpr(regex).result;
+        String result = convertExpr(regex).result;
+        // G4中 . 匹配任意字符包括\n，但Java regex的.默认不匹配\n
+        // 用 ANY_CHAR 替换不在字符类内的 .
+        result = replaceDotOutsideCharClass(result);
+        // ANY_CHAR -> 任意字符（包括换行符）
+        // 用 [^\0] 匹配除NULL外的所有字符（等价于G4的.）
+        char NULL = '\0';
+        return result.replace(ANY_CHAR_PLACEHOLDER, "[^" + NULL + "]");
+    }
+
+    private static final String ANY_CHAR_PLACEHOLDER = "\u0001ANYCHAR\u0001";
+
+    /**
+     * 替换 . 为占位符，但跳过字符类 [...] 内的 .（那里是字面量）
+     */
+    private String replaceDotOutsideCharClass(String s) {
+        StringBuilder sb = new StringBuilder();
+        boolean inCharClass = false;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '\\' && i + 1 < s.length()) {
+                // 转义序列，原样保留
+                sb.append(ch);
+                sb.append(s.charAt(++i));
+            } else if (ch == '[') {
+                inCharClass = true;
+                sb.append(ch);
+            } else if (ch == ']') {
+                inCharClass = false;
+                sb.append(ch);
+            } else if (ch == '.' && !inCharClass) {
+                // G4的.匹配任意字符，包括换行符
+                sb.append(ANY_CHAR_PLACEHOLDER);
+            } else {
+                sb.append(ch);
+            }
+        }
+        return sb.toString();
     }
     
     /**
@@ -141,7 +185,7 @@ public class DynamicLexer implements Lexer {
             
             if (ch == '\'') {
                 // 字面量
-                int end = findMatchingQuote(s, i + 1);
+                int end = findMatchingQuote(s, i + 1, s.length());
                 if (end == -1) throw new RuntimeException("Unclosed string literal at " + i);
                 String literal = s.substring(i + 1, end);
                 result.append(escapeRegex(literal));
@@ -183,10 +227,8 @@ public class DynamicLexer implements Lexer {
                     int end = findMatchingBracket(s, i);
                     if (end == -1) throw new RuntimeException("Unclosed bracket after ~ at " + i);
                     String charClass = s.substring(i, end + 1);
-                    System.err.println("DEBUG ~: charClass='" + charClass + "'");
                     // charClass like ~["\\\r\n]
-                    String inner = charClass.substring(2, charClass.length() - 1); // strip ~[ and ]
-                    System.err.println("DEBUG ~: inner='" + inner + "'");
+                    String inner = charClass.substring(1, charClass.length() - 1); // strip ~[ and ]
                     result.append("[^").append(escapeCharClass(inner)).append("]");
                     i = end + 1;
                 } else {
@@ -249,18 +291,19 @@ public class DynamicLexer implements Lexer {
         for (int i = 0; i < inner.length(); i++) {
             char ch = inner.charAt(i);
             if (ch == '\\' && i + 1 < inner.length()) {
-                // G4转义序列: \t \r \n 等
+                // G4转义序列 -> 转为真实字符
+                // Java regex在字符类[]中: \t=tab, \r=CR, \n=LF, \\=backslash
                 char next = inner.charAt(i + 1);
-                if (next == 't') { sb.append("\\t"); i++; }
-                else if (next == 'r') { sb.append("\\r"); i++; }
-                else if (next == 'n') { sb.append("\\n"); i++; }
+                if (next == 't') { sb.append('\t'); i++; }
+                else if (next == 'r') { sb.append('\r'); i++; }
+                else if (next == 'n') { sb.append('\n'); i++; }
                 else if (next == '\\') { sb.append("\\\\"); i++; }
-                else if (next == '"') { sb.append("\\\""); i++; }
-                else if (next == '\'') { sb.append("\\'"); i++; }
-                else if (next == '[') { sb.append("\\["); i++; }
-                else if (next == ']') { sb.append("\\]"); i++; }
-                else if (next == '^') { sb.append("\\^"); i++; }
-                else if (next == '-') { sb.append("\\-"); i++; }
+                else if (next == '"') { sb.append('"'); i++; }
+                else if (next == '\'') { sb.append('\''); i++; }
+                else if (next == '[') { sb.append('['); i++; }
+                else if (next == ']') { sb.append(']'); i++; }
+                else if (next == '^') { sb.append('^'); i++; }
+                else if (next == '-') { sb.append('-'); i++; }
                 else { sb.append(ch); }
             } else {
                 sb.append(ch);
@@ -269,8 +312,8 @@ public class DynamicLexer implements Lexer {
         return sb.toString();
     }
     
-    private int findMatchingQuote(String s, int start) {
-        for (int i = start; i < s.length(); i++) {
+    private int findMatchingQuote(String s, int start, int maxPos) {
+        for (int i = start; i < maxPos; i++) {
             if (s.charAt(i) == '\\' && i + 1 < s.length()) {
                 i++; // skip escaped char
             } else if (s.charAt(i) == '\'') {
@@ -279,12 +322,11 @@ public class DynamicLexer implements Lexer {
         }
         return -1;
     }
-    
+
     private int findMatchingBracket(String s, int start) {
         int depth = 0;
         for (int i = start; i < s.length(); i++) {
             if (s.charAt(i) == '\\' && i + 1 < s.length()) { i++; continue; }
-            if (s.charAt(i) == '\'') { int end = findMatchingQuote(s, i + 1); if (end != -1) i = end; continue; }
             if (s.charAt(i) == '[') depth++;
             else if (s.charAt(i) == ']') { if (depth == 1) return i; if (depth > 0) depth--; }
         }
@@ -295,7 +337,7 @@ public class DynamicLexer implements Lexer {
         int depth = 0;
         for (int i = start; i < s.length(); i++) {
             if (s.charAt(i) == '\\' && i + 1 < s.length()) { i++; continue; }
-            if (s.charAt(i) == '\'') { int end = findMatchingQuote(s, i + 1); if (end != -1) i = end; continue; }
+            if (s.charAt(i) == '\'') { int end = findMatchingQuote(s, i + 1, s.length()); if (end != -1) i = end; continue; }
             if (s.charAt(i) == '[') { int end = findMatchingBracket(s, i); if (end != -1) i = end; continue; }
             if (s.charAt(i) == '(') depth++;
             else if (s.charAt(i) == ')') {
@@ -308,14 +350,39 @@ public class DynamicLexer implements Lexer {
     }
 
     private String escapeRegex(String literal) {
-        // 转义正则特殊字符
+        // 先处理G4转义序列，再转义正则特殊字符
+        String processed = unescapeG4(literal);
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < literal.length(); i++) {
-            char ch = literal.charAt(i);
+        for (int i = 0; i < processed.length(); i++) {
+            char ch = processed.charAt(i);
             if ("\\^$.|?*+()[]{}-".indexOf(ch) >= 0) {
                 sb.append('\\');
             }
             sb.append(ch);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 将G4转义序列还原为真实字符
+     * G4中: \\ -> \  \t -> tab  \r -> CR  \n -> LF  \" -> "  \' -> '
+     */
+    private String unescapeG4(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (ch == '\\' && i + 1 < s.length()) {
+                char next = s.charAt(i + 1);
+                if (next == 't') { sb.append('\t'); i++; }
+                else if (next == 'r') { sb.append('\r'); i++; }
+                else if (next == 'n') { sb.append('\n'); i++; }
+                else if (next == '\\') { sb.append('\\'); i++; }
+                else if (next == '"') { sb.append('"'); i++; }
+                else if (next == '\'') { sb.append('\''); i++; }
+                else { sb.append(ch); }
+            } else {
+                sb.append(ch);
+            }
         }
         return sb.toString();
     }
@@ -389,7 +456,7 @@ public class DynamicLexer implements Lexer {
             Matcher matcher = pattern.matcher(input.substring(pos));
             if (matcher.lookingAt()) {
                 String matched = matcher.group();
-                // 找最长匹配
+                // 找最长匹配；长度相等时保留先出现的规则（保持keyword优先于同长度Identifier）
                 if (bestMatch == null || matched.length() > bestMatch.length()) {
                     bestMatch = matched;
                     bestTokenType = tokenType;
@@ -406,7 +473,7 @@ public class DynamicLexer implements Lexer {
             token.setLine(bestLine);
             token.setColumn(bestColumn);
             token.setTokenName(bestTokenType);
-            
+
             // 移动位置
             for (int i = 0; i < bestMatch.length(); i++) {
                 if (bestMatch.charAt(i) == '\n') {
@@ -417,7 +484,12 @@ public class DynamicLexer implements Lexer {
                 }
             }
             pos = bestEndPos;
-            
+
+            // HIDDEN channel的token不加入结果
+            if (hiddenTokenNames.contains(bestTokenType)) {
+                return nextToken();
+            }
+
             return token;
         }
         
