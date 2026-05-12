@@ -1,6 +1,7 @@
 package com.zifang.util.json;
 
 import com.zifang.util.json.define.TypeReference;
+import com.zifang.util.json.dsl.JsonPathParser;
 
 import java.util.List;
 import java.util.Map;
@@ -42,5 +43,15 @@ public class JsonUtil{
 //            e.printStackTrace();
 //        }
         return t;
+    }
+
+    /**
+     * Query JSON with JsonPath expression.
+     * @param json JSON string
+     * @param path JsonPath expression, e.g. "$.store.book[0].title", "$..author"
+     * @return List of matched values
+     */
+    public static List<Object> query(String json, String path) {
+        return new JsonPathParser().query(json, path);
     }
 }

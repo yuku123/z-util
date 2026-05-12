@@ -142,8 +142,10 @@ public class G4FileParser {
             body = body.substring(0, actionIdx).trim();
         }
         
-        // 判断类型
-        G4Rule.RuleType type = G4Rule.RuleType.PARSER;
+        // 判断类型 — section 声明优先于首字母惯例
+        // defaultType 已经由调用方根据当前 section (lexer/parser grammar) 确定
+        // 这里只在首字母大写时将其提升为 LEXER（符合 ANTLR 惯例）
+        G4Rule.RuleType type = defaultType;
         if (name.length() > 0 && name.charAt(0) >= 'A' && name.charAt(0) <= 'Z') {
             type = G4Rule.RuleType.LEXER;
         }
