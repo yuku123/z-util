@@ -1,0 +1,367 @@
+package com.zifang.util.dsl.g4;
+
+import com.zifang.util.dsl.core.ASTFactory;
+import com.zifang.util.dsl.core.ASTNode;
+import com.zifang.util.dsl.core.Parser;
+import com.zifang.util.dsl.core.TokenReader;
+import com.zifang.util.dsl.g4.model.G4Rule;
+import com.zifang.util.dsl.ast.SimpleASTNode;
+import com.zifang.util.dsl.token.Token;
+
+import java.util.*;
+
+/**
+ * 动态语法分析器
+ * 根据.g4文件动态生成语法分析器
+ */
+public class DynamicParser implements Parser {
+
+    private TokenReader tokenReader;
+    private Map<String, G4Rule> parserRules;
+    private ASTFactory astFactory;
+
+    // 预定义的Token类型（来自G4Lexer）
+    private static final Set<String> TERMINALS = new HashSet<>(Arrays.asList(
+        "Id", "StringLiteral", "Int", "Decimal"
+    ));
+
+    public DynamicParser() {
+        this.parserRules = new HashMap<>();
+    }
+
+    /**
+     * 加载G4文件并初始化
+     */
+    public void loadG4(String g4Content) {
+        List<G4Rule> rules = G4FileParser.extractRules(g4Content);
+
+        for (G4Rule rule : rules) {
+            if (rule.getType() == G4Rule.RuleType.PARSER) {
+                parserRules.put(rule.getName(), rule);
+            }
+        }
+    }
+
+    /**
+     * 从文件加载G4
+     */
+    public void loadG4File(String filePath) {
+        try {
+            String content = new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(filePath)));
+            loadG4(content);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load G4 file: " + filePath, e);
+        }
+    }
+
+    @Override
+    public void setTokenReader(TokenReader tokenReader) {
+        this.tokenReader = tokenReader;
+    }
+
+    @Override
+    public ASTNode parse() {
+        // 默认从第一个规则开始
+        if (parserRules.isEmpty()) {
+            throw new RuntimeException("No parser rules loaded");
+        }
+        String startRule = parserRules.keySet().iterator().next();
+        return parse(startRule);
+    }
+
+    @Override
+    public ASTNode parse(String startRule) {
+        G4Rule rule = parserRules.get(startRule);
+        if (rule == null) {
+            throw new RuntimeException("Unknown rule: " + startRule);
+        }
+
+        return parseRule(rule);
+    }
+
+    /**
+     * 解析一条规则
+     */
+    private ASTNode parseRule(G4Rule rule) {
+        String ruleName = rule.getName();
+        String body = rule.getBody().trim();
+
+        SimpleASTNode node = new SimpleASTNode();
+        node.setType(ruleName);
+        node.setLine(getCurrentLine());
+        node.setColumn(getCurrentColumn());
+
+        // 解析规则体
+        List<ParseResult> results = parseAlternatives(body, node);
+
+        // 返回第一个成功匹配的结果
+        if (!results.isEmpty()) {
+            return results.get(0).node;
+        }
+
+        return node;
+    }
+
+    /**
+     * 解析规则体中的多个可选分支
+     */
+    private List<ParseResult> parseAlternatives(String body, ASTNode parent) {
+        List<ParseResult> results = new ArrayList<>();
+
+        // 按|分割，但需要注意括号内的|
+        List<String> alternatives = splitAlternatives(body);
+
+        for (String alt : alternatives) {
+            SimpleASTNode altNode = new SimpleASTNode();
+            altNode.setType("alt");
+            altNode.setLine(getCurrentLine());
+            altNode.setColumn(getCurrentColumn());
+
+            try {
+                parseSequence(alt.trim(), altNode);
+                results.add(new ParseResult(altNode));
+            } catch (ParseException e) {
+                // 这个分支不匹配，尝试下一个
+            }
+        }
+
+        return results;
+    }
+
+    /**
+     * 解析连续的token序列
+     */
+    private void parseSequence(String sequence, ASTNode parent) {
+        // 分割sequence中的各个元素
+        List<String> elements = splitElements(sequence);
+
+        for (String element : elements) {
+            element = element.trim();
+            if (element.isEmpty()) continue;
+
+            ASTNode child = parseElement(element);
+            if (child != null) {
+                parent.addChild(child);
+            }
+        }
+    }
+
+    /**
+     * 解析单个元素
+     */
+    private ASTNode parseElement(String element) {
+        element = element.trim();
+
+        // 可选元素 (...)
+        if (element.startsWith("(") && element.endsWith(")")) {
+            String inner = element.substring(1, element.length() - 1);
+            SimpleASTNode node = new SimpleASTNode();
+            node.setType("group");
+            node.setLine(getCurrentLine());
+            node.setColumn(getCurrentColumn());
+            try {
+                parseSequence(inner, node);
+            } catch (ParseException e) {
+                // 可选组，不匹配时不报错
+            }
+            return node;
+        }
+
+        // 可选元素 ?
+        if (element.endsWith("?")) {
+            String inner = element.substring(0, element.length() - 1).trim();
+            SimpleASTNode node = new SimpleASTNode();
+            node.setType("optional");
+            node.setLine(getCurrentLine());
+            node.setColumn(getCurrentColumn());
+            try {
+                parseSequence(inner, node);
+            } catch (ParseException e) {
+                // 可选，不匹配
+            }
+            return node;
+        }
+
+        // 闭包 * +
+        if (element.endsWith("*") || element.endsWith("+")) {
+            char op = element.charAt(element.length() - 1);
+            String inner = element.substring(0, element.length() - 1).trim();
+            SimpleASTNode node = new SimpleASTNode();
+            node.setType(op == '*' ? "star" : "plus");
+            node.setLine(getCurrentLine());
+            node.setColumn(getCurrentColumn());
+
+            int minCount = op == '+' ? 1 : 0;
+            int count = 0;
+
+            try {
+                while (true) {
+                    ASTNode child = parseElement(inner);
+                    if (child != null) {
+                        node.addChild(child);
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+            } catch (ParseException e) {
+                // 停止匹配
+            }
+
+            if (count < minCount) {
+                throw new ParseException("Expected at least " + minCount + " matches");
+            }
+
+            return node;
+        }
+
+        // 字符串字面量匹配
+        if (element.startsWith("'") && element.endsWith("'")) {
+            String expected = element.substring(1, element.length() - 1);
+            return matchTerminal(expected);
+        }
+
+        // 字符字面量匹配
+        if (element.startsWith("\"") && element.endsWith("\"")) {
+            String expected = element.substring(1, element.length() - 1);
+            return matchTerminal(expected);
+        }
+
+        // 规则引用（非终结符）
+        if (isRuleRef(element)) {
+            return matchNonTerminal(element);
+        }
+
+        // 忽略空白
+        if (element.isEmpty()) {
+            return null;
+        }
+
+        throw new ParseException("Unknown element: " + element);
+    }
+
+    /**
+     * 匹配终结符
+     */
+    private ASTNode matchTerminal(String expected) {
+        Token token = tokenReader.peek();
+        if (token != null && expected.equals(token.getText())) {
+            tokenReader.advance();
+            SimpleASTNode node = new SimpleASTNode();
+            node.setType("terminal");
+            node.setText(token.getText());
+            node.setLine(token.getLine());
+            node.setColumn(token.getColumn());
+            node.setToken(token);
+            return node;
+        }
+        throw new ParseException("Expected: " + expected + ", got: " + (token != null ? token.getText() : "null"));
+    }
+
+    /**
+     * 匹配非终结符
+     */
+    private ASTNode matchNonTerminal(String ruleName) {
+        G4Rule rule = parserRules.get(ruleName);
+        if (rule == null) {
+            throw new ParseException("Unknown rule: " + ruleName);
+        }
+        return parseRule(rule);
+    }
+
+    /**
+     * 判断是否是规则引用
+     */
+    private boolean isRuleRef(String name) {
+        // 第一个字符是小写字母，且是已知的parser规则
+        if (name.length() > 0 && name.charAt(0) >= 'a' && name.charAt(0) <= 'z') {
+            return parserRules.containsKey(name);
+        }
+        return false;
+    }
+
+    /**
+     * 按|分割（忽略括号内的|）
+     */
+    private List<String> splitAlternatives(String body) {
+        List<String> alternatives = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        int parenDepth = 0;
+
+        for (int i = 0; i < body.length(); i++) {
+            char ch = body.charAt(i);
+            if (ch == '(') parenDepth++;
+            else if (ch == ')') parenDepth--;
+            else if (ch == '|' && parenDepth == 0) {
+                alternatives.add(sb.toString());
+                sb = new StringBuilder();
+            } else {
+                sb.append(ch);
+            }
+        }
+
+        if (sb.length() > 0) {
+            alternatives.add(sb.toString());
+        }
+
+        return alternatives;
+    }
+
+    /**
+     * 分割元素序列
+     */
+    private List<String> splitElements(String sequence) {
+        List<String> elements = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        int parenDepth = 0;
+
+        for (int i = 0; i < sequence.length(); i++) {
+            char ch = sequence.charAt(i);
+            if (ch == '(') parenDepth++;
+            else if (ch == ')') parenDepth--;
+            else if (ch == ' ' && parenDepth == 0) {
+                if (sb.length() > 0) {
+                    elements.add(sb.toString());
+                    sb = new StringBuilder();
+                }
+            } else {
+                sb.append(ch);
+            }
+        }
+
+        if (sb.length() > 0) {
+            elements.add(sb.toString());
+        }
+
+        return elements;
+    }
+
+    private int getCurrentLine() {
+        Token peek = tokenReader.peek();
+        return peek != null ? peek.getLine() : 0;
+    }
+
+    private int getCurrentColumn() {
+        Token peek = tokenReader.peek();
+        return peek != null ? peek.getColumn() : 0;
+    }
+
+    /**
+     * 解析结果封装
+     */
+    private static class ParseResult {
+        ASTNode node;
+        ParseResult(ASTNode node) {
+            this.node = node;
+        }
+    }
+
+    /**
+     * 解析异常
+     */
+    private static class ParseException extends RuntimeException {
+        ParseException(String message) {
+            super(message);
+        }
+    }
+}

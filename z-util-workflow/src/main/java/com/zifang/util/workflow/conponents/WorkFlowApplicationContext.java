@@ -1,5 +1,8 @@
 package com.zifang.util.workflow.conponents;
 
+import com.zifang.util.workflow.bpmn.BpmnDiagram;
+import com.zifang.util.workflow.bpmn.BpmnModelConverter;
+import com.zifang.util.workflow.bpmn.BpmnXmlParser;
 import com.zifang.util.core.io.FileUtil;
 import com.zifang.util.core.util.GsonUtil;
 import com.zifang.util.workflow.config.ExecutableWorkflowNode;
@@ -404,5 +407,30 @@ public class WorkFlowApplicationContext {
 
         //再增加
         workflowNodes.add(workflowNode);
+    }
+
+    /**
+     * Load workflow configuration from BPMN XML content.
+     * Parses the BPMN XML and converts it to WorkflowConfiguration.
+     *
+     * @param xmlContent BPMN 2.0 XML string
+     */
+    public void loadFromBpmnXml(String xmlContent) {
+        BpmnXmlParser parser = new BpmnXmlParser();
+        BpmnDiagram diagram = parser.parse(xmlContent);
+        BpmnModelConverter converter = new BpmnModelConverter();
+        WorkflowConfiguration config = converter.convert(diagram);
+        refreshByWorkflowConfiguration(config);
+    }
+
+    /**
+     * Refresh the context using a new workflow configuration.
+     * Reinitializes engines, transforms nodes, and reconnects.
+     *
+     * @param config the new workflow configuration
+     */
+    public void refreshByWorkflowConfiguration(WorkflowConfiguration config) {
+        this.workflowConfiguration = config;
+        initial();
     }
 }

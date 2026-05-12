@@ -1,0 +1,71 @@
+package com.zifang.util.crawler.cua.steps;
+
+import com.zifang.util.crawler.browser.BrowserClient;
+import com.zifang.util.crawler.cua.StepResult;
+import com.zifang.util.crawler.pipeline.PipelineContext;
+
+/**
+ * Step for clicking on an element.
+ * Task: "click", params: {css, waitMs}
+ */
+public class ClickStep implements Step {
+
+    public static final String NAME = "click";
+    private String css;
+    private long waitMs = 0;
+
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public void setParameter(String key, Object value) {
+        if ("css".equalsIgnoreCase(key)) {
+            this.css = String.valueOf(value);
+        } else if ("waitMs".equalsIgnoreCase(key) || "wait".equalsIgnoreCase(key)) {
+            this.waitMs = Long.parseLong(String.valueOf(value));
+        }
+    }
+
+    @Override
+    public StepResult execute(PipelineContext ctx) {
+        String selector = css;
+        if (selector == null) {
+            selector = (String) ctx.getParameter("css");
+        }
+
+        if (selector == null || selector.isEmpty()) {
+            return StepResult.builder()
+                    .stepName(NAME)
+                    .success(false)
+                    .errorMessage("No CSS selector provided for click")
+                    .build();
+        }
+
+        try {
+            BrowserClient client = getBrowserClient(ctx);
+            client.click(selector);
+
+            if (waitMs > 0) {
+                client.waitFor(waitMs);
+            }
+
+            return StepResult.builder()
+                    .stepName(NAME)
+                    .success(true)
+                    .output("Clicked element: " + selector)
+                    .build();
+        } catch (Exception e) {
+            return StepResult.builder()
+                    .stepName(NAME)
+                    .success(false)
+                    .errorMessage("Click failed: " + e.getMessage())
+                    .build();
+        }
+    }
+
+    protected BrowserClient getBrowserClient(PipelineContext ctx) {
+        return (BrowserClient) ctx.getParameter("browserClient");
+    }
+}
