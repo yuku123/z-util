@@ -69,6 +69,7 @@ public class DslJsonParser {
             nextChar(); // skip ':'
             Object val = parseValue();
             obj.put(key, val);
+            skipWs();
             if (c == '}') {
                 nextChar();
                 return obj;
@@ -89,6 +90,7 @@ public class DslJsonParser {
             return arr;
         }
         while (true) {
+            skipWs();
             Object val = parseValue();
             arr.add(val);
             skipWs();
