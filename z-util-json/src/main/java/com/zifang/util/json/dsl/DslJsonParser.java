@@ -120,7 +120,7 @@ public class DslJsonParser {
         }
         String raw = s.substring(start + 1, pos); // exclude opening quote (pos still at closing quote)
         nextChar(); // skip closing quote
-        return raw;
+        return decodeString(raw);
     }
 
     private String decodeString(String raw) {

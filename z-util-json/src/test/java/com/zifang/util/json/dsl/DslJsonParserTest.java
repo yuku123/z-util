@@ -122,9 +122,9 @@ public class DslJsonParserTest {
     @Test
     public void testParseObjectMultipleKeys() {
         JsonObject obj = (JsonObject) parser.parse("{\"a\": 1, \"b\": 2, \"c\": 3}");
-        assertEquals(1, obj.get("a"));
-        assertEquals(2, obj.get("b"));
-        assertEquals(3, obj.get("c"));
+        assertEquals(1L, obj.get("a"));
+        assertEquals(2L, obj.get("b"));
+        assertEquals(3L, obj.get("c"));
     }
 
     @Test

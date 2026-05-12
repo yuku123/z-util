@@ -55,9 +55,18 @@ public class JsonPathParser {
             }
 
             // 点访问 $.name
+            // 先判断是否是 $.* 通配符（通配符在 readName 里会被当作普通名字）
+            if (pos + 1 < path.length() && path.charAt(pos + 1) == '*') {
+                List<Object> all = getAllChildren(current);
+                for (Object item : all) {
+                    results.add(item);
+                }
+                return;
+            }
             String name = readName(path, pos + 1);
             int end = pos + 1 + name.length();
             Object child = getChild(current, name);
+            if (child == NOT_FOUND) return; // key 不存在
             if (end < path.length()) {
                 evaluate(child, path, end, results);
             } else {
@@ -152,10 +161,16 @@ public class JsonPathParser {
 
     private Object getChild(Object current, String name) {
         if (current instanceof JsonObject) {
-            return ((JsonObject) current).get(name);
+            JsonObject obj = (JsonObject) current;
+            boolean exists = obj.getAllKeyValue().stream().anyMatch(e -> e.getKey().equals(name));
+            if (!exists) return NOT_FOUND;
+            return obj.get(name);
         }
         return null;
     }
+
+    /** 别名：表示 key 存在但值为 null，与 key 不存在区分开 */
+    private static final Object NOT_FOUND = new Object();
 
     private Object getArrayElement(Object current, int idx) {
         if (current instanceof JsonArray) {

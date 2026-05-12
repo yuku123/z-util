@@ -7,6 +7,7 @@ import com.zifang.util.crawler.cua.steps.Step;
 import com.zifang.util.crawler.pipeline.PipelineContext;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -112,17 +113,17 @@ public class RuleBasedPlanner {
      * Register predefined rules for common task patterns.
      */
     private void registerPredefinedRules() {
-        addRule("click.*button", List.of("navigate_if_needed", "wait_element", "click", "screenshot_on_error"));
-        addRule("fill.*form", List.of("navigate_if_needed", "wait_element", "clear", "input", "screenshot_on_error"));
-        addRule("extract.*data", List.of("wait_element", "extract"));
-        addRule("open.*url", List.of("navigate"));
-        addRule("go.*to", List.of("navigate"));
-        addRule("type.*into", List.of("input"));
-        addRule("get.*text", List.of("extract"));
-        addRule("save.*screenshot", List.of("screenshot"));
-        addRule("take.*screenshot", List.of("screenshot"));
-        addRule("switch.*window", List.of("switch"));
-        addRule("switch.*tab", List.of("switch"));
-        addRule("switch.*frame", List.of("switch"));
+        addRule("click.*button", Arrays.asList("navigate_if_needed", "wait_element", "click", "screenshot_on_error"));
+        addRule("fill.*form", Arrays.asList("navigate_if_needed", "wait_element", "clear", "input", "screenshot_on_error"));
+        addRule("extract.*data", Arrays.asList("wait_element", "extract"));
+        addRule("open.*url", Arrays.asList("navigate"));
+        addRule("go.*to", Arrays.asList("navigate"));
+        addRule("type.*into", Arrays.asList("input"));
+        addRule("get.*text", Arrays.asList("extract"));
+        addRule("save.*screenshot", Arrays.asList("screenshot"));
+        addRule("take.*screenshot", Arrays.asList("screenshot"));
+        addRule("switch.*window", Arrays.asList("switch"));
+        addRule("switch.*tab", Arrays.asList("switch"));
+        addRule("switch.*frame", Arrays.asList("switch"));
     }
 }
