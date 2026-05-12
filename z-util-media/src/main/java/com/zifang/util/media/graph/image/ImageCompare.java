@@ -1,136 +1,148 @@
 package com.zifang.util.media.graph.image;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /**
- * 图片比较
+ * 图片比较工具。
+ * 支持：相似度百分比 / 像素差异Map / 是否完全相同
  */
-
 public final class ImageCompare {
 
-    private static final Logger log = LoggerFactory.getLogger(ImageCompare.class);
+    private ImageCompare() {}
 
     /**
-     * 改变成二进制码
+     * 比较两张图片的相似度。
      *
-     * @param file
-     * @return
+     * @param image1 图片1
+     * @param image2 图片2
+     * @return 相似度百分比（0~100），完全相同返回100
      */
-    public static String[][] getPX(File file) {
-        int[] rgb = new int[3];
-
-        BufferedImage bi = null;
-        try {
-            bi = ImageIO.read(file);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static float compareImage(File image1, File image2) throws IOException {
+        BufferedImage bi1 = ImageIO.read(image1);
+        BufferedImage bi2 = ImageIO.read(image2);
+        if (bi1 == null || bi2 == null) {
+            throw new IOException("Unable to read one or both images");
         }
-
-        int width = bi.getWidth();
-        int height = bi.getHeight();
-        int minx = bi.getMinX();
-        int miny = bi.getMinY();
-        String[][] list = new String[width][height];
-        for (int i = minx; i < width; i++) {
-            for (int j = miny; j < height; j++) {
-                int pixel = bi.getRGB(i, j);
-                rgb[0] = (pixel & 0xff0000) >> 16;
-                rgb[1] = (pixel & 0xff00) >> 8;
-                rgb[2] = (pixel & 0xff);
-                list[i][j] = rgb[0] + "," + rgb[1] + "," + rgb[2];
-
-            }
-        }
-        return list;
-
+        return compareImage(bi1, bi2);
     }
 
     /**
-     * 比较俩个图片的相似度
+     * 比较两张 BufferedImage 的相似度。
      *
-     * @param image1
-     * @param image2
-     * @return
+     * @param bi1 图片1
+     * @param bi2 图片2
+     * @return 相似度百分比（0~100）
      */
-    public static float compareImage(File image1, File image2) {
-        String[][] list1 = getPX(image1);
-        String[][] list2 = getPX(image2);
-        int xiangsi = 0;
-        int busi = 0;
-        int i = 0, j = 0;
-        for (String[] strings : list1) {
-            if ((i + 1) == list1.length) {
-                continue;
-            }
-            for (int m = 0; m < strings.length; m++) {
-                try {
-                    String[] value1 = list1[i][j].split(",");
-                    String[] value2 = list2[i][j].split(",");
-                    int k = 0;
-                    for (int n = 0; n < value2.length; n++) {
-                        if (Math.abs(Integer.parseInt(value1[k]) - Integer.parseInt(value2[k])) < 5) {
-                            xiangsi++;
-                        } else {
-                            busi++;
-                        }
-                    }
-                } catch (RuntimeException e) {
-                    continue;
+    public static float compareImage(BufferedImage bi1, BufferedImage bi2) {
+        int w1 = bi1.getWidth();
+        int h1 = bi1.getHeight();
+        int w2 = bi2.getWidth();
+        int h2 = bi2.getHeight();
+
+        // 尺寸不一致时，取共同区域
+        int w = Math.min(w1, w2);
+        int h = Math.min(h1, h2);
+
+        int total = w * h;
+        int similar = 0;
+        int threshold = 5;
+
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                int p1 = bi1.getRGB(x, y);
+                int p2 = bi2.getRGB(x, y);
+                int r1 = (p1 >> 16) & 0xff;
+                int g1 = (p1 >> 8) & 0xff;
+                int b1 = p1 & 0xff;
+                int r2 = (p2 >> 16) & 0xff;
+                int g2 = (p2 >> 8) & 0xff;
+                int b2 = p2 & 0xff;
+                if (Math.abs(r1 - r2) < threshold
+                        && Math.abs(g1 - g2) < threshold
+                        && Math.abs(b1 - b2) < threshold) {
+                    similar++;
                 }
-                j++;
             }
-            i++;
         }
+        return (float) similar / total * 100f;
+    }
 
-        list1 = getPX(image1);
-        list2 = getPX(image2);
-        i = 0;
-        j = 0;
-        for (String[] strings : list1) {
-            if ((i + 1) == list1.length) {
-                continue;
-            }
-            for (int m = 0; m < strings.length; m++) {
-                try {
-                    String[] value1 = list1[i][j].split(",");
-                    String[] value2 = list2[i][j].split(",");
-                    int k = 0;
-                    for (int n = 0; n < value2.length; n++) {
-                        if (Math.abs(Integer.parseInt(value1[k]) - Integer.parseInt(value2[k])) < 5) {
-                            xiangsi++;
-                        } else {
-                            busi++;
-                        }
-                    }
-                } catch (RuntimeException e) {
-                    continue;
+    /**
+     * 判断两张图片是否完全相同（逐像素比较）。
+     */
+    public static boolean isIdentical(File image1, File image2) throws IOException {
+        BufferedImage bi1 = ImageIO.read(image1);
+        BufferedImage bi2 = ImageIO.read(image2);
+        if (bi1 == null || bi2 == null) {
+            throw new IOException("Unable to read one or both images");
+        }
+        return isIdentical(bi1, bi2);
+    }
+
+    /**
+     * 判断两张 BufferedImage 是否完全相同。
+     */
+    public static boolean isIdentical(BufferedImage bi1, BufferedImage bi2) {
+        int w1 = bi1.getWidth();
+        int h1 = bi1.getHeight();
+        int w2 = bi2.getWidth();
+        int h2 = bi2.getHeight();
+        if (w1 != w2 || h1 != h2) {
+            return false;
+        }
+        for (int y = 0; y < h1; y++) {
+            for (int x = 0; x < w1; x++) {
+                if (bi1.getRGB(x, y) != bi2.getRGB(x, y)) {
+                    return false;
                 }
-                j++;
             }
-            i++;
         }
-        String baifen = "";
-        try {
-            baifen = ((Double.parseDouble(xiangsi + "") / Double.parseDouble((busi + xiangsi) + "")) + "");
-            baifen = baifen.substring(baifen.indexOf(".") + 1, baifen.indexOf(".") + 3);
-        } catch (Exception e) {
-            baifen = "0";
-        }
-        if (baifen.length() <= 0) {
-            baifen = "0";
-        }
-        if (busi == 0) {
-            baifen = "100";
-        }
-        log.debug("相似像素数量：" + xiangsi + " 不相似像素数量：" + busi + " 相似率：" + Integer.parseInt(baifen) + "%");
-        return Integer.parseInt(baifen);
+        return true;
+    }
 
+    /**
+     * 获取差异图（将两张图片的不同像素标记为红色）。
+     *
+     * @param image1 图片1
+     * @param image2 图片2
+     * @return 差异图
+     */
+    public static BufferedImage diffImage(File image1, File image2) throws IOException {
+        BufferedImage bi1 = ImageIO.read(image1);
+        BufferedImage bi2 = ImageIO.read(image2);
+        if (bi1 == null || bi2 == null) {
+            throw new IOException("Unable to read one or both images");
+        }
+        return diffImage(bi1, bi2);
+    }
 
+    /**
+     * 获取差异图。
+     *
+     * @param bi1 图片1
+     * @param bi2 图片2
+     * @return 差异 BufferedImage，不同像素显示为红色
+     */
+    public static BufferedImage diffImage(BufferedImage bi1, BufferedImage bi2) {
+        int w = Math.min(bi1.getWidth(), bi2.getWidth());
+        int h = Math.min(bi1.getHeight(), bi2.getHeight());
+        BufferedImage diff = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                int p1 = bi1.getRGB(x, y);
+                int p2 = bi2.getRGB(x, y);
+                if (p1 == p2) {
+                    diff.setRGB(x, y, p1);
+                } else {
+                    // 红色标记差异
+                    diff.setRGB(x, y, 0xffff0000);
+                }
+            }
+        }
+        return diff;
     }
 }
