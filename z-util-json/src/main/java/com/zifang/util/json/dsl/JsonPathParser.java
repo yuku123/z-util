@@ -4,6 +4,7 @@ import com.zifang.util.json.model.JsonObject;
 import com.zifang.util.json.model.JsonArray;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 手写 JsonPath 执行器，不依赖有问题的 DynamicParser G4 引擎。
@@ -179,7 +180,7 @@ public class JsonPathParser {
         } else if (current instanceof JsonObject) {
             JsonObject obj = (JsonObject) current;
             int i = 0;
-            for (Object v : obj.getAllKeyValue().stream().map(e -> e.getValue()).toList()) {
+            for (Object v : obj.getAllKeyValue().stream().map(e -> e.getValue()).collect(Collectors.toList())) {
                 if (i++ == idx) return v;
             }
         }
@@ -190,7 +191,7 @@ public class JsonPathParser {
         List<Object> result = new ArrayList<>();
         if (current instanceof JsonObject) {
             JsonObject obj = (JsonObject) current;
-            for (Object v : obj.getAllKeyValue().stream().map(e -> e.getValue()).toList()) {
+            for (Object v : obj.getAllKeyValue().stream().map(e -> e.getValue()).collect(Collectors.toList())) {
                 result.add(v);
             }
         } else if (current instanceof JsonArray) {
@@ -203,7 +204,7 @@ public class JsonPathParser {
     private void collectAll(Object current, List<Object> results) {
         if (current instanceof JsonObject) {
             JsonObject obj = (JsonObject) current;
-            for (Object v : obj.getAllKeyValue().stream().map(e -> e.getValue()).toList()) {
+            for (Object v : obj.getAllKeyValue().stream().map(e -> e.getValue()).collect(Collectors.toList())) {
                 results.add(v);
                 collectAll(v, results);
             }
