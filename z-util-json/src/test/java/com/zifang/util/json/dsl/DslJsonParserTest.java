@@ -1,13 +1,14 @@
-package com.zifang.util.json.dsl;
+package com.zifang.util.json.code;
 
 import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
+import com.zifang.util.json.dsl.DslJsonParser;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Comprehensive test suite for DslJsonParser (G4-based JSON parser)
+ * DslJsonParser (手写 JSON 解析器) 完整测试
  */
 public class DslJsonParserTest {
 
@@ -17,80 +18,93 @@ public class DslJsonParserTest {
 
     @Test
     public void testParseNull() {
-        Object result = parser.parse("null");
-        assertNull(result);
+        assertNull(parser.parse("null"));
     }
 
     @Test
     public void testParseTrue() {
-        Object result = parser.parse("true");
-        assertEquals(Boolean.TRUE, result);
+        assertEquals(Boolean.TRUE, parser.parse("true"));
     }
 
     @Test
     public void testParseFalse() {
-        Object result = parser.parse("false");
-        assertEquals(Boolean.FALSE, result);
+        assertEquals(Boolean.FALSE, parser.parse("false"));
     }
 
     @Test
     public void testParsePositiveInt() {
-        Object result = parser.parse("123");
-        assertEquals(123L, result);
+        assertEquals(123L, parser.parse("123"));
     }
 
     @Test
     public void testParseNegativeInt() {
-        Object result = parser.parse("-456");
-        assertEquals(-456L, result);
+        assertEquals(-456L, parser.parse("-456"));
     }
 
     @Test
     public void testParsePositiveDouble() {
-        Object result = parser.parse("3.14");
-        assertEquals(3.14, result);
+        assertEquals(3.14, parser.parse("3.14"));
     }
 
     @Test
     public void testParseNegativeDouble() {
-        Object result = parser.parse("-2.718");
-        assertEquals(-2.718, result);
+        assertEquals(-2.718, parser.parse("-2.718"));
     }
 
     @Test
     public void testParseScientificNotation() {
-        Object result = parser.parse("1.23e10");
-        assertEquals(1.23e10, result);
+        assertEquals(1.23e10, parser.parse("1.23e10"));
     }
 
     @Test
     public void testParseScientificNotationWithPlus() {
-        Object result = parser.parse("1.23e+5");
-        assertEquals(1.23e+5, result);
+        assertEquals(1.23e+5, parser.parse("1.23e+5"));
     }
 
     @Test
     public void testParseScientificNotationWithMinus() {
-        Object result = parser.parse("5.0e-3");
-        assertEquals(5.0e-3, result);
+        assertEquals(5.0e-3, parser.parse("5.0e-3"));
     }
 
     @Test
     public void testParseString() {
-        Object result = parser.parse("\"hello\"");
-        assertEquals("hello", result);
+        assertEquals("hello", parser.parse("\"hello\""));
     }
 
     @Test
     public void testParseStringWithEscapes() {
-        Object result = parser.parse("\"line\\nbreak\"");
-        assertEquals("line\nbreak", result);
+        assertEquals("line\nbreak", parser.parse("\"line\\nbreak\""));
     }
 
     @Test
     public void testParseStringWithQuote() {
-        Object result = parser.parse("\"say \\\"hello\\\"\"");
-        assertEquals("say \"hello\"", result);
+        assertEquals("say \"hello\"", parser.parse("\"say \\\"hello\\\"\""));
+    }
+
+    @Test
+    public void testParseStringWithBackslash() {
+        assertEquals("a\\b", parser.parse("\"a\\\\b\""));
+    }
+
+    @Test
+    public void testParseStringWithTab() {
+        assertEquals("a\tb", parser.parse("\"a\\tb\""));
+    }
+
+    @Test
+    public void testParseStringWithCarriageReturn() {
+        assertEquals("a\rb", parser.parse("\"a\\rb\""));
+    }
+
+    @Test
+    public void testParseZero() {
+        assertEquals(0L, parser.parse("0"));
+    }
+
+    @Test
+    public void testParseLargeNumber() {
+        // 超过 Integer 范围，返回 Long
+        assertEquals(3000000000L, parser.parse("3000000000"));
     }
 
     // ===== 空对象/数组 =====
@@ -99,16 +113,14 @@ public class DslJsonParserTest {
     public void testParseEmptyObject() {
         Object result = parser.parse("{}");
         assertTrue(result instanceof JsonObject);
-        JsonObject obj = (JsonObject) result;
-        assertEquals(0, obj.getAllKeyValue().size());
+        assertEquals(0, ((JsonObject) result).getAllKeyValue().size());
     }
 
     @Test
     public void testParseEmptyArray() {
         Object result = parser.parse("[]");
         assertTrue(result instanceof JsonArray);
-        JsonArray arr = (JsonArray) result;
-        assertEquals(0, arr.size());
+        assertEquals(0, ((JsonArray) result).size());
     }
 
     // ===== 基础对象 =====
@@ -129,8 +141,7 @@ public class DslJsonParserTest {
 
     @Test
     public void testParseObjectMixedTypes() {
-        JsonObject obj = (JsonObject) parser.parse(
-            "{\"str\": \"text\", \"num\": 42, \"bool\": true, \"nil\": null}");
+        JsonObject obj = (JsonObject) parser.parse("{\"str\": \"text\", \"num\": 42, \"bool\": true, \"nil\": null}");
         assertEquals("text", obj.get("str"));
         assertEquals(42L, obj.get("num"));
         assertEquals(Boolean.TRUE, obj.get("bool"));
@@ -139,8 +150,7 @@ public class DslJsonParserTest {
 
     @Test
     public void testParseNestedObject() {
-        JsonObject obj = (JsonObject) parser.parse(
-            "{\"outer\": {\"inner\": \"value\"}}");
+        JsonObject obj = (JsonObject) parser.parse("{\"outer\": {\"inner\": \"value\"}}");
         JsonObject inner = (JsonObject) obj.get("outer");
         assertEquals("value", inner.get("inner"));
     }
@@ -218,8 +228,13 @@ public class DslJsonParserTest {
 
     @Test
     public void testParseUnicodeEscaped() {
-        Object result = parser.parse("\"\\u4e2d\\u6587\"");
-        assertEquals("中文", result);
+        assertEquals("中文", parser.parse("\"\\u4e2d\\u6587\""));
+    }
+
+    @Test
+    public void testParseUnicodeMixed() {
+        JsonObject obj = (JsonObject) parser.parse("{\"msg\": \"Hello\\u4e2d\\u6587World\"}");
+        assertEquals("Hello中文World", obj.get("msg"));
     }
 
     // ===== 空白 =====
@@ -237,11 +252,10 @@ public class DslJsonParserTest {
         assertEquals(2L, obj.get("b"));
     }
 
-    // ===== 数字边界 =====
-
     @Test
-    public void testParseZero() {
-        assertEquals(0L, parser.parse("0"));
+    public void testParseWithTabs() {
+        JsonObject obj = (JsonObject) parser.parse("{\t\"a\": 1\t}");
+        assertEquals(1L, obj.get("a"));
     }
 
     // ===== 错误处理 =====
@@ -259,5 +273,15 @@ public class DslJsonParserTest {
     @Test(expected = RuntimeException.class)
     public void testParseUnclosedArray() {
         parser.parse("[1, 2");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testParseUnclosedString() {
+        parser.parse("\"unclosed");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testParseInvalidNumber() {
+        parser.parse("-");
     }
 }
