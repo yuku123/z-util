@@ -11,19 +11,18 @@ import java.io.IOException;
  */
 public class GithubApiHolder {
 
-    public static GithubApiHolder INSTANCE = new GithubApiHolder();
+    public static GithubApiHolder INSTANCE = new GithubApiHolder(null);
 
     private final GitHub github;
     private final GithubConfig config;
 
-    private GithubApiHolder() {
-        this.config = GithubConfig.fromEnv();
-        this.github = build(config);
-    }
-
     private GithubApiHolder(GithubConfig config) {
         this.config = config;
-        this.github = build(config);
+        this.github = config == null ? null : build(config);
+    }
+
+    private GithubApiHolder() {
+        this(GithubConfig.fromEnv());
     }
 
     private GitHub build(GithubConfig config) {
@@ -52,13 +51,13 @@ public class GithubApiHolder {
     }
 
     public static void init(GithubConfig config) {
-        if (INSTANCE.github != null) {
+        if (INSTANCE.config != null) {
             throw new IllegalStateException("GithubApiHolder has already been initialized");
         }
         INSTANCE = new GithubApiHolder(config);
     }
 
     public static void reset() {
-        INSTANCE = new GithubApiHolder();
+        INSTANCE = new GithubApiHolder(null);
     }
 }

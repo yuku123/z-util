@@ -54,6 +54,10 @@ public class NexusComponentManager {
         } catch (UnirestException e) {
             e.printStackTrace();
         }
+        if (response == null) {
+            System.out.println(String.format("组件【%s-%s-%s】删除失败，HTTP 响应为空", component.getRepository(), component.getGroup(), component.getName(), component.getVersion()));
+            return;
+        }
         int status = response.getStatus();
         if (status == 204) {
             successDeleteTotal++;
@@ -93,6 +97,10 @@ public class NexusComponentManager {
             response = Unirest.get(url).basicAuth(NEXUS_USERNAME, NEXUS_PASSWORD).asString();
         } catch (UnirestException e) {
             e.printStackTrace();
+        }
+        if (response == null) {
+            System.out.println("组件搜索出错，HTTP 响应为空");
+            return;
         }
         if (response.getStatus() == 200) {
             JsonObject jsonObject = JsonParser.parseString(response.getBody()).getAsJsonObject();
