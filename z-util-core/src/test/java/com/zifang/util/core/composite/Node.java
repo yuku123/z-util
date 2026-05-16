@@ -1,4 +1,4 @@
-package com.zifang.util.core.test.composite;
+package com.zifang.util.core.composite;
 
 public class Node {
     private int id;
