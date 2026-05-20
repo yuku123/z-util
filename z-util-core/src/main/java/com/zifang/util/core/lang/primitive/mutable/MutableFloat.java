@@ -231,7 +231,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @param operand the quantity to add, not null
      * @return the value associated with this instance after adding the operand
      * @throws NullPointerException if {@code operand} is null
-     * @since 3.5
      */
     public float addAndGet(final Number operand) {
         this.value += operand.floatValue();
@@ -244,7 +243,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
-     * @since 3.5
      */
     public float getAndAdd(final float operand) {
         final float last = value;
@@ -259,7 +257,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
      * @throws NullPointerException if {@code operand} is null
-     * @since 3.5
      */
     public float getAndAdd(final Number operand) {
         final float last = value;

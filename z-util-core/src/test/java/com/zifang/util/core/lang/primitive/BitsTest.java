@@ -31,20 +31,22 @@ public class BitsTest {
 
     @Test
     public void isOdd() {
-        // Source isOdd uses (x & 1) == 0 (incorrectly marks even numbers as odd)
-        assertTrue(Bits.isOdd(3));
+        // isOdd: (abs(x) & 1) != 0
         assertTrue(Bits.isOdd(1));
-        assertTrue(Bits.isOdd(2));   // source returns true
-        assertTrue(Bits.isOdd(0));   // source returns true
+        assertTrue(Bits.isOdd(3));
+        assertFalse(Bits.isOdd(2));
+        assertFalse(Bits.isOdd(0));
         assertTrue(Bits.isOdd(-1));
+        assertFalse(Bits.isOdd(-2));
     }
 
     @Test
     public void isEven() {
-        assertFalse(Bits.isEven(2));
-        assertFalse(Bits.isEven(0));
-        assertFalse(Bits.isEven(-2));
-        assertTrue(Bits.isEven(3));
+        assertTrue(Bits.isEven(2));
+        assertTrue(Bits.isEven(0));
+        assertTrue(Bits.isEven(-2));
+        assertFalse(Bits.isEven(3));
+        assertFalse(Bits.isEven(1));
     }
 
     // --- avg ---
@@ -109,11 +111,11 @@ public class BitsTest {
 
     @Test
     public void multipleLess_basic() {
-        // Implementation: (n+1) >> 1
+        // multipleLess rounds down to previous power of 2
         assertEquals(1, Bits.multipleLess(1));
-        assertEquals(2, Bits.multipleLess(2));
+        assertEquals(1, Bits.multipleLess(2));
         assertEquals(2, Bits.multipleLess(3));
-        assertEquals(2, Bits.multipleLess(4));
+        assertEquals(3, Bits.multipleLess(4));
         assertEquals(3, Bits.multipleLess(5));
     }
 
@@ -131,41 +133,43 @@ public class BitsTest {
 
     @Test
     public void setTrue_getFlag() {
-        // Source setTrue is a no-op
         long result = Bits.setTrue(0L, 5);
-        assertEquals(0L, result);
+        assertEquals(32L, result);
+        assertTrue(Bits.getFlag(result, 5));
+        assertFalse(Bits.getFlag(result, 4));
     }
 
     @Test
     public void setFalse_getFlag() {
-        // Source setFalse is a no-op
         long allTrue = ~0L;
         long result = Bits.setFalse(allTrue, 5);
-        assertEquals(allTrue, result);
+        assertFalse(Bits.getFlag(result, 5));
+        assertTrue(Bits.getFlag(result, 4));
     }
 
     @Test
     public void setTrue_middleBit() {
-        // Source implementation appears to be a no-op, returns input unchanged
+        // 42 (101010) OR (1<<5)=32 gives 74 (1101010)
         long result = Bits.setTrue(42L, 5);
-        assertEquals(42L, result);
+        assertEquals(74L, result);
     }
 
     // --- getAllTrueIndex / getAllFalseIndex ---
 
     @Test
     public void getAllTrueIndex() {
-        // Source setTrue is a no-op, so flags are always 0
         long flags = Bits.setTrue(Bits.setTrue(0L, 1), 3);
         Set<Byte> trueIndex = Bits.getAllTrueIndex(flags);
-        assertEquals(0, trueIndex.size());
+        assertEquals(2, trueIndex.size());
+        assertTrue(trueIndex.contains((byte) 1));
+        assertTrue(trueIndex.contains((byte) 3));
     }
 
     @Test
     public void getAllFalseIndex() {
-        // Source setTrue is a no-op, flags stay 0, all 64 bits are "false"
         long flags = Bits.setTrue(0L, 0);
         Set<Byte> falseIndex = Bits.getAllFalseIndex(flags);
-        assertEquals(64, falseIndex.size());
+        assertEquals(63, falseIndex.size());
+        assertFalse(falseIndex.contains((byte) 0));
     }
 }

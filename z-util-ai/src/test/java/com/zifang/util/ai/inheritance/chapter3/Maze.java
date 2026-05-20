@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * a fitness score for a path; it is this score that the genetic algorithm will
  * optimize.
  *
- * @author bkanber
+ * @author zifang
  */
 public class Maze {
     private final int[][] maze;

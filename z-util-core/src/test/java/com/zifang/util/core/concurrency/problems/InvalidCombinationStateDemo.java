@@ -3,7 +3,7 @@ package com.zifang.util.core.concurrency.problems;
 import java.util.Random;
 
 /**
- * @author Jerry Lee (oldratlee at gmail dot com)
+ * @author zifang Lee (oldratlee at gmail dot com)
  */
 public class InvalidCombinationStateDemo {
     public static void main(String[] args) {

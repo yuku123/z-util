@@ -6,7 +6,7 @@ package com.zifang.util.ai.inheritance.chapter4;
  * total distance required to travel to the cities in the specified order. The
  * result returned by getDistance() is used by GeneticAlgorithm.calcFitness.
  *
- * @author bkanber
+ * @author zifang
  */
 
 public class Route {

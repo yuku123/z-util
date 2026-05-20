@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.*;
 
 /**
- * @author Cay Horstmann
+ * @author zifang Horstmann
  * @version 1.00 2007-10-28
  */
 public class CompilerTest {

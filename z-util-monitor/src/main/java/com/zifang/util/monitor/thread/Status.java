@@ -3,8 +3,7 @@ package com.zifang.util.monitor.thread;
 /**
  * 监控的组件的状态。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class Status {
 

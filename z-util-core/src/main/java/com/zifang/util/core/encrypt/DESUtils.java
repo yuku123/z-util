@@ -22,7 +22,7 @@ class DESUtils {
      * @param data 待加密字符串
      * @param key  校验位
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午5:51:37
      */
     @SuppressWarnings("restriction")
@@ -52,7 +52,7 @@ class DESUtils {
      * @param cryptData 待解密密文
      * @param key       校验位
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午5:52:23
      */
     @SuppressWarnings("restriction")

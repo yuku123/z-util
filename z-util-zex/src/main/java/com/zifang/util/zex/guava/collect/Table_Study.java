@@ -26,9 +26,8 @@ import java.util.List;
  *   <li>ArrayTable: 二维数组，以提升访问速度和密集Table的内存利用率</li>
  * </ul>
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Table_Study {
     @Test

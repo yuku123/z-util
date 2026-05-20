@@ -7,7 +7,7 @@ package com.zifang.util.distributes.sequence;
  * 基于Twitter的Snowflake算法实现，用于在分布式环境中生成全局唯一的有序ID。
  * ID由时间戳、机器ID、数据中心ID和序列号组成，共64位。
  *
- * @author lry
+ * @author zifang
  */
 public class Sequence {
 

@@ -40,9 +40,8 @@ import java.util.List;
  * <p>
  * splitter实例总是不可变，线程安全的，可将其定义为static final常量。
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Splitter_Study {
     String str = ",a,,b,";

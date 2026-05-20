@@ -24,7 +24,7 @@ package com.zifang.util.ai.inheritance.chapter5;
  * university has would come from a database, but this isn't a book about
  * databases so we hardcode it.
  *
- * @author bkanber
+ * @author zifang
  */
 public class TimetableGA {
 

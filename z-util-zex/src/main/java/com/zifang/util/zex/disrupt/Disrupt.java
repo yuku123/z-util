@@ -8,7 +8,6 @@ package com.zifang.util.zex.disrupt;
  *
  * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Disrupt {
 

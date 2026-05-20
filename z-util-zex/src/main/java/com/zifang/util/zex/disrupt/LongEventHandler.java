@@ -10,7 +10,6 @@ import com.lmax.disruptor.EventHandler;
  *
  * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class LongEventHandler implements EventHandler<LongEvent> {
 

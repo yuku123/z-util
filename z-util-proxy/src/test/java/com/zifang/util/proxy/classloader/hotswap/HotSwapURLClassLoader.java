@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * 只要功能是重新加载更改过的.class文件，达到热替换的作用
  *
- * @author banana
+ * @author zifang
  */
 public class HotSwapURLClassLoader extends URLClassLoader {
     // 缓存加载class文件的最后最新修改时间

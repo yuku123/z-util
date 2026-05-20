@@ -11,7 +11,7 @@ package com.zifang.util.ai.inheritance.chapter4;
  * crossover and mutation. Check out the GeneticAlgorithm class for
  * implementations of crossover and mutation for this problem.
  *
- * @author bkanber
+ * @author zifang
  */
 public class TSP {
     public static int maxGenerations = 10000;

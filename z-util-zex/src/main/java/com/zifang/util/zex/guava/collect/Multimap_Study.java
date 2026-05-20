@@ -39,9 +39,8 @@ import java.util.Map.Entry;
  * <p>
  * 除了两个不可变形式的实现，其他所有实现都支持null键和null值。
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Multimap_Study {
     /**

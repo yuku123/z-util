@@ -7,7 +7,7 @@ import java.util.List;
  * <p>
  * 存放每个方法 throws 的所有异常。
  *
- * @author Malcolm
+ * @author zifang
  */
 public class Attribute_Exceptions_info extends Attribute_info {
 

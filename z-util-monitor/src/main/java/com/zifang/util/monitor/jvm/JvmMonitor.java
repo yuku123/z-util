@@ -6,8 +6,7 @@ package com.zifang.util.monitor.jvm;
  * 提供Java虚拟机层面的监控功能，
  * 包括内存使用、垃圾回收、类加载、线程等信息的监控。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class JvmMonitor {
 }

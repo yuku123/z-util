@@ -10,8 +10,7 @@ import java.lang.management.ThreadMXBean;
  * 演示如何使用ThreadMXBean获取JVM中线程的信息，
  * 包括线程ID、线程名称等。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class MultiThread extends Thread {
 

@@ -34,9 +34,8 @@ import java.util.Collection;
  *   <li>ImmutableMap-ImmutableMultiset-No</li>
  * </ul>
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Multiset_Study {
     /**

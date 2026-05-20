@@ -33,7 +33,7 @@ class Base64Utils {
      *
      * @param data
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午5:10:18
      */
     protected static String encrypt(byte[] data) {
@@ -75,7 +75,7 @@ class Base64Utils {
      * @param str
      * @return
      * @throws UnsupportedEncodingException
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午5:11:51
      */
     protected static byte[] decrypt(String str) throws Exception {

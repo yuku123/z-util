@@ -17,7 +17,7 @@ import java.util.Objects;
  * 的公钥按照一定方法生成一个密钥，由于一些数学规律，这两个密钥完全 相同。这样，A 和 B 间就有了一个共同的密钥可以用于各种加密。本实例介绍 Java
  * 中在上 一小节的基础上如何利用 DH 公钥和私钥各自创建共享密钥。
  *
- * @author cc
+ * @author zifang
  * @version 1.0
  * @Company: Beijing INFCN Software Co.,Ltd.
  * @ClassName: DHDemo

@@ -8,8 +8,7 @@ import com.zifang.util.monitor.thread.alarm.Alarmable;
  * 实现此接口的组件可以被监控管理器定期采集状态信息，
  * 当状态异常时自动触发告警。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  * @see Alarmable
  */
 public interface Monitorable extends Alarmable {

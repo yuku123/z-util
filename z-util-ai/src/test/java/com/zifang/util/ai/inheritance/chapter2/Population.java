@@ -11,7 +11,7 @@ import java.util.Random;
  * such as finding the strongest individuals, collecting stats on the population
  * as a whole, and selecting individuals to mutate or crossover.
  *
- * @author bkanber
+ * @author zifang
  */
 public class Population {
     private Individual[] population;

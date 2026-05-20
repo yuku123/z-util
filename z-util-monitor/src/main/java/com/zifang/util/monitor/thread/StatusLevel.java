@@ -3,8 +3,7 @@ package com.zifang.util.monitor.thread;
 /**
  * 状态枚举。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public enum StatusLevel {
 

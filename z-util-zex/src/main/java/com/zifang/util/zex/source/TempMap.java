@@ -11,7 +11,6 @@ import java.util.Set;
  *
  * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class TempMap<K, V> extends AbstractMap<K, V> {
 

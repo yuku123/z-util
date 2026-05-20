@@ -30,14 +30,14 @@ public class Bits {
     }
 
     /**
-     * 判断是偶数
+     * 判断是奇数
      */
     public static boolean isOdd(int i) {
-        return (abs(i) & 1) == 0;
+        return (abs(i) & 1) != 0;
     }
 
     /**
-     * 判断是奇数
+     * 判断是偶数
      */
     public static boolean isEven(int i) {
         return !isOdd(i);

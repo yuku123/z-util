@@ -11,8 +11,7 @@ import java.util.Map;
  * 引用队列配合Reference的子类使用，当引用对象所指向的内存空间被GC回收后，
  * 该引用对象会被追加到引用队列的末尾。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class ReferenceQueueDemo {
 

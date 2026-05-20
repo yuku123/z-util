@@ -15,7 +15,7 @@ package com.zifang.util.ai.inheritance.chapter2;
  * how good a solution to the problem this individual is. The meaning of the
  * fitness score will vary based on the problem at hand.
  *
- * @author bkanber
+ * @author zifang
  */
 public class Individual {
     private int[] chromosome;

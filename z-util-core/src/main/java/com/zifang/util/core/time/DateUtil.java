@@ -63,7 +63,7 @@ public class DateUtil {
      * @param date   为空时，默认为当前时间
      * @param format 默认格式为：yyyy-MM-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 30, 2013
      */
     public static String addYearToDate(int year, Date date, String format) {
@@ -82,7 +82,7 @@ public class DateUtil {
      * @param date   为空时，默认为当前时间
      * @param format 默认格式为：yyyy-MM-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 30, 2013
      */
     public static String addYearToDate(int year, String date, String format) {
@@ -101,7 +101,7 @@ public class DateUtil {
      * @param date   指定时间
      * @param format 指定格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 30, 2013
      */
     public static String addMothToDate(int month, Date date, String format) {
@@ -120,7 +120,7 @@ public class DateUtil {
      * @param date   指定时间
      * @param format 指定格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 30, 2013
      */
     public static String addMothToDate(int month, String date, String format) {
@@ -139,7 +139,7 @@ public class DateUtil {
      * @param date   指定日期
      * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String addDayToDate(int day, Date date, String format) {
@@ -158,7 +158,7 @@ public class DateUtil {
      * @param date   指定日期
      * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String addDayToDate(int day, String date, String format) {
@@ -177,7 +177,7 @@ public class DateUtil {
      * @param date   指定日期
      * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String addHourToDate(int hour, Date date, String format) {
@@ -196,7 +196,7 @@ public class DateUtil {
      * @param date   指定日期
      * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String addHourToDate(int hour, String date, String format) {
@@ -215,7 +215,7 @@ public class DateUtil {
      * @param date   指定日期
      * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String addMinuteToDate(int minute, Date date, String format) {
@@ -234,7 +234,7 @@ public class DateUtil {
      * @param date   指定日期
      * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String addMinuteToDate(int minute, String date, String format) {
@@ -253,7 +253,7 @@ public class DateUtil {
      * @param date   指定日期
      * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String addSecondToDate(int second, Date date, String format) {
@@ -273,7 +273,7 @@ public class DateUtil {
      * @param format 日期格式 为空默认 yyyy-mm-dd HH:mm:ss
      * @return String
      * @throws Exception
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String addSecondToDate(int second, String date, String format) {
@@ -291,7 +291,7 @@ public class DateUtil {
      * @param date   时间
      * @param format 格式
      * @return Calendar
-     * @author chenssy
+     * @author zifang
      * @date Dec 30, 2013
      */
     public static Calendar getCalendar(Date date, String format) {
@@ -310,7 +310,7 @@ public class DateUtil {
      *
      * @param value
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2019年5月31日 下午5:20:22
      */
     public static Date string2Date(String value) {
@@ -336,7 +336,7 @@ public class DateUtil {
      * @param value  需要转换的字符串
      * @param format 日期格式
      * @return Date
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static Date string2Date(String value, String format) {
@@ -362,7 +362,7 @@ public class DateUtil {
      * @param value  需要转换的日期
      * @param format 日期格式
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String date2String(Date value, String format) {
@@ -379,7 +379,7 @@ public class DateUtil {
      *
      * @param value
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2019年5月31日 下午5:21:38
      */
     public static String date2String(Date value) {
@@ -396,7 +396,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentYear(Date value) {
@@ -409,7 +409,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentYear(String value) {
@@ -423,7 +423,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentMonth(Date value) {
@@ -436,7 +436,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentMonth(String value) {
@@ -451,7 +451,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentDay(Date value) {
@@ -464,7 +464,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentDay(String value) {
@@ -479,7 +479,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String getCurrentWeek(Date value) {
@@ -494,7 +494,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return String
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static String getCurrentWeek(String value) {
@@ -507,7 +507,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentHour(Date value) {
@@ -520,7 +520,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentHour(String value) {
@@ -535,7 +535,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentMinute(Date value) {
@@ -548,7 +548,7 @@ public class DateUtil {
      *
      * @param value 日期
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int getCurrentMinute(String value) {
@@ -569,7 +569,7 @@ public class DateUtil {
      * @param endDay   被比较的时间  为空(null)则为当前时间
      * @param stype    返回值类型   0为多少天，1为多少个月，2为多少年
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Dec 31, 2013
      */
     public static int compareDate(String startDay, String endDay, int stype) {
@@ -617,7 +617,7 @@ public class DateUtil {
      * @param endTime   需要被比较的时间 若为空则默认当前时间
      * @param type      1：小时   2：分钟   3：秒
      * @return int
-     * @author chenssy
+     * @author zifang
      * @date Jan 2, 2014
      */
     public static int compareTime(String startTime, String endTime, int type) {
@@ -681,7 +681,7 @@ public class DateUtil {
      *
      * @param date
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2019年5月31日 下午5:31:10
      */
     public static String getMonthFirstDate(String date) {
@@ -694,7 +694,7 @@ public class DateUtil {
      *
      * @param strdate
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2019年5月31日 下午5:32:09
      */
     public static String getMonthLastDate(String date) {
@@ -711,7 +711,7 @@ public class DateUtil {
      *
      * @param date
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2019年6月1日 下午12:38:53
      */
     @SuppressWarnings("static-access")

@@ -3,7 +3,7 @@ package com.zifang.util.ai.inheritance.chapter5;
 /**
  * Simple timeslot abstraction -- just represents a timeslot (like "Wed 9:00am-11:00am").
  *
- * @author bkanber
+ * @author zifang
  */
 public class Timeslot {
     private final int timeslotId;

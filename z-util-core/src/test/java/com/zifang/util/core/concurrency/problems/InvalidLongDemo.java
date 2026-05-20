@@ -1,7 +1,7 @@
 package com.zifang.util.core.concurrency.problems;
 
 /**
- * @author Jerry Lee(oldratlee at gmail dot com)
+ * @author zifang Lee(oldratlee at gmail dot com)
  */
 public class InvalidLongDemo {
     long count = 0;

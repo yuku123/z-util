@@ -20,9 +20,8 @@ import java.util.Set;
  * RangeSet表示一组不相交的区间集合，支持添加、移除、补集等操作。
  * RangeMap描述了"不相交的、非空的区间"到特定值的映射。
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Range_Study {
     @Test

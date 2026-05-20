@@ -14,8 +14,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * 线程池管理器。
  *
- * @author lijing
- * @since 2015/10/29
+ * @author zifang
  */
 public class ExecutorManager {
 

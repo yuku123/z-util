@@ -35,9 +35,8 @@ import java.util.Map;
  *   <li>EnumMap + HashMap = EnumHashBiMap</li>
  * </ul>
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class BiMap_Study {
     /**

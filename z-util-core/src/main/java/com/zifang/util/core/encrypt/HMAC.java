@@ -62,7 +62,7 @@ import java.security.NoSuchAlgorithmException;
  * 密钥必须随机选取(或使用强大的基于随机种子的伪随机生成方法)，并且要周期性的更新。目前的攻击没有指出一个有效的更换密钥的频率，因为那些攻击实际上并不可行。
  * 然而，周期性更新密钥是一个对付函数和密钥所存在的潜在缺陷的基本的安全措施，并可以降低泄漏密钥带来的危害。
  *
- * @author cc
+ * @author zifang
  * @version 1.0
  * @Company: Beijing INFCN Software Co.,Ltd.
  * @ClassName: HMAC

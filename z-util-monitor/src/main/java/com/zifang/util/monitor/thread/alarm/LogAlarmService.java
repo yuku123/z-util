@@ -6,8 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 日志打印告警服务。
  *
- * @author lijing
- * @since 2015/11/25
+ * @author zifang
  */
 public class LogAlarmService implements AlarmService {
 

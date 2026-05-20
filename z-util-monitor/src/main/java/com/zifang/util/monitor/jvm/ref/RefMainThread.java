@@ -6,8 +6,7 @@ package com.zifang.util.monitor.jvm.ref;
  * 演示Java中的强引用、软引用、弱引用、虚引用四种引用类型的行为差异，
  * 以及引用队列在引用回收中的作用。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class RefMainThread {
 

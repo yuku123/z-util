@@ -10,8 +10,7 @@ import com.zifang.util.monitor.thread.alarm.Alarmable;
  * 继承自Monitorable和Alarmable接口，
  * 用于标识可以监控和告警的线程池执行器。
  *
- * @author lijing
- * @since 2015/11/26
+ * @author zifang
  * @see Monitorable
  * @see Alarmable
  */

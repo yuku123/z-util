@@ -28,9 +28,8 @@ import java.util.Map.Entry;
  *   <li>响应超时时间：6000毫秒</li>
  * </ul>
  *
- * @author JourWon
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class HttpClientUtils {
 

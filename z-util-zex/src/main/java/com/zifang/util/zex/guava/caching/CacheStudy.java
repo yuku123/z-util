@@ -25,7 +25,7 @@ import java.util.concurrent.*;
  * get(key) ：入参key不允许为null，否则抛异常com.google.common.cache.CacheLoader$InvalidCacheLoadException: CacheLoader returned null for key "key"；
  * get(key) ：返回值不允许为null，否则抛异常java.lang.NullPointerException at com.google.common.base.Preconditions.checkNotNull(Preconditions.java:770)。
  *
- * @author zxiaofan
+ * @author zifang
  */
 public class CacheStudy {
     /**

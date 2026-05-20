@@ -25,8 +25,7 @@ import java.util.concurrent.*;
  * 如果我们不关心这个任务的结果，可以直接使用ExecutorService中的execute方法（实际是继承Executor接口）来直接去执行任务。<br/>
  * 这样的话，Runnable没有经过多余的封装，在runWorker中得到的异常也直接能在afterExecute中捕捉。<br/>
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class FixedMonitorableExecutor extends ThreadPoolExecutor implements MonitorableExecutor {
 

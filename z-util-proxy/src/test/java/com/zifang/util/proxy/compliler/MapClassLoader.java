@@ -6,7 +6,7 @@ import java.util.Map;
  * A class loader that loads classes from a map whose keys are class names and whose values are byte
  * code arrays.
  *
- * @author Cay Horstmann
+ * @author zifang Horstmann
  * @version 1.00 2007-11-02
  */
 public class MapClassLoader extends ClassLoader {

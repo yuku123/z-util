@@ -3,7 +3,7 @@ package com.zifang.util.proxy.a.decompile.utils;
 /**
  * <pre>
  * 16进制值与String/Byte之间的转换
- * @author JerryLi
+ * @author zifang
  * @email lijian@dzs.mobi
  * @data 2011-10-16
  * http://blog.csdn.net/hzbigdog/article/details/6877712

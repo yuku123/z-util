@@ -12,7 +12,6 @@ import java.net.URISyntaxException;
  *
  * @author zifang
  * @version 1.0.0
- * @since 2020-01-01
  */
 public class SourceJavaFileObject extends SimpleJavaFileObject {
 

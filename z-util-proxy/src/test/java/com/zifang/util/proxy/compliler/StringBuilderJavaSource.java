@@ -6,7 +6,7 @@ import java.net.URI;
 /**
  * A Java source that holds the code in a string builder.
  *
- * @author Cay Horstmann
+ * @author zifang Horstmann
  * @version 1.00 2007-11-02
  */
 public class StringBuilderJavaSource extends SimpleJavaFileObject {

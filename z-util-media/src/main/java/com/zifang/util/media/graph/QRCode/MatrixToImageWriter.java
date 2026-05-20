@@ -29,7 +29,7 @@ import java.io.OutputStream;
  * file or stream. Provided here instead of core since it depends on
  * Java SE libraries.
  *
- * @author Sean Owen
+ * @author zifang Owen
  */
 public final class MatrixToImageWriter {
 

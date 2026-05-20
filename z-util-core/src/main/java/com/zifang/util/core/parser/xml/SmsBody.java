@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  * 请求内容
  *
- * @author xuejiangtao
+ * @author zifang
  * Jul 25, 2013 9:34:16 PM
  */
 public class SmsBody {

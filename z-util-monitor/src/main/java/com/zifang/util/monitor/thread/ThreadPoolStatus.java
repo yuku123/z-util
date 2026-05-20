@@ -10,8 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * 线程池状态。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class ThreadPoolStatus extends Status {
 

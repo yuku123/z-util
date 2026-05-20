@@ -28,9 +28,8 @@ import java.util.List;
  * Collections2提供了对集合进行过滤和转换的工具方法。
  * 主要功能包括filter（过滤）和transform（转换）。
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Collections2_Study {
     List<UserBo> listUser = Lists.newArrayList(null, new UserBo("nameA", 12), new UserBo("nameB", 16), new UserBo("nameAC", 19));

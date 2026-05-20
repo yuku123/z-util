@@ -3,8 +3,7 @@ package com.zifang.util.monitor.thread.alarm;
 /**
  * 告警服务接口。
  *
- * @author lijing
- * @since 2015/12/1
+ * @author zifang
  */
 public interface AlarmService {
 

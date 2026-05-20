@@ -7,7 +7,7 @@ package com.zifang.util.ai.inheritance.chapter3;
  * `evalPopulation` method, which is then responsible for scoring an abstract
  * robot with sensors against the maze.
  *
- * @author bkanber
+ * @author zifang
  */
 public class RobotController {
 

@@ -9,7 +9,6 @@ package com.zifang.util.compile.sorce2.generator.info;
  *
  * @author zifang
  * @version 1.0.0
- * @since 2020-01-01
  */
 public class FieldInfo {
 

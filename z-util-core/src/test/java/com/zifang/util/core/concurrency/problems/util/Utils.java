@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @author ding.lid
+ * @author zifang
  */
 public class Utils {
     static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();

@@ -10,7 +10,6 @@ import java.io.File;
  *
  * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class TransformMobi2Epub {
     public static void main(String[] args) {

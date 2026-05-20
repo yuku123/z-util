@@ -12,8 +12,7 @@ import java.util.Collection;
 /**
  * 监控线程，定时访问监控组件集合中的所有组件。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class MonitorTask implements Runnable {
 

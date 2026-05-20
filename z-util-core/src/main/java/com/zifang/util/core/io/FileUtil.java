@@ -1202,7 +1202,7 @@ public class FileUtil {
      * 删除所有文件，包括文件夹
      *
      * @param dirpath
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2019年5月23日 下午12:41:08
      */
     public void deleteAll(String dirpath) {

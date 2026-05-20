@@ -13,7 +13,7 @@ package com.zifang.util.ai.inheritance.chapter2;
  * example is very simple: if the fitness score (ie, number of ones) is the same
  * as the length of the chromosome (ie, we're all ones), we're done!
  *
- * @author bkanber
+ * @author zifang
  */
 public class AllOnesGA {
 

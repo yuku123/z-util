@@ -211,7 +211,6 @@ public class CharUtil {
      *
      * @param c 字符
      * @return 是否为16进制规范的字符
-     * @since 4.1.5
      */
     public static boolean isHexChar(char c) {
         return isNumber(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
@@ -322,7 +321,6 @@ public class CharUtil {
      *
      * @param b 字符
      * @return 16进制字符
-     * @since 5.3.1
      */
     public static int digit16(int b) {
         return Character.digit(b, 16);
@@ -342,7 +340,6 @@ public class CharUtil {
      * @return 转换后的字符
      * @see <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters#Unicode_symbols">Unicode_symbols</a>
      * @see <a href="https://en.wikipedia.org/wiki/Enclosed_Alphanumerics">Alphanumerics</a>
-     * @since 5.6.2
      */
     public static char toCloseChar(char c) {
         int result = c;
@@ -367,12 +364,11 @@ public class CharUtil {
      *
      * @param number 被转换的数字
      * @return 转换后的字符
-     * @author dazer
+     * @author zifang
      * @see <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters#Unicode_symbols">维基百科wikipedia-Unicode_symbols</a>
      * @see <a href="https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%88%97%E8%A1%A8">维基百科wikipedia-Unicode字符列表</a>
      * @see <a href="https://coolsymbol.com/">coolsymbol</a>
      * @see <a href="https://baike.baidu.com/item/%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6/112715?fr=aladdin">百度百科 特殊字符</a>
-     * @since 5.6.2
      */
     public static char toCloseByNumber(int number) {
         if (number > 20) {

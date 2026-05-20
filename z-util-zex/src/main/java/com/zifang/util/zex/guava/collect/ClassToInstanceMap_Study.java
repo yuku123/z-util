@@ -24,9 +24,8 @@ import org.junit.Test;
  * <p>
  * 实现类：MutableClassToInstanceMap、ImmutableClassToInstanceMap
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class ClassToInstanceMap_Study {
 

@@ -1,7 +1,7 @@
 package com.zifang.util.core.concurrency.problems;
 
 /**
- * @author Jerry Lee (oldratlee at gmail dot com)
+ * @author zifang Lee (oldratlee at gmail dot com)
  */
 public class WrongCounterDemo {
     private static final int INC_COUNT = 100000000;

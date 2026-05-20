@@ -16,8 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 监控组件管理器。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class MonitorManager {
 

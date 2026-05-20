@@ -8,7 +8,7 @@ import java.io.OutputStream;
  * 基于 Lempel-Ziv 压缩算法（源于 compress.c），用于将像素数据编码为 GIF 格式。
  * 该类由 David Rowley 修改以适应 GIF 格式。
  *
- * @author wuhongjun
+ * @author zifang
  * @version 1.0
  */
 public class Encoder {

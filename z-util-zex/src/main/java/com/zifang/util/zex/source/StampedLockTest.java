@@ -14,7 +14,6 @@ import java.util.concurrent.locks.StampedLock;
  *
  * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class StampedLockTest {
     final static HashMap<String, String> data = new HashMap<>();

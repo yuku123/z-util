@@ -32,9 +32,8 @@ public class TimestampUtil {
      * @param value  待转换的Timestamp
      * @param format String的格式
      * @return java.lang.String
-     * @author chenssy
+     * @author zifang
      * @date 2019-09-24
-     * @since v1.0.0
      */
     public static String timestamp2String(Timestamp value, String format) {
         if (null == value) {
@@ -50,9 +49,8 @@ public class TimestampUtil {
      *
      * @param date 待转换的Date
      * @return java.sql.Timestamp
-     * @author chenssy
+     * @author zifang
      * @date 2019-09-24
-     * @since v1.0.0
      */
     public static Timestamp date2Timestamp(Date date) {
         if (date == null) {
@@ -66,9 +64,8 @@ public class TimestampUtil {
      *
      * @param time 待转换的Timestamp
      * @return java.util.Date
-     * @author chenssy
+     * @author zifang
      * @date 2019-09-24
-     * @since v1.0.0
      */
     public static Date timestamp2Date(Timestamp time) {
         return time;

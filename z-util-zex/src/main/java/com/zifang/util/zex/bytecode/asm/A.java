@@ -14,7 +14,6 @@ import java.io.FileOutputStream;
  *
  * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class A {
     public static void main(String[] args) throws Exception {

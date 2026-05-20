@@ -36,9 +36,8 @@ import java.util.Map.Entry;
  * <p>
  * Joiner在百万级别以上数据拼接时比传统方式更高效。
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Joiner_Study {
     String str1 = "a ";

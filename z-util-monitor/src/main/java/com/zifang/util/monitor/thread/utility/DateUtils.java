@@ -10,7 +10,7 @@ import java.util.Date;
  * <p>
  * 提供日期和时间相关的常用操作方法。
  *
- * @author lijing
+ * @author zifang
  */
 public final class DateUtils {
 

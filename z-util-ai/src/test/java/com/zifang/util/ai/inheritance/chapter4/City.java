@@ -4,7 +4,7 @@ package com.zifang.util.ai.inheritance.chapter4;
  * A simple abstraction of a city. This class maintains Cartesian coordinates
  * and also knows the Pythagorean theorem.
  *
- * @author bkanber
+ * @author zifang
  */
 public class City {
     private int x;

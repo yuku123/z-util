@@ -14,7 +14,7 @@ import java.math.RoundingMode;
  *   <li>数字金额转换为中文大写</li>
  * </ul>
  *
- * @author chenssy
+ * @author zifang
  */
 public class MoneyUtil {
 

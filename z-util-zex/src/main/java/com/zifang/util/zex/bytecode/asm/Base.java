@@ -7,7 +7,6 @@ package com.zifang.util.zex.bytecode.asm;
  *
  * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class Base {
 

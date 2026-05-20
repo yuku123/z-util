@@ -3,7 +3,7 @@ package com.zifang.util.proxy.compliler;
 import javax.swing.*;
 
 /**
- * @author Cay Horstmann
+ * @author zifang Horstmann
  * @version 1.00 2007-11-02
  */
 public abstract class ButtonFrame extends JFrame {

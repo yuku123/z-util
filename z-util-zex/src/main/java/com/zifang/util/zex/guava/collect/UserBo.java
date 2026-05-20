@@ -13,9 +13,8 @@ package com.zifang.util.zex.guava.collect;
  * <p>
  * 此类是用户数据的传输对象，包含用户的名称和年龄信息。
  *
- * @author zxiaofan
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class UserBo {
     private String name;

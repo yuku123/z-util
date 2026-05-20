@@ -10,8 +10,7 @@ import java.lang.ref.ReferenceQueue;
  * 虚引用主要用来跟踪对象被垃圾回收的状态，当对象被回收前，虚引用会被放入ReferenceQueue中。
  * 虚引用不会自动回收对象，需要客户端自行处理以防止内存溢出。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class PhantomReferenceDemo {
 

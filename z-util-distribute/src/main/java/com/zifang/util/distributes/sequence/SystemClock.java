@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * 1000万次：优化前480ms，优化后12ms，提升40倍
  * 100万次：优化前50ms，优化后10ms，提升5倍
  *
- * @author lry
+ * @author zifang
  */
 public class SystemClock {
 

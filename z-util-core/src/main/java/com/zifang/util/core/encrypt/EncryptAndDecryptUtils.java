@@ -15,7 +15,7 @@ public class EncryptAndDecryptUtils {
      *
      * @param value 待加密字符
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午4:54:23
      */
     public static String md5Encrypt(String value) {
@@ -31,7 +31,7 @@ public class EncryptAndDecryptUtils {
      *
      * @param value 待加密字符
      * @return 密文
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午4:59:42
      */
     public static String shaEncrypt(String value) {
@@ -47,7 +47,7 @@ public class EncryptAndDecryptUtils {
      *
      * @param value 待加密字符串
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午5:16:12
      */
     public static String base64Encrypt(String value) {
@@ -64,7 +64,7 @@ public class EncryptAndDecryptUtils {
      *
      * @param value 待解密字符串
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午5:16:34
      */
     public static String base64Decrypt(String value) {
@@ -86,7 +86,7 @@ public class EncryptAndDecryptUtils {
      * @param value 待加密字符
      * @param key   若key为空，则使用默认key
      * @return 加密成功返回密文，否则返回null
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午5:39:46
      */
     public static String desEncrypt(String value, String key) {
@@ -109,7 +109,7 @@ public class EncryptAndDecryptUtils {
      * @param value 待解密字符
      * @param key   若key为空，则使用默认key
      * @return
-     * @author : chenssy
+     * @author zifang chenssy
      * @date : 2016年5月20日 下午5:55:56
      */
     public static String desDecrypt(String value, String key) {

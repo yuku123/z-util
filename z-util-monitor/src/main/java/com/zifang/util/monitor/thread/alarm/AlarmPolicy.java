@@ -8,8 +8,7 @@ import com.zifang.util.monitor.thread.Status;
  * 定义判断监控组件是否需要告警的策略接口，
  * 子类实现具体的告警判断逻辑。
  *
- * @author lijing
- * @since 2015/11/26
+ * @author zifang
  * @see Status
  */
 public abstract class AlarmPolicy {

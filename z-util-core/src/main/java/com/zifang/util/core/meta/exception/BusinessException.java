@@ -6,7 +6,7 @@ import com.zifang.util.core.meta.StatusCode;
 /**
  * 业务异常
  *
- * @author zhixiang.lwt
+ * @author zifang
  */
 public class BusinessException extends BaseException {
 

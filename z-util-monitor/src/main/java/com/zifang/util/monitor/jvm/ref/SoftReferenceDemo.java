@@ -10,8 +10,7 @@ import java.lang.ref.SoftReference;
  * 当内存不足时，JVM会根据情况决定是否回收软引用指向的对象。
  * 适用于实现内存敏感的缓存。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class SoftReferenceDemo {
 

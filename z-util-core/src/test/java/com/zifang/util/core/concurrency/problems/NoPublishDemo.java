@@ -4,7 +4,7 @@ package com.zifang.util.core.concurrency.problems;
 /**
  * <a href="http://hllvm.group.iteye.com/group/topic/34932">请问R大 有没有什么工具可以查看正在运行的类的c/汇编代码</a>提到了<b>代码提升</b>的问题。
  *
- * @author Jerry Lee (oldratlee at gmail dot com)
+ * @author zifang Lee (oldratlee at gmail dot com)
  * @see <a href="http://hllvm.group.iteye.com/group/topic/34932">请问R大 有没有什么工具可以查看正在运行的类的c/汇编代码</a>
  */
 public class NoPublishDemo {

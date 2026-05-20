@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author zifang
  * @version 1.0.0
- * @since 2020-01-01
  */
 public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<JavaFileManager> {
 

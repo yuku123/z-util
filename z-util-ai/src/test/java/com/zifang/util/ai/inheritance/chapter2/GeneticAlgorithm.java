@@ -21,7 +21,7 @@ package com.zifang.util.ai.inheritance.chapter2;
  * chosen, however, so that we can keep each chapter's examples as simple and
  * concrete as possible.
  *
- * @author bkanber
+ * @author zifang
  */
 public class GeneticAlgorithm {
     private int populationSize;

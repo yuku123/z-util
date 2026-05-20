@@ -5,8 +5,7 @@ package com.zifang.util.monitor.jvm;
  * <p>
  * 演示字符串常量池的工作机制以及intern方法的使用。
  *
- * @author lijing
- * @since 2015/11/24
+ * @author zifang
  */
 public class StringDemo {
 

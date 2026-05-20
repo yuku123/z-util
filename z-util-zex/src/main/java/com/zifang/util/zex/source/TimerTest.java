@@ -11,7 +11,6 @@ import java.util.TimerTask;
  *
  * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class TimerTest {
     public static void main(String[] args) {

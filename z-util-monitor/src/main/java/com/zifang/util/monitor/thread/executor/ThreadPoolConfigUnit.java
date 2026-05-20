@@ -7,8 +7,7 @@ import com.zifang.util.monitor.thread.utility.TimeUtil;
 /**
  * 线程池配置。
  *
- * @author lijing
- * @since 2015/11/25
+ * @author zifang
  */
 public class ThreadPoolConfigUnit {
 

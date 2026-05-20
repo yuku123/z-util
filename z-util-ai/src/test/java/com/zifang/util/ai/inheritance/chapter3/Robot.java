@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * A robot abstraction. Give it a maze and an instruction set, and it will
  * attempt to navigate to the finish.
  *
- * @author bkanber
+ * @author zifang
  */
 public class Robot {
     private enum Direction {NORTH, EAST, SOUTH, WEST}

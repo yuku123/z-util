@@ -12,7 +12,7 @@ package com.zifang.util.ai.inheritance.chapter3;
  * AllOnesGA fitness method; in this case we actually have to evaluate how good
  * the robot is at navigating a maze!
  *
- * @author bkanber
+ * @author zifang
  */
 public class GeneticAlgorithm {
 

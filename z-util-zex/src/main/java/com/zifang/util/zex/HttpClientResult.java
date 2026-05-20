@@ -8,9 +8,8 @@ import java.io.Serializable;
  * 此类封装了HTTP请求的响应结果，包括响应状态码和响应内容。
  * 用于统一处理各种HTTP请求的返回值。
  *
- * @author JourWon
+ * @author zifang
  * @version 1.0
- * @since 1.0
  */
 public class HttpClientResult implements Serializable {
 

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * @author Jerry Lee (oldratlee at gmail dot com)
+ * @author zifang Lee (oldratlee at gmail dot com)
  */
 public class SynchronizationOnMutableFieldDemo {
     static final int ADD_COUNT = 10000;

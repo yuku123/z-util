@@ -1,39 +1,3 @@
-///*
-// * Licensed to the Apache Software Foundation (ASF) under one or more
-// * contributor license agreements.  See the NOTICE file distributed with
-// * this work for additional information regarding copyright ownership.
-// * The ASF licenses this file to You under the Apache License, Version 2.0
-// * (the "License"); you may not use this file except in compliance with
-// * the License.  You may obtain a copy of the License at
-// *
-// *     http://www.apache.org/licenses/LICENSE-2.0
-// *
-// * Unless required by applicable law or agreed to in writing, software
-// * distributed under the License is distributed on an "AS IS" BASIS,
-// * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// * See the License for the specific language governing permissions and
-// * limitations under the License.
-// */
-//package com.zifang.util.core.pattern.chain.define;
-//
-//import java.util.Iterator;
-//import java.util.Map;
-//
-///**
-// * <code>CatalogFactory</code> 存储和检索目录。
-// * <p>
-// * 工厂允许使用默认 {@link Catalog} 以及使用名称键存储的 Catalog。
-// * 它遵循工厂模式（参见 GoF）。
-// * <p>
-// * 基本实现基于单个 String 提供命令查找。
-// * 此 String 对编码目录和命令名称。
-// *
-// * @param <K> 与此 {@link Command} 关联的上下文维护的键类型
-// * @param <V> 映射值的类型
-// * @param <C> 与此命令关联的上下文类型
-// *
-// * @version $Id: CatalogFactory.java 1486528 2013-05-27 07:38:38Z simonetripoda $
-// */
 //public interface CatalogFactory<K, V, C extends Map<K, V>> {
 //
 //    /**
