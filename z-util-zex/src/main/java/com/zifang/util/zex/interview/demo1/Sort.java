@@ -4,8 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 树形结构排序类。
+ * <p>
+ * 此类提供树形结构的遍历和打印功能。
+ * 根据父子关系构建树形结构，并按照层级顺序打印节点。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class Sort {
 
+    /**
+     * 打印树形结构。
+     *
+     * @param list 节点列表
+     */
     public void print(List<Node> list) {
         Node root = list.stream().filter(e -> 0 == e.getParentId()).findFirst().get(); // 得到根节点
         // 根据节点进行打印

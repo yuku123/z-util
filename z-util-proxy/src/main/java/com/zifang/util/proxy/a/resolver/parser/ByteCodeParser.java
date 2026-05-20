@@ -5,7 +5,8 @@ import com.zifang.util.proxy.a.resolver.parser.struct.ClassFile;
 import java.util.Objects;
 
 /**
- * @author zifang
+ * 字节码解析器<br>
+ * 负责将字节数组解析为ClassFile结构
  */
 public class ByteCodeParser {
 
@@ -13,41 +14,47 @@ public class ByteCodeParser {
 
     private ClassFile classFile;
 
+    /**
+     * 获取字节数组
+     *
+     * @return 字节数组
+     */
     public byte[] getBytes() {
         return bytes;
     }
 
+    /**
+     * 设置字节数组
+     *
+     * @param bytes 字节数组
+     */
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
     }
 
+    /**
+     * 获取ClassFile对象
+     *
+     * @return ClassFile对象
+     */
     public ClassFile getClassFile() {
         return classFile;
     }
 
+    /**
+     * 设置ClassFile对象
+     *
+     * @param classFile ClassFile对象
+     */
     public void setClassFile(ClassFile classFile) {
         this.classFile = classFile;
     }
 
-    @Override
-    public String toString() {
-        return "ByteCodeParser{bytes=" + (bytes != null ? bytes.length : 0) + ", classFile=" + classFile + "}";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ByteCodeParser that = (ByteCodeParser) o;
-        return Objects.equals(bytes, that.bytes) &&
-                Objects.equals(classFile, that.classFile);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(bytes, classFile);
-    }
-
+    /**
+     * 解析ClassFile并返回
+     *
+     * @return ClassFile对象
+     */
     public ClassFile solveClassFile() {
         if (classFile != null) {
             return classFile;

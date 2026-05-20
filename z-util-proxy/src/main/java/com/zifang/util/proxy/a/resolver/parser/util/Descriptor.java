@@ -2,8 +2,20 @@ package com.zifang.util.proxy.a.resolver.parser.util;
 
 import com.zifang.util.proxy.a.resolver.parser.struct.Field;
 
+/**
+ * 字段描述符解析器<br>
+ * 用于将JVM字段描述符转换为Java源码形式的字段声明
+ */
 public class Descriptor {
 
+    /**
+     * 将字段对象转换为Java源码形式的字段声明字符串
+     * <p>
+     * 根据字段的访问标志和描述符信息，生成类似"public static final int"的字符串
+     *
+     * @param field 字段对象
+     * @return Java源码形式的字段声明
+     */
     public String descriprField(Field field) {
         StringBuilder s = new StringBuilder();
         if ((field.getAccessFlag() & 0x00000001) == 0x000000001) {

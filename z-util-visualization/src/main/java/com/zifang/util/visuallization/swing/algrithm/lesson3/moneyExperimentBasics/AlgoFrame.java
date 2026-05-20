@@ -3,11 +3,21 @@ package com.zifang.util.visuallization.swing.algrithm.lesson3.moneyExperimentBas
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 金钱实验可视化框架
+ * 提供金钱分配实验的图表绘制功能
+ */
 public class AlgoFrame extends JFrame {
 
     private int canvasWidth;
     private int canvasHeight;
 
+    /**
+     * 创建可视化框架
+     * @param title 窗口标题
+     * @param canvasWidth 画布宽度
+     * @param canvasHeight 画布高度
+     */
     public AlgoFrame(String title, int canvasWidth, int canvasHeight) {
 
         super(title);
@@ -25,22 +35,37 @@ public class AlgoFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * 创建可视化框架（默认尺寸1024x768）
+     * @param title 窗口标题
+     */
     public AlgoFrame(String title) {
 
         this(title, 1024, 768);
     }
 
+    /**
+     * 获取画布宽度
+     * @return 画布宽度
+     */
     public int getCanvasWidth() {
         return canvasWidth;
     }
 
+    /**
+     * 获取画布高度
+     * @return 画布高度
+     */
     public int getCanvasHeight() {
         return canvasHeight;
     }
 
-    // data
     int[] money;
 
+    /**
+     * 渲染财富数据
+     * @param money 财富数组
+     */
     public void render(int[] money) {
         this.money = money;
         repaint();

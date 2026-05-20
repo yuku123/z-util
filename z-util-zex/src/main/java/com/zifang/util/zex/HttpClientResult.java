@@ -3,10 +3,14 @@ package com.zifang.util.zex;
 import java.io.Serializable;
 
 /**
- * Description: 封装httpClient响应结果
+ * HTTP客户端响应结果封装类。
+ * <p>
+ * 此类封装了HTTP请求的响应结果，包括响应状态码和响应内容。
+ * 用于统一处理各种HTTP请求的返回值。
  *
  * @author JourWon
- * @date Created on 2018年4月19日
+ * @version 1.0
+ * @since 1.0
  */
 public class HttpClientResult implements Serializable {
 

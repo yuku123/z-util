@@ -1,8 +1,19 @@
 package com.zifang.util.monitor.jvm.ref;
 
-import java.lang.ref.*;
-
+/**
+ * 引用类型主测试类。
+ * <p>
+ * 演示Java中的强引用、软引用、弱引用、虚引用四种引用类型的行为差异，
+ * 以及引用队列在引用回收中的作用。
+ *
+ * @author lijing
+ * @since 2015/11/24
+ */
 public class RefMainThread {
+
+    /**
+     * 测试用内部类。
+     */
     static class RefTestObj {
         private int id;
 
@@ -35,6 +46,11 @@ public class RefMainThread {
         }
     }
 
+    /**
+     * 主方法，演示四种引用类型的回收机制。
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
         // 创建三种不同的引用类型所需对象
         RefTestObj softRef = new RefTestObj();
@@ -115,6 +131,11 @@ public class RefMainThread {
         }
     }
 
+    /**
+     * 打印引用对象及其所指向对象的信息。
+     *
+     * @param ref 引用对象
+     */
     public static void print(Reference<RefTestObj> ref) {
         RefTestObj obj = ref.get();
         System.out.println("The Reference is " + ref.toString() + " and with object " + obj + " which is "

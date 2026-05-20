@@ -10,7 +10,8 @@ import java.io.FileInputStream;
 import java.util.Objects;
 
 /**
- * @author zifang
+ * 字节码解析器<br>
+ * 负责从输入流中解析字节码并构建ClassFile结构
  */
 public class ByteCodeParser {
 
@@ -20,56 +21,75 @@ public class ByteCodeParser {
 
     private MethodAttributeHandler methodAttributeHandler = new MethodAttributeHandler();
 
+    /**
+     * 获取字节扫描器
+     *
+     * @return 字节扫描器
+     */
     public ByteScanner getScanner() {
         return scanner;
     }
 
+    /**
+     * 设置字节扫描器
+     *
+     * @param scanner 字节扫描器
+     */
     public void setScanner(ByteScanner scanner) {
         this.scanner = scanner;
     }
 
+    /**
+     * 获取ClassFile对象
+     *
+     * @return ClassFile对象
+     */
     public ClassFile getClassFile() {
         return classFile;
     }
 
+    /**
+     * 设置ClassFile对象
+     *
+     * @param classFile ClassFile对象
+     */
     public void setClassFile(ClassFile classFile) {
         this.classFile = classFile;
     }
 
+    /**
+     * 获取方法属性处理器
+     *
+     * @return 方法属性处理器
+     */
     public MethodAttributeHandler getMethodAttributeHandler() {
         return methodAttributeHandler;
     }
 
-    @Override
-    public String toString() {
-        return "ByteCodeParser{scanner=" + scanner + ", classFile=" + classFile + ", methodAttributeHandler=" + methodAttributeHandler + "}";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ByteCodeParser that = (ByteCodeParser) o;
-        return Objects.equals(scanner, that.scanner) &&
-                Objects.equals(classFile, that.classFile) &&
-                Objects.equals(methodAttributeHandler, that.methodAttributeHandler);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(scanner, classFile, methodAttributeHandler);
-    }
-
-
+    /**
+     * 解析thisClass索引
+     *
+     * @throws Exception 如果解析失败
+     */
     public void thisClass() throws Exception {
         int thisClassIndex = this.scanner.readToInteger(2);
 
     }
 
+    /**
+     * 解析superClass索引
+     *
+     * @throws Exception 如果解析失败
+     */
     public void superClass() throws Exception {
         int superClassIndex = this.scanner.readToInteger(2);
     }
 
+    /**
+     * 解析接口集合
+     *
+     * @throws Exception 如果解析失败
+     */
     public void interfaces() throws Exception {
         byte[] interfacesLen = new byte[2];
         this.scanner.readToInteger(2);
@@ -77,6 +97,11 @@ public class ByteCodeParser {
         int len = interfacesLen[0] << 8 & 0x0000ff00 | interfacesLen[1] & 0x000000ff;
     }
 
+    /**
+     * 解析字段集合
+     *
+     * @throws Exception 如果解析失败
+     */
     public void fields() throws Exception {
 
         int fieldsCount = this.scanner.readToInteger(2);
@@ -125,6 +150,11 @@ public class ByteCodeParser {
         }
     }
 
+    /**
+     * 解析方法集合
+     *
+     * @throws Exception 如果解析失败
+     */
     public void methods() throws Exception {
         int methodCount = this.scanner.readToInteger(2);
 
@@ -163,8 +193,14 @@ public class ByteCodeParser {
         }
     }
 
+    /**
+     * 方法属性处理器
+     */
     private class MethodAttributeHandler {
 
+        /**
+         * 处理Code属性
+         */
         public void handleCode() {
             int maxStack = scanner.readToInteger(2); // 最大栈
             int maxLocals = scanner.readToInteger(2); // 最大本地变量
@@ -260,6 +296,9 @@ public class ByteCodeParser {
     }
 
 
+    /**
+     * 处理常量池
+     */
     public void handleConstantPool() {
         int classFileCount = this.scanner.readToInteger(2);
 
@@ -318,6 +357,11 @@ public class ByteCodeParser {
         }
     }
 
+    /**
+     * 处理访问标志
+     *
+     * @throws Exception 如果解析失败
+     */
     public void handleAccessFlags() throws Exception {
         classFile.setAccessFlags(this.scanner.readToInteger(2));
     }

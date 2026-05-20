@@ -1,7 +1,11 @@
 package com.zifang.util.media.graph.image.GIF;
 
 /**
- * #nodoc- GifQuant
+ * GIF 图像颜色量化器（基于神经网络的八叉树算法）。
+ * 将真彩色图像（最多 1670 万色）量化到 256 色的调色板。
+ *
+ * <p>该算法通过自组织神经网络学习图像颜色分布，
+ * 将相似的颜色归类到同一个神经元，最终生成 256 色的调色板。
  */
 public class Quant {
     protected static final int netsize = 256; /* number of colours used */
@@ -86,6 +90,13 @@ public class Quant {
 
     /* Initialise network in range (0,0,0) to (255,255,255) and set parameters
        ----------------------------------------------------------------------- */
+    /**
+     * 初始化网络，将神经元权重初始化为 (0,0,0) 到 (255,255,255) 范围内的值。
+     *
+     * @param thepic 输入图像的像素数据
+     * @param len    像素数据长度
+     * @param sample 采样因子 1..30
+     */
     public Quant(byte[] thepic, int len, int sample) {
 
         int i;
@@ -105,6 +116,11 @@ public class Quant {
         }
     }
 
+    /**
+     * 获取颜色映射表。
+     *
+     * @return 256 色调色板，每 3 个字节表示一个 RGB 颜色
+     */
     public byte[] colorMap() {
         byte[] map = new byte[3 * netsize];
         int[] index = new int[netsize];
@@ -120,8 +136,10 @@ public class Quant {
         return map;
     }
 
-    /* Insertion sort of network and building of netindex[0..255] (to do after unbias)
-       ------------------------------------------------------------------------------- */
+    /**
+     * 插入排序：对网络进行排序并构建快速查找表 netindex。
+     * 在 unbias 操作之后调用。
+     */
     public void inxbuild() {
 
         int i, j, smallpos, smallval;
@@ -173,8 +191,10 @@ public class Quant {
             netindex[j] = maxnetpos; /* really 256 */
     }
 
-    /* Main Learning Loop
-       ------------------ */
+    /**
+     * 主学习循环。
+     * 通过迭代调整神经网络的权重，使其学习输入图像的颜色分布。
+     */
     public void learn() {
 
         int i, j, b, g, r;
@@ -249,8 +269,14 @@ public class Quant {
         //fprintf(stderr,"finished 1D learning: final alpha=%f !\n",((float)alpha)/initalpha);
     }
 
-    /* Search for BGR values 0..255 (after net is unbiased) and return colour index
-       ---------------------------------------------------------------------------- */
+    /**
+     * 查找与给定 BGR 值最接近的颜色在调色板中的索引。
+     *
+     * @param b 蓝色分量 0..255
+     * @param g 绿色分量 0..255
+     * @param r 红色分量 0..255
+     * @return 调色板中最接近颜色的索引
+     */
     public int map(int b, int g, int r) {
 
         int i, j, dist, a, bestd;
@@ -317,6 +343,11 @@ public class Quant {
         return (best);
     }
 
+    /**
+     * 执行完整的量化流程。
+     *
+     * @return 量化后的 256 色调色板
+     */
     public byte[] process() {
         learn();
         unbiasnet();
@@ -324,8 +355,10 @@ public class Quant {
         return colorMap();
     }
 
-    /* Unbias network to give byte values 0..255 and record position i to prepare for sort
-       ----------------------------------------------------------------------------------- */
+    /**
+     * 去除网络偏差，将权重值偏移回 0..255 范围。
+     * 并记录颜色编号，为排序做准备。
+     */
     public void unbiasnet() {
 
         int i, j;
@@ -338,8 +371,16 @@ public class Quant {
         }
     }
 
-    /* Move adjacent neurons by precomputed alpha*(1-((i-j)^2/[r]^2)) in radpower[|i-j|]
-       --------------------------------------------------------------------------------- */
+    /**
+     * 移动相邻神经元，调整权重。
+     * 根据预计算的 alpha*(1-((i-j)^2/[r]^2)) 值调整半径 rad 范围内的相邻神经元。
+     *
+     * @param rad 调整半径
+     * @param i   神经元索引
+     * @param b   蓝色分量
+     * @param g   绿色分量
+     * @param r   红色分量
+     */
     protected void alterneigh(int rad, int i, int b, int g, int r) {
 
         int j, k, lo, hi, a, m;
@@ -378,8 +419,15 @@ public class Quant {
         }
     }
 
-    /* Move neuron i towards biased (b,g,r) by factor alpha
-       ---------------------------------------------------- */
+    /**
+     * 移动单个神经元，使其向目标颜色靠近。
+     *
+     * @param alpha 学习因子
+     * @param i     神经元索引
+     * @param b     蓝色分量
+     * @param g     绿色分量
+     * @param r     红色分量
+     */
     protected void altersingle(int alpha, int i, int b, int g, int r) {
 
         /* alter hit neuron */
@@ -389,8 +437,16 @@ public class Quant {
         n[2] -= (alpha * (n[2] - r)) / initalpha;
     }
 
-    /* Search for biased BGR values
-       ---------------------------- */
+    /**
+     * 竞赛算法：查找最匹配神经元并更新频率。
+     * 找到距离最近的神经元（最小距离）和最佳神经元（最小距离-偏差）。
+     * 对于频繁选择的神经元，freq[i] 较高而 bias[i] 为负值。
+     *
+     * @param b 蓝色分量
+     * @param g 绿色分量
+     * @param r 红色分量
+     * @return 最佳匹配神经元的索引
+     */
     protected int contest(int b, int g, int r) {
 
         /* finds closest neuron (min dist) and updates freq */

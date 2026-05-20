@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * HTML parser using Jsoup for CSS selector extraction.
+ * 使用 Jsoup 进行 CSS 选择器提取的 HTML 解析器。
  */
 public class HtmlParser {
 
@@ -17,7 +17,10 @@ public class HtmlParser {
     }
 
     /**
-     * Parse HTML and return text content of first element matching CSS selector.
+     * 解析 HTML，返回匹配 CSS 选择器的第一个元素的文本内容。
+     * @param html HTML 字符串
+     * @param cssSelector CSS 选择器
+     * @return 元素文本内容，未找到则返回 null
      */
     public static String parse(String html, String cssSelector) {
         Document doc = Jsoup.parse(html);
@@ -26,7 +29,10 @@ public class HtmlParser {
     }
 
     /**
-     * Parse HTML and return text content of all elements matching CSS selector.
+     * 解析 HTML，返回匹配 CSS 选择器的所有元素的文本内容。
+     * @param html HTML 字符串
+     * @param cssSelector CSS 选择器
+     * @return 文本内容列表
      */
     public static List<String> parseAll(String html, String cssSelector) {
         Document doc = Jsoup.parse(html);
@@ -39,7 +45,11 @@ public class HtmlParser {
     }
 
     /**
-     * Parse HTML and return attribute value of first element matching CSS selector.
+     * 解析 HTML，返回匹配 CSS 选择器的第一个元素的指定属性值。
+     * @param html HTML 字符串
+     * @param cssSelector CSS 选择器
+     * @param attrName 属性名
+     * @return 属性值，未找到则返回 null
      */
     public static String parseAttr(String html, String cssSelector, String attrName) {
         Document doc = Jsoup.parse(html);
@@ -48,7 +58,9 @@ public class HtmlParser {
     }
 
     /**
-     * Parse HTML and return Jsoup Document for advanced operations.
+     * 解析 HTML 并返回 Jsoup Document 对象，用于高级操作。
+     * @param html HTML 字符串
+     * @return Jsoup Document 对象
      */
     public static Document parse(String html) {
         return Jsoup.parse(html);

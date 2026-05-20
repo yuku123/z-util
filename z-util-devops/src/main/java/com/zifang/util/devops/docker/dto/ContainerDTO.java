@@ -137,6 +137,8 @@ public class ContainerDTO {
 
     /**
      * 端口映射
+     * <p>
+     * 用于表示容器与宿主机之间的端口映射关系
      */
     public static class PortMapping {
         private String hostIp;

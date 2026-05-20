@@ -6,15 +6,24 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * 圆形动画可视化器
+ * 演示带碰撞检测的圆形动画效果
+ */
 public class AlgoVisualizer {
 
     private Circle[] circles;
     private AlgoFrame frame;
     private boolean isAnimated = true;
 
+    /**
+     * 创建可视化器
+     * @param sceneWidth 场景宽度
+     * @param sceneHeight 场景高度
+     * @param N 圆形数量
+     */
     public AlgoVisualizer(int sceneWidth, int sceneHeight, int N) {
 
-        // 初始化数据
         circles = new Circle[N];
         int R = 50;
         for (int i = 0; i < N; i++) {
@@ -25,7 +34,6 @@ public class AlgoVisualizer {
             circles[i] = new Circle(x, y, R, vx, vy);
         }
 
-        // 初始化视图
         EventQueue.invokeLater(() -> {
             frame = new AlgoFrame("Welcome", sceneWidth, sceneHeight);
             frame.addKeyListener(new AlgoKeyListener());
@@ -36,15 +44,15 @@ public class AlgoVisualizer {
         });
     }
 
-    // 动画逻辑
+    /**
+     * 动画循环
+     */
     private void run() {
 
         while (true) {
-            // 绘制数据
             frame.render(circles);
             AlgoVisHelper.pause(20);
 
-            // 更新数据
             if (isAnimated)
                 for (Circle circle : circles)
                     circle.move(0, 0, frame.getCanvasWidth(), frame.getCanvasHeight());

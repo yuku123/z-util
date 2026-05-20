@@ -216,6 +216,11 @@ public class IssueApiWrapper {
 
     // ==================== DTO ====================
 
+    /**
+     * Issue 信息 DTO
+     * <p>
+     * 用于封装 Issue 的基本信息，包括编号、标题、正文、状态、标签等
+     */
     public static class IssueInfo {
         public int number;
         public String title;
@@ -226,6 +231,13 @@ public class IssueApiWrapper {
         public String createdAt;
         public String updatedAt;
 
+        /**
+         * 从 GHIssue 对象构建 IssueInfo
+         *
+         * @param issue Issue 对象
+         * @return IssueInfo 实例
+         * @throws IOException IO异常
+         */
         public static IssueInfo from(GHIssue issue) throws IOException {
             IssueInfo info = new IssueInfo();
             info.number = issue.getNumber();

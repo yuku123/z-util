@@ -39,10 +39,23 @@ public class OrganizationApiWrapper {
 
     // ==================== Organization Info ====================
 
+    /**
+     * 获取组织信息
+     *
+     * @return GHOrganization 组织对象
+     * @throws IOException IO异常
+     */
     public GHOrganization get() throws IOException {
         return github.getOrganization(org);
     }
 
+    /**
+     * 获取指定组织信息
+     *
+     * @param org 组织名称
+     * @return GHOrganization 组织对象
+     * @throws IOException IO异常
+     */
     public GHOrganization get(String org) throws IOException {
         return github.getOrganization(org);
     }

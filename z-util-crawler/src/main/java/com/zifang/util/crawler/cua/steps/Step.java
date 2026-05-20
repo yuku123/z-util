@@ -6,7 +6,7 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 import java.util.Map;
 
 /**
- * Interface for a step in the CUA execution pipeline.
+ * CUA 执行管道中步骤的接口定义。
  */
 public interface Step {
 

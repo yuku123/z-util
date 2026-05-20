@@ -38,18 +38,39 @@ public class GithubApiHolder {
         }
     }
 
+    /**
+     * 获取 GitHub 客户端实例
+     *
+     * @return GitHub 客户端对象，可能为 null（如果未初始化）
+     */
     public GitHub getGithub() {
         return github;
     }
 
+    /**
+     * 获取 GitHub 配置
+     *
+     * @return GithubConfig 配置对象，可能为 null
+     */
     public GithubConfig getConfig() {
         return config;
     }
 
+    /**
+     * 获取 GithubApiHolder 单例实例
+     *
+     * @return GithubApiHolder 实例
+     */
     public static GithubApiHolder getInstance() {
         return INSTANCE;
     }
 
+    /**
+     * 初始化 GithubApiHolder（仅可调用一次）
+     *
+     * @param config GitHub 配置
+     * @throws IllegalStateException 当已经初始化过再次调用时抛出
+     */
     public static void init(GithubConfig config) {
         if (INSTANCE.config != null) {
             throw new IllegalStateException("GithubApiHolder has already been initialized");
@@ -57,6 +78,9 @@ public class GithubApiHolder {
         INSTANCE = new GithubApiHolder(config);
     }
 
+    /**
+     * 重置 GithubApiHolder 到未初始化状态
+     */
     public static void reset() {
         INSTANCE = new GithubApiHolder(null);
     }

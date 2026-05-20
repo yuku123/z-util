@@ -4,7 +4,22 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 
+/**
+ * 多线程演示类。
+ * <p>
+ * 演示如何使用ThreadMXBean获取JVM中线程的信息，
+ * 包括线程ID、线程名称等。
+ *
+ * @author lijing
+ * @since 2015/11/24
+ */
 public class MultiThread extends Thread {
+
+    /**
+     * 主方法，演示获取JVM线程信息。
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();
         //只要线程和线程堆栈的信息

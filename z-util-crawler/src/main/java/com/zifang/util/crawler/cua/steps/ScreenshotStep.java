@@ -7,8 +7,8 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 import java.io.File;
 
 /**
- * Step for taking screenshots.
- * Task: "screenshot", params: {path, fullPage}
+ * 截图步骤，用于截取页面快照。
+ * 任务关键字：screenshot，参数：{path, fullPage}
  */
 public class ScreenshotStep implements Step {
 

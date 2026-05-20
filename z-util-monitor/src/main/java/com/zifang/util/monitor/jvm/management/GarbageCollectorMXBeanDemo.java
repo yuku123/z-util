@@ -20,16 +20,16 @@ public class GarbageCollectorMXBeanDemo {
 
 
     /**
-     * 获取指定JVM的垃圾回收器信息
+     * 获取指定JVM的垃圾回收器信息。
      * <p>
-     * 远程程序启动初始JVM参数配置开启远程监控
-     * -Djava.rmi.server.hostname=192.168.10.105
-     * -Dcom.sun.management.jmxremote
-     * -Dcom.sun.management.jmxremote.port=9999
-     * -Dcom.sun.management.jmxremote.ssl=false
-     * -Dcom.sun.management.jmxremote.authenticate=false
-     *
-     * @return
+     * 远程程序启动JVM参数配置开启远程监控：
+     * <ul>
+     *   <li>-Djava.rmi.server.hostname=192.168.10.105</li>
+     *   <li>-Dcom.sun.management.jmxremote</li>
+     *   <li>-Dcom.sun.management.jmxremote.port=9999</li>
+     *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
+     *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
+     * </ul>
      */
     public static void getRemoteGarbageCollectorMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -69,9 +69,7 @@ public class GarbageCollectorMXBeanDemo {
     }
 
     /**
-     * 获取当前虚拟机垃圾回收器的信息
-     *
-     * @return
+     * 获取当前虚拟机垃圾回收器信息。
      */
     public static void getLocalGarbageCollectorMXBean() {
         List<GarbageCollectorMXBean> list = ManagementFactory.getGarbageCollectorMXBeans();
@@ -87,6 +85,11 @@ public class GarbageCollectorMXBeanDemo {
         }
     }
 
+    /**
+     * 主方法，演示获取JVM垃圾回收器信息。
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
         getRemoteGarbageCollectorMXBean();
         getLocalGarbageCollectorMXBean();

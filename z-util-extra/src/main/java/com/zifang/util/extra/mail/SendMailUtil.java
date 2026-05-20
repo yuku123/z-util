@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * 邮件发送工具类（网易163邮箱）
  * <p>
- * 提供基于网易163邮箱SMTP服务的邮件发送功能
+ * 提供基于网易163邮箱SMTP服务的邮件发送功能，支持发送纯文本邮件
  *
  * @author zifang
  */
@@ -52,7 +52,7 @@ public class SendMailUtil {
      * <p>
      * 通过网易163邮箱SMTP服务器发送文本邮件，邮件内容为纯文本格式
      *
-     * @param context 邮件正文内容
+     * @param context 邮件正文内容，不能为空
      */
     public static void send(String context) {
         Properties props = new Properties();

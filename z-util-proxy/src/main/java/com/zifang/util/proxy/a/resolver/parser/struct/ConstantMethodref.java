@@ -1,11 +1,23 @@
 package com.zifang.util.proxy.a.resolver.parser.struct;
 
+/**
+ * 方法符号引用常量<br>
+ * 表示Class文件中CONSTANT_Methodref_info类型的常量
+ */
 public class ConstantMethodref extends ConstantPoolItem {
 
     private int classIndex;
 
     private int nameAndTypeIndex;
 
+    /**
+     * 构造方法
+     *
+     * @param classFile        ClassFile对象
+     * @param index           常量池索引
+     * @param classIndex       指向CONSTANT_Class_info的索引
+     * @param nameAndTypeIndex 指向CONSTANT_NameAndType_info的索引
+     */
     public ConstantMethodref(ClassFile classFile, int index, int classIndex, int nameAndTypeIndex) {
         super(classFile, index);
         this.classIndex = classIndex;

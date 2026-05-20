@@ -1,39 +1,76 @@
 package com.zifang.util.visuallization.swing.manager.tree;
 
+/**
+ * 树形节点数据类
+ * 存储树形节点的ID、名称和父节点ID信息
+ */
 public class TreeNode {
     private String id;
     private String name;
     private String parentId;
 
+    /**
+     * 创建树节点
+     */
     public TreeNode() {
     }
 
+    /**
+     * 创建树节点
+     * @param id 节点唯一标识
+     * @param name 节点显示名称
+     * @param parentId 父节点ID（null表示根节点）
+     */
     public TreeNode(String id, String name, String parentId) {
         this.id = id;
         this.name = name;
         this.parentId = parentId;
     }
 
+    /**
+     * 获取节点ID
+     * @return 节点ID
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * 设置节点ID
+     * @param id 节点ID
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * 获取节点名称
+     * @return 节点名称
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * 设置节点名称
+     * @param name 节点名称
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * 获取父节点ID
+     * @return 父节点ID，null表示根节点
+     */
     public String getParentId() {
         return parentId;
     }
 
+    /**
+     * 设置父节点ID
+     * @param parentId 父节点ID
+     */
     public void setParentId(String parentId) {
         this.parentId = parentId;
     }

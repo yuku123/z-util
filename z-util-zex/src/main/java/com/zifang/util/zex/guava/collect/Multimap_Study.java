@@ -1,7 +1,7 @@
 /*
  * 文件名：Multimap_Study.java
  * 版权：Copyright 2007-2019 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： Multimap_Study.java
+ * 描述： Guava Multimap学习类
  * 修改人：zxiaofan
  * 修改时间：2019年12月22日
  * 修改内容：新增
@@ -20,23 +20,29 @@ import java.util.List;
 import java.util.Map.Entry;
 
 /**
- * Multimap:get(key)==>Collection<>（可能为空集合（默认容量为3）但不会为null，asMap.get()可能返回null）
+ * Guava Multimap学习类。
+ * <p>
+ * Multimap:get(key)==&gt;Collection&lt;&gt;（可能为空集合（默认容量为3）但不会为null，asMap.get()可能返回null）
  * <p>
  * 常使用ListMultimap或SetMultimap。
+ * <p>
+ * Multimap实现与底层数据结构对应关系：
+ * <ul>
+ *   <li>ArrayListMultimap: HashMap + ArrayList</li>
+ *   <li>HashMultimap: HashMap + HashSet</li>
+ *   <li>LinkedListMultimap: LinkedHashMap + LinkedList</li>
+ *   <li>LinkedHashMultimap: LinkedHashMap + LinkedHashMap</li>
+ *   <li>TreeMultimap: TreeMap + TreeSet</li>
+ *   <li>ImmutableListMultimap: ImmutableMap + ImmutableList</li>
+ *   <li>ImmutableSetMultimap: ImmutableMap + ImmutableSet</li>
+ * </ul>
+ * <p>
+ * 除了两个不可变形式的实现，其他所有实现都支持null键和null值。
  *
  * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
-// Multimap实现--key类似--value类似
-// ArrayListMultimap HashMap ArrayList
-// HashMultimap HashMap HashSet
-// LinkedListMultimap* LinkedHashMap* LinkedList*
-// LinkedHashMultimap** LinkedHashMap LinkedHashMap
-// TreeMultimap TreeMap TreeSet
-// ImmutableListMultimap ImmutableMap ImmutableList
-// ImmutableSetMultimap ImmutableMap ImmutableSet
-// 除了两个不可变形式的实现，其他所有实现都支持null键和null值;
-// LinkedListMultimap.entries()保留了所有键和值的迭代顺序;
-// LinkedHashMultimap保留了映射项的插入顺序，包括键插入的顺序，以及键映射的所有值的插入顺序.
 public class Multimap_Study {
     /**
      * 基本使用.

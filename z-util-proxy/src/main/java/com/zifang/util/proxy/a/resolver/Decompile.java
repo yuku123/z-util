@@ -7,6 +7,10 @@ import com.zifang.util.proxy.a.resolver.parser.util.ByteScanner;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * 反编译器<br>
+ * 负责从Class文件中提取信息并输出
+ */
 public class Decompile {
 
     ByteScanner scanner;
@@ -15,6 +19,11 @@ public class Decompile {
 
     MethodAttributeHandler methodAttributeHandler;
 
+    /**
+     * 构造方法，默认从指定路径加载Class文件
+     *
+     * @throws FileNotFoundException 如果文件未找到
+     */
     public Decompile() throws FileNotFoundException {
         FileInputStream inputStream = new FileInputStream("/Users/zifang/workplace/idea_workplace/bytecode_resolver/src/main/java/com/jiangchunbo/decompiler/SimpleClass.class");
         this.scanner = new ByteScanner(inputStream);
@@ -23,49 +32,29 @@ public class Decompile {
         methodAttributeHandler = new MethodAttributeHandler();
     }
 
-    public static void main(String[] args) throws Exception {
-        Decompile decompiler = new Decompile();
-
-        // 魔数
-        decompiler.magic();
-
-        // 版本号
-        decompiler.version();
-
-        // 常量池
-        decompiler.constant();
-
-        // 访问标志
-        decompiler.accessFlags();
-
-        // 类索引
-        decompiler.thisClass();
-
-        // 父类索引
-        decompiler.superClass();
-
-        // 接口集合
-        decompiler.interfaces();
-
-        decompiler.fields();
-
-        decompiler.methods();
-        System.out.println(decompiler.classFile);
-    }
-
     /**
+     * 解析魔数
+     * <p>
      * 魔数由 4 个字节组成，十六进制为 0xCAFEBABE
      */
     public void magic() {
         classFile.setMagic(this.scanner.readToInteger(4));
     }
 
+    /**
+     * 解析版本号
+     */
     public void version() {
         /*  */
         classFile.setMinorVersion(this.scanner.readToInteger(2));
         classFile.setMajorVersion(this.scanner.readToInteger(2));
     }
 
+    /**
+     * 解析常量池
+     *
+     * @throws Exception 如果解析失败
+     */
     public void constant() throws Exception {
         int classFileCount = this.scanner.readToInteger(2);
 
@@ -170,20 +159,40 @@ public class Decompile {
         }
     }
 
+    /**
+     * 解析访问标志
+     *
+     * @throws Exception 如果解析失败
+     */
     public void accessFlags() throws Exception {
         classFile.setAccessFlags(this.scanner.readToInteger(2));
 
     }
 
+    /**
+     * 解析thisClass索引
+     *
+     * @throws Exception 如果解析失败
+     */
     public void thisClass() throws Exception {
         int thisClassIndex = this.scanner.readToInteger(2);
 
     }
 
+    /**
+     * 解析superClass索引
+     *
+     * @throws Exception 如果解析失败
+     */
     public void superClass() throws Exception {
         int superClassIndex = this.scanner.readToInteger(2);
     }
 
+    /**
+     * 解析接口集合
+     *
+     * @throws Exception 如果解析失败
+     */
     public void interfaces() throws Exception {
         byte[] interfacesLen = new byte[2];
         this.scanner.readToInteger(2);
@@ -191,6 +200,11 @@ public class Decompile {
         int len = interfacesLen[0] << 8 & 0x0000ff00 | interfacesLen[1] & 0x000000ff;
     }
 
+    /**
+     * 解析字段集合
+     *
+     * @throws Exception 如果解析失败
+     */
     public void fields() throws Exception {
 
         int fieldsCount = this.scanner.readToInteger(2);
@@ -239,6 +253,11 @@ public class Decompile {
         }
     }
 
+    /**
+     * 解析方法集合
+     *
+     * @throws Exception 如果解析失败
+     */
     public void methods() throws Exception {
         int methodCount = this.scanner.readToInteger(2);
 
@@ -278,8 +297,14 @@ public class Decompile {
     }
 
 
+    /**
+     * 方法属性处理器
+     */
     private class MethodAttributeHandler {
 
+        /**
+         * 处理Code属性
+         */
         public void handleCode() {
             int maxStack = scanner.readToInteger(2); // 最大栈
             int maxLocals = scanner.readToInteger(2); // 最大本地变量

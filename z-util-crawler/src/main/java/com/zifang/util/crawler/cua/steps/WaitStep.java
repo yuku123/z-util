@@ -5,8 +5,8 @@ import com.zifang.util.crawler.cua.StepResult;
 import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
- * Step for waiting during execution.
- * Task: "wait", params: {type: time|element|script, target, timeoutSec}
+ * 等待步骤，用于在执行过程中等待。
+ * 任务关键字：wait，参数：{type: time|element|script, target, timeoutSec}
  */
 public class WaitStep implements Step {
 

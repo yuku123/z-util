@@ -34,12 +34,22 @@ public class GithubConfig {
         return new GithubConfig(token, "https://api.github.com");
     }
 
+    /**
+     * 使用指定 token 和 API URL 创建配置
+     *
+     * @param token  GitHub Personal Access Token
+     * @param apiUrl GitHub Enterprise API 地址（可选）
+     * @return GithubConfig 实例
+     */
     public static GithubConfig of(String token, String apiUrl) {
         return new GithubConfig(token, apiUrl);
     }
 
     /**
-     * 从环境变量 GITHUB_TOKEN 构建
+     * 从环境变量 GITHUB_TOKEN 构建配置
+     *
+     * @return GithubConfig 实例
+     * @throws IllegalStateException 当环境变量 GITHUB_TOKEN 未设置时抛出
      */
     public static GithubConfig fromEnv() {
         String token = System.getenv("GITHUB_TOKEN");

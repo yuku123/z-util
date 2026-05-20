@@ -6,25 +6,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 引用队列（java.lang.ref.ReferenceQueue）
+ * 引用队列演示类。
  * <p>
- * 引用队列配合Reference的子类等使用，当引用对象所指向的内存空间被GC回收后，该引用对象则被追加到引用队列的末尾
+ * 引用队列配合Reference的子类使用，当引用对象所指向的内存空间被GC回收后，
+ * 该引用对象会被追加到引用队列的末尾。
+ *
+ * @author lijing
+ * @since 2015/11/24
  */
 public class ReferenceQueueDemo {
 
     /**
-     * 此类提供三个方法，没有实现queue接口，也没有实现其它接口类，只提供移除队列的三个方法如下：
+     * 主方法，演示引用队列的使用。
      * <p>
-     * Reference<? extends T> ReferenceQueue#poll() ，从队列中出队一个元素，若队列为空则返回null。
-     * <p>
-     * Reference<? extends T> ReferenceQueue#remove()
-     * ，从队列中出队一个元素，若没有则阻塞直到有元素可出队。
-     * <p>
-     * Reference<? extends T> ReferenceQueue#remove(long timeout)
-     * ，从队列中出队一个元素，若没有则阻塞直到有元素可出队或超过timeout指定的毫秒数（由于采用wait(long
-     * timeout)方式实现等待，因此时间不能保证）。
+     * 此类提供三个方法：
+     * <ul>
+     *   <li>poll() - 从队列中出队一个元素，若队列为空则返回null</li>
+     *   <li>remove() - 从队列中出队一个元素，若没有则阻塞直到有元素可出队</li>
+     *   <li>remove(long timeout) - 从队列中出队一个元素，若没有则阻塞直到有元素可出队或超过timeout指定的毫秒数</li>
+     * </ul>
      *
-     * @param args
+     * @param args 命令行参数
      */
     public static void main(String[] args) {
         ReferenceQueue<Object> weakReferenceReferenceQueue = new ReferenceQueue<>();

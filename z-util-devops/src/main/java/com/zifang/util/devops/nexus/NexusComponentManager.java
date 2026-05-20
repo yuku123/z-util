@@ -116,6 +116,14 @@ public class NexusComponentManager {
         }
     }
 
+    /**
+     * 根据 GAV 坐标查找组件
+     *
+     * @param groupId    组ID
+     * @param artifactId  构件ID
+     * @param version     版本号
+     * @return 匹配的组件对象，未找到返回 null
+     */
     public Component findByGav(String groupId, String artifactId, String version) {
 
         List<Component> list = search(respository);
@@ -130,6 +138,14 @@ public class NexusComponentManager {
         return null;
     }
 
+    /**
+     * 检查指定 GAV 坐标的组件是否存在
+     *
+     * @param groupId    组ID
+     * @param artifactId  构件ID
+     * @param version     版本号
+     * @return 存在返回 true，不存在返回 false
+     */
     public Boolean checkExistGav(String groupId, String artifactId, String version) {
 
         List<Component> list = search(respository);

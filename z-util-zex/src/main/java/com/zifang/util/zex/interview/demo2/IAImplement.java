@@ -1,5 +1,15 @@
 package com.zifang.util.zex.interview.demo2;
 
+/**
+ * IA和IB接口的实现类。
+ * <p>
+ * 此类同时实现了IA和IB两个接口，并提供控制字符串的解析功能。
+ * 控制字符串格式：className$methodName=returnValue
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class IAImplement implements IA, IB {
 
     private String className;

@@ -1,9 +1,15 @@
 package com.zifang.util.zex.interview.demo2;
 
-import com.zifang.util.proxy.ProxyUtil;
-
-import java.lang.reflect.Proxy;
-
+/**
+ * 动态代理测试类。
+ * <p>
+ * 此类用于测试Java动态代理功能。
+ * 展示了如何使用ProxyUtil创建动态代理实例。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class Test {
 
 

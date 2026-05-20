@@ -80,6 +80,12 @@ public class Component implements Comparable<Component> {
         this.assets = assets;
     }
 
+    /**
+     * 比较两个组件的版本号
+     *
+     * @param o 要比较的组件
+     * @return 版本号比较结果
+     */
     @Override
     public int compareTo(Component o) {
         return this.version.compareTo(o.getVersion());

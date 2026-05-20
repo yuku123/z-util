@@ -5,6 +5,16 @@ import java.math.RoundingMode;
 
 /**
  * 金钱处理工具类
+ * <p>
+ * 提供人民币金额的各种转换和格式化功能，包括：
+ * <ul>
+ *   <li>人民币金额转换为中文大写</li>
+ *   <li>人民币金额转换为会计格式（千分位分隔）</li>
+ *   <li>人民币金额按指定单位格式化（如万元、亿元）</li>
+ *   <li>数字金额转换为中文大写</li>
+ * </ul>
+ *
+ * @author chenssy
  */
 public class MoneyUtil {
 
@@ -37,12 +47,13 @@ public class MoneyUtil {
     private static final int MONEY_PRECISION = 2;
 
     /**
-     * 人民币转换为大写,格式为：x万x千x百x十x元x角x分
+     * 将人民币金额转换为中文大写形式
+     * <p>
+     * 接收字符串格式的金额，格式为：x万x千x百x十x元x角x分
      *
-     * @param numberOfMoney 传入的金额
-     * @return
-     * @autor:chenssy
-     * @date:2014年8月7日
+     * @param numberOfMoney 传入的金额字符串
+     * @return 中文大写金额字符串
+     * @throws NumberFormatException 如果输入的字符串不是有效的数字格式
      */
     public static String number2CNMontray(String numberOfMoney) {
         return number2CNMontray(new BigDecimal(numberOfMoney));
@@ -50,10 +61,13 @@ public class MoneyUtil {
 
 
     /**
-     * 人民币转换为大写,格式为：x万x千x百x十x元x角x分
+     * 将人民币金额（BigDecimal类型）转换为中文大写形式
+     * <p>
+     * 将金额转换为中文大写表示，格式为：x万x千x百x十x元x角x分
+     * 支持负数，零元整返回"零元整"
      *
-     * @param numberOfMoney 传入的金额
-     * @return
+     * @param numberOfMoney 传入的金额（BigDecimal类型）
+     * @return 中文大写金额字符串
      */
     public static String number2CNMontray(BigDecimal numberOfMoney) {
         StringBuffer sb = new StringBuffer();
@@ -128,46 +142,54 @@ public class MoneyUtil {
     }
 
     /**
-     * 将人民币转换为会计格式金额(xxxx,xxxx,xxxx.xx),保留两位小数
+     * 将人民币转换为会计格式金额（千分位分隔），保留两位小数
+     * <p>
+     * 格式为：xxxx,xxxx,xxxx.xx
      *
      * @param money 待转换的金额
-     * @return
+     * @return 会计格式的金额字符串
      */
     public static String accountantMoney(BigDecimal money) {
         return accountantMoney(money, 2, 1);
     }
 
     /**
-     * 格式化金额，显示为xxx万元，xxx百万,xxx亿
+     * 格式化金额，按指定单位显示
+     * <p>
+     * 将金额除以指定的格式化值，并保留指定的小数位数。
+     * 例如：传入10000元，divisor=10000，scale=2，返回"1.00万元"
      *
      * @param money   待处理的金额
      * @param scale   小数点后保留的位数
-     * @param divisor 格式化值（10:十元、100:百元,1000千元，10000万元......）
-     * @return
+     * @param divisor 格式化值（10:十元、100:百元、1000:千元、10000:万元、100000000:亿元）
+     * @return 格式化后的金额字符串，带单位后缀
      */
     public static String getFormatMoney(BigDecimal money, int scale, double divisor) {
         return formatMoney(money, scale, divisor) + getCellFormat(divisor);
     }
 
     /**
-     * 获取会计格式的人民币(格式为:xxxx,xxxx,xxxx.xx)
+     * 获取会计格式的人民币，按指定单位显示
+     * <p>
+     * 将金额先转换为会计格式（千分位分隔），再按指定单位格式化。
+     * 例如：传入123456789元，divisor=100000000，scale=2，返回"1,234.57亿元"
      *
      * @param money   待处理的金额
      * @param scale   小数点后保留的位数
-     * @param divisor 格式化值（10:十元、100:百元,1000千元，10000万元......）
-     * @return
+     * @param divisor 格式化值（10:十元、100:百元、1000:千元、10000:万元、100000000:亿元）
+     * @return 会计格式的金额字符串，带单位后缀
      */
     public static String getAccountantMoney(BigDecimal money, int scale, double divisor) {
         return accountantMoney(money, scale, divisor) + getCellFormat(divisor);
     }
 
     /**
-     * 将人民币转换为会计格式金额(xxxx,xxxx,xxxx.xx)
+     * 将人民币转换为会计格式金额（千分位分隔）
      *
      * @param money   待处理的金额
      * @param scale   小数点后保留的位数
      * @param divisor 格式化值
-     * @return
+     * @return 会计格式的金额字符串
      */
     private static String accountantMoney(BigDecimal money, int scale, double divisor) {
         String disposeMoneyStr = formatMoney(money, scale, divisor);
@@ -208,12 +230,12 @@ public class MoneyUtil {
     }
 
     /**
-     * 格式化金额，显示为xxx万元，xxx百万,xxx亿
+     * 格式化金额数值
      *
      * @param money   待处理的金额
      * @param scale   小数点后保留的位数
      * @param divisor 格式化值
-     * @return
+     * @return 格式化后的金额数值字符串
      */
     private static String formatMoney(BigDecimal money, int scale, double divisor) {
         if (divisor == 0) {
@@ -226,6 +248,12 @@ public class MoneyUtil {
         return money.divide(divisorBD, scale, RoundingMode.HALF_UP).toString();
     }
 
+    /**
+     * 根据格式化值获取对应的单位字符串
+     *
+     * @param divisor 格式化值
+     * @return 对应的单位字符串（如"元"、"万元"、"亿元"等）
+     */
     private static String getCellFormat(double divisor) {
         String str = String.valueOf(divisor);
         int len = str.substring(0, str.indexOf(".")).length();
@@ -266,10 +294,13 @@ public class MoneyUtil {
     }
 
     /**
-     * 数字金额大写转换 先写个完整的然后将如零拾替换成零
+     * 数字金额大写转换
+     * <p>
+     * 将数字金额转换为中文大写形式，支持角分显示。
+     * 例如：1234.56 转换为 壹仟贰佰叁拾肆元伍角陆分
      *
-     * @param n 数字
-     * @return 中文大写数字
+     * @param n 数字金额
+     * @return 中文大写金额字符串
      */
     public static String digitUppercase(double n) {
         String[] fraction = {"角", "分"};

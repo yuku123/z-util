@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Context holder for crawler pipeline execution.
- * Contains request metadata, extracted data, errors, screenshots, and custom metadata.
+ * 爬虫管道执行上下文持有类，包含请求元数据、提取数据、错误信息、截图和自定义元数据。
  */
 public class PipelineContext {
 
@@ -20,6 +19,9 @@ public class PipelineContext {
     private Map<String, File> screenshots;
     private Map<String, Object> metadata;
 
+    /**
+     * 构造 PipelineContext。
+     */
     public PipelineContext() {
         this.headers = new HashMap<>();
         this.cookies = new HashMap<>();
@@ -29,120 +31,233 @@ public class PipelineContext {
         this.metadata = new HashMap<>();
     }
 
-    // Request metadata
+    // 请求元数据
 
+    /**
+     * 获取 URL。
+     * @return 请求 URL
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * 设置 URL。
+     * @param url 请求 URL
+     */
     public void setUrl(String url) {
         this.url = url;
     }
 
+    /**
+     * 获取请求头。
+     * @return 请求头映射
+     */
     public Map<String, String> getHeaders() {
         return headers;
     }
 
+    /**
+     * 设置请求头。
+     * @param headers 请求头映射
+     */
     public void setHeaders(Map<String, String> headers) {
         this.headers = headers;
     }
 
+    /**
+     * 获取 Cookie。
+     * @return Cookie 映射
+     */
     public Map<String, String> getCookies() {
         return cookies;
     }
 
+    /**
+     * 设置 Cookie。
+     * @param cookies Cookie 映射
+     */
     public void setCookies(Map<String, String> cookies) {
         this.cookies = cookies;
     }
 
-    // Extracted data
+    // 提取的数据
 
+    /**
+     * 获取数据映射。
+     * @return 数据映射
+     */
     public Map<String, Object> getData() {
         return data;
     }
 
+    /**
+     * 设置数据映射。
+     * @param data 数据映射
+     */
     public void setData(Map<String, Object> data) {
         this.data = data;
     }
 
+    /**
+     * 存入数据。
+     * @param key 键
+     * @param value 值
+     */
     public void put(String key, Object value) {
         this.data.put(key, value);
     }
 
-    // Aliases for backward compatibility
+    /**
+     * 存入数据（向后兼容别名）。
+     * @param key 键
+     * @param value 值
+     */
     public void putData(String key, Object value) {
         this.data.put(key, value);
     }
 
+    /**
+     * 获取数据。
+     * @param key 键
+     * @return 值
+     */
     public Object getData(String key) {
         return this.data.get(key);
     }
 
+    /**
+     * 获取数据（向后兼容别名）。
+     * @param key 键
+     * @return 值
+     */
     public Object get(String key) {
         return this.data.get(key);
     }
 
-    // Parameter access (alias for backward compatibility)
+    // 参数访问（向后兼容别名）
+    /**
+     * 获取参数。
+     * @param key 键
+     * @return 值
+     */
     public Object getParameter(String key) {
         return this.data.get(key);
     }
 
+    /**
+     * 存入参数。
+     * @param key 键
+     * @param value 值
+     */
     public void putParameter(String key, Object value) {
         this.data.put(key, value);
     }
 
-    // Raw content
+    // 原始内容
 
+    /**
+     * 获取 HTML 内容。
+     * @return HTML 字符串
+     */
     public String getHtml() {
         return html;
     }
 
+    /**
+     * 设置 HTML 内容。
+     * @param html HTML 字符串
+     */
     public void setHtml(String html) {
         this.html = html;
     }
 
+    /**
+     * 获取 JSON 内容。
+     * @return JSON 字符串
+     */
     public String getJson() {
         return json;
     }
 
+    /**
+     * 设置 JSON 内容。
+     * @param json JSON 字符串
+     */
     public void setJson(String json) {
         this.json = json;
     }
 
-    // Errors
+    // 错误信息
 
+    /**
+     * 获取错误映射。
+     * @return 错误映射
+     */
     public Map<String, String> getErrors() {
         return errors;
     }
 
+    /**
+     * 添加错误信息。
+     * @param stage 阶段名称
+     * @param message 错误信息
+     */
     public void addError(String stage, String message) {
         this.errors.put(stage, message);
     }
 
+    /**
+     * 判断是否存在错误。
+     * @return 是否存在错误
+     */
     public boolean hasErrors() {
         return !errors.isEmpty();
     }
 
-    // Screenshots
+    // 截图
 
+    /**
+     * 获取截图映射。
+     * @return 截图映射
+     */
     public Map<String, File> getScreenshots() {
         return screenshots;
     }
 
+    /**
+     * 添加截图。
+     * @param name 截图名称
+     * @param screenshot 截图文件
+     */
     public void addScreenshot(String name, File screenshot) {
         this.screenshots.put(name, screenshot);
     }
 
-    // Custom metadata
+    // 自定义元数据
 
+    /**
+     * 获取元数据映射。
+     * @return 元数据映射
+     */
     public Map<String, Object> getMetadata() {
         return metadata;
     }
 
+    /**
+     * 设置元数据。
+     * @param key 键
+     * @param value 值
+     */
     public void setMetadata(String key, Object value) {
         this.metadata.put(key, value);
     }
 
+    /**
+     * 获取元数据。
+     * @param key 键
+     * @return 值
+     */
     public Object getMetadata(String key) {
         return this.metadata.get(key);
     }

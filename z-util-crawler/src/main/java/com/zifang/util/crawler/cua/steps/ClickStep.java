@@ -5,8 +5,8 @@ import com.zifang.util.crawler.cua.StepResult;
 import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
- * Step for clicking on an element.
- * Task: "click", params: {css, waitMs}
+ * 点击步骤，用于点击页面元素。
+ * 任务关键字：click，参数：{css, waitMs}
  */
 public class ClickStep implements Step {
 

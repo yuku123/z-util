@@ -1,7 +1,7 @@
 /*
  * 文件名：Splitter_Study.java
  * 版权：Copyright 2007-2017 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： Splitter_Study.java
+ * 描述： Guava Splitter学习类
  * 修改人：zxiaofan
  * 修改时间：2017年1月4日
  * 修改内容：新增
@@ -17,7 +17,32 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Guava Splitter学习类。
+ * <p>
+ * Splitter提供了强大的字符串拆分功能，支持多种拆分方式。
+ * <p>
+ * 拆分器工厂方法：
+ * <ul>
+ *   <li>Splitter.on(char)：按单个字符拆分</li>
+ *   <li>Splitter.on(String)：按字符串拆分</li>
+ *   <li>Splitter.on(CharMatcher)：按字符匹配器拆分</li>
+ *   <li>Splitter.on(Pattern) / Splitter.onPattern(String)：按正则表达式拆分</li>
+ *   <li>Splitter.fixedLength(int)：按固定长度拆分</li>
+ * </ul>
+ * <p>
+ * 拆分器修饰符：
+ * <ul>
+ *   <li>omitEmptyStrings()：忽略空字符串</li>
+ *   <li>limit(int n)：限制拆分出的字符串数量</li>
+ *   <li>trimResults()：移除结果字符串的前导空白和尾部空白</li>
+ *   <li>trimResults(CharMatcher)：移除结果字符串的前导匹配字符和尾部匹配字符</li>
+ * </ul>
+ * <p>
+ * splitter实例总是不可变，线程安全的，可将其定义为static final常量。
+ *
  * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
 public class Splitter_Study {
     String str = ",a,,b,";

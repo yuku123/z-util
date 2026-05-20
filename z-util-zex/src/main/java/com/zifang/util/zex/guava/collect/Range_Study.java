@@ -1,7 +1,7 @@
 /*
  * 文件名：RangeSet_Study.java
  * 版权：Copyright 2007-2019 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： RangeSet_Study.java
+ * 描述： Guava RangeSet和RangeMap学习类
  * 修改人：zxiaofan
  * 修改时间：2019年12月27日
  * 修改内容：新增
@@ -15,9 +15,14 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * RangeSet<C extends Comparable>、RangeMap
+ * Guava RangeSet和RangeMap学习类。
+ * <p>
+ * RangeSet表示一组不相交的区间集合，支持添加、移除、补集等操作。
+ * RangeMap描述了"不相交的、非空的区间"到特定值的映射。
  *
  * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
 public class Range_Study {
     @Test

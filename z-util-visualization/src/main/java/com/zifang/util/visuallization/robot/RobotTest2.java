@@ -4,6 +4,10 @@ package com.zifang.util.visuallization.robot;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+/**
+ * Robot自动化测试类2
+ * 演示使用Robot自动操作IDE创建Java工程和输入代码
+ */
 public class RobotTest2 {
 
     private static Robot robot;

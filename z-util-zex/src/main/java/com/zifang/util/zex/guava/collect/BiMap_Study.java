@@ -1,7 +1,7 @@
 /*
  * 文件名：BiMap_Study.java
  * 版权：Copyright 2007-2019 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： BiMap_Study.java
+ * 描述： Guava BiMap学习类
  * 修改人：zxiaofan
  * 修改时间：2019年12月26日
  * 修改内容：新增
@@ -18,21 +18,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * inverse()反转BiMap<K, V>的键值映射.inverse的map是一个视图，在这个反转后的map中的任何增删改操作都会影响原来的map。
+ * Guava BiMap学习类。
  * <p>
- * key/value均唯一，因此 values()返回的是Set而不是普通的Collection.
+ * BiMap是一种双向映射的Map，key-value唯一，value也唯一。
+ * inverse()方法可以反转BiMap的键值映射，反转后的map是一个视图，任何增删改操作都会影响原map。
  * <p>
- * 把键映射到已经存在的值，会抛出IllegalArgumentException异常。想要强制替换特定值的键，使用 BiMap.inverse().forcePut(key, value)。
+ * key/value均唯一，因此values()返回的是Set而不是普通的Collection。
+ * 把键映射到已经存在的值，会抛出IllegalArgumentException异常。
+ * 想要强制替换特定值的键，使用BiMap.inverse().forcePut(key, value)。
  * <p>
- * （key-value随意put，value-key使用inverse().forcePut强制替换）
+ * BiMap实现与底层数据结构对应关系：
+ * <ul>
+ *   <li>HashMap + HashMap = HashBiMap</li>
+ *   <li>ImmutableMap + ImmutableMap = ImmutableBiMap</li>
+ *   <li>EnumMap + EnumMap = EnumBiMap</li>
+ *   <li>EnumMap + HashMap = EnumHashBiMap</li>
+ * </ul>
  *
  * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
-// Key-Value Map Impl--Value-Key Map Impl--Corresponding BiMap
-// HashMap--HashMap--HashBiMap
-// ImmutableMap--ImmutableMap--ImmutableBiMap
-// EnumMap--EnumMap--EnumBiMap
-// EnumMap--HashMap--EnumHashBiMap.
 public class BiMap_Study {
     /**
      * BiMap基础方法，其他实现类亦有如下方法.

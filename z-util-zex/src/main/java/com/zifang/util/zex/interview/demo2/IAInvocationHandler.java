@@ -3,6 +3,16 @@ package com.zifang.util.zex.interview.demo2;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+/**
+ * IA接口的动态代理调用处理器。
+ * <p>
+ * 此类实现了InvocationHandler接口，用于处理IA接口方法的动态代理调用。
+ * 当调用代理对象的方法时，会触发此处理器的invoke方法。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class IAInvocationHandler implements InvocationHandler {
     private String s;
     private IAImplement iaImplement;

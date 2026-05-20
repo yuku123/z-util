@@ -1,6 +1,11 @@
 package com.zifang.util.devops.nexus;
 
 
+/**
+ * Nexus 仓库中的资产（Asset）实体类
+ * <p>
+ * 代表 Nexus 组件库中的一个文件资产，包含资产的路径、下载地址、校验和等信息
+ */
 public class Asset {
 
     private String id;

@@ -2,20 +2,27 @@ package com.zifang.util.visuallization.swing.algrithm.lesson3.moneyExperimentBas
 
 import java.awt.*;
 
+/**
+ * 金钱实验可视化器基础版
+ * 演示随机财富分配实验的基本效果
+ */
 public class AlgoVisualizer {
 
     private static int DELAY = 10;
     private int[] money;
     private AlgoFrame frame;
 
+    /**
+     * 创建可视化器
+     * @param sceneWidth 场景宽度
+     * @param sceneHeight 场景高度
+     */
     public AlgoVisualizer(int sceneWidth, int sceneHeight) {
 
-        // 初始化数据
         money = new int[100];
         for (int i = 0; i < money.length; i++)
             money[i] = 100;
 
-        // 初始化视图
         EventQueue.invokeLater(() -> {
             frame = new AlgoFrame("Money Problem", sceneWidth, sceneHeight);
             new Thread(() -> {
@@ -24,6 +31,9 @@ public class AlgoVisualizer {
         });
     }
 
+    /**
+     * 运行动画循环
+     */
     public void run() {
 
         while (true) {

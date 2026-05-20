@@ -3,7 +3,9 @@ package com.zifang.util.extra;
 /**
  * 经纬度坐标计算工具类
  * <p>
- * 提供地球上两点之间距离的计算功能
+ * 提供地球上两点之间距离的计算功能，基于Haversine公式计算球面距离
+ *
+ * @author zifang
  */
 public final class CoordinateUtil {
     /**
@@ -16,6 +18,7 @@ public final class CoordinateUtil {
      * @param long2 第二点经度，单位：度，取值范围 [-180, 180]
      * @param lat2  第二点纬度，单位：度，取值范围 [-90, 90]
      * @return 两点之间的距离，单位：米
+     * @throws IllegalArgumentException 如果经纬度参数超出合法范围
      */
     public static double distance(double long1, double lat1, double long2, double lat2) {
         double a, b, R;

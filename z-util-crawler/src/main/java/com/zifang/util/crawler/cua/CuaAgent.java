@@ -7,8 +7,8 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Main CUA (Computer Use Agent) entry point.
- * Executes natural language tasks using rule-based planning and browser automation.
+ * CUA（计算机使用代理）主入口类。
+ * 使用基于规则的规划和浏览器自动化执行自然语言任务。
  */
 public class CuaAgent {
 
@@ -16,6 +16,9 @@ public class CuaAgent {
     private final RuleBasedPlanner planner;
     private final BrowserClient browserClient;
 
+    /**
+     * 使用默认配置的 ChromeDriver 构造 CuaAgent。
+     */
     public CuaAgent() {
         this.registry = new OperationRegistry();
         this.planner = new RuleBasedPlanner(registry);
@@ -23,6 +26,10 @@ public class CuaAgent {
         this.browserClient = new BrowserClient(driver);
     }
 
+    /**
+     * 使用指定的 BrowserClient 构造 CuaAgent。
+     * @param browserClient 浏览器客户端实例
+     */
     public CuaAgent(BrowserClient browserClient) {
         this.registry = new OperationRegistry();
         this.planner = new RuleBasedPlanner(registry);
@@ -59,10 +66,18 @@ public class CuaAgent {
                         .build());
     }
 
+    /**
+     * 获取操作注册表。
+     * @return 操作注册表实例
+     */
     public OperationRegistry getRegistry() {
         return registry;
     }
 
+    /**
+     * 获取浏览器客户端。
+     * @return 浏览器客户端实例
+     */
     public BrowserClient getBrowserClient() {
         return browserClient;
     }

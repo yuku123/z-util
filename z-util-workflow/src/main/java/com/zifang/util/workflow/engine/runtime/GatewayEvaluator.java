@@ -1,216 +1,176 @@
 package com.zifang.util.workflow.engine.runtime;
 
+import org.springframework.expression.EvaluationContext;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
+
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * 网关条件评估器。
- * 在运行时评估网关条件，支持简单的EL-like表达式：
+ * 基于 Spring Expression Language (SpEL) 实现，支持完整的表达式语法：
  * <ul>
- *   <li>${var == value} - 相等比较</li>
- *   <li>${var > 10} - 数值大于比较</li>
- *   <li>${var < 10} - 数值小于比较</li>
- *   <li>${var >= 10} - 数值大于等于比较</li>
- *   <li>${var <= 10} - 数值小于等于比较</li>
- *   <li>${!var} - 取反</li>
- *   <li>${var == "text"} - 带引号的字符串比较</li>
- *   <li>${var != value} - 不等于</li>
+ *   <li>比较运算符: ==, !=, &lt;, &gt;, &lt;=, &gt;=</li>
+ *   <li>逻辑运算符: &amp;&amp;, ||, !</li>
+ *   <li>字符串匹配: 'text', "text"</li>
+ *   <li>括号分组: (expr)</li>
+ *   <li>方法调用: object.method()</li>
+ *   <li>三目运算符: condition ? trueVal : falseVal</li>
+ * </ul>
+ *
+ * 输入格式: ${expression}，例如:
+ * <ul>
+ *   <li>${level >= 1}</li>
+ *   <li>${amount > 1000 && amount <= 5000}</li>
+ *   <li>${status == 'approved'}</li>
+ *   <li>${!isDisabled}</li>
  * </ul>
  *
  * @see WorkflowRuntimeEngine
  */
 public class GatewayEvaluator {
 
-    // Pattern to match expressions: ${...}
-    private static final Pattern EXPRESSION_PATTERN = Pattern.compile("\\$\\{([^}]+)}");
+    private final ExpressionParser expressionParser;
+
+    public GatewayEvaluator() {
+        this.expressionParser = new SpelExpressionParser();
+    }
 
     /**
-     * Evaluate a gateway condition expression against variables
+     * Evaluate a gateway condition expression against variables.
      *
-     * @param expression the expression to evaluate (e.g., "${approved == true}")
-     * @param variables the runtime variables
+     * @param expression the expression to evaluate (e.g., "${approved == true}" or "${amount > 1000 && amount <= 5000}")
+     * @param variables  the runtime variables available in the expression context
      * @return true if the condition is satisfied, false otherwise
+     * @throws IllegalArgumentException if the expression format is invalid
      */
     public boolean evaluate(String expression, Map<String, Object> variables) {
         if (expression == null || expression.trim().isEmpty()) {
             return true;
         }
 
-        Matcher matcher = EXPRESSION_PATTERN.matcher(expression);
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid expression format: " + expression);
-        }
+        String spelExpression = toSpEL(expression);
 
-        String condition = matcher.group(1).trim();
-        return evaluateCondition(condition, variables);
-    }
+        EvaluationContext context = createContext(variables);
 
-    private boolean evaluateCondition(String condition, Map<String, Object> variables) {
-        // Handle negation: !var
-        if (condition.startsWith("!")) {
-            String varName = condition.substring(1).trim();
-            Object value = getVariableValue(varName, variables);
-            return isFalse(value);
-        }
-
-        // Handle equality: var == value or var == "text"
-        if (condition.contains("==")) {
-            String[] parts = condition.split("==");
-            if (parts.length == 2) {
-                String varName = parts[0].trim();
-                String expectedValue = parts[1].trim();
-                Object actualValue = getVariableValue(varName, variables);
-                return compareEquality(actualValue, expectedValue);
-            }
-        }
-
-        // Handle not equal: var != value
-        if (condition.contains("!=")) {
-            String[] parts = condition.split("!=");
-            if (parts.length == 2) {
-                String varName = parts[0].trim();
-                String expectedValue = parts[1].trim();
-                Object actualValue = getVariableValue(varName, variables);
-                return !compareEquality(actualValue, expectedValue);
-            }
-        }
-
-        // Handle greater than: var > value
-        if (condition.contains(">")) {
-            String[] parts = condition.split(">");
-            if (parts.length == 2) {
-                String varName = parts[0].trim();
-                String strValue = parts[1].trim();
-                Object actualValue = getVariableValue(varName, variables);
-                return compareNumeric(actualValue, strValue) > 0;
-            }
-        }
-
-        // Handle less than: var < value
-        if (condition.contains("<")) {
-            // Make sure it's not <= or >=
-            if (!condition.contains("<=")) {
-                String[] parts = condition.split("<");
-                if (parts.length == 2) {
-                    String varName = parts[0].trim();
-                    String strValue = parts[1].trim();
-                    Object actualValue = getVariableValue(varName, variables);
-                    return compareNumeric(actualValue, strValue) < 0;
-                }
-            }
-        }
-
-        // Handle greater than or equal: var >= value
-        if (condition.contains(">=")) {
-            String[] parts = condition.split(">=");
-            if (parts.length == 2) {
-                String varName = parts[0].trim();
-                String strValue = parts[1].trim();
-                Object actualValue = getVariableValue(varName, variables);
-                return compareNumeric(actualValue, strValue) >= 0;
-            }
-        }
-
-        // Handle less than or equal: var <= value
-        if (condition.contains("<=")) {
-            String[] parts = condition.split("<=");
-            if (parts.length == 2) {
-                String varName = parts[0].trim();
-                String strValue = parts[1].trim();
-                Object actualValue = getVariableValue(varName, variables);
-                return compareNumeric(actualValue, strValue) <= 0;
-            }
-        }
-
-        // Simple variable reference: var (truthy check)
-        Object value = getVariableValue(condition, variables);
-        return !isFalse(value);
-    }
-
-    private Object getVariableValue(String varName, Map<String, Object> variables) {
-        if (variables == null || !variables.containsKey(varName)) {
-            return null;
-        }
-        return variables.get(varName);
-    }
-
-    private boolean isFalse(Object value) {
-        if (value == null) {
-            return true;
-        }
-        if (value instanceof Boolean) {
-            return !((Boolean) value);
-        }
-        if (value instanceof String) {
-            String str = ((String) value).toLowerCase();
-            return str.isEmpty() || str.equals("false") || str.equals("null");
-        }
-        return false;
-    }
-
-    private boolean compareEquality(Object actualValue, String expectedValue) {
-        // Handle quoted string values
-        if (expectedValue.startsWith("\"") && expectedValue.endsWith("\"")) {
-            String expected = expectedValue.substring(1, expectedValue.length() - 1);
-            if (actualValue == null) {
-                return false;
-            }
-            return actualValue.toString().equals(expected);
-        }
-
-        // Handle boolean values
-        if (expectedValue.equalsIgnoreCase("true") || expectedValue.equalsIgnoreCase("false")) {
-            boolean expected = Boolean.parseBoolean(expectedValue);
-            if (actualValue instanceof Boolean) {
-                return ((Boolean) actualValue) == expected;
-            }
-            return false;
-        }
-
-        // Handle null
-        if (expectedValue.equalsIgnoreCase("null")) {
-            return actualValue == null;
-        }
-
-        // Handle numeric comparison
-        if (actualValue instanceof Number) {
-            try {
-                double actual = ((Number) actualValue).doubleValue();
-                double expected = Double.parseDouble(expectedValue);
-                return actual == expected;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-
-        // String comparison
-        return actualValue != null && actualValue.toString().equals(expectedValue);
-    }
-
-    private int compareNumeric(Object actualValue, String strValue) {
-        if (actualValue == null) {
-            throw new IllegalArgumentException("Cannot compare null value numerically");
-        }
-
-        double actual;
-        if (actualValue instanceof Number) {
-            actual = ((Number) actualValue).doubleValue();
-        } else {
-            try {
-                actual = Double.parseDouble(actualValue.toString());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Cannot convert value to number: " + actualValue);
-            }
-        }
-
-        double expected;
         try {
-            expected = Double.parseDouble(strValue);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Cannot parse expected value as number: " + strValue);
+            Expression exp = expressionParser.parseExpression(spelExpression);
+            Object result = exp.getValue(context);
+
+            if (result instanceof Boolean) {
+                return (Boolean) result;
+            }
+            if (result == null) {
+                return false;
+            }
+            return Boolean.parseBoolean(result.toString());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to evaluate expression: " + expression, e);
+        }
+    }
+
+    /**
+     * 将 ${...} 格式转换为 SpEL 表达式。
+     * <p>
+     * 例如: ${level >= 1} -> #level >= 1
+     * <p>
+     * SpEL 中 # 前缀用于引用 setVariable() 设置的变量。
+     */
+    private String toSpEL(String expression) {
+        String trimmed = expression.trim();
+        String inner;
+        if (trimmed.startsWith("${") && trimmed.endsWith("}")) {
+            inner = trimmed.substring(2, trimmed.length() - 1).trim();
+        } else {
+            inner = trimmed;
         }
 
-        return Double.compare(actual, expected);
+        // 将变量名转换为 SpEL 的 #variableName 格式
+        // 例如: "level >= 1" -> "#level >= 1"
+        // 例如: "amount > 1000 && amount <= 5000" -> "#amount > 1000 && #amount <= 5000"
+        return replaceVariablesWithHashPrefix(inner);
+    }
+
+    /**
+     * 为表达式中的变量名添加 # 前缀。
+     * 使用简单的标识符检测来避免替换字符串字面量中的内容，
+     * 以及方法调用中的方法名（identifier 后紧跟 '('）。
+     */
+    private String replaceVariablesWithHashPrefix(String expression) {
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        int len = expression.length();
+
+        while (i < len) {
+            char ch = expression.charAt(i);
+
+            // 检测字符串字面量（单引号或双引号），跳过其内容
+            if (ch == '\'' || ch == '"') {
+                char quote = ch;
+                result.append(ch);
+                i++;
+                while (i < len) {
+                    char c = expression.charAt(i);
+                    result.append(c);
+                    if (c == quote && (i == 0 || expression.charAt(i - 1) != '\\')) {
+                        i++;
+                        break;
+                    }
+                    i++;
+                }
+                continue;
+            }
+
+            // 检测标识符开始（字母或下划线）
+            if (Character.isLetter(ch) || ch == '_') {
+                StringBuilder identifier = new StringBuilder();
+                int start = i;
+                while (i < len && (Character.isLetterOrDigit(expression.charAt(i)) || expression.charAt(i) == '_')) {
+                    identifier.append(expression.charAt(i));
+                    i++;
+                }
+                String ident = identifier.toString();
+
+                // 标识符后紧跟 '(' 说明是方法调用，不加 # 前缀
+                if (i < len && expression.charAt(i) == '(') {
+                    result.append(ident);
+                    continue;
+                }
+
+                // SpEL 关键字不需要加 #
+                if (isSpelKeyword(ident)) {
+                    result.append(ident);
+                } else {
+                    result.append('#').append(ident);
+                }
+                continue;
+            }
+
+            // 其他字符（操作符、括号、空格等）
+            result.append(ch);
+            i++;
+        }
+
+        return result.toString();
+    }
+
+    private boolean isSpelKeyword(String word) {
+        return word.equals("true") || word.equals("false") || word.equals("null") || word.equals("and")
+                || word.equals("or") || word.equals("not") || word.equals("div") || word.equals("mod");
+    }
+
+    /**
+     * 创建 SpEL 评估上下文，将 Map 中的变量注入到上下文中。
+     */
+    private EvaluationContext createContext(Map<String, Object> variables) {
+        StandardEvaluationContext context = new StandardEvaluationContext();
+        if (variables != null) {
+            for (Map.Entry<String, Object> entry : variables.entrySet()) {
+                context.setVariable(entry.getKey(), entry.getValue());
+            }
+        }
+        return context;
     }
 }

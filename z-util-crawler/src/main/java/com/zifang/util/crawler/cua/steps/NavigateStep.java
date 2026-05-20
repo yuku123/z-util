@@ -5,8 +5,8 @@ import com.zifang.util.crawler.cua.StepResult;
 import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
- * Step for navigating to a URL.
- * Task: "navigate", params: {url}
+ * 导航步骤，用于打开指定 URL。
+ * 任务关键字：navigate，参数：{url}
  */
 public class NavigateStep implements Step {
 

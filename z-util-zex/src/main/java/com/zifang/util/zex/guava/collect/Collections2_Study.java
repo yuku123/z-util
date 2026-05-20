@@ -1,7 +1,7 @@
 /*
  * 文件名：Collections2_Study.java
  * 版权：Copyright 2007-2017 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： Collections2_Study.java
+ * 描述： Guava Collections2学习类
  * 修改人：zxiaofan
  * 修改时间：2017年1月16日
  * 修改内容：新增
@@ -23,7 +23,14 @@ import java.util.List;
 
 
 /**
+ * Guava Collections2学习类。
+ * <p>
+ * Collections2提供了对集合进行过滤和转换的工具方法。
+ * 主要功能包括filter（过滤）和transform（转换）。
+ *
  * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
 public class Collections2_Study {
     List<UserBo> listUser = Lists.newArrayList(null, new UserBo("nameA", 12), new UserBo("nameB", 16), new UserBo("nameAC", 19));

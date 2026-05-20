@@ -14,6 +14,10 @@ import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.util.Enumeration;
 
+/**
+ * 管理界面主窗口
+ * 展示树形结构的企业管理系统导航面板
+ */
 public class ManagerFrame extends JFrame {
 
     private static final int DISCONTIGUOUS_TREE_SELECTION = 4;//单选的常量值为1，连选的常量值为2，多选的常量值为4
@@ -139,6 +143,10 @@ public class ManagerFrame extends JFrame {
         mainSplitPane.setDividerLocation(200);//设定分割线的距离左边的位置
     }
 
+    /**
+     * 启动管理界面
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
         ManagerFrame managerFrame = new ManagerFrame();
         managerFrame.init();//当前管理系统的全量初始化

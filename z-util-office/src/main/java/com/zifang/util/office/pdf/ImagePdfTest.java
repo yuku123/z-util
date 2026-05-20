@@ -13,6 +13,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
+/**
+ * PDF图片提取测试类
+ * 演示如何从PDF文档中提取嵌入的图片
+ */
 public class ImagePdfTest {
     public static void main(String[] args) throws IOException {
         File file = new File("/Users/zifang/Downloads/现代西班牙语1.pdf");

@@ -5,8 +5,8 @@ import com.zifang.util.crawler.cua.StepResult;
 import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
- * Step for switching between windows, frames, or tabs.
- * Task: "switch", params: {type: window|frame|tab, target}
+ * 切换步骤，用于在窗口、frame 或标签页之间切换。
+ * 任务关键字：switch，参数：{type: window|frame|tab, target}
  */
 public class SwitchWindowStep implements Step {
 

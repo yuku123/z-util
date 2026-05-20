@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * @author: wuhongjun
- * @version:1.0
+ * GIF 图像 LZW 压缩编码器。
+ * 基于 Lempel-Ziv 压缩算法（源于 compress.c），用于将像素数据编码为 GIF 格式。
+ * 该类由 David Rowley 修改以适应 GIF 格式。
+ *
+ * @author wuhongjun
+ * @version 1.0
  */
 public class Encoder {
     private static final int EOF = -1;
@@ -116,6 +120,14 @@ public class Encoder {
     byte[] accum = new byte[256];
 
     //----------------------------------------------------------------------------
+    /**
+     * 构造编码器。
+     *
+     * @param width       图像宽度
+     * @param height      图像高度
+     * @param pixels      像素数据（RGB 格式）
+     * @param color_depth 颜色深度
+     */
     Encoder(int width, int height, byte[] pixels, int color_depth) {
         imgW = width;
         imgH = height;
@@ -123,17 +135,23 @@ public class Encoder {
         initCodeSize = Math.max(2, color_depth);
     }
 
-    // Add a character to the end of the current packet, and if it is 254
-    // characters, flush the packet to disk.
+    /**
+     * 将字符添加到当前数据包末尾。
+     * 当数据包达到 254 个字符时，自动刷新到输出流。
+     *
+     * @param c    要添加的字符
+     * @param outs 输出流
+     * @throws IOException 如果写入失败
+     */
     void char_out(byte c, OutputStream outs) throws IOException {
         accum[a_count++] = c;
         if (a_count >= 254)
             flush_char(outs);
     }
 
-    // Clear out the hash table
-
-    // table clear for block compress
+    /**
+     * 清空哈希表，用于块压缩。
+     */
     void cl_block(OutputStream outs) throws IOException {
         cl_hash(hsize);
         free_ent = ClearCode + 2;
@@ -142,12 +160,25 @@ public class Encoder {
         output(ClearCode, outs);
     }
 
-    // reset code table
+    /**
+     * 重置代码表。
+     *
+     * @param hsize 哈希表大小
+     */
     void cl_hash(int hsize) {
         for (int i = 0; i < hsize; ++i)
             htab[i] = -1;
     }
 
+    /**
+     * LZW 压缩核心算法。
+     * 使用开放寻址双哈希（无链表）进行前缀码/下一字符组合的压缩。
+     * 基于 Knuth 算法 D 的变体和 G. Knott 的相对素数二次探测。
+     *
+     * @param init_bits 初始位数
+     * @param outs      输出流
+     * @throws IOException 如果写入失败
+     */
     void compress(int init_bits, OutputStream outs) throws IOException {
         int fcode;
         int i /* = 0 */;
@@ -220,6 +251,13 @@ public class Encoder {
     }
 
     //----------------------------------------------------------------------------
+    /**
+     * 编码图像并写入输出流。
+     * 首先写入初始代码大小字节，然后压缩并写入像素数据。
+     *
+     * @param os 输出流
+     * @throws IOException 如果写入失败
+     */
     void encode(OutputStream os) throws IOException {
         os.write(initCodeSize); // write "initial code size" byte
 
@@ -232,6 +270,12 @@ public class Encoder {
     }
 
     // Flush the packet to disk, and reset the accumulator
+    /**
+     * 刷新数据包到磁盘，并重置累加器。
+     *
+     * @param outs 输出流
+     * @throws IOException 如果写入失败
+     */
     void flush_char(OutputStream outs) throws IOException {
         if (a_count > 0) {
             outs.write(a_count);
@@ -240,13 +284,22 @@ public class Encoder {
         }
     }
 
+    /**
+     * 获取指定位数对应的最大代码值。
+     *
+     * @param n_bits 位数
+     * @return 最大代码值
+     */
     final int MAXCODE(int n_bits) {
         return (1 << n_bits) - 1;
     }
 
     //----------------------------------------------------------------------------
-    // Return the next pixel from the image
-    //----------------------------------------------------------------------------
+    /**
+     * 获取图像中的下一个像素。
+     *
+     * @return 下一个像素值，到达末尾时返回 EOF
+     */
     private int nextPixel() {
         if (remaining == 0)
             return EOF;
@@ -258,6 +311,14 @@ public class Encoder {
         return pix & 0xff;
     }
 
+    /**
+     * 输出代码到输出流。
+     * 维护一个 BITS 字符长的缓冲区，当缓冲区满时自动刷新。
+     *
+     * @param code 要输出的代码
+     * @param outs 输出流
+     * @throws IOException 如果写入失败
+     */
     void output(int code, OutputStream outs) throws IOException {
         cur_accum &= masks[cur_bits];
 

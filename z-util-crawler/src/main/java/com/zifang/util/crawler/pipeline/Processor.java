@@ -1,8 +1,8 @@
 package com.zifang.util.crawler.pipeline;
 
 /**
- * Processor interface for pipeline stages.
- * Implementations process the PipelineContext to extract/transform data.
+ * 处理器接口，定义管道阶段的处理逻辑。
+ * 实现类负责处理 PipelineContext 中的数据提取和转换。
  */
 public interface Processor {
 

@@ -21,16 +21,16 @@ public class MemoryManagerMXBeanDemo {
 
 
     /**
-     * 获取指定JVM的内存管理信息
+     * 获取指定JVM的内存管理信息。
      * <p>
-     * 远程程序启动初始JVM参数配置开启远程监控
-     * -Djava.rmi.server.hostname=192.168.10.105
-     * -Dcom.sun.management.jmxremote
-     * -Dcom.sun.management.jmxremote.port=9999
-     * -Dcom.sun.management.jmxremote.ssl=false
-     * -Dcom.sun.management.jmxremote.authenticate=false
-     *
-     * @return
+     * 远程程序启动JVM参数配置开启远程监控：
+     * <ul>
+     *   <li>-Djava.rmi.server.hostname=192.168.10.105</li>
+     *   <li>-Dcom.sun.management.jmxremote</li>
+     *   <li>-Dcom.sun.management.jmxremote.port=9999</li>
+     *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
+     *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
+     * </ul>
      */
     public static void getRemoteMemoryManagerMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -70,9 +70,7 @@ public class MemoryManagerMXBeanDemo {
     }
 
     /**
-     * 获取当前虚拟机内存管理的信息
-     *
-     * @return
+     * 获取当前虚拟机内存管理信息。
      */
     public static void getLocalMemoryManagerMXBean() {
         List<MemoryManagerMXBean> list = ManagementFactory.getMemoryManagerMXBeans();
@@ -87,6 +85,11 @@ public class MemoryManagerMXBeanDemo {
         }
     }
 
+    /**
+     * 主方法，演示获取JVM内存管理信息。
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
         getRemoteMemoryManagerMXBean();
         getLocalMemoryManagerMXBean();

@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 网络拓扑图组件 - 用于可视化神经网络
+ * 网络拓扑图组件
+ * 用于可视化神经网络结构，展示神经元节点和层级连接关系
  */
 public class NetworkGraph extends ChartFrame {
 
@@ -17,18 +18,27 @@ public class NetworkGraph extends ChartFrame {
 
     private static final int PADDING = 60;
 
+    /**
+     * 创建网络拓扑图
+     * @param title 图表标题
+     * @param width 图表宽度
+     * @param height 图表高度
+     */
     public NetworkGraph(String title, int width, int height) {
         super(title, width, height);
         this.layers = new ArrayList<>();
     }
 
+    /**
+     * 创建网络拓扑图（使用默认尺寸800x600）
+     * @param title 图表标题
+     */
     public NetworkGraph(String title) {
         this(title, 800, 600);
     }
 
     /**
      * 添加一层神经元
-     *
      * @param layerIndex 层索引（从0开始）
      * @param nodeCount  该层神经元数量
      * @param layerName  层名称（如"Input", "Hidden", "Output"）
@@ -41,6 +51,11 @@ public class NetworkGraph extends ChartFrame {
         layers.get(layerIndex).layerName = layerName;
     }
 
+    /**
+     * 添加一层神经元（自动追加到末尾）
+     * @param nodeCount  该层神经元数量
+     * @param layerName  层名称
+     */
     public void addLayer(int nodeCount, String layerName) {
         layers.add(new LayerData());
         LayerData last = layers.get(layers.size() - 1);
@@ -48,19 +63,44 @@ public class NetworkGraph extends ChartFrame {
         last.layerName = layerName;
     }
 
+    /**
+     * 清空所有层级数据
+     */
     public void clear() {
         layers.clear();
     }
 
+    /**
+     * 设置节点半径
+     * @param radius 节点半径（像素）
+     */
     public void setNodeRadius(int radius) {
         this.nodeRadius = radius;
     }
 
+    /**
+     * 设置某层的激活值（用于热力图显示）
+     * @param layerIndex 层索引
+     * @param activations 激活值列表，值范围建议为0-1
+     */
+    public void setLayerActivations(int layerIndex, List<Double> activations) {
+        if (layerIndex < layers.size()) {
+            layers.get(layerIndex).activations = new ArrayList<>(activations);
+        }
+    }
+
+    /**
+     * 触发图表重绘
+     */
     @Override
     public void render() {
         canvas.repaint();
     }
 
+    /**
+     * 创建网络图画布
+     * @return 网络图画布实例
+     */
     @Override
     protected ChartCanvas createCanvas() {
         return new NetworkCanvas();
@@ -73,14 +113,8 @@ public class NetworkGraph extends ChartFrame {
     }
 
     /**
-     * 设置某层的激活值（用于热力图）
+     * 内部类：网络画布，负责绘制网络拓扑结构
      */
-    public void setLayerActivations(int layerIndex, List<Double> activations) {
-        if (layerIndex < layers.size()) {
-            layers.get(layerIndex).activations = new ArrayList<>(activations);
-        }
-    }
-
     private class NetworkCanvas extends ChartCanvas {
 
         @Override

@@ -2,6 +2,16 @@ package com.zifang.util.zex.source;
 
 import java.util.BitSet;
 
+/**
+ * BitSet测试类。
+ * <p>
+ * 此类演示了Java BitSet的基本用法。
+ * BitSet是一种位向量，用于高效地存储和操作位信息。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class BitSetTest {
     public static void main(String[] args) {
 

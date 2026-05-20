@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
- * Singleton holder for ChromeDriver with lazy initialization and auto-download support.
+ * ChromeDriver 单例持有类，支持懒加载和自动下载。
  */
 public class ChromeDriverHolder {
 

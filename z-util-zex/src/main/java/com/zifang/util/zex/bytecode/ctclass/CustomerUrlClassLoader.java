@@ -10,7 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 自定义的url的classLoader
+ * 自定义的URL类加载器。
+ * <p>
+ * 此类继承自URLClassLoader，用于从指定URL路径加载类文件。
+ * 内部维护了jar包路径与其中类名列表的映射关系。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
  */
 public class CustomerUrlClassLoader extends URLClassLoader {
 

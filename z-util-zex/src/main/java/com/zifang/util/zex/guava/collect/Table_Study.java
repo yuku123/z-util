@@ -1,7 +1,7 @@
 /*
  * 文件名：Table_Study.java
  * 版权：Copyright 2007-2019 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： Table_Study.java
+ * 描述： Guava Table学习类
  * 修改人：zxiaofan
  * 修改时间：2019年12月26日
  * 修改内容：新增
@@ -14,12 +14,22 @@ import org.junit.Test;
 import java.util.List;
 
 /**
+ * Guava Table学习类。
+ * <p>
+ * Table是一种键映射两个值的特殊数据结构，类似Map&lt;R, Map&lt;C, V&gt;&gt;。
+ * <p>
+ * Table实现与底层数据结构对应关系：
+ * <ul>
+ *   <li>HashBasedTable: HashMap&lt;R, HashMap&lt;C, V&gt;&gt;</li>
+ *   <li>TreeBasedTable: TreeMap&lt;R, TreeMap&lt;C,V&gt;&gt;</li>
+ *   <li>ImmutableTable: ImmutableMap&lt;R, ImmutableMap&lt;C, V&gt;&gt; - 对稀疏或密集的数据集都有优化</li>
+ *   <li>ArrayTable: 二维数组，以提升访问速度和密集Table的内存利用率</li>
+ * </ul>
+ *
  * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
-// HashBasedTable--HashMap<R, HashMap<C, V>>
-// TreeBasedTable--TreeMap<R, TreeMap<C,V>>
-// ImmutableTable--ImmutableMap<R, ImmutableMap<C, V>>ImmutableTable对稀疏或密集的数据集都有优化
-// ArrayTable--二维数组，以提升访问速度和密集Table的内存利用率
 public class Table_Study {
     @Test
     public void basicTest() {

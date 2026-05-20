@@ -100,6 +100,11 @@ public class UserApiWrapper {
         github.getUser(username).unfollow();
     }
 
+    /**
+     * GitHub 用户信息 DTO
+     * <p>
+     * 用于封装用户的基本信息，包括登录名、姓名、邮箱、简介等
+     */
     public static class UserInfo {
         public String login;
         public String name;
@@ -111,6 +116,13 @@ public class UserApiWrapper {
         public int following;
         public int publicRepos;
 
+        /**
+         * 从 GHUser 对象构建 UserInfo
+         *
+         * @param user GitHub 用户对象
+         * @return UserInfo 实例
+         * @throws IOException IO异常
+         */
         public static UserInfo from(GHUser user) throws IOException {
             UserInfo info = new UserInfo();
             info.login = user.getLogin();

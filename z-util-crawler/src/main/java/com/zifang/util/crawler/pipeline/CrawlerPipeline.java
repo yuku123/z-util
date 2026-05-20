@@ -10,24 +10,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Crawler pipeline orchestrator.
- * Coordinates HTTP fetch, HTML/JSON parsing, and processor execution.
+ * 爬虫管道编排器，协调 HTTP 请求、HTML/JSON 解析和处理器执行。
  */
 public class CrawlerPipeline {
 
     private final List<Processor> processors = new ArrayList<>();
     private final CrawlerHttpClient httpClient;
 
+    /**
+     * 构造 CrawlerPipeline，使用默认的 CrawlerHttpClient。
+     */
     public CrawlerPipeline() {
         this.httpClient = new CrawlerHttpClient();
     }
 
+    /**
+     * 构造 CrawlerPipeline，使用指定的 HTTP 客户端。
+     * @param httpClient HTTP 客户端
+     */
     public CrawlerPipeline(CrawlerHttpClient httpClient) {
         this.httpClient = httpClient;
     }
 
     /**
-     * Add a processor to the pipeline.
+     * 添加处理器到管道。
+     * @param p 处理器实例
      */
     public void addProcessor(Processor p) {
         processors.add(p);
@@ -91,7 +98,7 @@ public class CrawlerPipeline {
     }
 
     /**
-     * Simple request object
+     * 简单的请求对象。
      */
     public static class Request {
         private String url;

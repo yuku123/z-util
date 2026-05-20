@@ -1,17 +1,24 @@
 package com.zifang.util.compile.sorce2.generator.info;
 
 /**
- * 形参列表
+ * 方法参数信息封装类
+ * <p>
+ * 用于封装Java方法的参数（形参）的类型和名称信息。
+ * 是MethodInfo中参数列表的基本组成单元。
+ *
+ * @author zifang
+ * @version 1.0.0
+ * @since 2020-01-01
  */
 public class MethodParameterPair {
 
     /**
-     * 形参种类 class的type
+     * 参数类型全限定名
      */
     private String paramType;
 
     /**
-     * 形参的名字
+     * 参数名称
      */
     private String paramName;
 

@@ -4,7 +4,17 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 树形节点注册帮助类
+ * 负责将注册的节点转换为Swing可用的树形结构
+ */
 public class RegisterTreeNodeHelper {
+    /**
+     * 将注册的节点转换为DefaultMutableTreeNode
+     * @param registerTreeNode 节点注册器
+     * @return Swing树形结构的根节点
+     * @throws RuntimeException 如果有多个根节点或存在游离节点
+     */
     public static DefaultMutableTreeNode solve(RegisterTreeNode registerTreeNode) {
 
         List<TreeNode> roots = registerTreeNode.getTreeNodes().stream().filter(e -> null == e.getParentId()).collect(Collectors.toList());

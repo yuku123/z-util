@@ -4,6 +4,10 @@ import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.toc.TocGenerator;
 
+/**
+ * Word文档目录更新示例类
+ * 演示如何使用docx4j库更新Word文档的目录
+ */
 public class TocUpdateDemo {
 
     static boolean update = false;

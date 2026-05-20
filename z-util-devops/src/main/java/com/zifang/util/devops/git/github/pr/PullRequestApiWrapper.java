@@ -164,6 +164,11 @@ public class PullRequestApiWrapper {
 
     // ==================== DTO ====================
 
+    /**
+     * Pull Request 信息 DTO
+     * <p>
+     * 用于封装 PR 的基本信息，包括编号、标题、正文、状态等
+     */
     public static class PRInfo {
         public int number;
         public String title;
@@ -174,6 +179,13 @@ public class PullRequestApiWrapper {
         public String baseBranch;
         public boolean merged;
 
+        /**
+         * 从 GHPullRequest 对象构建 PRInfo
+         *
+         * @param pr Pull Request 对象
+         * @return PRInfo 实例
+         * @throws IOException IO异常
+         */
         public static PRInfo from(GHPullRequest pr) throws IOException {
             PRInfo info = new PRInfo();
             info.number = pr.getNumber();

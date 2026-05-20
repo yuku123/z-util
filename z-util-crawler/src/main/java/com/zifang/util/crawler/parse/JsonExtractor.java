@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JSON extractor using json-simple for JSON path extraction.
+ * 使用 json-simple 进行 JSON 路径提取的 JSON 解析器。
  */
 public class JsonExtractor {
 
@@ -17,8 +17,11 @@ public class JsonExtractor {
     }
 
     /**
-     * Extract a single value from JSON using a dot-notation path.
-     * Example path: "data.name" or "items[0].title"
+     * 使用点号路径从 JSON 中提取单个值。
+     * 路径示例："data.name" 或 "items[0].title"
+     * @param jsonString JSON 字符串
+     * @param jsonPath 点号路径
+     * @return 提取的值，未找到或解析失败返回 null
      */
     public static String extract(String jsonString, String jsonPath) {
         try {
@@ -30,7 +33,10 @@ public class JsonExtractor {
     }
 
     /**
-     * Extract all values from JSON array at the given path.
+     * 从 JSON 中提取指定路径处的所有值。
+     * @param jsonString JSON 字符串
+     * @param jsonPath 点号路径
+     * @return 提取的值列表
      */
     public static List<String> extractAll(String jsonString, String jsonPath) {
         List<String> results = new ArrayList<>();

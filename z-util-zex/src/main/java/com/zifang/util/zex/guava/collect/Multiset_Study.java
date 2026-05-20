@@ -1,7 +1,7 @@
 /*
  * 文件名：Multiset_Study.java
  * 版权：Copyright 2007-2019 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： Multiset_Study.java
+ * 描述： Guava Multiset学习类
  * 修改人：zxiaofan
  * 修改时间：2019年12月19日
  * 修改内容：新增
@@ -17,21 +17,26 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
+ * Guava Multiset学习类。
+ * <p>
  * Multiset继承自JDK中的Collection接口，而不是Set接口，所以包含重复元素并没有违反原有的接口契约。
+ * Multiset不是一个Map&lt;E,Integer&gt;，本质上是一个Set加一个元素计数器。
  * <p>
- * Multiset不是一个Map<E,Integer>,本质上是一个Set加一个元素计数器.
- * <p>
- * Multiset中的元素的重复个数只会是正数，且最大不会超过Integer.MAX_VALUE。设定计数为0的元素将不会出现multiset中，也不会出现elementSet()和entrySet()的返回结果中。
- * <p>
- * multiset.iterator() 会循环迭代每一个出现的元素，迭代的次数与multiset.size()相同。
+ * Multiset中的元素的重复个数只会是正数，且最大不会超过Integer.MAX_VALUE。
+ * 设定计数为0的元素将不会出现multiset中，也不会出现elementSet()和entrySet()的返回结果中。
  * <p>
  * Map-Multiset对应关系-是否支持null：
- * <p>
- * HashMap-HashMultiset-Yes；TreeMap-TreeMultiset-Yes (if the comparator does)；LinkedHashMap-LinkedHashMultiset-Yes
- * <p>
- * ConcurrentHashMap-ConcurrentHashMultiset-No；ImmutableMap-ImmutableMultiset-No
+ * <ul>
+ *   <li>HashMap-HashMultiset-Yes</li>
+ *   <li>TreeMap-TreeMultiset-Yes (if the comparator does)</li>
+ *   <li>LinkedHashMap-LinkedHashMultiset-Yes</li>
+ *   <li>ConcurrentHashMap-ConcurrentHashMultiset-No</li>
+ *   <li>ImmutableMap-ImmutableMultiset-No</li>
+ * </ul>
  *
  * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
 public class Multiset_Study {
     /**

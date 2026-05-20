@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 条形图组件
+ * 用于可视化分类数据的分布，支持多系列数据展示、坐标轴标签、图例和网格线
  */
 public class BarChart extends ChartFrame {
 
@@ -20,24 +21,48 @@ public class BarChart extends ChartFrame {
     private static final int TOP_PADDING = 40;
     private static final int BOTTOM_PADDING = 60;
 
+    /**
+     * 创建条形图
+     * @param title 图表标题
+     * @param width 图表宽度
+     * @param height 图表高度
+     */
     public BarChart(String title, int width, int height) {
         super(title, width, height);
         this.seriesList = new ArrayList<>();
     }
 
+    /**
+     * 创建条形图（使用默认尺寸800x600）
+     * @param title 图表标题
+     */
     public BarChart(String title) {
         this(title, 800, 600);
     }
 
+    /**
+     * 添加数据系列
+     * @param series 数据系列对象
+     */
     public void addSeries(ChartSeries series) {
         seriesList.add(series);
         updateYRange();
     }
 
+    /**
+     * 添加数据系列
+     * @param name 系列名称
+     * @param data 数据列表
+     */
     public void addSeries(String name, List<Double> data) {
         addSeries(new ChartSeries(name, data));
     }
 
+    /**
+     * 向指定系列添加单个数据点
+     * @param seriesName 系列名称（不存在则创建新系列）
+     * @param value 数据值
+     */
     public void addData(String seriesName, double value) {
         ChartSeries series = findSeries(seriesName);
         if (series == null) {
@@ -48,6 +73,9 @@ public class BarChart extends ChartFrame {
         updateYRange();
     }
 
+    /**
+     * 清空所有数据
+     */
     public void clear() {
         for (ChartSeries series : seriesList) {
             series.clear();
@@ -55,40 +83,57 @@ public class BarChart extends ChartFrame {
         yMax = 1;
     }
 
-    private ChartSeries findSeries(String name) {
-        for (ChartSeries s : seriesList) {
-            if (s.getName().equals(name)) return s;
-        }
-        return null;
-    }
-
-    private void updateYRange() {
-        if (seriesList.isEmpty()) return;
-
-        double max = 0;
-        for (ChartSeries series : seriesList) {
-            if (series.size() > 0) {
-                max = Math.max(max, series.getMax());
-            }
-        }
-
-        if (max == 0) max = 1;
-        this.yMax = max * 1.1;
-    }
-
-    @Override
-    public void render() {
-        canvas.repaint();
-    }
-
+    /**
+     * 设置坐标轴标签
+     * @param xAxisLabel X轴标签
+     * @param yAxisLabel Y轴标签
+     */
     public void setAxisLabels(String xAxisLabel, String yAxisLabel) {
         this.xAxisLabel = xAxisLabel;
         this.yAxisLabel = yAxisLabel;
     }
 
+    /**
+     * 创建条形图画布
+     * @return 条形图画布实例
+     */
     @Override
     protected ChartCanvas createCanvas() {
         return new BarChartCanvas();
+    }
+
+    /**
+     * 触发图表重绘
+     */
+    @Override
+    public void render() {
+        canvas.repaint();
+    }
+
+    /**
+     * 更新Y轴范围
+     */
+    private void updateYRange() {
+        yMax = 1;
+        for (ChartSeries series : seriesList) {
+            for (int i = 0; i < series.size(); i++) {
+                yMax = Math.max(yMax, series.getData(i));
+            }
+        }
+    }
+
+    /**
+     * 查找指定名称的数据系列
+     * @param name 系列名称
+     * @return 找到的系列，不存在则返回null
+     */
+    private ChartSeries findSeries(String name) {
+        for (ChartSeries series : seriesList) {
+            if (series.getName().equals(name)) {
+                return series;
+            }
+        }
+        return null;
     }
 
     private class BarChartCanvas extends ChartCanvas {

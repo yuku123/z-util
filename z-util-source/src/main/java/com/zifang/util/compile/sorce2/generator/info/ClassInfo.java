@@ -4,7 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * class的标准信息载体
+ * 类信息标准封装类
+ * <p>
+ * 用于封装Java类的完整元数据信息，包括：
+ * <ul>
+ *   <li>类名、包名、修饰符</li>
+ *   <li>父类信息</li>
+ *   <li>实现的接口列表</li>
+ *   <li>字段列表</li>
+ *   <li>方法列表</li>
+ *   <li>导入语句和类注释</li>
+ * </ul>
+ * 支持通过静态方法从Class对象构建实例，是代码生成和分析的核心数据载体。
+ *
+ * @author zifang
+ * @version 1.0.0
+ * @since 2020-01-01
  */
 public class ClassInfo {
 
@@ -17,7 +32,7 @@ public class ClassInfo {
     private Boolean interfaceType;
 
     /**
-     * 当前类名
+     * 当前类简单名称（不含包名）
      */
     private String simpleClassName;
 
@@ -27,79 +42,114 @@ public class ClassInfo {
     private String packageName;
 
     /**
-     * 父类
+     * 父类信息
      */
     private ClassInfo superClass;
 
     /**
-     * 只是单纯记录类名
+     * 导入语句列表
      */
-    private List<String> imports = new ArrayList<>(); // 默认为空;
+    private List<String> imports = new ArrayList<>();
 
     /**
-     * block注释
+     * 类注释列表
      */
-    private List<String> comments = new ArrayList<>(); // 类注释
+    private List<String> comments = new ArrayList<>();
 
     /**
-     * 接口集合
+     * 接口列表
      */
-    private List<ClassInfo> interfaces = new ArrayList<>(); // 默认为空
+    private List<ClassInfo> interfaces = new ArrayList<>();
 
     /**
-     * 类的域集合
+     * 字段列表
      */
-    private List<FieldInfo> fields = new ArrayList<>(); // 默认为空
+    private List<FieldInfo> fields = new ArrayList<>();
 
     /**
-     * 类的所有方法
+     * 方法列表
      */
-    private List<MethodInfo> methods = new ArrayList<>(); // 默认为空
+    private List<MethodInfo> methods = new ArrayList<>();
 
     /**
-     * 标记当前类的modifier 决定是否为public
+     * 类的修饰符，使用 java.lang.reflect.Modifier 的常量值
      */
     private int modifiers;
 
     /**
-     * 全类路径名字
+     * 获取全类路径名称
+     *
+     * @return 包名.类名的格式
      */
     public String getName() {
         return packageName + "." + simpleClassName;
     }
 
+    /**
+     * 批量添加字段
+     *
+     * @param fieldInfos 字段信息列表
+     */
     public void appendFields(List<FieldInfo> fieldInfos) {
         checkField();
         fields.addAll(fieldInfos);
     }
 
+    /**
+     * 添加单个字段
+     *
+     * @param fieldInfo 字段信息
+     */
     public void appendField(FieldInfo fieldInfo) {
         checkField();
         fields.add(fieldInfo);
     }
 
+    /**
+     * 批量添加方法
+     *
+     * @param methodInfos 方法信息列表
+     */
     public void appendMethods(List<MethodInfo> methodInfos) {
         checkMethod();
         methods.addAll(methodInfos);
     }
 
+    /**
+     * 添加单个方法
+     *
+     * @param methodInfo 方法信息
+     */
     public void appendMethod(MethodInfo methodInfo) {
         checkMethod();
         methods.add(methodInfo);
     }
 
+    /**
+     * 批量添加接口
+     *
+     * @param interfaceClassInfos 接口信息列表
+     */
     public void appendInterfaces(List<ClassInfo> interfaceClassInfos) {
         checkInterface();
         interfaces.addAll(interfaceClassInfos);
     }
 
+    /**
+     * 添加单个接口
+     *
+     * @param interfaceClassInfo 接口信息
+     */
     public void appendInterfaces(ClassInfo interfaceClassInfo) {
         checkInterface();
         interfaces.add(interfaceClassInfo);
     }
 
     /**
-     * 将一个运行态class 直接解析转化为ClassInfo
+     * 将一个运行态class直接解析转化为ClassInfo
+     *
+     * @param clazz 要解析的Class对象
+     * @return 解析后的ClassInfo对象
      */
     public static ClassInfo parser(Class clazz) {
         return null; // @todo
@@ -107,6 +157,19 @@ public class ClassInfo {
 
     /**
      * 最小闭环构造器
+     * <p>
+     * 使用提供的所有参数创建一个完整的ClassInfo对象
+     *
+     * @param interfaceType   是否为接口
+     * @param modifiers      类修饰符
+     * @param packageName     包名
+     * @param comments       类注释列表
+     * @param simpleClassName 简单类名
+     * @param superClass     父类信息
+     * @param interfaces     接口列表
+     * @param fieldInfos     字段列表
+     * @param methodInfos    方法列表
+     * @return 构建完成的ClassInfo对象
      */
     public static ClassInfo build(
             Boolean interfaceType,

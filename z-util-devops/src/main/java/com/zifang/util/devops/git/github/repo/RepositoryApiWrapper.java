@@ -219,6 +219,11 @@ public class RepositoryApiWrapper {
 
     // ==================== DTO ====================
 
+    /**
+     * 仓库信息 DTO
+     * <p>
+     * 用于封装仓库的基本信息，包括全名、描述、默认分支、语言、星标数等
+     */
     public static class RepositoryInfo {
         private String fullName;
         private String description;
@@ -238,6 +243,12 @@ public class RepositoryApiWrapper {
         public boolean isPrivate() { return isPrivate; }
         public String getHtmlUrl() { return htmlUrl; }
 
+        /**
+         * 从 GHRepository 对象构建 RepositoryInfo
+         *
+         * @param r 仓库对象
+         * @return RepositoryInfo 实例
+         */
         public static RepositoryInfo from(GHRepository r) {
             RepositoryInfo info = new RepositoryInfo();
             info.fullName = r.getFullName();

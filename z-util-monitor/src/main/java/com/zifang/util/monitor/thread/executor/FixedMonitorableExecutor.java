@@ -127,6 +127,13 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
         taskStatusAfterExecuteConfig(r);
     }
 
+    /**
+     * 获取监控组件的状态。
+     * <p>
+     * 该方法会生成线程池中每个线程的状态、正在执行任务的状态以及线程池总体状态。
+     *
+     * @return 线程池的监控状态
+     */
     public Status status() {
         generateThreadStatus(this.status.getThreadStatusMap());
         generateTaskStatus(this.status.getTaskStatusMap());
@@ -241,11 +248,21 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
         this.status.getTaskStatusMap().remove(r);
     }
 
+    /**
+     * 获取组件名称。
+     *
+     * @return 线程池名称
+     */
     @Override
     public String componentName() {
         return this.threadPoolConfigUnit.getPoolName();
     }
 
+    /**
+     * 触发告警。
+     * <p>
+     * 当线程池状态异常时调用此方法，通知告警服务进行告警。
+     */
     @Override
     public void alarm() {
         this.status.getAlarmTimes().getAndIncrement();

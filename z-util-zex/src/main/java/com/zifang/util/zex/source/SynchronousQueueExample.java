@@ -5,8 +5,22 @@ import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 
+/**
+ * SynchronousQueue同步队列示例类。
+ * <p>
+ * SynchronousQueue是一种特殊的BlockingQueue，其特点是：
+ * 每个插入操作必须等待另一个线程的移除操作，反之亦然。
+ * 即put和take操作是同步的，适用于线程间直接传递数据的场景。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class SynchronousQueueExample {
 
+    /**
+     * SynchronousQueue生产者线程。
+     */
     static class SynchronousQueueProducer implements Runnable {
 
         protected BlockingQueue<String> blockingQueue;
@@ -32,6 +46,9 @@ public class SynchronousQueueExample {
 
     }
 
+    /**
+     * SynchronousQueue消费者线程。
+     */
     static class SynchronousQueueConsumer implements Runnable {
 
         protected BlockingQueue<String> blockingQueue;

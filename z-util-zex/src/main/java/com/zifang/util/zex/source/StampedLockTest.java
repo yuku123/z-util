@@ -4,11 +4,30 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.locks.StampedLock;
 
+/**
+ * StampedLock测试类。
+ * <p>
+ * StampedLock是Java 8引入的一种锁实现，提供了三种锁模式：
+ * 写锁、悲观读锁和乐观读锁。
+ * 与ReadWriteLock相比，StampedLock支持乐观读模式，
+ * 在读多写少的场景下可以提供更好的性能。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class StampedLockTest {
     final static HashMap<String, String> data = new HashMap<>();
     final static StampedLock lock = new StampedLock();
 
 
+    /**
+     * 写入数据，使用写锁。
+     *
+     * @param key   键
+     * @param value 值
+     * @return 旧值
+     */
     public static Object write(String key, String value) {
         long stamp = lock.writeLock();
         try {
@@ -23,8 +42,13 @@ public class StampedLockTest {
         return null;
     }
 
-    /*
-     * 对共享数据的悲观读操作
+    /**
+     * 对共享数据进行悲观读操作。
+     * <p>
+     * 悲观读会阻塞其他写操作，适用于读多写多的场景。
+     *
+     * @param key 键
+     * @return 值
      */
     public static Object pessimisticRead(String key) {
         System.out.println(new Date() + ":  进入过写模式，只能悲观读");
@@ -38,8 +62,14 @@ public class StampedLockTest {
         }
     }
 
-    /*
-     * 对共享数据的乐观读操作
+    /**
+     * 对共享数据进行乐观读操作。
+     * <p>
+     * 乐观读不会阻塞写操作，但如果检测到冲突会退化为悲观读。
+     * 适用于读多写少的场景。
+     *
+     * @param key 键
+     * @return 值
      */
     public static Object optimisticRead(String key) {
         String value = null;

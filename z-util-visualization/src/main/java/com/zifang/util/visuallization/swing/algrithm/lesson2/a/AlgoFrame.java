@@ -3,11 +3,21 @@ package com.zifang.util.visuallization.swing.algrithm.lesson2.a;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * 算法可视化框架 - 画布框架
+ * 提供算法可视化所需的绘图基础组件
+ */
 public class AlgoFrame extends JFrame {
 
     private int canvasWidth;
     private int canvasHeight;
 
+    /**
+     * 创建算法可视化框架
+     * @param title 窗口标题
+     * @param canvasWidth 画布宽度
+     * @param canvasHeight 画布高度
+     */
     public AlgoFrame(String title, int canvasWidth, int canvasHeight) {
 
         super(title);
@@ -25,23 +35,37 @@ public class AlgoFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * 创建算法可视化框架（使用默认尺寸1024x768）
+     * @param title 窗口标题
+     */
     public AlgoFrame(String title) {
 
         this(title, 1024, 768);
     }
 
+    /**
+     * 获取画布宽度
+     * @return 画布宽度
+     */
     public int getCanvasWidth() {
         return canvasWidth;
     }
 
+    /**
+     * 获取画布高度
+     * @return 画布高度
+     */
     public int getCanvasHeight() {
         return canvasHeight;
     }
-    //public JPanel getCanvas(){return canvas;}
 
-    // data
     private Circle[] circles;
 
+    /**
+     * 渲染圆形数据
+     * @param circles 圆形数组
+     */
     public void render(Circle[] circles) {
         this.circles = circles;
         repaint();

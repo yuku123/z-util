@@ -15,14 +15,18 @@ import java.lang.management.ThreadMXBean;
 public class ThreadMXBeanDemo {
 
     /**
-     * 获取指定JVM的线程信息
+     * 获取指定JVM的线程信息。
      * <p>
-     * 远程程序启动初始JVM参数配置开启远程监控 -Djava.rmi.server.hostname=192.168.10.105
-     * -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9999
-     * -Dcom.sun.management.jmxremote.ssl=false
-     * -Dcom.sun.management.jmxremote.authenticate=false
+     * 远程程序启动JVM参数配置开启远程监控：
+     * <ul>
+     *   <li>-Djava.rmi.server.hostname=192.168.10.105</li>
+     *   <li>-Dcom.sun.management.jmxremote</li>
+     *   <li>-Dcom.sun.management.jmxremote.port=9999</li>
+     *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
+     *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
+     * </ul>
      *
-     * @return
+     * @return 远程JVM的ThreadMXBean实例，连接失败返回null
      */
     public static ThreadMXBean getRemoteThreadMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -47,14 +51,19 @@ public class ThreadMXBeanDemo {
     }
 
     /**
-     * 获取当前虚拟机线程信息
+     * 获取当前虚拟机线程信息。
      *
-     * @return
+     * @return 当前JVM的ThreadMXBean实例
      */
     public static ThreadMXBean getLocalThreadMXBean() {
         return ManagementFactory.getThreadMXBean();
     }
 
+    /**
+     * 主方法，演示获取JVM线程信息。
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
         ThreadMXBean threadMXBean = getRemoteThreadMXBean();
 //		 ThreadMXBean threadMXBean = getLocalThreadMXBean();

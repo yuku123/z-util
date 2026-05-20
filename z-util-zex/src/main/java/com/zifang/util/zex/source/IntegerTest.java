@@ -4,6 +4,15 @@ import org.junit.Test;
 
 import java.lang.reflect.Method;
 
+/**
+ * Integer类测试类。
+ * <p>
+ * 此类用于测试Integer类的各种方法，包括parseInt、toHexString、toString等。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class IntegerTest {
     @Test
     public void test001(){

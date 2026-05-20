@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 简单AST节点实现
+ * ASTNode接口的标准实现类，用于构建抽象语法树
  */
 public class SimpleASTNode implements ASTNode {
 
@@ -18,10 +19,20 @@ public class SimpleASTNode implements ASTNode {
     private ASTNode parent;
     private Object token;
 
+    /**
+     * 默认构造函数
+     */
     public SimpleASTNode() {
         this.children = new ArrayList<>();
     }
 
+    /**
+     * 构造函数
+     * @param type 节点类型
+     * @param text 节点文本值
+     * @param line 行号
+     * @param column 列号
+     */
     public SimpleASTNode(String type, String text, int line, int column) {
         this.type = type;
         this.text = text;
@@ -35,6 +46,10 @@ public class SimpleASTNode implements ASTNode {
         return type;
     }
 
+    /**
+     * 设置节点类型
+     * @param type 节点类型字符串
+     */
     public void setType(String type) {
         this.type = type;
     }
@@ -44,6 +59,10 @@ public class SimpleASTNode implements ASTNode {
         return text;
     }
 
+    /**
+     * 设置节点文本值
+     * @param text 文本值
+     */
     public void setText(String text) {
         this.text = text;
     }
@@ -53,6 +72,10 @@ public class SimpleASTNode implements ASTNode {
         return line;
     }
 
+    /**
+     * 设置行号
+     * @param line 行号（从1开始）
+     */
     public void setLine(int line) {
         this.line = line;
     }
@@ -62,6 +85,10 @@ public class SimpleASTNode implements ASTNode {
         return column;
     }
 
+    /**
+     * 设置列号
+     * @param column 列号（从1开始）
+     */
     public void setColumn(int column) {
         this.column = column;
     }
@@ -111,6 +138,8 @@ public class SimpleASTNode implements ASTNode {
 
     /**
      * 打印AST树（用于调试）
+     * @param sb StringBuilder用于接收输出
+     * @param indent 缩进层级
      */
     public void dump(StringBuilder sb, int indent) {
         for (int i = 0; i < indent; i++) {

@@ -54,6 +54,11 @@ public class Status {
         this.level = level;
     }
 
+    /**
+     * 返回状态信息的字符串表示。
+     *
+     * @return 包含status和level的字符串表示
+     */
     @Override
     public String toString() {
         return "Status{" +

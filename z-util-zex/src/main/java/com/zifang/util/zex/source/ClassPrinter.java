@@ -5,6 +5,16 @@ import java.util.Arrays;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.stream.Collectors;
 
+/**
+ * 类信息打印工具类。
+ * <p>
+ * 此类用于打印指定类的所有声明方法信息，
+ * 包括方法的返回类型、名称和参数类型列表。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class ClassPrinter {
     public static void main(String[] args) {
         Class c = AbstractQueuedSynchronizer.class;

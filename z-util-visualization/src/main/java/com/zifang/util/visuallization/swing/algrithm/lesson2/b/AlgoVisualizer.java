@@ -4,21 +4,24 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.MouseAdapter;
 
+/**
+ * 算法可视化器（模板类）
+ * 提供算法可视化的基础框架结构
+ */
 public class AlgoVisualizer {
 
-    // TODO: 创建自己的数据
-    private Object data;        // 数据
-    private AlgoFrame frame;    // 视图
+    private Object data;
+    private AlgoFrame frame;
 
+    /**
+     * 创建可视化器
+     * @param sceneWidth 场景宽度
+     * @param sceneHeight 场景高度
+     */
     public AlgoVisualizer(int sceneWidth, int sceneHeight) {
 
-        // 初始化数据
-        // TODO: 初始化数据
-
-        // 初始化视图
         EventQueue.invokeLater(() -> {
             frame = new AlgoFrame("Welcome", sceneWidth, sceneHeight);
-            // TODO: 根据情况决定是否加入键盘鼠标事件监听器
             frame.addKeyListener(new AlgoKeyListener());
             frame.addMouseListener(new AlgoMouseListener());
             new Thread(() -> {
@@ -27,13 +30,12 @@ public class AlgoVisualizer {
         });
     }
 
-    // 动画逻辑
+    /**
+     * 动画逻辑（由子类实现）
+     */
     private void run() {
-
-        // TODO: 编写自己的动画逻辑
     }
 
-    // TODO: 根据情况决定是否实现键盘鼠标等交互事件监听器类
     private class AlgoKeyListener extends KeyAdapter {
     }
 

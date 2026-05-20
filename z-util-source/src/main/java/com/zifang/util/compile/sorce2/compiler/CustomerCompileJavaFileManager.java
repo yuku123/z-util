@@ -11,19 +11,48 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 用户自定义编译管理器
+ * 用户自定义编译文件管理器
+ * <p>
+ * 继承自ForwardingJavaFileManager，用于在动态编译过程中管理Java文件对象。
+ * 支持自定义源代码和字节码的存储、检索，以及覆盖默认的类加载器行为。
+ * 主要用于内存中编译场景，无需写入文件系统。
+ *
+ * @author zifang
+ * @version 1.0.0
+ * @since 2020-01-01
  */
 public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<JavaFileManager> {
 
+    /**
+     * 自定义类加载器
+     */
     private final CustomerCompileClassLoader classLoader;
 
+    /**
+     * Java文件对象缓存表，键为URI
+     */
     private final Map<URI, JavaFileObject> javaFileObjectMap = new ConcurrentHashMap<>();
 
+    /**
+     * 构造自定义编译文件管理器
+     *
+     * @param fileManager  标准文件管理器
+     * @param classLoader 自定义类加载器
+     */
     public CustomerCompileJavaFileManager(JavaFileManager fileManager, CustomerCompileClassLoader classLoader) {
         super(fileManager);
         this.classLoader = classLoader;
     }
 
+    /**
+     * 从位置、包名和相对名称构建URI
+     *
+     * @param location     位置（如CLASS_PATH、SOURCE_PATH）
+     * @param packageName  包名
+     * @param relativeName 相对名称
+     * @return 构建的URI
+     * @throws IllegalArgumentException 如果URI构建失败
+     */
     public static URI fromLocation(Location location, String packageName, String relativeName) {
         try {
             return new URI(location.getName() + '/' + packageName + '/' + relativeName);
@@ -32,7 +61,19 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
         }
     }
 
-    // 这里是编译器返回的同(源)Java文件对象,替换为CharSequenceJavaFileObject实现
+    /**
+     * 获取Java文件输出对象
+     * <p>
+     * 编译器调用此方法获取用于存储编译结果的JavaFileObject。
+     * 这里替换为CharSequenceJavaFileObject实现，以便在内存中存储字节码。
+     *
+     * @param location 文件位置
+     * @param className 类名
+     * @param kind      文件类型
+     * @param sibling   兄弟文件对象
+     * @return Java文件对象
+     * @throws IOException 如果发生IO错误
+     */
     @Override
     public JavaFileObject getJavaFileForOutput(Location location, String className, JavaFileObject.Kind kind, FileObject sibling) throws IOException {
         JavaFileObject javaFileObject = new CharSequenceJavaFileObject(className, kind);
@@ -40,12 +81,28 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
         return javaFileObject;
     }
 
-    // 这里覆盖原来的类加载器
+    /**
+     * 获取类加载器
+     * <p>
+     * 返回自定义的类加载器而非标准类加载器
+     *
+     * @param location 位置
+     * @return 类加载器
+     */
     @Override
     public ClassLoader getClassLoader(Location location) {
         return classLoader;
     }
 
+    /**
+     * 推断二进制名称
+     * <p>
+     * 对于自定义的CharSequenceJavaFileObject，直接返回其名称
+     *
+     * @param location 位置
+     * @param file     文件对象
+     * @return 二进制名称
+     */
     @Override
     public String inferBinaryName(Location location, JavaFileObject file) {
         if (file instanceof CharSequenceJavaFileObject) {
@@ -54,6 +111,18 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
         return super.inferBinaryName(location, file);
     }
 
+    /**
+     * 列出指定位置和包名下的文件对象
+     * <p>
+     * 合并了标准文件管理器的结果和内存中缓存的文件对象
+     *
+     * @param location    位置
+     * @param packageName 包名
+     * @param kinds       文件类型集合
+     * @param recurse     是否递归子包
+     * @return 文件对象迭代器
+     * @throws IOException 如果发生IO错误
+     */
     @Override
     public Iterable<JavaFileObject> list(Location location, String packageName, Set<JavaFileObject.Kind> kinds, boolean recurse) throws IOException {
         Iterable<JavaFileObject> superResult = super.list(location, packageName, kinds, recurse);
@@ -83,14 +152,22 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
     }
 
     /**
-     * 自定义方法,用于添加和缓存待编译的源文件对象
+     * 添加Java文件对象到缓存
+     *
+     * @param location      位置
+     * @param packageName   包名
+     * @param relativeName  相对名称
+     * @param javaFileObject Java文件对象
      */
     public void addJavaFileObject(Location location, String packageName, String relativeName, JavaFileObject javaFileObject) {
         javaFileObjectMap.put(fromLocation(location, packageName, relativeName), javaFileObject);
     }
 
     /**
-     * 自定义方法,用于添加和缓存待编译的源文件对象
+     * 添加Java文件对象到缓存
+     *
+     * @param uri            URI
+     * @param javaFileObject Java文件对象
      */
     public void addJavaFileObject(URI uri, JavaFileObject javaFileObject) {
         javaFileObjectMap.put(uri, javaFileObject);

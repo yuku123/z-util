@@ -11,13 +11,16 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * HTTP client wrapper around OkHttp with retry, cookie jar, proxy support, and configurable timeouts.
+ * 基于 OkHttp 的 HTTP 客户端，支持重试、Cookie 管理、代理支持和可配置超时。
  */
 public class CrawlerHttpClient {
 
     private final OkHttpClient client;
     private final CookieJarImpl cookieJar;
 
+    /**
+     * 构造 CrawlerHttpClient，使用默认配置。
+     */
     public CrawlerHttpClient() {
         this.cookieJar = new CookieJarImpl();
         this.client = new OkHttpClient.Builder()
@@ -30,7 +33,9 @@ public class CrawlerHttpClient {
     }
 
     /**
-     * Set proxy for HTTP requests.
+     * 设置 HTTP 代理。
+     * @param host 代理主机
+     * @param port 代理端口
      */
     public void setProxy(String host, int port) {
         // Note: proxy must be set at builder creation time for OkHttp
@@ -38,7 +43,11 @@ public class CrawlerHttpClient {
     }
 
     /**
-     * GET request
+     * 发送 GET 请求。
+     * @param url 请求 URL
+     * @param headers 请求头
+     * @return HTTP 响应
+     * @throws IOException 如果请求失败
      */
     public HttpResponse get(String url, Map<String, String> headers) throws IOException {
         Request.Builder builder = new Request.Builder().url(url).get();
@@ -50,7 +59,12 @@ public class CrawlerHttpClient {
     }
 
     /**
-     * POST request with body
+     * 发送 POST 请求。
+     * @param url 请求 URL
+     * @param body 请求体
+     * @param headers 请求头
+     * @return HTTP 响应
+     * @throws IOException 如果请求失败
      */
     public HttpResponse post(String url, String body, Map<String, String> headers) throws IOException {
         Request.Builder builder = new Request.Builder().url(url);
@@ -64,7 +78,10 @@ public class CrawlerHttpClient {
     }
 
     /**
-     * Download file from URL
+     * 从 URL 下载文件。
+     * @param url 请求 URL
+     * @param savePath 保存路径
+     * @throws IOException 如果下载失败
      */
     public void download(String url, String savePath) throws IOException {
         Request request = new Request.Builder().url(url).get().build();
@@ -91,28 +108,46 @@ public class CrawlerHttpClient {
     }
 
     /**
-     * HTTP response container
+     * HTTP 响应容器。
      */
     public static class HttpResponse {
         private final int code;
         private final String body;
         private final Map<String, String> headers;
 
-        public HttpResponse(int code, String body, Map<String, String> headers) {
+    /**
+     * 构造 HTTP 响应。
+     * @param code 状态码
+     * @param body 响应体
+     * @param headers 响应头
+     */
+    public HttpResponse(int code, String body, Map<String, String> headers) {
             this.code = code;
             this.body = body;
             this.headers = headers;
         }
 
-        public int getCode() {
+    /**
+     * 获取状态码。
+     * @return HTTP 状态码
+     */
+    public int getCode() {
             return code;
         }
 
-        public String getBody() {
+    /**
+     * 获取响应体。
+     * @return 响应体字符串
+     */
+    public String getBody() {
             return body;
         }
 
-        public Map<String, String> getHeaders() {
+    /**
+     * 获取响应头。
+     * @return 响应头映射
+     */
+    public Map<String, String> getHeaders() {
             return headers;
         }
     }

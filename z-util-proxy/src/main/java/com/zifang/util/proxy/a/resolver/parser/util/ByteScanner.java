@@ -4,16 +4,30 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * @author zifang
+ * 字节扫描器<br>
+ * 用于从输入流中读取不同长度的字节数据并转换为整数或字符串
  */
 public class ByteScanner {
 
     private InputStream inputStream;
 
+    /**
+     * 构造方法
+     *
+     * @param inputStream 输入流
+     */
     public ByteScanner(InputStream inputStream) {
         this.inputStream = inputStream;
     }
 
+    /**
+     * 从输入流读取指定长度的字节并转换为整数
+     * <p>
+     * 支持1、2、4字节长度的读取，采用高位在前（Big-Endian）存储方式
+     *
+     * @param size 字节长度，支持1、2、4
+     * @return 转换后的整数值，读取失败返回-1
+     */
     public int readToInteger(int size) {
         byte[] b = new byte[size];
         try {
@@ -33,6 +47,13 @@ public class ByteScanner {
         }
     }
 
+    /**
+     * 从输入流读取8个字节并转换为长整数
+     * <p>
+     * 采用高位在前（Big-Endian）存储方式
+     *
+     * @return 转换后的长整数值，读取失败返回-1
+     */
     public long readToLong() {
         byte[] bytes = new byte[8];
         try {
@@ -47,6 +68,12 @@ public class ByteScanner {
         }
     }
 
+    /**
+     * 从输入流读取指定长度的字节并转换为字符串
+     *
+     * @param size 要读取的字节长度
+     * @return 转换后的字符串，读取失败返回null
+     */
     public String readToString(int size) {
         byte[] b = new byte[size];
         try {

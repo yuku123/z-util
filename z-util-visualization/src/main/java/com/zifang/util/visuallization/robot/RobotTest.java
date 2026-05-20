@@ -8,7 +8,18 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Robot综合测试类
+ * 演示Robot类的多种功能：屏幕截图、鼠标操作、键盘操作、滚轮滚动等
+ */
 public class RobotTest {
+    /**
+     * 主方法
+     * @param args 命令行参数
+     * @throws AWTException 如果创建Robot失败
+     * @throws InterruptedException 如果线程休眠被中断
+     * @throws IOException 如果图片保存失败
+     */
     public static void main(String[] args) throws AWTException, InterruptedException, IOException {
 
         Robot robot = new Robot();
@@ -58,6 +69,10 @@ public class RobotTest {
 
     }
 
+    /**
+     * 输入字符串（仅支持英文字符）
+     * @param text 要输入的字符串
+     */
     public void keyboardString(final String text) {
         if (text != null) {
             try {

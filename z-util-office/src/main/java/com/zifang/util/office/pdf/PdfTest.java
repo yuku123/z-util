@@ -7,6 +7,10 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * PDF测试示例类
+ * 演示PDF文档的基本操作，如加载、创建空白页、保存等
+ */
 public class PdfTest {
     public static void main(String[] args) throws IOException {
         //Loading an existing document

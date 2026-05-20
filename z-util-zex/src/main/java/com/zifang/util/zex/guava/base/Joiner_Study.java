@@ -1,7 +1,7 @@
 /*
  * 文件名：Joiner_Study.java
  * 版权：Copyright 2007-2019 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： Joiner_Study.java
+ * 描述： Guava Joiner学习类
  * 修改人：zxiaofan
  * 修改时间：2019年12月29日
  * 修改内容：新增
@@ -20,9 +20,25 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * 连接器Joiner.join(Iterable<?> parts)
+ * Guava Joiner学习类。
+ * <p>
+ * Joiner是字符串连接器，提供了便捷的字符串拼接方式。
+ * <p>
+ * 主要特性：
+ * <ul>
+ *   <li>skipNulls()：跳过null值</li>
+ *   <li>useForNull(String)：用指定字符串替换null值</li>
+ *   <li>withKeyValueSeparator(String)：创建MapJoiner，指定key-value分隔符</li>
+ *   <li>appendTo()：将拼接结果追加到Appendable对象</li>
+ * </ul>
  * <p>
  * joiner实例总是不可变的，线程安全，建议定义为static final常量。
+ * <p>
+ * Joiner在百万级别以上数据拼接时比传统方式更高效。
+ *
+ * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
 public class Joiner_Study {
     String str1 = "a ";

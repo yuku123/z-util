@@ -6,45 +6,46 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 时间工具类
+ * 时间工具类。
+ * <p>
+ * 提供日期和时间相关的常用操作方法。
  *
  * @author lijing
  */
 public final class DateUtils {
 
     /**
-     * yyyy-MM-dd hh:mm:ss
-     */
-    public static final String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
-
-    /**
-     * 私有构造函数，不允许实例化此类。
-     */
-    private DateUtils() {
-    }
-
-    /**
-     * 默认日期格式。
+     * 默认日期格式：yyyy-MM-dd。
      */
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+
+    /**
+     * 默认日期时间格式：yyyy-MM-dd HH:mm:ss。
+     */
+    public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * 一天总毫秒数
      */
+    /**
+     * 一天总毫秒数。
+     */
     public static final long dayTotalMilliseconds = 24 * 60 * 60 * 1000L;
 
     /**
-     * 一天总秒数
+     * 一天总秒数。
      */
     public static final int dayTotalSeconds = 24 * 60 * 60;
 
     /**
-     * 返回日期的字符串类型，比如2014-06-04。
+     * 返回日期的字符串类型。
+     * <p>
+     * 例如：2014-06-04
      *
-     * @param dateTimestamp 系统毫秒数。
-     * @return 指定毫秒时间戳对应的日期。
+     * @param dateTimestamp 系统毫秒数
+     * @return 指定毫秒时间戳对应的日期字符串
      */
     public static String getDateString(long dateTimestamp) {
         SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
@@ -52,9 +53,11 @@ public final class DateUtils {
     }
 
     /**
-     * 返回今天的日期，格式是2014-06-04。
+     * 返回今天的日期。
+     * <p>
+     * 格式为：2014-06-04
      *
-     * @return 今天的日期。
+     * @return 今天的日期字符串
      */
     public static String getDateString() {
         SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
@@ -63,9 +66,11 @@ public final class DateUtils {
 
 
     /**
-     * 返回今天的日期，格式是2014-06-04 13:23:22。
+     * 返回今天的日期时间。
+     * <p>
+     * 格式为：2014-06-04 13:23:22
      *
-     * @return 今天的日期。
+     * @return 今天的日期时间字符串
      */
     public static String getDateAndTimeString() {
         SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT);
@@ -73,10 +78,12 @@ public final class DateUtils {
     }
 
     /**
-     * 返回下一天日期的字符串类型，比如输入为2014-06-04的时间戳，返回2014-06-05
+     * 返回下一天日期的字符串。
+     * <p>
+     * 例如输入为2014-06-04的时间戳，返回2014-06-05
      *
      * @param dateTimestamp 系统毫秒数
-     * @return
+     * @return 下一天日期字符串
      */
     public static String getNextDateString(long dateTimestamp) {
         SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_FORMAT);

@@ -115,8 +115,8 @@ public class SnowflakeIdWorker {
     /**
      * 阻塞到下一个毫秒，直到获得新的时间戳
      *
-     * @param lastTimestamp 上次生成ID的时间截
-     * @return 当前时间戳
+     * @param lastTimestamp 上次生成ID的时间戳
+     * @return 当前时间戳（毫秒）
      */
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();

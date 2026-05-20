@@ -5,6 +5,17 @@ import org.objectweb.asm.*;
 import java.io.File;
 import java.io.FileOutputStream;
 
+/**
+ * ASM字节码操作示例类。
+ * <p>
+ * 此类演示了如何使用ASM框架读取、修改和生成字节码。
+ * 通过ClassReader读取类信息，ClassWriter生成新的字节码，
+ * ClassVisitor和MethodVisitor进行字节码的访问和修改。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class A {
     public static void main(String[] args) throws Exception {
         //读取

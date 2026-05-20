@@ -11,12 +11,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * 拼音生成工具类
+ * <p>
+ * 提供中文转拼音的各种功能，包括：
+ * <ul>
+ *   <li>中文转换为全拼拼音</li>
+ *   <li>中文转换为首字母拼音</li>
+ *   <li>判断字符串是否包含中文</li>
+ *   <li>身份证号码相关操作</li>
+ * </ul>
+ *
  * @author zifang
  */
 public class PinyinGeneratorUtil {
 
     /**
-     * 生成中文拼音全称
+     * 将中文字符串转换为全拼拼音
+     * <p>
+     * 将输入的中文字符串转换为对应的汉语拼音全称，非汉字字符保持不变。
+     * 转换结果为小写形式，且去除所有非字母数字字符。
+     *
+     * @param chinese 中文字符串
+     * @return 中文对应的全拼拼音，字母均为小写
      */
     public static String transformToFullPinyin(String chinese) {
         // 用StringBuffer（字符串缓冲）来接收处理的数据
@@ -50,10 +66,13 @@ public class PinyinGeneratorUtil {
     }
 
     /**
-     * 生成中文首字母大写
+     * 将中文字符串转换为首字母拼音
+     * <p>
+     * 提取中文字符串中每个汉字的拼音首字母，非汉字字符保持不变。
+     * 返回结果为小写形式。
      *
-     * @param chinese
-     * @return
+     * @param chinese 中文字符串
+     * @return 每个汉字对应的拼音首字母，非汉字字符保持不变
      */
     public static String transformToHeadPinyin(String chinese) {
         // 用StringBuffer（字符串缓冲）来接收处理的数据
@@ -87,10 +106,13 @@ public class PinyinGeneratorUtil {
     }
 
     /**
-     * 将字符串中的中文转化为拼音,其他字符不变
+     * 将字符串中的中文转换为拼音，其他字符不变
+     * <p>
+     * 遍历输入字符串，将每个中文字符转换为其拼音表示，非汉字字符（字母、数字、标点等）保持原样输出。
+     * 转换采用不带声调的拼音格式。
      *
-     * @param inputString
-     * @return
+     * @param inputString 输入字符串
+     * @return 转换后的字符串，中文部分替换为拼音，非中文部分保持不变
      */
     public static String getPingYin(String inputString) {
         HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
@@ -120,7 +142,7 @@ public class PinyinGeneratorUtil {
      * 获取汉字串拼音首字母，英文字符不变
      *
      * @param chinese 汉字串
-     * @return 汉语拼音首字母
+     * @return 汉语拼音首字母，非汉字字符保持不变
      */
     public static String getFirstSpell(String chinese) {
         StringBuilder pybf = new StringBuilder();
@@ -146,10 +168,10 @@ public class PinyinGeneratorUtil {
     }
 
     /**
-     * 获取汉字串拼音，英文字符不变
+     * 获取汉字串全拼拼音，英文字符不变
      *
      * @param chinese 汉字串
-     * @return 汉语拼音
+     * @return 汉字串对应的完整拼音，非汉字字符保持不变
      */
     public static String getFullSpell(String chinese) {
         StringBuffer pybf = new StringBuffer();
@@ -172,7 +194,14 @@ public class PinyinGeneratorUtil {
     }
 
 
-    // 只能判断部分CJK字符（CJK统一汉字）
+    /**
+     * 使用正则表达式判断字符串是否包含中文
+     * <p>
+     * 该方法只能判断部分CJK字符（CJK统一汉字），对于某些生僻字可能无法准确识别。
+     *
+     * @param str 待检测的字符串
+     * @return 如果字符串包含中文返回true，否则返回false
+     */
     public static boolean isChineseByREG(String str) {
         if (str == null) {
             return false;
@@ -181,7 +210,15 @@ public class PinyinGeneratorUtil {
         return pattern.matcher(str.trim()).find();
     }
 
-    // 只能判断部分CJK字符（CJK统一汉字）
+    /**
+     * 使用Unicode块判断字符串是否包含中文
+     * <p>
+     * 通过检查字符是否属于CJK统一表意文字块来判断是否为中文，
+     * 只能判断部分CJK字符，对于某些生僻字可能无法准确识别。
+     *
+     * @param str 待检测的字符串
+     * @return 如果字符串包含中文返回true，否则返回false
+     */
     public static boolean isChineseByName(String str) {
         if (str == null) {
             return false;
@@ -194,7 +231,14 @@ public class PinyinGeneratorUtil {
     }
 
 
-    // 完整的判断中文汉字和符号
+    /**
+     * 完整的判断中文字符和符号
+     * <p>
+     * 遍历字符串中的每个字符，逐一判断是否为中文（包括汉字和常见中文标点符号）。
+     *
+     * @param strName 待检测的字符串
+     * @return 如果字符串包含中文返回true，否则返回false
+     */
     public static boolean isChinese(String strName) {
         char[] ch = strName.toCharArray();
         for (int i = 0; i < ch.length; i++) {
@@ -207,10 +251,12 @@ public class PinyinGeneratorUtil {
     }
 
     /**
-     * 判断是否是中文
+     * 判断单个字符是否为中文
+     * <p>
+     * 判断字符是否属于CJK统一表意文字、CJK兼容表意文字、CJK统一表意文字扩展A或中文标点符号范围。
      *
-     * @param c
-     * @return
+     * @param c 待检测的字符
+     * @return 如果是中文相关字符返回true，否则返回false
      */
     public static boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
@@ -218,7 +264,10 @@ public class PinyinGeneratorUtil {
     }
 
     /**
-     * 获取一个字符串中中文字符的个数
+     * 获取字符串中中文字符的个数
+     *
+     * @param str 待统计的字符串
+     * @return 字符串中中文字符的个数
      */
     public static int ChineseLength(String str) {
         Pattern p = Pattern.compile("[\u4E00-\u9FA5]+");
@@ -232,10 +281,13 @@ public class PinyinGeneratorUtil {
     }
 
     /**
-     * 判断是否是乱码
+     * 判断字符串是否为乱码
+     * <p>
+     * 通过分析字符串中非字母数字且非中文字符的比例来判断是否为乱码。
+     * 返回值为乱码字符占总字符的比例。
      *
-     * @param strName
-     * @return
+     * @param strName 待检测的字符串
+     * @return 乱码字符的比例（0.0表示无乱码，1.0表示完全乱码）
      */
     public static float isMessyCode(String strName) {
         Pattern p = Pattern.compile("\\s*|\t*|\r*|\n*");
@@ -255,8 +307,14 @@ public class PinyinGeneratorUtil {
         return count / chLength;
     }
 
-    /* 18位标准身份证号
-     * 方法用途：15位身份证转化为18位标准证件号
+    /**
+     * 将15位身份证号转换为18位标准身份证号
+     * <p>
+     * 15位身份证号码格式：6位地址码 + 6位出生日期（YYMMDD）+ 3位顺序码
+     * 转换时在第6位后插入"19"将出生年份补全为四位，然后计算校验位生成18位身份证号。
+     *
+     * @param IdCardNO 15位身份证号码
+     * @return 18位标准身份证号码，如果输入不符合15位格式则返回null
      */
     public static String transIDCard15to18(String IdCardNO) {
         String cardNo = null;
@@ -270,7 +328,11 @@ public class PinyinGeneratorUtil {
         return cardNo;
     }
 
-    /* 方法用途：15位补全身份证号码
+    /**
+     * 计算身份证最后一位校验码
+     *
+     * @param newCardId 补全后的17位身份证号
+     * @return 校验码字符（0-9或X）
      */
     private static String transCardLastNo(String newCardId) {
         char[] ch = newCardId.toCharArray();

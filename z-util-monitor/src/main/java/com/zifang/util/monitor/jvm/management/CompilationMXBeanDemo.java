@@ -16,16 +16,18 @@ public class CompilationMXBeanDemo {
 
 
     /**
-     * 获取指定JVM的类编译信息
+     * 获取指定JVM的编译信息。
      * <p>
-     * 远程程序启动初始JVM参数配置开启远程监控
-     * -Djava.rmi.server.hostname=192.168.10.105
-     * -Dcom.sun.management.jmxremote
-     * -Dcom.sun.management.jmxremote.port=9999
-     * -Dcom.sun.management.jmxremote.ssl=false
-     * -Dcom.sun.management.jmxremote.authenticate=false
+     * 远程程序启动JVM参数配置开启远程监控：
+     * <ul>
+     *   <li>-Djava.rmi.server.hostname=192.168.10.105</li>
+     *   <li>-Dcom.sun.management.jmxremote</li>
+     *   <li>-Dcom.sun.management.jmxremote.port=9999</li>
+     *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
+     *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
+     * </ul>
      *
-     * @return
+     * @return 远程JVM的CompilationMXBean实例，连接失败返回null
      */
     public static CompilationMXBean getRemoteCompilationMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -50,14 +52,19 @@ public class CompilationMXBeanDemo {
     }
 
     /**
-     * 获取当前虚拟机类编译信息
+     * 获取当前虚拟机编译信息。
      *
-     * @return
+     * @return 当前JVM的CompilationMXBean实例
      */
     public static CompilationMXBean getLocalCompilationMXBean() {
         return ManagementFactory.getCompilationMXBean();
     }
 
+    /**
+     * 主方法，演示获取JVM编译信息。
+     *
+     * @param args 命令行参数
+     */
     public static void main(String[] args) {
         CompilationMXBean compilationMXBean = getRemoteCompilationMXBean();
 //		CompilationMXBean compilationMXBean = getLocalCompilationMXBean();

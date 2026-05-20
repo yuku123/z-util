@@ -1,7 +1,18 @@
 package com.zifang.util.monitor.jvm;
 
+/**
+ * String字符串演示类。
+ * <p>
+ * 演示字符串常量池的工作机制以及intern方法的使用。
+ *
+ * @author lijing
+ * @since 2015/11/24
+ */
 public class StringDemo {
 
+    /**
+     * 测试方法，演示字符串常量的引用和intern方法的行为。
+     */
     public void test1() {
         String a = "ab";
         String b = "ab";

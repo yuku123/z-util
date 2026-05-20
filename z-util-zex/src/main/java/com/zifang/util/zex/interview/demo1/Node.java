@@ -1,5 +1,15 @@
 package com.zifang.util.zex.interview.demo1;
 
+/**
+ * 树形节点类。
+ * <p>
+ * 此类表示树形结构中的节点，包含节点ID、父节点ID和节点名称。
+ * 用于构建树形层级关系的数据结构。
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 1.0
+ */
 public class Node {
     private int id;
     private int parentId;

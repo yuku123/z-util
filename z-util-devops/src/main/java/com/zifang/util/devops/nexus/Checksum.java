@@ -1,6 +1,11 @@
 package com.zifang.util.devops.nexus;
 
 
+/**
+ * 文件校验和信息
+ * <p>
+ * 用于存储和校验文件的 MD5 和 SHA1 校验和
+ */
 public class Checksum {
 
     private String sha1;

@@ -823,6 +823,8 @@ public class DockerClient {
 
     /**
      * 容器资源使用统计
+     * <p>
+     * 用于封装容器的 CPU、内存、网络、磁盘使用情况
      */
     public static class StatsDTO {
         private double cpuPercent;

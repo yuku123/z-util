@@ -1,7 +1,7 @@
 /*
  * 文件名：ClassToInstanceMap_Study.java
  * 版权：Copyright 2007-2019 zxiaofan.com. Co. Ltd. All Rights Reserved.
- * 描述： ClassToInstanceMap_Study.java
+ * 描述： Guava ClassToInstanceMap学习类
  * 修改人：zxiaofan
  * 修改时间：2019年12月27日
  * 修改内容：新增
@@ -15,13 +15,18 @@ import org.junit.Test;
 
 
 /**
- * map的key并不是一种类型，是很多类型（常规Map的key、value类型固定），可通过类型得到其实例；
+ * Guava ClassToInstanceMap学习类。
+ * <p>
+ * ClassToInstanceMap是一种特殊的Map，其key是类型（Class对象），value是相应类型的实例。
+ * 可通过类型直接获取对应类型的实例，类似依赖注入容器。
  * <p>
  * 保证放入的value和key的类型对应，不一致将报转换异常。
  * <p>
- * 实现：MutableClassToInstanceMap、ImmutableClassToInstanceMap
+ * 实现类：MutableClassToInstanceMap、ImmutableClassToInstanceMap
  *
  * @author zxiaofan
+ * @version 1.0
+ * @since 1.0
  */
 public class ClassToInstanceMap_Study {
 

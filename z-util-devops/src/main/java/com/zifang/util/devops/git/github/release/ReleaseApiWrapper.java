@@ -150,6 +150,11 @@ public class ReleaseApiWrapper {
 
     // ==================== DTO ====================
 
+    /**
+     * Release 信息 DTO
+     * <p>
+     * 用于封装 Release 的基本信息，包括标签名、标题、正文、是否草稿等
+     */
     public static class ReleaseInfo {
         public long id;
         public String tagName;
@@ -160,6 +165,12 @@ public class ReleaseApiWrapper {
         public String htmlUrl;
         public String createdAt;
 
+        /**
+         * 从 GHRelease 对象构建 ReleaseInfo
+         *
+         * @param r Release 对象
+         * @return ReleaseInfo 实例
+         */
         public static ReleaseInfo from(GHRelease r) {
             ReleaseInfo info = new ReleaseInfo();
             info.id = r.getId();

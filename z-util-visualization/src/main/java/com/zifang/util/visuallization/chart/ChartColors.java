@@ -4,11 +4,15 @@ import java.awt.*;
 
 /**
  * 图表颜色定义
+ * 提供预设的调色板和颜色获取方法
  */
 public class ChartColors {
 
     private ChartColors() {}
 
+    /**
+     * 预定义的颜色调色板
+     */
     public static final Color[] PALETTE = {
             new Color(0x2196F3),  // Blue
             new Color(0x4CAF50),  // Green
@@ -22,6 +26,11 @@ public class ChartColors {
             new Color(0x607D8B),  // BlueGrey
     };
 
+    /**
+     * 根据索引获取颜色（循环调色板）
+     * @param index 颜色索引
+     * @return 对应的颜色
+     */
     public static Color getColor(int index) {
         return PALETTE[index % PALETTE.length];
     }

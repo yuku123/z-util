@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Step for extracting data from the page.
- * Task: "extract", params: {css, attr, multiple, asJson}
+ * 数据提取步骤，用于从页面中提取数据。
+ * 任务关键字：extract，参数：{css, attr, multiple, asJson}
  */
 public class ExtractStep implements Step {
 

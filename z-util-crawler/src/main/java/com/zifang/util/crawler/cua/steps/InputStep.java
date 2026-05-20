@@ -5,8 +5,8 @@ import com.zifang.util.crawler.cua.StepResult;
 import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
- * Step for inputting text into an element.
- * Task: "input", params: {css, text, clearFirst}
+ * 输入步骤，用于向输入框填写文本。
+ * 任务关键字：input，参数：{css, text, clearFirst}
  */
 public class InputStep implements Step {
 
