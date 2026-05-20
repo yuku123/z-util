@@ -109,19 +109,38 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
 
         // 得到根路径
         String basicPath = AnnotationUtil.getAnnotationValue(target, RestController.class);
-        System.out.println("[DEBUG handleHttpRequestLine] basicPath=" + basicPath + " method=" + method.getName() + " annotations=" + java.util.Arrays.toString(method.getAnnotations()));
+        System.out.println("[DEBUG handleHttpRequestLine] target=" + target + " method=" + method + " declaringClass=" + method.getDeclaringClass() + " annotations=" + java.util.Arrays.toString(method.getAnnotations()) + " declaredAnnotations=" + java.util.Arrays.toString(method.getDeclaredAnnotations()));
 
         // 解析 HTTP 方法和路径，支持 @GetMapping/@PostMapping/@PutMapping/@DeleteMapping/@RequestMapping
         RequestMethod requestMethod = null;
         String requestPath = null;
 
-        GetMapping getMapping = method.getAnnotation(GetMapping.class);
-        PostMapping postMapping = method.getAnnotation(PostMapping.class);
-        PutMapping putMapping = method.getAnnotation(PutMapping.class);
-        DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
-        RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
+        // 如果当前 method 没有注解，尝试从接口中查找同名方法
+        Method interfaceMethod = method;
+        if (method.getAnnotations().length == 0 && method.getDeclaringClass().isInterface()) {
+            // method 来自接口，正常
+        } else if (method.getAnnotations().length == 0) {
+            // method 来自实现类，尝试从接口中找同名方法
+            for (Class<?> iface : target.getInterfaces()) {
+                try {
+                    Method m = iface.getMethod(method.getName(), method.getParameterTypes());
+                    if (m.getAnnotations().length > 0) {
+                        interfaceMethod = m;
+                        System.out.println("[DEBUG handleHttpRequestLine] found annotated interface method: " + m);
+                        break;
+                    }
+                } catch (NoSuchMethodException ignored) {
+                }
+            }
+        }
 
-        System.out.println("[DEBUG handleHttpRequestLine] getMapping=" + getMapping + " postMapping=" + postMapping + " deleteMapping=" + deleteMapping);
+        GetMapping getMapping = interfaceMethod.getAnnotation(GetMapping.class);
+        PostMapping postMapping = interfaceMethod.getAnnotation(PostMapping.class);
+        PutMapping putMapping = interfaceMethod.getAnnotation(PutMapping.class);
+        DeleteMapping deleteMapping = interfaceMethod.getAnnotation(DeleteMapping.class);
+        RequestMapping requestMapping = interfaceMethod.getAnnotation(RequestMapping.class);
+
+        System.out.println("[DEBUG handleHttpRequestLine] getMapping=" + getMapping + " deleteMapping=" + deleteMapping);
 
         if (getMapping != null) {
             requestMethod = RequestMethod.GET;
