@@ -1,6 +1,7 @@
 package com.zifang.util.cli.util;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.text.DateFormat;
@@ -123,7 +124,7 @@ public class TypeHandler {
      * Convert a string value to the specified type.
      */
     @SuppressWarnings("unchecked")
-    public static <T> T cast(final String value, final Class<T> targetClass) throws ParseException {
+    public static <T> T cast(final String value, final Class<T> targetClass) throws ParseException, MalformedURLException, ClassNotFoundException {
         if (value == null) {
             return null;
         }

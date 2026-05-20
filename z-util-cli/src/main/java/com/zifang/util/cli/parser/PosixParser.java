@@ -75,7 +75,7 @@ public class PosixParser extends Parser {
         currentOption = null;
     }
 
-    private void handleLongOption(final String token, final boolean stopAtNonOption) {
+    private void handleLongOption(final String token, final boolean stopAtNonOption) throws AmbiguousOptionException {
         String optPart = token.substring(2);
         int equalIndex = DefaultParser.indexOfEqual(optPart);
         String opt = equalIndex == -1 ? optPart : optPart.substring(0, equalIndex);
