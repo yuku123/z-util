@@ -1,0 +1,103 @@
+package com.zifang.util.http.client;
+
+import com.zifang.util.http.base.define.RestController;
+import org.junit.Test;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.*;
+
+public class HttpRequestInvocationHandlerTest {
+
+    @Test
+    public void testConstructorWithInterface() {
+        HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
+        assertEquals(TestApi.class, handler.getTarget());
+    }
+
+    @Test
+    public void testConstructorWithInterfaceAndContextParams() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("key", "value");
+        
+        HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class, params);
+        assertEquals(TestApi.class, handler.getTarget());
+        assertSame(params, handler.getContextParams());
+    }
+
+    @Test
+    public void testSetContextParams() {
+        HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
+        Map<String, Object> params = new HashMap<>();
+        params.put("key", "value");
+        
+        handler.setContextParams(params);
+        assertSame(params, handler.getContextParams());
+    }
+
+    @Test
+    public void testGetContextParams() {
+        HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
+        assertNull(handler.getContextParams());
+    }
+
+    @Test
+    public void testToString() {
+        HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
+        String str = handler.toString();
+        assertNotNull(str);
+        assertTrue(str.contains("HttpRequestInvocationHandler"));
+    }
+
+    @Test
+    public void testEqualsWithSameContent() {
+        Map<String, Object> params1 = new HashMap<>();
+        Map<String, Object> params2 = new HashMap<>();
+        
+        HttpRequestInvocationHandler handler1 = new HttpRequestInvocationHandler(TestApi.class, params1);
+        HttpRequestInvocationHandler handler2 = new HttpRequestInvocationHandler(TestApi.class, params2);
+        
+        assertEquals(handler1, handler2);
+    }
+
+    @Test
+    public void testEqualsWithDifferentParams() {
+        Map<String, Object> params1 = new HashMap<>();
+        params1.put("key1", "value1");
+        
+        Map<String, Object> params2 = new HashMap<>();
+        params2.put("key2", "value2");
+        
+        HttpRequestInvocationHandler handler1 = new HttpRequestInvocationHandler(TestApi.class, params1);
+        HttpRequestInvocationHandler handler2 = new HttpRequestInvocationHandler(TestApi.class, params2);
+        
+        assertNotEquals(handler1, handler2);
+    }
+
+    @Test
+    public void testEqualsWithSelf() {
+        HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
+        assertEquals(handler, handler);
+    }
+
+    @Test
+    public void testEqualsWithNull() {
+        HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
+        assertNotEquals(null, handler);
+    }
+
+    @Test
+    public void testHashCode() {
+        Map<String, Object> params = new HashMap<>();
+        HttpRequestInvocationHandler handler1 = new HttpRequestInvocationHandler(TestApi.class, params);
+        HttpRequestInvocationHandler handler2 = new HttpRequestInvocationHandler(TestApi.class, params);
+        
+        assertEquals(handler1.hashCode(), handler2.hashCode());
+    }
+
+    @RestController("/test")
+    public interface TestApi {
+    }
+}

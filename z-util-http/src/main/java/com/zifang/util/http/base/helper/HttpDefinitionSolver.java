@@ -8,6 +8,8 @@ import com.zifang.util.http.base.pojo.HttpRequestDefinition;
 import com.zifang.util.http.base.pojo.HttpRequestHeader;
 import com.zifang.util.http.base.pojo.HttpRequestLine;
 import java.lang.reflect.Method;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -105,15 +107,40 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
 
     private void handleHttpRequestLine() {
 
-
         // 得到根路径
         String basicPath = AnnotationUtil.getAnnotationValue(target, RestController.class);
+        System.out.println("[DEBUG handleHttpRequestLine] basicPath=" + basicPath + " method=" + method.getName() + " annotations=" + java.util.Arrays.toString(method.getAnnotations()));
 
-        // 查看当前的方法体的调用方式是什么
-        RequestMethod requestMethod = AnnotationUtil.getAnnotationValue(method, RequestMapping.class, "method");
+        // 解析 HTTP 方法和路径，支持 @GetMapping/@PostMapping/@PutMapping/@DeleteMapping/@RequestMapping
+        RequestMethod requestMethod = null;
+        String requestPath = null;
 
-        // 当前方法的调用地址是什么
-        String requestPath = AnnotationUtil.getAnnotationValue(method, RequestMapping.class, "value");
+        GetMapping getMapping = method.getAnnotation(GetMapping.class);
+        PostMapping postMapping = method.getAnnotation(PostMapping.class);
+        PutMapping putMapping = method.getAnnotation(PutMapping.class);
+        DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
+        RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
+
+        System.out.println("[DEBUG handleHttpRequestLine] getMapping=" + getMapping + " postMapping=" + postMapping + " deleteMapping=" + deleteMapping);
+
+        if (getMapping != null) {
+            requestMethod = RequestMethod.GET;
+            requestPath = getMapping.value();
+        } else if (postMapping != null) {
+            requestMethod = RequestMethod.POST;
+            requestPath = postMapping.value();
+        } else if (putMapping != null) {
+            requestMethod = RequestMethod.PUT;
+            requestPath = putMapping.value();
+        } else if (deleteMapping != null) {
+            requestMethod = RequestMethod.DELETE;
+            requestPath = deleteMapping.value();
+        } else if (requestMapping != null) {
+            requestMethod = requestMapping.method();
+            requestPath = requestMapping.value();
+        }
+
+        System.out.println("[DEBUG handleHttpRequestLine] requestPath=" + requestPath + " requestMethod=" + requestMethod);
 
         // 检验是否有路径参数
         // 检验@requestParam
@@ -122,16 +149,53 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
             String key = AnnotationUtil.getAnnotationValue(parameterValuePair.getParameter(), RequestParam.class);
             String value = String.valueOf(parameterValuePair.getObj());
             if (key != null) {
-                requestParams.add(String.format("%s=%s", key, value));
+                try {
+                    String encodedKey = URLEncoder.encode(key, StandardCharsets.UTF_8.name());
+                    String encodedValue = URLEncoder.encode(value, StandardCharsets.UTF_8.name());
+                    requestParams.add(String.format("%s=%s", encodedKey, encodedValue));
+                } catch (Exception e) {
+                    // fallback: 不编码
+                    requestParams.add(String.format("%s=%s", key, value));
+                }
             }
         }
 
-        String url = basicPath + requestPath;
-        if (!requestParams.isEmpty()) {
-            url = url + "?" + String.join("&", requestParams);
+        // 提取路径变量，替换 requestPath 中的 {var} 占位符
+        String processedPath = requestPath;
+        if (processedPath != null && processedPath.contains("{")) {
+            Map<String, Object> pathVarMap = new LinkedHashMap<>();
+            for (ParameterValuePair pvp : parameterValuePairList) {
+                PathVariable pv = pvp.getParameter().getAnnotation(PathVariable.class);
+                if (pv != null) {
+                    String varName = pv.value();
+                    pathVarMap.put(varName, pvp.getObj());
+                }
+            }
+            // 替换 {varName} 为实际值
+            for (Map.Entry<String, Object> entry : pathVarMap.entrySet()) {
+                processedPath = processedPath.replace("{" + entry.getKey() + "}",
+                    String.valueOf(entry.getValue()));
+            }
         }
 
-        url = solveReplaceHolder(url, contextParams);
+        String relativePath = basicPath + processedPath;
+        if (!requestParams.isEmpty()) {
+            relativePath = relativePath + "?" + String.join("&", requestParams);
+        }
+
+        // 支持 contextParams 中的 baseUrl 作为前缀
+        String url = relativePath;
+        if (contextParams != null && contextParams.containsKey("baseUrl")) {
+            String baseUrl = String.valueOf(contextParams.get("baseUrl"));
+            if (baseUrl != null && !baseUrl.isEmpty()) {
+                // 确除末尾斜杠以避免双重斜杠
+                if (!baseUrl.endsWith("/")) {
+                    url = baseUrl + relativePath;
+                } else {
+                    url = baseUrl.substring(0, baseUrl.length() - 1) + relativePath;
+                }
+            }
+        }
 
         // 存储值
         HttpRequestLine httpRequestLine = new HttpRequestLine(); // 请求行的实例

@@ -16,20 +16,50 @@ public class HttpServerRequestHandler {
 
     private final Object target;
     private final Map<String, MethodMapping> methodMappings;
+    private final String contextPath;
 
     public HttpServerRequestHandler(Object target) {
         this.target = target;
         this.methodMappings = new HashMap<>();
+        this.contextPath = extractContextPath();
         scanMethods();
+    }
+
+    private String extractContextPath() {
+        Class<?> clazz = target.getClass();
+        Class<?>[] interfaces = clazz.getInterfaces();
+        for (Class<?> iface : interfaces) {
+            RestController rc = iface.getAnnotation(RestController.class);
+            if (rc != null) {
+                String path = rc.value();
+                return path.endsWith("/") ? path.substring(0, path.length() - 1) : path;
+            }
+        }
+        return "";
     }
 
     /**
      * 扫描目标类的方法，建立映射
+     * 优先扫描接口（因为注解在接口上），若无接口则扫描实现类
      */
     private void scanMethods() {
         Class<?> clazz = target.getClass();
 
-        for (Method method : clazz.getDeclaredMethods()) {
+        // 优先从接口上扫描注解（target 是实现类，需要找到对应的接口）
+        Class<?>[] interfaces = clazz.getInterfaces();
+        Class<?> annotationSource = null;
+        for (Class<?> iface : interfaces) {
+            if (iface.isAnnotationPresent(RestController.class)) {
+                annotationSource = iface;
+                break;
+            }
+        }
+        // 如果没找到接口（例如 target 本身是接口），直接扫描 target
+        if (annotationSource == null) {
+            annotationSource = clazz;
+        }
+
+        for (Method method : annotationSource.getDeclaredMethods()) {
             RequestMapping mapping = method.getAnnotation(RequestMapping.class);
             GetMapping getMapping = method.getAnnotation(GetMapping.class);
             PostMapping postMapping = method.getAnnotation(PostMapping.class);
@@ -69,20 +99,32 @@ public class HttpServerRequestHandler {
         String httpMethod = requestDefinition.getHttpRequestLine().getRequestMethod().name();
         String url = requestDefinition.getHttpRequestLine().getUrl();
 
-        // 解析路径（去除查询参数）
+        // 解析路径（去除查询参数和 context path 前缀）
         String path = url;
         int queryIndex = path.indexOf('?');
         if (queryIndex > 0) {
             path = path.substring(0, queryIndex);
         }
+        // 去除 context path 前缀，例如 /builder/hello -> /hello
+        if (contextPath != null && !contextPath.isEmpty() && path.startsWith(contextPath)) {
+            path = path.substring(contextPath.length());
+            if (!path.startsWith("/")) {
+                path = "/" + path;
+            }
+        }
 
         // 查找匹配的方法
         String key = httpMethod + ":" + path;
         MethodMapping mapping = methodMappings.get(key);
+        Map<String, String> pathParams = new HashMap<>();
 
         if (mapping == null) {
-            // 尝试模糊匹配
-            mapping = findMatchingMethod(httpMethod, path);
+            // 尝试模糊匹配，同时提取路径变量
+            java.util.Map.Entry<MethodMapping, Map<String, String>> result = findMatchingMethodWithParams(httpMethod, url);
+            if (result != null) {
+                mapping = result.getKey();
+                pathParams = result.getValue();
+            }
         }
 
         if (mapping == null) {
@@ -90,7 +132,7 @@ public class HttpServerRequestHandler {
         }
 
         // 准备方法参数
-        Object[] args = prepareArguments(mapping, requestDefinition);
+        Object[] args = prepareArguments(mapping, requestDefinition, pathParams);
 
         // 调用方法
         try {
@@ -118,6 +160,76 @@ public class HttpServerRequestHandler {
     }
 
     /**
+     * 查找匹配的方法并同时提取路径变量
+     */
+    private java.util.Map.Entry<MethodMapping, Map<String, String>> findMatchingMethodWithParams(String httpMethod, String url) {
+        // 从 URL 中提取路径部分（去除 host:port 和查询参数）
+        String path = extractPathFromUrl(url);
+
+        for (MethodMapping mapping : methodMappings.values()) {
+            if (!mapping.getHttpMethod().equals(httpMethod)) {
+                continue;
+            }
+
+            Map<String, String> params = matchPathWithParams(mapping.getPath(), path);
+            if (params != null) {
+                return new java.util.AbstractMap.SimpleEntry<>(mapping, params);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 从完整 URL 中提取路径部分
+     */
+    private String extractPathFromUrl(String url) {
+        // 去除协议和 host:port，得到路径部分
+        // 例如: http://localhost:8080/api/users/123 -> /api/users/123
+        int pathStart = url.indexOf("//");
+        if (pathStart >= 0) {
+            int hostEnd = url.indexOf("/", pathStart + 2);
+            if (hostEnd >= 0) {
+                return url.substring(hostEnd);
+            }
+        }
+        // 如果没有协议，直接返回（去除查询参数）
+        int queryStart = url.indexOf("?");
+        return queryStart >= 0 ? url.substring(0, queryStart) : url;
+    }
+
+    /**
+     * 匹配路径（支持路径变量如 /users/{id}），同时提取变量值
+     * @return 路径变量名->值的 Map，若不匹配则返回 null
+     */
+    private Map<String, String> matchPathWithParams(String pattern, String path) {
+        if (pattern.equals(path)) {
+            return new HashMap<>();
+        }
+
+        // 支持路径变量 {var}
+        String regex = pattern.replaceAll("\\{([^/]+)\\}", "([^/]+)");
+
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("^" + regex + "$");
+        java.util.regex.Matcher m = p.matcher(path);
+        if (!m.matches()) {
+            return null;
+        }
+
+        // 提取路径变量名和对应的值
+        Map<String, String> params = new HashMap<>();
+        java.util.regex.Pattern namePattern = java.util.regex.Pattern.compile("\\{([^/]+)\\}");
+        java.util.regex.Matcher nameMatcher = namePattern.matcher(pattern);
+        int groupIndex = 1;
+        while (nameMatcher.find()) {
+            String varName = nameMatcher.group(1);
+            String varValue = m.group(groupIndex);
+            params.put(varName, varValue);
+            groupIndex++;
+        }
+        return params;
+    }
+
+    /**
      * 匹配路径（支持路径变量如 /users/{id}）
      */
     private boolean matchPath(String pattern, String path) {
@@ -126,14 +238,14 @@ public class HttpServerRequestHandler {
         }
 
         // 支持路径变量 {var}
-        String regex = pattern.replaceAll("\\{[^/]+\\}", "[^/]+");
-        return path.matches(regex);
+        String regex = pattern.replaceAll("\\{[^/]+\\}", "([^/]+)");
+        return path.matches("^" + regex + "$");
     }
 
     /**
      * 准备方法参数
      */
-    private Object[] prepareArguments(MethodMapping mapping, HttpRequestDefinition request) {
+    private Object[] prepareArguments(MethodMapping mapping, HttpRequestDefinition request, Map<String, String> pathParams) {
         Method method = mapping.getMethod();
         Parameter[] parameters = method.getParameters();
         Object[] args = new Object[parameters.length];
@@ -144,8 +256,9 @@ public class HttpServerRequestHandler {
             // @PathVariable
             PathVariable pathVar = param.getAnnotation(PathVariable.class);
             if (pathVar != null) {
-                args[i] = extractPathVariable(mapping.getPath(),
-                    request.getHttpRequestLine().getUrl(), param.getType());
+                String name = pathVar.value();
+                String value = pathParams.get(name);
+                args[i] = convertType(value, param.getType());
                 continue;
             }
 

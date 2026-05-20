@@ -4,63 +4,160 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * DockerCommandResult 类测试
+ */
 public class DockerCommandResultTest {
 
     @Test
-    public void testSuccessWithData() {
-        DockerCommandResult<String> result = DockerCommandResult.success("hello");
-        assertTrue(result.isSuccess());
-        assertEquals("hello", result.getStdout());
+    public void testDefaultConstructor() {
+        DockerCommandResult<String> result = new DockerCommandResult<>();
+        assertNotNull(result);
+        assertFalse(result.isSuccess());
+        assertEquals(0, result.getExitCode());
+        assertNull(result.getStdout());
         assertNull(result.getStderr());
+        assertNull(result.getData());
+        assertNull(result.getMessage());
     }
 
     @Test
-    public void testSuccessWithTypedData() {
-        DockerCommandResult<Integer> result = DockerCommandResult.success(42);
+    public void testSuccessWithData() {
+        DockerCommandResult<String> result = DockerCommandResult.success("container-id-123");
+
         assertTrue(result.isSuccess());
-        assertEquals(Integer.valueOf(42), result.getData());
-        assertNull(result.getStdout());
+        assertEquals("container-id-123", result.getData());
+        assertEquals("container-id-123", result.getStdout());
+    }
+
+    @Test
+    public void testSuccessWithStdout() {
+        DockerCommandResult<String> result = DockerCommandResult.success("output data");
+
+        assertTrue(result.isSuccess());
+        assertEquals("output data", result.getStdout());
+        assertNull(result.getData());
     }
 
     @Test
     public void testFailWithExitCodeAndStderr() {
-        DockerCommandResult<String> result = DockerCommandResult.fail(1, "error message");
+        DockerCommandResult<String> result = DockerCommandResult.fail(1, "Error message");
+
         assertFalse(result.isSuccess());
         assertEquals(1, result.getExitCode());
-        assertEquals("error message", result.getStderr());
+        assertEquals("Error message", result.getStderr());
     }
 
     @Test
     public void testFailWithMessage() {
-        DockerCommandResult<String> result = DockerCommandResult.fail("connection timeout");
+        DockerCommandResult<String> result = DockerCommandResult.fail("Connection failed");
+
         assertFalse(result.isSuccess());
-        assertEquals("connection timeout", result.getMessage());
+        assertEquals("Connection failed", result.getMessage());
+    }
+
+    @Test
+    public void testSuccessSetter() {
+        DockerCommandResult<String> result = new DockerCommandResult<>();
+        result.setSuccess(true);
+        assertTrue(result.isSuccess());
+    }
+
+    @Test
+    public void testExitCodeSetter() {
+        DockerCommandResult<String> result = new DockerCommandResult<>();
+        result.setExitCode(127);
+        assertEquals(127, result.getExitCode());
+    }
+
+    @Test
+    public void testStdoutSetter() {
+        DockerCommandResult<String> result = new DockerCommandResult<>();
+        result.setStdout("test output");
+        assertEquals("test output", result.getStdout());
+    }
+
+    @Test
+    public void testStderrSetter() {
+        DockerCommandResult<String> result = new DockerCommandResult<>();
+        result.setStderr("error output");
+        assertEquals("error output", result.getStderr());
+    }
+
+    @Test
+    public void testDataSetter() {
+        DockerCommandResult<String> result = new DockerCommandResult<>();
+        result.setData("data value");
+        assertEquals("data value", result.getData());
+    }
+
+    @Test
+    public void testMessageSetter() {
+        DockerCommandResult<String> result = new DockerCommandResult<>();
+        result.setMessage("test message");
+        assertEquals("test message", result.getMessage());
     }
 
     @Test
     public void testToString() {
-        DockerCommandResult<String> result = DockerCommandResult.fail(127, "not found");
+        DockerCommandResult<String> result = DockerCommandResult.success("output");
         String str = result.toString();
-        assertTrue(str.contains("success=false"));
-        assertTrue(str.contains("exitCode=127"));
-        assertTrue(str.contains("not found"));
+
+        assertNotNull(str);
+        assertTrue(str.contains("DockerCommandResult"));
+        assertTrue(str.contains("success=true"));
     }
 
     @Test
-    public void testSettersAndGetters() {
-        DockerCommandResult<String> result = new DockerCommandResult<>();
-        result.setSuccess(true);
-        result.setExitCode(0);
-        result.setStdout("output");
-        result.setStderr("");
-        result.setData("data");
-        result.setMessage("msg");
+    public void testToStringWithFailure() {
+        DockerCommandResult<String> result = DockerCommandResult.fail(1, "error");
+        String str = result.toString();
+
+        assertNotNull(str);
+        assertTrue(str.contains("success=false"));
+    }
+
+    @Test
+    public void testSuccessResultCanHaveNullData() {
+        DockerCommandResult<String> result = DockerCommandResult.success((String) null);
 
         assertTrue(result.isSuccess());
+        assertNull(result.getStdout());
+        assertNull(result.getData());
+    }
+
+    @Test
+    public void testFailResultWithZeroExitCode() {
+        DockerCommandResult<String> result = DockerCommandResult.fail(0, "not really an error");
+
+        assertFalse(result.isSuccess());
         assertEquals(0, result.getExitCode());
-        assertEquals("output", result.getStdout());
-        assertEquals("", result.getStderr());
-        assertEquals("data", result.getData());
-        assertEquals("msg", result.getMessage());
+    }
+
+    @Test
+    public void testGenericType() {
+        DockerCommandResult<Integer> intResult = new DockerCommandResult<>();
+        intResult.setData(42);
+        assertEquals(42, intResult.getData().intValue());
+
+        DockerCommandResult<Double> doubleResult = new DockerCommandResult<>();
+        doubleResult.setData(3.14);
+        assertEquals(3.14, doubleResult.getData(), 0.0001);
+    }
+
+    @Test
+    public void testSuccessWithEmptyString() {
+        DockerCommandResult<String> result = DockerCommandResult.success("");
+
+        assertTrue(result.isSuccess());
+        assertEquals("", result.getStdout());
+    }
+
+    @Test
+    public void testFailWithEmptyMessage() {
+        DockerCommandResult<String> result = DockerCommandResult.fail("");
+
+        assertFalse(result.isSuccess());
+        assertEquals("", result.getMessage());
     }
 }

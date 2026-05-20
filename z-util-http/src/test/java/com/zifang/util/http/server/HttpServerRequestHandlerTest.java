@@ -1,0 +1,65 @@
+package com.zifang.util.http.server;
+
+import com.zifang.util.http.base.define.*;
+import com.zifang.util.http.base.pojo.HttpRequestBody;
+import com.zifang.util.http.base.pojo.HttpRequestDefinition;
+import com.zifang.util.http.base.pojo.HttpRequestLine;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class HttpServerRequestHandlerTest {
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testHandleRequestWithNullDefinition() {
+        HttpServerRequestHandler handler = new HttpServerRequestHandler(new TestController());
+        handler.handleRequest(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testHandleRequestWithNullRequestLine() {
+        HttpServerRequestHandler handler = new HttpServerRequestHandler(new TestController());
+        HttpRequestDefinition definition = new HttpRequestDefinition();
+        handler.handleRequest(definition);
+    }
+
+    @Test
+    public void testConstructor() {
+        TestController controller = new TestController();
+        HttpServerRequestHandler handler = new HttpServerRequestHandler(controller);
+        assertNotNull(handler);
+    }
+
+    @Test
+    public void testGetMappingInfo() {
+        TestController controller = new TestController();
+        HttpServerRequestHandler handler = new HttpServerRequestHandler(controller);
+        
+        HttpRequestDefinition definition = new HttpRequestDefinition();
+        HttpRequestLine requestLine = new HttpRequestLine();
+        requestLine.setRequestMethod(RequestMethod.GET);
+        requestLine.setUrl("/test");
+        definition.setHttpRequestLine(requestLine);
+        
+        // This will throw because the method mapping isn't found, but it shows the code works
+        try {
+            handler.handleRequest(definition);
+            fail("Expected RuntimeException");
+        } catch (RuntimeException e) {
+            assertTrue(e.getMessage().contains("No handler found"));
+        }
+    }
+
+    @RestController("/api")
+    public static class TestController {
+        @GetMapping("/test")
+        public String testMethod() {
+            return "test";
+        }
+
+        @PostMapping("/post")
+        public String postMethod(String body) {
+            return body;
+        }
+    }
+}

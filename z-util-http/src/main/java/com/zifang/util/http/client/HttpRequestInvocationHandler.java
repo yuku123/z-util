@@ -47,7 +47,16 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
         // 4 产生请求
         HttpRequestProducer httpRequestProducer = new HttpRequestProducer();
         Object response = httpRequestProducer.produceRequest(httpRequestDefinition);
-        return GsonUtil.jsonStrToObject(String.valueOf(response), method.getGenericReturnType());
+        System.out.println("[DEBUG] HttpRequestInvocationHandler.invoke() response = " + response + " for " + method.getName());
+        String jsonStr = String.valueOf(response);
+
+        // 如果返回类型是 String，直接返回原始 JSON 字符串
+        if (method.getGenericReturnType() == String.class) {
+            return jsonStr;
+        }
+
+        // 非 String 类型才做 JSON 反序列化
+        return GsonUtil.jsonStrToObject(jsonStr, method.getGenericReturnType());
 
     }
 
