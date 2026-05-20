@@ -9,11 +9,11 @@ public class BitsTest {
 
     @Test
     public void multipleLess() {
-        // multipleLess rounds down to previous power of 2
+        // multipleLess rounds down to nearest power of 2
         assertEquals(2, Bits.multipleLess(3));
-        assertEquals(1, Bits.multipleLess(2));
+        assertEquals(2, Bits.multipleLess(2));
         assertEquals(1, Bits.multipleLess(1));
-        assertEquals(1, Bits.multipleLess(0));
+        assertEquals(0, Bits.multipleLess(0));
     }
 
     @Test

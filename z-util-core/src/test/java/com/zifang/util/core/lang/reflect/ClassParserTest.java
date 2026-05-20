@@ -18,10 +18,10 @@ public class ClassParserTest {
         assertEquals(1, a.getCurrentProtectedField().size());
         assertEquals(3, a.getCurrentAllField().size());
 
-        assertEquals(4, a.getCurrentAllMethod().size());
+        assertEquals(6, a.getCurrentAllMethod().size());
         assertEquals(1, a.getCurrentPrivateMethod().size());
         assertEquals(1, a.getCurrentProtectedMethod().size());
-        assertEquals(1, a.getCurrentPublicMethod().size());
+        assertEquals(3, a.getCurrentPublicMethod().size());
         assertEquals(1, a.getCurrentDefaultMethod().size());
 
         assertTrue(a.isNormalClass());

@@ -111,12 +111,12 @@ public class BitsTest {
 
     @Test
     public void multipleLess_basic() {
-        // multipleLess rounds down to previous power of 2
+        // multipleLess rounds down to nearest power of 2
         assertEquals(1, Bits.multipleLess(1));
-        assertEquals(1, Bits.multipleLess(2));
+        assertEquals(2, Bits.multipleLess(2));
         assertEquals(2, Bits.multipleLess(3));
-        assertEquals(3, Bits.multipleLess(4));
-        assertEquals(3, Bits.multipleLess(5));
+        assertEquals(4, Bits.multipleLess(4));
+        assertEquals(4, Bits.multipleLess(5));
     }
 
     // --- multipleMore ---
@@ -149,9 +149,9 @@ public class BitsTest {
 
     @Test
     public void setTrue_middleBit() {
-        // 42 (101010) OR (1<<5)=32 gives 74 (1101010)
+        // 42 (101010) already has bit 5 set (32), so OR with 32 keeps 42
         long result = Bits.setTrue(42L, 5);
-        assertEquals(74L, result);
+        assertEquals(42L, result);
     }
 
     // --- getAllTrueIndex / getAllFalseIndex ---
