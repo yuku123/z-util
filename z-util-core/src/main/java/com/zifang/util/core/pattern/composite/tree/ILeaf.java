@@ -146,20 +146,8 @@ public interface ILeaf {
     default List<List<ILeaf>> getAllPathsToLeaves() {
         List<List<ILeaf>> paths = new ArrayList<>();
         List<ILeaf> currentPath = new ArrayList<>();
-        collectLeafPaths(this, currentPath, paths);
+        LeafHelper.collectLeafPaths(this, currentPath, paths);
         return paths;
-    }
-
-    private void collectLeafPaths(ILeaf node, List<ILeaf> currentPath, List<List<ILeaf>> paths) {
-        currentPath.add(node);
-        if (node.isLeaf()) {
-            paths.add(new ArrayList<>(currentPath));
-        } else {
-            for (ILeaf child : node.getSubLeaves()) {
-                collectLeafPaths(child, currentPath, paths);
-            }
-        }
-        currentPath.remove(currentPath.size() - 1);
     }
 
     /**
@@ -221,19 +209,8 @@ public interface ILeaf {
      */
     default List<ILeaf> findAll(Predicate<ILeaf> predicate) {
         List<ILeaf> results = new ArrayList<>();
-        collectMatches(this, predicate, results);
+        LeafHelper.collectMatches(this, predicate, results);
         return results;
-    }
-
-    private void collectMatches(ILeaf node, Predicate<ILeaf> predicate, List<ILeaf> results) {
-        if (predicate.test(node)) {
-            results.add(node);
-        }
-        if (!node.isLeaf()) {
-            for (ILeaf child : node.getSubLeaves()) {
-                collectMatches(child, predicate, results);
-            }
-        }
     }
 
     /**

@@ -1,44 +1,40 @@
 package com.zifang.util.core.pattern.composite.tree;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
- * 针对 叶子结点的操作
+ * 针对叶子结点的操作工具类
  *
  * @author zifang
  */
 public class LeafHelper {
 
     /**
-     * 转换 平铺的叶子结点 得到一个根节点
-     *
-     * @param leaves 堆放在一起的叶子结点
+     * 转换平铺的叶子结点得到一个根节点
      */
     public static ILeaf pickRootLeaf(List<? extends ILeaf> leaves) {
-
         if (leaves == null) {
             throw new NullPointerException();
         }
-
         return leaves.stream().filter(ILeaf::isRoot).findFirst().orElse(null);
     }
 
     /**
-     * 是否包含游离的根节点，就是说这么多结点内 有多个根节点的意思
+     * 是否包含游离的根节点（多个根节点）
      */
     public static boolean hasDissociateLeaf(List<? extends ILeaf> leaves) {
-
         if (leaves == null) {
             throw new NullPointerException();
         }
-
         return leaves.stream().filter(ILeaf::isRoot).count() > 1;
     }
 
     /**
-     * 获得 平铺的叶子结点(里面可能包含多个叶子根结点) 里面的所有的根节点串
+     * 获得平铺的叶子结点里面所有的根节点串
      */
     public static List<ILeaf> solveStackLeaves(List<ILeaf> leaves) {
         if (leaves == null) {
@@ -50,7 +46,7 @@ public class LeafHelper {
     }
 
     /**
-     * 对一般化object 进行leaf的包装
+     * 对一般化object进行leaf的包装
      */
     public static <ID, C> LeafWrapper<ID, ID, C> wrapper(ID currentId, ID parentId, C bean) {
         return new LeafWrapper<>(currentId, parentId, bean);
@@ -60,7 +56,8 @@ public class LeafHelper {
      * 树化结点包装
      */
     public static <ID, C> LeafWrapper<ID, ID, C> treeify(List<LeafWrapper<ID, ID, C>> leafWrappers) {
-        Map<ID, LeafWrapper<ID, ID, C>> leafWrapperMap = leafWrappers.stream().collect(Collectors.toMap(LeafWrapper::getA, e -> e));
+        Map<ID, LeafWrapper<ID, ID, C>> leafWrapperMap = leafWrappers.stream()
+                .collect(Collectors.toMap(LeafWrapper::getA, e -> e));
 
         LeafWrapper<ID, ID, C> root = null;
         for (LeafWrapper<ID, ID, C> leafWrapper : leafWrappers) {
@@ -73,5 +70,34 @@ public class LeafHelper {
             }
         }
         return root;
+    }
+
+    /**
+     * 收集所有匹配的节点
+     */
+    static void collectMatches(ILeaf node, Predicate<ILeaf> predicate, List<ILeaf> results) {
+        if (predicate.test(node)) {
+            results.add(node);
+        }
+        if (!node.isLeaf()) {
+            for (ILeaf child : node.getSubLeaves()) {
+                collectMatches(child, predicate, results);
+            }
+        }
+    }
+
+    /**
+     * 收集所有到叶子节点的路径
+     */
+    static void collectLeafPaths(ILeaf node, List<ILeaf> currentPath, List<List<ILeaf>> paths) {
+        currentPath.add(node);
+        if (node.isLeaf()) {
+            paths.add(new ArrayList<>(currentPath));
+        } else {
+            for (ILeaf child : node.getSubLeaves()) {
+                collectLeafPaths(child, currentPath, paths);
+            }
+        }
+        currentPath.remove(currentPath.size() - 1);
     }
 }
