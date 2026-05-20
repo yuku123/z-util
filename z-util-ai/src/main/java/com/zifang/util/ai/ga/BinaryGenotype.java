@@ -62,7 +62,6 @@ public class BinaryGenotype extends Individual {
      *
      * @return 由0和1组成的字符串
      */
-    @Override
     public String toBinaryString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length(); i++) {

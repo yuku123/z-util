@@ -24,11 +24,6 @@ public final class DateUtils {
      */
     public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-    public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
-    /**
-     * 一天总毫秒数
-     */
     /**
      * 一天总毫秒数。
      */

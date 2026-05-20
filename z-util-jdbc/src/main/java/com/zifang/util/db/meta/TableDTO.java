@@ -28,7 +28,7 @@ public class TableDTO {
         }
         this.tableName = trimmedName;
         this.comment = comment == null ? "" : comment.trim();
-        this.entityName = underlineToCamelUpper(trimmedName);
+        this.entityName = ColumnDTO.underlineToCamelUpper(trimmedName);
     }
 
     /**

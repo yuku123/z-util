@@ -100,7 +100,7 @@ public class MatrixToImageWriterEx {
             drawImage(logoPath, image, logoConfig);
 
             //写入logo照片到二维码
-            ImageIO.write(image, formate, new File(imagePath));
+            ImageIO.write(image, format, new File(imagePath));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,7 +124,7 @@ public class MatrixToImageWriterEx {
         drawImage(logoPath, image, logoConfig);
 
         //输出
-        ImageIO.write(image, formate, out);
+        ImageIO.write(image, format, out);
     }
 
     /**
@@ -142,7 +142,7 @@ public class MatrixToImageWriterEx {
         drawImage(logoPath, image, logoConfig);
 
         //输出
-        ImageIO.write(image, formate, out);
+        ImageIO.write(image, format, out);
     }
 
     /**

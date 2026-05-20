@@ -183,36 +183,30 @@ public class DefaultParser implements CommandLineParser {
                 }
             } else if (arg.startsWith(OPT_PREFIX) && arg.length() > 2) {
                 // Short option cluster: -abc
+                // Extract the first char as candidate option
                 String cluster = arg.substring(1);
-                // Check if first part is a known option with argument
-                if (options.hasShortOption(String.valueOf(cluster.charAt(0)))) {
-                    Option opt = options.getOption(String.valueOf(cluster.charAt(0)));
-                    if (opt.hasArg() && cluster.length() > 2) {
-                        // -fvalue
-                        result.add(OPT_PREFIX + cluster.charAt(0));
-                        result.add(cluster.substring(2));
-                        continue;
-                    }
-                }
-                // Burst the cluster
-                for (int j = 0; j < cluster.length(); j++) {
-                    String ch = String.valueOf(cluster.charAt(j));
-                    if (!options.hasShortOption(ch)) {
-                        if (stopAtNonOption) {
-                            result.add(LONG_OPT_PREFIX);
-                            result.add(arg.substring(j + 1));
-                            eatTheRest = true;
-                            break;
-                        } else {
-                            result.add(arg);
+                String firstChar = String.valueOf(cluster.charAt(0));
+                Option firstOpt = options.hasShortOption(firstChar) ? options.getOption(firstChar) : null;
+
+                if (firstOpt != null && firstOpt.hasArg()) {
+                    // -fvalue: first option takes an argument, rest is the value
+                    result.add(OPT_PREFIX + firstChar);
+                    result.add(cluster.substring(1));
+                } else {
+                    // Burst into individual short options
+                    for (int j = 0; j < cluster.length(); j++) {
+                        String ch = String.valueOf(cluster.charAt(j));
+                        if (!options.hasShortOption(ch)) {
+                            // Unknown option: treat remainder as positional args and stop
+                            result.add(arg.substring(j));
                             break;
                         }
-                    }
-                    result.add(OPT_PREFIX + ch);
-                    Option shortOpt = options.getOption(ch);
-                    if (shortOpt.hasArg() && j + 1 < cluster.length()) {
-                        result.add(cluster.substring(j + 1));
-                        break;
+                        result.add(OPT_PREFIX + ch);
+                        Option shortOpt = options.getOption(ch);
+                        if (shortOpt.hasArg() && j + 1 < cluster.length()) {
+                            result.add(cluster.substring(j + 1));
+                            break;
+                        }
                     }
                 }
             } else {
@@ -267,9 +261,9 @@ public class DefaultParser implements CommandLineParser {
         Option option = options.getOption(opt);
         String value = null;
 
-        if (option.hasArg() && token.length() > 2) {
+        if (option.hasArg() && token.length() > 1) {
             // -fvalue
-            value = token.substring(2);
+            value = token.substring(1);
         }
 
         processOption(option, iterator, value);

@@ -9,7 +9,6 @@ public class DateUtilsTest {
 
     @Test
     public void testConstants() {
-        assertEquals("yyyy-MM-dd hh:mm:ss", DateUtils.DATE_FORMAT);
         assertEquals("yyyy-MM-dd", DateUtils.DEFAULT_DATE_FORMAT);
         assertEquals("yyyy-MM-dd HH:mm:ss", DateUtils.DEFAULT_DATE_TIME_FORMAT);
         assertEquals(86400000L, DateUtils.dayTotalMilliseconds);

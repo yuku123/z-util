@@ -44,7 +44,7 @@ public class CommandLine implements Serializable {
 
     public boolean hasOption(final String opt) {
         Option option = getOptionObject(opt);
-        return option != null && option.hasValue();
+        return option != null;
     }
 
     public boolean hasOption(final Option opt) {

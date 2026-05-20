@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.File;
-import java.time.Duration;
 import java.util.Set;
 
 /**
@@ -22,7 +21,7 @@ public class BrowserClient {
      */
     public BrowserClient(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, 10);
     }
 
     /**
@@ -32,7 +31,7 @@ public class BrowserClient {
      */
     public BrowserClient(WebDriver driver, int timeoutSeconds) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        this.wait = new WebDriverWait(driver, timeoutSeconds);
     }
 
     /**
@@ -113,7 +112,7 @@ public class BrowserClient {
      */
     public boolean waitForElement(String cssSelector, int timeoutSec) {
         try {
-            WebDriverWait customWait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSec));
+            WebDriverWait customWait = new WebDriverWait(driver, (long) timeoutSec);
             customWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
             return true;
         } catch (TimeoutException e) {
@@ -129,7 +128,7 @@ public class BrowserClient {
      */
     public boolean waitForElementVisible(String cssSelector, int timeoutSec) {
         try {
-            WebDriverWait customWait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSec));
+            WebDriverWait customWait = new WebDriverWait(driver, (long) timeoutSec);
             customWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(cssSelector)));
             return true;
         } catch (TimeoutException e) {

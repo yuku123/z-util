@@ -1,5 +1,12 @@
 package com.zifang.util.monitor.jvm.ref;
 
+import java.lang.ref.PhantomReference;
+import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
+import java.lang.ref.ReferenceQueue;
+import java.util.Map;
+
 /**
  * 引用类型主测试类。
  * <p>

@@ -2,12 +2,16 @@ package com.zifang.util.proxy.a.resolver2.method;
 
 import com.zifang.util.proxy.a.resolver2.attribute.AbstractAttribute;
 import com.zifang.util.proxy.a.resolver2.attribute.AttributeFactory;
+import com.zifang.util.proxy.a.resolver2.constantpool.AbstractConstantPool;
 import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 方法表
+ */
 public class MethodTable {
     private U2 accessFlags;
     private U2 nameIndex;
@@ -15,21 +19,47 @@ public class MethodTable {
     private U2 attributesCount;
     private List<AbstractAttribute> attributesInfo = new ArrayList<>();
 
-    public MethodTable(InputStream stream) {
-        accessFlags = U2.read(stream);
-        nameIndex = U2.read(stream);
-        descriptorIndex = U2.read(stream);
-        attributesCount = U2.read(stream);
-        short count = attributesCount.value;//field的属性
-        for (int i = 0; i < count; i++) {
-            parseFieldAttribute(stream);
+    /**
+     * 构造函数
+     *
+     * @param stream       输入流
+     * @param poolList     常量池列表
+     * @param methodCount  方法数量
+     */
+    public MethodTable(InputStream stream, List<AbstractConstantPool> poolList, int methodCount) {
+        for (int i = 0; i < methodCount; i++) {
+            parseMethod(stream, poolList);
         }
     }
 
-    //解析字段表属性
-    public void parseFieldAttribute(InputStream inputStream) {
-        AbstractAttribute attributeTable = AttributeFactory.getAttributeTable(inputStream);
-        attributesInfo.add(attributeTable);
+    /**
+     * 解析单个方法
+     *
+     * @param inputStream 输入流
+     * @param poolList    常量池列表
+     */
+    public void parseMethod(InputStream inputStream, List<AbstractConstantPool> poolList) {
+        accessFlags = U2.read(inputStream);
+        nameIndex = U2.read(inputStream);
+        descriptorIndex = U2.read(inputStream);
+        attributesCount = U2.read(inputStream);
+        short count = attributesCount.value;
+        for (int i = 0; i < count; i++) {
+            parseAttribute(inputStream, poolList);
+        }
+    }
+
+    /**
+     * 解析方法属性
+     *
+     * @param inputStream 输入流
+     * @param poolList    常量池列表
+     */
+    public void parseAttribute(InputStream inputStream, List<AbstractConstantPool> poolList) {
+        AbstractAttribute attributeTable = AttributeFactory.getAttributeTable(inputStream, poolList);
+        if (attributeTable != null) {
+            attributesInfo.add(attributeTable);
+        }
     }
 
     public U2 getAccessFlags() {

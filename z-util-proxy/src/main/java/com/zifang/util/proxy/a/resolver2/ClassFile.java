@@ -1,24 +1,103 @@
 package com.zifang.util.proxy.a.resolver2;
 
+import com.zifang.util.proxy.a.resolver2.constantpool.ClassInfo;
 import com.zifang.util.proxy.a.resolver2.constantpool.ConstantPoolInfo;
-import com.zifang.util.proxy.a.resolver2.field.FieldInfo;
+import com.zifang.util.proxy.a.resolver2.constantpool.AbstractConstantPool;
+import com.zifang.util.proxy.a.resolver2.constantpool.Utf8Info;
+import com.zifang.util.proxy.a.resolver2.field.FieldTable;
 import com.zifang.util.proxy.a.resolver2.inter.InterfaceIndex;
-import com.zifang.util.proxy.a.resolver2.method.MethodInfo;
+import com.zifang.util.proxy.a.resolver2.method.MethodTable;
 import com.zifang.util.proxy.a.resolver2.readtype.U2;
 import com.zifang.util.proxy.a.resolver2.readtype.U4;
 
+/**
+ * ClassFile结构
+ * <p>
+ * 代表一个完整的.class文件结构，遵循JVM规范。
+ */
 public class ClassFile {
-    public static U4 magic;//魔术
-    public static U2 minorVersion;//次版本号
-    public static U2 majorVersion;//主版本号
-    public static U2 constantPoolSize;//常量池大小
-    public static ConstantPoolInfo poolInfo;//常量池内容
-    public static U2 accessFlag;//类的访问标志
-    public static U2 classIndex;//类索引
-    public static U2 superClassIndex;//父类索引
-    public static InterfaceIndex interfaceIndex;//接口索引
-    public static FieldInfo fieldInfo;//字段信息
-    public static MethodInfo methodInfo;//方法信息
+    /** 魔数，固定为0xCAFEBABE */
+    public U4 magic;
 
+    /** 次版本号 */
+    public U2 minorVersion;
 
+    /** 主版本号 (52=Java8, 55=Java11, 61=Java17) */
+    public U2 majorVersion;
+
+    /** 常量池大小 */
+    public U2 constantPoolSize;
+
+    /** 常量池内容 */
+    public ConstantPoolInfo poolInfo;
+
+    /** 类的访问标志 (ACC_PUBLIC, ACC_FINAL等) */
+    public U2 accessFlag;
+
+    /** 类索引，指向常量池中的CONSTANT_Class_info */
+    public U2 classIndex;
+
+    /** 父类索引，指向常量池中的CONSTANT_Class_info */
+    public U2 superClassIndex;
+
+    /** 接口索引表 */
+    public InterfaceIndex interfaceIndex;
+
+    /** 字段表 */
+    public FieldTable fieldInfo;
+
+    /** 方法表 */
+    public MethodTable methodInfo;
+
+    /**
+     * 获取类名
+     *
+     * @return 类名字符串
+     */
+    public String getClassName() {
+        if (poolInfo == null || poolInfo.getPoolList() == null || classIndex == null) {
+            return null;
+        }
+        // classIndex 指向常量池中的 ClassInfo (tag=7)
+        int classInfoIndex = classIndex.value - 1;
+        if (classInfoIndex < 0 || classInfoIndex >= poolInfo.getPoolList().size()) {
+            return null;
+        }
+        AbstractConstantPool classInfo = poolInfo.getPoolList().get(classInfoIndex);
+        if (!(classInfo instanceof ClassInfo)) {
+            return null;
+        }
+        // ClassInfo.nameIndex 指向 Utf8Info
+        int utf8Index = ((ClassInfo) classInfo).getNameIndex().value - 1;
+        if (utf8Index < 0 || utf8Index >= poolInfo.getPoolList().size()) {
+            return null;
+        }
+        AbstractConstantPool utf8Pool = poolInfo.getPoolList().get(utf8Index);
+        if (utf8Pool instanceof Utf8Info) {
+            return ((Utf8Info) utf8Pool).getValue();
+        }
+        return null;
+    }
+
+    /**
+     * 获取方法数量
+     *
+     * @return 方法数量
+     */
+    public int getMethodCount() {
+        if (methodInfo == null) {
+            return 0;
+        }
+        return methodInfo.getAccessFlags() != null ? 1 : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ClassFile{" +
+                "magic=" + (magic != null ? String.format("0x%08X", magic.value) : "null") +
+                ", majorVersion=" + (majorVersion != null ? majorVersion.value : 0) +
+                ", minorVersion=" + (minorVersion != null ? minorVersion.value : 0) +
+                ", constantPoolSize=" + (constantPoolSize != null ? constantPoolSize.value : 0) +
+                '}';
+    }
 }

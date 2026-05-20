@@ -8,13 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 接口信息
+ * 接口索引信息
  */
 public class InterfaceIndex {
     public U2 length;
-    public List<Interface> list = new ArrayList<Interface>();
+    public List<Interface> list = new ArrayList<>();
 
-    public InterfaceIndex(InputStream stream) {
-        length = U2.read(stream);
+    public InterfaceIndex() {
+    }
+
+    public void addIndex(U2 index) {
+        this.list.add(new Interface(index));
     }
 }

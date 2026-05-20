@@ -1,6 +1,5 @@
 package com.zifang.util.proxy.a.resolver2.attribute;
 
-import com.zifang.util.proxy.a.resolver2.ClassFile;
 import com.zifang.util.proxy.a.resolver2.constantpool.AbstractConstantPool;
 import com.zifang.util.proxy.a.resolver2.constantpool.Utf8Info;
 import com.zifang.util.proxy.a.resolver2.readtype.U2;
@@ -10,15 +9,25 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * 属性工厂类
+ * <p>
+ * 根据属性名称创建对应的属性解析对象。
+ */
 public class AttributeFactory {
-    private static final HashMap<String, AbstractAttribute> attrMap = new HashMap<String, AbstractAttribute>(29);
+    private static final HashMap<String, AbstractAttribute> attrMap = new HashMap<>(29);
 
-
-    public static AbstractAttribute getAttributeTable(InputStream inputStream) {
+    /**
+     * 获取属性对象
+     *
+     * @param inputStream 输入流
+     * @param poolList    常量池列表，用于解析属性名称
+     * @return 属性对象，如果不支持该属性则返回null
+     */
+    public static AbstractAttribute getAttributeTable(InputStream inputStream, List<AbstractConstantPool> poolList) {
         U2 attributeNameIndex = U2.read(inputStream);
         U4 attributeLength = U4.read(inputStream);
         short constantIndex = attributeNameIndex.getValue();
-        List<AbstractConstantPool> poolList = ClassFile.poolInfo.getPoolList();
         Utf8Info utf8Info = (Utf8Info) poolList.get(constantIndex - 1);
         String key = utf8Info.getValue();
 
@@ -30,7 +39,7 @@ public class AttributeFactory {
                 return constantValue;
             case "Code":
                 //方法表--java代码编译成的字节码指令
-                Code code = new Code(attributeNameIndex, attributeLength);
+                Code code = new Code(attributeNameIndex, attributeLength, poolList);
                 code.read(inputStream);
                 return code;
             case "Deprecate":
