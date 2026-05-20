@@ -8,11 +8,26 @@ import com.zifang.util.workflow.engine.spark.SparkEngine;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 引擎工厂类，负责创建和管理不同类型的执行引擎。
+ * 支持的引擎类型包括：spark、python、java。
+ * 引擎实例会被缓存以提高性能。
+ *
+ * @see AbstractEngine
+ * @see SparkEngine
+ * @see PythonEngine
+ * @see JavaEngine
+ */
 public class EngineFactory {
 
+    /**
+     * 引擎实例缓存池
+     */
     public static Map<String, AbstractEngine> engineCache = new HashMap<>();
 
-    //type : engine
+    /**
+     * 已注册的引擎类型映射表
+     */
     public static Map<String, Class<? extends AbstractEngine>> registeredEngineMap = new HashMap<String, Class<? extends AbstractEngine>>() {
         {
             put("spark", SparkEngine.class);
@@ -21,6 +36,14 @@ public class EngineFactory {
         }
     };
 
+    /**
+     * 根据引擎配置获取引擎实例。
+     * 如果缓存中已存在则直接返回，否则创建新实例并加入缓存。
+     *
+     * @param engine 引擎配置，包含类型、模式及属性信息
+     * @return 引擎实例，如果类型未注册则返回null
+     * @throws IllegalArgumentException 如果引擎类型未注册
+     */
     public static AbstractEngine getEngine(Engine engine) {
 
         //得到引擎种类类型

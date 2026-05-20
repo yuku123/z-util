@@ -17,29 +17,27 @@
 //package com.zifang.util.core.pattern.chain.define;
 //
 ///**
-// * A <code>Processing</code> encapsulates states that can be returned by
-// * commands.
+// * <code>Processing</code> 封装了命令可以返回的状态。
 // * <p>
-// * {@link org.apache.commons.chain2.Command}s should either return <code>FINISHED</code> if the
-// * processing of the given context has been completed, or return
-// * <code>CONTINUE</code> if the processing of the given {@link org.apache.commons.chain2.Context} should
-// * be delegated to a subsequent command in an enclosing {@link Chain}.
+// * {@link org.apache.commons.chain2.Command} 如果给定上下文的处理已完成应返回 <code>FINISHED</code>，
+// * 或者如果给定 {@link org.apache.commons.chain2.Context} 的处理应该委托给 enclosing {@link Chain} 中的后续命令，
+// * 则应返回 <code>CONTINUE</code>。
 // *
-// * @version $Id $
+// * @version $Id$
 // */
 //public enum Processing {
 //
 //    /**
-//     * Commands should return continue if the processing of the given
-//     * context should be delegated to a subsequent command in an enclosing chain.
+//     * 如果给定上下文的处理应该委托给 enclosing chain 中的后续命令，
+//     * 命令应返回 continue。
 //     *
 //     * @since Chain 2.0
 //     */
 //    CONTINUE,
 //
 //    /**
-//     * Commands should return finished if the processing of the given context
-//     * has been completed.
+//     * 如果给定上下文的处理已完成，
+//     * 命令应返回 finished。
 //     *
 //     * @since Chain 2.0
 //     */

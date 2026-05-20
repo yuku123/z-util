@@ -46,7 +46,9 @@ public class ClassParser {
     }
 
     /**
-     * 是否是普通的类
+     * 判断当前解析的类是否是普通的类（非接口、非抽象类、非枚举、非数组、非注解、非合成类、非原始类型）
+     *
+     * @return 是否是普通类
      */
     public boolean isNormalClass() {
         return null != clazz //
@@ -59,38 +61,83 @@ public class ClassParser {
                 && !clazz.isPrimitive();//
     }
 
+    /**
+     * 获取当前类的所有public字段
+     *
+     * @return public字段列表
+     */
     public List<Field> getCurrentPublicField() {
         return getCurrentAllField().stream().filter(e -> Modifier.isPublic(e.getModifiers())).collect(Collectors.toList());
     }
 
+    /**
+     * 获取当前类的所有protected字段
+     *
+     * @return protected字段列表
+     */
     public List<Field> getCurrentProtectedField() {
         return getCurrentAllField().stream().filter(e -> Modifier.isProtected(e.getModifiers())).collect(Collectors.toList());
     }
 
+    /**
+     * 获取当前类的所有private字段
+     *
+     * @return private字段列表
+     */
     public List<Field> getCurrentPrivateField() {
         return getCurrentAllField().stream().filter(e -> Modifier.isPrivate(e.getModifiers())).collect(Collectors.toList());
     }
 
+    /**
+     * 获取当前类的所有字段（不含父类字段）
+     *
+     * @return 当前类所有声明字段列表
+     */
     public List<Field> getCurrentAllField() {
         return Arrays.asList(clazz.getDeclaredFields());
     }
 
+    /**
+     * 获取当前类的所有protected方法
+     *
+     * @return protected方法列表
+     */
     public List<Method> getCurrentProtectedMethod() {
         return getCurrentAllMethod().stream().filter(e -> Modifier.isProtected(e.getModifiers())).collect(Collectors.toList());
     }
 
+    /**
+     * 获取当前类的所有public方法
+     *
+     * @return public方法列表
+     */
     public List<Method> getCurrentPublicMethod() {
         return getCurrentAllMethod().stream().filter(e -> Modifier.isPublic(e.getModifiers())).collect(Collectors.toList());
     }
 
+    /**
+     * 获取当前类的所有包级别默认访问权限方法（无修饰符）
+     *
+     * @return 默认访问权限方法列表
+     */
     public List<Method> getCurrentDefaultMethod() {
         return getCurrentAllMethod().stream().filter(e -> e.getModifiers() == 0).collect(Collectors.toList());
     }
 
+    /**
+     * 获取当前类的所有private方法
+     *
+     * @return private方法列表
+     */
     public List<Method> getCurrentPrivateMethod() {
         return getCurrentAllMethod().stream().filter(e -> Modifier.isPrivate(e.getModifiers())).collect(Collectors.toList());
     }
 
+    /**
+     * 获取当前类的所有方法（不含父类方法）
+     *
+     * @return 当前类所有声明方法列表
+     */
     public List<Method> getCurrentAllMethod() {
         return Arrays.asList(clazz.getDeclaredMethods());
     }
@@ -130,6 +177,9 @@ public class ClassParser {
 
     /**
      * 获得与目标类型一致的泛型type信息
+     *
+     * @param matchClassType 要匹配查找的类类型
+     * @return 泛型Type信息，若未找到返回null
      */
     public Type getGenericType(Class<?> matchClassType) {
         return reGne(leafWrapper, matchClassType);

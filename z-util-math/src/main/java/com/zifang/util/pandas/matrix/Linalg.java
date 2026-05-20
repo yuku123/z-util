@@ -11,7 +11,11 @@ public class Linalg {
     // ==================== 矩阵乘法 ====================
 
     /**
-     * 矩阵点积 (matrix multiplication)
+     * 计算矩阵点积 (matrix multiplication)，类似于 numpy.dot()
+     * @param a 第一个矩阵或向量
+     * @param b 第二个矩阵或向量
+     * @return 点积结果
+     * @throws UnsupportedOperationException 当维度不支持时抛出
      */
     public static Num dot(Num a, Num b) {
         if (a.nDim() == 1 && b.nDim() == 1) {
@@ -44,14 +48,22 @@ public class Linalg {
     }
 
     /**
-     * 矩阵乘法 (同 dot)
+     * 矩阵乘法，类似于 numpy.matmul()，与 dot 功能相同但更直观
+     * @param a 第一个矩阵
+     * @param b 第二个矩阵
+     * @return 矩阵乘法结果
+     * @throws UnsupportedOperationException 当维度不支持时抛出
      */
     public static Num matmul(Num a, Num b) {
         return dot(a, b);
     }
 
     /**
-     * 内积
+     * 计算向量内积，类似于 numpy.inner()
+     * @param a 第一个向量（必须是一维）
+     * @param b 第二个向量（必须是一维）
+     * @return 内积结果
+     * @throws IllegalArgumentException 当输入不是一维数组时抛出
      */
     public static double inner(Num a, Num b) {
         if (a.nDim() != 1 || b.nDim() != 1) {
@@ -67,7 +79,11 @@ public class Linalg {
     }
 
     /**
-     * 外积
+     * 计算向量外积，类似于 numpy.outer()
+     * @param a 第一个向量（必须是一维）
+     * @param b 第二个向量（必须是一维）
+     * @return 外积结果矩阵
+     * @throws IllegalArgumentException 当输入不是一维数组时抛出
      */
     public static Num outer(Num a, Num b) {
         if (a.nDim() != 1 || b.nDim() != 1) {
@@ -85,7 +101,11 @@ public class Linalg {
     }
 
     /**
-     * 张量积
+     * 计算张量点积，类似于 numpy.tensordot()
+     * @param a 第一个数组
+     * @param b 第二个数组
+     * @param axes 指定参与运算的轴
+     * @return 张量点积结果
      */
     public static Num tensordot(Num a, Num b, int[] axes) {
         // 简化实现
@@ -93,7 +113,11 @@ public class Linalg {
     }
 
     /**
-     * 克罗内克积
+     * 计算克罗内克积，类似于 numpy.kron()
+     * @param a 第一个矩阵（必须二维）
+     * @param b 第二个矩阵（必须二维）
+     * @return 克罗内克积结果
+     * @throws UnsupportedOperationException 当输入不是二维数组时抛出
      */
     public static Num kron(Num a, Num b) {
         if (a.nDim() == 2 && b.nDim() == 2) {
@@ -120,7 +144,10 @@ public class Linalg {
     // ==================== 分解 ====================
 
     /**
-     * 奇异值分解 (SVD)
+     * 奇异值分解 (SVD)，类似于 numpy.linalg.svd()
+     * @param a 输入矩阵（必须二维）
+     * @return SVDResult 包含 U、S、Vh 三个矩阵
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static SVDResult svd(Num a) {
         if (a.nDim() != 2) {
@@ -151,11 +178,29 @@ public class Linalg {
         return new SVDResult(new Num(u), new Num(s), new Num(vh));
     }
 
+    /**
+     * SVD 分解结果类
+     */
     public static class SVDResult {
+        /**
+         * 左奇异向量矩阵 U
+         */
         public final Num U;
+        /**
+         * 奇异值向量 S
+         */
         public final Num S;
+        /**
+         * 右奇异向量矩阵 Vh
+         */
         public final Num Vh;
 
+        /**
+         * 构造 SVD 结果
+         * @param u 左奇异向量矩阵
+         * @param s 奇异值向量
+         * @param vh 右奇异向量矩阵
+         */
         public SVDResult(Num u, Num s, Num vh) {
             this.U = u;
             this.S = s;
@@ -164,7 +209,10 @@ public class Linalg {
     }
 
     /**
-     * QR 分解
+     * QR 分解，类似于 numpy.linalg.qr()
+     * @param a 输入矩阵（必须二维）
+     * @return QRResult 包含 Q（正交矩阵）和 R（上三角矩阵）
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static QRResult qr(Num a) {
         if (a.nDim() != 2) {
@@ -190,10 +238,24 @@ public class Linalg {
         return new QRResult(new Num(q), new Num(r));
     }
 
+    /**
+     * QR 分解结果类
+     */
     public static class QRResult {
+        /**
+         * 正交矩阵 Q
+         */
         public final Num Q;
+        /**
+         * 上三角矩阵 R
+         */
         public final Num R;
 
+        /**
+         * 构造 QR 结果
+         * @param q 正交矩阵
+         * @param r 上三角矩阵
+         */
         public QRResult(Num q, Num r) {
             this.Q = q;
             this.R = r;
@@ -201,7 +263,10 @@ public class Linalg {
     }
 
     /**
-     * Cholesky 分解
+     * Cholesky 分解，类似于 numpy.linalg.cholesky()
+     * @param a 输入矩阵（必须二维且对称正定）
+     * @return 下三角矩阵 L，满足 A = L * L^T
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static Num cholesky(Num a) {
         if (a.nDim() != 2) {
@@ -224,7 +289,10 @@ public class Linalg {
     // ==================== 矩阵属性 ====================
 
     /**
-     * 矩阵行列式
+     * 计算矩阵行列式，类似于 numpy.linalg.det()
+     * @param a 输入矩阵（必须二维）
+     * @return 行列式值
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static double det(Num a) {
         if (a.nDim() != 2) {
@@ -248,7 +316,10 @@ public class Linalg {
     }
 
     /**
-     * 矩阵秩
+     * 计算矩阵秩，类似于 numpy.linalg.matrix_rank()
+     * @param a 输入矩阵（必须二维）
+     * @return 矩阵秩
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static int matrix_rank(Num a) {
         if (a.nDim() != 2) {
@@ -259,7 +330,10 @@ public class Linalg {
     }
 
     /**
-     * 矩阵迹
+     * 计算矩阵迹（对角线元素之和），类似于 numpy.trace()
+     * @param a 输入矩阵（必须二维）
+     * @return 矩阵迹
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static double trace(Num a) {
         if (a.nDim() != 2) {
@@ -277,7 +351,10 @@ public class Linalg {
     // ==================== 矩阵求逆和解方程 ====================
 
     /**
-     * 矩阵求逆
+     * 计算矩阵逆，类似于 numpy.linalg.inv()
+     * @param a 输入矩阵（必须二维且方阵）
+     * @return 逆矩阵
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static Num inv(Num a) {
         if (a.nDim() != 2) {
@@ -307,7 +384,9 @@ public class Linalg {
     }
 
     /**
-     * 伪逆 (Moore-Penrose 伪逆)
+     * 计算摩尔-彭罗斯伪逆，类似于 numpy.linalg.pinv()
+     * @param a 输入矩阵
+     * @return 伪逆矩阵
      */
     public static Num pinv(Num a) {
         // 简化实现，返回普通逆矩阵
@@ -315,7 +394,10 @@ public class Linalg {
     }
 
     /**
-     * 解线性方程组 Ax = b
+     * 解线性方程组 Ax = b，类似于 numpy.linalg.solve()
+     * @param a 系数矩阵 A
+     * @param b 常数向量 b
+     * @return 解向量 x
      */
     public static Num solve(Num a, Num b) {
         // 简化实现: x = A^(-1) * b
@@ -323,7 +405,10 @@ public class Linalg {
     }
 
     /**
-     * 最小二乘解
+     * 计算最小二乘解，类似于 numpy.linalg.lstsq()
+     * @param a 系数矩阵 A
+     * @param b 常数向量 b
+     * @return 最小二乘解向量
      */
     public static Num lstsq(Num a, Num b) {
         // 简化实现
@@ -333,12 +418,20 @@ public class Linalg {
     // ==================== 范数 ====================
 
     /**
-     * 向量/矩阵范数
+     * 计算向量或矩阵的 2-范数，类似于 numpy.linalg.norm()
+     * @param x 输入向量或矩阵
+     * @return 2-范数（欧几里得范数）
      */
     public static double norm(Num x) {
         return norm(x, 2);
     }
 
+    /**
+     * 计算向量或矩阵的范数，类似于 numpy.linalg.norm()
+     * @param x 输入向量或矩阵
+     * @param ord 范数类型（1, 2, Integer.MAX_VALUE）
+     * @return 指定类型的范数
+     */
     public static double norm(Num x, int ord) {
         if (x.nDim() == 1) {
             double[] v = (double[]) x.data();
@@ -359,6 +452,12 @@ public class Linalg {
         return norm(x, 2);
     }
 
+    /**
+     * 计算向量或矩阵的范数（字符串形式），类似于 numpy.linalg.norm()
+     * @param x 输入向量或矩阵
+     * @param ord 范数类型字符串（如 "fro" 表示 Frobenius 范数）
+     * @return 指定类型的范数
+     */
     public static double norm(Num x, String ord) {
         if ("fro".equals(ord)) {
             return norm(x, 2);
@@ -369,7 +468,10 @@ public class Linalg {
     // ==================== 特征值 ====================
 
     /**
-     * 特征值和特征向量
+     * 计算特征值和特征向量，类似于 numpy.linalg.eig()
+     * @param a 输入矩阵（必须二维）
+     * @return EigenResult 包含特征值 w 和特征向量 v
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static EigenResult eig(Num a) {
         if (a.nDim() != 2) {
@@ -390,16 +492,33 @@ public class Linalg {
     }
 
     /**
-     * 仅特征值
+     * 仅计算特征值，类似于 numpy.linalg.eigvals()
+     * @param a 输入矩阵（必须二维）
+     * @return 特征值向量
+     * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
     public static Num eigvals(Num a) {
         return eig(a).w;
     }
 
+    /**
+     * 特征值分解结果类
+     */
     public static class EigenResult {
+        /**
+         * 特征值向量
+         */
         public final Num w;  // 特征值
+        /**
+         * 特征向量矩阵
+         */
         public final Num v;  // 特征向量
 
+        /**
+         * 构造特征值分解结果
+         * @param w 特征值向量
+         * @param v 特征向量矩阵
+         */
         public EigenResult(Num w, Num v) {
             this.w = w;
             this.v = v;

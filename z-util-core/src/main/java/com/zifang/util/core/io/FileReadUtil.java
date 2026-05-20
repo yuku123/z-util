@@ -13,7 +13,9 @@ public class FileReadUtil {
     /**
      * 以字节为单位读取文件，常用于读二进制文件，如图片、声音、影像等文件。
      *
-     * @param fileName 文件的名
+     * @param fileName 文件名
+     * @return 文件输入流
+     * @throws IOException 如果读取发生异常
      */
     public static InputStream createByteRead(String fileName) throws IOException {
 
@@ -28,6 +30,8 @@ public class FileReadUtil {
      * 以字符为单位读取文件，常用于读文本，数字等类型的文件
      *
      * @param fileName 文件名
+     * @return 字符输入流（使用 UTF-8 编码）
+     * @throws IOException 如果读取发生异常
      */
     public static Reader createCharRead(String fileName) throws IOException {
 //        File file = new File(fileName);

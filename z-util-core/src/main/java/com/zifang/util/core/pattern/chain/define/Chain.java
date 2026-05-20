@@ -19,97 +19,87 @@
 //import java.util.Map;
 //
 ///**
-// * <p>A {@link Chain} represents a configured list of
-// * {@link org.apache.commons.chain2.Command}s that will be executed in order to perform processing
-// * on a specified {@link org.apache.commons.chain2.Context}.  Each included {@link org.apache.commons.chain2.Command} will be
-// * executed in turn, until either one of them returns <code>FINISHED</code>,
-// * one of the executed {@link org.apache.commons.chain2.Command}s throws an exception,
-// * or the end of the chain has been reached.  The {@link Chain} itself will
-// * return the return value of the last {@link org.apache.commons.chain2.Command} that was executed
-// * (if no exception was thrown), or rethrow the thrown exception.</p>
+// * <p>{@link Chain} 表示一个配置好的 {@link org.apache.commons.chain2.Command} 列表，
+// * 这些命令将按顺序执行以对指定的 {@link org.apache.commons.chain2.Context} 进行处理。
+// * 每个包含的 {@link org.apache.commons.chain2.Command} 将依次执行，
+// * 直到其中一个返回 <code>FINISHED</code>、
+// * 其中一个执行的 {@link org.apache.commons.chain2.Command} 抛出异常，
+// * 或到达链的末尾。{@link Chain} 本身将返回最后执行的 {@link org.apache.commons.chain2.Command} 的返回值
+// * （如果没有抛出异常），或重新抛出抛出的异常。</p>
 // *
-// * <p>Note that {@link Chain} extends {@link org.apache.commons.chain2.Command}, so that the two can
-// * be used interchangeably when a {@link org.apache.commons.chain2.Command} is expected.  This makes it
-// * easy to assemble workflows in a hierarchical manner by combining subchains
-// * into an overall processing chain.</p>
+// * <p>注意，{@link Chain} 扩展了 {@link org.apache.commons.chain2.Command}，
+// * 因此两者可以在期望 {@link org.apache.commons.chain2.Command} 的地方互换使用。
+// * 这使得通过将子链组合成整体处理链来轻松组装分层工作流变得容易。</p>
 // *
-// * <p>To protect applications from evolution of this interface, specialized
-// * implementations of {@link Chain} should generally be created by extending
-// * the provided base class {@code org.apache.commons.chain2.impl.ChainBase})
-// * rather than directly implementing this interface.</p>
+// * <p>为保护应用程序免受此接口演化的影响，
+// * {@link Chain} 的专用实现通常应该通过扩展提供的基类
+// * ({@code org.apache.commons.chain2.impl.ChainBase}) 来创建，
+// * 而不是直接实现此接口。</p>
 // *
-// * <p>{@link Chain} implementations should be designed in a thread-safe
-// * manner, suitable for execution on multiple threads simultaneously.  In
-// * general, this implies that the state information identifying which
-// * {@link org.apache.commons.chain2.Command} is currently being executed should be maintained in a
-// * local variable inside the <code>execute()</code> method, rather than
-// * in an instance variable.  The {@link org.apache.commons.chain2.Command}s in a {@link Chain} may be
-// * configured (via calls to <code>addCommand()</code>) at any time before
-// * the <code>execute()</code> method of the {@link Chain} is first called.
-// * After that, the configuration of the {@link Chain} is frozen.</p>
+// * <p>{@link Chain} 实现应该是线程安全的，
+// * 适合在多个线程上同时执行。
+// * 通常，这意味着标识当前正在执行哪个 {@link org.apache.commons.chain2.Command} 的状态信息
+// * 应该保持在 <code>execute()</code> 方法内的局部变量中，
+// * 而不是实例变量中。
+// * {@link Chain} 中的 {@link org.apache.commons.chain2.Command} 可以在
+// * {@link Chain} 的 <code>execute()</code> 方法首次调用之前的任何时间配置
+// * （通过调用 <code>addCommand()</code>）。
+// * 此后，{@link Chain} 的配置将被冻结。</p>
 // *
-// * @param <K> Context key type
-// * @param <V> Context value type
-// * @param <C> Type of the context associated with this chain
+// * @param <K> 上下文键类型
+// * @param <V> 上下文值类型
+// * @param <C> 与此链关联的上下文类型
 // *
 // * @version $Id$
 // */
 //public interface Chain<K, V, C extends Map<K, V>> extends Command<K, V, C> {
 //
 //    /**
-//     * <p>Add a {@link org.apache.commons.chain2.Command} to the list of {@link org.apache.commons.chain2.Command}s that will
-//     * be called in turn when this {@link Chain}'s <code>execute()</code>
-//     * method is called.  Once <code>execute()</code> has been called
-//     * at least once, it is no longer possible to add additional
-//     * {@link org.apache.commons.chain2.Command}s; instead, an exception will be thrown.</p>
+//     * <p>将 {@link org.apache.commons.chain2.Command} 添加到列表中，
+//     * 这些命令将在调用此 {@link Chain} 的 <code>execute()</code> 方法时依次调用。
+//     * 一旦 <code>execute()</code> 至少被调用一次，
+//     * 就不再可能添加额外的 {@link org.apache.commons.chain2.Command}；
+//     * 相反，将抛出异常。</p>
 //     *
-//     * @param <CMD> the {@link org.apache.commons.chain2.Command} type to be added in the {@link Chain}
-//     * @param command The {@link org.apache.commons.chain2.Command} to be added
+//     * @param <CMD> 要添加到 {@link Chain} 的 {@link org.apache.commons.chain2.Command} 类型
+//     * @param command 要添加的 {@link org.apache.commons.chain2.Command}
 //     *
-//     * @throws IllegalArgumentException if <code>command</code>
-//     *  is <code>null</code>
-//     * @throws IllegalStateException if this {@link Chain} has already
-//     *  been executed at least once, so no further configuration is allowed
+//     * @throws IllegalArgumentException 如果 <code>command</code> 为 <code>null</code>
+//     * @throws IllegalStateException 如果此 {@link Chain} 已经至少执行过一次，
+//     *  因此不允许进一步配置
 //     */
 //    <CMD extends org.apache.commons.chain2.Command<K, V, C>> void addCommand(CMD command);
 //
 //    /**
-//     * <p>Execute the processing represented by this {@link Chain} according
-//     * to the following algorithm.</p>
+//     * <p>根据以下算法执行此 {@link Chain} 表示的处理。</p>
 //     * <ul>
-//     * <li>If there are no configured {@link org.apache.commons.chain2.Command}s in the {@link Chain},
-//     *     return <code>CONTINUE</code>.</li>
-//     * <li>Call the <code>execute()</code> method of each {@link org.apache.commons.chain2.Command}
-//     *     configured on this chain, in the order they were added via calls
-//     *     to the <code>addCommand()</code> method, until the end of the
-//     *     configured {@link org.apache.commons.chain2.Command}s is encountered, or until one of
-//     *     the executed {@link org.apache.commons.chain2.Command}s returns <code>FINISHED</code>
-//     *     or throws an exception.</li>
-//     * <li>Walk backwards through the {@link org.apache.commons.chain2.Command}s whose
-//     *     <code>execute()</code> methods, starting with the last one that
-//     *     was executed.  If this {@link org.apache.commons.chain2.Command} instance is also a
-//     *     {@link org.apache.commons.chain2.Filter}, call its <code>postprocess()</code> method,
-//     *     discarding any exception that is thrown.</li>
-//     * <li>If the last {@link org.apache.commons.chain2.Command} whose <code>execute()</code> method
-//     *     was called threw an exception, rethrow that exception.</li>
-//     * <li>Otherwise, return the value returned by the <code>execute()</code>
-//     *     method of the last {@link org.apache.commons.chain2.Command} that was executed.  This will be
-//     *     <code>FINISHED</code> if the last {@link org.apache.commons.chain2.Command} indicated that
-//     *     processing of this {@link org.apache.commons.chain2.Context} has been completed, or
-//     *     <code>CONTINUE</code> if none of the called {@link org.apache.commons.chain2.Command}s
-//     *     returned <code>FINISHED</code>.</li>
+//     * <li>如果 {@link Chain} 中没有配置 {@link org.apache.commons.chain2.Command}，
+//     *     返回 <code>CONTINUE</code>。</li>
+//     * <li>按通过调用 <code>addCommand()</code> 方法添加的顺序调用
+//     *     配置在此链上的每个 {@link org.apache.commons.chain2.Command} 的 <code>execute()</code> 方法，
+//     *     直到遇到配置的 {@link org.apache.commons.chain2.Command} 的末尾，
+//     *     或者其中执行的 {@link org.apache.commons.chain2.Command} 返回 <code>FINISHED</code>
+//     *     或抛出异常。</li>
+//     * <li>向后遍历其 <code>execute()</code> 方法已执行的 {@link org.apache.commons.chain2.Command}，
+//     *     从最后执行的一个开始。
+//     *     如果此 {@link org.apache.commons.chain2.Command} 实例也是 {@link org.apache.commons.chain2.Filter}，
+//     *     调用其 <code>postprocess()</code> 方法，
+//     *     丢弃抛出的任何异常。</li>
+//     * <li>如果最后调用其 <code>execute()</code> 方法的 {@link org.apache.commons.chain2.Command} 抛出了异常，
+//     *     重新抛出该异常。</li>
+//     * <li>否则，返回最后执行的 {@link org.apache.commons.chain2.Command} 的 <code>execute()</code> 方法返回的值。
+//     *     如果最后一个 {@link org.apache.commons.chain2.Command} 指示此 {@link org.apache.commons.chain2.Context} 的处理已完成，
+//     *     则返回 <code>FINISHED</code>；
+//     *     如果没有调用的 {@link org.apache.commons.chain2.Command} 返回 <code>FINISHED</code>，
+//     *     则返回 <code>CONTINUE</code>。</li>
 //     * </ul>
 //     *
-//     * @param context The {@link org.apache.commons.chain2.Context} to be processed by this
-//     *  {@link Chain}
+//     * @param context 要由此 {@link Chain} 处理的 {@link org.apache.commons.chain2.Context}
 //     *
-//     * @throws IllegalArgumentException if <code>context</code>
-//     *  is <code>null</code>
+//     * @throws IllegalArgumentException 如果 <code>context</code> 为 <code>null</code>
 //     *
-//     * @return {@link org.apache.commons.chain2.Processing#FINISHED} if the processing of this context
-//     *  has been completed. Returns {@link org.apache.commons.chain2.Processing#CONTINUE} if the processing
-//     *  of this context should be delegated to a subsequent command in an
-//     *  enclosing chain.
+//     * @return {@link org.apache.commons.chain2.Processing#FINISHED} 如果此上下文的处理已完成。
+//     *  {@link org.apache.commons.chain2.Processing#CONTINUE} 如果此上下文的处理应该委托给 enclosing chain 中的后续命令。
 //     */
 //    @Override
 //    org.apache.commons.chain2.Processing execute(C context);

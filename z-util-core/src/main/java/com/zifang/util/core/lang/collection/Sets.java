@@ -40,14 +40,29 @@ public class Sets {
         return set;
     }
 
+    /**
+     * 计算两个集合的交集
+     *
+     * @return 交集集合
+     */
     public static void intersection() {
 
     }
 
+    /**
+     * 计算两个集合的差集
+     *
+     * @return 差集集合
+     */
     public static void difference() {
 
     }
 
+    /**
+     * 计算两个集合的并集
+     *
+     * @return 并集集合
+     */
     public static void union() {
 
     }

@@ -1,17 +1,21 @@
 package com.zifang.util.extra;
 
 /**
- * 经纬度相关的阿一些操作
+ * 经纬度坐标计算工具类
+ * <p>
+ * 提供地球上两点之间距离的计算功能
  */
 public final class CoordinateUtil {
     /**
-     * 计算地球上任意两点(经纬度)距离
+     * 计算地球上任意两点之间的球面距离
+     * <p>
+     * 使用 Haversine 公式计算两个经纬度坐标点之间的最短距离（地球表面大圆距离）
      *
-     * @param long1 第一点经度
-     * @param lat1  第一点纬度
-     * @param long2 第二点经度
-     * @param lat2  第二点纬度
-     * @return 返回距离 单位：米
+     * @param long1 第一点经度，单位：度，取值范围 [-180, 180]
+     * @param lat1  第一点纬度，单位：度，取值范围 [-90, 90]
+     * @param long2 第二点经度，单位：度，取值范围 [-180, 180]
+     * @param lat2  第二点纬度，单位：度，取值范围 [-90, 90]
+     * @return 两点之间的距离，单位：米
      */
     public static double distance(double long1, double lat1, double long2, double lat2) {
         double a, b, R;

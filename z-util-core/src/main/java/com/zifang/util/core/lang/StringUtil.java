@@ -38,28 +38,81 @@ public class StringUtil {
     private static final Supplier<String> NULL_STRING_MSG_SUPPLIER = () -> "'value' should be not null.";
     private static final String[] EMPTY_ARRAY = new String[0];
     private static final char SEPARATOR = '_';
+    /**
+     * Checks if a String is not empty (not null and not blank).
+     *
+     * @param string the String to check
+     * @return true if the String is not empty, false otherwise
+     */
     public static boolean isNotEmptyString(String string) {
         return string != null && !string.isEmpty();
     }
+    /**
+     * Checks if a String is not empty.
+     * Equivalent to !isEmpty(s).
+     *
+     * @param s the String to check
+     * @return true if the String is not empty, false otherwise
+     */
     public static boolean isNotEmpty(String s) {
         return !isEmpty(s);
     }
+    /**
+     * Checks if a String is not blank.
+     * A String is considered blank if it is null, empty, or contains only whitespace.
+     *
+     * @param s the String to check
+     * @return true if the String is not blank, false otherwise
+     */
     public static boolean isNotBlank(String s) {
         return !isBlank(s);
     }
+    /**
+     * Checks if a String is blank.
+     * A String is considered blank if it is null, empty, or contains only whitespace.
+     *
+     * @param s the String to check
+     * @return true if the String is blank, false otherwise
+     */
     public static boolean isBlank(String s) {
         return null == s || s.trim().isEmpty();
     }
+    /**
+     * Checks if a String is empty.
+     * A String is considered empty if it is null or has a length of zero.
+     *
+     * @param s the String to check
+     * @return true if the String is empty, false otherwise
+     */
     public static boolean isEmpty(String s) {
         return null == s || s.isEmpty();
     }
+    /**
+     * Checks if an Object is empty when converted to String.
+     * A Object is considered empty if it is null or its toString() result is empty.
+     *
+     * @param obj the Object to check
+     * @return true if the Object is empty, false otherwise
+     */
     public static boolean isEmpty(Object obj) {
         return null == obj || isEmpty(obj.toString());
     }
+    /**
+     * Checks if an Object is not empty when converted to String.
+     *
+     * @param obj the Object to check
+     * @return true if the Object is not empty, false otherwise
+     */
     public static boolean isNotEmpty(Object obj) {
         return !isEmpty(obj);
     }
 
+    /**
+     * Checks if all Strings in the array are not empty.
+     *
+     * @param strArr the String array to check
+     * @return true if all Strings are not empty, false otherwise
+     */
     public static boolean isNotEmpty(String... strArr) {
         for (String str : strArr) {
             if (isEmpty(str)) {
@@ -68,12 +121,31 @@ public class StringUtil {
         }
         return true;
     }
+    /**
+     * Checks if all characters in the String are lowercase.
+     *
+     * @param value the String to check
+     * @return true if all characters are lowercase, false otherwise
+     */
     public static boolean isAllLowerCase(String value) {
         return forEachCharAllMatch(value, Character::isLowerCase);
     }
+    /**
+     * Checks if all characters in the String are uppercase.
+     *
+     * @param value the String to check
+     * @return true if all characters are uppercase, false otherwise
+     */
     public static boolean isAllUpperCase(String value) {
         return forEachCharAllMatch(value, Character::isUpperCase);
     }
+    /**
+     * Tests if any character in the String matches the given predicate.
+     *
+     * @param value     the String to check
+     * @param predicate the predicate to test each character
+     * @return true if any character matches, false otherwise (including null or empty string)
+     */
     public static boolean forEachCharAnyMatch(String value, Predicate<Character> predicate) {
         if (value == null || value.isEmpty()) {
             return false;
@@ -85,6 +157,13 @@ public class StringUtil {
         }
         return false;
     }
+    /**
+     * Tests if all characters in the String match the given predicate.
+     *
+     * @param value     the String to check
+     * @param predicate the predicate to test each character
+     * @return true if all characters match, false otherwise (including null or empty string)
+     */
     public static boolean forEachCharAllMatch(String value, Predicate<Character> predicate) {
         if (value == null || value.isEmpty()) {
             return false;
@@ -97,6 +176,13 @@ public class StringUtil {
         return true;
     }
 
+    /**
+     * 在字符串末尾追加一个或多个字符串
+     *
+     * @param value   原始字符串
+     * @param appends 要追加的字符串数组
+     * @return 追加后的字符串，如果value为null则抛出异常
+     */
     public static String append(String value, String... appends) {
 
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
@@ -112,16 +198,35 @@ public class StringUtil {
 
     /**
      * 文本内存在多个连续空格场合，缩进为单个空格
+     * Collapses multiple consecutive whitespace characters into a single space.
+     *
+     * @param value The input string to collapse whitespace
+     * @return The string with consecutive whitespace collapsed to single space
      */
     public static String collapseWhitespace(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return value.trim().replaceAll("\\s\\s+", " ");
     }
 
+    /**
+     * Checks if the value contains the needle (case-insensitive).
+     *
+     * @param value the String to search in
+     * @param needle the String to search for
+     * @return true if value contains needle, false otherwise
+     */
     public static boolean contains(String value, String needle) {
         return contains(value, needle, false);
     }
 
+    /**
+     * Checks if the value contains the needle with case sensitivity control.
+     *
+     * @param value         the String to search in
+     * @param needle        the String to search for
+     * @param caseSensitive whether the comparison should be case-sensitive
+     * @return true if value contains needle, false otherwise
+     */
     public static boolean contains(String value, String needle, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         if (caseSensitive) {
@@ -130,20 +235,50 @@ public class StringUtil {
         return value.toLowerCase().contains(needle.toLowerCase());
     }
 
+    /**
+     * Checks if the value contains all the needles (case-insensitive).
+     *
+     * @param value  the String to search in
+     * @param needles the array of Strings to search for
+     * @return true if value contains all needles, false otherwise
+     */
     public static boolean containsAll(String value, String[] needles) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return Arrays.stream(needles).allMatch(needle -> contains(value, needle, false));
     }
 
+    /**
+     * Checks if the value contains all the needles with case sensitivity control.
+     *
+     * @param value         the String to search in
+     * @param needles       the array of Strings to search for
+     * @param caseSensitive whether the comparison should be case-sensitive
+     * @return true if value contains all needles, false otherwise
+     */
     public static boolean containsAll(String value, String[] needles, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return Arrays.stream(needles).allMatch(needle -> contains(value, needle, caseSensitive));
     }
 
+    /**
+     * Checks if the value contains any of the needles (case-insensitive).
+     *
+     * @param value  the String to search in
+     * @param needles the array of Strings to search for
+     * @return true if value contains any needle, false otherwise
+     */
     public static boolean containsAny(String value, String[] needles) {
         return containsAny(value, needles, false);
     }
 
+    /**
+     * Checks if the value contains any of the needles with case sensitivity control.
+     *
+     * @param value         the String to search in
+     * @param needles       the array of Strings to search for
+     * @param caseSensitive whether the comparison should be case-sensitive
+     * @return true if value contains any needle, false otherwise
+     */
     public static boolean containsAny(String value, String[] needles, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return Arrays.stream(needles).anyMatch(needle -> contains(value, needle, caseSensitive));
@@ -161,16 +296,40 @@ public class StringUtil {
         return countSubstr(caseSensitive ? value : value.toLowerCase(), caseSensitive ? subStr : subStr.toLowerCase(), allowOverlapping, 0L);
     }
 
+    /**
+     * Checks if the string ends with the specified search string (case-sensitive).
+     *
+     * @param value the string to check
+     * @param search the search string
+     * @return true if the string ends with the search string, false otherwise
+     */
     public static boolean endsWith(String value, String search) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return endsWith(value, search, value.length(), true);
     }
 
+    /**
+     * Checks if the string ends with the specified search string.
+     *
+     * @param value the string to check
+     * @param search the search string
+     * @param caseSensitive whether the comparison should be case-sensitive
+     * @return true if the string ends with the search string, false otherwise
+     */
     public static boolean endsWith(String value, String search, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return endsWith(value, search, value.length(), caseSensitive);
     }
 
+    /**
+     * Checks if the string ends with the specified search string at the given position.
+     *
+     * @param value the string to check
+     * @param search the search string
+     * @param position the position to check up to
+     * @param caseSensitive whether the comparison should be case-sensitive
+     * @return true if the string ends with the search string at the given position, false otherwise
+     */
     public static boolean endsWith(String value, String search, int position, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         int remainingLength = position - search.length();
@@ -180,10 +339,27 @@ public class StringUtil {
         return value.toLowerCase().indexOf(search.toLowerCase(), remainingLength) > -1;
     }
 
+    /**
+     * Ensures that the string starts with the given prefix.
+     * If the string already starts with the prefix, returns the original string unchanged.
+     *
+     * @param value  The input String
+     * @param prefix The prefix to ensure
+     * @return The string with the prefix ensured (case-sensitive)
+     */
     public static String ensureLeft(String value, String prefix) {
         return ensureLeft(value, prefix, true);
     }
 
+    /**
+     * Ensures that the string starts with the given prefix.
+     * If the string already starts with the prefix, returns the original string unchanged.
+     *
+     * @param value         The input String
+     * @param prefix        The prefix to ensure
+     * @param caseSensitive Whether the comparison should be case-sensitive
+     * @return The string with the prefix ensured
+     */
     public static String ensureLeft(String value, String prefix, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         if (caseSensitive) {
@@ -194,50 +370,132 @@ public class StringUtil {
         return _value.startsWith(_prefix) ? value : prefix + value;
     }
 
+    /**
+     * Ensures that the string ends with the given suffix.
+     * If the string already ends with the suffix, returns the original string unchanged.
+     *
+     * @param value  The input String
+     * @param suffix The suffix to ensure
+     * @return The string with the suffix ensured (case-sensitive)
+     */
     public static String ensureRight(String value, String suffix) {
         return ensureRight(value, suffix, true);
     }
 
+    /**
+     * Ensures that the string ends with the given suffix.
+     * If the string already ends with the suffix, returns the original string unchanged.
+     *
+     * @param value         The input String
+     * @param suffix        The suffix to ensure
+     * @param caseSensitive Whether the comparison should be case-sensitive
+     * @return The string with the suffix ensured
+     */
     public static String ensureRight(String value, String suffix, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return endsWith(value, suffix, caseSensitive) ? value : append(value, suffix);
     }
 
+    /**
+     * 使用 Base64 方式解码字符串
+     *
+     * @param value 要解码的 Base64 编码字符串
+     * @return 解码后的 UTF-8 字符串
+     * @throws IllegalArgumentException 如果value为null
+     */
     public static String base64Decode(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8);
     }
 
+    /**
+     * 使用 Base64 方式编码字符串
+     *
+     * @param value 要编码的字符串
+     * @return Base64 编码后的字符串
+     * @throws IllegalArgumentException 如果value为null
+     */
     public static String base64Encode(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return Base64.getEncoder().encodeToString(value.getBytes(StandardCharsets.UTF_8));
     }
 
+    /**
+     * 将二进制编码的字符串解码为普通字符串
+     * 使用16位数字表示2进制进行解码
+     *
+     * @param value 二进制编码的字符串
+     * @return 解码后的字符串
+     */
     public static String binDecode(String value) {
         return decode(value, 16, 2);
     }
 
+    /**
+     * 将字符串编码为二进制表示形式
+     * 使用16位数字表示2进制
+     *
+     * @param value 要编码的字符串
+     * @return 二进制编码后的字符串
+     */
     public static String binEncode(String value) {
         return encode(value, 16, 2);
     }
 
+    /**
+     * 将十六进制编码的字符串解码为普通字符串
+     * 使用4位数字表示16进制进行解码
+     *
+     * @param value 十六进制编码的字符串
+     * @return 解码后的字符串
+     */
     public static String hexDecode(String value) {
         return decode(value, 4, 16);
     }
 
+    /**
+     * 将字符串编码为十六进制表示形式
+     * 使用4位数字表示16进制
+     *
+     * @param value 要编码的字符串
+     * @return 十六进制编码后的字符串
+     */
     public static String hexEncode(String value) {
         return encode(value, 4, 16);
     }
 
+    /**
+     * 将十进制编码的字符串解码为普通字符串
+     * 使用5位数字表示10进制进行解码
+     *
+     * @param value 十进制编码的字符串
+     * @return 解码后的字符串
+     */
     public static String decDecode(String value) {
         return decode(value, 5, 10);
     }
 
+    /**
+     * 将字符串编码为十进制表示形式
+     * 使用5位数字表示10进制，char范围为[0,65536]，5位可完全展示
+     *
+     * @param value 要编码的字符串
+     * @return 十进制编码后的字符串
+     */
     public static String decEncode(String value) {
         // char=[0,65536] , 5位可完全展示
         return encode(value, 5, 10);
     }
 
+    /**
+     * 将编码字符串解码为普通字符串
+     *
+     * @param value  编码字符串
+     * @param digits 每个字符编码的位数
+     * @param radix  进制的基数（如2二进制, 10十进制, 16十六进制）
+     * @return 解码后的字符串
+     * @throws IllegalArgumentException 如果value为null
+     */
     public static String decode(String value, int digits, int radix) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return Arrays.stream(value.split("(?<=\\G.{" + digits + "})"))
@@ -245,6 +503,15 @@ public class StringUtil {
                 .collect(joining());
     }
 
+    /**
+     * 将字符串编码为指定进制表示形式
+     *
+     * @param value  要编码的字符串
+     * @param digits 每个字符编码的位数
+     * @param radix  进制的基数（如2二进制, 10十进制, 16十六进制）
+     * @return 编码后的字符串
+     * @throws IllegalArgumentException 如果value为null
+     */
     public static String encode(String value, int digits, int radix) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return value.chars().mapToObj(ch -> leftPad(Integer.toString(ch, radix), digits,"0")).collect(joining());
@@ -1072,8 +1339,13 @@ public class StringUtil {
         return input == null || input.isEmpty();
     }
 
-
-
+    /**
+     * Returns a string composed of the given character repeated the specified number of times.
+     *
+     * @param ch     the character to repeat
+     * @param repeat the number of times to repeat the character
+     * @return a string containing the character repeated {@code repeat} times, or empty string if repeat is less than or equal to 0
+     */
     public static String repeat(final char ch, final int repeat) {
         if (repeat <= 0) {
             return EMPTY;
@@ -1549,11 +1821,10 @@ public class StringUtil {
     }
 
     /**
-     * @author: zifang
-     * @description: 判断字符序列是否为数字
-     * @time: 2021-06-07 16:51:00
-     * @params: [cs] 请求参数
-     * @return: boolean 响应参数
+     * Checks if the character sequence contains only numeric characters.
+     *
+     * @param cs the character sequence to check
+     * @return true if all characters are digits, false otherwise (including null or empty)
      */
     public static boolean isNumeric(CharSequence cs) {
         if (isEmpty(cs)) {
@@ -1571,6 +1842,12 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Checks if the character sequence is empty (null or length of zero).
+     *
+     * @param cs the character sequence to check
+     * @return true if the character sequence is empty, false otherwise
+     */
     public static boolean isEmpty(CharSequence cs) {
         return cs == null || cs.length() == 0;
     }
@@ -1711,6 +1988,14 @@ public class StringUtil {
     }
 
 
+    /**
+     * Left pad a String with a specified character.
+     *
+     * @param str      the String to pad, may be null
+     * @param size     the size to pad to
+     * @param padChar  the character to pad with
+     * @return left padded String or null if null String input
+     */
     public static String leftPad(String str, int size, char padChar) {
         if (str == null) {
             return null;
@@ -1724,6 +2009,14 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Left pad a String with a specified string.
+     *
+     * @param str     the String to pad, may be null
+     * @param size    the size to pad to
+     * @param padStr  the string to pad with, space by default if empty or null
+     * @return left padded String or null if null String input
+     */
     public static String leftPad(final String str, final int size, String padStr) {
         if (str == null) {
             return null;
@@ -1757,6 +2050,14 @@ public class StringUtil {
     }
 
 
+    /**
+     * Right pad a String with a specified character.
+     *
+     * @param str      the String to pad, may be null
+     * @param size     the size to pad to
+     * @param padChar  the character to pad with
+     * @return right padded String or null if null String input
+     */
     public static String rightPad(String str, int size, char padChar) {
         if (str.length() < size) {
             String padding = repeat(padChar, size - str.length());
@@ -1765,6 +2066,14 @@ public class StringUtil {
         return str;
     }
 
+    /**
+     * Right pad a String with a specified string.
+     *
+     * @param str     the String to pad, may be null
+     * @param size    the size to pad to
+     * @param padStr  the string to pad with, space by default if empty or null
+     * @return right padded String or null if null String input
+     */
     public static String rightPad(final String str, final int size, String padStr) {
         if (str == null) {
             return null;
@@ -1798,6 +2107,14 @@ public class StringUtil {
 
 
 
+    /**
+     * Right pad a String with a specified string, truncating if exceeds size.
+     *
+     * @param str     the String to pad, may be null
+     * @param size    the size to pad to
+     * @param padStr  the string to pad with, space by default if empty or null
+     * @return right padded String truncated to size, or null if null String input
+     */
     public static String rightPadWithOver(final String str, final int size, String padStr) {
         if (str.length() > size) {
             return str.substring(0, size);
@@ -1833,11 +2150,31 @@ public class StringUtil {
         return sb.toString();
     }
 
+    /**
+     * Replaces the first non-overlapping occurrence of the search string with the replacement string.
+     * If no occurrence is found, the original text is returned unchanged.
+     *
+     * @param text        the text to search and replace in
+     * @param searchString the string to search for
+     * @param replacement  the string to replace the found search string with
+     * @return the resulting string after replacement
+     */
     public static String replace(final String text, final String searchString,
                                  final String replacement) {
         return replace(text, searchString, replacement, -1);
     }
 
+    /**
+     * Replaces the first non-overlapping occurrences of the search string with the replacement string,
+     * up to the specified maximum number of replacements.
+     * If max is -1, replaces all occurrences.
+     *
+     * @param text        the text to search and replace in
+     * @param searchString the string to search for
+     * @param replacement  the string to replace the found search string with
+     * @param max          the maximum number of replacements to make, -1 for all
+     * @return the resulting string after replacement
+     */
     public static String replace(final String text, final String searchString,
                                  final String replacement, final int max) {
         return replace(text, searchString, replacement, max, false);
@@ -1874,10 +2211,25 @@ public class StringUtil {
         return buf.toString();
     }
 
+    /**
+     * 在字符串中查找子串（不区分大小写），从位置0开始
+     *
+     * @param str     被搜索的字符序列
+     * @param searchStr 要查找的子串
+     * @return 子串第一次出现的位置，未找到返回-1
+     */
     public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr) {
         return indexOfIgnoreCase(str, searchStr, 0);
     }
 
+    /**
+     * 在字符串中从指定位置开始查找子串（不区分大小写）
+     *
+     * @param str       被搜索的字符序列
+     * @param searchStr 要查找的子串
+     * @param startPos  开始搜索的位置
+     * @return 子串第一次出现的位置，未找到返回-1
+     */
     public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr,
                                         int startPos) {
         if (str == null || searchStr == null) {
@@ -1901,6 +2253,14 @@ public class StringUtil {
         return INDEX_NOT_FOUND;
     }
 
+    /**
+     * 在字符序列中从指定位置开始查找子串的位置（区分大小写）
+     *
+     * @param sequence    被搜索的字符序列
+     * @param searchSequence 要查找的子串
+     * @param startPos    开始搜索的位置
+     * @return 子串第一次出现的位置，未找到返回-1
+     */
     public static int indexOf(final CharSequence sequence, final CharSequence searchSequence,
                               final int startPos) {
         if (sequence == null || searchSequence == null) {

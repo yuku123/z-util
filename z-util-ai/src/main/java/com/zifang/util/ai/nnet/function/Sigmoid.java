@@ -1,13 +1,17 @@
 package com.zifang.util.ai.nnet.function;
 
 /**
- * s激活函数
+ * Sigmoid激活函数（S型曲线）
+ * <p>
+ * f(x) = 1 / (1 + e^(-x))
  */
 public class Sigmoid implements IActivationFunction {
 
-
     /**
-     * f(x) = 1/(1+e^-x)
+     * 计算Sigmoid激活值
+     *
+     * @param x 输入值
+     * @return 激活值，范围在(0, 1)之间
      */
     @Override
     public Double calculate(Double x) {

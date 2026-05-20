@@ -17,26 +17,55 @@ public class Connector {
      */
     private List<String> post;
 
+    /**
+     * 默认构造函数
+     */
     public Connector() {
     }
 
+    /**
+     * 全参数构造函数
+     *
+     * @param pre  前置节点ID列表
+     * @param post 后置节点ID列表
+     */
     public Connector(List<String> pre, List<String> post) {
         this.pre = pre;
         this.post = post;
     }
 
+    /**
+     * 获取前置节点ID列表
+     *
+     * @return 前置节点ID列表
+     */
     public List<String> getPre() {
         return pre;
     }
 
+    /**
+     * 设置前置节点ID列表
+     *
+     * @param pre 前置节点ID列表
+     */
     public void setPre(List<String> pre) {
         this.pre = pre;
     }
 
+    /**
+     * 获取后置节点ID列表
+     *
+     * @return 后置节点ID列表
+     */
     public List<String> getPost() {
         return post;
     }
 
+    /**
+     * 设置后置节点ID列表
+     *
+     * @param post 后置节点ID列表
+     */
     public void setPost(List<String> post) {
         this.post = post;
     }

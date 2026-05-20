@@ -7,16 +7,16 @@ package com.zifang.util.expression.source.lexer;
 public interface Token {
 
     /**
-     * Token的类型
+     * 获取Token的类型。
      *
-     * @return
+     * @return Token类型枚举值
      */
     public TokenType getType();
 
     /**
-     * Token的文本值
+     * 获取Token的文本值。
      *
-     * @return
+     * @return Token的原始文本内容
      */
     public String getText();
 

@@ -19,50 +19,43 @@
 //import java.util.Map;
 //
 ///**
-// * <p>A {@link Filter} is a specialized {@link org.apache.commons.chain2.Command} that also expects
-// * the {@link Chain} that is executing it to call the
-// * <code>postprocess()</code> method if it called the <code>execute()</code>
-// * method.  This promise must be fulfilled in spite of any possible
-// * exceptions thrown by the <code>execute()</code> method of this
-// * {@link org.apache.commons.chain2.Command}, or any subsequent {@link org.apache.commons.chain2.Command} whose
-// * <code>execute()</code> method was called.  The owning {@link Chain}
-// * must call the <code>postprocess()</code> method of each {@link Filter}
-// * in a {@link Chain} in reverse order of the invocation of their
-// * <code>execute()</code> methods.</p>
+// * <p>{@link Filter} 是一个专用的 {@link org.apache.commons.chain2.Command}，
+// * 它还期望执行它的 {@link Chain} 在调用其 <code>execute()</code> 方法时调用
+// * <code>postprocess()</code> 方法。
+// * 即使此 {@link org.apache.commons.chain2.Command} 的 <code>execute()</code> 方法
+// * 或后续调用其 <code>execute()</code> 方法的 {@link org.apache.commons.chain2.Command}
+// * 可能抛出任何可能的异常，也必须履行此承诺。
+// * 所属的 {@link Chain} 必须按调用其 <code>execute()</code> 方法的反向顺序调用
+// * {@link Chain} 中每个 {@link Filter} 的 <code>postprocess()</code> 方法。</p>
 // *
-// * <p>The most common use case for a {@link Filter}, as opposed to a
-// * {@link org.apache.commons.chain2.Command}, is where potentially expensive resources must be acquired
-// * and held until the processing of a particular request has been completed,
-// * even if execution is delegated to a subsequent {@link org.apache.commons.chain2.Command} via the
-// * <code>execute()</code> returning <code>CONTINUE</code>.  A {@link Filter}
-// * can reliably release such resources in the <code>postprocess()</code>
-// * method, which is guaranteed to be called by the owning {@link Chain}.</p>
+// * <p>与 {@link org.apache.commons.chain2.Command} 相比，{@link Filter} 最常见的用例是：
+// * 必须获取并保存可能昂贵的资源，直到特定请求的处理完成，
+// * 即使通过 <code>execute()</code> 返回 <code>CONTINUE</code>
+// * 将执行委托给后续 {@link org.apache.commons.chain2.Command}。
+// * {@link Filter} 可以可靠地在 <code>postprocess()</code> 方法中释放此类资源，
+// * 而该方法保证由所属的 {@link Chain} 调用。</p>
 // *
-// * @param <K> the type of keys maintained by the context associated with this command
-// * @param <V> the type of mapped values
-// * @param <C> Type of the context associated with this command
+// * @param <K> 与此命令关联的上下文维护的键类型
+// * @param <V> 映射值的类型
+// * @param <C> 与此命令关联的上下文类型
 // *
 // * @version $Id$
 // */
 //public interface Filter<K, V, C extends Map<K, V>> extends org.apache.commons.chain2.Command<K, V, C> {
 //
 //    /**
-//     * <p>Execute any cleanup activities, such as releasing resources that
-//     * were acquired during the <code>execute()</code> method of this
-//     * {@link Filter} instance.</p>
+//     * <p>执行任何清理活动，例如释放在此 {@link Filter} 实例的
+//     * <code>execute()</code> 方法期间获取的资源。</p>
 //     *
-//     * @param context The {@link org.apache.commons.chain2.Context} to be processed by this
-//     *  {@link Filter}
-//     * @param exception The <code>Exception</code> (if any) that was thrown
-//     *  by the last {@link org.apache.commons.chain2.Command} that was executed; otherwise
-//     *  <code>null</code>
+//     * @param context 要由此 {@link Filter} 处理的 {@link org.apache.commons.chain2.Context}
+//     * @param exception 最后执行的 {@link org.apache.commons.chain2.Command} 抛出的
+//     *  <code>Exception</code>（如果有）；否则为 <code>null</code>
 //     *
-//     * @throws IllegalArgumentException if <code>context</code>
-//     *  is <code>null</code>
+//     * @throws IllegalArgumentException 如果 <code>context</code> 为 <code>null</code>
 //     *
-//     * @return If a non-null <code>exception</code> was "handled" by this
-//     *  method (and therefore need not be rethrown), return <code>FINISHED</code>;
-//     *  otherwise return <code>CONTINUE</code>
+//     * @return 如果此方法"处理"了非空 <code>exception</code>
+//     *  （因此不需要重新抛出），则返回 <code>FINISHED</code>；
+//     *  否则返回 <code>CONTINUE</code>
 //     */
 //   boolean postprocess(C context, Exception exception);
 //

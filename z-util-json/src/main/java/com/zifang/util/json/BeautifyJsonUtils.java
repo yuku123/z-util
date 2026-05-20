@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * JSON 美化工具类，提供格式化的 JSON 输出功能。
+ *
  * @author zifang
  */
 public class BeautifyJsonUtils {
@@ -17,6 +19,12 @@ public class BeautifyJsonUtils {
 
     private static int callDepth = 0;
 
+    /**
+     * 美化输出 JsonObject，格式化缩进显示。
+     *
+     * @param jsonObject 待美化的 JsonObject 对象
+     * @return 格式化后的 JSON 字符串
+     */
     public static String beautify(JsonObject jsonObject) {
 
         StringBuilder sb = new StringBuilder();
@@ -66,6 +74,12 @@ public class BeautifyJsonUtils {
         return sb.toString();
     }
 
+    /**
+     * 美化输出 JsonArray，格式化缩进显示。
+     *
+     * @param jsonArray 待美化的 JsonArray 对象
+     * @return 格式化后的 JSON 字符串
+     */
     public static String beautify(JsonArray jsonArray) {
         StringBuilder sb = new StringBuilder();
         sb.append(getIndentString());

@@ -17,23 +17,44 @@ public class NeuralNetwork {
         this.learningRate = 0.01;
     }
 
+    /**
+     * 设置学习率
+     *
+     * @param learningRate 学习率，必须大于0
+     * @return 当前神经网络实例（支持链式调用）
+     */
     public NeuralNetwork learningRate(double learningRate) {
         this.learningRate = learningRate;
         return this;
     }
 
+    /**
+     * 设置损失函数
+     *
+     * @param lossFunction 损失函数实例，不能为null
+     * @return 当前神经网络实例（支持链式调用）
+     */
     public NeuralNetwork lossFunction(LossFunction lossFunction) {
         this.lossFunction = lossFunction;
         return this;
     }
 
+    /**
+     * 添加层到神经网络
+     *
+     * @param layer 要添加的层，不能为null
+     * @return 当前神经网络实例（支持链式调用）
+     */
     public NeuralNetwork addLayer(Layer layer) {
         layers.add(layer);
         return this;
     }
 
     /**
-     * 前向传播
+     * 前向传播：根据输入计算神经网络输出
+     *
+     * @param inputs 输入数据，数组长度需与输入层匹配
+     * @return 神经网络输出数组
      */
     public double[] predict(double[] inputs) {
         double[] current = inputs;
@@ -44,7 +65,11 @@ public class NeuralNetwork {
     }
 
     /**
-     * 训练一步
+     * 执行一步训练：前向传播 + 反向传播
+     *
+     * @param inputs  输入数据，数组长度需与输入层匹配
+     * @param targets 目标数据，数组长度需与输出层匹配
+     * @return 本次训练的损失值
      */
     public double train(double[] inputs, double[] targets) {
         // 前向传播
@@ -76,10 +101,20 @@ public class NeuralNetwork {
         return gradient;
     }
 
+    /**
+     * 获取神经网络的所有层
+     *
+     * @return 层列表
+     */
     public List<Layer> getLayers() {
         return layers;
     }
 
+    /**
+     * 获取当前学习率
+     *
+     * @return 学习率
+     */
     public double getLearningRate() {
         return learningRate;
     }

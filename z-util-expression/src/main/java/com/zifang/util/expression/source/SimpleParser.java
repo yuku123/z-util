@@ -65,11 +65,11 @@ public class SimpleParser {
     }
 
     /**
-     * 解析脚本
+     * 解析脚本，返回AST根节点。
      *
-     * @param script
-     * @return
-     * @throws Exception
+     * @param script 要解析的脚本内容，支持变量声明、赋值语句和表达式
+     * @return AST根节点
+     * @throws Exception 如果解析过程中出现语法错误
      */
     public ASTNode parse(String script) throws Exception {
         SimpleLexer lexer = new SimpleLexer();
@@ -347,9 +347,9 @@ public class SimpleParser {
     }
 
     /**
-     * 打印输出AST的树状结构
+     * 打印输出AST的树状结构。
      *
-     * @param node
+     * @param node   AST节点
      * @param indent 缩进字符，由tab组成，每一级多一个tab
      */
     void dumpAST(ASTNode node, String indent) {

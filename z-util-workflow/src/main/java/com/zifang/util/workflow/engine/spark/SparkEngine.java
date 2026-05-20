@@ -5,66 +5,63 @@ import com.zifang.util.workflow.engine.interfaces.AbstractEngineService;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Spark执行引擎实现类。
+ * 负责在Spark环境下执行工作流节点，提供数据处理和分析能力。
+ * 支持通过注册机制添加各种Spark服务处理器。
+ *
+ * @see AbstractSparkEngine
+ * @see AbstractEngineService
+ */
 public class SparkEngine extends AbstractSparkEngine {
 
-//    private SparkContextInstance sparkContextInstance;
-
-//    {
-//            put("engine.service.empty",EmptyHandler.class);
-//            put("engine.service.resourceHandler",ResourceHandler.class);//数据的出入
-//            put("engine.service.joinHandler",JoinHandler.class);//专门用作数据整合，join相关
-//            put("engine.service.changeColumn", ChangeColumnNameHandler.class);//专门用作数据映射
-//            put("engine.service.pivot", PivotHandler.class);//专门处理数据透视功能
-//            put("engine.service.codification", CodificationHandler.class);//数据转换的一个环节，将列向数据转化为标定量
-//            put("engine.service.sql",SqlHandler.class);
-//            put("engine.service.castColumn", CodificationHandler.class);//更改列的类型性质
-    //横向 行数据 过滤(数据过滤)
-    //纵向 列数据 过滤(挑选列)
-    //对表的统计，列统计，行统计，缺失值统计，提供的统计参考提供多个--> 可能需要变成一个util而不是一个服务性质的存在 当操作是需要统计量参与的就执行方法调用
-    //窗口方法：组内排序，全量组排序，窗口累加，分片打标识
-    //split 节点内对数据进行分开
-    //
-
-    //    }
+    /**
+     * 已注册的引擎服务映射表
+     */
     public Map<String, Class<? extends AbstractEngineService>> registeredEngineServiceMap = new HashMap<String, Class<? extends AbstractEngineService>>() {
     };
 
+    /**
+     * 获取已注册的引擎服务映射表。
+     *
+     * @return 服务单元名称到服务类类型的映射
+     */
     @Override
     public Map<String, Class<? extends AbstractEngineService>> getRegisteredEngineServiceMap() {
         return registeredEngineServiceMap;
     }
 
+    /**
+     * 根据服务单元名称获取对应的引擎服务实例。
+     * 注意：当前实现返回null，实际使用时需要通过反射创建实例。
+     *
+     * @param serviceUnit 服务单元名称
+     * @return 引擎服务实例
+     */
     @Override
     public AbstractEngineService getRegisteredEngineService(String serviceUnit) {
-//        try {
-//            AbstractSparkEngineService abstractSparkEngineService = (AbstractSparkEngineService) registeredEngineServiceMap.get(serviceUnit).newInstance();
-//            abstractSparkEngineService.setSparkContextInstance(sparkContextInstance);
-//            return abstractSparkEngineService;
-//        } catch (InstantiationException | IllegalAccessException e) {
-//            e.printStackTrace();
-//        }
         return null;
     }
 
+    /**
+     * 注册引擎服务。
+     *
+     * @param name         服务单元名称
+     * @param engineService 服务类类型
+     */
     @Override
     public void register(String name, Class<? extends AbstractEngineService> engineService) {
         registeredEngineServiceMap.put(name, engineService);
     }
 
+    /**
+     * 引擎初始化方法。
+     * 子类可在此方法中完成SparkContext的初始化和服务注册。
+     */
     @Override
     public void doInitial() {
-//        sparkContextInstance = new SparkContextInstance(mode, properties);
-//
-//        //注册引擎方法
-//        Set<Class<?>> classSet = ClassUtil.searchClasses(this.getClass().getPackage().getName(), e -> e.isAnnotationPresent(EngineService.class));
-//
-//        for (Class<?> clazz : classSet) {
-//            String value = AnnotationUtil.getAnnotationValue(clazz, EngineService.class, "name");
-//            register(value, (Class<? extends AbstractEngineService>) clazz);
-//        }
     }
 
     public static void main(String[] args) {
-//        System.out.println(ChangeColumnNameHandler.class.isAnnotationPresent(EngineService.class));
     }
 }

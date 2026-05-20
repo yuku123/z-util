@@ -44,6 +44,9 @@ public class Correlation {
 
     /**
      * 计算两个 Series 的 Pearson 相关系数
+     * @param x 第一个 Series
+     * @param y 第二个 Series
+     * @return Pearson 相关系数，范围 [-1, 1]，如果有效数据点少于 2 个则返回 NaN
      */
     private static double calculatePearson(Series x, Series y) {
         double[] xData = x.toArray();
@@ -103,6 +106,9 @@ public class Correlation {
 
     /**
      * 计算两个 Series 的协方差
+     * @param x 第一个 Series
+     * @param y 第二个 Series
+     * @return 协方差，如果有效数据点少于 2 个则返回 NaN
      */
     private static double calculateCovariance(Series x, Series y) {
         double[] xData = x.toArray();

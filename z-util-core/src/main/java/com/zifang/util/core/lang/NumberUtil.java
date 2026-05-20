@@ -9,6 +9,20 @@ import java.util.Objects;
 import static com.zifang.util.core.lang.StringUtil.isEmpty;
 import static com.zifang.util.core.lang.regex.Patterns.FLOATING_POINT_NUMBER_PATTERN;
 
+/**
+ * <p>数字处理工具类，提供各种数字转换、比较和检查的工具方法。</p>
+ *
+ * <p>主要功能包括：</p>
+ * <ul>
+ *   <li>字符串到数字的转换（int, long, float, double, byte, short, BigDecimal, BigInteger）</li>
+ *   <li>数组中的最大值和最小值查找</li>
+ *   <li>三个值中的最大值和最小值</li>
+ *   <li>数字有效性检查（是否可解析、是否为有效数字）</li>
+ *   <li>数字比较（compare 方法）</li>
+ * </ul>
+ *
+ * @author zifang
+ */
 public class NumberUtil {
 
     /**
@@ -100,11 +114,11 @@ public class NumberUtil {
 
 
     /**
-     * <p>{@code NumberUtil} instances should NOT be constructed in standard programming.
-     * Instead, the class should be used as {@code NumberUtil.toInt("6");}.</p>
+     * <p>NumberUtil 类不应以标准编程方式实例化。</p>
      *
-     * <p>This constructor is public to permit tools that require a JavaBean instance
-     * to operate.</p>
+     * <p>此类应该作为工具类使用，例如 {@code NumberUtil.toInt("6");}。</p>
+     *
+     * <p>此构造函数是 public 的，以允许需要 JavaBean 实例的工具进行操作。</p>
      */
     public NumberUtil() {
     }
@@ -112,10 +126,9 @@ public class NumberUtil {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Convert a {@code String} to an {@code int}, returning
-     * {@code zero} if the conversion fails.</p>
+     * <p>将字符串转换为 int 类型，转换失败时返回零。</p>
      *
-     * <p>If the string is {@code null}, {@code zero} is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回零。</p>
      *
      * <pre>
      *   NumberUtil.toInt(null) = 0
@@ -123,18 +136,17 @@ public class NumberUtil {
      *   NumberUtil.toInt("1")  = 1
      * </pre>
      *
-     * @param str the string to convert, may be null
-     * @return the int represented by the string, or {@code zero} if conversion fails
+     * @param str 要转换的字符串，可以为 null
+     * @return 字符串对应的 int 值，转换失败时返回零
      */
     public static int toInt(final String str) {
         return toInt(str, 0);
     }
 
     /**
-     * <p>Convert a {@code String} to an {@code int}, returning a
-     * default value if the conversion fails.</p>
+     * <p>将字符串转换为 int 类型，转换失败时返回指定的默认值。</p>
      *
-     * <p>If the string is {@code null}, the default value is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回默认值。</p>
      *
      * <pre>
      *   NumberUtil.toInt(null, 1) = 1
@@ -142,9 +154,9 @@ public class NumberUtil {
      *   NumberUtil.toInt("1", 0)  = 1
      * </pre>
      *
-     * @param str          the string to convert, may be null
-     * @param defaultValue the default value
-     * @return the int represented by the string, or the default if conversion fails
+     * @param str          要转换的字符串，可以为 null
+     * @param defaultValue 默认值
+     * @return 字符串对应的 int 值，转换失败时返回默认值
      */
     public static int toInt(final String str, final int defaultValue) {
         if (str == null) {
@@ -158,10 +170,9 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code long}, returning
-     * {@code zero} if the conversion fails.</p>
+     * <p>将字符串转换为 long 类型，转换失败时返回零。</p>
      *
-     * <p>If the string is {@code null}, {@code zero} is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回零。</p>
      *
      * <pre>
      *   NumberUtil.toLong(null) = 0L
@@ -169,18 +180,17 @@ public class NumberUtil {
      *   NumberUtil.toLong("1")  = 1L
      * </pre>
      *
-     * @param str the string to convert, may be null
-     * @return the long represented by the string, or {@code 0} if conversion fails
+     * @param str 要转换的字符串，可以为 null
+     * @return 字符串对应的 long 值，转换失败时返回零
      */
     public static long toLong(final String str) {
         return toLong(str, 0L);
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code long}, returning a
-     * default value if the conversion fails.</p>
+     * <p>将字符串转换为 long 类型，转换失败时返回指定的默认值。</p>
      *
-     * <p>If the string is {@code null}, the default value is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回默认值。</p>
      *
      * <pre>
      *   NumberUtil.toLong(null, 1L) = 1L
@@ -188,9 +198,9 @@ public class NumberUtil {
      *   NumberUtil.toLong("1", 0L)  = 1L
      * </pre>
      *
-     * @param str          the string to convert, may be null
-     * @param defaultValue the default value
-     * @return the long represented by the string, or the default if conversion fails
+     * @param str          要转换的字符串，可以为 null
+     * @param defaultValue 默认值
+     * @return 字符串对应的 long 值，转换失败时返回默认值
      */
     public static long toLong(final String str, final long defaultValue) {
         if (str == null) {
@@ -204,11 +214,9 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code float}, returning
-     * {@code 0.0f} if the conversion fails.</p>
+     * <p>将字符串转换为 float 类型，转换失败时返回 0.0f。</p>
      *
-     * <p>If the string {@code str} is {@code null},
-     * {@code 0.0f} is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回 0.0f。</p>
      *
      * <pre>
      *   NumberUtil.toFloat(null)   = 0.0f
@@ -216,19 +224,17 @@ public class NumberUtil {
      *   NumberUtil.toFloat("1.5")  = 1.5f
      * </pre>
      *
-     * @param str the string to convert, may be {@code null}
-     * @return the float represented by the string, or {@code 0.0f} if conversion fails
+     * @param str 要转换的字符串，可以为 null
+     * @return 字符串对应的 float 值，转换失败时返回 0.0f
      */
     public static float toFloat(final String str) {
         return toFloat(str, 0.0f);
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code float}, returning a
-     * default value if the conversion fails.</p>
+     * <p>将字符串转换为 float 类型，转换失败时返回指定的默认值。</p>
      *
-     * <p>If the string {@code str} is {@code null}, the default
-     * value is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回默认值。</p>
      *
      * <pre>
      *   NumberUtil.toFloat(null, 1.1f)   = 1.0f
@@ -236,9 +242,9 @@ public class NumberUtil {
      *   NumberUtil.toFloat("1.5", 0.0f)  = 1.5f
      * </pre>
      *
-     * @param str          the string to convert, may be {@code null}
-     * @param defaultValue the default value
-     * @return the float represented by the string, or defaultValue if conversion fails
+     * @param str          要转换的字符串，可以为 null
+     * @param defaultValue 默认值
+     * @return 字符串对应的 float 值，转换失败时返回默认值
      */
     public static float toFloat(final String str, final float defaultValue) {
         if (str == null) {
@@ -252,11 +258,9 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code double}, returning
-     * {@code 0.0d} if the conversion fails.</p>
+     * <p>将字符串转换为 double 类型，转换失败时返回 0.0d。</p>
      *
-     * <p>If the string {@code str} is {@code null},
-     * {@code 0.0d} is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回 0.0d。</p>
      *
      * <pre>
      *   NumberUtil.toDouble(null)   = 0.0d
@@ -264,19 +268,17 @@ public class NumberUtil {
      *   NumberUtil.toDouble("1.5")  = 1.5d
      * </pre>
      *
-     * @param str the string to convert, may be {@code null}
-     * @return the double represented by the string, or {@code 0.0d} if conversion fails
+     * @param str 要转换的字符串，可以为 null
+     * @return 字符串对应的 double 值，转换失败时返回 0.0d
      */
     public static double toDouble(final String str) {
         return toDouble(str, 0.0d);
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code double}, returning a
-     * default value if the conversion fails.</p>
+     * <p>将字符串转换为 double 类型，转换失败时返回指定的默认值。</p>
      *
-     * <p>If the string {@code str} is {@code null}, the default
-     * value is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回默认值。</p>
      *
      * <pre>
      *   NumberUtil.toDouble(null, 1.1d)   = 1.1d
@@ -284,9 +286,9 @@ public class NumberUtil {
      *   NumberUtil.toDouble("1.5", 0.0d)  = 1.5d
      * </pre>
      *
-     * @param str          the string to convert, may be {@code null}
-     * @param defaultValue the default value
-     * @return the double represented by the string, or defaultValue if conversion fails
+     * @param str          要转换的字符串，可以为 null
+     * @param defaultValue 默认值
+     * @return 字符串对应的 double 值，转换失败时返回默认值
      */
     public static double toDouble(final String str, final double defaultValue) {
         if (str == null) {
@@ -300,39 +302,35 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code BigDecimal} to a {@code double}.</p>
+     * <p>将 BigDecimal 转换为 double 类型。</p>
      *
-     * <p>If the {@code BigDecimal} {@code value} is
-     * {@code null}, then the specified default value is returned.</p>
+     * <p>如果 BigDecimal 值为 {@code null}，则返回指定的默认值 0.0d。</p>
      *
      * <pre>
      *   NumberUtil.toDouble(null)                     = 0.0d
-     *   NumberUtil.toDouble(BigDecimal.valudOf(8.5d)) = 8.5d
+     *   NumberUtil.toDouble(BigDecimal.valueOf(8.5d)) = 8.5d
      * </pre>
      *
-     * @param value the {@code BigDecimal} to convert, may be {@code null}.
-     * @return the double represented by the {@code BigDecimal} or {@code 0.0d} if the {@code
-     * BigDecimal} is {@code null}.
+     * @param value 要转换的 BigDecimal，可以为 null
+     * @return BigDecimal 对应的 double 值，如果为 null 则返回 0.0d
      */
     public static double toDouble(final BigDecimal value) {
         return toDouble(value, 0.0d);
     }
 
     /**
-     * <p>Convert a {@code BigDecimal} to a {@code double}.</p>
+     * <p>将 BigDecimal 转换为 double 类型。</p>
      *
-     * <p>If the {@code BigDecimal} {@code value} is
-     * {@code null}, then the specified default value is returned.</p>
+     * <p>如果 BigDecimal 值为 {@code null}，则返回指定的默认值。</p>
      *
      * <pre>
      *   NumberUtil.toDouble(null, 1.1d)                     = 1.1d
-     *   NumberUtil.toDouble(BigDecimal.valudOf(8.5d), 1.1d) = 8.5d
+     *   NumberUtil.toDouble(BigDecimal.valueOf(8.5d), 1.1d) = 8.5d
      * </pre>
      *
-     * @param value        the {@code BigDecimal} to convert, may be {@code null}.
-     * @param defaultValue the default value
-     * @return the double represented by the {@code BigDecimal} or the defaultValue if the {@code
-     * BigDecimal} is {@code null}.
+     * @param value        要转换的 BigDecimal，可以为 null
+     * @param defaultValue 默认值
+     * @return BigDecimal 对应的 double 值，如果为 null 则返回默认值
      */
     public static double toDouble(final BigDecimal value, final double defaultValue) {
         return value == null ? defaultValue : value.doubleValue();
@@ -341,10 +339,9 @@ public class NumberUtil {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Convert a {@code String} to a {@code byte}, returning
-     * {@code zero} if the conversion fails.</p>
+     * <p>将字符串转换为 byte 类型，转换失败时返回零。</p>
      *
-     * <p>If the string is {@code null}, {@code zero} is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回零。</p>
      *
      * <pre>
      *   NumberUtil.toByte(null) = 0
@@ -352,18 +349,17 @@ public class NumberUtil {
      *   NumberUtil.toByte("1")  = 1
      * </pre>
      *
-     * @param str the string to convert, may be null
-     * @return the byte represented by the string, or {@code zero} if conversion fails
+     * @param str 要转换的字符串，可以为 null
+     * @return 字符串对应的 byte 值，转换失败时返回零
      */
     public static byte toByte(final String str) {
         return toByte(str, (byte) 0);
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code byte}, returning a
-     * default value if the conversion fails.</p>
+     * <p>将字符串转换为 byte 类型，转换失败时返回指定的默认值。</p>
      *
-     * <p>If the string is {@code null}, the default value is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回默认值。</p>
      *
      * <pre>
      *   NumberUtil.toByte(null, 1) = 1
@@ -371,9 +367,9 @@ public class NumberUtil {
      *   NumberUtil.toByte("1", 0)  = 1
      * </pre>
      *
-     * @param str          the string to convert, may be null
-     * @param defaultValue the default value
-     * @return the byte represented by the string, or the default if conversion fails
+     * @param str          要转换的字符串，可以为 null
+     * @param defaultValue 默认值
+     * @return 字符串对应的 byte 值，转换失败时返回默认值
      */
     public static byte toByte(final String str, final byte defaultValue) {
         if (str == null) {
@@ -387,10 +383,9 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code short}, returning
-     * {@code zero} if the conversion fails.</p>
+     * <p>将字符串转换为 short 类型，转换失败时返回零。</p>
      *
-     * <p>If the string is {@code null}, {@code zero} is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回零。</p>
      *
      * <pre>
      *   NumberUtil.toShort(null) = 0
@@ -398,18 +393,17 @@ public class NumberUtil {
      *   NumberUtil.toShort("1")  = 1
      * </pre>
      *
-     * @param str the string to convert, may be null
-     * @return the short represented by the string, or {@code zero} if conversion fails
+     * @param str 要转换的字符串，可以为 null
+     * @return 字符串对应的 short 值，转换失败时返回零
      */
     public static short toShort(final String str) {
         return toShort(str, (short) 0);
     }
 
     /**
-     * <p>Convert a {@code String} to an {@code short}, returning a
-     * default value if the conversion fails.</p>
+     * <p>将字符串转换为 short 类型，转换失败时返回指定的默认值。</p>
      *
-     * <p>If the string is {@code null}, the default value is returned.</p>
+     * <p>如果字符串为 {@code null}，则返回默认值。</p>
      *
      * <pre>
      *   NumberUtil.toShort(null, 1) = 1
@@ -417,9 +411,9 @@ public class NumberUtil {
      *   NumberUtil.toShort("1", 0)  = 1
      * </pre>
      *
-     * @param str          the string to convert, may be null
-     * @param defaultValue the default value
-     * @return the short represented by the string, or the default if conversion fails
+     * @param str          要转换的字符串，可以为 null
+     * @param defaultValue 默认值
+     * @return 字符串对应的 short 值，转换失败时返回默认值
      */
     public static short toShort(final String str, final short defaultValue) {
         if (str == null) {
@@ -433,30 +427,28 @@ public class NumberUtil {
     }
 
     /**
-     * Convert a {@code BigDecimal} to a {@code BigDecimal} with a scale of two that has been rounded
-     * using {@code RoundingMode.HALF_EVEN}. If the supplied {@code value} is null, then {@code
-     * BigDecimal.ZERO} is returned.
+     * <p>将 BigDecimal 转换为指定小数位数的 BigDecimal，使用 RoundingMode.HALF_EVEN 进行舍入。</p>
      *
-     * <p>Note, the scale of a {@code BigDecimal} is the number of digits to the right of the
-     * decimal point.</p>
+     * <p>如果输入值为 {@code null}，则返回 BigDecimal.ZERO。</p>
      *
-     * @param value the {@code BigDecimal} to convert, may be null.
-     * @return the scaled, with appropriate rounding, {@code BigDecimal}.
+     * <p>注意：BigDecimal 的 scale 是小数点后的位数。</p>
+     *
+     * @param value 要转换的 BigDecimal，可以为 null
+     * @return 舍入后的 BigDecimal
      */
     public static BigDecimal toScaledBigDecimal(final BigDecimal value) {
         return toScaledBigDecimal(value, INTEGER_TWO, RoundingMode.HALF_EVEN);
     }
 
     /**
-     * Convert a {@code BigDecimal} to a {@code BigDecimal} whose scale is the specified value with a
-     * {@code RoundingMode} applied. If the input {@code value} is {@code null}, we simply return
-     * {@code BigDecimal.ZERO}.
+     * <p>将 BigDecimal 转换为指定小数位数的 BigDecimal，并应用指定的舍入模式。</p>
      *
-     * @param value        the {@code BigDecimal} to convert, may be null.
-     * @param scale        the number of digits to the right of the decimal point.
-     * @param roundingMode a rounding behavior for numerical operations capable of discarding
-     *                     precision.
-     * @return the scaled, with appropriate rounding, {@code BigDecimal}.
+     * <p>如果输入值为 {@code null}，则返回 BigDecimal.ZERO。</p>
+     *
+     * @param value        要转换的 BigDecimal，可以为 null
+     * @param scale        小数点后的位数
+     * @param roundingMode 舍入模式
+     * @return 舍入后的 BigDecimal
      */
     public static BigDecimal toScaledBigDecimal(final BigDecimal value, final int scale,
                                                 final RoundingMode roundingMode) {
@@ -468,30 +460,28 @@ public class NumberUtil {
     }
 
     /**
-     * Convert a {@code Float} to a {@code BigDecimal} with a scale of two that has been rounded using
-     * {@code RoundingMode.HALF_EVEN}. If the supplied {@code value} is null, then {@code
-     * BigDecimal.ZERO} is returned.
+     * <p>将 Float 转换为指定小数位数的 BigDecimal，使用 RoundingMode.HALF_EVEN 进行舍入。</p>
      *
-     * <p>Note, the scale of a {@code BigDecimal} is the number of digits to the right of the
-     * decimal point.</p>
+     * <p>如果输入值为 {@code null}，则返回 BigDecimal.ZERO。</p>
      *
-     * @param value the {@code Float} to convert, may be null.
-     * @return the scaled, with appropriate rounding, {@code BigDecimal}.
+     * <p>注意：BigDecimal 的 scale 是小数点后的位数。</p>
+     *
+     * @param value 要转换的 Float，可以为 null
+     * @return 舍入后的 BigDecimal
      */
     public static BigDecimal toScaledBigDecimal(final Float value) {
         return toScaledBigDecimal(value, INTEGER_TWO, RoundingMode.HALF_EVEN);
     }
 
     /**
-     * Convert a {@code Float} to a {@code BigDecimal} whose scale is the specified value with a
-     * {@code RoundingMode} applied. If the input {@code value} is {@code null}, we simply return
-     * {@code BigDecimal.ZERO}.
+     * <p>将 Float 转换为指定小数位数的 BigDecimal，并应用指定的舍入模式。</p>
      *
-     * @param value        the {@code Float} to convert, may be null.
-     * @param scale        the number of digits to the right of the decimal point.
-     * @param roundingMode a rounding behavior for numerical operations capable of discarding
-     *                     precision.
-     * @return the scaled, with appropriate rounding, {@code BigDecimal}.
+     * <p>如果输入值为 {@code null}，则返回 BigDecimal.ZERO。</p>
+     *
+     * @param value        要转换的 Float，可以为 null
+     * @param scale        小数点后的位数
+     * @param roundingMode 舍入模式
+     * @return 舍入后的 BigDecimal
      */
     public static BigDecimal toScaledBigDecimal(final Float value, final int scale,
                                                 final RoundingMode roundingMode) {
@@ -502,30 +492,28 @@ public class NumberUtil {
     }
 
     /**
-     * Convert a {@code Double} to a {@code BigDecimal} with a scale of two that has been rounded
-     * using {@code RoundingMode.HALF_EVEN}. If the supplied {@code value} is null, then {@code
-     * BigDecimal.ZERO} is returned.
+     * <p>将 Double 转换为指定小数位数的 BigDecimal，使用 RoundingMode.HALF_EVEN 进行舍入。</p>
      *
-     * <p>Note, the scale of a {@code BigDecimal} is the number of digits to the right of the
-     * decimal point.</p>
+     * <p>如果输入值为 {@code null}，则返回 BigDecimal.ZERO。</p>
      *
-     * @param value the {@code Double} to convert, may be null.
-     * @return the scaled, with appropriate rounding, {@code BigDecimal}.
+     * <p>注意：BigDecimal 的 scale 是小数点后的位数。</p>
+     *
+     * @param value 要转换的 Double，可以为 null
+     * @return 舍入后的 BigDecimal
      */
     public static BigDecimal toScaledBigDecimal(final Double value) {
         return toScaledBigDecimal(value, INTEGER_TWO, RoundingMode.HALF_EVEN);
     }
 
     /**
-     * Convert a {@code Double} to a {@code BigDecimal} whose scale is the specified value with a
-     * {@code RoundingMode} applied. If the input {@code value} is {@code null}, we simply return
-     * {@code BigDecimal.ZERO}.
+     * <p>将 Double 转换为指定小数位数的 BigDecimal，并应用指定的舍入模式。</p>
      *
-     * @param value        the {@code Double} to convert, may be null.
-     * @param scale        the number of digits to the right of the decimal point.
-     * @param roundingMode a rounding behavior for numerical operations capable of discarding
-     *                     precision.
-     * @return the scaled, with appropriate rounding, {@code BigDecimal}.
+     * <p>如果输入值为 {@code null}，则返回 BigDecimal.ZERO。</p>
+     *
+     * @param value        要转换的 Double，可以为 null
+     * @param scale        小数点后的位数
+     * @param roundingMode 舍入模式
+     * @return 舍入后的 BigDecimal
      */
     public static BigDecimal toScaledBigDecimal(final Double value, final int scale,
                                                 final RoundingMode roundingMode) {
@@ -540,30 +528,28 @@ public class NumberUtil {
     }
 
     /**
-     * Convert a {@code String} to a {@code BigDecimal} with a scale of two that has been rounded
-     * using {@code RoundingMode.HALF_EVEN}. If the supplied {@code value} is null, then {@code
-     * BigDecimal.ZERO} is returned.
+     * <p>将字符串转换为指定小数位数的 BigDecimal，使用 RoundingMode.HALF_EVEN 进行舍入。</p>
      *
-     * <p>Note, the scale of a {@code BigDecimal} is the number of digits to the right of the
-     * decimal point.</p>
+     * <p>如果输入值为 {@code null}，则返回 BigDecimal.ZERO。</p>
      *
-     * @param value the {@code String} to convert, may be null.
-     * @return the scaled, with appropriate rounding, {@code BigDecimal}.
+     * <p>注意：BigDecimal 的 scale 是小数点后的位数。</p>
+     *
+     * @param value 要转换的字符串，可以为 null
+     * @return 舍入后的 BigDecimal
      */
     public static BigDecimal toScaledBigDecimal(final String value) {
         return toScaledBigDecimal(value, INTEGER_TWO, RoundingMode.HALF_EVEN);
     }
 
     /**
-     * Convert a {@code String} to a {@code BigDecimal} whose scale is the specified value with a
-     * {@code RoundingMode} applied. If the input {@code value} is {@code null}, we simply return
-     * {@code BigDecimal.ZERO}.
+     * <p>将字符串转换为指定小数位数的 BigDecimal，并应用指定的舍入模式。</p>
      *
-     * @param value        the {@code String} to convert, may be null.
-     * @param scale        the number of digits to the right of the decimal point.
-     * @param roundingMode a rounding behavior for numerical operations capable of discarding
-     *                     precision.
-     * @return the scaled, with appropriate rounding, {@code BigDecimal}.
+     * <p>如果输入值为 {@code null}，则返回 BigDecimal.ZERO。</p>
+     *
+     * @param value        要转换的字符串，可以为 null
+     * @param scale        小数点后的位数
+     * @param roundingMode 舍入模式
+     * @return 舍入后的 BigDecimal
      */
     public static BigDecimal toScaledBigDecimal(final String value, final int scale,
                                                 final RoundingMode roundingMode) {
@@ -614,33 +600,26 @@ public class NumberUtil {
     // plus minus everything. Probably more. A lot are not separable.
 
     /**
-     * <p>Turns a string value into a java.lang.Number.</p>
+     * <p>将字符串转换为 java.lang.Number 对象。</p>
      *
-     * <p>If the string starts with {@code 0x} or {@code -0x} (lower or upper case) or {@code #} or
-     * {@code -#}, it will be interpreted as a hexadecimal Integer - or Long, if the number of digits
-     * after the prefix is more than 8 - or BigInteger if there are more than 16 digits.
-     * </p>
-     * <p>Then, the value is examined for a type qualifier on the end, i.e. one of
-     * {@code 'f', 'F', 'd', 'D', 'l', 'L'}.  If it is found, it starts trying to create successively
-     * larger types from the type specified until one is found that can represent the value.</p>
+     * <p>如果字符串以 {@code 0x}、{@code -0x}（大小写不敏感）或 {@code #}、{@code -#} 开头，
+     * 则将其解析为十六进制整数；如果数字部分超过8位，则解析为 Long；如果超过16位，则解析为 BigInteger。</p>
      *
-     * <p>If a type specifier is not found, it will check for a decimal point
-     * and then try successively larger types from {@code Integer} to {@code BigInteger} and from
-     * {@code Float} to {@code BigDecimal}.</p>
+     * <p>然后检查字符串末尾是否有类型限定符，即 {@code 'f', 'F', 'd', 'D', 'l', 'L'} 之一。
+     * 如果找到，则依次尝试从指定类型创建更大的类型，直到找到能表示该值的类型。</p>
      *
-     * <p>
-     * Integral values with a leading {@code 0} will be interpreted as octal; the returned number will
-     * be Integer, Long or BigDecimal as appropriate.
-     * </p>
+     * <p>如果没有找到类型限定符，则检查是否有小数点，然后依次尝试从 {@code Integer} 到 {@code BigInteger}
+     * 以及从 {@code Float} 到 {@code BigDecimal} 的更大类型。</p>
      *
-     * <p>Returns {@code null} if the string is {@code null}.</p>
+     * <p>以 leading {@code 0} 开头的整数值将被解析为八进制；返回的数字将根据情况是 Integer、Long 或 BigDecimal。</p>
      *
-     * <p>This method does not trim the input string, i.e., strings with leading
-     * or trailing spaces will generate NumberFormatExceptions.</p>
+     * <p>如果字符串为 {@code null}，则返回 {@code null}。</p>
      *
-     * @param str String containing a number, may be null
-     * @return Number created from the string (or null if the input is null)
-     * @throws NumberFormatException if the value cannot be converted
+     * <p>此方法不会去除输入字符串的首尾空格，即带有前导或尾随空格的字符串会抛出 NumberFormatException。</p>
+     *
+     * @param str 包含数字的字符串，可以为 null
+     * @return 从字符串创建的 Number（如果输入为 null 则返回 null）
+     * @throws NumberFormatException 如果值无法转换
      */
     public static Number createNumber(final String str) {
         if (str == null) {
@@ -874,13 +853,13 @@ public class NumberUtil {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Convert a {@code String} to a {@code Float}.</p>
+     * <p>将字符串转换为 Float 类型。</p>
      *
-     * <p>Returns {@code null} if the string is {@code null}.</p>
+     * <p>如果字符串为 {@code null}，则返回 {@code null}。</p>
      *
-     * @param str a {@code String} to convert, may be null
-     * @return converted {@code Float} (or null if the input is null)
-     * @throws NumberFormatException if the value cannot be converted
+     * @param str 要转换的字符串，可以为 null
+     * @return 转换后的 Float（如果输入为 null 则返回 null）
+     * @throws NumberFormatException 如果值无法转换
      */
     public static Float createFloat(final String str) {
         if (str == null) {
@@ -890,13 +869,13 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code Double}.</p>
+     * <p>将字符串转换为 Double 类型。</p>
      *
-     * <p>Returns {@code null} if the string is {@code null}.</p>
+     * <p>如果字符串为 {@code null}，则返回 {@code null}。</p>
      *
-     * @param str a {@code String} to convert, may be null
-     * @return converted {@code Double} (or null if the input is null)
-     * @throws NumberFormatException if the value cannot be converted
+     * @param str 要转换的字符串，可以为 null
+     * @return 转换后的 Double（如果输入为 null 则返回 null）
+     * @throws NumberFormatException 如果值无法转换
      */
     public static Double createDouble(final String str) {
         if (str == null) {
@@ -906,15 +885,14 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code Integer}, handling
-     * hex (0xhhhh) and octal (0dddd) notations. N.B. a leading zero means octal; spaces are not
-     * trimmed.</p>
+     * <p>将字符串转换为 Integer 类型，支持十六进制（0xhhhh）和八进制（0dddd）表示法。
+     * 注意：前导零表示八进制；不会去除空格。</p>
      *
-     * <p>Returns {@code null} if the string is {@code null}.</p>
+     * <p>如果字符串为 {@code null}，则返回 {@code null}。</p>
      *
-     * @param str a {@code String} to convert, may be null
-     * @return converted {@code Integer} (or null if the input is null)
-     * @throws NumberFormatException if the value cannot be converted
+     * @param str 要转换的字符串，可以为 null
+     * @return 转换后的 Integer（如果输入为 null 则返回 null）
+     * @throws NumberFormatException 如果值无法转换
      */
     public static Integer createInteger(final String str) {
         if (str == null) {
@@ -925,15 +903,14 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code Long};
-     * since 3.1 it handles hex (0Xhhhh) and octal (0ddd) notations. N.B. a leading zero means octal;
-     * spaces are not trimmed.</p>
+     * <p>将字符串转换为 Long 类型；自 3.1 起支持十六进制（0Xhhhh）和八进制（0ddd）表示法。
+     * 注意：前导零表示八进制；不会去除空格。</p>
      *
-     * <p>Returns {@code null} if the string is {@code null}.</p>
+     * <p>如果字符串为 {@code null}，则返回 {@code null}。</p>
      *
-     * @param str a {@code String} to convert, may be null
-     * @return converted {@code Long} (or null if the input is null)
-     * @throws NumberFormatException if the value cannot be converted
+     * @param str 要转换的字符串，可以为 null
+     * @return 转换后的 Long（如果输入为 null 则返回 null）
+     * @throws NumberFormatException 如果值无法转换
      */
     public static Long createLong(final String str) {
         if (str == null) {
@@ -943,14 +920,13 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code BigInteger};
-     * since 3.2 it handles hex (0x or #) and octal (0) notations.</p>
+     * <p>将字符串转换为 BigInteger 类型；自 3.2 起支持十六进制（0x 或 #）和八进制（0）表示法。</p>
      *
-     * <p>Returns {@code null} if the string is {@code null}.</p>
+     * <p>如果字符串为 {@code null}，则返回 {@code null}。</p>
      *
-     * @param str a {@code String} to convert, may be null
-     * @return converted {@code BigInteger} (or null if the input is null)
-     * @throws NumberFormatException if the value cannot be converted
+     * @param str 要转换的字符串，可以为 null
+     * @return 转换后的 BigInteger（如果输入为 null 则返回 null）
+     * @throws NumberFormatException 如果值无法转换
      */
     public static BigInteger createBigInteger(final String str) {
         if (str == null) {
@@ -987,13 +963,13 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Convert a {@code String} to a {@code BigDecimal}.</p>
+     * <p>将字符串转换为 BigDecimal 类型。</p>
      *
-     * <p>Returns {@code null} if the string is {@code null}.</p>
+     * <p>如果字符串为 {@code null}，则返回 {@code null}。</p>
      *
-     * @param str a {@code String} to convert, may be null
-     * @return converted {@code BigDecimal} (or null if the input is null)
-     * @throws NumberFormatException if the value cannot be converted
+     * @param str 要转换的字符串，可以为 null
+     * @return 转换后的 BigDecimal（如果输入为 null 则返回 null）
+     * @throws NumberFormatException 如果值无法转换
      */
     public static BigDecimal createBigDecimal(final String str) {
         if (str == null) {
@@ -1010,12 +986,12 @@ public class NumberUtil {
     //--------------------------------------------------------------------
 
     /**
-     * <p>Returns the minimum value in an array.</p>
+     * <p>返回数组中的最小值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the minimum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最小值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static long min(final long... array) {
         // Validates input
@@ -1033,12 +1009,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the minimum value in an array.</p>
+     * <p>返回数组中的最小值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the minimum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最小值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static int min(final int... array) {
         // Validates input
@@ -1056,12 +1032,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the minimum value in an array.</p>
+     * <p>返回数组中的最小值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the minimum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最小值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static short min(final short... array) {
         // Validates input
@@ -1079,12 +1055,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the minimum value in an array.</p>
+     * <p>返回数组中的最小值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the minimum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最小值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static byte min(final byte... array) {
         // Validates input
@@ -1102,12 +1078,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the minimum value in an array.</p>
+     * <p>返回数组中的最小值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the minimum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty differently
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最小值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static double min(final double... array) {
         // Validates input
@@ -1128,12 +1104,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the minimum value in an array.</p>
+     * <p>返回数组中的最小值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the minimum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty differently
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最小值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static float min(final float... array) {
         // Validates input
@@ -1157,12 +1133,12 @@ public class NumberUtil {
     //--------------------------------------------------------------------
 
     /**
-     * <p>Returns the maximum value in an array.</p>
+     * <p>返回数组中的最大值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the maximum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最大值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static long max(final long... array) {
         // Validates input
@@ -1180,12 +1156,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the maximum value in an array.</p>
+     * <p>返回数组中的最大值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the maximum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最大值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static int max(final int... array) {
         // Validates input
@@ -1203,12 +1179,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the maximum value in an array.</p>
+     * <p>返回数组中的最大值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the maximum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最大值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static short max(final short... array) {
         // Validates input
@@ -1226,12 +1202,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the maximum value in an array.</p>
+     * <p>返回数组中的最大值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the maximum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最大值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static byte max(final byte... array) {
         // Validates input
@@ -1249,12 +1225,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the maximum value in an array.</p>
+     * <p>返回数组中的最大值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the maximum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty differently
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最大值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static double max(final double... array) {
         // Validates input
@@ -1275,12 +1251,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Returns the maximum value in an array.</p>
+     * <p>返回数组中的最大值。</p>
      *
-     * @param array an array, must not be null or empty
-     * @return the maximum value in the array
-     * @throws IllegalArgumentException if {@code array} is {@code null}
-     * @throws IllegalArgumentException if {@code array} is empty differently
+     * @param array 输入数组，不能为 null 或空
+     * @return 数组中的最大值
+     * @throws IllegalArgumentException 如果数组为 null
+     * @throws IllegalArgumentException 如果数组为空
      */
     public static float max(final float... array) {
         // Validates input
@@ -1315,12 +1291,12 @@ public class NumberUtil {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Gets the minimum of three {@code long} values.</p>
+     * <p>获取三个 long 值中的最小值。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the smallest of the values
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最小值
      */
     public static long min(long a, final long b, final long c) {
         if (b < a) {
@@ -1333,12 +1309,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Gets the minimum of three {@code int} values.</p>
+     * <p>获取三个 int 值中的最小值。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the smallest of the values
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最小值
      */
     public static int min(int a, final int b, final int c) {
         if (b < a) {
@@ -1351,12 +1327,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Gets the minimum of three {@code short} values.</p>
+     * <p>获取三个 short 值中的最小值。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the smallest of the values
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最小值
      */
     public static short min(short a, final short b, final short c) {
         if (b < a) {
@@ -1369,12 +1345,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Gets the minimum of three {@code byte} values.</p>
+     * <p>获取三个 byte 值中的最小值。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the smallest of the values
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最小值
      */
     public static byte min(byte a, final byte b, final byte c) {
         if (b < a) {
@@ -1387,30 +1363,30 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Gets the minimum of three {@code double} values.</p>
+     * <p>获取三个 double 值中的最小值。</p>
      *
-     * <p>If any value is {@code NaN}, {@code NaN} is
-     * returned. Infinity is handled.</p>
+     * <p>如果任一值为 {@code NaN}，则返回 {@code NaN}。
+     * Infinity 会被正确处理。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the smallest of the values differently
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最小值
      */
     public static double min(final double a, final double b, final double c) {
         return Math.min(Math.min(a, b), c);
     }
 
     /**
-     * <p>Gets the minimum of three {@code float} values.</p>
+     * <p>获取三个 float 值中的最小值。</p>
      *
-     * <p>If any value is {@code NaN}, {@code NaN} is
-     * returned. Infinity is handled.</p>
+     * <p>如果任一值为 {@code NaN}，则返回 {@code NaN}。
+     * Infinity 会被正确处理。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the smallest of the values differently
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最小值
      */
     public static float min(final float a, final float b, final float c) {
         return Math.min(Math.min(a, b), c);
@@ -1420,12 +1396,12 @@ public class NumberUtil {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Gets the maximum of three {@code long} values.</p>
+     * <p>获取三个 long 值中的最大值。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the largest of the values
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最大值
      */
     public static long max(long a, final long b, final long c) {
         if (b > a) {
@@ -1438,12 +1414,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Gets the maximum of three {@code int} values.</p>
+     * <p>获取三个 int 值中的最大值。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the largest of the values
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最大值
      */
     public static int max(int a, final int b, final int c) {
         if (b > a) {
@@ -1456,12 +1432,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Gets the maximum of three {@code short} values.</p>
+     * <p>获取三个 short 值中的最大值。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the largest of the values
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最大值
      */
     public static short max(short a, final short b, final short c) {
         if (b > a) {
@@ -1474,12 +1450,12 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Gets the maximum of three {@code byte} values.</p>
+     * <p>获取三个 byte 值中的最大值。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the largest of the values
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最大值
      */
     public static byte max(byte a, final byte b, final byte c) {
         if (b > a) {
@@ -1492,30 +1468,30 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Gets the maximum of three {@code double} values.</p>
+     * <p>获取三个 double 值中的最大值。</p>
      *
-     * <p>If any value is {@code NaN}, {@code NaN} is
-     * returned. Infinity is handled.</p>
+     * <p>如果任一值为 {@code NaN}，则返回 {@code NaN}。
+     * Infinity 会被正确处理。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the largest of the values differently
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最大值
      */
     public static double max(final double a, final double b, final double c) {
         return Math.max(Math.max(a, b), c);
     }
 
     /**
-     * <p>Gets the maximum of three {@code float} values.</p>
+     * <p>获取三个 float 值中的最大值。</p>
      *
-     * <p>If any value is {@code NaN}, {@code NaN} is
-     * returned. Infinity is handled.</p>
+     * <p>如果任一值为 {@code NaN}，则返回 {@code NaN}。
+     * Infinity 会被正确处理。</p>
      *
-     * @param a value 1
-     * @param b value 2
-     * @param c value 3
-     * @return the largest of the values differently
+     * @param a 第一个值
+     * @param b 第二个值
+     * @param c 第三个值
+     * @return 三个值中的最大值
      */
     public static float max(final float a, final float b, final float c) {
         return Math.max(Math.max(a, b), c);
@@ -1524,40 +1500,32 @@ public class NumberUtil {
     //-----------------------------------------------------------------------
 
     /**
-     * <p>Checks whether the {@code String} contains only
-     * digit characters.</p>
+     * <p>检查字符串是否只包含数字字符。</p>
      *
-     * <p>{@code Null} and empty String will return
-     * {@code false}.</p>
+     * <p>null 和空字符串将返回 {@code false}。</p>
      *
-     * @param str the {@code String} to check
-     * @return {@code true} if str contains only Unicode numeric
+     * @param str 要检查的字符串
+     * @return 如果字符串只包含 Unicode 数字字符则返回 true
      */
     public static boolean isDigits(final String str) {
         return StringUtil.isNumeric(str);
     }
 
     /**
-     * <p>Checks whether the String a valid Java number.</p>
+     * <p>检查字符串是否为有效的 Java 数字。</p>
      *
-     * <p>Valid numbers include hexadecimal marked with the {@code 0x} or
-     * {@code 0X} qualifier, octal numbers, scientific notation and numbers marked with a type
-     * qualifier (e.g. 123L).</p>
+     * <p>有效数字包括：十六进制（以 {@code 0x} 或 {@code 0X} 开头）、
+     * 八进制、科学计数法以及带类型限定符的数字（如 123L）。</p>
      *
-     * <p>Non-hexadecimal strings beginning with a leading zero are
-     * treated as octal values. Thus the string {@code 09} will return {@code false}, since {@code 9}
-     * is not a valid octal value. However, numbers beginning with {@code 0.} are treated as
-     * decimal.</p>
+     * <p>以前导零开头的非十六进制字符串被视为八进制值。因此字符串 {@code 09} 将返回 {@code false}，
+     * 因为 {@code 9} 不是有效的八进制值。但是，以 {@code 0.} 开头的数字被视为十进制。</p>
      *
-     * <p>{@code null} and empty/blank {@code String} will return
-     * {@code false}.</p>
+     * <p>{@code null} 和空/空白字符串将返回 {@code false}。</p>
      *
-     * <p>Note, {@link #createNumber(String)} should return a number for every
-     * input resulting in {@code true}.</p>
+     * <p>注意：对于每个导致此方法返回 {@code true} 的输入，{@link #createNumber(String)} 应该返回一个数字。</p>
      *
-     * @param str the {@code String} to check
-     * @return {@code true} if the string is a correctly formatted number
-     * @since 3.5
+     * @param str 要检查的字符串
+     * @return 如果字符串格式正确则返回 true
      */
     public static boolean isCreatable(final String str) {
         if (isEmpty(str)) {
@@ -1674,20 +1642,20 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Checks whether the given String is a parsable number.</p>
+     * <p>检查给定的字符串是否是可以解析的数字。</p>
      *
-     * <p>Parsable numbers include those Strings understood by {@link Integer#parseInt(String)},
-     * {@link Long#parseLong(String)}, {@link Float#parseFloat(String)} or {@link
-     * Double#parseDouble(String)}. This method can be used instead of catching {@link
-     * java.text.ParseException} when calling one of those methods.</p>
+     * <p>可解析的数字包括那些可以由 {@link Integer#parseInt(String)}、
+     * {@link Long#parseLong(String)}、{@link Float#parseFloat(String)} 或
+     * {@link Double#parseDouble(String)} 解析的字符串。
+     * 在调用这些方法时，可以使用方法代替捕获 {@link java.text.ParseException}。</p>
      *
-     * <p>Hexadecimal and scientific notations are <strong>not</strong> considered parsable.
-     * See {@link #isCreatable(String)} on those cases.</p>
+     * <p>十六进制和科学计数法表示的数字被认为是<strong>不可</strong>解析的。
+     * 有关这些情况请参阅 {@link #isCreatable(String)}。</p>
      *
-     * <p>{@code Null} and empty String will return {@code false}.</p>
+     * <p>{@code null} 和空字符串将返回 {@code false}。</p>
      *
-     * @param str the String to check.
-     * @return {@code true} if the string is a parsable number.
+     * @param str 要检查的字符串
+     * @return 如果字符串是可解析的数字则返回 true
      */
     public static boolean isParsable(final String str) {
         if (isEmpty(str)) {
@@ -1723,13 +1691,11 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Compzifang two {@code int} values numerically. This is the same functionality as provided in
-     * Java 7.</p>
+     * <p>比较两个 int 值的大小。这是 Java 7 提供的相同功能。</p>
      *
-     * @param x the first {@code int} to compare
-     * @param y the second {@code int} to compare
-     * @return the value {@code 0} if {@code x == y}; a value less than {@code 0} if {@code x < y};
-     * and a value greater than {@code 0} if {@code x > y}
+     * @param x 第一个 int 值
+     * @param y 第二个 int 值
+     * @return 如果 {@code x == y} 则返回 0；如果 {@code x < y} 则返回小于0的值；如果 {@code x > y} 则返回大于0的值
      */
     public static int compare(final int x, final int y) {
         if (x == y) {
@@ -1739,13 +1705,11 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Compzifang to {@code long} values numerically. This is the same functionality as provided in
-     * Java 7.</p>
+     * <p>比较两个 long 值的大小。这是 Java 7 提供的相同功能。</p>
      *
-     * @param x the first {@code long} to compare
-     * @param y the second {@code long} to compare
-     * @return the value {@code 0} if {@code x == y}; a value less than {@code 0} if {@code x < y};
-     * and a value greater than {@code 0} if {@code x > y}
+     * @param x 第一个 long 值
+     * @param y 第二个 long 值
+     * @return 如果 {@code x == y} 则返回 0；如果 {@code x < y} 则返回小于0的值；如果 {@code x > y} 则返回大于0的值
      */
     public static int compare(final long x, final long y) {
         if (x == y) {
@@ -1755,13 +1719,11 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Compzifang to {@code short} values numerically. This is the same functionality as provided in
-     * Java 7.</p>
+     * <p>比较两个 short 值的大小。这是 Java 7 提供的相同功能。</p>
      *
-     * @param x the first {@code short} to compare
-     * @param y the second {@code short} to compare
-     * @return the value {@code 0} if {@code x == y}; a value less than {@code 0} if {@code x < y};
-     * and a value greater than {@code 0} if {@code x > y}
+     * @param x 第一个 short 值
+     * @param y 第二个 short 值
+     * @return 如果 {@code x == y} 则返回 0；如果 {@code x < y} 则返回小于0的值；如果 {@code x > y} 则返回大于0的值
      */
     public static int compare(final short x, final short y) {
         if (x == y) {
@@ -1771,13 +1733,11 @@ public class NumberUtil {
     }
 
     /**
-     * <p>Compzifang two {@code byte} values numerically. This is the same functionality as provided in
-     * Java 7.</p>
+     * <p>比较两个 byte 值的大小。这是 Java 7 提供的相同功能。</p>
      *
-     * @param x the first {@code byte} to compare
-     * @param y the second {@code byte} to compare
-     * @return the value {@code 0} if {@code x == y}; a value less than {@code 0} if {@code x < y};
-     * and a value greater than {@code 0} if {@code x > y}
+     * @param x 第一个 byte 值
+     * @param y 第二个 byte 值
+     * @return 如果 {@code x == y} 则返回 0；如果 {@code x < y} 则返回小于0的值；如果 {@code x > y} 则返回大于0的值
      */
     public static int compare(final byte x, final byte y) {
         return x - y;
@@ -1793,6 +1753,14 @@ public class NumberUtil {
         }
     }
 
+    /**
+     * <p>检查字符串是否为浮点数。</p>
+     *
+     * <p>浮点数格式包括：正数、负数、小数、科学计数法等。</p>
+     *
+     * @param str 待检查的字符串
+     * @return 如果字符串是浮点数格式则返回 true，否则返回 false
+     */
     public static boolean isFloatingPointNumber(String str) {
         return FLOATING_POINT_NUMBER_PATTERN.matcher(str).matches();
     }

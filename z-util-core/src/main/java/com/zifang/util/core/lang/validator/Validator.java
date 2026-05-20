@@ -54,6 +54,15 @@ public class Validator {
         defenseIfTrue(ParamValidateStatusCode.PARAMETER_ERROR, parameter == null, msg, null);
     }
 
+    /**
+     * 使用谓词验证值，如果不满足谓词条件则抛出异常
+     *
+     * @param value     待验证的值
+     * @param predicate 验证谓词，如果谓词测试结果为true则抛出异常
+     * @param supplier  异常消息的提供者
+     * @param <T>       值类型
+     * @throws IllegalArgumentException 如果值不满足谓词条件
+     */
     public static <T> void validate(T value, Predicate<T> predicate, final Supplier<String> supplier) {
         if (predicate.test(value)) {
             throw new IllegalArgumentException(supplier.get());
@@ -82,26 +91,56 @@ public class Validator {
         defenseIfTrue(ParamValidateStatusCode.PARAMETER_ERROR, parameter != null, msg, param);
     }
 
+    /**
+     * 创建异常实例
+     *
+     * @param args 异常构造参数
+     * @return 异常实例
+     */
     BaseException newException(Object... args) {
         return null;
     }
 
+    /**
+     * 创建带根因异常的实例
+     *
+     * @param t    根因异常
+     * @param args 异常构造参数
+     * @return 异常实例
+     */
     BaseException newException(Throwable t, Object... args) {
         return null;
     }
 
+    /**
+     * 验证对象非空，为空时抛出通过newException创建的异常
+     *
+     * @param obj 待验证的对象
+     */
     public void notNull(Object obj) {
         if (obj == null) {
             throw newException(obj);
         }
     }
 
+    /**
+     * 验证对象非空，为空时抛出通过newException创建的异常
+     *
+     * @param obj  待验证的对象
+     * @param args 异常构造参数
+     */
     public void notNull(Object obj, Object... args) {
         if (obj == null) {
             throw newException(args);
         }
     }
 
+    /**
+     * 验证对象非空，为空时抛出IllegalArgumentException
+     *
+     * @param object  待验证的对象
+     * @param message 异常消息
+     */
     public static void notNull(Object object, String message) {
         if (Conditions.IS_NULL.test(object)) {
             throw new IllegalArgumentException(message);

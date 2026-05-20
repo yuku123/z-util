@@ -19,11 +19,11 @@
 //import java.util.Map;
 //
 ///**
-// * Allows adding a command in a {@link org.apache.commons.chain2.Catalog} identified by a name.
+// * 允许在 {@link org.apache.commons.chain2.Catalog} 中添加由名称标识的命令。
 // *
-// * @param <K> Context key type
-// * @param <V> Context value type
-// * @param <C> Type of the context associated with this command setter
+// * @param <K> 上下文键类型
+// * @param <V> 上下文值类型
+// * @param <C> 与此命令设置器关联的上下文类型
 // * @since 2.0
 // * @version $Id$
 // */

@@ -9,6 +9,13 @@ public class SinglePointCrossover implements CrossoverOperator {
 
     private final Random random = new Random();
 
+    /**
+     * 对两个父代进行单点交叉，产生两个子代
+     *
+     * @param parent1 第一个父代
+     * @param parent2 第二个父代
+     * @return 包含两个子代的数组
+     */
     @Override
     public Individual[] crossover(Individual parent1, Individual parent2) {
         Individual[] result = new Individual[2];

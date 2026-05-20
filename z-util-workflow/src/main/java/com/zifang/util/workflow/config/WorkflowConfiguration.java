@@ -17,26 +17,55 @@ public class WorkflowConfiguration {
      */
     private List<WorkflowNode> workflowNodeList;
 
+    /**
+     * 默认构造函数，创建一个空的流程配置
+     */
     public WorkflowConfiguration() {
     }
 
+    /**
+     * 全参数构造函数，初始化流程配置
+     *
+     * @param configurations    全局配置信息，包含执行引擎、缓存引擎等配置
+     * @param workflowNodeList  工作流节点列表，包含所有业务流程节点定义
+     */
     public WorkflowConfiguration(Configurations configurations, List<WorkflowNode> workflowNodeList) {
         this.configurations = configurations;
         this.workflowNodeList = workflowNodeList;
     }
 
+    /**
+     * 获取全局配置信息
+     *
+     * @return 全局配置对象，包含流引擎配置、缓存引擎配置等
+     */
     public Configurations getConfigurations() {
         return configurations;
     }
 
+    /**
+     * 设置全局配置信息
+     *
+     * @param configurations 全局配置对象，不能为null
+     */
     public void setConfigurations(Configurations configurations) {
         this.configurations = configurations;
     }
 
+    /**
+     * 获取工作流节点列表
+     *
+     * @return 工作流节点列表，包含所有业务流程节点定义
+     */
     public List<WorkflowNode> getWorkflowNodeList() {
         return workflowNodeList;
     }
 
+    /**
+     * 设置工作流节点列表
+     *
+     * @param workflowNodeList 工作流节点列表，不能为null
+     */
     public void setWorkflowNodeList(List<WorkflowNode> workflowNodeList) {
         this.workflowNodeList = workflowNodeList;
     }

@@ -15,12 +15,20 @@ import java.sql.ResultSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 仓储调用处理器，负责处理Repository接口方法的调用
+ */
 public class BaseRepositoryInvocationHandler implements InvocationHandler {
 
     private final Class<?> targetClass;
 
     private SqlExecutor sqlExecutor;
 
+    /**
+     * 构造调用处理器
+     *
+     * @param clazz Repository接口类型
+     */
     public BaseRepositoryInvocationHandler(Class<?> clazz) {
         this.targetClass = clazz;
         solve(targetClass);

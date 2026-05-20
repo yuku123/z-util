@@ -13,6 +13,14 @@ public class HiddenLayerImpl implements Layer {
     private double[] inputs;
     private double[] outputs;
 
+    /**
+     * 创建隐藏层
+     *
+     * @param inputCount          输入数量（上一层的神经元数量）
+     * @param neuronCount         当前层的神经元数量
+     * @param activationFunction  激活函数
+     * @throws IllegalArgumentException 当参数小于1时
+     */
     public HiddenLayerImpl(int inputCount, int neuronCount, ActivationFunction activationFunction) {
         this.neuronCount = neuronCount;
         this.activationFunction = activationFunction;
@@ -63,10 +71,20 @@ public class HiddenLayerImpl implements Layer {
         return LayerType.HIDDEN;
     }
 
+    /**
+     * 获取该层的神经元数组
+     *
+     * @return 神经元数组
+     */
     public Neuron[] getNeurons() {
         return neurons;
     }
 
+    /**
+     * 获取该层的神经元数量
+     *
+     * @return 神经元数量
+     */
     public int getNeuronCount() {
         return neuronCount;
     }

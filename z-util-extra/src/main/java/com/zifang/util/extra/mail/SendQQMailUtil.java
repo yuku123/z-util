@@ -8,8 +8,23 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
+/**
+ * QQ邮箱邮件发送工具类
+ * <p>
+ * 提供基于QQ邮箱SMTP服务的邮件发送功能，支持SSL安全连接
+ *
+ * @author zifang
+ */
 public class SendQQMailUtil {
 
+    /**
+     * 发送测试邮件（仅用于测试QQ邮箱SMTP配置）
+     * <p>
+     * 该方法演示如何使用QQ邮箱SMTP服务发送邮件
+     *
+     * @param args 命令行参数（未使用）
+     * @throws MessagingException 如果邮件配置或发送失败则抛出此异常
+     */
     public static void main(String[] args) throws MessagingException {
         Properties properties = new Properties();
         properties.put("mail.transport.protocol", "smtp");// 连接协议

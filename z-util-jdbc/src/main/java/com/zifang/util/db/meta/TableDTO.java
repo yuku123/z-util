@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 表DTO
+ * 表数据传输对象
  */
 public class TableDTO {
     public final String tableName;
@@ -14,6 +14,13 @@ public class TableDTO {
     private final List<ColumnDTO> columns = new ArrayList<>();
     public ColumnDTO primaryKey;
 
+    /**
+     * 构造表DTO
+     *
+     * @param tableName 表名，不能为空
+     * @param comment   表备注
+     * @throws IllegalArgumentException 表名为空或空白时抛出
+     */
     public TableDTO(String tableName, String comment) {
         String trimmedName = Objects.requireNonNull(tableName, "表名不能为空").trim();
         if (trimmedName.isEmpty()) {
@@ -24,11 +31,11 @@ public class TableDTO {
         this.entityName = underlineToCamelUpper(trimmedName);
     }
 
-    private String underlineToCamelUpper(String str) {
-        String camel = new ColumnDTO(str, "", 0, false, false, "").getJavaFieldName();
-        return camel.isEmpty() ? "UnknownEntity" : Character.toUpperCase(camel.charAt(0)) + camel.substring(1);
-    }
-
+    /**
+     * 添加字段
+     *
+     * @param column 字段对象
+     */
     public void addColumn(ColumnDTO column) {
         if (column != null) {
             columns.add(column);
@@ -38,10 +45,18 @@ public class TableDTO {
         }
     }
 
+    /**
+     * 获取字段列表的副本
+     *
+     * @return 字段列表
+     */
     public List<ColumnDTO> getColumns() {
         return new ArrayList<>(columns);
     }
 
+    /**
+     * 打印调试信息
+     */
     public void debugPrint() {
         System.out.println("=== TableDTO调试 ===");
         System.out.println("tableName: " + tableName);
@@ -50,22 +65,47 @@ public class TableDTO {
         System.out.println("===================");
     }
 
+    /**
+     * 获取表名
+     *
+     * @return 表名
+     */
     public String getTableName() {
         return tableName;
     }
 
+    /**
+     * 获取实体名（首字母大写的驼峰形式）
+     *
+     * @return 实体名
+     */
     public String getEntityName() {
         return entityName;
     }
 
+    /**
+     * 获取表备注
+     *
+     * @return 表备注
+     */
     public String getComment() {
         return comment;
     }
 
+    /**
+     * 获取主键字段
+     *
+     * @return 主键字段，没有主键返回null
+     */
     public ColumnDTO getPrimaryKey() {
         return primaryKey;
     }
 
+    /**
+     * 设置主键字段
+     *
+     * @param primaryKey 主键字段
+     */
     public void setPrimaryKey(ColumnDTO primaryKey) {
         this.primaryKey = primaryKey;
     }

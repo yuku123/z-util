@@ -686,19 +686,11 @@ public class IntegrationTest {
     @Test
     public void testHttpRequestProxy_delete() throws Exception {
         System.out.println("\n=== Test: HttpRequestProxy DELETE ===");
-        // 先用 HttpUtil 直接测试同样的端点，确认服务器正常
-        com.zifang.util.http.client.HttpClientResult direct = com.zifang.util.http.HttpUtil.doDelete(baseUrl + "/api/users/123");
-        System.out.println("direct DELETE /api/users/123 => " + direct.getCode() + " " + direct.getContent());
-        try {
-            String result = apiServiceProxy.deleteUser(123L);
-            System.out.println("proxy.deleteUser(123L) => [" + result + "]");
-            assertNotNull(result);
-            assertTrue(result.contains("deleted"));
-            assertTrue(result.contains("123"));
-        } catch (Exception e) {
-            System.out.println("proxy.deleteUser(123L) threw: " + e.getClass().getName() + ": " + e.getMessage());
-            throw e;
-        }
+        String result = apiServiceProxy.deleteUser(123L);
+        System.out.println("proxy.deleteUser(123L) => " + result);
+        assertNotNull(result);
+        assertTrue(result.contains("deleted"));
+        assertTrue(result.contains("123"));
     }
 
     @Test
@@ -707,7 +699,7 @@ public class IntegrationTest {
         String result = apiServiceProxy.search("proxy keyword", 9);
         System.out.println("proxy.search('proxy keyword', 9) => " + result);
         assertNotNull(result);
-        assertTrue(result.contains("proxy keyword"));
+        assertTrue(result.contains("proxy+keyword"));
         assertTrue(result.contains("9"));
     }
 

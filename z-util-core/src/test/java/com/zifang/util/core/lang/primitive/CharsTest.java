@@ -178,7 +178,7 @@ public class CharsTest {
     public void findFirstDiff_singleChar() {
         char[] source = new char[]{'a', 'a', 'b'};
         assertEquals(2, Chars.findFirstDiff(source, 0, 'a'));
-        assertEquals(-1, Chars.findFirstDiff(source, 0, 'b'));
+        assertEquals(0, Chars.findFirstDiff(source, 0, 'b'));
     }
 
     @Test

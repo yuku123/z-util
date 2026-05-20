@@ -725,6 +725,15 @@ public class FileUtil {
         return true;
     }
 
+    /**
+     * 从 URL 读取文件内容
+     *
+     * @param url     URL 地址
+     * @param charset 字符编码
+     * @return 文件内容字符串
+     * @throws IOException      如果读取发生异常
+     * @throws NullPointerException 如果 url 为 null
+     */
     public static String readString(URL url, String charset) throws IOException {
         if (url == null) {
             throw new NullPointerException("Empty url provided!");
@@ -744,6 +753,13 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 获取文件内容（使用默认编码）
+     *
+     * @param f 要读取的文件
+     * @return 文件内容字符串，文件不存在时返回空字符串
+     * @throws IOException 如果读取发生异常
+     */
     public static final String getFileContent(File f) throws IOException {
 
         String filecontent = "";
@@ -1108,6 +1124,12 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 将文件重命名
+     *
+     * @param oldFile 原文件
+     * @param newFile 目标文件
+     */
     public static void renameTo(File oldFile, File newFile) {
         oldFile.renameTo(newFile);
     }
@@ -2084,6 +2106,12 @@ public class FileUtil {
 //        return contentType;
 //    }
 
+    /**
+     * 生成文件
+     *
+     * @param filePath     生成文件的路径
+     * @param fileContent  文件内容
+     */
     public static final void gennerateFile(String filePath, String fileContent) {
         File file = new File(filePath);
         if (file.exists()) {
@@ -2101,6 +2129,11 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 获取系统临时文件夹路径
+     *
+     * @return 临时文件夹路径，以 "/" 结尾
+     */
     public static String decideTmpFolder() {
         String folderOld = System.getProperty("java.io.tmpdir");
         if (folderOld.endsWith("/")) {
@@ -2110,10 +2143,20 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 获取一个可用的临时文件夹路径（基于时间戳）
+     *
+     * @return 临时文件夹路径，格式为：系统临时目录 + "use_" + 时间戳 + "/"
+     */
     public static String decideTempUsableFolder() {
         return decideTmpFolder() + "use_" + System.currentTimeMillis() + "/";
     }
 
+    /**
+     * 创建指定路径的文件夹（如果存在则删除后重新创建）
+     *
+     * @param workFolder 文件夹路径
+     */
     public static void mkdir(String workFolder) {
         File file = new File(workFolder);
         if (file.exists()) {
@@ -2124,9 +2167,13 @@ public class FileUtil {
     }
 
     /**
-     * 清空这个文件夹下所有文件
+     * 清空文件夹下所有文件
      * <p>
-     * 如果这个文件夹不存在则创造
+     * 如果文件夹不存在则创建
+     *
+     * @param fileFolder 文件夹路径
+     * @return 成功返回 true，文件夹不存在返回 false
+     * @throws RuntimeException 如果传入的不是文件夹
      */
     public static boolean cleanFolder(String fileFolder) {
 
@@ -2150,14 +2197,21 @@ public class FileUtil {
     }
 
     /**
-     * 检测String代表的文件是否存在
+     * 检测文件是否存在
+     *
+     * @param filePath 文件路径
+     * @return 如果文件存在返回 true，否则返回 false
      */
     public static boolean isFileExist(String filePath) {
         return new File(filePath).exists();
     }
 
     /**
-     * Read an input stream into a string
+     * 将输入流转换为字符串
+     *
+     * @param in 输入流
+     * @return 转换后的字符串
+     * @throws IOException 如果读取发生异常
      */
     public final static String streamToString(InputStream in) throws IOException {
         StringBuffer out = new StringBuffer();
@@ -2169,7 +2223,11 @@ public class FileUtil {
     }
 
     /**
-     * Read an input stream into a byte[]
+     * 将输入流转换为字节数组
+     *
+     * @param is 输入流
+     * @return 字节数组
+     * @throws IOException 如果读取发生异常
      */
     public static final byte[] stream2Byte(InputStream is) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -2183,7 +2241,11 @@ public class FileUtil {
     }
 
     /**
-     * InputStream 转为 byte
+     * 将输入流转换为字节数组
+     *
+     * @param inStream 输入流
+     * @return 字节数组
+     * @throws Exception 如果读取发生异常
      */
     public static final byte[] inputStream2Byte(InputStream inStream) throws Exception {
         int count = 0;
@@ -2196,17 +2258,11 @@ public class FileUtil {
     }
 
     /**
-     * byte 转为 InputStream
+     * 将输入流保存为文件
      *
-     * @return InputStream
-     * @throws Exception
-     */
-    public static final InputStream byte2InputStream(byte[] b) throws Exception {
-        return new ByteArrayInputStream(b);
-    }
-
-    /**
-     * 将流另存为文件
+     * @param is      输入流
+     * @param outfile 输出文件
+     * @throws RuntimeException 如果写入发生异常
      */
     public static final void streamSaveAsFile(InputStream is, File outfile) {
         try (FileOutputStream fos = new FileOutputStream(outfile)) {
@@ -2286,8 +2342,8 @@ public class FileUtil {
     /**
      * 读取文件内容
      *
-     * @param file
-     * @return
+     * @param file 要读取的文件
+     * @return 文件内容字符串，读取失败返回 null
      */
     public static String readContents(File file) {
         try (FileInputStream in = new FileInputStream(file)) {

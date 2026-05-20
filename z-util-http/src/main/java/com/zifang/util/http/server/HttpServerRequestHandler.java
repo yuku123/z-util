@@ -99,13 +99,21 @@ public class HttpServerRequestHandler {
         String httpMethod = requestDefinition.getHttpRequestLine().getRequestMethod().name();
         String url = requestDefinition.getHttpRequestLine().getUrl();
 
-        // 解析路径（去除查询参数和 context path 前缀）
+        // 从 URL 中提取路径部分（去除协议+主机+端口）
         String path = url;
+        int protoEnd = path.indexOf("://");
+        if (protoEnd > 0) {
+            int slashAfterHost = path.indexOf('/', protoEnd + 3);
+            if (slashAfterHost >= 0) {
+                path = path.substring(slashAfterHost);
+            }
+        }
+        // 去除查询参数
         int queryIndex = path.indexOf('?');
         if (queryIndex > 0) {
             path = path.substring(0, queryIndex);
         }
-        // 去除 context path 前缀，例如 /builder/hello -> /hello
+        // 去除 context path 前缀
         if (contextPath != null && !contextPath.isEmpty() && path.startsWith(contextPath)) {
             path = path.substring(contextPath.length());
             if (!path.startsWith("/")) {

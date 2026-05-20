@@ -20,54 +20,53 @@
 //import java.util.Map;
 //
 ///**
-// * <p>A {@link Catalog} is a collection of named {@link Command}s (or
-// * {@link Chain}s) that can be used to retrieve the set of commands that
-// * should be performed based on a symbolic identifier.  Use of catalogs
-// * is optional, but convenient when there are multiple possible chains
-// * that can be selected and executed based on environmental conditions.</p>
+// * <p>{@link Catalog} 是命名 {@link Command}（或 {@link Chain}）的集合，
+// * 可用于根据符号标识符检索应执行的一组命令。
+// * 目录的使用是可选的，但在有多个可以基于环境条件选择和执行的链时很方便。</p>
 // *
-// * @param <K> the type of keys maintained by the context associated with this command
-// * @param <V> the type of mapped values
-// * @param <C> Type of the context associated with this command
+// * @param <K> 与此命令关联的上下文维护的键类型
+// * @param <V> 映射值的类型
+// * @param <C> 与此命令关联的上下文类型
 // *
 // * @version $Id$
 // */
 //public interface Catalog<K, V, C extends Map<K, V>> {
 //
 //    /**
-//     * <p>A default context attribute for storing a default {@link Catalog},
-//     * provided as a convenience only.</p>
+//     * <p>用于存储默认 {@link Catalog} 的默认上下文属性，
+//     * 仅作为便利提供。</p>
 //     */
 //    String CATALOG_KEY = "org.apache.commons.chain2.CATALOG";
 //
 //    /**
-//     * <p>Add a new name and associated {@link Command} or {@link Chain}
-//     * to the set of named commands known to this {@link Catalog},
-//     * replacing any previous command for that name.
+//     * <p>将新名称和关联的 {@link Command} 或 {@link Chain} 添加到此
+//     * {@link Catalog} 的命名命令集中，
+//     * 替换该名称的任何先前命令。</p>
 //     *
-//     * @param <CMD> the {@link Command} type to be added in the {@link Catalog}
-//     * @param name Name of the new command
-//     * @param command {@link Command} or {@link Chain} to be returned
-//     *  for later lookups on this name
+//     * @param <CMD> 要添加到 {@link Catalog} 的 {@link Command} 类型
+//     * @param name 新命令的名称
+//     * @param command 以后对此名称进行查找时要返回的 {@link Command} 或 {@link Chain}
+//     * @throws IllegalArgumentException 如果 name 或 command 为 null
 //     */
 //    <CMD extends Command<K, V, C>> void addCommand(String name, CMD command);
 //
 //    /**
-//     * <p>Return the {@link Command} or {@link Chain} associated with the
-//     * specified name, if any; otherwise, return <code>null</code>.</p>
+//     * <p>返回与指定名称关联的 {@link Command} 或 {@link Chain}（如果有）；
+//     * 否则返回 <code>null</code>。</p>
 //     *
-//     * @param <CMD> the expected {@link Command} type to be returned
-//     * @param name Name for which a {@link Command} or {@link Chain}
-//     *  should be retrieved
-//     * @return The Command associated with the specified name.
+//     * @param <CMD> 期望返回的 {@link Command} 类型
+//     * @param name 要检索其 {@link Command} 或 {@link Chain} 的名称
+//     * @return 与指定名称关联的命令
+//     * @throws IllegalArgumentException 如果 name 为 null
 //     */
 //    <CMD extends Command<K, V, C>> CMD getCommand(String name);
 //
 //    /**
-//     * <p>Return an <code>Iterator</code> over the set of named commands
-//     * known to this {@link Catalog}.  If there are no known commands,
-//     * an empty Iterator is returned.</p>
-//     * @return An iterator of the names in this Catalog.
+//     * <p>返回此 {@link Catalog} 已知命名命令集上的
+//     * <code>Iterator</code>。
+//     * 如果没有已知命令，则返回空迭代器。</p>
+//     *
+//     * @return 目录中名称的迭代器
 //     */
 //    Iterator<String> getNames();
 //

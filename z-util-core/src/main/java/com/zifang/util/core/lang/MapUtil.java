@@ -17,6 +17,12 @@ public class MapUtil {
 
     public static final int MAX_POWER_OF_TWO = 1 << (Integer.SIZE - 2);
 
+    /**
+     * 将Properties中的键值对合并到Map中
+     *
+     * @param props 要合并的Properties对象
+     * @param map   目标Map对象
+     */
     public static <K, V> void mergePropertiesIntoMap(Properties props, Map<K, V> map) {
         if (props != null) {
             for (Enumeration<?> en = props.propertyNames(); en.hasMoreElements(); ) {
@@ -32,32 +38,41 @@ public class MapUtil {
     }
 
     /**
-     * @author: zifang
-     * @description: new HashMap with expected size
-     * @time: 2021-12-24 11:21:07
-     * @params: [expectedSize] expected size
-     * @return: java.util.HashMap<K, V> out 出参
+     * 根据预期大小创建一个新的HashMap，自动计算合适的初始容量
+     *
+     * @param expectedSize 预期的键值对数量
+     * @return 新的HashMap实例
      */
     public static <K, V> HashMap<K, V> newHashMap(int expectedSize) {
         return new HashMap<>(capacity(expectedSize));
     }
 
+    /**
+     * 创建一个默认大小的HashMap（初始容量为16）
+     *
+     * @return 新的HashMap实例
+     */
     public static <K, V> HashMap<K, V> newHashMap() {
         return newHashMap(16);
     }
 
 
     /**
-     * @author: zifang
-     * @description: new LinkedHashMap with expected size
-     * @time: 2021-12-24 11:21:07
-     * @params: [expectedSize] expected size
-     * @return: java.util.LinkedHashMap<K, V> out 出参
+     * 根据预期大小创建一个新的LinkedHashMap，自动计算合适的初始容量
+     *
+     * @param expectedSize 预期的键值对数量
+     * @return 新的LinkedHashMap实例
      */
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize) {
         return new LinkedHashMap<>(capacity(expectedSize));
     }
 
+    /**
+     * 根据预期大小计算HashMap合适的初始容量
+     *
+     * @param expectedSize 预期的键值对数量
+     * @return 计算后的初始容量
+     */
     protected static int capacity(int expectedSize) {
         if (expectedSize < 3) {
             checkNonNegative(expectedSize, "expectedSize");
@@ -79,14 +94,33 @@ public class MapUtil {
         return value;
     }
 
+    /**
+     * 判断Map是否为空
+     *
+     * @param map 要检查的Map对象
+     * @return 如果Map为null或为空返回true，否则返回false
+     */
     public static <K, V> boolean isEmpty(Map<K, V> map) {
         return (map == null || map.isEmpty());
     }
 
+    /**
+     * 判断Map是否非空
+     *
+     * @param map 要检查的Map对象
+     * @return 如果Map不为null且不为空返回true，否则返回false
+     */
     public static <K, V> boolean isNotEmpty(Map<K, V> map) {
         return !isEmpty(map);
     }
 
+    /**
+     * 从Map中根据key获取对应的值
+     *
+     * @param map Map对象
+     * @param key 键
+     * @return 如果Map为空返回null，否则返回对应的值
+     */
     public static <K, V> V parseValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -94,6 +128,13 @@ public class MapUtil {
         return map.get(key);
     }
 
+    /**
+     * 从Map中根据key获取对应的值，并转换为String类型
+     *
+     * @param map Map对象
+     * @param key 键
+     * @return 如果Map为空返回null，否则返回对应的String值
+     */
     public static <K, V> String parseStringValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -101,6 +142,13 @@ public class MapUtil {
         return StringUtil.parseString(map.get(key));
     }
 
+    /**
+     * 从Map中根据key获取对应的值，并转换为Byte类型
+     *
+     * @param map Map对象
+     * @param key 键
+     * @return 如果Map为空返回null，否则返回对应的Byte值
+     */
     public static <K, V> Byte parseByteValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -108,6 +156,13 @@ public class MapUtil {
         return ByteUtil.parseByte(map.get(key));
     }
 
+    /**
+     * 从Map中根据key获取对应的值，并转换为Short类型
+     *
+     * @param map Map对象
+     * @param key 键
+     * @return 如果Map为空返回null，否则返回对应的Short值
+     */
     public static <K, V> Short parseShortValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -115,6 +170,13 @@ public class MapUtil {
         return ShortUtil.parseShort(map.get(key));
     }
 
+    /**
+     * 从Map中根据key获取对应的值，并转换为Integer类型
+     *
+     * @param map Map对象
+     * @param key 键
+     * @return 如果Map为空返回null，否则返回对应的Integer值
+     */
     public static <K, V> Integer parseIntegerValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -123,6 +185,13 @@ public class MapUtil {
     }
 
 
+    /**
+     * 从Map中根据key获取对应的值，并转换为Long类型
+     *
+     * @param map Map对象
+     * @param key 键
+     * @return 如果Map为空返回null，否则返回对应的Long值
+     */
     public static <K, V> Long parseLongValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -130,6 +199,14 @@ public class MapUtil {
         return LongUtil.parseLong(map.get(key));
     }
 
+    /**
+     * 从Map中根据key获取对应的值，如果值不存在或Map为空则返回默认值
+     *
+     * @param map          Map对象
+     * @param key          键
+     * @param defaultValue 默认值
+     * @return 如果Map非空且包含key则返回对应的值，否则返回默认值
+     */
     public static <K, V> V parseValueOrDefault(Map<K, V> map, K key, V defaultValue) {
         if (isEmpty(map)) {
             return defaultValue;
@@ -139,11 +216,10 @@ public class MapUtil {
 
 
     /**
-     * @author: zifang
-     * @description: create map from properties
-     * @time: 2021-12-24 11:19:30
-     * @params: [properties] properties
-     * @return: java.util.Map<java.lang.String, java.lang.String> properties map
+     * 将Properties对象转换为Map
+     *
+     * @param properties Properties对象
+     * @return 转换后的Map，如果properties为null则返回空Map
      */
     public static Map<String, String> fromProperties(Properties properties) {
         if (null == properties) {
@@ -160,6 +236,14 @@ public class MapUtil {
         return map;
     }
 
+    /**
+     * 替换Map中所有键中的指定字符串
+     *
+     * @param map     原Map对象
+     * @param search  要查找替换的字符串
+     * @param replace 替换后的字符串
+     * @return 键被替换后的新Map
+     */
     public static <T> Map<String, T> replaceKey(Map<String, T> map, String search, String replace) {
         Map<String, T> newMap = MapUtil.newHashMap(map.size());
         map.forEach((key, value) -> {
@@ -175,12 +259,10 @@ public class MapUtil {
     }
 
     /**
-     * @author: zifang
-     * @description: Trim value
-     * @description: 剔除值为null的键值对
-     * @time: 2022-11-28 22:52:07
-     * @params: [sourceMap] source map
-     * @return: java.util.Map<java.lang.String, T> result map
+     * 剔除Map中值为null的键值对
+     *
+     * @param sourceMap 原Map对象
+     * @return 剔除null值后的Map
      */
     public static <T> Map<String, T> trimValue(Map<String, T> sourceMap) {
         if (isEmpty(sourceMap)) {

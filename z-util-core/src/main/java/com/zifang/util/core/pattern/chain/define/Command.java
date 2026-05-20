@@ -19,30 +19,23 @@
 //import java.util.Map;
 //
 ///**
-// * <p>A {@link Command} encapsulates a unit of processing work to be
-// * performed, whose purpose is to examine and/or modify the state of a
-// * transaction that is represented by a {@link org.apache.commons.chain2.Context}.  Individual
-// * {@link Command}s can be assembled into a {@link Chain}, which allows
-// * them to either complete the required processing or delegate further
-// * processing to the next {@link Command} in the {@link Chain}.</p>
+// * <p>{@link Command} 封装要执行的单个处理单元，
+// * 其目的是检查和/或修改由 {@link org.apache.commons.chain2.Context} 表示的事务的状态。
+// * 单个 {@link Command} 可以组装成 {@link Chain}，
+// * 使其能够完成所需的处理或将进一步处理委托给 {@link Chain} 中的下一个 {@link Command}。</p>
 // *
-// * <p>{@link Command} implementations should be designed in a thread-safe
-// * manner, suitable for inclusion in multiple {@link Chain}s that might be
-// * processed by different threads simultaneously.  In general, this implies
-// * that {@link Command} classes should not maintain state information in
-// * instance variables.  Instead, state information should be maintained via
-// * suitable modifications to the attributes of the {@link org.apache.commons.chain2.Context} that is
-// * passed to the <code>execute()</code> command.</p>
+// * <p>{@link Command} 实现应该是线程安全的，
+// * 适合同时由不同线程处理包含在多个 {@link Chain} 中。
+// * 通常，这意味着 {@link Command} 类不应在实例变量中维护状态信息。
+// * 相反，状态信息应该通过对传递给 <code>execute()</code> 命令的 {@link org.apache.commons.chain2.Context} 
+// * 的属性进行适当的修改来维护。</p>
 // *
-// * <p>{@link Command} implementations typically retrieve and store state
-// * information in the {@link org.apache.commons.chain2.Context} instance that is passed as a parameter
-// * to the <code>execute()</code> method, using particular keys into the
-// * <code>Map</code> that can be acquired via
-// * <code>Context.getAttributes()</code>.  To improve interoperability of
-// * {@link Command} implementations, a useful design pattern is to expose the
-// * key values used as JavaBeans properties of the {@link Command}
-// * implementation class itself.  For example, a {@link Command} that requires
-// * an input and an output key might implement the following properties:</p>
+// * <p>{@link Command} 实现通常通过调用
+// * <code>Context.getAttributes()</code> 获取的 <code>Map</code>
+// * 使用特定键来检索和存储传递给 <code>execute()</code> 方法的 {@link org.apache.commons.chain2.Context} 实例中的状态信息。
+// * 为了提高 {@link Command} 实现的互操作性，
+// * 一个有用的设计模式是将用作 {@link Command} 实现类本身的 JavaBeans 属性的键值暴露出来。
+// * 例如，需要输入和输出键的 {@link Command} 可能实现以下属性：</p>
 // *
 // * <pre>
 // *   private String inputKey = "input";
@@ -62,45 +55,38 @@
 // *   }
 // * </pre>
 // *
-// * <p>And the operation of accessing the "input" information in the context
-// * would be executed by calling:</p>
+// * <p>在上下文中访问 "input" 信息的操作将通过调用：</p>
 // *
 // * <pre>
 // *   String input = (String) context.get(getInputKey());
 // * </pre>
 // *
-// * <p>instead of hard coding the attribute name.  The use of the "Key"
-// * suffix on such property names is a useful convention to identify properties
-// * being used in this fashion, as opposed to JavaBeans properties that simply
-// * configure the internal operation of this {@link Command}.</p>
+// * <p>而不是硬编码属性名。
+// * 在此类属性名上使用 "Key" 后缀是一个有用的约定，
+// * 用于识别以这种方式使用的属性，
+// * 而不是简单配置 {@link Command} 内部操作的 JavaBeans 属性。</p>
 // *
-// * @param <K> the type of keys maintained by the context associated with this command
-// * @param <V> the type of mapped values
-// * @param <C> Type of the context associated with this command
+// * @param <K> 与此命令关联的上下文维护的键类型
+// * @param <V> 映射值的类型
+// * @param <C> 与此命令关联的上下文类型
 // *
 // * @version $Id$
 // */
 //public interface Command<K, V, C extends Map<K, V>> {
 //
 //    /**
-//     * Execute a unit of processing work to be performed.
+//     * 执行要执行的单个处理单元。
 //     * <p>
-//     * A command may either complete the required processing and return
-//     * finished, or delegate remaining processing to the subsequent command
-//     * in the enclosing {@link Chain} by returning continue.
+//     * 命令可以完成所需的处理并返回 finished，
+//     * 或者通过返回 continue 将剩余处理委托给 enclosing {@link Chain} 中的后续命令。
 //     *
-//     * @param context The {@link org.apache.commons.chain2.Context} to be processed by this
-//     *  {@link Command}
+//     * @param context 要由此 {@link Command} 处理的 {@link org.apache.commons.chain2.Context}
 //     *
-//     * @throws ChainException general purpose exception return
-//     *  to indicate abnormal termination
-//     * @throws IllegalArgumentException if <code>context</code>
-//     *  is <code>null</code>
+//     * @throws ChainException 用于指示异常终止的通用异常返回
+//     * @throws IllegalArgumentException 如果 <code>context</code> 为 <code>null</code>
 //     *
-//     * @return {@link Processing#FINISHED} if the processing of this contex
-//     *  has been completed. Returns {@link Processing#CONTINUE} if the processing
-//     *  of this context should be delegated to a subsequent command in an
-//     *  enclosing chain.
+//     * @return {@link Processing#FINISHED} 如果此上下文的处理已完成。
+//     *  {@link Processing#CONTINUE} 如果此上下文的处理应该委托给 enclosing chain 中的后续命令。
 //     */
 //    Processing execute(C context);
 //

@@ -10,14 +10,20 @@ import java.util.function.Predicate;
 public class Maps {
 
     /**
-     * 移除key为null的元素
+     * 移除Map中key为null的元素
+     *
+     * @param map 待处理Map，不能为null
+     * @throws NullPointerException 如果map为null
      */
     public static <K, V> void removeNullKeys(Map<K, V> map) {
         removeKeys(map, Objects::isNull);
     }
 
     /**
-     * 移除value 为null的元素
+     * 移除Map中value为null的元素
+     *
+     * @param map 待处理Map，不能为null
+     * @throws NullPointerException 如果map为null
      */
     public static <K, V> void removeNullValues(Map<K, V> map) {
         removeValues(map, Objects::isNull);
@@ -25,10 +31,11 @@ public class Maps {
 
 
     /**
-     * 移除符合predicate检测结果的key的元素
+     * 移除Map中符合predicate检测结果的key的元素
      *
-     * @param map       将要被移除元素的map
-     * @param predicate 检验条件
+     * @param map       待处理Map，不能为null
+     * @param predicate 检验条件，用于判断key是否需要被移除
+     * @throws NullPointerException 如果map或predicate为null
      */
     public static <K, V> void removeKeys(Map<K, V> map, Predicate<K> predicate) {
         map.entrySet().removeIf(entry -> predicate.test(entry.getKey()));
@@ -36,31 +43,34 @@ public class Maps {
 
 
     /**
-     * 移除符合predicate检测结果的value的元素
+     * 移除Map中符合predicate检测结果的value的元素
      *
-     * @param map       将要被移除元素的map
-     * @param predicate 检验条件
+     * @param map       待处理Map，不能为null
+     * @param predicate 检验条件，用于判断value是否需要被移除
+     * @throws NullPointerException 如果map或predicate为null
      */
     public static <K, V> void removeValues(Map<K, V> map, Predicate<V> predicate) {
         map.entrySet().removeIf(entry -> predicate.test(entry.getValue()));
     }
 
     /**
-     * 移除符合predicate检测结果的key,value的元素
+     * 移除Map中符合predicate检测结果的key和value的元素
      *
-     * @param map       将要被移除元素的map
-     * @param predicate 检验条件(同时对key与value生效)
+     * @param map       待处理Map，不能为null
+     * @param predicate 检验条件，同时对key和value进行判断
+     * @throws NullPointerException 如果map或predicate为null
      */
     public static <K, V> void remove(Map<K, V> map, Predicate<Map.Entry<K, V>> predicate) {
         map.entrySet().removeIf(predicate);
     }
 
     /**
-     * 对给定的Map进行条件过滤
+     * 对给定的Map按照条件进行过滤，返回符合条件的元素组成的新Map
      *
-     * @param map       Map<K,V>
-     * @param predicate Predicate<Map.Entry<K,V>>
-     * @return Map<K, V>
+     * @param map       待过滤的Map，不能为null
+     * @param predicate 过滤条件，用于判断元素是否应被保留
+     * @return Map<K, V> 符合条件的新Map，如果没有任何元素符合条件则返回空Map
+     * @throws NullPointerException 如果map或predicate为null
      */
     public static <K, V> Map<K, V> filter(Map<K, V> map, Predicate<Map.Entry<K, V>> predicate) {
         Map<K, V> mapStore = new HashMap<>(map.size());
@@ -69,12 +79,13 @@ public class Maps {
     }
 
     /**
-     * set 转换器，根据set内的每个值，分裂生成Map对象
+     * 根据Set集合中的每个元素，分裂生成对应的Map对象
      *
-     * @param set           将要被处理的set
-     * @param acceptAsKey   对set生成key
-     * @param acceptAsValue 对set元素生成value值
-     * @return Map<K, V> 生成符合条件的map对象
+     * @param set           待处理的Set集合，不能为null
+     * @param acceptAsKey   将Set中每个元素转换为Map的key的函数，不能为null
+     * @param acceptAsValue 将Set中每个元素转换为Map的value的函数，不能为null
+     * @return Map<K, V> 根据给定规则生成的Map，key由acceptAsKey函数产生，value由acceptAsValue函数产生
+     * @throws NullPointerException 如果set、acceptAsKey或acceptAsValue为null
      */
     public static <U, K, V> Map<K, V> populateMap(Set<U> set, Function<U, K> acceptAsKey, Function<U, V> acceptAsValue) {
         Map<K, V> map = new LinkedHashMap<>();

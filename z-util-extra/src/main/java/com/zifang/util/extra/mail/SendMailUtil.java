@@ -7,23 +7,53 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 
-
+/**
+ * 邮件发送工具类（网易163邮箱）
+ * <p>
+ * 提供基于网易163邮箱SMTP服务的邮件发送功能
+ *
+ * @author zifang
+ */
 public class SendMailUtil {
 
-    static String HOST = "smtp.163.com"; // smtp服务器
+    /**
+     * SMTP 服务器地址
+     */
+    static String HOST = "smtp.163.com";
 
+    /**
+     * 发件人邮箱地址
+     */
+    static String FROM = "zhangchenhao1995@163.com";
 
-    static String FROM = "zhangchenhao1995@163.com"; // 发件人地址
-    static String USER = "zhangchenhao1995@163.com"; // 用户名
+    /**
+     * 邮箱用户名（通常与发件人地址一致）
+     */
+    static String USER = "zhangchenhao1995@163.com";
 
+    /**
+     * 163邮箱的SMTP授权码
+     */
     //1340947819@qq.com
-    static String PWD = "***"; // 163的授权码
-    static String[] TOS = new String[]{"1340947819@qq.com"}; //发送到的地方
+    static String PWD = "***";
 
+    /**
+     * 默认收件人地址列表
+     */
+    static String[] TOS = new String[]{"1340947819@qq.com"};
 
-    static String SUBJECT = "手表服务抛异常了"; // 邮件标题
+    /**
+     * 默认邮件标题
+     */
+    static String SUBJECT = "手表服务抛异常了";
 
-
+    /**
+     * 发送邮件（使用默认收件人和标题）
+     * <p>
+     * 通过网易163邮箱SMTP服务器发送文本邮件，邮件内容为纯文本格式
+     *
+     * @param context 邮件正文内容
+     */
     public static void send(String context) {
         Properties props = new Properties();
         props.put("mail.smtp.host", HOST);//设置发送邮件的邮件服务器的属性（这里使用网易的smtp服务器）

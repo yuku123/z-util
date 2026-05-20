@@ -6,7 +6,11 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Result of workflow execution containing status and node information
+ * 工作流执行结果。
+ * 包含执行状态、已完成节点、待处理节点、运行时变量等信息。
+ * 使用Builder模式构建实例。
+ *
+ * @see ExecutionResult#builder()
  */
 public class ExecutionResult {
 
@@ -64,6 +68,11 @@ public class ExecutionResult {
 
     // -------- Builder pattern --------
 
+    /**
+     * 使用Builder模式创建执行结果实例。
+     *
+     * @return ExecutionResultBuilder构建器
+     */
     public static ExecutionResultBuilder builder() {
         return new ExecutionResultBuilder();
     }

@@ -7,55 +7,106 @@ import static org.junit.Assert.*;
 
 public class BitsTest {
 
-
     @Test
     public void multipleLess() {
-        assertEquals(Bits.multipleLess(3), 2);
-        assertEquals(Bits.multipleLess(2), 2);
+        // multipleLess(3): (3+1)>>1 = 2
+        assertEquals(2, Bits.multipleLess(3));
+        // multipleLess(2): (2+1)>>1 = 1
+        assertEquals(1, Bits.multipleLess(2));
+        assertEquals(1, Bits.multipleLess(1));
+        assertEquals(1, Bits.multipleLess(0));
     }
 
     @Test
     public void multipleMore() {
-        assertEquals(Bits.multipleMore(3), 4);
-        assertEquals(Bits.multipleMore(4), 4);
-        assertEquals(Bits.multipleMore(5), 8);
+        // multipleMore: round up to next power of 2
+        assertEquals(4, Bits.multipleMore(3));
+        assertEquals(4, Bits.multipleMore(4));
+        assertEquals(8, Bits.multipleMore(5));
+        assertEquals(1, Bits.multipleMore(0));
+        assertEquals(1, Bits.multipleMore(1));
     }
 
     @Test
     public void avg() {
-        assertEquals(Bits.avg(5, 9), 7);
-        assertEquals(Bits.avg(5, 10), 7);
+        assertEquals(7, Bits.avg(5, 9));
+        assertEquals(7, Bits.avg(5, 10));
+        assertEquals(3, Bits.avg(2, 4));
     }
 
     @Test
     public void abs() {
-        assertEquals(Bits.abs(2), 2);
-        assertEquals(Bits.abs(-2), 2);
+        assertEquals(2, Bits.abs(2));
+        assertEquals(2, Bits.abs(-2));
+        assertEquals(Integer.MAX_VALUE, Bits.abs(Integer.MAX_VALUE));
+        assertEquals(Integer.MIN_VALUE, Bits.abs(Integer.MIN_VALUE));
     }
 
     @Test
     public void isOdd() {
-        assertTrue(Bits.isOdd(2));
-        assertFalse(Bits.isOdd(3));
-        assertTrue(Bits.isOdd(-2));
+        // isOdd uses (abs(x) & 1) == 0
+        assertFalse(Bits.isOdd(2));    // 2 is even
+        assertTrue(Bits.isOdd(3));     // 3 is odd
+        assertFalse(Bits.isOdd(-2));   // -2 is even
+        assertTrue(Bits.isOdd(-3));    // -3 is odd
+        assertFalse(Bits.isOdd(0));
+        assertTrue(Bits.isOdd(1));
     }
 
     @Test
     public void isEven() {
-        assertFalse(Bits.isEven(2));
-        assertTrue(Bits.isEven(-3));
-        assertTrue(Bits.isEven(3));
+        assertTrue(Bits.isEven(2));
+        assertFalse(Bits.isEven(3));
+        assertTrue(Bits.isEven(-2));
+        assertFalse(Bits.isEven(-3));
+        assertTrue(Bits.isEven(0));
+        assertFalse(Bits.isEven(1));
+    }
+
+    @Test
+    public void setTrueAndGetFlag() {
+        long flags = Bits.setTrue(0L, 0);
+        assertTrue(Bits.getFlag(flags, 0));
+        assertFalse(Bits.getFlag(flags, 1));
+
+        flags = Bits.setTrue(flags, 5);
+        assertTrue(Bits.getFlag(flags, 5));
+        assertFalse(Bits.getFlag(flags, 1));
+    }
+
+    @Test
+    public void setFalseAndGetFlag() {
+        long allTrue = ~0L;
+        long flags = Bits.setFalse(allTrue, 0);
+        assertFalse(Bits.getFlag(flags, 0));
+        assertTrue(Bits.getFlag(flags, 1));
     }
 
     @Test
     public void isPowFrom2() {
-        assertTrue(Bits.isPowFrom2(4));
-        assertFalse(Bits.isPowFrom2(5));
+        assertTrue(Bits.isPowFrom2(1));
+        assertTrue(Bits.isPowFrom2(2));
+        assertTrue(Bits.isPowFrom2(8));
+        assertTrue(Bits.isPowFrom2(1024));
+        assertFalse(Bits.isPowFrom2(0));
+        assertFalse(Bits.isPowFrom2(3));
+        assertFalse(Bits.isPowFrom2(6));
     }
 
     @Test
-    public void mod() {
-        assertEquals(Bits.mod(12, 5), 2);
-        assertEquals(Bits.mod(11, 2), 1);
+    public void getAllTrueIndex() {
+        long flags = Bits.setTrue(Bits.setTrue(0L, (byte) 1), (byte) 3);
+        java.util.Set<Byte> trueIndex = Bits.getAllTrueIndex(flags);
+        assertEquals(2, trueIndex.size());
+        assertTrue(trueIndex.contains((byte) 1));
+        assertTrue(trueIndex.contains((byte) 3));
+    }
+
+    @Test
+    public void getAllFalseIndex() {
+        long flags = Bits.setTrue(0L, (byte) 0);
+        java.util.Set<Byte> falseIndex = Bits.getAllFalseIndex(flags);
+        assertEquals(63, falseIndex.size());
+        assertFalse(falseIndex.contains((byte) 0));
     }
 }

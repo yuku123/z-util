@@ -62,7 +62,7 @@ public class Cache {
      * 读取缓存
      *
      * @param key 键
-     * @return
+     * @return 缓存的值，如果键不存在则返回null
      */
     public synchronized static Object get(String key) {
         Entity entity = map.get(key);
@@ -70,11 +70,12 @@ public class Cache {
     }
 
     /**
-     * 读取缓存
+     * 读取缓存并转换为指定类型
      *
-     * @param key 键
-     *            * @param clazz 值类型
-     * @return
+     * @param key   键
+     * @param clazz 值类型，用于将结果强制转换
+     * @param <T>   泛型类型
+     * @return 转换后的缓存值，如果键不存在则返回null
      */
     public synchronized static <T> T get(String key, Class<T> clazz) {
         return clazz.cast(Cache.get(key));
@@ -83,8 +84,8 @@ public class Cache {
     /**
      * 清除缓存
      *
-     * @param key
-     * @return
+     * @param key 键
+     * @return 被移除的缓存值，如果键不存在则返回null
      */
     public synchronized static Object remove(String key) {
         //清除原缓存数据
@@ -103,7 +104,7 @@ public class Cache {
     /**
      * 查询当前缓存的键值对数量
      *
-     * @return
+     * @return 当前缓存中的键值对数量
      */
     public synchronized static int size() {
         return map.size();

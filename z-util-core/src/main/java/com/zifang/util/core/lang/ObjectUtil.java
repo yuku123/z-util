@@ -7,8 +7,8 @@ public class ObjectUtil {
     /**
      * 采用对象的序列化完成对象的深克隆
      *
-     * @param obj 待克隆的对象
-     * @return x
+     * @param obj 待克隆的对象，必须实现Serializable接口
+     * @return 深克隆后的新对象，如果克隆失败返回null
      */
     @SuppressWarnings("unchecked")
     public static <T extends Serializable> T deepCloneObject(T obj) {
@@ -35,10 +35,10 @@ public class ObjectUtil {
     /**
      * 利用序列化完成集合的深克隆
      *
-     * @param collection 待克隆的集合
-     * @return dd
-     * @throws ClassNotFoundException dd
-     * @throws java.io.IOException    dd
+     * @param collection 待克隆的集合，必须可序列化
+     * @return 深克隆后的新集合
+     * @throws ClassNotFoundException 当反序列化时找不到类时抛出
+     * @throws java.io.IOException    当序列化或反序列化发生IO错误时抛出
      */
     @SuppressWarnings("unchecked")
     public static <T> Collection<T> deepCloneCollection(Collection<T> collection) throws ClassNotFoundException, IOException {

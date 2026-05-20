@@ -86,14 +86,24 @@ public class ReflectUtil {
     // --------------------------------------------------------------------------------------------------------- Field
 
     /**
-     * 查找指定类中是否包含指定名称对应的字段，包括所有字段（包括非public字段），也包括父类和Object类的字段
+     * 判断指定类中是否包含指定名称的字段，包括所有字段（包括非public字段），也包括父类和Object类的字段
+     *
+     * @param beanClass 类
+     * @param name      字段名
+     * @return 是否存在指定名称的字段
+     * @throws SecurityException 安全检查异常
      */
     public static boolean hasField(Class<?> beanClass, String name) throws SecurityException {
         return null != getField(beanClass, name);
     }
 
     /**
-     * 查找指定类中的所有字段（包括非public字段），也包括父类和Object类的字段， 字段不存在则返回null
+     * 获取指定类中的指定字段，包括所有字段（包括非public字段），也包括父类和Object类的字段
+     *
+     * @param beanClass 类
+     * @param name      字段名
+     * @return 字段对象，若不存在返回null
+     * @throws SecurityException 安全检查异常
      */
     public static Field getField(Class<?> beanClass, String name) throws SecurityException {
         final Field[] fields = getFields(beanClass);
@@ -806,7 +816,10 @@ public class ReflectUtil {
 
 
     /**
-     * 找到这个class的所有的 递归接口 -> 父类的接口与接口的接口
+     * 递归获取指定类的所有接口，包括父类的接口以及接口的接口
+     *
+     * @param clazz 指定类
+     * @return 所有接口列表
      */
     public static List<Class> getAllInterfaces(Class clazz) {
 
@@ -831,6 +844,13 @@ public class ReflectUtil {
     }
 
 
+    /**
+     * 获取指定类中与目标接口类型一致的泛型Type信息
+     *
+     * @param base          基础类
+     * @param interfaceClazz 要匹配的接口类型
+     * @return 泛型Type信息，若未找到返回null
+     */
     public static Type getGenericInterfaceType(Class<?> base, Class<?> interfaceClazz) {
 
         Type genericType = null;

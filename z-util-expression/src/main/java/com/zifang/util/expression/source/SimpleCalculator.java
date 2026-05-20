@@ -21,7 +21,7 @@ public class SimpleCalculator {
     /**
      * 执行脚本，并打印输出AST和求值过程。
      *
-     * @param script
+     * @param script 要执行的表达式脚本，如 "2+3*5"
      */
     public void evaluate(String script) {
         try {
@@ -36,11 +36,11 @@ public class SimpleCalculator {
     }
 
     /**
-     * 解析脚本，并返回根节点
+     * 解析脚本，并返回AST根节点。
      *
-     * @param code
-     * @return
-     * @throws Exception
+     * @param code 要解析的表达式脚本
+     * @return AST根节点
+     * @throws Exception 如果解析过程中出现语法错误
      */
     public ASTNode parse(String code) throws Exception {
         SimpleLexer lexer = new SimpleLexer();

@@ -13,6 +13,14 @@ public class IOUtil {
 
     private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
+    /**
+     * 从输入流中读取内容并转换为字符串
+     *
+     * @param in          输入流
+     * @param charsetName 字符编码，为空则使用默认编码
+     * @return 读取到的字符串内容
+     * @throws IOException 如果读取发生异常
+     */
     public static String read(InputStream in, String charsetName) throws IOException {
         FastByteArrayOutputStream out = read(in);
         return StringUtil.isBlank(charsetName) ? out.toString() : out.toString(charsetName);
@@ -51,6 +59,11 @@ public class IOUtil {
         return out;
     }
 
+    /**
+     * 关闭指定的 Closeable 对象
+     *
+     * @param closeable 要关闭的可关闭对象，如果为 null 则忽略
+     */
     public static void close(Closeable closeable) {
         if (null != closeable) {
             try {
@@ -81,6 +94,14 @@ public class IOUtil {
 //    }
 
 
+    /**
+     * 将输入流的内容复制到输出流
+     *
+     * @param input  输入流
+     * @param output 输出流
+     * @return 复制的字节数，如果超过 Integer.MAX_VALUE 则返回 -1
+     * @throws IOException 如果读取或写入发生异常
+     */
     public static int copy(InputStream input, OutputStream output) throws IOException {
         final long count = copyLarge(input, output);
         if (count > Integer.MAX_VALUE) {
@@ -89,6 +110,14 @@ public class IOUtil {
         return (int) count;
     }
 
+    /**
+     * 将输入流的内容大规模复制到输出流，使用较大的缓冲区
+     *
+     * @param input  输入流
+     * @param output 输出流
+     * @return 复制的总字节数
+     * @throws IOException 如果读取或写入发生异常
+     */
     public static long copyLarge(InputStream input, OutputStream output) throws IOException {
 
         byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];

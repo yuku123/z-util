@@ -19,11 +19,11 @@
 //import java.util.Map;
 //
 ///**
-// * First builder that allows adding a command in the target chain.
+// * 第一个构建器，允许在目标链中添加命令。
 // *
-// * @param <K> Context key type
-// * @param <V> Context value type
-// * @param <C> Type of the context associated with this chain executor
+// * @param <K> 上下文键类型
+// * @param <V> 上下文值类型
+// * @param <C> 与此链执行器关联的上下文类型
 // * @since 2.0
 // * @version $Id$
 // */

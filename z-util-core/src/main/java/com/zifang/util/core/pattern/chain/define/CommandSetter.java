@@ -19,23 +19,24 @@
 //import java.util.Map;
 //
 ///**
-// * Generic builder that allows adding commands to the target {@link Chain} has to be executed.
+// * 通用构建器，允许将命令添加到要执行的目标 {@link Chain}。
 // *
-// * @param <K> Context key type
-// * @param <V> Context value type
-// * @param <C> Type of the context associated with this command setter
-// * @param <R> Type of the next chain builder
+// * @param <K> 上下文键类型
+// * @param <V> 上下文值类型
+// * @param <C> 与此命令设置器关联的上下文类型
+// * @param <R> 下一个链构建器类型
 // * @since 2.0
 // * @version $Id$
 // */
 //public interface CommandSetter<K, V, C extends Map<K, V>, R> {
 //
 //    /**
-//     * Add the given command to the target {@link Chain} has to be executed.
+//     * 将给定命令添加到要执行的目标 {@link Chain}。
 //     *
-//     * @param <CMD> Type of the command has to be added
-//     * @param command the command has to be added in the target chain
-//     * @return next chain builder
+//     * @param <CMD> 要添加的命令类型
+//     * @param command 要添加到目标链中的命令
+//     * @return 下一个链构建器
+//     * @throws IllegalArgumentException 如果 command 为 null
 //     * @see Chain#addCommand(org.apache.commons.chain2.Command)
 //     */
 //    <CMD extends org.apache.commons.chain2.Command<K, V, C>> R add(CMD command);

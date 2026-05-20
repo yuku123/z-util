@@ -31,20 +31,53 @@ public class OkHttpUtil {
             .build();
 
     // ==================== Basic Auth ====================
+
+    /**
+     * 生成 Basic Auth 认证字符串。
+     *
+     * @param user 用户名
+     * @param pwd  密码
+     * @return Base64 编码后的 Basic Auth 字符串，格式为 "Basic {credentials}"
+     */
     public static String basicAuth(String user, String pwd) {
         String str = user + ":" + pwd;
         return "Basic " + java.util.Base64.getEncoder().encodeToString(str.getBytes(StandardCharsets.UTF_8));
     }
 
     // ==================== GET ====================
+
+    /**
+     * 发送 GET 请求。
+     *
+     * @param url 请求 URL
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult get(String url) throws IOException {
         return get(url, null, null);
     }
 
+    /**
+     * 发送 GET 请求（带查询参数）。
+     *
+     * @param url   请求 URL
+     * @param params 查询参数 Map，会追加到 URL 后面
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult get(String url, Map<String, String> params) throws IOException {
         return get(url, null, params);
     }
 
+    /**
+     * 发送 GET 请求（带头部和查询参数）。
+     *
+     * @param url     请求 URL
+     * @param headers 请求头 Map，可为 null
+     * @param params  查询参数 Map，会追加到 URL 后面，可为 null
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult get(String url, Map<String, String> headers, Map<String, String> params) throws IOException {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
         if (params != null) params.forEach(urlBuilder::addQueryParameter);
@@ -56,10 +89,28 @@ public class OkHttpUtil {
     }
 
     // ==================== POST JSON ====================
+
+    /**
+     * 发送 POST JSON 请求。
+     *
+     * @param url  请求 URL
+     * @param json JSON 格式的请求体
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult postJson(String url, String json) throws IOException {
         return postJson(url, null, json);
     }
 
+    /**
+     * 发送 POST JSON 请求（带请求头）。
+     *
+     * @param url     请求 URL
+     * @param headers 请求头 Map，可为 null
+     * @param json    JSON 格式的请求体
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult postJson(String url, Map<String, String> headers, String json) throws IOException {
         RequestBody body = RequestBody.create(json, JSON);
         Request.Builder req = new Request.Builder().url(url).post(body);
@@ -70,10 +121,28 @@ public class OkHttpUtil {
     }
 
     // ==================== POST FORM ====================
+
+    /**
+     * 发送 POST 表单请求。
+     *
+     * @param url    请求 URL
+     * @param params 表单参数 Map
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult postForm(String url, Map<String, String> params) throws IOException {
         return postForm(url, null, params);
     }
 
+    /**
+     * 发送 POST 表单请求（带请求头）。
+     *
+     * @param url     请求 URL
+     * @param headers 请求头 Map，可为 null
+     * @param params  表单参数 Map
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult postForm(String url, Map<String, String> headers, Map<String, String> params) throws IOException {
         FormBody.Builder form = new FormBody.Builder(StandardCharsets.UTF_8);
         if (params != null) params.forEach(form::add);
@@ -85,15 +154,38 @@ public class OkHttpUtil {
     }
 
     // ==================== 异步请求 ====================
+
+    /**
+     * 发送异步请求。
+     *
+     * @param request  请求对象
+     * @param callback 回调接口，用于处理响应或错误
+     */
     public static void async(Request request, Callback callback) {
         CLIENT.newCall(request).enqueue(callback);
     }
 
     // ==================== 异步 POST JSON ====================
+
+    /**
+     * 发送异步 POST JSON 请求。
+     *
+     * @param url      请求 URL
+     * @param json     JSON 格式的请求体
+     * @param callback 回调接口，用于处理响应或错误
+     */
     public static void asyncPostJson(String url, String json, Callback callback) {
         asyncPostJson(url, null, json, callback);
     }
 
+    /**
+     * 发送异步 POST JSON 请求（带请求头）。
+     *
+     * @param url      请求 URL
+     * @param headers  请求头 Map，可为 null
+     * @param json     JSON 格式的请求体
+     * @param callback 回调接口，用于处理响应或错误
+     */
     public static void asyncPostJson(String url, Map<String, String> headers, String json, Callback callback) {
         RequestBody body = RequestBody.create(json, JSON);
         Request.Builder req = new Request.Builder().url(url).post(body);
@@ -102,10 +194,26 @@ public class OkHttpUtil {
     }
 
     // ==================== ✅ 正确 SSE（无 connect()）====================
+
+    /**
+     * 建立 Server-Sent Events（SSE）连接。
+     *
+     * @param url      SSE 服务端 URL
+     * @param listener 事件监听器，用于处理 SSE 事件
+     * @return EventSource 对象，可用于关闭连接
+     */
     public static EventSource sse(String url, EventSourceListener listener) {
         return sse(url, null, listener);
     }
 
+    /**
+     * 建立 Server-Sent Events（SSE）连接（带请求头）。
+     *
+     * @param url      SSE 服务端 URL
+     * @param headers  请求头 Map，可为 null
+     * @param listener 事件监听器，用于处理 SSE 事件
+     * @return EventSource 对象，可用于关闭连接
+     */
     public static EventSource sse(String url, Map<String, String> headers, EventSourceListener listener) {
         Request.Builder req = new Request.Builder().url(url)
                 .addHeader("Accept", "text/event-stream")
@@ -122,10 +230,30 @@ public class OkHttpUtil {
     }
 
     // ==================== 文件上传 ====================
+
+    /**
+     * 上传文件（表单 multipart 方式）。
+     *
+     * @param url       请求 URL
+     * @param fileField 表单中文件字段的名称
+     * @param file      要上传的文件
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult upload(String url, String fileField, File file) throws IOException {
         return upload(url, null, fileField, file);
     }
 
+    /**
+     * 上传文件（表单 multipart 方式，带请求头）。
+     *
+     * @param url       请求 URL
+     * @param headers   请求头 Map，可为 null
+     * @param fileField 表单中文件字段的名称
+     * @param file      要上传的文件
+     * @return HttpClientResult，包含响应状态码和响应体
+     * @throws IOException 如果请求失败或网络异常
+     */
     public static HttpClientResult upload(String url, Map<String, String> headers, String fileField, File file) throws IOException {
         MultipartBody body = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)

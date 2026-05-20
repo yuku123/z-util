@@ -19,25 +19,25 @@
 //import java.util.Map;
 //
 ///**
-// * Builder that allows continue adding a command in the target chain and execute it.
+// * 构建器，允许继续向目标链添加命令并执行它。
 // *
-// * @param <K> Context key type
-// * @param <V> Context value type
-// * @param <C> Type of the context associated with this chain executor
+// * @param <K> 上下文键类型
+// * @param <V> 上下文值类型
+// * @param <C> 与此链执行器关联的上下文类型
 // * @version $Id$
 // * @since 2.0
 // */
 //public interface ChainExecutor<K, V, C extends Map<K, V>> extends CommandSetter<K, V, C, ChainExecutor<K, V, C>> {
 //
 //    /**
-//     * Execute the processing represented by the target chain.
+//     * 执行目标链表示的处理。
 //     *
-//     * @param context the context processed by the target chain
-//     * @return {@link Processing#FINISHED} if the processing of this context
-//     *  has been completed. Returns {@link Processing#CONTINUE} if the processing
-//     *  of this context should be delegated to a subsequent command in an
-//     *  enclosing chain.
+//     * @param context 由目标链处理的上下文
+//     * @return {@link Processing#FINISHED} 如果此上下文的处理已完成。
+//     *  {@link Processing#CONTINUE} 如果此上下文的处理应该委托给 enclosing chain 中的后续命令。
 //     *
+//     * @throws IllegalArgumentException 如果 context 为 null
+//     * @throws ChainException 如果执行过程中发生异常
 //     * @see Chain#execute(Map)
 //     */
 //    Processing execute(C context);

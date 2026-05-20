@@ -1,7 +1,9 @@
 package com.zifang.util.workflow.bpmn;
 
+import com.zifang.util.workflow.config.CacheEngine;
 import com.zifang.util.workflow.config.Configurations;
 import com.zifang.util.workflow.config.Connector;
+import com.zifang.util.workflow.config.Engine;
 import com.zifang.util.workflow.config.WorkflowConfiguration;
 import com.zifang.util.workflow.config.WorkflowNode;
 
@@ -11,11 +13,92 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Converter that transforms BpmnDiagram to WorkflowConfiguration
+ * Converter that transforms BpmnDiagram to WorkflowConfiguration.
+ *
+ * Supported BPMN node types:
+ * - startEvent, endEvent, userTask, serviceTask, scriptTask, manualTask
+ * - exclusiveGateway, parallelGateway, inclusiveGateway
+ * - callActivity (sub-process)
+ *
+ * Supported BPMN attributes:
+ * - id, name, documentation
+ * - sequenceFlow with sourceRef, targetRef, conditionExpression, default
+ * - multiInstanceLoopCharacteristics (sequential/parallel)
+ * - loopCharacteristics (standard loop)
+ *
+ * Node type mapping to internal types:
+ * - startEvent -> "startEvent"
+ * - endEvent -> "endEvent"
+ * - userTask -> "userTask"
+ * - serviceTask -> "serviceTask"
+ * - scriptTask -> "scriptTask"
+ * - manualTask -> "manualTask"
+ * - exclusiveGateway -> "exclusiveGateway"
+ * - parallelGateway -> "parallelGateway"
+ * - inclusiveGateway -> "inclusiveGateway"
+ * - callActivity -> "callActivity"
+ *
+ * Service unit mapping:
+ * - userTask -> "userTaskHandler"
+ * - serviceTask -> "serviceTaskHandler"
+ * - scriptTask -> "scriptTaskHandler"
+ * - manualTask -> "manualTaskHandler"
+ * - exclusiveGateway / inclusiveGateway -> "gatewayHandler"
+ * - parallelGateway -> "parallelGatewayHandler"
+ * - callActivity -> "callActivityHandler"
  */
 public class BpmnModelConverter {
 
-    private static final String ENGINE_TYPE = "spark";
+    /**
+     * Default engine type when converting BPMN.
+     * Can be overridden via setEngineType() or constructor.
+     */
+    private String engineType = "java";
+
+    /**
+     * Default cache engine type.
+     */
+    private String cacheEngineType = "memory";
+
+    /**
+     * 默认构造函数，使用 "java" 作为默认引擎类型。
+     */
+    public BpmnModelConverter() {
+    }
+
+    /**
+     * 使用指定的引擎类型构造转换器。
+     *
+     * @param engineType 引擎类型，如 "java"、"spark"、"python" 等
+     * @throws IllegalArgumentException 如果 engineType 为空或 null
+     */
+    public BpmnModelConverter(String engineType) {
+        if (engineType != null && !engineType.trim().isEmpty()) {
+            this.engineType = engineType;
+        }
+    }
+
+    /**
+     * Set the engine type for the converted WorkflowConfiguration.
+     *
+     * @param engineType engine type (e.g., "java", "spark", "python")
+     */
+    public void setEngineType(String engineType) {
+        if (engineType != null && !engineType.trim().isEmpty()) {
+            this.engineType = engineType;
+        }
+    }
+
+    /**
+     * Set the cache engine type.
+     *
+     * @param cacheEngineType cache engine type (e.g., "memory", "redis")
+     */
+    public void setCacheEngineType(String cacheEngineType) {
+        if (cacheEngineType != null && !cacheEngineType.trim().isEmpty()) {
+            this.cacheEngineType = cacheEngineType;
+        }
+    }
 
     /**
      * Convert BpmnDiagram to WorkflowConfiguration
@@ -26,10 +109,10 @@ public class BpmnModelConverter {
     public WorkflowConfiguration convert(BpmnDiagram diagram) {
         WorkflowConfiguration config = new WorkflowConfiguration();
 
-        // Set up configurations
-        config.setConfigurations(createConfigurations());
+        // Set up global configurations
+        config.setConfigurations(createConfigurations(diagram));
 
-        // Convert nodes
+        // Build lookup map and convert nodes
         List<WorkflowNode> workflowNodes = convertNodes(diagram);
 
         // Wire up connections based on sequence flows
@@ -40,16 +123,22 @@ public class BpmnModelConverter {
         return config;
     }
 
-    private Configurations createConfigurations() {
+    private Configurations createConfigurations(BpmnDiagram diagram) {
         Configurations configurations = new Configurations();
 
-        com.zifang.util.workflow.config.Engine engine = new com.zifang.util.workflow.config.Engine();
-        engine.setType(ENGINE_TYPE);
+        Engine engine = new Engine();
+        engine.setType(engineType);
+        engine.setMode("local");
         configurations.setEngine(engine);
 
-        com.zifang.util.workflow.config.CacheEngine cacheEngine = new com.zifang.util.workflow.config.CacheEngine();
-        cacheEngine.setEngineType("memory");
+        CacheEngine cacheEngine = new CacheEngine();
+        cacheEngine.setEngineType(cacheEngineType);
         configurations.setCacheEngine(cacheEngine);
+
+        // Store BPMN process id as workflow configuration id hint
+        if (diagram.getId() != null) {
+            configurations.setWorkflowConfigurationId(diagram.getId().hashCode());
+        }
 
         return configurations;
     }
@@ -57,7 +146,6 @@ public class BpmnModelConverter {
     private List<WorkflowNode> convertNodes(BpmnDiagram diagram) {
         List<WorkflowNode> workflowNodes = new ArrayList<>();
 
-        // First pass: create all workflow nodes
         for (BpmnDiagram.BpmnNode bpmnNode : diagram.getNodes()) {
             WorkflowNode workflowNode = convertNode(bpmnNode);
             workflowNodes.add(workflowNode);
@@ -82,11 +170,57 @@ public class BpmnModelConverter {
         // Set service unit based on node type
         workflowNode.setServiceUnit(getServiceUnit(bpmnNode.getType()));
 
-        // Set invoke parameter (e.g., condition expression for gateways)
-        if (bpmnNode.getProperty("conditionExpression") != null) {
-            workflowNode.setInvokeParameter(bpmnNode.getProperty("conditionExpression"));
-        } else if (bpmnNode.getProperty("documentation") != null) {
+        // Copy properties from BPMN node
+        // documentation -> invokeParameter (used as description)
+        if (bpmnNode.getProperty("documentation") != null) {
             workflowNode.setInvokeParameter(bpmnNode.getProperty("documentation"));
+        }
+
+        // loopCharacteristics -> stored in cache map
+        if (bpmnNode.getProperty("isSequentialLoop") != null
+                || bpmnNode.getProperty("isParallelLoop") != null
+                || bpmnNode.getProperty("loopMaximum") != null) {
+            HashMap<String, String> cache = new HashMap<>();
+            if (bpmnNode.getProperty("isSequentialLoop") != null) {
+                cache.put("loopType", "sequential");
+            }
+            if (bpmnNode.getProperty("isParallelLoop") != null) {
+                cache.put("loopType", "parallel");
+            }
+            if (bpmnNode.getProperty("loopMaximum") != null) {
+                cache.put("loopMaximum", bpmnNode.getProperty("loopMaximum"));
+            }
+            workflowNode.setCache(cache);
+        }
+
+        // calledElement (callActivity) -> stored in cache
+        if (bpmnNode.getProperty("calledElement") != null) {
+            HashMap<String, String> cache = workflowNode.getCache();
+            if (cache == null) {
+                cache = new HashMap<>();
+            }
+            cache.put("calledElement", bpmnNode.getProperty("calledElement"));
+            workflowNode.setCache(cache);
+        }
+
+        // script (scriptTask) -> stored in cache
+        if (bpmnNode.getProperty("script") != null) {
+            HashMap<String, String> cache = workflowNode.getCache();
+            if (cache == null) {
+                cache = new HashMap<>();
+            }
+            cache.put("script", bpmnNode.getProperty("script"));
+            workflowNode.setCache(cache);
+        }
+
+        // implementation (serviceTask) -> stored in cache
+        if (bpmnNode.getProperty("implementation") != null) {
+            HashMap<String, String> cache = workflowNode.getCache();
+            if (cache == null) {
+                cache = new HashMap<>();
+            }
+            cache.put("implementation", bpmnNode.getProperty("implementation"));
+            workflowNode.setCache(cache);
         }
 
         return workflowNode;
@@ -106,12 +240,29 @@ public class BpmnModelConverter {
                 return "userTask";
             case "servicetask":
                 return "serviceTask";
-            case "exclusivategateway":
+            case "scripttask":
+                return "scriptTask";
+            case "manualtask":
+                return "manualTask";
+            case "sendtask":
+                return "sendTask";
+            case "receivetask":
+                return "receiveTask";
+            case "exclusivegateway":
                 return "exclusiveGateway";
             case "parallelgateway":
                 return "parallelGateway";
+            case "inclusivegateway":
+                return "inclusiveGateway";
+            case "callactivity":
+                return "callActivity";
             case "task":
                 return "task";
+            case "subprocess":
+            case "adhocsubprocess":
+                return "subProcess";
+            case "transaction":
+                return "transaction";
             default:
                 return bpmnType.toLowerCase();
         }
@@ -127,19 +278,56 @@ public class BpmnModelConverter {
                 return "userTaskHandler";
             case "servicetask":
                 return "serviceTaskHandler";
-            case "exclusivategateway":
-            case "parallelgateway":
+            case "scripttask":
+                return "scriptTaskHandler";
+            case "manualtask":
+                return "manualTaskHandler";
+            case "sendtask":
+                return "sendTaskHandler";
+            case "receivetask":
+                return "receiveTaskHandler";
+            case "exclusivegateway":
+            case "inclusivegateway":
                 return "gatewayHandler";
+            case "parallelgateway":
+                return "parallelGatewayHandler";
+            case "callactivity":
+                return "callActivityHandler";
+            case "startevent":
+            case "endevent":
+                return "eventHandler";
             default:
                 return "empty";
         }
     }
 
+    /**
+     * Wire connections between nodes based on sequence flows.
+     * For exclusive gateways, the condition expression on the sequence flow
+     * is set as the invokeParameter on the TARGET node (the next node after the gateway).
+     * This is because the WorkflowRuntimeEngine evaluates conditions from post-nodes.
+     *
+     * For parallel gateways, all post-nodes are activated unconditionally.
+     *
+     * For inclusive gateways, all conditions are evaluated and all matching paths are taken.
+     */
     private void wireConnections(List<WorkflowNode> workflowNodes, BpmnDiagram diagram) {
-        // Build node lookup map
+        // Build node lookup map by id
         Map<String, WorkflowNode> nodeMap = new HashMap<>();
         for (WorkflowNode node : workflowNodes) {
             nodeMap.put(node.getNodeId(), node);
+        }
+
+        // Build sequence flow lookup by source to get default flow info
+        Map<String, String> defaultFlowMap = new HashMap<>();
+        Map<String, String> conditionFlowMap = new HashMap<>();
+        for (BpmnDiagram.BpmnSequenceFlow flow : diagram.getSequenceFlows()) {
+            if (flow.isDefault()) {
+                defaultFlowMap.put(flow.getSourceRef(), flow.getId());
+            }
+            if (flow.getConditionExpression() != null && !flow.getConditionExpression().isEmpty()) {
+                conditionFlowMap.put(flow.getSourceRef() + "->" + flow.getTargetRef(), flow.getConditionExpression());
+            }
         }
 
         // Wire based on sequence flows
@@ -148,19 +336,42 @@ public class BpmnModelConverter {
             WorkflowNode targetNode = nodeMap.get(flow.getTargetRef());
 
             if (sourceNode != null && targetNode != null) {
-                // Add post to source node
+                // Add target to source's post list
                 if (!sourceNode.getConnector().getPost().contains(flow.getTargetRef())) {
                     sourceNode.getConnector().getPost().add(flow.getTargetRef());
                 }
 
-                // Add pre to target node
+                // Add source to target's pre list
                 if (!targetNode.getConnector().getPre().contains(flow.getSourceRef())) {
                     targetNode.getConnector().getPre().add(flow.getSourceRef());
                 }
 
-                // If this is a conditional flow, set the condition on the target node
+                // For exclusive gateway outgoing flows with condition:
+                // Store the condition on the target node so the runtime can evaluate it.
+                // The WorkflowRuntimeEngine.executeGateway() reads conditions from post-nodes.
                 if (flow.getConditionExpression() != null && !flow.getConditionExpression().isEmpty()) {
-                    targetNode.setInvokeParameter(flow.getConditionExpression());
+                    // If target already has an invokeParameter (e.g., documentation), 
+                    // preserve it and add condition as a cache entry instead
+                    if (targetNode.getInvokeParameter() != null) {
+                        HashMap<String, String> cache = (HashMap<String, String>) targetNode.getCache();
+                        if (cache == null) {
+                            cache = new HashMap<>();
+                            targetNode.setCache(cache);
+                        }
+                        cache.put("conditionExpression", flow.getConditionExpression());
+                    } else {
+                        targetNode.setInvokeParameter(flow.getConditionExpression());
+                    }
+                }
+
+                // Mark if this is a default flow for the source gateway
+                if (flow.isDefault()) {
+                    HashMap<String, String> cache = (HashMap<String, String>) sourceNode.getCache();
+                    if (cache == null) {
+                        cache = new HashMap<>();
+                        sourceNode.setCache(cache);
+                    }
+                    cache.put("defaultFlow", flow.getTargetRef());
                 }
             }
         }

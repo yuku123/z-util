@@ -38,6 +38,10 @@ public class HttpUtil {
 
     /**
      * 生成 BasicAuth 请求头值
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return Base64编码的 BasicAuth 字符串，格式为 "Basic {base64(username:password)}"
      */
     public static String toBasicAuthValue(String username, String password) {
         return "Basic " + Base64.getEncoder()
@@ -45,14 +49,39 @@ public class HttpUtil {
     }
 
     // ====================== GET ======================
+
+    /**
+     * 发送 GET 请求（无参数）
+     *
+     * @param url 请求地址
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doGet(String url) throws Exception {
         return doGet(url, null, null);
     }
 
+    /**
+     * 发送 GET 请求（带参数）
+     *
+     * @param url    请求地址
+     * @param params 查询参数 Map
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doGet(String url, Map<String, String> params) throws Exception {
         return doGet(url, null, params);
     }
 
+    /**
+     * 发送 GET 请求（带头部和参数）
+     *
+     * @param url     请求地址
+     * @param headers 请求头 Map
+     * @param params  查询参数 Map
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doGet(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             URIBuilder uriBuilder = new URIBuilder(url);
@@ -71,14 +100,39 @@ public class HttpUtil {
     }
 
     // ====================== POST ======================
+
+    /**
+     * 发送 POST 请求（无参数）
+     *
+     * @param url 请求地址
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doPost(String url) throws Exception {
         return doPost(url, null, null);
     }
 
+    /**
+     * 发送 POST 请求（带参数）
+     *
+     * @param url    请求地址
+     * @param params 表单参数 Map
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doPost(String url, Map<String, String> params) throws Exception {
         return doPost(url, null, params);
     }
 
+    /**
+     * 发送 POST 请求（带头部和参数）
+     *
+     * @param url     请求地址
+     * @param headers 请求头 Map
+     * @param params  表单参数 Map
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doPost(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPost httpPost = new HttpPost(url);
@@ -93,14 +147,39 @@ public class HttpUtil {
     }
 
     // ====================== PUT ======================
+
+    /**
+     * 发送 PUT 请求（无参数）
+     *
+     * @param url 请求地址
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doPut(String url) throws Exception {
         return doPut(url, null, null);
     }
 
+    /**
+     * 发送 PUT 请求（带参数）
+     *
+     * @param url    请求地址
+     * @param params 表单参数 Map
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doPut(String url, Map<String, String> params) throws Exception {
         return doPut(url, null, params);
     }
 
+    /**
+     * 发送 PUT 请求（带头部和参数）
+     *
+     * @param url     请求地址
+     * @param headers 请求头 Map
+     * @param params  表单参数 Map
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doPut(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPut httpPut = new HttpPut(url);
@@ -115,14 +194,39 @@ public class HttpUtil {
     }
 
     // ====================== DELETE ======================
+
+    /**
+     * 发送 DELETE 请求（无参数）
+     *
+     * @param url 请求地址
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doDelete(String url) throws Exception {
         return doDelete(url, null, null);
     }
 
+    /**
+     * 发送 DELETE 请求（带参数）
+     *
+     * @param url    请求地址
+     * @param params 查询参数 Map
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doDelete(String url, Map<String, String> params) throws Exception {
         return doDelete(url, null, params);
     }
 
+    /**
+     * 发送 DELETE 请求（带头部和参数）
+     *
+     * @param url     请求地址
+     * @param headers 请求头 Map
+     * @param params  查询参数 Map
+     * @return HttpClientResult 包含响应状态码和响应内容
+     * @throws Exception 网络请求过程中的异常
+     */
     public static HttpClientResult doDelete(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             URIBuilder uriBuilder = new URIBuilder(url);

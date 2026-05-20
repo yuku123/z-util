@@ -22,8 +22,6 @@ public class HttpRequestProducer {
     private static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
     public Object produceRequest(HttpRequestDefinition httpRequestDefination) {
-        String url = httpRequestDefination.getHttpRequestLine().getUrl();
-        System.out.println("[DEBUG] HttpRequestProducer.produceRequest() URL = " + url + " method = " + httpRequestDefination.getHttpRequestLine().getRequestMethod());
 
         try {
             if (RequestMethod.GET == httpRequestDefination.getHttpRequestLine().getRequestMethod()) {
@@ -36,7 +34,6 @@ public class HttpRequestProducer {
                 return handleDeleteRequest(httpRequestDefination);
             }
         } catch (IOException e) {
-            System.out.println("[DEBUG] HttpRequestProducer IOException: " + e.getMessage());
             e.printStackTrace();
         }
 

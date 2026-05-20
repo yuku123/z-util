@@ -16,7 +16,10 @@ public class ZipUtil {
     private static final String ZIP_FILE_SUFFIX = ".zip";
 
     /**
-     * 压缩文件
+     * 压缩文件或文件夹为 ZIP 格式
+     *
+     * @param resourcePath 源文件或文件夹路径
+     * @param targetPath   目标文件夹路径
      */
     public static void zipFile(String resourcePath, String targetPath) {
         File resourcesFile = new File(resourcePath);
@@ -85,6 +88,15 @@ public class ZipUtil {
         }
     }
 
+    /**
+     * 压缩文件夹为 ZIP 文件
+     *
+     * @param folder         要压缩的文件夹路径
+     * @param targetFolder   目标文件夹路径
+     * @param zipFileName   ZIP 文件名（不含扩展名）
+     * @throws IOException  如果压缩失败
+     * @throws RuntimeException 如果 folder 不是有效目录
+     */
     public static void zipFolder(String folder, String targetFolder, String zipFileName) throws IOException {
 
         File zipFolder = new File(folder);
@@ -117,7 +129,12 @@ public class ZipUtil {
 
 
     /**
-     * 压缩文件
+     * 压缩单个文件到目标 ZIP 文件
+     *
+     * @param srcFilePath      源文件路径
+     * @param destZipFilePath  目标 ZIP 文件路径
+     * @param fileName        文件在 ZIP 包中的名称
+     * @throws Exception 如果压缩发生异常
      */
     public static void zipFile(String srcFilePath, String destZipFilePath, String fileName) throws Exception {
         File file = new File(destZipFilePath);
@@ -139,6 +156,13 @@ public class ZipUtil {
         fis.close();
     }
 
+    /**
+     * 解压 ZIP 文件到指定目录
+     *
+     * @param fileName   ZIP 文件路径
+     * @param unZipDir  解压目标目录
+     * @throws Exception 如果解压发生异常
+     */
     public static void unZip(String fileName, String unZipDir) throws Exception {
         // 先判断目标文件夹是否存在，如果不存在则新建，如果父目录不存在也新建
         File f = new File(unZipDir);

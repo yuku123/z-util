@@ -5,30 +5,65 @@ package com.zifang.util.workflow.config;
  */
 public class CacheEngine {
 
+    /**
+     * 缓存引擎类型
+     */
     private String engineType;
 
+    /**
+     * 缓存引擎服务标识
+     */
     private String cacheEngineService;
 
+    /**
+     * 默认构造函数
+     */
     public CacheEngine() {
     }
 
+    /**
+     * 全参数构造函数
+     *
+     * @param engineType        缓存引擎类型，如redis、memcached等
+     * @param cacheEngineService 缓存引擎服务标识，用于定位具体的缓存服务
+     */
     public CacheEngine(String engineType, String cacheEngineService) {
         this.engineType = engineType;
         this.cacheEngineService = cacheEngineService;
     }
 
+    /**
+     * 获取缓存引擎类型
+     *
+     * @return 缓存引擎类型，如redis、memcached等
+     */
     public String getEngineType() {
         return engineType;
     }
 
+    /**
+     * 设置缓存引擎类型
+     *
+     * @param engineType 缓存引擎类型，如redis、memcached等
+     */
     public void setEngineType(String engineType) {
         this.engineType = engineType;
     }
 
+    /**
+     * 获取缓存引擎服务标识
+     *
+     * @return 缓存引擎服务标识
+     */
     public String getCacheEngineService() {
         return cacheEngineService;
     }
 
+    /**
+     * 设置缓存引擎服务标识
+     *
+     * @param cacheEngineService 缓存引擎服务标识
+     */
     public void setCacheEngineService(String cacheEngineService) {
         this.cacheEngineService = cacheEngineService;
     }

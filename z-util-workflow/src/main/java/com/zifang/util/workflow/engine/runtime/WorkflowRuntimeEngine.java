@@ -17,8 +17,13 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Runtime execution engine for workflow.
- * Manages workflow execution, node wiring, and gateway evaluation.
+ * 工作流运行时执行引擎。
+ * 负责管理工作流执行、节点连线、网关评估和状态流转。
+ * 支持并行网关和排他网关的条件分支执行。
+ *
+ * @see ExecutionResult
+ * @see GatewayEvaluator
+ * @see ExecutableWorkflowNode
  */
 public class WorkflowRuntimeEngine {
 
@@ -35,6 +40,9 @@ public class WorkflowRuntimeEngine {
     private AtomicInteger nodeIdGenerator;
     private AbstractEngine abstractEngine;
 
+    /**
+     * 构造函数，初始化运行时引擎。
+     */
     public WorkflowRuntimeEngine() {
         this.nodeMap = new HashMap<>();
         this.variables = new HashMap<>();
@@ -43,10 +51,11 @@ public class WorkflowRuntimeEngine {
     }
 
     /**
-     * Initialize the runtime engine with workflow configuration.
-     * Builds node map, wires up connections, and sets up CountDownLatches.
+     * 使用工作流配置初始化运行时引擎。
+     * 构建节点映射、建立节点连线、设置CountDownLatch。
      *
-     * @param configuration the workflow configuration
+     * @param configuration 工作流配置
+     * @throws IllegalArgumentException 如果配置为空或节点列表为空
      */
     public void initialize(WorkflowConfiguration configuration) {
         this.configuration = configuration;
@@ -155,9 +164,10 @@ public class WorkflowRuntimeEngine {
     }
 
     /**
-     * Start workflow execution from start nodes (nodes with empty pre)
+     * 启动工作流执行，从起始节点开始执行（没有前置节点的节点）。
      *
-     * @return execution result
+     * @return 执行结果
+     * @see #resume(String)
      */
     public ExecutionResult start() {
         List<ExecutableWorkflowNode> startNodes = findStartNodes();
@@ -180,10 +190,11 @@ public class WorkflowRuntimeEngine {
     }
 
     /**
-     * Resume execution at a specific node (e.g., after user completes a task)
+     * 在指定节点恢复执行（例如用户完成任务后）。
      *
-     * @param nodeId the node ID to resume at
-     * @return execution result
+     * @param nodeId 要恢复执行的节点ID
+     * @return 执行结果
+     * @throws IllegalStateException 如果节点不存在
      */
     public ExecutionResult resume(String nodeId) {
         ExecutableWorkflowNode node = nodeMap.get(nodeId);
@@ -344,28 +355,28 @@ public class WorkflowRuntimeEngine {
     }
 
     /**
-     * Get current execution result
+     * 获取当前执行结果。
      *
-     * @return current execution result
+     * @return 当前执行结果
      */
     public ExecutionResult getCurrentResult() {
         return currentResult;
     }
 
     /**
-     * Get list of pending user tasks
+     * 获取待处理的用户任务节点列表。
      *
-     * @return list of pending user task node IDs
+     * @return 待处理用户任务节点ID列表
      */
     public List<String> getPendingUserTasks() {
         return currentResult.getPendingUserTaskNodes();
     }
 
     /**
-     * Set a runtime variable
+     * 设置运行时变量。
      *
-     * @param key   variable key
-     * @param value variable value
+     * @param key   变量键名
+     * @param value 变量值
      */
     public void setVariable(String key, Object value) {
         variables.put(key, value);
@@ -375,19 +386,19 @@ public class WorkflowRuntimeEngine {
     }
 
     /**
-     * Get a runtime variable
+     * 获取运行时变量。
      *
-     * @param key variable key
-     * @return variable value
+     * @param key 变量键名
+     * @return 变量值，如果不存在则返回null
      */
     public Object getVariable(String key) {
         return variables.get(key);
     }
 
     /**
-     * Get all runtime variables
+     * 获取所有运行时变量。
      *
-     * @return variables map
+     * @return 变量映射表的副本
      */
     public Map<String, Object> getVariables() {
         return new HashMap<>(variables);
@@ -395,14 +406,29 @@ public class WorkflowRuntimeEngine {
 
     // -------- Getters and Setters --------
 
+    /**
+     * 获取工作流配置。
+     *
+     * @return 工作流配置
+     */
     public WorkflowConfiguration getConfiguration() {
         return configuration;
     }
 
+    /**
+     * 获取节点映射表。
+     *
+     * @return 节点ID到可执行节点的映射
+     */
     public Map<String, ExecutableWorkflowNode> getNodeMap() {
         return nodeMap;
     }
 
+    /**
+     * 获取流程实例ID。
+     *
+     * @return 流程实例ID
+     */
     public String getProcessId() {
         return processId;
     }

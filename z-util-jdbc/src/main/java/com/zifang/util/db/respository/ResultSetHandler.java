@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 结果集处理器，负责将JDBC ResultSet转换为Java对象
+ */
 public class ResultSetHandler {
 
     private Type targetType;
@@ -24,6 +27,14 @@ public class ResultSetHandler {
 
     private ResultSetMetaData resultSetMetaData;
 
+    /**
+     * 处理ResultSet并转换为目标类型
+     *
+     * @return 转换后的对象，可能是List、Map或单个实体
+     * @throws InstantiationException 实例化实体失败
+     * @throws IllegalAccessException 访问字段失败
+     * @throws SQLException           数据库访问异常
+     */
     public Object solve() throws InstantiationException, IllegalAccessException, SQLException {
 
         resultSetMetaData = resultSet.getMetaData();
@@ -133,26 +144,56 @@ public class ResultSetHandler {
         return li;
     }
 
+    /**
+     * 获取目标类型
+     *
+     * @return 目标类型
+     */
     public Type getTargetType() {
         return targetType;
     }
 
+    /**
+     * 设置目标类型
+     *
+     * @param targetType 目标类型
+     */
     public void setTargetType(Type targetType) {
         this.targetType = targetType;
     }
 
+    /**
+     * 获取ResultSet
+     *
+     * @return ResultSet对象
+     */
     public ResultSet getResultSet() {
         return resultSet;
     }
 
+    /**
+     * 设置ResultSet
+     *
+     * @param resultSet ResultSet对象
+     */
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
     }
 
+    /**
+     * 获取ResultSet元数据
+     *
+     * @return ResultSet元数据
+     */
     public ResultSetMetaData getResultSetMetaData() {
         return resultSetMetaData;
     }
 
+    /**
+     * 设置ResultSet元数据
+     *
+     * @param resultSetMetaData ResultSet元数据
+     */
     public void setResultSetMetaData(ResultSetMetaData resultSetMetaData) {
         this.resultSetMetaData = resultSetMetaData;
     }

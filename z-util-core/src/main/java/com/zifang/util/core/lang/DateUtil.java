@@ -13,6 +13,10 @@ import java.util.TimeZone;
 
 import static com.zifang.util.core.Const.Symbol.REGEX_SPOT;
 
+/**
+ * 日期时间工具类
+ * <p>提供日期解析、格式化、时间戳转换等功能，支持多种日期格式</p>
+ */
 public class DateUtil {
     public static final String DATE_FORMAT_WHIFFLETREE_SECOND = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_FORMAT_WHIFFLETREE_DAY = "yyyy-MM-dd";
@@ -54,6 +58,13 @@ public class DateUtil {
     public static final SimpleDateFormat DATE_FORMAT_WHIFFLETREE_MILLIS_DATE_FORMAT = getFormat(
             DATE_FORMAT_WHIFFLETREE_MILLIS);
 
+    /**
+     * 获取指定日期格式的SimpleDateFormat实例
+     * <p>使用ThreadLocal缓存，同一线程内相同格式只会创建一个实例</p>
+     *
+     * @param pattern 日期格式模式（如 "yyyy-MM-dd HH:mm:ss"）
+     * @return SimpleDateFormat实例
+     */
     public static SimpleDateFormat getFormat(final String pattern) {
         Map<String, SimpleDateFormat> dateFormatMap = DATE_FORMAT_MAP.get();
         SimpleDateFormat dateFormat = dateFormatMap.get(pattern);
@@ -69,18 +80,46 @@ public class DateUtil {
         return dateFormat;
     }
 
+    /**
+     * 将Date对象格式化为字符串
+     *
+     * @param date    日期对象
+     * @param pattern 日期格式模式
+     * @return 格式化后的日期字符串
+     */
     public static String format(Date date, String pattern) {
         return getFormat(pattern).format(date);
     }
 
+    /**
+     * 将日期字符串解析为Date对象
+     *
+     * @param dateStr 日期字符串
+     * @param pattern 日期格式模式
+     * @return Date对象
+     * @throws ParseException 如果字符串格式与模式不匹配则抛出解析异常
+     */
     public static Date parse(String dateStr, String pattern) throws ParseException {
         return getFormat(pattern).parse(dateStr);
     }
 
+    /**
+     * 将日期字符串解析为Date对象（使用UTC格式）
+     *
+     * @param dateStr 日期字符串
+     * @return Date对象
+     * @throws ParseException 如果字符串格式与模式不匹配则抛出解析异常
+     */
     public static Date parse(String dateStr) throws ParseException {
         return getFormat("").parse(dateStr);
     }
 
+    /**
+     * 获取明天的开始时间
+     * <p>格式：yyyy-MM-dd HH:mm:ss</p>
+     *
+     * @return 明天开始时间的字符串表示
+     */
     public static String getNextDayStart() {
         long nowTime = System.currentTimeMillis();
         long nextDayStartTime =
@@ -90,6 +129,12 @@ public class DateUtil {
                 .format(new Date(nextDayStartTime));
     }
 
+    /**
+     * 获取今天的结束时间
+     * <p>格式：yyyy-MM-dd HH:mm:ss</p>
+     *
+     * @return 今天结束时间的字符串表示
+     */
     public static String getTodayEnd() {
         long nowTime = System.currentTimeMillis();
         long todayEndTime =
@@ -98,6 +143,12 @@ public class DateUtil {
         return getFormat(DATE_FORMAT_WHIFFLETREE_SECOND).format(new Date(todayEndTime));
     }
 
+    /**
+     * 获取今天的开始时间
+     * <p>格式：yyyy-MM-dd HH:mm:ss</p>
+     *
+     * @return 今天开始时间的字符串表示
+     */
     public static String getTodayStart() {
         long nowTime = System.currentTimeMillis();
         long todayStartTime =
@@ -129,10 +180,23 @@ public class DateUtil {
         return LocalDateTime.of(LocalDate.now().plusDays(offset), LocalTime.of(23, 59, 59));
     }
 
+    /**
+     * 将Date对象转换为LocalDateTime（使用系统默认时区）
+     *
+     * @param date Date对象
+     * @return LocalDateTime对象，如果date为null则返回null
+     */
     public static LocalDateTime dateToLocalDateTime(Date date) {
         return dateToLocalDateTime(date, ZoneId.systemDefault());
     }
 
+    /**
+     * 将Date对象转换为LocalDateTime（指定时区）
+     *
+     * @param date    Date对象
+     * @param zoneId  时区ID
+     * @return LocalDateTime对象，如果date或zoneId为null则返回null
+     */
     public static LocalDateTime dateToLocalDateTime(Date date, ZoneId zoneId) {
         if (null == date) {
             return null;
@@ -141,6 +205,13 @@ public class DateUtil {
         return instant.atZone(zoneId).toLocalDateTime();
     }
 
+    /**
+     * 将LocalDateTime对象转换为Date（指定时区）
+     *
+     * @param localDateTime LocalDateTime对象
+     * @param zoneId        时区ID
+     * @return Date对象，如果localDateTime或zoneId为null则返回null
+     */
     public static Date localDateTimeToDate(LocalDateTime localDateTime, ZoneId zoneId) {
         if (null == localDateTime) {
             return null;
@@ -149,10 +220,23 @@ public class DateUtil {
         return Date.from(zdt.toInstant());
     }
 
+    /**
+     * 将LocalDateTime对象转换为Date（使用系统默认时区）
+     *
+     * @param localDateTime LocalDateTime对象
+     * @return Date对象，如果localDateTime为null则返回null
+     */
     public static Date localDateTimeToDate(LocalDateTime localDateTime) {
         return localDateTimeToDate(localDateTime, ZoneId.systemDefault());
     }
 
+    /**
+     * 将日期时间字符串转换为微秒时间戳
+     * <p>支持格式：yyyy-MM-dd HH:mm:ss[.微秒]</p>
+     *
+     * @param dateTime 日期时间字符串
+     * @return 微秒时间戳
+     */
     public static long getMicrosecond(String dateTime) {
         String[] dateTimes = dateTime.split(REGEX_SPOT);
         if (dateTimes.length > 1) {
@@ -254,6 +338,12 @@ public class DateUtil {
         return localDateTimeToMilliTimestamp(localDateTime) / 1000;
     }
 
+    /**
+     * 将LocalDateTime对象转换为毫秒时间戳（使用系统默认时区）
+     *
+     * @param localDateTime LocalDateTime对象
+     * @return 毫秒时间戳
+     */
     public static Long localDateTimeToMilliTimestamp(LocalDateTime localDateTime) {
         return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
     }

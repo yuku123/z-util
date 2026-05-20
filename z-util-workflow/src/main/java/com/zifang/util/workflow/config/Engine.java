@@ -3,7 +3,10 @@ package com.zifang.util.workflow.config;
 import java.util.Map;
 
 /**
- * 表明是什么类型的执行引擎
+ * 执行引擎配置类。
+ * 用于配置工作流引擎的类型、模式和属性信息。
+ *
+ * @see Configurations
  */
 public class Engine {
 
@@ -22,35 +25,75 @@ public class Engine {
      */
     private Map<String, String> properties;
 
+    /**
+     * 默认构造函数
+     */
     public Engine() {
     }
 
+    /**
+     * 全参数构造函数
+     *
+     * @param type       引擎类型，如spark、flink等
+     * @param mode       引擎模式，表示在某个引擎下的种类类型
+     * @param properties 引擎属性参数Map，配置引擎所需的所有参数
+     */
     public Engine(String type, String mode, Map<String, String> properties) {
         this.type = type;
         this.mode = mode;
         this.properties = properties;
     }
 
+    /**
+     * 获取引擎类型
+     *
+     * @return 引擎类型，如spark、flink等
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * 设置引擎类型
+     *
+     * @param type 引擎类型，如spark、flink等
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * 获取引擎模式
+     *
+     * @return 引擎模式，表示在某个引擎下的种类类型
+     */
     public String getMode() {
         return mode;
     }
 
+    /**
+     * 设置引擎模式
+     *
+     * @param mode 引擎模式，表示在某个引擎下的种类类型
+     */
     public void setMode(String mode) {
         this.mode = mode;
     }
 
+    /**
+     * 获取引擎属性参数
+     *
+     * @return 引擎属性参数Map
+     */
     public Map<String, String> getProperties() {
         return properties;
     }
 
+    /**
+     * 设置引擎属性参数
+     *
+     * @param properties 引擎属性参数Map
+     */
     public void setProperties(Map<String, String> properties) {
         this.properties = properties;
     }

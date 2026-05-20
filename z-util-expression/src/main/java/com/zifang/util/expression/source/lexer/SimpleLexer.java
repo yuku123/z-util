@@ -137,11 +137,11 @@ public class SimpleLexer {
     }
 
     /**
-     * 解析字符串，形成Token。
+     * 解析字符串，形成Token序列。
      * 这是一个有限状态自动机，在不同的状态中迁移。
      *
-     * @param code
-     * @return
+     * @param code 要解析的源代码字符串
+     * @return Token读取器，包含解析出的所有Token
      */
     public SimpleTokenReader tokenize(String code) {
         tokens = new ArrayList<Token>();
@@ -240,9 +240,9 @@ public class SimpleLexer {
     }
 
     /**
-     * 打印所有的Token
+     * 打印所有的Token，用于调试和验证词法分析结果。
      *
-     * @param tokenReader
+     * @param tokenReader Token读取器
      */
     public static void dump(SimpleTokenReader tokenReader) {
         System.out.println("text\ttype");

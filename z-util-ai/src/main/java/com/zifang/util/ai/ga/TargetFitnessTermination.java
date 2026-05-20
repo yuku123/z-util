@@ -7,6 +7,11 @@ public class TargetFitnessTermination implements TerminationCondition {
 
     private final double targetFitness;
 
+    /**
+     * 构造一个目标适应度终止条件
+     *
+     * @param targetFitness 目标适应度值
+     */
     public TargetFitnessTermination(double targetFitness) {
         this.targetFitness = targetFitness;
     }

@@ -9,14 +9,22 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * ClassLoaderUtil
+ * ClassLoader工具类 提供ClassLoader相关的操作方法
  */
 public class ClassLoaderUtil {
 
     private static final Logger log = LoggerFactory.getLogger(ClassLoaderUtil.class);
 
+    /**
+     * 可覆盖的ClassLoader，用于优先使用指定的ClassLoader加载类
+     */
     public static ClassLoader overrideClassLoader;
 
+    /**
+     * 获取上下文ClassLoader，如果存在覆盖的ClassLoader则使用覆盖的，否则使用线程上下文ClassLoader
+     *
+     * @return ClassLoader实例
+     */
     public static ClassLoader getContextClassLoader() {
         return overrideClassLoader != null ? overrideClassLoader : Thread.currentThread().getContextClassLoader();
     }
@@ -35,6 +43,14 @@ public class ClassLoaderUtil {
         return theClass;
     }
 
+    /**
+     * 获取指定ClassLoader已加载的所有类列表
+     *
+     * @param classLoader ClassLoader实例
+     * @return 已加载的类列表
+     * @throws NoSuchFieldException   如果找不到classes字段
+     * @throws IllegalAccessException 如果无法访问classes字段
+     */
     public static List<Class> getLoaderClass(ClassLoader classLoader) throws NoSuchFieldException, IllegalAccessException {
         Class cla = classLoader.getClass();
         while (cla != ClassLoader.class) {

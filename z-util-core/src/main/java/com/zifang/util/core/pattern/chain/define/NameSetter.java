@@ -19,21 +19,22 @@
 //import java.util.Map;
 //
 ///**
-// * Allows specifying a name for a {@link org.apache.commons.chain2.Command} in a {@link org.apache.commons.chain2.Catalog} instance.
+// * 允许在 {@link org.apache.commons.chain2.Catalog} 实例中为 {@link org.apache.commons.chain2.Command} 指定名称。
 // *
-// * @param <K> Context key type
-// * @param <V> Context value type
-// * @param <C> Type of the context associated with this name setter
+// * @param <K> 上下文键类型
+// * @param <V> 上下文值类型
+// * @param <C> 与此名称设置器关联的上下文类型
 // * @since 2.0
 // * @version $Id$
 // */
 //public interface NameSetter<K, V, C extends Map<K, V>> {
 //
 //    /**
-//     * Specifies a name for a {@link org.apache.commons.chain2.Command} in a {@link org.apache.commons.chain2.Catalog} instance.
+//     * 在 {@link org.apache.commons.chain2.Catalog} 实例中为 {@link org.apache.commons.chain2.Command} 指定名称。
 //     *
-//     * @param name the name of the previous set {@link org.apache.commons.chain2.Command}
-//     * @return a new builder to add a new {@link org.apache.commons.chain2.Command}
+//     * @param name 上一个设置的 {@link org.apache.commons.chain2.Command} 的名称
+//     * @return 一个新的构建器，用于添加新的 {@link org.apache.commons.chain2.Command}
+//     * @throws IllegalArgumentException 如果 name 为 null
 //     */
 //    NamedCommandSetter<K, V, C> identifiedBy(String name);
 //

@@ -2,9 +2,10 @@ package com.zifang.util.db.respository;
 
 
 /**
- * 生成器 真正只会对这个接口 的所有方法进行扫描
- * <p>
- * 可以很简单的构造出例如curdRepository的接口 然后再往外进行扩展
+ * 仓储接口基类，用于定义数据访问对象的规范
+ *
+ * @param <T> 实体类型
+ * @param <ID> 主键类型
  */
 public interface Repository<T, ID> {
 

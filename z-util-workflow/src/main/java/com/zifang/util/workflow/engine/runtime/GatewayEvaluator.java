@@ -5,16 +5,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Evaluates gateway conditions at runtime.
- * Supports simple EL-like expressions:
- * - ${var == value} - equality check
- * - ${var > 10} - numeric comparison
- * - ${var < 10} - numeric comparison
- * - ${var >= 10} - numeric comparison
- * - ${var <= 10} - numeric comparison
- * - ${!var} - negation
- * - ${var == "text"} - string comparison with quotes
- * - ${var != value} - not equal
+ * 网关条件评估器。
+ * 在运行时评估网关条件，支持简单的EL-like表达式：
+ * <ul>
+ *   <li>${var == value} - 相等比较</li>
+ *   <li>${var > 10} - 数值大于比较</li>
+ *   <li>${var < 10} - 数值小于比较</li>
+ *   <li>${var >= 10} - 数值大于等于比较</li>
+ *   <li>${var <= 10} - 数值小于等于比较</li>
+ *   <li>${!var} - 取反</li>
+ *   <li>${var == "text"} - 带引号的字符串比较</li>
+ *   <li>${var != value} - 不等于</li>
+ * </ul>
+ *
+ * @see WorkflowRuntimeEngine
  */
 public class GatewayEvaluator {
 

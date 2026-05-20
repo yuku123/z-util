@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 数据源管理器，负责注册和管理多个数据源
+ */
 public class DataSourceManager {
 
     private static final String MYSQL8 = "com.mysql.cj.jdbc.Driver";
@@ -22,6 +25,18 @@ public class DataSourceManager {
 
     private static Map<String, DataSource> dataSourceMap = new HashMap<>();
 
+    /**
+     * 注册一个新的数据源
+     *
+     * @param name          数据源名称，唯一标识，不能为空
+     * @param datasourceUrl 数据库地址，不能为空
+     * @param port          端口号
+     * @param schemaMark    数据库名称
+     * @param username      用户名，不能为空
+     * @param password      密码
+     * @return 创建的数据源对象，注册失败返回null
+     * @throws RuntimeException 如果必要参数为空或数据源名称已存在
+     */
     public static DataSource registerDataSource(String name, String datasourceUrl, Integer port, String schemaMark, String username, String password) {
 
         if (name == null || datasourceUrl == null || username == null) {

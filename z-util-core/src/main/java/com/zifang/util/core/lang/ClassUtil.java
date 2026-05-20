@@ -41,88 +41,81 @@ public class ClassUtil {
     }
 
     /**
-     * @author: zifang
-     * @description: judge is base
-     * @time: 2019-05-08 17:48:00
-     * @params: [className] Class name
-     * @return: boolean response
-     **/
+     * 判断类名是否为Java基本类型（如int、double等）
+     *
+     * @param className 类的全限定名
+     * @return 如果是基本类型返回true，否则返回false
+     */
     public static boolean isPrimitive(String className) {
         return BASE_TYPE_LIST.contains(className);
     }
 
     /**
-     * @author: zifang
-     * @description: judge class name is base wrapper
-     * @time: 2019-06-14 10:01:00
-     * @params: [className] Class name
-     * @return: boolean response
+     * 判断类名是否为基本类型的包装类（如java.lang.Integer、java.lang.Double等）
+     *
+     * @param className 类的全限定名
+     * @return 如果是包装类返回true，否则返回false
      */
     public static boolean isBaseWrap(String className) {
         return BASE_WRAP_TYPE_LIST.contains(className);
     }
 
     /**
-     * @author: zifang
-     * @description: judge class is base wrapper
-     * @time: 2019-06-14 10:01:00
-     * @params: [clazz] class
-     * @return: boolean response
+     * 判断Class对象是否为基本类型的包装类
+     *
+     * @param clazz Class对象
+     * @return 如果是包装类返回true，否则返回false
      */
     public static boolean isBaseWrap(Class<?> clazz) {
         return isBaseWrap(clazz.getCanonicalName());
     }
 
     /**
-     * @author: zifang
-     * @description: judge class name is base or base wrapper
-     * @time: 2019-06-14 10:07:00
-     * @params: [className] class name
-     * @return: boolean response
+     * 判断类名是否为基本类型或其包装类
+     *
+     * @param className 类的全限定名
+     * @return 如果是基本类型或包装类返回true，否则返回false
      */
     public static boolean isBaseOrWrap(String className) {
         return isPrimitive(className) || isBaseWrap(className);
     }
 
     /**
-     * @author: zifang
-     * @description: judge class is base or base wrapper
-     * @time: 2019-06-14 10:08:00
-     * @params: [clazz] class
-     * @return: boolean response
+     * 判断Class对象是否为基本类型或其包装类
+     *
+     * @param clazz Class对象
+     * @return 如果是基本类型或包装类返回true，否则返回false
      */
     public static boolean isBaseOrWrap(Class<?> clazz) {
         return isBaseOrWrap(clazz.getCanonicalName());
     }
 
     /**
-     * @author: zifang
-     * @description: judge class is base or base wrapper or string
-     * @time: 2021-07-02 15:21:00
-     * @params: [clazz] request
-     * @return: boolean response
+     * 判断Class对象是否为基本类型、包装类或String类型
+     *
+     * @param clazz Class对象
+     * @return 如果是基本类型、包装类或String返回true，否则返回false
      */
     public static boolean isBaseOrWrapOrString(Class<?> clazz) {
         return isBaseOrWrap(clazz.getCanonicalName()) || isSameClass(clazz, String.class);
     }
 
     /**
-     * @author: zifang
-     * @description: judge object is base or base wrapper
-     * @time: 2019-06-14 10:09:00
-     * @params: [object] request
-     * @return: boolean response
+     * 判断对象是否为基本类型或其包装类的实例
+     *
+     * @param object 待检查的对象
+     * @return 如果是基本类型或包装类实例返回true，null返回false
      */
     public static boolean isBaseOrWrap(Object object) {
         return null != object && isBaseOrWrap(object.getClass());
     }
 
     /**
-     * @author: zifang
-     * @description: judge two class is same by classloader and canonicalName
-     * @time: 2020-08-27 14:50:00
-     * @params: [clazz, clz] class, class two
-     * @return: boolean is same
+     * 判断两个Class对象是否相同，通过类加载器和规范类名进行比较
+     *
+     * @param clazz 第一个Class对象
+     * @param clz   第二个Class对象
+     * @return 如果两者相同返回true，否则返回false
      */
     public static boolean isSameClass(Class<?> clazz, Class<?> clz) {
         if (null == clazz && null == clz) {
@@ -137,12 +130,11 @@ public class ClassUtil {
     }
 
     /**
-     * @author: zifang
-     * @description: judge two class is same name(maybe has different classLoader)
-     * @description: 判断两个类的类名是否一致（可能在两个类加载器中）
-     * @time: 2022-12-02 15:06:00
-     * @params: [clazz, clz] class, class two
-     * @return: boolean is same name
+     * 判断两个Class对象的类名是否相同（不考虑类加载器差异）
+     *
+     * @param clazz 第一个Class对象
+     * @param clz   第二个Class对象
+     * @return 如果类名相同返回true，否则返回false
      */
     public static boolean isSameNameClass(Class<?> clazz, Class<?> clz) {
         if (null == clazz && null == clz) {
@@ -154,6 +146,13 @@ public class ClassUtil {
         return clazz.getCanonicalName().equals(clz.getCanonicalName());
     }
 
+    /**
+     * 获取简短的类名，将包名中的每个部分缩写为首字母加点的形式
+     * 例如：com.example.TestClass -> c.e.TestClass
+     *
+     * @param className 类的全限定名
+     * @return 简化后的类名，如果输入为null则返回null
+     */
     public static String getShortClassName(String className) {
         if (className == null) {
             return null;
@@ -175,34 +174,43 @@ public class ClassUtil {
     }
 
     /**
-     * @author: zifang
-     * @description: 判断是否是jdk原生的类型, 如List.class、Map.class
-     * @time: 2021-12-13 19:36:00
-     * @params: [clazz] request
-     * @return: boolean response
+     * 判断Class对象是否为JDK原生类型（如List.class、Map.class等）
+     *
+     * @param clazz Class对象
+     * @return 如果是JDK原生类型返回true（即Class.getClassLoader()返回null）
      */
     public static boolean isOriginJdkType(Class<?> clazz) {
         return null == clazz.getClassLoader();
     }
 
+    /**
+     * 判断Class对象是否为Java原始数值类型（long、int、short、byte）
+     *
+     * @param clazz Class对象
+     * @return 如果是原始数值类型返回true，否则返回false
+     */
     public static boolean isPrimitiveNumberType(Class<?> clazz) {
         return long.class.isAssignableFrom(clazz) || int.class.isAssignableFrom(clazz)
                 || short.class.isAssignableFrom(clazz) || byte.class.isAssignableFrom(clazz);
     }
 
+    /**
+     * 判断Class对象是否为Java原始浮点数值类型（double、float）
+     *
+     * @param clazz Class对象
+     * @return 如果是原始浮点数值类型返回true，否则返回false
+     */
     public static boolean isPrimitiveFloatingPointNumberType(Class<?> clazz) {
         return double.class.isAssignableFrom(clazz) || float.class.isAssignableFrom(clazz);
     }
 
     /**
-     * <p>Converts an array of {@code Object} in to an array of {@code Class} objects.
-     * If any of these objects is null, a null element will be inserted into the array.</p>
+     * 将对象数组转换为Class对象数组
      *
-     * <p>This method returns {@code null} for a {@code null} input array.</p>
-     * <p>因为是数组所以隐式地带上了一个类型装箱如果有基本类型会转为对应的包装类，这可能会导致反射找方法时找不到使用时要慎重</p>
+     * <p>如果对象为null，则对应位置返回null。基本类型会被转换为对应的包装类。</p>
      *
-     * @param array an {@code Object} array
-     * @return a {@code Class} array, {@code null} if null array input
+     * @param array Object对象数组
+     * @return Class对象数组，如果输入为null则返回null
      */
     public static Class<?>[] toClass(final Object... array) {
         if (array == null) {
@@ -217,6 +225,12 @@ public class ClassUtil {
         return classes;
     }
 
+    /**
+     * 将Class对象数组转换为字符串表示形式，格式为：(Class1Name, Class2Name, ...)
+     *
+     * @param argTypes Class对象数组
+     * @return 格式化后的参数字符串
+     */
     public static String argumentTypesToString(Class<?>[] argTypes) {
         StringBuilder buf = new StringBuilder();
         buf.append("(");

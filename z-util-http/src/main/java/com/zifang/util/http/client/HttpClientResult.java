@@ -3,58 +3,117 @@ package com.zifang.util.http.client;
 import java.io.Serializable;
 
 /**
- * Description: 封装httpClient响应结果
+ * HTTP客户端响应结果封装类。
+ * <p>
+ * 该类封装了HTTP响应的状态码和响应内容，用于统一处理HTTP请求的返回结果。
+ * </p>
+ *
+ * @author zifang
+ * @see Serializable
  */
 public class HttpClientResult implements Serializable {
 
     private static final long serialVersionUID = 2168152194164783950L;
 
     /**
-     * 响应状态码
+     * 响应状态码，如200、404、500等HTTP状态码。
      */
     private int code;
 
     /**
-     * 响应数据
+     * 响应数据内容，通常为JSON字符串格式。
      */
     private String content;
 
+    /**
+     * 构造一个空的HTTP客户端结果。
+     */
     public HttpClientResult() {}
 
+    /**
+     * 构造一个仅包含状态码的HTTP客户端结果。
+     *
+     * @param code HTTP响应状态码
+     */
     public HttpClientResult(int code) {
         this.code = code;
     }
 
+    /**
+     * 构造一个仅包含响应内容的HTTP客户端结果。
+     *
+     * @param content HTTP响应内容
+     */
     public HttpClientResult(String content) {
         this.content = content;
     }
 
+    /**
+     * 构造一个包含状态码和响应内容的HTTP客户端结果。
+     *
+     * @param code    HTTP响应状态码
+     * @param content HTTP响应内容
+     */
     public HttpClientResult(int code, String content) {
         this.code = code;
         this.content = content;
     }
 
+    /**
+     * 获取HTTP响应状态码。
+     *
+     * @return HTTP响应状态码
+     */
     public int getCode() {
         return code;
     }
 
+    /**
+     * 设置HTTP响应状态码。
+     *
+     * @param code HTTP响应状态码
+     */
     public void setCode(int code) {
         this.code = code;
     }
 
+    /**
+     * 获取HTTP响应内容。
+     *
+     * @return HTTP响应内容字符串
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * 设置HTTP响应内容。
+     *
+     * @param content HTTP响应内容字符串
+     */
     public void setContent(String content) {
         this.content = content;
     }
 
+    /**
+     * 返回该结果的字符串表示。
+     *
+     * @return 包含 code 和 content 的字符串表示
+     */
     @Override
     public String toString() {
         return "HttpClientResult{code=" + code + ", content=" + content + "}";
     }
 
+    /**
+     * 比较两个HTTP客户端结果是否相等。
+     * <p>
+     * 两个结果相等当且仅当它们的 code 和 content 都相等。
+     * </p>
+     *
+     * @param o 待比较的对象
+     * @return 如果相等则返回 true，否则返回 false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,6 +123,11 @@ public class HttpClientResult implements Serializable {
         return content != null ? content.equals(that.content) : that.content == null;
     }
 
+    /**
+     * 返回该结果的哈希码。
+     *
+     * @return 哈希码值
+     */
     @Override
     public int hashCode() {
         int result = code;

@@ -5,9 +5,8 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@RequestMapping(method = RequestMethod.GET)
+@RequestMapping(method = RequestMethod.POST)
 public @interface PostMapping {
     String[] values() default {};
     String value() default "";
-
 }
