@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -46,9 +45,33 @@ public class CLITest {
     }
 
     @Test
+    public void testShortOptionWithAttachedValue() throws Exception {
+        Options options = new Options();
+        options.addOption("f", true, "Input file");
+
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(options, new String[]{"-finput.txt"});
+
+        assertTrue(cmd.hasOption("f"));
+        assertEquals("input.txt", cmd.getOptionValue("f"));
+    }
+
+    @Test
+    public void testLongOptionWithSpace() throws Exception {
+        Options options = new Options();
+        options.addOption(null, "file", true, "Input file");
+
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(options, new String[]{"--file", "input.txt"});
+
+        assertTrue(cmd.hasOption("file"));
+        assertEquals("input.txt", cmd.getOptionValue("file"));
+    }
+
+    @Test
     public void testLongOptionWithEquals() throws Exception {
         Options options = new Options();
-        options.addOption("file", true, "Input file");
+        options.addOption(null, "file", true, "Input file");
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, new String[]{"--file=input.txt"});
@@ -58,16 +81,31 @@ public class CLITest {
     }
 
     @Test
-    public void testMultipleArgs() throws Exception {
+    public void testPositionalArgs() throws Exception {
         Options options = new Options();
         options.addOption("f", true, "Input file");
 
         CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = parser.parse(options, new String[]{"-f", "a.txt", "b.txt"});
+        CommandLine cmd = parser.parse(options, new String[]{"arg1", "arg2"});
+
+        assertFalse(cmd.hasOption("f"));
+        assertEquals(2, cmd.getArgList().size());
+        assertEquals("arg1", cmd.getArgList().get(0));
+        assertEquals("arg2", cmd.getArgList().get(1));
+    }
+
+    @Test
+    public void testOptionWithPositionalArgs() throws Exception {
+        Options options = new Options();
+        options.addOption("f", true, "Input file");
+
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(options, new String[]{"-f", "input.txt", "arg1"});
 
         assertTrue(cmd.hasOption("f"));
-        assertEquals("a.txt", cmd.getOptionValue("f"));
-        assertEquals(Arrays.asList("a.txt", "b.txt"), cmd.getArgList());
+        assertEquals("input.txt", cmd.getOptionValue("f"));
+        assertEquals(1, cmd.getArgList().size());
+        assertEquals("arg1", cmd.getArgList().get(0));
     }
 
     @Test
@@ -87,6 +125,25 @@ public class CLITest {
     }
 
     @Test
+    public void testOptionGroupRejectsBoth() {
+        Options options = new Options();
+        OptionGroup group = new OptionGroup();
+        group.addOption(Option.builder().opt("a").description("Format A").build());
+        group.addOption(Option.builder().opt("b").description("Format B").build());
+        options.addOptionGroup(group);
+
+        CommandLineParser parser = new DefaultParser();
+        try {
+            parser.parse(options, new String[]{"-a", "-b"});
+            fail("Should throw AlreadySelectedException");
+        } catch (com.zifang.util.cli.exception.AlreadySelectedException e) {
+            assertNotNull(e.getMessage());
+        } catch (ParseException e) {
+            fail("Wrong exception type: " + e);
+        }
+    }
+
+    @Test
     public void testRequiredOptionMissing() {
         Options options = new Options();
         options.addOption(Option.builder().opt("r").description("Required").required(true).build());
@@ -103,7 +160,7 @@ public class CLITest {
     }
 
     @Test
-    public void testUnrecognizedOption() {
+    public void testUnrecognizedShortOption() {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
 
@@ -113,6 +170,22 @@ public class CLITest {
             fail("Should throw UnrecognizedOptionException");
         } catch (com.zifang.util.cli.exception.UnrecognizedOptionException e) {
             assertTrue(e.getMessage().contains("-z"));
+        } catch (ParseException e) {
+            fail("Wrong exception type: " + e);
+        }
+    }
+
+    @Test
+    public void testUnrecognizedLongOption() {
+        Options options = new Options();
+        options.addOption("a", false, "Toggle A");
+
+        CommandLineParser parser = new DefaultParser();
+        try {
+            parser.parse(options, new String[]{"--xyz"});
+            fail("Should throw UnrecognizedOptionException");
+        } catch (com.zifang.util.cli.exception.UnrecognizedOptionException e) {
+            assertTrue(e.getMessage().contains("--xyz"));
         } catch (ParseException e) {
             fail("Wrong exception type: " + e);
         }
@@ -149,7 +222,9 @@ public class CLITest {
         CommandLine cmd = parser.parse(options, new String[]{"-a", "non-option", "-b"}, true);
 
         assertTrue(cmd.hasOption("a"));
-        assertEquals(Arrays.asList("non-option", "-b"), cmd.getArgList());
+        assertEquals(2, cmd.getArgList().size());
+        assertEquals("non-option", cmd.getArgList().get(0));
+        assertEquals("-b", cmd.getArgList().get(1));
     }
 
     @Test
@@ -171,18 +246,6 @@ public class CLITest {
     }
 
     @Test
-    public void testLongOptionWithSpace() throws Exception {
-        Options options = new Options();
-        options.addOption("f", "file", true, "Input file");
-
-        CommandLineParser parser = new DefaultParser();
-        CommandLine cmd = parser.parse(options, new String[]{"--file", "input.txt"});
-
-        assertTrue(cmd.hasOption("file"));
-        assertEquals("input.txt", cmd.getOptionValue("file"));
-    }
-
-    @Test
     public void testNegatedOption() throws Exception {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -191,5 +254,18 @@ public class CLITest {
         CommandLine cmd = parser.parse(options, new String[]{});
 
         assertFalse(cmd.hasOption("a"));
+    }
+
+    @Test
+    public void testCombinedShortOptions() throws Exception {
+        Options options = new Options();
+        options.addOption("v", false, "Verbose");
+        options.addOption("x", false, "X flag");
+
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(options, new String[]{"-vx"});
+
+        assertTrue(cmd.hasOption("v"));
+        assertTrue(cmd.hasOption("x"));
     }
 }

@@ -255,12 +255,13 @@ public class DefaultParser implements CommandLineParser {
         String opt = token.length() > 1 ? String.valueOf(token.charAt(0)) : token;
 
         if (!options.hasShortOption(opt)) {
+            // Treat unknown short option cluster (e.g., "-ab") as positional args
+            // if stopAtNonOption, otherwise throw
             if (stopAtNonOption) {
-                eatTheRest = true;
                 cmd.addArg(OPT_PREFIX + token);
                 return;
             }
-            throw new UnrecognizedOptionException("Unrecognized option: -" + opt, "-" + opt);
+            throw new UnrecognizedOptionException("Unrecognized option: -" + token, "-" + token);
         }
 
         Option option = options.getOption(opt);
