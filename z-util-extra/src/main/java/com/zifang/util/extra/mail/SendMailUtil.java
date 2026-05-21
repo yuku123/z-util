@@ -1,94 +1,185 @@
 package com.zifang.util.extra.mail;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 /**
- * 邮件发送工具类（网易163邮箱）
+ * 邮件发送工具类
  * <p>
- * 提供基于网易163邮箱SMTP服务的邮件发送功能，支持发送纯文本邮件
+ * 支持：
+ * <ul>
+ *   <li>普通文本和HTML邮件</li>
+ *   <li>附件发送</li>
+ *   <li>抄送/密送</li>
+ *   <li>SSL/TLS加密</li>
+ *   <li>163/QQ/Gmail等主流邮箱</li>
+ * </ul>
  *
  * @author zifang
  */
 public class SendMailUtil {
 
-    /**
-     * SMTP 服务器地址
-     */
-    static String HOST = "smtp.163.com";
+    private SendMailUtil() {
+    }
 
     /**
-     * 发件人邮箱地址
+     * 使用配置发送邮件
      */
-    static String FROM = "zhangchenhao1995@163.com";
+    public static void send(MailConfig config, Mail mail) {
+        send(config, mail, null);
+    }
 
     /**
-     * 邮箱用户名（通常与发件人地址一致）
+     * 使用配置发送邮件（带回调）
      */
-    static String USER = "zhangchenhao1995@163.com";
+    public static void send(MailConfig config, Mail mail, SendCallback callback) {
+        mail.validate();
 
-    /**
-     * 163邮箱的SMTP授权码
-     */
-    //1340947819@qq.com
-    static String PWD = "***";
+        Properties props = config.toProperties();
+        Session session = Session.getInstance(props, config.getAuthenticator());
+        session.setDebug(config.isDebug());
 
-    /**
-     * 默认收件人地址列表
-     */
-    static String[] TOS = new String[]{"1340947819@qq.com"};
-
-    /**
-     * 默认邮件标题
-     */
-    static String SUBJECT = "手表服务抛异常了";
-
-    /**
-     * 发送邮件（使用默认收件人和标题）
-     * <p>
-     * 通过网易163邮箱SMTP服务器发送文本邮件，邮件内容为纯文本格式
-     *
-     * @param context 邮件正文内容，不能为空
-     */
-    public static void send(String context) {
-        Properties props = new Properties();
-        props.put("mail.smtp.host", HOST);//设置发送邮件的邮件服务器的属性（这里使用网易的smtp服务器）
-        props.put("mail.smtp.auth", "true");  //需要经过授权，也就是有户名和密码的校验，这样才能通过验证（一定要有这一条）
-        Session session = Session.getDefaultInstance(props);//用props对象构建一个session
-        //Session session = Session.getInstance(props);
-        session.setDebug(true);
-        MimeMessage message = new MimeMessage(session);//用session为参数定义消息对象
         try {
-            message.setFrom(new InternetAddress(FROM));// 加载发件人地址
-            InternetAddress[] sendTo = new InternetAddress[TOS.length]; // 加载收件人地址
-            for (int i = 0; i < TOS.length; i++) {
-                sendTo[i] = new InternetAddress(TOS[i]);
+            MimeMessage message = createMessage(session, config, mail);
+            Transport transport = session.getTransport("smtp");
+            transport.connect(config.getHost(), config.getUsername(), config.getPassword());
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+
+            if (callback != null) {
+                callback.onSuccess(mail);
             }
-            message.addRecipients(Message.RecipientType.TO, sendTo);
-            message.addRecipients(MimeMessage.RecipientType.CC, InternetAddress.parse(FROM));//设置在发送给收信人之前给自己（发送方）抄送一份，不然会被当成垃圾邮件，报554错
-            message.setSubject(SUBJECT);//加载标题
-            Multipart multipart = new MimeMultipart();//向multipart对象中添加邮件的各个部分内容，包括文本内容和附件
-            BodyPart contentPart = new MimeBodyPart();//设置邮件的文本内容
-            contentPart.setText(context);
-            multipart.addBodyPart(contentPart);
-            message.setContent(multipart);//将multipart对象放到message中
-            message.saveChanges(); //保存邮件
-            Transport transport = session.getTransport("smtp");//发送邮件
-            transport.connect(HOST, USER, PWD);//连接服务器的邮箱
-            transport.sendMessage(message, message.getAllRecipients());//把邮件发送出去
-            transport.close();//关闭连接
         } catch (Exception e) {
-            e.printStackTrace();
+            if (callback != null) {
+                callback.onError(mail, e);
+            } else {
+                throw new RuntimeException("Failed to send email", e);
+            }
         }
     }
 
-
-    public static void main(String[] args) {
-        send("mongo连接池出异常了！！！！！");
+    /**
+     * 发送简单文本邮件
+     */
+    public static void send(MailConfig config, String to, String subject, String content) {
+        Mail mail = Mail.create()
+                .to(to)
+                .subject(subject)
+                .content(content);
+        send(config, mail);
     }
 
+    /**
+     * 发送HTML邮件
+     */
+    public static void sendHtml(MailConfig config, String to, String subject, String htmlContent) {
+        Mail mail = Mail.create()
+                .to(to)
+                .subject(subject)
+                .html(htmlContent);
+        send(config, mail);
+    }
+
+    /**
+     * 发送带附件的邮件
+     */
+    public static void sendWithAttachment(MailConfig config, String to, String subject, String content, File... attachments) {
+        Mail mail = Mail.create()
+                .to(to)
+                .subject(subject)
+                .content(content)
+                .attach(attachments);
+        send(config, mail);
+    }
+
+    private static MimeMessage createMessage(Session session, MailConfig config, Mail mail) throws Exception {
+        MimeMessage message = new MimeMessage(session);
+
+        // 设置发件人
+        String from = mail.getFrom() != null ? mail.getFrom() : config.getFrom();
+        String fromName = mail.getFromName() != null ? mail.getFromName() : config.getFromName();
+        if (fromName != null) {
+            message.setFrom(new InternetAddress(from, fromName, StandardCharsets.UTF_8.name()));
+        } else {
+            message.setFrom(new InternetAddress(from));
+        }
+
+        // 设置收件人
+        message.setRecipients(Message.RecipientType.TO, parseAddresses(mail.getTo()));
+
+        // 设置抄送
+        if (!mail.getCc().isEmpty()) {
+            message.setRecipients(Message.RecipientType.CC, parseAddresses(mail.getCc()));
+        }
+
+        // 设置密送
+        if (!mail.getBcc().isEmpty()) {
+            message.setRecipients(Message.RecipientType.BCC, parseAddresses(mail.getBcc()));
+        }
+
+        // 设置主题
+        message.setSubject(mail.getSubject(), StandardCharsets.UTF_8.name());
+
+        // 设置时间和内容
+        message.setSentDate(new Date());
+
+        // 构建邮件内容
+        if (mail.getAttachments().isEmpty()) {
+            // 无附件
+            if (mail.isHtml()) {
+                message.setContent(mail.getContent(), "text/html;charset=UTF-8");
+            } else {
+                message.setText(mail.getContent(), StandardCharsets.UTF_8.name());
+            }
+        } else {
+            // 有附件
+            Multipart multipart = new MimeMultipart();
+
+            // 添加正文
+            BodyPart contentPart = new MimeBodyPart();
+            if (mail.isHtml()) {
+                contentPart.setContent(mail.getContent(), "text/html;charset=UTF-8");
+            } else {
+                contentPart.setContent(mail.getContent(), "text/plain;charset=UTF-8");
+            }
+            multipart.addBodyPart(contentPart);
+
+            // 添加附件
+            for (File file : mail.getAttachments()) {
+                BodyPart attachmentPart = new MimeBodyPart();
+                attachmentPart.setFileName(MimeUtility.encodeWord(file.getName()));
+                attachmentPart.setDataHandler(new DataHandler(new FileDataSource(file)));
+                multipart.addBodyPart(attachmentPart);
+            }
+
+            message.setContent(multipart);
+        }
+
+        message.saveChanges();
+        return message;
+    }
+
+    private static InternetAddress[] parseAddresses(List<String> addresses) throws UnsupportedEncodingException, AddressException {
+        InternetAddress[] result = new InternetAddress[addresses.size()];
+        for (int i = 0; i < addresses.size(); i++) {
+            result[i] = new InternetAddress(addresses.get(i));
+        }
+        return result;
+    }
+
+    /**
+     * 发送回调接口
+     */
+    public interface SendCallback {
+        void onSuccess(Mail mail);
+        void onError(Mail mail, Exception e);
+    }
 }
