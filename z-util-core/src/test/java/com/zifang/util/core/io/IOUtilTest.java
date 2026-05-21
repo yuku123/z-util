@@ -1,0 +1,263 @@
+package com.zifang.util.core.io;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import static org.junit.Assert.*;
+
+public class IOUtilTest {
+
+    private byte[] testData;
+    private File tempFile;
+
+    @Before
+    public void setUp() throws Exception {
+        testData = "hello world\nline2\nline3中文".getBytes(StandardCharsets.UTF_8);
+        tempFile = File.createTempFile("io-util-test", ".txt");
+        tempFile.deleteOnExit();
+    }
+
+    @After
+    public void tearDown() {
+        if (tempFile != null && tempFile.exists()) {
+            tempFile.delete();
+        }
+    }
+
+    // ==================== readString ====================
+
+    @Test
+    public void testReadStringFromInputStream() throws Exception {
+        try (InputStream in = new ByteArrayInputStream(testData)) {
+            String result = IOUtil.readString(in);
+            assertEquals("hello world\nline2\nline3中文", result);
+        }
+    }
+
+    @Test
+    public void testReadStringWithCharset() throws Exception {
+        try (InputStream in = new ByteArrayInputStream(testData)) {
+            String result = IOUtil.readString(in, "UTF-8");
+            assertEquals("hello world\nline2\nline3中文", result);
+        }
+    }
+
+    @Test
+    public void testReadStringWithGBKCharset() throws Exception {
+        byte[] gbkData = "你好世界".getBytes("GBK");
+        try (InputStream in = new ByteArrayInputStream(gbkData)) {
+            String result = IOUtil.readString(in, "GBK");
+            assertEquals("你好世界", result);
+        }
+    }
+
+    @Test
+    public void testReadStringEmptyStream() throws Exception {
+        try (InputStream in = new ByteArrayInputStream(new byte[0])) {
+            String result = IOUtil.readString(in);
+            assertEquals("", result);
+        }
+    }
+
+    // ==================== readToBuffer ====================
+
+    @Test
+    public void testReadToBuffer() throws Exception {
+        try (InputStream in = new ByteArrayInputStream(testData)) {
+            FastByteArrayOutputStream out = IOUtil.readToBuffer(in);
+            assertArrayEquals(testData, out.toByteArray());
+        }
+    }
+
+    @Test
+    public void testReadToBufferNotCloseInput() throws Exception {
+        InputStream in = new ByteArrayInputStream(testData);
+        IOUtil.readToBuffer(in, false);
+        assertNotNull(in.read()); // still open
+        in.close();
+    }
+
+    @Test
+    public void testReadToBufferClosesInputByDefault() throws Exception {
+        InputStream in = new ByteArrayInputStream(testData);
+        IOUtil.readToBuffer(in);
+        assertEquals(-1, in.read()); // already closed
+    }
+
+    // ==================== readLines ====================
+
+    @Test
+    public void testReadLinesFromReader() throws Exception {
+        try (Reader reader = new StringReader("line1\nline2\nline3")) {
+            List<String> lines = IOUtil.readLines(reader);
+            assertEquals(3, lines.size());
+            assertEquals("line1", lines.get(0));
+            assertEquals("line2", lines.get(1));
+            assertEquals("line3", lines.get(2));
+        }
+    }
+
+    @Test
+    public void testReadLinesWithEmptyLines() throws Exception {
+        try (Reader reader = new StringReader("line1\n\nline3")) {
+            List<String> lines = IOUtil.readLines(reader);
+            assertEquals(3, lines.size());
+            assertEquals("", lines.get(1));
+        }
+    }
+
+    @Test
+    public void testReadLinesConsumer() throws Exception {
+        try (InputStream in = new ByteArrayInputStream("a\nb\nc".getBytes(StandardCharsets.UTF_8))) {
+            StringBuilder sb = new StringBuilder();
+            IOUtil.readLines(in, StandardCharsets.UTF_8, sb::append);
+            assertEquals("abc", sb.toString());
+        }
+    }
+
+    // ==================== copy ====================
+
+    @Test
+    public void testCopySmallStream() throws Exception {
+        try (InputStream in = new ByteArrayInputStream(testData);
+             ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            int count = IOUtil.copy(in, out);
+            assertEquals(testData.length, count);
+            assertArrayEquals(testData, out.toByteArray());
+        }
+    }
+
+    @Test
+    public void testCopyLargeStream() throws Exception {
+        byte[] largeData = new byte[100_000];
+        for (int i = 0; i < largeData.length; i++) {
+            largeData[i] = (byte) (i % 256);
+        }
+        try (InputStream in = new ByteArrayInputStream(largeData);
+             ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            long count = IOUtil.copyLarge(in, out);
+            assertEquals(largeData.length, count);
+            assertArrayEquals(largeData, out.toByteArray());
+        }
+    }
+
+    @Test
+    public void testCopyReturnsZeroForEmptyStream() throws Exception {
+        try (InputStream in = new ByteArrayInputStream(new byte[0]);
+             ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+            int count = IOUtil.copy(in, out);
+            assertEquals(0, count);
+        }
+    }
+
+    // ==================== channelCopy ====================
+
+    @Test
+    public void testChannelCopy() throws Exception {
+        byte[] data = "channel test data".getBytes(StandardCharsets.UTF_8);
+        try (InputStream in = new ByteArrayInputStream(data);
+             ReadableByteChannel src = Channels.newChannel(in);
+             ByteArrayOutputStream baos = new ByteArrayOutputStream();
+             WritableByteChannel dest = Channels.newChannel(baos)) {
+            IOUtil.channelCopy(src, dest);
+            assertArrayEquals(data, baos.toByteArray());
+        }
+    }
+
+    @Test
+    public void testChannelCopyClear() throws Exception {
+        byte[] data = "channel clear test".getBytes(StandardCharsets.UTF_8);
+        try (InputStream in = new ByteArrayInputStream(data);
+             ReadableByteChannel src = Channels.newChannel(in);
+             ByteArrayOutputStream baos = new ByteArrayOutputStream();
+             WritableByteChannel dest = Channels.newChannel(baos)) {
+            IOUtil.channelCopyClear(src, dest);
+            assertArrayEquals(data, baos.toByteArray());
+        }
+    }
+
+    // ==================== skipFully ====================
+
+    @Test
+    public void testSkipFully() throws Exception {
+        byte[] data = "0123456789".getBytes(StandardCharsets.UTF_8);
+        try (InputStream in = new ByteArrayInputStream(data)) {
+            long skipped = IOUtil.skipFully(in, 5);
+            assertEquals(5, skipped);
+            assertEquals('5', in.read());
+        }
+    }
+
+    @Test
+    public void testSkipFullyBeyondEOF() throws Exception {
+        byte[] data = "123".getBytes(StandardCharsets.UTF_8);
+        try (InputStream in = new ByteArrayInputStream(data)) {
+            long skipped = IOUtil.skipFully(in, 10);
+            assertEquals(3, skipped); // only 3 available
+            assertEquals(-1, in.read());
+        }
+    }
+
+    @Test
+    public void testSkipFullyZero() throws Exception {
+        byte[] data = "abc".getBytes(StandardCharsets.UTF_8);
+        try (InputStream in = new ByteArrayInputStream(data)) {
+            long skipped = IOUtil.skipFully(in, 0);
+            assertEquals(0, skipped);
+            assertEquals('a', in.read());
+        }
+    }
+
+    // ==================== close ====================
+
+    @Test
+    public void testCloseNull() {
+        IOUtil.close(null); // should not throw
+    }
+
+    @Test
+    public void testCloseQuietly() {
+        IOUtil.closeQuietly(null); // should not throw
+    }
+
+    @Test
+    public void testCloseAlreadyClosed() throws Exception {
+        InputStream in = new ByteArrayInputStream(testData);
+        in.close();
+        IOUtil.close(in); // should not throw
+    }
+
+    @Test
+    public void testCloseIO() throws Exception {
+        InputStream in = new ByteArrayInputStream(testData);
+        IOUtil.close(in);
+        assertEquals(-1, in.read()); // closed
+    }
+
+    @Test
+    public void testCloseOutputStream() throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        IOUtil.close(out);
+        // writing after close may throw, but close itself shouldn't
+        byte[] data = "test".getBytes(StandardCharsets.UTF_8);
+        out.write(data);
+    }
+
+    // ==================== FastByteArrayOutputStream integration ====================
+
+    @Test
+    public void testReadToBufferAndWriteToFile() throws Exception {
+        try (FileOutputStream fos = new FileOutputStream(tempFile);
+             InputStream in = new ByteArrayInputStream(testData)) {
+            FastByteArrayOutputStream buf = IOUtil.readToBuffer(in);
+            buf.writeTo(fos);
+        }
+        byte[] readBack = java.nio.file.Files.readAllBytes(tempFile.toPath());
+        assertArrayEquals(testData, readBack);
+    }
+}

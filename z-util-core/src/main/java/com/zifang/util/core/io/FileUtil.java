@@ -1621,13 +1621,89 @@ public class FileUtil {
     }
 
     /**
-     * 获取文件的类型 只利用文件头做判断故不全
+     * 根据文件头魔数检测文件类型
      *
-     * @param file 需要处理的文件
-     * @return 文件类型
+     * @param file 需要检测的文件
+     * @return 文件类型后缀（jpg/png/pdf 等），未知返回 null
      */
     public final static String fileType(File file) {
-        return FileTypeImpl.getFileType(file);
+        if (file == null || !file.exists() || !file.isFile()) {
+            return null;
+        }
+        byte[] header = new byte[50];
+        try (FileInputStream fis = new FileInputStream(file)) {
+            int read = fis.read(header);
+            if (read <= 0) {
+                return null;
+            }
+            String hex = bytesToHex(header);
+            for (Map.Entry<String, String> entry : MAGIC_NUMBER_MAP.entrySet()) {
+                if (hex.toUpperCase().startsWith(entry.getValue())) {
+                    return entry.getKey();
+                }
+            }
+        } catch (IOException e) {
+            log.warn("fileType read error: {}", e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * 将字节数组转为十六进制字符串
+     */
+    private static String bytesToHex(byte[] bytes) {
+        if (bytes == null) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            int v = b & 0xFF;
+            if (v < 16) {
+                sb.append('0');
+            }
+            sb.append(Integer.toHexString(v));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 文件头魔数映射表
+     */
+    private static final Map<String, String> MAGIC_NUMBER_MAP = new HashMap<>();
+
+    static {
+        MAGIC_NUMBER_MAP.put("jpg", "FFD8FF");
+        MAGIC_NUMBER_MAP.put("png", "89504E47");
+        MAGIC_NUMBER_MAP.put("gif", "47494638");
+        MAGIC_NUMBER_MAP.put("tif", "49492A00");
+        MAGIC_NUMBER_MAP.put("bmp", "424D");
+        MAGIC_NUMBER_MAP.put("dwg", "41433130");
+        MAGIC_NUMBER_MAP.put("html", "68746D6C3E");
+        MAGIC_NUMBER_MAP.put("rtf", "7B5C727466");
+        MAGIC_NUMBER_MAP.put("xml", "3C3F786D6C");
+        MAGIC_NUMBER_MAP.put("zip", "504B0304");
+        MAGIC_NUMBER_MAP.put("rar", "52617221");
+        MAGIC_NUMBER_MAP.put("psd", "38425053");
+        MAGIC_NUMBER_MAP.put("eml", "44656C69766572792D646174653A");
+        MAGIC_NUMBER_MAP.put("dbx", "CFAD12FEC5FD746F");
+        MAGIC_NUMBER_MAP.put("pst", "2142444E");
+        MAGIC_NUMBER_MAP.put("xls", "D0CF11E0");
+        MAGIC_NUMBER_MAP.put("doc", "D0CF11E0");
+        MAGIC_NUMBER_MAP.put("mdb", "5374616E64617264204A");
+        MAGIC_NUMBER_MAP.put("wpd", "FF575043");
+        MAGIC_NUMBER_MAP.put("eps", "252150532D41646F6265");
+        MAGIC_NUMBER_MAP.put("ps", "252150532D41646F6265");
+        MAGIC_NUMBER_MAP.put("pdf", "255044462D312E");
+        MAGIC_NUMBER_MAP.put("qdf", "AC9EBD8F");
+        MAGIC_NUMBER_MAP.put("pwl", "E3828596");
+        MAGIC_NUMBER_MAP.put("wav", "57415645");
+        MAGIC_NUMBER_MAP.put("avi", "41564920");
+        MAGIC_NUMBER_MAP.put("ram", "2E7261FD");
+        MAGIC_NUMBER_MAP.put("rm", "2E524D46");
+        MAGIC_NUMBER_MAP.put("mpg", "000001BA");
+        MAGIC_NUMBER_MAP.put("mov", "6D6F6F76");
+        MAGIC_NUMBER_MAP.put("asf", "3026B2758E66CF11");
+        MAGIC_NUMBER_MAP.put("mid", "4D546864");
     }
 
     /**

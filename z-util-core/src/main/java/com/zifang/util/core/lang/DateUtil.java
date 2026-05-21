@@ -2,6 +2,8 @@ package com.zifang.util.core.lang;
 
 import com.zifang.util.core.lang.primitive.IntegerUtil;
 
+import java.lang.Deprecated;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -16,7 +18,10 @@ import static com.zifang.util.core.Const.Symbol.REGEX_SPOT;
 /**
  * 日期时间工具类
  * <p>提供日期解析、格式化、时间戳转换等功能，支持多种日期格式</p>
+ *
+ * @deprecated 请使用 {@link com.zifang.util.core.time.DateUtil} 或其他 core.time 包下的工具类
  */
+@Deprecated
 public class DateUtil {
     public static final String DATE_FORMAT_WHIFFLETREE_SECOND = "yyyy-MM-dd HH:mm:ss";
     public static final String DATE_FORMAT_WHIFFLETREE_DAY = "yyyy-MM-dd";
