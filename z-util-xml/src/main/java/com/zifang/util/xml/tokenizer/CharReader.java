@@ -71,11 +71,6 @@ public class CharReader {
         }
     }
 
-    /** Debug: get current position */
-    public int getPos() { return pos; }
-    /** Debug: get char at current position without advancing */
-    public char peekPos() { return pos < size ? buffer[pos] : (char)-1; }
-
     /**
      * 是否还有更多字符。
      */
