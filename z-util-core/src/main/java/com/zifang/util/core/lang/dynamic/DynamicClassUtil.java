@@ -11,6 +11,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * 动态类解析和生成工具类。
+ * <p>
+ * 提供将 Class 解析为 DynamicClass 结构，以及从 DynamicClass 生成源码的能力。
+ *
+ * @author zifang
+ * @see DynamicClass
+ * @see DynamicField
+ * @see DynamicMethod
+ */
 public class DynamicClassUtil {
 
     public static DynamicClass parser(Class<?> clazz) {

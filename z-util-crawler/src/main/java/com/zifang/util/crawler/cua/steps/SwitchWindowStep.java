@@ -6,7 +6,12 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
  * 切换步骤，用于在窗口、frame 或标签页之间切换。
+ * <p>
  * 任务关键字：switch，参数：{type: window|frame|tab, target}
+ * 支持在浏览器多窗口、多标签页和 iframe 之间切换上下文。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class SwitchWindowStep implements Step {
 

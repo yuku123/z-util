@@ -54,7 +54,7 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
-    public void testToStringWithCharset() {
+    public void testToStringWithCharset() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         byte[] data = "中文测试".getBytes("GBK");
         out.write(data, 0, data.length);
@@ -62,14 +62,14 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
-    public void testToStringWithCharsetObject() {
+    public void testToStringWithCharsetObject() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write("hello".getBytes());
         assertEquals("hello", out.toString(java.nio.charset.StandardCharsets.UTF_8));
     }
 
     @Test
-    public void testReset() {
+    public void testReset() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write("hello".getBytes());
         assertEquals(5, out.size());
@@ -79,7 +79,7 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
-    public void testCloseIsNoOp() {
+    public void testCloseIsNoOp() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write("before close".getBytes());
         out.close(); // no-op
@@ -120,7 +120,7 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
-    public void testConstructorWithInitialSize() {
+    public void testConstructorWithInitialSize() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream(2048);
         byte[] data = "init".getBytes();
         out.write(data);

@@ -6,7 +6,12 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
  * 点击步骤，用于点击页面元素。
+ * <p>
  * 任务关键字：click，参数：{css, waitMs}
+ * 支持点击后等待指定毫秒数，适用于点击后页面跳转场景。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class ClickStep implements Step {
 

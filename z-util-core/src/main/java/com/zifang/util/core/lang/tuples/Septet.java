@@ -1,5 +1,18 @@
 package com.zifang.util.core.lang.tuples;
 
+/**
+ * 七元组，包含7个元素的不可变元组。
+ *
+ * @author zifang
+ * @param <A> 第一个元素类型
+ * @param <B> 第二个元素类型
+ * @param <C> 第三个元素类型
+ * @param <D> 第四个元素类型
+ * @param <E> 第五个元素类型
+ * @param <F> 第六个元素类型
+ * @param <G> 第七个元素类型
+ * @see Sextet
+ */
 public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
     protected G g;
 

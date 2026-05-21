@@ -12,6 +12,12 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 基于 OkHttp 的 HTTP 客户端，支持重试、Cookie 管理、代理支持和可配置超时。
+ * <p>
+ * 为爬虫场景设计的 HTTP 客户端，提供 GET/POST 请求、文件下载等功能，
+ * 内置自动重试机制和内存 Cookie 管理。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class CrawlerHttpClient {
 

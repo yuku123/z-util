@@ -9,6 +9,14 @@ import java.awt.event.MouseEvent;
 /**
  * 圆形动画可视化器
  * 演示带碰撞检测的圆形动画效果
+ * 特点：
+ * 1. 多个圆形随机运动，带边界碰撞检测
+ * 2. 支持空格键暂停/继续动画
+ * 3. 支持鼠标点击切换圆形填充状态
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 2020-01-01
  */
 public class AlgoVisualizer {
 
@@ -18,9 +26,10 @@ public class AlgoVisualizer {
 
     /**
      * 创建可视化器
-     * @param sceneWidth 场景宽度
-     * @param sceneHeight 场景高度
-     * @param N 圆形数量
+     *
+     * @param sceneWidth  场景宽度（像素）
+     * @param sceneHeight 场景高度（像素）
+     * @param N           圆形数量
      */
     public AlgoVisualizer(int sceneWidth, int sceneHeight, int N) {
 
@@ -46,6 +55,7 @@ public class AlgoVisualizer {
 
     /**
      * 动画循环
+     * 持续更新圆形位置并渲染画面
      */
     private void run() {
 
@@ -105,6 +115,12 @@ public class AlgoVisualizer {
         }
     }
 
+    /**
+     * 主方法，程序入口
+     * 创建宽度800、高度800的可视化窗口，包含10个随机运动的圆形
+     *
+     * @param args 命令行参数（未使用）
+     */
     public static void main(String[] args) {
 
         int sceneWidth = 800;

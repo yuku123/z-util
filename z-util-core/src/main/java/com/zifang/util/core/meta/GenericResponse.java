@@ -1,5 +1,14 @@
 package com.zifang.util.core.meta;
 
+/**
+ * 通用响应封装类，包含泛型数据。
+ * <p>
+ * 用于 API 响应数据的统一封装，提供 Builder 模式构建响应对象。
+ *
+ * @author zifang
+ * @param <T> 数据类型
+ * @see BaseResponse
+ */
 public class GenericResponse<T> extends BaseResponse {
 
     private T data;

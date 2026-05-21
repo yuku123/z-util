@@ -2,6 +2,12 @@ package com.zifang.util.crawler.cua;
 
 /**
  * 单个步骤执行结果对象。
+ * <p>
+ * 记录步骤执行的名称、成败状态、输出结果、错误信息和执行耗时，
+ * 支持 Builder 模式构建，用于 CUA 执行过程中的步骤结果传递。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class StepResult {
 

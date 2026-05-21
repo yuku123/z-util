@@ -9,6 +9,12 @@ import java.util.Set;
 
 /**
  * 基于 Selenium WebDriver 的浏览器自动化客户端，为 CUA 层提供高级浏览器操作。
+ * <p>
+ * 该类封装了常用的 Selenium WebDriver 操作，包括页面导航、元素交互、
+ * 等待条件、窗口切换、截图等功能，为上层 CUA 提供简洁的API。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class BrowserClient {
 

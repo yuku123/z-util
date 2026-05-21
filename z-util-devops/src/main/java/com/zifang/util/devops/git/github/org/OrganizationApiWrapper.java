@@ -17,6 +17,12 @@ import java.util.Map;
 
 /**
  * GitHub Organization API 封装
+ * <p>
+ * 提供GitHub组织（Organization）相关操作的封装，
+ * 包括组织信息查询、成员管理、团队管理、仓库管理等。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class OrganizationApiWrapper {
 

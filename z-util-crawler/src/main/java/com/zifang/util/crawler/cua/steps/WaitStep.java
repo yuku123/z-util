@@ -6,7 +6,12 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
  * 等待步骤，用于在执行过程中等待。
+ * <p>
  * 任务关键字：wait，参数：{type: time|element|script, target, timeoutSec}
+ * 支持固定时间等待、元素出现等待、元素可见等待和脚本执行后等待。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class WaitStep implements Step {
 

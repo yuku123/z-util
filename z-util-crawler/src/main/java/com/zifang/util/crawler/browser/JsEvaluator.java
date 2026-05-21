@@ -5,6 +5,12 @@ import org.openqa.selenium.WebDriver;
 
 /**
  * WebDriver.executeScript() 的简单封装。
+ * <p>
+ * 提供同步和异步 JavaScript 执行功能，
+ * 简化在 Selenium 测试中对 JavaScript 的调用。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class JsEvaluator {
 

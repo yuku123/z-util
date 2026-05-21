@@ -8,6 +8,15 @@ import com.fasterxml.jackson.databind.ser.std.NumberSerializers;
 
 import java.io.IOException;
 
+/**
+ * Jackson 序列化器，用于保持 Long 类型数值不丢失精度。
+ * <p>
+ * 在某些 JavaScript 环境中，Long 类型数值可能超过 JavaScript Number 的安全整数范围，
+ * 此序列化器确保 Long 值以完整精度输出。
+ *
+ * @author zifang
+ * @see NumberSerializers.Base
+ */
 @JacksonStdImpl
 public class KeepLongSerializer extends NumberSerializers.Base<Object> {
 

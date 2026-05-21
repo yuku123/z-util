@@ -2,6 +2,15 @@ package com.zifang.util.core.lang.converter;
 
 import com.zifang.util.core.lang.tuples.Pair;
 
+/**
+ * 类型转换器接口。
+ * <p>
+ * 定义从类型 F 到类型 T 的转换方法。
+ *
+ * @author zifang
+ * @param <F> 源类型
+ * @param <T> 目标类型
+ */
 public interface IConverter<F, T> {
 
     default T to(F value){

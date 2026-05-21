@@ -19,7 +19,11 @@ import java.util.List;
 /**
  * Docker 命令封装客户端
  * <p>
- * 通过 docker CLI 执行命令，解析 JSON 输出
+ * 通过 docker CLI 执行命令，解析 JSON 输出，
+ * 提供容器、镜像、网络、卷等资源的完整管理操作。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class DockerClient {
 

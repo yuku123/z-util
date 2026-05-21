@@ -6,7 +6,12 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
  * 导航步骤，用于打开指定 URL。
+ * <p>
  * 任务关键字：navigate，参数：{url}
+ * 支持从参数或上下文获取目标URL，执行浏览器页面导航。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class NavigateStep implements Step {
 

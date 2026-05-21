@@ -7,6 +7,12 @@ import java.util.Map;
 
 /**
  * CUA 执行管道中步骤的接口定义。
+ * <p>
+ * 定义步骤的基本行为，包括获取名称、设置参数和执行逻辑。
+ * 所有 CUA 内置步骤（NavigateStep、ClickStep 等）都实现此接口。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public interface Step {
 

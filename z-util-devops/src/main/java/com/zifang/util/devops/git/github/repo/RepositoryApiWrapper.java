@@ -14,6 +14,12 @@ import java.util.Map;
 
 /**
  * GitHub Repository API 封装
+ * <p>
+ * 提供GitHub仓库（Repository）相关操作的封装，
+ * 包括仓库创建、删除、查询、分支管理、Fork、Star等操作。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class RepositoryApiWrapper {
 

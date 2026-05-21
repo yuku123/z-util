@@ -52,6 +52,24 @@ public class Circle {
     }
 
     /**
+     * 检测边界碰撞
+     * 当圆形碰到边界时，反转相应的速度分量
+     *
+     * @param minx 最小X坐标
+     * @param miny 最小Y坐标
+     * @param maxx 最大X坐标
+     * @param maxy 最大Y坐标
+     */
+    private void checkCollision(int minx, int miny, int maxx, int maxy) {
+        if (x - r < minx || x + r > maxx) {
+            vx = -vx;
+        }
+        if (y - r < miny || y + r > maxy) {
+            vy = -vy;
+        }
+    }
+
+    /**
      * 检测指定点是否在圆内
      * 使用欧几里得距离公式判断点到圆心的距离是否小于等于半径
      *

@@ -70,13 +70,8 @@ public class Tokenizer {
 
     // ===== 标签尾部（属性、自闭合） =====
     private void readTagTail() throws IOException {
-        char ch = cr.peek();
-        while (ch != (char) -1) {
-            // consume whitespace first
-            if (isWhiteSpace(ch)) {
-                ch = cr.next();
-                continue;
-            }
+        while (cr.hasMore()) {
+            char ch = cr.peek();
             if (ch == '>') {
                 cr.next();
                 tokens.add(new Token(TokenType.TAG_CLOSE, ">"));
@@ -84,24 +79,31 @@ public class Tokenizer {
             }
             if (ch == '/') {
                 cr.next(); // consume '/'
-                char nch = cr.next();
-                if (nch != '>') throw new XmlParseException("Expected > after /");
+                ch = cr.next();
+                if (ch != '>') throw new XmlParseException("Expected > after /");
                 tokens.add(new Token(TokenType.TAG_SELF_CLOSE, "/>"));
                 return;
             }
+            if (ch == '<') {
+                // end of tag, let main loop handle '<'
+                return;
+            }
+            if (isWhiteSpace(ch)) {
+                cr.next();
+                continue;
+            }
             readAttribute();
-            ch = cr.peek();
         }
     }
 
     // ===== 属性 =====
     private void readAttribute() throws IOException {
         char ch = cr.peek();
-        if (ch == '>' || ch == '/') return; // tail handles
+        if (ch == '<' || ch == '>' || ch == '/') return; // tail handles or markup start
 
         // attribute name
         StringBuilder name = new StringBuilder();
-        while (ch != (char) -1 && !isWhiteSpace(ch) && ch != '=' && ch != '>' && ch != '/') {
+        while (ch != (char) -1 && !isWhiteSpace(ch) && ch != '=' && ch != '>' && ch != '/' && ch != '<') {
             name.append(cr.next());
             ch = cr.peek();
         }
@@ -111,6 +113,8 @@ public class Tokenizer {
         ch = skipWs(ch);
         if (ch != '=') {
             // valueless attribute: e.g., disabled
+            // consume one char (whitespace or '/') before returning
+            if (ch != (char) -1 && ch != '>' && ch != '<' && ch != '/') cr.next();
             tokens.add(new Token(TokenType.ATTRIBUTE, attrName + "="));
             return;
         }

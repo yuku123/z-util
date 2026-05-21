@@ -1,5 +1,15 @@
 package com.zifang.util.core.lang.tuples;
 
+/**
+ * 元组工厂类。
+ * <p>
+ * 提供创建各种元组对象的静态方法。
+ *
+ * @author zifang
+ * @see Unit
+ * @see Pair
+ * @see Triplet
+ */
 public class Tuples {
 
      public static <A> Unit<A> of(A a){

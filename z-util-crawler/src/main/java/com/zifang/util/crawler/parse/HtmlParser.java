@@ -10,6 +10,12 @@ import java.util.List;
 
 /**
  * 使用 Jsoup 进行 CSS 选择器提取的 HTML 解析器。
+ * <p>
+ * 提供静态方法解析 HTML 字符串，支持通过 CSS 选择器提取文本内容、
+ * 属性值，以及返回 Jsoup Document 对象进行更复杂的操作。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class HtmlParser {
 

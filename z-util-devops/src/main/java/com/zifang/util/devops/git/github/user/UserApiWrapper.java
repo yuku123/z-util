@@ -11,6 +11,12 @@ import java.util.List;
 
 /**
  * GitHub User API 封装
+ * <p>
+ * 提供GitHub用户相关操作的封装，
+ * 包括获取用户信息、仓库列表、Star列表、关注者管理等功能。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class UserApiWrapper {
 

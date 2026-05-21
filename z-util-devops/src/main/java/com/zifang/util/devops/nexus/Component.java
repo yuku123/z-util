@@ -7,6 +7,12 @@ import java.util.Objects;
 
 /**
  * Maven组件
+ * <p>
+ * 用于表示Nexus仓库中的Maven构件（Component），
+ * 包含构件的ID、仓库名称、组ID、构件名、版本号、格式等信息。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class Component implements Comparable<Component> {
 

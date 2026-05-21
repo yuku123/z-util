@@ -14,6 +14,12 @@ import java.util.List;
 
 /**
  * GitHub Actions API 封装
+ * <p>
+ * 提供GitHub Actions相关操作的封装，
+ * 包括Workflow管理、Workflow Run执行、Job查询、Artifact管理等。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class ActionApiWrapper {
 

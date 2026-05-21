@@ -7,6 +7,11 @@ import java.awt.event.MouseAdapter;
 /**
  * 算法可视化器（模板类）
  * 提供算法可视化的基础框架结构
+ * 可作为创建自定义算法可视化器的父类
+ *
+ * @author zifang
+ * @version 1.0
+ * @since 2020-01-01
  */
 public class AlgoVisualizer {
 
@@ -15,8 +20,9 @@ public class AlgoVisualizer {
 
     /**
      * 创建可视化器
-     * @param sceneWidth 场景宽度
-     * @param sceneHeight 场景高度
+     *
+     * @param sceneWidth  场景宽度（像素）
+     * @param sceneHeight 场景高度（像素）
      */
     public AlgoVisualizer(int sceneWidth, int sceneHeight) {
 
@@ -50,6 +56,12 @@ public class AlgoVisualizer {
     private class AlgoMouseListener extends MouseAdapter {
     }
 
+    /**
+     * 主方法，程序入口
+     * 创建一个宽度800、高度800的可视化窗口
+     *
+     * @param args 命令行参数（未使用）
+     */
     public static void main(String[] args) {
 
         int sceneWidth = 800;

@@ -5,6 +5,12 @@ import java.util.Map;
 
 /**
  * Docker 容器信息
+ * <p>
+ * 用于封装Docker容器的完整元数据信息，
+ * 包括容器ID、名称、镜像、状态、端口映射、标签、网络等属性。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class ContainerDTO {
 

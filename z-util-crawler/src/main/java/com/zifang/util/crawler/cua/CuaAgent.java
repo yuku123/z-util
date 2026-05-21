@@ -8,7 +8,13 @@ import org.openqa.selenium.WebDriver;
 
 /**
  * CUA（计算机使用代理）主入口类。
+ * <p>
  * 使用基于规则的规划和浏览器自动化执行自然语言任务。
+ * 整合操作注册表、规则规划器和浏览器客户端，
+ * 提供面向自然语言描述的高级自动化能力。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class CuaAgent {
 

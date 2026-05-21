@@ -7,6 +7,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 /**
  * ChromeDriver 单例持有类，支持懒加载和自动下载。
+ * <p>
+ * 使用 WebDriverManager 自动管理 ChromeDriver 版本，
+ * 确保与本地 Chrome 浏览器版本匹配。支持 headless 模式运行。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class ChromeDriverHolder {
 

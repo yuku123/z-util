@@ -4,8 +4,20 @@ import com.zifang.util.json.model.JsonObject;
 import com.zifang.util.json.model.JsonArray;
 
 /**
- * 手写 JSON 解析器，直接基于 token 流，无需 G4 引擎。
- * 支持: null/true/false, Number(含科学计数法), String(含转义), 嵌套对象/数组, 空白字符
+ * 手写 JSON 解析器，直接基于字符流解析，无需外部词法分析工具。
+ * <p>
+ * 支持的JSON元素：
+ * <ul>
+ *   <li>null、true、false</li>
+ *   <li>数字（包含科学计数法）</li>
+ *   <li>字符串（包含转义字符）</li>
+ *   <li>嵌套对象和数组</li>
+ *   <li>空白字符</li>
+ * </ul>
+ *
+ * @author zifang
+ * @see com.zifang.util.json.model.JsonObject
+ * @see com.zifang.util.json.model.JsonArray
  */
 public class DslJsonParser {
 
@@ -14,6 +26,12 @@ public class DslJsonParser {
     private int len;
     private char c;
 
+    /**
+     * 解析JSON字符串，返回JsonObject或JsonArray。
+     *
+     * @param json JSON字符串
+     * @return 解析后的JsonObject或JsonArray实例
+     */
     public Object parse(String json) {
         this.s = json;
         this.pos = -1;

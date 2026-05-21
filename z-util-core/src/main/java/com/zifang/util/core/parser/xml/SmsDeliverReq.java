@@ -5,6 +5,15 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+/**
+ * SMS 短信下发请求XML结构。
+ * <p>
+ * 对应 SMSDELIVERREQ 根节点，包含请求头和短信内容列表。
+ *
+ * @author zifang
+ * @see ReqHeader
+ * @see SmsBody
+ */
 @XmlRootElement(name = "SMSDELIVERREQ")
 public class SmsDeliverReq {
 

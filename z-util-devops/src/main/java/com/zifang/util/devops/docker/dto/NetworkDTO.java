@@ -4,6 +4,12 @@ import java.util.Map;
 
 /**
  * Docker 网络信息
+ * <p>
+ * 用于封装Docker网络（Network）的完整元数据信息，
+ * 包括网络ID、名称、驱动、作用域、子网、网关、标签等属性。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class NetworkDTO {
 

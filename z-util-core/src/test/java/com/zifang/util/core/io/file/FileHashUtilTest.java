@@ -75,12 +75,12 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testMd5Null() {
+    public void testMd5Null() throws Exception {
         FileHashUtil.md5(null);
     }
 
     @Test(expected = IOException.class)
-    public void testMd5NonExistent() {
+    public void testMd5NonExistent() throws Exception {
         FileHashUtil.md5(new File("/non/existent/file.txt"));
     }
 
@@ -94,12 +94,12 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSha1Null() {
+    public void testSha1Null() throws Exception {
         FileHashUtil.sha1(null);
     }
 
     @Test(expected = IOException.class)
-    public void testSha1NonExistent() {
+    public void testSha1NonExistent() throws Exception {
         FileHashUtil.sha1(new File("/non/existent/file.txt"));
     }
 
@@ -127,12 +127,12 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSha256Null() {
+    public void testSha256Null() throws Exception {
         FileHashUtil.sha256(null);
     }
 
     @Test(expected = IOException.class)
-    public void testSha256NonExistent() {
+    public void testSha256NonExistent() throws Exception {
         FileHashUtil.sha256(new File("/non/existent/file.txt"));
     }
 
@@ -278,12 +278,12 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testFileTypeNull() {
+    public void testFileTypeNull() throws Exception {
         FileHashUtil.fileType(null);
     }
 
     @Test(expected = IOException.class)
-    public void testFileTypeNonExistent() {
+    public void testFileTypeNonExistent() throws Exception {
         FileHashUtil.fileType(new File("/non/existent/file.txt"));
     }
 
@@ -359,7 +359,7 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IOException.class)
-    public void testIsImageNonExistent() {
+    public void testIsImageNonExistent() throws Exception {
         FileHashUtil.isImage(new File("/non/existent/file.txt"));
     }
 }

@@ -11,6 +11,12 @@ import java.util.List;
 
 /**
  * 爬虫管道编排器，协调 HTTP 请求、HTML/JSON 解析和处理器执行。
+ * <p>
+ * 负责调度整个爬虫流程：发送 HTTP 请求、解析响应内容、
+ * 按顺序执行注册的处理器，最终返回包含提取结果的上下文对象。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class CrawlerPipeline {
 

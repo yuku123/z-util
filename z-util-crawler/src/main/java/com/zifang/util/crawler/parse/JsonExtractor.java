@@ -10,6 +10,12 @@ import java.util.List;
 
 /**
  * 使用 json-simple 进行 JSON 路径提取的 JSON 解析器。
+ * <p>
+ * 支持点号路径语法（如 "data.name" 或 "items[0].title"），
+ * 可提取单个值或所有匹配项，用于结构化数据的快速提取。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class JsonExtractor {
 

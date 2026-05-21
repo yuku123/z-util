@@ -4,12 +4,37 @@ import com.zifang.util.json.exception.JsonParseException;
 
 import java.io.IOException;
 
+/**
+ * JSON 词法分析器，将JSON字符串分解为Token序列。
+ * <p>
+ * 采用递归下降方式进行词法分析，支持以下JSON语法元素：
+ * <ul>
+ *   <li>对象：{@code { key: value, ... }}</li>
+ *   <li>数组：{@code [ value, ... ]}</li>
+ *   <li>字符串：支持转义字符和Unicode</li>
+ *   <li>数字：支持整数、浮点数、科学计数法</li>
+ *   <li>布尔值：true、false</li>
+ *   <li>null值</li>
+ * </ul>
+ *
+ * @author zifang
+ * @see Token
+ * @see TokenList
+ * @see CharReader
+ */
 public class Tokenizer {
 
     private CharReader charReader;
 
     private TokenList tokens;
 
+    /**
+     * 对给定的字符流进行词法分析，生成Token列表。
+     *
+     * @param charReader 字符读取器
+     * @return 生成的Token列表
+     * @throws IOException 如果读取过程中发生I/O错误
+     */
     public TokenList tokenize(CharReader charReader) throws IOException {
         this.charReader = charReader;
         tokens = new TokenList();

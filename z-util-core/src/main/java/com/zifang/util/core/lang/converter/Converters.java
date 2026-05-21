@@ -13,6 +13,15 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 类型转换器注册与管理中心。
+ * <p>
+ * 提供转换器的查找、注册和管理功能，支持基本类型、包装类型和自定义类型之间的转换。
+ *
+ * @author zifang
+ * @see IConverter
+ * @see ConvertCaller
+ */
 public class Converters {
 
     private static final Map<Pair<Class<?>,Class<?>>,IConverter<?,?>> converterCache = new HashMap<>();

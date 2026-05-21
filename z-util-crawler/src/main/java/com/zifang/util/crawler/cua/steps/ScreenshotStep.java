@@ -8,7 +8,12 @@ import java.io.File;
 
 /**
  * 截图步骤，用于截取页面快照。
+ * <p>
  * 任务关键字：screenshot，参数：{path, fullPage}
+ * 支持普通截图和整页截图，可指定保存路径。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class ScreenshotStep implements Step {
 

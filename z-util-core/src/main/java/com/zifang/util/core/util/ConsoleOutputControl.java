@@ -2,6 +2,16 @@ package com.zifang.util.core.util;
 
 import java.util.HashMap;
 
+/**
+ * 控制台彩色输出工具类。
+ * <p>
+ * 提供在终端输出彩色文字和背景的方法，基于 ANSI 转义序列实现。
+ * <p>
+ * 支持的颜色包括：红色、绿色、黄色、蓝色、紫色、青色、灰色等。
+ *
+ * @author zifang
+ * @see <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI Escape Code</a>
+ */
 public class ConsoleOutputControl {
 
     private static final HashMap<Integer,String> colorMap = new HashMap<Integer,String>(){

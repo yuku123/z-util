@@ -4,6 +4,12 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * GitHub API 配置
+ * <p>
+ * 用于配置GitHub API连接的认证信息和端点地址，
+ * 支持标准GitHub.com和企业版GitHub Enterprise。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class GithubConfig {
 

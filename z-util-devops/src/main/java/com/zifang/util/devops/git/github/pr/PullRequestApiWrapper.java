@@ -15,6 +15,12 @@ import java.util.List;
 
 /**
  * GitHub Pull Request API 封装
+ * <p>
+ * 提供GitHub Pull Request相关操作的封装，
+ * 包括PR的创建、更新、关闭、合并、Review管理、评论等功能。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class PullRequestApiWrapper {
 

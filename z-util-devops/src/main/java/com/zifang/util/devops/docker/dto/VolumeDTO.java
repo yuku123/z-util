@@ -4,6 +4,12 @@ import java.util.Map;
 
 /**
  * Docker 卷信息
+ * <p>
+ * 用于封装Docker卷（Volume）的完整元数据信息，
+ * 包括卷名称、驱动、本地挂载点、作用域、标签、创建时间等属性。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class VolumeDTO {
 

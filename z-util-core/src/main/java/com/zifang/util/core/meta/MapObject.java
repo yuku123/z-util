@@ -3,6 +3,16 @@ package com.zifang.util.core.meta;
 import java.util.HashMap;
 import java.util.Optional;
 
+/**
+ * 泛型 Map 对象，提供便捷的类型转换取值方法。
+ * <p>
+ * 继承自 HashMap<String, Object>，内部存储 Object 类型值，
+ * 提供类型安全的 getString、getLong、getInteger 等方法，
+ * 避免手动类型转换和 NullPointerException。
+ *
+ * @author zifang
+ * @see HashMap
+ */
 public class MapObject extends HashMap<String, Object> {
 
     private static final long serialVersionUID = 5070417008655524317L;

@@ -8,6 +8,12 @@ import java.io.IOException;
 
 /**
  * GitHub 客户端单例持有者
+ * <p>
+ * 负责GitHub API客户端的初始化和单例管理，
+ * 支持从环境变量或自定义配置创建客户端实例。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class GithubApiHolder {
 

@@ -10,6 +10,14 @@ import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+/**
+ * XML 与 Java Bean 转换工具类。
+ * <p>
+ * 基于 JAXB 实现 Bean 到 XML 字符串的 marshal，以及 XML 字符串到 Bean 的 unmarshal。
+ *
+ * @author zifang
+ * @see JAXBContext
+ */
 public class XmlBeanUtil {
 
     private static final Logger log = LoggerFactory.getLogger(XmlBeanUtil.class);

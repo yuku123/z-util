@@ -13,7 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * nexus组件管理
+ * Nexus组件管理器
+ * <p>
+ * 提供Nexus仓库组件的搜索、查询、删除等管理功能，
+ * 支持GAV坐标查询和组件存在性检查。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class NexusComponentManager {
 

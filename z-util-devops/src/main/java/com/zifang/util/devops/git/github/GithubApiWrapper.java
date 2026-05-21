@@ -12,6 +12,12 @@ import org.kohsuke.github.GitHub;
 
 /**
  * GitHub API 总入口，统一提供各子模块的封装接口。
+ * <p>
+ * 入口类，提供获取各种GitHub API封装对象的静态方法，
+ * 包括RepositoryApiWrapper、IssueApiWrapper、PullRequestApiWrapper等。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class GithubApiWrapper {
 

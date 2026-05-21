@@ -7,6 +7,12 @@ import java.util.Map;
 
 /**
  * 操作注册表，负责将任务关键字映射到 Step 实现类。
+ * <p>
+ * 维护步骤关键字到具体 Step 实现类的映射关系，
+ * 支持内置步骤自动注册和用户自定义步骤扩展。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class OperationRegistry {
 

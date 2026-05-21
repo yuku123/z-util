@@ -17,6 +17,12 @@ import java.util.List;
 
 /**
  * GitHub Issue API 封装
+ * <p>
+ * 提供GitHub Issue相关操作的封装，
+ * 包括Issue的创建、更新、关闭、标签管理、评论管理、 assignee管理等功能。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class IssueApiWrapper {
 

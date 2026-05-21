@@ -15,6 +15,12 @@ import java.util.List;
 
 /**
  * GitHub Release API 封装
+ * <p>
+ * 提供GitHub Release相关操作的封装，
+ * 包括Release的创建、更新、删除、查询，以及Asset的上传和管理。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class ReleaseApiWrapper {
 

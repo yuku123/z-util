@@ -7,6 +7,12 @@ import java.util.List;
 
 /**
  * CUA 代理执行结果对象，包含执行状态、步骤结果列表和上下文信息。
+ * <p>
+ * 封装整个 CUA 任务执行的完整结果，
+ * 包括所有步骤的执行详情、最终成功状态和关联的管道上下文。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class CuResult {
 

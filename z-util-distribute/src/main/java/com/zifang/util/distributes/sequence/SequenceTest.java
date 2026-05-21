@@ -4,6 +4,15 @@ package com.zifang.util.distributes.sequence;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Sequence序列号生成器并发测试类
+ * <p>
+ * 测试在多线程并发场景下Sequence生成的ID是否唯一。
+ * 启动两个线程分别使用不同的workerId生成ID，验证是否存在重复ID。
+ *
+ * @author zifang
+ * @see Sequence
+ */
 public class SequenceTest {
 
     public static void main(String[] args) {

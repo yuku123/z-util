@@ -13,7 +13,12 @@ import java.util.List;
 
 /**
  * 数据提取步骤，用于从页面中提取数据。
+ * <p>
  * 任务关键字：extract，参数：{css, attr, multiple, asJson}
+ * 支持通过 CSS 选择器提取文本或属性值，可单选或多选。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class ExtractStep implements Step {
 

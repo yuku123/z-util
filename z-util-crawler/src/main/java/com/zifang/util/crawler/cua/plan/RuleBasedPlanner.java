@@ -14,6 +14,13 @@ import java.util.regex.Pattern;
 
 /**
  * 基于规则的规划器，将自然语言任务描述映射为步骤序列。
+ * <p>
+ * 通过预定义的正则规则匹配任务描述，
+ * 将匹配的任务转换为具体的步骤执行序列，
+ * 支持用户自定义规则扩展。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class RuleBasedPlanner {
 

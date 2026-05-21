@@ -7,11 +7,29 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 手写 JsonPath 执行器，不依赖有问题的 DynamicParser G4 引擎。
- * 支持: $.key, $.arr[0], $..key, $.arr[*], $.arr[1:3]
+ * 手写 JsonPath 执行器，支持JSON数据的路径查询。
+ * <p>
+ * 支持的JsonPath语法：
+ * <ul>
+ *   <li>{@code $.key} - 对象属性访问</li>
+ *   <li>{@code $.arr[0]} - 数组索引访问</li>
+ *   <li>{@code $..key} - 递归下降属性搜索</li>
+ *   <li>{@code $.arr[*]} - 数组全量访问</li>
+ *   <li>{@code $.arr[1:3]} - 数组切片</li>
+ *   <li>{@code [?(@.price < 10)]} - 过滤表达式</li>
+ * </ul>
+ *
+ * @author zifang
  */
 public class JsonPathParser {
 
+    /**
+     * 在JSON字符串上执行JsonPath查询。
+     *
+     * @param json JSON字符串
+     * @param path JsonPath表达式
+     * @return 匹配结果的列表
+     */
     public List<Object> query(String json, String path) {
         Object doc = new DslJsonParser().parse(json);
         List<Object> results = new ArrayList<>();

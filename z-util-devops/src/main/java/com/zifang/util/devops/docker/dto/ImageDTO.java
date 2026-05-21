@@ -5,6 +5,12 @@ import java.util.Map;
 
 /**
  * Docker 镜像信息
+ * <p>
+ * 用于封装Docker镜像（Image）的完整元数据信息，
+ * 包括镜像ID、仓库名、标签、创建时间、大小、标签列表等属性。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class ImageDTO {
 

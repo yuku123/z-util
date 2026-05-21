@@ -4,6 +4,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
+/**
+ * 标题请求XML结构。
+ * <p>
+ * 对应 RequestOrder 根节点，包含区域信息列表。
+ *
+ * @author zifang
+ */
 @XmlRootElement(name = "RequestOrder")
 public class TitleRequest {
 

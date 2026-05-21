@@ -7,9 +7,15 @@ import com.zifang.util.json.tokenizer.Token;
 import com.zifang.util.json.tokenizer.TokenList;
 import com.zifang.util.json.tokenizer.TokenType;
 
-
 /**
+ * JSON解析器，将Token列表递归下降解析为JsonObject或JsonArray。
+ * <p>
+ * 采用递归下降解析算法，依次读取Token并构建JSON对象模型。
+ *
  * @author zifang
+ * @see com.zifang.util.json.tokenizer.Tokenizer
+ * @see com.zifang.util.json.model.JsonObject
+ * @see com.zifang.util.json.model.JsonArray
  */
 public class Parser {
 
@@ -26,6 +32,12 @@ public class Parser {
 
     private TokenList tokens;
 
+    /**
+     * 解析Token列表，生成JsonObject或JsonArray。
+     *
+     * @param tokens Token列表
+     * @return 解析后的JsonObject或JsonArray对象
+     */
     public Object parse(TokenList tokens) {
         this.tokens = tokens;
         return parse();

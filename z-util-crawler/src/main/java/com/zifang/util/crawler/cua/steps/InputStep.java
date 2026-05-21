@@ -6,7 +6,12 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 
 /**
  * 输入步骤，用于向输入框填写文本。
+ * <p>
  * 任务关键字：input，参数：{css, text, clearFirst}
+ * 支持先清空再输入，可控制是否清空输入框内容。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class InputStep implements Step {
 

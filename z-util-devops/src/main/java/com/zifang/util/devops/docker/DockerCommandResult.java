@@ -6,9 +6,11 @@ import java.util.List;
 /**
  * Docker 命令执行结果封装
  * <p>
- * 泛型封装 Docker 命令执行的成功/失败状态、标准输出、标准错误和附加数据
+ * 泛型封装 Docker 命令执行的成功/失败状态、标准输出、标准错误和附加数据。
  *
  * @param <T> 结果数据类型
+ * @author zifang
+ * @version 1.0.0
  */
 public class DockerCommandResult<T> {
 

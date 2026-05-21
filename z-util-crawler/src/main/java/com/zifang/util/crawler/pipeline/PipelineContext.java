@@ -6,6 +6,12 @@ import java.util.Map;
 
 /**
  * 爬虫管道执行上下文持有类，包含请求元数据、提取数据、错误信息、截图和自定义元数据。
+ * <p>
+ * 在管道执行过程中在各个处理器之间传递，
+ * 累积 HTTP 响应、解析结果、提取数据、错误信息和截图等。
+ *
+ * @author zifang
+ * @version 1.0.0
  */
 public class PipelineContext {
 
