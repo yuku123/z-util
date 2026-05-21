@@ -36,9 +36,17 @@ public class AlgoVisualizer {
     private void run() {
     }
 
+    /**
+     * 键盘事件监听器内部类
+     * 预留用于处理键盘输入事件
+     */
     private class AlgoKeyListener extends KeyAdapter {
     }
 
+    /**
+     * 鼠标事件监听器内部类
+     * 预留用于处理鼠标点击事件
+     */
     private class AlgoMouseListener extends MouseAdapter {
     }
 

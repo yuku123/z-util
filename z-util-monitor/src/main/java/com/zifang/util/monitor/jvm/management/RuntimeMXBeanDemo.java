@@ -12,6 +12,10 @@ import java.util.List;
 
 /**
  * 用于 Java 虚拟机运行时参数及其它信息接口。
+ * <p>
+ * 该MXBean提供查看JVM运行时信息的方法，包括启动时间、系统属性、输入参数等。
+ *
+ * @author zifang
  */
 public class RuntimeMXBeanDemo {
 

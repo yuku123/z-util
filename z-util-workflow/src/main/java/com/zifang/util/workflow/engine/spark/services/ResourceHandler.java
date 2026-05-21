@@ -10,6 +10,20 @@
 //import java.util.Map;
 //import java.util.Properties;
 //
+///**
+// * 资源处理器（占位实现）。
+// * <p>
+// * 该处理器是占位实现，具体逻辑待扩展。
+// * 用于处理各种数据资源的输入输出，包括：
+// * <ul>
+// *   <li>本地文件读写</li>
+// *   <li>MySQL数据库读写</li>
+// *   <li>Hive表读写</li>
+// * </ul>
+// *
+// * @see AbstractSparkEngineService
+// * @see CacheEngineService
+// */
 //@EngineService(name = "engine.service.resourceHandler")
 //public class ResourceHandler extends AbstractSparkEngineService {
 //

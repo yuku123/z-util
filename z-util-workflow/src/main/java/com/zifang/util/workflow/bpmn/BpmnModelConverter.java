@@ -13,39 +13,33 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Converter that transforms BpmnDiagram to WorkflowConfiguration.
+ * BPMN模型到工作流配置的转换器。
+ * <p>
+ * 将BpmnDiagram模型转换为WorkflowConfiguration，实现BPMN流程定义到工作流配置的转换。
+ * <p>
+ * 支持的BPMN节点类型：
+ * <ul>
+ *   <li>startEvent, endEvent, userTask, serviceTask, scriptTask, manualTask</li>
+ *   <li>exclusiveGateway, parallelGateway, inclusiveGateway</li>
+ *   <li>callActivity (子流程)</li>
+ * </ul>
+ * <p>
+ * 节点类型映射：
+ * <ul>
+ *   <li>startEvent -> "startEvent"</li>
+ *   <li>endEvent -> "endEvent"</li>
+ *   <li>userTask -> "userTask"</li>
+ *   <li>serviceTask -> "serviceTask"</li>
+ *   <li>scriptTask -> "scriptTask"</li>
+ *   <li>manualTask -> "manualTask"</li>
+ *   <li>exclusiveGateway -> "exclusiveGateway"</li>
+ *   <li>parallelGateway -> "parallelGateway"</li>
+ *   <li>inclusiveGateway -> "inclusiveGateway"</li>
+ *   <li>callActivity -> "callActivity"</li>
+ * </ul>
  *
- * Supported BPMN node types:
- * - startEvent, endEvent, userTask, serviceTask, scriptTask, manualTask
- * - exclusiveGateway, parallelGateway, inclusiveGateway
- * - callActivity (sub-process)
- *
- * Supported BPMN attributes:
- * - id, name, documentation
- * - sequenceFlow with sourceRef, targetRef, conditionExpression, default
- * - multiInstanceLoopCharacteristics (sequential/parallel)
- * - loopCharacteristics (standard loop)
- *
- * Node type mapping to internal types:
- * - startEvent -> "startEvent"
- * - endEvent -> "endEvent"
- * - userTask -> "userTask"
- * - serviceTask -> "serviceTask"
- * - scriptTask -> "scriptTask"
- * - manualTask -> "manualTask"
- * - exclusiveGateway -> "exclusiveGateway"
- * - parallelGateway -> "parallelGateway"
- * - inclusiveGateway -> "inclusiveGateway"
- * - callActivity -> "callActivity"
- *
- * Service unit mapping:
- * - userTask -> "userTaskHandler"
- * - serviceTask -> "serviceTaskHandler"
- * - scriptTask -> "scriptTaskHandler"
- * - manualTask -> "manualTaskHandler"
- * - exclusiveGateway / inclusiveGateway -> "gatewayHandler"
- * - parallelGateway -> "parallelGatewayHandler"
- * - callActivity -> "callActivityHandler"
+ * @see BpmnDiagram
+ * @see WorkflowConfiguration
  */
 public class BpmnModelConverter {
 

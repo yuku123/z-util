@@ -52,9 +52,11 @@ public class Circle {
     }
 
     /**
-     * 检测是否包含指定点
-     * @param p 坐标点
-     * @return 如果点在圆内返回true
+     * 检测指定点是否在圆内
+     * 使用欧几里得距离公式判断点到圆心的距离是否小于等于半径
+     *
+     * @param p 要检测的坐标点
+     * @return 如果点P在圆内（包括边界）返回true，否则返回false
      */
     public boolean contain(Point p) {
         return (x - p.x) * (x - p.x) + (y - p.y) * (y - p.y) <= r * r;

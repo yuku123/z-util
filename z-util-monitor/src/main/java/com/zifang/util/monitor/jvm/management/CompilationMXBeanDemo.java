@@ -11,6 +11,10 @@ import java.lang.management.ManagementFactory;
 
 /**
  * 用于 Java 虚拟机的编译系统的管理接口。
+ * <p>
+ * 该MXBean提供查看JIT编译器统计信息的方法。
+ *
+ * @author zifang
  */
 public class CompilationMXBeanDemo {
 

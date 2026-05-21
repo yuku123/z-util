@@ -16,6 +16,10 @@ import java.util.Set;
 
 /**
  * 用于 Java 虚拟机的内存管理接口。
+ * <p>
+ * 该MXBean提供查看内存管理器信息的方法。
+ *
+ * @author zifang
  */
 public class MemoryManagerMXBeanDemo {
 

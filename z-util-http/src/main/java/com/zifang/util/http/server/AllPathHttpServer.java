@@ -13,8 +13,28 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 全路径HTTP服务器
+ * <p>
+ * 一个简单的HTTP服务器示例，演示如何使用 {@link HttpServer} 处理所有路径的请求。
+ * 该服务器监听在指定端口，接收并响应所有进入的HTTP请求。
+ * </p>
+ *
+ * @author zifang
+ * @see HttpServer
+ * @see HttpHandler
+ */
 public class AllPathHttpServer {
 
+    /**
+     * 主方法，启动HTTP服务器。
+     * <p>
+     * 默认使用端口8848，绑定到所有路径（"/"）以接收所有请求。
+     * </p>
+     *
+     * @param args 命令行参数（未使用）
+     * @throws IOException 如果服务器创建或启动失败
+     */
     public static void main(String[] args) throws IOException {
         int port = 8848;
         // 创建HTTP服务器，绑定到8080端口
@@ -29,6 +49,15 @@ public class AllPathHttpServer {
     }
 
     // 处理所有路径和所有HTTP方法的处理器
+    /**
+     * 全局请求处理器
+     * <p>
+     * 该内部类实现了 {@link HttpHandler} 接口，用于处理所有进入的HTTP请求。
+     * 它会解析请求方法、路径、查询参数和请求体，并返回详细的响应信息。
+     * </p>
+     *
+     * @see HttpHandler
+     */
     static class AllRequestHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {

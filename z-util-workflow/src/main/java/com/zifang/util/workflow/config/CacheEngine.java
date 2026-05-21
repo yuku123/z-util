@@ -1,7 +1,12 @@
 package com.zifang.util.workflow.config;
 
 /**
- * 缓存引擎配置
+ * 缓存引擎配置。
+ * <p>
+ * 用于配置工作流的缓存机制，包括缓存引擎类型和服务标识。
+ * 支持多种缓存后端，如Redis、Memcached等。
+ *
+ * @see Configurations
  */
 public class CacheEngine {
 

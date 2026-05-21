@@ -10,7 +10,21 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 整个处理流的应用
+ * 工作流应用入口类。
+ * <p>
+ * 整个处理流的应用，负责创建和管理工作流上下文。
+ * 提供工作流上下文的创建、节点管理（增删改）、执行控制等功能。
+ * <p>
+ * 主要功能：
+ * <ul>
+ *   <li>创建工作流上下文</li>
+ *   <li>管理工作流节点（增加、删除、修改）</li>
+ *   <li>控制工作流执行（暂停、恢复、状态查询）</li>
+ *   <li>获取工作流上下文</li>
+ * </ul>
+ *
+ * @see WorkFlowApplicationContext
+ * @see com.zifang.util.workflow.config.WorkflowConfiguration
  */
 public class WorkFlowApplication {
 

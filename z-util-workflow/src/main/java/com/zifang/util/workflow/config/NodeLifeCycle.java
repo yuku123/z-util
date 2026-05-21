@@ -1,7 +1,20 @@
 package com.zifang.util.workflow.config;
 
 /**
- * 表达该节点的生命周期
+ * 节点生命周期接口。
+ * <p>
+ * 定义工作流节点的生命周期状态和回调方法。
+ * 实现此接口的类可以响应节点状态变化事件。
+ * <p>
+ * 状态常量：
+ * <ul>
+ *   <li>PREPARED - 准备就绪状态</li>
+ *   <li>STARTED - 运行状态</li>
+ *   <li>INTERRRUPTED - 被强行中止状态</li>
+ *   <li>EXECUTED - 执行完毕状态</li>
+ * </ul>
+ *
+ * @see ExecutableWorkflowNode
  */
 public interface NodeLifeCycle {
 

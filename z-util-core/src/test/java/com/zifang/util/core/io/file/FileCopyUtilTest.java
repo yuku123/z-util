@@ -148,7 +148,7 @@ public class FileCopyUtilTest {
         Files.write(srcFile2.toPath(), "content2".getBytes(StandardCharsets.UTF_8));
 
         File destDir = new File(tempBaseDir, "destdir");
-        FileCopyUtil.copyDir(srcDir, destDir);
+        FileCopyUtil.copyDir(srcDir, destDir.getAbsolutePath());
 
         assertTrue(destDir.exists());
         assertTrue(new File(destDir, "file1.txt").exists());
@@ -166,7 +166,7 @@ public class FileCopyUtilTest {
         Files.write(srcFile.toPath(), "nested content".getBytes(StandardCharsets.UTF_8));
 
         File destDir = new File(tempBaseDir, "destdir2");
-        FileCopyUtil.copyDir(srcDir, destDir);
+        FileCopyUtil.copyDir(srcDir, destDir.getAbsolutePath());
 
         assertTrue(new File(destDir, "subdir/nested.txt").exists());
         assertEquals("nested content", new String(Files.readAllBytes(new File(destDir, "subdir/nested.txt").toPath()), StandardCharsets.UTF_8));
@@ -175,7 +175,7 @@ public class FileCopyUtilTest {
     @Test(expected = NullPointerException.class)
     public void testCopyDirWithNullSrc() throws Exception {
         File destDir = new File(tempBaseDir, "dest-null-dir");
-        FileCopyUtil.copyDir(null, destDir);
+        FileCopyUtil.copyDir((File) null, (String) null);
     }
 
     @Test(expected = NullPointerException.class)
@@ -239,9 +239,8 @@ public class FileCopyUtilTest {
         InputStream in = new ByteArrayInputStream(data);
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
 
-        long count = FileCopyUtil.copyStream(in, out);
+        FileCopyUtil.copyStream(in, out);
 
-        assertEquals(data.length, count);
         assertArrayEquals(data, out.toByteArray());
     }
 
@@ -250,9 +249,8 @@ public class FileCopyUtilTest {
         InputStream in = new ByteArrayInputStream(new byte[0]);
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
 
-        long count = FileCopyUtil.copyStream(in, out);
+        FileCopyUtil.copyStream(in, out);
 
-        assertEquals(0, count);
         assertArrayEquals(new byte[0], out.toByteArray());
     }
 
@@ -265,9 +263,8 @@ public class FileCopyUtilTest {
         InputStream in = new ByteArrayInputStream(large);
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
 
-        long count = FileCopyUtil.copyStream(in, out);
+        FileCopyUtil.copyStream(in, out);
 
-        assertEquals(large.length, count);
         assertArrayEquals(large, out.toByteArray());
     }
 

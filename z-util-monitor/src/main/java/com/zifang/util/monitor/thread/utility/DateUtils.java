@@ -86,11 +86,11 @@ public final class DateUtils {
     }
 
     /**
-     * 根据时间戳，返回指定格式的日期时间字符串
+     * 根据时间戳，返回指定格式的日期时间字符串。
      *
-     * @param timestamp
-     * @param format
-     * @return
+     * @param timestamp 毫秒时间戳
+     * @param format    日期时间格式，如"yyyy-MM-dd HH:mm:ss"
+     * @return 格式化后的日期时间字符串
      */
     public static String getDateTimeString(long timestamp, String format) {
         SimpleDateFormat df = new SimpleDateFormat(format);
@@ -98,11 +98,11 @@ public final class DateUtils {
     }
 
     /**
-     * 日期转成字符串
+     * 将Date对象转换为指定格式的字符串。
      *
-     * @param date
-     * @param temp
-     * @return
+     * @param date  日期对象
+     * @param temp  日期格式，如"yyyy-MM-dd"
+     * @return 格式化后的日期字符串
      */
     public static String dateToStr(Date date, String temp) {
         SimpleDateFormat format = new SimpleDateFormat(temp);
@@ -111,11 +111,11 @@ public final class DateUtils {
     }
 
     /**
-     * 字符串转成日期
+     * 将字符串转换为Date对象。
      *
-     * @param dateStr
-     * @param formatStr
-     * @return
+     * @param dateStr    日期字符串
+     * @param formatStr  日期格式，如"yyyy-MM-dd"
+     * @return 解析后的Date对象，如果解析失败返回null
      */
     public static Date strToDate(String dateStr, String formatStr) {
         Date date = null;
@@ -129,11 +129,11 @@ public final class DateUtils {
     }
 
     /**
-     * 字符串转成日期后的毫秒时间戳
+     * 将字符串转换为Date对象后，返回毫秒时间戳。
      *
-     * @param dateStr
-     * @param formatStr
-     * @return
+     * @param dateStr    日期字符串
+     * @param formatStr  日期格式，如"yyyy-MM-dd"
+     * @return 毫秒时间戳，解析失败返回0
      */
     public static long strToDateMillisTimestamp(String dateStr, String formatStr) {
         Date date = strToDate(dateStr, formatStr);
@@ -141,11 +141,11 @@ public final class DateUtils {
     }
 
     /**
-     * 字符串转成日期后的标准时间戳
+     * 将字符串转换为Date对象后，返回秒级时间戳。
      *
-     * @param dateStr
-     * @param formatStr
-     * @return
+     * @param dateStr    日期字符串
+     * @param formatStr  日期格式，如"yyyy-MM-dd"
+     * @return 秒级时间戳，解析失败返回0
      */
     public static int strToDateTimestamp(String dateStr, String formatStr) {
         Date date = strToDate(dateStr, formatStr);
@@ -153,12 +153,13 @@ public final class DateUtils {
     }
 
     /**
-     * 计算两个日期date1-date2相差的天数
+     * 计算两个日期之间相差的天数。
      *
-     * @param date1
-     * @param date2
-     * @return
-     * @throws Exception
+     * @param date1  第一个日期字符串
+     * @param date2  第二个日期字符串
+     * @param format 日期格式，如"yyyy-MM-dd"
+     * @return 相差的天数（date1 - date2）
+     * @throws Exception 如果日期解析失败则抛出异常
      */
     public static long calcDay(String date1, String date2, String format) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -171,11 +172,11 @@ public final class DateUtils {
     }
 
     /**
-     * 比较两个Date类型的日期大小
+     * 比较两个Date类型的日期大小。
      *
-     * @param sDate开始时间
-     * @param eDate结束时间
-     * @return result返回结果(0 - - 相同 1 - - 前者大 2 - - 后者大)
+     * @param sDate 开始日期
+     * @param eDate 结束日期
+     * @return 比较结果：0-相同，1-前者大，-1或2-后者大
      */
     public static int compareDate(Date sDate, Date eDate) {
         Calendar sC = Calendar.getInstance();
@@ -186,12 +187,12 @@ public final class DateUtils {
     }
 
     /**
-     * 比较两个String类型的日期大小
+     * 比较两个String类型的日期大小。
      *
-     * @param sDate
-     * @param eDate
-     * @param formatStr
-     * @return result返回结果(0 - - 相同 1 - - 前者大 - 1 - - 后者大)
+     * @param sDate      开始日期字符串
+     * @param eDate      结束日期字符串
+     * @param formatStr  日期格式，如"yyyy-MM-dd"
+     * @return 比较结果：0-相同，1-前者大，-1-后者大
      */
     public static int compareDate(String sDate, String eDate, String formatStr) {
         Date startDate = strToDate(sDate, formatStr);

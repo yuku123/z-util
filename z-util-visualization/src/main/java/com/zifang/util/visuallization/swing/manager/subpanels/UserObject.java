@@ -59,6 +59,13 @@ public class UserObject {
         return displayName;
     }
 
+    /**
+     * 判断当前用户对象与指定对象是否相等
+     * 比较基于用户ID和显示名称
+     *
+     * @param o 要比较的对象
+     * @return 如果ID和显示名称都相同返回true，否则返回false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,6 +75,12 @@ public class UserObject {
                Objects.equals(displayName, that.displayName);
     }
 
+    /**
+     * 返回当前用户对象的哈希码
+     * 基于用户ID和显示名称计算
+     *
+     * @return 哈希码值
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, displayName);

@@ -1,16 +1,34 @@
 package com.zifang.util.http.base.pojo;
 
 /**
- * 请求体
+ * HTTP请求体
+ * <p>
+ * 用于存储HTTP请求的消息体内容，以字节数组形式保存。
+ * </p>
+ *
+ * @author zifang
  */
 public class HttpRequestBody {
 
+    /**
+     * 请求体的字节数据。
+     */
     private byte[] body;
 
+    /**
+     * 获取请求体字节数组。
+     *
+     * @return 请求体字节数组
+     */
     public byte[] getBody() {
         return body;
     }
 
+    /**
+     * 设置请求体字节数组。
+     *
+     * @param body 请求体字节数组
+     */
     public void setBody(byte[] body) {
         this.body = body;
     }

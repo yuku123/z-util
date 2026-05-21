@@ -12,6 +12,10 @@ import java.lang.management.MemoryUsage;
 
 /**
  * 用于 Java 虚拟机的内存信息接口。
+ * <p>
+ * 该MXBean提供查看堆内存和非堆内存使用情况的方法。
+ *
+ * @author zifang
  */
 public class MemoryMXBeanDemo {
 
@@ -61,6 +65,11 @@ public class MemoryMXBeanDemo {
         return ManagementFactory.getMemoryMXBean();
     }
 
+    /**
+     * 打印内存使用情况。
+     *
+     * @param memoryUsage 内存使用情况对象
+     */
     private static void printMemoryUsage(MemoryUsage memoryUsage) {
         if (memoryUsage != null) {
             // 返回已提交给 Java 虚拟机使用的内存量（以字节为单位）。

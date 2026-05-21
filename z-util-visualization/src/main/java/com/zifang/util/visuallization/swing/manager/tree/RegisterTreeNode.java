@@ -44,11 +44,23 @@ public class RegisterTreeNode {
         return this;
     }
 
+    /**
+     * 返回树节点注册器的字符串表示
+     *
+     * @return 包含所有树节点的字符串
+     */
     @Override
     public String toString() {
         return "RegisterTreeNode{treeNodes=" + treeNodes + "}";
     }
 
+    /**
+     * 判断当前注册器与指定对象是否相等
+     * 比较基于树节点列表
+     *
+     * @param o 要比较的对象
+     * @return 如果树节点列表相同返回true，否则返回false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,6 +69,12 @@ public class RegisterTreeNode {
         return Objects.equals(treeNodes, that.treeNodes);
     }
 
+    /**
+     * 返回当前注册器的哈希码
+     * 基于树节点列表计算
+     *
+     * @return 哈希码值
+     */
     @Override
     public int hashCode() {
         return Objects.hash(treeNodes);

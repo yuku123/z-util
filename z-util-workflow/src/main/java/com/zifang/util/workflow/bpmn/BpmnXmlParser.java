@@ -15,29 +15,25 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Parser for BPMN 2.0 XML format.
+ * BPMN 2.0 XML格式解析器。
+ * <p>
+ * 使用标准Java DOM API将BPMN XML解析为BpmnDiagram模型。
+ * <p>
+ * 支持的BPMN元素：
+ * <ul>
+ *   <li>流程：process, collaboration, subProcess, transaction</li>
+ *   <li>事件：startEvent, endEvent, intermediateThrowEvent, intermediateCatchEvent</li>
+ *   <li>任务：userTask, serviceTask, scriptTask, manualTask, sendTask, receiveTask, task</li>
+ *   <li>网关：exclusiveGateway, parallelGateway, inclusiveGateway, eventBasedGateway</li>
+ *   <li>连接：sequenceFlow (含conditionExpression, default, name)</li>
+ *   <li>结构：callActivity, subProcess</li>
+ *   <li>多实例：multiInstanceLoopCharacteristics, standardLoopCharacteristics</li>
+ *   <li>定时器：timerEventDefinition</li>
+ *   <li>文档：documentation (节点和流程上)</li>
+ * </ul>
  *
- * Parses BPMN XML into BpmnDiagram model using standard Java DOM API.
- *
- * Supported BPMN elements:
- * - Process: process, collaboration, subProcess, transaction
- * - Events: startEvent, endEvent, intermediateThrowEvent, intermediateCatchEvent
- * - Tasks: userTask, serviceTask, scriptTask, manualTask, sendTask, receiveTask, task
- * - Gateways: exclusiveGateway, parallelGateway, inclusiveGateway, eventBasedGateway
- * - Connections: sequenceFlow (with conditionExpression, default, name)
- * - Structure: callActivity, subProcess
- * - Multi-instance: multiInstanceLoopCharacteristics, standardLoopCharacteristics
- * - Timer: timerEventDefinition
- * - Documentation: documentation (on nodes and flows)
- *
- * Supported attributes:
- * - id, name, documentation
- * - sourceRef, targetRef, conditionExpression (on sequenceFlow)
- * - default, isImmediate, isSequential (on gateway/flow)
- * - calledElement, operationName (on callActivity)
- * - script, scriptFormat (on scriptTask)
- * - loopCharacteristics (on tasks)
- * - timeDate, timeDuration, timeCycle (on timerEventDefinition)
+ * @see BpmnDiagram
+ * @see BpmnModelConverter
  */
 public class BpmnXmlParser {
 

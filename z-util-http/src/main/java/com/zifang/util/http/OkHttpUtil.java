@@ -12,6 +12,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * OkHttp 工具类
+ * <p>
+ * 基于 OkHttp 库封装的HTTP客户端工具类，提供简洁的API用于发送各种HTTP请求。
+ * 支持GET、POST请求，支持表单提交、JSON发送、文件上传、SSE等功能。
+ * </p>
+ *
+ * @author zifang
+ * @see HttpClientResult
+ */
 public class OkHttpUtil {
 
     private static final int CONNECT_TIMEOUT = 10;

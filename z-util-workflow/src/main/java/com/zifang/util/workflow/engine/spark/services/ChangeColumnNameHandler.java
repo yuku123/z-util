@@ -8,6 +8,15 @@
 //import java.util.HashMap;
 //import java.util.Map;
 //
+///**
+// * 列名修改处理器（占位实现）。
+// * <p>
+// * 该处理器是占位实现，具体逻辑待扩展。
+// * 用于修改DataFrame的列名，实现列的重命名操作。
+// *
+// * @see AbstractSparkEngineService
+// * @see CacheEngineService
+// */
 //@EngineService(name = "engine.service.changeColumn")
 //public class ChangeColumnNameHandler extends AbstractSparkEngineService {
 //

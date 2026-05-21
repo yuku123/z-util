@@ -37,7 +37,9 @@ public class PhantomReferenceDemo {
      * 测试虚引用在内存不足时的行为。
      * <p>
      * JVM参数：-Xmx2m -Xms2m
-     * 虚引用不会自动回收对象，当内存不足时会抛出OutOfMemoryError。
+     * <p>
+     * 注意：虚引用不会自动回收对象，当内存不足时会抛出OutOfMemoryError。
+     * 此方法已被注释掉，因为直接运行会导致内存溢出。
      */
     public static void test2() {
 //		Reference<Bean>[] referent = new PhantomReference[100000];

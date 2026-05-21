@@ -11,6 +11,10 @@ import java.lang.management.ManagementFactory;
 
 /**
  * 用于 Java 虚拟机的类加载系统的管理接口。
+ * <p>
+ * 该MXBean提供查看类加载统计信息和控制类加载verbose输出的方法。
+ *
+ * @author zifang
  */
 public class ClassLoadingMXBeanDemo {
 

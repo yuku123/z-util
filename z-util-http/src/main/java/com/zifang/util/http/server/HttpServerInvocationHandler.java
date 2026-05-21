@@ -9,6 +9,16 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+/**
+ * HTTP服务端调用处理器
+ * <p>
+ * 该处理器实现了 {@link InvocationHandler} 接口，用于动态代理服务端接口。
+ * 当代理对象的方法被调用时，会自动将方法调用转换为HTTP请求定义。
+ * </p>
+ *
+ * @author zifang
+ * @see InvocationHandler
+ */
 public class HttpServerInvocationHandler implements InvocationHandler {
 
     // 代理的接口类

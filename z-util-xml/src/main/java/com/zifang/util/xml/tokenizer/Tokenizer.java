@@ -68,9 +68,15 @@ public class Tokenizer {
         readTagTail();
     }
 
+    // ===== 标签尾部（属性、自闭合） =====
     private void readTagTail() throws IOException {
         char ch = cr.peek();
         while (ch != (char) -1) {
+            // consume whitespace first
+            if (isWhiteSpace(ch)) {
+                ch = cr.next();
+                continue;
+            }
             if (ch == '>') {
                 cr.next();
                 tokens.add(new Token(TokenType.TAG_CLOSE, ">"));
@@ -83,19 +89,14 @@ public class Tokenizer {
                 tokens.add(new Token(TokenType.TAG_SELF_CLOSE, "/>"));
                 return;
             }
-            if (!isWhiteSpace(ch)) {
-                readAttribute();
-            }
+            readAttribute();
             ch = cr.peek();
         }
     }
 
+    // ===== 属性 =====
     private void readAttribute() throws IOException {
         char ch = cr.peek();
-        if (isWhiteSpace(ch)) {
-            cr.next();
-            return;
-        }
         if (ch == '>' || ch == '/') return; // tail handles
 
         // attribute name
@@ -108,12 +109,8 @@ public class Tokenizer {
 
         // skip ws to '='
         ch = skipWs(ch);
-        if (ch == '>') {
-            tokens.add(new Token(TokenType.ATTRIBUTE, attrName + "="));
-            return;
-        }
-        if (ch == '/') return; // tail handles
         if (ch != '=') {
+            // valueless attribute: e.g., disabled
             tokens.add(new Token(TokenType.ATTRIBUTE, attrName + "="));
             return;
         }
@@ -179,7 +176,6 @@ public class Tokenizer {
 
     // ===== CDATA =====
     private void readCdataSection() throws IOException {
-        // At '[' after '<!'
         StringBuilder marker = new StringBuilder();
         char ch = cr.next();
         while (marker.length() < 6 && ch != '[') {
@@ -239,14 +235,10 @@ public class Tokenizer {
                 }
             } else { // state == 2
                 if (ch == '>') {
-                    // Found '-->', the two preceding '-' were the closer, not part of content
                     break;
                 } else if (ch == '-') {
-                    // Another '-', keep it (it's part of content, e.g., '--->')
                     sb.append('-');
-                    // state stays 2
                 } else {
-                    // Two preceding '-' were not the closer, they are content
                     sb.append('-');
                     sb.append('-');
                     sb.append(ch);

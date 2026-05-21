@@ -75,11 +75,23 @@ public class TreeNode {
         this.parentId = parentId;
     }
 
+    /**
+     * 返回树节点的字符串表示
+     *
+     * @return 包含id、name和parentId的字符串
+     */
     @Override
     public String toString() {
         return "TreeNode{id=" + id + ", name=" + name + ", parentId=" + parentId + "}";
     }
 
+    /**
+     * 判断当前树节点与指定对象是否相等
+     * 比较基于id、name和parentId
+     *
+     * @param o 要比较的对象
+     * @return 如果所有属性都相同返回true，否则返回false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,6 +102,12 @@ public class TreeNode {
                java.util.Objects.equals(parentId, treeNode.parentId);
     }
 
+    /**
+     * 返回当前树节点的哈希码
+     * 基于id、name和parentId计算
+     *
+     * @return 哈希码值
+     */
     @Override
     public int hashCode() {
         return java.util.Objects.hash(id, name, parentId);

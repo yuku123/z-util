@@ -11,6 +11,10 @@ import java.lang.management.ThreadMXBean;
 
 /**
  * 用于 Java 虚拟机的线程管理接口。
+ * <p>
+ * 该MXBean提供查看线程信息、检测死锁、获取线程CPU时间等方法。
+ *
+ * @author zifang
  */
 public class ThreadMXBeanDemo {
 

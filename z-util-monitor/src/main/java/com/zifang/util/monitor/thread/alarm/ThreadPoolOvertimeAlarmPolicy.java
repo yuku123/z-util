@@ -16,9 +16,17 @@ public class ThreadPoolOvertimeAlarmPolicy extends AlarmPolicy {
      */
     private int alarmThreshold = 2 * TimeUtil.MINUTES_SECONDS * TimeUtil.SECOND_MILLISECONDS;
 
+    /**
+     * 默认构造函数，使用默认告警阈值（2分钟）。
+     */
     public ThreadPoolOvertimeAlarmPolicy() {
     }
 
+    /**
+     * 构造函数，指定告警阈值。
+     *
+     * @param alarmThreshold 告警阈值，单位为毫秒
+     */
     public ThreadPoolOvertimeAlarmPolicy(int alarmThreshold) {
         this.alarmThreshold = alarmThreshold;
     }

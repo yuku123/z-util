@@ -5,7 +5,6 @@ package com.zifang.util.proxy.a.resolver2.file;
  * <p>
  * 用于测试ClassFile解析功能。
  */
-public class TestClassParse1 {
 /**
  * 包含一个类属性,一个实例属性,一个方法的类
  */

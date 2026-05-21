@@ -11,6 +11,10 @@ import java.lang.management.OperatingSystemMXBean;
 
 /**
  * 用于 Java 虚拟机所在的操作系统系统的管理接口。
+ * <p>
+ * 该MXBean提供查看操作系统信息的方法，包括系统架构、处理器数量、系统负载等。
+ *
+ * @author zifang
  */
 public class OperatingSystemMXBeanDemo {
 

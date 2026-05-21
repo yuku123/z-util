@@ -4,7 +4,23 @@ import java.util.HashMap;
 import java.util.Objects;
 
 /**
- * 描述业务流节点的最小单元定义
+ * 工作流节点定义。
+ * <p>
+ * 描述业务流节点的最小单元定义，包含节点标识、类型、服务单元、调用参数和连接器信息。
+ * <p>
+ * 主要属性：
+ * <ul>
+ *   <li>nodeId - 节点唯一标识号</li>
+ *   <li>groupId - 节点组别标识，用于逻辑上归类同种处理单元</li>
+ *   <li>type - 节点类型，如startEvent、userTask、exclusiveGateway等</li>
+ *   <li>serviceUnit - 处理引擎的服务标识</li>
+ *   <li>invokeDynamic - 处理引擎的调用方法名</li>
+ *   <li>invokeParameter - 调用参数，可被处理引擎识别和转换</li>
+ *   <li>connector - 节点连接器，描述此节点与其他节点的关联情况</li>
+ * </ul>
+ *
+ * @see Connector
+ * @see ExecutableWorkflowNode
  */
 public class WorkflowNode {
 

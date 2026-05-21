@@ -21,7 +21,23 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 每个工作流的上下文，是工作引擎的工作子单元。工作引擎只负责发布命令，调度资源，调度任务相关功能
+ * 工作流应用上下文。
+ * <p>
+ * 每个工作流的上下文，是工作引擎的工作子单元。
+ * 工作引擎只负责发布命令，调度资源，调度任务相关功能。
+ * <p>
+ * 主要职责：
+ * <ul>
+ *   <li>管理工作流配置和节点</li>
+ *   <li>初始化执行引擎和缓存引擎</li>
+ *   <li>转换和连接工作流节点</li>
+ *   <li>生成可执行任务</li>
+ *   <li>支持从BPMN XML加载工作流配置</li>
+ * </ul>
+ *
+ * @see WorkFlowApplication
+ * @see com.zifang.util.workflow.config.WorkflowConfiguration
+ * @see com.zifang.util.workflow.config.ExecutableWorkflowNode
  */
 public class WorkFlowApplicationContext {
 

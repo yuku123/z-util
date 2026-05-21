@@ -6,7 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * BPMN diagram model containing definitions
+ * BPMN图表模型。
+ * <p>
+ * 包含BPMN 2.0流程定义的所有元素，包括节点和序列流。
+ * 用于从XML解析后或手动构建BPMN流程模型。
+ * <p>
+ * 主要元素：
+ * <ul>
+ *   <li>nodes - BPMN节点列表（开始事件、结束事件、任务、网关等）</li>
+ *   <li>sequenceFlows - 序列流列表（节点之间的连接）</li>
+ *   <li>nodeMap - 节点ID到节点的快速映射</li>
+ * </ul>
+ *
+ * @see BpmnProcess
+ * @see BpmnXmlParser
+ * @see BpmnModelConverter
  */
 public class BpmnDiagram {
 

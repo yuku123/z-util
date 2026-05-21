@@ -15,12 +15,25 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 /**
- * 根据 请求定义而产生请求
+ * HTTP请求生产者
+ * <p>
+ * 根据 {@link HttpRequestDefinition} 生成并发送HTTP请求。
+ * 支持GET、POST、PUT、DELETE等HTTP方法。
+ * </p>
+ *
+ * @author zifang
+ * @see HttpRequestDefinition
  */
 public class HttpRequestProducer {
 
     private static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
+    /**
+     * 根据请求定义生成并发送HTTP请求。
+     *
+     * @param httpRequestDefination HTTP请求定义
+     * @return 响应内容字符串，如果请求失败返回null
+     */
     public Object produceRequest(HttpRequestDefinition httpRequestDefination) {
 
         try {
@@ -40,6 +53,13 @@ public class HttpRequestProducer {
         return null;
     }
 
+    /**
+     * 处理POST请求。
+     *
+     * @param httpRequestDefinition HTTP请求定义
+     * @return 响应内容字符串
+     * @throws IOException 如果请求失败
+     */
     private Object handlePostRequest(HttpRequestDefinition httpRequestDefinition) throws IOException {
         HttpPost httpPost = new HttpPost(httpRequestDefinition.getHttpRequestLine().getUrl());
         httpPost.setHeader("Content-Type", "application/json;charset=utf8");
@@ -48,12 +68,26 @@ public class HttpRequestProducer {
         return EntityUtils.toString(response.getEntity());
     }
 
+    /**
+     * 处理GET请求。
+     *
+     * @param httpRequestDefination HTTP请求定义
+     * @return 响应内容字符串
+     * @throws IOException 如果请求失败
+     */
     private Object handleGetRequest(HttpRequestDefinition httpRequestDefination) throws IOException {
         HttpGet httpGet = new HttpGet(httpRequestDefination.getHttpRequestLine().getUrl());
         CloseableHttpResponse response = httpClient.execute(httpGet);
         return EntityUtils.toString(response.getEntity());
     }
 
+    /**
+     * 处理PUT请求。
+     *
+     * @param httpRequestDefinition HTTP请求定义
+     * @return 响应内容字符串
+     * @throws IOException 如果请求失败
+     */
     private Object handlePutRequest(HttpRequestDefinition httpRequestDefinition) throws IOException {
         HttpPut httpPut = new HttpPut(httpRequestDefinition.getHttpRequestLine().getUrl());
         httpPut.setHeader("Content-Type", "application/json;charset=utf8");
@@ -65,6 +99,13 @@ public class HttpRequestProducer {
         return EntityUtils.toString(response.getEntity());
     }
 
+    /**
+     * 处理DELETE请求。
+     *
+     * @param httpRequestDefinition HTTP请求定义
+     * @return 响应内容字符串
+     * @throws IOException 如果请求失败
+     */
     private Object handleDeleteRequest(HttpRequestDefinition httpRequestDefinition) throws IOException {
         HttpDelete httpDelete = new HttpDelete(httpRequestDefinition.getHttpRequestLine().getUrl());
         CloseableHttpResponse response = httpClient.execute(httpDelete);

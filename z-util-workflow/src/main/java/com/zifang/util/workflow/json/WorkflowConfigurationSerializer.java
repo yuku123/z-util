@@ -12,7 +12,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * JSON serializer for WorkflowConfiguration using Jackson
+ * 工作流配置JSON序列化器。
+ * <p>
+ * 使用Jackson库实现WorkflowConfiguration与JSON格式之间的相互转换。
+ * 支持将配置序列化为JSON字符串或文件，以及从JSON字符串或文件反序列化。
+ *
+ * @see WorkflowConfiguration
+ * @see ObjectMapper
  */
 public class WorkflowConfigurationSerializer {
 

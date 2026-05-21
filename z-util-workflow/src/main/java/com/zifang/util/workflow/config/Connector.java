@@ -3,7 +3,12 @@ package com.zifang.util.workflow.config;
 import java.util.List;
 
 /**
- * 描述此节点与其他节点的关联情况
+ * 节点连接器。
+ * <p>
+ * 描述此节点与其他节点的关联情况，包含前置节点列表和后置节点列表。
+ * 用于构建工作流的DAG（有向无环图）结构。
+ *
+ * @see WorkflowNode
  */
 public class Connector {
 

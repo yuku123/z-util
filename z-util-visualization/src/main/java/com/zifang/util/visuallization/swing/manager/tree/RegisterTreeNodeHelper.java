@@ -32,10 +32,23 @@ public class RegisterTreeNodeHelper {
         return rootDefaultMutableTreeNode;
     }
 
+    /**
+     * 将TreeNode转换为DefaultMutableTreeNode
+     *
+     * @param root 树节点
+     * @return Swing树形结构的节点
+     */
     private static DefaultMutableTreeNode getDefaultMutableTreeNodeByTreeNode(TreeNode root) {
         return new DefaultMutableTreeNode(root.getName());
     }
 
+    /**
+     * 递归构建子树结构
+     *
+     * @param root 当前根节点
+     * @param rootDefaultMutableTreeNode Swing树中的当前节点
+     * @param registerTreeNode 所有注册的节点列表
+     */
     private static void solveRoot(TreeNode root, DefaultMutableTreeNode rootDefaultMutableTreeNode, List<TreeNode> registerTreeNode) {
         // 得到这个集合的下等级别的数据
         String id = root.getId();

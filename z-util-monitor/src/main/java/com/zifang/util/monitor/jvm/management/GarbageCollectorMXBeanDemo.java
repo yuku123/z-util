@@ -14,7 +14,11 @@ import java.util.Set;
 
 
 /**
- * 用于 Java 虚拟机的获取垃圾回收器的管理接口。
+ * 用于 Java 虚拟机的垃圾回收器的管理接口。
+ * <p>
+ * 该MXBean提供查看垃圾回收统计信息的方法。
+ *
+ * @author zifang
  */
 public class GarbageCollectorMXBeanDemo {
 

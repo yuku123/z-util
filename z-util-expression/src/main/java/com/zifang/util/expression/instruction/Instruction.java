@@ -1,9 +1,22 @@
 package com.zifang.util.expression.instruction;
 
+/**
+ * 指令类
+ * 表示一个可执行的指令，包含指令码和参数列表
+ *
+ * @author zifang
+ * @version 1.0
+ */
 public class Instruction {
 
+    /**
+     * 指令码，标识指令类型
+     */
     private String instructionCode;
 
+    /**
+     * 指令参数列表
+     */
     private Object[] params;
 
     public String getInstructionCode() {

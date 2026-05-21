@@ -9,7 +9,13 @@
 //import java.util.Map;
 //
 ///**
-// * 支持书写任意sql的处理器件
+// * SQL处理器（占位实现）。
+// * <p>
+// * 该处理器是占位实现，具体逻辑待扩展。
+// * 支持书写任意SQL语句，在Spark SQL上下文中执行查询和转换操作。
+// *
+// * @see AbstractSparkEngineService
+// * @see CacheEngineService
 // */
 //@EngineService(name = "engine.service.sql")
 //public class SqlHandler extends AbstractSparkEngineService {

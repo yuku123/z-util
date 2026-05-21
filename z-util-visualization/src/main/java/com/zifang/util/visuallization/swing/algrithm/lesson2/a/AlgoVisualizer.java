@@ -59,8 +59,18 @@ public class AlgoVisualizer {
         }
     }
 
+    /**
+     * 键盘事件监听器内部类
+     * 处理键盘按键释放事件
+     */
     private class AlgoKeyListener extends KeyAdapter {
 
+        /**
+         * 按键释放事件处理
+         * 空格键用于切换动画播放/暂停状态
+         *
+         * @param event 键盘事件对象
+         */
         @Override
         public void keyReleased(KeyEvent event) {
             if (event.getKeyChar() == ' ')
@@ -68,8 +78,18 @@ public class AlgoVisualizer {
         }
     }
 
+    /**
+     * 鼠标事件监听器内部类
+     * 处理鼠标释放事件，用于切换圆形填充状态
+     */
     private class AlgoMouseListener extends MouseAdapter {
 
+        /**
+         * 鼠标释放事件处理
+         * 如果点击位置在某个圆内，则切换该圆的填充状态
+         *
+         * @param event 鼠标事件对象，包含点击位置信息
+         */
         @Override
         public void mouseReleased(MouseEvent event) {
 

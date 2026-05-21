@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -70,7 +71,7 @@ public class FileContentUtilTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testReadStringNullFile() throws Exception {
-        FileContentUtil.readString(null);
+        FileContentUtil.readString((File) null);
     }
 
     @Test(expected = FileNotFoundException.class)
@@ -301,13 +302,13 @@ public class FileContentUtilTest {
         tmp.deleteOnExit();
         Files.write(tmp.toPath(), data);
 
-        byte[] result = FileContentUtil.readFully(tmp);
+        byte[] result = FileContentUtil.readBytes(tmp);
         assertArrayEquals(data, result);
         tmp.delete();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testReadFullyNullFile() throws Exception {
-        FileContentUtil.readFully(null);
+        FileContentUtil.readBytes(null);
     }
 }

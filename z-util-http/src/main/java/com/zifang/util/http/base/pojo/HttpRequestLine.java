@@ -3,32 +3,58 @@ package com.zifang.util.http.base.pojo;
 import com.zifang.util.http.base.define.RequestMethod;
 
 /**
- * 请求行
+ * HTTP请求行
+ * <p>
+ * 用于存储HTTP请求的请求行信息，包括请求方法和URL。
+ * </p>
+ *
+ * @author zifang
+ * @see RequestMethod
  */
 public class HttpRequestLine {
 
     /**
-     * 请求种类
+     * HTTP请求方法。
      */
     private RequestMethod requestMethod;
 
     /**
-     * 请求地址
+     * 请求URL地址。
      */
     private String url;
 
+    /**
+     * 获取请求方法。
+     *
+     * @return HTTP请求方法
+     */
     public RequestMethod getRequestMethod() {
         return requestMethod;
     }
 
+    /**
+     * 设置请求方法。
+     *
+     * @param requestMethod HTTP请求方法
+     */
     public void setRequestMethod(RequestMethod requestMethod) {
         this.requestMethod = requestMethod;
     }
 
+    /**
+     * 获取请求URL。
+     *
+     * @return 请求URL
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * 设置请求URL。
+     *
+     * @param url 请求URL
+     */
     public void setUrl(String url) {
         this.url = url;
     }

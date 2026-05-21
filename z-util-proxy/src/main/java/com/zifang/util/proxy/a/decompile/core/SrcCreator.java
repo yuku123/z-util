@@ -1,11 +1,6 @@
 package com.zifang.util.proxy.a.decompile.core;
 
-/**
- * 源码生成器接口
- * <p>
- * 定义将Class_info转换为Java源代码的方法。
- */
-public interface SrcCreator {
+import com.zifang.util.proxy.a.decompile.bean.*;
 import com.zifang.util.proxy.a.decompile.bean.attribute.*;
 import com.zifang.util.proxy.a.decompile.bean.constant.*;
 import com.zifang.util.proxy.a.decompile.utils.Hex;
@@ -13,6 +8,11 @@ import com.zifang.util.proxy.a.decompile.utils.Hex;
 import java.util.*;
 import java.util.Map.Entry;
 
+/**
+ * 源码生成器接口
+ * <p>
+ * 定义将Class_info转换为Java源代码的方法。
+ */
 public class SrcCreator {
 
     /**

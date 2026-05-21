@@ -5,6 +5,9 @@ import com.zifang.util.core.meta.Description;
 import java.util.Objects;
 
 /**
+ * 数据源表字段数据传输对象
+ * 用于描述数据源中某个表的字段信息
+ *
  * @author zifang
  */
 public class DataSourceTableColumnDTO {

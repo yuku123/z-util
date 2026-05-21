@@ -3,7 +3,14 @@ package com.zifang.util.workflow.config;
 import java.util.List;
 
 /**
- * 整个流程图的定义
+ * 整个流程图的定义。
+ * <p>
+ * 封装了工作流的完整配置，包括全局配置和所有业务流程节点。
+ * 全局配置包含执行引擎类型、缓存引擎配置、个人环境参数和运行时参数。
+ * 工作流节点列表定义了所有的业务流程节点及其相互之间的连接关系。
+ *
+ * @see Configurations
+ * @see WorkflowNode
  */
 public class WorkflowConfiguration {
 

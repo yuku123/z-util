@@ -5,7 +5,22 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Represents a BPMN 2.0 sequence flow connecting flow nodes
+ * BPMN 2.0 序列流。
+ * <p>
+ * 表示BPMN流程中连接两个节点的顺序流，用于定义流程的执行路径。
+ * 序列流可以带有条件表达式，用于网关节点的条件分支判断。
+ * <p>
+ * 主要属性：
+ * <ul>
+ *   <li>sourceRef - 源节点引用</li>
+ *   <li>targetRef - 目标节点引用</li>
+ *   <li>conditionExpression - 条件表达式（用于条件分支）</li>
+ *   <li>isDefault - 是否为默认流向（仅排他网关使用）</li>
+ * </ul>
+ *
+ * @see BpmnProcess
+ * @see BpmnFlowNode
+ * @see GatewayEvaluator
  */
 public class BpmnSequenceFlow {
 

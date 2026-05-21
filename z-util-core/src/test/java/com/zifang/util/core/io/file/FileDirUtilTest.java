@@ -81,7 +81,7 @@ public class FileDirUtilTest {
     @Test
     public void testMkdirsCreatesNestedDirectories() throws Exception {
         File nested = new File(tempBaseDir, "a/b/c/d");
-        FileDirUtil.mkdirs(nested);
+        FileDirUtil.mkdirs(nested.getAbsolutePath());
         assertTrue(nested.exists());
         assertTrue(nested.isDirectory());
     }
@@ -155,7 +155,7 @@ public class FileDirUtilTest {
 
     @Test(expected = IOException.class)
     public void testDeleteDirWithNull() throws Exception {
-        FileDirUtil.deleteDir(null);
+        FileDirUtil.deleteDir((File) null);
     }
 
     // ==================== deleteFile ====================
@@ -176,7 +176,7 @@ public class FileDirUtilTest {
 
     @Test(expected = IOException.class)
     public void testDeleteFileWithNull() throws Exception {
-        FileDirUtil.deleteFile(null);
+        FileDirUtil.deleteFile((File) null);
     }
 
     // ==================== isEmptyDir ====================
@@ -219,16 +219,16 @@ public class FileDirUtilTest {
         file1.createNewFile();
         file2.createNewFile();
 
-        File[] files = FileDirUtil.listFiles(dir);
-        assertEquals(2, files.length);
+        List<File> files = FileDirUtil.listFiles(dir);
+        assertEquals(2, files.size());
     }
 
     @Test
     public void testListFilesWithEmptyDir() throws Exception {
         File emptyDir = new File(tempBaseDir, "empty-list");
         emptyDir.mkdirs();
-        File[] files = FileDirUtil.listFiles(emptyDir);
-        assertEquals(0, files.length);
+        List<File> files = FileDirUtil.listFiles(emptyDir);
+        assertEquals(0, files.size());
     }
 
     @Test(expected = IOException.class)
@@ -246,8 +246,8 @@ public class FileDirUtilTest {
         new File(dir, "file2.java").createNewFile();
         new File(dir, "file3.txt").createNewFile();
 
-        File[] txtFiles = FileDirUtil.listFiles(dir, "txt");
-        assertEquals(2, txtFiles.length);
+        List<File> txtFiles = FileDirUtil.listFiles(dir, "txt");
+        assertEquals(2, txtFiles.size());
     }
 
     @Test
@@ -255,8 +255,8 @@ public class FileDirUtilTest {
         File dir = new File(tempBaseDir, "extnomatch");
         dir.mkdirs();
         new File(dir, "file1.txt").createNewFile();
-        File[] xmlFiles = FileDirUtil.listFiles(dir, "xml");
-        assertEquals(0, xmlFiles.length);
+        List<File> xmlFiles = FileDirUtil.listFiles(dir, "xml");
+        assertEquals(0, xmlFiles.size());
     }
 
     // ==================== listFilesRecursively ====================
@@ -270,16 +270,16 @@ public class FileDirUtilTest {
         subDir.mkdirs();
         new File(subDir, "file2.txt").createNewFile();
 
-        File[] files = FileDirUtil.listFilesRecursively(dir);
-        assertEquals(2, files.length);
+        List<File> files = FileDirUtil.listFilesRecursively(dir);
+        assertEquals(2, files.size());
     }
 
     @Test
     public void testListFilesRecursivelyEmptyDir() throws Exception {
         File emptyDir = new File(tempBaseDir, "empty-recursive");
         emptyDir.mkdirs();
-        File[] files = FileDirUtil.listFilesRecursively(emptyDir);
-        assertEquals(0, files.length);
+        List<File> files = FileDirUtil.listFilesRecursively(emptyDir);
+        assertEquals(0, files.size());
     }
 
     @Test(expected = IOException.class)
@@ -338,25 +338,23 @@ public class FileDirUtilTest {
     @Test
     public void testEnsureDirExistsCreatesNewDir() throws Exception {
         File newDir = new File(tempBaseDir, "ensure-new");
-        File result = FileDirUtil.ensureDirExists(newDir);
+        FileDirUtil.ensureDirExists(newDir);
         assertTrue(newDir.exists());
-        assertEquals(newDir, result);
     }
 
     @Test
     public void testEnsureDirExistsReturnsExistingDir() throws Exception {
         File existing = new File(tempBaseDir, "ensure-existing");
         existing.mkdirs();
-        File result = FileDirUtil.ensureDirExists(existing);
-        assertEquals(existing, result);
+        FileDirUtil.ensureDirExists(existing);
+        assertTrue(existing.exists());
     }
 
     @Test
     public void testEnsureDirExistsCreatesNestedDirs() throws Exception {
         File nested = new File(tempBaseDir, "ensure/nested/dir");
-        File result = FileDirUtil.ensureDirExists(nested);
+        FileDirUtil.ensureDirExists(nested);
         assertTrue(nested.exists());
-        assertEquals(nested, result);
     }
 
     @Test(expected = IOException.class)
