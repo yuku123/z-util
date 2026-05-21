@@ -1,4 +1,4 @@
-package com.zifang.util.core.time.schedule;
+package com.zifang.util.core.schedule;
 
 import org.quartz.CalendarIntervalScheduleBuilder;
 import org.quartz.TriggerBuilder;
@@ -24,7 +24,7 @@ public class CalendarIntervalTrigger implements Trigger {
 
     private final org.quartz.CalendarIntervalTrigger delegate;
 
-    CalendarIntervalTrigger(org.quartz.CalendarIntervalTrigger delegate) {
+    public CalendarIntervalTrigger(org.quartz.CalendarIntervalTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -111,7 +111,7 @@ public class CalendarIntervalTrigger implements Trigger {
     }
 
     @Override
-    public com.zifang.util.core.time.schedule.Trigger getDelegate() {
+    public com.zifang.util.core.schedule.Trigger getDelegate() {
         return this;
     }
 

@@ -1,7 +1,7 @@
-package com.zifang.util.core.time.schedule.listener;
+package com.zifang.util.core.schedule.listener;
 
-import com.zifang.util.core.time.schedule.JobExecutionContextWrapper;
-import com.zifang.util.core.time.schedule.Trigger;
+import com.zifang.util.core.schedule.JobExecutionContextWrapper;
+import com.zifang.util.core.schedule.Trigger;
 import org.quartz.Trigger.CompletedExecutionInstruction;
 
 /**

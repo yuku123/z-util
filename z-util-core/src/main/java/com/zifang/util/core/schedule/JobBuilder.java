@@ -171,7 +171,9 @@ public class JobBuilder {
          * @return 配置完整的 JobDetail
          */
         public JobDetail build() {
-            org.quartz.JobBuilder quartzBuilder = org.quartz.JobBuilder.newJob(jobClass);
+            // 始终使用 RunnableJobAdapter 作为实际 Quartz Job，
+            // 用户的 Job 实现类通过 JobDataMap 传递给适配器。
+            org.quartz.JobBuilder quartzBuilder = org.quartz.JobBuilder.newJob(RunnableJobAdapter.class);
 
             if (name != null) {
                 quartzBuilder.withIdentity(name, group);
@@ -181,6 +183,11 @@ public class JobBuilder {
             }
             quartzBuilder.storeDurably(durable);
             quartzBuilder.requestRecovery(requestsRecovery);
+
+            // 将用户 Job 类存入 JobDataMap，供 RunnableJobAdapter 在执行时使用
+            if (!jobClass.equals(RunnableJobAdapter.class)) {
+                jobData.put("_jobClass", jobClass);
+            }
 
             for (Map.Entry<String, Object> entry : jobData.entrySet()) {
                 Object value = entry.getValue();
@@ -192,22 +199,23 @@ public class JobBuilder {
                 } else if (value instanceof Integer) {
                     quartzBuilder.usingJobData(entry.getKey(), (Integer) value);
                 } else if (value instanceof Long) {
-                    quartzBuilder.usingJobData(entry.getKey(), Long.valueOf((Integer) value));
+                    quartzBuilder.usingJobData(entry.getKey(), (Long) value);
                 } else if (value instanceof Boolean) {
                     quartzBuilder.usingJobData(entry.getKey(), (Boolean) value);
                 } else if (value instanceof Double) {
                     quartzBuilder.usingJobData(entry.getKey(), (Double) value);
                 } else if (value instanceof Float) {
-                    quartzBuilder.usingJobData(entry.getKey(), Float.valueOf((Float) value));
+                    quartzBuilder.usingJobData(entry.getKey(), (Float) value);
+                } else if (value instanceof Class) {
+                    // Class 类型序列化后再存储
+                    quartzBuilder.usingJobData(entry.getKey(), ((Class<?>) value).getName());
                 } else {
                     quartzBuilder.usingJobData(entry.getKey(), String.valueOf(value));
                 }
             }
 
-            // 特殊处理 RunnableJobAdapter
-            if (jobClass == RunnableJobAdapter.class) {
-                quartzBuilder.storeDurably();
-            }
+            // RunnableJobAdapter 需要持久化，以便重启后仍能通过 JobDataMap 恢复
+            quartzBuilder.storeDurably(true);
 
             return new JobDetail(quartzBuilder.build());
         }

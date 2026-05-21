@@ -1,4 +1,4 @@
-package com.zifang.util.core.time.schedule;
+package com.zifang.util.core.schedule;
 
 import org.quartz.SimpleScheduleBuilder;
 import org.quartz.TriggerBuilder;
@@ -31,7 +31,7 @@ public class SimpleTrigger implements Trigger {
 
     private final org.quartz.SimpleTrigger delegate;
 
-    SimpleTrigger(org.quartz.SimpleTrigger delegate) {
+    public SimpleTrigger(org.quartz.SimpleTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -122,7 +122,7 @@ public class SimpleTrigger implements Trigger {
     }
 
     @Override
-    public com.zifang.util.core.time.schedule.Trigger getDelegate() {
+    public com.zifang.util.core.schedule.Trigger getDelegate() {
         return this;
     }
 

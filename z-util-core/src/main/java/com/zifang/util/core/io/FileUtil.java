@@ -1,19 +1,21 @@
 package com.zifang.util.core.io;
 
-import com.zifang.util.core.lang.regex.RegexUtil;
-import com.zifang.util.core.lang.validator.Checker;
+import com.zifang.util.core.io.file.FileContentUtil;
+import com.zifang.util.core.io.file.FileCopyUtil;
+import com.zifang.util.core.io.file.FileDirUtil;
+import com.zifang.util.core.io.file.FileHashUtil;
+import com.zifang.util.core.io.file.FilePathUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.math.BigInteger;
-import java.net.FileNameMap;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Files;
 import java.security.MessageDigest;
@@ -23,40 +25,69 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
 
 /**
- * 文件相关的工具类
+ * File utility class providing common file operations.
+ * <p>
+ * This class serves as a facade for file operations, delegating to specialized
+ * utility classes where appropriate. It maintains backward compatibility with
+ * the existing API while providing improved error handling and logging.
+ * </p>
+ * <p>
+ * Specialized utilities:
+ * <ul>
+ *   <li>{@link FilePathUtil} - Path manipulation, file name/extension extraction</li>
+ *   <li>{@link FileContentUtil} - File content reading/writing</li>
+ *   <li>{@link FileDirUtil} - Directory operations</li>
+ *   <li>{@link FileCopyUtil} - File/directory copy operations</li>
+ *   <li>{@link FileHashUtil} - File hashing and type detection</li>
+ * </ul>
+ * </p>
+ *
+ * @author zifang
  */
 public class FileUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(FileUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
+
+    private static final String FOLDER_SEPARATOR = "/";
+    private static final char EXTENSION_SEPARATOR = '.';
+    private static final int BUFFER_SIZE = 1024 * 1024;
+
+    private FileUtil() {
+    }
+
+    // ==================== Copy Operations ====================
 
     /**
-     * 利用FileChannel直接实现文件的对拷,对于大文件速度特别明显
+     * Copies a file using FileChannel transferTo for large files.
+     * Performance is especially noticeable for large files.
+     *
+     * @param source source file
+     * @param target target file
      */
     public static void copyFileWithChannel(File source, File target) {
-        try (
-                FileInputStream inStream = new FileInputStream(source);
-                FileOutputStream outStream = new FileOutputStream(target);
-                FileChannel in = inStream.getChannel();
-                FileChannel out = outStream.getChannel()) {
+        try (FileInputStream inStream = new FileInputStream(source);
+             FileOutputStream outStream = new FileOutputStream(target);
+             FileChannel in = inStream.getChannel();
+             FileChannel out = outStream.getChannel()) {
             in.transferTo(0, in.size(), out);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to copy file {} to {} using channel", source.getAbsolutePath(), target.getAbsolutePath(), e);
         }
     }
 
     /**
-     * 使用FileChannel+Buffer实现文件的读取拷贝
+     * Copies a file using FileChannel with buffer.
+     *
+     * @param source source file
+     * @param target target file
      */
     public static void copyFileWithBuffer(File source, File target) {
-        try (
-                FileInputStream inStream = new FileInputStream(source);
-                FileOutputStream outStream = new FileOutputStream(target);
-                FileChannel in = inStream.getChannel();
-                FileChannel out = outStream.getChannel()
-        ) {
+        try (FileInputStream inStream = new FileInputStream(source);
+             FileOutputStream outStream = new FileOutputStream(target);
+             FileChannel in = inStream.getChannel();
+             FileChannel out = outStream.getChannel()) {
             ByteBuffer buffer = ByteBuffer.allocate(4096);
             while (in.read(buffer) != -1) {
                 buffer.flip();
@@ -64,265 +95,280 @@ public class FileUtil {
                 buffer.clear();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to copy file {} to {} using buffer", source.getAbsolutePath(), target.getAbsolutePath(), e);
         }
     }
 
     /**
-     * 利用Buffer实现文件的读取拷贝
+     * Copies a file using buffered streams.
+     *
+     * @param source source file
+     * @param target target file
      */
     public static void customBufferBufferedStreamCopy(File source, File target) {
-        try (
-                InputStream fis = new BufferedInputStream(new FileInputStream(source));
-                OutputStream fos = new BufferedOutputStream(new FileOutputStream(target))
-        ) {
+        try (InputStream fis = new BufferedInputStream(new FileInputStream(source));
+             OutputStream fos = new BufferedOutputStream(new FileOutputStream(target))) {
             byte[] buf = new byte[4096];
             int i;
             while ((i = fis.read(buf)) != -1) {
                 fos.write(buf, 0, i);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to copy file {} to {} using buffered stream", source.getAbsolutePath(), target.getAbsolutePath(), e);
         }
     }
 
     /**
-     * 利用Buffer实现文件的读取拷贝
+     * Copies a file using unbuffered streams.
+     *
+     * @param source source file
+     * @param target target file
      */
     public static void customBufferStreamCopy(File source, File target) {
-        try (
-                InputStream fis = new FileInputStream(source);
-                OutputStream fos = new FileOutputStream(target)
-        ) {
+        try (InputStream fis = new FileInputStream(source);
+             OutputStream fos = new FileOutputStream(target)) {
             byte[] buf = new byte[4096];
             int i;
             while ((i = fis.read(buf)) != -1) {
                 fos.write(buf, 0, i);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to copy file {} to {} using stream", source.getAbsolutePath(), target.getAbsolutePath(), e);
         }
     }
 
+    // ==================== Charset Conversion ====================
 
     /**
-     * 把指定文件或目录转换成指定的编码
+     * Converts a file or directory to a specified charset encoding.
      *
-     * @param fileName        要转换的文件
-     * @param fromCharsetName 源文件的编码
-     * @param toCharsetName   要转换的编码
+     * @param fileName        file to convert
+     * @param fromCharsetName source charset
+     * @param toCharsetName   target charset
      */
     public static void convert(String fileName, String fromCharsetName, String toCharsetName) {
         convert(new File(fileName), fromCharsetName, toCharsetName, null);
     }
 
     /**
-     * 把指定文件或目录转换成指定的编码
+     * Converts a file or directory to a specified charset encoding.
      *
-     * @param file            要转换的文件或目录
-     * @param fromCharsetName 源文件的编码
-     * @param toCharsetName   要转换的编码
+     * @param file            file to convert
+     * @param fromCharsetName source charset
+     * @param toCharsetName   target charset
      */
     public static void convert(File file, String fromCharsetName, String toCharsetName) {
         convert(file, fromCharsetName, toCharsetName, null);
     }
 
     /**
-     * 把指定文件或目录转换成指定的编码
+     * Converts a file or directory to a specified charset encoding with filter.
      *
-     * @param fileName        要转换的文件或目录
-     * @param fromCharsetName 源文件的编码
-     * @param toCharsetName   要转换的编码
-     * @param filter          文件名过滤器
+     * @param fileName        file to convert
+     * @param fromCharsetName source charset
+     * @param toCharsetName   target charset
+     * @param filter          filename filter
      */
     public static void convert(String fileName, String fromCharsetName, String toCharsetName, FilenameFilter filter) {
         convert(new File(fileName), fromCharsetName, toCharsetName, filter);
     }
 
     /**
-     * 把指定文件或目录转换成指定的编码
+     * Converts a file or directory to a specified charset encoding with filter.
      *
-     * @param file            要转换的文件或目录
-     * @param fromCharsetName 源文件的编码
-     * @param toCharsetName   要转换的编码
-     * @param filter          文件名过滤器
+     * @param file            file to convert
+     * @param fromCharsetName source charset
+     * @param toCharsetName   target charset
+     * @param filter          filename filter
      */
     public static void convert(File file, String fromCharsetName, String toCharsetName, FilenameFilter filter) {
         if (file.isDirectory()) {
-            List<File> list = Checker.valid(filter) ? listFileFilter(file, filter) : listFile(file);
-            if (Checker.valid(list)) {
+            List<File> list = filter != null ? listFileFilter(file, filter) : listFile(file);
+            if (list != null && !list.isEmpty()) {
                 for (File f : list) {
                     convert(f, fromCharsetName, toCharsetName, filter);
                 }
             }
         } else {
             if (filter == null || filter.accept(file.getParentFile(), file.getName())) {
-                String fileContent = getFileContentFromCharset(file, fromCharsetName);
-                saveFile2Charset(file, toCharsetName, fileContent);
+                try {
+                    String fileContent = getFileContentFromCharset(file, fromCharsetName);
+                    saveFile2Charset(file, toCharsetName, fileContent);
+                } catch (IOException e) {
+                    logger.error("Failed to convert file {} from {} to {}", file.getAbsolutePath(), fromCharsetName, toCharsetName, e);
+                }
             }
         }
     }
 
     /**
-     * 以指定编码方式读取文件，返回文件内容
+     * Reads file content with specified charset.
      *
-     * @param file            要转换的文件
-     * @param fromCharsetName 源文件的编码
+     * @param file            file to read
+     * @param fromCharsetName charset to use for reading
+     * @return file content
+     * @throws UnsupportedCharsetException if charset is not supported
+     * @throws IOException                 if reading fails
      */
-    public static String getFileContentFromCharset(File file, String fromCharsetName) {
-        String str = "";
+    public static String getFileContentFromCharset(File file, String fromCharsetName) throws IOException {
         if (!Charset.isSupported(fromCharsetName)) {
             throw new UnsupportedCharsetException(fromCharsetName);
         }
-        try (InputStream inputStream = new FileInputStream(file);
-             InputStreamReader reader = new InputStreamReader(inputStream, fromCharsetName)
-        ) {
-            char[] chs = new char[(int) file.length()];
-            reader.read(chs);
-            str = new String(chs).trim();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return str;
+        return FileContentUtil.readString(file, Charset.forName(fromCharsetName));
     }
 
     /**
-     * 以指定编码方式写文本文件，存在会覆盖
+     * Writes content to file with specified charset.
      *
-     * @param file          要写入的文件
-     * @param toCharsetName 要转换的编码
-     * @param content       文件内容
+     * @param file          file to write
+     * @param toCharsetName charset to use for writing
+     * @param content       content to write
+     * @throws UnsupportedCharsetException if charset is not supported
+     * @throws IOException                 if writing fails
      */
-    public static void saveFile2Charset(File file, String toCharsetName, String content) {
+    public static void saveFile2Charset(File file, String toCharsetName, String content) throws IOException {
         if (!Charset.isSupported(toCharsetName)) {
             throw new UnsupportedCharsetException(toCharsetName);
         }
-        try (
-                OutputStream outputStream = new FileOutputStream(file);
-                OutputStreamWriter outWrite = new OutputStreamWriter(outputStream, toCharsetName)
-        ) {
-            outWrite.write(content);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FileContentUtil.writeString(file, content, Charset.forName(toCharsetName));
     }
 
+    // ==================== Directory Operations ====================
+
     /**
-     * 文件重命名
+     * Renames a file or directory.
      *
-     * @param oldPath 老文件
-     * @param newPath 新文件
+     * @param oldPath old path
+     * @param newPath new path
+     * @return true if rename succeeded
      */
-    public boolean dirRename(String oldPath, String newPath) {
-        File oldFile = new File(oldPath);// 文件或目录
-        File newFile = new File(newPath);// 文件或目录
-        return oldFile.renameTo(newFile);// 重命名
+    public static boolean dirRename(String oldPath, String newPath) {
+        File oldFile = new File(oldPath);
+        File newFile = new File(newPath);
+        return oldFile.renameTo(newFile);
     }
 
     /**
-     * 递归创建文件夹
+     * Creates a directory recursively.
      *
-     * @param file 由目录创建的file对象
-     * @throws FileNotFoundException
+     * @param file directory to create
+     * @throws FileNotFoundException if creation fails
      */
     public static void mkDir(File file) throws FileNotFoundException {
         if (file == null) {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException("Directory file cannot be null");
         }
 
         if (file.getParentFile().exists()) {
-            if (file.exists()) { // 目录存在, 则直接返回
+            if (file.exists()) {
                 return;
             }
-
-            if (!file.mkdir()) { // 不存在, 则创建
-                throw new FileNotFoundException();
+            if (!file.mkdir()) {
+                throw new FileNotFoundException("Failed to create directory: " + file.getAbsolutePath());
             }
         } else {
-            mkDir(file.getParentFile()); // 创建父目录
+            mkDir(file.getParentFile());
             if (!file.exists() && !file.mkdir()) {
-                throw new FileNotFoundException();
+                throw new FileNotFoundException("Failed to create directory: " + file.getAbsolutePath());
             }
         }
     }
 
+    /**
+     * Creates a directory and all parent directories.
+     *
+     * @param dirPath directory path
+     * @throws IOException if creation fails
+     */
+    public static void mkdir(String dirPath) throws IOException {
+        FileDirUtil.mkdir(dirPath);
+    }
 
     /**
-     * 修改文件的最后访问时间。
-     * 如果文件不存在则创建该文件。
-     * <b>目前这个方法的行为方式还不稳定，主要是方法有些信息输出，这些信息输出是否保留还在考虑中。</b>
+     * Creates a directory and all parent directories.
      *
-     * @param file 需要修改最后访问时间的文件。
+     * @param dir directory
+     * @throws IOException if creation fails
+     */
+    public static void mkdir(File dir) throws IOException {
+        FileDirUtil.mkdir(dir);
+    }
+
+    /**
+     * Creates a directory and all parent directories.
+     *
+     * @param dirPath directory path
+     * @throws IOException if creation fails
+     */
+    public static void mkdirs(String dirPath) throws IOException {
+        FileDirUtil.mkdirs(dirPath);
+    }
+
+    // ==================== Touch Operations ====================
+
+    /**
+     * Updates file last modified time. Creates file if it doesn't exist.
+     *
+     * @param file file to touch
      */
     public static void touch(File file) {
         long currentTime = System.currentTimeMillis();
         if (!file.exists()) {
-            System.err.println("file not found:" + file.getName());
-            System.err.println("Create a new file:" + file.getName());
+            logger.debug("File not found: {}, creating new file", file.getName());
             try {
                 if (file.createNewFile()) {
-                    System.out.println("Succeeded!");
+                    logger.debug("Created new file: {}", file.getName());
                 } else {
-                    System.err.println("Create file failed!");
+                    logger.error("Failed to create file: {}", file.getName());
                 }
             } catch (IOException e) {
-                System.err.println("Create file failed!");
-                e.printStackTrace();
+                logger.error("Failed to create file: {}", file.getName(), e);
             }
         }
         boolean result = file.setLastModified(currentTime);
         if (!result) {
-            System.err.println("touch failed: " + file.getName());
+            logger.warn("Failed to set last modified time for file: {}", file.getName());
         }
     }
 
     /**
-     * 修改文件的最后访问时间。
-     * 如果文件不存在则创建该文件。
-     * <b>目前这个方法的行为方式还不稳定，主要是方法有些信息输出，这些信息输出是否保留还在考虑中。</b>
+     * Updates file last modified time. Creates file if it doesn't exist.
      *
-     * @param fileName 需要修改最后访问时间的文件的文件名。
+     * @param fileName file to touch
      */
     public static void touch(String fileName) {
-        File file = new File(fileName);
-        touch(file);
+        touch(new File(fileName));
     }
 
     /**
-     * 修改文件的最后访问时间。
-     * 如果文件不存在则创建该文件。
-     * <b>目前这个方法的行为方式还不稳定，主要是方法有些信息输出，这些信息输出是否保留还在考虑中。</b>
+     * Updates multiple files last modified time.
      *
-     * @param files 需要修改最后访问时间的文件数组。
+     * @param files files to touch
      */
     public static void touch(File[] files) {
-        for (int i = 0; i < files.length; i++) {
-            touch(files[i]);
+        for (File file : files) {
+            touch(file);
         }
     }
 
     /**
-     * 修改文件的最后访问时间。
-     * 如果文件不存在则创建该文件。
-     * <b>目前这个方法的行为方式还不稳定，主要是方法有些信息输出，这些信息输出是否保留还在考虑中。</b>
+     * Updates multiple files last modified time.
      *
-     * @param fileNames 需要修改最后访问时间的文件名数组。
+     * @param fileNames files to touch
      */
     public static void touch(String[] fileNames) {
-        File[] files = new File[fileNames.length];
-        for (int i = 0; i < fileNames.length; i++) {
-            files[i] = new File(fileNames[i]);
+        for (String fileName : fileNames) {
+            touch(fileName);
         }
-        touch(files);
     }
 
+    // ==================== Directory Creation ====================
+
     /**
-     * 创建指定的目录。
-     * 如果指定的目录的父目录不存在则创建其目录书上所有需要的父目录。
-     * <b>注意：可能会在返回false的时候创建部分父目录。</b>
+     * Creates a directory and all parent directories.
      *
-     * @param file 要创建的目录
-     * @return 完全创建成功时返回true，否则返回false。
+     * @param file directory to create
+     * @return true if creation succeeded
      */
     public static boolean makeDirectory(File file) {
         File parent = file.getParentFile();
@@ -333,119 +379,100 @@ public class FileUtil {
     }
 
     /**
-     * 创建指定的目录。
-     * 如果指定的目录的父目录不存在则创建其目录书上所有需要的父目录。
-     * <b>注意：可能会在返回false的时候创建部分父目录。</b>
+     * Creates a directory and all parent directories.
      *
-     * @param fileName 要创建的目录的目录名
-     * @return 完全创建成功时返回true，否则返回false。
+     * @param fileName directory path
+     * @return true if creation succeeded
      */
     public static boolean makeDirectory(String fileName) {
         File file = new File(fileName);
         return makeDirectory(file);
     }
 
+    // ==================== Empty Directory ====================
+
     /**
-     * 清空指定目录中的文件。
-     * 这个方法将尽可能删除所有的文件，但是只要有一个文件没有被删除都会返回false。
-     * 另外这个方法不会迭代删除，即不会删除子目录及其内容。
+     * Empties a directory by deleting all files within it.
+     * Does not recurse into subdirectories.
      *
-     * @param directory 要清空的目录
-     * @return 目录下的所有文件都被成功删除时返回true，否则返回false.
+     * @param directory directory to empty
+     * @throws IOException if directory cannot be emptied
      */
-    public static boolean emptyDirectory(File directory) {
-        boolean result = true;
-        File[] entries = directory.listFiles();
-        for (int i = 0; i < entries.length; i++) {
-            if (!entries[i].delete()) {
-                result = false;
-            }
+    public static void emptyDirectory(File directory) throws IOException {
+        FileDirUtil.cleanDir(directory);
+    }
+
+    /**
+     * Empties a directory by deleting all files within it.
+     * Does not recurse into subdirectories.
+     *
+     * @param directoryName directory path
+     * @throws IOException if directory cannot be emptied
+     */
+    public static void emptyDirectory(String directoryName) throws IOException {
+        emptyDirectory(new File(directoryName));
+    }
+
+    // ==================== Delete Directory ====================
+
+    /**
+     * Deletes a directory and all its contents recursively.
+     *
+     * @param dirName directory path
+     * @throws IOException if deletion fails
+     */
+    public static void deleteDirectory(String dirName) throws IOException {
+        FileDirUtil.deleteDir(dirName);
+    }
+
+    /**
+     * Deletes a directory and all its contents recursively.
+     *
+     * @param dir directory to delete
+     * @throws IOException if deletion fails
+     */
+    public static void deleteDirectory(File dir) throws IOException {
+        FileDirUtil.deleteDir(dir);
+    }
+
+    /**
+     * Deletes a directory and all its contents recursively.
+     *
+     * @param dir directory to delete
+     * @return true if deletion succeeded
+     */
+    public static boolean deleteDir(File dir) {
+        try {
+            FileDirUtil.deleteDir(dir);
+            return true;
+        } catch (IOException e) {
+            logger.error("Failed to delete directory: {}", dir.getAbsolutePath(), e);
+            return false;
         }
-        return result;
     }
 
-    /**
-     * 清空指定目录中的文件。
-     * 这个方法将尽可能删除所有的文件，但是只要有一个文件没有被删除都会返回false。
-     * 另外这个方法不会迭代删除，即不会删除子目录及其内容。
-     *
-     * @param directoryName 要清空的目录的目录名
-     * @return 目录下的所有文件都被成功删除时返回true，否则返回false。
-     */
-    public static boolean emptyDirectory(String directoryName) {
-        File dir = new File(directoryName);
-        return emptyDirectory(dir);
-    }
+    // ==================== List Files ====================
 
     /**
-     * 删除指定目录及其中的所有内容。
+     * Lists all files in a directory recursively.
      *
-     * @param dirName 要删除的目录的目录名
-     * @return 删除成功时返回true，否则返回false。
+     * @param file   directory
+     * @param filter file filter
+     * @return array of files
      */
-    public static boolean deleteDirectory(String dirName) {
-        return deleteDirectory(new File(dirName));
-    }
-
-    /**
-     * 删除指定目录及其中的所有内容。
-     *
-     * @param dir 要删除的目录
-     * @return 删除成功时返回true，否则返回false。
-     */
-    public static boolean deleteDirectory(File dir) {
-        if ((dir == null) || !dir.isDirectory()) {
-            throw new IllegalArgumentException("Argument " + dir +
-                    " is not a directory. ");
-        }
-
-        File[] entries = dir.listFiles();
-        int sz = entries.length;
-
-        for (int i = 0; i < sz; i++) {
-            if (entries[i].isDirectory()) {
-                if (!deleteDirectory(entries[i])) {
-                    return false;
-                }
-            } else {
-                if (!entries[i].delete()) {
-                    return false;
-                }
-            }
-        }
-
-        return dir.delete();
-    }
-
-    /**
-     * 列出目录中的所有内容，包括其子目录中的内容。
-     *
-     * @param file   要列出的目录
-     * @param filter 过滤器
-     * @return 目录内容的文件数组。
-     */
-    public static File[] listAll(File file,
-                                 javax.swing.filechooser.FileFilter filter) {
-        ArrayList list = new ArrayList();
+    public static File[] listAll(File file, javax.swing.filechooser.FileFilter filter) {
+        ArrayList<File> list = new ArrayList<>();
         File[] files;
         if (!file.exists() || file.isFile()) {
             return null;
         }
-        list(list, file, filter);
+        listFilesRecursive(list, file, filter);
         files = new File[list.size()];
         list.toArray(files);
         return files;
     }
 
-    /**
-     * 将目录中的内容添加到列表。
-     *
-     * @param list   文件列表
-     * @param filter 过滤器
-     * @param file   目录
-     */
-    private static void list(ArrayList list, File file,
-                             javax.swing.filechooser.FileFilter filter) {
+    private static void listFilesRecursive(ArrayList<File> list, File file, javax.swing.filechooser.FileFilter filter) {
         if (filter.accept(file)) {
             list.add(file);
             if (file.isFile()) {
@@ -454,181 +481,127 @@ public class FileUtil {
         }
         if (file.isDirectory()) {
             File[] files = file.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                list(list, files[i], filter);
+            if (files != null) {
+                for (File f : files) {
+                    listFilesRecursive(list, f, filter);
+                }
             }
         }
-
     }
 
+    // ==================== URL Operations ====================
+
     /**
-     * 返回文件的URL地址。
+     * Gets URL for a file.
      *
-     * @param file 文件
-     * @return 文件对应的的URL地址
-     * @throws MalformedURLException
-     * @deprecated 在实现的时候没有注意到File类本身带一个toURL方法将文件路径转换为URL。
-     * 请使用File.toURL方法。
+     * @param file file
+     * @return URL
+     * @throws MalformedURLException if URL is malformed
+     * @deprecated Use File.toURI().toURL() instead
      */
+    @Deprecated
     public static URL getURL(File file) throws MalformedURLException {
         String fileURL = "file:/" + file.getAbsolutePath();
-        URL url = new URL(fileURL);
-        return url;
+        return new URL(fileURL);
     }
 
+    // ==================== Path Operations ====================
+
     /**
-     * 从文件路径得到文件名。
+     * Gets filename from path.
      *
-     * @param filePath 文件的路径，可以是相对路径也可以是绝对路径
-     * @return 对应的文件名
+     * @param filePath file path
+     * @return filename
      */
     public static String getFileName(String filePath) {
-        File file = new File(filePath);
-        return file.getName();
+        return FilePathUtil.getName(filePath);
     }
 
     /**
-     * 从文件名得到文件绝对路径。
+     * Gets absolute path from filename.
      *
-     * @param fileName 文件名
-     * @return 对应的文件路径
+     * @param fileName filename
+     * @return absolute path
      */
     public static String getFilePath(String fileName) {
-        File file = new File(fileName);
-        return file.getAbsolutePath();
+        return new File(fileName).getAbsolutePath();
     }
 
     /**
-     * 将DOS/Windows格式的路径转换为UNIX/Linux格式的路径。
-     * 其实就是将路径中的"\"全部换为"/"，因为在某些情况下我们转换为这种方式比较方便，
-     * 某中程度上说"/"比"\"更适合作为路径分隔符，而且DOS/Windows也将它当作路径分隔符。
+     * Converts path to UNIX style (forward slashes).
      *
-     * @param filePath 转换前的路径
-     * @return 转换后的路径
+     * @param filePath path to convert
+     * @return UNIX style path
      */
     public static String toUNIXpath(String filePath) {
-        return filePath.replace('\\', '/');
+        return FilePathUtil.toUNIXPath(filePath);
     }
 
     /**
-     * 从文件名得到UNIX风格的文件绝对路径。
+     * Gets UNIX style absolute path.
      *
-     * @param fileName 文件名
-     * @return 对应的UNIX风格的文件路径
-     * @see #toUNIXpath(String filePath) toUNIXpath
+     * @param fileName filename
+     * @return UNIX style path
      */
     public static String getUNIXfilePath(String fileName) {
-        File file = new File(fileName);
-        return toUNIXpath(file.getAbsolutePath());
+        return toUNIXpath(new File(fileName).getAbsolutePath());
     }
 
     /**
-     * 得到文件的类型。
-     * 实际上就是得到文件名中最后一个“.”后面的部分。
+     * Gets file type/extension.
      *
-     * @param fileName 文件名
-     * @return 文件名中的类型部分
+     * @param fileName filename
+     * @return extension
      */
     public static String getTypePart(String fileName) {
-        int point = fileName.lastIndexOf('.');
-        int length = fileName.length();
-        if (point == -1 || point == length - 1) {
-            return "";
-        } else {
-            return fileName.substring(point + 1, length);
-        }
+        return FilePathUtil.getSuffix(fileName);
     }
 
     /**
-     * 得到文件的类型。
-     * 实际上就是得到文件名中最后一个“.”后面的部分。
+     * Gets file type/extension.
      *
-     * @param file 文件
-     * @return 文件名中的类型部分
+     * @param file file
+     * @return extension
      */
     public static String getFileType(File file) {
         return getTypePart(file.getName());
     }
 
     /**
-     * 判断文件是否为有效图片
+     * Checks if file is a valid image.
      *
-     * @param filePath 文件路径
-     * @return 是否为图片
+     * @param filePath file path
+     * @return true if valid image
      */
     public static boolean isImage(String filePath) {
-        File imageFile = new File(filePath);
-        if (!imageFile.exists()) {
-            return false;
-        }
-        try {
-            java.awt.Image img = ImageIO.read(imageFile);
-            return img != null && img.getWidth(null) > 0 && img.getHeight(null) > 0;
-        } catch (Exception e) {
-            return false;
-        }
+        return FileHashUtil.isImage(new File(filePath));
     }
 
     /**
-     * 得到文件的名字部分。
-     * 实际上就是路径中的最后一个路径分隔符后的部分。
+     * Gets file name without extension.
      *
-     * @param fileName 文件名
-     * @return 文件名中的名字部分
+     * @param fileName filename
+     * @return name part
      */
     public static String getNamePart(String fileName) {
-        int point = getPathLsatIndex(fileName);
-        int length = fileName.length();
-        if (point == -1) {
-            return fileName;
-        } else if (point == length - 1) {
-            int secondPoint = getPathLsatIndex(fileName, point - 1);
-            if (secondPoint == -1) {
-                if (length == 1) {
-                    return fileName;
-                } else {
-                    return fileName.substring(0, point);
-                }
-            } else {
-                return fileName.substring(secondPoint + 1, point);
-            }
-        } else {
-            return fileName.substring(point + 1);
-        }
+        return FilePathUtil.getBaseName(fileName);
     }
 
     /**
-     * 得到文件名中的父路径部分。
-     * 对两种路径分隔符都有效。
-     * 不存在时返回""。
-     * 如果文件名是以路径分隔符结尾的则不考虑该分隔符，例如"/path/"返回""。
+     * Gets parent directory path.
      *
-     * @param fileName 文件名
-     * @return 父路径，不存在或者已经是父目录时返回""
+     * @param fileName filename
+     * @return parent path
      */
     public static String getPathPart(String fileName) {
-        int point = getPathLsatIndex(fileName);
-        int length = fileName.length();
-        if (point == -1) {
-            return "";
-        } else if (point == length - 1) {
-            int secondPoint = getPathLsatIndex(fileName, point - 1);
-            if (secondPoint == -1) {
-                return "";
-            } else {
-                return fileName.substring(0, secondPoint);
-            }
-        } else {
-            return fileName.substring(0, point);
-        }
+        return FilePathUtil.getParent(fileName);
     }
 
     /**
-     * 得到路径分隔符在文件路径中首次出现的位置。
-     * 对于DOS或者UNIX风格的分隔符都可以。
+     * Gets index of path separator.
      *
-     * @param fileName 文件路径
-     * @return 路径分隔符在路径中首次出现的位置，没有出现时返回-1。
+     * @param fileName filename
+     * @return index
      */
     public static int getPathIndex(String fileName) {
         int point = fileName.indexOf('/');
@@ -639,12 +612,11 @@ public class FileUtil {
     }
 
     /**
-     * 得到路径分隔符在文件路径中指定位置后首次出现的位置。
-     * 对于DOS或者UNIX风格的分隔符都可以。
+     * Gets index of path separator after given position.
      *
-     * @param fileName  文件路径
-     * @param fromIndex 开始查找的位置
-     * @return 路径分隔符在路径中指定位置后首次出现的位置，没有出现时返回-1。
+     * @param fileName  filename
+     * @param fromIndex start position
+     * @return index
      */
     public static int getPathIndex(String fileName, int fromIndex) {
         int point = fileName.indexOf('/', fromIndex);
@@ -655,27 +627,21 @@ public class FileUtil {
     }
 
     /**
-     * 得到路径分隔符在文件路径中最后出现的位置。
-     * 对于DOS或者UNIX风格的分隔符都可以。
+     * Gets last index of path separator.
      *
-     * @param fileName 文件路径
-     * @return 路径分隔符在路径中最后出现的位置，没有出现时返回-1。
+     * @param fileName filename
+     * @return index
      */
     public static int getPathLsatIndex(String fileName) {
-        int point = fileName.lastIndexOf('/');
-        if (point == -1) {
-            point = fileName.lastIndexOf('\\');
-        }
-        return point;
+        return Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
     }
 
     /**
-     * 得到路径分隔符在文件路径中指定位置前最后出现的位置。
-     * 对于DOS或者UNIX风格的分隔符都可以。
+     * Gets last index of path separator before given position.
      *
-     * @param fileName  文件路径
-     * @param fromIndex 开始查找的位置
-     * @return 路径分隔符在路径中指定位置前最后出现的位置，没有出现时返回-1。
+     * @param fileName  filename
+     * @param fromIndex start position
+     * @return index
      */
     public static int getPathLsatIndex(String fileName, int fromIndex) {
         int point = fileName.lastIndexOf('/', fromIndex);
@@ -686,58 +652,40 @@ public class FileUtil {
     }
 
     /**
-     * 将文件名中的类型部分去掉。
+     * Removes extension from filename.
      *
-     * @param filename 文件名
-     * @return 去掉类型部分的结果
+     * @param filename filename
+     * @return filename without extension
      */
     public static String trimType(String filename) {
-        int index = filename.lastIndexOf(".");
-        if (index != -1) {
-            return filename.substring(0, index);
-        } else {
-            return filename;
-        }
+        return FilePathUtil.trimExtension(filename);
     }
 
     /**
-     * 得到相对路径。
-     * 文件名不是目录名的子节点时返回文件名。
+     * Gets relative path from parent to file.
      *
-     * @param pathName 目录名
-     * @param fileName 文件名
-     * @return 得到文件名相对于目录名的相对路径，目录下不存在该文件时返回文件名
+     * @param pathName parent path
+     * @param fileName file path
+     * @return relative path
      */
     public static String getSubpath(String pathName, String fileName) {
-        int index = fileName.indexOf(pathName);
-        if (index != -1) {
-            return fileName.substring(index + pathName.length() + 1);
-        } else {
-            return fileName;
-        }
+        return FilePathUtil.getSubpath(pathName, fileName);
     }
 
     /**
-     * 检查给定目录的存在性
-     * 保证指定的路径可用，如果指定的路径不存在，那么建立该路径，可以为多级路径
+     * Validates and creates path if needed.
      *
-     * @param path
-     * @return 真假值
+     * @param path path to validate
+     * @return true if path exists or was created
      */
-    public static final boolean pathValidate(String path) {
-        //String path="d:/web/www/sub";
-        //System.out.println(path);
-        //path = getUNIXfilePath(path);
-
-        //path = ereg_replace("^\\/+", "", path);
-        //path = ereg_replace("\\/+$", "", path);
+    public static boolean pathValidate(String path) {
         String[] arraypath = path.split("/");
         String tmppath = "";
         for (int i = 0; i < arraypath.length; i++) {
             tmppath += "/" + arraypath[i];
             File d = new File(tmppath.substring(1));
-            if (!d.exists()) { //检查Sub目录是否存在
-                System.out.println(tmppath.substring(1));
+            if (!d.exists()) {
+                logger.debug("Creating directory: {}", tmppath.substring(1));
                 if (!d.mkdir()) {
                     return false;
                 }
@@ -746,109 +694,63 @@ public class FileUtil {
         return true;
     }
 
+    // ==================== File Read Operations ====================
+
     /**
-     * 从 URL 读取文件内容
+     * Reads string from URL.
      *
-     * @param url     URL 地址
-     * @param charset 字符编码
-     * @return 文件内容字符串
-     * @throws IOException      如果读取发生异常
-     * @throws NullPointerException 如果 url 为 null
+     * @param url     URL to read
+     * @param charset charset to use
+     * @return content as string
+     * @throws IOException if reading fails
      */
     public static String readString(URL url, String charset) throws IOException {
         if (url == null) {
             throw new NullPointerException("Empty url provided!");
         }
-
-        InputStream in = null;
-        try {
-            in = url.openStream();
+        try (InputStream in = url.openStream()) {
             byte[] b = new byte[in.available()];
             in.read(b);
-            return new String(b);
-//            return IOUtil.read(in, charset);
-        } catch (IOException e) {
-            throw e;
-        } finally {
-            IOUtil.close(in);
+            return new String(b, charset);
         }
     }
 
     /**
-     * 获取文件内容（使用默认编码）
+     * Gets file content as string.
      *
-     * @param f 要读取的文件
-     * @return 文件内容字符串，文件不存在时返回空字符串
-     * @throws IOException 如果读取发生异常
+     * @param f file
+     * @return content
+     * @throws IOException if reading fails
      */
-    public static final String getFileContent(File f) throws IOException {
-
-        String filecontent = "";
-        try {
-            if (f.exists()) {
-                FileReader fr = new FileReader(f.getAbsolutePath());
-                BufferedReader br = new BufferedReader(fr); //建立BufferedReader对象，并实例化为br
-                String line = br.readLine(); //从文件读取一行字符串
-                //判断读取到的字符串是否不为空
-                while (line != null) {
-                    filecontent += line + "\n";
-                    line = br.readLine(); //从文件中继续读取一行数据
-                }
-                br.close(); //关闭BufferedReader对象
-                fr.close(); //关闭文件
-            }
-
-        } catch (IOException e) {
-            throw e;
-        }
-        return filecontent;
+    public static String getFileContent(File f) throws IOException {
+        return FileContentUtil.readString(f);
     }
 
-
     /**
-     * 读取文件的内容
-     * 读取指定文件的内容
+     * Gets file content as string.
      *
-     * @param path 为要读取文件的绝对路径
-     * @return 以行读取文件后的内容。
+     * @param path file path
+     * @return content
+     * @throws IOException if reading fails
      */
-    public static final String getFileContent(String path) throws IOException {
-        String filecontent = "";
+    public static String getFileContent(String path) throws IOException {
         if (!path.startsWith("/")) {
             path = FileUtil.class.getResource("/").getPath() + path;
         }
-        try {
-            File f = new File(path);
-            if (f.exists()) {
-                FileReader fr = new FileReader(path);
-                BufferedReader br = new BufferedReader(fr); //建立BufferedReader对象，并实例化为br
-                String line = br.readLine(); //从文件读取一行字符串
-                //判断读取到的字符串是否不为空
-                while (line != null) {
-                    filecontent += line + "\n";
-                    line = br.readLine(); //从文件中继续读取一行数据
-                }
-                br.close(); //关闭BufferedReader对象
-                fr.close(); //关闭文件
-            }
-
-        } catch (IOException e) {
-            throw e;
-        }
-        return filecontent;
+        return FileContentUtil.readString(new File(path), StandardCharsets.UTF_8);
     }
 
     /**
-     * 根据内容生成文件
+     * Generates module template file.
      *
-     * @param path          要生成文件的绝对路径，
-     * @param modulecontent 文件的内容。
-     * @return 真假值
+     * @param path          file path
+     * @param modulecontent content
+     * @return true if succeeded
+     * @throws IOException if writing fails
      */
-    public static final boolean genModuleTpl(String path, String modulecontent) throws IOException {
-
+    public static boolean genModuleTpl(String path, String modulecontent) throws IOException {
         path = getUNIXfilePath(path);
-        String[] patharray = path.split("\\/");
+        String[] patharray = path.split("/");
         String modulepath = "";
         for (int i = 0; i < patharray.length - 1; i++) {
             modulepath += "/" + patharray[i];
@@ -859,946 +761,768 @@ public class FileUtil {
                 return false;
             }
         }
-        try {
-            FileWriter fw = new FileWriter(path); //建立FileWriter对象，并实例化fw
-            //将字符串写入文件
-            fw.write(modulecontent);
-            fw.close();
-        } catch (IOException e) {
-            throw e;
-        }
+        FileWriter fw = new FileWriter(path);
+        fw.write(modulecontent);
+        fw.close();
         return true;
     }
 
     /**
-     * 获取图片文件的扩展名（发布系统专用）
+     * Gets picture extension name.
      *
-     * @param pic_path 为图片名称加上前面的路径不包括扩展名
-     * @return 图片的扩展名
+     * @param pic_path picture path without extension
+     * @return extension with dot (e.g., ".jpg")
      */
-    public static final String getPicExtendName(String pic_path) {
+    public static String getPicExtendName(String pic_path) {
         pic_path = getUNIXfilePath(pic_path);
-        String pic_extend = "";
         if (isFileExist(pic_path + ".gif")) {
-            pic_extend = ".gif";
+            return ".gif";
         }
         if (isFileExist(pic_path + ".jpeg")) {
-            pic_extend = ".jpeg";
+            return ".jpeg";
         }
         if (isFileExist(pic_path + ".jpg")) {
-            pic_extend = ".jpg";
+            return ".jpg";
         }
         if (isFileExist(pic_path + ".png")) {
-            pic_extend = ".png";
+            return ".png";
         }
-        return pic_extend; //返回图片扩展名
+        return "";
     }
 
+    // ==================== Copy File Operations ====================
+
     /**
-     * 拷贝文件
+     * Copies a file.
      *
-     * @param in  输入文件
-     * @param out 输出文件
-     * @return
-     * @throws Exception
+     * @param in  input file
+     * @param out output file
+     * @return true if succeeded
      */
-    public static final boolean CopyFile(File in, File out) throws Exception {
+    public static boolean CopyFile(File in, File out) {
         try {
-            FileInputStream fis = new FileInputStream(in);
-            FileOutputStream fos = new FileOutputStream(out);
-            byte[] buf = new byte[1024];
-            int i = 0;
-            while ((i = fis.read(buf)) != -1) {
-                fos.write(buf, 0, i);
-            }
-            fis.close();
-            fos.close();
+            FileCopyUtil.copyFile(in, out);
             return true;
-        } catch (IOException ie) {
-            ie.printStackTrace();
+        } catch (IOException e) {
+            logger.error("Failed to copy file {} to {}", in.getAbsolutePath(), out.getAbsolutePath(), e);
             return false;
         }
     }
 
     /**
-     * 把内容content写的path文件中
+     * Saves content to file.
      *
-     * @param content 输入内容
-     * @param path    文件路径
-     * @return
+     * @param content content to write
+     * @param path    file path
+     * @return true if succeeded
      */
     public static boolean SaveFileAs(String content, String path) {
-        FileWriter fw = null;
         try {
-            fw = new FileWriter(new File(path), false);
-            if (content != null) {
-                fw.write(content);
-            }
+            FileContentUtil.writeString(new File(path), content);
+            return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to save file: {}", path, e);
             return false;
-        } finally {
-            if (fw != null) {
-                try {
-                    fw.flush();
-                    fw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-        return true;
     }
 
     /**
-     * 以字节为单位读取文件，常用于读二进制文件，如图片、声音、影像等文件。
+     * Reads file as byte array.
+     *
+     * @param fileName file path
+     * @return byte array
      */
-    public static byte[] readFileByBytes(String fileName) throws IOException {
-        FileInputStream in = new FileInputStream(fileName);
-        byte[] bytes = null;
+    public static byte[] readFileByBytes(String fileName) {
         try {
-
-            ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
-
-            byte[] temp = new byte[1024];
-
-            int size = 0;
-
-            while ((size = in.read(temp)) != -1) {
-                out.write(temp, 0, size);
-            }
-
-            in.close();
-
-            bytes = out.toByteArray();
-
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        } finally {
-            if (in != null) {
-                in.close();
-            }
+            return FileContentUtil.readBytes(new File(fileName));
+        } catch (IOException e) {
+            logger.error("Failed to read file: {}", fileName, e);
+            return null;
         }
-        return bytes;
     }
 
     /**
-     * 以字符为单位读取文件，常用于读文本，数字等类型的文件
+     * Reads file as chars.
+     *
+     * @param fileName file path
      */
     public static void readFileByChars(String fileName) {
         File file = new File(fileName);
-        Reader reader = null;
-        try {
-            System.out.println("以字符为单位读取文件内容，一次读一个字节：");
-            // 一次读一个字符
-            reader = new InputStreamReader(new FileInputStream(file));
+        try (Reader reader = new InputStreamReader(new FileInputStream(file))) {
             int tempchar;
             while ((tempchar = reader.read()) != -1) {
-                // 对于windows下，\r\n这两个字符在一起时，表示一个换行。
-                // 但如果这两个字符分开显示时，会换两次行。
-                // 因此，屏蔽掉\r，或者屏蔽\n。否则，将会多出很多空行。
                 if (((char) tempchar) != '\r') {
                     System.out.print((char) tempchar);
                 }
             }
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            System.out.println("以字符为单位读取文件内容，一次读多个字节：");
-            // 一次读多个字符
-            char[] tempchars = new char[30];
-            int charread = 0;
-            reader = new InputStreamReader(new FileInputStream(fileName));
-            // 读入多个字符到字符数组中，charread为一次读取字符数
-            while ((charread = reader.read(tempchars)) != -1) {
-                // 同样屏蔽掉\r不显示
-                if ((charread == tempchars.length)
-                        && (tempchars[tempchars.length - 1] != '\r')) {
-                    System.out.print(tempchars);
-                } else {
-                    for (int i = 0; i < charread; i++) {
-                        if (tempchars[i] == '\r') {
-                            continue;
-                        } else {
-                            System.out.print(tempchars[i]);
-                        }
-                    }
-                }
-            }
-
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e1) {
-                }
-            }
+        } catch (IOException e) {
+            logger.error("Failed to read file: {}", fileName, e);
         }
     }
 
     /**
-     * 以行为单位读取文件，常用于读面向行的格式化文件
+     * Reads file as lines.
+     *
+     * @param fileName file path
+     * @return list of lines
      */
     public static List<String> readFileByLines(String fileName) {
-        List<String> returnString = new ArrayList<String>();
-        File file = new File(fileName);
-        BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new FileReader(file));
-            String tempString = null;
-            int line = 1;
-            // 一次读入一行，直到读入null为文件结束
-            while ((tempString = reader.readLine()) != null) {
-                // 显示行号
-                returnString.add(tempString);
-                line++;
-            }
-            reader.close();
+            return FileContentUtil.readLines(new File(fileName));
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e1) {
-                }
-            }
+            logger.error("Failed to read file: {}", fileName, e);
+            return new ArrayList<>();
         }
-        return returnString;
     }
 
     /**
-     * 随机读取文件内容
+     * Reads file randomly.
+     *
+     * @param fileName file path
      */
     public static void readFileByRandomAccess(String fileName) {
-        RandomAccessFile randomFile = null;
-        try {
-            System.out.println("随机读取一段文件内容：");
-            // 打开一个随机访问文件流，按只读方式
-            randomFile = new RandomAccessFile(fileName, "r");
-            // 文件长度，字节数
+        try (RandomAccessFile randomFile = new RandomAccessFile(fileName, "r")) {
             long fileLength = randomFile.length();
-            // 读文件的起始位置
-            int beginIndex = (fileLength > 4) ? 4 : 0;
-            // 将读文件的开始位置移到beginIndex位置。
+            int beginIndex = (int) ((fileLength > 4) ? 4 : 0);
             randomFile.seek(beginIndex);
             byte[] bytes = new byte[10];
-            int byteread = 0;
-            // 一次读10个字节，如果文件内容不足10个字节，则读剩下的字节。
-            // 将一次读取的字节数赋给byteread
+            int byteread;
             while ((byteread = randomFile.read(bytes)) != -1) {
                 System.out.write(bytes, 0, byteread);
             }
         } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (randomFile != null) {
-                try {
-                    randomFile.close();
-                } catch (IOException e1) {
-                }
-            }
+            logger.error("Failed to read file randomly: {}", fileName, e);
         }
     }
 
     /**
-     * 读取文件内容
+     * Reads entire file as string.
      *
-     * @param fileName
-     * @return
+     * @param fileName file path
+     * @return content
      */
     public static String readFileAll(String fileName) {
-        String encoding = "UTF-8";
         File file = new File(fileName);
-        Long filelength = file.length();
-        byte[] filecontent = new byte[filelength.intValue()];
-        try {
-            FileInputStream in = new FileInputStream(file);
-            in.read(filecontent);
-            in.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        long filelength = file.length();
+        if (filelength > Integer.MAX_VALUE) {
+            logger.error("File too large: {}", fileName);
+            return "";
         }
-        try {
-            return new String(filecontent, encoding);
-        } catch (UnsupportedEncodingException e) {
-            System.err.println("The OS does not support " + encoding);
-            e.printStackTrace();
+        byte[] filecontent = new byte[(int) filelength];
+        try (FileInputStream in = new FileInputStream(file)) {
+            in.read(filecontent);
+            return new String(filecontent, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            logger.error("Failed to read file: {}", fileName, e);
             return "";
         }
     }
 
+    // ==================== Rename Operations ====================
+
     /**
-     * 显示输入流中还剩的字节数
+     * Renames a file.
+     *
+     * @param oldFile old file
+     * @param newFile new file
      */
-    private static void showAvailableBytes(InputStream in) {
-        try {
-            System.out.println("当前字节输入流中的字节数为:" + in.available());
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void renameTo(File oldFile, File newFile) {
+        if (!oldFile.renameTo(newFile)) {
+            logger.warn("Failed to rename file {} to {}", oldFile.getAbsolutePath(), newFile.getAbsolutePath());
         }
     }
 
+    // ==================== Exist Check ====================
+
     /**
-     * 将文件重命名
+     * Checks if path exists.
      *
-     * @param oldFile 原文件
-     * @param newFile 目标文件
-     */
-    public static void renameTo(File oldFile, File newFile) {
-        oldFile.renameTo(newFile);
-    }
-
-
-    private static final String FOLDER_SEPARATOR = "/";
-    private static final char EXTENSION_SEPARATOR = '.';
-
-    /**
-     * @param filePath 指定的文件路径
-     * @param isNew    true：新建、false：不新建
-     * @return 存在返回TRUE，不存在返回FALSE
-     * @desc:判断指定路径是否存在，如果不存在，根据参数决定是否新建
+     * @param filePath path
+     * @param isNew    create if not exists
+     * @return true if exists
      */
     public static boolean isExist(String filePath, boolean isNew) {
         File file = new File(filePath);
         if (!file.exists() && isNew) {
-            return file.mkdirs();    //新建文件路径
+            return file.mkdirs();
         }
-        return false;
+        return file.exists();
     }
 
     /**
-     * 获取文件名，构建结构为 prefix + yyyyMMddHH24mmss + 10位随机数 + suffix + .type
+     * Checks if file exists.
      *
-     * @param type   文件类型
-     * @param prefix 前缀
-     * @param suffix 后缀
-     * @return
+     * @param filePath path
+     * @return true if exists
+     */
+    public static boolean isFileExist(String filePath) {
+        return new File(filePath).exists();
+    }
+
+    // ==================== Filename Generation ====================
+
+    /**
+     * Generates filename with timestamp and random number.
+     *
+     * @param type   file type
+     * @param prefix prefix
+     * @param suffix suffix
+     * @return generated filename
      */
     public static String getFileName(String type, String prefix, String suffix) {
-        String date = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-        String random = String.valueOf((int) ((Math.random() * 9 + 1) * 1000000000));   //10位随机数
-
-        //返回文件名
+        String date = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String random = String.valueOf((int) ((Math.random() * 9 + 1) * 1000000000));
         return prefix + date + random + suffix + "." + type;
     }
 
-
     /**
-     * 获取文件名，文件构成：当前时间 + 10位随机数
+     * Generates filename with timestamp and random number.
      *
-     * @return
+     * @return generated filename
      */
     public static String getFileName() {
-        String date = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-        String random = String.valueOf((int) ((Math.random() * 9 + 1) * 1000000000));   //10位随机数
-
-        //返回文件名
-        return date + random;
+        return getFileName("", "", "");
     }
 
-    /**
-     * 获取指定文件的大小
-     */
-    @SuppressWarnings("resource")
-    public static long getFileSize(File file) throws Exception {
-        long size = 0;
-        if (file.exists()) {
-            FileInputStream fis = null;
-            fis = new FileInputStream(file);
-            size = fis.available();
-        } else {
-            file.createNewFile();
-        }
-        return size;
-    }
+    // ==================== File Size ====================
 
     /**
-     * 删除所有文件，包括文件夹
+     * Gets file size.
      *
-     * @param dirpath
-     * @author zifang chenssy
-     * @date : 2019年5月23日 下午12:41:08
+     * @param file file
+     * @return file size in bytes
+     * @throws IOException if error occurs
      */
-    public void deleteAll(String dirpath) {
+    public static long getFileSize(File file) throws IOException {
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found: " + file.getAbsolutePath());
+        }
+        try (FileInputStream fis = new FileInputStream(file)) {
+            return fis.available();
+        }
+    }
+
+    // ==================== Delete All ====================
+
+    /**
+     * Deletes all files and directories recursively.
+     *
+     * @param dirpath directory path
+     */
+    public static void deleteAll(String dirpath) {
         File path = new File(dirpath);
-        try {
-            if (!path.exists()) {
-                return;// 目录不存在退出
-            }
-            if (path.isFile()) {
-                path.delete();
-                return;
-            }
-            File[] files = path.listFiles();// 如果目录中有文件递归删除文件
-            for (int i = 0; i < files.length; i++) {
-                deleteAll(files[i].getAbsolutePath());
-            }
+        if (!path.exists()) {
+            return;
+        }
+        if (path.isFile()) {
             path.delete();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            return;
         }
+        File[] files = path.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                deleteAll(file.getAbsolutePath());
+            }
+        }
+        path.delete();
     }
 
-    /**
-     * 复制文件或者文件夹
-     *
-     * @param inputFile   源文件
-     * @param outputFile  目的文件
-     * @param isOverWrite 是否覆盖文件
-     * @throws IOException
-     */
-    public static void copy(File inputFile, File outputFile, boolean isOverWrite)
-            throws IOException {
-        if (!inputFile.exists()) {
-            throw new RuntimeException(inputFile.getPath() + "源目录不存在!");
-        }
-        copyPri(inputFile, outputFile, isOverWrite);
-    }
+    // ==================== Copy Operations ====================
 
     /**
-     * 复制文件或者文件夹
+     * Copies file or directory.
      *
-     * @param inputFile   源文件
-     * @param outputFile  目的文件
-     * @param isOverWrite 是否覆盖文件
-     * @throws IOException
+     * @param inputFile   source
+     * @param outputFile  destination
+     * @param isOverWrite overwrite existing
+     * @throws IOException if copy fails
      */
-    private static void copyPri(File inputFile, File outputFile, boolean isOverWrite) throws IOException {
-        if (inputFile.isFile()) {        //文件
-            copySimpleFile(inputFile, outputFile, isOverWrite);
+    public static void copy(File inputFile, File outputFile, boolean isOverWrite) throws IOException {
+        if (inputFile.isFile()) {
+            FileCopyUtil.copyFile(inputFile, outputFile, isOverWrite);
         } else {
-            if (!outputFile.exists()) {        //文件夹
+            if (!outputFile.exists()) {
                 outputFile.mkdirs();
             }
-            // 循环子文件夹
-            for (File child : inputFile.listFiles()) {
-                copy(child, new File(outputFile.getPath() + "/" + child.getName()), isOverWrite);
-            }
-        }
-    }
-
-    /**
-     * 复制单个文件
-     *
-     * @param inputFile   源文件
-     * @param outputFile  目的文件
-     * @param isOverWrite 是否覆盖
-     * @throws IOException
-     */
-    private static void copySimpleFile(File inputFile, File outputFile, boolean isOverWrite) throws IOException {
-        if (outputFile.exists()) {
-            if (isOverWrite) {        //可以覆盖
-                if (!outputFile.delete()) {
-                    throw new RuntimeException(outputFile.getPath() + "无法覆盖！");
+            File[] children = inputFile.listFiles();
+            if (children != null) {
+                for (File child : children) {
+                    copy(child, new File(outputFile, child.getName()), isOverWrite);
                 }
-            } else {
-                // 不允许覆盖
-                return;
             }
         }
-        InputStream in = new FileInputStream(inputFile);
-        OutputStream out = new FileOutputStream(outputFile);
-        byte[] buffer = new byte[1024];
-        int read = 0;
-        while ((read = in.read(buffer)) != -1) {
-            out.write(buffer, 0, read);
-        }
-        in.close();
-        out.close();
     }
 
     /**
-     * 获取文件的MD5
+     * Copies directory recursively.
      *
-     * @param file 文件
-     * @return
+     * @param filePath   source path
+     * @param targetPath destination path
+     */
+    public static void copyDir(String filePath, String targetPath) {
+        try {
+            FileCopyUtil.copyDir(new File(filePath), targetPath);
+        } catch (IOException e) {
+            logger.error("Failed to copy directory {} to {}", filePath, targetPath, e);
+        }
+    }
+
+    /**
+     * Copies directory recursively.
+     *
+     * @param filePath   source
+     * @param targetPath destination
+     */
+    public static void copyDir(File filePath, String targetPath) {
+        try {
+            FileCopyUtil.copyDir(filePath, targetPath);
+        } catch (IOException e) {
+            logger.error("Failed to copy directory {} to {}", filePath.getAbsolutePath(), targetPath, e);
+        }
+    }
+
+    // ==================== MD5 Operations ====================
+
+    /**
+     * Gets MD5 hash of file.
+     *
+     * @param file file
+     * @return MD5 hash or null if error
      */
     public static String getFileMD5(File file) {
-        if (!file.exists() || !file.isFile()) {
-            return null;
-        }
-        MessageDigest digest = null;
-        FileInputStream in = null;
-        byte[] buffer = new byte[1024];
-        int len;
         try {
-            digest = MessageDigest.getInstance("MD5");
-            in = new FileInputStream(file);
-            while ((len = in.read(buffer, 0, 1024)) != -1) {
-                digest.update(buffer, 0, len);
-            }
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            return FileHashUtil.md5(file);
+        } catch (IOException e) {
+            logger.error("Failed to compute MD5 for file: {}", file.getAbsolutePath(), e);
             return null;
         }
-        BigInteger bigInt = new BigInteger(1, digest.digest());
-        return bigInt.toString(16);
     }
 
+    // ==================== File Suffix ====================
+
     /**
-     * 获取文件的后缀
+     * Gets file suffix/extension.
      *
-     * @param file 文件
-     * @return
+     * @param file file path
+     * @return extension without dot
      */
     public static String getFileSuffix(String file) {
-        if (file == null) {
-            return null;
-        }
-        int extIndex = file.lastIndexOf(EXTENSION_SEPARATOR);
-        if (extIndex == -1) {
-            return null;
-        }
-        int folderIndex = file.lastIndexOf(FOLDER_SEPARATOR);
-        if (folderIndex > extIndex) {
-            return null;
-        }
-        return file.substring(extIndex + 1);
+        return FilePathUtil.getSuffix(file);
     }
 
+    /**
+     * Gets file suffix/extension.
+     *
+     * @param file file
+     * @return extension without dot
+     */
+    public static String suffix(File file) {
+        String fileName = file.getName();
+        int dotIndex = fileName.indexOf(".");
+        if (dotIndex >= 0 && dotIndex < fileName.length() - 1) {
+            return fileName.substring(dotIndex + 1);
+        }
+        return "";
+    }
+
+    // ==================== Hash Operations ====================
 
     /**
-     * Buffer的大小
+     * Computes file hash.
+     *
+     * @param file     file
+     * @param hashType algorithm (MD5, SHA-1, SHA-256, etc.)
+     * @return hash as hex string or empty on error
      */
-    private static Integer BUFFER_SIZE = 1024 * 1024 * 10;
-
-    public static MessageDigest MD5 = null;
-
-    static {
+    public static String fileHash(File file, String hashType) {
         try {
-            MD5 = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException ne) {
-            ne.printStackTrace();
+            return FileHashUtil.hash(file, hashType);
+        } catch (IOException e) {
+            logger.error("Failed to compute {} hash for file: {}", hashType, file.getAbsolutePath(), e);
+            return "";
         }
     }
 
+    // ==================== Line Counting ====================
+
     /**
-     * 获取文件的md5
+     * Counts lines in file.
      *
-     * @param file
-     * @return
+     * @param file file
+     * @return number of lines
      */
-    public static String fileMD5(File file) {
-        FileInputStream fileInputStream = null;
+    public static int countLines(File file) {
         try {
-            fileInputStream = new FileInputStream(file);
-            byte[] buffer = new byte[8192];
-            int length;
-            while ((length = fileInputStream.read(buffer)) != -1) {
-                MD5.update(buffer, 0, length);
-            }
-            return new BigInteger(1, MD5.digest()).toString(16);
+            return (int) FileContentUtil.countLines(file);
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            try {
-                if (fileInputStream != null)
-                    fileInputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            logger.error("Failed to count lines in file: {}", file.getAbsolutePath(), e);
+            return 0;
+        }
+    }
+
+    // ==================== Lines Operations ====================
+
+    /**
+     * Reads all lines from file.
+     *
+     * @param file file
+     * @return list of lines
+     */
+    public static List<String> lines(File file) {
+        try {
+            return FileContentUtil.readLines(file);
+        } catch (IOException e) {
+            logger.error("Failed to read lines from file: {}", file.getAbsolutePath(), e);
+            return new ArrayList<>();
         }
     }
 
     /**
-     * 获取文件的行数
+     * Reads all lines from file with encoding.
      *
-     * @param file 统计的文件
-     * @return 文件行数
+     * @param file     file
+     * @param encoding charset
+     * @return list of lines
      */
-    public final static int countLines(File file) {
-        try (LineNumberReader rf = new LineNumberReader(new FileReader(file))) {
-            long fileLength = file.length();
-            rf.skip(fileLength);
-            return rf.getLineNumber();
+    public static List<String> lines(File file, String encoding) {
+        try {
+            return FileContentUtil.readLines(file, encoding);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to read lines from file: {} with encoding {}", file.getAbsolutePath(), encoding, e);
+            return new ArrayList<>();
         }
-        return 0;
     }
 
     /**
-     * 以列表的方式获取文件的所有行
+     * Reads first n lines from file.
      *
-     * @param file 需要出来的文件
-     * @return 包含所有行的list
+     * @param file  file
+     * @param lines number of lines
+     * @return list of lines
      */
-    public final static List<String> lines(File file) {
-        List<String> list = new ArrayList<>();
-        try (
-                BufferedReader reader = new BufferedReader(new FileReader(file))
-        ) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                list.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    /**
-     * 以列表的方式获取文件的所有行
-     *
-     * @param file     需要处理的文件
-     * @param encoding 指定读取文件的编码
-     * @return 包含所有行的list
-     */
-    public final static List<String> lines(File file, String encoding) {
-        List<String> list = new ArrayList<>();
-        try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))
-        ) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                list.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-
-    /**
-     * 以列表的方式获取文件的指定的行数数据
-     *
-     * @param file  处理的文件
-     * @param lines 需要读取的行数
-     * @return 包含制定行的list
-     */
-    public final static List<String> lines(File file, int lines) {
-        List<String> list = new ArrayList<>();
+    public static List<String> lines(File file, int lines) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            List<String> list = new ArrayList<>();
             String line;
-            while ((line = reader.readLine()) != null) {
+            int count = 0;
+            while ((line = reader.readLine()) != null && count < lines) {
                 list.add(line);
-                if (list.size() == lines) {
-                    break;
-                }
+                count++;
             }
+            return list;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to read {} lines from file: {}", lines, file.getAbsolutePath(), e);
+            return new ArrayList<>();
         }
-        return list;
     }
 
     /**
-     * 以列表的方式获取文件的指定的行数数据
+     * Reads first n lines from file with encoding.
      *
-     * @param file     需要处理的函数
-     * @param lines    需要处理的行还俗
-     * @param encoding 指定读取文件的编码
-     * @return 包含制定行的list
+     * @param file     file
+     * @param lines    number of lines
+     * @param encoding charset
+     * @return list of lines
      */
-    public final static List<String> lines(File file, int lines, String encoding) {
-        List<String> list = new ArrayList<>();
-        try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))
-        ) {
+    public static List<String> lines(File file, int lines, String encoding) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
+            List<String> list = new ArrayList<>();
             String line;
-            while ((line = reader.readLine()) != null) {
+            int count = 0;
+            while ((line = reader.readLine()) != null && count < lines) {
                 list.add(line);
-                if (list.size() == lines) {
-                    break;
-                }
+                count++;
             }
+            return list;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to read {} lines from file: {} with encoding {}", lines, file.getAbsolutePath(), encoding, e);
+            return new ArrayList<>();
         }
-        return list;
     }
 
+    // ==================== Append Line ====================
+
     /**
-     * 在文件末尾追加一行
+     * Appends a line to file.
      *
-     * @param file 需要处理的函数
-     * @param str  添加的子字符串
-     * @return 是否成功
+     * @param file file
+     * @param str  line to append
+     * @return true if succeeded
      */
-    public final static boolean appendLine(File file, String str) {
-        try (
-                RandomAccessFile randomFile = new RandomAccessFile(file, "rw")
-        ) {
-            long fileLength = randomFile.length();
-            randomFile.seek(fileLength);
-            //randomFile.writeBytes(SysHepler.FILE_SEPARATOR + str);
+    public static boolean appendLine(File file, String str) {
+        try {
+            FileContentUtil.appendLine(file, str);
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to append line to file: {}", file.getAbsolutePath(), e);
+            return false;
         }
-        return false;
     }
 
     /**
-     * 在文件末尾追加一行
+     * Appends a line to file with encoding.
      *
-     * @param file     需要处理的文件
-     * @param str      添加的字符串
-     * @param encoding 指定写入的编码
-     * @return 是否成功
+     * @param file     file
+     * @param str      line to append
+     * @param encoding charset
+     * @return true if succeeded
      */
-    public final static boolean appendLine(File file, String str, String encoding) {
-        String lineSeparator = System.getProperty("line.separator", "\n");
-        try (
-                RandomAccessFile randomFile = new RandomAccessFile(file, "rw")
-        ) {
-            long fileLength = randomFile.length();
-            randomFile.seek(fileLength);
-            randomFile.write((lineSeparator + str).getBytes(encoding));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * 将字符串以追加的方式写入到文件中
-     */
-    public final static boolean writeAppend(File file, String str) {
-        try (
-                RandomAccessFile randomFile = new RandomAccessFile(file, "rw")
-        ) {
-            long fileLength = randomFile.length();
-            randomFile.seek(fileLength);
-            randomFile.writeBytes(str);
+    public static boolean appendLine(File file, String str, String encoding) {
+        try {
+            FileContentUtil.appendLine(file, str);
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to append line to file: {} with encoding {}", file.getAbsolutePath(), encoding, e);
+            return false;
         }
-        return false;
     }
 
-    /**
-     * 将字符串以制定的编码写入到文件中
-     */
-    public final static boolean write(File file, String str, String encoding) {
-        try (
-                RandomAccessFile randomFile = new RandomAccessFile(file, "rw")
-        ) {
-            randomFile.write(str.getBytes(encoding));
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+    // ==================== Write Operations ====================
 
     /**
-     * 将字符串以追加的方式以制定的编码写入到文件中
-     */
-    public final static boolean writeAppend(File file, String str, String encoding) {
-        try (
-                RandomAccessFile randomFile = new RandomAccessFile(file, "rw")
-        ) {
-            long fileLength = randomFile.length();
-            randomFile.seek(fileLength);
-            randomFile.write(str.getBytes(encoding));
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * 快速清空一个超大的文件
+     * Writes string to file (overwrites).
      *
-     * @param file 需要处理的文件
-     * @return 是否成功
+     * @param file file
+     * @param str  content
+     * @return true if succeeded
      */
-    public final static boolean cleanFile(File file) {
-        try (
-                FileWriter fw = new FileWriter(file)
-        ) {
+    public static boolean writeAppend(File file, String str) {
+        try {
+            FileContentUtil.appendString(file, str);
+            return true;
+        } catch (IOException e) {
+            logger.error("Failed to write to file: {}", file.getAbsolutePath(), e);
+            return false;
+        }
+    }
+
+    /**
+     * Writes string to file with encoding (overwrites).
+     *
+     * @param file     file
+     * @param str      content
+     * @param encoding charset
+     * @return true if succeeded
+     */
+    public static boolean write(File file, String str, String encoding) {
+        try {
+            FileContentUtil.writeString(file, str, Charset.forName(encoding));
+            return true;
+        } catch (IOException e) {
+            logger.error("Failed to write to file: {} with encoding {}", file.getAbsolutePath(), encoding, e);
+            return false;
+        }
+    }
+
+    /**
+     * Appends string to file with encoding.
+     *
+     * @param file     file
+     * @param str      content
+     * @param encoding charset
+     * @return true if succeeded
+     */
+    public static boolean writeAppend(File file, String str, String encoding) {
+        try {
+            FileContentUtil.appendString(file, str);
+            return true;
+        } catch (IOException e) {
+            logger.error("Failed to append to file: {} with encoding {}", file.getAbsolutePath(), encoding, e);
+            return false;
+        }
+    }
+
+    /**
+     * Writes string to file.
+     *
+     * @param file file
+     * @param str  content
+     * @return true if succeeded
+     */
+    public static boolean write(File file, String str) {
+        try {
+            FileContentUtil.writeString(file, str);
+            return true;
+        } catch (IOException e) {
+            logger.error("Failed to write to file: {}", file.getAbsolutePath(), e);
+            return false;
+        }
+    }
+
+    /**
+     * Appends string to file.
+     *
+     * @param file     file
+     * @param str      content
+     * @param encoding charset
+     * @return true if succeeded
+     */
+    public static boolean addWrite(File file, String str, String encoding) {
+        try {
+            FileContentUtil.appendString(file, str);
+            return true;
+        } catch (IOException e) {
+            logger.error("Failed to add write to file: {} with encoding {}", file.getAbsolutePath(), encoding, e);
+            return false;
+        }
+    }
+
+    // ==================== Clean File ====================
+
+    /**
+     * Empties a file quickly.
+     *
+     * @param file file to empty
+     * @return true if succeeded
+     */
+    public static boolean cleanFile(File file) {
+        try (FileWriter fw = new FileWriter(file)) {
             fw.write("");
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to clean file: {}", file.getAbsolutePath(), e);
+            return false;
         }
-        return false;
     }
 
+    // ==================== MIME Type ====================
+
     /**
-     * 获取文件的Mime类型
+     * Gets MIME type of file.
      *
-     * @param file 需要处理的文件
-     * @return 返回文件的mime类型
-     * @throws IOException
+     * @param file file path
+     * @return MIME type
+     * @throws IOException if error
      */
-    public final static String mimeType(String file) throws IOException {
-        FileNameMap fileNameMap = URLConnection.getFileNameMap();
+    public static String mimeType(String file) throws IOException {
+        java.net.FileNameMap fileNameMap = URLConnection.getFileNameMap();
         return fileNameMap.getContentTypeFor(file);
     }
 
+    // ==================== File Type Detection ====================
+
     /**
-     * 根据文件头魔数检测文件类型
+     * Detects file type by magic bytes.
      *
-     * @param file 需要检测的文件
-     * @return 文件类型后缀（jpg/png/pdf 等），未知返回 null
+     * @param file file
+     * @return file type (jpg, png, pdf, etc.) or null
      */
-    public final static String fileType(File file) {
-        if (file == null || !file.exists() || !file.isFile()) {
-            return null;
-        }
-        byte[] header = new byte[50];
-        try (FileInputStream fis = new FileInputStream(file)) {
-            int read = fis.read(header);
-            if (read <= 0) {
-                return null;
-            }
-            String hex = bytesToHex(header);
-            for (Map.Entry<String, String> entry : MAGIC_NUMBER_MAP.entrySet()) {
-                if (hex.toUpperCase().startsWith(entry.getValue())) {
-                    return entry.getKey();
-                }
-            }
-        } catch (IOException e) {
-            log.warn("fileType read error: {}", e.getMessage());
-        }
-        return null;
+    public static String fileType(File file) {
+        return FileHashUtil.fileType(file);
     }
 
     /**
-     * 将字节数组转为十六进制字符串
-     */
-    private static String bytesToHex(byte[] bytes) {
-        if (bytes == null) {
-            return "";
-        }
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            int v = b & 0xFF;
-            if (v < 16) {
-                sb.append('0');
-            }
-            sb.append(Integer.toHexString(v));
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 文件头魔数映射表
-     */
-    private static final Map<String, String> MAGIC_NUMBER_MAP = new HashMap<>();
-
-    static {
-        MAGIC_NUMBER_MAP.put("jpg", "FFD8FF");
-        MAGIC_NUMBER_MAP.put("png", "89504E47");
-        MAGIC_NUMBER_MAP.put("gif", "47494638");
-        MAGIC_NUMBER_MAP.put("tif", "49492A00");
-        MAGIC_NUMBER_MAP.put("bmp", "424D");
-        MAGIC_NUMBER_MAP.put("dwg", "41433130");
-        MAGIC_NUMBER_MAP.put("html", "68746D6C3E");
-        MAGIC_NUMBER_MAP.put("rtf", "7B5C727466");
-        MAGIC_NUMBER_MAP.put("xml", "3C3F786D6C");
-        MAGIC_NUMBER_MAP.put("zip", "504B0304");
-        MAGIC_NUMBER_MAP.put("rar", "52617221");
-        MAGIC_NUMBER_MAP.put("psd", "38425053");
-        MAGIC_NUMBER_MAP.put("eml", "44656C69766572792D646174653A");
-        MAGIC_NUMBER_MAP.put("dbx", "CFAD12FEC5FD746F");
-        MAGIC_NUMBER_MAP.put("pst", "2142444E");
-        MAGIC_NUMBER_MAP.put("xls", "D0CF11E0");
-        MAGIC_NUMBER_MAP.put("doc", "D0CF11E0");
-        MAGIC_NUMBER_MAP.put("mdb", "5374616E64617264204A");
-        MAGIC_NUMBER_MAP.put("wpd", "FF575043");
-        MAGIC_NUMBER_MAP.put("eps", "252150532D41646F6265");
-        MAGIC_NUMBER_MAP.put("ps", "252150532D41646F6265");
-        MAGIC_NUMBER_MAP.put("pdf", "255044462D312E");
-        MAGIC_NUMBER_MAP.put("qdf", "AC9EBD8F");
-        MAGIC_NUMBER_MAP.put("pwl", "E3828596");
-        MAGIC_NUMBER_MAP.put("wav", "57415645");
-        MAGIC_NUMBER_MAP.put("avi", "41564920");
-        MAGIC_NUMBER_MAP.put("ram", "2E7261FD");
-        MAGIC_NUMBER_MAP.put("rm", "2E524D46");
-        MAGIC_NUMBER_MAP.put("mpg", "000001BA");
-        MAGIC_NUMBER_MAP.put("mov", "6D6F6F76");
-        MAGIC_NUMBER_MAP.put("asf", "3026B2758E66CF11");
-        MAGIC_NUMBER_MAP.put("mid", "4D546864");
-    }
-
-    /**
-     * 获取文件最后的修改时间
+     * Gets file modification time.
      *
-     * @param file 需要处理的文件
-     * @return 返回文件的修改时间
+     * @param file file
+     * @return modification date
      */
-    public final static Date modifyTime(File file) {
+    public static Date modifyTime(File file) {
         return new Date(file.lastModified());
     }
 
+    // ==================== Copy with Channel ====================
 
     /**
-     * 复制文件
+     * Copies file using FileChannel.
      *
-     * @param resourcePath 源文件
-     * @param targetPath   目标文件
-     * @return 是否成功
+     * @param resourcePath source
+     * @param targetPath  destination
+     * @return true if succeeded
      */
-    public final static boolean copy(String resourcePath, String targetPath) {
-        File file = new File(resourcePath);
-        return copy(file, targetPath);
+    public static boolean copy(String resourcePath, String targetPath) {
+        return copy(new File(resourcePath), targetPath);
     }
 
     /**
-     * 复制文件
-     * 通过该方式复制文件文件越大速度越是明显
+     * Copies file using FileChannel.
      *
-     * @param file       需要处理的文件
-     * @param targetFile 目标文件
-     * @return 是否成功
+     * @param file       source
+     * @param targetFile destination
+     * @return true if succeeded
      */
-    public final static boolean copy(File file, String targetFile) {
-        try (
-                FileInputStream fin = new FileInputStream(file);
-                FileOutputStream fout = new FileOutputStream(new File(targetFile))
-        ) {
+    public static boolean copy(File file, String targetFile) {
+        try (FileInputStream fin = new FileInputStream(file);
+             FileOutputStream fout = new FileOutputStream(new File(targetFile))) {
             FileChannel in = fin.getChannel();
             FileChannel out = fout.getChannel();
-            //设定缓冲区
             ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
             while (in.read(buffer) != -1) {
-                //准备写入，防止其他读取，锁住文件
                 buffer.flip();
                 out.write(buffer);
-                //准备读取。将缓冲区清理完毕，移动文件内部指针
                 buffer.clear();
             }
+            return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Failed to copy file {} to {}", file.getAbsolutePath(), targetFile, e);
+            return false;
         }
-        return false;
     }
 
+    /**
+     * Copies file.
+     *
+     * @param resource source
+     * @param target   destination
+     * @return true if succeeded
+     * @throws IOException if copy fails
+     */
+    public static boolean copy(File resource, File target) throws IOException {
+        if (resource.isFile()) {
+            FileCopyUtil.copyFile(resource, target);
+            return true;
+        }
+        File[] files = resource.listFiles();
+        if (files == null || files.length == 0) {
+            return target.mkdirs();
+        }
+        target.mkdirs();
+        for (File file : files) {
+            String targetFilePath = file.getAbsolutePath().substring(resource.getAbsolutePath().length());
+            File targetFile = new File(target.getAbsolutePath() + "/" + targetFilePath);
+            if (file.isDirectory()) {
+                targetFile.mkdirs();
+                copy(file, targetFile);
+            } else {
+                FileCopyUtil.copyFile(file, targetFile);
+            }
+        }
+        return true;
+    }
 
     /**
-     * 创建多级目录
+     * Copies file using FileChannel.
      *
-     * @param paths 需要创建的目录
-     * @return 是否成功
+     * @param file       source
+     * @param targetFile destination
+     * @return true if succeeded
+     * @throws IOException if copy fails
      */
-    public final static boolean createPaths(String paths) {
+    public static boolean copyFile(File file, File targetFile) throws IOException {
+        FileCopyUtil.copyFile(file, targetFile);
+        return true;
+    }
+
+    // ==================== Create Paths ====================
+
+    /**
+     * Creates multiple directory levels.
+     *
+     * @param paths directory path
+     * @return true if succeeded
+     */
+    public static boolean createPaths(String paths) {
         File dir = new File(paths);
         return !dir.exists() && dir.mkdir();
     }
 
     /**
-     * 创建文件支持多级目录
+     * Creates file with parent directories.
      *
-     * @param filePath 需要创建的文件
-     * @return 是否成功
+     * @param filePath file path
+     * @return true if succeeded
      */
-    public final static boolean createFiles(String filePath) {
+    public static boolean createFiles(String filePath) {
         File file = new File(filePath);
         if (file.isDirectory()) {
             if (!file.exists()) {
@@ -1811,7 +1535,7 @@ public class FileUtil {
                     try {
                         return file.createNewFile();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        logger.error("Failed to create file: {}", filePath, e);
                     }
                 }
             }
@@ -1820,122 +1544,227 @@ public class FileUtil {
     }
 
     /**
-     * 删除一个文件
+     * Creates file with parent directories.
      *
-     * @param file 需要处理的文件
-     * @return 是否成功
+     * @param file file
+     * @return true if succeeded
      */
-    public final static boolean deleteFile(File file) {
-        return file.delete();
-    }
-
-    /**
-     * 删除一个目录
-     *
-     * @param file 需要处理的文件
-     * @return 是否成功
-     */
-    public final static boolean deleteDir(File file) {
-        List<File> files = listFileAll(file);
-
-        for (File f : files) {
-            if (f.isDirectory()) {
-                deleteDir(f);
+    public static boolean createFiles(File file) {
+        if (file.exists()) {
+            return true;
+        }
+        if (file.isDirectory()) {
+            if (!file.exists()) {
+                return file.mkdirs();
+            }
+        } else {
+            File dir = file.getParentFile();
+            if (!dir.exists()) {
+                if (dir.mkdirs()) {
+                    try {
+                        return file.createNewFile();
+                    } catch (IOException e) {
+                        logger.error("Failed to create file: {}", file.getAbsolutePath(), e);
+                    }
+                }
             } else {
-                deleteFile(f);
+                try {
+                    return file.createNewFile();
+                } catch (IOException e) {
+                    logger.error("Failed to create file: {}", file.getAbsolutePath(), e);
+                }
             }
         }
+        return false;
+    }
 
+    /**
+     * Creates file with parent directories.
+     *
+     * @param file    file
+     * @param isReNew recreate if exists
+     * @return true if succeeded
+     */
+    public static boolean createFiles(File file, boolean isReNew) {
+        if (file.exists()) {
+            if (isReNew) {
+                if (file.delete()) {
+                    try {
+                        return file.createNewFile();
+                    } catch (IOException e) {
+                        logger.error("Failed to create file: {}", file.getAbsolutePath(), e);
+                    }
+                }
+            }
+            return true;
+        }
+        if (file.isDirectory()) {
+            if (!file.exists()) {
+                return file.mkdirs();
+            }
+        } else {
+            File dir = file.getParentFile();
+            if (!dir.exists()) {
+                if (dir.mkdirs()) {
+                    try {
+                        return file.createNewFile();
+                    } catch (IOException e) {
+                        logger.error("Failed to create file: {}", file.getAbsolutePath(), e);
+                    }
+                }
+            } else {
+                try {
+                    return file.createNewFile();
+                } catch (IOException e) {
+                    logger.error("Failed to create file: {}", file.getAbsolutePath(), e);
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Creates file with parent directories.
+     *
+     * @param path file path
+     * @return true if succeeded
+     */
+    public static boolean createFile(String path) {
+        if (path != null && !path.isEmpty()) {
+            try {
+                File file = new File(path);
+                if (!file.getParentFile().exists() && file.getParentFile().mkdirs()) {
+                    return file.createNewFile();
+                } else if (file.exists()) {
+                    return true;
+                } else {
+                    return file.createNewFile();
+                }
+            } catch (Exception e) {
+                logger.error("Failed to create file: {}", path, e);
+            }
+        }
+        return false;
+    }
+
+    // ==================== Delete File ====================
+
+    /**
+     * Deletes a file.
+     *
+     * @param file file
+     * @return true if deleted
+     */
+    public static boolean deleteFile(File file) {
         return file.delete();
     }
 
+    /**
+     * Deletes a directory and all contents.
+     *
+     * @param file directory
+     * @return true if deleted
+     */
+    public static boolean delete(File file) {
+        if (file == null) {
+            return false;
+        }
+        if (file.isFile()) {
+            return file.delete();
+        }
+        File[] files = file.listFiles();
+        if (files == null) {
+            return file.delete();
+        }
+        for (File ff : files) {
+            if (ff.isDirectory()) {
+                delete(ff);
+            } else {
+                if (ff.length() > 1024 * 1024 * 1024) {
+                    cleanFile(ff);
+                }
+                ff.delete();
+            }
+        }
+        return file.delete();
+    }
 
     /**
-     * 快速的删除超大的文件
+     * Deletes a large file quickly.
      *
-     * @param file 需要处理的文件
-     * @return 是否成功
+     * @param file file
+     * @return true if deleted
      */
-    public final static boolean deleteBigFile(File file) {
+    public static boolean deleteBigFile(File file) {
         return cleanFile(file) && file.delete();
     }
 
+    // ==================== List Files ====================
 
     /**
-     * 复制目录
+     * Lists files in directory recursively.
      *
-     * @param filePath   需要处理的文件
-     * @param targetPath 目标文件
-     */
-    public final static void copyDir(String filePath, String targetPath) {
-        File file = new File(filePath);
-        copyDir(file, targetPath);
-    }
-
-    /**
-     * 复制目录
-     *
-     * @param filePath   需要处理的文件
-     * @param targetPath 目标文件
-     */
-    public final static void copyDir(File filePath, String targetPath) {
-        File targetFile = new File(targetPath);
-        if (!targetFile.exists()) {
-            createPaths(targetPath);
-        }
-        File[] files = filePath.listFiles();
-        for (File file : files) {
-            String path = file.getName();
-            if (file.isDirectory()) {
-                copyDir(file, targetPath + "/" + path);
-            } else {
-                copy(file, targetPath + "/" + path);
-            }
-        }
-
-    }
-
-    /**
-     * 罗列指定路径下的全部文件
-     *
-     * @param path 需要处理的文件
-     * @return 包含所有文件的的list
+     * @param path directory path
+     * @return list of files
      */
     public static List<File> listFile(String path) {
-        File file = new File(path);
-        return listFile(file);
+        return listFile(new File(path));
     }
 
     /**
-     * 罗列指定路径下的全部文件包括文件夹
+     * Lists files in directory recursively.
      *
-     * @param path 需要处理的文件
-     * @return 返回文件列表
+     * @param path directory
+     * @return list of files
      */
-    public final static List<File> listFileAll(File path) {
+    public static List<File> listFile(File path) {
         List<File> list = new ArrayList<>();
-        File[] files = path.listFiles();
-        for (File file : files) {
-            list.add(file);
-            if (file.isDirectory()) {
-                list.addAll(listFileAll(file));
+        if (path != null && path.exists() && path.isDirectory()) {
+            File[] files = path.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        list.addAll(listFile(file));
+                    } else {
+                        list.add(file);
+                    }
+                }
             }
         }
-
         return list;
     }
 
     /**
-     * 罗列指定路径下的全部文件包括文件夹
+     * Lists all files including directories.
      *
-     * @param path   需要处理的文件
-     * @param filter 处理文件的filter
-     * @return 返回文件列表
+     * @param path directory
+     * @return list of all files and directories
      */
-    public final static List<File> listFileFilter(File path, FilenameFilter filter) {
+    public static List<File> listFileAll(File path) {
         List<File> list = new ArrayList<>();
         File[] files = path.listFiles();
-        if (Checker.valid(files)) {
+        if (files != null) {
+            for (File file : files) {
+                list.add(file);
+                if (file.isDirectory()) {
+                    list.addAll(listFileAll(file));
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * Lists files matching filter.
+     *
+     * @param path   directory
+     * @param filter filename filter
+     * @return list of matching files
+     */
+    public static List<File> listFileFilter(File path, FilenameFilter filter) {
+        List<File> list = new ArrayList<>();
+        File[] files = path.listFiles();
+        if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
                     list.addAll(listFileFilter(file, filter));
@@ -1950,24 +1779,16 @@ public class FileUtil {
     }
 
     /**
-     * 获取指定目录下的特点文件,通过后缀名过滤
+     * Lists files with postfix filter.
      *
-     * @param dirPath  需要处理的文件
-     * @param postfixs 文件后缀
-     * @return 返回文件列表
+     * @param dirPath  directory
+     * @param postfixs extension filter (e.g., ".txt")
+     * @return list of matching files
      */
-    public final static List<File> listFileFilter(File dirPath, final String postfixs) {
-        /*
-        如果在当前目录中使用Filter讲只罗列当前目录下的文件不会罗列孙子目录下的文件
-        FilenameFilter filefilter = new FilenameFilter() {
-            public boolean accept(File dir, String name) {
-                return name.endsWith(postfixs);
-            }
-        };
-        */
-        List<File> list = new ArrayList<File>();
+    public static List<File> listFileFilter(File dirPath, String postfixs) {
+        List<File> list = new ArrayList<>();
         File[] files = dirPath.listFiles();
-        if (Checker.valid(files)) {
+        if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
                     list.addAll(listFileFilter(file, postfixs));
@@ -1983,22 +1804,32 @@ public class FileUtil {
     }
 
     /**
-     * 在指定的目录下搜寻文个文件
+     * Lists files with suffix.
      *
-     * @param dirPath  搜索的目录
-     * @param fileName 搜索的文件名
-     * @return 返回文件列表
+     * @param dirPath  directory
+     * @param postfixs extension filter
+     * @return list of matching files
+     */
+    public static List<File> listFileSuffix(File dirPath, String postfixs) {
+        return listFileFilter(dirPath, postfixs);
+    }
+
+    /**
+     * Searches for file by name.
+     *
+     * @param dirPath  directory to search
+     * @param fileName filename to find
+     * @return list of matching files
      */
     public static List<File> searchFile(File dirPath, String fileName) {
         List<File> list = new ArrayList<>();
         File[] files = dirPath.listFiles();
-        if (Checker.valid(files)) {
+        if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
                     list.addAll(searchFile(file, fileName));
                 } else {
-                    String Name = file.getName();
-                    if (Name.equals(fileName)) {
+                    if (file.getName().equals(fileName)) {
                         list.add(file);
                     }
                 }
@@ -2008,737 +1839,32 @@ public class FileUtil {
     }
 
     /**
-     * 查找符合正则表达式reg的的文件
+     * Lists files by exact name match.
      *
-     * @param dirPath 搜索的目录
-     * @param reg     正则表达式
-     * @return 返回文件列表
-     */
-    public static List<File> searchFileReg(File dirPath, String reg) {
-        List<File> list = new ArrayList<>();
-        File[] files = dirPath.listFiles();
-        if (Checker.valid(files)) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(searchFile(file, reg));
-                } else {
-                    String Name = file.getName();
-                    if (RegexUtil.isMatche(Name, reg)) {
-                        list.add(file);
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
-
-    /**
-     * 读取文件，可以读到jar内的文件
-     */
-    public static String readFile(String fileName) {
-        InputStream fin = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
-        InputStreamReader reader = new InputStreamReader(fin);
-        BufferedReader buffReader = new BufferedReader(reader);
-        String strTmp = "";
-        StringBuffer buffer = null;
-        try {
-            buffer = new StringBuffer();
-            while ((strTmp = buffReader.readLine()) != null) {
-                buffer.append(strTmp).append("\n");
-            }
-            buffReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return buffer.toString();
-    }
-
-    /**
-     * 逐行处理
-     *
-     * @param file     handler file
-     * @param encoding file encoding
-     */
-    public static void handlerWithLine(File file, String encoding, Consumer<String> consumer) {
-        try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath()), encoding))
-        ) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                consumer.accept(line);
-            }
-        } catch (IOException e) {
-            log.error("handler error:" + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 逐行处理
-     *
-     * @param file     需要处理的文件
-     * @param encoding 文件编码
-     * @param result   接受处理结果的集合
-     * @param <E>
-     */
-    public static <E> void processWithLine(File file, String encoding, Collection<E> result, Function<String, ? extends E> mapper) {
-        if (result == null) {
-            log.info("receive collection is null");
-            return;
-        }
-        try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath()), encoding))
-        ) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                E tmpLine = mapper.apply(line);
-                if (tmpLine != null) {
-                    result.add(tmpLine);
-                }
-            }
-        } catch (IOException e) {
-            log.error("process error:" + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
-     * 创建文件支持多级目录
-     *
-     * @param path 需要创建的文件
-     * @return 是否成功
-     */
-    public static boolean createFile(String path) {
-        if (path != null && !path.isEmpty()) {
-            try {
-                File file = new File(path);
-                if (!file.getParentFile().exists() && file.getParentFile().mkdirs()) {
-                    return file.createNewFile();
-                }
-            } catch (Exception e) {
-                log.error("create file exception :" + path + ",Exception" + e.getMessage());
-                e.printStackTrace();
-            }
-
-        }
-        return false;
-    }
-
-    /**
-     * 获取文件后缀名
-     *
-     * @param file file
-     * @return file's suffix
-     */
-
-    public static String suffix(File file) {
-        String fileName = file.getName();
-        return fileName.substring(fileName.indexOf(".") + 1);
-    }
-
-    /**
-     * 获取文件的hash
-     *
-     * @param file     file
-     * @param HashTyle MD5,SHA-1,SHA-256
-     * @return
-     */
-    public static String fileHash(File file, String HashTyle) {
-        try (InputStream fis = new FileInputStream(file)) {
-            MessageDigest md = MessageDigest.getInstance(HashTyle);
-            byte[] buffer = new byte[1024];
-            int length = -1;
-            while ((length = fis.read(buffer, 0, 1024)) != -1) {
-                md.update(buffer, 0, length);
-            }
-            byte[] md5Bytes = md.digest();
-            StringBuilder hexValue = new StringBuilder();
-            for (int i = 0; i < md5Bytes.length; i++) {
-                int val = ((int) md5Bytes[i]) & 0xff;
-                if (val < 16) {
-                    hexValue.append("0");
-                }
-                hexValue.append(Integer.toHexString(val));
-            }
-            return hexValue.toString();
-        } catch (Exception e) {
-            log.error("get filehash error" + e.getMessage());
-            e.printStackTrace();
-            return "";
-        }
-
-    }
-
-    /**
-     * 利用字节特征探测文件编码
-     *
-     * @param file 需要处理的文件
-     * @return UTF-8 Unicode UTF-16BE GBK or null
-     */
-    public static String simpleEncoding(File file) {
-        try {
-            return "";//@todo
-            //return FileImpl.guestFileEncoding(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-//
-//    /**
-//     * 获取文件content-type
-//     * @param file
-//     * @return
-//     */
-//    public static String contentType(String file) {
-//        String contentType = null;
-//        try {
-//            contentType = new MimetypesFileTypeMap().getContentType(new File(file));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return contentType;
-//    }
-
-    /**
-     * 生成文件
-     *
-     * @param filePath     生成文件的路径
-     * @param fileContent  文件内容
-     */
-    public static final void gennerateFile(String filePath, String fileContent) {
-        File file = new File(filePath);
-        if (file.exists()) {
-            file.delete();
-        } else {
-            file.getParentFile().mkdirs();
-        }
-        try {
-            file.createNewFile();
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            bufferedWriter.write(fileContent);
-            bufferedWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 获取系统临时文件夹路径
-     *
-     * @return 临时文件夹路径，以 "/" 结尾
-     */
-    public static String decideTmpFolder() {
-        String folderOld = System.getProperty("java.io.tmpdir");
-        if (folderOld.endsWith("/")) {
-            return folderOld;
-        } else {
-            return folderOld + "/";
-        }
-    }
-
-    /**
-     * 获取一个可用的临时文件夹路径（基于时间戳）
-     *
-     * @return 临时文件夹路径，格式为：系统临时目录 + "use_" + 时间戳 + "/"
-     */
-    public static String decideTempUsableFolder() {
-        return decideTmpFolder() + "use_" + System.currentTimeMillis() + "/";
-    }
-
-    /**
-     * 创建指定路径的文件夹（如果存在则删除后重新创建）
-     *
-     * @param workFolder 文件夹路径
-     */
-    public static void mkdir(String workFolder) {
-        File file = new File(workFolder);
-        if (file.exists()) {
-            file.delete();
-        } else {
-            file.mkdir();
-        }
-    }
-
-    /**
-     * 清空文件夹下所有文件
-     * <p>
-     * 如果文件夹不存在则创建
-     *
-     * @param fileFolder 文件夹路径
-     * @return 成功返回 true，文件夹不存在返回 false
-     * @throws RuntimeException 如果传入的不是文件夹
-     */
-    public static boolean cleanFolder(String fileFolder) {
-
-
-        File file = new File(fileFolder);
-
-        if (!file.exists()) {
-            return false;
-        }
-
-        if (!file.isDirectory()) {
-            throw new RuntimeException("传入参数不为文件夹");
-        }
-
-        if (file.exists()) {
-            Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(File::delete);
-        } else {
-            file.mkdirs();
-        }
-        return true;
-    }
-
-    /**
-     * 检测文件是否存在
-     *
-     * @param filePath 文件路径
-     * @return 如果文件存在返回 true，否则返回 false
-     */
-    public static boolean isFileExist(String filePath) {
-        return new File(filePath).exists();
-    }
-
-    /**
-     * 将输入流转换为字符串
-     *
-     * @param in 输入流
-     * @return 转换后的字符串
-     * @throws IOException 如果读取发生异常
-     */
-    public static String streamToString(InputStream in) throws IOException {
-        StringBuffer out = new StringBuffer();
-        byte[] b = new byte[4096];
-        for (int n; (n = in.read(b)) != -1; ) {
-            out.append(new String(b, 0, n));
-        }
-        return out.toString();
-    }
-
-    /**
-     * 将输入流转换为字节数组
-     *
-     * @param is 输入流
-     * @return 字节数组
-     * @throws IOException 如果读取发生异常
-     */
-    public static byte[] stream2Byte(InputStream is) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int len = 0;
-        byte[] b = new byte[1024];
-        while ((len = is.read(b, 0, b.length)) != -1) {
-            baos.write(b, 0, len);
-        }
-        return baos.toByteArray();
-    }
-
-    /**
-     * 将输入流转换为字节数组
-     *
-     * @param inStream 输入流
-     * @return 字节数组
-     * @throws Exception 如果读取发生异常
-     */
-    public static final byte[] inputStream2Byte(InputStream inStream) throws Exception {
-        int count = 0;
-        while (count == 0) {
-            count = inStream.available();
-        }
-        byte[] b = new byte[count];
-        inStream.read(b);
-        return b;
-    }
-
-    /**
-     * 将输入流保存为文件
-     *
-     * @param is      输入流
-     * @param outfile 输出文件
-     * @throws RuntimeException 如果写入发生异常
-     */
-    public static void streamSaveAsFile(InputStream is, File outfile) {
-        try (FileOutputStream fos = new FileOutputStream(outfile)) {
-            byte[] buffer = new byte[1024];
-            int len;
-            while ((len = is.read(buffer)) > 0) {
-                fos.write(buffer, 0, len);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * 以列表的方式获取文件的所有行
-     *
-     * @param file 需要出来的文件
-     * @return 包含所有行的list
-     */
-    public static List<String> readLines(File file) {
-        return lines(file);
-    }
-
-    /**
-     * 以列表的方式获取文件的所有行
-     *
-     * @param file     需要处理的文件
-     * @param encoding 指定读取文件的编码
-     * @return 包含所有行的list
-     */
-    public static List<String> readLines(File file, String encoding) {
-        return lines(file, encoding);
-    }
-
-    /**
-     * 读取文件内容
-     *
-     * @param file 要读取的文件
-     * @return 文件内容字符串，读取失败返回 null
-     */
-    public static String readContents(File file) {
-        try (FileInputStream in = new FileInputStream(file)) {
-            Long filelength = file.length();
-            byte[] filecontent = new byte[filelength.intValue()];
-            if (in.read(filecontent) > 0) {
-                return new String(filecontent);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
-     * 创建文件支持多级目录
-     *
-     * @param file 需要创建的文件
-     * @return 是否成功, 如果存在则返回成功
-     */
-    public final static boolean createFiles(File file) {
-        if (file.exists()) {
-            return true;
-        }
-        if (file.isDirectory()) {
-            if (!file.exists()) {
-                return file.mkdirs();
-            }
-        } else {
-            File dir = file.getParentFile();
-            if (!dir.exists()) {
-                if (dir.mkdirs()) {
-                    try {
-                        return file.createNewFile();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else {
-                try {
-                    return file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 创建文件支持多级目录
-     *
-     * @param file 需要创建的文件
-     * @return 是否成功, 如果存在则返回成功
-     * @para isReNew 存在的时候是否重新创建
-     */
-    public static boolean createFiles(File file, boolean isReNew) {
-        if (file.exists()) {
-            if (isReNew) {
-                if (file.delete()) {
-                    try {
-                        return file.createNewFile();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            return true;
-        }
-        if (file.isDirectory()) {
-            if (!file.exists()) {
-                return file.mkdirs();
-            }
-        } else {
-            File dir = file.getParentFile();
-            if (!dir.exists()) {
-                if (dir.mkdirs()) {
-                    try {
-                        return file.createNewFile();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else {
-                try {
-                    return file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 写文件
-     *
-     * @param file 需要处理的函数
-     * @param str  添加的子字符串
-     * @return 是否成功
-     */
-    public static boolean write(File file, String str) {
-        try (
-                RandomAccessFile randomFile = new RandomAccessFile(file, "rw")
-        ) {
-            randomFile.writeBytes(str);
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
-    /**
-     * 写文件
-     *
-     * @param file     需要处理的文件
-     * @param str      添加的字符串
-     * @param encoding 指定写入的编码
-     * @return 是否成功
-     */
-    public static boolean addWrite(File file, String str, String encoding) {
-        try (
-                RandomAccessFile randomFile = new RandomAccessFile(file, "rw")
-        ) {
-            long fileLength = randomFile.length();
-            randomFile.seek(fileLength);
-            randomFile.write((str).getBytes(encoding));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
-    /**
-     * 复制文件
-     *
-     * @param resource 源文件
-     * @param target   目标文件
-     * @return 是否成功
-     */
-    public static boolean copy(File resource, File target) throws IOException {
-        if (resource == null) {
-            log.error("copy  resource is null");
-            return false;
-        }
-        if (resource.isFile()) {
-            return copyFile(resource, target);
-        }
-        File[] files = resource.listFiles();
-        if (files == null || files.length == 0) {
-            return target.mkdirs();
-        }
-        target.mkdirs();
-        for (File file : files) {
-            String targetFilePath = file.getAbsolutePath().substring(resource.getAbsolutePath().length());
-            File targetFile = new File(target + "/" + targetFilePath);
-            if (file.isDirectory()) {
-                targetFile.mkdirs();
-                copy(file, targetFile);
-            } else {
-                copyFile(file, targetFile);
-            }
-        }
-        return true;
-
-    }
-
-    /**
-     * 复制文件
-     * 通过该方式复制文件文件越大速度越是明显
-     *
-     * @param file       需要处理的文件
-     * @param targetFile 目标文件
-     * @return 是否成功
-     */
-    public static boolean copyFile(File file, File targetFile) throws IOException {
-        log.debug("copy file resource:{} ,target:{}", file.getAbsolutePath(), targetFile.getAbsolutePath());
-        int BUFFER_SIZE = 1024 * 1024;
-        if (!targetFile.getParentFile().exists()) {
-            targetFile.getParentFile().mkdirs();
-        }
-        targetFile.createNewFile();
-        try (
-                FileInputStream fin = new FileInputStream(file);
-                FileOutputStream fout = new FileOutputStream(targetFile)
-        ) {
-            FileChannel in = fin.getChannel();
-            FileChannel out = fout.getChannel();
-            ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
-            while (in.read(buffer) != -1) {
-                buffer.flip();
-                out.write(buffer);
-                buffer.clear();
-            }
-            return true;
-        } catch (IOException e) {
-            throw e;
-        }
-    }
-
-    /**
-     * 删除一个目录
-     *
-     * @param file 需要处理的文件
-     * @return 是否成功
-     */
-    public static boolean delete(File file) {
-        if (file == null)
-            return false;
-
-        if (file.isFile())
-            return file.delete();
-
-        File[] files = file.listFiles();
-        if (files == null) {
-            return file.delete();
-        }
-        for (File ff : files) {
-            if (file.isDirectory()) {
-                delete(ff);
-            } else {
-                if (ff.length() > 1024 * 1024 * 1024) {
-                    cleanFile(ff);
-                }
-                ff.delete();
-            }
-        }
-        return file.delete();
-    }
-
-
-    ///////////////////////////////////////////////////////////////////////
-    // 检索文件的方法
-
-    /**
-     * 罗列指定路径下的全部文件
-     *
-     * @param path 需要处理的文件
-     * @return 返回文件列表
-     */
-    public static List<File> listFile(File path) {
-        List<File> list = new ArrayList<>();
-        if (path != null && path.exists() && path.isDirectory()) {
-            File[] files = path.listFiles();
-            if (files == null) {
-                return list;
-            }
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(listFile(file));
-                } else {
-                    list.add(file);
-                }
-            }
-        }
-        return list;
-    }
-
-
-    /**
-     * 获取指定目录下的特点文件,通过后缀名过滤
-     *
-     * @param dirPath  需要处理的文件
-     * @param postfixs 文件后缀
-     * @return 返回文件列表
-     */
-    public static List<File> listFileSuffix(File dirPath, String postfixs) {
-        List<File> list = new ArrayList<>();
-        if (dirPath != null && dirPath.exists() && dirPath.isDirectory()) {
-            File[] files = dirPath.listFiles();
-            if (files == null) {
-                return list;
-            }
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(listFileSuffix(file, postfixs));
-                } else {
-                    String fileName = file.getName().toLowerCase();
-                    if (fileName.endsWith(postfixs.toLowerCase())) {
-                        list.add(file);
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
-    /**
-     * 在指定的目录下按照文件名查找文件
-     *
-     * @param dirPath  搜索的目录
-     * @param fileName 搜索的文件名
-     * @return 返回文件列表
+     * @param dirPath  directory
+     * @param fileName filename
+     * @return list of matching files
      */
     public static List<File> listFileName(File dirPath, String fileName) {
-        List<File> list = new ArrayList<>();
-        if (dirPath != null && dirPath.exists() && dirPath.isDirectory()) {
-            File[] files = dirPath.listFiles();
-            if (files == null) {
-                return list;
-            }
-
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(listFileName(file, fileName));
-                } else {
-                    String Name = file.getName();
-                    if (Name.equals(fileName)) {
-                        list.add(file);
-                    }
-                }
-            }
-        }
-        return list;
+        return searchFile(dirPath, fileName);
     }
 
     /**
-     * 在指定的目录下按照文件名查找文件忽略文件带下
+     * Lists files by name (case insensitive).
      *
-     * @param dirPath  搜索的目录
-     * @param fileName 搜索的文件名
-     * @return 返回文件列表
+     * @param dirPath  directory
+     * @param fileName filename
+     * @return list of matching files
      */
     public static List<File> listFileNameIgnoreCase(File dirPath, String fileName) {
         List<File> list = new ArrayList<>();
-        if (dirPath != null && dirPath.exists() && dirPath.isDirectory()) {
-            File[] files = dirPath.listFiles();
-            if (files == null) {
-                return list;
-            }
+        File[] files = dirPath.listFiles();
+        if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
-                    list.addAll(listFileName(file, fileName));
+                    list.addAll(listFileNameIgnoreCase(file, fileName));
                 } else {
-                    String Name = file.getName();
-                    if (Name.equalsIgnoreCase(fileName)) {
+                    if (file.getName().equalsIgnoreCase(fileName)) {
                         list.add(file);
                     }
                 }
@@ -2748,25 +1874,24 @@ public class FileUtil {
     }
 
     /**
-     * 罗列指定路径下的全部文件包括文件夹
+     * Lists files matching predicate.
      *
-     * @param path   需要处理的文件
-     * @param filter 处理文件的filter
-     * @return 返回文件列表
+     * @param path   directory
+     * @param filter predicate filter
+     * @return list of matching files
      */
     public static List<File> listFileFilter(File path, Predicate<File> filter) {
         List<File> list = new ArrayList<>();
         if (path != null && path.exists() && path.isDirectory()) {
             File[] files = path.listFiles();
-            if (files == null) {
-                return list;
-            }
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    list.addAll(listFileFilter(file, filter));
-                } else {
-                    if (filter.test(file)) {
-                        list.add(file);
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        list.addAll(listFileFilter(file, filter));
+                    } else {
+                        if (filter.test(file)) {
+                            list.add(file);
+                        }
                     }
                 }
             }
@@ -2774,21 +1899,17 @@ public class FileUtil {
         return list;
     }
 
-
     /**
-     * 罗列指定目录下的文件名符合正则表达式的文件
+     * Lists files matching regex pattern.
      *
-     * @param dirPath 搜索的目录
-     * @param pattern 正则表达式
-     * @return 返回文件列表
+     * @param dirPath directory
+     * @param pattern regex pattern
+     * @return list of matching files
      */
     public static List<File> listFileNameReg(File dirPath, Pattern pattern) {
         List<File> list = new ArrayList<>();
-        if (dirPath != null && dirPath.exists() && dirPath.isDirectory()) {
-            File[] files = dirPath.listFiles();
-            if (files == null) {
-                return list;
-            }
+        File[] files = dirPath.listFiles();
+        if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
                     list.addAll(listFileNameReg(file, pattern));
@@ -2800,5 +1921,273 @@ public class FileUtil {
             }
         }
         return list;
+    }
+
+    // ==================== Read File from Classpath ====================
+
+    /**
+     * Reads file from classpath.
+     *
+     * @param fileName classpath resource name
+     * @return file content
+     */
+    public static String readFile(String fileName) {
+        InputStream fin = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+        if (fin == null) {
+            logger.error("Resource not found: {}", fileName);
+            return "";
+        }
+        try (InputStreamReader reader = new InputStreamReader(fin)) {
+            StringBuilder buffer = new StringBuilder();
+            BufferedReader buffReader = new BufferedReader(reader);
+            String strTmp;
+            while ((strTmp = buffReader.readLine()) != null) {
+                buffer.append(strTmp).append("\n");
+            }
+            return buffer.toString();
+        } catch (IOException e) {
+            logger.error("Failed to read resource: {}", fileName, e);
+            return "";
+        }
+    }
+
+    // ==================== Process Lines ====================
+
+    /**
+     * Processes file lines with consumer.
+     *
+     * @param file     file to process
+     * @param encoding charset
+     * @param consumer line processor
+     */
+    public static void handlerWithLine(File file, String encoding, Consumer<String> consumer) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath()), encoding))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                consumer.accept(line);
+            }
+        } catch (IOException e) {
+            logger.error("Failed to process file: {}", file.getAbsolutePath(), e);
+        }
+    }
+
+    /**
+     * Processes file lines and collects results.
+     *
+     * @param file     file to process
+     * @param encoding charset
+     * @param result   collection for results
+     * @param mapper  line to result mapper
+     * @param <E>      result type
+     */
+    public static <E> void processWithLine(File file, String encoding, Collection<E> result, Function<String, E> mapper) {
+        if (result == null) {
+            logger.info("Result collection is null");
+            return;
+        }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath()), encoding))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                E tmpLine = mapper.apply(line);
+                if (tmpLine != null) {
+                    result.add(tmpLine);
+                }
+            }
+        } catch (IOException e) {
+            logger.error("Failed to process file: {}", file.getAbsolutePath(), e);
+        }
+    }
+
+    // ==================== Temp Folder ====================
+
+    /**
+     * Gets system temp folder path.
+     *
+     * @return temp folder path ending with "/"
+     */
+    public static String decideTmpFolder() {
+        String folderOld = System.getProperty("java.io.tmpdir");
+        if (folderOld.endsWith("/")) {
+            return folderOld;
+        }
+        return folderOld + "/";
+    }
+
+    /**
+     * Gets unique temp folder based on timestamp.
+     *
+     * @return temp folder path
+     */
+    public static String decideTempUsableFolder() {
+        return decideTmpFolder() + "use_" + System.currentTimeMillis() + "/";
+    }
+
+    // ==================== Clean Folder ====================
+
+    /**
+     * Cleans folder contents.
+     *
+     * @param fileFolder folder path
+     * @return true if cleaned
+     * @throws RuntimeException if not a folder
+     */
+    public static boolean cleanFolder(String fileFolder) {
+        File file = new File(fileFolder);
+        if (!file.exists()) {
+            return false;
+        }
+        if (!file.isDirectory()) {
+            throw new RuntimeException("Path is not a directory: " + fileFolder);
+        }
+        File[] files = file.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    cleanFolder(f.getAbsolutePath());
+                }
+                f.delete();
+            }
+        }
+        return true;
+    }
+
+    // ==================== Stream Operations ====================
+
+    /**
+     * Converts input stream to string.
+     *
+     * @param in input stream
+     * @return string content
+     * @throws IOException if reading fails
+     */
+    public static String streamToString(InputStream in) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] b = new byte[4096];
+        int n;
+        while ((n = in.read(b)) != -1) {
+            out.write(b, 0, n);
+        }
+        return out.toString();
+    }
+
+    /**
+     * Converts input stream to byte array.
+     *
+     * @param is input stream
+     * @return byte array
+     * @throws IOException if reading fails
+     */
+    public static byte[] stream2Byte(InputStream is) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int len;
+        byte[] b = new byte[1024];
+        while ((len = is.read(b, 0, b.length)) != -1) {
+            baos.write(b, 0, len);
+        }
+        return baos.toByteArray();
+    }
+
+    /**
+     * Converts input stream to byte array.
+     *
+     * @param inStream input stream
+     * @return byte array
+     * @throws Exception if reading fails
+     */
+    public static byte[] inputStream2Byte(InputStream inStream) throws Exception {
+        int count = 0;
+        while (count == 0) {
+            count = inStream.available();
+        }
+        byte[] b = new byte[count];
+        inStream.read(b);
+        return b;
+    }
+
+    /**
+     * Saves input stream to file.
+     *
+     * @param is      input stream
+     * @param outfile output file
+     */
+    public static void streamSaveAsFile(InputStream is, File outfile) {
+        try (FileOutputStream fos = new FileOutputStream(outfile)) {
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = is.read(buffer)) > 0) {
+                fos.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            logger.error("Failed to save stream to file: {}", outfile.getAbsolutePath(), e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    // ==================== Read Lines Aliases ====================
+
+    /**
+     * Reads all lines from file.
+     *
+     * @param file file
+     * @return list of lines
+     */
+    public static List<String> readLines(File file) {
+        return lines(file);
+    }
+
+    /**
+     * Reads all lines from file with encoding.
+     *
+     * @param file     file
+     * @param encoding charset
+     * @return list of lines
+     */
+    public static List<String> readLines(File file, String encoding) {
+        return lines(file, encoding);
+    }
+
+    /**
+     * Reads file contents as string.
+     *
+     * @param file file
+     * @return content or null on error
+     */
+    public static String readContents(File file) {
+        try (FileInputStream in = new FileInputStream(file)) {
+            long filelength = file.length();
+            byte[] filecontent = new byte[(int) filelength];
+            if (in.read(filecontent) > 0) {
+                return new String(filecontent, StandardCharsets.UTF_8);
+            }
+        } catch (IOException e) {
+            logger.error("Failed to read file: {}", file.getAbsolutePath(), e);
+        }
+        return null;
+    }
+
+    // ==================== Generate File ====================
+
+    /**
+     * Generates file with content.
+     *
+     * @param filePath    file path
+     * @param fileContent content
+     */
+    public static void gennerateFile(String filePath, String fileContent) {
+        File file = new File(filePath);
+        if (file.exists()) {
+            file.delete();
+        } else {
+            file.getParentFile().mkdirs();
+        }
+        try {
+            file.createNewFile();
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+            bufferedWriter.write(fileContent);
+            bufferedWriter.flush();
+            bufferedWriter.close();
+        } catch (IOException e) {
+            logger.error("Failed to generate file: {}", filePath, e);
+        }
     }
 }

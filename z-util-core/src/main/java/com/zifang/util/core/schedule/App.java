@@ -1,8 +1,8 @@
-package com.zifang.util.core.time.schedule;
+package com.zifang.util.core.schedule;
 
-import com.zifang.util.core.time.schedule.listener.JobListener;
-import com.zifang.util.core.time.schedule.listener.SchedulerListener;
-import com.zifang.util.core.time.schedule.listener.TriggerListener;
+import com.zifang.util.core.schedule.listener.JobListener;
+import com.zifang.util.core.schedule.listener.SchedulerListener;
+import com.zifang.util.core.schedule.listener.TriggerListener;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 调度框架使用示例集。
  * <p>
- * 本文件演示了 com.zifang.util.core.time.schedule 包的核心用法。
+ * 本文件演示了 com.zifang.util.core.schedule 包的核心用法。
  * 包含：简单任务、Cron 任务、有状态任务、Lambda 任务、日历排除、监听器等。
  *
  * @see SchedulerBuilder
@@ -475,7 +475,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("╔══════════════════════════════════════════╗");
         System.out.println("║  Schedule Framework Demo                ║");
-        System.out.println("║  com.zifang.util.core.time.schedule     ║");
+        System.out.println("║  com.zifang.util.core.schedule         ║");
         System.out.println("╚══════════════════════════════════════════╝\n");
 
         // 运行所有示例

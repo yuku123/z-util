@@ -3,40 +3,73 @@ package com.zifang.util.core.schedule;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.SchedulerException;
 
 /**
- * {@link RunnableJob} 到 {@link Job} 的适配器。
+ * {@link Job} 到 {@link RunnableJob} 的双向适配器。
  * <p>
- * 内部使用，将 lambda 风格的任务转换为 Quartz 可识别的 Job 实例。
+ * 内部使用，将用户的 Job 实现类或 lambda 风格的任务转换为 Quartz 可识别的 Job 实例。
  *
- * @see RunnableJob
  * @see JobBuilder
+ * @see Job
+ * @see RunnableJob
  */
 public class RunnableJobAdapter implements Job {
 
     private static final String RUNNABLE_KEY = "_runnable";
+    private static final String JOB_CLASS_KEY = "_jobClass";
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        Object raw = context.getMergedJobDataMap().get(RUNNABLE_KEY);
-        if (!(raw instanceof RunnableJob)) {
-            throw new JobExecutionException(
-                    "RunnableJob not found in JobDataMap. " +
-                            "Ensure the Job was built using JobBuilder.newJob(RunnableJob).");
-        }
-
-        RunnableJob runnable = (RunnableJob) raw;
         JobExecutionContextWrapper wrapper = new JobExecutionContextWrapper(context);
 
-        try {
-            runnable.execute(wrapper);
-        } catch (Exception e) {
-            if (e instanceof JobExecutionException) {
-                throw (JobExecutionException) e;
+        // 优先检查 lambda 模式
+        Object rawRunnable = context.getMergedJobDataMap().get(RUNNABLE_KEY);
+        if (rawRunnable instanceof RunnableJob) {
+            try {
+                ((RunnableJob) rawRunnable).execute(wrapper);
+                return;
+            } catch (Exception e) {
+                rethrow(e, context);
+                return; // unreachable
             }
-            throw new JobExecutionException("RunnableJob execution failed: " + e.getMessage(), e,
-                    !Boolean.TRUE.equals(context.getJobDetail().isConcurrentExecutionDisallowed()));
         }
+
+        // 否则检查接口实现类模式
+        Object rawClassName = context.getMergedJobDataMap().get(JOB_CLASS_KEY);
+        if (rawClassName == null) {
+            throw new JobExecutionException(
+                    "Neither RunnableJob nor Job class found in JobDataMap. " +
+                    "Use JobBuilder.newJob(YourJob.class) or JobBuilder.newJob(runnable).");
+        }
+
+        Class<?> clazz;
+        if (rawClassName instanceof Class) {
+            clazz = (Class<?>) rawClassName;
+        } else {
+            // JobDataMap 反序列化后可能是 String（类名字符串）
+            try {
+                clazz = Class.forName(String.valueOf(rawClassName));
+            } catch (ClassNotFoundException e) {
+                throw new JobExecutionException("Job class not found: " + rawClassName, e);
+            }
+        }
+
+        try {
+            Job userJob = (Job) clazz.newInstance();
+            userJob.execute(wrapper);
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new JobExecutionException("Failed to instantiate Job class: " + clazz.getName(), e);
+        } catch (Exception e) {
+            rethrow(e, context);
+        }
+    }
+
+    private void rethrow(Exception e, JobExecutionContext context) throws JobExecutionException {
+        if (e instanceof JobExecutionException) {
+            throw (JobExecutionException) e;
+        }
+        boolean nonConcurrent = !Boolean.TRUE.equals(
+                context.getJobDetail().isConcurrentExecutionDisallowed());
+        throw new JobExecutionException("Job execution failed: " + e.getMessage(), e, nonConcurrent);
     }
 }

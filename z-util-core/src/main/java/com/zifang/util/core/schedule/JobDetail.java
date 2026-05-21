@@ -23,7 +23,7 @@ public class JobDetail {
     /**
      * 内部构造器，从 Quartz JobDetail 构建。
      */
-    JobDetail(org.quartz.JobDetail delegate) {
+    public JobDetail(org.quartz.JobDetail delegate) {
         this.delegate = Objects.requireNonNull(delegate, "delegate must not be null");
     }
 
@@ -192,17 +192,7 @@ public class JobDetail {
         }
 
         Builder durable(boolean durable) {
-            delegate.setDurable(durable);
-            return this;
-        }
-
-        Builder disallowConcurrentExecution(boolean disallow) {
-            delegate.setConcurrentExecutionDisallowed(disallow);
-            return this;
-        }
-
-        Builder persistJobDataAfterExecution(boolean persist) {
-            delegate.setPersistJobDataAfterExecution(persist);
+            delegate.setDurability(durable);
             return this;
         }
 

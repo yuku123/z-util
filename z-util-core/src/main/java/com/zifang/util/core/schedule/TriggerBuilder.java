@@ -1,4 +1,4 @@
-package com.zifang.util.core.time.schedule;
+package com.zifang.util.core.schedule;
 
 import java.util.Date;
 import java.util.TimeZone;

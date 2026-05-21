@@ -1,4 +1,4 @@
-package com.zifang.util.core.time.schedule.listener;
+package com.zifang.util.core.schedule.listener;
 
 import org.quartz.impl.matchers.GroupMatcher;
 

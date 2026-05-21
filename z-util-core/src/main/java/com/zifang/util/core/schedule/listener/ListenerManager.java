@@ -1,7 +1,9 @@
-package com.zifang.util.core.time.schedule.listener;
+package com.zifang.util.core.schedule.listener;
 
-import com.zifang.util.core.time.schedule.JobExecutionContextWrapper;
-import com.zifang.util.core.time.schedule.SchedulerRuntimeException;
+import com.zifang.util.core.schedule.JobDetail;
+import com.zifang.util.core.schedule.JobExecutionContextWrapper;
+import com.zifang.util.core.schedule.MisfirePolicy;
+import com.zifang.util.core.schedule.SchedulerRuntimeException;
 import org.quartz.*;
 
 import java.util.*;
@@ -305,23 +307,23 @@ public class ListenerManager {
                     instruction);
         }
 
-        private Trigger toWrapper(org.quartz.Trigger t) {
+        private com.zifang.util.core.schedule.Trigger toWrapper(org.quartz.Trigger t) {
             // 简单的按类型分发包装，避免循环依赖
             if (t instanceof org.quartz.SimpleTrigger) {
-                return new com.zifang.util.core.time.schedule.SimpleTrigger(
+                return new com.zifang.util.core.schedule.SimpleTrigger(
                         (org.quartz.SimpleTrigger) t);
             } else if (t instanceof org.quartz.CronTrigger) {
-                return new com.zifang.util.core.time.schedule.CronTrigger(
+                return new com.zifang.util.core.schedule.CronTrigger(
                         (org.quartz.CronTrigger) t);
             } else if (t instanceof org.quartz.CalendarIntervalTrigger) {
-                return new com.zifang.util.core.time.schedule.CalendarIntervalTrigger(
+                return new com.zifang.util.core.schedule.CalendarIntervalTrigger(
                         (org.quartz.CalendarIntervalTrigger) t);
             } else if (t instanceof org.quartz.DailyTimeIntervalTrigger) {
-                return new com.zifang.util.core.time.schedule.DailyTimeIntervalTrigger(
+                return new com.zifang.util.core.schedule.DailyTimeIntervalTrigger(
                         (org.quartz.DailyTimeIntervalTrigger) t);
             } else {
                 // 通用包装
-                return new Trigger() {
+                return new com.zifang.util.core.schedule.Trigger() {
                     @Override public org.quartz.TriggerKey getKey() { return t.getKey(); }
                     @Override public String getName() { return t.getKey().getName(); }
                     @Override public String getGroup() { return t.getKey().getGroup(); }
@@ -335,7 +337,7 @@ public class ListenerManager {
                     @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
                     @Override public String getCalendarName() { return t.getCalendarName(); }
                     @Override public java.util.TimeZone getTimeZone() { return java.util.TimeZone.getDefault(); }
-                    @Override public org.quartz.Trigger getDelegate() { return t; }
+                    @Override public com.zifang.util.core.schedule.Trigger getDelegate() { return this; }
                     @Override public String toString() { return t.toString(); }
                 };
             }
@@ -449,21 +451,21 @@ public class ListenerManager {
             delegate.schedulerShuttingdown();
         }
 
-        private Trigger toWrapper(org.quartz.Trigger t) {
+        private com.zifang.util.core.schedule.Trigger toWrapper(org.quartz.Trigger t) {
             if (t instanceof org.quartz.SimpleTrigger) {
-                return new com.zifang.util.core.time.schedule.SimpleTrigger(
+                return new com.zifang.util.core.schedule.SimpleTrigger(
                         (org.quartz.SimpleTrigger) t);
             } else if (t instanceof org.quartz.CronTrigger) {
-                return new com.zifang.util.core.time.schedule.CronTrigger(
+                return new com.zifang.util.core.schedule.CronTrigger(
                         (org.quartz.CronTrigger) t);
             } else if (t instanceof org.quartz.CalendarIntervalTrigger) {
-                return new com.zifang.util.core.time.schedule.CalendarIntervalTrigger(
+                return new com.zifang.util.core.schedule.CalendarIntervalTrigger(
                         (org.quartz.CalendarIntervalTrigger) t);
             } else if (t instanceof org.quartz.DailyTimeIntervalTrigger) {
-                return new com.zifang.util.core.time.schedule.DailyTimeIntervalTrigger(
+                return new com.zifang.util.core.schedule.DailyTimeIntervalTrigger(
                         (org.quartz.DailyTimeIntervalTrigger) t);
             } else {
-                return new Trigger() {
+                return new com.zifang.util.core.schedule.Trigger() {
                     @Override public org.quartz.TriggerKey getKey() { return t.getKey(); }
                     @Override public String getName() { return t.getKey().getName(); }
                     @Override public String getGroup() { return t.getKey().getGroup(); }
@@ -477,7 +479,7 @@ public class ListenerManager {
                     @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
                     @Override public String getCalendarName() { return t.getCalendarName(); }
                     @Override public java.util.TimeZone getTimeZone() { return java.util.TimeZone.getDefault(); }
-                    @Override public org.quartz.Trigger getDelegate() { return t; }
+                    @Override public com.zifang.util.core.schedule.Trigger getDelegate() { return this; }
                     @Override public String toString() { return t.toString(); }
                 };
             }

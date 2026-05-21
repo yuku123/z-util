@@ -1,4 +1,4 @@
-package com.zifang.util.core.time.schedule;
+package com.zifang.util.core.schedule;
 
 import org.quartz.DailyTimeIntervalScheduleBuilder;
 import org.quartz.TriggerBuilder;
@@ -29,7 +29,7 @@ public class DailyTimeIntervalTrigger implements Trigger {
 
     private final org.quartz.DailyTimeIntervalTrigger delegate;
 
-    DailyTimeIntervalTrigger(org.quartz.DailyTimeIntervalTrigger delegate) {
+    public DailyTimeIntervalTrigger(org.quartz.DailyTimeIntervalTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -120,7 +120,7 @@ public class DailyTimeIntervalTrigger implements Trigger {
     }
 
     @Override
-    public com.zifang.util.core.time.schedule.Trigger getDelegate() {
+    public com.zifang.util.core.schedule.Trigger getDelegate() {
         return this;
     }
 

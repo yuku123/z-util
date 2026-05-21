@@ -1,4 +1,4 @@
-package com.zifang.util.core.time.schedule;
+package com.zifang.util.core.schedule;
 
 import org.quartz.CronScheduleBuilder;
 import org.quartz.TriggerBuilder;
@@ -33,7 +33,7 @@ public class CronTrigger implements Trigger {
 
     private final org.quartz.CronTrigger delegate;
 
-    CronTrigger(org.quartz.CronTrigger delegate) {
+    public CronTrigger(org.quartz.CronTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -120,7 +120,7 @@ public class CronTrigger implements Trigger {
     }
 
     @Override
-    public com.zifang.util.core.time.schedule.Trigger getDelegate() {
+    public com.zifang.util.core.schedule.Trigger getDelegate() {
         return this;
     }
 
