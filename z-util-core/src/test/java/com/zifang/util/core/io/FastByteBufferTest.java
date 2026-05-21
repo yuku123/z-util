@@ -2,6 +2,8 @@ package com.zifang.util.core.io;
 
 import org.junit.Test;
 
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.Assert.*;
 
 public class FastByteBufferTest {
@@ -50,7 +52,7 @@ public class FastByteBufferTest {
         buf2.append(" world".getBytes());
         buf1.append(buf2);
         assertEquals(11, buf1.size());
-        assertEquals("hello world", buf1.toArrayString());
+        assertEquals("hello world", new String(buf1.toArray(), StandardCharsets.UTF_8));
     }
 
     @Test

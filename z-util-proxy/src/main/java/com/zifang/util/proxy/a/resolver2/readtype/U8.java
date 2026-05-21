@@ -10,7 +10,6 @@ import java.io.InputStream;
  * JVM中用于表示long和double类型的位模式存储。
  */
 public class U8 {
-public class U8 {
 
     private long value;
 

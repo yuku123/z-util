@@ -70,7 +70,12 @@ public class Tokenizer {
 
     private void readTagTail() throws IOException {
         char ch = cr.peek();
-        while (ch != (char) -1 && ch != '>') {
+        while (ch != (char) -1) {
+            if (ch == '>') {
+                cr.next();
+                tokens.add(new Token(TokenType.TAG_CLOSE, ">"));
+                return;
+            }
             if (ch == '/') {
                 cr.next(); // consume '/'
                 char nch = cr.next();
@@ -82,10 +87,6 @@ public class Tokenizer {
                 readAttribute();
             }
             ch = cr.peek();
-        }
-        if (ch == '>') {
-            cr.next();
-            tokens.add(new Token(TokenType.TAG_CLOSE, ">"));
         }
     }
 

@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * 方法表
+ * <p>
+ * 存储ClassFile中所有的方法信息。
  */
 public class MethodTable {
     private U2 accessFlags;

@@ -1,18 +1,17 @@
 package com.zifang.util.proxy.a.resolver2.attribute;
 
-import com.zifang.util.proxy.a.resolver2.ClassFile;
-import com.zifang.util.proxy.a.resolver2.constantpool.AbstractConstantPool;
-import com.zifang.util.proxy.a.resolver2.constantpool.ConstantPoolInfo;
 import com.zifang.util.proxy.a.resolver2.readtype.U2;
 import com.zifang.util.proxy.a.resolver2.readtype.U4;
 
 import java.io.InputStream;
-import java.util.List;
 
 /**
- * 常量描述,加了final的字段 在class解析后,会有这个属性
+ * 常量值属性类
+ * <p>
+ * CONSTANT_ConstantValue_attribute用于表示静态字段的常量值。
  */
 public class ConstantValue extends AbstractAttribute {
+
     private U2 constantValueIndex;
 
     public ConstantValue(U2 attributeNameIndex, U4 attributeLength) {

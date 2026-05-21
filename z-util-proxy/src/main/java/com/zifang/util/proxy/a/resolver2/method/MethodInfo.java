@@ -2,16 +2,13 @@ package com.zifang.util.proxy.a.resolver2.method;
 
 import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 方法信息
  * <p>
  * 表示ClassFile中的方法表项，包含方法访问标志、名称索引、描述符索引和属性。
- */
-public class MethodInfo {
-import java.util.List;
-
-/**
- * 方法信息,未完成
  */
 
 public class MethodInfo {

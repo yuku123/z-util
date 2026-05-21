@@ -10,7 +10,6 @@ import java.io.InputStream;
  * JVM中用于表示float类型的位模式存储。
  */
 public class U4 {
-public class U4 {
 
     public int value;
     public byte[] bytes;

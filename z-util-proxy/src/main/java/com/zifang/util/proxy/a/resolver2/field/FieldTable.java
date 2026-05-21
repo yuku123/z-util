@@ -11,6 +11,8 @@ import java.util.List;
 
 /**
  * 字段表
+ * <p>
+ * 存储ClassFile中所有的字段信息。
  */
 public class FieldTable {
     public U2 accessFlags;
