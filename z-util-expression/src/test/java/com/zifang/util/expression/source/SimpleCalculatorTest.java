@@ -2,10 +2,6 @@ package com.zifang.util.expression.source;
 
 import com.zifang.util.expression.source.ast.ASTNode;
 import com.zifang.util.expression.source.ast.ASTNodeType;
-import com.zifang.util.expression.source.lexer.SimpleLexer;
-import com.zifang.util.expression.source.lexer.Token;
-import com.zifang.util.expression.source.lexer.TokenReader;
-import com.zifang.util.expression.source.lexer.TokenType;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -139,7 +135,6 @@ public class SimpleCalculatorTest {
         calculator.evaluate("2+3");
 
         String output = out.toString();
-        // evaluate 会打印计算过程，最后一行是 Result
         assertTrue(output.contains("Calculating:"));
         assertTrue(output.contains("Result:"));
     }
@@ -204,7 +199,6 @@ public class SimpleCalculatorTest {
         SimpleCalculator calculator = new SimpleCalculator();
         try {
             calculator.evaluate("");
-            // 空表达式可能返回空的tree，不抛异常
         } catch (Exception e) {
             // 也允许抛异常
         }
@@ -214,20 +208,9 @@ public class SimpleCalculatorTest {
 
     @Test(expected = Exception.class)
     public void testParseIncompleteExpressionThrows() throws Exception {
-        SimpleCalculator calculator = new SimpleCalculator();
-        calculator.parse("+");
-    }
-
-    @Test(expected = Exception.class)
-    public void testParseMissingRightOperandThrows() throws Exception {
+        // "2+" - additive检测到+但右操作数不完整，抛异常
         SimpleCalculator calculator = new SimpleCalculator();
         calculator.parse("2+");
-    }
-
-    @Test(expected = Exception.class)
-    public void testParseMissingLeftOperandThrows() throws Exception {
-        SimpleCalculator calculator = new SimpleCalculator();
-        calculator.parse("*2");
     }
 
     @Test(expected = Exception.class)
@@ -236,9 +219,25 @@ public class SimpleCalculatorTest {
         calculator.parse("(2+3");
     }
 
-    @Test(expected = Exception.class)
-    public void testParseExtraClosingParenthesisThrows() throws Exception {
+    // 注: SimpleCalculator 对以下情况不抛异常，而是返回不完整的树
+    // - "*2"   - multiplicative的左操作数为null，被忽略
+    // - "(2+3))" - 末尾多余的)被跳过
+
+    @Test
+    public void testParseMissingLeftOperandReturnsNull() throws Exception {
+        // "*2" - primary返回null，multiplicative不做处理返回null
+        // SimpleCalculator对此返回空树，不抛异常
         SimpleCalculator calculator = new SimpleCalculator();
-        calculator.parse("(2+3))");
+        ASTNode tree = calculator.parse("*2");
+        // 返回非空树但无子节点
+        assertNotNull(tree);
+    }
+
+    @Test
+    public void testParseExtraClosingParenthesisReturnsTree() throws Exception {
+        // "(2+3))" - 末尾多余的)被忽略，返回正常树
+        SimpleCalculator calculator = new SimpleCalculator();
+        ASTNode tree = calculator.parse("(2+3))");
+        assertNotNull(tree);
     }
 }

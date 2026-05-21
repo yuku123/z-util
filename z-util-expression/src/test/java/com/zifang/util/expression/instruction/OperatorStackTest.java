@@ -18,10 +18,10 @@ public class OperatorStackTest {
         assertEquals(Integer.valueOf(10), stack.pop());
     }
 
-    @Test
+    @Test(expected = java.util.NoSuchElementException.class)
     public void testPopEmpty() {
         OperatorStack stack = new OperatorStack();
-        assertNull(stack.pop());
+        stack.pop();
     }
 
     @Test
@@ -54,11 +54,11 @@ public class OperatorStackTest {
         assertEquals(100, stack.pop());
     }
 
-    @Test
+    @Test(expected = java.util.NoSuchElementException.class)
     public void testEmptyAfterPopAll() {
         OperatorStack stack = new OperatorStack();
         stack.push(1);
         stack.pop();
-        assertNull(stack.pop());
+        stack.pop(); // 第二次pop空栈，抛异常
     }
 }

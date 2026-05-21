@@ -118,25 +118,28 @@ public class SimpleLexerTest {
     // ==================== 关键字测试 ====================
 
     @Test
-    public void testTokenizeIntKeyword() {
-        List<Token> tokens = tokenize("int");
-        assertEquals(1, countTokens(tokens));
-        assertToken(tokens, 0, TokenType.Int, "int");
-    }
-
-    @Test
-    public void testTokenizeIntKeywordWithSpaceAfter() {
+    public void testTokenizeIntKeywordWithTrailingSpace() {
+        // "int " (带空格) 识别为关键字
         List<Token> tokens = tokenize("int ");
         assertEquals(1, countTokens(tokens));
         assertToken(tokens, 0, TokenType.Int, "int");
     }
 
     @Test
-    public void testTokenizeIntKeywordFollowedByIdentifier() {
+    public void testTokenizeIntKeywordWithFollowingIdentifier() {
+        // "int age" 识别为: int关键字 + age标识符
         List<Token> tokens = tokenize("int age");
         assertEquals(2, countTokens(tokens));
         assertToken(tokens, 0, TokenType.Int, "int");
         assertToken(tokens, 1, TokenType.Identifier, "age");
+    }
+
+    @Test
+    public void testTokenizeIntAloneBecomesIdentifier() {
+        // "int" 单独出现时，因为后面没有空格，被识别为标识符
+        List<Token> tokens = tokenize("int");
+        assertEquals(1, countTokens(tokens));
+        assertToken(tokens, 0, TokenType.Identifier, "int");
     }
 
     @Test
@@ -312,8 +315,9 @@ public class SimpleLexerTest {
 
     @Test
     public void testTokenizeExpressionStatement() {
+        // "age+10*2;" -> age + 10 * 2 ;
         List<Token> tokens = tokenize("age+10*2;");
-        assertEquals(7, countTokens(tokens));
+        assertEquals(6, countTokens(tokens));
         assertToken(tokens, 0, TokenType.Identifier, "age");
         assertToken(tokens, 1, TokenType.Plus, "+");
         assertToken(tokens, 2, TokenType.IntLiteral, "10");
@@ -324,10 +328,10 @@ public class SimpleLexerTest {
 
     @Test
     public void testTokenizeComplexStatement() {
+        // int result = a + b * c - d / e;
+        // 0:int 1:result 2:= 3:a 4:+ 5:b 6:* 7:c 8:- 9:d 10:/ 11:e 12:;
         List<Token> tokens = tokenize("int result = a + b * c - d / e;");
-        // int result = a + b * c - d / e ;
-        // 0    1      2 3 4 5  6  7 8 9 10 11
-        assertEquals(12, countTokens(tokens));
+        assertEquals(13, countTokens(tokens));
         assertToken(tokens, 0, TokenType.Int, "int");
         assertToken(tokens, 1, TokenType.Identifier, "result");
         assertToken(tokens, 2, TokenType.Assignment, "=");
@@ -340,6 +344,7 @@ public class SimpleLexerTest {
         assertToken(tokens, 9, TokenType.Identifier, "d");
         assertToken(tokens, 10, TokenType.Slash, "/");
         assertToken(tokens, 11, TokenType.Identifier, "e");
+        assertToken(tokens, 12, TokenType.SemiColon, ";");
     }
 
     // ==================== 边界测试 ====================

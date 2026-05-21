@@ -75,19 +75,19 @@ public class SimpleTokenReaderTest {
     @Test
     public void testUnreadSingle() {
         SimpleTokenReader reader = createReader(TokenType.IntLiteral, TokenType.Plus);
-        assertEquals("token0", reader.read());
+        assertEquals("token0", reader.read().getText());
         reader.unread();
-        assertEquals("token0", reader.read());
+        assertEquals("token0", reader.read().getText());
     }
 
     @Test
     public void testUnreadMultiple() {
         SimpleTokenReader reader = createReader(TokenType.IntLiteral, TokenType.Plus, TokenType.IntLiteral);
-        assertEquals("token0", reader.read());
-        assertEquals("token1", reader.read());
+        assertEquals("token0", reader.read().getText());
+        assertEquals("token1", reader.read().getText());
         reader.unread();
         reader.unread();
-        assertEquals("token0", reader.read());
+        assertEquals("token0", reader.read().getText());
     }
 
     @Test
@@ -97,7 +97,7 @@ public class SimpleTokenReaderTest {
         reader.unread();
         reader.unread();
         // position 已经是0，再unread也不应出错
-        assertEquals("token0", reader.read());
+        assertEquals("token0", reader.read().getText());
     }
 
     @Test
@@ -112,10 +112,10 @@ public class SimpleTokenReaderTest {
     @Test
     public void testPeekReadUnreadRead() {
         SimpleTokenReader reader = createReader(TokenType.IntLiteral, TokenType.Plus, TokenType.IntLiteral);
-        assertEquals("token0", reader.peek());  // 查看
-        assertEquals("token0", reader.read());  // 读出
+        assertEquals("token0", reader.peek().getText());  // 查看
+        assertEquals("token0", reader.read().getText());  // 读出
         reader.unread();                        // 回退
-        assertEquals("token0", reader.read());  // 再次读出
+        assertEquals("token0", reader.read().getText());  // 再次读出
     }
 
     @Test

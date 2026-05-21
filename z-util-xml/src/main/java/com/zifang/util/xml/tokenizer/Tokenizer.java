@@ -132,6 +132,21 @@ public class Tokenizer {
         }
         if (ch == (char) -1) throw new XmlParseException("Unclosed attr value");
         cr.next(); // consume closing quote
+
+        // Check for self-closing tag /> after attribute value
+        char nch = cr.peek();
+        if (nch == '/') {
+            cr.next(); // consume '/'
+            char nnch = cr.peek();
+            if (nnch == '>') {
+                cr.next(); // consume '>'
+                tokens.add(new Token(TokenType.TAG_SELF_CLOSE, "/>"));
+                return;
+            }
+            // Not />, back up so readTagTail can handle it
+            cr.back();
+        }
+
         tokens.add(new Token(TokenType.ATTRIBUTE, attrName + "=" + val.toString()));
     }
 
@@ -246,8 +261,9 @@ public class Tokenizer {
                 } else if (ch == '-') {
                     sb.append(ch); // second '-' of '-->' closing
                 } else {
-                    // We saw '--' followed by non-'>'. This was the opening <!--
-                    // The dashes were delimiters, not content - don't append them
+                    // We saw '--' followed by non-'>'. The dashes were the opening <!--
+                    // The current character is content - append it
+                    sb.append(ch);
                     state = 0;
                 }
             }
