@@ -110,7 +110,7 @@ public class DurationUtil {
     public static String format(Duration duration) {
         if (duration == null) return null;
         long seconds = duration.getSeconds();
-        long millis = duration.toMillisPart();
+        int millis = duration.getNano() / 1_000_000;
         if (millis == 0) {
             return String.format("%d秒", seconds);
         }
@@ -128,8 +128,8 @@ public class DurationUtil {
     public static String formatHMS(Duration duration) {
         if (duration == null) return null;
         long hours = duration.toHours();
-        int minutes = duration.toMinutesPart();
-        int seconds = duration.toSecondsPart();
+        int minutes = (int) (duration.toMinutes() % 60);
+        int seconds = (int) (duration.getSeconds() % 60);
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
@@ -144,9 +144,9 @@ public class DurationUtil {
     public static String formatDHMS(Duration duration) {
         if (duration == null) return null;
         long days = duration.toDays();
-        long hours = duration.toHoursPart();
-        int minutes = duration.toMinutesPart();
-        int seconds = duration.toSecondsPart();
+        int hours = (int) ((duration.getSeconds() / 3600) % 24);
+        int minutes = (int) ((duration.getSeconds() % 3600) / 60);
+        int seconds = (int) (duration.getSeconds() % 60);
         if (days > 0) {
             return String.format("%d天 %02d:%02d:%02d", days, hours, minutes, seconds);
         }
