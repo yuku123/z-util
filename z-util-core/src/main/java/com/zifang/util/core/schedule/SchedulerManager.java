@@ -2,7 +2,7 @@ package com.zifang.util.core.schedule;
 
 import com.zifang.util.core.schedule.listener.ListenerManager;
 import com.zifang.util.core.schedule.listener.SchedulerListener;
-import org.quartz.GroupMatcher;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
