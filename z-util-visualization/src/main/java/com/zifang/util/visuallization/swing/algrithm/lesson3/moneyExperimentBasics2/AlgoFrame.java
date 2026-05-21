@@ -71,6 +71,12 @@ public class AlgoFrame extends JFrame {
         repaint();
     }
 
+    /**
+     * 算法画布内部类
+     * 继承自JPanel，负责绘制财富分配可视化（支持正负值）
+     * 使用双缓冲技术提升渲染性能
+     * 正值显示为蓝色，负值显示为红色
+     */
     private class AlgoCanvas extends JPanel {
 
         public AlgoCanvas() {

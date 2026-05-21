@@ -4,6 +4,10 @@ import com.zifang.util.db.context.DataSourceManager;
 
 import javax.sql.DataSource;
 
+/**
+ * 数据源同步助手，提供数据源之间表结构同步功能
+ * 用于在不同的数据源之间同步表结构信息
+ */
 public class SyncHelper {
 
     public static void main(String[] args) {

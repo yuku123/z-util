@@ -71,8 +71,17 @@ public class AlgoFrame extends JFrame {
         repaint();
     }
 
+    /**
+     * 算法画布内部类
+     * 继承自JPanel，负责绘制圆形动画
+     * 使用双缓冲技术提升渲染性能，支持抗锯齿
+     */
     private class AlgoCanvas extends JPanel {
 
+        /**
+         * 创建算法画布
+         * 启用双缓冲以减少闪烁
+         */
         public AlgoCanvas() {
             // 双缓存
             super(true);
