@@ -66,6 +66,8 @@ public class SqlExecutor {
             for (Map.Entry<String, Class<?>> entry : stmt.getColumnTypes().entrySet()) {
                 table.addColumn(entry.getKey(), entry.getValue());
             }
+            // 创建索引
+            table.rebuildIndexes();
             return new SqlResult(true, "Table '" + stmt.getTableName() + "' created", 0);
         }
         return new SqlResult(false, "No columns specified for table", 0);
@@ -120,6 +122,11 @@ public class SqlExecutor {
             return new SqlResult(false, "Table not found: " + stmt.getTableName(), 0);
         }
         
+        // 处理JOIN
+        if (stmt.hasJoin()) {
+            return executeSelectWithJoin(stmt, table);
+        }
+        
         // 创建结果表
         Table result = table.createEmptyCopy();
         result.setName("result");
@@ -148,13 +155,8 @@ public class SqlExecutor {
         }
         result.setColumns(resultCols);
         
-        // 收集所有行数据
-        List<Row> filteredRows = new ArrayList<>();
-        for (Row row : table.getRows()) {
-            if (matchesWhere(row, stmt, table)) {
-                filteredRows.add(row);
-            }
-        }
+        // 获取符合条件的行（使用索引加速）
+        List<Integer> matchingRowIndices = getMatchingRowIndices(table, stmt);
         
         // 排序
         if (stmt.getOrderByColumn() != null) {
@@ -162,13 +164,13 @@ public class SqlExecutor {
             if (orderIdx >= 0) {
                 final int idx = orderIdx;
                 final boolean desc = stmt.isOrderByDesc();
-                filteredRows.sort((r1, r2) -> {
-                    Comparable v1 = (Comparable) r1.get(idx);
-                    Comparable v2 = (Comparable) r2.get(idx);
+                matchingRowIndices.sort((i1, i2) -> {
+                    Comparable v1 = (Comparable) table.getRow(i1).get(idx);
+                    Comparable v2 = (Comparable) table.getRow(i2).get(idx);
                     if (v1 == null && v2 == null) return 0;
                     if (v1 == null) return desc ? 1 : -1;
                     if (v2 == null) return desc ? -1 : 1;
-                    int cmp = ((Comparable) v1).compareTo(v2);
+                    int cmp = v1.compareTo(v2);
                     return desc ? -cmp : cmp;
                 });
             }
@@ -176,18 +178,17 @@ public class SqlExecutor {
         
         // LIMIT / OFFSET
         if (stmt.getOffset() != null && stmt.getOffset() > 0) {
-            filteredRows = filteredRows.subList(
-                Math.min(stmt.getOffset(), filteredRows.size()),
-                filteredRows.size()
-            );
+            int offset = Math.min(stmt.getOffset(), matchingRowIndices.size());
+            matchingRowIndices = matchingRowIndices.subList(offset, matchingRowIndices.size());
         }
         if (stmt.getLimit() != null && stmt.getLimit() > 0) {
-            int end = Math.min(stmt.getLimit(), filteredRows.size());
-            filteredRows = filteredRows.subList(0, end);
+            int end = Math.min(stmt.getLimit(), matchingRowIndices.size());
+            matchingRowIndices = matchingRowIndices.subList(0, end);
         }
         
         // 构建结果行
-        for (Row srcRow : filteredRows) {
+        for (int rowIdx : matchingRowIndices) {
+            Row srcRow = table.getRow(rowIdx);
             Row dstRow = new Row(colIndexes.size());
             for (int i = 0; i < colIndexes.size(); i++) {
                 dstRow.set(i, srcRow.get(colIndexes.get(i)));
@@ -196,6 +197,103 @@ public class SqlExecutor {
         }
         
         return new SqlResult(true, "Query OK", result.getRowCount(), result);
+    }
+    
+    /**
+     * 执行带JOIN的SELECT
+     */
+    private SqlResult executeSelectWithJoin(SqlStatement stmt, Table leftTable) {
+        Table rightTable = database.getTable(stmt.getJoinTable());
+        if (rightTable == null) {
+            return new SqlResult(false, "Join table not found: " + stmt.getJoinTable(), 0);
+        }
+        
+        String leftCol = stmt.getJoinLeftColumn();
+        String rightCol = stmt.getJoinRightColumn();
+        String joinOp = stmt.getJoinOp();
+        
+        int leftColIdx = leftTable.getColumnIndex(leftCol);
+        int rightColIdx = rightTable.getColumnIndex(rightCol);
+        
+        if (leftColIdx < 0) {
+            return new SqlResult(false, "Column not found in left table: " + leftCol, 0);
+        }
+        if (rightColIdx < 0) {
+            return new SqlResult(false, "Column not found in right table: " + rightCol, 0);
+        }
+        
+        // 构建结果表结构
+        Table result = new Table("result");
+        for (int i = 0; i < leftTable.getColumnCount(); i++) {
+            result.addColumn(leftTable.getColumn(i));
+        }
+        for (int i = 0; i < rightTable.getColumnCount(); i++) {
+            result.addColumn(rightTable.getColumn(i));
+        }
+        
+        // 获取左表符合条件的行
+        List<Integer> leftRowIndices = getMatchingRowIndices(leftTable, stmt);
+        
+        // 构建右表索引（如果右表在该列上有索引则使用索引）
+        Map<Object, List<Integer>> rightIndex = new HashMap<>();
+        for (int i = 0; i < rightTable.getRowCount(); i++) {
+            Object key = rightTable.getRow(i).get(rightColIdx);
+            rightIndex.computeIfAbsent(key, k -> new ArrayList<>()).add(i);
+        }
+        
+        // 执行JOIN
+        for (int leftIdx : leftRowIndices) {
+            Row leftRow = leftTable.getRow(leftIdx);
+            Object joinKey = leftRow.get(leftColIdx);
+            
+            // 查找匹配的右表行
+            List<Integer> rightIndices = rightIndex.get(joinKey);
+            if (rightIndices != null) {
+                for (int rightIdx : rightIndices) {
+                    Row rightRow = rightTable.getRow(rightIdx);
+                    Row joinedRow = new Row(result.getColumnCount());
+                    
+                    // 复制左表数据
+                    for (int i = 0; i < leftTable.getColumnCount(); i++) {
+                        joinedRow.set(i, leftRow.get(i));
+                    }
+                    // 复制右表数据
+                    for (int i = 0; i < rightTable.getColumnCount(); i++) {
+                        joinedRow.set(leftTable.getColumnCount() + i, rightRow.get(i));
+                    }
+                    result.addRow(joinedRow);
+                }
+            }
+        }
+        
+        return new SqlResult(true, "Query OK", result.getRowCount(), result);
+    }
+    
+    /**
+     * 获取匹配WHERE条件的行索引，优先使用索引
+     */
+    private List<Integer> getMatchingRowIndices(Table table, SqlStatement stmt) {
+        List<Integer> result = new ArrayList<>();
+        
+        String whereCol = stmt.getWhereColumn();
+        Object whereVal = stmt.getWhereValue();
+        String whereOp = stmt.getWhereOp() != null ? stmt.getWhereOp() : "=";
+        
+        // 如果WHERE条件是等于操作且列有索引，使用索引
+        if (whereCol != null && ("=".equals(whereOp) || "==".equals(whereOp)) && table.hasIndex(whereCol)) {
+            List<Integer> indexed = table.getRowIndicesByIndex(whereCol, whereVal);
+            result.addAll(indexed);
+        } else {
+            // 全表扫描
+            for (int i = 0; i < table.getRowCount(); i++) {
+                Row row = table.getRow(i);
+                if (matchesWhere(row, stmt, table)) {
+                    result.add(i);
+                }
+            }
+        }
+        
+        return result;
     }
     
     /**
@@ -213,7 +311,7 @@ public class SqlExecutor {
         
         Object rowValue = row.get(colIdx);
         Object condValue = stmt.getWhereValue();
-        String op = "="; // 从stmt获取操作符
+        String op = stmt.getWhereOp() != null ? stmt.getWhereOp() : "=";
         
         // 简单比较
         if (condValue == null) {
@@ -267,17 +365,18 @@ public class SqlExecutor {
         }
         
         int updateCount = 0;
-        for (Row row : table.getRows()) {
-            if (matchesWhere(row, stmt, table)) {
-                int colIdx = table.getColumnIndex(stmt.getUpdateColumn());
-                if (colIdx >= 0) {
-                    Object value = convertValue(
-                        stmt.getUpdateValue().toString(),
-                        table.getColumn(colIdx).getType()
-                    );
-                    row.set(colIdx, value);
-                    updateCount++;
-                }
+        List<Integer> toUpdate = getMatchingRowIndices(table, stmt);
+        
+        for (int idx : toUpdate) {
+            Row row = table.getRow(idx);
+            int colIdx = table.getColumnIndex(stmt.getUpdateColumn());
+            if (colIdx >= 0) {
+                Object value = convertValue(
+                    stmt.getUpdateValue().toString(),
+                    table.getColumn(colIdx).getType()
+                );
+                row.set(colIdx, value);
+                updateCount++;
             }
         }
         
@@ -293,15 +392,12 @@ public class SqlExecutor {
             return new SqlResult(false, "Table not found: " + stmt.getTableName(), 0);
         }
         
-        List<Row> toDelete = new ArrayList<>();
-        for (Row row : table.getRows()) {
-            if (matchesWhere(row, stmt, table)) {
-                toDelete.add(row);
-            }
-        }
+        List<Integer> toDelete = getMatchingRowIndices(table, stmt);
         
-        for (Row row : toDelete) {
-            table.getRows().remove(row);
+        // 按索引倒序删除，避免删除后索引错乱
+        Collections.sort(toDelete, Collections.reverseOrder());
+        for (int idx : toDelete) {
+            table.getRows().remove(idx);
         }
         
         return new SqlResult(true, toDelete.size() + " rows deleted", toDelete.size());
@@ -422,6 +518,7 @@ public class SqlExecutor {
             }
             table.addColumn(colName, colType);
         }
+        table.rebuildIndexes();
         return table;
     }
     
@@ -439,6 +536,36 @@ public class SqlExecutor {
         Table table = database.getTable(name);
         if (table != null) {
             table.clearRows();
+        }
+    }
+    
+    /**
+     * 为表创建索引
+     */
+    public void createIndex(String tableName, String columnName) {
+        Table table = database.getTable(tableName);
+        if (table != null) {
+            table.createIndex(columnName);
+        }
+    }
+    
+    /**
+     * 为表创建所有索引
+     */
+    public void createAllIndexes(String tableName) {
+        Table table = database.getTable(tableName);
+        if (table != null) {
+            table.createAllIndexes();
+        }
+    }
+    
+    /**
+     * 删除表的索引
+     */
+    public void dropIndex(String tableName, String columnName) {
+        Table table = database.getTable(tableName);
+        if (table != null) {
+            table.dropIndex(columnName);
         }
     }
 }

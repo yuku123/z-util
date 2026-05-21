@@ -12,8 +12,9 @@ public class SqlStatement {
     private List<String> columns;  // SELECT columns or INSERT/CREATE columns
     private List<String> values;   // INSERT values
     private List<String> selectColumns; // for SELECT
-    private String whereColumn;     // for WHERE column = value
+    private String whereColumn;     // for WHERE column op value
     private Object whereValue;
+    private String whereOp;         // WHERE 操作符: =, !=, >, <, >=, <=
     private String updateColumn;    // for UPDATE column = value
     private Object updateValue;
     private String orderByColumn;  // ORDER BY column
@@ -24,9 +25,11 @@ public class SqlStatement {
     // For CREATE TABLE
     private Map<String, Class<?>> columnTypes;
     
-    // For SELECT ... FROM table1 JOIN table2 ON ...
+    // For SELECT ... FROM table1 JOIN table2 ON table1.col = table2.col
     private String joinTable;
-    private String joinCondition; // e.g., "id = user_id"
+    private String joinLeftColumn;  // e.g., "user_id" from "user_id = orders.user_id"
+    private String joinRightColumn; // the right side of join condition
+    private String joinOp;          // join operator, default "="
     
     public SqlStatement() {
         this.columns = new ArrayList<>();
@@ -34,6 +37,8 @@ public class SqlStatement {
         this.selectColumns = new ArrayList<>();
         this.columnTypes = new LinkedHashMap<>();
         this.orderByDesc = false;
+        this.whereOp = "=";
+        this.joinOp = "=";
     }
     
     public SqlStatementType getType() {
@@ -104,6 +109,14 @@ public class SqlStatement {
         this.whereValue = whereValue;
     }
     
+    public String getWhereOp() {
+        return whereOp;
+    }
+    
+    public void setWhereOp(String whereOp) {
+        this.whereOp = whereOp;
+    }
+    
     public String getUpdateColumn() {
         return updateColumn;
     }
@@ -172,12 +185,35 @@ public class SqlStatement {
         this.joinTable = joinTable;
     }
     
-    public String getJoinCondition() {
-        return joinCondition;
+    public String getJoinLeftColumn() {
+        return joinLeftColumn;
     }
     
-    public void setJoinCondition(String joinCondition) {
-        this.joinCondition = joinCondition;
+    public void setJoinLeftColumn(String joinLeftColumn) {
+        this.joinLeftColumn = joinLeftColumn;
+    }
+    
+    public String getJoinRightColumn() {
+        return joinRightColumn;
+    }
+    
+    public void setJoinRightColumn(String joinRightColumn) {
+        this.joinRightColumn = joinRightColumn;
+    }
+    
+    public String getJoinOp() {
+        return joinOp;
+    }
+    
+    public void setJoinOp(String joinOp) {
+        this.joinOp = joinOp;
+    }
+    
+    /**
+     * 检查是否有JOIN子句
+     */
+    public boolean hasJoin() {
+        return joinTable != null && joinLeftColumn != null && joinRightColumn != null;
     }
     
     @Override
@@ -190,8 +226,12 @@ public class SqlStatement {
                 ", selectColumns=" + selectColumns +
                 ", whereColumn='" + whereColumn + '\'' +
                 ", whereValue=" + whereValue +
+                ", whereOp='" + whereOp + '\'' +
                 ", updateColumn='" + updateColumn + '\'' +
                 ", updateValue=" + updateValue +
+                ", joinTable='" + joinTable + '\'' +
+                ", joinLeftColumn='" + joinLeftColumn + '\'' +
+                ", joinRightColumn='" + joinRightColumn + '\'' +
                 '}';
     }
 }

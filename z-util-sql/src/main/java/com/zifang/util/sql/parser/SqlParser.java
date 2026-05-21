@@ -1,57 +1,14 @@
 package com.zifang.util.sql.parser;
 
-import com.zifang.util.dsl.g4.DynamicLexer;
-import com.zifang.util.dsl.g4.DynamicParser;
-import com.zifang.util.dsl.core.ASTNode;
-import com.zifang.util.dsl.token.Token;
-
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * SQL解析器
- * 使用DSL模块的DynamicLexer和DynamicParser进行SQL解析
+ * 使用正则表达式进行SQL解析
  */
 public class SqlParser {
-    
-    private static final String SQL_GRAMMAR = 
-        "lexer\n" +
-        "  Id:        [a-zA-Z_][a-zA-Z0-9_]*\n" +
-        "  String:    '\"' (~[\"\\\\r\\\\n])* '\"'\n" +
-        "  SQuote:    '\\'' (~['\\\\r\\\\n])* '\\''\n" +
-        "  Int:       [0-9]+\n" +
-        "  Float:     [0-9]+ '.' [0-9]+\n" +
-        "  Op:        '<=' | '>=' | '!=' | '<>' | '=' | '<' | '>' \n" +
-        "  KW:        'SELECT' | 'FROM' | 'WHERE' | 'AND' | 'OR' | 'INSERT' | 'INTO' \n" +
-        "            | 'VALUES' | 'UPDATE' | 'SET' | 'DELETE' | 'CREATE' | 'TABLE' \n" +
-        "            | 'DROP' | 'ORDER' | 'BY' | 'ASC' | 'DESC' | 'LIMIT' | 'OFFSET'\n" +
-        "            | 'JOIN' | 'ON' | 'NULL' | 'AS' | 'IN' | 'NOT'\n" +
-        "  LParen:    '('\n" +
-        "  RParen:    ')'\n" +
-        "  Comma:     ','\n" +
-        "  Star:      '*'\n" +
-        "  Dot:       '.'\n" +
-        "  WS:        [ \\\\t\\\\r\\\\n]+\n" +
-        "fragment NL: '\\\\n'\n" +
-        "\n" +
-        "parser\n" +
-        "  selectStmt: 'SELECT' selectCols 'FROM' Id joinClause? whereClause? orderByClause? limitClause?\n" +
-        "  selectCols: '*' | colList\n" +
-        "  colList: Id (',' Id)*\n" +
-        "  joinClause: ('JOIN' Id 'ON' Id Op Id)\n" +
-        "  whereClause: 'WHERE' Id Op value\n" +
-        "  orderByClause: 'ORDER' 'BY' Id ('ASC' | 'DESC')?\n" +
-        "  limitClause: 'LIMIT' Int ('OFFSET' Int)?\n" +
-        "  insertStmt: 'INSERT' 'INTO' Id '(' colList ')' 'VALUES' '(' valueList ')'\n" +
-        "  valueList: value (',' value)*\n" +
-        "  value: String | SQuote | Int | Float | 'NULL'\n" +
-        "  updateStmt: 'UPDATE' Id 'SET' Id '=' value whereClause?\n" +
-        "  deleteStmt: 'DELETE' 'FROM' Id whereClause?\n" +
-        "  createStmt: 'CREATE' 'TABLE' Id '(' colTypeList ')'\n" +
-        "  colTypeList: Id typeName (',' Id typeName)*\n" +
-        "  typeName: 'INT' | 'STRING' | 'LONG' | 'DOUBLE' | 'BOOLEAN' | 'FLOAT'\n" +
-        "  dropStmt: 'DROP' 'TABLE' Id\n";
     
     public SqlParser() {
     }
@@ -89,22 +46,34 @@ public class SqlParser {
     private void parseSelect(String sql, SqlStatement stmt) {
         stmt.setType(SqlStatementType.SELECT);
         
-        // SELECT * FROM table WHERE ...
+        // SELECT * FROM table WHERE ... JOIN table2 ON ...
         // SELECT col1, col2 FROM table WHERE ...
         
-        Pattern pattern = Pattern.compile(
-            "SELECT\\s+(\\*|[a-zA-Z_][a-zA-Z0-9_]*(?:\\s*,\\s*[a-zA-Z_][a-zA-Z0-9_]*)*)" +
-            "\\s+FROM\\s+([a-zA-Z_][a-zA-Z0-9_]*)" +
-            "(?:\\s+JOIN\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s+ON\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*([a-zA-Z_][a-zA-Z0-9_]*))?" +
-            "(?:\\s+WHERE\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*('(?:[^'\\\\]|\\\\.)*'|\"(?:[^\"\\\\]|\\\\.)*\"|[^\\s,]+))?" +
-            "(?:\\s+ORDER\\s+BY\\s+([a-zA-Z_][a-zA-Z0-9_]*)(?:\\s+(ASC|DESC))?)?" +
-            "(?:\\s+LIMIT\\s+(\\d+)(?:\\s+OFFSET\\s+(\\d+))?)?",
+        // 分离JOIN子句（如果有的话）
+        String joinCondition = null;
+        String joinTable = null;
+        String mainSql = sql;
+        
+        Pattern joinPattern = Pattern.compile(
+            "(.+?)\\s+JOIN\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s+ON\\s+(.+)",
             Pattern.CASE_INSENSITIVE
         );
+        Matcher joinMatcher = joinPattern.matcher(sql);
+        if (joinMatcher.find()) {
+            mainSql = joinMatcher.group(1).trim();
+            joinTable = joinMatcher.group(2);
+            joinCondition = joinMatcher.group(3).trim();
+        }
         
-        Matcher matcher = pattern.matcher(sql);
-        if (matcher.find()) {
-            String cols = matcher.group(1).trim();
+        // 解析主查询部分
+        // 首先尝试提取列
+        Pattern colPattern = Pattern.compile(
+            "SELECT\\s+(\\*|[a-zA-Z_][a-zA-Z0-9_]*(?:\\s*,\\s*[a-zA-Z_][a-zA-Z0-9_]*)*)\\s+FROM\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+            Pattern.CASE_INSENSITIVE
+        );
+        Matcher colMatcher = colPattern.matcher(mainSql);
+        if (colMatcher.find()) {
+            String cols = colMatcher.group(1).trim();
             if ("*".equals(cols)) {
                 stmt.addSelectColumn("*");
             } else {
@@ -112,33 +81,122 @@ public class SqlParser {
                     stmt.addSelectColumn(col.trim());
                 }
             }
-            stmt.setTableName(matcher.group(2));
-            
-            if (matcher.group(3) != null) {
-                stmt.setJoinTable(matcher.group(3));
-                stmt.setJoinCondition(matcher.group(4) + " " + matcher.group(5) + " " + matcher.group(6));
-            }
-            
-            if (matcher.group(7) != null) {
-                stmt.setWhereColumn(matcher.group(7));
-                String op = matcher.group(8);
-                String val = matcher.group(9);
-                stmt.setWhereValue(parseValue(val, op));
-            }
-            
-            if (matcher.group(10) != null) {
-                stmt.setOrderByColumn(matcher.group(10));
-                String dir = matcher.group(11);
-                stmt.setOrderByDesc("DESC".equalsIgnoreCase(dir));
-            }
-            
-            if (matcher.group(12) != null) {
-                stmt.setLimit(Integer.parseInt(matcher.group(12)));
-            }
-            if (matcher.group(13) != null) {
-                stmt.setOffset(Integer.parseInt(matcher.group(13)));
+            stmt.setTableName(colMatcher.group(2));
+        }
+        
+        // 解析WHERE、ORDER BY、LIMIT
+        String wherePart = null;
+        String orderPart = null;
+        String limitPart = null;
+        
+        // 提取WHERE
+        Pattern wherePattern = Pattern.compile(
+            "(?:WHERE|WHERE\\s+[^\\s]+\\s*=\\s*)([^ORDER|LIMIT|OFFSET]+?)(?:ORDER\\s+BY|LIMIT|OFFSET|$)",
+            Pattern.CASE_INSENSITIVE
+        );
+        Matcher whereMatcher = wherePattern.matcher(mainSql);
+        if (whereMatcher.find()) {
+            wherePart = whereMatcher.group(1).trim();
+            if (wherePart != null && wherePart.length() == 0) wherePart = null;
+        }
+        
+        // 提取ORDER BY
+        Pattern orderPattern = Pattern.compile(
+            "ORDER\\s+BY\\s+([a-zA-Z_][a-zA-Z0-9_]*)(?:\\s+(ASC|DESC))?",
+            Pattern.CASE_INSENSITIVE
+        );
+        Matcher orderMatcher = orderPattern.matcher(mainSql);
+        if (orderMatcher.find()) {
+            stmt.setOrderByColumn(orderMatcher.group(1));
+            stmt.setOrderByDesc("DESC".equalsIgnoreCase(orderMatcher.group(2)));
+        }
+        
+        // 提取LIMIT
+        Pattern limitPattern = Pattern.compile(
+            "LIMIT\\s+(\\d+)(?:\\s+OFFSET\\s+(\\d+))?",
+            Pattern.CASE_INSENSITIVE
+        );
+        Matcher limitMatcher = limitPattern.matcher(mainSql);
+        if (limitMatcher.find()) {
+            stmt.setLimit(Integer.parseInt(limitMatcher.group(1)));
+            if (limitMatcher.group(2) != null) {
+                stmt.setOffset(Integer.parseInt(limitMatcher.group(2)));
             }
         }
+        
+        // 解析WHERE条件
+        if (wherePart != null && !wherePart.isEmpty()) {
+            parseWhereCondition(wherePart, stmt);
+        }
+        
+        // 解析JOIN
+        if (joinTable != null && joinCondition != null) {
+            stmt.setJoinTable(joinTable);
+            parseJoinCondition(joinCondition, stmt);
+        }
+    }
+    
+    private void parseWhereCondition(String wherePart, SqlStatement stmt) {
+        // 匹配: column op value
+        // op 可以是: =, !=, <>, <, >, <=, >=
+        Pattern pattern = Pattern.compile(
+            "([a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*('(?:[^'\\\\]|\\\\.)*'|\"(?:[^\"\\\\]|\\\\.)*\"|[^\\s,]+)",
+            Pattern.CASE_INSENSITIVE
+        );
+        Matcher matcher = pattern.matcher(wherePart.trim());
+        if (matcher.find()) {
+            stmt.setWhereColumn(matcher.group(1));
+            stmt.setWhereOp(normalizeOp(matcher.group(2)));
+            stmt.setWhereValue(parseValue(matcher.group(3), matcher.group(2)));
+        }
+    }
+    
+    private void parseJoinCondition(String joinCondition, SqlStatement stmt) {
+        // 解析 ON a.x = b.y 格式
+        // 支持: table1.column = table2.column 或者 column = column
+        Pattern pattern = Pattern.compile(
+            "([a-zA-Z_][a-zA-Z0-9_]*\\.[a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*([a-zA-Z_][a-zA-Z0-9_]*\\.[a-zA-Z_][a-zA-Z0-9_]*)",
+            Pattern.CASE_INSENSITIVE
+        );
+        Matcher matcher = pattern.matcher(joinCondition.trim());
+        if (matcher.find()) {
+            String leftCol = matcher.group(1);
+            stmt.setJoinOp(normalizeOp(matcher.group(2)));
+            String rightCol = matcher.group(3);
+            
+            // 分割 table.column
+            String[] leftParts = leftCol.split("\\.");
+            String[] rightParts = rightCol.split("\\.");
+            
+            // 根据左右表确定哪边是主表的列
+            String mainTableName = stmt.getTableName().toLowerCase();
+            String joinTableName = stmt.getJoinTable().toLowerCase();
+            
+            if (leftParts[0].toLowerCase().equals(mainTableName)) {
+                stmt.setJoinLeftColumn(leftParts[1]);
+                stmt.setJoinRightColumn(rightParts[1]);
+            } else {
+                stmt.setJoinLeftColumn(rightParts[1]);
+                stmt.setJoinRightColumn(leftParts[1]);
+            }
+        } else {
+            // 简化格式: ON column = column
+            Pattern simplePattern = Pattern.compile(
+                "([a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
+                Pattern.CASE_INSENSITIVE
+            );
+            Matcher simpleMatcher = simplePattern.matcher(joinCondition.trim());
+            if (simpleMatcher.find()) {
+                stmt.setJoinLeftColumn(simpleMatcher.group(1));
+                stmt.setJoinOp(normalizeOp(simpleMatcher.group(2)));
+                stmt.setJoinRightColumn(simpleMatcher.group(3));
+            }
+        }
+    }
+    
+    private String normalizeOp(String op) {
+        if ("<>".equals(op)) return "!=";
+        return op;
     }
     
     private void parseInsert(String sql, SqlStatement stmt) {
@@ -146,8 +204,7 @@ public class SqlParser {
         
         // INSERT INTO table (col1, col2) VALUES (val1, val2)
         Pattern pattern = Pattern.compile(
-            "INSERT\\s+INTO\\s+([a-zA-Z_][a-zA-Z0-9_]*)" +
-            "\\s*\\(([^)]+)\\)\\s*VALUES\\s*\\(([^)]+)\\)",
+            "INSERT\\s+INTO\\s+([a-zA-Z_][a-zA-Z0-_]*)\\s*\\(([^)]+)\\)\\s*VALUES\\s*\\(([^)]+)\\)",
             Pattern.CASE_INSENSITIVE
         );
         
@@ -172,9 +229,7 @@ public class SqlParser {
         
         // UPDATE table SET col = value WHERE ...
         Pattern pattern = Pattern.compile(
-            "UPDATE\\s+([a-zA-Z_][a-zA-Z0-9_]*)" +
-            "\\s+SET\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*=\\s*('(?:[^'\\\\]|\\\\.)*'|\"(?:[^\"\\\\]|\\\\.)*\"|[^\\s,]+)" +
-            "(?:\\s+WHERE\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*('(?:[^'\\\\]|\\\\.)*'|\"(?:[^\"\\\\]|\\\\.)*\"|[^\\s,]+))?",
+            "UPDATE\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s+SET\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*=\\s*('(?:[^'\\\\]|\\\\.)*'|\"(?:[^\"\\\\]|\\\\.)*\"|[^\\s,]+)",
             Pattern.CASE_INSENSITIVE
         );
         
@@ -184,9 +239,16 @@ public class SqlParser {
             stmt.setUpdateColumn(matcher.group(2));
             stmt.setUpdateValue(parseValue(matcher.group(3), "="));
             
-            if (matcher.group(4) != null) {
-                stmt.setWhereColumn(matcher.group(4));
-                stmt.setWhereValue(parseValue(matcher.group(6), matcher.group(5)));
+            // 查找WHERE子句
+            Pattern wherePattern = Pattern.compile(
+                "WHERE\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*('(?:[^'\\\\]|\\\\.)*'|\"(?:[^\"\\\\]|\\\\.)*\"|[^\\s,]+)",
+                Pattern.CASE_INSENSITIVE
+            );
+            Matcher whereMatcher = wherePattern.matcher(sql);
+            if (whereMatcher.find()) {
+                stmt.setWhereColumn(whereMatcher.group(1));
+                stmt.setWhereOp(normalizeOp(whereMatcher.group(2)));
+                stmt.setWhereValue(parseValue(whereMatcher.group(3), whereMatcher.group(2)));
             }
         }
     }
@@ -196,8 +258,7 @@ public class SqlParser {
         
         // DELETE FROM table WHERE ...
         Pattern pattern = Pattern.compile(
-            "DELETE\\s+FROM\\s+([a-zA-Z_][a-zA-Z0-9_]*)" +
-            "(?:\\s+WHERE\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*('(?:[^'\\\\]|\\\\.)*'|\"(?:[^\"\\\\]|\\\\.)*\"|[^\\s,]+))?",
+            "DELETE\\s+FROM\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
             Pattern.CASE_INSENSITIVE
         );
         
@@ -205,9 +266,16 @@ public class SqlParser {
         if (matcher.find()) {
             stmt.setTableName(matcher.group(1));
             
-            if (matcher.group(2) != null) {
-                stmt.setWhereColumn(matcher.group(2));
-                stmt.setWhereValue(parseValue(matcher.group(4), matcher.group(3)));
+            // 查找WHERE子句
+            Pattern wherePattern = Pattern.compile(
+                "WHERE\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*([<>=!]+)\\s*('(?:[^'\\\\]|\\\\.)*'|\"(?:[^\"\\\\]|\\\\.)*\"|[^\\s,]+)",
+                Pattern.CASE_INSENSITIVE
+            );
+            Matcher whereMatcher = wherePattern.matcher(sql);
+            if (whereMatcher.find()) {
+                stmt.setWhereColumn(whereMatcher.group(1));
+                stmt.setWhereOp(normalizeOp(whereMatcher.group(2)));
+                stmt.setWhereValue(parseValue(whereMatcher.group(3), whereMatcher.group(2)));
             }
         }
     }
@@ -217,8 +285,7 @@ public class SqlParser {
         
         // CREATE TABLE table (col1 INT, col2 STRING, ...)
         Pattern pattern = Pattern.compile(
-            "CREATE\\s+TABLE\\s+([a-zA-Z_][a-zA-Z0-9_]*)" +
-            "\\s*\\(([^)]+)\\)",
+            "CREATE\\s+TABLE\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(([^)]+)\\)",
             Pattern.CASE_INSENSITIVE
         );
         
