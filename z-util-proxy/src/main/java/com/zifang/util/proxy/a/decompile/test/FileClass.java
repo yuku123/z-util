@@ -6,6 +6,11 @@ import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 文件类
+ * <p>
+ * 用于测试从文件加载类并进行解析。
+ */
 public class FileClass {
 
     //	private List<Map<Integer, List<Map<String, String>>>> niubi;
