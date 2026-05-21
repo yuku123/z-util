@@ -327,4 +327,7 @@ public class Tokenizer {
     private boolean isNameChar(char ch) {
         return Character.isLetterOrDigit(ch) || ch == '_' || ch == ':' || ch == '-' || ch == '.';
     }
+
+    private int getCharReaderPos() { return cr.getPos(); }
+    private char getCharAtCurrentPos() { return cr.peekPos(); }
 }

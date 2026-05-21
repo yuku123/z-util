@@ -241,7 +241,7 @@ public class XmlParser {
             } else if (type == TokenType.TEXT) {
                 String text = tokens.next().getValue();
                 // 规范化空白
-                if (text.trim().length() == 0) {
+                if (text.trim().isEmpty()) {
                     // 保留空白文本（用于格式美化）
                     element.getChildren().add(new XText(text));
                 } else {
