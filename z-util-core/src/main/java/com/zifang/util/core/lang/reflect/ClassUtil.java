@@ -17,6 +17,13 @@ import java.util.jar.JarFile;
 
 import static com.zifang.util.core.lang.reflect.ClassLoaderUtil.loadClass;
 
+/**
+ * 类反射工具类。
+ * <p>
+ * 提供类扫描、字段获取、方法获取、泛型类型解析等反射相关操作。
+ *
+ * @author zifang
+ */
 public class ClassUtil {
 
     private static final Logger log = LoggerFactory.getLogger(ClassUtil.class);

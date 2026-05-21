@@ -9,6 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Java 源码动态编译器。
+ * <p>
+ * 提供将 Java 源码字符串动态编译为字节码的能力。
+ *
+ * @author zifang
+ * @see JavaCompiler
+ * @see BytesJavaFileObject
+ */
 public class CustomerJavaCompiler {
 
     public static List<String> jarInnerLibPathList = new ArrayList<>();

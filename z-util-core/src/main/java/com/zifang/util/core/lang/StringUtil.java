@@ -31,6 +31,13 @@ import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 import static org.apache.logging.log4j.util.Strings.EMPTY;
 
+/**
+ * 字符串处理工具类。
+ * <p>
+ * 提供字符串判空、截取、编码转换、格式化、匹配等常用操作。
+ *
+ * @author zifang
+ */
 public class StringUtil {
     private static final int INDEX_NOT_FOUND = -1;
     private static final int PAD_LIMIT = 8192;

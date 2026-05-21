@@ -3,6 +3,15 @@ package com.zifang.util.core.meta.page;
 import com.zifang.util.core.meta.BaseResponse;
 import com.zifang.util.core.meta.ResultCode;
 
+/**
+ * 分页响应封装类。
+ * <p>
+ * 用于 API 分页数据的统一响应封装，包含数据、总页数、当前页等信息。
+ *
+ * @author zifang
+ * @param <T> 数据类型
+ * @see BaseResponse
+ */
 public class PaginationResponse<T> extends BaseResponse {
 
     private T data;//分页结果

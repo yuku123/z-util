@@ -5,6 +5,14 @@ import java.util.Base64;
 import java.util.Base64.Decoder;
 import java.util.Base64.Encoder;
 
+/**
+ * Base64 编解码工具类。
+ * <p>
+ * 提供字符串和字节数组的 Base64 编码解码功能。
+ *
+ * @author zifang
+ * @see Base64
+ */
 public class Base64Util {
 
     private static final Decoder DECODER = Base64.getDecoder();

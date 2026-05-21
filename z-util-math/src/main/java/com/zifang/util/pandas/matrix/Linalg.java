@@ -3,8 +3,36 @@ package com.zifang.util.pandas.matrix;
 import com.zifang.util.pandas.num.Num;
 
 /**
- * Linalg 类 - 对标 numpy.linalg
- * 提供线性代数运算功能
+ * Linalg 类 - 线性代数工具
+ * <p>
+ * 提供线性代数运算功能，对标 numpy.linalg。
+ * 该类实现了常用的矩阵运算和线性代数操作。
+ *
+ * <p>主要功能：
+ * <ul>
+ *   <li>矩阵乘法：dot、matmul、multi_dot</li>
+ *   <li>矩阵分解：SVD、QR、LU</li>
+ *   <li>矩阵运算：求逆、行列式、迹</li>
+ *   <li>特征值计算：eig、eigh</li>
+ *   <li>范数计算：norm</li>
+ *   <li>线性方程组求解：solve</li>
+ * </ul>
+ *
+ * <p>对标 numpy.linalg 函数：
+ * <ul>
+ *   <li>numpy.dot() - 矩阵点积</li>
+ *   <li>numpy.linalg.inv() - 矩阵求逆</li>
+ *   <li>numpy.linalg.det() - 行列式</li>
+ *   <li>numpy.linalg.eig() - 特征值分解</li>
+ *   <li>numpy.linalg.svd() - 奇异值分解</li>
+ *   <li>numpy.linalg.qr() - QR分解</li>
+ *   <li>numpy.linalg.solve() - 求解线性方程组</li>
+ *   <li>numpy.linalg.norm() - 矩阵/向量范数</li>
+ * </ul>
+ *
+ * @author zifang
+ * @see Num
+ * @see Matrix
  */
 public class Linalg {
 

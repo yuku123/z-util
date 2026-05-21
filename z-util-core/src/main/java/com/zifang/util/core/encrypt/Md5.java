@@ -14,6 +14,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * MD5 消息摘要算法实现。
+ * <p>
+ * 提供 MD5 哈希计算功能，支持字符串和输入流的 MD5 计算。
+ *
+ * @author MIT and INRIA
+ */
 public class Md5 {
     private static final int BUFFER_SIZE = 1024;
 

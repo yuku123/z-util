@@ -10,6 +10,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * 自定义 Java 文件管理器抽象基类。
+ * <p>
+ * 继承自 ForwardingJavaFileManager，用于管理动态编译过程中的文件对象。
+ *
+ * @author zifang
+ * @see ForwardingJavaFileManager
+ * @see BytesJavaFileObject
+ */
 public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager {
 
     public Map<String, BytesJavaFileObject> getFileObjectHashMap() {

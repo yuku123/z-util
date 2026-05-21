@@ -2,7 +2,25 @@ package com.zifang.util.db.define;
 
 /**
  * 插入操作注解
- * 用于标识需要进行数据库插入操作的方法
+ * <p>
+ * 用于标识需要进行数据库插入操作的方法，通常与MyBatis等ORM框架配合使用。
+ * 标记在Mapper接口的方法上，表示该方法执行插入数据库操作。
+ *
+ * <p>使用示例：
+ * <pre>
+ * public interface UserMapper {
+ *     &#64;Insert("INSERT INTO user(name, age) VALUES(#{name}, #{age})")
+ *     int insertUser(User user);
+ * }
+ * </pre>
+ *
+ * <p>该注解可以与&#64;Param注解配合使用，为方法参数指定名称，
+ * 以便在SQL语句中通过#{paramName}方式引用。
+ *
+ * @see Update
+ * @see Delete
+ * @see Select
+ * @see Param
  */
 public @interface Insert {
 }

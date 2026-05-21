@@ -2,7 +2,14 @@ package com.zifang.util.core.lang.regex;
 
 import java.util.regex.Pattern;
 
-
+/**
+ * 常用正则表达式模式定义。
+ * <p>
+ * 包含格式化说明符、浮点数等常见正则表达式常量。
+ *
+ * @author zifang
+ * @see Pattern
+ */
 public class Patterns {
 
     public static String FORMAT_SPECIFIER = "%(\\d+\\$)?([-#+ 0,(<]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])";

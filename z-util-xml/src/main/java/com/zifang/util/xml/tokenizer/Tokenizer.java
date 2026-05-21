@@ -70,22 +70,27 @@ public class Tokenizer {
 
     // ===== 标签尾部（属性、自闭合） =====
     private void readTagTail() throws IOException {
-        while (cr.hasMore()) {
+        while (true) {
             char ch = cr.peek();
+            System.err.println("DBG readTagTail peek ch='" + (ch == (char)-1 ? "EOF" : ch) + "' pos?");
             if (ch == '>') {
                 cr.next();
                 tokens.add(new Token(TokenType.TAG_CLOSE, ">"));
+                System.err.println("DBG -> TAG_CLOSE");
                 return;
             }
             if (ch == '/') {
                 cr.next(); // consume '/'
-                ch = cr.next();
+                ch = cr.next(); // consume '>'
+                System.err.println("DBG self-close check ch='" + (ch == (char)-1 ? "EOF" : ch) + "'");
                 if (ch != '>') throw new XmlParseException("Expected > after /");
                 tokens.add(new Token(TokenType.TAG_SELF_CLOSE, "/>"));
+                System.err.println("DBG -> TAG_SELF_CLOSE");
                 return;
             }
             if (ch == '<') {
                 // end of tag, let main loop handle '<'
+                System.err.println("DBG -> '<' return");
                 return;
             }
             if (isWhiteSpace(ch)) {
@@ -99,6 +104,7 @@ public class Tokenizer {
     // ===== 属性 =====
     private void readAttribute() throws IOException {
         char ch = cr.peek();
+        System.err.println("DBG readAttribute peek ch='" + (ch == (char)-1 ? "EOF" : ch) + "'");
         if (ch == '<' || ch == '>' || ch == '/') return; // tail handles or markup start
 
         // attribute name
@@ -123,16 +129,22 @@ public class Tokenizer {
 
         char quote = ch;
         if (quote != '\'' && quote != '"') throw new XmlParseException("Unquoted attr value: " + quote);
+        System.err.println("DBG consuming opening quote, then reading value until '" + quote + "'");
         cr.next(); // consume opening quote
         StringBuilder val = new StringBuilder();
         ch = cr.next();
+        System.err.println("DBG value loop start: ch='" + (ch == (char)-1 ? "EOF" : ch) + "' quote='" + quote + "'");
         while (ch != quote && ch != (char) -1) {
             if (ch == '&') val.append(readEntity());
             else val.append(ch);
             ch = cr.next();
+            System.err.println("DBG value loop: ch='" + (ch == (char)-1 ? "EOF" : ch) + "'");
         }
+        System.err.println("DBG value loop exit: ch='" + (ch == (char)-1 ? "EOF" : ch) + "'");
         if (ch == (char) -1) throw new XmlParseException("Unclosed attr value");
+        System.err.println("DBG found closing quote '" + quote + "', pos before consume=" + getCharReaderPos() + ", char at that pos='" + getCharAtCurrentPos() + "'");
         cr.next(); // consume closing quote
+        System.err.println("DBG found closing quote '" + quote + "', pos AFTER consume=" + getCharReaderPos() + ", char peek='" + (cr.peek() == (char)-1 ? "EOF" : cr.peek()) + "'");
         tokens.add(new Token(TokenType.ATTRIBUTE, attrName + "=" + val.toString()));
     }
 

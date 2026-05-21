@@ -15,6 +15,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * XML 处理工具类。
+ * <p>
+ * 提供 XML 字符串与 DOM Document 之间转换、Map 与 XML 互转等功能。
+ *
+ * @author zifang
+ * @see Document
+ */
 public class XmlUtil {
 
     public static final String INVALID_REGEX = "[\\x00-\\x08\\x0b-\\x0c\\x0e-\\x1f]";

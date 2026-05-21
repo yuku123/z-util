@@ -1,5 +1,13 @@
 package com.zifang.util.core.lang.jdbc;
 
+/**
+ * JDBC 类型管理器。
+ * <p>
+ * 提供 JDBC 类型与 Java 类型之间的映射管理功能。
+ *
+ * @author zifang
+ * @see JdbcType
+ */
 public class JdbcTypeManager {
     // TINYINT -> byte | short
     // SMALLINT -> short

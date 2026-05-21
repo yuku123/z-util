@@ -4,14 +4,43 @@ import com.zifang.util.pandas.DataFrame;
 import com.zifang.util.pandas.Series;
 
 /**
- * Correlation 类 - 相关性分析
- * 提供相关系数计算和协方差矩阵功能
- * 对标 pandas.corr() 和 pandas.cov()
+ * Correlation 类 - 相关性分析工具
+ * <p>
+ * 提供相关系数计算和协方差矩阵功能，对标 pandas.corr() 和 pandas.cov()。
+ * 用于分析数据集中各变量之间的线性相关性强度和方向。
+ *
+ * <p>主要功能：
+ * <ul>
+ *   <li>计算 Pearson 相关系数矩阵</li>
+ *   <li>计算协方差矩阵</li>
+ *   <li>支持 DataFrame 整体的相关性分析</li>
+ *   <li>支持两个 Series 之间的相关性分析</li>
+ * </ul>
+ *
+ * <p>Pearson 相关系数：
+ * <ul>
+ *   <li>取值范围：[-1, 1]</li>
+ *   <li>接近 1：强正相关</li>
+ *   <li>接近 -1：强负相关</li>
+ *   <li>接近 0：无明显线性相关</li>
+ * </ul>
+ *
+ * <p>使用示例：
+ * <pre>
+ * DataFrame df = Pandas.read_csv("data.csv");
+ * DataFrame corrMatrix = Correlation.corr(df);
+ * </pre>
+ *
+ * @author zifang
+ * @see DataFrame
+ * @see Series
+ * @see Pandas
  */
 public class Correlation {
 
     /**
      * 计算 Pearson 相关系数矩阵
+     *
      * @param df 输入 DataFrame
      * @return 相关系数矩阵 DataFrame
      */
@@ -21,6 +50,7 @@ public class Correlation {
 
     /**
      * 计算 Pearson 相关系数矩阵
+     *
      * @param df 输入 DataFrame
      * @return 相关系数矩阵 DataFrame
      */
@@ -44,6 +74,7 @@ public class Correlation {
 
     /**
      * 计算两个 Series 的 Pearson 相关系数
+     *
      * @param x 第一个 Series
      * @param y 第二个 Series
      * @return Pearson 相关系数，范围 [-1, 1]，如果有效数据点少于 2 个则返回 NaN
@@ -84,6 +115,7 @@ public class Correlation {
 
     /**
      * 计算协方差矩阵
+     *
      * @param df 输入 DataFrame
      * @return 协方差矩阵 DataFrame
      */
@@ -106,6 +138,7 @@ public class Correlation {
 
     /**
      * 计算两个 Series 的协方差
+     *
      * @param x 第一个 Series
      * @param y 第二个 Series
      * @return 协方差，如果有效数据点少于 2 个则返回 NaN

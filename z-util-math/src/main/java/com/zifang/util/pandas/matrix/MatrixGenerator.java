@@ -6,7 +6,31 @@ import java.util.List;
 
 /**
  * MatrixGenerator 类 - 矩阵构造器
- * 提供多种方式创建矩阵，类似于 numpy 矩阵生成函数
+ * <p>
+ * 提供多种方式创建矩阵，类似于 numpy 矩阵生成函数。
+ * 该类主要用于以编程方式生成各种类型和形状的矩阵对象。
+ *
+ * <p>主要功能：
+ * <ul>
+ *   <li>从数组或列表创建矩阵</li>
+ *   <li>生成指定维度的特殊矩阵（全零、全一、单位阵等）</li>
+ *   <li>生成等差数列矩阵</li>
+ *   <li>生成随机矩阵</li>
+ * </ul>
+ *
+ * <p>对标 numpy 函数：
+ * <ul>
+ *   <li>numpy.array() - 从数据创建数组</li>
+ *   <li>numpy.zeros() - 生成全零矩阵</li>
+ *   <li>numpy.ones() - 生成全一矩阵</li>
+ *   <li>numpy.arange() - 生成等差数列</li>
+ *   <li>numpy.eye() - 生成单位矩阵</li>
+ *   <li>numpy.random.rand() - 生成随机矩阵</li>
+ * </ul>
+ *
+ * @author zifang
+ * @see Matrix
+ * @see com.zifang.util.pandas.num.Num
  */
 public class MatrixGenerator {
 
