@@ -85,6 +85,7 @@ public class CharReader {
     private void fillBuffer() throws IOException {
         int n = reader.read(buffer);
         if (n == -1) {
+            size = 0;
             return;
         }
         pos = 0;
