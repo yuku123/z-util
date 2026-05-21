@@ -50,6 +50,21 @@ public class CharReader {
     }
 
     /**
+     * 预读下一个字符（不移动光标），但会填充 buffer 如果需要。
+     */
+    public char peekNext() throws IOException {
+        if (pos + 1 >= size) {
+            // 当前 buffer 位置不够，尝试填充
+            if (pos + 1 < buffer.length && size > 0) {
+                // size > 0 表示有有效数据，不需要填充
+                return pos + 1 < size ? buffer[pos + 1] : (char) -1;
+            }
+            fillBuffer();
+        }
+        return pos + 1 < size ? buffer[pos + 1] : (char) -1;
+    }
+
+    /**
      * 消费并返回下一个字符，光标前移。
      */
     public char next() throws IOException {
@@ -77,6 +92,9 @@ public class CharReader {
     public boolean hasMore() throws IOException {
         if (pos < size) {
             return true;
+        }
+        if (size == -1) {
+            return false; // EOF already reached
         }
         fillBuffer();
         return pos < size;

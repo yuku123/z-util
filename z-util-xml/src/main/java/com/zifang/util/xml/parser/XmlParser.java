@@ -91,6 +91,13 @@ public class XmlParser {
             } else if (type == TokenType.END_DOCUMENT) {
                 tokens.next();
                 break;
+            } else if (type == TokenType.TEXT) {
+                // 根元素后的尾部空白（允许）
+                String text = tokens.next().getValue();
+                if (text.trim().length() > 0) {
+                    throw new XmlParseException("Unexpected text content after root element: " + text.trim());
+                }
+                // Skip whitespace-only text
             } else {
                 throw new XmlParseException("Unexpected token after root element: " + token);
             }

@@ -18,6 +18,12 @@ public class TokenList {
         tokens.add(token);
     }
 
+    public void removeLast() {
+        if (!tokens.isEmpty()) {
+            tokens.remove(tokens.size() - 1);
+        }
+    }
+
     public Token peek() {
         return pos < tokens.size() ? tokens.get(pos) : null;
     }

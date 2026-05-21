@@ -72,16 +72,28 @@ public class Tokenizer {
     private void readTagTail() throws IOException {
         while (true) {
             char ch = cr.peek();
-            if (ch == '>') {
-                cr.next();
-                tokens.add(new Token(TokenType.TAG_CLOSE, ">"));
-                return;
-            }
             if (ch == '/') {
                 cr.next(); // consume '/'
                 ch = cr.next(); // consume '>'
                 if (ch != '>') throw new XmlParseException("Expected > after /");
                 tokens.add(new Token(TokenType.TAG_SELF_CLOSE, "/>"));
+                return;
+            }
+            if (ch == '>') {
+                // Check if this is self-closing /> (not just > followed by content)
+                char nch = cr.peekNext();
+                if (nch == '/') {
+                    // This is />, self-closing tag
+                    cr.next(); // consume '>'
+                    cr.next(); // consume '/'
+                    ch = cr.next(); // consume '>'
+                    if (ch != '>') throw new XmlParseException("Expected > after /");
+                    tokens.add(new Token(TokenType.TAG_SELF_CLOSE, "/>"));
+                    return;
+                }
+                // Not self-closing, consume '>' and return.
+                // If next char is '<', readTextContent will see empty and return without token.
+                cr.next(); // consume '>'
                 return;
             }
             if (ch == '<') {
@@ -92,6 +104,7 @@ public class Tokenizer {
                 cr.next();
                 continue;
             }
+            if (ch == (char) -1) return; // EOF
             readAttribute();
         }
     }
@@ -131,7 +144,10 @@ public class Tokenizer {
             ch = cr.next();
         }
         if (ch == (char) -1) throw new XmlParseException("Unclosed attr value");
-        cr.next(); // consume closing quote
+        // Note: closing quote is already consumed by the loop's ch = cr.next() when ch == quote
+
+        // Add attribute token
+        tokens.add(new Token(TokenType.ATTRIBUTE, attrName + "=" + val.toString()));
 
         // Check for self-closing tag /> after attribute value
         char nch = cr.peek();
@@ -140,14 +156,13 @@ public class Tokenizer {
             char nnch = cr.peek();
             if (nnch == '>') {
                 cr.next(); // consume '>'
+                // Add TAG_SELF_CLOSE (keep ATTRIBUTE)
                 tokens.add(new Token(TokenType.TAG_SELF_CLOSE, "/>"));
                 return;
             }
             // Not />, back up so readTagTail can handle it
             cr.back();
         }
-
-        tokens.add(new Token(TokenType.ATTRIBUTE, attrName + "=" + val.toString()));
     }
 
     // ===== 结束标签 =====
