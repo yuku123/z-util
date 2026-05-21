@@ -5,6 +5,11 @@ import com.zifang.util.proxy.a.resolver2.readtype.U2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 常量池信息
+ * <p>
+ * 存储ClassFile中完整的常量池数据，包括常量池大小和常量项列表。
+ */
 public class ConstantPoolInfo {
     private U2 poolSize;
     private List<AbstractConstantPool> poolList;

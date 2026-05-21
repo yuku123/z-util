@@ -101,7 +101,7 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    public static String md5(File file) {
+    public static String md5(File file) throws IOException {
         return hash(file, "MD5");
     }
 
@@ -117,7 +117,7 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    public static String sha1(File file) {
+    public static String sha1(File file) throws IOException {
         return hash(file, "SHA-1");
     }
 
@@ -133,7 +133,7 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    public static String sha256(File file) {
+    public static String sha256(File file) throws IOException {
         return hash(file, "SHA-256");
     }
 
@@ -163,7 +163,7 @@ public final class FileHashUtil {
      * @throws IllegalArgumentException  if the file is null or algorithm is null/empty
      * @throws RuntimeException          if the specified algorithm is not available
      */
-    public static String hash(File file, String algorithm) {
+    public static String hash(File file, String algorithm) throws IOException {
         if (file == null) {
             throw new IllegalArgumentException("File cannot be null");
         }
@@ -230,7 +230,7 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    public static String fileType(File file) {
+    public static String fileType(File file) throws IOException {
         if (file == null) {
             throw new IllegalArgumentException("File cannot be null");
         }
@@ -299,7 +299,7 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    public static boolean isImage(File file) {
+    public static boolean isImage(File file) throws IOException {
         if (file == null) {
             throw new IllegalArgumentException("File cannot be null");
         }

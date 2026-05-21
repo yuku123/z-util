@@ -1,5 +1,14 @@
 package com.zifang.util.zex.sort;
 
+/**
+ * 排序算法实现类。
+ * <p>
+ * 此类实现了经典的快速排序算法，用于对数据进行排序。
+ * 快速排序是一种不稳定排序算法。
+ *
+ * @author zifang
+ * @version 1.0
+ */
 public class Sort04快排 {
 
     public static void func(int[] a, int start, int end) {

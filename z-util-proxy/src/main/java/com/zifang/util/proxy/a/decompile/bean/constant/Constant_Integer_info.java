@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 整数常量类
+ * <p>
+ * CONSTANT_Integer_info用于表示4字节的int类型常量值。
+ */
 public class Constant_Integer_info extends Constant_X_info {
 
     public static final int tag_length = 1;

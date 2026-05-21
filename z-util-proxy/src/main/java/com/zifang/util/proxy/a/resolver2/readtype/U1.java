@@ -3,6 +3,11 @@ package com.zifang.util.proxy.a.resolver2.readtype;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * 无符号1字节数据类型
+ * <p>
+ * 用于从输入流中读取1字节的无符号整数，范围为0-255。
+ */
 public class U1 {
 
     public byte value;

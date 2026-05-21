@@ -1,5 +1,13 @@
 package com.zifang.util.zex;
 
+/**
+ * 工具类。
+ * <p>
+ * 此类提供常用的工具方法。
+ *
+ * @author zifang
+ * @version 1.0
+ */
 import org.openjdk.jol.info.ClassLayout;
 
 public class ClassLayoutTest {

@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 双精度浮点数常量类
+ * <p>
+ * CONSTANT_Double_info用于表示8字节的double类型常量值。
+ */
 public class Constant_Double_info extends Constant_X_info {
     public static final int tag_length = 1;
     public static final int bytes_length = 8;

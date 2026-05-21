@@ -7,6 +7,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 局部变量表属性
+ * <p>
+ * LocalVariableTable_attribute用于描述方法局部变量的信息。
+ * 包括变量名、类型、作用域范围等。
+ */
 public class LocalVariableTable extends AbstractAttribute {
     private U2 localVariableTableLength;//局部变量槽的数量
     private List<LocalVariableInfo> localVariableTable = new ArrayList<>();//局部变量表的详细信息

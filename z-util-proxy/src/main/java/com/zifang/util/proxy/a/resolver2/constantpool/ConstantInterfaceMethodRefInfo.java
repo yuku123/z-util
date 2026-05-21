@@ -4,6 +4,12 @@ import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
 import java.io.InputStream;
 
+/**
+ * 接口方法引用信息
+ * <p>
+ * CONSTANT_InterfaceMethodref_info用于表示接口中声明的方法的符号引用。
+ * 结构与CONSTANT_Methodref_info相同。
+ */
 public class ConstantInterfaceMethodRefInfo extends AbstractConstantPool {
     private U2 classIndex;
     private U2 nameIndex;

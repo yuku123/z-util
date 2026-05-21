@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.core;
 
+/**
+ * 操作数字节数判断器
+ * <p>
+ * 根据操作码判断操作数所占的字节数。
+ */
 public class OperandBytesJudge {
     /**
      * 十六进制 和 字节码指令 转换

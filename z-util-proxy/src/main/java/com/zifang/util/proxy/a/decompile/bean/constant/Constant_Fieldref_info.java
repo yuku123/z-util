@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 字段引用常量类
+ * <p>
+ * CONSTANT_Fieldref_info用于表示类中声明的字段的符号引用。
+ */
 public class Constant_Fieldref_info extends Constant_X_info {
     public static final int tag_length = 1;
     public static final int index_length = 2;

@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
+/**
+ * 源文件属性类
+ * <p>
+ * SourceFile_attribute用于指明源文件的文件名。
+ */
 public class Attribute_SourceFile_info extends Attribute_info {
     private int attribute_name_index;
     private int attribute_length;

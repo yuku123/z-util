@@ -1,5 +1,14 @@
 package com.zifang.util.zex.bust.charpter12;
 
+/**
+ * 字段可见性示例类。
+ * <p>
+ * 此类展示了Java中字段可见性的概念。
+ * 用于测试多线程环境下字段的可见性问题。
+ *
+ * @author zifang
+ * @version 1.0
+ */
 public class FieldVisibility {
 
     int a = 1;

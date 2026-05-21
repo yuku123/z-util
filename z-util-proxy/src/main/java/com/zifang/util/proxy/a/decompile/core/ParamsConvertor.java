@@ -3,6 +3,11 @@ package com.zifang.util.proxy.a.decompile.core;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 参数转换器
+ * <p>
+ * 将字节码参数描述符转换为Java方法签名。
+ */
 public class ParamsConvertor {
 
     /**

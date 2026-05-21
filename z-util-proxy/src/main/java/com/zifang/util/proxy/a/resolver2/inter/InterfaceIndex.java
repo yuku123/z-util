@@ -1,14 +1,14 @@
 package com.zifang.util.proxy.a.resolver2.inter;
 
-
 import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 接口索引信息
+ * 接口索引表
+ * <p>
+ * 存储ClassFile中所有实现的接口，包含接口计数和接口列表。
  */
 public class InterfaceIndex {
     public U2 length;

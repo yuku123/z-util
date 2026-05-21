@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
+/**
+ * 常量值属性类
+ * <p>
+ * ConstantValue_attribute用于表示静态字段的常量值。
+ */
 public class Attribute_ConstantValue_info extends Attribute_info {
     private int attribute_name_index;
     private int attribute_length;

@@ -2,6 +2,15 @@ package com.zifang.util.zex.sort;
 
 import org.apache.commons.lang3.ArchUtils;
 
+/**
+ * 排序架构测试类。
+ * <p>
+ * 此类用于测试不同排序算法的架构和性能。
+ * 包含对各种排序算法实现的支持。
+ *
+ * @author zifang
+ * @version 1.0
+ */
 public class TestArch {
 
     //ArchUtils 系统的信息导出

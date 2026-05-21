@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
+/**
+ * 合成属性类
+ * <p>
+ * Synthetic_attribute表示类、字段或方法是由编译器生成的。
+ */
 public class Attribute_Synthetic_info extends Attribute_info {
     private int attribute_name_index;
     private int attribute_length;

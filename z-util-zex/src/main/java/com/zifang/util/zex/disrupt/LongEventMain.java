@@ -1,5 +1,14 @@
 package com.zifang.util.zex.disrupt;
 
+/**
+ * Disruptor高性能消息框架示例类。
+ * <p>
+ * 此类展示了LMAX Disruptor的使用方式。
+ * Disruptor是一种高性能的消息队列框架。
+ *
+ * @author zifang
+ * @version 1.0
+ */
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;

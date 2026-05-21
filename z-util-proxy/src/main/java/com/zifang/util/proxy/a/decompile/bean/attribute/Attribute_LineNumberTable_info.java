@@ -2,7 +2,11 @@ package com.zifang.util.proxy.a.decompile.bean.attribute;
 
 import java.util.List;
 
-
+/**
+ * 行号表属性类
+ * <p>
+ * LineNumberTable_attribute用于关联字节码偏移和源码行号。
+ */
 public class Attribute_LineNumberTable_info extends Attribute_info {
 
     private int attribute_name_index;

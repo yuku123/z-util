@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 接口方法引用常量类
+ * <p>
+ * CONSTANT_InterfaceMethodref_info用于表示接口中声明的方法的符号引用。
+ */
 public class Constant_InterfaceMethodref_info extends Constant_X_info {
     public static final int tag_length = 1;
     public static final int index_length = 2;

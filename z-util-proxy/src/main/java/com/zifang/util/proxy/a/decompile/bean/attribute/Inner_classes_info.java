@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
+/**
+ * 内部类信息类
+ * <p>
+ * 描述内部类与外围类之间的关联信息。
+ */
 public class Inner_classes_info {
     private int inner_class_info_index;
     private int outer_class_info_index;

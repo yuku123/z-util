@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 常量池项基类
+ * <p>
+ * 所有常量池项的父类，定义了常量池项的基本结构。
+ */
 public class Constant_X_info {
 
     private String constant_pool_info_Type;

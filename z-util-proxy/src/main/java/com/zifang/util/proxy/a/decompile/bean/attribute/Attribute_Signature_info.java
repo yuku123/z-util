@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
+/**
+ * 签名属性类
+ * <p>
+ * Signature_attribute用于记录泛型签名信息。
+ */
 public class Attribute_Signature_info extends Attribute_info {
     private int attribute_name_index;
     private int attribute_length;

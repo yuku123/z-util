@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 名称和类型常量类
+ * <p>
+ * CONSTANT_NameAndType_info用于表示字段或方法的名称和类型的符号引用。
+ */
 public class Constant_NameAndType_info extends Constant_X_info {
     public static final int tag_length = 1;
     public static final int index_length = 2;

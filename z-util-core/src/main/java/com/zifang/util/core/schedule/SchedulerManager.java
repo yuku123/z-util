@@ -425,8 +425,12 @@ public class SchedulerManager {
      */
     public Trigger unscheduleJob(TriggerKey triggerKey) {
         try {
-            org.quartz.Trigger t = delegate.unscheduleJob(triggerKey);
-            return t != null ? wrapTrigger(t) : null;
+            org.quartz.Trigger t = delegate.getTrigger(triggerKey);
+            if (t == null) {
+                return null;
+            }
+            boolean removed = delegate.unscheduleJob(triggerKey);
+            return removed ? wrapTrigger(t) : null;
         } catch (SchedulerException e) {
             throw new SchedulerRuntimeException("Failed to unschedule job: " + triggerKey, e);
         }
@@ -678,6 +682,12 @@ public class SchedulerManager {
         @Override public Date getEndTime() { return delegate.getEndTime(); }
         @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
         @Override public String getCalendarName() { return delegate.getCalendarName(); }
+        @Override public java.util.TimeZone getTimeZone() {
+            if (delegate instanceof org.quartz.CronTrigger) {
+                return ((org.quartz.CronTrigger) delegate).getTimeZone();
+            }
+            return java.util.TimeZone.getDefault();
+        }
         @Override public org.quartz.Trigger getDelegate() { return delegate; }
 
         @Override

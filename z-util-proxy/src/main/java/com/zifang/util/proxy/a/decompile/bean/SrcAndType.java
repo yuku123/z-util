@@ -1,5 +1,12 @@
 package com.zifang.util.proxy.a.decompile.bean;
 
+import com.zifang.util.proxy.a.decompile.bean.attribute.Attribute_info;
+
+/**
+ * 源码与类型组合类
+ * <p>
+ * 用于存储源码片段及其对应的类型信息。
+ */
 public class SrcAndType {
 
     private String src;  // 名字

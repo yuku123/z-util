@@ -1,6 +1,5 @@
 package com.zifang.util.core.schedule;
 
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
@@ -13,7 +12,7 @@ import org.quartz.JobExecutionException;
  * @see Job
  * @see RunnableJob
  */
-public class RunnableJobAdapter implements Job {
+public class RunnableJobAdapter implements org.quartz.Job, Job {
 
     private static final String RUNNABLE_KEY = "_runnable";
     private static final String JOB_CLASS_KEY = "_jobClass";
@@ -56,7 +55,7 @@ public class RunnableJobAdapter implements Job {
 
         try {
             Job userJob = (Job) clazz.newInstance();
-            userJob.execute(wrapper);
+            userJob.execute(wrapper.getDelegate());
         } catch (InstantiationException | IllegalAccessException e) {
             throw new JobExecutionException("Failed to instantiate Job class: " + clazz.getName(), e);
         } catch (Exception e) {
@@ -69,7 +68,7 @@ public class RunnableJobAdapter implements Job {
             throw (JobExecutionException) e;
         }
         boolean nonConcurrent = !Boolean.TRUE.equals(
-                context.getJobDetail().isConcurrentExecutionDisallowed());
+                context.getJobDetail().isConcurrentExectionDisallowed());
         throw new JobExecutionException("Job execution failed: " + e.getMessage(), e, nonConcurrent);
     }
 }

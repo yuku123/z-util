@@ -3,7 +3,13 @@ package com.zifang.util.proxy.a.resolver2.readtype;
 import java.io.IOException;
 import java.io.InputStream;
 
-
+/**
+ * 无符号4字节数据类型
+ * <p>
+ * 用于从输入流中读取4字节的无符号整数，范围为0-4294967295。
+ * JVM中用于表示float类型的位模式存储。
+ */
+public class U4 {
 public class U4 {
 
     public int value;

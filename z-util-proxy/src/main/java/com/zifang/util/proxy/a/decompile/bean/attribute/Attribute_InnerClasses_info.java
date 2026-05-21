@@ -2,6 +2,11 @@ package com.zifang.util.proxy.a.decompile.bean.attribute;
 
 import java.util.List;
 
+/**
+ * 内部类属性类
+ * <p>
+ * InnerClasses_attribute用于记录内部类和其外围类的关联信息。
+ */
 public class Attribute_InnerClasses_info extends Attribute_info {
     private int attribute_name_index;
     private int attribute_length;

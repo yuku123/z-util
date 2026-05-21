@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
+/**
+ * 属性信息基类
+ * <p>
+ * 所有属性的父类，包含属性名索引、属性长度和信息。
+ */
 public class Attribute_info {
 
     private int attribute_name_index;

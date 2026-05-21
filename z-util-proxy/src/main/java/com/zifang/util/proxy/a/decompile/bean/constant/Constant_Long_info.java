@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 长整数常量类
+ * <p>
+ * CONSTANT_Long_info用于表示8字节的long类型常量值。
+ */
 public class Constant_Long_info extends Constant_X_info {
     public static final int tag_length = 1;
     public static final int bytes_length = 8;

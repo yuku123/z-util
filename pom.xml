@@ -45,6 +45,7 @@
         <module>z-util-proxy</module>
         <module>z-util-ch</module>
         <module>z-util-json</module>
+        <module>z-util-xml</module>
         <module>z-util-dsl</module>
         <module>z-util-cli</module>
         <module>z-util-all</module>
@@ -66,6 +67,12 @@
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-json</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-xml</artifactId>
                 <version>${util.version}</version>
             </dependency>
 

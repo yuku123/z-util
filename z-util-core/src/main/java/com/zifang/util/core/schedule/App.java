@@ -5,6 +5,8 @@ import com.zifang.util.core.schedule.listener.SchedulerListener;
 import com.zifang.util.core.schedule.listener.TriggerListener;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.quartz.StatefulJob;
+import org.quartz.TimeOfDay;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -273,8 +275,8 @@ public class App {
                 .withName("daily-trigger")
                 .forJob(job)
                 .onWeekdays()
-                .startingDailyAt(LocalTime.of(9, 0))
-                .endingDailyAt(LocalTime.of(18, 0))
+                .startingDailyAt(new TimeOfDay(9, 0, 0))
+                .endingDailyAt(new TimeOfDay(18, 0, 0))
                 .withIntervalInSeconds(30)
                 .withMisfirePolicy(MisfirePolicy.IGNORE_MISFIRE_FIRES_NOW)
                 .build();

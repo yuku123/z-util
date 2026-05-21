@@ -3,6 +3,11 @@ package com.zifang.util.proxy.a.decompile.core;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 参数处理器
+ * <p>
+ * 处理字节码方法参数的转换和解析。
+ */
 public class ParamsHandler {
 
     /**

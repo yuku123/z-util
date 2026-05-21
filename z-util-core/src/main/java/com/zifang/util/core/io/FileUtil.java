@@ -573,7 +573,7 @@ public class FileUtil {
      * @param filePath file path
      * @return true if valid image
      */
-    public static boolean isImage(String filePath) {
+    public static boolean isImage(String filePath) throws IOException {
         return FileHashUtil.isImage(new File(filePath));
     }
 
@@ -1407,7 +1407,7 @@ public class FileUtil {
      * @param file file
      * @return file type (jpg, png, pdf, etc.) or null
      */
-    public static String fileType(File file) {
+    public static String fileType(File file) throws IOException {
         return FileHashUtil.fileType(file);
     }
 

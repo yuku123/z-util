@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
+/**
+ * 局部变量信息类
+ * <p>
+ * 描述方法的局部变量信息，包括开始PC、长度、名称索引、描述符索引和变量槽索引。
+ */
 public class Local_variable_info {
     private int start_pc;
     private int length;

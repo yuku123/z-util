@@ -111,8 +111,8 @@ public class CalendarIntervalTrigger implements Trigger {
     }
 
     @Override
-    public com.zifang.util.core.schedule.Trigger getDelegate() {
-        return this;
+    public org.quartz.Trigger getDelegate() {
+        return delegate;
     }
 
     @Override

@@ -4,6 +4,12 @@ import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
 import java.io.InputStream;
 
+/**
+ * 方法引用信息
+ * <p>
+ * CONSTANT_Methodref_info用于表示类中声明的方法的符号引用。
+ * 包含指向类信息的class_index和指向方法描述的name_index。
+ */
 public class MethodRefInfo extends AbstractConstantPool {
     private U2 classIndex;
     private U2 nameIndex;

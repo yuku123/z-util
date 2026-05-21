@@ -14,6 +14,12 @@ import java.util.List;
  * <p>
  * 根据属性名称创建对应的属性解析对象。
  */
+/**
+ * 属性工厂类
+ * <p>
+ * 根据属性名称创建对应的属性实例。
+ * 支持Code、ConstantValue、LineNumberTable、LocalVariableTable等标准属性。
+ */
 public class AttributeFactory {
     private static final HashMap<String, AbstractAttribute> attrMap = new HashMap<>(29);
 

@@ -7,7 +7,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 异常属性
+ * <p>
+ * Exceptions_attribute用于列出方法可能抛出的已检查异常。
+ */
 public class Exceptions extends AbstractAttribute {
+
     private U2 numberOfExceptions;//方法throw的异常数量;
     private List<U2> exceptionIndexTable = new ArrayList<>(numberOfExceptions.value);//指向常量池中constant_class_table型常量的索引;
 

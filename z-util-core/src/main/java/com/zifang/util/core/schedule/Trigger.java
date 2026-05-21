@@ -101,7 +101,12 @@ public interface Trigger {
     /**
      * 获取底层 Quartz Trigger 对象。
      */
-    Trigger getDelegate();
+    /**
+     * 获取底层的 Quartz Trigger 实例。
+     * <p>
+     * 用于需要传递 Trigger 给 Quartz Scheduler API 的场景。
+     */
+    org.quartz.Trigger getDelegate();
 
     // ==================== 常用时间操作 ====================
 

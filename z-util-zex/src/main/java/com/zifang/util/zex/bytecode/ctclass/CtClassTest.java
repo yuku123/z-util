@@ -1,5 +1,14 @@
 package com.zifang.util.zex.bytecode.ctclass;
 
+/**
+ * Java字节码操作示例类。
+ * <p>
+ * 此类展示了Java字节码的读取和操作技术。
+ * 使用Javassist或ASM框架进行字节码增强。
+ *
+ * @author zifang
+ * @version 1.0
+ */
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;

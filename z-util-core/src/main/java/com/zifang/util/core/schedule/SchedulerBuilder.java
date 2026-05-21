@@ -37,7 +37,7 @@ import java.util.Properties;
 public class SchedulerBuilder {
 
     private String name = "Scheduler";
-    private String instanceId = Scheduler.DEFAULT_INSTANCE_ID;
+    private String instanceId = "NON_CLUSTERED";
     private boolean embedded = false;
     private int threadCount = 10;
     private int threadPriority = Thread.NORM_PRIORITY;

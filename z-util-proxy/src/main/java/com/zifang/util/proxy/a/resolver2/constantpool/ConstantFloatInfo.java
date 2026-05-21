@@ -4,6 +4,11 @@ import com.zifang.util.proxy.a.resolver2.readtype.U4;
 
 import java.io.InputStream;
 
+/**
+ * 浮点数常量
+ * <p>
+ * CONSTANT_Float_info用于表示4字节的float类型常量值。
+ */
 public class ConstantFloatInfo extends AbstractConstantPool {
     private U4 bytes;
 

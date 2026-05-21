@@ -6,7 +6,11 @@ import com.zifang.util.proxy.a.decompile.bean.OpcodeAndOperand;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * 代码属性类
+ * <p>
+ * Code_attribute用于存储方法的字节码指令和相关调试信息。
+ */
 public class Attribute_Code_info extends Attribute_info {
 
     private int attribute_name_index;

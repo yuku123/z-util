@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 动态调用常量类
+ * <p>
+ * CONSTANT_InvokeDynamic_info用于表示invokedynamic指令的动态调用点。
+ */
 public class Constant_InvokeDynamic_info extends Constant_X_info {
     public static int tag_length = 1;
     public static int bootstrap_method_attr_index_length = 2;

@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.core;
 
+/**
+ * 字节码转换器
+ * <p>
+ * 将十六进制字节码转换为可读的指令格式。
+ */
 public class CodeConvertor {
     /**
      * 十六进制 和 字节码指令 转换

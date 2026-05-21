@@ -2,6 +2,11 @@ package com.zifang.util.proxy.a.decompile.bean.attribute;
 
 import java.util.List;
 
+/**
+ * 局部变量表属性类
+ * <p>
+ * LocalVariableTable_attribute用于描述方法局部变量的信息。
+ */
 public class Attribute_LocalVariableTable_info extends Attribute_info {
     private int attribute_name_index;
     private int attribute_length;

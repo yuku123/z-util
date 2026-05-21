@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
+/**
+ * 行号信息类
+ * <p>
+ * 关联字节码行号与Java源码行号。
+ */
 public class Line_number_info {
     private int start_pc; //字节码行号
     private int line_number; //java 源码行号

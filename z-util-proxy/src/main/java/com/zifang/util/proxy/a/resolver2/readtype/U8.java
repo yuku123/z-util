@@ -3,7 +3,13 @@ package com.zifang.util.proxy.a.resolver2.readtype;
 import java.io.IOException;
 import java.io.InputStream;
 
-
+/**
+ * 无符号8字节数据类型
+ * <p>
+ * 用于从输入流中读取8字节的长整数数据。
+ * JVM中用于表示long和double类型的位模式存储。
+ */
+public class U8 {
 public class U8 {
 
     private long value;

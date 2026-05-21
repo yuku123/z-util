@@ -4,6 +4,11 @@ import com.zifang.util.proxy.a.resolver2.readtype.U4;
 
 import java.io.InputStream;
 
+/**
+ * 整数常量
+ * <p>
+ * CONSTANT_Integer_info用于表示4字节的int类型常量值。
+ */
 public class ConstantIntegerInfo extends AbstractConstantPool {
 
     private U4 bytes;

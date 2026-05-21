@@ -7,7 +7,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-//LineNumberTable属性用于描述Java源码行号与字节码行号（字节码的偏移量）之间的对应关系。
+/**
+ * 行号表属性
+ * <p>
+ * LineNumberTable_attribute用于关联字节码偏移和源码行号。
+ * 用于调试时提供堆栈跟踪的源码位置信息。
+ */
 public class LineNumberTable extends AbstractAttribute {
     private U2 lineNumTableLength;
     private List<LineNumberInfo> lineNumberTable = new ArrayList<>();

@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 方法句柄常量类
+ * <p>
+ * CONSTANT_MethodHandle_info用于表示方法句柄，是JVM用于实现invokedynamic指令的关键数据结构。
+ */
 public class Constant_MethodHandle_info extends Constant_X_info {
     public static int tag_length = 1;
     public static int reference_kind_length = 1;

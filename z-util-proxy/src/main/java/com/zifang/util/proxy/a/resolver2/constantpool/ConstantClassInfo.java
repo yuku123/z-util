@@ -4,6 +4,12 @@ import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
 import java.io.InputStream;
 
+/**
+ * 字符串常量
+ * <p>
+ * CONSTANT_String_info用于表示字符串常量的符号引用。
+ * string_index指向常量池中CONSTANT_Utf8_info常量的索引。
+ */
 public class ConstantClassInfo extends AbstractConstantPool {
 
     private U2 stringIndex;

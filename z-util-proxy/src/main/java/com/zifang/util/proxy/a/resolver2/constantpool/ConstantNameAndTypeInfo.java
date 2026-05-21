@@ -4,6 +4,12 @@ import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
 import java.io.InputStream;
 
+/**
+ * 名称和类型描述符
+ * <p>
+ * CONSTANT_NameAndType_info用于表示字段或方法的名称和类型的符号引用。
+ * 包含name_index和descriptor_index两个指向UTF-8常量的索引。
+ */
 public class ConstantNameAndTypeInfo extends AbstractConstantPool {
     private U2 nameIndex;
     private U2 descriptorIndex;

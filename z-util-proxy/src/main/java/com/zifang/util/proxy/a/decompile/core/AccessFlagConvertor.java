@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.core;
 
+/**
+ * 访问标志转换器
+ * <p>
+ * 将JVM访问标志转换为Java源码中的访问修饰符。
+ */
 public class AccessFlagConvertor {
 
     public static String classAccessFlagConvertor(String hexString) {

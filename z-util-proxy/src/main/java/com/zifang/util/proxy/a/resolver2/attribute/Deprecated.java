@@ -5,7 +5,12 @@ import com.zifang.util.proxy.a.resolver2.readtype.U4;
 
 import java.io.InputStream;
 
-//Deprecated和Synthetic两个属性都属于标志类型的布尔属性，只存在有和没有的区别，没有属性值 的概念。
+/**
+ * 已弃用属性
+ * <p>
+ * Deprecated_attribute用于标记类、接口、字段或方法已被弃用。
+ * 用于编译时警告和运行时警告。
+ */
 public class Deprecated extends AbstractAttribute {
 
 

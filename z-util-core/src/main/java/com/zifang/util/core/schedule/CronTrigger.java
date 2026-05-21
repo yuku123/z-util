@@ -120,8 +120,8 @@ public class CronTrigger implements Trigger {
     }
 
     @Override
-    public com.zifang.util.core.schedule.Trigger getDelegate() {
-        return this;
+    public org.quartz.Trigger getDelegate() {
+        return delegate;
     }
 
     @Override
@@ -139,21 +139,7 @@ public class CronTrigger implements Trigger {
      * 获取 cron 表达式字符串。
      */
     public String getCronExpression() {
-        return delegate.getCronExpression();
-    }
-
-    /**
-     * 获取 CronExpression 对象。
-     */
-    public org.quartz.CronExpression getCronExpressionObject() {
-        return delegate.getCronExpressionObject();
-    }
-
-    /**
-     * 是否基于秒（Quartz cron 特有属性）。
-     */
-    public boolean isSecondBased() {
-        return delegate.isSecondBased();
+        return delegate.getExpressionSummary();
     }
 
     // ==================== Builder ====================

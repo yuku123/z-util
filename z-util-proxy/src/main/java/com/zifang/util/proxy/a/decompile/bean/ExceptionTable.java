@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean;
 
+/**
+ * 异常表项类
+ * <p>
+ * JVM异常表用于try-catch块的异常处理。
+ */
 public class ExceptionTable {
     private int start_pc;
     private int end_pc;

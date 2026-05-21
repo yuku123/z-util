@@ -2,6 +2,11 @@ package com.zifang.util.proxy.a.decompile.core;
 
 import java.io.*;
 
+/**
+ * 文件创建器
+ * <p>
+ * 将反编译后的Java源码写入文件。
+ */
 public class FileCreator {
     /**
      * 源码写入到指定包指定后缀的源文件中。

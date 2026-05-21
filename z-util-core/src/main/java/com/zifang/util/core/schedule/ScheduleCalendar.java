@@ -2,6 +2,8 @@ package com.zifang.util.core.schedule;
 
 import java.time.LocalDate;
 import java.util.*;
+import org.quartz.Calendar;
+import org.quartz.impl.calendar.*;
 
 /**
  * Quartz {@link Calendar} 的封装类，支持日期排除规则。
@@ -59,7 +61,7 @@ public class ScheduleCalendar {
      */
     public static ScheduleCalendar excludeDates(Set<LocalDate> excludedDates) {
         AnnualCalendar calendar = new AnnualCalendar();
-        List<Calendar> exclusions = new ArrayList<>();
+        java.util.ArrayList<java.util.Calendar> exclusions = new java.util.ArrayList<>();
         for (LocalDate date : excludedDates) {
             java.util.Calendar c = java.util.Calendar.getInstance();
             c.set(date.getYear(), date.getMonthValue() - 1, date.getDayOfMonth());
@@ -104,7 +106,10 @@ public class ScheduleCalendar {
      * 创建一个排除周末（周六、周日）的日历。
      */
     public static ScheduleCalendar excludeWeekends() {
-        return excludeWeekdays(EnumSet.of(java.util.Calendar.SATURDAY, java.util.Calendar.SUNDAY));
+        Set<Integer> weekends = new HashSet<>();
+        weekends.add(java.util.Calendar.SATURDAY);
+        weekends.add(java.util.Calendar.SUNDAY);
+        return excludeWeekdays(weekends);
     }
 
     /**
@@ -116,7 +121,7 @@ public class ScheduleCalendar {
         // 创建一个排除所有日期的年历，然后添加例外
         AnnualCalendar calendar = new AnnualCalendar();
         // 先排除所有天
-        List<Calendar> emptyList = new ArrayList<>();
+        java.util.ArrayList<java.util.Calendar> emptyList = new java.util.ArrayList<>();
         calendar.setDaysExcluded(emptyList);
 
         // 使用 HolidayCalendar 包含特定日期
@@ -149,7 +154,7 @@ public class ScheduleCalendar {
      * 创建一个空日历（不过滤任何日期）。
      */
     public static ScheduleCalendar none() {
-        return new ScheduleCalendar(new BaseCalendar(new java.util.Calendar.Builder().build()));
+        return new ScheduleCalendar(new BaseCalendar());
     }
 
     // ==================== 操作方法 ====================

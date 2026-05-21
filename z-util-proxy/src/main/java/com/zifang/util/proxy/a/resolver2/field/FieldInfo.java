@@ -2,7 +2,12 @@ package com.zifang.util.proxy.a.resolver2.field;
 
 import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
-import java.util.ArrayList;
+/**
+ * 字段信息
+ * <p>
+ * 表示ClassFile中的字段表项，包含字段访问标志、名称索引、描述符索引和属性。
+ */
+public class FieldInfo {
 import java.util.List;
 
 

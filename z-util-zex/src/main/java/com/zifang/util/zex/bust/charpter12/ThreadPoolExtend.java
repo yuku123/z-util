@@ -2,6 +2,15 @@ package com.zifang.util.zex.bust.charpter12;
 
 import java.util.concurrent.*;
 
+/**
+ * 线程池扩展示例类。
+ * <p>
+ * 此类展示了如何扩展Java线程池功能。
+ * 包含自定义线程池的实现和使用示例。
+ *
+ * @author zifang
+ * @version 1.0
+ */
 public class ThreadPoolExtend {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         // 线程池扩展调用

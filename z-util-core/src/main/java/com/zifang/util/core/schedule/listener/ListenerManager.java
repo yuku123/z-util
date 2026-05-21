@@ -337,7 +337,7 @@ public class ListenerManager {
                     @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
                     @Override public String getCalendarName() { return t.getCalendarName(); }
                     @Override public java.util.TimeZone getTimeZone() { return java.util.TimeZone.getDefault(); }
-                    @Override public com.zifang.util.core.schedule.Trigger getDelegate() { return this; }
+                    @Override public org.quartz.Trigger getDelegate() { return t; }
                     @Override public String toString() { return t.toString(); }
                 };
             }
@@ -479,7 +479,7 @@ public class ListenerManager {
                     @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
                     @Override public String getCalendarName() { return t.getCalendarName(); }
                     @Override public java.util.TimeZone getTimeZone() { return java.util.TimeZone.getDefault(); }
-                    @Override public com.zifang.util.core.schedule.Trigger getDelegate() { return this; }
+                    @Override public org.quartz.Trigger getDelegate() { return t; }
                     @Override public String toString() { return t.toString(); }
                 };
             }

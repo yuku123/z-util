@@ -6,6 +6,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * UTF-8编码的字符串常量
+ * <p>
+ * CONSTANT_Utf8_info用于存储字符串、类名、方法名等文本数据。
+ * JVM规范定义的UTF-8编码与标准UTF-8略有不同。
+ */
 public class Utf8Info extends AbstractConstantPool {
 
     private short length;

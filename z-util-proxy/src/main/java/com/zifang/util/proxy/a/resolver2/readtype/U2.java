@@ -3,6 +3,12 @@ package com.zifang.util.proxy.a.resolver2.readtype;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * 无符号2字节数据类型
+ * <p>
+ * 用于从输入流中读取2字节的无符号整数，范围为0-65535。
+ * JVM中多使用此类型表示索引和计数。
+ */
 public class U2 {
     public short value;
 

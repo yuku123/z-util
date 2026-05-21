@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * UTF-8字符串常量类
+ * <p>
+ * CONSTANT_Utf8_info用于存储字符串、类名、方法名等文本数据。
+ */
 public class Constant_Utf8_info extends Constant_X_info {
 
     public static final int tag_length = 1;

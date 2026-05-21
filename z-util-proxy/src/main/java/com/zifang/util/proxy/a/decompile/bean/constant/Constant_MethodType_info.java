@@ -1,5 +1,10 @@
 package com.zifang.util.proxy.a.decompile.bean.constant;
 
+/**
+ * 方法类型常量类
+ * <p>
+ * CONSTANT_MethodType_info用于表示方法类型的符号引用。
+ */
 public class Constant_MethodType_info extends Constant_X_info {
     public static int tag_length = 1;
     public static int descriptor_index_length = 2;

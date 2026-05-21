@@ -4,6 +4,11 @@ import com.zifang.util.proxy.a.decompile.bean.attribute.Attribute_info;
 
 import java.util.List;
 
+/**
+ * 字段信息类
+ * <p>
+ * 存储字段的访问标志、名称索引、描述符索引和属性列表。
+ */
 public class Fields_info {
     private String access_flag;
     private int name_index;

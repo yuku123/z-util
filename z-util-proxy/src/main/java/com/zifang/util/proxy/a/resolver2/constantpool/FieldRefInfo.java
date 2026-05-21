@@ -4,6 +4,12 @@ import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
 import java.io.InputStream;
 
+/**
+ * 字段引用信息
+ * <p>
+ * CONSTANT_Fieldref_info用于表示类中声明的字段的符号引用。
+ * 包含指向类信息的class_index和指向字段描述的name_index。
+ */
 public class FieldRefInfo extends AbstractConstantPool {
 
     private U2 classIndex;

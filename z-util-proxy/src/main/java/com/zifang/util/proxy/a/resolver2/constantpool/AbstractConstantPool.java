@@ -2,6 +2,14 @@ package com.zifang.util.proxy.a.resolver2.constantpool;
 
 import java.io.InputStream;
 
+/**
+ * 常量池抽象基类
+ * <p>
+ * JVM常量池中所有常量项的父类，定义了常量池项的基本结构。
+ * 每个常量池项都有一个tag字段标识其类型。
+ *
+ * @see <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4">JVM Specification - Constant Pool</a>
+ */
 public abstract class AbstractConstantPool {
     public static final byte CONSTANT_UTF8_INFO = 1;                  // CONSTANT_Utf8_info
     public static final byte CONSTANT_INTEGER_INFO = 3;               // CONSTANT_Integer_info

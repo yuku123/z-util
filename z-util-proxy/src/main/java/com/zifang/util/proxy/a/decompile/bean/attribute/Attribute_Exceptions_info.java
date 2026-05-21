@@ -1,6 +1,11 @@
 package com.zifang.util.proxy.a.decompile.bean.attribute;
 
-import java.util.List;
+/**
+ * 异常属性类
+ * <p>
+ * Exceptions_attribute用于列出方法可能抛出的已检查异常。
+ */
+public class Attribute_Exceptions_info extends Attribute_info {
 
 /**
  * 方法属性。

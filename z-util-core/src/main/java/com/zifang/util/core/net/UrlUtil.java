@@ -308,10 +308,8 @@ public class UrlUtil {
         }
     }
 
-    private static final String CHARSET_UTF_8 = "UTF-8";
-
     /**
-     * 解码URL查询字符串，将 + 视为空格
+     * 解码URL查询字符串
      *
      * @param source 查询字符串
      * @return 解码后的字符串
