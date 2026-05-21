@@ -394,6 +394,13 @@ public class SqlExecutor {
     }
     
     /**
+     * 检查表是否存在
+     */
+    public boolean hasTable(String name) {
+        return database.hasTable(name);
+    }
+    
+    /**
      * 创建表
      */
     public Table createTable(String name, String... columns) {

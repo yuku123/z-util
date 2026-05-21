@@ -48,6 +48,7 @@
         <module>z-util-xml</module>
         <module>z-util-dsl</module>
         <module>z-util-cli</module>
+        <module>z-util-sql</module>
         <module>z-util-all</module>
     </modules>
 
@@ -97,6 +98,12 @@
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-all</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-sql</artifactId>
                 <version>${util.version}</version>
             </dependency>
 
