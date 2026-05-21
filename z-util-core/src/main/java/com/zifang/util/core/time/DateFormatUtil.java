@@ -108,15 +108,19 @@ public class DateFormatUtil {
     }
 
     public static String formatDate(Date date, String format) {
-        return formatDate(DateUtil.date2String(date), format);
+        return formatDate(DateUtil.format(date), format);
     }
 
     public static String formatDate(String value) {
-        return getFormat(DATE_FORMAT2).format(DateUtil.string2Date(value, DATE_FORMAT2));
+        try {
+            return getFormat(DATE_FORMAT2).format(DateUtil.parse(value, DATE_FORMAT2));
+        } catch (Exception e) {
+            return value;
+        }
     }
 
     public static String formatDate(Date value) {
-        return formatDate(DateUtil.date2String(value));
+        return formatDate(DateUtil.format(value));
     }
 
     protected static SimpleDateFormat getFormat(String format) {

@@ -1,0 +1,163 @@
+package com.zifang.util.core.io.archive;
+
+import java.io.*;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
+
+/**
+ * ZIP 压缩/解压工具类
+ */
+public class ZipUtil {
+
+    private static final String ZIP_FILE_SUFFIX = ".zip";
+    private static final int BUFFER_SIZE = 1024;
+
+    /**
+     * 压缩文件或文件夹为 ZIP 格式
+     *
+     * @param resourcePath 源文件或文件夹路径
+     * @param targetPath   目标文件夹路径
+     */
+    public static void zipFile(String resourcePath, String targetPath) {
+        File resourcesFile = new File(resourcePath);
+        File targetFile = new File(targetPath);
+
+        if (!targetFile.exists()) {
+            targetFile.mkdirs();
+        }
+        String targetName = resourcesFile.getName() + ZIP_FILE_SUFFIX;
+
+        try (ZipOutputStream out = new ZipOutputStream(
+                new BufferedOutputStream(new FileOutputStream(targetPath + "/" + targetName)))) {
+            compressedFile(out, resourcesFile, "");
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * 压缩文件夹为 ZIP 文件
+     *
+     * @param folder       要压缩的文件夹路径
+     * @param targetFolder 目标文件夹路径
+     * @param zipFileName  ZIP 文件名（不含扩展名）
+     * @throws IOException 如果压缩失败
+     */
+    public static void zipFolder(String folder, String targetFolder, String zipFileName) throws IOException {
+        File zipFolder = new File(folder);
+
+        if (!zipFolder.isDirectory()) {
+            throw new IOException("folder: " + folder + " is not a Folder");
+        }
+        if (!zipFolder.exists()) {
+            throw new IOException("folder: " + folder + " does not exist");
+        }
+
+        File targetDir = new File(targetFolder);
+        if (!targetDir.exists()) {
+            targetDir.mkdirs();
+        }
+
+        String zipFilePath = zipFileName.endsWith(ZIP_FILE_SUFFIX)
+                ? targetFolder + File.separator + zipFileName
+                : targetFolder + File.separator + zipFileName + ZIP_FILE_SUFFIX;
+
+        try (ZipOutputStream out = new ZipOutputStream(
+                new BufferedOutputStream(new FileOutputStream(zipFilePath)))) {
+            compressedFile(out, zipFolder, "");
+        }
+    }
+
+    /**
+     * 压缩单个文件到目标 ZIP 文件
+     *
+     * @param srcFilePath     源文件路径
+     * @param destZipFilePath 目标 ZIP 文件路径
+     * @param fileName        文件在 ZIP 包中的名称
+     */
+    public static void zipFile(String srcFilePath, String destZipFilePath, String fileName) {
+        try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(destZipFilePath));
+             FileInputStream fis = new FileInputStream(srcFilePath)) {
+            ZipEntry z1 = new ZipEntry(fileName);
+            zos.putNextEntry(z1);
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int len;
+            while ((len = fis.read(buffer)) != -1) {
+                zos.write(buffer, 0, len);
+            }
+            zos.closeEntry();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * 解压 ZIP 文件到指定目录
+     *
+     * @param zipFilePath ZIP 文件路径
+     * @param destDir     解压目标目录
+     * @throws IOException 如果解压失败
+     */
+    public static void unZip(String zipFilePath, String destDir) throws IOException {
+        File f = new File(destDir);
+        if (!f.exists()) {
+            f.mkdirs();
+        }
+
+        try (ZipFile zipfile = new ZipFile(zipFilePath)) {
+            Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>) zipfile.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = entries.nextElement();
+                File destFile = new File(destDir, entry.getName());
+
+                if (entry.isDirectory()) {
+                    destFile.mkdirs();
+                } else {
+                    destFile.getParentFile().mkdirs();
+                    try (BufferedInputStream is = new BufferedInputStream(zipfile.getInputStream(entry));
+                         BufferedOutputStream fos = new BufferedOutputStream(
+                                 new FileOutputStream(destFile), BUFFER_SIZE)) {
+                        byte[] data = new byte[BUFFER_SIZE];
+                        int count;
+                        while ((count = is.read(data, 0, BUFFER_SIZE)) != -1) {
+                            fos.write(data, 0, count);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static void compressedFile(ZipOutputStream out, File file, String dir) {
+        if (file.isDirectory()) {
+            out.putNextEntry(new ZipEntry(dir + "/"));
+            String childDir = dir.isEmpty() ? "" : dir + "/";
+            File[] files = file.listFiles();
+            if (files != null) {
+                for (File child : files) {
+                    compressedFile(out, child, childDir + child.getName());
+                }
+            }
+        } else {
+            try (FileInputStream fis = new FileInputStream(file)) {
+                out.putNextEntry(new ZipEntry(dir));
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int len;
+                while ((len = fis.read(buffer)) > 0) {
+                    out.write(buffer, 0, len);
+                }
+                out.closeEntry();
+            } catch (IOException e) {
+                throw new UncheckedIOException(e);
+            }
+        }
+    }
+
+    private static class UncheckedIOException extends RuntimeException {
+        private UncheckedIOException(IOException cause) {
+            super(cause);
+        }
+    }
+}
