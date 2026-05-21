@@ -246,10 +246,8 @@ public class Tokenizer {
                 } else if (ch == '-') {
                     sb.append(ch); // second '-' of '-->' closing
                 } else {
-                    // We saw '--' followed by non-'>'. The first '-' was the second '-' of <!--
-                    // So we should append it as content (not the second '-' of -->)
-                    sb.append('-');
-                    sb.append(ch);
+                    // We saw '--' followed by non-'>'. This was the opening <!--
+                    // The dashes were delimiters, not content - don't append them
                     state = 0;
                 }
             }

@@ -2,127 +2,89 @@ package com.zifang.util.expression.instruction;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 /**
- * 指令相关测试
+ * Instruction 指令类完整测试
  */
 public class InstructionTest {
 
     @Test
-    public void testInstructionAnnotationExists() {
-        // 测试注解存在
-        assertNotNull(CommandAnnotation.class);
-    }
-
-    @Test
-    public void testInstructionClassExists() {
-        // 测试指令类存在
-        assertTrue(true);
-    }
-
-    @Test
-    public void testOperatorEnum() {
-        // 测试操作符枚举
-        Operator[] operators = Operator.values();
-        assertNotNull(operators);
-        assertTrue(operators.length >= 0);
-    }
-
-    @Test
-    public void testOperatorStack() {
-        // 测试操作符栈
-        OperatorStack stack = new OperatorStack();
-        assertNotNull(stack);
-    }
-
-    @Test
-    public void testCommandParser() {
-        // 测试命令解析器
-        CommandParser parser = new CommandParser();
-        assertNotNull(parser);
-    }
-
-    @Test
-    public void testInstructionDefine() {
-        // 测试指令定义
-        InstructionDefine define = new InstructionDefine();
-        assertNotNull(define);
-    }
-
-    @Test
-    public void testInstructionRegister() {
-        // 测试指令注册器
-        InstructionRegister register = new InstructionRegister();
-        assertNotNull(register);
-    }
-
-    @Test
-    public void testInstructionExecutor() {
-        // 测试指令执行器
-        InstructionExecutor executor = new InstructionExecutor();
-        assertNotNull(executor);
-    }
-
-    @Test
-    public void testInstructionExecution() {
-        // 测试指令执行
+    public void testDefaultConstructor() {
         Instruction instruction = new Instruction();
-        assertNotNull(instruction);
+        assertNull(instruction.getInstructionCode());
+        assertNull(instruction.getParams());
     }
 
     @Test
-    public void testBasicArithmeticOperators() {
-        // 测试基本算术运算符
-        Operator add = Operator.ADD;
-        Operator subtract = Operator.SUBTRACT;
-        Operator multiply = Operator.MULTIPLY;
-        Operator divide = Operator.DIVIDE;
+    public void testSettersAndGetters() {
+        Instruction instruction = new Instruction();
+        instruction.setInstructionCode("ADD");
+        instruction.setParams(new Object[]{"param1", 2});
 
-        assertNotNull(add);
-        assertNotNull(subtract);
-        assertNotNull(multiply);
-        assertNotNull(divide);
+        assertEquals("ADD", instruction.getInstructionCode());
+        assertEquals(2, instruction.getParams().length);
+        assertEquals("param1", instruction.getParams()[0]);
+        assertEquals(2, instruction.getParams()[1]);
     }
 
     @Test
-    public void testComparisonOperators() {
-        // 测试比较运算符（如果存在）
-        // 这些可能在 Operator 枚举中定义
-        assertTrue(true); // 占位符
+    public void testStaticFactory() {
+        Instruction instruction = Instruction.of("SUB", new Object[]{"a", "b"});
+        assertEquals("SUB", instruction.getInstructionCode());
+        assertEquals(2, instruction.getParams().length);
     }
 
     @Test
-    public void testLogicalOperators() {
-        // 测试逻辑运算符（如果存在）
-        assertTrue(true); // 占位符
+    public void testToString() {
+        Instruction instruction = Instruction.of("ADD", new Object[]{1, 2, 3});
+        String str = instruction.toString();
+        assertTrue(str.contains("ADD"));
+        assertTrue(str.contains("1"));
     }
 
     @Test
-    public void testOperatorPrecedence() {
-        // 测试操作符优先级
-        // 验证乘除优先级高于加减
-        assertTrue(true); // 占位符
+    public void testEquals() {
+        Instruction i1 = Instruction.of("ADD", new Object[]{1, 2});
+        Instruction i2 = Instruction.of("ADD", new Object[]{1, 2});
+        Instruction i3 = Instruction.of("SUB", new Object[]{1, 2});
+
+        assertEquals(i1, i2);
+        assertNotEquals(i1, i3);
     }
 
     @Test
-    public void testInstructionStackOperations() {
-        // 测试指令栈操作
-        // 压栈、弹栈、查看栈顶等操作
-        assertTrue(true); // 占位符
+    public void testHashCode() {
+        Instruction i1 = Instruction.of("ADD", new Object[]{1, 2});
+        Instruction i2 = Instruction.of("ADD", new Object[]{1, 2});
+
+        assertEquals(i1.hashCode(), i2.hashCode());
     }
 
     @Test
-    public void testInstructionParsing() {
-        // 测试指令解析
-        // 将字符串解析为指令序列
-        assertTrue(true); // 占位符
+    public void testNotEqualsWithNull() {
+        Instruction i1 = Instruction.of("ADD", new Object[]{1});
+        assertNotEquals(null, i1);
     }
 
     @Test
-    public void testInstructionOptimization() {
-        // 测试指令优化
-        // 常量折叠、死代码消除等
-        assertTrue(true); // 占位符
+    public void testNotEqualsWithDifferentClass() {
+        Instruction i1 = Instruction.of("ADD", new Object[]{1});
+        assertNotEquals("string", i1);
+    }
+
+    @Test
+    public void testParamsWithDifferentLength() {
+        Instruction i1 = Instruction.of("ADD", new Object[]{1});
+        Instruction i2 = Instruction.of("ADD", new Object[]{1, 2});
+        assertNotEquals(i1, i2);
+    }
+
+    @Test
+    public void testReflexivity() {
+        Instruction i1 = Instruction.of("ADD", new Object[]{1, 2});
+        assertEquals(i1, i1);
     }
 }
