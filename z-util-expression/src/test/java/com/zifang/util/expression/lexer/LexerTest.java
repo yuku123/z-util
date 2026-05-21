@@ -2,6 +2,8 @@ package com.zifang.util.expression.lexer;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -24,6 +26,11 @@ public class LexerTest {
             public void setInput(String input) {
                 // Mock implementation
             }
+
+            @Override
+            public List<TokenDefinition> tokenize() {
+                return null;
+            }
         };
 
         assertNotNull(lexer);
@@ -41,6 +48,11 @@ public class LexerTest {
             public void setInput(String input) {
                 this.input = input;
             }
+
+            @Override
+            public List<TokenDefinition> tokenize() {
+                return null;
+            }
         };
 
         lexer.setInput("");
@@ -54,6 +66,11 @@ public class LexerTest {
             public void setInput(String input) {
                 // 应该处理 null 输入
             }
+
+            @Override
+            public List<TokenDefinition> tokenize() {
+                return null;
+            }
         };
 
         lexer.setInput(null);
@@ -66,6 +83,11 @@ public class LexerTest {
             @Override
             public void setInput(String input) {
                 // 处理复杂表达式
+            }
+
+            @Override
+            public List<TokenDefinition> tokenize() {
+                return null;
             }
         };
 
@@ -87,6 +109,11 @@ public class LexerTest {
             @Override
             public void setInput(String input) {
                 // 处理特殊字符
+            }
+
+            @Override
+            public List<TokenDefinition> tokenize() {
+                return null;
             }
         };
 

@@ -1,5 +1,7 @@
 package com.zifang.util.core.time.converter;
 
+import com.zifang.util.core.time.DurationUtil;
+
 import java.time.*;
 import java.util.Date;
 
@@ -242,8 +244,7 @@ public class TimeConverter {
     // ==================== Duration <-> Long ====================
 
     public static long toMillis(Duration duration) {
-        if (duration == null) return 0;
-        return duration.toMillis();
+        return DurationUtil.toMillis(duration);
     }
 
     public static Duration toDuration(long millis) {
@@ -251,8 +252,7 @@ public class TimeConverter {
     }
 
     public static long toSeconds(Duration duration) {
-        if (duration == null) return 0;
-        return duration.toSeconds();
+        return DurationUtil.toSeconds(duration);
     }
 
     public static Duration toDurationSeconds(long seconds) {

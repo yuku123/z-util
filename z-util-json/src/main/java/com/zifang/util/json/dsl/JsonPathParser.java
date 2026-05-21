@@ -77,9 +77,7 @@ public class JsonPathParser {
             // 先判断是否是 $.* 通配符（通配符在 readName 里会被当作普通名字）
             if (pos + 1 < path.length() && path.charAt(pos + 1) == '*') {
                 List<Object> all = getAllChildren(current);
-                for (Object item : all) {
-                    results.add(item);
-                }
+                results.addAll(all);
                 return;
             }
             String name = readName(path, pos + 1);
@@ -149,7 +147,6 @@ public class JsonPathParser {
             if (pos + 1 < path.length() && path.charAt(pos + 1) == '[') {
                 evaluate(current, path, pos + 1, results);
             }
-            return;
         }
     }
 

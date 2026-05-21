@@ -52,20 +52,22 @@ public class XmlFormatter {
     private void writeDocument(XDocument doc, StringBuilder sb, int depth) {
         if (doc.getDeclaration() != null) {
             writeDeclaration(doc.getDeclaration(), sb);
-            if (!doc.getPrependNodes().isEmpty() || doc.getRoot() != null) {
+            if (indentSize > 0 && (!doc.getPrependNodes().isEmpty() || doc.getRoot() != null)) {
                 sb.append('\n');
             }
         } else {
             // 默认加上 XML 声明
             writeDeclaration(new XDeclaration("1.0", null, null), sb);
-            if (doc.getRoot() != null) {
+            if (indentSize > 0 && doc.getRoot() != null) {
                 sb.append('\n');
             }
         }
 
         for (XNode node : doc.getPrependNodes()) {
             writeNode(node, sb, 0);
-            sb.append('\n');
+            if (indentSize > 0) {
+                sb.append('\n');
+            }
         }
 
         if (doc.getRoot() != null) {
@@ -122,15 +124,22 @@ public class XmlFormatter {
             return;
         }
 
-        sb.append(">\n");
+        sb.append('>');
+        if (indentSize > 0) {
+            sb.append('\n');
+        }
         for (XNode child : children) {
             writeNode(child, sb, depth + 1);
         }
-        indent(sb, depth);
+        if (indentSize > 0) {
+            indent(sb, depth);
+        }
         sb.append("</");
         sb.append(element.getQualifiedName());
         sb.append('>');
-        sb.append('\n');
+        if (indentSize > 0) {
+            sb.append('\n');
+        }
     }
 
     private boolean isSimpleTextElement(XElement element) {
@@ -153,27 +162,44 @@ public class XmlFormatter {
             String text = ((XText) node).getText();
             if (preserveWhitespace || !text.trim().isEmpty()) {
                 sb.append(escapeXmlText(text));
-                sb.append('\n');
+                if (indentSize > 0) {
+                    sb.append('\n');
+                }
             }
         } else if (node instanceof XCData) {
-            indent(sb, depth);
+            if (indentSize > 0) {
+                indent(sb, depth);
+            }
             sb.append("<![CDATA[");
             sb.append(((XCData) node).getData());
-            sb.append("]]>\n");
+            sb.append("]]>");
+            if (indentSize > 0) {
+                sb.append('\n');
+            }
         } else if (node instanceof XComment) {
-            indent(sb, depth);
+            if (indentSize > 0) {
+                indent(sb, depth);
+            }
             sb.append("<!--");
             sb.append(((XComment) node).getContent());
-            sb.append("-->\n");
+            sb.append("-->");
+            if (indentSize > 0) {
+                sb.append('\n');
+            }
         } else if (node instanceof XProcessingInstruction) {
-            indent(sb, depth);
+            if (indentSize > 0) {
+                indent(sb, depth);
+            }
             sb.append("<?");
             XProcessingInstruction pi = (XProcessingInstruction) node;
             sb.append(pi.getTarget());
             if (!pi.getData().isEmpty()) {
                 sb.append(' ').append(pi.getData());
             }
-            sb.append("?>\n");
+            sb.append("?>");
+            if (indentSize > 0) {
+                sb.append('\n');
+            }
         }
     }
 

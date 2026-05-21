@@ -1,8 +1,7 @@
-package com.zifang.util.json.code;
+package com.zifang.util.json.dsl;
 
 import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
-import com.zifang.util.json.dsl.DslJsonParser;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

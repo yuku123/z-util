@@ -173,6 +173,10 @@ public class Tokenizer {
         if (trimmed.startsWith("?xml") && (trimmed.length() == 4 || Character.isWhitespace(trimmed.charAt(4)))) {
             tokens.add(new Token(TokenType.DECLARATION, s));
         } else {
+            // Strip leading '?' for PI (PI syntax is <?target ...?>)
+            if (trimmed.startsWith("?")) {
+                trimmed = trimmed.substring(1);
+            }
             tokens.add(new Token(TokenType.PROCESSING_INSTRUCTION, trimmed));
         }
     }
@@ -217,9 +221,9 @@ public class Tokenizer {
     // ===== 注释 =====
     private void readComment() throws IOException {
         // At first '-' of '<!--' (already consumed '<!' in readMarkup, peek returned '-')
-        // Use a state machine: 0=looking for first '-', 1=found first '-', 2=saw '--'
+        // Use a state machine: 0=normal, 1=saw first '-', 2=saw '--'
         StringBuilder sb = new StringBuilder();
-        int state = 0; // 0=normal, 1=saw first '-', 2=saw '--'
+        int state = 0;
         char ch = cr.next(); // consume first '-'
         while (ch != (char) -1) {
             if (state == 0) {
@@ -240,9 +244,10 @@ public class Tokenizer {
                 if (ch == '>') {
                     break;
                 } else if (ch == '-') {
-                    sb.append('-');
+                    sb.append(ch); // second '-' of '-->' closing
                 } else {
-                    sb.append('-');
+                    // We saw '--' followed by non-'>'. The first '-' was the second '-' of <!--
+                    // So we should append it as content (not the second '-' of -->)
                     sb.append('-');
                     sb.append(ch);
                     state = 0;

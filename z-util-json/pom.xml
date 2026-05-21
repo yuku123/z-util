@@ -17,6 +17,7 @@
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-core</artifactId>
+            <version>${util.version}</version>
         </dependency>
         <dependency>
             <groupId>com.zifang</groupId>
