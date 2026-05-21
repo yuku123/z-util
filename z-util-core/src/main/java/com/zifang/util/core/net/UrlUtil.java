@@ -307,4 +307,132 @@ public class UrlUtil {
                     || c == '-' || c == '_' || c == '.' || c == '~';
         }
     }
+
+    private static final String CHARSET_UTF_8 = "UTF-8";
+
+    /**
+     * 解码URL查询字符串，将 + 视为空格
+     *
+     * @param source 查询字符串
+     * @return 解码后的字符串
+     */
+    public static String decodeQuery(String source) {
+        return decodeQuery(source, CHARSET_UTF_8);
+    }
+
+    /**
+     * 解码URL查询字符串，将 + 视为空格
+     *
+     * @param source   查询字符串
+     * @param encoding 编码方式
+     * @return 解码后的字符串
+     */
+    public static String decodeQuery(String source, String encoding) {
+        if (source == null) {
+            return null;
+        }
+        int length = source.length();
+        java.io.ByteArrayOutputStream bos = new java.io.ByteArrayOutputStream(length);
+        boolean changed = false;
+        for (int i = 0; i < length; i++) {
+            int ch = source.charAt(i);
+            switch (ch) {
+                case '%':
+                    if ((i + 2) < length) {
+                        char hex1 = source.charAt(i + 1);
+                        char hex2 = source.charAt(i + 2);
+                        int u = Character.digit(hex1, 16);
+                        int l = Character.digit(hex2, 16);
+                        if (u == -1 || l == -1) {
+                            throw new IllegalArgumentException("Invalid sequence: " + source.substring(i));
+                        }
+                        bos.write((u << 4) + l);
+                        i += 2;
+                        changed = true;
+                    } else {
+                        throw new IllegalArgumentException("Invalid sequence: " + source.substring(i));
+                    }
+                    break;
+                case '+':
+                    ch = ' ';
+                    changed = true;
+                default:
+                    bos.write(ch);
+            }
+        }
+        try {
+            return changed ? new String(bos.toByteArray(), encoding) : source;
+        } catch (java.io.UnsupportedEncodingException e) {
+            return source;
+        }
+    }
+
+    /**
+     * URL构建器，用于链式拼接查询参数
+     * <p>Example:
+     * <pre>
+     * String url = UrlUtil.build("/api/user")
+     *     .queryParam("name", "张三")
+     *     .queryParam("age", "20")
+     *     .toString();
+     * // /api/user?name=%E5%BC%A0%E4%B8%89&amp;age=20
+     * </pre>
+     */
+    public static class Builder {
+        private final StringBuilder url;
+        private final String encoding;
+        private boolean hasParams;
+
+        public Builder(String path, boolean encodePath, String encoding) {
+            this.encoding = encoding;
+            this.url = new StringBuilder();
+            if (encodePath) {
+                this.url.append(encode(path, encoding));
+            } else {
+                this.url.append(path);
+            }
+            this.hasParams = this.url.indexOf("?") != -1;
+        }
+
+        /**
+         * 创建默认UTF-8编码的URL构建器
+         *
+         * @param path 初始路径
+         * @return Builder实例
+         */
+        public static Builder build(String path) {
+            return new Builder(path, true, CHARSET_UTF_8);
+        }
+
+        /**
+         * 追加查询参数
+         *
+         * @param name  参数名
+         * @param value 参数值
+         * @return this
+         */
+        public Builder queryParam(String name, String value) {
+            url.append(hasParams ? '&' : '?');
+            hasParams = true;
+            try {
+                url.append(URLEncoder.encode(name, encoding));
+            } catch (UnsupportedEncodingException e) {
+                url.append(name);
+            }
+            if (value != null && !value.isEmpty()) {
+                url.append('=');
+                try {
+                    url.append(URLEncoder.encode(value, encoding));
+                } catch (UnsupportedEncodingException e) {
+                    url.append(value);
+                }
+            }
+            return this;
+        }
+
+        @Override
+        public String toString() {
+            return url.toString();
+        }
+    }
 }

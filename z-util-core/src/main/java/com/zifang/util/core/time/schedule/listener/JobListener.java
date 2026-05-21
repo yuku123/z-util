@@ -1,5 +1,8 @@
 package com.zifang.util.core.time.schedule.listener;
 
+import com.zifang.util.core.time.schedule.JobExecutionContextWrapper;
+import org.quartz.JobExecutionException;
+
 /**
  * 任务监听器接口，对应 Quartz 的 {@link org.quartz.JobListener}。
  * <p>
@@ -60,10 +63,10 @@ public interface JobListener {
     /**
      * 任务执行完成（Job.execute 返回后调用，无论是正常返回还是抛出异常）。
      *
-     * @param context     任务执行上下文
-     * @param exception   任务执行中抛出的异常（如果任务正常完成则为 null）
+     * @param context   任务执行上下文
+     * @param exception 任务执行中抛出的异常（如果任务正常完成则为 null）
      */
     default void jobWasExecuted(JobExecutionContextWrapper context,
-                                org.quartz.JobExecutionException exception) {
+                                JobExecutionException exception) {
     }
 }

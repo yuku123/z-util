@@ -22,6 +22,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 
 /**
  * 文件相关的工具类
@@ -546,6 +547,25 @@ public class FileUtil {
      */
     public static String getFileType(File file) {
         return getTypePart(file.getName());
+    }
+
+    /**
+     * 判断文件是否为有效图片
+     *
+     * @param filePath 文件路径
+     * @return 是否为图片
+     */
+    public static boolean isImage(String filePath) {
+        File imageFile = new File(filePath);
+        if (!imageFile.exists()) {
+            return false;
+        }
+        try {
+            java.awt.Image img = ImageIO.read(imageFile);
+            return img != null && img.getWidth(null) > 0 && img.getHeight(null) > 0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**

@@ -1,7 +1,6 @@
 package com.zifang.util.core.time.schedule;
 
 import org.quartz.SimpleScheduleBuilder;
-import org.quartz.SimpleTrigger;
 import org.quartz.TriggerBuilder;
 
 import java.util.Date;
@@ -11,7 +10,7 @@ import java.util.TimeZone;
 /**
  * 简单触发器，基于固定间隔或固定次数的重复策略。
  * <p>
- * 对应 Quartz 的 {@link SimpleTrigger}。
+ * 对应 Quartz 的 {@link org.quartz.SimpleTrigger}。
  * <p>
  * 示例：每秒执行一次，永远重复
  * <pre>
@@ -22,17 +21,6 @@ import java.util.TimeZone;
  *     .repeatForever()
  *     .build();
  * </pre>
- * <p>
- * 示例：5分钟后执行一次，只执行一次（不需要 repeatForever）
- * <pre>
- * Trigger trigger = TriggerBuilder.newSimpleTrigger()
- *     .withName("my-trigger")
- *     .forJob("my-job")
- *     .startAt(LocalDateTime.now().plusMinutes(5))
- *     .withIntervalInMinutes(1)
- *     .withRepeatCount(0)  // 0 表示不重复，即只执行一次
- *     .build();
- * </pre>
  *
  * @see CronTrigger
  * @see CalendarIntervalTrigger
@@ -41,9 +29,9 @@ import java.util.TimeZone;
  */
 public class SimpleTrigger implements Trigger {
 
-    private final SimpleTrigger delegate;
+    private final org.quartz.SimpleTrigger delegate;
 
-    SimpleTrigger(SimpleTrigger delegate) {
+    SimpleTrigger(org.quartz.SimpleTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -124,14 +112,18 @@ public class SimpleTrigger implements Trigger {
         return delegate.getCalendarName();
     }
 
+    /**
+     * SimpleTrigger 不直接暴露时区，返回系统默认时区。
+     * 如需时区支持，请使用 {@link CronTrigger}。
+     */
     @Override
     public TimeZone getTimeZone() {
-        return delegate.getTimeZone();
+        return TimeZone.getDefault();
     }
 
     @Override
-    public SimpleTrigger getDelegate() {
-        return delegate;
+    public com.zifang.util.core.time.schedule.Trigger getDelegate() {
+        return this;
     }
 
     @Override
@@ -176,7 +168,7 @@ public class SimpleTrigger implements Trigger {
     public static class SimpleBuilder extends Builder<SimpleBuilder> {
 
         private long intervalInMillis = 0;
-        private int repeatCount = 0; // 0 = 执行一次
+        private int repeatCount = 0;
 
         public SimpleBuilder withIntervalInSeconds(int seconds) {
             this.intervalInMillis = seconds * 1000L;
@@ -202,7 +194,7 @@ public class SimpleTrigger implements Trigger {
          * 设置永久重复（无限次）。
          */
         public SimpleBuilder repeatForever() {
-            this.repeatCount = SimpleTrigger.REPEAT_INDEFINITELY;
+            this.repeatCount = org.quartz.SimpleTrigger.REPEAT_INDEFINITELY;
             return this;
         }
 
@@ -217,29 +209,37 @@ public class SimpleTrigger implements Trigger {
 
         @Override
         public SimpleTrigger build() {
+            SimpleScheduleBuilder sb = SimpleScheduleBuilder.simpleSchedule()
+                    .withIntervalInMilliseconds(intervalInMillis)
+                    .withRepeatCount(repeatCount);
+
+            // 应用 misfire 策略
+            if (misfirePolicy != null) {
+                switch (misfirePolicy) {
+                    case IGNORE_MISFIRE_FIRES_NOW:
+                        sb.withMisfireHandlingInstructionIgnoreMisfires();
+                        break;
+                    case FIRE_NOW:
+                        sb.withMisfireHandlingInstructionFireNow();
+                        break;
+                    default:
+                        // 其余策略暂不单独处理
+                        break;
+                }
+            }
+
             org.quartz.SimpleTrigger built = TriggerBuilder.newTrigger()
                     .withIdentity(name, group)
                     .withDescription(description)
                     .withPriority(priority)
                     .startAt(startTime != null ? startTime : new Date())
                     .endAt(endTime)
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                            .withIntervalInMilliseconds(intervalInMillis)
-                            .withRepeatCount(repeatCount)
-                            .withMisfireHandlingInstruction(getMisfireInstruction()))
+                    .withSchedule(sb)
                     .forJob(jobKey)
                     .modifiedByCalendar(calendarName)
-                    .inTimeZone(timeZone)
                     .build();
 
-            return new SimpleTrigger((org.quartz.SimpleTrigger) built);
-        }
-
-        private int getMisfireInstruction() {
-            if (misfirePolicy == null) {
-                return org.quartz.Trigger.MISFIRE_INSTRUCTION_SMART_POLICY;
-            }
-            return misfirePolicy.toQuartzInstruction();
+            return new SimpleTrigger(built);
         }
     }
 }

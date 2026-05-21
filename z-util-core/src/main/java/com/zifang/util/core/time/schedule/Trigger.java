@@ -1,7 +1,6 @@
 package com.zifang.util.core.time.schedule;
 
 import org.quartz.Scheduler;
-import org.quartz.Trigger;
 import org.quartz.TriggerKey;
 
 import java.time.LocalDateTime;
@@ -141,9 +140,9 @@ public interface Trigger {
      */
     abstract class Builder<B extends Builder<B>> {
         protected String name;
-        protected String group = Scheduler.DEFAULT_GROUP;
+        protected String group = org.quartz.Scheduler.DEFAULT_GROUP;
         protected String description;
-        protected int priority = Trigger.DEFAULT_PRIORITY;
+        protected int priority = org.quartz.Trigger.DEFAULT_PRIORITY;
         protected Date startTime;
         protected Date endTime;
         protected String calendarName;

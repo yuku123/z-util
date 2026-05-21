@@ -1,7 +1,6 @@
 package com.zifang.util.core.time.schedule;
 
 import org.quartz.CalendarIntervalScheduleBuilder;
-import org.quartz.CalendarIntervalTrigger;
 import org.quartz.TriggerBuilder;
 
 import java.util.Date;
@@ -11,29 +10,10 @@ import java.util.TimeZone;
 /**
  * 日历区间触发器，按照日历单位（天、月、年等）递增的间隔重复执行。
  * <p>
- * 对应 Quartz 的 {@link CalendarIntervalTrigger}。
+ * 对应 Quartz 的 {@link org.quartz.CalendarIntervalTrigger}。
  * <p>
  * 与 {@link SimpleTrigger} 的固定毫秒间隔不同，CalendarIntervalTrigger 会自动处理
  * 夏令时切换、月份天数变化等日历语义。
- * <p>
- * 示例：每月 1 日凌晨 0 点执行
- * <pre>
- * Trigger trigger = TriggerBuilder.newCalendarIntervalTrigger()
- *     .withName("monthly-trigger")
- *     .forJob("my-job")
- *     .withIntervalInMonths(1)
- *     .onCalendarIntervalType()
- *     .build();
- * </pre>
- * <p>
- * 示例：每隔 2 周执行一次
- * <pre>
- * Trigger trigger = TriggerBuilder.newCalendarIntervalTrigger()
- *     .withName("biweekly-trigger")
- *     .forJob("my-job")
- *     .withIntervalInWeeks(2)
- *     .build();
- * </pre>
  *
  * @see SimpleTrigger
  * @see CronTrigger
@@ -42,9 +22,9 @@ import java.util.TimeZone;
  */
 public class CalendarIntervalTrigger implements Trigger {
 
-    private final CalendarIntervalTrigger delegate;
+    private final org.quartz.CalendarIntervalTrigger delegate;
 
-    CalendarIntervalTrigger(CalendarIntervalTrigger delegate) {
+    CalendarIntervalTrigger(org.quartz.CalendarIntervalTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -131,8 +111,8 @@ public class CalendarIntervalTrigger implements Trigger {
     }
 
     @Override
-    public CalendarIntervalTrigger getDelegate() {
-        return delegate;
+    public com.zifang.util.core.time.schedule.Trigger getDelegate() {
+        return this;
     }
 
     @Override
@@ -156,22 +136,15 @@ public class CalendarIntervalTrigger implements Trigger {
     /**
      * 获取递增间隔单位。
      */
-    public java.util.concurrent.TimeUnit getIntervalUnit() {
+    public org.quartz.DateBuilder.IntervalUnit getIntervalUnit() {
         return delegate.getRepeatIntervalUnit();
-    }
-
-    /**
-     * 获取日历类型。
-     */
-    public int getCalendarIntervalType() {
-        return delegate.getIntervalType();
     }
 
     /**
      * 是否在夏令时回拨时调整时间。
      */
     public boolean isSkipDayIfHourDoesNotExist() {
-        return delegate.getSkipDayIfHourDoesNotExist();
+        return delegate.isSkipDayIfHourDoesNotExist();
     }
 
     // ==================== Builder ====================
@@ -182,25 +155,15 @@ public class CalendarIntervalTrigger implements Trigger {
     public static class CalendarBuilder extends Builder<CalendarBuilder> {
 
         private int interval = 1;
-        private java.util.concurrent.TimeUnit intervalUnit =
-                java.util.concurrent.TimeUnit.DAYS;
-        private boolean skipDayIfHourDoesNotExist = false;
+        private org.quartz.DateBuilder.IntervalUnit intervalUnit =
+                org.quartz.DateBuilder.IntervalUnit.DAY;
 
         /**
          * 设置按天递增。
          */
         public CalendarBuilder withIntervalInDays(int days) {
             this.interval = days;
-            this.intervalUnit = java.util.concurrent.TimeUnit.DAYS;
-            return this;
-        }
-
-        /**
-         * 设置按月递增。
-         */
-        public CalendarBuilder withIntervalInMonths(int months) {
-            this.interval = months;
-            this.intervalUnit = java.util.concurrent.TimeUnit.DAYS; // 月份特殊处理
+            this.intervalUnit = org.quartz.DateBuilder.IntervalUnit.DAY;
             return this;
         }
 
@@ -209,7 +172,16 @@ public class CalendarIntervalTrigger implements Trigger {
          */
         public CalendarBuilder withIntervalInWeeks(int weeks) {
             this.interval = weeks;
-            this.intervalUnit = java.util.concurrent.TimeUnit.DAYS;
+            this.intervalUnit = org.quartz.DateBuilder.IntervalUnit.WEEK;
+            return this;
+        }
+
+        /**
+         * 设置按月递增。
+         */
+        public CalendarBuilder withIntervalInMonths(int months) {
+            this.interval = months;
+            this.intervalUnit = org.quartz.DateBuilder.IntervalUnit.MONTH;
             return this;
         }
 
@@ -218,27 +190,20 @@ public class CalendarIntervalTrigger implements Trigger {
          */
         public CalendarBuilder withIntervalInYears(int years) {
             this.interval = years;
-            this.intervalUnit = java.util.concurrent.TimeUnit.DAYS; // 年份特殊处理
+            this.intervalUnit = org.quartz.DateBuilder.IntervalUnit.YEAR;
             return this;
         }
 
         /**
-         * 设置按日历单位递增。
+         * 设置按指定日历单位递增。
          *
          * @param interval 间隔数量
-         * @param unit     间隔单位
+         * @param unit     间隔单位（非 TimeUnit，而是 Quartz 的 IntervalUnit）
          */
-        public CalendarBuilder withInterval(int interval, java.util.concurrent.TimeUnit unit) {
+        public CalendarBuilder withInterval(int interval,
+                                            org.quartz.DateBuilder.IntervalUnit unit) {
             this.interval = interval;
             this.intervalUnit = unit;
-            return this;
-        }
-
-        /**
-         * 设置为月份日历类型。
-         */
-        public CalendarBuilder onCalendarIntervalType() {
-            // 月份需要特殊处理，由 build() 方法处理
             return this;
         }
 
@@ -251,28 +216,36 @@ public class CalendarIntervalTrigger implements Trigger {
             return this;
         }
 
+        private boolean skipDayIfHourDoesNotExist = false;
+
         @Override
         public CalendarIntervalTrigger build() {
-            CalendarIntervalScheduleBuilder scheduleBuilder;
+            CalendarIntervalScheduleBuilder scheduleBuilder =
+                    CalendarIntervalScheduleBuilder.calendarIntervalSchedule()
+                            .withInterval(interval, intervalUnit)
+                            .skipDayIfHourDoesNotExist(skipDayIfHourDoesNotExist);
 
-            if (intervalUnit == java.util.concurrent.TimeUnit.DAYS) {
-                scheduleBuilder = CalendarIntervalScheduleBuilder.calendarIntervalSchedule()
-                        .withIntervalInDays(interval);
-            } else if (intervalUnit == java.util.concurrent.TimeUnit.HOURS) {
-                scheduleBuilder = CalendarIntervalScheduleBuilder.calendarIntervalSchedule()
-                        .withIntervalInHours(interval);
-            } else if (intervalUnit == java.util.concurrent.TimeUnit.MINUTES) {
-                scheduleBuilder = CalendarIntervalScheduleBuilder.calendarIntervalSchedule()
-                        .withIntervalInMinutes(interval);
-            } else {
-                // 默认按月处理
-                scheduleBuilder = CalendarIntervalScheduleBuilder.calendarIntervalSchedule()
-                        .withIntervalInMonths(interval);
+            // 应用 misfire 策略
+            if (misfirePolicy != null) {
+                switch (misfirePolicy) {
+                    case IGNORE_MISFIRE_FIRES_NOW:
+                        scheduleBuilder.withMisfireHandlingInstructionIgnoreMisfires();
+                        break;
+                    case DO_NOTHING:
+                        scheduleBuilder.withMisfireHandlingInstructionDoNothing();
+                        break;
+                    case FIRE_NOW:
+                        scheduleBuilder.withMisfireHandlingInstructionFireAndProceed();
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            scheduleBuilder
-                    .withMisfireHandlingInstruction(getMisfireInstruction())
-                    .skipDayIfHourDoesNotExist(skipDayIfHourDoesNotExist);
+            // 时区设置在 scheduleBuilder 上
+            if (timeZone != null) {
+                scheduleBuilder.inTimeZone(timeZone);
+            }
 
             org.quartz.CalendarIntervalTrigger built =
                     TriggerBuilder.newTrigger()
@@ -284,17 +257,9 @@ public class CalendarIntervalTrigger implements Trigger {
                             .withSchedule(scheduleBuilder)
                             .forJob(jobKey)
                             .modifiedByCalendar(calendarName)
-                            .inTimeZone(timeZone)
                             .build();
 
             return new CalendarIntervalTrigger(built);
-        }
-
-        private int getMisfireInstruction() {
-            if (misfirePolicy == null) {
-                return org.quartz.Trigger.MISFIRE_INSTRUCTION_SMART_POLICY;
-            }
-            return misfirePolicy.toQuartzInstruction();
         }
     }
 }

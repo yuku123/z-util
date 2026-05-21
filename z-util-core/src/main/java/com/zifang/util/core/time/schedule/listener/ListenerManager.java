@@ -1,6 +1,7 @@
 package com.zifang.util.core.time.schedule.listener;
 
 import com.zifang.util.core.time.schedule.JobExecutionContextWrapper;
+import com.zifang.util.core.time.schedule.SchedulerRuntimeException;
 import org.quartz.*;
 
 import java.util.*;
@@ -37,7 +38,7 @@ public class ListenerManager {
     private final Map<String, TriggerListener> triggerListeners = new ConcurrentHashMap<>();
     private final List<SchedulerListener> schedulerListeners = Collections.synchronizedList(new ArrayList<>());
 
-    ListenerManager(org.quartz.Scheduler quartzScheduler) {
+    public ListenerManager(org.quartz.Scheduler quartzScheduler) {
         this.quartzScheduler = Objects.requireNonNull(quartzScheduler);
     }
 
@@ -245,17 +246,18 @@ public class ListenerManager {
         }
 
         @Override
-        public void jobToBeExecuted(JobExecutionContext context) {
+        public void jobToBeExecuted(org.quartz.JobExecutionContext context) {
             delegate.jobToBeExecuted(new JobExecutionContextWrapper(context));
         }
 
         @Override
-        public void jobExecutionVetoed(JobExecutionContext context) {
+        public void jobExecutionVetoed(org.quartz.JobExecutionContext context) {
             delegate.jobExecutionVetoed(new JobExecutionContextWrapper(context));
         }
 
         @Override
-        public void jobWasExecuted(JobExecutionContext context, JobExecutionException exception) {
+        public void jobWasExecuted(org.quartz.JobExecutionContext context,
+                                   org.quartz.JobExecutionException exception) {
             delegate.jobWasExecuted(new JobExecutionContextWrapper(context), exception);
         }
     }
@@ -273,23 +275,70 @@ public class ListenerManager {
         }
 
         @Override
-        public void triggerFired(Trigger trigger, JobExecutionContext context) {
-            delegate.triggerFired(trigger, new JobExecutionContextWrapper(context));
+        public void triggerFired(org.quartz.Trigger trigger,
+                                 org.quartz.JobExecutionContext context) {
+            delegate.triggerFired(
+                    toWrapper(trigger),
+                    new JobExecutionContextWrapper(context));
         }
 
         @Override
-        public void triggerMisfired(Trigger trigger) {
-            delegate.triggerMisfired(trigger);
+        public boolean vetoJobExecution(org.quartz.Trigger trigger,
+                                        org.quartz.JobExecutionContext context) {
+            return delegate.vetoJobExecution(
+                    toWrapper(trigger),
+                    new JobExecutionContextWrapper(context));
         }
 
         @Override
-        public void triggerComplete(Trigger trigger, JobExecutionContext context, int triggerInstructionCode) {
-            delegate.triggerComplete(trigger, new JobExecutionContextWrapper(context), triggerInstructionCode);
+        public void triggerMisfired(org.quartz.Trigger trigger) {
+            delegate.triggerMisfired(toWrapper(trigger));
         }
 
         @Override
-        public Date getNextFireTime(Trigger trigger, Date nextFireTime) {
-            return delegate.getNextFireTime(trigger, nextFireTime);
+        public void triggerComplete(org.quartz.Trigger trigger,
+                                    org.quartz.JobExecutionContext context,
+                                    org.quartz.Trigger.CompletedExecutionInstruction instruction) {
+            delegate.triggerComplete(
+                    toWrapper(trigger),
+                    new JobExecutionContextWrapper(context),
+                    instruction);
+        }
+
+        private Trigger toWrapper(org.quartz.Trigger t) {
+            // 简单的按类型分发包装，避免循环依赖
+            if (t instanceof org.quartz.SimpleTrigger) {
+                return new com.zifang.util.core.time.schedule.SimpleTrigger(
+                        (org.quartz.SimpleTrigger) t);
+            } else if (t instanceof org.quartz.CronTrigger) {
+                return new com.zifang.util.core.time.schedule.CronTrigger(
+                        (org.quartz.CronTrigger) t);
+            } else if (t instanceof org.quartz.CalendarIntervalTrigger) {
+                return new com.zifang.util.core.time.schedule.CalendarIntervalTrigger(
+                        (org.quartz.CalendarIntervalTrigger) t);
+            } else if (t instanceof org.quartz.DailyTimeIntervalTrigger) {
+                return new com.zifang.util.core.time.schedule.DailyTimeIntervalTrigger(
+                        (org.quartz.DailyTimeIntervalTrigger) t);
+            } else {
+                // 通用包装
+                return new Trigger() {
+                    @Override public org.quartz.TriggerKey getKey() { return t.getKey(); }
+                    @Override public String getName() { return t.getKey().getName(); }
+                    @Override public String getGroup() { return t.getKey().getGroup(); }
+                    @Override public org.quartz.JobKey getJobKey() { return t.getJobKey(); }
+                    @Override public String getDescription() { return t.getDescription(); }
+                    @Override public Date getNextFireTime() { return t.getNextFireTime(); }
+                    @Override public Date getPreviousFireTime() { return t.getPreviousFireTime(); }
+                    @Override public int getPriority() { return t.getPriority(); }
+                    @Override public Date getStartTime() { return t.getStartTime(); }
+                    @Override public Date getEndTime() { return t.getEndTime(); }
+                    @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
+                    @Override public String getCalendarName() { return t.getCalendarName(); }
+                    @Override public java.util.TimeZone getTimeZone() { return java.util.TimeZone.getDefault(); }
+                    @Override public org.quartz.Trigger getDelegate() { return t; }
+                    @Override public String toString() { return t.toString(); }
+                };
+            }
         }
     }
 
@@ -301,27 +350,27 @@ public class ListenerManager {
         }
 
         @Override
-        public void jobAdded(JobDetail jobDetail) {
+        public void jobAdded(org.quartz.JobDetail jobDetail) {
             delegate.jobAdded(new JobDetail(jobDetail));
         }
 
         @Override
-        public void jobDeleted(JobKey jobKey) {
+        public void jobDeleted(org.quartz.JobKey jobKey) {
             delegate.jobDeleted(jobKey);
         }
 
         @Override
-        public void jobScheduled(Trigger trigger) {
-            delegate.jobScheduled(trigger);
+        public void jobScheduled(org.quartz.Trigger trigger) {
+            delegate.jobScheduled(toWrapper(trigger));
         }
 
         @Override
-        public void jobUnscheduled(TriggerKey triggerKey) {
+        public void jobUnscheduled(org.quartz.TriggerKey triggerKey) {
             delegate.jobUnscheduled(triggerKey);
         }
 
         @Override
-        public void triggerPaused(TriggerKey triggerKey) {
+        public void triggerPaused(org.quartz.TriggerKey triggerKey) {
             delegate.triggerPaused(triggerKey);
         }
 
@@ -331,7 +380,7 @@ public class ListenerManager {
         }
 
         @Override
-        public void triggerResumed(TriggerKey triggerKey) {
+        public void triggerResumed(org.quartz.TriggerKey triggerKey) {
             delegate.triggerResumed(triggerKey);
         }
 
@@ -341,7 +390,7 @@ public class ListenerManager {
         }
 
         @Override
-        public void jobPaused(JobKey jobKey) {
+        public void jobPaused(org.quartz.JobKey jobKey) {
             delegate.jobPaused(jobKey);
         }
 
@@ -351,7 +400,7 @@ public class ListenerManager {
         }
 
         @Override
-        public void jobResumed(JobKey jobKey) {
+        public void jobResumed(org.quartz.JobKey jobKey) {
             delegate.jobResumed(jobKey);
         }
 
@@ -361,7 +410,7 @@ public class ListenerManager {
         }
 
         @Override
-        public void schedulerError(String msg, SchedulerException cause) {
+        public void schedulerError(String msg, org.quartz.SchedulerException cause) {
             delegate.schedulerError(msg, cause);
         }
 
@@ -371,48 +420,67 @@ public class ListenerManager {
         }
 
         @Override
-        public void triggerFinalized(Trigger trigger) {
-            delegate.triggerFinalized(trigger);
+        public void triggerFinalized(org.quartz.Trigger trigger) {
+            delegate.triggerFinalized(toWrapper(trigger));
         }
 
         @Override
-        public void triggerAdded(Trigger trigger) {
-            delegate.triggerAdded(trigger);
+        public void schedulingDataCleared() {
+            delegate.schedulingDataCleared();
         }
 
         @Override
-        public void schedulerCleared() {
-            delegate.schedulerCleared();
+        public void schedulerStarting() {
+            delegate.schedulerStarting();
         }
 
         @Override
-        public void triggerDoesNotExist(TriggerKey triggerKey) {
-            delegate.triggerDoesNotExist(triggerKey);
+        public void schedulerStarted() {
+            delegate.schedulerStarted();
         }
 
         @Override
-        public void jobDoesNotExist(JobKey jobKey) {
-            delegate.jobDoesNotExist(jobKey);
+        public void schedulerInStandbyMode() {
+            delegate.schedulerInStandbyMode();
         }
 
         @Override
-        public void triggerPausedNone(TriggerKey triggerKey) {
-            delegate.triggerPausedNone(triggerKey);
+        public void schedulerShuttingdown() {
+            delegate.schedulerShuttingdown();
         }
 
-        @Override
-        public void triggersPausedNone(String triggerGroup) {
-            delegate.triggersPausedNone(triggerGroup);
-        }
-
-        @Override
-        public void jobPausedNone(JobKey jobKey) {
-            delegate.jobPausedNone(jobKey);
-        }
-
-        @Override
-        public void jobsPausedNone(String jobGroup) {
-            delegate.jobsPausedNone(jobGroup);
+        private Trigger toWrapper(org.quartz.Trigger t) {
+            if (t instanceof org.quartz.SimpleTrigger) {
+                return new com.zifang.util.core.time.schedule.SimpleTrigger(
+                        (org.quartz.SimpleTrigger) t);
+            } else if (t instanceof org.quartz.CronTrigger) {
+                return new com.zifang.util.core.time.schedule.CronTrigger(
+                        (org.quartz.CronTrigger) t);
+            } else if (t instanceof org.quartz.CalendarIntervalTrigger) {
+                return new com.zifang.util.core.time.schedule.CalendarIntervalTrigger(
+                        (org.quartz.CalendarIntervalTrigger) t);
+            } else if (t instanceof org.quartz.DailyTimeIntervalTrigger) {
+                return new com.zifang.util.core.time.schedule.DailyTimeIntervalTrigger(
+                        (org.quartz.DailyTimeIntervalTrigger) t);
+            } else {
+                return new Trigger() {
+                    @Override public org.quartz.TriggerKey getKey() { return t.getKey(); }
+                    @Override public String getName() { return t.getKey().getName(); }
+                    @Override public String getGroup() { return t.getKey().getGroup(); }
+                    @Override public org.quartz.JobKey getJobKey() { return t.getJobKey(); }
+                    @Override public String getDescription() { return t.getDescription(); }
+                    @Override public Date getNextFireTime() { return t.getNextFireTime(); }
+                    @Override public Date getPreviousFireTime() { return t.getPreviousFireTime(); }
+                    @Override public int getPriority() { return t.getPriority(); }
+                    @Override public Date getStartTime() { return t.getStartTime(); }
+                    @Override public Date getEndTime() { return t.getEndTime(); }
+                    @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
+                    @Override public String getCalendarName() { return t.getCalendarName(); }
+                    @Override public java.util.TimeZone getTimeZone() { return java.util.TimeZone.getDefault(); }
+                    @Override public org.quartz.Trigger getDelegate() { return t; }
+                    @Override public String toString() { return t.toString(); }
+                };
+            }
         }
     }
 }

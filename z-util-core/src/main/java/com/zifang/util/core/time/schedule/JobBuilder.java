@@ -1,7 +1,5 @@
 package com.zifang.util.core.time.schedule;
 
-import org.quartz.Job;
-import org.quartz.JobBuilder;
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
 
@@ -45,9 +43,9 @@ public class JobBuilder {
     }
 
     /**
-     * 创建新的 JobBuilder，指定任务类。
+     * 创建新的 JobBuilder，指定任务类（实现 {@link Job} 接口）。
      *
-     * @param jobClass 任务类，必须实现 {@link Job} 或 {@link StatefulJob}
+     * @param jobClass 任务类，必须实现本框架的 {@link Job} 接口
      * @return 新的 Builder 实例
      */
     public static JobDetailBuilder newJob(Class<? extends Job> jobClass) {
@@ -76,8 +74,6 @@ public class JobBuilder {
         private String group = Scheduler.DEFAULT_GROUP;
         private String description;
         private boolean durable = false;
-        private boolean concurrentExecutionDisallowed = false;
-        private boolean persistJobDataAfterExecution = false;
         private boolean requestsRecovery = false;
         private final java.util.Map<String, Object> jobData = new java.util.HashMap<>();
 
@@ -158,26 +154,6 @@ public class JobBuilder {
         }
 
         /**
-         * 设置不允许并发执行。
-         * <p>
-         * 等同于实现 {@link StatefulJob}。
-         */
-        public JobDetailBuilder disallowConcurrentExecution() {
-            this.concurrentExecutionDisallowed = true;
-            return this;
-        }
-
-        /**
-         * 设置执行后持久化 JobDataMap。
-         * <p>
-         * 等同于实现 {@link StatefulJob}。
-         */
-        public JobDetailBuilder persistJobDataAfterExecution() {
-            this.persistJobDataAfterExecution = true;
-            return this;
-        }
-
-        /**
          * 设置请求恢复。
          * <p>
          * 当 Scheduler 异常关闭后重启，已执行过的任务如果支持恢复，会被重新执行。
@@ -187,33 +163,14 @@ public class JobBuilder {
             return this;
         }
 
-        /**
-         * 指定任务类型（覆盖默认类型）。
-         * <p>
-         * 通常不需要手动调用，除非使用自定义 Job 类型。
-         */
-        public JobDetailBuilder ofType(Class<? extends Job> clazz) {
-            // 用于自定义任务类型，这里仅作占位
-            return this;
-        }
-
         // ==================== 构建 ====================
 
         /**
          * 构建 JobDetail 实例。
          *
          * @return 配置完整的 JobDetail
-         * @throws IllegalStateException 如果任务类实现了 {@link StatefulJob} 但同时
-         *                                调用了 disallowConcurrentExecution 或 persistJobDataAfterExecution
          */
         public JobDetail build() {
-            // 检查一致性
-            boolean isStateful = StatefulJob.class.isAssignableFrom(jobClass);
-            if (isStateful) {
-                this.concurrentExecutionDisallowed = true;
-                this.persistJobDataAfterExecution = true;
-            }
-
             org.quartz.JobBuilder quartzBuilder = org.quartz.JobBuilder.newJob(jobClass);
 
             if (name != null) {
@@ -222,19 +179,29 @@ public class JobBuilder {
             if (description != null) {
                 quartzBuilder.withDescription(description);
             }
-            quartzBuilder.durable(durable);
+            quartzBuilder.storeDurably(durable);
             quartzBuilder.requestRecovery(requestsRecovery);
 
-            if (concurrentExecutionDisallowed) {
-                quartzBuilder.disallowConcurrentExecution();
-            }
-            if (persistJobDataAfterExecution) {
-                quartzBuilder.persistJobDataAfterExecution();
-            }
-
             for (Map.Entry<String, Object> entry : jobData.entrySet()) {
-                quartzBuilder.usingJobData(entry.getKey(),
-                        entry.getValue() == null ? "" : String.valueOf(entry.getValue()));
+                Object value = entry.getValue();
+                if (value == null) {
+                    continue;
+                }
+                if (value instanceof String) {
+                    quartzBuilder.usingJobData(entry.getKey(), (String) value);
+                } else if (value instanceof Integer) {
+                    quartzBuilder.usingJobData(entry.getKey(), (Integer) value);
+                } else if (value instanceof Long) {
+                    quartzBuilder.usingJobData(entry.getKey(), Long.valueOf((Integer) value));
+                } else if (value instanceof Boolean) {
+                    quartzBuilder.usingJobData(entry.getKey(), (Boolean) value);
+                } else if (value instanceof Double) {
+                    quartzBuilder.usingJobData(entry.getKey(), (Double) value);
+                } else if (value instanceof Float) {
+                    quartzBuilder.usingJobData(entry.getKey(), Float.valueOf((Float) value));
+                } else {
+                    quartzBuilder.usingJobData(entry.getKey(), String.valueOf(value));
+                }
             }
 
             // 特殊处理 RunnableJobAdapter

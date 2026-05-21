@@ -1,7 +1,6 @@
 package com.zifang.util.core.time.schedule;
 
 import org.quartz.DailyTimeIntervalScheduleBuilder;
-import org.quartz.DailyTimeIntervalTrigger;
 import org.quartz.TriggerBuilder;
 
 import java.util.Date;
@@ -12,7 +11,7 @@ import java.util.TimeZone;
 /**
  * 每日时间区间触发器，在每天的指定时间段内按固定间隔重复执行。
  * <p>
- * 对应 Quartz 的 {@link DailyTimeIntervalTrigger}。
+ * 对应 Quartz 的 {@link org.quartz.DailyTimeIntervalTrigger}。
  * <p>
  * 与 {@link SimpleTrigger} 不同，DailyTimeIntervalTrigger 可以：
  * <ul>
@@ -20,18 +19,6 @@ import java.util.TimeZone;
  *   <li>限定在哪些天触发（如周一到周五）</li>
  *   <li>自动处理夏令时切换</li>
  * </ul>
- * <p>
- * 示例：工作日上午 9:00 到 18:00，每 30 分钟执行一次
- * <pre>
- * Trigger trigger = TriggerBuilder.newDailyTimeIntervalTrigger()
- *     .withName("daily-trigger")
- *     .forJob("my-job")
- *     .onDaysOfTheWeek(MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY)
- *     .startingDailyAt(LocalTime.of(9, 0))
- *     .endingDailyAt(LocalTime.of(18, 0))
- *     .withIntervalInMinutes(30)
- *     .build();
- * </pre>
  *
  * @see SimpleTrigger
  * @see CronTrigger
@@ -40,9 +27,9 @@ import java.util.TimeZone;
  */
 public class DailyTimeIntervalTrigger implements Trigger {
 
-    private final DailyTimeIntervalTrigger delegate;
+    private final org.quartz.DailyTimeIntervalTrigger delegate;
 
-    DailyTimeIntervalTrigger(DailyTimeIntervalTrigger delegate) {
+    DailyTimeIntervalTrigger(org.quartz.DailyTimeIntervalTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -123,14 +110,18 @@ public class DailyTimeIntervalTrigger implements Trigger {
         return delegate.getCalendarName();
     }
 
+    /**
+     * DailyTimeIntervalTrigger 不直接暴露时区，返回系统默认时区。
+     * 如需时区支持，请使用 {@link CronTrigger}。
+     */
     @Override
     public TimeZone getTimeZone() {
-        return delegate.getTimeZone();
+        return TimeZone.getDefault();
     }
 
     @Override
-    public DailyTimeIntervalTrigger getDelegate() {
-        return delegate;
+    public com.zifang.util.core.time.schedule.Trigger getDelegate() {
+        return this;
     }
 
     @Override
@@ -149,15 +140,15 @@ public class DailyTimeIntervalTrigger implements Trigger {
     /**
      * 获取每日开始时间。
      */
-    public Date getStartTimeOfDay() {
-        return delegate.getStartTimeOfDayTime();
+    public org.quartz.TimeOfDay getStartTimeOfDay() {
+        return delegate.getStartTimeOfDay();
     }
 
     /**
      * 获取每日结束时间。
      */
-    public Date getEndTimeOfDay() {
-        return delegate.getEndTimeOfDayTime();
+    public org.quartz.TimeOfDay getEndTimeOfDay() {
+        return delegate.getEndTimeOfDay();
     }
 
     /**
@@ -170,14 +161,13 @@ public class DailyTimeIntervalTrigger implements Trigger {
     /**
      * 获取重复间隔单位。
      */
-    public java.util.concurrent.TimeUnit getRepeatIntervalUnit() {
+    public org.quartz.DateBuilder.IntervalUnit getRepeatIntervalUnit() {
         return delegate.getRepeatIntervalUnit();
     }
 
     /**
      * 获取触发在一周中的哪些天。
      */
-    @SuppressWarnings("unchecked")
     public Set<Integer> getDaysOfWeek() {
         return delegate.getDaysOfWeek();
     }
@@ -189,6 +179,13 @@ public class DailyTimeIntervalTrigger implements Trigger {
         return delegate.getRepeatCount();
     }
 
+    /**
+     * 获取已触发次数。
+     */
+    public int getTimesTriggered() {
+        return delegate.getTimesTriggered();
+    }
+
     // ==================== Builder ====================
 
     /**
@@ -196,41 +193,42 @@ public class DailyTimeIntervalTrigger implements Trigger {
      */
     public static class DailyBuilder extends Builder<DailyBuilder> {
 
-        private java.time.LocalTime startTimeOfDay = java.time.LocalTime.of(0, 0, 0);
-        private java.time.LocalTime endTimeOfDay = java.time.LocalTime.of(23, 59, 59);
+        private org.quartz.TimeOfDay startTimeOfDay;
+        private org.quartz.TimeOfDay endTimeOfDay;
         private int repeatInterval = 1;
-        private java.util.concurrent.TimeUnit repeatIntervalUnit = java.util.concurrent.TimeUnit.MINUTES;
+        private org.quartz.DateBuilder.IntervalUnit repeatIntervalUnit =
+                org.quartz.DateBuilder.IntervalUnit.MINUTE;
         private Set<Integer> daysOfWeek = null; // null 表示每天
 
         /**
-         * 设置每日开始时间（LocalTime）。
+         * 设置每日开始时间。
          */
-        public DailyBuilder startingDailyAt(java.time.LocalTime time) {
+        public DailyBuilder startingDailyAt(org.quartz.TimeOfDay time) {
             this.startTimeOfDay = Objects.requireNonNull(time);
             return this;
         }
 
         /**
-         * 设置每日开始时间（小时:分钟）。
+         * 设置每日结束时间。
          */
-        public DailyBuilder startingDailyAt(int hour, int minute) {
-            this.startTimeOfDay = java.time.LocalTime.of(hour, minute);
-            return this;
-        }
-
-        /**
-         * 设置每日结束时间（LocalTime）。
-         */
-        public DailyBuilder endingDailyAt(java.time.LocalTime time) {
+        public DailyBuilder endingDailyAt(org.quartz.TimeOfDay time) {
             this.endTimeOfDay = Objects.requireNonNull(time);
             return this;
         }
 
         /**
-         * 设置每日结束时间（小时:分钟）。
+         * 设置每日开始时间（小时:分钟:秒）。
          */
-        public DailyBuilder endingDailyAt(int hour, int minute) {
-            this.endTimeOfDay = java.time.LocalTime.of(hour, minute);
+        public DailyBuilder startingDailyAt(int hour, int minute, int second) {
+            this.startTimeOfDay = org.quartz.TimeOfDay.hourMinuteAndSecondOfDay(hour, minute, second);
+            return this;
+        }
+
+        /**
+         * 设置每日结束时间（小时:分钟:秒）。
+         */
+        public DailyBuilder endingDailyAt(int hour, int minute, int second) {
+            this.endTimeOfDay = org.quartz.TimeOfDay.hourMinuteAndSecondOfDay(hour, minute, second);
             return this;
         }
 
@@ -239,7 +237,7 @@ public class DailyTimeIntervalTrigger implements Trigger {
          */
         public DailyBuilder withIntervalInSeconds(int seconds) {
             this.repeatInterval = seconds;
-            this.repeatIntervalUnit = java.util.concurrent.TimeUnit.SECONDS;
+            this.repeatIntervalUnit = org.quartz.DateBuilder.IntervalUnit.SECOND;
             return this;
         }
 
@@ -248,7 +246,7 @@ public class DailyTimeIntervalTrigger implements Trigger {
          */
         public DailyBuilder withIntervalInMinutes(int minutes) {
             this.repeatInterval = minutes;
-            this.repeatIntervalUnit = java.util.concurrent.TimeUnit.MINUTES;
+            this.repeatIntervalUnit = org.quartz.DateBuilder.IntervalUnit.MINUTE;
             return this;
         }
 
@@ -257,14 +255,15 @@ public class DailyTimeIntervalTrigger implements Trigger {
          */
         public DailyBuilder withIntervalInHours(int hours) {
             this.repeatInterval = hours;
-            this.repeatIntervalUnit = java.util.concurrent.TimeUnit.HOURS;
+            this.repeatIntervalUnit = org.quartz.DateBuilder.IntervalUnit.HOUR;
             return this;
         }
 
         /**
          * 设置按指定单位重复间隔。
          */
-        public DailyBuilder withInterval(int interval, java.util.concurrent.TimeUnit unit) {
+        public DailyBuilder withInterval(int interval,
+                                          org.quartz.DateBuilder.IntervalUnit unit) {
             this.repeatInterval = interval;
             this.repeatIntervalUnit = unit;
             return this;
@@ -275,7 +274,8 @@ public class DailyTimeIntervalTrigger implements Trigger {
          *
          * @param days java.util.Calendar 常量，如 Calendar.MONDAY, Calendar.TUESDAY 等
          */
-        public DailyBuilder onDaysOfTheWeek(Integer... days) {
+        @SafeVarargs
+        public final DailyBuilder onDaysOfTheWeek(Integer... days) {
             this.daysOfWeek = new java.util.HashSet<>(java.util.Arrays.asList(days));
             return this;
         }
@@ -284,27 +284,20 @@ public class DailyTimeIntervalTrigger implements Trigger {
          * 设置工作日（周一到周五）。
          */
         public DailyBuilder onWeekdays() {
-            return onDaysOfTheWeek(
-                    java.util.Calendar.MONDAY,
-                    java.util.Calendar.TUESDAY,
-                    java.util.Calendar.WEDNESDAY,
-                    java.util.Calendar.THURSDAY,
-                    java.util.Calendar.FRIDAY
-            );
+            this.daysOfWeek = DailyTimeIntervalScheduleBuilder.MONDAY_THROUGH_FRIDAY;
+            return this;
         }
 
         /**
          * 设置周末（周六、周日）。
          */
         public DailyBuilder onWeekendDays() {
-            return onDaysOfTheWeek(
-                    java.util.Calendar.SATURDAY,
-                    java.util.Calendar.SUNDAY
-            );
+            this.daysOfWeek = DailyTimeIntervalScheduleBuilder.SATURDAY_AND_SUNDAY;
+            return this;
         }
 
         /**
-         * 设置每天。
+         * 设置每天（默认）。
          */
         public DailyBuilder onEveryDay() {
             this.daysOfWeek = null;
@@ -313,34 +306,40 @@ public class DailyTimeIntervalTrigger implements Trigger {
 
         @Override
         public DailyTimeIntervalTrigger build() {
-            DailyTimeIntervalScheduleBuilder scheduleBuilder =
+            DailyTimeIntervalScheduleBuilder sb =
                     DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule()
-                            .startingDailyAt(
-                                    org.quartz.TimeOfDay.dayTime(startTimeOfDay.getHour(),
-                                            startTimeOfDay.getMinute(), startTimeOfDay.getSecond()))
-                            .endingDailyAt(
-                                    org.quartz.TimeOfDay.dayTime(endTimeOfDay.getHour(),
-                                            endTimeOfDay.getMinute(), endTimeOfDay.getSecond()))
-                            .withIntervalInMinutes(1) // 默认，会被覆盖
-                            .withMisfireHandlingInstruction(getMisfireInstruction());
+                            .withInterval(repeatInterval, repeatIntervalUnit);
 
-            // 应用间隔配置
-            switch (repeatIntervalUnit) {
-                case SECONDS:
-                    scheduleBuilder.withIntervalInSeconds(repeatInterval);
-                    break;
-                case MINUTES:
-                    scheduleBuilder.withIntervalInMinutes(repeatInterval);
-                    break;
-                case HOURS:
-                    scheduleBuilder.withIntervalInHours(repeatInterval);
-                    break;
-                default:
-                    scheduleBuilder.withIntervalInMinutes(repeatInterval);
+            // 开始时间
+            if (startTimeOfDay != null) {
+                sb.startingDailyAt(startTimeOfDay);
             }
 
+            // 结束时间
+            if (endTimeOfDay != null) {
+                sb.endingDailyAt(endTimeOfDay);
+            }
+
+            // 触发日期
             if (daysOfWeek != null && !daysOfWeek.isEmpty()) {
-                scheduleBuilder.onDaysOfTheWeek(daysOfWeek);
+                sb.onDaysOfTheWeek(daysOfWeek);
+            }
+
+            // 应用 misfire 策略
+            if (misfirePolicy != null) {
+                switch (misfirePolicy) {
+                    case IGNORE_MISFIRE_FIRES_NOW:
+                        sb.withMisfireHandlingInstructionIgnoreMisfires();
+                        break;
+                    case DO_NOTHING:
+                        sb.withMisfireHandlingInstructionDoNothing();
+                        break;
+                    case FIRE_NOW:
+                        sb.withMisfireHandlingInstructionFireAndProceed();
+                        break;
+                    default:
+                        break;
+                }
             }
 
             org.quartz.DailyTimeIntervalTrigger built =
@@ -350,20 +349,12 @@ public class DailyTimeIntervalTrigger implements Trigger {
                             .withPriority(priority)
                             .startAt(startTime != null ? startTime : new Date())
                             .endAt(endTime)
-                            .withSchedule(scheduleBuilder)
+                            .withSchedule(sb)
                             .forJob(jobKey)
                             .modifiedByCalendar(calendarName)
-                            .inTimeZone(timeZone)
                             .build();
 
             return new DailyTimeIntervalTrigger(built);
-        }
-
-        private int getMisfireInstruction() {
-            if (misfirePolicy == null) {
-                return org.quartz.Trigger.MISFIRE_INSTRUCTION_SMART_POLICY;
-            }
-            return misfirePolicy.toQuartzInstruction();
         }
     }
 }

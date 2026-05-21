@@ -5,8 +5,8 @@ import com.zifang.util.core.time.schedule.listener.SchedulerListener;
 import com.zifang.util.core.time.schedule.listener.TriggerListener;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.Trigger;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;

@@ -1,8 +1,10 @@
 package com.zifang.util.core.time.schedule.listener;
 
-import org.quartz.*;
-
-import java.util.Date;
+import com.zifang.util.core.time.schedule.JobDetail;
+import com.zifang.util.core.time.schedule.Trigger;
+import org.quartz.JobKey;
+import org.quartz.SchedulerException;
+import org.quartz.TriggerKey;
 
 /**
  * 调度器监听器接口，对应 Quartz 的 {@link org.quartz.SchedulerListener}。
@@ -90,7 +92,7 @@ public interface SchedulerListener {
     /**
      * 调度器中发生错误。
      *
-     * @param msg  错误消息
+     * @param msg   错误消息
      * @param cause 异常（可能为 null）
      */
     default void schedulerError(String msg, SchedulerException cause) {
@@ -103,56 +105,38 @@ public interface SchedulerListener {
     }
 
     /**
-     * 触发器触发（即将触发，但尚未到任务执行阶段）。
+     * 触发器触发完成（所有触发次数用尽后 finalization）。
      */
     default void triggerFinalized(Trigger trigger) {
     }
 
     /**
-     * 触发器被添加到调度器。
+     * 调度器的数据（任务和触发器）被清除。
      */
-    default void triggerAdded(Trigger trigger) {
+    default void schedulingDataCleared() {
     }
 
     /**
-     * 调度器数据被清除（所有任务和触发器被删除）。
+     * 调度器正在启动。
      */
-    default void schedulerCleared() {
+    default void schedulerStarting() {
     }
 
     /**
-     * 触发器在调度器中不存在时尝试操作。
+     * 调度器已启动。
      */
-    default void triggerDoesNotExist(TriggerKey triggerKey) {
+    default void schedulerStarted() {
     }
 
     /**
-     * 任务在调度器中不存在时尝试操作。
+     * 调度器处于待机状态（暂停状态，可被重启）。
      */
-    default void jobDoesNotExist(JobKey jobKey) {
+    default void schedulerInStandbyMode() {
     }
 
     /**
-     * 触发器被暂停但不存在（用于幂等操作）。
+     * 调度器正在关闭。
      */
-    default void triggerPausedNone(TriggerKey triggerKey) {
-    }
-
-    /**
-     * 触发器组被暂停但为空（用于幂等操作）。
-     */
-    default void triggersPausedNone(String triggerGroup) {
-    }
-
-    /**
-     * 任务被暂停但不存在（用于幂等操作）。
-     */
-    default void jobPausedNone(JobKey jobKey) {
-    }
-
-    /**
-     * 任务组被暂停但为空（用于幂等操作）。
-     */
-    default void jobsPausedNone(String jobGroup) {
+    default void schedulerShuttingdown() {
     }
 }

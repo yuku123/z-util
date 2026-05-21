@@ -1,7 +1,6 @@
 package com.zifang.util.core.time.schedule;
 
 import org.quartz.CronScheduleBuilder;
-import org.quartz.CronTrigger;
 import org.quartz.TriggerBuilder;
 
 import java.util.Date;
@@ -11,7 +10,7 @@ import java.util.TimeZone;
 /**
  * Cron 触发器，使用 cron 表达式定义复杂的调度规则。
  * <p>
- * 对应 Quartz 的 {@link CronTrigger}。
+ * 对应 Quartz 的 {@link org.quartz.CronTrigger}。
  * <p>
  * cron 表达式格式（从左到右，空格分隔）：
  * <pre>
@@ -23,18 +22,7 @@ import java.util.TimeZone;
  *   <li>{@code "0 30 9 ? * MON-FRI"}    — 工作日上午 9:30 执行</li>
  *   <li>{@code "0 0/15 * * * ?"}        — 每 15 分钟执行</li>
  *   <li>{@code "0 0 12 1 * ?"}          — 每月 1 日中午 12:00 执行</li>
- *   <li>{@code "0 0 10 ? * 6L"}         — 每月最后一个星期五上午 10:00 执行</li>
  * </ul>
- * <p>
- * 示例：
- * <pre>
- * Trigger trigger = TriggerBuilder.newCronTrigger()
- *     .withName("my-cron-trigger")
- *     .forJob("my-job")
- *     .withCronExpression("0 30 9 ? * MON-FRI")
- *     .withMisfirePolicy(MisfirePolicy.DO_NOTHING)
- *     .build();
- * </pre>
  *
  * @see SimpleTrigger
  * @see CalendarIntervalTrigger
@@ -43,9 +31,9 @@ import java.util.TimeZone;
  */
 public class CronTrigger implements Trigger {
 
-    private final CronTrigger delegate;
+    private final org.quartz.CronTrigger delegate;
 
-    CronTrigger(CronTrigger delegate) {
+    CronTrigger(org.quartz.CronTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
 
@@ -132,8 +120,8 @@ public class CronTrigger implements Trigger {
     }
 
     @Override
-    public CronTrigger getDelegate() {
-        return delegate;
+    public com.zifang.util.core.time.schedule.Trigger getDelegate() {
+        return this;
     }
 
     @Override
@@ -148,21 +136,21 @@ public class CronTrigger implements Trigger {
     // ==================== 特有属性 ====================
 
     /**
-     * 获取 cron 表达式。
+     * 获取 cron 表达式字符串。
      */
     public String getCronExpression() {
         return delegate.getCronExpression();
     }
 
     /**
-     * 获取表达式验证器。
+     * 获取 CronExpression 对象。
      */
     public org.quartz.CronExpression getCronExpressionObject() {
         return delegate.getCronExpressionObject();
     }
 
     /**
-     * 是否支持秒精度（Quartz 特有）。
+     * 是否基于秒（Quartz cron 特有属性）。
      */
     public boolean isSecondBased() {
         return delegate.isSecondBased();
@@ -181,10 +169,11 @@ public class CronTrigger implements Trigger {
         /**
          * 设置 cron 表达式。
          *
-         * @param cronExpression 6-7 位 cron 表达式
+         * @param cronExpression 6-7 位 cron 表达式字符串
          */
         public CronBuilder withCronExpression(String cronExpression) {
-            this.cronExpression = Objects.requireNonNull(cronExpression, "cron expression must not be null");
+            this.cronExpression = Objects.requireNonNull(cronExpression,
+                    "cron expression must not be null");
             return this;
         }
 
@@ -198,7 +187,7 @@ public class CronTrigger implements Trigger {
         }
 
         /**
-         * 设置时区，自动更新 cron 表达式的时区。
+         * 设置时区。
          */
         @Override
         public CronBuilder inTimeZone(TimeZone timeZone) {
@@ -210,8 +199,8 @@ public class CronTrigger implements Trigger {
         public CronTrigger build() {
             if (cronExpression == null && cronExpressionObject == null) {
                 throw new IllegalStateException(
-                        "cronExpression must be set before building CronTrigger. " +
-                                "Use withCronExpression(String) method.");
+                        "cronExpression must be set before building CronTrigger. "
+                                + "Use withCronExpression(String) method.");
             }
 
             CronScheduleBuilder scheduleBuilder;
@@ -221,7 +210,28 @@ public class CronTrigger implements Trigger {
                 scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
             }
 
-            scheduleBuilder.withMisfireHandling(getMisfireInstruction());
+            // 应用 misfire 策略（使用命名方法）
+            if (misfirePolicy != null) {
+                switch (misfirePolicy) {
+                    case IGNORE_MISFIRE_FIRES_NOW:
+                        scheduleBuilder.withMisfireHandlingInstructionIgnoreMisfires();
+                        break;
+                    case DO_NOTHING:
+                        scheduleBuilder.withMisfireHandlingInstructionDoNothing();
+                        break;
+                    case FIRE_NOW:
+                        scheduleBuilder.withMisfireHandlingInstructionFireAndProceed();
+                        break;
+                    default:
+                        // SMART_POLICY 不需要额外处理
+                        break;
+                }
+            }
+
+            // 时区设置在 CronScheduleBuilder 上
+            if (timeZone != null) {
+                scheduleBuilder.inTimeZone(timeZone);
+            }
 
             org.quartz.CronTrigger built = TriggerBuilder.newTrigger()
                     .withIdentity(name, group)
@@ -232,17 +242,9 @@ public class CronTrigger implements Trigger {
                     .withSchedule(scheduleBuilder)
                     .forJob(jobKey)
                     .modifiedByCalendar(calendarName)
-                    .inTimeZone(timeZone != null ? timeZone : TimeZone.getDefault())
                     .build();
 
-            return new CronTrigger((org.quartz.CronTrigger) built);
-        }
-
-        private int getMisfireInstruction() {
-            if (misfirePolicy == null) {
-                return org.quartz.Trigger.MISFIRE_INSTRUCTION_SMART_POLICY;
-            }
-            return misfirePolicy.toQuartzInstruction();
+            return new CronTrigger(built);
         }
     }
 }

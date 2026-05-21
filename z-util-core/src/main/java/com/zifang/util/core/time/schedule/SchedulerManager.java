@@ -2,8 +2,13 @@ package com.zifang.util.core.time.schedule;
 
 import com.zifang.util.core.time.schedule.listener.ListenerManager;
 import com.zifang.util.core.time.schedule.listener.SchedulerListener;
-import org.quartz.*;
-import org.quartz.impl.matchers.GroupMatcher;
+import org.quartz.GroupMatcher;
+import org.quartz.JobExecutionException;
+import org.quartz.JobKey;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerMetaData;
+import org.quartz.TriggerKey;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -63,19 +68,6 @@ public class SchedulerManager {
      * 启动调度器。
      * <p>
      * 调度器启动后，触发器会按照配置开始触发任务。
-     */
-    public void start() throws SchedulerRuntimeException {
-        try {
-            if (!delegate.isStarted()) {
-                delegate.start();
-            }
-        } catch (SchedulerException e) {
-            throw new SchedulerRuntimeException("Failed to start scheduler", e);
-        }
-    }
-
-    /**
-     * 启动调度器（便捷方法，支持抛出受检异常）。
      *
      * @throws SchedulerException 启动失败
      */
@@ -152,13 +144,14 @@ public class SchedulerManager {
     /**
      * 调度多个任务和触发器（原子操作）。
      *
-     * @param triggersAndJobs Map，key 为 Trigger，value 为 JobDetail
+     * @param jobsAndTriggers Map，key 为 JobDetail，value 为 Trigger 集合
      */
-    public void scheduleJobs(Map<Trigger, JobDetail> triggersAndJobs) {
+    public void scheduleJobs(Map<JobDetail, Trigger> jobsAndTriggers) {
         try {
-            Map<org.quartz.Trigger, org.quartz.JobDetail> map = new HashMap<>();
-            for (Map.Entry<Trigger, JobDetail> entry : triggersAndJobs.entrySet()) {
-                map.put(entry.getKey().getDelegate(), entry.getValue().getDelegate());
+            Map<org.quartz.JobDetail, Set<? extends org.quartz.Trigger>> map = new HashMap<>();
+            for (Map.Entry<JobDetail, Trigger> entry : jobsAndTriggers.entrySet()) {
+                map.put(entry.getKey().getDelegate(),
+                        Collections.singleton(entry.getValue().getDelegate()));
             }
             delegate.scheduleJobs(map, true);
         } catch (SchedulerException e) {
@@ -277,7 +270,7 @@ public class SchedulerManager {
     /**
      * 获取所有分组的任务键。
      */
-    public Set<String> getJobGroupNames() {
+    public List<String> getJobGroupNames() {
         try {
             return delegate.getJobGroupNames();
         } catch (SchedulerException e) {
@@ -316,9 +309,14 @@ public class SchedulerManager {
     /**
      * 获取触发器关联的任务键。
      */
-    public JobKey getTrigggerJobKey(TriggerKey triggerKey) {
+    public JobKey getTriggerJobKey(TriggerKey triggerKey) {
         try {
-            return delegate.getTrigggerJobKey(triggerKey);
+            org.quartz.Trigger t = delegate.getTrigger(triggerKey);
+            if (t == null) {
+                throw new SchedulerRuntimeException(
+                        "Trigger not found: " + triggerKey);
+            }
+            return t.getJobKey();
         } catch (SchedulerException e) {
             throw new SchedulerRuntimeException("Failed to get trigger job key: " + triggerKey, e);
         }
@@ -411,7 +409,7 @@ public class SchedulerManager {
     /**
      * 获取所有触发器分组。
      */
-    public Set<String> getTriggerGroupNames() {
+    public List<String> getTriggerGroupNames() {
         try {
             return delegate.getTriggerGroupNames();
         } catch (SchedulerException e) {
@@ -680,7 +678,6 @@ public class SchedulerManager {
         @Override public Date getEndTime() { return delegate.getEndTime(); }
         @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
         @Override public String getCalendarName() { return delegate.getCalendarName(); }
-        @Override public TimeZone getTimeZone() { return delegate.getTimeZone(); }
         @Override public org.quartz.Trigger getDelegate() { return delegate; }
 
         @Override

@@ -19,7 +19,10 @@ public class JobExecutionContextWrapper {
 
     private final JobExecutionContext delegate;
 
-    JobExecutionContextWrapper(JobExecutionContext delegate) {
+    /**
+     * 从 Quartz JobExecutionContext 构造包装器。
+     */
+    public JobExecutionContextWrapper(JobExecutionContext delegate) {
         this.delegate = delegate;
     }
 
