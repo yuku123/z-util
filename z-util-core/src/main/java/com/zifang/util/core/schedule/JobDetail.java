@@ -112,7 +112,7 @@ public class JobDetail {
      * @see StatefulJob
      */
     public boolean isConcurrentExectionDisallowed() {
-        return delegate.isConcurrentExecutionDisallowed();
+        return delegate.isConcurrentExectionDisallowed();
     }
 
     /**

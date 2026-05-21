@@ -46,42 +46,42 @@ public class JobExecutionContextWrapper {
      * 获取任务的 Key。
      */
     public org.quartz.JobKey getJobKey() {
-        return delegate.getJobKey();
+        return delegate.getJobDetail().getKey();
     }
 
     /**
      * 获取任务的名称。
      */
     public String getJobName() {
-        return delegate.getJobName();
+        return delegate.getJobDetail().getKey().getName();
     }
 
     /**
      * 获取任务的分组。
      */
     public String getJobGroup() {
-        return delegate.getJobGroup();
+        return delegate.getJobDetail().getKey().getGroup();
     }
 
     /**
      * 获取触发器的 Key。
      */
     public org.quartz.TriggerKey getTriggerKey() {
-        return delegate.getTriggerKey();
+        return delegate.getTrigger().getKey();
     }
 
     /**
      * 获取触发器名称。
      */
     public String getTriggerName() {
-        return delegate.getTriggerName();
+        return delegate.getTrigger().getKey().getName();
     }
 
     /**
      * 获取触发器分组。
      */
     public String getTriggerGroup() {
-        return delegate.getTriggerGroup();
+        return delegate.getTrigger().getKey().getGroup();
     }
 
     /**
