@@ -133,7 +133,7 @@ public class Tokenizer {
         if (ch == (char) -1) throw new XmlParseException("Unclosed attr value");
         cr.next(); // consume closing quote
 
-        // Check for self-closing tag /> immediately after closing quote
+        // Check for self-closing tag /> after attribute value
         char nch = cr.peek();
         if (nch == '/') {
             cr.next(); // consume '/'
@@ -147,7 +147,6 @@ public class Tokenizer {
             cr.back();
         }
 
-        // Only add ATTRIBUTE token if not self-closing
         tokens.add(new Token(TokenType.ATTRIBUTE, attrName + "=" + val.toString()));
     }
 
