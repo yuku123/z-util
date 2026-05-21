@@ -8,4 +8,4 @@ package com.zifang.util.core.pattern.composite.define;
  * @author zifang
  * @see AbstractCluster
  */
-public class DefaultCluster extends AbstractCluster {
+public class DefaultCluster extends AbstractCluster {}
