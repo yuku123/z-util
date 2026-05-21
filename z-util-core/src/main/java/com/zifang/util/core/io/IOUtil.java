@@ -69,11 +69,7 @@ public class IOUtil {
     public static FastByteArrayOutputStream readToBuffer(InputStream in, boolean closeIn) throws IOException {
         FastByteArrayOutputStream out;
         if (in instanceof FileInputStream) {
-            try {
-                out = new FastByteArrayOutputStream(in.available());
-            } catch (IOException e) {
-                throw e;
-            }
+            out = new FastByteArrayOutputStream(in.available());
         } else {
             out = new FastByteArrayOutputStream();
         }

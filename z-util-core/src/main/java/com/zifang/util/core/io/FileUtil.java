@@ -15,6 +15,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -1900,7 +1901,7 @@ public class FileUtil {
      * @param path 需要处理的文件
      * @return 包含所有文件的的list
      */
-    public final static List<File> listFile(String path) {
+    public static List<File> listFile(String path) {
         File file = new File(path);
         return listFile(file);
     }
@@ -1988,7 +1989,7 @@ public class FileUtil {
      * @param fileName 搜索的文件名
      * @return 返回文件列表
      */
-    public final static List<File> searchFile(File dirPath, String fileName) {
+    public static List<File> searchFile(File dirPath, String fileName) {
         List<File> list = new ArrayList<>();
         File[] files = dirPath.listFiles();
         if (Checker.valid(files)) {
@@ -2013,7 +2014,7 @@ public class FileUtil {
      * @param reg     正则表达式
      * @return 返回文件列表
      */
-    public final static List<File> searchFileReg(File dirPath, String reg) {
+    public static List<File> searchFileReg(File dirPath, String reg) {
         List<File> list = new ArrayList<>();
         File[] files = dirPath.listFiles();
         if (Checker.valid(files)) {
@@ -2061,7 +2062,7 @@ public class FileUtil {
      */
     public static void handlerWithLine(File file, String encoding, Consumer<String> consumer) {
         try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))
+                BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath()), encoding))
         ) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -2087,7 +2088,7 @@ public class FileUtil {
             return;
         }
         try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))
+                BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath()), encoding))
         ) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -2110,7 +2111,7 @@ public class FileUtil {
      * @return 是否成功
      */
     public static boolean createFile(String path) {
-        if (path != null && path.length() > 0) {
+        if (path != null && !path.isEmpty()) {
             try {
                 File file = new File(path);
                 if (!file.getParentFile().exists() && file.getParentFile().mkdirs()) {
@@ -2309,7 +2310,7 @@ public class FileUtil {
      * @return 转换后的字符串
      * @throws IOException 如果读取发生异常
      */
-    public final static String streamToString(InputStream in) throws IOException {
+    public static String streamToString(InputStream in) throws IOException {
         StringBuffer out = new StringBuffer();
         byte[] b = new byte[4096];
         for (int n; (n = in.read(b)) != -1; ) {
@@ -2325,15 +2326,14 @@ public class FileUtil {
      * @return 字节数组
      * @throws IOException 如果读取发生异常
      */
-    public static final byte[] stream2Byte(InputStream is) throws IOException {
+    public static byte[] stream2Byte(InputStream is) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         int len = 0;
         byte[] b = new byte[1024];
         while ((len = is.read(b, 0, b.length)) != -1) {
             baos.write(b, 0, len);
         }
-        byte[] buffer = baos.toByteArray();
-        return buffer;
+        return baos.toByteArray();
     }
 
     /**
@@ -2360,7 +2360,7 @@ public class FileUtil {
      * @param outfile 输出文件
      * @throws RuntimeException 如果写入发生异常
      */
-    public static final void streamSaveAsFile(InputStream is, File outfile) {
+    public static void streamSaveAsFile(InputStream is, File outfile) {
         try (FileOutputStream fos = new FileOutputStream(outfile)) {
             byte[] buffer = new byte[1024];
             int len;
@@ -2374,24 +2374,6 @@ public class FileUtil {
         }
     }
 
-
-    /**
-     * 获取文件的行数
-     *
-     * @param file 统计的文件
-     * @return 文件行数
-     */
-    public static int lineCounts(File file) {
-        try (LineNumberReader rf = new LineNumberReader(new FileReader(file))) {
-            long fileLength = file.length();
-            rf.skip(fileLength);
-            return rf.getLineNumber();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
     /**
      * 以列表的方式获取文件的所有行
      *
@@ -2399,18 +2381,7 @@ public class FileUtil {
      * @return 包含所有行的list
      */
     public static List<String> readLines(File file) {
-        List<String> list = new ArrayList<>();
-        try (
-                BufferedReader reader = new BufferedReader(new FileReader(file))
-        ) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                list.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
+        return lines(file);
     }
 
     /**
@@ -2421,18 +2392,7 @@ public class FileUtil {
      * @return 包含所有行的list
      */
     public static List<String> readLines(File file, String encoding) {
-        List<String> list = new ArrayList<>();
-        try (
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))
-        ) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                list.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
+        return lines(file, encoding);
     }
 
     /**
@@ -2496,7 +2456,7 @@ public class FileUtil {
      * @return 是否成功, 如果存在则返回成功
      * @para isReNew 存在的时候是否重新创建
      */
-    public final static boolean createFiles(File file, boolean isReNew) {
+    public static boolean createFiles(File file, boolean isReNew) {
         if (file.exists()) {
             if (isReNew) {
                 if (file.delete()) {
@@ -2657,7 +2617,7 @@ public class FileUtil {
             return file.delete();
 
         File[] files = file.listFiles();
-        if (files == null || files.length == 0) {
+        if (files == null) {
             return file.delete();
         }
         for (File ff : files) {
@@ -2687,7 +2647,7 @@ public class FileUtil {
         List<File> list = new ArrayList<>();
         if (path != null && path.exists() && path.isDirectory()) {
             File[] files = path.listFiles();
-            if (files == null || files.length == 0) {
+            if (files == null) {
                 return list;
             }
             for (File file : files) {
@@ -2713,7 +2673,7 @@ public class FileUtil {
         List<File> list = new ArrayList<>();
         if (dirPath != null && dirPath.exists() && dirPath.isDirectory()) {
             File[] files = dirPath.listFiles();
-            if (files == null || files.length == 0) {
+            if (files == null) {
                 return list;
             }
             for (File file : files) {
@@ -2741,7 +2701,7 @@ public class FileUtil {
         List<File> list = new ArrayList<>();
         if (dirPath != null && dirPath.exists() && dirPath.isDirectory()) {
             File[] files = dirPath.listFiles();
-            if (files == null || files.length == 0) {
+            if (files == null) {
                 return list;
             }
 
@@ -2770,7 +2730,7 @@ public class FileUtil {
         List<File> list = new ArrayList<>();
         if (dirPath != null && dirPath.exists() && dirPath.isDirectory()) {
             File[] files = dirPath.listFiles();
-            if (files == null || files.length == 0) {
+            if (files == null) {
                 return list;
             }
             for (File file : files) {
@@ -2798,7 +2758,7 @@ public class FileUtil {
         List<File> list = new ArrayList<>();
         if (path != null && path.exists() && path.isDirectory()) {
             File[] files = path.listFiles();
-            if (files == null || files.length == 0) {
+            if (files == null) {
                 return list;
             }
             for (File file : files) {
@@ -2826,7 +2786,7 @@ public class FileUtil {
         List<File> list = new ArrayList<>();
         if (dirPath != null && dirPath.exists() && dirPath.isDirectory()) {
             File[] files = dirPath.listFiles();
-            if (files == null || files.length == 0) {
+            if (files == null) {
                 return list;
             }
             for (File file : files) {
