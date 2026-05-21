@@ -211,7 +211,7 @@ public class FileHashUtilTest {
         // GIF magic bytes: 47 49 46 38 (GIF8)
         byte[] gifData = new byte[]{
                 0x47, 0x49, 0x46, 0x38, 0x39, 0x61,
-                0x01, 0x00, 0x01, 0x00, 0x80, 0x00, 0x00
+                0x01, 0x00, 0x01, 0x00, (byte) 0x80, 0x00, 0x00
         };
         File tmp = File.createTempFile("magic", ".gif");
         tmp.deleteOnExit();
