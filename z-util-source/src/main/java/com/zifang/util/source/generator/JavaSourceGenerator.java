@@ -5,6 +5,7 @@ import com.zifang.util.source.generator.info.ClassInfo;
 import com.zifang.util.source.generator.info.FieldInfo;
 import com.zifang.util.source.generator.info.MethodInfo;
 import com.zifang.util.source.generator.info.MethodParameterPair;
+import com.zifang.util.core.lang.StringUtil;
 
 import java.lang.reflect.Modifier;
 import java.util.List;
@@ -41,7 +42,7 @@ public class JavaSourceGenerator {
      */
     private String generateClass(ClassInfo classInfo, int indentLevel) {
         StringBuilder sb = new StringBuilder();
-        String indent = "    ".repeat(indentLevel);
+        String indent = StringUtil.repeat("    ",indentLevel);
 
         // 类注解
         if (classInfo.getAnnotations() != null) {

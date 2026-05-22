@@ -1,5 +1,6 @@
 package com.zifang.util.monitor.exporter;
 
+import com.zifang.util.core.lang.collection.*;
 import com.zifang.util.monitor.MetricsRegistry;
 import com.zifang.util.monitor.MetricsSnapshot;
 
@@ -116,7 +117,7 @@ public class HtmlExporter {
 
         // 各类别数量
         for (MetricsSnapshot.Category category : MetricsSnapshot.Category.values()) {
-            int count = grouped.getOrDefault(category, List.of()).size();
+            int count = grouped.getOrDefault(category, Lists.of()).size();
             sb.append("            <div class=\"summary-card\">\n");
             sb.append("                <h3>").append(category.getLabel()).append("</h3>\n");
             sb.append("                <div class=\"value\">").append(count).append("</div>\n");
