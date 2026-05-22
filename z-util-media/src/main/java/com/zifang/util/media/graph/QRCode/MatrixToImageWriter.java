@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.zifang.util.media.graph.QRCode;
+package com.zifang.util.media.graph.qrcode;
 
 import com.google.zxing.common.BitMatrix;
 

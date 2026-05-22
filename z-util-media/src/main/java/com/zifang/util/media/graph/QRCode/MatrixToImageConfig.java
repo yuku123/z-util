@@ -1,4 +1,4 @@
-package com.zifang.util.media.graph.QRCode;
+package com.zifang.util.media.graph.qrcode;
 
 import java.awt.image.BufferedImage;
 

@@ -1,4 +1,4 @@
-package com.zifang.util.media.graph;
+package com.zifang.util.media.graph.qrcode;
 
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;

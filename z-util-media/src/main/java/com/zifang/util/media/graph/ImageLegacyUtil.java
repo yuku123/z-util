@@ -10,10 +10,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * 图像处理<br>
- * 对图片进行压缩、水印、伸缩变换、透明处理、格式转换操作
+ * 图像处理（旧版，兼容保留）。
+ * 对图片进行压缩、水印、伸缩变换、透明处理、格式转换操作。
+ *
+ * @deprecated 推荐使用 {@link com.zifang.util.media.graph.image.ImageUtil} 替代
  */
-public class ImageUtil {
+@Deprecated
+public class ImageLegacyUtil {
 
     public static final float DEFAULT_QUALITY = 0.2125f;
 
