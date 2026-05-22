@@ -6,6 +6,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.zifang.util.source.generator.info.AnnotationInfo;
 import com.zifang.util.source.generator.info.ClassInfo;
 import com.zifang.util.source.generator.info.FieldInfo;
 import com.zifang.util.source.generator.info.MethodInfo;
@@ -23,6 +24,7 @@ import java.util.List;
  * <p>
  * 使用 JavaParser 将 Java 源代码解析为 ClassInfo 模型。
  * 支持从文件、InputStream 或字符串解析。
+ * 支持：类、接口、枚举、注解、内部类
  *
  * @author zifang
  */
@@ -83,93 +85,14 @@ public class SourceCodeParser {
                 cu.getPackageDeclaration().map(p -> p.getName().asString()).orElse("")
         );
 
-        // 类型声明（只取第一个，支持 ClassOrInterfaceDeclaration）
+        // 类型声明（只取第一个）
         List<TypeDeclaration<?>> types = cu.getTypes();
         if (types.isEmpty()) {
-            throw new RuntimeException("No class or interface declaration found");
+            throw new RuntimeException("No class, interface, enum or annotation declaration found");
         }
 
         TypeDeclaration<?> type = types.get(0);
-
-        // 只有 ClassOrInterfaceDeclaration 支持完整的类信息
-        if (!(type instanceof ClassOrInterfaceDeclaration)) {
-            throw new RuntimeException("Only ClassOrInterfaceDeclaration is supported");
-        }
-
-        ClassOrInterfaceDeclaration classDecl = (ClassOrInterfaceDeclaration) type;
-
-        classInfo.setSimpleClassName(classDecl.getName().asString());
-        classInfo.setInterfaceType(classDecl.isInterface());
-        classInfo.setModifiers(parseModifiers(classDecl));
-
-        // 父类
-        List<ClassOrInterfaceType> extendedTypes = classDecl.getExtendedTypes();
-        if (!extendedTypes.isEmpty()) {
-            ClassInfo superClassInfo = new ClassInfo();
-            superClassInfo.setSimpleClassName(extendedTypes.get(0).getName().asString());
-            superClassInfo.setPackageName("");
-            classInfo.setSuperClass(superClassInfo);
-        }
-
-        // 接口列表
-        List<ClassInfo> interfaces = new ArrayList<>();
-        for (ClassOrInterfaceType iface : classDecl.getImplementedTypes()) {
-            ClassInfo ifaceInfo = new ClassInfo();
-            ifaceInfo.setSimpleClassName(iface.getName().asString());
-            ifaceInfo.setPackageName("");
-            interfaces.add(ifaceInfo);
-        }
-        classInfo.setInterfaces(interfaces);
-
-        // 字段列表
-        List<FieldInfo> fieldInfos = new ArrayList<>();
-        for (FieldDeclaration field : classDecl.getFields()) {
-            FieldInfo fieldInfo = new FieldInfo();
-            fieldInfo.setType(field.getVariables().get(0).getType().asString());
-            fieldInfo.setValue(field.getVariables().get(0).getName().asString());
-
-            int mod = parseModifiers(field);
-            fieldInfo.setModifiers(new int[]{mod});
-
-            // 初始值
-            if (field.getVariables().get(0).getInitializer().isPresent()) {
-                fieldInfo.setInitializer(field.getVariables().get(0).getInitializer().get().toString());
-            } else {
-                fieldInfo.setInitializer("null");
-            }
-
-            fieldInfos.add(fieldInfo);
-        }
-        classInfo.setFields(fieldInfos);
-
-        // 方法列表
-        List<MethodInfo> methodInfos = new ArrayList<>();
-        for (MethodDeclaration method : classDecl.getMethods()) {
-            MethodInfo methodInfo = new MethodInfo();
-            methodInfo.setMethodName(method.getName().asString());
-            methodInfo.setModifier(parseModifiers(method));
-            methodInfo.setReturnType(method.getType().asString());
-
-            // 参数
-            List<MethodParameterPair> params = new ArrayList<>();
-            for (Parameter param : method.getParameters()) {
-                MethodParameterPair pair = new MethodParameterPair();
-                pair.setParamType(param.getType().asString());
-                pair.setParamName(param.getName().asString());
-                params.add(pair);
-            }
-            methodInfo.setMethodParameterPairs(params);
-
-            // 方法体语句
-            List<String> statements = new ArrayList<>();
-            method.getBody().ifPresent(body -> {
-                body.getStatements().forEach(stmt -> statements.add(stmt.toString()));
-            });
-            methodInfo.setStatements(statements);
-
-            methodInfos.add(methodInfo);
-        }
-        classInfo.setMethods(methodInfos);
+        convertTypeDeclaration(type, classInfo);
 
         // 导入语句
         List<String> imports = new ArrayList<>();
@@ -180,30 +103,178 @@ public class SourceCodeParser {
     }
 
     /**
+     * 转换类型声明（支持 Class、Interface、Enum、Annotation）
+     */
+    private void convertTypeDeclaration(TypeDeclaration<?> type, ClassInfo classInfo) {
+        classInfo.setSimpleClassName(type.getName().asString());
+        classInfo.setModifiers(parseModifiers(type));
+
+        // 解析类的注解
+        List<AnnotationInfo> annotations = new ArrayList<>();
+        for (AnnotationExpr annotation : type.getAnnotations()) {
+            annotations.add(convertAnnotation(annotation));
+        }
+        classInfo.setAnnotations(annotations);
+
+        if (type instanceof ClassOrInterfaceDeclaration) {
+            ClassOrInterfaceDeclaration classDecl = (ClassOrInterfaceDeclaration) type;
+            classInfo.setInterfaceType(classDecl.isInterface());
+
+            // 父类
+            List<ClassOrInterfaceType> extendedTypes = classDecl.getExtendedTypes();
+            if (!extendedTypes.isEmpty()) {
+                ClassInfo superClassInfo = new ClassInfo();
+                superClassInfo.setSimpleClassName(extendedTypes.get(0).getName().asString());
+                superClassInfo.setPackageName("");
+                classInfo.setSuperClass(superClassInfo);
+            }
+
+            // 接口列表
+            List<ClassInfo> interfaces = new ArrayList<>();
+            for (ClassOrInterfaceType iface : classDecl.getImplementedTypes()) {
+                ClassInfo ifaceInfo = new ClassInfo();
+                ifaceInfo.setSimpleClassName(iface.getName().asString());
+                ifaceInfo.setPackageName("");
+                interfaces.add(ifaceInfo);
+            }
+            classInfo.setInterfaces(interfaces);
+
+        } else if (type instanceof EnumDeclaration) {
+            EnumDeclaration enumDecl = (EnumDeclaration) type;
+            classInfo.setInterfaceType(false);
+            // 枚举隐式继承 java.lang.Enum
+
+            // 实现的接口
+            List<ClassInfo> interfaces = new ArrayList<>();
+            for (ClassOrInterfaceType iface : enumDecl.getImplementedTypes()) {
+                ClassInfo ifaceInfo = new ClassInfo();
+                ifaceInfo.setSimpleClassName(iface.getName().asString());
+                ifaceInfo.setPackageName("");
+                interfaces.add(ifaceInfo);
+            }
+            classInfo.setInterfaces(interfaces);
+
+        } else if (type instanceof AnnotationDeclaration) {
+            classInfo.setInterfaceType(false);
+            // 注解类型隐式继承 java.lang.annotation.Annotation
+        }
+
+        // 字段列表
+        List<FieldInfo> fieldInfos = new ArrayList<>();
+        for (FieldDeclaration field : type.getFields()) {
+            fieldInfos.add(convertField(field));
+        }
+        classInfo.setFields(fieldInfos);
+
+        // 方法列表
+        List<MethodInfo> methodInfos = new ArrayList<>();
+        for (MethodDeclaration method : type.getMethods()) {
+            methodInfos.add(convertMethod(method));
+        }
+        classInfo.setMethods(methodInfos);
+
+        // 内部类列表
+        List<ClassInfo> innerClasses = new ArrayList<>();
+        for (BodyDeclaration<?> member : type.getMembers()) {
+            if (member instanceof TypeDeclaration) {
+                ClassInfo innerClassInfo = new ClassInfo();
+                convertTypeDeclaration((TypeDeclaration<?>) member, innerClassInfo);
+                innerClasses.add(innerClassInfo);
+            }
+        }
+        classInfo.setInnerClasses(innerClasses);
+    }
+
+    /**
+     * 转换字段
+     */
+    private FieldInfo convertField(FieldDeclaration field) {
+        FieldInfo fieldInfo = new FieldInfo();
+        fieldInfo.setType(field.getVariables().get(0).getType().asString());
+        fieldInfo.setValue(field.getVariables().get(0).getName().asString());
+        fieldInfo.setModifiers(new int[]{parseModifiers(field)});
+
+        // 初始值
+        if (field.getVariables().get(0).getInitializer().isPresent()) {
+            fieldInfo.setInitializer(field.getVariables().get(0).getInitializer().get().toString());
+        } else {
+            fieldInfo.setInitializer("null");
+        }
+
+        // 字段注解
+        List<AnnotationInfo> annotations = new ArrayList<>();
+        for (AnnotationExpr annotation : field.getAnnotations()) {
+            annotations.add(convertAnnotation(annotation));
+        }
+        fieldInfo.setAnnotations(annotations);
+
+        return fieldInfo;
+    }
+
+    /**
+     * 转换方法
+     */
+    private MethodInfo convertMethod(MethodDeclaration method) {
+        MethodInfo methodInfo = new MethodInfo();
+        methodInfo.setMethodName(method.getName().asString());
+        methodInfo.setModifier(parseModifiers(method));
+        methodInfo.setReturnType(method.getType().asString());
+
+        // 参数
+        List<MethodParameterPair> params = new ArrayList<>();
+        for (Parameter param : method.getParameters()) {
+            MethodParameterPair pair = new MethodParameterPair();
+            pair.setParamType(param.getType().asString());
+            pair.setParamName(param.getName().asString());
+            params.add(pair);
+        }
+        methodInfo.setMethodParameterPairs(params);
+
+        // 方法体语句
+        List<String> statements = new ArrayList<>();
+        method.getBody().ifPresent(body -> {
+            body.getStatements().forEach(stmt -> statements.add(stmt.toString()));
+        });
+        methodInfo.setStatements(statements);
+
+        // 方法注解
+        List<AnnotationInfo> annotations = new ArrayList<>();
+        for (AnnotationExpr annotation : method.getAnnotations()) {
+            annotations.add(convertAnnotation(annotation));
+        }
+        methodInfo.setAnnotations(annotations);
+
+        return methodInfo;
+    }
+
+    /**
+     * 转换注解
+     */
+    private AnnotationInfo convertAnnotation(AnnotationExpr annotation) {
+        AnnotationInfo info = new AnnotationInfo();
+        info.setType(annotation.getName().asString());
+
+        if (annotation instanceof NormalAnnotationExpr) {
+            NormalAnnotationExpr normal = (NormalAnnotationExpr) annotation;
+            for (MemberValuePair pair : normal.getPairs()) {
+                info.addMember(pair.getName().asString(), pair.getValue().toString());
+            }
+        } else if (annotation instanceof SingleMemberAnnotationExpr) {
+            SingleMemberAnnotationExpr single = (SingleMemberAnnotationExpr) annotation;
+            info.addMember("", single.getMemberValue().toString());
+        }
+
+        return info;
+    }
+
+    /**
      * 解析修饰符
      */
-    private int parseModifiers(com.github.javaparser.ast.body.BodyDeclaration<?> declaration) {
+    private int parseModifiers(BodyDeclaration<?> declaration) {
         int modifiers = 0;
-
-        // 尝试从 ClassOrInterfaceDeclaration 获取
-        if (declaration instanceof ClassOrInterfaceDeclaration) {
-            for (Modifier mod : ((ClassOrInterfaceDeclaration) declaration).getModifiers()) {
-                modifiers |= modifierKeywordToInt(mod.getKeyword().name());
-            }
+        for (Modifier mod : declaration.getModifiers()) {
+            modifiers |= modifierKeywordToInt(mod.getKeyword().name());
         }
-        // 尝试从 MethodDeclaration 获取
-        else if (declaration instanceof MethodDeclaration) {
-            for (Modifier mod : ((MethodDeclaration) declaration).getModifiers()) {
-                modifiers |= modifierKeywordToInt(mod.getKeyword().name());
-            }
-        }
-        // 尝试从 FieldDeclaration 获取
-        else if (declaration instanceof FieldDeclaration) {
-            for (Modifier mod : ((FieldDeclaration) declaration).getModifiers()) {
-                modifiers |= modifierKeywordToInt(mod.getKeyword().name());
-            }
-        }
-
         return modifiers;
     }
 
