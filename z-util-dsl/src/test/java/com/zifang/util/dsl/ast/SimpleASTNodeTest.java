@@ -197,8 +197,6 @@ public class SimpleASTNodeTest {
         SimpleASTNode node = new SimpleASTNode();
         node.addChild(new SimpleASTNode("child", "1", 1, 1));
         List<ASTNode> children = node.getChildren();
-        assertThrows(UnsupportedOperationException.class, () -> {
-            children.clear();
-        });
+        assertThrows(UnsupportedOperationException.class, children::clear);
     }
 }
