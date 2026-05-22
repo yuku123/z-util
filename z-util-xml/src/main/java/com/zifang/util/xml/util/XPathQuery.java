@@ -34,7 +34,7 @@ public class XPathQuery {
         if (doc.getRoot() == null) {
             return new ArrayList<>();
         }
-        return queryNode(doc.getRoot(), path);
+        return queryNode(doc, path);
     }
 
     /**
@@ -70,8 +70,22 @@ public class XPathQuery {
             String rest = path.substring(1);
             if (node instanceof XDocument) {
                 XElement root = ((XDocument) node).getRoot();
-                if (root != null) {
-                    followPath(root, splitPath(rest), 0, results);
+                if (root == null) {
+                    return results;
+                }
+                if (rest.isEmpty()) {
+                    // Query is just "/" - return root element
+                    results.add(root);
+                } else {
+                    String[] parts = splitPath(rest);
+                    // First part should match the root element itself
+                    if (matchesName(root, parts[0])) {
+                        if (parts.length == 1) {
+                            results.add(root);
+                        } else {
+                            followPath(root, parts, 1, results);
+                        }
+                    }
                 }
             } else if (node instanceof XElement) {
                 followPath((XElement) node, splitPath(rest), 0, results);
