@@ -1,4 +1,5 @@
 # Java class files
+.DS_Store
 *.class
 /build
 /target/
