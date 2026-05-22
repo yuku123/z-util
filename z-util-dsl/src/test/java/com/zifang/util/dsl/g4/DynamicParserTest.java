@@ -2,9 +2,9 @@ package com.zifang.util.dsl.g4;
 
 import com.zifang.util.dsl.core.ASTNode;
 import com.zifang.util.dsl.core.TokenReader;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DynamicParserTest {
 
@@ -46,10 +46,10 @@ public class DynamicParserTest {
         assertNotNull(node);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testParse_NoRulesLoaded() {
         DynamicParser parser = new DynamicParser();
-        parser.parse();
+        assertThrows(RuntimeException.class, () -> parser.parse());
     }
 
     @Test
@@ -115,7 +115,7 @@ public class DynamicParserTest {
         assertNotNull(node);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testParse_UnknownRule() {
         DynamicParser parser = new DynamicParser();
         String g4 = "lexer grammar Test;\n" +
@@ -125,6 +125,6 @@ public class DynamicParserTest {
                 "hello : 'hello' ;\n";
 
         parser.loadG4(g4);
-        parser.parse("nonexistent");
+        assertThrows(RuntimeException.class, () -> parser.parse("nonexistent"));
     }
 }
