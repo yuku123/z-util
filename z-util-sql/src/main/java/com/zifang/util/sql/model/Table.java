@@ -112,12 +112,44 @@ public class Table {
         }
         return -1;
     }
-    
+
+    public boolean hasColumn(String name) {
+        return getColumnIndex(name) >= 0;
+    }
+
     public Row getRow(int index) {
         if (index < 0 || index >= rows.size()) {
             return null;
         }
         return rows.get(index);
+    }
+
+    public Row removeRow(int index) {
+        if (index < 0 || index >= rows.size()) {
+            return null;
+        }
+        Row removed = rows.remove(index);
+        invalidateIndexes();
+        return removed;
+    }
+
+    /**
+     * 根据索引值查找行号列表
+     */
+    public List<Integer> findRowsByIndexValue(String columnName, Object value) {
+        return getRowIndicesByIndex(columnName, value);
+    }
+
+    /**
+     * 复制表结构和数据
+     */
+    public Table copy() {
+        Table copy = new Table(name);
+        copy.setColumns(new ArrayList<>(columns));
+        for (Row row : rows) {
+            copy.addRow(new Row(new ArrayList<>(row.getValues())));
+        }
+        return copy;
     }
     
     // ========== 索引管理 ==========

@@ -3,7 +3,6 @@ package com.zifang.util.proxy.a.resolver2.method;
 import com.zifang.util.proxy.a.resolver2.attribute.AbstractAttribute;
 import com.zifang.util.proxy.a.resolver2.attribute.AttributeFactory;
 import com.zifang.util.proxy.a.resolver2.constantpool.AbstractConstantPool;
-import com.zifang.util.proxy.a.resolver2.readtype.U2;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,11 +14,7 @@ import java.util.List;
  * 存储ClassFile中所有的方法信息。
  */
 public class MethodTable {
-    private U2 accessFlags;
-    private U2 nameIndex;
-    private U2 descriptorIndex;
-    private U2 attributesCount;
-    private List<AbstractAttribute> attributesInfo = new ArrayList<>();
+    private List<MethodInfo> methods = new ArrayList<>();
 
     /**
      * 构造函数
@@ -30,7 +25,7 @@ public class MethodTable {
      */
     public MethodTable(InputStream stream, List<AbstractConstantPool> poolList, int methodCount) {
         for (int i = 0; i < methodCount; i++) {
-            parseMethod(stream, poolList);
+            methods.add(parseMethod(stream, poolList));
         }
     }
 
@@ -39,68 +34,58 @@ public class MethodTable {
      *
      * @param inputStream 输入流
      * @param poolList    常量池列表
+     * @return 解析后的方法信息
      */
-    public void parseMethod(InputStream inputStream, List<AbstractConstantPool> poolList) {
-        accessFlags = U2.read(inputStream);
-        nameIndex = U2.read(inputStream);
-        descriptorIndex = U2.read(inputStream);
-        attributesCount = U2.read(inputStream);
+    public MethodInfo parseMethod(InputStream inputStream, List<AbstractConstantPool> poolList) {
+        com.zifang.util.proxy.a.resolver2.readtype.U2 accessFlags = 
+                com.zifang.util.proxy.a.resolver2.readtype.U2.read(inputStream);
+        com.zifang.util.proxy.a.resolver2.readtype.U2 nameIndex = 
+                com.zifang.util.proxy.a.resolver2.readtype.U2.read(inputStream);
+        com.zifang.util.proxy.a.resolver2.readtype.U2 descriptorIndex = 
+                com.zifang.util.proxy.a.resolver2.readtype.U2.read(inputStream);
+        com.zifang.util.proxy.a.resolver2.readtype.U2 attributesCount = 
+                com.zifang.util.proxy.a.resolver2.readtype.U2.read(inputStream);
+
+        List<AbstractAttribute> attributes = new ArrayList<>();
         short count = attributesCount.value;
         for (int i = 0; i < count; i++) {
-            parseAttribute(inputStream, poolList);
+            AbstractAttribute attribute = AttributeFactory.getAttributeTable(inputStream, poolList);
+            if (attribute != null) {
+                attributes.add(attribute);
+            }
         }
+
+        return new MethodInfo(accessFlags, nameIndex, descriptorIndex, attributesCount, attributes);
     }
 
     /**
-     * 解析方法属性
+     * 获取所有方法
      *
-     * @param inputStream 输入流
-     * @param poolList    常量池列表
+     * @return 方法列表
      */
-    public void parseAttribute(InputStream inputStream, List<AbstractConstantPool> poolList) {
-        AbstractAttribute attributeTable = AttributeFactory.getAttributeTable(inputStream, poolList);
-        if (attributeTable != null) {
-            attributesInfo.add(attributeTable);
+    public List<MethodInfo> getMethods() {
+        return methods;
+    }
+
+    /**
+     * 获取方法数量
+     *
+     * @return 方法数量
+     */
+    public int getMethodCount() {
+        return methods.size();
+    }
+
+    /**
+     * 根据索引获取方法
+     *
+     * @param index 方法索引
+     * @return 方法信息
+     */
+    public MethodInfo getMethod(int index) {
+        if (index >= 0 && index < methods.size()) {
+            return methods.get(index);
         }
-    }
-
-    public U2 getAccessFlags() {
-        return accessFlags;
-    }
-
-    public void setAccessFlags(U2 accessFlags) {
-        this.accessFlags = accessFlags;
-    }
-
-    public U2 getNameIndex() {
-        return nameIndex;
-    }
-
-    public void setNameIndex(U2 nameIndex) {
-        this.nameIndex = nameIndex;
-    }
-
-    public U2 getDescriptorIndex() {
-        return descriptorIndex;
-    }
-
-    public void setDescriptorIndex(U2 descriptorIndex) {
-        this.descriptorIndex = descriptorIndex;
-    }
-
-    public U2 getAttributesCount() {
-        return attributesCount;
-    }
-
-    public void setAttributesCount(U2 attributesCount) {
-        this.attributesCount = attributesCount;
-    }
-
-    public List<AbstractAttribute> getAttributesInfo() {
-        return attributesInfo;
-    }
-
-    public void setAttributesInfo(List<AbstractAttribute> attributesInfo) {
-        this.attributesInfo = attributesInfo;
+        return null;
     }
 }

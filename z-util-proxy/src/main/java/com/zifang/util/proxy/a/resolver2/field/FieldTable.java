@@ -15,11 +15,7 @@ import java.util.List;
  * 存储ClassFile中所有的字段信息。
  */
 public class FieldTable {
-    public U2 accessFlags;
-    public U2 nameIndex;
-    public U2 descriptorIndex;
-    public U2 attributesCount;
-    public List<AbstractAttribute> attributesInfo = new ArrayList<>();
+    private List<FieldInfo> fields = new ArrayList<>();
 
     /**
      * 构造函数
@@ -30,7 +26,7 @@ public class FieldTable {
      */
     public FieldTable(InputStream stream, List<AbstractConstantPool> poolList, int fieldCount) {
         for (int i = 0; i < fieldCount; i++) {
-            parseField(stream, poolList);
+            fields.add(parseField(stream, poolList));
         }
     }
 
@@ -39,28 +35,54 @@ public class FieldTable {
      *
      * @param inputStream 输入流
      * @param poolList    常量池列表
+     * @return 解析后的字段信息
      */
-    public void parseField(InputStream inputStream, List<AbstractConstantPool> poolList) {
-        accessFlags = U2.read(inputStream);
-        nameIndex = U2.read(inputStream);
-        descriptorIndex = U2.read(inputStream);
-        attributesCount = U2.read(inputStream);
+    public FieldInfo parseField(InputStream inputStream, List<AbstractConstantPool> poolList) {
+        U2 accessFlags = U2.read(inputStream);
+        U2 nameIndex = U2.read(inputStream);
+        U2 descriptorIndex = U2.read(inputStream);
+        U2 attributesCount = U2.read(inputStream);
+
+        List<AbstractAttribute> attributes = new ArrayList<>();
         short count = attributesCount.value;
         for (int i = 0; i < count; i++) {
-            parseAttribute(inputStream, poolList);
+            AbstractAttribute attribute = AttributeFactory.getAttributeTable(inputStream, poolList);
+            if (attribute != null) {
+                attributes.add(attribute);
+            }
         }
+
+        return new FieldInfo(accessFlags, nameIndex, descriptorIndex, attributesCount, attributes);
     }
 
     /**
-     * 解析字段属性
+     * 获取所有字段
      *
-     * @param inputStream 输入流
-     * @param poolList    常量池列表
+     * @return 字段列表
      */
-    public void parseAttribute(InputStream inputStream, List<AbstractConstantPool> poolList) {
-        AbstractAttribute attributeTable = AttributeFactory.getAttributeTable(inputStream, poolList);
-        if (attributeTable != null) {
-            attributesInfo.add(attributeTable);
+    public List<FieldInfo> getFields() {
+        return fields;
+    }
+
+    /**
+     * 获取字段数量
+     *
+     * @return 字段数量
+     */
+    public int getFieldCount() {
+        return fields.size();
+    }
+
+    /**
+     * 根据索引获取字段
+     *
+     * @param index 字段索引
+     * @return 字段信息
+     */
+    public FieldInfo getField(int index) {
+        if (index >= 0 && index < fields.size()) {
+            return fields.get(index);
         }
+        return null;
     }
 }

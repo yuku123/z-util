@@ -84,13 +84,13 @@ public class SqlParser {
         // 解析主查询部分
         // 首先尝试提取列
         Pattern colPattern = Pattern.compile(
-            "SELECT\\s+(\\*|[a-zA-Z_][a-zA-Z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)?(?:\\s*,\\s*[a-zA-Z_][a-zA-Z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)?)*)\\s+FROM\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+            "SELECT\\s+(\\*|[a-zA-Z_][a-zA-Z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)?(?:\\s*,\\s*[a-zA-Z_][a-zA-Z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)?)*|COUNT\\s*\\(\\s*\\*\\s*\\))\\s+FROM\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
             Pattern.CASE_INSENSITIVE
         );
         Matcher colMatcher = colPattern.matcher(mainSql);
         if (colMatcher.find()) {
             String cols = colMatcher.group(1).trim();
-            if ("*".equals(cols)) {
+            if ("*".equals(cols) || "COUNT(*)".equalsIgnoreCase(cols)) {
                 stmt.addSelectColumn("*");
             } else {
                 for (String col : cols.split("\\s*,\\s*")) {

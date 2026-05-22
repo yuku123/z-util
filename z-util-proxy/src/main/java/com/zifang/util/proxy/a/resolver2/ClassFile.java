@@ -88,7 +88,7 @@ public class ClassFile {
         if (methodInfo == null) {
             return 0;
         }
-        return methodInfo.getAccessFlags() != null ? 1 : 0;
+        return methodInfo.getMethodCount();
     }
 
     @Override

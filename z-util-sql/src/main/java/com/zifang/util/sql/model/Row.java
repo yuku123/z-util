@@ -65,7 +65,19 @@ public class Row implements Iterable<Object> {
     public void clear() {
         values.clear();
     }
-    
+
+    public boolean contains(Object value) {
+        return values.contains(value);
+    }
+
+    public int indexOf(Object value) {
+        return values.indexOf(value);
+    }
+
+    public Object[] toArray() {
+        return values.toArray();
+    }
+
     @Override
     public Iterator<Object> iterator() {
         return values.iterator();
