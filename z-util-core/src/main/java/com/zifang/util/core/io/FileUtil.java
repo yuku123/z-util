@@ -371,11 +371,10 @@ public class FileUtil {
      * @return true if creation succeeded
      */
     public static boolean makeDirectory(File file) {
-        File parent = file.getParentFile();
-        if (parent != null) {
-            return parent.mkdirs();
+        if (file.exists()) {
+            return file.isDirectory();
         }
-        return false;
+        return file.mkdirs();
     }
 
     /**
@@ -473,7 +472,7 @@ public class FileUtil {
     }
 
     private static void listFilesRecursive(ArrayList<File> list, File file, javax.swing.filechooser.FileFilter filter) {
-        if (filter.accept(file)) {
+        if (filter == null || filter.accept(file)) {
             list.add(file);
             if (file.isFile()) {
                 return;
@@ -524,7 +523,7 @@ public class FileUtil {
      * @return absolute path
      */
     public static String getFilePath(String fileName) {
-        return new File(fileName).getAbsolutePath();
+        return getPathPart(fileName);
     }
 
     /**
@@ -668,7 +667,7 @@ public class FileUtil {
      * @param fileName file path
      * @return relative path
      */
-    public static String getSubpath(String pathName, String fileName) {
+    public static String getSubpath(String fileName, String pathName) {
         return FilePathUtil.getSubpath(pathName, fileName);
     }
 
@@ -770,24 +769,34 @@ public class FileUtil {
     /**
      * Gets picture extension name.
      *
-     * @param pic_path picture path without extension
-     * @return extension with dot (e.g., ".jpg")
+     * @param pic_path picture file path
+     * @return extension without dot (e.g., "jpg") or null if no extension
      */
     public static String getPicExtendName(String pic_path) {
         pic_path = getUNIXfilePath(pic_path);
+        if (!isFileExist(pic_path)) {
+            return null;
+        }
+        // Check for image extensions
         if (isFileExist(pic_path + ".gif")) {
-            return ".gif";
+            return "gif";
         }
         if (isFileExist(pic_path + ".jpeg")) {
-            return ".jpeg";
+            return "jpeg";
         }
         if (isFileExist(pic_path + ".jpg")) {
-            return ".jpg";
+            return "jpg";
         }
         if (isFileExist(pic_path + ".png")) {
-            return ".png";
+            return "png";
         }
-        return "";
+        // File exists but no image extension found - extract extension from filename
+        int lastDot = pic_path.lastIndexOf('.');
+        int lastSep = Math.max(pic_path.lastIndexOf('/'), pic_path.lastIndexOf('\\'));
+        if (lastDot > lastSep && lastDot < pic_path.length() - 1) {
+            return pic_path.substring(lastDot + 1);
+        }
+        return null;
     }
 
     // ==================== Copy File Operations ====================
@@ -1092,7 +1101,7 @@ public class FileUtil {
     public static String getFileMD5(File file) {
         try {
             return FileHashUtil.md5(file);
-        } catch (IOException e) {
+        } catch (IOException | NoSuchAlgorithmException e) {
             logger.error("Failed to compute MD5 for file: {}", file.getAbsolutePath(), e);
             return null;
         }
@@ -1137,7 +1146,7 @@ public class FileUtil {
     public static String fileHash(File file, String hashType) {
         try {
             return FileHashUtil.hash(file, hashType);
-        } catch (IOException e) {
+        } catch (IOException | NoSuchAlgorithmException e) {
             logger.error("Failed to compute {} hash for file: {}", hashType, file.getAbsolutePath(), e);
             return "";
         }

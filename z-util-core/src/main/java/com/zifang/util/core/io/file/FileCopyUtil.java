@@ -89,7 +89,7 @@ public final class FileCopyUtil {
             throw new IOException("Source is not a file: " + src.getAbsolutePath());
         }
         if (!overwrite && dest.exists()) {
-            throw new IOException("Destination already exists and overwrite is false: " + dest.getAbsolutePath());
+            throw new java.nio.file.FileAlreadyExistsException("Destination already exists and overwrite is false: " + dest.getAbsolutePath());
         }
 
         // Ensure parent directories exist

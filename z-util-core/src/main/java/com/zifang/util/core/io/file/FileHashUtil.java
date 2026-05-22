@@ -101,7 +101,7 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    public static String md5(File file) throws IOException {
+    public static String md5(File file) throws IOException, NoSuchAlgorithmException {
         return hash(file, "MD5");
     }
 
@@ -117,7 +117,7 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    public static String sha1(File file) throws IOException {
+    public static String sha1(File file) throws IOException, NoSuchAlgorithmException {
         return hash(file, "SHA-1");
     }
 
@@ -133,7 +133,7 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    public static String sha256(File file) throws IOException {
+    public static String sha256(File file) throws IOException, NoSuchAlgorithmException {
         return hash(file, "SHA-256");
     }
 
@@ -161,9 +161,9 @@ public final class FileHashUtil {
      * @return the hash as a lowercase hexadecimal string
      * @throws IOException               if the file cannot be read
      * @throws IllegalArgumentException  if the file is null or algorithm is null/empty
-     * @throws RuntimeException          if the specified algorithm is not available
+     * @throws NoSuchAlgorithmException  if the specified algorithm is not available
      */
-    public static String hash(File file, String algorithm) throws IOException {
+    public static String hash(File file, String algorithm) throws IOException, NoSuchAlgorithmException {
         if (file == null) {
             throw new IllegalArgumentException("File cannot be null");
         }
@@ -186,7 +186,7 @@ public final class FileHashUtil {
             messageDigest = MessageDigest.getInstance(algorithm);
         } catch (NoSuchAlgorithmException e) {
             logger.error("Hash algorithm '{}' is not available", algorithm, e);
-            throw new RuntimeException("Hash algorithm '" + algorithm + "' is not available", e);
+            throw e;
         }
 
         try (FileInputStream fis = new FileInputStream(file)) {
@@ -264,7 +264,7 @@ public final class FileHashUtil {
         String hexString = bytesToHex(magicBytes);
 
         for (Map.Entry<String, String> entry : MAGIC_NUMBER_MAP.entrySet()) {
-            if (hexString.startsWith(entry.getKey())) {
+            if (hexString.toUpperCase().startsWith(entry.getKey())) {
                 logger.debug("Detected file type '{}' for file: {}", entry.getValue(), file.getAbsolutePath());
                 return entry.getValue();
             }

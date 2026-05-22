@@ -111,7 +111,8 @@ public final class FilePathUtil {
             return "";
         }
         int extensionIndex = name.lastIndexOf(EXTENSION_SEPARATOR);
-        if (extensionIndex == -1) {
+        // Hidden files (starting with '.') without other dots should return the full name
+        if (extensionIndex <= 0) {
             return name;
         }
         return name.substring(0, extensionIndex);
@@ -173,14 +174,14 @@ public final class FilePathUtil {
      */
     public static String getParent(String filePath) {
         if (filePath == null) {
-            throw new IllegalArgumentException("File path must not be null");
+            return null;
         }
         if (filePath.isEmpty()) {
             return "";
         }
         int separatorIndex = Math.max(filePath.lastIndexOf(UNIX_SEPARATOR), filePath.lastIndexOf(WINDOWS_SEPARATOR));
         if (separatorIndex == -1) {
-            return "";
+            return null;
         }
         return filePath.substring(0, separatorIndex);
     }
@@ -211,14 +212,23 @@ public final class FilePathUtil {
      */
     public static String normalize(String path) {
         if (path == null) {
-            throw new IllegalArgumentException("Path must not be null");
+            return null;
         }
         if (path.isEmpty()) {
             return "";
         }
         try {
-            Path normalizedPath = Paths.get(path).normalize();
-            return normalizedPath.toString();
+            // Determine if path uses Windows backslashes
+            boolean hasBackslashes = path.indexOf(WINDOWS_SEPARATOR) != -1;
+            // Convert backslashes to forward slashes for proper handling
+            String unixPath = path.replace(WINDOWS_SEPARATOR, UNIX_SEPARATOR);
+            Path normalizedPath = Paths.get(unixPath).normalize();
+            String result = normalizedPath.toString();
+            // Convert back to backslashes if original path used them
+            if (hasBackslashes) {
+                result = result.replace(UNIX_SEPARATOR, WINDOWS_SEPARATOR);
+            }
+            return result;
         } catch (Exception e) {
             logger.warn("Failed to normalize path '{}': {}", path, e.getMessage());
             return path;
@@ -247,7 +257,7 @@ public final class FilePathUtil {
      */
     public static String toUNIXPath(String path) {
         if (path == null) {
-            throw new IllegalArgumentException("Path must not be null");
+            return null;
         }
         if (path.isEmpty()) {
             return "";
@@ -277,7 +287,7 @@ public final class FilePathUtil {
      */
     public static String getPrefix(String filename) {
         if (filename == null) {
-            throw new IllegalArgumentException("Filename must not be null");
+            return null;
         }
         if (filename.isEmpty()) {
             return "";
@@ -285,11 +295,46 @@ public final class FilePathUtil {
         if (filename.equals(".") || filename.equals("..")) {
             return "";
         }
-        int extensionIndex = filename.lastIndexOf(EXTENSION_SEPARATOR);
-        if (extensionIndex == -1) {
+
+        // Check for UNC path: \\server\share\...
+        if (filename.startsWith("\\\\")) {
+            int secondBackslash = filename.indexOf('\\', 2);
+            if (secondBackslash != -1) {
+                int thirdBackslash = filename.indexOf('\\', secondBackslash + 1);
+                if (thirdBackslash != -1) {
+                    // Check if there's a non-backslash char after the third backslash
+                    if (thirdBackslash + 1 < filename.length() && filename.charAt(thirdBackslash + 1) != '\\') {
+                        // Has file/folder after share, include trailing backslash
+                        return filename.substring(0, thirdBackslash + 1);
+                    }
+                    // No file after share, don't include trailing backslash
+                    return filename.substring(0, thirdBackslash);
+                }
+                // No third backslash, path ends at share name
+                return filename + "\\";
+            }
             return filename;
         }
-        return filename.substring(0, extensionIndex);
+
+        // Check for Windows drive letter: C:\...
+        if (filename.length() >= 2 && filename.charAt(1) == ':') {
+            char drive = Character.toUpperCase(filename.charAt(0));
+            if ((drive >= 'A' && drive <= 'Z') || drive == '\\' || drive == '/') {
+                if (filename.length() >= 3 && (filename.charAt(2) == '\\' || filename.charAt(2) == '/')) {
+                    return filename.substring(0, 3);
+                }
+                return filename.substring(0, 2);
+            }
+        }
+
+        // Check for Unix absolute path: /...
+        if (filename.startsWith("/")) {
+            // Return just the root "/"
+            return "/";
+        }
+
+        // Relative path - no prefix
+        return "";
     }
 
     /**
@@ -314,7 +359,7 @@ public final class FilePathUtil {
      */
     public static String getSuffix(String filename) {
         if (filename == null) {
-            throw new IllegalArgumentException("Filename must not be null");
+            return null;
         }
         if (filename.isEmpty()) {
             return "";
@@ -322,7 +367,7 @@ public final class FilePathUtil {
         if (filename.equals(".") || filename.equals("..")) {
             return "";
         }
-        int extensionIndex = filename.lastIndexOf(EXTENSION_SEPARATOR);
+        int extensionIndex = filename.indexOf(EXTENSION_SEPARATOR);
         if (extensionIndex == -1 || extensionIndex == filename.length() - 1) {
             return "";
         }
@@ -349,7 +394,20 @@ public final class FilePathUtil {
      * @throws IllegalArgumentException if filename is null
      */
     public static String trimExtension(String filename) {
-        return getPrefix(filename);
+        if (filename == null) {
+            return null;
+        }
+        if (filename.isEmpty()) {
+            return "";
+        }
+        if (filename.equals(".") || filename.equals("..")) {
+            return filename;
+        }
+        int extensionIndex = filename.lastIndexOf(EXTENSION_SEPARATOR);
+        if (extensionIndex <= 0) {
+            return filename;
+        }
+        return filename.substring(0, extensionIndex);
     }
 
     /**
@@ -375,10 +433,10 @@ public final class FilePathUtil {
      */
     public static String getSubpath(String parent, String fileName) {
         if (parent == null) {
-            throw new IllegalArgumentException("Parent path must not be null");
+            return null;
         }
         if (fileName == null) {
-            throw new IllegalArgumentException("File name must not be null");
+            return null;
         }
         String normalizedParent = toUNIXPath(normalize(parent));
         String normalizedFileName = toUNIXPath(normalize(fileName));
@@ -407,7 +465,7 @@ public final class FilePathUtil {
      */
     public static boolean isExist(String path) {
         if (path == null) {
-            throw new IllegalArgumentException("Path must not be null");
+            return false;
         }
         try {
             return Files.exists(Paths.get(path));
@@ -430,7 +488,7 @@ public final class FilePathUtil {
      */
     public static boolean isDirectory(String path) {
         if (path == null) {
-            throw new IllegalArgumentException("Path must not be null");
+            return false;
         }
         try {
             return Files.isDirectory(Paths.get(path));
@@ -453,7 +511,7 @@ public final class FilePathUtil {
      */
     public static boolean isFile(String path) {
         if (path == null) {
-            throw new IllegalArgumentException("Path must not be null");
+            return false;
         }
         try {
             return Files.isRegularFile(Paths.get(path));
