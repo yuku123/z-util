@@ -97,6 +97,50 @@ public class ParamsConvertor {
     }
 
     /**
+     * 方法参数
+     *
+     * @param str descriptor中的参数部分，如 "ILjava/lang/String;)V" -> "ILjava/lang/String;"
+     * @return Java 参数列表字符串
+     */
+    public static String paramsConvertorMethodParams(String str) {
+        if (str == null || str.isEmpty()) {
+            return "";
+        }
+
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        while (i < str.length()) {
+            char c = str.charAt(i);
+            String type = parseType(str, i);
+            if (!result.toString().isEmpty()) {
+                result.append(", ");
+            }
+            result.append(paramsConvertorFieldType(type));
+            i += type.length();
+        }
+        return result.toString();
+    }
+
+    /**
+     * 解析类型描述符
+     */
+    private static String parseType(String str, int i) {
+        char c = str.charAt(i);
+        switch (c) {
+            case 'B': case 'C': case 'D': case 'F': case 'I':
+            case 'J': case 'S': case 'Z': case 'V':
+                return String.valueOf(c);
+            case 'L':
+                int semicolon = str.indexOf(';', i);
+                return str.substring(i, semicolon + 1);
+            case '[':
+                return String.valueOf(c) + parseType(str, i + 1);
+            default:
+                return String.valueOf(c);
+        }
+    }
+
+    /**
      * 方法的返回值类型
      *
      * @param str

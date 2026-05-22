@@ -1,7 +1,5 @@
 package com.zifang.util.proxy.a.decompile.app;
 
-import com.zifang.util.proxy.a.decompile.adapter.ClassFileAdapter;
-import com.zifang.util.proxy.a.decompile.bean.Class_info;
 import com.zifang.util.proxy.a.decompile.core.FileCreator;
 import com.zifang.util.proxy.a.decompile.core.SrcCreator;
 import com.zifang.util.proxy.a.resolver.ByteCodeResolver;
@@ -10,10 +8,9 @@ import com.zifang.util.proxy.a.model.ClassFile;
 /**
  * 反编译器入口类
  * <p>
- * 使用新的两阶段架构：
+ * 两阶段架构：
  * 1. ByteCodeResolver 解析字节码 → ClassFile
- * 2. ClassFileAdapter 转换 ClassFile → Class_info
- * 3. SrcCreator 生成 Java 源码
+ * 2. SrcCreator 生成 Java 源码
  */
 public class App {
 
@@ -27,21 +24,18 @@ public class App {
         try {
             // 1. 使用 ByteCodeResolver 解析字节码
             ClassFile classFile = ByteCodeResolver.parseFromFile(classPath);
-            
-            // 2. 使用 ClassFileAdapter 转换为 Class_info
-            Class_info classInfo = ClassFileAdapter.adapt(classFile);
-            
-            // 3. 使用 SrcCreator 生成 Java 源码
-            String src = SrcCreator.createJavaFileSrc(classInfo);
+
+            // 2. 使用 SrcCreator 直接生成 Java 源码
+            String src = SrcCreator.createJavaFileSrc(classFile);
             System.out.println(src);
-            
-            // 4. 如果指定了输出目录，则写入文件
+
+            // 3. 如果指定了输出目录，则写入文件
             if (outputDir != null && !outputDir.isEmpty()) {
                 String className = extractClassName(classFile.getClassName());
                 FileCreator.createFile(className, src, outputDir);
                 System.out.println("已生成文件: " + outputDir + "/" + className + ".java");
             }
-            
+
         } catch (Exception e) {
             System.err.println("反编译失败: " + e.getMessage());
             e.printStackTrace();
@@ -68,13 +62,10 @@ public class App {
             // 1. 使用 ByteCodeResolver 解析字节码
             ClassFile classFile = ByteCodeResolver.parseFromStream(
                 new java.io.ByteArrayInputStream(classData));
-            
-            // 2. 使用 ClassFileAdapter 转换为 Class_info
-            Class_info classInfo = ClassFileAdapter.adapt(classFile);
-            
-            // 3. 使用 SrcCreator 生成 Java 源码
-            return SrcCreator.createJavaFileSrc(classInfo);
-            
+
+            // 2. 使用 SrcCreator 直接生成 Java 源码
+            return SrcCreator.createJavaFileSrc(classFile);
+
         } catch (Exception e) {
             throw new RuntimeException("反编译失败", e);
         }
@@ -90,13 +81,10 @@ public class App {
         try {
             // 1. 使用 ByteCodeResolver 解析字节码
             ClassFile classFile = ByteCodeResolver.parseFromStream(inputStream);
-            
-            // 2. 使用 ClassFileAdapter 转换为 Class_info
-            Class_info classInfo = ClassFileAdapter.adapt(classFile);
-            
-            // 3. 使用 SrcCreator 生成 Java 源码
-            return SrcCreator.createJavaFileSrc(classInfo);
-            
+
+            // 2. 使用 SrcCreator 直接生成 Java 源码
+            return SrcCreator.createJavaFileSrc(classFile);
+
         } catch (Exception e) {
             throw new RuntimeException("反编译失败", e);
         }
@@ -115,10 +103,10 @@ public class App {
             if (is == null) {
                 throw new RuntimeException("找不到类: " + className);
             }
-            
+
             String src = decompile(is);
             System.out.println(src);
-            
+
         } catch (Exception e) {
             System.err.println("反编译失败: " + e.getMessage());
             e.printStackTrace();

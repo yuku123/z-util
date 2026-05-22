@@ -590,30 +590,28 @@ public class QRCodeEncoder {
     }
     
     private static void addFormatInfo(BitMatrix matrix, byte[] formatInfo, int size) {
-        // Format info: 15 bits placed around the three finder patterns in specific L-shapes
-        // Bit positions in formatInfo array follow standard MSB-first order:
-        // bits 0-4: first 5 bits (LSB is formatInfo[0])
-        // The 15 bits are placed in this order:
-        //   1. (8,y) for y = size-1 down to 0 — left of timing pattern
-        //   2. (x,8) for x = size-1 down to 0 — above timing pattern
-        // (some positions are skipped due to finder/separation pattern overlap)
+        // Format info: 15 bits placed in a fixed L-shape around finder patterns
+        // The 15 positions are (x,y) pairs, in order of bit index 0-14:
+        // bits 0-12: the L-shape around the top-left finder
+        // bits 13-14: continuation around bottom-left finder
 
+        // Row y=8, x=size-1 down to x=0 (15 cells, skipping x=6 which is timing pattern)
         int idx = 0;
-
-        // --- Left side: column x=8, from top (y=size-1) down to y=0 ---
-        for (int y = size - 1; y >= 0; y--) {
-            if (y == 6) continue; // timing pattern gap
-            matrix.set(8, y, (formatInfo[idx / 8] & (1 << (7 - (idx % 8)))) != 0);
-            idx++;
-            if (idx >= 15) break;
+        for (int x = size - 1; x >= 0; x--) {
+            if (x == 6) continue; // skip timing pattern column
+            if (idx < 15) {
+                matrix.set(x, 8, formatInfo[idx] == 1);
+                idx++;
+            }
         }
 
-        // --- Top side: row y=8, from left (x=size-1) down to x=0 ---
-        for (int x = size - 1; x >= 0; x--) {
-            if (x == 6) continue; // timing pattern gap
-            matrix.set(x, 8, (formatInfo[idx / 8] & (1 << (7 - (idx % 8)))) != 0);
-            idx++;
-            if (idx >= 15) break;
+        // Column x=8, y=size-1 down to y=7 (continuing the L-shape)
+        for (int y = size - 1; y >= 7; y--) {
+            if (y == 6) continue;
+            if (idx < 15) {
+                matrix.set(8, y, formatInfo[idx] == 1);
+                idx++;
+            }
         }
     }
     

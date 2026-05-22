@@ -344,6 +344,5 @@ public class PinyinGeneratorUtil {
         }
         int residue = m % 11;
         return String.valueOf(verCode[residue]);
-
     }
 }
