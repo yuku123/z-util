@@ -24,11 +24,11 @@ class LSTMTest {
         LSTM lstm = new LSTM(inputSize, hiddenSize, numLayers);
 
         // Create input: [seqLen, batch, inputSize]
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, (float)(rand.nextDouble() * 2 - 1));
         }
 
         // Forward pass
@@ -51,11 +51,11 @@ class LSTMTest {
         LSTM lstm = new LSTM(inputSize, hiddenSize, numLayers);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT32);
         Random rand = new Random(123);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, (float)(rand.nextDouble() * 2 - 1));
         }
 
         // Forward pass
@@ -85,18 +85,18 @@ class LSTMTest {
         LSTM lstm = new LSTM(inputSize, hiddenSize, numLayers);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, (float)(rand.nextDouble() * 2 - 1));
         }
 
         // Forward pass
         NdArray output = lstm.forward(input);
 
         // Create upstream gradient
-        NdArray gradOutput = NdArray.zeros(new Shape(seqLen, batchSize, hiddenSize), DType.FLOAT64);
+        NdArray gradOutput = NdArray.zeros(new Shape(seqLen, batchSize, hiddenSize), DType.FLOAT32);
         Object gradData = gradOutput.getData();
         for (int i = 0; i < gradOutput.size(); i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);

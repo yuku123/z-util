@@ -25,11 +25,11 @@ class ModuleTest {
         Sequential seq = new Sequential(dense1, relu, dense2);
 
         // Create input: batch size 2, 8 features
-        NdArray input = NdArray.zeros(new Shape(2, 8), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(2, 8), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Forward pass
@@ -50,18 +50,18 @@ class ModuleTest {
         Sequential seq = new Sequential(dense1, relu, dense2);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(2, 8), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(2, 8), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Forward pass
         NdArray output = seq.forward(input);
 
         // Create upstream gradient (same shape as output)
-        NdArray gradOutput = NdArray.zeros(new Shape(2, 8), DType.FLOAT64);
+        NdArray gradOutput = NdArray.zeros(new Shape(2, 8), DType.FLOAT32);
         Object gradData = gradOutput.getData();
         for (int i = 0; i < gradOutput.size(); i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);
@@ -83,11 +83,11 @@ class ModuleTest {
         Sequential seq = new Sequential(dense, dropout);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(2, 8), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(2, 8), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Test train mode

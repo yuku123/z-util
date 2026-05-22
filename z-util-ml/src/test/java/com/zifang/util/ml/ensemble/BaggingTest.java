@@ -25,7 +25,7 @@ class BaggingTest {
         for (int i = 0; i < flatX.length; i++) {
             flatX[i] = rand.nextDouble() * 10;
         }
-        NdArray X = NdArray.array(flatX, DType.FLOAT64).reshape(nSamples, nFeatures);
+        NdArray X = NdArray.array(flatX, DType.FLOAT32).reshape(nSamples, nFeatures);
 
         // Generate random labels (class indices 0, 1, 2)
         int[] y = new int[nSamples];
@@ -68,7 +68,7 @@ class BaggingTest {
             y[i] = 1;
         }
 
-        NdArray X = NdArray.array(flatX, DType.FLOAT64).reshape(nSamples, nFeatures);
+        NdArray X = NdArray.array(flatX, DType.FLOAT32).reshape(nSamples, nFeatures);
 
         // Fit Bagging
         Bagging bagging = new Bagging(10, 10, 2);
@@ -103,7 +103,7 @@ class BaggingTest {
         for (int i = 0; i < flatX.length; i++) {
             flatX[i] = rand.nextDouble();
         }
-        NdArray X = NdArray.array(flatX, DType.FLOAT64).reshape(nSamples, nFeatures);
+        NdArray X = NdArray.array(flatX, DType.FLOAT32).reshape(nSamples, nFeatures);
 
         int[] y = new int[nSamples];
         for (int i = 0; i < nSamples; i++) {

@@ -20,8 +20,8 @@ class ActivationsTest {
         ReLU relu = new ReLU();
 
         // Create input: [batch=2, features=5]
-        double[] values = {-2.0, -1.0, 0.0, 1.0, 2.0, -3.0, 0.5, 0.0, 0.1, 4.0};
-        NdArray input = NdArray.array(values, DType.FLOAT64).reshape(2, 5);
+        float[] values = {-2.0f, -1.0f, 0.0f, 1.0f, 2.0f, -3.0f, 0.5f, 0.0f, 0.1f, 4.0f};
+        NdArray input = NdArray.array(values, DType.FLOAT32).reshape(2, 5);
 
         // Forward pass
         NdArray output = relu.forward(input);
@@ -40,15 +40,15 @@ class ActivationsTest {
     void testReLUBackward() {
         ReLU relu = new ReLU();
 
-        double[] values = {-1.0, 0.5, 2.0};
-        NdArray input = NdArray.array(values, DType.FLOAT64).reshape(1, 3);
+        float[] values = {-1.0f, 0.5f, 2.0f};
+        NdArray input = NdArray.array(values, DType.FLOAT32).reshape(1, 3);
 
         // Forward pass
         relu.forward(input);
 
         // Upstream gradient (all ones)
-        double[] gradValues = {1.0, 1.0, 1.0};
-        NdArray gradOutput = NdArray.array(gradValues, DType.FLOAT64).reshape(1, 3);
+        float[] gradValues = {1.0f, 1.0f, 1.0f};
+        NdArray gradOutput = NdArray.array(gradValues, DType.FLOAT32).reshape(1, 3);
 
         // Backward pass
         NdArray gradInput = relu.backward(gradOutput);
@@ -62,8 +62,8 @@ class ActivationsTest {
     void testTanhForward() {
         Tanh tanh = new Tanh();
 
-        double[] values = {0.0, 1.0, -1.0, 0.5, -0.5};
-        NdArray input = NdArray.array(values, DType.FLOAT64).reshape(1, 5);
+        float[] values = {0.0f, 1.0f, -1.0f, 0.5f, -0.5f};
+        NdArray input = NdArray.array(values, DType.FLOAT32).reshape(1, 5);
 
         // Forward pass
         NdArray output = tanh.forward(input);
@@ -80,15 +80,15 @@ class ActivationsTest {
     void testTanhBackward() {
         Tanh tanh = new Tanh();
 
-        double[] values = {0.5, -0.5};
-        NdArray input = NdArray.array(values, DType.FLOAT64).reshape(1, 2);
+        float[] values = {0.5f, -0.5f};
+        NdArray input = NdArray.array(values, DType.FLOAT32).reshape(1, 2);
 
         // Forward pass
         tanh.forward(input);
 
         // Upstream gradient
-        double[] gradValues = {1.0, 1.0};
-        NdArray gradOutput = NdArray.array(gradValues, DType.FLOAT64).reshape(1, 2);
+        float[] gradValues = {1.0f, 1.0f};
+        NdArray gradOutput = NdArray.array(gradValues, DType.FLOAT32).reshape(1, 2);
 
         // Backward pass
         NdArray gradInput = tanh.backward(gradOutput);
@@ -107,11 +107,11 @@ class ActivationsTest {
         Tanh tanh = new Tanh();
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, (float)(rand.nextDouble() * 2 - 1));
         }
 
         // ReLU forward

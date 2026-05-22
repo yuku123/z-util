@@ -25,11 +25,11 @@ class PoolTest {
         MaxPool2d maxPool = new MaxPool2d(kernelSize, stride);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Forward pass
@@ -60,7 +60,7 @@ class PoolTest {
         //  [9, 10, 11, 12],
         //  [13, 14, 15, 16]]
         double[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
-        NdArray input = NdArray.array(values, DType.FLOAT64).reshape(batchSize, channels, height, width);
+        NdArray input = NdArray.array(values, DType.FLOAT32).reshape(batchSize, channels, height, width);
 
         // Forward pass
         NdArray output = maxPool.forward(input);
@@ -85,18 +85,18 @@ class PoolTest {
         MaxPool2d maxPool = new MaxPool2d(kernelSize, stride);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Forward pass
         NdArray output = maxPool.forward(input);
 
         // Create upstream gradient
-        NdArray gradOutput = NdArray.zeros(output.getShape(), DType.FLOAT64);
+        NdArray gradOutput = NdArray.zeros(output.getShape(), DType.FLOAT32);
         Object gradData = gradOutput.getData();
         for (int i = 0; i < gradOutput.size(); i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);
@@ -124,11 +124,11 @@ class PoolTest {
         AvgPool2d avgPool = new AvgPool2d(kernelSize, stride);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Forward pass
@@ -154,7 +154,7 @@ class PoolTest {
         AvgPool2d avgPool = new AvgPool2d(kernelSize, stride);
 
         // Create input with all ones
-        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT32);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
             com.zifang.util.numpy.Array.set(data, i, 4.0); // All values = 4
@@ -183,18 +183,18 @@ class PoolTest {
         AvgPool2d avgPool = new AvgPool2d(kernelSize, stride);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, channels, height, width), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Forward pass
         NdArray output = avgPool.forward(input);
 
         // Create upstream gradient
-        NdArray gradOutput = NdArray.zeros(output.getShape(), DType.FLOAT64);
+        NdArray gradOutput = NdArray.zeros(output.getShape(), DType.FLOAT32);
         Object gradData = gradOutput.getData();
         for (int i = 0; i < gradOutput.size(); i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);

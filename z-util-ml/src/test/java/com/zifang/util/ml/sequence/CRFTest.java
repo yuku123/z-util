@@ -20,7 +20,7 @@ public class CRFTest {
             {0.1, 0.4, 0.2, 1.0, 0.3}
         };
         
-        NdArray features = NdArray.array(flatten(featuresData), DType.FLOAT64).reshape(4, 5);
+        NdArray features = NdArray.array(flatten(featuresData), DType.FLOAT32).reshape(4, 5);
         int[] labels = new int[]{0, 1, 2, 1};
         
         // Fit should not throw
@@ -41,7 +41,7 @@ public class CRFTest {
             {0.2, 0.3, 0.7, 0.2}
         };
         
-        NdArray features = NdArray.array(flatten(featuresData), DType.FLOAT64).reshape(3, 4);
+        NdArray features = NdArray.array(flatten(featuresData), DType.FLOAT32).reshape(3, 4);
         
         int[] predictions = crf.predict(features);
         

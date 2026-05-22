@@ -25,7 +25,7 @@ class VotingTest {
         for (int i = 0; i < flatX.length; i++) {
             flatX[i] = rand.nextDouble() * 10;
         }
-        NdArray X = NdArray.array(flatX, DType.FLOAT64).reshape(nSamples, nFeatures);
+        NdArray X = NdArray.array(flatX, DType.FLOAT32).reshape(nSamples, nFeatures);
 
         int[] y = new int[nSamples];
         for (int i = 0; i < nSamples; i++) {
@@ -65,7 +65,7 @@ class VotingTest {
         for (int i = 0; i < flatX.length; i++) {
             flatX[i] = rand.nextDouble() * 10;
         }
-        NdArray X = NdArray.array(flatX, DType.FLOAT64).reshape(nSamples, nFeatures);
+        NdArray X = NdArray.array(flatX, DType.FLOAT32).reshape(nSamples, nFeatures);
 
         int[] y = new int[nSamples];
         for (int i = 0; i < nSamples; i++) {

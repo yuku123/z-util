@@ -19,7 +19,7 @@ public class OneClassSVMTest {
             data[i][1] = Math.random() * 2 - 1;
         }
         
-        NdArray X = NdArray.array(flatten(data), DType.FLOAT64).reshape(50, 2);
+        NdArray X = NdArray.array(flatten(data), DType.FLOAT32).reshape(50, 2);
         
         // Fit should not throw
         ocsvm.fit(X);
@@ -35,7 +35,7 @@ public class OneClassSVMTest {
             trainData[i][1] = Math.random() * 2 - 1;
         }
         
-        NdArray Xtrain = NdArray.array(flatten(trainData), DType.FLOAT64).reshape(50, 2);
+        NdArray Xtrain = NdArray.array(flatten(trainData), DType.FLOAT32).reshape(50, 2);
         ocsvm.fit(Xtrain);
         
         // Create test data
@@ -45,7 +45,7 @@ public class OneClassSVMTest {
             testData[i][1] = Math.random() * 2 - 1;
         }
         
-        NdArray Xtest = NdArray.array(flatten(testData), DType.FLOAT64).reshape(10, 2);
+        NdArray Xtest = NdArray.array(flatten(testData), DType.FLOAT32).reshape(10, 2);
         int[] predictions = ocsvm.predict(Xtest);
         
         assertNotNull(predictions);
@@ -68,7 +68,7 @@ public class OneClassSVMTest {
             data[i][2] = Math.random() * 2 - 1;
         }
         
-        NdArray X = NdArray.array(flatten(data), DType.FLOAT64).reshape(30, 3);
+        NdArray X = NdArray.array(flatten(data), DType.FLOAT32).reshape(30, 3);
         ocsvm.fit(X);
         
         int[] predictions = ocsvm.predict(X);

@@ -21,11 +21,11 @@ class DropoutTest {
         Dropout dropout = new Dropout(0.5f);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Train mode - should apply dropout
@@ -75,11 +75,11 @@ class DropoutTest {
         Dropout dropout = new Dropout(0.5f);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Forward pass
@@ -98,11 +98,11 @@ class DropoutTest {
         Dropout dropout = new Dropout(0.5f);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Train mode
@@ -112,7 +112,7 @@ class DropoutTest {
         NdArray output = dropout.forward(input);
 
         // Create upstream gradient
-        NdArray gradOutput = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT64);
+        NdArray gradOutput = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT32);
         Object gradData = gradOutput.getData();
         for (int i = 0; i < gradOutput.size(); i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);
@@ -136,11 +136,11 @@ class DropoutTest {
         dropout.train();
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT64);
+        NdArray input = NdArray.zeros(new Shape(batchSize, features), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble());
+            com.zifang.util.numpy.Array.set(data, i, (float)rand.nextDouble());
         }
 
         // Forward pass

@@ -24,7 +24,7 @@ class StackingTest {
         for (int i = 0; i < flatX.length; i++) {
             flatX[i] = rand.nextDouble() * 10;
         }
-        NdArray X = NdArray.array(flatX, DType.FLOAT64).reshape(nSamples, nFeatures);
+        NdArray X = NdArray.array(flatX, DType.FLOAT32).reshape(nSamples, nFeatures);
 
         int[] y = new int[nSamples];
         for (int i = 0; i < nSamples; i++) {
@@ -69,7 +69,7 @@ class StackingTest {
             flatX[i * nFeatures + 1] = 3 + rand.nextGaussian() * 0.5;
         }
 
-        NdArray X = NdArray.array(flatX, DType.FLOAT64).reshape(nSamples, nFeatures);
+        NdArray X = NdArray.array(flatX, DType.FLOAT32).reshape(nSamples, nFeatures);
 
         int[] y = new int[nSamples];
         for (int i = 0; i < nSamples / 2; i++) y[i] = 0;

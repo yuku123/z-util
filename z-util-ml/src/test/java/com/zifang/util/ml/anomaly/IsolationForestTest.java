@@ -19,7 +19,7 @@ public class IsolationForestTest {
             data[i][1] = Math.random() * 2 - 1;
         }
         
-        NdArray X = NdArray.array(flatten(data), DType.FLOAT64).reshape(100, 2);
+        NdArray X = NdArray.array(flatten(data), DType.FLOAT32).reshape(100, 2);
         
         // Fit should not throw
         isoForest.fit(X);
@@ -35,7 +35,7 @@ public class IsolationForestTest {
             trainData[i][1] = Math.random() * 2 - 1;
         }
         
-        NdArray Xtrain = NdArray.array(flatten(trainData), DType.FLOAT64).reshape(50, 2);
+        NdArray Xtrain = NdArray.array(flatten(trainData), DType.FLOAT32).reshape(50, 2);
         isoForest.fit(Xtrain);
         
         // Create test data
@@ -45,7 +45,7 @@ public class IsolationForestTest {
             testData[i][1] = Math.random() * 2 - 1;
         }
         
-        NdArray Xtest = NdArray.array(flatten(testData), DType.FLOAT64).reshape(10, 2);
+        NdArray Xtest = NdArray.array(flatten(testData), DType.FLOAT32).reshape(10, 2);
         int[] predictions = isoForest.predict(Xtest);
         
         assertNotNull(predictions);
@@ -67,7 +67,7 @@ public class IsolationForestTest {
             data[i][1] = Math.random() * 2 - 1;
         }
         
-        NdArray X = NdArray.array(flatten(data), DType.FLOAT64).reshape(50, 2);
+        NdArray X = NdArray.array(flatten(data), DType.FLOAT32).reshape(50, 2);
         isoForest.fit(X);
         
         double[] scores = isoForest.score(X);

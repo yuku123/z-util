@@ -18,7 +18,7 @@ class OptimizerTest {
         int paramSize = 8;
 
         // Create a parameter
-        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
+        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
@@ -30,7 +30,7 @@ class OptimizerTest {
         optimizer.addParameter("weight", param);
 
         // Create gradient (all ones)
-        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
+        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
         Object gradData = grad.getData();
         for (int i = 0; i < paramSize; i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);
@@ -39,7 +39,7 @@ class OptimizerTest {
 
         // Get initial parameter values
         Object paramData = param.getData();
-        double[] initialValues = new float[paramSize];
+        double[] initialValues = new double[paramSize];
         for (int i = 0; i < paramSize; i++) {
             initialValues[i] = (double) com.zifang.util.numpy.Array.get(paramData, i);
         }
@@ -60,7 +60,7 @@ class OptimizerTest {
         int paramSize = 8;
 
         // Create a parameter
-        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
+        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
@@ -72,7 +72,7 @@ class OptimizerTest {
         optimizer.addParameter("weight", param);
 
         // Create gradient (all ones)
-        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
+        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
         Object gradData = grad.getData();
         for (int i = 0; i < paramSize; i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);
@@ -104,7 +104,7 @@ class OptimizerTest {
         int paramSize = 8;
 
         // Create a parameter
-        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
+        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
@@ -116,7 +116,7 @@ class OptimizerTest {
         optimizer.addParameter("weight", param);
 
         // Set gradient
-        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
+        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
         Object gradData = grad.getData();
         for (int i = 0; i < paramSize; i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);
@@ -136,7 +136,7 @@ class OptimizerTest {
         int paramSize = 8;
 
         // Create a parameter
-        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
+        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
@@ -148,7 +148,7 @@ class OptimizerTest {
         optimizer.addParameter("weight", param);
 
         // Set gradient
-        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
+        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
         Object gradData = grad.getData();
         for (int i = 0; i < paramSize; i++) {
             com.zifang.util.numpy.Array.set(gradData, i, 1.0);
