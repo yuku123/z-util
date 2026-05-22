@@ -3,9 +3,9 @@ package com.zifang.util.numpy;
 /**
  * Internal helper class for array operations
  */
-final class Array {
+public final class Array {
 
-    static Object createZeroArray(DType dtype, int size) {
+    public static Object createZeroArray(DType dtype, int size) {
         switch (dtype) {
             case INT8: return new byte[size];
             case INT16: return new short[size];
@@ -19,7 +19,7 @@ final class Array {
         }
     }
 
-    static Object createOneArray(DType dtype, int size) {
+    public static Object createOneArray(DType dtype, int size) {
         switch (dtype) {
             case INT8:
                 byte[] byteOne = new byte[size];
@@ -60,7 +60,7 @@ final class Array {
         }
     }
 
-    static Object arange(DType dtype, int start, int stop, int step, int size) {
+    public static Object arange(DType dtype, int start, int stop, int step, int size) {
         switch (dtype) {
             case INT8:
                 byte[] byteArr = new byte[size];
@@ -93,7 +93,7 @@ final class Array {
         }
     }
 
-    static Object get(Object array, int index) {
+    public static Object get(Object array, int index) {
         if (array instanceof byte[]) return ((byte[]) array)[index];
         if (array instanceof short[]) return ((short[]) array)[index];
         if (array instanceof int[]) return ((int[]) array)[index];
@@ -106,7 +106,7 @@ final class Array {
         throw new IllegalArgumentException("Unsupported array type");
     }
 
-    static void set(Object array, int index, Object value) {
+    public static void set(Object array, int index, Object value) {
         if (array instanceof byte[] && value instanceof Number) {
             ((byte[]) array)[index] = ((Number) value).byteValue();
         } else if (array instanceof short[] && value instanceof Number) {
@@ -130,7 +130,7 @@ final class Array {
         }
     }
 
-    static Object copy(Object src, int size, DType dtype) {
+    public static Object copy(Object src, int size, DType dtype) {
         if (src instanceof byte[]) {
             return ((byte[]) src).clone();
         }
@@ -161,12 +161,12 @@ final class Array {
         throw new IllegalArgumentException("Unsupported array type");
     }
 
-    static void copy(Object src, int srcIdx, Object dst, int dstIdx) {
+    public static void copy(Object src, int srcIdx, Object dst, int dstIdx) {
         Object value = get(src, srcIdx);
         set(dst, dstIdx, value);
     }
 
-    static void fill(Object array, Object value, int size) {
+    public static void fill(Object array, Object value, int size) {
         for (int i = 0; i < size; i++) {
             set(array, i, value);
         }
@@ -228,7 +228,7 @@ final class Array {
         return 0;
     }
 
-    static Object transpose(Object data, int[] shape, int... axes) {
+    public static Object transpose(Object data, int[] shape, int... axes) {
         int ndim = shape.length;
         int size = 1;
         for (int dim : shape) size *= dim;

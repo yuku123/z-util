@@ -4,7 +4,7 @@ import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.Shape;
 
-/import java.util.Random;
+import java.util.Random;
 
 /**
  * Dropout layer - regularization technique

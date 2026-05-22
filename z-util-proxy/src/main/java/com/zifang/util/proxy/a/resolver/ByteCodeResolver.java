@@ -11,6 +11,8 @@ import com.zifang.util.proxy.a.model.readtype.U2;
 import com.zifang.util.proxy.a.model.readtype.U4;
 
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +40,8 @@ import java.util.List;
  */
 public class ByteCodeResolver {
 
-    private InputStream inputStream;
-    private ClassFile classFile;
+    private final InputStream inputStream;
+    private final ClassFile classFile;
 
     public ByteCodeResolver(InputStream inputStream) {
         this.inputStream = inputStream;
@@ -53,7 +55,7 @@ public class ByteCodeResolver {
      * @return 解析后的ClassFile对象
      */
     public static ClassFile parseFromFile(String filePath) {
-        try (InputStream is = new java.io.FileInputStream(filePath)) {
+        try (InputStream is = Files.newInputStream(Paths.get(filePath))) {
             return new ByteCodeResolver(is).parse();
         } catch (Exception e) {
             throw new RuntimeException("解析字节码文件失败: " + filePath, e);
@@ -245,8 +247,7 @@ public class ByteCodeResolver {
         // 先读取字段数量
         U2 fieldsCount = U2.read(inputStream);
         // 字段表解析器会读取各个字段
-        FieldTable fieldInfo = new FieldTable(inputStream, classFile.poolInfo.getPoolList(), fieldsCount.value);
-        classFile.fieldInfo = fieldInfo;
+        classFile.fieldInfo = new FieldTable(inputStream, classFile.poolInfo.getPoolList(), fieldsCount.value);
     }
 
     /**
@@ -259,7 +260,7 @@ public class ByteCodeResolver {
         U2 methodsCount = U2.read(inputStream);
         // 方法表解析器会读取各个方法
         MethodTable methodInfo = new MethodTable(inputStream, classFile.poolInfo.getPoolList(), methodsCount.value);
-        classFile.methodInfo = methodInfo;
+        classFile.setMethodInfo(methodInfo);
     }
 
     /**

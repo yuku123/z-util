@@ -100,4 +100,93 @@ public class ClassFile {
                 ", constantPoolSize=" + (constantPoolSize != null ? constantPoolSize.value : 0) +
                 '}';
     }
+
+
+    public U4 getMagic() {
+        return magic;
+    }
+
+    public void setMagic(U4 magic) {
+        this.magic = magic;
+    }
+
+    public U2 getMinorVersion() {
+        return minorVersion;
+    }
+
+    public void setMinorVersion(U2 minorVersion) {
+        this.minorVersion = minorVersion;
+    }
+
+    public U2 getMajorVersion() {
+        return majorVersion;
+    }
+
+    public void setMajorVersion(U2 majorVersion) {
+        this.majorVersion = majorVersion;
+    }
+
+    public U2 getConstantPoolSize() {
+        return constantPoolSize;
+    }
+
+    public void setConstantPoolSize(U2 constantPoolSize) {
+        this.constantPoolSize = constantPoolSize;
+    }
+
+    public ConstantPoolInfo getPoolInfo() {
+        return poolInfo;
+    }
+
+    public void setPoolInfo(ConstantPoolInfo poolInfo) {
+        this.poolInfo = poolInfo;
+    }
+
+    public U2 getAccessFlag() {
+        return accessFlag;
+    }
+
+    public void setAccessFlag(U2 accessFlag) {
+        this.accessFlag = accessFlag;
+    }
+
+    public U2 getClassIndex() {
+        return classIndex;
+    }
+
+    public void setClassIndex(U2 classIndex) {
+        this.classIndex = classIndex;
+    }
+
+    public U2 getSuperClassIndex() {
+        return superClassIndex;
+    }
+
+    public void setSuperClassIndex(U2 superClassIndex) {
+        this.superClassIndex = superClassIndex;
+    }
+
+    public InterfaceIndex getInterfaceIndex() {
+        return interfaceIndex;
+    }
+
+    public void setInterfaceIndex(InterfaceIndex interfaceIndex) {
+        this.interfaceIndex = interfaceIndex;
+    }
+
+    public FieldTable getFieldInfo() {
+        return fieldInfo;
+    }
+
+    public void setFieldInfo(FieldTable fieldInfo) {
+        this.fieldInfo = fieldInfo;
+    }
+
+    public MethodTable getMethodInfo() {
+        return methodInfo;
+    }
+
+    public void setMethodInfo(MethodTable methodInfo) {
+        this.methodInfo = methodInfo;
+    }
 }

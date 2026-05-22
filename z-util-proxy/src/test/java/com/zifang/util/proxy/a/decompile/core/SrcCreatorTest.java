@@ -9,83 +9,107 @@ import java.io.InputStream;
 import static org.junit.Assert.*;
 
 /**
- * SrcCreator 测试类
- * <p>
- * 测试将 ClassFile 反编译为 Java 源代码的功能。
+ * SrcCreator 反编译测试
  */
 public class SrcCreatorTest {
 
     /**
-     * 测试反编译简单类
+     * 测试简单类的反编译
      */
     @Test
-    public void testDecompileSimpleClass() {
+    public void testSimpleClassDecompile() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
-        assertNotNull("测试类字节码资源未找到", is);
-
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);
-        assertNotNull("ClassFile 不应为 null", classFile);
-
         String src = SrcCreator.createJavaFileSrc(classFile);
-        assertNotNull("生成的源码不应为 null", src);
-        assertFalse("生成的源码不应为空", src.isEmpty());
 
-        // 验证源码包含基本结构
-        assertTrue("应包含 package 声明", src.contains("package"));
-        assertTrue("应包含 class 声明", src.contains("class"));
+        // 验证基本结构
+        assertNotNull(src);
+        assertTrue(src.contains("package testclass;"));
+        assertTrue(src.contains("public class TestClassParse1"));
 
-        // 打印生成的源码以便人工验证
+        // 验证字段
+        assertTrue(src.contains("public static int i;"));
+        assertTrue(src.contains("public int n;"));
+        assertTrue(src.contains("public static final int m;"));
+
+        // 验证构造方法中的字段赋值
+        assertTrue(src.contains("this.n = 1;"));
+
+        // 验证方法体
+        assertTrue(src.contains("j = 1;"));
+        assertTrue(src.contains("return;"));
+    }
+
+    /**
+     * 测试方法体生成 - 局部变量赋值
+     */
+    @Test
+    public void testLocalVariableAssignment() {
+        InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
+        ClassFile classFile = ByteCodeResolver.parseFromStream(is);
+        String src = SrcCreator.createJavaFileSrc(classFile);
+
+        // 验证 method() 方法中的 j = 1
+        assertTrue(src.contains("j = 1;"));
+    }
+
+    /**
+     * 测试方法体生成 - 字段赋值
+     */
+    @Test
+    public void testFieldAssignment() {
+        InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
+        ClassFile classFile = ByteCodeResolver.parseFromStream(is);
+        String src = SrcCreator.createJavaFileSrc(classFile);
+
+        // 验证构造方法中的 this.n = 1
+        assertTrue(src.contains("this.n = 1;"));
+    }
+
+    /**
+     * 测试方法体生成 - return 语句
+     */
+    @Test
+    public void testReturnStatement() {
+        InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
+        ClassFile classFile = ByteCodeResolver.parseFromStream(is);
+        String src = SrcCreator.createJavaFileSrc(classFile);
+
+        // 验证所有方法都有 return
+        assertNotNull(src);
+        // method() 有 return
+        assertTrue(src.contains("return;"));
+    }
+
+    /**
+     * 测试方法体生成 - 空方法
+     */
+    @Test
+    public void testEmptyMethod() {
+        InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
+        ClassFile classFile = ByteCodeResolver.parseFromStream(is);
+        String src = SrcCreator.createJavaFileSrc(classFile);
+
+        // 验证 run() 方法存在（即使它是空的）
+        assertTrue(src.contains("public void run()"));
+    }
+
+    /**
+     * 测试字节码解析和反编译的集成
+     */
+    @Test
+    public void testBytecodeToSource() {
+        InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
+        ClassFile classFile = ByteCodeResolver.parseFromStream(is);
+        String src = SrcCreator.createJavaFileSrc(classFile);
+
+        // 输出便于调试
         System.out.println("=== 生成的源码 ===");
         System.out.println(src);
 
-        try {
-            is.close();
-        } catch (Exception e) {
-            // 忽略关闭异常
-        }
-    }
-
-    /**
-     * 测试生成的代码包含正确的方法签名
-     */
-    @Test
-    public void testMethodSignatureGeneration() {
-        InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
-        assertNotNull("测试类字节码资源未找到", is);
-
-        ClassFile classFile = ByteCodeResolver.parseFromStream(is);
-        String src = SrcCreator.createJavaFileSrc(classFile);
-
-        // 验证包含方法定义（可能是 <init> 或其他方法）
-        assertTrue("应包含方法定义（括号）", src.contains("(") && src.contains(")"));
-
-        try {
-            is.close();
-        } catch (Exception e) {
-            // 忽略关闭异常
-        }
-    }
-
-    /**
-     * 测试字段生成
-     */
-    @Test
-    public void testFieldGeneration() {
-        InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
-        assertNotNull("测试类字节码资源未找到", is);
-
-        ClassFile classFile = ByteCodeResolver.parseFromStream(is);
-        String src = SrcCreator.createJavaFileSrc(classFile);
-
-        // 检查是否有字段声明（如果有的话）
-        // TestClassParse1 可能没有字段，所以这不是强制要求
-        System.out.println("=== 生成的字段 ===");
-        System.out.println(src);
-
-        try {
-            is.close();
-        } catch (Exception e) {
-            // 忽略关闭异常
-        }
+        // 基本验证
+        assertNotNull(src);
+        assertTrue(src.length() > 0);
+        assertTrue(src.contains("class TestClassParse1"));
     }
 }
