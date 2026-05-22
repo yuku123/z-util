@@ -4,6 +4,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
 import java.lang.management.ThreadMXBean;
+import java.lang.management.ThreadInfo;
 import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.RuntimeMXBean;
 import java.lang.management.ClassLoadingMXBean;
@@ -162,16 +163,9 @@ public class MetricsCollector {
         registry.register("os.systemloadaverage", MetricsSnapshot.Category.OS,
                 () -> osMXBean.getSystemLoadAverage(), "系统平均负载");
 
-        // 系统内存 (需要兼容处理)
+        // 系统内存 (JVM 最大堆内存)
         registry.register("os.memory.total", MetricsSnapshot.Category.OS,
-                () -> {
-                    try {
-                        Map<String, Object> mem = osMXBean.getSystemProperties();
-                        return Runtime.getRuntime().maxMemory();
-                    } catch (Exception e) {
-                        return -1;
-                    }
-                }, "系统总内存", "bytes");
+                () -> Runtime.getRuntime().maxMemory(), "系统总内存", "bytes");
 
         registry.setEnabled(true);
     }
@@ -213,27 +207,36 @@ public class MetricsCollector {
         // 线程状态分布
         registry.register("jvm.thread.states.runnable", MetricsSnapshot.Category.THREAD,
                 () -> {
-                    long[] counts = threadMXBean.getThreadInfo(threadMXBean.getAllThreadIds())
-                            .stream()
-                            .filter(t -> t != null && t.getThreadState() == Thread.State.RUNNABLE)
-                            .count();
-                    return counts;
+                    ThreadInfo[] infos = threadMXBean.getThreadInfo(threadMXBean.getAllThreadIds());
+                    long count = 0;
+                    for (ThreadInfo info : infos) {
+                        if (info != null && info.getThreadState() == Thread.State.RUNNABLE) {
+                            count++;
+                        }
+                    }
+                    return count;
                 }, "RUNNABLE 线程数量");
         registry.register("jvm.thread.states.waiting", MetricsSnapshot.Category.THREAD,
                 () -> {
-                    long[] counts = threadMXBean.getThreadInfo(threadMXBean.getAllThreadIds())
-                            .stream()
-                            .filter(t -> t != null && t.getThreadState() == Thread.State.WAITING)
-                            .count();
-                    return counts;
+                    ThreadInfo[] infos = threadMXBean.getThreadInfo(threadMXBean.getAllThreadIds());
+                    long count = 0;
+                    for (ThreadInfo info : infos) {
+                        if (info != null && info.getThreadState() == Thread.State.WAITING) {
+                            count++;
+                        }
+                    }
+                    return count;
                 }, "WAITING 线程数量");
         registry.register("jvm.thread.states.blocked", MetricsSnapshot.Category.THREAD,
                 () -> {
-                    long[] counts = threadMXBean.getThreadInfo(threadMXBean.getAllThreadIds())
-                            .stream()
-                            .filter(t -> t != null && t.getThreadState() == Thread.State.BLOCKED)
-                            .count();
-                    return counts;
+                    ThreadInfo[] infos = threadMXBean.getThreadInfo(threadMXBean.getAllThreadIds());
+                    long count = 0;
+                    for (ThreadInfo info : infos) {
+                        if (info != null && info.getThreadState() == Thread.State.BLOCKED) {
+                            count++;
+                        }
+                    }
+                    return count;
                 }, "BLOCKED 线程数量");
 
         registry.setEnabled(true);

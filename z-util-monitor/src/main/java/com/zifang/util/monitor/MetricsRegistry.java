@@ -81,6 +81,13 @@ public class MetricsRegistry {
     }
 
     /**
+     * 注册一个指标（带描述）
+     */
+    public void register(String name, MetricsSnapshot.Category category, Supplier<Object> provider, String description) {
+        register(name, category, provider, description, null);
+    }
+
+    /**
      * 注销一个指标
      */
     public void unregister(String name) {

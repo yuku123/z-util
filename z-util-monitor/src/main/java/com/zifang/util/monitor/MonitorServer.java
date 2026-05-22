@@ -20,17 +20,15 @@ import java.util.concurrent.Executors;
  *
  * <h3>使用示例：</h3>
  * <pre>{@code
- * // 创建并启动服务器
+ * // 创建并启动服务器（注册所有内置指标）
  * MonitorServer server = MonitorServer.builder()
  *     .port(8849)
- *     .enableJvm()      // 启用 JVM 指标
- *     .enableOs()       // 启用 OS 指标
- *     .enableThread()   // 启用线程指标
+ *     .registerAll()  // 注册 JVM/OS/线程等内置指标
  *     .build()
  *     .start();
  *
  * // 注册自定义指标
- * server.register("myapp.counter", () -> MyCounter.getValue(), "自定义计数器");
+ * server.register("myapp.counter", () -> MyCounter.getValue(), "自定义计数器", "次");
  *
  * // 停止服务器
  * server.stop();
@@ -125,39 +123,7 @@ public class MonitorServer {
         return started;
     }
 
-    // ========== 内置指标启用方法 ==========
-
-    /**
-     * 启用所有内置指标（JVM、OS、线程）
-     */
-    public MonitorServer enableAll() {
-        collector.enableAll();
-        return this;
-    }
-
-    /**
-     * 启用 JVM 指标
-     */
-    public MonitorServer enableJvm() {
-        collector.enableJvm();
-        return this;
-    }
-
-    /**
-     * 启用操作系统指标
-     */
-    public MonitorServer enableOs() {
-        collector.enableOs();
-        return this;
-    }
-
-    /**
-     * 启用线程指标
-     */
-    public MonitorServer enableThread() {
-        collector.enableThread();
-        return this;
-    }
+    // ========== 注册方法 ==========
 
     /**
      * 注册自定义指标
@@ -256,44 +222,25 @@ public class MonitorServer {
 
     public static class Builder {
         private int port = DEFAULT_PORT;
-        private boolean enableJvm = false;
-        private boolean enableOs = false;
-        private boolean enableThread = false;
+        private boolean registerAll = false;
 
         public Builder port(int port) {
             this.port = port;
             return this;
         }
 
-        public Builder enableJvm() {
-            this.enableJvm = true;
+        /**
+         * 注册所有内置指标（JVM、OS、线程）
+         */
+        public Builder registerAll() {
+            this.registerAll = true;
             return this;
-        }
-
-        public Builder enableOs() {
-            this.enableOs = true;
-            return this;
-        }
-
-        public Builder enableThread() {
-            this.enableThread = true;
-            return this;
-        }
-
-        public Builder enableAll() {
-            return enableJvm().enableOs().enableThread();
         }
 
         public MonitorServer build() {
             MonitorServer server = new MonitorServer(port);
-            if (enableJvm) {
-                server.collector.enableJvm();
-            }
-            if (enableOs) {
-                server.collector.enableOs();
-            }
-            if (enableThread) {
-                server.collector.enableThread();
+            if (registerAll) {
+                server.collector.enableAll();
             }
             return server;
         }

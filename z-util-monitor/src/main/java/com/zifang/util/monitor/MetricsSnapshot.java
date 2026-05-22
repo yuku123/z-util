@@ -14,17 +14,23 @@ public class MetricsSnapshot {
     private final Object value;
     private final String description;
     private final String unit;
+    private final Category category;
 
     public MetricsSnapshot(String name, Object value) {
-        this(name, value, null, null);
+        this(name, value, null, null, null);
     }
 
     public MetricsSnapshot(String name, Object value, String description, String unit) {
+        this(name, value, description, unit, null);
+    }
+
+    public MetricsSnapshot(String name, Object value, String description, String unit, Category category) {
         this.timestamp = System.currentTimeMillis();
         this.name = name;
         this.value = value;
         this.description = description;
         this.unit = unit;
+        this.category = category;
     }
 
     public long getTimestamp() {
@@ -45,6 +51,10 @@ public class MetricsSnapshot {
 
     public String getUnit() {
         return unit;
+    }
+
+    public MetricsSnapshot.Category getCategory() {
+        return category;
     }
 
     /**
