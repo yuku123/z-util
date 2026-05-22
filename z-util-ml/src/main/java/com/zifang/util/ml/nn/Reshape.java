@@ -60,7 +60,7 @@ public class Reshape extends Module {
     @Override
     public NdArray backward(NdArray gradOutput) {
         // Reshape back to input shape (which is stored as original shape)
-        return gradOutput.reshape(gradOutput.getShape());
+        return gradOutput.reshape(gradOutput.getShape().getDimensions());
     }
     
     public int[] getTargetShape() {

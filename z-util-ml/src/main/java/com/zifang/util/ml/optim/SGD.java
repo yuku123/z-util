@@ -54,7 +54,7 @@ public class SGD extends Optimizer {
             // Apply weight decay (L2 regularization)
             NdArray effectiveGrad = grad;
             if (weightDecay > 0) {
-                effectiveGrad = addScalar(multiply(param, weightDecay), grad);
+                effectiveGrad = add(multiply(param, weightDecay), grad);
             }
             
             if (momentum > 0) {
@@ -70,15 +70,15 @@ public class SGD extends Optimizer {
                     // Nesterov accelerated gradient
                     // buf = momentum * buf + grad
                     // param = param - (momentum * buf + lr * grad)
-                    NdArray newBuf = addScalar(multiply(buf, momentum), effectiveGrad);
+                    NdArray newBuf = add(multiply(buf, momentum), effectiveGrad);
                     state.put(momentumKey, newBuf);
-                    NdArray update = addScalar(multiply(buf, momentum), effectiveGrad);
+                    NdArray update = add(multiply(buf, momentum), effectiveGrad);
                     param = subtract(param, multiply(update, learningRate));
                 } else {
                     // Standard momentum
                     // buf = momentum * buf + grad
                     // param = param - lr * buf
-                    NdArray newBuf = addScalar(multiply(buf, momentum), effectiveGrad);
+                    NdArray newBuf = add(multiply(buf, momentum), effectiveGrad);
                     state.put(momentumKey, newBuf);
                     param = subtract(param, multiply(newBuf, learningRate));
                 }
@@ -133,6 +133,10 @@ public class SGD extends Optimizer {
     
     private NdArray addScalar(NdArray a, double scalar) {
         return elementWiseOp(a, scalar, (x, s) -> ((Number) x).doubleValue() + s);
+    }
+    
+    private NdArray add(NdArray a, NdArray b) {
+        return elementWiseOp2(a, b, (x, y) -> ((Number) x).doubleValue() + ((Number) y).doubleValue());
     }
     
     private NdArray subtract(NdArray a, NdArray b) {

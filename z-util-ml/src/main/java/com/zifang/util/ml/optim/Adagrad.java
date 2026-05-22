@@ -66,7 +66,7 @@ public class Adagrad extends Optimizer {
             state.put(sumKey, newGradSum);
             
             // Compute update: grad / (sqrt(grad_sum) + eps)
-            NdArray denom = add(sqrt(newGradSum), eps);
+            NdArray denom = addScalar(sqrt(newGradSum), eps);
             NdArray update = divide(effectiveGrad, denom);
             
             // param = param - lr * update
@@ -127,6 +127,10 @@ public class Adagrad extends Optimizer {
     
     private NdArray scalarOp(NdArray input, double scalar) {
         return elementWiseOp(input, scalar, (x, s) -> ((Number) x).doubleValue() * s);
+    }
+    
+    private NdArray addScalar(NdArray a, double scalar) {
+        return elementWiseOp(a, scalar, (x, s) -> ((Number) x).doubleValue() + s);
     }
     
     private NdArray elementWiseOp(NdArray input, double scalar, Op op) {

@@ -1,7 +1,7 @@
 package com.zifang.util.visuallization.chart;
 
-import com.zifang.util.ai.ga.Population;
-import com.zifang.util.ai.ga.Individual;
+import com.zifang.util.ml.ga.Population;
+import com.zifang.util.ml.ga.Individual;
 
 import java.util.ArrayList;
 import java.util.List;

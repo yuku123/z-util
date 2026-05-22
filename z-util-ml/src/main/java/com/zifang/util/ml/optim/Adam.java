@@ -101,7 +101,7 @@ public class Adam extends Optimizer {
             // Compute update
             // update = lr * m_hat / (sqrt(v_hat) + eps)
             NdArray vHatSqrt = sqrt(vHat);
-            NdArray denom = add(vHatSqrt, eps);
+            NdArray denom = addScalar(vHatSqrt, eps);
             NdArray update = scalarOp(mHat, lr / 1.0);
             NdArray finalUpdate = divide(update, denom);
             
@@ -195,6 +195,10 @@ public class Adam extends Optimizer {
     
     private NdArray scalarOp(NdArray input, double scalar) {
         return elementWiseOp(input, scalar, (x, s) -> ((Number) x).doubleValue() * s);
+    }
+    
+    private NdArray addScalar(NdArray a, double scalar) {
+        return elementWiseOp(a, scalar, (x, s) -> ((Number) x).doubleValue() + s);
     }
     
     private NdArray elementWiseOp(NdArray input, double scalar, Op op) {

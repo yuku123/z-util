@@ -88,7 +88,7 @@ public class RMSprop extends Optimizer {
             }
             
             // Compute update: grad / (sqrt(avg) + eps)
-            NdArray avgSqrt = sqrt(add(max(avg, eps), eps));
+            NdArray avgSqrt = sqrt(addScalar(sqrt(max(avg, eps)), eps));
             NdArray update = divide(effectiveGrad, avgSqrt);
             
             if (momentum > 0) {
@@ -192,6 +192,10 @@ public class RMSprop extends Optimizer {
     
     private NdArray scalarOp(NdArray input, double scalar) {
         return elementWiseOp(input, scalar, (x, s) -> ((Number) x).doubleValue() * s);
+    }
+    
+    private NdArray addScalar(NdArray a, double scalar) {
+        return elementWiseOp(a, scalar, (x, s) -> ((Number) x).doubleValue() + s);
     }
     
     private NdArray elementWiseOp(NdArray input, double scalar, Op op) {

@@ -1,7 +1,7 @@
 package com.zifang.util.visuallization.chart;
 
-import com.zifang.util.ai.nnet.NeuralNetwork;
-import com.zifang.util.ai.nnet.Layer;
+import com.zifang.util.ml.nnet.NeuralNetwork;
+import com.zifang.util.ml.nnet.Layer;
 
 import java.util.ArrayList;
 import java.util.List;
