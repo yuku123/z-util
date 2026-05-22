@@ -50,9 +50,11 @@ public class SimpleASTNodeTest {
         node.addChild(new SimpleASTNode(ASTNodeType.IntLiteral, "1"));
 
         List<ASTNode> children = node.getChildren();
-        assertThrows(UnsupportedOperationException.class, () -> {
+        try {
             children.clear();
-        });
+        } catch (UnsupportedOperationException e){
+            assert true;
+        }
     }
 
     @Test

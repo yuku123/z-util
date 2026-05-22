@@ -1,5 +1,7 @@
 package com.zifang.util.zex.interview.demo2;
 
+import java.lang.reflect.Proxy;
+
 /**
  * 动态代理测试类。
  * <p>

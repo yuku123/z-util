@@ -2,11 +2,11 @@ package com.zifang.util.dsl.g4;
 
 import com.zifang.util.dsl.token.SimpleToken;
 import com.zifang.util.dsl.token.Token;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DynamicLexerTest {
 
@@ -154,7 +154,7 @@ public class DynamicLexerTest {
         assertEquals("42", tokens.get(0).getText());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testTokenize_UnknownCharacter() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -162,7 +162,7 @@ public class DynamicLexerTest {
 
         lexer.loadG4(g4);
         lexer.setInput("@");
-        lexer.tokenize();
+        assertThrows(RuntimeException.class, () -> lexer.tokenize());
     }
 
     @Test

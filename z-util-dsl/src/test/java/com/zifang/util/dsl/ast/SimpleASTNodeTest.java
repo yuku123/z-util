@@ -1,11 +1,11 @@
 package com.zifang.util.dsl.ast;
 
 import com.zifang.util.dsl.core.ASTNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SimpleASTNodeTest {
 
@@ -190,5 +190,13 @@ public class SimpleASTNodeTest {
         node.dump(sb, 0);
         // Should not throw exception
         assertNotNull(sb.toString());
+    }
+
+    @Test
+    public void testChildrenReadOnly() {
+        SimpleASTNode node = new SimpleASTNode();
+        node.addChild(new SimpleASTNode("child", "1", 1, 1));
+        List<ASTNode> children = node.getChildren();
+        assertThrows(UnsupportedOperationException.class, children::clear);
     }
 }

@@ -3,6 +3,7 @@ package com.zifang.util.dsl.ast;
 import com.zifang.util.dsl.core.ASTNode;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -95,7 +96,7 @@ public class SimpleASTNode implements ASTNode {
 
     @Override
     public List<ASTNode> getChildren() {
-        return children;
+        return Collections.unmodifiableList(children);
     }
 
     @Override
