@@ -70,53 +70,38 @@ public class Adam extends Optimizer {
             NdArray v = state.get(vKey);
             
             if (m == null) {
-                m = NdArray.zeros(param.getShape(), DType.FLOAT64);
+                m = NdArray.zeros(param.getShape(), param.getDtype());
                 state.put(mKey, m);
             }
             if (v == null) {
-                v = NdArray.zeros(param.getShape(), DType.FLOAT64);
+                v = NdArray.zeros(param.getShape(), param.getDtype());
                 state.put(vKey, v);
             }
             
-            // Update biased first moment estimate
-            // m = beta1 * m + (1 - beta1) * grad
-            NdArray oneMinusBeta1 = scalarOp(m, 1.0 - beta1);
-            NdArray oneMinusBeta1TimesGrad = scalarOp(grad, 1.0 - beta1);
-            NdArray newM = add(multiply(m, beta1), oneMinusBeta1TimesGrad);
-            state.put(mKey, newM);
+            // m = beta1 * m + (1-beta1) * grad  (in-place on m)
+            multiplyInPlace(m, beta1);
+            // gradCopy = (1-beta1) * grad  (temporary)
+            NdArray gradCopy = scalarOp(grad, 1.0 - beta1);
+            addInPlace(m, gradCopy);
             
-            // Update biased second raw moment estimate
-            // v = beta2 * v + (1 - beta2) * grad^2
-            NdArray gradSquared = multiply(grad, grad);
-            NdArray oneMinusBeta2TimesGradSq = scalarOp(gradSquared, 1.0 - beta2);
-            NdArray newV = add(multiply(v, beta2), oneMinusBeta2TimesGradSq);
-            state.put(vKey, newV);
+            // v = beta2 * v + (1-beta2) * grad^2  (in-place on v)
+            multiplyInPlace(v, beta2);
+            squareInPlace(gradCopy);
+            multiplyInPlace(gradCopy, 1.0 - beta2);
+            addInPlace(v, gradCopy);
             
-            // Compute bias-corrected estimates
-            // m_hat = m / (1 - beta1^t)
-            NdArray mHat = scalarOp(newM, 1.0 / biasCorrection1);
-            // v_hat = v / (1 - beta2^t)
-            NdArray vHat = scalarOp(newV, 1.0 / biasCorrection2);
+            // bias-corrected estimates: m_hat = m / biasCorrection1, v_hat = v / biasCorrection2
+            NdArray mHat = scalarOp(m, 1.0 / biasCorrection1);
+            NdArray vHat = scalarOp(v, 1.0 / biasCorrection2);
             
-            // Compute update
             // update = lr * m_hat / (sqrt(v_hat) + eps)
-            NdArray vHatSqrt = sqrt(vHat);
-            NdArray denom = addScalar(vHatSqrt, eps);
-            NdArray update = scalarOp(mHat, lr / 1.0);
-            NdArray finalUpdate = divide(update, denom);
+            sqrtInPlace(vHat);
+            addScalarInPlace(vHat, eps);
+            divideInPlace(mHat, vHat);
+            multiplyInPlace(mHat, lr);
             
-            if (adamw && weightDecay > 0) {
-                // AdamW: apply weight decay separately
-                // param = param - lr * (weight_decay * param + update)
-                NdArray weightDecayTerm = scalarOp(param, weightDecay);
-                NdArray totalUpdate = add(weightDecayTerm, finalUpdate);
-                param = subtract(param, scalarOp(totalUpdate, lr));
-            } else {
-                // Standard Adam (or AdamW with weight_decay=0)
-                param = subtract(param, finalUpdate);
-            }
-            
-            parameters.put(name, param);
+            // param = param - update
+            subtractInPlace(param, mHat);
         }
     }
     
@@ -242,8 +227,135 @@ public class Adam extends Optimizer {
             }
             return NdArray.create(result, dtype, a.getShape());
         }
+
+        if (dataA instanceof float[] && dataB instanceof float[]) {
+            float[] arrA = (float[]) dataA;
+            float[] arrB = (float[]) dataB;
+            float[] result = new float[size];
+            for (int i = 0; i < size; i++) {
+                result[i] = (float) op.apply(arrA[i], arrB[i]);
+            }
+            return NdArray.create(result, dtype, a.getShape());
+        }
         
         throw new IllegalArgumentException("Unsupported dtype combination");
+    }
+    
+    // In-place operations
+    private void multiplyInPlace(NdArray a, double scalar) {
+        Object data = a.getData();
+        int size = a.size();
+        if (data instanceof double[]) {
+            double[] arr = (double[]) data;
+            for (int i = 0; i < size; i++) arr[i] *= scalar;
+        } else if (data instanceof float[]) {
+            float[] arr = (float[]) data;
+            for (int i = 0; i < size; i++) arr[i] = (float)(arr[i] * scalar);
+        } else {
+            throw new IllegalArgumentException("Unsupported dtype: " + a.getDtype());
+        }
+    }
+    
+    private void addInPlace(NdArray a, NdArray b) {
+        Object dataA = a.getData();
+        Object dataB = b.getData();
+        int size = a.size();
+        if (dataA instanceof double[] && dataB instanceof double[]) {
+            double[] arrA = (double[]) dataA;
+            double[] arrB = (double[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] += arrB[i];
+        } else if (dataA instanceof float[] && dataB instanceof float[]) {
+            float[] arrA = (float[]) dataA;
+            float[] arrB = (float[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] += arrB[i];
+        } else {
+            throw new IllegalArgumentException("Unsupported dtype for addInPlace");
+        }
+    }
+    
+    private void subtractInPlace(NdArray a, NdArray b) {
+        Object dataA = a.getData();
+        Object dataB = b.getData();
+        int size = a.size();
+        if (dataA instanceof double[] && dataB instanceof double[]) {
+            double[] arrA = (double[]) dataA;
+            double[] arrB = (double[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] -= arrB[i];
+        } else if (dataA instanceof float[] && dataB instanceof float[]) {
+            float[] arrA = (float[]) dataA;
+            float[] arrB = (float[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] -= arrB[i];
+        } else {
+            throw new IllegalArgumentException("Unsupported dtype for subtractInPlace");
+        }
+    }
+    
+    private void addScalarInPlace(NdArray a, double scalar) {
+        Object data = a.getData();
+        int size = a.size();
+        if (data instanceof double[]) {
+            double[] arr = (double[]) data;
+            for (int i = 0; i < size; i++) arr[i] += scalar;
+        } else if (data instanceof float[]) {
+            float[] arr = (float[]) data;
+            for (int i = 0; i < size; i++) arr[i] = (float)(arr[i] + scalar);
+        }
+    }
+    
+    private void sqrtInPlace(NdArray a) {
+        Object data = a.getData();
+        int size = a.size();
+        if (data instanceof double[]) {
+            double[] arr = (double[]) data;
+            for (int i = 0; i < size; i++) arr[i] = Math.sqrt(arr[i]);
+        } else if (data instanceof float[]) {
+            float[] arr = (float[]) data;
+            for (int i = 0; i < size; i++) arr[i] = (float) Math.sqrt(arr[i]);
+        }
+    }
+    
+    private void divideInPlace(NdArray a, NdArray b) {
+        Object dataA = a.getData();
+        Object dataB = b.getData();
+        int size = a.size();
+        if (dataA instanceof double[] && dataB instanceof double[]) {
+            double[] arrA = (double[]) dataA;
+            double[] arrB = (double[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] /= arrB[i];
+        } else if (dataA instanceof float[] && dataB instanceof float[]) {
+            float[] arrA = (float[]) dataA;
+            float[] arrB = (float[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] /= arrB[i];
+        }
+    }
+    
+    private void squareInPlace(NdArray a) {
+        Object data = a.getData();
+        int size = a.size();
+        if (data instanceof double[]) {
+            double[] arr = (double[]) data;
+            for (int i = 0; i < size; i++) arr[i] *= arr[i];
+        } else if (data instanceof float[]) {
+            float[] arr = (float[]) data;
+            for (int i = 0; i < size; i++) arr[i] *= arr[i];
+        }
+    }
+    
+    private NdArray copyOf(NdArray a) {
+        Object data = a.getData();
+        int size = a.size();
+        if (data instanceof double[]) {
+            double[] arr = (double[]) data;
+            double[] result = new double[size];
+            System.arraycopy(arr, 0, result, 0, size);
+            return NdArray.create(result, DType.FLOAT64, a.getShape());
+        } else if (data instanceof float[]) {
+            float[] arr = (float[]) data;
+            float[] result = new float[size];
+            System.arraycopy(arr, 0, result, 0, size);
+            return NdArray.create(result, DType.FLOAT32, a.getShape());
+        }
+        return null;
     }
     
     @FunctionalInterface

@@ -75,7 +75,14 @@ public class PCA {
             }
         }
         
-        NdArray covNd = NdArray.create(covariance, DType.FLOAT64, new com.zifang.util.numpy.Shape(nFeatures, nFeatures));
+        // Flatten 2D covariance to 1D so NdArray.get(i,j) works correctly
+        double[] flatCov = new double[nFeatures * nFeatures];
+        for (int i = 0; i < nFeatures; i++) {
+            for (int j = 0; j < nFeatures; j++) {
+                flatCov[i * nFeatures + j] = covariance[i][j];
+            }
+        }
+        NdArray covNd = NdArray.create(flatCov, DType.FLOAT64, new com.zifang.util.numpy.Shape(nFeatures, nFeatures));
         
         // Step 3: Compute eigenvalues and eigenvectors using SVD
         // For SVD: A = U S V^T, for covariance matrix A = V S^2 V^T
@@ -112,7 +119,7 @@ public class PCA {
         
         this.principalComponents = NdArray.create(flatten2D(sortedComponents), DType.FLOAT64, 
             new com.zifang.util.numpy.Shape(nComponents, nFeatures));
-        this.explainedVariance = NdArray.array(sortedEigenvalues, DType.FLOAT64).reshape(nComponents, 1);
+        this.explainedVariance = NdArray.array(sortedEigenvalues, DType.FLOAT64).reshape(nComponents);
     }
 
     /**

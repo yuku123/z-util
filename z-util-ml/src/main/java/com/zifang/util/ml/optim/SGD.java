@@ -61,33 +61,30 @@ public class SGD extends Optimizer {
                 NdArray buf = state.get(momentumKey);
                 
                 if (buf == null) {
-                    // Initialize momentum buffer with zeros (match param dtype)
                     buf = NdArray.zeros(param.getShape(), param.getDtype());
                     state.put(momentumKey, buf);
                 }
                 
                 if (nesterov) {
-                    // Nesterov accelerated gradient
-                    // buf = momentum * buf + grad
-                    // param = param - (momentum * buf + lr * grad)
-                    NdArray newBuf = add(multiply(buf, momentum), effectiveGrad);
-                    state.put(momentumKey, newBuf);
-                    NdArray update = add(multiply(buf, momentum), effectiveGrad);
-                    param = subtract(param, multiply(update, learningRate));
+                    // Nesterov: buf = momentum * buf + grad; update = momentum * buf + lr * grad
+                    multiplyInPlace(buf, momentum);
+                    addInPlace(buf, effectiveGrad);
+                    multiplyInPlace(buf, momentum);
+                    addInPlace(buf, effectiveGrad);
+                    multiplyInPlace(buf, learningRate);
+                    subtractInPlace(param, buf);
                 } else {
-                    // Standard momentum
-                    // buf = momentum * buf + grad
-                    // param = param - lr * buf
-                    NdArray newBuf = add(multiply(buf, momentum), effectiveGrad);
-                    state.put(momentumKey, newBuf);
-                    param = subtract(param, multiply(newBuf, learningRate));
+                    // Standard momentum: buf = momentum * buf + grad; param = param - lr * buf
+                    multiplyInPlace(buf, momentum);
+                    addInPlace(buf, effectiveGrad);
+                    multiplyInPlace(buf, learningRate);
+                    subtractInPlace(param, buf);
                 }
             } else {
-                // Simple gradient descent
-                param = subtract(param, multiply(effectiveGrad, learningRate));
+                // Simple gradient descent: param = param - lr * grad
+                multiplyInPlace(effectiveGrad, learningRate);
+                subtractInPlace(param, effectiveGrad);
             }
-            
-            parameters.put(name, param);
         }
     }
     
@@ -143,6 +140,55 @@ public class SGD extends Optimizer {
         return elementWiseOp2(a, b, (x, y) -> ((Number) x).doubleValue() - ((Number) y).doubleValue());
     }
     
+    // In-place operations: modify NdArray data directly
+    private void multiplyInPlace(NdArray a, double scalar) {
+        Object data = a.getData();
+        int size = a.size();
+        if (data instanceof double[]) {
+            double[] arr = (double[]) data;
+            for (int i = 0; i < size; i++) arr[i] *= scalar;
+        } else if (data instanceof float[]) {
+            float[] arr = (float[]) data;
+            for (int i = 0; i < size; i++) arr[i] = (float)(arr[i] * scalar);
+        } else {
+            throw new IllegalArgumentException("Unsupported dtype: " + a.getDtype());
+        }
+    }
+    
+    private void addInPlace(NdArray a, NdArray b) {
+        Object dataA = a.getData();
+        Object dataB = b.getData();
+        int size = a.size();
+        if (dataA instanceof double[] && dataB instanceof double[]) {
+            double[] arrA = (double[]) dataA;
+            double[] arrB = (double[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] += arrB[i];
+        } else if (dataA instanceof float[] && dataB instanceof float[]) {
+            float[] arrA = (float[]) dataA;
+            float[] arrB = (float[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] += arrB[i];
+        } else {
+            throw new IllegalArgumentException("Unsupported dtype combination for addInPlace");
+        }
+    }
+    
+    private void subtractInPlace(NdArray a, NdArray b) {
+        Object dataA = a.getData();
+        Object dataB = b.getData();
+        int size = a.size();
+        if (dataA instanceof double[] && dataB instanceof double[]) {
+            double[] arrA = (double[]) dataA;
+            double[] arrB = (double[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] -= arrB[i];
+        } else if (dataA instanceof float[] && dataB instanceof float[]) {
+            float[] arrA = (float[]) dataA;
+            float[] arrB = (float[]) dataB;
+            for (int i = 0; i < size; i++) arrA[i] -= arrB[i];
+        } else {
+            throw new IllegalArgumentException("Unsupported dtype combination for subtractInPlace");
+        }
+    }
+    
     private NdArray elementWiseOp(NdArray input, double scalar, Op op) {
         Object data = input.getData();
         Object newData;
@@ -165,6 +211,15 @@ public class SGD extends Optimizer {
             newData = result;
         } else {
             throw new IllegalArgumentException("Unsupported dtype: " + dtype);
+        }
+        
+        // Preserve input dtype (casting scalar result to float if needed)
+        if (dtype == DType.FLOAT32 && !(data instanceof float[])) {
+            float[] floatResult = new float[size];
+            for (int i = 0; i < size; i++) {
+                floatResult[i] = (float) ((double[]) newData)[i];
+            }
+            newData = floatResult;
         }
         
         return NdArray.create(newData, dtype, input.getShape());

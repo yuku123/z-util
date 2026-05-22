@@ -543,20 +543,52 @@ public class TransformerEncoder extends Module {
         Shape shapeB = b.getShape();
         
         if (shapeA.equals(shapeB)) {
-            NdArray result = NdArray.zeros(shapeA, DType.FLOAT32);
-            Object aData = a.getData();
-            Object bData = b.getData();
-            Object cData = result.getData();
-            int size = a.size();
-            
-            for (int i = 0; i < size; i++) {
-                float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i)).floatValue();
-                float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, i)).floatValue();
-                com.zifang.util.numpy.Array.set(cData, i, aVal + bVal);
-            }
-            return result;
+            return addNoBroadcast(a, b);
         }
         
-        throw new IllegalArgumentException("Cannot add arrays with shapes " + shapeA + " and " + shapeB);
+        // Broadcasting: b's trailing dimsB dimensions are broadcast across a's last dimsB dimensions
+        int dimsA = shapeA.ndim();
+        int dimsB = shapeB.ndim();
+        
+        // Verify broadcast compatibility: for trailing dims, each dimA must equal dimB or be 1, or dimB must equal dimA
+        for (int i = 0; i < dimsB; i++) {
+            int dimA = shapeA.get(dimsA - dimsB + i);
+            int dimB = shapeB.get(i);
+            // Valid if: dimB==1 OR dimA==dimB OR dimA==1
+            boolean valid = (dimB == 1) || (dimA == dimB) || (dimA == 1);
+            if (!valid) {
+                throw new IllegalArgumentException("Cannot broadcast shapes " + shapeA + " and " + shapeB);
+            }
+        }
+        
+        NdArray result = NdArray.zeros(shapeA, DType.FLOAT32);
+        Object aData = a.getData();
+        Object bData = b.getData();
+        Object cData = result.getData();
+        int size = result.size();
+        int bSize = b.size();
+        
+        for (int i = 0; i < size; i++) {
+            float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i)).floatValue();
+            int bIdx = (bSize == 1) ? 0 : i % bSize;
+            float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, bIdx)).floatValue();
+            com.zifang.util.numpy.Array.set(cData, i, aVal + bVal);
+        }
+        return result;
+    }
+    
+    private NdArray addNoBroadcast(NdArray a, NdArray b) {
+        Shape shapeA = a.getShape();
+        NdArray result = NdArray.zeros(shapeA, DType.FLOAT32);
+        Object aData = a.getData();
+        Object bData = b.getData();
+        Object cData = result.getData();
+        int size = a.size();
+        for (int i = 0; i < size; i++) {
+            float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i)).floatValue();
+            float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, i)).floatValue();
+            com.zifang.util.numpy.Array.set(cData, i, aVal + bVal);
+        }
+        return result;
     }
 }
