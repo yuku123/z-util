@@ -411,41 +411,41 @@ public final class FilePathUtil {
     }
 
     /**
-     * Gets the relative path from a parent directory to a file.
+     * Gets the relative path from a base directory to a file.
      * <p>
-     * This method calculates the relative path between a parent directory
-     * and a file within that directory. It returns the portion of the file's
-     * path that is relative to the parent.
+     * This method calculates the relative path between a base directory
+     * and a file path. It returns the portion of the file's path that is
+     * relative to the base.
      * </p>
      * <p>
      * Examples:
      * <ul>
-     *   <li>{@code getSubpath("/home/user", "/home/user/docs/file.txt")} returns {@code "docs/file.txt"}</li>
-     *   <li>{@code getSubpath("/home/user", "/home/user/file.txt")} returns {@code "file.txt"}</li>
+     *   <li>{@code getSubpath("/home/user/file.txt", "/home")} returns {@code "user/file.txt"}</li>
+     *   <li>{@code getSubpath("/home/user/file.txt", "/var")} returns {@code "/home/user/file.txt"}</li>
      * </ul>
      * </p>
      *
-     * @param parent    the parent directory path
-     * @param fileName  the full file path
-     * @return the relative path from parent to file, or empty string if file is directly in parent
-     * @throws IllegalArgumentException if parent or fileName is null
-     * @throws IllegalArgumentException if fileName does not start with parent
+     * @param fullPath  the full file path
+     * @param basePath  the base directory path
+     * @return the relative path from base to file, or the full path if no common prefix
+     * @throws IllegalArgumentException if fullPath or basePath is null
      */
-    public static String getSubpath(String parent, String fileName) {
-        if (parent == null) {
+    public static String getSubpath(String fullPath, String basePath) {
+        if (fullPath == null) {
             return null;
         }
-        if (fileName == null) {
+        if (basePath == null) {
             return null;
         }
-        String normalizedParent = toUNIXPath(normalize(parent));
-        String normalizedFileName = toUNIXPath(normalize(fileName));
+        String normalizedFullPath = toUNIXPath(normalize(fullPath));
+        String normalizedBasePath = toUNIXPath(normalize(basePath));
 
-        if (!normalizedFileName.startsWith(normalizedParent)) {
-            throw new IllegalArgumentException("File '" + fileName + "' is not under parent '" + parent + "'");
+        if (!normalizedFullPath.startsWith(normalizedBasePath)) {
+            // If no common prefix, return the full path as-is
+            return fullPath;
         }
 
-        String subpath = normalizedFileName.substring(normalizedParent.length());
+        String subpath = normalizedFullPath.substring(normalizedBasePath.length());
         if (subpath.startsWith("/") || subpath.startsWith("\\")) {
             subpath = subpath.substring(1);
         }

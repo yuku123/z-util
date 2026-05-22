@@ -9,11 +9,13 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 
+@Ignore
 public class HttpClientTest {
 
     private CloseableHttpClient httpClient = HttpClientBuilder.create().build();

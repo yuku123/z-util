@@ -209,6 +209,9 @@ public final class FileContentUtil {
         if (file == null) {
             throw new IllegalArgumentException("File must not be null");
         }
+        if (content == null) {
+            throw new IllegalArgumentException("Content must not be null");
+        }
         if (charset == null) {
             throw new IllegalArgumentException("Charset must not be null");
         }
@@ -218,9 +221,7 @@ public final class FileContentUtil {
         createParentDirectoriesIfNeeded(file);
 
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset))) {
-            if (content != null) {
-                writer.write(content);
-            }
+            writer.write(content);
         }
     }
 
@@ -320,11 +321,21 @@ public final class FileContentUtil {
 
         createParentDirectoriesIfNeeded(file);
 
+        boolean needsSeparator = file.exists() && file.length() > 0;
+        if (needsSeparator) {
+            String existingContent = readString(file);
+            if (existingContent.endsWith("\n")) {
+                needsSeparator = false;
+            }
+        }
+
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), StandardCharsets.UTF_8))) {
+            if (needsSeparator) {
+                writer.write("\n");
+            }
             if (line != null) {
                 writer.write(line);
             }
-            writer.newLine();
         }
     }
 

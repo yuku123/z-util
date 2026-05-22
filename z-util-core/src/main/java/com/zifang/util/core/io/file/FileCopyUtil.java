@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
@@ -89,7 +90,8 @@ public final class FileCopyUtil {
             throw new IOException("Source is not a file: " + src.getAbsolutePath());
         }
         if (!overwrite && dest.exists()) {
-            throw new java.nio.file.FileAlreadyExistsException("Destination already exists and overwrite is false: " + dest.getAbsolutePath());
+            logger.debug("Destination already exists and overwrite is false, skipping copy: {}", dest.getAbsolutePath());
+            return;
         }
 
         // Ensure parent directories exist

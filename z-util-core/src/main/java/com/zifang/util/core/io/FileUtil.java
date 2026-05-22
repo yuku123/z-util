@@ -441,6 +441,9 @@ public class FileUtil {
      * @return true if deletion succeeded
      */
     public static boolean deleteDir(File dir) {
+        if (dir == null || !dir.exists()) {
+            return false;
+        }
         try {
             FileDirUtil.deleteDir(dir);
             return true;
@@ -472,7 +475,12 @@ public class FileUtil {
     }
 
     private static void listFilesRecursive(ArrayList<File> list, File file, javax.swing.filechooser.FileFilter filter) {
-        if (filter == null || filter.accept(file)) {
+        if (filter == null) {
+            // When no filter, only add files (not directories), and don't add the starting directory itself
+            if (file.isFile()) {
+                list.add(file);
+            }
+        } else if (filter.accept(file)) {
             list.add(file);
             if (file.isFile()) {
                 return;
@@ -663,12 +671,12 @@ public class FileUtil {
     /**
      * Gets relative path from parent to file.
      *
-     * @param pathName parent path
-     * @param fileName file path
+     * @param fullPath full file path
+     * @param basePath base directory path
      * @return relative path
      */
-    public static String getSubpath(String fileName, String pathName) {
-        return FilePathUtil.getSubpath(pathName, fileName);
+    public static String getSubpath(String fullPath, String basePath) {
+        return FilePathUtil.getSubpath(fullPath, basePath);
     }
 
     /**

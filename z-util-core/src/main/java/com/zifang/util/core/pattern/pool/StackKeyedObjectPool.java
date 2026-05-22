@@ -139,7 +139,6 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
 
             if (defaultConfig.isTestOnReturn() && !factory.validateObject(pooledObject)) {
                 destroyObject(key, pooledObject);
-                active.decrementAndGet();
                 condition.signalAll();
                 return;
             }
@@ -148,7 +147,6 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
 
             if (closed || !pooledObject.isIdle()) {
                 destroyObject(key, pooledObject);
-                active.decrementAndGet();
                 condition.signalAll();
                 return;
             }
@@ -159,10 +157,10 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
                 destroyObject(key, pooledObject);
             }
 
-            active.decrementAndGet();
             condition.signalAll();
 
         } finally {
+            active.decrementAndGet();
             lock.unlock();
         }
     }

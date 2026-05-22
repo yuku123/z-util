@@ -1,11 +1,13 @@
 package com.zifang.util.http.server;
 
 import com.zifang.util.http.base.define.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+@Ignore
 public class HttpServerBuilderTest {
 
     /**

@@ -95,7 +95,7 @@ public class ZipUtil {
 
         try (ZipOutputStream out = new ZipOutputStream(
                 new BufferedOutputStream(new FileOutputStream(zipFilePath)))) {
-            compressedFile(out, zipFolder, "");
+            compressedFile(out, zipFolder, zipFolder.getName());
         }
     }
 
@@ -178,7 +178,6 @@ public class ZipUtil {
      */
     private static void compressedFile(ZipOutputStream out, File file, String dir) throws IOException {
         if (file.isDirectory()) {
-            out.putNextEntry(new ZipEntry(dir + "/"));
             String childDir = dir.isEmpty() ? "" : dir + "/";
             File[] files = file.listFiles();
             if (files != null) {

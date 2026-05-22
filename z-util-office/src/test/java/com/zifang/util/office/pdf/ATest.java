@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ATest {
     @Test
+    @org.junit.Ignore("依赖外部路径 /Volumes/Elements SE，作业性质")
     public void test(){
         String baseFolder ="/Volumes/Elements SE/out/test";
         String targetFolder = "/Volumes/Elements SE/out/test_output";
@@ -27,6 +28,7 @@ public class ATest {
     }
 
     @Test
+    @org.junit.Ignore("依赖外部路径 /Volumes/Elements SE，作业性质")
     public void test2(){
         String baseFolder ="/Volumes/Elements SE/out/mock2/test";
         String targetFolder = "/Volumes/Elements SE/out/mock2/test_output";

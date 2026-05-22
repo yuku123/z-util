@@ -29,6 +29,9 @@ public class FileUtilTest {
 
     private void doFolder(String base) {
         File[] files = new File(base).listFiles();
+        if (files == null) {
+            return;
+        }
         for (File file : files) {
             if(file.isDirectory()){
                 doFolder(file.getAbsolutePath());

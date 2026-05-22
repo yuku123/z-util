@@ -32,6 +32,7 @@ public class Test0 {
     }
 
     @Test
+    @org.junit.Ignore("需要 MySQL 数据库连接")
     public void test() {
 
         ResourceItemRepository resourceItemRepository = RepositoryProxy.proxy(ResourceItemRepository.class);
@@ -51,6 +52,7 @@ public class Test0 {
     }
 
     @Test
+    @org.junit.Ignore("需要 MySQL 数据库连接")
     public void test1() {
         ResourceItemRepository resourceItemRepository = RepositoryProxy.proxy(ResourceItemRepository.class);
 

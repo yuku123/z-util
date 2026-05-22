@@ -282,7 +282,8 @@ public final class FileDirUtil {
             throw new IOException("Directory does not exist: " + dir.getAbsolutePath());
         }
         if (!dir.isDirectory()) {
-            throw new IOException("Not a directory: " + dir.getAbsolutePath());
+            // A file (non-directory) is considered not empty for isEmptyDir
+            return false;
         }
 
         String[] list = dir.list();

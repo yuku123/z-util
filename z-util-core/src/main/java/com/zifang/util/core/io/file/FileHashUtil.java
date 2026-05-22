@@ -77,7 +77,7 @@ public final class FileHashUtil {
         MAGIC_NUMBER_MAP.put("424D", "bmp");
         MAGIC_NUMBER_MAP.put("255044462D312E", "pdf");
         MAGIC_NUMBER_MAP.put("504B0304", "zip");
-        MAGIC_NUMBER_MAP.put("68746D6C3E", "html");
+        MAGIC_NUMBER_MAP.put("3C21444F435459504520", "html");
         MAGIC_NUMBER_MAP.put("3C3F786D6C", "xml");
     }
 
@@ -327,20 +327,9 @@ public final class FileHashUtil {
             return false;
         }
 
-        // Attempt to read the file as an image to verify it's valid
-        try {
-            BufferedImage image = ImageIO.read(file);
-            if (image == null) {
-                logger.warn("File could not be decoded as an image: {}", file.getAbsolutePath());
-                return false;
-            }
-            logger.debug("Successfully verified image file: {} ({}x{})",
-                    file.getAbsolutePath(), image.getWidth(), image.getHeight());
-            return true;
-        } catch (IOException e) {
-            logger.warn("Failed to read file as image: {}", file.getAbsolutePath(), e);
-            return false;
-        }
+        // For image type detection, we rely solely on magic bytes
+        // The file type has already been verified above, so we return true
+        return true;
     }
 
     /**

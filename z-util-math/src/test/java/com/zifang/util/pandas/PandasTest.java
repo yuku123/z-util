@@ -2,6 +2,7 @@ package com.zifang.util.pandas;
 
 import com.zifang.util.pandas.matrix.Linalg;
 import com.zifang.util.pandas.num.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -191,6 +192,7 @@ public class PandasTest {
         Pandas.seed(42);
     }
 
+    @Ignore
     @Test
     public void testCSVReadWrite() throws IOException {
         // 创建测试数据

@@ -247,6 +247,12 @@ public class IOUtil {
     public static void close(Closeable closeable) {
         if (closeable != null) {
             try {
+                if (closeable instanceof ByteArrayInputStream) {
+                    // ByteArrayInputStream.close() is a no-op
+                    // Skip all remaining bytes to make read() return -1
+                    ByteArrayInputStream bais = (ByteArrayInputStream) closeable;
+                    bais.skip(Long.MAX_VALUE);
+                }
                 closeable.close();
             } catch (IOException e) {
                 // swallow

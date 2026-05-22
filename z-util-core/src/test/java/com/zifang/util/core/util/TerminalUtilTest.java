@@ -36,11 +36,14 @@ public class TerminalUtilTest {
         String baseFolder = "Z:\\temp\\workplace";
 
 
-        for(File file : new File(baseFolder).listFiles()){
-            if(file.isDirectory()){
-                 if(file.getName().contains(" ")){
-                     file.renameTo(new File(file.getParent() + "\\" + file.getName().replace(" ","_").replace("+","_")));
-                 }
+        File[] files = new File(baseFolder).listFiles();
+        if (files != null) {
+            for(File file : files){
+                if(file.isDirectory()){
+                     if(file.getName().contains(" ")){
+                         file.renameTo(new File(file.getParent() + "\\" + file.getName().replace(" ","_").replace("+","_")));
+                     }
+                }
             }
         }
 
@@ -61,8 +64,11 @@ public class TerminalUtilTest {
     }
 
     private void doFolder(String baseFolder, ExecutorService executor) {
-
-        for(File file : new File(baseFolder).listFiles()){
+        File[] files = new File(baseFolder).listFiles();
+        if (files == null) {
+            return;
+        }
+        for(File file : files){
 
             if(file.isDirectory()){
                 doFolder(file.getAbsolutePath(), executor);
