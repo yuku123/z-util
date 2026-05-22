@@ -641,7 +641,6 @@ public class SrcCreator {
      * 解析字段名
      */
     private static String resolveFieldName(int constantPoolIndex, List<AbstractConstantPool> poolList) {
-        // Debug: 打印常量池索引和大小
         // System.out.println("resolveFieldName: index=" + constantPoolIndex + " poolSize=" + poolList.size());
 
         if (constantPoolIndex <= 0 || constantPoolIndex > poolList.size()) {
@@ -649,12 +648,13 @@ public class SrcCreator {
         }
         AbstractConstantPool pool = poolList.get(constantPoolIndex - 1);
         String poolClass = pool.getClass().getSimpleName();
-        // System.out.println("  pool[" + (constantPoolIndex - 1) + "] = " + poolClass);
+        System.out.println("  pool[" + (constantPoolIndex - 1) + "] = " + poolClass);
         if (!(pool instanceof FieldRefInfo)) {
             return null;
         }
         FieldRefInfo fieldRef = (FieldRefInfo) pool;
-        int nameAndTypeIndex = fieldRef.getNameAndTypeIndex().value - 1;
+        int nameAndTypeIndex = fieldRef.getNameIndex().value - 1;  // name_index 指向 NameAndType_info
+        System.out.println("  nameAndTypeIndex=" + nameAndTypeIndex);
         if (nameAndTypeIndex < 0 || nameAndTypeIndex >= poolList.size()) {
             return null;
         }
@@ -663,6 +663,7 @@ public class SrcCreator {
             return null;
         }
         int nameIndex = ((ConstantNameAndTypeInfo) ntPool).getNameIndex().value - 1;
+        System.out.println("  nameIndex=" + nameIndex);
         if (nameIndex < 0 || nameIndex >= poolList.size()) {
             return null;
         }
