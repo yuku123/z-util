@@ -158,16 +158,6 @@ public class SourceCodeParser {
             }
             classInfo.setInterfaces(interfaces);
 
-            // 枚举常量作为特殊字段添加
-            for (EnumConstantDeclaration constant : enumDecl.getEntries()) {
-                FieldInfo constField = new FieldInfo();
-                constField.setType(classInfo.getSimpleClassName());
-                constField.setValue(constant.getName().asString());
-                constField.setModifiers(new int[]{java.lang.reflect.Modifier.PUBLIC | java.lang.reflect.Modifier.STATIC | java.lang.reflect.Modifier.FINAL});
-                constField.setInitializer("null");
-                fieldInfos.add(constField);
-            }
-
         } else if (type instanceof AnnotationDeclaration) {
             classInfo.setInterfaceType(false);
             // 注解类型隐式继承 java.lang.annotation.Annotation
@@ -199,6 +189,17 @@ public class SourceCodeParser {
         for (MethodDeclaration method : type.getMethods()) {
             methodInfos.add(convertMethod(method));
         }
+
+        // 注解成员（AnnotationMemberDeclaration）也作为方法处理
+        if (type instanceof AnnotationDeclaration) {
+            AnnotationDeclaration annot = (AnnotationDeclaration) type;
+            for (BodyDeclaration<?> member : annot.getMembers()) {
+                if (member instanceof AnnotationMemberDeclaration) {
+                    methodInfos.add(convertAnnotationMember((AnnotationMemberDeclaration) member));
+                }
+            }
+        }
+
         classInfo.setMethods(methodInfos);
 
         // 内部类列表
@@ -271,6 +272,24 @@ public class SourceCodeParser {
             annotations.add(convertAnnotation(annotation));
         }
         methodInfo.setAnnotations(annotations);
+
+        return methodInfo;
+    }
+
+    /**
+     * 转换注解成员声明
+     */
+    private MethodInfo convertAnnotationMember(AnnotationMemberDeclaration member) {
+        MethodInfo methodInfo = new MethodInfo();
+        methodInfo.setMethodName(member.getName().asString());
+        methodInfo.setModifier(java.lang.reflect.Modifier.PUBLIC | java.lang.reflect.Modifier.ABSTRACT);
+        methodInfo.setReturnType(member.getType().asString());
+        methodInfo.setMethodParameterPairs(new ArrayList<>());
+
+        // 默认值作为方法体的一部分
+        List<String> statements = new ArrayList<>();
+        member.getDefaultValue().ifPresent(v -> statements.add("default " + v.toString()));
+        methodInfo.setStatements(statements);
 
         return methodInfo;
     }

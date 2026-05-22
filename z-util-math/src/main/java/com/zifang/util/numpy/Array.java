@@ -240,22 +240,34 @@ public final class Array {
             strides[i] = strides[i + 1] * shape[i + 1];
         }
 
-        // Compute strides for the transposed result based on new shape
-        // newStrides[j] = product of newShape dimensions after axis j
-        // This is the correct C-order stride for each axis position in the result
+        // Compute the transposed shape: newShape[j] = shape[axes[j]]
+        int[] newShape = new int[ndim];
+        for (int j = 0; j < ndim; j++) {
+            newShape[j] = shape[axes[j]];
+        }
+
+        // C-order strides for newShape: stride[j] = product of newShape dimensions after j
         int[] newStrides = new int[ndim];
         newStrides[ndim - 1] = 1;
         for (int i = ndim - 2; i >= 0; i--) {
-            newStrides[i] = newStrides[i + 1] * shape[ndim - 1 - i];
+            newStrides[i] = newStrides[i + 1] * newShape[i + 1];
         }
 
-        int[] coord = new int[ndim];
+        // Original C-order strides for the original shape
         int[] origStrides = new int[ndim];
         origStrides[ndim - 1] = 1;
         for (int i = ndim - 2; i >= 0; i--) {
-            origStrides[i] = origStrides[i + 1] * shape[ndim - 1 - i];
+            origStrides[i] = origStrides[i + 1] * shape[i + 1];
         }
 
+        // axes[j] = old axis at new axis position j
+        // To get old_coord[old_axis], we need new_coord at position invAxes[old_axis]
+        int[] invAxes = new int[ndim];
+        for (int j = 0; j < ndim; j++) {
+            invAxes[axes[j]] = j;
+        }
+
+        int[] coord = new int[ndim];
         for (int i = 0; i < size; i++) {
             int oldIdx = 0;
             int tmp = i;
@@ -263,8 +275,10 @@ public final class Array {
                 coord[j] = tmp / newStrides[j];
                 tmp = tmp % newStrides[j];
             }
-            for (int j = 0; j < ndim; j++) {
-                oldIdx += coord[j] * origStrides[axes[j]];
+            // old_coord[old_axis] = new_coord[invAxes[old_axis]]
+            // oldIdx = Σ old_coord[k] * origStrides[k]
+            for (int k = 0; k < ndim; k++) {
+                oldIdx += coord[invAxes[k]] * origStrides[k];
             }
             copy(data, oldIdx, result, i);
         }

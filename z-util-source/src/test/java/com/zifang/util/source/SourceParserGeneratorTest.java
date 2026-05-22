@@ -125,8 +125,9 @@ public class SourceParserGeneratorTest {
         assertEquals("com.example", classInfo.getPackageName());
         assertEquals("Season", classInfo.getSimpleClassName());
         assertFalse(classInfo.getInterfaceType());
-        assertEquals(4, classInfo.getFields().size());
-        assertEquals(2, classInfo.getMethods().size());
+        assertEquals(5, classInfo.getFields().size());
+        // 构造函数不是方法，所以只有 1 个方法 (getChineseName)
+        assertEquals(1, classInfo.getMethods().size());
 
         System.out.println("=== 枚举解析结果 ===");
         System.out.println("包名: " + classInfo.getPackageName());
@@ -198,13 +199,14 @@ public class SourceParserGeneratorTest {
         assertEquals(1, classInfo.getFields().size());
         assertEquals(1, classInfo.getFields().get(0).getAnnotations().size());
 
-        assertEquals(2, classInfo.getMethods().size());
-        assertEquals(1, classInfo.getMethods().get(1).getAnnotations().size());
+        // 构造函数不是方法，所以只有 1 个方法 (toString)
+        assertEquals(1, classInfo.getMethods().size());
+        assertEquals(1, classInfo.getMethods().get(0).getAnnotations().size());
 
         System.out.println("=== 带注解的类解析结果 ===");
         System.out.println("类注解: " + classInfo.getAnnotations());
         System.out.println("字段注解: " + classInfo.getFields().get(0).getAnnotations());
-        System.out.println("方法注解: " + classInfo.getMethods().get(1).getAnnotations());
+        System.out.println("方法注解: " + classInfo.getMethods().get(0).getAnnotations());
     }
 
     /**

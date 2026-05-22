@@ -23,7 +23,7 @@ import java.util.concurrent.Executors;
  * // 创建并启动服务器（注册所有内置指标）
  * MonitorServer server = MonitorServer.builder()
  *     .port(8849)
- *     .registerAll()  // 注册 JVM/OS/线程等内置指标
+ *     .registerDefaultMonitor()  // 注册 JVM/OS/线程等内置指标
  *     .build()
  *     .start();
  *
@@ -222,7 +222,7 @@ public class MonitorServer {
 
     public static class Builder {
         private int port = DEFAULT_PORT;
-        private boolean registerAll = false;
+        private boolean registerDefaultMonitor = false;
 
         public Builder port(int port) {
             this.port = port;
@@ -232,14 +232,14 @@ public class MonitorServer {
         /**
          * 注册所有内置指标（JVM、OS、线程）
          */
-        public Builder registerAll() {
-            this.registerAll = true;
+        public Builder registerDefaultMonitor() {
+            this.registerDefaultMonitor = true;
             return this;
         }
 
         public MonitorServer build() {
             MonitorServer server = new MonitorServer(port);
-            if (registerAll) {
+            if (registerDefaultMonitor) {
                 server.collector.enableAll();
             }
             return server;

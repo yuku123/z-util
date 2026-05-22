@@ -25,7 +25,15 @@ public class JavaSourceGenerator {
      * 从 ClassInfo 生成完整的 Java 源码
      */
     public String generate(ClassInfo classInfo) {
-        return generateClass(classInfo, 0);
+        StringBuilder sb = new StringBuilder();
+
+        // 包声明
+        if (classInfo.getPackageName() != null && !classInfo.getPackageName().isEmpty()) {
+            sb.append("package ").append(classInfo.getPackageName()).append(";\n\n");
+        }
+
+        sb.append(generateClass(classInfo, 0));
+        return sb.toString();
     }
 
     /**
