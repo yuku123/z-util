@@ -95,6 +95,20 @@ public class SrcCreatorTest {
     }
 
     /**
+     * 测试方法体生成 - 静态初始化块
+     */
+    @Test
+    public void testStaticInitializer() {
+        InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
+        ClassFile classFile = ByteCodeResolver.parseFromStream(is);
+        String src = SrcCreator.createJavaFileSrc(classFile);
+
+        // 验证静态初始化块存在且包含 i = 0
+        assertTrue(src.contains("static {"));
+        assertTrue(src.contains("i = 0"));
+    }
+
+    /**
      * 测试字节码解析和反编译的集成
      */
     @Test
