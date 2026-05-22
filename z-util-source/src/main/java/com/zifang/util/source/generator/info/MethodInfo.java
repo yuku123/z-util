@@ -40,6 +40,11 @@ public class MethodInfo {
      */
     private List<String> statements;
 
+    /**
+     * 注解列表
+     */
+    private List<AnnotationInfo> annotations = new ArrayList<>();
+
 
     @Override
     public boolean equals(Object obj) {
@@ -180,5 +185,13 @@ public class MethodInfo {
      */
     public void setStatements(List<String> statements) {
         this.statements = statements;
+    }
+
+    public List<AnnotationInfo> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(List<AnnotationInfo> annotations) {
+        this.annotations = annotations;
     }
 }

@@ -1,5 +1,8 @@
 package com.zifang.util.source.generator.info;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 字段信息封装类
  * <p>
@@ -31,6 +34,11 @@ public class FieldInfo {
      * 初始值表达式字符串，默认为 "null"
      */
     private String initializer = "null";
+
+    /**
+     * 注解列表
+     */
+    private List<AnnotationInfo> annotations = new ArrayList<>();
 
     /**
      * 默认构造函数，创建一个空的FieldInfo实例
@@ -145,6 +153,14 @@ public class FieldInfo {
      */
     public void setModifier(int... modifier) {
         modifiers = modifier;
+    }
+
+    public List<AnnotationInfo> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(List<AnnotationInfo> annotations) {
+        this.annotations = annotations;
     }
 
     @Override

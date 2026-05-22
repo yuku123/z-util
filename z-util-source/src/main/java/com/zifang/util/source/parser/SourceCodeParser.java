@@ -5,6 +5,10 @@ import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.expr.AnnotationExpr;
+import com.github.javaparser.ast.expr.MemberValuePair;
+import com.github.javaparser.ast.expr.NormalAnnotationExpr;
+import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.zifang.util.source.generator.info.AnnotationInfo;
 import com.zifang.util.source.generator.info.ClassInfo;
@@ -154,6 +158,16 @@ public class SourceCodeParser {
             }
             classInfo.setInterfaces(interfaces);
 
+            // 枚举常量作为特殊字段添加
+            for (EnumConstantDeclaration constant : enumDecl.getEntries()) {
+                FieldInfo constField = new FieldInfo();
+                constField.setType(classInfo.getSimpleClassName());
+                constField.setValue(constant.getName().asString());
+                constField.setModifiers(new int[]{java.lang.reflect.Modifier.PUBLIC | java.lang.reflect.Modifier.STATIC | java.lang.reflect.Modifier.FINAL});
+                constField.setInitializer("null");
+                fieldInfos.add(constField);
+            }
+
         } else if (type instanceof AnnotationDeclaration) {
             classInfo.setInterfaceType(false);
             // 注解类型隐式继承 java.lang.annotation.Annotation
@@ -164,6 +178,20 @@ public class SourceCodeParser {
         for (FieldDeclaration field : type.getFields()) {
             fieldInfos.add(convertField(field));
         }
+
+        // 枚举常量作为特殊字段添加
+        if (type instanceof EnumDeclaration) {
+            EnumDeclaration enumDecl = (EnumDeclaration) type;
+            for (EnumConstantDeclaration constant : enumDecl.getEntries()) {
+                FieldInfo constField = new FieldInfo();
+                constField.setType(classInfo.getSimpleClassName());
+                constField.setValue(constant.getName().asString());
+                constField.setModifiers(new int[]{java.lang.reflect.Modifier.PUBLIC | java.lang.reflect.Modifier.STATIC | java.lang.reflect.Modifier.FINAL});
+                constField.setInitializer("null");
+                fieldInfos.add(constField);
+            }
+        }
+
         classInfo.setFields(fieldInfos);
 
         // 方法列表
@@ -270,9 +298,31 @@ public class SourceCodeParser {
     /**
      * 解析修饰符
      */
-    private int parseModifiers(BodyDeclaration<?> declaration) {
+    private int parseModifiers(TypeDeclaration<?> type) {
         int modifiers = 0;
-        for (Modifier mod : declaration.getModifiers()) {
+        for (Modifier mod : type.getModifiers()) {
+            modifiers |= modifierKeywordToInt(mod.getKeyword().name());
+        }
+        return modifiers;
+    }
+
+    /**
+     * 解析字段修饰符
+     */
+    private int parseModifiers(FieldDeclaration field) {
+        int modifiers = 0;
+        for (Modifier mod : field.getModifiers()) {
+            modifiers |= modifierKeywordToInt(mod.getKeyword().name());
+        }
+        return modifiers;
+    }
+
+    /**
+     * 解析方法修饰符
+     */
+    private int parseModifiers(MethodDeclaration method) {
+        int modifiers = 0;
+        for (Modifier mod : method.getModifiers()) {
             modifiers |= modifierKeywordToInt(mod.getKeyword().name());
         }
         return modifiers;

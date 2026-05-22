@@ -1,5 +1,6 @@
 package com.zifang.util.source.generator;
 
+import com.zifang.util.source.generator.info.AnnotationInfo;
 import com.zifang.util.source.generator.info.ClassInfo;
 import com.zifang.util.source.generator.info.FieldInfo;
 import com.zifang.util.source.generator.info.MethodInfo;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
  * <p>
  * 根据 ClassInfo 模型生成可读的 Java 源代码。
  * 支持生成完整的类定义，包括包声明、导入语句、类注释、方法实现等。
+ * 支持：类、接口、枚举、注解、内部类
  *
  * @author zifang
  */
@@ -23,33 +25,33 @@ public class JavaSourceGenerator {
      * 从 ClassInfo 生成完整的 Java 源码
      */
     public String generate(ClassInfo classInfo) {
+        return generateClass(classInfo, 0);
+    }
+
+    /**
+     * 生成类源码（带缩进级别）
+     */
+    private String generateClass(ClassInfo classInfo, int indentLevel) {
         StringBuilder sb = new StringBuilder();
+        String indent = "    ".repeat(indentLevel);
 
-        // 包声明
-        if (classInfo.getPackageName() != null && !classInfo.getPackageName().isEmpty()) {
-            sb.append("package ").append(classInfo.getPackageName()).append(";\n\n");
-        }
-
-        // 导入语句
-        if (classInfo.getImports() != null && !classInfo.getImports().isEmpty()) {
-            for (String imp : classInfo.getImports()) {
-                sb.append("import ").append(imp).append(";\n");
+        // 类注解
+        if (classInfo.getAnnotations() != null) {
+            for (AnnotationInfo annotation : classInfo.getAnnotations()) {
+                sb.append(indent).append(annotation.toString()).append("\n");
             }
-            sb.append("\n");
-        }
-
-        // 类注释
-        if (classInfo.getComments() != null && !classInfo.getComments().isEmpty()) {
-            sb.append("/**\n");
-            for (String comment : classInfo.getComments()) {
-                sb.append(" * ").append(comment).append("\n");
-            }
-            sb.append(" */\n");
         }
 
         // 类修饰符 + 类名
-        sb.append(modifiersToString(classInfo.getModifiers(), classInfo.getInterfaceType()));
-        sb.append("class ").append(classInfo.getSimpleClassName());
+        sb.append(indent).append(modifiersToString(classInfo.getModifiers(), classInfo.getInterfaceType()));
+
+        // 判断类型
+        Boolean isInterface = classInfo.getInterfaceType();
+        if (isInterface != null && isInterface) {
+            sb.append("interface ").append(classInfo.getSimpleClassName());
+        } else {
+            sb.append("class ").append(classInfo.getSimpleClassName());
+        }
 
         // 父类
         if (classInfo.getSuperClass() != null) {
@@ -72,7 +74,13 @@ public class JavaSourceGenerator {
         List<FieldInfo> fields = classInfo.getFields();
         if (fields != null) {
             for (FieldInfo field : fields) {
-                sb.append("    ");
+                sb.append(indent).append("    ");
+                // 字段注解
+                if (field.getAnnotations() != null) {
+                    for (AnnotationInfo annotation : field.getAnnotations()) {
+                        sb.append(annotation.toString()).append(" ");
+                    }
+                }
                 sb.append(modifiersToString(field.getModifiers(), false));
                 sb.append(field.getType()).append(" ");
                 sb.append(field.getValue());
@@ -90,7 +98,13 @@ public class JavaSourceGenerator {
         List<MethodInfo> methods = classInfo.getMethods();
         if (methods != null) {
             for (MethodInfo method : methods) {
-                sb.append("    ");
+                sb.append(indent).append("    ");
+                // 方法注解
+                if (method.getAnnotations() != null) {
+                    for (AnnotationInfo annotation : method.getAnnotations()) {
+                        sb.append(annotation.toString()).append(" ");
+                    }
+                }
                 sb.append(modifiersToString(method.getModifier(), false));
                 sb.append(method.getReturnType()).append(" ");
                 sb.append(method.getMethodName()).append("(");
@@ -111,16 +125,25 @@ public class JavaSourceGenerator {
                 if (statements != null && !statements.isEmpty()) {
                     sb.append(" {\n");
                     for (String stmt : statements) {
-                        sb.append("        ").append(stmt).append("\n");
+                        sb.append(indent).append("        ").append(stmt).append("\n");
                     }
-                    sb.append("    }\n\n");
+                    sb.append(indent).append("    }\n\n");
                 } else {
                     sb.append(";\n\n");
                 }
             }
         }
 
-        sb.append("}\n");
+        // 内部类
+        List<ClassInfo> innerClasses = classInfo.getInnerClasses();
+        if (innerClasses != null) {
+            for (ClassInfo innerClass : innerClasses) {
+                sb.append(generateClass(innerClass, indentLevel + 1));
+                sb.append("\n");
+            }
+        }
+
+        sb.append(indent).append("}\n");
         return sb.toString();
     }
 

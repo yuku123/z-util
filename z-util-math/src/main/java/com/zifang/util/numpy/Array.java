@@ -240,21 +240,31 @@ public final class Array {
             strides[i] = strides[i + 1] * shape[i + 1];
         }
 
+        // Compute strides for the transposed result based on new shape
+        // newStrides[j] = product of newShape dimensions after axis j
+        // This is the correct C-order stride for each axis position in the result
         int[] newStrides = new int[ndim];
-        for (int i = 0; i < ndim; i++) {
-            newStrides[i] = strides[axes[i]];
+        newStrides[ndim - 1] = 1;
+        for (int i = ndim - 2; i >= 0; i--) {
+            newStrides[i] = newStrides[i + 1] * shape[ndim - 1 - i];
         }
 
         int[] coord = new int[ndim];
+        int[] origStrides = new int[ndim];
+        origStrides[ndim - 1] = 1;
+        for (int i = ndim - 2; i >= 0; i--) {
+            origStrides[i] = origStrides[i + 1] * shape[ndim - 1 - i];
+        }
+
         for (int i = 0; i < size; i++) {
             int oldIdx = 0;
             int tmp = i;
             for (int j = 0; j < ndim; j++) {
-                coord[j] = tmp / strides[j];
-                tmp = tmp % strides[j];
+                coord[j] = tmp / newStrides[j];
+                tmp = tmp % newStrides[j];
             }
             for (int j = 0; j < ndim; j++) {
-                oldIdx += coord[j] * newStrides[j];
+                oldIdx += coord[j] * origStrides[axes[j]];
             }
             copy(data, oldIdx, result, i);
         }
