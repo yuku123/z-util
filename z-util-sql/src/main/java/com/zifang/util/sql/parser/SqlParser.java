@@ -84,7 +84,7 @@ public class SqlParser {
         // 解析主查询部分
         // 首先尝试提取列
         Pattern colPattern = Pattern.compile(
-            "SELECT\\s+(\\*|[a-zA-Z_][a-zA-Z0-9_]*(?:\\s*,\\s*[a-zA-Z_][a-zA-Z0-9_]*)*)\\s+FROM\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+            "SELECT\\s+(\\*|[a-zA-Z_][a-zA-Z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)?(?:\\s*,\\s*[a-zA-Z_][a-zA-Z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z0-9_]*)?)*)\\s+FROM\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
             Pattern.CASE_INSENSITIVE
         );
         Matcher colMatcher = colPattern.matcher(mainSql);
@@ -107,7 +107,7 @@ public class SqlParser {
         
         // 提取WHERE
         Pattern wherePattern = Pattern.compile(
-            "(?:WHERE|WHERE\\s+[^\\s]+\\s*=\\s*)([^ORDER|LIMIT|OFFSET]+?)(?:ORDER\\s+BY|LIMIT|OFFSET|$)",
+            "WHERE\\s+(.+?)(?:\\s+ORDER\\s+BY|\\s+LIMIT|\\s+OFFSET|$)",
             Pattern.CASE_INSENSITIVE
         );
         Matcher whereMatcher = wherePattern.matcher(mainSql);
