@@ -1,5 +1,6 @@
 package com.zifang.util.monitor.exporter;
 
+import com.zifang.util.core.lang.collection.Lists;
 import com.zifang.util.monitor.MetricsRegistry;
 import com.zifang.util.monitor.MetricsSnapshot;
 
@@ -36,7 +37,7 @@ public class JsonExporter {
         json.append("  \"categories\": {\n");
         boolean firstCategory = true;
         for (MetricsSnapshot.Category category : MetricsSnapshot.Category.values()) {
-            int count = grouped.getOrDefault(category, List.of()).size();
+            int count = grouped.getOrDefault(category, Lists.of()).size();
             if (count > 0) {
                 if (!firstCategory) {
                     json.append(",\n");
