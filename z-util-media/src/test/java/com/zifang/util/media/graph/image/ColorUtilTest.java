@@ -43,13 +43,13 @@ public class ColorUtilTest {
     public void testColor2StringWhite() {
         Color white = Color.WHITE;
         String hex = ColorUtil.Color2String(white);
-        assertEquals("#FF0000FF00FF", hex);
+        assertEquals("#FFFFFF", hex);
     }
 
     @Test
     public void testColor2StringBlack() {
         Color black = Color.BLACK;
         String hex = ColorUtil.Color2String(black);
-        assertEquals("#FF000000", hex);
+        assertEquals("#000000", hex);
     }
 }

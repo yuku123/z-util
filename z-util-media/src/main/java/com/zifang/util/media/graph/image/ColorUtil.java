@@ -16,8 +16,21 @@ public final class ColorUtil {
      * @return 对应的 Color 对象
      */
     public final static Color String2Color(String str) {
-        int i = Integer.parseInt(str.substring(1), 16);
-        return new Color(i);
+        String hex = str.substring(1);
+        if (hex.length() == 6) {
+            int r = Integer.parseInt(hex.substring(0, 2), 16);
+            int g = Integer.parseInt(hex.substring(2, 4), 16);
+            int b = Integer.parseInt(hex.substring(4, 6), 16);
+            return new Color(r, g, b);
+        } else if (hex.length() == 8) {
+            int a = Integer.parseInt(hex.substring(0, 2), 16);
+            int r = Integer.parseInt(hex.substring(2, 4), 16);
+            int g = Integer.parseInt(hex.substring(4, 6), 16);
+            int b = Integer.parseInt(hex.substring(6, 8), 16);
+            return new Color(r, g, b, a);
+        } else {
+            throw new IllegalArgumentException("Invalid color format: " + str);
+        }
     }
 
     /**
@@ -29,10 +42,10 @@ public final class ColorUtil {
     public final static String Color2String(Color color) {
         String R = Integer.toHexString(color.getRed());
         R = R.length() < 2 ? ('0' + R) : R;
-        String B = Integer.toHexString(color.getBlue());
-        B = B.length() < 2 ? ('0' + B) : B;
         String G = Integer.toHexString(color.getGreen());
         G = G.length() < 2 ? ('0' + G) : G;
-        return '#' + R + B + G;
+        String B = Integer.toHexString(color.getBlue());
+        B = B.length() < 2 ? ('0' + B) : B;
+        return ('#' + R + G + B).toUpperCase();
     }
 }

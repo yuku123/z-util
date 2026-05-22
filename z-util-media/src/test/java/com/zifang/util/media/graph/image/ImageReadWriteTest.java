@@ -44,8 +44,8 @@ public class ImageReadWriteTest {
 
     @Test
     public void testIsSupported() {
-        assertFalse(ImageReadWrite.isSupported("image.png"));
-        assertFalse(ImageReadWrite.isSupported("image.jpg"));
+        assertTrue(ImageReadWrite.isSupported("image.png"));
+        assertTrue(ImageReadWrite.isSupported("image.jpg"));
     }
 
     @Test
