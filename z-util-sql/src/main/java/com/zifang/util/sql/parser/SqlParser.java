@@ -52,17 +52,33 @@ public class SqlParser {
         // 分离JOIN子句（如果有的话）
         String joinCondition = null;
         String joinTable = null;
+        boolean isLeftJoin = false;
         String mainSql = sql;
         
-        Pattern joinPattern = Pattern.compile(
-            "(.+?)\\s+JOIN\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s+ON\\s+(.+)",
+        // 尝试匹配 LEFT JOIN
+        Pattern leftJoinPattern = Pattern.compile(
+            "(.+?)\\s+LEFT\\s+JOIN\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s+ON\\s+(.+)",
             Pattern.CASE_INSENSITIVE
         );
-        Matcher joinMatcher = joinPattern.matcher(sql);
-        if (joinMatcher.find()) {
-            mainSql = joinMatcher.group(1).trim();
-            joinTable = joinMatcher.group(2);
-            joinCondition = joinMatcher.group(3).trim();
+        Matcher leftJoinMatcher = leftJoinPattern.matcher(sql);
+        if (leftJoinMatcher.find()) {
+            mainSql = leftJoinMatcher.group(1).trim();
+            joinTable = leftJoinMatcher.group(2);
+            joinCondition = leftJoinMatcher.group(3).trim();
+            isLeftJoin = true;
+        } else {
+            // 尝试匹配普通 JOIN
+            Pattern joinPattern = Pattern.compile(
+                "(.+?)\\s+JOIN\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s+ON\\s+(.+)",
+                Pattern.CASE_INSENSITIVE
+            );
+            Matcher joinMatcher = joinPattern.matcher(sql);
+            if (joinMatcher.find()) {
+                mainSql = joinMatcher.group(1).trim();
+                joinTable = joinMatcher.group(2);
+                joinCondition = joinMatcher.group(3).trim();
+                isLeftJoin = false;
+            }
         }
         
         // 解析主查询部分
@@ -132,6 +148,7 @@ public class SqlParser {
         // 解析JOIN
         if (joinTable != null && joinCondition != null) {
             stmt.setJoinTable(joinTable);
+            stmt.setLeftJoin(isLeftJoin);
             parseJoinCondition(joinCondition, stmt);
         }
     }

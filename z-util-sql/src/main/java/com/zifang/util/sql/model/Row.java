@@ -5,46 +5,87 @@ import java.util.*;
 /**
  * 行数据
  */
-public class Row {
+public class Row implements Iterable<Object> {
     
-    private Object[] values;
+    private List<Object> values;
     
-    public Row(int size) {
-        this.values = new Object[size];
+    public Row() {
+        this.values = new ArrayList<>();
     }
     
-    public Row(Object[] values) {
-        this.values = values;
+    public Row(int size) {
+        this.values = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
+            this.values.add(null);
+        }
+    }
+    
+    public Row(Object... values) {
+        this.values = new ArrayList<>(Arrays.asList(values));
+    }
+    
+    public Row(List<Object> values) {
+        this.values = new ArrayList<>(values);
+    }
+    
+    public void add(Object value) {
+        values.add(value);
     }
     
     public Object get(int index) {
-        if (index < 0 || index >= values.length) {
-            throw new IndexOutOfBoundsException("Column index out of bounds: " + index);
+        if (index < 0 || index >= values.size()) {
+            return null;
         }
-        return values[index];
+        return values.get(index);
     }
     
     public void set(int index, Object value) {
-        if (index < 0 || index >= values.length) {
-            throw new IndexOutOfBoundsException("Column index out of bounds: " + index);
+        if (index < 0 || index >= values.size()) {
+            return;
         }
-        values[index] = value;
+        values.set(index, value);
     }
     
-    public Object[] getValues() {
+    public List<Object> getValues() {
         return values;
     }
     
-    public void setValues(Object[] values) {
-        this.values = values;
+    public void setValues(List<Object> values) {
+        this.values = new ArrayList<>(values);
     }
     
     public int size() {
-        return values.length;
+        return values.size();
+    }
+    
+    public boolean isEmpty() {
+        return values.isEmpty();
+    }
+    
+    public void clear() {
+        values.clear();
+    }
+    
+    @Override
+    public Iterator<Object> iterator() {
+        return values.iterator();
     }
     
     @Override
     public String toString() {
-        return Arrays.toString(values);
+        return values.toString();
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Row row = (Row) o;
+        return Objects.equals(values, row.values);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(values);
     }
 }

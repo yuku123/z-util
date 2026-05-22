@@ -24,6 +24,7 @@ public class SqlResultTest {
     public void testCreateSuccessResultWithTable() {
         Table table = new Table("users");
         table.addColumn("id", Integer.class);
+        table.addColumn("name", String.class);
         table.addRow(1, "Alice");
         
         SqlResult result = new SqlResult(true, "Query OK", 1, table);

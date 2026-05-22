@@ -10,7 +10,7 @@ public class SqlStatement {
     private SqlStatementType type;
     private String tableName;
     private List<String> columns;  // SELECT columns or INSERT/CREATE columns
-    private List<String> values;   // INSERT values
+    private List<Object> values;   // INSERT values
     private List<String> selectColumns; // for SELECT
     private String whereColumn;     // for WHERE column op value
     private Object whereValue;
@@ -30,6 +30,7 @@ public class SqlStatement {
     private String joinLeftColumn;  // e.g., "user_id" from "user_id = orders.user_id"
     private String joinRightColumn; // the right side of join condition
     private String joinOp;          // join operator, default "="
+    private boolean leftJoin;       // true for LEFT JOIN, false for INNER JOIN
     
     public SqlStatement() {
         this.columns = new ArrayList<>();
@@ -69,15 +70,15 @@ public class SqlStatement {
         this.columns = columns;
     }
     
-    public List<String> getValues() {
+    public List<Object> getValues() {
         return values;
     }
     
-    public void addValue(String value) {
+    public void addValue(Object value) {
         this.values.add(value);
     }
     
-    public void setValues(List<String> values) {
+    public void setValues(List<Object> values) {
         this.values = values;
     }
     
@@ -209,13 +210,40 @@ public class SqlStatement {
         this.joinOp = joinOp;
     }
     
+    public boolean isLeftJoin() {
+        return leftJoin;
+    }
+    
+    public void setLeftJoin(boolean leftJoin) {
+        this.leftJoin = leftJoin;
+    }
+    
     /**
      * 检查是否有JOIN子句
      */
     public boolean hasJoin() {
-        return joinTable != null && joinLeftColumn != null && joinRightColumn != null;
+        return joinTable != null;
     }
-    
+
+    /**
+     * 清除JOIN子句的所有数据
+     */
+    public void clearJoin() {
+        this.joinTable = null;
+        this.joinLeftColumn = null;
+        this.joinRightColumn = null;
+        this.joinOp = "=";
+        this.leftJoin = false;
+    }
+
+    /**
+     * 清除列和值
+     */
+    public void clearColumnsAndValues() {
+        this.columns.clear();
+        this.values.clear();
+    }
+
     @Override
     public String toString() {
         return "SqlStatement{" +

@@ -114,6 +114,9 @@ public class Table {
     }
     
     public Row getRow(int index) {
+        if (index < 0 || index >= rows.size()) {
+            return null;
+        }
         return rows.get(index);
     }
     
@@ -128,12 +131,12 @@ public class Table {
             throw new IllegalArgumentException("Column not found: " + columnName);
         }
         
-        Map<Object, List<Integer>> colIndex = new HashMap<>();
+        Map<Object, List<Integer>> indexData = new HashMap<>();
         for (int i = 0; i < rows.size(); i++) {
             Object value = rows.get(i).get(colIndex);
-            colIndex.computeIfAbsent(value, k -> new ArrayList<>()).add(i);
+            indexData.computeIfAbsent(value, k -> new ArrayList<>()).add(i);
         }
-        indexMap.put(columnName.toLowerCase(), colIndex);
+        indexMap.put(columnName.toLowerCase(), indexData);
     }
     
     /**

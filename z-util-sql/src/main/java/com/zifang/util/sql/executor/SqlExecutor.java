@@ -100,7 +100,7 @@ public class SqlExecutor {
         Row row = new Row(table.getColumnCount());
         for (int i = 0; i < stmt.getColumns().size(); i++) {
             String colName = stmt.getColumns().get(i);
-            String val = stmt.getValues().get(i);
+            Object val = stmt.getValues().get(i);
             int colIndex = table.getColumnIndex(colName);
             if (colIndex < 0) {
                 return new SqlResult(false, "Column not found: " + colName, 0);
@@ -406,29 +406,39 @@ public class SqlExecutor {
     /**
      * 转换值类型
      */
-    private Object convertValue(String val, Class<?> targetType) {
-        if (val == null || "NULL".equalsIgnoreCase(val)) {
+    private Object convertValue(Object val, Class<?> targetType) {
+        if (val == null || "NULL".equalsIgnoreCase(String.valueOf(val))) {
             return null;
         }
-        
-        val = val.trim();
-        
-        // 去除引号
-        if ((val.startsWith("'") && val.endsWith("'")) || 
-            (val.startsWith("\"") && val.endsWith("\""))) {
-            val = val.substring(1, val.length() - 1);
-            val = val.replace("\\'", "'");
-            val = val.replace("\\\"", "\"");
-            val = val.replace("\\\\", "\\");
-        }
-        
-        if (targetType == String.class) {
+
+        // 如果值已经是目标类型，直接返回
+        if (val.getClass() == targetType || 
+            (targetType == Integer.TYPE && val instanceof Integer) ||
+            (targetType == Long.TYPE && val instanceof Long) ||
+            (targetType == Double.TYPE && val instanceof Double) ||
+            (targetType == Float.TYPE && val instanceof Float) ||
+            (targetType == Boolean.TYPE && val instanceof Boolean)) {
             return val;
         }
-        
+
+        String strVal = val.toString().trim();
+
+        // 去除引号
+        if ((strVal.startsWith("'") && strVal.endsWith("'")) ||
+            (strVal.startsWith("\"") && strVal.endsWith("\""))) {
+            strVal = strVal.substring(1, strVal.length() - 1);
+            strVal = strVal.replace("\\'", "'");
+            strVal = strVal.replace("\\\"", "\"");
+            strVal = strVal.replace("\\\\", "\\");
+        }
+
+        if (targetType == String.class) {
+            return strVal;
+        }
+
         if (targetType == Integer.class || targetType == Integer.TYPE) {
             try {
-                return Integer.parseInt(val);
+                return Integer.parseInt(strVal);
             } catch (NumberFormatException e) {
                 return 0;
             }
@@ -436,33 +446,33 @@ public class SqlExecutor {
         
         if (targetType == Long.class || targetType == Long.TYPE) {
             try {
-                return Long.parseLong(val);
+                return Long.parseLong(strVal);
             } catch (NumberFormatException e) {
                 return 0L;
             }
         }
-        
+
         if (targetType == Double.class || targetType == Double.TYPE) {
             try {
-                return Double.parseDouble(val);
+                return Double.parseDouble(strVal);
             } catch (NumberFormatException e) {
                 return 0.0;
             }
         }
-        
+
         if (targetType == Float.class || targetType == Float.TYPE) {
             try {
-                return Float.parseFloat(val);
+                return Float.parseFloat(strVal);
             } catch (NumberFormatException e) {
                 return 0.0f;
             }
         }
-        
+
         if (targetType == Boolean.class || targetType == Boolean.TYPE) {
-            return Boolean.parseBoolean(val);
+            return Boolean.parseBoolean(strVal);
         }
-        
-        return val;
+
+        return strVal;
     }
     
     // ========== 数据库管理方法 ==========

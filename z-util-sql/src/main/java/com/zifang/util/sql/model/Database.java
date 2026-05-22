@@ -33,6 +33,15 @@ public class Database {
         return table;
     }
     
+    public Table createTable(String name, Column... columns) {
+        Table table = new Table(name);
+        for (Column col : columns) {
+            table.addColumn(col.getName(), col.getType());
+        }
+        addTable(table);
+        return table;
+    }
+    
     public Table getTable(String name) {
         return tables.get(name.toLowerCase());
     }
@@ -41,8 +50,8 @@ public class Database {
         return tables.containsKey(name.toLowerCase());
     }
     
-    public void dropTable(String name) {
-        tables.remove(name.toLowerCase());
+    public boolean dropTable(String name) {
+        return tables.remove(name.toLowerCase()) != null;
     }
     
     public Set<String> getTableNames() {
@@ -55,6 +64,10 @@ public class Database {
     
     public int getTableCount() {
         return tables.size();
+    }
+    
+    public void clearAllTables() {
+        tables.clear();
     }
     
     @Override
