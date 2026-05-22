@@ -1,11 +1,18 @@
 package com.zifang.util.proxy.a.decompile.adapter;
 
 import com.zifang.util.proxy.a.decompile.bean.Class_info;
+import com.zifang.util.proxy.a.decompile.bean.ExceptionTable;
 import com.zifang.util.proxy.a.decompile.bean.Fields_info;
 import com.zifang.util.proxy.a.decompile.bean.Methods_info;
+import com.zifang.util.proxy.a.decompile.bean.OpcodeAndOperand;
+import com.zifang.util.proxy.a.decompile.bean.attribute.*;
 import com.zifang.util.proxy.a.decompile.bean.constant.*;
-import com.zifang.util.proxy.a.resolver2.ClassFile;
-import com.zifang.util.proxy.a.resolver2.constantpool.*;
+import com.zifang.util.proxy.a.decompile.core.CodeConvertor;
+import com.zifang.util.proxy.a.decompile.core.OperandBytesJudge;
+import com.zifang.util.proxy.a.model.ClassFile;
+import com.zifang.util.proxy.a.model.attribute.*;
+import com.zifang.util.proxy.a.model.constantpool.*;
+import com.zifang.util.proxy.a.model.readtype.U1;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +27,9 @@ import java.util.Map;
  */
 public class ClassFileAdapter {
 
+    /** 临时存储 poolList，用于属性转换 */
+    private static List<AbstractConstantPool> tempPoolList;
+
     /**
      * 将 ClassFile 转换为 Class_info
      *
@@ -28,6 +38,7 @@ public class ClassFileAdapter {
      */
     public static Class_info adapt(ClassFile classFile) {
         Class_info classInfo = new Class_info();
+        tempPoolList = classFile.poolInfo.getPoolList();
 
         // 1. 设置魔数
         classInfo.setMagic(String.format("0x%08X", classFile.magic.value));
@@ -64,15 +75,14 @@ public class ClassFileAdapter {
         List<Fields_info> fieldsList = new ArrayList<>();
         if (classFile.fieldInfo != null) {
             for (int i = 0; i < classFile.fieldInfo.getFieldCount(); i++) {
-                com.zifang.util.proxy.a.resolver2.field.FieldInfo fieldInfo = 
+                com.zifang.util.proxy.a.model.field.FieldInfo fieldInfo = 
                         classFile.fieldInfo.getField(i);
                 Fields_info fieldsInfo = new Fields_info();
                 fieldsInfo.setAccess_flag(String.format("%04X", fieldInfo.getAccessFlags().value));
                 fieldsInfo.setName_index(fieldInfo.getNameIndex().value);
                 fieldsInfo.setDescriptor_index(fieldInfo.getDescriptorIndex().value);
                 fieldsInfo.setAttributes_count(fieldInfo.getAttributesCount().value);
-                // TODO: 转换属性
-                fieldsInfo.setAttributes_list(new ArrayList<>());
+                fieldsInfo.setAttributes_list(convertAttributes(fieldInfo.getAttributes()));
                 fieldsList.add(fieldsInfo);
             }
         }
@@ -83,22 +93,222 @@ public class ClassFileAdapter {
         List<Methods_info> methodsList = new ArrayList<>();
         if (classFile.methodInfo != null) {
             for (int i = 0; i < classFile.methodInfo.getMethodCount(); i++) {
-                com.zifang.util.proxy.a.resolver2.method.MethodInfo methodInfo = 
+                com.zifang.util.proxy.a.model.method.MethodInfo methodInfo = 
                         classFile.methodInfo.getMethod(i);
                 Methods_info methodsInfo = new Methods_info();
                 methodsInfo.setAccess_flag(String.format("%04X", methodInfo.getAccessFlags().value));
                 methodsInfo.setName_index(methodInfo.getNameIndex().value);
                 methodsInfo.setDescriptor_index(methodInfo.getDescriptorIndex().value);
                 methodsInfo.setAttributes_count(methodInfo.getAttributesCount().value);
-                // TODO: 转换属性
-                methodsInfo.setAttributes_list(new ArrayList<>());
+                methodsInfo.setAttributes_list(convertAttributes(methodInfo.getAttributes()));
                 methodsList.add(methodsInfo);
             }
         }
         classInfo.setMethods_info_List(methodsList);
         classInfo.setMethods_count(methodsList.size());
 
+        // 9. 设置类属性（通常为空）
+        classInfo.setAttributes_count(0);
+        classInfo.setAttributes(new ArrayList<>());
+
         return classInfo;
+    }
+
+    /**
+     * 转换属性列表
+     */
+    private static List<Attribute_info> convertAttributes(List<AbstractAttribute> attributes) {
+        List<Attribute_info> result = new ArrayList<>();
+        if (attributes == null) {
+            return result;
+        }
+
+        for (AbstractAttribute attr : attributes) {
+            Attribute_info info = convertAttribute(attr);
+            if (info != null) {
+                result.add(info);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 转换单个属性
+     */
+    private static Attribute_info convertAttribute(AbstractAttribute attr) {
+        if (attr == null) {
+            return null;
+        }
+
+        Attribute_info info = new Attribute_info();
+        
+        // 获取属性名称
+        int nameIndex = attr.getAttributeNameIndex().value;
+        String attrName = getUtf8String(nameIndex - 1);
+        info.setAttribute_type(attrName);
+        info.setAttribute_name_index(nameIndex);
+        info.setAttrbute_length(attr.getAttributeLength().value);
+
+        // 根据属性类型进行转换
+        if (attr instanceof Code) {
+            return convertCodeAttribute((Code) attr);
+        } else if (attr instanceof ConstantValue) {
+            return convertConstantValueAttribute((ConstantValue) attr);
+        } else if (attr instanceof LineNumberTable) {
+            return convertLineNumberTableAttribute((LineNumberTable) attr);
+        } else if (attr instanceof LocalVariableTable) {
+            return convertLocalVariableTableAttribute((LocalVariableTable) attr);
+        }
+
+        // 其他属性类型直接存储信息
+        info.setInfo(attr.getClass().getSimpleName());
+        return info;
+    }
+
+    /**
+     * 转换 Code 属性
+     */
+    private static Attribute_Code_info convertCodeAttribute(Code code) {
+        Attribute_Code_info info = new Attribute_Code_info();
+        info.setAttribute_type("Code");
+        info.setAttribute_name_index(code.getAttributeNameIndex().value);
+        info.setAttrbute_length(code.getAttributeLength().value);
+        info.setMax_statck(code.getMaxStack().value);
+        info.setMax_locals(code.getMaxLocals().value);
+        info.setCode_length(code.getCodeLength().value);
+
+        // 转换字节码指令
+        Map<Integer, OpcodeAndOperand> codeMap = new HashMap<>();
+        List<U1> codeBytes = code.getCode();
+        for (int pc = 0; pc < codeBytes.size(); pc++) {
+            int opcode = codeBytes.get(pc).value & 0xFF;
+            OpcodeAndOperand oa = new OpcodeAndOperand();
+            String hexCode = String.format("%02X", opcode);
+            String opcodeName = CodeConvertor.codeConvertor(hexCode);
+            
+            // 处理未知 opcode
+            if (opcodeName == null) {
+                opcodeName = "unknown_" + hexCode;
+                codeMap.put(pc, oa);
+                continue;
+            }
+            
+            oa.setOpcode(opcodeName);
+            
+            // 判断操作数
+            int operandBytes = OperandBytesJudge.operandBytesCount(opcodeName);
+            if (operandBytes > 0 && pc + operandBytes < codeBytes.size()) {
+                StringBuilder operand = new StringBuilder();
+                for (int j = 0; j < operandBytes; j++) {
+                    pc++;
+                    operand.append(String.format("%02X", codeBytes.get(pc).value));
+                }
+                try {
+                    oa.setOperand(Integer.parseInt(operand.toString(), 16));
+                } catch (NumberFormatException e) {
+                    oa.setOperand(operand.toString());
+                }
+            }
+            codeMap.put(pc, oa);
+        }
+        info.setCodeMap(codeMap);
+
+        // 转换异常表
+        info.setException_table_length(code.getExceptionTableLength().value);
+        List<ExceptionTable> exceptionTables = new ArrayList<>();
+        for (Code.ExceptionInfo ei : code.getExceptionTable()) {
+            ExceptionTable et = new ExceptionTable();
+            et.setStart_pc(ei.getStartPc().value);
+            et.setEnd_pc(ei.getEndPc().value);
+            et.setHandler_pc(ei.getHandlerPc().value + "");
+            // catch_pc 0 表示 catch-all (finally)
+            if (ei.getCatchPc().value == 0) {
+                et.setCatch_type("0");
+            } else {
+                et.setCatch_type(ei.getCatchPc().value + "");
+            }
+            exceptionTables.add(et);
+        }
+        info.setExceptionTablesList(exceptionTables);
+
+        // 转换子属性（LineNumberTable, LocalVariableTable）
+        info.setAttributes_count(code.getAttributesCount().value);
+        info.setAttributesList(convertAttributes(code.getAttributes()));
+
+        return info;
+    }
+
+    /**
+     * 转换 ConstantValue 属性
+     */
+    private static Attribute_ConstantValue_info convertConstantValueAttribute(ConstantValue cv) {
+        Attribute_ConstantValue_info info = new Attribute_ConstantValue_info();
+        info.setAttribute_type("ConstantValue");
+        info.setAttribute_name_index(cv.getAttributeNameIndex().value);
+        info.setAttrbute_length(cv.getAttributeLength().value);
+        info.setConstantvalue_index(cv.getConstantValueIndex().value);
+        return info;
+    }
+
+    /**
+     * 转换 LineNumberTable 属性
+     */
+    private static Attribute_LineNumberTable_info convertLineNumberTableAttribute(LineNumberTable lnt) {
+        Attribute_LineNumberTable_info info = new Attribute_LineNumberTable_info();
+        info.setAttribute_type("LineNumberTable");
+        info.setAttribute_name_index(lnt.getAttributeNameIndex().value);
+        info.setAttrbute_length(lnt.getAttributeLength().value);
+        info.setLine_number_table_length(lnt.getLineNumTableLength().value);
+
+        List<Line_number_info> lineList = new ArrayList<>();
+        for (LineNumberTable.LineNumberInfo lni : lnt.getLineNumberTable()) {
+            Line_number_info linfo = new Line_number_info();
+            linfo.setStart_pc(lni.getStartPc().value);
+            linfo.setLine_number(lni.getLineNumber().value);
+            lineList.add(linfo);
+        }
+        info.setLine_number_table_List(lineList);
+
+        return info;
+    }
+
+    /**
+     * 转换 LocalVariableTable 属性
+     */
+    private static Attribute_LocalVariableTable_info convertLocalVariableTableAttribute(LocalVariableTable lvt) {
+        Attribute_LocalVariableTable_info info = new Attribute_LocalVariableTable_info();
+        info.setAttribute_type("LocalVariableTable");
+        info.setAttribute_name_index(lvt.getAttributeNameIndex().value);
+        info.setAttrbute_length(lvt.getAttributeLength().value);
+        info.setLocal_variable_table_length(lvt.getLocalVariableTableLength().value);
+
+        List<Local_variable_info> varList = new ArrayList<>();
+        for (LocalVariableTable.LocalVariableInfo lvi : lvt.getLocalVariableTable()) {
+            Local_variable_info vinfo = new Local_variable_info();
+            vinfo.setStart_pc(lvi.getStartPc().value);
+            vinfo.setLength(lvi.getLength().value);
+            vinfo.setName_index(lvi.getNameIndex().value);
+            vinfo.setDescriptor_index(lvi.getDescriptorIndex().value);
+            vinfo.setIndex(lvi.getIndex().value);
+            varList.add(vinfo);
+        }
+        info.setLocal_variable_table_List(varList);
+
+        return info;
+    }
+
+    /**
+     * 从常量池获取 UTF8 字符串
+     */
+    private static String getUtf8String(int poolIndex) {
+        if (poolIndex < 0 || poolIndex >= tempPoolList.size()) {
+            return "";
+        }
+        AbstractConstantPool pool = tempPoolList.get(poolIndex);
+        if (pool instanceof Utf8Info) {
+            return ((Utf8Info) pool).getValue();
+        }
+        return "";
     }
 
     /**

@@ -1,11 +1,8 @@
 package com.zifang.util.media.graph.qrcode;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.zifang.util.media.graph.qrcode.encoder.BitMatrix;
+import com.zifang.util.media.graph.qrcode.encoder.ErrorCorrectionLevel;
+import com.zifang.util.media.graph.qrcode.encoder.QRCodeEncoder;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -13,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Hashtable;
 
 /**
  * 二维码图片写入扩展类。
@@ -21,7 +17,6 @@ import java.util.Hashtable;
  * 可以将 Logo 图片嵌入到二维码中间。
  */
 public class MatrixToImageWriterEx {
-
 
     private static final MatrixToLogoImageConfig DEFAULT_CONFIG = new MatrixToLogoImageConfig();
 
@@ -34,20 +29,7 @@ public class MatrixToImageWriterEx {
      * @return BitMatrix 位矩阵对象
      */
     public static BitMatrix createQRCode(String content, int width, int height) {
-        Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
-        //设置字符编码
-        hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-        // 指定纠错等级
-        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
-        hints.put(EncodeHintType.MARGIN, 1);
-        BitMatrix matrix = null;
-        try {
-            matrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-
-        return matrix;
+        return QRCodeEncoder.encode(content, width, height, ErrorCorrectionLevel.H, "UTF-8");
     }
 
     /**
@@ -60,11 +42,11 @@ public class MatrixToImageWriterEx {
      * @throws IOException 如果文件写入失败
      */
     public static void writeToFile(BitMatrix matrix, String format, String imagePath, String logoPath) throws IOException {
-        MatrixToImageWriter.writeToFile(matrix, format, new File(imagePath), new MatrixToImageConfig());
+        MatrixToImageWriter.writeToFile(matrix, format, new File(imagePath));
 
         //添加logo图片, 此处一定需要重新进行读取，而不能直接使用二维码的BufferedImage 对象
         BufferedImage img = ImageIO.read(new File(imagePath));
-        MatrixToImageWriterEx.overlapImage(img, format, imagePath, logoPath, DEFAULT_CONFIG);
+        overlapImage(img, format, imagePath, logoPath, DEFAULT_CONFIG);
     }
 
     /**
@@ -78,11 +60,11 @@ public class MatrixToImageWriterEx {
      * @throws IOException 如果文件写入失败
      */
     public static void writeToFile(BitMatrix matrix, String format, String imagePath, String logoPath, MatrixToLogoImageConfig logoConfig) throws IOException {
-        MatrixToImageWriter.writeToFile(matrix, format, new File(imagePath), new MatrixToImageConfig());
+        MatrixToImageWriter.writeToFile(matrix, format, new File(imagePath));
 
         //添加logo图片, 此处一定需要重新进行读取，而不能直接使用二维码的BufferedImage 对象
         BufferedImage img = ImageIO.read(new File(imagePath));
-        MatrixToImageWriterEx.overlapImage(img, format, imagePath, logoPath, logoConfig);
+        overlapImage(img, format, imagePath, logoPath, logoConfig);
     }
 
     /**
@@ -96,10 +78,7 @@ public class MatrixToImageWriterEx {
      */
     public static void overlapImage(BufferedImage image, String format, String imagePath, String logoPath, MatrixToLogoImageConfig logoConfig) {
         try {
-            //将logo写入二维码中
             drawImage(logoPath, image, logoConfig);
-
-            //写入logo照片到二维码
             ImageIO.write(image, format, new File(imagePath));
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,13 +96,8 @@ public class MatrixToImageWriterEx {
      * @throws IOException 如果写入失败
      */
     public static void overlapImage(BitMatrix matrix, String format, String logoPath, MatrixToLogoImageConfig logoConfig, OutputStream out) throws IOException {
-        //将matrix转换为bufferImage
         BufferedImage image = MatrixToImageWriter.toBufferedImage(matrix);
-
-        //将logo照片绘制到二维码中间
         drawImage(logoPath, image, logoConfig);
-
-        //输出
         ImageIO.write(image, format, out);
     }
 
@@ -138,10 +112,7 @@ public class MatrixToImageWriterEx {
      * @throws IOException 如果写入失败
      */
     public static void overlapImage(BufferedImage image, String format, String logoPath, MatrixToLogoImageConfig logoConfig, OutputStream out) throws IOException {
-        //将logo照片绘制到二维码中间
         drawImage(logoPath, image, logoConfig);
-
-        //输出
         ImageIO.write(image, format, out);
     }
 
@@ -160,7 +131,6 @@ public class MatrixToImageWriterEx {
 
         try {
             BufferedImage logo = ImageIO.read(new File(logoPath));
-            logo.setRGB(0, 0, BufferedImage.TYPE_INT_BGR);
             Graphics2D g = image.createGraphics();
 
             //考虑到logo照片贴到二维码中，建议大小不要超过二维码的1/5;
@@ -173,17 +143,9 @@ public class MatrixToImageWriterEx {
 
             //绘制图
             g.drawImage(logo, x, y, width, height, null);
-
-            //给logo画边框
-            //构造一个具有指定线条宽度以及 cap 和 join 风格的默认值的实心 BasicStroke
-//		g.setStroke(new BasicStroke(logoConfig.getBorder()));
-//		g.setColor(logoConfig.getBorderColor());
-//		g.drawRect(x, y, width, height);
-
             g.dispose();
-        } catch (Exception e) {   //捕捉异常后不做任何处理，防止图片路径错误而导致二维码生成失败
-
+        } catch (Exception e) {
+            //捕捉异常后不做任何处理，防止图片路径错误而导致二维码生成失败
         }
     }
-
 }

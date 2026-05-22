@@ -5,7 +5,7 @@ import com.zifang.util.proxy.a.decompile.bean.constant.Constant_Class_info;
 import com.zifang.util.proxy.a.decompile.bean.constant.Constant_Utf8_info;
 import com.zifang.util.proxy.a.decompile.bean.constant.Constant_X_info;
 import com.zifang.util.proxy.a.resolver.ByteCodeResolver;
-import com.zifang.util.proxy.a.resolver2.ClassFile;
+import com.zifang.util.proxy.a.model.ClassFile;
 import org.junit.Test;
 
 import java.io.InputStream;

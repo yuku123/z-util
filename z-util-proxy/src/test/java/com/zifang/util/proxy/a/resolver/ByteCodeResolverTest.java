@@ -1,11 +1,11 @@
 package com.zifang.util.proxy.a.resolver;
 
-import com.zifang.util.proxy.a.resolver2.ClassFile;
-import com.zifang.util.proxy.a.resolver2.constantpool.AbstractConstantPool;
-import com.zifang.util.proxy.a.resolver2.constantpool.ClassInfo;
-import com.zifang.util.proxy.a.resolver2.constantpool.Utf8Info;
-import com.zifang.util.proxy.a.resolver2.field.FieldTable;
-import com.zifang.util.proxy.a.resolver2.method.MethodTable;
+import com.zifang.util.proxy.a.model.ClassFile;
+import com.zifang.util.proxy.a.model.constantpool.AbstractConstantPool;
+import com.zifang.util.proxy.a.model.constantpool.ClassInfo;
+import com.zifang.util.proxy.a.model.constantpool.Utf8Info;
+import com.zifang.util.proxy.a.model.field.FieldTable;
+import com.zifang.util.proxy.a.model.method.MethodTable;
 import org.junit.Test;
 
 import java.io.InputStream;

@@ -1,22 +1,6 @@
-/*
- * Copyright 2009 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.zifang.util.media.graph.qrcode;
 
-import com.google.zxing.common.BitMatrix;
+import com.zifang.util.media.graph.qrcode.encoder.BitMatrix;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -26,8 +10,7 @@ import java.io.OutputStream;
 
 /**
  * Writes a {@link BitMatrix} to {@link BufferedImage},
- * file or stream. Provided here instead of core since it depends on
- * Java SE libraries.
+ * file or stream.
  *
  * @author zifang Owen
  */
@@ -52,7 +35,7 @@ public final class MatrixToImageWriter {
     public static BufferedImage toBufferedImage(BitMatrix matrix, MatrixToImageConfig config) {
         int width = matrix.getWidth();
         int height = matrix.getHeight();
-        BufferedImage image = new BufferedImage(width, height, config.getBufferedImageColorModel());
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         int onColor = config.getPixelOnColor();
         int offColor = config.getPixelOffColor();
         for (int x = 0; x < width; x++) {
@@ -102,5 +85,4 @@ public final class MatrixToImageWriter {
             throw new IOException("Could not write an image of format " + format);
         }
     }
-
 }

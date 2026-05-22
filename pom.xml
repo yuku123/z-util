@@ -36,7 +36,7 @@
         <module>z-util-zex</module>
         <module>z-util-http</module>
         <module>z-util-math</module>
-        <module>z-util-ai</module>
+        <module>z-util-ml</module>
         <module>z-util-extra</module>
         <module>z-util-monitor</module>
         <module>z-util-devops</module>

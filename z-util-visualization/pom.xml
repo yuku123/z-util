@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>com.zifang</groupId>
-            <artifactId>z-util-ai</artifactId>
+            <artifactId>z-util-ml</artifactId>
             <version>${util.version}</version>
         </dependency>
     </dependencies>

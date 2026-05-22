@@ -1,14 +1,14 @@
 package com.zifang.util.proxy.a.resolver;
 
-import com.zifang.util.proxy.a.resolver2.ClassFile;
-import com.zifang.util.proxy.a.resolver2.attribute.AttributeFactory;
-import com.zifang.util.proxy.a.resolver2.constantpool.*;
-import com.zifang.util.proxy.a.resolver2.field.FieldTable;
-import com.zifang.util.proxy.a.resolver2.inter.InterfaceIndex;
-import com.zifang.util.proxy.a.resolver2.method.MethodTable;
-import com.zifang.util.proxy.a.resolver2.readtype.U1;
-import com.zifang.util.proxy.a.resolver2.readtype.U2;
-import com.zifang.util.proxy.a.resolver2.readtype.U4;
+import com.zifang.util.proxy.a.model.ClassFile;
+import com.zifang.util.proxy.a.model.attribute.AttributeFactory;
+import com.zifang.util.proxy.a.model.constantpool.*;
+import com.zifang.util.proxy.a.model.field.FieldTable;
+import com.zifang.util.proxy.a.model.inter.InterfaceIndex;
+import com.zifang.util.proxy.a.model.method.MethodTable;
+import com.zifang.util.proxy.a.model.readtype.U1;
+import com.zifang.util.proxy.a.model.readtype.U2;
+import com.zifang.util.proxy.a.model.readtype.U4;
 
 import java.io.InputStream;
 import java.util.ArrayList;
