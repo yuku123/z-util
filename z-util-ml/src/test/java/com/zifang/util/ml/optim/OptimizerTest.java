@@ -18,7 +18,7 @@ class OptimizerTest {
         int paramSize = 8;
 
         // Create a parameter
-        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
+        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
@@ -30,10 +30,10 @@ class OptimizerTest {
         optimizer.addParameter("weight", param);
 
         // Create gradient (all ones)
-        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
+        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
         Object gradData = grad.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(gradData, i, 1.0f);
+            com.zifang.util.numpy.Array.set(gradData, i, 1.0);
         }
         optimizer.setGradient("weight", grad);
 
@@ -51,7 +51,7 @@ class OptimizerTest {
         for (int i = 0; i < paramSize; i++) {
             float newValue = (float) com.zifang.util.numpy.Array.get(paramData, i);
             // With lr=0.1 and grad=1, param should decrease by 0.1
-            assertEquals(initialValues[i] - 0.1f, newValue, 0.001f);
+            assertEquals(initialValues[i] - 0.1f, newValue, 0.001);
         }
     }
 
@@ -60,7 +60,7 @@ class OptimizerTest {
         int paramSize = 8;
 
         // Create a parameter
-        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
+        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
@@ -72,10 +72,10 @@ class OptimizerTest {
         optimizer.addParameter("weight", param);
 
         // Create gradient (all ones)
-        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
+        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
         Object gradData = grad.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(gradData, i, 1.0f);
+            com.zifang.util.numpy.Array.set(gradData, i, 1.0);
         }
         optimizer.setGradient("weight", grad);
 
@@ -104,7 +104,7 @@ class OptimizerTest {
         int paramSize = 8;
 
         // Create a parameter
-        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
+        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
@@ -116,10 +116,10 @@ class OptimizerTest {
         optimizer.addParameter("weight", param);
 
         // Set gradient
-        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
+        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
         Object gradData = grad.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(gradData, i, 1.0f);
+            com.zifang.util.numpy.Array.set(gradData, i, 1.0);
         }
         optimizer.setGradient("weight", grad);
 
@@ -136,7 +136,7 @@ class OptimizerTest {
         int paramSize = 8;
 
         // Create a parameter
-        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
+        NdArray param = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
@@ -148,10 +148,10 @@ class OptimizerTest {
         optimizer.addParameter("weight", param);
 
         // Set gradient
-        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT32);
+        NdArray grad = NdArray.zeros(new Shape(paramSize), DType.FLOAT64);
         Object gradData = grad.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(gradData, i, 1.0f);
+            com.zifang.util.numpy.Array.set(gradData, i, 1.0);
         }
         optimizer.setGradient("weight", grad);
 

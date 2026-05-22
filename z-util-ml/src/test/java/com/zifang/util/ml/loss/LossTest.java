@@ -21,11 +21,11 @@ class LossTest {
 
         // Predictions: [1, 2, 3, 4]
         float[] predValues = {1.0f, 2.0f, 3.0f, 4.0f};
-        NdArray predictions = NdArray.array(predValues, DType.FLOAT32).reshape(1, size);
+        NdArray predictions = NdArray.array(predValues, DType.FLOAT64).reshape(1, size);
 
         // Targets: [1, 2, 3, 4] (same as predictions -> MSE should be 0)
         float[] targetValues = {1.0f, 2.0f, 3.0f, 4.0f};
-        NdArray targets = NdArray.array(targetValues, DType.FLOAT32).reshape(1, size);
+        NdArray targets = NdArray.array(targetValues, DType.FLOAT64).reshape(1, size);
 
         // Compute loss
         NdArray loss = mseLoss.compute(predictions, targets);
@@ -33,7 +33,7 @@ class LossTest {
         // Loss should be approximately 0
         Object lossData = loss.getData();
         float lossValue = (float) com.zifang.util.numpy.Array.get(lossData, 0);
-        assertEquals(0.0f, lossValue, 0.001f);
+        assertEquals(0.0, lossValue, 0.001);
     }
 
     @Test
@@ -44,11 +44,11 @@ class LossTest {
 
         // Predictions: [1, 2, 3, 4]
         float[] predValues = {1.0f, 2.0f, 3.0f, 4.0f};
-        NdArray predictions = NdArray.array(predValues, DType.FLOAT32).reshape(1, size);
+        NdArray predictions = NdArray.array(predValues, DType.FLOAT64).reshape(1, size);
 
         // Targets: [2, 3, 4, 5] (each off by 1)
         float[] targetValues = {2.0f, 3.0f, 4.0f, 5.0f};
-        NdArray targets = NdArray.array(targetValues, DType.FLOAT32).reshape(1, size);
+        NdArray targets = NdArray.array(targetValues, DType.FLOAT64).reshape(1, size);
 
         // Compute loss
         NdArray loss = mseLoss.compute(predictions, targets);
@@ -56,7 +56,7 @@ class LossTest {
         // MSE = (1 + 1 + 1 + 1) / 4 = 1
         Object lossData = loss.getData();
         float lossValue = (float) com.zifang.util.numpy.Array.get(lossData, 0);
-        assertEquals(1.0f, lossValue, 0.001f);
+        assertEquals(1.0, lossValue, 0.001);
     }
 
     @Test
@@ -67,11 +67,11 @@ class LossTest {
 
         // Predictions
         float[] predValues = {1.0f, 2.0f, 3.0f, 4.0f};
-        NdArray predictions = NdArray.array(predValues, DType.FLOAT32).reshape(1, size);
+        NdArray predictions = NdArray.array(predValues, DType.FLOAT64).reshape(1, size);
 
         // Targets
         float[] targetValues = {2.0f, 3.0f, 4.0f, 5.0f};
-        NdArray targets = NdArray.array(targetValues, DType.FLOAT32).reshape(1, size);
+        NdArray targets = NdArray.array(targetValues, DType.FLOAT64).reshape(1, size);
 
         // Compute gradient
         NdArray gradient = mseLoss.gradient(predictions, targets);
@@ -80,7 +80,7 @@ class LossTest {
         Object gradData = gradient.getData();
         for (int i = 0; i < size; i++) {
             float gradValue = (float) com.zifang.util.numpy.Array.get(gradData, i);
-            assertEquals(-0.5f, gradValue, 0.001f);
+            assertEquals(-0.5f, gradValue, 0.001);
         }
     }
 
@@ -95,12 +95,12 @@ class LossTest {
         // For class 0: [2.0, 1.0, 0.5]
         // For class 1: [0.5, 2.0, 1.0]
         float[] predValues = {2.0f, 1.0f, 0.5f, 0.5f, 2.0f, 1.0f};
-        NdArray predictions = NdArray.array(predValues, DType.FLOAT32).reshape(batchSize, numClasses);
+        NdArray predictions = NdArray.array(predValues, DType.FLOAT64).reshape(batchSize, numClasses);
 
         // Targets (one-hot encoded)
         // Class 0 for sample 0, Class 1 for sample 1
         float[] targetValues = {1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f};
-        NdArray targets = NdArray.array(targetValues, DType.FLOAT32).reshape(batchSize, numClasses);
+        NdArray targets = NdArray.array(targetValues, DType.FLOAT64).reshape(batchSize, numClasses);
 
         // Compute loss
         NdArray loss = celLoss.compute(predictions, targets);
@@ -120,11 +120,11 @@ class LossTest {
 
         // Predictions (logits)
         float[] predValues = {2.0f, 1.0f, 0.5f, 0.5f, 2.0f, 1.0f};
-        NdArray predictions = NdArray.array(predValues, DType.FLOAT32).reshape(batchSize, numClasses);
+        NdArray predictions = NdArray.array(predValues, DType.FLOAT64).reshape(batchSize, numClasses);
 
         // Targets (one-hot)
         float[] targetValues = {1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f};
-        NdArray targets = NdArray.array(targetValues, DType.FLOAT32).reshape(batchSize, numClasses);
+        NdArray targets = NdArray.array(targetValues, DType.FLOAT64).reshape(batchSize, numClasses);
 
         // Compute gradient
         NdArray gradient = celLoss.gradient(predictions, targets);
@@ -152,8 +152,8 @@ class LossTest {
             mseTarget[i] = rand.nextFloat();
         }
 
-        NdArray msePredictions = NdArray.array(msePred, DType.FLOAT32).reshape(batchSize, features);
-        NdArray mseTargets = NdArray.array(mseTarget, DType.FLOAT32).reshape(batchSize, features);
+        NdArray msePredictions = NdArray.array(msePred, DType.FLOAT64).reshape(batchSize, features);
+        NdArray mseTargets = NdArray.array(mseTarget, DType.FLOAT64).reshape(batchSize, features);
 
         NdArray mseLossOutput = mseLoss.compute(msePredictions, mseTargets);
         NdArray mseGradient = mseLoss.gradient(msePredictions, mseTargets);
@@ -173,8 +173,8 @@ class LossTest {
             ceTarget[i] = (i % numClasses == 0) ? 1.0f : 0.0f;
         }
 
-        NdArray cePredictions = NdArray.array(cePred, DType.FLOAT32).reshape(batchSize, numClasses);
-        NdArray ceTargets = NdArray.array(ceTarget, DType.FLOAT32).reshape(batchSize, numClasses);
+        NdArray cePredictions = NdArray.array(cePred, DType.FLOAT64).reshape(batchSize, numClasses);
+        NdArray ceTargets = NdArray.array(ceTarget, DType.FLOAT64).reshape(batchSize, numClasses);
 
         NdArray ceLossOutput = celLoss.compute(cePredictions, ceTargets);
         NdArray ceGradient = celLoss.gradient(cePredictions, ceTargets);
