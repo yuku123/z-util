@@ -30,7 +30,7 @@ public class SrcCreator {
      * @return Java 源代码字符串
      */
     public static String createJavaFileSrc(ClassFile classFile) {
-        StringBuffer sBuffer = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         // 获取常量池
         List<AbstractConstantPool> poolList = classFile.poolInfo.getPoolList();
@@ -44,161 +44,51 @@ public class SrcCreator {
 
         // 包声明
         String packageName = thisClassQualified.substring(0, thisClassQualified.lastIndexOf("/")).replace("/", ".");
-        sBuffer.append("package ").append(packageName).append(";\n\n");
+        sb.append("package ").append(packageName).append(";\n\n");
 
         // 收集导入
         Set<String> imports = collectImports(classFile);
-
-        // 输出导入
         for (String imp : imports) {
-            // 过滤掉 java.lang、当前包、自己、不合法的导入
-            if (!imp.startsWith("java.lang.")
-                    && !imp.equals(packageName)
-                    && !imp.equals(packageName + "." + thisClassSimple)) {
-                sBuffer.append("import ").append(imp).append(";\n");
-            }
+            sb.append("import ").append(imp).append(";\n");
         }
-        sBuffer.append("\n");
+        if (!imports.isEmpty()) {
+            sb.append("\n");
+        }
 
-        // 类访问标志
+        // 类定义开始
         String accessFlag = AccessFlagConvertor.classAccessFlagConvertor(
-                String.format("%04X", classFile.accessFlag.value));
-
-        // 父类
-        String superClass = getSuperClassName(classFile);
-
-        // 接口
-        String interfaces = getInterfaceNames(classFile);
-
-        sBuffer.append(accessFlag).append("class ").append(thisClassSimple)
-                .append(superClass).append(interfaces).append("{\n\n");
+                String.format("%04X", classFile.getAccessFlag().value));
+        sb.append(accessFlag).append("class ").append(thisClassSimple).append("{\n\n");
 
         // 字段
-        if (classFile.fieldInfo != null) {
-            for (int i = 0; i < classFile.fieldInfo.getFieldCount(); i++) {
-                FieldInfo fieldInfo = classFile.fieldInfo.getField(i);
-                sBuffer.append(generateFieldSrc(fieldInfo, classFile));
+        for (int i = 0; i < classFile.fieldInfo.getFieldCount(); i++) {
+            FieldInfo fieldInfo = classFile.fieldInfo.getField(i);
+            String fieldSrc = generateFieldSrc(fieldInfo, classFile);
+            if (fieldSrc != null) {
+                sb.append(fieldSrc);
             }
         }
-        sBuffer.append("\n");
 
         // 方法
-        if (classFile.methodInfo != null) {
-            for (int i = 0; i < classFile.methodInfo.getMethodCount(); i++) {
-                MethodInfo methodInfo = classFile.methodInfo.getMethod(i);
-                String methodSrc = generateMethodSrc(methodInfo, classFile, thisClassSimple);
-                if (methodSrc != null) {
-                    sBuffer.append(methodSrc);
-                }
+        for (int i = 0; i < classFile.methodInfo.getMethodCount(); i++) {
+            MethodInfo methodInfo = classFile.methodInfo.getMethod(i);
+            String methodSrc = generateMethodSrc(methodInfo, classFile, thisClassSimple);
+            if (methodSrc != null) {
+                sb.append(methodSrc);
             }
         }
 
-        sBuffer.append("}\n");
-        return sBuffer.toString();
+        sb.append("}\n");
+        return sb.toString();
     }
 
     /**
-     * 收集需要导入的类
+     * 收集需要的导入
      */
     private static Set<String> collectImports(ClassFile classFile) {
-        Set<String> imports = new HashSet<>();
-        List<AbstractConstantPool> poolList = classFile.poolInfo.getPoolList();
-
-        for (AbstractConstantPool pool : poolList) {
-            if (pool instanceof Utf8Info) {
-                String value = ((Utf8Info) pool).getValue();
-                if (value != null && value.contains("/") && !value.contains("(")) {
-                    String imported = value.replace("/", ".");
-                    if (imported.contains("<")) {
-                        imported = imported.substring(0, imported.indexOf("<"));
-                    }
-                    if (!imported.endsWith(";")) {
-                        imports.add(imported);
-                    }
-                }
-            }
-        }
+        Set<String> imports = new TreeSet<>();
+        // TODO: 分析字段类型，添加需要的导入
         return imports;
-    }
-
-    /**
-     * 获取父类名
-     */
-    private static String getSuperClassName(ClassFile classFile) {
-        if (classFile.superClassIndex == null || classFile.superClassIndex.value == 0) {
-            return " extends Object";
-        }
-
-        List<AbstractConstantPool> poolList = classFile.poolInfo.getPoolList();
-        int classInfoIndex = classFile.superClassIndex.value - 1;
-
-        if (classInfoIndex < 0 || classInfoIndex >= poolList.size()) {
-            return " extends Object";
-        }
-
-        AbstractConstantPool pool = poolList.get(classInfoIndex);
-        if (!(pool instanceof ClassInfo)) {
-            return " extends Object";
-        }
-
-        int utf8Index = ((ClassInfo) pool).getNameIndex().value - 1;
-        if (utf8Index < 0 || utf8Index >= poolList.size()) {
-            return " extends Object";
-        }
-
-        AbstractConstantPool utf8Pool = poolList.get(utf8Index);
-        if (!(utf8Pool instanceof Utf8Info)) {
-            return " extends Object";
-        }
-
-        String superClass = ((Utf8Info) utf8Pool).getValue();
-        if (superClass.equals("java/lang/Object")) {
-            return "";
-        }
-        return " extends " + superClass.replace("/", ".");
-    }
-
-    /**
-     * 获取接口名列表
-     */
-    private static String getInterfaceNames(ClassFile classFile) {
-        if (classFile.interfaceIndex == null || classFile.interfaceIndex.list.isEmpty()) {
-            return "";
-        }
-
-        List<AbstractConstantPool> poolList = classFile.poolInfo.getPoolList();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < classFile.interfaceIndex.list.size(); i++) {
-            int classInfoIndex = (int) classFile.interfaceIndex.list.get(i).index.value - 1;
-            if (classInfoIndex < 0 || classInfoIndex >= poolList.size()) {
-                continue;
-            }
-
-            AbstractConstantPool pool = poolList.get(classInfoIndex);
-            if (!(pool instanceof ClassInfo)) {
-                continue;
-            }
-
-            int utf8Index = ((ClassInfo) pool).getNameIndex().value - 1;
-            if (utf8Index < 0 || utf8Index >= poolList.size()) {
-                continue;
-            }
-
-            AbstractConstantPool utf8Pool = poolList.get(utf8Index);
-            if (!(utf8Pool instanceof Utf8Info)) {
-                continue;
-            }
-
-            String iface = ((Utf8Info) utf8Pool).getValue().replace("/", ".");
-            if (i == 0) {
-                sb.append(" implements ");
-            } else {
-                sb.append(", ");
-            }
-            sb.append(iface);
-        }
-        return sb.toString();
     }
 
     /**
@@ -235,11 +125,6 @@ public class SrcCreator {
         int nameIndex = methodInfo.getNameIndex().value - 1;
         String methodName = getUtf8String(poolList, nameIndex);
 
-        // 跳过类初始化方法
-        if ("<clinit>".equals(methodName)) {
-            return null;
-        }
-
         // 描述符
         int descIndex = methodInfo.getDescriptorIndex().value - 1;
         String descriptor = getUtf8String(poolList, descIndex);
@@ -263,6 +148,12 @@ public class SrcCreator {
         short accessValue = methodInfo.getAccessFlags().value;
         boolean isAbstract = (accessValue & 0x0400) != 0;
         boolean isNative = (accessValue & 0x0100) != 0;
+        boolean isStatic = (accessValue & 0x0008) != 0;
+
+        // 静态初始化方法
+        if ("<clinit>".equals(methodName)) {
+            return generateStaticInitializer(methodInfo, classFile, thisClassSimple);
+        }
 
         if (isAbstract || isNative) {
             return "\t" + accessFlag + methodSignature + exceptions + ";\n\n";
@@ -271,18 +162,17 @@ public class SrcCreator {
         // 获取 Code 属性
         Code codeAttr = findCodeAttribute(methodInfo);
 
-        StringBuffer methodBody = new StringBuffer();
+        StringBuilder methodBody = new StringBuilder();
         methodBody.append("\t").append(accessFlag).append(methodSignature)
                 .append(exceptions).append("{\n");
 
         if (codeAttr != null) {
             // 收集局部变量表
-            Map<Integer, String> localVars = new HashMap<>();
-            localVars.put(0, "this");
+            Map<Integer, String> localVars = new LinkedHashMap<>();
+            if (!isStatic) {
+                localVars.put(0, "this");
+            }
             collectLocalVariables(codeAttr, classFile, localVars);
-
-            // 解析方法参数
-            List<String> paramNames = extractMethodParams(descriptor, localVars);
 
             // 生成方法体
             String body = decompileMethodBody(codeAttr, classFile, thisClassSimple, localVars);
@@ -291,6 +181,35 @@ public class SrcCreator {
 
         methodBody.append("\t}\n\n");
         return methodBody.toString();
+    }
+
+    /**
+     * 生成静态初始化块
+     */
+    private static String generateStaticInitializer(MethodInfo methodInfo, ClassFile classFile, String thisClassSimple) {
+        Code codeAttr = findCodeAttribute(methodInfo);
+        if (codeAttr == null) {
+            return "";
+        }
+
+        Map<Integer, String> localVars = new LinkedHashMap<>();
+        String body = decompileMethodBody(codeAttr, classFile, thisClassSimple, localVars);
+
+        // 清理 return; 语句
+        body = body.replace("\t\treturn;\n", "");
+        // body 现在是 "\t\ti = 0;\n" 格式
+        if (body.trim().isEmpty()) {
+            return "";  // 空初始化块不生成
+        }
+
+        // 将 body 的缩进从 \t\t 改为 \t（static 块内一层缩进）
+        body = body.replace("\t\t", "\t");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("\tstatic {\n");
+        sb.append(body);
+        sb.append("\t}\n\n");
+        return sb.toString();
     }
 
     /**
@@ -305,7 +224,7 @@ public class SrcCreator {
         }
 
         String paramTypes = descriptor.substring(parenOpen + 1, parenClose);
-        int slot = 1; // 0 is 'this'
+        int slot = 1; // 0 is 'this' for non-static
         int i = 0;
         while (i < paramTypes.length()) {
             char c = paramTypes.charAt(i);
@@ -339,28 +258,32 @@ public class SrcCreator {
                         sb.append("[]");
                         j++;
                     }
-                    char baseType = paramTypes.charAt(j);
-                    String base;
-                    if (baseType == 'L') {
-                        int semi2 = paramTypes.indexOf(';', j);
-                        String classType2 = paramTypes.substring(j + 1, semi2);
-                        base = classType2.substring(classType2.lastIndexOf('/') + 1);
-                        j = semi2;
-                    } else {
-                        base = ParamsConvertor.paramsConvertorFieldType(String.valueOf(baseType));
+                    char elemType = paramTypes.charAt(j);
+                    String elemTypeStr = null;
+                    switch (elemType) {
+                        case 'B': elemTypeStr = "byte"; break;
+                        case 'C': elemTypeStr = "char"; break;
+                        case 'F': elemTypeStr = "float"; break;
+                        case 'I': elemTypeStr = "int"; break;
+                        case 'J': elemTypeStr = "long"; break;
+                        case 'S': elemTypeStr = "short"; break;
+                        case 'Z': elemTypeStr = "boolean"; break;
+                        case 'L':
+                            int end = paramTypes.indexOf(';', j);
+                            elemTypeStr = paramTypes.substring(j + 1, end);
+                            elemTypeStr = elemTypeStr.substring(elemTypeStr.lastIndexOf('/') + 1);
+                            break;
                     }
-                    type = base + sb.toString();
+                    type = elemTypeStr + sb.toString();
                     width = 1;
                     i = j;
                     break;
                 default:
-                    i++;
-                    continue;
+                    type = "Object";
+                    width = 1;
             }
-            if (!localVars.containsKey(slot)) {
-                localVars.put(slot, "arg" + slot);
-            }
-            params.add(type + " " + localVars.get(slot));
+            localVars.put(slot, "arg" + slot);
+            params.add(type + " arg" + slot);
             slot += width;
             i++;
         }
@@ -368,30 +291,12 @@ public class SrcCreator {
     }
 
     /**
-     * 查找方法的 Code 属性
-     */
-    private static Code findCodeAttribute(MethodInfo methodInfo) {
-        if (methodInfo.getAttributes() == null) {
-            return null;
-        }
-        for (AbstractAttribute attr : methodInfo.getAttributes()) {
-            if (attr instanceof Code) {
-                return (Code) attr;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * 反编译方法体，生成 Java 代码
+     * 生成方法体
      */
     private static String decompileMethodBody(Code codeAttr, ClassFile classFile,
                                               String thisClassName, Map<Integer, String> localVars) {
-        List<U1> codeBytes = codeAttr.getCode();
         List<AbstractConstantPool> poolList = classFile.poolInfo.getPoolList();
-
-        // 解码字节码
-        List<DecompilerInstruction> instructions = decodeInstructions(codeBytes, poolList);
+        List<DecompilerInstruction> instructions = decodeInstructions(codeAttr.getCode(), poolList);
 
         // 设置行号
         Map<Integer, Integer> pcToLine = new HashMap<>();
@@ -416,7 +321,7 @@ public class SrcCreator {
             inst.lineNumber = lastLine;
         }
 
-        // 简化版反编译：按行号分组，每组生成一行 Java 代码
+        // 按行号分组
         Map<Integer, List<DecompilerInstruction>> instructionsByLine = new LinkedHashMap<>();
         for (DecompilerInstruction inst : instructions) {
             int line = inst.lineNumber > 0 ? inst.lineNumber : 0;
@@ -424,7 +329,6 @@ public class SrcCreator {
         }
 
         StringBuilder sb = new StringBuilder();
-        Set<Integer> printedLines = new HashSet<>();
 
         for (Entry<Integer, List<DecompilerInstruction>> entry : instructionsByLine.entrySet()) {
             List<DecompilerInstruction> lineInstrs = entry.getValue();
@@ -433,11 +337,9 @@ public class SrcCreator {
             String javaStmt = generateJavaStatement(lineInstrs, poolList, thisClassName, localVars);
             if (javaStmt != null && !javaStmt.isEmpty()) {
                 sb.append(INDENT).append(javaStmt).append("\n");
-                printedLines.add(entry.getKey());
             }
         }
 
-        // 如果没有生成任何代码，添加空行或注释
         if (sb.length() == 0) {
             sb.append(INDENT).append("// (empty method)\n");
         }
@@ -471,31 +373,57 @@ public class SrcCreator {
 
         // 先处理非 return 指令
         if (!nonReturnInstrs.isEmpty()) {
-            // 检查字段赋值模式: aload_0 iconst_1 putfield X
-            String fieldAssign = matchFieldAssignment(nonReturnInstrs, poolList);
-            if (fieldAssign != null) {
-                result.append(fieldAssign);
+            // 第一步：过滤掉 invokespecial <init>（构造方法调用）
+            List<DecompilerInstruction> filtered = new ArrayList<>();
+            for (DecompilerInstruction inst : nonReturnInstrs) {
+                if ("invokespecial".equals(inst.opcode) && inst.operand != null) {
+                    // 检查是否是 <init> 方法
+                    String methodName = resolveMethodName((Integer) inst.operand, poolList);
+                    if ("<init>".equals(methodName)) {
+                        continue; // 跳过构造方法调用
+                    }
+                }
+                filtered.add(inst);
+            }
+            nonReturnInstrs = filtered;
+
+            // 检查静态字段赋值: iconst_1 putstatic #13
+            String staticFieldAssign = matchStaticFieldAssignment(nonReturnInstrs, poolList);
+            if (staticFieldAssign != null) {
+                result.append(staticFieldAssign);
             } else {
-                // 检查局部变量赋值模式: iconst_1 istore_1
-                String varAssign = matchVariableAssignment(nonReturnInstrs, localVars);
-                if (varAssign != null) {
-                    result.append(varAssign);
+                // 检查实例字段赋值: aload_0 iconst_1 putfield X
+                String fieldAssign = matchFieldAssignment(nonReturnInstrs, poolList);
+                if (fieldAssign != null) {
+                    result.append(fieldAssign);
                 } else {
-                    // 检查方法调用模式
-                    String methodCall = matchMethodCall(nonReturnInstrs, poolList);
-                    if (methodCall != null) {
-                        result.append(methodCall);
+                    // 检查局部变量赋值: iconst_1 istore_1
+                    String varAssign = matchVariableAssignment(nonReturnInstrs, localVars);
+                    if (varAssign != null) {
+                        result.append(varAssign);
                     } else {
-                        // 默认：生成注释
-                        StringBuilder sb = new StringBuilder();
-                        for (DecompilerInstruction inst : nonReturnInstrs) {
-                            if (sb.length() > 0) sb.append(" ");
-                            sb.append(inst.opcode);
-                            if (inst.operand != null) {
-                                sb.append(" ").append(inst.operand);
+                        // 检查方法调用
+                        String methodCall = matchMethodCall(nonReturnInstrs, poolList);
+                        if (methodCall != null) {
+                            result.append(methodCall);
+                        } else {
+                            // 默认：生成注释
+                            StringBuilder sb = new StringBuilder();
+                            for (DecompilerInstruction inst : nonReturnInstrs) {
+                                // 跳过无操作数的 aload_0
+                                if ("aload_0".equals(inst.opcode) && inst.operand == null) {
+                                    continue;
+                                }
+                                if (sb.length() > 0) sb.append(" ");
+                                sb.append(inst.opcode);
+                                if (inst.operand != null) {
+                                    sb.append(" ").append(inst.operand);
+                                }
+                            }
+                            if (sb.length() > 0) {
+                                result.append("// ").append(sb.toString());
                             }
                         }
-                        result.append("// ").append(sb.toString());
                     }
                 }
             }
@@ -513,17 +441,43 @@ public class SrcCreator {
     }
 
     /**
-     * 匹配字段赋值模式: aload_0 <value> putfield <field_index>
+     * 匹配静态字段赋值模式: <value> putstatic #<index>
+     */
+    private static String matchStaticFieldAssignment(List<DecompilerInstruction> instructions,
+                                                     List<AbstractConstantPool> poolList) {
+        if (instructions.isEmpty()) return null;
+
+        for (int i = 0; i < instructions.size(); i++) {
+            DecompilerInstruction inst = instructions.get(i);
+            if ("putstatic".equals(inst.opcode) && inst.operand != null) {
+                // 获取字段名
+                String fieldName = resolveFieldName((Integer) inst.operand, poolList);
+                if (fieldName == null) {
+                    fieldName = "field" + inst.operand;
+                }
+
+                // 获取赋的值（指令序列中 putstatic 之前的部分）
+                String value = inferValue(instructions.subList(0, i), poolList);
+                if (value == null) {
+                    value = "0";
+                }
+
+                return fieldName + " = " + value + ";";
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 匹配实例字段赋值模式: aload_0 <value> putfield <field_index>
      */
     private static String matchFieldAssignment(List<DecompilerInstruction> instructions,
                                                List<AbstractConstantPool> poolList) {
         if (instructions.size() < 3) return null;
 
-        // 找 putfield 指令
         for (int i = 0; i < instructions.size(); i++) {
             DecompilerInstruction inst = instructions.get(i);
             if ("putfield".equals(inst.opcode) && inst.operand != null) {
-                // 需要至少2个前置指令: 一个是 aload_0 (this)，一个是值
                 if (i < 2) continue;
 
                 // 获取字段名
@@ -551,7 +505,6 @@ public class SrcCreator {
                                                   Map<Integer, String> localVars) {
         if (instructions.isEmpty()) return null;
 
-        // 查找 istore 指令
         for (int i = 0; i < instructions.size(); i++) {
             DecompilerInstruction inst = instructions.get(i);
             if (inst.opcode.startsWith("istore")) {
@@ -559,7 +512,6 @@ public class SrcCreator {
                 if (inst.opcode.equals("istore")) {
                     varIndex = (Integer) inst.operand;
                 } else {
-                    // istore_0, istore_1, istore_2, istore_3
                     varIndex = Integer.parseInt(inst.opcode.substring("istore_".length()));
                 }
 
@@ -582,9 +534,14 @@ public class SrcCreator {
     private static String matchMethodCall(List<DecompilerInstruction> instructions,
                                           List<AbstractConstantPool> poolList) {
         for (DecompilerInstruction inst : instructions) {
-            if ("invokespecial".equals(inst.opcode) && inst.operand != null) {
+            if (("invokespecial".equals(inst.opcode) || "invokestatic".equals(inst.opcode)
+                 || "invokevirtual".equals(inst.opcode)) && inst.operand != null) {
                 String methodName = resolveMethodName((Integer) inst.operand, poolList);
                 if (methodName != null) {
+                    // 跳过 Object.<init> 调用，在构造方法中自动调用
+                    if ("<init>".equals(methodName) || "<clinit>".equals(methodName)) {
+                        return null;
+                    }
                     return methodName + "();";
                 }
             }
@@ -599,10 +556,10 @@ public class SrcCreator {
                                       List<AbstractConstantPool> poolList) {
         if (instructions.isEmpty()) return null;
 
-        // 收集常量
         List<String> stack = new ArrayList<>();
         for (DecompilerInstruction inst : instructions) {
             switch (inst.opcode) {
+                // int 常量
                 case "iconst_m1": stack.add("-1"); break;
                 case "iconst_0": stack.add("0"); break;
                 case "iconst_1": stack.add("1"); break;
@@ -616,7 +573,35 @@ public class SrcCreator {
                         stack.add(String.valueOf(inst.operand));
                     }
                     break;
-                case "aload_0": stack.add("this"); break;
+                // long 常量
+                case "lconst_0": stack.add("0L"); break;
+                case "lconst_1": stack.add("1L"); break;
+                // float 常量
+                case "fconst_0": stack.add("0.0f"); break;
+                case "fconst_1": stack.add("1.0f"); break;
+                case "fconst_2": stack.add("2.0f"); break;
+                // double 常量
+                case "dconst_0": stack.add("0.0"); break;
+                case "dconst_1": stack.add("1.0"); break;
+                // 加载常量 (ldc) - 从常量池加载
+                case "ldc":
+                case "ldc_w":
+                case "ldc2_w":
+                    if (poolList != null && inst.operand != null) {
+                        String constVal = resolveConstantValue((Integer) inst.operand, poolList);
+                        if (constVal != null) {
+                            stack.add(constVal);
+                        }
+                    }
+                    break;
+                // this 引用
+                case "aload_0":
+                    if ("this".equals(localVarsGet(instructions, 0)) || isThisReference(instructions)) {
+                        stack.add("this");
+                    } else {
+                        stack.add("/* this */");
+                    }
+                    break;
                 case "aload":
                 case "aload_1":
                 case "aload_2":
@@ -624,8 +609,9 @@ public class SrcCreator {
                     stack.add("/* local var */");
                     break;
                 default:
-                    if (!inst.opcode.startsWith("istore") && !inst.opcode.startsWith("astore")) {
-                        stack.add("/* " + inst.opcode + " */");
+                    if (!inst.opcode.startsWith("istore") && !inst.opcode.startsWith("astore")
+                        && !inst.opcode.startsWith("putstatic") && !inst.opcode.startsWith("putfield")) {
+                        // stack.add("/* " + inst.opcode + " */");
                     }
                     break;
             }
@@ -638,22 +624,66 @@ public class SrcCreator {
     }
 
     /**
-     * 解析字段名
+     * 判断是否是 this 引用
      */
-    private static String resolveFieldName(int constantPoolIndex, List<AbstractConstantPool> poolList) {
-        // System.out.println("resolveFieldName: index=" + constantPoolIndex + " poolSize=" + poolList.size());
+    private static boolean isThisReference(List<DecompilerInstruction> instructions) {
+        for (DecompilerInstruction inst : instructions) {
+            if ("aload_0".equals(inst.opcode)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    /**
+     * 获取局部变量名
+     */
+    private static String localVarsGet(List<DecompilerInstruction> instructions, int slot) {
+        // 简化实现，实际应该从 localVars Map 中获取
+        return null;
+    }
+
+    /**
+     * 解析常量池中的常量值
+     */
+    private static String resolveConstantValue(int constantPoolIndex, List<AbstractConstantPool> poolList) {
         if (constantPoolIndex <= 0 || constantPoolIndex > poolList.size()) {
             return null;
         }
         AbstractConstantPool pool = poolList.get(constantPoolIndex - 1);
-        // System.out.println("  pool[" + (constantPoolIndex - 1) + "] = " + pool.getClass().getSimpleName());
+        if (pool instanceof ConstantIntegerInfo) {
+            return String.valueOf(((ConstantIntegerInfo) pool).getBytes().getValue());
+        } else if (pool instanceof ConstantLongInfo) {
+            return ((ConstantLongInfo) pool).getBytes().getValue() + "L";
+        } else if (pool instanceof ConstantFloatInfo) {
+            return ((ConstantFloatInfo) pool).getBytes().getValue() + "f";
+        } else if (pool instanceof ConstantDoubleInfo) {
+            return String.valueOf(((ConstantDoubleInfo) pool).getBytes().getValue());
+        } else if (pool instanceof ConstantClassInfo) {
+            int stringIndex = ((ConstantClassInfo) pool).getStringIndex().value - 1;
+            if (stringIndex >= 0 && stringIndex < poolList.size()) {
+                AbstractConstantPool utf8Pool = poolList.get(stringIndex);
+                if (utf8Pool instanceof Utf8Info) {
+                    return "\"" + ((Utf8Info) utf8Pool).getValue() + "\"";
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 解析字段名
+     */
+    private static String resolveFieldName(int constantPoolIndex, List<AbstractConstantPool> poolList) {
+        if (constantPoolIndex <= 0 || constantPoolIndex > poolList.size()) {
+            return null;
+        }
+        AbstractConstantPool pool = poolList.get(constantPoolIndex - 1);
         if (!(pool instanceof FieldRefInfo)) {
             return null;
         }
         FieldRefInfo fieldRef = (FieldRefInfo) pool;
-        int nameAndTypeIndex = fieldRef.getNameIndex().value - 1;  // name_index 指向 NameAndType_info
-        // System.out.println("  nameAndTypeIndex=" + nameAndTypeIndex);
+        int nameAndTypeIndex = fieldRef.getNameIndex().value - 1;
         if (nameAndTypeIndex < 0 || nameAndTypeIndex >= poolList.size()) {
             return null;
         }
@@ -662,7 +692,6 @@ public class SrcCreator {
             return null;
         }
         int nameIndex = ((ConstantNameAndTypeInfo) ntPool).getNameIndex().value - 1;
-        // System.out.println("  nameIndex=" + nameIndex);
         if (nameIndex < 0 || nameIndex >= poolList.size()) {
             return null;
         }
@@ -686,18 +715,18 @@ public class SrcCreator {
         }
         MethodRefInfo methodRef = (MethodRefInfo) pool;
         int nameAndTypeIndex = methodRef.getNameIndex().value - 1;
-        if (nameAndTypeIndex <= 0 || nameAndTypeIndex > poolList.size()) {
+        if (nameAndTypeIndex < 0 || nameAndTypeIndex >= poolList.size()) {
             return null;
         }
-        AbstractConstantPool ntPool = poolList.get(nameAndTypeIndex - 1);
+        AbstractConstantPool ntPool = poolList.get(nameAndTypeIndex);
         if (!(ntPool instanceof ConstantNameAndTypeInfo)) {
             return null;
         }
         int nameIndex = ((ConstantNameAndTypeInfo) ntPool).getNameIndex().value - 1;
-        if (nameIndex <= 0 || nameIndex > poolList.size()) {
+        if (nameIndex < 0 || nameIndex >= poolList.size()) {
             return null;
         }
-        AbstractConstantPool namePool = poolList.get(nameIndex - 1);
+        AbstractConstantPool namePool = poolList.get(nameIndex);
         if (!(namePool instanceof Utf8Info)) {
             return null;
         }
@@ -710,10 +739,6 @@ public class SrcCreator {
     private static List<DecompilerInstruction> decodeInstructions(List<U1> codeBytes,
                                                                    List<AbstractConstantPool> poolList) {
         List<DecompilerInstruction> instructions = new ArrayList<>();
-        Map<Integer, Integer> pcToLine = new HashMap<>();
-
-        // 收集行号信息（从 LineNumberTable）
-        // 这里简化处理，假设行号可以从指令推断
 
         int pc = 0;
         while (pc < codeBytes.size()) {
@@ -728,7 +753,7 @@ public class SrcCreator {
             DecompilerInstruction inst = new DecompilerInstruction();
             inst.pc = pc;
             inst.opcode = opcodeName;
-            inst.lineNumber = pcToLine.getOrDefault(pc, 0);
+            inst.lineNumber = 0;
 
             pc++;
 
@@ -796,38 +821,52 @@ public class SrcCreator {
     }
 
     /**
-     * 拼接方法返回类型、方法名和参数
+     * 查找 Code 属性
      */
-    private static String jointMethodReturnNameParams(String methodName, String descriptor) {
-        // descriptor 格式: (参数类型...)返回类型
-        int parenOpen = descriptor.indexOf('(');
-        int parenClose = descriptor.indexOf(')');
-
-        if (parenOpen == -1 || parenClose == -1) {
-            return methodName + " " + descriptor;
+    private static Code findCodeAttribute(MethodInfo methodInfo) {
+        if (methodInfo.getAttributes() == null) {
+            return null;
         }
-
-        String params = descriptor.substring(parenOpen + 1, parenClose);
-        String returnType = descriptor.substring(parenClose + 1);
-
-        String javaParams = ParamsConvertor.paramsConvertorMethodParams(params);
-        String javaReturnType = ParamsConvertor.paramsConvertorMethodReturnType(returnType);
-
-        return javaReturnType + " " + methodName + "(" + javaParams + ")";
+        for (AbstractAttribute attr : methodInfo.getAttributes()) {
+            if (attr instanceof Code) {
+                return (Code) attr;
+            }
+        }
+        return null;
     }
 
     /**
-     * 处理异常声明
+     * 判断异常
      */
     private static String throwExceptionsJudge(MethodInfo methodInfo, ClassFile classFile) {
         // TODO: 实现异常处理
         return "";
     }
 
-    // ==================== 内部类 ====================
+    /**
+     * 拼接方法返回类型、方法名和参数
+     */
+    private static String jointMethodReturnNameParams(String methodName, String descriptor) {
+        int parenOpen = descriptor.indexOf('(');
+        int parenClose = descriptor.indexOf(')');
+        if (parenOpen == -1 || parenClose == -1) {
+            return methodName + "()";
+        }
+
+        String params = descriptor.substring(parenOpen + 1, parenClose);
+        String returnType = descriptor.substring(parenClose + 1);
+
+        // 转换参数类型
+        String convertedParams = ParamsConvertor.paramsConvertorMethodParams(params);
+
+        // 转换返回类型
+        String convertedReturn = ParamsConvertor.paramsConvertorFieldType(returnType);
+
+        return convertedReturn + " " + methodName + "(" + convertedParams + ")";
+    }
 
     /**
-     * 反编译指令
+     * 指令内部类
      */
     private static class DecompilerInstruction {
         int pc;
