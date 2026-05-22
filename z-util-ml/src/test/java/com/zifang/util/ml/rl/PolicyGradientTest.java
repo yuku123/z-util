@@ -18,7 +18,7 @@ public class PolicyGradientTest {
         double[] rewards = new double[]{1.0, 0.5, 0.1};
         
         for (int i = 0; i < states.length; i++) {
-            states[i] = NdArray.array(new float[]{1.0f, 2.0f, 3.0f, 4.0f}, DType.FLOAT32).reshape(1, 4);
+            states[i] = NdArray.array(new double[]{1.0f, 2.0f, 3.0f, 4.0f}, DType.FLOAT64).reshape(1, 4);
         }
         
         // Update should not throw
@@ -33,7 +33,7 @@ public class PolicyGradientTest {
     public void testPolicyGradientSelectAction() {
         PolicyGradient agent = new PolicyGradient(4, 3, 16, 0.001, 0.99);
         
-        NdArray state = NdArray.array(new float[]{1.0f, 2.0f, 3.0f, 4.0f}, DType.FLOAT32).reshape(1, 4);
+        NdArray state = NdArray.array(new double[]{1.0f, 2.0f, 3.0f, 4.0f}, DType.FLOAT64).reshape(1, 4);
         
         int action = agent.selectAction(state);
         assertTrue(action >= 0 && action < 3);

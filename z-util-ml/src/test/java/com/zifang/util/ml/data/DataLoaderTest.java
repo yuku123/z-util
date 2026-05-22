@@ -20,20 +20,20 @@ class DataLoaderTest {
         int nLabels = 3;
 
         // Create features
-        float[] featureData = new float[nSamples * nFeatures];
+        double[] featureData = new double[nSamples * nFeatures];
         Random rand = new Random(42);
         for (int i = 0; i < featureData.length; i++) {
-            featureData[i] = rand.nextFloat();
+            featureData[i] = rand.nextDouble();
         }
-        NdArray features = NdArray.array(featureData, DType.FLOAT32).reshape(nSamples, nFeatures);
+        NdArray features = NdArray.array(featureData, DType.FLOAT64).reshape(nSamples, nFeatures);
 
         // Create labels (one-hot encoded for simplicity)
-        float[] labelData = new float[nSamples * nLabels];
+        double[] labelData = new double[nSamples * nLabels];
         for (int i = 0; i < nSamples; i++) {
             int label = rand.nextInt(nLabels);
             labelData[i * nLabels + label] = 1.0f;
         }
-        NdArray labels = NdArray.array(labelData, DType.FLOAT32).reshape(nSamples, nLabels);
+        NdArray labels = NdArray.array(labelData, DType.FLOAT64).reshape(nSamples, nLabels);
 
         // Create TensorDataset
         TensorDataset dataset = new TensorDataset(features, labels);
@@ -62,18 +62,18 @@ class DataLoaderTest {
         int nFeatures = 3;
 
         // Create simple features
-        float[] featureData = new float[nSamples * nFeatures];
+        double[] featureData = new double[nSamples * nFeatures];
         for (int i = 0; i < featureData.length; i++) {
-            featureData[i] = i;
+            featureData[i] = (double) i;
         }
-        NdArray features = NdArray.array(featureData, DType.FLOAT32).reshape(nSamples, nFeatures);
+        NdArray features = NdArray.array(featureData, DType.FLOAT64).reshape(nSamples, nFeatures);
 
         // Create simple labels
-        float[] labelData = new float[nSamples];
+        double[] labelData = new double[nSamples];
         for (int i = 0; i < nSamples; i++) {
-            labelData[i] = i;
+            labelData[i] = (double) i;
         }
-        NdArray labels = NdArray.array(labelData, DType.FLOAT32).reshape(nSamples, 1);
+        NdArray labels = NdArray.array(labelData, DType.FLOAT64).reshape(nSamples, 1);
 
         // Create TensorDataset
         TensorDataset dataset = new TensorDataset(features, labels);
@@ -85,9 +85,9 @@ class DataLoaderTest {
 
         // Verify sample 0 has feature values [0, 1, 2]
         Object featData = sampleFeatures.getData();
-        assertEquals(0.0f, (float) com.zifang.util.numpy.Array.get(featData, 0), 0.001f);
-        assertEquals(1.0f, (float) com.zifang.util.numpy.Array.get(featData, 1), 0.001f);
-        assertEquals(2.0f, (float) com.zifang.util.numpy.Array.get(featData, 2), 0.001f);
+        assertEquals(0.0, (double) com.zifang.util.numpy.Array.get(featData, 0), 0.001);
+        assertEquals(1.0, (double) com.zifang.util.numpy.Array.get(featData, 1), 0.001);
+        assertEquals(2.0, (double) com.zifang.util.numpy.Array.get(featData, 2), 0.001);
     }
 
     @Test
@@ -97,19 +97,19 @@ class DataLoaderTest {
         int batchSize = 3;
 
         // Create features
-        float[] featureData = new float[nSamples * nFeatures];
+        double[] featureData = new double[nSamples * nFeatures];
         Random rand = new Random(42);
         for (int i = 0; i < featureData.length; i++) {
-            featureData[i] = rand.nextFloat();
+            featureData[i] = rand.nextDouble();
         }
-        NdArray features = NdArray.array(featureData, DType.FLOAT32).reshape(nSamples, nFeatures);
+        NdArray features = NdArray.array(featureData, DType.FLOAT64).reshape(nSamples, nFeatures);
 
         // Create labels
-        float[] labelData = new float[nSamples];
+        double[] labelData = new double[nSamples];
         for (int i = 0; i < nSamples; i++) {
-            labelData[i] = i;
+            labelData[i] = (double) i;
         }
-        NdArray labels = NdArray.array(labelData, DType.FLOAT32).reshape(nSamples, 1);
+        NdArray labels = NdArray.array(labelData, DType.FLOAT64).reshape(nSamples, 1);
 
         // Create TensorDataset
         TensorDataset dataset = new TensorDataset(features, labels);
@@ -140,18 +140,18 @@ class DataLoaderTest {
         int batchSize = 2;
 
         // Create features with sequential values
-        float[] featureData = new float[nSamples * nFeatures];
+        double[] featureData = new double[nSamples * nFeatures];
         for (int i = 0; i < featureData.length; i++) {
-            featureData[i] = i;
+            featureData[i] = (double) i;
         }
-        NdArray features = NdArray.array(featureData, DType.FLOAT32).reshape(nSamples, nFeatures);
+        NdArray features = NdArray.array(featureData, DType.FLOAT64).reshape(nSamples, nFeatures);
 
         // Create labels with sequential values
-        float[] labelData = new float[nSamples];
+        double[] labelData = new double[nSamples];
         for (int i = 0; i < nSamples; i++) {
-            labelData[i] = i;
+            labelData[i] = (double) i;
         }
-        NdArray labels = NdArray.array(labelData, DType.FLOAT32).reshape(nSamples, 1);
+        NdArray labels = NdArray.array(labelData, DType.FLOAT64).reshape(nSamples, 1);
 
         // Create TensorDataset
         TensorDataset dataset = new TensorDataset(features, labels);
@@ -178,19 +178,19 @@ class DataLoaderTest {
         int batchSize = 3;
 
         // Create features
-        float[] featureData = new float[nSamples * nFeatures];
+        double[] featureData = new double[nSamples * nFeatures];
         Random rand = new Random(42);
         for (int i = 0; i < featureData.length; i++) {
-            featureData[i] = rand.nextFloat();
+            featureData[i] = rand.nextDouble();
         }
-        NdArray features = NdArray.array(featureData, DType.FLOAT32).reshape(nSamples, nFeatures);
+        NdArray features = NdArray.array(featureData, DType.FLOAT64).reshape(nSamples, nFeatures);
 
         // Create labels
-        float[] labelData = new float[nSamples];
+        double[] labelData = new double[nSamples];
         for (int i = 0; i < nSamples; i++) {
-            labelData[i] = i;
+            labelData[i] = (double) i;
         }
-        NdArray labels = NdArray.array(labelData, DType.FLOAT32).reshape(nSamples, 1);
+        NdArray labels = NdArray.array(labelData, DType.FLOAT64).reshape(nSamples, 1);
 
         // Create TensorDataset
         TensorDataset dataset = new TensorDataset(features, labels);
@@ -219,19 +219,19 @@ class DataLoaderTest {
         int nFeatures = 4;
 
         // Create features
-        float[] featureData = new float[nSamples * nFeatures];
+        double[] featureData = new double[nSamples * nFeatures];
         Random rand = new Random(42);
         for (int i = 0; i < featureData.length; i++) {
-            featureData[i] = rand.nextFloat();
+            featureData[i] = rand.nextDouble();
         }
-        NdArray features = NdArray.array(featureData, DType.FLOAT32).reshape(nSamples, nFeatures);
+        NdArray features = NdArray.array(featureData, DType.FLOAT64).reshape(nSamples, nFeatures);
 
         // Create labels
-        float[] labelData = new float[nSamples];
+        double[] labelData = new double[nSamples];
         for (int i = 0; i < nSamples; i++) {
-            labelData[i] = i;
+            labelData[i] = (double) i;
         }
-        NdArray labels = NdArray.array(labelData, DType.FLOAT32).reshape(nSamples, 1);
+        NdArray labels = NdArray.array(labelData, DType.FLOAT64).reshape(nSamples, 1);
 
         // Create TensorDataset
         TensorDataset dataset = new TensorDataset(features, labels);

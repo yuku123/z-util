@@ -22,11 +22,11 @@ class DenseTest {
         Dense dense = new Dense(inputFeatures, outputFeatures);
 
         // Create input: (batchSize, inputFeatures)
-        NdArray input = NdArray.zeros(new Shape(batchSize, inputFeatures), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(batchSize, inputFeatures), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
@@ -66,11 +66,11 @@ class DenseTest {
         Dense dense = new Dense(inputFeatures, outputFeatures);
 
         // Create 1D input
-        NdArray input = NdArray.zeros(new Shape(inputFeatures), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(inputFeatures), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
@@ -89,21 +89,21 @@ class DenseTest {
         Dense dense = new Dense(inputFeatures, outputFeatures);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(batchSize, inputFeatures), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(batchSize, inputFeatures), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
         NdArray output = dense.forward(input);
 
         // Create upstream gradient
-        NdArray gradOutput = NdArray.zeros(new Shape(batchSize, outputFeatures), DType.FLOAT32);
+        NdArray gradOutput = NdArray.zeros(new Shape(batchSize, outputFeatures), DType.FLOAT64);
         Object gradData = gradOutput.getData();
         for (int i = 0; i < gradOutput.size(); i++) {
-            com.zifang.util.numpy.Array.set(gradData, i, 1.0f);
+            com.zifang.util.numpy.Array.set(gradData, i, 1.0);
         }
 
         // Backward pass

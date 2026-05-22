@@ -24,11 +24,11 @@ class RNNTest {
         RNN rnn = new RNN(inputSize, hiddenSize, numLayers);
 
         // Create input: [seqLen, batch, inputSize]
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
@@ -51,11 +51,11 @@ class RNNTest {
         RNN rnn = new RNN(inputSize, hiddenSize, numLayers);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT64);
         Random rand = new Random(123);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
@@ -69,7 +69,7 @@ class RNNTest {
         // Verify output values are in valid range (tanh output is in [-1, 1])
         Object outData = output.getData();
         for (int i = 0; i < output.size(); i++) {
-            float val = (float) com.zifang.util.numpy.Array.get(outData, i);
+            double val = (double) com.zifang.util.numpy.Array.get(outData, i);
             assertTrue(val >= -1.0f && val <= 1.0f, "RNN output should be in [-1, 1]");
         }
     }
@@ -85,21 +85,21 @@ class RNNTest {
         RNN rnn = new RNN(inputSize, hiddenSize, numLayers);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, inputSize), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
         NdArray output = rnn.forward(input);
 
         // Create upstream gradient
-        NdArray gradOutput = NdArray.zeros(new Shape(seqLen, batchSize, hiddenSize), DType.FLOAT32);
+        NdArray gradOutput = NdArray.zeros(new Shape(seqLen, batchSize, hiddenSize), DType.FLOAT64);
         Object gradData = gradOutput.getData();
         for (int i = 0; i < gradOutput.size(); i++) {
-            com.zifang.util.numpy.Array.set(gradData, i, 1.0f);
+            com.zifang.util.numpy.Array.set(gradData, i, 1.0);
         }
 
         // Backward pass

@@ -22,7 +22,7 @@ public class DQNTest {
         DQN dqn = new DQN(4, 3, 16, 0.001, 0.99, 1.0, 0.995, 0.01, 100, 32, 10);
         
         // Create a simple state
-        NdArray state = NdArray.array(new double[]{1.0, 2.0, 3.0, 4.0}, DType.FLOAT32).reshape(1, 4);
+        NdArray state = NdArray.array(new double[]{1.0, 2.0, 3.0, 4.0}, DType.FLOAT64).reshape(1, 4);
         
         // With epsilon=1.0, should select random action
         int action = dqn.selectAction(state);
@@ -33,8 +33,8 @@ public class DQNTest {
     public void testDQNTrainingStep() {
         DQN dqn = new DQN(4, 3, 16, 0.001, 0.99, 1.0, 0.995, 0.01, 100, 32, 10);
         
-        NdArray state = NdArray.array(new double[]{1.0, 2.0, 3.0, 4.0}, DType.FLOAT32).reshape(1, 4);
-        NdArray nextState = NdArray.array(new double[]{2.0, 3.0, 4.0, 5.0}, DType.FLOAT32).reshape(1, 4);
+        NdArray state = NdArray.array(new double[]{1.0, 2.0, 3.0, 4.0}, DType.FLOAT64).reshape(1, 4);
+        NdArray nextState = NdArray.array(new double[]{2.0, 3.0, 4.0, 5.0}, DType.FLOAT64).reshape(1, 4);
         
         // Train should not throw
         dqn.train(state, 1, 1.0, nextState, false);

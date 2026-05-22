@@ -25,11 +25,11 @@ class TransformerTest {
         TransformerEncoder transformer = new TransformerEncoder(dModel, nhead, dimFeedforward, numLayers, 0.0);
 
         // Create input: [seqLen, batch, dModel]
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, dModel), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, dModel), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
@@ -53,11 +53,11 @@ class TransformerTest {
         TransformerEncoder transformer = new TransformerEncoder(dModel, nhead, dimFeedforward, numLayers, 0.0);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, dModel), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, dModel), DType.FLOAT64);
         Random rand = new Random(123);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
@@ -81,21 +81,21 @@ class TransformerTest {
         TransformerEncoder transformer = new TransformerEncoder(dModel, nhead, dimFeedforward, numLayers, 0.0);
 
         // Create input
-        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, dModel), DType.FLOAT32);
+        NdArray input = NdArray.zeros(new Shape(seqLen, batchSize, dModel), DType.FLOAT64);
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, rand.nextDouble() * 2 - 1);
         }
 
         // Forward pass
         NdArray output = transformer.forward(input);
 
         // Create upstream gradient
-        NdArray gradOutput = NdArray.zeros(new Shape(seqLen, batchSize, dModel), DType.FLOAT32);
+        NdArray gradOutput = NdArray.zeros(new Shape(seqLen, batchSize, dModel), DType.FLOAT64);
         Object gradData = gradOutput.getData();
         for (int i = 0; i < gradOutput.size(); i++) {
-            com.zifang.util.numpy.Array.set(gradData, i, 1.0f);
+            com.zifang.util.numpy.Array.set(gradData, i, 1.0);
         }
 
         // Backward pass

@@ -22,7 +22,7 @@ class OptimizerTest {
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, (double) (rand.nextDouble() * 2 - 1));
         }
 
         // Create SGD optimizer
@@ -39,9 +39,9 @@ class OptimizerTest {
 
         // Get initial parameter values
         Object paramData = param.getData();
-        float[] initialValues = new float[paramSize];
+        double[] initialValues = new float[paramSize];
         for (int i = 0; i < paramSize; i++) {
-            initialValues[i] = (float) com.zifang.util.numpy.Array.get(paramData, i);
+            initialValues[i] = (double) com.zifang.util.numpy.Array.get(paramData, i);
         }
 
         // Step
@@ -49,9 +49,9 @@ class OptimizerTest {
 
         // Verify parameters were updated (should move in negative gradient direction)
         for (int i = 0; i < paramSize; i++) {
-            float newValue = (float) com.zifang.util.numpy.Array.get(paramData, i);
+            double newValue = (double) com.zifang.util.numpy.Array.get(paramData, i);
             // With lr=0.1 and grad=1, param should decrease by 0.1
-            assertEquals(initialValues[i] - 0.1f, newValue, 0.001);
+            assertEquals(initialValues[i] - 0.1, newValue, 0.001);
         }
     }
 
@@ -64,7 +64,7 @@ class OptimizerTest {
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, (double) (rand.nextDouble() * 2 - 1));
         }
 
         // Create Adam optimizer
@@ -81,18 +81,18 @@ class OptimizerTest {
 
         // Get initial parameter values
         Object paramData = param.getData();
-        float initialSum = 0;
+        double initialSum = 0;
         for (int i = 0; i < paramSize; i++) {
-            initialSum += (float) com.zifang.util.numpy.Array.get(paramData, i);
+            initialSum += (double) com.zifang.util.numpy.Array.get(paramData, i);
         }
 
         // Step
         optimizer.step();
 
         // Verify parameters were updated
-        float newSum = 0;
+        double newSum = 0;
         for (int i = 0; i < paramSize; i++) {
-            newSum += (float) com.zifang.util.numpy.Array.get(paramData, i);
+            newSum += (double) com.zifang.util.numpy.Array.get(paramData, i);
         }
 
         // Adam should have updated the parameters
@@ -108,7 +108,7 @@ class OptimizerTest {
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, (double) (rand.nextDouble() * 2 - 1));
         }
 
         // Create SGD optimizer
@@ -140,7 +140,7 @@ class OptimizerTest {
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(data, i, rand.nextFloat() * 2 - 1);
+            com.zifang.util.numpy.Array.set(data, i, (double) (rand.nextDouble() * 2 - 1));
         }
 
         // Create SGD with momentum
