@@ -40,8 +40,8 @@ class DropoutTest {
         Object trainData = trainOutput.getData();
         boolean dropoutApplied = false;
         for (int i = 0; i < input.size(); i++) {
-            double inVal = (double) com.zifang.util.numpy.Array.get(data, i);
-            double outVal = (double) com.zifang.util.numpy.Array.get(trainData, i);
+            double inVal = ((Number) com.zifang.util.numpy.Array.get(data, i)).doubleValue();
+            double outVal = ((Number) com.zifang.util.numpy.Array.get(trainData, i)).doubleValue();
             // In train mode with p=0.5, values should either be 0 or scaled by 2
             if (inVal != outVal) {
                 dropoutApplied = true;
@@ -60,8 +60,8 @@ class DropoutTest {
         // In eval mode, output should be input scaled by (1-p)
         Object evalData = evalOutput.getData();
         for (int i = 0; i < input.size(); i++) {
-            double inVal = (double) com.zifang.util.numpy.Array.get(data, i);
-            double outVal = (double) com.zifang.util.numpy.Array.get(evalData, i);
+            double inVal = ((Number) com.zifang.util.numpy.Array.get(data, i)).doubleValue();
+            double outVal = ((Number) com.zifang.util.numpy.Array.get(evalData, i)).doubleValue();
             // In eval mode with p=0.5, output = input * 0.5
             assertEquals(inVal * 0.5f, outVal, 0.001);
         }
@@ -149,8 +149,8 @@ class DropoutTest {
         // With p=0, output should equal input scaled by 1 (no change)
         Object outData = output.getData();
         for (int i = 0; i < input.size(); i++) {
-            double inVal = (double) com.zifang.util.numpy.Array.get(data, i);
-            double outVal = (double) com.zifang.util.numpy.Array.get(outData, i);
+            double inVal = ((Number) com.zifang.util.numpy.Array.get(data, i)).doubleValue();
+            double outVal = ((Number) com.zifang.util.numpy.Array.get(outData, i)).doubleValue();
             assertEquals(inVal, outVal, 0.001);
         }
     }

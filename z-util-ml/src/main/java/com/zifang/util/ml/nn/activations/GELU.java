@@ -57,7 +57,7 @@ public class GELU extends com.zifang.util.ml.nn.Module {
             float coeff = 0.044715f;
             
             for (int i = 0; i < size; i++) {
-                float x = (float) com.zifang.util.numpy.Array.get(inData, i);
+                float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
                 float xCubed = x * x * x;
                 float inner = sqrt2OverPi * (x + coeff * xCubed);
                 float result = 0.5f * x * (1.0f + tanhApprox(inner));
@@ -66,7 +66,7 @@ public class GELU extends com.zifang.util.ml.nn.Module {
         } else {
             // Use exact: x * Phi(x)
             for (int i = 0; i < size; i++) {
-                float x = (float) com.zifang.util.numpy.Array.get(inData, i);
+                float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
                 float result = x * normalCdf(x);
                 com.zifang.util.numpy.Array.set(outData, i, result);
             }
@@ -89,8 +89,8 @@ public class GELU extends com.zifang.util.ml.nn.Module {
             float coeff = 0.044715f;
             
             for (int i = 0; i < size; i++) {
-                float x = (float) com.zifang.util.numpy.Array.get(inData, i);
-                float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
+                float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
+                float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
                 
                 float xCubed = x * x * x;
                 float inner = sqrt2OverPi * (x + coeff * xCubed);
@@ -105,8 +105,8 @@ public class GELU extends com.zifang.util.ml.nn.Module {
         } else {
             // Derivative of exact GELU: Phi(x) + x * phi(x)
             for (int i = 0; i < size; i++) {
-                float x = (float) com.zifang.util.numpy.Array.get(inData, i);
-                float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
+                float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
+                float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
                 
                 float cdf = normalCdf(x);
                 float pdf = normalPdf(x);

@@ -74,16 +74,16 @@ public class Dense extends Module {
             for (int outIdx = 0; outIdx < outputFeatures; outIdx++) {
                 float sum = 0.0f;
                 for (int inIdx = 0; inIdx < inputFeatures; inIdx++) {
-                    float w = (float) com.zifang.util.numpy.Array.get(wData, outIdx * inputFeatures + inIdx);
+                    float w = ((Number) com.zifang.util.numpy.Array.get(wData, outIdx * inputFeatures + inIdx)).floatValue();
                     float x;
                     if (input.ndim() == 1) {
-                        x = (float) com.zifang.util.numpy.Array.get(inData, inIdx);
+                        x = ((Number) com.zifang.util.numpy.Array.get(inData, inIdx)).floatValue();
                     } else {
-                        x = (float) com.zifang.util.numpy.Array.get(inData, b * inputFeatures + inIdx);
+                        x = ((Number) com.zifang.util.numpy.Array.get(inData, b * inputFeatures + inIdx)).floatValue();
                     }
                     sum += w * x;
                 }
-                float biasVal = (float) com.zifang.util.numpy.Array.get(bData, outIdx);
+                float biasVal = ((Number) com.zifang.util.numpy.Array.get(bData, outIdx)).floatValue();
                 float outVal = sum + biasVal;
                 
                 if (output.ndim() == 1) {
@@ -115,9 +115,9 @@ public class Dense extends Module {
             for (int b = 0; b < batchSize; b++) {
                 float gOut;
                 if (gradOutput.ndim() == 1) {
-                    gOut = (float) com.zifang.util.numpy.Array.get(gOutData, outIdx);
+                    gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
                 } else {
-                    gOut = (float) com.zifang.util.numpy.Array.get(gOutData, b * outputFeatures + outIdx);
+                    gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, b * outputFeatures + outIdx)).floatValue();
                 }
                 bGradSum += gOut;
             }
@@ -132,15 +132,15 @@ public class Dense extends Module {
                 for (int b = 0; b < batchSize; b++) {
                     float gOut;
                     if (gradOutput.ndim() == 1) {
-                        gOut = (float) com.zifang.util.numpy.Array.get(gOutData, outIdx);
+                        gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
                     } else {
-                        gOut = (float) com.zifang.util.numpy.Array.get(gOutData, b * outputFeatures + outIdx);
+                        gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, b * outputFeatures + outIdx)).floatValue();
                     }
                     float x;
                     if (savedInput.ndim() == 1) {
-                        x = (float) com.zifang.util.numpy.Array.get(inData, inIdx);
+                        x = ((Number) com.zifang.util.numpy.Array.get(inData, inIdx)).floatValue();
                     } else {
-                        x = (float) com.zifang.util.numpy.Array.get(inData, b * inputFeatures + inIdx);
+                        x = ((Number) com.zifang.util.numpy.Array.get(inData, b * inputFeatures + inIdx)).floatValue();
                     }
                     wGrad += gOut * x;
                 }
@@ -164,11 +164,11 @@ public class Dense extends Module {
                 for (int outIdx = 0; outIdx < outputFeatures; outIdx++) {
                     float gOut;
                     if (gradOutput.ndim() == 1) {
-                        gOut = (float) com.zifang.util.numpy.Array.get(gOutData, outIdx);
+                        gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
                     } else {
-                        gOut = (float) com.zifang.util.numpy.Array.get(gOutData, b * outputFeatures + outIdx);
+                        gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, b * outputFeatures + outIdx)).floatValue();
                     }
-                    float w = (float) com.zifang.util.numpy.Array.get(wData, outIdx * inputFeatures + inIdx);
+                    float w = ((Number) com.zifang.util.numpy.Array.get(wData, outIdx * inputFeatures + inIdx)).floatValue();
                     sum += gOut * w;
                 }
                 if (gradInput.ndim() == 1) {

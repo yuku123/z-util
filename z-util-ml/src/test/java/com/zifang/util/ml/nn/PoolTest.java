@@ -68,7 +68,7 @@ class PoolTest {
         // First window [1,2,5,6] should have max of 6
         // Get output value
         Object outData = output.getData();
-        double firstMax = (double) com.zifang.util.numpy.Array.get(outData, 0);
+        double firstMax = ((Number) com.zifang.util.numpy.Array.get(outData, 0)).doubleValue();
 
         assertEquals(6.0, firstMax, 0.001);
     }
@@ -166,7 +166,7 @@ class PoolTest {
         // All outputs should be 4 (average of 4s is 4)
         Object outData = output.getData();
         for (int i = 0; i < output.size(); i++) {
-            double val = (double) com.zifang.util.numpy.Array.get(outData, i);
+            double val = ((Number) com.zifang.util.numpy.Array.get(outData, i)).doubleValue();
             assertEquals(4.0, val, 0.001);
         }
     }

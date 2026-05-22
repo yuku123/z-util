@@ -23,7 +23,7 @@ public class Softplus extends com.zifang.util.ml.nn.Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float x = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             // softplus(x) = log(1 + exp(x))
             // Use numerical stability: if x > 20, return x; if x < -20, return exp(x)
             float result;
@@ -49,8 +49,8 @@ public class Softplus extends com.zifang.util.ml.nn.Module {
         int size = gradOutput.size();
         
         for (int i = 0; i < size; i++) {
-            float x = (float) com.zifang.util.numpy.Array.get(inData, i);
-            float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
+            float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
+            float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
             
             // d/dx log(1 + exp(x)) = exp(x) / (1 + exp(x)) = sigmoid(x)
             float sigmoid;

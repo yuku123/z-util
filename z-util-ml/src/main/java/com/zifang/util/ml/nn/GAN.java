@@ -141,8 +141,8 @@ public class GAN {
         
         double loss = 0.0;
         for (int i = 0; i < size; i++) {
-            float pred = clamp((float) com.zifang.util.numpy.Array.get(predData, i), (float) EPSILON, (float) (1 - EPSILON));
-            float target = (float) com.zifang.util.numpy.Array.get(targetData, i);
+            float pred = clamp(((Number) com.zifang.util.numpy.Array.get(predData, i)).floatValue(), (float) EPSILON, (float) (1 - EPSILON));
+            float target = ((Number) com.zifang.util.numpy.Array.get(targetData, i)).floatValue();
             loss += -target * Math.log(pred) - (1 - target) * Math.log(1 - pred);
         }
         
@@ -174,7 +174,7 @@ public class GAN {
             int size = param.size();
             
             for (int j = 0; j < size; j++) {
-                float val = (float) com.zifang.util.numpy.Array.get(paramData, j);
+                float val = ((Number) com.zifang.util.numpy.Array.get(paramData, j)).floatValue();
                 val += (float) (random.nextGaussian() * lr * 0.01);
                 com.zifang.util.numpy.Array.set(paramData, j, val);
             }

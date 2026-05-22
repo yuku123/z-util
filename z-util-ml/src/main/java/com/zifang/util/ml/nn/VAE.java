@@ -89,8 +89,8 @@ public class VAE extends Module {
         
         for (int b = 0; b < batchSize; b++) {
             for (int i = 0; i < latentDim; i++) {
-                float muVal = (float) com.zifang.util.numpy.Array.get(encData, b * 2 * latentDim + i);
-                float logVarVal = (float) com.zifang.util.numpy.Array.get(encData, b * 2 * latentDim + latentDim + i);
+                float muVal = ((Number) com.zifang.util.numpy.Array.get(encData, b * 2 * latentDim + i)).floatValue();
+                float logVarVal = ((Number) com.zifang.util.numpy.Array.get(encData, b * 2 * latentDim + latentDim + i)).floatValue();
                 com.zifang.util.numpy.Array.set(muData, b * latentDim + i, muVal);
                 com.zifang.util.numpy.Array.set(logVarData, b * latentDim + i, logVarVal);
             }
@@ -128,8 +128,8 @@ public class VAE extends Module {
         
         for (int b = 0; b < batchSize; b++) {
             for (int i = 0; i < latentDim; i++) {
-                float muVal = (float) com.zifang.util.numpy.Array.get(muData, b * latentDim + i);
-                float logVarVal = (float) com.zifang.util.numpy.Array.get(logVarData, b * latentDim + i);
+                float muVal = ((Number) com.zifang.util.numpy.Array.get(muData, b * latentDim + i)).floatValue();
+                float logVarVal = ((Number) com.zifang.util.numpy.Array.get(logVarData, b * latentDim + i)).floatValue();
                 float std = (float) Math.sqrt(Math.exp(logVarVal));
                 
                 double u1 = random.nextDouble();
@@ -161,8 +161,8 @@ public class VAE extends Module {
         
         double loss = 0.0;
         for (int i = 0; i < size; i++) {
-            float xVal = (float) com.zifang.util.numpy.Array.get(xData, i);
-            float reconVal = (float) com.zifang.util.numpy.Array.get(reconData, i);
+            float xVal = ((Number) com.zifang.util.numpy.Array.get(xData, i)).floatValue();
+            float reconVal = ((Number) com.zifang.util.numpy.Array.get(reconData, i)).floatValue();
             
             reconVal = clamp(reconVal, 1e-7f, 1 - 1e-7f);
             loss += -xVal * Math.log(reconVal) - (1 - xVal) * Math.log(1 - reconVal);
@@ -179,8 +179,8 @@ public class VAE extends Module {
         double klLoss = 0.0;
         for (int b = 0; b < batchSize; b++) {
             for (int i = 0; i < latentDim; i++) {
-                float muVal = (float) com.zifang.util.numpy.Array.get(muData, b * latentDim + i);
-                float logVarVal = (float) com.zifang.util.numpy.Array.get(logVarData, b * latentDim + i);
+                float muVal = ((Number) com.zifang.util.numpy.Array.get(muData, b * latentDim + i)).floatValue();
+                float logVarVal = ((Number) com.zifang.util.numpy.Array.get(logVarData, b * latentDim + i)).floatValue();
                 float var = (float) Math.exp(logVarVal);
                 
                 klLoss += 0.5 * (logVarVal - muVal * muVal - var + 1);

@@ -15,6 +15,7 @@ public class MaxPool2d extends Module {
     private final int stride;
     private NdArray savedIndices;  // For backward pass
     private int[] outputShape;
+    private int[] inputShape;  // Save input shape for backward pass
     
     public MaxPool2d(int kernelSize) {
         this(kernelSize, kernelSize);
@@ -40,6 +41,7 @@ public class MaxPool2d extends Module {
         int outW = (inW - kernelSize) / stride + 1;
         
         outputShape = new int[]{batchSize, channels, outH, outW};
+        inputShape = new int[]{batchSize, channels, inH, inW};
         NdArray output = NdArray.zeros(new Shape(outputShape), DType.FLOAT32);
         savedIndices = NdArray.zeros(new Shape(outputShape), DType.INT32);
         
@@ -60,7 +62,7 @@ public class MaxPool2d extends Module {
                                 int inX = outX * stride + kX;
                                 
                                 int inIdx = ((b * channels + c) * inH + inY) * inW + inX;
-                                float val = (float) com.zifang.util.numpy.Array.get(inData, inIdx);
+                                float val = ((Number) com.zifang.util.numpy.Array.get(inData, inIdx)).floatValue();
                                 
                                 if (val > maxVal) {
                                     maxVal = val;
@@ -87,8 +89,9 @@ public class MaxPool2d extends Module {
         int outH = gradOutput.getShape().get(2);
         int outW = gradOutput.getShape().get(3);
         
-        int inH = savedIndices.getShape().get(2);
-        int inW = savedIndices.getShape().get(3);
+        // Use saved input shape, not savedIndices shape
+        int inH = inputShape[2];
+        int inW = inputShape[3];
         
         NdArray gradInput = NdArray.zeros(new Shape(batchSize, channels, inH, inW), DType.FLOAT32);
         Object gInData = gradInput.getData();
@@ -100,10 +103,10 @@ public class MaxPool2d extends Module {
                 for (int outY = 0; outY < outH; outY++) {
                     for (int outX = 0; outX < outW; outX++) {
                         int outIdx = ((b * channels + c) * outH + outY) * outW + outX;
-                        float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, outIdx);
-                        int maxIdx = (int) com.zifang.util.numpy.Array.get(idxData, outIdx);
+                        float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
+                        int maxIdx = ((Number) com.zifang.util.numpy.Array.get(idxData, outIdx)).intValue();
                         
-                        float existing = (float) com.zifang.util.numpy.Array.get(gInData, maxIdx);
+                        float existing = ((Number) com.zifang.util.numpy.Array.get(gInData, maxIdx)).floatValue();
                         com.zifang.util.numpy.Array.set(gInData, maxIdx, existing + gOut);
                     }
                 }

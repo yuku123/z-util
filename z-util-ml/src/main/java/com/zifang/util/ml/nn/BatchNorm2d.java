@@ -74,7 +74,7 @@ public class BatchNorm2d extends Module {
                     for (int h = 0; h < height; h++) {
                         for (int w = 0; w < width; w++) {
                             int idx = ((b * channels + c) * height + h) * width + w;
-                            float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                            float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                             sum += val;
                         }
                     }
@@ -90,7 +90,7 @@ public class BatchNorm2d extends Module {
                     for (int h = 0; h < height; h++) {
                         for (int w = 0; w < width; w++) {
                             int idx = ((b * channels + c) * height + h) * width + w;
-                            float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                            float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                             float diff = val - batchMean[c];
                             sum += diff * diff;
                         }
@@ -105,23 +105,23 @@ public class BatchNorm2d extends Module {
             
             // Update running statistics
             for (int c = 0; c < channels; c++) {
-                float rm = (float) com.zifang.util.numpy.Array.get(rmData, c);
-                float rv = (float) com.zifang.util.numpy.Array.get(rvData, c);
+                float rm = ((Number) com.zifang.util.numpy.Array.get(rmData, c)).floatValue();
+                float rv = ((Number) com.zifang.util.numpy.Array.get(rvData, c)).floatValue();
                 com.zifang.util.numpy.Array.set(rmData, c, momentum * rm + (1 - momentum) * batchMean[c]);
                 com.zifang.util.numpy.Array.set(rvData, c, momentum * rv + (1 - momentum) * batchVar[c]);
             }
             
             // Normalize and scale
             for (int c = 0; c < channels; c++) {
-                float g = (float) com.zifang.util.numpy.Array.get(gData, c);
-                float b = (float) com.zifang.util.numpy.Array.get(bData, c);
+                float g = ((Number) com.zifang.util.numpy.Array.get(gData, c)).floatValue();
+                float b = ((Number) com.zifang.util.numpy.Array.get(bData, c)).floatValue();
                 float std = (float) Math.sqrt(batchVar[c] + eps);
                 
                 for (int bb = 0; bb < batchSize; bb++) {
                     for (int h = 0; h < height; h++) {
                         for (int w = 0; w < width; w++) {
                             int idx = ((bb * channels + c) * height + h) * width + w;
-                            float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                            float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                             float normalized = (val - batchMean[c]) / std;
                             float outVal = g * normalized + b;
                             com.zifang.util.numpy.Array.set(outData, idx, outVal);
@@ -132,17 +132,17 @@ public class BatchNorm2d extends Module {
         } else {
             // Inference mode: use running statistics
             for (int c = 0; c < channels; c++) {
-                float g = (float) com.zifang.util.numpy.Array.get(gData, c);
-                float b = (float) com.zifang.util.numpy.Array.get(bData, c);
-                float rm = (float) com.zifang.util.numpy.Array.get(rmData, c);
-                float rv = (float) com.zifang.util.numpy.Array.get(rvData, c);
+                float g = ((Number) com.zifang.util.numpy.Array.get(gData, c)).floatValue();
+                float b = ((Number) com.zifang.util.numpy.Array.get(bData, c)).floatValue();
+                float rm = ((Number) com.zifang.util.numpy.Array.get(rmData, c)).floatValue();
+                float rv = ((Number) com.zifang.util.numpy.Array.get(rvData, c)).floatValue();
                 float std = (float) Math.sqrt(rv + eps);
                 
                 for (int bb = 0; bb < batchSize; bb++) {
                     for (int h = 0; h < height; h++) {
                         for (int w = 0; w < width; w++) {
                             int idx = ((bb * channels + c) * height + h) * width + w;
-                            float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                            float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                             float normalized = (val - rm) / std;
                             float outVal = g * normalized + b;
                             com.zifang.util.numpy.Array.set(outData, idx, outVal);
@@ -168,13 +168,13 @@ public class BatchNorm2d extends Module {
         float[] mean = new float[savedMean.size()];
         Object mData = savedMean.getData();
         for (int i = 0; i < mean.length; i++) {
-            mean[i] = (float) com.zifang.util.numpy.Array.get(mData, i);
+            mean[i] = ((Number) com.zifang.util.numpy.Array.get(mData, i)).floatValue();
         }
         
         float[] var = new float[savedVar.size()];
         Object vData = savedVar.getData();
         for (int i = 0; i < var.length; i++) {
-            var[i] = (float) com.zifang.util.numpy.Array.get(vData, i);
+            var[i] = ((Number) com.zifang.util.numpy.Array.get(vData, i)).floatValue();
         }
         
         // Gradient w.r.t. gamma and beta
@@ -193,8 +193,8 @@ public class BatchNorm2d extends Module {
                 for (int h = 0; h < height; h++) {
                     for (int w = 0; w < width; w++) {
                         int idx = ((b * channels + c) * height + h) * width + w;
-                        float xNorm = ((float) com.zifang.util.numpy.Array.get(inData, idx) - mean[c]) / std;
-                        float dOut = (float) com.zifang.util.numpy.Array.get(gOutData, idx);
+                        float xNorm = (((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue() - mean[c]) / std;
+                        float dOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, idx)).floatValue();
                         gg += dOut * xNorm;
                         bg += dOut;
                     }
@@ -210,7 +210,7 @@ public class BatchNorm2d extends Module {
         Object gmData = gamma.getData();
         
         for (int c = 0; c < channels; c++) {
-            float g = (float) com.zifang.util.numpy.Array.get(gmData, c);
+            float g = ((Number) com.zifang.util.numpy.Array.get(gmData, c)).floatValue();
             float std = (float) Math.sqrt(var[c] + eps);
             float varGrad = 0.0f;
             float meanGrad = 0.0f;
@@ -220,9 +220,9 @@ public class BatchNorm2d extends Module {
                 for (int h = 0; h < height; h++) {
                     for (int w = 0; w < width; w++) {
                         int idx = ((b * channels + c) * height + h) * width + w;
-                        float x = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                        float x = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                         float xCentered = x - mean[c];
-                        float dOut = (float) com.zifang.util.numpy.Array.get(gOutData, idx);
+                        float dOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, idx)).floatValue();
                         meanGrad -= dOut * g / std;
                         varGrad -= dOut * g * xCentered / (std * std * std);
                     }
@@ -237,9 +237,9 @@ public class BatchNorm2d extends Module {
                 for (int h = 0; h < height; h++) {
                     for (int w = 0; w < width; w++) {
                         int idx = ((b * channels + c) * height + h) * width + w;
-                        float x = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                        float x = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                         float xCentered = x - mean[c];
-                        float dOut = (float) com.zifang.util.numpy.Array.get(gOutData, idx);
+                        float dOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, idx)).floatValue();
                         float dXNorm = dOut * g / std;
                         float dVar = varGrad * xCentered;
                         float dMean = meanGrad / n;

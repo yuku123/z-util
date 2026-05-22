@@ -121,7 +121,7 @@ public class DQN {
                 Object tgtWData = targetWeight.getData();
                 int wSize = sourceWeight.size();
                 for (int j = 0; j < wSize; j++) {
-                    float val = (float) com.zifang.util.numpy.Array.get(srcWData, j);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(srcWData, j)).floatValue();
                     com.zifang.util.numpy.Array.set(tgtWData, j, val);
                 }
                 
@@ -130,7 +130,7 @@ public class DQN {
                 Object tgtBData = targetBias.getData();
                 int bSize = sourceBias.size();
                 for (int j = 0; j < bSize; j++) {
-                    float val = (float) com.zifang.util.numpy.Array.get(srcBData, j);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(srcBData, j)).floatValue();
                     com.zifang.util.numpy.Array.set(tgtBData, j, val);
                 }
             }

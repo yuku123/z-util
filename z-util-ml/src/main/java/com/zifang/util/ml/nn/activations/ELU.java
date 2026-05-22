@@ -32,7 +32,7 @@ public class ELU extends com.zifang.util.ml.nn.Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             float result = val > 0 ? val : alpha * ((float) Math.exp(val) - 1.0f);
             com.zifang.util.numpy.Array.set(outData, i, result);
         }
@@ -49,8 +49,8 @@ public class ELU extends com.zifang.util.ml.nn.Module {
         int size = gradOutput.size();
         
         for (int i = 0; i < size; i++) {
-            float x = (float) com.zifang.util.numpy.Array.get(inData, i);
-            float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
+            float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
+            float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
             float slope = x > 0 ? 1.0f : alpha * (float) Math.exp(x);
             com.zifang.util.numpy.Array.set(gInData, i, gOut * slope);
         }

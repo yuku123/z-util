@@ -64,7 +64,7 @@ public class LayerNorm extends Module {
                 float sum = 0.0f;
                 for (int i = 0; i < featureSize; i++) {
                     int idx = b * featureSize + i;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     sum += val;
                 }
                 meanArr[b] = sum / featureSize;
@@ -72,7 +72,7 @@ public class LayerNorm extends Module {
                 sum = 0.0f;
                 for (int i = 0; i < featureSize; i++) {
                     int idx = b * featureSize + i;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     float diff = val - meanArr[b];
                     sum += diff * diff;
                 }
@@ -88,10 +88,10 @@ public class LayerNorm extends Module {
                 
                 for (int i = 0; i < featureSize; i++) {
                     int idx = b * featureSize + i;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     float normalized = (val - mean) / std;
-                    float w = (float) com.zifang.util.numpy.Array.get(wData, i);
-                    float bVal = (float) com.zifang.util.numpy.Array.get(bData, i);
+                    float w = ((Number) com.zifang.util.numpy.Array.get(wData, i)).floatValue();
+                    float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, i)).floatValue();
                     com.zifang.util.numpy.Array.set(outData, idx, w * normalized + bVal);
                 }
             }
@@ -101,7 +101,7 @@ public class LayerNorm extends Module {
                 float sum = 0.0f;
                 for (int i = 0; i < featureSize; i++) {
                     int idx = b * featureSize + i;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     sum += val;
                 }
                 float mean = sum / featureSize;
@@ -109,7 +109,7 @@ public class LayerNorm extends Module {
                 sum = 0.0f;
                 for (int i = 0; i < featureSize; i++) {
                     int idx = b * featureSize + i;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     float diff = val - mean;
                     sum += diff * diff;
                 }
@@ -117,10 +117,10 @@ public class LayerNorm extends Module {
                 
                 for (int i = 0; i < featureSize; i++) {
                     int idx = b * featureSize + i;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     float normalized = (val - mean) / std;
-                    float w = (float) com.zifang.util.numpy.Array.get(wData, i);
-                    float bVal = (float) com.zifang.util.numpy.Array.get(bData, i);
+                    float w = ((Number) com.zifang.util.numpy.Array.get(wData, i)).floatValue();
+                    float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, i)).floatValue();
                     com.zifang.util.numpy.Array.set(outData, idx, w * normalized + bVal);
                 }
             }
@@ -142,7 +142,7 @@ public class LayerNorm extends Module {
         float[] meanArr = new float[savedMean.size()];
         Object mData = savedMean.getData();
         for (int i = 0; i < meanArr.length; i++) {
-            meanArr[i] = (float) com.zifang.util.numpy.Array.get(mData, i);
+            meanArr[i] = ((Number) com.zifang.util.numpy.Array.get(mData, i)).floatValue();
         }
         
         // Gradient w.r.t. weight and bias
@@ -156,7 +156,7 @@ public class LayerNorm extends Module {
             float sumVar = 0.0f;
             for (int i = 0; i < normalizedShape; i++) {
                 int idx = b * normalizedShape + i;
-                float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                 sumVar += (val - mean) * (val - mean);
             }
             float var = sumVar / normalizedShape;
@@ -164,10 +164,10 @@ public class LayerNorm extends Module {
             
             for (int i = 0; i < normalizedShape; i++) {
                 int idx = b * normalizedShape + i;
-                float x = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                float x = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                 float xNorm = (x - mean) / std;
-                float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, idx);
-                float w = (float) com.zifang.util.numpy.Array.get(wData, i);
+                float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, idx)).floatValue();
+                float w = ((Number) com.zifang.util.numpy.Array.get(wData, i)).floatValue();
                 
                 wGrad[i] += gOut * xNorm;
                 bGrad[i] += gOut;
@@ -184,7 +184,7 @@ public class LayerNorm extends Module {
             float sumVar = 0.0f;
             for (int i = 0; i < normalizedShape; i++) {
                 int idx = b * normalizedShape + i;
-                float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                 sumVar += (val - mean) * (val - mean);
             }
             float var = sumVar / normalizedShape;
@@ -195,8 +195,8 @@ public class LayerNorm extends Module {
             float[] weightedSum = new float[normalizedShape];
             for (int i = 0; i < normalizedShape; i++) {
                 int idx = b * normalizedShape + i;
-                float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, idx);
-                float w = (float) com.zifang.util.numpy.Array.get(wData, i);
+                float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, idx)).floatValue();
+                float w = ((Number) com.zifang.util.numpy.Array.get(wData, i)).floatValue();
                 weightedSum[i] = gOut * w;
             }
             
@@ -209,14 +209,14 @@ public class LayerNorm extends Module {
             float dVar = 0.0f;
             for (int i = 0; i < normalizedShape; i++) {
                 int idx = b * normalizedShape + i;
-                float x = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                float x = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                 dVar += weightedSum[i] * (x - mean);
             }
             dVar *= -0.5f * Math.pow(std, -3);
             
             for (int i = 0; i < normalizedShape; i++) {
                 int idx = b * normalizedShape + i;
-                float x = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                float x = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                 float xCentered = x - mean;
                 
                 float part1 = weightedSum[i] / std;

@@ -92,15 +92,15 @@ public class Conv2d extends Module {
                                         int inIdx = ((b * inChannels + inC) * inH + inY) * inW + inX;
                                         int wIdx = ((outC * inChannels + inC) * kernelSize + kY) * kernelSize + kX;
                                         
-                                        float x = (float) com.zifang.util.numpy.Array.get(inData, inIdx);
-                                        float w = (float) com.zifang.util.numpy.Array.get(wData, wIdx);
+                                        float x = ((Number) com.zifang.util.numpy.Array.get(inData, inIdx)).floatValue();
+                                        float w = ((Number) com.zifang.util.numpy.Array.get(wData, wIdx)).floatValue();
                                         sum += x * w;
                                     }
                                 }
                             }
                         }
                         
-                        float biasVal = (float) com.zifang.util.numpy.Array.get(bData, outC);
+                        float biasVal = ((Number) com.zifang.util.numpy.Array.get(bData, outC)).floatValue();
                         float outVal = sum + biasVal;
                         
                         int outIdx = ((b * outChannels + outC) * outH + outY) * outW + outX;
@@ -140,8 +140,8 @@ public class Conv2d extends Module {
                 for (int outY = 0; outY < outH; outY++) {
                     for (int outX = 0; outX < outW; outX++) {
                         int outIdx = ((b * outChannels + outC) * outH + outY) * outW + outX;
-                        float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, outIdx);
-                        float bGrad = (float) com.zifang.util.numpy.Array.get(bGradData, outC);
+                        float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
+                        float bGrad = ((Number) com.zifang.util.numpy.Array.get(bGradData, outC)).floatValue();
                         com.zifang.util.numpy.Array.set(bGradData, outC, bGrad + gOut);
                     }
                 }
@@ -160,15 +160,15 @@ public class Conv2d extends Module {
                                         int outIdx = ((b * outChannels + outC) * outH + outY) * outW + outX;
                                         int inIdx = ((b * inChannels + inC) * inH + inY) * inW + inX;
                                         
-                                        float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, outIdx);
-                                        float x = (float) com.zifang.util.numpy.Array.get(inData, inIdx);
+                                        float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
+                                        float x = ((Number) com.zifang.util.numpy.Array.get(inData, inIdx)).floatValue();
                                         wGrad += gOut * x;
                                     }
                                 }
                             }
                             
                             int wGradIdx = ((outC * inChannels + inC) * kernelSize + kY) * kernelSize + kX;
-                            float existingWGrad = (float) com.zifang.util.numpy.Array.get(wGradData, wGradIdx);
+                            float existingWGrad = ((Number) com.zifang.util.numpy.Array.get(wGradData, wGradIdx)).floatValue();
                             com.zifang.util.numpy.Array.set(wGradData, wGradIdx, existingWGrad + wGrad);
                         }
                     }
@@ -196,8 +196,8 @@ public class Conv2d extends Module {
                                         int outIdx = ((b * outChannels + outC) * outH + outY) * outW + outX;
                                         int wIdx = ((outC * inChannels + inC) * kernelSize + kY) * kernelSize + kX;
                                         
-                                        float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, outIdx);
-                                        float w = (float) com.zifang.util.numpy.Array.get(wData, wIdx);
+                                        float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
+                                        float w = ((Number) com.zifang.util.numpy.Array.get(wData, wIdx)).floatValue();
                                         sum += gOut * w;
                                     }
                                 }

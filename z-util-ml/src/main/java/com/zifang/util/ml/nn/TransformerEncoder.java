@@ -218,7 +218,7 @@ public class TransformerEncoder extends Module {
                     for (int k = 0; k < dK; k++) {
                         int inIdx = (i * batchSize + b) * dK * nhead + h * dK + k;
                         int outIdx = ((i * batchSize + b) * nhead + h) * dK + k;
-                        float val = (float) com.zifang.util.numpy.Array.get(inData, inIdx);
+                        float val = ((Number) com.zifang.util.numpy.Array.get(inData, inIdx)).floatValue();
                         com.zifang.util.numpy.Array.set(outData, outIdx, val);
                     }
                 }
@@ -249,8 +249,8 @@ public class TransformerEncoder extends Module {
                         for (int k = 0; k < dK; k++) {
                             int qIdx = ((i * batchSize + b) * nhead + h) * dK + k;
                             int kIdx = ((j * batchSize + b) * nhead + h) * dK + k;
-                            float qVal = (float) com.zifang.util.numpy.Array.get(qData, qIdx);
-                            float kVal = (float) com.zifang.util.numpy.Array.get(kData, kIdx);
+                            float qVal = ((Number) com.zifang.util.numpy.Array.get(qData, qIdx)).floatValue();
+                            float kVal = ((Number) com.zifang.util.numpy.Array.get(kData, kIdx)).floatValue();
                             sum += qVal * kVal;
                         }
                         float scaledScore = sum / (float) Math.sqrt(dK);
@@ -278,8 +278,8 @@ public class TransformerEncoder extends Module {
                         for (int j = 0; j < seqLen; j++) {
                             int aIdx = ((i * seqLen + j) * batchSize + b) * nhead + h;
                             int vIdx = ((j * batchSize + b) * nhead + h) * dK + k;
-                            float aVal = (float) com.zifang.util.numpy.Array.get(aData, aIdx);
-                            float vVal = (float) com.zifang.util.numpy.Array.get(vData, vIdx);
+                            float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, aIdx)).floatValue();
+                            float vVal = ((Number) com.zifang.util.numpy.Array.get(vData, vIdx)).floatValue();
                             sum += aVal * vVal;
                         }
                         int outIdx = ((i * batchSize + b) * nhead + h) * dK + k;
@@ -299,7 +299,7 @@ public class TransformerEncoder extends Module {
                     for (int k = 0; k < dK; k++) {
                         int srcIdx = ((i * batchSize + b) * nhead + h) * dK + k;
                         int dstIdx = (i * batchSize + b) * dK * nhead + h * dK + k;
-                        float val = (float) com.zifang.util.numpy.Array.get(outData, srcIdx);
+                        float val = ((Number) com.zifang.util.numpy.Array.get(outData, srcIdx)).floatValue();
                         com.zifang.util.numpy.Array.set(resData, dstIdx, val);
                     }
                 }
@@ -327,7 +327,7 @@ public class TransformerEncoder extends Module {
                     float maxVal = Float.NEGATIVE_INFINITY;
                     for (int j = 0; j < keyDim; j++) {
                         int idx = ((i * keyDim + j) * batchSize + b) * nhead + h;
-                        float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                        float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                         if (val > maxVal) maxVal = val;
                     }
                     
@@ -336,7 +336,7 @@ public class TransformerEncoder extends Module {
                     float[] expVals = new float[keyDim];
                     for (int j = 0; j < keyDim; j++) {
                         int idx = ((i * keyDim + j) * batchSize + b) * nhead + h;
-                        float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                        float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                         float expVal = (float) Math.exp(val - maxVal);
                         expVals[j] = expVal;
                         sum += expVal;
@@ -373,7 +373,7 @@ public class TransformerEncoder extends Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             com.zifang.util.numpy.Array.set(outData, i, Math.max(0, val));
         }
         return output;
@@ -398,7 +398,7 @@ public class TransformerEncoder extends Module {
                 float mean = 0.0f;
                 for (int j = 0; j < dModel; j++) {
                     int idx = (i * batchSize + b) * dModel + j;
-                    mean += (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    mean += ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                 }
                 mean /= dModel;
                 
@@ -406,7 +406,7 @@ public class TransformerEncoder extends Module {
                 float variance = 0.0f;
                 for (int j = 0; j < dModel; j++) {
                     int idx = (i * batchSize + b) * dModel + j;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     variance += (val - mean) * (val - mean);
                 }
                 variance /= dModel;
@@ -415,10 +415,10 @@ public class TransformerEncoder extends Module {
                 float std = (float) Math.sqrt(variance + 1e-8);
                 for (int j = 0; j < dModel; j++) {
                     int idx = (i * batchSize + b) * dModel + j;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     float normalized = (val - mean) / std;
-                    float g = (float) com.zifang.util.numpy.Array.get(gammaData, j);
-                    float b_val = (float) com.zifang.util.numpy.Array.get(betaData, j);
+                    float g = ((Number) com.zifang.util.numpy.Array.get(gammaData, j)).floatValue();
+                    float b_val = ((Number) com.zifang.util.numpy.Array.get(betaData, j)).floatValue();
                     com.zifang.util.numpy.Array.set(outData, idx, g * normalized + b_val);
                 }
             }
@@ -443,7 +443,7 @@ public class TransformerEncoder extends Module {
                 
                 for (int b = 0; b < batchSize; b++) {
                     int idx = (pos * batchSize + b) * dModel + i;
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     com.zifang.util.numpy.Array.set(outData, idx, val + pe);
                 }
             }
@@ -468,8 +468,8 @@ public class TransformerEncoder extends Module {
                 for (int j = 0; j < n; j++) {
                     float sum = 0.0f;
                     for (int l = 0; l < k; l++) {
-                        float aVal = (float) com.zifang.util.numpy.Array.get(aData, i * k + l);
-                        float bVal = (float) com.zifang.util.numpy.Array.get(bData, l * n + j);
+                        float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i * k + l)).floatValue();
+                        float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, l * n + j)).floatValue();
                         sum += aVal * bVal;
                     }
                     com.zifang.util.numpy.Array.set(cData, i * n + j, sum);
@@ -495,7 +495,7 @@ public class TransformerEncoder extends Module {
                     for (int l = 0; l < k; l++) {
                         int srcIdx = (i * batch + j) * k + l;
                         int dstIdx = (i * batch + j) * k + l;
-                        float val = (float) com.zifang.util.numpy.Array.get(aData, srcIdx);
+                        float val = ((Number) com.zifang.util.numpy.Array.get(aData, srcIdx)).floatValue();
                         com.zifang.util.numpy.Array.set(aFlatData, dstIdx, val);
                     }
                 }
@@ -510,8 +510,8 @@ public class TransformerEncoder extends Module {
                 for (int j = 0; j < n; j++) {
                     float sum = 0.0f;
                     for (int l = 0; l < k; l++) {
-                        float aVal = (float) com.zifang.util.numpy.Array.get(aFlatData, i * k + l);
-                        float bVal = (float) com.zifang.util.numpy.Array.get(bData, l * n + j);
+                        float aVal = ((Number) com.zifang.util.numpy.Array.get(aFlatData, i * k + l)).floatValue();
+                        float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, l * n + j)).floatValue();
                         sum += aVal * bVal;
                     }
                     com.zifang.util.numpy.Array.set(cFlatData, i * n + j, sum);
@@ -527,7 +527,7 @@ public class TransformerEncoder extends Module {
                     for (int l = 0; l < n; l++) {
                         int srcIdx = (i * batch + j) * n + l;
                         int dstIdx = (i * batch + j) * n + l;
-                        float val = (float) com.zifang.util.numpy.Array.get(resFlatData, srcIdx);
+                        float val = ((Number) com.zifang.util.numpy.Array.get(resFlatData, srcIdx)).floatValue();
                         com.zifang.util.numpy.Array.set(resultData, dstIdx, val);
                     }
                 }
@@ -550,8 +550,8 @@ public class TransformerEncoder extends Module {
             int size = a.size();
             
             for (int i = 0; i < size; i++) {
-                float aVal = (float) com.zifang.util.numpy.Array.get(aData, i);
-                float bVal = (float) com.zifang.util.numpy.Array.get(bData, i);
+                float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i)).floatValue();
+                float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, i)).floatValue();
                 com.zifang.util.numpy.Array.set(cData, i, aVal + bVal);
             }
             return result;

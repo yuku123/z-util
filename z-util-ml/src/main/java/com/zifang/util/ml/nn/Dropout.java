@@ -39,7 +39,7 @@ public class Dropout extends Module {
             int size = input.size();
             
             for (int i = 0; i < size; i++) {
-                float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+                float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
                 if (random.nextFloat() < p) {
                     // Drop this element
                     com.zifang.util.numpy.Array.set(maskData, i, 0.0f);
@@ -59,7 +59,7 @@ public class Dropout extends Module {
             float scale = 1 - p;
             
             for (int i = 0; i < size; i++) {
-                float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+                float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
                 com.zifang.util.numpy.Array.set(outData, i, val * scale);
             }
             return output;
@@ -78,8 +78,8 @@ public class Dropout extends Module {
             int size = gradOutput.size();
             
             for (int i = 0; i < size; i++) {
-                float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
-                float m = (float) com.zifang.util.numpy.Array.get(maskData, i);
+                float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
+                float m = ((Number) com.zifang.util.numpy.Array.get(maskData, i)).floatValue();
                 // mask already contains scaled values (val / (1-p)) during forward
                 // so gradInput = gradOutput * (mask / (1-p)) = gradOutput * mask / (1-p)
                 // But simpler: gradInput = gradOutput * mask (since mask has 0 or 1/(1-p))
@@ -99,7 +99,7 @@ public class Dropout extends Module {
             int size = gradOutput.size();
             
             for (int i = 0; i < size; i++) {
-                float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
+                float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
                 com.zifang.util.numpy.Array.set(gInData, i, gOut * scale);
             }
             return gradInput;

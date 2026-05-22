@@ -13,6 +13,7 @@ public class AvgPool2d extends Module {
     
     private final int kernelSize;
     private final int stride;
+    private int[] inputShape;  // Save input shape for backward pass
     
     public AvgPool2d(int kernelSize) {
         this(kernelSize, kernelSize);
@@ -37,6 +38,7 @@ public class AvgPool2d extends Module {
         int outH = (inH - kernelSize) / stride + 1;
         int outW = (inW - kernelSize) / stride + 1;
         
+        inputShape = new int[]{batchSize, channels, inH, inW};
         NdArray output = NdArray.zeros(new Shape(batchSize, channels, outH, outW), DType.FLOAT32);
         
         Object inData = input.getData();
@@ -56,7 +58,7 @@ public class AvgPool2d extends Module {
                                 int inX = outX * stride + kX;
                                 
                                 int inIdx = ((b * channels + c) * inH + inY) * inW + inX;
-                                float val = (float) com.zifang.util.numpy.Array.get(inData, inIdx);
+                                float val = ((Number) com.zifang.util.numpy.Array.get(inData, inIdx)).floatValue();
                                 sum += val;
                             }
                         }
@@ -78,20 +80,22 @@ public class AvgPool2d extends Module {
         int outH = gradOutput.getShape().get(2);
         int outW = gradOutput.getShape().get(3);
         
-        // We need input shape for full backward, but we don't store it
-        // For simplicity, assume input was computed before and we can infer size
-        int kernelArea = kernelSize * kernelSize;
+        // Use saved input shape
+        int inH = inputShape[2];
+        int inW = inputShape[3];
         
-        NdArray gradInput = NdArray.zeros(gradOutput.getShape(), DType.FLOAT32);
+        NdArray gradInput = NdArray.zeros(new Shape(batchSize, channels, inH, inW), DType.FLOAT32);
         Object gOutData = gradOutput.getData();
         Object gInData = gradInput.getData();
+        
+        float kernelArea = kernelSize * kernelSize;
         
         for (int b = 0; b < batchSize; b++) {
             for (int c = 0; c < channels; c++) {
                 for (int outY = 0; outY < outH; outY++) {
                     for (int outX = 0; outX < outW; outX++) {
                         int outIdx = ((b * channels + c) * outH + outY) * outW + outX;
-                        float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, outIdx);
+                        float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
                         float gVal = gOut / kernelArea;
                         
                         for (int kY = 0; kY < kernelSize; kY++) {
@@ -99,13 +103,9 @@ public class AvgPool2d extends Module {
                                 int inY = outY * stride + kY;
                                 int inX = outX * stride + kX;
                                 
-                                // Gradients are distributed equally to each position in the kernel
-                                // This is an approximation - true backward would need input shape
-                                int inIdx = ((b * channels + c) * outH + inY) * outW + inX;
-                                if (inIdx < gradInput.size()) {
-                                    float existing = (float) com.zifang.util.numpy.Array.get(gInData, inIdx);
-                                    com.zifang.util.numpy.Array.set(gInData, inIdx, existing + gVal);
-                                }
+                                int inIdx = ((b * channels + c) * inH + inY) * inW + inX;
+                                float existing = ((Number) com.zifang.util.numpy.Array.get(gInData, inIdx)).floatValue();
+                                com.zifang.util.numpy.Array.set(gInData, inIdx, existing + gVal);
                             }
                         }
                     }

@@ -29,7 +29,7 @@ public class Swish extends com.zifang.util.ml.nn.Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float x = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             float sig = (float) (1.0 / (1.0 + Math.exp(-x)));
             float result = x * sig;
             com.zifang.util.numpy.Array.set(outData, i, result);
@@ -49,9 +49,9 @@ public class Swish extends com.zifang.util.ml.nn.Module {
         int size = gradOutput.size();
         
         for (int i = 0; i < size; i++) {
-            float x = (float) com.zifang.util.numpy.Array.get(savedInput.getData(), i);
-            float sig = (float) com.zifang.util.numpy.Array.get(sigData, i);
-            float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
+            float x = ((Number) com.zifang.util.numpy.Array.get(savedInput.getData(), i)).floatValue();
+            float sig = ((Number) com.zifang.util.numpy.Array.get(sigData, i)).floatValue();
+            float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
             
             // f'(x) = sigmoid(x) + x * sigmoid(x) * (1 - sigmoid(x))
             float dsig = sig * (1.0f - sig);

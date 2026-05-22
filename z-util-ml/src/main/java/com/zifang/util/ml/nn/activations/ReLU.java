@@ -23,7 +23,7 @@ public class ReLU extends com.zifang.util.ml.nn.Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             com.zifang.util.numpy.Array.set(outData, i, Math.max(0, val));
         }
         
@@ -39,8 +39,8 @@ public class ReLU extends com.zifang.util.ml.nn.Module {
         int size = gradOutput.size();
         
         for (int i = 0; i < size; i++) {
-            float x = (float) com.zifang.util.numpy.Array.get(inData, i);
-            float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
+            float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
+            float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
             // dL/dx = dL/dy * f'(x) where f'(x) = 1 if x > 0, else 0
             com.zifang.util.numpy.Array.set(gInData, i, x > 0 ? gOut : 0);
         }

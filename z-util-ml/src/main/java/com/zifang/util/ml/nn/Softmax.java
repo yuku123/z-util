@@ -63,7 +63,7 @@ public class Softmax extends Module {
                         // Multi-dimensional case
                         idx = (outer * dimSize + d) * innerSize + inner;
                     }
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     if (val > maxVal) {
                         maxVal = val;
                     }
@@ -82,7 +82,7 @@ public class Softmax extends Module {
                     } else {
                         idx = (outer * dimSize + d) * innerSize + inner;
                     }
-                    float val = (float) com.zifang.util.numpy.Array.get(inData, idx);
+                    float val = ((Number) com.zifang.util.numpy.Array.get(inData, idx)).floatValue();
                     float expVal = (float) Math.exp(val - maxVal);
                     expVals[d] = expVal;
                     sum += expVal;
@@ -146,7 +146,7 @@ public class Softmax extends Module {
                     } else {
                         idx = (outer * dimSize + d) * innerSize + inner;
                     }
-                    float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, idx);
+                    float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, idx)).floatValue();
                     // Assuming y_i ~ 1/dimSize for gradient estimation
                     // This is an approximation since we don't have forward output stored
                     weightedSum += gOut * (1.0f / dimSize);
@@ -162,7 +162,7 @@ public class Softmax extends Module {
                     } else {
                         idx = (outer * dimSize + d) * innerSize + inner;
                     }
-                    float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, idx);
+                    float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, idx)).floatValue();
                     // y_i ~ 1/dimSize approximation
                     float y = 1.0f / dimSize;
                     float gIn = y * (gOut - weightedSum);

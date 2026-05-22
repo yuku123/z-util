@@ -125,7 +125,7 @@ class BaggingTest {
         for (int i = 0; i < nSamples; i++) {
             float sum = 0;
             for (int c = 0; c < nClasses; c++) {
-                float val = (float) com.zifang.util.numpy.Array.get(data, i * nClasses + c);
+                float val = ((Number) com.zifang.util.numpy.Array.get(data, i * nClasses + c)).floatValue();
                 sum += val;
             }
             assertTrue(Math.abs(sum - 1.0f) < 0.01f, "Probabilities should sum to 1");

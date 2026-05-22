@@ -362,7 +362,7 @@ public class LSTM extends Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             float sig = (float) (1.0 / (1.0 + Math.exp(-val)));
             com.zifang.util.numpy.Array.set(outData, i, sig);
         }
@@ -377,7 +377,7 @@ public class LSTM extends Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             float sig = (float) (1.0 / (1.0 + Math.exp(-val)));
             com.zifang.util.numpy.Array.set(outData, i, sig * (1 - sig));
         }
@@ -392,7 +392,7 @@ public class LSTM extends Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             float th = (float) Math.tanh(val);
             com.zifang.util.numpy.Array.set(outData, i, 1 - th * th);
         }
@@ -407,7 +407,7 @@ public class LSTM extends Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float val = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             com.zifang.util.numpy.Array.set(outData, i, (float) Math.tanh(val));
         }
         return output;
@@ -426,8 +426,8 @@ public class LSTM extends Module {
         int size = a.size();
         
         for (int i = 0; i < size; i++) {
-            float aVal = (float) com.zifang.util.numpy.Array.get(aData, i);
-            float bVal = (float) com.zifang.util.numpy.Array.get(bData, i);
+            float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i)).floatValue();
+            float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, i)).floatValue();
             com.zifang.util.numpy.Array.set(cData, i, aVal * bVal);
         }
         return result;
@@ -449,8 +449,8 @@ public class LSTM extends Module {
                 for (int j = 0; j < n; j++) {
                     float sum = 0.0f;
                     for (int l = 0; l < k; l++) {
-                        float aVal = (float) com.zifang.util.numpy.Array.get(aData, i * k + l);
-                        float bVal = (float) com.zifang.util.numpy.Array.get(bData, l * n + j);
+                        float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i * k + l)).floatValue();
+                        float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, l * n + j)).floatValue();
                         sum += aVal * bVal;
                     }
                     com.zifang.util.numpy.Array.set(cData, i * n + j, sum);
@@ -474,8 +474,8 @@ public class LSTM extends Module {
             int size = a.size();
             
             for (int i = 0; i < size; i++) {
-                float aVal = (float) com.zifang.util.numpy.Array.get(aData, i);
-                float bVal = (float) com.zifang.util.numpy.Array.get(bData, i);
+                float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i)).floatValue();
+                float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, i)).floatValue();
                 com.zifang.util.numpy.Array.set(cData, i, aVal + bVal);
             }
             return result;
@@ -493,8 +493,8 @@ public class LSTM extends Module {
             
             for (int i = 0; i < batchSize; i++) {
                 for (int j = 0; j < hiddenSize; j++) {
-                    float aVal = (float) com.zifang.util.numpy.Array.get(aData, i * hiddenSize + j);
-                    float bVal = (float) com.zifang.util.numpy.Array.get(bData, j);
+                    float aVal = ((Number) com.zifang.util.numpy.Array.get(aData, i * hiddenSize + j)).floatValue();
+                    float bVal = ((Number) com.zifang.util.numpy.Array.get(bData, j)).floatValue();
                     com.zifang.util.numpy.Array.set(cData, i * hiddenSize + j, aVal + bVal);
                 }
             }

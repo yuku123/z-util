@@ -69,7 +69,7 @@ class RNNTest {
         // Verify output values are in valid range (tanh output is in [-1, 1])
         Object outData = output.getData();
         for (int i = 0; i < output.size(); i++) {
-            double val = (double) com.zifang.util.numpy.Array.get(outData, i);
+            double val = ((Number) com.zifang.util.numpy.Array.get(outData, i)).doubleValue();
             assertTrue(val >= -1.0f && val <= 1.0f, "RNN output should be in [-1, 1]");
         }
     }

@@ -21,7 +21,7 @@ public class Tanh extends com.zifang.util.ml.nn.Module {
         int size = input.size();
         
         for (int i = 0; i < size; i++) {
-            float x = (float) com.zifang.util.numpy.Array.get(inData, i);
+            float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             float result = (float) Math.tanh(x);
             com.zifang.util.numpy.Array.set(outData, i, result);
         }
@@ -39,8 +39,8 @@ public class Tanh extends com.zifang.util.ml.nn.Module {
         int size = gradOutput.size();
         
         for (int i = 0; i < size; i++) {
-            float tanhVal = (float) com.zifang.util.numpy.Array.get(tanhData, i);
-            float gOut = (float) com.zifang.util.numpy.Array.get(gOutData, i);
+            float tanhVal = ((Number) com.zifang.util.numpy.Array.get(tanhData, i)).floatValue();
+            float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
             
             // d/dx tanh(x) = 1 - tanh^2(x)
             float dx = 1.0f - tanhVal * tanhVal;
