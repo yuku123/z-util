@@ -24,44 +24,49 @@ public class SVMTest {
     }
 
     /**
-     * Generate linearly separable data with labels +1 and -1.
+     * Generate linearly separable data AND labels together (two classes separated by x > 0).
      */
-    private NdArray generateLinearlySeparableData(int nSamples) {
-        double[][] data = new double[nSamples][2];
-        for (int i = 0; i < nSamples; i++) {
-            data[i][0] = random.nextDouble() * 10 - 5;
-            data[i][1] = random.nextDouble() * 10 - 5;
+    private static class DataWithLabels {
+        NdArray X;
+        int[] y;
+        DataWithLabels(NdArray X, int[] y) {
+            this.X = X;
+            this.y = y;
         }
-        return createNdArray(data, nSamples, 2);
     }
 
-    private int[] generateLinearlySeparableLabels(int nSamples) {
+    private DataWithLabels generateLinearlySeparableDataWithLabels(int nSamples, Random rnd) {
+        double[][] data = new double[nSamples][2];
         int[] labels = new int[nSamples];
         for (int i = 0; i < nSamples; i++) {
-            double x = random.nextDouble() * 10 - 5;
+            double x = rnd.nextDouble() * 10 - 5;
+            double y = rnd.nextDouble() * 10 - 5;
+            data[i][0] = x;
+            data[i][1] = y;
             labels[i] = (x > 0) ? 1 : -1;
         }
-        return labels;
+        return new DataWithLabels(createNdArray(data, nSamples, 2), labels);
     }
 
     @Test
     public void testSVMLinear() {
         int nSamples = 100;
-        NdArray X = generateLinearlySeparableData(nSamples);
-        int[] y = generateLinearlySeparableLabels(nSamples);
-        
+        DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));
+        NdArray X = dwl.X;
+        int[] y = dwl.y;
+
         SVM svm = new SVM(0.01, 1000, 0.1, SVM.KernelType.LINEAR);
         svm.fit(X, y);
-        
+
         int[] predictions = svm.predict(X);
-        
+
         assertEquals(nSamples, predictions.length);
-        
+
         // All predictions should be +1 or -1
         for (int pred : predictions) {
             assertTrue(pred == 1 || pred == -1, "Predictions should be +1 or -1");
         }
-        
+
         // Calculate accuracy
         int correct = 0;
         for (int i = 0; i < nSamples; i++) {
@@ -79,11 +84,11 @@ public class SVMTest {
         int nSamples = 60;
         double[][] data = new double[nSamples][2];
         int[] labels = new int[nSamples];
-        
+
         for (int i = 0; i < nSamples; i++) {
             double angle = random.nextDouble() * 2 * Math.PI;
             double radius = random.nextDouble() * 2;
-            
+
             if (i < nSamples / 2) {
                 // Inner circle - label -1
                 data[i][0] = radius * Math.cos(angle);
@@ -96,17 +101,17 @@ public class SVMTest {
                 labels[i] = 1;
             }
         }
-        
+
         NdArray X = createNdArray(data, nSamples, 2);
-        
+
         SVM svm = new SVM(0.01, 500, 0.1, SVM.KernelType.RBF);
         svm.setGamma(0.1);
         svm.fit(X, labels);
-        
+
         int[] predictions = svm.predict(X);
-        
+
         assertEquals(nSamples, predictions.length);
-        
+
         // All predictions should be +1 or -1
         for (int pred : predictions) {
             assertTrue(pred == 1 || pred == -1);
@@ -116,16 +121,17 @@ public class SVMTest {
     @Test
     public void testSVMPredict() {
         int nSamples = 40;
-        NdArray X = generateLinearlySeparableData(nSamples);
-        int[] y = generateLinearlySeparableLabels(nSamples);
-        
+        DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));
+        NdArray X = dwl.X;
+        int[] y = dwl.y;
+
         SVM svm = new SVM(0.01, 500, 0.1, SVM.KernelType.LINEAR);
         svm.fit(X, y);
-        
+
         int[] predictions = svm.predict(X);
-        
+
         assertEquals(nSamples, predictions.length);
-        
+
         for (int pred : predictions) {
             assertTrue(pred == 1 || pred == -1, "Predictions should be +1 or -1");
         }

@@ -8,6 +8,7 @@ import java.util.List;
 public class JvmTest {
 
     @Test
+    @org.junit.Ignore("JVM作业测试，故意触发OOM")
     public void test0() {
         List<HeapOOM> list = new ArrayList<>();
         while (true) {
@@ -16,6 +17,7 @@ public class JvmTest {
     }
 
     @Test
+    @org.junit.Ignore("JVM作业测试，故意触发StackOverflow")
     public void test1() {
         StackOverflow stackOverflowError = new StackOverflow();
         try {

@@ -95,7 +95,8 @@ public class TransformerEncoder extends Module {
             initXavierUniform(Wo[layer], dK * nhead, dModel);
             registerParameter("Wo_" + layer, Wo[layer]);
             
-            // FFN weights
+            // FFN weights - standard matrix multiplication: W @ x where W is (out_features, in_features)
+            // Linear(dModel, dimFeedforward): W1 maps dModel -> dimFeedforward, so W1 shape (dModel, dimFeedforward)
             ffLinear1Weight[layer] = NdArray.zeros(new Shape(dModel, dimFeedforward), DType.FLOAT32);
             initXavierUniform(ffLinear1Weight[layer], dModel, dimFeedforward);
             registerParameter("ff1_w_" + layer, ffLinear1Weight[layer]);
@@ -103,6 +104,7 @@ public class TransformerEncoder extends Module {
             ffLinear1Bias[layer] = NdArray.zeros(new Shape(dimFeedforward), DType.FLOAT32);
             registerParameter("ff1_b_" + layer, ffLinear1Bias[layer]);
             
+            // Linear(dimFeedforward, dModel): W2 maps dimFeedforward -> dModel, so W2 shape (dimFeedforward, dModel)
             ffLinear2Weight[layer] = NdArray.zeros(new Shape(dimFeedforward, dModel), DType.FLOAT32);
             initXavierUniform(ffLinear2Weight[layer], dimFeedforward, dModel);
             registerParameter("ff2_w_" + layer, ffLinear2Weight[layer]);
@@ -357,11 +359,13 @@ public class TransformerEncoder extends Module {
     // Feed-forward network: Linear(ReLU(Linear(x)))
     private NdArray feedForward(NdArray input, int layer) {
         // First linear + ReLU
-        NdArray hidden = relu(add(matmul(input, ffLinear1Weight[layer].transpose()), ffLinear1Bias[layer]));
-        
+        // weight is already (dimFeedforward, dModel), no transpose needed
+        NdArray hidden = relu(add(matmul(input, ffLinear1Weight[layer]), ffLinear1Bias[layer]));
+
         // Second linear
-        NdArray output = add(matmul(hidden, ffLinear2Weight[layer].transpose()), ffLinear2Bias[layer]);
-        
+        // weight is already (dModel, dimFeedforward), no transpose needed
+        NdArray output = add(matmul(hidden, ffLinear2Weight[layer]), ffLinear2Bias[layer]);
+
         return output;
     }
     

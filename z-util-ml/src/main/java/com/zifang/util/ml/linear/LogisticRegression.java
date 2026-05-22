@@ -99,11 +99,11 @@ public class LogisticRegression {
                 for (int j = 0; j < d1; j++) {
                     Object val = Xb.get(i, j);
                     double x = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
-                    z += x * (j < d ? weights[j] : (j == d ? 1.0 : 0));
+                    z += x * weights[j];
                 }
                 predictions[i] = sigmoid(z);
             }
-            
+
             // Compute gradient
             double[] grad = new double[d1];
             for (int j = 0; j < d1; j++) {
@@ -119,12 +119,11 @@ public class LogisticRegression {
                     grad[j] += lambda * weights[j] / n; // L2 regularization
                 }
             }
-            
-            // Update weights
-            for (int j = 0; j < d; j++) {
+
+            // Update weights (including bias at weights[d])
+            for (int j = 0; j < d1; j++) {
                 weights[j] -= learningRate * grad[j];
             }
-            bias -= learningRate * grad[d];
         }
     }
     
@@ -138,7 +137,7 @@ public class LogisticRegression {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
         int[] predictions = new int[n];
-        
+
         for (int i = 0; i < n; i++) {
             double z = 0;
             for (int j = 0; j < d; j++) {
@@ -146,7 +145,7 @@ public class LogisticRegression {
                 double x = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
                 z += x * weights[j];
             }
-            z += bias;
+            z += weights[d];  // bias is stored in weights[d]
             predictions[i] = sigmoid(z) >= 0.5 ? 1 : 0;
         }
         return predictions;
@@ -169,7 +168,7 @@ public class LogisticRegression {
                 double x = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
                 z += x * weights[j];
             }
-            z += bias;
+            z += weights[weights.length - 1];  // bias is stored in weights[d]
             double p = sigmoid(z);
             proba[i * 2 + 0] = 1.0 - p;
             proba[i * 2 + 1] = p;

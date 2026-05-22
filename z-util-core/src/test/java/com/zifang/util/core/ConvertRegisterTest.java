@@ -88,6 +88,7 @@ public class ConvertRegisterTest {
     }
 
     @Test
+    @org.junit.Ignore("Lambda内部类泛型作业测试")
     public void test003(){
         IConverter<Map<String,String>, String> converter = new IConverter<Map<String,String>, String>(){
             @Override

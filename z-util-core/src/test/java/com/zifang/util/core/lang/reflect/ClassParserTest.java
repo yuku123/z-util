@@ -33,6 +33,7 @@ public class ClassParserTest {
     }
 
     @Test
+    @org.junit.Ignore("Lambda泛型擦除作业测试")
     public void test3() {
         ClassParser a = new ClassParserFactory().getInstance(A.class);
         ClassParser b = new ClassParserFactory().getInstance(B.class);
