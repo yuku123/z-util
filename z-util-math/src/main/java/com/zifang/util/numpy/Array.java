@@ -233,53 +233,52 @@ public final class Array {
         int size = 1;
         for (int dim : shape) size *= dim;
 
-        Object result = createZeroArray(DType.fromClass(data.getClass().getComponentType()), size);
-        int[] strides = new int[ndim];
-        strides[ndim - 1] = 1;
-        for (int i = ndim - 2; i >= 0; i--) {
-            strides[i] = strides[i + 1] * shape[i + 1];
-        }
-
-        // Compute the transposed shape: newShape[j] = shape[axes[j]]
+        // Determine the new (permuted) shape: newShape[j] = shape[axes[j]]
         int[] newShape = new int[ndim];
         for (int j = 0; j < ndim; j++) {
             newShape[j] = shape[axes[j]];
         }
 
-        // C-order strides for newShape: stride[j] = product of newShape dimensions after j
-        int[] newStrides = new int[ndim];
-        newStrides[ndim - 1] = 1;
-        for (int i = ndim - 2; i >= 0; i--) {
-            newStrides[i] = newStrides[i + 1] * newShape[i + 1];
-        }
-
-        // Original C-order strides for the original shape
+        // C-order strides for original shape
         int[] origStrides = new int[ndim];
         origStrides[ndim - 1] = 1;
         for (int i = ndim - 2; i >= 0; i--) {
             origStrides[i] = origStrides[i + 1] * shape[i + 1];
         }
 
-        // axes[j] = old axis at new axis position j
-        // To get old_coord[old_axis], we need new_coord at position invAxes[old_axis]
+        // C-order strides for the transposed (new) shape
+        int[] newStrides = new int[ndim];
+        newStrides[ndim - 1] = 1;
+        for (int i = ndim - 2; i >= 0; i--) {
+            newStrides[i] = newStrides[i + 1] * newShape[i + 1];
+        }
+
+        // Precompute the inverse axes: invAxes[old_axis] = position of that old axis in new array
         int[] invAxes = new int[ndim];
         for (int j = 0; j < ndim; j++) {
             invAxes[axes[j]] = j;
         }
 
+        Object result = createZeroArray(DType.fromClass(data.getClass().getComponentType()), size);
         int[] coord = new int[ndim];
+
         for (int i = 0; i < size; i++) {
-            int oldIdx = 0;
+            // Decompose flat output index i into coordinates for the new shape
             int tmp = i;
-            for (int j = 0; j < ndim; j++) {
-                coord[j] = tmp / newStrides[j];
-                tmp = tmp % newStrides[j];
+            for (int j = ndim - 1; j >= 0; j--) {
+                coord[j] = tmp % newShape[j];
+                tmp = tmp / newShape[j];
             }
-            // old_coord[old_axis] = new_coord[invAxes[old_axis]]
-            // oldIdx = Σ old_coord[k] * origStrides[k]
+
+            // Map new coordinates to old coordinates using axes
+            // axes[j] = old axis at new axis position j
+            // So oldCoord[axes[j]] = newCoord[j]
+            // oldIdx = Σ oldCoord[k] * origStrides[k]
+            int oldIdx = 0;
             for (int k = 0; k < ndim; k++) {
-                oldIdx += coord[invAxes[k]] * origStrides[k];
+                oldIdx += coord[axes[k]] * origStrides[k];
             }
+
             copy(data, oldIdx, result, i);
         }
 

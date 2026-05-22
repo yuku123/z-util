@@ -93,13 +93,13 @@ public class SVM {
         for (int i = 0; i < n; i++) ones[i] = 1.0;
         NdArray biasCol = NdArray.create(ones, DType.FLOAT64, new Shape(n, 1));
         
-        double[][] result = new double[n][d + 1];
+        double[] result = new double[n * (d + 1)];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < d; j++) {
                 Object val = X.get(i, j);
-                result[i][j] = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
+                result[i * (d + 1) + j] = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
             }
-            result[i][d] = 1.0;
+            result[i * (d + 1) + d] = 1.0;
         }
         return NdArray.create(result, DType.FLOAT64, new Shape(n, d + 1));
     }

@@ -31,13 +31,13 @@ public class LinearRegression {
     private NdArray addBias(NdArray X) {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
-        double[][] result = new double[n][d + 1];
+        double[] result = new double[n * (d + 1)];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < d; j++) {
                 Object val = X.get(i, j);
-                result[i][j] = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
+                result[i * (d + 1) + j] = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
             }
-            result[i][d] = 1.0;
+            result[i * (d + 1) + d] = 1.0;
         }
         return NdArray.create(result, DType.FLOAT64, new Shape(n, d + 1));
     }
@@ -106,20 +106,20 @@ public class LinearRegression {
         NdArray XtX = Linalg.dot(Xb.transpose(), Xb);
         
         // Add ridge regularization: λ on diagonal except for bias term (last one)
-        double[][] XtXData = new double[d1][d1];
+        double[] XtXFlat = new double[d1 * d1];
         for (int i = 0; i < d1; i++) {
             for (int j = 0; j < d1; j++) {
                 Object val = XtX.get(i, j);
-                XtXData[i][j] = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
+                XtXFlat[i * d1 + j] = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
             }
         }
-        
+
         // Apply regularization to all parameters except bias
         for (int i = 0; i < d; i++) {
-            XtXData[i][i] += lambda;
+            XtXFlat[i * d1 + i] += lambda;
         }
-        
-        NdArray XtXReg = NdArray.create(XtXData, DType.FLOAT64, new Shape(d1, d1));
+
+        NdArray XtXReg = NdArray.create(XtXFlat, DType.FLOAT64, new Shape(d1, d1));
         
         // Compute (XᵀX + λI)⁻¹
         NdArray XtXInv = Linalg.inv(XtXReg);

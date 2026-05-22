@@ -71,7 +71,7 @@ class Conv2dTest {
         Object outData = output.getData();
         boolean hasNonZero = false;
         for (int i = 0; i < output.size(); i++) {
-            double val = (double) com.zifang.util.numpy.Array.get(outData, i);
+            double val = ((Number) com.zifang.util.numpy.Array.get(outData, i)).doubleValue();
             if (val != 0) {
                 hasNonZero = true;
                 break;

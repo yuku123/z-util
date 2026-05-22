@@ -45,10 +45,15 @@ public class LogisticRegression {
     private NdArray addBias(NdArray X) {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
-        double[] ones = new double[n];
-        for (int i = 0; i < n; i++) ones[i] = 1.0;
-        NdArray biasCol = NdArray.create(ones, DType.FLOAT64, new Shape(n, 1));
-        return NdArray.array(new Object[]{X, biasCol}, DType.FLOAT64).reshape(n, d + 1);
+        double[] result = new double[n * (d + 1)];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < d; j++) {
+                Object val = X.get(i, j);
+                result[i * (d + 1) + j] = val instanceof Number ? ((Number) val).doubleValue() : 0.0;
+            }
+            result[i * (d + 1) + d] = 1.0;
+        }
+        return NdArray.create(result, DType.FLOAT64, new Shape(n, d + 1));
     }
     
     /**
@@ -155,8 +160,8 @@ public class LogisticRegression {
      */
     public NdArray predictProba(NdArray X) {
         int n = X.getShape().get(0);
-        double[][] proba = new double[n][2];
-        
+        double[] proba = new double[n * 2];
+
         for (int i = 0; i < n; i++) {
             double z = 0;
             for (int j = 0; j < weights.length - 1; j++) {
@@ -166,10 +171,10 @@ public class LogisticRegression {
             }
             z += bias;
             double p = sigmoid(z);
-            proba[i][0] = 1.0 - p;
-            proba[i][1] = p;
+            proba[i * 2 + 0] = 1.0 - p;
+            proba[i * 2 + 1] = p;
         }
-        
+
         return NdArray.create(proba, DType.FLOAT64, new Shape(n, 2));
     }
 }
