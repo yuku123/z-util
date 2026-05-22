@@ -284,6 +284,22 @@ public class ClassInfo {
         this.interfaceType = interfaceType;
     }
 
+    public List<ClassInfo> getInnerClasses() {
+        return innerClasses;
+    }
+
+    public void setInnerClasses(List<ClassInfo> innerClasses) {
+        this.innerClasses = innerClasses;
+    }
+
+    public List<AnnotationInfo> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(List<AnnotationInfo> annotations) {
+        this.annotations = annotations;
+    }
+
     private void checkInterface() {
         if (interfaces == null) {
             throw new RuntimeException("当前interfaceList为null");
