@@ -452,7 +452,7 @@ public class TransformerEncoder extends Module {
         return output;
     }
     
-    // Matrix multiplication (2D)
+    // Matrix multiplication (supports 2D and 3D batched)
     private NdArray matmul(NdArray a, NdArray b) {
         if (a.ndim() == 2 && b.ndim() == 2) {
             int m = a.getShape().get(0);
@@ -476,8 +476,65 @@ public class TransformerEncoder extends Module {
                 }
             }
             return result;
+        } else if (a.ndim() == 3 && b.ndim() == 2) {
+            // 3D input [seqLen, batch, dModel] @ 2D weight [dModel, outDim]
+            // Treat as batched matmul: flatten first two dims, multiply, reshape back
+            int seqLen = a.getShape().get(0);
+            int batch = a.getShape().get(1);
+            int k = a.getShape().get(2);
+            int n = b.getShape().get(1);
+            
+            int m = seqLen * batch;
+            
+            // Flatten a to [m, k]
+            NdArray aFlat = NdArray.zeros(new Shape(m, k), DType.FLOAT32);
+            Object aData = a.getData();
+            Object aFlatData = aFlat.getData();
+            for (int i = 0; i < seqLen; i++) {
+                for (int j = 0; j < batch; j++) {
+                    for (int l = 0; l < k; l++) {
+                        int srcIdx = (i * batch + j) * k + l;
+                        int dstIdx = (i * batch + j) * k + l;
+                        float val = (float) com.zifang.util.numpy.Array.get(aData, srcIdx);
+                        com.zifang.util.numpy.Array.set(aFlatData, dstIdx, val);
+                    }
+                }
+            }
+            
+            // Multiply: [m, k] @ [k, n] -> [m, n]
+            NdArray resultFlat = NdArray.zeros(new Shape(m, n), DType.FLOAT32);
+            Object bData = b.getData();
+            Object cFlatData = resultFlat.getData();
+            
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    float sum = 0.0f;
+                    for (int l = 0; l < k; l++) {
+                        float aVal = (float) com.zifang.util.numpy.Array.get(aFlatData, i * k + l);
+                        float bVal = (float) com.zifang.util.numpy.Array.get(bData, l * n + j);
+                        sum += aVal * bVal;
+                    }
+                    com.zifang.util.numpy.Array.set(cFlatData, i * n + j, sum);
+                }
+            }
+            
+            // Reshape back to [seqLen, batch, n]
+            NdArray result = NdArray.zeros(new Shape(seqLen, batch, n), DType.FLOAT32);
+            Object resultData = result.getData();
+            Object resFlatData = resultFlat.getData();
+            for (int i = 0; i < seqLen; i++) {
+                for (int j = 0; j < batch; j++) {
+                    for (int l = 0; l < n; l++) {
+                        int srcIdx = (i * batch + j) * n + l;
+                        int dstIdx = (i * batch + j) * n + l;
+                        float val = (float) com.zifang.util.numpy.Array.get(resFlatData, srcIdx);
+                        com.zifang.util.numpy.Array.set(resultData, dstIdx, val);
+                    }
+                }
+            }
+            return result;
         }
-        throw new IllegalArgumentException("matmul only supports 2D matrices");
+        throw new IllegalArgumentException("matmul only supports 2D or 3D@2D matrices, got a.ndim=" + a.ndim() + ", b.ndim=" + b.ndim());
     }
     
     // Addition

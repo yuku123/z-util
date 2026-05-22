@@ -22,7 +22,7 @@ class OptimizerTest {
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(data, i, (double) (rand.nextDouble() * 2 - 1));
+            com.zifang.util.numpy.Array.set(data, i, (float) (rand.nextDouble() * 2 - 1));
         }
 
         // Create SGD optimizer
@@ -64,7 +64,7 @@ class OptimizerTest {
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(data, i, (double) (rand.nextDouble() * 2 - 1));
+            com.zifang.util.numpy.Array.set(data, i, (float) (rand.nextDouble() * 2 - 1));
         }
 
         // Create Adam optimizer
@@ -108,7 +108,7 @@ class OptimizerTest {
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(data, i, (double) (rand.nextDouble() * 2 - 1));
+            com.zifang.util.numpy.Array.set(data, i, (float) (rand.nextDouble() * 2 - 1));
         }
 
         // Create SGD optimizer
@@ -140,7 +140,7 @@ class OptimizerTest {
         Random rand = new Random(42);
         Object data = param.getData();
         for (int i = 0; i < paramSize; i++) {
-            com.zifang.util.numpy.Array.set(data, i, (double) (rand.nextDouble() * 2 - 1));
+            com.zifang.util.numpy.Array.set(data, i, (float) (rand.nextDouble() * 2 - 1));
         }
 
         // Create SGD with momentum

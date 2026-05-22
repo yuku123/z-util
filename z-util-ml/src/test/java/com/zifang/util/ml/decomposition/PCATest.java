@@ -20,7 +20,7 @@ public class PCATest {
                 flat[i * cols + j] = data[i][j];
             }
         }
-        return NdArray.array(flat, DType.FLOAT32).reshape(rows, cols);
+        return NdArray.array(flat, DType.FLOAT64).reshape(rows, cols);
     }
 
     @Test

@@ -70,7 +70,7 @@ public class MSELoss implements LossFunction {
             result[i] = aData[i] - bData[i];
         }
 
-        return NdArray.array(result, DType.FLOAT64);
+        return NdArray.array(result, DType.FLOAT64).reshape(a.getShape().getDimensions());
     }
 
     private NdArray elementwiseMultiply(NdArray a, NdArray b) {
@@ -84,7 +84,7 @@ public class MSELoss implements LossFunction {
             result[i] = aData[i] * bData[i];
         }
 
-        return NdArray.array(result, DType.FLOAT64);
+        return NdArray.array(result, DType.FLOAT64).reshape(a.getShape().getDimensions());
     }
 
     private NdArray elementwiseScale(NdArray a, double scale) {
@@ -97,7 +97,7 @@ public class MSELoss implements LossFunction {
             result[i] = aData[i] * scale;
         }
 
-        return NdArray.array(result, DType.FLOAT64);
+        return NdArray.array(result, DType.FLOAT64).reshape(a.getShape().getDimensions());
     }
 
     private double sumAll(NdArray a) {

@@ -28,8 +28,10 @@ public class TensorDataset implements Dataset {
      */
     public TensorDataset(NdArray features, NdArray labels) {
         this.samples = new ArrayList<>();
-        this.featureShape = features.getShape().getDimensions().clone();
-        this.labelShape = labels.getShape().getDimensions().clone();
+        int[] fullFeatureShape = features.getShape().getDimensions();
+        int[] fullLabelShape = labels.getShape().getDimensions();
+        this.featureShape = computePerSampleShape(fullFeatureShape);
+        this.labelShape = computePerSampleShape(fullLabelShape);
 
         int nSamples = features.getShape().get(0);
         for (int i = 0; i < nSamples; i++) {
@@ -50,8 +52,10 @@ public class TensorDataset implements Dataset {
 
         if (!data.isEmpty()) {
             NdArray[] first = data.get(0);
-            this.featureShape = first[0].getShape().getDimensions().clone();
-            this.labelShape = first[1].getShape().getDimensions().clone();
+            int[] featDims = first[0].getShape().getDimensions();
+            int[] labelDims = first[1].getShape().getDimensions();
+            this.featureShape = computePerSampleShape(featDims);
+            this.labelShape = computePerSampleShape(labelDims);
         } else {
             this.featureShape = new int[]{};
             this.labelShape = new int[]{};
@@ -80,6 +84,20 @@ public class TensorDataset implements Dataset {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + samples.size());
         }
         return samples.get(index);
+    }
+
+    /**
+     * Compute per-sample shape by removing the batch dimension (first element).
+     * If shape is (nSamples, ...), returns (...).
+     * If shape is just (nSamples,) or (), returns empty int[].
+     */
+    private int[] computePerSampleShape(int[] shape) {
+        if (shape.length > 1) {
+            int[] perSample = new int[shape.length - 1];
+            System.arraycopy(shape, 1, perSample, 0, shape.length - 1);
+            return perSample;
+        }
+        return new int[]{};
     }
 
     /**

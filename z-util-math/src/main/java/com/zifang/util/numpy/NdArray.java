@@ -196,20 +196,20 @@ public class NdArray {
 
         Object newData = Array.createZeroArray(dtype, totalSize);
         int[] idx = new int[shape.ndim()];
-        sliceRecursive(data, newData, allIndices, idx, 0);
+        int[] dstIdx = new int[]{0};
+        sliceRecursive(data, newData, allIndices, idx, 0, dstIdx);
         return new NdArray(newData, dtype, new Shape(newShape));
     }
 
-    private void sliceRecursive(Object src, Object dst, int[][] indices, int[] idx, int dim) {
+    private void sliceRecursive(Object src, Object dst, int[][] indices, int[] idx, int dim, int[] dstIdx) {
         if (dim == indices.length) {
             int flatSrcIdx = calculateFlatIndex(idx);
-            int flatDstIdx = calculateFlatIndex(Arrays.copyOf(idx, idx.length));
-            Array.copy(src, flatSrcIdx, dst, flatDstIdx);
+            Array.copy(src, flatSrcIdx, dst, dstIdx[0]++);
             return;
         }
         for (int i = 0; i < indices[dim].length; i++) {
             idx[dim] = indices[dim][i];
-            sliceRecursive(src, dst, indices, idx, dim + 1);
+            sliceRecursive(src, dst, indices, idx, dim + 1, dstIdx);
         }
     }
 

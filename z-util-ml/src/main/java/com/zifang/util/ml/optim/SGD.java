@@ -61,8 +61,8 @@ public class SGD extends Optimizer {
                 NdArray buf = state.get(momentumKey);
                 
                 if (buf == null) {
-                    // Initialize momentum buffer with zeros
-                    buf = NdArray.zeros(param.getShape(), DType.FLOAT64);
+                    // Initialize momentum buffer with zeros (match param dtype)
+                    buf = NdArray.zeros(param.getShape(), param.getDtype());
                     state.put(momentumKey, buf);
                 }
                 

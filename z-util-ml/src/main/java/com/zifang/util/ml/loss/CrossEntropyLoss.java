@@ -59,7 +59,7 @@ public class CrossEntropyLoss implements LossFunction {
             result[i] *= scale;
         }
 
-        return NdArray.array(result, DType.FLOAT64);
+        return NdArray.array(result, DType.FLOAT64).reshape(predictions.getShape().getDimensions());
     }
 
     /**
