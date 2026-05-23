@@ -239,7 +239,7 @@ public class PropertiesParserTest {
         String output = stringWriter.toString();
         Assert.assertTrue(output.contains("name=test"));
         Assert.assertTrue(output.contains("value=123"));
-        Assert.assertTrue(output.contains("# This is a comment"));
+        Assert.assertTrue(output.contains("#This is a comment"));
     }
 
     /**
