@@ -20,6 +20,7 @@
         <module>z-util-parser-json</module>
         <module>z-util-parser-xml</module>
         <module>z-util-parser-yaml</module>
+        <module>z-util-parser-properties</module>
         <module>z-util-parser-ini</module>
         <module>z-util-parser-csv</module>
         <module>z-util-parser-toml</module>

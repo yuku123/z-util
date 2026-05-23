@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="z-util-crawler" />
+        <module name="z-util-distribute" />
+        <module name="z-util-proxy" />
+        <module name="z-util-parser-json" />
+        <module name="z-util-expr-lua" />
+        <module name="z-util-extra" />
+        <module name="z-util-jdbc" />
+        <module name="z-util-parser-csv" />
+        <module name="z-util-expr-groovy" />
+        <module name="z-util-visualization" />
+        <module name="z-util-parser-properties" />
+        <module name="z-util-monitor" />
+        <module name="z-util-workflow" />
+        <module name="z-util-sql" />
+        <module name="z-util-expr-js" />
+        <module name="z-util-parser-proto" />
+        <module name="z-util-dsl" />
+        <module name="z-util-core" />
+        <module name="z-util-ml" />
+        <module name="z-util-source" />
+        <module name="z-util-media" />
+        <module name="z-util-ch" />
+        <module name="z-util-office" />
+        <module name="z-util-zex" />
+        <module name="z-util-cli" />
+        <module name="z-util-parser-toml" />
+        <module name="z-util-expr-sql" />
+        <module name="z-util-parser-ini" />
+        <module name="z-util-parser-xml" />
+        <module name="z-util-devops" />
+        <module name="z-util-http" />
+        <module name="z-util-math" />
+        <module name="z-util-parser-yaml" />
+        <module name="z-util-expr-el" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bootstrap" target="1.8" />
+      <module name="bootstrap-generate" target="1.8" />
+      <module name="bootstrap-gennerate" target="1.8" />
+      <module name="ctc-client" target="1.8" />
+      <module name="ctc-core" target="1.8" />
+      <module name="ctc-sdk" target="1.8" />
+      <module name="ctc-sso" target="1.8" />
+      <module name="ctc-starter" target="1.8" />
+      <module name="util-ai" target="1.8" />
+      <module name="util-ch" target="1.8" />
+      <module name="util-core" target="1.8" />
+      <module name="util-crawler" target="1.8" />
+      <module name="util-devops" target="1.8" />
+      <module name="util-distribute" target="1.8" />
+      <module name="util-expression" target="1.8" />
+      <module name="util-extra" target="1.8" />
+      <module name="util-http" target="1.8" />
+      <module name="util-jdbc" target="1.8" />
+      <module name="util-json" target="1.8" />
+      <module name="util-llm" target="1.8" />
+      <module name="util-math" target="1.8" />
+      <module name="util-media" target="1.8" />
+      <module name="util-monitor" target="1.8" />
+      <module name="util-office" target="1.8" />
+      <module name="util-proxy" target="1.8" />
+      <module name="util-source" target="1.8" />
+      <module name="util-visualization" target="1.8" />
+      <module name="util-workflow" target="1.8" />
+      <module name="util-zex" target="1.8" />
+      <module name="z-agent" target="17" />
+      <module name="z-agent-bot" target="17" />
+      <module name="z-agent-center" target="17" />
+      <module name="z-agent-center-core" target="1.8" />
+      <module name="z-agent-center-starter" target="17" />
+      <module name="z-agent-common" target="17" />
+      <module name="z-agent-core" target="17" />
+      <module name="z-agent-engine" target="17" />
+      <module name="z-agent-mcp-center" target="1.8" />
+      <module name="z-agent-mcp-client" target="1.8" />
+      <module name="z-agent-mcp-core" target="1.8" />
+      <module name="z-agent-mcp-gw" target="1.8" />
+      <module name="z-agent-mcp-impl" target="17" />
+      <module name="z-agent-mcp-impl-asset" target="17" />
+      <module name="z-agent-mcp-impl-db" target="17" />
+      <module name="z-agent-mcp-starter" target="1.8" />
+      <module name="z-cache" target="1.8" />
+      <module name="z-cache-client" target="1.8" />
+      <module name="z-cache-common" target="1.8" />
+      <module name="z-cache-core" target="1.8" />
+      <module name="z-cache-server" target="1.8" />
+      <module name="z-config" target="1.8" />
+      <module name="z-config-admin" target="1.8" />
+      <module name="z-config-client" target="1.8" />
+      <module name="z-config-common" target="1.8" />
+      <module name="z-config-core" target="1.8" />
+      <module name="z-config-sdk" target="1.8" />
+      <module name="z-config-spring-boot-starter" target="1.8" />
+      <module name="z-ctc" target="1.8" />
+      <module name="z-ext" target="1.8" />
+      <module name="z-ext-admin" target="1.8" />
+      <module name="z-ext-core" target="1.8" />
+      <module name="z-ext-spring-boot-starter" target="1.8" />
+      <module name="z-gw" target="1.8" />
+      <module name="z-gw-core" target="1.8" />
+      <module name="z-gw-starter" target="1.8" />
+      <module name="z-meta" target="1.8" />
+      <module name="z-meta-admin" target="1.8" />
+      <module name="z-meta-common" target="1.8" />
+      <module name="z-meta-core" target="1.8" />
+      <module name="z-mist" target="1.8" />
+      <module name="z-mist-admin" target="1.8" />
+      <module name="z-mist-client" target="1.8" />
+      <module name="z-mist-common" target="1.8" />
+      <module name="z-mist-core" target="1.8" />
+      <module name="z-mist-sdk" target="1.8" />
+      <module name="z-mist-spring-boot-starter" target="1.8" />
+      <module name="z-mq" target="17" />
+      <module name="z-mq-broker" target="17" />
+      <module name="z-mq-client" target="17" />
+      <module name="z-mq-common" target="17" />
+      <module name="z-mq-nameserver" target="17" />
+      <module name="z-mq-remoting" target="17" />
+      <module name="z-mq-store" target="17" />
+      <module name="z-one-company" target="1.8" />
+      <module name="z-one-company-starter" target="1.8" />
+      <module name="z-oss" target="1.8" />
+      <module name="z-oss-api" target="1.8" />
+      <module name="z-oss-common" target="1.8" />
+      <module name="z-oss-core" target="1.8" />
+      <module name="z-schedule" target="1.8" />
+      <module name="z-schedule-admin" target="1.8" />
+      <module name="z-schedule-core" target="1.8" />
+      <module name="z-task" target="1.8" />
+      <module name="z-task-admin" target="1.8" />
+      <module name="z-task-common" target="1.8" />
+      <module name="z-task-core" target="1.8" />
+      <module name="z-task-entity" target="1.8" />
+      <module name="z-task-mapper" target="1.8" />
+      <module name="z-task-service" target="1.8" />
+      <module name="z-task-starter" target="1.8" />
+      <module name="z-util-ai" target="1.8" />
+      <module name="z-util-expression" target="1.8" />
+      <module name="z-util-json" target="1.8" />
+      <module name="z-util-xml" target="1.8" />
+      <module name="z-util-yaml" target="1.8" />
+      <module name="z-wf" target="1.8" />
+      <module name="z-wf-client" target="1.8" />
+      <module name="z-wf-core" target="1.8" />
+      <module name="z-wf-starter" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bootstrap" options="-parameters" />
+      <module name="bootstrap-gennerate" options="-parameters" />
+      <module name="ctc-client" options="-parameters" />
+      <module name="ctc-core" options="-parameters" />
+      <module name="ctc-sdk" options="-parameters" />
+      <module name="ctc-sso" options="-parameters" />
+      <module name="ctc-starter" options="-parameters" />
+      <module name="z-ctc" options="-parameters" />
+      <module name="z-mq-broker" options="-parameters" />
+      <module name="z-mq-client" options="-parameters" />
+      <module name="z-mq-common" options="-parameters" />
+      <module name="z-mq-nameserver" options="-parameters" />
+      <module name="z-mq-remoting" options="-parameters" />
+      <module name="z-mq-store" options="-parameters" />
+      <module name="z-oss" options="" />
+      <module name="z-oss-api" options="" />
+      <module name="z-oss-common" options="" />
+      <module name="z-oss-core" options="" />
+      <module name="z-wf" options="-parameters" />
+      <module name="z-wf-client" options="-parameters" />
+      <module name="z-wf-core" options="-parameters" />
+      <module name="z-wf-starter" options="-parameters" />
+    </option>
+  </component>
+</project>

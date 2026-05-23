@@ -1,9 +1,11 @@
 # Java class files
 .DS_Store
 *.class
-/build
+/build/
 /target/
-.idea/
+*/target/
+**/target/
+**/surefire-reports/
 */target/
 */metastore_db
 /logs

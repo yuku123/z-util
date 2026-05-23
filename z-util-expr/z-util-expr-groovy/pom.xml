@@ -10,6 +10,42 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>z-util-expr-groovy</artifactId>
-    <description>TODO: 待实现</description>
-    <dependencies/>
+    <description>Groovy script executor module</description>
+
+    <properties>
+        <groovy.version>3.0.19</groovy.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-eclipse-compiler</artifactId>
+                <version>3.7.0</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>

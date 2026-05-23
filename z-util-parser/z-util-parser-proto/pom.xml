@@ -10,6 +10,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>z-util-parser-proto</artifactId>
-    <description>TODO: 待实现</description>
-    <dependencies/>
+    <description>Proto3 .proto 文件解析器，支持 message、enum、service、RPC 等语法</description>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

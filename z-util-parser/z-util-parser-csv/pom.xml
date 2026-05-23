@@ -10,6 +10,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>z-util-parser-csv</artifactId>
-    <description>TODO: 待实现</description>
-    <dependencies/>
+    <description>CSV file parser supporting RFC 4180 format</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

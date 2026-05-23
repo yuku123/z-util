@@ -10,6 +10,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>z-util-expr-lua</artifactId>
-    <description>TODO: 待实现</description>
-    <dependencies/>
+    <version>${util.version}</version>
+    <description>Lua 脚本执行器，基于纯 Java Luaj 实现</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.luaj</groupId>
+            <artifactId>luaj-jse</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

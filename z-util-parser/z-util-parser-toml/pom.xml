@@ -10,6 +10,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>z-util-parser-toml</artifactId>
-    <description>TODO: 待实现</description>
-    <dependencies/>
+    <version>${util.version}</version>
+    <description>TOML 配置文件解析器（TOML v1.0.0 子集）</description>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>

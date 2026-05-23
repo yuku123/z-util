@@ -1,0 +1,204 @@
+package com.zifang.util.parser.csv;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * CSV Parser supporting RFC 4180 format.
+ * Features:
+ * - Custom delimiter (default comma)
+ * - Quoted fields
+ * - Escaped quotes ("")
+ * - First line as column names
+ * - Skip empty lines
+ * - Trim fields
+ */
+public class CsvParser {
+
+    private char delimiter;
+    private boolean firstLineAsHeader;
+    private boolean skipEmptyLines;
+    private boolean trimFields;
+
+    /**
+     * Builder for CsvParser configuration
+     */
+    public static class Builder {
+        private char delimiter = ',';
+        private boolean firstLineAsHeader = false;
+        private boolean skipEmptyLines = true;
+        private boolean trimFields = false;
+
+        public Builder delimiter(char delimiter) {
+            this.delimiter = delimiter;
+            return this;
+        }
+
+        public Builder firstLineAsHeader(boolean firstLineAsHeader) {
+            this.firstLineAsHeader = firstLineAsHeader;
+            return this;
+        }
+
+        public Builder skipEmptyLines(boolean skipEmptyLines) {
+            this.skipEmptyLines = skipEmptyLines;
+            return this;
+        }
+
+        public Builder trimFields(boolean trimFields) {
+            this.trimFields = trimFields;
+            return this;
+        }
+
+        public CsvParser build() {
+            return new CsvParser(this);
+        }
+    }
+
+    private CsvParser(Builder builder) {
+        this.delimiter = builder.delimiter;
+        this.firstLineAsHeader = builder.firstLineAsHeader;
+        this.skipEmptyLines = builder.skipEmptyLines;
+        this.trimFields = builder.trimFields;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    /**
+     * Parse CSV content from a Reader
+     */
+    public List<String[]> parse(Reader reader) {
+        List<String[]> result = new ArrayList<>();
+        BufferedReader br = new BufferedReader(reader);
+        try {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (skipEmptyLines && line.trim().isEmpty()) {
+                    continue;
+                }
+                String[] fields = parseLine(line);
+                result.add(fields);
+            }
+        } catch (IOException e) {
+            throw new CsvException("Error reading CSV", e);
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                // ignore
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Parse CSV content from a String
+     */
+    public List<String[]> parse(String content) {
+        return parse(new StringReader(content));
+    }
+
+    /**
+     * Parse CSV content and return as list of String arrays, with first line as headers
+     */
+    public ParseResult parseWithHeader(Reader reader) {
+        List<String[]> allLines = parse(reader);
+        if (allLines.isEmpty()) {
+            return new ParseResult(new String[0], new ArrayList<String[]>());
+        }
+
+        String[] headers = allLines.get(0);
+        List<String[]> data = allLines.subList(1, allLines.size());
+
+        List<String[]> result = new ArrayList<>();
+        for (String[] row : data) {
+            result.add(row);
+        }
+
+        return new ParseResult(headers, result);
+    }
+
+    /**
+     * Parse CSV content and return as list of String arrays, with first line as headers
+     */
+    public ParseResult parseWithHeader(String content) {
+        return parseWithHeader(new StringReader(content));
+    }
+
+    /**
+     * Parse a single CSV line using state machine
+     */
+    private String[] parseLine(String line) {
+        List<String> fields = new ArrayList<>();
+        StringBuilder field = new StringBuilder();
+        boolean inQuotes = false;
+        int len = line.length();
+
+        for (int i = 0; i < len; i++) {
+            char c = line.charAt(i);
+
+            if (inQuotes) {
+                if (c == '"') {
+                    if (i + 1 < len && line.charAt(i + 1) == '"') {
+                        // Escaped quote ""
+                        field.append('"');
+                        i++;
+                    } else {
+                        // End of quoted field
+                        inQuotes = false;
+                    }
+                } else {
+                    field.append(c);
+                }
+            } else {
+                if (c == '"') {
+                    inQuotes = true;
+                } else if (c == delimiter) {
+                    // End of field
+                    fields.add(trimFields ? field.toString().trim() : field.toString());
+                    field = new StringBuilder();
+                } else {
+                    field.append(c);
+                }
+            }
+        }
+
+        // Add last field
+        fields.add(trimFields ? field.toString().trim() : field.toString());
+
+        return fields.toArray(new String[0]);
+    }
+
+    /**
+     * Result of parsing CSV with headers
+     */
+    public static class ParseResult {
+        private final String[] headers;
+        private final List<String[]> data;
+
+        public ParseResult(String[] headers, List<String[]> data) {
+            this.headers = headers;
+            this.data = data;
+        }
+
+        public String[] getHeaders() {
+            return headers;
+        }
+
+        public List<String[]> getData() {
+            return data;
+        }
+
+        /**
+         * Get row as Map (header name -> value)
+         */
+        public String[] getRowAsMap(int index) {
+            if (index < 0 || index >= data.size()) {
+                throw new CsvException("Row index out of bounds: " + index);
+            }
+            return data.get(index);
+        }
+    }
+}
