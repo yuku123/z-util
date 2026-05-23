@@ -414,33 +414,42 @@ public class SqlParser {
      * 解析 WHERE 条件
      */
     private void parseWhereConditions(String whereClause, SqlStatement statement) {
-        // 先按 AND/OR 分割
+        // 按 AND/OR 分割，AND 优先级高于 OR
         SqlStatement.WhereCondition.LogicalOperator pendingOp = SqlStatement.WhereCondition.LogicalOperator.NONE;
 
         java.util.List<String> segments = splitByLogicalOperators(whereClause);
 
-        for (String segment : segments) {
-            String trimmed = segment.trim();
-            if (trimmed.isEmpty()) {
+        for (int i = 0; i < segments.size(); i++) {
+            String segment = segments.get(i).trim();
+            if (segment.isEmpty()) {
                 continue;
             }
 
-            // 检查开头是否是 AND/OR
-            String upper = trimmed.toUpperCase();
-            if (upper.startsWith("AND ")) {
-                pendingOp = SqlStatement.WhereCondition.LogicalOperator.AND;
-                trimmed = trimmed.substring(3).trim();
-            } else if (upper.startsWith("OR ")) {
-                pendingOp = SqlStatement.WhereCondition.LogicalOperator.OR;
-                trimmed = trimmed.substring(2).trim();
+            String upper = segment.toUpperCase();
+            if (i > 0) {
+                // 第一个 segment 没有前置操作符
+                // 否则，前一个 segment 的尾部操作符标记当前 segment
+                String prevSegment = segments.get(i - 1).trim().toUpperCase();
+                if (prevSegment.endsWith("AND ") || prevSegment.endsWith("AND\t")) {
+                    pendingOp = SqlStatement.WhereCondition.LogicalOperator.AND;
+                } else if (prevSegment.endsWith("OR ") || prevSegment.endsWith("OR\t")) {
+                    pendingOp = SqlStatement.WhereCondition.LogicalOperator.OR;
+                } else {
+                    pendingOp = SqlStatement.WhereCondition.LogicalOperator.NONE;
+                }
             }
 
-            // 解析单个条件
-            SqlStatement.WhereCondition condition = parseSingleCondition(trimmed);
+            // 去掉前置 AND/OR 再解析
+            if (upper.startsWith("AND ") || upper.startsWith("AND\t")) {
+                segment = segment.substring(3).trim();
+            } else if (upper.startsWith("OR ") || upper.startsWith("OR\t")) {
+                segment = segment.substring(2).trim();
+            }
+
+            SqlStatement.WhereCondition condition = parseSingleCondition(segment);
             if (condition != null) {
                 condition.setLogicalOperator(pendingOp);
                 statement.addWhereCondition(condition);
-                pendingOp = SqlStatement.WhereCondition.LogicalOperator.NONE;
             }
         }
     }
