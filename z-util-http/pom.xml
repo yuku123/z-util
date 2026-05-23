@@ -39,12 +39,10 @@
             <version>4.12.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-json</artifactId>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
         <dependency>

@@ -4,6 +4,8 @@ package com.zifang.util.json.tokenizer;
  * JSON Token（词法单元），表示JSON语法中的最小语义单位。
  * <p>
  * 每个Token由类型和值组成，例如数字"123"对应Token(TokenType.NUMBER, "123")。
+ * <p>
+ * 优化：提供静态单例Token，避免简单标点符号重复创建对象。
  *
  * @author zifang
  * @see TokenType
@@ -11,9 +13,22 @@ package com.zifang.util.json.tokenizer;
  */
 public class Token {
 
-    private TokenType tokenType;
+    private final TokenType tokenType;
+    private final String value;
 
-    private String value;
+    /**
+     * 静态单例Token，避免标点符号重复创建。
+     */
+    public static final Token BEGIN_OBJECT  = new Token(TokenType.BEGIN_OBJECT, "{");
+    public static final Token END_OBJECT    = new Token(TokenType.END_OBJECT, "}");
+    public static final Token BEGIN_ARRAY   = new Token(TokenType.BEGIN_ARRAY, "[");
+    public static final Token END_ARRAY     = new Token(TokenType.END_ARRAY, "]");
+    public static final Token SEP_COMMA     = new Token(TokenType.SEP_COMMA, ",");
+    public static final Token SEP_COLON     = new Token(TokenType.SEP_COLON, ":");
+    public static final Token NULL          = new Token(TokenType.NULL, "null");
+    public static final Token TRUE          = new Token(TokenType.BOOLEAN, "true");
+    public static final Token FALSE         = new Token(TokenType.BOOLEAN, "false");
+    public static final Token END_DOCUMENT  = new Token(TokenType.END_DOCUMENT, null);
 
     /**
      * 构造一个Token。
@@ -26,38 +41,18 @@ public class Token {
         this.value = value;
     }
 
-    /**
-     * 获取Token类型。
-     *
-     * @return Token类型枚举值
-     */
     public TokenType getTokenType() {
         return tokenType;
     }
 
-    /**
-     * 设置Token类型。
-     *
-     * @param tokenType 新的Token类型
-     */
     public void setTokenType(TokenType tokenType) {
         this.tokenType = tokenType;
     }
 
-    /**
-     * 获取Token的值。
-     *
-     * @return Token的文本值
-     */
     public String getValue() {
         return value;
     }
 
-    /**
-     * 设置Token的值。
-     *
-     * @param value 新的文本值
-     */
     public void setValue(String value) {
         this.value = value;
     }

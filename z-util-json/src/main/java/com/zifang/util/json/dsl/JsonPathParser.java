@@ -38,6 +38,18 @@ public class JsonPathParser {
         return results;
     }
 
+    /**
+     * 执行 JsonPath 查询，返回第一个匹配结果（兼容 fastjson 的 JSONPath.read）。
+     *
+     * @param json JSON字符串
+     * @param path JsonPath表达式
+     * @return 第一个匹配结果，如果无匹配返回 null
+     */
+    public Object read(String json, String path) {
+        List<Object> results = query(json, path);
+        return results.isEmpty() ? null : results.get(0);
+    }
+
     private void evaluate(Object current, String path, int pos, List<Object> results) {
         if (current == null) return;
         if (pos >= path.length()) {

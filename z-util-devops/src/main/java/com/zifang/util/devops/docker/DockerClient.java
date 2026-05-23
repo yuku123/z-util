@@ -1,9 +1,8 @@
 package com.zifang.util.devops.docker;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.zifang.util.json.JsonUtil;
+import com.zifang.util.json.model.JsonArray;
+import com.zifang.util.json.model.JsonObject;
 import com.zifang.util.devops.docker.dto.ContainerDTO;
 import com.zifang.util.devops.docker.dto.ImageDTO;
 import com.zifang.util.devops.docker.dto.NetworkDTO;
@@ -28,7 +27,6 @@ import java.util.List;
 public class DockerClient {
 
     private final String dockerHost;
-    private final Gson gson = new Gson();
 
     /**
      * 使用默认 docker socket
@@ -125,7 +123,7 @@ public class DockerClient {
             if (StringUtils.isBlank(line)) {
                 continue;
             }
-            ContainerDTO dto = gson.fromJson(line, ContainerDTO.class);
+            ContainerDTO dto = JsonUtil.fromJson(line, ContainerDTO.class);
             list.add(dto);
         }
         if (!all) {
@@ -243,11 +241,11 @@ public class DockerClient {
         if (StringUtils.isBlank(output)) {
             return null;
         }
-        JsonArray array = gson.fromJson(output, JsonArray.class);
+        JsonArray array = JsonUtil.fromJson(output, JsonArray.class);
         if (array.size() == 0) {
             return null;
         }
-        JsonObject obj = array.get(0).getAsJsonObject();
+        JsonObject obj = array.getAsJsonObject(0);
         ContainerDTO dto = new ContainerDTO();
         dto.setId(getJsonString(obj, "Id"));
         dto.setName(getJsonString(obj, "Name"));
@@ -336,7 +334,7 @@ public class DockerClient {
         if (StringUtils.isBlank(output)) {
             return stats;
         }
-        JsonObject obj = gson.fromJson(output, JsonObject.class);
+        JsonObject obj = JsonUtil.fromJson(output, JsonObject.class);
         String cpuStr = getJsonString(obj, "CPUPerc");
         String memStr = getJsonString(obj, "MemPerc");
         String netStr = getJsonString(obj, "NetIO");
@@ -387,7 +385,7 @@ public class DockerClient {
             if (StringUtils.isBlank(line)) {
                 continue;
             }
-            ImageDTO dto = gson.fromJson(line, ImageDTO.class);
+            ImageDTO dto = JsonUtil.fromJson(line, ImageDTO.class);
             list.add(dto);
         }
         return list;
@@ -442,11 +440,11 @@ public class DockerClient {
         if (StringUtils.isBlank(output)) {
             return null;
         }
-        JsonArray array = gson.fromJson(output, JsonArray.class);
+        JsonArray array = JsonUtil.fromJson(output, JsonArray.class);
         if (array.size() == 0) {
             return null;
         }
-        JsonObject obj = array.get(0).getAsJsonObject();
+        JsonObject obj = array.getAsJsonObject(0);
         ImageDTO dto = new ImageDTO();
         dto.setId(getJsonString(obj, "Id"));
         dto.setCreated(getJsonString(obj, "Created"));
@@ -454,8 +452,8 @@ public class DockerClient {
         if (obj.has("RepoTags")) {
             JsonArray tags = obj.getAsJsonArray("RepoTags");
             List<String> repoTags = new ArrayList<>();
-            for (JsonElement e : tags) {
-                repoTags.add(e.getAsString());
+            for (int i = 0; i < tags.size(); i++) {
+                repoTags.add(tags.getAsString(i));
             }
             dto.setRepoTags(repoTags);
         }
@@ -518,7 +516,7 @@ public class DockerClient {
             if (StringUtils.isBlank(line)) {
                 continue;
             }
-            JsonObject obj = gson.fromJson(line, JsonObject.class);
+            JsonObject obj = JsonUtil.fromJson(line, JsonObject.class);
             NetworkDTO dto = new NetworkDTO();
             dto.setId(getJsonString(obj, "ID"));
             dto.setName(getJsonString(obj, "Name"));
@@ -582,11 +580,11 @@ public class DockerClient {
         if (StringUtils.isBlank(output)) {
             return null;
         }
-        JsonArray array = gson.fromJson(output, JsonArray.class);
+        JsonArray array = JsonUtil.fromJson(output, JsonArray.class);
         if (array.size() == 0) {
             return null;
         }
-        JsonObject obj = array.get(0).getAsJsonObject();
+        JsonObject obj = array.getAsJsonObject(0);
         NetworkDTO dto = new NetworkDTO();
         dto.setId(getJsonString(obj, "Id"));
         dto.setName(getJsonString(obj, "Name"));
@@ -597,7 +595,7 @@ public class DockerClient {
             if (ipam.has("Config")) {
                 JsonArray configs = ipam.getAsJsonArray("Config");
                 if (configs.size() > 0) {
-                    JsonObject config = configs.get(0).getAsJsonObject();
+                    JsonObject config = configs.getAsJsonObject(0);
                     dto.setSubnet(getJsonString(config, "Subnet"));
                     dto.setGateway(getJsonString(config, "Gateway"));
                 }
@@ -621,7 +619,7 @@ public class DockerClient {
             if (StringUtils.isBlank(line)) {
                 continue;
             }
-            JsonObject obj = gson.fromJson(line, JsonObject.class);
+            JsonObject obj = JsonUtil.fromJson(line, JsonObject.class);
             VolumeDTO dto = new VolumeDTO();
             dto.setName(getJsonString(obj, "Name"));
             dto.setDriver(getJsonString(obj, "Driver"));
@@ -663,11 +661,11 @@ public class DockerClient {
         if (StringUtils.isBlank(output)) {
             return null;
         }
-        JsonArray array = gson.fromJson(output, JsonArray.class);
+        JsonArray array = JsonUtil.fromJson(output, JsonArray.class);
         if (array.size() == 0) {
             return null;
         }
-        JsonObject obj = array.get(0).getAsJsonObject();
+        JsonObject obj = array.getAsJsonObject(0);
         VolumeDTO dto = new VolumeDTO();
         dto.setName(getJsonString(obj, "Name"));
         dto.setDriver(getJsonString(obj, "Driver"));
@@ -694,7 +692,7 @@ public class DockerClient {
         if (StringUtils.isBlank(output)) {
             return null;
         }
-        JsonObject obj = gson.fromJson(output, JsonObject.class);
+        JsonObject obj = JsonUtil.fromJson(output, JsonObject.class);
         return getJsonString(obj, "Server", "Version");
     }
 
@@ -773,16 +771,16 @@ public class DockerClient {
     private String getJsonString(JsonObject obj, String... keys) {
         JsonObject current = obj;
         for (int i = 0; i < keys.length - 1; i++) {
-            if (!current.has(keys[i]) || current.get(keys[i]).isJsonNull()) {
+            if (!current.has(keys[i]) || current.get(keys[i]) == null) {
                 return null;
             }
             current = current.getAsJsonObject(keys[i]);
         }
         String lastKey = keys[keys.length - 1];
-        if (!current.has(lastKey) || current.get(lastKey).isJsonNull()) {
+        if (!current.has(lastKey) || current.get(lastKey) == null) {
             return null;
         }
-        return current.get(lastKey).getAsString();
+        return current.getAsString(lastKey);
     }
 
     private double parsePercent(String str) {
