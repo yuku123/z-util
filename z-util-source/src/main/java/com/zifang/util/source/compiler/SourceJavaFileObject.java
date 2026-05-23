@@ -15,40 +15,26 @@ import java.net.URISyntaxException;
  */
 public class SourceJavaFileObject extends SimpleJavaFileObject {
 
+    private final String sourceCode;
 
-    /**
-     * 源代码内容
-     */
-    private String sourceCode;
-
-    /**
-     * 使用指定URI和类型构造文件对象
-     *
-     * @param uri  文件对象的URI
-     * @param kind 文件类型（SOURCE或CLASS）
-     */
     protected SourceJavaFileObject(URI uri, Kind kind) {
         super(uri, kind);
+        this.sourceCode = null;
     }
 
-    /**
-     * 使用类名和源代码构造文件对象
-     *
-     * @param className   类名
-     * @param sourceCode  源代码内容
-     */
     public SourceJavaFileObject(String className, String sourceCode) {
         super(fromClassName(className + Kind.SOURCE.extension), Kind.SOURCE);
         this.sourceCode = sourceCode;
     }
 
     /**
-     * 从类名创建URI
-     *
-     * @param className 类名（包含文件扩展名）
-     * @return 对应的URI
-     * @throws IllegalArgumentException 如果URI语法错误
+     * 返回源代码内容
      */
+    @Override
+    public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+        return sourceCode;
+    }
+
     private static URI fromClassName(String className) {
         try {
             return new URI(className);

@@ -33,6 +33,15 @@ public class JavaSourceGenerator {
             sb.append("package ").append(classInfo.getPackageName()).append(";\n\n");
         }
 
+        // 生成 import 语句
+        List<String> imports = classInfo.getImports();
+        if (imports != null && !imports.isEmpty()) {
+            for (String imp : imports) {
+                sb.append("import ").append(imp).append(";\n");
+            }
+            sb.append("\n");
+        }
+
         sb.append(generateClass(classInfo, 0));
         return sb.toString();
     }
@@ -91,8 +100,8 @@ public class JavaSourceGenerator {
                     }
                 }
                 sb.append(modifiersToString(field.getModifiers(), false));
-                sb.append(field.getType()).append(" ");
-                sb.append(field.getValue());
+                if (field.getType() != null) sb.append(field.getType()).append(" ");
+                if (field.getName() != null) sb.append(field.getName());
                 if (!"null".equals(field.getInitializer())) {
                     sb.append(" = ").append(field.getInitializer());
                 }
@@ -115,8 +124,9 @@ public class JavaSourceGenerator {
                     }
                 }
                 sb.append(modifiersToString(method.getModifier(), false));
-                sb.append(method.getReturnType()).append(" ");
-                sb.append(method.getMethodName()).append("(");
+                if (method.getReturnType() != null) sb.append(method.getReturnType()).append(" ");
+                if (method.getMethodName() != null) sb.append(method.getMethodName());
+                sb.append("(");
 
                 // 参数
                 List<MethodParameterPair> params = method.getMethodParameterPairs();
@@ -184,7 +194,9 @@ public class JavaSourceGenerator {
         if (Modifier.isVolatile(mod)) sb.append("volatile ");
         if (Modifier.isTransient(mod)) sb.append("transient ");
         if (Modifier.isStrict(mod)) sb.append("strictfp ");
-        if (isInterface && !Modifier.isAbstract(mod)) sb.append("interface ");
+        if (isInterface && !Modifier.isAbstract(mod)) {
+            // interface 修饰符由调用方添加，此处不输出
+        }
         return sb.toString();
     }
 

@@ -34,7 +34,7 @@ public class CrawlerHttpClient {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(new RetryInterceptor(3))
+                .retryOnConnectionFailure(false)
                 .build();
     }
 
@@ -101,16 +101,16 @@ public class CrawlerHttpClient {
     }
 
     private HttpResponse execute(Request request) throws IOException {
-        Response response = client.newCall(request).execute();
-        int code = response.code();
-        String body = response.body() != null ? response.body().string() : "";
-        Map<String, String> responseHeaders = new HashMap<>();
-        Headers headers = response.headers();
-        for (String name : headers.names()) {
-            responseHeaders.put(name, headers.get(name));
+        try (Response response = client.newCall(request).execute()) {
+            int code = response.code();
+            String body = response.body() != null ? response.body().string() : "";
+            Map<String, String> responseHeaders = new HashMap<>();
+            Headers headers = response.headers();
+            for (String name : headers.names()) {
+                responseHeaders.put(name, headers.get(name));
+            }
+            return new HttpResponse(code, body, responseHeaders);
         }
-        response.close();
-        return new HttpResponse(code, body, responseHeaders);
     }
 
     /**

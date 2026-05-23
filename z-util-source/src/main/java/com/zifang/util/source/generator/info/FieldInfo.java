@@ -2,6 +2,7 @@ package com.zifang.util.source.generator.info;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 字段信息封装类
@@ -15,144 +16,77 @@ import java.util.List;
  */
 public class FieldInfo {
 
-    /**
-     * 字段类型全限定名
-     */
     private String type;
-
-    /**
-     * 字段名称
-     */
-    private String value;
-
-    /**
-     * 修饰符数组，使用 java.lang.reflect.Modifier 的常量值
-     */
+    private String name;
     private int[] modifiers = new int[]{};
-
-    /**
-     * 初始值表达式字符串，默认为 "null"
-     */
     private String initializer = "null";
-
-    /**
-     * 注解列表
-     */
     private List<AnnotationInfo> annotations = new ArrayList<>();
 
-    /**
-     * 默认构造函数，创建一个空的FieldInfo实例
-     */
     public FieldInfo() {
     }
 
-    /**
-     * 构造函数，创建指定类型和名称的FieldInfo实例
-     *
-     * @param type  字段类型全限定名，如 "java.lang.String"
-     * @param value 字段名称
-     */
-    public FieldInfo(String type, String value) {
+    public FieldInfo(String type, String name) {
         this.type = type;
-        this.value = value;
-        this.modifiers = new int[]{};
-        this.initializer = "null";
+        this.name = name;
     }
 
-    /**
-     * 构造函数，创建完整配置的FieldInfo实例
-     *
-     * @param type        字段类型全限定名
-     * @param value       字段名称
-     * @param modifiers   修饰符数组，使用 java.lang.reflect.Modifier 的常量值
-     * @param initializer 初始值表达式字符串
-     */
-    public FieldInfo(String type, String value, int[] modifiers, String initializer) {
+    public FieldInfo(String type, String name, int[] modifiers, String initializer) {
         this.type = type;
-        this.value = value;
+        this.name = name;
         this.modifiers = modifiers;
         this.initializer = initializer;
     }
 
-    /**
-     * 获取字段类型
-     *
-     * @return 字段类型全限定名
-     */
     public String getType() {
         return type;
     }
 
-    /**
-     * 设置字段类型
-     *
-     * @param type 字段类型全限定名
-     */
     public void setType(String type) {
         this.type = type;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /**
-     * 获取字段名称
-     *
-     * @return 字段名称
+     * @deprecated Use {@link #getName()} instead
      */
+    @Deprecated
     public String getValue() {
-        return value;
+        return name;
     }
 
     /**
-     * 设置字段名称
-     *
-     * @param value 字段名称
+     * @deprecated Use {@link #setName(String)} instead
      */
+    @Deprecated
     public void setValue(String value) {
-        this.value = value;
+        this.name = value;
     }
 
-    /**
-     * 获取修饰符数组
-     *
-     * @return 修饰符数组
-     */
     public int[] getModifiers() {
         return modifiers;
     }
 
-    /**
-     * 设置修饰符数组
-     *
-     * @param modifiers 修饰符数组
-     */
     public void setModifiers(int[] modifiers) {
         this.modifiers = modifiers;
     }
 
-    /**
-     * 获取初始值表达式
-     *
-     * @return 初始值表达式字符串
-     */
+    public void setModifier(int... modifier) {
+        this.modifiers = modifier;
+    }
+
     public String getInitializer() {
         return initializer;
     }
 
-    /**
-     * 设置初始值表达式
-     *
-     * @param initializer 初始值表达式字符串
-     */
     public void setInitializer(String initializer) {
         this.initializer = initializer;
-    }
-
-    /**
-     * 设置修饰符
-     *
-     * @param modifier 可变参数形式的修饰符
-     */
-    public void setModifier(int... modifier) {
-        modifiers = modifier;
     }
 
     public List<AnnotationInfo> getAnnotations() {
@@ -165,20 +99,27 @@ public class FieldInfo {
 
     @Override
     public boolean equals(Object obj) {
-        return value.equals(((FieldInfo) obj).value);
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        FieldInfo other = (FieldInfo) obj;
+        return Objects.equals(name, other.name);
     }
 
     @Override
     public int hashCode() {
         int result = type != null ? type.hashCode() : 0;
-        result = 31 * result + (value != null ? value.hashCode() : 0);
-        result = 31 * result + (modifiers != null ? java.util.Arrays.hashCode(modifiers) : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + java.util.Arrays.hashCode(modifiers);
         result = 31 * result + (initializer != null ? initializer.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return type + " " + value + " = " + initializer + ";";
+        return type + " " + name + " = " + initializer + ";";
     }
 }

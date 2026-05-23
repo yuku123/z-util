@@ -22,6 +22,14 @@ public class MethodParameterPair {
     private String paramName;
 
 
+    public MethodParameterPair() {
+    }
+
+    public MethodParameterPair(String paramType, String paramName) {
+        this.paramType = paramType;
+        this.paramName = paramName;
+    }
+
     public String getParamType() {
         return paramType;
     }

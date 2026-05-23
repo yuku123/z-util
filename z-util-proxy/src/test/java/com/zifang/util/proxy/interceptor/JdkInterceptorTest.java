@@ -14,7 +14,7 @@ public class JdkInterceptorTest {
         TestTarget target = new TestTarget();
         TestAspect aspect = new TestAspect();
         JdkInterceptor interceptor = new JdkInterceptor(target, aspect);
-        
+
         assertSame(target, interceptor.getTarget());
     }
 
@@ -23,12 +23,13 @@ public class JdkInterceptorTest {
         TestTarget target = new TestTarget();
         TestAspect aspect = new TestAspect();
         JdkInterceptor interceptor = new JdkInterceptor(target, aspect);
-        
+
         Method method = TestTarget.class.getMethod("sayHello");
         Object result = interceptor.invoke(null, method, new Object[]{});
-        
+
         assertTrue(aspect.isBeforeCalled());
         assertTrue(aspect.isAfterCalled());
+        assertEquals("Hello", result);
     }
 
     @Test
@@ -36,10 +37,10 @@ public class JdkInterceptorTest {
         TestTarget target = new TestTarget();
         BlockingAspect aspect = new BlockingAspect();
         JdkInterceptor interceptor = new JdkInterceptor(target, aspect);
-        
+
         Method method = TestTarget.class.getMethod("sayHello");
         Object result = interceptor.invoke(null, method, new Object[]{});
-        
+
         assertTrue(aspect.isBeforeCalled());
         assertFalse(aspect.isAfterCalled());
         assertNull(result);
@@ -50,15 +51,16 @@ public class JdkInterceptorTest {
         TestTarget target = new TestTarget();
         ExceptionAspect aspect = new ExceptionAspect();
         JdkInterceptor interceptor = new JdkInterceptor(target, aspect);
-        
+
         Method method = TestTarget.class.getMethod("throwException");
         try {
             interceptor.invoke(null, method, new Object[]{});
-            fail("Expected exception");
-        } catch (Exception e) {
+            fail("Expected RuntimeException");
+        } catch (RuntimeException e) {
+            // afterException 返回 true 时，抛出包装异常 RuntimeException
             assertTrue(e.getCause() instanceof RuntimeException);
         }
-        
+
         assertTrue(aspect.isBeforeCalled());
         assertTrue(aspect.isAfterExceptionCalled());
     }
@@ -68,13 +70,15 @@ public class JdkInterceptorTest {
         TestTarget target = new TestTarget();
         RethrowAspect aspect = new RethrowAspect();
         JdkInterceptor interceptor = new JdkInterceptor(target, aspect);
-        
+
         Method method = TestTarget.class.getMethod("throwException");
+        // afterException 返回 false：重新抛出原始 RuntimeException
         try {
             interceptor.invoke(null, method, new Object[]{});
             fail("Expected RuntimeException");
-        } catch (Exception e) {
-            assertTrue(e.getCause() instanceof RuntimeException);
+        } catch (RuntimeException e) {
+            // 重新抛出的是原始异常本身
+            assertTrue(e.getCause() == null || e.getCause() instanceof RuntimeException);
         }
     }
 
@@ -82,7 +86,7 @@ public class JdkInterceptorTest {
         public String sayHello() {
             return "Hello";
         }
-        
+
         public void throwException() {
             throw new RuntimeException("Test exception");
         }

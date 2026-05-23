@@ -155,8 +155,8 @@ public class CrawlerPipelineTest {
 
     @Test
     public void testExecute_WithConnectionFailure() {
-        // Use an invalid URL to simulate connection failure
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get("http://localhost:99999");
+        // 使用一个不会被连接到的地址（端口 1 是保留端口，通常不可用）
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get("http://127.0.0.1:1");
         PipelineContext ctx = pipeline.execute(request);
 
         assertNotNull(ctx);

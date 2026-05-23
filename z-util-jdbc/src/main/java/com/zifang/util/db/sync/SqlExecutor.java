@@ -16,11 +16,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * SQL执行器，提供数据库表的创建、修改、查询等操作
@@ -31,8 +29,6 @@ public class SqlExecutor {
 
     private static final Logger log = LoggerFactory.getLogger(SqlExecutor.class);
 
-    private static Map<String, DataSource> dataSourceCache = new LinkedHashMap<>();
-
     private final DataSource dataSource;
 
     /**
@@ -41,7 +37,7 @@ public class SqlExecutor {
      * @param dataSource 数据源，不能为null
      */
     public SqlExecutor(DataSource dataSource) {
-        this.dataSource = dataSource;
+        this.dataSource = Objects.requireNonNull(dataSource, "dataSource不能为null");
     }
 
     /**
@@ -52,27 +48,19 @@ public class SqlExecutor {
      * @throws BusinessException 获取表信息失败时抛出
      */
     public List<DataSourceTableDTO> fetchTableInfo(String schemaMark) {
-        List<DataSourceTableDTO> dataSourceTableDTOS = new ArrayList<>();
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
+        List<DataSourceTableDTO> tableList = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()) {
             ResultSet resultSet = conn.getMetaData().getTables(schemaMark, "%", "%", new String[]{"TABLE"});
             while (resultSet.next()) {
-                DataSourceTableDTO dataSourceTableDTO = new DataSourceTableDTO();
-                dataSourceTableDTO.setTableName(resultSet.getString("TABLE_NAME"));
-                dataSourceTableDTO.setDescriptions(resultSet.getString("REMARKS"));
-                dataSourceTableDTOS.add(dataSourceTableDTO);
+                DataSourceTableDTO dto = new DataSourceTableDTO();
+                dto.setTableName(resultSet.getString("TABLE_NAME"));
+                dto.setDescriptions(resultSet.getString("REMARKS"));
+                tableList.add(dto);
             }
-            return dataSourceTableDTOS;
+            return tableList;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("获取表信息出错, schema={}", schemaMark, e);
             throw new BusinessException(BaseStatusCode.FAIL, "获取表信息出错");
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -82,86 +70,80 @@ public class SqlExecutor {
      * @param schemaMark 数据库schema名称
      * @param tableName  表名称
      * @return 字段信息列表，包含字段名、类型、备注等
+     * @throws BusinessException 获取字段信息失败时抛出
      */
     public List<DataSourceTableColumnDTO> fetchTableColumnInfo(String schemaMark, String tableName) {
-        List<DataSourceTableColumnDTO> dataSourceTableColumnDTOS = new ArrayList<>();
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
+        List<DataSourceTableColumnDTO> columnList = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()) {
             ResultSet resultSet = conn.getMetaData().getColumns(schemaMark, "%", tableName, null);
             while (resultSet.next()) {
-                DataSourceTableColumnDTO dataSourceTableColumnDTO = new DataSourceTableColumnDTO();
-                dataSourceTableColumnDTO.setColumnName(resultSet.getString("COLUMN_NAME"));
-                dataSourceTableColumnDTO.setColumnType(resultSet.getString("TYPE_NAME").toLowerCase());
-                dataSourceTableColumnDTO.setColumnComment(resultSet.getString("REMARKS"));
-                dataSourceTableColumnDTOS.add(dataSourceTableColumnDTO);
+                DataSourceTableColumnDTO dto = new DataSourceTableColumnDTO();
+                dto.setColumnName(resultSet.getString("COLUMN_NAME"));
+                dto.setColumnType(resultSet.getString("TYPE_NAME").toLowerCase());
+                dto.setColumnComment(resultSet.getString("REMARKS"));
+                columnList.add(dto);
             }
+            return columnList;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            log.error("获取表字段信息出错, schema={}, table={}", schemaMark, tableName, e);
+            throw new BusinessException(BaseStatusCode.FAIL, "获取表字段信息出错");
         }
-        return dataSourceTableColumnDTOS;
     }
 
     /**
      * 创建表，默认包含一个id主键字段
      *
-     * @param tableName   表名，不能为空
+     * @param tableName    表名，不能为空
      * @param descriptions 表描述/备注
-     * @throws RuntimeException 创建失败时抛出
+     * @throws BusinessException 创建失败时抛出
      */
-    public void createTable(String tableName, String descriptions) throws RuntimeException {
+    public void createTable(String tableName, String descriptions) {
         String sql = String.format(
-                "create table IF NOT EXISTS %s(id bigint(20) comment '主键') COMMENT='%s' ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+                "CREATE TABLE IF NOT EXISTS %s (id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键') COMMENT='%s' ENGINE=InnoDB DEFAULT CHARSET=utf8",
                 tableName,
                 descriptions
         );
-        executeDML(dataSource, sql);
+        executeDML(sql);
     }
 
     /**
      * 为表添加新字段
      *
-     * @param tableName    表名
-     * @param columnName   新字段名
-     * @param columnType   字段类型，如varchar(255)、int等
+     * @param tableName     表名
+     * @param columnName    新字段名
+     * @param columnType    字段类型，如varchar(255)、int等
      * @param columnComment 字段备注/注释
-     * @throws RuntimeException 添加失败时抛出
+     * @throws BusinessException 添加失败时抛出
      */
-    public void createTableColumn(String tableName, String columnName, String columnType, String columnComment) throws RuntimeException {
-        String sql = String.format("ALTER TABLE %s ADD %s %s comment '%s'",
+    public void createTableColumn(String tableName, String columnName, String columnType, String columnComment) {
+        String sql = String.format("ALTER TABLE %s ADD COLUMN %s %s COMMENT '%s'",
                 tableName,
                 columnName,
                 columnType,
                 columnComment
         );
-        executeDML(dataSource, sql);
+        executeDML(sql);
     }
 
     /**
      * 修改表字段（可修改字段名、类型、备注）
      *
-     * @param tableName           表名
-     * @param columnName          原字段名
-     * @param targetColumnName    目标字段名
-     * @param targetColumnType    目标字段类型
-     * @param targetColumnComment 目标字段备注
-     * @throws RuntimeException 修改失败时抛出
+     * @param tableName            表名
+     * @param columnName           原字段名
+     * @param targetColumnName     目标字段名
+     * @param targetColumnType     目标字段类型
+     * @param targetColumnComment  目标字段备注
+     * @throws BusinessException 修改失败时抛出
      */
-    public void updateTableColumn(String tableName, String columnName, String targetColumnName, String targetColumnType, String targetColumnComment) throws RuntimeException {
-        String sql = String.format("ALTER TABLE %s change %s %s %s comment '%s'",
+    public void updateTableColumn(String tableName, String columnName, String targetColumnName, String targetColumnType, String targetColumnComment) {
+        String sql = String.format("ALTER TABLE %s CHANGE %s %s %s COMMENT '%s'",
                 tableName,
                 columnName,
                 targetColumnName,
                 targetColumnType,
                 targetColumnComment
         );
-        executeDML(dataSource, sql);
+        executeDML(sql);
     }
 
     /**
@@ -169,186 +151,136 @@ public class SqlExecutor {
      *
      * @param tableName  表名
      * @param columnName 要删除的字段名
-     * @throws RuntimeException 删除失败时抛出
+     * @throws BusinessException 删除失败时抛出
      */
-    public void removeTableColumn(String tableName, String columnName) throws RuntimeException {
-        String sql = String.format("ALTER TABLE %s drop column %s;", tableName, columnName);
-        executeDML(dataSource, sql);
+    public void removeTableColumn(String tableName, String columnName) {
+        String sql = String.format("ALTER TABLE %s DROP COLUMN %s", tableName, columnName);
+        executeDML(sql);
     }
 
     /**
      * 修改表名和表备注
      *
-     * @param tableName          原表名
-     * @param targetTableName    目标表名
+     * @param tableName           原表名
+     * @param targetTableName     目标表名
      * @param targetTableComments 目标表备注
-     * @throws RuntimeException 修改失败时抛出
+     * @throws BusinessException 修改失败时抛出
      */
-    public void updateTable(String tableName, String targetTableName, String targetTableComments) throws RuntimeException {
-        String sql1 = String.format("ALTER TABLE %s rename to %s",
-                tableName,
-                targetTableName
-        );
-
-        String sql2 = String.format("alter TABLE %s comment '%s'",
-                tableName,
-                targetTableComments
-        );
-        executeDML(dataSource, sql1);
-        executeDML(dataSource, sql2);
+    public void updateTable(String tableName, String targetTableName, String targetTableComments) {
+        executeDML(String.format("ALTER TABLE %s RENAME TO %s", tableName, targetTableName));
+        executeDML(String.format("ALTER TABLE %s COMMENT '%s'", targetTableName, targetTableComments));
     }
 
     /**
      * 删除表
      *
-     * @param tableName   表名
-     * @param descriptions 表描述（目前未使用）
-     * @throws RuntimeException 删除失败时抛出
+     * @param tableName 表名
+     * @throws BusinessException 删除失败时抛出
      */
-    public void removeTable(String tableName, String descriptions) throws RuntimeException {
-        String sql = String.format(" DROP TABLE %s", tableName);
-        executeDML(dataSource, sql);
+    public void removeTable(String tableName) {
+        String sql = String.format("DROP TABLE IF EXISTS %s", tableName);
+        executeDML(sql);
     }
 
     /**
      * 获取指定schema下所有表的详细信息，包含每个表的字段列表
      *
-     * @param dataSource 数据源
      * @param schemaMark 数据库schema名称
      * @return 表信息列表，每条表信息包含字段详情
+     * @throws BusinessException 获取表信息失败时抛出
      */
-    public List<DataSourceTableDTO> deepFetchTableInfo(DataSource dataSource, String schemaMark) {
-        List<DataSourceTableDTO> dataSourceTableDTOS = new ArrayList<>();
-        List<DataSourceTableColumnDTO> dataSourceTableColumnDTOS = new ArrayList<>();
-        Connection conn = null;
-        try {
-            conn = dataSource.getConnection();
+    public List<DataSourceTableDTO> deepFetchTableInfo(String schemaMark) {
+        List<DataSourceTableDTO> tableList = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection()) {
             ResultSet tableResultSet = conn.getMetaData().getTables(schemaMark, "%", "%", new String[]{"TABLE"});
             while (tableResultSet.next()) {
-                DataSourceTableDTO dataSourceTableDTO = new DataSourceTableDTO();
-                dataSourceTableDTO.setTableName(tableResultSet.getString("TABLE_NAME"));
-                dataSourceTableDTO.setDescriptions(tableResultSet.getString("REMARKS"));
-                dataSourceTableDTOS.add(dataSourceTableDTO);
+                DataSourceTableDTO dto = new DataSourceTableDTO();
+                dto.setTableName(tableResultSet.getString("TABLE_NAME"));
+                dto.setDescriptions(tableResultSet.getString("REMARKS"));
+                tableList.add(dto);
             }
 
             ResultSet columnResultSet = conn.getMetaData().getColumns(schemaMark, "%", "%", null);
+            List<DataSourceTableColumnDTO> columnList = new ArrayList<>();
             while (columnResultSet.next()) {
-                DataSourceTableColumnDTO dataSourceTableColumnDTO = new DataSourceTableColumnDTO();
-//                dataSourceTableColumnDTO.setDatasourceCode();
-                dataSourceTableColumnDTO.setTableName(columnResultSet.getString("TABLE_NAME"));
-                dataSourceTableColumnDTO.setColumnName(columnResultSet.getString("COLUMN_NAME"));
-                dataSourceTableColumnDTO.setColumnType(columnResultSet.getString("TYPE_NAME"));
-                dataSourceTableColumnDTO.setColumnComment(columnResultSet.getString("REMARKS"));
-                dataSourceTableColumnDTOS.add(dataSourceTableColumnDTO);
+                DataSourceTableColumnDTO dto = new DataSourceTableColumnDTO();
+                dto.setTableName(columnResultSet.getString("TABLE_NAME"));
+                dto.setColumnName(columnResultSet.getString("COLUMN_NAME"));
+                dto.setColumnType(columnResultSet.getString("TYPE_NAME"));
+                dto.setColumnComment(columnResultSet.getString("REMARKS"));
+                columnList.add(dto);
             }
+
+            Map<String, List<DataSourceTableColumnDTO>> columnMap = new java.util.LinkedHashMap<>();
+            for (DataSourceTableColumnDTO col : columnList) {
+                columnMap.computeIfAbsent(col.getTableName(), k -> new ArrayList<>()).add(col);
+            }
+            for (DataSourceTableDTO table : tableList) {
+                table.setColumns(columnMap.get(table.getTableName()));
+            }
+            return tableList;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            log.error("获取表详细信息出错, schema={}", schemaMark, e);
+            throw new BusinessException(BaseStatusCode.FAIL, "获取表详细信息出错");
         }
-
-        Map<String, List<DataSourceTableColumnDTO>> columnMap = dataSourceTableColumnDTOS.stream().collect(Collectors.groupingBy(DataSourceTableColumnDTO::getTableName));
-        dataSourceTableDTOS.forEach(e -> e.setColumns(columnMap.get(e.getTableName())));
-
-        return dataSourceTableDTOS;
     }
 
     /**
      * 执行DML语句（INSERT、UPDATE、DELETE）
      *
-     * @param dataSource 数据源
-     * @param sql        要执行的DML语句
+     * @param sql 要执行的DML语句
      * @throws BusinessException 执行失败时抛出
      */
-    public void executeDml(DataSource dataSource, String sql) {
-        Connection connection = null;
-        try {
-            connection = dataSource.getConnection();
-            Statement smt = connection.createStatement();
-            log.info("execute dml sql:{}", sql);
+    public void executeDML(String sql) {
+        try (Connection connection = dataSource.getConnection();
+             Statement smt = connection.createStatement()) {
+            log.info("execute dml sql: {}", sql);
             smt.executeUpdate(sql);
         } catch (SQLException e) {
-            log.error(String.format("执行操作数据库失败：执行的sql:%S,错误信息 %S", sql, e.getMessage()));
-            throw new BusinessException(BaseStatusCode.FAIL, "执行操作数据库失败，请通知值班人员");
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            log.error("执行DML失败: sql={}, error={}", sql, e.getMessage(), e);
+            throw new BusinessException(BaseStatusCode.FAIL, "执行数据库操作失败");
         }
     }
 
     /**
      * 执行SELECT查询语句，返回多条记录
      *
-     * @param dataSource 数据源
-     * @param sql        SELECT查询语句
+     * @param sql SELECT查询语句
      * @return 查询结果列表，每条记录为Map结构
      * @throws BusinessException 查询失败时抛出
      */
-    public List<Map<String, Object>> selectList(DataSource dataSource, String sql) {
-        Connection connection = null;
-        try {
-            connection = dataSource.getConnection();
+    @SuppressWarnings("unchecked")
+    public List<Map<String, Object>> selectList(String sql) {
+        try (Connection connection = dataSource.getConnection()) {
             QueryRunner qr = new QueryRunner();
-            List<Map<String, Object>> l = qr.query(connection, sql, new MapListHandler());
-            return l == null ? new ArrayList<>() : l;
+            List<Map<String, Object>> result = (List<Map<String, Object>>) (List<?>) qr.query(connection, sql, new MapListHandler());
+            return result == null ? new ArrayList<>() : result;
         } catch (SQLException e) {
-            log.error(String.format("数据库查询异常：执行的sql:%S,错误信息 %S", sql, e.getMessage()));
-            throw new BusinessException(BaseStatusCode.FAIL, "数据库查询异常，请通知值班人员");
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            log.error("数据库查询异常: sql={}, error={}", sql, e.getMessage(), e);
+            throw new BusinessException(BaseStatusCode.FAIL, "数据库查询异常");
         }
     }
 
     /**
      * 执行COUNT查询，返回记录数
      *
-     * @param dataSource 数据源
-     * @param sqlCnt     COUNT查询语句
+     * @param sqlCnt COUNT查询语句
      * @return 记录数，查询失败返回null
      */
-    public Integer count(DataSource dataSource, String sqlCnt) {
-        Connection connection = null;
-        try {
-            connection = dataSource.getConnection();
+    public Long count(String sqlCnt) {
+        try (Connection connection = dataSource.getConnection()) {
             QueryRunner qr = new QueryRunner();
-            return Integer.valueOf(String.valueOf(qr.query(connection, sqlCnt, new ScalarHandler())));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            Object result = qr.query(connection, sqlCnt, new ScalarHandler());
+            if (result == null) {
+                return 0L;
             }
-        }
-        return null;
-    }
-
-    private void executeDML(DataSource dataSource, String sql) throws RuntimeException {
-        Connection connection = null;
-        try {
-            connection = dataSource.getConnection();
-            Statement smt = connection.createStatement();
-            smt.executeUpdate(sql);
-        } catch (SQLException e) {
-            throw new RuntimeException("操作数据表失败，请联系管理员！");
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (result instanceof Number) {
+                return ((Number) result).longValue();
             }
+            return Long.parseLong(result.toString());
+        } catch (SQLException e) {
+            log.error("COUNT查询异常: sql={}, error={}", sqlCnt, e.getMessage(), e);
+            return null;
         }
     }
 
@@ -363,7 +295,7 @@ public class SqlExecutor {
 
     @Override
     public String toString() {
-        return "SqlExecutor{dataSourceCache=" + dataSourceCache + ", dataSource=" + dataSource + "}";
+        return "SqlExecutor{dataSource=" + dataSource + "}";
     }
 
     @Override
@@ -371,12 +303,11 @@ public class SqlExecutor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SqlExecutor that = (SqlExecutor) o;
-        return Objects.equals(dataSourceCache, that.dataSourceCache) &&
-                Objects.equals(dataSource, that.dataSource);
+        return Objects.equals(dataSource, that.dataSource);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(dataSourceCache, dataSource);
+        return Objects.hash(dataSource);
     }
 }

@@ -45,6 +45,7 @@
         <module>z-util-proxy</module>
         <module>z-util-ch</module>
         <module>z-util-json</module>
+        <module>z-util-yaml</module>
         <module>z-util-xml</module>
         <module>z-util-dsl</module>
         <module>z-util-cli</module>

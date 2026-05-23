@@ -1,14 +1,35 @@
 package com.zifang.util.source.generator.diff;
 
+import com.zifang.util.source.generator.info.MethodInfo;
+
+import java.util.Objects;
+
 /**
- * 方法差异比较器
- * <p>
- * 负责比较两个MethodInfo对象之间的差异，
- * 包括方法名、返回类型、参数列表、修饰符、方法体等属性的对比。
- * 常用于代码生成后的校验或版本对比场景。
+ * MethodInfo 差异比较器
  *
  * @author zifang
  * @version 1.0.0
  */
 public class MethodDiffer {
+
+    public MethodDiffer() {
+    }
+
+    /**
+     * 比较两个方法是否相等
+     *
+     * @return true 相等，false 不等
+     */
+    public boolean diff(MethodInfo left, MethodInfo right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        return Objects.equals(left.getMethodName(), right.getMethodName())
+                && Objects.equals(left.getReturnType(), right.getReturnType())
+                && left.getModifier() == right.getModifier()
+                && Objects.equals(left.getMethodParameterPairs(), right.getMethodParameterPairs());
+    }
 }
