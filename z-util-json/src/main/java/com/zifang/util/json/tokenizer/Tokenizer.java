@@ -8,7 +8,7 @@ import java.io.IOException;
  * JSON 词法分析器，将JSON字符串分解为Token序列。
  * <p>
  * 优化版本：直接操作 CharReader（char[]），消除 Reader 缓冲边界检查。
- * 采用状态机驱动，避免重复方法调用开销。
+ * whitespace 跳过使用 peek 策略，避免回退导致的状态错乱。
  *
  * @author zifang
  * @see Token
@@ -17,10 +17,6 @@ import java.io.IOException;
  */
 public class Tokenizer {
 
-    private static final int CT_WHITESPACE = 1;
-    private static final int CT_DIGIT = 2;
-    private static final int CT_QUOTE = 3;
-
     private CharReader charReader;
 
     /**
@@ -28,7 +24,7 @@ public class Tokenizer {
      */
     public TokenList tokenize(CharReader charReader) throws IOException {
         this.charReader = charReader;
-        TokenList tokens = new TokenList();
+        TokenList tokens = new TokenList(64);
         tokenize(tokens);
         return tokens;
     }
@@ -85,15 +81,19 @@ public class Tokenizer {
             return readNumber(false);
         }
 
-        throw new JsonParseException("Invalid character: " + ch);
+        throw new JsonParseException("Invalid character: '" + ch + "'");
     }
 
+    /**
+     * 跳过空白字符，使用 peek 策略（只看不消费）。
+     */
     private void skipWhitespace() throws IOException {
-        char ch;
-        while ((ch = charReader.next()) != (char) -1) {
-            if (ch != ' ' && ch != '\t' && ch != '\r' && ch != '\n') {
-                charReader.back();
-                break;
+        while (charReader.hasMore()) {
+            char ch = charReader.peek();
+            if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n') {
+                charReader.next(); // 消费空白
+            } else {
+                break; // 非空白，peek 位置不变
             }
         }
     }
@@ -202,7 +202,8 @@ public class Tokenizer {
             ch = charReader.peek();
         }
         if (ch == 'e' || ch == 'E') {
-            sb.append(charReader.next());
+            charReader.next(); // consume 'e'/'E'
+            sb.append(ch);
             ch = charReader.next();
             if (ch == '+' || ch == '-') {
                 sb.append(ch);

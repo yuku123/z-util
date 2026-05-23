@@ -42,6 +42,13 @@ public class TokenList {
         return pos < tokens.size();
     }
 
+    /**
+     * 查看前一个Token（不移动位置）。
+     */
+    public Token peekPrevious() {
+        return pos - 1 < 0 ? null : tokens.get(pos - 1);
+    }
+
     public int size() {
         return tokens.size();
     }

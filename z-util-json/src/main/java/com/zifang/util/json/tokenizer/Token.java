@@ -45,16 +45,8 @@ public class Token {
         return tokenType;
     }
 
-    public void setTokenType(TokenType tokenType) {
-        this.tokenType = tokenType;
-    }
-
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 
     @Override
