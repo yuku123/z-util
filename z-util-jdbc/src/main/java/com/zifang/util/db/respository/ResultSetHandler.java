@@ -1,6 +1,7 @@
 package com.zifang.util.db.respository;
 
 import com.zifang.util.core.lang.converter.Converters;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import javax.persistence.Column;
 import java.lang.reflect.Field;
@@ -38,23 +39,23 @@ public class ResultSetHandler {
 
         resultSetMetaData = resultSet.getMetaData();
 
+        // 是泛型类
         if (targetType instanceof ParameterizedType) {
-            ParameterizedType pt = (ParameterizedType) targetType;
-            if (pt.getRawType() == List.class) {
-                Type elementType = pt.getActualTypeArguments()[0];
-                if (elementType instanceof ParameterizedType) {
-                    ParameterizedType elementPt = (ParameterizedType) elementType;
-                    if (elementPt.getRawType() == Map.class) {
+            if (((ParameterizedType) targetType).getRawType() == List.class) {
+                Type type = ((ParameterizedTypeImpl) targetType).getActualTypeArguments()[0];
+                if (type instanceof ParameterizedType) {
+                    Class clazz = ((ParameterizedTypeImpl) type).getRawType();
+                    if (clazz == Map.class) {
                         List<Map<String, Object>> list = fetch(resultSet);
                         return list;
                     }
                 } else {
-                    Class<?> clazz = (Class<?>) elementType;
+                    Class clazz = (Class) ((ParameterizedTypeImpl) targetType).getActualTypeArguments()[0];
                     List<Map<String, Object>> list = fetch(resultSet);
                     List<Object> o = transformBatch(list, clazz);
                     return o;
                 }
-            } else if (pt.getRawType() == Map.class) {
+            } else if (((ParameterizedType) targetType).getRawType() == Map.class) {
                 List<Map<String, Object>> list = fetch(resultSet);
                 if (list.size() > 1) {
                     throw new RuntimeException("rows > 1");
@@ -79,7 +80,7 @@ public class ResultSetHandler {
         return null;
     }
 
-    private List<Object> transformBatch(List<Map<String, Object>> list, Class<?> clazz) throws InstantiationException, IllegalAccessException {
+    private List<Object> transformBatch(List<Map<String, Object>> list, Class clazz) throws InstantiationException, IllegalAccessException {
         List<Object> objects = new ArrayList<>();
         for (Map<String, Object> map : list) {
             Object o = transform(map, clazz);
@@ -89,12 +90,7 @@ public class ResultSetHandler {
     }
 
     private Object transform(Map<String, Object> map, Class<?> clazz) throws InstantiationException, IllegalAccessException {
-        Object o;
-        try {
-            o = clazz.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            throw new IllegalStateException("无法实例化: " + clazz.getName(), e);
-        }
+        Object o = clazz.newInstance();
         Field[] fields = clazz.getDeclaredFields();
         Map<String, Field> columnMap = new LinkedHashMap<>();
         for (Field field : fields) {
@@ -119,6 +115,7 @@ public class ResultSetHandler {
         if (column == null) {
             StringBuilder convertName = new StringBuilder();
             for (int i = 0; i < field.getName().length(); i++) {
+                //如果是大写前面先加一个_
                 if (isUpperCase(field.getName().charAt(i))) {
                     convertName.append("_");
                 }
@@ -130,16 +127,16 @@ public class ResultSetHandler {
         }
     }
 
+    //字母是否是大写
     private static boolean isUpperCase(char c) {
-        return c >= 'A' && c <= 'Z';
+        return c >= 65 && c <= 90;
     }
 
     private List<Map<String, Object>> fetch(ResultSet resultSet) throws SQLException {
         List<Map<String, Object>> li = new ArrayList<>();
         while (resultSet.next()) {
             Map<String, Object> map = new LinkedHashMap<>();
-            int columnCount = resultSetMetaData.getColumnCount();
-            for (int i = 1; i <= columnCount; i++) {
+            for (int i = 1; i < resultSetMetaData.getColumnCount(); i++) {
                 map.put(resultSetMetaData.getColumnName(i), resultSet.getObject(i));
             }
             li.add(map);
@@ -147,26 +144,56 @@ public class ResultSetHandler {
         return li;
     }
 
+    /**
+     * 获取目标类型
+     *
+     * @return 目标类型
+     */
     public Type getTargetType() {
         return targetType;
     }
 
+    /**
+     * 设置目标类型
+     *
+     * @param targetType 目标类型
+     */
     public void setTargetType(Type targetType) {
         this.targetType = targetType;
     }
 
+    /**
+     * 获取ResultSet
+     *
+     * @return ResultSet对象
+     */
     public ResultSet getResultSet() {
         return resultSet;
     }
 
+    /**
+     * 设置ResultSet
+     *
+     * @param resultSet ResultSet对象
+     */
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
     }
 
+    /**
+     * 获取ResultSet元数据
+     *
+     * @return ResultSet元数据
+     */
     public ResultSetMetaData getResultSetMetaData() {
         return resultSetMetaData;
     }
 
+    /**
+     * 设置ResultSet元数据
+     *
+     * @param resultSetMetaData ResultSet元数据
+     */
     public void setResultSetMetaData(ResultSetMetaData resultSetMetaData) {
         this.resultSetMetaData = resultSetMetaData;
     }

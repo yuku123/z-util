@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * Token列表，用于存储和管理JSON词法分析过程中产生的Token序列。
+ * <p>
+ * 提供Token的顺序访问能力，支持前向读取和回退操作。
  *
  * @author zifang
  * @see Token
@@ -12,49 +14,51 @@ import java.util.List;
  */
 public class TokenList {
 
-    private final List<Token> tokens;
-    private int pos = 0;
+    private List<Token> tokens = new ArrayList<>(64);
 
-    /**
-     * 根据预估Token数量预分配容量。
-     */
-    public TokenList(int estimatedSize) {
-        this.tokens = new ArrayList<>(estimatedSize);
-    }
+    private int pos = 0;
 
     public TokenList() {
         this.tokens = new ArrayList<>(64);
     }
 
+    public TokenList(int initialCapacity) {
+        this.tokens = new ArrayList<>(initialCapacity);
+    }
+
+    /**
+     * 添加一个Token到列表末尾。
+     */
     public void add(Token token) {
         tokens.add(token);
     }
 
+    /**
+     * 查看当前Token（不移动位置）。
+     */
     public Token peek() {
         return pos < tokens.size() ? tokens.get(pos) : null;
     }
 
+    /**
+     * 查看前一个Token。
+     */
+    public Token peekPrevious() {
+        return pos - 1 < 0 ? null : tokens.get(pos - 2);
+    }
+
+    /**
+     * 获取下一个Token并移动位置。
+     */
     public Token next() {
         return tokens.get(pos++);
     }
 
+    /**
+     * 判断是否还有更多Token。
+     */
     public boolean hasMore() {
         return pos < tokens.size();
-    }
-
-    /**
-     * 查看前一个Token（不移动位置）。
-     */
-    public Token peekPrevious() {
-        return pos - 1 < 0 ? null : tokens.get(pos - 1);
-    }
-
-    public int size() {
-        return tokens.size();
-    }
-
-    public void reset() {
-        pos = 0;
     }
 
     @Override

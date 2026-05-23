@@ -7,8 +7,15 @@ import java.io.IOException;
 /**
  * JSON 词法分析器，将JSON字符串分解为Token序列。
  * <p>
- * 优化版本：直接操作 CharReader（char[]），消除 Reader 缓冲边界检查。
- * whitespace 跳过使用 peek 策略，避免回退导致的状态错乱。
+ * 采用递归下降方式进行词法分析，支持以下JSON语法元素：
+ * <ul>
+ *   <li>对象：{@code { key: value, ... }}</li>
+ *   <li>数组：{@code [ value, ... ]}</li>
+ *   <li>字符串：支持转义字符和Unicode</li>
+ *   <li>数字：支持整数、浮点数、科学计数法</li>
+ *   <li>布尔值：true、false</li>
+ *   <li>null值</li>
+ * </ul>
  *
  * @author zifang
  * @see Token
@@ -19,30 +26,42 @@ public class Tokenizer {
 
     private CharReader charReader;
 
+    private TokenList tokens;
+
     /**
      * 对给定的字符流进行词法分析，生成Token列表。
+     *
+     * @param charReader 字符读取器
+     * @return 生成的Token列表
+     * @throws IOException 如果读取过程中发生I/O错误
      */
     public TokenList tokenize(CharReader charReader) throws IOException {
         this.charReader = charReader;
-        TokenList tokens = new TokenList(64);
-        tokenize(tokens);
+        tokens = new TokenList(64);
+        tokenize();
         return tokens;
     }
 
-    private void tokenize(TokenList tokens) throws IOException {
+    private void tokenize() throws IOException {
+        // 使用do-while处理空文件
         Token token;
         do {
-            token = nextToken();
+            token = start();
             tokens.add(token);
         } while (token.getTokenType() != TokenType.END_DOCUMENT);
     }
 
-    private Token nextToken() throws IOException {
-        skipWhitespace();
+    private Token start() throws IOException {
+        char ch;
+        for (; ; ) {
+            if (!charReader.hasMore()) {
+                return Token.END_DOCUMENT;
+            }
 
-        char ch = charReader.next();
-        if (ch == (char) -1) {
-            return Token.END_DOCUMENT;
+            ch = charReader.next();
+            if (!isWhiteSpace(ch)) {
+                break;
+            }
         }
 
         switch (ch) {
@@ -61,173 +80,197 @@ public class Tokenizer {
             case 'n':
                 return readNull();
             case 't':
-                if (charReader.next() == 'r' && charReader.next() == 'u' && charReader.next() == 'e') {
-                    return Token.TRUE;
-                }
-                throw new JsonParseException("Invalid JSON: expected 'true'");
             case 'f':
-                if (charReader.next() == 'a' && charReader.next() == 'l' && charReader.next() == 's' && charReader.next() == 'e') {
-                    return Token.FALSE;
-                }
-                throw new JsonParseException("Invalid JSON: expected 'false'");
+                return readBoolean();
             case '"':
                 return readString();
             case '-':
-                return readNumber(true);
+                return readNumber();
         }
 
-        if (ch >= '0' && ch <= '9') {
-            charReader.back();
-            return readNumber(false);
+        if (isDigit(ch)) {
+            return readNumber();
         }
 
-        throw new JsonParseException("Invalid character: '" + ch + "'");
+        throw new JsonParseException("Illegal character");
     }
 
-    /**
-     * 跳过空白字符，使用 peek 策略（只看不消费）。
-     */
-    private void skipWhitespace() throws IOException {
-        while (charReader.hasMore()) {
-            char ch = charReader.peek();
-            if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n') {
-                charReader.next(); // 消费空白
-            } else {
-                break; // 非空白，peek 位置不变
-            }
-        }
+    private boolean isWhiteSpace(char ch) {
+        return (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n');
     }
 
     private Token readString() throws IOException {
-        StringBuilder sb = new StringBuilder(64);
-        char ch;
-        while ((ch = charReader.next()) != (char) -1) {
+        StringBuilder sb = new StringBuilder();
+        for (; ; ) {
+            char ch = charReader.next();
             if (ch == '\\') {
-                char nc = charReader.next();
-                switch (nc) {
-                    case '"':
-                        sb.append('"');
-                        break;
-                    case '\\':
-                        sb.append('\\');
-                        break;
-                    case 'u':
-                        int val = 0;
-                        for (int i = 0; i < 4; i++) {
-                            char hc = charReader.next();
-                            int digit = hexToInt(hc);
-                            if (digit < 0) {
-                                throw new JsonParseException("Invalid unicode escape");
-                            }
-                            val = (val << 4) | digit;
+                if (!isEscape()) {
+                    throw new JsonParseException("Invalid escape character");
+                }
+                sb.append('\\');
+                ch = charReader.peek();
+                sb.append(ch);
+                if (ch == 'u') {
+                    for (int i = 0; i < 4; i++) {
+                        ch = charReader.next();
+                        if (isHex(ch)) {
+                            sb.append(ch);
+                        } else {
+                            throw new JsonParseException("Invalid character");
                         }
-                        sb.append((char) val);
-                        break;
-                    case 'r':
-                        sb.append('\r');
-                        break;
-                    case 'n':
-                        sb.append('\n');
-                        break;
-                    case 'b':
-                        sb.append('\b');
-                        break;
-                    case 't':
-                        sb.append('\t');
-                        break;
-                    case 'f':
-                        sb.append('\f');
-                        break;
-                    default:
-                        throw new JsonParseException("Invalid escape: \\" + nc);
+                    }
                 }
             } else if (ch == '"') {
                 return new Token(TokenType.STRING, sb.toString());
             } else if (ch == '\r' || ch == '\n') {
-                throw new JsonParseException("Unterminated string");
+                throw new JsonParseException("Invalid character");
             } else {
                 sb.append(ch);
             }
         }
-        throw new JsonParseException("Unterminated string");
     }
 
-    private int hexToInt(char ch) {
-        if (ch >= '0' && ch <= '9') return ch - '0';
-        if (ch >= 'a' && ch <= 'f') return ch - 'a' + 10;
-        if (ch >= 'A' && ch <= 'F') return ch - 'A' + 10;
-        return -1;
-    }
-
-    private Token readNumber(boolean negative) throws IOException {
-        StringBuilder sb = new StringBuilder(16);
-        if (negative) {
-            sb.append('-');
-        }
+    private boolean isEscape() throws IOException {
         char ch = charReader.next();
-        if (ch == '0') {
-            sb.append('0');
-            appendFracAndExp(sb);
-            return new Token(TokenType.NUMBER, sb.toString());
-        }
-        if (ch >= '1' && ch <= '9') {
-            sb.append(ch);
-            while ((ch = charReader.next()) >= '0' && ch <= '9') {
-                sb.append(ch);
-            }
-            if (ch != (char) -1) {
-                charReader.back();
-            }
-            appendFracAndExp(sb);
-            return new Token(TokenType.NUMBER, sb.toString());
-        }
-        throw new JsonParseException("Invalid number");
+        return (ch == '"' || ch == '\\' || ch == 'u' || ch == 'r'
+                || ch == 'n' || ch == 'b' || ch == 't' || ch == 'f');
+
     }
 
-    private void appendFracAndExp(StringBuilder sb) throws IOException {
-        char ch = charReader.next();
-        if (ch == '.') {
-            sb.append('.');
-            ch = charReader.next();
-            if (ch < '0' || ch > '9') {
-                throw new JsonParseException("Invalid fraction");
-            }
-            sb.append(ch);
-            while ((ch = charReader.next()) >= '0' && ch <= '9') {
-                sb.append(ch);
-            }
-            if (ch != (char) -1) {
-                charReader.back();
-            }
-            ch = charReader.peek();
-        }
-        if (ch == 'e' || ch == 'E') {
-            charReader.next(); // consume 'e'/'E'
+    private boolean isHex(char ch) {
+        return ((ch >= '0' && ch <= '9') || ('a' <= ch && ch <= 'f')
+                || ('A' <= ch && ch <= 'F'));
+    }
+
+    private Token readNumber() throws IOException {
+        char ch = charReader.peek();
+        StringBuilder sb = new StringBuilder();
+        if (ch == '-') {    // 处理负数
             sb.append(ch);
             ch = charReader.next();
-            if (ch == '+' || ch == '-') {
+            if (ch == '0') {    // 处理 -0.xxxx
+                sb.append(ch);
+                sb.append(readFracAndExp());
+            } else if (isDigitOne2Nine(ch)) {
+                do {
+                    sb.append(ch);
+                    ch = charReader.next();
+                } while (isDigit(ch));
+                if (ch != (char) -1) {
+                    charReader.back();
+                    sb.append(readFracAndExp());
+                }
+            } else {
+                throw new JsonParseException("Invalid minus number");
+            }
+        } else if (ch == '0') {    // 处理小数
+            sb.append(ch);
+            sb.append(readFracAndExp());
+        } else {
+            do {
                 sb.append(ch);
                 ch = charReader.next();
-            }
-            if (ch < '0' || ch > '9') {
-                throw new JsonParseException("Invalid exponent");
-            }
-            sb.append(ch);
-            while ((ch = charReader.next()) >= '0' && ch <= '9') {
-                sb.append(ch);
-            }
+            } while (isDigit(ch));
             if (ch != (char) -1) {
                 charReader.back();
+                sb.append(readFracAndExp());
             }
-        } else if (ch != (char) -1) {
+        }
+
+        return new Token(TokenType.NUMBER, sb.toString());
+    }
+
+    private boolean isExp(char ch) throws IOException {
+        return ch == 'e' || ch == 'E';
+    }
+
+    private boolean isDigit(char ch) {
+        return ch >= '0' && ch <= '9';
+    }
+
+    private boolean isDigitOne2Nine(char ch) {
+        return ch >= '0' && ch <= '9';
+    }
+
+    private String readFracAndExp() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        char ch = charReader.next();
+        if (ch == '.') {
+            sb.append(ch);
+            ch = charReader.next();
+            if (!isDigit(ch)) {
+                throw new JsonParseException("Invalid frac");
+            }
+            do {
+                sb.append(ch);
+                ch = charReader.next();
+            } while (isDigit(ch));
+
+            if (isExp(ch)) {    // 处理科学计数法
+                sb.append(ch);
+                sb.append(readExp());
+            } else {
+                if (ch != (char) -1) {
+                    charReader.back();
+                }
+            }
+        } else if (isExp(ch)) {
+            sb.append(ch);
+            sb.append(readExp());
+        } else {
             charReader.back();
+        }
+
+        return sb.toString();
+    }
+
+    private String readExp() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        char ch = charReader.next();
+        if (ch == '+' || ch == '-') {
+            sb.append(ch);
+            ch = charReader.next();
+            if (isDigit(ch)) {
+                do {
+                    sb.append(ch);
+                    ch = charReader.next();
+                } while (isDigit(ch));
+
+                if (ch != (char) -1) {    // 读取结束，不用回退
+                    charReader.back();
+                }
+            } else {
+                throw new JsonParseException("e or E");
+            }
+        } else {
+            throw new JsonParseException("e or E");
+        }
+
+        return sb.toString();
+    }
+
+    private Token readBoolean() throws IOException {
+        if (charReader.peek() == 't') {
+            if (!(charReader.next() == 'r' && charReader.next() == 'u' && charReader.next() == 'e')) {
+                throw new JsonParseException("Invalid json string");
+            }
+
+            return Token.TRUE;
+        } else {
+            if (!(charReader.next() == 'a' && charReader.next() == 'l'
+                    && charReader.next() == 's' && charReader.next() == 'e')) {
+                throw new JsonParseException("Invalid json string");
+            }
+
+            return Token.FALSE;
         }
     }
 
     private Token readNull() throws IOException {
-        if (charReader.next() == 'u' && charReader.next() == 'l' && charReader.next() == 'l') {
-            return Token.NULL;
+        if (!(charReader.next() == 'u' && charReader.next() == 'l' && charReader.next() == 'l')) {
+            throw new JsonParseException("Invalid json string");
         }
-        throw new JsonParseException("Invalid JSON: expected 'null'");
+
+        return Token.NULL;
     }
 }

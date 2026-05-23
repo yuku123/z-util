@@ -4,8 +4,6 @@ package com.zifang.util.json.tokenizer;
  * JSON Token（词法单元），表示JSON语法中的最小语义单位。
  * <p>
  * 每个Token由类型和值组成，例如数字"123"对应Token(TokenType.NUMBER, "123")。
- * <p>
- * 优化：提供静态单例Token，避免简单标点符号重复创建对象。
  *
  * @author zifang
  * @see TokenType
@@ -13,12 +11,7 @@ package com.zifang.util.json.tokenizer;
  */
 public class Token {
 
-    private final TokenType tokenType;
-    private final String value;
-
-    /**
-     * 静态单例Token，避免标点符号重复创建。
-     */
+    /** 标点符号Token单例，避免重复创建对象 */
     public static final Token BEGIN_OBJECT  = new Token(TokenType.BEGIN_OBJECT, "{");
     public static final Token END_OBJECT    = new Token(TokenType.END_OBJECT, "}");
     public static final Token BEGIN_ARRAY   = new Token(TokenType.BEGIN_ARRAY, "[");
@@ -30,12 +23,9 @@ public class Token {
     public static final Token FALSE         = new Token(TokenType.BOOLEAN, "false");
     public static final Token END_DOCUMENT  = new Token(TokenType.END_DOCUMENT, null);
 
-    /**
-     * 构造一个Token。
-     *
-     * @param tokenType Token类型
-     * @param value     Token的文本值
-     */
+    private final TokenType tokenType;
+    private final String value;
+
     public Token(TokenType tokenType, String value) {
         this.tokenType = tokenType;
         this.value = value;

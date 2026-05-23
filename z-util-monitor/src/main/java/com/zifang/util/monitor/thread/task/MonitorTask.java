@@ -1,6 +1,6 @@
 package com.zifang.util.monitor.thread.task;
 
-import com.zifang.util.json.model.JsonObject;
+import com.alibaba.fastjson.JSONObject;
 import com.zifang.util.monitor.thread.Monitorable;
 import com.zifang.util.monitor.thread.Status;
 import com.zifang.util.monitor.thread.StatusLevel;
@@ -38,11 +38,11 @@ public class MonitorTask implements Runnable {
     @Override
     public void run() {
         LOGGER.info("{} start", this.getClass().getSimpleName());
-        JsonObject jsonObject;
+        JSONObject jsonObject;
         for (Monitorable monitorable : monitorSet) {
             //防止监控组件的任何异常导致此线程执行出错。
             try {
-                jsonObject = new JsonObject();
+                jsonObject = new JSONObject();
                 Status status = monitorable.status();
                 jsonObject.put("component", monitorable.componentName());
                 jsonObject.put("statusLevel", status.getLevel().toString());

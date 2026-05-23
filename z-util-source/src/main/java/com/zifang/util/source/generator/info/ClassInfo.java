@@ -1,9 +1,5 @@
 package com.zifang.util.source.generator.info;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,21 +22,68 @@ import java.util.List;
  */
 public class ClassInfo {
 
+    /**
+     * 标记当前classInfo是否为接口
+     * <p>
+     * true : 是接口
+     * false : 不是接口
+     */
     private Boolean interfaceType;
-    private String simpleClassName;
-    private String packageName;
-    private ClassInfo superClass;
-    private List<String> imports = new ArrayList<>();
-    private List<String> comments = new ArrayList<>();
-    private List<ClassInfo> interfaces = new ArrayList<>();
-    private List<FieldInfo> fields = new ArrayList<>();
-    private List<MethodInfo> methods = new ArrayList<>();
-    private int modifiers;
-    private List<ClassInfo> innerClasses = new ArrayList<>();
-    private List<AnnotationInfo> annotations = new ArrayList<>();
 
-    public ClassInfo() {
-    }
+    /**
+     * 当前类简单名称（不含包名）
+     */
+    private String simpleClassName;
+
+    /**
+     * 当前包名
+     */
+    private String packageName;
+
+    /**
+     * 父类信息
+     */
+    private ClassInfo superClass;
+
+    /**
+     * 导入语句列表
+     */
+    private List<String> imports = new ArrayList<>();
+
+    /**
+     * 类注释列表
+     */
+    private List<String> comments = new ArrayList<>();
+
+    /**
+     * 接口列表
+     */
+    private List<ClassInfo> interfaces = new ArrayList<>();
+
+    /**
+     * 字段列表
+     */
+    private List<FieldInfo> fields = new ArrayList<>();
+
+    /**
+     * 方法列表
+     */
+    private List<MethodInfo> methods = new ArrayList<>();
+
+    /**
+     * 类的修饰符，使用 java.lang.reflect.Modifier 的常量值
+     */
+    private int modifiers;
+
+    /**
+     * 内部类列表
+     */
+    private List<ClassInfo> innerClasses = new ArrayList<>();
+
+    /**
+     * 注解列表
+     */
+    private List<AnnotationInfo> annotations = new ArrayList<>();
 
     /**
      * 获取全类路径名称
@@ -48,141 +91,83 @@ public class ClassInfo {
      * @return 包名.类名的格式
      */
     public String getName() {
-        if (packageName == null || packageName.isEmpty()) {
-            return simpleClassName;
-        }
         return packageName + "." + simpleClassName;
     }
 
     /**
-     * 获取全限定类名（包含包名）
-     */
-    public String getFullName() {
-        return getName();
-    }
-
-    /**
      * 批量添加字段
+     *
+     * @param fieldInfos 字段信息列表
      */
     public void appendFields(List<FieldInfo> fieldInfos) {
-        if (fieldInfos == null) {
-            return;
-        }
+        checkField();
         fields.addAll(fieldInfos);
     }
 
     /**
      * 添加单个字段
+     *
+     * @param fieldInfo 字段信息
      */
     public void appendField(FieldInfo fieldInfo) {
-        if (fieldInfo != null) {
-            fields.add(fieldInfo);
-        }
+        checkField();
+        fields.add(fieldInfo);
     }
 
     /**
      * 批量添加方法
+     *
+     * @param methodInfos 方法信息列表
      */
     public void appendMethods(List<MethodInfo> methodInfos) {
-        if (methodInfos == null) {
-            return;
-        }
+        checkMethod();
         methods.addAll(methodInfos);
     }
 
     /**
      * 添加单个方法
+     *
+     * @param methodInfo 方法信息
      */
     public void appendMethod(MethodInfo methodInfo) {
-        if (methodInfo != null) {
-            methods.add(methodInfo);
-        }
+        checkMethod();
+        methods.add(methodInfo);
     }
 
     /**
      * 批量添加接口
+     *
+     * @param interfaceClassInfos 接口信息列表
      */
     public void appendInterfaces(List<ClassInfo> interfaceClassInfos) {
-        if (interfaceClassInfos == null) {
-            return;
-        }
+        checkInterface();
         interfaces.addAll(interfaceClassInfos);
     }
 
     /**
      * 添加单个接口
+     *
+     * @param interfaceClassInfo 接口信息
      */
-    public void appendInterface(ClassInfo interfaceClassInfo) {
-        if (interfaceClassInfo != null) {
-            interfaces.add(interfaceClassInfo);
-        }
+    public void appendInterfaces(ClassInfo interfaceClassInfo) {
+        checkInterface();
+        interfaces.add(interfaceClassInfo);
     }
 
     /**
-     * 将一个运行态 class 直接解析转化为 ClassInfo
+     * 将一个运行态class直接解析转化为ClassInfo
      *
-     * @param clazz 要解析的 Class 对象
-     * @return 解析后的 ClassInfo 对象
+     * @param clazz 要解析的Class对象
+     * @return 解析后的ClassInfo对象
      */
     public static ClassInfo parser(Class clazz) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("clazz 不能为 null");
-        }
-
-        ClassInfo classInfo = new ClassInfo();
-        classInfo.setInterfaceType(clazz.isInterface());
-        classInfo.setSimpleClassName(clazz.getSimpleName());
-        classInfo.setModifiers(clazz.getModifiers());
-
-        Package pkg = clazz.getPackage();
-        classInfo.setPackageName(pkg != null ? pkg.getName() : "");
-
-        // 解析父类
-        Class<?> superClass = clazz.getSuperclass();
-        if (superClass != null && superClass != Object.class) {
-            classInfo.setSuperClass(parser(superClass));
-        }
-
-        // 解析接口
-        for (Class<?> iface : clazz.getInterfaces()) {
-            classInfo.appendInterface(parser(iface));
-        }
-
-        // 解析字段
-        for (Field field : clazz.getDeclaredFields()) {
-            FieldInfo fieldInfo = new FieldInfo();
-            fieldInfo.setType(field.getType().getName());
-            fieldInfo.setName(field.getName());
-            fieldInfo.setModifiers(new int[]{field.getModifiers()});
-            classInfo.appendField(fieldInfo);
-        }
-
-        // 解析方法
-        for (Method method : clazz.getDeclaredMethods()) {
-            MethodInfo methodInfo = new MethodInfo();
-            methodInfo.setMethodName(method.getName());
-            methodInfo.setReturnType(method.getReturnType().getName());
-            methodInfo.setModifier(method.getModifiers());
-
-            List<MethodParameterPair> params = new ArrayList<>();
-            for (Parameter param : method.getParameters()) {
-                params.add(new MethodParameterPair(param.getType().getName(), param.getName()));
-            }
-            methodInfo.setMethodParameterPairs(params);
-
-            classInfo.appendMethod(methodInfo);
-        }
-
-        // 解析内部类
-        for (Class<?> inner : clazz.getDeclaredClasses()) {
-            classInfo.getInnerClasses().add(parser(inner));
-        }
-
-        return classInfo;
+        return null; // @todo
     }
 
     /**
      * 最小闭环构造器
+     * <p>
+     * 使用提供的所有参数创建一个完整的ClassInfo对象
      *
      * @param interfaceType   是否为接口
      * @param modifiers      类修饰符
@@ -193,11 +178,11 @@ public class ClassInfo {
      * @param interfaces     接口列表
      * @param fieldInfos     字段列表
      * @param methodInfos    方法列表
-     * @return 构建完成的 ClassInfo 对象
+     * @return 构建完成的ClassInfo对象
      */
     public static ClassInfo build(
             Boolean interfaceType,
-            int modifiers,
+            Integer modifiers,
             String packageName,
             List<String> comments,
             String simpleClassName,
@@ -218,22 +203,13 @@ public class ClassInfo {
         return classInfo;
     }
 
-    // ==================== Getters / Setters ====================
-
-    public Boolean getInterfaceType() {
-        return interfaceType;
-    }
-
-    public void setInterfaceType(Boolean interfaceType) {
-        this.interfaceType = interfaceType;
-    }
 
     public List<String> getComments() {
         return comments;
     }
 
     public void setComments(List<String> comments) {
-        this.comments = comments != null ? comments : new ArrayList<>();
+        this.comments = comments;
     }
 
     public String getSimpleClassName() {
@@ -260,20 +236,12 @@ public class ClassInfo {
         this.superClass = superClass;
     }
 
-    public List<String> getImports() {
-        return imports;
-    }
-
-    public void setImports(List<String> imports) {
-        this.imports = imports != null ? imports : new ArrayList<>();
-    }
-
     public List<ClassInfo> getInterfaces() {
         return interfaces;
     }
 
     public void setInterfaces(List<ClassInfo> interfaces) {
-        this.interfaces = interfaces != null ? interfaces : new ArrayList<>();
+        this.interfaces = interfaces;
     }
 
     public List<FieldInfo> getFields() {
@@ -281,7 +249,7 @@ public class ClassInfo {
     }
 
     public void setFields(List<FieldInfo> fields) {
-        this.fields = fields != null ? fields : new ArrayList<>();
+        this.fields = fields;
     }
 
     public List<MethodInfo> getMethods() {
@@ -289,7 +257,7 @@ public class ClassInfo {
     }
 
     public void setMethods(List<MethodInfo> methods) {
-        this.methods = methods != null ? methods : new ArrayList<>();
+        this.methods = methods;
     }
 
     public int getModifiers() {
@@ -300,12 +268,20 @@ public class ClassInfo {
         this.modifiers = modifiers;
     }
 
-    /**
-     * @deprecated Use {@link #setModifiers(int)} instead
-     */
-    @Deprecated
-    public void setModifiers(Integer modifiers) {
-        this.modifiers = modifiers != null ? modifiers : 0;
+    public List<String> getImports() {
+        return imports;
+    }
+
+    public void setImports(List<String> imports) {
+        this.imports = imports;
+    }
+
+    public Boolean getInterfaceType() {
+        return interfaceType;
+    }
+
+    public void setInterfaceType(Boolean interfaceType) {
+        this.interfaceType = interfaceType;
     }
 
     public List<ClassInfo> getInnerClasses() {
@@ -313,7 +289,7 @@ public class ClassInfo {
     }
 
     public void setInnerClasses(List<ClassInfo> innerClasses) {
-        this.innerClasses = innerClasses != null ? innerClasses : new ArrayList<>();
+        this.innerClasses = innerClasses;
     }
 
     public List<AnnotationInfo> getAnnotations() {
@@ -321,15 +297,30 @@ public class ClassInfo {
     }
 
     public void setAnnotations(List<AnnotationInfo> annotations) {
-        this.annotations = annotations != null ? annotations : new ArrayList<>();
+        this.annotations = annotations;
     }
 
-    @Override
-    public String toString() {
-        return "ClassInfo{" +
-                "name=" + getName() +
-                ", interfaceType=" + interfaceType +
-                ", modifiers=" + Modifier.toString(modifiers) +
-                '}';
+    private void checkInterface() {
+        if (interfaces == null) {
+            throw new RuntimeException("当前interfaceList为null");
+        }
+    }
+
+    private void checkMethod() {
+        if (methods == null) {
+            throw new RuntimeException("当前methodList为null");
+        }
+    }
+
+    private void checkImports() {
+        if (imports == null) {
+            throw new RuntimeException("当前importList为null");
+        }
+    }
+
+    private void checkField() {
+        if (fields == null) {
+            throw new RuntimeException("当前fieldList为null");
+        }
     }
 }

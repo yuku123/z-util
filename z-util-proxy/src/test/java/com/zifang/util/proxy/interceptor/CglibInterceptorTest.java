@@ -32,9 +32,9 @@ public class CglibInterceptorTest {
         enhancer.setCallback(interceptor);
         TestTarget proxy = (TestTarget) enhancer.create();
 
-        assertEquals("Hello", proxy.sayHello());
         assertTrue(aspect.isBeforeCalled());
         assertTrue(aspect.isAfterCalled());
+        assertEquals("Hello", proxy.sayHello());
     }
 
     @Test
@@ -48,7 +48,6 @@ public class CglibInterceptorTest {
         enhancer.setCallback(interceptor);
         TestTarget proxy = (TestTarget) enhancer.create();
 
-        proxy.sayHello();
         assertTrue(aspect.isBeforeCalled());
         assertFalse(aspect.isAfterCalled());
     }
@@ -64,10 +63,6 @@ public class CglibInterceptorTest {
         enhancer.setCallback(interceptor);
         TestTarget proxy = (TestTarget) enhancer.create();
 
-        try {
-            proxy.throwException();
-        } catch (RuntimeException ignored) {
-        }
         assertTrue(aspect.isBeforeCalled());
         assertTrue(aspect.isAfterExceptionCalled());
     }

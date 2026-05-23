@@ -1,8 +1,9 @@
 package com.zifang.util.http.dedao;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONPath;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.zifang.util.core.io.FileUtil;
-import com.zifang.util.json.JsonUtil;
-import com.zifang.util.json.dsl.JsonPathParser;
 import com.zifang.util.core.lang.DateUtil;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -35,10 +36,10 @@ public class DedaoE {
         for(File file :files){
             try {
                 String content = FileUtil.getFileContent(file);
-                Map<String, Object> stringObjectMap = JsonUtil.fromJson(content, Map.class);
-                String timeStamp = new JsonPathParser().read(content, "$.bookDetail.c.article.PublishTime").toString();
-                String raw = new JsonPathParser().read(content, "$.bookDetail.c.content").toString();
-                List<Map<String,Object>> rawMap = (List<Map<String,Object>>) JsonUtil.fromJson(raw, List.class);
+                Map<String, Object> stringObjectMap = JSON.parseObject(content);
+                String timeStamp = JSONPath.read(content, "$.bookDetail.c.article.PublishTime").toString();
+                String raw = JSONPath.read(content, "$.bookDetail.c.content").toString();
+                List<Map<String,Object>> rawMap = (List<Map<String,Object>>)JSON.parse(raw);
 
                 LocalDateTime localDateTime = DateUtil.timestampToLocalDateTime(Long.parseLong(timeStamp) * 1000);
 
@@ -77,7 +78,7 @@ public class DedaoE {
         HttpGet httpGet = new HttpGet("https://www.dedao.cn/pc/odob/pc/audio/article/get?token="+urlEncode);
         CloseableHttpResponse response = httpClient.execute(httpGet);
         String res = EntityUtils.toString(response.getEntity());
-        Map<String,Object> ress = (Map<String, Object>) JsonUtil.fromJson(res, Map.class);
+        Map<String,Object> ress = (Map<String, Object>) JSON.parse(res.toString());
         return ress;
     }
 
@@ -87,10 +88,10 @@ public class DedaoE {
 
         HttpPost httpPost = new HttpPost("https://www.dedao.cn/pc/bauhinia/pc/article/info");
         httpPost.setHeader("Content-Type", "application/json;charset=utf8");
-        httpPost.setEntity(new StringEntity(JsonUtil.toJson(params)));
+        httpPost.setEntity(new StringEntity(JSON.toJSONString(params)));
         CloseableHttpResponse response = httpClient.execute(httpPost);
         String res = EntityUtils.toString(response.getEntity());
-        Map<String,Object> ress = (Map<String, Object>)new JsonPathParser().read(res, "$.c");
+        Map<String,Object> ress = (Map<String, Object>)JSONPath.read(res, "$.c");
         return ress;
     }
 
@@ -108,10 +109,10 @@ public class DedaoE {
 
         HttpPost httpPost = new HttpPost("https://www.dedao.cn/pc/label/v2/algo/pc/product/list");
         httpPost.setHeader("Content-Type", "application/json;charset=utf8");
-        httpPost.setEntity(new StringEntity(JsonUtil.toJson(params)));
+        httpPost.setEntity(new StringEntity(JSON.toJSONString(params)));
         CloseableHttpResponse response = httpClient.execute(httpPost);
         String res = EntityUtils.toString(response.getEntity());
-        List<Map<String,Object>> ress = (List<Map<String, Object>>) new JsonPathParser().read(res, "$.c.product_list");
+        List<Map<String,Object>> ress = (List<Map<String, Object>>) JSONPath.read(res, "$.c.product_list");
 
         return ress;
     }

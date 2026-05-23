@@ -34,7 +34,7 @@ public class CrawlerHttpClient {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
-                .retryOnConnectionFailure(false)
+                .addInterceptor(new RetryInterceptor(3))
                 .build();
     }
 
@@ -101,16 +101,16 @@ public class CrawlerHttpClient {
     }
 
     private HttpResponse execute(Request request) throws IOException {
-        try (Response response = client.newCall(request).execute()) {
-            int code = response.code();
-            String body = response.body() != null ? response.body().string() : "";
-            Map<String, String> responseHeaders = new HashMap<>();
-            Headers headers = response.headers();
-            for (String name : headers.names()) {
-                responseHeaders.put(name, headers.get(name));
-            }
-            return new HttpResponse(code, body, responseHeaders);
+        Response response = client.newCall(request).execute();
+        int code = response.code();
+        String body = response.body() != null ? response.body().string() : "";
+        Map<String, String> responseHeaders = new HashMap<>();
+        Headers headers = response.headers();
+        for (String name : headers.names()) {
+            responseHeaders.put(name, headers.get(name));
         }
+        response.close();
+        return new HttpResponse(code, body, responseHeaders);
     }
 
     /**
@@ -154,7 +154,7 @@ public class CrawlerHttpClient {
      * @return 响应头映射
      */
     public Map<String, String> getHeaders() {
-            return headers != null ? headers : java.util.Collections.emptyMap();
+            return headers;
         }
     }
 

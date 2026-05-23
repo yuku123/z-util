@@ -70,7 +70,7 @@ public class CrawlerPipeline {
 
             // Pre-parse HTML/JSON if content type suggests
             parseAndStore(ctx, response.getBody(), request.getContentType());
-        } catch (IOException | IllegalArgumentException e) {
+        } catch (IOException e) {
             ctx.addError("http", e.getMessage());
         }
 

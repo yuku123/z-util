@@ -1,119 +1,98 @@
 package com.zifang.util.json.tokenizer;
 
-import com.zifang.util.json.exception.JsonParseException;
+import java.io.IOException;
+import java.io.Reader;
 
 /**
- * 字符缓冲读取器，直接操作 char[] 数组。
+ * 字符缓冲读取器，提供字符流的顺序读取和回退能力。
  * <p>
- * 对于 JSON，一次性加载全部内容到 char[]，通过整数索引访问，
- * 消除 Reader 缓冲区的边界检查开销，显著提升解析性能。
- * <p>
- * 支持回退（pushBack）一个字符，支持 EOF 保护。
+ * 使用缓冲机制提高读取效率，默认缓冲区大小为1024字符。
  *
  * @author zifang
  */
 public class CharReader {
 
-    private final char[] buffer;
-    private final int len;
-    private int pos = 0;
-    private int pushBackPos = -1;
-    /** 标记是否已到达 EOF，防止 EOF 后 back() 导致数组越界 */
-    private boolean eof = false;
+    private static final int BUFFER_SIZE = 1024;
+
+    private final Reader reader;
+
+    private char[] buffer;
+
+    private int pos;
+
+    private int size;
 
     /**
-     * 从 String 构建读取器（全量加载，无 IO）。
+     * 构造一个字符缓冲读取器。
+     *
+     * @param reader 底层的字符输入流
      */
-    public CharReader(String str) {
-        this.buffer = str.toCharArray();
-        this.len = buffer.length;
-    }
-
-    /**
-     * 从 char[] 构建读取器（全量加载，无 IO）。
-     */
-    public CharReader(char[] chars) {
-        this.buffer = chars;
-        this.len = chars.length;
-    }
-
-    /**
-     * 从 Reader 一次性加载全部内容。
-     */
-    public static CharReader fromReader(java.io.Reader reader) throws java.io.IOException {
-        java.io.BufferedReader br = reader instanceof java.io.BufferedReader
-                ? (java.io.BufferedReader) reader
-                : new java.io.BufferedReader(reader, 8192);
-        StringBuilder sb = new StringBuilder();
-        char[] chunk = new char[8192];
-        int n;
-        while ((n = br.read(chunk)) != -1) {
-            sb.append(chunk, 0, n);
-        }
-        return new CharReader(sb.toString());
-    }
-
-    /**
-     * 读取下一个字符并移动位置。
-     */
-    public char next() {
-        if (pushBackPos >= 0) {
-            int saved = pushBackPos;
-            pushBackPos = -1;
-            return buffer[saved];
-        }
-        if (pos >= len) {
-            eof = true;
-            return (char) -1;
-        }
-        return buffer[pos++];
-    }
-
-    /**
-     * 将位置回退一个字符（最多一层嵌套回退）。
-     */
-    public void back() {
-        if (eof) {
-            return;
-        }
-        if (pushBackPos >= 0) {
-            // 已有回退，恢复原位
-            pos = pushBackPos;
-            pushBackPos = -1;
-        } else if (pos > 0) {
-            pushBackPos = pos;
-            pos--;
-        }
+    public CharReader(Reader reader) {
+        this.reader = reader;
+        buffer = new char[BUFFER_SIZE];
     }
 
     /**
      * 查看当前字符（不移动位置）。
+     *
+     * @return 当前字符，如果已到缓冲区末尾则返回-1
      */
     public char peek() {
-        if (pushBackPos >= 0) {
-            return buffer[pushBackPos];
-        }
-        if (pos >= len) {
+        if (pos - 1 >= size) {
             return (char) -1;
         }
-        return buffer[pos];
+
+        return buffer[Math.max(0, pos - 1)];
+    }
+
+    /**
+     * 读取下一个字符并移动位置。
+     *
+     * @return 下一个字符，如果已到末尾则返回-1
+     * @throws IOException 如果读取过程中发生I/O错误
+     */
+    public char next() throws IOException {
+        if (!hasMore()) {
+            return (char) -1;
+        }
+
+        return buffer[pos++];
+    }
+
+    /**
+     * 将位置回退一个字符。
+     */
+    public void back() {
+        pos = Math.max(0, --pos);
     }
 
     /**
      * 判断是否还有更多字符可读。
+     *
+     * @return 如果还有字符返回true
+     * @throws IOException 如果读取过程中发生I/O错误
      */
-    public boolean hasMore() {
-        if (pushBackPos >= 0) {
+    public boolean hasMore() throws IOException {
+        if (pos < size) {
             return true;
         }
-        return pos < len;
+
+        fillBuffer();
+        return pos < size;
     }
 
-    public int position() {
-        return pos;
-    }
+    /**
+     * 填充缓冲区。
+     *
+     * @throws IOException 如果读取过程中发生I/O错误
+     */
+    void fillBuffer() throws IOException {
+        int n = reader.read(buffer);
+        if (n == -1) {
+            return;
+        }
 
-    public int remaining() {
-        return len - pos;
+        pos = 0;
+        size = n;
     }
 }

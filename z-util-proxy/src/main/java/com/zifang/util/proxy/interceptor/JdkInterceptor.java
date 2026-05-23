@@ -1,5 +1,6 @@
 package com.zifang.util.proxy.interceptor;
 
+
 import com.zifang.util.proxy.aspects.Aspect;
 
 import java.io.Serializable;
@@ -9,14 +10,20 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 /**
- * JDK 动态代理切面拦截器
+ * JDK实现的动态代理切面
  */
 public class JdkInterceptor implements InvocationHandler, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final Object target;
-    private final Aspect aspect;
+    private Object target;
+    private Aspect aspect;
 
+    /**
+     * 构造
+     *
+     * @param target 被代理对象
+     * @param aspect 切面实现
+     */
     public JdkInterceptor(Object target, Aspect aspect) {
         this.target = target;
         this.aspect = aspect;
@@ -28,31 +35,28 @@ public class JdkInterceptor implements InvocationHandler, Serializable {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        // before 返回 false 时跳过方法执行，直接返回 null
-        if (!aspect.before(target, method, args)) {
-            return null;
-        }
+        final Object target = this.target;
+        final Aspect aspect = this.aspect;
+        Object result = null;
 
-        method.setAccessible(true);
-        Object result;
-        try {
-            // 静态方法没有 target
-            Object actualTarget = Modifier.isStatic(method.getModifiers()) ? null : target;
-            result = method.invoke(actualTarget, args);
-        } catch (InvocationTargetException e) {
-            // InvocationTargetException 由 method.invoke 抛出，内含业务异常
-            Throwable targetException = e.getTargetException();
-            boolean rethrow = !aspect.afterException(target, method, args, targetException);
-            // afterException 返回 false：重新抛出原始异常
-            // afterException 返回 true：消费异常，抛出包装异常
-            if (rethrow) {
-                throw targetException;
+        // 开始前回调
+        if (aspect.before(target, method, args)) {
+            method.setAccessible(true);
+            try {
+                result = method.invoke(Modifier.isStatic(method.getModifiers()) ? null : target, args);
+            } catch (InvocationTargetException e) {
+                // 异常回调（只捕获业务代码导致的异常，而非反射导致的异常）
+                if (aspect.afterException(target, method, args, e.getTargetException())) {
+                    throw e;
+                }
             }
-            throw new RuntimeException(targetException);
         }
 
-        // 正常返回后回调
-        aspect.after(target, method, args, result);
-        return result;
+        // 结束执行回调
+        if (aspect.after(target, method, args, result)) {
+            return result;
+        }
+        return null;
     }
+
 }

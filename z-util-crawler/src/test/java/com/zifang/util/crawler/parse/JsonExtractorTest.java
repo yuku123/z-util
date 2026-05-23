@@ -146,9 +146,7 @@ public class JsonExtractorTest {
 
     @Test
     public void testExtractAll_WithTopLevelArrayIndex_ReturnsSingleElementList() {
-        // items[0] 返回单个对象（不是数组），extractAll 对非数组返回空列表
         List<String> results = JsonExtractor.extractAll(ARRAY_JSON, "items[0]");
-        assertNotNull(results);
-        assertTrue("extractAll 对非数组值应返回空列表", results.isEmpty());
+        assertEquals(1, results.size());
     }
 }

@@ -1,13 +1,9 @@
 package com.zifang.util.source.compiler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.tools.*;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 动态编译执行上下文
@@ -21,17 +17,15 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class CompileContext {
 
-    private static final Logger log = LoggerFactory.getLogger(CompileContext.class);
-
     /**
-     * 上下文唯一标识，基于原子计数器生成
+     * 上下文唯一标识，基于时间戳生成
      */
-    private final long id = idCounter.incrementAndGet();
+    public static Long id = System.currentTimeMillis();
 
     /**
      * 系统Java编译器实例
      */
-    private JavaCompiler compiler;
+    private JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
     /**
      * 自定义编译文件管理器
@@ -51,31 +45,13 @@ public class CompileContext {
     /**
      * 诊断信息收集器
      */
-    private DiagnosticCollector<JavaFileObject> diagnosticCollector;
+    private DiagnosticCollector<JavaFileObject> diagnosticCollector = new DiagnosticCollector<>();
 
     /**
      * 待编译的Java文件对象列表
      */
-    private List<CharSequenceJavaFileObject> charSequenceJavaFileObjects;
+    private List<CharSequenceJavaFileObject> charSequenceJavaFileObjects = new ArrayList<>();
 
-    /**
-     * 是否已初始化
-     */
-    private volatile boolean initialized = false;
-
-    private static final AtomicLong idCounter = new AtomicLong(0);
-
-    public CompileContext() {
-        this.charSequenceJavaFileObjects = new ArrayList<>();
-        this.diagnosticCollector = new DiagnosticCollector<>();
-        this.compiler = ToolProvider.getSystemJavaCompiler();
-        if (this.compiler == null) {
-            throw new IllegalStateException(
-                    "无法获取系统Java编译器（ToolProvider.getSystemJavaCompiler() 返回 null）。" +
-                    "请确保在 JDK 环境下运行（非 JRE），或添加 tools.jar 到 classpath。");
-        }
-        log.info("CompileContext 创建完成，id={}", id);
-    }
 
     /**
      * 添加Java文件对象到编译上下文
@@ -84,41 +60,44 @@ public class CompileContext {
      * @param javaFileObject Java文件对象
      */
     public void addJavaObject(URI uri, CharSequenceJavaFileObject javaFileObject) {
-        checkInitialized();
-        customerCompileJavaFileManager.addJavaFileObject(uri, javaFileObject);
+
+        this.customerCompileJavaFileManager.addJavaFileObject(uri, javaFileObject);
+
         charSequenceJavaFileObjects.add(javaFileObject);
+
     }
 
     /**
-     * 初始化编译上下文。
-     * 多次调用安全，但只会初始化一次。
+     * 初始化编译上下文
+     * <p>
+     * 初始化编译器实例、标准文件管理器、自定义类加载器和自定义文件管理器
      */
-    public synchronized void initial() {
-        if (initialized) {
-            log.debug("CompileContext 已初始化，跳过: id={}", id);
-            return;
-        }
+    public void initial() {
+
+        // 获取标准的Java文件管理器实例
         standardJavaFileManager = compiler.getStandardFileManager(diagnosticCollector, null, null);
+        // 初始化自定义类加载器
         classLoader = new CustomerCompileClassLoader(Thread.currentThread().getContextClassLoader());
+        // 初始化自定义Java文件管理器实例
         customerCompileJavaFileManager = new CustomerCompileJavaFileManager(standardJavaFileManager, classLoader);
-        initialized = true;
-        log.info("CompileContext 初始化完成: id={}", id);
     }
 
     /**
      * 执行编译任务
-     *
-     * @return true 编译成功，false 编译失败
+     * <p>
+     * 使用初始化的组件执行Java源代码编译，
+     * 编译参数设置为1.8版本以确保兼容性
      */
-    public boolean compile() {
-        checkInitialized();
+    public void compile() {
 
+        // 设置编译参数 - 指定编译版本为JDK1.8以提高兼容性
         List<String> options = new ArrayList<>();
         options.add("-source");
         options.add("1.8");
         options.add("-target");
         options.add("1.8");
 
+        // 初始化一个编译任务实例
         JavaCompiler.CompilationTask compilationTask = compiler.getTask(
                 null,
                 customerCompileJavaFileManager,
@@ -127,19 +106,11 @@ public class CompileContext {
                 null,
                 charSequenceJavaFileObjects
         );
+        // 执行编译任务
+        Boolean result = compilationTask.call();
 
-        boolean result = Boolean.TRUE.equals(compilationTask.call());
+        System.out.println("编译状况：" + result);
 
-        if (!result) {
-            log.error("编译失败，诊断信息:");
-            for (Diagnostic<? extends JavaFileObject> diagnostic : diagnosticCollector.getDiagnostics()) {
-                log.error("  行 {}: {}", diagnostic.getLineNumber(), diagnostic.getMessage(null));
-            }
-        } else {
-            log.info("编译成功: id={}, 文件数={}", id, charSequenceJavaFileObjects.size());
-        }
-
-        return result;
     }
 
     /**
@@ -149,32 +120,11 @@ public class CompileContext {
      * @return Class对象，如果加载失败返回null
      */
     public Class<?> load(String className) {
-        checkInitialized();
         try {
-            return classLoader.loadClass(className);
+            return this.classLoader.loadClass(className);
         } catch (ClassNotFoundException e) {
-            log.error("加载类失败: {}", className, e);
-            return null;
+            e.printStackTrace();
         }
-    }
-
-    /**
-     * 获取诊断信息
-     */
-    public List<Diagnostic<? extends JavaFileObject>> getDiagnostics() {
-        return diagnosticCollector.getDiagnostics();
-    }
-
-    /**
-     * 获取上下文ID
-     */
-    public long getId() {
-        return id;
-    }
-
-    private void checkInitialized() {
-        if (!initialized) {
-            throw new IllegalStateException("CompileContext 未初始化，请先调用 initial() 方法");
-        }
+        return null;
     }
 }

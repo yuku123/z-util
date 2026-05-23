@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JSON 路径提取器。
+ * 使用 json-simple 进行 JSON 路径提取的 JSON 解析器。
  * <p>
  * 支持点号路径语法（如 "data.name" 或 "items[0].title"），
- * 可提取单个值或所有匹配项。
+ * 可提取单个值或所有匹配项，用于结构化数据的快速提取。
  *
  * @author zifang
+ * @version 1.0.0
  */
 public class JsonExtractor {
 
@@ -23,9 +24,9 @@ public class JsonExtractor {
 
     /**
      * 使用点号路径从 JSON 中提取单个值。
-     *
+     * 路径示例："data.name" 或 "items[0].title"
      * @param jsonString JSON 字符串
-     * @param jsonPath   点号路径
+     * @param jsonPath 点号路径
      * @return 提取的值，未找到或解析失败返回 null
      */
     public static String extract(String jsonString, String jsonPath) {
@@ -39,9 +40,8 @@ public class JsonExtractor {
 
     /**
      * 从 JSON 中提取指定路径处的所有值。
-     *
      * @param jsonString JSON 字符串
-     * @param jsonPath   点号路径
+     * @param jsonPath 点号路径
      * @return 提取的值列表
      */
     public static List<String> extractAll(String jsonString, String jsonPath) {
@@ -64,13 +64,6 @@ public class JsonExtractor {
         JSONParser parser = new JSONParser();
         Object root = parser.parse(jsonString);
 
-        if (jsonPath == null) {
-            throw new NullPointerException("jsonPath is null");
-        }
-        if (jsonPath.trim().isEmpty()) {
-            return root;
-        }
-
         String[] parts = jsonPath.split("\\.");
         Object current = root;
 
@@ -78,43 +71,25 @@ public class JsonExtractor {
             if (current == null) {
                 return null;
             }
-            if (part.isEmpty()) {
-                continue;
-            }
-
-            // 处理 part 中的数组索引，如 "items[0]" → 先取 "items" 再取 [0]
-            int bracketIdx = part.indexOf('[');
-            String key = (bracketIdx >= 0) ? part.substring(0, bracketIdx) : part;
-            String bracket = (bracketIdx >= 0) ? part.substring(bracketIdx) : null;
-
-            // 先按键访问（如果 key 非空）
-            if (!key.isEmpty()) {
-                if (current instanceof JSONObject) {
-                    JSONObject obj = (JSONObject) current;
-                    if (!obj.containsKey(key)) {
-                        return null;
-                    }
-                    current = obj.get(key);
+            if (current instanceof JSONObject) {
+                JSONObject obj = (JSONObject) current;
+                if (obj.containsKey(part)) {
+                    current = obj.get(part);
                 } else {
                     return null;
                 }
-            }
-
-            // 再处理数组索引
-            if (bracket != null) {
-                if (current instanceof JSONArray) {
-                    int index = parseArrayIndex(bracket);
-                    if (index >= 0 && index < ((JSONArray) current).size()) {
-                        current = ((JSONArray) current).get(index);
-                    } else {
-                        return null;
-                    }
+            } else if (current instanceof JSONArray) {
+                JSONArray array = (JSONArray) current;
+                int index = parseArrayIndex(part);
+                if (index >= 0 && index < array.size()) {
+                    current = array.get(index);
                 } else {
                     return null;
                 }
+            } else {
+                return null;
             }
         }
-
         return current;
     }
 
