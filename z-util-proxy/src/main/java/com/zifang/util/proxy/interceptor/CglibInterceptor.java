@@ -5,7 +5,6 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -45,12 +44,10 @@ public class CglibInterceptor implements MethodInterceptor, Serializable {
         Object result = null;
         try {
             result = proxy.invokeSuper(obj, args);
-        } catch (InvocationTargetException e) {
-            // 异常回调（只捕获业务代码导致的异常，而非反射导致的异常）
-            if (aspect.afterException(target, method, args, e.getTargetException())) {
-                throw e;
-            }
-            return null;
+        } catch (RuntimeException e) {
+            // cglib invokeSuper 直接抛原始异常（非 InvocationTargetException）
+            aspect.afterException(target, method, args, e);
+            throw e;
         }
 
         // 结束执行回调

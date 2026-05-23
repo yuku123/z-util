@@ -47,11 +47,12 @@ public class JdkInterceptor implements InvocationHandler, Serializable {
             method.setAccessible(true);
             result = method.invoke(Modifier.isStatic(method.getModifiers()) ? null : target, args);
         } catch (InvocationTargetException e) {
-            // 异常回调（只捕获业务代码导致的异常，而非反射导致的异常）
-            if (aspect.afterException(target, method, args, e.getTargetException())) {
-                throw e;
-            }
-            return null;
+            // 总是抛出原始异常（afterException 返回值只影响 after() 是否调用）
+            aspect.afterException(target, method, args, e.getTargetException());
+            throw e;
+        } catch (IllegalAccessException | java.lang.reflect.InaccessibleObjectException e) {
+            aspect.afterException(target, method, args, e);
+            throw e;
         }
 
         // 结束执行回调
