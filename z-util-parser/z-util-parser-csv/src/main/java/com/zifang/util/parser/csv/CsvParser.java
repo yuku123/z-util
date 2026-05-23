@@ -100,21 +100,21 @@ public class CsvParser {
     }
 
     /**
-     * Read a CSV line respecting RFC 4180 quoting rules.
-     * A logical CSV record may span multiple physical lines if
-     * a quoted field contains embedded newlines.
-     * Delegates "" escape handling to parseLine().
+     * Read a CSV line — handles CRLF and quoted fields with embedded newlines.
+     * Quote pairs ("") inside quoted fields are NOT consumed here;
+     * they are passed through to parseLine which handles them per RFC 4180.
      */
     private String readCsvLine(BufferedReader br) throws IOException {
         StringBuilder line = new StringBuilder();
-        boolean inQuotes = false;
+        int quoteCount = 0;
         int ch;
         while ((ch = br.read()) != -1) {
             char c = (char) ch;
             if (c == '"') {
-                inQuotes = !inQuotes;
-            } else if ((c == '\n' || c == '\r') && !inQuotes) {
-                // End of CSV record — handle \r\n
+                quoteCount++;
+                line.append(c);
+            } else if ((c == '\n' || c == '\r') && quoteCount % 2 == 0) {
+                // Even quote count → not inside a quoted field → end of record
                 if (c == '\r') {
                     br.mark(1);
                     int peek = br.read();
@@ -127,7 +127,6 @@ public class CsvParser {
                 line.append(c);
             }
         }
-        // EOF — return accumulated line if non-empty
         return line.length() > 0 ? line.toString() : null;
     }
 

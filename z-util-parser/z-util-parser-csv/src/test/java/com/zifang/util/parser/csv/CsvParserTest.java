@@ -386,10 +386,11 @@ public class CsvParserTest {
         String csvWithQuotedNewline = "\"line1\nline2\",normal";
         List<String[]> result = parser.parse(csvWithQuotedNewline);
 
+        // Quoted embedded newline is part of the field — single record
         assertEquals(1, result.size());
-        // Current implementation treats \n as end of line, so this is 2 lines
-        // This test documents current behavior
-        assertEquals(2, result.size());
+        assertEquals(2, result.get(0).length);
+        assertEquals("line1\nline2", result.get(0)[0]);
+        assertEquals("normal", result.get(0)[1]);
     }
 
     /**
