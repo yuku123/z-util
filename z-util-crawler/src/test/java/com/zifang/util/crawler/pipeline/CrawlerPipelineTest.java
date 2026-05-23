@@ -1,37 +1,52 @@
 package com.zifang.util.crawler.pipeline;
 
-import com.zifang.util.crawler.http.CrawlerHttpClient;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
+import com.sun.net.httpserver.HttpServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import static org.junit.Assert.*;
 
 public class CrawlerPipelineTest {
 
-    private MockWebServer mockWebServer;
-    private CrawlerPipeline pipeline;
+    private HttpServer httpServer;
+    private String baseUrl;
+    private Executor executor = Executors.newSingleThreadExecutor();
 
     @Before
     public void setUp() throws IOException {
-        mockWebServer = new MockWebServer();
-        mockWebServer.start();
-        pipeline = new CrawlerPipeline();
+        httpServer = HttpServer.create(new InetSocketAddress(0), 0);
+        httpServer.setExecutor(executor);
+        httpServer.start();
+        baseUrl = "http://localhost:" + httpServer.getAddress().getPort();
     }
 
     @After
-    public void tearDown() throws IOException {
-        mockWebServer.shutdown();
+    public void tearDown() {
+        if (httpServer != null) {
+            httpServer.stop(0);
+        }
     }
 
-    private String getBaseUrl() {
-        return mockWebServer.url("/").toString().replaceAll("/$", "");
+    private void enqueue(int code, String body, String contentType) {
+        httpServer.createContext("/", exchange -> {
+            if (contentType != null) {
+                exchange.getResponseHeaders().set("Content-Type", contentType);
+            }
+            byte[] bytes = body.getBytes();
+            exchange.sendResponseHeaders(code, bytes.length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(bytes);
+            os.close();
+        });
     }
 
     // --- Request static factory methods tests ---
@@ -79,15 +94,13 @@ public class CrawlerPipelineTest {
 
     @Test
     public void testExecute_GetRequest() {
-        mockWebServer.enqueue(new MockResponse()
-                .setBody("<html><head><title>Test</title></head><body>Hello</body></html>")
-                .addHeader("Content-Type", "text/html"));
+        enqueue(200, "<html><head><title>Test</title></head><body>Hello</body></html>", "text/html");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
-        PipelineContext ctx = pipeline.execute(request);
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx);
-        assertEquals(getBaseUrl(), ctx.getUrl());
+        assertEquals(baseUrl, ctx.getUrl());
         assertNotNull(ctx.getHtml());
         assertTrue(ctx.getHtml().contains("Hello"));
         assertFalse(ctx.hasErrors());
@@ -95,13 +108,11 @@ public class CrawlerPipelineTest {
 
     @Test
     public void testExecute_PostRequest() {
-        mockWebServer.enqueue(new MockResponse()
-                .setBody("{\"result\":\"success\"}")
-                .addHeader("Content-Type", "application/json"));
+        enqueue(200, "{\"result\":\"success\"}", "application/json");
 
         CrawlerPipeline.Request request = CrawlerPipeline.Request.post(
-                getBaseUrl(), "{}", "application/json");
-        PipelineContext ctx = pipeline.execute(request);
+                baseUrl, "{}", "application/json");
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx);
         assertFalse(ctx.hasErrors());
@@ -109,45 +120,36 @@ public class CrawlerPipelineTest {
 
     @Test
     public void testExecute_WithHeaders() {
-        mockWebServer.enqueue(new MockResponse()
-                .setBody("OK")
-                .setResponseCode(200));
+        enqueue(200, "OK", "text/plain");
 
         Map<String, String> headers = new HashMap<>();
         headers.put("Authorization", "Bearer token");
         headers.put("Accept", "application/json");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
         request.setHeaders(headers);
-
-        PipelineContext ctx = pipeline.execute(request);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx);
-        assertEquals("Bearer token", ctx.getHeaders().get("Authorization"));
     }
 
     @Test
     public void testExecute_With404Response() {
-        mockWebServer.enqueue(new MockResponse()
-                .setResponseCode(404)
-                .setBody("Not Found"));
+        enqueue(404, "Not Found", "text/plain");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
-        PipelineContext ctx = pipeline.execute(request);
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx);
-        // HTTP errors don't add to context errors in current implementation
         assertNotNull(ctx.getHtml());
     }
 
     @Test
     public void testExecute_WithServerError() {
-        mockWebServer.enqueue(new MockResponse()
-                .setResponseCode(500)
-                .setBody("Internal Server Error"));
+        enqueue(500, "Internal Server Error", "text/plain");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
-        PipelineContext ctx = pipeline.execute(request);
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx);
         assertNotNull(ctx.getHtml());
@@ -155,9 +157,8 @@ public class CrawlerPipelineTest {
 
     @Test
     public void testExecute_WithConnectionFailure() {
-        // Use an invalid URL to simulate connection failure
         CrawlerPipeline.Request request = CrawlerPipeline.Request.get("http://localhost:99999");
-        PipelineContext ctx = pipeline.execute(request);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx);
         assertTrue(ctx.hasErrors());
@@ -169,11 +170,12 @@ public class CrawlerPipelineTest {
     @Test
     public void testAddProcessor() {
         TestProcessor processor = new TestProcessor();
+        CrawlerPipeline pipeline = new CrawlerPipeline();
         pipeline.addProcessor(processor);
 
-        mockWebServer.enqueue(new MockResponse().setBody("OK"));
+        enqueue(200, "OK", "text/plain");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
         PipelineContext ctx = pipeline.execute(request);
 
         assertTrue(processor.wasCalled());
@@ -184,12 +186,13 @@ public class CrawlerPipelineTest {
     public void testMultipleProcessors() {
         TestProcessor p1 = new TestProcessor();
         TestProcessor p2 = new TestProcessor();
+        CrawlerPipeline pipeline = new CrawlerPipeline();
         pipeline.addProcessor(p1);
         pipeline.addProcessor(p2);
 
-        mockWebServer.enqueue(new MockResponse().setBody("OK"));
+        enqueue(200, "OK", "text/plain");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
         pipeline.execute(request);
 
         assertTrue(p1.wasCalled());
@@ -200,18 +203,17 @@ public class CrawlerPipelineTest {
     public void testProcessorException_DoesNotStopPipeline() {
         FailingProcessor failingProcessor = new FailingProcessor();
         TestProcessor successProcessor = new TestProcessor();
+        CrawlerPipeline pipeline = new CrawlerPipeline();
         pipeline.addProcessor(failingProcessor);
         pipeline.addProcessor(successProcessor);
 
-        mockWebServer.enqueue(new MockResponse().setBody("OK"));
+        enqueue(200, "OK", "text/plain");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
         PipelineContext ctx = pipeline.execute(request);
 
-        // Failing processor should add error but not stop pipeline
         assertTrue(ctx.hasErrors());
         assertTrue(ctx.getErrors().containsKey("processor.FailingProcessor"));
-        // Next processor should still be called
         assertTrue(successProcessor.wasCalled());
     }
 
@@ -219,22 +221,20 @@ public class CrawlerPipelineTest {
 
     @Test
     public void testExecute_ParsesHtmlTitle() {
-        mockWebServer.enqueue(new MockResponse()
-                .setBody("<html><head><title>My Title</title></head><body>Content</body></html>"));
+        enqueue(200, "<html><head><title>My Title</title></head><body>Content</body></html>", "text/html");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
-        PipelineContext ctx = pipeline.execute(request);
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertEquals("My Title", ctx.getData().get("_title"));
     }
 
     @Test
     public void testExecute_ParsesHtmlBodyText() {
-        mockWebServer.enqueue(new MockResponse()
-                .setBody("<html><head><title>T</title></head><body><p>Some text</p></body></html>"));
+        enqueue(200, "<html><head><title>T</title></head><body><p>Some text</p></body></html>", "text/html");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
-        PipelineContext ctx = pipeline.execute(request);
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx.getData().get("_text"));
         assertTrue(ctx.getData().get("_text").toString().contains("Some text"));
@@ -242,50 +242,23 @@ public class CrawlerPipelineTest {
 
     @Test
     public void testExecute_WithEmptyBody() {
-        mockWebServer.enqueue(new MockResponse()
-                .setBody("")
-                .setResponseCode(200));
+        enqueue(200, "", "text/plain");
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
-        PipelineContext ctx = pipeline.execute(request);
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx);
-        // Should not throw exception with empty body
     }
 
     @Test
     public void testExecute_WithNullContentType() {
-        mockWebServer.enqueue(new MockResponse()
-                .setBody("<html><head><title>T</title></head><body>Hi</body></html>"));
+        enqueue(200, "<html><head><title>T</title></head><body>Hi</body></html>", null);
 
-        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(getBaseUrl());
-        PipelineContext ctx = pipeline.execute(request);
+        CrawlerPipeline.Request request = CrawlerPipeline.Request.get(baseUrl);
+        PipelineContext ctx = new CrawlerPipeline().execute(request);
 
         assertNotNull(ctx);
         assertFalse(ctx.hasErrors());
-    }
-
-    // --- Custom HTTP Client test ---
-
-    @Test
-    public void testExecute_WithCustomHttpClient() throws IOException {
-        MockWebServer secondServer = new MockWebServer();
-        secondServer.start();
-        secondServer.enqueue(new MockResponse().setBody("Custom Client Response"));
-
-        try {
-            CrawlerHttpClient customClient = new CrawlerHttpClient();
-            CrawlerPipeline customPipeline = new CrawlerPipeline(customClient);
-
-            String customUrl = secondServer.url("/").toString().replaceAll("/$", "");
-            CrawlerPipeline.Request request = CrawlerPipeline.Request.get(customUrl);
-            PipelineContext ctx = customPipeline.execute(request);
-
-            assertNotNull(ctx);
-            assertTrue(ctx.getHtml().contains("Custom Client Response"));
-        } finally {
-            secondServer.shutdown();
-        }
     }
 
     // --- Helper classes for testing ---

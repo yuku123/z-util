@@ -1,6 +1,5 @@
 package com.zifang.util.proxy.interceptor;
 
-
 import com.zifang.util.proxy.aspects.Aspect;
 
 import java.io.Serializable;
@@ -37,19 +36,22 @@ public class JdkInterceptor implements InvocationHandler, Serializable {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         final Object target = this.target;
         final Aspect aspect = this.aspect;
-        Object result = null;
 
-        // 开始前回调
-        if (aspect.before(target, method, args)) {
+        // 开始前回调，返回 false 则跳过目标方法，也不调用 after
+        if (!aspect.before(target, method, args)) {
+            return null;
+        }
+
+        Object result = null;
+        try {
             method.setAccessible(true);
-            try {
-                result = method.invoke(Modifier.isStatic(method.getModifiers()) ? null : target, args);
-            } catch (InvocationTargetException e) {
-                // 异常回调（只捕获业务代码导致的异常，而非反射导致的异常）
-                if (aspect.afterException(target, method, args, e.getTargetException())) {
-                    throw e;
-                }
+            result = method.invoke(Modifier.isStatic(method.getModifiers()) ? null : target, args);
+        } catch (InvocationTargetException e) {
+            // 异常回调（只捕获业务代码导致的异常，而非反射导致的异常）
+            if (aspect.afterException(target, method, args, e.getTargetException())) {
+                throw e;
             }
+            return null;
         }
 
         // 结束执行回调
@@ -58,5 +60,4 @@ public class JdkInterceptor implements InvocationHandler, Serializable {
         }
         return null;
     }
-
 }

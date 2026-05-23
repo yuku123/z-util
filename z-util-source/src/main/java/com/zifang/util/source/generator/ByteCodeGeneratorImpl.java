@@ -15,12 +15,11 @@ public class ByteCodeGeneratorImpl implements ByteCodeGenerator {
     public ByteCodeGeneratorImpl() {
     }
 
-    @Override
     public byte[] generate(ClassInfo classInfo) {
         if (classInfo == null) {
             throw new IllegalArgumentException("classInfo 不能为 null");
         }
-        log.debug("生成字节码: className={}", classInfo.getFullName());
+        log.debug("生成字节码: className={}", classInfo.getName());
         // TODO: 基于 ASM 实现完整的字节码生成
         throw new UnsupportedOperationException("字节码生成尚未实现，请使用 JavaSourceGenerator");
     }

@@ -1,34 +1,122 @@
 package com.zifang.util.db.transation;
 
+import com.zifang.util.db.define.Isolation;
+import com.zifang.util.db.define.Propagation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * 事务管理器
- * <p>
- * 提供事务控制能力的核心接口，用于管理数据库事务的边界。
- * 该接口定义了事务管理的基本操作，包括事务的开启、提交、回滚等。
  *
- * <p>主要功能：
- * <ul>
- *   <li>编程式事务管理：通过API显式控制事务边界</li>
- *   <li>声明式事务管理：通过注解（如&#64;Transactional）自动管理</li>
- *   <li>事务传播行为控制：定义事务方法被调用时如何响应已存在的事务</li>
- *   <li>事务隔离级别设置：控制并发事务之间的相互影响程度</li>
- *   <li>事务超时控制：防止长时间运行的事务占用资源</li>
- * </ul>
- *
- * <p>使用示例：
- * <pre>
- * // 编程式事务
- * transactionManager.begin();
- * try {
- *     // 业务操作
- *     transactionManager.commit();
- * } catch (Exception e) {
- *     transactionManager.rollback();
- * }
- * </pre>
- *
- * @author zifang
- * @see org.springframework.transaction.TransactionManager
+ * @see com.zifang.util.db.transation.TransactionInterceptor
+ * @see com.zifang.util.db.transation.TransactionTemplate
  */
 public class TranslationManager {
+
+    private static final Logger log = LoggerFactory.getLogger(TranslationManager.class);
+
+    private final ThreadLocal<Integer> depthHolder = ThreadLocal.withInitial(() -> 0);
+
+    /**
+     * 开启事务
+     *
+     * @param propagation 传播行为
+     * @param isolation   隔离级别
+     * @param readOnly    是否只读
+     */
+    public void begin(Propagation propagation, Isolation isolation, boolean readOnly) {
+        int depth = getDepth();
+        if (depth > 0) {
+            switch (propagation) {
+                case MANDATORY:
+                    throw new TransactionException("当前存在活动事务，但传播行为为 MANDATORY");
+                case NEVER:
+                    throw new TransactionException("当前存在活动事务，但传播行为为 NEVER");
+                case NOT_SUPPORTED:
+                    // 挂起当前事务，以非事务执行
+                    depthHolder.set(0);
+                    log.debug("事务传播行为 NOT_SUPPORTED，挂起当前事务");
+                    break;
+                case SUPPORTS:
+                    // 加入已存在事务，不做任何操作
+                    log.debug("事务传播行为 SUPPORTS，加入已存在事务，depth={}", depth);
+                    break;
+                case REQUIRES_NEW:
+                    // 挂起当前事务，开启新事务
+                    log.debug("事务传播行为 REQUIRES_NEW，挂起当前事务");
+                    break;
+                case NESTED:
+                    // 创建嵌套事务（保存点）
+                    log.debug("事务传播行为 NESTED，创建嵌套事务");
+                    break;
+                case REQUIRED:
+                default:
+                    // 加入已存在事务
+                    log.debug("事务传播行为 REQUIRED，加入已存在事务，depth={}", depth);
+                    break;
+            }
+        }
+        depthHolder.set(depth + 1);
+        log.debug("事务开启，depth={}, propagation={}, isolation={}, readOnly={}",
+                depth + 1, propagation, isolation, readOnly);
+    }
+
+    /**
+     * 检查是否存在活动事务
+     */
+    public boolean isActive() {
+        return getDepth() > 0;
+    }
+
+    /**
+     * 获取当前事务嵌套深度
+     *
+     * @return 深度，0 表示无活动事务
+     */
+    public int getDepth() {
+        Integer depth = depthHolder.get();
+        return depth == null ? 0 : depth;
+    }
+
+    /**
+     * 提交当前事务
+     *
+     * @throws TransactionException 如果没有活动事务
+     */
+    public void commit() {
+        int depth = getDepth();
+        if (depth == 0) {
+            throw new TransactionException("没有活动事务，无法提交");
+        }
+        depthHolder.set(depth - 1);
+        log.debug("事务提交，剩余 depth={}", depth - 1);
+    }
+
+    /**
+     * 回滚当前事务
+     *
+     * @throws TransactionException 如果没有活动事务
+     */
+    public void rollback() {
+        int depth = getDepth();
+        if (depth == 0) {
+            throw new TransactionException("没有活动事务，无法回滚");
+        }
+        depthHolder.set(0);
+        log.debug("事务回滚完成");
+    }
+
+    /**
+     * 事务异常
+     */
+    public static class TransactionException extends RuntimeException {
+
+        public TransactionException(String message) {
+            super(message);
+        }
+
+        public TransactionException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
 }

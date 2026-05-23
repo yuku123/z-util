@@ -34,7 +34,7 @@ public class CrawlerHttpClient {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(new RetryInterceptor(3))
+                .connectionPool(new ConnectionPool(0, Long.MAX_VALUE, TimeUnit.NANOSECONDS))
                 .build();
     }
 
@@ -56,12 +56,16 @@ public class CrawlerHttpClient {
      * @throws IOException 如果请求失败
      */
     public HttpResponse get(String url, Map<String, String> headers) throws IOException {
-        Request.Builder builder = new Request.Builder().url(url).get();
-        if (headers != null) {
-            headers.forEach(builder::addHeader);
+        try {
+            Request.Builder builder = new Request.Builder().url(url).get();
+            if (headers != null) {
+                headers.forEach(builder::addHeader);
+            }
+            Request request = builder.build();
+            return execute(request);
+        } catch (Exception e) {
+            throw e instanceof IOException ? (IOException) e : new IOException(e.getMessage(), e);
         }
-        Request request = builder.build();
-        return execute(request);
     }
 
     /**
@@ -73,14 +77,18 @@ public class CrawlerHttpClient {
      * @throws IOException 如果请求失败
      */
     public HttpResponse post(String url, String body, Map<String, String> headers) throws IOException {
-        Request.Builder builder = new Request.Builder().url(url);
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        builder.post(RequestBody.create(body, JSON));
-        if (headers != null) {
-            headers.forEach(builder::addHeader);
+        try {
+            Request.Builder builder = new Request.Builder().url(url);
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            builder.post(RequestBody.create(body, JSON));
+            if (headers != null) {
+                headers.forEach(builder::addHeader);
+            }
+            Request request = builder.build();
+            return execute(request);
+        } catch (Exception e) {
+            throw e instanceof IOException ? (IOException) e : new IOException(e.getMessage(), e);
         }
-        Request request = builder.build();
-        return execute(request);
     }
 
     /**
@@ -90,27 +98,50 @@ public class CrawlerHttpClient {
      * @throws IOException 如果下载失败
      */
     public void download(String url, String savePath) throws IOException {
-        Request request = new Request.Builder().url(url).get().build();
-        Response response = client.newCall(request).execute();
-        if (!response.isSuccessful()) {
-            throw new IOException("Download failed: " + response.code());
+        try {
+            Request request = new Request.Builder().url(url).get().build();
+            Response response = client.newCall(request).execute();
+            if (!response.isSuccessful()) {
+                throw new IOException("Download failed: " + response.code());
+            }
+            BufferedSink sink = Okio.buffer(Okio.sink(new File(savePath)));
+            sink.writeAll(response.body().source());
+            sink.close();
+        } catch (Exception e) {
+            throw e instanceof IOException ? (IOException) e : new IOException(e.getMessage(), e);
         }
-        BufferedSink sink = Okio.buffer(Okio.sink(new File(savePath)));
-        sink.writeAll(response.body().source());
-        sink.close();
     }
 
     private HttpResponse execute(Request request) throws IOException {
-        Response response = client.newCall(request).execute();
-        int code = response.code();
-        String body = response.body() != null ? response.body().string() : "";
-        Map<String, String> responseHeaders = new HashMap<>();
-        Headers headers = response.headers();
-        for (String name : headers.names()) {
-            responseHeaders.put(name, headers.get(name));
+        Response response = null;
+        IOException lastException = null;
+        for (int attempt = 0; attempt <= 3; attempt++) {
+            try {
+                response = client.newCall(request).execute();
+                break;
+            } catch (Exception e) {
+                lastException = e instanceof IOException ? (IOException) e : new IOException(e.getMessage(), e);
+                if (response != null) {
+                    response.close();
+                    response = null;
+                }
+            }
         }
-        response.close();
-        return new HttpResponse(code, body, responseHeaders);
+        if (response == null) {
+            throw lastException != null ? lastException : new IOException("Request failed");
+        }
+        try {
+            String body = response.body() != null ? response.body().string() : "";
+            int code = response.code();
+            Map<String, String> responseHeaders = new HashMap<>();
+            Headers h = response.headers();
+            for (String name : h.names()) {
+                responseHeaders.put(name, h.get(name));
+            }
+            return new HttpResponse(code, body, responseHeaders);
+        } finally {
+            response.close();
+        }
     }
 
     /**
@@ -121,78 +152,40 @@ public class CrawlerHttpClient {
         private final String body;
         private final Map<String, String> headers;
 
-    /**
-     * 构造 HTTP 响应。
-     * @param code 状态码
-     * @param body 响应体
-     * @param headers 响应头
-     */
-    public HttpResponse(int code, String body, Map<String, String> headers) {
+        /**
+         * 构造 HTTP 响应。
+         * @param code 状态码
+         * @param body 响应体
+         * @param headers 响应头
+         */
+        public HttpResponse(int code, String body, Map<String, String> headers) {
             this.code = code;
             this.body = body;
             this.headers = headers;
         }
 
-    /**
-     * 获取状态码。
-     * @return HTTP 状态码
-     */
-    public int getCode() {
+        /**
+         * 获取状态码。
+         * @return HTTP 状态码
+         */
+        public int getCode() {
             return code;
         }
 
-    /**
-     * 获取响应体。
-     * @return 响应体字符串
-     */
-    public String getBody() {
+        /**
+         * 获取响应体。
+         * @return 响应体字符串
+         */
+        public String getBody() {
             return body;
         }
 
-    /**
-     * 获取响应头。
-     * @return 响应头映射
-     */
-    public Map<String, String> getHeaders() {
-            return headers;
-        }
-    }
-
-    /**
-     * Retry interceptor for failed requests
-     */
-    private static class RetryInterceptor implements Interceptor {
-        private final int maxRetries;
-
-        public RetryInterceptor(int maxRetries) {
-            this.maxRetries = maxRetries;
-        }
-
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            Response response = null;
-            IOException exception = null;
-            for (int i = 0; i <= maxRetries; i++) {
-                try {
-                    response = chain.proceed(request);
-                    if (response.isSuccessful()) {
-                        return response;
-                    }
-                    if (response.body() != null) {
-                        response.close();
-                    }
-                } catch (IOException e) {
-                    exception = e;
-                    if (response != null) {
-                        response.close();
-                    }
-                }
-            }
-            if (exception != null) {
-                throw exception;
-            }
-            return response;
+        /**
+         * 获取响应头。
+         * @return 响应头映射
+         */
+        public Map<String, String> getHeaders() {
+            return headers != null ? headers : new HashMap<>();
         }
     }
 

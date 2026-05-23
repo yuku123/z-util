@@ -15,7 +15,6 @@ public class ByteCodeParserImpl implements ByteCodeParser {
     public ByteCodeParserImpl() {
     }
 
-    @Override
     public ClassInfo parse(byte[] bytecode) {
         if (bytecode == null || bytecode.length == 0) {
             throw new IllegalArgumentException("bytecode 不能为空");
@@ -24,7 +23,6 @@ public class ByteCodeParserImpl implements ByteCodeParser {
         throw new UnsupportedOperationException("字节码解析尚未实现，请使用 SourceCodeParser");
     }
 
-    @Override
     public ClassInfo parse(Class<?> clazz) {
         if (clazz == null) {
             throw new IllegalArgumentException("clazz 不能为 null");
