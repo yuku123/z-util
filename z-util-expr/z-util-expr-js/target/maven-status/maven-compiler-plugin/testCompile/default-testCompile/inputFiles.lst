@@ -1,0 +1,14 @@
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/source/lexer/SimpleLexerTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/instruction/OperatorStackTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/source/SimpleParserTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/source/SimpleCalculatorTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/instruction/InstructionTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/dynamic/DynamicG4Test.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/lexer/LexerTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/dynamic/AllRulesValidationTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/source/lexer/TokenTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/source/lexer/SimpleTokenReaderTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/instruction/OperatorTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/CommandTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/source/ast/SimpleASTNodeTest.java
+/Users/zifang/workplace/idea_workplace/z-util/z-util-expr/z-util-expr-js/src/test/java/com/zifang/util/expression/source/SimpleScriptTest.java

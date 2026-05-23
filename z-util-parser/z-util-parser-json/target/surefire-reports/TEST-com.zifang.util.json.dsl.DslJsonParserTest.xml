@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.zifang.util.json.dsl.DslJsonParserTest" time="0.005" tests="39" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="socksProxyHost" value="127.0.0.1"/>
+    <property name="http.proxyHost" value="127.0.0.1"/>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json/target/test-classes:/Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json/target/classes:/Users/zifang/workplace/idea_workplace/z-util/z-util-core/target/classes:/Users/zifang/.m2/repository/org/quartz-scheduler/quartz/2.3.2/quartz-2.3.2.jar:/Users/zifang/.m2/repository/com/mchange/c3p0/0.9.5.4/c3p0-0.9.5.4.jar:/Users/zifang/.m2/repository/com/mchange/mchange-commons-java/0.2.15/mchange-commons-java-0.2.15.jar:/Users/zifang/.m2/repository/com/zaxxer/HikariCP-java7/2.4.13/HikariCP-java7-2.4.13.jar:/Users/zifang/.m2/repository/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar:/Users/zifang/.m2/repository/org/apache/commons/commons-pool2/2.3/commons-pool2-2.3.jar:/Users/zifang/.m2/repository/org/apache/logging/log4j/log4j-1.2-api/2.23.1/log4j-1.2-api-2.23.1.jar:/Users/zifang/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar:/Users/zifang/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.23.1/log4j-slf4j-impl-2.23.1.jar:/Users/zifang/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.1/log4j-core-2.23.1.jar:/Users/zifang/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/Users/zifang/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.jar:/Users/zifang/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.jar:/Users/zifang/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.jar:/Users/zifang/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar:/Users/zifang/.m2/repository/com/google/inject/guice/4.2.3/guice-4.2.3.jar:/Users/zifang/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/Users/zifang/.m2/repository/com/google/guava/guava/23.0/guava-23.0.jar:/Users/zifang/.m2/repository/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar:/Users/zifang/.m2/repository/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18.jar:/Users/zifang/.m2/repository/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar:/Users/zifang/.m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar:/Users/zifang/.m2/repository/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar:/Users/zifang/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar:/Users/zifang/.m2/repository/com/sun/xml/bind/jaxb-impl/2.3.1/jaxb-impl-2.3.1.jar:/Users/zifang/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.4/jaxb-core-4.0.4.jar:/Users/zifang/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/Users/zifang/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/Users/zifang/.m2/repository/org/eclipse/angus/angus-activation/2.0.1/angus-activation-2.0.1.jar:/Users/zifang/workplace/idea_workplace/z-util/z-util-dsl/target/classes:/Users/zifang/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/zifang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="https.proxyPort" value="7897"/>
+    <property name="java.vm.vendor" value="Homebrew"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json/target/surefire/surefirebooter-20260523184902315_33.jar /Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json/target/surefire 2026-05-23T18-48-53_228-jvmRun1 surefire-20260523184902315_31tmp surefire_4-20260523184902315_32tmp"/>
+    <property name="http.nonProxyHosts" value="127.0.0.1|192.168.0.0/16|*.192.168.0.0/16|10.0.0.0/8|*.10.0.0.0/8|172.16.0.0/12|*.172.16.0.0/12|localhost|*.localhost|local|*.local|crashlytics.com|*.crashlytics.com|&lt;local&gt;|*.&lt;local&gt;"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json/target/test-classes:/Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json/target/classes:/Users/zifang/workplace/idea_workplace/z-util/z-util-core/target/classes:/Users/zifang/.m2/repository/org/quartz-scheduler/quartz/2.3.2/quartz-2.3.2.jar:/Users/zifang/.m2/repository/com/mchange/c3p0/0.9.5.4/c3p0-0.9.5.4.jar:/Users/zifang/.m2/repository/com/mchange/mchange-commons-java/0.2.15/mchange-commons-java-0.2.15.jar:/Users/zifang/.m2/repository/com/zaxxer/HikariCP-java7/2.4.13/HikariCP-java7-2.4.13.jar:/Users/zifang/.m2/repository/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar:/Users/zifang/.m2/repository/org/apache/commons/commons-pool2/2.3/commons-pool2-2.3.jar:/Users/zifang/.m2/repository/org/apache/logging/log4j/log4j-1.2-api/2.23.1/log4j-1.2-api-2.23.1.jar:/Users/zifang/.m2/repository/org/apache/logging/log4j/log4j-api/2.23.1/log4j-api-2.23.1.jar:/Users/zifang/.m2/repository/org/apache/logging/log4j/log4j-slf4j-impl/2.23.1/log4j-slf4j-impl-2.23.1.jar:/Users/zifang/.m2/repository/org/apache/logging/log4j/log4j-core/2.23.1/log4j-core-2.23.1.jar:/Users/zifang/.m2/repository/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar:/Users/zifang/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.10.0/jackson-databind-2.10.0.jar:/Users/zifang/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.10.0/jackson-annotations-2.10.0.jar:/Users/zifang/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.10.0/jackson-core-2.10.0.jar:/Users/zifang/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar:/Users/zifang/.m2/repository/com/google/inject/guice/4.2.3/guice-4.2.3.jar:/Users/zifang/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar:/Users/zifang/.m2/repository/com/google/guava/guava/23.0/guava-23.0.jar:/Users/zifang/.m2/repository/com/google/code/findbugs/jsr305/1.3.9/jsr305-1.3.9.jar:/Users/zifang/.m2/repository/com/google/errorprone/error_prone_annotations/2.0.18/error_prone_annotations-2.0.18.jar:/Users/zifang/.m2/repository/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar:/Users/zifang/.m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar:/Users/zifang/.m2/repository/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar:/Users/zifang/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar:/Users/zifang/.m2/repository/com/sun/xml/bind/jaxb-impl/2.3.1/jaxb-impl-2.3.1.jar:/Users/zifang/.m2/repository/com/sun/xml/bind/jaxb-core/4.0.4/jaxb-core-4.0.4.jar:/Users/zifang/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/Users/zifang/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/Users/zifang/.m2/repository/org/eclipse/angus/angus-activation/2.0.1/angus-activation-2.0.1.jar:/Users/zifang/workplace/idea_workplace/z-util/z-util-dsl/target/classes:/Users/zifang/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/zifang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/zifang"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-01-20"/>
+    <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="https.proxyHost" value="127.0.0.1"/>
+    <property name="basedir" value="/Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json/target/surefire/surefirebooter-20260523184902315_33.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="127.0.0.1|192.168.0.0/16|*.192.168.0.0/16|10.0.0.0/8|*.10.0.0.0/8|172.16.0.0/12|*.172.16.0.0/12|localhost|*.localhost|local|*.local|crashlytics.com|*.crashlytics.com|&lt;local&gt;|*.&lt;local&gt;"/>
+    <property name="java.runtime.version" value="25.0.2"/>
+    <property name="user.name" value="zifang"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="26.4.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Homebrew"/>
+    <property name="localRepository" value="/Users/zifang/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/m9/2z3syv390gz9ctbr9q8r5j880000gn/T/"/>
+    <property name="java.version" value="25.0.2"/>
+    <property name="user.dir" value="/Users/zifang/workplace/idea_workplace/z-util/z-util-parser/z-util-parser-json"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="socksProxyPort" value="7897"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/zifang/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Homebrew"/>
+    <property name="java.vm.version" value="25.0.2"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="127.0.0.1|192.168.0.0/16|*.192.168.0.0/16|10.0.0.0/8|*.10.0.0.0/8|172.16.0.0/12|*.172.16.0.0/12|localhost|*.localhost|local|*.local|crashlytics.com|*.crashlytics.com|&lt;local&gt;|*.&lt;local&gt;"/>
+    <property name="java.class.version" value="69.0"/>
+    <property name="http.proxyPort" value="7897"/>
+  </properties>
+  <testcase name="testParseComplexStructure" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.001"/>
+  <testcase name="testParseStringWithEscapes" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseFalse" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParsePositiveInt" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseStringWithTab" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseObjectMixedTypes" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseScientificNotation" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseStringWithBackslash" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseString" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseNegativeInt" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseUnicode" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseNull" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseTrue" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseZero" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseUnclosedArray" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseUnclosedObject" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseWithNewlines" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseUnclosedString" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseScientificNotationWithMinus" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.001"/>
+  <testcase name="testParseUnicodeEscaped" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseEmptyObject" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseNegativeDouble" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseScientificNotationWithPlus" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseInvalidNumber" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseNestedObject" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParsePositiveDouble" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseWithTabs" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseArrayMixedTypes" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseObjectMultipleKeys" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseStringWithCarriageReturn" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseNestedArray" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseWithSpaces" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseLargeNumber" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseUnicodeMixed" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseSimpleArray" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseInvalidJson" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseStringWithQuote" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseEmptyArray" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+  <testcase name="testParseSimpleObject" classname="com.zifang.util.json.dsl.DslJsonParserTest" time="0.0"/>
+</testsuite>

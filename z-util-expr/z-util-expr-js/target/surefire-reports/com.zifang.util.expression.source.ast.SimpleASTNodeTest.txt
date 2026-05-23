@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.zifang.util.expression.source.ast.SimpleASTNodeTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in com.zifang.util.expression.source.ast.SimpleASTNodeTest

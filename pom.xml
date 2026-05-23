@@ -28,7 +28,9 @@
         <module>z-util-core</module>
         <module>z-util-office</module>
         <module>z-util-media</module>
-        <module>z-util-expression</module>
+        <module>z-util-dsl</module>
+        <module>z-util-parser</module>
+        <module>z-util-expr</module>
         <module>z-util-crawler</module>
         <module>z-util-workflow</module>
         <module>z-util-visualization</module>
@@ -44,9 +46,6 @@
         <module>z-util-distribute</module>
         <module>z-util-proxy</module>
         <module>z-util-ch</module>
-        <module>z-util-json</module>
-        <module>z-util-xml</module>
-        <module>z-util-dsl</module>
         <module>z-util-cli</module>
         <module>z-util-sql</module>
         <module>z-util-all</module>

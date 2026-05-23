@@ -80,7 +80,8 @@
 
         <dependency>
             <groupId>com.zifang</groupId>
-            <artifactId>z-util-json</artifactId>
+            <artifactId>z-util-parser-json</artifactId>
+            <version>${util.version}</version>
         </dependency>
 
         <dependency>
