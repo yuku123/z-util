@@ -74,7 +74,13 @@ public class CsvParser {
         BufferedReader br = new BufferedReader(reader);
         try {
             String line;
-            while ((line = br.readLine()) != null) {
+            boolean firstLine = true;
+            while ((line = readCsvLine(br)) != null) {
+                // Strip BOM (U+FEFF) from first line
+                if (firstLine && !line.isEmpty() && line.charAt(0) == '\uFEFF') {
+                    line = line.substring(1);
+                }
+                firstLine = false;
                 if (skipEmptyLines && line.trim().isEmpty()) {
                     continue;
                 }
@@ -91,6 +97,38 @@ public class CsvParser {
             }
         }
         return result;
+    }
+
+    /**
+     * Read a CSV line respecting RFC 4180 quoting rules.
+     * A logical CSV record may span multiple physical lines if
+     * a quoted field contains embedded newlines.
+     * Delegates "" escape handling to parseLine().
+     */
+    private String readCsvLine(BufferedReader br) throws IOException {
+        StringBuilder line = new StringBuilder();
+        boolean inQuotes = false;
+        int ch;
+        while ((ch = br.read()) != -1) {
+            char c = (char) ch;
+            if (c == '"') {
+                inQuotes = !inQuotes;
+            } else if ((c == '\n' || c == '\r') && !inQuotes) {
+                // End of CSV record — handle \r\n
+                if (c == '\r') {
+                    br.mark(1);
+                    int peek = br.read();
+                    if (peek != '\n') {
+                        br.reset();
+                    }
+                }
+                return line.toString();
+            } else {
+                line.append(c);
+            }
+        }
+        // EOF — return accumulated line if non-empty
+        return line.length() > 0 ? line.toString() : null;
     }
 
     /**

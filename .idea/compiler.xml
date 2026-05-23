@@ -20,7 +20,6 @@
         <module name="z-util-parser-properties" />
         <module name="z-util-monitor" />
         <module name="z-util-workflow" />
-        <module name="z-util-sql" />
         <module name="z-util-expr-js" />
         <module name="z-util-parser-proto" />
         <module name="z-util-dsl" />
@@ -147,6 +146,7 @@
       <module name="z-util-ai" target="1.8" />
       <module name="z-util-expression" target="1.8" />
       <module name="z-util-json" target="1.8" />
+      <module name="z-util-sql" target="1.8" />
       <module name="z-util-xml" target="1.8" />
       <module name="z-util-yaml" target="1.8" />
       <module name="z-wf" target="1.8" />

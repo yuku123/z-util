@@ -16,6 +16,8 @@ public class SqlStatement {
         INSERT,
         UPDATE,
         DELETE,
+        CREATE,
+        DROP,
         UNKNOWN
     }
 

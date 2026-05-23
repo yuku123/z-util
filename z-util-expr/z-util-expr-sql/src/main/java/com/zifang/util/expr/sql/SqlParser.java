@@ -425,27 +425,19 @@ public class SqlParser {
                 continue;
             }
 
+            // 检查当前 segment 是否以 AND/OR 开头（这表示上一个逻辑操作符）
             String upper = segment.toUpperCase();
-            if (i > 0) {
-                // 第一个 segment 没有前置操作符
-                // 否则，前一个 segment 的尾部操作符标记当前 segment
-                String prevSegment = segments.get(i - 1).trim().toUpperCase();
-                if (prevSegment.endsWith("AND ") || prevSegment.endsWith("AND\t")) {
-                    pendingOp = SqlStatement.WhereCondition.LogicalOperator.AND;
-                } else if (prevSegment.endsWith("OR ") || prevSegment.endsWith("OR\t")) {
-                    pendingOp = SqlStatement.WhereCondition.LogicalOperator.OR;
-                } else {
-                    pendingOp = SqlStatement.WhereCondition.LogicalOperator.NONE;
-                }
-            }
-
-            // 去掉前置 AND/OR 再解析
-            if (upper.startsWith("AND ") || upper.startsWith("AND\t")) {
+            if (upper.startsWith("AND")) {
+                pendingOp = SqlStatement.WhereCondition.LogicalOperator.AND;
                 segment = segment.substring(3).trim();
-            } else if (upper.startsWith("OR ") || upper.startsWith("OR\t")) {
+            } else if (upper.startsWith("OR")) {
+                pendingOp = SqlStatement.WhereCondition.LogicalOperator.OR;
                 segment = segment.substring(2).trim();
+            } else {
+                pendingOp = SqlStatement.WhereCondition.LogicalOperator.NONE;
             }
 
+            // 解析单个条件
             SqlStatement.WhereCondition condition = parseSingleCondition(segment);
             if (condition != null) {
                 condition.setLogicalOperator(pendingOp);
@@ -456,11 +448,13 @@ public class SqlParser {
 
     /**
      * 按逻辑运算符分割 WHERE 子句
+     * 每个 segment 可能以 AND/OR 开头
      */
     private java.util.List<String> splitByLogicalOperators(String whereClause) {
         java.util.List<String> result = new java.util.ArrayList<>();
         StringBuilder current = new StringBuilder();
         int parenDepth = 0;
+        String pendingOp = "";
 
         for (int i = 0; i < whereClause.length(); i++) {
             char c = whereClause.charAt(i);
@@ -473,24 +467,31 @@ public class SqlParser {
                 parenDepth--;
                 current.append(c);
             } else if (parenDepth == 0) {
-                // 检查 AND
+                // 检查 AND（3字符）
                 if (upper == 'A' && i + 2 < whereClause.length()
                         && Character.toUpperCase(whereClause.charAt(i + 1)) == 'N'
                         && Character.toUpperCase(whereClause.charAt(i + 2)) == 'D'
                         && (i + 3 == whereClause.length() || !Character.isLetterOrDigit(whereClause.charAt(i + 3)))) {
                     result.add(current.toString());
                     current = new StringBuilder();
-                    i += 2;
+                    pendingOp = "AND";
+                    i += 2; // 跳到 AND 后的字符，循环末尾会再+1
                     continue;
                 }
-                // 检查 OR
+                // 检查 OR（2字符）
                 if (upper == 'O' && i + 1 < whereClause.length()
                         && Character.toUpperCase(whereClause.charAt(i + 1)) == 'R'
                         && (i + 2 == whereClause.length() || !Character.isLetterOrDigit(whereClause.charAt(i + 2)))) {
                     result.add(current.toString());
                     current = new StringBuilder();
-                    i += 1;
+                    pendingOp = "OR";
+                    i += 1; // 跳到 OR 后的字符，循环末尾会再+1
                     continue;
+                }
+                // 携带前置操作符
+                if (current.length() == 0 && !pendingOp.isEmpty()) {
+                    current.append(pendingOp).append(" ");
+                    pendingOp = "";
                 }
                 current.append(c);
             } else {

@@ -138,11 +138,6 @@
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
-                <artifactId>z-util-sql</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
                 <artifactId>z-util-all</artifactId>
                 <version>${util.version}</version>
             </dependency>
