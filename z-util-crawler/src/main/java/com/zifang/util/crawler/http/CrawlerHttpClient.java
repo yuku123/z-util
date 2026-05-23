@@ -154,7 +154,7 @@ public class CrawlerHttpClient {
      * @return 响应头映射
      */
     public Map<String, String> getHeaders() {
-            return headers;
+            return headers != null ? headers : java.util.Collections.emptyMap();
         }
     }
 
