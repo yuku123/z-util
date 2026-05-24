@@ -94,17 +94,30 @@ public class SetsTest {
     // --- empty stubs: intersection, difference, union ---
 
     @Test
-    public void testIntersection_Stub() {
-        Sets.intersection();
+    public void testIntersection_Basic() {
+        Set<String> s1 = Sets.newHashSet("a", "b", "c");
+        Set<String> s2 = Sets.newHashSet("b", "c", "d");
+        Set<String> result = Sets.intersection(s1, s2);
+        assertEquals(2, result.size());
+        assertTrue(result.contains("b"));
+        assertTrue(result.contains("c"));
     }
 
     @Test
-    public void testDifference_Stub() {
-        Sets.difference();
+    public void testDifference_Basic() {
+        Set<String> s1 = Sets.newHashSet("a", "b", "c");
+        Set<String> s2 = Sets.newHashSet("b", "c", "d");
+        Set<String> result = Sets.difference(s1, s2);
+        assertEquals(1, result.size());
+        assertTrue(result.contains("a"));
     }
 
     @Test
-    public void testUnion_Stub() {
-        Sets.union();
+    public void testUnion_Basic() {
+        Set<String> s1 = Sets.newHashSet("a", "b");
+        Set<String> s2 = Sets.newHashSet("b", "c");
+        Set<String> result = Sets.union(s1, s2);
+        assertEquals(3, result.size());
+        assertTrue(result.containsAll(Arrays.asList("a", "b", "c")));
     }
 }

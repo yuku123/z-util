@@ -16,8 +16,8 @@ public class DynamicMethod {
 
     private String body;
 
-    private List<DynamicParameter> parameters = new ArrayList<>();
-    public static DynamicMethod of(String methodName, List<DynamicParameter> parameters, String returnType, String body) {
+    private List<?> parameters = new ArrayList<>();
+    public static DynamicMethod of(String methodName, List<?> parameters, String returnType, String body) {
         DynamicMethod dynamicMethod = new DynamicMethod();
         dynamicMethod.setMethodName(methodName);
         dynamicMethod.setParameters(parameters);
@@ -58,11 +58,11 @@ public class DynamicMethod {
         this.body = body;
     }
 
-    public List<DynamicParameter> getParameters() {
+    public List<?> getParameters() {
         return parameters;
     }
 
-    public void setParameters(List<DynamicParameter> parameters) {
+    public void setParameters(List<?> parameters) {
         this.parameters = parameters;
     }
 }

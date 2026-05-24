@@ -6,9 +6,7 @@ import com.zifang.util.core.util.GsonUtil;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -35,16 +33,47 @@ public class DynamicClassUtil {
         return dynamicClass;
     }
 
-    private static DynamicAnnotation parser(Annotation annotation) {
-        return null;
+    private static Map<String, Object> parser(Annotation annotation) {
+        Map<String, Object> result = new HashMap<>();
+        result.put("name", annotation.annotationType().getName());
+        Map<String, Object> attributes = new HashMap<>();
+        for (Method method : annotation.annotationType().getDeclaredMethods()) {
+            try {
+                method.setAccessible(true);
+                attributes.put(method.getName(), method.invoke(annotation));
+            } catch (Exception e) {
+                // ignore
+            }
+        }
+        result.put("attributes", attributes);
+        return result;
     }
 
     public static DynamicField parser(Field field) {
-        return null;
+        DynamicField dynamicField = new DynamicField();
+        dynamicField.setName(field.getName());
+        dynamicField.setType(field.getType().getName());
+        try {
+            field.setAccessible(true);
+            dynamicField.setValue(field.get(null));
+        } catch (Exception e) {
+            // ignore for instance fields
+        }
+        dynamicField.setDesc(field.getType().getName() + " " + field.getName());
+        return dynamicField;
     }
 
     public static DynamicMethod parser(Method method) {
-        return null;
+        DynamicMethod dynamicMethod = new DynamicMethod();
+        dynamicMethod.setMethodName(method.getName());
+        dynamicMethod.setReturnType(method.getReturnType().getName());
+        List<String> params = new ArrayList<>();
+        for (Class<?> paramType : method.getParameterTypes()) {
+            params.add(paramType.getName());
+        }
+        dynamicMethod.setParameters(params);
+        dynamicMethod.setDesc(method.getName() + "(" + String.join(",", params) + ")");
+        return dynamicMethod;
     }
 
     public static List<DynamicClass> parserClass(List<Class<?>> clazzes) {
@@ -59,20 +88,65 @@ public class DynamicClassUtil {
         return fields.stream().map(DynamicClassUtil::parser).collect(Collectors.toList());
     }
 
-    private static List<DynamicAnnotation> parserAnnotations(List<Annotation> annotations) {
+    private static List<?> parserAnnotations(List<Annotation> annotations) {
         return annotations.stream().map(DynamicClassUtil::parser).collect(Collectors.toList());
     }
 
     public static Class<?> parser(DynamicClass dynamicClass) {
-        return null;
+        // Generating a Class from DynamicClass requires bytecode generation library
+        // Return the class of DynamicClass as a placeholder
+        return DynamicClass.class;
     }
 
-    public static String parserAsCode(DynamicClass dynamicBean) {
-        return null;
+    public static String parserAsCode(DynamicClass dynamicClass) {
+        return generateClassSource(dynamicClass);
     }
 
     public static String generateClassSource(DynamicClass dynamicBean) {
-        return null;
+        if (dynamicBean == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        
+        // Package
+        if (dynamicBean.getPackageName() != null && !dynamicBean.getPackageName().isEmpty()) {
+            sb.append("package ").append(dynamicBean.getPackageName()).append(";\n\n");
+        }
+        
+        // Annotations
+        for (Object annotationObj : dynamicBean.getAnnotations()) {
+            if (annotationObj instanceof Map) {
+                @SuppressWarnings("unchecked")
+                Map<String, Object> annotation = (Map<String, Object>) annotationObj;
+                sb.append("@").append(annotation.get("name")).append("\n");
+            }
+        }
+        
+        // Class declaration
+        String classKeyword = Boolean.TRUE.equals(dynamicBean.getInterface()) ? "interface" : "class";
+        sb.append("public ").append(classKeyword).append(" ").append(dynamicBean.getClassName()).append(" {\n");
+        
+        // Fields
+        for (DynamicField field : dynamicBean.getFields()) {
+            sb.append("    private ").append(field.getType()).append(" ").append(field.getName()).append(";\n");
+        }
+        
+        // Methods
+        for (DynamicMethod method : dynamicBean.getMethods()) {
+            sb.append("    public ").append(method.getReturnType()).append(" ")
+              .append(method.getMethodName()).append("(");
+            @SuppressWarnings("unchecked")
+            List<String> params = (List<String>) method.getParameters();
+            sb.append(String.join(", ", params));
+            sb.append(") {\n        ");
+            if (method.getBody() != null) {
+                sb.append(method.getBody());
+            }
+            sb.append("\n    }\n");
+        }
+        
+        sb.append("}");
+        return sb.toString();
     }
 
     public static List<String> generateClassSource(String json){

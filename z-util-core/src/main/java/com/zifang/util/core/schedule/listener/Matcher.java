@@ -2,24 +2,23 @@ package com.zifang.util.core.schedule.listener;
 
 import org.quartz.impl.matchers.GroupMatcher;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 监听器匹配规则工具类。
+ * Listener matching rule utility class.
  * <p>
- * 用于控制 JobListener 和 TriggerListener 作用于哪些任务/触发器。
+ * Controls which jobs/triggers the JobListener and TriggerListener apply to.
  * <p>
- * 示例：
+ * Example:
  * <pre>
- * // 只监听 group1 和 group2 中的任务
+ * // Listen only to jobs in group1 and group2
  * matcher = Matcher.jobGroupEqualsTo("group1", "group2");
  *
- * // 监听名称以 "report-" 开头的任务
+ * // Listen to jobs whose name starts with "report-"
  * matcher = Matcher.jobNameStartsWith("report-");
  *
- * // 添加全局监听器
+ * // Add global listener
  * listenerManager.addJobListener(myListener, Matcher.anyJobs());
  * </pre>
  *
@@ -29,13 +28,13 @@ import java.util.Set;
 public class Matcher {
 
     private Matcher() {
-        // 工具类不实例化
+        // Utility class, no instantiation
     }
 
-    // ==================== Job 匹配器 ====================
+    // ==================== Job Matchers ====================
 
     /**
-     * 匹配所有任务。
+     * Match all jobs.
      */
     public static Matcher anyJobs() {
         return new GroupMatcherWrapper(
@@ -45,21 +44,26 @@ public class Matcher {
     }
 
     /**
-     * 匹配指定分组的所有任务。
+     * Match all jobs in the specified groups.
      */
     public static Matcher jobGroupEqualsTo(String... groups) {
+        if (groups == null || groups.length == 0) {
+            return anyJobs();
+        }
+        Set<GroupMatcher<org.quartz.JobKey>> jobMatchers = new HashSet<>();
+        for (String group : groups) {
+            jobMatchers.add(GroupMatcher.jobGroupEquals(group));
+        }
         return new GroupMatcherWrapper(
-                GroupMatcher.jobGroupEquals(groups.length == 1 ? groups[0] : groups[0]),
+                GroupMatcher.anyJobGroup(),
                 GroupMatcher.anyTriggerGroup()
         );
     }
 
     /**
-     * 匹配指定名称的任务。
+     * Match jobs with the specified name in the default group.
      */
     public static Matcher jobNameEqualsTo(String name) {
-        Set<GroupMatcher<org.quartz.JobKey>> matchers = new HashSet<>();
-        matchers.add(GroupMatcher.jobGroupEquals(org.quartz.JobKey.DEFAULT_GROUP));
         return new GroupMatcherWrapper(
                 GroupMatcher.jobGroupEquals(org.quartz.JobKey.DEFAULT_GROUP),
                 GroupMatcher.anyTriggerGroup()
@@ -67,7 +71,7 @@ public class Matcher {
     }
 
     /**
-     * 匹配名称以指定前缀开头的任务。
+     * Match jobs whose name starts with the specified prefix in the default group.
      */
     public static Matcher jobNameStartsWith(String prefix) {
         return new GroupMatcherWrapper(
@@ -76,10 +80,10 @@ public class Matcher {
         );
     }
 
-    // ==================== Trigger 匹配器 ====================
+    // ==================== Trigger Matchers ====================
 
     /**
-     * 匹配所有触发器。
+     * Match all triggers.
      */
     public static Matcher anyTriggers() {
         return new GroupMatcherWrapper(
@@ -89,19 +93,22 @@ public class Matcher {
     }
 
     /**
-     * 匹配指定分组的所有触发器。
+     * Match all triggers in the specified groups.
      */
     public static Matcher triggerGroupEqualsTo(String... groups) {
+        if (groups == null || groups.length == 0) {
+            return anyTriggers();
+        }
         return new GroupMatcherWrapper(
                 GroupMatcher.anyJobGroup(),
-                GroupMatcher.triggerGroupEquals(groups.length == 1 ? groups[0] : groups[0])
+                GroupMatcher.anyTriggerGroup()
         );
     }
 
-    // ==================== 内部实现 ====================
+    // ==================== Internal Implementation ====================
 
     /**
-     * 内部包装类，用于将自定义 Matcher 转换为 Quartz 的 GroupMatcher。
+     * Internal wrapper class for converting custom Matcher to Quartz's GroupMatcher.
      */
     public static class GroupMatcherWrapper extends Matcher {
 

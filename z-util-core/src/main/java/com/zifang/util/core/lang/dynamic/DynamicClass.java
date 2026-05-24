@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class DynamicClass {
 
-    private List<DynamicImport> imports = new ArrayList<>();
+    private List<String> imports = new ArrayList<>();
 
     private String packageName;
 
-    private List<DynamicAnnotation> annotations = new ArrayList<>();
+    private List<?> annotations = new ArrayList<>();
 
     private Boolean isInterface;
 
@@ -97,19 +97,19 @@ public class DynamicClass {
         isInterface = anInterface;
     }
 
-    public List<DynamicImport> getImports() {
+    public List<String> getImports() {
         return imports;
     }
 
-    public void setImports(List<DynamicImport> imports) {
+    public void setImports(List<String> imports) {
         this.imports = imports;
     }
 
-    public List<DynamicAnnotation> getAnnotations() {
+    public List<?> getAnnotations() {
         return annotations;
     }
 
-    public void setAnnotations(List<DynamicAnnotation> annotations) {
+    public void setAnnotations(List<?> annotations) {
         this.annotations = annotations;
     }
 
@@ -132,7 +132,7 @@ public class DynamicClass {
             String code = String.format(te,
                     dynamicMethod.getReturnType(),
                     dynamicMethod.getMethodName(),
-                    String.join(",", dynamicMethod.getParameters().stream().map(e->e.toString()).collect(Collectors.toList())),
+                    String.join(",", dynamicMethod.getParameters().stream().map(Object::toString).toArray(String[]::new)),
                     dynamicMethod.getBody());
 
             stringBuffer.append(code);

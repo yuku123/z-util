@@ -47,7 +47,7 @@ public final class RsaUtil {
     private static final int MAX_DECRYPT_BLOCK = 128;
 
 
-    /**
+/**
      * BASE64解密
      *
      * @param key
@@ -55,7 +55,7 @@ public final class RsaUtil {
      * @throws Exception
      */
     public static byte[] decryptBASE64(String key) throws Exception {
-        return Base64Ext.decode(key.getBytes(), Base64Ext.NO_WRAP);
+        return Base64Utils.decrypt(key);
     }
 
     /**
@@ -66,7 +66,7 @@ public final class RsaUtil {
      * @throws Exception
      */
     public static String encryptBASE64(byte[] key) throws Exception {
-        return new String(Base64Ext.encode(key, Base64Ext.NO_WRAP));
+        return Base64Utils.encrypt(key);
     }
 
 
