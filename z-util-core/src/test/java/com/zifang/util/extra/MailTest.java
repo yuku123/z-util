@@ -1,5 +1,7 @@
 package com.zifang.util.extra;
 
+import com.zifang.util.core.extra.mail.Mail;
+import com.zifang.util.core.extra.mail.MailConfig;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

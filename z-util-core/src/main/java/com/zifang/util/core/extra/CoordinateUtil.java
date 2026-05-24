@@ -1,4 +1,4 @@
-package com.zifang.util.extra;
+package com.zifang.util.core.extra;
 
 /**
  * 经纬度坐标计算工具类

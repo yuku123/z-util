@@ -1,8 +1,6 @@
-package com.zifang.util.extra;
+package com.zifang.util.core.extra.mail;
 
-import javax.mail.internet.InternetAddress;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 

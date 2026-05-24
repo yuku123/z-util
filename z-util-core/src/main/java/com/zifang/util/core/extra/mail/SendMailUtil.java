@@ -1,4 +1,4 @@
-package com.zifang.util.extra;
+package com.zifang.util.core.extra.mail;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
