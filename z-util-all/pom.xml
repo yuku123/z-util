@@ -98,11 +98,6 @@
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
-                <artifactId>z-util-extra</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
                 <artifactId>z-util-devops</artifactId>
                 <version>${util.version}</version>
             </dependency>

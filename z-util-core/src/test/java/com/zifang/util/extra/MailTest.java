@@ -1,4 +1,4 @@
-package com.zifang.util.extra.mail;
+package com.zifang.util.extra;
 
 import org.junit.Test;
 

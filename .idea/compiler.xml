@@ -7,6 +7,38 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="z-util-crawler" />
+        <module name="z-util-distribute" />
+        <module name="z-util-proxy" />
+        <module name="z-util-parser-json" />
+        <module name="z-util-expr-lua" />
+        <module name="z-util-jdbc" />
+        <module name="z-util-parser-csv" />
+        <module name="z-util-expr-groovy" />
+        <module name="z-util-visualization" />
+        <module name="z-util-parser-properties" />
+        <module name="z-util-monitor" />
+        <module name="z-util-workflow" />
+        <module name="z-util-expr-js" />
+        <module name="z-util-parser-proto" />
+        <module name="z-util-dsl" />
+        <module name="z-util-core" />
+        <module name="z-util-ml" />
+        <module name="z-util-source" />
+        <module name="z-util-media" />
+        <module name="z-util-ch" />
+        <module name="z-util-office" />
+        <module name="z-util-zex" />
+        <module name="z-util-cli" />
+        <module name="z-util-parser-toml" />
+        <module name="z-util-expr-sql" />
+        <module name="z-util-parser-ini" />
+        <module name="z-util-parser-xml" />
+        <module name="z-util-devops" />
+        <module name="z-util-http" />
+        <module name="z-util-math" />
+        <module name="z-util-parser-yaml" />
+        <module name="z-util-expr-el" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -110,34 +142,13 @@
       <module name="z-task-mapper" target="1.8" />
       <module name="z-task-service" target="1.8" />
       <module name="z-task-starter" target="1.8" />
-      <module name="z-util" target="1.8" />
       <module name="z-util-ai" target="1.8" />
-      <module name="z-util-all" target="1.8" />
-      <module name="z-util-ch" target="1.8" />
-      <module name="z-util-cli" target="1.8" />
-      <module name="z-util-core" target="1.8" />
-      <module name="z-util-crawler" target="1.8" />
-      <module name="z-util-devops" target="1.8" />
-      <module name="z-util-distribute" target="1.8" />
-      <module name="z-util-dsl" target="1.8" />
       <module name="z-util-expression" target="1.8" />
       <module name="z-util-extra" target="1.8" />
-      <module name="z-util-http" target="1.8" />
-      <module name="z-util-jdbc" target="1.8" />
       <module name="z-util-json" target="1.8" />
-      <module name="z-util-math" target="1.8" />
-      <module name="z-util-media" target="1.8" />
-      <module name="z-util-ml" target="1.8" />
-      <module name="z-util-monitor" target="1.8" />
-      <module name="z-util-office" target="1.8" />
-      <module name="z-util-proxy" target="1.8" />
-      <module name="z-util-source" target="1.8" />
       <module name="z-util-sql" target="1.8" />
-      <module name="z-util-visualization" target="1.8" />
-      <module name="z-util-workflow" target="1.8" />
       <module name="z-util-xml" target="1.8" />
       <module name="z-util-yaml" target="1.8" />
-      <module name="z-util-zex" target="1.8" />
       <module name="z-wf" target="1.8" />
       <module name="z-wf-client" target="1.8" />
       <module name="z-wf-core" target="1.8" />
