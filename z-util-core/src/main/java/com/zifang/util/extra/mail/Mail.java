@@ -1,4 +1,4 @@
-package com.zifang.util.extra.mail;
+package com.zifang.util.extra;
 
 import javax.mail.internet.InternetAddress;
 import java.io.File;

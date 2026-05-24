@@ -43,7 +43,7 @@ mvn test -Dtest=TestClassName#testMethod
 | Category | Modules |
 |----------|---------|
 | Core | `util-core` - Base utilities and common classes |
-| Data | `util-jdbc`, `util-json`, `util-expression` - Data processing |
+| Data | `util-jdbc`, `util-expression` - Data processing |
 | Web | `util-http`, `util-crawler`, `util-proxy` - Web utilities |
 | Compute | `util-math`, `util-ai`, `util-llm` - Computation and AI |
 | Media | `util-media`, `util-office`, `util-visualization` - Media processing |

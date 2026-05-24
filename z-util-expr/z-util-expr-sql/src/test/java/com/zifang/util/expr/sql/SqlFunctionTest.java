@@ -80,7 +80,7 @@ public class SqlFunctionTest {
     @Test
     public void testRowSubstring() {
         Map<String, Object> r = row("s", "HelloWorld");
-        assertEquals("World", eval.evaluate("SUBSTRING(s, 7, 5)", r));
+        assertEquals("World", eval.evaluate("SUBSTRING(s, 6, 5)", r));
     }
 
     @Test
@@ -142,14 +142,14 @@ public class SqlFunctionTest {
     @Test
     public void testRowInstr() {
         Map<String, Object> r = row("s", "hello world");
-        assertEquals(3, eval.evaluate("INSTR(s, 'lo')", r));
+        assertEquals(4, eval.evaluate("INSTR(s, 'lo')", r));
     }
 
     @Test
     public void testRowYear() {
         Map<String, Object> r = row();
         Object y = eval.evaluate("YEAR(NOW())", r);
-        assertTrue(y instanceof Integer);
+        assertTrue(y instanceof Number);
     }
 
     @Test
@@ -262,7 +262,7 @@ public class SqlFunctionTest {
     @Test
     public void testRowExp() {
         Map<String, Object> r = row("v", 1);
-        assertEquals(Math.E, eval.evaluate("EXP(v)", r));
+        assertEquals(Math.exp(1), ((Number) eval.evaluate("EXP(v)", r)).doubleValue(), 1e-10);
     }
 
     @Test

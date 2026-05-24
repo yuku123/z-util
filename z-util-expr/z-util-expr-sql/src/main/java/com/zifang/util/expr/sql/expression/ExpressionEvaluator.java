@@ -398,6 +398,7 @@ public class ExpressionEvaluator {
             if (word.equals("OR")) return new Token(TokenType.OP, "OR", 2);
             if (word.equals("NOT")) return new Token(TokenType.OP, "NOT", 5);
             if (word.equals("LIKE")) return new Token(TokenType.OP, "LIKE", 6);
+            if (word.equals("AS")) return new Token(TokenType.OP, "AS", 6);
             int peek = pos;
             while (peek < s.length() && Character.isWhitespace(s.charAt(peek))) peek++;
             if (peek < s.length() && s.charAt(peek) == '(') {
@@ -509,6 +510,21 @@ public class ExpressionEvaluator {
             List<Node> args = new ArrayList<>();
             if (pos < tokens.length && tokens[pos].type != TokenType.RPAREN && tokens[pos].type != TokenType.EOF) {
                 args.add(parseExpr());
+                // 特殊处理 CAST(expr AS TYPE) 语法：遇到 AS 后把剩余部分当作类型串解析
+                if (pos < tokens.length && tokens[pos].type == TokenType.OP && tokens[pos].value.equalsIgnoreCase("AS")) {
+                    // 跳过 AS 关键字，收集类型相关 token 直到 RPAREN
+                    pos++;
+                    List<Token> typeTokens = new ArrayList<>();
+                    while (pos < tokens.length && tokens[pos].type != TokenType.RPAREN) {
+                        typeTokens.add(tokens[pos++]);
+                    }
+                    // 用类型串构造一个虚假的 StrNode，CAST 函数自行解析
+                    StringBuilder typeSb = new StringBuilder();
+                    for (Token t : typeTokens) typeSb.append(t.value).append(" ");
+                    args.add(new StrNode(typeSb.toString().trim()));
+                    // RPAREN 已在 while 中被消费，不再重复消费
+                    return new FuncNode(name.toUpperCase(), args.toArray(new Node[0]));
+                }
                 while (pos < tokens.length && tokens[pos].type == TokenType.COMMA) {
                     pos++; args.add(parseExpr());
                 }

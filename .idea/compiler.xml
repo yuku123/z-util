@@ -12,7 +12,6 @@
         <module name="z-util-proxy" />
         <module name="z-util-parser-json" />
         <module name="z-util-expr-lua" />
-        <module name="z-util-extra" />
         <module name="z-util-jdbc" />
         <module name="z-util-parser-csv" />
         <module name="z-util-expr-groovy" />
@@ -145,6 +144,7 @@
       <module name="z-task-starter" target="1.8" />
       <module name="z-util-ai" target="1.8" />
       <module name="z-util-expression" target="1.8" />
+      <module name="z-util-extra" target="1.8" />
       <module name="z-util-json" target="1.8" />
       <module name="z-util-sql" target="1.8" />
       <module name="z-util-xml" target="1.8" />

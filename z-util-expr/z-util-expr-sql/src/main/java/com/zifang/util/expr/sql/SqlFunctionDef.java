@@ -13,11 +13,10 @@ public class SqlFunctionDef {
     private final boolean isVarargs;
 
     public SqlFunctionDef(String name, Method method) {
-        this.name = name.toUpperCase();
+        this.name = name != null ? name.toUpperCase() : null;
         this.method = method;
-        Class<?>[] params = method.getParameterTypes();
-        this.isVarargs = params.length > 0
-                && params[params.length - 1].isArray();
+        this.isVarargs = (method != null && method.getParameterCount() > 0
+                && method.getParameterTypes()[method.getParameterCount() - 1].isArray());
     }
 
     public String getName() { return name; }
@@ -27,17 +26,10 @@ public class SqlFunctionDef {
         try {
             if (isVarargs) {
                 int paramCount = method.getParameterCount();
-                // paramCount = 1(row) + M(fixed) + 1(varargs) = M+2
-                // M = paramCount - 2 (number of fixed params after row, excluding varargs)
-                int fixedCount = paramCount - 2;  // M = number of fixed params after row
+                int fixedCount = paramCount - 2;
                 if (paramCount == 2) {
-                    // (Map, Object...) — only row + varargs, no fixed params
-                    // args go directly to the varargs array
                     return method.invoke(null, row, args);
                 }
-                // (Map, T1, ..., TM, Object...) — M fixed params + varargs
-                // args[0..M-1] → fixed slots 1..M
-                // args[M..] → varargs array (slot M+1)
                 Object[] invokeArgs = new Object[paramCount];
                 invokeArgs[0] = row;
                 for (int i = 0; i < fixedCount; i++) {
@@ -50,14 +42,15 @@ public class SqlFunctionDef {
                 invokeArgs[paramCount - 1] = varargs;
                 return method.invoke(null, invokeArgs);
             }
-            switch (args.length) {
-                case 0:  return method.invoke(null, row);
-                case 1:  return method.invoke(null, row, args[0]);
-                case 2:  return method.invoke(null, row, args[0], args[1]);
-                case 3:  return method.invoke(null, row, args[0], args[1], args[2]);
-                case 4:  return method.invoke(null, row, args[0], args[1], args[2], args[3]);
-                default: return method.invoke(null, (Object) new Object[]{row, args});
+            // method is never null here (UDF path goes through SqlUdfDef which overrides exec)
+            // 非 varargs 方法：动态计算所需的实参数组大小，向缺失槽填 null 后反射调用
+            int paramCount = method.getParameterCount();
+            Object[] invokeArgs = new Object[paramCount];
+            invokeArgs[0] = row;
+            for (int i = 1; i < paramCount; i++) {
+                invokeArgs[i] = i - 1 < args.length ? args[i - 1] : null;
             }
+            return method.invoke(null, invokeArgs);
         } catch (Exception e) {
             throw new SqlException("Failed to execute function: " + name, e);
         }

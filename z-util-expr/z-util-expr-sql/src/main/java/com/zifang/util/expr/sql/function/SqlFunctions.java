@@ -326,37 +326,37 @@ public final class SqlFunctions {
     @SqlFunction("YEAR")
     public static Object year(Map<String, Object> row, Object date) {
         if (date == null) return null;
-        return extractTemporal(date, LocalDate.class, LocalDate::getYear);
+        return extractTemporal(date, LocalDate.class);
     }
 
     @SqlFunction("MONTH")
     public static Object month(Map<String, Object> row, Object date) {
         if (date == null) return null;
-        return extractTemporal(date, LocalDate.class, LocalDate::getMonthValue);
+        return extractTemporal(date, LocalDate.class);
     }
 
     @SqlFunction("DAY")
     public static Object day(Map<String, Object> row, Object date) {
         if (date == null) return null;
-        return extractTemporal(date, LocalDate.class, LocalDate::getDayOfMonth);
+        return extractTemporal(date, LocalDate.class);
     }
 
     @SqlFunction("HOUR")
     public static Object hour(Map<String, Object> row, Object date) {
         if (date == null) return null;
-        return extractTemporal(date, LocalTime.class, LocalTime::getHour);
+        return extractTemporal(date, LocalTime.class);
     }
 
     @SqlFunction("MINUTE")
     public static Object minute(Map<String, Object> row, Object date) {
         if (date == null) return null;
-        return extractTemporal(date, LocalTime.class, LocalTime::getMinute);
+        return extractTemporal(date, LocalTime.class);
     }
 
     @SqlFunction("SECOND")
     public static Object second(Map<String, Object> row, Object date) {
         if (date == null) return null;
-        return extractTemporal(date, LocalTime.class, LocalTime::getSecond);
+        return extractTemporal(date, LocalTime.class);
     }
 
     @SqlFunction("DATE")
@@ -481,6 +481,10 @@ public final class SqlFunctions {
 
     @SqlFunction("NULLIF")
     public static Object nullif(Map<String, Object> row, Object a, Object b) {
+        // Compare by numeric value when both are Numbers, otherwise use Objects.equals
+        if (a instanceof Number && b instanceof Number) {
+            return ((Number) a).doubleValue() == ((Number) b).doubleValue() ? null : a;
+        }
         return Objects.equals(a, b) ? null : a;
     }
 
@@ -593,7 +597,12 @@ public final class SqlFunctions {
     public static Object decode(Map<String, Object> row, Object val, Object... pairs) {
         if (val == null || pairs == null || pairs.length == 0) return null;
         for (int i = 0; i < pairs.length - 1; i += 2) {
-            if (Objects.equals(val, pairs[i])) return pairs[i + 1];
+            // Coerce numeric types for comparison
+            if (pairs[i] instanceof Number && val instanceof Number) {
+                if (((Number) val).doubleValue() == ((Number) pairs[i]).doubleValue()) return pairs[i + 1];
+            } else if (Objects.equals(val, pairs[i])) {
+                return pairs[i + 1];
+            }
         }
         // if odd number, last is default
         if (pairs.length % 2 == 1) return pairs[pairs.length - 1];
@@ -657,26 +666,19 @@ public final class SqlFunctions {
         return "true".equals(s) || "1".equals(s) || "yes".equals(s) || "t".equals(s);
     }
 
-    private static <T> T extractTemporal(Object date, Class<T> targetType, java.util.function.Function<T, Integer> extractor) {
+    private static Integer extractTemporal(Object date, Class<?> targetType) {
         try {
             if (date instanceof LocalDateTime) {
                 LocalDateTime ldt = (LocalDateTime) date;
-                if (targetType == LocalDate.class) {
-                    return targetType.cast(ldt.toLocalDate());
-                } else if (targetType == LocalTime.class) {
-                    return targetType.cast(ldt.toLocalTime());
-                }
+                return targetType == LocalDate.class ? ldt.toLocalDate().getYear() : ldt.toLocalTime().getHour();
             } else if (date instanceof LocalDate) {
                 LocalDate ld = (LocalDate) date;
-                if (targetType == LocalDate.class) return targetType.cast(ld);
+                return targetType == LocalDate.class ? ld.getYear() : ld.getMonthValue();
             } else if (date instanceof LocalTime) {
                 LocalTime lt = (LocalTime) date;
-                if (targetType == LocalTime.class) return targetType.cast(lt);
-            } else {
-                // try parse
-                if (targetType == LocalDate.class) {
-                    return targetType.cast(LocalDate.parse(date.toString().substring(0, 10)));
-                }
+                return targetType == LocalTime.class ? lt.getHour() : lt.getMinute();
+            } else if (targetType == LocalDate.class) {
+                return LocalDate.parse(date.toString().substring(0, 10)).getYear();
             }
         } catch (Exception e) { /* fallthrough */ }
         return null;
