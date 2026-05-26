@@ -6,10 +6,23 @@ import java.security.NoSuchAlgorithmException;
 /**
  * MD5加密
  */
-class MD5Utils {
+public class MD5Utils {
     protected final static String MD5_KEY = "MD5";
-
     protected final static String SHA_KEY = "SHA1";
+    public static String encrypt(String value) {
+        return encrypt(value, MD5_KEY);
+    }
+
+    public static String encrypt(byte[] inputByteArray) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance(MD5_KEY);
+            messageDigest.update(inputByteArray);
+            byte[] resultByteArray = messageDigest.digest();
+            return byteArrayToHex(resultByteArray);
+        } catch (NoSuchAlgorithmException e) {
+            return null;
+        }
+    }
 
     protected static String encrypt(String value, String key) {
         try {

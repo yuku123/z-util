@@ -5,9 +5,6 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * BASE64加解密工具类
- *
- * @Author:chenssy
- * @date:2016年5月20日 下午5:05:30
  */
 class Base64Utils {
 
