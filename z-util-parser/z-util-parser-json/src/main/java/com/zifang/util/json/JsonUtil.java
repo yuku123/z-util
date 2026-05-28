@@ -1,7 +1,7 @@
 package com.zifang.util.json;
 
 import com.zifang.util.json.define.TypeReference;
-import com.zifang.util.json.dsl.G4JsonParser;
+import com.zifang.util.json.dsl.DslJsonParser;
 import com.zifang.util.json.dsl.JsonPathParser;
 import com.zifang.util.json.exception.JsonTypeException;
 import com.zifang.util.json.model.JsonArray;
@@ -27,7 +27,7 @@ import java.util.*;
  */
 public class JsonUtil {
 
-    private static final G4JsonParser PARSER = new G4JsonParser();
+    private static final DslJsonParser PARSER = new DslJsonParser();
 
     // ==================== 解析入口 ====================
 
