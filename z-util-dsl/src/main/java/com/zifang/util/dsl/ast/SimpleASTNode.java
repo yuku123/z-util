@@ -16,7 +16,7 @@ public class SimpleASTNode implements ASTNode {
     private String text;
     private int line;
     private int column;
-    private List<ASTNode> children;
+    private final List<ASTNode> children;
     private ASTNode parent;
     private Object token;
 

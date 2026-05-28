@@ -41,6 +41,114 @@ public class JsonObject {
     }
 
     /**
+     * 获取 JSON 对象中键值对的数量。
+     *
+     * @return 键值对数量
+     */
+    public int size() {
+        return map.size();
+    }
+
+    /**
+     * 判断 JSON 对象是否包含指定键。
+     *
+     * @param key 键名
+     * @return 是否包含
+     */
+    public boolean containsKey(String key) {
+        return map.containsKey(key);
+    }
+
+    /**
+     * 移除指定键的键值对。
+     *
+     * @param key 键名
+     * @return 被移除的值，如果键不存在则返回null
+     */
+    public Object remove(String key) {
+        return map.remove(key);
+    }
+
+    /**
+     * 获取指定键的值，如果键不存在则返回默认值。
+     *
+     * @param key          键名
+     * @param defaultValue 默认值
+     * @return 键值或默认值
+     */
+    public Object getOrDefault(String key, Object defaultValue) {
+        return map.getOrDefault(key, defaultValue);
+    }
+
+    /**
+     * 获取指定键对应的 String 值。
+     *
+     * @param key 键名
+     * @return String 值，键不存在或类型不匹配返回 null
+     */
+    public String getString(String key) {
+        Object v = map.get(key);
+        return v instanceof String ? (String) v : null;
+    }
+
+    /**
+     * 获取指定键对应的 Integer 值。
+     *
+     * @param key 键名
+     * @return Integer 值，键不存在或类型不匹配返回 null
+     */
+    public Integer getInt(String key) {
+        Object v = map.get(key);
+        if (v instanceof Number) return ((Number) v).intValue();
+        return null;
+    }
+
+    /**
+     * 获取指定键对应的 Long 值。
+     *
+     * @param key 键名
+     * @return Long 值，键不存在或类型不匹配返回 null
+     */
+    public Long getLong(String key) {
+        Object v = map.get(key);
+        if (v instanceof Number) return ((Number) v).longValue();
+        return null;
+    }
+
+    /**
+     * 获取指定键对应的 Double 值。
+     *
+     * @param key 键名
+     * @return Double 值，键不存在或类型不匹配返回 null
+     */
+    public Double getDouble(String key) {
+        Object v = map.get(key);
+        if (v instanceof Number) return ((Number) v).doubleValue();
+        return null;
+    }
+
+    /**
+     * 获取指定键对应的 Boolean 值。
+     *
+     * @param key 键名
+     * @return Boolean 值，键不存在或类型不匹配返回 null
+     */
+    public Boolean getBoolean(String key) {
+        Object v = map.get(key);
+        if (v instanceof Boolean) return (Boolean) v;
+        return null;
+    }
+
+    /**
+     * 判断 JSON 对象是否为空（不包含任何键值对）。
+     *
+     * @return 是否为空
+     */
+    public boolean isEmpty() {
+        return map.isEmpty();
+    }
+
+    /**
      * 获取所有键值对的列表。
      *
      * @return 键值对列表

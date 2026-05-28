@@ -32,18 +32,18 @@ public class DynamicLexer implements Lexer {
     private int line;
     private int column;
     
-    private List<TokenDefinition> tokenDefinitions;
-    private Map<String, Pattern> compiledPatterns;
+    private final List<TokenDefinition> tokenDefinitions;
+    private final Map<String, Pattern> compiledPatterns;
     
     // Token类型映射
-    private Map<String, Integer> tokenTypeMap;
+    private final Map<String, Integer> tokenTypeMap;
     private int nextTypeId;
     
     // Fragment规则（不直接产生Token）
-    private Map<String, String> fragmentRules;
+    private final Map<String, String> fragmentRules;
 
     // HIDDEN channel的token名称集合
-    private Set<String> hiddenTokenNames;
+    private final Set<String> hiddenTokenNames;
 
     // 解析结果
     private List<Token> tokens;

@@ -79,7 +79,39 @@ public class JsonUtil {
      * 将任意对象序列化为美化 JSON 字符串（带缩进）。
      */
     public static <T> String toJsonPretty(T t) {
-        return BeautifyJsonUtils.beautify(toJson(t));
+        return prettyPrint(toJson(t), 0);
+    }
+
+    private static String prettyPrint(String json, int indent) {
+        if (json == null || json.isEmpty()) return json;
+        StringBuilder sb = new StringBuilder();
+        int depth = 0;
+        for (int i = 0; i < json.length(); i++) {
+            char ch = json.charAt(i);
+            if (ch == '{' || ch == '[') {
+                sb.append(ch).append('\n');
+                depth++;
+                sb.append(indent(depth));
+            } else if (ch == '}' || ch == ']') {
+                sb.append('\n');
+                depth--;
+                sb.append(indent(depth)).append(ch);
+            } else if (ch == ',') {
+                sb.append(ch).append('\n');
+                sb.append(indent(depth));
+            } else if (ch == ':') {
+                sb.append(ch).append(' ');
+            } else {
+                sb.append(ch);
+            }
+        }
+        return sb.toString();
+    }
+
+    private static String indent(int depth) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < depth; i++) sb.append("  ");
+        return sb.toString();
     }
 
     // ==================== 反序列化 ====================
@@ -214,7 +246,7 @@ public class JsonUtil {
                     JsonObject obj = (JsonObject) parsed;
                     java.lang.reflect.Type keyType = pt.getActualTypeArguments()[0];
                     java.lang.reflect.Type valType = pt.getActualTypeArguments()[1];
-                    Map<Object, Object> map = new LinkedHashMap<>();
+                    Map<Object, Object> map = new LinkedHashMap<Object, Object>();
                     for (Map.Entry<String, Object> e : obj.getAllKeyValue()) {
                         map.put(convertValue(e.getKey(), keyType), convertValue(e.getValue(), valType));
                     }
@@ -241,7 +273,11 @@ public class JsonUtil {
             return deserializePojo((JsonObject) parsed, (Class<T>) targetType);
         }
         if (parsed instanceof JsonArray && targetType == List.class) {
-            List<Object> list = new ArrayList<>((JsonArray) parsed);
+            JsonArray arr = (JsonArray) parsed;
+            List<Object> list = new ArrayList<Object>(arr.size());
+            for (Object item : arr) {
+                list.add(item);
+            }
             return (T) list;
         }
 

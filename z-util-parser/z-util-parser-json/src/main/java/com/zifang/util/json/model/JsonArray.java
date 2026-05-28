@@ -79,6 +79,94 @@ public class JsonArray implements Iterable {
         return (JsonArray) obj;
     }
 
+    /**
+     * 判断数组是否为空。
+     *
+     * @return 是否为空
+     */
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
+    /**
+     * 移除指定索引处的元素。
+     *
+     * @param index 索引位置
+     * @return 被移除的元素
+     */
+    public Object remove(int index) {
+        return list.remove(index);
+    }
+
+    /**
+     * 判断数组是否包含指定元素。
+     *
+     * @param obj 要查找的元素
+     * @return 是否包含
+     */
+    public boolean contains(Object obj) {
+        return list.contains(obj);
+    }
+
+    /**
+     * 获取指定索引处的 String 值。
+     *
+     * @param index 索引位置
+     * @return String 值，类型不匹配返回 null
+     */
+    public String getString(int index) {
+        Object v = list.get(index);
+        return v instanceof String ? (String) v : null;
+    }
+
+    /**
+     * 获取指定索引处的 Integer 值。
+     *
+     * @param index 索引位置
+     * @return Integer 值，类型不匹配返回 null
+     */
+    public Integer getInt(int index) {
+        Object v = list.get(index);
+        if (v instanceof Number) return ((Number) v).intValue();
+        return null;
+    }
+
+    /**
+     * 获取指定索引处的 Long 值。
+     *
+     * @param index 索引位置
+     * @return Long 值，类型不匹配返回 null
+     */
+    public Long getLong(int index) {
+        Object v = list.get(index);
+        if (v instanceof Number) return ((Number) v).longValue();
+        return null;
+    }
+
+    /**
+     * 获取指定索引处的 Double 值。
+     *
+     * @param index 索引位置
+     * @return Double 值，类型不匹配返回 null
+     */
+    public Double getDouble(int index) {
+        Object v = list.get(index);
+        if (v instanceof Number) return ((Number) v).doubleValue();
+        return null;
+    }
+
+    /**
+     * 获取指定索引处的 Boolean 值。
+     *
+     * @param index 索引位置
+     * @return Boolean 值，类型不匹配返回 null
+     */
+    public Boolean getBoolean(int index) {
+        Object v = list.get(index);
+        if (v instanceof Boolean) return (Boolean) v;
+        return null;
+    }
+
     @Override
     public String toString() {
         return BeautifyJsonUtils.beautify(this);
