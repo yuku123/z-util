@@ -4,21 +4,38 @@ import com.zifang.util.core.time.converter.TimeConverter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
- * java.util.Date 工具类
+ * Date工具类（统一版本）
  * <p>
- * 只处理Date类型，提供Date的格式化、解析、计算等功能
- * 与其他时间类型的转换通过TimeConverter完成
+ * 提供Date类型的格式化、解析、计算、转换等功能。
+ * 与其他时间类型的转换通过{@link TimeConverter}完成。
+ * </p>
+ * <p>
+ * 方法分类：
+ * <ul>
+ *   <li>格式化/解析：format/parse 方法</li>
+ *   <li>获取当前时间：now/todayStart/todayEnd/dayStart/dayEnd</li>
+ *   <li>日期计算：plus/minus 系列方法</li>
+ *   <li>日期比较：isBefore/isAfter/isSameDay/isSameInstant</li>
+ *   <li>时间差计算：daysBetween/hoursBetween/secondsBetween/millisBetween</li>
+ *   <li>类型转换：toLocalDateTime/toLocalDate/toInstant 等</li>
+ * </ul>
+ * </p>
+ *
+ * @author zifang
+ * @see TimeConverter
+ * @see LocalDateTimeUtil
+ * @see InstantUtil
+ * @see DurationUtil
  */
 public class DateUtil {
+
+    // ==================== 常量定义 ====================
 
     public static final String PATTERN_DEFAULT = "yyyy-MM-dd HH:mm:ss";
     public static final String PATTERN_DATE = "yyyy-MM-dd";
@@ -38,7 +55,7 @@ public class DateUtil {
     // ==================== 格式化 ====================
 
     /**
-     * 格式化日期为字符串
+     * 格式化日期为字符串，使用默认格式 PATTERN_DEFAULT
      */
     public static String format(Date date) {
         return format(date, PATTERN_DEFAULT);
@@ -63,7 +80,7 @@ public class DateUtil {
     // ==================== 解析 ====================
 
     /**
-     * 解析日期字符串
+     * 解析日期字符串，使用默认格式
      */
     public static Date parse(String dateStr) throws ParseException {
         return parse(dateStr, PATTERN_DEFAULT);
@@ -78,7 +95,7 @@ public class DateUtil {
     }
 
     /**
-     * 解析日期字符串（宽松模式）
+     * 解析日期字符串（宽松模式，尝试多种模式）
      */
     public static Date parseStrict(String dateStr, String... patterns) {
         if (dateStr == null || dateStr.trim().isEmpty()) return null;
@@ -131,6 +148,40 @@ public class DateUtil {
     public static Date dayEnd(Date date) {
         LocalDate localDate = TimeConverter.toLocalDate(date);
         return TimeConverter.toDate(localDate.atTime(LocalTime.MAX));
+    }
+
+    /**
+     * 获取今天的开始时间字符串
+     */
+    public static String getTodayStartStr() {
+        return format(new Date(), PATTERN_DEFAULT);
+    }
+
+    /**
+     * 获取今天的结束时间字符串
+     */
+    public static String getTodayEndStr() {
+        return format(new Date(), PATTERN_DEFAULT);
+    }
+
+    /**
+     * 获取偏移天数开始时间
+     *
+     * @param offset 偏移量（明天为1，今天为0，昨天为-1）
+     * @return 偏移天数开始时间的 LocalDateTime
+     */
+    public static LocalDateTime getDayStart(int offset) {
+        return LocalDateTime.of(LocalDate.now().plusDays(offset), LocalTime.of(0, 0, 0));
+    }
+
+    /**
+     * 获取偏移天数结束时间
+     *
+     * @param offset 偏移量（明天为1，今天为0，昨天为-1）
+     * @return 偏移天数结束时间的 LocalDateTime
+     */
+    public static LocalDateTime getDayEnd(int offset) {
+        return LocalDateTime.of(LocalDate.now().plusDays(offset), LocalTime.of(23, 59, 59));
     }
 
     // ==================== 日期计算 ====================
@@ -239,7 +290,7 @@ public class DateUtil {
     public static long daysBetween(Date start, Date end) {
         LocalDate d1 = TimeConverter.toLocalDate(start);
         LocalDate d2 = TimeConverter.toLocalDate(end);
-        return java.time.temporal.ChronoUnit.DAYS.between(d1, d2);
+        return ChronoUnit.DAYS.between(d1, d2);
     }
 
     /**
@@ -248,7 +299,7 @@ public class DateUtil {
     public static long hoursBetween(Date start, Date end) {
         LocalDateTime dt1 = TimeConverter.toLocalDateTime(start);
         LocalDateTime dt2 = TimeConverter.toLocalDateTime(end);
-        return java.time.temporal.ChronoUnit.HOURS.between(dt1, dt2);
+        return ChronoUnit.HOURS.between(dt1, dt2);
     }
 
     /**
@@ -257,7 +308,7 @@ public class DateUtil {
     public static long minutesBetween(Date start, Date end) {
         LocalDateTime dt1 = TimeConverter.toLocalDateTime(start);
         LocalDateTime dt2 = TimeConverter.toLocalDateTime(end);
-        return java.time.temporal.ChronoUnit.MINUTES.between(dt1, dt2);
+        return ChronoUnit.MINUTES.between(dt1, dt2);
     }
 
     /**
@@ -284,6 +335,13 @@ public class DateUtil {
     }
 
     /**
+     * 转换为LocalDateTime（指定时区）
+     */
+    public static LocalDateTime toLocalDateTime(Date date, ZoneId zoneId) {
+        return TimeConverter.toLocalDateTime(date, zoneId);
+    }
+
+    /**
      * 转换为LocalDate
      */
     public static LocalDate toLocalDate(Date date) {
@@ -295,6 +353,13 @@ public class DateUtil {
      */
     public static LocalTime toLocalTime(Date date) {
         return TimeConverter.toLocalTime(date);
+    }
+
+    /**
+     * 转换为Instant
+     */
+    public static Instant toInstant(Date date) {
+        return TimeConverter.toInstant(date);
     }
 
     /**
@@ -314,6 +379,13 @@ public class DateUtil {
     }
 
     /**
+     * 从LocalDateTime转换（指定时区）
+     */
+    public static Date fromLocalDateTime(LocalDateTime localDateTime, ZoneId zoneId) {
+        return TimeConverter.toDate(localDateTime, zoneId);
+    }
+
+    /**
      * 从LocalDate转换
      */
     public static Date fromLocalDate(LocalDate localDate) {
@@ -327,7 +399,121 @@ public class DateUtil {
         return new Date(epochMilli);
     }
 
+    /**
+     * 从Instant转换
+     */
+    public static Date fromInstant(Instant instant) {
+        return TimeConverter.toDate(instant);
+    }
+
+    // ==================== Java 8 Time API 封装 ====================
+
+    /**
+     * 将时间戳（秒）转换为LocalDateTime（使用系统默认时区）
+     */
+    public static LocalDateTime timestampToLocalDateTime(long timestamp) {
+        int offset = TimeZone.getDefault().getRawOffset() / 3600_000;
+        return timestampToLocalDateTime(timestamp, offset);
+    }
+
+    /**
+     * 将时间戳（秒）转换为LocalDateTime（指定时区偏移量）
+     */
+    public static LocalDateTime timestampToLocalDateTime(long timestamp, int zoneOffset) {
+        return LocalDateTime.ofEpochSecond(timestamp, 0, ZoneOffset.ofHours(zoneOffset));
+    }
+
+    /**
+     * 将LocalDateTime转换为时间戳（秒）
+     */
+    public static long localDateTimeToTimestamp(LocalDateTime localDateTime) {
+        return localDateTimeToMilliTimestamp(localDateTime) / 1000;
+    }
+
+    /**
+     * 将LocalDateTime转换为毫秒时间戳
+     */
+    public static long localDateTimeToMilliTimestamp(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    }
+
+    /**
+     * 解析日期时间字符串（支持微秒）
+     * <p>
+     * 格式：yyyy-MM-dd HH:mm:ss[.微秒]
+     */
+    public static LocalDateTime parseLocalDateTime(String dateTime) {
+        return parseLocalDateTime(dateTime, PATTERN_DEFAULT);
+    }
+
+    /**
+     * 解析日期时间字符串（支持微秒）
+     */
+    public static LocalDateTime parseLocalDateTime(String dateTime, String pattern) {
+        if (dateTime == null || dateTime.trim().isEmpty()) return null;
+        String[] parts = dateTime.split("\\.");
+        String baseStr = parts[0];
+        LocalDateTime result = LocalDateTime.parse(baseStr, DateTimeFormatter.ofPattern(pattern));
+        if (parts.length > 1) {
+            int micros = Integer.parseInt(rightPadWithOver(parts[1], 6, "0"));
+            result = result.plusNanos(micros * 1_000L);
+        }
+        return result;
+    }
+
+    /**
+     * 解析时间字符串（支持微秒）
+     * <p>
+     * 格式：HH:mm:ss[.微秒]
+     */
+    public static LocalTime parseLocalTime(String time) {
+        return parseLocalTime(time, PATTERN_TIME);
+    }
+
+    /**
+     * 解析时间字符串（支持微秒）
+     */
+    public static LocalTime parseLocalTime(String time, String pattern) {
+        if (time == null || time.trim().isEmpty()) return null;
+        String[] parts = time.split("\\.");
+        String baseStr = parts[0];
+        LocalTime result = LocalTime.parse(baseStr, DateTimeFormatter.ofPattern(pattern));
+        if (parts.length > 1) {
+            int micros = Integer.parseInt(rightPadWithOver(parts[1], 6, "0"));
+            result = result.plusNanos(micros * 1_000L);
+        }
+        return result;
+    }
+
+    /**
+     * 获取带微秒的时间戳
+     */
+    public static long getMicrosecond(String dateTime) {
+        if (dateTime == null || dateTime.trim().isEmpty()) return 0;
+        String[] parts = dateTime.split("\\.");
+        String baseStr = parts[0];
+        LocalDateTime ldt = LocalDateTime.parse(baseStr, FMT_DEFAULT);
+        long result = ldt.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond() * 1_000_000;
+        if (parts.length > 1) {
+            int micros = Integer.parseInt(rightPadWithOver(parts[1], 6, "0"));
+            result += micros;
+        }
+        return result;
+    }
+
     // ==================== 内部方法 ====================
+
+    private static String rightPadWithOver(String str, int size, String padStr) {
+        if (str == null) return null;
+        if (str.length() > size) {
+            return str.substring(0, size);
+        }
+        StringBuilder sb = new StringBuilder(str);
+        while (sb.length() < size) {
+            sb.append(padStr);
+        }
+        return sb.toString();
+    }
 
     private static SimpleDateFormat getFormat(String pattern) {
         if (pattern == null || pattern.trim().isEmpty()) {

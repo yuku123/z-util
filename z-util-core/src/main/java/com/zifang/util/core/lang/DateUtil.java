@@ -1,356 +1,136 @@
 package com.zifang.util.core.lang;
 
-import com.zifang.util.core.lang.primitive.IntegerUtil;
-
-import java.lang.Deprecated;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TimeZone;
-
-import static com.zifang.util.core.Const.Symbol.REGEX_SPOT;
 
 /**
- * 日期时间工具类
- * <p>提供日期解析、格式化、时间戳转换等功能，支持多种日期格式</p>
+ * 日期时间工具类（已废弃）
+ * <p>
+ * 请使用 {@link com.zifang.util.core.time.DateUtil} 或其他 core.time 包下的工具类
  *
- * @deprecated 请使用 {@link com.zifang.util.core.time.DateUtil} 或其他 core.time 包下的工具类
+ * @deprecated 请使用 {@link com.zifang.util.core.time.DateUtil}
  */
 @Deprecated
 public class DateUtil {
-    public static final String DATE_FORMAT_WHIFFLETREE_SECOND = "yyyy-MM-dd HH:mm:ss";
-    public static final String DATE_FORMAT_WHIFFLETREE_DAY = "yyyy-MM-dd";
-    public static final String DATE_FORMAT_DIAGONAL_SECOND = "yyyy/MM/dd HH:mm:ss";
-    public static final String DATE_FORMAT_TIMESTAMP = "yyyy/MM/dd HH:mm:ss.S";
-    public static final String DATE_FORMAT_DIAGONAL_DAY = "yyyy/MM/dd";
-    public static final String DATE_FORMAT_MINUTE = "yyyyMMddHHmmss";
-    public static final String DATE_FORMAT_DAY = "yyyyMMdd";
-    public static final String DATE_FORMAT_MONTH = "yyyyMM";
-    public static final String DATE_FORMAT_WHIFFLETREE_MILLIS = "yyyy-MM-dd HH:mm:ss.SSS";
-    public static final String DATE_FORMAT_WHIFFLETREE_MICRO = "yyyy-MM-dd HH:mm:ss.SSSSSS";
-    public static final String DATE_FORMAT_T_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS";
-    public static final String DATE_FORMAT_UTC = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
-    public static final String DATE_FORMAT_ZONE_UTC = "yyyy-MM-dd'T'HH:mm:ss.SSS'+0000'";
-    public static final String DATE_FORMAT_ZONE_COLON_UTC = "yyyy-MM-dd'T'HH:mm:ss.SSS'+00:00'";
-    public static final String DATE_FORMAT_TIME = "HH:mm:ss";
-    public static final String DATE_FORMAT_TIME_MILLIS = "HH:mm:ss.SSS";
-    public static final String DATE_FORMAT_TIME_MICRO = "HH:mm:ss.SSSSSS";
-    public static final DateTimeFormatter DATE_FORMAT_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_TIME);
-    public static final DateTimeFormatter DATE_FORMAT_TIME_MICRO_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_TIME_MICRO);
-    public static final DateTimeFormatter DATE_FORMAT_WHIFFLETREE_SECOND_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_WHIFFLETREE_SECOND);
-    public static final DateTimeFormatter DATE_FORMAT_WHIFFLETREE_MICRO_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_WHIFFLETREE_MICRO);
-    public static final DateTimeFormatter DATE_FORMAT_WHIFFLETREE_DAY_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_WHIFFLETREE_DAY);
-    public static final DateTimeFormatter DATE_FORMAT_DAY_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_DAY);
-    public static final DateTimeFormatter DATE_FORMAT_WHIFFLETREE_MILLIS_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT_WHIFFLETREE_MILLIS);
-    private static final int DATABASE_PRECISION = 6;
-    /**
-     * 存储格式的Map
-     */
-    private static final ThreadLocal<Map<String, SimpleDateFormat>> DATE_FORMAT_MAP = ThreadLocal
-            .withInitial(HashMap::new);
-    public static final SimpleDateFormat DATE_FORMAT_WHIFFLETREE_SECOND_DATE_FORMAT = getFormat(
-            DATE_FORMAT_WHIFFLETREE_SECOND);
-    public static final SimpleDateFormat DATE_FORMAT_WHIFFLETREE_DAY_DATE_FORMAT = getFormat(
-            DATE_FORMAT_WHIFFLETREE_DAY);
-    public static final SimpleDateFormat DATE_FORMAT_TIME_DATE_FORMAT = getFormat(DATE_FORMAT_TIME);
-    public static final SimpleDateFormat DATE_FORMAT_TIME_MILLIS_FORMAT = getFormat(
-            DATE_FORMAT_TIME_MILLIS);
-    public static final SimpleDateFormat DATE_FORMAT_WHIFFLETREE_MILLIS_DATE_FORMAT = getFormat(
-            DATE_FORMAT_WHIFFLETREE_MILLIS);
 
-    /**
-     * 获取指定日期格式的SimpleDateFormat实例
-     * <p>使用ThreadLocal缓存，同一线程内相同格式只会创建一个实例</p>
-     *
-     * @param pattern 日期格式模式（如 "yyyy-MM-dd HH:mm:ss"）
-     * @return SimpleDateFormat实例
-     */
-    public static SimpleDateFormat getFormat(final String pattern) {
-        Map<String, SimpleDateFormat> dateFormatMap = DATE_FORMAT_MAP.get();
-        SimpleDateFormat dateFormat = dateFormatMap.get(pattern);
-        if (null == dateFormat) {
-            if (null == pattern || pattern.length() == 0) {
-                dateFormat = new SimpleDateFormat(DATE_FORMAT_ZONE_UTC);
-                dateFormatMap.put(pattern, dateFormat);
-            } else {
-                dateFormat = new SimpleDateFormat(pattern);
-                dateFormatMap.put(pattern, dateFormat);
-            }
-        }
-        return dateFormat;
-    }
+    public static final String DATE_FORMAT_WHIFFLETREE_SECOND = com.zifang.util.core.time.DateUtil.PATTERN_DEFAULT;
+    public static final String DATE_FORMAT_WHIFFLETREE_DAY = com.zifang.util.core.time.DateUtil.PATTERN_DATE;
+    public static final String DATE_FORMAT_TIME = com.zifang.util.core.time.DateUtil.PATTERN_TIME;
+    public static final String DATE_FORMAT_WHIFFLETREE_MILLIS = com.zifang.util.core.time.DateUtil.PATTERN_DATETIME_MS;
 
-    /**
-     * 将Date对象格式化为字符串
-     *
-     * @param date    日期对象
-     * @param pattern 日期格式模式
-     * @return 格式化后的日期字符串
-     */
+    private static final Map<String, SimpleDateFormat> DATE_FORMAT_MAP = new HashMap<>();
+
+    @Deprecated
     public static String format(Date date, String pattern) {
-        return getFormat(pattern).format(date);
+        return com.zifang.util.core.time.DateUtil.format(date, pattern);
     }
 
-    /**
-     * 将日期字符串解析为Date对象
-     *
-     * @param dateStr 日期字符串
-     * @param pattern 日期格式模式
-     * @return Date对象
-     * @throws ParseException 如果字符串格式与模式不匹配则抛出解析异常
-     */
+    @Deprecated
     public static Date parse(String dateStr, String pattern) throws ParseException {
-        return getFormat(pattern).parse(dateStr);
+        return com.zifang.util.core.time.DateUtil.parse(dateStr, pattern);
     }
 
-    /**
-     * 将日期字符串解析为Date对象（使用UTC格式）
-     *
-     * @param dateStr 日期字符串
-     * @return Date对象
-     * @throws ParseException 如果字符串格式与模式不匹配则抛出解析异常
-     */
+    @Deprecated
     public static Date parse(String dateStr) throws ParseException {
-        return getFormat("").parse(dateStr);
+        return com.zifang.util.core.time.DateUtil.parse(dateStr);
     }
 
-    /**
-     * 获取明天的开始时间
-     * <p>格式：yyyy-MM-dd HH:mm:ss</p>
-     *
-     * @return 明天开始时间的字符串表示
-     */
-    public static String getNextDayStart() {
-        long nowTime = System.currentTimeMillis();
-        long nextDayStartTime =
-                nowTime - (nowTime + TimeZone.getDefault().getRawOffset()) % (3600_000 * 24)
-                        + 3600_000 * 24;
-        return getFormat(DATE_FORMAT_WHIFFLETREE_SECOND)
-                .format(new Date(nextDayStartTime));
-    }
-
-    /**
-     * 获取今天的结束时间
-     * <p>格式：yyyy-MM-dd HH:mm:ss</p>
-     *
-     * @return 今天结束时间的字符串表示
-     */
-    public static String getTodayEnd() {
-        long nowTime = System.currentTimeMillis();
-        long todayEndTime =
-                nowTime - (nowTime + TimeZone.getDefault().getRawOffset()) % (3600_000 * 24)
-                        + 3600_000 * 24 - 1;
-        return getFormat(DATE_FORMAT_WHIFFLETREE_SECOND).format(new Date(todayEndTime));
-    }
-
-    /**
-     * 获取今天的开始时间
-     * <p>格式：yyyy-MM-dd HH:mm:ss</p>
-     *
-     * @return 今天开始时间的字符串表示
-     */
-    public static String getTodayStart() {
-        long nowTime = System.currentTimeMillis();
-        long todayStartTime =
-                nowTime - (nowTime + TimeZone.getDefault().getRawOffset()) % (3600_000 * 24);
-        return getFormat(DATE_FORMAT_WHIFFLETREE_SECOND).format(new Date(todayStartTime));
-    }
-
-    /**
-     * @author: zifang
-     * @description: Get the start time of the specified offset days (tomorrow offset is 1, today offset is 0, yesterday offset is - 1)
-     * @description: 获取指定偏移量天数的开始时间(明天偏移量为1今天偏移量为0昨天偏移量为 - 1)
-     * @time: 2022-09-30 12:02:26
-     * @params: [offset] 日期偏移量
-     * @return: java.time.LocalDateTime 开始时间
-     */
+    @Deprecated
     public static LocalDateTime getDayStart(int offset) {
-        return LocalDateTime.of(LocalDate.now().plusDays(offset), LocalTime.of(0, 0, 0));
+        return com.zifang.util.core.time.DateUtil.getDayStart(offset);
     }
 
-    /**
-     * @author: zifang
-     * @description: Get the end time of the specified offset days (tomorrow offset is 1, today offset is 0, yesterday offset is - 1)
-     * @description: 获取指定偏移量天数的结束时间(明天偏移量为1今天偏移量为0昨天偏移量为 - 1)
-     * @time: 2022-09-30 12:02:26
-     * @params: [offset] 日期偏移量
-     * @return: java.time.LocalDateTime 结束时间
-     */
+    @Deprecated
     public static LocalDateTime getDayEnd(int offset) {
-        return LocalDateTime.of(LocalDate.now().plusDays(offset), LocalTime.of(23, 59, 59));
+        return com.zifang.util.core.time.DateUtil.getDayEnd(offset);
     }
 
-    /**
-     * 将Date对象转换为LocalDateTime（使用系统默认时区）
-     *
-     * @param date Date对象
-     * @return LocalDateTime对象，如果date为null则返回null
-     */
+    @Deprecated
     public static LocalDateTime dateToLocalDateTime(Date date) {
-        return dateToLocalDateTime(date, ZoneId.systemDefault());
+        return com.zifang.util.core.time.DateUtil.toLocalDateTime(date);
     }
 
-    /**
-     * 将Date对象转换为LocalDateTime（指定时区）
-     *
-     * @param date    Date对象
-     * @param zoneId  时区ID
-     * @return LocalDateTime对象，如果date或zoneId为null则返回null
-     */
+    @Deprecated
     public static LocalDateTime dateToLocalDateTime(Date date, ZoneId zoneId) {
-        if (null == date) {
-            return null;
-        }
-        Instant instant = date.toInstant();
-        return instant.atZone(zoneId).toLocalDateTime();
+        return com.zifang.util.core.time.DateUtil.toLocalDateTime(date, zoneId);
     }
 
-    /**
-     * 将LocalDateTime对象转换为Date（指定时区）
-     *
-     * @param localDateTime LocalDateTime对象
-     * @param zoneId        时区ID
-     * @return Date对象，如果localDateTime或zoneId为null则返回null
-     */
+    @Deprecated
     public static Date localDateTimeToDate(LocalDateTime localDateTime, ZoneId zoneId) {
-        if (null == localDateTime) {
-            return null;
-        }
-        ZonedDateTime zdt = localDateTime.atZone(zoneId);
-        return Date.from(zdt.toInstant());
+        return com.zifang.util.core.time.DateUtil.fromLocalDateTime(localDateTime, zoneId);
     }
 
-    /**
-     * 将LocalDateTime对象转换为Date（使用系统默认时区）
-     *
-     * @param localDateTime LocalDateTime对象
-     * @return Date对象，如果localDateTime为null则返回null
-     */
+    @Deprecated
     public static Date localDateTimeToDate(LocalDateTime localDateTime) {
-        return localDateTimeToDate(localDateTime, ZoneId.systemDefault());
+        return com.zifang.util.core.time.DateUtil.fromLocalDateTime(localDateTime);
     }
 
-    /**
-     * 将日期时间字符串转换为微秒时间戳
-     * <p>支持格式：yyyy-MM-dd HH:mm:ss[.微秒]</p>
-     *
-     * @param dateTime 日期时间字符串
-     * @return 微秒时间戳
-     */
+    @Deprecated
     public static long getMicrosecond(String dateTime) {
-        String[] dateTimes = dateTime.split(REGEX_SPOT);
-        if (dateTimes.length > 1) {
-            dateTime = dateTimes[0];
-        }
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime,
-                DateTimeFormatter.ofPattern(DATE_FORMAT_WHIFFLETREE_SECOND));
-        long result =
-                localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond() * 1_000_000;
-        if (dateTimes.length > 1) {
-            int microsecond = Integer.parseInt(
-                    StringUtil.rightPadWithOver(dateTimes[1], DATABASE_PRECISION, "0"));
-            result += microsecond;
-        }
-
-        return result;
+        return com.zifang.util.core.time.DateUtil.getMicrosecond(dateTime);
     }
 
-    /**
-     * @author: zifang
-     * @description: 解析yyyy-MM-dd HH:mm:ss开头的所有时间
-     * @time: 2022-05-05 11:17:31
-     * @params: [dateTime] in 入参
-     * @return: java.time.LocalDateTime out 出参
-     */
+    @Deprecated
     public static LocalDateTime getDefaultLocalDateTime(String dateTime) {
-        String[] dateTimes = dateTime.split(REGEX_SPOT);
-        if (dateTimes.length > 1) {
-            dateTime = dateTimes[0];
-        }
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTime,
-                DATE_FORMAT_WHIFFLETREE_SECOND_FORMATTER);
-        if (dateTimes.length > 1) {
-            int microsecond = Integer.parseInt(
-                    StringUtil.rightPadWithOver(dateTimes[1], DATABASE_PRECISION, "0"));
-            localDateTime = localDateTime.plusNanos(microsecond * 1_000L);
-        }
-
-        return localDateTime;
+        return com.zifang.util.core.time.DateUtil.parseLocalDateTime(dateTime);
     }
 
-    /**
-     * @author: zifang
-     * @description: 解析HH:mm:ss开头的所有时间
-     * @time: 2022-05-05 11:20:42
-     * @params: [time] in 入参
-     * @return: java.time.LocalTime out 出参
-     */
+    @Deprecated
     public static LocalTime getDefaultLocalTime(String time) {
-        String[] dateTimes = time.split(REGEX_SPOT);
-        if (dateTimes.length > 1) {
-            time = dateTimes[0];
-        }
-        LocalTime localTime = LocalTime.parse(time, DATE_FORMAT_TIME_FORMATTER);
-        if (dateTimes.length > 1) {
-            int microsecond = Integer.parseInt(
-                    StringUtil.rightPadWithOver(dateTimes[1], DATABASE_PRECISION, "0"));
-            localTime = localTime.plusNanos(microsecond * 1_000L);
-        }
-
-        return localTime;
+        return com.zifang.util.core.time.DateUtil.parseLocalTime(time);
     }
 
-    /**
-     * @author: zifang
-     * @description: Convert timestamp to LocalDateTime(default zone is eight)
-     * @description: 时间戳转LocalDateTime（取默认时区）
-     * @time: 2022-08-31 11:19:45
-     * @params: [timestamp] 时间戳
-     * @return: java.time.LocalDateTime
-     */
+    @Deprecated
     public static LocalDateTime timestampToLocalDateTime(Long timestamp) {
-        int offset = IntegerUtil.parseInteger(
-                Duration.ofMillis(TimeZone.getDefault().getRawOffset()).toHours());
-        return timestampToLocalDateTime(timestamp, offset);
+        return com.zifang.util.core.time.DateUtil.timestampToLocalDateTime(timestamp);
     }
 
-    /**
-     * @author: zifang
-     * @description: Convert timestamp to LocalDateTime with zoneOffset
-     * @description: 时间戳转LocalDateTime(指定时区偏移量)
-     * @time: 2022-08-31 11:19:45
-     * @params: [timestamp, zoneOffset] 时间戳, 时区偏移量
-     * @return: java.time.LocalDateTime
-     */
+    @Deprecated
     public static LocalDateTime timestampToLocalDateTime(Long timestamp, int zoneOffset) {
-        return LocalDateTime.ofEpochSecond(timestamp / 1000, 0, ZoneOffset.ofHours(zoneOffset));
+        return com.zifang.util.core.time.DateUtil.timestampToLocalDateTime(timestamp, zoneOffset);
     }
 
-    /**
-     * @author: zifang
-     * @description: Convert LocalDateTime to timestamp
-     * @description: LocalDateTime转时间戳
-     * @time: 2022-08-31 11:19:45
-     * @params: [localDateTime] LocalDateTime
-     * @return: java.lang.Long
-     */
+    @Deprecated
     public static Long localDateTimeToTimestamp(LocalDateTime localDateTime) {
-        return localDateTimeToMilliTimestamp(localDateTime) / 1000;
+        return com.zifang.util.core.time.DateUtil.localDateTimeToTimestamp(localDateTime);
     }
 
-    /**
-     * 将LocalDateTime对象转换为毫秒时间戳（使用系统默认时区）
-     *
-     * @param localDateTime LocalDateTime对象
-     * @return 毫秒时间戳
-     */
+    @Deprecated
     public static Long localDateTimeToMilliTimestamp(LocalDateTime localDateTime) {
-        return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        return com.zifang.util.core.time.DateUtil.localDateTimeToMilliTimestamp(localDateTime);
     }
 
+    @Deprecated
+    public static String getNextDayStart() {
+        return com.zifang.util.core.time.DateUtil.format(
+            com.zifang.util.core.time.DateUtil.plusDays(
+                com.zifang.util.core.time.DateUtil.todayStart(), 1));
+    }
+
+    @Deprecated
+    public static String getTodayEnd() {
+        return com.zifang.util.core.time.DateUtil.format(com.zifang.util.core.time.DateUtil.todayEnd());
+    }
+
+    @Deprecated
+    public static String getTodayStart() {
+        return com.zifang.util.core.time.DateUtil.format(com.zifang.util.core.time.DateUtil.todayStart());
+    }
+
+    @Deprecated
+    public static SimpleDateFormat getFormat(final String pattern) {
+        String p = (pattern == null || pattern.trim().isEmpty()) ? com.zifang.util.core.time.DateUtil.PATTERN_DEFAULT : pattern;
+        SimpleDateFormat format = DATE_FORMAT_MAP.get(p);
+        if (format == null) {
+            format = new SimpleDateFormat(p);
+            DATE_FORMAT_MAP.put(p, format);
+        }
+        return format;
+    }
 }

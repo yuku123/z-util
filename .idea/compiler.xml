@@ -36,7 +36,9 @@
         <module name="z-util-parser-xml" />
         <module name="z-util-devops" />
         <module name="z-util-http" />
+        <module name="z-util-validation" />
         <module name="z-util-math" />
+        <module name="z-util-cache" />
         <module name="z-util-parser-yaml" />
         <module name="z-util-expr-el" />
       </profile>

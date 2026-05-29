@@ -47,6 +47,9 @@
         <module>z-util-ch</module>
         <module>z-util-cli</module>
 
+        <module>z-util-validation</module>
+        <module>z-util-cache</module>
+
         <module>z-util-all</module>
     </modules>
 

@@ -123,6 +123,8 @@
     <file url="file://$PROJECT_DIR$/z-util-ai/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-all/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-all/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/z-util-cache/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/z-util-cache/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-ch/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-ch/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-cli/src/main/java" charset="UTF-8" />
@@ -193,6 +195,8 @@
     <file url="file://$PROJECT_DIR$/z-util-source/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-sql/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-sql/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/z-util-validation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/z-util-validation/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-visualization/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-visualization/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-workflow/src/main/java" charset="UTF-8" />

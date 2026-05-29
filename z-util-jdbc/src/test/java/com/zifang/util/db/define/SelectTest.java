@@ -1,0 +1,61 @@
+package com.zifang.util.db.define;
+
+import org.junit.Test;
+
+import java.lang.annotation.Annotation;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
+
+import static org.junit.Assert.*;
+
+/**
+ * Select 注解测试
+ */
+public class SelectTest {
+
+    @Test
+    public void testSelectIsAnnotation() {
+        assertTrue(Select.class.isAnnotation());
+    }
+
+    @Test
+    public void testSelectTargetMethod() {
+        assertTrue(Select.class.isAnnotationPresent(Target.class));
+        Target target = Select.class.getAnnotation(Target.class);
+        assertEquals(1, target.value().length);
+        assertEquals(ElementType.METHOD, target.value()[0]);
+    }
+
+    @Test
+    public void testSelectRetentionRuntime() {
+        assertTrue(Select.class.isAnnotationPresent(Retention.class));
+        Retention retention = Select.class.getAnnotation(Retention.class);
+        assertEquals(RetentionPolicy.RUNTIME, retention.value());
+    }
+
+    @Test
+    public void testSelectDocumented() {
+        assertTrue(Select.class.isAnnotationPresent(Documented.class));
+    }
+
+    @Test
+    public void testSelectHasValueMethod() {
+        try {
+            java.lang.reflect.Method valueMethod = Select.class.getMethod("value");
+            assertNotNull(valueMethod);
+            assertEquals(String.class, valueMethod.getReturnType());
+        } catch (NoSuchMethodException e) {
+            fail("value method should exist");
+        }
+    }
+
+    @Test
+    public void testSelectHasOneMethod() {
+        java.lang.reflect.Method[] methods = Select.class.getDeclaredMethods();
+        assertEquals(1, methods.length);
+        assertEquals("value", methods[0].getName());
+    }
+}
