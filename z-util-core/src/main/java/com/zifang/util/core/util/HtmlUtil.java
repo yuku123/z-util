@@ -150,8 +150,8 @@ public class HtmlUtil {
         scriptPattern = Pattern.compile("eval\\((.*?)\\)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
         value = scriptPattern.matcher(value).replaceAll("");
 
-        // Avoid e­xpression(...) expressions
-        scriptPattern = Pattern.compile("e­xpression\\((.*?)\\)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
+        // Avoid expression(...) expressions (CSS expression XSS vector)
+        scriptPattern = Pattern.compile("expression\\((.*?)\\)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
         value = scriptPattern.matcher(value).replaceAll("");
 
         // Avoid javascript:... expressions
@@ -186,16 +186,16 @@ public class HtmlUtil {
         for (int i = 0; i < value.length(); ++i) {
             switch (value.charAt(i)) {
                 case '<':
-                    result.append("<");
+                    result.append("&lt;");
                     break;
                 case '>':
-                    result.append(">");
+                    result.append("&gt;");
                     break;
                 case '"':
-                    result.append("\"");
+                    result.append("&quot;");
                     break;
                 case '\'':
-                    result.append("'");
+                    result.append("&apos;");
                     break;
                 case '%':
                     result.append("%");

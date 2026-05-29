@@ -124,10 +124,10 @@ public class NetworkUtil {
      * @return IPv4地址字符串，格式如 "192.168.1.1"
      */
     public static String intToIp(int intIp) {
-        return (intIp >> 24) + "."
-                + ((intIp & 0x00FFFFFF) >> 16) + "."
-                + ((intIp & 0x0000FFFF) >> 8) + "."
-                + (intIp & 0x000000FF);
+        return (intIp >>> 24) + "."
+                + ((intIp >>> 16) & 0xFF) + "."
+                + ((intIp >>> 8) & 0xFF) + "."
+                + (intIp & 0xFF);
     }
 
     /**
