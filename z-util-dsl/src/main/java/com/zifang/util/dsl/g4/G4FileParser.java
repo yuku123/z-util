@@ -42,10 +42,13 @@ public class G4FileParser {
      */
     public static List<G4Rule> extractRules(String g4Content) {
         List<G4Rule> rules = new ArrayList<>();
-        
+
         // 首先提取 lexer grammar 和 parser grammar 的名称
         String lexerName = extractGrammarName(g4Content, "lexer");
         String parserName = extractGrammarName(g4Content, "parser");
+
+        // 移除块注释，避免 /**/ 干扰规则解析
+        g4Content = stripBlockComments(g4Content);
         
         boolean inLexer = false;
         boolean inParser = false;
@@ -65,8 +68,8 @@ public class G4FileParser {
                 continue;
             }
             
-            // 跳过空行和注释行
-            if (line.isEmpty() || line.startsWith("//") || line.startsWith("/*") || line.startsWith("*")) {
+            // 跳过空行和注释行（/* */ 多行注释由 removeLineComment 处理，不在这里过滤）
+            if (line.isEmpty() || line.startsWith("//")) {
                 continue;
             }
             
@@ -180,7 +183,61 @@ public class G4FileParser {
         
         return line;
     }
-    
+
+    /**
+     * 移除块注释 /* ... */（跨越多行）
+     * 关键：在 [] 字符类内部的 */ 不是块注释结束标记
+     */
+    private static String stripBlockComments(String content) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        int bracketDepth = 0; // 跟踪 [] 字符类深度
+
+        while (i < content.length() - 1) {
+            char ch = content.charAt(i);
+
+            // 在字符串引号内原样传递
+            if (ch == '\'' || ch == '"') {
+                char quote = ch;
+                sb.append(ch);
+                i++;
+                while (i < content.length()) {
+                    char c = content.charAt(i);
+                    sb.append(c);
+                    if (c == '\\' && i + 1 < content.length()) {
+                        i++;
+                        sb.append(content.charAt(i));
+                    } else if (c == quote) {
+                        break;
+                    }
+                    i++;
+                }
+                i++;
+                continue;
+            }
+
+            // 跟踪 [] 字符类边界（只在词法规则体内有意义）
+            if (ch == '[') bracketDepth++;
+            else if (ch == ']' && bracketDepth > 0) bracketDepth--;
+
+            // 块注释开始 + 不在字符类内
+            if (ch == '/' && i + 1 < content.length()
+                    && content.charAt(i + 1) == '*'
+                    && bracketDepth == 0) {
+                int end = content.indexOf("*/", i + 2);
+                if (end >= 0) {
+                    i = end + 2;
+                    continue;
+                }
+            }
+
+            sb.append(ch);
+            i++;
+        }
+        if (i < content.length()) sb.append(content.charAt(i));
+        return sb.toString();
+    }
+
     /**
      * 从给定位置开始查找分号（考虑字符串、字符类和括号嵌套）
      */

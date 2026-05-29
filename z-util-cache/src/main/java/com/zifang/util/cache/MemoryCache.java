@@ -130,6 +130,50 @@ public class MemoryCache implements Cache {
         scheduler.shutdown();
     }
 
+    // ==================== 持久化 ====================
+
+    @Override
+    public void exportToFile(String filePath) {
+        try (java.io.ObjectOutputStream out = new java.io.ObjectOutputStream(
+                new java.io.BufferedOutputStream(
+                        new java.io.FileOutputStream(filePath)))) {
+            synchronized (cache) {
+                out.writeObject(name);
+                out.writeInt(cache.size());
+                for (Map.Entry<String, CacheEntry> entry : cache.entrySet()) {
+                    if (!entry.getValue().isExpired()) {
+                        out.writeObject(entry.getKey());
+                        out.writeObject(entry.getValue());
+                    }
+                }
+            }
+        } catch (java.io.IOException e) {
+            throw new CacheException("Failed to export cache to file: " + filePath, e);
+        }
+    }
+
+    @Override
+    public void importFromFile(String filePath) {
+        try (java.io.ObjectInputStream in = new java.io.ObjectInputStream(
+                new java.io.BufferedInputStream(
+                        new java.io.FileInputStream(filePath)))) {
+            String exportedName = (String) in.readObject();
+            int size = in.readInt();
+            synchronized (cache) {
+                cache.clear();
+                for (int i = 0; i < size; i++) {
+                    String key = (String) in.readObject();
+                    CacheEntry entry = (CacheEntry) in.readObject();
+                    if (!entry.isExpired()) {
+                        cache.put(key, entry);
+                    }
+                }
+            }
+        } catch (java.io.IOException | java.lang.ClassNotFoundException e) {
+            throw new CacheException("Failed to import cache from file: " + filePath, e);
+        }
+    }
+
     private void scheduleCleanup(long ttlSeconds) {
         scheduler.scheduleAtFixedRate(() -> {
             long now = System.currentTimeMillis();
@@ -140,7 +184,8 @@ public class MemoryCache implements Cache {
     /**
      * Cache entry with value and expiration time.
      */
-    private static class CacheEntry {
+    private static class CacheEntry implements java.io.Serializable {
+        private static final long serialVersionUID = 1L;
         private final Object value;
         private final long expirationTime; // 0 means no expiration
 

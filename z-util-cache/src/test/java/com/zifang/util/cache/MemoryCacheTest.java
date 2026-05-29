@@ -128,9 +128,34 @@ public class MemoryCacheTest {
             cache.put("key" + i, "value" + i);
         }
         assertEquals(100, cache.size());
-        
+
         for (int i = 0; i < 100; i++) {
             assertEquals("value" + i, cache.get("key" + i));
         }
+    }
+
+    @Test
+    public void testExportImportRoundtrip() throws java.io.IOException {
+        cache.put("k1", "v1");
+        cache.put("k2", 42);
+        cache.put("k3", new java.util.HashMap<>());
+
+        java.io.File tmp = java.io.File.createTempFile("cache-test", ".dat");
+        tmp.deleteOnExit();
+
+        cache.exportToFile(tmp.getPath());
+
+        MemoryCache other = new MemoryCache("other");
+        other.importFromFile(tmp.getPath());
+
+        assertEquals("v1", other.get("k1"));
+        assertEquals(42, other.get("k2"));
+        assertNotNull(other.get("k3"));
+        assertEquals(cache.size(), other.size());
+    }
+
+    @Test(expected = CacheException.class)
+    public void testImportFromFileNotFound() {
+        cache.importFromFile("/tmp/this_file_definitely_does_not_exist_12345.cache");
     }
 }

@@ -24,7 +24,7 @@
             <artifactId>z-util-dsl</artifactId>
             <version>${util.version}</version>
         </dependency>
-        <!-- SnakeYAML: 业界标准 YAML 解析器 -->
+        <!-- SnakeYAML: 旧版 facade 后端，保留但不作为核心解析器 -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
