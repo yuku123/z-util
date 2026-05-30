@@ -25,12 +25,23 @@ public final class MatrixToImageWriter {
      * Renders a {@link BitMatrix} as an image, where "false" bits are rendered
      * as white, and "true" bits are rendered as black.
      */
+    /**
+     * toBufferedImage方法。
+     *      * @param matrix BitMatrix类型参数
+     * @return static BufferedImage类型返回值
+     */
     public static BufferedImage toBufferedImage(BitMatrix matrix) {
         return toBufferedImage(matrix, DEFAULT_CONFIG);
     }
 
     /**
      * As {@link #toBufferedImage(BitMatrix)}, but allows customization of the output.
+     */
+    /**
+     * toBufferedImage方法。
+     *      * @param matrix BitMatrix类型参数
+     * @param config MatrixToImageConfig类型参数
+     * @return static BufferedImage类型返回值
      */
     public static BufferedImage toBufferedImage(BitMatrix matrix, MatrixToImageConfig config) {
         int width = matrix.getWidth();
@@ -51,12 +62,27 @@ public final class MatrixToImageWriter {
      *
      * @see #toBufferedImage(BitMatrix)
      */
+    /**
+     * writeToFile方法。
+     *      * @param matrix BitMatrix类型参数
+     * @param format String类型参数
+     * @param file File类型参数
+     * @return static void类型返回值
+     */
     public static void writeToFile(BitMatrix matrix, String format, File file) throws IOException {
         writeToFile(matrix, format, file, DEFAULT_CONFIG);
     }
 
     /**
      * As {@link #writeToFile(BitMatrix, String, File)}, but allows customization of the output.
+     */
+    /**
+     * writeToFile方法。
+     *      * @param matrix BitMatrix类型参数
+     * @param format String类型参数
+     * @param file File类型参数
+     * @param config MatrixToImageConfig类型参数
+     * @return static void类型返回值
      */
     public static void writeToFile(BitMatrix matrix, String format, File file, MatrixToImageConfig config)
             throws IOException {
@@ -71,12 +97,27 @@ public final class MatrixToImageWriter {
      *
      * @see #toBufferedImage(BitMatrix)
      */
+    /**
+     * writeToStream方法。
+     *      * @param matrix BitMatrix类型参数
+     * @param format String类型参数
+     * @param stream OutputStream类型参数
+     * @return static void类型返回值
+     */
     public static void writeToStream(BitMatrix matrix, String format, OutputStream stream) throws IOException {
         writeToStream(matrix, format, stream, DEFAULT_CONFIG);
     }
 
     /**
      * As {@link #writeToStream(BitMatrix, String, OutputStream)}, but allows customization of the output.
+     */
+    /**
+     * writeToStream方法。
+     *      * @param matrix BitMatrix类型参数
+     * @param format String类型参数
+     * @param stream OutputStream类型参数
+     * @param config MatrixToImageConfig类型参数
+     * @return static void类型返回值
      */
     public static void writeToStream(BitMatrix matrix, String format, OutputStream stream, MatrixToImageConfig config)
             throws IOException {

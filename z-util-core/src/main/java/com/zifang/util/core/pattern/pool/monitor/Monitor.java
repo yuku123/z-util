@@ -7,5 +7,8 @@ package com.zifang.util.core.pattern.pool.monitor;
  *
  * @author zifang
  */
+/**
+ * Monitor类。
+ */
 public class Monitor {
 }

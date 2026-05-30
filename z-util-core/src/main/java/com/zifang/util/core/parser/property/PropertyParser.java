@@ -13,6 +13,9 @@ import java.util.*;
  *
  * @author zifang
  */
+/**
+ * PropertyParser类。
+ */
 public class PropertyParser {
 
     /**
@@ -21,6 +24,11 @@ public class PropertyParser {
      * @param inputStream 输入流
      * @return 属性映射
      * @throws IOException 读取异常
+     */
+    /**
+     * load方法。
+     *      * @param inputStream InputStream类型参数
+     * @return static Properties类型返回值
      */
     public static Properties load(InputStream inputStream) throws IOException {
         Properties props = new Properties();
@@ -35,6 +43,11 @@ public class PropertyParser {
      * @return 属性映射
      * @throws IOException 读取异常
      */
+    /**
+     * load方法。
+     *      * @param file File类型参数
+     * @return static Properties类型返回值
+     */
     public static Properties load(File file) throws IOException {
         return load(file.toPath());
     }
@@ -45,6 +58,11 @@ public class PropertyParser {
      * @param path 文件路径
      * @return 属性映射
      * @throws IOException 读取异常
+     */
+    /**
+     * load方法。
+     *      * @param path Path类型参数
+     * @return static Properties类型返回值
      */
     public static Properties load(Path path) throws IOException {
         try (InputStream is = Files.newInputStream(path)) {
@@ -58,6 +76,11 @@ public class PropertyParser {
      * @param resource 资源路径
      * @return 属性映射
      * @throws IOException 读取异常
+     */
+    /**
+     * loadFromClasspath方法。
+     *      * @param resource String类型参数
+     * @return static Properties类型返回值
      */
     public static Properties loadFromClasspath(String resource) throws IOException {
         InputStream is = PropertyParser.class.getClassLoader().getResourceAsStream(resource);
@@ -79,6 +102,13 @@ public class PropertyParser {
      * @param header  文件头注释（可为 null）
      * @throws IOException 写入异常
      */
+    /**
+     * store方法。
+     *      * @param props Properties类型参数
+     * @param file File类型参数
+     * @param header String类型参数
+     * @return static void类型返回值
+     */
     public static void store(Properties props, File file, String header) throws IOException {
         try (OutputStream os = new FileOutputStream(file);
              OutputStreamWriter writer = new OutputStreamWriter(os, StandardCharsets.UTF_8)) {
@@ -94,6 +124,13 @@ public class PropertyParser {
      * @param defaultVal 默认值
      * @return 属性值或默认值
      */
+    /**
+     * getString方法。
+     *      * @param props Properties类型参数
+     * @param key String类型参数
+     * @param defaultVal String类型参数
+     * @return static String类型返回值
+     */
     public static String getString(Properties props, String key, String defaultVal) {
         return props.getProperty(key, defaultVal);
     }
@@ -105,6 +142,13 @@ public class PropertyParser {
      * @param key        属性键
      * @param defaultVal 默认值
      * @return 属性值或默认值
+     */
+    /**
+     * getInt方法。
+     *      * @param props Properties类型参数
+     * @param key String类型参数
+     * @param defaultVal int类型参数
+     * @return static int类型返回值
      */
     public static int getInt(Properties props, String key, int defaultVal) {
         String val = props.getProperty(key);
@@ -126,6 +170,13 @@ public class PropertyParser {
      * @param defaultVal 默认值
      * @return 属性值或默认值
      */
+    /**
+     * getLong方法。
+     *      * @param props Properties类型参数
+     * @param key String类型参数
+     * @param defaultVal long类型参数
+     * @return static long类型返回值
+     */
     public static long getLong(Properties props, String key, long defaultVal) {
         String val = props.getProperty(key);
         if (val == null) {
@@ -145,6 +196,13 @@ public class PropertyParser {
      * @param key        属性键
      * @param defaultVal 默认值
      * @return 属性值或默认值
+     */
+    /**
+     * getBoolean方法。
+     *      * @param props Properties类型参数
+     * @param key String类型参数
+     * @param defaultVal boolean类型参数
+     * @return static boolean类型返回值
      */
     public static boolean getBoolean(Properties props, String key, boolean defaultVal) {
         String val = props.getProperty(key);

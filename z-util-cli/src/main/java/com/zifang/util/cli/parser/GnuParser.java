@@ -14,11 +14,24 @@ import java.util.List;
  * @deprecated since 1.3, use {@link DefaultParser} instead.
  */
 @Deprecated
+/**
+ * GnuParser类。
+ */
 public class GnuParser extends Parser {
 
+    /**
+     * GnuParser方法。
+     */
     public GnuParser() {}
 
     @Override
+    /**
+     * flatten方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return String[]类型返回值
+     */
     protected String[] flatten(final Options options, final String[] arguments, final boolean stopAtNonOption) {
         List<String> tokens = new ArrayList<>();
         boolean eatTheRest = false;

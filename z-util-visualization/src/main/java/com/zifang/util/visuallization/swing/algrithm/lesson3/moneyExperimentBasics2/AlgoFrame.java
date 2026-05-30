@@ -7,6 +7,9 @@ import java.awt.*;
  * 金钱实验可视化框架（增强版）
  * 支持正负财富的显示，蓝色表示正值，红色表示负值
  */
+/**
+ * AlgoFrame类。
+ */
 public class AlgoFrame extends JFrame {
 
     private int canvasWidth;

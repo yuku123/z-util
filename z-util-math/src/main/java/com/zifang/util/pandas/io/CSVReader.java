@@ -10,6 +10,9 @@ import java.util.*;
 /**
  * CSV 读取器 - 支持从 CSV 文件读取数据
  */
+/**
+ * CSVReader类。
+ */
 public class CSVReader {
 
     private char delimiter = ',';
@@ -20,37 +23,74 @@ public class CSVReader {
     private int skipRows = 0;
     private int maxRows = -1; // -1 表示不限制
 
+    /**
+     * CSVReader方法。
+     */
     public CSVReader() {}
 
+    /**
+     * builder方法。
+     * @return static CSVReader类型返回值
+     */
     public static CSVReader builder() {
         return new CSVReader();
     }
 
+    /**
+     * delimiter方法。
+     *      * @param delimiter char类型参数
+     * @return CSVReader类型返回值
+     */
     public CSVReader delimiter(char delimiter) {
         this.delimiter = delimiter;
         return this;
     }
 
+    /**
+     * quoteChar方法。
+     *      * @param quoteChar char类型参数
+     * @return CSVReader类型返回值
+     */
     public CSVReader quoteChar(char quoteChar) {
         this.quoteChar = quoteChar;
         return this;
     }
 
+    /**
+     * hasHeader方法。
+     *      * @param hasHeader boolean类型参数
+     * @return CSVReader类型返回值
+     */
     public CSVReader hasHeader(boolean hasHeader) {
         this.hasHeader = hasHeader;
         return this;
     }
 
+    /**
+     * encoding方法。
+     *      * @param encoding String类型参数
+     * @return CSVReader类型返回值
+     */
     public CSVReader encoding(String encoding) {
         this.encoding = encoding;
         return this;
     }
 
+    /**
+     * skipRows方法。
+     *      * @param skipRows int类型参数
+     * @return CSVReader类型返回值
+     */
     public CSVReader skipRows(int skipRows) {
         this.skipRows = skipRows;
         return this;
     }
 
+    /**
+     * maxRows方法。
+     *      * @param maxRows int类型参数
+     * @return CSVReader类型返回值
+     */
     public CSVReader maxRows(int maxRows) {
         this.maxRows = maxRows;
         return this;
@@ -59,12 +99,22 @@ public class CSVReader {
     /**
      * 从文件路径读取 CSV
      */
+    /**
+     * read方法。
+     *      * @param filePath String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame read(String filePath) throws IOException {
         return read(new File(filePath));
     }
 
     /**
      * 从 File 对象读取 CSV
+     */
+    /**
+     * read方法。
+     *      * @param file File类型参数
+     * @return DataFrame类型返回值
      */
     public DataFrame read(File file) throws IOException {
         try (BufferedReader reader = new BufferedReader(
@@ -76,6 +126,11 @@ public class CSVReader {
     /**
      * 从 InputStream 读取 CSV
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame read(InputStream inputStream) throws IOException {
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(inputStream, encoding))) {
@@ -85,6 +140,11 @@ public class CSVReader {
 
     /**
      * 从字符串读取 CSV
+     */
+    /**
+     * readFromString方法。
+     *      * @param csvContent String类型参数
+     * @return DataFrame类型返回值
      */
     public DataFrame readFromString(String csvContent) throws IOException {
         try (BufferedReader reader = new BufferedReader(new StringReader(csvContent))) {

@@ -8,9 +8,17 @@ import com.zifang.util.core.lang.converter.IConverter;
  * @author zifang
  * @see IConverter
  */
+/**
+ * StringIntegerConverter类。
+ */
 public class StringIntegerConverter implements IConverter<String, Integer> {
 
     @Override
+    /**
+     * to方法。
+     *      * @param value String类型参数
+     * @return int类型返回值
+     */
     public Integer to(String value) {
         if (value == null) {
             return null;
@@ -18,6 +26,12 @@ public class StringIntegerConverter implements IConverter<String, Integer> {
         return Integer.valueOf(value.trim());
     }
 
+    /**
+     * to方法。
+     *      * @param value String类型参数
+     * @param defaultValue int类型参数
+     * @return int类型返回值
+     */
     public Integer to(String value, Integer defaultValue) {
         if (value == null) {
             return defaultValue;

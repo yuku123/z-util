@@ -8,6 +8,9 @@ package com.zifang.util.visuallization.swing.algrithm.lesson2.a;
  * @version 1.0
  * @since 2020-01-01
  */
+/**
+ * Client类。
+ */
 public class Client {
 
     /**

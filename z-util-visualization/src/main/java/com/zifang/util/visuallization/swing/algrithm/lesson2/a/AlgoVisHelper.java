@@ -11,6 +11,9 @@ import java.awt.geom.Ellipse2D;
  * @version 1.0
  * @since 2020-01-01
  */
+/**
+ * AlgoVisHelper类。
+ */
 public class AlgoVisHelper {
 
     /**

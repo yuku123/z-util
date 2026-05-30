@@ -23,6 +23,9 @@ import java.util.Random;
  * This is a Monte Carlo policy gradient method that updates parameters
  * based on complete episode trajectories.
  */
+/**
+ * PolicyGradient类。
+ */
 public class PolicyGradient {
     
     private int stateDim;
@@ -41,6 +44,14 @@ public class PolicyGradient {
      * @param hiddenLayers Number of neurons in hidden layers
      * @param learningRate Learning rate for the optimizer
      * @param gamma Discount factor
+     */
+    /**
+     * PolicyGradient方法。
+     *      * @param stateDim int类型参数
+     * @param actionCount int类型参数
+     * @param hiddenLayers int类型参数
+     * @param learningRate double类型参数
+     * @param gamma double类型参数
      */
     public PolicyGradient(int stateDim, int actionCount, int hiddenLayers,
                           double learningRate, double gamma) {
@@ -79,6 +90,11 @@ public class PolicyGradient {
      * 
      * @param state The current state
      * @return The sampled action index
+     */
+    /**
+     * selectAction方法。
+     *      * @param state NdArray类型参数
+     * @return int类型返回值
      */
     public int selectAction(NdArray state) {
         // Get action scores from network
@@ -163,6 +179,12 @@ public class PolicyGradient {
      * @param trajectoryStates Array of states in the trajectory
      * @param trajectoryActions Array of actions taken
      * @param trajectoryRewards Array of rewards received
+     */
+    /**
+     * update方法。
+     *      * @param trajectoryStates NdArray[]类型参数
+     * @param trajectoryActions int[]类型参数
+     * @param trajectoryRewards double[]类型参数
      */
     public void update(NdArray[] trajectoryStates, int[] trajectoryActions, double[] trajectoryRewards) {
         int trajectoryLength = trajectoryStates.length;
@@ -290,6 +312,12 @@ public class PolicyGradient {
      * @param actions Array of action arrays
      * @param discountedRewards Array to fill with discounted rewards
      */
+    /**
+     * fit方法。
+     *      * @param states NdArray[]类型参数
+     * @param actions int[]类型参数
+     * @param discountedRewards double[]类型参数
+     */
     public void fit(NdArray[] states, int[] actions, double[] discountedRewards) {
         // Compute policy gradient update for the batch
         int batchSize = states.length;
@@ -319,6 +347,12 @@ public class PolicyGradient {
      * @param rewards Array of rewards
      * @return Array of discounted rewards G_t
      */
+    /**
+     * computeDiscountedRewards方法。
+     *      * @param rewards double[]类型参数
+     * @param gamma double类型参数
+     * @return static double[]类型返回值
+     */
     public static double[] computeDiscountedRewards(double[] rewards, double gamma) {
         int length = rewards.length;
         double[] discountedRewards = new double[length];
@@ -335,6 +369,10 @@ public class PolicyGradient {
     /**
      * Gets the policy network.
      */
+    /**
+     * getPolicyNetwork方法。
+     * @return Sequential类型返回值
+     */
     public Sequential getPolicyNetwork() {
         return policyNetwork;
     }
@@ -342,12 +380,20 @@ public class PolicyGradient {
     /**
      * Gets the learning rate.
      */
+    /**
+     * getLearningRate方法。
+     * @return double类型返回值
+     */
     public double getLearningRate() {
         return learningRate;
     }
     
     /**
      * Gets the discount factor.
+     */
+    /**
+     * getGamma方法。
+     * @return double类型返回值
      */
     public double getGamma() {
         return gamma;

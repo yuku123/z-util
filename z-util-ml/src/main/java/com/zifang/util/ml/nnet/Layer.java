@@ -5,6 +5,9 @@ package com.zifang.util.ml.nnet;
  * <p>
  * 定义神经网络中一层所需的基本操作，包括前向传播和反向传播
  */
+/**
+ * Layer接口。
+ */
 public interface Layer {
 
     /**

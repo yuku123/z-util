@@ -19,6 +19,9 @@ import java.util.Objects;
 /**
  * 结果集处理器，负责将JDBC ResultSet转换为Java对象
  */
+/**
+ * ResultSetHandler类。
+ */
 public class ResultSetHandler {
 
     private Type targetType;
@@ -34,6 +37,10 @@ public class ResultSetHandler {
      * @throws InstantiationException 实例化实体失败
      * @throws IllegalAccessException 访问字段失败
      * @throws SQLException           数据库访问异常
+     */
+    /**
+     * solve方法。
+     * @return Object类型返回值
      */
     public Object solve() throws InstantiationException, IllegalAccessException, SQLException {
 
@@ -149,6 +156,10 @@ public class ResultSetHandler {
      *
      * @return 目标类型
      */
+    /**
+     * getTargetType方法。
+     * @return Type类型返回值
+     */
     public Type getTargetType() {
         return targetType;
     }
@@ -157,6 +168,10 @@ public class ResultSetHandler {
      * 设置目标类型
      *
      * @param targetType 目标类型
+     */
+    /**
+     * setTargetType方法。
+     *      * @param targetType Type类型参数
      */
     public void setTargetType(Type targetType) {
         this.targetType = targetType;
@@ -167,6 +182,10 @@ public class ResultSetHandler {
      *
      * @return ResultSet对象
      */
+    /**
+     * getResultSet方法。
+     * @return ResultSet类型返回值
+     */
     public ResultSet getResultSet() {
         return resultSet;
     }
@@ -175,6 +194,10 @@ public class ResultSetHandler {
      * 设置ResultSet
      *
      * @param resultSet ResultSet对象
+     */
+    /**
+     * setResultSet方法。
+     *      * @param resultSet ResultSet类型参数
      */
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
@@ -185,6 +208,10 @@ public class ResultSetHandler {
      *
      * @return ResultSet元数据
      */
+    /**
+     * getResultSetMetaData方法。
+     * @return ResultSetMetaData类型返回值
+     */
     public ResultSetMetaData getResultSetMetaData() {
         return resultSetMetaData;
     }
@@ -194,16 +221,29 @@ public class ResultSetHandler {
      *
      * @param resultSetMetaData ResultSet元数据
      */
+    /**
+     * setResultSetMetaData方法。
+     *      * @param resultSetMetaData ResultSetMetaData类型参数
+     */
     public void setResultSetMetaData(ResultSetMetaData resultSetMetaData) {
         this.resultSetMetaData = resultSetMetaData;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "ResultSetHandler{targetType=" + targetType + ", resultSet=" + resultSet + ", resultSetMetaData=" + resultSetMetaData + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -214,6 +254,10 @@ public class ResultSetHandler {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(targetType, resultSet, resultSetMetaData);
     }

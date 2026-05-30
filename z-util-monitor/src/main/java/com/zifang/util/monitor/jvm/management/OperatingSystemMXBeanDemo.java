@@ -16,6 +16,9 @@ import java.lang.management.OperatingSystemMXBean;
  *
  * @author zifang
  */
+/**
+ * OperatingSystemMXBeanDemo类。
+ */
 public class OperatingSystemMXBeanDemo {
 
 
@@ -32,6 +35,10 @@ public class OperatingSystemMXBeanDemo {
      * </ul>
      *
      * @return 远程JVM所在操作系统的OperatingSystemMXBean实例，连接失败返回null
+     */
+    /**
+     * getRemoteOperatingSystemMXBean方法。
+     * @return static OperatingSystemMXBean类型返回值
      */
     public static OperatingSystemMXBean getRemoteOperatingSystemMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -60,6 +67,10 @@ public class OperatingSystemMXBeanDemo {
      *
      * @return 当前JVM所在操作系统的OperatingSystemMXBean实例
      */
+    /**
+     * getLocalOperatingSystemMXBean方法。
+     * @return static OperatingSystemMXBean类型返回值
+     */
     public static OperatingSystemMXBean getLocalOperatingSystemMXBean() {
         return ManagementFactory.getOperatingSystemMXBean();
     }
@@ -68,6 +79,11 @@ public class OperatingSystemMXBeanDemo {
      * 主方法，演示获取JVM所在操作系统信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) {
         OperatingSystemMXBean operatingSystemMXBean = getRemoteOperatingSystemMXBean();

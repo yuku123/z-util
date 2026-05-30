@@ -9,6 +9,9 @@ package com.zifang.util.source.define;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * ByteCodeParser接口。
+ */
 public interface ByteCodeParser {
 
 }

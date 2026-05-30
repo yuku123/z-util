@@ -9,6 +9,9 @@ import java.util.List;
  * 网络拓扑图组件
  * 用于可视化神经网络结构，展示神经元节点和层级连接关系
  */
+/**
+ * NetworkGraph类。
+ */
 public class NetworkGraph extends ChartFrame {
 
     private final List<LayerData> layers;

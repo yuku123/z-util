@@ -11,16 +11,28 @@ import java.util.Random;
  * During training, randomly sets some values to zero with probability p
  * During inference, scales output by (1 - p)
  */
+/**
+ * Dropout类。
+ */
 public class Dropout extends Module {
     
     private final float p;
     private final Random random;
     private NdArray mask;
     
+    /**
+     * Dropout方法。
+     *      * @param p float类型参数
+     */
     public Dropout(float p) {
         this(p, new Random());
     }
     
+    /**
+     * Dropout方法。
+     *      * @param p float类型参数
+     * @param random Random类型参数
+     */
     public Dropout(float p, Random random) {
         if (p < 0 || p > 1) {
             throw new IllegalArgumentException("Dropout probability must be between 0 and 1");
@@ -30,6 +42,11 @@ public class Dropout extends Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         if (training) {
             // Create mask where each element is kept with probability (1-p)
@@ -67,6 +84,11 @@ public class Dropout extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         // During training: dL/dx = dL/dy * mask (scaled)
         // During inference: dL/dx = dL/dy * (1-p)
@@ -106,5 +128,9 @@ public class Dropout extends Module {
         }
     }
     
+    /**
+     * getP方法。
+     * @return float类型返回值
+     */
     public float getP() { return p; }
 }

@@ -8,6 +8,9 @@ import com.zifang.util.numpy.NdArray;
  * <p>
  * L1 = (1/n) * Σ|predictions[i] - targets[i]|
  */
+/**
+ * L1Loss类。
+ */
 public class L1Loss implements LossFunction {
 
     /**
@@ -18,6 +21,12 @@ public class L1Loss implements LossFunction {
      * @return Scalar loss value
      */
     @Override
+    /**
+     * compute方法。
+     *      * @param predictions NdArray类型参数
+     * @param targets NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray compute(NdArray predictions, NdArray targets) {
         validateInputs(predictions, targets);
 
@@ -43,6 +52,12 @@ public class L1Loss implements LossFunction {
      * @return Gradient array with same shape as predictions
      */
     @Override
+    /**
+     * gradient方法。
+     *      * @param predictions NdArray类型参数
+     * @param targets NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray gradient(NdArray predictions, NdArray targets) {
         validateInputs(predictions, targets);
 

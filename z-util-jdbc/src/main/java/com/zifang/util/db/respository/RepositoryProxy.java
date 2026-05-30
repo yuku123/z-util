@@ -6,6 +6,9 @@ import com.zifang.util.proxy.ProxyUtil;
 /**
  * 仓储代理工厂，用于创建Repository接口的动态代理实例
  */
+/**
+ * RepositoryProxy类。
+ */
 public class RepositoryProxy {
 
     /**
@@ -14,6 +17,11 @@ public class RepositoryProxy {
      * @param clazz Repository接口类型
      * @param <I>   接口类型
      * @return 代理后的接口实现实例
+     */
+    /**
+     * proxy方法。
+     *      * @param clazz ClassI类型参数
+     * @return static <I> I类型返回值
      */
     public static <I> I proxy(Class<I> clazz) {
         return ProxyUtil.newProxyInstance(new BaseRepositoryInvocationHandler(clazz), clazz);

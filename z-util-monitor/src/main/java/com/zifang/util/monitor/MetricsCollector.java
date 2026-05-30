@@ -20,6 +20,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * 可通过 {@link MetricsRegistry} 进行注册，支持按需启用/停用。
  * </p>
  */
+/**
+ * MetricsCollector类。
+ */
 public class MetricsCollector {
 
     private final MetricsRegistry registry;
@@ -35,6 +38,9 @@ public class MetricsCollector {
     private final ClassLoadingMXBean classLoadingMXBean;
     private final List<GarbageCollectorMXBean> gcMXBeans;
 
+    /**
+     * MetricsCollector方法。
+     */
     public MetricsCollector() {
         this.registry = MetricsRegistry.getInstance();
         this.memoryMXBean = ManagementFactory.getMemoryMXBean();
@@ -48,6 +54,9 @@ public class MetricsCollector {
     /**
      * 启用所有内置指标采集
      */
+    /**
+     * enableAll方法。
+     */
     public void enableAll() {
         enableJvm();
         enableOs();
@@ -56,6 +65,9 @@ public class MetricsCollector {
 
     /**
      * 禁用所有内置指标采集
+     */
+    /**
+     * disableAll方法。
      */
     public void disableAll() {
         disableJvm();
@@ -66,6 +78,9 @@ public class MetricsCollector {
 
     /**
      * 启用 JVM 指标采集
+     */
+    /**
+     * enableJvm方法。
      */
     public void enableJvm() {
         if (jvmEnabled) {
@@ -128,6 +143,9 @@ public class MetricsCollector {
     /**
      * 停用 JVM 指标采集
      */
+    /**
+     * disableJvm方法。
+     */
     public void disableJvm() {
         if (!jvmEnabled) {
             return;
@@ -145,6 +163,9 @@ public class MetricsCollector {
 
     /**
      * 启用操作系统指标采集
+     */
+    /**
+     * enableOs方法。
      */
     public void enableOs() {
         if (osEnabled) {
@@ -173,6 +194,9 @@ public class MetricsCollector {
     /**
      * 停用操作系统指标采集
      */
+    /**
+     * disableOs方法。
+     */
     public void disableOs() {
         if (!osEnabled) {
             return;
@@ -188,6 +212,9 @@ public class MetricsCollector {
 
     /**
      * 启用线程指标采集
+     */
+    /**
+     * enableThread方法。
      */
     public void enableThread() {
         if (threadEnabled) {
@@ -245,6 +272,9 @@ public class MetricsCollector {
     /**
      * 停用线程指标采集
      */
+    /**
+     * disableThread方法。
+     */
     public void disableThread() {
         if (!threadEnabled) {
             return;
@@ -258,18 +288,34 @@ public class MetricsCollector {
         }
     }
 
+    /**
+     * isJvmEnabled方法。
+     * @return boolean类型返回值
+     */
     public boolean isJvmEnabled() {
         return jvmEnabled;
     }
 
+    /**
+     * isOsEnabled方法。
+     * @return boolean类型返回值
+     */
     public boolean isOsEnabled() {
         return osEnabled;
     }
 
+    /**
+     * isThreadEnabled方法。
+     * @return boolean类型返回值
+     */
     public boolean isThreadEnabled() {
         return threadEnabled;
     }
 
+    /**
+     * getRegistry方法。
+     * @return MetricsRegistry类型返回值
+     */
     public MetricsRegistry getRegistry() {
         return registry;
     }

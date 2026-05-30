@@ -18,6 +18,9 @@ import java.util.Map;
  *
  * @see PivotANode
  */
+/**
+ * PivotA类。
+ */
 public class PivotA {
 
     /**
@@ -35,6 +38,10 @@ public class PivotA {
      *
      * @return Pivot列定义列表
      */
+    /**
+     * getPivotColumnDefinations方法。
+     * @return List<PivotANode>类型返回值
+     */
     public List<PivotANode> getPivotColumnDefinations() {
         return pivotColumnDefinations;
     }
@@ -43,6 +50,10 @@ public class PivotA {
      * 设置Pivot列定义列表。
      *
      * @param pivotColumnDefinations Pivot列定义列表
+     */
+    /**
+     * setPivotColumnDefinations方法。
+     *      * @param pivotColumnDefinations ListPivotANode类型参数
      */
     public void setPivotColumnDefinations(List<PivotANode> pivotColumnDefinations) {
         this.pivotColumnDefinations = pivotColumnDefinations;
@@ -53,6 +64,10 @@ public class PivotA {
      *
      * @return 列名映射表
      */
+    /**
+     * getColumnMap方法。
+     * @return Map<String, String>类型返回值
+     */
     public Map<String, String> getColumnMap() {
         return columnMap;
     }
@@ -61,6 +76,10 @@ public class PivotA {
      * 设置列名映射表。
      *
      * @param columnMap 列名映射表
+     */
+    /**
+     * setColumnMap方法。
+     *      * @param columnMap MapString,类型参数
      */
     public void setColumnMap(Map<String, String> columnMap) {
         this.columnMap = columnMap;

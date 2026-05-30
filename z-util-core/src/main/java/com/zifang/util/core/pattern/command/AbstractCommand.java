@@ -16,6 +16,9 @@ public abstract class AbstractCommand implements ICommand {
      * 3. {@link #postExecute()} - 后置处理
      */
     @Override
+    /**
+     * execute方法。
+     */
     public void execute() {
         preExecute();
         execute();
@@ -27,6 +30,9 @@ public abstract class AbstractCommand implements ICommand {
      * 子类可重写此方法以执行清理、资源释放等操作。
      */
     @Override
+    /**
+     * postExecute方法。
+     */
     public void postExecute() {
 
     }
@@ -36,6 +42,9 @@ public abstract class AbstractCommand implements ICommand {
      * 子类可重写此方法以执行参数校验、资源准备等操作。
      */
     @Override
+    /**
+     * preExecute方法。
+     */
     public void preExecute() {
 
     }

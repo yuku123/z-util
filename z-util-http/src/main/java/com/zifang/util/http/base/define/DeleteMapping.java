@@ -11,6 +11,9 @@ import java.lang.annotation.*;
  * @author zifang
  */
 @Retention(RetentionPolicy.RUNTIME)
+/**
+ * DeleteMapping注解。
+ */
 public @interface DeleteMapping {
 
     /**

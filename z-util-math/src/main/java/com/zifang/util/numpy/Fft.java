@@ -4,6 +4,9 @@ package com.zifang.util.numpy;
  * FFT operations for 1D and 2D signals.
  * Provides numpy.fft equivalent functionality.
  */
+/**
+ * Fft类。
+ */
 public class Fft {
 
     private static final double TWO_PI = 2.0 * Math.PI;
@@ -20,6 +23,11 @@ public class Fft {
      * 1D Discrete Fourier Transform.
      * Returns the FFT of the input array.
      */
+    /**
+     * fft方法。
+     *      * @param x ComplexNdArray类型参数
+     * @return static ComplexNdArray类型返回值
+     */
     public static ComplexNdArray fft(ComplexNdArray x) {
         int n = x.length();
         if (n == 1) {
@@ -35,6 +43,11 @@ public class Fft {
         return fftNaive(x);
     }
 
+    /**
+     * fft方法。
+     *      * @param x NdArray类型参数
+     * @return static ComplexNdArray类型返回值
+     */
     public static ComplexNdArray fft(NdArray x) {
         return fft(toComplex(x));
     }
@@ -100,6 +113,11 @@ public class Fft {
     /**
      * 1D Inverse Discrete Fourier Transform.
      */
+    /**
+     * ifft方法。
+     *      * @param x ComplexNdArray类型参数
+     * @return static ComplexNdArray类型返回值
+     */
     public static ComplexNdArray ifft(ComplexNdArray x) {
         int n = x.length();
         // Conjugate, FFT, conjugate, scale
@@ -114,12 +132,22 @@ public class Fft {
         return new ComplexNdArray(resultRe, resultIm);
     }
 
+    /**
+     * ifft方法。
+     *      * @param x NdArray类型参数
+     * @return static ComplexNdArray类型返回值
+     */
     public static ComplexNdArray ifft(NdArray x) {
         return ifft(toComplex(x));
     }
 
     /**
      * 2D Discrete Fourier Transform.
+     */
+    /**
+     * fft2方法。
+     *      * @param x ComplexNdArray类型参数
+     * @return static ComplexNdArray类型返回值
      */
     public static ComplexNdArray fft2(ComplexNdArray x) {
         int rows = x.rows();
@@ -148,12 +176,22 @@ public class Fft {
         return colFFT;
     }
 
+    /**
+     * fft2方法。
+     *      * @param x NdArray类型参数
+     * @return static ComplexNdArray类型返回值
+     */
     public static ComplexNdArray fft2(NdArray x) {
         return fft2(toComplex(x));
     }
 
     /**
      * 2D Inverse Discrete Fourier Transform.
+     */
+    /**
+     * ifft2方法。
+     *      * @param x ComplexNdArray类型参数
+     * @return static ComplexNdArray类型返回值
      */
     public static ComplexNdArray ifft2(ComplexNdArray x) {
         int rows = x.rows();
@@ -182,6 +220,11 @@ public class Fft {
         return colIFFT;
     }
 
+    /**
+     * ifft2方法。
+     *      * @param x NdArray类型参数
+     * @return static ComplexNdArray类型返回值
+     */
     public static ComplexNdArray ifft2(NdArray x) {
         return ifft2(toComplex(x));
     }
@@ -191,6 +234,12 @@ public class Fft {
      * Returns the frequencies for the FFT output.
      * @param n Number of samples
      * @param d Sample spacing
+     */
+    /**
+     * fftfreq方法。
+     *      * @param n int类型参数
+     * @param d double类型参数
+     * @return static NdArray类型返回值
      */
     public static NdArray fftfreq(int n, double d) {
         double[] freqs = new double[n];
@@ -210,6 +259,11 @@ public class Fft {
     /**
      * Real FFT (only positive frequencies for real input).
      * Returns only the positive half of the frequency spectrum.
+     */
+    /**
+     * rfft方法。
+     *      * @param x NdArray类型参数
+     * @return static ComplexNdArray类型返回值
      */
     public static ComplexNdArray rfft(NdArray x) {
         int cols = x.ndim() == 1 ? x.getShape().get(0) : x.getShape().get(1);
@@ -258,6 +312,11 @@ public class Fft {
         private final int rows;
         private final int cols;
 
+    /**
+     * ComplexNdArray方法。
+     *      * @param real double[]类型参数
+     * @param imag double[]类型参数
+     */
         public ComplexNdArray(double[] real, double[] imag) {
             this.re = real.clone();
             this.im = imag.clone();
@@ -266,6 +325,11 @@ public class Fft {
             this.cols = real.length;
         }
 
+    /**
+     * ComplexNdArray方法。
+     *      * @param rows int类型参数
+     * @param cols int类型参数
+     */
         public ComplexNdArray(int rows, int cols) {
             this.rows = rows;
             this.cols = cols;
@@ -274,36 +338,76 @@ public class Fft {
             this.im = new double[length];
         }
 
+    /**
+     * re方法。
+     *      * @param i int类型参数
+     * @return double类型返回值
+     */
         public double re(int i) {
             return re[i];
         }
 
+    /**
+     * im方法。
+     *      * @param i int类型参数
+     * @return double类型返回值
+     */
         public double im(int i) {
             return im[i];
         }
 
+    /**
+     * length方法。
+     * @return int类型返回值
+     */
         public int length() {
             return length;
         }
 
+    /**
+     * rows方法。
+     * @return int类型返回值
+     */
         public int rows() {
             return rows;
         }
 
+    /**
+     * cols方法。
+     * @return int类型返回值
+     */
         public int cols() {
             return cols;
         }
 
+    /**
+     * set方法。
+     *      * @param i int类型参数
+     * @param real double类型参数
+     * @param imag double类型参数
+     */
         public void set(int i, double real, double imag) {
             re[i] = real;
             im[i] = imag;
         }
 
+    /**
+     * set方法。
+     *      * @param row int类型参数
+     * @param col int类型参数
+     * @param real double类型参数
+     * @param imag double类型参数
+     */
         public void set(int row, int col, double real, double imag) {
             re[row * cols + col] = real;
             im[row * cols + col] = imag;
         }
 
+    /**
+     * getRow方法。
+     *      * @param row int类型参数
+     * @return ComplexNdArray类型返回值
+     */
         public ComplexNdArray getRow(int row) {
             double[] rowRe = new double[cols];
             double[] rowIm = new double[cols];
@@ -314,6 +418,11 @@ public class Fft {
             return new ComplexNdArray(rowRe, rowIm);
         }
 
+    /**
+     * getColumn方法。
+     *      * @param col int类型参数
+     * @return ComplexNdArray类型返回值
+     */
         public ComplexNdArray getColumn(int col) {
             double[] colRe = new double[rows];
             double[] colIm = new double[rows];
@@ -324,10 +433,18 @@ public class Fft {
             return new ComplexNdArray(colRe, colIm);
         }
 
+    /**
+     * copy方法。
+     * @return ComplexNdArray类型返回值
+     */
         public ComplexNdArray copy() {
             return new ComplexNdArray(re.clone(), im.clone());
         }
 
+    /**
+     * conjugate方法。
+     * @return ComplexNdArray类型返回值
+     */
         public ComplexNdArray conjugate() {
             double[] conjRe = re.clone();
             double[] conjIm = new double[length];
@@ -337,11 +454,20 @@ public class Fft {
             return new ComplexNdArray(conjRe, conjIm);
         }
 
+    /**
+     * magnitude方法。
+     *      * @param i int类型参数
+     * @return double类型返回值
+     */
         public double magnitude(int i) {
             return Math.sqrt(re[i] * re[i] + im[i] * im[i]);
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append("[");

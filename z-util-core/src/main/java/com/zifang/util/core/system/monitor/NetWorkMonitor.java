@@ -8,6 +8,9 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 
+/**
+ * NetWorkMonitor类。
+ */
 public class NetWorkMonitor {
 
     /**

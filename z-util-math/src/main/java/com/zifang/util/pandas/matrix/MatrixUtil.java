@@ -28,5 +28,8 @@ package com.zifang.util.pandas.matrix;
  * @see Matrix
  * @see com.zifang.util.pandas.matrix.Linalg
  */
+/**
+ * MatrixUtil类。
+ */
 public class MatrixUtil {
 }

@@ -4,6 +4,9 @@ package com.zifang.util.visuallization.swing.manager.tree;
  * 树形节点数据类
  * 存储树形节点的ID、名称和父节点ID信息
  */
+/**
+ * TreeNode类。
+ */
 public class TreeNode {
     private String id;
     private String name;

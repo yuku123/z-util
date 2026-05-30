@@ -28,6 +28,9 @@ import javax.sql.DataSource;
  * @see DataSourceManager
  * @see javax.sql.DataSource
  */
+/**
+ * DatasourceFactory接口。
+ */
 public interface DatasourceFactory {
 
     /**

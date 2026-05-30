@@ -5,6 +5,9 @@ package com.zifang.util.ml.nnet;
  * <p>
  * MSE = (1/n) * Σ(predictions[i] - targets[i])²
  */
+/**
+ * MSELoss类。
+ */
 public class MSELoss implements LossFunction {
 
     /**
@@ -16,6 +19,12 @@ public class MSELoss implements LossFunction {
      * @throws IllegalArgumentException 当数组长度不匹配时
      */
     @Override
+    /**
+     * compute方法。
+     *      * @param predictions double[]类型参数
+     * @param targets double[]类型参数
+     * @return double类型返回值
+     */
     public double compute(double[] predictions, double[] targets) {
         double sum = 0;
         for (int i = 0; i < predictions.length; i++) {
@@ -34,6 +43,12 @@ public class MSELoss implements LossFunction {
      * @throws IllegalArgumentException 当数组长度不匹配时
      */
     @Override
+    /**
+     * gradient方法。
+     *      * @param predictions double[]类型参数
+     * @param targets double[]类型参数
+     * @return double[]类型返回值
+     */
     public double[] gradient(double[] predictions, double[] targets) {
         double[] gradient = new double[predictions.length];
         for (int i = 0; i < predictions.length; i++) {

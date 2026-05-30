@@ -10,6 +10,9 @@ import com.zifang.util.numpy.Shape;
  * Input: (batchSize, channels, height, width)
  * Output: (batchSize, channels, height, width)
  */
+/**
+ * BatchNorm2d类。
+ */
 public class BatchNorm2d extends Module {
     
     private final int numFeatures;
@@ -25,10 +28,20 @@ public class BatchNorm2d extends Module {
     private NdArray savedVar;
     private NdArray savedInput;
     
+    /**
+     * BatchNorm2d方法。
+     *      * @param numFeatures int类型参数
+     */
     public BatchNorm2d(int numFeatures) {
         this(numFeatures, 1e-5f, 0.1f);
     }
     
+    /**
+     * BatchNorm2d方法。
+     *      * @param numFeatures int类型参数
+     * @param eps float类型参数
+     * @param momentum float类型参数
+     */
     public BatchNorm2d(int numFeatures, float eps, float momentum) {
         this.numFeatures = numFeatures;
         this.eps = eps;
@@ -44,6 +57,11 @@ public class BatchNorm2d extends Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         if (input.ndim() != 4) {
             throw new IllegalArgumentException("Input must be 4D: (batchSize, channels, height, width)");
@@ -156,6 +174,11 @@ public class BatchNorm2d extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         int batchSize = gradOutput.getShape().get(0);
         int channels = gradOutput.getShape().get(1);
@@ -254,8 +277,24 @@ public class BatchNorm2d extends Module {
         return gradInput;
     }
     
+    /**
+     * getRunningMean方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getRunningMean() { return runningMean; }
+    /**
+     * getRunningVar方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getRunningVar() { return runningVar; }
+    /**
+     * getGamma方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getGamma() { return gamma; }
+    /**
+     * getBeta方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getBeta() { return beta; }
 }

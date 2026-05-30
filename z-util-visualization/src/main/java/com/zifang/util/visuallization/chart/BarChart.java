@@ -9,6 +9,9 @@ import java.util.List;
  * 条形图组件
  * 用于可视化分类数据的分布，支持多系列数据展示、坐标轴标签、图例和网格线
  */
+/**
+ * BarChart类。
+ */
 public class BarChart extends ChartFrame {
 
     private final List<ChartSeries> seriesList;

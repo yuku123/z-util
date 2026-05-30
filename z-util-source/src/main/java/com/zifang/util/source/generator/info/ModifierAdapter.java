@@ -14,6 +14,9 @@ import java.util.Map;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * ModifierAdapter类。
+ */
 public class ModifierAdapter {
 
     /**
@@ -35,6 +38,11 @@ public class ModifierAdapter {
      *
      * @param modifier java.lang.reflect.Modifier中的修饰符常量值
      * @return 对应的javaparser修饰符关键字
+     */
+    /**
+     * getKeyWord方法。
+     *      * @param modifier int类型参数
+     * @return static com.github.javaparser.ast.Modifier.Keyword类型返回值
      */
     public static com.github.javaparser.ast.Modifier.Keyword getKeyWord(Integer modifier) {
         return modifierMap.get(modifier).getKeyword();

@@ -7,6 +7,9 @@ import java.awt.*;
  * 算法可视化框架（模板类）
  * 提供算法可视化所需的绘图基础组件
  */
+/**
+ * AlgoFrame类。
+ */
 public class AlgoFrame extends JFrame {
 
     private int canvasWidth;

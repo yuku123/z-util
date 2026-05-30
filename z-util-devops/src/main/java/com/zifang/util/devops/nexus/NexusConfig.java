@@ -8,5 +8,8 @@ package com.zifang.util.devops.nexus;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * NexusConfig类。
+ */
 public class NexusConfig {
 }

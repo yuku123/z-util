@@ -3,6 +3,9 @@ package com.zifang.util.numpy;
 /**
  * Data types supported by NdArray
  */
+/**
+ * DType枚举。
+ */
 public enum DType {
     INT8("int8"),
     INT16("int16"),
@@ -20,10 +23,19 @@ public enum DType {
         this.name = name;
     }
 
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * fromClass方法。
+     *      * @param cls Class?类型参数
+     * @return static DType类型返回值
+     */
     public static DType fromClass(Class<?> cls) {
         if (cls == byte.class || cls == Byte.class) return INT8;
         if (cls == short.class || cls == Short.class) return INT16;
@@ -36,6 +48,10 @@ public enum DType {
         return OBJECT;
     }
 
+    /**
+     * toClass方法。
+     * @return Class<?>类型返回值
+     */
     public Class<?> toClass() {
         switch (this) {
             case INT8: return byte.class;

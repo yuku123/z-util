@@ -30,6 +30,9 @@ import java.util.Date;
  * @see DateUtil
  * @see InstantUtil
  */
+/**
+ * TimestampUtil类。
+ */
 public class TimestampUtil {
 
     /**
@@ -50,10 +53,20 @@ public class TimestampUtil {
     /**
      * 默认DateTimeFormatter，格式为 {@link #PATTERN_DEFAULT}
      */
+    /**
+     * DateTimeFormatter.ofPattern方法。
+     *      * @param PATTERN_DEFAULT Object类型参数
+     * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
+     */
     public static final DateTimeFormatter FMT_DEFAULT = DateTimeFormatter.ofPattern(PATTERN_DEFAULT);
 
     /**
      * 毫秒级DateTimeFormatter，格式为 {@link #PATTERN_DATETIME_MS}
+     */
+    /**
+     * DateTimeFormatter.ofPattern方法。
+     *      * @param PATTERN_DATETIME_MS Object类型参数
+     * @return static final DateTimeFormatter FMT_DATETIME_MS =类型返回值
      */
     public static final DateTimeFormatter FMT_DATETIME_MS = DateTimeFormatter.ofPattern(PATTERN_DATETIME_MS);
 
@@ -65,6 +78,11 @@ public class TimestampUtil {
      * @param timestamp 要格式化的时间戳，不能为null
      * @return 格式化后的时间字符串
      * @throws NullPointerException if timestamp is null
+     */
+    /**
+     * format方法。
+     *      * @param timestamp Timestamp类型参数
+     * @return static String类型返回值
      */
     public static String format(Timestamp timestamp) {
         return format(timestamp, PATTERN_DEFAULT);
@@ -78,6 +96,12 @@ public class TimestampUtil {
      * @return 格式化后的时间字符串
      * @throws NullPointerException if timestamp is null
      */
+    /**
+     * format方法。
+     *      * @param timestamp Timestamp类型参数
+     * @param pattern String类型参数
+     * @return static String类型返回值
+     */
     public static String format(Timestamp timestamp, String pattern) {
         if (timestamp == null) return null;
         return new SimpleDateFormat(pattern).format(timestamp);
@@ -90,6 +114,12 @@ public class TimestampUtil {
      * @param formatter 日期时间格式化器，不能为null
      * @return 格式化后的时间字符串
      * @throws NullPointerException if timestamp or formatter is null
+     */
+    /**
+     * format方法。
+     *      * @param timestamp Timestamp类型参数
+     * @param formatter DateTimeFormatter类型参数
+     * @return static String类型返回值
      */
     public static String format(Timestamp timestamp, DateTimeFormatter formatter) {
         if (timestamp == null) return null;
@@ -105,6 +135,11 @@ public class TimestampUtil {
      * @return 解析后的Timestamp，如果输入为空则返回null
      * @throws IllegalArgumentException if the string does not match the expected format
      */
+    /**
+     * parse方法。
+     *      * @param dateStr String类型参数
+     * @return static Timestamp类型返回值
+     */
     public static Timestamp parse(String dateStr) {
         if (dateStr == null || dateStr.trim().isEmpty()) return null;
         return Timestamp.valueOf(dateStr);
@@ -116,6 +151,12 @@ public class TimestampUtil {
      * @param dateStr 时间字符串
      * @param pattern 时间格式模式，如 "yyyy-MM-dd HH:mm:ss"
      * @return 解析后的Timestamp，解析失败返回null
+     */
+    /**
+     * parse方法。
+     *      * @param dateStr String类型参数
+     * @param pattern String类型参数
+     * @return static Timestamp类型返回值
      */
     public static Timestamp parse(String dateStr, String pattern) {
         if (dateStr == null || dateStr.trim().isEmpty()) return null;
@@ -133,6 +174,10 @@ public class TimestampUtil {
      *
      * @return 当前时间的Timestamp对象
      */
+    /**
+     * now方法。
+     * @return static Timestamp类型返回值
+     */
     public static Timestamp now() {
         return new Timestamp(System.currentTimeMillis());
     }
@@ -142,6 +187,11 @@ public class TimestampUtil {
      *
      * @param time 毫秒值，表示自1970年1月1日以来的毫秒数
      * @return 指定毫秒值的Timestamp对象
+     */
+    /**
+     * of方法。
+     *      * @param time long类型参数
+     * @return static Timestamp类型返回值
      */
     public static Timestamp of(long time) {
         return new Timestamp(time);
@@ -154,6 +204,11 @@ public class TimestampUtil {
      * @return 对应的Timestamp对象
      * @throws NullPointerException if localDateTime is null
      */
+    /**
+     * of方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static Timestamp类型返回值
+     */
     public static Timestamp of(LocalDateTime localDateTime) {
         return Timestamp.valueOf(localDateTime);
     }
@@ -164,6 +219,11 @@ public class TimestampUtil {
      * @param instant Instant对象，不能为null
      * @return 对应的Timestamp对象
      * @throws NullPointerException if instant is null
+     */
+    /**
+     * of方法。
+     *      * @param instant Instant类型参数
+     * @return static Timestamp类型返回值
      */
     public static Timestamp of(Instant instant) {
         return Timestamp.from(instant);
@@ -179,6 +239,12 @@ public class TimestampUtil {
      * @return 增加后的新Timestamp对象
      * @throws NullPointerException if timestamp is null
      */
+    /**
+     * plusMillis方法。
+     *      * @param timestamp Timestamp类型参数
+     * @param millis long类型参数
+     * @return static Timestamp类型返回值
+     */
     public static Timestamp plusMillis(Timestamp timestamp, long millis) {
         return new Timestamp(timestamp.getTime() + millis);
     }
@@ -190,6 +256,12 @@ public class TimestampUtil {
      * @param millis    要减少的毫秒数，可以为负数
      * @return 减少后的新Timestamp对象
      * @throws NullPointerException if timestamp is null
+     */
+    /**
+     * minusMillis方法。
+     *      * @param timestamp Timestamp类型参数
+     * @param millis long类型参数
+     * @return static Timestamp类型返回值
      */
     public static Timestamp minusMillis(Timestamp timestamp, long millis) {
         return new Timestamp(timestamp.getTime() - millis);
@@ -203,6 +275,12 @@ public class TimestampUtil {
      * @return 增加后的新Timestamp对象
      * @throws NullPointerException if timestamp is null
      */
+    /**
+     * plusSeconds方法。
+     *      * @param timestamp Timestamp类型参数
+     * @param seconds long类型参数
+     * @return static Timestamp类型返回值
+     */
     public static Timestamp plusSeconds(Timestamp timestamp, long seconds) {
         return new Timestamp(timestamp.getTime() + seconds * 1000);
     }
@@ -214,6 +292,12 @@ public class TimestampUtil {
      * @param seconds   要减少的秒数，可以为负数
      * @return 减少后的新Timestamp对象
      * @throws NullPointerException if timestamp is null
+     */
+    /**
+     * minusSeconds方法。
+     *      * @param timestamp Timestamp类型参数
+     * @param seconds long类型参数
+     * @return static Timestamp类型返回值
      */
     public static Timestamp minusSeconds(Timestamp timestamp, long seconds) {
         return new Timestamp(timestamp.getTime() - seconds * 1000);
@@ -229,6 +313,12 @@ public class TimestampUtil {
      * @return 如果ts1在ts2之前则返回true
      * @throws NullPointerException if ts1 or ts2 is null
      */
+    /**
+     * isBefore方法。
+     *      * @param ts1 Timestamp类型参数
+     * @param ts2 Timestamp类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isBefore(Timestamp ts1, Timestamp ts2) {
         return ts1.before(ts2);
     }
@@ -240,6 +330,12 @@ public class TimestampUtil {
      * @param ts2 第二个时间戳，不能为null
      * @return 如果ts1在ts2之后则返回true
      * @throws NullPointerException if ts1 or ts2 is null
+     */
+    /**
+     * isAfter方法。
+     *      * @param ts1 Timestamp类型参数
+     * @param ts2 Timestamp类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isAfter(Timestamp ts1, Timestamp ts2) {
         return ts1.after(ts2);
@@ -253,6 +349,11 @@ public class TimestampUtil {
      * @param timestamp 要转换的时间戳
      * @return 转换后的Date对象，如果输入为null则返回null
      */
+    /**
+     * toDate方法。
+     *      * @param timestamp Timestamp类型参数
+     * @return static Date类型返回值
+     */
     public static Date toDate(Timestamp timestamp) {
         if (timestamp == null) return null;
         return new Date(timestamp.getTime());
@@ -263,6 +364,11 @@ public class TimestampUtil {
      *
      * @param timestamp 要转换的时间戳
      * @return 转换后的LocalDateTime对象，如果输入为null则返回null
+     */
+    /**
+     * toLocalDateTime方法。
+     *      * @param timestamp Timestamp类型参数
+     * @return static LocalDateTime类型返回值
      */
     public static LocalDateTime toLocalDateTime(Timestamp timestamp) {
         if (timestamp == null) return null;
@@ -275,6 +381,11 @@ public class TimestampUtil {
      * @param timestamp 要转换的时间戳
      * @return 转换后的LocalDate对象（不含时间部分），如果输入为null则返回null
      */
+    /**
+     * toLocalDate方法。
+     *      * @param timestamp Timestamp类型参数
+     * @return static LocalDate类型返回值
+     */
     public static LocalDate toLocalDate(Timestamp timestamp) {
         if (timestamp == null) return null;
         return timestamp.toLocalDateTime().toLocalDate();
@@ -286,6 +397,11 @@ public class TimestampUtil {
      * @param timestamp 要转换的时间戳
      * @return 转换后的Instant对象，如果输入为null则返回null
      */
+    /**
+     * toInstant方法。
+     *      * @param timestamp Timestamp类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant toInstant(Timestamp timestamp) {
         if (timestamp == null) return null;
         return timestamp.toInstant();
@@ -296,6 +412,11 @@ public class TimestampUtil {
      *
      * @param timestamp 要转换的时间戳
      * @return 毫秒值，如果输入为null则返回0
+     */
+    /**
+     * toEpochMilli方法。
+     *      * @param timestamp Timestamp类型参数
+     * @return static long类型返回值
      */
     public static long toEpochMilli(Timestamp timestamp) {
         if (timestamp == null) return 0;
@@ -310,6 +431,11 @@ public class TimestampUtil {
      * @param date 要转换的Date对象
      * @return 转换后的Timestamp对象，如果输入为null则返回null
      */
+    /**
+     * fromDate方法。
+     *      * @param date Date类型参数
+     * @return static Timestamp类型返回值
+     */
     public static Timestamp fromDate(Date date) {
         if (date == null) return null;
         return new Timestamp(date.getTime());
@@ -320,6 +446,11 @@ public class TimestampUtil {
      *
      * @param localDateTime 要转换的LocalDateTime对象
      * @return 转换后的Timestamp对象，如果输入为null则返回null
+     */
+    /**
+     * fromLocalDateTime方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static Timestamp类型返回值
      */
     public static Timestamp fromLocalDateTime(LocalDateTime localDateTime) {
         if (localDateTime == null) return null;
@@ -334,6 +465,11 @@ public class TimestampUtil {
      * @param localDate 要转换的LocalDate对象
      * @return 转换后的Timestamp对象，如果输入为null则返回null
      */
+    /**
+     * fromLocalDate方法。
+     *      * @param localDate LocalDate类型参数
+     * @return static Timestamp类型返回值
+     */
     public static Timestamp fromLocalDate(LocalDate localDate) {
         if (localDate == null) return null;
         return Timestamp.valueOf(localDate.atStartOfDay());
@@ -345,6 +481,11 @@ public class TimestampUtil {
      * @param instant 要转换的Instant对象
      * @return 转换后的Timestamp对象，如果输入为null则返回null
      */
+    /**
+     * fromInstant方法。
+     *      * @param instant Instant类型参数
+     * @return static Timestamp类型返回值
+     */
     public static Timestamp fromInstant(Instant instant) {
         if (instant == null) return null;
         return Timestamp.from(instant);
@@ -355,6 +496,11 @@ public class TimestampUtil {
      *
      * @param epochMilli 自1970年1月1日以来的毫秒数
      * @return 对应的Timestamp对象
+     */
+    /**
+     * fromEpochMilli方法。
+     *      * @param epochMilli long类型参数
+     * @return static Timestamp类型返回值
      */
     public static Timestamp fromEpochMilli(long epochMilli) {
         return new Timestamp(epochMilli);

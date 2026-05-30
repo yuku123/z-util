@@ -9,16 +9,28 @@ import com.zifang.util.numpy.Shape;
  * Input: (*)
  * Output: (shape)
  */
+/**
+ * Reshape类。
+ */
 public class Reshape extends Module {
     
     private final int[] targetShape;
     private int[] inferredShape;
     
+    /**
+     * Reshape方法。
+     *      * @param targetShape int...类型参数
+     */
     public Reshape(int... targetShape) {
         this.targetShape = targetShape;
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         int inputSize = input.size();
         
@@ -58,11 +70,20 @@ public class Reshape extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         // Reshape back to input shape (which is stored as original shape)
         return gradOutput.reshape(gradOutput.getShape().getDimensions());
     }
     
+    /**
+     * getTargetShape方法。
+     * @return int[]类型返回值
+     */
     public int[] getTargetShape() {
         return inferredShape != null ? inferredShape : targetShape;
     }

@@ -8,6 +8,9 @@ import javax.xml.bind.annotation.XmlElement;
  * @author zifang
  * Jul 25, 2013 9:34:16 PM
  */
+/**
+ * SmsBody类。
+ */
 public class SmsBody {
 
     /**
@@ -25,39 +28,72 @@ public class SmsBody {
      */
     private String destAddr;
 
+    /**
+     * getContent方法。
+     * @return String类型返回值
+     */
     public String getContent() {
         return content;
     }
 
     @XmlElement(name = "CONTENT")
+    /**
+     * setContent方法。
+     *      * @param content String类型参数
+     */
     public void setContent(String content) {
         this.content = content;
     }
 
+    /**
+     * getSourceAddr方法。
+     * @return String类型返回值
+     */
     public String getSourceAddr() {
         return sourceAddr;
     }
 
     @XmlElement(name = "SOURCEADDR")
+    /**
+     * setSourceAddr方法。
+     *      * @param sourceAddr String类型参数
+     */
     public void setSourceAddr(String sourceAddr) {
         this.sourceAddr = sourceAddr;
     }
 
+    /**
+     * getDestAddr方法。
+     * @return String类型返回值
+     */
     public String getDestAddr() {
         return destAddr;
     }
 
     @XmlElement(name = "DESTADDR")
+    /**
+     * setDestAddr方法。
+     *      * @param destAddr String类型参数
+     */
     public void setDestAddr(String destAddr) {
         this.destAddr = destAddr;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "SmsBody{content=" + content + ", sourceAddr=" + sourceAddr + ", destAddr=" + destAddr + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -68,6 +104,10 @@ public class SmsBody {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return java.util.Objects.hash(content, sourceAddr, destAddr);
     }

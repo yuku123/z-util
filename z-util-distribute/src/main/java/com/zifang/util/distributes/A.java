@@ -12,5 +12,8 @@ package com.zifang.util.distributes;
  * @author zifang
  * @version 1.0
  */
+/**
+ * A类。
+ */
 public class A {
 }

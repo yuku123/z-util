@@ -9,6 +9,9 @@ import com.zifang.util.numpy.Shape;
  * Uses online learning (stochastic gradient descent).
  * Convergence only guaranteed for linearly separable data.
  */
+/**
+ * Perceptron类。
+ */
 public class Perceptron {
     
     private double learningRate;
@@ -21,6 +24,11 @@ public class Perceptron {
      * 
      * @param learningRate Learning rate for weight updates
      * @param nIterations Number of passes over the training data
+     */
+    /**
+     * Perceptron方法。
+     *      * @param learningRate double类型参数
+     * @param nIterations int类型参数
      */
     public Perceptron(double learningRate, int nIterations) {
         this.learningRate = learningRate;
@@ -64,6 +72,11 @@ public class Perceptron {
      * @param X Feature matrix of shape [n_samples, n_features]
      * @param y Target labels (binary: 0 or 1)
      */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
+     */
     public void fit(NdArray X, int[] y) {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
@@ -106,6 +119,11 @@ public class Perceptron {
      * @param X Feature matrix of shape [n_samples, n_features]
      * @return Array of predicted class labels (0 or 1)
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
@@ -138,6 +156,12 @@ public class Perceptron {
      * @param X Feature matrix of shape [n_samples, n_features]
      * @param y True labels
      * @return Accuracy (fraction of correctly classified samples)
+     */
+    /**
+     * score方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
+     * @return double类型返回值
      */
     public double score(NdArray X, int[] y) {
         int[] predictions = predict(X);

@@ -17,7 +17,15 @@ import java.util.Iterator;
  * PDF图片提取测试类
  * 演示如何从PDF文档中提取嵌入的图片
  */
+/**
+ * ImagePdfTest类。
+ */
 public class ImagePdfTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
         File file = new File("/Users/zifang/Downloads/现代西班牙语1.pdf");
         PDDocument document = PDDocument.load(file);

@@ -8,6 +8,9 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
+/**
+ * NotNull注解。
+ */
 public @interface NotNull {
     String message() default "不能为空";
 }

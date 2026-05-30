@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
  *
  * @author zifang
  */
+/**
+ * Collections类。
+ */
 public class Collections {
 
     private static final Logger log = LoggerFactory.getLogger(Collections.class);
@@ -23,6 +26,11 @@ public class Collections {
      * @param collection 可变数量的集合
      * @param <E>        泛型元素类型
      * @return 并集结果集合
+     */
+    /**
+     * union方法。
+     *      * @param collection CollectionE...类型参数
+     * @return static <E> Collection<E>类型返回值
      */
     public static <E> Collection<E> union(Collection<E>... collection) {
         Collection<E> base = new ArrayList<>();
@@ -41,6 +49,12 @@ public class Collections {
      * @param <E>         泛型元素类型
      * @return 交集结果集合
      */
+    /**
+     * retain方法。
+     *      * @param collection1 CollectionE类型参数
+     * @param collection2 CollectionE类型参数
+     * @return static <E> Collection<E>类型返回值
+     */
     public static <E> Collection<E> retain(Collection<E> collection1, Collection<E> collection2) {
         Collection<E> left = new ArrayList<>(collection1);
         Collection<E> right = new ArrayList<>(collection2);
@@ -54,6 +68,11 @@ public class Collections {
      * @param collection 参数
      * @return boolean
      */
+    /**
+     * isEmptyCollection方法。
+     *      * @param collection Collection?类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isEmptyCollection(Collection<?> collection) {
         return collection == null || collection.isEmpty();
     }
@@ -63,6 +82,11 @@ public class Collections {
      *
      * @param collection 参数
      * @return boolean
+     */
+    /**
+     * isNotEmptyCollection方法。
+     *      * @param collection Collection?类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isNotEmptyCollection(Collection<?> collection) {
         return collection != null && !collection.isEmpty();
@@ -74,6 +98,11 @@ public class Collections {
      * @param map 参数
      * @return boolean
      */
+    /**
+     * isNotEmptyMap方法。
+     *      * @param map Map?,类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isNotEmptyMap(Map<?, ?> map) {
         return map != null && !map.isEmpty();
     }
@@ -83,6 +112,11 @@ public class Collections {
      *
      * @param map 参数
      * @return boolean
+     */
+    /**
+     * isEmptyMap方法。
+     *      * @param map Map?,类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isEmptyMap(Map<?, ?> map) {
         return map == null || map.isEmpty();
@@ -94,6 +128,11 @@ public class Collections {
      * @param list 待处理的列表
      * @param <T>  泛型元素类型
      * @return 去重后的列表；若输入为 null 或空列表，则返回空列表
+     */
+    /**
+     * removeDuplicate方法。
+     *      * @param list ListT类型参数
+     * @return static <T> List<T>类型返回值
      */
     public static <T> List<T> removeDuplicate(List<T> list) {
         if (list == null || list.size() == 0) {
@@ -112,6 +151,12 @@ public class Collections {
      * @param <T>   泛型元素类型
      * @return 交集列表；若任一列表为空或 null，则返回空列表
      */
+    /**
+     * intersection方法。
+     *      * @param list1 ListT类型参数
+     * @param list2 ListT类型参数
+     * @return static <T> List<T>类型返回值
+     */
     public static <T> List<T> intersection(List<T> list1, List<T> list2) {
         if (Checker.valid(list1, list2)) {
             Set<T> set = new HashSet<>(list1);
@@ -128,6 +173,12 @@ public class Collections {
      * @param set2 第二个集合
      * @param <T>  泛型元素类型
      * @return 交集集合；若任一集合为空或 null，则返回空集合
+     */
+    /**
+     * intersection方法。
+     *      * @param set1 CollectionT类型参数
+     * @param set2 CollectionT类型参数
+     * @return static <T> Set<T>类型返回值
      */
     public static <T> Set<T> intersection(Collection<T> set1, Collection<T> set2) {
         if (Checker.valid(set1, set2)) {
@@ -146,6 +197,12 @@ public class Collections {
      * @param <K>  键的泛型类型
      * @param <V>  值的泛型类型
      * @return 仅包含两个 Map 键交集的 Map；若任一 Map 为空或 null，则返回空 Map
+     */
+    /**
+     * intersection方法。
+     *      * @param map1 MapK,类型参数
+     * @param map2 MapK,类型参数
+     * @return static <K, V> Map<K, V>类型返回值
      */
     public static <K, V> Map<K, V> intersection(Map<K, V> map1, Map<K, V> map2) {
         Map<K, V> map = new HashMap<>(map1.size());
@@ -168,6 +225,12 @@ public class Collections {
      * @param <T>   泛型元素类型
      * @return 并集列表（不去重）
      */
+    /**
+     * unicon方法。
+     *      * @param list1 ListT类型参数
+     * @param list2 ListT类型参数
+     * @return static <T> List<T>类型返回值
+     */
     public static <T> List<T> unicon(List<T> list1, List<T> list2) {
         List<T> list = new ArrayList<>();
         list.addAll(list1);
@@ -183,6 +246,12 @@ public class Collections {
      * @param <T>  泛型元素类型
      * @return 并集集合（修改并返回 set1）
      */
+    /**
+     * unicon方法。
+     *      * @param set1 SetT类型参数
+     * @param set2 SetT类型参数
+     * @return static <T> Set<T>类型返回值
+     */
     public static <T> Set<T> unicon(Set<T> set1, Set<T> set2) {
         set1.addAll(set2);
         return set1;
@@ -195,6 +264,12 @@ public class Collections {
      * @param queue2 第二个队列
      * @param <T>    泛型元素类型
      * @return 并集队列（修改并返回 queue1）
+     */
+    /**
+     * unicon方法。
+     *      * @param queue1 QueueT类型参数
+     * @param queue2 QueueT类型参数
+     * @return static <T> Queue<T>类型返回值
      */
     public static <T> Queue<T> unicon(Queue<T> queue1, Queue<T> queue2) {
         queue1.addAll(queue2);
@@ -209,6 +284,12 @@ public class Collections {
      * @param <K>  键的泛型类型
      * @param <V>  值的泛型类型
      * @return 并集 Map
+     */
+    /**
+     * unicon方法。
+     *      * @param map1 MapK,类型参数
+     * @param map2 MapK,类型参数
+     * @return static <K, V> Map<K, V>类型返回值
      */
     public static <K, V> Map<K, V> unicon(Map<K, V> map1, Map<K, V> map2) {
         Map<K, V> map = new HashMap<>(map1.size() + map2.size());
@@ -225,6 +306,12 @@ public class Collections {
      * @param list2 减去的列表
      * @param <T>   泛型元素类型
      * @return 差集列表；从 list1 中移除 list2 包含的元素
+     */
+    /**
+     * subtract方法。
+     *      * @param list1 ListT类型参数
+     * @param list2 ListT类型参数
+     * @return static <T> List<T>类型返回值
      */
     public static <T> List<T> subtract(List<T> list1, List<T> list2) {
         List<T> list = new ArrayList<>(list1.size() + list2.size());
@@ -243,6 +330,12 @@ public class Collections {
      * @param <T>  泛型元素类型
      * @return 差集集合；从 set1 中移除 set2 包含的元素
      */
+    /**
+     * subtract方法。
+     *      * @param set1 SetT类型参数
+     * @param set2 SetT类型参数
+     * @return static <T> Set<T>类型返回值
+     */
     public static <T> Set<T> subtract(Set<T> set1, Set<T> set2) {
         Set<T> set = new HashSet<>(set1.size() + set2.size());
         if (Checker.valid(set1)) {
@@ -259,6 +352,12 @@ public class Collections {
      * @param queue2 减去的队列
      * @param <T>    泛型元素类型
      * @return 差集队列；从 queue1 中移除 queue2 包含的元素
+     */
+    /**
+     * subtract方法。
+     *      * @param queue1 QueueT类型参数
+     * @param queue2 QueueT类型参数
+     * @return static <T> Queue<T>类型返回值
      */
     public static <T> Queue<T> subtract(Queue<T> queue1, Queue<T> queue2) {
         Queue<T> queue = new LinkedList<>();
@@ -277,6 +376,12 @@ public class Collections {
      * @param <K>  键的泛型类型
      * @param <V>  值的泛型类型
      * @return 差集 Map；只保留 map1 中键不在 map2 中的键值对
+     */
+    /**
+     * subtract方法。
+     *      * @param map1 MapK,类型参数
+     * @param map2 MapK,类型参数
+     * @return static <K, V> Map<K, V>类型返回值
      */
     public static <K, V> Map<K, V> subtract(Map<K, V> map1, Map<K, V> map2) {
         Map<K, V> map = new HashMap<>(map1.size() + map2.size());
@@ -302,6 +407,12 @@ public class Collections {
      * @param <T>        泛型元素类型
      * @return 连接后的字符串；末尾不包含分隔符
      */
+    /**
+     * join方法。
+     *      * @param collection CollectionT类型参数
+     * @param separator String类型参数
+     * @return static <T> String类型返回值
+     */
     public static <T> String join(Collection<T> collection, String separator) {
         StringBuilder sb = new StringBuilder();
         for (T t : collection) {
@@ -320,6 +431,13 @@ public class Collections {
      * @param <K>         键的泛型类型
      * @param <V>         值的泛型类型
      * @return 连接后的字符串；末尾不包含键值对分隔符
+     */
+    /**
+     * join方法。
+     *      * @param map MapK,类型参数
+     * @param separator String类型参数
+     * @param separator1 String类型参数
+     * @return static <K, V> String类型返回值
      */
     public static <K, V> String join(Map<K, V> map, String separator, String separator1) {
         if (map == null || map.size() == 0) {
@@ -342,6 +460,12 @@ public class Collections {
      * @param <V>       泛型
      * @return 字符串
      */
+    /**
+     * keyJoin方法。
+     *      * @param map MapK,类型参数
+     * @param separator String类型参数
+     * @return static <K, V> String类型返回值
+     */
     public static <K, V> String keyJoin(Map<K, V> map, String separator) {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<K, V> entry : map.entrySet()) {
@@ -358,6 +482,12 @@ public class Collections {
      * @param <K>       泛型
      * @param <V>       泛型
      * @return 字符串
+     */
+    /**
+     * valueJoin方法。
+     *      * @param map MapK,类型参数
+     * @param separator String类型参数
+     * @return static <K, V> String类型返回值
      */
     public static <K, V> String valueJoin(Map<K, V> map, String separator) {
         StringBuilder sb = new StringBuilder();

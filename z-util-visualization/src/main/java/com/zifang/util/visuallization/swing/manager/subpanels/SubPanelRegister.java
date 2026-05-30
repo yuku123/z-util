@@ -8,6 +8,9 @@ import java.util.Map;
  * 子面板注册器
  * 用于管理界面上子面板的注册和查找
  */
+/**
+ * SubPanelRegister类。
+ */
 public class SubPanelRegister {
 
     private Map<Integer, JPanel> registedPanel;

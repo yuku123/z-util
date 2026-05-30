@@ -7,6 +7,9 @@ import java.io.Closeable;
 /**
  * Token流读取器
  */
+/**
+ * TokenReader接口。
+ */
 public interface TokenReader extends Closeable {
 
     /**

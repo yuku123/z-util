@@ -24,6 +24,9 @@ import java.util.Properties;
  * Supports both short (-s) and long (--long) options, option groups,
  * required options, and argument value parsing.
  */
+/**
+ * DefaultParser类。
+ */
 public class DefaultParser implements CommandLineParser {
 
     /** Current Options */
@@ -55,21 +58,49 @@ public class DefaultParser implements CommandLineParser {
     private static final String LONG_OPT_PREFIX = "--";
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments) throws ParseException {
         return parse(options, arguments, null, false);
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException {
         return parse(options, arguments, null, stopAtNonOption);
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param properties final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments, final Properties properties) throws ParseException {
         return parse(options, arguments, properties, false);
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param properties final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments, final Properties properties, final boolean stopAtNonOption)
             throws ParseException {
         // reset state
@@ -142,6 +173,12 @@ public class DefaultParser implements CommandLineParser {
 
     /**
      * Flattens the arguments array, splitting combined short options like "-abc" into "-a -b -c".
+     */
+    /**
+     * flatten方法。
+     *      * @param arguments final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return String[]类型返回值
      */
     protected String[] flatten(final String[] arguments, final boolean stopAtNonOption) throws ParseException {
         List<String> result = new ArrayList<>();

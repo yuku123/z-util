@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
  * 树形节点注册帮助类
  * 负责将注册的节点转换为Swing可用的树形结构
  */
+/**
+ * RegisterTreeNodeHelper类。
+ */
 public class RegisterTreeNodeHelper {
     /**
      * 将注册的节点转换为DefaultMutableTreeNode

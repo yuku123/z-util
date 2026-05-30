@@ -15,6 +15,9 @@ import com.zifang.util.proxy.a.model.readtype.U4;
  * <p>
  * 代表一个完整的.class文件结构，遵循JVM规范。
  */
+/**
+ * ClassFile类。
+ */
 public class ClassFile {
     /** 魔数，固定为0xCAFEBABE */
     public U4 magic;
@@ -54,6 +57,10 @@ public class ClassFile {
      *
      * @return 类名字符串
      */
+    /**
+     * getClassName方法。
+     * @return String类型返回值
+     */
     public String getClassName() {
         if (poolInfo == null || poolInfo.getPoolList() == null || classIndex == null) {
             return null;
@@ -84,6 +91,10 @@ public class ClassFile {
      *
      * @return 方法数量
      */
+    /**
+     * getMethodCount方法。
+     * @return int类型返回值
+     */
     public int getMethodCount() {
         if (methodInfo == null) {
             return 0;
@@ -92,6 +103,10 @@ public class ClassFile {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "ClassFile{" +
                 "magic=" + (magic != null ? String.format("0x%08X", magic.value) : "null") +
@@ -102,90 +117,178 @@ public class ClassFile {
     }
 
 
+    /**
+     * getMagic方法。
+     * @return U4类型返回值
+     */
     public U4 getMagic() {
         return magic;
     }
 
+    /**
+     * setMagic方法。
+     *      * @param magic U4类型参数
+     */
     public void setMagic(U4 magic) {
         this.magic = magic;
     }
 
+    /**
+     * getMinorVersion方法。
+     * @return U2类型返回值
+     */
     public U2 getMinorVersion() {
         return minorVersion;
     }
 
+    /**
+     * setMinorVersion方法。
+     *      * @param minorVersion U2类型参数
+     */
     public void setMinorVersion(U2 minorVersion) {
         this.minorVersion = minorVersion;
     }
 
+    /**
+     * getMajorVersion方法。
+     * @return U2类型返回值
+     */
     public U2 getMajorVersion() {
         return majorVersion;
     }
 
+    /**
+     * setMajorVersion方法。
+     *      * @param majorVersion U2类型参数
+     */
     public void setMajorVersion(U2 majorVersion) {
         this.majorVersion = majorVersion;
     }
 
+    /**
+     * getConstantPoolSize方法。
+     * @return U2类型返回值
+     */
     public U2 getConstantPoolSize() {
         return constantPoolSize;
     }
 
+    /**
+     * setConstantPoolSize方法。
+     *      * @param constantPoolSize U2类型参数
+     */
     public void setConstantPoolSize(U2 constantPoolSize) {
         this.constantPoolSize = constantPoolSize;
     }
 
+    /**
+     * getPoolInfo方法。
+     * @return ConstantPoolInfo类型返回值
+     */
     public ConstantPoolInfo getPoolInfo() {
         return poolInfo;
     }
 
+    /**
+     * setPoolInfo方法。
+     *      * @param poolInfo ConstantPoolInfo类型参数
+     */
     public void setPoolInfo(ConstantPoolInfo poolInfo) {
         this.poolInfo = poolInfo;
     }
 
+    /**
+     * getAccessFlag方法。
+     * @return U2类型返回值
+     */
     public U2 getAccessFlag() {
         return accessFlag;
     }
 
+    /**
+     * setAccessFlag方法。
+     *      * @param accessFlag U2类型参数
+     */
     public void setAccessFlag(U2 accessFlag) {
         this.accessFlag = accessFlag;
     }
 
+    /**
+     * getClassIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getClassIndex() {
         return classIndex;
     }
 
+    /**
+     * setClassIndex方法。
+     *      * @param classIndex U2类型参数
+     */
     public void setClassIndex(U2 classIndex) {
         this.classIndex = classIndex;
     }
 
+    /**
+     * getSuperClassIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getSuperClassIndex() {
         return superClassIndex;
     }
 
+    /**
+     * setSuperClassIndex方法。
+     *      * @param superClassIndex U2类型参数
+     */
     public void setSuperClassIndex(U2 superClassIndex) {
         this.superClassIndex = superClassIndex;
     }
 
+    /**
+     * getInterfaceIndex方法。
+     * @return InterfaceIndex类型返回值
+     */
     public InterfaceIndex getInterfaceIndex() {
         return interfaceIndex;
     }
 
+    /**
+     * setInterfaceIndex方法。
+     *      * @param interfaceIndex InterfaceIndex类型参数
+     */
     public void setInterfaceIndex(InterfaceIndex interfaceIndex) {
         this.interfaceIndex = interfaceIndex;
     }
 
+    /**
+     * getFieldInfo方法。
+     * @return FieldTable类型返回值
+     */
     public FieldTable getFieldInfo() {
         return fieldInfo;
     }
 
+    /**
+     * setFieldInfo方法。
+     *      * @param fieldInfo FieldTable类型参数
+     */
     public void setFieldInfo(FieldTable fieldInfo) {
         this.fieldInfo = fieldInfo;
     }
 
+    /**
+     * getMethodInfo方法。
+     * @return MethodTable类型返回值
+     */
     public MethodTable getMethodInfo() {
         return methodInfo;
     }
 
+    /**
+     * setMethodInfo方法。
+     *      * @param methodInfo MethodTable类型参数
+     */
     public void setMethodInfo(MethodTable methodInfo) {
         this.methodInfo = methodInfo;
     }

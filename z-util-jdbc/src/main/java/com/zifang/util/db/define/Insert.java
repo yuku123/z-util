@@ -22,5 +22,8 @@ package com.zifang.util.db.define;
  * @see Select
  * @see Param
  */
+/**
+ * Insert注解。
+ */
 public @interface Insert {
 }

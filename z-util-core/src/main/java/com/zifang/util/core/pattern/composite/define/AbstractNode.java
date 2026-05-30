@@ -10,6 +10,9 @@ import java.util.List;
  * @author zifang
  * @see INode
  */
+/**
+ * AbstractNode类。
+ */
 public class AbstractNode implements INode {
 
     protected String id;
@@ -17,16 +20,28 @@ public class AbstractNode implements INode {
     protected String name;
 
     @Override
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return null;
     }
 
     @Override
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
     public String getId() {
         return null;
     }
 
     @Override
+    /**
+     * getCombinedNode方法。
+     * @return List<INode>类型返回值
+     */
     public List<INode> getCombinedNode() {
         return null;
     }

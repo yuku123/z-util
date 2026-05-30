@@ -8,6 +8,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * RequestLine注解。
+ */
 public @interface RequestLine {
     String url();
 

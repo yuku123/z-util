@@ -17,6 +17,9 @@ import java.util.regex.Pattern;
  * <p>
  * 提供URL编码解码、参数解析等功能
  */
+/**
+ * UrlUtil类。
+ */
 public class UrlUtil {
 
     private static final String CHARSET_UTF_8 = "UTF-8";
@@ -26,6 +29,11 @@ public class UrlUtil {
      *
      * @param url 需要编码的URL
      * @return 编码后的URL
+     */
+    /**
+     * encode方法。
+     *      * @param url String类型参数
+     * @return static String类型返回值
      */
     public static String encode(String url) {
         return encode(url, CHARSET_UTF_8);
@@ -37,6 +45,12 @@ public class UrlUtil {
      * @param url      需要编码的URL
      * @param encoding 编码方式
      * @return 编码后的URL
+     */
+    /**
+     * encode方法。
+     *      * @param url String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
      */
     public static String encode(String url, String encoding) {
         try {
@@ -52,6 +66,11 @@ public class UrlUtil {
      * @param url 需要解码的URL
      * @return 解码后的URL
      */
+    /**
+     * decode方法。
+     *      * @param url String类型参数
+     * @return static String类型返回值
+     */
     public static String decode(String url) {
         return decode(url, CHARSET_UTF_8);
     }
@@ -62,6 +81,12 @@ public class UrlUtil {
      * @param url      需要解码的URL
      * @param encoding 解码方式
      * @return 解码后的URL
+     */
+    /**
+     * decode方法。
+     *      * @param url String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
      */
     public static String decode(String url, String encoding) {
         try {
@@ -78,6 +103,13 @@ public class UrlUtil {
      * @param paramName  参数名
      * @param paramValue 参数值
      * @return 更新后的URL
+     */
+    /**
+     * setParam方法。
+     *      * @param url String类型参数
+     * @param paramName String类型参数
+     * @param paramValue String类型参数
+     * @return static String类型返回值
      */
     public static String setParam(String url, String paramName, String paramValue) {
         int tempIndex = url.indexOf("?");
@@ -107,6 +139,12 @@ public class UrlUtil {
      * @param paramName 参数名
      * @return 参数值，不存在返回null
      */
+    /**
+     * getParamValue方法。
+     *      * @param url String类型参数
+     * @param paramName String类型参数
+     * @return static String类型返回值
+     */
     public static String getParamValue(String url, String paramName) {
         int tempIndex = url.indexOf("?");
         if (tempIndex != -1) {
@@ -132,6 +170,12 @@ public class UrlUtil {
      * @param paramNames 参数名数组
      * @return 移除参数后的URL
      */
+    /**
+     * removeParam方法。
+     *      * @param url String类型参数
+     * @param paramNames String...类型参数
+     * @return static String类型返回值
+     */
     public static String removeParam(String url, String... paramNames) {
         for (String paramName : paramNames) {
             url = removeParam(url, paramName);
@@ -145,6 +189,12 @@ public class UrlUtil {
      * @param url       URL
      * @param paramName 参数名
      * @return 移除参数后的URL
+     */
+    /**
+     * removeParam方法。
+     *      * @param url String类型参数
+     * @param paramName String类型参数
+     * @return static String类型返回值
      */
     public static String removeParam(String url, String paramName) {
         int tempIndex = url.indexOf("?");
@@ -178,6 +228,12 @@ public class UrlUtil {
      * @param locationHeader Location头
      * @return 拼接后的URL
      */
+    /**
+     * urlJoin方法。
+     *      * @param url URL类型参数
+     * @param locationHeader String类型参数
+     * @return static String类型返回值
+     */
     public static String urlJoin(URL url, String locationHeader) {
         try {
             if (locationHeader.startsWith("http")) {
@@ -194,6 +250,11 @@ public class UrlUtil {
      *
      * @param request http请求
      * @return 参数Map
+     */
+    /**
+     * getRequestParams方法。
+     *      * @param request HttpServletRequest类型参数
+     * @return static Map<String, String>类型返回值
      */
     public static Map<String, String> getRequestParams(HttpServletRequest request) {
         Map<String, String> map = new HashMap<>();
@@ -220,6 +281,14 @@ public class UrlUtil {
      * @param dupLink 重复参数名的参数值之间的连接符，连接后的字符串作为该参数的参数值，可为null
      *                null：不允许重复参数名出现，则靠后的参数值会覆盖掉靠前的参数值。
      * @return map
+     */
+    /**
+     * parseQuery方法。
+     *      * @param query String类型参数
+     * @param split1 char类型参数
+     * @param split2 char类型参数
+     * @param dupLink String类型参数
+     * @return static Map<String, String>类型返回值
      */
     public static Map<String, String> parseQuery(String query, char split1, char split2, String dupLink) {
         if (query == null || query.isEmpty() || query.indexOf(split2) <= 0) {
@@ -274,6 +343,11 @@ public class UrlUtil {
      * @param queryUri http请求的uri
      * @return 参数字符串Map
      */
+    /**
+     * httpParseQuery方法。
+     *      * @param queryUri String类型参数
+     * @return static Map<String, String>类型返回值
+     */
     public static Map<String, String> httpParseQuery(String queryUri) {
         Map<String, String> result = new HashMap<>();
         if (queryUri != null && !queryUri.isEmpty()) {
@@ -285,6 +359,12 @@ public class UrlUtil {
     private static class URLEncoder {
         private static final Pattern CHARSET_PATTERN = Pattern.compile("%([0-9A-Fa-f]{2})");
 
+    /**
+     * encode方法。
+     *      * @param url String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
+     */
         public static String encode(String url, String encoding) throws UnsupportedEncodingException {
             if (url == null || url.isEmpty()) {
                 return url;
@@ -314,6 +394,11 @@ public class UrlUtil {
      * @param source 查询字符串
      * @return 解码后的字符串
      */
+    /**
+     * decodeQuery方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
+     */
     public static String decodeQuery(String source) {
         return decodeQuery(source, CHARSET_UTF_8);
     }
@@ -324,6 +409,12 @@ public class UrlUtil {
      * @param source   查询字符串
      * @param encoding 编码方式
      * @return 解码后的字符串
+     */
+    /**
+     * decodeQuery方法。
+     *      * @param source String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
      */
     public static String decodeQuery(String source, String encoding) {
         if (source == null) {
@@ -381,6 +472,12 @@ public class UrlUtil {
         private final String encoding;
         private boolean hasParams;
 
+    /**
+     * Builder方法。
+     *      * @param path String类型参数
+     * @param encodePath boolean类型参数
+     * @param encoding String类型参数
+     */
         public Builder(String path, boolean encodePath, String encoding) {
             this.encoding = encoding;
             this.url = new StringBuilder();
@@ -398,6 +495,11 @@ public class UrlUtil {
          * @param path 初始路径
          * @return Builder实例
          */
+    /**
+     * build方法。
+     *      * @param path String类型参数
+     * @return static Builder类型返回值
+     */
         public static Builder build(String path) {
             return new Builder(path, true, CHARSET_UTF_8);
         }
@@ -409,6 +511,12 @@ public class UrlUtil {
          * @param value 参数值
          * @return this
          */
+    /**
+     * queryParam方法。
+     *      * @param name String类型参数
+     * @param value String类型参数
+     * @return Builder类型返回值
+     */
         public Builder queryParam(String name, String value) {
             url.append(hasParams ? '&' : '?');
             hasParams = true;
@@ -429,6 +537,10 @@ public class UrlUtil {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return url.toString();
         }

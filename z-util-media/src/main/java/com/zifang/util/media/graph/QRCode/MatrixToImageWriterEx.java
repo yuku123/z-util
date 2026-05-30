@@ -16,6 +16,9 @@ import java.io.OutputStream;
  * 在 MatrixToImageWriter 的基础上增加了 Logo 水印功能，
  * 可以将 Logo 图片嵌入到二维码中间。
  */
+/**
+ * MatrixToImageWriterEx类。
+ */
 public class MatrixToImageWriterEx {
 
     private static final MatrixToLogoImageConfig DEFAULT_CONFIG = new MatrixToLogoImageConfig();
@@ -27,6 +30,13 @@ public class MatrixToImageWriterEx {
      * @param width   二维码宽度
      * @param height  二维码高度
      * @return BitMatrix 位矩阵对象
+     */
+    /**
+     * createQRCode方法。
+     *      * @param content String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @return static BitMatrix类型返回值
      */
     public static BitMatrix createQRCode(String content, int width, int height) {
         return QRCodeEncoder.encode(content, width, height, ErrorCorrectionLevel.H, "UTF-8");
@@ -40,6 +50,14 @@ public class MatrixToImageWriterEx {
      * @param imagePath 二维码图片保存路径
      * @param logoPath Logo 图片路径
      * @throws IOException 如果文件写入失败
+     */
+    /**
+     * writeToFile方法。
+     *      * @param matrix BitMatrix类型参数
+     * @param format String类型参数
+     * @param imagePath String类型参数
+     * @param logoPath String类型参数
+     * @return static void类型返回值
      */
     public static void writeToFile(BitMatrix matrix, String format, String imagePath, String logoPath) throws IOException {
         MatrixToImageWriter.writeToFile(matrix, format, new File(imagePath));
@@ -59,6 +77,15 @@ public class MatrixToImageWriterEx {
      * @param logoConfig Logo 配置对象
      * @throws IOException 如果文件写入失败
      */
+    /**
+     * writeToFile方法。
+     *      * @param matrix BitMatrix类型参数
+     * @param format String类型参数
+     * @param imagePath String类型参数
+     * @param logoPath String类型参数
+     * @param logoConfig MatrixToLogoImageConfig类型参数
+     * @return static void类型返回值
+     */
     public static void writeToFile(BitMatrix matrix, String format, String imagePath, String logoPath, MatrixToLogoImageConfig logoConfig) throws IOException {
         MatrixToImageWriter.writeToFile(matrix, format, new File(imagePath));
 
@@ -75,6 +102,15 @@ public class MatrixToImageWriterEx {
      * @param imagePath 二维码图片保存路径
      * @param logoPath  Logo 图片路径
      * @param logoConfig Logo 配置对象
+     */
+    /**
+     * overlapImage方法。
+     *      * @param image BufferedImage类型参数
+     * @param format String类型参数
+     * @param imagePath String类型参数
+     * @param logoPath String类型参数
+     * @param logoConfig MatrixToLogoImageConfig类型参数
+     * @return static void类型返回值
      */
     public static void overlapImage(BufferedImage image, String format, String imagePath, String logoPath, MatrixToLogoImageConfig logoConfig) {
         try {
@@ -95,6 +131,15 @@ public class MatrixToImageWriterEx {
      * @param out       输出流
      * @throws IOException 如果写入失败
      */
+    /**
+     * overlapImage方法。
+     *      * @param matrix BitMatrix类型参数
+     * @param format String类型参数
+     * @param logoPath String类型参数
+     * @param logoConfig MatrixToLogoImageConfig类型参数
+     * @param out OutputStream类型参数
+     * @return static void类型返回值
+     */
     public static void overlapImage(BitMatrix matrix, String format, String logoPath, MatrixToLogoImageConfig logoConfig, OutputStream out) throws IOException {
         BufferedImage image = MatrixToImageWriter.toBufferedImage(matrix);
         drawImage(logoPath, image, logoConfig);
@@ -110,6 +155,15 @@ public class MatrixToImageWriterEx {
      * @param logoConfig Logo 配置对象，可为 null 使用默认配置
      * @param out       输出流
      * @throws IOException 如果写入失败
+     */
+    /**
+     * overlapImage方法。
+     *      * @param image BufferedImage类型参数
+     * @param format String类型参数
+     * @param logoPath String类型参数
+     * @param logoConfig MatrixToLogoImageConfig类型参数
+     * @param out OutputStream类型参数
+     * @return static void类型返回值
      */
     public static void overlapImage(BufferedImage image, String format, String logoPath, MatrixToLogoImageConfig logoConfig, OutputStream out) throws IOException {
         drawImage(logoPath, image, logoConfig);

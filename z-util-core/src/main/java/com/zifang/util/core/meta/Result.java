@@ -12,6 +12,9 @@ import java.io.Serializable;
  *
  * @param <T> 返回数据的类型
  */
+/**
+ * Result类。
+ */
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1444605237688228650L;
     private T data;
@@ -26,6 +29,10 @@ public class Result<T> implements Serializable {
      * @param <T>  数据类型
      * @return 成功的Result实例
      */
+    /**
+     * success方法。
+     * @return static <T> Result<T>类型返回值
+     */
     public static <T> Result<T> success() {
         Result<T> result = new Result<>();
         result.data(null).success(Boolean.TRUE);
@@ -38,6 +45,11 @@ public class Result<T> implements Serializable {
      * @param <T>   数据类型
      * @param data  返回的数据
      * @return 成功的Result实例
+     */
+    /**
+     * success方法。
+     *      * @param data T类型参数
+     * @return static <T> Result<T>类型返回值
      */
     public static <T> Result<T> success(T data) {
         Result<T> result = new Result<>();
@@ -53,6 +65,12 @@ public class Result<T> implements Serializable {
      * @param statusCode  状态码枚举
      * @param params      动态参数，用于格式化消息字符串
      * @return 失败的Result实例
+     */
+    /**
+     * error方法。
+     *      * @param statusCode StatusCode类型参数
+     * @param params Object...类型参数
+     * @return static <T> Result<T>类型返回值
      */
     public static <T> Result<T> error(StatusCode statusCode, Object... params) {
         Result<T> result = new Result<>();
@@ -72,6 +90,12 @@ public class Result<T> implements Serializable {
      * @param params         动态参数，用于格式化消息字符串
      * @return 失败的Result实例
      */
+    /**
+     * error方法。
+     *      * @param baseException BaseException类型参数
+     * @param params Object...类型参数
+     * @return static <T> Result<T>类型返回值
+     */
     public static <T> Result<T> error(BaseException baseException, Object... params) {
         String baseMessage = baseException.getMessage();
         baseMessage = buildMessage(baseMessage, params);
@@ -90,6 +114,11 @@ public class Result<T> implements Serializable {
      * @param message 错误消息
      * @return 失败的Result实例
      */
+    /**
+     * fail方法。
+     *      * @param message String类型参数
+     * @return static <T> Result<T>类型返回值
+     */
     public static <T> Result<T> fail(String message) {
         return error(BaseStatusCode.FAIL, message);
     }
@@ -98,6 +127,10 @@ public class Result<T> implements Serializable {
      * 获取返回的数据
      *
      * @return 返回的数据
+     */
+    /**
+     * getData方法。
+     * @return T类型返回值
      */
     public T getData() {
         return data;
@@ -108,6 +141,10 @@ public class Result<T> implements Serializable {
      *
      * @return 是否成功
      */
+    /**
+     * isSuccess方法。
+     * @return boolean类型返回值
+     */
     public boolean isSuccess() {
         return success;
     }
@@ -116,6 +153,10 @@ public class Result<T> implements Serializable {
      * 获取状态码
      *
      * @return 状态码
+     */
+    /**
+     * getCode方法。
+     * @return int类型返回值
      */
     public int getCode() {
         return code;
@@ -126,6 +167,10 @@ public class Result<T> implements Serializable {
      *
      * @return 消息内容
      */
+    /**
+     * getMessage方法。
+     * @return String类型返回值
+     */
     public String getMessage() {
         return message;
     }
@@ -135,6 +180,11 @@ public class Result<T> implements Serializable {
      *
      * @param data 返回数据
      * @return 返回对象本身，用于链式调用
+     */
+    /**
+     * data方法。
+     *      * @param data T类型参数
+     * @return Result<T>类型返回值
      */
     public Result<T> data(T data) {
         this.data = data;
@@ -157,6 +207,11 @@ public class Result<T> implements Serializable {
      *
      * @param code 状态码
      * @return 返回对象本身，用于链式调用
+     */
+    /**
+     * code方法。
+     *      * @param code int类型参数
+     * @return Result<T>类型返回值
      */
     public Result<T> code(Integer code) {
         this.code = code;
@@ -184,6 +239,12 @@ public class Result<T> implements Serializable {
      * @param statusMessage 原始消息字符串
      * @param params        动态参数
      * @return 格式化后的消息字符串
+     */
+    /**
+     * buildMessage方法。
+     *      * @param statusMessage String类型参数
+     * @param params Object...类型参数
+     * @return static String类型返回值
      */
     public static String buildMessage(String statusMessage, Object... params) {
         StringBuilder message = new StringBuilder();
@@ -224,6 +285,10 @@ public class Result<T> implements Serializable {
      * @return 字符串表示
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "Result{" + "data=" + data + ", success=" + success + ", code=" + code + ", message='" + message + '\'' + '}';
     }

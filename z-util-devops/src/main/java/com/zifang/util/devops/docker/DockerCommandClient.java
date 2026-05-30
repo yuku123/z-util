@@ -8,5 +8,8 @@ package com.zifang.util.devops.docker;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * DockerCommandClient类。
+ */
 public class DockerCommandClient {
 }

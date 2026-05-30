@@ -9,6 +9,9 @@ import java.util.Objects;
  *
  * @author zifang
  */
+/**
+ * DataSourceDTO类。
+ */
 public class DataSourceDTO {
 
     @Description("数据源id")
@@ -46,6 +49,10 @@ public class DataSourceDTO {
      *
      * @return 数据源id
      */
+    /**
+     * getId方法。
+     * @return long类型返回值
+     */
     public Long getId() {
         return id;
     }
@@ -54,6 +61,10 @@ public class DataSourceDTO {
      * 设置数据源id
      *
      * @param id 数据源id
+     */
+    /**
+     * setId方法。
+     *      * @param id long类型参数
      */
     public void setId(Long id) {
         this.id = id;
@@ -64,6 +75,10 @@ public class DataSourceDTO {
      *
      * @return 数据标识
      */
+    /**
+     * getDatasourceCode方法。
+     * @return String类型返回值
+     */
     public String getDatasourceCode() {
         return datasourceCode;
     }
@@ -72,6 +87,10 @@ public class DataSourceDTO {
      * 设置数据标识
      *
      * @param datasourceCode 数据标识
+     */
+    /**
+     * setDatasourceCode方法。
+     *      * @param datasourceCode String类型参数
      */
     public void setDatasourceCode(String datasourceCode) {
         this.datasourceCode = datasourceCode;
@@ -82,6 +101,10 @@ public class DataSourceDTO {
      *
      * @return 数据源名称
      */
+    /**
+     * getDatasourceName方法。
+     * @return String类型返回值
+     */
     public String getDatasourceName() {
         return datasourceName;
     }
@@ -90,6 +113,10 @@ public class DataSourceDTO {
      * 设置数据源名称
      *
      * @param datasourceName 数据源名称
+     */
+    /**
+     * setDatasourceName方法。
+     *      * @param datasourceName String类型参数
      */
     public void setDatasourceName(String datasourceName) {
         this.datasourceName = datasourceName;
@@ -100,6 +127,10 @@ public class DataSourceDTO {
      *
      * @return 数据源地址
      */
+    /**
+     * getDatasourceUrl方法。
+     * @return String类型返回值
+     */
     public String getDatasourceUrl() {
         return datasourceUrl;
     }
@@ -108,6 +139,10 @@ public class DataSourceDTO {
      * 设置数据源地址
      *
      * @param datasourceUrl 数据源地址
+     */
+    /**
+     * setDatasourceUrl方法。
+     *      * @param datasourceUrl String类型参数
      */
     public void setDatasourceUrl(String datasourceUrl) {
         this.datasourceUrl = datasourceUrl;
@@ -118,6 +153,10 @@ public class DataSourceDTO {
      *
      * @return 端口号
      */
+    /**
+     * getPortNumber方法。
+     * @return int类型返回值
+     */
     public Integer getPortNumber() {
         return portNumber;
     }
@@ -126,6 +165,10 @@ public class DataSourceDTO {
      * 设置端口号
      *
      * @param portNumber 端口号
+     */
+    /**
+     * setPortNumber方法。
+     *      * @param portNumber int类型参数
      */
     public void setPortNumber(Integer portNumber) {
         this.portNumber = portNumber;
@@ -136,6 +179,10 @@ public class DataSourceDTO {
      *
      * @return 库名称
      */
+    /**
+     * getSchemaMark方法。
+     * @return String类型返回值
+     */
     public String getSchemaMark() {
         return schemaMark;
     }
@@ -144,6 +191,10 @@ public class DataSourceDTO {
      * 设置库名称
      *
      * @param schemaMark 库名称
+     */
+    /**
+     * setSchemaMark方法。
+     *      * @param schemaMark String类型参数
      */
     public void setSchemaMark(String schemaMark) {
         this.schemaMark = schemaMark;
@@ -154,6 +205,10 @@ public class DataSourceDTO {
      *
      * @return 用户名称
      */
+    /**
+     * getUserName方法。
+     * @return String类型返回值
+     */
     public String getUserName() {
         return userName;
     }
@@ -162,6 +217,10 @@ public class DataSourceDTO {
      * 设置用户名称
      *
      * @param userName 用户名称
+     */
+    /**
+     * setUserName方法。
+     *      * @param userName String类型参数
      */
     public void setUserName(String userName) {
         this.userName = userName;
@@ -172,6 +231,10 @@ public class DataSourceDTO {
      *
      * @return 密码
      */
+    /**
+     * getPw方法。
+     * @return String类型返回值
+     */
     public String getPw() {
         return pw;
     }
@@ -180,6 +243,10 @@ public class DataSourceDTO {
      * 设置密码
      *
      * @param pw 密码
+     */
+    /**
+     * setPw方法。
+     *      * @param pw String类型参数
      */
     public void setPw(String pw) {
         this.pw = pw;
@@ -190,6 +257,10 @@ public class DataSourceDTO {
      *
      * @return 数据描述
      */
+    /**
+     * getDescriptions方法。
+     * @return String类型返回值
+     */
     public String getDescriptions() {
         return descriptions;
     }
@@ -198,6 +269,10 @@ public class DataSourceDTO {
      * 设置数据描述
      *
      * @param descriptions 数据描述
+     */
+    /**
+     * setDescriptions方法。
+     *      * @param descriptions String类型参数
      */
     public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
@@ -208,6 +283,10 @@ public class DataSourceDTO {
      *
      * @return 数据源类型
      */
+    /**
+     * getDatasourceType方法。
+     * @return String类型返回值
+     */
     public String getDatasourceType() {
         return datasourceType;
     }
@@ -217,16 +296,29 @@ public class DataSourceDTO {
      *
      * @param datasourceType 数据源类型
      */
+    /**
+     * setDatasourceType方法。
+     *      * @param datasourceType String类型参数
+     */
     public void setDatasourceType(String datasourceType) {
         this.datasourceType = datasourceType;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "DataSourceDTO{id=" + id + ", datasourceCode=" + datasourceCode + ", datasourceName=" + datasourceName + ", datasourceUrl=" + datasourceUrl + ", portNumber=" + portNumber + ", schemaMark=" + schemaMark + ", userName=" + userName + ", pw=" + pw + ", descriptions=" + descriptions + ", datasourceType=" + datasourceType + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -244,6 +336,10 @@ public class DataSourceDTO {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(id, datasourceCode, datasourceName, datasourceUrl, portNumber, schemaMark, userName, pw, descriptions, datasourceType);
     }

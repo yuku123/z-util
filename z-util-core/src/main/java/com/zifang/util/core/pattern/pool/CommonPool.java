@@ -7,5 +7,8 @@ package com.zifang.util.core.pattern.pool;
  *
  * @author zifang
  */
+/**
+ * CommonPool类。
+ */
 public class CommonPool {
 }

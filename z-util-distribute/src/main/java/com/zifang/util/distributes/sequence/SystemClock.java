@@ -22,6 +22,9 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * @author zifang
  */
+/**
+ * SystemClock类。
+ */
 public class SystemClock {
 
     private final long period;
@@ -42,6 +45,11 @@ public class SystemClock {
      * 内部单例持有类
      */
     private static class InstanceHolder {
+    /**
+     * SystemClock方法。
+     *      * @param 1 Object类型参数
+     * @return static final SystemClock INSTANCE = new类型返回值
+     */
         public static final SystemClock INSTANCE = new SystemClock(1);
     }
 
@@ -59,6 +67,11 @@ public class SystemClock {
      */
     private void scheduleClockUpdating() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
+    /**
+     * newThread方法。
+     *      * @param runnable Runnable类型参数
+     * @return Thread类型返回值
+     */
             public Thread newThread(Runnable runnable) {
                 Thread thread = new Thread(runnable, "System Clock");
                 thread.setDaemon(true);
@@ -66,6 +79,9 @@ public class SystemClock {
             }
         });
         scheduler.scheduleAtFixedRate(new Runnable() {
+    /**
+     * run方法。
+     */
             public void run() {
                 now.set(System.currentTimeMillis());
             }
@@ -88,6 +104,10 @@ public class SystemClock {
      *
      * @return 当前时间戳（毫秒）
      */
+    /**
+     * now方法。
+     * @return static long类型返回值
+     */
     public static long now() {
         return instance().currentTimeMillis();
     }
@@ -96,6 +116,10 @@ public class SystemClock {
      * 获取当前时间的日期字符串格式
      *
      * @return 当前时间戳对应的日期字符串，格式为yyyy-mm-dd hh:mm:ss.fffffffff
+     */
+    /**
+     * nowDate方法。
+     * @return static String类型返回值
      */
     public static String nowDate() {
         return new Timestamp(instance().currentTimeMillis()).toString();

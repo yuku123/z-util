@@ -6,6 +6,9 @@ package com.zifang.util.core.pattern.memento;
  * @param <T> 状态类型
  * @author zifang
  */
+/**
+ * Memento接口。
+ */
 public interface Memento<T> {
 
     /**

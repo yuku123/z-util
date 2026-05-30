@@ -12,12 +12,18 @@ import com.zifang.util.workflow.conponents.WorkFlowApplicationContext;
  *
  * @see WorkFlowApplicationContext
  */
+/**
+ * newFeatureTest类。
+ */
 public class newFeatureTest {
 
     /**
      * 测试完整工作流执行功能。
      * <p>
      * 加载工作流配置文件，执行所有节点，验证整体流程是否正常。
+     */
+    /**
+     * testAll方法。
      */
     public void testAll() {
 
@@ -44,6 +50,11 @@ public class newFeatureTest {
 //        workFlowApplicationContext.executeTask();
 //    }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new newFeatureTest().testAll();
     }

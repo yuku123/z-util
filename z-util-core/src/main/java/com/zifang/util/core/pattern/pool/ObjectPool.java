@@ -7,6 +7,9 @@ import java.util.NoSuchElementException;
  *
  * @param <T> 对象类型
  */
+/**
+ * ObjectPool接口。
+ */
 public interface ObjectPool<T> {
 
     /**

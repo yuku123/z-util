@@ -12,6 +12,9 @@ import java.util.Map;
 /**
  * @author zifang
  */
+/**
+ * GsonUtil类。
+ */
 public class GsonUtil {
 
 //    private static Gson gson = new Gson();
@@ -35,23 +38,51 @@ public class GsonUtil {
             .create();
 
 
+    /**
+     * objectToJsonStr方法。
+     *      * @param object T类型参数
+     * @return static <T> String类型返回值
+     */
     public static <T> String objectToJsonStr(T object) {
         return gson.toJson(object);
     }
 
+    /**
+     * jsonStrToObject方法。
+     *      * @param jsonStr String类型参数
+     * @param classOfT ClassT类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T jsonStrToObject(String jsonStr, Class<T> classOfT) {
         return gson.fromJson(jsonStr, classOfT);
     }
 
+    /**
+     * jsonStrToObject方法。
+     *      * @param jsonStr String类型参数
+     * @param typeReference Type类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T jsonStrToObject(String jsonStr, Type typeReference) {
         return gson.fromJson(jsonStr, typeReference);
     }
 
 
+    /**
+     * changeToSubClass方法。
+     *      * @param o Object类型参数
+     * @param t ClassT类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T changeToSubClass(Object o, Class<T> t) {
         return jsonStrToObject(objectToJsonStr(o), t);
     }
 
+    /**
+     * toMap方法。
+     *      * @param o Object类型参数
+     * @return static Map<String, Object>类型返回值
+     */
     public static Map<String, Object> toMap(Object o) {
         return (Map<String, Object>) jsonStrToObject(GsonUtil.objectToJsonStr(o), Map.class);
     }

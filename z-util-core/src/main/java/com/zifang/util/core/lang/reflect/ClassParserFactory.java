@@ -6,6 +6,9 @@ import com.zifang.util.core.pattern.factory.IFactory;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * ClassParserFactory类。
+ */
 public class ClassParserFactory implements IFactory<Class<?>, ClassParser> {
 
     /**
@@ -20,12 +23,23 @@ public class ClassParserFactory implements IFactory<Class<?>, ClassParser> {
 
 
     @Override
+    /**
+     * getInstance方法。
+     *      * @param clazz Class?类型参数
+     * @return ClassParser类型返回值
+     */
     public ClassParser getInstance(Class<?> clazz) {
         return getInstance(clazz, false);
     }
 
     /**
      * @param forceRefreshCache 是否需要强制刷新缓存
+     */
+    /**
+     * getInstance方法。
+     *      * @param clazz Class?类型参数
+     * @param forceRefreshCache boolean类型参数
+     * @return static ClassParser类型返回值
      */
     public static ClassParser getInstance(Class<?> clazz, boolean forceRefreshCache) {
         if (forceRefreshCache) {

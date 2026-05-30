@@ -9,6 +9,9 @@ import java.util.Arrays;
  *
  * @author zifang
  */
+/**
+ * Floats类。
+ */
 public class Floats {
 
     private Floats() {
@@ -16,6 +19,12 @@ public class Floats {
 
     /**
      * 将浮点数数组用指定分隔符连接成字符串。
+     */
+    /**
+     * join方法。
+     *      * @param array float[]类型参数
+     * @param delimiter String类型参数
+     * @return static String类型返回值
      */
     public static String join(float[] array, String delimiter) {
         if (array == null || array.length == 0) {
@@ -33,6 +42,11 @@ public class Floats {
 
     /**
      * 将多个浮点数组合并为一个。
+     */
+    /**
+     * concat方法。
+     *      * @param arrays float[]...类型参数
+     * @return static float[]类型返回值
      */
     public static float[] concat(float[]... arrays) {
         int totalLength = 0;
@@ -55,6 +69,11 @@ public class Floats {
     /**
      * 反转浮点数数组。
      */
+    /**
+     * reverse方法。
+     *      * @param array float[]类型参数
+     * @return static float[]类型返回值
+     */
     public static float[] reverse(float[] array) {
         if (array == null || array.length <= 1) {
             return array != null ? array : new float[0];
@@ -68,6 +87,11 @@ public class Floats {
 
     /**
      * 将浮点数数组转换为字符串。
+     */
+    /**
+     * toString方法。
+     *      * @param array float[]类型参数
+     * @return static String类型返回值
      */
     public static String toString(float[] array) {
         if (array == null || array.length == 0) {
@@ -87,6 +111,11 @@ public class Floats {
     /**
      * 计算浮点数数组的和。
      */
+    /**
+     * sum方法。
+     *      * @param array float[]类型参数
+     * @return static double类型返回值
+     */
     public static double sum(float[] array) {
         if (array == null || array.length == 0) {
             return 0.0;
@@ -101,6 +130,11 @@ public class Floats {
     /**
      * 计算浮点数数组的平均值。
      */
+    /**
+     * average方法。
+     *      * @param array float[]类型参数
+     * @return static double类型返回值
+     */
     public static double average(float[] array) {
         if (array == null || array.length == 0) {
             return 0.0;
@@ -110,6 +144,11 @@ public class Floats {
 
     /**
      * 获取浮点数数组中的最小值。
+     */
+    /**
+     * min方法。
+     *      * @param array float[]类型参数
+     * @return static float类型返回值
      */
     public static float min(float[] array) {
         if (array == null || array.length == 0) {
@@ -127,6 +166,11 @@ public class Floats {
     /**
      * 获取浮点数数组中的最大值。
      */
+    /**
+     * max方法。
+     *      * @param array float[]类型参数
+     * @return static float类型返回值
+     */
     public static float max(float[] array) {
         if (array == null || array.length == 0) {
             return 0f;
@@ -143,6 +187,12 @@ public class Floats {
     /**
      * 判断浮点数数组是否包含指定值。
      */
+    /**
+     * contains方法。
+     *      * @param array float[]类型参数
+     * @param value float类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean contains(float[] array, float value) {
         if (array == null || array.length == 0) {
             return false;
@@ -158,6 +208,12 @@ public class Floats {
     /**
      * 查找浮点数在数组中首次出现的索引。
      */
+    /**
+     * indexOf方法。
+     *      * @param array float[]类型参数
+     * @param value float类型参数
+     * @return static int类型返回值
+     */
     public static int indexOf(float[] array, float value) {
         if (array == null || array.length == 0) {
             return -1;
@@ -172,6 +228,11 @@ public class Floats {
 
     /**
      * 将字符串解析为浮点数。
+     */
+    /**
+     * parseFloat方法。
+     *      * @param str String类型参数
+     * @return static Float类型返回值
      */
     public static Float parseFloat(String str) {
         if (str == null || str.trim().isEmpty()) {

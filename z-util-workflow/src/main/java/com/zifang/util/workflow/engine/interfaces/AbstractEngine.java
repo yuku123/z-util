@@ -29,6 +29,10 @@ public abstract class AbstractEngine {
      *
      * @return 服务单元名称到服务类类型的映射
      */
+    /**
+     * getRegisteredEngineServiceMap方法。
+     * @return abstract Map<String, Class<? extends AbstractEngineService>>类型返回值
+     */
     public abstract Map<String, Class<? extends AbstractEngineService>> getRegisteredEngineServiceMap();
 
     /**
@@ -36,6 +40,11 @@ public abstract class AbstractEngine {
      *
      * @param serviceUnit 服务单元名称
      * @return 引擎服务实例，如果未找到则返回null
+     */
+    /**
+     * getRegisteredEngineService方法。
+     *      * @param serviceUnit String类型参数
+     * @return abstract AbstractEngineService类型返回值
      */
     public abstract AbstractEngineService getRegisteredEngineService(String serviceUnit);
 
@@ -45,12 +54,22 @@ public abstract class AbstractEngine {
      * @param name         服务单元名称
      * @param engineService 服务类类型
      */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param engineService Class?类型参数
+     * @return abstract void类型返回值
+     */
     public abstract void register(String name, Class<? extends AbstractEngineService> engineService);
 
     /**
      * 设置引擎运行模式。
      *
      * @param mode 模式名称
+     */
+    /**
+     * setMode方法。
+     *      * @param mode String类型参数
      */
     public void setMode(String mode) {
         this.mode = mode;
@@ -61,12 +80,20 @@ public abstract class AbstractEngine {
      *
      * @param properties 配置属性映射
      */
+    /**
+     * setConfiguration方法。
+     *      * @param properties MapString,类型参数
+     */
     public void setConfiguration(Map<String, String> properties) {
         this.properties = properties;
     }
 
     /**
      * 引擎初始化方法，子类实现具体的初始化逻辑。
+     */
+    /**
+     * doInitial方法。
+     * @return abstract void类型返回值
      */
     public abstract void doInitial();
 }

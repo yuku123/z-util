@@ -11,6 +11,9 @@ import java.lang.annotation.*;
  * @author zifang
  */
 @Retention(RetentionPolicy.RUNTIME)
+/**
+ * PutMapping注解。
+ */
 public @interface PutMapping {
 
     /**

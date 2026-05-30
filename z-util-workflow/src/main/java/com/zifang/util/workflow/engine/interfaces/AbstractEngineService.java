@@ -31,8 +31,16 @@ public abstract class AbstractEngineService {
      *
      * @param executableWorkflowNode 可执行的工作流节点
      */
+    /**
+     * exec方法。
+     *      * @param executableWorkflowNode ExecutableWorkflowNode类型参数
+     * @return abstract void类型返回值
+     */
     public abstract void exec(ExecutableWorkflowNode executableWorkflowNode);
 
+    /**
+     * AbstractEngineService方法。
+     */
     public AbstractEngineService() {
     }
 
@@ -40,6 +48,10 @@ public abstract class AbstractEngineService {
      * 获取工作流应用上下文。
      *
      * @return 工作流应用上下文
+     */
+    /**
+     * getWorkFlowApplicationContext方法。
+     * @return WorkFlowApplicationContext类型返回值
      */
     public WorkFlowApplicationContext getWorkFlowApplicationContext() {
         return workFlowApplicationContext;
@@ -50,6 +62,10 @@ public abstract class AbstractEngineService {
      *
      * @param workFlowApplicationContext 工作流应用上下文
      */
+    /**
+     * setWorkFlowApplicationContext方法。
+     *      * @param workFlowApplicationContext WorkFlowApplicationContext类型参数
+     */
     public void setWorkFlowApplicationContext(WorkFlowApplicationContext workFlowApplicationContext) {
         this.workFlowApplicationContext = workFlowApplicationContext;
     }
@@ -58,6 +74,10 @@ public abstract class AbstractEngineService {
      * 获取调用参数。
      *
      * @return 调用参数
+     */
+    /**
+     * getInvokeParameter方法。
+     * @return Object类型返回值
      */
     public Object getInvokeParameter() {
         return invokeParameter;
@@ -68,16 +88,29 @@ public abstract class AbstractEngineService {
      *
      * @param invokeParameter 调用参数
      */
+    /**
+     * setInvokeParameter方法。
+     *      * @param invokeParameter Object类型参数
+     */
     public void setInvokeParameter(Object invokeParameter) {
         this.invokeParameter = invokeParameter;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "AbstractEngineService{workFlowApplicationContext=" + workFlowApplicationContext + ", invokeParameter=" + invokeParameter + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -87,6 +120,10 @@ public abstract class AbstractEngineService {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(workFlowApplicationContext, invokeParameter);
     }

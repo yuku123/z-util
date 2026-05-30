@@ -9,6 +9,9 @@ import java.net.UnknownHostException;
 /**
  * 系统环境相关工具类。
  */
+/**
+ * SystemUtil类。
+ */
 public class SystemUtil {
 
     private SystemUtil() {
@@ -18,6 +21,10 @@ public class SystemUtil {
      * 获取当前进程的 PID。
      *
      * @return 进程ID
+     */
+    /**
+     * getProcessId方法。
+     * @return static long类型返回值
      */
     public static long getProcessId() {
         RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
@@ -34,6 +41,10 @@ public class SystemUtil {
      *
      * @return 操作系统名称
      */
+    /**
+     * getOsName方法。
+     * @return static String类型返回值
+     */
     public static String getOsName() {
         return System.getProperty("os.name", "unknown");
     }
@@ -42,6 +53,10 @@ public class SystemUtil {
      * 获取操作系统架构。
      *
      * @return 系统架构（如 x86_64）
+     */
+    /**
+     * getOsArch方法。
+     * @return static String类型返回值
      */
     public static String getOsArch() {
         return System.getProperty("os.arch", "unknown");
@@ -52,6 +67,10 @@ public class SystemUtil {
      *
      * @return 系统版本
      */
+    /**
+     * getOsVersion方法。
+     * @return static String类型返回值
+     */
     public static String getOsVersion() {
         return System.getProperty("os.version", "unknown");
     }
@@ -60,6 +79,10 @@ public class SystemUtil {
      * 获取 JVM 启动时间戳。
      *
      * @return 启动时间（毫秒）
+     */
+    /**
+     * getStartTime方法。
+     * @return static long类型返回值
      */
     public static long getStartTime() {
         return ManagementFactory.getRuntimeMXBean().getStartTime();
@@ -70,6 +93,10 @@ public class SystemUtil {
      *
      * @return 运行时间（毫秒）
      */
+    /**
+     * getUptime方法。
+     * @return static long类型返回值
+     */
     public static long getUptime() {
         return ManagementFactory.getRuntimeMXBean().getUptime();
     }
@@ -79,6 +106,10 @@ public class SystemUtil {
      *
      * @return 处理器数量
      */
+    /**
+     * getAvailableProcessors方法。
+     * @return static int类型返回值
+     */
     public static int getAvailableProcessors() {
         return Runtime.getRuntime().availableProcessors();
     }
@@ -87,6 +118,10 @@ public class SystemUtil {
      * 获取主机名。
      *
      * @return 主机名
+     */
+    /**
+     * getHostname方法。
+     * @return static String类型返回值
      */
     public static String getHostname() {
         try {
@@ -101,6 +136,10 @@ public class SystemUtil {
      *
      * @return IP 地址
      */
+    /**
+     * getHostAddress方法。
+     * @return static String类型返回值
+     */
     public static String getHostAddress() {
         try {
             return InetAddress.getLocalHost().getHostAddress();
@@ -114,6 +153,10 @@ public class SystemUtil {
      *
      * @return 系统负载平均值
      */
+    /**
+     * getSystemLoadAverage方法。
+     * @return static double类型返回值
+     */
     public static double getSystemLoadAverage() {
         OperatingSystemMXBean os = ManagementFactory.getOperatingSystemMXBean();
         return os.getSystemLoadAverage();
@@ -124,6 +167,10 @@ public class SystemUtil {
      *
      * @return 最大内存（字节）
      */
+    /**
+     * getMaxMemory方法。
+     * @return static long类型返回值
+     */
     public static long getMaxMemory() {
         return Runtime.getRuntime().maxMemory();
     }
@@ -133,6 +180,10 @@ public class SystemUtil {
      *
      * @return 空闲内存（字节）
      */
+    /**
+     * getFreeMemory方法。
+     * @return static long类型返回值
+     */
     public static long getFreeMemory() {
         return Runtime.getRuntime().freeMemory();
     }
@@ -141,6 +192,10 @@ public class SystemUtil {
      * 获取 JVM 总内存。
      *
      * @return 总内存（字节）
+     */
+    /**
+     * getTotalMemory方法。
+     * @return static long类型返回值
      */
     public static long getTotalMemory() {
         return Runtime.getRuntime().totalMemory();

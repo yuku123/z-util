@@ -8,6 +8,9 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
+/**
+ * Email注解。
+ */
 public @interface Email {
     String message() default "邮箱格式不正确";
 }

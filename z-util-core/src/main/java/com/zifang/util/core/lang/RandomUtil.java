@@ -7,6 +7,9 @@ import java.util.UUID;
 /**
  * 随机数工具类
  */
+/**
+ * RandomUtil类。
+ */
 public class RandomUtil {
     private static final String ALL_CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -19,6 +22,12 @@ public class RandomUtil {
     /**
      * 生成制定范围内的随机数
      */
+    /**
+     * integer方法。
+     *      * @param scopeMin int类型参数
+     * @param scoeMax int类型参数
+     * @return static int类型返回值
+     */
     public static int integer(int scopeMin, int scoeMax) {
         Random random = new Random();
         return (random.nextInt(scoeMax) % (scoeMax - scopeMin + 1) + scopeMin);
@@ -26,6 +35,11 @@ public class RandomUtil {
 
     /**
      * 返回固定长度的数字
+     */
+    /**
+     * number方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
      */
     public static String number(int length) {
         StringBuilder sb = new StringBuilder();
@@ -39,6 +53,11 @@ public class RandomUtil {
     /**
      * 返回一个定长的随机字符串(只包含大小写字母、数字)
      */
+    /**
+     * string方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
+     */
     public static String string(int length) {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
@@ -50,6 +69,11 @@ public class RandomUtil {
 
     /**
      * 返回一个定长的随机纯字母字符串(只包含大小写字母)
+     */
+    /**
+     * mixString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
      */
     public static String mixString(int length) {
         StringBuilder sb = new StringBuilder();
@@ -63,6 +87,11 @@ public class RandomUtil {
     /**
      * 返回一个定长的随机纯大写字母字符串(只包含大小写字母)
      */
+    /**
+     * lowerString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
+     */
     public static String lowerString(int length) {
         return mixString(length).toLowerCase();
     }
@@ -70,12 +99,22 @@ public class RandomUtil {
     /**
      * 返回一个定长的随机纯小写字母字符串(只包含大小写字母)
      */
+    /**
+     * upperString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
+     */
     public static String upperString(int length) {
         return mixString(length).toUpperCase();
     }
 
     /**
      * 生成一个定长的纯0字符串
+     */
+    /**
+     * zeroString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
      */
     public static String zeroString(int length) {
         StringBuilder sb = new StringBuilder();
@@ -87,6 +126,12 @@ public class RandomUtil {
 
     /**
      * 根据数字生成一个定长的字符串，长度不够前面补0
+     */
+    /**
+     * toFixdLengthString方法。
+     *      * @param num long类型参数
+     * @param fixdlenth int类型参数
+     * @return static String类型返回值
      */
     public static String toFixdLengthString(long num, int fixdlenth) {
         StringBuilder sb = new StringBuilder();
@@ -107,6 +152,12 @@ public class RandomUtil {
      * @param fixdlenth 字符串长度
      * @return 定长的字符串
      */
+    /**
+     * toFixdLengthString方法。
+     *      * @param num int类型参数
+     * @param fixdlenth int类型参数
+     * @return static String类型返回值
+     */
     public static String toFixdLengthString(int num, int fixdlenth) {
         StringBuilder sb = new StringBuilder();
         String strNum = String.valueOf(num);
@@ -126,6 +177,12 @@ public class RandomUtil {
      * @param param
      * @return 定长的数字
      */
+    /**
+     * getNotSimple方法。
+     *      * @param param int[]类型参数
+     * @param len int类型参数
+     * @return static int类型返回值
+     */
     public static int getNotSimple(int[] param, int len) {
         Random rand = new Random();
         for (int i = param.length; i > 1; i--) {
@@ -144,11 +201,20 @@ public class RandomUtil {
     /**
      * 从指定的数组中随机数组中的某个元素
      */
+    /**
+     * randomItem方法。
+     *      * @param param T[]类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T randomItem(T[] param) {
         int index = integer(0, param.length);
         return param[index];
     }
 
+    /**
+     * uuid16方法。
+     * @return static String类型返回值
+     */
     public static String uuid16() {
         String uuid = UUID.randomUUID().toString();
         char[] cs = new char[32];
@@ -166,6 +232,10 @@ public class RandomUtil {
      *
      * @return 小写的UUID
      */
+    /**
+     * uuid方法。
+     * @return static String类型返回值
+     */
     public static String uuid() {
         UUID uuid = UUID.randomUUID();
         String s = uuid.toString();
@@ -177,6 +247,10 @@ public class RandomUtil {
      * 返回一个UUID
      *
      * @return 大写的UUID
+     */
+    /**
+     * UUID方法。
+     * @return static String类型返回值
      */
     public static String UUID() {
         UUID uuid = UUID.randomUUID();
@@ -194,6 +268,11 @@ public class RandomUtil {
      *
      * @param hostFeature 主机特征码建议设置4位
      * @return
+     */
+    /**
+     * squid方法。
+     *      * @param hostFeature String类型参数
+     * @return static String类型返回值
      */
     public static String squid(String hostFeature) {
         Long date = new Date().getTime();
@@ -262,6 +341,11 @@ public class RandomUtil {
      * @param length 随机数长度
      * @return
      */
+    /**
+     * generateString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
+     */
     public static String generateString(int length) {
         StringBuffer sb = new StringBuffer();
         Random random = new Random();
@@ -276,6 +360,11 @@ public class RandomUtil {
      *
      * @param length 随机数长度
      * @return
+     */
+    /**
+     * generateMixString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
      */
     public static String generateMixString(int length) {
         StringBuffer sb = new StringBuffer();
@@ -292,12 +381,22 @@ public class RandomUtil {
      * @param length 随机数长度
      * @return
      */
+    /**
+     * generateLowerString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
+     */
     public static String generateLowerString(int length) {
         return generateMixString(length).toLowerCase();
     }
 
     /**
      * 获取定长的随机数，只包含大写字母
+     */
+    /**
+     * generateUpperString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
      */
     public static String generateUpperString(int length) {
         return generateMixString(length).toUpperCase();
@@ -308,6 +407,11 @@ public class RandomUtil {
      *
      * @param length 随机数长度
      * @return
+     */
+    /**
+     * generateNumberString方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
      */
     public static String generateNumberString(int length) {
         StringBuffer sb = new StringBuffer();

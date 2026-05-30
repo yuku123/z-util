@@ -18,6 +18,9 @@ import java.util.Enumeration;
  * 管理界面主窗口
  * 展示树形结构的企业管理系统导航面板
  */
+/**
+ * ManagerFrame类。
+ */
 public class ManagerFrame extends JFrame {
 
     private static final int DISCONTIGUOUS_TREE_SELECTION = 4;//单选的常量值为1，连选的常量值为2，多选的常量值为4

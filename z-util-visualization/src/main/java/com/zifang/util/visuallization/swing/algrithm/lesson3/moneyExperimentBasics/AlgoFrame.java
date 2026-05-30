@@ -7,6 +7,9 @@ import java.awt.*;
  * 金钱实验可视化框架
  * 提供金钱分配实验的图表绘制功能
  */
+/**
+ * AlgoFrame类。
+ */
 public class AlgoFrame extends JFrame {
 
     private int canvasWidth;

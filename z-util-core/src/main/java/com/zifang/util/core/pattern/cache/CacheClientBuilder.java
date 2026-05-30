@@ -7,6 +7,9 @@ package com.zifang.util.core.pattern.cache;
  *
  * @author zifang
  */
+/**
+ * CacheClientBuilder类。
+ */
 public class CacheClientBuilder {
 
     private CacheProvider cacheProvider;
@@ -14,6 +17,9 @@ public class CacheClientBuilder {
 
     /**
      * 默认构造函数
+     */
+    /**
+     * CacheClientBuilder方法。
      */
     public CacheClientBuilder() {
     }
@@ -23,6 +29,11 @@ public class CacheClientBuilder {
      *
      * @param cacheProvider 缓存提供者
      * @param dbNum        数据库编号
+     */
+    /**
+     * CacheClientBuilder方法。
+     *      * @param cacheProvider CacheProvider类型参数
+     * @param dbNum String类型参数
      */
     public CacheClientBuilder(CacheProvider cacheProvider, String dbNum) {
         this.cacheProvider = cacheProvider;
@@ -34,6 +45,10 @@ public class CacheClientBuilder {
      *
      * @return 缓存提供者
      */
+    /**
+     * getCacheProvider方法。
+     * @return CacheProvider类型返回值
+     */
     public CacheProvider getCacheProvider() {
         return cacheProvider;
     }
@@ -42,6 +57,10 @@ public class CacheClientBuilder {
      * 设置缓存提供者
      *
      * @param cacheProvider 缓存提供者
+     */
+    /**
+     * setCacheProvider方法。
+     *      * @param cacheProvider CacheProvider类型参数
      */
     public void setCacheProvider(CacheProvider cacheProvider) {
         this.cacheProvider = cacheProvider;
@@ -52,6 +71,10 @@ public class CacheClientBuilder {
      *
      * @return 数据库编号
      */
+    /**
+     * getDbNum方法。
+     * @return String类型返回值
+     */
     public String getDbNum() {
         return dbNum;
     }
@@ -60,6 +83,10 @@ public class CacheClientBuilder {
      * 设置数据库编号
      *
      * @param dbNum 数据库编号
+     */
+    /**
+     * setDbNum方法。
+     *      * @param dbNum String类型参数
      */
     public void setDbNum(String dbNum) {
         this.dbNum = dbNum;
@@ -70,17 +97,30 @@ public class CacheClientBuilder {
      *
      * @return 缓存客户端实例
      */
+    /**
+     * build方法。
+     * @return CacheClient类型返回值
+     */
     public CacheClient build() {
         CacheClient cacheClient = new DefaultCacheClient();
         return cacheClient;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "CacheClientBuilder{cacheProvider=" + cacheProvider + ", dbNum=" + dbNum + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -90,6 +130,10 @@ public class CacheClientBuilder {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return java.util.Objects.hash(cacheProvider, dbNum);
     }

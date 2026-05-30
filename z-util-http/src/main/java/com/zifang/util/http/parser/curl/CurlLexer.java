@@ -7,11 +7,17 @@ import java.util.List;
  * cURL 命令词法分析器
  * 将 cURL 命令文本分割为 token 列表
  */
+/**
+ * CurlLexer类。
+ */
 public class CurlLexer {
 
     /**
      * Token 类型
      */
+/**
+ * TokenType枚举。
+ */
     public enum TokenType {
         COMMAND,        // curl 命令本身
         OPTION_SHORT,   // 短选项，如 -X, -H
@@ -28,6 +34,12 @@ public class CurlLexer {
         public final String value;
         public final int position;
 
+    /**
+     * Token方法。
+     *      * @param type TokenType类型参数
+     * @param value String类型参数
+     * @param position int类型参数
+     */
         public Token(TokenType type, String value, int position) {
             this.type = type;
             this.value = value;
@@ -35,6 +47,10 @@ public class CurlLexer {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return String.format("Token(%s, '%s', %d)", type, value, position);
         }
@@ -45,6 +61,11 @@ public class CurlLexer {
      *
      * @param command cURL 命令文本
      * @return Token 列表
+     */
+    /**
+     * tokenize方法。
+     *      * @param command String类型参数
+     * @return static List<Token>类型返回值
      */
     public static List<Token> tokenize(String command) {
         List<Token> tokens = new ArrayList<>();

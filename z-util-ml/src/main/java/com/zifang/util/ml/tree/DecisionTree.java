@@ -10,6 +10,9 @@ import java.util.Random;
  * Uses Gini impurity for split selection
  * Supports numerical features with threshold-based splits
  */
+/**
+ * DecisionTree类。
+ */
 public class DecisionTree {
     private int maxDepth;
     private int minSamplesSplit;
@@ -30,6 +33,9 @@ public class DecisionTree {
         public double threshold;
         public double[] classDistribution;
 
+    /**
+     * TreeNode方法。
+     */
         public TreeNode() {
             this.isLeaf = false;
             this.left = null;
@@ -40,6 +46,12 @@ public class DecisionTree {
         }
     }
 
+    /**
+     * DecisionTree方法。
+     *      * @param maxDepth int类型参数
+     * @param minSamplesSplit int类型参数
+     * @param minSamplesLeaf int类型参数
+     */
     public DecisionTree(int maxDepth, int minSamplesSplit, int minSamplesLeaf) {
         this.maxDepth = maxDepth;
         this.minSamplesSplit = minSamplesSplit;
@@ -47,12 +59,22 @@ public class DecisionTree {
         this.random = new Random();
     }
 
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
+     */
     public void fit(NdArray X, int[] y) {
         this.nClasses = findMaxValue(y) + 1;
         double[][] Xdata = toDouble2D(X);
         this.root = buildTree(Xdata, y, 0);
     }
 
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         int[] predictions = new int[Xdata.length];
@@ -62,6 +84,11 @@ public class DecisionTree {
         return predictions;
     }
 
+    /**
+     * predictProba方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray predictProba(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         double[][] proba = new double[Xdata.length][nClasses];
@@ -310,10 +337,18 @@ public class DecisionTree {
         return NdArray.array(flat, DType.FLOAT64).reshape(rows, cols);
     }
 
+    /**
+     * getRoot方法。
+     * @return TreeNode类型返回值
+     */
     public TreeNode getRoot() {
         return root;
     }
 
+    /**
+     * getNClasses方法。
+     * @return int类型返回值
+     */
     public int getNClasses() {
         return nClasses;
     }

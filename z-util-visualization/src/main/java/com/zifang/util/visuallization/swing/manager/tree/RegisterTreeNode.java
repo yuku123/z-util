@@ -8,6 +8,9 @@ import java.util.Objects;
  * 树形节点注册器
  * 用于注册和管理树形结构中的节点信息
  */
+/**
+ * RegisterTreeNode类。
+ */
 public class RegisterTreeNode {
 
     private List<TreeNode> treeNodes = new ArrayList<>();

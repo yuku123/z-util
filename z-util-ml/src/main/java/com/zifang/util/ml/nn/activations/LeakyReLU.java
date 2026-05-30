@@ -9,20 +9,35 @@ import com.zifang.util.numpy.Shape;
  * f(x) = x if x > 0, else negative_slope * x
  * f'(x) = 1 if x > 0, else negative_slope
  */
+/**
+ * LeakyReLU类。
+ */
 public class LeakyReLU extends com.zifang.util.ml.nn.Module {
     
     private final float negativeSlope;
     private NdArray savedInput;
     
+    /**
+     * LeakyReLU方法。
+     */
     public LeakyReLU() {
         this(0.01f);
     }
     
+    /**
+     * LeakyReLU方法。
+     *      * @param negativeSlope float类型参数
+     */
     public LeakyReLU(float negativeSlope) {
         this.negativeSlope = negativeSlope;
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         savedInput = input.copy();
         
@@ -40,6 +55,11 @@ public class LeakyReLU extends com.zifang.util.ml.nn.Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         NdArray gradInput = NdArray.zeros(gradOutput.getShape(), DType.FLOAT32);
         Object gInData = gradInput.getData();
@@ -57,5 +77,9 @@ public class LeakyReLU extends com.zifang.util.ml.nn.Module {
         return gradInput;
     }
     
+    /**
+     * getNegativeSlope方法。
+     * @return float类型返回值
+     */
     public float getNegativeSlope() { return negativeSlope; }
 }

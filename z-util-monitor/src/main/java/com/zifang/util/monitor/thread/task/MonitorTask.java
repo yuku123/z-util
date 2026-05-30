@@ -14,6 +14,9 @@ import java.util.Collection;
  *
  * @author zifang
  */
+/**
+ * MonitorTask类。
+ */
 public class MonitorTask implements Runnable {
 
     /**
@@ -31,11 +34,18 @@ public class MonitorTask implements Runnable {
      *
      * @param monitorSet 监控组件集合。
      */
+    /**
+     * MonitorTask方法。
+     *      * @param monitorSet CollectionMonitorable类型参数
+     */
     public MonitorTask(Collection<Monitorable> monitorSet) {
         this.monitorSet = monitorSet;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         LOGGER.info("{} start", this.getClass().getSimpleName());
         JSONObject jsonObject;

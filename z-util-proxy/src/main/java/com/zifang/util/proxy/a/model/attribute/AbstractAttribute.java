@@ -18,25 +18,51 @@ public abstract class AbstractAttribute {
     private U2 attributeNameIndex;
     private U4 attributeLength;//明属性值所占用的字节数
 
+    /**
+     * AbstractAttribute方法。
+     *      * @param attributeNameIndex U2类型参数
+     * @param attributeLength U4类型参数
+     */
     public AbstractAttribute(U2 attributeNameIndex, U4 attributeLength) {
         this.attributeNameIndex = attributeNameIndex;
         this.attributeLength = attributeLength;
     }
 
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     * @return abstract void类型返回值
+     */
     public abstract void read(InputStream inputStream);
 
+    /**
+     * getAttributeNameIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getAttributeNameIndex() {
         return attributeNameIndex;
     }
 
+    /**
+     * setAttributeNameIndex方法。
+     *      * @param attributeNameIndex U2类型参数
+     */
     public void setAttributeNameIndex(U2 attributeNameIndex) {
         this.attributeNameIndex = attributeNameIndex;
     }
 
+    /**
+     * getAttributeLength方法。
+     * @return U4类型返回值
+     */
     public U4 getAttributeLength() {
         return attributeLength;
     }
 
+    /**
+     * setAttributeLength方法。
+     *      * @param attributeLength U4类型参数
+     */
     public void setAttributeLength(U4 attributeLength) {
         this.attributeLength = attributeLength;
     }

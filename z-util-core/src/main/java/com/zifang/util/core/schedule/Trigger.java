@@ -28,6 +28,9 @@ import java.util.TimeZone;
  * @see DailyTimeIntervalTrigger
  * @see TriggerBuilder
  */
+/**
+ * Trigger接口。
+ */
 public interface Trigger {
 
     /**
@@ -156,6 +159,10 @@ public interface Trigger {
         protected org.quartz.JobKey jobKey;
 
         @SuppressWarnings("unchecked")
+    /**
+     * self方法。
+     * @return B类型返回值
+     */
         protected B self() {
             return (B) this;
         }
@@ -163,6 +170,11 @@ public interface Trigger {
         /**
          * 设置触发器名称。
          */
+    /**
+     * withName方法。
+     *      * @param name String类型参数
+     * @return B类型返回值
+     */
         public B withName(String name) {
             this.name = Objects.requireNonNull(name, "trigger name must not be null");
             return self();
@@ -171,6 +183,11 @@ public interface Trigger {
         /**
          * 设置触发器分组。
          */
+    /**
+     * withGroup方法。
+     *      * @param group String类型参数
+     * @return B类型返回值
+     */
         public B withGroup(String group) {
             this.group = Objects.requireNonNull(group, "trigger group must not be null");
             return self();
@@ -179,6 +196,11 @@ public interface Trigger {
         /**
          * 设置触发器描述。
          */
+    /**
+     * withDescription方法。
+     *      * @param description String类型参数
+     * @return B类型返回值
+     */
         public B withDescription(String description) {
             this.description = description;
             return self();
@@ -187,6 +209,11 @@ public interface Trigger {
         /**
          * 设置优先级。
          */
+    /**
+     * withPriority方法。
+     *      * @param priority int类型参数
+     * @return B类型返回值
+     */
         public B withPriority(int priority) {
             this.priority = priority;
             return self();
@@ -195,6 +222,11 @@ public interface Trigger {
         /**
          * 设置开始时间（java.util.Date）。
          */
+    /**
+     * startingAt方法。
+     *      * @param startTime Date类型参数
+     * @return B类型返回值
+     */
         public B startingAt(Date startTime) {
             this.startTime = startTime;
             return self();
@@ -203,6 +235,11 @@ public interface Trigger {
         /**
          * 设置开始时间（LocalDateTime，自动转换）。
          */
+    /**
+     * startingAt方法。
+     *      * @param startTime LocalDateTime类型参数
+     * @return B类型返回值
+     */
         public B startingAt(LocalDateTime startTime) {
             this.startTime = Date.from(startTime.atZone(ZoneId.systemDefault()).toInstant());
             return self();
@@ -211,6 +248,11 @@ public interface Trigger {
         /**
          * 设置结束时间（java.util.Date）。
          */
+    /**
+     * endingAt方法。
+     *      * @param endTime Date类型参数
+     * @return B类型返回值
+     */
         public B endingAt(Date endTime) {
             this.endTime = endTime;
             return self();
@@ -219,6 +261,11 @@ public interface Trigger {
         /**
          * 设置结束时间（LocalDateTime，自动转换）。
          */
+    /**
+     * endingAt方法。
+     *      * @param endTime LocalDateTime类型参数
+     * @return B类型返回值
+     */
         public B endingAt(LocalDateTime endTime) {
             this.endTime = Date.from(endTime.atZone(ZoneId.systemDefault()).toInstant());
             return self();
@@ -227,6 +274,11 @@ public interface Trigger {
         /**
          * 关联到指定 Job（通过 JobKey）。
          */
+    /**
+     * forJob方法。
+     *      * @param jobKey org.quartz.JobKey类型参数
+     * @return B类型返回值
+     */
         public B forJob(org.quartz.JobKey jobKey) {
             this.jobKey = jobKey;
             return self();
@@ -235,6 +287,11 @@ public interface Trigger {
         /**
          * 关联到指定 Job（通过 JobDetail）。
          */
+    /**
+     * forJob方法。
+     *      * @param jobDetail JobDetail类型参数
+     * @return B类型返回值
+     */
         public B forJob(JobDetail jobDetail) {
             this.jobKey = jobDetail.getKey();
             return self();
@@ -243,6 +300,12 @@ public interface Trigger {
         /**
          * 关联到指定 Job（通过名称+分组）。
          */
+    /**
+     * forJob方法。
+     *      * @param jobName String类型参数
+     * @param jobGroup String类型参数
+     * @return B类型返回值
+     */
         public B forJob(String jobName, String jobGroup) {
             this.jobKey = org.quartz.JobKey.jobKey(jobName, jobGroup);
             return self();
@@ -251,6 +314,11 @@ public interface Trigger {
         /**
          * 关联到指定 Job（通过名称，使用默认分组）。
          */
+    /**
+     * forJob方法。
+     *      * @param jobName String类型参数
+     * @return B类型返回值
+     */
         public B forJob(String jobName) {
             this.jobKey = org.quartz.JobKey.jobKey(jobName);
             return self();
@@ -262,6 +330,11 @@ public interface Trigger {
          * @see ScheduleCalendar
          * @see SchedulerManager#addCalendar(String, ScheduleCalendar)
          */
+    /**
+     * modifiedByCalendar方法。
+     *      * @param calendarName String类型参数
+     * @return B类型返回值
+     */
         public B modifiedByCalendar(String calendarName) {
             this.calendarName = calendarName;
             return self();
@@ -270,6 +343,11 @@ public interface Trigger {
         /**
          * 设置时区。
          */
+    /**
+     * inTimeZone方法。
+     *      * @param timeZone TimeZone类型参数
+     * @return B类型返回值
+     */
         public B inTimeZone(TimeZone timeZone) {
             this.timeZone = timeZone;
             return self();
@@ -278,6 +356,11 @@ public interface Trigger {
         /**
          * 设置时区（通过 ZoneId）。
          */
+    /**
+     * inTimeZone方法。
+     *      * @param zoneId ZoneId类型参数
+     * @return B类型返回值
+     */
         public B inTimeZone(ZoneId zoneId) {
             this.timeZone = TimeZone.getTimeZone(zoneId);
             return self();
@@ -286,6 +369,11 @@ public interface Trigger {
         /**
          * 设置时区（通过 ZoneId 字符串，如 "Asia/Shanghai"）。
          */
+    /**
+     * inTimeZone方法。
+     *      * @param zoneId String类型参数
+     * @return B类型返回值
+     */
         public B inTimeZone(String zoneId) {
             this.timeZone = TimeZone.getTimeZone(zoneId);
             return self();
@@ -294,6 +382,11 @@ public interface Trigger {
         /**
          * 设置 misfire 策略。
          */
+    /**
+     * withMisfirePolicy方法。
+     *      * @param misfirePolicy MisfirePolicy类型参数
+     * @return B类型返回值
+     */
         public B withMisfirePolicy(MisfirePolicy misfirePolicy) {
             this.misfirePolicy = misfirePolicy;
             return self();
@@ -302,6 +395,10 @@ public interface Trigger {
         /**
          * 构建触发器。子类必须实现。
          */
+    /**
+     * build方法。
+     * @return abstract Trigger类型返回值
+     */
         public abstract Trigger build();
     }
 }

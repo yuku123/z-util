@@ -18,10 +18,21 @@ import java.util.Map;
  * @see JavaCompiler
  * @see BytesJavaFileObject
  */
+/**
+ * CustomerJavaCompiler类。
+ */
 public class CustomerJavaCompiler {
 
+    /**
+     * ArrayList<>方法。
+     * @return static List<String> jarInnerLibPathList = new类型返回值
+     */
     public static List<String> jarInnerLibPathList = new ArrayList<>();
     private static Boolean jarInnerLibPathListGeneratedFlag = false;
+    /**
+     * generateClassPath方法。
+     * @return static void类型返回值
+     */
     public static void generateClassPath() {
         if(!jarInnerLibPathListGeneratedFlag){
 //            ApplicationHome  applicationHome = new ApplicationHome();
@@ -46,6 +57,12 @@ public class CustomerJavaCompiler {
     }
     /**
      * 将javaCode 编译成为类
+     */
+    /**
+     * compile方法。
+     *      * @param className String类型参数
+     * @param javaCode String类型参数
+     * @return static Map<String, BytesJavaFileObject>类型返回值
      */
     public static Map<String, BytesJavaFileObject> compile(String className, String javaCode) throws Exception {
 
@@ -95,6 +112,11 @@ public class CustomerJavaCompiler {
     }
 
 
+    /**
+     * compile方法。
+     *      * @param stringJavaFileObjects ListStringJavaFileObject类型参数
+     * @return static Map<String, BytesJavaFileObject>类型返回值
+     */
     public static Map<String, BytesJavaFileObject> compile(List<StringJavaFileObject> stringJavaFileObjects) throws Exception {
 
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();

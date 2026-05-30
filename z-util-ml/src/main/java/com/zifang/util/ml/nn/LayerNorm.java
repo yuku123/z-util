@@ -10,6 +10,9 @@ import com.zifang.util.numpy.Shape;
  * Input: (*, normalized_shape)
  * Output: same shape as input
  */
+/**
+ * LayerNorm类。
+ */
 public class LayerNorm extends Module {
     
     private final int normalizedShape;
@@ -20,10 +23,19 @@ public class LayerNorm extends Module {
     private NdArray savedMean;
     private NdArray savedInput;
     
+    /**
+     * LayerNorm方法。
+     *      * @param normalizedShape int类型参数
+     */
     public LayerNorm(int normalizedShape) {
         this(normalizedShape, 1e-5f);
     }
     
+    /**
+     * LayerNorm方法。
+     *      * @param normalizedShape int类型参数
+     * @param eps float类型参数
+     */
     public LayerNorm(int normalizedShape, float eps) {
         this.normalizedShape = normalizedShape;
         this.eps = eps;
@@ -36,6 +48,11 @@ public class LayerNorm extends Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         savedInput = input.copy();
         
@@ -130,6 +147,11 @@ public class LayerNorm extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         int totalSize = gradOutput.size();
         int batchSize = totalSize / normalizedShape;
@@ -230,6 +252,14 @@ public class LayerNorm extends Module {
         return gradInput;
     }
     
+    /**
+     * getWeight方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getWeight() { return weight; }
+    /**
+     * getBias方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getBias() { return bias; }
 }

@@ -10,9 +10,17 @@ import java.math.BigDecimal;
  * @author zifang
  * @see IConverter
  */
+/**
+ * BigDecimalDoubleConverter类。
+ */
 public class BigDecimalDoubleConverter implements IConverter<BigDecimal, Double> {
 
     @Override
+    /**
+     * to方法。
+     *      * @param value BigDecimal类型参数
+     * @return double类型返回值
+     */
     public Double to(BigDecimal value) {
         if (value == null) {
             return null;
@@ -20,6 +28,12 @@ public class BigDecimalDoubleConverter implements IConverter<BigDecimal, Double>
         return value.doubleValue();
     }
 
+    /**
+     * to方法。
+     *      * @param value BigDecimal类型参数
+     * @param defaultValue double类型参数
+     * @return double类型返回值
+     */
     public Double to(BigDecimal value, Double defaultValue) {
         if (value == null) {
             return defaultValue;

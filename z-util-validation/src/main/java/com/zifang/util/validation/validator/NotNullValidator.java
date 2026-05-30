@@ -9,9 +9,19 @@ import java.lang.reflect.Field;
 /**
  * 非空校验器
  */
+/**
+ * NotNullValidator类。
+ */
 public class NotNullValidator implements Validator<NotNull> {
 
     @Override
+    /**
+     * validate方法。
+     *      * @param target Object类型参数
+     * @param field Field类型参数
+     * @param annotation NotNull类型参数
+     * @param result ValidateResult类型参数
+     */
     public void validate(Object target, Field field, NotNull annotation, ValidateResult result) {
         Object value;
         try {

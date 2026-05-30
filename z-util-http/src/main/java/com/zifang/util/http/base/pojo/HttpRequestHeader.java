@@ -11,5 +11,8 @@ import java.util.LinkedHashMap;
  * @author zifang
  * @see LinkedHashMap
  */
+/**
+ * HttpRequestHeader类。
+ */
 public class HttpRequestHeader extends LinkedHashMap<String, String> {
 }

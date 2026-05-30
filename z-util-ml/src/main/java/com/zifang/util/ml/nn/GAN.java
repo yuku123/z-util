@@ -19,6 +19,9 @@ import java.util.Random;
  * 1. Train D: real loss = -log(D(real)), fake loss = -log(1 - D(G(z)))
  * 2. Train G: loss = -log(D(G(z))) (maximize D's error)
  */
+/**
+ * GAN类。
+ */
 public class GAN {
     
     private Module generator;
@@ -30,6 +33,14 @@ public class GAN {
     
     private static final double EPSILON = 1e-12;
     
+    /**
+     * GAN方法。
+     *      * @param generator Module类型参数
+     * @param discriminator Module类型参数
+     * @param latentDim int类型参数
+     * @param genOptimizer com.zifang.util.ml.optim.Optimizer类型参数
+     * @param discOptimizer com.zifang.util.ml.optim.Optimizer类型参数
+     */
     public GAN(Module generator, Module discriminator, int latentDim, 
                com.zifang.util.ml.optim.Optimizer genOptimizer, 
                com.zifang.util.ml.optim.Optimizer discOptimizer) {
@@ -57,6 +68,12 @@ public class GAN {
     
     /**
      * Train the GAN on real samples.
+     */
+    /**
+     * train方法。
+     *      * @param realSamples NdArray类型参数
+     * @param epochs int类型参数
+     * @param batchSize int类型参数
      */
     public void train(NdArray realSamples, int epochs, int batchSize) {
         int nSamples = realSamples.getShape().get(0);
@@ -110,11 +127,20 @@ public class GAN {
         applyGradientStep(generator, 0.001);
     }
     
+    /**
+     * generate方法。
+     *      * @param nSamples int类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray generate(int nSamples) {
         NdArray noise = generateNoise(nSamples);
         return generator.forward(noise);
     }
     
+    /**
+     * getGeneratorParams方法。
+     * @return NdArray[]类型返回值
+     */
     public NdArray[] getGeneratorParams() {
         List<NdArray> params = generator.parameters();
         return params.toArray(new NdArray[0]);
@@ -246,19 +272,33 @@ public class GAN {
         return Math.max(min, Math.min(max, val));
     }
     
+    /**
+     * getGenerator方法。
+     * @return Module类型返回值
+     */
     public Module getGenerator() {
         return generator;
     }
     
+    /**
+     * getDiscriminator方法。
+     * @return Module类型返回值
+     */
     public Module getDiscriminator() {
         return discriminator;
     }
     
+    /**
+     * train方法。
+     */
     public void train() {
         generator.train();
         discriminator.train();
     }
     
+    /**
+     * eval方法。
+     */
     public void eval() {
         generator.eval();
         discriminator.eval();

@@ -12,6 +12,9 @@ import java.lang.ref.ReferenceQueue;
  *
  * @author zifang
  */
+/**
+ * PhantomReferenceDemo类。
+ */
 public class PhantomReferenceDemo {
 
     /**
@@ -20,6 +23,10 @@ public class PhantomReferenceDemo {
      * 虚引用无法通过get()获取目标对象，对象被回收后会被放入引用队列。
      *
      * @throws InterruptedException 如果等待过程中被中断
+     */
+    /**
+     * test1方法。
+     * @return static void类型返回值
      */
     public static void test1() throws InterruptedException {
         ReferenceQueue<String> refQueue = new ReferenceQueue<String>();
@@ -41,6 +48,10 @@ public class PhantomReferenceDemo {
      * 注意：虚引用不会自动回收对象，当内存不足时会抛出OutOfMemoryError。
      * 此方法已被注释掉，因为直接运行会导致内存溢出。
      */
+    /**
+     * test2方法。
+     * @return static void类型返回值
+     */
     public static void test2() {
 //		Reference<Bean>[] referent = new PhantomReference[100000];
 //		ReferenceQueue<Bean> queue = new ReferenceQueue<SoftReferenceDemo.Bean>();
@@ -58,6 +69,11 @@ public class PhantomReferenceDemo {
      *
      * @param args 命令行参数
      * @throws InterruptedException 如果等待过程中被中断
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) throws InterruptedException {
         test1();

@@ -5,6 +5,9 @@ import com.zifang.util.db.transation.TranslationManager;
 /**
  * 数据源上下文配置类，用于配置数据源工厂、扫描包和事务管理器
  */
+/**
+ * DataSourceContext类。
+ */
 public class DataSourceContext {
 
     private DatasourceFactory datasourceFactory;
@@ -19,6 +22,11 @@ public class DataSourceContext {
      * @param datasourceFactory 数据源工厂实例
      * @return 当前实例，支持链式调用
      */
+    /**
+     * dataSourceFactory方法。
+     *      * @param datasourceFactory DatasourceFactory类型参数
+     * @return DataSourceContext类型返回值
+     */
     public DataSourceContext dataSourceFactory(DatasourceFactory datasourceFactory) {
         this.datasourceFactory = datasourceFactory;
         return this;
@@ -29,6 +37,11 @@ public class DataSourceContext {
      *
      * @param scanPackageName 包名，用于Repository接口扫描
      * @return 当前实例，支持链式调用
+     */
+    /**
+     * scanPackage方法。
+     *      * @param scanPackageName String类型参数
+     * @return DataSourceContext类型返回值
      */
     public DataSourceContext scanPackage(String scanPackageName) {
         this.scanPackageName = scanPackageName;
@@ -41,6 +54,11 @@ public class DataSourceContext {
      * @param transationManager 事务管理器实例
      * @return 当前实例，支持链式调用
      */
+    /**
+     * transationManager方法。
+     *      * @param transationManager TranslationManager类型参数
+     * @return DataSourceContext类型返回值
+     */
     public DataSourceContext transationManager(TranslationManager transationManager) {
         this.transactionManager = transationManager;
         return this;
@@ -51,6 +69,10 @@ public class DataSourceContext {
      *
      * @return 数据源工厂
      */
+    /**
+     * getDatasourceFactory方法。
+     * @return DatasourceFactory类型返回值
+     */
     public DatasourceFactory getDatasourceFactory() {
         return datasourceFactory;
     }
@@ -59,6 +81,10 @@ public class DataSourceContext {
      * 设置数据源工厂
      *
      * @param datasourceFactory 数据源工厂
+     */
+    /**
+     * setDatasourceFactory方法。
+     *      * @param datasourceFactory DatasourceFactory类型参数
      */
     public void setDatasourceFactory(DatasourceFactory datasourceFactory) {
         this.datasourceFactory = datasourceFactory;
@@ -69,6 +95,10 @@ public class DataSourceContext {
      *
      * @return 扫描包名
      */
+    /**
+     * getScanPackageName方法。
+     * @return String类型返回值
+     */
     public String getScanPackageName() {
         return scanPackageName;
     }
@@ -77,6 +107,10 @@ public class DataSourceContext {
      * 设置扫描包名
      *
      * @param scanPackageName 扫描包名
+     */
+    /**
+     * setScanPackageName方法。
+     *      * @param scanPackageName String类型参数
      */
     public void setScanPackageName(String scanPackageName) {
         this.scanPackageName = scanPackageName;
@@ -87,6 +121,10 @@ public class DataSourceContext {
      *
      * @return 事务管理器
      */
+    /**
+     * getTransactionManager方法。
+     * @return TranslationManager类型返回值
+     */
     public TranslationManager getTransactionManager() {
         return transactionManager;
     }
@@ -96,16 +134,29 @@ public class DataSourceContext {
      *
      * @param transactionManager 事务管理器
      */
+    /**
+     * setTransactionManager方法。
+     *      * @param transactionManager TranslationManager类型参数
+     */
     public void setTransactionManager(TranslationManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "DataSourceContext{datasourceFactory=" + datasourceFactory + ", scanPackageName=" + scanPackageName + ", transactionManager=" + transactionManager + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -116,6 +167,10 @@ public class DataSourceContext {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return java.util.Objects.hash(datasourceFactory, scanPackageName, transactionManager);
     }

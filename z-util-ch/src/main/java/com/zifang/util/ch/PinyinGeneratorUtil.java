@@ -23,6 +23,9 @@ import java.util.regex.Pattern;
  *
  * @author zifang
  */
+/**
+ * PinyinGeneratorUtil类。
+ */
 public class PinyinGeneratorUtil {
 
     /**
@@ -33,6 +36,11 @@ public class PinyinGeneratorUtil {
      *
      * @param chinese 中文字符串
      * @return 中文对应的全拼拼音，字母均为小写
+     */
+    /**
+     * transformToFullPinyin方法。
+     *      * @param chinese String类型参数
+     * @return static String类型返回值
      */
     public static String transformToFullPinyin(String chinese) {
         // 用StringBuffer（字符串缓冲）来接收处理的数据
@@ -74,6 +82,11 @@ public class PinyinGeneratorUtil {
      * @param chinese 中文字符串
      * @return 每个汉字对应的拼音首字母，非汉字字符保持不变
      */
+    /**
+     * transformToHeadPinyin方法。
+     *      * @param chinese String类型参数
+     * @return static String类型返回值
+     */
     public static String transformToHeadPinyin(String chinese) {
         // 用StringBuffer（字符串缓冲）来接收处理的数据
         StringBuffer sb = new StringBuffer();
@@ -114,6 +127,11 @@ public class PinyinGeneratorUtil {
      * @param inputString 输入字符串
      * @return 转换后的字符串，中文部分替换为拼音，非中文部分保持不变
      */
+    /**
+     * getPingYin方法。
+     *      * @param inputString String类型参数
+     * @return static String类型返回值
+     */
     public static String getPingYin(String inputString) {
         HanyuPinyinOutputFormat format = new HanyuPinyinOutputFormat();
         format.setCaseType(HanyuPinyinCaseType.LOWERCASE);
@@ -144,6 +162,11 @@ public class PinyinGeneratorUtil {
      * @param chinese 汉字串
      * @return 汉语拼音首字母，非汉字字符保持不变
      */
+    /**
+     * getFirstSpell方法。
+     *      * @param chinese String类型参数
+     * @return static String类型返回值
+     */
     public static String getFirstSpell(String chinese) {
         StringBuilder pybf = new StringBuilder();
         char[] arr = chinese.toCharArray();
@@ -172,6 +195,11 @@ public class PinyinGeneratorUtil {
      *
      * @param chinese 汉字串
      * @return 汉字串对应的完整拼音，非汉字字符保持不变
+     */
+    /**
+     * getFullSpell方法。
+     *      * @param chinese String类型参数
+     * @return static String类型返回值
      */
     public static String getFullSpell(String chinese) {
         StringBuffer pybf = new StringBuffer();
@@ -202,6 +230,11 @@ public class PinyinGeneratorUtil {
      * @param str 待检测的字符串
      * @return 如果字符串包含中文返回true，否则返回false
      */
+    /**
+     * isChineseByREG方法。
+     *      * @param str String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isChineseByREG(String str) {
         if (str == null) {
             return false;
@@ -218,6 +251,11 @@ public class PinyinGeneratorUtil {
      *
      * @param str 待检测的字符串
      * @return 如果字符串包含中文返回true，否则返回false
+     */
+    /**
+     * isChineseByName方法。
+     *      * @param str String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isChineseByName(String str) {
         if (str == null) {
@@ -239,6 +277,11 @@ public class PinyinGeneratorUtil {
      * @param strName 待检测的字符串
      * @return 如果字符串包含中文返回true，否则返回false
      */
+    /**
+     * isChinese方法。
+     *      * @param strName String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isChinese(String strName) {
         char[] ch = strName.toCharArray();
         for (int i = 0; i < ch.length; i++) {
@@ -258,6 +301,11 @@ public class PinyinGeneratorUtil {
      * @param c 待检测的字符
      * @return 如果是中文相关字符返回true，否则返回false
      */
+    /**
+     * isChinese方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
         return ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS;
@@ -268,6 +316,11 @@ public class PinyinGeneratorUtil {
      *
      * @param str 待统计的字符串
      * @return 字符串中中文字符的个数
+     */
+    /**
+     * ChineseLength方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
      */
     public static int ChineseLength(String str) {
         Pattern p = Pattern.compile("[\u4E00-\u9FA5]+");
@@ -288,6 +341,11 @@ public class PinyinGeneratorUtil {
      *
      * @param strName 待检测的字符串
      * @return 乱码字符的比例（0.0表示无乱码，1.0表示完全乱码）
+     */
+    /**
+     * isMessyCode方法。
+     *      * @param strName String类型参数
+     * @return static float类型返回值
      */
     public static float isMessyCode(String strName) {
         Pattern p = Pattern.compile("\\s*|\t*|\r*|\n*");
@@ -315,6 +373,11 @@ public class PinyinGeneratorUtil {
      *
      * @param IdCardNO 15位身份证号码
      * @return 18位标准身份证号码，如果输入不符合15位格式则返回null
+     */
+    /**
+     * transIDCard15to18方法。
+     *      * @param IdCardNO String类型参数
+     * @return static String类型返回值
      */
     public static String transIDCard15to18(String IdCardNO) {
         String cardNo = null;

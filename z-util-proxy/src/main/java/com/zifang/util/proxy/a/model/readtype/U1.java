@@ -8,14 +8,26 @@ import java.io.InputStream;
  * <p>
  * 用于从输入流中读取1字节的无符号整数，范围为0-255。
  */
+/**
+ * U1类。
+ */
 public class U1 {
 
     public byte value;
 
+    /**
+     * U1方法。
+     *      * @param value byte类型参数
+     */
     public U1(byte value) {
         this.value = value;
     }
 
+    /**
+     * read方法。
+     *      * @param stream InputStream类型参数
+     * @return static U1类型返回值
+     */
     public static U1 read(InputStream stream) {
         byte[] bytes = new byte[1];
         try {
@@ -27,6 +39,10 @@ public class U1 {
         return u1;
     }
 
+    /**
+     * getValue方法。
+     * @return byte类型返回值
+     */
     public byte getValue() {
         return value;
     }

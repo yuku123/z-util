@@ -8,6 +8,9 @@ import java.lang.annotation.*;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
+/**
+ * Length注解。
+ */
 public @interface Length {
     int min() default 0;
     int max() default Integer.MAX_VALUE;

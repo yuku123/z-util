@@ -9,19 +9,34 @@ import com.zifang.util.numpy.Shape;
  * softmax(x_i) = exp(x_i) / sum(exp(x_j))
  * Typically applied along the last dimension
  */
+/**
+ * Softmax类。
+ */
 public class Softmax extends Module {
     
     private final int dim;
     
+    /**
+     * Softmax方法。
+     */
     public Softmax() {
         this(-1);  // Default: apply along last dimension
     }
     
+    /**
+     * Softmax方法。
+     *      * @param dim int类型参数
+     */
     public Softmax(int dim) {
         this.dim = dim;
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         int ndim = input.ndim();
         int applyDim = dim < 0 ? ndim + dim : dim;
@@ -107,6 +122,11 @@ public class Softmax extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         // For softmax: dL/dx_i = sum(dL/dy_j * y_j) * y_i - dL/dy_i * y_i
         // Simplified: dL/dx = y * (dL/dy - sum(dL/dy * y))
@@ -174,5 +194,9 @@ public class Softmax extends Module {
         return gradInput;
     }
     
+    /**
+     * getDim方法。
+     * @return int类型返回值
+     */
     public int getDim() { return dim; }
 }

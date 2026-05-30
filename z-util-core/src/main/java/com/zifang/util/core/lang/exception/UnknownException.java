@@ -8,6 +8,9 @@ package com.zifang.util.core.lang.exception;
  *
  * @author zifang
  */
+/**
+ * UnknownException类。
+ */
 public class UnknownException extends RuntimeException {
 
     private static final long serialVersionUID = -7655513487870988265L;
@@ -16,6 +19,10 @@ public class UnknownException extends RuntimeException {
      * 使用指定错误信息创建未知异常。
      *
      * @param message 错误信息
+     */
+    /**
+     * UnknownException方法。
+     *      * @param message String类型参数
      */
     public UnknownException(String message) {
         super(message);
@@ -27,12 +34,20 @@ public class UnknownException extends RuntimeException {
      * @param message 错误信息
      * @param cause    原始异常，通常是导致当前异常的根本原因
      */
+    /**
+     * UnknownException方法。
+     *      * @param message String类型参数
+     * @param cause Throwable类型参数
+     */
     public UnknownException(String message, Throwable cause) {
         super(message, cause);
     }
 
     /**
      * 创建一个空的未知异常。
+     */
+    /**
+     * UnknownException方法。
      */
     public UnknownException() {
         super();
@@ -42,6 +57,10 @@ public class UnknownException extends RuntimeException {
      * 使用原始异常创建未知异常。
      *
      * @param cause 原始异常
+     */
+    /**
+     * UnknownException方法。
+     *      * @param cause Throwable类型参数
      */
     public UnknownException(Throwable cause) {
         super(cause);

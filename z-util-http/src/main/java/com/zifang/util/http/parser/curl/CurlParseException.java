@@ -9,12 +9,19 @@ package com.zifang.util.http.parser.curl;
  * @author zifang
  * @see RuntimeException
  */
+/**
+ * CurlParseException类。
+ */
 public class CurlParseException extends RuntimeException {
 
     /**
      * 构造一个带指定消息的解析异常。
      *
      * @param message 异常消息
+     */
+    /**
+     * CurlParseException方法。
+     *      * @param message String类型参数
      */
     public CurlParseException(String message) {
         super(message);
@@ -25,6 +32,11 @@ public class CurlParseException extends RuntimeException {
      *
      * @param message 异常消息
      * @param cause   根因异常
+     */
+    /**
+     * CurlParseException方法。
+     *      * @param message String类型参数
+     * @param cause Throwable类型参数
      */
     public CurlParseException(String message, Throwable cause) {
         super(message, cause);

@@ -11,6 +11,9 @@ import com.zifang.util.http.base.define.RequestMethod;
  * @author zifang
  * @see RequestMethod
  */
+/**
+ * HttpRequestLine类。
+ */
 public class HttpRequestLine {
 
     /**
@@ -28,6 +31,10 @@ public class HttpRequestLine {
      *
      * @return HTTP请求方法
      */
+    /**
+     * getRequestMethod方法。
+     * @return RequestMethod类型返回值
+     */
     public RequestMethod getRequestMethod() {
         return requestMethod;
     }
@@ -36,6 +43,10 @@ public class HttpRequestLine {
      * 设置请求方法。
      *
      * @param requestMethod HTTP请求方法
+     */
+    /**
+     * setRequestMethod方法。
+     *      * @param requestMethod RequestMethod类型参数
      */
     public void setRequestMethod(RequestMethod requestMethod) {
         this.requestMethod = requestMethod;
@@ -46,6 +57,10 @@ public class HttpRequestLine {
      *
      * @return 请求URL
      */
+    /**
+     * getUrl方法。
+     * @return String类型返回值
+     */
     public String getUrl() {
         return url;
     }
@@ -55,16 +70,29 @@ public class HttpRequestLine {
      *
      * @param url 请求URL
      */
+    /**
+     * setUrl方法。
+     *      * @param url String类型参数
+     */
     public void setUrl(String url) {
         this.url = url;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "HttpRequestLine{requestMethod=" + requestMethod + ", url=" + url + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -74,6 +102,10 @@ public class HttpRequestLine {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         int result = requestMethod != null ? requestMethod.hashCode() : 0;
         result = 31 * result + (url != null ? url.hashCode() : 0);

@@ -22,6 +22,9 @@ import java.util.Map;
  * @see IConverter
  * @see ConvertCaller
  */
+/**
+ * Converters类。
+ */
 public class Converters {
 
     private static final Map<Pair<Class<?>,Class<?>>,IConverter<?,?>> converterCache = new HashMap<>();
@@ -43,6 +46,12 @@ public class Converters {
         }
     }
 
+    /**
+     * findConverter方法。
+     *      * @param from ClassF类型参数
+     * @param target ClassT类型参数
+     * @return static <F,T> IConverter<F,T>类型返回值
+     */
     public static <F,T> IConverter<F,T> findConverter(Class<F> from, Class<T> target) {
 
         // 获取原始类型
@@ -93,6 +102,11 @@ public class Converters {
          throw new RuntimeException("没有找到对应的转换器" + a.getName() + "->" + b.getName());
     }
 
+    /**
+     * registerConverter方法。
+     *      * @param clazz Class?类型参数
+     * @return static <F,T> void类型返回值
+     */
     public static <F,T> void registerConverter(Class<? extends IConverter<F,T>> clazz) {
         try {
             Object instance = clazz.newInstance();
@@ -103,6 +117,13 @@ public class Converters {
     }
 
 
+    /**
+     * registerConverter方法。
+     *      * @param converter IConverterF,类型参数
+     * @param from Class?类型参数
+     * @param target Class?类型参数
+     * @return static <F,T> void类型返回值
+     */
     public static <F,T> void registerConverter(IConverter<F, T> converter, Class<?> from, Class<?> target) {
         Pair<Class<?>, Class<?>> pair = new Pair<>(from, target);
 
@@ -121,6 +142,11 @@ public class Converters {
         }
     }
 
+    /**
+     * registerConverter方法。
+     *      * @param converter IConverterF,类型参数
+     * @return static <F,T> void类型返回值
+     */
     public static <F,T> void registerConverter(IConverter<F, T> converter){
         try {
             ClassParser classParser = new ClassParserFactory().getInstance(converter.getClass());
@@ -156,6 +182,12 @@ public class Converters {
 
 
 
+    /**
+     * to方法。
+     *      * @param value Object类型参数
+     * @param clazz ClassT类型参数
+     * @return static <F,T> T类型返回值
+     */
     public static <F,T> T to(Object value, Class<T> clazz) {
         return findConverter((Class<F>) value.getClass(), clazz).to((F)value);
     }

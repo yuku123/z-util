@@ -13,18 +13,28 @@ import java.util.function.*;
  * @param <C> 上下文类型
  * @author zifang
  */
+/**
+ * ChainExecutor类。
+ */
 public class ChainExecutor<C extends ChainContext<?, ?>> {
 
     private final Map<String, Chain<C>> chainCatalog;
     private final List<ChainListener<C>> listeners;
     private final ExecutorService executor;
 
+    /**
+     * ChainExecutor方法。
+     */
     public ChainExecutor() {
         this.chainCatalog = new HashMap<>();
         this.listeners = new ArrayList<>();
         this.executor = null;
     }
 
+    /**
+     * ChainExecutor方法。
+     *      * @param executor ExecutorService类型参数
+     */
     public ChainExecutor(ExecutorService executor) {
         this.chainCatalog = new HashMap<>();
         this.listeners = new ArrayList<>();
@@ -34,6 +44,12 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     /**
      * 注册链到目录
      */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param chain ChainC类型参数
+     * @return ChainExecutor<C>类型返回值
+     */
     public ChainExecutor<C> register(String name, Chain<C> chain) {
         chainCatalog.put(name, chain);
         return this;
@@ -41,6 +57,11 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
 
     /**
      * 注册链
+     */
+    /**
+     * register方法。
+     *      * @param chain ChainC类型参数
+     * @return ChainExecutor<C>类型返回值
      */
     public ChainExecutor<C> register(Chain<C> chain) {
         chainCatalog.put(chain.getName(), chain);
@@ -50,12 +71,22 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     /**
      * 获取注册的链
      */
+    /**
+     * getChain方法。
+     *      * @param name String类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> getChain(String name) {
         return chainCatalog.get(name);
     }
 
     /**
      * 移除注册的链
+     */
+    /**
+     * removeChain方法。
+     *      * @param name String类型参数
+     * @return Chain<C>类型返回值
      */
     public Chain<C> removeChain(String name) {
         return chainCatalog.remove(name);
@@ -64,12 +95,21 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     /**
      * 是否包含指定名称的链
      */
+    /**
+     * contains方法。
+     *      * @param name String类型参数
+     * @return boolean类型返回值
+     */
     public boolean contains(String name) {
         return chainCatalog.containsKey(name);
     }
 
     /**
      * 获取所有链名称
+     */
+    /**
+     * getChainNames方法。
+     * @return Set<String>类型返回值
      */
     public Set<String> getChainNames() {
         return Collections.unmodifiableSet(chainCatalog.keySet());
@@ -78,12 +118,21 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     /**
      * 获取链数量
      */
+    /**
+     * getChainCount方法。
+     * @return int类型返回值
+     */
     public int getChainCount() {
         return chainCatalog.size();
     }
 
     /**
      * 添加监听器
+     */
+    /**
+     * addListener方法。
+     *      * @param listener ChainListenerC类型参数
+     * @return ChainExecutor<C>类型返回值
      */
     public ChainExecutor<C> addListener(ChainListener<C> listener) {
         if (listener != null) {
@@ -95,6 +144,11 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     /**
      * 移除监听器
      */
+    /**
+     * removeListener方法。
+     *      * @param listener ChainListenerC类型参数
+     * @return ChainExecutor<C>类型返回值
+     */
     public ChainExecutor<C> removeListener(ChainListener<C> listener) {
         listeners.remove(listener);
         return this;
@@ -102,6 +156,12 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
 
     /**
      * 执行链
+     */
+    /**
+     * execute方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @return ProcessorResult类型返回值
      */
     public ProcessorResult execute(Chain<C> chain, C context) {
         notifyBeforeExecution(chain, context);
@@ -122,6 +182,12 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     /**
      * 执行命名链
      */
+    /**
+     * execute方法。
+     *      * @param chainName String类型参数
+     * @param context C类型参数
+     * @return ProcessorResult类型返回值
+     */
     public ProcessorResult execute(String chainName, C context) {
         Chain<C> chain = chainCatalog.get(chainName);
         if (chain == null) {
@@ -133,6 +199,12 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     /**
      * 异步执行链
      */
+    /**
+     * executeAsync方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @return CompletableFuture<ProcessorResult>类型返回值
+     */
     public CompletableFuture<ProcessorResult> executeAsync(Chain<C> chain, C context) {
         if (executor == null) {
             throw new IllegalStateException("No ExecutorService configured for async execution");
@@ -142,6 +214,12 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
 
     /**
      * 异步执行命名链
+     */
+    /**
+     * executeAsync方法。
+     *      * @param chainName String类型参数
+     * @param context C类型参数
+     * @return CompletableFuture<ProcessorResult>类型返回值
      */
     public CompletableFuture<ProcessorResult> executeAsync(String chainName, C context) {
         Chain<C> chain = chainCatalog.get(chainName);
@@ -184,6 +262,9 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     /**
      * 链监听器接口
      */
+/**
+ * ChainListener接口。
+ */
     public interface ChainListener<C extends ChainContext<?, ?>> {
         default void onBeforeExecution(Chain<C> chain, C context) {}
         default void onAfterExecution(Chain<C> chain, C context, ProcessorResult result, long duration) {}
@@ -195,12 +276,31 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
      */
     public abstract static class ChainListenerAdapter<C extends ChainContext<?, ?>> implements ChainListener<C> {
         @Override
+    /**
+     * onBeforeExecution方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     */
         public void onBeforeExecution(Chain<C> chain, C context) {}
 
         @Override
+    /**
+     * onAfterExecution方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @param result ProcessorResult类型参数
+     * @param duration long类型参数
+     */
         public void onAfterExecution(Chain<C> chain, C context, ProcessorResult result, long duration) {}
 
         @Override
+    /**
+     * onError方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @param error Exception类型参数
+     * @param duration long类型参数
+     */
         public void onError(Chain<C> chain, C context, Exception error, long duration) {}
     }
 
@@ -210,25 +310,51 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
     public static class LoggingChainListener<C extends ChainContext<?, ?>> extends ChainListenerAdapter<C> {
         private final java.util.logging.Logger logger;
 
+    /**
+     * LoggingChainListener方法。
+     */
         public LoggingChainListener() {
             this.logger = java.util.logging.Logger.getLogger(ChainExecutor.class.getName());
         }
 
+    /**
+     * LoggingChainListener方法。
+     *      * @param logger java.util.logging.Logger类型参数
+     */
         public LoggingChainListener(java.util.logging.Logger logger) {
             this.logger = logger;
         }
 
         @Override
+    /**
+     * onBeforeExecution方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     */
         public void onBeforeExecution(Chain<C> chain, C context) {
             logger.info("Executing chain: " + chain.getName());
         }
 
         @Override
+    /**
+     * onAfterExecution方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @param result ProcessorResult类型参数
+     * @param duration long类型参数
+     */
         public void onAfterExecution(Chain<C> chain, C context, ProcessorResult result, long duration) {
             logger.info("Chain '" + chain.getName() + "' completed with result: " + result + " in " + duration + "ms");
         }
 
         @Override
+    /**
+     * onError方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @param error Exception类型参数
+     * @param duration long类型参数
+     */
         public void onError(Chain<C> chain, C context, Exception error, long duration) {
             logger.severe("Chain '" + chain.getName() + "' failed after " + duration + "ms: " + error.getMessage());
         }
@@ -243,6 +369,13 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
         private final Map<String, AtomicLong> failureCount = new ConcurrentHashMap<>();
 
         @Override
+    /**
+     * onAfterExecution方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @param result ProcessorResult类型参数
+     * @param duration long类型参数
+     */
         public void onAfterExecution(Chain<C> chain, C context, ProcessorResult result, long duration) {
             String name = chain.getName();
             executionCount.merge(name, 1L, Long::sum);
@@ -250,6 +383,13 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
         }
 
         @Override
+    /**
+     * onError方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @param error Exception类型参数
+     * @param duration long类型参数
+     */
         public void onError(Chain<C> chain, C context, Exception error, long duration) {
             String name = chain.getName();
             executionCount.merge(name, 1L, Long::sum);
@@ -257,19 +397,39 @@ public class ChainExecutor<C extends ChainContext<?, ?>> {
             failureCount.computeIfAbsent(name, k -> new AtomicLong()).incrementAndGet();
         }
 
+    /**
+     * getExecutionCount方法。
+     *      * @param chainName String类型参数
+     * @return long类型返回值
+     */
         public long getExecutionCount(String chainName) {
             return executionCount.getOrDefault(chainName, 0L);
         }
 
+    /**
+     * getTotalDuration方法。
+     *      * @param chainName String类型参数
+     * @return long类型返回值
+     */
         public long getTotalDuration(String chainName) {
             return totalDuration.getOrDefault(chainName, 0L);
         }
 
+    /**
+     * getFailureCount方法。
+     *      * @param chainName String类型参数
+     * @return long类型返回值
+     */
         public long getFailureCount(String chainName) {
             AtomicLong count = failureCount.get(chainName);
             return count != null ? count.get() : 0;
         }
 
+    /**
+     * getAverageDuration方法。
+     *      * @param chainName String类型参数
+     * @return double类型返回值
+     */
         public double getAverageDuration(String chainName) {
             long count = executionCount.getOrDefault(chainName, 0L);
             long total = totalDuration.getOrDefault(chainName, 0L);

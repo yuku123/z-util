@@ -10,6 +10,9 @@ import java.io.IOException;
  *
  * @author zifang
  */
+/**
+ * NetClient接口。
+ */
 public interface NetClient extends Closeable {
 
     /**

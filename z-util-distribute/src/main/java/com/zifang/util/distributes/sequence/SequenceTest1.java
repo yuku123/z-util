@@ -14,9 +14,15 @@ import org.junit.Test;
  * @author zifang
  * @see Sequence
  */
+/**
+ * SequenceTest1类。
+ */
 public class SequenceTest1 {
 
     @Test
+    /**
+     * name方法。
+     */
     public void name() {
         Sequence sequence = new Sequence(0, 0);
         for (int i = 0; i < 1000; i++) {

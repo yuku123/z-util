@@ -6,13 +6,26 @@ import java.security.NoSuchAlgorithmException;
 /**
  * MD5加密
  */
+/**
+ * MD5Utils类。
+ */
 public class MD5Utils {
     protected final static String MD5_KEY = "MD5";
     protected final static String SHA_KEY = "SHA1";
+    /**
+     * encrypt方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String encrypt(String value) {
         return encrypt(value, MD5_KEY);
     }
 
+    /**
+     * encrypt方法。
+     *      * @param inputByteArray byte[]类型参数
+     * @return static String类型返回值
+     */
     public static String encrypt(byte[] inputByteArray) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(MD5_KEY);
@@ -24,6 +37,12 @@ public class MD5Utils {
         }
     }
 
+    /**
+     * encrypt方法。
+     *      * @param value String类型参数
+     * @param key String类型参数
+     * @return static String类型返回值
+     */
     protected static String encrypt(String value, String key) {
         try {
             // 拿到一个MD5转换器（如果想要SHA1参数换成”SHA1”）

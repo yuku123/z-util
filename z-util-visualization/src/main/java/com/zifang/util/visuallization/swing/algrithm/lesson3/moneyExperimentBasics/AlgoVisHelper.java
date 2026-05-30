@@ -9,6 +9,9 @@ import java.awt.geom.Rectangle2D;
  * 算法可视化帮助类
  * 提供绘图辅助方法
  */
+/**
+ * AlgoVisHelper类。
+ */
 public class AlgoVisHelper {
 
     private AlgoVisHelper() {

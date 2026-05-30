@@ -8,6 +8,9 @@ import java.util.Set;
 /**
  * @author zifang
  */
+/**
+ * Sets类。
+ */
 public class Sets {
 
     /**
@@ -18,6 +21,11 @@ public class Sets {
      * @return HashSet对象
      */
     @SafeVarargs
+    /**
+     * newHashSet方法。
+     *      * @param ts T...类型参数
+     * @return static <T> HashSet<T>类型返回值
+     */
     public static <T> HashSet<T> newHashSet(T... ts) {
         return newHashSet(false, ts);
     }
@@ -31,6 +39,12 @@ public class Sets {
      * @return HashSet对象
      */
     @SafeVarargs
+    /**
+     * newHashSet方法。
+     *      * @param isSorted boolean类型参数
+     * @param ts T...类型参数
+     * @return static <T> HashSet<T>类型返回值
+     */
     public static <T> HashSet<T> newHashSet(boolean isSorted, T... ts) {
         if (null == ts) {
             return isSorted ? new LinkedHashSet<>() : new HashSet<>();
@@ -49,6 +63,12 @@ public class Sets {
      * @param set2  第二个集合
      * @return 交集集合
      */
+    /**
+     * intersection方法。
+     *      * @param set1 SetT类型参数
+     * @param set2 SetT类型参数
+     * @return static <T> Set<T>类型返回值
+     */
     public static <T> Set<T> intersection(Set<T> set1, Set<T> set2) {
         if (set1 == null || set2 == null) {
             return new HashSet<>();
@@ -65,6 +85,12 @@ public class Sets {
      * @param set1  第一个集合
      * @param set2  第二个集合
      * @return 差集集合
+     */
+    /**
+     * difference方法。
+     *      * @param set1 SetT类型参数
+     * @param set2 SetT类型参数
+     * @return static <T> Set<T>类型返回值
      */
     public static <T> Set<T> difference(Set<T> set1, Set<T> set2) {
         if (set1 == null) {
@@ -84,6 +110,12 @@ public class Sets {
      * @param set1  第一个集合
      * @param set2  第二个集合
      * @return 并集集合
+     */
+    /**
+     * union方法。
+     *      * @param set1 SetT类型参数
+     * @param set2 SetT类型参数
+     * @return static <T> Set<T>类型返回值
      */
     public static <T> Set<T> union(Set<T> set1, Set<T> set2) {
         Set<T> result = new HashSet<>();

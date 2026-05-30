@@ -28,6 +28,9 @@ import org.slf4j.LoggerFactory;
  *
  * @see TranslationManager
  */
+/**
+ * TransactionTemplate类。
+ */
 public class TransactionTemplate {
 
     private static final Logger log = LoggerFactory.getLogger(TransactionTemplate.class);
@@ -37,25 +40,48 @@ public class TransactionTemplate {
     private Isolation isolation = Isolation.DEFAULT;
     private boolean readOnly = false;
 
+    /**
+     * TransactionTemplate方法。
+     */
     public TransactionTemplate() {
     }
 
+    /**
+     * TransactionTemplate方法。
+     *      * @param transactionManager TranslationManager类型参数
+     */
     public TransactionTemplate(TranslationManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 
+    /**
+     * setTransactionManager方法。
+     *      * @param transactionManager TranslationManager类型参数
+     */
     public void setTransactionManager(TranslationManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 
+    /**
+     * setPropagation方法。
+     *      * @param propagation Propagation类型参数
+     */
     public void setPropagation(Propagation propagation) {
         this.propagation = propagation;
     }
 
+    /**
+     * setIsolation方法。
+     *      * @param isolation Isolation类型参数
+     */
     public void setIsolation(Isolation isolation) {
         this.isolation = isolation;
     }
 
+    /**
+     * setReadOnly方法。
+     *      * @param readOnly boolean类型参数
+     */
     public void setReadOnly(boolean readOnly) {
         this.readOnly = readOnly;
     }
@@ -65,6 +91,10 @@ public class TransactionTemplate {
      *
      * @param action 业务逻辑
      * @throws TransactionException 事务执行失败时抛出
+     */
+    /**
+     * execute方法。
+     *      * @param action TransactionAction类型参数
      */
     public void execute(TransactionAction action) {
         executeWithResult(() -> {
@@ -80,6 +110,11 @@ public class TransactionTemplate {
      * @param <T>   返回值类型
      * @return 业务逻辑的返回值
      * @throws TransactionException 事务执行失败时抛出
+     */
+    /**
+     * executeWithResult方法。
+     *      * @param action TransactionFunctionT类型参数
+     * @return <T> T类型返回值
      */
     public <T> T executeWithResult(TransactionFunction<T> action) {
         TranslationManager tm = getTransactionManager();
@@ -113,11 +148,17 @@ public class TransactionTemplate {
     // ==================== 回调接口 ====================
 
     @FunctionalInterface
+/**
+ * TransactionAction接口。
+ */
     public interface TransactionAction {
         void execute();
     }
 
     @FunctionalInterface
+/**
+ * TransactionFunction接口。
+ */
     public interface TransactionFunction<T> {
         T execute();
     }

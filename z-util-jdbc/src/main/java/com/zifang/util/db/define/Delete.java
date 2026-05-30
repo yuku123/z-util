@@ -22,5 +22,8 @@ package com.zifang.util.db.define;
  * @see Select
  * @see Param
  */
+/**
+ * Delete注解。
+ */
 public @interface Delete {
 }

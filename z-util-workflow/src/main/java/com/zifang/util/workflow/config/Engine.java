@@ -8,6 +8,9 @@ import java.util.Map;
  *
  * @see Configurations
  */
+/**
+ * Engine类。
+ */
 public class Engine {
 
     /**
@@ -28,6 +31,9 @@ public class Engine {
     /**
      * 默认构造函数
      */
+    /**
+     * Engine方法。
+     */
     public Engine() {
     }
 
@@ -37,6 +43,12 @@ public class Engine {
      * @param type       引擎类型，如spark、flink等
      * @param mode       引擎模式，表示在某个引擎下的种类类型
      * @param properties 引擎属性参数Map，配置引擎所需的所有参数
+     */
+    /**
+     * Engine方法。
+     *      * @param type String类型参数
+     * @param mode String类型参数
+     * @param properties MapString,类型参数
      */
     public Engine(String type, String mode, Map<String, String> properties) {
         this.type = type;
@@ -49,6 +61,10 @@ public class Engine {
      *
      * @return 引擎类型，如spark、flink等
      */
+    /**
+     * getType方法。
+     * @return String类型返回值
+     */
     public String getType() {
         return type;
     }
@@ -57,6 +73,10 @@ public class Engine {
      * 设置引擎类型
      *
      * @param type 引擎类型，如spark、flink等
+     */
+    /**
+     * setType方法。
+     *      * @param type String类型参数
      */
     public void setType(String type) {
         this.type = type;
@@ -67,6 +87,10 @@ public class Engine {
      *
      * @return 引擎模式，表示在某个引擎下的种类类型
      */
+    /**
+     * getMode方法。
+     * @return String类型返回值
+     */
     public String getMode() {
         return mode;
     }
@@ -75,6 +99,10 @@ public class Engine {
      * 设置引擎模式
      *
      * @param mode 引擎模式，表示在某个引擎下的种类类型
+     */
+    /**
+     * setMode方法。
+     *      * @param mode String类型参数
      */
     public void setMode(String mode) {
         this.mode = mode;
@@ -85,6 +113,10 @@ public class Engine {
      *
      * @return 引擎属性参数Map
      */
+    /**
+     * getProperties方法。
+     * @return Map<String, String>类型返回值
+     */
     public Map<String, String> getProperties() {
         return properties;
     }
@@ -94,16 +126,29 @@ public class Engine {
      *
      * @param properties 引擎属性参数Map
      */
+    /**
+     * setProperties方法。
+     *      * @param properties MapString,类型参数
+     */
     public void setProperties(Map<String, String> properties) {
         this.properties = properties;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "Engine{type=" + type + ", mode=" + mode + ", properties=" + properties + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -114,6 +159,10 @@ public class Engine {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         int result = type != null ? type.hashCode() : 0;
         result = 31 * result + (mode != null ? mode.hashCode() : 0);

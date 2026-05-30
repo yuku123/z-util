@@ -6,6 +6,9 @@ import java.awt.*;
  * 圆形数据类
  * 表示具有位置、半径和速度的圆形对象
  */
+/**
+ * Circle类。
+ */
 public class Circle {
 
     public int x, y;

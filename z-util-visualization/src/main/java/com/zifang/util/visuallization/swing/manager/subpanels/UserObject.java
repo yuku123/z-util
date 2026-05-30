@@ -6,6 +6,9 @@ import java.util.Objects;
  * 用户对象数据类
  * 存储用户ID和显示名称信息
  */
+/**
+ * UserObject类。
+ */
 public class UserObject {
 
     private Integer id;

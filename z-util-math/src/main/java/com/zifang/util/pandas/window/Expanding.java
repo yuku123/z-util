@@ -9,15 +9,27 @@ import java.util.function.Function;
  * 对标 pandas.Series.expanding
  * 从序列开头开始，窗口大小逐渐增大
  */
+/**
+ * Expanding类。
+ */
 public class Expanding {
 
     private final Series series;
     private final int minPeriods;
 
+    /**
+     * Expanding方法。
+     *      * @param series Series类型参数
+     */
     public Expanding(Series series) {
         this(series, 1);
     }
 
+    /**
+     * Expanding方法。
+     *      * @param series Series类型参数
+     * @param minPeriods int类型参数
+     */
     public Expanding(Series series, int minPeriods) {
         this.series = series;
         this.minPeriods = minPeriods;
@@ -25,6 +37,10 @@ public class Expanding {
 
     /**
      * 计算扩展窗口的均值
+     */
+    /**
+     * mean方法。
+     * @return Series类型返回值
      */
     public Series mean() {
         return applyWindow(values -> {
@@ -39,6 +55,10 @@ public class Expanding {
     /**
      * 计算扩展窗口的和
      */
+    /**
+     * sum方法。
+     * @return Series类型返回值
+     */
     public Series sum() {
         return applyWindow(values -> {
             double sum = 0;
@@ -51,6 +71,10 @@ public class Expanding {
 
     /**
      * 计算扩展窗口的最大值
+     */
+    /**
+     * max方法。
+     * @return Series类型返回值
      */
     public Series max() {
         return applyWindow(values -> {
@@ -65,6 +89,10 @@ public class Expanding {
     /**
      * 计算扩展窗口的最小值
      */
+    /**
+     * min方法。
+     * @return Series类型返回值
+     */
     public Series min() {
         return applyWindow(values -> {
             double min = Double.POSITIVE_INFINITY;
@@ -77,6 +105,10 @@ public class Expanding {
 
     /**
      * 计算扩展窗口的标准差
+     */
+    /**
+     * std方法。
+     * @return Series类型返回值
      */
     public Series std() {
         return applyWindow(values -> {
@@ -97,6 +129,10 @@ public class Expanding {
     /**
      * 计算扩展窗口的方差
      */
+    /**
+     * var方法。
+     * @return Series类型返回值
+     */
     public Series var() {
         return applyWindow(values -> {
             double mean = 0;
@@ -115,6 +151,10 @@ public class Expanding {
 
     /**
      * 计算扩展窗口的计数
+     */
+    /**
+     * count方法。
+     * @return Series类型返回值
      */
     public Series count() {
         double[] data = series.toArray();
@@ -135,6 +175,11 @@ public class Expanding {
 
     /**
      * 应用自定义聚合函数
+     */
+    /**
+     * apply方法。
+     *      * @param func FunctionSeries,类型参数
+     * @return Series类型返回值
      */
     public Series apply(Function<Series, Double> func) {
         return applyWindow(values -> {

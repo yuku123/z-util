@@ -38,11 +38,18 @@ import java.util.List;
  *
  * @author zifang
  */
+/**
+ * ByteCodeResolver类。
+ */
 public class ByteCodeResolver {
 
     private final InputStream inputStream;
     private final ClassFile classFile;
 
+    /**
+     * ByteCodeResolver方法。
+     *      * @param inputStream InputStream类型参数
+     */
     public ByteCodeResolver(InputStream inputStream) {
         this.inputStream = inputStream;
         this.classFile = new ClassFile();
@@ -53,6 +60,11 @@ public class ByteCodeResolver {
      *
      * @param filePath .class文件路径
      * @return 解析后的ClassFile对象
+     */
+    /**
+     * parseFromFile方法。
+     *      * @param filePath String类型参数
+     * @return static ClassFile类型返回值
      */
     public static ClassFile parseFromFile(String filePath) {
         try (InputStream is = Files.newInputStream(Paths.get(filePath))) {
@@ -68,6 +80,11 @@ public class ByteCodeResolver {
      * @param inputStream 包含字节码的输入流
      * @return 解析后的ClassFile对象
      */
+    /**
+     * parseFromStream方法。
+     *      * @param inputStream InputStream类型参数
+     * @return static ClassFile类型返回值
+     */
     public static ClassFile parseFromStream(InputStream inputStream) {
         return new ByteCodeResolver(inputStream).parse();
     }
@@ -76,6 +93,10 @@ public class ByteCodeResolver {
      * 执行解析
      *
      * @return 解析后的ClassFile对象
+     */
+    /**
+     * parse方法。
+     * @return ClassFile类型返回值
      */
     public ClassFile parse() {
         try {
@@ -268,12 +289,21 @@ public class ByteCodeResolver {
      *
      * @return ClassFile对象
      */
+    /**
+     * getClassFile方法。
+     * @return ClassFile类型返回值
+     */
     public ClassFile getClassFile() {
         return classFile;
     }
 
     /**
      * 主方法，用于命令行测试
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) {
         if (args.length == 0) {

@@ -47,6 +47,11 @@ public final class Unsigned {
      * @return 无符号byte值（0~255）
      * @throws NullPointerException if bb is null
      */
+    /**
+     * getUnsignedByte方法。
+     *      * @param bb ByteBuffer类型参数
+     * @return static short类型返回值
+     */
     public static short getUnsignedByte(ByteBuffer bb) {
         return (short) (bb.get() & 0xff);
     }
@@ -62,6 +67,12 @@ public final class Unsigned {
      * @throws NullPointerException if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
+    /**
+     * getUnsignedByte方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param position int类型参数
+     * @return static short类型返回值
+     */
     public static short getUnsignedByte(ByteBuffer bb, int position) {
         return (short) (bb.get(position) & 0xff);
     }
@@ -74,6 +85,12 @@ public final class Unsigned {
      * @param bb    目标ByteBuffer，不能为null
      * @param value 要写入的值（0~255）
      * @throws NullPointerException if bb is null
+     */
+    /**
+     * putUnsignedByte方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param value int类型参数
+     * @return static void类型返回值
      */
     public static void putUnsignedByte(ByteBuffer bb, int value) {
         bb.put((byte) (value & 0xff));
@@ -90,6 +107,13 @@ public final class Unsigned {
      * @throws NullPointerException if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
+    /**
+     * putUnsignedByte方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param position int类型参数
+     * @param value int类型参数
+     * @return static void类型返回值
+     */
     public static void putUnsignedByte(ByteBuffer bb, int position, int value) {
         bb.put(position, (byte) (value & 0xff));
     }
@@ -104,6 +128,11 @@ public final class Unsigned {
      * @param bb 源ByteBuffer，不能为null
      * @return 无符号short值（0~65535）
      * @throws NullPointerException if bb is null
+     */
+    /**
+     * getUnsignedShort方法。
+     *      * @param bb ByteBuffer类型参数
+     * @return static int类型返回值
      */
     public static int getUnsignedShort(ByteBuffer bb) {
         return bb.getShort() & 0xffff;
@@ -120,6 +149,12 @@ public final class Unsigned {
      * @throws NullPointerException if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
+    /**
+     * getUnsignedShort方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param position int类型参数
+     * @return static int类型返回值
+     */
     public static int getUnsignedShort(ByteBuffer bb, int position) {
         return bb.getShort(position) & 0xffff;
     }
@@ -132,6 +167,12 @@ public final class Unsigned {
      * @param bb    目标ByteBuffer，不能为null
      * @param value 要写入的值（0~65535）
      * @throws NullPointerException if bb is null
+     */
+    /**
+     * putUnsignedShort方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param value int类型参数
+     * @return static void类型返回值
      */
     public static void putUnsignedShort(ByteBuffer bb, int value) {
         bb.putShort((short) (value & 0xffff));
@@ -148,6 +189,13 @@ public final class Unsigned {
      * @throws NullPointerException if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
+    /**
+     * putUnsignedShort方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param position int类型参数
+     * @param value int类型参数
+     * @return static void类型返回值
+     */
     public static void putUnsignedShort(ByteBuffer bb, int position, int value) {
         bb.putShort(position, (short) (value & 0xffff));
     }
@@ -162,6 +210,11 @@ public final class Unsigned {
      * @param bb 源ByteBuffer，不能为null
      * @return 无符号int值（0~4294967295）
      * @throws NullPointerException if bb is null
+     */
+    /**
+     * getUnsignedInt方法。
+     *      * @param bb ByteBuffer类型参数
+     * @return static long类型返回值
      */
     public static long getUnsignedInt(ByteBuffer bb) {
         return bb.getInt() & 0xffffffffL;
@@ -178,6 +231,12 @@ public final class Unsigned {
      * @throws NullPointerException if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
+    /**
+     * getUnsignedInt方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param position int类型参数
+     * @return static long类型返回值
+     */
     public static long getUnsignedInt(ByteBuffer bb, int position) {
         return bb.getInt(position) & 0xffffffffL;
     }
@@ -190,6 +249,12 @@ public final class Unsigned {
      * @param bb    目标ByteBuffer，不能为null
      * @param value 要写入的值（0~4294967295）
      * @throws NullPointerException if bb is null
+     */
+    /**
+     * putUnsignedInt方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param value long类型参数
+     * @return static void类型返回值
      */
     public static void putUnsignedInt(ByteBuffer bb, long value) {
         bb.putInt((int) (value & 0xffffffffL));
@@ -205,6 +270,13 @@ public final class Unsigned {
      * @param value   要写入的值（0~4294967295）
      * @throws NullPointerException if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
+     */
+    /**
+     * putUnsignedInt方法。
+     *      * @param bb ByteBuffer类型参数
+     * @param position int类型参数
+     * @param value long类型参数
+     * @return static void类型返回值
      */
     public static void putUnsignedInt(ByteBuffer bb, int position, long value) {
         bb.putInt(position, (int) (value & 0xffffffffL));

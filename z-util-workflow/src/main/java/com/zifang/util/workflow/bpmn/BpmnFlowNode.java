@@ -26,6 +26,9 @@ import java.util.Objects;
  * @see BpmnProcess
  * @see BpmnSequenceFlow
  */
+/**
+ * BpmnFlowNode类。
+ */
 public class BpmnFlowNode {
 
     /**
@@ -51,6 +54,9 @@ public class BpmnFlowNode {
     /**
      * 默认构造函数
      */
+    /**
+     * BpmnFlowNode方法。
+     */
     public BpmnFlowNode() {
         this.properties = new HashMap<>();
     }
@@ -61,6 +67,12 @@ public class BpmnFlowNode {
      * @param id   节点唯一标识符
      * @param name 节点名称
      * @param type 节点类型
+     */
+    /**
+     * BpmnFlowNode方法。
+     *      * @param id String类型参数
+     * @param name String类型参数
+     * @param type String类型参数
      */
     public BpmnFlowNode(String id, String name, String type) {
         this.id = id;
@@ -77,6 +89,13 @@ public class BpmnFlowNode {
      * @param type       节点类型
      * @param properties 节点扩展属性
      */
+    /**
+     * BpmnFlowNode方法。
+     *      * @param id String类型参数
+     * @param name String类型参数
+     * @param type String类型参数
+     * @param properties MapString,类型参数
+     */
     public BpmnFlowNode(String id, String name, String type, Map<String, Object> properties) {
         this.id = id;
         this.name = name;
@@ -89,6 +108,10 @@ public class BpmnFlowNode {
      *
      * @return 节点ID
      */
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
     public String getId() {
         return id;
     }
@@ -97,6 +120,10 @@ public class BpmnFlowNode {
      * 设置节点唯一标识符
      *
      * @param id 节点ID
+     */
+    /**
+     * setId方法。
+     *      * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -107,6 +134,10 @@ public class BpmnFlowNode {
      *
      * @return 节点名称
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -115,6 +146,10 @@ public class BpmnFlowNode {
      * 设置节点名称
      *
      * @param name 节点名称
+     */
+    /**
+     * setName方法。
+     *      * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -125,6 +160,10 @@ public class BpmnFlowNode {
      *
      * @return 节点类型
      */
+    /**
+     * getType方法。
+     * @return String类型返回值
+     */
     public String getType() {
         return type;
     }
@@ -133,6 +172,10 @@ public class BpmnFlowNode {
      * 设置节点类型
      *
      * @param type 节点类型
+     */
+    /**
+     * setType方法。
+     *      * @param type String类型参数
      */
     public void setType(String type) {
         this.type = type;
@@ -143,6 +186,10 @@ public class BpmnFlowNode {
      *
      * @return 属性映射表
      */
+    /**
+     * getProperties方法。
+     * @return Map<String, Object>类型返回值
+     */
     public Map<String, Object> getProperties() {
         return properties;
     }
@@ -151,6 +198,10 @@ public class BpmnFlowNode {
      * 设置节点扩展属性
      *
      * @param properties 属性映射表
+     */
+    /**
+     * setProperties方法。
+     *      * @param properties MapString,类型参数
      */
     public void setProperties(Map<String, Object> properties) {
         this.properties = properties;
@@ -162,6 +213,11 @@ public class BpmnFlowNode {
      * @param key   属性键
      * @param value 属性值
      */
+    /**
+     * setProperty方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     */
     public void setProperty(String key, Object value) {
         this.properties.put(key, value);
     }
@@ -172,16 +228,30 @@ public class BpmnFlowNode {
      * @param key 属性键
      * @return 属性值
      */
+    /**
+     * getProperty方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object getProperty(String key) {
         return this.properties.get(key);
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "BpmnFlowNode{id='" + id + "', name='" + name + "', type='" + type + "', properties=" + properties + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -193,6 +263,10 @@ public class BpmnFlowNode {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(id, name, type, properties);
     }

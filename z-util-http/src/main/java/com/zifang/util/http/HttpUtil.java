@@ -22,6 +22,9 @@ import java.util.*;
  *
  * @author zifang util
  */
+/**
+ * HttpUtil类。
+ */
 public class HttpUtil {
 
     // 编码格式
@@ -43,6 +46,12 @@ public class HttpUtil {
      * @param password 密码
      * @return Base64编码的 BasicAuth 字符串，格式为 "Basic {base64(username:password)}"
      */
+    /**
+     * toBasicAuthValue方法。
+     *      * @param username String类型参数
+     * @param password String类型参数
+     * @return static String类型返回值
+     */
     public static String toBasicAuthValue(String username, String password) {
         return "Basic " + Base64.getEncoder()
                 .encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
@@ -57,6 +66,11 @@ public class HttpUtil {
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
      */
+    /**
+     * doGet方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doGet(String url) throws Exception {
         return doGet(url, null, null);
     }
@@ -68,6 +82,12 @@ public class HttpUtil {
      * @param params 查询参数 Map
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
+     */
+    /**
+     * doGet方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doGet(String url, Map<String, String> params) throws Exception {
         return doGet(url, null, params);
@@ -81,6 +101,13 @@ public class HttpUtil {
      * @param params  查询参数 Map
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
+     */
+    /**
+     * doGet方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doGet(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
@@ -108,6 +135,11 @@ public class HttpUtil {
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
      */
+    /**
+     * doPost方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doPost(String url) throws Exception {
         return doPost(url, null, null);
     }
@@ -119,6 +151,12 @@ public class HttpUtil {
      * @param params 表单参数 Map
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
+     */
+    /**
+     * doPost方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doPost(String url, Map<String, String> params) throws Exception {
         return doPost(url, null, params);
@@ -132,6 +170,13 @@ public class HttpUtil {
      * @param params  表单参数 Map
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
+     */
+    /**
+     * doPost方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doPost(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
@@ -155,6 +200,11 @@ public class HttpUtil {
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
      */
+    /**
+     * doPut方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doPut(String url) throws Exception {
         return doPut(url, null, null);
     }
@@ -166,6 +216,12 @@ public class HttpUtil {
      * @param params 表单参数 Map
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
+     */
+    /**
+     * doPut方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doPut(String url, Map<String, String> params) throws Exception {
         return doPut(url, null, params);
@@ -179,6 +235,13 @@ public class HttpUtil {
      * @param params  表单参数 Map
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
+     */
+    /**
+     * doPut方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doPut(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
@@ -202,6 +265,11 @@ public class HttpUtil {
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
      */
+    /**
+     * doDelete方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doDelete(String url) throws Exception {
         return doDelete(url, null, null);
     }
@@ -213,6 +281,12 @@ public class HttpUtil {
      * @param params 查询参数 Map
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
+     */
+    /**
+     * doDelete方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doDelete(String url, Map<String, String> params) throws Exception {
         return doDelete(url, null, params);
@@ -226,6 +300,13 @@ public class HttpUtil {
      * @param params  查询参数 Map
      * @return HttpClientResult 包含响应状态码和响应内容
      * @throws Exception 网络请求过程中的异常
+     */
+    /**
+     * doDelete方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doDelete(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {

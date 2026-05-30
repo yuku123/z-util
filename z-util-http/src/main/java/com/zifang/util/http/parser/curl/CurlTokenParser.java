@@ -18,6 +18,9 @@ import java.util.Map;
  * cURL Token 解析器
  * 将词法分析后的 token 列表解析为 HttpRequestDefinition
  */
+/**
+ * CurlTokenParser类。
+ */
 public class CurlTokenParser {
 
     /**
@@ -25,6 +28,11 @@ public class CurlTokenParser {
      *
      * @param tokens token 列表
      * @return HttpRequestDefinition
+     */
+    /**
+     * parse方法。
+     *      * @param tokens ListCurlLexer.Token类型参数
+     * @return static HttpRequestDefinition类型返回值
      */
     public static HttpRequestDefinition parse(List<CurlLexer.Token> tokens) {
         if (tokens == null || tokens.isEmpty()) {

@@ -5,9 +5,16 @@ import java.util.Arrays;
 /**
  * Represents the shape of an NdArray
  */
+/**
+ * Shape类。
+ */
 public class Shape {
     private final int[] dimensions;
 
+    /**
+     * Shape方法。
+     *      * @param dimensions int...类型参数
+     */
     public Shape(int... dimensions) {
         if (dimensions == null || dimensions.length == 0) {
             this.dimensions = new int[0];
@@ -16,6 +23,10 @@ public class Shape {
         }
     }
 
+    /**
+     * Shape方法。
+     *      * @param dimensions long...类型参数
+     */
     public Shape(long... dimensions) {
         if (dimensions == null || dimensions.length == 0) {
             this.dimensions = new int[0];
@@ -27,14 +38,26 @@ public class Shape {
         }
     }
 
+    /**
+     * getDimensions方法。
+     * @return int[]类型返回值
+     */
     public int[] getDimensions() {
         return Arrays.copyOf(dimensions, dimensions.length);
     }
 
+    /**
+     * ndim方法。
+     * @return int类型返回值
+     */
     public int ndim() {
         return dimensions.length;
     }
 
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         int result = 1;
         for (int dim : dimensions) {
@@ -43,6 +66,11 @@ public class Shape {
         return result;
     }
 
+    /**
+     * get方法。
+     *      * @param index int类型参数
+     * @return int类型返回值
+     */
     public int get(int index) {
         if (index < 0 || index >= dimensions.length) {
             throw new IndexOutOfBoundsException("Dimension index out of bounds: " + index);
@@ -50,10 +78,19 @@ public class Shape {
         return dimensions[index];
     }
 
+    /**
+     * reshape方法。
+     *      * @param newShape int...类型参数
+     * @return Shape类型返回值
+     */
     public Shape reshape(int... newShape) {
         return new Shape(newShape);
     }
 
+    /**
+     * transpose方法。
+     * @return Shape类型返回值
+     */
     public Shape transpose() {
         int[] transposed = new int[dimensions.length];
         for (int i = 0; i < dimensions.length; i++) {
@@ -62,19 +99,35 @@ public class Shape {
         return new Shape(transposed);
     }
 
+    /**
+     * isScalar方法。
+     * @return boolean类型返回值
+     */
     public boolean isScalar() {
         return dimensions.length == 0;
     }
 
+    /**
+     * isVector方法。
+     * @return boolean类型返回值
+     */
     public boolean isVector() {
         return dimensions.length == 1;
     }
 
+    /**
+     * isMatrix方法。
+     * @return boolean类型返回值
+     */
     public boolean isMatrix() {
         return dimensions.length == 2;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         if (dimensions.length == 0) {
             return "()";
@@ -91,6 +144,11 @@ public class Shape {
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -99,6 +157,10 @@ public class Shape {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Arrays.hashCode(dimensions);
     }

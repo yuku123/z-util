@@ -8,6 +8,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * RequestHeader注解。
+ */
 public @interface RequestHeader {
     String key();
 

@@ -11,12 +11,20 @@ import com.zifang.util.numpy.Shape;
  *       = sigmoid(x) + x * sigmoid(x) * (1 - sigmoid(x))
  *       = sigmoid(x) * (1 + x * (1 - sigmoid(x)))
  */
+/**
+ * Swish类。
+ */
 public class Swish extends com.zifang.util.ml.nn.Module {
     
     private NdArray savedInput;
     private NdArray savedSigmoid;
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         savedInput = input.copy();
         
@@ -41,6 +49,11 @@ public class Swish extends com.zifang.util.ml.nn.Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         NdArray gradInput = NdArray.zeros(gradOutput.getShape(), DType.FLOAT32);
         Object gInData = gradInput.getData();

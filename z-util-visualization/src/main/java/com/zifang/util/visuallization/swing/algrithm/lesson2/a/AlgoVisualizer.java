@@ -18,6 +18,9 @@ import java.awt.event.MouseEvent;
  * @version 1.0
  * @since 2020-01-01
  */
+/**
+ * AlgoVisualizer类。
+ */
 public class AlgoVisualizer {
 
     private Circle[] circles;

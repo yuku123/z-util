@@ -7,11 +7,19 @@ import com.zifang.util.pandas.Series;
  * 对标 pandas DataFrame/Series.interpolate
  * 提供多种插值方法填充缺失值
  */
+/**
+ * Interpolator类。
+ */
 public class Interpolator {
 
     /**
      * 线性插值
      * 使用相邻的非缺失值进行线性插值
+     */
+    /**
+     * linear方法。
+     *      * @param series Series类型参数
+     * @return static Series类型返回值
      */
     public static Series linear(Series series) {
         double[] data = series.toArray();
@@ -44,6 +52,11 @@ public class Interpolator {
      * 前向填充
      * 使用前一个非缺失值填充
      */
+    /**
+     * forward方法。
+     *      * @param series Series类型参数
+     * @return static Series类型返回值
+     */
     public static Series forward(Series series) {
         double[] data = series.toArray();
         double[] result = new double[data.length];
@@ -66,6 +79,11 @@ public class Interpolator {
     /**
      * 后向填充
      * 使用后一个非缺失值填充
+     */
+    /**
+     * backward方法。
+     *      * @param series Series类型参数
+     * @return static Series类型返回值
      */
     public static Series backward(Series series) {
         double[] data = series.toArray();
@@ -90,6 +108,12 @@ public class Interpolator {
      * 多项式插值
      * 使用多项式拟合进行插值
      */
+    /**
+     * polynomial方法。
+     *      * @param series Series类型参数
+     * @param order int类型参数
+     * @return static Series类型返回值
+     */
     public static Series polynomial(Series series, int order) {
         // 简化实现：使用线性插值作为基础
         // 实际的多项式插值需要更复杂的算法
@@ -99,6 +123,11 @@ public class Interpolator {
     /**
      * 样条插值
      * 使用样条函数进行平滑插值
+     */
+    /**
+     * spline方法。
+     *      * @param series Series类型参数
+     * @return static Series类型返回值
      */
     public static Series spline(Series series) {
         // 简化实现：使用线性插值

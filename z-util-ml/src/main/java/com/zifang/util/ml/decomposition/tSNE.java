@@ -20,6 +20,9 @@ import com.zifang.util.numpy.Shape;
  * 6. Gradient descent: dL/dy_i = 4 * sum_j (p_ij - q_ij) * (y_i - y_j) * (1 + ||y_i - y_j||^2)^(-1)
  * 7. Early exaggeration: multiply P by 4 for first 100 iterations
  */
+/**
+ * tSNE类。
+ */
 public class tSNE {
     private int nComponents;
     private int perplexity;
@@ -37,6 +40,13 @@ public class tSNE {
      * @param nIterations Number of iterations (default 1000)
      * @param learningRate Learning rate for gradient descent (default 200)
      */
+    /**
+     * tSNE方法。
+     *      * @param nComponents int类型参数
+     * @param perplexity int类型参数
+     * @param nIterations int类型参数
+     * @param learningRate double类型参数
+     */
     public tSNE(int nComponents, int perplexity, int nIterations, double learningRate) {
         this.nComponents = nComponents;
         this.perplexity = perplexity;
@@ -47,6 +57,9 @@ public class tSNE {
     /**
      * Constructor with default parameters
      */
+    /**
+     * tSNE方法。
+     */
     public tSNE() {
         this(2, 30, 1000, 200.0);
     }
@@ -55,6 +68,11 @@ public class tSNE {
      * Fit and transform data to low-dimensional embedding
      * @param X High-dimensional data of shape [n_samples, n_features]
      * @return Low-dimensional embedding of shape [n_samples, n_components]
+     */
+    /**
+     * fitTransform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
      */
     public NdArray fitTransform(NdArray X) {
         double[][] Xdata = toDouble2D(X);

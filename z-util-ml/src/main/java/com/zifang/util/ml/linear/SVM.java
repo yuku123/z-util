@@ -9,8 +9,14 @@ import com.zifang.util.numpy.Shape;
  * Supports LINEAR and RBF kernels.
  * Binary classification only (labels {+1, -1}).
  */
+/**
+ * SVM类。
+ */
 public class SVM {
     
+/**
+ * KernelType枚举。
+ */
     public enum KernelType {
         LINEAR,
         RBF
@@ -34,6 +40,13 @@ public class SVM {
      * @param lambda L2 regularization parameter (controls margin softness)
      * @param kernelType Type of kernel (LINEAR or RBF)
      */
+    /**
+     * SVM方法。
+     *      * @param learningRate double类型参数
+     * @param nIterations int类型参数
+     * @param lambda double类型参数
+     * @param kernelType KernelType类型参数
+     */
     public SVM(double learningRate, int nIterations, double lambda, KernelType kernelType) {
         this.learningRate = learningRate;
         this.nIterations = nIterations;
@@ -44,6 +57,10 @@ public class SVM {
     
     /**
      * Set gamma parameter for RBF kernel.
+     */
+    /**
+     * setGamma方法。
+     *      * @param gamma double类型参数
      */
     public void setGamma(double gamma) {
         this.gamma = gamma;
@@ -122,6 +139,11 @@ public class SVM {
      * 
      * @param X Feature matrix of shape [n_samples, n_features]
      * @param y Target labels (+1 or -1)
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
      */
     public void fit(NdArray X, int[] y) {
         int n = X.getShape().get(0);
@@ -230,6 +252,11 @@ public class SVM {
      * 
      * @param X Feature matrix of shape [n_samples, n_features]
      * @return Array of predicted class labels (+1 or -1)
+     */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
      */
     public int[] predict(NdArray X) {
         int n = X.getShape().get(0);

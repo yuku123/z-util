@@ -52,6 +52,9 @@ import java.util.stream.Collectors;
  * @see Job
  * @see Trigger
  */
+/**
+ * SchedulerManager类。
+ */
 public class SchedulerManager {
 
     private final Scheduler delegate;
@@ -71,6 +74,9 @@ public class SchedulerManager {
      *
      * @throws SchedulerException 启动失败
      */
+    /**
+     * start方法。
+     */
     public void start() throws SchedulerException {
         if (!delegate.isStarted()) {
             delegate.start();
@@ -84,6 +90,10 @@ public class SchedulerManager {
      *
      * @param waitForJobsComplete 是否等待正在执行的任务完成
      */
+    /**
+     * shutdown方法。
+     *      * @param waitForJobsComplete boolean类型参数
+     */
     public void shutdown(boolean waitForJobsComplete) {
         try {
             delegate.shutdown(waitForJobsComplete);
@@ -95,12 +105,19 @@ public class SchedulerManager {
     /**
      * 关闭调度器（默认等待正在执行的任务完成）。
      */
+    /**
+     * shutdown方法。
+     */
     public void shutdown() {
         shutdown(true);
     }
 
     /**
      * 判断调度器是否已启动。
+     */
+    /**
+     * isStarted方法。
+     * @return boolean类型返回值
      */
     public boolean isStarted() {
         try {
@@ -112,6 +129,10 @@ public class SchedulerManager {
 
     /**
      * 判断调度器是否已关闭。
+     */
+    /**
+     * isShutdown方法。
+     * @return boolean类型返回值
      */
     public boolean isShutdown() {
         try {
@@ -132,6 +153,12 @@ public class SchedulerManager {
      * @param trigger 触发器
      * @return 下次触发时间（如果不再触发则返回 null）
      */
+    /**
+     * scheduleJob方法。
+     *      * @param job JobDetail类型参数
+     * @param trigger Trigger类型参数
+     * @return Date类型返回值
+     */
     public Date scheduleJob(JobDetail job, Trigger trigger) {
         try {
             return delegate.scheduleJob(job.getDelegate(), trigger.getDelegate());
@@ -145,6 +172,10 @@ public class SchedulerManager {
      * 调度多个任务和触发器（原子操作）。
      *
      * @param jobsAndTriggers Map，key 为 JobDetail，value 为 Trigger 集合
+     */
+    /**
+     * scheduleJobs方法。
+     *      * @param jobsAndTriggers MapJobDetail,类型参数
      */
     public void scheduleJobs(Map<JobDetail, Trigger> jobsAndTriggers) {
         try {
@@ -166,6 +197,10 @@ public class SchedulerManager {
      *
      * @param job 任务描述
      */
+    /**
+     * addJob方法。
+     *      * @param job JobDetail类型参数
+     */
     public void addJob(JobDetail job) {
         try {
             delegate.addJob(job.getDelegate(), true);
@@ -176,6 +211,11 @@ public class SchedulerManager {
 
     /**
      * 添加任务（不设置 replace，意味着如果已存在同名同组任务则抛异常）。
+     */
+    /**
+     * addJob方法。
+     *      * @param job JobDetail类型参数
+     * @param replace boolean类型参数
      */
     public void addJob(JobDetail job, boolean replace) {
         try {
@@ -191,6 +231,11 @@ public class SchedulerManager {
      * @param jobKey 任务键
      * @return 是否成功删除（任务不存在也返回 true）
      */
+    /**
+     * deleteJob方法。
+     *      * @param jobKey JobKey类型参数
+     * @return boolean类型返回值
+     */
     public boolean deleteJob(JobKey jobKey) {
         try {
             return delegate.deleteJob(jobKey);
@@ -202,12 +247,23 @@ public class SchedulerManager {
     /**
      * 删除任务（按名称和分组）。
      */
+    /**
+     * deleteJob方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     * @return boolean类型返回值
+     */
     public boolean deleteJob(String name, String group) {
         return deleteJob(JobKey.jobKey(name, group));
     }
 
     /**
      * 删除任务（按名称，使用默认分组）。
+     */
+    /**
+     * deleteJob方法。
+     *      * @param name String类型参数
+     * @return boolean类型返回值
      */
     public boolean deleteJob(String name) {
         return deleteJob(JobKey.jobKey(name));
@@ -221,6 +277,11 @@ public class SchedulerManager {
      * @param jobKey 任务键
      * @return 任务详情（如果不存在则返回 null）
      */
+    /**
+     * getJob方法。
+     *      * @param jobKey JobKey类型参数
+     * @return JobDetail类型返回值
+     */
     public JobDetail getJob(JobKey jobKey) {
         try {
             org.quartz.JobDetail detail = delegate.getJobDetail(jobKey);
@@ -233,6 +294,12 @@ public class SchedulerManager {
     /**
      * 获取任务详情（按名称和分组）。
      */
+    /**
+     * getJob方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     * @return JobDetail类型返回值
+     */
     public JobDetail getJob(String name, String group) {
         return getJob(JobKey.jobKey(name, group));
     }
@@ -240,12 +307,22 @@ public class SchedulerManager {
     /**
      * 获取任务详情（按名称，使用默认分组）。
      */
+    /**
+     * getJob方法。
+     *      * @param name String类型参数
+     * @return JobDetail类型返回值
+     */
     public JobDetail getJob(String name) {
         return getJob(JobKey.jobKey(name));
     }
 
     /**
      * 检查任务是否存在。
+     */
+    /**
+     * checkExists方法。
+     *      * @param jobKey JobKey类型参数
+     * @return boolean类型返回值
      */
     public boolean checkExists(JobKey jobKey) {
         try {
@@ -258,6 +335,10 @@ public class SchedulerManager {
     /**
      * 获取所有任务键。
      */
+    /**
+     * getJobKeys方法。
+     * @return List<JobKey>类型返回值
+     */
     public List<JobKey> getJobKeys() {
         try {
             return delegate.getJobKeys(GroupMatcher.anyJobGroup())
@@ -269,6 +350,10 @@ public class SchedulerManager {
 
     /**
      * 获取所有分组的任务键。
+     */
+    /**
+     * getJobGroupNames方法。
+     * @return List<String>类型返回值
      */
     public List<String> getJobGroupNames() {
         try {
@@ -283,6 +368,11 @@ public class SchedulerManager {
     /**
      * 获取触发器。
      */
+    /**
+     * getTrigger方法。
+     *      * @param triggerKey TriggerKey类型参数
+     * @return Trigger类型返回值
+     */
     public Trigger getTrigger(TriggerKey triggerKey) {
         try {
             org.quartz.Trigger t = delegate.getTrigger(triggerKey);
@@ -295,6 +385,12 @@ public class SchedulerManager {
     /**
      * 获取触发器（按名称和分组）。
      */
+    /**
+     * getTrigger方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     * @return Trigger类型返回值
+     */
     public Trigger getTrigger(String name, String group) {
         return getTrigger(TriggerKey.triggerKey(name, group));
     }
@@ -302,12 +398,22 @@ public class SchedulerManager {
     /**
      * 获取触发器（按名称，使用默认分组）。
      */
+    /**
+     * getTrigger方法。
+     *      * @param name String类型参数
+     * @return Trigger类型返回值
+     */
     public Trigger getTrigger(String name) {
         return getTrigger(TriggerKey.triggerKey(name));
     }
 
     /**
      * 获取触发器关联的任务键。
+     */
+    /**
+     * getTriggerJobKey方法。
+     *      * @param triggerKey TriggerKey类型参数
+     * @return JobKey类型返回值
      */
     public JobKey getTriggerJobKey(TriggerKey triggerKey) {
         try {
@@ -325,6 +431,10 @@ public class SchedulerManager {
     /**
      * 暂停触发器。
      */
+    /**
+     * pauseTrigger方法。
+     *      * @param triggerKey TriggerKey类型参数
+     */
     public void pauseTrigger(TriggerKey triggerKey) {
         try {
             delegate.pauseTrigger(triggerKey);
@@ -336,6 +446,11 @@ public class SchedulerManager {
     /**
      * 暂停触发器（按名称和分组）。
      */
+    /**
+     * pauseTrigger方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     */
     public void pauseTrigger(String name, String group) {
         pauseTrigger(TriggerKey.triggerKey(name, group));
     }
@@ -343,12 +458,20 @@ public class SchedulerManager {
     /**
      * 暂停触发器（按名称，使用默认分组）。
      */
+    /**
+     * pauseTrigger方法。
+     *      * @param name String类型参数
+     */
     public void pauseTrigger(String name) {
         pauseTrigger(TriggerKey.triggerKey(name));
     }
 
     /**
      * 恢复触发器。
+     */
+    /**
+     * resumeTrigger方法。
+     *      * @param triggerKey TriggerKey类型参数
      */
     public void resumeTrigger(TriggerKey triggerKey) {
         try {
@@ -361,6 +484,11 @@ public class SchedulerManager {
     /**
      * 恢复触发器（按名称和分组）。
      */
+    /**
+     * resumeTrigger方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     */
     public void resumeTrigger(String name, String group) {
         resumeTrigger(TriggerKey.triggerKey(name, group));
     }
@@ -368,12 +496,19 @@ public class SchedulerManager {
     /**
      * 恢复触发器（按名称，使用默认分组）。
      */
+    /**
+     * resumeTrigger方法。
+     *      * @param name String类型参数
+     */
     public void resumeTrigger(String name) {
         resumeTrigger(TriggerKey.triggerKey(name));
     }
 
     /**
      * 暂停所有触发器。
+     */
+    /**
+     * pauseAllTriggers方法。
      */
     public void pauseAllTriggers() {
         try {
@@ -386,6 +521,9 @@ public class SchedulerManager {
     /**
      * 恢复所有触发器。
      */
+    /**
+     * resumeAllTriggers方法。
+     */
     public void resumeAllTriggers() {
         try {
             delegate.resumeAll();
@@ -396,6 +534,10 @@ public class SchedulerManager {
 
     /**
      * 获取所有触发器键。
+     */
+    /**
+     * getTriggerKeys方法。
+     * @return List<TriggerKey>类型返回值
      */
     public List<TriggerKey> getTriggerKeys() {
         try {
@@ -408,6 +550,10 @@ public class SchedulerManager {
 
     /**
      * 获取所有触发器分组。
+     */
+    /**
+     * getTriggerGroupNames方法。
+     * @return List<String>类型返回值
      */
     public List<String> getTriggerGroupNames() {
         try {
@@ -422,6 +568,11 @@ public class SchedulerManager {
      *
      * @param triggerKey 触发器键
      * @return 被移除的触发器
+     */
+    /**
+     * unscheduleJob方法。
+     *      * @param triggerKey TriggerKey类型参数
+     * @return Trigger类型返回值
      */
     public Trigger unscheduleJob(TriggerKey triggerKey) {
         try {
@@ -439,6 +590,12 @@ public class SchedulerManager {
     /**
      * 移除触发器（按名称和分组）。
      */
+    /**
+     * unscheduleJob方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     * @return Trigger类型返回值
+     */
     public Trigger unscheduleJob(String name, String group) {
         return unscheduleJob(TriggerKey.triggerKey(name, group));
     }
@@ -446,12 +603,23 @@ public class SchedulerManager {
     /**
      * 移除触发器（按名称，使用默认分组）。
      */
+    /**
+     * unscheduleJob方法。
+     *      * @param name String类型参数
+     * @return Trigger类型返回值
+     */
     public Trigger unscheduleJob(String name) {
         return unscheduleJob(TriggerKey.triggerKey(name));
     }
 
     /**
      * 重置触发器（删除旧触发器，添加新触发器，任务保持不变）。
+     */
+    /**
+     * rescheduleJob方法。
+     *      * @param triggerKey TriggerKey类型参数
+     * @param newTrigger Trigger类型参数
+     * @return Date类型返回值
      */
     public Date rescheduleJob(TriggerKey triggerKey, Trigger newTrigger) {
         try {
@@ -466,6 +634,10 @@ public class SchedulerManager {
     /**
      * 暂停任务（所有触发该任务的触发器都被暂停）。
      */
+    /**
+     * pauseJob方法。
+     *      * @param jobKey JobKey类型参数
+     */
     public void pauseJob(JobKey jobKey) {
         try {
             delegate.pauseJob(jobKey);
@@ -477,6 +649,11 @@ public class SchedulerManager {
     /**
      * 暂停任务（按名称和分组）。
      */
+    /**
+     * pauseJob方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     */
     public void pauseJob(String name, String group) {
         pauseJob(JobKey.jobKey(name, group));
     }
@@ -484,12 +661,20 @@ public class SchedulerManager {
     /**
      * 暂停任务（按名称，使用默认分组）。
      */
+    /**
+     * pauseJob方法。
+     *      * @param name String类型参数
+     */
     public void pauseJob(String name) {
         pauseJob(JobKey.jobKey(name));
     }
 
     /**
      * 恢复任务。
+     */
+    /**
+     * resumeJob方法。
+     *      * @param jobKey JobKey类型参数
      */
     public void resumeJob(JobKey jobKey) {
         try {
@@ -502,12 +687,21 @@ public class SchedulerManager {
     /**
      * 恢复任务（按名称和分组）。
      */
+    /**
+     * resumeJob方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     */
     public void resumeJob(String name, String group) {
         resumeJob(JobKey.jobKey(name, group));
     }
 
     /**
      * 恢复任务（按名称，使用默认分组）。
+     */
+    /**
+     * resumeJob方法。
+     *      * @param name String类型参数
      */
     public void resumeJob(String name) {
         resumeJob(JobKey.jobKey(name));
@@ -518,6 +712,11 @@ public class SchedulerManager {
      *
      * @param jobKey       任务键
      * @param data         额外的 JobData（会合并到 JobDataMap）
+     */
+    /**
+     * triggerJob方法。
+     *      * @param jobKey JobKey类型参数
+     * @param data MapString,类型参数
      */
     public void triggerJob(JobKey jobKey, Map<String, ?> data) {
         try {
@@ -534,6 +733,10 @@ public class SchedulerManager {
     /**
      * 立即触发一次任务执行。
      */
+    /**
+     * triggerJob方法。
+     *      * @param jobKey JobKey类型参数
+     */
     public void triggerJob(JobKey jobKey) {
         triggerJob(jobKey, null);
     }
@@ -548,6 +751,13 @@ public class SchedulerManager {
      * @param replace     是否替换已存在的同名日历
      * @param updateTriggers 是否更新使用此日历的触发器
      */
+    /**
+     * addCalendar方法。
+     *      * @param name String类型参数
+     * @param calendar ScheduleCalendar类型参数
+     * @param replace boolean类型参数
+     * @param updateTriggers boolean类型参数
+     */
     public void addCalendar(String name, ScheduleCalendar calendar,
                            boolean replace, boolean updateTriggers) {
         try {
@@ -560,6 +770,11 @@ public class SchedulerManager {
     /**
      * 添加日历（替换已存在的同名日历，更新触发器）。
      */
+    /**
+     * addCalendar方法。
+     *      * @param name String类型参数
+     * @param calendar ScheduleCalendar类型参数
+     */
     public void addCalendar(String name, ScheduleCalendar calendar) {
         addCalendar(name, calendar, true, true);
     }
@@ -569,6 +784,11 @@ public class SchedulerManager {
      *
      * @param name 日历名称
      * @return 日历实例（如果不存在则返回 null）
+     */
+    /**
+     * getCalendar方法。
+     *      * @param name String类型参数
+     * @return ScheduleCalendar类型返回值
      */
     public ScheduleCalendar getCalendar(String name) {
         try {
@@ -582,6 +802,11 @@ public class SchedulerManager {
     /**
      * 删除日历。
      */
+    /**
+     * deleteCalendar方法。
+     *      * @param name String类型参数
+     * @return boolean类型返回值
+     */
     public boolean deleteCalendar(String name) {
         try {
             return delegate.deleteCalendar(name);
@@ -592,6 +817,10 @@ public class SchedulerManager {
 
     /**
      * 获取所有日历名称。
+     */
+    /**
+     * getCalendarNames方法。
+     * @return List<String>类型返回值
      */
     public List<String> getCalendarNames() {
         try {
@@ -606,6 +835,10 @@ public class SchedulerManager {
     /**
      * 获取监听器管理器。
      */
+    /**
+     * getListenerManager方法。
+     * @return ListenerManager类型返回值
+     */
     public ListenerManager getListenerManager() {
         return listenerManager;
     }
@@ -614,6 +847,10 @@ public class SchedulerManager {
 
     /**
      * 获取调度器元数据。
+     */
+    /**
+     * getMetaData方法。
+     * @return SchedulerMetaData类型返回值
      */
     public SchedulerMetaData getMetaData() {
         try {
@@ -625,6 +862,10 @@ public class SchedulerManager {
 
     /**
      * 获取调度器名称。
+     */
+    /**
+     * getSchedulerName方法。
+     * @return String类型返回值
      */
     public String getSchedulerName() {
         try {
@@ -638,6 +879,10 @@ public class SchedulerManager {
      * 获取原始 Quartz Scheduler 对象。
      * <p>
      * 谨慎使用。仅在需要直接操作 Quartz API 时调用。
+     */
+    /**
+     * getDelegate方法。
+     * @return Scheduler类型返回值
      */
     public Scheduler getDelegate() {
         return delegate;
@@ -691,6 +936,10 @@ public class SchedulerManager {
         @Override public org.quartz.Trigger getDelegate() { return delegate; }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "GenericTrigger{key=" + getKey() + "}";
         }

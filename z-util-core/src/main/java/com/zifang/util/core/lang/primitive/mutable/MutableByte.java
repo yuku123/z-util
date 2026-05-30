@@ -10,6 +10,9 @@ import com.zifang.util.core.lang.NumberUtil;
  * is not treated by String.format() as a Byte parameter.
  * @version: JDK 1.8
  */
+/**
+ * MutableByte类。
+ */
 public class MutableByte extends Number implements Comparable<MutableByte>, Mutable<Number>,
         Cloneable {
 
@@ -23,6 +26,9 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
     /**
      * Constructs a new MutableByte with the default value of zero.
      */
+    /**
+     * MutableByte方法。
+     */
     public MutableByte() {
     }
 
@@ -30,6 +36,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * Constructs a new MutableByte with the specified value.
      *
      * @param value the initial value to store
+     */
+    /**
+     * MutableByte方法。
+     *      * @param value final类型参数
      */
     public MutableByte(final byte value) {
         this.value = value;
@@ -41,6 +51,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @param value the initial value to store, not null
      * @throws NullPointerException if the object is null
      */
+    /**
+     * MutableByte方法。
+     *      * @param value final类型参数
+     */
     public MutableByte(final Number value) {
         this.value = value.byteValue();
     }
@@ -50,6 +64,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      *
      * @param value the string to parse, not null
      * @throws NumberFormatException if the string cannot be parsed into a byte
+     */
+    /**
+     * MutableByte方法。
+     *      * @param value final类型参数
      */
     public MutableByte(final String value) {
         this.value = Byte.parseByte(value);
@@ -63,6 +81,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return the value as a Byte, never null
      */
     @Override
+    /**
+     * getValue方法。
+     * @return byte类型返回值
+     */
     public Byte getValue() {
         return this.value;
     }
@@ -71,6 +93,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * Sets the value.
      *
      * @param value the value to set
+     */
+    /**
+     * setValue方法。
+     *      * @param value final类型参数
      */
     public void setValue(final byte value) {
         this.value = value;
@@ -83,6 +109,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @throws NullPointerException if the object is null
      */
     @Override
+    /**
+     * setValue方法。
+     *      * @param value final类型参数
+     */
     public void setValue(final Number value) {
         this.value = value.byteValue();
     }
@@ -91,6 +121,9 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
 
     /**
      * Increments the value.
+     */
+    /**
+     * increment方法。
      */
     public void increment() {
         value++;
@@ -101,6 +134,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * instance immediately prior to the increment operation. This method is not thread safe.
      *
      * @return the value associated with the instance before it was incremented
+     */
+    /**
+     * getAndIncrement方法。
+     * @return byte类型返回值
      */
     public byte getAndIncrement() {
         final byte last = value;
@@ -114,6 +151,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      *
      * @return the value associated with the instance after it is incremented
      */
+    /**
+     * incrementAndGet方法。
+     * @return byte类型返回值
+     */
     public byte incrementAndGet() {
         value++;
         return value;
@@ -121,6 +162,9 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
 
     /**
      * Decrements the value.
+     */
+    /**
+     * decrement方法。
      */
     public void decrement() {
         value--;
@@ -131,6 +175,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * instance immediately prior to the decrement operation. This method is not thread safe.
      *
      * @return the value associated with the instance before it was decremented
+     */
+    /**
+     * getAndDecrement方法。
+     * @return byte类型返回值
      */
     public byte getAndDecrement() {
         final byte last = value;
@@ -144,6 +192,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      *
      * @return the value associated with the instance after it is decremented
      */
+    /**
+     * decrementAndGet方法。
+     * @return byte类型返回值
+     */
     public byte decrementAndGet() {
         value--;
         return value;
@@ -156,6 +208,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      *
      * @param operand the value to add, not null
      */
+    /**
+     * add方法。
+     *      * @param operand final类型参数
+     */
     public void add(final byte operand) {
         this.value += operand;
     }
@@ -166,6 +222,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @param operand the value to add, not null
      * @throws NullPointerException if the object is null
      */
+    /**
+     * add方法。
+     *      * @param operand final类型参数
+     */
     public void add(final Number operand) {
         this.value += operand.byteValue();
     }
@@ -174,6 +234,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * Subtracts a value from the value of this instance.
      *
      * @param operand the value to subtract, not null
+     */
+    /**
+     * subtract方法。
+     *      * @param operand final类型参数
      */
     public void subtract(final byte operand) {
         this.value -= operand;
@@ -185,6 +249,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @param operand the value to subtract, not null
      * @throws NullPointerException if the object is null
      */
+    /**
+     * subtract方法。
+     *      * @param operand final类型参数
+     */
     public void subtract(final Number operand) {
         this.value -= operand.byteValue();
     }
@@ -195,6 +263,11 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance after adding the operand
+     */
+    /**
+     * addAndGet方法。
+     *      * @param operand final类型参数
+     * @return byte类型返回值
      */
     public byte addAndGet(final byte operand) {
         this.value += operand;
@@ -209,6 +282,11 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return the value associated with this instance after adding the operand
      * @throws NullPointerException if {@code operand} is null
      */
+    /**
+     * addAndGet方法。
+     *      * @param operand final类型参数
+     * @return byte类型返回值
+     */
     public byte addAndGet(final Number operand) {
         this.value += operand.byteValue();
         return value;
@@ -220,6 +298,11 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
+     */
+    /**
+     * getAndAdd方法。
+     *      * @param operand final类型参数
+     * @return byte类型返回值
      */
     public byte getAndAdd(final byte operand) {
         final byte last = value;
@@ -234,6 +317,11 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
      * @throws NullPointerException if {@code operand} is null
+     */
+    /**
+     * getAndAdd方法。
+     *      * @param operand final类型参数
+     * @return byte类型返回值
      */
     public byte getAndAdd(final Number operand) {
         final byte last = value;
@@ -250,6 +338,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return the numeric value represented by this object after conversion to type byte.
      */
     @Override
+    /**
+     * byteValue方法。
+     * @return byte类型返回值
+     */
     public byte byteValue() {
         return value;
     }
@@ -260,6 +352,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return the numeric value represented by this object after conversion to type int.
      */
     @Override
+    /**
+     * intValue方法。
+     * @return int类型返回值
+     */
     public int intValue() {
         return value;
     }
@@ -270,6 +366,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return the numeric value represented by this object after conversion to type long.
      */
     @Override
+    /**
+     * longValue方法。
+     * @return long类型返回值
+     */
     public long longValue() {
         return value;
     }
@@ -280,6 +380,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return the numeric value represented by this object after conversion to type float.
      */
     @Override
+    /**
+     * floatValue方法。
+     * @return float类型返回值
+     */
     public float floatValue() {
         return value;
     }
@@ -290,6 +394,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return the numeric value represented by this object after conversion to type double.
      */
     @Override
+    /**
+     * doubleValue方法。
+     * @return double类型返回值
+     */
     public double doubleValue() {
         return value;
     }
@@ -300,6 +408,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * Gets this mutable as an instance of Byte.
      *
      * @return a Byte instance containing the value from this mutable
+     */
+    /**
+     * toByte方法。
+     * @return byte类型返回值
      */
     public Byte toByte() {
         return byteValue();
@@ -316,6 +428,11 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return {@code true} if the objects are the same; {@code false} otherwise.
      */
     @Override
+    /**
+     * equals方法。
+     *      * @param obj final类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(final Object obj) {
         if (obj instanceof MutableByte) {
             return value == ((MutableByte) obj).byteValue();
@@ -329,6 +446,10 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return a suitable hash code
      */
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return value;
     }
@@ -342,6 +463,11 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return negative if this is less, zero if equal, positive if greater
      */
     @Override
+    /**
+     * compareTo方法。
+     *      * @param other final类型参数
+     * @return int类型返回值
+     */
     public int compareTo(final MutableByte other) {
         return NumberUtil.compare(this.value, other.value);
     }
@@ -354,11 +480,19 @@ public class MutableByte extends Number implements Comparable<MutableByte>, Muta
      * @return the mutable value as a string
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return String.valueOf(value);
     }
 
     @Override
+    /**
+     * clone方法。
+     * @return MutableByte类型返回值
+     */
     public MutableByte clone() {
         return new MutableByte(value);
     }

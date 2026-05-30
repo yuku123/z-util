@@ -15,6 +15,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * PathVariable注解。
+ */
 public @interface PathVariable {
 
     /**

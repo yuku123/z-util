@@ -3,6 +3,9 @@ package com.zifang.util.db.sequence;
 /**
  * 分布式序号生成器接口
  */
+/**
+ * Sequence接口。
+ */
 public interface Sequence {
 
     /**

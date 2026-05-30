@@ -9,6 +9,9 @@ import java.util.Random;
  * Gradient Boosting (simplified XGBoost-style)
  * Uses gradient descent for boosting with second-order gradient information
  */
+/**
+ * XGBoost类。
+ */
 public class XGBoost {
     private int nEstimators;
     private double learningRate;
@@ -42,6 +45,9 @@ public class XGBoost {
             public int featureIndex;
             public double threshold;
 
+    /**
+     * TreeNode方法。
+     */
             public TreeNode() {
                 this.isLeaf = false;
                 this.value = 0.0;
@@ -52,6 +58,12 @@ public class XGBoost {
             }
         }
 
+    /**
+     * RegressionTree方法。
+     *      * @param maxDepth int类型参数
+     * @param minChildWeight int类型参数
+     * @param nFeatures int类型参数
+     */
         public RegressionTree(int maxDepth, int minChildWeight, int nFeatures) {
             this.maxDepth = maxDepth;
             this.minChildWeight = minChildWeight;
@@ -59,10 +71,21 @@ public class XGBoost {
             this.random = new Random();
         }
 
+    /**
+     * fit方法。
+     *      * @param X double[][]类型参数
+     * @param y double[]类型参数
+     * @param featureIndices int[]类型参数
+     */
         public void fit(double[][] X, double[] y, int[] featureIndices) {
             this.root = buildTree(X, y, featureIndices, 0);
         }
 
+    /**
+     * predict方法。
+     *      * @param X double[][]类型参数
+     * @return double[]类型返回值
+     */
         public double[] predict(double[][] X) {
             double[] predictions = new double[X.length];
             for (int i = 0; i < X.length; i++) {
@@ -210,6 +233,17 @@ public class XGBoost {
         }
     }
 
+    /**
+     * XGBoost方法。
+     *      * @param nEstimators int类型参数
+     * @param learningRate double类型参数
+     * @param maxDepth int类型参数
+     * @param minChildWeight int类型参数
+     * @param subsample double类型参数
+     * @param colsampleBytree double类型参数
+     * @param lambda double类型参数
+     * @param alpha double类型参数
+     */
     public XGBoost(int nEstimators, double learningRate, int maxDepth, int minChildWeight,
                    double subsample, double colsampleBytree, double lambda, double alpha) {
         this.nEstimators = nEstimators;
@@ -223,6 +257,11 @@ public class XGBoost {
         this.random = new Random();
     }
 
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
+     */
     public void fit(NdArray X, int[] y) {
         int nSamples = X.getShape().get(0);
         this.nFeatures = X.getShape().get(1);
@@ -306,6 +345,11 @@ public class XGBoost {
         }
     }
 
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray predict(NdArray X) {
         int nSamples = X.getShape().get(0);
         double[][] Xdata = toDouble2D(X);
@@ -328,6 +372,11 @@ public class XGBoost {
         return createNdArray(logits, nSamples, nClasses);
     }
 
+    /**
+     * predictClass方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predictClass(NdArray X) {
         int nSamples = X.getShape().get(0);
         NdArray logits = predict(X);

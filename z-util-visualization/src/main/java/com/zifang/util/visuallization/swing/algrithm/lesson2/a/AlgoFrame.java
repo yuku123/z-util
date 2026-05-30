@@ -7,6 +7,9 @@ import java.awt.*;
  * 算法可视化框架 - 画布框架
  * 提供算法可视化所需的绘图基础组件
  */
+/**
+ * AlgoFrame类。
+ */
 public class AlgoFrame extends JFrame {
 
     private int canvasWidth;
@@ -18,6 +21,7 @@ public class AlgoFrame extends JFrame {
      * @param canvasWidth 画布宽度
      * @param canvasHeight 画布高度
      */
+
     public AlgoFrame(String title, int canvasWidth, int canvasHeight) {
 
         super(title);

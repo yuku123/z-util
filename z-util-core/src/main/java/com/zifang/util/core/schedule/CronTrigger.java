@@ -29,10 +29,17 @@ import java.util.TimeZone;
  * @see DailyTimeIntervalTrigger
  * @see TriggerBuilder
  */
+/**
+ * CronTrigger类。
+ */
 public class CronTrigger implements Trigger {
 
     private final org.quartz.CronTrigger delegate;
 
+    /**
+     * CronTrigger方法。
+     *      * @param delegate org.quartz.CronTrigger类型参数
+     */
     public CronTrigger(org.quartz.CronTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
     }
@@ -42,6 +49,10 @@ public class CronTrigger implements Trigger {
     /**
      * 创建新的 CronTrigger Builder。
      */
+    /**
+     * newCronTrigger方法。
+     * @return static CronBuilder类型返回值
+     */
     public static CronBuilder newCronTrigger() {
         return new CronBuilder();
     }
@@ -49,56 +60,100 @@ public class CronTrigger implements Trigger {
     // ==================== Trigger 接口实现 ====================
 
     @Override
+    /**
+     * getKey方法。
+     * @return org.quartz.TriggerKey类型返回值
+     */
     public org.quartz.TriggerKey getKey() {
         return delegate.getKey();
     }
 
     @Override
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return delegate.getKey().getName();
     }
 
     @Override
+    /**
+     * getGroup方法。
+     * @return String类型返回值
+     */
     public String getGroup() {
         return delegate.getKey().getGroup();
     }
 
     @Override
+    /**
+     * getJobKey方法。
+     * @return org.quartz.JobKey类型返回值
+     */
     public org.quartz.JobKey getJobKey() {
         return delegate.getJobKey();
     }
 
     @Override
+    /**
+     * getDescription方法。
+     * @return String类型返回值
+     */
     public String getDescription() {
         return delegate.getDescription();
     }
 
     @Override
+    /**
+     * getNextFireTime方法。
+     * @return Date类型返回值
+     */
     public Date getNextFireTime() {
         return delegate.getNextFireTime();
     }
 
     @Override
+    /**
+     * getPreviousFireTime方法。
+     * @return Date类型返回值
+     */
     public Date getPreviousFireTime() {
         return delegate.getPreviousFireTime();
     }
 
     @Override
+    /**
+     * getPriority方法。
+     * @return int类型返回值
+     */
     public int getPriority() {
         return delegate.getPriority();
     }
 
     @Override
+    /**
+     * getStartTime方法。
+     * @return Date类型返回值
+     */
     public Date getStartTime() {
         return delegate.getStartTime();
     }
 
     @Override
+    /**
+     * getEndTime方法。
+     * @return Date类型返回值
+     */
     public Date getEndTime() {
         return delegate.getEndTime();
     }
 
     @Override
+    /**
+     * getMisfirePolicy方法。
+     * @return MisfirePolicy类型返回值
+     */
     public MisfirePolicy getMisfirePolicy() {
         int ins = delegate.getMisfireInstruction();
         for (MisfirePolicy p : MisfirePolicy.values()) {
@@ -110,21 +165,37 @@ public class CronTrigger implements Trigger {
     }
 
     @Override
+    /**
+     * getCalendarName方法。
+     * @return String类型返回值
+     */
     public String getCalendarName() {
         return delegate.getCalendarName();
     }
 
     @Override
+    /**
+     * getTimeZone方法。
+     * @return TimeZone类型返回值
+     */
     public TimeZone getTimeZone() {
         return delegate.getTimeZone();
     }
 
     @Override
+    /**
+     * getDelegate方法。
+     * @return org.quartz.Trigger类型返回值
+     */
     public org.quartz.Trigger getDelegate() {
         return delegate;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "CronTrigger{" +
                 "key=" + getKey() +
@@ -137,6 +208,10 @@ public class CronTrigger implements Trigger {
 
     /**
      * 获取 cron 表达式字符串。
+     */
+    /**
+     * getCronExpression方法。
+     * @return String类型返回值
      */
     public String getCronExpression() {
         return delegate.getExpressionSummary();
@@ -157,6 +232,11 @@ public class CronTrigger implements Trigger {
          *
          * @param cronExpression 6-7 位 cron 表达式字符串
          */
+    /**
+     * withCronExpression方法。
+     *      * @param cronExpression String类型参数
+     * @return CronBuilder类型返回值
+     */
         public CronBuilder withCronExpression(String cronExpression) {
             this.cronExpression = Objects.requireNonNull(cronExpression,
                     "cron expression must not be null");
@@ -166,6 +246,11 @@ public class CronTrigger implements Trigger {
         /**
          * 设置 cron 表达式（使用 CronExpression 对象，支持更多特性）。
          */
+    /**
+     * withCronExpressionObject方法。
+     *      * @param cronExpressionObject org.quartz.CronExpression类型参数
+     * @return CronBuilder类型返回值
+     */
         public CronBuilder withCronExpressionObject(org.quartz.CronExpression cronExpressionObject) {
             this.cronExpressionObject = Objects.requireNonNull(cronExpressionObject);
             this.cronExpression = cronExpressionObject.getCronExpression();
@@ -176,12 +261,21 @@ public class CronTrigger implements Trigger {
          * 设置时区。
          */
         @Override
+    /**
+     * inTimeZone方法。
+     *      * @param timeZone TimeZone类型参数
+     * @return CronBuilder类型返回值
+     */
         public CronBuilder inTimeZone(TimeZone timeZone) {
             super.inTimeZone(timeZone);
             return this;
         }
 
         @Override
+    /**
+     * build方法。
+     * @return CronTrigger类型返回值
+     */
         public CronTrigger build() {
             if (cronExpression == null && cronExpressionObject == null) {
                 throw new IllegalStateException(

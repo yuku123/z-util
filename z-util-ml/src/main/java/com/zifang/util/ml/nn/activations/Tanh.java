@@ -9,11 +9,19 @@ import com.zifang.util.numpy.Shape;
  * f(x) = tanh(x) = (exp(x) - exp(-x)) / (exp(x) + exp(-x))
  * f'(x) = 1 - tanh^2(x)
  */
+/**
+ * Tanh类。
+ */
 public class Tanh extends com.zifang.util.ml.nn.Module {
     
     private NdArray savedOutput;  // Store tanh(x) for backward pass
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         NdArray output = NdArray.zeros(input.getShape(), DType.FLOAT32);
         Object inData = input.getData();
@@ -31,6 +39,11 @@ public class Tanh extends com.zifang.util.ml.nn.Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         NdArray gradInput = NdArray.zeros(gradOutput.getShape(), DType.FLOAT32);
         Object gInData = gradInput.getData();

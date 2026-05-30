@@ -8,5 +8,8 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
+/**
+ * CookieValue注解。
+ */
 public @interface CookieValue {
 }

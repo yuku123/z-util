@@ -9,6 +9,9 @@ import java.util.Arrays;
  *
  * @author zifang
  */
+/**
+ * Shorts类。
+ */
 public class Shorts {
 
     private Shorts() {
@@ -16,6 +19,12 @@ public class Shorts {
 
     /**
      * 将短整数数组用指定分隔符连接成字符串。
+     */
+    /**
+     * join方法。
+     *      * @param array short[]类型参数
+     * @param delimiter String类型参数
+     * @return static String类型返回值
      */
     public static String join(short[] array, String delimiter) {
         if (array == null || array.length == 0) {
@@ -33,6 +42,11 @@ public class Shorts {
 
     /**
      * 将多个短整数数组合并为一个。
+     */
+    /**
+     * concat方法。
+     *      * @param arrays short[]...类型参数
+     * @return static short[]类型返回值
      */
     public static short[] concat(short[]... arrays) {
         int totalLength = 0;
@@ -55,6 +69,11 @@ public class Shorts {
     /**
      * 反转短整数数组。
      */
+    /**
+     * reverse方法。
+     *      * @param array short[]类型参数
+     * @return static short[]类型返回值
+     */
     public static short[] reverse(short[] array) {
         if (array == null || array.length <= 1) {
             return array != null ? array : new short[0];
@@ -68,6 +87,11 @@ public class Shorts {
 
     /**
      * 将短整数数组转换为字符串。
+     */
+    /**
+     * toString方法。
+     *      * @param array short[]类型参数
+     * @return static String类型返回值
      */
     public static String toString(short[] array) {
         if (array == null || array.length == 0) {
@@ -87,6 +111,11 @@ public class Shorts {
     /**
      * 计算短整数数组的和。
      */
+    /**
+     * sum方法。
+     *      * @param array short[]类型参数
+     * @return static int类型返回值
+     */
     public static int sum(short[] array) {
         if (array == null || array.length == 0) {
             return 0;
@@ -100,6 +129,11 @@ public class Shorts {
 
     /**
      * 获取短整数数组中的最小值。
+     */
+    /**
+     * min方法。
+     *      * @param array short[]类型参数
+     * @return static short类型返回值
      */
     public static short min(short[] array) {
         if (array == null || array.length == 0) {
@@ -117,6 +151,11 @@ public class Shorts {
     /**
      * 获取短整数数组中的最大值。
      */
+    /**
+     * max方法。
+     *      * @param array short[]类型参数
+     * @return static short类型返回值
+     */
     public static short max(short[] array) {
         if (array == null || array.length == 0) {
             return 0;
@@ -133,6 +172,12 @@ public class Shorts {
     /**
      * 判断短整数数组是否包含指定值。
      */
+    /**
+     * contains方法。
+     *      * @param array short[]类型参数
+     * @param value short类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean contains(short[] array, short value) {
         if (array == null || array.length == 0) {
             return false;
@@ -148,6 +193,12 @@ public class Shorts {
     /**
      * 查找短整数在数组中首次出现的索引。
      */
+    /**
+     * indexOf方法。
+     *      * @param array short[]类型参数
+     * @param value short类型参数
+     * @return static int类型返回值
+     */
     public static int indexOf(short[] array, short value) {
         if (array == null || array.length == 0) {
             return -1;
@@ -162,6 +213,11 @@ public class Shorts {
 
     /**
      * 将字符串解析为短整数。
+     */
+    /**
+     * parseShort方法。
+     *      * @param str String类型参数
+     * @return static Short类型返回值
      */
     public static Short parseShort(String str) {
         if (str == null || str.trim().isEmpty()) {

@@ -17,6 +17,9 @@ import java.util.List;
  * Formats help text for command-line options.
  * Supports custom left padding, description width, option headers, and footers.
  */
+/**
+ * HelpFormatter类。
+ */
 public class HelpFormatter {
 
     /** Default output width */
@@ -60,90 +63,178 @@ public class HelpFormatter {
     protected String argNameClose = DEFAULT_ARG_NAME_CLOSE;
     protected String separator = DEFAULT_SEPARATOR;
 
+    /**
+     * HelpFormatter方法。
+     */
     public HelpFormatter() {}
 
+    /**
+     * getWidth方法。
+     * @return int类型返回值
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * setWidth方法。
+     *      * @param width final类型参数
+     */
     public void setWidth(final int width) {
         this.width = width;
     }
 
+    /**
+     * getLeftPad方法。
+     * @return int类型返回值
+     */
     public int getLeftPad() {
         return leftPad;
     }
 
+    /**
+     * setLeftPad方法。
+     *      * @param leftPad final类型参数
+     */
     public void setLeftPad(final int leftPad) {
         this.leftPad = leftPad;
     }
 
+    /**
+     * getDescPad方法。
+     * @return int类型返回值
+     */
     public int getDescPad() {
         return descPad;
     }
 
+    /**
+     * setDescPad方法。
+     *      * @param descPad final类型参数
+     */
     public void setDescPad(final int descPad) {
         this.descPad = descPad;
     }
 
+    /**
+     * getSyntaxIndent方法。
+     * @return int类型返回值
+     */
     public int getSyntaxIndent() {
         return syntaxIndent;
     }
 
+    /**
+     * setSyntaxIndent方法。
+     *      * @param syntaxIndent final类型参数
+     */
     public void setSyntaxIndent(final int syntaxIndent) {
         this.syntaxIndent = syntaxIndent;
     }
 
+    /**
+     * getOptPrefix方法。
+     * @return String类型返回值
+     */
     public String getOptPrefix() {
         return optPrefix;
     }
 
+    /**
+     * setOptPrefix方法。
+     *      * @param optPrefix final类型参数
+     */
     public void setOptPrefix(final String optPrefix) {
         this.optPrefix = optPrefix;
     }
 
+    /**
+     * getLongOptPrefix方法。
+     * @return String类型返回值
+     */
     public String getLongOptPrefix() {
         return longOptPrefix;
     }
 
+    /**
+     * setLongOptPrefix方法。
+     *      * @param longOptPrefix final类型参数
+     */
     public void setLongOptPrefix(final String longOptPrefix) {
         this.longOptPrefix = longOptPrefix;
     }
 
+    /**
+     * getSyntaxPrefix方法。
+     * @return String类型返回值
+     */
     public String getSyntaxPrefix() {
         return syntaxPrefix;
     }
 
+    /**
+     * setSyntaxPrefix方法。
+     *      * @param syntaxPrefix final类型参数
+     */
     public void setSyntaxPrefix(final String syntaxPrefix) {
         this.syntaxPrefix = syntaxPrefix;
     }
 
+    /**
+     * getArgNameOpen方法。
+     * @return String类型返回值
+     */
     public String getArgNameOpen() {
         return argNameOpen;
     }
 
+    /**
+     * setArgNameOpen方法。
+     *      * @param argNameOpen final类型参数
+     */
     public void setArgNameOpen(final String argNameOpen) {
         this.argNameOpen = argNameOpen;
     }
 
+    /**
+     * getArgNameClose方法。
+     * @return String类型返回值
+     */
     public String getArgNameClose() {
         return argNameClose;
     }
 
+    /**
+     * setArgNameClose方法。
+     *      * @param argNameClose final类型参数
+     */
     public void setArgNameClose(final String argNameClose) {
         this.argNameClose = argNameClose;
     }
 
+    /**
+     * getSeparator方法。
+     * @return String类型返回值
+     */
     public String getSeparator() {
         return separator;
     }
 
+    /**
+     * setSeparator方法。
+     *      * @param separator final类型参数
+     */
     public void setSeparator(final String separator) {
         this.separator = separator;
     }
 
     /**
      * Print help text to System.out.
+     */
+    /**
+     * printHelp方法。
+     *      * @param cmdLineSyntax final类型参数
+     * @param options final类型参数
      */
     public void printHelp(final String cmdLineSyntax, final Options options) {
         printHelp(width, cmdLineSyntax, null, options, null, false);
@@ -152,12 +243,25 @@ public class HelpFormatter {
     /**
      * Print help text to System.out with auto-generated usage.
      */
+    /**
+     * printHelp方法。
+     *      * @param cmdLineSyntax final类型参数
+     * @param options final类型参数
+     * @param autoUsage final类型参数
+     */
     public void printHelp(final String cmdLineSyntax, final Options options, final boolean autoUsage) {
         printHelp(width, cmdLineSyntax, null, options, null, autoUsage);
     }
 
     /**
      * Print help text to System.out with header and footer.
+     */
+    /**
+     * printHelp方法。
+     *      * @param cmdLineSyntax final类型参数
+     * @param header final类型参数
+     * @param options final类型参数
+     * @param footer final类型参数
      */
     public void printHelp(final String cmdLineSyntax, final String header, final Options options, final String footer) {
         printHelp(width, cmdLineSyntax, header, options, footer, false);
@@ -166,12 +270,29 @@ public class HelpFormatter {
     /**
      * Print help text to System.out with header, footer, and auto usage.
      */
+    /**
+     * printHelp方法。
+     *      * @param cmdLineSyntax final类型参数
+     * @param header final类型参数
+     * @param options final类型参数
+     * @param footer final类型参数
+     * @param autoUsage final类型参数
+     */
     public void printHelp(final String cmdLineSyntax, final String header, final Options options, final String footer, final boolean autoUsage) {
         printHelp(width, cmdLineSyntax, header, options, footer, autoUsage);
     }
 
     /**
      * Print help text with custom width.
+     */
+    /**
+     * printHelp方法。
+     *      * @param width final类型参数
+     * @param cmdLineSyntax final类型参数
+     * @param header final类型参数
+     * @param options final类型参数
+     * @param footer final类型参数
+     * @param autoUsage final类型参数
      */
     public void printHelp(final int width, final String cmdLineSyntax, final String header, final Options options, final String footer, final boolean autoUsage) {
         PrintWriter pw = new PrintWriter(System.out);
@@ -181,6 +302,16 @@ public class HelpFormatter {
 
     /**
      * Print help text to a PrintWriter.
+     */
+    /**
+     * printHelp方法。
+     *      * @param pw final类型参数
+     * @param width final类型参数
+     * @param cmdLineSyntax final类型参数
+     * @param header final类型参数
+     * @param options final类型参数
+     * @param footer final类型参数
+     * @param autoUsage final类型参数
      */
     public void printHelp(final PrintWriter pw, final int width, final String cmdLineSyntax,
                          final String header, final Options options, final String footer, final boolean autoUsage) {
@@ -217,12 +348,24 @@ public class HelpFormatter {
     /**
      * Print the options table.
      */
+    /**
+     * printOptions方法。
+     *      * @param pw final类型参数
+     * @param options final类型参数
+     */
     public void printOptions(final PrintWriter pw, final Options options) {
         printOptions(pw, options, leftPad, descPad);
     }
 
     /**
      * Print the options table with custom padding.
+     */
+    /**
+     * printOptions方法。
+     *      * @param pw final类型参数
+     * @param options final类型参数
+     * @param leftPad final类型参数
+     * @param descPad final类型参数
      */
     public void printOptions(final PrintWriter pw, final Options options, final int leftPad, final int descPad) {
         String lpad = createPadding(leftPad);
@@ -274,6 +417,11 @@ public class HelpFormatter {
     /**
      * Create the text representation of an option.
      */
+    /**
+     * createOptionText方法。
+     *      * @param option final类型参数
+     * @return String类型返回值
+     */
     public String createOptionText(final Option option) {
         StringBuilder sb = new StringBuilder();
 
@@ -303,6 +451,11 @@ public class HelpFormatter {
     /**
      * Create the argument name string for an option.
      */
+    /**
+     * createArgName方法。
+     *      * @param option final类型参数
+     * @return String类型返回值
+     */
     public String createArgName(final Option option) {
         String argName = option.getArgName();
         if (argName == null || argName.isEmpty()) {
@@ -314,6 +467,11 @@ public class HelpFormatter {
     /**
      * Create padding string of specified length.
      */
+    /**
+     * createPadding方法。
+     *      * @param len final类型参数
+     * @return String类型返回值
+     */
     public String createPadding(final int len) {
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++) {
@@ -324,6 +482,12 @@ public class HelpFormatter {
 
     /**
      * Wrap text to fit within specified width.
+     */
+    /**
+     * wrapText方法。
+     *      * @param text final类型参数
+     * @param width final类型参数
+     * @return List<String>类型返回值
      */
     public List<String> wrapText(final String text, final int width) {
         List<String> lines = new ArrayList<>();
@@ -363,6 +527,11 @@ public class HelpFormatter {
     /**
      * Print wrapped text.
      */
+    /**
+     * printWrappedText方法。
+     *      * @param pw final类型参数
+     * @param text final类型参数
+     */
     public void printWrappedText(final PrintWriter pw, final String text) {
         List<String> lines = wrapText(text, width);
         for (String line : lines) {
@@ -373,6 +542,12 @@ public class HelpFormatter {
     /**
      * Print wrapped text with leading padding.
      */
+    /**
+     * printWrappedText方法。
+     *      * @param pw final类型参数
+     * @param width final类型参数
+     * @param text final类型参数
+     */
     public void printWrappedText(final PrintWriter pw, final int width, final String text) {
         List<String> lines = wrapText(text, width);
         for (String line : lines) {
@@ -382,6 +557,11 @@ public class HelpFormatter {
 
     /**
      * Create the syntax string for all options.
+     */
+    /**
+     * createSyntaxOptions方法。
+     *      * @param options final类型参数
+     * @return String类型返回值
      */
     public String createSyntaxOptions(final Options options) {
         StringBuilder sb = new StringBuilder();
@@ -422,6 +602,12 @@ public class HelpFormatter {
         List<Option> opts = new ArrayList<>(options.getOptions());
         Collections.sort(opts, new Comparator<Option>() {
             @Override
+    /**
+     * compare方法。
+     *      * @param o1 final类型参数
+     * @param o2 final类型参数
+     * @return int类型返回值
+     */
             public int compare(final Option o1, final Option o2) {
                 String k1 = o1.getKey();
                 String k2 = o2.getKey();
@@ -434,12 +620,23 @@ public class HelpFormatter {
     /**
      * Print usage to System.out.
      */
+    /**
+     * printUsage方法。
+     *      * @param cmdLineSyntax final类型参数
+     * @param options final类型参数
+     */
     public void printUsage(final String cmdLineSyntax, final Options options) {
         printUsage(new PrintWriter(System.out), cmdLineSyntax, options);
     }
 
     /**
      * Print usage to a PrintWriter.
+     */
+    /**
+     * printUsage方法。
+     *      * @param pw final类型参数
+     * @param cmdLineSyntax final类型参数
+     * @param options final类型参数
      */
     public void printUsage(final PrintWriter pw, final String cmdLineSyntax, final Options options) {
         StringBuilder sb = new StringBuilder(syntaxPrefix);

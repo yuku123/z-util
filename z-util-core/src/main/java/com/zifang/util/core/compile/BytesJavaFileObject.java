@@ -14,24 +14,43 @@ import java.net.URI;
  * @author zifang
  * @see SimpleJavaFileObject
  */
+/**
+ * BytesJavaFileObject类。
+ */
 public class BytesJavaFileObject extends SimpleJavaFileObject {
 
     private final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
+    /**
+     * BytesJavaFileObject方法。
+     *      * @param name String类型参数
+     * @param kind Kind类型参数
+     */
     public BytesJavaFileObject(String name, Kind kind) {
         super(URI.create("string:///" + name.replace('.', '/') + kind.extension), kind);
     }
 
+    /**
+     * getBytes方法。
+     * @return byte[]类型返回值
+     */
     public byte[] getBytes() {
         return bos.toByteArray();
     }
 
     @Override
+    /**
+     * openOutputStream方法。
+     * @return OutputStream类型返回值
+     */
     public OutputStream openOutputStream() throws IOException {
         return bos;
     }
 
     @Override
+    /**
+     * finalize方法。
+     */
     protected void finalize() throws Throwable {
         super.finalize();
         bos.close();

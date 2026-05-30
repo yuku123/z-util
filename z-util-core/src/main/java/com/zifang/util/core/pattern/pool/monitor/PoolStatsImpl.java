@@ -5,6 +5,9 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * 池统计数据实现
  */
+/**
+ * PoolStatsImpl类。
+ */
 public class PoolStatsImpl implements PoolStats {
 
     private final AtomicLong borrowCount = new AtomicLong(0);
@@ -24,56 +27,100 @@ public class PoolStatsImpl implements PoolStats {
     private volatile long lastReturnRateTime = System.currentTimeMillis();
 
     @Override
+    /**
+     * getActiveCount方法。
+     * @return int类型返回值
+     */
     public int getActiveCount() {
         return 0; // 由池提供
     }
 
     @Override
+    /**
+     * getIdleCount方法。
+     * @return int类型返回值
+     */
     public int getIdleCount() {
         return 0; // 由池提供
     }
 
     @Override
+    /**
+     * getTotalCount方法。
+     * @return int类型返回值
+     */
     public int getTotalCount() {
         return 0; // 由池提供
     }
 
     @Override
+    /**
+     * getWaitingThreads方法。
+     * @return int类型返回值
+     */
     public int getWaitingThreads() {
         return 0; // 由池提供
     }
 
     @Override
+    /**
+     * getBorrowCount方法。
+     * @return long类型返回值
+     */
     public long getBorrowCount() {
         return borrowCount.get();
     }
 
     @Override
+    /**
+     * getReturnCount方法。
+     * @return long类型返回值
+     */
     public long getReturnCount() {
         return returnCount.get();
     }
 
     @Override
+    /**
+     * getCreateCount方法。
+     * @return long类型返回值
+     */
     public long getCreateCount() {
         return createCount.get();
     }
 
     @Override
+    /**
+     * getDestroyCount方法。
+     * @return long类型返回值
+     */
     public long getDestroyCount() {
         return destroyCount.get();
     }
 
     @Override
+    /**
+     * getValidateCount方法。
+     * @return long类型返回值
+     */
     public long getValidateCount() {
         return validateCount.get();
     }
 
     @Override
+    /**
+     * getMaxBorrowWaitTime方法。
+     * @return long类型返回值
+     */
     public long getMaxBorrowWaitTime() {
         return maxBorrowWaitTime.get();
     }
 
     @Override
+    /**
+     * getAvgBorrowWaitTime方法。
+     * @return long类型返回值
+     */
     public long getAvgBorrowWaitTime() {
         long borrow = borrowCount.get();
         if (borrow == 0) return 0;
@@ -81,16 +128,28 @@ public class PoolStatsImpl implements PoolStats {
     }
 
     @Override
+    /**
+     * getMaxReturnWaitTime方法。
+     * @return long类型返回值
+     */
     public long getMaxReturnWaitTime() {
         return maxReturnWaitTime.get();
     }
 
     @Override
+    /**
+     * getUtilization方法。
+     * @return double类型返回值
+     */
     public double getUtilization() {
         return 0; // 由池提供
     }
 
     @Override
+    /**
+     * getBorrowRate方法。
+     * @return double类型返回值
+     */
     public double getBorrowRate() {
         long now = System.currentTimeMillis();
         long elapsed = now - lastBorrowRateTime;
@@ -101,6 +160,10 @@ public class PoolStatsImpl implements PoolStats {
     }
 
     @Override
+    /**
+     * getReturnRate方法。
+     * @return double类型返回值
+     */
     public double getReturnRate() {
         long now = System.currentTimeMillis();
         long elapsed = now - lastReturnRateTime;
@@ -112,6 +175,10 @@ public class PoolStatsImpl implements PoolStats {
 
     // 供池内部调用的方法
 
+    /**
+     * recordBorrow方法。
+     *      * @param waitTime long类型参数
+     */
     public void recordBorrow(long waitTime) {
         borrowCount.incrementAndGet();
         borrowRateCount.incrementAndGet();
@@ -119,6 +186,10 @@ public class PoolStatsImpl implements PoolStats {
         updateMax(maxBorrowWaitTime, waitTime);
     }
 
+    /**
+     * recordReturn方法。
+     *      * @param waitTime long类型参数
+     */
     public void recordReturn(long waitTime) {
         returnCount.incrementAndGet();
         returnRateCount.incrementAndGet();
@@ -126,14 +197,23 @@ public class PoolStatsImpl implements PoolStats {
         updateMax(maxReturnWaitTime, waitTime);
     }
 
+    /**
+     * recordCreate方法。
+     */
     public void recordCreate() {
         createCount.incrementAndGet();
     }
 
+    /**
+     * recordDestroy方法。
+     */
     public void recordDestroy() {
         destroyCount.incrementAndGet();
     }
 
+    /**
+     * recordValidate方法。
+     */
     public void recordValidate() {
         validateCount.incrementAndGet();
     }
@@ -146,6 +226,9 @@ public class PoolStatsImpl implements PoolStats {
         } while (!max.compareAndSet(current, value));
     }
 
+    /**
+     * reset方法。
+     */
     public void reset() {
         borrowCount.set(0);
         returnCount.set(0);

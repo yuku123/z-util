@@ -7,6 +7,9 @@ import com.zifang.util.numpy.Shape;
 /**
  * Dense (fully connected) layer: y = Wx + b
  */
+/**
+ * Dense类。
+ */
 public class Dense extends Module {
     
     private final int inputFeatures;
@@ -16,6 +19,11 @@ public class Dense extends Module {
     private NdArray savedInput;  // For backward pass
     private NdArray savedOutput; // For backward pass
     
+    /**
+     * Dense方法。
+     *      * @param inputFeatures int类型参数
+     * @param outputFeatures int类型参数
+     */
     public Dense(int inputFeatures, int outputFeatures) {
         this.inputFeatures = inputFeatures;
         this.outputFeatures = outputFeatures;
@@ -31,6 +39,11 @@ public class Dense extends Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         savedInput = input.copy();
         
@@ -99,6 +112,11 @@ public class Dense extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         // gradOutput: (batchSize, outputFeatures) or (outputFeatures,)
         Object gOutData = gradOutput.getData();
@@ -185,12 +203,20 @@ public class Dense extends Module {
     /**
      * Returns the weight tensor
      */
+    /**
+     * getWeight方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getWeight() {
         return weight;
     }
     
     /**
      * Returns the bias tensor
+     */
+    /**
+     * getBias方法。
+     * @return NdArray类型返回值
      */
     public NdArray getBias() {
         return bias;

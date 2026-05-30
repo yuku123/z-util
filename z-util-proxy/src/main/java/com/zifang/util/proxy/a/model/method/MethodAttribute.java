@@ -5,5 +5,8 @@ package com.zifang.util.proxy.a.model.method;
  * <p>
  * 标记接口,表示方法表属性。
  */
+/**
+ * MethodAttribute接口。
+ */
 public interface MethodAttribute {
 }

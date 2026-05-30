@@ -4,6 +4,9 @@ package com.zifang.util.media.graph.qrcode.encoder;
  * Reed-Solomon encoder for QR code error correction.
  * Implements GF(256) Galois Field arithmetic.
  */
+/**
+ * ReedSolomonEncoder类。
+ */
 public class ReedSolomonEncoder {
     
     private static final int GENERATOR_POLY_DEGREE = 120; // Enough for all cases
@@ -57,6 +60,12 @@ public class ReedSolomonEncoder {
      * @param data The data bytes
      * @param numEcBytes The number of error correction bytes to generate
      * @return The error correction codewords
+     */
+    /**
+     * encode方法。
+     *      * @param data byte[]类型参数
+     * @param numEcBytes int类型参数
+     * @return byte[]类型返回值
      */
     public byte[] encode(byte[] data, int numEcBytes) {
         if (data == null || data.length == 0) {
@@ -119,6 +128,12 @@ public class ReedSolomonEncoder {
      * @param numEcBytes The number of error correction bytes
      * @return Corrected data bytes (without ECC)
      * @throws RuntimeException if too many errors to correct
+     */
+    /**
+     * decode方法。
+     *      * @param data byte[]类型参数
+     * @param numEcBytes int类型参数
+     * @return byte[]类型返回值
      */
     public byte[] decode(byte[] data, int numEcBytes) {
         if (data == null || data.length <= numEcBytes) {

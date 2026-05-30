@@ -13,6 +13,9 @@ import java.util.function.Predicate;
  * @author zifang
  */
 @FunctionalInterface
+/**
+ * Processor接口。
+ */
 public interface Processor<C extends ChainContext<?, ?>> {
 
     /**

@@ -5,6 +5,9 @@ package com.zifang.util.core.pattern.cache;
  *
  * @author zifang
  */
+/**
+ * CacheProvider接口。
+ */
 public interface CacheProvider {
 
 }

@@ -9,6 +9,9 @@ import com.zifang.util.numpy.Shape;
  * 提供随机数生成功能，支持 1D/2D 形状，使用 NdArray 作为返回类型
  * 基于 pandas/num/NumRandom.java 风格
  */
+/**
+ * Random类。
+ */
 public class Random {
 
     private java.util.Random random;
@@ -16,6 +19,9 @@ public class Random {
 
     /**
      * 使用默认种子构造随机数生成器
+     */
+    /**
+     * Random方法。
      */
     public Random() {
         this.random = new java.util.Random();
@@ -25,6 +31,10 @@ public class Random {
      * 使用指定种子构造随机数生成器
      * @param seed 随机种子
      */
+    /**
+     * Random方法。
+     *      * @param seed long类型参数
+     */
     public Random(long seed) {
         this.seed = seed;
         this.random = new java.util.Random(seed);
@@ -33,6 +43,10 @@ public class Random {
     /**
      * 设置随机数种子
      * @param seed 随机种子
+     */
+    /**
+     * seed方法。
+     *      * @param seed long类型参数
      */
     public void seed(long seed) {
         this.seed = seed;
@@ -46,6 +60,11 @@ public class Random {
      * @param shape 数组形状，如传入 3 或 3,4
      * @return 指定形状的随机数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * rand方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     public NdArray rand(int... shape) {
         if (shape.length == 1) {
@@ -69,6 +88,11 @@ public class Random {
      * @param shape 数组形状
      * @return 指定形状的标准正态分布随机数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * randn方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     public NdArray randn(int... shape) {
         if (shape.length == 1) {
@@ -95,6 +119,13 @@ public class Random {
      * @return 指定形状的随机整数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
      */
+    /**
+     * randint方法。
+     *      * @param low int类型参数
+     * @param high int类型参数
+     * @param shape int...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray randint(int low, int high, int... shape) {
         if (shape.length == 0) {
             double[] array = new double[]{random.nextInt(high - low) + low};
@@ -119,6 +150,10 @@ public class Random {
      * 生成随机浮点数 [0.0, 1.0)，类似于 numpy.random.random()
      * @return 随机浮点数
      */
+    /**
+     * random方法。
+     * @return double类型返回值
+     */
     public double random() {
         return random.nextDouble();
     }
@@ -132,6 +167,13 @@ public class Random {
      * @param shape 数组形状
      * @return 指定形状的正态分布随机数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * normal方法。
+     *      * @param loc double类型参数
+     * @param scale double类型参数
+     * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     public NdArray normal(double loc, double scale, int... shape) {
         if (shape.length == 0) {
@@ -158,6 +200,11 @@ public class Random {
      * @param shape 数组形状
      * @return 指定形状的标准正态分布随机数 NdArray
      */
+    /**
+     * normal方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray normal(int... shape) {
         return normal(0.0, 1.0, shape);
     }
@@ -169,6 +216,13 @@ public class Random {
      * @param shape 数组形状
      * @return 指定形状的均匀分布随机数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * uniform方法。
+     *      * @param low double类型参数
+     * @param high double类型参数
+     * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     public NdArray uniform(double low, double high, int... shape) {
         if (shape.length == 0) {
@@ -195,6 +249,11 @@ public class Random {
      * @param shape 数组形状
      * @return 指定形状的均匀分布随机数 NdArray
      */
+    /**
+     * uniform方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray uniform(int... shape) {
         return uniform(0.0, 1.0, shape);
     }
@@ -204,6 +263,10 @@ public class Random {
     /**
      * 随机打乱数组顺序，类似于 numpy.random.shuffle()
      * @param array 待打乱的 NdArray（原地修改）
+     */
+    /**
+     * shuffle方法。
+     *      * @param array NdArray类型参数
      */
     public void shuffle(NdArray array) {
         Object data = array.getData();
@@ -231,6 +294,11 @@ public class Random {
      * @param n 排列范围 [0, n)
      * @return 0 到 n-1 的随机排列 NdArray
      */
+    /**
+     * permutation方法。
+     *      * @param n int类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray permutation(int n) {
         double[] arr = new double[n];
         for (int i = 0; i < n; i++) {
@@ -246,6 +314,11 @@ public class Random {
      * @param array 输入 NdArray
      * @return 输入数组的随机排列副本 NdArray
      */
+    /**
+     * permutation方法。
+     *      * @param array NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray permutation(NdArray array) {
         NdArray result = array.copy();
         shuffle(result);
@@ -260,6 +333,13 @@ public class Random {
      * @param size 选择数量
      * @param replace 是否允许重复选择
      * @return 随机选择的 NdArray
+     */
+    /**
+     * choice方法。
+     *      * @param array double[]类型参数
+     * @param size int类型参数
+     * @param replace boolean类型参数
+     * @return NdArray类型返回值
      */
     public NdArray choice(double[] array, int size, boolean replace) {
         double[] result = new double[size];
@@ -279,6 +359,11 @@ public class Random {
      * @param array 候选数组
      * @return 随机选择的元素
      */
+    /**
+     * choice方法。
+     *      * @param array double[]类型参数
+     * @return double类型返回值
+     */
     public double choice(double[] array) {
         return array[random.nextInt(array.length)];
     }
@@ -289,6 +374,13 @@ public class Random {
      * @param size 选择数量
      * @param replace 是否允许重复选择
      * @return 随机选择的 NdArray
+     */
+    /**
+     * choice方法。
+     *      * @param array NdArray类型参数
+     * @param size int类型参数
+     * @param replace boolean类型参数
+     * @return NdArray类型返回值
      */
     public NdArray choice(NdArray array, int size, boolean replace) {
         Object data = array.getData();
@@ -302,6 +394,11 @@ public class Random {
      * 从 NdArray 中随机选择一个元素
      * @param array 候选 NdArray
      * @return 随机选择的元素
+     */
+    /**
+     * choice方法。
+     *      * @param array NdArray类型参数
+     * @return double类型返回值
      */
     public double choice(NdArray array) {
         Object data = array.getData();

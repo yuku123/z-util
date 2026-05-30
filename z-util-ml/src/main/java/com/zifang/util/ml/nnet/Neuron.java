@@ -5,6 +5,9 @@ import java.util.Random;
 /**
  * 神经元
  */
+/**
+ * Neuron类。
+ */
 public class Neuron {
 
     private final double[] weights;
@@ -18,6 +21,10 @@ public class Neuron {
      * 创建神经元
      *
      * @param inputCount 输入数量
+     */
+    /**
+     * Neuron方法。
+     *      * @param inputCount int类型参数
      */
     public Neuron(int inputCount) {
         this.weights = new double[inputCount];
@@ -40,6 +47,12 @@ public class Neuron {
      * @param activationFunction  激活函数
      * @return 神经元输出值
      */
+    /**
+     * calculateOutput方法。
+     *      * @param inputs double[]类型参数
+     * @param activationFunction ActivationFunction类型参数
+     * @return double类型返回值
+     */
     public double calculateOutput(double[] inputs, ActivationFunction activationFunction) {
         double sum = 0;
         for (int i = 0; i < inputs.length; i++) {
@@ -55,6 +68,10 @@ public class Neuron {
      *
      * @return 权重数组副本
      */
+    /**
+     * getWeights方法。
+     * @return double[]类型返回值
+     */
     public double[] getWeights() {
         return weights;
     }
@@ -63,6 +80,10 @@ public class Neuron {
      * 获取神经元的偏置值
      *
      * @return 偏置值
+     */
+    /**
+     * getBias方法。
+     * @return double类型返回值
      */
     public double getBias() {
         return bias;
@@ -73,6 +94,10 @@ public class Neuron {
      *
      * @return 输出值
      */
+    /**
+     * getOutput方法。
+     * @return double类型返回值
+     */
     public double getOutput() {
         return output;
     }
@@ -81,6 +106,10 @@ public class Neuron {
      * 设置神经元的输出值
      *
      * @param output 输出值
+     */
+    /**
+     * setOutput方法。
+     *      * @param output double类型参数
      */
     public void setOutput(double output) {
         this.output = output;
@@ -91,6 +120,10 @@ public class Neuron {
      *
      * @return 误差值
      */
+    /**
+     * getDelta方法。
+     * @return double类型返回值
+     */
     public double getDelta() {
         return delta;
     }
@@ -99,6 +132,10 @@ public class Neuron {
      * 设置神经元的误差值（用于反向传播）
      *
      * @param delta 误差值
+     */
+    /**
+     * setDelta方法。
+     *      * @param delta double类型参数
      */
     public void setDelta(double delta) {
         this.delta = delta;

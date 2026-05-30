@@ -6,8 +6,16 @@ package com.zifang.util.core.lang.primitive;
  * @description: short util
  * @version: JDK 1.8
  */
+/**
+ * ShortUtil类。
+ */
 public class ShortUtil {
 
+    /**
+     * parseShort方法。
+     *      * @param object Object类型参数
+     * @return static Short类型返回值
+     */
     public static Short parseShort(Object object) {
         if (null == object) {
             return null;
@@ -15,6 +23,12 @@ public class ShortUtil {
         return Short.parseShort(object.toString());
     }
 
+    /**
+     * parseShortOrDefault方法。
+     *      * @param object Object类型参数
+     * @param defaultValue short类型参数
+     * @return static Short类型返回值
+     */
     public static Short parseShortOrDefault(Object object, Short defaultValue) {
         if (null == object) {
             return defaultValue;

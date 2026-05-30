@@ -17,6 +17,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @RequestMapping(method = RequestMethod.GET)
+/**
+ * GetMapping注解。
+ */
 public @interface GetMapping {
 
     /**

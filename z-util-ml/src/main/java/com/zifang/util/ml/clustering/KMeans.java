@@ -12,6 +12,9 @@ import com.zifang.util.numpy.DType;
  * 3. Update centroids as mean of assigned points
  * 4. Repeat until convergence or maxIterations
  */
+/**
+ * KMeans类。
+ */
 public class KMeans {
     private int k;
     private int maxIterations;
@@ -19,12 +22,22 @@ public class KMeans {
     private NdArray centroids;
     private int[] labels;
     
+    /**
+     * KMeans方法。
+     *      * @param k int类型参数
+     * @param maxIterations int类型参数
+     * @param tolerance double类型参数
+     */
     public KMeans(int k, int maxIterations, double tolerance) {
         this.k = k;
         this.maxIterations = maxIterations;
         this.tolerance = tolerance;
     }
     
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     */
     public void fit(NdArray X) {
         int nSamples = X.getShape().get(0);
         int nFeatures = X.getShape().get(1);
@@ -105,6 +118,11 @@ public class KMeans {
         this.centroids = this.centroids.reshape(k, nFeatures);
     }
     
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         double[][] centroidsData = toDouble2D(this.centroids);
@@ -118,6 +136,11 @@ public class KMeans {
         return predictions;
     }
     
+    /**
+     * fitPredict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] fitPredict(NdArray X) {
         fit(X);
         return labels;

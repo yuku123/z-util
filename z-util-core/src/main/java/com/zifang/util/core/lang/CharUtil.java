@@ -1,5 +1,8 @@
 package com.zifang.util.core.lang;
 
+/**
+ * CharUtil类。
+ */
 public class CharUtil {
 
     char SPACE = ' ';
@@ -76,6 +79,11 @@ public class CharUtil {
      * @param ch 被检查的字符处
      * @return true表示为ASCII字符，ASCII字符位于0~127之间
      */
+    /**
+     * isAscii方法。
+     *      * @param ch char类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isAscii(char ch) {
         return ch < 128;
     }
@@ -94,6 +102,11 @@ public class CharUtil {
      *
      * @param ch 被检查的字符处
      * @return true表示为ASCII可见字符，可见字符位于32~126之间
+     */
+    /**
+     * isAsciiPrintable方法。
+     *      * @param ch char类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isAsciiPrintable(char ch) {
         return ch >= 32 && ch < 127;
@@ -114,6 +127,11 @@ public class CharUtil {
      * @param ch 被检查的字符
      * @return true表示为控制符，控制符位于0~31和127
      */
+    /**
+     * isAsciiControl方法。
+     *      * @param ch final类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isAsciiControl(final char ch) {
         return ch < 32 || ch == 127;
     }
@@ -133,6 +151,11 @@ public class CharUtil {
      *
      * @param ch 被检查的字符
      * @return true表示为字母（包括大写字母和小写字母）字母包括A~Z和a~z
+     */
+    /**
+     * isLetter方法。
+     *      * @param ch char类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isLetter(char ch) {
         return isLetterUpper(ch) || isLetterLower(ch);
@@ -155,6 +178,11 @@ public class CharUtil {
      * @param ch 被检查的字符
      * @return true表示为大写字母，大写字母包括A~Z
      */
+    /**
+     * isLetterUpper方法。
+     *      * @param ch final类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isLetterUpper(final char ch) {
         return ch >= 'A' && ch <= 'Z';
     }
@@ -175,6 +203,11 @@ public class CharUtil {
      *
      * @param ch 被检查的字符
      * @return true表示为小写字母，小写字母指a~z
+     */
+    /**
+     * isLetterLower方法。
+     *      * @param ch final类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isLetterLower(final char ch) {
         return ch >= 'a' && ch <= 'z';
@@ -197,6 +230,11 @@ public class CharUtil {
      * @param ch 被检查的字符
      * @return true表示为数字字符，数字字符指0~9
      */
+    /**
+     * isNumber方法。
+     *      * @param ch char类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isNumber(char ch) {
         return ch >= '0' && ch <= '9';
     }
@@ -211,6 +249,11 @@ public class CharUtil {
      *
      * @param c 字符
      * @return 是否为16进制规范的字符
+     */
+    /**
+     * isHexChar方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isHexChar(char c) {
         return isNumber(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
@@ -231,6 +274,11 @@ public class CharUtil {
      * @param ch 被检查的字符
      * @return true表示为字母或数字，包括A~Z、a~z、0~9
      */
+    /**
+     * isLetterOrNumber方法。
+     *      * @param ch final类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isLetterOrNumber(final char ch) {
         return isLetter(ch) || isNumber(ch);
     }
@@ -245,6 +293,11 @@ public class CharUtil {
      *
      * @param clazz 被检查的类
      * @return true表示为字符类
+     */
+    /**
+     * isCharClass方法。
+     *      * @param clazz Class?类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isCharClass(Class<?> clazz) {
         return clazz == Character.class || clazz == char.class;
@@ -261,6 +314,11 @@ public class CharUtil {
      * @param value 被检查的对象
      * @return true表示为字符类
      */
+    /**
+     * isChar方法。
+     *      * @param value Object类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isChar(Object value) {
         //noinspection ConstantConditions
         return value instanceof Character || value.getClass() == char.class;
@@ -270,6 +328,11 @@ public class CharUtil {
      * 是否空白符<br>
      * 空白符包括空格、制表符、全角空格和不间断空格<br>
      */
+    /**
+     * isBlankChar方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isBlankChar(char c) {
         return isBlankChar((int) c);
     }
@@ -277,6 +340,11 @@ public class CharUtil {
     /**
      * 是否空白符<br>
      * 空白符包括空格、制表符、全角空格和不间断空格<br>
+     */
+    /**
+     * isBlankChar方法。
+     *      * @param c int类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isBlankChar(int c) {
         return Character.isWhitespace(c)
@@ -288,6 +356,11 @@ public class CharUtil {
 
     /**
      * 判断是否为emoji表情符
+     */
+    /**
+     * isEmoji方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isEmoji(char c) {
         return false == ((c == 0x0) || //
@@ -302,6 +375,13 @@ public class CharUtil {
     /**
      * 比较两个字符是否相同
      */
+    /**
+     * equals方法。
+     *      * @param c1 char类型参数
+     * @param c2 char类型参数
+     * @param ignoreCase boolean类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean equals(char c1, char c2, boolean ignoreCase) {
         if (ignoreCase) {
             return Character.toLowerCase(c1) == Character.toLowerCase(c2);
@@ -312,6 +392,11 @@ public class CharUtil {
     /**
      * 获取字符类型
      */
+    /**
+     * getType方法。
+     *      * @param c int类型参数
+     * @return static int类型返回值
+     */
     public static int getType(int c) {
         return Character.getType(c);
     }
@@ -321,6 +406,11 @@ public class CharUtil {
      *
      * @param b 字符
      * @return 16进制字符
+     */
+    /**
+     * digit16方法。
+     *      * @param b int类型参数
+     * @return static int类型返回值
      */
     public static int digit16(int b) {
         return Character.digit(b, 16);
@@ -340,6 +430,11 @@ public class CharUtil {
      * @return 转换后的字符
      * @see <a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters#Unicode_symbols">Unicode_symbols</a>
      * @see <a href="https://en.wikipedia.org/wiki/Enclosed_Alphanumerics">Alphanumerics</a>
+     */
+    /**
+     * toCloseChar方法。
+     *      * @param c char类型参数
+     * @return static char类型返回值
      */
     public static char toCloseChar(char c) {
         int result = c;
@@ -369,6 +464,11 @@ public class CharUtil {
      * @see <a href="https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%88%97%E8%A1%A8">维基百科wikipedia-Unicode字符列表</a>
      * @see <a href="https://coolsymbol.com/">coolsymbol</a>
      * @see <a href="https://baike.baidu.com/item/%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6/112715?fr=aladdin">百度百科 特殊字符</a>
+     */
+    /**
+     * toCloseByNumber方法。
+     *      * @param number int类型参数
+     * @return static char类型返回值
      */
     public static char toCloseByNumber(int number) {
         if (number > 20) {

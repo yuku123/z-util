@@ -34,6 +34,9 @@ package com.zifang.util.core.schedule;
  * @see JobBuilder
  */
 @FunctionalInterface
+/**
+ * RunnableJob接口。
+ */
 public interface RunnableJob {
 
     /**

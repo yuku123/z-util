@@ -9,11 +9,19 @@ import com.zifang.util.numpy.Shape;
  * f(x) = log(1 + exp(x))
  * f'(x) = sigmoid(x) = 1 / (1 + exp(-x))
  */
+/**
+ * Softplus类。
+ */
 public class Softplus extends com.zifang.util.ml.nn.Module {
     
     private NdArray savedInput;
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         savedInput = input.copy();
         
@@ -41,6 +49,11 @@ public class Softplus extends com.zifang.util.ml.nn.Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         NdArray gradInput = NdArray.zeros(gradOutput.getShape(), DType.FLOAT32);
         Object gInData = gradInput.getData();

@@ -30,6 +30,9 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * Select注解。
+ */
 public @interface Select {
     /**
      * 指定查询SQL语句

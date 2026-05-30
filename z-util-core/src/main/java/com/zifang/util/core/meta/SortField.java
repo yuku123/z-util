@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 /**
  * @author zifang
  */
+/**
+ * SortField类。
+ */
 public class SortField implements Serializable {
 
     private static final long serialVersionUID = -7342671270425244017L;
@@ -21,42 +24,86 @@ public class SortField implements Serializable {
      */
     private boolean asc = true;
 
+    /**
+     * SortField方法。
+     *      * @param column String类型参数
+     * @param asc boolean类型参数
+     */
     public SortField(String column, boolean asc) {
         this.column = column;
         this.asc = asc;
     }
 
+    /**
+     * SortField方法。
+     */
     public SortField() {
     }
 
+    /**
+     * getColumn方法。
+     * @return String类型返回值
+     */
     public String getColumn() {
         return column;
     }
 
+    /**
+     * setColumn方法。
+     *      * @param column String类型参数
+     */
     public void setColumn(String column) {
         this.column = column;
     }
 
+    /**
+     * isAsc方法。
+     * @return boolean类型返回值
+     */
     public boolean isAsc() {
         return asc;
     }
 
+    /**
+     * setAsc方法。
+     *      * @param asc boolean类型参数
+     */
     public void setAsc(boolean asc) {
         this.asc = asc;
     }
 
+    /**
+     * asc方法。
+     *      * @param column String类型参数
+     * @return static SortField类型返回值
+     */
     public static SortField asc(String column) {
         return build(column, true);
     }
 
+    /**
+     * desc方法。
+     *      * @param column String类型参数
+     * @return static SortField类型返回值
+     */
     public static SortField desc(String column) {
         return build(column, false);
     }
 
+    /**
+     * ascs方法。
+     *      * @param columns String...类型参数
+     * @return static List<SortField>类型返回值
+     */
     public static List<SortField> ascs(String... columns) {
         return Arrays.stream(columns).map(SortField::asc).collect(Collectors.toList());
     }
 
+    /**
+     * descs方法。
+     *      * @param columns String...类型参数
+     * @return static List<SortField>类型返回值
+     */
     public static List<SortField> descs(String... columns) {
         return Arrays.stream(columns).map(SortField::desc).collect(Collectors.toList());
     }
@@ -66,11 +113,20 @@ public class SortField implements Serializable {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "SortField{column=" + column + ", asc=" + asc + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -79,6 +135,10 @@ public class SortField implements Serializable {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return java.util.Objects.hash(column, asc);
     }

@@ -14,6 +14,9 @@ import java.util.*;
  * 动态语法分析器
  * 根据.g4文件动态生成语法分析器
  */
+/**
+ * DynamicParser类。
+ */
 public class DynamicParser implements Parser {
 
     private TokenReader tokenReader;
@@ -25,12 +28,19 @@ public class DynamicParser implements Parser {
         "Id", "StringLiteral", "Int", "Decimal"
     ));
 
+    /**
+     * DynamicParser方法。
+     */
     public DynamicParser() {
         this.parserRules = new HashMap<>();
     }
 
     /**
      * 加载G4文件并初始化
+     */
+    /**
+     * loadG4方法。
+     *      * @param g4Content String类型参数
      */
     public void loadG4(String g4Content) {
         List<G4Rule> rules = G4FileParser.extractRules(g4Content);
@@ -45,6 +55,10 @@ public class DynamicParser implements Parser {
     /**
      * 从文件加载G4
      */
+    /**
+     * loadG4File方法。
+     *      * @param filePath String类型参数
+     */
     public void loadG4File(String filePath) {
         try {
             String content = new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(filePath)));
@@ -55,11 +69,19 @@ public class DynamicParser implements Parser {
     }
 
     @Override
+    /**
+     * setTokenReader方法。
+     *      * @param tokenReader TokenReader类型参数
+     */
     public void setTokenReader(TokenReader tokenReader) {
         this.tokenReader = tokenReader;
     }
 
     @Override
+    /**
+     * parse方法。
+     * @return ASTNode类型返回值
+     */
     public ASTNode parse() {
         // 默认从第一个规则开始
         if (parserRules.isEmpty()) {
@@ -70,6 +92,11 @@ public class DynamicParser implements Parser {
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param startRule String类型参数
+     * @return ASTNode类型返回值
+     */
     public ASTNode parse(String startRule) {
         G4Rule rule = parserRules.get(startRule);
         if (rule == null) {

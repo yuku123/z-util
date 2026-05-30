@@ -7,6 +7,9 @@ import java.util.List;
 /**
  * 词法分析器接口
  */
+/**
+ * Lexer接口。
+ */
 public interface Lexer {
 
     /**

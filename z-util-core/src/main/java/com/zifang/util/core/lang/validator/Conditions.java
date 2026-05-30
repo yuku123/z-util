@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 /**
  * 各种验证条件的集中管理
  */
+/**
+ * Conditions类。
+ */
 public class Conditions {
 
     /**
@@ -20,6 +23,11 @@ public class Conditions {
 
     /**
      * 判断对象是否为数组的谓词
+     */
+    /**
+     * =方法。
+     *      * @param e Object类型参数
+     * @return static Predicate<Object> IS_ARRAY类型返回值
      */
     public static Predicate<Object> IS_ARRAY = (e) -> true;
 }

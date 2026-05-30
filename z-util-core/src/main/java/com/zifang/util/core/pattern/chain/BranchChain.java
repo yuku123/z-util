@@ -12,6 +12,9 @@ import java.util.function.Predicate;
  * @param <C> 上下文类型
  * @author zifang
  */
+/**
+ * BranchChain类。
+ */
 public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     private final Predicate<C> condition;
@@ -19,10 +22,19 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     private Chain<C> falseChain;
     private final String name;
 
+    /**
+     * BranchChain方法。
+     *      * @param condition PredicateC类型参数
+     */
     public BranchChain(Predicate<C> condition) {
         this(condition, "BranchChain-" + System.currentTimeMillis());
     }
 
+    /**
+     * BranchChain方法。
+     *      * @param condition PredicateC类型参数
+     * @param name String类型参数
+     */
     public BranchChain(Predicate<C> condition, String name) {
         this.condition = condition;
         this.trueChain = Chain.empty();
@@ -33,6 +45,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     /**
      * 设置条件为true时执行的链
      */
+    /**
+     * whenTrue方法。
+     *      * @param chain ChainC类型参数
+     * @return BranchChain<C>类型返回值
+     */
     public BranchChain<C> whenTrue(Chain<C> chain) {
         this.trueChain = chain;
         return this;
@@ -40,6 +57,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * 设置条件为true时执行的处理器
+     */
+    /**
+     * whenTrue方法。
+     *      * @param processor ProcessorC类型参数
+     * @return BranchChain<C>类型返回值
      */
     public BranchChain<C> whenTrue(Processor<C> processor) {
         this.trueChain = Chain.of(processor);
@@ -49,6 +71,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     /**
      * 设置条件为false时执行的链
      */
+    /**
+     * whenFalse方法。
+     *      * @param chain ChainC类型参数
+     * @return BranchChain<C>类型返回值
+     */
     public BranchChain<C> whenFalse(Chain<C> chain) {
         this.falseChain = chain;
         return this;
@@ -56,6 +83,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * 设置条件为false时执行的处理器
+     */
+    /**
+     * whenFalse方法。
+     *      * @param processor ProcessorC类型参数
+     * @return BranchChain<C>类型返回值
      */
     public BranchChain<C> whenFalse(Processor<C> processor) {
         this.falseChain = Chain.of(processor);
@@ -65,6 +97,12 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     /**
      * 快捷方法：if-else结构
      */
+    /**
+     * branch方法。
+     *      * @param trueBranch ChainC类型参数
+     * @param falseBranch ChainC类型参数
+     * @return BranchChain<C>类型返回值
+     */
     public BranchChain<C> branch(Chain<C> trueBranch, Chain<C> falseBranch) {
         this.trueChain = trueBranch;
         this.falseChain = falseBranch;
@@ -72,11 +110,19 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
     @Override
+    /**
+     * getProcessors方法。
+     * @return List<Processor<C>>类型返回值
+     */
     public List<Processor<C>> getProcessors() {
         List<Processor<C>> result = new ArrayList<>();
         result.add(context -> {
@@ -90,6 +136,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * process方法。
+     *      * @param context C类型参数
+     * @return ProcessorResult类型返回值
+     */
     public ProcessorResult process(C context) {
         if (condition.test(context)) {
             return trueChain.process(context);
@@ -99,24 +150,45 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * addProcessor方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addProcessor(Processor<C> processor) {
         trueChain.addProcessor(processor);
         return this;
     }
 
     @Override
+    /**
+     * addFirst方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addFirst(Processor<C> processor) {
         trueChain.addFirst(processor);
         return this;
     }
 
     @Override
+    /**
+     * addAt方法。
+     *      * @param index int类型参数
+     * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addAt(int index, Processor<C> processor) {
         trueChain.addAt(index, processor);
         return this;
     }
 
     @Override
+    /**
+     * remove方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> remove(Processor<C> processor) {
         trueChain.remove(processor);
         falseChain.remove(processor);
@@ -124,6 +196,10 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * clear方法。
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> clear() {
         trueChain.clear();
         falseChain.clear();
@@ -131,6 +207,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * prepend方法。
+     *      * @param other ChainC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> prepend(Chain<C> other) {
         trueChain.prepend(other);
         falseChain.prepend(other);
@@ -138,6 +219,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * append方法。
+     *      * @param other ChainC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> append(Chain<C> other) {
         trueChain.append(other);
         falseChain.append(other);

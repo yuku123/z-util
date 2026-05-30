@@ -6,8 +6,16 @@ package com.zifang.util.core.lang.primitive;
  * @description: boolean util
  * @version: JDK 1.8
  */
+/**
+ * BooleanUtil类。
+ */
 public class BooleanUtil {
 
+    /**
+     * parseBoolean方法。
+     *      * @param object Object类型参数
+     * @return static Boolean类型返回值
+     */
     public static Boolean parseBoolean(Object object) {
         if (null == object) {
             return null;
@@ -15,6 +23,12 @@ public class BooleanUtil {
         return Boolean.parseBoolean(object.toString());
     }
 
+    /**
+     * parseBooleanOrDefault方法。
+     *      * @param object Object类型参数
+     * @param defaultValue boolean类型参数
+     * @return static Boolean类型返回值
+     */
     public static Boolean parseBooleanOrDefault(Object object, Boolean defaultValue) {
         if (null == object) {
             return defaultValue;
@@ -29,6 +43,12 @@ public class BooleanUtil {
      * @time: 2022-06-08 10:24:20
      * @params: [x, y] 值
      * @return: int 是否一致
+     */
+    /**
+     * compare方法。
+     *      * @param x final类型参数
+     * @param y final类型参数
+     * @return static int类型返回值
      */
     public static int compare(final boolean x, final boolean y) {
         if (x == y) {

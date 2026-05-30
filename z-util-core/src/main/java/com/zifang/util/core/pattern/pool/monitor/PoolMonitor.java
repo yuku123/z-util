@@ -12,6 +12,9 @@ import java.util.function.Consumer;
  *
  * @param <T> 对象类型
  */
+/**
+ * PoolMonitor类。
+ */
 public class PoolMonitor<T> {
 
     private final PoolStatsImpl stats = new PoolStatsImpl();
@@ -19,9 +22,16 @@ public class PoolMonitor<T> {
     private final List<Consumer<PoolStats>> statsConsumers = new CopyOnWriteArrayList<>();
     private volatile boolean enabled = true;
 
+    /**
+     * PoolMonitor方法。
+     */
     public PoolMonitor() {
     }
 
+    /**
+     * PoolMonitor方法。
+     *      * @param listener PoolListenerT类型参数
+     */
     public PoolMonitor(PoolListener<T> listener) {
         if (listener != null) {
             listeners.add(listener);
@@ -30,6 +40,10 @@ public class PoolMonitor<T> {
 
     /**
      * 添加监听器
+     */
+    /**
+     * addListener方法。
+     *      * @param listener PoolListenerT类型参数
      */
     public void addListener(PoolListener<T> listener) {
         if (listener != null) {
@@ -40,12 +54,20 @@ public class PoolMonitor<T> {
     /**
      * 移除监听器
      */
+    /**
+     * removeListener方法。
+     *      * @param listener PoolListenerT类型参数
+     */
     public void removeListener(PoolListener<T> listener) {
         listeners.remove(listener);
     }
 
     /**
      * 添加统计消费者，每次统计更新时调用
+     */
+    /**
+     * addStatsConsumer方法。
+     *      * @param consumer ConsumerPoolStats类型参数
      */
     public void addStatsConsumer(Consumer<PoolStats> consumer) {
         if (consumer != null) {
@@ -56,16 +78,28 @@ public class PoolMonitor<T> {
     /**
      * 启用/禁用监控
      */
+    /**
+     * setEnabled方法。
+     *      * @param enabled boolean类型参数
+     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
+    /**
+     * isEnabled方法。
+     * @return boolean类型返回值
+     */
     public boolean isEnabled() {
         return enabled;
     }
 
     /**
      * 获取统计信息
+     */
+    /**
+     * getStats方法。
+     * @return PoolStats类型返回值
      */
     public PoolStats getStats() {
         return stats;
@@ -74,12 +108,20 @@ public class PoolMonitor<T> {
     /**
      * 重置统计
      */
+    /**
+     * reset方法。
+     */
     public void reset() {
         stats.reset();
     }
 
     // 内部方法，供池调用
 
+    /**
+     * recordBorrow方法。
+     *      * @param object T类型参数
+     * @param waitTime long类型参数
+     */
     public void recordBorrow(T object, long waitTime) {
         if (!enabled) return;
         stats.recordBorrow(waitTime);
@@ -87,6 +129,11 @@ public class PoolMonitor<T> {
         notifyStats();
     }
 
+    /**
+     * recordReturn方法。
+     *      * @param object T类型参数
+     * @param waitTime long类型参数
+     */
     public void recordReturn(T object, long waitTime) {
         if (!enabled) return;
         stats.recordReturn(waitTime);
@@ -94,6 +141,10 @@ public class PoolMonitor<T> {
         notifyStats();
     }
 
+    /**
+     * recordCreate方法。
+     *      * @param object T类型参数
+     */
     public void recordCreate(T object) {
         if (!enabled) return;
         stats.recordCreate();
@@ -101,6 +152,10 @@ public class PoolMonitor<T> {
         notifyStats();
     }
 
+    /**
+     * recordDestroy方法。
+     *      * @param object T类型参数
+     */
     public void recordDestroy(T object) {
         if (!enabled) return;
         stats.recordDestroy();
@@ -108,17 +163,29 @@ public class PoolMonitor<T> {
         notifyStats();
     }
 
+    /**
+     * recordValidate方法。
+     *      * @param object T类型参数
+     * @param valid boolean类型参数
+     */
     public void recordValidate(T object, boolean valid) {
         if (!enabled) return;
         stats.recordValidate();
         notifyValidate(object, valid);
     }
 
+    /**
+     * recordEvict方法。
+     *      * @param object T类型参数
+     */
     public void recordEvict(T object) {
         if (!enabled) return;
         notifyEvict(object);
     }
 
+    /**
+     * recordClose方法。
+     */
     public void recordClose() {
         if (!enabled) return;
         notifyClose();

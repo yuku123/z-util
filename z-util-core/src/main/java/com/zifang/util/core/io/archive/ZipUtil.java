@@ -29,6 +29,9 @@ import java.util.zip.ZipOutputStream;
  * @see ZipFile
  * @see ZipOutputStream
  */
+/**
+ * ZipUtil类。
+ */
 public class ZipUtil {
 
     private static final String ZIP_FILE_SUFFIX = ".zip";
@@ -44,6 +47,12 @@ public class ZipUtil {
      * @param targetPath  目标文件夹路径（如果不存在会自动创建）
      * @throws IllegalArgumentException 如果 resourcePath 或 targetPath 为空
      * @throws UncheckedIOException    如果压缩过程中发生 IO 错误
+     */
+    /**
+     * zipFile方法。
+     *      * @param resourcePath String类型参数
+     * @param targetPath String类型参数
+     * @return static void类型返回值
      */
     public static void zipFile(String resourcePath, String targetPath) {
         File resourcesFile = new File(resourcePath);
@@ -73,6 +82,13 @@ public class ZipUtil {
      * @param zipFileName  ZIP 文件名（可包含或不包含 .zip 扩展名）
      * @throws IOException              如果 folder 不是目录或不存在
      * @throws IllegalArgumentException 如果参数为空
+     */
+    /**
+     * zipFolder方法。
+     *      * @param folder String类型参数
+     * @param targetFolder String类型参数
+     * @param zipFileName String类型参数
+     * @return static void类型返回值
      */
     public static void zipFolder(String folder, String targetFolder, String zipFileName) throws IOException {
         File zipFolder = new File(folder);
@@ -111,6 +127,13 @@ public class ZipUtil {
      * @throws IllegalArgumentException 如果任何参数为空
      * @throws UncheckedIOException     如果压缩过程中发生 IO 错误
      */
+    /**
+     * zipFile方法。
+     *      * @param srcFilePath String类型参数
+     * @param destZipFilePath String类型参数
+     * @param fileName String类型参数
+     * @return static void类型返回值
+     */
     public static void zipFile(String srcFilePath, String destZipFilePath, String fileName) {
         try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(destZipFilePath));
              FileInputStream fis = new FileInputStream(srcFilePath)) {
@@ -137,6 +160,12 @@ public class ZipUtil {
      * @param destDir     解压目标目录（如果不存在会自动创建）
      * @throws IOException              如果 ZIP 文件不存在或格式无效
      * @throws IllegalArgumentException 如果任何参数为空
+     */
+    /**
+     * unZip方法。
+     *      * @param zipFilePath String类型参数
+     * @param destDir String类型参数
+     * @return static void类型返回值
      */
     public static void unZip(String zipFilePath, String destDir) throws IOException {
         File f = new File(destDir);

@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
  * @see com.zifang.util.db.transation.TransactionInterceptor
  * @see com.zifang.util.db.transation.TransactionTemplate
  */
+/**
+ * TranslationManager类。
+ */
 public class TranslationManager {
 
     private static final Logger log = LoggerFactory.getLogger(TranslationManager.class);
@@ -23,6 +26,12 @@ public class TranslationManager {
      * @param propagation 传播行为
      * @param isolation   隔离级别
      * @param readOnly    是否只读
+     */
+    /**
+     * begin方法。
+     *      * @param propagation Propagation类型参数
+     * @param isolation Isolation类型参数
+     * @param readOnly boolean类型参数
      */
     public void begin(Propagation propagation, Isolation isolation, boolean readOnly) {
         int depth = getDepth();
@@ -64,6 +73,10 @@ public class TranslationManager {
     /**
      * 检查是否存在活动事务
      */
+    /**
+     * isActive方法。
+     * @return boolean类型返回值
+     */
     public boolean isActive() {
         return getDepth() > 0;
     }
@@ -72,6 +85,10 @@ public class TranslationManager {
      * 获取当前事务嵌套深度
      *
      * @return 深度，0 表示无活动事务
+     */
+    /**
+     * getDepth方法。
+     * @return int类型返回值
      */
     public int getDepth() {
         Integer depth = depthHolder.get();
@@ -82,6 +99,9 @@ public class TranslationManager {
      * 提交当前事务
      *
      * @throws TransactionException 如果没有活动事务
+     */
+    /**
+     * commit方法。
      */
     public void commit() {
         int depth = getDepth();
@@ -97,6 +117,9 @@ public class TranslationManager {
      *
      * @throws TransactionException 如果没有活动事务
      */
+    /**
+     * rollback方法。
+     */
     public void rollback() {
         int depth = getDepth();
         if (depth == 0) {
@@ -111,10 +134,19 @@ public class TranslationManager {
      */
     public static class TransactionException extends RuntimeException {
 
+    /**
+     * TransactionException方法。
+     *      * @param message String类型参数
+     */
         public TransactionException(String message) {
             super(message);
         }
 
+    /**
+     * TransactionException方法。
+     *      * @param message String类型参数
+     * @param cause Throwable类型参数
+     */
         public TransactionException(String message, Throwable cause) {
             super(message, cause);
         }

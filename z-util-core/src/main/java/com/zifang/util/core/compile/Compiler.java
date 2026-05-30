@@ -8,10 +8,20 @@ import java.util.Map;
 /**
  * @author zifang
  */
+/**
+ * Compiler类。
+ */
 public class Compiler {
 
     private static CustomerClassLoader defineClassLoader = new CustomerClassLoader(Thread.currentThread().getContextClassLoader());
 
+    /**
+     * compile方法。
+     *      * @param packageName String类型参数
+     * @param simpleName String类型参数
+     * @param script String类型参数
+     * @return static Class<?>类型返回值
+     */
     public static Class<?> compile(String packageName , String simpleName , String script) {
         Class<?> clazz = null;
 
@@ -31,6 +41,12 @@ public class Compiler {
         return clazz;
     }
 
+    /**
+     * compile方法。
+     *      * @param scripts ListStringJavaFileObject类型参数
+     * @param getClass String类型参数
+     * @return static Class<?>类型返回值
+     */
     public static Class<?> compile(List<StringJavaFileObject> scripts, String getClass) {
         Class<?> clazz = null;
         Class returnClass = null;
@@ -58,6 +74,12 @@ public class Compiler {
     }
 
 
+    /**
+     * compile方法。
+     *      * @param scriptCodeMap MapString,String类型参数
+     * @param getClass String类型参数
+     * @return static Class<?>类型返回值
+     */
     public static Class<?> compile(Map<String,String> scriptCodeMap, String getClass) {
         List<StringJavaFileObject> scripts = new ArrayList<>();
         scriptCodeMap.forEach((key, value) -> scripts.add(new StringJavaFileObject(key, value)));

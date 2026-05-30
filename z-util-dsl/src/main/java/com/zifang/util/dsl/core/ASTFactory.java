@@ -3,6 +3,9 @@ package com.zifang.util.dsl.core;
 /**
  * AST工厂接口
  */
+/**
+ * ASTFactory接口。
+ */
 public interface ASTFactory {
 
     /**

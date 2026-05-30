@@ -12,6 +12,9 @@ import java.io.IOException;
  * Robot综合测试类
  * 演示Robot类的多种功能：屏幕截图、鼠标操作、键盘操作、滚轮滚动等
  */
+/**
+ * RobotTest类。
+ */
 public class RobotTest {
     /**
      * 主方法

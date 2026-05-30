@@ -4,6 +4,9 @@ package com.zifang.util.ml.optim;
  * Learning rate scheduler interface.
  * Schedulers adjust the learning rate during training.
  */
+/**
+ * LrScheduler接口。
+ */
 public interface LrScheduler {
     
     /**

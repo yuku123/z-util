@@ -22,6 +22,9 @@ import java.util.regex.Pattern;
  * HTTP服务器构建器
  * 用于快速构建基于注解的HTTP服务器
  */
+/**
+ * HttpServerBuilder类。
+ */
 public class HttpServerBuilder {
 
     private int port = 8080;
@@ -35,6 +38,11 @@ public class HttpServerBuilder {
      * @param port 端口号
      * @return HttpServerBuilder实例
      */
+    /**
+     * bindPort方法。
+     *      * @param port int类型参数
+     * @return static HttpServerBuilder类型返回值
+     */
     public static HttpServerBuilder bindPort(int port) {
         HttpServerBuilder builder = new HttpServerBuilder();
         builder.port = port;
@@ -47,6 +55,11 @@ public class HttpServerBuilder {
      * @param controller 控制器实例
      * @return HttpServerBuilder实例
      */
+    /**
+     * proxy方法。
+     *      * @param controller Object类型参数
+     * @return HttpServerBuilder类型返回值
+     */
     public HttpServerBuilder proxy(Object controller) {
         this.controllers.add(controller);
         return this;
@@ -56,6 +69,10 @@ public class HttpServerBuilder {
      * 启动HTTP服务器
      *
      * @return HttpServerBuilder实例
+     */
+    /**
+     * start方法。
+     * @return HttpServerBuilder类型返回值
      */
     public HttpServerBuilder start() {
         try {
@@ -87,6 +104,9 @@ public class HttpServerBuilder {
 
     /**
      * 停止HTTP服务器
+     */
+    /**
+     * stop方法。
      */
     public void stop() {
         if (httpServer != null) {
@@ -216,6 +236,10 @@ public class HttpServerBuilder {
      */
     private class RootHandler implements HttpHandler {
         @Override
+    /**
+     * handle方法。
+     *      * @param exchange HttpExchange类型参数
+     */
         public void handle(HttpExchange exchange) throws IOException {
             String requestMethod = exchange.getRequestMethod();
             String requestPath = exchange.getRequestURI().getPath();

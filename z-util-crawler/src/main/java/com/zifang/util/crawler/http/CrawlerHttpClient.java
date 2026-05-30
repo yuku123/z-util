@@ -19,6 +19,9 @@ import java.util.concurrent.TimeUnit;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * CrawlerHttpClient类。
+ */
 public class CrawlerHttpClient {
 
     private final OkHttpClient client;
@@ -26,6 +29,9 @@ public class CrawlerHttpClient {
 
     /**
      * 构造 CrawlerHttpClient，使用默认配置。
+     */
+    /**
+     * CrawlerHttpClient方法。
      */
     public CrawlerHttpClient() {
         this.cookieJar = new CookieJarImpl();
@@ -43,6 +49,11 @@ public class CrawlerHttpClient {
      * @param host 代理主机
      * @param port 代理端口
      */
+    /**
+     * setProxy方法。
+     *      * @param host String类型参数
+     * @param port int类型参数
+     */
     public void setProxy(String host, int port) {
         // Note: proxy must be set at builder creation time for OkHttp
         // This is a simplified approach - for dynamic proxy, use RoutePlanner
@@ -54,6 +65,12 @@ public class CrawlerHttpClient {
      * @param headers 请求头
      * @return HTTP 响应
      * @throws IOException 如果请求失败
+     */
+    /**
+     * get方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @return HttpResponse类型返回值
      */
     public HttpResponse get(String url, Map<String, String> headers) throws IOException {
         try {
@@ -76,6 +93,13 @@ public class CrawlerHttpClient {
      * @return HTTP 响应
      * @throws IOException 如果请求失败
      */
+    /**
+     * post方法。
+     *      * @param url String类型参数
+     * @param body String类型参数
+     * @param headers MapString,类型参数
+     * @return HttpResponse类型返回值
+     */
     public HttpResponse post(String url, String body, Map<String, String> headers) throws IOException {
         try {
             Request.Builder builder = new Request.Builder().url(url);
@@ -96,6 +120,11 @@ public class CrawlerHttpClient {
      * @param url 请求 URL
      * @param savePath 保存路径
      * @throws IOException 如果下载失败
+     */
+    /**
+     * download方法。
+     *      * @param url String类型参数
+     * @param savePath String类型参数
      */
     public void download(String url, String savePath) throws IOException {
         try {
@@ -158,6 +187,12 @@ public class CrawlerHttpClient {
          * @param body 响应体
          * @param headers 响应头
          */
+    /**
+     * HttpResponse方法。
+     *      * @param code int类型参数
+     * @param body String类型参数
+     * @param headers MapString,类型参数
+     */
         public HttpResponse(int code, String body, Map<String, String> headers) {
             this.code = code;
             this.body = body;
@@ -168,6 +203,10 @@ public class CrawlerHttpClient {
          * 获取状态码。
          * @return HTTP 状态码
          */
+    /**
+     * getCode方法。
+     * @return int类型返回值
+     */
         public int getCode() {
             return code;
         }
@@ -176,6 +215,10 @@ public class CrawlerHttpClient {
          * 获取响应体。
          * @return 响应体字符串
          */
+    /**
+     * getBody方法。
+     * @return String类型返回值
+     */
         public String getBody() {
             return body;
         }
@@ -184,6 +227,10 @@ public class CrawlerHttpClient {
          * 获取响应头。
          * @return 响应头映射
          */
+    /**
+     * getHeaders方法。
+     * @return Map<String, String>类型返回值
+     */
         public Map<String, String> getHeaders() {
             return headers != null ? headers : new HashMap<>();
         }
@@ -196,6 +243,11 @@ public class CrawlerHttpClient {
         private final Map<String, Map<String, Cookie>> cookieStore = new HashMap<>();
 
         @Override
+    /**
+     * saveFromResponse方法。
+     *      * @param url HttpUrl类型参数
+     * @param cookies java.util.ListCookie类型参数
+     */
         public void saveFromResponse(HttpUrl url, java.util.List<Cookie> cookies) {
             cookieStore.put(url.host(), new HashMap<>());
             for (Cookie cookie : cookies) {
@@ -204,6 +256,11 @@ public class CrawlerHttpClient {
         }
 
         @Override
+    /**
+     * loadForRequest方法。
+     *      * @param url HttpUrl类型参数
+     * @return java.util.List<Cookie>类型返回值
+     */
         public java.util.List<Cookie> loadForRequest(HttpUrl url) {
             Map<String, Cookie> hostCookies = cookieStore.get(url.host());
             if (hostCookies == null) {

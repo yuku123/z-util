@@ -9,6 +9,9 @@ import java.util.*;
  * 
  * Uses epsilon-greedy action selection and a HashMap-based Q-table.
  */
+/**
+ * QLearning类。
+ */
 public class QLearning {
     
     private double learningRate;
@@ -20,6 +23,9 @@ public class QLearning {
     /**
      * Interface for states in the RL environment.
      */
+/**
+ * State接口。
+ */
     public interface State {
         Object getState();
         List<ActionResult> getAvailableActions();
@@ -28,6 +34,9 @@ public class QLearning {
     /**
      * Interface for action results containing next state, reward, and terminal info.
      */
+/**
+ * ActionResult接口。
+ */
     public interface ActionResult {
         Object getAction();
         State getNextState();
@@ -42,6 +51,13 @@ public class QLearning {
      * @param gamma Discount factor (γ)
      * @param epsilon Exploration rate for epsilon-greedy
      * @param nEpisodes Number of episodes to train
+     */
+    /**
+     * QLearning方法。
+     *      * @param learningRate double类型参数
+     * @param gamma double类型参数
+     * @param epsilon double类型参数
+     * @param nEpisodes int类型参数
      */
     public QLearning(double learningRate, double gamma, double epsilon, int nEpisodes) {
         this.learningRate = learningRate;
@@ -72,6 +88,12 @@ public class QLearning {
      * @param action The action taken
      * @return The Q-value Q(s,a)
      */
+    /**
+     * getQValue方法。
+     *      * @param state State类型参数
+     * @param action Object类型参数
+     * @return double类型返回值
+     */
     public double getQValue(State state, Object action) {
         String key = stateActionKey(state, action);
         return qTable.getOrDefault(key, 0.0);
@@ -90,6 +112,11 @@ public class QLearning {
      * 
      * @param state The current state
      * @return The action with the highest Q-value
+     */
+    /**
+     * getBestAction方法。
+     *      * @param state State类型参数
+     * @return Object类型返回值
      */
     public Object getBestAction(State state) {
         List<ActionResult> availableActions = state.getAvailableActions();
@@ -140,6 +167,13 @@ public class QLearning {
      * @param reward The reward received
      * @param nextState The resulting state
      */
+    /**
+     * update方法。
+     *      * @param state State类型参数
+     * @param action Object类型参数
+     * @param reward double类型参数
+     * @param nextState State类型参数
+     */
     public void update(State state, Object action, double reward, State nextState) {
         double currentQ = getQValue(state, action);
         
@@ -167,6 +201,10 @@ public class QLearning {
      * Runs the Q-Learning algorithm for the specified number of episodes.
      * 
      * @param startState The initial state for each episode
+     */
+    /**
+     * learn方法。
+     *      * @param startState State类型参数
      */
     public void learn(State startState) {
         for (int episode = 0; episode < nEpisodes; episode++) {
@@ -231,12 +269,20 @@ public class QLearning {
     /**
      * Gets the current Q-table (for inspection).
      */
+    /**
+     * getQTable方法。
+     * @return HashMap<String, Double>类型返回值
+     */
     public HashMap<String, Double> getQTable() {
         return new HashMap<>(qTable);
     }
     
     /**
      * Gets the learning rate.
+     */
+    /**
+     * getLearningRate方法。
+     * @return double类型返回值
      */
     public double getLearningRate() {
         return learningRate;
@@ -245,12 +291,20 @@ public class QLearning {
     /**
      * Sets the learning rate.
      */
+    /**
+     * setLearningRate方法。
+     *      * @param learningRate double类型参数
+     */
     public void setLearningRate(double learningRate) {
         this.learningRate = learningRate;
     }
     
     /**
      * Gets the discount factor.
+     */
+    /**
+     * getGamma方法。
+     * @return double类型返回值
      */
     public double getGamma() {
         return gamma;
@@ -259,6 +313,10 @@ public class QLearning {
     /**
      * Gets the epsilon exploration rate.
      */
+    /**
+     * getEpsilon方法。
+     * @return double类型返回值
+     */
     public double getEpsilon() {
         return epsilon;
     }
@@ -266,12 +324,20 @@ public class QLearning {
     /**
      * Sets the epsilon exploration rate.
      */
+    /**
+     * setEpsilon方法。
+     *      * @param epsilon double类型参数
+     */
     public void setEpsilon(double epsilon) {
         this.epsilon = epsilon;
     }
     
     /**
      * Gets the number of episodes.
+     */
+    /**
+     * getnEpisodes方法。
+     * @return int类型返回值
      */
     public int getnEpisodes() {
         return nEpisodes;

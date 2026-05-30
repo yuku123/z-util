@@ -5,6 +5,9 @@ import java.util.List;
 /**
  * @author zifang
  */
+/**
+ * Const类。
+ */
 public class Const {
 
     interface EnumCollectors<T> {
@@ -42,6 +45,11 @@ public class Const {
         public static String CURLY_BRACE = "{}";
         public static String AT = "@";
         public static String DOLLAR = "$";
+    /**
+     * "方法。
+     *      * @param " ";类型参数
+     * @return static String LEFT_BRACKET =类型返回值
+     */
         public static String LEFT_BRACKET = "(";
         public static String RIGHT_BRACKET = ")";
     }
@@ -60,19 +68,37 @@ public class Const {
         OperateSystem UnKnown = new OperateSystem("UnKnown", "unKnown");
         OperateSystem LOCAL_OPERATE_SYSTEM = getOperateSystem(System.getProperty("os.name"));
 
+    /**
+     * OperateSystem方法。
+     *      * @param system String类型参数
+     * @param lowerSystem String类型参数
+     */
         public OperateSystem(String system, String lowerSystem) {
             this.system = system;
             this.lowerSystem = lowerSystem;
         }
 
+    /**
+     * getSystem方法。
+     * @return String类型返回值
+     */
         public String getSystem() {
             return system;
         }
 
+    /**
+     * getLowerSystem方法。
+     * @return String类型返回值
+     */
         public String getLowerSystem() {
             return lowerSystem;
         }
 
+    /**
+     * getOperateSystem方法。
+     *      * @param info String类型参数
+     * @return OperateSystem类型返回值
+     */
         public OperateSystem getOperateSystem(String info) {
             return getList().stream()
                     .filter(system -> info.toLowerCase().contains(system.getLowerSystem()))
@@ -81,11 +107,20 @@ public class Const {
         }
 
         @Override
+    /**
+     * getList方法。
+     * @return List<OperateSystem>类型返回值
+     */
         public List<OperateSystem> getList() {
             return null;
         }
 
         @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -95,16 +130,27 @@ public class Const {
         }
 
         @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
         public int hashCode() {
             return java.util.Objects.hash(system, lowerSystem);
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "OperateSystem{system=" + system + ", lowerSystem=" + lowerSystem + "}";
         }
     }
 
+/**
+ * TimeFormat类。
+ */
     public class TimeFormat{
         public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
         public static final String DATE_FORMAT = "yyyy-MM-dd";
@@ -122,21 +168,38 @@ public class Const {
         /** 汉字起始值 */
         int CHINESE_CHARACTER_START = 0x4e00;
 
+    /**
+     * getChineseCharacterLength方法。
+     * @return int类型返回值
+     */
         public int getChineseCharacterLength() {
             return CHINESE_CHARACTER_LENGTH;
         }
 
+    /**
+     * getChineseCharacterStart方法。
+     * @return int类型返回值
+     */
         public int getChineseCharacterStart() {
             return CHINESE_CHARACTER_START;
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "Statics{CHINESE_CHARACTER_LENGTH=" + CHINESE_CHARACTER_LENGTH +
                     ", CHINESE_CHARACTER_START=" + CHINESE_CHARACTER_START + "}";
         }
 
         @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -146,6 +209,10 @@ public class Const {
         }
 
         @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
         public int hashCode() {
             return java.util.Objects.hash(CHINESE_CHARACTER_LENGTH, CHINESE_CHARACTER_START);
         }
@@ -161,10 +228,17 @@ public class Const {
         public static final String GBK = "GBK";
         public static final String GB2312 = "GB2312";
 
+    /**
+     * Charset方法。
+     */
         public Charset() {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "Charset{US_ASCII=" + US_ASCII + ", ISO_8859_1=" + ISO_8859_1 +
                     ", UTF_8=" + UTF_8 + ", UTF_16BE=" + UTF_16BE + ", UTF_16LE=" + UTF_16LE +
@@ -172,6 +246,11 @@ public class Const {
         }
 
         @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -180,6 +259,10 @@ public class Const {
         }
 
         @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
         public int hashCode() {
             return 0;
         }
@@ -241,10 +324,17 @@ public class Const {
          */
         public static final String SYS_LINE_SEPARATOR = "line.separator";
 
+    /**
+     * JvmProperties方法。
+     */
         public JvmProperties() {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "JvmProperties{JVM_VERSION=" + JVM_VERSION + ", JVM_ENCODING=" + JVM_ENCODING +
                     ", JVM_TEMPDIR=" + JVM_TEMPDIR + ", HTTP_PROXY_HOST=" + HTTP_PROXY_HOST +
@@ -256,6 +346,11 @@ public class Const {
         }
 
         @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -264,6 +359,10 @@ public class Const {
         }
 
         @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
         public int hashCode() {
             return 0;
         }

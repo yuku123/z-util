@@ -11,6 +11,9 @@ import java.util.Map;
  *
  * @author zifang
  */
+/**
+ * Event类。
+ */
 public class Event {
 
     private final Object source;
@@ -24,6 +27,11 @@ public class Event {
      * @param source 事件源
      * @param type   事件类型
      */
+    /**
+     * Event方法。
+     *      * @param source Object类型参数
+     * @param type String类型参数
+     */
     public Event(Object source, String type) {
         this(source, type, new HashMap<>());
     }
@@ -34,6 +42,12 @@ public class Event {
      * @param source 事件源
      * @param type   事件类型
      * @param data   事件数据
+     */
+    /**
+     * Event方法。
+     *      * @param source Object类型参数
+     * @param type String类型参数
+     * @param data MapString,类型参数
      */
     public Event(Object source, String type, Map<String, Object> data) {
         this.source = source;
@@ -47,6 +61,10 @@ public class Event {
      *
      * @return 事件源
      */
+    /**
+     * getSource方法。
+     * @return Object类型返回值
+     */
     public Object getSource() {
         return source;
     }
@@ -55,6 +73,10 @@ public class Event {
      * 获取事件时间戳。
      *
      * @return 时间戳
+     */
+    /**
+     * getTimestamp方法。
+     * @return long类型返回值
      */
     public long getTimestamp() {
         return timestamp;
@@ -65,6 +87,10 @@ public class Event {
      *
      * @return 事件类型
      */
+    /**
+     * getType方法。
+     * @return String类型返回值
+     */
     public String getType() {
         return type;
     }
@@ -73,6 +99,10 @@ public class Event {
      * 获取事件数据。
      *
      * @return 不可修改的事件数据
+     */
+    /**
+     * getData方法。
+     * @return Map<String, Object>类型返回值
      */
     public Map<String, Object> getData() {
         return Collections.unmodifiableMap(data);
@@ -85,6 +115,12 @@ public class Event {
      * @param value 值
      * @return 当前事件
      */
+    /**
+     * addData方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     * @return Event类型返回值
+     */
     public Event addData(String key, Object value) {
         this.data.put(key, value);
         return this;
@@ -96,11 +132,20 @@ public class Event {
      * @param key 键
      * @return 值
      */
+    /**
+     * getData方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object getData(String key) {
         return data.get(key);
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "Event{" +
                 "source=" + source +

@@ -6,8 +6,16 @@ package com.zifang.util.core.lang.primitive;
  * @description: float util
  * @version: JDK 1.8
  */
+/**
+ * FloatUtil类。
+ */
 public class FloatUtil {
 
+    /**
+     * parseFloat方法。
+     *      * @param object Object类型参数
+     * @return static Float类型返回值
+     */
     public static Float parseFloat(Object object) {
         if (null == object) {
             return null;
@@ -15,6 +23,12 @@ public class FloatUtil {
         return Float.parseFloat(object.toString());
     }
 
+    /**
+     * parseFloatOrDefault方法。
+     *      * @param object Object类型参数
+     * @param defaultValue float类型参数
+     * @return static Float类型返回值
+     */
     public static Float parseFloatOrDefault(Object object, Float defaultValue) {
         if (null == object) {
             return defaultValue;

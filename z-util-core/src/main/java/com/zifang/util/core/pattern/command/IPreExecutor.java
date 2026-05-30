@@ -5,6 +5,9 @@ package com.zifang.util.core.pattern.command;
  *
  * @author zifang
  */
+/**
+ * IPreExecutor接口。
+ */
 public interface IPreExecutor {
 
     /**

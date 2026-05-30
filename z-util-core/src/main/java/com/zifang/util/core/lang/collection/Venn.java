@@ -7,11 +7,19 @@ import java.util.stream.Collectors;
 /**
  * 描述两个集合之间的内容关系
  */
+/**
+ * Venn类。
+ */
 public class Venn<E> {
 
     private final Collection<E> c1;
     private final Collection<E> c2;
 
+    /**
+     * Venn方法。
+     *      * @param c1 CollectionE类型参数
+     * @param c2 CollectionE类型参数
+     */
     public Venn(Collection<E> c1, Collection<E> c2) {
         this.c1 = c1;
         this.c2 = c2;
@@ -19,6 +27,10 @@ public class Venn<E> {
 
     /**
      * 并集 c1 U c2
+     */
+    /**
+     * union方法。
+     * @return Collection<E>类型返回值
      */
     public Collection<E> union() {
         Collection<E> c = new ArrayList<>();
@@ -29,12 +41,20 @@ public class Venn<E> {
         return c.stream().distinct().collect(Collectors.toList());
     }
 
+    /**
+     * unionCount方法。
+     * @return int类型返回值
+     */
     public Integer unionCount() {
         return union().size();
     }
 
     /**
      * 交集 c1 n c2
+     */
+    /**
+     * intersection方法。
+     * @return Collection<E>类型返回值
      */
     public Collection<E> intersection() {
         Collection<E> all = union();
@@ -50,6 +70,10 @@ public class Venn<E> {
     /**
      * 交集 c1 n ( c1 n c2 )
      */
+    /**
+     * intersectionLeft方法。
+     * @return Collection<E>类型返回值
+     */
     public Collection<E> intersectionLeft() {
         Collection<E> dc1 = c1.stream().distinct().collect(Collectors.toList());
         dc1.removeAll(intersection());
@@ -58,6 +82,10 @@ public class Venn<E> {
 
     /**
      * 交集 c2 n ( c1 n c2 )
+     */
+    /**
+     * intersectionRight方法。
+     * @return Collection<E>类型返回值
      */
     public Collection<E> intersectionRight() {
         Collection<E> dc2 = c2.stream().distinct().collect(Collectors.toList());
@@ -68,10 +96,17 @@ public class Venn<E> {
     /**
      * 交集 c1 n c2 后的集合大小
      */
+    /**
+     * intersectionCount方法。
+     * @return int类型返回值
+     */
     public Integer intersectionCount() {
         return intersection().size();
     }
 
+    /**
+     * dicript方法。
+     */
     public void dicript() {
 //        long left = 1;
 //        long

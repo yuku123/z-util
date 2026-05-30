@@ -13,17 +13,29 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * NavigateStep类。
+ */
 public class NavigateStep implements Step {
 
     public static final String NAME = "navigate";
     private String url;
 
     @Override
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return NAME;
     }
 
     @Override
+    /**
+     * setParameter方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     */
     public void setParameter(String key, Object value) {
         if ("url".equalsIgnoreCase(key)) {
             this.url = String.valueOf(value);
@@ -31,6 +43,11 @@ public class NavigateStep implements Step {
     }
 
     @Override
+    /**
+     * execute方法。
+     *      * @param ctx PipelineContext类型参数
+     * @return StepResult类型返回值
+     */
     public StepResult execute(PipelineContext ctx) {
         String targetUrl = url;
         if (targetUrl == null) {
@@ -66,6 +83,11 @@ public class NavigateStep implements Step {
         }
     }
 
+    /**
+     * getBrowserClient方法。
+     *      * @param ctx PipelineContext类型参数
+     * @return BrowserClient类型返回值
+     */
     protected BrowserClient getBrowserClient(PipelineContext ctx) {
         return (BrowserClient) ctx.getParameter("browserClient");
     }

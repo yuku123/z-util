@@ -18,6 +18,9 @@ import java.util.concurrent.CountDownLatch;
  * @see AbstractEngine
  * @see AbstractEngineService
  */
+/**
+ * ExecutableWorkflowNode类。
+ */
 public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycle {
 
     // 描述当前节点的状态
@@ -58,6 +61,9 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
     /**
      * 默认构造函数
      */
+    /**
+     * ExecutableWorkflowNode方法。
+     */
     public ExecutableWorkflowNode() {
     }
 
@@ -67,6 +73,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * @param workflowNode 工作流节点配置对象，从中复制节点相关属性
      */
     //初始化，将节点信息同步到可执行node内部
+    /**
+     * ExecutableWorkflowNode方法。
+     *      * @param workflowNode WorkflowNode类型参数
+     */
     public ExecutableWorkflowNode(WorkflowNode workflowNode) {
         super.setNodeId(workflowNode.getNodeId());
         super.setConnector(workflowNode.getConnector());
@@ -88,6 +98,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @return 节点状态，参考NodeLifeCycle接口定义的状态常量
      */
+    /**
+     * getStatus方法。
+     * @return String类型返回值
+     */
     public String getStatus() {
         return status;
     }
@@ -96,6 +110,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 设置节点状态
      *
      * @param status 节点状态，参考NodeLifeCycle接口定义的状态常量
+     */
+    /**
+     * setStatus方法。
+     *      * @param status String类型参数
      */
     public void setStatus(String status) {
         this.status = status;
@@ -106,6 +124,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @return 抽象执行引擎实例
      */
+    /**
+     * getAbstractEngine方法。
+     * @return AbstractEngine类型返回值
+     */
     public AbstractEngine getAbstractEngine() {
         return abstractEngine;
     }
@@ -114,6 +136,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 设置抽象执行引擎
      *
      * @param abstractEngine 抽象执行引擎实例
+     */
+    /**
+     * setAbstractEngine方法。
+     *      * @param abstractEngine AbstractEngine类型参数
      */
     public void setAbstractEngine(AbstractEngine abstractEngine) {
         this.abstractEngine = abstractEngine;
@@ -124,6 +150,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @return 抽象引擎服务实例
      */
+    /**
+     * getAbstractEngineService方法。
+     * @return AbstractEngineService类型返回值
+     */
     public AbstractEngineService getAbstractEngineService() {
         return abstractEngineService;
     }
@@ -132,6 +162,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 设置抽象引擎服务
      *
      * @param abstractEngineService 抽象引擎服务实例
+     */
+    /**
+     * setAbstractEngineService方法。
+     *      * @param abstractEngineService AbstractEngineService类型参数
      */
     public void setAbstractEngineService(AbstractEngineService abstractEngineService) {
         this.abstractEngineService = abstractEngineService;
@@ -142,6 +176,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @return CountDownLatch实例，用于控制前置节点的同步
      */
+    /**
+     * getCountDownLatch方法。
+     * @return CountDownLatch类型返回值
+     */
     public CountDownLatch getCountDownLatch() {
         return countDownLatch;
     }
@@ -150,6 +188,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 设置前置节点计数闩
      *
      * @param countDownLatch CountDownLatch实例，用于控制前置节点的同步
+     */
+    /**
+     * setCountDownLatch方法。
+     *      * @param countDownLatch CountDownLatch类型参数
      */
     public void setCountDownLatch(CountDownLatch countDownLatch) {
         this.countDownLatch = countDownLatch;
@@ -160,6 +202,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @return 后置节点CountDownLatch列表，用于通知后置节点
      */
+    /**
+     * getPostCountDownLatchList方法。
+     * @return List<CountDownLatch>类型返回值
+     */
     public List<CountDownLatch> getPostCountDownLatchList() {
         return postCountDownLatchList;
     }
@@ -168,6 +214,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 设置后置节点计数闩列表
      *
      * @param postCountDownLatchList 后置节点CountDownLatch列表
+     */
+    /**
+     * setPostCountDownLatchList方法。
+     *      * @param postCountDownLatchList ListCountDownLatch类型参数
      */
     public void setPostCountDownLatchList(List<CountDownLatch> postCountDownLatchList) {
         this.postCountDownLatchList = postCountDownLatchList;
@@ -178,6 +228,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @return 后置可执行工作流节点列表
      */
+    /**
+     * getPost方法。
+     * @return List<ExecutableWorkflowNode>类型返回值
+     */
     public List<ExecutableWorkflowNode> getPost() {
         return post;
     }
@@ -186,6 +240,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 设置后置可执行节点列表
      *
      * @param post 后置可执行工作流节点列表
+     */
+    /**
+     * setPost方法。
+     *      * @param post ListExecutableWorkflowNode类型参数
      */
     public void setPost(List<ExecutableWorkflowNode> post) {
         this.post = post;
@@ -196,6 +254,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @return 前置可执行工作流节点列表
      */
+    /**
+     * getPre方法。
+     * @return List<ExecutableWorkflowNode>类型返回值
+     */
     public List<ExecutableWorkflowNode> getPre() {
         return pre;
     }
@@ -204,6 +266,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 设置前置可执行节点列表
      *
      * @param pre 前置可执行工作流节点列表
+     */
+    /**
+     * setPre方法。
+     *      * @param pre ListExecutableWorkflowNode类型参数
      */
     public void setPre(List<ExecutableWorkflowNode> pre) {
         this.pre = pre;
@@ -214,6 +280,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @return 调用标志，0表示未被调用，1表示已被调用
      */
+    /**
+     * getIsCalled方法。
+     * @return int类型返回值
+     */
     public int getIsCalled() {
         return isCalled;
     }
@@ -222,6 +292,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 设置节点是否被调用标志
      *
      * @param isCalled 调用标志，0表示未被调用，1表示已被调用
+     */
+    /**
+     * setIsCalled方法。
+     *      * @param isCalled int类型参数
      */
     public void setIsCalled(int isCalled) {
         this.isCalled = isCalled;
@@ -234,6 +308,9 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 子类可重写此方法实现具体的前置处理逻辑
      */
     @Override
+    /**
+     * preExecute方法。
+     */
     public void preExecute() {
     }
 
@@ -242,6 +319,9 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 子类可重写此方法实现具体的后置处理逻辑
      */
     @Override
+    /**
+     * postExecute方法。
+     */
     public void postExecute() {
     }
 
@@ -250,6 +330,9 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 子类可重写此方法实现具体的初始化逻辑
      */
     @Override
+    /**
+     * init方法。
+     */
     public void init() {
     }
 
@@ -260,6 +343,9 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 默认为同步执行操作，内部调用阻塞执行方法
      */
     //开始执行
+    /**
+     * exec方法。
+     */
     public void exec() {
         //默认为同步执行操作
         blockExec();
@@ -314,6 +400,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @param executableWorkNode 待添加的后置可执行工作流节点
      */
+    /**
+     * putPost方法。
+     *      * @param executableWorkNode ExecutableWorkflowNode类型参数
+     */
     public void putPost(ExecutableWorkflowNode executableWorkNode) {
         if (!post.contains(executableWorkNode)) {
             post.add(executableWorkNode);
@@ -325,6 +415,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      *
      * @param executableWorkNode 待添加的前置可执行工作流节点
      */
+    /**
+     * putPre方法。
+     *      * @param executableWorkNode ExecutableWorkflowNode类型参数
+     */
     public void putPre(ExecutableWorkflowNode executableWorkNode) {
         if (!pre.contains(executableWorkNode)) {
             pre.add(executableWorkNode);
@@ -332,11 +426,20 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "ExecutableWorkflowNode{status=" + status + ", abstractEngine=" + abstractEngine + ", abstractEngineService=" + abstractEngineService + ", countDownLatch=" + countDownLatch + ", postCountDownLatchList=" + postCountDownLatchList + ", post=" + post + ", pre=" + pre + ", isCalled=" + isCalled + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -353,6 +456,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(super.hashCode(), status, abstractEngine, abstractEngineService, countDownLatch, postCountDownLatchList, post, pre, isCalled);
     }

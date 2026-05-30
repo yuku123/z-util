@@ -25,6 +25,9 @@ import java.lang.annotation.*;
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * Param注解。
+ */
 public @interface Param {
     /**
      * 指定参数的名称

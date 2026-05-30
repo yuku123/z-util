@@ -10,6 +10,9 @@ import java.util.Random;
  * Uses bootstrap sampling and random feature selection
  * Aggregates predictions via majority vote
  */
+/**
+ * RandomForest类。
+ */
 public class RandomForest {
     private int nEstimators;
     private int maxDepth;
@@ -18,6 +21,13 @@ public class RandomForest {
     private DecisionTree[] trees;
     private Random random;
 
+    /**
+     * RandomForest方法。
+     *      * @param nEstimators int类型参数
+     * @param maxDepth int类型参数
+     * @param minSamplesSplit int类型参数
+     * @param maxFeatures int类型参数
+     */
     public RandomForest(int nEstimators, int maxDepth, int minSamplesSplit, int maxFeatures) {
         this.nEstimators = nEstimators;
         this.maxDepth = maxDepth;
@@ -27,6 +37,11 @@ public class RandomForest {
         this.random = new Random();
     }
 
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
+     */
     public void fit(NdArray X, int[] y) {
         int nSamples = X.getShape().get(0);
         int nFeatures = X.getShape().get(1);
@@ -66,6 +81,11 @@ public class RandomForest {
         }
     }
 
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         int nSamples = X.getShape().get(0);
         int[][] predictions = new int[nEstimators][nSamples];
@@ -97,6 +117,11 @@ public class RandomForest {
         return finalPredictions;
     }
 
+    /**
+     * predictProba方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray predictProba(NdArray X) {
         int nSamples = X.getShape().get(0);
         int nClasses = trees[0].getNClasses();

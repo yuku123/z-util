@@ -10,6 +10,9 @@ import java.util.List;
  *
  * @author zifang
  */
+/**
+ * AnnotationInfo类。
+ */
 public class AnnotationInfo {
 
     /**
@@ -22,34 +25,66 @@ public class AnnotationInfo {
      */
     private List<AnnotationMember> members = new ArrayList<>();
 
+    /**
+     * AnnotationInfo方法。
+     */
     public AnnotationInfo() {
     }
 
+    /**
+     * AnnotationInfo方法。
+     *      * @param type String类型参数
+     */
     public AnnotationInfo(String type) {
         this.type = type;
     }
 
+    /**
+     * getType方法。
+     * @return String类型返回值
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * setType方法。
+     *      * @param type String类型参数
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * getMembers方法。
+     * @return List<AnnotationMember>类型返回值
+     */
     public List<AnnotationMember> getMembers() {
         return members;
     }
 
+    /**
+     * setMembers方法。
+     *      * @param members ListAnnotationMember类型参数
+     */
     public void setMembers(List<AnnotationMember> members) {
         this.members = members;
     }
 
+    /**
+     * addMember方法。
+     *      * @param name String类型参数
+     * @param value String类型参数
+     */
     public void addMember(String name, String value) {
         members.add(new AnnotationMember(name, value));
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         if (members.isEmpty()) {
             return "@" + type;
@@ -75,26 +110,50 @@ public class AnnotationInfo {
         private String name;
         private String value;
 
+    /**
+     * AnnotationMember方法。
+     */
         public AnnotationMember() {
         }
 
+    /**
+     * AnnotationMember方法。
+     *      * @param name String类型参数
+     * @param value String类型参数
+     */
         public AnnotationMember(String name, String value) {
             this.name = name;
             this.value = value;
         }
 
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
         public String getName() {
             return name;
         }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
         public void setName(String name) {
             this.name = name;
         }
 
+    /**
+     * getValue方法。
+     * @return String类型返回值
+     */
         public String getValue() {
             return value;
         }
 
+    /**
+     * setValue方法。
+     *      * @param value String类型参数
+     */
         public void setValue(String value) {
             this.value = value;
         }

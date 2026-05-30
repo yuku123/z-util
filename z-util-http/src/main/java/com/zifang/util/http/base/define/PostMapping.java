@@ -16,6 +16,9 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @RequestMapping(method = RequestMethod.POST)
+/**
+ * PostMapping注解。
+ */
 public @interface PostMapping {
 
     /**

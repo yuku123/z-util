@@ -7,6 +7,9 @@ import com.zifang.util.pandas.Series;
  * 对标 pandas.Series.ewm
  * 对每个值赋予指数递减的权重，越近的值权重越高
  */
+/**
+ * EWM类。
+ */
 public class EWM {
 
     private final Series series;
@@ -18,10 +21,26 @@ public class EWM {
     private final boolean ignoreNaN;   // 是否忽略 NaN
     private final int minPeriods;      // 最小周期数
 
+    /**
+     * EWM方法。
+     *      * @param series Series类型参数
+     * @param alpha double类型参数
+     */
     public EWM(Series series, double alpha) {
         this(series, alpha, -1, -1, -1, true, false, 0);
     }
 
+    /**
+     * EWM方法。
+     *      * @param series Series类型参数
+     * @param alpha double类型参数
+     * @param com double类型参数
+     * @param span double类型参数
+     * @param halflife double类型参数
+     * @param adjust boolean类型参数
+     * @param ignoreNaN boolean类型参数
+     * @param minPeriods int类型参数
+     */
     public EWM(Series series, double alpha, double com, double span, double halflife,
                boolean adjust, boolean ignoreNaN, int minPeriods) {
         this.series = series;
@@ -37,6 +56,12 @@ public class EWM {
     /**
      * 使用 COM (质心) 创建 EWM
      */
+    /**
+     * com方法。
+     *      * @param series Series类型参数
+     * @param com double类型参数
+     * @return static EWM类型返回值
+     */
     public static EWM com(Series series, double com) {
         double alpha = 1 / (1 + com);
         return new EWM(series, alpha, com, -1, -1, true, false, 0);
@@ -45,6 +70,12 @@ public class EWM {
     /**
      * 使用跨度创建 EWM
      */
+    /**
+     * span方法。
+     *      * @param series Series类型参数
+     * @param span double类型参数
+     * @return static EWM类型返回值
+     */
     public static EWM span(Series series, double span) {
         double alpha = 2 / (span + 1);
         return new EWM(series, alpha, -1, span, -1, true, false, 0);
@@ -52,6 +83,12 @@ public class EWM {
 
     /**
      * 使用半衰期创建 EWM
+     */
+    /**
+     * halflife方法。
+     *      * @param series Series类型参数
+     * @param halflife double类型参数
+     * @return static EWM类型返回值
      */
     public static EWM halflife(Series series, double halflife) {
         double alpha = 1 - Math.exp(-Math.log(2) / halflife);
@@ -62,6 +99,10 @@ public class EWM {
 
     /**
      * 计算指数加权移动平均 (EWMA)
+     */
+    /**
+     * mean方法。
+     * @return Series类型返回值
      */
     public Series mean() {
         double[] data = series.toArray();
@@ -109,6 +150,10 @@ public class EWM {
 
     /**
      * 计算指数加权移动方差
+     */
+    /**
+     * var方法。
+     * @return Series类型返回值
      */
     public Series var() {
         double[] data = series.toArray();
@@ -162,6 +207,10 @@ public class EWM {
     /**
      * 计算指数加权移动标准差
      */
+    /**
+     * std方法。
+     * @return Series类型返回值
+     */
     public Series std() {
         Series variance = var();
         return variance.apply(x -> Math.sqrt(x));
@@ -169,6 +218,10 @@ public class EWM {
 
     /**
      * 计算指数加权移动和
+     */
+    /**
+     * sum方法。
+     * @return Series类型返回值
      */
     public Series sum() {
         double[] data = series.toArray();

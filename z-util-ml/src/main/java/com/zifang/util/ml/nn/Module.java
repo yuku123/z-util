@@ -14,10 +14,19 @@ import java.util.List;
 public abstract class Module {
     
     protected boolean training = true;
+    /**
+     * ArrayList<>方法。
+     * @return List<NdArray> parameters = new类型返回值
+     */
     protected List<NdArray> parameters = new ArrayList<>();
     
     /**
      * Forward pass - computes output from input
+     */
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return abstract NdArray类型返回值
      */
     public abstract NdArray forward(NdArray input);
     
@@ -26,10 +35,18 @@ public abstract class Module {
      * @param gradOutput Gradient from upstream (dL/doutput)
      * @return Gradient with respect to input (dL/dinput)
      */
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return abstract NdArray类型返回值
+     */
     public abstract NdArray backward(NdArray gradOutput);
     
     /**
      * Sets the module to training mode
+     */
+    /**
+     * train方法。
      */
     public void train() {
         this.training = true;
@@ -38,12 +55,19 @@ public abstract class Module {
     /**
      * Sets the module to evaluation mode
      */
+    /**
+     * eval方法。
+     */
     public void eval() {
         this.training = false;
     }
     
     /**
      * Returns whether the module is in training mode
+     */
+    /**
+     * isTraining方法。
+     * @return boolean类型返回值
      */
     public boolean isTraining() {
         return training;
@@ -52,6 +76,10 @@ public abstract class Module {
     /**
      * Returns all parameters of this module
      */
+    /**
+     * parameters方法。
+     * @return List<NdArray>类型返回值
+     */
     public List<NdArray> parameters() {
         return parameters;
     }
@@ -59,12 +87,22 @@ public abstract class Module {
     /**
      * Registers a parameter tensor
      */
+    /**
+     * registerParameter方法。
+     *      * @param name String类型参数
+     * @param param NdArray类型参数
+     */
     protected void registerParameter(String name, NdArray param) {
         parameters.add(param);
     }
     
     /**
      * Creates a zero-initialized parameter tensor with given shape
+     */
+    /**
+     * createParameter方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     protected NdArray createParameter(int... shape) {
         NdArray param = NdArray.zeros(new Shape(shape), DType.FLOAT32);
@@ -74,6 +112,13 @@ public abstract class Module {
     
     /**
      * Applies Xavier/Glorot uniform initialization
+     */
+    /**
+     * initXavierUniform方法。
+     *      * @param tensor NdArray类型参数
+     * @param fanIn int类型参数
+     * @param fanOut int类型参数
+     * @return NdArray类型返回值
      */
     protected NdArray initXavierUniform(NdArray tensor, int fanIn, int fanOut) {
         double limit = Math.sqrt(6.0 / (fanIn + fanOut));
@@ -88,6 +133,13 @@ public abstract class Module {
     
     /**
      * Applies Xavier/Glorot normal initialization
+     */
+    /**
+     * initXavierNormal方法。
+     *      * @param tensor NdArray类型参数
+     * @param fanIn int类型参数
+     * @param fanOut int类型参数
+     * @return NdArray类型返回值
      */
     protected NdArray initXavierNormal(NdArray tensor, int fanIn, int fanOut) {
         double std = Math.sqrt(2.0 / (fanIn + fanOut));
@@ -106,6 +158,12 @@ public abstract class Module {
     /**
      * Applies Kaiming/He normal initialization
      */
+    /**
+     * initKaimingNormal方法。
+     *      * @param tensor NdArray类型参数
+     * @param fanIn int类型参数
+     * @return NdArray类型返回值
+     */
     protected NdArray initKaimingNormal(NdArray tensor, int fanIn) {
         double std = Math.sqrt(2.0 / fanIn);
         Object data = tensor.getData();
@@ -121,6 +179,9 @@ public abstract class Module {
     
     /**
      * Resets all parameters to zero
+     */
+    /**
+     * zeroGrad方法。
      */
     public void zeroGrad() {
         for (NdArray param : parameters) {

@@ -42,6 +42,9 @@ import java.util.Map;
  * @param <V> the type of mapped values
  * @version $Id$
  */
+/**
+ * Context接口。
+ */
 public interface Context<K, V> extends Map<K, V> {
 
     /**

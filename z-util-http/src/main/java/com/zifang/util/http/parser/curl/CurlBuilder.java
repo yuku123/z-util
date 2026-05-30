@@ -13,6 +13,9 @@ import java.util.Base64;
  * cURL 命令构建器
  * 将 HttpRequestDefinition 转换为 cURL 命令文本
  */
+/**
+ * CurlBuilder类。
+ */
 public class CurlBuilder {
 
     private static final String INDENT = "  ";
@@ -22,6 +25,11 @@ public class CurlBuilder {
      *
      * @param definition HTTP 请求定义
      * @return cURL 命令文本
+     */
+    /**
+     * build方法。
+     *      * @param definition HttpRequestDefinition类型参数
+     * @return static String类型返回值
      */
     public static String build(HttpRequestDefinition definition) {
         if (definition == null) {
@@ -68,6 +76,11 @@ public class CurlBuilder {
      *
      * @param definition HTTP 请求定义
      * @return 格式化的 cURL 命令文本
+     */
+    /**
+     * buildPretty方法。
+     *      * @param definition HttpRequestDefinition类型参数
+     * @return static String类型返回值
      */
     public static String buildPretty(HttpRequestDefinition definition) {
         if (definition == null) {

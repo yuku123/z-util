@@ -17,6 +17,9 @@ import java.util.concurrent.*;
  * @description: 线程工具
  * @version: JDK 1.8
  */
+/**
+ * ThreadUtil类。
+ */
 public class ThreadUtil {
 
     private static final int THREAD_MULTIPLE = 2;
@@ -38,6 +41,10 @@ public class ThreadUtil {
      * @return: int thread count
      * @return: int 线程数
      */
+    /**
+     * getSuitableThreadCount方法。
+     * @return static int类型返回值
+     */
     public static int getSuitableThreadCount() {
         return getSuitableThreadCount(THREAD_MULTIPLE);
     }
@@ -50,6 +57,12 @@ public class ThreadUtil {
      * @params: [threadMultiple, ioIntensive] 线程并发度，io密集型
      * @return: int thread count
      * @return: int 线程数
+     */
+    /**
+     * getSuitableThreadCount方法。
+     *      * @param threadMultiple int类型参数
+     * @param ioIntensive boolean类型参数
+     * @return static int类型返回值
      */
     public static int getSuitableThreadCount(int threadMultiple, boolean ioIntensive) {
         final int coreCount = Runtime.getRuntime().availableProcessors();
@@ -66,6 +79,10 @@ public class ThreadUtil {
         return workerCount;
     }
 
+    /**
+     * getLargeThreadCount方法。
+     * @return static int类型返回值
+     */
     public static int getLargeThreadCount() {
         final int coreCount = Runtime.getRuntime().availableProcessors();
         if (coreCount <= AVAILABLE_PROCESSORS_LITTLE_UPPER) {
@@ -83,6 +100,11 @@ public class ThreadUtil {
      * @params: [threadMultiple] 线程并发度
      * @return: int out 出参
      */
+    /**
+     * getSuitableThreadCount方法。
+     *      * @param threadMultiple int类型参数
+     * @return static int类型返回值
+     */
     public static int getSuitableThreadCount(int threadMultiple) {
         return getSuitableThreadCount(threadMultiple, true);
     }
@@ -96,6 +118,11 @@ public class ThreadUtil {
      * @params: [ioIntensive] 是否io密集型
      * @return: int out 出参
      */
+    /**
+     * getSuitableThreadCount方法。
+     *      * @param ioIntensive boolean类型参数
+     * @return static int类型返回值
+     */
     public static int getSuitableThreadCount(boolean ioIntensive) {
         return getSuitableThreadCount(THREAD_MULTIPLE, ioIntensive);
     }
@@ -107,6 +134,11 @@ public class ThreadUtil {
      * @time: 2022-12-28 20:03:06
      * @params: [resourceName] 资源名
      * @return: java.io.InputStream 资源流
+     */
+    /**
+     * getResourceAsStream方法。
+     *      * @param resourceName String类型参数
+     * @return static InputStream类型返回值
      */
     public static InputStream getResourceAsStream(String resourceName) {
         return Thread.currentThread().getContextClassLoader().getResourceAsStream(resourceName);
@@ -120,10 +152,20 @@ public class ThreadUtil {
      * @params: [resourceName] 资源名
      * @return: java.net.URL 资源定位符
      */
+    /**
+     * getResource方法。
+     *      * @param resourceName String类型参数
+     * @return static URL类型返回值
+     */
     public static URL getResource(String resourceName) {
         return Thread.currentThread().getContextClassLoader().getResource(resourceName);
     }
 
+    /**
+     * newSingleExecutor方法。
+     *      * @param threadFactory ThreadFactory类型参数
+     * @return static Executor类型返回值
+     */
     public static Executor newSingleExecutor(ThreadFactory threadFactory) {
         return new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<>(), threadFactory);
@@ -136,6 +178,10 @@ public class ThreadUtil {
      * @time: 2022-10-11 11:22:45
      * @params: []
      * @return: java.util.Map<java.lang.ThreadLocal < ?>,java.lang.Object>
+     */
+    /**
+     * getAllThreadLocalMap方法。
+     * @return static Map<ThreadLocal<?>, Object>类型返回值
      */
     public static Map<ThreadLocal<?>, Object> getAllThreadLocalMap() {
         Map<ThreadLocal<?>, Object> result = getThreadLocalMap();
@@ -151,6 +197,10 @@ public class ThreadUtil {
      * @params: []
      * @return: java.util.Map<java.lang.ThreadLocal < ?>,java.lang.Object>
      */
+    /**
+     * getThreadLocalMap方法。
+     * @return static Map<ThreadLocal<?>, Object>类型返回值
+     */
     public static Map<ThreadLocal<?>, Object> getThreadLocalMap() {
         return getThreadLocalMap(false);
     }
@@ -162,6 +212,10 @@ public class ThreadUtil {
      * @time: 2022-10-11 11:22:45
      * @params: []
      * @return: java.util.Map<java.lang.ThreadLocal < ?>,java.lang.Object>
+     */
+    /**
+     * getInheritableThreadLocalsMap方法。
+     * @return static Map<ThreadLocal<?>, Object>类型返回值
      */
     public static Map<ThreadLocal<?>, Object> getInheritableThreadLocalsMap() {
         return getThreadLocalMap(true);
@@ -175,6 +229,11 @@ public class ThreadUtil {
      * @params: [inheritable] 是否为inheritable
      * @return: java.util.Map<java.lang.ThreadLocal < ?>,java.lang.Object>
      */
+    /**
+     * getThreadLocalMap方法。
+     *      * @param inheritable boolean类型参数
+     * @return static Map<ThreadLocal<?>, Object>类型返回值
+     */
     public static Map<ThreadLocal<?>, Object> getThreadLocalMap(boolean inheritable) {
         return getThreadLocalMap(Thread.currentThread(), inheritable);
     }
@@ -186,6 +245,12 @@ public class ThreadUtil {
      * @time: 2022-10-11 11:22:45
      * @params: [thread, inheritable] 线程, 是否为inheritable
      * @return: java.util.Map<java.lang.ThreadLocal < ?>,java.lang.Object>
+     */
+    /**
+     * getThreadLocalMap方法。
+     *      * @param thread Thread类型参数
+     * @param inheritable boolean类型参数
+     * @return static Map<ThreadLocal<?>, Object>类型返回值
      */
     public static Map<ThreadLocal<?>, Object> getThreadLocalMap(Thread thread, boolean inheritable) {
         Map<ThreadLocal<?>, Object> threadLocalMap = MapUtil.newHashMap();
@@ -230,12 +295,28 @@ public class ThreadUtil {
     }
 
 
+    /**
+     * getExecutorService方法。
+     *      * @param threadNameFormat String类型参数
+     * @param workerNum int类型参数
+     * @param taskSize int类型参数
+     * @param handler RejectedExecutionHandler类型参数
+     * @return static ExecutorService类型返回值
+     */
     public static ExecutorService getExecutorService(String threadNameFormat, Integer workerNum,
                                                      Integer taskSize, RejectedExecutionHandler handler) {
         return getExecutorService(threadNameFormat, workerNum, taskSize, handler,
                 ThreadUtil::getSuitableThreadCount);
     }
 
+    /**
+     * getLargeExecutorService方法。
+     *      * @param threadNameFormat String类型参数
+     * @param workerNum int类型参数
+     * @param taskSize int类型参数
+     * @param handler RejectedExecutionHandler类型参数
+     * @return static ExecutorService类型返回值
+     */
     public static ExecutorService getLargeExecutorService(String threadNameFormat, Integer workerNum,
                                                           Integer taskSize, RejectedExecutionHandler handler) {
         return getExecutorService(threadNameFormat, workerNum, taskSize, handler,

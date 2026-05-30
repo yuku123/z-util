@@ -36,6 +36,9 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * @see Sequence
  */
+/**
+ * SnowflakeSequence类。
+ */
 public class SnowflakeSequence implements Sequence {
 
     private static final Logger log = LoggerFactory.getLogger(SnowflakeSequence.class);
@@ -69,6 +72,10 @@ public class SnowflakeSequence implements Sequence {
      *
      * @param nodeId 节点号（0 ~ 1023），必须全局唯一
      */
+    /**
+     * SnowflakeSequence方法。
+     *      * @param nodeId long类型参数
+     */
     public SnowflakeSequence(long nodeId) {
         this(nodeId, DEFAULT_EPOCH);
     }
@@ -78,6 +85,11 @@ public class SnowflakeSequence implements Sequence {
      *
      * @param nodeId 节点号（0 ~ 1023）
      * @param epoch  起始时间戳（毫秒），通常设为服务上线日期
+     */
+    /**
+     * SnowflakeSequence方法。
+     *      * @param nodeId long类型参数
+     * @param epoch long类型参数
      */
     public SnowflakeSequence(long nodeId, long epoch) {
         if (nodeId < 0 || nodeId > MAX_NODE_ID) {
@@ -96,6 +108,10 @@ public class SnowflakeSequence implements Sequence {
      * 生成下一个唯一 ID
      */
     @Override
+    /**
+     * next方法。
+     * @return long类型返回值
+     */
     public long next() {
         long ts = currentTimestamp();
         long seq;
@@ -129,6 +145,11 @@ public class SnowflakeSequence implements Sequence {
     }
 
     @Override
+    /**
+     * next方法。
+     *      * @param count int类型参数
+     * @return long[]类型返回值
+     */
     public long[] next(int count) {
         if (count <= 0) {
             throw new IllegalArgumentException("count 必须大于 0");
@@ -168,6 +189,11 @@ public class SnowflakeSequence implements Sequence {
     /**
      * 解析 ID 组成部分
      */
+    /**
+     * parse方法。
+     *      * @param id long类型参数
+     * @return String类型返回值
+     */
     public String parse(long id) {
         long ts = ((id >> TIMESTAMP_SHIFT) & ~(-1L << 41)) + epoch;
         long nid = (id >> NODE_ID_SHIFT) & MAX_NODE_ID;
@@ -178,27 +204,54 @@ public class SnowflakeSequence implements Sequence {
         return String.format("id=%d, datetime=%s, nodeId=%d, seq=%d", id, datetime, nid, seq);
     }
 
+    /**
+     * getNodeId方法。
+     * @return long类型返回值
+     */
     public long getNodeId() {
         return nodeId;
     }
 
+    /**
+     * getTotalGenerated方法。
+     * @return long类型返回值
+     */
     public long getTotalGenerated() {
         return totalGenerated.get();
     }
 
+    /**
+     * getTimestampOf方法。
+     *      * @param id long类型参数
+     * @return long类型返回值
+     */
     public long getTimestampOf(long id) {
         return ((id >> TIMESTAMP_SHIFT) & ~(-1L << 41)) + epoch;
     }
 
+    /**
+     * getNodeIdOf方法。
+     *      * @param id long类型参数
+     * @return long类型返回值
+     */
     public long getNodeIdOf(long id) {
         return (id >> NODE_ID_SHIFT) & MAX_NODE_ID;
     }
 
+    /**
+     * getSeqOf方法。
+     *      * @param id long类型参数
+     * @return long类型返回值
+     */
     public long getSeqOf(long id) {
         return id & MAX_SEQ_PER_MS;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return String.format("SnowflakeSequence[nodeId=%d, epoch=%d, totalGenerated=%d]",
                 nodeId, epoch, totalGenerated.get());

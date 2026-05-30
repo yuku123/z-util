@@ -5,6 +5,9 @@ package com.zifang.util.core.pattern.command;
  *
  * @author zifang
  */
+/**
+ * IPostExecutor接口。
+ */
 public interface IPostExecutor {
 
     /**

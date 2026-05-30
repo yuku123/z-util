@@ -16,6 +16,10 @@ public final class MonitorConstant {
     /**
      * 初始状态，可将各个组件的初始状态值设置成此对象。
      */
+    /**
+     * Object方法。
+     * @return static final Object INIT_STATUS = new类型返回值
+     */
     public static final Object INIT_STATUS = new Object();
 
     /**

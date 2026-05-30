@@ -17,6 +17,9 @@ import java.util.List;
  *
  * @author zifang
  */
+/**
+ * RuntimeMXBeanDemo类。
+ */
 public class RuntimeMXBeanDemo {
 
 
@@ -33,6 +36,10 @@ public class RuntimeMXBeanDemo {
      * </ul>
      *
      * @return 远程JVM的RuntimeMXBean实例，连接失败返回null
+     */
+    /**
+     * getRemoteRuntimeMXBean方法。
+     * @return static RuntimeMXBean类型返回值
      */
     public static RuntimeMXBean getRemoteRuntimeMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -61,6 +68,10 @@ public class RuntimeMXBeanDemo {
      *
      * @return 当前JVM的RuntimeMXBean实例
      */
+    /**
+     * getLocalRuntimeMXBean方法。
+     * @return static RuntimeMXBean类型返回值
+     */
     public static RuntimeMXBean getLocalRuntimeMXBean() {
         return ManagementFactory.getRuntimeMXBean();
     }
@@ -69,6 +80,11 @@ public class RuntimeMXBeanDemo {
      * 主方法，演示获取JVM运行时参数信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) {
 //		RuntimeMXBean runtimeMXBean = getRemoteRuntimeMXBean();

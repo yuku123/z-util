@@ -10,15 +10,25 @@ import com.zifang.util.numpy.Shape;
  * Approximation: 0.5 * x * (1 + tanh(sqrt(2/pi) * (x + 0.044715 * x^3)))
  * f'(x) = Phi(x) + x * phi(x) where phi is the PDF of standard normal
  */
+/**
+ * GELU类。
+ */
 public class GELU extends com.zifang.util.ml.nn.Module {
     
     private final boolean approximate;
     private NdArray savedInput;
     
+    /**
+     * GELU方法。
+     */
     public GELU() {
         this(true);
     }
     
+    /**
+     * GELU方法。
+     *      * @param approximate boolean类型参数
+     */
     public GELU(boolean approximate) {
         this.approximate = approximate;
     }
@@ -43,6 +53,11 @@ public class GELU extends com.zifang.util.ml.nn.Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         savedInput = input.copy();
         
@@ -76,6 +91,11 @@ public class GELU extends com.zifang.util.ml.nn.Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         NdArray gradInput = NdArray.zeros(gradOutput.getShape(), DType.FLOAT32);
         Object gInData = gradInput.getData();
@@ -119,5 +139,9 @@ public class GELU extends com.zifang.util.ml.nn.Module {
         return gradInput;
     }
     
+    /**
+     * isApproximate方法。
+     * @return boolean类型返回值
+     */
     public boolean isApproximate() { return approximate; }
 }

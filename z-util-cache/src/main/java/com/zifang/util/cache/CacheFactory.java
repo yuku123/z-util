@@ -4,6 +4,9 @@ package com.zifang.util.cache;
  * Factory interface for creating Cache instances.
  * Implementations provide different cache types.
  */
+/**
+ * CacheFactory接口。
+ */
 public interface CacheFactory {
 
     /**

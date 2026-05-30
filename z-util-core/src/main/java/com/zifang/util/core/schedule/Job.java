@@ -20,6 +20,9 @@ import org.quartz.JobExecutionException;
  * @see StatefulJob
  * @see JobBuilder
  */
+/**
+ * Job接口。
+ */
 public interface Job {
 
     /**

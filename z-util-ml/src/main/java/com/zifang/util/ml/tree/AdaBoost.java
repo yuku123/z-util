@@ -11,6 +11,9 @@ import java.util.Random;
  * Reweights samples at each round based on misclassification
  * Final prediction via weighted majority vote
  */
+/**
+ * AdaBoost类。
+ */
 public class AdaBoost {
     private int nEstimators;
     private double learningRate;
@@ -28,11 +31,20 @@ public class AdaBoost {
         public int[] predictions;
         public int nClasses;
 
+    /**
+     * DecisionStump方法。
+     *      * @param nClasses int类型参数
+     */
         public DecisionStump(int nClasses) {
             this.nClasses = nClasses;
             this.predictions = new int[2];  // Prediction for left and right
         }
 
+    /**
+     * predict方法。
+     *      * @param x double[]类型参数
+     * @return int类型返回值
+     */
         public int predict(double[] x) {
             if (x[featureIndex] <= threshold) {
                 return predictions[0];
@@ -41,6 +53,11 @@ public class AdaBoost {
             }
         }
 
+    /**
+     * predictIndex方法。
+     *      * @param x double[]类型参数
+     * @return int类型返回值
+     */
         public int predictIndex(double[] x) {
             if (x[featureIndex] <= threshold) {
                 return 0;
@@ -50,12 +67,22 @@ public class AdaBoost {
         }
     }
 
+    /**
+     * AdaBoost方法。
+     *      * @param nEstimators int类型参数
+     * @param learningRate double类型参数
+     */
     public AdaBoost(int nEstimators, double learningRate) {
         this.nEstimators = nEstimators;
         this.learningRate = learningRate;
         this.random = new Random();
     }
 
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
+     */
     public void fit(NdArray X, int[] y) {
         int nSamples = X.getShape().get(0);
         int nFeatures = X.getShape().get(1);
@@ -108,6 +135,11 @@ public class AdaBoost {
         }
     }
 
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         int nSamples = Xdata.length;
@@ -119,6 +151,11 @@ public class AdaBoost {
         return predictions;
     }
 
+    /**
+     * predictProba方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray predictProba(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         int nSamples = Xdata.length;

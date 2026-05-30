@@ -5,6 +5,9 @@ package com.zifang.util.core.pattern.command;
  *
  * @author zifang
  */
+/**
+ * IReceiver接口。
+ */
 public interface IReceiver {
 
     /**

@@ -16,12 +16,23 @@ public final class PropertiesUtil {
     /**
      * 从系统属性文件中获取相应的值
      */
+    /**
+     * key方法。
+     *      * @param key String类型参数
+     * @return static String类型返回值
+     */
     public static String key(String key) {
         return System.getProperty(key);
     }
 
     /**
      * 根据Key读取Value
+     */
+    /**
+     * getValueByKey方法。
+     *      * @param filePath String类型参数
+     * @param key String类型参数
+     * @return static String类型返回值
      */
     public static String getValueByKey(String filePath, String key) {
         Properties pps = new Properties();
@@ -49,6 +60,11 @@ public final class PropertiesUtil {
 //        }
 //    }
 
+    /**
+     * properties方法。
+     *      * @param in InputStream类型参数
+     * @return static Map<String, String>类型返回值
+     */
     public static Map<String, String> properties(InputStream in) {
         Map<String, String> map = new HashMap<>();
         Properties pps = new Properties();
@@ -69,6 +85,11 @@ public final class PropertiesUtil {
     /**
      * 读取Properties的全部信息
      */
+    /**
+     * GetAllProperties方法。
+     *      * @param filePath String类型参数
+     * @return static Map<String, String>类型返回值
+     */
     public static Map<String, String> GetAllProperties(String filePath) throws IOException {
         Map<String, String> map = new HashMap<>();
         Properties pps = new Properties();
@@ -82,6 +103,13 @@ public final class PropertiesUtil {
 
     /**
      * 写入Properties信息
+     */
+    /**
+     * WriteProperties方法。
+     *      * @param filePath String类型参数
+     * @param pKey String类型参数
+     * @param pValue String类型参数
+     * @return static void类型返回值
      */
     public static void WriteProperties(String filePath, String pKey, String pValue) throws IOException {
         Properties props = new Properties();

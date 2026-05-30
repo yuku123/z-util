@@ -19,6 +19,12 @@ public abstract class ProxyFactory implements Serializable {
      * @param aspect 切面实现
      * @return 代理对象
      */
+    /**
+     * proxy方法。
+     *      * @param target T类型参数
+     * @param aspect Aspect类型参数
+     * @return abstract <T> T类型返回值
+     */
     public abstract <T> T proxy(T target, Aspect aspect);
 
     /**
@@ -28,6 +34,12 @@ public abstract class ProxyFactory implements Serializable {
      * @param target      目标对象
      * @param aspectClass 切面对象类
      * @return 代理对象
+     */
+    /**
+     * createProxy方法。
+     *      * @param target T类型参数
+     * @param aspectClass Class?类型参数
+     * @return static <T> T类型返回值
      */
     public static <T> T createProxy(T target, Class<? extends Aspect> aspectClass) {
         try {
@@ -46,6 +58,12 @@ public abstract class ProxyFactory implements Serializable {
      * @param aspect 切面实现
      * @return 代理对象
      */
+    /**
+     * createProxy方法。
+     *      * @param target T类型参数
+     * @param aspect Aspect类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T createProxy(T target, Aspect aspect) {
         return create().proxy(target, aspect);
     }
@@ -54,6 +72,10 @@ public abstract class ProxyFactory implements Serializable {
      * 根据用户引入Cglib与否创建代理工厂
      *
      * @return 代理工厂
+     */
+    /**
+     * create方法。
+     * @return static ProxyFactory类型返回值
      */
     public static ProxyFactory create() {
         try {

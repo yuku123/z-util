@@ -14,6 +14,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * ChromeDriverHolder类。
+ */
 public class ChromeDriverHolder {
 
     private static WebDriver driver;
@@ -24,6 +27,10 @@ public class ChromeDriverHolder {
     /**
      * Get the singleton WebDriver instance.
      * Automatically downloads matching ChromeDriver if needed.
+     */
+    /**
+     * getDriver方法。
+     * @return static synchronized WebDriver类型返回值
      */
     public static synchronized WebDriver getDriver() {
         if (driver == null) {
@@ -40,6 +47,10 @@ public class ChromeDriverHolder {
 
     /**
      * Close and quit the driver.
+     */
+    /**
+     * quit方法。
+     * @return static synchronized void类型返回值
      */
     public static synchronized void quit() {
         if (driver != null) {

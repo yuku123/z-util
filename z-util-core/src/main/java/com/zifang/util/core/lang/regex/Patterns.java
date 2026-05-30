@@ -10,11 +10,24 @@ import java.util.regex.Pattern;
  * @author zifang
  * @see Pattern
  */
+/**
+ * Patterns类。
+ */
 public class Patterns {
 
     public static String FORMAT_SPECIFIER = "%(\\d+\\$)?([-#+ 0,(<]*)?(\\d+)?(\\.\\d+)?([tT])?([a-zA-Z%])";
     public static String FLOATING_POINT_NUMBER_FORMAT = "^[-\\+]?[.\\d]*$";
 
+    /**
+     * Pattern.compile方法。
+     *      * @param FORMAT_SPECIFIER Object类型参数
+     * @return static Pattern FORMAT_PATTERN =类型返回值
+     */
     public static Pattern FORMAT_PATTERN = Pattern.compile(FORMAT_SPECIFIER);
+    /**
+     * Pattern.compile方法。
+     *      * @param FLOATING_POINT_NUMBER_FORMAT Object类型参数
+     * @return static Pattern FLOATING_POINT_NUMBER_PATTERN =类型返回值
+     */
     public static Pattern FLOATING_POINT_NUMBER_PATTERN = Pattern.compile(FLOATING_POINT_NUMBER_FORMAT);
 }

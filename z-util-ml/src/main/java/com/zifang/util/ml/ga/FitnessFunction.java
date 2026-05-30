@@ -26,6 +26,9 @@ package com.zifang.util.ml.ga;
  * @see GeneticAlgorithmEngine
  * @see SelectionOperator
  */
+/**
+ * FitnessFunction接口。
+ */
 public interface FitnessFunction {
 
     /**

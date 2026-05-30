@@ -10,5 +10,8 @@ package com.zifang.util.workflow.engine.spark.services;
  *
  * @see AbstractSparkEngineService
  */
+/**
+ * SegmentationHandler类。
+ */
 public class SegmentationHandler {
 }

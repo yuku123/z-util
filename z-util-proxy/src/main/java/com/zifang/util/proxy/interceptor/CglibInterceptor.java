@@ -10,6 +10,9 @@ import java.lang.reflect.Method;
 /**
  * Cglib实现的动态代理切面
  */
+/**
+ * CglibInterceptor类。
+ */
 public class CglibInterceptor implements MethodInterceptor, Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,16 +25,33 @@ public class CglibInterceptor implements MethodInterceptor, Serializable {
      * @param target 被代理对象
      * @param aspect 切面实现
      */
+    /**
+     * CglibInterceptor方法。
+     *      * @param target Object类型参数
+     * @param aspect Aspect类型参数
+     */
     public CglibInterceptor(Object target, Aspect aspect) {
         this.target = target;
         this.aspect = aspect;
     }
 
+    /**
+     * getTarget方法。
+     * @return Object类型返回值
+     */
     public Object getTarget() {
         return this.target;
     }
 
     @Override
+    /**
+     * intercept方法。
+     *      * @param obj Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param proxy MethodProxy类型参数
+     * @return Object类型返回值
+     */
     public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
         final Object target = this.target;
         final Aspect aspect = this.aspect;

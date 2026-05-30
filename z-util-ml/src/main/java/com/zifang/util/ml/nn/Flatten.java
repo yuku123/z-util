@@ -9,12 +9,20 @@ import com.zifang.util.numpy.Shape;
  * Input: (*)
  * Output: (batch_size, -1) where -1 is inferred from remaining dimensions
  */
+/**
+ * Flatten类。
+ */
 public class Flatten extends Module {
     
     private int batchSize;
     private int numFeatures;
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray forward(NdArray input) {
         batchSize = 1;
         int ndim = input.ndim();
@@ -40,6 +48,11 @@ public class Flatten extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         // Reshape gradient back to original shape
         int[] originalShape = new int[batchSize > 1 ? numFeatures > 0 ? 2 : 1 : 1];
@@ -51,6 +64,14 @@ public class Flatten extends Module {
         return gradOutput.reshape(numFeatures);
     }
     
+    /**
+     * getBatchSize方法。
+     * @return int类型返回值
+     */
     public int getBatchSize() { return batchSize; }
+    /**
+     * getNumFeatures方法。
+     * @return int类型返回值
+     */
     public int getNumFeatures() { return numFeatures; }
 }

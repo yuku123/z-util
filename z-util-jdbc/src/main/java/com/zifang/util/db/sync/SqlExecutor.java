@@ -27,6 +27,9 @@ import java.util.stream.Collectors;
  *
  * @author zifang
  */
+/**
+ * SqlExecutor类。
+ */
 public class SqlExecutor {
 
     private static final Logger log = LoggerFactory.getLogger(SqlExecutor.class);
@@ -40,6 +43,10 @@ public class SqlExecutor {
      *
      * @param dataSource 数据源，不能为null
      */
+    /**
+     * SqlExecutor方法。
+     *      * @param dataSource DataSource类型参数
+     */
     public SqlExecutor(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -50,6 +57,11 @@ public class SqlExecutor {
      * @param schemaMark 数据库schema名称，用于过滤表
      * @return 表信息列表，包含表名和备注
      * @throws BusinessException 获取表信息失败时抛出
+     */
+    /**
+     * fetchTableInfo方法。
+     *      * @param schemaMark String类型参数
+     * @return List<DataSourceTableDTO>类型返回值
      */
     public List<DataSourceTableDTO> fetchTableInfo(String schemaMark) {
         List<DataSourceTableDTO> dataSourceTableDTOS = new ArrayList<>();
@@ -83,6 +95,12 @@ public class SqlExecutor {
      * @param tableName  表名称
      * @return 字段信息列表，包含字段名、类型、备注等
      */
+    /**
+     * fetchTableColumnInfo方法。
+     *      * @param schemaMark String类型参数
+     * @param tableName String类型参数
+     * @return List<DataSourceTableColumnDTO>类型返回值
+     */
     public List<DataSourceTableColumnDTO> fetchTableColumnInfo(String schemaMark, String tableName) {
         List<DataSourceTableColumnDTO> dataSourceTableColumnDTOS = new ArrayList<>();
         Connection conn = null;
@@ -115,6 +133,11 @@ public class SqlExecutor {
      * @param descriptions 表描述/备注
      * @throws RuntimeException 创建失败时抛出
      */
+    /**
+     * createTable方法。
+     *      * @param tableName String类型参数
+     * @param descriptions String类型参数
+     */
     public void createTable(String tableName, String descriptions) throws RuntimeException {
         String sql = String.format(
                 "create table IF NOT EXISTS %s(id bigint(20) comment '主键') COMMENT='%s' ENGINE=InnoDB DEFAULT CHARSET=utf8;",
@@ -132,6 +155,13 @@ public class SqlExecutor {
      * @param columnType   字段类型，如varchar(255)、int等
      * @param columnComment 字段备注/注释
      * @throws RuntimeException 添加失败时抛出
+     */
+    /**
+     * createTableColumn方法。
+     *      * @param tableName String类型参数
+     * @param columnName String类型参数
+     * @param columnType String类型参数
+     * @param columnComment String类型参数
      */
     public void createTableColumn(String tableName, String columnName, String columnType, String columnComment) throws RuntimeException {
         String sql = String.format("ALTER TABLE %s ADD %s %s comment '%s'",
@@ -153,6 +183,14 @@ public class SqlExecutor {
      * @param targetColumnComment 目标字段备注
      * @throws RuntimeException 修改失败时抛出
      */
+    /**
+     * updateTableColumn方法。
+     *      * @param tableName String类型参数
+     * @param columnName String类型参数
+     * @param targetColumnName String类型参数
+     * @param targetColumnType String类型参数
+     * @param targetColumnComment String类型参数
+     */
     public void updateTableColumn(String tableName, String columnName, String targetColumnName, String targetColumnType, String targetColumnComment) throws RuntimeException {
         String sql = String.format("ALTER TABLE %s change %s %s %s comment '%s'",
                 tableName,
@@ -171,6 +209,11 @@ public class SqlExecutor {
      * @param columnName 要删除的字段名
      * @throws RuntimeException 删除失败时抛出
      */
+    /**
+     * removeTableColumn方法。
+     *      * @param tableName String类型参数
+     * @param columnName String类型参数
+     */
     public void removeTableColumn(String tableName, String columnName) throws RuntimeException {
         String sql = String.format("ALTER TABLE %s drop column %s;", tableName, columnName);
         executeDML(dataSource, sql);
@@ -183,6 +226,12 @@ public class SqlExecutor {
      * @param targetTableName    目标表名
      * @param targetTableComments 目标表备注
      * @throws RuntimeException 修改失败时抛出
+     */
+    /**
+     * updateTable方法。
+     *      * @param tableName String类型参数
+     * @param targetTableName String类型参数
+     * @param targetTableComments String类型参数
      */
     public void updateTable(String tableName, String targetTableName, String targetTableComments) throws RuntimeException {
         String sql1 = String.format("ALTER TABLE %s rename to %s",
@@ -205,6 +254,11 @@ public class SqlExecutor {
      * @param descriptions 表描述（目前未使用）
      * @throws RuntimeException 删除失败时抛出
      */
+    /**
+     * removeTable方法。
+     *      * @param tableName String类型参数
+     * @param descriptions String类型参数
+     */
     public void removeTable(String tableName, String descriptions) throws RuntimeException {
         String sql = String.format(" DROP TABLE %s", tableName);
         executeDML(dataSource, sql);
@@ -216,6 +270,12 @@ public class SqlExecutor {
      * @param dataSource 数据源
      * @param schemaMark 数据库schema名称
      * @return 表信息列表，每条表信息包含字段详情
+     */
+    /**
+     * deepFetchTableInfo方法。
+     *      * @param dataSource DataSource类型参数
+     * @param schemaMark String类型参数
+     * @return List<DataSourceTableDTO>类型返回值
      */
     public List<DataSourceTableDTO> deepFetchTableInfo(DataSource dataSource, String schemaMark) {
         List<DataSourceTableDTO> dataSourceTableDTOS = new ArrayList<>();
@@ -264,6 +324,11 @@ public class SqlExecutor {
      * @param sql        要执行的DML语句
      * @throws BusinessException 执行失败时抛出
      */
+    /**
+     * executeDml方法。
+     *      * @param dataSource DataSource类型参数
+     * @param sql String类型参数
+     */
     public void executeDml(DataSource dataSource, String sql) {
         Connection connection = null;
         try {
@@ -291,6 +356,12 @@ public class SqlExecutor {
      * @return 查询结果列表，每条记录为Map结构
      * @throws BusinessException 查询失败时抛出
      */
+    /**
+     * selectList方法。
+     *      * @param dataSource DataSource类型参数
+     * @param sql String类型参数
+     * @return List<Map<String, Object>>类型返回值
+     */
     public List<Map<String, Object>> selectList(DataSource dataSource, String sql) {
         Connection connection = null;
         try {
@@ -316,6 +387,12 @@ public class SqlExecutor {
      * @param dataSource 数据源
      * @param sqlCnt     COUNT查询语句
      * @return 记录数，查询失败返回null
+     */
+    /**
+     * count方法。
+     *      * @param dataSource DataSource类型参数
+     * @param sqlCnt String类型参数
+     * @return int类型返回值
      */
     public Integer count(DataSource dataSource, String sqlCnt) {
         Connection connection = null;
@@ -357,16 +434,29 @@ public class SqlExecutor {
      *
      * @return 数据源对象
      */
+    /**
+     * getDataSource方法。
+     * @return DataSource类型返回值
+     */
     public DataSource getDataSource() {
         return dataSource;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "SqlExecutor{dataSourceCache=" + dataSourceCache + ", dataSource=" + dataSource + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -376,6 +466,10 @@ public class SqlExecutor {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(dataSourceCache, dataSource);
     }

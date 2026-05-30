@@ -13,16 +13,28 @@ import java.util.Collection;
 public abstract class AbstractCluster implements ICluster {
 
     @Override
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return null;
     }
 
     @Override
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
     public String getId() {
         return null;
     }
 
     @Override
+    /**
+     * members方法。
+     * @return Collection<INode>类型返回值
+     */
     public Collection<INode> members() {
         return null;
     }

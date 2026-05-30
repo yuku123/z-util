@@ -9,9 +9,19 @@ import java.lang.reflect.Field;
 /**
  * 正则表达式校验器
  */
+/**
+ * PatternValidator类。
+ */
 public class PatternValidator implements Validator<Pattern> {
 
     @Override
+    /**
+     * validate方法。
+     *      * @param target Object类型参数
+     * @param field Field类型参数
+     * @param annotation Pattern类型参数
+     * @param result ValidateResult类型参数
+     */
     public void validate(Object target, Field field, Pattern annotation, ValidateResult result) {
         Object value;
         try {

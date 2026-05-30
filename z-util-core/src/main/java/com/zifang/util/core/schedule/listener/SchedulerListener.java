@@ -15,6 +15,9 @@ import org.quartz.TriggerKey;
  * @see JobListener
  * @see TriggerListener
  */
+/**
+ * SchedulerListener接口。
+ */
 public interface SchedulerListener {
 
     /**

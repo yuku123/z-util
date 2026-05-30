@@ -9,5 +9,8 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
+/**
+ * MatrixVariable类。
+ */
 public class MatrixVariable {
 }

@@ -12,6 +12,9 @@ import java.util.List;
 /**
  * CSV 写入器 - 支持将数据写入 CSV 文件
  */
+/**
+ * CSVWriter类。
+ */
 public class CSVWriter {
 
     private char delimiter = ',';
@@ -23,47 +26,94 @@ public class CSVWriter {
     private boolean quoteAll = false;
     private boolean escapeSpecialChars = true;
 
+    /**
+     * CSVWriter方法。
+     */
     public CSVWriter() {}
 
+    /**
+     * builder方法。
+     * @return static CSVWriter类型返回值
+     */
     public static CSVWriter builder() {
         return new CSVWriter();
     }
 
+    /**
+     * delimiter方法。
+     *      * @param delimiter char类型参数
+     * @return CSVWriter类型返回值
+     */
     public CSVWriter delimiter(char delimiter) {
         this.delimiter = delimiter;
         return this;
     }
 
+    /**
+     * quoteChar方法。
+     *      * @param quoteChar char类型参数
+     * @return CSVWriter类型返回值
+     */
     public CSVWriter quoteChar(char quoteChar) {
         this.quoteChar = quoteChar;
         return this;
     }
 
+    /**
+     * includeHeader方法。
+     *      * @param includeHeader boolean类型参数
+     * @return CSVWriter类型返回值
+     */
     public CSVWriter includeHeader(boolean includeHeader) {
         this.includeHeader = includeHeader;
         return this;
     }
 
+    /**
+     * includeIndex方法。
+     *      * @param includeIndex boolean类型参数
+     * @return CSVWriter类型返回值
+     */
     public CSVWriter includeIndex(boolean includeIndex) {
         this.includeIndex = includeIndex;
         return this;
     }
 
+    /**
+     * encoding方法。
+     *      * @param encoding String类型参数
+     * @return CSVWriter类型返回值
+     */
     public CSVWriter encoding(String encoding) {
         this.encoding = encoding;
         return this;
     }
 
+    /**
+     * lineEnding方法。
+     *      * @param lineEnding String类型参数
+     * @return CSVWriter类型返回值
+     */
     public CSVWriter lineEnding(String lineEnding) {
         this.lineEnding = lineEnding;
         return this;
     }
 
+    /**
+     * quoteAll方法。
+     *      * @param quoteAll boolean类型参数
+     * @return CSVWriter类型返回值
+     */
     public CSVWriter quoteAll(boolean quoteAll) {
         this.quoteAll = quoteAll;
         return this;
     }
 
+    /**
+     * escapeSpecialChars方法。
+     *      * @param escapeSpecialChars boolean类型参数
+     * @return CSVWriter类型返回值
+     */
     public CSVWriter escapeSpecialChars(boolean escapeSpecialChars) {
         this.escapeSpecialChars = escapeSpecialChars;
         return this;
@@ -72,12 +122,22 @@ public class CSVWriter {
     /**
      * 写入文件路径
      */
+    /**
+     * write方法。
+     *      * @param df DataFrame类型参数
+     * @param filePath String类型参数
+     */
     public void write(DataFrame df, String filePath) throws IOException {
         write(df, new File(filePath));
     }
 
     /**
      * 写入 File 对象
+     */
+    /**
+     * write方法。
+     *      * @param df DataFrame类型参数
+     * @param file File类型参数
      */
     public void write(DataFrame df, File file) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(
@@ -88,6 +148,11 @@ public class CSVWriter {
 
     /**
      * 写入 OutputStream
+     */
+    /**
+     * write方法。
+     *      * @param df DataFrame类型参数
+     * @param outputStream OutputStream类型参数
      */
     public void write(DataFrame df, OutputStream outputStream) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(
@@ -222,12 +287,21 @@ public class CSVWriter {
     /**
      * 将 DataFrame 写入 CSV 字符串
      */
+    /**
+     * toCSVString方法。
+     *      * @param df DataFrame类型参数
+     * @return static String类型返回值
+     */
     public static String toCSVString(DataFrame df) {
         StringBuilder sb = new StringBuilder();
         try {
             CSVWriter writer = new CSVWriter();
             writer.write(df, new OutputStream() {
                 @Override
+    /**
+     * write方法。
+     *      * @param b int类型参数
+     */
                 public void write(int b) {
                     sb.append((char) b);
                 }

@@ -8,5 +8,8 @@ package com.zifang.util.devops.common;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * GavInfo类。
+ */
 public class GavInfo {
 }

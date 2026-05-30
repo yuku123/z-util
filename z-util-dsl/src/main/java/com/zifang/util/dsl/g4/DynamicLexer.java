@@ -24,6 +24,9 @@ import java.util.regex.Pattern;
  * - 括号: (expr) 用于分组
  * - 点号: . 表示任意字符
  */
+/**
+ * DynamicLexer类。
+ */
 public class DynamicLexer implements Lexer {
 
     private String input;
@@ -48,6 +51,9 @@ public class DynamicLexer implements Lexer {
     // 解析结果
     private List<Token> tokens;
     
+    /**
+     * DynamicLexer方法。
+     */
     public DynamicLexer() {
         this.tokenDefinitions = new ArrayList<>();
         this.compiledPatterns = new LinkedHashMap<>();
@@ -59,6 +65,10 @@ public class DynamicLexer implements Lexer {
     
     /**
      * 加载G4文件并初始化
+     */
+    /**
+     * loadG4方法。
+     *      * @param g4Content String类型参数
      */
     public void loadG4(String g4Content) {
         // 解析G4文件
@@ -106,6 +116,10 @@ public class DynamicLexer implements Lexer {
     
     /**
      * 从文件加载G4
+     */
+    /**
+     * loadG4File方法。
+     *      * @param filePath String类型参数
      */
     public void loadG4File(String filePath) {
         try {
@@ -388,6 +402,10 @@ public class DynamicLexer implements Lexer {
     }
 
     @Override
+    /**
+     * setInput方法。
+     *      * @param input String类型参数
+     */
     public void setInput(String input) {
         this.input = input;
         this.chars = input.toCharArray();
@@ -397,6 +415,10 @@ public class DynamicLexer implements Lexer {
     }
 
     @Override
+    /**
+     * setInput方法。
+     *      * @param input char[]类型参数
+     */
     public void setInput(char[] input) {
         this.chars = input;
         this.input = new String(input);
@@ -406,6 +428,10 @@ public class DynamicLexer implements Lexer {
     }
 
     @Override
+    /**
+     * tokenize方法。
+     * @return List<Token>类型返回值
+     */
     public List<Token> tokenize() {
         tokens = new ArrayList<>();
         pos = 0;
@@ -502,6 +528,10 @@ public class DynamicLexer implements Lexer {
     }
 
     @Override
+    /**
+     * getTokenReader方法。
+     * @return TokenReader类型返回值
+     */
     public TokenReader getTokenReader() {
         if (tokens == null) {
             tokenize();
@@ -516,12 +546,20 @@ public class DynamicLexer implements Lexer {
         private final List<Token> tokens;
         private int index;
         
+    /**
+     * SimpleTokenReader方法。
+     *      * @param tokens ListToken类型参数
+     */
         public SimpleTokenReader(List<Token> tokens) {
             this.tokens = tokens;
             this.index = 0;
         }
         
         @Override
+    /**
+     * read方法。
+     * @return Token类型返回值
+     */
         public Token read() {
             if (index < tokens.size()) {
                 return tokens.get(index++);
@@ -530,6 +568,10 @@ public class DynamicLexer implements Lexer {
         }
         
         @Override
+    /**
+     * peek方法。
+     * @return Token类型返回值
+     */
         public Token peek() {
             if (index < tokens.size()) {
                 return tokens.get(index);
@@ -538,6 +580,9 @@ public class DynamicLexer implements Lexer {
         }
         
         @Override
+    /**
+     * advance方法。
+     */
         public void advance() {
             if (index < tokens.size()) {
                 index++;
@@ -545,6 +590,11 @@ public class DynamicLexer implements Lexer {
         }
         
         @Override
+    /**
+     * get方法。
+     *      * @param offset int类型参数
+     * @return Token类型返回值
+     */
         public Token get(int offset) {
             int idx = index + offset;
             if (idx >= 0 && idx < tokens.size()) {
@@ -554,16 +604,26 @@ public class DynamicLexer implements Lexer {
         }
         
         @Override
+    /**
+     * hasNext方法。
+     * @return boolean类型返回值
+     */
         public boolean hasNext() {
             return index < tokens.size();
         }
         
         @Override
+    /**
+     * reset方法。
+     */
         public void reset() {
             index = 0;
         }
         
         @Override
+    /**
+     * close方法。
+     */
         public void close() {
             // nothing to close
         }

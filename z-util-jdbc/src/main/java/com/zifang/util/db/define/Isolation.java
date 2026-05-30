@@ -5,6 +5,9 @@ import java.sql.Connection;
 /**
  * 事务隔离级别枚举
  */
+/**
+ * Isolation枚举。
+ */
 public enum Isolation {
 
     /**
@@ -38,6 +41,10 @@ public enum Isolation {
         this.level = level;
     }
 
+    /**
+     * getLevel方法。
+     * @return int类型返回值
+     */
     public int getLevel() {
         return level;
     }

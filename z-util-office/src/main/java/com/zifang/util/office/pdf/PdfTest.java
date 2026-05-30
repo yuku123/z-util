@@ -11,7 +11,15 @@ import java.io.IOException;
  * PDF测试示例类
  * 演示PDF文档的基本操作，如加载、创建空白页、保存等
  */
+/**
+ * PdfTest类。
+ */
 public class PdfTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
         //Loading an existing document
         File file = new File("/Users/zifang/Downloads/现代西班牙语1.pdf");

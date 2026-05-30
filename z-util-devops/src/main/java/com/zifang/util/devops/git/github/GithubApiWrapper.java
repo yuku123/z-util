@@ -19,6 +19,9 @@ import org.kohsuke.github.GitHub;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * GithubApiWrapper类。
+ */
 public class GithubApiWrapper {
 
     private GithubApiWrapper() {
@@ -35,6 +38,10 @@ public class GithubApiWrapper {
      *
      * @return RepositoryApiWrapper 实例
      */
+    /**
+     * repo方法。
+     * @return static RepositoryApiWrapper类型返回值
+     */
     public static RepositoryApiWrapper repo() {
         return new RepositoryApiWrapper(github());
     }
@@ -45,6 +52,12 @@ public class GithubApiWrapper {
      * @param owner 仓库所有者
      * @param repo  仓库名称
      * @return RepositoryApiWrapper 实例
+     */
+    /**
+     * repo方法。
+     *      * @param owner String类型参数
+     * @param repo String类型参数
+     * @return static RepositoryApiWrapper类型返回值
      */
     public static RepositoryApiWrapper repo(String owner, String repo) {
         return new RepositoryApiWrapper(github(), owner, repo);
@@ -57,6 +70,10 @@ public class GithubApiWrapper {
      *
      * @return IssueApiWrapper 实例
      */
+    /**
+     * issue方法。
+     * @return static IssueApiWrapper类型返回值
+     */
     public static IssueApiWrapper issue() {
         return new IssueApiWrapper(github());
     }
@@ -67,6 +84,12 @@ public class GithubApiWrapper {
      * @param owner 仓库所有者
      * @param repo  仓库名称
      * @return IssueApiWrapper 实例
+     */
+    /**
+     * issue方法。
+     *      * @param owner String类型参数
+     * @param repo String类型参数
+     * @return static IssueApiWrapper类型返回值
      */
     public static IssueApiWrapper issue(String owner, String repo) {
         return new IssueApiWrapper(github(), owner, repo);
@@ -79,6 +102,10 @@ public class GithubApiWrapper {
      *
      * @return PullRequestApiWrapper 实例
      */
+    /**
+     * pr方法。
+     * @return static PullRequestApiWrapper类型返回值
+     */
     public static PullRequestApiWrapper pr() {
         return new PullRequestApiWrapper(github());
     }
@@ -89,6 +116,12 @@ public class GithubApiWrapper {
      * @param owner 仓库所有者
      * @param repo  仓库名称
      * @return PullRequestApiWrapper 实例
+     */
+    /**
+     * pr方法。
+     *      * @param owner String类型参数
+     * @param repo String类型参数
+     * @return static PullRequestApiWrapper类型返回值
      */
     public static PullRequestApiWrapper pr(String owner, String repo) {
         return new PullRequestApiWrapper(github(), owner, repo);
@@ -101,6 +134,10 @@ public class GithubApiWrapper {
      *
      * @return ReleaseApiWrapper 实例
      */
+    /**
+     * release方法。
+     * @return static ReleaseApiWrapper类型返回值
+     */
     public static ReleaseApiWrapper release() {
         return new ReleaseApiWrapper(github());
     }
@@ -111,6 +148,12 @@ public class GithubApiWrapper {
      * @param owner 仓库所有者
      * @param repo  仓库名称
      * @return ReleaseApiWrapper 实例
+     */
+    /**
+     * release方法。
+     *      * @param owner String类型参数
+     * @param repo String类型参数
+     * @return static ReleaseApiWrapper类型返回值
      */
     public static ReleaseApiWrapper release(String owner, String repo) {
         return new ReleaseApiWrapper(github(), owner, repo);
@@ -123,6 +166,10 @@ public class GithubApiWrapper {
      *
      * @return ActionApiWrapper 实例
      */
+    /**
+     * action方法。
+     * @return static ActionApiWrapper类型返回值
+     */
     public static ActionApiWrapper action() {
         return new ActionApiWrapper(github());
     }
@@ -133,6 +180,12 @@ public class GithubApiWrapper {
      * @param owner 仓库所有者
      * @param repo  仓库名称
      * @return ActionApiWrapper 实例
+     */
+    /**
+     * action方法。
+     *      * @param owner String类型参数
+     * @param repo String类型参数
+     * @return static ActionApiWrapper类型返回值
      */
     public static ActionApiWrapper action(String owner, String repo) {
         return new ActionApiWrapper(github(), owner, repo);
@@ -145,6 +198,10 @@ public class GithubApiWrapper {
      *
      * @return UserApiWrapper 实例
      */
+    /**
+     * user方法。
+     * @return static UserApiWrapper类型返回值
+     */
     public static UserApiWrapper user() {
         return new UserApiWrapper(github());
     }
@@ -156,6 +213,10 @@ public class GithubApiWrapper {
      *
      * @return OrganizationApiWrapper 实例
      */
+    /**
+     * org方法。
+     * @return static OrganizationApiWrapper类型返回值
+     */
     public static OrganizationApiWrapper org() {
         return new OrganizationApiWrapper(github());
     }
@@ -165,6 +226,11 @@ public class GithubApiWrapper {
      *
      * @param orgName 组织名称
      * @return OrganizationApiWrapper 实例
+     */
+    /**
+     * org方法。
+     *      * @param orgName String类型参数
+     * @return static OrganizationApiWrapper类型返回值
      */
     public static OrganizationApiWrapper org(String orgName) {
         return new OrganizationApiWrapper(github(), orgName);

@@ -10,6 +10,9 @@ import java.util.concurrent.TimeUnit;
  * In-memory cache implementation with optional TTL support.
  * Uses ConcurrentHashMap for thread-safety and ScheduledExecutorService for expiration.
  */
+/**
+ * MemoryCache类。
+ */
 public class MemoryCache implements Cache {
 
     private final String name;
@@ -22,6 +25,10 @@ public class MemoryCache implements Cache {
      *
      * @param name cache name
      */
+    /**
+     * MemoryCache方法。
+     *      * @param name String类型参数
+     */
     public MemoryCache(String name) {
         this(name, 16, 0);
     }
@@ -31,6 +38,11 @@ public class MemoryCache implements Cache {
      *
      * @param name           cache name
      * @param initialCapacity initial capacity
+     */
+    /**
+     * MemoryCache方法。
+     *      * @param name String类型参数
+     * @param initialCapacity int类型参数
      */
     public MemoryCache(String name, int initialCapacity) {
         this(name, initialCapacity, 0);
@@ -42,6 +54,12 @@ public class MemoryCache implements Cache {
      * @param name           cache name
      * @param initialCapacity initial capacity
      * @param defaultTtlSeconds default TTL in seconds, 0 means no expiration
+     */
+    /**
+     * MemoryCache方法。
+     *      * @param name String类型参数
+     * @param initialCapacity int类型参数
+     * @param defaultTtlSeconds long类型参数
      */
     public MemoryCache(String name, int initialCapacity, long defaultTtlSeconds) {
         this.name = name;
@@ -59,6 +77,11 @@ public class MemoryCache implements Cache {
     }
 
     @Override
+    /**
+     * get方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object get(String key) {
         CacheEntry entry = cache.get(key);
         if (entry == null) {
@@ -72,11 +95,22 @@ public class MemoryCache implements Cache {
     }
 
     @Override
+    /**
+     * put方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     */
     public void put(String key, Object value) {
         put(key, value, defaultTtlSeconds);
     }
 
     @Override
+    /**
+     * put方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     * @param ttl long类型参数
+     */
     public void put(String key, Object value, long ttl) {
         long effectiveTtl = ttl > 0 ? ttl : defaultTtlSeconds;
         if (effectiveTtl > 0) {
@@ -87,11 +121,21 @@ public class MemoryCache implements Cache {
     }
 
     @Override
+    /**
+     * remove方法。
+     *      * @param key String类型参数
+     * @return boolean类型返回值
+     */
     public boolean remove(String key) {
         return cache.remove(key) != null;
     }
 
     @Override
+    /**
+     * contains方法。
+     *      * @param key String类型参数
+     * @return boolean类型返回值
+     */
     public boolean contains(String key) {
         CacheEntry entry = cache.get(key);
         if (entry == null) {
@@ -105,11 +149,18 @@ public class MemoryCache implements Cache {
     }
 
     @Override
+    /**
+     * clear方法。
+     */
     public void clear() {
         cache.clear();
     }
 
     @Override
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -119,12 +170,19 @@ public class MemoryCache implements Cache {
      *
      * @return number of entries (including expired but not yet removed)
      */
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         return cache.size();
     }
 
     /**
      * Shutdown the cleanup scheduler.
+     */
+    /**
+     * shutdown方法。
      */
     public void shutdown() {
         scheduler.shutdown();
@@ -133,6 +191,10 @@ public class MemoryCache implements Cache {
     // ==================== 持久化 ====================
 
     @Override
+    /**
+     * exportToFile方法。
+     *      * @param filePath String类型参数
+     */
     public void exportToFile(String filePath) {
         try (java.io.ObjectOutputStream out = new java.io.ObjectOutputStream(
                 new java.io.BufferedOutputStream(
@@ -153,6 +215,10 @@ public class MemoryCache implements Cache {
     }
 
     @Override
+    /**
+     * importFromFile方法。
+     *      * @param filePath String类型参数
+     */
     public void importFromFile(String filePath) {
         try (java.io.ObjectInputStream in = new java.io.ObjectInputStream(
                 new java.io.BufferedInputStream(

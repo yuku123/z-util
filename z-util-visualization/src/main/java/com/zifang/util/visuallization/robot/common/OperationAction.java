@@ -9,5 +9,8 @@ package com.zifang.util.visuallization.robot.common;
  * @version 1.0
  * @since 2020-01-01
  */
+/**
+ * OperationAction类。
+ */
 public class OperationAction {
 }

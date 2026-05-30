@@ -9,6 +9,9 @@ package com.zifang.util.core.lang.exception;
  *
  * @author zifang
  */
+/**
+ * ExecuteScriptException类。
+ */
 public class ExecuteScriptException extends RuntimeException {
 
     private static final long serialVersionUID = -2590455067812497134L;
@@ -17,6 +20,10 @@ public class ExecuteScriptException extends RuntimeException {
      * 使用指定错误信息创建脚本执行异常。
      *
      * @param message 错误信息，描述脚本执行失败的原因
+     */
+    /**
+     * ExecuteScriptException方法。
+     *      * @param message String类型参数
      */
     public ExecuteScriptException(String message) {
         super(message);
@@ -27,6 +34,11 @@ public class ExecuteScriptException extends RuntimeException {
      *
      * @param message 错误信息，描述脚本执行失败的原因
      * @param cause   原始异常，通常是导致当前异常的根本原因
+     */
+    /**
+     * ExecuteScriptException方法。
+     *      * @param message String类型参数
+     * @param cause Throwable类型参数
      */
     public ExecuteScriptException(String message, Throwable cause) {
         super(message, cause);

@@ -17,6 +17,9 @@ import java.util.function.BiFunction;
  * Training uses gradient descent on conditional log-likelihood.
  * Inference uses Viterbi algorithm for best tag sequence.
  */
+/**
+ * CRF类。
+ */
 public class CRF {
     
     private int nTags;
@@ -43,6 +46,13 @@ public class CRF {
      * @param nFeatures Dimension of feature vectors
      * @param learningRate Learning rate for SGD
      * @param lambda L2 regularization parameter
+     */
+    /**
+     * CRF方法。
+     *      * @param nTags int类型参数
+     * @param nFeatures int类型参数
+     * @param learningRate double类型参数
+     * @param lambda double类型参数
      */
     public CRF(int nTags, int nFeatures, double learningRate, double lambda) {
         this.nTags = nTags;
@@ -73,6 +83,10 @@ public class CRF {
      * Set the feature extractor function.
      * 
      * @param extractor Function that takes (featureVector, position) and returns feature array
+     */
+    /**
+     * setFeatureExtractor方法。
+     *      * @param extractor BiFunctiondouble[],类型参数
      */
     public void setFeatureExtractor(BiFunction<double[], Integer, double[]> extractor) {
         this.featureExtractor = extractor;
@@ -201,6 +215,12 @@ public class CRF {
      * @param features Feature matrix [sequenceLength, nFeatures]
      * @param labels True tag sequence
      * @return Negative log-likelihood
+     */
+    /**
+     * score方法。
+     *      * @param features NdArray类型参数
+     * @param labels int[]类型参数
+     * @return double类型返回值
      */
     public double score(NdArray features, int[] labels) {
         // Score = log P(y|x) = score(x,y) - Z(x)
@@ -402,6 +422,12 @@ public class CRF {
      * @param labels Tag sequence of length sequenceLength
      * @param nIterations Number of training iterations
      */
+    /**
+     * fit方法。
+     *      * @param features NdArray类型参数
+     * @param labels int[]类型参数
+     * @param nIterations int类型参数
+     */
     public void fit(NdArray features, int[] labels, int nIterations) {
         if (features.getShape().get(0) != labels.length) {
             throw new IllegalArgumentException("Feature sequence length must match labels length");
@@ -440,6 +466,11 @@ public class CRF {
      * 
      * @param features Feature matrix [sequenceLength, nFeatures]
      * @return Best tag sequence
+     */
+    /**
+     * predict方法。
+     *      * @param features NdArray类型参数
+     * @return int[]类型返回值
      */
     public int[] predict(NdArray features) {
         int T = features.getShape().get(0);
@@ -508,6 +539,10 @@ public class CRF {
      * 
      * @return Copy of tag weights
      */
+    /**
+     * getTagWeights方法。
+     * @return double[][]类型返回值
+     */
     public double[][] getTagWeights() {
         double[][] copy = new double[nTags][nFeatures];
         for (int i = 0; i < nTags; i++) {
@@ -520,6 +555,10 @@ public class CRF {
      * Get transition weights.
      * 
      * @return Copy of transition weights
+     */
+    /**
+     * getTransitionWeights方法。
+     * @return double[][]类型返回值
      */
     public double[][] getTransitionWeights() {
         double[][] copy = new double[nTags][nTags];
@@ -534,6 +573,10 @@ public class CRF {
      * 
      * @return Number of tags
      */
+    /**
+     * getNTags方法。
+     * @return int类型返回值
+     */
     public int getNTags() {
         return nTags;
     }
@@ -542,6 +585,10 @@ public class CRF {
      * Get feature dimension.
      * 
      * @return Number of features
+     */
+    /**
+     * getNFeatures方法。
+     * @return int类型返回值
      */
     public int getNFeatures() {
         return nFeatures;

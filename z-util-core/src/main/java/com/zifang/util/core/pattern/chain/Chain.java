@@ -11,6 +11,9 @@ import java.util.function.*;
  * @param <C> 上下文类型
  * @author zifang
  */
+/**
+ * Chain接口。
+ */
 public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
 
     /**
@@ -149,32 +152,62 @@ public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
         private final C context;
         private final ProcessorResult result;
 
+    /**
+     * ChainResult方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @param result ProcessorResult类型参数
+     */
         public ChainResult(Chain<C> chain, C context, ProcessorResult result) {
             this.chain = chain;
             this.context = context;
             this.result = result;
         }
 
+    /**
+     * getChain方法。
+     * @return Chain<C>类型返回值
+     */
         public Chain<C> getChain() {
             return chain;
         }
 
+    /**
+     * getContext方法。
+     * @return C类型返回值
+     */
         public C getContext() {
             return context;
         }
 
+    /**
+     * getResult方法。
+     * @return ProcessorResult类型返回值
+     */
         public ProcessorResult getResult() {
             return result;
         }
 
+    /**
+     * isSuccess方法。
+     * @return boolean类型返回值
+     */
         public boolean isSuccess() {
             return result.isSuccess();
         }
 
+    /**
+     * isFinished方法。
+     * @return boolean类型返回值
+     */
         public boolean isFinished() {
             return result.isFinished();
         }
 
+    /**
+     * isContinued方法。
+     * @return boolean类型返回值
+     */
         public boolean isContinued() {
             return result.shouldContinue();
         }

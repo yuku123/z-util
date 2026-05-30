@@ -5,6 +5,9 @@ import java.util.Arrays;
 /**
  * 隐藏层实现
  */
+/**
+ * HiddenLayerImpl类。
+ */
 public class HiddenLayerImpl implements Layer {
 
     private final int neuronCount;
@@ -21,6 +24,12 @@ public class HiddenLayerImpl implements Layer {
      * @param activationFunction  激活函数
      * @throws IllegalArgumentException 当参数小于1时
      */
+    /**
+     * HiddenLayerImpl方法。
+     *      * @param inputCount int类型参数
+     * @param neuronCount int类型参数
+     * @param activationFunction ActivationFunction类型参数
+     */
     public HiddenLayerImpl(int inputCount, int neuronCount, ActivationFunction activationFunction) {
         this.neuronCount = neuronCount;
         this.activationFunction = activationFunction;
@@ -33,6 +42,11 @@ public class HiddenLayerImpl implements Layer {
     }
 
     @Override
+    /**
+     * forward方法。
+     *      * @param inputs double[]类型参数
+     * @return double[]类型返回值
+     */
     public double[] forward(double[] inputs) {
         this.inputs = Arrays.copyOf(inputs, inputs.length);
         this.outputs = new double[neuronCount];
@@ -45,6 +59,11 @@ public class HiddenLayerImpl implements Layer {
     }
 
     @Override
+    /**
+     * backward方法。
+     *      * @param gradients double[]类型参数
+     * @return double[]类型返回值
+     */
     public double[] backward(double[] gradients) {
         double[] inputGradients = new double[inputs.length];
 
@@ -62,11 +81,19 @@ public class HiddenLayerImpl implements Layer {
     }
 
     @Override
+    /**
+     * getOutput方法。
+     * @return double[]类型返回值
+     */
     public double[] getOutput() {
         return outputs;
     }
 
     @Override
+    /**
+     * getLayerType方法。
+     * @return LayerType类型返回值
+     */
     public LayerType getLayerType() {
         return LayerType.HIDDEN;
     }
@@ -76,6 +103,10 @@ public class HiddenLayerImpl implements Layer {
      *
      * @return 神经元数组
      */
+    /**
+     * getNeurons方法。
+     * @return Neuron[]类型返回值
+     */
     public Neuron[] getNeurons() {
         return neurons;
     }
@@ -84,6 +115,10 @@ public class HiddenLayerImpl implements Layer {
      * 获取该层的神经元数量
      *
      * @return 神经元数量
+     */
+    /**
+     * getNeuronCount方法。
+     * @return int类型返回值
      */
     public int getNeuronCount() {
         return neuronCount;

@@ -4,6 +4,9 @@ package com.zifang.util.cache;
  * Cache interface defining basic cache operations.
  * Provides abstraction for different cache implementations (memory, redis, etc.)
  */
+/**
+ * Cache接口。
+ */
 public interface Cache {
 
     /**

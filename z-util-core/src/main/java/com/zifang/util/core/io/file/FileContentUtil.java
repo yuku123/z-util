@@ -45,6 +45,11 @@ public final class FileContentUtil {
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
+    /**
+     * readString方法。
+     *      * @param file File类型参数
+     * @return static String类型返回值
+     */
     public static String readString(File file) throws IOException {
         return readString(file, StandardCharsets.UTF_8);
     }
@@ -57,6 +62,12 @@ public final class FileContentUtil {
      * @return the entire file contents as a string
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null or charset is null
+     */
+    /**
+     * readString方法。
+     *      * @param file File类型参数
+     * @param charset Charset类型参数
+     * @return static String类型返回值
      */
     public static String readString(File file, Charset charset) throws IOException {
         if (file == null) {
@@ -96,6 +107,11 @@ public final class FileContentUtil {
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if filePath is null or empty
      */
+    /**
+     * readString方法。
+     *      * @param filePath String类型参数
+     * @return static String类型返回值
+     */
     public static String readString(String filePath) throws IOException {
         if (filePath == null || filePath.trim().isEmpty()) {
             throw new IllegalArgumentException("File path must not be null or empty");
@@ -113,6 +129,11 @@ public final class FileContentUtil {
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
+    /**
+     * readLines方法。
+     *      * @param file File类型参数
+     * @return static List<String>类型返回值
+     */
     public static List<String> readLines(File file) throws IOException {
         return readLines(file, StandardCharsets.UTF_8.name());
     }
@@ -125,6 +146,12 @@ public final class FileContentUtil {
      * @return a list of all lines in the file, with line separators removed
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null or encoding is null/empty
+     */
+    /**
+     * readLines方法。
+     *      * @param file File类型参数
+     * @param encoding String类型参数
+     * @return static List<String>类型返回值
      */
     public static List<String> readLines(File file, String encoding) throws IOException {
         if (file == null) {
@@ -154,6 +181,11 @@ public final class FileContentUtil {
      * @return the entire file contents as a byte array
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null
+     */
+    /**
+     * readBytes方法。
+     *      * @param file File类型参数
+     * @return static byte[]类型返回值
      */
     public static byte[] readBytes(File file) throws IOException {
         if (file == null) {
@@ -192,6 +224,12 @@ public final class FileContentUtil {
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
+    /**
+     * writeString方法。
+     *      * @param file File类型参数
+     * @param content String类型参数
+     * @return static void类型返回值
+     */
     public static void writeString(File file, String content) throws IOException {
         writeString(file, content, StandardCharsets.UTF_8);
     }
@@ -204,6 +242,13 @@ public final class FileContentUtil {
      * @param charset the charset to use for encoding
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null or charset is null
+     */
+    /**
+     * writeString方法。
+     *      * @param file File类型参数
+     * @param content String类型参数
+     * @param charset Charset类型参数
+     * @return static void类型返回值
      */
     public static void writeString(File file, String content, Charset charset) throws IOException {
         if (file == null) {
@@ -235,6 +280,12 @@ public final class FileContentUtil {
      * @param lines the lines to write
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null
+     */
+    /**
+     * writeLines方法。
+     *      * @param file File类型参数
+     * @param lines ListString类型参数
+     * @return static void类型返回值
      */
     public static void writeLines(File file, List<String> lines) throws IOException {
         writeLines(file, lines, StandardCharsets.UTF_8, false);
@@ -287,6 +338,12 @@ public final class FileContentUtil {
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
+    /**
+     * appendString方法。
+     *      * @param file File类型参数
+     * @param content String类型参数
+     * @return static void类型返回值
+     */
     public static void appendString(File file, String content) throws IOException {
         if (file == null) {
             throw new IllegalArgumentException("File must not be null");
@@ -311,6 +368,12 @@ public final class FileContentUtil {
      * @param line the line to append
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null
+     */
+    /**
+     * appendLine方法。
+     *      * @param file File类型参数
+     * @param line String类型参数
+     * @return static void类型返回值
      */
     public static void appendLine(File file, String line) throws IOException {
         if (file == null) {
@@ -349,6 +412,11 @@ public final class FileContentUtil {
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
+    /**
+     * countLines方法。
+     *      * @param file File类型参数
+     * @return static long类型返回值
+     */
     public static long countLines(File file) throws IOException {
         if (file == null) {
             throw new IllegalArgumentException("File must not be null");
@@ -381,6 +449,11 @@ public final class FileContentUtil {
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if input stream is null
      */
+    /**
+     * readFully方法。
+     *      * @param in InputStream类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] readFully(InputStream in) throws IOException {
         if (in == null) {
             throw new IllegalArgumentException("InputStream must not be null");
@@ -404,6 +477,11 @@ public final class FileContentUtil {
      * @return all characters read from the reader
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if reader is null
+     */
+    /**
+     * readFully方法。
+     *      * @param reader Reader类型参数
+     * @return static String类型返回值
      */
     public static String readFully(Reader reader) throws IOException {
         if (reader == null) {

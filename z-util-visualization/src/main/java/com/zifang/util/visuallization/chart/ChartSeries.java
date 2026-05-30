@@ -7,6 +7,9 @@ import java.util.List;
  * 图表数据系列
  * 用于存储和管理一个系列的数据点和标签
  */
+/**
+ * ChartSeries类。
+ */
 public class ChartSeries {
 
     private final String name;

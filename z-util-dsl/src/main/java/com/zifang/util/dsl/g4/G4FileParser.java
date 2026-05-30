@@ -19,10 +19,18 @@ import java.util.regex.Pattern;
  * - fragment ruleName : body ;
  * - supports -> channel(HIDDEN) actions
  */
+/**
+ * G4FileParser类。
+ */
 public class G4FileParser {
 
     /**
      * Parse .g4 content
+     */
+    /**
+     * parse方法。
+     *      * @param g4Content String类型参数
+     * @return static G4File类型返回值
      */
     public static G4File parse(String g4Content) {
         G4File g4File = new G4File();
@@ -35,6 +43,11 @@ public class G4FileParser {
     /**
      * Extract all rules from .g4 content
      * Uses character-by-character parsing instead of regex to avoid comment handling issues
+     */
+    /**
+     * extractRules方法。
+     *      * @param g4Content String类型参数
+     * @return static List<G4Rule>类型返回值
      */
     public static List<G4Rule> extractRules(String g4Content) {
         List<G4Rule> rules = new ArrayList<>();
@@ -301,6 +314,11 @@ public class G4FileParser {
 
     /**
      * Load and parse from file
+     */
+    /**
+     * parseFromFile方法。
+     *      * @param filePath String类型参数
+     * @return static G4File类型返回值
      */
     public static G4File parseFromFile(String filePath) {
         try {

@@ -24,6 +24,9 @@ import java.util.Properties;
  *
  * <p>集群部署时，确保每台机器的 nodeId 不同（手动模式更可靠）
  */
+/**
+ * NodeIdAllocator类。
+ */
 public class NodeIdAllocator {
 
     private static final Logger log = LoggerFactory.getLogger(NodeIdAllocator.class);
@@ -40,6 +43,11 @@ public class NodeIdAllocator {
      *
      * @param specifiedNodeId 指定节点号（小于 0 表示自动分配）
      * @return 节点号（0 ~ 1023）
+     */
+    /**
+     * allocate方法。
+     *      * @param specifiedNodeId long类型参数
+     * @return static long类型返回值
      */
     public static long allocate(long specifiedNodeId) {
         if (specifiedNodeId >= 0 && specifiedNodeId <= MAX_NODE_ID) {
@@ -114,6 +122,11 @@ public class NodeIdAllocator {
 
     /**
      * 验证节点号是否合法
+     */
+    /**
+     * isValid方法。
+     *      * @param nodeId long类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isValid(long nodeId) {
         return nodeId >= 0 && nodeId <= MAX_NODE_ID;

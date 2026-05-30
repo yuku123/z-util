@@ -8,6 +8,9 @@ import java.awt.event.KeyEvent;
  * 秦码Robot演示类
  * 使用Robot自动化输入"HelloWorld"
  */
+/**
+ * QinMaRobot类。
+ */
 public class QinMaRobot {
 
     public static void main(String[] args) throws AWTException {

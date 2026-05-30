@@ -5,6 +5,9 @@ import java.util.Arrays;
 /**
  * N-dimensional array implementation
  */
+/**
+ * NdArray类。
+ */
 public class NdArray {
     private Object data;
     private final DType dtype;
@@ -16,22 +19,49 @@ public class NdArray {
         this.shape = shape;
     }
 
+    /**
+     * create方法。
+     *      * @param data Object类型参数
+     * @param dtype DType类型参数
+     * @param shape Shape类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray create(Object data, DType dtype, Shape shape) {
         return new NdArray(data, dtype, shape);
     }
 
+    /**
+     * zeros方法。
+     *      * @param shape Shape类型参数
+     * @param dtype DType类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray zeros(Shape shape, DType dtype) {
         int size = shape.size();
         Object data = Array.createZeroArray(dtype, size);
         return new NdArray(data, dtype, shape);
     }
 
+    /**
+     * ones方法。
+     *      * @param shape Shape类型参数
+     * @param dtype DType类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray ones(Shape shape, DType dtype) {
         int size = shape.size();
         Object data = Array.createOneArray(dtype, size);
         return new NdArray(data, dtype, shape);
     }
 
+    /**
+     * arange方法。
+     *      * @param start int类型参数
+     * @param stop int类型参数
+     * @param step int类型参数
+     * @param dtype DType类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray arange(int start, int stop, int step, DType dtype) {
         if (step == 0) {
             throw new IllegalArgumentException("step cannot be zero");
@@ -41,14 +71,33 @@ public class NdArray {
         return new NdArray(data, dtype, new Shape(size));
     }
 
+    /**
+     * arange方法。
+     *      * @param start int类型参数
+     * @param stop int类型参数
+     * @param dtype DType类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray arange(int start, int stop, DType dtype) {
         return arange(start, stop, 1, dtype);
     }
 
+    /**
+     * arange方法。
+     *      * @param stop int类型参数
+     * @param dtype DType类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray arange(int stop, DType dtype) {
         return arange(0, stop, 1, dtype);
     }
 
+    /**
+     * array方法。
+     *      * @param data Object类型参数
+     * @param dtype DType类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray array(Object data, DType dtype) {
         if (data instanceof Object[]) {
             Object[] arr = (Object[]) data;
@@ -85,26 +134,51 @@ public class NdArray {
         throw new IllegalArgumentException("Unsupported array type: " + data.getClass());
     }
 
+    /**
+     * getData方法。
+     * @return Object类型返回值
+     */
     public Object getData() {
         return data;
     }
 
+    /**
+     * getDtype方法。
+     * @return DType类型返回值
+     */
     public DType getDtype() {
         return dtype;
     }
 
+    /**
+     * getShape方法。
+     * @return Shape类型返回值
+     */
     public Shape getShape() {
         return shape;
     }
 
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         return shape.size();
     }
 
+    /**
+     * ndim方法。
+     * @return int类型返回值
+     */
     public int ndim() {
         return shape.ndim();
     }
 
+    /**
+     * get方法。
+     *      * @param indices int...类型参数
+     * @return Object类型返回值
+     */
     public Object get(int... indices) {
         if (indices.length != shape.ndim()) {
             throw new IllegalArgumentException("Number of indices must match dimensions");
@@ -113,6 +187,11 @@ public class NdArray {
         return Array.get(data, flatIndex);
     }
 
+    /**
+     * set方法。
+     *      * @param value Object类型参数
+     * @param indices int...类型参数
+     */
     public void set(Object value, int... indices) {
         if (indices.length != shape.ndim()) {
             throw new IllegalArgumentException("Number of indices must match dimensions");
@@ -131,6 +210,11 @@ public class NdArray {
         return flatIndex;
     }
 
+    /**
+     * reshape方法。
+     *      * @param newShape int...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray reshape(int... newShape) {
         int size = shape.size();
         int expectedSize = 1;
@@ -143,6 +227,10 @@ public class NdArray {
         return new NdArray(data, dtype, new Shape(newShape));
     }
 
+    /**
+     * transpose方法。
+     * @return NdArray类型返回值
+     */
     public NdArray transpose() {
         if (shape.ndim() < 2) {
             return this;
@@ -155,6 +243,11 @@ public class NdArray {
         return transpose(perm);
     }
 
+    /**
+     * transpose方法。
+     *      * @param axes int...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray transpose(int... axes) {
         if (axes.length != shape.ndim()) {
             throw new IllegalArgumentException("Number of axes must match dimensions");
@@ -167,6 +260,11 @@ public class NdArray {
         return new NdArray(transposedData, dtype, new Shape(newShape));
     }
 
+    /**
+     * slice方法。
+     *      * @param slices Slice...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray slice(Slice... slices) {
         if (slices.length > shape.ndim()) {
             throw new IllegalArgumentException("Too many slices");
@@ -213,17 +311,30 @@ public class NdArray {
         }
     }
 
+    /**
+     * copy方法。
+     * @return NdArray类型返回值
+     */
     public NdArray copy() {
         Object newData = Array.copy(data, shape.size(), dtype);
         return new NdArray(newData, dtype, shape);
     }
 
+    /**
+     * fill方法。
+     *      * @param value Object类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray fill(Object value) {
         Array.fill(data, value, shape.size());
         return this;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("NdArray(shape=").append(shape);
@@ -235,6 +346,11 @@ public class NdArray {
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -244,6 +360,10 @@ public class NdArray {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         int result = Arrays.hashCode(shape.getDimensions());
         result = 31 * result + dtype.hashCode();

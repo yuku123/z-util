@@ -21,6 +21,9 @@ import com.zifang.util.numpy.Shape;
  * 
  * Simplified implementation using fuzzy set approach with binary cross-entropy optimization.
  */
+/**
+ * UMAP类。
+ */
 public class UMAP {
     private int nComponents;
     private int nNeighbors;
@@ -36,6 +39,14 @@ public class UMAP {
      * @param learningRate Learning rate (default 1.0)
      * @param nIterations  Number of iterations (default 200)
      */
+    /**
+     * UMAP方法。
+     *      * @param nComponents int类型参数
+     * @param nNeighbors int类型参数
+     * @param minDist double类型参数
+     * @param learningRate double类型参数
+     * @param nIterations int类型参数
+     */
     public UMAP(int nComponents, int nNeighbors, double minDist, double learningRate, int nIterations) {
         this.nComponents = nComponents;
         this.nNeighbors = nNeighbors;
@@ -47,6 +58,9 @@ public class UMAP {
     /**
      * Constructor with default parameters
      */
+    /**
+     * UMAP方法。
+     */
     public UMAP() {
         this(2, 15, 0.1, 1.0, 200);
     }
@@ -55,6 +69,11 @@ public class UMAP {
      * Fit and transform data to low-dimensional embedding
      * @param X High-dimensional data of shape [n_samples, n_features]
      * @return Low-dimensional embedding of shape [n_samples, n_components]
+     */
+    /**
+     * fitTransform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
      */
     public NdArray fitTransform(NdArray X) {
         double[][] Xdata = toDouble2D(X);

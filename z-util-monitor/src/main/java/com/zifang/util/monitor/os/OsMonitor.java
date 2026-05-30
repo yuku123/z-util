@@ -8,5 +8,8 @@ package com.zifang.util.monitor.os;
  *
  * @author zifang
  */
+/**
+ * OsMonitor类。
+ */
 public class OsMonitor {
 }

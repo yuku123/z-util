@@ -38,6 +38,9 @@ import java.util.Properties;
  * @see Properties
  * @see ClassLoader
  */
+/**
+ * ConfigUtil类。
+ */
 public class ConfigUtil {
 
     /**
@@ -57,6 +60,11 @@ public class ConfigUtil {
      *
      * @param path 资源路径（相对路径或绝对路径）
      * @return 资源URL，未找到返回null
+     */
+    /**
+     * findAsResource方法。
+     *      * @param path String类型参数
+     * @return static URL类型返回值
      */
     public static URL findAsResource(String path) {
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
@@ -87,6 +95,11 @@ public class ConfigUtil {
      * @return 文件系统路径
      * @throws IllegalArgumentException 如果资源未找到
      */
+    /**
+     * toFilePath方法。
+     *      * @param path String类型参数
+     * @return static String类型返回值
+     */
     public static String toFilePath(String path) {
         URL url = findAsResource(path);
         if (url == null) {
@@ -115,6 +128,11 @@ public class ConfigUtil {
      * @param path 资源路径
      * @return Properties 对象，加载后的配置内容
      * @throws IOException 如果资源未找到或读取失败
+     */
+    /**
+     * loadProperties方法。
+     *      * @param path String类型参数
+     * @return static Properties类型返回值
      */
     public static Properties loadProperties(String path) throws IOException {
         URL url = findAsResource(path);

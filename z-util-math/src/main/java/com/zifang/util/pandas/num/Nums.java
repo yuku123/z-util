@@ -6,10 +6,17 @@ import java.util.List;
  * Nums 类 - numpy 函数库的静态方法封装
  * 提供数组创建和操作的静态方法，类似于 Python numpy 库
  */
+/**
+ * Nums类。
+ */
 public class Nums {
 
     /**
      * 随机数生成器实例
+     */
+    /**
+     * NumRandom方法。
+     * @return static final NumRandom random = new类型返回值
      */
     public static final NumRandom random = new NumRandom();
 
@@ -17,6 +24,11 @@ public class Nums {
      * 从数组对象创建 Num 实例
      * @param array 数组对象，支持 double[]、int[] 等
      * @return Num 实例
+     */
+    /**
+     * array方法。
+     *      * @param array Object类型参数
+     * @return static Num类型返回值
      */
     public static Num array(Object array) {
         return new Num(array);
@@ -27,6 +39,11 @@ public class Nums {
      * @param list 列表对象
      * @return Num 实例
      */
+    /**
+     * array方法。
+     *      * @param list List?类型参数
+     * @return static Num类型返回值
+     */
     public static Num array(List<?> list) {
         return new Num(list.toArray());
     }
@@ -36,6 +53,12 @@ public class Nums {
      * @param shape 数组形状
      * @param dType 数据类型
      * @return 空 Num 实例
+     */
+    /**
+     * array方法。
+     *      * @param shape int[]类型参数
+     * @param dType DType类型参数
+     * @return static Num类型返回值
      */
     public static Num array(int[] shape, DType dType) {
         return null;
@@ -48,6 +71,13 @@ public class Nums {
      * @param dType 数据类型
      * @return Num 实例
      */
+    /**
+     * array方法。
+     *      * @param shape int[]类型参数
+     * @param objs Object[]类型参数
+     * @param dType DType类型参数
+     * @return static Num类型返回值
+     */
     public static Num array(int[] shape, Object[] objs, DType dType) {
         return null;
     }
@@ -57,6 +87,12 @@ public class Nums {
      * @param num 目标 Num 实例
      * @param objs 用于填充的对象数组
      * @return 填充后的 Num 实例
+     */
+    /**
+     * fill方法。
+     *      * @param num Num类型参数
+     * @param objs Object[]类型参数
+     * @return static Num类型返回值
      */
     public static Num fill(Num num, Object[] objs) {
         return null;
@@ -74,6 +110,11 @@ public class Nums {
      * </ul>
      * @param i 可以是单个数字(结束值)或多个参数(开始, 结束, 步长)
      * @return 均匀间隔的数值数组
+     */
+    /**
+     * aRange方法。
+     *      * @param i Object...类型参数
+     * @return static Num类型返回值
      */
     public static Num aRange(Object... i) {
         return null;
@@ -94,6 +135,14 @@ public class Nums {
      * @param endPoint 是否包含最后的值
      * @return 均匀间隔的样本数组
      */
+    /**
+     * linSpace方法。
+     *      * @param i Number类型参数
+     * @param j Number类型参数
+     * @param num int类型参数
+     * @param endPoint boolean类型参数
+     * @return static Num类型返回值
+     */
     public static Num linSpace(Number i, Number j, Integer num, Boolean endPoint) {
         return null;
     }
@@ -110,6 +159,12 @@ public class Nums {
      * @param dType  数据类型
      * @return 全零 Num 实例
      */
+    /**
+     * zeros方法。
+     *      * @param shapes Integer[]类型参数
+     * @param dType DType类型参数
+     * @return static Num类型返回值
+     */
     public static Num zeros(Integer[] shapes, DType dType) {
         return null;
     }
@@ -122,6 +177,10 @@ public class Nums {
      * 类似于 numpy.ones()
      *
      * @return 全一 Num 实例
+     */
+    /**
+     * ones方法。
+     * @return static Num类型返回值
      */
     public static Num ones() {
         return null;
@@ -136,6 +195,10 @@ public class Nums {
      *
      * @return 单位矩阵 Num 实例
      */
+    /**
+     * eye方法。
+     * @return static Num类型返回值
+     */
     public static Num eye() {
         return null;
     }
@@ -145,6 +208,9 @@ public class Nums {
      * <p>
      * 类似于 numpy.hstack()
      */
+    /**
+     * hStack方法。
+     */
     public void hStack() {
 
     }
@@ -153,6 +219,9 @@ public class Nums {
      * 纵向连接多个数组
      * <p>
      * 类似于 numpy.vstack()
+     */
+    /**
+     * vStack方法。
      */
     public void vStack() {
 
@@ -166,6 +235,9 @@ public class Nums {
      * <p>
      * 类似于 numpy.hsplit()
      */
+    /**
+     * hsplit方法。
+     */
     public void hsplit() {
 
     }
@@ -174,6 +246,9 @@ public class Nums {
      * 垂直分割数组
      * <p>
      * 类似于 numpy.vsplit()
+     */
+    /**
+     * vsplit方法。
      */
     public void vsplit() {
 

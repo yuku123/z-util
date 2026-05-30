@@ -7,6 +7,9 @@ import java.io.*;
  * <p>
  * 将反编译后的Java源码写入文件。
  */
+/**
+ * FileCreator类。
+ */
 public class FileCreator {
 
     /**
@@ -14,6 +17,12 @@ public class FileCreator {
      *
      * @param name 源文件名称（不含扩展名）
      * @param src 源代码
+     */
+    /**
+     * createFile方法。
+     *      * @param name String类型参数
+     * @param src String类型参数
+     * @return static void类型返回值
      */
     public static void createFile(String name, String src) {
         createFile(name, src, null);
@@ -25,6 +34,13 @@ public class FileCreator {
      * @param name 源文件名称（不含扩展名）
      * @param src 源代码
      * @param outputDir 输出目录，为 null 时使用当前目录
+     */
+    /**
+     * createFile方法。
+     *      * @param name String类型参数
+     * @param src String类型参数
+     * @param outputDir String类型参数
+     * @return static void类型返回值
      */
     public static void createFile(String name, String src, String outputDir) {
         // 确定输出目录

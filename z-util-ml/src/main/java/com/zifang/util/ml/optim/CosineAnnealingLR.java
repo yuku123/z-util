@@ -15,6 +15,9 @@ package com.zifang.util.ml.optim;
  * 
  * where T_i is the period for the current restart.
  */
+/**
+ * CosineAnnealingLR类。
+ */
 public class CosineAnnealingLR implements LrScheduler {
     
     private final Optimizer optimizer;
@@ -29,14 +32,34 @@ public class CosineAnnealingLR implements LrScheduler {
     private int lastRestart;
     private int currentPeriod;
     
+    /**
+     * CosineAnnealingLR方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param tMax int类型参数
+     */
     public CosineAnnealingLR(Optimizer optimizer, int tMax) {
         this(optimizer, tMax, 0.0, 1, 0, 0.0);
     }
     
+    /**
+     * CosineAnnealingLR方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param tMax int类型参数
+     * @param etaMin double类型参数
+     */
     public CosineAnnealingLR(Optimizer optimizer, int tMax, double etaMin) {
         this(optimizer, tMax, etaMin, 1, 0, 0.0);
     }
     
+    /**
+     * CosineAnnealingLR方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param tMax int类型参数
+     * @param etaMin double类型参数
+     * @param tMult int类型参数
+     * @param warmup_epochs int类型参数
+     * @param warmup_start_lr double类型参数
+     */
     public CosineAnnealingLR(Optimizer optimizer, int tMax, double etaMin, int tMult, int warmup_epochs, double warmup_start_lr) {
         this.optimizer = optimizer;
         this.baseLearningRate = optimizer.getLearningRate();
@@ -51,6 +74,9 @@ public class CosineAnnealingLR implements LrScheduler {
     }
     
     @Override
+    /**
+     * step方法。
+     */
     public void step() {
         epoch++;
         
@@ -85,12 +111,20 @@ public class CosineAnnealingLR implements LrScheduler {
     }
     
     @Override
+    /**
+     * getLastLR方法。
+     * @return double类型返回值
+     */
     public double getLastLR() {
         return optimizer.getLearningRate();
     }
     
     /**
      * Get the current epoch.
+     */
+    /**
+     * getEpoch方法。
+     * @return int类型返回值
      */
     public int getEpoch() {
         return epoch;
@@ -99,12 +133,20 @@ public class CosineAnnealingLR implements LrScheduler {
     /**
      * Get the maximum number of epochs (period).
      */
+    /**
+     * gettMax方法。
+     * @return int类型返回值
+     */
     public int gettMax() {
         return tMax;
     }
     
     /**
      * Get the minimum learning rate.
+     */
+    /**
+     * getEtaMin方法。
+     * @return double类型返回值
      */
     public double getEtaMin() {
         return etaMin;
@@ -113,12 +155,20 @@ public class CosineAnnealingLR implements LrScheduler {
     /**
      * Get the period multiplier for warm restarts.
      */
+    /**
+     * gettMult方法。
+     * @return int类型返回值
+     */
     public int gettMult() {
         return tMult;
     }
     
     /**
      * Get the base learning rate.
+     */
+    /**
+     * getBaseLearningRate方法。
+     * @return double类型返回值
      */
     public double getBaseLearningRate() {
         return baseLearningRate;

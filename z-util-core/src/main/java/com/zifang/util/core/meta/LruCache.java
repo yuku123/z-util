@@ -10,6 +10,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * @description: lru cache
  * @version: JDK 1.8
  */
+/**
+ * LruCache类。
+ */
 public class LruCache<K, V> extends LinkedHashMap<K, V> {
 
     private static final long serialVersionUID = -5167631809472116969L;
@@ -20,21 +23,38 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
     private final Lock lock = new ReentrantLock();
     private volatile int maxCapacity;
 
+    /**
+     * LruCache方法。
+     */
     public LruCache() {
         this(DEFAULT_MAX_CAPACITY);
     }
 
+    /**
+     * LruCache方法。
+     *      * @param maxCapacity int类型参数
+     */
     public LruCache(int maxCapacity) {
         super(16, DEFAULT_LOAD_FACTOR, true);
         this.maxCapacity = maxCapacity;
     }
 
     @Override
+    /**
+     * removeEldestEntry方法。
+     *      * @param eldest java.util.Map.EntryK,类型参数
+     * @return boolean类型返回值
+     */
     protected boolean removeEldestEntry(java.util.Map.Entry<K, V> eldest) {
         return size() > maxCapacity;
     }
 
     @Override
+    /**
+     * containsKey方法。
+     *      * @param key Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean containsKey(Object key) {
         lock.lock();
         try {
@@ -45,6 +65,11 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
     }
 
     @Override
+    /**
+     * get方法。
+     *      * @param key Object类型参数
+     * @return V类型返回值
+     */
     public V get(Object key) {
         lock.lock();
         try {
@@ -55,6 +80,12 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
     }
 
     @Override
+    /**
+     * put方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
+     * @return V类型返回值
+     */
     public V put(K key, V value) {
         lock.lock();
         try {
@@ -65,6 +96,11 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
     }
 
     @Override
+    /**
+     * remove方法。
+     *      * @param key Object类型参数
+     * @return V类型返回值
+     */
     public V remove(Object key) {
         lock.lock();
         try {
@@ -75,6 +111,10 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
     }
 
     @Override
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         lock.lock();
         try {
@@ -85,6 +125,9 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
     }
 
     @Override
+    /**
+     * clear方法。
+     */
     public void clear() {
         lock.lock();
         try {
@@ -94,10 +137,18 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
         }
     }
 
+    /**
+     * getMaxCapacity方法。
+     * @return int类型返回值
+     */
     public int getMaxCapacity() {
         return maxCapacity;
     }
 
+    /**
+     * setMaxCapacity方法。
+     *      * @param maxCapacity int类型参数
+     */
     public void setMaxCapacity(int maxCapacity) {
         this.maxCapacity = maxCapacity;
     }

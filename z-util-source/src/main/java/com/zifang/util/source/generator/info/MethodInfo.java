@@ -13,6 +13,9 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * MethodInfo类。
+ */
 public class MethodInfo {
 
     /**
@@ -47,6 +50,11 @@ public class MethodInfo {
 
 
     @Override
+    /**
+     * equals方法。
+     *      * @param obj Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object obj) {
         if (obj instanceof MethodInfo) {
             MethodInfo tobeCompare = (MethodInfo) obj;
@@ -70,6 +78,10 @@ public class MethodInfo {
      *
      * @return 方法签名字符串
      */
+    /**
+     * signature方法。
+     * @return String类型返回值
+     */
     public String signature() {
         return returnType + " " + methodName + "(" + getParameterStr() + ")" + ";";
     }
@@ -80,6 +92,10 @@ public class MethodInfo {
      * 例如：public String name(String cc, Double dd);
      *
      * @return 方法完整签名字符串
+     */
+    /**
+     * fullSignature方法。
+     * @return String类型返回值
      */
     public String fullSignature() {
         return returnType + " " + methodName + "(" + getParameterStr() + ")" + ";";
@@ -102,6 +118,10 @@ public class MethodInfo {
      *
      * @return 方法修饰符
      */
+    /**
+     * getModifier方法。
+     * @return int类型返回值
+     */
     public Integer getModifier() {
         return modifier;
     }
@@ -110,6 +130,10 @@ public class MethodInfo {
      * 设置方法修饰符
      *
      * @param modifier 方法修饰符
+     */
+    /**
+     * setModifier方法。
+     *      * @param modifier int类型参数
      */
     public void setModifier(Integer modifier) {
         this.modifier = modifier;
@@ -120,6 +144,10 @@ public class MethodInfo {
      *
      * @return 返回类型全限定名
      */
+    /**
+     * getReturnType方法。
+     * @return String类型返回值
+     */
     public String getReturnType() {
         return returnType;
     }
@@ -128,6 +156,10 @@ public class MethodInfo {
      * 设置返回类型
      *
      * @param returnType 返回类型全限定名
+     */
+    /**
+     * setReturnType方法。
+     *      * @param returnType String类型参数
      */
     public void setReturnType(String returnType) {
         this.returnType = returnType;
@@ -138,6 +170,10 @@ public class MethodInfo {
      *
      * @return 方法名称
      */
+    /**
+     * getMethodName方法。
+     * @return String类型返回值
+     */
     public String getMethodName() {
         return methodName;
     }
@@ -146,6 +182,10 @@ public class MethodInfo {
      * 设置方法名称
      *
      * @param methodName 方法名称
+     */
+    /**
+     * setMethodName方法。
+     *      * @param methodName String类型参数
      */
     public void setMethodName(String methodName) {
         this.methodName = methodName;
@@ -156,6 +196,10 @@ public class MethodInfo {
      *
      * @return 参数列表
      */
+    /**
+     * getMethodParameterPairs方法。
+     * @return List<MethodParameterPair>类型返回值
+     */
     public List<MethodParameterPair> getMethodParameterPairs() {
         return methodParameterPairs;
     }
@@ -164,6 +208,10 @@ public class MethodInfo {
      * 设置参数列表
      *
      * @param methodParameterPairs 参数列表
+     */
+    /**
+     * setMethodParameterPairs方法。
+     *      * @param methodParameterPairs ListMethodParameterPair类型参数
      */
     public void setMethodParameterPairs(List<MethodParameterPair> methodParameterPairs) {
         this.methodParameterPairs = methodParameterPairs;
@@ -174,6 +222,10 @@ public class MethodInfo {
      *
      * @return 方法体语句列表
      */
+    /**
+     * getStatements方法。
+     * @return List<String>类型返回值
+     */
     public List<String> getStatements() {
         return statements;
     }
@@ -183,14 +235,26 @@ public class MethodInfo {
      *
      * @param statements 方法体语句列表
      */
+    /**
+     * setStatements方法。
+     *      * @param statements ListString类型参数
+     */
     public void setStatements(List<String> statements) {
         this.statements = statements;
     }
 
+    /**
+     * getAnnotations方法。
+     * @return List<AnnotationInfo>类型返回值
+     */
     public List<AnnotationInfo> getAnnotations() {
         return annotations;
     }
 
+    /**
+     * setAnnotations方法。
+     *      * @param annotations ListAnnotationInfo类型参数
+     */
     public void setAnnotations(List<AnnotationInfo> annotations) {
         this.annotations = annotations;
     }

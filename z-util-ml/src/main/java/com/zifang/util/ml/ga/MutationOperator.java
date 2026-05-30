@@ -27,6 +27,9 @@ package com.zifang.util.ml.ga;
  * @see CrossoverOperator
  * @see GeneticAlgorithmEngine
  */
+/**
+ * MutationOperator接口。
+ */
 public interface MutationOperator {
 
     /**

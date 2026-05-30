@@ -12,6 +12,9 @@ import org.openqa.selenium.WebDriver;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * JsEvaluator类。
+ */
 public class JsEvaluator {
 
     private final JavascriptExecutor executor;
@@ -19,6 +22,10 @@ public class JsEvaluator {
     /**
      * 构造 JsEvaluator。
      * @param driver WebDriver 实例
+     */
+    /**
+     * JsEvaluator方法。
+     *      * @param driver WebDriver类型参数
      */
     public JsEvaluator(WebDriver driver) {
         this.executor = (JavascriptExecutor) driver;
@@ -28,6 +35,11 @@ public class JsEvaluator {
      * 执行同步 JavaScript。
      * @param script JavaScript 脚本
      * @return 脚本执行结果
+     */
+    /**
+     * evaluate方法。
+     *      * @param script String类型参数
+     * @return Object类型返回值
      */
     public Object evaluate(String script) {
         return executor.executeScript(script);
@@ -39,6 +51,12 @@ public class JsEvaluator {
      * @param args 脚本参数
      * @return 脚本执行结果
      */
+    /**
+     * evaluate方法。
+     *      * @param script String类型参数
+     * @param args Object...类型参数
+     * @return Object类型返回值
+     */
     public Object evaluate(String script, Object... args) {
         return executor.executeScript(script, args);
     }
@@ -47,6 +65,11 @@ public class JsEvaluator {
      * 执行异步 JavaScript。
      * @param script JavaScript 脚本
      * @return 脚本执行结果
+     */
+    /**
+     * evaluateAsync方法。
+     *      * @param script String类型参数
+     * @return Object类型返回值
      */
     public Object evaluateAsync(String script) {
         return executor.executeAsyncScript(script);
@@ -57,6 +80,12 @@ public class JsEvaluator {
      * @param script JavaScript 脚本
      * @param args 脚本参数
      * @return 脚本执行结果
+     */
+    /**
+     * evaluateAsync方法。
+     *      * @param script String类型参数
+     * @param args Object...类型参数
+     * @return Object类型返回值
      */
     public Object evaluateAsync(String script, Object... args) {
         return executor.executeAsyncScript(script, args);

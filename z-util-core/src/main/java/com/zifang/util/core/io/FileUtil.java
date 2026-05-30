@@ -46,6 +46,9 @@ import java.util.regex.Pattern;
  *
  * @author zifang
  */
+/**
+ * FileUtil类。
+ */
 public class FileUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
@@ -66,6 +69,12 @@ public class FileUtil {
      * @param source source file
      * @param target target file
      */
+    /**
+     * copyFileWithChannel方法。
+     *      * @param source File类型参数
+     * @param target File类型参数
+     * @return static void类型返回值
+     */
     public static void copyFileWithChannel(File source, File target) {
         try (FileInputStream inStream = new FileInputStream(source);
              FileOutputStream outStream = new FileOutputStream(target);
@@ -82,6 +91,12 @@ public class FileUtil {
      *
      * @param source source file
      * @param target target file
+     */
+    /**
+     * copyFileWithBuffer方法。
+     *      * @param source File类型参数
+     * @param target File类型参数
+     * @return static void类型返回值
      */
     public static void copyFileWithBuffer(File source, File target) {
         try (FileInputStream inStream = new FileInputStream(source);
@@ -105,6 +120,12 @@ public class FileUtil {
      * @param source source file
      * @param target target file
      */
+    /**
+     * customBufferBufferedStreamCopy方法。
+     *      * @param source File类型参数
+     * @param target File类型参数
+     * @return static void类型返回值
+     */
     public static void customBufferBufferedStreamCopy(File source, File target) {
         try (InputStream fis = new BufferedInputStream(new FileInputStream(source));
              OutputStream fos = new BufferedOutputStream(new FileOutputStream(target))) {
@@ -123,6 +144,12 @@ public class FileUtil {
      *
      * @param source source file
      * @param target target file
+     */
+    /**
+     * customBufferStreamCopy方法。
+     *      * @param source File类型参数
+     * @param target File类型参数
+     * @return static void类型返回值
      */
     public static void customBufferStreamCopy(File source, File target) {
         try (InputStream fis = new FileInputStream(source);
@@ -146,6 +173,13 @@ public class FileUtil {
      * @param fromCharsetName source charset
      * @param toCharsetName   target charset
      */
+    /**
+     * convert方法。
+     *      * @param fileName String类型参数
+     * @param fromCharsetName String类型参数
+     * @param toCharsetName String类型参数
+     * @return static void类型返回值
+     */
     public static void convert(String fileName, String fromCharsetName, String toCharsetName) {
         convert(new File(fileName), fromCharsetName, toCharsetName, null);
     }
@@ -156,6 +190,13 @@ public class FileUtil {
      * @param file            file to convert
      * @param fromCharsetName source charset
      * @param toCharsetName   target charset
+     */
+    /**
+     * convert方法。
+     *      * @param file File类型参数
+     * @param fromCharsetName String类型参数
+     * @param toCharsetName String类型参数
+     * @return static void类型返回值
      */
     public static void convert(File file, String fromCharsetName, String toCharsetName) {
         convert(file, fromCharsetName, toCharsetName, null);
@@ -169,6 +210,14 @@ public class FileUtil {
      * @param toCharsetName   target charset
      * @param filter          filename filter
      */
+    /**
+     * convert方法。
+     *      * @param fileName String类型参数
+     * @param fromCharsetName String类型参数
+     * @param toCharsetName String类型参数
+     * @param filter FilenameFilter类型参数
+     * @return static void类型返回值
+     */
     public static void convert(String fileName, String fromCharsetName, String toCharsetName, FilenameFilter filter) {
         convert(new File(fileName), fromCharsetName, toCharsetName, filter);
     }
@@ -180,6 +229,14 @@ public class FileUtil {
      * @param fromCharsetName source charset
      * @param toCharsetName   target charset
      * @param filter          filename filter
+     */
+    /**
+     * convert方法。
+     *      * @param file File类型参数
+     * @param fromCharsetName String类型参数
+     * @param toCharsetName String类型参数
+     * @param filter FilenameFilter类型参数
+     * @return static void类型返回值
      */
     public static void convert(File file, String fromCharsetName, String toCharsetName, FilenameFilter filter) {
         if (file.isDirectory()) {
@@ -210,6 +267,12 @@ public class FileUtil {
      * @throws UnsupportedCharsetException if charset is not supported
      * @throws IOException                 if reading fails
      */
+    /**
+     * getFileContentFromCharset方法。
+     *      * @param file File类型参数
+     * @param fromCharsetName String类型参数
+     * @return static String类型返回值
+     */
     public static String getFileContentFromCharset(File file, String fromCharsetName) throws IOException {
         if (!Charset.isSupported(fromCharsetName)) {
             throw new UnsupportedCharsetException(fromCharsetName);
@@ -225,6 +288,13 @@ public class FileUtil {
      * @param content       content to write
      * @throws UnsupportedCharsetException if charset is not supported
      * @throws IOException                 if writing fails
+     */
+    /**
+     * saveFile2Charset方法。
+     *      * @param file File类型参数
+     * @param toCharsetName String类型参数
+     * @param content String类型参数
+     * @return static void类型返回值
      */
     public static void saveFile2Charset(File file, String toCharsetName, String content) throws IOException {
         if (!Charset.isSupported(toCharsetName)) {
@@ -242,6 +312,12 @@ public class FileUtil {
      * @param newPath new path
      * @return true if rename succeeded
      */
+    /**
+     * dirRename方法。
+     *      * @param oldPath String类型参数
+     * @param newPath String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean dirRename(String oldPath, String newPath) {
         File oldFile = new File(oldPath);
         File newFile = new File(newPath);
@@ -253,6 +329,11 @@ public class FileUtil {
      *
      * @param file directory to create
      * @throws FileNotFoundException if creation fails
+     */
+    /**
+     * mkDir方法。
+     *      * @param file File类型参数
+     * @return static void类型返回值
      */
     public static void mkDir(File file) throws FileNotFoundException {
         if (file == null) {
@@ -280,6 +361,11 @@ public class FileUtil {
      * @param dirPath directory path
      * @throws IOException if creation fails
      */
+    /**
+     * mkdir方法。
+     *      * @param dirPath String类型参数
+     * @return static void类型返回值
+     */
     public static void mkdir(String dirPath) throws IOException {
         FileDirUtil.mkdir(dirPath);
     }
@@ -289,6 +375,11 @@ public class FileUtil {
      *
      * @param dir directory
      * @throws IOException if creation fails
+     */
+    /**
+     * mkdir方法。
+     *      * @param dir File类型参数
+     * @return static void类型返回值
      */
     public static void mkdir(File dir) throws IOException {
         FileDirUtil.mkdir(dir);
@@ -300,6 +391,11 @@ public class FileUtil {
      * @param dirPath directory path
      * @throws IOException if creation fails
      */
+    /**
+     * mkdirs方法。
+     *      * @param dirPath String类型参数
+     * @return static void类型返回值
+     */
     public static void mkdirs(String dirPath) throws IOException {
         FileDirUtil.mkdirs(dirPath);
     }
@@ -310,6 +406,11 @@ public class FileUtil {
      * Updates file last modified time. Creates file if it doesn't exist.
      *
      * @param file file to touch
+     */
+    /**
+     * touch方法。
+     *      * @param file File类型参数
+     * @return static void类型返回值
      */
     public static void touch(File file) {
         long currentTime = System.currentTimeMillis();
@@ -336,6 +437,11 @@ public class FileUtil {
      *
      * @param fileName file to touch
      */
+    /**
+     * touch方法。
+     *      * @param fileName String类型参数
+     * @return static void类型返回值
+     */
     public static void touch(String fileName) {
         touch(new File(fileName));
     }
@@ -344,6 +450,11 @@ public class FileUtil {
      * Updates multiple files last modified time.
      *
      * @param files files to touch
+     */
+    /**
+     * touch方法。
+     *      * @param files File[]类型参数
+     * @return static void类型返回值
      */
     public static void touch(File[] files) {
         for (File file : files) {
@@ -355,6 +466,11 @@ public class FileUtil {
      * Updates multiple files last modified time.
      *
      * @param fileNames files to touch
+     */
+    /**
+     * touch方法。
+     *      * @param fileNames String[]类型参数
+     * @return static void类型返回值
      */
     public static void touch(String[] fileNames) {
         for (String fileName : fileNames) {
@@ -370,6 +486,11 @@ public class FileUtil {
      * @param file directory to create
      * @return true if creation succeeded
      */
+    /**
+     * makeDirectory方法。
+     *      * @param file File类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean makeDirectory(File file) {
         if (file.exists()) {
             return file.isDirectory();
@@ -382,6 +503,11 @@ public class FileUtil {
      *
      * @param fileName directory path
      * @return true if creation succeeded
+     */
+    /**
+     * makeDirectory方法。
+     *      * @param fileName String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean makeDirectory(String fileName) {
         File file = new File(fileName);
@@ -397,6 +523,11 @@ public class FileUtil {
      * @param directory directory to empty
      * @throws IOException if directory cannot be emptied
      */
+    /**
+     * emptyDirectory方法。
+     *      * @param directory File类型参数
+     * @return static void类型返回值
+     */
     public static void emptyDirectory(File directory) throws IOException {
         FileDirUtil.cleanDir(directory);
     }
@@ -407,6 +538,11 @@ public class FileUtil {
      *
      * @param directoryName directory path
      * @throws IOException if directory cannot be emptied
+     */
+    /**
+     * emptyDirectory方法。
+     *      * @param directoryName String类型参数
+     * @return static void类型返回值
      */
     public static void emptyDirectory(String directoryName) throws IOException {
         emptyDirectory(new File(directoryName));
@@ -420,6 +556,11 @@ public class FileUtil {
      * @param dirName directory path
      * @throws IOException if deletion fails
      */
+    /**
+     * deleteDirectory方法。
+     *      * @param dirName String类型参数
+     * @return static void类型返回值
+     */
     public static void deleteDirectory(String dirName) throws IOException {
         FileDirUtil.deleteDir(dirName);
     }
@@ -430,6 +571,11 @@ public class FileUtil {
      * @param dir directory to delete
      * @throws IOException if deletion fails
      */
+    /**
+     * deleteDirectory方法。
+     *      * @param dir File类型参数
+     * @return static void类型返回值
+     */
     public static void deleteDirectory(File dir) throws IOException {
         FileDirUtil.deleteDir(dir);
     }
@@ -439,6 +585,11 @@ public class FileUtil {
      *
      * @param dir directory to delete
      * @return true if deletion succeeded
+     */
+    /**
+     * deleteDir方法。
+     *      * @param dir File类型参数
+     * @return static boolean类型返回值
      */
     public static boolean deleteDir(File dir) {
         if (dir == null || !dir.exists()) {
@@ -461,6 +612,12 @@ public class FileUtil {
      * @param file   directory
      * @param filter file filter
      * @return array of files
+     */
+    /**
+     * listAll方法。
+     *      * @param file File类型参数
+     * @param filter javax.swing.filechooser.FileFilter类型参数
+     * @return static File[]类型返回值
      */
     public static File[] listAll(File file, javax.swing.filechooser.FileFilter filter) {
         ArrayList<File> list = new ArrayList<>();
@@ -507,6 +664,11 @@ public class FileUtil {
      * @deprecated Use File.toURI().toURL() instead
      */
     @Deprecated
+    /**
+     * getURL方法。
+     *      * @param file File类型参数
+     * @return static URL类型返回值
+     */
     public static URL getURL(File file) throws MalformedURLException {
         String fileURL = "file:/" + file.getAbsolutePath();
         return new URL(fileURL);
@@ -520,6 +682,11 @@ public class FileUtil {
      * @param filePath file path
      * @return filename
      */
+    /**
+     * getFileName方法。
+     *      * @param filePath String类型参数
+     * @return static String类型返回值
+     */
     public static String getFileName(String filePath) {
         return FilePathUtil.getName(filePath);
     }
@@ -529,6 +696,11 @@ public class FileUtil {
      *
      * @param fileName filename
      * @return absolute path
+     */
+    /**
+     * getFilePath方法。
+     *      * @param fileName String类型参数
+     * @return static String类型返回值
      */
     public static String getFilePath(String fileName) {
         return getPathPart(fileName);
@@ -540,6 +712,11 @@ public class FileUtil {
      * @param filePath path to convert
      * @return UNIX style path
      */
+    /**
+     * toUNIXpath方法。
+     *      * @param filePath String类型参数
+     * @return static String类型返回值
+     */
     public static String toUNIXpath(String filePath) {
         return FilePathUtil.toUNIXPath(filePath);
     }
@@ -549,6 +726,11 @@ public class FileUtil {
      *
      * @param fileName filename
      * @return UNIX style path
+     */
+    /**
+     * getUNIXfilePath方法。
+     *      * @param fileName String类型参数
+     * @return static String类型返回值
      */
     public static String getUNIXfilePath(String fileName) {
         return toUNIXpath(new File(fileName).getAbsolutePath());
@@ -560,6 +742,11 @@ public class FileUtil {
      * @param fileName filename
      * @return extension
      */
+    /**
+     * getTypePart方法。
+     *      * @param fileName String类型参数
+     * @return static String类型返回值
+     */
     public static String getTypePart(String fileName) {
         return FilePathUtil.getSuffix(fileName);
     }
@@ -569,6 +756,11 @@ public class FileUtil {
      *
      * @param file file
      * @return extension
+     */
+    /**
+     * getFileType方法。
+     *      * @param file File类型参数
+     * @return static String类型返回值
      */
     public static String getFileType(File file) {
         return getTypePart(file.getName());
@@ -580,6 +772,11 @@ public class FileUtil {
      * @param filePath file path
      * @return true if valid image
      */
+    /**
+     * isImage方法。
+     *      * @param filePath String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isImage(String filePath) throws IOException {
         return FileHashUtil.isImage(new File(filePath));
     }
@@ -589,6 +786,11 @@ public class FileUtil {
      *
      * @param fileName filename
      * @return name part
+     */
+    /**
+     * getNamePart方法。
+     *      * @param fileName String类型参数
+     * @return static String类型返回值
      */
     public static String getNamePart(String fileName) {
         return FilePathUtil.getBaseName(fileName);
@@ -600,6 +802,11 @@ public class FileUtil {
      * @param fileName filename
      * @return parent path
      */
+    /**
+     * getPathPart方法。
+     *      * @param fileName String类型参数
+     * @return static String类型返回值
+     */
     public static String getPathPart(String fileName) {
         return FilePathUtil.getParent(fileName);
     }
@@ -609,6 +816,11 @@ public class FileUtil {
      *
      * @param fileName filename
      * @return index
+     */
+    /**
+     * getPathIndex方法。
+     *      * @param fileName String类型参数
+     * @return static int类型返回值
      */
     public static int getPathIndex(String fileName) {
         int point = fileName.indexOf('/');
@@ -625,6 +837,12 @@ public class FileUtil {
      * @param fromIndex start position
      * @return index
      */
+    /**
+     * getPathIndex方法。
+     *      * @param fileName String类型参数
+     * @param fromIndex int类型参数
+     * @return static int类型返回值
+     */
     public static int getPathIndex(String fileName, int fromIndex) {
         int point = fileName.indexOf('/', fromIndex);
         if (point == -1) {
@@ -639,6 +857,11 @@ public class FileUtil {
      * @param fileName filename
      * @return index
      */
+    /**
+     * getPathLsatIndex方法。
+     *      * @param fileName String类型参数
+     * @return static int类型返回值
+     */
     public static int getPathLsatIndex(String fileName) {
         return Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
     }
@@ -649,6 +872,12 @@ public class FileUtil {
      * @param fileName  filename
      * @param fromIndex start position
      * @return index
+     */
+    /**
+     * getPathLsatIndex方法。
+     *      * @param fileName String类型参数
+     * @param fromIndex int类型参数
+     * @return static int类型返回值
      */
     public static int getPathLsatIndex(String fileName, int fromIndex) {
         int point = fileName.lastIndexOf('/', fromIndex);
@@ -664,6 +893,11 @@ public class FileUtil {
      * @param filename filename
      * @return filename without extension
      */
+    /**
+     * trimType方法。
+     *      * @param filename String类型参数
+     * @return static String类型返回值
+     */
     public static String trimType(String filename) {
         return FilePathUtil.trimExtension(filename);
     }
@@ -675,6 +909,12 @@ public class FileUtil {
      * @param basePath base directory path
      * @return relative path
      */
+    /**
+     * getSubpath方法。
+     *      * @param fullPath String类型参数
+     * @param basePath String类型参数
+     * @return static String类型返回值
+     */
     public static String getSubpath(String fullPath, String basePath) {
         return FilePathUtil.getSubpath(fullPath, basePath);
     }
@@ -684,6 +924,11 @@ public class FileUtil {
      *
      * @param path path to validate
      * @return true if path exists or was created
+     */
+    /**
+     * pathValidate方法。
+     *      * @param path String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean pathValidate(String path) {
         String[] arraypath = path.split("/");
@@ -711,6 +956,12 @@ public class FileUtil {
      * @return content as string
      * @throws IOException if reading fails
      */
+    /**
+     * readString方法。
+     *      * @param url URL类型参数
+     * @param charset String类型参数
+     * @return static String类型返回值
+     */
     public static String readString(URL url, String charset) throws IOException {
         if (url == null) {
             throw new NullPointerException("Empty url provided!");
@@ -729,6 +980,11 @@ public class FileUtil {
      * @return content
      * @throws IOException if reading fails
      */
+    /**
+     * getFileContent方法。
+     *      * @param f File类型参数
+     * @return static String类型返回值
+     */
     public static String getFileContent(File f) throws IOException {
         return FileContentUtil.readString(f);
     }
@@ -739,6 +995,11 @@ public class FileUtil {
      * @param path file path
      * @return content
      * @throws IOException if reading fails
+     */
+    /**
+     * getFileContent方法。
+     *      * @param path String类型参数
+     * @return static String类型返回值
      */
     public static String getFileContent(String path) throws IOException {
         if (!path.startsWith("/")) {
@@ -754,6 +1015,12 @@ public class FileUtil {
      * @param modulecontent content
      * @return true if succeeded
      * @throws IOException if writing fails
+     */
+    /**
+     * genModuleTpl方法。
+     *      * @param path String类型参数
+     * @param modulecontent String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean genModuleTpl(String path, String modulecontent) throws IOException {
         path = getUNIXfilePath(path);
@@ -779,6 +1046,11 @@ public class FileUtil {
      *
      * @param pic_path picture file path
      * @return extension without dot (e.g., "jpg") or null if no extension
+     */
+    /**
+     * getPicExtendName方法。
+     *      * @param pic_path String类型参数
+     * @return static String类型返回值
      */
     public static String getPicExtendName(String pic_path) {
         pic_path = getUNIXfilePath(pic_path);
@@ -816,6 +1088,12 @@ public class FileUtil {
      * @param out output file
      * @return true if succeeded
      */
+    /**
+     * CopyFile方法。
+     *      * @param in File类型参数
+     * @param out File类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean CopyFile(File in, File out) {
         try {
             FileCopyUtil.copyFile(in, out);
@@ -833,6 +1111,12 @@ public class FileUtil {
      * @param path    file path
      * @return true if succeeded
      */
+    /**
+     * SaveFileAs方法。
+     *      * @param content String类型参数
+     * @param path String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean SaveFileAs(String content, String path) {
         try {
             FileContentUtil.writeString(new File(path), content);
@@ -849,6 +1133,11 @@ public class FileUtil {
      * @param fileName file path
      * @return byte array
      */
+    /**
+     * readFileByBytes方法。
+     *      * @param fileName String类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] readFileByBytes(String fileName) {
         try {
             return FileContentUtil.readBytes(new File(fileName));
@@ -862,6 +1151,11 @@ public class FileUtil {
      * Reads file as chars.
      *
      * @param fileName file path
+     */
+    /**
+     * readFileByChars方法。
+     *      * @param fileName String类型参数
+     * @return static void类型返回值
      */
     public static void readFileByChars(String fileName) {
         File file = new File(fileName);
@@ -883,6 +1177,11 @@ public class FileUtil {
      * @param fileName file path
      * @return list of lines
      */
+    /**
+     * readFileByLines方法。
+     *      * @param fileName String类型参数
+     * @return static List<String>类型返回值
+     */
     public static List<String> readFileByLines(String fileName) {
         try {
             return FileContentUtil.readLines(new File(fileName));
@@ -896,6 +1195,11 @@ public class FileUtil {
      * Reads file randomly.
      *
      * @param fileName file path
+     */
+    /**
+     * readFileByRandomAccess方法。
+     *      * @param fileName String类型参数
+     * @return static void类型返回值
      */
     public static void readFileByRandomAccess(String fileName) {
         try (RandomAccessFile randomFile = new RandomAccessFile(fileName, "r")) {
@@ -917,6 +1221,11 @@ public class FileUtil {
      *
      * @param fileName file path
      * @return content
+     */
+    /**
+     * readFileAll方法。
+     *      * @param fileName String类型参数
+     * @return static String类型返回值
      */
     public static String readFileAll(String fileName) {
         File file = new File(fileName);
@@ -943,6 +1252,12 @@ public class FileUtil {
      * @param oldFile old file
      * @param newFile new file
      */
+    /**
+     * renameTo方法。
+     *      * @param oldFile File类型参数
+     * @param newFile File类型参数
+     * @return static void类型返回值
+     */
     public static void renameTo(File oldFile, File newFile) {
         if (!oldFile.renameTo(newFile)) {
             logger.warn("Failed to rename file {} to {}", oldFile.getAbsolutePath(), newFile.getAbsolutePath());
@@ -958,6 +1273,12 @@ public class FileUtil {
      * @param isNew    create if not exists
      * @return true if exists
      */
+    /**
+     * isExist方法。
+     *      * @param filePath String类型参数
+     * @param isNew boolean类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isExist(String filePath, boolean isNew) {
         File file = new File(filePath);
         if (!file.exists() && isNew) {
@@ -971,6 +1292,11 @@ public class FileUtil {
      *
      * @param filePath path
      * @return true if exists
+     */
+    /**
+     * isFileExist方法。
+     *      * @param filePath String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isFileExist(String filePath) {
         return new File(filePath).exists();
@@ -986,6 +1312,13 @@ public class FileUtil {
      * @param suffix suffix
      * @return generated filename
      */
+    /**
+     * getFileName方法。
+     *      * @param type String类型参数
+     * @param prefix String类型参数
+     * @param suffix String类型参数
+     * @return static String类型返回值
+     */
     public static String getFileName(String type, String prefix, String suffix) {
         String date = new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String random = String.valueOf((int) ((Math.random() * 9 + 1) * 1000000000));
@@ -996,6 +1329,10 @@ public class FileUtil {
      * Generates filename with timestamp and random number.
      *
      * @return generated filename
+     */
+    /**
+     * getFileName方法。
+     * @return static String类型返回值
      */
     public static String getFileName() {
         return getFileName("", "", "");
@@ -1009,6 +1346,11 @@ public class FileUtil {
      * @param file file
      * @return file size in bytes
      * @throws IOException if error occurs
+     */
+    /**
+     * getFileSize方法。
+     *      * @param file File类型参数
+     * @return static long类型返回值
      */
     public static long getFileSize(File file) throws IOException {
         if (!file.exists()) {
@@ -1025,6 +1367,11 @@ public class FileUtil {
      * Deletes all files and directories recursively.
      *
      * @param dirpath directory path
+     */
+    /**
+     * deleteAll方法。
+     *      * @param dirpath String类型参数
+     * @return static void类型返回值
      */
     public static void deleteAll(String dirpath) {
         File path = new File(dirpath);
@@ -1054,6 +1401,13 @@ public class FileUtil {
      * @param isOverWrite overwrite existing
      * @throws IOException if copy fails
      */
+    /**
+     * copy方法。
+     *      * @param inputFile File类型参数
+     * @param outputFile File类型参数
+     * @param isOverWrite boolean类型参数
+     * @return static void类型返回值
+     */
     public static void copy(File inputFile, File outputFile, boolean isOverWrite) throws IOException {
         if (inputFile.isFile()) {
             FileCopyUtil.copyFile(inputFile, outputFile, isOverWrite);
@@ -1076,6 +1430,12 @@ public class FileUtil {
      * @param filePath   source path
      * @param targetPath destination path
      */
+    /**
+     * copyDir方法。
+     *      * @param filePath String类型参数
+     * @param targetPath String类型参数
+     * @return static void类型返回值
+     */
     public static void copyDir(String filePath, String targetPath) {
         try {
             FileCopyUtil.copyDir(new File(filePath), targetPath);
@@ -1089,6 +1449,12 @@ public class FileUtil {
      *
      * @param filePath   source
      * @param targetPath destination
+     */
+    /**
+     * copyDir方法。
+     *      * @param filePath File类型参数
+     * @param targetPath String类型参数
+     * @return static void类型返回值
      */
     public static void copyDir(File filePath, String targetPath) {
         try {
@@ -1105,6 +1471,11 @@ public class FileUtil {
      *
      * @param file file
      * @return MD5 hash or null if error
+     */
+    /**
+     * getFileMD5方法。
+     *      * @param file File类型参数
+     * @return static String类型返回值
      */
     public static String getFileMD5(File file) {
         try {
@@ -1123,6 +1494,11 @@ public class FileUtil {
      * @param file file path
      * @return extension without dot
      */
+    /**
+     * getFileSuffix方法。
+     *      * @param file String类型参数
+     * @return static String类型返回值
+     */
     public static String getFileSuffix(String file) {
         return FilePathUtil.getSuffix(file);
     }
@@ -1132,6 +1508,11 @@ public class FileUtil {
      *
      * @param file file
      * @return extension without dot
+     */
+    /**
+     * suffix方法。
+     *      * @param file File类型参数
+     * @return static String类型返回值
      */
     public static String suffix(File file) {
         String fileName = file.getName();
@@ -1151,6 +1532,12 @@ public class FileUtil {
      * @param hashType algorithm (MD5, SHA-1, SHA-256, etc.)
      * @return hash as hex string or empty on error
      */
+    /**
+     * fileHash方法。
+     *      * @param file File类型参数
+     * @param hashType String类型参数
+     * @return static String类型返回值
+     */
     public static String fileHash(File file, String hashType) {
         try {
             return FileHashUtil.hash(file, hashType);
@@ -1167,6 +1554,11 @@ public class FileUtil {
      *
      * @param file file
      * @return number of lines
+     */
+    /**
+     * countLines方法。
+     *      * @param file File类型参数
+     * @return static int类型返回值
      */
     public static int countLines(File file) {
         try {
@@ -1185,6 +1577,11 @@ public class FileUtil {
      * @param file file
      * @return list of lines
      */
+    /**
+     * lines方法。
+     *      * @param file File类型参数
+     * @return static List<String>类型返回值
+     */
     public static List<String> lines(File file) {
         try {
             return FileContentUtil.readLines(file);
@@ -1201,6 +1598,12 @@ public class FileUtil {
      * @param encoding charset
      * @return list of lines
      */
+    /**
+     * lines方法。
+     *      * @param file File类型参数
+     * @param encoding String类型参数
+     * @return static List<String>类型返回值
+     */
     public static List<String> lines(File file, String encoding) {
         try {
             return FileContentUtil.readLines(file, encoding);
@@ -1216,6 +1619,12 @@ public class FileUtil {
      * @param file  file
      * @param lines number of lines
      * @return list of lines
+     */
+    /**
+     * lines方法。
+     *      * @param file File类型参数
+     * @param lines int类型参数
+     * @return static List<String>类型返回值
      */
     public static List<String> lines(File file, int lines) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -1240,6 +1649,13 @@ public class FileUtil {
      * @param lines    number of lines
      * @param encoding charset
      * @return list of lines
+     */
+    /**
+     * lines方法。
+     *      * @param file File类型参数
+     * @param lines int类型参数
+     * @param encoding String类型参数
+     * @return static List<String>类型返回值
      */
     public static List<String> lines(File file, int lines, String encoding) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding))) {
@@ -1266,6 +1682,12 @@ public class FileUtil {
      * @param str  line to append
      * @return true if succeeded
      */
+    /**
+     * appendLine方法。
+     *      * @param file File类型参数
+     * @param str String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean appendLine(File file, String str) {
         try {
             FileContentUtil.appendLine(file, str);
@@ -1283,6 +1705,13 @@ public class FileUtil {
      * @param str      line to append
      * @param encoding charset
      * @return true if succeeded
+     */
+    /**
+     * appendLine方法。
+     *      * @param file File类型参数
+     * @param str String类型参数
+     * @param encoding String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean appendLine(File file, String str, String encoding) {
         try {
@@ -1303,6 +1732,12 @@ public class FileUtil {
      * @param str  content
      * @return true if succeeded
      */
+    /**
+     * writeAppend方法。
+     *      * @param file File类型参数
+     * @param str String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean writeAppend(File file, String str) {
         try {
             FileContentUtil.appendString(file, str);
@@ -1320,6 +1755,13 @@ public class FileUtil {
      * @param str      content
      * @param encoding charset
      * @return true if succeeded
+     */
+    /**
+     * write方法。
+     *      * @param file File类型参数
+     * @param str String类型参数
+     * @param encoding String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean write(File file, String str, String encoding) {
         try {
@@ -1339,6 +1781,13 @@ public class FileUtil {
      * @param encoding charset
      * @return true if succeeded
      */
+    /**
+     * writeAppend方法。
+     *      * @param file File类型参数
+     * @param str String类型参数
+     * @param encoding String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean writeAppend(File file, String str, String encoding) {
         try {
             FileContentUtil.appendString(file, str);
@@ -1355,6 +1804,12 @@ public class FileUtil {
      * @param file file
      * @param str  content
      * @return true if succeeded
+     */
+    /**
+     * write方法。
+     *      * @param file File类型参数
+     * @param str String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean write(File file, String str) {
         try {
@@ -1374,6 +1829,13 @@ public class FileUtil {
      * @param encoding charset
      * @return true if succeeded
      */
+    /**
+     * addWrite方法。
+     *      * @param file File类型参数
+     * @param str String类型参数
+     * @param encoding String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean addWrite(File file, String str, String encoding) {
         try {
             FileContentUtil.appendString(file, str);
@@ -1391,6 +1853,11 @@ public class FileUtil {
      *
      * @param file file to empty
      * @return true if succeeded
+     */
+    /**
+     * cleanFile方法。
+     *      * @param file File类型参数
+     * @return static boolean类型返回值
      */
     public static boolean cleanFile(File file) {
         try (FileWriter fw = new FileWriter(file)) {
@@ -1411,6 +1878,11 @@ public class FileUtil {
      * @return MIME type
      * @throws IOException if error
      */
+    /**
+     * mimeType方法。
+     *      * @param file String类型参数
+     * @return static String类型返回值
+     */
     public static String mimeType(String file) throws IOException {
         java.net.FileNameMap fileNameMap = URLConnection.getFileNameMap();
         return fileNameMap.getContentTypeFor(file);
@@ -1424,6 +1896,11 @@ public class FileUtil {
      * @param file file
      * @return file type (jpg, png, pdf, etc.) or null
      */
+    /**
+     * fileType方法。
+     *      * @param file File类型参数
+     * @return static String类型返回值
+     */
     public static String fileType(File file) throws IOException {
         return FileHashUtil.fileType(file);
     }
@@ -1433,6 +1910,11 @@ public class FileUtil {
      *
      * @param file file
      * @return modification date
+     */
+    /**
+     * modifyTime方法。
+     *      * @param file File类型参数
+     * @return static Date类型返回值
      */
     public static Date modifyTime(File file) {
         return new Date(file.lastModified());
@@ -1447,6 +1929,12 @@ public class FileUtil {
      * @param targetPath  destination
      * @return true if succeeded
      */
+    /**
+     * copy方法。
+     *      * @param resourcePath String类型参数
+     * @param targetPath String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean copy(String resourcePath, String targetPath) {
         return copy(new File(resourcePath), targetPath);
     }
@@ -1457,6 +1945,12 @@ public class FileUtil {
      * @param file       source
      * @param targetFile destination
      * @return true if succeeded
+     */
+    /**
+     * copy方法。
+     *      * @param file File类型参数
+     * @param targetFile String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean copy(File file, String targetFile) {
         try (FileInputStream fin = new FileInputStream(file);
@@ -1483,6 +1977,12 @@ public class FileUtil {
      * @param target   destination
      * @return true if succeeded
      * @throws IOException if copy fails
+     */
+    /**
+     * copy方法。
+     *      * @param resource File类型参数
+     * @param target File类型参数
+     * @return static boolean类型返回值
      */
     public static boolean copy(File resource, File target) throws IOException {
         if (resource.isFile()) {
@@ -1515,6 +2015,12 @@ public class FileUtil {
      * @return true if succeeded
      * @throws IOException if copy fails
      */
+    /**
+     * copyFile方法。
+     *      * @param file File类型参数
+     * @param targetFile File类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean copyFile(File file, File targetFile) throws IOException {
         FileCopyUtil.copyFile(file, targetFile);
         return true;
@@ -1528,6 +2034,11 @@ public class FileUtil {
      * @param paths directory path
      * @return true if succeeded
      */
+    /**
+     * createPaths方法。
+     *      * @param paths String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean createPaths(String paths) {
         File dir = new File(paths);
         return !dir.exists() && dir.mkdir();
@@ -1538,6 +2049,11 @@ public class FileUtil {
      *
      * @param filePath file path
      * @return true if succeeded
+     */
+    /**
+     * createFiles方法。
+     *      * @param filePath String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean createFiles(String filePath) {
         File file = new File(filePath);
@@ -1565,6 +2081,11 @@ public class FileUtil {
      *
      * @param file file
      * @return true if succeeded
+     */
+    /**
+     * createFiles方法。
+     *      * @param file File类型参数
+     * @return static boolean类型返回值
      */
     public static boolean createFiles(File file) {
         if (file.exists()) {
@@ -1601,6 +2122,12 @@ public class FileUtil {
      * @param file    file
      * @param isReNew recreate if exists
      * @return true if succeeded
+     */
+    /**
+     * createFiles方法。
+     *      * @param file File类型参数
+     * @param isReNew boolean类型参数
+     * @return static boolean类型返回值
      */
     public static boolean createFiles(File file, boolean isReNew) {
         if (file.exists()) {
@@ -1646,6 +2173,11 @@ public class FileUtil {
      * @param path file path
      * @return true if succeeded
      */
+    /**
+     * createFile方法。
+     *      * @param path String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean createFile(String path) {
         if (path != null && !path.isEmpty()) {
             try {
@@ -1672,6 +2204,11 @@ public class FileUtil {
      * @param file file
      * @return true if deleted
      */
+    /**
+     * deleteFile方法。
+     *      * @param file File类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean deleteFile(File file) {
         return file.delete();
     }
@@ -1681,6 +2218,11 @@ public class FileUtil {
      *
      * @param file directory
      * @return true if deleted
+     */
+    /**
+     * delete方法。
+     *      * @param file File类型参数
+     * @return static boolean类型返回值
      */
     public static boolean delete(File file) {
         if (file == null) {
@@ -1712,6 +2254,11 @@ public class FileUtil {
      * @param file file
      * @return true if deleted
      */
+    /**
+     * deleteBigFile方法。
+     *      * @param file File类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean deleteBigFile(File file) {
         return cleanFile(file) && file.delete();
     }
@@ -1724,6 +2271,11 @@ public class FileUtil {
      * @param path directory path
      * @return list of files
      */
+    /**
+     * listFile方法。
+     *      * @param path String类型参数
+     * @return static List<File>类型返回值
+     */
     public static List<File> listFile(String path) {
         return listFile(new File(path));
     }
@@ -1733,6 +2285,11 @@ public class FileUtil {
      *
      * @param path directory
      * @return list of files
+     */
+    /**
+     * listFile方法。
+     *      * @param path File类型参数
+     * @return static List<File>类型返回值
      */
     public static List<File> listFile(File path) {
         List<File> list = new ArrayList<>();
@@ -1757,6 +2314,11 @@ public class FileUtil {
      * @param path directory
      * @return list of all files and directories
      */
+    /**
+     * listFileAll方法。
+     *      * @param path File类型参数
+     * @return static List<File>类型返回值
+     */
     public static List<File> listFileAll(File path) {
         List<File> list = new ArrayList<>();
         File[] files = path.listFiles();
@@ -1777,6 +2339,12 @@ public class FileUtil {
      * @param path   directory
      * @param filter filename filter
      * @return list of matching files
+     */
+    /**
+     * listFileFilter方法。
+     *      * @param path File类型参数
+     * @param filter FilenameFilter类型参数
+     * @return static List<File>类型返回值
      */
     public static List<File> listFileFilter(File path, FilenameFilter filter) {
         List<File> list = new ArrayList<>();
@@ -1801,6 +2369,12 @@ public class FileUtil {
      * @param dirPath  directory
      * @param postfixs extension filter (e.g., ".txt")
      * @return list of matching files
+     */
+    /**
+     * listFileFilter方法。
+     *      * @param dirPath File类型参数
+     * @param postfixs String类型参数
+     * @return static List<File>类型返回值
      */
     public static List<File> listFileFilter(File dirPath, String postfixs) {
         List<File> list = new ArrayList<>();
@@ -1827,6 +2401,12 @@ public class FileUtil {
      * @param postfixs extension filter
      * @return list of matching files
      */
+    /**
+     * listFileSuffix方法。
+     *      * @param dirPath File类型参数
+     * @param postfixs String类型参数
+     * @return static List<File>类型返回值
+     */
     public static List<File> listFileSuffix(File dirPath, String postfixs) {
         return listFileFilter(dirPath, postfixs);
     }
@@ -1837,6 +2417,12 @@ public class FileUtil {
      * @param dirPath  directory to search
      * @param fileName filename to find
      * @return list of matching files
+     */
+    /**
+     * searchFile方法。
+     *      * @param dirPath File类型参数
+     * @param fileName String类型参数
+     * @return static List<File>类型返回值
      */
     public static List<File> searchFile(File dirPath, String fileName) {
         List<File> list = new ArrayList<>();
@@ -1862,6 +2448,12 @@ public class FileUtil {
      * @param fileName filename
      * @return list of matching files
      */
+    /**
+     * listFileName方法。
+     *      * @param dirPath File类型参数
+     * @param fileName String类型参数
+     * @return static List<File>类型返回值
+     */
     public static List<File> listFileName(File dirPath, String fileName) {
         return searchFile(dirPath, fileName);
     }
@@ -1872,6 +2464,12 @@ public class FileUtil {
      * @param dirPath  directory
      * @param fileName filename
      * @return list of matching files
+     */
+    /**
+     * listFileNameIgnoreCase方法。
+     *      * @param dirPath File类型参数
+     * @param fileName String类型参数
+     * @return static List<File>类型返回值
      */
     public static List<File> listFileNameIgnoreCase(File dirPath, String fileName) {
         List<File> list = new ArrayList<>();
@@ -1896,6 +2494,12 @@ public class FileUtil {
      * @param path   directory
      * @param filter predicate filter
      * @return list of matching files
+     */
+    /**
+     * listFileFilter方法。
+     *      * @param path File类型参数
+     * @param filter PredicateFile类型参数
+     * @return static List<File>类型返回值
      */
     public static List<File> listFileFilter(File path, Predicate<File> filter) {
         List<File> list = new ArrayList<>();
@@ -1923,6 +2527,12 @@ public class FileUtil {
      * @param pattern regex pattern
      * @return list of matching files
      */
+    /**
+     * listFileNameReg方法。
+     *      * @param dirPath File类型参数
+     * @param pattern Pattern类型参数
+     * @return static List<File>类型返回值
+     */
     public static List<File> listFileNameReg(File dirPath, Pattern pattern) {
         List<File> list = new ArrayList<>();
         File[] files = dirPath.listFiles();
@@ -1947,6 +2557,11 @@ public class FileUtil {
      *
      * @param fileName classpath resource name
      * @return file content
+     */
+    /**
+     * readFile方法。
+     *      * @param fileName String类型参数
+     * @return static String类型返回值
      */
     public static String readFile(String fileName) {
         InputStream fin = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
@@ -1977,6 +2592,13 @@ public class FileUtil {
      * @param encoding charset
      * @param consumer line processor
      */
+    /**
+     * handlerWithLine方法。
+     *      * @param file File类型参数
+     * @param encoding String类型参数
+     * @param consumer ConsumerString类型参数
+     * @return static void类型返回值
+     */
     public static void handlerWithLine(File file, String encoding, Consumer<String> consumer) {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file.toPath()), encoding))) {
             String line;
@@ -1996,6 +2618,14 @@ public class FileUtil {
      * @param result   collection for results
      * @param mapper  line to result mapper
      * @param <E>      result type
+     */
+    /**
+     * processWithLine方法。
+     *      * @param file File类型参数
+     * @param encoding String类型参数
+     * @param result CollectionE类型参数
+     * @param mapper FunctionString,类型参数
+     * @return static <E> void类型返回值
      */
     public static <E> void processWithLine(File file, String encoding, Collection<E> result, Function<String, E> mapper) {
         if (result == null) {
@@ -2022,6 +2652,10 @@ public class FileUtil {
      *
      * @return temp folder path ending with "/"
      */
+    /**
+     * decideTmpFolder方法。
+     * @return static String类型返回值
+     */
     public static String decideTmpFolder() {
         String folderOld = System.getProperty("java.io.tmpdir");
         if (folderOld.endsWith("/")) {
@@ -2035,6 +2669,10 @@ public class FileUtil {
      *
      * @return temp folder path
      */
+    /**
+     * decideTempUsableFolder方法。
+     * @return static String类型返回值
+     */
     public static String decideTempUsableFolder() {
         return decideTmpFolder() + "use_" + System.currentTimeMillis() + "/";
     }
@@ -2047,6 +2685,11 @@ public class FileUtil {
      * @param fileFolder folder path
      * @return true if cleaned
      * @throws RuntimeException if not a folder
+     */
+    /**
+     * cleanFolder方法。
+     *      * @param fileFolder String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean cleanFolder(String fileFolder) {
         File file = new File(fileFolder);
@@ -2077,6 +2720,11 @@ public class FileUtil {
      * @return string content
      * @throws IOException if reading fails
      */
+    /**
+     * streamToString方法。
+     *      * @param in InputStream类型参数
+     * @return static String类型返回值
+     */
     public static String streamToString(InputStream in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         byte[] b = new byte[4096];
@@ -2093,6 +2741,11 @@ public class FileUtil {
      * @param is input stream
      * @return byte array
      * @throws IOException if reading fails
+     */
+    /**
+     * stream2Byte方法。
+     *      * @param is InputStream类型参数
+     * @return static byte[]类型返回值
      */
     public static byte[] stream2Byte(InputStream is) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -2111,6 +2764,11 @@ public class FileUtil {
      * @return byte array
      * @throws Exception if reading fails
      */
+    /**
+     * inputStream2Byte方法。
+     *      * @param inStream InputStream类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] inputStream2Byte(InputStream inStream) throws Exception {
         int count = 0;
         while (count == 0) {
@@ -2126,6 +2784,12 @@ public class FileUtil {
      *
      * @param is      input stream
      * @param outfile output file
+     */
+    /**
+     * streamSaveAsFile方法。
+     *      * @param is InputStream类型参数
+     * @param outfile File类型参数
+     * @return static void类型返回值
      */
     public static void streamSaveAsFile(InputStream is, File outfile) {
         try (FileOutputStream fos = new FileOutputStream(outfile)) {
@@ -2148,6 +2812,11 @@ public class FileUtil {
      * @param file file
      * @return list of lines
      */
+    /**
+     * readLines方法。
+     *      * @param file File类型参数
+     * @return static List<String>类型返回值
+     */
     public static List<String> readLines(File file) {
         return lines(file);
     }
@@ -2159,6 +2828,12 @@ public class FileUtil {
      * @param encoding charset
      * @return list of lines
      */
+    /**
+     * readLines方法。
+     *      * @param file File类型参数
+     * @param encoding String类型参数
+     * @return static List<String>类型返回值
+     */
     public static List<String> readLines(File file, String encoding) {
         return lines(file, encoding);
     }
@@ -2168,6 +2843,11 @@ public class FileUtil {
      *
      * @param file file
      * @return content or null on error
+     */
+    /**
+     * readContents方法。
+     *      * @param file File类型参数
+     * @return static String类型返回值
      */
     public static String readContents(File file) {
         try (FileInputStream in = new FileInputStream(file)) {
@@ -2189,6 +2869,12 @@ public class FileUtil {
      *
      * @param filePath    file path
      * @param fileContent content
+     */
+    /**
+     * gennerateFile方法。
+     *      * @param filePath String类型参数
+     * @param fileContent String类型参数
+     * @return static void类型返回值
      */
     public static void gennerateFile(String filePath, String fileContent) {
         File file = new File(filePath);

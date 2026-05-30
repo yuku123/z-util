@@ -2,6 +2,9 @@ package com.zifang.util.core.pattern.composite.define;
 
 import java.util.Collection;
 
+/**
+ * ICluster接口。
+ */
 public interface ICluster {
 
     /**

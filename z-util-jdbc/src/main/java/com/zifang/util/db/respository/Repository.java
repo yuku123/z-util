@@ -7,6 +7,9 @@ package com.zifang.util.db.respository;
  * @param <T> 实体类型
  * @param <ID> 主键类型
  */
+/**
+ * Repository接口。
+ */
 public interface Repository<T, ID> {
 
 }

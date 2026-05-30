@@ -8,6 +8,9 @@ package com.zifang.util.core.schedule;
  *
  * @see TriggerBuilder#withMisfirePolicy(MisfirePolicy)
  */
+/**
+ * MisfirePolicy枚举。
+ */
 public enum MisfirePolicy {
 
     /**
@@ -46,6 +49,10 @@ public enum MisfirePolicy {
 
     /**
      * 转换为 Quartz 内部整数常量。
+     */
+    /**
+     * toQuartzInstruction方法。
+     * @return int类型返回值
      */
     public int toQuartzInstruction() {
         return instruction;

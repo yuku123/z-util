@@ -39,6 +39,9 @@ import org.quartz.impl.calendar.*;
  * @see SchedulerManager#addCalendar(String, ScheduleCalendar)
  * @see TriggerBuilder#modifiedByCalendar(String)
  */
+/**
+ * ScheduleCalendar类。
+ */
 public class ScheduleCalendar {
 
     private final org.quartz.Calendar delegate;
@@ -59,6 +62,11 @@ public class ScheduleCalendar {
      *
      * @param excludedDates 要排除的日期集合
      */
+    /**
+     * excludeDates方法。
+     *      * @param excludedDates SetLocalDate类型参数
+     * @return static ScheduleCalendar类型返回值
+     */
     public static ScheduleCalendar excludeDates(Set<LocalDate> excludedDates) {
         AnnualCalendar calendar = new AnnualCalendar();
         java.util.ArrayList<java.util.Calendar> exclusions = new java.util.ArrayList<>();
@@ -77,6 +85,12 @@ public class ScheduleCalendar {
      * @param start 区间开始日期（包含）
      * @param end   区间结束日期（包含）
      */
+    /**
+     * excludeRange方法。
+     *      * @param start LocalDate类型参数
+     * @param end LocalDate类型参数
+     * @return static ScheduleCalendar类型返回值
+     */
     public static ScheduleCalendar excludeRange(LocalDate start, LocalDate end) {
         Set<LocalDate> dates = new HashSet<>();
         LocalDate cursor = start;
@@ -93,6 +107,11 @@ public class ScheduleCalendar {
      * @param weekdays 要排除的星期几，使用 {@link java.util.Calendar} 常量
      *                 如 {@code Calendar.MONDAY}, {@code Calendar.TUESDAY} 等
      */
+    /**
+     * excludeWeekdays方法。
+     *      * @param weekdays SetInteger类型参数
+     * @return static ScheduleCalendar类型返回值
+     */
     public static ScheduleCalendar excludeWeekdays(Set<Integer> weekdays) {
         WeeklyCalendar calendar = new WeeklyCalendar();
         for (Integer day : weekdays) {
@@ -105,6 +124,10 @@ public class ScheduleCalendar {
     /**
      * 创建一个排除周末（周六、周日）的日历。
      */
+    /**
+     * excludeWeekends方法。
+     * @return static ScheduleCalendar类型返回值
+     */
     public static ScheduleCalendar excludeWeekends() {
         Set<Integer> weekends = new HashSet<>();
         weekends.add(java.util.Calendar.SATURDAY);
@@ -116,6 +139,11 @@ public class ScheduleCalendar {
      * 创建一个排除除给定日期外的所有日期的日历。
      *
      * @param includedDates 只包含的日期集合（其他日期全部排除）
+     */
+    /**
+     * includeOnly方法。
+     *      * @param includedDates SetLocalDate类型参数
+     * @return static ScheduleCalendar类型返回值
      */
     public static ScheduleCalendar includeOnly(Set<LocalDate> includedDates) {
         // 创建一个排除所有日期的年历，然后添加例外
@@ -140,6 +168,11 @@ public class ScheduleCalendar {
      *
      * @param excludedDays 一个月中的日期（如每月 1 日、15 日），使用 1-31
      */
+    /**
+     * excludeDaysOfMonth方法。
+     *      * @param excludedDays SetInteger类型参数
+     * @return static ScheduleCalendar类型返回值
+     */
     public static ScheduleCalendar excludeDaysOfMonth(Set<Integer> excludedDays) {
         MonthlyCalendar calendar = new MonthlyCalendar();
         for (Integer day : excludedDays) {
@@ -152,6 +185,10 @@ public class ScheduleCalendar {
 
     /**
      * 创建一个空日历（不过滤任何日期）。
+     */
+    /**
+     * none方法。
+     * @return static ScheduleCalendar类型返回值
      */
     public static ScheduleCalendar none() {
         return new ScheduleCalendar(new BaseCalendar());
@@ -167,6 +204,11 @@ public class ScheduleCalendar {
      * @param calendar 要链接的日历
      * @return 链接后的新日历实例
      */
+    /**
+     * chainCalendar方法。
+     *      * @param calendar ScheduleCalendar类型参数
+     * @return ScheduleCalendar类型返回值
+     */
     public ScheduleCalendar chainCalendar(ScheduleCalendar calendar) {
         org.quartz.Calendar base = delegate;
         org.quartz.Calendar toChain = calendar.getDelegate();
@@ -178,6 +220,10 @@ public class ScheduleCalendar {
      * 获取底层 Quartz Calendar 对象。
      * <p>
      * 谨慎使用。
+     */
+    /**
+     * getDelegate方法。
+     * @return org.quartz.Calendar类型返回值
      */
     public org.quartz.Calendar getDelegate() {
         return delegate;

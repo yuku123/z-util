@@ -5,6 +5,9 @@ import java.util.Random;
 /**
  * 二进制翻转变异算子
  */
+/**
+ * BinaryMutation类。
+ */
 public class BinaryMutation implements MutationOperator {
 
     private final Random random = new Random();
@@ -16,6 +19,11 @@ public class BinaryMutation implements MutationOperator {
      * @param mutationRate 变异率，范围[0, 1]
      */
     @Override
+    /**
+     * mutate方法。
+     *      * @param individual Individual类型参数
+     * @param mutationRate double类型参数
+     */
     public void mutate(Individual individual, double mutationRate) {
         for (int i = 0; i < individual.length(); i++) {
             if (random.nextDouble() < mutationRate) {

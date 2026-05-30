@@ -9,9 +9,19 @@ import java.lang.reflect.Field;
 /**
  * 数值范围校验器
  */
+/**
+ * RangeValidator类。
+ */
 public class RangeValidator implements Validator<Range> {
 
     @Override
+    /**
+     * validate方法。
+     *      * @param target Object类型参数
+     * @param field Field类型参数
+     * @param annotation Range类型参数
+     * @param result ValidateResult类型参数
+     */
     public void validate(Object target, Field field, Range annotation, ValidateResult result) {
         Object value;
         try {

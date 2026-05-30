@@ -23,6 +23,9 @@ import java.util.Objects;
  * @see ExecutableWorkflowNode
  * @see WorkFlowApplicationContext
  */
+/**
+ * Task类。
+ */
 public class Task {
 
     /**
@@ -48,6 +51,9 @@ public class Task {
     /**
      * 默认构造函数
      */
+    /**
+     * Task方法。
+     */
     public Task() {
     }
 
@@ -55,6 +61,10 @@ public class Task {
      * 获取工作流应用上下文
      *
      * @return 工作流应用上下文
+     */
+    /**
+     * getWorkFlowApplicationContext方法。
+     * @return WorkFlowApplicationContext类型返回值
      */
     public WorkFlowApplicationContext getWorkFlowApplicationContext() {
         return workFlowApplicationContext;
@@ -65,6 +75,10 @@ public class Task {
      *
      * @param workFlowApplicationContext 工作流应用上下文
      */
+    /**
+     * setWorkFlowApplicationContext方法。
+     *      * @param workFlowApplicationContext WorkFlowApplicationContext类型参数
+     */
     public void setWorkFlowApplicationContext(WorkFlowApplicationContext workFlowApplicationContext) {
         this.workFlowApplicationContext = workFlowApplicationContext;
     }
@@ -73,6 +87,10 @@ public class Task {
      * 获取起始节点
      *
      * @return 起始节点
+     */
+    /**
+     * getStart方法。
+     * @return ExecutableWorkflowNode类型返回值
      */
     public ExecutableWorkflowNode getStart() {
         return start;
@@ -83,6 +101,10 @@ public class Task {
      *
      * @param start 起始节点
      */
+    /**
+     * setStart方法。
+     *      * @param start ExecutableWorkflowNode类型参数
+     */
     public void setStart(ExecutableWorkflowNode start) {
         this.start = start;
     }
@@ -91,6 +113,10 @@ public class Task {
      * 获取可执行工作流节点列表
      *
      * @return 可执行节点列表
+     */
+    /**
+     * getExecutableWorkNodes方法。
+     * @return List<ExecutableWorkflowNode>类型返回值
      */
     public List<ExecutableWorkflowNode> getExecutableWorkNodes() {
         return executableWorkNodes;
@@ -101,6 +127,10 @@ public class Task {
      *
      * @param executableWorkNodes 可执行节点列表
      */
+    /**
+     * setExecutableWorkNodes方法。
+     *      * @param executableWorkNodes ListExecutableWorkflowNode类型参数
+     */
     public void setExecutableWorkNodes(List<ExecutableWorkflowNode> executableWorkNodes) {
         this.executableWorkNodes = executableWorkNodes;
     }
@@ -110,6 +140,10 @@ public class Task {
      *
      * @return 节点映射表
      */
+    /**
+     * getExecutableWorkNodeIdMap方法。
+     * @return Map<String, ExecutableWorkflowNode>类型返回值
+     */
     public Map<String, ExecutableWorkflowNode> getExecutableWorkNodeIdMap() {
         return executableWorkNodeIdMap;
     }
@@ -118,6 +152,10 @@ public class Task {
      * 设置节点ID到节点的映射表
      *
      * @param executableWorkNodeIdMap 节点映射表
+     */
+    /**
+     * setExecutableWorkNodeIdMap方法。
+     *      * @param executableWorkNodeIdMap MapString,类型参数
      */
     public void setExecutableWorkNodeIdMap(Map<String, ExecutableWorkflowNode> executableWorkNodeIdMap) {
         this.executableWorkNodeIdMap = executableWorkNodeIdMap;
@@ -129,11 +167,18 @@ public class Task {
      * 从起始节点开始执行整个工作流，
      * 按照节点连线顺序依次执行各节点。
      */
+    /**
+     * exec方法。
+     */
     public void exec() {
         start.exec();
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "Task{" +
                 "workFlowApplicationContext=" + workFlowApplicationContext +
@@ -144,6 +189,11 @@ public class Task {
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -155,6 +205,10 @@ public class Task {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(workFlowApplicationContext, start, executableWorkNodes, executableWorkNodeIdMap);
     }

@@ -1,5 +1,8 @@
 package com.zifang.util.core.lang;
 
+/**
+ * HashUtil类。
+ */
 public class HashUtil {
 
     /**
@@ -8,6 +11,12 @@ public class HashUtil {
      * @param key   字符串
      * @param prime 一个质数
      * @return hash结果
+     */
+    /**
+     * additiveHash方法。
+     *      * @param key String类型参数
+     * @param prime int类型参数
+     * @return static int类型返回值
      */
     public static int additiveHash(String key, int prime) {
         int hash, i;
@@ -23,6 +32,12 @@ public class HashUtil {
      * @param key   输入字符串
      * @param prime 质数
      * @return hash值
+     */
+    /**
+     * rotatingHash方法。
+     *      * @param key String类型参数
+     * @param prime int类型参数
+     * @return static int类型返回值
      */
     public static int rotatingHash(String key, int prime) {
         int hash, i;
@@ -47,6 +62,11 @@ public class HashUtil {
      * @param key 输入字符串
      * @return 输出hash值
      */
+    /**
+     * oneByOneHash方法。
+     *      * @param key String类型参数
+     * @return static int类型返回值
+     */
     public static int oneByOneHash(String key) {
         int hash, i;
         for (hash = 0, i = 0; i < key.length(); ++i) {
@@ -68,6 +88,11 @@ public class HashUtil {
      *
      * @param key 输入字节数组
      * @return 结果hash
+     */
+    /**
+     * bernstein方法。
+     *      * @param key String类型参数
+     * @return static int类型返回值
      */
     public static int bernstein(String key) {
         int hash = 0;
@@ -102,6 +127,13 @@ public class HashUtil {
 
     /**
      * Universal Hashing
+     */
+    /**
+     * universal方法。
+     *      * @param key char[]类型参数
+     * @param mask int类型参数
+     * @param tab int[]类型参数
+     * @return static int类型返回值
      */
     public static int universal(char[] key, int mask, int[] tab) {
         int hash = key.length, i, len = key.length;
@@ -140,6 +172,13 @@ public class HashUtil {
     /**
      * Zobrist Hashing
      */
+    /**
+     * zobrist方法。
+     *      * @param key char[]类型参数
+     * @param mask int类型参数
+     * @param tab int[][]类型参数
+     * @return static int类型返回值
+     */
     public static int zobrist(char[] key, int mask, int[][] tab) {
         int hash, i;
         for (hash = key.length, i = 0; i < key.length; ++i) {
@@ -161,6 +200,11 @@ public class HashUtil {
      * @param data 数组
      * @return int值
      */
+    /**
+     * FNVHash方法。
+     *      * @param data byte[]类型参数
+     * @return static int类型返回值
+     */
     public static int FNVHash(byte[] data) {
         int hash = (int) 2166136261L;
         for (byte b : data) {
@@ -178,6 +222,11 @@ public class HashUtil {
      *
      * @param data 数组
      * @return int值
+     */
+    /**
+     * FNVHash1方法。
+     *      * @param data byte[]类型参数
+     * @return static int类型返回值
      */
     public static int FNVHash1(byte[] data) {
         final int p = 16777619;
@@ -200,6 +249,11 @@ public class HashUtil {
      * @param data 字符串
      * @return int值
      */
+    /**
+     * FNVHash1方法。
+     *      * @param data String类型参数
+     * @return static int类型返回值
+     */
     public static int FNVHash1(String data) {
         final int p = 16777619;
         int hash = (int) 2166136261L;
@@ -219,6 +273,11 @@ public class HashUtil {
     /**
      * Thomas Wang的算法，整数hash
      */
+    /**
+     * intHash方法。
+     *      * @param key int类型参数
+     * @return static int类型返回值
+     */
     public static int intHash(int key) {
         key += ~(key << 15);
         key ^= (key >>> 10);
@@ -234,6 +293,11 @@ public class HashUtil {
      * RS算法hash
      *
      * @param str 字符串
+     */
+    /**
+     * RSHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
      */
     public static int RSHash(String str) {
         int b = 378551;
@@ -254,6 +318,11 @@ public class HashUtil {
     /**
      * JS算法
      */
+    /**
+     * JSHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
+     */
     public static int JSHash(String str) {
         int hash = 1315423911;
 
@@ -269,6 +338,11 @@ public class HashUtil {
 
     /**
      * PJW算法
+     */
+    /**
+     * PJWHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
      */
     public static int PJWHash(String str) {
         int BitsInUnsignedInt = 32;
@@ -295,6 +369,11 @@ public class HashUtil {
     /**
      * ELF算法
      */
+    /**
+     * ELFHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
+     */
     public static int ELFHash(String str) {
         int hash = 0;
         int x = 0;
@@ -316,6 +395,11 @@ public class HashUtil {
     /**
      * BKDR算法
      */
+    /**
+     * BKDRHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
+     */
     public static int BKDRHash(String str) {
         int seed = 131; // 31 131 1313 13131 131313 etc..  
         int hash = 0;
@@ -333,6 +417,11 @@ public class HashUtil {
     /**
      * SDBM算法
      */
+    /**
+     * SDBMHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
+     */
     public static int SDBMHash(String str) {
         int hash = 0;
 
@@ -349,6 +438,11 @@ public class HashUtil {
     /**
      * DJB算法
      */
+    /**
+     * DJBHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
+     */
     public static int DJBHash(String str) {
         int hash = 5381;
 
@@ -363,6 +457,11 @@ public class HashUtil {
     /**
      * DEK算法
      */
+    /**
+     * DEKHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
+     */
     public static int DEKHash(String str) {
         int hash = str.length();
 
@@ -376,6 +475,11 @@ public class HashUtil {
 
     /**
      * AP算法
+     */
+    /**
+     * APHash方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
      */
     public static int APHash(String str) {
         int hash = 0;
@@ -393,6 +497,11 @@ public class HashUtil {
     /**
      * JAVA自己带的算法
      */
+    /**
+     * java方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
+     */
     public static int java(String str) {
         int h = 0;
         int off = 0;
@@ -406,6 +515,11 @@ public class HashUtil {
     /**
      * 混合hash算法，输出64位的值
      */
+    /**
+     * mixHash方法。
+     *      * @param str String类型参数
+     * @return static long类型返回值
+     */
     public static long mixHash(String str) {
         long hash = str.hashCode();
         hash <<= 32;
@@ -418,6 +532,11 @@ public class HashUtil {
      * <p>
      * 如果key为null，则hash值为0，否则调用key的hashCode()方法
      * 并让高16位与整个hash异或，这样做是为了使计算出的hash更分散
+     */
+    /**
+     * hash方法。
+     *      * @param key Object类型参数
+     * @return static int类型返回值
      */
     public static int hash(Object key) {
         int h;

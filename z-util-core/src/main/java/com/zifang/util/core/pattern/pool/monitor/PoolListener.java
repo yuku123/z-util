@@ -5,6 +5,9 @@ package com.zifang.util.core.pattern.pool.monitor;
  *
  * @param <T> 对象类型
  */
+/**
+ * PoolListener接口。
+ */
 public interface PoolListener<T> {
 
     /**

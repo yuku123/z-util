@@ -37,6 +37,9 @@ import org.quartz.JobExecutionException;
  * @see TriggerListener
  * @see SchedulerListener
  */
+/**
+ * JobListener接口。
+ */
 public interface JobListener {
 
     /**

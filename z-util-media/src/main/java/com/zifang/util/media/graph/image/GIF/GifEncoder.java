@@ -29,12 +29,20 @@ import java.io.*;
  * @author zifang
  * @version 1.03 November 2003
  */
+/**
+ * GifEncoder类。
+ */
 public class GifEncoder {
     protected int width; // image size
     protected int height;
     protected Color transparent = null; // transparent color if given
     protected int transIndex; // transparent index in color table
     protected int repeat = -1; // no repeat
+    /**
+     * delay方法。
+     *      * @param hundredths Object类型参数
+     * @return int delay = 0; // frame类型返回值
+     */
     protected int delay = 0; // frame delay (hundredths)
     protected boolean started = false; // ready to output frames
     protected OutputStream out;
@@ -44,7 +52,17 @@ public class GifEncoder {
     protected int colorDepth; // number of bit planes
     protected byte[] colorTab; // RGB palette
     protected boolean[] usedEntry = new boolean[256]; // active palette entries
+    /**
+     * size方法。
+     *      * @param bits-1 Object类型参数
+     * @return int palSize = 7; // color table类型返回值
+     */
     protected int palSize = 7; // color table size (bits-1)
+    /**
+     * code方法。
+     *      * @param default -1类型参数
+     * @return int dispose = -1; // disposal类型返回值
+     */
     protected int dispose = -1; // disposal code (-1 = use default)
     protected boolean closeStream = false; // close stream when finished
     protected boolean firstFrame = true;
@@ -57,6 +75,10 @@ public class GifEncoder {
      *
      * @param ms int delay time in milliseconds
      */
+    /**
+     * setDelay方法。
+     *      * @param ms int类型参数
+     */
     public void setDelay(int ms) {
         delay = Math.round(ms / 10.0f);
     }
@@ -67,6 +89,10 @@ public class GifEncoder {
      * color has been set, otherwise 2.
      *
      * @param code int disposal code.
+     */
+    /**
+     * setDispose方法。
+     *      * @param code int类型参数
      */
     public void setDispose(int code) {
         if (code >= 0) {
@@ -81,6 +107,10 @@ public class GifEncoder {
      * image is added.
      *
      * @param iter int number of iterations.
+     */
+    /**
+     * setRepeat方法。
+     *      * @param iter int类型参数
      */
     public void setRepeat(int iter) {
         if (iter >= 0) {
@@ -99,6 +129,10 @@ public class GifEncoder {
      *
      * @param c Color to be treated as transparent on display.
      */
+    /**
+     * setTransparent方法。
+     *      * @param c Color类型参数
+     */
     public void setTransparent(Color c) {
         transparent = c;
     }
@@ -112,6 +146,11 @@ public class GifEncoder {
      *
      * @param im BufferedImage containing frame to write.
      * @return true if successful.
+     */
+    /**
+     * addFrame方法。
+     *      * @param im BufferedImage类型参数
+     * @return boolean类型返回值
      */
     public boolean addFrame(BufferedImage im) {
         if ((im == null) || !started) {
@@ -149,6 +188,10 @@ public class GifEncoder {
     }
 
     //added by alvaro
+    /**
+     * outFlush方法。
+     * @return boolean类型返回值
+     */
     public boolean outFlush() {
         boolean ok = true;
         try {
@@ -161,6 +204,10 @@ public class GifEncoder {
         return ok;
     }
 
+    /**
+     * getFrameByteArray方法。
+     * @return byte[]类型返回值
+     */
     public byte[] getFrameByteArray() {
         return ((ByteArrayOutputStream) out).toByteArray();
     }
@@ -169,6 +216,10 @@ public class GifEncoder {
      * Flushes any pending data and closes output file.
      * If writing to an OutputStream, the stream is not
      * closed.
+     */
+    /**
+     * finish方法。
+     * @return boolean类型返回值
      */
     public boolean finish() {
         if (!started) return false;
@@ -187,6 +238,9 @@ public class GifEncoder {
         return ok;
     }
 
+    /**
+     * reset方法。
+     */
     public void reset() {
         // reset for subsequent use
         transIndex = 0;
@@ -205,6 +259,10 @@ public class GifEncoder {
      *
      * @param fps float frame rate (frames per second)
      */
+    /**
+     * setFrameRate方法。
+     *      * @param fps float类型参数
+     */
     public void setFrameRate(float fps) {
         if (fps != 0f) {
             delay = Math.round(100f / fps);
@@ -221,6 +279,10 @@ public class GifEncoder {
      *
      * @param quality int greater than 0.
      */
+    /**
+     * setQuality方法。
+     *      * @param quality int类型参数
+     */
     public void setQuality(int quality) {
         if (quality < 1) quality = 1;
         sample = quality;
@@ -233,6 +295,11 @@ public class GifEncoder {
      *
      * @param w int frame width.
      * @param h int frame width.
+     */
+    /**
+     * setSize方法。
+     *      * @param w int类型参数
+     * @param h int类型参数
      */
     public void setSize(int w, int h) {
         if (started && !firstFrame) return;
@@ -249,6 +316,11 @@ public class GifEncoder {
      *
      * @param os OutputStream on which GIF images are written.
      * @return false if initial write failed.
+     */
+    /**
+     * start方法。
+     *      * @param os OutputStream类型参数
+     * @return boolean类型返回值
      */
     public boolean start(OutputStream os) {
         if (os == null) return false;
@@ -269,6 +341,11 @@ public class GifEncoder {
      * @param file String containing output file name.
      * @return false if open or initial write failed.
      */
+    /**
+     * start方法。
+     *      * @param file String类型参数
+     * @return boolean类型返回值
+     */
     public boolean start(String file) {
         boolean ok = true;
         try {
@@ -283,6 +360,9 @@ public class GifEncoder {
 
     /**
      * Analyzes image colors and creates color map.
+     */
+    /**
+     * analyzePixels方法。
      */
     protected void analyzePixels() {
         int len = pixels.length;
@@ -320,6 +400,11 @@ public class GifEncoder {
     /**
      * Returns index of palette color closest to c
      */
+    /**
+     * findClosest方法。
+     *      * @param c Color类型参数
+     * @return int类型返回值
+     */
     protected int findClosest(Color c) {
         if (colorTab == null) return -1;
         int r = c.getRed();
@@ -346,6 +431,9 @@ public class GifEncoder {
     /**
      * Extracts image pixels into byte array "pixels"
      */
+    /**
+     * getImagePixels方法。
+     */
     protected void getImagePixels() {
         int w = image.getWidth();
         int h = image.getHeight();
@@ -365,6 +453,9 @@ public class GifEncoder {
 
     /**
      * Writes Graphic Control Extension
+     */
+    /**
+     * writeGraphicCtrlExt方法。
      */
     protected void writeGraphicCtrlExt() throws IOException {
         out.write(0x21); // extension introducer
@@ -397,6 +488,9 @@ public class GifEncoder {
     /**
      * Writes Image Descriptor
      */
+    /**
+     * writeImageDesc方法。
+     */
     protected void writeImageDesc() throws IOException {
         out.write(0x2c); // image separator
         writeShort(0); // image position x,y = 0,0
@@ -420,6 +514,9 @@ public class GifEncoder {
     /**
      * Writes Logical Screen Descriptor
      */
+    /**
+     * writeLSD方法。
+     */
     protected void writeLSD() throws IOException {
         // logical screen size
         writeShort(width);
@@ -438,6 +535,9 @@ public class GifEncoder {
      * Writes Netscape application extension to define
      * repeat count.
      */
+    /**
+     * writeNetscapeExt方法。
+     */
     protected void writeNetscapeExt() throws IOException {
         out.write(0x21); // extension introducer
         out.write(0xff); // app extension label
@@ -452,6 +552,9 @@ public class GifEncoder {
     /**
      * Writes color table
      */
+    /**
+     * writePalette方法。
+     */
     protected void writePalette() throws IOException {
         out.write(colorTab, 0, colorTab.length);
         int n = (3 * 256) - colorTab.length;
@@ -463,6 +566,9 @@ public class GifEncoder {
     /**
      * Encodes and writes pixel data
      */
+    /**
+     * writePixels方法。
+     */
     protected void writePixels() throws IOException {
         Encoder encoder = new Encoder(width, height, indexedPixels, colorDepth);
         encoder.encode(out);
@@ -471,6 +577,10 @@ public class GifEncoder {
     /**
      * Write 16-bit value to output stream, LSB first
      */
+    /**
+     * writeShort方法。
+     *      * @param value int类型参数
+     */
     protected void writeShort(int value) throws IOException {
         out.write(value & 0xff);
         out.write((value >> 8) & 0xff);
@@ -478,6 +588,10 @@ public class GifEncoder {
 
     /**
      * Writes string to output stream
+     */
+    /**
+     * writeString方法。
+     *      * @param s String类型参数
      */
     protected void writeString(String s) throws IOException {
         for (int i = 0; i < s.length(); i++) {

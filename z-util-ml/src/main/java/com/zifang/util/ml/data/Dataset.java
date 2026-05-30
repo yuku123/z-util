@@ -7,6 +7,9 @@ import com.zifang.util.numpy.NdArray;
  * <p>
  * Represents a dataset that can be iterated over to get samples.
  */
+/**
+ * Dataset接口。
+ */
 public interface Dataset {
 
     /**

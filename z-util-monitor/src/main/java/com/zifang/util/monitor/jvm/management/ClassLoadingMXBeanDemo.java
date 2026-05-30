@@ -16,6 +16,9 @@ import java.lang.management.ManagementFactory;
  *
  * @author zifang
  */
+/**
+ * ClassLoadingMXBeanDemo类。
+ */
 public class ClassLoadingMXBeanDemo {
 
 
@@ -32,6 +35,10 @@ public class ClassLoadingMXBeanDemo {
      * </ul>
      *
      * @return 远程JVM的ClassLoadingMXBean实例，连接失败返回null
+     */
+    /**
+     * getRemoteClassLoading方法。
+     * @return static ClassLoadingMXBean类型返回值
      */
     public static ClassLoadingMXBean getRemoteClassLoading() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -60,6 +67,10 @@ public class ClassLoadingMXBeanDemo {
      *
      * @return 当前JVM的ClassLoadingMXBean实例
      */
+    /**
+     * getLocalClassLoading方法。
+     * @return static ClassLoadingMXBean类型返回值
+     */
     public static ClassLoadingMXBean getLocalClassLoading() {
         return ManagementFactory.getClassLoadingMXBean();
     }
@@ -68,6 +79,11 @@ public class ClassLoadingMXBeanDemo {
      * 主方法，演示获取JVM类加载信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) {
         ClassLoadingMXBean classLoadingMXBean = getRemoteClassLoading();

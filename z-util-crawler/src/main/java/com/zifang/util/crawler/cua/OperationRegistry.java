@@ -14,12 +14,18 @@ import java.util.Map;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * OperationRegistry类。
+ */
 public class OperationRegistry {
 
     private final Map<String, Class<? extends Step>> stepMap;
 
     /**
      * 构造操作注册表。
+     */
+    /**
+     * OperationRegistry方法。
      */
     public OperationRegistry() {
         this.stepMap = new HashMap<>();
@@ -31,6 +37,11 @@ public class OperationRegistry {
      * @param taskKeyword 任务关键字（如 "navigate", "click" 等）
      * @param stepClass 步骤实现类
      */
+    /**
+     * register方法。
+     *      * @param taskKeyword String类型参数
+     * @param stepClass Class?类型参数
+     */
     public void register(String taskKeyword, Class<? extends Step> stepClass) {
         stepMap.put(taskKeyword.toLowerCase(), stepClass);
     }
@@ -40,6 +51,11 @@ public class OperationRegistry {
      * @param taskKeyword 任务关键字
      * @return 步骤实例，如果未注册则返回 null
      * @throws RuntimeException 如果步骤类无法实例化
+     */
+    /**
+     * resolve方法。
+     *      * @param taskKeyword String类型参数
+     * @return Step类型返回值
      */
     public Step resolve(String taskKeyword) {
         Class<? extends Step> stepClass = stepMap.get(taskKeyword.toLowerCase());
@@ -57,6 +73,11 @@ public class OperationRegistry {
      * 检查任务关键字是否已注册。
      * @param taskKeyword 任务关键字
      * @return 是否已注册
+     */
+    /**
+     * isRegistered方法。
+     *      * @param taskKeyword String类型参数
+     * @return boolean类型返回值
      */
     public boolean isRegistered(String taskKeyword) {
         return stepMap.containsKey(taskKeyword.toLowerCase());

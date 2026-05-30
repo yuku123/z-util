@@ -23,6 +23,11 @@ public final class CaptchaUtil {
     /**
      * 设置验证码字体。
      */
+    /**
+     * setFont方法。
+     *      * @param font Font类型参数
+     * @return static void类型返回值
+     */
     public static void setFont(Font font) {
         DEFAULT_FONT = font;
     }
@@ -34,6 +39,13 @@ public final class CaptchaUtil {
      * @param width     图片宽度
      * @param height    图片高度
      * @return 验证码图片
+     */
+    /**
+     * pngCaptcha方法。
+     *      * @param randomStr String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @return static BufferedImage类型返回值
      */
     public static BufferedImage pngCaptcha(String randomStr, int width, int height) {
         char[] chars = randomStr.toCharArray();
@@ -68,6 +80,14 @@ public final class CaptchaUtil {
     /**
      * 生成 PNG 验证码并写入文件。
      */
+    /**
+     * pngCaptcha方法。
+     *      * @param randomStr String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @param filePath String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean pngCaptcha(String randomStr, int width, int height, String filePath) {
         try {
             BufferedImage bi = pngCaptcha(randomStr, width, height);
@@ -80,6 +100,13 @@ public final class CaptchaUtil {
 
     /**
      * 生成 PNG 验证码并返回 Base64 字符串。
+     */
+    /**
+     * pngCaptchaBase64方法。
+     *      * @param randomStr String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @return static String类型返回值
      */
     public static String pngCaptchaBase64(String randomStr, int width, int height) {
         try {
@@ -100,6 +127,14 @@ public final class CaptchaUtil {
      * @param height    高度
      * @param frameDelay 每帧延迟（毫秒）
      * @return GIF 图片
+     */
+    /**
+     * gifCaptcha方法。
+     *      * @param randomStr String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @param frameDelay int类型参数
+     * @return static BufferedImage类型返回值
      */
     public static BufferedImage gifCaptcha(String randomStr, int width, int height, int frameDelay) {
         char[] chars = randomStr.toCharArray();
@@ -137,6 +172,15 @@ public final class CaptchaUtil {
     /**
      * 生成 GIF 并写出到文件。
      */
+    /**
+     * gifCaptcha方法。
+     *      * @param randomStr String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @param frameDelay int类型参数
+     * @param filePath String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean gifCaptcha(String randomStr, int width, int height, int frameDelay, String filePath) {
         try {
             BufferedImage gif = gifCaptcha(randomStr, width, height, frameDelay);
@@ -150,6 +194,14 @@ public final class CaptchaUtil {
 
     /**
      * 生成 GIF 并返回 Base64。
+     */
+    /**
+     * gifCaptchaBase64方法。
+     *      * @param randomStr String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @param frameDelay int类型参数
+     * @return static String类型返回值
      */
     public static String gifCaptchaBase64(String randomStr, int width, int height, int frameDelay) {
         BufferedImage gif = gifCaptcha(randomStr, width, height, frameDelay);

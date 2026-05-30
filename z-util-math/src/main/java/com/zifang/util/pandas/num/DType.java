@@ -3,6 +3,9 @@ package com.zifang.util.pandas.num;
 /**
  * 数据类型枚举 - 对标 numpy 的 dtype
  */
+/**
+ * DType枚举。
+ */
 public enum DType {
     // 整数类型
     INT8("int8", 1, true),
@@ -35,28 +38,53 @@ public enum DType {
         this.integer = integer;
     }
 
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * getSize方法。
+     * @return int类型返回值
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * isInteger方法。
+     * @return boolean类型返回值
+     */
     public boolean isInteger() {
         return integer;
     }
 
+    /**
+     * isFloat方法。
+     * @return boolean类型返回值
+     */
     public boolean isFloat() {
         return this == FLOAT32 || this == FLOAT64;
     }
 
+    /**
+     * isNumeric方法。
+     * @return boolean类型返回值
+     */
     public boolean isNumeric() {
         return integer || isFloat();
     }
 
     /**
      * 从字符串解析 dtype
+     */
+    /**
+     * fromString方法。
+     *      * @param dtype String类型参数
+     * @return static DType类型返回值
      */
     public static DType fromString(String dtype) {
         if (dtype == null) return FLOAT64;

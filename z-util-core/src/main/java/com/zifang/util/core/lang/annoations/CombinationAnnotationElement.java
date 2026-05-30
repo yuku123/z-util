@@ -15,6 +15,9 @@ import java.util.*;
  *
  * @author zifang
  */
+/**
+ * CombinationAnnotationElement类。
+ */
 public class CombinationAnnotationElement implements AnnotatedElement, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,11 +48,20 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
     /**
      * @param element 需要解析注解的元素：可以是Class、Method、Field、Constructor、ReflectPermission
      */
+    /**
+     * CombinationAnnotationElement方法。
+     *      * @param element AnnotatedElement类型参数
+     */
     public CombinationAnnotationElement(AnnotatedElement element) {
         init(element);
     }
 
     @Override
+    /**
+     * isAnnotationPresent方法。
+     *      * @param annotationClass Class?类型参数
+     * @return boolean类型返回值
+     */
     public boolean isAnnotationPresent(Class<? extends Annotation> annotationClass) {
 
         return annotationMap.containsKey(annotationClass);
@@ -57,12 +69,21 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
     }
 
     @Override
+    /**
+     * getAnnotation方法。
+     *      * @param annotationClass ClassT类型参数
+     * @return <T extends Annotation> T类型返回值
+     */
     public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {
         Annotation annotation = annotationMap.get(annotationClass);
         return (annotation == null) ? null : (T) annotation;
     }
 
     @Override
+    /**
+     * getAnnotations方法。
+     * @return Annotation[]类型返回值
+     */
     public Annotation[] getAnnotations() {
 
         final Collection<Annotation> annotations = this.annotationMap.values();
@@ -70,6 +91,10 @@ public class CombinationAnnotationElement implements AnnotatedElement, Serializa
     }
 
     @Override
+    /**
+     * getDeclaredAnnotations方法。
+     * @return Annotation[]类型返回值
+     */
     public Annotation[] getDeclaredAnnotations() {
 
         final Collection<Annotation> annotations = this.declaredAnnotationMap.values();

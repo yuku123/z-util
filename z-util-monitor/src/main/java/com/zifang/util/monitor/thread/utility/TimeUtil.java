@@ -48,6 +48,10 @@ public final class TimeUtil {
      *
      * @return 当前时间戳。
      */
+    /**
+     * getTimestamp方法。
+     * @return static int类型返回值
+     */
     public static int getTimestamp() {
         return (int) (System.currentTimeMillis() / SECOND_MILLISECONDS);
     }
@@ -56,6 +60,10 @@ public final class TimeUtil {
      * 获取当前毫秒时间戳。
      *
      * @return 当前毫秒时间戳。
+     */
+    /**
+     * getMillisTimestamp方法。
+     * @return static long类型返回值
      */
     public static long getMillisTimestamp() {
         return System.currentTimeMillis();
@@ -66,6 +74,11 @@ public final class TimeUtil {
      *
      * @param timestamp 待转换时间戳。
      * @return 转换之后的时间戳。
+     */
+    /**
+     * getMillisTimestamp方法。
+     *      * @param timestamp int类型参数
+     * @return static long类型返回值
      */
     public static long getMillisTimestamp(int timestamp) {
         if (timestamp < 0) {
@@ -80,6 +93,11 @@ public final class TimeUtil {
      * @param millisTimestamp 待转换毫秒时间戳。
      * @return 转换之后的时间戳。
      */
+    /**
+     * getTimestamp方法。
+     *      * @param millisTimestamp long类型参数
+     * @return static int类型返回值
+     */
     public static int getTimestamp(long millisTimestamp) {
         return (int) (millisTimestamp / SECOND_MILLISECONDS);
     }
@@ -90,6 +108,11 @@ public final class TimeUtil {
      * @param hour 整点小时数。参数范围早0~24。
      * @return 该小时的整点毫秒时间戳。
      */
+    /**
+     * getHourMillisTimestamp方法。
+     *      * @param hour int类型参数
+     * @return static long类型返回值
+     */
     public static long getHourMillisTimestamp(int hour) {
         if (hour < 0 || hour > DAY_HOURS) {
             throw new IllegalArgumentException("Argument must be in [0. 24] range.");
@@ -97,6 +120,9 @@ public final class TimeUtil {
         return hour * HOUR_MINUTES * MINUTES_SECONDS * SECOND_MILLISECONDS;
     }
 
+/**
+ * Hourage枚举。
+ */
     public enum Hourage {
 
         /**
@@ -150,6 +176,10 @@ public final class TimeUtil {
          *
          * @return 此枚举的小时数。
          */
+    /**
+     * getHour方法。
+     * @return int类型返回值
+     */
         public int getHour() {
             return hour;
         }
@@ -159,6 +189,10 @@ public final class TimeUtil {
          *
          * @return 毫秒数。
          */
+    /**
+     * getHourageMillisTimestamp方法。
+     * @return long类型返回值
+     */
         public long getHourageMillisTimestamp() {
             return getHourMillisTimestamp(this.getHour());
         }

@@ -15,10 +15,16 @@ import java.nio.charset.Charset;
  *
  * @author zifang
  */
+/**
+ * FastByteArrayOutputStream类。
+ */
 public class FastByteArrayOutputStream extends OutputStream {
 
     private final FastByteBuffer buffer;
 
+    /**
+     * FastByteArrayOutputStream方法。
+     */
     public FastByteArrayOutputStream() {
         this(1024);
     }
@@ -28,20 +34,38 @@ public class FastByteArrayOutputStream extends OutputStream {
      *
      * @param size 预估大小
      */
+    /**
+     * FastByteArrayOutputStream方法。
+     *      * @param size int类型参数
+     */
     public FastByteArrayOutputStream(int size) {
         buffer = new FastByteBuffer(size);
     }
 
     @Override
+    /**
+     * write方法。
+     *      * @param b byte[]类型参数
+     * @param off int类型参数
+     * @param len int类型参数
+     */
     public void write(byte[] b, int off, int len) {
         buffer.append(b, off, len);
     }
 
     @Override
+    /**
+     * write方法。
+     *      * @param b int类型参数
+     */
     public void write(int b) {
         buffer.append((byte) b);
     }
 
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         return buffer.size();
     }
@@ -50,14 +74,24 @@ public class FastByteArrayOutputStream extends OutputStream {
      * 此方法无任何效果，当流被关闭后不会抛出IOException
      */
     @Override
+    /**
+     * close方法。
+     */
     public void close() {
         // nop
     }
 
+    /**
+     * reset方法。
+     */
     public void reset() {
         buffer.reset();
     }
 
+    /**
+     * writeTo方法。
+     *      * @param out OutputStream类型参数
+     */
     public void writeTo(OutputStream out) throws IOException {
         final int index = buffer.index();
         if (index < 0) {
@@ -82,11 +116,19 @@ public class FastByteArrayOutputStream extends OutputStream {
      *
      * @return Byte数组
      */
+    /**
+     * toByteArray方法。
+     * @return byte[]类型返回值
+     */
     public byte[] toByteArray() {
         return buffer.toArray();
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return new String(toByteArray(), java.nio.charset.StandardCharsets.UTF_8);
     }
@@ -97,6 +139,11 @@ public class FastByteArrayOutputStream extends OutputStream {
      * @param charsetName 编码
      * @return 字符串
      */
+    /**
+     * toString方法。
+     *      * @param charsetName String类型参数
+     * @return String类型返回值
+     */
     public String toString(String charsetName) {
         return new String(toByteArray(), java.nio.charset.Charset.forName(charsetName));
     }
@@ -106,6 +153,11 @@ public class FastByteArrayOutputStream extends OutputStream {
      *
      * @param charset 编码,null表示默认编码
      * @return 字符串
+     */
+    /**
+     * toString方法。
+     *      * @param charset java.nio.charset.Charset类型参数
+     * @return String类型返回值
      */
     public String toString(java.nio.charset.Charset charset) {
         if (charset == null) {

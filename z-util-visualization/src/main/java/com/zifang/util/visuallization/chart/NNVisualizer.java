@@ -10,6 +10,9 @@ import java.util.List;
  * 神经网络可视化器
  * 用于可视化神经网络拓扑结构和训练过程中的损失变化
  */
+/**
+ * NNVisualizer类。
+ */
 public class NNVisualizer {
 
     private final NetworkGraph networkGraph;

@@ -10,6 +10,9 @@ import java.util.List;
  * 遗传算法可视化器
  * 用于可视化遗传算法进化过程中的适应度变化和最优染色体
  */
+/**
+ * GAVisualizer类。
+ */
 public class GAVisualizer {
 
     private final LineChart fitnessChart;

@@ -23,5 +23,8 @@ package com.zifang.util.core.schedule;
  *
  * @see Job
  */
+/**
+ * StatefulJob接口。
+ */
 public interface StatefulJob {
 }

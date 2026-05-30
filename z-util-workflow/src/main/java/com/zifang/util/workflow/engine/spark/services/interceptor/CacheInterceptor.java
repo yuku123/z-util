@@ -22,6 +22,9 @@ import java.lang.reflect.Method;
  * @see EngineServiceInterceptor
  */
 @EngineServiceInterceptor
+/**
+ * CacheInterceptor类。
+ */
 public class CacheInterceptor implements Aspect {
 
     /**
@@ -36,6 +39,13 @@ public class CacheInterceptor implements Aspect {
      * @return true 继续执行方法，false 跳过方法执行
      */
     @Override
+    /**
+     * before方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return boolean类型返回值
+     */
     public boolean before(Object target, Method method, Object[] args) {
         return false;
     }
@@ -52,6 +62,14 @@ public class CacheInterceptor implements Aspect {
      * @return true 继续处理，false 终止处理链
      */
     @Override
+    /**
+     * after方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param returnVal Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean after(Object target, Method method, Object[] args, Object returnVal) {
 
         return false;
@@ -69,6 +87,14 @@ public class CacheInterceptor implements Aspect {
      * @return true 继续处理异常，false 终止异常传播
      */
     @Override
+    /**
+     * afterException方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param e Throwable类型参数
+     * @return boolean类型返回值
+     */
     public boolean afterException(Object target, Method method, Object[] args, Throwable e) {
         return false;
     }

@@ -9,6 +9,9 @@ package com.zifang.util.distributes.sequence;
  *
  * @author zifang
  */
+/**
+ * Sequence类。
+ */
 public class Sequence {
 
     private final long twepoch = 1288834974657L;
@@ -34,6 +37,11 @@ public class Sequence {
      * @param datacenterId 数据中心ID，有效范围：0 ~ 31
      * @throws IllegalArgumentException 如果workerId或datacenterId超出有效范围
      */
+    /**
+     * Sequence方法。
+     *      * @param workerId long类型参数
+     * @param datacenterId long类型参数
+     */
     public Sequence(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(
@@ -55,6 +63,10 @@ public class Sequence {
      *
      * @return 返回一个64位的long类型唯一ID
      * @throws RuntimeException 如果系统时钟回拨，会拒绝生成ID并抛出异常
+     */
+    /**
+     * nextId方法。
+     * @return synchronized long类型返回值
      */
     public synchronized long nextId() {
         long timestamp = timeGen();
@@ -85,6 +97,11 @@ public class Sequence {
      * @param lastTimestamp 上次生成ID的时间戳
      * @return 下一个可用的时间戳（毫秒）
      */
+    /**
+     * tilNextMillis方法。
+     *      * @param lastTimestamp long类型参数
+     * @return long类型返回值
+     */
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
@@ -99,6 +116,10 @@ public class Sequence {
      * 使用SystemClock获取时间，比直接调用System.currentTimeMillis()性能更好。
      *
      * @return 当前时间戳（毫秒）
+     */
+    /**
+     * timeGen方法。
+     * @return long类型返回值
      */
     protected long timeGen() {
         return SystemClock.now();

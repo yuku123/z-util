@@ -5,6 +5,9 @@ import java.util.*;
 /**
  * Apriori algorithm for frequent itemset mining and association rule generation.
  */
+/**
+ * Apriori类。
+ */
 public class Apriori {
 
     private final double minSupport;
@@ -17,6 +20,11 @@ public class Apriori {
      *
      * @param minSupport    Minimum support threshold (0-1)
      * @param minConfidence Minimum confidence threshold (0-1)
+     */
+    /**
+     * Apriori方法。
+     *      * @param minSupport double类型参数
+     * @param minConfidence double类型参数
      */
     public Apriori(double minSupport, double minConfidence) {
         if (minSupport < 0 || minSupport > 1) {
@@ -35,6 +43,11 @@ public class Apriori {
      *
      * @param transactions List of transactions, where each transaction is an array of item IDs
      * @return List of frequent itemsets
+     */
+    /**
+     * findFrequentItemsets方法。
+     *      * @param transactions Listint[]类型参数
+     * @return List<Set<Integer>>类型返回值
      */
     public List<Set<Integer>> findFrequentItemsets(List<int[]> transactions) {
         if (transactions == null || transactions.isEmpty()) {
@@ -107,6 +120,11 @@ public class Apriori {
      *
      * @param transactions List of transactions
      * @return List of association rules
+     */
+    /**
+     * findAssociationRules方法。
+     *      * @param transactions Listint[]类型参数
+     * @return List<AssociationRule>类型返回值
      */
     public List<AssociationRule> findAssociationRules(List<int[]> transactions) {
         if (transactions == null || transactions.isEmpty()) {
@@ -280,6 +298,14 @@ public class Apriori {
         private final double confidence;
         private final double lift;
 
+    /**
+     * AssociationRule方法。
+     *      * @param antecedent SetInteger类型参数
+     * @param consequent SetInteger类型参数
+     * @param support double类型参数
+     * @param confidence double类型参数
+     * @param lift double类型参数
+     */
         public AssociationRule(Set<Integer> antecedent, Set<Integer> consequent,
                                double support, double confidence, double lift) {
             this.antecedent = new HashSet<>(antecedent);
@@ -289,27 +315,51 @@ public class Apriori {
             this.lift = lift;
         }
 
+    /**
+     * getAntecedent方法。
+     * @return Set<Integer>类型返回值
+     */
         public Set<Integer> getAntecedent() {
             return new HashSet<>(antecedent);
         }
 
+    /**
+     * getConsequent方法。
+     * @return Set<Integer>类型返回值
+     */
         public Set<Integer> getConsequent() {
             return new HashSet<>(consequent);
         }
 
+    /**
+     * getSupport方法。
+     * @return double类型返回值
+     */
         public double getSupport() {
             return support;
         }
 
+    /**
+     * getConfidence方法。
+     * @return double类型返回值
+     */
         public double getConfidence() {
             return confidence;
         }
 
+    /**
+     * getLift方法。
+     * @return double类型返回值
+     */
         public double getLift() {
             return lift;
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "AssociationRule{" +
                     "antecedent=" + antecedent +

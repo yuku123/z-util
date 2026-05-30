@@ -12,6 +12,9 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * Description注解。
+ */
 public @interface Description {
     String value();
 }

@@ -10,6 +10,9 @@ import java.util.List;
  *
  * @see PivotA
  */
+/**
+ * PivotANode类。
+ */
 public class PivotANode {
 
     /**
@@ -32,6 +35,10 @@ public class PivotANode {
      *
      * @return 统计值列名
      */
+    /**
+     * getValue方法。
+     * @return String类型返回值
+     */
     public String getValue() {
         return value;
     }
@@ -40,6 +47,10 @@ public class PivotANode {
      * 设置统计值列名。
      *
      * @param value 统计值列名
+     */
+    /**
+     * setValue方法。
+     *      * @param value String类型参数
      */
     public void setValue(String value) {
         this.value = value;
@@ -50,6 +61,10 @@ public class PivotANode {
      *
      * @return 列名
      */
+    /**
+     * getColumnName方法。
+     * @return String类型返回值
+     */
     public String getColumnName() {
         return columnName;
     }
@@ -58,6 +73,10 @@ public class PivotANode {
      * 设置将被处理的列名。
      *
      * @param columnName 列名
+     */
+    /**
+     * setColumnName方法。
+     *      * @param columnName String类型参数
      */
     public void setColumnName(String columnName) {
         this.columnName = columnName;
@@ -68,6 +87,10 @@ public class PivotANode {
      *
      * @return 需要透视的值列表
      */
+    /**
+     * getPivotColumns方法。
+     * @return List<String>类型返回值
+     */
     public List<String> getPivotColumns() {
         return pivotColumns;
     }
@@ -76,6 +99,10 @@ public class PivotANode {
      * 设置需要透视的值列表。
      *
      * @param pivotColumns 需要透视的值列表
+     */
+    /**
+     * setPivotColumns方法。
+     *      * @param pivotColumns ListString类型参数
      */
     public void setPivotColumns(List<String> pivotColumns) {
         this.pivotColumns = pivotColumns;

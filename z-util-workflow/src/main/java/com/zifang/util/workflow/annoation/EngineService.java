@@ -20,6 +20,9 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * EngineService注解。
+ */
 public @interface EngineService {
     /**
      * 服务单元名称，用于唯一标识服务。

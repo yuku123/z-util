@@ -6,6 +6,9 @@ import java.awt.*;
  * 图表颜色定义
  * 提供预设的调色板和颜色获取方法
  */
+/**
+ * ChartColors类。
+ */
 public class ChartColors {
 
     private ChartColors() {}

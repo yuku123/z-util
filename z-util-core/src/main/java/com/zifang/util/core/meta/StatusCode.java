@@ -4,6 +4,9 @@ package com.zifang.util.core.meta;
 /**
  * 状态码接口
  */
+/**
+ * StatusCode接口。
+ */
 public interface StatusCode {
 
     /**

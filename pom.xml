@@ -49,6 +49,7 @@
 
         <module>z-util-validation</module>
         <module>z-util-cache</module>
+        <module>z-util-ioc</module>
 
         <module>z-util-all</module>
     </modules>

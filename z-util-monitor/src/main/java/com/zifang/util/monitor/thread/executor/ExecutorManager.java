@@ -16,6 +16,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  *
  * @author zifang
  */
+/**
+ * ExecutorManager类。
+ */
 public class ExecutorManager {
 
     /**
@@ -57,6 +60,10 @@ public class ExecutorManager {
      * 构造函数。
      *
      * @param threadPoolConfigUnitList 需要管理的线程池配置列表。
+     */
+    /**
+     * ExecutorManager方法。
+     *      * @param threadPoolConfigUnitList ListThreadPoolConfigUnit类型参数
      */
     public ExecutorManager(List<ThreadPoolConfigUnit> threadPoolConfigUnitList) {
         monitorManager = new MonitorManager();
@@ -130,6 +137,11 @@ public class ExecutorManager {
      * @param poolName 线程池名称。
      * @return 获取缓存键任务执行线程池。
      */
+    /**
+     * getExecutor方法。
+     *      * @param poolName String类型参数
+     * @return ExecutorService类型返回值
+     */
     public ExecutorService getExecutor(String poolName) {
         return threadPoolMap.get(poolName);
     }
@@ -138,6 +150,10 @@ public class ExecutorManager {
      * 获取监控管理器。
      *
      * @return 监控管理器。
+     */
+    /**
+     * getMonitorManager方法。
+     * @return MonitorManager类型返回值
      */
     public MonitorManager getMonitorManager() {
         return monitorManager;

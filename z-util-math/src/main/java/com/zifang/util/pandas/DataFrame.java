@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
  * DataFrame 类 - 对标 pandas DataFrame
  * 提供二维表格数据结构和数据分析功能
  */
+/**
+ * DataFrame类。
+ */
 public class DataFrame {
 
     private Map<String, Series> columns;
@@ -18,16 +21,28 @@ public class DataFrame {
 
     // ==================== 构造函数 ====================
 
+    /**
+     * DataFrame方法。
+     */
     public DataFrame() {
         this.columns = new LinkedHashMap<>();
         this.index = Index.range(0);
         this.columnNames = new ArrayList<>();
     }
 
+    /**
+     * DataFrame方法。
+     *      * @param data MapString,类型参数
+     */
     public DataFrame(Map<String, double[]> data) {
         this(data, null);
     }
 
+    /**
+     * DataFrame方法。
+     *      * @param data MapString,类型参数
+     * @param index String[]类型参数
+     */
     public DataFrame(Map<String, double[]> data, String[] index) {
         this.columns = new LinkedHashMap<>();
         this.columnNames = new ArrayList<>(data.keySet());
@@ -49,6 +64,10 @@ public class DataFrame {
         }
     }
 
+    /**
+     * DataFrame方法。
+     *      * @param records ListMapString,类型参数
+     */
     public DataFrame(List<Map<String, Object>> records) {
         this.columns = new LinkedHashMap<>();
 
@@ -82,14 +101,29 @@ public class DataFrame {
 
     // ==================== 静态工厂方法 ====================
 
+    /**
+     * fromMap方法。
+     *      * @param data MapString,类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame fromMap(Map<String, double[]> data) {
         return new DataFrame(data);
     }
 
+    /**
+     * fromRecords方法。
+     *      * @param records ListMapString,类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame fromRecords(List<Map<String, Object>> records) {
         return new DataFrame(records);
     }
 
+    /**
+     * fromCSV方法。
+     *      * @param csvContent String类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame fromCSV(String csvContent) {
         // 简化实现
         String[] lines = csvContent.split("\n");
@@ -116,10 +150,20 @@ public class DataFrame {
 
     // ==================== 列操作 ====================
 
+    /**
+     * get方法。
+     *      * @param column String类型参数
+     * @return Series类型返回值
+     */
     public Series get(String column) {
         return columns.get(column);
     }
 
+    /**
+     * get方法。
+     *      * @param columns String...类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame get(String... columns) {
         Map<String, double[]> newData = new LinkedHashMap<>();
         for (String col : columns) {
@@ -131,6 +175,12 @@ public class DataFrame {
         return new DataFrame(newData, this.index.toArray());
     }
 
+    /**
+     * addColumn方法。
+     *      * @param name String类型参数
+     * @param data double[]类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame addColumn(String name, double[] data) {
         Series series = new Series(data, this.index, name, null);
         this.columns.put(name, series);
@@ -138,6 +188,12 @@ public class DataFrame {
         return this;
     }
 
+    /**
+     * addColumn方法。
+     *      * @param name String类型参数
+     * @param series Series类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame addColumn(String name, Series series) {
         this.columns.put(name, series);
         if (!this.columnNames.contains(name)) {
@@ -146,12 +202,22 @@ public class DataFrame {
         return this;
     }
 
+    /**
+     * dropColumn方法。
+     *      * @param name String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame dropColumn(String name) {
         this.columns.remove(name);
         this.columnNames.remove(name);
         return this;
     }
 
+    /**
+     * rename方法。
+     *      * @param mapping MapString,类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame rename(Map<String, String> mapping) {
         for (Map.Entry<String, String> entry : mapping.entrySet()) {
             String oldName = entry.getKey();
@@ -172,32 +238,64 @@ public class DataFrame {
 
     // ==================== 行操作 ====================
 
+    /**
+     * nRows方法。
+     * @return int类型返回值
+     */
     public int nRows() {
         return this.index.size();
     }
 
+    /**
+     * nCols方法。
+     * @return int类型返回值
+     */
     public int nCols() {
         return this.columnNames.size();
     }
 
+    /**
+     * head方法。
+     *      * @param n int类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame head(int n) {
         int end = Math.min(n, this.nRows());
         return this.slice(0, end);
     }
 
+    /**
+     * head方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame head() {
         return head(5);
     }
 
+    /**
+     * tail方法。
+     *      * @param n int类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame tail(int n) {
         int start = Math.max(0, this.nRows() - n);
         return this.slice(start, this.nRows());
     }
 
+    /**
+     * tail方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame tail() {
         return tail(5);
     }
 
+    /**
+     * slice方法。
+     *      * @param start int类型参数
+     * @param end int类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame slice(int start, int end) {
         Index newIndex = this.index.slice(start, end);
         Map<String, double[]> newData = new LinkedHashMap<>();
@@ -214,10 +312,19 @@ public class DataFrame {
 
     // ==================== 索引操作 ====================
 
+    /**
+     * index方法。
+     * @return Index类型返回值
+     */
     public Index index() {
         return this.index;
     }
 
+    /**
+     * setIndex方法。
+     *      * @param newIndex Index类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame setIndex(Index newIndex) {
         if (newIndex.size() != this.nRows()) {
             throw new IllegalArgumentException("New index size must match number of rows");
@@ -229,12 +336,22 @@ public class DataFrame {
         return this;
     }
 
+    /**
+     * columns方法。
+     * @return List<String>类型返回值
+     */
     public List<String> columns() {
         return new ArrayList<>(this.columnNames);
     }
 
     // ==================== 过滤和选择 ====================
 
+    /**
+     * filter方法。
+     *      * @param condition FunctionSeries,类型参数
+     * @param column String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame filter(Function<Series, Boolean> condition, String column) {
         Series target = this.columns.get(column);
         if (target == null) {
@@ -255,6 +372,11 @@ public class DataFrame {
         return this.slice(start, end);
     }
 
+    /**
+     * query方法。
+     *      * @param expression String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame query(String expression) {
         // 简化实现 - 实际应该解析表达式
         return this;
@@ -262,6 +384,12 @@ public class DataFrame {
 
     // ==================== 排序 ====================
 
+    /**
+     * sort_values方法。
+     *      * @param column String类型参数
+     * @param ascending boolean类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame sort_values(String column, boolean ascending) {
         Series target = this.columns.get(column);
         if (target == null) {
@@ -298,10 +426,20 @@ public class DataFrame {
         return new DataFrame(newData, newIndex);
     }
 
+    /**
+     * sort_values方法。
+     *      * @param column String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame sort_values(String column) {
         return sort_values(column, true);
     }
 
+    /**
+     * sort_index方法。
+     *      * @param ascending boolean类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame sort_index(boolean ascending) {
         String[] labels = this.index.toArray();
         Integer[] indices = new Integer[labels.length];
@@ -333,12 +471,20 @@ public class DataFrame {
         return new DataFrame(newData, newIndex);
     }
 
+    /**
+     * sort_index方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame sort_index() {
         return sort_index(true);
     }
 
     // ==================== 统计方法 ====================
 
+    /**
+     * sum方法。
+     * @return Series类型返回值
+     */
     public Series sum() {
         double[] sums = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -348,6 +494,10 @@ public class DataFrame {
         return new Series(sums, Index.of(this.columnNames.toArray(new String[0])), "sum", null);
     }
 
+    /**
+     * mean方法。
+     * @return Series类型返回值
+     */
     public Series mean() {
         double[] means = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -357,6 +507,10 @@ public class DataFrame {
         return new Series(means, Index.of(this.columnNames.toArray(new String[0])), "mean", null);
     }
 
+    /**
+     * std方法。
+     * @return Series类型返回值
+     */
     public Series std() {
         double[] stds = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -366,6 +520,10 @@ public class DataFrame {
         return new Series(stds, Index.of(this.columnNames.toArray(new String[0])), "std", null);
     }
 
+    /**
+     * var方法。
+     * @return Series类型返回值
+     */
     public Series var() {
         double[] vars = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -375,6 +533,10 @@ public class DataFrame {
         return new Series(vars, Index.of(this.columnNames.toArray(new String[0])), "var", null);
     }
 
+    /**
+     * min方法。
+     * @return Series类型返回值
+     */
     public Series min() {
         double[] mins = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -384,6 +546,10 @@ public class DataFrame {
         return new Series(mins, Index.of(this.columnNames.toArray(new String[0])), "min", null);
     }
 
+    /**
+     * max方法。
+     * @return Series类型返回值
+     */
     public Series max() {
         double[] maxs = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -393,6 +559,10 @@ public class DataFrame {
         return new Series(maxs, Index.of(this.columnNames.toArray(new String[0])), "max", null);
     }
 
+    /**
+     * describe方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame describe() {
         String[] stats = {"count", "mean", "std", "min", "25%", "50%", "75%", "max"};
         Map<String, double[]> descData = new LinkedHashMap<>();
@@ -416,6 +586,11 @@ public class DataFrame {
 
     // ==================== 数据清洗 ====================
 
+    /**
+     * fillna方法。
+     *      * @param value double类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame fillna(double value) {
         DataFrame result = new DataFrame();
         result.index = this.index;
@@ -429,6 +604,10 @@ public class DataFrame {
         return result;
     }
 
+    /**
+     * dropna方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame dropna() {
         // 找出包含 NaN 的行
         boolean[] hasNaN = new boolean[this.nRows()];
@@ -464,6 +643,10 @@ public class DataFrame {
      * 使用线性插值方法填充 NaN 值
      * @return 插值后的 DataFrame
      */
+    /**
+     * interpolate方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame interpolate() {
         return interpolate("linear");
     }
@@ -472,6 +655,11 @@ public class DataFrame {
      * 使用指定方法进行插值
      * @param method 插值方法："linear", "forward", "backward"
      * @return 插值后的 DataFrame
+     */
+    /**
+     * interpolate方法。
+     *      * @param method String类型参数
+     * @return DataFrame类型返回值
      */
     public DataFrame interpolate(String method) {
         DataFrame result = new DataFrame();
@@ -503,6 +691,10 @@ public class DataFrame {
         return result;
     }
 
+    /**
+     * dropDuplicates方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame dropDuplicates() {
         // 简化实现：基于所有列去重
         Set<List<Double>> seen = new LinkedHashSet<>();
@@ -528,6 +720,11 @@ public class DataFrame {
         return this.slice(start, end);
     }
 
+    /**
+     * dropDuplicates方法。
+     *      * @param columns String...类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame dropDuplicates(String... columns) {
         // 基于指定列去重
         Set<List<Double>> seen = new LinkedHashSet<>();
@@ -555,15 +752,28 @@ public class DataFrame {
 
     // ==================== 分组聚合 ====================
 
+    /**
+     * groupby方法。
+     *      * @param column String类型参数
+     * @return GroupBy类型返回值
+     */
     public GroupBy groupby(String column) {
         return new GroupBy(this, column);
     }
 
+/**
+ * GroupBy类。
+ */
     public class GroupBy {
         private DataFrame df;
         private String column;
         private Map<Double, List<Integer>> groups;
 
+    /**
+     * GroupBy方法。
+     *      * @param df DataFrame类型参数
+     * @param column String类型参数
+     */
         public GroupBy(DataFrame df, String column) {
             this.df = df;
             this.column = column;
@@ -576,30 +786,58 @@ public class DataFrame {
             }
         }
 
+    /**
+     * sum方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame sum() {
             return aggregate(Series::sum);
         }
 
+    /**
+     * mean方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame mean() {
             return aggregate(Series::mean);
         }
 
+    /**
+     * count方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame count() {
             return aggregate(series -> Double.valueOf(series.count()));
         }
 
+    /**
+     * min方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame min() {
             return aggregate(Series::min);
         }
 
+    /**
+     * max方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame max() {
             return aggregate(Series::max);
         }
 
+    /**
+     * std方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame std() {
             return aggregate(Series::std);
         }
 
+    /**
+     * var方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame var() {
             return aggregate(Series::var);
         }
@@ -639,11 +877,26 @@ public class DataFrame {
 
     // ==================== 连接和合并 ====================
 
+    /**
+     * join方法。
+     *      * @param other DataFrame类型参数
+     * @param how String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame join(DataFrame other, String how) {
         // 简化实现：基于索引连接
         return merge(this, other, this.index.toArray()[0], other.index.toArray()[0], how);
     }
 
+    /**
+     * merge方法。
+     *      * @param left DataFrame类型参数
+     * @param right DataFrame类型参数
+     * @param leftOn String类型参数
+     * @param rightOn String类型参数
+     * @param how String类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame merge(DataFrame left, DataFrame right, String leftOn, String rightOn, String how) {
         // 简化实现：inner join
         Series leftSeries = left.get(leftOn);
@@ -704,6 +957,10 @@ public class DataFrame {
 
     // ==================== 数据导出 ====================
 
+    /**
+     * toArray方法。
+     * @return double[][]类型返回值
+     */
     public double[][] toArray() {
         double[][] result = new double[this.nRows()][this.nCols()];
         for (int i = 0; i < this.nRows(); i++) {
@@ -715,6 +972,10 @@ public class DataFrame {
         return result;
     }
 
+    /**
+     * toMap方法。
+     * @return Map<String, double[]>类型返回值
+     */
     public Map<String, double[]> toMap() {
         Map<String, double[]> result = new LinkedHashMap<>();
         for (String col : this.columnNames) {
@@ -723,6 +984,10 @@ public class DataFrame {
         return result;
     }
 
+    /**
+     * toCSV方法。
+     * @return String类型返回值
+     */
     public String toCSV() {
         StringBuilder sb = new StringBuilder();
 
@@ -741,6 +1006,10 @@ public class DataFrame {
         return sb.toString();
     }
 
+    /**
+     * toJSON方法。
+     * @return String类型返回值
+     */
     public String toJSON() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -765,6 +1034,10 @@ public class DataFrame {
     // ==================== 描述和打印 ====================
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
@@ -791,10 +1064,16 @@ public class DataFrame {
         return sb.toString();
     }
 
+    /**
+     * print方法。
+     */
     public void print() {
         System.out.println(this.toString());
     }
 
+    /**
+     * info方法。
+     */
     public void info() {
         System.out.println("<class 'util-math.DataFrame'>");
         System.out.println("RangeIndex: " + this.nRows() + " entries, 0 to " + (this.nRows() - 1));

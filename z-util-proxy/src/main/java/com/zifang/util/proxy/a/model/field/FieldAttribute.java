@@ -5,5 +5,8 @@ package com.zifang.util.proxy.a.model.field;
  * <p>
  * 标注属于字段表的属性。
  */
+/**
+ * FieldAttribute接口。
+ */
 public interface FieldAttribute {
 }

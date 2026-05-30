@@ -5,6 +5,9 @@ import java.util.List;
 /**
  * AST节点接口
  */
+/**
+ * ASTNode接口。
+ */
 public interface ASTNode {
 
     /**

@@ -14,6 +14,9 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @param <T> 对象类型
  */
+/**
+ * SoftReferenceObjectPool类。
+ */
 public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
 
     private final PooledObjectFactory<T> factory;
@@ -26,10 +29,19 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
     private final ReentrantLock lock = new ReentrantLock();
     private final Condition condition = lock.newCondition();
 
+    /**
+     * SoftReferenceObjectPool方法。
+     *      * @param factory PooledObjectFactoryT类型参数
+     */
     public SoftReferenceObjectPool(PooledObjectFactory<T> factory) {
         this(factory, new PoolConfig());
     }
 
+    /**
+     * SoftReferenceObjectPool方法。
+     *      * @param factory PooledObjectFactoryT类型参数
+     * @param config PoolConfig类型参数
+     */
     public SoftReferenceObjectPool(PooledObjectFactory<T> factory, PoolConfig config) {
         this.factory = factory;
         this.config = config;
@@ -39,6 +51,10 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * borrowObject方法。
+     * @return T类型返回值
+     */
     public T borrowObject() throws Exception {
         checkOpen();
 
@@ -115,6 +131,10 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * returnObject方法。
+     *      * @param obj T类型参数
+     */
     public void returnObject(T obj) throws Exception {
         checkOpen();
 
@@ -156,6 +176,10 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * invalidateObject方法。
+     *      * @param obj T类型参数
+     */
     public void invalidateObject(T obj) throws Exception {
         lock.lock();
         try {
@@ -173,6 +197,9 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * clear方法。
+     */
     public void clear() throws Exception {
         lock.lock();
         try {
@@ -183,6 +210,9 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * close方法。
+     */
     public void close() {
         if (closed) {
             return;
@@ -203,11 +233,19 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * getNumActive方法。
+     * @return int类型返回值
+     */
     public int getNumActive() {
         return numActive.get();
     }
 
     @Override
+    /**
+     * getNumIdle方法。
+     * @return int类型返回值
+     */
     public int getNumIdle() {
         lock.lock();
         try {
@@ -219,6 +257,10 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * getConfig方法。
+     * @return PoolConfig类型返回值
+     */
     public PoolConfig getConfig() {
         return config;
     }

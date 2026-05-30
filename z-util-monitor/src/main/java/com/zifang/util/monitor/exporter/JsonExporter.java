@@ -11,14 +11,25 @@ import java.util.TreeMap;
 /**
  * JSON 指标导出器
  */
+/**
+ * JsonExporter类。
+ */
 public class JsonExporter {
 
     private final MetricsRegistry registry;
 
+    /**
+     * JsonExporter方法。
+     *      * @param registry MetricsRegistry类型参数
+     */
     public JsonExporter(MetricsRegistry registry) {
         this.registry = registry;
     }
 
+    /**
+     * export方法。
+     * @return String类型返回值
+     */
     public String export() {
         List<MetricsSnapshot> snapshots = registry.collect();
 

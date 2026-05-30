@@ -14,6 +14,9 @@ import java.util.function.Predicate;
 /**
  * @author zifang
  */
+/**
+ * Pageable类。
+ */
 public class Pageable<T> implements IPageable<T> {
 
     private static final long serialVersionUID = -8805933490739835015L;
@@ -22,6 +25,10 @@ public class Pageable<T> implements IPageable<T> {
      * 查询数据列表
      */
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    /**
+     * Collections.emptyList方法。
+     * @return List<T> records =类型返回值
+     */
     protected List<T> records = Collections.emptyList();
 
     /**
@@ -45,8 +52,15 @@ public class Pageable<T> implements IPageable<T> {
      * 排序字段信息
      */
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    /**
+     * ArrayList<>方法。
+     * @return List<SortField> orders = new类型返回值
+     */
     protected List<SortField> orders = new ArrayList<>();
 
+    /**
+     * Pageable方法。
+     */
     public Pageable() {
     }
 
@@ -56,10 +70,21 @@ public class Pageable<T> implements IPageable<T> {
      * @param current 当前页
      * @param size    每页显示条数
      */
+    /**
+     * Pageable方法。
+     *      * @param current long类型参数
+     * @param size long类型参数
+     */
     public Pageable(long current, long size) {
         this(current, size, 0);
     }
 
+    /**
+     * Pageable方法。
+     *      * @param current long类型参数
+     * @param size long类型参数
+     * @param total long类型参数
+     */
     public Pageable(long current, long size, long total) {
         if (current > 1) {
             this.current = current;
@@ -68,10 +93,18 @@ public class Pageable<T> implements IPageable<T> {
         this.total = total;
     }
 
+    /**
+     * getOrders方法。
+     * @return List<SortField>类型返回值
+     */
     public List<SortField> getOrders() {
         return orders;
     }
 
+    /**
+     * setOrders方法。
+     *      * @param orders ListSortField类型参数
+     */
     public void setOrders(List<SortField> orders) {
         this.orders = orders;
     }
@@ -80,6 +113,10 @@ public class Pageable<T> implements IPageable<T> {
      * 是否存在上一页
      *
      * @return true / false
+     */
+    /**
+     * hasPrevious方法。
+     * @return boolean类型返回值
      */
     public boolean hasPrevious() {
         return this.current > 1;
@@ -90,49 +127,89 @@ public class Pageable<T> implements IPageable<T> {
      *
      * @return true / false
      */
+    /**
+     * hasNext方法。
+     * @return boolean类型返回值
+     */
     public boolean hasNext() {
         return this.current < this.getPages();
     }
 
     @Override
+    /**
+     * getRecords方法。
+     * @return List<T>类型返回值
+     */
     public List<T> getRecords() {
         return this.records;
     }
 
     @Override
+    /**
+     * setRecords方法。
+     *      * @param records ListT类型参数
+     * @return Pageable<T>类型返回值
+     */
     public Pageable<T> setRecords(List<T> records) {
         this.records = records;
         return this;
     }
 
     @Override
+    /**
+     * getTotal方法。
+     * @return long类型返回值
+     */
     public long getTotal() {
         return this.total;
     }
 
     @Override
+    /**
+     * setTotal方法。
+     *      * @param total long类型参数
+     * @return Pageable<T>类型返回值
+     */
     public Pageable<T> setTotal(long total) {
         this.total = total;
         return this;
     }
 
     @Override
+    /**
+     * getSize方法。
+     * @return long类型返回值
+     */
     public long getSize() {
         return this.size;
     }
 
     @Override
+    /**
+     * setSize方法。
+     *      * @param size long类型参数
+     * @return Pageable<T>类型返回值
+     */
     public Pageable<T> setSize(long size) {
         this.size = size;
         return this;
     }
 
     @Override
+    /**
+     * getCurrent方法。
+     * @return long类型返回值
+     */
     public long getCurrent() {
         return this.current;
     }
 
     @Override
+    /**
+     * setCurrent方法。
+     *      * @param current long类型参数
+     * @return Pageable<T>类型返回值
+     */
     public Pageable<T> setCurrent(long current) {
         this.current = current;
         return this;
@@ -176,6 +253,11 @@ public class Pageable<T> implements IPageable<T> {
      * @param items 条件
      * @return 返回分页参数本身
      */
+    /**
+     * addOrder方法。
+     *      * @param items SortField...类型参数
+     * @return Pageable<T>类型返回值
+     */
     public Pageable<T> addOrder(SortField... items) {
         orders.addAll(Arrays.asList(items));
         return this;
@@ -187,6 +269,11 @@ public class Pageable<T> implements IPageable<T> {
      * @param items 条件
      * @return 返回分页参数本身
      */
+    /**
+     * addOrder方法。
+     *      * @param items ListSortField类型参数
+     * @return Pageable<T>类型返回值
+     */
     public Pageable<T> addOrder(List<SortField> items) {
         orders.addAll(items);
         return this;
@@ -194,6 +281,10 @@ public class Pageable<T> implements IPageable<T> {
 
 
     @Override
+    /**
+     * orders方法。
+     * @return List<SortField>类型返回值
+     */
     public List<SortField> orders() {
         return getOrders();
     }

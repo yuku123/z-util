@@ -18,6 +18,9 @@ import java.util.Map;
 /**
  * 仓储调用处理器，负责处理Repository接口方法的调用
  */
+/**
+ * BaseRepositoryInvocationHandler类。
+ */
 public class BaseRepositoryInvocationHandler implements InvocationHandler {
 
     private final Class<?> targetClass;
@@ -28,6 +31,10 @@ public class BaseRepositoryInvocationHandler implements InvocationHandler {
      * 构造调用处理器
      *
      * @param clazz Repository接口类型
+     */
+    /**
+     * BaseRepositoryInvocationHandler方法。
+     *      * @param clazz Class?类型参数
      */
     public BaseRepositoryInvocationHandler(Class<?> clazz) {
         this.targetClass = clazz;
@@ -40,6 +47,13 @@ public class BaseRepositoryInvocationHandler implements InvocationHandler {
     }
 
     @Override
+    /**
+     * invoke方法。
+     *      * @param proxy Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return Object类型返回值
+     */
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Class<?> clazz = method.getDeclaringClass();
         if (clazz == CrudRepository.class) {

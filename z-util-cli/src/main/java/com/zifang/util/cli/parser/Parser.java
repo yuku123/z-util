@@ -20,40 +20,89 @@ public abstract class Parser implements CommandLineParser {
     private Options options;
     private java.util.List requiredOptions;
 
+    /**
+     * Parser方法。
+     */
     protected Parser() {}
 
+    /**
+     * checkRequiredOptions方法。
+     */
     protected void checkRequiredOptions() throws com.zifang.util.cli.exception.MissingOptionException {
         if (!getRequiredOptions().isEmpty()) {
             throw new com.zifang.util.cli.exception.MissingOptionException(getRequiredOptions());
         }
     }
 
+    /**
+     * flatten方法。
+     *      * @param opts Options类型参数
+     * @param arguments String[]类型参数
+     * @param stopAtNonOption boolean类型参数
+     * @return abstract String[]类型返回值
+     */
     protected abstract String[] flatten(Options opts, String[] arguments, boolean stopAtNonOption) throws ParseException;
 
+    /**
+     * getOptions方法。
+     * @return Options类型返回值
+     */
     protected Options getOptions() {
         return options;
     }
 
+    /**
+     * getRequiredOptions方法。
+     * @return java.util.List类型返回值
+     */
     protected java.util.List getRequiredOptions() {
         return requiredOptions;
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments) throws ParseException {
         return parse(options, arguments, null, false);
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException {
         return parse(options, arguments, null, stopAtNonOption);
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param properties final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments, final Properties properties) throws ParseException {
         return parse(options, arguments, properties, false);
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param properties final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments, final Properties properties, final boolean stopAtNonOption)
             throws ParseException {
         options.helpOptions().forEach(opt -> opt.clearValues());
@@ -107,6 +156,11 @@ public abstract class Parser implements CommandLineParser {
         return cmd;
     }
 
+    /**
+     * processOption方法。
+     *      * @param arg final类型参数
+     * @param iter final类型参数
+     */
     protected void processOption(final String arg, final java.util.ListIterator<String> iter) throws ParseException {
         if (!getOptions().hasOption(arg)) {
             throw new com.zifang.util.cli.exception.UnrecognizedOptionException("Unrecognized option: " + arg, arg);
@@ -132,6 +186,11 @@ public abstract class Parser implements CommandLineParser {
         cmd.addOption(opt);
     }
 
+    /**
+     * processArgs方法。
+     *      * @param opt final类型参数
+     * @param iter final类型参数
+     */
     public void processArgs(final Option opt, final java.util.ListIterator<String> iter) throws ParseException {
         while (iter.hasNext()) {
             String str = iter.next();
@@ -151,6 +210,10 @@ public abstract class Parser implements CommandLineParser {
         }
     }
 
+    /**
+     * processProperties方法。
+     *      * @param properties final类型参数
+     */
     protected void processProperties(final Properties properties) throws ParseException {
         if (properties == null) return;
         for (java.util.Enumeration<?> e = properties.propertyNames(); e.hasMoreElements(); ) {
@@ -178,6 +241,10 @@ public abstract class Parser implements CommandLineParser {
         }
     }
 
+    /**
+     * setOptions方法。
+     *      * @param options final类型参数
+     */
     protected void setOptions(final Options options) {
         this.options = options;
         this.requiredOptions = new java.util.ArrayList<>(options.getRequiredOptions());

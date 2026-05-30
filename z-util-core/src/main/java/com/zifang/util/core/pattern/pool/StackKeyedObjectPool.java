@@ -14,6 +14,9 @@ import java.util.function.Supplier;
  * @param <K> 键类型
  * @param <V> 对象类型
  */
+/**
+ * StackKeyedObjectPool类。
+ */
 public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
 
     private final PooledObjectFactory<V> factory;
@@ -27,10 +30,19 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
 
     private volatile boolean closed;
 
+    /**
+     * StackKeyedObjectPool方法。
+     *      * @param factory PooledObjectFactoryV类型参数
+     */
     public StackKeyedObjectPool(PooledObjectFactory<V> factory) {
         this(factory, new PoolConfig());
     }
 
+    /**
+     * StackKeyedObjectPool方法。
+     *      * @param factory PooledObjectFactoryV类型参数
+     * @param defaultConfig PoolConfig类型参数
+     */
     public StackKeyedObjectPool(PooledObjectFactory<V> factory, PoolConfig defaultConfig) {
         this.factory = factory;
         this.defaultConfig = defaultConfig;
@@ -41,6 +53,11 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
     }
 
     @Override
+    /**
+     * borrowObject方法。
+     *      * @param key K类型参数
+     * @return V类型返回值
+     */
     public V borrowObject(K key) throws Exception {
         checkOpen();
 
@@ -112,6 +129,11 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
     }
 
     @Override
+    /**
+     * returnObject方法。
+     *      * @param key K类型参数
+     * @param obj V类型参数
+     */
     public void returnObject(K key, V obj) throws Exception {
         checkOpen();
 
@@ -166,6 +188,11 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
     }
 
     @Override
+    /**
+     * invalidateObject方法。
+     *      * @param key K类型参数
+     * @param obj V类型参数
+     */
     public void invalidateObject(K key, V obj) throws Exception {
         lock.lock();
         try {
@@ -199,6 +226,9 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
     }
 
     @Override
+    /**
+     * clear方法。
+     */
     public void clear() throws Exception {
         lock.lock();
         try {
@@ -211,6 +241,10 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
     }
 
     @Override
+    /**
+     * clear方法。
+     *      * @param key K类型参数
+     */
     public void clear(K key) throws Exception {
         lock.lock();
         try {
@@ -228,6 +262,10 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
     }
 
     @Override
+    /**
+     * getPoolSize方法。
+     * @return int类型返回值
+     */
     public int getPoolSize() {
         int size = 0;
         for (PooledObjectStack<V> stack : pools.values()) {
@@ -237,11 +275,19 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
     }
 
     @Override
+    /**
+     * getNumIdle方法。
+     * @return int类型返回值
+     */
     public int getNumIdle() {
         return getPoolSize();
     }
 
     @Override
+    /**
+     * getNumActive方法。
+     * @return int类型返回值
+     */
     public int getNumActive() {
         int total = 0;
         for (AtomicInteger count : activeCount.values()) {
@@ -251,18 +297,31 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
     }
 
     @Override
+    /**
+     * getNumIdle方法。
+     *      * @param key K类型参数
+     * @return int类型返回值
+     */
     public int getNumIdle(K key) {
         PooledObjectStack<V> stack = pools.get(key);
         return stack != null ? stack.size() : 0;
     }
 
     @Override
+    /**
+     * getNumActive方法。
+     *      * @param key K类型参数
+     * @return int类型返回值
+     */
     public int getNumActive(K key) {
         AtomicInteger count = activeCount.get(key);
         return count != null ? count.get() : 0;
     }
 
     @Override
+    /**
+     * close方法。
+     */
     public void close() {
         if (closed) {
             return;

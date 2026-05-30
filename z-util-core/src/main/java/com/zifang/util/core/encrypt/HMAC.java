@@ -70,6 +70,9 @@ import java.security.NoSuchAlgorithmException;
  * @Description: TODO(这里用一句话描述这个类的作用)
  * @date 2019年12月1日 下午4:49:20
  */
+/**
+ * HMAC类。
+ */
 public class HMAC {
     /**
      * 定义加密方式
@@ -93,6 +96,9 @@ public class HMAC {
     /**
      * 构造函数
      */
+    /**
+     * HMAC方法。
+     */
     public HMAC() {
 
     }
@@ -103,6 +109,11 @@ public class HMAC {
      * @param key 需要加密的字节数组
      * @return 字符串
      * @throws Exception
+     */
+    /**
+     * encryptBase64方法。
+     *      * @param key byte[]类型参数
+     * @return static String类型返回值
      */
     public static String encryptBase64(byte[] key) throws Exception {
         return java.util.Base64.getEncoder().encodeToString(key);
@@ -115,6 +126,11 @@ public class HMAC {
      * @return 字节数组
      * @throws Exception
      */
+    /**
+     * decryptBase64方法。
+     *      * @param key String类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] decryptBase64(String key) throws Exception {
         return java.util.Base64.getDecoder().decode((key));
     }
@@ -123,6 +139,10 @@ public class HMAC {
      * 初始化HMAC密钥
      *
      * @return
+     */
+    /**
+     * init方法。
+     * @return static String类型返回值
      */
     public static String init() {
         SecretKey key;
@@ -146,6 +166,12 @@ public class HMAC {
      * @param key  密钥
      * @return 字节数组
      */
+    /**
+     * encryptHMAC方法。
+     *      * @param data byte[]类型参数
+     * @param key String类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] encryptHMAC(byte[] data, String key) {
         SecretKey secretKey;
         byte[] bytes = null;
@@ -166,6 +192,12 @@ public class HMAC {
      * @param data 需要加密的字符串
      * @param key  密钥
      * @return 字符串
+     */
+    /**
+     * encryptHMAC方法。
+     *      * @param data String类型参数
+     * @param key String类型参数
+     * @return static String类型返回值
      */
     public static String encryptHMAC(String data, String key) {
         if (data == null || data.trim().equals("")) {
@@ -211,6 +243,11 @@ public class HMAC {
      * 测试方法
      *
      * @param args
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) throws Exception {
         String key = HMAC.init();

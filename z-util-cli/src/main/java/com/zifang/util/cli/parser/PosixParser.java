@@ -16,6 +16,9 @@ import java.util.List;
  * @deprecated since 1.3, use {@link DefaultParser} instead.
  */
 @Deprecated
+/**
+ * PosixParser类。
+ */
 public class PosixParser extends Parser {
 
     private final List<String> tokens = new ArrayList<>();
@@ -23,9 +26,19 @@ public class PosixParser extends Parser {
     private Option currentOption;
     private Options options;
 
+    /**
+     * PosixParser方法。
+     */
     public PosixParser() {}
 
     @Override
+    /**
+     * flatten方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return String[]类型返回值
+     */
     protected String[] flatten(final Options options, final String[] arguments, final boolean stopAtNonOption) throws ParseException {
         init();
         this.options = options;

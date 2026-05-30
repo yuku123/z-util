@@ -20,6 +20,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+/**
+ * RestController注解。
+ */
 public @interface RestController {
 
     /**

@@ -9,6 +9,9 @@ import java.util.Arrays;
  *
  * @author zifang
  */
+/**
+ * Bytes类。
+ */
 public class Bytes {
 
     private Bytes() {
@@ -16,6 +19,12 @@ public class Bytes {
 
     /**
      * 将字节数组用指定分隔符连接成字符串。
+     */
+    /**
+     * join方法。
+     *      * @param array byte[]类型参数
+     * @param delimiter String类型参数
+     * @return static String类型返回值
      */
     public static String join(byte[] array, String delimiter) {
         if (array == null || array.length == 0) {
@@ -33,6 +42,11 @@ public class Bytes {
 
     /**
      * 将多个字节数组合并为一个。
+     */
+    /**
+     * concat方法。
+     *      * @param arrays byte[]...类型参数
+     * @return static byte[]类型返回值
      */
     public static byte[] concat(byte[]... arrays) {
         int totalLength = 0;
@@ -55,6 +69,11 @@ public class Bytes {
     /**
      * 反转字节数组。
      */
+    /**
+     * reverse方法。
+     *      * @param array byte[]类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] reverse(byte[] array) {
         if (array == null || array.length <= 1) {
             return array != null ? array : new byte[0];
@@ -69,6 +88,11 @@ public class Bytes {
     /**
      * 将字节数组转换为十六进制字符串。
      */
+    /**
+     * toHex方法。
+     *      * @param array byte[]类型参数
+     * @return static String类型返回值
+     */
     public static String toHex(byte[] array) {
         if (array == null || array.length == 0) {
             return "";
@@ -82,6 +106,11 @@ public class Bytes {
 
     /**
      * 将十六进制字符串转换为字节数组。
+     */
+    /**
+     * fromHex方法。
+     *      * @param hex String类型参数
+     * @return static byte[]类型返回值
      */
     public static byte[] fromHex(String hex) {
         if (hex == null || hex.isEmpty()) {
@@ -99,6 +128,11 @@ public class Bytes {
     /**
      * 计算字节数组的和（按无符号值计算）。
      */
+    /**
+     * sum方法。
+     *      * @param array byte[]类型参数
+     * @return static int类型返回值
+     */
     public static int sum(byte[] array) {
         if (array == null || array.length == 0) {
             return 0;
@@ -113,6 +147,11 @@ public class Bytes {
     /**
      * 计算字节数组的平均值（按无符号值计算）。
      */
+    /**
+     * average方法。
+     *      * @param array byte[]类型参数
+     * @return static double类型返回值
+     */
     public static double average(byte[] array) {
         if (array == null || array.length == 0) {
             return 0.0;
@@ -122,6 +161,11 @@ public class Bytes {
 
     /**
      * 获取字节数组中的最小值。
+     */
+    /**
+     * min方法。
+     *      * @param array byte[]类型参数
+     * @return static byte类型返回值
      */
     public static byte min(byte[] array) {
         if (array == null || array.length == 0) {
@@ -139,6 +183,11 @@ public class Bytes {
     /**
      * 获取字节数组中的最大值。
      */
+    /**
+     * max方法。
+     *      * @param array byte[]类型参数
+     * @return static byte类型返回值
+     */
     public static byte max(byte[] array) {
         if (array == null || array.length == 0) {
             return 0;
@@ -155,6 +204,12 @@ public class Bytes {
     /**
      * 判断字节数组是否包含指定字节。
      */
+    /**
+     * contains方法。
+     *      * @param array byte[]类型参数
+     * @param value byte类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean contains(byte[] array, byte value) {
         if (array == null || array.length == 0) {
             return false;
@@ -170,6 +225,12 @@ public class Bytes {
     /**
      * 查找字节在数组中首次出现的索引。
      */
+    /**
+     * indexOf方法。
+     *      * @param array byte[]类型参数
+     * @param value byte类型参数
+     * @return static int类型返回值
+     */
     public static int indexOf(byte[] array, byte value) {
         if (array == null || array.length == 0) {
             return -1;
@@ -184,6 +245,12 @@ public class Bytes {
 
     /**
      * 按指定分隔符分割字节数组。
+     */
+    /**
+     * split方法。
+     *      * @param array byte[]类型参数
+     * @param delimiter byte类型参数
+     * @return static byte[][]类型返回值
      */
     public static byte[][] split(byte[] array, byte delimiter) {
         if (array == null || array.length == 0) {

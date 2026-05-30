@@ -20,5 +20,8 @@ package com.zifang.util.workflow.bpmn;
  * @see BpmnProcess
  * @see BpmnXmlParser
  */
+/**
+ * Bpmn类。
+ */
 public class Bpmn {
 }

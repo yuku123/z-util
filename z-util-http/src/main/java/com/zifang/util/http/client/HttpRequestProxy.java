@@ -15,6 +15,9 @@ import java.util.Map;
  * @author zifang
  * @see HttpRequestInvocationHandler
  */
+/**
+ * HttpRequestProxy类。
+ */
 public class HttpRequestProxy {
 
     /**
@@ -24,6 +27,11 @@ public class HttpRequestProxy {
      * @param <T>              请求接口的类型
      * @return 请求接口的代理对象
      * @throws IllegalArgumentException 如果 requestInterface 为 null
+     */
+    /**
+     * proxy方法。
+     *      * @param requestInterface ClassT类型参数
+     * @return static <T> T类型返回值
      */
     public static <T> T proxy(Class<T> requestInterface) {
         return proxy(requestInterface, new HashMap<>());
@@ -37,6 +45,12 @@ public class HttpRequestProxy {
      * @param <T>              请求接口的类型
      * @return 请求接口的代理对象
      * @throws IllegalArgumentException 如果 requestInterface 为 null
+     */
+    /**
+     * proxy方法。
+     *      * @param requestInterface ClassT类型参数
+     * @param contextParams MapString,Object类型参数
+     * @return static <T> T类型返回值
      */
     public static <T> T proxy(Class<T> requestInterface, Map<String,Object> contextParams) {
         HttpRequestInvocationHandler httpRequestInvocationHandler = new HttpRequestInvocationHandler(requestInterface);

@@ -8,6 +8,9 @@ package com.zifang.util.ml.optim;
  * Formula:
  *   lr = base_lr * gamma^(epoch / step_size)
  */
+/**
+ * StepLR类。
+ */
 public class StepLR implements LrScheduler {
     
     private final Optimizer optimizer;
@@ -16,10 +19,23 @@ public class StepLR implements LrScheduler {
     private final double gamma;
     private int epoch;
     
+    /**
+     * StepLR方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param stepSize int类型参数
+     * @param gamma double类型参数
+     */
     public StepLR(Optimizer optimizer, int stepSize, double gamma) {
         this(optimizer, stepSize, gamma, 0);
     }
     
+    /**
+     * StepLR方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param stepSize int类型参数
+     * @param gamma double类型参数
+     * @param lastEpoch int类型参数
+     */
     public StepLR(Optimizer optimizer, int stepSize, double gamma, int lastEpoch) {
         this.optimizer = optimizer;
         this.baseLearningRate = optimizer.getLearningRate();
@@ -29,6 +45,9 @@ public class StepLR implements LrScheduler {
     }
     
     @Override
+    /**
+     * step方法。
+     */
     public void step() {
         epoch++;
         double newLr = baseLearningRate * Math.pow(gamma, epoch / stepSize);
@@ -36,12 +55,20 @@ public class StepLR implements LrScheduler {
     }
     
     @Override
+    /**
+     * getLastLR方法。
+     * @return double类型返回值
+     */
     public double getLastLR() {
         return optimizer.getLearningRate();
     }
     
     /**
      * Get the current epoch.
+     */
+    /**
+     * getEpoch方法。
+     * @return int类型返回值
      */
     public int getEpoch() {
         return epoch;
@@ -50,6 +77,10 @@ public class StepLR implements LrScheduler {
     /**
      * Get the step size.
      */
+    /**
+     * getStepSize方法。
+     * @return int类型返回值
+     */
     public int getStepSize() {
         return stepSize;
     }
@@ -57,12 +88,20 @@ public class StepLR implements LrScheduler {
     /**
      * Get the gamma factor.
      */
+    /**
+     * getGamma方法。
+     * @return double类型返回值
+     */
     public double getGamma() {
         return gamma;
     }
     
     /**
      * Get the base learning rate.
+     */
+    /**
+     * getBaseLearningRate方法。
+     * @return double类型返回值
      */
     public double getBaseLearningRate() {
         return baseLearningRate;

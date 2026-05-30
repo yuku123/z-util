@@ -17,6 +17,9 @@ import java.util.*;
  *
  * @author zifang
  */
+/**
+ * MemoryLeakDemo类。
+ */
 public class MemoryLeakDemo {
 
     /**
@@ -27,6 +30,10 @@ public class MemoryLeakDemo {
     static Vector v = new Vector(10);
     static List list = new ArrayList();
 
+    /**
+     * test1方法。
+     * @return static void类型返回值
+     */
     public static void test1() {
         for (int i = 1; i < 100; i++) {
             Object o = new Integer(i);
@@ -46,6 +53,10 @@ public class MemoryLeakDemo {
 
     /**
      * 2、当集合里面的对象属性被修改后，再调用remove（）方法时不起作用。
+     */
+    /**
+     * test2方法。
+     * @return static void类型返回值
      */
     public static void test2() {
         Set<Person> set = new HashSet<Person>();
@@ -117,6 +128,11 @@ public class MemoryLeakDemo {
      * 显然B采用singleton模式，它持有一个A对象的引用，而这个A类的对象将不能被回收。想象下如果A是个比较复杂的对象或者集合类型会发生什么情况
      */
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         test1();
         test2();
@@ -126,29 +142,54 @@ public class MemoryLeakDemo {
         private String userName;
         private int age;
 
+    /**
+     * Person方法。
+     *      * @param userName String类型参数
+     * @param age int类型参数
+     */
         public Person(String userName, int age) {
             super();
             this.userName = userName;
             this.age = age;
         }
 
+    /**
+     * getUserName方法。
+     * @return String类型返回值
+     */
         public String getUserName() {
             return userName;
         }
 
+    /**
+     * setUserName方法。
+     *      * @param userName String类型参数
+     */
         public void setUserName(String userName) {
             this.userName = userName;
         }
 
+    /**
+     * getAge方法。
+     * @return int类型返回值
+     */
         public int getAge() {
             return age;
         }
 
+    /**
+     * setAge方法。
+     *      * @param age int类型参数
+     */
         public void setAge(int age) {
             this.age = age;
         }
 
         @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
         public int hashCode() {
             final int prime = 31;
             int result = 1;
@@ -158,6 +199,11 @@ public class MemoryLeakDemo {
         }
 
         @Override
+    /**
+     * equals方法。
+     *      * @param obj Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean equals(Object obj) {
             if (this == obj)
                 return true;
@@ -174,6 +220,10 @@ public class MemoryLeakDemo {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "User [userName=" + userName + ", age=" + age + "]";
         }

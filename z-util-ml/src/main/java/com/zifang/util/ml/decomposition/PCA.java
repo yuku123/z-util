@@ -17,6 +17,9 @@ import com.zifang.util.numpy.Linalg;
  * 4. Sort by eigenvalue descending, select top nComponents
  * 5. Project data onto principal components
  */
+/**
+ * PCA类。
+ */
 public class PCA {
     private int nComponents;
     private NdArray principalComponents;  // Eigenvectors (loading vectors)
@@ -27,6 +30,10 @@ public class PCA {
      * Constructor with number of components
      * @param nComponents Number of principal components to keep
      */
+    /**
+     * PCA方法。
+     *      * @param nComponents int类型参数
+     */
     public PCA(int nComponents) {
         this.nComponents = nComponents;
     }
@@ -34,6 +41,10 @@ public class PCA {
     /**
      * Fit the PCA model to training data
      * @param X Training data of shape [n_samples, n_features]
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
      */
     public void fit(NdArray X) {
         int nSamples = X.getShape().get(0);
@@ -127,6 +138,11 @@ public class PCA {
      * @param X Data of shape [n_samples, n_features]
      * @return Transformed data of shape [n_samples, n_components]
      */
+    /**
+     * transform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray transform(NdArray X) {
         // Center data
         double[][] Xdata = toDouble2D(X);
@@ -168,6 +184,11 @@ public class PCA {
      * @param X Training data of shape [n_samples, n_features]
      * @return Transformed data of shape [n_samples, n_components]
      */
+    /**
+     * fitTransform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray fitTransform(NdArray X) {
         fit(X);
         return transform(X);
@@ -177,6 +198,11 @@ public class PCA {
      * Transform data back to original space (inverse transform)
      * @param X Transformed data of shape [n_samples, n_components]
      * @return Original space data of shape [n_samples, n_features]
+     */
+    /**
+     * inverseTransform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
      */
     public NdArray inverseTransform(NdArray X) {
         double[][] Xdata = toDouble2D(X);
@@ -209,6 +235,10 @@ public class PCA {
     /**
      * Get principal components (eigenvectors)
      */
+    /**
+     * getPrincipalComponents方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getPrincipalComponents() {
         return principalComponents;
     }
@@ -216,12 +246,20 @@ public class PCA {
     /**
      * Get explained variance (eigenvalues)
      */
+    /**
+     * getExplainedVariance方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getExplainedVariance() {
         return explainedVariance;
     }
 
     /**
      * Get total explained variance ratio
+     */
+    /**
+     * getExplainedVarianceRatio方法。
+     * @return double类型返回值
      */
     public double getExplainedVarianceRatio() {
         double totalVariance = 0.0;

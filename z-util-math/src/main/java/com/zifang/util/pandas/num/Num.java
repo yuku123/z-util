@@ -9,6 +9,9 @@ import java.util.function.Function;
  * Num 类 - Java 版本的 numpy ndarray
  * 提供多维数组的创建、操作和计算功能
  */
+/**
+ * Num类。
+ */
 public class Num {
 
     private Object array;
@@ -20,6 +23,10 @@ public class Num {
      * 构造方法，从数组对象创建 Num 实例
      * @param array 数组对象，支持 double[] 或 double[][]
      * @throws RuntimeException 如果传入参数不是数组类型
+     */
+    /**
+     * Num方法。
+     *      * @param array Object类型参数
      */
     public Num(Object array) {
         if (!array.getClass().isArray()) {
@@ -36,6 +43,11 @@ public class Num {
      * @param shape 数组形状，如 new int[]{3, 4} 表示 3x4 矩阵
      * @return 全零 Num 实例
      */
+    /**
+     * zeros方法。
+     *      * @param shape int...类型参数
+     * @return static Num类型返回值
+     */
     public static Num zeros(int... shape) {
         return zeros(shape, DType.FLOAT64);
     }
@@ -45,6 +57,12 @@ public class Num {
      * @param shape 数组形状
      * @param dtype 数据类型
      * @return 全零 Num 实例
+     */
+    /**
+     * zeros方法。
+     *      * @param shape int[]类型参数
+     * @param dtype DType类型参数
+     * @return static Num类型返回值
      */
     public static Num zeros(int[] shape, DType dtype) {
         Object array = createArray(shape, dtype);
@@ -56,6 +74,11 @@ public class Num {
      * @param shape 数组形状
      * @return 全一 Num 实例
      */
+    /**
+     * ones方法。
+     *      * @param shape int...类型参数
+     * @return static Num类型返回值
+     */
     public static Num ones(int... shape) {
         return fill(shape, 1.0);
     }
@@ -65,6 +88,12 @@ public class Num {
      * @param shape 数组形状
      * @param value 填充值
      * @return 填充后的 Num 实例
+     */
+    /**
+     * fill方法。
+     *      * @param shape int[]类型参数
+     * @param value double类型参数
+     * @return static Num类型返回值
      */
     public static Num fill(int[] shape, double value) {
         Object array = createFilledArray(shape, value);
@@ -77,6 +106,13 @@ public class Num {
      * @param stop 结束值（不包含）
      * @param step 步长
      * @return 生成的 Num 实例
+     */
+    /**
+     * arange方法。
+     *      * @param start double类型参数
+     * @param stop double类型参数
+     * @param step double类型参数
+     * @return static Num类型返回值
      */
     public static Num arange(double start, double stop, double step) {
         int size = (int) Math.ceil((stop - start) / step);
@@ -92,6 +128,11 @@ public class Num {
      * @param stop 结束值（不包含）
      * @return 生成的 Num 实例
      */
+    /**
+     * arange方法。
+     *      * @param stop int类型参数
+     * @return static Num类型返回值
+     */
     public static Num arange(int stop) {
         return arange(0, stop, 1);
     }
@@ -102,6 +143,13 @@ public class Num {
      * @param stop 结束值
      * @param num 样本数量
      * @return 生成的 Num 实例
+     */
+    /**
+     * linspace方法。
+     *      * @param start double类型参数
+     * @param stop double类型参数
+     * @param num int类型参数
+     * @return static Num类型返回值
      */
     public static Num linspace(double start, double stop, int num) {
         return linspace(start, stop, num, true);
@@ -114,6 +162,14 @@ public class Num {
      * @param num 样本数量
      * @param endpoint 是否包含结束值
      * @return 生成的 Num 实例
+     */
+    /**
+     * linspace方法。
+     *      * @param start double类型参数
+     * @param stop double类型参数
+     * @param num int类型参数
+     * @param endpoint boolean类型参数
+     * @return static Num类型返回值
      */
     public static Num linspace(double start, double stop, int num, boolean endpoint) {
         double step = endpoint ? (stop - start) / (num - 1) : (stop - start) / num;
@@ -130,6 +186,11 @@ public class Num {
      * @return 单位矩阵
      * @throws RuntimeException 暂未实现
      */
+    /**
+     * eye方法。
+     *      * @param i int类型参数
+     * @return static Num类型返回值
+     */
     public static Num eye(int i) {
         throw new RuntimeException();
     }
@@ -141,6 +202,11 @@ public class Num {
      * @param other 另一个 Num 实例
      * @return 相加结果
      */
+    /**
+     * add方法。
+     *      * @param other Num类型参数
+     * @return Num类型返回值
+     */
     public Num add(Num other) {
         return elementWiseOp(other, (a, b) -> a + b);
     }
@@ -149,6 +215,11 @@ public class Num {
      * 标量加法，将数组每个元素加上标量值
      * @param scalar 标量值
      * @return 相加结果
+     */
+    /**
+     * add方法。
+     *      * @param scalar double类型参数
+     * @return Num类型返回值
      */
     public Num add(double scalar) {
         return elementWiseOp(scalar, (a, b) -> a + b);
@@ -159,6 +230,11 @@ public class Num {
      * @param other 另一个 Num 实例
      * @return 相减结果
      */
+    /**
+     * subtract方法。
+     *      * @param other Num类型参数
+     * @return Num类型返回值
+     */
     public Num subtract(Num other) {
         return elementWiseOp(other, (a, b) -> a - b);
     }
@@ -167,6 +243,11 @@ public class Num {
      * 标量减法，将数组每个元素减去标量值
      * @param scalar 标量值
      * @return 相减结果
+     */
+    /**
+     * subtract方法。
+     *      * @param scalar double类型参数
+     * @return Num类型返回值
      */
     public Num subtract(double scalar) {
         return elementWiseOp(scalar, (a, b) -> a - b);
@@ -177,6 +258,11 @@ public class Num {
      * @param other 另一个 Num 实例
      * @return 相乘结果
      */
+    /**
+     * multiply方法。
+     *      * @param other Num类型参数
+     * @return Num类型返回值
+     */
     public Num multiply(Num other) {
         return elementWiseOp(other, (a, b) -> a * b);
     }
@@ -185,6 +271,11 @@ public class Num {
      * 标量乘法，将数组每个元素乘以标量值
      * @param scalar 标量值
      * @return 相乘结果
+     */
+    /**
+     * multiply方法。
+     *      * @param scalar double类型参数
+     * @return Num类型返回值
      */
     public Num multiply(double scalar) {
         return elementWiseOp(scalar, (a, b) -> a * b);
@@ -195,6 +286,11 @@ public class Num {
      * @param other 另一个 Num 实例
      * @return 相除结果
      */
+    /**
+     * divide方法。
+     *      * @param other Num类型参数
+     * @return Num类型返回值
+     */
     public Num divide(Num other) {
         return elementWiseOp(other, (a, b) -> a / b);
     }
@@ -204,6 +300,11 @@ public class Num {
      * @param scalar 标量值
      * @return 相除结果
      */
+    /**
+     * divide方法。
+     *      * @param scalar double类型参数
+     * @return Num类型返回值
+     */
     public Num divide(double scalar) {
         return elementWiseOp(scalar, (a, b) -> a / b);
     }
@@ -212,6 +313,11 @@ public class Num {
      * 幂运算，类似于 numpy.pow()
      * @param exponent 指数
      * @return 幂运算结果
+     */
+    /**
+     * pow方法。
+     *      * @param exponent double类型参数
+     * @return Num类型返回值
      */
     public Num pow(double exponent) {
         return elementWiseOp(exponent, Math::pow);
@@ -223,6 +329,10 @@ public class Num {
      * 计算所有元素的总和，类似于 numpy.sum()
      * @return 所有元素的总和
      */
+    /**
+     * sum方法。
+     * @return double类型返回值
+     */
     public double sum() {
         return reduce((a, b) -> a + b, 0.0);
     }
@@ -230,6 +340,10 @@ public class Num {
     /**
      * 计算所有元素的平均值，类似于 numpy.mean()
      * @return 平均值
+     */
+    /**
+     * mean方法。
+     * @return double类型返回值
      */
     public double mean() {
         return sum() / size;
@@ -239,6 +353,10 @@ public class Num {
      * 计算所有元素的最大值，类似于 numpy.max()
      * @return 最大值
      */
+    /**
+     * max方法。
+     * @return double类型返回值
+     */
     public double max() {
         return reduce((a, b) -> Math.max(a, b), Double.NEGATIVE_INFINITY);
     }
@@ -246,6 +364,10 @@ public class Num {
     /**
      * 计算所有元素的最小值，类似于 numpy.min()
      * @return 最小值
+     */
+    /**
+     * min方法。
+     * @return double类型返回值
      */
     public double min() {
         return reduce((a, b) -> Math.min(a, b), Double.POSITIVE_INFINITY);
@@ -255,6 +377,10 @@ public class Num {
      * 计算所有元素的标准差，类似于 numpy.std()
      * @return 标准差
      */
+    /**
+     * std方法。
+     * @return double类型返回值
+     */
     public double std() {
         return Math.sqrt(var());
     }
@@ -262,6 +388,10 @@ public class Num {
     /**
      * 计算所有元素的方差，类似于 numpy.var()
      * @return 方差
+     */
+    /**
+     * var方法。
+     * @return double类型返回值
      */
     public double var() {
         double mean = mean();
@@ -275,6 +405,11 @@ public class Num {
      * @param newShape 新的形状
      * @return 形状改变后的 Num 实例
      * @throws IllegalArgumentException 如果新形状的元素总数与原数组不匹配
+     */
+    /**
+     * reshape方法。
+     *      * @param newShape int...类型参数
+     * @return Num类型返回值
      */
     public Num reshape(int... newShape) {
         int newSize = 1;
@@ -293,6 +428,10 @@ public class Num {
      * 计算矩阵转置，类似于 numpy.transpose()
      * @return 转置后的 Num 实例（仅支持 2D 数组）
      * @throws UnsupportedOperationException 维度大于 2 时抛出
+     */
+    /**
+     * transpose方法。
+     * @return Num类型返回值
      */
     public Num transpose() {
         if (shape.length < 2) {
@@ -320,6 +459,10 @@ public class Num {
      * 将多维数组展平为一维数组，类似于 numpy.flatten()
      * @return 展平后的 Num 实例
      */
+    /**
+     * flatten方法。
+     * @return Num类型返回值
+     */
     public Num flatten() {
         return reshape(size);
     }
@@ -330,6 +473,10 @@ public class Num {
      * 计算正弦值，类似于 numpy.sin()
      * @return 正弦值数组
      */
+    /**
+     * sin方法。
+     * @return Num类型返回值
+     */
     public Num sin() {
         return apply(Math::sin);
     }
@@ -337,6 +484,10 @@ public class Num {
     /**
      * 计算余弦值，类似于 numpy.cos()
      * @return 余弦值数组
+     */
+    /**
+     * cos方法。
+     * @return Num类型返回值
      */
     public Num cos() {
         return apply(Math::cos);
@@ -346,6 +497,10 @@ public class Num {
      * 计算正切值，类似于 numpy.tan()
      * @return 正切值数组
      */
+    /**
+     * tan方法。
+     * @return Num类型返回值
+     */
     public Num tan() {
         return apply(Math::tan);
     }
@@ -353,6 +508,10 @@ public class Num {
     /**
      * 计算指数函数值，类似于 numpy.exp()
      * @return e^x 值数组
+     */
+    /**
+     * exp方法。
+     * @return Num类型返回值
      */
     public Num exp() {
         return apply(Math::exp);
@@ -362,6 +521,10 @@ public class Num {
      * 计算自然对数，类似于 numpy.log()
      * @return ln(x) 值数组
      */
+    /**
+     * log方法。
+     * @return Num类型返回值
+     */
     public Num log() {
         return apply(Math::log);
     }
@@ -369,6 +532,10 @@ public class Num {
     /**
      * 计算以 10 为底的对数，类似于 numpy.log10()
      * @return log10(x) 值数组
+     */
+    /**
+     * log10方法。
+     * @return Num类型返回值
      */
     public Num log10() {
         return apply(Math::log10);
@@ -378,6 +545,10 @@ public class Num {
      * 计算平方根，类似于 numpy.sqrt()
      * @return sqrt(x) 值数组
      */
+    /**
+     * sqrt方法。
+     * @return Num类型返回值
+     */
     public Num sqrt() {
         return apply(Math::sqrt);
     }
@@ -386,6 +557,10 @@ public class Num {
      * 计算绝对值，类似于 numpy.abs()
      * @return 绝对值数组
      */
+    /**
+     * abs方法。
+     * @return Num类型返回值
+     */
     public Num abs() {
         return apply(Math::abs);
     }
@@ -393,6 +568,10 @@ public class Num {
     // ==================== 工具方法 ====================
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "Num(shape=" + Arrays.toString(shape) + ", dtype=" + dType + ", data=" + Arrays.deepToString((Object[]) array) + ")";
     }
@@ -400,6 +579,10 @@ public class Num {
     /**
      * 获取数组形状
      * @return 形状数组的副本
+     */
+    /**
+     * shape方法。
+     * @return int[]类型返回值
      */
     public int[] shape() {
         return shape.clone();
@@ -409,6 +592,10 @@ public class Num {
      * 获取数组维度数量
      * @return 维度数量
      */
+    /**
+     * nDim方法。
+     * @return int类型返回值
+     */
     public int nDim() {
         return shape.length;
     }
@@ -416,6 +603,10 @@ public class Num {
     /**
      * 获取数组元素总数
      * @return 元素总数
+     */
+    /**
+     * size方法。
+     * @return int类型返回值
      */
     public int size() {
         return size;
@@ -425,6 +616,10 @@ public class Num {
      * 获取数组数据类型
      * @return 数据类型
      */
+    /**
+     * dtype方法。
+     * @return DType类型返回值
+     */
     public DType dtype() {
         return dType;
     }
@@ -432,6 +627,10 @@ public class Num {
     /**
      * 获取底层数组数据
      * @return 数组数据对象
+     */
+    /**
+     * data方法。
+     * @return Object类型返回值
      */
     public Object data() {
         return array;
@@ -572,6 +771,11 @@ public class Num {
         throw new UnsupportedOperationException("Reduction operations for this shape not yet implemented");
     }
 
+    /**
+     * apply方法。
+     *      * @param op java.util.function.DoubleUnaryOperator类型参数
+     * @return Num类型返回值
+     */
     public Num apply(java.util.function.DoubleUnaryOperator op) {
         if (array instanceof double[]) {
             double[] a = (double[]) array;

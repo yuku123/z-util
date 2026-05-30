@@ -7,6 +7,9 @@ package com.zifang.util.office.word;
  * @param <K> 键的类型
  * @param <V> 值的类型
  */
+/**
+ * Tuple类。
+ */
 public class Tuple<K, V> {
     private K key;
     private V value;
@@ -15,6 +18,10 @@ public class Tuple<K, V> {
      * 获取键
      *
      * @return 键
+     */
+    /**
+     * getKey方法。
+     * @return K类型返回值
      */
     public K getKey() {
         return key;
@@ -25,6 +32,10 @@ public class Tuple<K, V> {
      *
      * @param key 键
      */
+    /**
+     * setKey方法。
+     *      * @param key K类型参数
+     */
     public void setKey(K key) {
         this.key = key;
     }
@@ -33,6 +44,10 @@ public class Tuple<K, V> {
      * 获取值
      *
      * @return 值
+     */
+    /**
+     * getValue方法。
+     * @return V类型返回值
      */
     public V getValue() {
         return value;
@@ -43,6 +58,10 @@ public class Tuple<K, V> {
      *
      * @param value 值
      */
+    /**
+     * setValue方法。
+     *      * @param value V类型参数
+     */
     public void setValue(V value) {
         this.value = value;
     }
@@ -52,6 +71,11 @@ public class Tuple<K, V> {
      *
      * @param key 键
      * @param value 值
+     */
+    /**
+     * Tuple方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
      */
     public Tuple(K key, V value) {
         this.key = key;

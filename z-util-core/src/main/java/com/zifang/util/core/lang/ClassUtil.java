@@ -9,6 +9,9 @@ import java.util.List;
  * @description: class type util
  * @version: JDK 1.8
  */
+/**
+ * ClassUtil类。
+ */
 public class ClassUtil {
 
     /**
@@ -46,6 +49,11 @@ public class ClassUtil {
      * @param className 类的全限定名
      * @return 如果是基本类型返回true，否则返回false
      */
+    /**
+     * isPrimitive方法。
+     *      * @param className String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isPrimitive(String className) {
         return BASE_TYPE_LIST.contains(className);
     }
@@ -55,6 +63,11 @@ public class ClassUtil {
      *
      * @param className 类的全限定名
      * @return 如果是包装类返回true，否则返回false
+     */
+    /**
+     * isBaseWrap方法。
+     *      * @param className String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isBaseWrap(String className) {
         return BASE_WRAP_TYPE_LIST.contains(className);
@@ -66,6 +79,11 @@ public class ClassUtil {
      * @param clazz Class对象
      * @return 如果是包装类返回true，否则返回false
      */
+    /**
+     * isBaseWrap方法。
+     *      * @param clazz Class?类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isBaseWrap(Class<?> clazz) {
         return isBaseWrap(clazz.getCanonicalName());
     }
@@ -75,6 +93,11 @@ public class ClassUtil {
      *
      * @param className 类的全限定名
      * @return 如果是基本类型或包装类返回true，否则返回false
+     */
+    /**
+     * isBaseOrWrap方法。
+     *      * @param className String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isBaseOrWrap(String className) {
         return isPrimitive(className) || isBaseWrap(className);
@@ -86,6 +109,11 @@ public class ClassUtil {
      * @param clazz Class对象
      * @return 如果是基本类型或包装类返回true，否则返回false
      */
+    /**
+     * isBaseOrWrap方法。
+     *      * @param clazz Class?类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isBaseOrWrap(Class<?> clazz) {
         return isBaseOrWrap(clazz.getCanonicalName());
     }
@@ -95,6 +123,11 @@ public class ClassUtil {
      *
      * @param clazz Class对象
      * @return 如果是基本类型、包装类或String返回true，否则返回false
+     */
+    /**
+     * isBaseOrWrapOrString方法。
+     *      * @param clazz Class?类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isBaseOrWrapOrString(Class<?> clazz) {
         return isBaseOrWrap(clazz.getCanonicalName()) || isSameClass(clazz, String.class);
@@ -106,6 +139,11 @@ public class ClassUtil {
      * @param object 待检查的对象
      * @return 如果是基本类型或包装类实例返回true，null返回false
      */
+    /**
+     * isBaseOrWrap方法。
+     *      * @param object Object类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isBaseOrWrap(Object object) {
         return null != object && isBaseOrWrap(object.getClass());
     }
@@ -116,6 +154,12 @@ public class ClassUtil {
      * @param clazz 第一个Class对象
      * @param clz   第二个Class对象
      * @return 如果两者相同返回true，否则返回false
+     */
+    /**
+     * isSameClass方法。
+     *      * @param clazz Class?类型参数
+     * @param clz Class?类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isSameClass(Class<?> clazz, Class<?> clz) {
         if (null == clazz && null == clz) {
@@ -136,6 +180,12 @@ public class ClassUtil {
      * @param clz   第二个Class对象
      * @return 如果类名相同返回true，否则返回false
      */
+    /**
+     * isSameNameClass方法。
+     *      * @param clazz Class?类型参数
+     * @param clz Class?类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isSameNameClass(Class<?> clazz, Class<?> clz) {
         if (null == clazz && null == clz) {
             return true;
@@ -152,6 +202,11 @@ public class ClassUtil {
      *
      * @param className 类的全限定名
      * @return 简化后的类名，如果输入为null则返回null
+     */
+    /**
+     * getShortClassName方法。
+     *      * @param className String类型参数
+     * @return static String类型返回值
      */
     public static String getShortClassName(String className) {
         if (className == null) {
@@ -179,6 +234,11 @@ public class ClassUtil {
      * @param clazz Class对象
      * @return 如果是JDK原生类型返回true（即Class.getClassLoader()返回null）
      */
+    /**
+     * isOriginJdkType方法。
+     *      * @param clazz Class?类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isOriginJdkType(Class<?> clazz) {
         return null == clazz.getClassLoader();
     }
@@ -188,6 +248,11 @@ public class ClassUtil {
      *
      * @param clazz Class对象
      * @return 如果是原始数值类型返回true，否则返回false
+     */
+    /**
+     * isPrimitiveNumberType方法。
+     *      * @param clazz Class?类型参数
+     * @return static boolean类型返回值
      */
     public static boolean isPrimitiveNumberType(Class<?> clazz) {
         return long.class.isAssignableFrom(clazz) || int.class.isAssignableFrom(clazz)
@@ -200,6 +265,11 @@ public class ClassUtil {
      * @param clazz Class对象
      * @return 如果是原始浮点数值类型返回true，否则返回false
      */
+    /**
+     * isPrimitiveFloatingPointNumberType方法。
+     *      * @param clazz Class?类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isPrimitiveFloatingPointNumberType(Class<?> clazz) {
         return double.class.isAssignableFrom(clazz) || float.class.isAssignableFrom(clazz);
     }
@@ -211,6 +281,11 @@ public class ClassUtil {
      *
      * @param array Object对象数组
      * @return Class对象数组，如果输入为null则返回null
+     */
+    /**
+     * toClass方法。
+     *      * @param array final类型参数
+     * @return static Class<?>[]类型返回值
      */
     public static Class<?>[] toClass(final Object... array) {
         if (array == null) {
@@ -230,6 +305,11 @@ public class ClassUtil {
      *
      * @param argTypes Class对象数组
      * @return 格式化后的参数字符串
+     */
+    /**
+     * argumentTypesToString方法。
+     *      * @param argTypes Class?[]类型参数
+     * @return static String类型返回值
      */
     public static String argumentTypesToString(Class<?>[] argTypes) {
         StringBuilder buf = new StringBuilder();

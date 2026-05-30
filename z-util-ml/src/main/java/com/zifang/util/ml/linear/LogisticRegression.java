@@ -9,6 +9,9 @@ import com.zifang.util.numpy.Shape;
  * Logistic Regression classifier using binary cross-entropy loss with L2 regularization.
  * Uses gradient descent optimization.
  */
+/**
+ * LogisticRegression类。
+ */
 public class LogisticRegression {
     
     private double learningRate;
@@ -23,6 +26,12 @@ public class LogisticRegression {
      * @param learningRate Learning rate for gradient descent
      * @param nIterations Number of iterations for gradient descent
      * @param lambda L2 regularization parameter
+     */
+    /**
+     * LogisticRegression方法。
+     *      * @param learningRate double类型参数
+     * @param nIterations int类型参数
+     * @param lambda double类型参数
      */
     public LogisticRegression(double learningRate, int nIterations, double lambda) {
         this.learningRate = learningRate;
@@ -77,6 +86,11 @@ public class LogisticRegression {
      * 
      * @param X Feature matrix of shape [n_samples, n_features]
      * @param y Target labels (binary: 0 or 1)
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
      */
     public void fit(NdArray X, int[] y) {
         int n = X.getShape().get(0);
@@ -133,6 +147,11 @@ public class LogisticRegression {
      * @param X Feature matrix of shape [n_samples, n_features]
      * @return Array of predicted class labels (0 or 1)
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
@@ -156,6 +175,11 @@ public class LogisticRegression {
      * 
      * @param X Feature matrix of shape [n_samples, n_features]
      * @return NdArray of shape [n_samples, 2] with probabilities for each class
+     */
+    /**
+     * predictProba方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
      */
     public NdArray predictProba(NdArray X) {
         int n = X.getShape().get(0);

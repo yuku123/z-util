@@ -15,6 +15,9 @@ import java.util.function.Supplier;
  * @param <K> 键类型
  * @param <V> 值类型
  */
+/**
+ * WeakHashMapCache类。
+ */
 public class WeakHashMapCache<K, V> implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -32,6 +35,11 @@ public class WeakHashMapCache<K, V> implements Serializable {
      *
      * @param key 键
      * @return 值
+     */
+    /**
+     * get方法。
+     *      * @param key K类型参数
+     * @return V类型返回值
      */
     public V get(K key) {
         // 尝试读取缓存
@@ -51,6 +59,12 @@ public class WeakHashMapCache<K, V> implements Serializable {
      * @param key      键
      * @param supplier 如果不存在回调方法，用于生产值对象
      * @return 值对象
+     */
+    /**
+     * get方法。
+     *      * @param key K类型参数
+     * @param supplier SupplierV类型参数
+     * @return V类型返回值
      */
     public V get(K key, Supplier<V> supplier) {
         V v = get(key);
@@ -81,6 +95,12 @@ public class WeakHashMapCache<K, V> implements Serializable {
      * @param value 值
      * @return 值
      */
+    /**
+     * put方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
+     * @return V类型返回值
+     */
     public V put(K key, V value) {
         writeLock.lock();
         try {
@@ -97,6 +117,11 @@ public class WeakHashMapCache<K, V> implements Serializable {
      * @param key 键
      * @return 移除的值
      */
+    /**
+     * remove方法。
+     *      * @param key K类型参数
+     * @return V类型返回值
+     */
     public V remove(K key) {
         writeLock.lock();
         try {
@@ -108,6 +133,9 @@ public class WeakHashMapCache<K, V> implements Serializable {
 
     /**
      * 清空缓存池
+     */
+    /**
+     * clear方法。
      */
     public void clear() {
         writeLock.lock();

@@ -13,10 +13,17 @@ import java.util.Map;
  *
  * @author zifang
  */
+/**
+ * PrimitiveUtil类。
+ */
 public class PrimitiveUtil {
 
     private static final Logger log = LoggerFactory.getLogger(PrimitiveUtil.class);
 
+    /**
+     * Object>方法。
+     * @return static final Map<Class<?>, Object> primitiveTypeDefaults = new LinkedHashMap<Class<?>,类型返回值
+     */
     public static final Map<Class<?>, Object> primitiveTypeDefaults = new LinkedHashMap<Class<?>, Object>() {
         {
             put(Byte.class, (byte) 0);
@@ -65,6 +72,11 @@ public class PrimitiveUtil {
     /**
      * 获得默认基础值
      */
+    /**
+     * defaultValue方法。
+     *      * @param clazz Class?类型参数
+     * @return static Object类型返回值
+     */
     public static Object defaultValue(Class<?> clazz) {
 
         if(isPrimitive(clazz)){
@@ -81,12 +93,22 @@ public class PrimitiveUtil {
     /**
      * 判断是否是基本类型
      */
+    /**
+     * isPrimitive方法。
+     *      * @param clazz ClassT类型参数
+     * @return static <T> boolean类型返回值
+     */
     public static <T> boolean isPrimitive(Class<T> clazz) {
         return primitiveTypeList.contains(clazz);
     }
 
     /**
      * 判断是否是基本类型的包装类
+     */
+    /**
+     * isPrimitiveWrapper方法。
+     *      * @param clazz ClassT类型参数
+     * @return static <T> boolean类型返回值
      */
     public static <T> boolean isPrimitiveWrapper(Class<T> clazz) {
         return primitiveWrapperTypeList.contains(clazz);
@@ -95,12 +117,22 @@ public class PrimitiveUtil {
     /**
      * 判断是否为普通类型 -> 既不是基本类型也不是基本类型的包装
      */
+    /**
+     * isGeneralType方法。
+     *      * @param clazz ClassT类型参数
+     * @return static <T> boolean类型返回值
+     */
     public static <T> boolean isGeneralType(Class<T> clazz) {
         return (!isPrimitive(clazz)) && (!isPrimitiveWrapper(clazz));
     }
 
     /**
      * 得到包装类对应的基本类型
+     */
+    /**
+     * getPrimitive方法。
+     *      * @param clazz Class?类型参数
+     * @return static Class<?>类型返回值
      */
     public static Class<?> getPrimitive(Class<?> clazz) {
 
@@ -119,6 +151,11 @@ public class PrimitiveUtil {
 
     /**
      * 得到基本类型对应的包装类型
+     */
+    /**
+     * getPrimitiveWrapper方法。
+     *      * @param clazz Class?类型参数
+     * @return static Class<?>类型返回值
      */
     public static Class<?> getPrimitiveWrapper(Class<?> clazz) {
 

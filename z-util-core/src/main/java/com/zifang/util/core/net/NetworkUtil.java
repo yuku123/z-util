@@ -11,6 +11,9 @@ import static com.zifang.util.core.Const.Symbol.MINUS;
 /**
  * 网络操作类
  */
+/**
+ * NetworkUtil类。
+ */
 public class NetworkUtil {
 
     /**
@@ -25,6 +28,11 @@ public class NetworkUtil {
      * @return MAC地址字符串
      * @throws SocketException      如果发生网络接口访问错误
      * @throws UnknownHostException 如果无法确定本地主机地址
+     */
+    /**
+     * getMac方法。
+     *      * @param macConnector String类型参数
+     * @return static String类型返回值
      */
     public static String getMac(String macConnector) throws SocketException, UnknownHostException {
         StringBuilder macAddress = new StringBuilder();
@@ -59,6 +67,10 @@ public class NetworkUtil {
      * @throws SocketException      如果发生网络接口访问错误
      * @throws UnknownHostException  如果无法确定本地主机地址
      */
+    /**
+     * getMac方法。
+     * @return static String类型返回值
+     */
     public static String getMac() throws SocketException, UnknownHostException {
         return getMac(MINUS);
     }
@@ -68,6 +80,10 @@ public class NetworkUtil {
      *
      * @return 本机所有有效IPv4地址列表
      * @throws SocketException 如果发生网络接口访问错误
+     */
+    /**
+     * getLocalHostAddress方法。
+     * @return static List<String>类型返回值
      */
     public static List<String> getLocalHostAddress() throws SocketException {
         List<String> ipList = new ArrayList<>();
@@ -93,6 +109,10 @@ public class NetworkUtil {
      *
      * @return 本机第一个有效IPv4地址，如果获取失败则返回默认回环地址 "127.0.0.1"
      */
+    /**
+     * getFirstLocalHostAddress方法。
+     * @return static String类型返回值
+     */
     public static String getFirstLocalHostAddress() {
         List<String> ipList;
         try {
@@ -111,6 +131,11 @@ public class NetworkUtil {
      * @param ipStr IPv4地址字符串，格式如 "192.168.1.1"
      * @return IPv4地址对应的32位整数
      */
+    /**
+     * ipToInt方法。
+     *      * @param ipStr String类型参数
+     * @return static int类型返回值
+     */
     public static int ipToInt(String ipStr) {
         String[] ip = ipStr.split("\\.");
         return (Integer.parseInt(ip[0]) << 24) + (Integer.parseInt(ip[1]) << 16) + (
@@ -123,6 +148,11 @@ public class NetworkUtil {
      * @param intIp 32位整数表示的IPv4地址
      * @return IPv4地址字符串，格式如 "192.168.1.1"
      */
+    /**
+     * intToIp方法。
+     *      * @param intIp int类型参数
+     * @return static String类型返回值
+     */
     public static String intToIp(int intIp) {
         return (intIp >>> 24) + "."
                 + ((intIp >>> 16) & 0xFF) + "."
@@ -133,6 +163,10 @@ public class NetworkUtil {
     /**
      * 获取本地第一个有效IPv4地址（非回环、非禁用、非IPv6）
      * @return 本地IP字符串，获取失败返回null
+     */
+    /**
+     * getLocalIp方法。
+     * @return static String类型返回值
      */
     public static String getLocalIp() {
         try {
@@ -168,6 +202,10 @@ public class NetworkUtil {
      * @return 有效IPv4地址数组
      * @throws UnknownHostException 如果无法确定本地主机名
      */
+    /**
+     * getAllLocalIps方法。
+     * @return static String[]类型返回值
+     */
     public static String[] getAllLocalIps() throws UnknownHostException {
         return java.util.stream.Stream.of(InetAddress.getAllByName(getLocalHostName()))
                 .filter(addr -> addr instanceof Inet4Address && !addr.isLoopbackAddress())
@@ -187,6 +225,11 @@ public class NetworkUtil {
     }
 
     // 测试
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws UnknownHostException {
         System.out.println("自定义NetUtil获取本地IP：" + NetworkUtil.getLocalIp());
         System.out.println("所有本地有效IPv4：");

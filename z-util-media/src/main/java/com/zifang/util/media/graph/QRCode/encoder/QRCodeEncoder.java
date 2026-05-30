@@ -7,6 +7,9 @@ import java.nio.charset.StandardCharsets;
  * QR Code encoder implementing ISO/IEC 18004.
  * Replaces com.google.zxing.MultiFormatWriter.
  */
+/**
+ * QRCodeEncoder类。
+ */
 public class QRCodeEncoder {
 
     // Mode indicators
@@ -241,6 +244,15 @@ public class QRCodeEncoder {
      * @param level The error correction level
      * @param charset The charset to use (e.g., "GB18030" for Chinese, "UTF-8")
      * @return The BitMatrix representing the QR code
+     */
+    /**
+     * encode方法。
+     *      * @param content String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @param level ErrorCorrectionLevel类型参数
+     * @param charset String类型参数
+     * @return static BitMatrix类型返回值
      */
     public static BitMatrix encode(String content, int width, int height, ErrorCorrectionLevel level, String charset) {
         if (content == null || content.isEmpty()) {

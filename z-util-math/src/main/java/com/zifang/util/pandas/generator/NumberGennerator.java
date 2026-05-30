@@ -10,6 +10,9 @@ import java.io.IOException;
  *
  * @author zifang
  */
+/**
+ * NumberGennerator类。
+ */
 public class NumberGennerator {
 
     /**
@@ -17,12 +20,22 @@ public class NumberGennerator {
      *
      * @param limit 搜索的最大值
      */
+    /**
+     * primeNumber方法。
+     *      * @param limit int类型参数
+     * @return static boolean[]类型返回值
+     */
     public static boolean[] primeNumber(int limit) {
         boolean[] b = new boolean[limit];
 
         return null;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
 
         // 生成素数列表

@@ -20,6 +20,9 @@ import java.util.Set;
  *
  * @author zifang
  */
+/**
+ * GarbageCollectorMXBeanDemo类。
+ */
 public class GarbageCollectorMXBeanDemo {
 
 
@@ -34,6 +37,10 @@ public class GarbageCollectorMXBeanDemo {
      *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
      *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
      * </ul>
+     */
+    /**
+     * getRemoteGarbageCollectorMXBean方法。
+     * @return static void类型返回值
      */
     public static void getRemoteGarbageCollectorMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -75,6 +82,10 @@ public class GarbageCollectorMXBeanDemo {
     /**
      * 获取当前虚拟机垃圾回收器信息。
      */
+    /**
+     * getLocalGarbageCollectorMXBean方法。
+     * @return static void类型返回值
+     */
     public static void getLocalGarbageCollectorMXBean() {
         List<GarbageCollectorMXBean> list = ManagementFactory.getGarbageCollectorMXBeans();
         if (list != null) {
@@ -93,6 +104,11 @@ public class GarbageCollectorMXBeanDemo {
      * 主方法，演示获取JVM垃圾回收器信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) {
         getRemoteGarbageCollectorMXBean();

@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 /**
  * @author zifang
  */
+/**
+ * PackageScanner类。
+ */
 public class PackageScanner {
 
     private static final String CLASS_SUFFIX = ".class";
@@ -30,6 +33,11 @@ public class PackageScanner {
      * @return 该包下的类集合
      *
      * */
+    /**
+     * searchClasses方法。
+     *      * @param packageName String类型参数
+     * @return static Set<Class<?>>类型返回值
+     */
     public static Set<Class<?>> searchClasses(String packageName) {
         return searchClasses(packageName, null);
     }
@@ -43,6 +51,12 @@ public class PackageScanner {
      * @return 该包下的类集合
      *
      * */
+    /**
+     * searchClasses方法。
+     *      * @param packageName String类型参数
+     * @param predicate PredicateClass?类型参数
+     * @return static Set<Class<?>>类型返回值
+     */
     public static Set<Class<?>> searchClasses(String packageName, Predicate<Class<?>> predicate) {
         Set<Class<?>> set = search(packageName);
         if (predicate == null) {
@@ -86,6 +100,11 @@ public class PackageScanner {
         return classes;
     }
 
+    /**
+     * searchFromFile方法。
+     *      * @param packageName String类型参数
+     * @return static Set<Class<?>>类型返回值
+     */
     public static Set<Class<?>> searchFromFile(String packageName) {
         String classpath = defaultClassPath;
         String basePackPath = packageName.replace(".", File.separator);

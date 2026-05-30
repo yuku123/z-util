@@ -12,12 +12,19 @@ import java.util.Map;
  * HTTP 服务端请求处理器
  * 负责将 HTTP 请求分派到对应的方法
  */
+/**
+ * HttpServerRequestHandler类。
+ */
 public class HttpServerRequestHandler {
 
     private final Object target;
     private final Map<String, MethodMapping> methodMappings;
     private final String contextPath;
 
+    /**
+     * HttpServerRequestHandler方法。
+     *      * @param target Object类型参数
+     */
     public HttpServerRequestHandler(Object target) {
         this.target = target;
         this.methodMappings = new HashMap<>();
@@ -90,6 +97,11 @@ public class HttpServerRequestHandler {
      *
      * @param requestDefinition HTTP 请求定义
      * @return 处理结果
+     */
+    /**
+     * handleRequest方法。
+     *      * @param requestDefinition HttpRequestDefinition类型参数
+     * @return Object类型返回值
      */
     public Object handleRequest(HttpRequestDefinition requestDefinition) {
         if (requestDefinition == null || requestDefinition.getHttpRequestLine() == null) {
@@ -378,6 +390,15 @@ public class HttpServerRequestHandler {
         private final PutMapping putMapping;
         private final DeleteMapping deleteMapping;
 
+    /**
+     * MethodMapping方法。
+     *      * @param method Method类型参数
+     * @param mapping RequestMapping类型参数
+     * @param getMapping GetMapping类型参数
+     * @param postMapping PostMapping类型参数
+     * @param putMapping PutMapping类型参数
+     * @param deleteMapping DeleteMapping类型参数
+     */
         public MethodMapping(Method method, RequestMapping mapping, GetMapping getMapping,
                              PostMapping postMapping, PutMapping putMapping, DeleteMapping deleteMapping) {
             this.method = method;
@@ -388,10 +409,18 @@ public class HttpServerRequestHandler {
             this.deleteMapping = deleteMapping;
         }
 
+    /**
+     * getMethod方法。
+     * @return Method类型返回值
+     */
         public Method getMethod() {
             return method;
         }
 
+    /**
+     * getHttpMethod方法。
+     * @return String类型返回值
+     */
         public String getHttpMethod() {
             if (getMapping != null) return "GET";
             if (postMapping != null) return "POST";
@@ -401,6 +430,10 @@ public class HttpServerRequestHandler {
             return "GET";
         }
 
+    /**
+     * getPath方法。
+     * @return String类型返回值
+     */
         public String getPath() {
             if (getMapping != null) return getMapping.value();
             if (postMapping != null) return postMapping.value();

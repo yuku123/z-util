@@ -9,6 +9,9 @@ import java.util.List;
  * 折线图组件
  * 用于可视化连续数据的变化趋势，支持多系列数据展示、坐标轴标签、图例和网格线
  */
+/**
+ * LineChart类。
+ */
 public class LineChart extends ChartFrame {
 
     private final List<ChartSeries> seriesList;

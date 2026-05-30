@@ -19,6 +19,9 @@ import java.util.Map;
  * @author zifang
  * @see InvocationHandler
  */
+/**
+ * HttpServerInvocationHandler类。
+ */
 public class HttpServerInvocationHandler implements InvocationHandler {
 
     // 代理的接口类
@@ -27,16 +30,32 @@ public class HttpServerInvocationHandler implements InvocationHandler {
     // 调用过程中需要的上下文参数
     private Map<String,Object> contextParams;
 
+    /**
+     * HttpServerInvocationHandler方法。
+     *      * @param requestInterface Class?类型参数
+     */
     public HttpServerInvocationHandler(Class<?> requestInterface) {
         this.target = requestInterface;
     }
 
+    /**
+     * HttpServerInvocationHandler方法。
+     *      * @param requestInterface Class?类型参数
+     * @param contextParams MapString,Object类型参数
+     */
     public HttpServerInvocationHandler(Class<?> requestInterface, Map<String,Object> contextParams) {
         this.target = requestInterface;
         this.contextParams = contextParams;
     }
 
     @Override
+    /**
+     * invoke方法。
+     *      * @param proxy Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return Object类型返回值
+     */
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
         // 1 检查相关

@@ -30,10 +30,16 @@ import java.util.Map;
  *
  * @see WorkflowRuntimeEngine
  */
+/**
+ * GatewayEvaluator类。
+ */
 public class GatewayEvaluator {
 
     private final ExpressionParser expressionParser;
 
+    /**
+     * GatewayEvaluator方法。
+     */
     public GatewayEvaluator() {
         this.expressionParser = new SpelExpressionParser();
     }
@@ -45,6 +51,12 @@ public class GatewayEvaluator {
      * @param variables  the runtime variables available in the expression context
      * @return true if the condition is satisfied, false otherwise
      * @throws IllegalArgumentException if the expression format is invalid
+     */
+    /**
+     * evaluate方法。
+     *      * @param expression String类型参数
+     * @param variables MapString,类型参数
+     * @return boolean类型返回值
      */
     public boolean evaluate(String expression, Map<String, Object> variables) {
         if (expression == null || expression.trim().isEmpty()) {

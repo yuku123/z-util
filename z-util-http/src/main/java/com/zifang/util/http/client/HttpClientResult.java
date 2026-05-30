@@ -11,6 +11,9 @@ import java.io.Serializable;
  * @author zifang
  * @see Serializable
  */
+/**
+ * HttpClientResult类。
+ */
 public class HttpClientResult implements Serializable {
 
     private static final long serialVersionUID = 2168152194164783950L;
@@ -28,12 +31,19 @@ public class HttpClientResult implements Serializable {
     /**
      * 构造一个空的HTTP客户端结果。
      */
+    /**
+     * HttpClientResult方法。
+     */
     public HttpClientResult() {}
 
     /**
      * 构造一个仅包含状态码的HTTP客户端结果。
      *
      * @param code HTTP响应状态码
+     */
+    /**
+     * HttpClientResult方法。
+     *      * @param code int类型参数
      */
     public HttpClientResult(int code) {
         this.code = code;
@@ -43,6 +53,10 @@ public class HttpClientResult implements Serializable {
      * 构造一个仅包含响应内容的HTTP客户端结果。
      *
      * @param content HTTP响应内容
+     */
+    /**
+     * HttpClientResult方法。
+     *      * @param content String类型参数
      */
     public HttpClientResult(String content) {
         this.content = content;
@@ -54,6 +68,11 @@ public class HttpClientResult implements Serializable {
      * @param code    HTTP响应状态码
      * @param content HTTP响应内容
      */
+    /**
+     * HttpClientResult方法。
+     *      * @param code int类型参数
+     * @param content String类型参数
+     */
     public HttpClientResult(int code, String content) {
         this.code = code;
         this.content = content;
@@ -64,6 +83,10 @@ public class HttpClientResult implements Serializable {
      *
      * @return HTTP响应状态码
      */
+    /**
+     * getCode方法。
+     * @return int类型返回值
+     */
     public int getCode() {
         return code;
     }
@@ -72,6 +95,10 @@ public class HttpClientResult implements Serializable {
      * 设置HTTP响应状态码。
      *
      * @param code HTTP响应状态码
+     */
+    /**
+     * setCode方法。
+     *      * @param code int类型参数
      */
     public void setCode(int code) {
         this.code = code;
@@ -82,6 +109,10 @@ public class HttpClientResult implements Serializable {
      *
      * @return HTTP响应内容字符串
      */
+    /**
+     * getContent方法。
+     * @return String类型返回值
+     */
     public String getContent() {
         return content;
     }
@@ -90,6 +121,10 @@ public class HttpClientResult implements Serializable {
      * 设置HTTP响应内容。
      *
      * @param content HTTP响应内容字符串
+     */
+    /**
+     * setContent方法。
+     *      * @param content String类型参数
      */
     public void setContent(String content) {
         this.content = content;
@@ -101,6 +136,10 @@ public class HttpClientResult implements Serializable {
      * @return 包含 code 和 content 的字符串表示
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "HttpClientResult{code=" + code + ", content=" + content + "}";
     }
@@ -115,6 +154,11 @@ public class HttpClientResult implements Serializable {
      * @return 如果相等则返回 true，否则返回 false
      */
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -129,6 +173,10 @@ public class HttpClientResult implements Serializable {
      * @return 哈希码值
      */
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         int result = code;
         result = 31 * result + (content != null ? content.hashCode() : 0);

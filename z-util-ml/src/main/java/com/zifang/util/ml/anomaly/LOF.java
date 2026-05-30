@@ -18,6 +18,9 @@ import java.util.PriorityQueue;
  * 4. LOF(p) = sum(lrd(o) / lrd(p)) / k for all neighbors o
  * 5. LOF > 1 means more dense than neighbors (outlier), LOF ≈ 1 normal
  */
+/**
+ * LOF类。
+ */
 public class LOF {
     
     private int nNeighbors;
@@ -33,6 +36,11 @@ public class LOF {
      * @param nNeighbors Number of neighbors (k)
      * @param contamination Expected proportion of outliers (0.0 to 0.5)
      */
+    /**
+     * LOF方法。
+     *      * @param nNeighbors int类型参数
+     * @param contamination double类型参数
+     */
     public LOF(int nNeighbors, double contamination) {
         this.nNeighbors = nNeighbors;
         this.contamination = contamination;
@@ -41,6 +49,10 @@ public class LOF {
     
     /**
      * Fit the LOF to the training data.
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
      */
     public void fit(NdArray X) {
         double[][] Xdata = toDouble2D(X);
@@ -178,6 +190,11 @@ public class LOF {
      * @param X Input data (nSamples x nFeatures)
      * @return Array of predictions: 1 for normal, -1 for anomaly
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         int nSamples = Xdata.length;
@@ -197,6 +214,11 @@ public class LOF {
      * 
      * @param X Input data (nSamples x nFeatures)
      * @return Array of LOF scores (higher = more anomalous)
+     */
+    /**
+     * score方法。
+     *      * @param X NdArray类型参数
+     * @return double[]类型返回值
      */
     public double[] score(NdArray X) {
         double[][] Xdata = toDouble2D(X);

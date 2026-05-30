@@ -8,10 +8,18 @@ import org.docx4j.toc.TocGenerator;
  * Word文档目录更新示例类
  * 演示如何使用docx4j库更新Word文档的目录
  */
+/**
+ * TocUpdateDemo类。
+ */
 public class TocUpdateDemo {
 
     static boolean update = false;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws Exception {
 
         String input_DOCX = "/Users/zifang/Downloads/test.docx";
