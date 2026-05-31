@@ -272,7 +272,25 @@ public class DynamicParser implements Parser {
      */
     private ASTNode matchTerminal(String expected) {
         Token token = tokenReader.peek();
-        if (token != null && expected.equals(token.getText())) {
+        if (token == null) {
+            throw new ParseException("Expected: " + expected + ", got EOF");
+        }
+        // 如果 expected 是大写开头的 token 名称，按 token 类型匹配
+        if (expected.length() > 0 && expected.charAt(0) >= 'A' && expected.charAt(0) <= 'Z') {
+            if (expected.equals(token.getTokenName())) {
+                tokenReader.advance();
+                SimpleASTNode node = new SimpleASTNode();
+                node.setType(token.getTokenName());
+                node.setText(token.getText());
+                node.setLine(token.getLine());
+                node.setColumn(token.getColumn());
+                node.setToken(token);
+                return node;
+            }
+            throw new ParseException("Expected token: " + expected + ", got: " + token.getTokenName() + " (" + token.getText() + ")");
+        }
+        // 小写字母开头或普通字符，按文本精确匹配
+        if (expected.equals(token.getText())) {
             tokenReader.advance();
             SimpleASTNode node = new SimpleASTNode();
             node.setType("terminal");
@@ -282,7 +300,7 @@ public class DynamicParser implements Parser {
             node.setToken(token);
             return node;
         }
-        throw new ParseException("Expected: " + expected + ", got: " + (token != null ? token.getText() : "null"));
+        throw new ParseException("Expected: " + expected + ", got: " + token.getText());
     }
 
     /**
@@ -308,17 +326,42 @@ public class DynamicParser implements Parser {
     }
 
     /**
-     * 按|分割（忽略括号内的|）
+     * 按|分割（忽略括号内的|和字符串字面量内的|）
      */
     private List<String> splitAlternatives(String body) {
         List<String> alternatives = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         int parenDepth = 0;
+        boolean inQuote = false;
+        char quoteChar = 0;
 
         for (int i = 0; i < body.length(); i++) {
             char ch = body.charAt(i);
-            if (ch == '(') parenDepth++;
-            else if (ch == ')') parenDepth--;
+
+            // 处理字符串字面量
+            if (!inQuote && (ch == '\'' || ch == '"')) {
+                inQuote = true;
+                quoteChar = ch;
+                sb.append(ch);
+                continue;
+            }
+            if (inQuote && ch == '\\' && i + 1 < body.length()) {
+                sb.append(ch);
+                sb.append(body.charAt(++i));
+                continue;
+            }
+            if (inQuote && ch == quoteChar) {
+                inQuote = false;
+                sb.append(ch);
+                continue;
+            }
+            if (inQuote) {
+                sb.append(ch);
+                continue;
+            }
+
+            if (ch == '(' || ch == '[') parenDepth++;
+            else if (ch == ')' || ch == ']') parenDepth = Math.max(0, parenDepth - 1);
             else if (ch == '|' && parenDepth == 0) {
                 alternatives.add(sb.toString());
                 sb = new StringBuilder();
@@ -335,31 +378,55 @@ public class DynamicParser implements Parser {
     }
 
     /**
-     * 分割元素序列
+     * 分割元素序列（按空格分割，但保留括号内的空格）
+     * G4元素分割：按空格分割，但忽略括号内的空格
      */
     private List<String> splitElements(String sequence) {
         List<String> elements = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         int parenDepth = 0;
+        boolean inQuote = false;
+        char quoteChar = 0;
 
         for (int i = 0; i < sequence.length(); i++) {
             char ch = sequence.charAt(i);
-            if (ch == '(') parenDepth++;
-            else if (ch == ')') parenDepth--;
+
+            // 处理字符串字面量（不分割其中的空格）
+            if (!inQuote && (ch == '\'' || ch == '"')) {
+                inQuote = true;
+                quoteChar = ch;
+                sb.append(ch);
+                continue;
+            }
+            if (inQuote && ch == '\\' && i + 1 < sequence.length()) {
+                sb.append(ch);
+                sb.append(sequence.charAt(++i));
+                continue;
+            }
+            if (inQuote && ch == quoteChar) {
+                inQuote = false;
+                sb.append(ch);
+                continue;
+            }
+            if (inQuote) {
+                sb.append(ch);
+                continue;
+            }
+
+            if (ch == '(' || ch == '[') parenDepth++;
+            else if (ch == ')' || ch == ']') parenDepth = Math.max(0, parenDepth - 1);
             else if (ch == ' ' && parenDepth == 0) {
                 if (sb.length() > 0) {
                     elements.add(sb.toString());
                     sb = new StringBuilder();
                 }
-            } else {
-                sb.append(ch);
+                continue;
             }
+            sb.append(ch);
         }
-
         if (sb.length() > 0) {
             elements.add(sb.toString());
         }
-
         return elements;
     }
 

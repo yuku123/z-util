@@ -11,7 +11,9 @@ import com.zifang.util.json.model.JsonObject;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 基于 G4 DSL 的 JSON 解析器。
@@ -49,7 +51,7 @@ public class G4JsonParser {
             DynamicParser parser = new DynamicParser();
             parser.loadG4(parserG4);
             parser.setTokenReader(tokenReader);
-            ASTNode ast = parser.parse();
+            ASTNode ast = parser.parse("json");
 
             return astToJava(ast);
         } catch (JsonParseException e) {
@@ -130,7 +132,7 @@ public class G4JsonParser {
                 // 未知节点类型，尝试单子节点或标量
                 if (children.size() == 1) return astToJava(children.get(0));
                 if (text != null && !text.isEmpty()) return parseScalar(type, text);
-                return children.stream().map(this::astToJava).toList();
+                return children.stream().map(this::astToJava).collect(Collectors.toList());
         }
     }
 

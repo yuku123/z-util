@@ -6,7 +6,7 @@ parser grammar JsonParser;
 
 options { tokenVocab=JsonLexer; }
 
-json: value EOF;
+json: value;
 
 value: object | array | string | number | bool | Null;
 
