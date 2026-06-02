@@ -1,8 +1,6 @@
 package com.zifang.util.json;
 
 import com.zifang.util.json.define.TypeReference;
-import com.zifang.util.json.dsl.DslJsonParser;
-import com.zifang.util.json.dsl.JsonPathParser;
 import com.zifang.util.json.exception.JsonTypeException;
 import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
@@ -20,14 +18,13 @@ import java.util.*;
  *   <li>{@code fromJson(json, TypeRef)} — JSON 反序列化为指定类型</li>
  *   <li>{@code parseObject(json)} — JSON 字符串 → JsonObject</li>
  *   <li>{@code parseArray(json)} — JSON 字符串 → JsonArray</li>
- *   <li>{@code query(json, path)} — JsonPath 查询</li>
  * </ul>
  *
  * @author zifang
  */
 public class JsonUtil {
 
-    private static final DslJsonParser PARSER = new DslJsonParser();
+    private static final JSONParser PARSER = new JSONParser();
 
     // ==================== 解析入口 ====================
 
@@ -36,7 +33,7 @@ public class JsonUtil {
      */
     public static JsonObject parseObject(String json) {
         if (json == null || json.trim().isEmpty()) return new JsonObject();
-        Object parsed = PARSER.parse(json.trim());
+        Object parsed = PARSER.fromJSON(json.trim());
         if (parsed instanceof JsonObject) return (JsonObject) parsed;
         throw new JsonTypeException("JSON is not an object: " + json);
     }
@@ -46,16 +43,9 @@ public class JsonUtil {
      */
     public static JsonArray parseArray(String json) {
         if (json == null || json.trim().isEmpty()) return new JsonArray();
-        Object parsed = PARSER.parse(json.trim());
+        Object parsed = PARSER.fromJSON(json.trim());
         if (parsed instanceof JsonArray) return (JsonArray) parsed;
         throw new JsonTypeException("JSON is not an array: " + json);
-    }
-
-    /**
-     * 使用 JsonPath 表达式查询 JSON 数据。
-     */
-    public static List<Object> query(String json, String path) {
-        return new JsonPathParser().query(json, path);
     }
 
     // ==================== 序列化 ====================
@@ -122,7 +112,7 @@ public class JsonUtil {
     @SuppressWarnings("unchecked")
     public static <T> T fromJson(String jsonStr, TypeReference<T> typeRef) {
         if (jsonStr == null || jsonStr.trim().isEmpty()) return null;
-        Object parsed = PARSER.parse(jsonStr.trim());
+        Object parsed = PARSER.fromJSON(jsonStr.trim());
         return (T) convertValue(parsed, typeRef.getType());
     }
 
@@ -131,7 +121,7 @@ public class JsonUtil {
      */
     public static <T> T fromJson(String jsonStr, Class<T> clazz) {
         if (jsonStr == null || jsonStr.trim().isEmpty()) return null;
-        Object parsed = PARSER.parse(jsonStr.trim());
+        Object parsed = PARSER.fromJSON(jsonStr.trim());
         return convertValue(parsed, clazz);
     }
 

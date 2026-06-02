@@ -241,15 +241,6 @@ public class JsonUtilTest {
         assertEquals("Bob", person.get("name"));
     }
 
-    // ==================== query ====================
-
-    @Test
-    public void testQuery() {
-        String json = "{\"store\":{\"book\":[{\"title\":\"Intro\"},{\"title\":\"Ref\"}]}}";
-        List<Object> titles = JsonUtil.query(json, "$.store.book[*].title");
-        assertFalse(titles.isEmpty());
-    }
-
     // ==================== 边界情况 ====================
 
     @Test

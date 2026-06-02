@@ -259,6 +259,11 @@ public class DynamicParser implements Parser {
             return matchNonTerminal(element);
         }
 
+        // 大写开头：终结符（token 类型名）
+        if (element.length() > 0 && element.charAt(0) >= 'A' && element.charAt(0) <= 'Z') {
+            return matchTerminal(element);
+        }
+
         // 忽略空白
         if (element.isEmpty()) {
             return null;
