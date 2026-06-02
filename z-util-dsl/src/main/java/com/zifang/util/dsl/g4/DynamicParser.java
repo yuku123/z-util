@@ -387,53 +387,31 @@ public class DynamicParser implements Parser {
      * G4元素分割：按空格分割，但忽略括号内的空格
      */
     private List<String> splitElements(String sequence) {
-        System.err.println("!!! splitElements CALLED with: " + sequence + " UID=" + java.util.UUID.randomUUID());
         List<String> elements = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
+        StringBuilder current = new StringBuilder();
         int parenDepth = 0;
-        boolean inQuote = false;
-        char quoteChar = 0;
 
         for (int i = 0; i < sequence.length(); i++) {
-            char ch = sequence.charAt(i);
+            char c = sequence.charAt(i);
 
-            if (!inQuote && (ch == '\'' || ch == '"')) {
-                inQuote = true;
-                quoteChar = ch;
-                sb.append(ch);
-                continue;
+            if (c == '(') {
+                parenDepth++;
+                current.append(c);
+            } else if (c == ')') {
+                parenDepth = Math.max(0, parenDepth - 1);
+                current.append(c);
+            } else if (c == ' ' && parenDepth == 0 && current.length() > 0) {
+                elements.add(current.toString());
+                current = new StringBuilder();
+            } else {
+                current.append(c);
             }
-            if (inQuote && ch == '\\' && i + 1 < sequence.length()) {
-                sb.append(ch);
-                sb.append(sequence.charAt(++i));
-                continue;
-            }
-            if (inQuote && ch == quoteChar) {
-                inQuote = false;
-                sb.append(ch);
-                continue;
-            }
-            if (inQuote) {
-                sb.append(ch);
-                continue;
-            }
+        }
 
-            if (ch == '(') { parenDepth++; sb.append(ch); }
-            else if (ch == ')') { parenDepth = Math.max(0, parenDepth - 1); sb.append(ch); }
-            else if (ch == ' ' && parenDepth > 0) { sb.append(ch); }
-            else if (ch == ' ' && parenDepth == 0) {
-                if (sb.length() > 0) {
-                    elements.add(sb.toString());
-                    sb = new StringBuilder();
-                }
-                continue;
-            }
-            sb.append(ch);
+        if (current.length() > 0) {
+            elements.add(current.toString());
         }
-        if (sb.length() > 0) {
-            elements.add(sb.toString());
-        }
-        System.err.println("DEBUG_splitElements RESULT: " + elements);
+
         return elements;
     }
 

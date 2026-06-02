@@ -77,6 +77,12 @@
             <version>2.1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-dsl</artifactId>
+            <version>${util.version}</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->
         <dependency>
             <groupId>org.springframework</groupId>
