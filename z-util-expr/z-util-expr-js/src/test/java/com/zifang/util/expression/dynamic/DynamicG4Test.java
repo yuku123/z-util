@@ -4,7 +4,7 @@ import com.zifang.util.expression.dynamic.core.ASTNode;
 import com.zifang.util.expression.dynamic.core.Lexer;
 import com.zifang.util.expression.dynamic.core.TokenReader;
 import com.zifang.util.expression.dynamic.g4.DynamicLexer;
-import com.zifang.util.expression.dynamic.g4.DynamicParser;
+import com.zifang.util.dsl.g4.DynamicParser;
 import com.zifang.util.expression.dynamic.token.Token;
 import org.junit.Test;
 

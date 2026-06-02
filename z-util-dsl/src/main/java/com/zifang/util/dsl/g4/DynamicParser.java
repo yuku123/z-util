@@ -387,6 +387,7 @@ public class DynamicParser implements Parser {
      * G4元素分割：按空格分割，但忽略括号内的空格
      */
     private List<String> splitElements(String sequence) {
+        System.err.println("!!! splitElements CALLED with: " + sequence + " UID=" + java.util.UUID.randomUUID());
         List<String> elements = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         int parenDepth = 0;
@@ -396,7 +397,6 @@ public class DynamicParser implements Parser {
         for (int i = 0; i < sequence.length(); i++) {
             char ch = sequence.charAt(i);
 
-            // 处理字符串字面量（不分割其中的空格）
             if (!inQuote && (ch == '\'' || ch == '"')) {
                 inQuote = true;
                 quoteChar = ch;
@@ -418,8 +418,9 @@ public class DynamicParser implements Parser {
                 continue;
             }
 
-            if (ch == '(' || ch == '[') parenDepth++;
-            else if (ch == ')' || ch == ']') parenDepth = Math.max(0, parenDepth - 1);
+            if (ch == '(') { parenDepth++; sb.append(ch); }
+            else if (ch == ')') { parenDepth = Math.max(0, parenDepth - 1); sb.append(ch); }
+            else if (ch == ' ' && parenDepth > 0) { sb.append(ch); }
             else if (ch == ' ' && parenDepth == 0) {
                 if (sb.length() > 0) {
                     elements.add(sb.toString());
@@ -432,6 +433,7 @@ public class DynamicParser implements Parser {
         if (sb.length() > 0) {
             elements.add(sb.toString());
         }
+        System.err.println("DEBUG_splitElements RESULT: " + elements);
         return elements;
     }
 

@@ -1,7 +1,3 @@
-/*
- * JSON Parser G4
- * 对标 RFC 8259 规范
- */
 parser grammar JsonParser;
 
 options { tokenVocab=JsonLexer; }
