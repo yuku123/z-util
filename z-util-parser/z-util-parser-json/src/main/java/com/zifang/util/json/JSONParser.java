@@ -57,6 +57,10 @@ public class JSONParser {
         } catch (JsonParseException e) {
             throw e;
         } catch (Exception e) {
+            System.out.println("EXCEPTION type: " + e.getClass().getName());
+            System.out.println("EXCEPTION message: " + e.getMessage());
+            System.out.println("EXCEPTION cause: " + (e.getCause() != null ? e.getCause().getClass().getName() + " " + e.getCause().getMessage() : "null"));
+            e.printStackTrace();
             throw new JsonParseException("JSON解析失败: " + e.getMessage());
         }
     }
