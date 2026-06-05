@@ -121,12 +121,15 @@ public class DynamicParser implements Parser {
         // 解析规则体
         List<ParseResult> results = parseAlternatives(body, node);
 
-        // 返回第一个成功匹配的结果
-        if (!results.isEmpty()) {
-            return results.get(0).node;
+        // 找第一个真正匹配了token的（至少有一个child）的alternative
+        for (ParseResult r : results) {
+            if (!r.node.getChildren().isEmpty()) {
+                return r.node;
+            }
         }
 
-        return node;
+        // 所有alternative都空了（没有consume任何token），抛异常让上层感知失败
+        throw new ParseException("Rule '" + ruleName + "' failed to match");
     }
 
     /**
