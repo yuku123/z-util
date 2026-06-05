@@ -35,6 +35,13 @@
             <version>1.4.9</version>
         </dependency>
 
+        <!-- JGit: 纯 Java 实现的 git 操作库 -->
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>5.13.3.202401111512-r</version>
+        </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
