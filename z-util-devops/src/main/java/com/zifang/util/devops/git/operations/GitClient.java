@@ -189,21 +189,21 @@ public final class GitClient {
      * 工作区与 HEAD 的 diff（未暂存变更）
      */
     public static GitResult<List<GitDiffEntry>> diff(GitRepository repo) {
-        return J.diffWorkTree(repo);
+        return GitResult.success(J.diffWorkTree(repo));
     }
 
     /**
      * HEAD 与暂存区的 diff（已暂存未提交）
      */
     public static GitResult<List<GitDiffEntry>> diffCached(GitRepository repo) {
-        return J.diffIndex(repo);
+        return GitResult.success(J.diffIndex(repo));
     }
 
     /**
      * 两个 ref 之间的 diff
      */
     public static GitResult<List<GitDiffEntry>> diff(GitRepository repo, String oldRef, String newRef) {
-        return J.diffRefs(repo, oldRef, newRef);
+        return GitResult.success(J.diffRefs(repo, oldRef, newRef));
     }
 
     // ==================== 提交 ====================

@@ -40,13 +40,13 @@ public class GitResult<T> {
     }
 
     /**
-     * 创建仅含标准输出的成功结果
+     * 创建仅含标准输出的成功结果（无 data）
      *
      * @param stdout 标准输出
      * @param <T>    数据类型
      * @return 成功结果对象
      */
-    public static <T> GitResult<T> success(String stdout) {
+    public static <T> GitResult<T> successStdout(String stdout) {
         GitResult<T> r = new GitResult<>();
         r.success = true;
         r.stdout = stdout;

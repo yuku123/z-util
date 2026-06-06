@@ -85,7 +85,7 @@ public class JGitExecutor {
                 File gitDir = git.getRepository().getDirectory();
                 return GitResult.success(new GitRepository(dir, gitDir));
             }
-        } catch (GitAPIException | IOException e) {
+        } catch (Exception e) {
             return GitResult.fail("初始化失败: " + e.getMessage());
         }
     }
@@ -245,6 +245,12 @@ public class JGitExecutor {
 
     public GitResult<List<GitCommit>> log(GitRepository repo, int maxCount) {
         try (Git git = openGit(repo)) {
+            // HEAD 不存在（空仓库）时，JGit log 会抛 NoHeadException。
+            // 这里视作"没有提交"，返回空 list。
+            ObjectId head = git.getRepository().resolve(Constants.HEAD);
+            if (head == null) {
+                return GitResult.success(new ArrayList<>());
+            }
             LogCommand cmd = git.log();
             if (maxCount > 0) {
                 cmd.setMaxCount(maxCount);
@@ -304,16 +310,11 @@ public class JGitExecutor {
     // 返回带 ChangeType / 路径 / sha 的 GitDiffEntry 列表，但不包含 patch 文本（要 patch 走 shell diff）。
 
     public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffWorkTree(GitRepository repo) {
+        // 对应 `git diff`：工作区 vs 索引（不是 vs HEAD）
         try (Git git = openGit(repo)) {
             Repository r = git.getRepository();
-            ObjectId head = r.resolve(Constants.HEAD);
-            if (head == null) {
-                return new ArrayList<>();
-            }
-            CanonicalTreeParser oldIt = new CanonicalTreeParser();
-            try (ObjectReader reader = r.newObjectReader()) {
-                oldIt.reset(reader, head);
-            }
+            DirCache dc = r.readDirCache();
+            AbstractTreeIterator oldIt = new DirCacheIterator(dc);
             AbstractTreeIterator newIt = new FileTreeIterator(r);
             return scanDiff(r, oldIt, newIt);
         } catch (IOException e) {
@@ -324,13 +325,17 @@ public class JGitExecutor {
     public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffIndex(GitRepository repo) {
         try (Git git = openGit(repo)) {
             Repository r = git.getRepository();
-            ObjectId head = r.resolve(Constants.HEAD);
-            if (head == null) {
+            ObjectId headCommit = r.resolve(Constants.HEAD);
+            if (headCommit == null) {
                 return new ArrayList<>();
+            }
+            ObjectId headTree;
+            try (RevWalk walk = new RevWalk(r)) {
+                headTree = walk.parseCommit(headCommit).getTree().getId();
             }
             CanonicalTreeParser oldIt = new CanonicalTreeParser();
             try (ObjectReader reader = r.newObjectReader()) {
-                oldIt.reset(reader, head);
+                oldIt.reset(reader, headTree);
             }
             DirCache dc = r.readDirCache();
             AbstractTreeIterator newIt = new DirCacheIterator(dc);
@@ -343,16 +348,22 @@ public class JGitExecutor {
     public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffRefs(GitRepository repo, String oldRef, String newRef) {
         try (Git git = openGit(repo)) {
             Repository r = git.getRepository();
-            ObjectId oldId = r.resolve(oldRef);
-            ObjectId newId = r.resolve(newRef);
-            if (oldId == null || newId == null) {
+            ObjectId oldCommit = r.resolve(oldRef);
+            ObjectId newCommit = r.resolve(newRef);
+            if (oldCommit == null || newCommit == null) {
                 throw new GitException("无法解析引用: oldRef=" + oldRef + " newRef=" + newRef);
+            }
+            ObjectId oldTree;
+            ObjectId newTree;
+            try (RevWalk walk = new RevWalk(r)) {
+                oldTree = walk.parseCommit(oldCommit).getTree().getId();
+                newTree = walk.parseCommit(newCommit).getTree().getId();
             }
             CanonicalTreeParser oldIt = new CanonicalTreeParser();
             CanonicalTreeParser newIt = new CanonicalTreeParser();
             try (ObjectReader reader = r.newObjectReader()) {
-                oldIt.reset(reader, oldId);
-                newIt.reset(reader, newId);
+                oldIt.reset(reader, oldTree);
+                newIt.reset(reader, newTree);
             }
             return scanDiff(r, oldIt, newIt);
         } catch (IOException e) {
@@ -689,11 +700,15 @@ public class JGitExecutor {
     // ==================== 内部 ====================
 
     private static Git openGit(GitRepository repo) {
-        Repository r = new org.eclipse.jgit.storage.file.FileRepositoryBuilder()
-                .setGitDir(repo.getGitDir())
-                .setWorkTree(repo.getWorkDir())
-                .build();
-        return new Git(r);
+        try {
+            Repository r = new org.eclipse.jgit.storage.file.FileRepositoryBuilder()
+                    .setGitDir(repo.getGitDir())
+                    .setWorkTree(repo.getWorkDir())
+                    .build();
+            return new Git(r);
+        } catch (IOException e) {
+            throw new GitException("打开仓库失败: " + e.getMessage(), e);
+        }
     }
 
     @SuppressWarnings("unused")

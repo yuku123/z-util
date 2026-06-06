@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONPath;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.zifang.util.core.io.FileUtil;
-import com.zifang.util.core.lang.DateUtil;
+import com.zifang.util.core.time.DateUtil;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;

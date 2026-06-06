@@ -196,15 +196,20 @@ public class GitClientTest {
         writeFile(new File(workDir, "a.txt"), "line1\nline2\n");
         GitClient.add(repo, "a.txt");
 
-        // diffCached：HEAD vs 索引
+        // diffCached：HEAD vs 索引（已暂存但未提交，应有变化）
         GitResult<List<com.zifang.util.devops.git.operations.core.GitDiffEntry>> cached = GitClient.diffCached(repo);
         assertTrue(cached.isSuccess());
         assertFalse(cached.getData().isEmpty());
 
-        // diff：工作区 vs HEAD（已暂存后应该没变化）
+        // diff：工作区 vs 索引（已暂存，工作区与索引一致，应为空）
         GitResult<List<com.zifang.util.devops.git.operations.core.GitDiffEntry>> wt = GitClient.diff(repo);
         assertTrue(wt.isSuccess());
         assertTrue(wt.getData().isEmpty());
+
+        // diffRefs：HEAD vs HEAD 应为空
+        GitResult<List<com.zifang.util.devops.git.operations.core.GitDiffEntry>> same = GitClient.diff(repo, "HEAD", "HEAD");
+        assertTrue(same.isSuccess());
+        assertTrue(same.getData().isEmpty());
     }
 
     @Test
@@ -224,7 +229,7 @@ public class GitClientTest {
 
     @Test
     public void testCommitWithEmptyMessage() {
-        GitResult<String> r = GitClient.commit(repo, "x", "", false);
+        GitResult<String> r = GitClient.commit(repo, null, "", false);
         assertFalse(r.isSuccess());
         assertTrue(r.getMessage().contains("message"));
     }
