@@ -216,7 +216,7 @@ public class UrlUtilTest {
     }
 
     @Test
-    public void testUrlJoin_NullLocation() {
+    public void testUrlJoin_NullLocation() throws MalformedURLException {
         assertEquals("http://example.com/path", UrlUtil.urlJoin(new URL("http://example.com/path"), null));
     }
 

@@ -202,12 +202,15 @@ public class JSONParser {
 
         switch (type) {
             case "null":
+            case "Null":
                 return null;
             case "bool":
+            case "Bool":
                 if ("true".equals(text)) return Boolean.TRUE;
                 if ("false".equals(text)) return Boolean.FALSE;
                 break;
             case "number":
+            case "Number":
                 if (text.contains(".") || text.contains("e") || text.contains("E")) {
                     try { return Double.parseDouble(text); } catch (NumberFormatException ignored) {}
                 }

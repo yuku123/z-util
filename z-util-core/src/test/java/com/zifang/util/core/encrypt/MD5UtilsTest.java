@@ -25,7 +25,7 @@ public class MD5UtilsTest {
     public void testEncrypt_EmptyString() {
         String result = MD5Utils.encrypt("");
         assertNotNull(result);
-        assertEquals(MD5Utils.MD5_HEX_LENGTH, result.length());
+        assertEquals(32, result.length());
         // 空字符串的 MD5 值为: d41d8cd98f00b204e9800998ecf8427e
         assertEquals("d41d8cd98f00b204e9800998ecf8427e", result);
     }
@@ -86,7 +86,7 @@ public class MD5UtilsTest {
     @Test
     public void testEncrypt_ByteArrayEquivalents() {
         String strResult = MD5Utils.encrypt("hello");
-        byte[] byteResult = MD5Utils.encrypt("hello".getBytes());
+        String byteResult = MD5Utils.encrypt("hello".getBytes());
         assertEquals(strResult, byteResult);
     }
 
@@ -104,7 +104,7 @@ public class MD5UtilsTest {
 
     @Test
     public void testEncryptWithSalt_BothNull() {
-        assertNull(MD5Utils.encryptWithSalt(null, null));
+        assertNull(MD5Utils.encryptWithSalt((String) null, (String) null));
     }
 
     @Test
@@ -196,7 +196,7 @@ public class MD5UtilsTest {
     @Test
     public void testGenerateSaltAsBytes_DefaultLength() {
         byte[] salt = MD5Utils.generateSaltAsBytes();
-        assertEquals(MD5Utils.DEFAULT_SALT_LENGTH, salt.length);
+        assertEquals(16, salt.length);
     }
 
     @Test

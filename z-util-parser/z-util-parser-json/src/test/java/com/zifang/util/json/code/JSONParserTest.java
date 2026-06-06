@@ -60,9 +60,17 @@ public class JSONParserTest {
 
     @Test
     public void testParseScientificNotation() throws Exception {
-        // TODO: JSONParser tokenizer has a bug parsing scientific notation like "1.23e10"
-        // The number token "1.23" and "e10" get separated. DslJsonParser handles this correctly.
-        // See: DslJsonParserTest.testParseScientificNotation
+        JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": 1.23e10}");
+        assertEquals(1.23e10, obj.get("k"));
+
+        obj = (JsonObject) jsonParser.fromJSON("{\"k\": 1e10}");
+        assertEquals(1.0e10, obj.get("k"));
+
+        obj = (JsonObject) jsonParser.fromJSON("{\"k\": 1.23E-5}");
+        assertEquals(1.23e-5, obj.get("k"));
+
+        obj = (JsonObject) jsonParser.fromJSON("{\"k\": -1.5e3}");
+        assertEquals(-1.5e3, obj.get("k"));
     }
 
     @Test

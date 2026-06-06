@@ -64,6 +64,10 @@ public class UrlUtil {
 
     /**
      * 对字符串进行 URL 编码
+     * <p>
+     * 注意：{@link URLEncoder} 是 application/x-www-form-urlencoded 编码，
+     * 会把空格编码为 +，但现代 URL 路径/查询通常用 %20 表示空格，因此这里把 + 替换为 %20。
+     * </p>
      *
      * @param url      待编码的字符串
      * @param encoding 编码字符集
@@ -74,7 +78,7 @@ public class UrlUtil {
             return null;
         }
         try {
-            return URLEncoder.encode(url, encoding);
+            return URLEncoder.encode(url, encoding).replace("+", "%20");
         } catch (Exception e) {
             // 忽略编码异常，返回原字符串
             return url;
@@ -119,8 +123,11 @@ public class UrlUtil {
      * @return 添加/修改参数后的 URL
      */
     public static String setParam(String url, String paramName, String paramValue) {
-        if (url == null || paramName == null) {
-            return url;
+        if (paramName == null) {
+            return null;
+        }
+        if (url == null) {
+            return null;
         }
         String encodedValue = encode(paramValue);
         int tempIndex = url.indexOf("?");
@@ -231,7 +238,12 @@ public class UrlUtil {
             if (locationHeader.startsWith("http")) {
                 return new URL(locationHeader).toString();
             }
-            return new URL(baseUrl.getProtocol(), baseUrl.getAuthority(), locationHeader).toString();
+            // 相对路径需要保证以 / 开头，否则 new URL(protocol, authority, file) 会拼成 example.comsubpath
+            String path = locationHeader;
+            if (!path.startsWith("/") && !path.startsWith("?")) {
+                path = "/" + path;
+            }
+            return new URL(baseUrl.getProtocol(), baseUrl.getAuthority(), path).toString();
         } catch (MalformedURLException e) {
             return baseUrl.toString();
         }
@@ -398,11 +410,31 @@ public class UrlUtil {
             this.encoding = encoding;
             this.url = new StringBuilder();
             if (encodePath) {
-                this.url.append(encode(path, encoding));
+                // 路径编码：保留 /，只对每段做 URL 编码
+                this.url.append(encodePath(path, encoding));
             } else {
                 this.url.append(path);
             }
             this.hasParams = this.url.indexOf("?") != -1;
+        }
+
+        /**
+         * 编码路径段：保留 / 分隔符，只对每段做 URL 编码
+         */
+        private String encodePath(String path, String encoding) {
+            if (path == null) {
+                return null;
+            }
+            // 先按 / 拆开，逐段编码，最后用 / 拼回
+            String[] segments = path.split("/", -1);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < segments.length; i++) {
+                if (i > 0) {
+                    sb.append('/');
+                }
+                sb.append(encode(segments[i], encoding));
+            }
+            return sb.toString();
         }
 
         /**

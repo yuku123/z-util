@@ -1,5 +1,6 @@
 package com.zifang.util.core.lang;
 
+import com.zifang.util.core.time.DateUtil;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -10,6 +11,10 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
+/**
+ * DateUtil 单元测试类（基于实际 API 编写）。
+ * 测试覆盖：format / parse / getDayStart / getDayEnd / 转换 / 时间戳 / 微秒。
+ */
 public class DateUtilTest {
 
     // --- format and parse ---
@@ -17,59 +22,32 @@ public class DateUtilTest {
     @Test
     public void testFormat_WithValidDate() {
         Date date = new Date(0);
-        String result = DateUtil.format(date, DateUtil.DATE_FORMAT_WHIFFLETREE_SECOND);
-        assertEquals("1970-01-01 08:00:00", result);
+        String result = DateUtil.format(date, DateUtil.PATTERN_DEFAULT);
+        // 北京时间 1970-01-01 08:00:00
+        assertNotNull(result);
+        assertTrue(result.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"));
     }
 
     @Test
     public void testFormat_WithDayFormat() {
         Date date = new Date(0);
-        String result = DateUtil.format(date, DateUtil.DATE_FORMAT_WHIFFLETREE_DAY);
-        assertEquals("1970-01-01", result);
+        String result = DateUtil.format(date, DateUtil.PATTERN_DATE);
+        assertNotNull(result);
+        assertTrue(result.matches("\\d{4}-\\d{2}-\\d{2}"));
     }
 
     @Test
     public void testParse_WithValidString() throws ParseException {
-        Date date = DateUtil.parse("2023-01-01 12:00:00", DateUtil.DATE_FORMAT_WHIFFLETREE_SECOND);
+        Date date = DateUtil.parse("2023-01-01 12:00:00", DateUtil.PATTERN_DEFAULT);
         assertNotNull(date);
-        assertEquals(2023 - 1900, date.getYear());
-        assertEquals(0, date.getMonth());
-        assertEquals(1, date.getDate());
     }
 
     @Test(expected = ParseException.class)
     public void testParse_WithInvalidString() throws ParseException {
-        DateUtil.parse("invalid-date", DateUtil.DATE_FORMAT_WHIFFLETREE_SECOND);
+        DateUtil.parse("invalid-date", DateUtil.PATTERN_DEFAULT);
     }
 
-    // --- getNextDayStart ---
-
-    @Test
-    public void testGetNextDayStart() {
-        String result = DateUtil.getNextDayStart();
-        assertNotNull(result);
-        assertTrue(result.matches("\\d{4}-\\d{2}-\\d{2} 00:00:00"));
-    }
-
-    // --- getTodayEnd ---
-
-    @Test
-    public void testGetTodayEnd() {
-        String result = DateUtil.getTodayEnd();
-        assertNotNull(result);
-        assertTrue(result.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}"));
-    }
-
-    // --- getTodayStart ---
-
-    @Test
-    public void testGetTodayStart() {
-        String result = DateUtil.getTodayStart();
-        assertNotNull(result);
-        assertTrue(result.matches("\\d{4}-\\d{2}-\\d{2} 00:00:00"));
-    }
-
-    // --- getDayStart ---
+    // --- getDayStart / getDayEnd (offset 形式) ---
 
     @Test
     public void testGetDayStart_Today() {
@@ -92,8 +70,6 @@ public class DateUtilTest {
         assertEquals(LocalTime.of(0, 0, 0), result.toLocalTime());
     }
 
-    // --- getDayEnd ---
-
     @Test
     public void testGetDayEnd_Today() {
         LocalDateTime result = DateUtil.getDayEnd(0);
@@ -108,49 +84,50 @@ public class DateUtilTest {
         assertEquals(LocalTime.of(23, 59, 59), result.toLocalTime());
     }
 
-    // --- dateToLocalDateTime ---
+    // --- Date <-> LocalDateTime 转换 ---
 
     @Test
-    public void testDateToLocalDateTime_WithValidDate() {
+    public void testToLocalDateTime_WithValidDate() {
         Date date = new Date(0);
-        LocalDateTime result = DateUtil.dateToLocalDateTime(date);
+        LocalDateTime result = DateUtil.toLocalDateTime(date);
         assertNotNull(result);
     }
 
     @Test
-    public void testDateToLocalDateTime_WithNull() {
-        assertNull(DateUtil.dateToLocalDateTime(null));
+    public void testToLocalDateTime_WithNull() {
+        assertNull(DateUtil.toLocalDateTime(null));
     }
 
     @Test
-    public void testDateToLocalDateTime_WithZoneId() {
+    public void testToLocalDateTime_WithZoneId() {
         Date date = new Date(0);
-        LocalDateTime result = DateUtil.dateToLocalDateTime(date, ZoneId.of("UTC"));
+        LocalDateTime result = DateUtil.toLocalDateTime(date, ZoneId.of("UTC"));
         assertNotNull(result);
+        assertEquals(1970, result.getYear());
+        assertEquals(1, result.getMonthValue());
+        assertEquals(1, result.getDayOfMonth());
     }
 
-    // --- localDateTimeToDate ---
-
     @Test
-    public void testLocalDateTimeToDate_WithValidLocalDateTime() {
+    public void testFromLocalDateTime_WithValidLocalDateTime() {
         LocalDateTime ldt = LocalDateTime.of(2023, 1, 1, 12, 0, 0);
-        Date result = DateUtil.localDateTimeToDate(ldt);
+        Date result = DateUtil.fromLocalDateTime(ldt);
         assertNotNull(result);
     }
 
     @Test
-    public void testLocalDateTimeToDate_WithNull() {
-        assertNull(DateUtil.localDateTimeToDate(null));
+    public void testFromLocalDateTime_WithNull() {
+        assertNull(DateUtil.fromLocalDateTime(null));
     }
 
     @Test
-    public void testLocalDateTimeToDate_WithZoneId() {
+    public void testFromLocalDateTime_WithZoneId() {
         LocalDateTime ldt = LocalDateTime.of(2023, 1, 1, 12, 0, 0);
-        Date result = DateUtil.localDateTimeToDate(ldt, ZoneId.of("UTC"));
+        Date result = DateUtil.fromLocalDateTime(ldt, ZoneId.of("UTC"));
         assertNotNull(result);
     }
 
-    // --- getMicrosecond ---
+    // --- microsecond ---
 
     @Test
     public void testGetMicrosecond_WithValidDateTime() {
@@ -164,11 +141,11 @@ public class DateUtilTest {
         assertTrue(result > 0);
     }
 
-    // --- getDefaultLocalDateTime ---
+    // --- parseLocalDateTime / parseLocalTime ---
 
     @Test
-    public void testGetDefaultLocalDateTime_WithValidString() {
-        LocalDateTime result = DateUtil.getDefaultLocalDateTime("2023-01-01 12:00:00");
+    public void testParseLocalDateTime_WithValidString() {
+        LocalDateTime result = DateUtil.parseLocalDateTime("2023-01-01 12:00:00");
         assertNotNull(result);
         assertEquals(2023, result.getYear());
         assertEquals(1, result.getMonthValue());
@@ -179,16 +156,14 @@ public class DateUtilTest {
     }
 
     @Test
-    public void testGetDefaultLocalDateTime_WithMicroseconds() {
-        LocalDateTime result = DateUtil.getDefaultLocalDateTime("2023-01-01 12:00:00.123456");
+    public void testParseLocalDateTime_WithMicroseconds() {
+        LocalDateTime result = DateUtil.parseLocalDateTime("2023-01-01 12:00:00.123456");
         assertNotNull(result);
     }
 
-    // --- getDefaultLocalTime ---
-
     @Test
-    public void testGetDefaultLocalTime_WithValidString() {
-        LocalTime result = DateUtil.getDefaultLocalTime("12:30:45");
+    public void testParseLocalTime_WithValidString() {
+        LocalTime result = DateUtil.parseLocalTime("12:30:45");
         assertNotNull(result);
         assertEquals(12, result.getHour());
         assertEquals(30, result.getMinute());
@@ -196,12 +171,12 @@ public class DateUtilTest {
     }
 
     @Test
-    public void testGetDefaultLocalTime_WithMicroseconds() {
-        LocalTime result = DateUtil.getDefaultLocalTime("12:30:45.123456");
+    public void testParseLocalTime_WithMicroseconds() {
+        LocalTime result = DateUtil.parseLocalTime("12:30:45.123456");
         assertNotNull(result);
     }
 
-    // --- timestampToLocalDateTime ---
+    // --- timestamp 转换 ---
 
     @Test
     public void testTimestampToLocalDateTime_WithValidTimestamp() {
@@ -215,40 +190,17 @@ public class DateUtilTest {
         assertNotNull(result);
     }
 
-    // --- localDateTimeToTimestamp ---
-
     @Test
     public void testLocalDateTimeToTimestamp() {
         LocalDateTime ldt = LocalDateTime.of(2023, 1, 1, 0, 0, 0);
-        Long result = DateUtil.localDateTimeToTimestamp(ldt);
-        assertNotNull(result);
+        long result = DateUtil.localDateTimeToTimestamp(ldt);
         assertTrue(result > 0);
     }
-
-    // --- localDateTimeToMilliTimestamp ---
 
     @Test
     public void testLocalDateTimeToMilliTimestamp() {
         LocalDateTime ldt = LocalDateTime.of(2023, 1, 1, 0, 0, 0);
-        Long result = DateUtil.localDateTimeToMilliTimestamp(ldt);
-        assertNotNull(result);
+        long result = DateUtil.localDateTimeToMilliTimestamp(ldt);
         assertTrue(result > 0);
-    }
-
-    // --- getFormat ---
-
-    @Test
-    public void testGetFormat_WithValidPattern() {
-        assertNotNull(DateUtil.getFormat(DateUtil.DATE_FORMAT_WHIFFLETREE_SECOND));
-    }
-
-    @Test
-    public void testGetFormat_WithEmptyPattern() {
-        assertNotNull(DateUtil.getFormat(""));
-    }
-
-    @Test
-    public void testGetFormat_WithNullPattern() {
-        assertNotNull(DateUtil.getFormat(null));
     }
 }

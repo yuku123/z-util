@@ -124,12 +124,35 @@ public class DynamicParser implements Parser {
         // 找第一个真正匹配了token的（至少有一个child）的alternative
         for (ParseResult r : results) {
             if (!r.node.getChildren().isEmpty()) {
-                return r.node;
+                // 用规则名作为类型，把 alt 的子节点拍平后作为 rule 节点的子节点
+                // 跳过 alt/optional/group/star/plus 等内部包装类型，让 AST 直接暴露匹配的元素
+                SimpleASTNode matched = new SimpleASTNode();
+                matched.setType(ruleName);
+                matched.setLine(node.getLine());
+                matched.setColumn(node.getColumn());
+                flattenInto(matched, r.node);
+                return matched;
             }
         }
 
         // 所有alternative都空了（没有consume任何token），抛异常让上层感知失败
         throw new ParseException("Rule '" + ruleName + "' failed to match");
+    }
+
+    /**
+     * 把 src 的子节点中所有"包装"类型（alt/optional/group/star/plus）展开，
+     * 把真实匹配的子节点（终结符/非终结符 rule 名）直接挂到 target 下。
+     */
+    private void flattenInto(SimpleASTNode target, ASTNode src) {
+        for (ASTNode child : src.getChildren()) {
+            String type = child.getType();
+            if ("alt".equals(type) || "optional".equals(type) || "group".equals(type)
+                    || "star".equals(type) || "plus".equals(type)) {
+                flattenInto(target, child);
+            } else {
+                target.addChild(child);
+            }
+        }
     }
 
     /**
@@ -227,12 +250,15 @@ public class DynamicParser implements Parser {
             try {
                 while (true) {
                     ASTNode child = parseElement(inner);
-                    if (child != null) {
-                        node.addChild(child);
-                        count++;
-                    } else {
+                    if (child == null) {
                         break;
                     }
+                    // 防止空匹配造成死循环：例如 (a)* 中 a 不匹配时 group 仍返回空节点
+                    if (child.getChildren().isEmpty()) {
+                        break;
+                    }
+                    node.addChild(child);
+                    count++;
                 }
             } catch (ParseException e) {
                 // 停止匹配
@@ -246,7 +272,7 @@ public class DynamicParser implements Parser {
         }
 
         // 字符串字面量匹配
-        if (element.startsWith("'") && element.endsWith("'")) {
+        if (element.startsWith("'") && element.endsWith("'") && element.length() >= 2) {
             String expected = element.substring(1, element.length() - 1);
             return matchTerminal(expected);
         }
@@ -368,9 +394,13 @@ public class DynamicParser implements Parser {
                 continue;
             }
 
-            if (ch == '(' || ch == '[') parenDepth++;
-            else if (ch == ')' || ch == ']') parenDepth = Math.max(0, parenDepth - 1);
-            else if (ch == '|' && parenDepth == 0) {
+            if (ch == '(' || ch == '[') {
+                parenDepth++;
+                sb.append(ch);
+            } else if (ch == ')' || ch == ']') {
+                parenDepth = Math.max(0, parenDepth - 1);
+                sb.append(ch);
+            } else if (ch == '|' && parenDepth == 0) {
                 alternatives.add(sb.toString());
                 sb = new StringBuilder();
             } else {
@@ -388,16 +418,37 @@ public class DynamicParser implements Parser {
     /**
      * 分割元素序列（按空格分割，但保留括号内的空格）
      * G4元素分割：按空格分割，但忽略括号内的空格
+     * 顶层遇到 ( 时，如果已有内容，需要先把当前内容 flush 成一个独立元素，
+     * 因为 G4 中标识符后紧跟括号表示"两个元素"，如 pair(Comma pair)* 是 pair 和 (Comma pair)*
+     * 注意：必须同时跟踪单/双引号包围的字符串字面量，避免把 '('/' 这类字面量里的括号当作分组符。
      */
     private List<String> splitElements(String sequence) {
         List<String> elements = new ArrayList<>();
         StringBuilder current = new StringBuilder();
         int parenDepth = 0;
+        boolean inQuote = false;
+        char quoteChar = 0;
 
         for (int i = 0; i < sequence.length(); i++) {
             char c = sequence.charAt(i);
 
-            if (c == '(') {
+            if (!inQuote && (c == '\'' || c == '"')) {
+                inQuote = true;
+                quoteChar = c;
+                current.append(c);
+            } else if (inQuote && c == '\\' && i + 1 < sequence.length()) {
+                current.append(c);
+                current.append(sequence.charAt(++i));
+            } else if (inQuote && c == quoteChar) {
+                inQuote = false;
+                current.append(c);
+            } else if (inQuote) {
+                current.append(c);
+            } else if (c == '(') {
+                if (parenDepth == 0 && current.length() > 0) {
+                    elements.add(current.toString());
+                    current = new StringBuilder();
+                }
                 parenDepth++;
                 current.append(c);
             } else if (c == ')') {
