@@ -131,7 +131,7 @@ public class MD5Utils {
         }
         byte[] salt = new byte[length];
         new SecureRandom().nextBytes(salt);
-        return Base64Utils.encode(salt);
+        return Base64Utils.encrypt(salt);
     }
 
     /**
