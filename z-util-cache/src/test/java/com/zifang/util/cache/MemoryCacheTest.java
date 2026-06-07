@@ -4,212 +4,250 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.junit.Assert.*;
 
 /**
- * Unit tests for MemoryCache implementation.
- */
-/**
- * MemoryCacheTest类。
+ * MemoryCache / LoadingCache 单元测试。
  */
 public class MemoryCacheTest {
 
-    private MemoryCache cache;
+    private Cache<String, String> cache;
 
     @Before
-    /**
-     * setUp方法。
-     */
     public void setUp() {
-        cache = new MemoryCache("test-cache", 16);
+        cache = CacheBuilder.<String, String>newBuilder()
+                .name("test")
+                .recordStats()
+                .build();
     }
 
     @After
-    /**
-     * tearDown方法。
-     */
     public void tearDown() {
-        cache.clear();
         cache.shutdown();
     }
 
+    // ==================== 基础 CRUD ====================
+
     @Test
-    /**
-     * testGetName方法。
-     */
-    public void testGetName() {
-        assertEquals("test-cache", cache.getName());
+    public void testName() {
+        assertEquals("test", cache.getName());
     }
 
     @Test
-    /**
-     * testPutAndGet方法。
-     */
     public void testPutAndGet() {
-        cache.put("key1", "value1");
-        assertEquals("value1", cache.get("key1"));
-    }
-
-    @Test
-    /**
-     * testGetNonExistentKey方法。
-     */
-    public void testGetNonExistentKey() {
-        assertNull(cache.get("non-existent"));
-    }
-
-    @Test
-    /**
-     * testPutWithTTL方法。
-     */
-    public void testPutWithTTL() throws InterruptedException {
-        cache.put("ttl-key", "ttl-value", 1);
-        assertEquals("ttl-value", cache.get("ttl-key"));
-        
-        // Wait for expiration
-        Thread.sleep(1500);
-        assertNull(cache.get("ttl-key"));
-    }
-
-    @Test
-    /**
-     * testContains方法。
-     */
-    public void testContains() {
-        cache.put("key1", "value1");
-        assertTrue(cache.contains("key1"));
-        assertFalse(cache.contains("non-existent"));
-    }
-
-    @Test
-    /**
-     * testContainsExpired方法。
-     */
-    public void testContainsExpired() throws InterruptedException {
-        cache.put("ttl-key", "ttl-value", 1);
-        Thread.sleep(1500);
-        assertFalse(cache.contains("ttl-key"));
-    }
-
-    @Test
-    /**
-     * testRemove方法。
-     */
-    public void testRemove() {
-        cache.put("key1", "value1");
-        assertTrue(cache.remove("key1"));
-        assertNull(cache.get("key1"));
-        
-        // Remove non-existent key
-        assertFalse(cache.remove("non-existent"));
-    }
-
-    @Test
-    /**
-     * testClear方法。
-     */
-    public void testClear() {
-        cache.put("key1", "value1");
-        cache.put("key2", "value2");
-        cache.clear();
-        assertNull(cache.get("key1"));
-        assertNull(cache.get("key2"));
-        assertEquals(0, cache.size());
-    }
-
-    @Test
-    /**
-     * testSize方法。
-     */
-    public void testSize() {
-        assertEquals(0, cache.size());
-        cache.put("key1", "value1");
-        assertEquals(1, cache.size());
-        cache.put("key2", "value2");
-        assertEquals(2, cache.size());
-        cache.remove("key1");
-        assertEquals(1, cache.size());
-    }
-
-    @Test
-    /**
-     * testOverwriteValue方法。
-     */
-    public void testOverwriteValue() {
-        cache.put("key1", "value1");
-        cache.put("key1", "value2");
-        assertEquals("value2", cache.get("key1"));
-        assertEquals(1, cache.size());
-    }
-
-    @Test
-    /**
-     * testNullValue方法。
-     */
-    public void testNullValue() {
-        cache.put("null-key", null);
-        assertNull(cache.get("null-key"));
-        assertTrue(cache.contains("null-key"));
-    }
-
-    @Test
-    /**
-     * testCacheWithDefaultTTL方法。
-     */
-    public void testCacheWithDefaultTTL() throws InterruptedException {
-        MemoryCache ttlCache = new MemoryCache("ttl-cache", 16, 1);
-        ttlCache.put("key1", "value1");
-        assertEquals("value1", ttlCache.get("key1"));
-        
-        // Wait long enough for cleanup to run (cleanup runs every 1s)
-        Thread.sleep(2500);
-        assertNull("Entry should be expired and removed", ttlCache.get("key1"));
-        ttlCache.shutdown();
-    }
-
-    @Test
-    /**
-     * testMultiplePuts方法。
-     */
-    public void testMultiplePuts() {
-        for (int i = 0; i < 100; i++) {
-            cache.put("key" + i, "value" + i);
-        }
-        assertEquals(100, cache.size());
-
-        for (int i = 0; i < 100; i++) {
-            assertEquals("value" + i, cache.get("key" + i));
-        }
-    }
-
-    @Test
-    /**
-     * testExportImportRoundtrip方法。
-     */
-    public void testExportImportRoundtrip() throws java.io.IOException {
         cache.put("k1", "v1");
-        cache.put("k2", 42);
-        cache.put("k3", new java.util.HashMap<>());
-
-        java.io.File tmp = java.io.File.createTempFile("cache-test", ".dat");
-        tmp.deleteOnExit();
-
-        cache.exportToFile(tmp.getPath());
-
-        MemoryCache other = new MemoryCache("other");
-        other.importFromFile(tmp.getPath());
-
-        assertEquals("v1", other.get("k1"));
-        assertEquals(42, other.get("k2"));
-        assertNotNull(other.get("k3"));
-        assertEquals(cache.size(), other.size());
+        assertEquals("v1", cache.get("k1"));
     }
 
-    @Test(expected = CacheException.class)
-    /**
-     * testImportFromFileNotFound方法。
-     */
-    public void testImportFromFileNotFound() {
-        cache.importFromFile("/tmp/this_file_definitely_does_not_exist_12345.cache");
+    @Test
+    public void testGetMissReturnsNull() {
+        assertNull(cache.get("absent"));
+    }
+
+    @Test
+    public void testContains() {
+        cache.put("k", "v");
+        assertTrue(cache.contains("k"));
+        assertFalse(cache.contains("absent"));
+    }
+
+    @Test
+    public void testOverwrite() {
+        cache.put("k", "v1");
+        cache.put("k", "v2");
+        assertEquals("v2", cache.get("k"));
+        assertEquals(1, cache.size());
+    }
+
+    @Test
+    public void testRemove() {
+        cache.put("k", "v");
+        assertTrue(cache.remove("k"));
+        assertNull(cache.get("k"));
+        assertFalse(cache.remove("absent"));
+    }
+
+    @Test
+    public void testClear() {
+        cache.put("a", "1"); cache.put("b", "2");
+        cache.invalidateAll();
+        assertEquals(0, cache.size());
+    }
+
+    // ==================== 过期 ====================
+
+    @Test
+    public void testExpireAfterWrite() throws InterruptedException {
+        Cache<String, String> c = CacheBuilder.<String, String>newBuilder()
+                .name("exp-write")
+                .expireAfterWrite(Duration.ofMillis(300))
+                .recordStats()
+                .build();
+        c.put("k", "v");
+        assertEquals("v", c.get("k"));
+        Thread.sleep(500);
+        assertNull(c.get("k"));
+        assertTrue(c.stats().expirationCount() >= 1);
+        c.shutdown();
+    }
+
+    @Test
+    public void testExpireAfterAccess_resetsOnGet() throws InterruptedException {
+        Cache<String, String> c = CacheBuilder.<String, String>newBuilder()
+                .name("exp-access")
+                .expireAfterAccess(Duration.ofMillis(300))
+                .build();
+        c.put("k", "v");
+        Thread.sleep(150);
+        // 在过期前 get 一下，刷新访问时间
+        assertEquals("v", c.get("k"));
+        Thread.sleep(200);
+        // 总共 350ms，但最后一次访问是 200ms 前，没过期
+        assertEquals("v", c.get("k"));
+        Thread.sleep(350);
+        assertNull(c.get("k"));
+        c.shutdown();
+    }
+
+    // ==================== LRU 淘汰 ====================
+
+    @Test
+    public void testMaximumSize_evictsLRU() {
+        Cache<Integer, String> c = CacheBuilder.<Integer, String>newBuilder()
+                .name("lru")
+                .maximumSize(3)
+                .recordStats()
+                .build();
+        c.put(1, "a");
+        c.put(2, "b");
+        c.put(3, "c");
+        c.get(1); // 访问 1，让 2 变 LRU
+        c.put(4, "d"); // 触发淘汰
+        assertNull(c.get(2));
+        assertNotNull(c.get(1));
+        assertNotNull(c.get(3));
+        assertNotNull(c.get(4));
+        assertTrue(c.stats().evictionCount() >= 1);
+        c.shutdown();
+    }
+
+    // ==================== 批量 ====================
+
+    @Test
+    public void testGetAllPresent_skipsMiss() {
+        cache.put("a", "1"); cache.put("b", "2");
+        Map<String, String> got = cache.getAllPresent(java.util.Arrays.asList("a", "absent", "b"));
+        assertEquals(2, got.size());
+        assertEquals("1", got.get("a"));
+        assertEquals("2", got.get("b"));
+    }
+
+    @Test
+    public void testPutAll() {
+        Map<String, String> data = new HashMap<>();
+        data.put("a", "1"); data.put("b", "2");
+        cache.putAll(data);
+        assertEquals("1", cache.get("a"));
+        assertEquals("2", cache.get("b"));
+    }
+
+    // ==================== 统计 ====================
+
+    @Test
+    public void testStats_hitMiss() {
+        cache.put("k", "v");
+        cache.get("k");     // hit
+        cache.get("miss"); // miss
+        assertEquals(1, cache.stats().hitCount());
+        assertEquals(1, cache.stats().missCount());
+        assertEquals(0.5, cache.stats().hitRate(), 0.0001);
+    }
+
+    // ==================== 监听器 ====================
+
+    @Test
+    public void testRemovalListener_explicit() {
+        AtomicInteger calls = new AtomicInteger();
+        Cache<String, String> c = CacheBuilder.<String, String>newBuilder()
+                .name("listener")
+                .addListener(n -> { if (n.getCause() == RemovalListener.RemovalCause.EXPLICIT) calls.incrementAndGet(); })
+                .build();
+        c.put("k", "v");
+        c.remove("k");
+        assertEquals(1, calls.get());
+        c.shutdown();
+    }
+
+    @Test
+    public void testRemovalListener_eviction() {
+        AtomicInteger evictions = new AtomicInteger();
+        Cache<Integer, String> c = CacheBuilder.<Integer, String>newBuilder()
+                .name("evict-listener")
+                .maximumSize(2)
+                .addListener(n -> { if (n.getCause() == RemovalListener.RemovalCause.SIZE_LIMIT) evictions.incrementAndGet(); })
+                .build();
+        c.put(1, "a");
+        c.put(2, "b");
+        c.put(3, "c"); // 触发淘汰
+        c.put(4, "d"); // 再触发一次
+        assertEquals(2, evictions.get());
+        c.shutdown();
+    }
+
+    // ==================== get-or-load ====================
+
+    @Test
+    public void testGetWithLoader_miss() {
+        AtomicInteger calls = new AtomicInteger();
+        String v = cache.get("k", k -> { calls.incrementAndGet(); return "loaded-" + k; });
+        assertEquals("loaded-k", v);
+        assertEquals(1, calls.get());
+        // 第二次取，loader 不再被调
+        assertEquals("loaded-k", cache.get("k"));
+        assertEquals(1, calls.get());
+    }
+
+    @Test
+    public void testGetWithLoader_loaderReturnsNull_doesNotCache() {
+        AtomicInteger calls = new AtomicInteger();
+        cache.get("k", k -> { calls.incrementAndGet(); return null; });
+        assertEquals(1, calls.get());
+        // 第二次再 miss，会再次调 loader
+        cache.get("k", k -> { calls.incrementAndGet(); return null; });
+        assertEquals(2, calls.get());
+    }
+
+    // ==================== asMap ====================
+
+    @Test
+    public void testAsMap_isView() {
+        cache.put("a", "1"); cache.put("b", "2");
+        Map<String, String> view = cache.asMap();
+        assertEquals(2, view.size());
+        assertEquals("1", view.get("a"));
+    }
+
+    // ==================== LoadingCache ====================
+
+    @Test
+    public void testLoadingCache_autoLoad() {
+        AtomicInteger calls = new AtomicInteger();
+        LoadingCache<String, String> lc = CacheBuilder.<String, String>newBuilder()
+                .name("loading")
+                .build(k -> { calls.incrementAndGet(); return "v-" + k; });
+        assertEquals("v-1", lc.get("1"));
+        assertEquals("v-1", lc.get("1")); // 第二次不再调 loader
+        assertEquals(1, calls.get());
+
+        // 批量
+        Map<String, String> all = lc.getAll(java.util.Arrays.asList("2", "3"));
+        assertEquals(2, all.size());
+        assertEquals(3, calls.get());
+        lc.shutdown();
     }
 }

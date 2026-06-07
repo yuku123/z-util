@@ -1,0 +1,119 @@
+package com.zifang.util.cache;
+
+import java.time.Duration;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * 缓存构建器（对标 Guava CacheBuilder / Caffeine）。
+ * <p>
+ * 链式 API + 必填 name + 可选配置：
+ * <pre>{@code
+ *   Cache<String, User> cache = CacheBuilder.<String, User>newBuilder()
+ *       .name("user-cache")
+ *       .maximumSize(10_000)
+ *       .expireAfterWrite(Duration.ofMinutes(5))
+ *       .expireAfterAccess(Duration.ofMinutes(2))
+ *       .recordStats()
+ *       .addListener((n) -> log.info("evicted {}", n.getKey()))
+ *       .build();
+ *
+ *   LoadingCache<String, User> loading = CacheBuilder.<String, User>newBuilder()
+ *       .name("loading-user")
+ *       .maximumSize(10_000)
+ *       .build(loader);   // 传入 CacheLoader 得到 LoadingCache
+ * }</pre>
+ *
+ * @param <K> 键类型
+ * @param <V> 值类型
+ */
+public class CacheBuilder<K, V> {
+
+    private String name = "cache-" + System.nanoTime();
+    private long maximumSize = -1L;            // -1 表示无界
+    private long expireAfterWriteNanos = -1L;  // -1 表示不过期
+    private long expireAfterAccessNanos = -1L; // -1 表示不过期
+    private long initialCapacity = 16;
+    private boolean recordStats = false;
+    private final Set<RemovalListener<K, V>> listeners = new HashSet<>();
+
+    private CacheBuilder() {}
+
+    public static <K, V> CacheBuilder<K, V> newBuilder() {
+        return new CacheBuilder<>();
+    }
+
+    public CacheBuilder<K, V> name(String name) {
+        if (name == null || name.isEmpty()) throw new IllegalArgumentException("name must not be empty");
+        this.name = name;
+        return this;
+    }
+
+    public CacheBuilder<K, V> initialCapacity(int initialCapacity) {
+        if (initialCapacity <= 0) throw new IllegalArgumentException("initialCapacity must be > 0");
+        this.initialCapacity = initialCapacity;
+        return this;
+    }
+
+    /**
+     * 设置最大条目数。超过时按 LRU 淘汰。{@code -1} 或不调用表示无界。
+     */
+    public CacheBuilder<K, V> maximumSize(long maximumSize) {
+        if (maximumSize < 0 && maximumSize != -1) {
+            throw new IllegalArgumentException("maximumSize must be >= 0 or -1 (unbounded)");
+        }
+        this.maximumSize = maximumSize;
+        return this;
+    }
+
+    /**
+     * 写入后存活时间。{@code Duration.ZERO} 或不调用表示不过期。
+     */
+    public CacheBuilder<K, V> expireAfterWrite(Duration duration) {
+        this.expireAfterWriteNanos = duration == null ? -1L : duration.toNanos();
+        return this;
+    }
+
+    /**
+     * 最后一次访问后空闲时间（含 get 也会刷新）。{@code Duration.ZERO} 或不调用表示不过期。
+     */
+    public CacheBuilder<K, V> expireAfterAccess(Duration duration) {
+        this.expireAfterAccessNanos = duration == null ? -1L : duration.toNanos();
+        return this;
+    }
+
+    public CacheBuilder<K, V> recordStats() {
+        this.recordStats = true;
+        return this;
+    }
+
+    public CacheBuilder<K, V> addListener(RemovalListener<K, V> listener) {
+        if (listener != null) this.listeners.add(listener);
+        return this;
+    }
+
+    /**
+     * 构建一个普通 {@link Cache}。
+     */
+    public Cache<K, V> build() {
+        return new MemoryCache<>(this);
+    }
+
+    /**
+     * 构建一个 {@link LoadingCache}，loader 在 key 缺失时被调用。
+     */
+    public LoadingCache<K, V> build(CacheLoader<K, V> loader) {
+        if (loader == null) throw new IllegalArgumentException("loader must not be null");
+        return new LoadingMemoryCache<>(this, loader);
+    }
+
+    // ==================== 包内可见的访问器（供 MemoryCache 使用） ====================
+
+    String getName() { return name; }
+    long getMaximumSize() { return maximumSize; }
+    long getExpireAfterWriteNanos() { return expireAfterWriteNanos; }
+    long getExpireAfterAccessNanos() { return expireAfterAccessNanos; }
+    long getInitialCapacity() { return initialCapacity; }
+    boolean isRecordStats() { return recordStats; }
+    Set<RemovalListener<K, V>> getListeners() { return listeners; }
+}

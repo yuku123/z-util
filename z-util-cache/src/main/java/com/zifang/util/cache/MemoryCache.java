@@ -1,337 +1,377 @@
 package com.zifang.util.cache;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
 
 /**
- * In-memory cache implementation with optional TTL support.
- * Uses ConcurrentHashMap for thread-safety and ScheduledExecutorService for expiration.
+ * 基于 LinkedHashMap(accessOrder=true) 的内存缓存实现。
+ * <p>
+ * 核心能力：
+ * <ul>
+ *   <li>LRU 淘汰（通过 {@link LinkedHashMap} 的 access-order）</li>
+ *   <li>{@code expireAfterWrite}：写入后存活 N 纳秒后过期</li>
+ *   <li>{@code expireAfterAccess}：最后一次访问后 N 纳秒未访问则过期（get 也会刷新）</li>
+ *   <li>统计（hit / miss / eviction / expiration / load 计数）</li>
+ *   <li>移除回调（按 cause 分类）</li>
+ *   <li>定时清理线程（守护）</li>
+ * </ul>
+ * 线程安全：所有写操作在 synchronized 块中完成；读操作也走 synchronized（简单实现）。
+ * <p>
+ * 通过 {@link CacheBuilder} 构造，{@link #MemoryCache(CacheBuilder)} 包内可见。
  */
-/**
- * MemoryCache类。
- */
-/**
- * MemoryCache类。
- */
-public class MemoryCache implements Cache {
+public class MemoryCache<K, V> implements Cache<K, V> {
 
     private final String name;
-    private final Map<String, CacheEntry> cache;
+    private final long maximumSize;
+    private final long expireAfterWriteNanos;
+    private final long expireAfterAccessNanos;
+    private final long cleanupIntervalNanos;
+    private final boolean recordStats;
+    private final Set<RemovalListener<K, V>> listeners;
+
+    private final LinkedHashMap<K, Node<K, V>> data;
+    private final CacheStats stats = new CacheStats();
     private final ScheduledExecutorService scheduler;
-    private final long defaultTtlSeconds;
+    private final AtomicLong approximateSize = new AtomicLong(0L);
+    private volatile boolean shutdown = false;
 
     /**
-     * Create a new in-memory cache with the given name.
-     *
-     * @param name cache name
+     * 包内可见的构造器（从 {@link CacheBuilder} 读取配置）。
+     * 由于 LinkedHashMap 的 accessOrder 特性（访问时把节点移到队尾），
+     * 我们需要 synchronize 才能安全地修改 map。
      */
-    /**
-     * MemoryCache方法。
-     *      * @param name String类型参数
-     */
-    /**
-     * MemoryCache方法。
-     *      * @param name String类型参数
-     */
-    public MemoryCache(String name) {
-        this(name, 16, 0);
-    }
-
-    /**
-     * Create a new in-memory cache with specified initial capacity and no expiration.
-     *
-     * @param name           cache name
-     * @param initialCapacity initial capacity
-     */
-    /**
-     * MemoryCache方法。
-     *      * @param name String类型参数
-     * @param initialCapacity int类型参数
-     */
-    /**
-     * MemoryCache方法。
-     *      * @param name String类型参数
-     * @param initialCapacity int类型参数
-     */
-    public MemoryCache(String name, int initialCapacity) {
-        this(name, initialCapacity, 0);
-    }
-
-    /**
-     * Create a new in-memory cache with specified capacity and default TTL.
-     *
-     * @param name           cache name
-     * @param initialCapacity initial capacity
-     * @param defaultTtlSeconds default TTL in seconds, 0 means no expiration
-     */
-    /**
-     * MemoryCache方法。
-     *      * @param name String类型参数
-     * @param initialCapacity int类型参数
-     * @param defaultTtlSeconds long类型参数
-     */
-    /**
-     * MemoryCache方法。
-     *      * @param name String类型参数
-     * @param initialCapacity int类型参数
-     * @param defaultTtlSeconds long类型参数
-     */
-    public MemoryCache(String name, int initialCapacity, long defaultTtlSeconds) {
-        this.name = name;
-        this.defaultTtlSeconds = defaultTtlSeconds;
-        this.cache = new ConcurrentHashMap<>(initialCapacity);
+    MemoryCache(CacheBuilder<K, V> b) {
+        this.name = b.getName();
+        this.maximumSize = b.getMaximumSize();
+        this.expireAfterWriteNanos = b.getExpireAfterWriteNanos();
+        this.expireAfterAccessNanos = b.getExpireAfterAccessNanos();
+        this.recordStats = b.isRecordStats();
+        this.listeners = Collections.unmodifiableSet(new java.util.LinkedHashSet<>(b.getListeners()));
+        int cap = (int) Math.min(b.getInitialCapacity(), Integer.MAX_VALUE);
+        this.data = new LinkedHashMap<>(cap, 0.75f, true);
+        // 清理间隔 = max(1s, min(expire)/4)
+        long minExp = Math.min(
+                expireAfterWriteNanos < 0 ? Long.MAX_VALUE : expireAfterWriteNanos,
+                expireAfterAccessNanos < 0 ? Long.MAX_VALUE : expireAfterAccessNanos);
+        this.cleanupIntervalNanos = minExp < 0 ? TimeUnit.SECONDS.toNanos(30) : Math.max(TimeUnit.SECONDS.toNanos(1), minExp / 4);
         this.scheduler = Executors.newSingleThreadScheduledExecutor(r -> {
             Thread t = new Thread(r, "MemoryCache-" + name + "-cleanup");
             t.setDaemon(true);
             return t;
         });
+        if (cleanupIntervalNanos > 0 && cleanupIntervalNanos < Long.MAX_VALUE / 2) {
+            scheduler.scheduleAtFixedRate(this::cleanupExpired, cleanupIntervalNanos, cleanupIntervalNanos, TimeUnit.NANOSECONDS);
+        }
+    }
 
-        if (defaultTtlSeconds > 0) {
-            scheduleCleanup(defaultTtlSeconds);
+    // ==================== Cache 接口实现 ====================
+
+    @Override
+    public V get(K key) {
+        return getInternal(key, null, false);
+    }
+
+    @Override
+    public V get(K key, Function<? super K, ? extends V> loader) {
+        if (loader == null) throw new IllegalArgumentException("loader must not be null");
+        return getInternal(key, loader, false);
+    }
+
+    @Override
+    public boolean contains(K key) {
+        if (key == null) return false;
+        synchronized (data) {
+            Node<K, V> n = data.get(key);
+            if (n == null) return false;
+            if (isExpired(n)) {
+                // 不立即删除（清理交给后台），但 contains 返回 false
+                return false;
+            }
+            return true;
         }
     }
 
     @Override
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @return Object类型返回值
-     */
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @return Object类型返回值
-     */
-    public Object get(String key) {
-        CacheEntry entry = cache.get(key);
-        if (entry == null) {
-            return null;
+    public Map<K, V> getAllPresent(Iterable<? extends K> keys) {
+        Map<K, V> result = new HashMap<>();
+        synchronized (data) {
+            for (K k : keys) {
+                Node<K, V> n = data.get(k);
+                if (n == null) continue;
+                if (isExpired(n)) continue;
+                touchAccess(n);
+                result.put(k, n.value);
+                if (recordStats) stats.recordHit();
+            }
         }
-        if (entry.isExpired()) {
-            cache.remove(key);
-            return null;
-        }
-        return entry.getValue();
+        return result;
     }
 
     @Override
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     */
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     */
-    public void put(String key, Object value) {
-        put(key, value, defaultTtlSeconds);
+    public void put(K key, V value) {
+        putInternal(key, value, false);
     }
 
     @Override
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     * @param ttl long类型参数
-     */
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     * @param ttl long类型参数
-     */
-    public void put(String key, Object value, long ttl) {
-        long effectiveTtl = ttl > 0 ? ttl : defaultTtlSeconds;
-        if (effectiveTtl > 0) {
-            cache.put(key, new CacheEntry(value, System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(effectiveTtl)));
-        } else {
-            cache.put(key, new CacheEntry(value, Long.MAX_VALUE));
+    public void put(K key, Function<? super K, ? extends V> loader) {
+        if (loader == null) throw new IllegalArgumentException("loader must not be null");
+        V loaded = loader.apply(key);
+        if (loaded == null) return;
+        putInternal(key, loaded, false);
+    }
+
+    @Override
+    public void putAll(Map<? extends K, ? extends V> map) {
+        for (Map.Entry<? extends K, ? extends V> e : map.entrySet()) {
+            putInternal(e.getKey(), e.getValue(), false);
         }
     }
 
     @Override
-    /**
-     * remove方法。
-     *      * @param key String类型参数
-     * @return boolean类型返回值
-     */
-    /**
-     * remove方法。
-     *      * @param key String类型参数
-     * @return boolean类型返回值
-     */
-    public boolean remove(String key) {
-        return cache.remove(key) != null;
+    public boolean remove(K key) {
+        if (key == null) return false;
+        synchronized (data) {
+            Node<K, V> n = data.remove(key);
+            if (n == null) return false;
+            approximateSize.decrementAndGet();
+            fireRemoval(key, n.value, RemovalListener.RemovalCause.EXPLICIT);
+            return true;
+        }
     }
 
     @Override
-    /**
-     * contains方法。
-     *      * @param key String类型参数
-     * @return boolean类型返回值
-     */
-    /**
-     * contains方法。
-     *      * @param key String类型参数
-     * @return boolean类型返回值
-     */
-    public boolean contains(String key) {
-        CacheEntry entry = cache.get(key);
-        if (entry == null) {
-            return false;
-        }
-        if (entry.isExpired()) {
-            cache.remove(key);
-            return false;
-        }
-        return true;
+    public void invalidateAll() {
+        clear();
     }
 
     @Override
-    /**
-     * clear方法。
-     */
-    /**
-     * clear方法。
-     */
     public void clear() {
-        cache.clear();
+        synchronized (data) {
+            // 复制一份 key-value 用来通知
+            java.util.List<Map.Entry<K, V>> entries = new java.util.ArrayList<>(data.size());
+            for (Map.Entry<K, Node<K, V>> e : data.entrySet()) {
+                entries.add(new java.util.AbstractMap.SimpleEntry<>(e.getKey(), e.getValue().value));
+            }
+            data.clear();
+            approximateSize.set(0L);
+            for (Map.Entry<K, V> e : entries) {
+                fireRemoval(e.getKey(), e.getValue(), RemovalListener.RemovalCause.COLLECTED);
+            }
+        }
     }
 
     @Override
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
+    public long size() {
+        synchronized (data) {
+            return data.size();
+        }
+    }
+
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * Get the current size of the cache.
-     *
-     * @return number of entries (including expired but not yet removed)
-     */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
-    public int size() {
-        return cache.size();
+    @Override
+    public CacheStats stats() {
+        return stats;
     }
 
-    /**
-     * Shutdown the cleanup scheduler.
-     */
-    /**
-     * shutdown方法。
-     */
-    /**
-     * shutdown方法。
-     */
+    @Override
+    public Map<K, V> asMap() {
+        synchronized (data) {
+            // 清理掉过期的，再返回视图
+            cleanupExpiredLocked();
+            return new java.util.AbstractMap<K, V>() {
+                @Override
+                public Set<Map.Entry<K, V>> entrySet() {
+                    Set<Map.Entry<K, V>> set = new java.util.LinkedHashSet<>();
+                    for (Map.Entry<K, Node<K, V>> e : data.entrySet()) {
+                        if (!isExpired(e.getValue())) {
+                            set.add(new java.util.AbstractMap.SimpleEntry<>(e.getKey(), e.getValue().value));
+                        }
+                    }
+                    return set;
+                }
+                @Override public int size() { return entrySet().size(); }
+            };
+        }
+    }
+
+    @Override
+    public Set<RemovalListener<K, V>> removalListeners() {
+        return listeners;
+    }
+
+    @Override
     public void shutdown() {
-        scheduler.shutdown();
+        if (shutdown) return;
+        shutdown = true;
+        scheduler.shutdownNow();
     }
 
-    // ==================== 持久化 ====================
+    // ==================== 内部实现 ====================
 
-    @Override
-    /**
-     * exportToFile方法。
-     *      * @param filePath String类型参数
-     */
-    /**
-     * exportToFile方法。
-     *      * @param filePath String类型参数
-     */
-    public void exportToFile(String filePath) {
-        try (java.io.ObjectOutputStream out = new java.io.ObjectOutputStream(
-                new java.io.BufferedOutputStream(
-                        new java.io.FileOutputStream(filePath)))) {
-            synchronized (cache) {
-                out.writeObject(name);
-                out.writeInt(cache.size());
-                for (Map.Entry<String, CacheEntry> entry : cache.entrySet()) {
-                    if (!entry.getValue().isExpired()) {
-                        out.writeObject(entry.getKey());
-                        out.writeObject(entry.getValue());
-                    }
-                }
+    private V getInternal(K key, Function<? super K, ? extends V> loader, boolean refresh) {
+        if (key == null) {
+            if (recordStats) stats.recordMiss();
+            return null;
+        }
+        synchronized (data) {
+            cleanupExpiredLocked();
+            Node<K, V> n = data.get(key);
+            if (n != null && !isExpired(n)) {
+                touchAccess(n);
+                if (recordStats) stats.recordHit();
+                return n.value;
             }
-        } catch (java.io.IOException e) {
-            throw new CacheException("Failed to export cache to file: " + filePath, e);
-        }
-    }
-
-    @Override
-    /**
-     * importFromFile方法。
-     *      * @param filePath String类型参数
-     */
-    /**
-     * importFromFile方法。
-     *      * @param filePath String类型参数
-     */
-    public void importFromFile(String filePath) {
-        try (java.io.ObjectInputStream in = new java.io.ObjectInputStream(
-                new java.io.BufferedInputStream(
-                        new java.io.FileInputStream(filePath)))) {
-            String exportedName = (String) in.readObject();
-            int size = in.readInt();
-            synchronized (cache) {
-                cache.clear();
-                for (int i = 0; i < size; i++) {
-                    String key = (String) in.readObject();
-                    CacheEntry entry = (CacheEntry) in.readObject();
-                    if (!entry.isExpired()) {
-                        cache.put(key, entry);
-                    }
+            // 缺失或已过期
+            if (recordStats) stats.recordMiss();
+            if (loader == null) {
+                if (n != null) {
+                    // 已过期，移除
+                    data.remove(key);
+                    approximateSize.decrementAndGet();
+                    fireRemoval(key, n.value, expireAfterWriteNanos > 0
+                            ? RemovalListener.RemovalCause.EXPIRED
+                            : RemovalListener.RemovalCause.ACCESS_EXPIRED);
                 }
+                return null;
             }
-        } catch (java.io.IOException | java.lang.ClassNotFoundException e) {
-            throw new CacheException("Failed to import cache from file: " + filePath, e);
+            // 加载
+            V loaded = loadValue(key, loader);
+            if (loaded != null) {
+                putInternalLocked(key, loaded, true);
+            } else {
+                // loader 返回 null：不放入缓存
+            }
+            return loaded;
         }
     }
 
-    private void scheduleCleanup(long ttlSeconds) {
-        scheduler.scheduleAtFixedRate(() -> {
-            long now = System.currentTimeMillis();
-            cache.entrySet().removeIf(entry -> entry.getValue().isExpired());
-        }, ttlSeconds, ttlSeconds, TimeUnit.MILLISECONDS);
+    private V loadValue(K key, Function<? super K, ? extends V> loader) {
+        long t0 = System.nanoTime();
+        try {
+            V v = loader.apply(key);
+            if (recordStats) stats.recordLoadSuccess(System.nanoTime() - t0);
+            return v;
+        } catch (RuntimeException ex) {
+            if (recordStats) stats.recordLoadFailure(System.nanoTime() - t0);
+            throw ex;
+        } catch (Throwable t) {
+            if (recordStats) stats.recordLoadFailure(System.nanoTime() - t0);
+            throw new RuntimeException("CacheLoader failed for key " + key, t);
+        }
     }
 
-    /**
-     * Cache entry with value and expiration time.
-     */
-    private static class CacheEntry implements java.io.Serializable {
-        private static final long serialVersionUID = 1L;
-        private final Object value;
-        private final long expirationTime; // 0 means no expiration
-
-        CacheEntry(Object value, long expirationTime) {
-            this.value = value;
-            this.expirationTime = expirationTime;
+    private void putInternal(K key, V value, boolean fromLoader) {
+        if (key == null) throw new IllegalArgumentException("key must not be null");
+        if (value == null) {
+            // null value: 视作删除
+            remove(key);
+            return;
         }
-
-        Object getValue() {
-            return value;
+        synchronized (data) {
+            putInternalLocked(key, value, fromLoader);
         }
+    }
 
-        boolean isExpired() {
-            return expirationTime > 0 && System.currentTimeMillis() > expirationTime;
+    private void putInternalLocked(K key, V value, boolean fromLoader) {
+        Node<K, V> old = data.get(key);
+        if (old != null) {
+            old.value = value;
+            old.writeNanos = System.nanoTime();
+            old.accessNanos = old.writeNanos;
+            // accessOrder=true，重复 put 会把节点移到队尾（重新标记为最近使用）
+            // 但要显式触发——get 会触发，put 不一定。这里手动 remove+put 强制刷新位置
+            data.remove(key);
+            data.put(key, old);
+            // 覆盖不触发 listener（语义：值更新，不算被移除）
+        } else {
+            Node<K, V> n = new Node<>();
+            n.value = value;
+            n.writeNanos = System.nanoTime();
+            n.accessNanos = n.writeNanos;
+            data.put(key, n);
+            approximateSize.incrementAndGet();
+            enforceCapacity();
         }
+    }
+
+    private void enforceCapacity() {
+        if (maximumSize < 0) return;
+        while (data.size() > maximumSize) {
+            // 淘汰最久未使用（accessOrder 队首）
+            K eldestKey = data.keySet().iterator().next();
+            Node<K, V> evicted = data.remove(eldestKey);
+            approximateSize.decrementAndGet();
+            if (recordStats) stats.recordEviction();
+            fireRemoval(eldestKey, evicted.value, RemovalListener.RemovalCause.SIZE_LIMIT);
+        }
+    }
+
+    private boolean isExpired(Node<K, V> n) {
+        long now = System.nanoTime();
+        if (expireAfterWriteNanos > 0 && now - n.writeNanos >= expireAfterWriteNanos) return true;
+        if (expireAfterAccessNanos > 0 && now - n.accessNanos >= expireAfterAccessNanos) return true;
+        return false;
+    }
+
+    private void touchAccess(Node<K, V> n) {
+        n.accessNanos = System.nanoTime();
+    }
+
+    private void cleanupExpired() {
+        synchronized (data) {
+            cleanupExpiredLocked();
+        }
+    }
+
+    private void cleanupExpiredLocked() {
+        if (data.isEmpty()) return;
+        // 必须先复制 keySet 再迭代删除
+        java.util.List<K> expiredKeys = new java.util.ArrayList<>();
+        for (Map.Entry<K, Node<K, V>> e : data.entrySet()) {
+            if (isExpired(e.getValue())) {
+                expiredKeys.add(e.getKey());
+            }
+        }
+        for (K k : expiredKeys) {
+            Node<K, V> n = data.remove(k);
+            approximateSize.decrementAndGet();
+            if (recordStats) stats.recordExpiration();
+            // 判断是写过期还是访问过期
+            RemovalListener.RemovalCause cause = (expireAfterWriteNanos > 0
+                    && System.nanoTime() - n.writeNanos >= expireAfterWriteNanos)
+                    ? RemovalListener.RemovalCause.EXPIRED
+                    : RemovalListener.RemovalCause.ACCESS_EXPIRED;
+            fireRemoval(k, n.value, cause);
+        }
+    }
+
+    private void fireRemoval(K key, V value, RemovalListener.RemovalCause cause) {
+        RemovalListener.RemovalNotification<K, V> n = new RemovalListener.RemovalNotification<>(key, value, cause);
+        for (RemovalListener<K, V> l : listeners) {
+            try {
+                l.onRemoval(n);
+            } catch (RuntimeException ignored) {
+                // 监听器异常不影响主流程
+            }
+        }
+    }
+
+    /** 内部节点。value 可变，write/access 时间戳用于过期判定。 */
+    private static final class Node<K, V> {
+        volatile V value;
+        volatile long writeNanos;
+        volatile long accessNanos;
     }
 }

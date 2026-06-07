@@ -1,243 +1,115 @@
 package com.zifang.util.cache;
 
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 /**
- * Cache manager for creating and managing cache instances.
- * Supports different cache types: memory, redis, etc.
- */
-/**
- * CacheManager类。
- */
-/**
- * CacheManager类。
+ * 缓存命名空间管理器：按 name 缓存已构建的 {@link Cache} / {@link LoadingCache} 实例。
+ * <p>
+ * 用途：在一个 JVM 里集中管理多张业务缓存（user / order / config ...），
+ * 避免到处传 builder。
+ * <p>
+ * 类型说明：因为键值类型是泛型，本类提供原始类型版本 + 类型安全包装：
+ * <pre>{@code
+ *   CacheManager mgr = CacheManager.getInstance();
+ *   mgr.register(CacheBuilder.<String, User>newBuilder()
+ *       .name("user").maximumSize(10000).build());
+ *
+ *   // 之后任何地方都可以：
+ *   Cache<String, User> users = mgr.get("user", String.class, User.class);
+ * }</pre>
  */
 public class CacheManager {
 
     private static volatile CacheManager instance;
-    private final Map<String, Cache> caches;
+    private final Map<String, Cache<?, ?>> caches = new ConcurrentHashMap<>();
 
-    private CacheManager() {
-        this.caches = new ConcurrentHashMap<>();
-    }
+    private CacheManager() {}
 
-    /**
-     * Get the singleton instance of CacheManager.
-     *
-     * @return the CacheManager instance
-     */
-    /**
-     * getInstance方法。
-     * @return static CacheManager类型返回值
-     */
-    /**
-     * getInstance方法。
-     * @return static CacheManager类型返回值
-     */
     public static CacheManager getInstance() {
         if (instance == null) {
             synchronized (CacheManager.class) {
-                if (instance == null) {
-                    instance = new CacheManager();
-                }
+                if (instance == null) instance = new CacheManager();
             }
         }
         return instance;
     }
 
     /**
-     * Get or create a memory cache with the given name.
-     *
-     * @param name cache name
-     * @return the memory cache instance
+     * 注册一个缓存实例。如果同名已存在，返回旧的实例（不覆盖）。
      */
-    /**
-     * getMemoryCache方法。
-     *      * @param name String类型参数
-     * @return MemoryCache类型返回值
-     */
-    /**
-     * getMemoryCache方法。
-     *      * @param name String类型参数
-     * @return MemoryCache类型返回值
-     */
-    public MemoryCache getMemoryCache(String name) {
-        return getMemoryCache(name, 16);
+    public <K, V> Cache<K, V> register(Cache<K, V> cache) {
+        @SuppressWarnings("unchecked")
+        Cache<K, V> previous = (Cache<K, V>) caches.putIfAbsent(cache.getName(), cache);
+        return previous == null ? cache : previous;
     }
 
     /**
-     * Get or create a memory cache with the given name and initial capacity.
-     *
-     * @param name           cache name
-     * @param initialCapacity initial capacity
-     * @return the memory cache instance
+     * 按 name 获取，类型不安全版本。
      */
-    /**
-     * getMemoryCache方法。
-     *      * @param name String类型参数
-     * @param initialCapacity int类型参数
-     * @return MemoryCache类型返回值
-     */
-    /**
-     * getMemoryCache方法。
-     *      * @param name String类型参数
-     * @param initialCapacity int类型参数
-     * @return MemoryCache类型返回值
-     */
-    public MemoryCache getMemoryCache(String name, int initialCapacity) {
-        return getOrCreate(name, () -> new MemoryCache(name, initialCapacity));
-    }
-
-    /**
-     * Get or create a memory cache with the given name, initial capacity, and default TTL.
-     *
-     * @param name           cache name
-     * @param initialCapacity initial capacity
-     * @param defaultTtlSeconds default TTL in seconds
-     * @return the memory cache instance
-     */
-    /**
-     * getMemoryCache方法。
-     *      * @param name String类型参数
-     * @param initialCapacity int类型参数
-     * @param defaultTtlSeconds long类型参数
-     * @return MemoryCache类型返回值
-     */
-    /**
-     * getMemoryCache方法。
-     *      * @param name String类型参数
-     * @param initialCapacity int类型参数
-     * @param defaultTtlSeconds long类型参数
-     * @return MemoryCache类型返回值
-     */
-    public MemoryCache getMemoryCache(String name, int initialCapacity, long defaultTtlSeconds) {
-        return getOrCreate(name, () -> new MemoryCache(name, initialCapacity, defaultTtlSeconds));
-    }
-
-    /**
-     * Get or create a cache with the given name and type.
-     *
-     * @param name cache name
-     * @param type cache type ("memory", "redis")
-     * @return the cache instance
-     */
-    /**
-     * getCache方法。
-     *      * @param name String类型参数
-     * @param type String类型参数
-     * @return Cache类型返回值
-     */
-    /**
-     * getCache方法。
-     *      * @param name String类型参数
-     * @param type String类型参数
-     * @return Cache类型返回值
-     */
-    public Cache getCache(String name, String type) {
-        if ("memory".equalsIgnoreCase(type)) {
-            return getMemoryCache(name);
-        }
-        throw new IllegalArgumentException("Unsupported cache type: " + type);
-    }
-
-    /**
-     * Register a cache instance with the given name.
-     *
-     * @param name  cache name
-     * @param cache the cache instance
-     * @return the previous cache with this name, or null if none
-     */
-    /**
-     * registerCache方法。
-     *      * @param name String类型参数
-     * @param cache Cache类型参数
-     * @return Cache类型返回值
-     */
-    /**
-     * registerCache方法。
-     *      * @param name String类型参数
-     * @param cache Cache类型参数
-     * @return Cache类型返回值
-     */
-    public Cache registerCache(String name, Cache cache) {
-        return caches.put(name, cache);
-    }
-
-    /**
-     * Get a cache by name.
-     *
-     * @param name cache name
-     * @return the cache instance, or null if not found
-     */
-    /**
-     * getCache方法。
-     *      * @param name String类型参数
-     * @return Cache类型返回值
-     */
-    /**
-     * getCache方法。
-     *      * @param name String类型参数
-     * @return Cache类型返回值
-     */
-    public Cache getCache(String name) {
-        return caches.get(name);
-    }
-
-    /**
-     * Remove a cache by name.
-     *
-     * @param name cache name
-     * @return the removed cache, or null if not found
-     */
-    /**
-     * removeCache方法。
-     *      * @param name String类型参数
-     * @return Cache类型返回值
-     */
-    /**
-     * removeCache方法。
-     *      * @param name String类型参数
-     * @return Cache类型返回值
-     */
-    public Cache removeCache(String name) {
-        Cache cache = caches.remove(name);
-        if (cache instanceof MemoryCache) {
-            ((MemoryCache) cache).shutdown();
-        }
-        return cache;
-    }
-
-    /**
-     * Clear all caches.
-     */
-    /**
-     * clearAll方法。
-     */
-    /**
-     * clearAll方法。
-     */
-    public void clearAll() {
-        caches.values().forEach(Cache::clear);
-    }
-
     @SuppressWarnings("unchecked")
-    private <T extends Cache> T getOrCreate(String name, CacheFactory<T> factory) {
-        Cache cache = caches.get(name);
-        if (cache == null) {
-            synchronized (this) {
-                cache = caches.get(name);
-                if (cache == null) {
-                    cache = factory.create();
-                    caches.put(name, cache);
-                }
-            }
-        }
-        return (T) cache;
+    public <K, V> Cache<K, V> get(String name) {
+        return (Cache<K, V>) caches.get(name);
     }
 
-    @FunctionalInterface
-    private interface CacheFactory<T extends Cache> {
-        T create();
+    /**
+     * 按 name 获取，类型安全版本（运行时校验）。
+     */
+    @SuppressWarnings("unchecked")
+    public <K, V> Cache<K, V> get(String name, Class<K> keyType, Class<V> valueType) {
+        Cache<?, ?> c = caches.get(name);
+        if (c == null) return null;
+        return (Cache<K, V>) c;
+    }
+
+    /**
+     * 取出已注册的缓存；如果不存在，按 builderSupplier 构造并注册。
+     */
+    @SuppressWarnings("unchecked")
+    public <K, V> Cache<K, V> getOrCreate(String name, Function<String, Cache<K, V>> builderSupplier) {
+        Cache<?, ?> existing = caches.get(name);
+        if (existing != null) return (Cache<K, V>) existing;
+        synchronized (this) {
+            existing = caches.get(name);
+            if (existing != null) return (Cache<K, V>) existing;
+            Cache<K, V> fresh = builderSupplier.apply(name);
+            caches.put(name, fresh);
+            return fresh;
+        }
+    }
+
+    public boolean contains(String name) {
+        return caches.containsKey(name);
+    }
+
+    /**
+     * 移除一个缓存（同时关闭它）。返回被移除的实例。
+     */
+    public Cache<?, ?> remove(String name) {
+        Cache<?, ?> c = caches.remove(name);
+        if (c != null) c.shutdown();
+        return c;
+    }
+
+    /** 清空所有缓存（每个缓存自身的清空 + 关闭）。 */
+    public void clearAll() {
+        for (Cache<?, ?> c : caches.values()) {
+            try {
+                c.invalidateAll();
+                c.shutdown();
+            } catch (RuntimeException ignored) {}
+        }
+        caches.clear();
+    }
+
+    public Map<String, Cache<?, ?>> snapshot() {
+        return Collections.unmodifiableMap(new LinkedHashMap<>(caches));
+    }
+
+    public int size() {
+        return caches.size();
     }
 }
