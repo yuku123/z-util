@@ -22,40 +22,26 @@ MODULES = [
 
 
 def has_proper_javadoc(content, decl_start):
-    """检查声明前是否有格式正确的 Javadoc"""
+    """检查声明前是否有紧贴的、格式正确的 Javadoc（不被其他非空白内容隔开）"""
     if decl_start == 0:
         return False
-    
-    # 在 decl_start 之前找 /**
-    # 从 decl_start 往前找（最多回溯5000字符）
-    search_start = max(0, decl_start - 5000)
-    search_region = content[search_start:decl_start]
-    
-    # 找到最后一个 /**
-    javadoc_idx = search_region.rfind('/**')
-    if javadoc_idx == -1:
+
+    # 1. 从 decl_start 向前跳过空白，找到最近的 */
+    i = decl_start
+    while i > 0 and content[i - 1] in ' \t\n\r':
+        i -= 1
+    # i 现在指向 decl_start 之前第一个非空白字符的下一位
+    if i < 2 or content[i - 2:i] != '*/':
         return False
-    
-    # 检查 /** 前面是否只有空白（换行、空格、TAB）
-    before_javadoc = search_region[:javadoc_idx]
-    if before_javadoc.strip():
-        # /** 前有非空白内容，这不是给当前声明的 Javadoc
-        return False
-    
-    # 找对应的 */
-    absolute_javadoc_start = search_start + javadoc_idx
-    end = content.find('*/', absolute_javadoc_start + 3)
-    if end == -1:
-        return False
-    
-    # 检查 */ 是否在 decl_start 之前
-    if end >= decl_start:
-        return False
-    
-    # 检查 */ 和 decl_start 之间是否只有空白
-    between = content[end + 2:decl_start]
-    if between.strip() == '':
-        return True
+
+    # 2. 从 i 继续向前找匹配的 /**
+    #    i 指向 */ 之后的位置。i-2 指向 *，i-3 是 * 前的字符。
+    #    向前找形如 "/**" 的三字符序列。
+    j = i - 3
+    while j >= 2:
+        if content[j - 2:j + 1] == '/**':
+            return True
+        j -= 1
     return False
 
 
