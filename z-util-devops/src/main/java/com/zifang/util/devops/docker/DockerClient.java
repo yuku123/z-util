@@ -28,6 +28,9 @@ import java.util.List;
 /**
  * DockerClient类。
  */
+/**
+ * DockerClient类。
+ */
 public class DockerClient {
 
     private final String dockerHost;
@@ -35,6 +38,9 @@ public class DockerClient {
 
     /**
      * 使用默认 docker socket
+     */
+    /**
+     * DockerClient方法。
      */
     /**
      * DockerClient方法。
@@ -47,6 +53,10 @@ public class DockerClient {
      * 指定 docker host
      *
      * @param dockerHost unix:///var/run/docker.sock 或 tcp://host:2375
+     */
+    /**
+     * DockerClient方法。
+     *      * @param dockerHost String类型参数
      */
     /**
      * DockerClient方法。
@@ -129,6 +139,11 @@ public class DockerClient {
      *      * @param all boolean类型参数
      * @return List<ContainerDTO>类型返回值
      */
+    /**
+     * listContainers方法。
+     *      * @param all boolean类型参数
+     * @return List<ContainerDTO>类型返回值
+     */
     public List<ContainerDTO> listContainers(boolean all) {
         String[] cmd = dockerCmd("ps", "-a", "--format", "{{json .}}");
         String output = execToString(cmd);
@@ -156,12 +171,20 @@ public class DockerClient {
      * listAllContainers方法。
      * @return List<ContainerDTO>类型返回值
      */
+    /**
+     * listAllContainers方法。
+     * @return List<ContainerDTO>类型返回值
+     */
     public List<ContainerDTO> listAllContainers() {
         return listContainers(true);
     }
 
     /**
      * 列出运行中的容器
+     */
+    /**
+     * listRunningContainers方法。
+     * @return List<ContainerDTO>类型返回值
      */
     /**
      * listRunningContainers方法。
@@ -178,6 +201,13 @@ public class DockerClient {
      * @param name    容器名
      * @param cmd     启动命令
      * @return 容器ID
+     */
+    /**
+     * createContainer方法。
+     *      * @param image String类型参数
+     * @param name String类型参数
+     * @param cmd String...类型参数
+     * @return String类型返回值
      */
     /**
      * createContainer方法。
@@ -203,6 +233,10 @@ public class DockerClient {
      * startContainer方法。
      *      * @param containerIdOrName String类型参数
      */
+    /**
+     * startContainer方法。
+     *      * @param containerIdOrName String类型参数
+     */
     public void startContainer(String containerIdOrName) {
         execToStringSilently(dockerCmd("start", containerIdOrName));
     }
@@ -214,12 +248,20 @@ public class DockerClient {
      * stopContainer方法。
      *      * @param containerIdOrName String类型参数
      */
+    /**
+     * stopContainer方法。
+     *      * @param containerIdOrName String类型参数
+     */
     public void stopContainer(String containerIdOrName) {
         execToStringSilently(dockerCmd("stop", containerIdOrName));
     }
 
     /**
      * 重启容器
+     */
+    /**
+     * restartContainer方法。
+     *      * @param containerIdOrName String类型参数
      */
     /**
      * restartContainer方法。
@@ -240,6 +282,11 @@ public class DockerClient {
      *      * @param containerIdOrName String类型参数
      * @param force boolean类型参数
      */
+    /**
+     * removeContainer方法。
+     *      * @param containerIdOrName String类型参数
+     * @param force boolean类型参数
+     */
     public void removeContainer(String containerIdOrName, boolean force) {
         String[] cmd = force
                 ? dockerCmd("rm", "-f", containerIdOrName)
@@ -249,6 +296,10 @@ public class DockerClient {
 
     /**
      * 强制删除容器
+     */
+    /**
+     * forceRemoveContainer方法。
+     *      * @param containerIdOrName String类型参数
      */
     /**
      * forceRemoveContainer方法。
@@ -265,6 +316,10 @@ public class DockerClient {
      * pauseContainer方法。
      *      * @param containerIdOrName String类型参数
      */
+    /**
+     * pauseContainer方法。
+     *      * @param containerIdOrName String类型参数
+     */
     public void pauseContainer(String containerIdOrName) {
         execToStringSilently(dockerCmd("pause", containerIdOrName));
     }
@@ -276,12 +331,20 @@ public class DockerClient {
      * unpauseContainer方法。
      *      * @param containerIdOrName String类型参数
      */
+    /**
+     * unpauseContainer方法。
+     *      * @param containerIdOrName String类型参数
+     */
     public void unpauseContainer(String containerIdOrName) {
         execToStringSilently(dockerCmd("unpause", containerIdOrName));
     }
 
     /**
      * 杀掉容器
+     */
+    /**
+     * killContainer方法。
+     *      * @param containerIdOrName String类型参数
      */
     /**
      * killContainer方法。
@@ -299,12 +362,22 @@ public class DockerClient {
      *      * @param containerIdOrName String类型参数
      * @param newName String类型参数
      */
+    /**
+     * renameContainer方法。
+     *      * @param containerIdOrName String类型参数
+     * @param newName String类型参数
+     */
     public void renameContainer(String containerIdOrName, String newName) {
         execToStringSilently(dockerCmd("rename", containerIdOrName, newName));
     }
 
     /**
      * 获取容器详细信息
+     */
+    /**
+     * inspectContainer方法。
+     *      * @param containerIdOrName String类型参数
+     * @return ContainerDTO类型返回值
      */
     /**
      * inspectContainer方法。
@@ -349,6 +422,12 @@ public class DockerClient {
      * @param tail int类型参数
      * @return String类型返回值
      */
+    /**
+     * getContainerLogs方法。
+     *      * @param containerIdOrName String类型参数
+     * @param tail int类型参数
+     * @return String类型返回值
+     */
     public String getContainerLogs(String containerIdOrName, Integer tail) {
         String[] cmd;
         if (tail != null) {
@@ -361,6 +440,11 @@ public class DockerClient {
 
     /**
      * 获取容器日志（最后100行）
+     */
+    /**
+     * getContainerLogs方法。
+     *      * @param containerIdOrName String类型参数
+     * @return String类型返回值
      */
     /**
      * getContainerLogs方法。
@@ -380,6 +464,12 @@ public class DockerClient {
      * @param command String...类型参数
      * @return String类型返回值
      */
+    /**
+     * execContainer方法。
+     *      * @param containerIdOrName String类型参数
+     * @param command String...类型参数
+     * @return String类型返回值
+     */
     public String execContainer(String containerIdOrName, String... command) {
         List<String> cmdList = new ArrayList<>(Arrays.asList("docker", "-H", dockerHost, "exec", containerIdOrName));
         cmdList.addAll(Arrays.asList(command));
@@ -388,6 +478,12 @@ public class DockerClient {
 
     /**
      * 在容器内交互式执行命令
+     */
+    /**
+     * execContainerInteractive方法。
+     *      * @param containerIdOrName String类型参数
+     * @param command String...类型参数
+     * @return String类型返回值
      */
     /**
      * execContainerInteractive方法。
@@ -411,6 +507,13 @@ public class DockerClient {
      * @param tag String类型参数
      * @return String类型返回值
      */
+    /**
+     * commitContainer方法。
+     *      * @param containerIdOrName String类型参数
+     * @param repository String类型参数
+     * @param tag String类型参数
+     * @return String类型返回值
+     */
     public String commitContainer(String containerIdOrName, String repository, String tag) {
         String[] cmd = dockerCmd("commit", containerIdOrName, repository + ":" + tag);
         return execToString(cmd);
@@ -418,6 +521,11 @@ public class DockerClient {
 
     /**
      * 容器文件变更
+     */
+    /**
+     * containerDiff方法。
+     *      * @param containerIdOrName String类型参数
+     * @return List<String>类型返回值
      */
     /**
      * containerDiff方法。
@@ -437,6 +545,11 @@ public class DockerClient {
 
     /**
      * 容器资源使用统计
+     */
+    /**
+     * getContainerStats方法。
+     *      * @param containerIdOrName String类型参数
+     * @return DockerClient.StatsDTO类型返回值
      */
     /**
      * getContainerStats方法。
@@ -485,6 +598,10 @@ public class DockerClient {
      * portContainer方法。
      *      * @param containerIdOrName String类型参数
      */
+    /**
+     * portContainer方法。
+     *      * @param containerIdOrName String类型参数
+     */
     public void portContainer(String containerIdOrName) {
         execToString(dockerCmd("port", containerIdOrName));
     }
@@ -493,6 +610,10 @@ public class DockerClient {
 
     /**
      * 列出所有镜像
+     */
+    /**
+     * listImages方法。
+     * @return List<ImageDTO>类型返回值
      */
     /**
      * listImages方法。
@@ -522,12 +643,22 @@ public class DockerClient {
      *      * @param image String类型参数
      * @param tag String类型参数
      */
+    /**
+     * pullImage方法。
+     *      * @param image String类型参数
+     * @param tag String类型参数
+     */
     public void pullImage(String image, String tag) {
         execToStringSilently(dockerCmd("pull", image + ":" + tag));
     }
 
     /**
      * 推送镜像
+     */
+    /**
+     * pushImage方法。
+     *      * @param image String类型参数
+     * @param tag String类型参数
      */
     /**
      * pushImage方法。
@@ -549,6 +680,11 @@ public class DockerClient {
      *      * @param imageIdOrName String类型参数
      * @param force boolean类型参数
      */
+    /**
+     * removeImage方法。
+     *      * @param imageIdOrName String类型参数
+     * @param force boolean类型参数
+     */
     public void removeImage(String imageIdOrName, boolean force) {
         String[] cmd = force
                 ? dockerCmd("rmi", "-f", imageIdOrName)
@@ -558,6 +694,10 @@ public class DockerClient {
 
     /**
      * 强制删除镜像
+     */
+    /**
+     * forceRemoveImage方法。
+     *      * @param imageIdOrName String类型参数
      */
     /**
      * forceRemoveImage方法。
@@ -576,12 +716,23 @@ public class DockerClient {
      * @param repository String类型参数
      * @param tag String类型参数
      */
+    /**
+     * tagImage方法。
+     *      * @param imageIdOrName String类型参数
+     * @param repository String类型参数
+     * @param tag String类型参数
+     */
     public void tagImage(String imageIdOrName, String repository, String tag) {
         execToStringSilently(dockerCmd("tag", imageIdOrName, repository + ":" + tag));
     }
 
     /**
      * 获取镜像详细信息
+     */
+    /**
+     * inspectImage方法。
+     *      * @param imageIdOrName String类型参数
+     * @return ImageDTO类型返回值
      */
     /**
      * inspectImage方法。
@@ -628,6 +779,13 @@ public class DockerClient {
      * @param tag String类型参数
      * @return String类型返回值
      */
+    /**
+     * buildImage方法。
+     *      * @param dockerFilePath String类型参数
+     * @param imageName String类型参数
+     * @param tag String类型参数
+     * @return String类型返回值
+     */
     public String buildImage(String dockerFilePath, String imageName, String tag) {
         String[] cmd = dockerCmd("build", "-t", imageName + ":" + tag, "-f", dockerFilePath, ".");
         return execToString(cmd);
@@ -635,6 +793,11 @@ public class DockerClient {
 
     /**
      * 镜像历史
+     */
+    /**
+     * imageHistory方法。
+     *      * @param imageIdOrName String类型参数
+     * @return String类型返回值
      */
     /**
      * imageHistory方法。
@@ -655,12 +818,24 @@ public class DockerClient {
      * @param password String类型参数
      * @return int类型返回值
      */
+    /**
+     * login方法。
+     *      * @param registry String类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return int类型返回值
+     */
     public int login(String registry, String username, String password) {
         return execExitCode("docker", "-H", dockerHost, "login", registry, "-u", username, "-p", password);
     }
 
     /**
      * 登出镜像仓库
+     */
+    /**
+     * logout方法。
+     *      * @param registry String类型参数
+     * @return int类型返回值
      */
     /**
      * logout方法。
@@ -677,6 +852,9 @@ public class DockerClient {
     /**
      * pruneImages方法。
      */
+    /**
+     * pruneImages方法。
+     */
     public void pruneImages() {
         execToStringSilently(dockerCmd("image", "prune", "-f"));
     }
@@ -685,6 +863,10 @@ public class DockerClient {
 
     /**
      * 列出所有网络
+     */
+    /**
+     * listNetworks方法。
+     * @return List<NetworkDTO>类型返回值
      */
     /**
      * listNetworks方法。
@@ -725,6 +907,13 @@ public class DockerClient {
      * @param subnet String类型参数
      * @return String类型返回值
      */
+    /**
+     * createNetwork方法。
+     *      * @param name String类型参数
+     * @param driver String类型参数
+     * @param subnet String类型参数
+     * @return String类型返回值
+     */
     public String createNetwork(String name, String driver, String subnet) {
         List<String> cmdList = new ArrayList<>(Arrays.asList("docker", "-H", dockerHost, "network", "create", "--driver", driver));
         if (StringUtils.isNotBlank(subnet)) {
@@ -743,6 +932,11 @@ public class DockerClient {
      *      * @param name String类型参数
      * @return String类型返回值
      */
+    /**
+     * createBridgeNetwork方法。
+     *      * @param name String类型参数
+     * @return String类型返回值
+     */
     public String createBridgeNetwork(String name) {
         return createNetwork(name, "bridge", null);
     }
@@ -754,12 +948,21 @@ public class DockerClient {
      * removeNetwork方法。
      *      * @param networkIdOrName String类型参数
      */
+    /**
+     * removeNetwork方法。
+     *      * @param networkIdOrName String类型参数
+     */
     public void removeNetwork(String networkIdOrName) {
         execToStringSilently(dockerCmd("network", "rm", networkIdOrName));
     }
 
     /**
      * 连接容器到网络
+     */
+    /**
+     * connectContainerToNetwork方法。
+     *      * @param networkIdOrName String类型参数
+     * @param containerIdOrName String类型参数
      */
     /**
      * connectContainerToNetwork方法。
@@ -778,12 +981,22 @@ public class DockerClient {
      *      * @param networkIdOrName String类型参数
      * @param containerIdOrName String类型参数
      */
+    /**
+     * disconnectContainerFromNetwork方法。
+     *      * @param networkIdOrName String类型参数
+     * @param containerIdOrName String类型参数
+     */
     public void disconnectContainerFromNetwork(String networkIdOrName, String containerIdOrName) {
         execToStringSilently(dockerCmd("network", "disconnect", networkIdOrName, containerIdOrName));
     }
 
     /**
      * 获取网络详细信息
+     */
+    /**
+     * inspectNetwork方法。
+     *      * @param networkIdOrName String类型参数
+     * @return NetworkDTO类型返回值
      */
     /**
      * inspectNetwork方法。
@@ -828,6 +1041,10 @@ public class DockerClient {
      * listVolumes方法。
      * @return List<VolumeDTO>类型返回值
      */
+    /**
+     * listVolumes方法。
+     * @return List<VolumeDTO>类型返回值
+     */
     public List<VolumeDTO> listVolumes() {
         String output = execToString(dockerCmd("volume", "ls", "--format", "{{json .}}"));
         List<VolumeDTO> list = new ArrayList<>();
@@ -858,6 +1075,12 @@ public class DockerClient {
      * @param driver String类型参数
      * @return VolumeDTO类型返回值
      */
+    /**
+     * createVolume方法。
+     *      * @param name String类型参数
+     * @param driver String类型参数
+     * @return VolumeDTO类型返回值
+     */
     public VolumeDTO createVolume(String name, String driver) {
         String[] cmd = dockerCmd("volume", "create", "--driver", driver, name);
         execToStringSilently(cmd);
@@ -866,6 +1089,11 @@ public class DockerClient {
 
     /**
      * 创建本地卷
+     */
+    /**
+     * createLocalVolume方法。
+     *      * @param name String类型参数
+     * @return VolumeDTO类型返回值
      */
     /**
      * createLocalVolume方法。
@@ -883,12 +1111,21 @@ public class DockerClient {
      * removeVolume方法。
      *      * @param volumeName String类型参数
      */
+    /**
+     * removeVolume方法。
+     *      * @param volumeName String类型参数
+     */
     public void removeVolume(String volumeName) {
         execToStringSilently(dockerCmd("volume", "rm", volumeName));
     }
 
     /**
      * 获取卷详细信息
+     */
+    /**
+     * inspectVolume方法。
+     *      * @param volumeName String类型参数
+     * @return VolumeDTO类型返回值
      */
     /**
      * inspectVolume方法。
@@ -920,6 +1157,9 @@ public class DockerClient {
     /**
      * pruneVolumes方法。
      */
+    /**
+     * pruneVolumes方法。
+     */
     public void pruneVolumes() {
         execToStringSilently(dockerCmd("volume", "prune", "-f"));
     }
@@ -928,6 +1168,10 @@ public class DockerClient {
 
     /**
      * 获取 Docker 版本
+     */
+    /**
+     * getVersion方法。
+     * @return String类型返回值
      */
     /**
      * getVersion方法。
@@ -949,12 +1193,20 @@ public class DockerClient {
      * getInfo方法。
      * @return String类型返回值
      */
+    /**
+     * getInfo方法。
+     * @return String类型返回值
+     */
     public String getInfo() {
         return execToString(dockerCmd("info", "--format", "{{json .}}"));
     }
 
     /**
      * 检查 docker 是否可用
+     */
+    /**
+     * isDockerAvailable方法。
+     * @return boolean类型返回值
      */
     /**
      * isDockerAvailable方法。
@@ -970,12 +1222,18 @@ public class DockerClient {
     /**
      * pruneBuildCache方法。
      */
+    /**
+     * pruneBuildCache方法。
+     */
     public void pruneBuildCache() {
         execToStringSilently(dockerCmd("builder", "prune", "-f"));
     }
 
     /**
      * 清理所有未使用资源
+     */
+    /**
+     * pruneAll方法。
      */
     /**
      * pruneAll方法。
@@ -988,6 +1246,11 @@ public class DockerClient {
 
     /**
      * 启动 compose 服务
+     */
+    /**
+     * composeUp方法。
+     *      * @param composeFile String类型参数
+     * @param projectName String类型参数
      */
     /**
      * composeUp方法。
@@ -1013,6 +1276,11 @@ public class DockerClient {
      *      * @param composeFile String类型参数
      * @param projectName String类型参数
      */
+    /**
+     * composeDown方法。
+     *      * @param composeFile String类型参数
+     * @param projectName String类型参数
+     */
     public void composeDown(String composeFile, String projectName) {
         List<String> cmd = new ArrayList<>(Arrays.asList("docker", "-H", dockerHost, "compose", "-f", composeFile));
         if (StringUtils.isNotBlank(projectName)) {
@@ -1025,6 +1293,12 @@ public class DockerClient {
 
     /**
      * 查看 compose 服务状态
+     */
+    /**
+     * composePs方法。
+     *      * @param composeFile String类型参数
+     * @param projectName String类型参数
+     * @return String类型返回值
      */
     /**
      * composePs方法。
@@ -1118,10 +1392,18 @@ public class DockerClient {
      * getCpuPercent方法。
      * @return double类型返回值
      */
+    /**
+     * getCpuPercent方法。
+     * @return double类型返回值
+     */
         public double getCpuPercent() {
             return cpuPercent;
         }
 
+    /**
+     * setCpuPercent方法。
+     *      * @param cpuPercent double类型参数
+     */
     /**
      * setCpuPercent方法。
      *      * @param cpuPercent double类型参数
@@ -1134,10 +1416,18 @@ public class DockerClient {
      * getMemoryPercent方法。
      * @return double类型返回值
      */
+    /**
+     * getMemoryPercent方法。
+     * @return double类型返回值
+     */
         public double getMemoryPercent() {
             return memoryPercent;
         }
 
+    /**
+     * setMemoryPercent方法。
+     *      * @param memoryPercent double类型参数
+     */
     /**
      * setMemoryPercent方法。
      *      * @param memoryPercent double类型参数
@@ -1150,10 +1440,18 @@ public class DockerClient {
      * getMemoryUsage方法。
      * @return long类型返回值
      */
+    /**
+     * getMemoryUsage方法。
+     * @return long类型返回值
+     */
         public long getMemoryUsage() {
             return memoryUsage;
         }
 
+    /**
+     * setMemoryUsage方法。
+     *      * @param memoryUsage long类型参数
+     */
     /**
      * setMemoryUsage方法。
      *      * @param memoryUsage long类型参数
@@ -1166,10 +1464,18 @@ public class DockerClient {
      * getMemoryLimit方法。
      * @return long类型返回值
      */
+    /**
+     * getMemoryLimit方法。
+     * @return long类型返回值
+     */
         public long getMemoryLimit() {
             return memoryLimit;
         }
 
+    /**
+     * setMemoryLimit方法。
+     *      * @param memoryLimit long类型参数
+     */
     /**
      * setMemoryLimit方法。
      *      * @param memoryLimit long类型参数
@@ -1182,10 +1488,18 @@ public class DockerClient {
      * getNetworkRx方法。
      * @return long类型返回值
      */
+    /**
+     * getNetworkRx方法。
+     * @return long类型返回值
+     */
         public long getNetworkRx() {
             return networkRx;
         }
 
+    /**
+     * setNetworkRx方法。
+     *      * @param networkRx long类型参数
+     */
     /**
      * setNetworkRx方法。
      *      * @param networkRx long类型参数
@@ -1198,10 +1512,18 @@ public class DockerClient {
      * getNetworkTx方法。
      * @return long类型返回值
      */
+    /**
+     * getNetworkTx方法。
+     * @return long类型返回值
+     */
         public long getNetworkTx() {
             return networkTx;
         }
 
+    /**
+     * setNetworkTx方法。
+     *      * @param networkTx long类型参数
+     */
     /**
      * setNetworkTx方法。
      *      * @param networkTx long类型参数
@@ -1214,10 +1536,18 @@ public class DockerClient {
      * getBlockRead方法。
      * @return long类型返回值
      */
+    /**
+     * getBlockRead方法。
+     * @return long类型返回值
+     */
         public long getBlockRead() {
             return blockRead;
         }
 
+    /**
+     * setBlockRead方法。
+     *      * @param blockRead long类型参数
+     */
     /**
      * setBlockRead方法。
      *      * @param blockRead long类型参数
@@ -1230,10 +1560,18 @@ public class DockerClient {
      * getBlockWrite方法。
      * @return long类型返回值
      */
+    /**
+     * getBlockWrite方法。
+     * @return long类型返回值
+     */
         public long getBlockWrite() {
             return blockWrite;
         }
 
+    /**
+     * setBlockWrite方法。
+     *      * @param blockWrite long类型参数
+     */
     /**
      * setBlockWrite方法。
      *      * @param blockWrite long类型参数
@@ -1246,10 +1584,18 @@ public class DockerClient {
      * getNetworkRxFmt方法。
      * @return String类型返回值
      */
+    /**
+     * getNetworkRxFmt方法。
+     * @return String类型返回值
+     */
         public String getNetworkRxFmt() {
             return formatSize(networkRx);
         }
 
+    /**
+     * getNetworkTxFmt方法。
+     * @return String类型返回值
+     */
     /**
      * getNetworkTxFmt方法。
      * @return String类型返回值
@@ -1262,10 +1608,18 @@ public class DockerClient {
      * getBlockReadFmt方法。
      * @return String类型返回值
      */
+    /**
+     * getBlockReadFmt方法。
+     * @return String类型返回值
+     */
         public String getBlockReadFmt() {
             return formatSize(blockRead);
         }
 
+    /**
+     * getBlockWriteFmt方法。
+     * @return String类型返回值
+     */
     /**
      * getBlockWriteFmt方法。
      * @return String类型返回值

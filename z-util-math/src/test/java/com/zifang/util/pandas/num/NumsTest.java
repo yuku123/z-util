@@ -11,9 +11,15 @@ import static org.junit.Assert.*;
 /**
  * Nums 工具类测试
  */
+/**
+ * NumsTest类。
+ */
 public class NumsTest {
 
     @Test
+    /**
+     * testArrayCreation方法。
+     */
     public void testArrayCreation() {
         // 测试基本数组创建
         int[] intArray = {1, 2, 3, 4, 5};
@@ -23,6 +29,9 @@ public class NumsTest {
     }
 
     @Test
+    /**
+     * testArrayFromList方法。
+     */
     public void testArrayFromList() {
         // 测试从 List 创建数组
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
@@ -32,6 +41,9 @@ public class NumsTest {
     }
 
     @Test
+    /**
+     * testNDim方法。
+     */
     public void testNDim() {
         // 测试维度计算
         int[] oneDim = {1, 2, 3};
@@ -45,6 +57,9 @@ public class NumsTest {
     }
 
     @Test
+    /**
+     * testShape方法。
+     */
     public void testShape() {
         // 测试形状计算
         int[][] twoDim = {{1, 2, 3}, {4, 5, 6}};
@@ -56,6 +71,9 @@ public class NumsTest {
     }
 
     @Test
+    /**
+     * testSize方法。
+     */
     public void testSize() {
         // 测试元素总数计算
         int[][] twoDim = {{1, 2, 3}, {4, 5, 6}};
@@ -65,6 +83,9 @@ public class NumsTest {
 
     @Ignore
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         // 测试字符串表示
         int[] arr = {1, 2, 3};
@@ -77,12 +98,18 @@ public class NumsTest {
     }
 
     @Test(expected = RuntimeException.class)
+    /**
+     * testArrayWithNonArray方法。
+     */
     public void testArrayWithNonArray() {
         // 测试传入非数组时抛出异常
         Nums.array("not an array");
     }
 
     @Test
+    /**
+     * testRandomAccess方法。
+     */
     public void testRandomAccess() {
         // 测试随机数生成器可访问
         assertNotNull(Nums.random);

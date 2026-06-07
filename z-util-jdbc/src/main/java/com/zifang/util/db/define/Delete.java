@@ -25,5 +25,8 @@ package com.zifang.util.db.define;
 /**
  * Delete注解。
  */
+/**
+ * Delete注解。
+ */
 public @interface Delete {
 }

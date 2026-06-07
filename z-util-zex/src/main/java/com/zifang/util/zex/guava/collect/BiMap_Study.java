@@ -38,11 +38,17 @@ import java.util.Map;
  * @author zifang
  * @version 1.0
  */
+/**
+ * BiMap_Study类。
+ */
 public class BiMap_Study {
     /**
      * BiMap基础方法，其他实现类亦有如下方法.
      */
     @Test
+    /**
+     * basicTest方法。
+     */
     public void basicTest() {
         BiMap<String, Integer> nameId = HashBiMap.create();
         initMap(nameId);
@@ -70,6 +76,9 @@ public class BiMap_Study {
     }
 
     @Test
+    /**
+     * otherImpl方法。
+     */
     public void otherImpl() {
         // ImmutableBiMap
         Map<String, Integer> temp = new HashMap<>();

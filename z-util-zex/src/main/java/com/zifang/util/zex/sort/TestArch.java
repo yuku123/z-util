@@ -11,9 +11,16 @@ import org.apache.commons.lang3.ArchUtils;
  * @author zifang
  * @version 1.0
  */
+/**
+ * TestArch类。
+ */
 public class TestArch {
 
     //ArchUtils 系统的信息导出
+    /**
+     * archUtils方法。
+     * @return static void类型返回值
+     */
     public static void archUtils() {
         System.out.println(ArchUtils.getProcessor().getArch());
         System.out.println(ArchUtils.getProcessor().isX86());
@@ -180,6 +187,10 @@ public class TestArch {
      * toString(Object array) 将数组转换为string字符串并返回
      * <p>
      * toStringArray(Object[] array) 将Object数组转换为String数组类型
+     */
+    /**
+     * arrayUtils方法。
+     * @return static void类型返回值
      */
     public static void arrayUtils() {
 
@@ -949,6 +960,11 @@ public class TestArch {
      * StringUtils.trimToEmpty("    abc    ") = "abc"
      */
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         archUtils();
     }

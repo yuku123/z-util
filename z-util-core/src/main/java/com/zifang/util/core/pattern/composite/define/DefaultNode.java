@@ -12,4 +12,7 @@ package com.zifang.util.core.pattern.composite.define;
 /**
  * DefaultNode类。
  */
+/**
+ * DefaultNode类。
+ */
 public class DefaultNode<T> extends AbstractNode {}

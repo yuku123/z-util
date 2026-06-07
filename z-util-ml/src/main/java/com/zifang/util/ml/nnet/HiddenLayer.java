@@ -7,5 +7,8 @@ package com.zifang.util.ml.nnet;
 /**
  * HiddenLayer类。
  */
+/**
+ * HiddenLayer类。
+ */
 public class HiddenLayer {
 }

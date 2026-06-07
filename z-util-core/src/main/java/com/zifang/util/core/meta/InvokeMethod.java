@@ -9,6 +9,9 @@ import java.lang.reflect.Method;
 /**
  * InvokeMethod类。
  */
+/**
+ * InvokeMethod类。
+ */
 public class InvokeMethod {
 
     /***
@@ -24,9 +27,18 @@ public class InvokeMethod {
     /**
      * InvokeMethod方法。
      */
+    /**
+     * InvokeMethod方法。
+     */
     public InvokeMethod() {
     }
 
+    /**
+     * InvokeMethod方法。
+     *      * @param target Object类型参数
+     * @param methodHandle MethodHandle类型参数
+     * @param method Method类型参数
+     */
     /**
      * InvokeMethod方法。
      *      * @param target Object类型参数
@@ -43,10 +55,18 @@ public class InvokeMethod {
      * getTarget方法。
      * @return Object类型返回值
      */
+    /**
+     * getTarget方法。
+     * @return Object类型返回值
+     */
     public Object getTarget() {
         return target;
     }
 
+    /**
+     * setTarget方法。
+     *      * @param target Object类型参数
+     */
     /**
      * setTarget方法。
      *      * @param target Object类型参数
@@ -59,10 +79,18 @@ public class InvokeMethod {
      * getMethodHandle方法。
      * @return MethodHandle类型返回值
      */
+    /**
+     * getMethodHandle方法。
+     * @return MethodHandle类型返回值
+     */
     public MethodHandle getMethodHandle() {
         return methodHandle;
     }
 
+    /**
+     * setMethodHandle方法。
+     *      * @param methodHandle MethodHandle类型参数
+     */
     /**
      * setMethodHandle方法。
      *      * @param methodHandle MethodHandle类型参数
@@ -75,10 +103,18 @@ public class InvokeMethod {
      * getMethod方法。
      * @return Method类型返回值
      */
+    /**
+     * getMethod方法。
+     * @return Method类型返回值
+     */
     public Method getMethod() {
         return method;
     }
 
+    /**
+     * setMethod方法。
+     *      * @param method Method类型参数
+     */
     /**
      * setMethod方法。
      *      * @param method Method类型参数
@@ -92,11 +128,20 @@ public class InvokeMethod {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "InvokeMethod{target=" + target + ", methodHandle=" + methodHandle + ", method=" + method + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -112,6 +157,10 @@ public class InvokeMethod {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

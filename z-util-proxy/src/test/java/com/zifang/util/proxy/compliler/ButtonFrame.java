@@ -15,8 +15,15 @@ public abstract class ButtonFrame extends JFrame {
     protected JButton blueButton;
     protected JButton redButton;
 
+    /**
+     * addEventHandlers方法。
+     * @return abstract void类型返回值
+     */
     protected abstract void addEventHandlers();
 
+    /**
+     * ButtonFrame方法。
+     */
     public ButtonFrame() {
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 

@@ -7,6 +7,9 @@ package com.zifang.util.visuallization.swing.manager.tree;
 /**
  * TreeNode类。
  */
+/**
+ * TreeNode类。
+ */
 public class TreeNode {
     private String id;
     private String name;
@@ -14,6 +17,9 @@ public class TreeNode {
 
     /**
      * 创建树节点
+     */
+    /**
+     * TreeNode方法。
      */
     public TreeNode() {
     }
@@ -23,6 +29,12 @@ public class TreeNode {
      * @param id 节点唯一标识
      * @param name 节点显示名称
      * @param parentId 父节点ID（null表示根节点）
+     */
+    /**
+     * TreeNode方法。
+     *      * @param id String类型参数
+     * @param name String类型参数
+     * @param parentId String类型参数
      */
     public TreeNode(String id, String name, String parentId) {
         this.id = id;
@@ -34,6 +46,10 @@ public class TreeNode {
      * 获取节点ID
      * @return 节点ID
      */
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
     public String getId() {
         return id;
     }
@@ -41,6 +57,10 @@ public class TreeNode {
     /**
      * 设置节点ID
      * @param id 节点ID
+     */
+    /**
+     * setId方法。
+     *      * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -50,6 +70,10 @@ public class TreeNode {
      * 获取节点名称
      * @return 节点名称
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -57,6 +81,10 @@ public class TreeNode {
     /**
      * 设置节点名称
      * @param name 节点名称
+     */
+    /**
+     * setName方法。
+     *      * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -66,6 +94,10 @@ public class TreeNode {
      * 获取父节点ID
      * @return 父节点ID，null表示根节点
      */
+    /**
+     * getParentId方法。
+     * @return String类型返回值
+     */
     public String getParentId() {
         return parentId;
     }
@@ -73,6 +105,10 @@ public class TreeNode {
     /**
      * 设置父节点ID
      * @param parentId 父节点ID
+     */
+    /**
+     * setParentId方法。
+     *      * @param parentId String类型参数
      */
     public void setParentId(String parentId) {
         this.parentId = parentId;
@@ -84,6 +120,10 @@ public class TreeNode {
      * @return 包含id、name和parentId的字符串
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "TreeNode{id=" + id + ", name=" + name + ", parentId=" + parentId + "}";
     }
@@ -96,6 +136,11 @@ public class TreeNode {
      * @return 如果所有属性都相同返回true，否则返回false
      */
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -112,6 +157,10 @@ public class TreeNode {
      * @return 哈希码值
      */
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return java.util.Objects.hash(id, name, parentId);
     }

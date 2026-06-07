@@ -9,8 +9,16 @@ package com.zifang.util.core.lang.primitive;
 /**
  * LongUtil类。
  */
+/**
+ * LongUtil类。
+ */
 public class LongUtil {
 
+    /**
+     * parseLong方法。
+     *      * @param object Object类型参数
+     * @return static Long类型返回值
+     */
     /**
      * parseLong方法。
      *      * @param object Object类型参数
@@ -29,6 +37,12 @@ public class LongUtil {
      * @param defaultValue long类型参数
      * @return static Long类型返回值
      */
+    /**
+     * parseLongOrDefault方法。
+     *      * @param object Object类型参数
+     * @param defaultValue long类型参数
+     * @return static Long类型返回值
+     */
     public static Long parseLongOrDefault(Object object, Long defaultValue) {
         if (null == object) {
             return defaultValue;
@@ -36,6 +50,11 @@ public class LongUtil {
         return Long.parseLong(object.toString());
     }
 
+    /**
+     * length方法。
+     *      * @param value long类型参数
+     * @return static int类型返回值
+     */
     /**
      * length方法。
      *      * @param value long类型参数

@@ -7,10 +7,18 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.channels.SocketChannel;
 
+/**
+ * IntgenClient类。
+ */
 public class IntgenClient {
 
     public static int DEFAULT_PORT = 1919;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         if (args.length == 0) {

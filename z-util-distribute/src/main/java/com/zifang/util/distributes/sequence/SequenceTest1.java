@@ -17,9 +17,15 @@ import org.junit.Test;
 /**
  * SequenceTest1类。
  */
+/**
+ * SequenceTest1类。
+ */
 public class SequenceTest1 {
 
     @Test
+    /**
+     * name方法。
+     */
     /**
      * name方法。
      */

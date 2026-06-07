@@ -6,5 +6,8 @@ package com.zifang.util.db.monitor;
 /**
  * DatasourceDescription类。
  */
+/**
+ * DatasourceDescription类。
+ */
 public class DatasourceDescription {
 }

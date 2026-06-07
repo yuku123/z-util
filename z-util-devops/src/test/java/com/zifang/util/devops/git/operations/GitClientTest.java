@@ -21,12 +21,18 @@ import static org.junit.Assert.*;
  * <p>
  * 使用 JUnit 4。每个测试在临时目录里 init 一个新仓库，互不干扰。
  */
+/**
+ * GitClientTest类。
+ */
 public class GitClientTest {
 
     private File workDir;
     private GitRepository repo;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() throws Exception {
         workDir = createTempDir("git-client-test");
         GitResult<GitRepository> r = GitClient.init(workDir);
@@ -37,11 +43,17 @@ public class GitClientTest {
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() throws Exception {
         deleteRecursive(workDir);
     }
 
     @Test
+    /**
+     * testInit方法。
+     */
     public void testInit() {
         assertNotNull(repo.getGitDir());
         assertTrue(repo.getGitDir().exists());
@@ -49,6 +61,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testOpenAfterInit方法。
+     */
     public void testOpenAfterInit() {
         GitResult<GitRepository> r = GitClient.open(workDir);
         assertTrue(r.isSuccess());
@@ -56,6 +71,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testAddAndCommit方法。
+     */
     public void testAddAndCommit() throws Exception {
         File f = new File(workDir, "hello.txt");
         writeFile(f, "hello world\n");
@@ -81,6 +99,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testLog方法。
+     */
     public void testLog() throws Exception {
         // 没有提交时 log 应返回空
         GitResult<List<GitCommit>> empty = GitClient.log(repo, 10);
@@ -102,6 +123,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testShow方法。
+     */
     public void testShow() throws Exception {
         commitFile("x.txt", "x", "the commit");
         GitResult<List<GitCommit>> log = GitClient.log(repo, 1);
@@ -114,6 +138,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testBranch方法。
+     */
     public void testBranch() throws Exception {
         commitFile("init.txt", "init", "first");
         // 初始应该有 HEAD 指向一个分支（init 后的默认分支名是 master 或 main）
@@ -150,6 +177,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testCheckoutNewBranch方法。
+     */
     public void testCheckoutNewBranch() throws Exception {
         commitFile("init.txt", "init", "first");
         GitResult<Void> r = GitClient.checkoutNewBranch(repo, "dev");
@@ -158,6 +188,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testTag方法。
+     */
     public void testTag() throws Exception {
         commitFile("init.txt", "init", "first");
         GitResult<Void> lt = GitClient.tagCreate(repo, "v0.1");
@@ -177,6 +210,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testResetSoft方法。
+     */
     public void testResetSoft() throws Exception {
         commitFile("a.txt", "a", "first");
         commitFile("b.txt", "b", "second");
@@ -190,6 +226,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testDiff方法。
+     */
     public void testDiff() throws Exception {
         commitFile("a.txt", "line1\n", "first");
         // 修改并 add
@@ -213,6 +252,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testRemoteAddListRemove方法。
+     */
     public void testRemoteAddListRemove() throws Exception {
         GitResult<Void> add = GitClient.remoteAdd(repo, "origin", "https://example.com/foo.git");
         assertTrue(add.isSuccess());
@@ -228,6 +270,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testCommitWithEmptyMessage方法。
+     */
     public void testCommitWithEmptyMessage() {
         GitResult<String> r = GitClient.commit(repo, null, "", false);
         assertFalse(r.isSuccess());
@@ -235,12 +280,18 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testOpenNonExistent方法。
+     */
     public void testOpenNonExistent() {
         GitResult<GitRepository> r = GitClient.open(new File("/tmp/this/does/not/exist/" + System.nanoTime()));
         assertFalse(r.isSuccess());
     }
 
     @Test
+    /**
+     * testShellAvailable方法。
+     */
     public void testShellAvailable() {
         // 不强求 shell 可用，方法本身不能抛异常
         boolean available = GitClient.isShellAvailable();
@@ -249,6 +300,9 @@ public class GitClientTest {
     }
 
     @Test
+    /**
+     * testCleanDryRun方法。
+     */
     public void testCleanDryRun() throws Exception {
         // 未跟踪文件
         writeFile(new File(workDir, "untracked.txt"), "junk");

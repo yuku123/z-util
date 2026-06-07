@@ -13,12 +13,18 @@ import java.nio.channels.SocketChannel;
 /**
  * @author zifang
  */
+/**
+ * NioChannelTest004类。
+ */
 public class NioChannelTest004 {
 
     public static String host = "127.0.0.1";
     private static int port = 50000;
 
     @Test
+    /**
+     * server方法。
+     */
     public void server() throws IOException {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.bind(new InetSocketAddress(host, port));
@@ -37,6 +43,9 @@ public class NioChannelTest004 {
     }
 
     @Test
+    /**
+     * client方法。
+     */
     public void client() throws IOException {
         // 服务端IP地址和端口，与服务端建立连接
         Socket socket = new Socket(host, port);

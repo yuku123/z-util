@@ -8,6 +8,9 @@ package com.zifang.util.ml.nnet;
 /**
  * Layer接口。
  */
+/**
+ * Layer接口。
+ */
 public interface Layer {
 
     /**

@@ -11,5 +11,8 @@ package com.zifang.util.devops.common;
 /**
  * GavInfo类。
  */
+/**
+ * GavInfo类。
+ */
 public class GavInfo {
 }

@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * XGBoostTest类。
+ */
 public class XGBoostTest {
 
     private Random random = new Random(42);
@@ -45,6 +48,9 @@ public class XGBoostTest {
     }
 
     @Test
+    /**
+     * testXGBoostFit方法。
+     */
     public void testXGBoostFit() {
         int nSamples = 80;
         NdArray X = generateClassificationData(nSamples);
@@ -64,6 +70,9 @@ public class XGBoostTest {
     }
 
     @Test
+    /**
+     * testXGBoostRegularization方法。
+     */
     public void testXGBoostRegularization() {
         int nSamples = 60;
         NdArray X = generateClassificationData(nSamples);
@@ -90,6 +99,9 @@ public class XGBoostTest {
     }
 
     @Test
+    /**
+     * testXGBoostMultiClass方法。
+     */
     public void testXGBoostMultiClass() {
         int nSamples = 90;
         double[][] data = new double[nSamples][2];

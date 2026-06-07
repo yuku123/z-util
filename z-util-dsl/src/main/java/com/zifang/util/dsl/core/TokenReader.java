@@ -10,6 +10,9 @@ import java.io.Closeable;
 /**
  * TokenReader接口。
  */
+/**
+ * TokenReader接口。
+ */
 public interface TokenReader extends Closeable {
 
     /**

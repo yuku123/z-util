@@ -8,8 +8,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * BinarySaver类。
+ */
 public class BinarySaver {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         for (int i = 0; i < args.length; i++) {
             try {
@@ -23,6 +31,11 @@ public class BinarySaver {
         }
     }
 
+    /**
+     * saveBinaryFile方法。
+     *      * @param u URL类型参数
+     * @return static void类型返回值
+     */
     public static void saveBinaryFile(URL u) throws IOException {
         URLConnection uc = u.openConnection();
         String contentType = uc.getContentType();

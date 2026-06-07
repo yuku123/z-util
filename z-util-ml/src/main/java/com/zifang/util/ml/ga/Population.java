@@ -11,6 +11,9 @@ import java.util.Random;
 /**
  * Population类。
  */
+/**
+ * Population类。
+ */
 public class Population {
 
     private final List<Individual> individuals;
@@ -19,6 +22,9 @@ public class Population {
 
     /**
      * 构造一个空的种群
+     */
+    /**
+     * Population方法。
      */
     /**
      * Population方法。
@@ -32,6 +38,10 @@ public class Population {
      * 构造一个具有初始容量的种群
      *
      * @param size 初始容量
+     */
+    /**
+     * Population方法。
+     *      * @param size int类型参数
      */
     /**
      * Population方法。
@@ -51,6 +61,10 @@ public class Population {
      * addIndividual方法。
      *      * @param individual Individual类型参数
      */
+    /**
+     * addIndividual方法。
+     *      * @param individual Individual类型参数
+     */
     public void addIndividual(Individual individual) {
         individuals.add(individual);
     }
@@ -60,6 +74,11 @@ public class Population {
      *
      * @param index 索引位置
      * @return 个体对象
+     */
+    /**
+     * getIndividual方法。
+     *      * @param index int类型参数
+     * @return Individual类型返回值
      */
     /**
      * getIndividual方法。
@@ -83,6 +102,12 @@ public class Population {
      * @param individual Individual类型参数
      * @return Individual类型返回值
      */
+    /**
+     * setIndividual方法。
+     *      * @param index int类型参数
+     * @param individual Individual类型参数
+     * @return Individual类型返回值
+     */
     public Individual setIndividual(int index, Individual individual) {
         return individuals.set(index, individual);
     }
@@ -91,6 +116,10 @@ public class Population {
      * 获取种群中个体的数量
      *
      * @return 个体数量
+     */
+    /**
+     * size方法。
+     * @return int类型返回值
      */
     /**
      * size方法。
@@ -109,6 +138,10 @@ public class Population {
      * getIndividuals方法。
      * @return List<Individual>类型返回值
      */
+    /**
+     * getIndividuals方法。
+     * @return List<Individual>类型返回值
+     */
     public List<Individual> getIndividuals() {
         return new ArrayList<>(individuals);
     }
@@ -117,6 +150,10 @@ public class Population {
      * 获取种群中适应度最高的个体
      *
      * @return 适应度最高的个体
+     */
+    /**
+     * getFittest方法。
+     * @return Individual类型返回值
      */
     /**
      * getFittest方法。
@@ -133,6 +170,11 @@ public class Population {
      *
      * @param offset 偏移量，从0开始
      * @return 排序后对应偏移量的个体
+     */
+    /**
+     * getFittest方法。
+     *      * @param offset int类型参数
+     * @return Individual类型返回值
      */
     /**
      * getFittest方法。
@@ -156,6 +198,10 @@ public class Population {
      * getTotalFitness方法。
      * @return double类型返回值
      */
+    /**
+     * getTotalFitness方法。
+     * @return double类型返回值
+     */
     public double getTotalFitness() {
         return totalFitness;
     }
@@ -164,6 +210,10 @@ public class Population {
      * 设置种群的总适应度
      *
      * @param totalFitness 总适应度值
+     */
+    /**
+     * setTotalFitness方法。
+     *      * @param totalFitness double类型参数
      */
     /**
      * setTotalFitness方法。
@@ -182,6 +232,10 @@ public class Population {
      * calculateTotalFitness方法。
      * @return double类型返回值
      */
+    /**
+     * calculateTotalFitness方法。
+     * @return double类型返回值
+     */
     public double calculateTotalFitness() {
         this.totalFitness = individuals.stream()
                 .mapToDouble(Individual::getFitness)
@@ -193,6 +247,10 @@ public class Population {
      * 使用轮盘赌算法从种群中选择一个个体
      *
      * @return 被选中的个体
+     */
+    /**
+     * rouletteSelect方法。
+     * @return Individual类型返回值
      */
     /**
      * rouletteSelect方法。
@@ -215,6 +273,9 @@ public class Population {
 
     /**
      * 随机打乱种群中个体的顺序
+     */
+    /**
+     * shuffle方法。
      */
     /**
      * shuffle方法。

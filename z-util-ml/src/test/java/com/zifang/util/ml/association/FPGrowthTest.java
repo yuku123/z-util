@@ -8,9 +8,15 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * FPGrowthTest类。
+ */
 public class FPGrowthTest {
 
     @Test
+    /**
+     * testFPGrowthEmptyTransactions方法。
+     */
     public void testFPGrowthEmptyTransactions() {
         FPGrowth fpGrowth = new FPGrowth(0.5, 1);
         
@@ -22,6 +28,9 @@ public class FPGrowthTest {
     }
 
     @Test
+    /**
+     * testFPGrowthInstantiation方法。
+     */
     public void testFPGrowthInstantiation() {
         // Just test that FPGrowth can be instantiated with various parameters
         FPGrowth fpGrowth = new FPGrowth(0.3, 2);

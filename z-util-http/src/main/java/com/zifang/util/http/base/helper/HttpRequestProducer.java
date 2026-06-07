@@ -27,6 +27,9 @@ import java.io.IOException;
 /**
  * HttpRequestProducer类。
  */
+/**
+ * HttpRequestProducer类。
+ */
 public class HttpRequestProducer {
 
     private static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
@@ -36,6 +39,11 @@ public class HttpRequestProducer {
      *
      * @param httpRequestDefination HTTP请求定义
      * @return 响应内容字符串，如果请求失败返回null
+     */
+    /**
+     * produceRequest方法。
+     *      * @param httpRequestDefination HttpRequestDefinition类型参数
+     * @return Object类型返回值
      */
     /**
      * produceRequest方法。

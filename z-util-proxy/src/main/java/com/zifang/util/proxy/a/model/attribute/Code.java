@@ -17,6 +17,9 @@ import java.util.List;
 /**
  * Code类。
  */
+/**
+ * Code类。
+ */
 public class Code extends AbstractAttribute {
     private U2 maxStack;
     private U2 maxLocals;
@@ -34,12 +37,22 @@ public class Code extends AbstractAttribute {
      * @param attributeLength U4类型参数
      * @param poolList ListAbstractConstantPool类型参数
      */
+    /**
+     * Code方法。
+     *      * @param attributeNameIndex U2类型参数
+     * @param attributeLength U4类型参数
+     * @param poolList ListAbstractConstantPool类型参数
+     */
     public Code(U2 attributeNameIndex, U4 attributeLength, List<AbstractConstantPool> poolList) {
         super(attributeNameIndex, attributeLength);
         this.poolList = poolList;
     }
 
     @Override
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     /**
      * read方法。
      *      * @param inputStream InputStream类型参数
@@ -82,12 +95,22 @@ public class Code extends AbstractAttribute {
 /**
  * ExceptionInfo类。
  */
+/**
+ * ExceptionInfo类。
+ */
     public class ExceptionInfo {
         private U2 startPc;
         private U2 endPc;
         private U2 handlerPc;
         private U2 catchPc;
 
+    /**
+     * ExceptionInfo方法。
+     *      * @param startPc U2类型参数
+     * @param endPc U2类型参数
+     * @param handlerPc U2类型参数
+     * @param catchPc U2类型参数
+     */
     /**
      * ExceptionInfo方法。
      *      * @param startPc U2类型参数
@@ -106,10 +129,18 @@ public class Code extends AbstractAttribute {
      * getStartPc方法。
      * @return U2类型返回值
      */
+    /**
+     * getStartPc方法。
+     * @return U2类型返回值
+     */
         public U2 getStartPc() {
             return startPc;
         }
 
+    /**
+     * getEndPc方法。
+     * @return U2类型返回值
+     */
     /**
      * getEndPc方法。
      * @return U2类型返回值
@@ -122,10 +153,18 @@ public class Code extends AbstractAttribute {
      * getHandlerPc方法。
      * @return U2类型返回值
      */
+    /**
+     * getHandlerPc方法。
+     * @return U2类型返回值
+     */
         public U2 getHandlerPc() {
             return handlerPc;
         }
 
+    /**
+     * getCatchPc方法。
+     * @return U2类型返回值
+     */
     /**
      * getCatchPc方法。
      * @return U2类型返回值
@@ -139,10 +178,18 @@ public class Code extends AbstractAttribute {
      * getMaxStack方法。
      * @return U2类型返回值
      */
+    /**
+     * getMaxStack方法。
+     * @return U2类型返回值
+     */
     public U2 getMaxStack() {
         return maxStack;
     }
 
+    /**
+     * getMaxLocals方法。
+     * @return U2类型返回值
+     */
     /**
      * getMaxLocals方法。
      * @return U2类型返回值
@@ -155,10 +202,18 @@ public class Code extends AbstractAttribute {
      * getCodeLength方法。
      * @return U4类型返回值
      */
+    /**
+     * getCodeLength方法。
+     * @return U4类型返回值
+     */
     public U4 getCodeLength() {
         return codeLength;
     }
 
+    /**
+     * getCode方法。
+     * @return List<U1>类型返回值
+     */
     /**
      * getCode方法。
      * @return List<U1>类型返回值
@@ -171,10 +226,18 @@ public class Code extends AbstractAttribute {
      * getExceptionTableLength方法。
      * @return U2类型返回值
      */
+    /**
+     * getExceptionTableLength方法。
+     * @return U2类型返回值
+     */
     public U2 getExceptionTableLength() {
         return exceptionTableLength;
     }
 
+    /**
+     * getExceptionTable方法。
+     * @return List<ExceptionInfo>类型返回值
+     */
     /**
      * getExceptionTable方法。
      * @return List<ExceptionInfo>类型返回值
@@ -187,10 +250,18 @@ public class Code extends AbstractAttribute {
      * getAttributesCount方法。
      * @return U2类型返回值
      */
+    /**
+     * getAttributesCount方法。
+     * @return U2类型返回值
+     */
     public U2 getAttributesCount() {
         return attributesCount;
     }
 
+    /**
+     * getAttributes方法。
+     * @return List<AbstractAttribute>类型返回值
+     */
     /**
      * getAttributes方法。
      * @return List<AbstractAttribute>类型返回值

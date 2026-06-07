@@ -3,6 +3,9 @@ package com.zifang.util.ml.inheritance.chapter5;
 /**
  * Simple Professor abstraction.
  */
+/**
+ * Professor类。
+ */
 public class Professor {
     private final int professorId;
     private final String professorName;
@@ -12,6 +15,11 @@ public class Professor {
      *
      * @param professorId   The ID for this professor
      * @param professorName The name of this professor
+     */
+    /**
+     * Professor方法。
+     *      * @param professorId int类型参数
+     * @param professorName String类型参数
      */
     public Professor(int professorId, String professorName) {
         this.professorId = professorId;
@@ -23,6 +31,10 @@ public class Professor {
      *
      * @return professorId
      */
+    /**
+     * getProfessorId方法。
+     * @return int类型返回值
+     */
     public int getProfessorId() {
         return this.professorId;
     }
@@ -31,6 +43,10 @@ public class Professor {
      * Get professor's name
      *
      * @return professorName
+     */
+    /**
+     * getProfessorName方法。
+     * @return String类型返回值
      */
     public String getProfessorName() {
         return this.professorName;

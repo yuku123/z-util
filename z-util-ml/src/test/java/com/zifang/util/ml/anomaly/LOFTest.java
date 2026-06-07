@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * LOFTest类。
+ */
 public class LOFTest {
 
     @Test
+    /**
+     * testLOFFit方法。
+     */
     public void testLOFFit() {
         LOF lof = new LOF(5, 0.1);
         
@@ -26,6 +32,9 @@ public class LOFTest {
     }
 
     @Test
+    /**
+     * testLOFPredict方法。
+     */
     public void testLOFPredict() {
         LOF lof = new LOF(5, 0.1);
         
@@ -58,6 +67,9 @@ public class LOFTest {
     }
 
     @Test
+    /**
+     * testLOFScores方法。
+     */
     public void testLOFScores() {
         LOF lof = new LOF(5, 0.1);
         

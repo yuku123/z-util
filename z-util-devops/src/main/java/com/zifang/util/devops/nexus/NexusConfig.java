@@ -11,5 +11,8 @@ package com.zifang.util.devops.nexus;
 /**
  * NexusConfig类。
  */
+/**
+ * NexusConfig类。
+ */
 public class NexusConfig {
 }

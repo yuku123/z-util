@@ -10,6 +10,9 @@ import java.util.List;
 /**
  * OptionGroup类。
  */
+/**
+ * OptionGroup类。
+ */
 public class OptionGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,8 +25,15 @@ public class OptionGroup implements Serializable {
     /**
      * OptionGroup方法。
      */
+    /**
+     * OptionGroup方法。
+     */
     public OptionGroup() {}
 
+    /**
+     * OptionGroup方法。
+     *      * @param description final类型参数
+     */
     /**
      * OptionGroup方法。
      *      * @param description final类型参数
@@ -32,6 +42,11 @@ public class OptionGroup implements Serializable {
         this.description = description;
     }
 
+    /**
+     * addOption方法。
+     *      * @param option final类型参数
+     * @return OptionGroup类型返回值
+     */
     /**
      * addOption方法。
      *      * @param option final类型参数
@@ -46,10 +61,18 @@ public class OptionGroup implements Serializable {
      * getOptions方法。
      * @return List<Option>类型返回值
      */
+    /**
+     * getOptions方法。
+     * @return List<Option>类型返回值
+     */
     public List<Option> getOptions() {
         return options;
     }
 
+    /**
+     * getDescription方法。
+     * @return String类型返回值
+     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -62,10 +85,18 @@ public class OptionGroup implements Serializable {
      * setDescription方法。
      *      * @param description final类型参数
      */
+    /**
+     * setDescription方法。
+     *      * @param description final类型参数
+     */
     public void setDescription(final String description) {
         this.description = description;
     }
 
+    /**
+     * isRequired方法。
+     * @return boolean类型返回值
+     */
     /**
      * isRequired方法。
      * @return boolean类型返回值
@@ -78,10 +109,18 @@ public class OptionGroup implements Serializable {
      * setRequired方法。
      *      * @param required final类型参数
      */
+    /**
+     * setRequired方法。
+     *      * @param required final类型参数
+     */
     public void setRequired(final boolean required) {
         this.required = required;
     }
 
+    /**
+     * getSelected方法。
+     * @return Option类型返回值
+     */
     /**
      * getSelected方法。
      * @return Option类型返回值
@@ -94,10 +133,18 @@ public class OptionGroup implements Serializable {
      * setSelected方法。
      *      * @param option final类型参数
      */
+    /**
+     * setSelected方法。
+     *      * @param option final类型参数
+     */
     public void setSelected(final Option option) {
         this.selected = option;
     }
 
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

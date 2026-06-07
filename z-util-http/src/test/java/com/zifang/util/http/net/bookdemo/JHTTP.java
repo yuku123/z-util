@@ -9,6 +9,9 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * JHTTP类。
+ */
 public class JHTTP {
 
     private final static Logger log = Logger.getLogger(JHTTP.class.getCanonicalName());
@@ -19,6 +22,11 @@ public class JHTTP {
     private final File rootDirectory;
     private final int port;
 
+    /**
+     * JHTTP方法。
+     *      * @param rootDirectory File类型参数
+     * @param port int类型参数
+     */
     public JHTTP(File rootDirectory, int port) throws IOException {
 
         if (!rootDirectory.isDirectory()) {
@@ -28,6 +36,9 @@ public class JHTTP {
         this.port = port;
     }
 
+    /**
+     * start方法。
+     */
     public void start() throws IOException {
         ExecutorService pool = Executors.newFixedThreadPool(NUM_THREADS);
         try (ServerSocket server = new ServerSocket(port)) {
@@ -46,6 +57,11 @@ public class JHTTP {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         // get the Document root

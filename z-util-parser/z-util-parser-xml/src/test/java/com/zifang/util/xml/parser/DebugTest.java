@@ -5,8 +5,14 @@ import com.zifang.util.xml.XmlUtil;
 import com.zifang.util.xml.model.*;
 import org.junit.Test;
 
+/**
+ * DebugTest类。
+ */
 public class DebugTest {
     @Test
+    /**
+     * testDebug方法。
+     */
     public void testDebug() throws Exception {
         String xml = "<root id=\"123\" name=\"test\"/>";
         System.out.println("Input: " + xml);

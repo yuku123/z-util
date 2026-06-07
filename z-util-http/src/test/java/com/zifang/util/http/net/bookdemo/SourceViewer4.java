@@ -5,8 +5,16 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * SourceViewer4类。
+ */
 public class SourceViewer4 {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try {
             URL u = new URL(args[0]);

@@ -8,8 +8,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Options类。
+ */
 public class Options {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try {
             args = new String[]{"http://localhost:9999/webDemo/test"};

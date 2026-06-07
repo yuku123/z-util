@@ -12,12 +12,19 @@ package com.zifang.util.devops.nexus;
 /**
  * Checksum类。
  */
+/**
+ * Checksum类。
+ */
 public class Checksum {
 
     private String sha1;
 
     private String md5;
 
+    /**
+     * getSha1方法。
+     * @return String类型返回值
+     */
     /**
      * getSha1方法。
      * @return String类型返回值
@@ -30,10 +37,18 @@ public class Checksum {
      * setSha1方法。
      *      * @param sha1 String类型参数
      */
+    /**
+     * setSha1方法。
+     *      * @param sha1 String类型参数
+     */
     public void setSha1(String sha1) {
         this.sha1 = sha1;
     }
 
+    /**
+     * getMd5方法。
+     * @return String类型返回值
+     */
     /**
      * getMd5方法。
      * @return String类型返回值
@@ -46,11 +61,19 @@ public class Checksum {
      * setMd5方法。
      *      * @param md5 String类型参数
      */
+    /**
+     * setMd5方法。
+     *      * @param md5 String类型参数
+     */
     public void setMd5(String md5) {
         this.md5 = md5;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -65,6 +88,11 @@ public class Checksum {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -73,6 +101,10 @@ public class Checksum {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

@@ -16,6 +16,9 @@ import java.nio.charset.StandardCharsets;
 /**
  * IOUtil类。
  */
+/**
+ * IOUtil类。
+ */
 public class IOUtil {
 
     public static final int EOF = -1;
@@ -30,6 +33,12 @@ public class IOUtil {
      * @param charsetName 字符编码，null 则使用 UTF-8
      * @return 字符串内容
      * @throws IOException 读取异常
+     */
+    /**
+     * readString方法。
+     *      * @param in InputStream类型参数
+     * @param charsetName String类型参数
+     * @return static String类型返回值
      */
     /**
      * readString方法。
@@ -57,6 +66,11 @@ public class IOUtil {
      *      * @param in InputStream类型参数
      * @return static String类型返回值
      */
+    /**
+     * readString方法。
+     *      * @param in InputStream类型参数
+     * @return static String类型返回值
+     */
     public static String readString(InputStream in) throws IOException {
         return readString(in, StandardCharsets.UTF_8.name());
     }
@@ -67,6 +81,11 @@ public class IOUtil {
      * @param in 输入流
      * @return 包含读取数据的缓冲区
      * @throws IOException 读取异常
+     */
+    /**
+     * readToBuffer方法。
+     *      * @param in InputStream类型参数
+     * @return static FastByteArrayOutputStream类型返回值
      */
     /**
      * readToBuffer方法。
@@ -84,6 +103,12 @@ public class IOUtil {
      * @param closeIn 读取完毕后是否关闭输入流
      * @return 包含读取数据的缓冲区
      * @throws IOException 读取异常
+     */
+    /**
+     * readToBuffer方法。
+     *      * @param in InputStream类型参数
+     * @param closeIn boolean类型参数
+     * @return static FastByteArrayOutputStream类型返回值
      */
     /**
      * readToBuffer方法。
@@ -120,6 +145,11 @@ public class IOUtil {
      *      * @param reader Reader类型参数
      * @return static java.util.List<String>类型返回值
      */
+    /**
+     * readLines方法。
+     *      * @param reader Reader类型参数
+     * @return static java.util.List<String>类型返回值
+     */
     public static java.util.List<String> readLines(Reader reader) throws IOException {
         java.util.List<String> lines = new java.util.ArrayList<>();
         try (BufferedReader br = reader instanceof BufferedReader
@@ -140,6 +170,13 @@ public class IOUtil {
      * @param charset  字符编码
      * @param consumer 行处理器
      * @throws IOException 读取异常
+     */
+    /**
+     * readLines方法。
+     *      * @param in InputStream类型参数
+     * @param charset Charset类型参数
+     * @param consumer java.util.function.ConsumerString类型参数
+     * @return static void类型返回值
      */
     /**
      * readLines方法。
@@ -174,6 +211,12 @@ public class IOUtil {
      * @param output OutputStream类型参数
      * @return static int类型返回值
      */
+    /**
+     * copy方法。
+     *      * @param input InputStream类型参数
+     * @param output OutputStream类型参数
+     * @return static int类型返回值
+     */
     public static int copy(InputStream input, OutputStream output) throws IOException {
         long count = copyLarge(input, output);
         if (count > Integer.MAX_VALUE) {
@@ -189,6 +232,12 @@ public class IOUtil {
      * @param output 输出流
      * @return 复制的总字节数
      * @throws IOException 读取或写入异常
+     */
+    /**
+     * copyLarge方法。
+     *      * @param input InputStream类型参数
+     * @param output OutputStream类型参数
+     * @return static long类型返回值
      */
     /**
      * copyLarge方法。
@@ -214,6 +263,12 @@ public class IOUtil {
      * @param src  源 Channel
      * @param dest 目标 Channel
      * @throws IOException 复制异常
+     */
+    /**
+     * channelCopy方法。
+     *      * @param src ReadableByteChannel类型参数
+     * @param dest WritableByteChannel类型参数
+     * @return static void类型返回值
      */
     /**
      * channelCopy方法。
@@ -248,6 +303,12 @@ public class IOUtil {
      * @param dest WritableByteChannel类型参数
      * @return static void类型返回值
      */
+    /**
+     * channelCopyClear方法。
+     *      * @param src ReadableByteChannel类型参数
+     * @param dest WritableByteChannel类型参数
+     * @return static void类型返回值
+     */
     public static void channelCopyClear(ReadableByteChannel src, WritableByteChannel dest) throws IOException {
         ByteBuffer buffer = ByteBuffer.allocateDirect(16 * 1024);
         while (src.read(buffer) != -1) {
@@ -261,6 +322,10 @@ public class IOUtil {
 
     /**
      * 从 stdin 复制到 stdout（演示用）
+     */
+    /**
+     * channelCopyStdInToStdOut方法。
+     * @return static void类型返回值
      */
     /**
      * channelCopyStdInToStdOut方法。
@@ -281,6 +346,12 @@ public class IOUtil {
      * @param toSkip 要跳过的字节数
      * @return 实际跳过的字节数
      * @throws IOException 跳过异常
+     */
+    /**
+     * skipFully方法。
+     *      * @param input InputStream类型参数
+     * @param toSkip long类型参数
+     * @return static long类型返回值
      */
     /**
      * skipFully方法。
@@ -320,6 +391,11 @@ public class IOUtil {
      *      * @param closeable Closeable类型参数
      * @return static void类型返回值
      */
+    /**
+     * close方法。
+     *      * @param closeable Closeable类型参数
+     * @return static void类型返回值
+     */
     public static void close(Closeable closeable) {
         if (closeable != null) {
             try {
@@ -338,6 +414,11 @@ public class IOUtil {
 
     /**
      * 安全关闭 Closeable（别名，语义更明确）
+     */
+    /**
+     * closeQuietly方法。
+     *      * @param closeable Closeable类型参数
+     * @return static void类型返回值
      */
     /**
      * closeQuietly方法。

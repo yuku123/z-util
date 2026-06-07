@@ -41,6 +41,9 @@ import static org.apache.logging.log4j.util.Strings.EMPTY;
 /**
  * StringUtil类。
  */
+/**
+ * StringUtil类。
+ */
 public class StringUtil {
     private static final int INDEX_NOT_FOUND = -1;
     private static final int PAD_LIMIT = 8192;
@@ -53,6 +56,11 @@ public class StringUtil {
      *
      * @param string the String to check
      * @return true if the String is not empty, false otherwise
+     */
+    /**
+     * isNotEmptyString方法。
+     *      * @param string String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isNotEmptyString方法。
@@ -74,6 +82,11 @@ public class StringUtil {
      *      * @param s String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isNotEmpty方法。
+     *      * @param s String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isNotEmpty(String s) {
         return !isEmpty(s);
     }
@@ -83,6 +96,11 @@ public class StringUtil {
      *
      * @param s the String to check
      * @return true if the String is not blank, false otherwise
+     */
+    /**
+     * isNotBlank方法。
+     *      * @param s String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isNotBlank方法。
@@ -104,6 +122,11 @@ public class StringUtil {
      *      * @param s String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isBlank方法。
+     *      * @param s String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isBlank(String s) {
         return null == s || s.trim().isEmpty();
     }
@@ -113,6 +136,11 @@ public class StringUtil {
      *
      * @param s the String to check
      * @return true if the String is empty, false otherwise
+     */
+    /**
+     * isEmpty方法。
+     *      * @param s String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isEmpty方法。
@@ -134,6 +162,11 @@ public class StringUtil {
      *      * @param obj Object类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isEmpty方法。
+     *      * @param obj Object类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isEmpty(Object obj) {
         return null == obj || isEmpty(obj.toString());
     }
@@ -142,6 +175,11 @@ public class StringUtil {
      *
      * @param obj the Object to check
      * @return true if the Object is not empty, false otherwise
+     */
+    /**
+     * isNotEmpty方法。
+     *      * @param obj Object类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isNotEmpty方法。
@@ -157,6 +195,11 @@ public class StringUtil {
      *
      * @param strArr the String array to check
      * @return true if all Strings are not empty, false otherwise
+     */
+    /**
+     * isNotEmpty方法。
+     *      * @param strArr String...类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isNotEmpty方法。
@@ -182,6 +225,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isAllLowerCase方法。
+     *      * @param value String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isAllLowerCase(String value) {
         return forEachCharAllMatch(value, Character::isLowerCase);
     }
@@ -190,6 +238,11 @@ public class StringUtil {
      *
      * @param value the String to check
      * @return true if all characters are uppercase, false otherwise
+     */
+    /**
+     * isAllUpperCase方法。
+     *      * @param value String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isAllUpperCase方法。
@@ -205,6 +258,12 @@ public class StringUtil {
      * @param value     the String to check
      * @param predicate the predicate to test each character
      * @return true if any character matches, false otherwise (including null or empty string)
+     */
+    /**
+     * forEachCharAnyMatch方法。
+     *      * @param value String类型参数
+     * @param predicate PredicateCharacter类型参数
+     * @return static boolean类型返回值
      */
     /**
      * forEachCharAnyMatch方法。
@@ -229,6 +288,12 @@ public class StringUtil {
      * @param value     the String to check
      * @param predicate the predicate to test each character
      * @return true if all characters match, false otherwise (including null or empty string)
+     */
+    /**
+     * forEachCharAllMatch方法。
+     *      * @param value String类型参数
+     * @param predicate PredicateCharacter类型参数
+     * @return static boolean类型返回值
      */
     /**
      * forEachCharAllMatch方法。
@@ -261,6 +326,12 @@ public class StringUtil {
      * @param appends String...类型参数
      * @return static String类型返回值
      */
+    /**
+     * append方法。
+     *      * @param value String类型参数
+     * @param appends String...类型参数
+     * @return static String类型返回值
+     */
     public static String append(String value, String... appends) {
 
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
@@ -286,6 +357,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * collapseWhitespace方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String collapseWhitespace(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return value.trim().replaceAll("\\s\\s+", " ");
@@ -304,6 +380,12 @@ public class StringUtil {
      * @param needle String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * contains方法。
+     *      * @param value String类型参数
+     * @param needle String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean contains(String value, String needle) {
         return contains(value, needle, false);
     }
@@ -315,6 +397,13 @@ public class StringUtil {
      * @param needle        the String to search for
      * @param caseSensitive whether the comparison should be case-sensitive
      * @return true if value contains needle, false otherwise
+     */
+    /**
+     * contains方法。
+     *      * @param value String类型参数
+     * @param needle String类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static boolean类型返回值
      */
     /**
      * contains方法。
@@ -344,6 +433,12 @@ public class StringUtil {
      * @param needles String[]类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * containsAll方法。
+     *      * @param value String类型参数
+     * @param needles String[]类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean containsAll(String value, String[] needles) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return Arrays.stream(needles).allMatch(needle -> contains(value, needle, false));
@@ -356,6 +451,13 @@ public class StringUtil {
      * @param needles       the array of Strings to search for
      * @param caseSensitive whether the comparison should be case-sensitive
      * @return true if value contains all needles, false otherwise
+     */
+    /**
+     * containsAll方法。
+     *      * @param value String类型参数
+     * @param needles String[]类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static boolean类型返回值
      */
     /**
      * containsAll方法。
@@ -382,6 +484,12 @@ public class StringUtil {
      * @param needles String[]类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * containsAny方法。
+     *      * @param value String类型参数
+     * @param needles String[]类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean containsAny(String value, String[] needles) {
         return containsAny(value, needles, false);
     }
@@ -393,6 +501,13 @@ public class StringUtil {
      * @param needles       the array of Strings to search for
      * @param caseSensitive whether the comparison should be case-sensitive
      * @return true if value contains any needle, false otherwise
+     */
+    /**
+     * containsAny方法。
+     *      * @param value String类型参数
+     * @param needles String[]类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static boolean类型返回值
      */
     /**
      * containsAny方法。
@@ -415,10 +530,24 @@ public class StringUtil {
      * @param subStr String类型参数
      * @return static long类型返回值
      */
+    /**
+     * countSubstr方法。
+     *      * @param value String类型参数
+     * @param subStr String类型参数
+     * @return static long类型返回值
+     */
     public static long countSubstr(String value, String subStr) {
         return countSubstr(value, subStr, true, false);
     }
 
+    /**
+     * countSubstr方法。
+     *      * @param value String类型参数
+     * @param subStr String类型参数
+     * @param caseSensitive boolean类型参数
+     * @param allowOverlapping boolean类型参数
+     * @return static long类型返回值
+     */
     /**
      * countSubstr方法。
      *      * @param value String类型参数
@@ -438,6 +567,12 @@ public class StringUtil {
      * @param value the string to check
      * @param search the search string
      * @return true if the string ends with the search string, false otherwise
+     */
+    /**
+     * endsWith方法。
+     *      * @param value String类型参数
+     * @param search String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * endsWith方法。
@@ -465,6 +600,13 @@ public class StringUtil {
      * @param caseSensitive boolean类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * endsWith方法。
+     *      * @param value String类型参数
+     * @param search String类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean endsWith(String value, String search, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return endsWith(value, search, value.length(), caseSensitive);
@@ -478,6 +620,14 @@ public class StringUtil {
      * @param position the position to check up to
      * @param caseSensitive whether the comparison should be case-sensitive
      * @return true if the string ends with the search string at the given position, false otherwise
+     */
+    /**
+     * endsWith方法。
+     *      * @param value String类型参数
+     * @param search String类型参数
+     * @param position int类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static boolean类型返回值
      */
     /**
      * endsWith方法。
@@ -510,6 +660,12 @@ public class StringUtil {
      * @param prefix String类型参数
      * @return static String类型返回值
      */
+    /**
+     * ensureLeft方法。
+     *      * @param value String类型参数
+     * @param prefix String类型参数
+     * @return static String类型返回值
+     */
     public static String ensureLeft(String value, String prefix) {
         return ensureLeft(value, prefix, true);
     }
@@ -522,6 +678,13 @@ public class StringUtil {
      * @param prefix        The prefix to ensure
      * @param caseSensitive Whether the comparison should be case-sensitive
      * @return The string with the prefix ensured
+     */
+    /**
+     * ensureLeft方法。
+     *      * @param value String类型参数
+     * @param prefix String类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static String类型返回值
      */
     /**
      * ensureLeft方法。
@@ -554,6 +717,12 @@ public class StringUtil {
      * @param suffix String类型参数
      * @return static String类型返回值
      */
+    /**
+     * ensureRight方法。
+     *      * @param value String类型参数
+     * @param suffix String类型参数
+     * @return static String类型返回值
+     */
     public static String ensureRight(String value, String suffix) {
         return ensureRight(value, suffix, true);
     }
@@ -566,6 +735,13 @@ public class StringUtil {
      * @param suffix        The suffix to ensure
      * @param caseSensitive Whether the comparison should be case-sensitive
      * @return The string with the suffix ensured
+     */
+    /**
+     * ensureRight方法。
+     *      * @param value String类型参数
+     * @param suffix String类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static String类型返回值
      */
     /**
      * ensureRight方法。
@@ -591,6 +767,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * base64Decode方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String base64Decode(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return new String(Base64.getDecoder().decode(value), StandardCharsets.UTF_8);
@@ -602,6 +783,11 @@ public class StringUtil {
      * @param value 要编码的字符串
      * @return Base64 编码后的字符串
      * @throws IllegalArgumentException 如果value为null
+     */
+    /**
+     * base64Encode方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * base64Encode方法。
@@ -625,6 +811,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * binDecode方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String binDecode(String value) {
         return decode(value, 16, 2);
     }
@@ -635,6 +826,11 @@ public class StringUtil {
      *
      * @param value 要编码的字符串
      * @return 二进制编码后的字符串
+     */
+    /**
+     * binEncode方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * binEncode方法。
@@ -657,6 +853,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * hexDecode方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String hexDecode(String value) {
         return decode(value, 4, 16);
     }
@@ -667,6 +868,11 @@ public class StringUtil {
      *
      * @param value 要编码的字符串
      * @return 十六进制编码后的字符串
+     */
+    /**
+     * hexEncode方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * hexEncode方法。
@@ -689,6 +895,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * decDecode方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String decDecode(String value) {
         return decode(value, 5, 10);
     }
@@ -699,6 +910,11 @@ public class StringUtil {
      *
      * @param value 要编码的字符串
      * @return 十进制编码后的字符串
+     */
+    /**
+     * decEncode方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * decEncode方法。
@@ -718,6 +934,13 @@ public class StringUtil {
      * @param radix  进制的基数（如2二进制, 10十进制, 16十六进制）
      * @return 解码后的字符串
      * @throws IllegalArgumentException 如果value为null
+     */
+    /**
+     * decode方法。
+     *      * @param value String类型参数
+     * @param digits int类型参数
+     * @param radix int类型参数
+     * @return static String类型返回值
      */
     /**
      * decode方法。
@@ -749,6 +972,13 @@ public class StringUtil {
      * @param radix int类型参数
      * @return static String类型返回值
      */
+    /**
+     * encode方法。
+     *      * @param value String类型参数
+     * @param digits int类型参数
+     * @param radix int类型参数
+     * @return static String类型返回值
+     */
     public static String encode(String value, int digits, int radix) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return value.chars().mapToObj(ch -> leftPad(Integer.toString(ch, radix), digits,"0")).collect(joining());
@@ -761,6 +991,12 @@ public class StringUtil {
      * @param value The input String
      * @param n     Number of chars to return
      * @return The first n chars
+     */
+    /**
+     * first方法。
+     *      * @param value String类型参数
+     * @param n int类型参数
+     * @return static Optional<String>类型返回值
      */
     /**
      * first方法。
@@ -783,6 +1019,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static Optional<String>类型返回值
      */
+    /**
+     * head方法。
+     *      * @param value String类型参数
+     * @return static Optional<String>类型返回值
+     */
     public static Optional<String> head(String value) {
         return first(value, 1);
     }
@@ -793,6 +1034,12 @@ public class StringUtil {
      * @param value  The value to be formatted
      * @param params Parameters to be described in the string
      * @return The formatted string
+     */
+    /**
+     * format方法。
+     *      * @param value String类型参数
+     * @param params String...类型参数
+     * @return static String类型返回值
      */
     /**
      * format方法。
@@ -834,6 +1081,14 @@ public class StringUtil {
      * @param caseSensitive boolean类型参数
      * @return static int类型返回值
      */
+    /**
+     * indexOf方法。
+     *      * @param value String类型参数
+     * @param needle String类型参数
+     * @param offset int类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static int类型返回值
+     */
     public static int indexOf(String value, String needle, int offset, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         if (caseSensitive) {
@@ -848,6 +1103,12 @@ public class StringUtil {
      * @param first  The first String
      * @param second The second String
      * @return true if first and second are not equal false otherwise
+     */
+    /**
+     * unequal方法。
+     *      * @param first String类型参数
+     * @param second String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * unequal方法。
@@ -873,6 +1134,12 @@ public class StringUtil {
      * @param second String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * inequal方法。
+     *      * @param first String类型参数
+     * @param second String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean inequal(String first, String second) {
         return !Objects.equals(first, second);
     }
@@ -884,6 +1151,13 @@ public class StringUtil {
      * @param substr The String to insert
      * @param index  The index to insert substr
      * @return String with substr added
+     */
+    /**
+     * insert方法。
+     *      * @param value String类型参数
+     * @param substr String类型参数
+     * @param index int类型参数
+     * @return static String类型返回值
      */
     /**
      * insert方法。
@@ -912,6 +1186,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isUpperCase方法。
+     *      * @param value String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isUpperCase(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         for (int i = 0; i < value.length(); i++) {
@@ -927,6 +1206,11 @@ public class StringUtil {
      *
      * @param value The input String
      * @return true if String is lowercase false otherwise
+     */
+    /**
+     * isLowerCase方法。
+     *      * @param value String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isLowerCase方法。
@@ -956,6 +1240,12 @@ public class StringUtil {
      * @param n int类型参数
      * @return static String类型返回值
      */
+    /**
+     * last方法。
+     *      * @param value String类型参数
+     * @param n int类型参数
+     * @return static String类型返回值
+     */
     public static String last(String value, int n) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         if (n > value.length()) {
@@ -971,6 +1261,11 @@ public class StringUtil {
      *
      * @param value The input String
      * @return true if Object is a String false otherwise
+     */
+    /**
+     * isString方法。
+     *      * @param value Object类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isString方法。
@@ -998,6 +1293,12 @@ public class StringUtil {
      * @param needle String类型参数
      * @return static int类型返回值
      */
+    /**
+     * lastIndexOf方法。
+     *      * @param value String类型参数
+     * @param needle String类型参数
+     * @return static int类型返回值
+     */
     public static int lastIndexOf(String value, String needle) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return lastIndexOf(value, needle, value.length(), true);
@@ -1011,6 +1312,13 @@ public class StringUtil {
      * @param needle        The search String
      * @param caseSensitive true or false
      * @return Return position of the last occurrence of 'needle'.
+     */
+    /**
+     * lastIndexOf方法。
+     *      * @param value String类型参数
+     * @param needle String类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static int类型返回值
      */
     /**
      * lastIndexOf方法。
@@ -1042,6 +1350,14 @@ public class StringUtil {
      * @param caseSensitive boolean类型参数
      * @return static int类型返回值
      */
+    /**
+     * lastIndexOf方法。
+     *      * @param value String类型参数
+     * @param needle String类型参数
+     * @param offset int类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static int类型返回值
+     */
     public static int lastIndexOf(String value, String needle, int offset,
                                   boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
@@ -1063,6 +1379,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * leftTrim方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String leftTrim(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return value.replaceAll("^\\s+", "");
@@ -1073,6 +1394,11 @@ public class StringUtil {
      *
      * @param value The input String
      * @return Length of the String
+     */
+    /**
+     * length方法。
+     *      * @param value String类型参数
+     * @return static int类型返回值
      */
     /**
      * length方法。
@@ -1097,6 +1423,12 @@ public class StringUtil {
      * @param prepends String...类型参数
      * @return static String类型返回值
      */
+    /**
+     * prepend方法。
+     *      * @param value String类型参数
+     * @param prepends String...类型参数
+     * @return static String类型返回值
+     */
     public static String prepend(String value, String... prepends) {
         return prependArray(value, prepends);
     }
@@ -1107,6 +1439,12 @@ public class StringUtil {
      * @param value    The input String
      * @param prepends Strings to prepend
      * @return The prepended String
+     */
+    /**
+     * prependArray方法。
+     *      * @param value String类型参数
+     * @param prepends String[]类型参数
+     * @return static String类型返回值
      */
     /**
      * prependArray方法。
@@ -1140,6 +1478,12 @@ public class StringUtil {
      * @param prefix String类型参数
      * @return static String类型返回值
      */
+    /**
+     * removeLeft方法。
+     *      * @param value String类型参数
+     * @param prefix String类型参数
+     * @return static String类型返回值
+     */
     public static String removeLeft(String value, String prefix) {
         return removeLeft(value, prefix, true);
     }
@@ -1151,6 +1495,13 @@ public class StringUtil {
      * @param prefix        String to remove on left
      * @param caseSensitive ensure case sensitivity
      * @return The String without prefix
+     */
+    /**
+     * removeLeft方法。
+     *      * @param value String类型参数
+     * @param prefix String类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static String类型返回值
      */
     /**
      * removeLeft方法。
@@ -1179,6 +1530,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * removeNonWords方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String removeNonWords(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return value.replaceAll("[^\\w]+", "");
@@ -1190,6 +1546,12 @@ public class StringUtil {
      * @param value  The input String
      * @param suffix The suffix to remove
      * @return The String without suffix!
+     */
+    /**
+     * removeRight方法。
+     *      * @param value String类型参数
+     * @param suffix String类型参数
+     * @return static String类型返回值
      */
     /**
      * removeRight方法。
@@ -1216,6 +1578,13 @@ public class StringUtil {
      * @param caseSensitive boolean类型参数
      * @return static String类型返回值
      */
+    /**
+     * removeRight方法。
+     *      * @param value String类型参数
+     * @param suffix String类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static String类型返回值
+     */
     public static String removeRight(String value, String suffix, boolean caseSensitive) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         Validator.validate(suffix, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
@@ -1228,6 +1597,11 @@ public class StringUtil {
      *
      * @param value The input String
      * @return String without spaces
+     */
+    /**
+     * removeSpaces方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * removeSpaces方法。
@@ -1252,6 +1626,12 @@ public class StringUtil {
      * @param multiplier int类型参数
      * @return static String类型返回值
      */
+    /**
+     * repeat方法。
+     *      * @param value String类型参数
+     * @param multiplier int类型参数
+     * @return static String类型返回值
+     */
     public static String repeat(String value, int multiplier) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return Stream.generate(() -> value).limit(multiplier).collect(joining());
@@ -1265,6 +1645,14 @@ public class StringUtil {
      * @param newValue      The String to replace
      * @param caseSensitive whether search should be case sensitive or not
      * @return String replaced with 'newvalue'.
+     */
+    /**
+     * replace方法。
+     *      * @param value String类型参数
+     * @param search String类型参数
+     * @param newValue String类型参数
+     * @param caseSensitive boolean类型参数
+     * @return static String类型返回值
      */
     /**
      * replace方法。
@@ -1300,6 +1688,13 @@ public class StringUtil {
      * @param length int类型参数
      * @return static String类型返回值
      */
+    /**
+     * rightPad方法。
+     *      * @param value String类型参数
+     * @param pad String类型参数
+     * @param length int类型参数
+     * @return static String类型返回值
+     */
     public static String rightPad(String value, String pad, int length) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         if (value.length() > length) {
@@ -1319,6 +1714,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * rightTrim方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String rightTrim(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return value.replaceAll("\\s+$", "");
@@ -1331,6 +1731,13 @@ public class StringUtil {
      * @param length Max size of the truncated String
      * @param filler String that will be added to the end of the return string. Example: '...'
      * @return The truncated String
+     */
+    /**
+     * safeTruncate方法。
+     *      * @param value String类型参数
+     * @param length int类型参数
+     * @param filler String类型参数
+     * @return static String类型返回值
      */
     /**
      * safeTruncate方法。
@@ -1373,6 +1780,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String[]类型返回值
      */
+    /**
+     * words方法。
+     *      * @param value String类型参数
+     * @return static String[]类型返回值
+     */
     public static String[] words(String value) {
         return words(value, "\\s+");
     }
@@ -1383,6 +1795,12 @@ public class StringUtil {
      * @param value     The input String
      * @param delimiter delimiter for splitting input String
      * @return words array
+     */
+    /**
+     * words方法。
+     *      * @param value String类型参数
+     * @param delimiter String类型参数
+     * @return static String[]类型返回值
      */
     /**
      * words方法。
@@ -1411,6 +1829,13 @@ public class StringUtil {
      * @param filler String类型参数
      * @return static String类型返回值
      */
+    /**
+     * truncate方法。
+     *      * @param value String类型参数
+     * @param length int类型参数
+     * @param filler String类型参数
+     * @return static String类型返回值
+     */
     public static String truncate(String value, int length, String filler) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         if (length == 0) {
@@ -1427,6 +1852,11 @@ public class StringUtil {
      *      * @param encodedHtml String类型参数
      * @return static String类型返回值
      */
+    /**
+     * htmlDecode方法。
+     *      * @param encodedHtml String类型参数
+     * @return static String类型返回值
+     */
     public static String htmlDecode(String encodedHtml) {
         Validator.validate(encodedHtml, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         try {
@@ -1436,6 +1866,11 @@ public class StringUtil {
         }
     }
 
+    /**
+     * htmlEncode方法。
+     *      * @param html String类型参数
+     * @return static String类型返回值
+     */
     /**
      * htmlEncode方法。
      *      * @param html String类型参数
@@ -1469,6 +1904,13 @@ public class StringUtil {
      * @param end int类型参数
      * @return static String类型返回值
      */
+    /**
+     * slice方法。
+     *      * @param value String类型参数
+     * @param begin int类型参数
+     * @param end int类型参数
+     * @return static String类型返回值
+     */
     public static String slice(String value, int begin, int end) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         return value.substring(begin, end);
@@ -1476,6 +1918,11 @@ public class StringUtil {
 
     /**
      * Convert a String to a slug
+     */
+    /**
+     * slugify方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * slugify方法。
@@ -1494,12 +1941,24 @@ public class StringUtil {
      * @param suffix String类型参数
      * @return static String类型返回值
      */
+    /**
+     * surround方法。
+     *      * @param value String类型参数
+     * @param prefix String类型参数
+     * @param suffix String类型参数
+     * @return static String类型返回值
+     */
     public static String surround(String value, String prefix, String suffix) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         String _prefix = Optional.ofNullable(prefix).orElse("");
         return append(_prefix, value, Optional.ofNullable(suffix).orElse(_prefix));
     }
 
+    /**
+     * toCamelCase方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     /**
      * toCamelCase方法。
      *      * @param value String类型参数
@@ -1518,6 +1977,11 @@ public class StringUtil {
      *      * @param value String类型参数
      * @return static String类型返回值
      */
+    /**
+     * toStudlyCase方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String toStudlyCase(String value) {
         Validator.validate(value, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         String[] words = collapseWhitespace(value.trim()).split("\\s*(_|-|\\s)\\s*");
@@ -1529,6 +1993,11 @@ public class StringUtil {
      *
      * @param value The input String
      * @return String tail
+     */
+    /**
+     * tail方法。
+     *      * @param value String类型参数
+     * @return static Optional<String>类型返回值
      */
     /**
      * tail方法。
@@ -1552,12 +2021,23 @@ public class StringUtil {
      * @param chr String类型参数
      * @return static String类型返回值
      */
+    /**
+     * toDecamelize方法。
+     *      * @param value String类型参数
+     * @param chr String类型参数
+     * @return static String类型返回值
+     */
     public static String toDecamelize(String value, String chr) {
         String camelCasedString = toCamelCase(value);
         String[] words = camelCasedString.split("(?=\\p{Upper})");
         return Arrays.stream(words).map(String::toLowerCase).collect(joining(Optional.ofNullable(chr).orElse(" ")));
     }
 
+    /**
+     * toKebabCase方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     /**
      * toKebabCase方法。
      *      * @param value String类型参数
@@ -1572,6 +2052,11 @@ public class StringUtil {
      *
      * @param value The input String
      * @return String in snake_case.
+     */
+    /**
+     * toSnakeCase方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * toSnakeCase方法。
@@ -1594,6 +2079,11 @@ public class StringUtil {
      *      * @param input String类型参数
      * @return static String类型返回值
      */
+    /**
+     * capitalize方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
+     */
     public static String capitalize(String input) throws IllegalArgumentException {
         if (input == null) {
             throw new IllegalArgumentException("input can't be null");
@@ -1609,6 +2099,11 @@ public class StringUtil {
      *
      * @param input The string to convert
      * @return The converted string
+     */
+    /**
+     * lowerFirst方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
      */
     /**
      * lowerFirst方法。
@@ -1639,6 +2134,12 @@ public class StringUtil {
      * @param encloser String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isEnclosedBetween方法。
+     *      * @param input String类型参数
+     * @param encloser String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isEnclosedBetween(String input, String encloser) {
         return isEnclosedBetween(input, encloser, encloser);
     }
@@ -1650,6 +2151,13 @@ public class StringUtil {
      * @param leftEncloser  String which encloses input String at left start
      * @param rightEncloser String which encloses input String at the right end
      * @return true if enclosed false otherwise
+     */
+    /**
+     * isEnclosedBetween方法。
+     *      * @param input String类型参数
+     * @param leftEncloser String类型参数
+     * @param rightEncloser String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isEnclosedBetween方法。
@@ -1686,6 +2194,12 @@ public class StringUtil {
      * @param chars String...类型参数
      * @return static Optional<String>类型返回值
      */
+    /**
+     * trimStart方法。
+     *      * @param input String类型参数
+     * @param chars String...类型参数
+     * @return static Optional<String>类型返回值
+     */
     public static Optional<String> trimStart(String input, String... chars) {
         return Optional.ofNullable(input).filter(v -> !v.isEmpty()).map(v -> {
             String pattern = String.format("^[%s]+", String.join("\\", Arrays.asList(chars)));
@@ -1710,6 +2224,11 @@ public class StringUtil {
      *      * @param input String类型参数
      * @return static Map<Character, Long>类型返回值
      */
+    /**
+     * charsCount方法。
+     *      * @param input String类型参数
+     * @return static Map<Character, Long>类型返回值
+     */
     public static Map<Character, Long> charsCount(String input) {
         if (isNullOrEmpty(input)) {
             return Collections.emptyMap();
@@ -1722,6 +2241,11 @@ public class StringUtil {
      *
      * @param input The input string
      * @return the input string in all lower case with underscores between words
+     */
+    /**
+     * underscored方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
      */
     /**
      * underscored方法。
@@ -1747,6 +2271,11 @@ public class StringUtil {
      *      * @param input String类型参数
      * @return static String[]类型返回值
      */
+    /**
+     * lines方法。
+     *      * @param input String类型参数
+     * @return static String[]类型返回值
+     */
     public static String[] lines(String input) {
         if (input == null) {
             return EMPTY_ARRAY;
@@ -1759,6 +2288,11 @@ public class StringUtil {
      *
      * @param input The input String
      * @return dasherized String.
+     */
+    /**
+     * dasherize方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
      */
     /**
      * dasherize方法。
@@ -1780,6 +2314,11 @@ public class StringUtil {
      *      * @param input String类型参数
      * @return static String类型返回值
      */
+    /**
+     * humanize方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
+     */
     public static String humanize(String input) {
         if (input == null || input.length() == 0) {
             return "";
@@ -1792,6 +2331,11 @@ public class StringUtil {
      *
      * @param input Input string
      * @return String with all the case swapped
+     */
+    /**
+     * swapCase方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
      */
     /**
      * swapCase方法。
@@ -1824,6 +2368,11 @@ public class StringUtil {
      *      * @param number long类型参数
      * @return static String类型返回值
      */
+    /**
+     * formatNumber方法。
+     *      * @param number long类型参数
+     * @return static String类型返回值
+     */
     public static String formatNumber(long number) {
         String stringRepresentation = Long.toString(number);
         StringBuilder sb = new StringBuilder();
@@ -1841,6 +2390,12 @@ public class StringUtil {
         return sb.reverse().toString();
     }
 
+    /**
+     * chop方法。
+     *      * @param input String类型参数
+     * @param step int类型参数
+     * @return static String[]类型返回值
+     */
     /**
      * chop方法。
      *      * @param input String类型参数
@@ -1874,6 +2429,11 @@ public class StringUtil {
      *      * @param input String类型参数
      * @return static String类型返回值
      */
+    /**
+     * startCase方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
+     */
     public static String startCase(String input) {
         Validator.validate(input, NULL_STRING_PREDICATE, NULL_STRING_MSG_SUPPLIER);
         // split into a word when we encounter a space, or an underscore, or a dash, or a switch from lower to upper case
@@ -1882,6 +2442,11 @@ public class StringUtil {
                 .map(w -> upperFirst(w.toLowerCase())).collect(joining(" "));
     }
 
+    /**
+     * escapeRegExp方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
+     */
     /**
      * escapeRegExp方法。
      *      * @param input String类型参数
@@ -1924,6 +2489,12 @@ public class StringUtil {
      * @param repeat final类型参数
      * @return static String类型返回值
      */
+    /**
+     * repeat方法。
+     *      * @param ch final类型参数
+     * @param repeat final类型参数
+     * @return static String类型返回值
+     */
     public static String repeat(final char ch, final int repeat) {
         if (repeat <= 0) {
             return EMPTY;
@@ -1935,6 +2506,11 @@ public class StringUtil {
 
     /**
      * 将半角的符号转换成全角符号.(即英文字符转中文字符)
+     */
+    /**
+     * changeToFull方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * changeToFull方法。
@@ -1976,6 +2552,11 @@ public class StringUtil {
      *      * @param ch char类型参数
      * @return static String类型返回值
      */
+    /**
+     * unicodeEscaped方法。
+     *      * @param ch char类型参数
+     * @return static String类型返回值
+     */
     public static String unicodeEscaped(char ch) {
         if (ch < 0x10) {
             return "\\u000" + Integer.toHexString(ch);
@@ -2000,6 +2581,12 @@ public class StringUtil {
      * @param nullStr String类型参数
      * @return static String类型返回值
      */
+    /**
+     * toString方法。
+     *      * @param object Object类型参数
+     * @param nullStr String类型参数
+     * @return static String类型返回值
+     */
     public static String toString(Object object, String nullStr) {
         return object == null ? nullStr : object.toString();
     }
@@ -2007,6 +2594,11 @@ public class StringUtil {
 
     /**
      * 页面中去除字符串中的空格、回车、换行符、制表符
+     */
+    /**
+     * replaceBlank方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * replaceBlank方法。
@@ -2032,6 +2624,11 @@ public class StringUtil {
      *      * @param string String类型参数
      * @return static String类型返回值
      */
+    /**
+     * string2Unicode方法。
+     *      * @param string String类型参数
+     * @return static String类型返回值
+     */
     public static String string2Unicode(String string) {
         StringBuilder uni = new StringBuilder();
         for (int i = 0; i < string.length(); i++) {
@@ -2045,6 +2642,11 @@ public class StringUtil {
      * 转字符串 实现native2ascii.exe类似的功能
      *
      * @param unicode 需要处理的字符串
+     */
+    /**
+     * unicode2String方法。
+     *      * @param unicode String类型参数
+     * @return static String类型返回值
      */
     /**
      * unicode2String方法。
@@ -2071,6 +2673,12 @@ public class StringUtil {
      * @param str2 String类型参数
      * @return static String类型返回值
      */
+    /**
+     * hasPrefix方法。
+     *      * @param str1 String类型参数
+     * @param str2 String类型参数
+     * @return static String类型返回值
+     */
     public static String hasPrefix(String str1, String str2) {
         //@TODO-字符串方法实现
         return null;
@@ -2085,6 +2693,12 @@ public class StringUtil {
      * @param str2 String类型参数
      * @return static String类型返回值
      */
+    /**
+     * hasSuffix方法。
+     *      * @param str1 String类型参数
+     * @param str2 String类型参数
+     * @return static String类型返回值
+     */
     public static String hasSuffix(String str1, String str2) {
         //TODO-字符串方法实现
         return null;
@@ -2092,6 +2706,12 @@ public class StringUtil {
 
     /**
      * 数字格式化
+     */
+    /**
+     * formatNumber方法。
+     *      * @param obj BigDecimal类型参数
+     * @param format String类型参数
+     * @return static String类型返回值
      */
     /**
      * formatNumber方法。
@@ -2116,12 +2736,22 @@ public class StringUtil {
      *      * @param str String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * hasLength方法。
+     *      * @param str String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean hasLength(String str) {
         return str != null && !str.isEmpty();
     }
 
     /**
      * 下划线转驼峰命名
+     */
+    /**
+     * toUnderScoreCase方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * toUnderScoreCase方法。
@@ -2166,6 +2796,11 @@ public class StringUtil {
      *      * @param source String类型参数
      * @return static String类型返回值
      */
+    /**
+     * underlineToBigCamelCase方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
+     */
     public static String underlineToBigCamelCase(String source) {
         if (isEmpty(source)) {
             return source;
@@ -2178,6 +2813,11 @@ public class StringUtil {
         return builder.toString();
     }
 
+    /**
+     * strikeToBigCamelCase方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
+     */
     /**
      * strikeToBigCamelCase方法。
      *      * @param source String类型参数
@@ -2200,9 +2840,19 @@ public class StringUtil {
      *      * @param source String类型参数
      * @return static String类型返回值
      */
+    /**
+     * strikeToLittleCamelCase方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
+     */
     public static String strikeToLittleCamelCase(String source) {
         return lowerFirst(strikeToBigCamelCase(source));
     }
+    /**
+     * strikeToUnderline方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
+     */
     /**
      * strikeToUnderline方法。
      *      * @param source String类型参数
@@ -2220,6 +2870,11 @@ public class StringUtil {
         return String.valueOf(result);
     }
 
+    /**
+     * underlineUpperToLittleCamelCase方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
+     */
     /**
      * underlineUpperToLittleCamelCase方法。
      *      * @param source String类型参数
@@ -2244,6 +2899,11 @@ public class StringUtil {
      * @time: 2022-08-23 09:18:32
      * @params: [source] 源字符串
      * @return: java.lang.String 转换后字符串
+     */
+    /**
+     * strikeToUnderlineUpper方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
      */
     /**
      * strikeToUnderlineUpper方法。
@@ -2275,6 +2935,11 @@ public class StringUtil {
      *      * @param source String类型参数
      * @return static String类型返回值
      */
+    /**
+     * underlineToLittleCamelCase方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
+     */
     public static String underlineToLittleCamelCase(String source) {
         return lowerFirst(underlineToBigCamelCase(source));
     }
@@ -2286,6 +2951,11 @@ public class StringUtil {
      * @time: 2019-06-13 17:31:00
      * @params: [source] 源字符串
      * @return: java.lang.String 转换后字符串
+     */
+    /**
+     * upperFirst方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
      */
     /**
      * upperFirst方法。
@@ -2304,6 +2974,11 @@ public class StringUtil {
 
     /**
      * 首字母小写
+     */
+    /**
+     * firstLetterLowercase方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
      */
     /**
      * firstLetterLowercase方法。
@@ -2332,6 +3007,11 @@ public class StringUtil {
      *      * @param email String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * validateEmailFormat方法。
+     *      * @param email String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean validateEmailFormat(String email) {
         if (isEmpty(email)) {
             return false;
@@ -2342,6 +3022,11 @@ public class StringUtil {
         return matcher.matches();
     }
 
+    /**
+     * trim方法。
+     *      * @param originStr String类型参数
+     * @return static String类型返回值
+     */
     /**
      * trim方法。
      *      * @param originStr String类型参数
@@ -2360,6 +3045,12 @@ public class StringUtil {
      * @time: 2020-09-28 14:46:00
      * @params: [originStr, trim] 源字符串，首尾要去除的空格
      * @return: java.lang.String 转换后字符串
+     */
+    /**
+     * trim方法。
+     *      * @param originStr String类型参数
+     * @param trim String类型参数
+     * @return static String类型返回值
      */
     /**
      * trim方法。
@@ -2410,10 +3101,22 @@ public class StringUtil {
      * @param separator String类型参数
      * @return static List<String>类型返回值
      */
+    /**
+     * listSplit方法。
+     *      * @param str String类型参数
+     * @param separator String类型参数
+     * @return static List<String>类型返回值
+     */
     public static List<String> listSplit(String str, String separator) {
         return listSplit(str, separator, true);
     }
 
+    /**
+     * split方法。
+     *      * @param str String类型参数
+     * @param separator String类型参数
+     * @return static String[]类型返回值
+     */
     /**
      * split方法。
      *      * @param str String类型参数
@@ -2434,6 +3137,13 @@ public class StringUtil {
      * @time: 2021-05-21 17:04:00
      * @params: [str, delimiter, allowStrEmpty] 字符串，分隔符，空字符是否算一个字符串
      * @return: java.util.List<java.lang.String> 响应参数
+     */
+    /**
+     * listSplit方法。
+     *      * @param str String类型参数
+     * @param separator String类型参数
+     * @param allowStrEmpty boolean类型参数
+     * @return static List<String>类型返回值
      */
     /**
      * listSplit方法。
@@ -2548,6 +3258,11 @@ public class StringUtil {
      *      * @param cs CharSequence类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isNumeric方法。
+     *      * @param cs CharSequence类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isNumeric(CharSequence cs) {
         if (isEmpty(cs)) {
             return false;
@@ -2575,10 +3290,20 @@ public class StringUtil {
      *      * @param cs CharSequence类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isEmpty方法。
+     *      * @param cs CharSequence类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isEmpty(CharSequence cs) {
         return cs == null || cs.length() == 0;
     }
 
+    /**
+     * parseString方法。
+     *      * @param object Object类型参数
+     * @return static String类型返回值
+     */
     /**
      * parseString方法。
      *      * @param object Object类型参数
@@ -2591,6 +3316,12 @@ public class StringUtil {
         return object.toString();
     }
 
+    /**
+     * parseStringOrDefault方法。
+     *      * @param object Object类型参数
+     * @param defaultValue String类型参数
+     * @return static String类型返回值
+     */
     /**
      * parseStringOrDefault方法。
      *      * @param object Object类型参数
@@ -2610,11 +3341,22 @@ public class StringUtil {
      * @param defaultValue String类型参数
      * @return static String类型返回值
      */
+    /**
+     * getOrDefault方法。
+     *      * @param str String类型参数
+     * @param defaultValue String类型参数
+     * @return static String类型返回值
+     */
     public static String getOrDefault(String str, String defaultValue) {
         return isNotEmpty(str) ? str : defaultValue;
     }
 
 
+    /**
+     * parseSteamToString方法。
+     *      * @param inputStream InputStream类型参数
+     * @return static String类型返回值
+     */
     /**
      * parseSteamToString方法。
      *      * @param inputStream InputStream类型参数
@@ -2634,6 +3376,12 @@ public class StringUtil {
      * @param charset Charset类型参数
      * @return static InputStream类型返回值
      */
+    /**
+     * parseStringToStream方法。
+     *      * @param content String类型参数
+     * @param charset Charset类型参数
+     * @return static InputStream类型返回值
+     */
     public static InputStream parseStringToStream(String content, Charset charset) {
         if (isEmpty(content)) {
             throw new IllegalArgumentException("content is empty");
@@ -2641,6 +3389,11 @@ public class StringUtil {
         return new ByteArrayInputStream(content.getBytes(charset));
     }
 
+    /**
+     * parseStringToStream方法。
+     *      * @param content String类型参数
+     * @return static InputStream类型返回值
+     */
     /**
      * parseStringToStream方法。
      *      * @param content String类型参数
@@ -2655,10 +3408,22 @@ public class StringUtil {
      *      * @param count int类型参数
      * @return static String类型返回值
      */
+    /**
+     * random方法。
+     *      * @param count int类型参数
+     * @return static String类型返回值
+     */
     public static String random(int count) {
         return random(count, true, true);
     }
 
+    /**
+     * random方法。
+     *      * @param count int类型参数
+     * @param letters boolean类型参数
+     * @param numbers boolean类型参数
+     * @return static String类型返回值
+     */
     /**
      * random方法。
      *      * @param count int类型参数
@@ -2679,10 +3444,29 @@ public class StringUtil {
      * @param numbers boolean类型参数
      * @return static String类型返回值
      */
+    /**
+     * random方法。
+     *      * @param count int类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     * @param letters boolean类型参数
+     * @param numbers boolean类型参数
+     * @return static String类型返回值
+     */
     public static String random(int count, int start, int end, boolean letters, boolean numbers) {
         return random(count, start, end, letters, numbers, null);
     }
 
+    /**
+     * random方法。
+     *      * @param count int类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     * @param letters final类型参数
+     * @param numbers final类型参数
+     * @param chars final类型参数
+     * @return static String类型返回值
+     */
     /**
      * random方法。
      *      * @param count int类型参数
@@ -2778,6 +3562,12 @@ public class StringUtil {
      * @param setter ConsumerString类型参数
      * @return static void类型返回值
      */
+    /**
+     * setIfPresent方法。
+     *      * @param value String类型参数
+     * @param setter ConsumerString类型参数
+     * @return static void类型返回值
+     */
     public static void setIfPresent(String value, Consumer<String> setter) {
         if (isNotEmpty(value)) {
             setter.accept(value);
@@ -2792,6 +3582,13 @@ public class StringUtil {
      * @param size     the size to pad to
      * @param padChar  the character to pad with
      * @return left padded String or null if null String input
+     */
+    /**
+     * leftPad方法。
+     *      * @param str String类型参数
+     * @param size int类型参数
+     * @param padChar char类型参数
+     * @return static String类型返回值
      */
     /**
      * leftPad方法。
@@ -2820,6 +3617,13 @@ public class StringUtil {
      * @param size    the size to pad to
      * @param padStr  the string to pad with, space by default if empty or null
      * @return left padded String or null if null String input
+     */
+    /**
+     * leftPad方法。
+     *      * @param str final类型参数
+     * @param size final类型参数
+     * @param padStr String类型参数
+     * @return static String类型返回值
      */
     /**
      * leftPad方法。
@@ -2876,6 +3680,13 @@ public class StringUtil {
      * @param padChar char类型参数
      * @return static String类型返回值
      */
+    /**
+     * rightPad方法。
+     *      * @param str String类型参数
+     * @param size int类型参数
+     * @param padChar char类型参数
+     * @return static String类型返回值
+     */
     public static String rightPad(String str, int size, char padChar) {
         if (str.length() < size) {
             String padding = repeat(padChar, size - str.length());
@@ -2891,6 +3702,13 @@ public class StringUtil {
      * @param size    the size to pad to
      * @param padStr  the string to pad with, space by default if empty or null
      * @return right padded String or null if null String input
+     */
+    /**
+     * rightPad方法。
+     *      * @param str final类型参数
+     * @param size final类型参数
+     * @param padStr String类型参数
+     * @return static String类型返回值
      */
     /**
      * rightPad方法。
@@ -2947,6 +3765,13 @@ public class StringUtil {
      * @param padStr String类型参数
      * @return static String类型返回值
      */
+    /**
+     * rightPadWithOver方法。
+     *      * @param str final类型参数
+     * @param size final类型参数
+     * @param padStr String类型参数
+     * @return static String类型返回值
+     */
     public static String rightPadWithOver(final String str, final int size, String padStr) {
         if (str.length() > size) {
             return str.substring(0, size);
@@ -2954,6 +3779,12 @@ public class StringUtil {
         return rightPad(str, size, padStr);
     }
 
+    /**
+     * join方法。
+     *      * @param delimiter final类型参数
+     * @param strings final类型参数
+     * @return static String类型返回值
+     */
     /**
      * join方法。
      *      * @param delimiter final类型参数
@@ -3004,6 +3835,13 @@ public class StringUtil {
      * @param replacement final类型参数
      * @return static String类型返回值
      */
+    /**
+     * replace方法。
+     *      * @param text final类型参数
+     * @param searchString final类型参数
+     * @param replacement final类型参数
+     * @return static String类型返回值
+     */
     public static String replace(final String text, final String searchString,
                                  final String replacement) {
         return replace(text, searchString, replacement, -1);
@@ -3019,6 +3857,14 @@ public class StringUtil {
      * @param replacement  the string to replace the found search string with
      * @param max          the maximum number of replacements to make, -1 for all
      * @return the resulting string after replacement
+     */
+    /**
+     * replace方法。
+     *      * @param text final类型参数
+     * @param searchString final类型参数
+     * @param replacement final类型参数
+     * @param max final类型参数
+     * @return static String类型返回值
      */
     /**
      * replace方法。
@@ -3077,6 +3923,12 @@ public class StringUtil {
      * @param searchStr final类型参数
      * @return static int类型返回值
      */
+    /**
+     * indexOfIgnoreCase方法。
+     *      * @param str final类型参数
+     * @param searchStr final类型参数
+     * @return static int类型返回值
+     */
     public static int indexOfIgnoreCase(final CharSequence str, final CharSequence searchStr) {
         return indexOfIgnoreCase(str, searchStr, 0);
     }
@@ -3088,6 +3940,13 @@ public class StringUtil {
      * @param searchStr 要查找的子串
      * @param startPos  开始搜索的位置
      * @return 子串第一次出现的位置，未找到返回-1
+     */
+    /**
+     * indexOfIgnoreCase方法。
+     *      * @param str final类型参数
+     * @param searchStr final类型参数
+     * @param startPos int类型参数
+     * @return static int类型返回值
      */
     /**
      * indexOfIgnoreCase方法。
@@ -3126,6 +3985,13 @@ public class StringUtil {
      * @param searchSequence 要查找的子串
      * @param startPos    开始搜索的位置
      * @return 子串第一次出现的位置，未找到返回-1
+     */
+    /**
+     * indexOf方法。
+     *      * @param sequence final类型参数
+     * @param searchSequence final类型参数
+     * @param startPos final类型参数
+     * @return static int类型返回值
      */
     /**
      * indexOf方法。
@@ -3194,11 +4060,21 @@ public class StringUtil {
      *      * @param message String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isFormat方法。
+     *      * @param message String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isFormat(String message) {
         Matcher matcher = Patterns.FORMAT_PATTERN.matcher(message);
         return matcher.find();
     }
 
+    /**
+     * getReader方法。
+     *      * @param str CharSequence类型参数
+     * @return static StringReader类型返回值
+     */
     /**
      * getReader方法。
      *      * @param str CharSequence类型参数
@@ -3216,11 +4092,21 @@ public class StringUtil {
      *      * @param cs CharSequence类型参数
      * @return static String类型返回值
      */
+    /**
+     * str方法。
+     *      * @param cs CharSequence类型参数
+     * @return static String类型返回值
+     */
     public static String str(CharSequence cs) {
         return null == cs ? null : cs.toString();
     }
 
 
+    /**
+     * atoi方法。
+     *      * @param str String类型参数
+     * @return static int类型返回值
+     */
     /**
      * atoi方法。
      *      * @param str String类型参数
@@ -3269,6 +4155,11 @@ public class StringUtil {
      *      * @param str String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * hasText方法。
+     *      * @param str String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean hasText(String str) {
         return (str != null && !str.isEmpty() && containsText(str));
     }
@@ -3298,6 +4189,12 @@ public class StringUtil {
      * @param searchSeq final类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * contains方法。
+     *      * @param seq final类型参数
+     * @param searchSeq final类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean contains(final CharSequence seq, final CharSequence searchSeq) {
         if (seq == null || searchSeq == null) {
             return false;
@@ -3320,6 +4217,12 @@ public class StringUtil {
      * @param searchChar final类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * contains方法。
+     *      * @param seq final类型参数
+     * @param searchChar final类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean contains(final CharSequence seq, final int searchChar) {
         if (isEmpty(seq)) {
             return false;
@@ -3335,6 +4238,13 @@ public class StringUtil {
      * @time: 2022-06-07 16:06:50
      * @params: [sequence, searchChar, startPos] 字符串，检索字符，起始下标
      * @return: int 下标
+     */
+    /**
+     * indexOf方法。
+     *      * @param cs final类型参数
+     * @param searchChar final类型参数
+     * @param start int类型参数
+     * @return static int类型返回值
      */
     /**
      * indexOf方法。

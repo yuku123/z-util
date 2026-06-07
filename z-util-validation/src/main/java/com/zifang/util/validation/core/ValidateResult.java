@@ -8,12 +8,20 @@ import java.util.*;
 /**
  * ValidateResult类。
  */
+/**
+ * ValidateResult类。
+ */
 public class ValidateResult {
 
     private final Map<String, List<String>> errors = new HashMap<>();
 
     /**
      * 添加错误信息
+     */
+    /**
+     * addError方法。
+     *      * @param fieldName String类型参数
+     * @param message String类型参数
      */
     /**
      * addError方法。
@@ -31,12 +39,20 @@ public class ValidateResult {
      * hasErrors方法。
      * @return boolean类型返回值
      */
+    /**
+     * hasErrors方法。
+     * @return boolean类型返回值
+     */
     public boolean hasErrors() {
         return !errors.isEmpty();
     }
 
     /**
      * 获取所有错误信息
+     */
+    /**
+     * getErrors方法。
+     * @return Map<String, List<String>>类型返回值
      */
     /**
      * getErrors方法。
@@ -53,6 +69,10 @@ public class ValidateResult {
      * getFirstError方法。
      * @return Optional<String>类型返回值
      */
+    /**
+     * getFirstError方法。
+     * @return Optional<String>类型返回值
+     */
     public Optional<String> getFirstError() {
         if (errors.isEmpty()) {
             return Optional.empty();
@@ -61,6 +81,10 @@ public class ValidateResult {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

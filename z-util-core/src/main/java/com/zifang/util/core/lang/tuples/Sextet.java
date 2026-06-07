@@ -15,10 +15,22 @@ package com.zifang.util.core.lang.tuples;
 /**
  * Sextet类。
  */
+/**
+ * Sextet类。
+ */
 public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
 
     protected F f;
 
+    /**
+     * Sextet方法。
+     *      * @param a A类型参数
+     * @param b B类型参数
+     * @param c C类型参数
+     * @param d D类型参数
+     * @param e E类型参数
+     * @param f F类型参数
+     */
     /**
      * Sextet方法。
      *      * @param a A类型参数
@@ -37,10 +49,18 @@ public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
      * getF方法。
      * @return F类型返回值
      */
+    /**
+     * getF方法。
+     * @return F类型返回值
+     */
     public F getF() {
         return f;
     }
 
+    /**
+     * setF方法。
+     *      * @param f F类型参数
+     */
     /**
      * setF方法。
      *      * @param f F类型参数
@@ -50,6 +70,10 @@ public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -64,6 +88,11 @@ public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -73,6 +102,10 @@ public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

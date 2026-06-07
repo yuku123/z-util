@@ -9,6 +9,9 @@ import java.awt.*;
 /**
  * Circle类。
  */
+/**
+ * Circle类。
+ */
 public class Circle {
 
     public int x, y;
@@ -24,6 +27,14 @@ public class Circle {
      * @param vx X方向速度
      * @param vy Y方向速度
      */
+    /**
+     * Circle方法。
+     *      * @param x int类型参数
+     * @param y int类型参数
+     * @param r int类型参数
+     * @param vx int类型参数
+     * @param vy int类型参数
+     */
     public Circle(int x, int y, int r, int vx, int vy) {
         this.x = x;
         this.y = y;
@@ -36,6 +47,10 @@ public class Circle {
      * 获取半径
      * @return 半径
      */
+    /**
+     * getR方法。
+     * @return int类型返回值
+     */
     public int getR() {
         return r;
     }
@@ -46,6 +61,13 @@ public class Circle {
      * @param miny 最小Y坐标
      * @param maxx 最大X坐标
      * @param maxy 最大Y坐标
+     */
+    /**
+     * move方法。
+     *      * @param minx int类型参数
+     * @param miny int类型参数
+     * @param maxx int类型参数
+     * @param maxy int类型参数
      */
     public void move(int minx, int miny, int maxx, int maxy) {
         x += vx;
@@ -78,6 +100,11 @@ public class Circle {
      *
      * @param p 要检测的坐标点
      * @return 如果点P在圆内（包括边界）返回true，否则返回false
+     */
+    /**
+     * contain方法。
+     *      * @param p Point类型参数
+     * @return boolean类型返回值
      */
     public boolean contain(Point p) {
         return (x - p.x) * (x - p.x) + (y - p.y) * (y - p.y) <= r * r;

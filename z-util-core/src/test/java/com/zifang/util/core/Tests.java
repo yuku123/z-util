@@ -6,9 +6,15 @@ import com.zifang.util.core.parser.xml.XmlBeanUtil;
 import com.zifang.util.core.util.GsonUtil;
 import org.junit.Test;
 
+/**
+ * Tests类。
+ */
 public class Tests {
 
     @Test
+    /**
+     * test1方法。
+     */
     public void test1() {
         String content = FileUtil.readFile("test.xml");
         TitleRequest titleRequest = XmlBeanUtil.xmlToBean(content, TitleRequest.class);

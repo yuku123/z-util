@@ -11,6 +11,9 @@ import java.util.List;
  * - Escaping of quotes by doubling
  * - Support for writing String[] rows
  */
+/**
+ * CsvWriter类。
+ */
 public class CsvWriter implements Closeable, Flushable {
 
     private final Writer writer;
@@ -20,6 +23,10 @@ public class CsvWriter implements Closeable, Flushable {
     /**
      * Create a CsvWriter to an OutputStream with default settings
      */
+    /**
+     * CsvWriter方法。
+     *      * @param outputStream OutputStream类型参数
+     */
     public CsvWriter(OutputStream outputStream) {
         this(outputStream, ',', false);
     }
@@ -27,12 +34,23 @@ public class CsvWriter implements Closeable, Flushable {
     /**
      * Create a CsvWriter to an OutputStream with custom delimiter
      */
+    /**
+     * CsvWriter方法。
+     *      * @param outputStream OutputStream类型参数
+     * @param delimiter char类型参数
+     */
     public CsvWriter(OutputStream outputStream, char delimiter) {
         this(outputStream, delimiter, false);
     }
 
     /**
      * Create a CsvWriter to an OutputStream with custom settings
+     */
+    /**
+     * CsvWriter方法。
+     *      * @param outputStream OutputStream类型参数
+     * @param delimiter char类型参数
+     * @param trimFields boolean类型参数
      */
     public CsvWriter(OutputStream outputStream, char delimiter, boolean trimFields) {
         this.writer = new OutputStreamWriter(outputStream);
@@ -43,6 +61,10 @@ public class CsvWriter implements Closeable, Flushable {
     /**
      * Create a CsvWriter to a Writer with default settings
      */
+    /**
+     * CsvWriter方法。
+     *      * @param writer Writer类型参数
+     */
     public CsvWriter(Writer writer) {
         this(writer, ',', false);
     }
@@ -50,12 +72,23 @@ public class CsvWriter implements Closeable, Flushable {
     /**
      * Create a CsvWriter to a Writer with custom delimiter
      */
+    /**
+     * CsvWriter方法。
+     *      * @param writer Writer类型参数
+     * @param delimiter char类型参数
+     */
     public CsvWriter(Writer writer, char delimiter) {
         this(writer, delimiter, false);
     }
 
     /**
      * Create a CsvWriter to a Writer with custom settings
+     */
+    /**
+     * CsvWriter方法。
+     *      * @param writer Writer类型参数
+     * @param delimiter char类型参数
+     * @param trimFields boolean类型参数
      */
     public CsvWriter(Writer writer, char delimiter, boolean trimFields) {
         this.writer = writer;
@@ -66,6 +99,10 @@ public class CsvWriter implements Closeable, Flushable {
     /**
      * Create a CsvWriter to a file
      */
+    /**
+     * CsvWriter方法。
+     *      * @param filePath String类型参数
+     */
     public CsvWriter(String filePath) throws FileNotFoundException {
         this(new FileOutputStream(filePath), ',', false);
     }
@@ -73,12 +110,21 @@ public class CsvWriter implements Closeable, Flushable {
     /**
      * Create a CsvWriter to a file with custom delimiter
      */
+    /**
+     * CsvWriter方法。
+     *      * @param filePath String类型参数
+     * @param delimiter char类型参数
+     */
     public CsvWriter(String filePath, char delimiter) throws FileNotFoundException {
         this(new FileOutputStream(filePath), delimiter, false);
     }
 
     /**
      * Write a single row
+     */
+    /**
+     * writeRow方法。
+     *      * @param fields String...类型参数
      */
     public void writeRow(String... fields) throws IOException {
         for (int i = 0; i < fields.length; i++) {
@@ -94,6 +140,10 @@ public class CsvWriter implements Closeable, Flushable {
     /**
      * Write a single row from a list
      */
+    /**
+     * writeRow方法。
+     *      * @param fields ListString类型参数
+     */
     public void writeRow(List<String> fields) throws IOException {
         for (int i = 0; i < fields.size(); i++) {
             if (i > 0) {
@@ -108,6 +158,10 @@ public class CsvWriter implements Closeable, Flushable {
     /**
      * Write multiple rows
      */
+    /**
+     * writeRows方法。
+     *      * @param rows ListString[]类型参数
+     */
     public void writeRows(List<String[]> rows) throws IOException {
         for (String[] row : rows) {
             writeRow(row);
@@ -116,6 +170,10 @@ public class CsvWriter implements Closeable, Flushable {
 
     /**
      * Write multiple rows from varargs
+     */
+    /**
+     * writeRows方法。
+     *      * @param rows String[]...类型参数
      */
     public void writeRows(String[]... rows) throws IOException {
         for (String[] row : rows) {
@@ -181,11 +239,17 @@ public class CsvWriter implements Closeable, Flushable {
     }
 
     @Override
+    /**
+     * flush方法。
+     */
     public void flush() throws IOException {
         writer.flush();
     }
 
     @Override
+    /**
+     * close方法。
+     */
     public void close() throws IOException {
         writer.close();
     }
@@ -195,29 +259,58 @@ public class CsvWriter implements Closeable, Flushable {
         private char delimiter = ',';
         private boolean trimFields = false;
 
+    /**
+     * delimiter方法。
+     *      * @param delimiter char类型参数
+     * @return Builder类型返回值
+     */
         public Builder delimiter(char delimiter) {
             this.delimiter = delimiter;
             return this;
         }
 
+    /**
+     * trimFields方法。
+     *      * @param trimFields boolean类型参数
+     * @return Builder类型返回值
+     */
         public Builder trimFields(boolean trimFields) {
             this.trimFields = trimFields;
             return this;
         }
 
+    /**
+     * build方法。
+     *      * @param outputStream OutputStream类型参数
+     * @return CsvWriter类型返回值
+     */
         public CsvWriter build(OutputStream outputStream) {
             return new CsvWriter(outputStream, delimiter, trimFields);
         }
 
+    /**
+     * build方法。
+     *      * @param writer Writer类型参数
+     * @return CsvWriter类型返回值
+     */
         public CsvWriter build(Writer writer) {
             return new CsvWriter(writer, delimiter, trimFields);
         }
 
+    /**
+     * build方法。
+     *      * @param filePath String类型参数
+     * @return CsvWriter类型返回值
+     */
         public CsvWriter build(String filePath) throws FileNotFoundException {
             return new CsvWriter(new FileOutputStream(filePath), delimiter, trimFields);
         }
     }
 
+    /**
+     * builder方法。
+     * @return static Builder类型返回值
+     */
     public static Builder builder() {
         return new Builder();
     }

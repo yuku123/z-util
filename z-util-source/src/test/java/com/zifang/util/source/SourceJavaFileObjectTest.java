@@ -10,9 +10,15 @@ import static org.junit.Assert.*;
 /**
  * SourceJavaFileObject 测试
  */
+/**
+ * SourceJavaFileObjectTest类。
+ */
 public class SourceJavaFileObjectTest {
 
     @Test
+    /**
+     * testConstructorWithSource方法。
+     */
     public void testConstructorWithSource() {
         String sourceCode = "public class Test {}";
         SourceJavaFileObject fileObject = new SourceJavaFileObject("Test", sourceCode);
@@ -21,6 +27,9 @@ public class SourceJavaFileObjectTest {
     }
 
     @Test(expected = UnsupportedOperationException.class)
+    /**
+     * testGetCharContent方法。
+     */
     public void testGetCharContent() throws Exception {
         String sourceCode = "package com.example;\npublic class Hello {}\n";
         SourceJavaFileObject fileObject = new SourceJavaFileObject("Hello", sourceCode);
@@ -30,6 +39,9 @@ public class SourceJavaFileObjectTest {
     }
 
     @Test
+    /**
+     * testGetName方法。
+     */
     public void testGetName() {
         SourceJavaFileObject fileObject = new SourceJavaFileObject("com.example.Test", "source code");
         assertTrue(fileObject.getName().contains("com.example.Test"));

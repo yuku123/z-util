@@ -5,8 +5,16 @@ import com.zifang.util.http.base.pojo.HttpRequestDefinition;
 /**
  * cURL 解析器使用示例
  */
+/**
+ * CurlParserExample类。
+ */
 public class CurlParserExample {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         System.out.println("========================================");
         System.out.println("cURL 解析器使用示例");

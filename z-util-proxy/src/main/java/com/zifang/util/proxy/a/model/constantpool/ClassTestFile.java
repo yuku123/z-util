@@ -8,10 +8,18 @@ package com.zifang.util.proxy.a.model.constantpool;
 /**
  * ClassTestFile类。
  */
+/**
+ * ClassTestFile类。
+ */
 public class ClassTestFile {
     int i = 0;
     static String str = "Hello World";
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     /**
      * main方法。
      *      * @param args String[]类型参数

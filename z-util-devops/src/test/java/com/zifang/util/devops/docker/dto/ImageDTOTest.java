@@ -12,9 +12,15 @@ import static org.junit.Assert.*;
 /**
  * ImageDTO 类测试
  */
+/**
+ * ImageDTOTest类。
+ */
 public class ImageDTOTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         ImageDTO dto = new ImageDTO();
         assertNotNull(dto);
@@ -30,6 +36,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testIdSetterAndGetter方法。
+     */
     public void testIdSetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         dto.setId("sha256:abc123");
@@ -37,6 +46,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testRepositorySetterAndGetter方法。
+     */
     public void testRepositorySetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         dto.setRepository("nginx");
@@ -44,6 +56,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testTagSetterAndGetter方法。
+     */
     public void testTagSetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         dto.setTag("latest");
@@ -54,6 +69,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testCreatedSetterAndGetter方法。
+     */
     public void testCreatedSetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         dto.setCreated("2023-01-15T10:30:00Z");
@@ -61,6 +79,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testSizeSetterAndGetter方法。
+     */
     public void testSizeSetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         dto.setSize("142MB");
@@ -68,6 +89,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testSizeBytesSetterAndGetter方法。
+     */
     public void testSizeBytesSetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         dto.setSizeBytes(148897280L);
@@ -75,6 +99,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testLabelsSetterAndGetter方法。
+     */
     public void testLabelsSetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         Map<String, String> labels = new HashMap<>();
@@ -90,6 +117,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testRepoTagsSetterAndGetter方法。
+     */
     public void testRepoTagsSetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         List<String> repoTags = Arrays.asList("nginx:latest", "nginx:1.19.0", "nginx:alpine");
@@ -102,6 +132,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testPortsSetterAndGetter方法。
+     */
     public void testPortsSetterAndGetter() {
         ImageDTO dto = new ImageDTO();
         List<String> ports = Arrays.asList("80/tcp", "443/tcp");
@@ -114,6 +147,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         ImageDTO dto = new ImageDTO();
         dto.setId("sha256:abc123");
@@ -129,6 +165,9 @@ public class ImageDTOTest {
     }
 
     @Test
+    /**
+     * testCompleteImageDTO方法。
+     */
     public void testCompleteImageDTO() {
         ImageDTO dto = new ImageDTO();
         dto.setId("sha256:def456");

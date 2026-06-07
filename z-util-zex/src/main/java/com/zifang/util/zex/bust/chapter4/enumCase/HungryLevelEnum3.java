@@ -9,6 +9,9 @@ package com.zifang.util.zex.bust.chapter4.enumCase;
  * @author zifang
  * @version 1.0
  */
+/**
+ * HungryLevelEnum3枚举。
+ */
 public enum HungryLevelEnum3 {
     HUNGRY_LEVEL_1("一成饱") {
         @Override
@@ -35,10 +38,18 @@ public enum HungryLevelEnum3 {
         this.description = description;
     }
 
+    /**
+     * getDescription方法。
+     * @return String类型返回值
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * setDescription方法。
+     *      * @param description String类型参数
+     */
     public void setDescription(String description) {
         this.description = description;
     }

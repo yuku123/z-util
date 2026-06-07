@@ -10,8 +10,16 @@ import com.zifang.util.proxy.a.decompile.app.App;
 /**
  * Test类。
  */
+/**
+ * Test类。
+ */
 public class Test {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     /**
      * main方法。
      *      * @param args String[]类型参数

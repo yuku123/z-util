@@ -11,6 +11,9 @@ import java.lang.annotation.*;
 /**
  * NotNull注解。
  */
+/**
+ * NotNull注解。
+ */
 public @interface NotNull {
     String message() default "不能为空";
 }

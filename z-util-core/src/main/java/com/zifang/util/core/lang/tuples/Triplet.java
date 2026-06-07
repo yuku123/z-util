@@ -6,10 +6,19 @@ package com.zifang.util.core.lang.tuples;
 /**
  * Triplet类。
  */
+/**
+ * Triplet类。
+ */
 public class Triplet<A, B, C> extends Pair<A, B> {
 
     protected C c;
 
+    /**
+     * Triplet方法。
+     *      * @param a A类型参数
+     * @param b B类型参数
+     * @param c C类型参数
+     */
     /**
      * Triplet方法。
      *      * @param a A类型参数
@@ -25,10 +34,18 @@ public class Triplet<A, B, C> extends Pair<A, B> {
      * getC方法。
      * @return C类型返回值
      */
+    /**
+     * getC方法。
+     * @return C类型返回值
+     */
     public C getC() {
         return c;
     }
 
+    /**
+     * setC方法。
+     *      * @param c C类型参数
+     */
     /**
      * setC方法。
      *      * @param c C类型参数
@@ -38,6 +55,10 @@ public class Triplet<A, B, C> extends Pair<A, B> {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -52,6 +73,11 @@ public class Triplet<A, B, C> extends Pair<A, B> {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -61,6 +87,10 @@ public class Triplet<A, B, C> extends Pair<A, B> {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

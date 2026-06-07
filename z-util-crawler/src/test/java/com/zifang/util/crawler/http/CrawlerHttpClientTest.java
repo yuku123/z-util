@@ -17,6 +17,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.Assert.*;
 
+/**
+ * CrawlerHttpClientTest类。
+ */
 public class CrawlerHttpClientTest {
 
     private Thread serverThread;
@@ -29,6 +32,9 @@ public class CrawlerHttpClientTest {
     private String baseUrl;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() throws Exception {
         httpClient = new CrawlerHttpClient();
 
@@ -59,6 +65,9 @@ public class CrawlerHttpClientTest {
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() throws Exception {
         serverStop = true;
         if (serverThread != null) {
@@ -148,18 +157,27 @@ public class CrawlerHttpClientTest {
     // --- HttpResponse inner class tests ---
 
     @Test
+    /**
+     * testHttpResponse_GetCode方法。
+     */
     public void testHttpResponse_GetCode() {
         CrawlerHttpClient.HttpResponse response = new CrawlerHttpClient.HttpResponse(200, "body", new HashMap<>());
         assertEquals(200, response.getCode());
     }
 
     @Test
+    /**
+     * testHttpResponse_GetBody方法。
+     */
     public void testHttpResponse_GetBody() {
         CrawlerHttpClient.HttpResponse response = new CrawlerHttpClient.HttpResponse(200, "test body", new HashMap<>());
         assertEquals("test body", response.getBody());
     }
 
     @Test
+    /**
+     * testHttpResponse_GetHeaders方法。
+     */
     public void testHttpResponse_GetHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
@@ -168,12 +186,18 @@ public class CrawlerHttpClientTest {
     }
 
     @Test
+    /**
+     * testHttpResponse_WithNullBody方法。
+     */
     public void testHttpResponse_WithNullBody() {
         CrawlerHttpClient.HttpResponse response = new CrawlerHttpClient.HttpResponse(200, null, new HashMap<>());
         assertNull(response.getBody());
     }
 
     @Test
+    /**
+     * testHttpResponse_WithNullHeaders方法。
+     */
     public void testHttpResponse_WithNullHeaders() {
         CrawlerHttpClient.HttpResponse response = new CrawlerHttpClient.HttpResponse(200, "body", null);
         assertNotNull(response.getHeaders());
@@ -182,6 +206,9 @@ public class CrawlerHttpClientTest {
     // --- GET request tests ---
 
     @Test
+    /**
+     * testGet_WithSuccessfulResponse方法。
+     */
     public void testGet_WithSuccessfulResponse() throws Exception {
         enqueue(200, "Hello World", "text/plain");
         CrawlerHttpClient.HttpResponse response = httpClient.get(baseUrl, null);
@@ -190,6 +217,9 @@ public class CrawlerHttpClientTest {
     }
 
     @Test
+    /**
+     * testGet_WithHeaders方法。
+     */
     public void testGet_WithHeaders() throws Exception {
         enqueue(200, "OK", "text/plain");
         Map<String, String> headers = new HashMap<>();
@@ -200,6 +230,9 @@ public class CrawlerHttpClientTest {
     }
 
     @Test
+    /**
+     * testGet_With404Response方法。
+     */
     public void testGet_With404Response() throws Exception {
         enqueue(404, "Not Found", "text/plain");
         CrawlerHttpClient.HttpResponse response = httpClient.get(baseUrl, null);
@@ -208,6 +241,9 @@ public class CrawlerHttpClientTest {
     }
 
     @Test
+    /**
+     * testGet_ReturnsResponseHeaders方法。
+     */
     public void testGet_ReturnsResponseHeaders() throws Exception {
         enqueue(200, "OK", "text/plain");
         CrawlerHttpClient.HttpResponse response = httpClient.get(baseUrl, null);
@@ -217,6 +253,9 @@ public class CrawlerHttpClientTest {
     // --- POST request tests ---
 
     @Test
+    /**
+     * testPost_WithSuccessfulResponse方法。
+     */
     public void testPost_WithSuccessfulResponse() throws Exception {
         enqueue(201, "Created", "text/plain");
         CrawlerHttpClient.HttpResponse response = httpClient.post(baseUrl, "{\"name\":\"test\"}", null);
@@ -225,6 +264,9 @@ public class CrawlerHttpClientTest {
     }
 
     @Test
+    /**
+     * testPost_WithHeaders方法。
+     */
     public void testPost_WithHeaders() throws Exception {
         enqueue(200, "OK", "text/plain");
         Map<String, String> headers = new HashMap<>();
@@ -234,6 +276,9 @@ public class CrawlerHttpClientTest {
     }
 
     @Test
+    /**
+     * testPost_WithEmptyBody方法。
+     */
     public void testPost_WithEmptyBody() throws Exception {
         enqueue(204, "", "text/plain");
         CrawlerHttpClient.HttpResponse response = httpClient.post(baseUrl, "", null);
@@ -243,6 +288,9 @@ public class CrawlerHttpClientTest {
     // --- Download tests ---
 
     @Test
+    /**
+     * testDownload_Success方法。
+     */
     public void testDownload_Success() throws Exception {
         enqueue(200, "file content here", "text/plain");
         File tempFile = File.createTempFile("download_test", ".txt");
@@ -254,6 +302,9 @@ public class CrawlerHttpClientTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testDownload_With404Response方法。
+     */
     public void testDownload_With404Response() throws Exception {
         enqueue(404, "Not Found", "text/plain");
         File tempFile = File.createTempFile("download_test", ".txt");
@@ -262,6 +313,9 @@ public class CrawlerHttpClientTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testDownload_WithServerError方法。
+     */
     public void testDownload_WithServerError() throws Exception {
         enqueue(500, "Internal Server Error", "text/plain");
         File tempFile = File.createTempFile("download_test", ".txt");
@@ -272,6 +326,9 @@ public class CrawlerHttpClientTest {
     // --- setProxy test ---
 
     @Test
+    /**
+     * testSetProxy_DoesNotThrow方法。
+     */
     public void testSetProxy_DoesNotThrow() {
         httpClient.setProxy("127.0.0.1", 8080);
     }
@@ -279,6 +336,9 @@ public class CrawlerHttpClientTest {
     // --- Multiple requests test ---
 
     @Test
+    /**
+     * testMultipleGetRequests方法。
+     */
     public void testMultipleGetRequests() throws Exception {
         enqueue(200, "Response 1", "text/plain");
         CrawlerHttpClient.HttpResponse r1 = httpClient.get(baseUrl, null);

@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug18Test类。
+ */
 public class JsonDebug18Test {
 
     @Test
+    /**
+     * testAstToJavaDirectly方法。
+     */
     public void testAstToJavaDirectly() throws Exception {
         // Manually build AST for {"a":1} and call astToJava
         JSONParser jsonParser = new JSONParser();
@@ -82,6 +88,9 @@ public class JsonDebug18Test {
     }
 
     @Test
+    /**
+     * testExtractStringValue方法。
+     */
     public void testExtractStringValue() throws Exception {
         JSONParser jsonParser = new JSONParser();
 

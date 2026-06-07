@@ -10,9 +10,15 @@ import static org.junit.Assert.*;
 /**
  * Component 类测试
  */
+/**
+ * ComponentTest类。
+ */
 public class ComponentTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         Component component = new Component();
         assertNotNull(component);
@@ -27,6 +33,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testIdSetterAndGetter方法。
+     */
     public void testIdSetterAndGetter() {
         Component component = new Component();
         component.setId("comp-123");
@@ -34,6 +43,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testRepositorySetterAndGetter方法。
+     */
     public void testRepositorySetterAndGetter() {
         Component component = new Component();
         component.setRepository("maven-releases");
@@ -41,6 +53,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testGroupSetterAndGetter方法。
+     */
     public void testGroupSetterAndGetter() {
         Component component = new Component();
         component.setGroup("com.example");
@@ -48,6 +63,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testNameSetterAndGetter方法。
+     */
     public void testNameSetterAndGetter() {
         Component component = new Component();
         component.setName("my-library");
@@ -55,6 +73,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testVersionSetterAndGetter方法。
+     */
     public void testVersionSetterAndGetter() {
         Component component = new Component();
         component.setVersion("1.0.0");
@@ -62,6 +83,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testFormatSetterAndGetter方法。
+     */
     public void testFormatSetterAndGetter() {
         Component component = new Component();
         component.setFormat("maven");
@@ -69,6 +93,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testAssetsSetterAndGetter方法。
+     */
     public void testAssetsSetterAndGetter() {
         Component component = new Component();
 
@@ -86,6 +113,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testCompareTo方法。
+     */
     public void testCompareTo() {
         Component comp1 = new Component();
         comp1.setVersion("1.0.0");
@@ -102,6 +132,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         Component comp1 = new Component();
         comp1.setId("id1");
@@ -123,6 +156,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentId方法。
+     */
     public void testEqualsWithDifferentId() {
         Component comp1 = new Component();
         comp1.setId("id1");
@@ -134,24 +170,36 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testEqualsWithSameObject方法。
+     */
     public void testEqualsWithSameObject() {
         Component component = new Component();
         assertEquals(component, component);
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         Component component = new Component();
         assertNotEquals(component, null);
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentClass方法。
+     */
     public void testEqualsWithDifferentClass() {
         Component component = new Component();
         assertNotEquals(component, "not a component");
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         Component comp1 = new Component();
         comp1.setId("id1");
@@ -165,6 +213,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testHashCodeConsistency方法。
+     */
     public void testHashCodeConsistency() {
         Component component = new Component();
         component.setId("id1");
@@ -176,6 +227,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         Component component = new Component();
         component.setId("test-id");
@@ -191,6 +245,9 @@ public class ComponentTest {
     }
 
     @Test
+    /**
+     * testCompleteComponent方法。
+     */
     public void testCompleteComponent() {
         Component component = new Component();
         component.setId("comp-full");

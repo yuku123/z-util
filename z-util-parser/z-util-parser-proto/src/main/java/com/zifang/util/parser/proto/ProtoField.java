@@ -7,6 +7,9 @@ import java.util.Objects;
  *
  * @author zifang
  */
+/**
+ * ProtoField类。
+ */
 public class ProtoField {
 
     /**
@@ -29,6 +32,13 @@ public class ProtoField {
      */
     private final boolean repeated;
 
+    /**
+     * ProtoField方法。
+     *      * @param type String类型参数
+     * @param name String类型参数
+     * @param tag int类型参数
+     * @param repeated boolean类型参数
+     */
     public ProtoField(String type, String name, int tag, boolean repeated) {
         this.type = type;
         this.name = name;
@@ -36,23 +46,44 @@ public class ProtoField {
         this.repeated = repeated;
     }
 
+    /**
+     * getType方法。
+     * @return String类型返回值
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * getTag方法。
+     * @return int类型返回值
+     */
     public int getTag() {
         return tag;
     }
 
+    /**
+     * isRepeated方法。
+     * @return boolean类型返回值
+     */
     public boolean isRepeated() {
         return repeated;
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -64,11 +95,19 @@ public class ProtoField {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(type, name, tag, repeated);
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (repeated) {

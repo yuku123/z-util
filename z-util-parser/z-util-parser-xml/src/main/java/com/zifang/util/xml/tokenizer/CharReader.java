@@ -9,6 +9,9 @@ import java.io.Reader;
  *
  * @author zifang
  */
+/**
+ * CharReader类。
+ */
 public class CharReader {
 
     private static final int BUFFER_SIZE = 4096;
@@ -21,6 +24,10 @@ public class CharReader {
 
     private int size;
 
+    /**
+     * CharReader方法。
+     *      * @param reader Reader类型参数
+     */
     public CharReader(Reader reader) {
         this.reader = reader;
         this.buffer = new char[BUFFER_SIZE];
@@ -28,6 +35,10 @@ public class CharReader {
 
     /**
      * 预读当前字符，不移动光标。
+     */
+    /**
+     * peek方法。
+     * @return char类型返回值
      */
     public char peek() throws IOException {
         if (pos >= size) {
@@ -42,6 +53,10 @@ public class CharReader {
     /**
      * 返回前一个字符。
      */
+    /**
+     * peekPrevious方法。
+     * @return char类型返回值
+     */
     public char peekPrevious() {
         if (pos - 1 < 0) {
             return (char) -1;
@@ -51,6 +66,10 @@ public class CharReader {
 
     /**
      * 预读下一个字符（不移动光标），但会填充 buffer 如果需要。
+     */
+    /**
+     * peekNext方法。
+     * @return char类型返回值
      */
     public char peekNext() throws IOException {
         if (pos + 1 >= size) {
@@ -67,6 +86,10 @@ public class CharReader {
     /**
      * 消费并返回下一个字符，光标前移。
      */
+    /**
+     * next方法。
+     * @return char类型返回值
+     */
     public char next() throws IOException {
         if (pos >= size) {
             fillBuffer();
@@ -80,6 +103,9 @@ public class CharReader {
     /**
      * 回退一个字符。
      */
+    /**
+     * back方法。
+     */
     public void back() {
         if (pos > 0) {
             pos--;
@@ -88,6 +114,10 @@ public class CharReader {
 
     /**
      * 是否还有更多字符。
+     */
+    /**
+     * hasMore方法。
+     * @return boolean类型返回值
      */
     public boolean hasMore() throws IOException {
         if (pos < size) {

@@ -12,6 +12,9 @@ import java.io.File;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * GitRepository类。
+ */
 public class GitRepository {
 
     private final File workDir;
@@ -23,6 +26,11 @@ public class GitRepository {
      * @param workDir 工作目录（包含 .git 子目录的目录）
      * @param gitDir  .git 目录
      */
+    /**
+     * GitRepository方法。
+     *      * @param workDir File类型参数
+     * @param gitDir File类型参数
+     */
     public GitRepository(File workDir, File gitDir) {
         this.workDir = workDir;
         this.gitDir = gitDir;
@@ -31,12 +39,20 @@ public class GitRepository {
     /**
      * 获取工作目录
      */
+    /**
+     * getWorkDir方法。
+     * @return File类型返回值
+     */
     public File getWorkDir() {
         return workDir;
     }
 
     /**
      * 获取 .git 目录
+     */
+    /**
+     * getGitDir方法。
+     * @return File类型返回值
      */
     public File getGitDir() {
         return gitDir;
@@ -45,11 +61,19 @@ public class GitRepository {
     /**
      * 仓库路径字符串（用于打印）
      */
+    /**
+     * getPath方法。
+     * @return String类型返回值
+     */
     public String getPath() {
         return workDir == null ? null : workDir.getAbsolutePath();
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "GitRepository{path='" + getPath() + "'}";
     }

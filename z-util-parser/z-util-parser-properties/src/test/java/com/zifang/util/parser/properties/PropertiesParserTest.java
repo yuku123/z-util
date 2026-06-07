@@ -10,6 +10,9 @@ import java.util.List;
  *
  * @author zifang
  */
+/**
+ * PropertiesParserTest类。
+ */
 public class PropertiesParserTest {
 
     private PropertiesParser parser = new PropertiesParser();
@@ -18,6 +21,9 @@ public class PropertiesParserTest {
      * 测试 1: 基本 key=value 解析
      */
     @Test
+    /**
+     * testBasicKeyValueParsing方法。
+     */
     public void testBasicKeyValueParsing() {
         String input = "name=zifang\nage=30";
         PropertiesModel model = parser.parse(input);
@@ -31,6 +37,9 @@ public class PropertiesParserTest {
      * 测试 2: 含注释行（# 和 !）
      */
     @Test
+    /**
+     * testCommentLines方法。
+     */
     public void testCommentLines() {
         String input = "# This is a comment\n" +
                 "! This is also a comment\n" +
@@ -49,6 +58,9 @@ public class PropertiesParserTest {
      * 测试 3: 含空值 key=
      */
     @Test
+    /**
+     * testEmptyValue方法。
+     */
     public void testEmptyValue() {
         String input = "name=\nage=30";
         PropertiesModel model = parser.parse(input);
@@ -62,6 +74,9 @@ public class PropertiesParserTest {
      * line2
      */
     @Test
+    /**
+     * testMultiLineContinuation方法。
+     */
     public void testMultiLineContinuation() {
         String input = "content=line1\\\nline2\\\nline3\nnext=value";
         PropertiesModel model = parser.parse(input);
@@ -74,6 +89,9 @@ public class PropertiesParserTest {
      * 测试 5: Unicode 转义 \u0041\u0042 → AB
      */
     @Test
+    /**
+     * testUnicodeEscape方法。
+     */
     public void testUnicodeEscape() {
         String input = "chars=\\u0041\\u0042\\u0043";
         PropertiesModel model = parser.parse(input);
@@ -85,6 +103,9 @@ public class PropertiesParserTest {
      * 测试 6: 含重复 key（后者覆盖前者）
      */
     @Test
+    /**
+     * testDuplicateKeys方法。
+     */
     public void testDuplicateKeys() {
         String input = "name=zifang1\nname=zifang2";
         PropertiesModel model = parser.parse(input);
@@ -97,6 +118,9 @@ public class PropertiesParserTest {
      * 测试 7: 含空白行
      */
     @Test
+    /**
+     * testBlankLines方法。
+     */
     public void testBlankLines() {
         String input = "name=zifang\n\n\nage=30\n";
         PropertiesModel model = parser.parse(input);
@@ -110,6 +134,9 @@ public class PropertiesParserTest {
      * 测试 8: 含前置空白 key
      */
     @Test
+    /**
+     * testLeadingWhitespaceKey方法。
+     */
     public void testLeadingWhitespaceKey() {
         String input = "  name=zifang\n   age=30";
         PropertiesModel model = parser.parse(input);
@@ -122,6 +149,9 @@ public class PropertiesParserTest {
      * 测试 9: list-style key[0]=val 解析
      */
     @Test
+    /**
+     * testListStyleKey方法。
+     */
     public void testListStyleKey() {
         String input = "items[0]=apple\nitems[1]=banana\nitems[2]=cherry";
         PropertiesModel model = parser.parse(input);
@@ -136,6 +166,9 @@ public class PropertiesParserTest {
      * 测试 10: round-trip：解析后重新输出，内容一致
      */
     @Test
+    /**
+     * testRoundTrip方法。
+     */
     public void testRoundTrip() {
         String input = "# Comment for name\n" +
                 "name=zifang\n" +
@@ -162,6 +195,9 @@ public class PropertiesParserTest {
      * 测试转义字符：\t \n \r \" \\
      */
     @Test
+    /**
+     * testEscapeCharacters方法。
+     */
     public void testEscapeCharacters() {
         String input = "tab=hello\\tworld\n" +
                 "newline=line1\\nline2\n" +
@@ -181,6 +217,9 @@ public class PropertiesParserTest {
      * 测试键的有序性
      */
     @Test
+    /**
+     * testKeyOrder方法。
+     */
     public void testKeyOrder() {
         String input = "zebra=animal\napple=fruit\nbanana=yellow";
         PropertiesModel model = parser.parse(input);
@@ -197,6 +236,9 @@ public class PropertiesParserTest {
      * 测试 11: parseFromReader — 从 Reader 解析（文件编码ISO-8859-1）
      */
     @Test
+    /**
+     * testParseFromReader方法。
+     */
     public void testParseFromReader() throws Exception {
         String content = "name=zifang\nage=30";
         java.io.StringReader reader = new java.io.StringReader(content);
@@ -210,6 +252,9 @@ public class PropertiesParserTest {
      * 测试 12: parseFromFile — 从真实文件解析
      */
     @Test
+    /**
+     * testParseFromFile方法。
+     */
     public void testParseFromFile() throws Exception {
         java.io.File tempFile = java.io.File.createTempFile("test", ".properties");
         tempFile.deleteOnExit();
@@ -229,6 +274,9 @@ public class PropertiesParserTest {
      * 测试 13: storeToWriter — 写入到 Writer 并读回
      */
     @Test
+    /**
+     * testStoreToWriter方法。
+     */
     public void testStoreToWriter() throws Exception {
         String input = "# This is a comment\nname=test\nvalue=123";
         PropertiesModel model = parser.parse(input);
@@ -246,6 +294,9 @@ public class PropertiesParserTest {
      * 测试 14: key包含特殊字符 — key中有空格/等号时的处理
      */
     @Test
+    /**
+     * testKeyWithSpecialChars方法。
+     */
     public void testKeyWithSpecialChars() {
         // Key中的空格和等号应该被包含在key中（等号作为分隔符，空格作为key的一部分）
         String input = "key with space=value1\nanother key=value2";
@@ -260,6 +311,9 @@ public class PropertiesParserTest {
      * 测试 15: value含中文 — 中文值的解析与round-trip
      */
     @Test
+    /**
+     * testChineseValue方法。
+     */
     public void testChineseValue() {
         String input = "greeting=你好世界\nmessage=欢迎使用";
         PropertiesModel model = parser.parse(input);
@@ -278,6 +332,9 @@ public class PropertiesParserTest {
      * 测试 16: value含引号 — "和'在value中的处理
      */
     @Test
+    /**
+     * testValueWithQuotes方法。
+     */
     public void testValueWithQuotes() {
         String input = "quote1=他说：\"你好\"\nquote2=她说：'你好'\nboth=双\"单'混合";
         PropertiesModel model = parser.parse(input);
@@ -291,6 +348,9 @@ public class PropertiesParserTest {
      * 测试 17: 大量key性能 — 创建100+键值对，验证正确性和性能量级
      */
     @Test
+    /**
+     * testLargeNumberOfKeys方法。
+     */
     public void testLargeNumberOfKeys() {
         StringBuilder sb = new StringBuilder();
         int keyCount = 150;
@@ -318,6 +378,9 @@ public class PropertiesParserTest {
      * 测试 18: getPropertyOrDefault — 取不存在的key时返回默认值
      */
     @Test
+    /**
+     * testGetPropertyOrDefault方法。
+     */
     public void testGetPropertyOrDefault() {
         String input = "existing=value";
         PropertiesModel model = parser.parse(input);
@@ -331,6 +394,9 @@ public class PropertiesParserTest {
      * 测试 19: containsKey — 存在性检查
      */
     @Test
+    /**
+     * testContainsKey方法。
+     */
     public void testContainsKey() {
         String input = "key1=value1\nkey2=value2";
         PropertiesModel model = parser.parse(input);
@@ -345,6 +411,9 @@ public class PropertiesParserTest {
      * 测试 20: removeProperty — 删除某个key
      */
     @Test
+    /**
+     * testRemoveProperty方法。
+     */
     public void testRemoveProperty() {
         String input = "key1=value1\nkey2=value2\nkey3=value3";
         PropertiesModel model = parser.parse(input);
@@ -366,6 +435,9 @@ public class PropertiesParserTest {
      * 测试 21: getAllKeys — 获取所有key列表
      */
     @Test
+    /**
+     * testGetAllKeys方法。
+     */
     public void testGetAllKeys() {
         String input = "zebra=animal\napple=fruit\nbanana=yellow";
         PropertiesModel model = parser.parse(input);
@@ -381,6 +453,9 @@ public class PropertiesParserTest {
      * 测试 22: comment含井号 — 注释本身包含#字符的处理
      */
     @Test
+    /**
+     * testCommentWithHash方法。
+     */
     public void testCommentWithHash() {
         String input = "# This comment has a # hash inside\nname=test\n# Another # comment # for value\nvalue=123";
         PropertiesModel model = parser.parse(input);
@@ -395,6 +470,9 @@ public class PropertiesParserTest {
      * 测试 23: 续行跨多行 — 超过2行的多行续行
      */
     @Test
+    /**
+     * testMultiLineContinuationExtended方法。
+     */
     public void testMultiLineContinuationExtended() {
         String input = "longtext=line1\\\nline2\\\nline3\\\nline4\\\nline5\nnext=value";
         PropertiesModel model = parser.parse(input);
@@ -407,6 +485,9 @@ public class PropertiesParserTest {
      * 测试 24: 反斜杠转义 — value中包含多个连续反斜杠
      */
     @Test
+    /**
+     * testMultipleBackslashes方法。
+     */
     public void testMultipleBackslashes() {
         String input = "single=c:\\\\path\ndouble=before\\\\\\\\after\npath=c:\\\\users\\\\name";
         PropertiesModel model = parser.parse(input);

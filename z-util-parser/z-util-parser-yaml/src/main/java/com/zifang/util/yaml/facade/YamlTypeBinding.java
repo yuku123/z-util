@@ -10,6 +10,12 @@ public abstract class YamlTypeBinding<T> {
 
     private final Type type;
 
+    /**
+     * YamlTypeBinding方法。
+     */
+    /**
+     * YamlTypeBinding方法。
+     */
     protected YamlTypeBinding() {
         Type superclass = getClass().getGenericSuperclass();
         if (superclass instanceof ParameterizedType) {
@@ -19,6 +25,14 @@ public abstract class YamlTypeBinding<T> {
         }
     }
 
+    /**
+     * getType方法。
+     * @return Type类型返回值
+     */
+    /**
+     * getType方法。
+     * @return Type类型返回值
+     */
     public Type getType() {
         return type;
     }

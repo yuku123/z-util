@@ -8,6 +8,9 @@ package com.zifang.util.monitor.thread;
 /**
  * StatusLevel枚举。
  */
+/**
+ * StatusLevel枚举。
+ */
 public enum StatusLevel {
 
     /**

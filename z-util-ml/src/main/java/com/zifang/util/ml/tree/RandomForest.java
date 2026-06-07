@@ -13,6 +13,9 @@ import java.util.Random;
 /**
  * RandomForest类。
  */
+/**
+ * RandomForest类。
+ */
 public class RandomForest {
     private int nEstimators;
     private int maxDepth;
@@ -21,6 +24,13 @@ public class RandomForest {
     private DecisionTree[] trees;
     private Random random;
 
+    /**
+     * RandomForest方法。
+     *      * @param nEstimators int类型参数
+     * @param maxDepth int类型参数
+     * @param minSamplesSplit int类型参数
+     * @param maxFeatures int类型参数
+     */
     /**
      * RandomForest方法。
      *      * @param nEstimators int类型参数
@@ -37,6 +47,11 @@ public class RandomForest {
         this.random = new Random();
     }
 
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
+     */
     /**
      * fit方法。
      *      * @param X NdArray类型参数
@@ -86,6 +101,11 @@ public class RandomForest {
      *      * @param X NdArray类型参数
      * @return int[]类型返回值
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         int nSamples = X.getShape().get(0);
         int[][] predictions = new int[nEstimators][nSamples];
@@ -117,6 +137,11 @@ public class RandomForest {
         return finalPredictions;
     }
 
+    /**
+     * predictProba方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * predictProba方法。
      *      * @param X NdArray类型参数

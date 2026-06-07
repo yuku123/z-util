@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 /**
  * CommandParser类。
  */
+/**
+ * CommandParser类。
+ */
 public class CommandParser<C extends CommandContext> {
 
     private final CommandRegistry<C> registry;
@@ -22,6 +25,10 @@ public class CommandParser<C extends CommandContext> {
     private final Pattern paramPattern = Pattern.compile("(\\w+)(?:\\((.*)\\))?");
     private final Pattern kvPattern = Pattern.compile("(\\w+)=([^,]+)");
 
+    /**
+     * CommandParser方法。
+     *      * @param registry CommandRegistryC类型参数
+     */
     /**
      * CommandParser方法。
      *      * @param registry CommandRegistryC类型参数
@@ -46,6 +53,11 @@ public class CommandParser<C extends CommandContext> {
      *      * @param script String类型参数
      * @param context C类型参数
      */
+    /**
+     * parseAndExecute方法。
+     *      * @param script String类型参数
+     * @param context C类型参数
+     */
     public void parseAndExecute(String script, C context) {
         if (script == null || script.trim().isEmpty()) {
             return;
@@ -64,6 +76,11 @@ public class CommandParser<C extends CommandContext> {
 
     /**
      * 解析并执行命令列表
+     */
+    /**
+     * parseAndExecute方法。
+     *      * @param commandLines ListString类型参数
+     * @param context C类型参数
      */
     /**
      * parseAndExecute方法。
@@ -248,12 +265,20 @@ public class CommandParser<C extends CommandContext> {
      * getExecutor方法。
      * @return CommandExecutor<C>类型返回值
      */
+    /**
+     * getExecutor方法。
+     * @return CommandExecutor<C>类型返回值
+     */
     public CommandExecutor<C> getExecutor() {
         return executor;
     }
 
     /**
      * 获取注册表
+     */
+    /**
+     * getRegistry方法。
+     * @return CommandRegistry<C>类型返回值
      */
     /**
      * getRegistry方法。

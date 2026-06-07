@@ -12,11 +12,19 @@ import com.zifang.util.numpy.Shape;
 /**
  * Softplus类。
  */
+/**
+ * Softplus类。
+ */
 public class Softplus extends com.zifang.util.ml.nn.Module {
     
     private NdArray savedInput;
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -49,6 +57,11 @@ public class Softplus extends com.zifang.util.ml.nn.Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * backward方法。
      *      * @param gradOutput NdArray类型参数

@@ -108,6 +108,11 @@ class StackingTest {
         }
 
         @Override
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y Object类型参数
+     */
         public void fit(NdArray X, Object y) {
             if (y instanceof int[]) {
                 tree.fit(X, (int[]) y);
@@ -115,11 +120,21 @@ class StackingTest {
         }
 
         @Override
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return Object类型返回值
+     */
         public Object predict(NdArray X) {
             return tree.predict(X);
         }
 
         @Override
+    /**
+     * predictProba方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
         public NdArray predictProba(NdArray X) {
             return tree.predictProba(X);
         }

@@ -13,6 +13,9 @@ class Father2 {
 
     protected int money = 100;
 
+    /**
+     * fishing方法。
+     */
     public void fishing() {
         System.out.println("钓鱼");
     }
@@ -21,10 +24,18 @@ class Father2 {
 
 class Son2 extends Father2 {
 
+    /**
+     * writeCode方法。
+     */
     public void writeCode() {
         System.out.println("写代码");
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Son2 son = new Son2();
         son.fishing();

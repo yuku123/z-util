@@ -8,9 +8,15 @@ import static org.junit.Assert.*;
 /**
  * MethodParameterPair 模型测试
  */
+/**
+ * MethodParameterPairTest类。
+ */
 public class MethodParameterPairTest {
 
     @Test
+    /**
+     * testBasicSetters方法。
+     */
     public void testBasicSetters() {
         MethodParameterPair pair = new MethodParameterPair();
         pair.setParamType("String");
@@ -21,6 +27,9 @@ public class MethodParameterPairTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         MethodParameterPair pair = new MethodParameterPair();
         pair.setParamType("String");
@@ -30,6 +39,9 @@ public class MethodParameterPairTest {
     }
 
     @Test
+    /**
+     * testToStringWithDifferentTypes方法。
+     */
     public void testToStringWithDifferentTypes() {
         MethodParameterPair pair1 = new MethodParameterPair();
         pair1.setParamType("int");

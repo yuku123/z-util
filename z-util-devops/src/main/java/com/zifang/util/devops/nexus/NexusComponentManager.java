@@ -24,6 +24,9 @@ import java.util.stream.Collectors;
 /**
  * NexusComponentManager类。
  */
+/**
+ * NexusComponentManager类。
+ */
 public class NexusComponentManager {
 
     /**
@@ -59,6 +62,10 @@ public class NexusComponentManager {
      * delete方法。
      *      * @param component Component类型参数
      */
+    /**
+     * delete方法。
+     *      * @param component Component类型参数
+     */
     public void delete(Component component) {
         String url = String.format("%s/service/rest/v1/components/%s", NEXUS_URL, component.getId());
         HttpResponse response = null;
@@ -84,6 +91,11 @@ public class NexusComponentManager {
      *
      * @param repository 仓库名称
      * @return
+     */
+    /**
+     * search方法。
+     *      * @param repository String类型参数
+     * @return static List<Component>类型返回值
      */
     /**
      * search方法。
@@ -149,6 +161,13 @@ public class NexusComponentManager {
      * @param version String类型参数
      * @return Component类型返回值
      */
+    /**
+     * findByGav方法。
+     *      * @param groupId String类型参数
+     * @param artifactId String类型参数
+     * @param version String类型参数
+     * @return Component类型返回值
+     */
     public Component findByGav(String groupId, String artifactId, String version) {
 
         List<Component> list = search(respository);
@@ -170,6 +189,13 @@ public class NexusComponentManager {
      * @param artifactId  构件ID
      * @param version     版本号
      * @return 存在返回 true，不存在返回 false
+     */
+    /**
+     * checkExistGav方法。
+     *      * @param groupId String类型参数
+     * @param artifactId String类型参数
+     * @param version String类型参数
+     * @return boolean类型返回值
      */
     /**
      * checkExistGav方法。

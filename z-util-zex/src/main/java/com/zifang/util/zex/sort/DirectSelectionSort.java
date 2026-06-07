@@ -10,6 +10,9 @@ package com.zifang.util.zex.sort;
  * @author zifang
  * @version 1.0
  */
+/**
+ * DirectSelectionSort类。
+ */
 public class DirectSelectionSort {
 
 

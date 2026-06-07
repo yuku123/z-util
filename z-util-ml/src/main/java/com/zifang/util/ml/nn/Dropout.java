@@ -14,6 +14,9 @@ import java.util.Random;
 /**
  * Dropout类。
  */
+/**
+ * Dropout类。
+ */
 public class Dropout extends Module {
     
     private final float p;
@@ -24,10 +27,19 @@ public class Dropout extends Module {
      * Dropout方法。
      *      * @param p float类型参数
      */
+    /**
+     * Dropout方法。
+     *      * @param p float类型参数
+     */
     public Dropout(float p) {
         this(p, new Random());
     }
     
+    /**
+     * Dropout方法。
+     *      * @param p float类型参数
+     * @param random Random类型参数
+     */
     /**
      * Dropout方法。
      *      * @param p float类型参数
@@ -42,6 +54,11 @@ public class Dropout extends Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -89,6 +106,11 @@ public class Dropout extends Module {
      *      * @param gradOutput NdArray类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         // During training: dL/dx = dL/dy * mask (scaled)
         // During inference: dL/dx = dL/dy * (1-p)
@@ -128,6 +150,10 @@ public class Dropout extends Module {
         }
     }
     
+    /**
+     * getP方法。
+     * @return float类型返回值
+     */
     /**
      * getP方法。
      * @return float类型返回值

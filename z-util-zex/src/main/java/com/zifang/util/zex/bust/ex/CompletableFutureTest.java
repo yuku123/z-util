@@ -11,7 +11,15 @@ package com.zifang.util.zex.bust.ex;
  */
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * CompletableFutureTest类。
+ */
 public class CompletableFutureTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         //任务1：洗水壶->烧开水
         CompletableFuture<Void> f1 =

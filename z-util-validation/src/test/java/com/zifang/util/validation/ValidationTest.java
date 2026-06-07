@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
 /**
  * 校验框架测试
  */
+/**
+ * ValidationTest类。
+ */
 public class ValidationTest {
 
     // ==================== 测试模型类 ====================
@@ -31,6 +34,14 @@ public class ValidationTest {
         @Pattern(regex = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
         String phone;
 
+    /**
+     * User方法。
+     *      * @param username String类型参数
+     * @param password String类型参数
+     * @param email String类型参数
+     * @param age int类型参数
+     * @param phone String类型参数
+     */
         public User(String username, String password, String email, int age, String phone) {
             this.username = username;
             this.password = password;
@@ -49,6 +60,11 @@ public class ValidationTest {
         @Range(min = 0.01, max = 999999.99, message = "价格必须在合理范围内")
         double price;
 
+    /**
+     * Product方法。
+     *      * @param name String类型参数
+     * @param price double类型参数
+     */
         public Product(String name, double price) {
             this.name = name;
             this.price = price;
@@ -58,6 +74,9 @@ public class ValidationTest {
     // ==================== NotNull 测试 ====================
 
     @Test
+    /**
+     * testNotNullValid方法。
+     */
     public void testNotNullValid() {
         User user = new User("zifang", "123456", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -65,6 +84,9 @@ public class ValidationTest {
     }
 
     @Test
+    /**
+     * testNotNullInvalid方法。
+     */
     public void testNotNullInvalid() {
         User user = new User(null, "123456", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -75,6 +97,9 @@ public class ValidationTest {
     // ==================== Length 测试 ====================
 
     @Test
+    /**
+     * testLengthValid方法。
+     */
     public void testLengthValid() {
         User user = new User("zifang", "12345678", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -82,6 +107,9 @@ public class ValidationTest {
     }
 
     @Test
+    /**
+     * testLengthTooShort方法。
+     */
     public void testLengthTooShort() {
         User user = new User("zifang", "123", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -89,6 +117,9 @@ public class ValidationTest {
     }
 
     @Test
+    /**
+     * testLengthTooLong方法。
+     */
     public void testLengthTooLong() {
         User user = new User("zifang", "123456789012345678901", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -98,6 +129,9 @@ public class ValidationTest {
     // ==================== Email 测试 ====================
 
     @Test
+    /**
+     * testEmailValid方法。
+     */
     public void testEmailValid() {
         User user = new User("zifang", "123456", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -105,6 +139,9 @@ public class ValidationTest {
     }
 
     @Test
+    /**
+     * testEmailInvalid方法。
+     */
     public void testEmailInvalid() {
         User user = new User("zifang", "123456", "invalid-email", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -114,6 +151,9 @@ public class ValidationTest {
     // ==================== Range 测试 ====================
 
     @Test
+    /**
+     * testRangeValid方法。
+     */
     public void testRangeValid() {
         User user = new User("zifang", "123456", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -121,6 +161,9 @@ public class ValidationTest {
     }
 
     @Test
+    /**
+     * testRangeTooLow方法。
+     */
     public void testRangeTooLow() {
         Product product = new Product("Test", -1.0);
         ValidateResult result = ValidationEngine.validate(product);
@@ -130,6 +173,9 @@ public class ValidationTest {
     // ==================== Pattern 测试 ====================
 
     @Test
+    /**
+     * testPatternValid方法。
+     */
     public void testPatternValid() {
         User user = new User("zifang", "123456", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -137,6 +183,9 @@ public class ValidationTest {
     }
 
     @Test
+    /**
+     * testPatternInvalid方法。
+     */
     public void testPatternInvalid() {
         User user = new User("zifang", "123456", "test@example.com", 25, "12345");
         ValidateResult result = ValidationEngine.validate(user);
@@ -146,6 +195,9 @@ public class ValidationTest {
     // ==================== 多字段综合测试 ====================
 
     @Test
+    /**
+     * testMultipleErrors方法。
+     */
     public void testMultipleErrors() {
         User user = new User(null, "123", "invalid-email", 200, "12345");
         ValidateResult result = ValidationEngine.validate(user);
@@ -155,6 +207,9 @@ public class ValidationTest {
     }
 
     @Test
+    /**
+     * testAllValid方法。
+     */
     public void testAllValid() {
         User user = new User("zifang", "123456", "test@example.com", 25, "13800138000");
         ValidateResult result = ValidationEngine.validate(user);
@@ -164,6 +219,9 @@ public class ValidationTest {
     // ==================== 异常测试 ====================
 
     @Test(expected = com.zifang.util.validation.core.ValidationException.class)
+    /**
+     * testValidateAndThrow方法。
+     */
     public void testValidateAndThrow() {
         User user = new User(null, "123", "invalid-email", 25, "12345");
         ValidationEngine.validateAndThrow(user);
@@ -172,6 +230,9 @@ public class ValidationTest {
     // ==================== ValidateResult 测试 ====================
 
     @Test
+    /**
+     * testValidateResultToString方法。
+     */
     public void testValidateResultToString() {
         User user = new User(null, "123", "invalid-email", 25, "12345");
         ValidateResult result = ValidationEngine.validate(user);
@@ -180,6 +241,9 @@ public class ValidationTest {
     }
 
     @Test
+    /**
+     * testValidateResultFirstError方法。
+     */
     public void testValidateResultFirstError() {
         User user = new User(null, "123", "invalid-email", 25, "12345");
         ValidateResult result = ValidationEngine.validate(user);

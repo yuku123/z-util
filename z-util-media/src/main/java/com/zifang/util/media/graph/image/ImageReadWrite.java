@@ -33,12 +33,22 @@ public final class ImageReadWrite {
      *      * @param path String类型参数
      * @return static BufferedImage类型返回值
      */
+    /**
+     * read方法。
+     *      * @param path String类型参数
+     * @return static BufferedImage类型返回值
+     */
     public static BufferedImage read(String path) throws IOException {
         return ImageIO.read(new File(path));
     }
 
     /**
      * 从 File 对象读取图片。
+     */
+    /**
+     * read方法。
+     *      * @param file File类型参数
+     * @return static BufferedImage类型返回值
      */
     /**
      * read方法。
@@ -57,12 +67,22 @@ public final class ImageReadWrite {
      *      * @param in InputStream类型参数
      * @return static BufferedImage类型返回值
      */
+    /**
+     * read方法。
+     *      * @param in InputStream类型参数
+     * @return static BufferedImage类型返回值
+     */
     public static BufferedImage read(InputStream in) throws IOException {
         return ImageIO.read(in);
     }
 
     /**
      * 从 byte[] 读取图片。
+     */
+    /**
+     * read方法。
+     *      * @param data byte[]类型参数
+     * @return static BufferedImage类型返回值
      */
     /**
      * read方法。
@@ -82,6 +102,13 @@ public final class ImageReadWrite {
      * @param formatName 格式名，如 "png", "jpg", "jpeg", "gif", "bmp"
      * @param path       目标路径
      * @throws IOException 写入失败
+     */
+    /**
+     * write方法。
+     *      * @param image BufferedImage类型参数
+     * @param formatName String类型参数
+     * @param path String类型参数
+     * @return static void类型返回值
      */
     /**
      * write方法。
@@ -112,6 +139,13 @@ public final class ImageReadWrite {
      * @param file File类型参数
      * @return static void类型返回值
      */
+    /**
+     * write方法。
+     *      * @param image BufferedImage类型参数
+     * @param formatName String类型参数
+     * @param file File类型参数
+     * @return static void类型返回值
+     */
     public static void write(BufferedImage image, String formatName, File file) throws IOException {
         File parent = file.getParentFile();
         if (parent != null && !parent.exists()) {
@@ -124,6 +158,13 @@ public final class ImageReadWrite {
 
     /**
      * 将图片写入 OutputStream。
+     */
+    /**
+     * write方法。
+     *      * @param image BufferedImage类型参数
+     * @param formatName String类型参数
+     * @param out OutputStream类型参数
+     * @return static void类型返回值
      */
     /**
      * write方法。
@@ -148,12 +189,23 @@ public final class ImageReadWrite {
      *      * @param image BufferedImage类型参数
      * @return static byte[]类型返回值
      */
+    /**
+     * toBytes方法。
+     *      * @param image BufferedImage类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] toBytes(BufferedImage image) throws IOException {
         return toBytes(image, "png");
     }
 
     /**
      * 将图片写入 byte[]。
+     */
+    /**
+     * toBytes方法。
+     *      * @param image BufferedImage类型参数
+     * @param formatName String类型参数
+     * @return static byte[]类型返回值
      */
     /**
      * toBytes方法。
@@ -178,6 +230,11 @@ public final class ImageReadWrite {
      *      * @param path String类型参数
      * @return static String类型返回值
      */
+    /**
+     * inferFormat方法。
+     *      * @param path String类型参数
+     * @return static String类型返回值
+     */
     public static String inferFormat(String path) {
         String ext = "";
         int dot = path.lastIndexOf('.');
@@ -191,6 +248,11 @@ public final class ImageReadWrite {
 
     /**
      * 判断文件是否是支持的图片格式。
+     */
+    /**
+     * isSupported方法。
+     *      * @param path String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isSupported方法。

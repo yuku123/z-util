@@ -18,9 +18,15 @@ class LoadClass{
 }
 
 
+/**
+ * LoadClassTest类。
+ */
 public class LoadClassTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() throws ClassNotFoundException{
         // 直接引用类
         Class<?> c1 = LoadClass.class;
@@ -39,6 +45,9 @@ public class LoadClassTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002() throws ClassNotFoundException {
         Class<?> c1 = int.class;
         Class<?> c2 = Class.forName("I");
@@ -46,6 +55,9 @@ public class LoadClassTest {
     }
 
     @Test
+    /**
+     * test003方法。
+     */
     public void test003() throws ClassNotFoundException {
         Class<?> c1 = int.class;
         for(Method method : c1.getClass().getMethods()){

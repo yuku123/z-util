@@ -13,6 +13,9 @@ import java.util.List;
 /**
  * SimpleASTNode类。
  */
+/**
+ * SimpleASTNode类。
+ */
 public class SimpleASTNode implements ASTNode {
 
     private String type;
@@ -25,6 +28,9 @@ public class SimpleASTNode implements ASTNode {
 
     /**
      * 默认构造函数
+     */
+    /**
+     * SimpleASTNode方法。
      */
     /**
      * SimpleASTNode方法。
@@ -47,6 +53,13 @@ public class SimpleASTNode implements ASTNode {
      * @param line int类型参数
      * @param column int类型参数
      */
+    /**
+     * SimpleASTNode方法。
+     *      * @param type String类型参数
+     * @param text String类型参数
+     * @param line int类型参数
+     * @param column int类型参数
+     */
     public SimpleASTNode(String type, String text, int line, int column) {
         this.type = type;
         this.text = text;
@@ -56,6 +69,10 @@ public class SimpleASTNode implements ASTNode {
     }
 
     @Override
+    /**
+     * getType方法。
+     * @return String类型返回值
+     */
     /**
      * getType方法。
      * @return String类型返回值
@@ -72,11 +89,19 @@ public class SimpleASTNode implements ASTNode {
      * setType方法。
      *      * @param type String类型参数
      */
+    /**
+     * setType方法。
+     *      * @param type String类型参数
+     */
     public void setType(String type) {
         this.type = type;
     }
 
     @Override
+    /**
+     * getText方法。
+     * @return String类型返回值
+     */
     /**
      * getText方法。
      * @return String类型返回值
@@ -93,11 +118,19 @@ public class SimpleASTNode implements ASTNode {
      * setText方法。
      *      * @param text String类型参数
      */
+    /**
+     * setText方法。
+     *      * @param text String类型参数
+     */
     public void setText(String text) {
         this.text = text;
     }
 
     @Override
+    /**
+     * getLine方法。
+     * @return int类型返回值
+     */
     /**
      * getLine方法。
      * @return int类型返回值
@@ -114,11 +147,19 @@ public class SimpleASTNode implements ASTNode {
      * setLine方法。
      *      * @param line int类型参数
      */
+    /**
+     * setLine方法。
+     *      * @param line int类型参数
+     */
     public void setLine(int line) {
         this.line = line;
     }
 
     @Override
+    /**
+     * getColumn方法。
+     * @return int类型返回值
+     */
     /**
      * getColumn方法。
      * @return int类型返回值
@@ -135,6 +176,10 @@ public class SimpleASTNode implements ASTNode {
      * setColumn方法。
      *      * @param column int类型参数
      */
+    /**
+     * setColumn方法。
+     *      * @param column int类型参数
+     */
     public void setColumn(int column) {
         this.column = column;
     }
@@ -144,11 +189,19 @@ public class SimpleASTNode implements ASTNode {
      * getChildren方法。
      * @return List<ASTNode>类型返回值
      */
+    /**
+     * getChildren方法。
+     * @return List<ASTNode>类型返回值
+     */
     public List<ASTNode> getChildren() {
         return Collections.unmodifiableList(children);
     }
 
     @Override
+    /**
+     * addChild方法。
+     *      * @param child ASTNode类型参数
+     */
     /**
      * addChild方法。
      *      * @param child ASTNode类型参数
@@ -165,11 +218,19 @@ public class SimpleASTNode implements ASTNode {
      * getParent方法。
      * @return ASTNode类型返回值
      */
+    /**
+     * getParent方法。
+     * @return ASTNode类型返回值
+     */
     public ASTNode getParent() {
         return parent;
     }
 
     @Override
+    /**
+     * setParent方法。
+     *      * @param parent ASTNode类型参数
+     */
     /**
      * setParent方法。
      *      * @param parent ASTNode类型参数
@@ -183,6 +244,10 @@ public class SimpleASTNode implements ASTNode {
      * getToken方法。
      * @return Object类型返回值
      */
+    /**
+     * getToken方法。
+     * @return Object类型返回值
+     */
     public Object getToken() {
         return token;
     }
@@ -192,11 +257,19 @@ public class SimpleASTNode implements ASTNode {
      * setToken方法。
      *      * @param token Object类型参数
      */
+    /**
+     * setToken方法。
+     *      * @param token Object类型参数
+     */
     public void setToken(Object token) {
         this.token = token;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -214,6 +287,11 @@ public class SimpleASTNode implements ASTNode {
      * 打印AST树（用于调试）
      * @param sb StringBuilder用于接收输出
      * @param indent 缩进层级
+     */
+    /**
+     * dump方法。
+     *      * @param sb StringBuilder类型参数
+     * @param indent int类型参数
      */
     /**
      * dump方法。

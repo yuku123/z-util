@@ -16,6 +16,9 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * StackObjectPool类。
  */
+/**
+ * StackObjectPool类。
+ */
 public class StackObjectPool<T> implements ObjectPool<T> {
 
     private final PooledObjectFactory<T> factory;
@@ -35,6 +38,10 @@ public class StackObjectPool<T> implements ObjectPool<T> {
      * StackObjectPool方法。
      *      * @param factory PooledObjectFactoryT类型参数
      */
+    /**
+     * StackObjectPool方法。
+     *      * @param factory PooledObjectFactoryT类型参数
+     */
     public StackObjectPool(PooledObjectFactory<T> factory) {
         this(factory, new PoolConfig());
     }
@@ -44,10 +51,21 @@ public class StackObjectPool<T> implements ObjectPool<T> {
      *      * @param factory PooledObjectFactoryT类型参数
      * @param config PoolConfig类型参数
      */
+    /**
+     * StackObjectPool方法。
+     *      * @param factory PooledObjectFactoryT类型参数
+     * @param config PoolConfig类型参数
+     */
     public StackObjectPool(PooledObjectFactory<T> factory, PoolConfig config) {
         this(factory, config, config.getMaxTotal());
     }
 
+    /**
+     * StackObjectPool方法。
+     *      * @param factory PooledObjectFactoryT类型参数
+     * @param config PoolConfig类型参数
+     * @param maxPoolSize int类型参数
+     */
     /**
      * StackObjectPool方法。
      *      * @param factory PooledObjectFactoryT类型参数
@@ -80,6 +98,10 @@ public class StackObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * borrowObject方法。
+     * @return T类型返回值
+     */
     /**
      * borrowObject方法。
      * @return T类型返回值
@@ -172,6 +194,10 @@ public class StackObjectPool<T> implements ObjectPool<T> {
      * returnObject方法。
      *      * @param obj T类型参数
      */
+    /**
+     * returnObject方法。
+     *      * @param obj T类型参数
+     */
     public void returnObject(T obj) throws Exception {
         checkOpen();
 
@@ -225,6 +251,10 @@ public class StackObjectPool<T> implements ObjectPool<T> {
      * invalidateObject方法。
      *      * @param obj T类型参数
      */
+    /**
+     * invalidateObject方法。
+     *      * @param obj T类型参数
+     */
     public void invalidateObject(T obj) throws Exception {
         lock.lock();
         try {
@@ -246,6 +276,9 @@ public class StackObjectPool<T> implements ObjectPool<T> {
     /**
      * clear方法。
      */
+    /**
+     * clear方法。
+     */
     public void clear() throws Exception {
         lock.lock();
         try {
@@ -261,6 +294,9 @@ public class StackObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * close方法。
+     */
     /**
      * close方法。
      */
@@ -294,11 +330,19 @@ public class StackObjectPool<T> implements ObjectPool<T> {
      * getNumActive方法。
      * @return int类型返回值
      */
+    /**
+     * getNumActive方法。
+     * @return int类型返回值
+     */
     public int getNumActive() {
         return numActive.get();
     }
 
     @Override
+    /**
+     * getNumIdle方法。
+     * @return int类型返回值
+     */
     /**
      * getNumIdle方法。
      * @return int类型返回值
@@ -313,6 +357,10 @@ public class StackObjectPool<T> implements ObjectPool<T> {
     }
 
     @Override
+    /**
+     * getConfig方法。
+     * @return PoolConfig类型返回值
+     */
     /**
      * getConfig方法。
      * @return PoolConfig类型返回值
@@ -355,6 +403,9 @@ public class StackObjectPool<T> implements ObjectPool<T> {
 
     /**
      * 添加新对象到池
+     */
+    /**
+     * addObject方法。
      */
     /**
      * addObject方法。

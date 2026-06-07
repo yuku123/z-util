@@ -16,6 +16,9 @@ import java.util.List;
 /**
  * FieldInfo类。
  */
+/**
+ * FieldInfo类。
+ */
 public class FieldInfo {
 
     /**
@@ -49,6 +52,9 @@ public class FieldInfo {
     /**
      * FieldInfo方法。
      */
+    /**
+     * FieldInfo方法。
+     */
     public FieldInfo() {
     }
 
@@ -57,6 +63,11 @@ public class FieldInfo {
      *
      * @param type  字段类型全限定名，如 "java.lang.String"
      * @param value 字段名称
+     */
+    /**
+     * FieldInfo方法。
+     *      * @param type String类型参数
+     * @param value String类型参数
      */
     /**
      * FieldInfo方法。
@@ -85,6 +96,13 @@ public class FieldInfo {
      * @param modifiers int[]类型参数
      * @param initializer String类型参数
      */
+    /**
+     * FieldInfo方法。
+     *      * @param type String类型参数
+     * @param value String类型参数
+     * @param modifiers int[]类型参数
+     * @param initializer String类型参数
+     */
     public FieldInfo(String type, String value, int[] modifiers, String initializer) {
         this.type = type;
         this.value = value;
@@ -96,6 +114,10 @@ public class FieldInfo {
      * 获取字段类型
      *
      * @return 字段类型全限定名
+     */
+    /**
+     * getType方法。
+     * @return String类型返回值
      */
     /**
      * getType方法。
@@ -114,6 +136,10 @@ public class FieldInfo {
      * setType方法。
      *      * @param type String类型参数
      */
+    /**
+     * setType方法。
+     *      * @param type String类型参数
+     */
     public void setType(String type) {
         this.type = type;
     }
@@ -122,6 +148,10 @@ public class FieldInfo {
      * 获取字段名称
      *
      * @return 字段名称
+     */
+    /**
+     * getValue方法。
+     * @return String类型返回值
      */
     /**
      * getValue方法。
@@ -140,6 +170,10 @@ public class FieldInfo {
      * setValue方法。
      *      * @param value String类型参数
      */
+    /**
+     * setValue方法。
+     *      * @param value String类型参数
+     */
     public void setValue(String value) {
         this.value = value;
     }
@@ -148,6 +182,10 @@ public class FieldInfo {
      * 获取修饰符数组
      *
      * @return 修饰符数组
+     */
+    /**
+     * getModifiers方法。
+     * @return int[]类型返回值
      */
     /**
      * getModifiers方法。
@@ -166,6 +204,10 @@ public class FieldInfo {
      * setModifiers方法。
      *      * @param modifiers int[]类型参数
      */
+    /**
+     * setModifiers方法。
+     *      * @param modifiers int[]类型参数
+     */
     public void setModifiers(int[] modifiers) {
         this.modifiers = modifiers;
     }
@@ -174,6 +216,10 @@ public class FieldInfo {
      * 获取初始值表达式
      *
      * @return 初始值表达式字符串
+     */
+    /**
+     * getInitializer方法。
+     * @return String类型返回值
      */
     /**
      * getInitializer方法。
@@ -192,6 +238,10 @@ public class FieldInfo {
      * setInitializer方法。
      *      * @param initializer String类型参数
      */
+    /**
+     * setInitializer方法。
+     *      * @param initializer String类型参数
+     */
     public void setInitializer(String initializer) {
         this.initializer = initializer;
     }
@@ -205,6 +255,10 @@ public class FieldInfo {
      * setModifier方法。
      *      * @param modifier int...类型参数
      */
+    /**
+     * setModifier方法。
+     *      * @param modifier int...类型参数
+     */
     public void setModifier(int... modifier) {
         modifiers = modifier;
     }
@@ -213,10 +267,18 @@ public class FieldInfo {
      * getAnnotations方法。
      * @return List<AnnotationInfo>类型返回值
      */
+    /**
+     * getAnnotations方法。
+     * @return List<AnnotationInfo>类型返回值
+     */
     public List<AnnotationInfo> getAnnotations() {
         return annotations;
     }
 
+    /**
+     * setAnnotations方法。
+     *      * @param annotations ListAnnotationInfo类型参数
+     */
     /**
      * setAnnotations方法。
      *      * @param annotations ListAnnotationInfo类型参数
@@ -231,11 +293,20 @@ public class FieldInfo {
      *      * @param obj Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param obj Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object obj) {
         return value.equals(((FieldInfo) obj).value);
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值
@@ -249,6 +320,10 @@ public class FieldInfo {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * DQNTest类。
+ */
 public class DQNTest {
 
     @Test
+    /**
+     * testDQNInit方法。
+     */
     public void testDQNInit() {
         DQN dqn = new DQN(4, 3, 16, 0.001, 0.99, 1.0, 0.995, 0.01, 100, 32, 10);
         
@@ -18,6 +24,9 @@ public class DQNTest {
     }
 
     @Test
+    /**
+     * testDQNSelectAction方法。
+     */
     public void testDQNSelectAction() {
         DQN dqn = new DQN(4, 3, 16, 0.001, 0.99, 1.0, 0.995, 0.01, 100, 32, 10);
         
@@ -30,6 +39,9 @@ public class DQNTest {
     }
 
     @Test
+    /**
+     * testDQNTrainingStep方法。
+     */
     public void testDQNTrainingStep() {
         DQN dqn = new DQN(4, 3, 16, 0.001, 0.99, 1.0, 0.995, 0.01, 100, 32, 10);
         

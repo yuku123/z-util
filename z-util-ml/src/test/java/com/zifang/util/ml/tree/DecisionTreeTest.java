@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * DecisionTreeTest类。
+ */
 public class DecisionTreeTest {
 
     private Random random = new Random(42);
@@ -48,6 +51,9 @@ public class DecisionTreeTest {
     }
 
     @Test
+    /**
+     * testDecisionTreeFit方法。
+     */
     public void testDecisionTreeFit() {
         int nSamples = 100;
         NdArray X = generateLinearlySeparableData(nSamples);
@@ -72,6 +78,9 @@ public class DecisionTreeTest {
     }
 
     @Test
+    /**
+     * testDecisionTreeDepth方法。
+     */
     public void testDecisionTreeDepth() {
         int nSamples = 50;
         NdArray X = generateLinearlySeparableData(nSamples);
@@ -98,6 +107,9 @@ public class DecisionTreeTest {
     }
 
     @Test
+    /**
+     * testDecisionTreePredictProba方法。
+     */
     public void testDecisionTreePredictProba() {
         int nSamples = 50;
         NdArray X = generateLinearlySeparableData(nSamples);
@@ -123,6 +135,9 @@ public class DecisionTreeTest {
     }
 
     @Test
+    /**
+     * testDecisionTreePureLeaf方法。
+     */
     public void testDecisionTreePureLeaf() {
         // Create data where one region is pure (all same class)
         double[][] data = new double[20][2];

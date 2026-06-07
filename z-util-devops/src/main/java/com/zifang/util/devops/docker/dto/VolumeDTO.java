@@ -14,6 +14,9 @@ import java.util.Map;
 /**
  * VolumeDTO类。
  */
+/**
+ * VolumeDTO类。
+ */
 public class VolumeDTO {
 
     private String name;
@@ -28,10 +31,18 @@ public class VolumeDTO {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
     /**
      * setName方法。
      *      * @param name String类型参数
@@ -44,10 +55,18 @@ public class VolumeDTO {
      * getDriver方法。
      * @return String类型返回值
      */
+    /**
+     * getDriver方法。
+     * @return String类型返回值
+     */
     public String getDriver() {
         return driver;
     }
 
+    /**
+     * setDriver方法。
+     *      * @param driver String类型参数
+     */
     /**
      * setDriver方法。
      *      * @param driver String类型参数
@@ -60,10 +79,18 @@ public class VolumeDTO {
      * getMountpoint方法。
      * @return String类型返回值
      */
+    /**
+     * getMountpoint方法。
+     * @return String类型返回值
+     */
     public String getMountpoint() {
         return mountpoint;
     }
 
+    /**
+     * setMountpoint方法。
+     *      * @param mountpoint String类型参数
+     */
     /**
      * setMountpoint方法。
      *      * @param mountpoint String类型参数
@@ -76,10 +103,18 @@ public class VolumeDTO {
      * getScope方法。
      * @return String类型返回值
      */
+    /**
+     * getScope方法。
+     * @return String类型返回值
+     */
     public String getScope() {
         return scope;
     }
 
+    /**
+     * setScope方法。
+     *      * @param scope String类型参数
+     */
     /**
      * setScope方法。
      *      * @param scope String类型参数
@@ -92,10 +127,18 @@ public class VolumeDTO {
      * getLabels方法。
      * @return Map<String, String>类型返回值
      */
+    /**
+     * getLabels方法。
+     * @return Map<String, String>类型返回值
+     */
     public Map<String, String> getLabels() {
         return labels;
     }
 
+    /**
+     * setLabels方法。
+     *      * @param labels MapString,类型参数
+     */
     /**
      * setLabels方法。
      *      * @param labels MapString,类型参数
@@ -108,10 +151,18 @@ public class VolumeDTO {
      * getCreated方法。
      * @return String类型返回值
      */
+    /**
+     * getCreated方法。
+     * @return String类型返回值
+     */
     public String getCreated() {
         return created;
     }
 
+    /**
+     * setCreated方法。
+     *      * @param created String类型参数
+     */
     /**
      * setCreated方法。
      *      * @param created String类型参数
@@ -124,10 +175,18 @@ public class VolumeDTO {
      * isReadonly方法。
      * @return boolean类型返回值
      */
+    /**
+     * isReadonly方法。
+     * @return boolean类型返回值
+     */
     public boolean isReadonly() {
         return readonly;
     }
 
+    /**
+     * setReadonly方法。
+     *      * @param readonly boolean类型参数
+     */
     /**
      * setReadonly方法。
      *      * @param readonly boolean类型参数
@@ -137,6 +196,10 @@ public class VolumeDTO {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

@@ -14,6 +14,9 @@ import java.util.Objects;
 /**
  * SnowFlakeIdWorker类。
  */
+/**
+ * SnowFlakeIdWorker类。
+ */
 public class SnowFlakeIdWorker {
 
     /**
@@ -114,6 +117,11 @@ public class SnowFlakeIdWorker {
      *      * @param workerId long类型参数
      * @param dataCenterId long类型参数
      */
+    /**
+     * SnowFlakeIdWorker方法。
+     *      * @param workerId long类型参数
+     * @param dataCenterId long类型参数
+     */
     public SnowFlakeIdWorker(long workerId, long dataCenterId) {
         if (workerId > MAX_WORKER_ID || workerId < 0) {
             throw new IllegalArgumentException(
@@ -134,6 +142,10 @@ public class SnowFlakeIdWorker {
      * @time: 2020/9/1 15:26
      * @params: [] 请求参数
      * @return: java.lang.Long 响应参数
+     */
+    /**
+     * getWorkId方法。
+     * @return static Long类型返回值
      */
     /**
      * getWorkId方法。
@@ -176,6 +188,10 @@ public class SnowFlakeIdWorker {
      * getInstance方法。
      * @return static SnowFlakeIdWorker类型返回值
      */
+    /**
+     * getInstance方法。
+     * @return static SnowFlakeIdWorker类型返回值
+     */
     public static SnowFlakeIdWorker getInstance() {
         return LazyHolder.INSTANCE;
     }
@@ -184,6 +200,10 @@ public class SnowFlakeIdWorker {
      * 获得下一个ID (该方法是线程安全的)
      *
      * @return SnowflakeId
+     */
+    /**
+     * nextId方法。
+     * @return synchronized long类型返回值
      */
     /**
      * nextId方法。
@@ -220,6 +240,10 @@ public class SnowFlakeIdWorker {
         return allocate(timestamp - TW_EPOCH);
     }
 
+    /**
+     * nextIdByCacheWhenClockMoved方法。
+     * @return synchronized long类型返回值
+     */
     /**
      * nextIdByCacheWhenClockMoved方法。
      * @return synchronized long类型返回值
@@ -290,6 +314,11 @@ public class SnowFlakeIdWorker {
      *      * @param lastTimestamp long类型参数
      * @return long类型返回值
      */
+    /**
+     * tilNextMillis方法。
+     *      * @param lastTimestamp long类型参数
+     * @return long类型返回值
+     */
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
@@ -302,6 +331,10 @@ public class SnowFlakeIdWorker {
      * 返回以毫秒为单位的当前时间
      *
      * @return 当前时间(毫秒)
+     */
+    /**
+     * timeGen方法。
+     * @return long类型返回值
      */
     /**
      * timeGen方法。

@@ -12,6 +12,9 @@ import com.zifang.util.numpy.Shape;
 /**
  * Random类。
  */
+/**
+ * Random类。
+ */
 public class Random {
 
     private java.util.Random random;
@@ -23,6 +26,9 @@ public class Random {
     /**
      * Random方法。
      */
+    /**
+     * Random方法。
+     */
     public Random() {
         this.random = new java.util.Random();
     }
@@ -30,6 +36,10 @@ public class Random {
     /**
      * 使用指定种子构造随机数生成器
      * @param seed 随机种子
+     */
+    /**
+     * Random方法。
+     *      * @param seed long类型参数
      */
     /**
      * Random方法。
@@ -48,6 +58,10 @@ public class Random {
      * seed方法。
      *      * @param seed long类型参数
      */
+    /**
+     * seed方法。
+     *      * @param seed long类型参数
+     */
     public void seed(long seed) {
         this.seed = seed;
         this.random.setSeed(seed);
@@ -60,6 +74,11 @@ public class Random {
      * @param shape 数组形状，如传入 3 或 3,4
      * @return 指定形状的随机数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * rand方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     /**
      * rand方法。
@@ -88,6 +107,11 @@ public class Random {
      * @param shape 数组形状
      * @return 指定形状的标准正态分布随机数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * randn方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     /**
      * randn方法。
@@ -126,6 +150,13 @@ public class Random {
      * @param shape int...类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * randint方法。
+     *      * @param low int类型参数
+     * @param high int类型参数
+     * @param shape int...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray randint(int low, int high, int... shape) {
         if (shape.length == 0) {
             double[] array = new double[]{random.nextInt(high - low) + low};
@@ -154,6 +185,10 @@ public class Random {
      * random方法。
      * @return double类型返回值
      */
+    /**
+     * random方法。
+     * @return double类型返回值
+     */
     public double random() {
         return random.nextDouble();
     }
@@ -167,6 +202,13 @@ public class Random {
      * @param shape 数组形状
      * @return 指定形状的正态分布随机数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * normal方法。
+     *      * @param loc double类型参数
+     * @param scale double类型参数
+     * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     /**
      * normal方法。
@@ -205,6 +247,11 @@ public class Random {
      *      * @param shape int...类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * normal方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray normal(int... shape) {
         return normal(0.0, 1.0, shape);
     }
@@ -216,6 +263,13 @@ public class Random {
      * @param shape 数组形状
      * @return 指定形状的均匀分布随机数 NdArray
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * uniform方法。
+     *      * @param low double类型参数
+     * @param high double类型参数
+     * @param shape int...类型参数
+     * @return NdArray类型返回值
      */
     /**
      * uniform方法。
@@ -254,6 +308,11 @@ public class Random {
      *      * @param shape int...类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * uniform方法。
+     *      * @param shape int...类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray uniform(int... shape) {
         return uniform(0.0, 1.0, shape);
     }
@@ -263,6 +322,10 @@ public class Random {
     /**
      * 随机打乱数组顺序，类似于 numpy.random.shuffle()
      * @param array 待打乱的 NdArray（原地修改）
+     */
+    /**
+     * shuffle方法。
+     *      * @param array NdArray类型参数
      */
     /**
      * shuffle方法。
@@ -299,6 +362,11 @@ public class Random {
      *      * @param n int类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * permutation方法。
+     *      * @param n int类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray permutation(int n) {
         double[] arr = new double[n];
         for (int i = 0; i < n; i++) {
@@ -319,6 +387,11 @@ public class Random {
      *      * @param array NdArray类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * permutation方法。
+     *      * @param array NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray permutation(NdArray array) {
         NdArray result = array.copy();
         shuffle(result);
@@ -333,6 +406,13 @@ public class Random {
      * @param size 选择数量
      * @param replace 是否允许重复选择
      * @return 随机选择的 NdArray
+     */
+    /**
+     * choice方法。
+     *      * @param array double[]类型参数
+     * @param size int类型参数
+     * @param replace boolean类型参数
+     * @return NdArray类型返回值
      */
     /**
      * choice方法。
@@ -364,6 +444,11 @@ public class Random {
      *      * @param array double[]类型参数
      * @return double类型返回值
      */
+    /**
+     * choice方法。
+     *      * @param array double[]类型参数
+     * @return double类型返回值
+     */
     public double choice(double[] array) {
         return array[random.nextInt(array.length)];
     }
@@ -374,6 +459,13 @@ public class Random {
      * @param size 选择数量
      * @param replace 是否允许重复选择
      * @return 随机选择的 NdArray
+     */
+    /**
+     * choice方法。
+     *      * @param array NdArray类型参数
+     * @param size int类型参数
+     * @param replace boolean类型参数
+     * @return NdArray类型返回值
      */
     /**
      * choice方法。
@@ -394,6 +486,11 @@ public class Random {
      * 从 NdArray 中随机选择一个元素
      * @param array 候选 NdArray
      * @return 随机选择的元素
+     */
+    /**
+     * choice方法。
+     *      * @param array NdArray类型参数
+     * @return double类型返回值
      */
     /**
      * choice方法。

@@ -4,9 +4,15 @@ import com.zifang.util.media.graph.qrcode.encoder.BitMatrix;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * BinaryBitmapTest类。
+ */
 public class BinaryBitmapTest {
 
     @Test
+    /**
+     * testConstructor方法。
+     */
     public void testConstructor() {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(5, 5);
@@ -15,6 +21,9 @@ public class BinaryBitmapTest {
     }
 
     @Test
+    /**
+     * testGetBlackMatrix方法。
+     */
     public void testGetBlackMatrix() {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(3, 7);
@@ -23,6 +32,9 @@ public class BinaryBitmapTest {
     }
 
     @Test
+    /**
+     * testGetWidth方法。
+     */
     public void testGetWidth() {
         BitMatrix matrix = new BitMatrix(25, 30);
         BinaryBitmap bitmap = new BinaryBitmap(matrix);
@@ -30,6 +42,9 @@ public class BinaryBitmapTest {
     }
 
     @Test
+    /**
+     * testGetHeight方法。
+     */
     public void testGetHeight() {
         BitMatrix matrix = new BitMatrix(25, 30);
         BinaryBitmap bitmap = new BinaryBitmap(matrix);
@@ -37,6 +52,9 @@ public class BinaryBitmapTest {
     }
 
     @Test
+    /**
+     * testGetBlackMatrixReturnsCorrectBits方法。
+     */
     public void testGetBlackMatrixReturnsCorrectBits() {
         BitMatrix matrix = new BitMatrix(8, 8);
         matrix.set(2, 2);

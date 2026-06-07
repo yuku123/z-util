@@ -13,6 +13,9 @@ import java.util.Random;
 /**
  * DecisionTree类。
  */
+/**
+ * DecisionTree类。
+ */
 public class DecisionTree {
     private int maxDepth;
     private int minSamplesSplit;
@@ -36,6 +39,9 @@ public class DecisionTree {
     /**
      * TreeNode方法。
      */
+    /**
+     * TreeNode方法。
+     */
         public TreeNode() {
             this.isLeaf = false;
             this.left = null;
@@ -46,6 +52,12 @@ public class DecisionTree {
         }
     }
 
+    /**
+     * DecisionTree方法。
+     *      * @param maxDepth int类型参数
+     * @param minSamplesSplit int类型参数
+     * @param minSamplesLeaf int类型参数
+     */
     /**
      * DecisionTree方法。
      *      * @param maxDepth int类型参数
@@ -64,12 +76,22 @@ public class DecisionTree {
      *      * @param X NdArray类型参数
      * @param y int[]类型参数
      */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
+     */
     public void fit(NdArray X, int[] y) {
         this.nClasses = findMaxValue(y) + 1;
         double[][] Xdata = toDouble2D(X);
         this.root = buildTree(Xdata, y, 0);
     }
 
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     /**
      * predict方法。
      *      * @param X NdArray类型参数
@@ -84,6 +106,11 @@ public class DecisionTree {
         return predictions;
     }
 
+    /**
+     * predictProba方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * predictProba方法。
      *      * @param X NdArray类型参数
@@ -341,10 +368,18 @@ public class DecisionTree {
      * getRoot方法。
      * @return TreeNode类型返回值
      */
+    /**
+     * getRoot方法。
+     * @return TreeNode类型返回值
+     */
     public TreeNode getRoot() {
         return root;
     }
 
+    /**
+     * getNClasses方法。
+     * @return int类型返回值
+     */
     /**
      * getNClasses方法。
      * @return int类型返回值

@@ -11,5 +11,8 @@ package com.zifang.util.monitor.os;
 /**
  * OsMonitor类。
  */
+/**
+ * OsMonitor类。
+ */
 public class OsMonitor {
 }

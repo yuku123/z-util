@@ -10,17 +10,26 @@ import static org.junit.Assert.*;
  * AlgoFrame 单元测试
  * 测试算法可视化框架的构造和方法
  */
+/**
+ * AlgoFrameTest类。
+ */
 public class AlgoFrameTest {
 
     private AlgoFrame frame;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         // 使用小尺寸创建Frame用于测试，避免实际显示窗口
         frame = new AlgoFrame("Test Frame", 800, 600);
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         if (frame != null) {
             frame.dispose();
@@ -28,6 +37,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testConstructorWithAllParameters方法。
+     */
     public void testConstructorWithAllParameters() {
         AlgoFrame testFrame = new AlgoFrame("Test Title", 1024, 768);
         try {
@@ -39,6 +51,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testConstructorWithDefaultSize方法。
+     */
     public void testConstructorWithDefaultSize() {
         AlgoFrame testFrame = new AlgoFrame("Default Size Test");
         try {
@@ -50,16 +65,25 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testGetCanvasWidth方法。
+     */
     public void testGetCanvasWidth() {
         assertEquals(800, frame.getCanvasWidth());
     }
 
     @Test
+    /**
+     * testGetCanvasHeight方法。
+     */
     public void testGetCanvasHeight() {
         assertEquals(600, frame.getCanvasHeight());
     }
 
     @Test
+    /**
+     * testGetCanvasWidthWithDifferentSizes方法。
+     */
     public void testGetCanvasWidthWithDifferentSizes() {
         AlgoFrame smallFrame = new AlgoFrame("Small", 320, 240);
         try {
@@ -71,6 +95,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testGetCanvasWidthWithLargeSize方法。
+     */
     public void testGetCanvasWidthWithLargeSize() {
         AlgoFrame largeFrame = new AlgoFrame("Large", 1920, 1080);
         try {
@@ -82,6 +109,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testRenderWithNullCircles方法。
+     */
     public void testRenderWithNullCircles() {
         // 测试render方法接受null数组
         frame.render(null);
@@ -89,6 +119,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testRenderWithEmptyCircles方法。
+     */
     public void testRenderWithEmptyCircles() {
         // 测试render方法接受空数组
         Circle[] emptyCircles = new Circle[0];
@@ -97,6 +130,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testRenderWithSingleCircle方法。
+     */
     public void testRenderWithSingleCircle() {
         Circle circle = new Circle(100, 100, 50, 5, 5);
         circle.isFilled = false;
@@ -105,6 +141,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testRenderWithMultipleCircles方法。
+     */
     public void testRenderWithMultipleCircles() {
         Circle circle1 = new Circle(100, 100, 50, 5, 5);
         circle1.isFilled = true;
@@ -117,6 +156,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testRenderMultipleTimes方法。
+     */
     public void testRenderMultipleTimes() {
         Circle circle = new Circle(100, 100, 50, 5, 5);
         // 多次调用render方法
@@ -128,6 +170,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testFrameTitle方法。
+     */
     public void testFrameTitle() {
         AlgoFrame titledFrame = new AlgoFrame("My Custom Title", 500, 400);
         try {
@@ -138,6 +183,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testEdgeCasesZeroDimensions方法。
+     */
     public void testEdgeCasesZeroDimensions() {
         AlgoFrame zeroFrame = new AlgoFrame("Zero Size", 0, 0);
         try {
@@ -149,6 +197,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testEdgeCasesNegativeDimensions方法。
+     */
     public void testEdgeCasesNegativeDimensions() {
         // 负数尺寸也应该被接受（不抛异常）
         AlgoFrame negFrame = new AlgoFrame("Negative Size", -100, -200);
@@ -161,6 +212,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testRenderWithFilledCircle方法。
+     */
     public void testRenderWithFilledCircle() {
         Circle filledCircle = new Circle(50, 50, 25, 0, 0);
         filledCircle.isFilled = true;
@@ -169,6 +223,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testRenderWithStrokeCircle方法。
+     */
     public void testRenderWithStrokeCircle() {
         Circle strokeCircle = new Circle(50, 50, 25, 0, 0);
         strokeCircle.isFilled = false;
@@ -177,6 +234,9 @@ public class AlgoFrameTest {
     }
 
     @Test
+    /**
+     * testMultipleFrameInstances方法。
+     */
     public void testMultipleFrameInstances() {
         AlgoFrame frame1 = new AlgoFrame("Frame 1", 100, 100);
         AlgoFrame frame2 = new AlgoFrame("Frame 2", 200, 200);

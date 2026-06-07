@@ -10,5 +10,8 @@ package com.zifang.util.core.lang.jdbc;
 /**
  * JdbcType类。
  */
+/**
+ * JdbcType类。
+ */
 public class JdbcType {
 }

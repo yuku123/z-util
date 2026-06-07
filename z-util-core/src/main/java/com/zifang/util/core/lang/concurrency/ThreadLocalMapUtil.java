@@ -12,10 +12,17 @@ import java.util.Map;
 /**
  * ThreadLocalMapUtil类。
  */
+/**
+ * ThreadLocalMapUtil类。
+ */
 public class ThreadLocalMapUtil {
 
     private static final ThreadLocal<Map<Object, Object>> THREAD_LOCAL_MAP = new InheritableThreadLocal<>();
 
+    /**
+     * getThreadLocal方法。
+     * @return static Map<Object, Object>类型返回值
+     */
     /**
      * getThreadLocal方法。
      * @return static Map<Object, Object>类型返回值
@@ -29,6 +36,11 @@ public class ThreadLocalMapUtil {
      *      * @param key Object类型参数
      * @return static <T> T类型返回值
      */
+    /**
+     * get方法。
+     *      * @param key Object类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T get(Object key) {
         Map<Object, Object> map = THREAD_LOCAL_MAP.get();
         if (map == null) {
@@ -37,6 +49,12 @@ public class ThreadLocalMapUtil {
         return (T) map.get(key);
     }
 
+    /**
+     * get方法。
+     *      * @param key Object类型参数
+     * @param defaultValue T类型参数
+     * @return static <T> T类型返回值
+     */
     /**
      * get方法。
      *      * @param key Object类型参数
@@ -57,6 +75,12 @@ public class ThreadLocalMapUtil {
      * @param value Object类型参数
      * @return static void类型返回值
      */
+    /**
+     * set方法。
+     *      * @param key Object类型参数
+     * @param value Object类型参数
+     * @return static void类型返回值
+     */
     public static void set(Object key, Object value) {
         Map<Object, Object> map = THREAD_LOCAL_MAP.get();
         if (null == map) {
@@ -66,6 +90,11 @@ public class ThreadLocalMapUtil {
         THREAD_LOCAL_MAP.set(map);
     }
 
+    /**
+     * set方法。
+     *      * @param keyValueMap MapObject,类型参数
+     * @return static void类型返回值
+     */
     /**
      * set方法。
      *      * @param keyValueMap MapObject,类型参数
@@ -84,10 +113,19 @@ public class ThreadLocalMapUtil {
      * remove方法。
      * @return static void类型返回值
      */
+    /**
+     * remove方法。
+     * @return static void类型返回值
+     */
     public static void remove() {
         THREAD_LOCAL_MAP.remove();
     }
 
+    /**
+     * fetchValuesByPrefix方法。
+     *      * @param prefix String类型参数
+     * @return static <T> Map<Object, T>类型返回值
+     */
     /**
      * fetchValuesByPrefix方法。
      *      * @param prefix String类型参数
@@ -116,6 +154,11 @@ public class ThreadLocalMapUtil {
      *      * @param key String类型参数
      * @return static <T> T类型返回值
      */
+    /**
+     * remove方法。
+     *      * @param key String类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T remove(String key) {
         Map<Object, Object> map = THREAD_LOCAL_MAP.get();
         if (map == null) {
@@ -124,6 +167,11 @@ public class ThreadLocalMapUtil {
         return (T) map.remove(key);
     }
 
+    /**
+     * clear方法。
+     *      * @param prefix String类型参数
+     * @return static void类型返回值
+     */
     /**
      * clear方法。
      *      * @param prefix String类型参数

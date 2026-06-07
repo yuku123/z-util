@@ -6,9 +6,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ATest类。
+ */
 public class ATest {
     @Test
     @org.junit.Ignore("依赖外部路径 /Volumes/Elements SE，作业性质")
+    /**
+     * test方法。
+     */
     public void test(){
         String baseFolder ="/Volumes/Elements SE/out/test";
         String targetFolder = "/Volumes/Elements SE/out/test_output";
@@ -29,6 +35,9 @@ public class ATest {
 
     @Test
     @org.junit.Ignore("依赖外部路径 /Volumes/Elements SE，作业性质")
+    /**
+     * test2方法。
+     */
     public void test2(){
         String baseFolder ="/Volumes/Elements SE/out/mock2/test";
         String targetFolder = "/Volumes/Elements SE/out/mock2/test_output";

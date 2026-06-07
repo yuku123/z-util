@@ -8,10 +8,16 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.junit.Test;
 
+/**
+ * CommonPoolTest类。
+ */
 public class CommonPoolTest {
 
 
     @Test
+    /**
+     * test1方法。
+     */
     public void test1() {
         // 创建池对象工厂
         PooledObjectFactory<Resource> factory = new MyPoolableObjectFactory();
@@ -65,17 +71,28 @@ public class CommonPoolTest {
         private static int id;
         private int rid;
 
+    /**
+     * Resource方法。
+     */
         public Resource() {
             synchronized (this) {
                 this.rid = id++;
             }
         }
 
+    /**
+     * getRid方法。
+     * @return int类型返回值
+     */
         public int getRid() {
             return this.rid;
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "id:" + this.rid;
         }
@@ -89,6 +106,10 @@ public class CommonPoolTest {
          * 创建一个对象实例
          */
         @Override
+    /**
+     * create方法。
+     * @return Resource类型返回值
+     */
         public Resource create() throws Exception {
             return new Resource();
         }
@@ -97,6 +118,11 @@ public class CommonPoolTest {
          * 包裹创建的对象实例，返回一个pooledobject
          */
         @Override
+    /**
+     * wrap方法。
+     *      * @param obj Resource类型参数
+     * @return PooledObject<Resource>类型返回值
+     */
         public PooledObject<Resource> wrap(Resource obj) {
             return new DefaultPooledObject<Resource>(obj);
         }

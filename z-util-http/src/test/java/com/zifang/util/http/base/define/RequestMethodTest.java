@@ -5,9 +5,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * RequestMethodTest类。
+ */
 public class RequestMethodTest {
 
     @Test
+    /**
+     * testEnumValues方法。
+     */
     public void testEnumValues() {
         RequestMethod[] methods = RequestMethod.values();
         assertEquals(8, methods.length);
@@ -23,6 +29,9 @@ public class RequestMethodTest {
 
     @Ignore
     @Test
+    /**
+     * testEnumOrdinal方法。
+     */
     public void testEnumOrdinal() {
         assertEquals(0, RequestMethod.GET.ordinal());
         assertEquals(2, RequestMethod.POST.ordinal());
@@ -30,6 +39,9 @@ public class RequestMethodTest {
     }
 
     @Test
+    /**
+     * testEnumToString方法。
+     */
     public void testEnumToString() {
         assertEquals("GET", RequestMethod.GET.toString());
         assertEquals("POST", RequestMethod.POST.toString());

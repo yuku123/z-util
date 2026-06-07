@@ -23,6 +23,11 @@ public abstract class AbstractAttribute {
      *      * @param attributeNameIndex U2类型参数
      * @param attributeLength U4类型参数
      */
+    /**
+     * AbstractAttribute方法。
+     *      * @param attributeNameIndex U2类型参数
+     * @param attributeLength U4类型参数
+     */
     public AbstractAttribute(U2 attributeNameIndex, U4 attributeLength) {
         this.attributeNameIndex = attributeNameIndex;
         this.attributeLength = attributeLength;
@@ -33,8 +38,17 @@ public abstract class AbstractAttribute {
      *      * @param inputStream InputStream类型参数
      * @return abstract void类型返回值
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     * @return abstract void类型返回值
+     */
     public abstract void read(InputStream inputStream);
 
+    /**
+     * getAttributeNameIndex方法。
+     * @return U2类型返回值
+     */
     /**
      * getAttributeNameIndex方法。
      * @return U2类型返回值
@@ -47,6 +61,10 @@ public abstract class AbstractAttribute {
      * setAttributeNameIndex方法。
      *      * @param attributeNameIndex U2类型参数
      */
+    /**
+     * setAttributeNameIndex方法。
+     *      * @param attributeNameIndex U2类型参数
+     */
     public void setAttributeNameIndex(U2 attributeNameIndex) {
         this.attributeNameIndex = attributeNameIndex;
     }
@@ -55,10 +73,18 @@ public abstract class AbstractAttribute {
      * getAttributeLength方法。
      * @return U4类型返回值
      */
+    /**
+     * getAttributeLength方法。
+     * @return U4类型返回值
+     */
     public U4 getAttributeLength() {
         return attributeLength;
     }
 
+    /**
+     * setAttributeLength方法。
+     *      * @param attributeLength U4类型参数
+     */
     /**
      * setAttributeLength方法。
      *      * @param attributeLength U4类型参数

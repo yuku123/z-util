@@ -20,6 +20,9 @@ import java.lang.annotation.*;
 /**
  * GetMapping注解。
  */
+/**
+ * GetMapping注解。
+ */
 public @interface GetMapping {
 
     /**

@@ -8,6 +8,9 @@ package com.zifang.util.core.pattern.pool;
 /**
  * PooledObjectFactory接口。
  */
+/**
+ * PooledObjectFactory接口。
+ */
 public interface PooledObjectFactory<T> {
 
     /**

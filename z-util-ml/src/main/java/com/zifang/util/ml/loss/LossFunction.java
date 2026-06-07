@@ -11,6 +11,9 @@ import com.zifang.util.numpy.NdArray;
 /**
  * LossFunction接口。
  */
+/**
+ * LossFunction接口。
+ */
 public interface LossFunction {
 
     /**

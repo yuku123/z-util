@@ -29,8 +29,14 @@ import java.util.List;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Table_Study类。
+ */
 public class Table_Study {
     @Test
+    /**
+     * basicTest方法。
+     */
     public void basicTest() {
         Table<String, String, Integer> table = HashBasedTable.create();
         initTable(table);
@@ -42,6 +48,9 @@ public class Table_Study {
     }
 
     @Test
+    /**
+     * otherImplTest方法。
+     */
     public void otherImplTest() {
         // TreeBasedTable
         Table<String, String, Integer> table = TreeBasedTable.create();

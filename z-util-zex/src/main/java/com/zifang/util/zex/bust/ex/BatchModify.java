@@ -11,7 +11,15 @@ package com.zifang.util.zex.bust.ex;
  */
 import java.net.SocketException;
 
+/**
+ * BatchModify类。
+ */
 public class BatchModify {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws SocketException {
 //        File file = new File("/Volumes/element/エロ/里番/2012-2013-2014");
 //        File[] dd = file.listFiles();

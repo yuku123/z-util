@@ -8,6 +8,9 @@ import java.util.Optional;
 /**
  * ExpandObject类。
  */
+/**
+ * ExpandObject类。
+ */
 public class ExpandObject implements Serializable {
 
     private static final long serialVersionUID = -7925759494583339810L;
@@ -23,6 +26,11 @@ public class ExpandObject implements Serializable {
      * @time: 2021/11/6 17:24
      * @params: [key] key
      * @return: java.lang.Object response
+     */
+    /**
+     * clear方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
      */
     /**
      * clear方法。
@@ -46,6 +54,9 @@ public class ExpandObject implements Serializable {
     /**
      * clearAll方法。
      */
+    /**
+     * clearAll方法。
+     */
     public void clearAll() {
         if (null != this.expandMap) {
             this.expandMap.clear();
@@ -58,6 +69,12 @@ public class ExpandObject implements Serializable {
      * @time: 2021/11/6 17:24
      * @params: [key, defaultValue] key, defaultValue
      * @return: java.lang.Object response
+     */
+    /**
+     * getOrDefault方法。
+     *      * @param key String类型参数
+     * @param defaultValue String类型参数
+     * @return Object类型返回值
      */
     /**
      * getOrDefault方法。
@@ -84,6 +101,11 @@ public class ExpandObject implements Serializable {
      *      * @param key String类型参数
      * @return Object类型返回值
      */
+    /**
+     * get方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object get(String key) {
         if (null != this.expandMap) {
             return this.expandMap.get(key);
@@ -96,10 +118,20 @@ public class ExpandObject implements Serializable {
      *      * @param key String类型参数
      * @return String类型返回值
      */
+    /**
+     * getString方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
     public String getString(String key) {
         return Optional.ofNullable(get(key)).map(Object::toString).orElse(null);
     }
 
+    /**
+     * getLong方法。
+     *      * @param key String类型参数
+     * @return long类型返回值
+     */
     /**
      * getLong方法。
      *      * @param key String类型参数
@@ -115,11 +147,21 @@ public class ExpandObject implements Serializable {
      *      * @param key String类型参数
      * @return int类型返回值
      */
+    /**
+     * getInteger方法。
+     *      * @param key String类型参数
+     * @return int类型返回值
+     */
     public Integer getInteger(String key) {
         return Optional.ofNullable(get(key)).map(value -> Integer.parseInt(value.toString()))
                 .orElse(null);
     }
 
+    /**
+     * getShort方法。
+     *      * @param key String类型参数
+     * @return short类型返回值
+     */
     /**
      * getShort方法。
      *      * @param key String类型参数
@@ -135,11 +177,21 @@ public class ExpandObject implements Serializable {
      *      * @param key String类型参数
      * @return byte类型返回值
      */
+    /**
+     * getByte方法。
+     *      * @param key String类型参数
+     * @return byte类型返回值
+     */
     public Byte getByte(String key) {
         return Optional.ofNullable(get(key)).map(value -> Byte.parseByte(value.toString()))
                 .orElse(null);
     }
 
+    /**
+     * getDouble方法。
+     *      * @param key String类型参数
+     * @return double类型返回值
+     */
     /**
      * getDouble方法。
      *      * @param key String类型参数
@@ -155,11 +207,21 @@ public class ExpandObject implements Serializable {
      *      * @param key String类型参数
      * @return float类型返回值
      */
+    /**
+     * getFloat方法。
+     *      * @param key String类型参数
+     * @return float类型返回值
+     */
     public Float getFloat(String key) {
         return Optional.ofNullable(get(key)).map(value -> Float.parseFloat(value.toString()))
                 .orElse(null);
     }
 
+    /**
+     * getObject方法。
+     *      * @param key String类型参数
+     * @return <T> T类型返回值
+     */
     /**
      * getObject方法。
      *      * @param key String类型参数
@@ -175,6 +237,11 @@ public class ExpandObject implements Serializable {
      * @time: 2021/11/6 17:24
      * @params: [key, value] key, value
      * @return: java.lang.Object response
+     */
+    /**
+     * set方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
      */
     /**
      * set方法。

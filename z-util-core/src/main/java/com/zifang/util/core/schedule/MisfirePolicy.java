@@ -11,6 +11,9 @@ package com.zifang.util.core.schedule;
 /**
  * MisfirePolicy枚举。
  */
+/**
+ * MisfirePolicy枚举。
+ */
 public enum MisfirePolicy {
 
     /**
@@ -49,6 +52,10 @@ public enum MisfirePolicy {
 
     /**
      * 转换为 Quartz 内部整数常量。
+     */
+    /**
+     * toQuartzInstruction方法。
+     * @return int类型返回值
      */
     /**
      * toQuartzInstruction方法。

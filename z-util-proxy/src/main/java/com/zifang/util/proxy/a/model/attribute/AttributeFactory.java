@@ -23,6 +23,9 @@ import java.util.List;
 /**
  * AttributeFactory类。
  */
+/**
+ * AttributeFactory类。
+ */
 public class AttributeFactory {
     private static final HashMap<String, AbstractAttribute> attrMap = new HashMap<>(29);
 
@@ -32,6 +35,12 @@ public class AttributeFactory {
      * @param inputStream 输入流
      * @param poolList    常量池列表，用于解析属性名称
      * @return 属性对象，如果不支持该属性则返回null
+     */
+    /**
+     * getAttributeTable方法。
+     *      * @param inputStream InputStream类型参数
+     * @param poolList ListAbstractConstantPool类型参数
+     * @return static AbstractAttribute类型返回值
      */
     /**
      * getAttributeTable方法。

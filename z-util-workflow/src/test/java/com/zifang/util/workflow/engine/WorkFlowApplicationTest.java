@@ -23,11 +23,17 @@ import static org.junit.Assert.*;
  * 
  * 这里我们重点测试静态字段访问和非依赖完整初始化的功能。
  */
+/**
+ * WorkFlowApplicationTest类。
+ */
 public class WorkFlowApplicationTest {
 
     private WorkFlowApplication workFlowApplication;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         workFlowApplication = new WorkFlowApplication();
         // 清理静态状态
@@ -36,12 +42,18 @@ public class WorkFlowApplicationTest {
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         WorkFlowApplication.workFlowContextMap.clear();
         WorkFlowApplication.workflowContextId.set(0);
     }
 
     @Test
+    /**
+     * testStaticFieldsExist方法。
+     */
     public void testStaticFieldsExist() {
         assertNotNull("workFlowContextMap should not be null", WorkFlowApplication.workFlowContextMap);
         assertNotNull("threadPool should not be null", WorkFlowApplication.threadPool);
@@ -49,28 +61,43 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testWorkFlowContextMapInitiallyEmpty方法。
+     */
     public void testWorkFlowContextMapInitiallyEmpty() {
         assertTrue("workFlowContextMap should be empty initially", WorkFlowApplication.workFlowContextMap.isEmpty());
     }
 
     @Test
+    /**
+     * testWorkflowContextIdInitiallyZero方法。
+     */
     public void testWorkflowContextIdInitiallyZero() {
         assertEquals("workflowContextId should start at 0", 0, WorkFlowApplication.workflowContextId.get());
     }
 
     @Test
+    /**
+     * testThreadPoolIsShutdownable方法。
+     */
     public void testThreadPoolIsShutdownable() {
         assertNotNull(WorkFlowApplication.threadPool);
         assertFalse(WorkFlowApplication.threadPool.isShutdown());
     }
 
     @Test
+    /**
+     * testGetWorkFlowApplicationContextWithNonExistentId方法。
+     */
     public void testGetWorkFlowApplicationContextWithNonExistentId() {
         WorkFlowApplicationContext context = workFlowApplication.getWorkFlowApplicationContext(999);
         assertNull("Should return null for non-existent context ID", context);
     }
 
     @Test
+    /**
+     * testGetWorkFlowApplicationContextWithNullId方法。
+     */
     public void testGetWorkFlowApplicationContextWithNullId() {
         // Using 0 which should not exist
         WorkFlowApplicationContext context = workFlowApplication.getWorkFlowApplicationContext(0);
@@ -78,6 +105,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testWorkFlowContextMapCanStoreAndRetrieve方法。
+     */
     public void testWorkFlowContextMapCanStoreAndRetrieve() {
         WorkFlowApplicationContext testContext = new WorkFlowApplicationContext();
         testContext.setWorkFlowApplicationContextId(1);
@@ -87,6 +117,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testWorkFlowContextMapCanRemove方法。
+     */
     public void testWorkFlowContextMapCanRemove() {
         WorkFlowApplicationContext testContext = new WorkFlowApplicationContext();
         testContext.setWorkFlowApplicationContextId(1);
@@ -97,6 +130,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testWorkflowContextIdIncrement方法。
+     */
     public void testWorkflowContextIdIncrement() {
         int initialValue = WorkFlowApplication.workflowContextId.get();
         WorkFlowApplication.workflowContextId.incrementAndGet();
@@ -104,6 +140,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testMultipleContextIdsAreUnique方法。
+     */
     public void testMultipleContextIdsAreUnique() {
         WorkFlowApplicationContext context1 = new WorkFlowApplicationContext();
         context1.setWorkFlowApplicationContextId(1);
@@ -118,6 +157,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testAddSimpleWorkflowNodeWithNonExistentContext方法。
+     */
     public void testAddSimpleWorkflowNodeWithNonExistentContext() {
         // 测试在不存在的上下文中添加节点
         // 由于上下文不存在，应该返回 false 或导致 NPE
@@ -137,6 +179,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testRemoveWorkflownNodeWithNonExistentContext方法。
+     */
     public void testRemoveWorkflownNodeWithNonExistentContext() {
         try {
             Boolean result = workFlowApplication.removeWorkflownNode(999, "someNodeId");
@@ -149,6 +194,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testModifyWorkflowNodeConfigurationWithNonExistentContext方法。
+     */
     public void testModifyWorkflowNodeConfigurationWithNonExistentContext() {
         WorkflowNode modifiedNode = new WorkflowNode();
         modifiedNode.setNodeId("someNodeId");
@@ -166,6 +214,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testResetWorkflowNodeMethodExists方法。
+     */
     public void testResetWorkflowNodeMethodExists() {
         // 测试 resetWorkflowNode 方法存在（虽然返回 null）
         Boolean result = workFlowApplication.resetWorkflowNode();
@@ -173,6 +224,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testStartReferToMethodExists方法。
+     */
     public void testStartReferToMethodExists() {
         // 测试 startReferTo 方法存在（虽然返回 null）
         Boolean result = workFlowApplication.startReferTo();
@@ -180,6 +234,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testForcePauseMethodExists方法。
+     */
     public void testForcePauseMethodExists() {
         // 测试 forcePause 方法存在（虽然返回 null）
         Boolean result = workFlowApplication.forcePause();
@@ -187,6 +244,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testResumeMethodExists方法。
+     */
     public void testResumeMethodExists() {
         // 测试 resume 方法存在（虽然返回 null）
         Boolean result = workFlowApplication.resume();
@@ -194,6 +254,9 @@ public class WorkFlowApplicationTest {
     }
 
     @Test
+    /**
+     * testStatusMethodExists方法。
+     */
     public void testStatusMethodExists() {
         // 测试 status 方法存在（虽然返回 null）
         Boolean result = workFlowApplication.status();

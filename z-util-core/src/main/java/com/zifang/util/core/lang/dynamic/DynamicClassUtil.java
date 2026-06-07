@@ -22,8 +22,16 @@ import java.util.stream.Collectors;
 /**
  * DynamicClassUtil类。
  */
+/**
+ * DynamicClassUtil类。
+ */
 public class DynamicClassUtil {
 
+    /**
+     * parser方法。
+     *      * @param clazz Class?类型参数
+     * @return static DynamicClass类型返回值
+     */
     /**
      * parser方法。
      *      * @param clazz Class?类型参数
@@ -62,6 +70,11 @@ public class DynamicClassUtil {
      *      * @param field Field类型参数
      * @return static DynamicField类型返回值
      */
+    /**
+     * parser方法。
+     *      * @param field Field类型参数
+     * @return static DynamicField类型返回值
+     */
     public static DynamicField parser(Field field) {
         DynamicField dynamicField = new DynamicField();
         dynamicField.setName(field.getName());
@@ -76,6 +89,11 @@ public class DynamicClassUtil {
         return dynamicField;
     }
 
+    /**
+     * parser方法。
+     *      * @param method Method类型参数
+     * @return static DynamicMethod类型返回值
+     */
     /**
      * parser方法。
      *      * @param method Method类型参数
@@ -99,6 +117,11 @@ public class DynamicClassUtil {
      *      * @param clazzes ListClass?类型参数
      * @return static List<DynamicClass>类型返回值
      */
+    /**
+     * parserClass方法。
+     *      * @param clazzes ListClass?类型参数
+     * @return static List<DynamicClass>类型返回值
+     */
     public static List<DynamicClass> parserClass(List<Class<?>> clazzes) {
         return clazzes.stream().map(DynamicClassUtil::parser).collect(Collectors.toList());
     }
@@ -108,10 +131,20 @@ public class DynamicClassUtil {
      *      * @param methods ListMethod类型参数
      * @return static List<DynamicMethod>类型返回值
      */
+    /**
+     * parserMethods方法。
+     *      * @param methods ListMethod类型参数
+     * @return static List<DynamicMethod>类型返回值
+     */
     public static List<DynamicMethod> parserMethods(List<Method> methods) {
         return methods.stream().map(DynamicClassUtil::parser).collect(Collectors.toList());
     }
 
+    /**
+     * parserFields方法。
+     *      * @param fields ListField类型参数
+     * @return static List<DynamicField>类型返回值
+     */
     /**
      * parserFields方法。
      *      * @param fields ListField类型参数
@@ -130,6 +163,11 @@ public class DynamicClassUtil {
      *      * @param dynamicClass DynamicClass类型参数
      * @return static Class<?>类型返回值
      */
+    /**
+     * parser方法。
+     *      * @param dynamicClass DynamicClass类型参数
+     * @return static Class<?>类型返回值
+     */
     public static Class<?> parser(DynamicClass dynamicClass) {
         // Generating a Class from DynamicClass requires bytecode generation library
         // Return the class of DynamicClass as a placeholder
@@ -141,10 +179,20 @@ public class DynamicClassUtil {
      *      * @param dynamicClass DynamicClass类型参数
      * @return static String类型返回值
      */
+    /**
+     * parserAsCode方法。
+     *      * @param dynamicClass DynamicClass类型参数
+     * @return static String类型返回值
+     */
     public static String parserAsCode(DynamicClass dynamicClass) {
         return generateClassSource(dynamicClass);
     }
 
+    /**
+     * generateClassSource方法。
+     *      * @param dynamicBean DynamicClass类型参数
+     * @return static String类型返回值
+     */
     /**
      * generateClassSource方法。
      *      * @param dynamicBean DynamicClass类型参数
@@ -202,9 +250,19 @@ public class DynamicClassUtil {
      *      * @param json String类型参数
      * @return static List<String>类型返回值
      */
+    /**
+     * generateClassSource方法。
+     *      * @param json String类型参数
+     * @return static List<String>类型返回值
+     */
     public static List<String> generateClassSource(String json){
         return generateClassSource(GsonUtil.toMap(json));
     }
+    /**
+     * generateClassSource方法。
+     *      * @param map MapString,Object类型参数
+     * @return static List<String>类型返回值
+     */
     /**
      * generateClassSource方法。
      *      * @param map MapString,Object类型参数

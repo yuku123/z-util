@@ -10,9 +10,15 @@ import static org.junit.Assert.*;
 /**
  * NetworkDTO 类测试
  */
+/**
+ * NetworkDTOTest类。
+ */
 public class NetworkDTOTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         NetworkDTO dto = new NetworkDTO();
         assertNotNull(dto);
@@ -29,6 +35,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testIdSetterAndGetter方法。
+     */
     public void testIdSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         dto.setId("abc123def456");
@@ -36,6 +45,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testNameSetterAndGetter方法。
+     */
     public void testNameSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         dto.setName("my-network");
@@ -43,6 +55,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testDriverSetterAndGetter方法。
+     */
     public void testDriverSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         dto.setDriver("bridge");
@@ -53,6 +68,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testScopeSetterAndGetter方法。
+     */
     public void testScopeSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         dto.setScope("local");
@@ -63,6 +81,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testInternalSetterAndGetter方法。
+     */
     public void testInternalSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         assertFalse(dto.isInternal());
@@ -75,6 +96,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testAttachableSetterAndGetter方法。
+     */
     public void testAttachableSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         assertFalse(dto.isAttachable());
@@ -87,6 +111,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testSubnetSetterAndGetter方法。
+     */
     public void testSubnetSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         dto.setSubnet("172.17.0.0/16");
@@ -94,6 +121,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testGatewaySetterAndGetter方法。
+     */
     public void testGatewaySetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         dto.setGateway("172.17.0.1");
@@ -101,6 +131,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testLabelsSetterAndGetter方法。
+     */
     public void testLabelsSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         Map<String, String> labels = new HashMap<>();
@@ -116,6 +149,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testContainerCountSetterAndGetter方法。
+     */
     public void testContainerCountSetterAndGetter() {
         NetworkDTO dto = new NetworkDTO();
         assertEquals(0, dto.getContainerCount());
@@ -128,6 +164,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         NetworkDTO dto = new NetworkDTO();
         dto.setId("net123");
@@ -144,6 +183,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testCompleteNetworkDTO方法。
+     */
     public void testCompleteNetworkDTO() {
         NetworkDTO dto = new NetworkDTO();
         dto.setId("network-uuid-123");
@@ -175,6 +217,9 @@ public class NetworkDTOTest {
     }
 
     @Test
+    /**
+     * testDockerNetworkTypes方法。
+     */
     public void testDockerNetworkTypes() {
         // Bridge network
         NetworkDTO bridge = new NetworkDTO();

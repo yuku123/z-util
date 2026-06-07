@@ -17,9 +17,15 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * SocketTest001类。
+ */
 public class SocketTest001 {
 
     @Test
+    /**
+     * client方法。
+     */
     public void client() throws IOException {
         // 服务端IP地址和端口，与服务端建立连接
         Socket socket = new Socket("127.0.0.1", 50000);
@@ -35,6 +41,9 @@ public class SocketTest001 {
     }
 
     @Test
+    /**
+     * server方法。
+     */
     public void server() throws IOException {
         // 监听指定的端口
         ServerSocket server = new ServerSocket(50000);
@@ -58,6 +67,11 @@ public class SocketTest001 {
         server.close();
     }
 
+    /**
+     * printMessageFromInputStream方法。
+     *      * @param inputStream InputStream类型参数
+     * @return static void类型返回值
+     */
     public static void printMessageFromInputStream(InputStream inputStream) throws IOException {
         byte[] bytes = new byte[1024];
         int len;

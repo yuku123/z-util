@@ -14,5 +14,8 @@ package com.zifang.util.monitor.thread;
 /**
  * ThreadMonitor类。
  */
+/**
+ * ThreadMonitor类。
+ */
 public class ThreadMonitor {
 }

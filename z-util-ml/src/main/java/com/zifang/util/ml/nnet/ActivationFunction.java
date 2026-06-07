@@ -8,6 +8,9 @@ package com.zifang.util.ml.nnet;
 /**
  * ActivationFunction接口。
  */
+/**
+ * ActivationFunction接口。
+ */
 public interface ActivationFunction {
 
     /**

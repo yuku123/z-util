@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
  * BpmnXmlParser 类测试
  * 补充测试以确保完整覆盖所有公开方法
  */
+/**
+ * BpmnXmlParserTest类。
+ */
 public class BpmnXmlParserTest {
 
     private static final String SIMPLE_BPMN_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -42,6 +45,9 @@ public class BpmnXmlParserTest {
             "</definitions>";
 
     @Test
+    /**
+     * testParseSimpleBpmnWithStartAndEndEvents方法。
+     */
     public void testParseSimpleBpmnWithStartAndEndEvents() {
         BpmnXmlParser parser = new BpmnXmlParser();
         BpmnDiagram diagram = parser.parse(SIMPLE_BPMN_XML);
@@ -53,12 +59,18 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         BpmnXmlParser parser = new BpmnXmlParser();
         assertNotNull(parser);
     }
 
     @Test
+    /**
+     * testConstructorWithNamespaceAwareTrue方法。
+     */
     public void testConstructorWithNamespaceAwareTrue() {
         BpmnXmlParser parser = new BpmnXmlParser(true);
         assertNotNull(parser);
@@ -69,6 +81,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testConstructorWithNamespaceAwareFalse方法。
+     */
     public void testConstructorWithNamespaceAwareFalse() {
         BpmnXmlParser parser = new BpmnXmlParser(false);
         assertNotNull(parser);
@@ -79,6 +94,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseFromString方法。
+     */
     public void testParseFromString() {
         BpmnXmlParser parser = new BpmnXmlParser();
         BpmnDiagram diagram = parser.parse(SIMPLE_BPMN_XML);
@@ -88,6 +106,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseFromByteArray方法。
+     */
     public void testParseFromByteArray() {
         BpmnXmlParser parser = new BpmnXmlParser();
         byte[] xmlBytes = SIMPLE_BPMN_XML.getBytes(StandardCharsets.UTF_8);
@@ -100,6 +121,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseFromByteArrayWithDifferentCharset方法。
+     */
     public void testParseFromByteArrayWithDifferentCharset() {
         BpmnXmlParser parser = new BpmnXmlParser();
         byte[] xmlBytes = SIMPLE_BPMN_XML.getBytes(StandardCharsets.UTF_8);
@@ -111,6 +135,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseBpmnWithUserTask方法。
+     */
     public void testParseBpmnWithUserTask() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -139,6 +166,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseBpmnWithExclusiveGateway方法。
+     */
     public void testParseBpmnWithExclusiveGateway() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -166,6 +196,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseBpmnWithParallelGateway方法。
+     */
     public void testParseBpmnWithParallelGateway() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -192,6 +225,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseBpmnWithInclusiveGateway方法。
+     */
     public void testParseBpmnWithInclusiveGateway() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -218,6 +254,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseBpmnWithSequenceFlow方法。
+     */
     public void testParseBpmnWithSequenceFlow() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -242,6 +281,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseBpmnWithSequenceFlowWithName方法。
+     */
     public void testParseBpmnWithSequenceFlowWithName() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -262,6 +304,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseBpmnWithSequenceFlowWithDefault方法。
+     */
     public void testParseBpmnWithSequenceFlowWithDefault() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -290,6 +335,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseBpmnWithConditionExpression方法。
+     */
     public void testParseBpmnWithConditionExpression() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -314,6 +362,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseEmptyProcess方法。
+     */
     public void testParseEmptyProcess() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -331,6 +382,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseWithDocumentation方法。
+     */
     public void testParseWithDocumentation() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -353,6 +407,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseInvalidXml方法。
+     */
     public void testParseInvalidXml() {
         String invalidXml = "not valid xml at all";
         BpmnXmlParser parser = new BpmnXmlParser();
@@ -366,12 +423,18 @@ public class BpmnXmlParserTest {
     }
 
     @Test(expected = RuntimeException.class)
+    /**
+     * testParseInvalidXmlWithAnnotation方法。
+     */
     public void testParseInvalidXmlWithAnnotation() {
         BpmnXmlParser parser = new BpmnXmlParser();
         parser.parse("not valid xml at all");
     }
 
     @Test
+    /**
+     * testParseInvalidByteArray方法。
+     */
     public void testParseInvalidByteArray() {
         BpmnXmlParser parser = new BpmnXmlParser();
         byte[] invalidBytes = "not valid xml at all".getBytes(StandardCharsets.UTF_8);
@@ -385,6 +448,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnDiagramNodeMap方法。
+     */
     public void testBpmnDiagramNodeMap() {
         BpmnXmlParser parser = new BpmnXmlParser();
         BpmnDiagram diagram = parser.parse(SIMPLE_BPMN_XML);
@@ -396,6 +462,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnNodeProperties方法。
+     */
     public void testBpmnNodeProperties() {
         BpmnDiagram.BpmnNode node = new BpmnDiagram.BpmnNode();
         node.setId("node1");
@@ -413,6 +482,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnSequenceFlowProperties方法。
+     */
     public void testBpmnSequenceFlowProperties() {
         BpmnDiagram.BpmnSequenceFlow flow = new BpmnDiagram.BpmnSequenceFlow();
         flow.setId("flow1");
@@ -427,6 +499,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnDiagramGettersAndSetters方法。
+     */
     public void testBpmnDiagramGettersAndSetters() {
         BpmnDiagram diagram = new BpmnDiagram();
         diagram.setId("diagram1");
@@ -437,6 +512,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnDiagramConstructorWithIdAndName方法。
+     */
     public void testBpmnDiagramConstructorWithIdAndName() {
         BpmnDiagram diagram = new BpmnDiagram("id123", "My Process");
         assertEquals("id123", diagram.getId());
@@ -444,6 +522,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testAddNodeAndSequenceFlow方法。
+     */
     public void testAddNodeAndSequenceFlow() {
         BpmnDiagram diagram = new BpmnDiagram();
 
@@ -462,6 +543,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseComplexBpmnDiagram方法。
+     */
     public void testParseComplexBpmnDiagram() {
         BpmnXmlParser parser = new BpmnXmlParser();
         BpmnDiagram diagram = parser.parse(COMPLEX_BPMN_XML);
@@ -474,6 +558,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseServiceTask方法。
+     */
     public void testParseServiceTask() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -502,6 +589,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseScriptTask方法。
+     */
     public void testParseScriptTask() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -531,6 +621,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseWithIncomingAndOutgoing方法。
+     */
     public void testParseWithIncomingAndOutgoing() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -562,6 +655,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnNodeDefaultConstructor方法。
+     */
     public void testBpmnNodeDefaultConstructor() {
         BpmnDiagram.BpmnNode node = new BpmnDiagram.BpmnNode();
         assertNotNull(node);
@@ -569,6 +665,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnSequenceFlowDefaultConstructor方法。
+     */
     public void testBpmnSequenceFlowDefaultConstructor() {
         BpmnDiagram.BpmnSequenceFlow flow = new BpmnDiagram.BpmnSequenceFlow();
         assertNotNull(flow);
@@ -576,6 +675,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnSequenceFlowWithSourceAndTarget方法。
+     */
     public void testBpmnSequenceFlowWithSourceAndTarget() {
         BpmnDiagram.BpmnSequenceFlow flow = new BpmnDiagram.BpmnSequenceFlow("flow1", "node1", "node2");
         assertEquals("flow1", flow.getId());
@@ -584,6 +686,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testBpmnSequenceFlowSetDefault方法。
+     */
     public void testBpmnSequenceFlowSetDefault() {
         BpmnDiagram.BpmnSequenceFlow flow = new BpmnDiagram.BpmnSequenceFlow();
         assertFalse(flow.isDefault());
@@ -596,6 +701,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testEmptyXmlString方法。
+     */
     public void testEmptyXmlString() {
         BpmnXmlParser parser = new BpmnXmlParser();
 
@@ -608,6 +716,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testEmptyByteArray方法。
+     */
     public void testEmptyByteArray() {
         BpmnXmlParser parser = new BpmnXmlParser();
 
@@ -620,6 +731,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testParseMultipleStartEvents方法。
+     */
     public void testParseMultipleStartEvents() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -640,6 +754,9 @@ public class BpmnXmlParserTest {
     }
 
     @Test
+    /**
+     * testNamespaceAwareVsNonNamespaceAware方法。
+     */
     public void testNamespaceAwareVsNonNamespaceAware() {
         String xmlWithNamespace = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +

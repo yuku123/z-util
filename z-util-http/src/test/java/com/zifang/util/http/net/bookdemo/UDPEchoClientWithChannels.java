@@ -10,11 +10,19 @@ import java.nio.channels.Selector;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * UDPEchoClientWithChannels类。
+ */
 public class UDPEchoClientWithChannels {
 
     public final static int PORT = 7;
     private final static int LIMIT = 100;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         SocketAddress remote;

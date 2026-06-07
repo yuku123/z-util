@@ -12,8 +12,16 @@ package com.zifang.util.zex.leetcode;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * _103类。
+ */
 public class _103 {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Queue<Integer> queue = new LinkedList<>();
         System.out.println();

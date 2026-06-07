@@ -13,17 +13,26 @@ import static org.junit.Assert.*;
 /**
  * CompileContext 测试
  */
+/**
+ * CompileContextTest类。
+ */
 public class CompileContextTest {
 
     private CompileContext compileContext;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         compileContext = new CompileContext();
         compileContext.initial();
     }
 
     @Test
+    /**
+     * testInitial方法。
+     */
     public void testInitial() {
         assertNotNull(compileContext);
         // 验证编译器已初始化
@@ -31,6 +40,9 @@ public class CompileContextTest {
     }
 
     @Test
+    /**
+     * testAddJavaObject方法。
+     */
     public void testAddJavaObject() {
         String sourceCode = "public class HelloService { public String hello() { return \"Hello\"; } }";
         CharSequenceJavaFileObject javaFileObject = new CharSequenceJavaFileObject("HelloService", sourceCode);
@@ -42,6 +54,9 @@ public class CompileContextTest {
     }
 
     @Test
+    /**
+     * testId方法。
+     */
     public void testId() {
         // 验证静态 id 字段存在且为时间戳
         assertNotNull(CompileContext.id);
@@ -49,6 +64,9 @@ public class CompileContextTest {
     }
 
     @Test
+    /**
+     * testCompileResult方法。
+     */
     public void testCompileResult() {
         // 测试编译结果输出（只是验证方法可调用）
         String sourceCode = "public class MathService { " +
@@ -62,6 +80,9 @@ public class CompileContextTest {
     }
 
     @Test
+    /**
+     * testLoadClass方法。
+     */
     public void testLoadClass() {
         String sourceCode = "public class UserService { public String getName() { return \"test\"; } }";
         CharSequenceJavaFileObject javaFileObject = new CharSequenceJavaFileObject("UserService", sourceCode);

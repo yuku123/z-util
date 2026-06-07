@@ -30,10 +30,17 @@ import java.util.TimeZone;
 /**
  * SimpleTrigger类。
  */
+/**
+ * SimpleTrigger类。
+ */
 public class SimpleTrigger implements Trigger {
 
     private final org.quartz.SimpleTrigger delegate;
 
+    /**
+     * SimpleTrigger方法。
+     *      * @param delegate org.quartz.SimpleTrigger类型参数
+     */
     /**
      * SimpleTrigger方法。
      *      * @param delegate org.quartz.SimpleTrigger类型参数
@@ -51,6 +58,10 @@ public class SimpleTrigger implements Trigger {
      * newSimpleTrigger方法。
      * @return static SimpleBuilder类型返回值
      */
+    /**
+     * newSimpleTrigger方法。
+     * @return static SimpleBuilder类型返回值
+     */
     public static SimpleBuilder newSimpleTrigger() {
         return new SimpleBuilder();
     }
@@ -58,6 +69,10 @@ public class SimpleTrigger implements Trigger {
     // ==================== Trigger 接口实现 ====================
 
     @Override
+    /**
+     * getKey方法。
+     * @return org.quartz.TriggerKey类型返回值
+     */
     /**
      * getKey方法。
      * @return org.quartz.TriggerKey类型返回值
@@ -71,11 +86,19 @@ public class SimpleTrigger implements Trigger {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return delegate.getKey().getName();
     }
 
     @Override
+    /**
+     * getGroup方法。
+     * @return String类型返回值
+     */
     /**
      * getGroup方法。
      * @return String类型返回值
@@ -89,11 +112,19 @@ public class SimpleTrigger implements Trigger {
      * getJobKey方法。
      * @return org.quartz.JobKey类型返回值
      */
+    /**
+     * getJobKey方法。
+     * @return org.quartz.JobKey类型返回值
+     */
     public org.quartz.JobKey getJobKey() {
         return delegate.getJobKey();
     }
 
     @Override
+    /**
+     * getDescription方法。
+     * @return String类型返回值
+     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -107,11 +138,19 @@ public class SimpleTrigger implements Trigger {
      * getNextFireTime方法。
      * @return Date类型返回值
      */
+    /**
+     * getNextFireTime方法。
+     * @return Date类型返回值
+     */
     public Date getNextFireTime() {
         return delegate.getNextFireTime();
     }
 
     @Override
+    /**
+     * getPreviousFireTime方法。
+     * @return Date类型返回值
+     */
     /**
      * getPreviousFireTime方法。
      * @return Date类型返回值
@@ -125,11 +164,19 @@ public class SimpleTrigger implements Trigger {
      * getPriority方法。
      * @return int类型返回值
      */
+    /**
+     * getPriority方法。
+     * @return int类型返回值
+     */
     public int getPriority() {
         return delegate.getPriority();
     }
 
     @Override
+    /**
+     * getStartTime方法。
+     * @return Date类型返回值
+     */
     /**
      * getStartTime方法。
      * @return Date类型返回值
@@ -143,11 +190,19 @@ public class SimpleTrigger implements Trigger {
      * getEndTime方法。
      * @return Date类型返回值
      */
+    /**
+     * getEndTime方法。
+     * @return Date类型返回值
+     */
     public Date getEndTime() {
         return delegate.getEndTime();
     }
 
     @Override
+    /**
+     * getMisfirePolicy方法。
+     * @return MisfirePolicy类型返回值
+     */
     /**
      * getMisfirePolicy方法。
      * @return MisfirePolicy类型返回值
@@ -167,6 +222,10 @@ public class SimpleTrigger implements Trigger {
      * getCalendarName方法。
      * @return String类型返回值
      */
+    /**
+     * getCalendarName方法。
+     * @return String类型返回值
+     */
     public String getCalendarName() {
         return delegate.getCalendarName();
     }
@@ -180,6 +239,10 @@ public class SimpleTrigger implements Trigger {
      * getTimeZone方法。
      * @return TimeZone类型返回值
      */
+    /**
+     * getTimeZone方法。
+     * @return TimeZone类型返回值
+     */
     public TimeZone getTimeZone() {
         return TimeZone.getDefault();
     }
@@ -189,11 +252,19 @@ public class SimpleTrigger implements Trigger {
      * getDelegate方法。
      * @return org.quartz.Trigger类型返回值
      */
+    /**
+     * getDelegate方法。
+     * @return org.quartz.Trigger类型返回值
+     */
     public org.quartz.Trigger getDelegate() {
         return delegate;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -217,6 +288,10 @@ public class SimpleTrigger implements Trigger {
      * getRepeatCount方法。
      * @return int类型返回值
      */
+    /**
+     * getRepeatCount方法。
+     * @return int类型返回值
+     */
     public int getRepeatCount() {
         return delegate.getRepeatCount();
     }
@@ -228,12 +303,20 @@ public class SimpleTrigger implements Trigger {
      * getRepeatInterval方法。
      * @return long类型返回值
      */
+    /**
+     * getRepeatInterval方法。
+     * @return long类型返回值
+     */
     public long getRepeatInterval() {
         return delegate.getRepeatInterval();
     }
 
     /**
      * 获取已触发的次数。
+     */
+    /**
+     * getTimesTriggered方法。
+     * @return int类型返回值
      */
     /**
      * getTimesTriggered方法。
@@ -258,11 +341,21 @@ public class SimpleTrigger implements Trigger {
      *      * @param seconds int类型参数
      * @return SimpleBuilder类型返回值
      */
+    /**
+     * withIntervalInSeconds方法。
+     *      * @param seconds int类型参数
+     * @return SimpleBuilder类型返回值
+     */
         public SimpleBuilder withIntervalInSeconds(int seconds) {
             this.intervalInMillis = seconds * 1000L;
             return this;
         }
 
+    /**
+     * withIntervalInMinutes方法。
+     *      * @param minutes int类型参数
+     * @return SimpleBuilder类型返回值
+     */
     /**
      * withIntervalInMinutes方法。
      *      * @param minutes int类型参数
@@ -278,11 +371,21 @@ public class SimpleTrigger implements Trigger {
      *      * @param hours int类型参数
      * @return SimpleBuilder类型返回值
      */
+    /**
+     * withIntervalInHours方法。
+     *      * @param hours int类型参数
+     * @return SimpleBuilder类型返回值
+     */
         public SimpleBuilder withIntervalInHours(int hours) {
             this.intervalInMillis = hours * 3600 * 1000L;
             return this;
         }
 
+    /**
+     * withIntervalInMillis方法。
+     *      * @param millis long类型参数
+     * @return SimpleBuilder类型返回值
+     */
     /**
      * withIntervalInMillis方法。
      *      * @param millis long类型参数
@@ -296,6 +399,10 @@ public class SimpleTrigger implements Trigger {
         /**
          * 设置永久重复（无限次）。
          */
+    /**
+     * repeatForever方法。
+     * @return SimpleBuilder类型返回值
+     */
     /**
      * repeatForever方法。
      * @return SimpleBuilder类型返回值
@@ -314,12 +421,21 @@ public class SimpleTrigger implements Trigger {
      *      * @param repeatCount int类型参数
      * @return SimpleBuilder类型返回值
      */
+    /**
+     * withRepeatCount方法。
+     *      * @param repeatCount int类型参数
+     * @return SimpleBuilder类型返回值
+     */
         public SimpleBuilder withRepeatCount(int repeatCount) {
             this.repeatCount = repeatCount;
             return this;
         }
 
         @Override
+    /**
+     * build方法。
+     * @return SimpleTrigger类型返回值
+     */
     /**
      * build方法。
      * @return SimpleTrigger类型返回值

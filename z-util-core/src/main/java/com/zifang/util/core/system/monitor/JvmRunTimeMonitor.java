@@ -8,6 +8,9 @@ import java.util.Objects;
 /**
  * JvmRunTimeMonitor类。
  */
+/**
+ * JvmRunTimeMonitor类。
+ */
 public class JvmRunTimeMonitor {
 
     /**
@@ -36,6 +39,10 @@ public class JvmRunTimeMonitor {
      * usedMemory方法。
      * @return final static long类型返回值
      */
+    /**
+     * usedMemory方法。
+     * @return final static long类型返回值
+     */
     public final static long usedMemory() {
         if (Objects.nonNull(osmxb)) {
             return (osmxb.getTotalPhysicalMemorySize() - osmxb.getFreePhysicalMemorySize()) / kb;
@@ -46,6 +53,10 @@ public class JvmRunTimeMonitor {
 
     /**
      * 获取JVM内存总量
+     */
+    /**
+     * JVMtotalMem方法。
+     * @return final static long类型返回值
      */
     /**
      * JVMtotalMem方法。
@@ -62,12 +73,20 @@ public class JvmRunTimeMonitor {
      * JVMfreeMem方法。
      * @return final static long类型返回值
      */
+    /**
+     * JVMfreeMem方法。
+     * @return final static long类型返回值
+     */
     public final static long JVMfreeMem() {
         return Runtime.getRuntime().freeMemory() / kb;
     }
 
     /**
      * 虚拟机使用最大内存量
+     */
+    /**
+     * JVMmaxMem方法。
+     * @return final static long类型返回值
      */
     /**
      * JVMmaxMem方法。

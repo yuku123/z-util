@@ -5,9 +5,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * OkHttpUtilTest类。
+ */
 public class OkHttpUtilTest {
 
     @Test
+    /**
+     * testBasicAuth方法。
+     */
     public void testBasicAuth() {
         String auth = OkHttpUtil.basicAuth("testuser", "testpass");
         
@@ -19,6 +25,9 @@ public class OkHttpUtilTest {
     }
 
     @Test
+    /**
+     * testBasicAuthWithSpecialCharacters方法。
+     */
     public void testBasicAuthWithSpecialCharacters() {
         String auth = OkHttpUtil.basicAuth("user:pass", "p@ss=word");
         
@@ -27,6 +36,9 @@ public class OkHttpUtilTest {
     }
 
     @Test
+    /**
+     * testMediaTypes方法。
+     */
     public void testMediaTypes() {
         assertNotNull(OkHttpUtil.JSON);
         assertEquals("application/json; charset=utf-8", OkHttpUtil.JSON.toString());
@@ -39,6 +51,9 @@ public class OkHttpUtilTest {
     }
 
     @Test
+    /**
+     * testBasicAuthWithEmptyPassword方法。
+     */
     public void testBasicAuthWithEmptyPassword() {
         String auth = OkHttpUtil.basicAuth("user", "");
         assertNotNull(auth);

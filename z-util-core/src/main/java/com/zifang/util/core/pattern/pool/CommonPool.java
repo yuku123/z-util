@@ -10,5 +10,8 @@ package com.zifang.util.core.pattern.pool;
 /**
  * CommonPool类。
  */
+/**
+ * CommonPool类。
+ */
 public class CommonPool {
 }

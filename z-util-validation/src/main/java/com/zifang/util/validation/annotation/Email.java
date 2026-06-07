@@ -11,6 +11,9 @@ import java.lang.annotation.*;
 /**
  * Email注解。
  */
+/**
+ * Email注解。
+ */
 public @interface Email {
     String message() default "邮箱格式不正确";
 }

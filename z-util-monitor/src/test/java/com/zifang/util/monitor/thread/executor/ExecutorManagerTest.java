@@ -11,9 +11,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
 
+/**
+ * ExecutorManagerTest类。
+ */
 public class ExecutorManagerTest {
 
     @Test
+    /**
+     * testExecutorManagerCreation方法。
+     */
     public void testExecutorManagerCreation() {
         List<ThreadPoolConfigUnit> configList = new ArrayList<>();
         ThreadPoolConfigUnit unit = new ThreadPoolConfigUnit();
@@ -30,18 +36,27 @@ public class ExecutorManagerTest {
     }
 
     @Test
+    /**
+     * testExecutorManagerWithNullList方法。
+     */
     public void testExecutorManagerWithNullList() {
         ExecutorManager manager = new ExecutorManager(null);
         assertNotNull(manager);
     }
 
     @Test
+    /**
+     * testExecutorManagerWithEmptyList方法。
+     */
     public void testExecutorManagerWithEmptyList() {
         ExecutorManager manager = new ExecutorManager(new ArrayList<>());
         assertNotNull(manager);
     }
 
     @Test
+    /**
+     * testGetExecutor方法。
+     */
     public void testGetExecutor() {
         List<ThreadPoolConfigUnit> configList = new ArrayList<>();
         ThreadPoolConfigUnit unit = new ThreadPoolConfigUnit();
@@ -57,6 +72,9 @@ public class ExecutorManagerTest {
     }
 
     @Test
+    /**
+     * testConstants方法。
+     */
     public void testConstants() {
         assertEquals(0xF, ExecutorManager.TASK_EXECUTE_TYPE_MASK);
         assertEquals(0x1, ExecutorManager.CPU_INTENSIVE);

@@ -6,6 +6,9 @@ package com.zifang.util.dsl.core;
 /**
  * Parser接口。
  */
+/**
+ * Parser接口。
+ */
 public interface Parser {
 
     /**

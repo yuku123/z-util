@@ -7,11 +7,17 @@ package com.zifang.util.dsl.g4.model;
 /**
  * G4Rule类。
  */
+/**
+ * G4Rule类。
+ */
 public class G4Rule {
     
     /**
      * 规则类型枚举
      */
+/**
+ * RuleType枚举。
+ */
 /**
  * RuleType枚举。
  */
@@ -34,6 +40,9 @@ public class G4Rule {
     /**
      * G4Rule方法。
      */
+    /**
+     * G4Rule方法。
+     */
     public G4Rule() {
     }
     
@@ -43,6 +52,13 @@ public class G4Rule {
      * @param type 规则类型（LEXER或PARSER）
      * @param body 规则体内容
      * @param isFragment 是否为fragment规则
+     */
+    /**
+     * G4Rule方法。
+     *      * @param name String类型参数
+     * @param type G4Rule.RuleType类型参数
+     * @param body String类型参数
+     * @param isFragment boolean类型参数
      */
     /**
      * G4Rule方法。
@@ -70,6 +86,12 @@ public class G4Rule {
      * @param type G4Rule.RuleType类型参数
      * @param body String类型参数
      */
+    /**
+     * G4Rule方法。
+     *      * @param name String类型参数
+     * @param type G4Rule.RuleType类型参数
+     * @param body String类型参数
+     */
     public G4Rule(String name, G4Rule.RuleType type, String body) {
         this.name = name;
         this.type = type;
@@ -79,6 +101,10 @@ public class G4Rule {
     /**
      * 获取规则名称
      * @return 规则名称
+     */
+    /**
+     * getName方法。
+     * @return String类型返回值
      */
     /**
      * getName方法。
@@ -96,6 +122,10 @@ public class G4Rule {
      * setName方法。
      *      * @param name String类型参数
      */
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -103,6 +133,10 @@ public class G4Rule {
     /**
      * 获取规则类型
      * @return 规则类型（LEXER或PARSER）
+     */
+    /**
+     * getType方法。
+     * @return RuleType类型返回值
      */
     /**
      * getType方法。
@@ -120,6 +154,10 @@ public class G4Rule {
      * setType方法。
      *      * @param type RuleType类型参数
      */
+    /**
+     * setType方法。
+     *      * @param type RuleType类型参数
+     */
     public void setType(RuleType type) {
         this.type = type;
     }
@@ -127,6 +165,10 @@ public class G4Rule {
     /**
      * 获取规则体
      * @return 规则体原始字符串
+     */
+    /**
+     * getBody方法。
+     * @return String类型返回值
      */
     /**
      * getBody方法。
@@ -144,6 +186,10 @@ public class G4Rule {
      * setBody方法。
      *      * @param body String类型参数
      */
+    /**
+     * setBody方法。
+     *      * @param body String类型参数
+     */
     public void setBody(String body) {
         this.body = body;
     }
@@ -151,6 +197,10 @@ public class G4Rule {
     /**
      * 判断是否为fragment规则
      * @return true表示是fragment规则
+     */
+    /**
+     * isFragment方法。
+     * @return boolean类型返回值
      */
     /**
      * isFragment方法。
@@ -168,6 +218,10 @@ public class G4Rule {
      * setFragment方法。
      *      * @param fragment boolean类型参数
      */
+    /**
+     * setFragment方法。
+     *      * @param fragment boolean类型参数
+     */
     public void setFragment(boolean fragment) {
         isFragment = fragment;
     }
@@ -175,6 +229,10 @@ public class G4Rule {
     /**
      * 判断是否为HIDDEN channel
      * @return true表示隐藏在HIDDEN channel
+     */
+    /**
+     * isHidden方法。
+     * @return boolean类型返回值
      */
     /**
      * isHidden方法。
@@ -192,11 +250,19 @@ public class G4Rule {
      * setHidden方法。
      *      * @param hidden boolean类型参数
      */
+    /**
+     * setHidden方法。
+     *      * @param hidden boolean类型参数
+     */
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

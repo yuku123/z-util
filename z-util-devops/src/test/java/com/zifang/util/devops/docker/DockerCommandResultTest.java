@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * DockerCommandResult 类测试
  */
+/**
+ * DockerCommandResultTest类。
+ */
 public class DockerCommandResultTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         DockerCommandResult<String> result = new DockerCommandResult<>();
         assertNotNull(result);
@@ -23,6 +29,9 @@ public class DockerCommandResultTest {
 
     @Test
     @org.junit.Ignore("DockerCommandResult 实现 bug，getData() 和 getStdout() 返回不同值")
+    /**
+     * testSuccessWithData方法。
+     */
     public void testSuccessWithData() {
         DockerCommandResult<String> result = DockerCommandResult.success("container-id-123");
 
@@ -32,6 +41,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testSuccessWithStdout方法。
+     */
     public void testSuccessWithStdout() {
         DockerCommandResult<String> result = DockerCommandResult.success("output data");
 
@@ -41,6 +53,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testFailWithExitCodeAndStderr方法。
+     */
     public void testFailWithExitCodeAndStderr() {
         DockerCommandResult<String> result = DockerCommandResult.fail(1, "Error message");
 
@@ -50,6 +65,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testFailWithMessage方法。
+     */
     public void testFailWithMessage() {
         DockerCommandResult<String> result = DockerCommandResult.fail("Connection failed");
 
@@ -58,6 +76,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testSuccessSetter方法。
+     */
     public void testSuccessSetter() {
         DockerCommandResult<String> result = new DockerCommandResult<>();
         result.setSuccess(true);
@@ -65,6 +86,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testExitCodeSetter方法。
+     */
     public void testExitCodeSetter() {
         DockerCommandResult<String> result = new DockerCommandResult<>();
         result.setExitCode(127);
@@ -72,6 +96,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testStdoutSetter方法。
+     */
     public void testStdoutSetter() {
         DockerCommandResult<String> result = new DockerCommandResult<>();
         result.setStdout("test output");
@@ -79,6 +106,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testStderrSetter方法。
+     */
     public void testStderrSetter() {
         DockerCommandResult<String> result = new DockerCommandResult<>();
         result.setStderr("error output");
@@ -86,6 +116,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testDataSetter方法。
+     */
     public void testDataSetter() {
         DockerCommandResult<String> result = new DockerCommandResult<>();
         result.setData("data value");
@@ -93,6 +126,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testMessageSetter方法。
+     */
     public void testMessageSetter() {
         DockerCommandResult<String> result = new DockerCommandResult<>();
         result.setMessage("test message");
@@ -100,6 +136,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         DockerCommandResult<String> result = DockerCommandResult.success("output");
         String str = result.toString();
@@ -110,6 +149,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testToStringWithFailure方法。
+     */
     public void testToStringWithFailure() {
         DockerCommandResult<String> result = DockerCommandResult.fail(1, "error");
         String str = result.toString();
@@ -119,6 +161,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testSuccessResultCanHaveNullData方法。
+     */
     public void testSuccessResultCanHaveNullData() {
         DockerCommandResult<String> result = DockerCommandResult.success((String) null);
 
@@ -128,6 +173,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testFailResultWithZeroExitCode方法。
+     */
     public void testFailResultWithZeroExitCode() {
         DockerCommandResult<String> result = DockerCommandResult.fail(0, "not really an error");
 
@@ -136,6 +184,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testGenericType方法。
+     */
     public void testGenericType() {
         DockerCommandResult<Integer> intResult = new DockerCommandResult<>();
         intResult.setData(42);
@@ -147,6 +198,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testSuccessWithEmptyString方法。
+     */
     public void testSuccessWithEmptyString() {
         DockerCommandResult<String> result = DockerCommandResult.success("");
 
@@ -155,6 +209,9 @@ public class DockerCommandResultTest {
     }
 
     @Test
+    /**
+     * testFailWithEmptyMessage方法。
+     */
     public void testFailWithEmptyMessage() {
         DockerCommandResult<String> result = DockerCommandResult.fail("");
 

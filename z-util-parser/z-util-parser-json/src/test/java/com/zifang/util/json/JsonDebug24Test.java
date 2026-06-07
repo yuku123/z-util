@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug24Test类。
+ */
 public class JsonDebug24Test {
 
     @Test
+    /**
+     * testDirect方法。
+     */
     public void testDirect() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -35,6 +41,9 @@ public class JsonDebug24Test {
     }
 
     @Test
+    /**
+     * testDirectParseSequence方法。
+     */
     public void testDirectParseSequence() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");

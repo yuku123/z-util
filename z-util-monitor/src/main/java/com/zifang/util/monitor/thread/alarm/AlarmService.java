@@ -8,6 +8,9 @@ package com.zifang.util.monitor.thread.alarm;
 /**
  * AlarmService接口。
  */
+/**
+ * AlarmService接口。
+ */
 public interface AlarmService {
 
     /**

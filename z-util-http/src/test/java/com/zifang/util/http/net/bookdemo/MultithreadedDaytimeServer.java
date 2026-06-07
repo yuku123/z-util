@@ -7,10 +7,18 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 
+/**
+ * MultithreadedDaytimeServer类。
+ */
 public class MultithreadedDaytimeServer {
 
     public final static int PORT = 13;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try (ServerSocket server = new ServerSocket(PORT)) {
             while (true) {
@@ -35,6 +43,9 @@ public class MultithreadedDaytimeServer {
         }
 
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             try {
                 Writer out = new OutputStreamWriter(connection.getOutputStream());

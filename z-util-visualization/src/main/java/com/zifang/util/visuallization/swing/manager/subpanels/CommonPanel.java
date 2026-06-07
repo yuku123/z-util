@@ -14,6 +14,9 @@ import javax.swing.*;
 /**
  * CommonPanel类。
  */
+/**
+ * CommonPanel类。
+ */
 public class CommonPanel extends JPanel {
 
 }

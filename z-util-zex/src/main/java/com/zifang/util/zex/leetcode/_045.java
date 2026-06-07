@@ -9,7 +9,15 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _045类。
+ */
 public class _045 {
+    /**
+     * jump方法。
+     *      * @param nums int[]类型参数
+     * @return int类型返回值
+     */
     public int jump(int[] nums) {
 
         if(nums.length == 1){
@@ -52,6 +60,11 @@ public class _045 {
         return n;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         new _045().jump(new int[]{1,2,1,1,1});

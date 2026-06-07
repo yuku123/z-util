@@ -11,10 +11,18 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * EchoServer类。
+ */
 public class EchoServer {
 
     public static int DEFAULT_PORT = 7;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         int port;

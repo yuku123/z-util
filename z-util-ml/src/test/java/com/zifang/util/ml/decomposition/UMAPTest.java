@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * UMAPTest类。
+ */
 public class UMAPTest {
 
     private Random random = new Random(42);
@@ -24,6 +27,9 @@ public class UMAPTest {
     }
 
     @Test
+    /**
+     * testUMAPOutputShape方法。
+     */
     public void testUMAPOutputShape() {
         int nSamples = 30;
         int nFeatures = 4;
@@ -46,6 +52,9 @@ public class UMAPTest {
     }
 
     @Test
+    /**
+     * testUMAPNeighbors方法。
+     */
     public void testUMAPNeighbors() {
         int nSamples = 40;
         int nFeatures = 5;

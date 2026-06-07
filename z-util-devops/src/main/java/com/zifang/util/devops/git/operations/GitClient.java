@@ -64,12 +64,22 @@ public final class GitClient {
     /**
      * 在指定目录初始化一个新仓库
      */
+    /**
+     * init方法。
+     *      * @param path String类型参数
+     * @return static GitResult<GitRepository>类型返回值
+     */
     public static GitResult<GitRepository> init(String path) {
         return init(new File(path));
     }
 
     /**
      * 在指定目录初始化一个新仓库
+     */
+    /**
+     * init方法。
+     *      * @param dir File类型参数
+     * @return static GitResult<GitRepository>类型返回值
      */
     public static GitResult<GitRepository> init(File dir) {
         return J.init(dir);
@@ -78,12 +88,22 @@ public final class GitClient {
     /**
      * 打开已有仓库
      */
+    /**
+     * open方法。
+     *      * @param path String类型参数
+     * @return static GitResult<GitRepository>类型返回值
+     */
     public static GitResult<GitRepository> open(String path) {
         return open(new File(path));
     }
 
     /**
      * 打开已有仓库
+     */
+    /**
+     * open方法。
+     *      * @param repoDir File类型参数
+     * @return static GitResult<GitRepository>类型返回值
      */
     public static GitResult<GitRepository> open(File repoDir) {
         return J.open(repoDir);
@@ -92,6 +112,12 @@ public final class GitClient {
     /**
      * 克隆远程仓库
      */
+    /**
+     * clone方法。
+     *      * @param url String类型参数
+     * @param targetPath String类型参数
+     * @return static GitResult<GitRepository>类型返回值
+     */
     public static GitResult<GitRepository> clone(String url, String targetPath) {
         return clone(url, new File(targetPath), null, null);
     }
@@ -99,12 +125,26 @@ public final class GitClient {
     /**
      * 克隆远程仓库
      */
+    /**
+     * clone方法。
+     *      * @param url String类型参数
+     * @param targetDir File类型参数
+     * @return static GitResult<GitRepository>类型返回值
+     */
     public static GitResult<GitRepository> clone(String url, File targetDir) {
         return clone(url, targetDir, null, null);
     }
 
     /**
      * 克隆远程仓库（带凭证）
+     */
+    /**
+     * clone方法。
+     *      * @param url String类型参数
+     * @param targetDir File类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return static GitResult<GitRepository>类型返回值
      */
     public static GitResult<GitRepository> clone(String url, File targetDir, String username, String password) {
         // 优先 JGit 克隆；JGit 在某些 sparse / LFS 场景下会失败，失败时回退 shell
@@ -149,6 +189,10 @@ public final class GitClient {
     /**
      * 检查当前环境是否可用：JGit 始终可用，shell 视系统是否有 git 二进制
      */
+    /**
+     * isShellAvailable方法。
+     * @return static boolean类型返回值
+     */
     public static boolean isShellAvailable() {
         return SHELL.isAvailable();
     }
@@ -158,12 +202,23 @@ public final class GitClient {
     /**
      * 暂存文件（add）。patterns 为空表示全部
      */
+    /**
+     * add方法。
+     *      * @param repo GitRepository类型参数
+     * @param patterns String...类型参数
+     * @return static GitResult<Void>类型返回值
+     */
     public static GitResult<Void> add(GitRepository repo, String... patterns) {
         return J.add(repo, patterns);
     }
 
     /**
      * 暂存全部
+     */
+    /**
+     * addAll方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<Void>类型返回值
      */
     public static GitResult<Void> addAll(GitRepository repo) {
         return J.add(repo, ".");
@@ -174,12 +229,24 @@ public final class GitClient {
      *
      * @param cached true 表示仅从索引移除（--cached），文件保留在工作区
      */
+    /**
+     * rm方法。
+     *      * @param repo GitRepository类型参数
+     * @param cached boolean类型参数
+     * @param patterns String...类型参数
+     * @return static GitResult<Void>类型返回值
+     */
     public static GitResult<Void> rm(GitRepository repo, boolean cached, String... patterns) {
         return J.rm(repo, cached, patterns);
     }
 
     /**
      * 工作区状态
+     */
+    /**
+     * status方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<GitStatus>类型返回值
      */
     public static GitResult<GitStatus> status(GitRepository repo) {
         return J.status(repo);
@@ -188,6 +255,11 @@ public final class GitClient {
     /**
      * 工作区与 HEAD 的 diff（未暂存变更）
      */
+    /**
+     * diff方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<List<GitDiffEntry>>类型返回值
+     */
     public static GitResult<List<GitDiffEntry>> diff(GitRepository repo) {
         return GitResult.success(J.diffWorkTree(repo));
     }
@@ -195,12 +267,24 @@ public final class GitClient {
     /**
      * HEAD 与暂存区的 diff（已暂存未提交）
      */
+    /**
+     * diffCached方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<List<GitDiffEntry>>类型返回值
+     */
     public static GitResult<List<GitDiffEntry>> diffCached(GitRepository repo) {
         return GitResult.success(J.diffIndex(repo));
     }
 
     /**
      * 两个 ref 之间的 diff
+     */
+    /**
+     * diff方法。
+     *      * @param repo GitRepository类型参数
+     * @param oldRef String类型参数
+     * @param newRef String类型参数
+     * @return static GitResult<List<GitDiffEntry>>类型返回值
      */
     public static GitResult<List<GitDiffEntry>> diff(GitRepository repo, String oldRef, String newRef) {
         return GitResult.success(J.diffRefs(repo, oldRef, newRef));
@@ -211,12 +295,25 @@ public final class GitClient {
     /**
      * 使用当前 git config 中的 user.name/user.email 提交
      */
+    /**
+     * commit方法。
+     *      * @param repo GitRepository类型参数
+     * @param message String类型参数
+     * @return static GitResult<String>类型返回值
+     */
     public static GitResult<String> commit(GitRepository repo, String message) {
         return commit(repo, null, message, false);
     }
 
     /**
      * 提交（指定 author/committer）
+     */
+    /**
+     * commit方法。
+     *      * @param repo GitRepository类型参数
+     * @param author GitAuthor类型参数
+     * @param message String类型参数
+     * @return static GitResult<String>类型返回值
      */
     public static GitResult<String> commit(GitRepository repo, GitAuthor author, String message) {
         return commit(repo, author, message, false);
@@ -227,6 +324,14 @@ public final class GitClient {
      *
      * @param all    true 表示自动暂存已跟踪文件的修改（git commit -a）
      * @param author 为 null 时使用仓库配置
+     */
+    /**
+     * commit方法。
+     *      * @param repo GitRepository类型参数
+     * @param author GitAuthor类型参数
+     * @param message String类型参数
+     * @param all boolean类型参数
+     * @return static GitResult<String>类型返回值
      */
     public static GitResult<String> commit(GitRepository repo, GitAuthor author, String message, boolean all) {
         if (message == null || message.isEmpty()) {
@@ -240,12 +345,24 @@ public final class GitClient {
      *
      * @param mode soft / mixed / hard / keep / merge（默认 mixed）
      */
+    /**
+     * reset方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @param mode String类型参数
+     * @return static GitResult<Void>类型返回值
+     */
     public static GitResult<Void> reset(GitRepository repo, String ref, String mode) {
         return J.reset(repo, ref, mode);
     }
 
     /**
      * 重置 HEAD 一次（保留工作区修改）
+     */
+    /**
+     * resetHead方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<Void>类型返回值
      */
     public static GitResult<Void> resetHead(GitRepository repo) {
         return J.reset(repo, "HEAD", "mixed");
@@ -256,6 +373,12 @@ public final class GitClient {
     /**
      * 列出最近 maxCount 条提交
      */
+    /**
+     * log方法。
+     *      * @param repo GitRepository类型参数
+     * @param maxCount int类型参数
+     * @return static GitResult<List<GitCommit>>类型返回值
+     */
     public static GitResult<List<GitCommit>> log(GitRepository repo, int maxCount) {
         return J.log(repo, maxCount);
     }
@@ -263,12 +386,23 @@ public final class GitClient {
     /**
      * 列出全部提交
      */
+    /**
+     * log方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<List<GitCommit>>类型返回值
+     */
     public static GitResult<List<GitCommit>> log(GitRepository repo) {
         return J.log(repo, -1);
     }
 
     /**
      * 显示单条提交
+     */
+    /**
+     * show方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @return static GitResult<GitCommit>类型返回值
      */
     public static GitResult<GitCommit> show(GitRepository repo, String ref) {
         return J.show(repo, ref);
@@ -279,12 +413,22 @@ public final class GitClient {
     /**
      * 列出所有分支（local + remote）
      */
+    /**
+     * branchList方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<List<GitBranch>>类型返回值
+     */
     public static GitResult<List<GitBranch>> branchList(GitRepository repo) {
         return J.branchList(repo, GitBranch.Type.ALL);
     }
 
     /**
      * 列出本地分支
+     */
+    /**
+     * branchListLocal方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<List<GitBranch>>类型返回值
      */
     public static GitResult<List<GitBranch>> branchListLocal(GitRepository repo) {
         return J.branchList(repo, GitBranch.Type.LOCAL);
@@ -293,12 +437,23 @@ public final class GitClient {
     /**
      * 列出远程分支
      */
+    /**
+     * branchListRemote方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<List<GitBranch>>类型返回值
+     */
     public static GitResult<List<GitBranch>> branchListRemote(GitRepository repo) {
         return J.branchList(repo, GitBranch.Type.REMOTE);
     }
 
     /**
      * 创建分支（不切换）
+     */
+    /**
+     * branchCreate方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return static GitResult<Void>类型返回值
      */
     public static GitResult<Void> branchCreate(GitRepository repo, String name) {
         return J.branchCreate(repo, name);
@@ -309,12 +464,25 @@ public final class GitClient {
      *
      * @param force 强制删除未合并分支
      */
+    /**
+     * branchDelete方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @param force boolean类型参数
+     * @return static GitResult<Void>类型返回值
+     */
     public static GitResult<Void> branchDelete(GitRepository repo, String name, boolean force) {
         return J.branchDelete(repo, name, force);
     }
 
     /**
      * 切换分支或恢复文件
+     */
+    /**
+     * checkout方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @return static GitResult<Void>类型返回值
      */
     public static GitResult<Void> checkout(GitRepository repo, String ref) {
         return J.checkout(repo, ref);
@@ -323,12 +491,23 @@ public final class GitClient {
     /**
      * 创建并切换到新分支
      */
+    /**
+     * checkoutNewBranch方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return static GitResult<Void>类型返回值
+     */
     public static GitResult<Void> checkoutNewBranch(GitRepository repo, String name) {
         return J.checkoutNewBranch(repo, name);
     }
 
     /**
      * 当前分支名
+     */
+    /**
+     * currentBranch方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<String>类型返回值
      */
     public static GitResult<String> currentBranch(GitRepository repo) {
         return J.currentBranch(repo);
@@ -339,6 +518,11 @@ public final class GitClient {
     /**
      * 列出所有远程
      */
+    /**
+     * remoteList方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<List<GitRemote>>类型返回值
+     */
     public static GitResult<List<GitRemote>> remoteList(GitRepository repo) {
         return J.remoteList(repo);
     }
@@ -346,12 +530,25 @@ public final class GitClient {
     /**
      * 添加远程
      */
+    /**
+     * remoteAdd方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @param url String类型参数
+     * @return static GitResult<Void>类型返回值
+     */
     public static GitResult<Void> remoteAdd(GitRepository repo, String name, String url) {
         return J.remoteAdd(repo, name, url);
     }
 
     /**
      * 移除远程
+     */
+    /**
+     * remoteRemove方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return static GitResult<Void>类型返回值
      */
     public static GitResult<Void> remoteRemove(GitRepository repo, String name) {
         return J.remoteRemove(repo, name);
@@ -362,12 +559,26 @@ public final class GitClient {
     /**
      * fetch
      */
+    /**
+     * fetch方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @return static GitResult<FetchResult>类型返回值
+     */
     public static GitResult<FetchResult> fetch(GitRepository repo, String remote) {
         return fetch(repo, remote, null, null);
     }
 
     /**
      * fetch（带凭证）
+     */
+    /**
+     * fetch方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return static GitResult<FetchResult>类型返回值
      */
     public static GitResult<FetchResult> fetch(GitRepository repo, String remote, String username, String password) {
         return J.fetch(repo, remote, username, password);
@@ -376,12 +587,28 @@ public final class GitClient {
     /**
      * pull (fetch + merge)
      */
+    /**
+     * pull方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @param branch String类型参数
+     * @return static GitResult<PullResult>类型返回值
+     */
     public static GitResult<PullResult> pull(GitRepository repo, String remote, String branch) {
         return pull(repo, remote, branch, null, null);
     }
 
     /**
      * pull（带凭证）
+     */
+    /**
+     * pull方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @param branch String类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return static GitResult<PullResult>类型返回值
      */
     public static GitResult<PullResult> pull(GitRepository repo, String remote, String branch,
                                              String username, String password) {
@@ -393,12 +620,28 @@ public final class GitClient {
      *
      * @param refspec 形如 "main" 或 "main:remote-main"；null 表示推送当前分支
      */
+    /**
+     * push方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @param refspec String类型参数
+     * @return static GitResult<Iterable<PushResult>>类型返回值
+     */
     public static GitResult<Iterable<PushResult>> push(GitRepository repo, String remote, String refspec) {
         return push(repo, remote, refspec, null, null);
     }
 
     /**
      * push（带凭证）
+     */
+    /**
+     * push方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @param refspec String类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return static GitResult<Iterable<PushResult>>类型返回值
      */
     public static GitResult<Iterable<PushResult>> push(GitRepository repo, String remote, String refspec,
                                                        String username, String password) {
@@ -410,12 +653,24 @@ public final class GitClient {
     /**
      * merge 指定分支/提交到当前
      */
+    /**
+     * merge方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @return static GitResult<MergeResult>类型返回值
+     */
     public static GitResult<MergeResult> merge(GitRepository repo, String ref) {
         return J.merge(repo, ref);
     }
 
     /**
      * 在当前分支上 rebase 到 upstream
+     */
+    /**
+     * rebase方法。
+     *      * @param repo GitRepository类型参数
+     * @param upstream String类型参数
+     * @return static GitResult<RebaseResult>类型返回值
      */
     public static GitResult<RebaseResult> rebase(GitRepository repo, String upstream) {
         return J.rebase(repo, upstream);
@@ -426,12 +681,23 @@ public final class GitClient {
     /**
      * 列出全部 tag
      */
+    /**
+     * tagList方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<List<GitTag>>类型返回值
+     */
     public static GitResult<List<GitTag>> tagList(GitRepository repo) {
         return J.tagList(repo);
     }
 
     /**
      * 创建轻量 tag
+     */
+    /**
+     * tagCreate方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return static GitResult<Void>类型返回值
      */
     public static GitResult<Void> tagCreate(GitRepository repo, String name) {
         return J.tagCreate(repo, name, null, false, null);
@@ -440,12 +706,26 @@ public final class GitClient {
     /**
      * 在指定 ref 上创建轻量 tag
      */
+    /**
+     * tagCreate方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @param ref String类型参数
+     * @return static GitResult<Void>类型返回值
+     */
     public static GitResult<Void> tagCreate(GitRepository repo, String name, String ref) {
         return J.tagCreate(repo, name, null, false, ref);
     }
 
     /**
      * 创建带注释的 tag
+     */
+    /**
+     * tagCreateAnnotated方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @param message String类型参数
+     * @return static GitResult<Void>类型返回值
      */
     public static GitResult<Void> tagCreateAnnotated(GitRepository repo, String name, String message) {
         return J.tagCreate(repo, name, message, true, null);
@@ -454,12 +734,26 @@ public final class GitClient {
     /**
      * 在指定 ref 上创建带注释的 tag
      */
+    /**
+     * tagCreateAnnotated方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @param message String类型参数
+     * @param ref String类型参数
+     * @return static GitResult<Void>类型返回值
+     */
     public static GitResult<Void> tagCreateAnnotated(GitRepository repo, String name, String message, String ref) {
         return J.tagCreate(repo, name, message, true, ref);
     }
 
     /**
      * 删除本地 tag
+     */
+    /**
+     * tagDelete方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return static GitResult<Void>类型返回值
      */
     public static GitResult<Void> tagDelete(GitRepository repo, String name) {
         return J.tagDelete(repo, name);
@@ -470,6 +764,13 @@ public final class GitClient {
 
     /**
      * 工作区清理：移除未跟踪文件（git clean -fd）
+     */
+    /**
+     * clean方法。
+     *      * @param repo GitRepository类型参数
+     * @param force boolean类型参数
+     * @param includeIgnored boolean类型参数
+     * @return static GitResult<String>类型返回值
      */
     public static GitResult<String> clean(GitRepository repo, boolean force, boolean includeIgnored) {
         String[] args;
@@ -488,6 +789,13 @@ public final class GitClient {
      *
      * @param includeUntracked true 表示把未跟踪文件也一起暂存（git stash -u）
      */
+    /**
+     * stash方法。
+     *      * @param repo GitRepository类型参数
+     * @param includeUntracked boolean类型参数
+     * @param message String类型参数
+     * @return static GitResult<String>类型返回值
+     */
     public static GitResult<String> stash(GitRepository repo, boolean includeUntracked, String message) {
         java.util.List<String> args = new ArrayList<>();
         args.add("stash");
@@ -505,6 +813,11 @@ public final class GitClient {
     /**
      * stash 弹出最近一次
      */
+    /**
+     * stashPop方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<String>类型返回值
+     */
     public static GitResult<String> stashPop(GitRepository repo) {
         return SHELL.exec(repo.getWorkDir(), "stash", "pop");
     }
@@ -512,12 +825,23 @@ public final class GitClient {
     /**
      * 列出 stash
      */
+    /**
+     * stashList方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<String>类型返回值
+     */
     public static GitResult<String> stashList(GitRepository repo) {
         return SHELL.exec(repo.getWorkDir(), "stash", "list");
     }
 
     /**
      * blame 单文件
+     */
+    /**
+     * blame方法。
+     *      * @param repo GitRepository类型参数
+     * @param path String类型参数
+     * @return static GitResult<String>类型返回值
      */
     public static GitResult<String> blame(GitRepository repo, String path) {
         return SHELL.exec(repo.getWorkDir(), "blame", path);
@@ -530,6 +854,14 @@ public final class GitClient {
      * @param ref        导出哪个 ref（null 表示 HEAD）
      * @param outputPath 输出文件路径
      */
+    /**
+     * archive方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @param format String类型参数
+     * @param outputPath String类型参数
+     * @return static GitResult<String>类型返回值
+     */
     public static GitResult<String> archive(GitRepository repo, String ref, String format, String outputPath) {
         String realRef = ref == null ? "HEAD" : ref;
         if (format == null) {
@@ -540,6 +872,13 @@ public final class GitClient {
 
     /**
      * worktree add
+     */
+    /**
+     * worktreeAdd方法。
+     *      * @param repo GitRepository类型参数
+     * @param path String类型参数
+     * @param branch String类型参数
+     * @return static GitResult<String>类型返回值
      */
     public static GitResult<String> worktreeAdd(GitRepository repo, String path, String branch) {
         java.util.List<String> args = new ArrayList<>();
@@ -556,12 +895,24 @@ public final class GitClient {
     /**
      * worktree list（原始文本）
      */
+    /**
+     * worktreeList方法。
+     *      * @param repo GitRepository类型参数
+     * @return static GitResult<String>类型返回值
+     */
     public static GitResult<String> worktreeList(GitRepository repo) {
         return SHELL.exec(repo.getWorkDir(), "worktree", "list");
     }
 
     /**
      * worktree remove
+     */
+    /**
+     * worktreeRemove方法。
+     *      * @param repo GitRepository类型参数
+     * @param path String类型参数
+     * @param force boolean类型参数
+     * @return static GitResult<String>类型返回值
      */
     public static GitResult<String> worktreeRemove(GitRepository repo, String path, boolean force) {
         return SHELL.exec(repo.getWorkDir(), "worktree", "remove", force ? "--force" : "--", path);
@@ -572,12 +923,23 @@ public final class GitClient {
      *
      * @return stdout 文本
      */
+    /**
+     * execRaw方法。
+     *      * @param repo GitRepository类型参数
+     * @param args String...类型参数
+     * @return static GitResult<String>类型返回值
+     */
     public static GitResult<String> execRaw(GitRepository repo, String... args) {
         return SHELL.exec(repo.getWorkDir(), args);
     }
 
     /**
      * 在任意目录执行任意 git 命令（无仓库对象，逃生口）
+     */
+    /**
+     * execRaw方法。
+     *      * @param args String...类型参数
+     * @return static GitResult<String>类型返回值
      */
     public static GitResult<String> execRaw(String... args) {
         return SHELL.exec(null, args);

@@ -16,11 +16,17 @@ import java.io.File;
 import java.io.IOException;
 
 @Ignore
+/**
+ * HttpClientTest类。
+ */
 public class HttpClientTest {
 
     private CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
     @Test
+    /**
+     * testGet方法。
+     */
     public void testGet() throws IOException {
         String url = "/api/files/1";
         HttpGet httpGet = new HttpGet(url);
@@ -29,6 +35,9 @@ public class HttpClientTest {
     }
 
     @Test
+    /**
+     * testPut方法。
+     */
     public void testPut() throws IOException {
         String url = "/api/user";
         HttpPut httpPut = new HttpPut(url);
@@ -39,6 +48,9 @@ public class HttpClientTest {
     }
 
     @Test
+    /**
+     * testPost方法。
+     */
     public void testPost() throws IOException {
         String url = "/api/user";
         HttpPost httpPost = new HttpPost(url);
@@ -49,6 +61,9 @@ public class HttpClientTest {
     }
 
     @Test
+    /**
+     * testUpload1方法。
+     */
     public void testUpload1() throws IOException {
         String url = "/api/files/1";
         HttpPost httpPost = new HttpPost(url);
@@ -64,6 +79,9 @@ public class HttpClientTest {
     }
 
     @Test
+    /**
+     * testDelete方法。
+     */
     public void testDelete() throws IOException {
         String url = "/api/user/12";
         HttpDelete httpDelete = new HttpDelete(url);

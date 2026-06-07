@@ -12,6 +12,9 @@ import java.util.Iterator;
 /**
  * NIO服务端
  */
+/**
+ * NIOServer类。
+ */
 public class NIOServer {
     // 通道管理器
     private Selector selector;
@@ -21,6 +24,10 @@ public class NIOServer {
      *
      * @param port 绑定的端口号
      * @throws IOException
+     */
+    /**
+     * initServer方法。
+     *      * @param port int类型参数
      */
     public void initServer(int port) throws IOException {
         // 获得一个ServerSocket通道
@@ -42,6 +49,9 @@ public class NIOServer {
      * @throws IOException
      */
     @SuppressWarnings("unchecked")
+    /**
+     * listen方法。
+     */
     public void listen() throws IOException {
         System.out.println("服务端启动成功！");
         // 轮询访问selector
@@ -83,6 +93,10 @@ public class NIOServer {
      * @param key
      * @throws IOException
      */
+    /**
+     * read方法。
+     *      * @param key SelectionKey类型参数
+     */
     public void read(SelectionKey key) throws IOException {
         // 服务器可读取消息:得到事件发生的Socket通道
         SocketChannel channel = (SocketChannel) key.channel();
@@ -100,6 +114,11 @@ public class NIOServer {
      * 启动服务端测试
      *
      * @throws IOException
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) throws IOException {
         NIOServer server = new NIOServer();

@@ -13,6 +13,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * AnnotationContext类。
  */
+/**
+ * AnnotationContext类。
+ */
 public class AnnotationContext {
 
     private final Map<Class<?>, Object> beans = new ConcurrentHashMap<>();
@@ -21,6 +24,10 @@ public class AnnotationContext {
      * 扫描指定包下的类并注册到容器中。
      *
      * @param packageName 包名
+     */
+    /**
+     * scan方法。
+     *      * @param packageName String类型参数
      */
     /**
      * scan方法。
@@ -35,6 +42,11 @@ public class AnnotationContext {
      *
      * @param instance 实例
      * @param <T>      类型
+     */
+    /**
+     * register方法。
+     *      * @param instance T类型参数
+     * @return <T> void类型返回值
      */
     /**
      * register方法。
@@ -63,6 +75,11 @@ public class AnnotationContext {
      *      * @param clazz ClassT类型参数
      * @return <T> T类型返回值
      */
+    /**
+     * getBean方法。
+     *      * @param clazz ClassT类型参数
+     * @return <T> T类型返回值
+     */
     public <T> T getBean(Class<T> clazz) {
         return (T) beans.get(clazz);
     }
@@ -73,6 +90,11 @@ public class AnnotationContext {
      * @param clazz 类
      * @param <T>   类型
      * @return 实例列表
+     */
+    /**
+     * getBeansOfType方法。
+     *      * @param clazz ClassT类型参数
+     * @return <T> List<T>类型返回值
      */
     /**
      * getBeansOfType方法。
@@ -91,6 +113,9 @@ public class AnnotationContext {
 
     /**
      * 清除所有注册的bean。
+     */
+    /**
+     * clear方法。
      */
     /**
      * clear方法。

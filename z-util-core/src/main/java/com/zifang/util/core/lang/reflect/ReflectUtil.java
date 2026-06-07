@@ -13,6 +13,9 @@ import java.util.List;
 /**
  * ReflectUtil类。
  */
+/**
+ * ReflectUtil类。
+ */
 public class ReflectUtil {
 
     /**
@@ -37,6 +40,12 @@ public class ReflectUtil {
      * @param clazz          类
      * @param parameterTypes 参数类型，只要任何一个参数是指定参数的父类或接口或相等即可，此参数可以不传
      * @return 构造方法，如果未找到返回null
+     */
+    /**
+     * getConstructor方法。
+     *      * @param clazz ClassT类型参数
+     * @param parameterTypes Class?...类型参数
+     * @return static <T> Constructor<T>类型返回值
      */
     /**
      * getConstructor方法。
@@ -76,6 +85,11 @@ public class ReflectUtil {
      *      * @param beanClass ClassT类型参数
      * @return static <T> Constructor<T>[]类型返回值
      */
+    /**
+     * getConstructors方法。
+     *      * @param beanClass ClassT类型参数
+     * @return static <T> Constructor<T>[]类型返回值
+     */
     public static <T> Constructor<T>[] getConstructors(Class<T> beanClass) throws SecurityException {
         Constructor<?>[] constructors = CONSTRUCTORS_CACHE.get(beanClass);
         if (null != constructors) {
@@ -92,6 +106,11 @@ public class ReflectUtil {
      * @param beanClass 类
      * @return 字段列表
      * @throws SecurityException 安全检查异常
+     */
+    /**
+     * getConstructorsDirectly方法。
+     *      * @param beanClass Class?类型参数
+     * @return static Constructor<?>[]类型返回值
      */
     /**
      * getConstructorsDirectly方法。
@@ -118,6 +137,12 @@ public class ReflectUtil {
      * @param name String类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * hasField方法。
+     *      * @param beanClass Class?类型参数
+     * @param name String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean hasField(Class<?> beanClass, String name) throws SecurityException {
         return null != getField(beanClass, name);
     }
@@ -129,6 +154,12 @@ public class ReflectUtil {
      * @param name      字段名
      * @return 字段对象，若不存在返回null
      * @throws SecurityException 安全检查异常
+     */
+    /**
+     * getField方法。
+     *      * @param beanClass Class?类型参数
+     * @param name String类型参数
+     * @return static Field类型返回值
      */
     /**
      * getField方法。
@@ -160,6 +191,11 @@ public class ReflectUtil {
      *      * @param beanClass Class?类型参数
      * @return static Field[]类型返回值
      */
+    /**
+     * getFields方法。
+     *      * @param beanClass Class?类型参数
+     * @return static Field[]类型返回值
+     */
     public static Field[] getFields(Class<?> beanClass) throws SecurityException {
         Field[] allFields = FIELDS_CACHE.get(beanClass);
         if (null != allFields) {
@@ -177,6 +213,12 @@ public class ReflectUtil {
      * @param withSuperClassFieds 是否包括父类的字段列表
      * @return 字段列表
      * @throws SecurityException 安全检查异常
+     */
+    /**
+     * getFieldsDirectly方法。
+     *      * @param beanClass Class?类型参数
+     * @param withSuperClassFieds boolean类型参数
+     * @return static Field[]类型返回值
      */
     /**
      * getFieldsDirectly方法。
@@ -854,6 +896,11 @@ public class ReflectUtil {
      *      * @param accessibleObject T类型参数
      * @return static <T extends AccessibleObject> T类型返回值
      */
+    /**
+     * setAccessible方法。
+     *      * @param accessibleObject T类型参数
+     * @return static <T extends AccessibleObject> T类型返回值
+     */
     public static <T extends AccessibleObject> T setAccessible(T accessibleObject) {
         if (null != accessibleObject && !accessibleObject.isAccessible()) {
             accessibleObject.setAccessible(true);
@@ -867,6 +914,11 @@ public class ReflectUtil {
      *
      * @param clazz 指定类
      * @return 所有接口列表
+     */
+    /**
+     * getAllInterfaces方法。
+     *      * @param clazz Class类型参数
+     * @return static List<Class>类型返回值
      */
     /**
      * getAllInterfaces方法。
@@ -902,6 +954,12 @@ public class ReflectUtil {
      * @param base          基础类
      * @param interfaceClazz 要匹配的接口类型
      * @return 泛型Type信息，若未找到返回null
+     */
+    /**
+     * getGenericInterfaceType方法。
+     *      * @param base Class?类型参数
+     * @param interfaceClazz Class?类型参数
+     * @return static Type类型返回值
      */
     /**
      * getGenericInterfaceType方法。

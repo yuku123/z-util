@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * RandomForestTest类。
+ */
 public class RandomForestTest {
 
     private Random random = new Random(42);
@@ -45,6 +48,9 @@ public class RandomForestTest {
     }
 
     @Test
+    /**
+     * testRandomForestAccuracy方法。
+     */
     public void testRandomForestAccuracy() {
         int nSamples = 100;
         NdArray X = generateClassificationData(nSamples);
@@ -68,6 +74,9 @@ public class RandomForestTest {
     }
 
     @Test
+    /**
+     * testRandomForestProba方法。
+     */
     public void testRandomForestProba() {
         int nSamples = 50;
         NdArray X = generateClassificationData(nSamples);
@@ -93,6 +102,9 @@ public class RandomForestTest {
     }
 
     @Test
+    /**
+     * testRandomForestMultiClass方法。
+     */
     public void testRandomForestMultiClass() {
         int nSamples = 90;
         double[][] data = new double[nSamples][2];

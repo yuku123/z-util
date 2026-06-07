@@ -39,6 +39,9 @@ import java.util.Objects;
 /**
  * JobBuilder类。
  */
+/**
+ * JobBuilder类。
+ */
 public class JobBuilder {
 
     private JobBuilder() {
@@ -56,6 +59,11 @@ public class JobBuilder {
      *      * @param jobClass Class?类型参数
      * @return static JobDetailBuilder类型返回值
      */
+    /**
+     * newJob方法。
+     *      * @param jobClass Class?类型参数
+     * @return static JobDetailBuilder类型返回值
+     */
     public static JobDetailBuilder newJob(Class<? extends Job> jobClass) {
         return new JobDetailBuilder(jobClass);
     }
@@ -66,6 +74,11 @@ public class JobBuilder {
      * @param runnable 执行逻辑
      * @return 新的 Builder 实例
      * @see JobBuilder#ofType(Class)
+     */
+    /**
+     * newJob方法。
+     *      * @param runnable RunnableJob类型参数
+     * @return static JobDetailBuilder类型返回值
      */
     /**
      * newJob方法。
@@ -104,6 +117,11 @@ public class JobBuilder {
      *      * @param name String类型参数
      * @return JobDetailBuilder类型返回值
      */
+    /**
+     * withName方法。
+     *      * @param name String类型参数
+     * @return JobDetailBuilder类型返回值
+     */
         public JobDetailBuilder withName(String name) {
             this.name = Objects.requireNonNull(name, "job name must not be null");
             return this;
@@ -112,6 +130,12 @@ public class JobBuilder {
         /**
          * 设置任务名称和分组。
          */
+    /**
+     * withIdentity方法。
+     *      * @param name String类型参数
+     * @param group String类型参数
+     * @return JobDetailBuilder类型返回值
+     */
     /**
      * withIdentity方法。
      *      * @param name String类型参数
@@ -132,6 +156,11 @@ public class JobBuilder {
      *      * @param name String类型参数
      * @return JobDetailBuilder类型返回值
      */
+    /**
+     * withIdentity方法。
+     *      * @param name String类型参数
+     * @return JobDetailBuilder类型返回值
+     */
         public JobDetailBuilder withIdentity(String name) {
             this.name = Objects.requireNonNull(name, "job name must not be null");
             return this;
@@ -140,6 +169,11 @@ public class JobBuilder {
         /**
          * 设置描述。
          */
+    /**
+     * withDescription方法。
+     *      * @param description String类型参数
+     * @return JobDetailBuilder类型返回值
+     */
     /**
      * withDescription方法。
      *      * @param description String类型参数
@@ -161,6 +195,12 @@ public class JobBuilder {
      * @param value Object类型参数
      * @return JobDetailBuilder类型返回值
      */
+    /**
+     * usingJobData方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     * @return JobDetailBuilder类型返回值
+     */
         public JobDetailBuilder usingJobData(String key, Object value) {
             jobData.put(key, value);
             return this;
@@ -169,6 +209,11 @@ public class JobBuilder {
         /**
          * 添加多个任务数据。
          */
+    /**
+     * usingJobData方法。
+     *      * @param data MapString,类型参数
+     * @return JobDetailBuilder类型返回值
+     */
     /**
      * usingJobData方法。
      *      * @param data MapString,类型参数
@@ -190,6 +235,10 @@ public class JobBuilder {
      * durable方法。
      * @return JobDetailBuilder类型返回值
      */
+    /**
+     * durable方法。
+     * @return JobDetailBuilder类型返回值
+     */
         public JobDetailBuilder durable() {
             this.durable = true;
             return this;
@@ -198,6 +247,10 @@ public class JobBuilder {
         /**
          * 设置为持久任务（别名）。
          */
+    /**
+     * storeDurably方法。
+     * @return JobDetailBuilder类型返回值
+     */
     /**
      * storeDurably方法。
      * @return JobDetailBuilder类型返回值
@@ -215,6 +268,10 @@ public class JobBuilder {
      * requestRecovery方法。
      * @return JobDetailBuilder类型返回值
      */
+    /**
+     * requestRecovery方法。
+     * @return JobDetailBuilder类型返回值
+     */
         public JobDetailBuilder requestRecovery() {
             this.requestsRecovery = true;
             return this;
@@ -227,6 +284,10 @@ public class JobBuilder {
          *
          * @return 配置完整的 JobDetail
          */
+    /**
+     * build方法。
+     * @return JobDetail类型返回值
+     */
     /**
      * build方法。
      * @return JobDetail类型返回值

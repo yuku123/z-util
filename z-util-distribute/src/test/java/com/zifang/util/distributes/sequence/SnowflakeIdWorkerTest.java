@@ -7,9 +7,15 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
+/**
+ * SnowflakeIdWorkerTest类。
+ */
 public class SnowflakeIdWorkerTest {
 
     @Test
+    /**
+     * testNextId_BasicFunctionality方法。
+     */
     public void testNextId_BasicFunctionality() {
         SnowflakeIdWorker worker = new SnowflakeIdWorker(1, 1);
         long id = worker.nextId();
@@ -17,6 +23,9 @@ public class SnowflakeIdWorkerTest {
     }
 
     @Test
+    /**
+     * testNextId_Uniqueness方法。
+     */
     public void testNextId_Uniqueness() {
         SnowflakeIdWorker worker = new SnowflakeIdWorker(0, 0);
         Set<Long> ids = new HashSet<>();
@@ -32,6 +41,9 @@ public class SnowflakeIdWorkerTest {
     }
 
     @Test
+    /**
+     * testNextId_OrderedGeneration方法。
+     */
     public void testNextId_OrderedGeneration() {
         SnowflakeIdWorker worker = new SnowflakeIdWorker(0, 0);
         long prevId = 0;
@@ -43,6 +55,9 @@ public class SnowflakeIdWorkerTest {
     }
 
     @Test
+    /**
+     * testNextId_IdStructure方法。
+     */
     public void testNextId_IdStructure() {
         SnowflakeIdWorker worker = new SnowflakeIdWorker(5, 3);
         long id = worker.nextId();
@@ -54,26 +69,41 @@ public class SnowflakeIdWorkerTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructor_InvalidWorkerId_Negative方法。
+     */
     public void testConstructor_InvalidWorkerId_Negative() {
         new SnowflakeIdWorker(-1, 0);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructor_InvalidWorkerId_TooLarge方法。
+     */
     public void testConstructor_InvalidWorkerId_TooLarge() {
         new SnowflakeIdWorker(32, 0);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructor_InvalidDatacenterId_Negative方法。
+     */
     public void testConstructor_InvalidDatacenterId_Negative() {
         new SnowflakeIdWorker(0, -1);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructor_InvalidDatacenterId_TooLarge方法。
+     */
     public void testConstructor_InvalidDatacenterId_TooLarge() {
         new SnowflakeIdWorker(0, 32);
     }
 
     @Test
+    /**
+     * testConstructor_ValidBoundaryValues方法。
+     */
     public void testConstructor_ValidBoundaryValues() {
         SnowflakeIdWorker worker1 = new SnowflakeIdWorker(0, 0);
         SnowflakeIdWorker worker31 = new SnowflakeIdWorker(31, 31);
@@ -86,6 +116,9 @@ public class SnowflakeIdWorkerTest {
     }
 
     @Test
+    /**
+     * testNextId_MultipleWorkers方法。
+     */
     public void testNextId_MultipleWorkers() {
         SnowflakeIdWorker worker1 = new SnowflakeIdWorker(1, 1);
         SnowflakeIdWorker worker2 = new SnowflakeIdWorker(2, 2);

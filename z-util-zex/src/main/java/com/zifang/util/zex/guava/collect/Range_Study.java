@@ -23,8 +23,14 @@ import java.util.Set;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Range_Study类。
+ */
 public class Range_Study {
     @Test
+    /**
+     * basicRangeSetTest方法。
+     */
     public void basicRangeSetTest() {
         RangeSet<Integer> range = TreeRangeSet.create();
         range.add(Range.closed(1, 10)); // [1..10]左右均闭合
@@ -62,6 +68,9 @@ public class Range_Study {
      * RangeMap没有提供complement()、contains()、rangeContaining()以及encloses()方法,但支持交集subRangeMap。
      */
     @Test
+    /**
+     * RangeMapTest方法。
+     */
     public void RangeMapTest() {
         RangeMap<Integer, String> rangeMap = TreeRangeMap.create();
         rangeMap.put(Range.closed(3, 7), "v2"); // [[3..7]=v2]

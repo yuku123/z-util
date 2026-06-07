@@ -3,8 +3,16 @@ package com.zifang.util.http.net.bookdemo;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * URISplitter类。
+ */
 public class URISplitter {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         for (int i = 0; i < args.length; i++) {

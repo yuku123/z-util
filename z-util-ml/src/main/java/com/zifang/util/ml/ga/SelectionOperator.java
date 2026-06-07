@@ -6,6 +6,9 @@ package com.zifang.util.ml.ga;
 /**
  * SelectionOperator接口。
  */
+/**
+ * SelectionOperator接口。
+ */
 public interface SelectionOperator {
 
     /**

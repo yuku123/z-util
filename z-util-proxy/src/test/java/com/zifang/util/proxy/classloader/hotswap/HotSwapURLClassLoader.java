@@ -13,8 +13,15 @@ import java.util.Map;
  *
  * @author zifang
  */
+/**
+ * HotSwapURLClassLoader类。
+ */
 public class HotSwapURLClassLoader extends URLClassLoader {
     // 缓存加载class文件的最后最新修改时间
+    /**
+     * Long>方法。
+     * @return static Map<String, Long> cacheLastModifyTimeMap = new HashMap<String,类型返回值
+     */
     public static Map<String, Long> cacheLastModifyTimeMap = new HashMap<String, Long>();
     // 工程class类所在的路径
     public static String projectClassPath = "D:/work/git/jdk_demo/bin/";
@@ -23,11 +30,18 @@ public class HotSwapURLClassLoader extends URLClassLoader {
 
     private static HotSwapURLClassLoader hcl = new HotSwapURLClassLoader();
 
+    /**
+     * HotSwapURLClassLoader方法。
+     */
     public HotSwapURLClassLoader() {
         // 设置ClassLoader加载的路径
         super(getMyURLs());
     }
 
+    /**
+     * getClassLoader方法。
+     * @return static HotSwapURLClassLoader类型返回值
+     */
     public static HotSwapURLClassLoader getClassLoader() {
         return hcl;
     }
@@ -46,6 +60,12 @@ public class HotSwapURLClassLoader extends URLClassLoader {
      * 重写loadClass，不采用双亲委托机制("java."开头的类还是会由系统默认ClassLoader加载)
      */
     @Override
+    /**
+     * loadClass方法。
+     *      * @param name String类型参数
+     * @param resolve boolean类型参数
+     * @return Class<?>类型返回值
+     */
     public Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
         Class clazz = null;
         // 查看HotSwapURLClassLoader实例缓存下，是否已经加载过class
@@ -83,6 +103,11 @@ public class HotSwapURLClassLoader extends URLClassLoader {
         return customLoad(name, this);
     }
 
+    /**
+     * load方法。
+     *      * @param name String类型参数
+     * @return Class类型返回值
+     */
     public Class load(String name) throws Exception {
         return loadClass(name);
     }
@@ -94,6 +119,12 @@ public class HotSwapURLClassLoader extends URLClassLoader {
      * @param cl
      * @return
      * @throws ClassNotFoundException
+     */
+    /**
+     * customLoad方法。
+     *      * @param name String类型参数
+     * @param cl ClassLoader类型参数
+     * @return Class类型返回值
      */
     public Class customLoad(String name, ClassLoader cl) throws ClassNotFoundException {
         return customLoad(name, false, cl);
@@ -107,6 +138,13 @@ public class HotSwapURLClassLoader extends URLClassLoader {
      * @return
      * @throws ClassNotFoundException
      */
+    /**
+     * customLoad方法。
+     *      * @param name String类型参数
+     * @param resolve boolean类型参数
+     * @param cl ClassLoader类型参数
+     * @return Class类型返回值
+     */
     public Class customLoad(String name, boolean resolve, ClassLoader cl) throws ClassNotFoundException {
         // findClass()调用的是URLClassLoader里面重载了ClassLoader的findClass()方法
         Class clazz = ((HotSwapURLClassLoader) cl).findClass(name);
@@ -118,11 +156,21 @@ public class HotSwapURLClassLoader extends URLClassLoader {
         return clazz;
     }
 
+    /**
+     * loadClass方法。
+     *      * @param name String类型参数
+     * @return Class<?>类型返回值
+     */
     public Class<?> loadClass(String name) throws ClassNotFoundException {
         return loadClass(name, false);
     }
 
     @Override
+    /**
+     * findClass方法。
+     *      * @param name String类型参数
+     * @return Class<?>类型返回值
+     */
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         // TODO Auto-generated method stub
         return super.findClass(name);

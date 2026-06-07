@@ -5,11 +5,19 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
+/**
+ * UDPDiscardServer类。
+ */
 public class UDPDiscardServer {
 
     public final static int PORT = 9;
     public final static int MAX_PACKET_SIZE = 65507;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         byte[] buffer = new byte[MAX_PACKET_SIZE];

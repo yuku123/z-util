@@ -9,7 +9,15 @@ package com.zifang.util.zex.bust.chapter3;
  * @author zifang
  * @version 1.0
  */
+/**
+ * ControlLoopBreakTest类。
+ */
 public class ControlLoopBreakTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         for (int i = 0; i < 4; i++) {
             System.out.println("当前i值为" + i);

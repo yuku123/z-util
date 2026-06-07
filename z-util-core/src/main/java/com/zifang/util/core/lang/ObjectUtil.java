@@ -6,6 +6,9 @@ import java.util.Collection;
 /**
  * ObjectUtil类。
  */
+/**
+ * ObjectUtil类。
+ */
 public class ObjectUtil {
     /**
      * 采用对象的序列化完成对象的深克隆
@@ -14,6 +17,11 @@ public class ObjectUtil {
      * @return 深克隆后的新对象，如果克隆失败返回null
      */
     @SuppressWarnings("unchecked")
+    /**
+     * deepCloneObject方法。
+     *      * @param obj T类型参数
+     * @return static <T extends Serializable> T类型返回值
+     */
     /**
      * deepCloneObject方法。
      *      * @param obj T类型参数
@@ -49,6 +57,11 @@ public class ObjectUtil {
      * @throws java.io.IOException    当序列化或反序列化发生IO错误时抛出
      */
     @SuppressWarnings("unchecked")
+    /**
+     * deepCloneCollection方法。
+     *      * @param collection CollectionT类型参数
+     * @return static <T> Collection<T>类型返回值
+     */
     /**
      * deepCloneCollection方法。
      *      * @param collection CollectionT类型参数

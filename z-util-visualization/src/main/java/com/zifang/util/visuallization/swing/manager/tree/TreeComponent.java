@@ -13,6 +13,9 @@ import javax.swing.*;
 /**
  * TreeComponent类。
  */
+/**
+ * TreeComponent类。
+ */
 public class TreeComponent extends JTree {
 
 }

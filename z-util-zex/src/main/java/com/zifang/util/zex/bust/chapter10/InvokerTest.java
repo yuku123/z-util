@@ -21,31 +21,55 @@ class InvokeClass{
     public static String staticValue = "staticValue";
     public String noStaticValue = "noStaticValue";
 
+    /**
+     * InvokeClass方法。
+     */
     public InvokeClass(){
         System.out.println("调用默认构造方法");
     }
 
+    /**
+     * InvokeClass方法。
+     *      * @param desc String类型参数
+     */
     public InvokeClass(String desc){
         System.out.println("调用构造方法："+desc);
     }
 
+    /**
+     * staticHandle方法。
+     * @return static void类型返回值
+     */
     public static void staticHandle(){
         System.out.println("staticHandle");
     }
 
+    /**
+     * handle方法。
+     */
     public void handle(){
         System.out.println("handle");
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString(){
         return String.valueOf(this.hashCode());
     }
 
 }
+/**
+ * InvokerTest类。
+ */
 public class InvokerTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         System.out.println("\n执行newInstance--");
         InvokeClass i1 = InvokeClass.class.newInstance();
@@ -66,6 +90,9 @@ public class InvokerTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002() throws NoSuchFieldException, IllegalAccessException {
 
         InvokeClass invokeClass = new InvokeClass();
@@ -93,6 +120,9 @@ public class InvokerTest {
     }
 
     @Test
+    /**
+     * test003方法。
+     */
     public void test003() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         InvokeClass invokeClass = new InvokeClass();
         Method method1 = InvokeClass.class.getMethod("staticHandle");

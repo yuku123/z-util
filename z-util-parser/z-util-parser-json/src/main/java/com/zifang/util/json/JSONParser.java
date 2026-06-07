@@ -23,6 +23,9 @@ import java.util.stream.Collectors;
  * <p>
  * 对标 com.zifang.util.json.JSONParser，提供 fromJSON(String) 入口。
  */
+/**
+ * JSONParser类。
+ */
 public class JSONParser {
 
     private static final String LEXER_G4 = "JsonLexer.g4";
@@ -34,6 +37,11 @@ public class JSONParser {
      * @param json JSON 字符串
      * @return JsonObject、JsonArray 或标量值（String/Number/Boolean/null）
      * @throws JsonParseException 如果格式非法
+     */
+    /**
+     * fromJSON方法。
+     *      * @param json String类型参数
+     * @return Object类型返回值
      */
     public Object fromJSON(String json) {
         if (json == null || json.trim().isEmpty()) {
@@ -72,6 +80,11 @@ public class JSONParser {
      * @return JsonObject
      * @throws JsonParseException 如果根节点不是对象
      */
+    /**
+     * parseObject方法。
+     *      * @param json String类型参数
+     * @return JsonObject类型返回值
+     */
     public JsonObject parseObject(String json) {
         Object result = fromJSON(json);
         if (result instanceof JsonObject) return (JsonObject) result;
@@ -87,6 +100,11 @@ public class JSONParser {
      * @param json JSON 字符串
      * @return JsonArray
      * @throws JsonParseException 如果根节点不是数组
+     */
+    /**
+     * parseArray方法。
+     *      * @param json String类型参数
+     * @return JsonArray类型返回值
      */
     public JsonArray parseArray(String json) {
         Object result = fromJSON(json);
@@ -152,7 +170,6 @@ public class JSONParser {
                 for (ASTNode pairChild : pairChildren) {
                     String pt = pairChild.getType();
                     if ("string".equals(pt)) {
-                        // string 节点下有 StringLiteral terminal
                         key = extractStringValue(pairChild);
                     } else if ("value".equals(pt)) {
                         value = astToJava(pairChild);
@@ -162,6 +179,7 @@ public class JSONParser {
                     obj.put(String.valueOf(key), value);
                 }
             }
+            // 跳过 LBrace/RBrace 等括号终端节点
         }
         return obj;
     }
@@ -170,11 +188,19 @@ public class JSONParser {
         JsonArray arr = new JsonArray();
         for (ASTNode child : node.getChildren()) {
             String childType = child.getType();
-            if ("value".equals(childType)) {
-                arr.add(astToJava(child));
+            // 跳过 LBracket/RBracket 等括号终端节点，只把实际 value 节点加进数组
+            if (isBracketTerminal(childType)) {
+                continue;
             }
+            arr.add(astToJava(child));
         }
         return arr;
+    }
+
+    private boolean isBracketTerminal(String type) {
+        return "LBrace".equals(type) || "RBrace".equals(type)
+            || "LBracket".equals(type) || "RBracket".equals(type)
+            || "Comma".equals(type);
     }
 
     private String extractStringValue(ASTNode stringNode) {

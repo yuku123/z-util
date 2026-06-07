@@ -9,9 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * LeafTest类。
+ */
 public class LeafTest {
 
     @Test
+    /**
+     * test方法。
+     */
     public void test() {
 
         List<Node> nodes = getDataList(); // 获得结点列表

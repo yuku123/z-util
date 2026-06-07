@@ -10,9 +10,15 @@ import static org.junit.Assert.*;
 /**
  * Configurations 类测试
  */
+/**
+ * ConfigurationsTest类。
+ */
 public class ConfigurationsTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         Configurations configurations = new Configurations();
         assertNotNull(configurations);
@@ -24,6 +30,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testWorkflowConfigurationId方法。
+     */
     public void testWorkflowConfigurationId() {
         Configurations configurations = new Configurations();
 
@@ -35,6 +44,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testEngine方法。
+     */
     public void testEngine() {
         Configurations configurations = new Configurations();
 
@@ -50,6 +62,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testEngineCanBeNull方法。
+     */
     public void testEngineCanBeNull() {
         Configurations configurations = new Configurations();
         configurations.setEngine(null);
@@ -57,6 +72,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testCacheEngine方法。
+     */
     public void testCacheEngine() {
         Configurations configurations = new Configurations();
 
@@ -72,6 +90,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testCacheEngineCanBeNull方法。
+     */
     public void testCacheEngineCanBeNull() {
         Configurations configurations = new Configurations();
         configurations.setCacheEngine(null);
@@ -79,6 +100,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testPersonalEnvironment方法。
+     */
     public void testPersonalEnvironment() {
         Configurations configurations = new Configurations();
 
@@ -94,6 +118,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testPersonalEnvironmentCanBeNull方法。
+     */
     public void testPersonalEnvironmentCanBeNull() {
         Configurations configurations = new Configurations();
         configurations.setPersonalEnvironment(null);
@@ -101,6 +128,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testRuntimeParameter方法。
+     */
     public void testRuntimeParameter() {
         Configurations configurations = new Configurations();
 
@@ -116,6 +146,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testRuntimeParameterCanBeNull方法。
+     */
     public void testRuntimeParameterCanBeNull() {
         Configurations configurations = new Configurations();
         configurations.setRuntimeParameter(null);
@@ -123,6 +156,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         Configurations config1 = new Configurations();
         config1.setWorkflowConfigurationId(1);
@@ -134,6 +170,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentIds方法。
+     */
     public void testEqualsWithDifferentIds() {
         Configurations config1 = new Configurations();
         config1.setWorkflowConfigurationId(1);
@@ -145,24 +184,36 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testEqualsWithSameObject方法。
+     */
     public void testEqualsWithSameObject() {
         Configurations config = new Configurations();
         assertEquals(config, config);
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         Configurations config = new Configurations();
         assertNotEquals(config, null);
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentClass方法。
+     */
     public void testEqualsWithDifferentClass() {
         Configurations config = new Configurations();
         assertNotEquals(config, "not a configurations");
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         Configurations config1 = new Configurations();
         config1.setWorkflowConfigurationId(1);
@@ -174,6 +225,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testHashCodeConsistency方法。
+     */
     public void testHashCodeConsistency() {
         Configurations config = new Configurations();
         int hashCode1 = config.hashCode();
@@ -182,6 +236,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         Configurations configurations = new Configurations();
         String str = configurations.toString();
@@ -191,6 +248,9 @@ public class ConfigurationsTest {
     }
 
     @Test
+    /**
+     * testComplexConfigurations方法。
+     */
     public void testComplexConfigurations() {
         Configurations configurations = new Configurations();
         configurations.setWorkflowConfigurationId(42);

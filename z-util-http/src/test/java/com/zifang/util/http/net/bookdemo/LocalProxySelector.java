@@ -5,10 +5,18 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * LocalProxySelector类。
+ */
 public class LocalProxySelector extends ProxySelector {
 
     private List<URI> failed = new ArrayList<URI>();
 
+    /**
+     * select方法。
+     *      * @param uri URI类型参数
+     * @return List<Proxy>类型返回值
+     */
     public List<Proxy> select(URI uri) {
 
         List<Proxy> result = new ArrayList<Proxy>();
@@ -23,6 +31,12 @@ public class LocalProxySelector extends ProxySelector {
         return result;
     }
 
+    /**
+     * connectFailed方法。
+     *      * @param uri URI类型参数
+     * @param address SocketAddress类型参数
+     * @param ex IOException类型参数
+     */
     public void connectFailed(URI uri, SocketAddress address, IOException ex) {
         failed.add(uri);
     }

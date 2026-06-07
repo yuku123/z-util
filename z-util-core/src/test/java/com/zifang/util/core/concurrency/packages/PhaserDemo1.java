@@ -3,8 +3,16 @@ package com.zifang.util.core.concurrency.packages;
 import java.util.concurrent.Phaser;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * PhaserDemo1类。
+ */
 public class PhaserDemo1 {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Phaser phaser = new Phaser(2);
 
@@ -20,12 +28,20 @@ class MyThread implements Runnable {
     Phaser phaser = null;
     String info = null;
 
+    /**
+     * MyThread方法。
+     *      * @param phaser Phaser类型参数
+     * @param info String类型参数
+     */
     public MyThread(Phaser phaser, String info) {
         this.phaser = phaser;
         this.info = info;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         phaser.arriveAndAwaitAdvance();
         System.out.println(info + ": start...");

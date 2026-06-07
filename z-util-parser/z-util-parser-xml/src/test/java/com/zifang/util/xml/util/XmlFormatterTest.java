@@ -9,9 +9,15 @@ import static org.junit.Assert.*;
 /**
  * XmlFormatter 格式化功能测试。
  */
+/**
+ * XmlFormatterTest类。
+ */
 public class XmlFormatterTest {
 
     @Test
+    /**
+     * testFormat方法。
+     */
     public void testFormat() throws Exception {
         String xml = "<?xml version=\"1.0\"?><root id=\"1\"><child>text</child></root>";
         XDocument doc = XmlUtil.parse(xml);
@@ -22,6 +28,9 @@ public class XmlFormatterTest {
     }
 
     @Test
+    /**
+     * testFormatCompact方法。
+     */
     public void testFormatCompact() throws Exception {
         String xml = "<root id=\"1\"><child>text</child></root>";
         XDocument doc = XmlUtil.parse(xml);
@@ -31,6 +40,9 @@ public class XmlFormatterTest {
     }
 
     @Test
+    /**
+     * testFormatWithChinese方法。
+     */
     public void testFormatWithChinese() throws Exception {
         String xml = "<root>你好世界</root>";
         XDocument doc = XmlUtil.parse(xml);
@@ -39,24 +51,36 @@ public class XmlFormatterTest {
     }
 
     @Test
+    /**
+     * testEscapeXmlText方法。
+     */
     public void testEscapeXmlText() throws Exception {
         String escaped = XmlFormatter.escapeXmlText("a & b < c > d \" e ' f");
         assertEquals("a &amp; b &lt; c &gt; d &quot; e &apos; f", escaped);
     }
 
     @Test
+    /**
+     * testEscapeXmlAttr方法。
+     */
     public void testEscapeXmlAttr() throws Exception {
         String escaped = XmlFormatter.escapeXmlAttr("a & b < c > d \" e ' f");
         assertEquals("a &amp; b &lt; c &gt; d &quot; e &apos; f", escaped);
     }
 
     @Test
+    /**
+     * testWrapCData方法。
+     */
     public void testWrapCData() throws Exception {
         String wrapped = XmlFormatter.wrapCData("hello]]>world");
         assertEquals("hello]]><![CDATA[>world", wrapped);
     }
 
     @Test
+    /**
+     * testWrapCDataNormal方法。
+     */
     public void testWrapCDataNormal() throws Exception {
         String wrapped = XmlFormatter.wrapCData("hello world");
         assertEquals("hello world", wrapped);
@@ -65,6 +89,9 @@ public class XmlFormatterTest {
     // ===== 序列化 API =====
 
     @Test
+    /**
+     * testElementBuilder方法。
+     */
     public void testElementBuilder() throws Exception {
         XElement book = XmlUtil.element("book",
                 XmlUtil.element("title", XmlUtil.text("Java编程思想")),
@@ -79,6 +106,9 @@ public class XmlFormatterTest {
     }
 
     @Test
+    /**
+     * testElementWithText方法。
+     */
     public void testElementWithText() throws Exception {
         XElement e = XmlUtil.elementWithText("title", "Java编程思想");
         XDocument doc = XmlUtil.document(e);

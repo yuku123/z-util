@@ -3,9 +3,15 @@ package com.zifang.util.monitor.thread.utility;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * TimeUtilTest类。
+ */
 public class TimeUtilTest {
 
     @Test
+    /**
+     * testConstants方法。
+     */
     public void testConstants() {
         assertEquals(24, TimeUtil.DAY_HOURS);
         assertEquals(60, TimeUtil.HOUR_MINUTES);
@@ -16,12 +22,18 @@ public class TimeUtilTest {
     }
 
     @Test
+    /**
+     * testGetTimestamp方法。
+     */
     public void testGetTimestamp() {
         int timestamp = TimeUtil.getTimestamp();
         assertTrue(timestamp > 0);
     }
 
     @Test
+    /**
+     * testGetMillisTimestamp方法。
+     */
     public void testGetMillisTimestamp() {
         long millis = TimeUtil.getMillisTimestamp();
         assertTrue(millis > 0);
@@ -29,6 +41,9 @@ public class TimeUtilTest {
     }
 
     @Test
+    /**
+     * testGetMillisTimestampFromInt方法。
+     */
     public void testGetMillisTimestampFromInt() {
         int timestamp = 1000;
         long millis = TimeUtil.getMillisTimestamp(timestamp);
@@ -36,11 +51,17 @@ public class TimeUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testGetMillisTimestampNegative方法。
+     */
     public void testGetMillisTimestampNegative() {
         TimeUtil.getMillisTimestamp(-1);
     }
 
     @Test
+    /**
+     * testGetTimestampFromMillis方法。
+     */
     public void testGetTimestampFromMillis() {
         long millis = 1000000L;
         int timestamp = TimeUtil.getTimestamp(millis);
@@ -48,6 +69,9 @@ public class TimeUtilTest {
     }
 
     @Test
+    /**
+     * testGetHourMillisTimestamp方法。
+     */
     public void testGetHourMillisTimestamp() {
         assertEquals(0L, TimeUtil.getHourMillisTimestamp(0));
         assertEquals(3600000L, TimeUtil.getHourMillisTimestamp(1));
@@ -55,22 +79,34 @@ public class TimeUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testGetHourMillisTimestampNegative方法。
+     */
     public void testGetHourMillisTimestampNegative() {
         TimeUtil.getHourMillisTimestamp(-1);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testGetHourMillisTimestampOutOfRange方法。
+     */
     public void testGetHourMillisTimestampOutOfRange() {
         TimeUtil.getHourMillisTimestamp(25);
     }
 
     @Test
+    /**
+     * testHourageEnumValues方法。
+     */
     public void testHourageEnumValues() {
         TimeUtil.Hourage[] values = TimeUtil.Hourage.values();
         assertEquals(5, values.length);
     }
 
     @Test
+    /**
+     * testHourageEnumGetHour方法。
+     */
     public void testHourageEnumGetHour() {
         assertEquals(1, TimeUtil.Hourage.ONE.getHour());
         assertEquals(2, TimeUtil.Hourage.TWO.getHour());
@@ -80,6 +116,9 @@ public class TimeUtilTest {
     }
 
     @Test
+    /**
+     * testHourageGetMillisTimestamp方法。
+     */
     public void testHourageGetMillisTimestamp() {
         assertEquals(TimeUtil.getHourMillisTimestamp(1), TimeUtil.Hourage.ONE.getHourageMillisTimestamp());
         assertEquals(TimeUtil.getHourMillisTimestamp(23), TimeUtil.Hourage.TWENTY_THREE.getHourageMillisTimestamp());

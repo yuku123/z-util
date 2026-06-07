@@ -12,7 +12,16 @@ package com.zifang.util.zex.leetcode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * _068类。
+ */
 public class _068 {
+    /**
+     * fullJustify方法。
+     *      * @param words String[]类型参数
+     * @param maxWidth int类型参数
+     * @return List<String>类型返回值
+     */
     public List<String> fullJustify(String[] words, int maxWidth) {
         List<String> ans = new ArrayList<>();
 
@@ -82,6 +91,12 @@ public class _068 {
     }
 
 
+    /**
+     * repeat方法。
+     *      * @param str String类型参数
+     * @param times int类型参数
+     * @return String类型返回值
+     */
     public String repeat(String str , int times){
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < times; i++){
@@ -90,6 +105,11 @@ public class _068 {
         return  sb.toString();
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _068().fullJustify(new String[]{"What ","must ","be   ","shall ","be.  "},5);
     }

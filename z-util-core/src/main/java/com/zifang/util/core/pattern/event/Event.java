@@ -14,6 +14,9 @@ import java.util.Map;
 /**
  * Event类。
  */
+/**
+ * Event类。
+ */
 public class Event {
 
     private final Object source;
@@ -26,6 +29,11 @@ public class Event {
      *
      * @param source 事件源
      * @param type   事件类型
+     */
+    /**
+     * Event方法。
+     *      * @param source Object类型参数
+     * @param type String类型参数
      */
     /**
      * Event方法。
@@ -49,6 +57,12 @@ public class Event {
      * @param type String类型参数
      * @param data MapString,类型参数
      */
+    /**
+     * Event方法。
+     *      * @param source Object类型参数
+     * @param type String类型参数
+     * @param data MapString,类型参数
+     */
     public Event(Object source, String type, Map<String, Object> data) {
         this.source = source;
         this.timestamp = System.currentTimeMillis();
@@ -60,6 +74,10 @@ public class Event {
      * 获取事件源。
      *
      * @return 事件源
+     */
+    /**
+     * getSource方法。
+     * @return Object类型返回值
      */
     /**
      * getSource方法。
@@ -78,6 +96,10 @@ public class Event {
      * getTimestamp方法。
      * @return long类型返回值
      */
+    /**
+     * getTimestamp方法。
+     * @return long类型返回值
+     */
     public long getTimestamp() {
         return timestamp;
     }
@@ -86,6 +108,10 @@ public class Event {
      * 获取事件类型。
      *
      * @return 事件类型
+     */
+    /**
+     * getType方法。
+     * @return String类型返回值
      */
     /**
      * getType方法。
@@ -104,6 +130,10 @@ public class Event {
      * getData方法。
      * @return Map<String, Object>类型返回值
      */
+    /**
+     * getData方法。
+     * @return Map<String, Object>类型返回值
+     */
     public Map<String, Object> getData() {
         return Collections.unmodifiableMap(data);
     }
@@ -114,6 +144,12 @@ public class Event {
      * @param key   键
      * @param value 值
      * @return 当前事件
+     */
+    /**
+     * addData方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     * @return Event类型返回值
      */
     /**
      * addData方法。
@@ -137,11 +173,20 @@ public class Event {
      *      * @param key String类型参数
      * @return Object类型返回值
      */
+    /**
+     * getData方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object getData(String key) {
         return data.get(key);
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

@@ -9,10 +9,18 @@ import java.util.HashMap;
 /**
  * https://github.com/ddean2009/learn-java-base-9-to-20
  */
+/**
+ * test类。
+ */
 public class test {
 
     //public static final log log = logFactory.getlog(test.class);
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         HashMap hashMap = new HashMap();

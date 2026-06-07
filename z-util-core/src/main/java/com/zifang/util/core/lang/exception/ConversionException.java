@@ -11,6 +11,9 @@ package com.zifang.util.core.lang.exception;
 /**
  * ConversionException类。
  */
+/**
+ * ConversionException类。
+ */
 public class ConversionException extends RuntimeException {
 
     /**
@@ -18,6 +21,11 @@ public class ConversionException extends RuntimeException {
      *
      * @param value 转换失败的值
      * @param nfex  原始的 NumberFormatException
+     */
+    /**
+     * ConversionException方法。
+     *      * @param value Object类型参数
+     * @param nfex NumberFormatException类型参数
      */
     /**
      * ConversionException方法。

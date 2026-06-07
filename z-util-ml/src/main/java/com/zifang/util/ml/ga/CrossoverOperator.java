@@ -30,6 +30,9 @@ package com.zifang.util.ml.ga;
 /**
  * CrossoverOperator接口。
  */
+/**
+ * CrossoverOperator接口。
+ */
 public interface CrossoverOperator {
 
     /**

@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit;
  * 如果在shutdown()方法与执行器结束之间发送一个任务给执行器，这个任务会被拒绝，因为这个时间段执行器已不再接受任务了。ThreadPoolExecutor类提供了一套机制，当任务被拒绝时调用这套机制来处理它们。
  * 在本节，我们将学习如何处理执行器中被拒绝的任务，这些任务实现了RejectedExecutionHandler 接口。
  */
+/**
+ * RejectedExecutionHandlerExecutorDemo类。
+ */
 public class RejectedExecutionHandlerExecutorDemo {
 
     // 1．创建一个名为 RejectedTaskController 的类，并实现 RejectedExecutionHandler
@@ -19,6 +22,11 @@ public class RejectedExecutionHandlerExecutorDemo {
     static class RejectedTaskController implements RejectedExecutionHandler {
 
         @Override
+    /**
+     * rejectedExecution方法。
+     *      * @param r Runnable类型参数
+     * @param executor ThreadPoolExecutor类型参数
+     */
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
             System.out.printf("RejectedTaskController: The task %s has been rejected\n", r.toString());
             System.out.printf("RejectedTaskController: %s\n", executor.toString());
@@ -33,12 +41,19 @@ public class RejectedExecutionHandlerExecutorDemo {
         private String name;
 
         // 4．实现类的构造器，用来初始化类的属性。
+    /**
+     * Task方法。
+     *      * @param name String类型参数
+     */
         public Task(String name) {
             this.name = name;
         }
 
         // 5．实现run()方法。在控制台输出信息表示方法开始执行。
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             System.out.println("Task " + name + ": Starting");
             // 6．让线程休眠一段随机时间。
@@ -54,12 +69,21 @@ public class RejectedExecutionHandlerExecutorDemo {
         }
 
         // 8．覆盖toString()方法，返回任务的名称。
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return name;
         }
     }
 
     // 9．实现范例的主类，创建 Main 主类，并实现 main() 方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         /// 10．创建 RejectedTaskController 对象来管理被拒绝的任务。
         RejectedTaskController controller = new RejectedTaskController();

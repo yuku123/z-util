@@ -23,8 +23,14 @@ public abstract class Parser implements CommandLineParser {
     /**
      * Parser方法。
      */
+    /**
+     * Parser方法。
+     */
     protected Parser() {}
 
+    /**
+     * checkRequiredOptions方法。
+     */
     /**
      * checkRequiredOptions方法。
      */
@@ -41,8 +47,19 @@ public abstract class Parser implements CommandLineParser {
      * @param stopAtNonOption boolean类型参数
      * @return abstract String[]类型返回值
      */
+    /**
+     * flatten方法。
+     *      * @param opts Options类型参数
+     * @param arguments String[]类型参数
+     * @param stopAtNonOption boolean类型参数
+     * @return abstract String[]类型返回值
+     */
     protected abstract String[] flatten(Options opts, String[] arguments, boolean stopAtNonOption) throws ParseException;
 
+    /**
+     * getOptions方法。
+     * @return Options类型返回值
+     */
     /**
      * getOptions方法。
      * @return Options类型返回值
@@ -51,6 +68,10 @@ public abstract class Parser implements CommandLineParser {
         return options;
     }
 
+    /**
+     * getRequiredOptions方法。
+     * @return java.util.List类型返回值
+     */
     /**
      * getRequiredOptions方法。
      * @return java.util.List类型返回值
@@ -66,11 +87,24 @@ public abstract class Parser implements CommandLineParser {
      * @param arguments final类型参数
      * @return CommandLine类型返回值
      */
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments) throws ParseException {
         return parse(options, arguments, null, false);
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return CommandLine类型返回值
+     */
     /**
      * parse方法。
      *      * @param options final类型参数
@@ -90,11 +124,26 @@ public abstract class Parser implements CommandLineParser {
      * @param properties final类型参数
      * @return CommandLine类型返回值
      */
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param properties final类型参数
+     * @return CommandLine类型返回值
+     */
     public CommandLine parse(final Options options, final String[] arguments, final Properties properties) throws ParseException {
         return parse(options, arguments, properties, false);
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param properties final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return CommandLine类型返回值
+     */
     /**
      * parse方法。
      *      * @param options final类型参数
@@ -161,6 +210,11 @@ public abstract class Parser implements CommandLineParser {
      *      * @param arg final类型参数
      * @param iter final类型参数
      */
+    /**
+     * processOption方法。
+     *      * @param arg final类型参数
+     * @param iter final类型参数
+     */
     protected void processOption(final String arg, final java.util.ListIterator<String> iter) throws ParseException {
         if (!getOptions().hasOption(arg)) {
             throw new com.zifang.util.cli.exception.UnrecognizedOptionException("Unrecognized option: " + arg, arg);
@@ -191,6 +245,11 @@ public abstract class Parser implements CommandLineParser {
      *      * @param opt final类型参数
      * @param iter final类型参数
      */
+    /**
+     * processArgs方法。
+     *      * @param opt final类型参数
+     * @param iter final类型参数
+     */
     public void processArgs(final Option opt, final java.util.ListIterator<String> iter) throws ParseException {
         while (iter.hasNext()) {
             String str = iter.next();
@@ -210,6 +269,10 @@ public abstract class Parser implements CommandLineParser {
         }
     }
 
+    /**
+     * processProperties方法。
+     *      * @param properties final类型参数
+     */
     /**
      * processProperties方法。
      *      * @param properties final类型参数
@@ -241,6 +304,10 @@ public abstract class Parser implements CommandLineParser {
         }
     }
 
+    /**
+     * setOptions方法。
+     *      * @param options final类型参数
+     */
     /**
      * setOptions方法。
      *      * @param options final类型参数

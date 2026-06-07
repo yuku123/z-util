@@ -7,6 +7,9 @@ package com.zifang.util.dsl.token;
 /**
  * Token接口。
  */
+/**
+ * Token接口。
+ */
 public interface Token {
 
     /**

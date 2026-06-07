@@ -4,8 +4,16 @@ import java.io.IOException;
 import java.net.SocketOption;
 import java.nio.channels.*;
 
+/**
+ * OptionSupport类。
+ */
 public class OptionSupport {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
         printOptions(SocketChannel.open());
         printOptions(ServerSocketChannel.open());

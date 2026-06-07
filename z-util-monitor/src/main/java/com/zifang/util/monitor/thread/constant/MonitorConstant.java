@@ -20,6 +20,10 @@ public final class MonitorConstant {
      * Object方法。
      * @return static final Object INIT_STATUS = new类型返回值
      */
+    /**
+     * Object方法。
+     * @return static final Object INIT_STATUS = new类型返回值
+     */
     public static final Object INIT_STATUS = new Object();
 
     /**

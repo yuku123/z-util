@@ -8,6 +8,9 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  * ReqHeader类。
  */
+/**
+ * ReqHeader类。
+ */
 public class ReqHeader {
 
     /**
@@ -29,6 +32,10 @@ public class ReqHeader {
      * getSysId方法。
      * @return String类型返回值
      */
+    /**
+     * getSysId方法。
+     * @return String类型返回值
+     */
     public String getSysId() {
         return sysId;
     }
@@ -38,10 +45,18 @@ public class ReqHeader {
      * setSysId方法。
      *      * @param sysId String类型参数
      */
+    /**
+     * setSysId方法。
+     *      * @param sysId String类型参数
+     */
     public void setSysId(String sysId) {
         this.sysId = sysId;
     }
 
+    /**
+     * getAuthCode方法。
+     * @return String类型返回值
+     */
     /**
      * getAuthCode方法。
      * @return String类型返回值
@@ -55,10 +70,18 @@ public class ReqHeader {
      * setAuthCode方法。
      *      * @param authCode String类型参数
      */
+    /**
+     * setAuthCode方法。
+     *      * @param authCode String类型参数
+     */
     public void setAuthCode(String authCode) {
         this.authCode = authCode;
     }
 
+    /**
+     * getReqNo方法。
+     * @return String类型返回值
+     */
     /**
      * getReqNo方法。
      * @return String类型返回值
@@ -68,6 +91,10 @@ public class ReqHeader {
     }
 
     @XmlElement(name = "REQNO")
+    /**
+     * setReqNo方法。
+     *      * @param reqNo String类型参数
+     */
     /**
      * setReqNo方法。
      *      * @param reqNo String类型参数

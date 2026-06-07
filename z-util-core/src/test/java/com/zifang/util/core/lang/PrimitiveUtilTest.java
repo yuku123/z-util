@@ -5,9 +5,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * PrimitiveUtilTest类。
+ */
 public class PrimitiveUtilTest {
 
     @Test
+    /**
+     * isPrimitive方法。
+     */
     public void isPrimitive() {
         assertTrue(PrimitiveUtil.isPrimitive(byte.class));
         assertTrue(PrimitiveUtil.isPrimitive(char.class));
@@ -22,6 +28,9 @@ public class PrimitiveUtilTest {
     }
 
     @Test
+    /**
+     * isPrimitiveWrapper方法。
+     */
     public void isPrimitiveWrapper() {
         assertTrue(PrimitiveUtil.isPrimitiveWrapper(Byte.class));
         assertTrue(PrimitiveUtil.isPrimitiveWrapper(Character.class));
@@ -36,6 +45,9 @@ public class PrimitiveUtilTest {
     }
 
     @Test
+    /**
+     * getPrimitive方法。
+     */
     public void getPrimitive() {
         assertEquals(PrimitiveUtil.getPrimitive(Byte.class), byte.class);
         assertEquals(PrimitiveUtil.getPrimitive(Character.class), char.class);
@@ -48,11 +60,17 @@ public class PrimitiveUtilTest {
     }
 
     @Test(expected = RuntimeException.class)
+    /**
+     * getPrimitiveThrow方法。
+     */
     public void getPrimitiveThrow() {
         assertEquals(PrimitiveUtil.getPrimitive(String.class), byte.class);
     }
 
     @Test
+    /**
+     * getPrimitiveWrapper方法。
+     */
     public void getPrimitiveWrapper() {
         assertEquals(PrimitiveUtil.getPrimitiveWrapper(byte.class), Byte.class);
         assertEquals(PrimitiveUtil.getPrimitiveWrapper(char.class), Character.class);
@@ -65,6 +83,9 @@ public class PrimitiveUtilTest {
     }
 
     @Test
+    /**
+     * getPrimitiveWrapperThrow方法。
+     */
     public void getPrimitiveWrapperThrow() {
         // getPrimitiveWrapper(String.class) returns String.class, not null or exception
         Class<?> result = PrimitiveUtil.getPrimitiveWrapper(String.class);
@@ -72,6 +93,9 @@ public class PrimitiveUtilTest {
     }
 
     @Test
+    /**
+     * isGeneralType方法。
+     */
     public void isGeneralType() {
         assertTrue(PrimitiveUtil.isGeneralType(String.class));
         assertFalse(PrimitiveUtil.isGeneralType(byte.class));

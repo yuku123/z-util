@@ -19,6 +19,9 @@ import java.util.Date;
 /**
  * PatternOptionBuilder类。
  */
+/**
+ * PatternOptionBuilder类。
+ */
 public class PatternOptionBuilder {
 
     public static final Class<String> STRING_VALUE = String.class;
@@ -37,6 +40,11 @@ public class PatternOptionBuilder {
 
     /**
      * Creates an Option using the pattern string.
+     */
+    /**
+     * createOption方法。
+     *      * @param pattern final类型参数
+     * @return static Option类型返回值
      */
     /**
      * createOption方法。
@@ -132,6 +140,11 @@ public class PatternOptionBuilder {
 
     /**
      * Creates Options from a pattern string array.
+     */
+    /**
+     * parsePatterns方法。
+     *      * @param patterns final类型参数
+     * @return static com.zifang.util.cli.model.Options类型返回值
      */
     /**
      * parsePatterns方法。

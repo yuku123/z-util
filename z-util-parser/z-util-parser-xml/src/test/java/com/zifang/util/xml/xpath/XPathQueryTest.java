@@ -11,6 +11,9 @@ import static org.junit.Assert.*;
 /**
  * XPath 查询功能测试。
  */
+/**
+ * XPathQueryTest类。
+ */
 public class XPathQueryTest {
 
     private XDocument buildTestDoc() throws Exception {
@@ -36,6 +39,9 @@ public class XPathQueryTest {
     // ===== 路径查询 =====
 
     @Test
+    /**
+     * testAbsolutePath方法。
+     */
     public void testAbsolutePath() throws Exception {
         XDocument doc = buildTestDoc();
         XElement library = (XElement) XmlUtil.xpathOne(doc, "/library");
@@ -44,6 +50,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testChildPath方法。
+     */
     public void testChildPath() throws Exception {
         XDocument doc = buildTestDoc();
         XElement book = (XElement) XmlUtil.xpathOne(doc, "/library/book");
@@ -52,6 +61,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testDescendantPath方法。
+     */
     public void testDescendantPath() throws Exception {
         XDocument doc = buildTestDoc();
         Object result = XmlUtil.xpathOne(doc, "//title");
@@ -61,6 +73,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testDescendantAll方法。
+     */
     public void testDescendantAll() throws Exception {
         XDocument doc = buildTestDoc();
         List<Object> titles = XmlUtil.xpath(doc, "//title");
@@ -70,6 +85,9 @@ public class XPathQueryTest {
     // ===== 通配符 =====
 
     @Test
+    /**
+     * testWildcardChild方法。
+     */
     public void testWildcardChild() throws Exception {
         XDocument doc = buildTestDoc();
         List<Object> children = XmlUtil.xpath(doc, "/library/*");
@@ -77,6 +95,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testWildcardDescendant方法。
+     */
     public void testWildcardDescendant() throws Exception {
         XDocument doc = buildTestDoc();
         List<Object> all = XmlUtil.xpath(doc, "//*");
@@ -86,6 +107,9 @@ public class XPathQueryTest {
     // ===== 属性过滤 =====
 
     @Test
+    /**
+     * testAttributeFilter方法。
+     */
     public void testAttributeFilter() throws Exception {
         XDocument doc = buildTestDoc();
         XElement zhBook = (XElement) XmlUtil.xpathOne(doc, "//book[@lang='zh']");
@@ -94,6 +118,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testAttributeFilterNoMatch方法。
+     */
     public void testAttributeFilterNoMatch() throws Exception {
         XDocument doc = buildTestDoc();
         Object result = XmlUtil.xpathOne(doc, "//book[@lang='fr']");
@@ -101,6 +128,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testMultipleAttributeFilter方法。
+     */
     public void testMultipleAttributeFilter() throws Exception {
         XDocument doc = buildTestDoc();
         List<Object> books = XmlUtil.xpath(doc, "//book[@id]");
@@ -110,6 +140,9 @@ public class XPathQueryTest {
     // ===== 位置索引 =====
 
     @Test
+    /**
+     * testPositionalIndex方法。
+     */
     public void testPositionalIndex() throws Exception {
         XDocument doc = buildTestDoc();
         XElement firstBook = (XElement) XmlUtil.xpathOne(doc, "/library/book[1]");
@@ -120,6 +153,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testPositionalIndexOutOfRange方法。
+     */
     public void testPositionalIndexOutOfRange() throws Exception {
         XDocument doc = buildTestDoc();
         Object result = XmlUtil.xpathOne(doc, "/library/book[99]");
@@ -129,6 +165,9 @@ public class XPathQueryTest {
     // ===== 属性选择 =====
 
     @Test
+    /**
+     * testAttributeSelection方法。
+     */
     public void testAttributeSelection() throws Exception {
         XDocument doc = buildTestDoc();
         Object id = XmlUtil.xpathOne(doc, "//book[1]/@id");
@@ -136,6 +175,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testAllAttributes方法。
+     */
     public void testAllAttributes() throws Exception {
         XDocument doc = buildTestDoc();
         List<Object> attrs = XmlUtil.xpath(doc, "//book[1]/@*");
@@ -145,6 +187,9 @@ public class XPathQueryTest {
     // ===== 深度嵌套 =====
 
     @Test
+    /**
+     * testDeepNested方法。
+     */
     public void testDeepNested() throws Exception {
         XDocument doc = buildTestDoc();
         Object author = XmlUtil.xpathOne(doc, "/library/book[2]/author");
@@ -155,6 +200,9 @@ public class XPathQueryTest {
     // ===== getElement / getAttr 便捷方法 =====
 
     @Test
+    /**
+     * testGetElement方法。
+     */
     public void testGetElement() throws Exception {
         XDocument doc = buildTestDoc();
         XElement price = XmlUtil.getElement(doc, "//book[1]/price");
@@ -162,6 +210,9 @@ public class XPathQueryTest {
     }
 
     @Test
+    /**
+     * testGetAttr方法。
+     */
     public void testGetAttr() throws Exception {
         XDocument doc = buildTestDoc();
         String id = XmlUtil.getAttr(doc, "//magazine[@id='m1']/@id");

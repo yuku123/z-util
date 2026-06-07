@@ -8,19 +8,33 @@ import java.util.TimerTask;
  * Timer类运用
  * 更复杂的日期用 quartz
  */
+/**
+ * TraditionalTimerTest类。
+ */
 public class TraditionalTimerTest {
 
     static int count = 0;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         TraditionalTimerTest t = new TraditionalTimerTest();
         t.test2();
     }
 
+    /**
+     * test1方法。
+     */
     public void test1() {
         new Timer().schedule(new TimerTask() {
 
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 System.out.println("bombing!");
             }
@@ -37,11 +51,17 @@ public class TraditionalTimerTest {
         }
     }
 
+    /**
+     * test2方法。
+     */
     public void test2() {
 
         //两秒和四秒交替打印 bombing
         class MyTimerTask extends TimerTask {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 count = (count + 1) % 2;
 

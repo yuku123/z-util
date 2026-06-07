@@ -13,12 +13,18 @@ import static org.junit.Assert.*;
  * BpmnModelConverter 完整转换管道测试。
  * 测试从 BPMN XML → BpmnDiagram → WorkflowConfiguration 的完整转换链路。
  */
+/**
+ * BpmnModelConverterTest类。
+ */
 public class BpmnModelConverterTest {
 
     private BpmnXmlParser parser;
     private BpmnModelConverter converter;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         parser = new BpmnXmlParser();
         converter = new BpmnModelConverter();
@@ -36,6 +42,9 @@ public class BpmnModelConverterTest {
     // ===== 基础转换测试 =====
 
     @Test
+    /**
+     * testConvertLinearProcess方法。
+     */
     public void testConvertLinearProcess() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" " +
@@ -88,6 +97,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertExclusiveGatewayBranching方法。
+     */
     public void testConvertExclusiveGatewayBranching() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -141,6 +153,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertParallelGateway方法。
+     */
     public void testConvertParallelGateway() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -192,6 +207,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertServiceTask方法。
+     */
     public void testConvertServiceTask() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -221,6 +239,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertManualTask方法。
+     */
     public void testConvertManualTask() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -246,6 +267,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertNoSequenceFlows方法。
+     */
     public void testConvertNoSequenceFlows() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -270,6 +294,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertConfigurationsAreSet方法。
+     */
     public void testConvertConfigurationsAreSet() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -293,6 +320,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertOrphanNodeWithoutFlows方法。
+     */
     public void testConvertOrphanNodeWithoutFlows() {
         // Nodes that are not connected by any sequence flow should still be converted
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -320,6 +350,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertSequenceFlowWithName方法。
+     */
     public void testConvertSequenceFlowWithName() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -339,6 +372,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testCustomEngineType方法。
+     */
     public void testCustomEngineType() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -358,6 +394,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertInclusiveGateway方法。
+     */
     public void testConvertInclusiveGateway() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -393,6 +432,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertSimpleProcessWithStartAndEnd方法。
+     */
     public void testConvertSimpleProcessWithStartAndEnd() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -423,6 +465,9 @@ public class BpmnModelConverterTest {
     }
 
     @Test
+    /**
+     * testConvertCallActivity方法。
+     */
     public void testConvertCallActivity() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +

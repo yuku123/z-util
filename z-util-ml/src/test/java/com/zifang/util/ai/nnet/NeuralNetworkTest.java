@@ -9,9 +9,15 @@ import static org.junit.Assert.*;
 /**
  * NeuralNetwork 类测试
  */
+/**
+ * NeuralNetworkTest类。
+ */
 public class NeuralNetworkTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         NeuralNetwork nn = new NeuralNetwork();
         assertNotNull(nn);
@@ -20,12 +26,18 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testLearningRateDefault方法。
+     */
     public void testLearningRateDefault() {
         NeuralNetwork nn = new NeuralNetwork();
         assertEquals(0.01, nn.getLearningRate(), 0.0001);
     }
 
     @Test
+    /**
+     * testLearningRateSetter方法。
+     */
     public void testLearningRateSetter() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.learningRate(0.1);
@@ -33,6 +45,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testAddLayer方法。
+     */
     public void testAddLayer() {
         NeuralNetwork nn = new NeuralNetwork();
         Layer layer = new HiddenLayerImpl(2, 3, new SigmoidActivation());
@@ -44,6 +59,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testAddMultipleLayers方法。
+     */
     public void testAddMultipleLayers() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.addLayer(new HiddenLayerImpl(2, 3, new SigmoidActivation()));
@@ -53,6 +71,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testAddLayerMethodChaining方法。
+     */
     public void testAddLayerMethodChaining() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.addLayer(new HiddenLayerImpl(2, 3, new SigmoidActivation()))
@@ -64,6 +85,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testPredictWithNoLayers方法。
+     */
     public void testPredictWithNoLayers() {
         NeuralNetwork nn = new NeuralNetwork();
         double[] inputs = {1.0, 2.0};
@@ -74,30 +98,55 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testPredictWithMockLayer方法。
+     */
     public void testPredictWithMockLayer() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.addLayer(new Layer() {
             @Override
+    /**
+     * forward方法。
+     *      * @param inputs double[]类型参数
+     * @return double[]类型返回值
+     */
             public double[] forward(double[] inputs) {
                 return inputs;
             }
 
             @Override
+    /**
+     * backward方法。
+     *      * @param gradients double[]类型参数
+     * @return double[]类型返回值
+     */
             public double[] backward(double[] gradients) {
                 return gradients;
             }
 
             @Override
+    /**
+     * getOutput方法。
+     * @return double[]类型返回值
+     */
             public double[] getOutput() {
                 return new double[0];
             }
 
             @Override
+    /**
+     * getLayerType方法。
+     * @return Layer.LayerType类型返回值
+     */
             public Layer.LayerType getLayerType() {
                 return Layer.LayerType.HIDDEN;
             }
 
             @Override
+    /**
+     * getNeuronCount方法。
+     * @return int类型返回值
+     */
             public int getNeuronCount() {
                 return 2;
             }
@@ -110,6 +159,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testTrainWithNoLayers方法。
+     */
     public void testTrainWithNoLayers() {
         NeuralNetwork nn = new NeuralNetwork();
         double[] inputs = {1.0, 2.0};
@@ -122,6 +174,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testTrainWithLossFunction方法。
+     */
     public void testTrainWithLossFunction() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.lossFunction(new MSELoss());
@@ -137,6 +192,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testTrainMultipleTimes方法。
+     */
     public void testTrainMultipleTimes() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.learningRate(0.1);
@@ -156,6 +214,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testGetLayersReturnsCopy方法。
+     */
     public void testGetLayersReturnsCopy() {
         NeuralNetwork nn = new NeuralNetwork();
         Layer layer = new HiddenLayerImpl(2, 3, new SigmoidActivation());
@@ -168,6 +229,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testEmptyNetworkPredict方法。
+     */
     public void testEmptyNetworkPredict() {
         NeuralNetwork nn = new NeuralNetwork();
         double[] inputs = {};
@@ -177,6 +241,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testEmptyNetworkTrain方法。
+     */
     public void testEmptyNetworkTrain() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.lossFunction(new MSELoss());
@@ -189,6 +256,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testPredictWithHiddenLayer方法。
+     */
     public void testPredictWithHiddenLayer() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.addLayer(new HiddenLayerImpl(2, 2, new SigmoidActivation()));
@@ -201,6 +271,9 @@ public class NeuralNetworkTest {
     }
 
     @Test
+    /**
+     * testLossFunctionSetter方法。
+     */
     public void testLossFunctionSetter() {
         NeuralNetwork nn = new NeuralNetwork();
         MSELoss lossFn = new MSELoss();

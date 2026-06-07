@@ -12,6 +12,12 @@ import java.util.Map;
  *
  * @author zifang
  */
+/**
+ * YamlUtil类。
+ */
+/**
+ * YamlUtil类。
+ */
 public class YamlUtil {
 
     private static final YamlParser DEFAULT_PARSER = new YamlParser();
@@ -26,6 +32,16 @@ public class YamlUtil {
      * @param t 待序列化的对象
      * @param <T> 对象类型
      * @return YAML 字符串，序列化失败时返回 null
+     */
+    /**
+     * toYaml方法。
+     *      * @param t T类型参数
+     * @return static <T> String类型返回值
+     */
+    /**
+     * toYaml方法。
+     *      * @param t T类型参数
+     * @return static <T> String类型返回值
      */
     public static <T> String toYaml(T t) {
         if (t == null) {
@@ -45,6 +61,16 @@ public class YamlUtil {
      * @param <T> 对象类型
      * @return 格式化的 YAML 字符串
      */
+    /**
+     * toPrettyYaml方法。
+     *      * @param t T类型参数
+     * @return static <T> String类型返回值
+     */
+    /**
+     * toPrettyYaml方法。
+     *      * @param t T类型参数
+     * @return static <T> String类型返回值
+     */
     public static <T> String toPrettyYaml(T t) {
         if (t == null) {
             return "null\n";
@@ -63,6 +89,18 @@ public class YamlUtil {
      * @param <T>     泛型参数
      * @return 反序列化后的对象，若失败返回 null
      */
+    /**
+     * fromYaml方法。
+     *      * @param yamlStr String类型参数
+     * @param clazz ClassT类型参数
+     * @return static <T> T类型返回值
+     */
+    /**
+     * fromYaml方法。
+     *      * @param yamlStr String类型参数
+     * @param clazz ClassT类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T fromYaml(String yamlStr, Class<T> clazz) {
         if (yamlStr == null || yamlStr.trim().isEmpty()) {
             return null;
@@ -77,6 +115,18 @@ public class YamlUtil {
      * @param typeRef 类型引用
      * @param <T>     泛型参数
      * @return 反序列化后的对象，若失败返回 null
+     */
+    /**
+     * fromYaml方法。
+     *      * @param yamlStr String类型参数
+     * @param typeRef TypeReferenceT类型参数
+     * @return static <T> T类型返回值
+     */
+    /**
+     * fromYaml方法。
+     *      * @param yamlStr String类型参数
+     * @param typeRef TypeReferenceT类型参数
+     * @return static <T> T类型返回值
      */
     public static <T> T fromYaml(String yamlStr, TypeReference<T> typeRef) {
         if (yamlStr == null || yamlStr.trim().isEmpty()) {
@@ -95,6 +145,16 @@ public class YamlUtil {
      *
      * @param yamlStr YAML 字符串
      * @return 解析后的对象
+     */
+    /**
+     * parse方法。
+     *      * @param yamlStr String类型参数
+     * @return static Object类型返回值
+     */
+    /**
+     * parse方法。
+     *      * @param yamlStr String类型参数
+     * @return static Object类型返回值
      */
     public static Object parse(String yamlStr) {
         if (yamlStr == null || yamlStr.trim().isEmpty()) {
@@ -116,6 +176,18 @@ public class YamlUtil {
      * @param yaml YAML 字符串
      * @param path YAMLPath 表达式
      * @return 匹配结果的列表
+     */
+    /**
+     * query方法。
+     *      * @param yaml String类型参数
+     * @param path String类型参数
+     * @return static List<Object>类型返回值
+     */
+    /**
+     * query方法。
+     *      * @param yaml String类型参数
+     * @param path String类型参数
+     * @return static List<Object>类型返回值
      */
     public static List<Object> query(String yaml, String path) {
         return new YamlPathParser().query(yaml, path);

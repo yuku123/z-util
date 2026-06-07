@@ -11,6 +11,9 @@ import com.lmax.disruptor.EventHandler;
  * @author zifang
  * @version 1.0
  */
+/**
+ * LongEventHandler类。
+ */
 public class LongEventHandler implements EventHandler<LongEvent> {
 
     /**
@@ -21,6 +24,12 @@ public class LongEventHandler implements EventHandler<LongEvent> {
      * @param endOfBatch 是否是批次中的最后一个事件
      */
     @Override
+    /**
+     * onEvent方法。
+     *      * @param event LongEvent类型参数
+     * @param sequence long类型参数
+     * @param endOfBatch boolean类型参数
+     */
     public void onEvent(LongEvent event, long sequence, boolean endOfBatch) {
         System.out.println("Event: " + event);
     }

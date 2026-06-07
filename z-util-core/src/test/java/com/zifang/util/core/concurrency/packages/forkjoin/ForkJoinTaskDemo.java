@@ -6,6 +6,9 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
+/**
+ * ForkJoinTaskDemo类。
+ */
 public class ForkJoinTaskDemo {
 
     private class SumTask extends RecursiveTask<Integer> {
@@ -16,6 +19,12 @@ public class ForkJoinTaskDemo {
         private int start;
         private int end;
 
+    /**
+     * SumTask方法。
+     *      * @param arr int[]类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     */
         public SumTask(int[] arr, int start, int end) {
             this.arr = arr;
             this.start = start;
@@ -32,6 +41,10 @@ public class ForkJoinTaskDemo {
         }
 
         @Override
+    /**
+     * compute方法。
+     * @return int类型返回值
+     */
         protected Integer compute() {
 
             if ((end - start) <= THRESHOLD) {
@@ -48,6 +61,11 @@ public class ForkJoinTaskDemo {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         int[] arr = new int[100];
         for (int i = 0; i < 100; i++) {

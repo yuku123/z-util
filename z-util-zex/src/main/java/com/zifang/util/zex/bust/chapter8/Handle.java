@@ -12,7 +12,15 @@ package com.zifang.util.zex.bust.chapter8;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handle类。
+ */
 public class Handle {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         List<? extends Number> numberList = new ArrayList<Integer>() {
             {

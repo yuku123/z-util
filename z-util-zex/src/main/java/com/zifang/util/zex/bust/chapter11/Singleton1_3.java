@@ -9,6 +9,9 @@ package com.zifang.util.zex.bust.chapter11;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Singleton1_3类。
+ */
 public class Singleton1_3 {
 
     private static Singleton1_3 singleton = null;
@@ -18,6 +21,10 @@ public class Singleton1_3 {
     public int f2 = 2;
     private Singleton1_3() {}
 
+    /**
+     * getInstance方法。
+     * @return static Singleton1_3类型返回值
+     */
     public static Singleton1_3 getInstance() {
 
         if (singleton == null) {

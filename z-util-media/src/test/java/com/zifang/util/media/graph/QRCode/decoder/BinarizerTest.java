@@ -6,9 +6,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import static org.junit.Assert.*;
 
+/**
+ * BinarizerTest类。
+ */
 public class BinarizerTest {
 
     @Test
+    /**
+     * testBinarizeWithThreshold方法。
+     */
     public void testBinarizeWithThreshold() {
         BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         // Fill half bright, half dark
@@ -30,6 +36,9 @@ public class BinarizerTest {
     }
 
     @Test
+    /**
+     * testBinarizeAutomatic方法。
+     */
     public void testBinarizeAutomatic() {
         BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         // Create a gradient image
@@ -48,6 +57,9 @@ public class BinarizerTest {
     }
 
     @Test
+    /**
+     * testBinarizeSolidImage方法。
+     */
     public void testBinarizeSolidImage() {
         BufferedImage image = new BufferedImage(5, 5, BufferedImage.TYPE_INT_RGB);
         // All white pixels
@@ -68,6 +80,9 @@ public class BinarizerTest {
     }
 
     @Test
+    /**
+     * testBinarizeBlackImage方法。
+     */
     public void testBinarizeBlackImage() {
         BufferedImage image = new BufferedImage(5, 5, BufferedImage.TYPE_INT_RGB);
         // All black pixels

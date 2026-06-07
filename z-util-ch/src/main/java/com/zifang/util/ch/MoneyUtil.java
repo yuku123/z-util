@@ -19,6 +19,9 @@ import java.math.RoundingMode;
 /**
  * MoneyUtil类。
  */
+/**
+ * MoneyUtil类。
+ */
 public class MoneyUtil {
 
     /**
@@ -63,6 +66,11 @@ public class MoneyUtil {
      *      * @param numberOfMoney String类型参数
      * @return static String类型返回值
      */
+    /**
+     * number2CNMontray方法。
+     *      * @param numberOfMoney String类型参数
+     * @return static String类型返回值
+     */
     public static String number2CNMontray(String numberOfMoney) {
         return number2CNMontray(new BigDecimal(numberOfMoney));
     }
@@ -76,6 +84,11 @@ public class MoneyUtil {
      *
      * @param numberOfMoney 传入的金额（BigDecimal类型）
      * @return 中文大写金额字符串
+     */
+    /**
+     * number2CNMontray方法。
+     *      * @param numberOfMoney BigDecimal类型参数
+     * @return static String类型返回值
      */
     /**
      * number2CNMontray方法。
@@ -167,6 +180,11 @@ public class MoneyUtil {
      *      * @param money BigDecimal类型参数
      * @return static String类型返回值
      */
+    /**
+     * accountantMoney方法。
+     *      * @param money BigDecimal类型参数
+     * @return static String类型返回值
+     */
     public static String accountantMoney(BigDecimal money) {
         return accountantMoney(money, 2, 1);
     }
@@ -189,6 +207,13 @@ public class MoneyUtil {
      * @param divisor double类型参数
      * @return static String类型返回值
      */
+    /**
+     * getFormatMoney方法。
+     *      * @param money BigDecimal类型参数
+     * @param scale int类型参数
+     * @param divisor double类型参数
+     * @return static String类型返回值
+     */
     public static String getFormatMoney(BigDecimal money, int scale, double divisor) {
         return formatMoney(money, scale, divisor) + getCellFormat(divisor);
     }
@@ -203,6 +228,13 @@ public class MoneyUtil {
      * @param scale   小数点后保留的位数
      * @param divisor 格式化值（10:十元、100:百元、1000:千元、10000:万元、100000000:亿元）
      * @return 会计格式的金额字符串，带单位后缀
+     */
+    /**
+     * getAccountantMoney方法。
+     *      * @param money BigDecimal类型参数
+     * @param scale int类型参数
+     * @param divisor double类型参数
+     * @return static String类型返回值
      */
     /**
      * getAccountantMoney方法。
@@ -333,6 +365,11 @@ public class MoneyUtil {
      *
      * @param n 数字金额
      * @return 中文大写金额字符串
+     */
+    /**
+     * digitUppercase方法。
+     *      * @param n double类型参数
+     * @return static String类型返回值
      */
     /**
      * digitUppercase方法。

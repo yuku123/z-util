@@ -13,6 +13,9 @@ package com.zifang.util.core.lang.dynamic;
 /**
  * DynamicField类。
  */
+/**
+ * DynamicField类。
+ */
 public class DynamicField {
 
     private String name;
@@ -27,10 +30,18 @@ public class DynamicField {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
     /**
      * setName方法。
      *      * @param name String类型参数
@@ -43,10 +54,18 @@ public class DynamicField {
      * getDesc方法。
      * @return String类型返回值
      */
+    /**
+     * getDesc方法。
+     * @return String类型返回值
+     */
     public String getDesc() {
         return desc;
     }
 
+    /**
+     * setDesc方法。
+     *      * @param desc String类型参数
+     */
     /**
      * setDesc方法。
      *      * @param desc String类型参数
@@ -59,10 +78,18 @@ public class DynamicField {
      * getValue方法。
      * @return Object类型返回值
      */
+    /**
+     * getValue方法。
+     * @return Object类型返回值
+     */
     public Object getValue() {
         return value;
     }
 
+    /**
+     * setValue方法。
+     *      * @param value Object类型参数
+     */
     /**
      * setValue方法。
      *      * @param value Object类型参数
@@ -75,10 +102,18 @@ public class DynamicField {
      * getType方法。
      * @return String类型返回值
      */
+    /**
+     * getType方法。
+     * @return String类型返回值
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * setType方法。
+     *      * @param type String类型参数
+     */
     /**
      * setType方法。
      *      * @param type String类型参数
@@ -93,9 +128,23 @@ public class DynamicField {
      * @param type String类型参数
      * @return static DynamicField类型返回值
      */
+    /**
+     * of方法。
+     *      * @param name String类型参数
+     * @param type String类型参数
+     * @return static DynamicField类型返回值
+     */
     public static DynamicField of(String name, String type){
         return DynamicField.of(name, type, null, null);
     }
+    /**
+     * of方法。
+     *      * @param name String类型参数
+     * @param type String类型参数
+     * @param value Object类型参数
+     * @param desc String类型参数
+     * @return static DynamicField类型返回值
+     */
     /**
      * of方法。
      *      * @param name String类型参数

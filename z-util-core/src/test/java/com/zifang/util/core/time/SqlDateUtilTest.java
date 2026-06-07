@@ -10,9 +10,15 @@ import java.time.LocalTime;
 
 import static org.junit.Assert.*;
 
+/**
+ * SqlDateUtilTest类。
+ */
 public class SqlDateUtilTest {
 
     @Test
+    /**
+     * testFormat方法。
+     */
     public void testFormat() {
         Date date = Date.valueOf("2024-06-15");
         String result = SqlDateUtil.format(date);
@@ -20,6 +26,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testFormatWithPattern方法。
+     */
     public void testFormatWithPattern() {
         Date date = Date.valueOf("2024-06-15");
         String result = SqlDateUtil.format(date, "yyyyMMdd");
@@ -27,12 +36,18 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testFormatNull方法。
+     */
     public void testFormatNull() {
         assertNull(SqlDateUtil.format(null));
         assertNull(SqlDateUtil.format(null, "yyyy-MM-dd"));
     }
 
     @Test
+    /**
+     * testParse方法。
+     */
     public void testParse() {
         Date date = SqlDateUtil.parse("2024-06-15");
         assertNotNull(date);
@@ -42,6 +57,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testParseCompact方法。
+     */
     public void testParseCompact() {
         Date date = SqlDateUtil.parse("20240615", "yyyyMMdd");
         assertNotNull(date);
@@ -49,12 +67,18 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testParseNull方法。
+     */
     public void testParseNull() {
         assertNull(SqlDateUtil.parse(null));
         assertNull(SqlDateUtil.parse(""));
     }
 
     @Test
+    /**
+     * testNow方法。
+     */
     public void testNow() {
         Date now = SqlDateUtil.now();
         assertNotNull(now);
@@ -62,6 +86,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testPlusMinusDays方法。
+     */
     public void testPlusMinusDays() {
         Date base = Date.valueOf("2024-06-15");
         Date plus = SqlDateUtil.plusDays(base, 5);
@@ -71,6 +98,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testPlusMinusMonths方法。
+     */
     public void testPlusMinusMonths() {
         Date base = Date.valueOf("2024-06-15");
         Date plus = SqlDateUtil.plusMonths(base, 2);
@@ -80,6 +110,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testPlusMinusYears方法。
+     */
     public void testPlusMinusYears() {
         Date base = Date.valueOf("2024-06-15");
         Date plus = SqlDateUtil.plusYears(base, 1);
@@ -89,6 +122,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testCompare方法。
+     */
     public void testCompare() {
         Date earlier = Date.valueOf("2024-06-15");
         Date later = Date.valueOf("2024-06-20");
@@ -97,6 +133,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testIsSameDay方法。
+     */
     public void testIsSameDay() {
         Date date1 = Date.valueOf("2024-06-15");
         Date date2 = Date.valueOf("2024-06-15");
@@ -106,6 +145,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testDaysBetween方法。
+     */
     public void testDaysBetween() {
         Date start = Date.valueOf("2024-06-01");
         Date end = Date.valueOf("2024-06-15");
@@ -113,6 +155,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testGetParts方法。
+     */
     public void testGetParts() {
         Date date = Date.valueOf("2024-06-15");
         assertEquals(2024, SqlDateUtil.getYear(date));
@@ -121,6 +166,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testToLocalDate方法。
+     */
     public void testToLocalDate() {
         Date date = Date.valueOf("2024-06-15");
         LocalDate ld = SqlDateUtil.toLocalDate(date);
@@ -131,6 +179,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testToLocalDateTime方法。
+     */
     public void testToLocalDateTime() {
         Date date = Date.valueOf("2024-06-15");
         LocalDateTime ldt = SqlDateUtil.toLocalDateTime(date);
@@ -144,6 +195,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testToLocalTime方法。
+     */
     public void testToLocalTime() {
         Date date = Date.valueOf("2024-06-15");
         LocalTime lt = SqlDateUtil.toLocalTime(date);
@@ -154,6 +208,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testToUtilDate方法。
+     */
     public void testToUtilDate() {
         Date date = Date.valueOf("2024-06-15");
         java.util.Date utilDate = SqlDateUtil.toUtilDate(date);
@@ -162,6 +219,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testToInstant方法。
+     */
     public void testToInstant() {
         Date date = Date.valueOf("2024-06-15");
         Instant instant = SqlDateUtil.toInstant(date);
@@ -170,6 +230,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testFromLocalDate方法。
+     */
     public void testFromLocalDate() {
         LocalDate ld = LocalDate.of(2024, 6, 15);
         Date date = SqlDateUtil.fromLocalDate(ld);
@@ -178,6 +241,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testFromLocalDateTime方法。
+     */
     public void testFromLocalDateTime() {
         LocalDateTime ldt = LocalDateTime.of(2024, 6, 15, 10, 30, 45);
         Date date = SqlDateUtil.fromLocalDateTime(ldt);
@@ -186,6 +252,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testFromEpochMilli方法。
+     */
     public void testFromEpochMilli() {
         Date date = SqlDateUtil.fromEpochMilli(1718455200000L);
         assertNotNull(date);
@@ -193,6 +262,9 @@ public class SqlDateUtilTest {
     }
 
     @Test
+    /**
+     * testNullHandling方法。
+     */
     public void testNullHandling() {
         assertNull(SqlDateUtil.toLocalDate(null));
         assertNull(SqlDateUtil.toLocalDateTime(null));

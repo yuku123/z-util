@@ -25,5 +25,8 @@ package com.zifang.util.db.define;
 /**
  * Update注解。
  */
+/**
+ * Update注解。
+ */
 public @interface Update {
 }

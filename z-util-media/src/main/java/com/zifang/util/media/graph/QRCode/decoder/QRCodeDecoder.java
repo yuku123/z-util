@@ -34,6 +34,12 @@ public final class QRCodeDecoder {
      * @param charset String类型参数
      * @return static String类型返回值
      */
+    /**
+     * decode方法。
+     *      * @param image BufferedImage类型参数
+     * @param charset String类型参数
+     * @return static String类型返回值
+     */
     public static String decode(BufferedImage image, String charset) {
         // Step 1: Binarize
         BitMatrix binaryMatrix = Binarizer.binarize(image);

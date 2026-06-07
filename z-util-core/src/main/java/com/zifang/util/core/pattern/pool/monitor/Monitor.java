@@ -10,5 +10,8 @@ package com.zifang.util.core.pattern.pool.monitor;
 /**
  * Monitor类。
  */
+/**
+ * Monitor类。
+ */
 public class Monitor {
 }

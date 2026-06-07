@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * OneClassSVMTest类。
+ */
 public class OneClassSVMTest {
 
     @Test
+    /**
+     * testOneClassSVMFit方法。
+     */
     public void testOneClassSVMFit() {
         OneClassSVM ocsvm = new OneClassSVM(0.1, "RBF", 0.5);
         
@@ -26,6 +32,9 @@ public class OneClassSVMTest {
     }
 
     @Test
+    /**
+     * testOneClassSVMPredict方法。
+     */
     public void testOneClassSVMPredict() {
         OneClassSVM ocsvm = new OneClassSVM(0.1, "RBF", 0.5);
         
@@ -58,6 +67,9 @@ public class OneClassSVMTest {
     }
 
     @Test
+    /**
+     * testOneClassSVMLinearKernel方法。
+     */
     public void testOneClassSVMLinearKernel() {
         OneClassSVM ocsvm = new OneClassSVM(0.1, "LINEAR", 0.5);
         

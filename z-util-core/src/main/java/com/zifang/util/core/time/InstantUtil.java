@@ -36,6 +36,9 @@ import java.util.Date;
 /**
  * InstantUtil类。
  */
+/**
+ * InstantUtil类。
+ */
 public class InstantUtil {
 
     /**
@@ -61,10 +64,20 @@ public class InstantUtil {
      *      * @param PATTERN_DEFAULT Object类型参数
      * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
      */
+    /**
+     * DateTimeFormatter.ofPattern方法。
+     *      * @param PATTERN_DEFAULT Object类型参数
+     * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
+     */
     public static final DateTimeFormatter FMT_DEFAULT = DateTimeFormatter.ofPattern(PATTERN_DEFAULT);
 
     /**
      * 日期DateTimeFormatter，格式为 {@link #PATTERN_DATE}
+     */
+    /**
+     * DateTimeFormatter.ofPattern方法。
+     *      * @param PATTERN_DATE Object类型参数
+     * @return static final DateTimeFormatter FMT_DATE =类型返回值
      */
     /**
      * DateTimeFormatter.ofPattern方法。
@@ -87,6 +100,11 @@ public class InstantUtil {
      *      * @param instant Instant类型参数
      * @return static String类型返回值
      */
+    /**
+     * format方法。
+     *      * @param instant Instant类型参数
+     * @return static String类型返回值
+     */
     public static String format(Instant instant) {
         return format(instant, FMT_DEFAULT);
     }
@@ -98,6 +116,12 @@ public class InstantUtil {
      * @param pattern 时间格式模式，如 "yyyy-MM-dd HH:mm:ss"
      * @return 格式化后的时间字符串
      * @throws NullPointerException if instant is null
+     */
+    /**
+     * format方法。
+     *      * @param instant Instant类型参数
+     * @param pattern String类型参数
+     * @return static String类型返回值
      */
     /**
      * format方法。
@@ -124,6 +148,12 @@ public class InstantUtil {
      * @param formatter DateTimeFormatter类型参数
      * @return static String类型返回值
      */
+    /**
+     * format方法。
+     *      * @param instant Instant类型参数
+     * @param formatter DateTimeFormatter类型参数
+     * @return static String类型返回值
+     */
     public static String format(Instant instant, DateTimeFormatter formatter) {
         if (instant == null) return null;
         return formatter.format(instant.atZone(ZoneId.systemDefault()));
@@ -137,6 +167,13 @@ public class InstantUtil {
      * @param pattern 时间格式模式，如 "yyyy-MM-dd HH:mm:ss"
      * @return 格式化后的时间字符串
      * @throws NullPointerException if instant or zoneId is null
+     */
+    /**
+     * format方法。
+     *      * @param instant Instant类型参数
+     * @param zoneId ZoneId类型参数
+     * @param pattern String类型参数
+     * @return static String类型返回值
      */
     /**
      * format方法。
@@ -175,6 +212,11 @@ public class InstantUtil {
      *      * @param dateStr String类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * parse方法。
+     *      * @param dateStr String类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant parse(String dateStr) {
         return parse(dateStr, PATTERN_DEFAULT);
     }
@@ -185,6 +227,12 @@ public class InstantUtil {
      * @param dateStr 时间字符串
      * @param pattern 时间格式模式，如 "yyyy-MM-dd HH:mm:ss"
      * @return 解析后的Instant，解析失败返回null
+     */
+    /**
+     * parse方法。
+     *      * @param dateStr String类型参数
+     * @param pattern String类型参数
+     * @return static Instant类型返回值
      */
     /**
      * parse方法。
@@ -208,6 +256,10 @@ public class InstantUtil {
      * now方法。
      * @return static Instant类型返回值
      */
+    /**
+     * now方法。
+     * @return static Instant类型返回值
+     */
     public static Instant now() {
         return Instant.now();
     }
@@ -223,6 +275,11 @@ public class InstantUtil {
      *      * @param epochSecond long类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * ofEpochSecond方法。
+     *      * @param epochSecond long类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant ofEpochSecond(long epochSecond) {
         return Instant.ofEpochSecond(epochSecond);
     }
@@ -232,6 +289,11 @@ public class InstantUtil {
      *
      * @param epochMilli Unix时间戳，表示自1970年1月1日以来的毫秒数
      * @return 对应的Instant对象
+     */
+    /**
+     * ofEpochMilli方法。
+     *      * @param epochMilli long类型参数
+     * @return static Instant类型返回值
      */
     /**
      * ofEpochMilli方法。
@@ -258,6 +320,12 @@ public class InstantUtil {
      * @param millis long类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * plusMillis方法。
+     *      * @param instant Instant类型参数
+     * @param millis long类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant plusMillis(Instant instant, long millis) {
         return instant.plusMillis(millis);
     }
@@ -269,6 +337,12 @@ public class InstantUtil {
      * @param millis  要减少的毫秒数，可以为负数
      * @return 减少后的新Instant对象
      * @throws NullPointerException if instant is null
+     */
+    /**
+     * minusMillis方法。
+     *      * @param instant Instant类型参数
+     * @param millis long类型参数
+     * @return static Instant类型返回值
      */
     /**
      * minusMillis方法。
@@ -294,6 +368,12 @@ public class InstantUtil {
      * @param seconds long类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * plusSeconds方法。
+     *      * @param instant Instant类型参数
+     * @param seconds long类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant plusSeconds(Instant instant, long seconds) {
         return instant.plusSeconds(seconds);
     }
@@ -305,6 +385,12 @@ public class InstantUtil {
      * @param seconds 要减少的秒数，可以为负数
      * @return 减少后的新Instant对象
      * @throws NullPointerException if instant is null
+     */
+    /**
+     * minusSeconds方法。
+     *      * @param instant Instant类型参数
+     * @param seconds long类型参数
+     * @return static Instant类型返回值
      */
     /**
      * minusSeconds方法。
@@ -330,6 +416,12 @@ public class InstantUtil {
      * @param nanos long类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * plusNanos方法。
+     *      * @param instant Instant类型参数
+     * @param nanos long类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant plusNanos(Instant instant, long nanos) {
         return instant.plusNanos(nanos);
     }
@@ -341,6 +433,12 @@ public class InstantUtil {
      * @param nanos   要减少的纳秒数，可以为负数
      * @return 减少后的新Instant对象
      * @throws NullPointerException if instant is null
+     */
+    /**
+     * minusNanos方法。
+     *      * @param instant Instant类型参数
+     * @param nanos long类型参数
+     * @return static Instant类型返回值
      */
     /**
      * minusNanos方法。
@@ -368,6 +466,12 @@ public class InstantUtil {
      * @param instant2 Instant类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isBefore方法。
+     *      * @param instant1 Instant类型参数
+     * @param instant2 Instant类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isBefore(Instant instant1, Instant instant2) {
         return instant1.isBefore(instant2);
     }
@@ -386,6 +490,12 @@ public class InstantUtil {
      * @param instant2 Instant类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isAfter方法。
+     *      * @param instant1 Instant类型参数
+     * @param instant2 Instant类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isAfter(Instant instant1, Instant instant2) {
         return instant1.isAfter(instant2);
     }
@@ -397,6 +507,12 @@ public class InstantUtil {
      * @param instant2 第二个时间点，不能为null
      * @return 如果两者相等则返回true
      * @throws NullPointerException if instant1 or instant2 is null
+     */
+    /**
+     * isEqual方法。
+     *      * @param instant1 Instant类型参数
+     * @param instant2 Instant类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isEqual方法。
@@ -424,6 +540,12 @@ public class InstantUtil {
      * @param end Instant类型参数
      * @return static long类型返回值
      */
+    /**
+     * millisBetween方法。
+     *      * @param start Instant类型参数
+     * @param end Instant类型参数
+     * @return static long类型返回值
+     */
     public static long millisBetween(Instant start, Instant end) {
         return java.time.temporal.ChronoUnit.MILLIS.between(start, end);
     }
@@ -435,6 +557,12 @@ public class InstantUtil {
      * @param end   结束时间点，不能为null
      * @return 秒差（end - start）
      * @throws NullPointerException if start or end is null
+     */
+    /**
+     * secondsBetween方法。
+     *      * @param start Instant类型参数
+     * @param end Instant类型参数
+     * @return static long类型返回值
      */
     /**
      * secondsBetween方法。
@@ -460,6 +588,12 @@ public class InstantUtil {
      * @param end Instant类型参数
      * @return static long类型返回值
      */
+    /**
+     * nanosBetween方法。
+     *      * @param start Instant类型参数
+     * @param end Instant类型参数
+     * @return static long类型返回值
+     */
     public static long nanosBetween(Instant start, Instant end) {
         return java.time.temporal.ChronoUnit.NANOS.between(start, end);
     }
@@ -477,6 +611,11 @@ public class InstantUtil {
      *      * @param instant Instant类型参数
      * @return static long类型返回值
      */
+    /**
+     * toEpochMilli方法。
+     *      * @param instant Instant类型参数
+     * @return static long类型返回值
+     */
     public static long toEpochMilli(Instant instant) {
         if (instant == null) return 0;
         return instant.toEpochMilli();
@@ -487,6 +626,11 @@ public class InstantUtil {
      *
      * @param instant 要转换的时间点
      * @return 秒值，如果输入为null则返回0
+     */
+    /**
+     * toEpochSecond方法。
+     *      * @param instant Instant类型参数
+     * @return static long类型返回值
      */
     /**
      * toEpochSecond方法。
@@ -510,6 +654,11 @@ public class InstantUtil {
      *      * @param instant Instant类型参数
      * @return static int类型返回值
      */
+    /**
+     * getNano方法。
+     *      * @param instant Instant类型参数
+     * @return static int类型返回值
+     */
     public static int getNano(Instant instant) {
         return instant.getNano();
     }
@@ -527,6 +676,11 @@ public class InstantUtil {
      *      * @param instant Instant类型参数
      * @return static Date类型返回值
      */
+    /**
+     * toDate方法。
+     *      * @param instant Instant类型参数
+     * @return static Date类型返回值
+     */
     public static Date toDate(Instant instant) {
         return TimeConverter.toDate(instant);
     }
@@ -536,6 +690,11 @@ public class InstantUtil {
      *
      * @param instant 要转换的时间点
      * @return 转换后的LocalDateTime对象，如果输入为null则返回null
+     */
+    /**
+     * toLocalDateTime方法。
+     *      * @param instant Instant类型参数
+     * @return static LocalDateTime类型返回值
      */
     /**
      * toLocalDateTime方法。
@@ -559,6 +718,12 @@ public class InstantUtil {
      * @param zoneId ZoneId类型参数
      * @return static LocalDateTime类型返回值
      */
+    /**
+     * toLocalDateTime方法。
+     *      * @param instant Instant类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalDateTime类型返回值
+     */
     public static LocalDateTime toLocalDateTime(Instant instant, ZoneId zoneId) {
         return TimeConverter.toLocalDateTime(instant, zoneId);
     }
@@ -568,6 +733,11 @@ public class InstantUtil {
      *
      * @param instant 要转换的时间点
      * @return 转换后的LocalDate对象，如果输入为null则返回null
+     */
+    /**
+     * toLocalDate方法。
+     *      * @param instant Instant类型参数
+     * @return static LocalDate类型返回值
      */
     /**
      * toLocalDate方法。
@@ -591,6 +761,12 @@ public class InstantUtil {
      * @param zoneId ZoneId类型参数
      * @return static LocalDate类型返回值
      */
+    /**
+     * toLocalDate方法。
+     *      * @param instant Instant类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalDate类型返回值
+     */
     public static LocalDate toLocalDate(Instant instant, ZoneId zoneId) {
         return TimeConverter.toLocalDate(instant, zoneId);
     }
@@ -600,6 +776,11 @@ public class InstantUtil {
      *
      * @param instant 要转换的时间点
      * @return 转换后的LocalTime对象，如果输入为null则返回null
+     */
+    /**
+     * toLocalTime方法。
+     *      * @param instant Instant类型参数
+     * @return static LocalTime类型返回值
      */
     /**
      * toLocalTime方法。
@@ -623,6 +804,12 @@ public class InstantUtil {
      * @param zoneId ZoneId类型参数
      * @return static LocalTime类型返回值
      */
+    /**
+     * toLocalTime方法。
+     *      * @param instant Instant类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalTime类型返回值
+     */
     public static LocalTime toLocalTime(Instant instant, ZoneId zoneId) {
         return TimeConverter.toLocalTime(instant, zoneId);
     }
@@ -632,6 +819,11 @@ public class InstantUtil {
      *
      * @param instant 要转换的时间点
      * @return 转换后的ZonedDateTime对象，如果输入为null则返回null
+     */
+    /**
+     * toZonedDateTime方法。
+     *      * @param instant Instant类型参数
+     * @return static ZonedDateTime类型返回值
      */
     /**
      * toZonedDateTime方法。
@@ -648,6 +840,12 @@ public class InstantUtil {
      * @param instant 要转换的时间点
      * @param zoneId  时区ID
      * @return 转换后的ZonedDateTime对象，如果输入为null则返回null
+     */
+    /**
+     * toZonedDateTime方法。
+     *      * @param instant Instant类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static ZonedDateTime类型返回值
      */
     /**
      * toZonedDateTime方法。
@@ -672,6 +870,11 @@ public class InstantUtil {
      *      * @param date Date类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * fromDate方法。
+     *      * @param date Date类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant fromDate(Date date) {
         return TimeConverter.toInstant(date);
     }
@@ -681,6 +884,11 @@ public class InstantUtil {
      *
      * @param localDateTime 要转换的LocalDateTime对象
      * @return 转换后的Instant对象，如果输入为null则返回null
+     */
+    /**
+     * fromLocalDateTime方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static Instant类型返回值
      */
     /**
      * fromLocalDateTime方法。
@@ -704,6 +912,12 @@ public class InstantUtil {
      * @param zoneId ZoneId类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * fromLocalDateTime方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant fromLocalDateTime(LocalDateTime localDateTime, ZoneId zoneId) {
         return TimeConverter.toInstant(localDateTime, zoneId);
     }
@@ -715,6 +929,11 @@ public class InstantUtil {
      *
      * @param localDate 要转换的LocalDate对象
      * @return 转换后的Instant对象，如果输入为null则返回null
+     */
+    /**
+     * fromLocalDate方法。
+     *      * @param localDate LocalDate类型参数
+     * @return static Instant类型返回值
      */
     /**
      * fromLocalDate方法。
@@ -740,6 +959,12 @@ public class InstantUtil {
      * @param zoneId ZoneId类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * fromLocalDate方法。
+     *      * @param localDate LocalDate类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant fromLocalDate(LocalDate localDate, ZoneId zoneId) {
         return TimeConverter.toInstant(localDate, zoneId);
     }
@@ -751,6 +976,11 @@ public class InstantUtil {
      *
      * @param localTime 要转换的LocalTime对象
      * @return 转换后的Instant对象，如果输入为null则返回null
+     */
+    /**
+     * fromLocalTime方法。
+     *      * @param localTime LocalTime类型参数
+     * @return static Instant类型返回值
      */
     /**
      * fromLocalTime方法。
@@ -776,6 +1006,12 @@ public class InstantUtil {
      * @param zoneId ZoneId类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * fromLocalTime方法。
+     *      * @param localTime LocalTime类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant fromLocalTime(LocalTime localTime, ZoneId zoneId) {
         return TimeConverter.toInstant(localTime, zoneId);
     }
@@ -785,6 +1021,11 @@ public class InstantUtil {
      *
      * @param zonedDateTime 要转换的ZonedDateTime对象
      * @return 转换后的Instant对象，如果输入为null则返回null
+     */
+    /**
+     * fromZonedDateTime方法。
+     *      * @param zonedDateTime ZonedDateTime类型参数
+     * @return static Instant类型返回值
      */
     /**
      * fromZonedDateTime方法。
@@ -806,6 +1047,11 @@ public class InstantUtil {
      *      * @param epochMilli long类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * fromEpochMilli方法。
+     *      * @param epochMilli long类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant fromEpochMilli(long epochMilli) {
         return Instant.ofEpochMilli(epochMilli);
     }
@@ -815,6 +1061,11 @@ public class InstantUtil {
      *
      * @param epochSecond 自1970年1月1日以来的秒数
      * @return 对应的Instant对象
+     */
+    /**
+     * fromEpochSecond方法。
+     *      * @param epochSecond long类型参数
+     * @return static Instant类型返回值
      */
     /**
      * fromEpochSecond方法。

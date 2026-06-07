@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * LogisticRegressionTest类。
+ */
 public class LogisticRegressionTest {
 
     private Random random = new Random(42);
@@ -71,6 +74,9 @@ public class LogisticRegressionTest {
     }
 
     @Test
+    /**
+     * testLogisticRegressionBinary方法。
+     */
     public void testLogisticRegressionBinary() {
         int nSamples = 100;
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));
@@ -96,6 +102,9 @@ public class LogisticRegressionTest {
     }
 
     @Test
+    /**
+     * testLogisticRegressionProba方法。
+     */
     public void testLogisticRegressionProba() {
         int nSamples = 50;
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));
@@ -122,6 +131,9 @@ public class LogisticRegressionTest {
     }
 
     @Test
+    /**
+     * testLogisticRegressionL2Regularization方法。
+     */
     public void testLogisticRegressionL2Regularization() {
         int nSamples = 60;
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));

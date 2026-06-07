@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * Numpy 类测试
  */
+/**
+ * NumpyTest类。
+ */
 public class NumpyTest {
 
     @Test
+    /**
+     * testArrayFromIntArray方法。
+     */
     public void testArrayFromIntArray() {
         int[] data = {1, 2, 3, 4, 5};
         NdArray arr = Numpy.array(data);
@@ -19,6 +25,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testArrayFromDoubleArray方法。
+     */
     public void testArrayFromDoubleArray() {
         double[] data = {1.0, 2.0, 3.0, 4.0, 5.0};
         NdArray arr = Numpy.array(data);
@@ -28,6 +37,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testArrayWithDType方法。
+     */
     public void testArrayWithDType() {
         int[] data = {1, 2, 3};
         NdArray arr = Numpy.array(data, DType.INT32);
@@ -36,6 +48,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testZeros方法。
+     */
     public void testZeros() {
         NdArray arr = Numpy.zeros(3, 4);
         assertNotNull(arr);
@@ -44,6 +59,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testZerosWithShape方法。
+     */
     public void testZerosWithShape() {
         NdArray arr = Numpy.zeros(new Shape(2, 3), DType.FLOAT64);
         assertNotNull(arr);
@@ -51,6 +69,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testOnes方法。
+     */
     public void testOnes() {
         NdArray arr = Numpy.ones(3, 4);
         assertNotNull(arr);
@@ -58,6 +79,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testArangeWithStop方法。
+     */
     public void testArangeWithStop() {
         NdArray arr = Numpy.arange(5);
         assertNotNull(arr);
@@ -65,6 +89,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testArangeWithStartStop方法。
+     */
     public void testArangeWithStartStop() {
         NdArray arr = Numpy.arange(2, 5);
         assertNotNull(arr);
@@ -72,6 +99,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testArangeWithStartStopStep方法。
+     */
     public void testArangeWithStartStopStep() {
         NdArray arr = Numpy.arange(0, 10, 1, DType.INT32);
         assertNotNull(arr);
@@ -79,6 +109,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testArangeWithDType方法。
+     */
     public void testArangeWithDType() {
         NdArray arr = Numpy.arange(0, 5, DType.FLOAT64);
         assertNotNull(arr);
@@ -86,6 +119,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testEmpty方法。
+     */
     public void testEmpty() {
         NdArray arr = Numpy.empty(3, 3);
         assertNotNull(arr);
@@ -93,6 +129,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testReshape方法。
+     */
     public void testReshape() {
         NdArray arr = Numpy.arange(12);
         NdArray reshaped = Numpy.reshape(arr, 3, 4);
@@ -101,6 +140,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testTranspose方法。
+     */
     public void testTranspose() {
         NdArray arr = Numpy.arange(6).reshape(2, 3);
         NdArray transposed = Numpy.transpose(arr);
@@ -110,6 +152,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testCopy方法。
+     */
     public void testCopy() {
         NdArray arr = Numpy.arange(5);
         NdArray copied = Numpy.copy(arr);
@@ -118,6 +163,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testFill方法。
+     */
     public void testFill() {
         NdArray arr = Numpy.zeros(3, 3);
         Numpy.fill(arr, 5.0);
@@ -127,6 +175,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testShape方法。
+     */
     public void testShape() {
         NdArray arr = Numpy.zeros(2, 3, 4);
         Shape shape = Numpy.shape(arr);
@@ -136,6 +187,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testDtype方法。
+     */
     public void testDtype() {
         int[] data = {1, 2, 3};
         NdArray arr = Numpy.array(data, DType.INT32);
@@ -143,12 +197,18 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testSize方法。
+     */
     public void testSize() {
         NdArray arr = Numpy.zeros(3, 4, 2);
         assertEquals(24, Numpy.size(arr));
     }
 
     @Test
+    /**
+     * testNdim方法。
+     */
     public void testNdim() {
         NdArray arr1d = Numpy.arange(5);
         assertEquals(1, Numpy.ndim(arr1d));
@@ -161,6 +221,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testSum方法。
+     */
     public void testSum() {
         NdArray arr = Numpy.array(new int[]{1, 2, 3, 4, 5});
         NdArray result = Numpy.sum(arr);
@@ -168,6 +231,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testMean方法。
+     */
     public void testMean() {
         NdArray arr = Numpy.array(new int[]{2, 4, 6, 8, 10});
         NdArray result = Numpy.mean(arr);
@@ -175,6 +241,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testMax方法。
+     */
     public void testMax() {
         NdArray arr = Numpy.array(new int[]{3, 1, 4, 1, 5, 9, 2, 6});
         NdArray result = Numpy.max(arr);
@@ -190,6 +259,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testMin方法。
+     */
     public void testMin() {
         NdArray arr = Numpy.array(new int[]{3, 1, 4, 1, 5, 9, 2, 6});
         NdArray result = Numpy.min(arr);
@@ -205,6 +277,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testSumEmpty方法。
+     */
     public void testSumEmpty() {
         NdArray arr = Numpy.array(new int[]{});
         NdArray result = Numpy.sum(arr);
@@ -212,6 +287,9 @@ public class NumpyTest {
     }
 
     @Test
+    /**
+     * testInferDType方法。
+     */
     public void testInferDType() {
         assertEquals(DType.INT8, Numpy.array(new byte[]{1, 2}).getDtype());
         assertEquals(DType.INT16, Numpy.array(new short[]{1, 2}).getDtype());

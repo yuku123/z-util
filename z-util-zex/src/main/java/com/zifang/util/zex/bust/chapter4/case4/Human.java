@@ -42,6 +42,11 @@ class Human {
         System.out.println("#double:" + a);
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Human human = new Human();
         human.handle(true);

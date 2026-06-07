@@ -13,6 +13,9 @@ import java.io.IOException;
 /**
  * NumberGennerator类。
  */
+/**
+ * NumberGennerator类。
+ */
 public class NumberGennerator {
 
     /**
@@ -25,12 +28,22 @@ public class NumberGennerator {
      *      * @param limit int类型参数
      * @return static boolean[]类型返回值
      */
+    /**
+     * primeNumber方法。
+     *      * @param limit int类型参数
+     * @return static boolean[]类型返回值
+     */
     public static boolean[] primeNumber(int limit) {
         boolean[] b = new boolean[limit];
 
         return null;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     /**
      * main方法。
      *      * @param args String[]类型参数

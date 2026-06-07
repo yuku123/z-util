@@ -15,6 +15,9 @@ import java.util.concurrent.Executors;
 
 import static org.junit.Assert.*;
 
+/**
+ * CrawlerPipelineTest类。
+ */
 public class CrawlerPipelineTest {
 
     private HttpServer httpServer;
@@ -22,6 +25,9 @@ public class CrawlerPipelineTest {
     private Executor executor = Executors.newSingleThreadExecutor();
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() throws IOException {
         httpServer = HttpServer.create(new InetSocketAddress(0), 0);
         httpServer.setExecutor(executor);
@@ -30,6 +36,9 @@ public class CrawlerPipelineTest {
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         if (httpServer != null) {
             httpServer.stop(0);
@@ -52,6 +61,9 @@ public class CrawlerPipelineTest {
     // --- Request static factory methods tests ---
 
     @Test
+    /**
+     * testRequest_Get方法。
+     */
     public void testRequest_Get() {
         CrawlerPipeline.Request request = CrawlerPipeline.Request.get("https://example.com");
         assertEquals("https://example.com", request.getUrl());
@@ -59,6 +71,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testRequest_Post方法。
+     */
     public void testRequest_Post() {
         CrawlerPipeline.Request request = CrawlerPipeline.Request.post(
                 "https://example.com", "{\"name\":\"test\"}", "application/json");
@@ -71,6 +86,9 @@ public class CrawlerPipelineTest {
     // --- Request getters and setters ---
 
     @Test
+    /**
+     * testRequest_SettersAndGetters方法。
+     */
     public void testRequest_SettersAndGetters() {
         CrawlerPipeline.Request request = new CrawlerPipeline.Request();
 
@@ -93,6 +111,9 @@ public class CrawlerPipelineTest {
     // --- Pipeline execution tests ---
 
     @Test
+    /**
+     * testExecute_GetRequest方法。
+     */
     public void testExecute_GetRequest() {
         enqueue(200, "<html><head><title>Test</title></head><body>Hello</body></html>", "text/html");
 
@@ -107,6 +128,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testExecute_PostRequest方法。
+     */
     public void testExecute_PostRequest() {
         enqueue(200, "{\"result\":\"success\"}", "application/json");
 
@@ -119,6 +143,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testExecute_WithHeaders方法。
+     */
     public void testExecute_WithHeaders() {
         enqueue(200, "OK", "text/plain");
 
@@ -134,6 +161,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testExecute_With404Response方法。
+     */
     public void testExecute_With404Response() {
         enqueue(404, "Not Found", "text/plain");
 
@@ -145,6 +175,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testExecute_WithServerError方法。
+     */
     public void testExecute_WithServerError() {
         enqueue(500, "Internal Server Error", "text/plain");
 
@@ -156,6 +189,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testExecute_WithConnectionFailure方法。
+     */
     public void testExecute_WithConnectionFailure() {
         CrawlerPipeline.Request request = CrawlerPipeline.Request.get("http://localhost:99999");
         PipelineContext ctx = new CrawlerPipeline().execute(request);
@@ -168,6 +204,9 @@ public class CrawlerPipelineTest {
     // --- Processor tests ---
 
     @Test
+    /**
+     * testAddProcessor方法。
+     */
     public void testAddProcessor() {
         TestProcessor processor = new TestProcessor();
         CrawlerPipeline pipeline = new CrawlerPipeline();
@@ -183,6 +222,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testMultipleProcessors方法。
+     */
     public void testMultipleProcessors() {
         TestProcessor p1 = new TestProcessor();
         TestProcessor p2 = new TestProcessor();
@@ -200,6 +242,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testProcessorException_DoesNotStopPipeline方法。
+     */
     public void testProcessorException_DoesNotStopPipeline() {
         FailingProcessor failingProcessor = new FailingProcessor();
         TestProcessor successProcessor = new TestProcessor();
@@ -220,6 +265,9 @@ public class CrawlerPipelineTest {
     // --- Parse and store tests ---
 
     @Test
+    /**
+     * testExecute_ParsesHtmlTitle方法。
+     */
     public void testExecute_ParsesHtmlTitle() {
         enqueue(200, "<html><head><title>My Title</title></head><body>Content</body></html>", "text/html");
 
@@ -230,6 +278,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testExecute_ParsesHtmlBodyText方法。
+     */
     public void testExecute_ParsesHtmlBodyText() {
         enqueue(200, "<html><head><title>T</title></head><body><p>Some text</p></body></html>", "text/html");
 
@@ -241,6 +292,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testExecute_WithEmptyBody方法。
+     */
     public void testExecute_WithEmptyBody() {
         enqueue(200, "", "text/plain");
 
@@ -251,6 +305,9 @@ public class CrawlerPipelineTest {
     }
 
     @Test
+    /**
+     * testExecute_WithNullContentType方法。
+     */
     public void testExecute_WithNullContentType() {
         enqueue(200, "<html><head><title>T</title></head><body>Hi</body></html>", null);
 
@@ -268,16 +325,28 @@ public class CrawlerPipelineTest {
         private boolean called = false;
 
         @Override
+    /**
+     * process方法。
+     *      * @param ctx PipelineContext类型参数
+     */
         public void process(PipelineContext ctx) {
             called = true;
             lastContext = ctx;
             ctx.put("processor_called", true);
         }
 
+    /**
+     * wasCalled方法。
+     * @return boolean类型返回值
+     */
         public boolean wasCalled() {
             return called;
         }
 
+    /**
+     * getLastContext方法。
+     * @return PipelineContext类型返回值
+     */
         public PipelineContext getLastContext() {
             return lastContext;
         }
@@ -285,6 +354,10 @@ public class CrawlerPipelineTest {
 
     private static class FailingProcessor implements Processor {
         @Override
+    /**
+     * process方法。
+     *      * @param ctx PipelineContext类型参数
+     */
         public void process(PipelineContext ctx) {
             throw new RuntimeException("Intentional test failure");
         }

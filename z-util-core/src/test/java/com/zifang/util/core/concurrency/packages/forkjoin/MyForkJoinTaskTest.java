@@ -8,10 +8,16 @@ import java.util.concurrent.ForkJoinTask;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * MyForkJoinTaskTest类。
+ */
 public class MyForkJoinTaskTest {
 
     /******************** 测试ForkJoinPool.invoke(...)： *********************/
     @Test
+    /**
+     * testForkJoinInvoke方法。
+     */
     public void testForkJoinInvoke() throws InterruptedException, ExecutionException {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         MyForkJoinTask<String> task = new MyForkJoinTask<String>();
@@ -23,10 +29,16 @@ public class MyForkJoinTaskTest {
     }
 
     @Test
+    /**
+     * testForkJoinInvoke2方法。
+     */
     public void testForkJoinInvoke2() throws InterruptedException, ExecutionException {
         final ForkJoinPool forkJoinPool = new ForkJoinPool();
         final MyForkJoinTask<String> task = new MyForkJoinTask<String>();
         new Thread(new Runnable() {
+    /**
+     * run方法。
+     */
             public void run() {
                 try {
                     Thread.sleep(1000);
@@ -45,6 +57,9 @@ public class MyForkJoinTaskTest {
 
     /******************** 测试ForkJoinPool.submit(...)： ********************/
     @Test
+    /**
+     * testForkJoinSubmit方法。
+     */
     public void testForkJoinSubmit() throws InterruptedException, ExecutionException {
         final ForkJoinPool forkJoinPool = new ForkJoinPool();
         final MyForkJoinTask<String> task = new MyForkJoinTask<String>();
@@ -55,6 +70,9 @@ public class MyForkJoinTaskTest {
     }
 
     @Test
+    /**
+     * testForkJoinSubmit2方法。
+     */
     public void testForkJoinSubmit2() throws InterruptedException, ExecutionException {
         final ForkJoinPool forkJoinPool = new ForkJoinPool();
         final MyForkJoinTask<String> task = new MyForkJoinTask<String>();
@@ -64,10 +82,16 @@ public class MyForkJoinTaskTest {
     }
 
     @Test
+    /**
+     * testForkJoinSubmit3方法。
+     */
     public void testForkJoinSubmit3() throws InterruptedException, ExecutionException {
         final ForkJoinPool forkJoinPool = new ForkJoinPool();
         final MyForkJoinTask<String> task = new MyForkJoinTask<String>();
         new Thread(new Runnable() {
+    /**
+     * run方法。
+     */
             public void run() {
                 try {
                     Thread.sleep(1000);
@@ -86,6 +110,9 @@ public class MyForkJoinTaskTest {
 
     /******************* 测试ForkJoinPool.execute(...)： ****************/
     @Test
+    /**
+     * testForkJoinExecute方法。
+     */
     public void testForkJoinExecute() throws InterruptedException, ExecutionException {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         MyForkJoinTask<String> task = new MyForkJoinTask<String>();

@@ -8,6 +8,9 @@ import java.util.Random;
 /**
  * BinaryMutation类。
  */
+/**
+ * BinaryMutation类。
+ */
 public class BinaryMutation implements MutationOperator {
 
     private final Random random = new Random();
@@ -19,6 +22,11 @@ public class BinaryMutation implements MutationOperator {
      * @param mutationRate 变异率，范围[0, 1]
      */
     @Override
+    /**
+     * mutate方法。
+     *      * @param individual Individual类型参数
+     * @param mutationRate double类型参数
+     */
     /**
      * mutate方法。
      *      * @param individual Individual类型参数

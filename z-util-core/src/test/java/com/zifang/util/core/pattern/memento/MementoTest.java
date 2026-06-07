@@ -7,11 +7,17 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+/**
+ * MementoTest类。
+ */
 public class MementoTest {
 
     // ==================== MementoContext Tests ====================
 
     @Test
+    /**
+     * testSaveAndRetrieve方法。
+     */
     public void testSaveAndRetrieve() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -24,6 +30,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testNextAndPrevious方法。
+     */
     public void testNextAndPrevious() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -50,6 +59,9 @@ public class MementoTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
+    /**
+     * testPreviousAtFirstThrows方法。
+     */
     public void testPreviousAtFirstThrows() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -57,6 +69,9 @@ public class MementoTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
+    /**
+     * testNextAtLastThrows方法。
+     */
     public void testNextAtLastThrows() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -64,6 +79,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testSaveAfterUndoClearsRedoHistory方法。
+     */
     public void testSaveAfterUndoClearsRedoHistory() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -81,6 +99,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMoveTo方法。
+     */
     public void testMoveTo() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -98,6 +119,9 @@ public class MementoTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
+    /**
+     * testMoveToOutOfBoundsThrows方法。
+     */
     public void testMoveToOutOfBoundsThrows() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -105,6 +129,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testSaveWithLabel方法。
+     */
     public void testSaveWithLabel() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1", "first");
@@ -117,6 +144,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMoveToLabelNotFound方法。
+     */
     public void testMoveToLabelNotFound() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1", "first");
@@ -126,6 +156,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testStepForwardAndBackward方法。
+     */
     public void testStepForwardAndBackward() {
         MementoContext<String> context = new MementoContext<>();
         for (int i = 0; i < 10; i++) {
@@ -138,6 +171,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testFirstAndLast方法。
+     */
     public void testFirstAndLast() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -149,6 +185,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testClear方法。
+     */
     public void testClear() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -161,6 +200,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testCurrentSnapshot方法。
+     */
     public void testCurrentSnapshot() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1", "label1", "desc1");
@@ -173,6 +215,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testGetSnapshotMetas方法。
+     */
     public void testGetSnapshotMetas() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1", "label1");
@@ -189,6 +234,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMaxSize方法。
+     */
     public void testMaxSize() {
         MementoContext<String> context = new MementoContext<>(3);
         context.save("state1");
@@ -201,6 +249,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testCheckpoint方法。
+     */
     public void testCheckpoint() {
         MementoContext<String> context = new MementoContext<>();
         context.save("state1");
@@ -225,6 +276,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testListener方法。
+     */
     public void testListener() {
         MementoContext<String> context = new MementoContext<>();
         StringBuilder events = new StringBuilder();
@@ -250,6 +304,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testEmptyContext方法。
+     */
     public void testEmptyContext() {
         MementoContext<String> context = new MementoContext<>();
 
@@ -265,6 +322,9 @@ public class MementoTest {
     // ==================== Originator Tests ====================
 
     @Test
+    /**
+     * testOriginatorBasic方法。
+     */
     public void testOriginatorBasic() {
         Originator<String> originator = new Originator<>();
         originator.setState("state1");
@@ -282,6 +342,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testOriginatorWithValidator方法。
+     */
     public void testOriginatorWithValidator() {
         Originator<String> originator = new Originator<>(
             state -> state != null && !state.isEmpty()
@@ -294,6 +357,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testOriginatorWithCopier方法。
+     */
     public void testOriginatorWithCopier() {
         StringBuffer original = new StringBuffer("original");
         Originator<StringBuffer> originator = new Originator<>(
@@ -309,6 +375,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testStateUpdater方法。
+     */
     public void testStateUpdater() {
         Originator<String> originator = new Originator<>();
         originator.setState("initial");
@@ -323,6 +392,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testOriginatorSaveWithLabel方法。
+     */
     public void testOriginatorSaveWithLabel() {
         Originator<String> originator = new Originator<>();
         originator.setState("state1");
@@ -333,6 +405,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testStateEquals方法。
+     */
     public void testStateEquals() {
         Originator<String> originator = new Originator<>();
         originator.setState("state1");
@@ -345,6 +420,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testOriginatorContextIntegration方法。
+     */
     public void testOriginatorContextIntegration() {
         Originator<String> originator = new Originator<>();
         MementoContext<String> context = new MementoContext<>();
@@ -366,6 +444,9 @@ public class MementoTest {
     // ==================== MementoImpl Tests ====================
 
     @Test
+    /**
+     * testMementoImplBasic方法。
+     */
     public void testMementoImplBasic() {
         MementoImpl<String> memento = MementoImpl.of("state1");
         assertEquals("state1", memento.getState());
@@ -373,6 +454,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoImplWithLabel方法。
+     */
     public void testMementoImplWithLabel() {
         MementoImpl<String> memento = MementoImpl.of("state1", "myLabel");
         assertEquals("state1", memento.getState());
@@ -380,6 +464,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoImplBuilder方法。
+     */
     public void testMementoImplBuilder() {
         MementoImpl<String> memento = MementoImpl.<String>builder()
             .state("state1")
@@ -396,6 +483,9 @@ public class MementoTest {
     // ==================== MementoHistory Tests ====================
 
     @Test
+    /**
+     * testMementoHistoryBasic方法。
+     */
     public void testMementoHistoryBasic() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -414,6 +504,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryCannotUndoAtFirst方法。
+     */
     public void testMementoHistoryCannotUndoAtFirst() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -425,6 +518,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryCannotRedoAtLast方法。
+     */
     public void testMementoHistoryCannotRedoAtLast() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -437,6 +533,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryClear方法。
+     */
     public void testMementoHistoryClear() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -452,6 +551,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryGoTo方法。
+     */
     public void testMementoHistoryGoTo() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -468,6 +570,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryCheckpoint方法。
+     */
     public void testMementoHistoryCheckpoint() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -497,6 +602,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryExecuteWithLabel方法。
+     */
     public void testMementoHistoryExecuteWithLabel() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -510,6 +618,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryListener方法。
+     */
     public void testMementoHistoryListener() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -537,6 +648,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryFilter方法。
+     */
     public void testMementoHistoryFilter() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator);
@@ -554,6 +668,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryMaxSize方法。
+     */
     public void testMementoHistoryMaxSize() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator, 3);
@@ -568,6 +685,9 @@ public class MementoTest {
     }
 
     @Test
+    /**
+     * testMementoHistoryGetContext方法。
+     */
     public void testMementoHistoryGetContext() {
         Originator<String> originator = new Originator<>();
         MementoHistory<String> history = new MementoHistory<>(originator, 50);

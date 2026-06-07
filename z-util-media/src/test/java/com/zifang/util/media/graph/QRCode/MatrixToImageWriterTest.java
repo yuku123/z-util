@@ -8,14 +8,23 @@ import java.io.ByteArrayOutputStream;
 
 import static org.junit.Assert.*;
 
+/**
+ * MatrixToImageWriterTest类。
+ */
 public class MatrixToImageWriterTest {
 
     @Test
+    /**
+     * testMatrixToImageWriterHasPrivateConstructor方法。
+     */
     public void testMatrixToImageWriterHasPrivateConstructor() {
         assertNotNull(MatrixToImageWriter.class);
     }
 
     @Test
+    /**
+     * testToBufferedImage方法。
+     */
     public void testToBufferedImage() throws Exception {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(0, 0);
@@ -28,6 +37,9 @@ public class MatrixToImageWriterTest {
     }
 
     @Test
+    /**
+     * testWriteToStream方法。
+     */
     public void testWriteToStream() throws Exception {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(5, 5);

@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * PolicyGradientTest类。
+ */
 public class PolicyGradientTest {
 
     @Test
+    /**
+     * testPolicyGradientUpdate方法。
+     */
     public void testPolicyGradientUpdate() {
         PolicyGradient agent = new PolicyGradient(4, 3, 16, 0.001, 0.99);
         
@@ -30,6 +36,9 @@ public class PolicyGradientTest {
     }
 
     @Test
+    /**
+     * testPolicyGradientSelectAction方法。
+     */
     public void testPolicyGradientSelectAction() {
         PolicyGradient agent = new PolicyGradient(4, 3, 16, 0.001, 0.99);
         
@@ -40,6 +49,9 @@ public class PolicyGradientTest {
     }
 
     @Test
+    /**
+     * testPolicyGradientDiscountedRewards方法。
+     */
     public void testPolicyGradientDiscountedRewards() {
         double[] rewards = new double[]{1.0, 2.0, 3.0};
         double gamma = 0.9;

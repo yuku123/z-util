@@ -15,6 +15,9 @@ import java.io.FileOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * MyZip类。
+ */
 public class MyZip { // 创建类
     private void zip(String zipFileName, File inputFile) throws Exception {
         ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName)); // 创建ZipOutputStream类对象
@@ -44,6 +47,11 @@ public class MyZip { // 创建类
         }
     }
 
+    /**
+     * main方法。
+     *      * @param temp String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] temp) { // 主方法
         MyZip book = new MyZip(); // 创建本例对象
         try {

@@ -6,5 +6,8 @@ package com.zifang.util.proxy.a.model;
 /**
  * ClassAttribute接口。
  */
+/**
+ * ClassAttribute接口。
+ */
 public interface ClassAttribute {
 }

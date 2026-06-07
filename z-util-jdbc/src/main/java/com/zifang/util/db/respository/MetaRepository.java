@@ -6,5 +6,8 @@ package com.zifang.util.db.respository;
 /**
  * MetaRepository类。
  */
+/**
+ * MetaRepository类。
+ */
 public class MetaRepository {
 }

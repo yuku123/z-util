@@ -11,10 +11,17 @@ import java.util.function.*;
 /**
  * Tree类。
  */
+/**
+ * Tree类。
+ */
 public class Tree {
 
     private final ILeaf root;
 
+    /**
+     * Tree方法。
+     *      * @param root ILeaf类型参数
+     */
     /**
      * Tree方法。
      *      * @param root ILeaf类型参数
@@ -33,12 +40,20 @@ public class Tree {
      * getRoot方法。
      * @return ILeaf类型返回值
      */
+    /**
+     * getRoot方法。
+     * @return ILeaf类型返回值
+     */
     public ILeaf getRoot() {
         return root;
     }
 
     // ==================== 遍历操作 ====================
 
+    /**
+     * dfs方法。
+     *      * @param action ConsumerILeaf类型参数
+     */
     /**
      * dfs方法。
      *      * @param action ConsumerILeaf类型参数
@@ -62,6 +77,10 @@ public class Tree {
      * bfs方法。
      *      * @param action ConsumerILeaf类型参数
      */
+    /**
+     * bfs方法。
+     *      * @param action ConsumerILeaf类型参数
+     */
     public void bfs(Consumer<ILeaf> action) {
         Queue<ILeaf> queue = new LinkedList<>();
         queue.offer(root);
@@ -78,10 +97,18 @@ public class Tree {
      * preOrder方法。
      *      * @param action ConsumerILeaf类型参数
      */
+    /**
+     * preOrder方法。
+     *      * @param action ConsumerILeaf类型参数
+     */
     public void preOrder(Consumer<ILeaf> action) {
         root.traversePreOrder(action);
     }
 
+    /**
+     * postOrder方法。
+     *      * @param action ConsumerILeaf类型参数
+     */
     /**
      * postOrder方法。
      *      * @param action ConsumerILeaf类型参数
@@ -94,10 +121,18 @@ public class Tree {
      * levelOrder方法。
      *      * @param action ConsumerILeaf类型参数
      */
+    /**
+     * levelOrder方法。
+     *      * @param action ConsumerILeaf类型参数
+     */
     public void levelOrder(Consumer<ILeaf> action) {
         bfs(action);
     }
 
+    /**
+     * levelOrder方法。
+     *      * @param action BiConsumerInteger,类型参数
+     */
     /**
      * levelOrder方法。
      *      * @param action BiConsumerInteger,类型参数
@@ -120,6 +155,10 @@ public class Tree {
      * traverseLeaves方法。
      *      * @param action ConsumerILeaf类型参数
      */
+    /**
+     * traverseLeaves方法。
+     *      * @param action ConsumerILeaf类型参数
+     */
     public void traverseLeaves(Consumer<ILeaf> action) {
         dfs(node -> {
             if (node.isLeaf()) {
@@ -135,10 +174,20 @@ public class Tree {
      *      * @param predicate PredicateILeaf类型参数
      * @return ILeaf类型返回值
      */
+    /**
+     * find方法。
+     *      * @param predicate PredicateILeaf类型参数
+     * @return ILeaf类型返回值
+     */
     public ILeaf find(Predicate<ILeaf> predicate) {
         return root.find(predicate);
     }
 
+    /**
+     * findByName方法。
+     *      * @param name String类型参数
+     * @return ILeaf类型返回值
+     */
     /**
      * findByName方法。
      *      * @param name String类型参数
@@ -153,10 +202,20 @@ public class Tree {
      *      * @param id String类型参数
      * @return ILeaf类型返回值
      */
+    /**
+     * findById方法。
+     *      * @param id String类型参数
+     * @return ILeaf类型返回值
+     */
     public ILeaf findById(String id) {
         return root.find(node -> Objects.equals(node.getId(), id));
     }
 
+    /**
+     * findAll方法。
+     *      * @param predicate PredicateILeaf类型参数
+     * @return List<ILeaf>类型返回值
+     */
     /**
      * findAll方法。
      *      * @param predicate PredicateILeaf类型参数
@@ -171,10 +230,20 @@ public class Tree {
      *      * @param name String类型参数
      * @return List<ILeaf>类型返回值
      */
+    /**
+     * findAllByName方法。
+     *      * @param name String类型参数
+     * @return List<ILeaf>类型返回值
+     */
     public List<ILeaf> findAllByName(String name) {
         return root.findAll(node -> Objects.equals(node.getName(), name));
     }
 
+    /**
+     * findAllPaths方法。
+     *      * @param predicate PredicateILeaf类型参数
+     * @return List<List<ILeaf>>类型返回值
+     */
     /**
      * findAllPaths方法。
      *      * @param predicate PredicateILeaf类型参数
@@ -206,10 +275,21 @@ public class Tree {
      *      * @param target ILeaf类型参数
      * @return List<ILeaf>类型返回值
      */
+    /**
+     * getPath方法。
+     *      * @param target ILeaf类型参数
+     * @return List<ILeaf>类型返回值
+     */
     public List<ILeaf> getPath(ILeaf target) {
         return target.getPathFromRoot();
     }
 
+    /**
+     * getLowestCommonAncestor方法。
+     *      * @param node1 ILeaf类型参数
+     * @param node2 ILeaf类型参数
+     * @return ILeaf类型返回值
+     */
     /**
      * getLowestCommonAncestor方法。
      *      * @param node1 ILeaf类型参数
@@ -239,6 +319,12 @@ public class Tree {
      * @param node2 ILeaf类型参数
      * @return int类型返回值
      */
+    /**
+     * getDistance方法。
+     *      * @param node1 ILeaf类型参数
+     * @param node2 ILeaf类型参数
+     * @return int类型返回值
+     */
     public int getDistance(ILeaf node1, ILeaf node2) {
         ILeaf lca = getLowestCommonAncestor(node1, node2);
         if (lca == null) {
@@ -253,10 +339,18 @@ public class Tree {
      * getNodeCount方法。
      * @return int类型返回值
      */
+    /**
+     * getNodeCount方法。
+     * @return int类型返回值
+     */
     public int getNodeCount() {
         return root.getSubtreeSize();
     }
 
+    /**
+     * getLeafCount方法。
+     * @return int类型返回值
+     */
     /**
      * getLeafCount方法。
      * @return int类型返回值
@@ -271,6 +365,10 @@ public class Tree {
      * getHeight方法。
      * @return int类型返回值
      */
+    /**
+     * getHeight方法。
+     * @return int类型返回值
+     */
     public int getHeight() {
         return root.getSubtreeHeight();
     }
@@ -279,10 +377,19 @@ public class Tree {
      * getDepth方法。
      * @return int类型返回值
      */
+    /**
+     * getDepth方法。
+     * @return int类型返回值
+     */
     public int getDepth() {
         return root.getDepth();
     }
 
+    /**
+     * getDepth方法。
+     *      * @param node ILeaf类型参数
+     * @return int类型返回值
+     */
     /**
      * getDepth方法。
      *      * @param node ILeaf类型参数
@@ -297,10 +404,19 @@ public class Tree {
      *      * @param node ILeaf类型参数
      * @return int类型返回值
      */
+    /**
+     * getDegree方法。
+     *      * @param node ILeaf类型参数
+     * @return int类型返回值
+     */
     public int getDegree(ILeaf node) {
         return node.getChildCount();
     }
 
+    /**
+     * getAverageDepth方法。
+     * @return double类型返回值
+     */
     /**
      * getAverageDepth方法。
      * @return double类型返回值
@@ -317,6 +433,10 @@ public class Tree {
 
     // ==================== 验证操作 ====================
 
+    /**
+     * isBinaryTree方法。
+     * @return boolean类型返回值
+     */
     /**
      * isBinaryTree方法。
      * @return boolean类型返回值
@@ -344,6 +464,10 @@ public class Tree {
         }
     }
 
+    /**
+     * isBalanced方法。
+     * @return boolean类型返回值
+     */
     /**
      * isBalanced方法。
      * @return boolean类型返回值
@@ -381,12 +505,20 @@ public class Tree {
      * toList方法。
      * @return List<ILeaf>类型返回值
      */
+    /**
+     * toList方法。
+     * @return List<ILeaf>类型返回值
+     */
     public List<ILeaf> toList() {
         List<ILeaf> result = new ArrayList<>();
         preOrder(result::add);
         return result;
     }
 
+    /**
+     * toMap方法。
+     * @return Map<String, ILeaf>类型返回值
+     */
     /**
      * toMap方法。
      * @return Map<String, ILeaf>类型返回值
@@ -402,12 +534,20 @@ public class Tree {
      *      * @param mapper FunctionILeaf,类型参数
      * @return <R> List<R>类型返回值
      */
+    /**
+     * map方法。
+     *      * @param mapper FunctionILeaf,类型参数
+     * @return <R> List<R>类型返回值
+     */
     public <R> List<R> map(Function<ILeaf, R> mapper) {
         return root.map(mapper);
     }
 
     // ==================== 打印操作 ====================
 
+    /**
+     * print方法。
+     */
     /**
      * print方法。
      */
@@ -419,10 +559,18 @@ public class Tree {
      * toTreeString方法。
      * @return String类型返回值
      */
+    /**
+     * toTreeString方法。
+     * @return String类型返回值
+     */
     public String toTreeString() {
         return root.toTreeString();
     }
 
+    /**
+     * toIndentString方法。
+     * @return String类型返回值
+     */
     /**
      * toIndentString方法。
      * @return String类型返回值
@@ -446,6 +594,10 @@ public class Tree {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

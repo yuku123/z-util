@@ -12,6 +12,9 @@ import com.zifang.util.monitor.thread.utility.TimeUtil;
 /**
  * ThreadPoolConfigUnit类。
  */
+/**
+ * ThreadPoolConfigUnit类。
+ */
 public class ThreadPoolConfigUnit {
 
     /**
@@ -64,6 +67,10 @@ public class ThreadPoolConfigUnit {
      * getPoolName方法。
      * @return String类型返回值
      */
+    /**
+     * getPoolName方法。
+     * @return String类型返回值
+     */
     public String getPoolName() {
         return poolName;
     }
@@ -72,6 +79,10 @@ public class ThreadPoolConfigUnit {
      * 设置线程池名称。
      *
      * @param poolName 线程池名称
+     */
+    /**
+     * setPoolName方法。
+     *      * @param poolName String类型参数
      */
     /**
      * setPoolName方法。
@@ -90,6 +101,10 @@ public class ThreadPoolConfigUnit {
      * getPoolSize方法。
      * @return int类型返回值
      */
+    /**
+     * getPoolSize方法。
+     * @return int类型返回值
+     */
     public int getPoolSize() {
         return poolSize;
     }
@@ -98,6 +113,10 @@ public class ThreadPoolConfigUnit {
      * 设置线程池大小。
      *
      * @param poolSize 线程池大小
+     */
+    /**
+     * setPoolSize方法。
+     *      * @param poolSize int类型参数
      */
     /**
      * setPoolSize方法。
@@ -116,6 +135,10 @@ public class ThreadPoolConfigUnit {
      * getComputeType方法。
      * @return byte类型返回值
      */
+    /**
+     * getComputeType方法。
+     * @return byte类型返回值
+     */
     public byte getComputeType() {
         return computeType;
     }
@@ -124,6 +147,10 @@ public class ThreadPoolConfigUnit {
      * 设置计算类型。
      *
      * @param computeType 计算类型（CPU密集型或IO密集型）
+     */
+    /**
+     * setComputeType方法。
+     *      * @param computeType byte类型参数
      */
     /**
      * setComputeType方法。
@@ -142,6 +169,10 @@ public class ThreadPoolConfigUnit {
      * getTaskType方法。
      * @return Class类型返回值
      */
+    /**
+     * getTaskType方法。
+     * @return Class类型返回值
+     */
     public Class getTaskType() {
         return taskType;
     }
@@ -150,6 +181,10 @@ public class ThreadPoolConfigUnit {
      * 设置任务类型。
      *
      * @param taskType 任务类型Class对象
+     */
+    /**
+     * setTaskType方法。
+     *      * @param taskType Class类型参数
      */
     /**
      * setTaskType方法。
@@ -168,6 +203,10 @@ public class ThreadPoolConfigUnit {
      * getThreadOvertimeThreshhold方法。
      * @return long类型返回值
      */
+    /**
+     * getThreadOvertimeThreshhold方法。
+     * @return long类型返回值
+     */
     public long getThreadOvertimeThreshhold() {
         return threadOvertimeThreshhold;
     }
@@ -176,6 +215,10 @@ public class ThreadPoolConfigUnit {
      * 设置线程超时阈值。
      *
      * @param threadOvertimeThreshhold 线程超时阈值（毫秒）
+     */
+    /**
+     * setThreadOvertimeThreshhold方法。
+     *      * @param threadOvertimeThreshhold long类型参数
      */
     /**
      * setThreadOvertimeThreshhold方法。
@@ -194,6 +237,10 @@ public class ThreadPoolConfigUnit {
      * getAlarmPolicy方法。
      * @return AlarmPolicy类型返回值
      */
+    /**
+     * getAlarmPolicy方法。
+     * @return AlarmPolicy类型返回值
+     */
     public AlarmPolicy getAlarmPolicy() {
         return alarmPolicy;
     }
@@ -202,6 +249,10 @@ public class ThreadPoolConfigUnit {
      * 获取告警服务。
      *
      * @return 告警服务对象
+     */
+    /**
+     * getAlarmService方法。
+     * @return AlarmService类型返回值
      */
     /**
      * getAlarmService方法。
@@ -220,6 +271,10 @@ public class ThreadPoolConfigUnit {
      * setAlarmPolicy方法。
      *      * @param alarmPolicy AlarmPolicy类型参数
      */
+    /**
+     * setAlarmPolicy方法。
+     *      * @param alarmPolicy AlarmPolicy类型参数
+     */
     public void setAlarmPolicy(AlarmPolicy alarmPolicy) {
         this.alarmPolicy = alarmPolicy;
     }
@@ -228,6 +283,10 @@ public class ThreadPoolConfigUnit {
      * 设置告警服务。
      *
      * @param alarmService 待设置告警服务。
+     */
+    /**
+     * setAlarmService方法。
+     *      * @param alarmService AlarmService类型参数
      */
     /**
      * setAlarmService方法。
@@ -246,6 +305,10 @@ public class ThreadPoolConfigUnit {
      * getMonitorInterval方法。
      * @return long类型返回值
      */
+    /**
+     * getMonitorInterval方法。
+     * @return long类型返回值
+     */
     public long getMonitorInterval() {
         return monitorInterval;
     }
@@ -254,6 +317,10 @@ public class ThreadPoolConfigUnit {
      * 设置监控间隔时间。
      *
      * @param monitorInterval 监控间隔时间（毫秒）
+     */
+    /**
+     * setMonitorInterval方法。
+     *      * @param monitorInterval long类型参数
      */
     /**
      * setMonitorInterval方法。
@@ -269,6 +336,10 @@ public class ThreadPoolConfigUnit {
      * @return 包含所有配置字段的字符串表示
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

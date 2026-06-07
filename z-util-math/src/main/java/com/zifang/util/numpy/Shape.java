@@ -8,9 +8,16 @@ import java.util.Arrays;
 /**
  * Shape类。
  */
+/**
+ * Shape类。
+ */
 public class Shape {
     private final int[] dimensions;
 
+    /**
+     * Shape方法。
+     *      * @param dimensions int...类型参数
+     */
     /**
      * Shape方法。
      *      * @param dimensions int...类型参数
@@ -23,6 +30,10 @@ public class Shape {
         }
     }
 
+    /**
+     * Shape方法。
+     *      * @param dimensions long...类型参数
+     */
     /**
      * Shape方法。
      *      * @param dimensions long...类型参数
@@ -42,6 +53,10 @@ public class Shape {
      * getDimensions方法。
      * @return int[]类型返回值
      */
+    /**
+     * getDimensions方法。
+     * @return int[]类型返回值
+     */
     public int[] getDimensions() {
         return Arrays.copyOf(dimensions, dimensions.length);
     }
@@ -50,10 +65,18 @@ public class Shape {
      * ndim方法。
      * @return int类型返回值
      */
+    /**
+     * ndim方法。
+     * @return int类型返回值
+     */
     public int ndim() {
         return dimensions.length;
     }
 
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     /**
      * size方法。
      * @return int类型返回值
@@ -71,6 +94,11 @@ public class Shape {
      *      * @param index int类型参数
      * @return int类型返回值
      */
+    /**
+     * get方法。
+     *      * @param index int类型参数
+     * @return int类型返回值
+     */
     public int get(int index) {
         if (index < 0 || index >= dimensions.length) {
             throw new IndexOutOfBoundsException("Dimension index out of bounds: " + index);
@@ -83,10 +111,19 @@ public class Shape {
      *      * @param newShape int...类型参数
      * @return Shape类型返回值
      */
+    /**
+     * reshape方法。
+     *      * @param newShape int...类型参数
+     * @return Shape类型返回值
+     */
     public Shape reshape(int... newShape) {
         return new Shape(newShape);
     }
 
+    /**
+     * transpose方法。
+     * @return Shape类型返回值
+     */
     /**
      * transpose方法。
      * @return Shape类型返回值
@@ -103,10 +140,18 @@ public class Shape {
      * isScalar方法。
      * @return boolean类型返回值
      */
+    /**
+     * isScalar方法。
+     * @return boolean类型返回值
+     */
     public boolean isScalar() {
         return dimensions.length == 0;
     }
 
+    /**
+     * isVector方法。
+     * @return boolean类型返回值
+     */
     /**
      * isVector方法。
      * @return boolean类型返回值
@@ -119,11 +164,19 @@ public class Shape {
      * isMatrix方法。
      * @return boolean类型返回值
      */
+    /**
+     * isMatrix方法。
+     * @return boolean类型返回值
+     */
     public boolean isMatrix() {
         return dimensions.length == 2;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -149,6 +202,11 @@ public class Shape {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -157,6 +215,10 @@ public class Shape {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

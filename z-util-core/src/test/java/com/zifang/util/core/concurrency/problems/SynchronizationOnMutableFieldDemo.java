@@ -7,6 +7,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * @author zifang Lee (oldratlee at gmail dot com)
  */
+/**
+ * SynchronizationOnMutableFieldDemo类。
+ */
 public class SynchronizationOnMutableFieldDemo {
     static final int ADD_COUNT = 10000;
 
@@ -16,6 +19,11 @@ public class SynchronizationOnMutableFieldDemo {
 
     private volatile List<Listener> listeners = new CopyOnWriteArrayList<Listener>();
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws Exception {
         SynchronizationOnMutableFieldDemo demo = new SynchronizationOnMutableFieldDemo();
 
@@ -37,6 +45,10 @@ public class SynchronizationOnMutableFieldDemo {
         }
     }
 
+    /**
+     * addListener方法。
+     *      * @param listener Listener类型参数
+     */
     public void addListener(Listener listener) {
         synchronized (listeners) {
             List<Listener> results = new ArrayList<Listener>(listeners);
@@ -51,6 +63,9 @@ public class SynchronizationOnMutableFieldDemo {
 
     private class ConcurrencyCheckTask implements Runnable {
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             System.out.println("ConcurrencyCheckTask started!");
             for (int i = 0; i < ADD_COUNT; ++i) {

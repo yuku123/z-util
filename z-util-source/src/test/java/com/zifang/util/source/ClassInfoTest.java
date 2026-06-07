@@ -13,9 +13,15 @@ import static org.junit.Assert.*;
 /**
  * ClassInfo 模型测试
  */
+/**
+ * ClassInfoTest类。
+ */
 public class ClassInfoTest {
 
     @Test
+    /**
+     * testBuilder方法。
+     */
     public void testBuilder() {
         ClassInfo classInfo = ClassInfo.build(
                 false,
@@ -36,6 +42,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testAppendField方法。
+     */
     public void testAppendField() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Test");
@@ -48,6 +57,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testAppendFields方法。
+     */
     public void testAppendFields() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Test");
@@ -61,6 +73,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testAppendMethod方法。
+     */
     public void testAppendMethod() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Test");
@@ -75,6 +90,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testGetName方法。
+     */
     public void testGetName() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setPackageName("com.example");
@@ -84,6 +102,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testSuperClass方法。
+     */
     public void testSuperClass() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Dog");
@@ -97,6 +118,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testInterfaces方法。
+     */
     public void testInterfaces() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Dog");
@@ -112,6 +136,9 @@ public class ClassInfoTest {
     }
 
     @Test(expected = RuntimeException.class)
+    /**
+     * testAppendFieldNullCheck方法。
+     */
     public void testAppendFieldNullCheck() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Test");
@@ -121,6 +148,9 @@ public class ClassInfoTest {
     }
 
     @Test(expected = RuntimeException.class)
+    /**
+     * testAppendMethodNullCheck方法。
+     */
     public void testAppendMethodNullCheck() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Test");
@@ -131,6 +161,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testInnerClasses方法。
+     */
     public void testInnerClasses() {
         ClassInfo outer = new ClassInfo();
         outer.setSimpleClassName("Outer");
@@ -146,6 +179,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testImports方法。
+     */
     public void testImports() {
         ClassInfo classInfo = new ClassInfo();
         List<String> imports = new ArrayList<>();
@@ -158,6 +194,9 @@ public class ClassInfoTest {
     }
 
     @Test
+    /**
+     * testAnnotations方法。
+     */
     public void testAnnotations() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Test");

@@ -7,15 +7,25 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * DigestThread类。
+ */
 public class DigestThread extends Thread {
 
     private String filename;
 
+    /**
+     * DigestThread方法。
+     *      * @param filename String类型参数
+     */
     public DigestThread(String filename) {
         this.filename = filename;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         try {
             FileInputStream in = new FileInputStream(filename);
@@ -37,6 +47,11 @@ public class DigestThread extends Thread {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         for (String filename : args) {
             Thread t = new DigestThread(filename);

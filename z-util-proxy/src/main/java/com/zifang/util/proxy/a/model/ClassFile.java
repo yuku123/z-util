@@ -18,6 +18,9 @@ import com.zifang.util.proxy.a.model.readtype.U4;
 /**
  * ClassFile类。
  */
+/**
+ * ClassFile类。
+ */
 public class ClassFile {
     /** 魔数，固定为0xCAFEBABE */
     public U4 magic;
@@ -61,6 +64,10 @@ public class ClassFile {
      * getClassName方法。
      * @return String类型返回值
      */
+    /**
+     * getClassName方法。
+     * @return String类型返回值
+     */
     public String getClassName() {
         if (poolInfo == null || poolInfo.getPoolList() == null || classIndex == null) {
             return null;
@@ -95,6 +102,10 @@ public class ClassFile {
      * getMethodCount方法。
      * @return int类型返回值
      */
+    /**
+     * getMethodCount方法。
+     * @return int类型返回值
+     */
     public int getMethodCount() {
         if (methodInfo == null) {
             return 0;
@@ -103,6 +114,10 @@ public class ClassFile {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -121,10 +136,18 @@ public class ClassFile {
      * getMagic方法。
      * @return U4类型返回值
      */
+    /**
+     * getMagic方法。
+     * @return U4类型返回值
+     */
     public U4 getMagic() {
         return magic;
     }
 
+    /**
+     * setMagic方法。
+     *      * @param magic U4类型参数
+     */
     /**
      * setMagic方法。
      *      * @param magic U4类型参数
@@ -137,10 +160,18 @@ public class ClassFile {
      * getMinorVersion方法。
      * @return U2类型返回值
      */
+    /**
+     * getMinorVersion方法。
+     * @return U2类型返回值
+     */
     public U2 getMinorVersion() {
         return minorVersion;
     }
 
+    /**
+     * setMinorVersion方法。
+     *      * @param minorVersion U2类型参数
+     */
     /**
      * setMinorVersion方法。
      *      * @param minorVersion U2类型参数
@@ -153,10 +184,18 @@ public class ClassFile {
      * getMajorVersion方法。
      * @return U2类型返回值
      */
+    /**
+     * getMajorVersion方法。
+     * @return U2类型返回值
+     */
     public U2 getMajorVersion() {
         return majorVersion;
     }
 
+    /**
+     * setMajorVersion方法。
+     *      * @param majorVersion U2类型参数
+     */
     /**
      * setMajorVersion方法。
      *      * @param majorVersion U2类型参数
@@ -169,10 +208,18 @@ public class ClassFile {
      * getConstantPoolSize方法。
      * @return U2类型返回值
      */
+    /**
+     * getConstantPoolSize方法。
+     * @return U2类型返回值
+     */
     public U2 getConstantPoolSize() {
         return constantPoolSize;
     }
 
+    /**
+     * setConstantPoolSize方法。
+     *      * @param constantPoolSize U2类型参数
+     */
     /**
      * setConstantPoolSize方法。
      *      * @param constantPoolSize U2类型参数
@@ -185,10 +232,18 @@ public class ClassFile {
      * getPoolInfo方法。
      * @return ConstantPoolInfo类型返回值
      */
+    /**
+     * getPoolInfo方法。
+     * @return ConstantPoolInfo类型返回值
+     */
     public ConstantPoolInfo getPoolInfo() {
         return poolInfo;
     }
 
+    /**
+     * setPoolInfo方法。
+     *      * @param poolInfo ConstantPoolInfo类型参数
+     */
     /**
      * setPoolInfo方法。
      *      * @param poolInfo ConstantPoolInfo类型参数
@@ -201,10 +256,18 @@ public class ClassFile {
      * getAccessFlag方法。
      * @return U2类型返回值
      */
+    /**
+     * getAccessFlag方法。
+     * @return U2类型返回值
+     */
     public U2 getAccessFlag() {
         return accessFlag;
     }
 
+    /**
+     * setAccessFlag方法。
+     *      * @param accessFlag U2类型参数
+     */
     /**
      * setAccessFlag方法。
      *      * @param accessFlag U2类型参数
@@ -217,10 +280,18 @@ public class ClassFile {
      * getClassIndex方法。
      * @return U2类型返回值
      */
+    /**
+     * getClassIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getClassIndex() {
         return classIndex;
     }
 
+    /**
+     * setClassIndex方法。
+     *      * @param classIndex U2类型参数
+     */
     /**
      * setClassIndex方法。
      *      * @param classIndex U2类型参数
@@ -233,10 +304,18 @@ public class ClassFile {
      * getSuperClassIndex方法。
      * @return U2类型返回值
      */
+    /**
+     * getSuperClassIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getSuperClassIndex() {
         return superClassIndex;
     }
 
+    /**
+     * setSuperClassIndex方法。
+     *      * @param superClassIndex U2类型参数
+     */
     /**
      * setSuperClassIndex方法。
      *      * @param superClassIndex U2类型参数
@@ -249,10 +328,18 @@ public class ClassFile {
      * getInterfaceIndex方法。
      * @return InterfaceIndex类型返回值
      */
+    /**
+     * getInterfaceIndex方法。
+     * @return InterfaceIndex类型返回值
+     */
     public InterfaceIndex getInterfaceIndex() {
         return interfaceIndex;
     }
 
+    /**
+     * setInterfaceIndex方法。
+     *      * @param interfaceIndex InterfaceIndex类型参数
+     */
     /**
      * setInterfaceIndex方法。
      *      * @param interfaceIndex InterfaceIndex类型参数
@@ -265,10 +352,18 @@ public class ClassFile {
      * getFieldInfo方法。
      * @return FieldTable类型返回值
      */
+    /**
+     * getFieldInfo方法。
+     * @return FieldTable类型返回值
+     */
     public FieldTable getFieldInfo() {
         return fieldInfo;
     }
 
+    /**
+     * setFieldInfo方法。
+     *      * @param fieldInfo FieldTable类型参数
+     */
     /**
      * setFieldInfo方法。
      *      * @param fieldInfo FieldTable类型参数
@@ -281,10 +376,18 @@ public class ClassFile {
      * getMethodInfo方法。
      * @return MethodTable类型返回值
      */
+    /**
+     * getMethodInfo方法。
+     * @return MethodTable类型返回值
+     */
     public MethodTable getMethodInfo() {
         return methodInfo;
     }
 
+    /**
+     * setMethodInfo方法。
+     *      * @param methodInfo MethodTable类型参数
+     */
     /**
      * setMethodInfo方法。
      *      * @param methodInfo MethodTable类型参数

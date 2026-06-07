@@ -10,11 +10,20 @@ import net.sf.cglib.proxy.Enhancer;
 /**
  * CglibProxyFactory类。
  */
+/**
+ * CglibProxyFactory类。
+ */
 public class CglibProxyFactory extends ProxyFactory {
     private static final long serialVersionUID = 1L;
 
     @Override
     @SuppressWarnings("unchecked")
+    /**
+     * proxy方法。
+     *      * @param target T类型参数
+     * @param aspect Aspect类型参数
+     * @return <T> T类型返回值
+     */
     /**
      * proxy方法。
      *      * @param target T类型参数

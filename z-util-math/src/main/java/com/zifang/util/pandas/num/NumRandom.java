@@ -9,6 +9,9 @@ import java.util.Random;
 /**
  * NumRandom类。
  */
+/**
+ * NumRandom类。
+ */
 public class NumRandom {
 
     private Random random;
@@ -20,6 +23,9 @@ public class NumRandom {
     /**
      * NumRandom方法。
      */
+    /**
+     * NumRandom方法。
+     */
     public NumRandom() {
         this.random = new Random();
     }
@@ -27,6 +33,10 @@ public class NumRandom {
     /**
      * 使用指定种子构造随机数生成器
      * @param seed 随机种子
+     */
+    /**
+     * NumRandom方法。
+     *      * @param seed long类型参数
      */
     /**
      * NumRandom方法。
@@ -45,6 +55,10 @@ public class NumRandom {
      * seed方法。
      *      * @param seed long类型参数
      */
+    /**
+     * seed方法。
+     *      * @param seed long类型参数
+     */
     public void seed(long seed) {
         this.seed = seed;
         this.random.setSeed(seed);
@@ -57,6 +71,11 @@ public class NumRandom {
      * @param shape 数组形状，如传入 3 或 3,4
      * @return 指定形状的随机数数组
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * rand方法。
+     *      * @param shape int...类型参数
+     * @return Num类型返回值
      */
     /**
      * rand方法。
@@ -87,6 +106,11 @@ public class NumRandom {
      * @param shape 数组形状
      * @return 指定形状的标准正态分布随机数数组
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * randn方法。
+     *      * @param shape int...类型参数
+     * @return Num类型返回值
      */
     /**
      * randn方法。
@@ -127,6 +151,13 @@ public class NumRandom {
      * @param shape int...类型参数
      * @return Num类型返回值
      */
+    /**
+     * randint方法。
+     *      * @param low int类型参数
+     * @param high int类型参数
+     * @param shape int...类型参数
+     * @return Num类型返回值
+     */
     public Num randint(int low, int high, int... shape) {
         if (shape.length == 0) {
             return new Num(new int[]{random.nextInt(high - low) + low});
@@ -156,6 +187,10 @@ public class NumRandom {
      * random方法。
      * @return double类型返回值
      */
+    /**
+     * random方法。
+     * @return double类型返回值
+     */
     public double random() {
         return random.nextDouble();
     }
@@ -169,6 +204,13 @@ public class NumRandom {
      * @param shape 数组形状
      * @return 指定形状的正态分布随机数数组
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * normal方法。
+     *      * @param loc double类型参数
+     * @param scale double类型参数
+     * @param shape int...类型参数
+     * @return Num类型返回值
      */
     /**
      * normal方法。
@@ -208,6 +250,11 @@ public class NumRandom {
      *      * @param shape int...类型参数
      * @return Num类型返回值
      */
+    /**
+     * normal方法。
+     *      * @param shape int...类型参数
+     * @return Num类型返回值
+     */
     public Num normal(int... shape) {
         return normal(0.0, 1.0, shape);
     }
@@ -219,6 +266,13 @@ public class NumRandom {
      * @param shape 数组形状
      * @return 指定形状的均匀分布随机数数组
      * @throws UnsupportedOperationException 维度超过 2 时抛出
+     */
+    /**
+     * uniform方法。
+     *      * @param low double类型参数
+     * @param high double类型参数
+     * @param shape int...类型参数
+     * @return Num类型返回值
      */
     /**
      * uniform方法。
@@ -258,6 +312,11 @@ public class NumRandom {
      *      * @param shape int...类型参数
      * @return Num类型返回值
      */
+    /**
+     * uniform方法。
+     *      * @param shape int...类型参数
+     * @return Num类型返回值
+     */
     public Num uniform(int... shape) {
         return uniform(0.0, 1.0, shape);
     }
@@ -267,6 +326,10 @@ public class NumRandom {
     /**
      * 随机打乱数组顺序，类似于 numpy.random.shuffle()
      * @param array 待打乱的数组（原地修改）
+     */
+    /**
+     * shuffle方法。
+     *      * @param array Num类型参数
      */
     /**
      * shuffle方法。
@@ -294,6 +357,11 @@ public class NumRandom {
      *      * @param n int类型参数
      * @return Num类型返回值
      */
+    /**
+     * permutation方法。
+     *      * @param n int类型参数
+     * @return Num类型返回值
+     */
     public Num permutation(int n) {
         double[] arr = new double[n];
         for (int i = 0; i < n; i++) {
@@ -314,6 +382,11 @@ public class NumRandom {
      *      * @param array Num类型参数
      * @return Num类型返回值
      */
+    /**
+     * permutation方法。
+     *      * @param array Num类型参数
+     * @return Num类型返回值
+     */
     public Num permutation(Num array) {
         Num result = new Num(array.data());
         shuffle(result);
@@ -328,6 +401,13 @@ public class NumRandom {
      * @param size 选择数量
      * @param replace 是否允许重复选择
      * @return 随机选择的数组
+     */
+    /**
+     * choice方法。
+     *      * @param array double[]类型参数
+     * @param size int类型参数
+     * @param replace boolean类型参数
+     * @return Num类型返回值
      */
     /**
      * choice方法。
@@ -358,6 +438,11 @@ public class NumRandom {
      *      * @param array double[]类型参数
      * @return double类型返回值
      */
+    /**
+     * choice方法。
+     *      * @param array double[]类型参数
+     * @return double类型返回值
+     */
     public double choice(double[] array) {
         return array[random.nextInt(array.length)];
     }
@@ -372,6 +457,10 @@ public class NumRandom {
      * getDefault方法。
      * @return static NumRandom类型返回值
      */
+    /**
+     * getDefault方法。
+     * @return static NumRandom类型返回值
+     */
     public static NumRandom getDefault() {
         return Nums.random;
     }
@@ -379,6 +468,11 @@ public class NumRandom {
     /**
      * 设置默认随机数生成器的种子
      * @param seed 随机种子
+     */
+    /**
+     * setSeed方法。
+     *      * @param seed long类型参数
+     * @return static void类型返回值
      */
     /**
      * setSeed方法。

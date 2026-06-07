@@ -19,6 +19,9 @@ import java.lang.management.ThreadMXBean;
 /**
  * ThreadMXBeanDemo类。
  */
+/**
+ * ThreadMXBeanDemo类。
+ */
 public class ThreadMXBeanDemo {
 
     /**
@@ -34,6 +37,10 @@ public class ThreadMXBeanDemo {
      * </ul>
      *
      * @return 远程JVM的ThreadMXBean实例，连接失败返回null
+     */
+    /**
+     * getRemoteThreadMXBean方法。
+     * @return static ThreadMXBean类型返回值
      */
     /**
      * getRemoteThreadMXBean方法。
@@ -70,6 +77,10 @@ public class ThreadMXBeanDemo {
      * getLocalThreadMXBean方法。
      * @return static ThreadMXBean类型返回值
      */
+    /**
+     * getLocalThreadMXBean方法。
+     * @return static ThreadMXBean类型返回值
+     */
     public static ThreadMXBean getLocalThreadMXBean() {
         return ManagementFactory.getThreadMXBean();
     }
@@ -78,6 +89,11 @@ public class ThreadMXBeanDemo {
      * 主方法，演示获取JVM线程信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

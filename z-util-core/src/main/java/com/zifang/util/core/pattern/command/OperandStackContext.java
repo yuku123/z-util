@@ -10,6 +10,9 @@ import java.util.*;
 /**
  * OperandStackContext类。
  */
+/**
+ * OperandStackContext类。
+ */
 public class OperandStackContext extends CommandContext {
 
     private final OperandStack operandStack;
@@ -17,10 +20,17 @@ public class OperandStackContext extends CommandContext {
     /**
      * OperandStackContext方法。
      */
+    /**
+     * OperandStackContext方法。
+     */
     public OperandStackContext() {
         this.operandStack = new OperandStack();
     }
 
+    /**
+     * OperandStackContext方法。
+     *      * @param initialData MapString,类型参数
+     */
     /**
      * OperandStackContext方法。
      *      * @param initialData MapString,类型参数
@@ -34,10 +44,19 @@ public class OperandStackContext extends CommandContext {
      * OperandStackContext方法。
      *      * @param stackSize int类型参数
      */
+    /**
+     * OperandStackContext方法。
+     *      * @param stackSize int类型参数
+     */
     public OperandStackContext(int stackSize) {
         this.operandStack = new OperandStack(stackSize);
     }
 
+    /**
+     * OperandStackContext方法。
+     *      * @param initialData MapString,类型参数
+     * @param stackSize int类型参数
+     */
     /**
      * OperandStackContext方法。
      *      * @param initialData MapString,类型参数
@@ -55,12 +74,20 @@ public class OperandStackContext extends CommandContext {
      * getOperandStack方法。
      * @return OperandStack类型返回值
      */
+    /**
+     * getOperandStack方法。
+     * @return OperandStack类型返回值
+     */
     public OperandStack getOperandStack() {
         return operandStack;
     }
 
     /**
      * 快捷方法：入栈
+     */
+    /**
+     * push方法。
+     *      * @param value Object类型参数
      */
     /**
      * push方法。
@@ -78,6 +105,10 @@ public class OperandStackContext extends CommandContext {
      * pop方法。
      * @return <T> T类型返回值
      */
+    /**
+     * pop方法。
+     * @return <T> T类型返回值
+     */
     public <T> T pop() {
         return (T) operandStack.pop();
     }
@@ -90,11 +121,19 @@ public class OperandStackContext extends CommandContext {
      * peek方法。
      * @return <T> T类型返回值
      */
+    /**
+     * peek方法。
+     * @return <T> T类型返回值
+     */
     public <T> T peek() {
         return (T) operandStack.peek();
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

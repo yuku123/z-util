@@ -8,5 +8,8 @@ package com.zifang.util.proxy.a.model.field;
 /**
  * FieldAttribute接口。
  */
+/**
+ * FieldAttribute接口。
+ */
 public interface FieldAttribute {
 }

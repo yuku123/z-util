@@ -15,6 +15,9 @@ import java.net.SocketAddress;
 /**
  * NetServer接口。
  */
+/**
+ * NetServer接口。
+ */
 public interface NetServer extends Closeable {
 
     /**

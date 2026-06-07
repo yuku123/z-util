@@ -6,16 +6,26 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * ReturnDigest类。
+ */
 public class ReturnDigest extends Thread {
 
     private String filename;
     private byte[] digest;
 
+    /**
+     * ReturnDigest方法。
+     *      * @param filename String类型参数
+     */
     public ReturnDigest(String filename) {
         this.filename = filename;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         try {
             FileInputStream in = new FileInputStream(filename);
@@ -32,6 +42,10 @@ public class ReturnDigest extends Thread {
         }
     }
 
+    /**
+     * getDigest方法。
+     * @return byte[]类型返回值
+     */
     public byte[] getDigest() {
         return digest;
     }

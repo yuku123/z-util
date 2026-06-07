@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug19Test类。
+ */
 public class JsonDebug19Test {
 
     @Test
+    /**
+     * testTokenStreamForJsonObject方法。
+     */
     public void testTokenStreamForJsonObject() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         DynamicLexer lexer = new DynamicLexer();
@@ -26,6 +32,9 @@ public class JsonDebug19Test {
     }
 
     @Test
+    /**
+     * testTraceObjectRule方法。
+     */
     public void testTraceObjectRule() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -67,6 +76,9 @@ public class JsonDebug19Test {
     }
 
     @Test
+    /**
+     * testParsePairDirectly方法。
+     */
     public void testParsePairDirectly() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -90,6 +102,9 @@ public class JsonDebug19Test {
     }
 
     @Test
+    /**
+     * testParseValueOnObject方法。
+     */
     public void testParseValueOnObject() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");

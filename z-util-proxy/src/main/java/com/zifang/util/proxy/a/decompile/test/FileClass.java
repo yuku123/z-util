@@ -14,9 +14,15 @@ import java.util.List;
 /**
  * FileClass类。
  */
+/**
+ * FileClass类。
+ */
 public class FileClass {
 
     //	private List<Map<Integer, List<Map<String, String>>>> niubi;
+    /**
+     * FileClass方法。
+     */
     /**
      * FileClass方法。
      */
@@ -24,6 +30,11 @@ public class FileClass {
 
     }
 
+    /**
+     * FileClass方法。
+     *      * @param obj JFrame类型参数
+     * @param jFrame JFrame类型参数
+     */
     /**
      * FileClass方法。
      *      * @param obj JFrame类型参数
@@ -37,6 +48,11 @@ public class FileClass {
 
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     /**
      * main方法。
      *      * @param args String[]类型参数

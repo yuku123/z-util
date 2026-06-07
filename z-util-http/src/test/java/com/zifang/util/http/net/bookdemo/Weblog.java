@@ -4,8 +4,16 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ * Weblog类。
+ */
 public class Weblog {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try (FileInputStream fin = new FileInputStream(args[0]);
              Reader in = new InputStreamReader(fin);

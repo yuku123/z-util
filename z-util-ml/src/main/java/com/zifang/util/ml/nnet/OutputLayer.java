@@ -7,5 +7,8 @@ package com.zifang.util.ml.nnet;
 /**
  * OutputLayer类。
  */
+/**
+ * OutputLayer类。
+ */
 public class OutputLayer {
 }

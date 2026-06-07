@@ -32,6 +32,12 @@ class DESUtils {
      * @param key String类型参数
      * @return static String类型返回值
      */
+    /**
+     * encrypt方法。
+     *      * @param data String类型参数
+     * @param key String类型参数
+     * @return static String类型返回值
+     */
     protected static String encrypt(String data, String key) {
         String encryptedData = null;
         try {
@@ -62,6 +68,12 @@ class DESUtils {
      * @date : 2016年5月20日 下午5:52:23
      */
     @SuppressWarnings("restriction")
+    /**
+     * decrypt方法。
+     *      * @param cryptData String类型参数
+     * @param key String类型参数
+     * @return static String类型返回值
+     */
     /**
      * decrypt方法。
      *      * @param cryptData String类型参数

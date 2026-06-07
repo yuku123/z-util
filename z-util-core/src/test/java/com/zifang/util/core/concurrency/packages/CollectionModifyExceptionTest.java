@@ -4,8 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * CollectionModifyExceptionTest类。
+ */
 public class CollectionModifyExceptionTest {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Collection<User> users = new ArrayList<User>();
 

@@ -24,6 +24,9 @@ import java.util.Set;
 /**
  * MemoryManagerMXBeanDemo类。
  */
+/**
+ * MemoryManagerMXBeanDemo类。
+ */
 public class MemoryManagerMXBeanDemo {
 
 
@@ -38,6 +41,10 @@ public class MemoryManagerMXBeanDemo {
      *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
      *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
      * </ul>
+     */
+    /**
+     * getRemoteMemoryManagerMXBean方法。
+     * @return static void类型返回值
      */
     /**
      * getRemoteMemoryManagerMXBean方法。
@@ -87,6 +94,10 @@ public class MemoryManagerMXBeanDemo {
      * getLocalMemoryManagerMXBean方法。
      * @return static void类型返回值
      */
+    /**
+     * getLocalMemoryManagerMXBean方法。
+     * @return static void类型返回值
+     */
     public static void getLocalMemoryManagerMXBean() {
         List<MemoryManagerMXBean> list = ManagementFactory.getMemoryManagerMXBeans();
         if (list != null) {
@@ -104,6 +115,11 @@ public class MemoryManagerMXBeanDemo {
      * 主方法，演示获取JVM内存管理信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

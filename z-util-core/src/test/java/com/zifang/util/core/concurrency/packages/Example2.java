@@ -3,14 +3,25 @@ package com.zifang.util.core.concurrency.packages;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.SynchronousQueue;
 
+/**
+ * Example2类。
+ */
 public class Example2 {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         final SynchronousQueue<String> queue = new SynchronousQueue<String>();
         final Semaphore semaphore = new Semaphore(1);
         for (int i = 0; i < 10; i++) {
             new Thread(new Runnable() {
                 @Override
+    /**
+     * run方法。
+     */
                 public void run() {
                     while (true) {
                         try {
@@ -40,6 +51,11 @@ public class Example2 {
 }
 
 class TestDo {
+    /**
+     * doSame方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
+     */
     public static String doSame(String input) {
         try {
             Thread.sleep(1000);

@@ -12,6 +12,9 @@ package com.zifang.util.source.generator.diff;
 /**
  * FieldDiffer类。
  */
+/**
+ * FieldDiffer类。
+ */
 public class FieldDiffer {
 
 }

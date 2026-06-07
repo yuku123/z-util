@@ -8,6 +8,9 @@ import com.zifang.util.db.transation.TranslationManager;
 /**
  * DataSourceContext类。
  */
+/**
+ * DataSourceContext类。
+ */
 public class DataSourceContext {
 
     private DatasourceFactory datasourceFactory;
@@ -21,6 +24,11 @@ public class DataSourceContext {
      *
      * @param datasourceFactory 数据源工厂实例
      * @return 当前实例，支持链式调用
+     */
+    /**
+     * dataSourceFactory方法。
+     *      * @param datasourceFactory DatasourceFactory类型参数
+     * @return DataSourceContext类型返回值
      */
     /**
      * dataSourceFactory方法。
@@ -43,6 +51,11 @@ public class DataSourceContext {
      *      * @param scanPackageName String类型参数
      * @return DataSourceContext类型返回值
      */
+    /**
+     * scanPackage方法。
+     *      * @param scanPackageName String类型参数
+     * @return DataSourceContext类型返回值
+     */
     public DataSourceContext scanPackage(String scanPackageName) {
         this.scanPackageName = scanPackageName;
         return this;
@@ -53,6 +66,11 @@ public class DataSourceContext {
      *
      * @param transationManager 事务管理器实例
      * @return 当前实例，支持链式调用
+     */
+    /**
+     * transationManager方法。
+     *      * @param transationManager TranslationManager类型参数
+     * @return DataSourceContext类型返回值
      */
     /**
      * transationManager方法。
@@ -73,6 +91,10 @@ public class DataSourceContext {
      * getDatasourceFactory方法。
      * @return DatasourceFactory类型返回值
      */
+    /**
+     * getDatasourceFactory方法。
+     * @return DatasourceFactory类型返回值
+     */
     public DatasourceFactory getDatasourceFactory() {
         return datasourceFactory;
     }
@@ -81,6 +103,10 @@ public class DataSourceContext {
      * 设置数据源工厂
      *
      * @param datasourceFactory 数据源工厂
+     */
+    /**
+     * setDatasourceFactory方法。
+     *      * @param datasourceFactory DatasourceFactory类型参数
      */
     /**
      * setDatasourceFactory方法。
@@ -99,6 +125,10 @@ public class DataSourceContext {
      * getScanPackageName方法。
      * @return String类型返回值
      */
+    /**
+     * getScanPackageName方法。
+     * @return String类型返回值
+     */
     public String getScanPackageName() {
         return scanPackageName;
     }
@@ -107,6 +137,10 @@ public class DataSourceContext {
      * 设置扫描包名
      *
      * @param scanPackageName 扫描包名
+     */
+    /**
+     * setScanPackageName方法。
+     *      * @param scanPackageName String类型参数
      */
     /**
      * setScanPackageName方法。
@@ -125,6 +159,10 @@ public class DataSourceContext {
      * getTransactionManager方法。
      * @return TranslationManager类型返回值
      */
+    /**
+     * getTransactionManager方法。
+     * @return TranslationManager类型返回值
+     */
     public TranslationManager getTransactionManager() {
         return transactionManager;
     }
@@ -133,6 +171,10 @@ public class DataSourceContext {
      * 设置事务管理器
      *
      * @param transactionManager 事务管理器
+     */
+    /**
+     * setTransactionManager方法。
+     *      * @param transactionManager TranslationManager类型参数
      */
     /**
      * setTransactionManager方法。
@@ -147,11 +189,20 @@ public class DataSourceContext {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "DataSourceContext{datasourceFactory=" + datasourceFactory + ", scanPackageName=" + scanPackageName + ", transactionManager=" + transactionManager + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -167,6 +218,10 @@ public class DataSourceContext {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

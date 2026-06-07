@@ -22,11 +22,17 @@ class SenderThread extends Thread {
         this.socket.connect(server, port);
     }
 
+    /**
+     * halt方法。
+     */
     public void halt() {
         this.stopped = true;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         try {
             BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));

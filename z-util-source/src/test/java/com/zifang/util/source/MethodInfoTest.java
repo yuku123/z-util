@@ -12,9 +12,15 @@ import static org.junit.Assert.*;
 /**
  * MethodInfo 模型测试
  */
+/**
+ * MethodInfoTest类。
+ */
 public class MethodInfoTest {
 
     @Test
+    /**
+     * testBasicSetters方法。
+     */
     public void testBasicSetters() {
         MethodInfo methodInfo = new MethodInfo();
         methodInfo.setMethodName("getName");
@@ -27,6 +33,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testSignature方法。
+     */
     public void testSignature() {
         MethodInfo methodInfo = new MethodInfo();
         methodInfo.setReturnType("String");
@@ -36,6 +45,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testSignatureWithParameters方法。
+     */
     public void testSignatureWithParameters() {
         MethodInfo methodInfo = new MethodInfo();
         methodInfo.setReturnType("String");
@@ -52,6 +64,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testFullSignature方法。
+     */
     public void testFullSignature() {
         MethodInfo methodInfo = new MethodInfo();
         methodInfo.setReturnType("String");
@@ -61,6 +76,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         MethodInfo m1 = new MethodInfo();
         m1.setMethodName("getName");
@@ -79,6 +97,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testEqualsWithParameters方法。
+     */
     public void testEqualsWithParameters() {
         MethodInfo m1 = new MethodInfo();
         m1.setMethodName("getName");
@@ -106,6 +127,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentParameters方法。
+     */
     public void testEqualsWithDifferentParameters() {
         MethodInfo m1 = new MethodInfo();
         m1.setMethodName("getName");
@@ -133,6 +157,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testStatements方法。
+     */
     public void testStatements() {
         MethodInfo methodInfo = new MethodInfo();
         List<String> statements = new ArrayList<>();
@@ -145,6 +172,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testAnnotations方法。
+     */
     public void testAnnotations() {
         MethodInfo methodInfo = new MethodInfo();
         com.zifang.util.source.generator.info.AnnotationInfo annot = 
@@ -156,6 +186,9 @@ public class MethodInfoTest {
     }
 
     @Test
+    /**
+     * testGetParameterStrWithEmptyParams方法。
+     */
     public void testGetParameterStrWithEmptyParams() {
         MethodInfo methodInfo = new MethodInfo();
         methodInfo.setReturnType("String");

@@ -12,9 +12,15 @@ import static org.junit.Assert.*;
 /**
  * 链执行模式测试
  */
+/**
+ * ChainTest类。
+ */
 public class ChainTest {
 
     @Test
+    /**
+     * testChainContextBasic方法。
+     */
     public void testChainContextBasic() {
         ChainContext<String, Object> context = ChainContext.create();
         context.put("key1", "value1");
@@ -27,6 +33,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainContextWithInitialData方法。
+     */
     public void testChainContextWithInitialData() {
         Map<String, Object> initial = new HashMap<>();
         initial.put("name", "test");
@@ -38,6 +47,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainContextTypedGet方法。
+     */
     public void testChainContextTypedGet() {
         ChainContext<String, Object> context = ChainContext.create();
         context.put("stringVal", "hello");
@@ -48,6 +60,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testProcessorFromConsumer方法。
+     */
     public void testProcessorFromConsumer() {
         AtomicInteger counter = new AtomicInteger(0);
         Processor<ChainContext<String, Object>> processor = Processor.fromConsumer(ctx -> {
@@ -64,6 +79,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testProcessorWhen方法。
+     */
     public void testProcessorWhen() {
         Processor<ChainContext<String, Object>> processor = Processor.when(
                 ctx -> ctx.containsKey("condition"),
@@ -84,6 +102,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testProcessorAndThen方法。
+     */
     public void testProcessorAndThen() {
         AtomicInteger counter = new AtomicInteger(0);
 
@@ -105,6 +126,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testSimpleChain方法。
+     */
     public void testSimpleChain() {
         AtomicInteger counter = new AtomicInteger(0);
         Chain<ChainContext<String, Object>> chain = Chain.<ChainContext<String, Object>>builder()
@@ -121,6 +145,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testSimpleChainContinue方法。
+     */
     public void testSimpleChainContinue() {
         AtomicInteger counter = new AtomicInteger(0);
         Chain<ChainContext<String, Object>> chain = Chain.<ChainContext<String, Object>>builder()
@@ -136,6 +163,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainBuilderBasic方法。
+     */
     public void testChainBuilderBasic() {
         AtomicInteger counter = new AtomicInteger(0);
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create("testChain")
@@ -150,6 +180,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainBuilderWithCondition方法。
+     */
     public void testChainBuilderWithCondition() {
         AtomicInteger counter = new AtomicInteger(0);
         AtomicBoolean conditionMet = new AtomicBoolean(false);
@@ -173,6 +206,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainBuilderWithFilter方法。
+     */
     public void testChainBuilderWithFilter() {
         AtomicInteger beforeCounter = new AtomicInteger(0);
         AtomicInteger afterCounter = new AtomicInteger(0);
@@ -198,6 +234,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainBuilderBranch方法。
+     */
     public void testChainBuilderBranch() {
         AtomicBoolean isAdmin = new AtomicBoolean(false);
         AtomicInteger adminCounter = new AtomicInteger(0);
@@ -230,6 +269,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainExecutor方法。
+     */
     public void testChainExecutor() {
         ChainExecutor<ChainContext<String, Object>> executor = new ChainExecutor<>();
 
@@ -249,6 +291,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainExecutorWithListener方法。
+     */
     public void testChainExecutorWithListener() {
         AtomicBoolean beforeCalled = new AtomicBoolean(false);
         AtomicBoolean afterCalled = new AtomicBoolean(false);
@@ -256,11 +301,23 @@ public class ChainTest {
         ChainExecutor<ChainContext<String, Object>> executor = new ChainExecutor<>();
         executor.addListener(new ChainExecutor.ChainListenerAdapter<ChainContext<String, Object>>() {
             @Override
+    /**
+     * onBeforeExecution方法。
+     *      * @param chain ChainChainContextString,类型参数
+     * @param context ChainContextString,类型参数
+     */
             public void onBeforeExecution(Chain<ChainContext<String, Object>> chain, ChainContext<String, Object> context) {
                 beforeCalled.set(true);
             }
 
             @Override
+    /**
+     * onAfterExecution方法。
+     *      * @param chain ChainChainContextString,类型参数
+     * @param context ChainContextString,类型参数
+     * @param result ProcessorResult类型参数
+     * @param duration long类型参数
+     */
             public void onAfterExecution(Chain<ChainContext<String, Object>> chain,
                                          ChainContext<String, Object> context,
                                          ProcessorResult result, long duration) {
@@ -278,6 +335,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainExecutorMetrics方法。
+     */
     public void testChainExecutorMetrics() {
         ChainExecutor.MetricsChainListener<ChainContext<String, Object>> metrics =
                 new ChainExecutor.MetricsChainListener<>();
@@ -299,6 +359,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testProcessorResult方法。
+     */
     public void testProcessorResult() {
         assertTrue(ProcessorResult.CONTINUE.shouldContinue());
         assertTrue(ProcessorResult.SKIP.shouldContinue());
@@ -317,6 +380,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testFilterProcessor方法。
+     */
     public void testFilterProcessor() {
         AtomicInteger before = new AtomicInteger(0);
         AtomicInteger after = new AtomicInteger(0);
@@ -341,6 +407,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainAppend方法。
+     */
     public void testChainAppend() {
         AtomicInteger counter1 = new AtomicInteger(0);
         AtomicInteger counter2 = new AtomicInteger(0);
@@ -362,6 +431,9 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainExecuteWithResult方法。
+     */
     public void testChainExecuteWithResult() {
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create()
                 .add(ctx -> {
@@ -380,12 +452,18 @@ public class ChainTest {
     }
 
     @Test
+    /**
+     * testChainToString方法。
+     */
     public void testChainToString() {
         Chain<ChainContext<String, Object>> chain = Chain.named("myChain");
         assertTrue(chain.toString().contains("myChain"));
     }
 
     @Test
+    /**
+     * testChainIsEmpty方法。
+     */
     public void testChainIsEmpty() {
         Chain<ChainContext<String, Object>> emptyChain = Chain.empty();
         assertTrue(emptyChain.isEmpty());
@@ -399,12 +477,18 @@ public class ChainTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testChainExecutorThrowsOnMissingChain方法。
+     */
     public void testChainExecutorThrowsOnMissingChain() {
         ChainExecutor<ChainContext<String, Object>> executor = new ChainExecutor<>();
         executor.execute("nonExistent", ChainContext.create());
     }
 
     @Test
+    /**
+     * testNamedProcessor方法。
+     */
     public void testNamedProcessor() {
         AtomicBoolean executed = new AtomicBoolean(false);
         NamedProcessor<ChainContext<String, Object>> named = new NamedProcessor<>(

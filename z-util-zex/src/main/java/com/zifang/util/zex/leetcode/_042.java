@@ -9,7 +9,15 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _042类。
+ */
 public class _042 {
+    /**
+     * trap方法。
+     *      * @param height int[]类型参数
+     * @return int类型返回值
+     */
     public int trap(int[] height) {
 
         int base = 0;
@@ -66,6 +74,11 @@ public class _042 {
         return score;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _042().trap(new int[]{5,4,1,2});
     }

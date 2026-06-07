@@ -11,6 +11,9 @@ import java.util.List;
 /**
  * ParamsConvertor类。
  */
+/**
+ * ParamsConvertor类。
+ */
 public class ParamsConvertor {
 
     /**
@@ -18,6 +21,11 @@ public class ParamsConvertor {
      *
      * @param str
      * @return
+     */
+    /**
+     * paramsConvertorFieldType方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * paramsConvertorFieldType方法。
@@ -95,6 +103,12 @@ public class ParamsConvertor {
      * @param str String类型参数
      * @return static String类型返回值
      */
+    /**
+     * paramsConvertorFieldTypeWithGeneric方法。
+     *      * @param signature String类型参数
+     * @param str String类型参数
+     * @return static String类型返回值
+     */
     public static String paramsConvertorFieldTypeWithGeneric(String signature, String str) {
         String inner = signature.substring(signature.indexOf("<") + 1, signature.indexOf(">"));
         List<String> params = new ArrayList<>();
@@ -115,6 +129,11 @@ public class ParamsConvertor {
      *
      * @param str descriptor中的参数部分，如 "ILjava/lang/String;)V" -> "ILjava/lang/String;"
      * @return Java 参数列表字符串
+     */
+    /**
+     * paramsConvertorMethodParams方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * paramsConvertorMethodParams方法。
@@ -164,6 +183,11 @@ public class ParamsConvertor {
      *
      * @param str
      * @return
+     */
+    /**
+     * paramsConvertorMethodReturnType方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * paramsConvertorMethodReturnType方法。

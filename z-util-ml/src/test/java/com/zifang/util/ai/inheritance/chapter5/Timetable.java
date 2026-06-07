@@ -23,6 +23,9 @@ import java.util.HashMap;
  * created by createClasses, and figures out how many hard constraints have been
  * violated.
  */
+/**
+ * Timetable类。
+ */
 public class Timetable {
     private final HashMap<Integer, Room> rooms;
     private final HashMap<Integer, Professor> professors;
@@ -35,6 +38,9 @@ public class Timetable {
 
     /**
      * Initialize new Timetable
+     */
+    /**
+     * Timetable方法。
      */
     public Timetable() {
         this.rooms = new HashMap<Integer, Room>();
@@ -55,6 +61,10 @@ public class Timetable {
      * you'll see it in action in Chapter 6.
      *
      * @param cloneable
+     */
+    /**
+     * Timetable方法。
+     *      * @param cloneable Timetable类型参数
      */
     public Timetable(Timetable cloneable) {
         this.rooms = cloneable.getRooms();
@@ -87,6 +97,12 @@ public class Timetable {
      * @param roomName
      * @param capacity
      */
+    /**
+     * addRoom方法。
+     *      * @param roomId int类型参数
+     * @param roomName String类型参数
+     * @param capacity int类型参数
+     */
     public void addRoom(int roomId, String roomName, int capacity) {
         this.rooms.put(roomId, new Room(roomId, roomName, capacity));
     }
@@ -96,6 +112,11 @@ public class Timetable {
      *
      * @param professorId
      * @param professorName
+     */
+    /**
+     * addProfessor方法。
+     *      * @param professorId int类型参数
+     * @param professorName String类型参数
      */
     public void addProfessor(int professorId, String professorName) {
         this.professors.put(professorId, new Professor(professorId, professorName));
@@ -109,6 +130,13 @@ public class Timetable {
      * @param module
      * @param professorIds
      */
+    /**
+     * addModule方法。
+     *      * @param moduleId int类型参数
+     * @param moduleCode String类型参数
+     * @param module String类型参数
+     * @param professorIds int[]类型参数
+     */
     public void addModule(int moduleId, String moduleCode, String module, int[] professorIds) {
         this.modules.put(moduleId, new Module(moduleId, moduleCode, module, professorIds));
     }
@@ -120,6 +148,12 @@ public class Timetable {
      * @param groupSize
      * @param moduleIds
      */
+    /**
+     * addGroup方法。
+     *      * @param groupId int类型参数
+     * @param groupSize int类型参数
+     * @param moduleIds int[]类型参数
+     */
     public void addGroup(int groupId, int groupSize, int[] moduleIds) {
         this.groups.put(groupId, new Group(groupId, groupSize, moduleIds));
         this.numClasses = 0;
@@ -130,6 +164,11 @@ public class Timetable {
      *
      * @param timeslotId
      * @param timeslot
+     */
+    /**
+     * addTimeslot方法。
+     *      * @param timeslotId int类型参数
+     * @param timeslot String类型参数
      */
     public void addTimeslot(int timeslotId, String timeslot) {
         this.timeslots.put(timeslotId, new Timeslot(timeslotId, timeslot));
@@ -148,6 +187,10 @@ public class Timetable {
      * Just loop through the chromosome and create Class objects and store them.
      *
      * @param individual
+     */
+    /**
+     * createClasses方法。
+     *      * @param individual Individual类型参数
      */
     public void createClasses(Individual individual) {
         // Init classes
@@ -188,6 +231,11 @@ public class Timetable {
      * @param roomId
      * @return room
      */
+    /**
+     * getRoom方法。
+     *      * @param roomId int类型参数
+     * @return Room类型返回值
+     */
     public Room getRoom(int roomId) {
         if (!this.rooms.containsKey(roomId)) {
             System.out.println("Rooms doesn't contain key " + roomId);
@@ -195,6 +243,10 @@ public class Timetable {
         return this.rooms.get(roomId);
     }
 
+    /**
+     * getRooms方法。
+     * @return HashMap<Integer, Room>类型返回值
+     */
     public HashMap<Integer, Room> getRooms() {
         return this.rooms;
     }
@@ -203,6 +255,10 @@ public class Timetable {
      * Get random room
      *
      * @return room
+     */
+    /**
+     * getRandomRoom方法。
+     * @return Room类型返回值
      */
     public Room getRandomRoom() {
         Object[] roomsArray = this.rooms.values().toArray();
@@ -216,6 +272,11 @@ public class Timetable {
      * @param professorId
      * @return professor
      */
+    /**
+     * getProfessor方法。
+     *      * @param professorId int类型参数
+     * @return Professor类型返回值
+     */
     public Professor getProfessor(int professorId) {
         return this.professors.get(professorId);
     }
@@ -226,6 +287,11 @@ public class Timetable {
      * @param moduleId
      * @return module
      */
+    /**
+     * getModule方法。
+     *      * @param moduleId int类型参数
+     * @return Module类型返回值
+     */
     public Module getModule(int moduleId) {
         return this.modules.get(moduleId);
     }
@@ -235,6 +301,11 @@ public class Timetable {
      *
      * @param groupId
      * @return moduleId array
+     */
+    /**
+     * getGroupModules方法。
+     *      * @param groupId int类型参数
+     * @return int[]类型返回值
      */
     public int[] getGroupModules(int groupId) {
         Group group = this.groups.get(groupId);
@@ -247,6 +318,11 @@ public class Timetable {
      * @param groupId
      * @return group
      */
+    /**
+     * getGroup方法。
+     *      * @param groupId int类型参数
+     * @return Group类型返回值
+     */
     public Group getGroup(int groupId) {
         return this.groups.get(groupId);
     }
@@ -255,6 +331,10 @@ public class Timetable {
      * Get all student groups
      *
      * @return array of groups
+     */
+    /**
+     * getGroupsAsArray方法。
+     * @return Group[]类型返回值
      */
     public Group[] getGroupsAsArray() {
         return this.groups.values().toArray(new Group[this.groups.size()]);
@@ -266,6 +346,11 @@ public class Timetable {
      * @param timeslotId
      * @return timeslot
      */
+    /**
+     * getTimeslot方法。
+     *      * @param timeslotId int类型参数
+     * @return Timeslot类型返回值
+     */
     public Timeslot getTimeslot(int timeslotId) {
         return this.timeslots.get(timeslotId);
     }
@@ -274,6 +359,10 @@ public class Timetable {
      * Get random timeslotId
      *
      * @return timeslot
+     */
+    /**
+     * getRandomTimeslot方法。
+     * @return Timeslot类型返回值
      */
     public Timeslot getRandomTimeslot() {
         Object[] timeslotArray = this.timeslots.values().toArray();
@@ -286,6 +375,10 @@ public class Timetable {
      *
      * @return classes
      */
+    /**
+     * getClasses方法。
+     * @return Class[]类型返回值
+     */
     public Class[] getClasses() {
         return this.classes;
     }
@@ -294,6 +387,10 @@ public class Timetable {
      * Get number of classes that need scheduling
      *
      * @return numClasses
+     */
+    /**
+     * getNumClasses方法。
+     * @return int类型返回值
      */
     public int getNumClasses() {
         if (this.numClasses > 0) {
@@ -331,6 +428,10 @@ public class Timetable {
      * doesn't make a difference, but for larger values it certainly does.
      *
      * @return numClashes
+     */
+    /**
+     * calcClashes方法。
+     * @return int类型返回值
      */
     public int calcClashes() {
         int clashes = 0;

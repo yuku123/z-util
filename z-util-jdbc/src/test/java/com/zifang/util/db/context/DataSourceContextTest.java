@@ -11,9 +11,15 @@ import static org.junit.Assert.*;
 /**
  * DataSourceContext 类测试
  */
+/**
+ * DataSourceContextTest类。
+ */
 public class DataSourceContextTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         DataSourceContext context = new DataSourceContext();
         assertNotNull(context);
@@ -23,6 +29,9 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testChainMethods方法。
+     */
     public void testChainMethods() {
         DataSourceContext context = new DataSourceContext()
                 .scanPackage("com.example.repository")
@@ -33,6 +42,9 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testScanPackageName方法。
+     */
     public void testScanPackageName() {
         DataSourceContext context = new DataSourceContext();
         context.setScanPackageName("com.test.pkg");
@@ -41,10 +53,17 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testDataSourceFactory方法。
+     */
     public void testDataSourceFactory() {
         DataSourceContext context = new DataSourceContext();
         DatasourceFactory factory = new DatasourceFactory() {
             @Override
+    /**
+     * getDatasource方法。
+     * @return DataSource类型返回值
+     */
             public DataSource getDatasource() {
                 return null;
             }
@@ -56,6 +75,9 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testTransactionManager方法。
+     */
     public void testTransactionManager() {
         DataSourceContext context = new DataSourceContext();
         TranslationManager tm = new TranslationManager();
@@ -66,6 +88,9 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         DataSourceContext ctx1 = new DataSourceContext();
         ctx1.setScanPackageName("com.test");
@@ -77,6 +102,9 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentPackages方法。
+     */
     public void testEqualsWithDifferentPackages() {
         DataSourceContext ctx1 = new DataSourceContext();
         ctx1.setScanPackageName("com.test1");
@@ -88,12 +116,18 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         DataSourceContext ctx = new DataSourceContext();
         assertNotEquals(ctx, null);
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         DataSourceContext ctx1 = new DataSourceContext();
         ctx1.setScanPackageName("com.test");
@@ -105,6 +139,9 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         DataSourceContext ctx = new DataSourceContext();
         String str = ctx.toString();
@@ -114,9 +151,16 @@ public class DataSourceContextTest {
     }
 
     @Test
+    /**
+     * testFullConfiguration方法。
+     */
     public void testFullConfiguration() {
         DatasourceFactory factory = new DatasourceFactory() {
             @Override
+    /**
+     * getDatasource方法。
+     * @return DataSource类型返回值
+     */
             public DataSource getDatasource() {
                 return null;
             }

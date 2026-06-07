@@ -25,6 +25,10 @@ public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager 
      * getFileObjectHashMap方法。
      * @return Map<String, BytesJavaFileObject>类型返回值
      */
+    /**
+     * getFileObjectHashMap方法。
+     * @return Map<String, BytesJavaFileObject>类型返回值
+     */
     public Map<String, BytesJavaFileObject> getFileObjectHashMap() {
         return fileObjectHashMap;
     }
@@ -33,10 +37,22 @@ public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager 
      * CustomerJavaFileManager方法。
      *      * @param fileManager JavaFileManager类型参数
      */
+    /**
+     * CustomerJavaFileManager方法。
+     *      * @param fileManager JavaFileManager类型参数
+     */
     protected CustomerJavaFileManager(JavaFileManager fileManager) {
         super(fileManager);
     }
     @Override
+    /**
+     * getJavaFileForOutput方法。
+     *      * @param location Location类型参数
+     * @param className String类型参数
+     * @param kind JavaFileObject.Kind类型参数
+     * @param sibling FileObject类型参数
+     * @return JavaFileObject类型返回值
+     */
     /**
      * getJavaFileForOutput方法。
      *      * @param location Location类型参数
@@ -63,11 +79,22 @@ public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager 
      *      * @param location Location类型参数
      * @return boolean类型返回值
      */
+    /**
+     * hasLocation方法。
+     *      * @param location Location类型参数
+     * @return boolean类型返回值
+     */
     public boolean hasLocation(Location location) {
         return super.hasLocation(location);
     }
 
     @Override
+    /**
+     * isSameFile方法。
+     *      * @param a FileObject类型参数
+     * @param b FileObject类型参数
+     * @return boolean类型返回值
+     */
     /**
      * isSameFile方法。
      *      * @param a FileObject类型参数
@@ -85,11 +112,22 @@ public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager 
      * @param remaining Iterator类型参数
      * @return boolean类型返回值
      */
+    /**
+     * handleOption方法。
+     *      * @param current String类型参数
+     * @param remaining Iterator类型参数
+     * @return boolean类型返回值
+     */
     public boolean handleOption(String current, Iterator remaining) {
         return super.handleOption(current, remaining);
     }
 
     @Override
+    /**
+     * isSupportedOption方法。
+     *      * @param option String类型参数
+     * @return int类型返回值
+     */
     /**
      * isSupportedOption方法。
      *      * @param option String类型参数
@@ -107,11 +145,25 @@ public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager 
      * @param kind JavaFileObject.Kind类型参数
      * @return JavaFileObject类型返回值
      */
+    /**
+     * getJavaFileForInput方法。
+     *      * @param location Location类型参数
+     * @param className String类型参数
+     * @param kind JavaFileObject.Kind类型参数
+     * @return JavaFileObject类型返回值
+     */
     public JavaFileObject getJavaFileForInput(Location location, String className, JavaFileObject.Kind kind) throws IOException {
         return super.getJavaFileForInput(location, className, kind);
     }
 
     @Override
+    /**
+     * getFileForInput方法。
+     *      * @param location Location类型参数
+     * @param packageName String类型参数
+     * @param relativeName String类型参数
+     * @return FileObject类型返回值
+     */
     /**
      * getFileForInput方法。
      *      * @param location Location类型参数
@@ -132,6 +184,14 @@ public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager 
      * @param sibling FileObject类型参数
      * @return FileObject类型返回值
      */
+    /**
+     * getFileForOutput方法。
+     *      * @param location Location类型参数
+     * @param packageName String类型参数
+     * @param relativeName String类型参数
+     * @param sibling FileObject类型参数
+     * @return FileObject类型返回值
+     */
     public FileObject getFileForOutput(Location location, String packageName, String relativeName, FileObject sibling) throws IOException {
         return super.getFileForOutput(location, packageName, relativeName, sibling);
     }
@@ -140,11 +200,17 @@ public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager 
     /**
      * flush方法。
      */
+    /**
+     * flush方法。
+     */
     public void flush() throws IOException {
         super.flush();
     }
 
     @Override
+    /**
+     * close方法。
+     */
     /**
      * close方法。
      */

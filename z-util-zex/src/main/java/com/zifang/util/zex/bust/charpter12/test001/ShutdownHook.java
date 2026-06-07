@@ -9,7 +9,15 @@ package com.zifang.util.zex.bust.charpter12.test001;
  * @author zifang
  * @version 1.0
  */
+/**
+ * ShutdownHook类。
+ */
 public class ShutdownHook {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         System.out.println("JVM-start");
 

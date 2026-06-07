@@ -10,6 +10,9 @@ import java.io.*;
 /**
  * FileCreator类。
  */
+/**
+ * FileCreator类。
+ */
 public class FileCreator {
 
     /**
@@ -17,6 +20,12 @@ public class FileCreator {
      *
      * @param name 源文件名称（不含扩展名）
      * @param src 源代码
+     */
+    /**
+     * createFile方法。
+     *      * @param name String类型参数
+     * @param src String类型参数
+     * @return static void类型返回值
      */
     /**
      * createFile方法。
@@ -34,6 +43,13 @@ public class FileCreator {
      * @param name 源文件名称（不含扩展名）
      * @param src 源代码
      * @param outputDir 输出目录，为 null 时使用当前目录
+     */
+    /**
+     * createFile方法。
+     *      * @param name String类型参数
+     * @param src String类型参数
+     * @param outputDir String类型参数
+     * @return static void类型返回值
      */
     /**
      * createFile方法。

@@ -4,12 +4,19 @@ import javassist.*;
 
 import java.lang.reflect.Modifier;
 
+/**
+ * CreatePerson类。
+ */
 public class CreatePerson {
 
     /**
      * 创建一个Person 对象
      *
      * @throws Exception
+     */
+    /**
+     * createPseson方法。
+     * @return static void类型返回值
      */
     public static void createPseson() throws Exception {
         ClassPool pool = ClassPool.getDefault();
@@ -50,6 +57,11 @@ public class CreatePerson {
         cc.writeFile("src/main/java/");
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try {
             createPseson();

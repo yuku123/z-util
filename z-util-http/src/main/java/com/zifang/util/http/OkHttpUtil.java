@@ -25,6 +25,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * OkHttpUtil类。
  */
+/**
+ * OkHttpUtil类。
+ */
 public class OkHttpUtil {
 
     private static final int CONNECT_TIMEOUT = 10;
@@ -36,13 +39,28 @@ public class OkHttpUtil {
      *      * @param charset=utf-8" "application/json;类型参数
      * @return static final MediaType JSON =类型返回值
      */
+    /**
+     * MediaType.parse方法。
+     *      * @param charset=utf-8" "application/json;类型参数
+     * @return static final MediaType JSON =类型返回值
+     */
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     /**
      * MediaType.parse方法。
      *      * @param "application/x-www-form-urlencoded" Object类型参数
      * @return static final MediaType FORM =类型返回值
      */
+    /**
+     * MediaType.parse方法。
+     *      * @param "application/x-www-form-urlencoded" Object类型参数
+     * @return static final MediaType FORM =类型返回值
+     */
     public static final MediaType FORM = MediaType.parse("application/x-www-form-urlencoded");
+    /**
+     * MediaType.parse方法。
+     *      * @param "application/octet-stream" Object类型参数
+     * @return static final MediaType FILE =类型返回值
+     */
     /**
      * MediaType.parse方法。
      *      * @param "application/octet-stream" Object类型参数
@@ -73,6 +91,12 @@ public class OkHttpUtil {
      * @param pwd String类型参数
      * @return static String类型返回值
      */
+    /**
+     * basicAuth方法。
+     *      * @param user String类型参数
+     * @param pwd String类型参数
+     * @return static String类型返回值
+     */
     public static String basicAuth(String user, String pwd) {
         String str = user + ":" + pwd;
         return "Basic " + java.util.Base64.getEncoder().encodeToString(str.getBytes(StandardCharsets.UTF_8));
@@ -86,6 +110,11 @@ public class OkHttpUtil {
      * @param url 请求 URL
      * @return HttpClientResult，包含响应状态码和响应体
      * @throws IOException 如果请求失败或网络异常
+     */
+    /**
+     * get方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
      */
     /**
      * get方法。
@@ -110,6 +139,12 @@ public class OkHttpUtil {
      * @param params MapString,类型参数
      * @return static HttpClientResult类型返回值
      */
+    /**
+     * get方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult get(String url, Map<String, String> params) throws IOException {
         return get(url, null, params);
     }
@@ -122,6 +157,13 @@ public class OkHttpUtil {
      * @param params  查询参数 Map，会追加到 URL 后面，可为 null
      * @return HttpClientResult，包含响应状态码和响应体
      * @throws IOException 如果请求失败或网络异常
+     */
+    /**
+     * get方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     /**
      * get方法。
@@ -156,6 +198,12 @@ public class OkHttpUtil {
      * @param json String类型参数
      * @return static HttpClientResult类型返回值
      */
+    /**
+     * postJson方法。
+     *      * @param url String类型参数
+     * @param json String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult postJson(String url, String json) throws IOException {
         return postJson(url, null, json);
     }
@@ -168,6 +216,13 @@ public class OkHttpUtil {
      * @param json    JSON 格式的请求体
      * @return HttpClientResult，包含响应状态码和响应体
      * @throws IOException 如果请求失败或网络异常
+     */
+    /**
+     * postJson方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param json String类型参数
+     * @return static HttpClientResult类型返回值
      */
     /**
      * postJson方法。
@@ -201,6 +256,12 @@ public class OkHttpUtil {
      * @param params MapString,类型参数
      * @return static HttpClientResult类型返回值
      */
+    /**
+     * postForm方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult postForm(String url, Map<String, String> params) throws IOException {
         return postForm(url, null, params);
     }
@@ -213,6 +274,13 @@ public class OkHttpUtil {
      * @param params  表单参数 Map
      * @return HttpClientResult，包含响应状态码和响应体
      * @throws IOException 如果请求失败或网络异常
+     */
+    /**
+     * postForm方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     /**
      * postForm方法。
@@ -245,6 +313,12 @@ public class OkHttpUtil {
      * @param callback Callback类型参数
      * @return static void类型返回值
      */
+    /**
+     * async方法。
+     *      * @param request Request类型参数
+     * @param callback Callback类型参数
+     * @return static void类型返回值
+     */
     public static void async(Request request, Callback callback) {
         CLIENT.newCall(request).enqueue(callback);
     }
@@ -265,6 +339,13 @@ public class OkHttpUtil {
      * @param callback Callback类型参数
      * @return static void类型返回值
      */
+    /**
+     * asyncPostJson方法。
+     *      * @param url String类型参数
+     * @param json String类型参数
+     * @param callback Callback类型参数
+     * @return static void类型返回值
+     */
     public static void asyncPostJson(String url, String json, Callback callback) {
         asyncPostJson(url, null, json, callback);
     }
@@ -276,6 +357,14 @@ public class OkHttpUtil {
      * @param headers  请求头 Map，可为 null
      * @param json     JSON 格式的请求体
      * @param callback 回调接口，用于处理响应或错误
+     */
+    /**
+     * asyncPostJson方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param json String类型参数
+     * @param callback Callback类型参数
+     * @return static void类型返回值
      */
     /**
      * asyncPostJson方法。
@@ -307,6 +396,12 @@ public class OkHttpUtil {
      * @param listener EventSourceListener类型参数
      * @return static EventSource类型返回值
      */
+    /**
+     * sse方法。
+     *      * @param url String类型参数
+     * @param listener EventSourceListener类型参数
+     * @return static EventSource类型返回值
+     */
     public static EventSource sse(String url, EventSourceListener listener) {
         return sse(url, null, listener);
     }
@@ -318,6 +413,13 @@ public class OkHttpUtil {
      * @param headers  请求头 Map，可为 null
      * @param listener 事件监听器，用于处理 SSE 事件
      * @return EventSource 对象，可用于关闭连接
+     */
+    /**
+     * sse方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param listener EventSourceListener类型参数
+     * @return static EventSource类型返回值
      */
     /**
      * sse方法。
@@ -359,6 +461,13 @@ public class OkHttpUtil {
      * @param file File类型参数
      * @return static HttpClientResult类型返回值
      */
+    /**
+     * upload方法。
+     *      * @param url String类型参数
+     * @param fileField String类型参数
+     * @param file File类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult upload(String url, String fileField, File file) throws IOException {
         return upload(url, null, fileField, file);
     }
@@ -372,6 +481,14 @@ public class OkHttpUtil {
      * @param file      要上传的文件
      * @return HttpClientResult，包含响应状态码和响应体
      * @throws IOException 如果请求失败或网络异常
+     */
+    /**
+     * upload方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param fileField String类型参数
+     * @param file File类型参数
+     * @return static HttpClientResult类型返回值
      */
     /**
      * upload方法。

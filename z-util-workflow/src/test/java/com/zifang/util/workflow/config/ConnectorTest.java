@@ -11,21 +11,33 @@ import static org.junit.Assert.*;
 /**
  * Connector 连接类测试
  */
+/**
+ * ConnectorTest类。
+ */
 public class ConnectorTest {
 
     private Connector connector;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         connector = new Connector();
     }
 
     @Test
+    /**
+     * testConnectorCreation方法。
+     */
     public void testConnectorCreation() {
         assertNotNull(connector);
     }
 
     @Test
+    /**
+     * testPreNodes方法。
+     */
     public void testPreNodes() {
         List<String> preNodes = new ArrayList<>();
         preNodes.add("node-001");
@@ -40,6 +52,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testPostNodes方法。
+     */
     public void testPostNodes() {
         List<String> postNodes = new ArrayList<>();
         postNodes.add("node-003");
@@ -56,6 +71,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testEmptyPreNodes方法。
+     */
     public void testEmptyPreNodes() {
         List<String> preNodes = new ArrayList<>();
         connector.setPre(preNodes);
@@ -65,6 +83,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testEmptyPostNodes方法。
+     */
     public void testEmptyPostNodes() {
         List<String> postNodes = new ArrayList<>();
         connector.setPost(postNodes);
@@ -74,18 +95,27 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testNullPreNodes方法。
+     */
     public void testNullPreNodes() {
         connector.setPre(null);
         assertNull(connector.getPre());
     }
 
     @Test
+    /**
+     * testNullPostNodes方法。
+     */
     public void testNullPostNodes() {
         connector.setPost(null);
         assertNull(connector.getPost());
     }
 
     @Test
+    /**
+     * testSinglePreNode方法。
+     */
     public void testSinglePreNode() {
         List<String> preNodes = new ArrayList<>();
         preNodes.add("start-node");
@@ -97,6 +127,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testSinglePostNode方法。
+     */
     public void testSinglePostNode() {
         List<String> postNodes = new ArrayList<>();
         postNodes.add("end-node");
@@ -108,6 +141,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testMultiplePreAndPostNodes方法。
+     */
     public void testMultiplePreAndPostNodes() {
         // 测试复杂的工作流连接
         List<String> preNodes = new ArrayList<>();
@@ -127,6 +163,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testModifyPreNodesAfterSet方法。
+     */
     public void testModifyPreNodesAfterSet() {
         List<String> preNodes = new ArrayList<>();
         preNodes.add("node-1");
@@ -143,6 +182,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testConnectorEquality方法。
+     */
     public void testConnectorEquality() {
         // 创建两个相同的 connector
         Connector connector1 = new Connector();
@@ -161,6 +203,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testWorkflowScenario方法。
+     */
     public void testWorkflowScenario() {
         // 模拟一个实际的工作流场景
         // 创建线性工作流: start -> process -> end
@@ -185,6 +230,9 @@ public class ConnectorTest {
     }
 
     @Test
+    /**
+     * testBranchingWorkflow方法。
+     */
     public void testBranchingWorkflow() {
         // 测试分支工作流
         //      -> node-b ->

@@ -13,11 +13,18 @@ import java.io.InputStream;
 /**
  * ConstantInvokeDynamicInfo类。
  */
+/**
+ * ConstantInvokeDynamicInfo类。
+ */
 public class ConstantInvokeDynamicInfo extends AbstractConstantPool {
 
     private U2 bootstrapMethodAttrIndex;
     private U2 nameIndex;
 
+    /**
+     * ConstantInvokeDynamicInfo方法。
+     *      * @param tag byte类型参数
+     */
     /**
      * ConstantInvokeDynamicInfo方法。
      *      * @param tag byte类型参数
@@ -31,6 +38,10 @@ public class ConstantInvokeDynamicInfo extends AbstractConstantPool {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     public void read(InputStream inputStream) {
         this.bootstrapMethodAttrIndex = U2.read(inputStream);
         this.nameIndex = U2.read(inputStream);
@@ -40,10 +51,18 @@ public class ConstantInvokeDynamicInfo extends AbstractConstantPool {
      * getBootstrapMethodAttrIndex方法。
      * @return U2类型返回值
      */
+    /**
+     * getBootstrapMethodAttrIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getBootstrapMethodAttrIndex() {
         return bootstrapMethodAttrIndex;
     }
 
+    /**
+     * getNameIndex方法。
+     * @return U2类型返回值
+     */
     /**
      * getNameIndex方法。
      * @return U2类型返回值

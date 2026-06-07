@@ -16,6 +16,9 @@ import java.util.Map;
 /**
  * PipelineContext类。
  */
+/**
+ * PipelineContext类。
+ */
 public class PipelineContext {
 
     private String url;
@@ -30,6 +33,9 @@ public class PipelineContext {
 
     /**
      * 构造 PipelineContext。
+     */
+    /**
+     * PipelineContext方法。
      */
     /**
      * PipelineContext方法。
@@ -53,6 +59,10 @@ public class PipelineContext {
      * getUrl方法。
      * @return String类型返回值
      */
+    /**
+     * getUrl方法。
+     * @return String类型返回值
+     */
     public String getUrl() {
         return url;
     }
@@ -60,6 +70,10 @@ public class PipelineContext {
     /**
      * 设置 URL。
      * @param url 请求 URL
+     */
+    /**
+     * setUrl方法。
+     *      * @param url String类型参数
      */
     /**
      * setUrl方法。
@@ -77,6 +91,10 @@ public class PipelineContext {
      * getHeaders方法。
      * @return Map<String, String>类型返回值
      */
+    /**
+     * getHeaders方法。
+     * @return Map<String, String>类型返回值
+     */
     public Map<String, String> getHeaders() {
         return headers;
     }
@@ -84,6 +102,10 @@ public class PipelineContext {
     /**
      * 设置请求头。
      * @param headers 请求头映射
+     */
+    /**
+     * setHeaders方法。
+     *      * @param headers MapString,类型参数
      */
     /**
      * setHeaders方法。
@@ -101,6 +123,10 @@ public class PipelineContext {
      * getCookies方法。
      * @return Map<String, String>类型返回值
      */
+    /**
+     * getCookies方法。
+     * @return Map<String, String>类型返回值
+     */
     public Map<String, String> getCookies() {
         return cookies;
     }
@@ -108,6 +134,10 @@ public class PipelineContext {
     /**
      * 设置 Cookie。
      * @param cookies Cookie 映射
+     */
+    /**
+     * setCookies方法。
+     *      * @param cookies MapString,类型参数
      */
     /**
      * setCookies方法。
@@ -127,6 +157,10 @@ public class PipelineContext {
      * getData方法。
      * @return Map<String, Object>类型返回值
      */
+    /**
+     * getData方法。
+     * @return Map<String, Object>类型返回值
+     */
     public Map<String, Object> getData() {
         return data;
     }
@@ -134,6 +168,10 @@ public class PipelineContext {
     /**
      * 设置数据映射。
      * @param data 数据映射
+     */
+    /**
+     * setData方法。
+     *      * @param data MapString,类型参数
      */
     /**
      * setData方法。
@@ -147,6 +185,11 @@ public class PipelineContext {
      * 存入数据。
      * @param key 键
      * @param value 值
+     */
+    /**
+     * put方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
      */
     /**
      * put方法。
@@ -167,6 +210,11 @@ public class PipelineContext {
      *      * @param key String类型参数
      * @param value Object类型参数
      */
+    /**
+     * putData方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     */
     public void putData(String key, Object value) {
         this.data.put(key, value);
     }
@@ -181,6 +229,11 @@ public class PipelineContext {
      *      * @param key String类型参数
      * @return Object类型返回值
      */
+    /**
+     * getData方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object getData(String key) {
         return this.data.get(key);
     }
@@ -189,6 +242,11 @@ public class PipelineContext {
      * 获取数据（向后兼容别名）。
      * @param key 键
      * @return 值
+     */
+    /**
+     * get方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
      */
     /**
      * get方法。
@@ -210,6 +268,11 @@ public class PipelineContext {
      *      * @param key String类型参数
      * @return Object类型返回值
      */
+    /**
+     * getParameter方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object getParameter(String key) {
         return this.data.get(key);
     }
@@ -218,6 +281,11 @@ public class PipelineContext {
      * 存入参数。
      * @param key 键
      * @param value 值
+     */
+    /**
+     * putParameter方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
      */
     /**
      * putParameter方法。
@@ -238,6 +306,10 @@ public class PipelineContext {
      * getHtml方法。
      * @return String类型返回值
      */
+    /**
+     * getHtml方法。
+     * @return String类型返回值
+     */
     public String getHtml() {
         return html;
     }
@@ -245,6 +317,10 @@ public class PipelineContext {
     /**
      * 设置 HTML 内容。
      * @param html HTML 字符串
+     */
+    /**
+     * setHtml方法。
+     *      * @param html String类型参数
      */
     /**
      * setHtml方法。
@@ -262,6 +338,10 @@ public class PipelineContext {
      * getJson方法。
      * @return String类型返回值
      */
+    /**
+     * getJson方法。
+     * @return String类型返回值
+     */
     public String getJson() {
         return json;
     }
@@ -269,6 +349,10 @@ public class PipelineContext {
     /**
      * 设置 JSON 内容。
      * @param json JSON 字符串
+     */
+    /**
+     * setJson方法。
+     *      * @param json String类型参数
      */
     /**
      * setJson方法。
@@ -288,6 +372,10 @@ public class PipelineContext {
      * getErrors方法。
      * @return Map<String, String>类型返回值
      */
+    /**
+     * getErrors方法。
+     * @return Map<String, String>类型返回值
+     */
     public Map<String, String> getErrors() {
         return errors;
     }
@@ -302,6 +390,11 @@ public class PipelineContext {
      *      * @param stage String类型参数
      * @param message String类型参数
      */
+    /**
+     * addError方法。
+     *      * @param stage String类型参数
+     * @param message String类型参数
+     */
     public void addError(String stage, String message) {
         this.errors.put(stage, message);
     }
@@ -309,6 +402,10 @@ public class PipelineContext {
     /**
      * 判断是否存在错误。
      * @return 是否存在错误
+     */
+    /**
+     * hasErrors方法。
+     * @return boolean类型返回值
      */
     /**
      * hasErrors方法。
@@ -328,6 +425,10 @@ public class PipelineContext {
      * getScreenshots方法。
      * @return Map<String, File>类型返回值
      */
+    /**
+     * getScreenshots方法。
+     * @return Map<String, File>类型返回值
+     */
     public Map<String, File> getScreenshots() {
         return screenshots;
     }
@@ -336,6 +437,11 @@ public class PipelineContext {
      * 添加截图。
      * @param name 截图名称
      * @param screenshot 截图文件
+     */
+    /**
+     * addScreenshot方法。
+     *      * @param name String类型参数
+     * @param screenshot File类型参数
      */
     /**
      * addScreenshot方法。
@@ -356,6 +462,10 @@ public class PipelineContext {
      * getMetadata方法。
      * @return Map<String, Object>类型返回值
      */
+    /**
+     * getMetadata方法。
+     * @return Map<String, Object>类型返回值
+     */
     public Map<String, Object> getMetadata() {
         return metadata;
     }
@@ -370,6 +480,11 @@ public class PipelineContext {
      *      * @param key String类型参数
      * @param value Object类型参数
      */
+    /**
+     * setMetadata方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     */
     public void setMetadata(String key, Object value) {
         this.metadata.put(key, value);
     }
@@ -378,6 +493,11 @@ public class PipelineContext {
      * 获取元数据。
      * @param key 键
      * @return 值
+     */
+    /**
+     * getMetadata方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
      */
     /**
      * getMetadata方法。

@@ -9,6 +9,9 @@ import java.lang.reflect.Field;
  *
  * @author zifang
  */
+/**
+ * TestSolveAtomic类。
+ */
 public class TestSolveAtomic {
 
     public long count = 0;
@@ -38,6 +41,11 @@ public class TestSolveAtomic {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
         TestSolveAtomic test = new TestSolveAtomic();
         Thread th1 = new Thread(() -> {

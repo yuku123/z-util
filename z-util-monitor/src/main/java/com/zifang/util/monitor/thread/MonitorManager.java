@@ -21,6 +21,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * MonitorManager类。
  */
+/**
+ * MonitorManager类。
+ */
 public class MonitorManager {
 
     /**
@@ -44,6 +47,9 @@ public class MonitorManager {
     /**
      * MonitorManager方法。
      */
+    /**
+     * MonitorManager方法。
+     */
     public MonitorManager() {
         scheduledExecutorServiceList = new ArrayList<>();
         monitorAggregation = new HashMap<>();
@@ -53,6 +59,11 @@ public class MonitorManager {
      * 把被监控组件集合全部加入到监控集合中。
      *
      * @param monitorAggregation 待增加的监控组件集合。
+     */
+    /**
+     * addAllMonitor方法。
+     *      * @param monitorAggregation MapLong,类型参数
+     * @return synchronized void类型返回值
      */
     /**
      * addAllMonitor方法。
@@ -83,6 +94,10 @@ public class MonitorManager {
      * 关闭监控线程池。
      *
      * @param forceShutdown 是否强制关闭。
+     */
+    /**
+     * shutdown方法。
+     *      * @param forceShutdown boolean类型参数
      */
     /**
      * shutdown方法。

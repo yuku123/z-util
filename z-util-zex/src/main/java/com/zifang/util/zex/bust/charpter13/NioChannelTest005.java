@@ -21,6 +21,9 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
+/**
+ * NioChannelTest005类。
+ */
 public class NioChannelTest005 {
 
     public static String host = "127.0.0.1";
@@ -28,6 +31,9 @@ public class NioChannelTest005 {
 
 
     @Test
+    /**
+     * serverTest001方法。
+     */
     public void serverTest001() throws IOException {
         Selector selector = Selector.open();
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
@@ -37,6 +43,9 @@ public class NioChannelTest005 {
     }
 
     @Test
+    /**
+     * server方法。
+     */
     public void server() throws IOException {
         Selector selector = Selector.open();
 
@@ -60,6 +69,9 @@ public class NioChannelTest005 {
     }
 
     @Test
+    /**
+     * client方法。
+     */
     public void client() throws IOException {
         // 服务端IP地址和端口，与服务端建立连接
         Socket socket = new Socket(host, port);

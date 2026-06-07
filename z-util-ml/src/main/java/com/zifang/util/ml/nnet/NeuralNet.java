@@ -7,5 +7,8 @@ package com.zifang.util.ml.nnet;
 /**
  * NeuralNet类。
  */
+/**
+ * NeuralNet类。
+ */
 public class NeuralNet {
 }

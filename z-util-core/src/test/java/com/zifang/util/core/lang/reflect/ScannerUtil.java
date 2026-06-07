@@ -4,8 +4,14 @@ import org.junit.Test;
 
 import java.util.Set;
 
+/**
+ * ScannerUtil类。
+ */
 public class ScannerUtil {
     @Test
+    /**
+     * t方法。
+     */
     public void t() {
         Set<Class<?>> set = PackageScanner.searchClasses("com.google");
         for (Class<?> aClass : set) {

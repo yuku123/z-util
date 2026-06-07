@@ -24,5 +24,10 @@ public abstract class AlarmPolicy {
      *      * @param status Status类型参数
      * @return abstract boolean类型返回值
      */
+    /**
+     * needAlarm方法。
+     *      * @param status Status类型参数
+     * @return abstract boolean类型返回值
+     */
     public abstract boolean needAlarm(Status status);
 }

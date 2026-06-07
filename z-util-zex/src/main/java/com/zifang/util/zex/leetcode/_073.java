@@ -9,7 +9,14 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _073类。
+ */
 public class _073 {
+    /**
+     * setZeroes方法。
+     *      * @param matrix int[][]类型参数
+     */
     public void setZeroes(int[][] matrix) {
 
         // 行数
@@ -68,6 +75,11 @@ public class _073 {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _073().setZeroes(new int[][]{new int[]{0,1,2,0},new int[]{3,4,5,2},new int[]{1,3,1,5}});
     }

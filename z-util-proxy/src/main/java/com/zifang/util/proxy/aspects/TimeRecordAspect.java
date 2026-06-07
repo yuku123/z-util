@@ -6,5 +6,8 @@ package com.zifang.util.proxy.aspects;
 /**
  * TimeRecordAspect类。
  */
+/**
+ * TimeRecordAspect类。
+ */
 public class TimeRecordAspect {
 }

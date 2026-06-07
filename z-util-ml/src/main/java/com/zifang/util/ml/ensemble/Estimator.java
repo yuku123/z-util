@@ -9,6 +9,9 @@ import com.zifang.util.numpy.NdArray;
 /**
  * Estimator接口。
  */
+/**
+ * Estimator接口。
+ */
 public interface Estimator {
     /**
      * Fit the estimator on training data.

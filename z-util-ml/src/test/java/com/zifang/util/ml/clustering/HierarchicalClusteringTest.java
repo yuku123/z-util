@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * HierarchicalClusteringTest类。
+ */
 public class HierarchicalClusteringTest {
 
     private Random random = new Random(42);
@@ -48,6 +51,9 @@ public class HierarchicalClusteringTest {
     }
 
     @Test
+    /**
+     * testHierarchicalAgglomeration方法。
+     */
     public void testHierarchicalAgglomeration() {
         NdArray X = generateSimpleClusteredData();
         
@@ -66,6 +72,9 @@ public class HierarchicalClusteringTest {
     }
 
     @Test
+    /**
+     * testHierarchicalLinkages方法。
+     */
     public void testHierarchicalLinkages() {
         NdArray X = generateSimpleClusteredData();
         
@@ -91,6 +100,9 @@ public class HierarchicalClusteringTest {
     }
 
     @Test
+    /**
+     * testHierarchicalDendrogram方法。
+     */
     public void testHierarchicalDendrogram() {
         NdArray X = generateSimpleClusteredData();
         

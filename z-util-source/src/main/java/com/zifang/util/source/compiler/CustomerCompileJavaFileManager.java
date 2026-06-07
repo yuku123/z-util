@@ -23,6 +23,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * CustomerCompileJavaFileManager类。
  */
+/**
+ * CustomerCompileJavaFileManager类。
+ */
 public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<JavaFileManager> {
 
     /**
@@ -46,6 +49,11 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      *      * @param fileManager JavaFileManager类型参数
      * @param classLoader CustomerCompileClassLoader类型参数
      */
+    /**
+     * CustomerCompileJavaFileManager方法。
+     *      * @param fileManager JavaFileManager类型参数
+     * @param classLoader CustomerCompileClassLoader类型参数
+     */
     public CustomerCompileJavaFileManager(JavaFileManager fileManager, CustomerCompileClassLoader classLoader) {
         super(fileManager);
         this.classLoader = classLoader;
@@ -59,6 +67,13 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      * @param relativeName 相对名称
      * @return 构建的URI
      * @throws IllegalArgumentException 如果URI构建失败
+     */
+    /**
+     * fromLocation方法。
+     *      * @param location Location类型参数
+     * @param packageName String类型参数
+     * @param relativeName String类型参数
+     * @return static URI类型返回值
      */
     /**
      * fromLocation方法。
@@ -97,6 +112,14 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      * @param sibling FileObject类型参数
      * @return JavaFileObject类型返回值
      */
+    /**
+     * getJavaFileForOutput方法。
+     *      * @param location Location类型参数
+     * @param className String类型参数
+     * @param kind JavaFileObject.Kind类型参数
+     * @param sibling FileObject类型参数
+     * @return JavaFileObject类型返回值
+     */
     public JavaFileObject getJavaFileForOutput(Location location, String className, JavaFileObject.Kind kind, FileObject sibling) throws IOException {
         JavaFileObject javaFileObject = new CharSequenceJavaFileObject(className, kind);
         classLoader.addJavaFileObject(className, javaFileObject);
@@ -117,6 +140,11 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      *      * @param location Location类型参数
      * @return ClassLoader类型返回值
      */
+    /**
+     * getClassLoader方法。
+     *      * @param location Location类型参数
+     * @return ClassLoader类型返回值
+     */
     public ClassLoader getClassLoader(Location location) {
         return classLoader;
     }
@@ -131,6 +159,12 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      * @return 二进制名称
      */
     @Override
+    /**
+     * inferBinaryName方法。
+     *      * @param location Location类型参数
+     * @param file JavaFileObject类型参数
+     * @return String类型返回值
+     */
     /**
      * inferBinaryName方法。
      *      * @param location Location类型参数
@@ -157,6 +191,14 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      * @throws IOException 如果发生IO错误
      */
     @Override
+    /**
+     * list方法。
+     *      * @param location Location类型参数
+     * @param packageName String类型参数
+     * @param kinds SetJavaFileObject.Kind类型参数
+     * @param recurse boolean类型参数
+     * @return Iterable<JavaFileObject>类型返回值
+     */
     /**
      * list方法。
      *      * @param location Location类型参数
@@ -207,6 +249,13 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      * @param relativeName String类型参数
      * @param javaFileObject JavaFileObject类型参数
      */
+    /**
+     * addJavaFileObject方法。
+     *      * @param location Location类型参数
+     * @param packageName String类型参数
+     * @param relativeName String类型参数
+     * @param javaFileObject JavaFileObject类型参数
+     */
     public void addJavaFileObject(Location location, String packageName, String relativeName, JavaFileObject javaFileObject) {
         javaFileObjectMap.put(fromLocation(location, packageName, relativeName), javaFileObject);
     }
@@ -216,6 +265,11 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      *
      * @param uri            URI
      * @param javaFileObject Java文件对象
+     */
+    /**
+     * addJavaFileObject方法。
+     *      * @param uri URI类型参数
+     * @param javaFileObject JavaFileObject类型参数
      */
     /**
      * addJavaFileObject方法。

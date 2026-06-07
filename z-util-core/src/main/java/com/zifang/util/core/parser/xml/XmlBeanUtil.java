@@ -21,10 +21,19 @@ import java.io.StringWriter;
 /**
  * XmlBeanUtil类。
  */
+/**
+ * XmlBeanUtil类。
+ */
 public class XmlBeanUtil {
 
     private static final Logger log = LoggerFactory.getLogger(XmlBeanUtil.class);
 
+    /**
+     * beanToXml方法。
+     *      * @param obj Object类型参数
+     * @param load Class?类型参数
+     * @return static String类型返回值
+     */
     /**
      * beanToXml方法。
      *      * @param obj Object类型参数
@@ -47,6 +56,12 @@ public class XmlBeanUtil {
         return xmlStr;
     }
 
+    /**
+     * xmlToBean方法。
+     *      * @param str String类型参数
+     * @param load ClassT类型参数
+     * @return static <T> T类型返回值
+     */
     /**
      * xmlToBean方法。
      *      * @param str String类型参数

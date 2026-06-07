@@ -10,6 +10,9 @@ package com.zifang.util.devops.git.operations;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * GitResult类。
+ */
 public class GitResult<T> {
 
     private boolean success;
@@ -22,6 +25,9 @@ public class GitResult<T> {
     /**
      * GitResult方法。
      */
+    /**
+     * GitResult方法。
+     */
     public GitResult() {
     }
 
@@ -31,6 +37,11 @@ public class GitResult<T> {
      * @param data 结果数据
      * @param <T>  数据类型
      * @return 成功结果对象
+     */
+    /**
+     * success方法。
+     *      * @param data T类型参数
+     * @return static <T> GitResult<T>类型返回值
      */
     public static <T> GitResult<T> success(T data) {
         GitResult<T> r = new GitResult<>();
@@ -46,6 +57,11 @@ public class GitResult<T> {
      * @param <T>    数据类型
      * @return 成功结果对象
      */
+    /**
+     * successStdout方法。
+     *      * @param stdout String类型参数
+     * @return static <T> GitResult<T>类型返回值
+     */
     public static <T> GitResult<T> successStdout(String stdout) {
         GitResult<T> r = new GitResult<>();
         r.success = true;
@@ -60,6 +76,12 @@ public class GitResult<T> {
      * @param exitCode 退出码
      * @param <T>      数据类型
      * @return 成功结果对象
+     */
+    /**
+     * success方法。
+     *      * @param data T类型参数
+     * @param exitCode int类型参数
+     * @return static <T> GitResult<T>类型返回值
      */
     public static <T> GitResult<T> success(T data, int exitCode) {
         GitResult<T> r = new GitResult<>();
@@ -77,6 +99,12 @@ public class GitResult<T> {
      * @param <T>      数据类型
      * @return 失败结果对象
      */
+    /**
+     * fail方法。
+     *      * @param exitCode int类型参数
+     * @param stderr String类型参数
+     * @return static <T> GitResult<T>类型返回值
+     */
     public static <T> GitResult<T> fail(int exitCode, String stderr) {
         GitResult<T> r = new GitResult<>();
         r.success = false;
@@ -92,6 +120,11 @@ public class GitResult<T> {
      * @param <T>     数据类型
      * @return 失败结果对象
      */
+    /**
+     * fail方法。
+     *      * @param message String类型参数
+     * @return static <T> GitResult<T>类型返回值
+     */
     public static <T> GitResult<T> fail(String message) {
         GitResult<T> r = new GitResult<>();
         r.success = false;
@@ -102,55 +135,107 @@ public class GitResult<T> {
     /**
      * 是否成功
      */
+    /**
+     * isSuccess方法。
+     * @return boolean类型返回值
+     */
     public boolean isSuccess() {
         return success;
     }
 
+    /**
+     * setSuccess方法。
+     *      * @param success boolean类型参数
+     */
     public void setSuccess(boolean success) {
         this.success = success;
     }
 
+    /**
+     * getExitCode方法。
+     * @return int类型返回值
+     */
     public int getExitCode() {
         return exitCode;
     }
 
+    /**
+     * setExitCode方法。
+     *      * @param exitCode int类型参数
+     */
     public void setExitCode(int exitCode) {
         this.exitCode = exitCode;
     }
 
+    /**
+     * getStdout方法。
+     * @return String类型返回值
+     */
     public String getStdout() {
         return stdout;
     }
 
+    /**
+     * setStdout方法。
+     *      * @param stdout String类型参数
+     */
     public void setStdout(String stdout) {
         this.stdout = stdout;
     }
 
+    /**
+     * getStderr方法。
+     * @return String类型返回值
+     */
     public String getStderr() {
         return stderr;
     }
 
+    /**
+     * setStderr方法。
+     *      * @param stderr String类型参数
+     */
     public void setStderr(String stderr) {
         this.stderr = stderr;
     }
 
+    /**
+     * getData方法。
+     * @return T类型返回值
+     */
     public T getData() {
         return data;
     }
 
+    /**
+     * setData方法。
+     *      * @param data T类型参数
+     */
     public void setData(T data) {
         this.data = data;
     }
 
+    /**
+     * getMessage方法。
+     * @return String类型返回值
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * setMessage方法。
+     *      * @param message String类型参数
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "GitResult{" +
                 "success=" + success +

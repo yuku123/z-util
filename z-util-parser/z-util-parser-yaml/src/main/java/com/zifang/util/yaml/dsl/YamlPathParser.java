@@ -14,8 +14,20 @@ import java.util.Map;
  *
  * @author zifang
  */
+/**
+ * YamlPathParser类。
+ */
+/**
+ * YamlPathParser类。
+ */
 public class YamlPathParser {
 
+    /**
+     * YamlPathParser方法。
+     */
+    /**
+     * YamlPathParser方法。
+     */
     public YamlPathParser() {
     }
 
@@ -34,6 +46,18 @@ public class YamlPathParser {
      * @param yaml YAML 字符串
      * @param path YAMLPath 表达式，例如 "$.config.database.host"、"$.items[0]"
      * @return 匹配结果的列表
+     */
+    /**
+     * query方法。
+     *      * @param yaml String类型参数
+     * @param path String类型参数
+     * @return List<Object>类型返回值
+     */
+    /**
+     * query方法。
+     *      * @param yaml String类型参数
+     * @param path String类型参数
+     * @return List<Object>类型返回值
      */
     public List<Object> query(String yaml, String path) {
         if (yaml == null || path == null) {

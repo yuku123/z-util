@@ -11,11 +11,19 @@ package com.zifang.util.zex.bust.charpter12;
  */
 import java.time.LocalDateTime;
 
+/**
+ * OrderlyDemo类。
+ */
 public class OrderlyDemo {
 
     static int value = 1;
     private static boolean flag = false;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 199; i++) {
             value = 1;
@@ -31,6 +39,9 @@ public class OrderlyDemo {
 
     static class DisplayThread extends Thread {
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             System.out.println(Thread.currentThread().getName() + " DisplayThread begin, time:" + LocalDateTime.now());
             value = 1024;
@@ -42,6 +53,9 @@ public class OrderlyDemo {
 
     static class CountThread extends Thread {
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             if (flag) {
                 System.out.println(Thread.currentThread().getName() + " value的值是：" + value + ", time:" + LocalDateTime.now());

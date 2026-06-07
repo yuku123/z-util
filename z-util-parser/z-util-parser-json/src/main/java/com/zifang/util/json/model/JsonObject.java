@@ -16,6 +16,9 @@ import java.util.Map;
  * @author zifang
  * @see JsonArray
  */
+/**
+ * JsonObject类。
+ */
 public class JsonObject {
 
     private Map<String, Object> map = new HashMap<String, Object>();
@@ -25,6 +28,11 @@ public class JsonObject {
      *
      * @param key   键名
      * @param value 值，可以是基本类型、String、JsonObject、JsonArray或null
+     */
+    /**
+     * put方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
      */
     public void put(String key, Object value) {
         map.put(key, value);
@@ -36,6 +44,11 @@ public class JsonObject {
      * @param key 键名
      * @return 对应的值，如果键不存在则返回null
      */
+    /**
+     * get方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object get(String key) {
         return map.get(key);
     }
@@ -44,6 +57,10 @@ public class JsonObject {
      * 获取 JSON 对象中键值对的数量。
      *
      * @return 键值对数量
+     */
+    /**
+     * size方法。
+     * @return int类型返回值
      */
     public int size() {
         return map.size();
@@ -55,6 +72,11 @@ public class JsonObject {
      * @param key 键名
      * @return 是否包含
      */
+    /**
+     * containsKey方法。
+     *      * @param key String类型参数
+     * @return boolean类型返回值
+     */
     public boolean containsKey(String key) {
         return map.containsKey(key);
     }
@@ -64,6 +86,11 @@ public class JsonObject {
      *
      * @param key 键名
      * @return 被移除的值，如果键不存在则返回null
+     */
+    /**
+     * remove方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
      */
     public Object remove(String key) {
         return map.remove(key);
@@ -76,6 +103,12 @@ public class JsonObject {
      * @param defaultValue 默认值
      * @return 键值或默认值
      */
+    /**
+     * getOrDefault方法。
+     *      * @param key String类型参数
+     * @param defaultValue Object类型参数
+     * @return Object类型返回值
+     */
     public Object getOrDefault(String key, Object defaultValue) {
         return map.getOrDefault(key, defaultValue);
     }
@@ -85,6 +118,11 @@ public class JsonObject {
      *
      * @param key 键名
      * @return String 值，键不存在或类型不匹配返回 null
+     */
+    /**
+     * getString方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
      */
     public String getString(String key) {
         Object v = map.get(key);
@@ -96,6 +134,11 @@ public class JsonObject {
      *
      * @param key 键名
      * @return Integer 值，键不存在或类型不匹配返回 null
+     */
+    /**
+     * getInt方法。
+     *      * @param key String类型参数
+     * @return int类型返回值
      */
     public Integer getInt(String key) {
         Object v = map.get(key);
@@ -109,6 +152,11 @@ public class JsonObject {
      * @param key 键名
      * @return Long 值，键不存在或类型不匹配返回 null
      */
+    /**
+     * getLong方法。
+     *      * @param key String类型参数
+     * @return long类型返回值
+     */
     public Long getLong(String key) {
         Object v = map.get(key);
         if (v instanceof Number) return ((Number) v).longValue();
@@ -120,6 +168,11 @@ public class JsonObject {
      *
      * @param key 键名
      * @return Double 值，键不存在或类型不匹配返回 null
+     */
+    /**
+     * getDouble方法。
+     *      * @param key String类型参数
+     * @return double类型返回值
      */
     public Double getDouble(String key) {
         Object v = map.get(key);
@@ -133,6 +186,11 @@ public class JsonObject {
      * @param key 键名
      * @return Boolean 值，键不存在或类型不匹配返回 null
      */
+    /**
+     * getBoolean方法。
+     *      * @param key String类型参数
+     * @return boolean类型返回值
+     */
     public Boolean getBoolean(String key) {
         Object v = map.get(key);
         if (v instanceof Boolean) return (Boolean) v;
@@ -144,6 +202,10 @@ public class JsonObject {
      *
      * @return 是否为空
      */
+    /**
+     * isEmpty方法。
+     * @return boolean类型返回值
+     */
     public boolean isEmpty() {
         return map.isEmpty();
     }
@@ -152,6 +214,10 @@ public class JsonObject {
      * 获取所有键值对的列表。
      *
      * @return 键值对列表
+     */
+    /**
+     * getAllKeyValue方法。
+     * @return List<Map.Entry<String, Object>>类型返回值
      */
     public List<Map.Entry<String, Object>> getAllKeyValue() {
         return new ArrayList<>(map.entrySet());
@@ -164,6 +230,11 @@ public class JsonObject {
      * @return JsonObject值
      * @throws IllegalArgumentException 如果键不存在
      * @throws JsonTypeException       如果值不是JsonObject类型
+     */
+    /**
+     * getJsonObject方法。
+     *      * @param key String类型参数
+     * @return JsonObject类型返回值
      */
     public JsonObject getJsonObject(String key) {
         if (!map.containsKey(key)) {
@@ -186,6 +257,11 @@ public class JsonObject {
      * @throws IllegalArgumentException 如果键不存在
      * @throws JsonTypeException       如果值不是JsonArray类型
      */
+    /**
+     * getJsonArray方法。
+     *      * @param key String类型参数
+     * @return JsonArray类型返回值
+     */
     public JsonArray getJsonArray(String key) {
         if (!map.containsKey(key)) {
             throw new IllegalArgumentException("Invalid key");
@@ -200,6 +276,10 @@ public class JsonObject {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return BeautifyJsonUtils.beautify(this);
     }

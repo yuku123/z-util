@@ -15,16 +15,28 @@ public abstract class UDPServer implements Runnable {
     private final Logger log = Logger.getLogger(UDPServer.class.getCanonicalName());
     private volatile boolean isShutDown = false;
 
+    /**
+     * UDPServer方法。
+     *      * @param port int类型参数
+     * @param bufferSize int类型参数
+     */
     public UDPServer(int port, int bufferSize) {
         this.bufferSize = bufferSize;
         this.port = port;
     }
 
+    /**
+     * UDPServer方法。
+     *      * @param port int类型参数
+     */
     public UDPServer(int port) {
         this(port, 8192);
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         byte[] buffer = new byte[bufferSize];
         try (DatagramSocket socket = new DatagramSocket(port)) {
@@ -48,8 +60,17 @@ public abstract class UDPServer implements Runnable {
         }
     }
 
+    /**
+     * respond方法。
+     *      * @param socket DatagramSocket类型参数
+     * @param request DatagramPacket类型参数
+     * @return abstract void类型返回值
+     */
     public abstract void respond(DatagramSocket socket, DatagramPacket request) throws IOException;
 
+    /**
+     * shutDown方法。
+     */
     public void shutDown() {
         this.isShutDown = true;
     }

@@ -12,11 +12,17 @@ import static org.junit.Assert.*;
 /**
  * JavaSourceGenerator 测试
  */
+/**
+ * JavaSourceGeneratorTest类。
+ */
 public class JavaSourceGeneratorTest {
 
     private JavaSourceGenerator generator = new JavaSourceGenerator();
 
     @Test
+    /**
+     * testGenerateSimpleClass方法。
+     */
     public void testGenerateSimpleClass() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("User");
@@ -31,6 +37,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateClassWithFields方法。
+     */
     public void testGenerateClassWithFields() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("User");
@@ -50,6 +59,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateClassWithMethods方法。
+     */
     public void testGenerateClassWithMethods() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("User");
@@ -76,6 +88,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateClassWithSuperClass方法。
+     */
     public void testGenerateClassWithSuperClass() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Dog");
@@ -93,6 +108,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateClassWithInterfaces方法。
+     */
     public void testGenerateClassWithInterfaces() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Dog");
@@ -112,6 +130,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateInterface方法。
+     */
     public void testGenerateInterface() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("MyInterface");
@@ -127,6 +148,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateClassWithAnnotations方法。
+     */
     public void testGenerateClassWithAnnotations() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("User");
@@ -145,6 +169,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateFieldWithInitializer方法。
+     */
     public void testGenerateFieldWithInitializer() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Constants");
@@ -163,6 +190,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateMethodWithParameters方法。
+     */
     public void testGenerateMethodWithParameters() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Calculator");
@@ -201,6 +231,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateMethodWithAnnotations方法。
+     */
     public void testGenerateMethodWithAnnotations() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("User");
@@ -230,6 +263,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateFieldWithAnnotations方法。
+     */
     public void testGenerateFieldWithAnnotations() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("User");
@@ -251,6 +287,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateAbstractClass方法。
+     */
     public void testGenerateAbstractClass() {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("AbstractDao");
@@ -264,6 +303,9 @@ public class JavaSourceGeneratorTest {
     }
 
     @Test
+    /**
+     * testGenerateInnerClass方法。
+     */
     public void testGenerateInnerClass() {
         ClassInfo outer = new ClassInfo();
         outer.setSimpleClassName("Outer");

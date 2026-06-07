@@ -8,6 +8,9 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * RecursiveTaskDemo类。
+ */
 public class RecursiveTaskDemo {
 
     // 1．创建一个名为DocumentMock的类。它将生成一个字符串矩阵来模拟一个文档。
@@ -17,6 +20,13 @@ public class RecursiveTaskDemo {
                 "main"};
 
         // 3．实现generateDocument()方法。它接收3个参数，分别是行数numLines，每一行词的个数numWords，和准备查找的词word。然后返回一个字符串矩阵。
+    /**
+     * generateDocument方法。
+     *      * @param numLines int类型参数
+     * @param numWords int类型参数
+     * @param word String类型参数
+     * @return String[][]类型返回值
+     */
         public String[][] generateDocument(int numLines, int numWords, String word) {
             // 4．创建用来生成文档所需要的对象：String矩阵，和用来生成随机数的Random对象。
             int counter = 0;
@@ -48,6 +58,13 @@ public class RecursiveTaskDemo {
         private String word;
 
         // 9．实现类的构造器，用来初始化类的所有属性。
+    /**
+     * DocumentTask方法。
+     *      * @param document String[][]类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     * @param word String类型参数
+     */
         public DocumentTask(String[][] document, int start, int end, String word) {
             this.document = document;
             this.start = start;
@@ -57,6 +74,10 @@ public class RecursiveTaskDemo {
 
         // 10．实现compute()方法。如果end和start的差异小于10，则调用processLines()方法，来计算这两个位置之间要查找的词出现的次数。
         @Override
+    /**
+     * compute方法。
+     * @return int类型返回值
+     */
         protected Integer compute() {
             int result = 0;
             if (end - start < 10) {
@@ -118,6 +139,13 @@ public class RecursiveTaskDemo {
         private String word;
 
         // 20．实现类的构造器，用来初始化它的属性。
+    /**
+     * LineTask方法。
+     *      * @param line String[]类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     * @param word String类型参数
+     */
         public LineTask(String[] line, int start, int end, String word) {
             this.line = line;
             this.start = start;
@@ -127,6 +155,10 @@ public class RecursiveTaskDemo {
 
         // 21．实现compute()方法。如果end和start属性的差异小于100，那么任务将采用count()方法，在由start与end属性所决定的行的片断中查找词。
         @Override
+    /**
+     * compute方法。
+     * @return int类型返回值
+     */
         protected Integer compute() {
             Integer result = null;
             if (end - start < 100) {
@@ -176,6 +208,11 @@ public class RecursiveTaskDemo {
     }
 
     // 29．实现范例的主类，创建Main主类，并实现main()方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // 30．创建Document对象，包含100行，每行1,000个词。
         Document mock = new Document();

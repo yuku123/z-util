@@ -10,10 +10,16 @@ package com.zifang.util.monitor.jvm;
 /**
  * StringDemo类。
  */
+/**
+ * StringDemo类。
+ */
 public class StringDemo {
 
     /**
      * 测试方法，演示字符串常量的引用和intern方法的行为。
+     */
+    /**
+     * test1方法。
      */
     /**
      * test1方法。
@@ -43,6 +49,11 @@ public class StringDemo {
      * -XX:+PrintFlagsFinal 打印虚拟机的Global flags参数
      * 在Java6以及Java 7 直到 Java7u40前，-XX:StringTableSize 参数默认值是1009。在Java7u40中它增长为60013（在Java8中也是同样的值）。
      * 如果你不确定字符串常量池的使用情况，尝试使用 -XX:+PrintStringTableStatics 虚拟机参数。它将会在你程序结束时打印出你的字符串常量池的使用情况。
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

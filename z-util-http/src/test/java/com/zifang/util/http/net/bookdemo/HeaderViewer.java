@@ -6,8 +6,16 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
 
+/**
+ * HeaderViewer类。
+ */
 public class HeaderViewer {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         for (int i = 0; i < args.length; i++) {
             try {

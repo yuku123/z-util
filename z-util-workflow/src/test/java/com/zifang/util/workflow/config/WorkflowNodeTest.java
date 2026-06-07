@@ -10,21 +10,33 @@ import static org.junit.Assert.*;
 /**
  * WorkflowNode 类测试
  */
+/**
+ * WorkflowNodeTest类。
+ */
 public class WorkflowNodeTest {
 
     private WorkflowNode node;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         node = new WorkflowNode();
     }
 
     @Test
+    /**
+     * testWorkflowNodeCreation方法。
+     */
     public void testWorkflowNodeCreation() {
         assertNotNull(node);
     }
 
     @Test
+    /**
+     * testNodeId方法。
+     */
     public void testNodeId() {
         node.setNodeId("node-001");
         assertEquals("node-001", node.getNodeId());
@@ -34,6 +46,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testGroupId方法。
+     */
     public void testGroupId() {
         node.setGroupId("group-001");
         assertEquals("group-001", node.getGroupId());
@@ -43,6 +58,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testName方法。
+     */
     public void testName() {
         node.setName("数据读取");
         assertEquals("数据读取", node.getName());
@@ -52,6 +70,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testType方法。
+     */
     public void testType() {
         node.setType("input");
         assertEquals("input", node.getType());
@@ -64,6 +85,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testServiceUnit方法。
+     */
     public void testServiceUnit() {
         node.setServiceUnit("java-service");
         assertEquals("java-service", node.getServiceUnit());
@@ -73,6 +97,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testInvokeDynamic方法。
+     */
     public void testInvokeDynamic() {
         node.setInvokeDynamic("handleData");
         assertEquals("handleData", node.getInvokeDynamic());
@@ -82,6 +109,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testInvokeParameter方法。
+     */
     public void testInvokeParameter() {
         // 测试参数可以是不同类型
         node.setInvokeParameter("string-param");
@@ -98,6 +128,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testConnector方法。
+     */
     public void testConnector() {
         Connector connector = new Connector();
         connector.setPre(new java.util.ArrayList<>());
@@ -108,6 +141,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testCache方法。
+     */
     public void testCache() {
         HashMap<String, String> cache = new HashMap<>();
         cache.put("key1", "value1");
@@ -120,6 +156,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testPutPost方法。
+     */
     public void testPutPost() {
         WorkflowNode node1 = new WorkflowNode();
         node1.setNodeId("node-1");
@@ -142,6 +181,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testPutPre方法。
+     */
     public void testPutPre() {
         WorkflowNode node1 = new WorkflowNode();
         node1.setNodeId("node-1");
@@ -164,6 +206,9 @@ public class WorkflowNodeTest {
     }
 
     @Test
+    /**
+     * testComplexWorkflowNode方法。
+     */
     public void testComplexWorkflowNode() {
         // 创建一个复杂的工作流节点
         WorkflowNode node = new WorkflowNode();

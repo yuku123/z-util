@@ -11,6 +11,9 @@ import java.util.List;
 /**
  * ParamsHandler类。
  */
+/**
+ * ParamsHandler类。
+ */
 public class ParamsHandler {
 
     /**
@@ -25,6 +28,12 @@ public class ParamsHandler {
      *
      * @param src
      * @param params
+     */
+    /**
+     * getParams方法。
+     *      * @param src String类型参数
+     * @param params ListString类型参数
+     * @return static void类型返回值
      */
     /**
      * getParams方法。
@@ -122,6 +131,12 @@ public class ParamsHandler {
      *
      * @param src
      * @param params
+     */
+    /**
+     * pureBasicTypeFill方法。
+     *      * @param src String类型参数
+     * @param params ListString类型参数
+     * @return static void类型返回值
      */
     /**
      * pureBasicTypeFill方法。

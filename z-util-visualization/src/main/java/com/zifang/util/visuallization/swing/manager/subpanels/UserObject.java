@@ -9,6 +9,9 @@ import java.util.Objects;
 /**
  * UserObject类。
  */
+/**
+ * UserObject类。
+ */
 public class UserObject {
 
     private Integer id;
@@ -18,12 +21,19 @@ public class UserObject {
     /**
      * 创建用户对象
      */
+    /**
+     * UserObject方法。
+     */
     public UserObject() {
     }
 
     /**
      * 获取用户ID
      * @return 用户ID
+     */
+    /**
+     * getId方法。
+     * @return int类型返回值
      */
     public Integer getId() {
         return id;
@@ -33,6 +43,10 @@ public class UserObject {
      * 设置用户ID
      * @param id 用户ID
      */
+    /**
+     * setId方法。
+     *      * @param id int类型参数
+     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -41,6 +55,10 @@ public class UserObject {
      * 获取显示名称
      * @return 显示名称
      */
+    /**
+     * getDisplayName方法。
+     * @return String类型返回值
+     */
     public String getDisplayName() {
         return displayName;
     }
@@ -48,6 +66,10 @@ public class UserObject {
     /**
      * 设置显示名称
      * @param displayName 显示名称
+     */
+    /**
+     * setDisplayName方法。
+     *      * @param displayName String类型参数
      */
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
@@ -58,6 +80,10 @@ public class UserObject {
      * @return 显示名称
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return displayName;
     }
@@ -70,6 +96,11 @@ public class UserObject {
      * @return 如果ID和显示名称都相同返回true，否则返回false
      */
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -85,6 +116,10 @@ public class UserObject {
      * @return 哈希码值
      */
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(id, displayName);
     }

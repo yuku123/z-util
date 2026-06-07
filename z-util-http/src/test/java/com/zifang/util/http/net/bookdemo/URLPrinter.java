@@ -4,8 +4,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/**
+ * URLPrinter类。
+ */
 public class URLPrinter {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try {
             URL u = new URL("http://www.oreilly.com/");

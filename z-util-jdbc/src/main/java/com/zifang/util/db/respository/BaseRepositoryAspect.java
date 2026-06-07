@@ -11,6 +11,9 @@ import java.lang.reflect.Method;
 /**
  * BaseRepositoryAspect类。
  */
+/**
+ * BaseRepositoryAspect类。
+ */
 public class BaseRepositoryAspect implements Aspect {
 
 
@@ -23,6 +26,13 @@ public class BaseRepositoryAspect implements Aspect {
      * @return true继续执行，false阻止执行
      */
     @Override
+    /**
+     * before方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return boolean类型返回值
+     */
     /**
      * before方法。
      *      * @param target Object类型参数
@@ -52,6 +62,14 @@ public class BaseRepositoryAspect implements Aspect {
      * @param returnVal Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * after方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param returnVal Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean after(Object target, Method method, Object[] args, Object returnVal) {
         return false;
     }
@@ -66,6 +84,14 @@ public class BaseRepositoryAspect implements Aspect {
      * @return true处理后继续抛出，false阻止抛出
      */
     @Override
+    /**
+     * afterException方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param e Throwable类型参数
+     * @return boolean类型返回值
+     */
     /**
      * afterException方法。
      *      * @param target Object类型参数

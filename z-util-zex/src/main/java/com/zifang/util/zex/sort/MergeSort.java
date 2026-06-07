@@ -21,12 +21,19 @@ package com.zifang.util.zex.sort;
  * @author zifang
  * @version 1.0
  */
+/**
+ * MergeSort类。
+ */
 public class MergeSort {
 
     /**
      * 对整数数组进行归并排序。
      *
      * @param arr 待排序的整数数组
+     */
+    /**
+     * sort方法。
+     *      * @param arr int[]类型参数
      */
     public void sort(int[] arr) {
         sort(arr, 0, arr.length - 1);

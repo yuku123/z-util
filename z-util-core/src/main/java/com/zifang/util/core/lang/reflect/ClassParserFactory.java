@@ -9,6 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * ClassParserFactory类。
  */
+/**
+ * ClassParserFactory类。
+ */
 public class ClassParserFactory implements IFactory<Class<?>, ClassParser> {
 
     /**
@@ -28,12 +31,23 @@ public class ClassParserFactory implements IFactory<Class<?>, ClassParser> {
      *      * @param clazz Class?类型参数
      * @return ClassParser类型返回值
      */
+    /**
+     * getInstance方法。
+     *      * @param clazz Class?类型参数
+     * @return ClassParser类型返回值
+     */
     public ClassParser getInstance(Class<?> clazz) {
         return getInstance(clazz, false);
     }
 
     /**
      * @param forceRefreshCache 是否需要强制刷新缓存
+     */
+    /**
+     * getInstance方法。
+     *      * @param clazz Class?类型参数
+     * @param forceRefreshCache boolean类型参数
+     * @return static ClassParser类型返回值
      */
     /**
      * getInstance方法。

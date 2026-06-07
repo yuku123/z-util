@@ -9,7 +9,15 @@ package com.zifang.util.zex.bust.chapter2;
  * @author zifang
  * @version 1.0
  */
+/**
+ * ASCII类。
+ */
 public class ASCII {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         for (char i = 0; i < 256; i++) {
             System.out.println((int) i + "->" + Integer.toBinaryString(i) + "->" + i);

@@ -11,9 +11,15 @@ import static org.junit.Assert.*;
 /**
  * AnnotationInfo 模型测试
  */
+/**
+ * AnnotationInfoTest类。
+ */
 public class AnnotationInfoTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         AnnotationInfo info = new AnnotationInfo();
         assertNull(info.getType());
@@ -21,6 +27,9 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testTypeConstructor方法。
+     */
     public void testTypeConstructor() {
         AnnotationInfo info = new AnnotationInfo("Deprecated");
         assertEquals("Deprecated", info.getType());
@@ -28,6 +37,9 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testAddMember方法。
+     */
     public void testAddMember() {
         AnnotationInfo info = new AnnotationInfo();
         info.setType("MyAnnotation");
@@ -39,12 +51,18 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testToStringSimple方法。
+     */
     public void testToStringSimple() {
         AnnotationInfo info = new AnnotationInfo("Deprecated");
         assertEquals("@Deprecated", info.toString());
     }
 
     @Test
+    /**
+     * testToStringWithMember方法。
+     */
     public void testToStringWithMember() {
         AnnotationInfo info = new AnnotationInfo("MyAnnotation");
         info.addMember("value", "\"test\"");
@@ -52,6 +70,9 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testToStringWithMultipleMembers方法。
+     */
     public void testToStringWithMultipleMembers() {
         AnnotationInfo info = new AnnotationInfo("MyAnnotation");
         info.addMember("name", "\"test\"");
@@ -63,6 +84,9 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testToStringWithSingleMemberAnnotation方法。
+     */
     public void testToStringWithSingleMemberAnnotation() {
         AnnotationInfo info = new AnnotationInfo("MyAnnotation");
         info.addMember("", "\"singleValue\"");
@@ -70,6 +94,9 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testAnnotationMember方法。
+     */
     public void testAnnotationMember() {
         AnnotationInfo.AnnotationMember member = new AnnotationInfo.AnnotationMember();
         member.setName("value");
@@ -79,6 +106,9 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testAnnotationMemberConstructor方法。
+     */
     public void testAnnotationMemberConstructor() {
         AnnotationInfo.AnnotationMember member = new AnnotationInfo.AnnotationMember("key", "123");
         assertEquals("key", member.getName());
@@ -86,6 +116,9 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testSetType方法。
+     */
     public void testSetType() {
         AnnotationInfo info = new AnnotationInfo();
         info.setType("Override");
@@ -93,6 +126,9 @@ public class AnnotationInfoTest {
     }
 
     @Test
+    /**
+     * testSetMembers方法。
+     */
     public void testSetMembers() {
         AnnotationInfo info = new AnnotationInfo();
         List<AnnotationInfo.AnnotationMember> members = new ArrayList<>();

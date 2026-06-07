@@ -15,6 +15,9 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
  * Java 在原子类中实现了CAS机制。这些类提供了compareAndSet() 方法；这个方法是CAS操作的实现和其他方法的基础。
  * Java 中还引入了原子Array，用来实现Integer类型和Long类型数组的操作。在这个指南里，你将要学习如何使用AtomicIntegerArray 类来操作原子 arrays。
  */
+/**
+ * AtomicIntegerArrayDemo类。
+ */
 public class AtomicIntegerArrayDemo {
     // 1.创建一个类，名为 Incrementer，并实现 Runnable 接口。
     static class Incrementer implements Runnable {
@@ -23,12 +26,19 @@ public class AtomicIntegerArrayDemo {
         private AtomicIntegerArray vector;
 
         // 3.实现类的构造函数，初始化它的属性值。
+    /**
+     * Incrementer方法。
+     *      * @param vector AtomicIntegerArray类型参数
+     */
         public Incrementer(AtomicIntegerArray vector) {
             this.vector = vector;
         }
 
         // 4.实现 run() 方法。使用 getAndIncrement() 方操作array里的所有元素。
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             for (int i = 0; i < vector.length(); i++) {
                 vector.getAndIncrement(i);
@@ -43,12 +53,19 @@ public class AtomicIntegerArrayDemo {
         private AtomicIntegerArray vector;
 
         // 7.实现类的构造函数，初始化它的属性值。
+    /**
+     * Decrementer方法。
+     *      * @param vector AtomicIntegerArray类型参数
+     */
         public Decrementer(AtomicIntegerArray vector) {
             this.vector = vector;
         }
 
         // 8.实现 run() 方法。使用 getAndDecrement() 方法操作array里的所有元素。
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             for (int i = 0; i < vector.length(); i++) {
                 vector.getAndDecrement(i);
@@ -57,6 +74,11 @@ public class AtomicIntegerArrayDemo {
     }
 
     // 9.我们创建一个示例来进行示范，创建一个类，名为 Main 并添加 main()方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         // 10.声明一个常量，名为 THREADS，分配它的值为 100。创建一个有1，000个元素的 AtomicIntegerArray 对象。

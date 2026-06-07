@@ -10,15 +10,24 @@ import static org.junit.Assert.*;
 /**
  * Engine 类测试
  */
+/**
+ * EngineTest类。
+ */
 public class EngineTest {
 
     @Test
+    /**
+     * testEngineCreation方法。
+     */
     public void testEngineCreation() {
         Engine engine = new Engine();
         assertNotNull(engine);
     }
 
     @Test
+    /**
+     * testEngineType方法。
+     */
     public void testEngineType() {
         Engine engine = new Engine();
         engine.setType("java");
@@ -32,6 +41,9 @@ public class EngineTest {
     }
 
     @Test
+    /**
+     * testEngineMode方法。
+     */
     public void testEngineMode() {
         Engine engine = new Engine();
         engine.setMode("local");
@@ -45,6 +57,9 @@ public class EngineTest {
     }
 
     @Test
+    /**
+     * testEngineProperties方法。
+     */
     public void testEngineProperties() {
         Engine engine = new Engine();
 
@@ -63,6 +78,9 @@ public class EngineTest {
     }
 
     @Test
+    /**
+     * testEngineWithEmptyProperties方法。
+     */
     public void testEngineWithEmptyProperties() {
         Engine engine = new Engine();
         engine.setProperties(new HashMap<>());
@@ -73,6 +91,9 @@ public class EngineTest {
     }
 
     @Test
+    /**
+     * testEngineWithNullProperties方法。
+     */
     public void testEngineWithNullProperties() {
         Engine engine = new Engine();
         engine.setProperties(null);
@@ -82,6 +103,9 @@ public class EngineTest {
     }
 
     @Test
+    /**
+     * testEngineEquality方法。
+     */
     public void testEngineEquality() {
         Engine engine1 = new Engine();
         engine1.setType("java");
@@ -97,6 +121,9 @@ public class EngineTest {
     }
 
     @Test
+    /**
+     * testEngineComplexConfiguration方法。
+     */
     public void testEngineComplexConfiguration() {
         Engine engine = new Engine();
 

@@ -11,8 +11,14 @@ package com.zifang.util.zex.bust.charpter12.test001;
  */
 import org.junit.Test;
 
+/**
+ * JoinTest类。
+ */
 public class JoinTest {
     @Test
+    /**
+     * test0方法。
+     */
     public void test0() {
         Thread th1 = new Thread(() -> {
             try {
@@ -51,6 +57,9 @@ public class JoinTest {
     }
 
     @Test
+    /**
+     * test1方法。
+     */
     public void test1() {
         Thread th1 = new Thread(() -> {
             try {

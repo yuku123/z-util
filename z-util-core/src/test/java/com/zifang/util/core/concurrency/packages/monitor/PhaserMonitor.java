@@ -9,6 +9,9 @@ import java.util.concurrent.TimeUnit;
  * Java 并发 API 提供的其中一个最复杂且强大的功能是使用 Phaser 类来执行同步phased任务。当有些任务可以分成步骤执行时，此机制是很有用的。Phaser类提供的同步线程机制是在每个步骤的末端， 所以全部的线程都完成第一步后，才能开始执行第二步。
  * 在这个指南，你将学习如何从Phaser类获取其状态信息。
  */
+/**
+ * PhaserMonitor类。
+ */
 public class PhaserMonitor {
 
     // 1. 创建一个类，名为 Task ，实现 Runnable 接口.
@@ -19,6 +22,11 @@ public class PhaserMonitor {
         private Phaser phaser;
 
         // 4. 实现类的构造函数，初始其属性值。
+    /**
+     * Task方法。
+     *      * @param time int类型参数
+     * @param phaser Phaser类型参数
+     */
         public Task(int time, Phaser phaser) {
             this.time = time;
             this.phaser = phaser;
@@ -26,6 +34,9 @@ public class PhaserMonitor {
 
         // 5. 实现 run() 方法。首先，使用 arrive() 方法指示 phaser 属性任务开始执行了。
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             phaser.arrive();
             // 6. 写信息到操控台表明阶段一开始，把线程放入休眠几秒，使用time属性来表明，再写信息到操控台表明阶段一结束，并使用
@@ -62,6 +73,11 @@ public class PhaserMonitor {
         }
 
         // 8. 创建例子的主类通过创建一个类，名为 Main 并添加 main()方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
         public static void main(String[] args) throws Exception {
             // 9. 创建新的有3个参与者的 Phaser 对象，名为 phaser。
             Phaser phaser = new Phaser(3);

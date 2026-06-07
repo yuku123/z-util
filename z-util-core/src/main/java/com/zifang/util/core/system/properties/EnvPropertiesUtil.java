@@ -8,10 +8,17 @@ import java.util.Map;
 /**
  * EnvPropertiesUtil类。
  */
+/**
+ * EnvPropertiesUtil类。
+ */
 public class EnvPropertiesUtil {
 
     /**
      * @return 当前宿主机系统级别的参数
+     */
+    /**
+     * getEnvProperties方法。
+     * @return static Map<String, String>类型返回值
      */
     /**
      * getEnvProperties方法。
@@ -26,6 +33,11 @@ public class EnvPropertiesUtil {
      *
      * @param propertyKey 环境(系统)
      * @return propertyKey 对应的系统参数值
+     */
+    /**
+     * getEnvProperty方法。
+     *      * @param propertyKey String类型参数
+     * @return static String类型返回值
      */
     /**
      * getEnvProperty方法。

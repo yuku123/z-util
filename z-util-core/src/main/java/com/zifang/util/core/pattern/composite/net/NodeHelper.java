@@ -6,5 +6,8 @@ package com.zifang.util.core.pattern.composite.net;
 /**
  * NodeHelper类。
  */
+/**
+ * NodeHelper类。
+ */
 public class NodeHelper {
 }

@@ -9,38 +9,59 @@ import static org.junit.Assert.*;
 /**
  * Unit tests for MemoryCache implementation.
  */
+/**
+ * MemoryCacheTest类。
+ */
 public class MemoryCacheTest {
 
     private MemoryCache cache;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         cache = new MemoryCache("test-cache", 16);
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         cache.clear();
         cache.shutdown();
     }
 
     @Test
+    /**
+     * testGetName方法。
+     */
     public void testGetName() {
         assertEquals("test-cache", cache.getName());
     }
 
     @Test
+    /**
+     * testPutAndGet方法。
+     */
     public void testPutAndGet() {
         cache.put("key1", "value1");
         assertEquals("value1", cache.get("key1"));
     }
 
     @Test
+    /**
+     * testGetNonExistentKey方法。
+     */
     public void testGetNonExistentKey() {
         assertNull(cache.get("non-existent"));
     }
 
     @Test
+    /**
+     * testPutWithTTL方法。
+     */
     public void testPutWithTTL() throws InterruptedException {
         cache.put("ttl-key", "ttl-value", 1);
         assertEquals("ttl-value", cache.get("ttl-key"));
@@ -51,6 +72,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testContains方法。
+     */
     public void testContains() {
         cache.put("key1", "value1");
         assertTrue(cache.contains("key1"));
@@ -58,6 +82,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testContainsExpired方法。
+     */
     public void testContainsExpired() throws InterruptedException {
         cache.put("ttl-key", "ttl-value", 1);
         Thread.sleep(1500);
@@ -65,6 +92,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testRemove方法。
+     */
     public void testRemove() {
         cache.put("key1", "value1");
         assertTrue(cache.remove("key1"));
@@ -75,6 +105,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testClear方法。
+     */
     public void testClear() {
         cache.put("key1", "value1");
         cache.put("key2", "value2");
@@ -85,6 +118,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testSize方法。
+     */
     public void testSize() {
         assertEquals(0, cache.size());
         cache.put("key1", "value1");
@@ -96,6 +132,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testOverwriteValue方法。
+     */
     public void testOverwriteValue() {
         cache.put("key1", "value1");
         cache.put("key1", "value2");
@@ -104,6 +143,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testNullValue方法。
+     */
     public void testNullValue() {
         cache.put("null-key", null);
         assertNull(cache.get("null-key"));
@@ -111,6 +153,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testCacheWithDefaultTTL方法。
+     */
     public void testCacheWithDefaultTTL() throws InterruptedException {
         MemoryCache ttlCache = new MemoryCache("ttl-cache", 16, 1);
         ttlCache.put("key1", "value1");
@@ -123,6 +168,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testMultiplePuts方法。
+     */
     public void testMultiplePuts() {
         for (int i = 0; i < 100; i++) {
             cache.put("key" + i, "value" + i);
@@ -135,6 +183,9 @@ public class MemoryCacheTest {
     }
 
     @Test
+    /**
+     * testExportImportRoundtrip方法。
+     */
     public void testExportImportRoundtrip() throws java.io.IOException {
         cache.put("k1", "v1");
         cache.put("k2", 42);
@@ -155,6 +206,9 @@ public class MemoryCacheTest {
     }
 
     @Test(expected = CacheException.class)
+    /**
+     * testImportFromFileNotFound方法。
+     */
     public void testImportFromFileNotFound() {
         cache.importFromFile("/tmp/this_file_definitely_does_not_exist_12345.cache");
     }

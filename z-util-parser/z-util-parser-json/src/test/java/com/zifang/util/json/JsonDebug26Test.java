@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug26Test类。
+ */
 public class JsonDebug26Test {
 
     @Test
+    /**
+     * testExactJsonDebug21Scenario方法。
+     */
     public void testExactJsonDebug21Scenario() throws Exception {
         // Exactly replicate JsonDebug21Test#testFullParseJsonObject
         String lexerG4 = loadG4("JsonLexer.g4");

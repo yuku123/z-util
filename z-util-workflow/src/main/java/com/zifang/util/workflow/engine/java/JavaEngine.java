@@ -15,6 +15,9 @@ import java.util.Map;
 /**
  * JavaEngine类。
  */
+/**
+ * JavaEngine类。
+ */
 public class JavaEngine extends AbstractEngine {
 
     /**
@@ -23,6 +26,10 @@ public class JavaEngine extends AbstractEngine {
      * @return 服务单元名称到服务类类型的映射
      */
     @Override
+    /**
+     * getRegisteredEngineServiceMap方法。
+     * @return Map<String, Class<? extends AbstractEngineService>>类型返回值
+     */
     /**
      * getRegisteredEngineServiceMap方法。
      * @return Map<String, Class<? extends AbstractEngineService>>类型返回值
@@ -38,6 +45,11 @@ public class JavaEngine extends AbstractEngine {
      * @return 引擎服务实例
      */
     @Override
+    /**
+     * getRegisteredEngineService方法。
+     *      * @param serviceUnit String类型参数
+     * @return AbstractEngineService类型返回值
+     */
     /**
      * getRegisteredEngineService方法。
      *      * @param serviceUnit String类型参数
@@ -59,6 +71,11 @@ public class JavaEngine extends AbstractEngine {
      *      * @param name String类型参数
      * @param engineService Class?类型参数
      */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param engineService Class?类型参数
+     */
     public void register(String name, Class<? extends AbstractEngineService> engineService) {
 
     }
@@ -67,6 +84,9 @@ public class JavaEngine extends AbstractEngine {
      * 引擎初始化方法。
      */
     @Override
+    /**
+     * doInitial方法。
+     */
     /**
      * doInitial方法。
      */

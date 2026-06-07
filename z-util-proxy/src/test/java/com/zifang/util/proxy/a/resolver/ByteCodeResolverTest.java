@@ -17,6 +17,9 @@ import static org.junit.Assert.*;
  * <p>
  * 测试字节码解析器的核心功能：解析 .class 文件并提取类信息。
  */
+/**
+ * ByteCodeResolverTest类。
+ */
 public class ByteCodeResolverTest {
 
     /**
@@ -25,6 +28,9 @@ public class ByteCodeResolverTest {
      * 使用内嵌的测试类进行解析，验证解析结果的正确性。
      */
     @Test
+    /**
+     * testParseSimpleClass方法。
+     */
     public void testParseSimpleClass() {
         // 获取测试类的字节码
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
@@ -64,6 +70,9 @@ public class ByteCodeResolverTest {
      * 验证常量池中的 UTF8 和 Class 常量能被正确解析。
      */
     @Test
+    /**
+     * testConstantPoolParsing方法。
+     */
     public void testConstantPoolParsing() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         assertNotNull("测试类字节码资源未找到", is);
@@ -99,6 +108,9 @@ public class ByteCodeResolverTest {
      * 测试从文件路径解析
      */
     @Test
+    /**
+     * testParseFromFilePath方法。
+     */
     public void testParseFromFilePath() {
         // 使用测试资源文件
         String resourcePath = getClass().getResource("/testclass/TestClassParse1.class").getFile();
@@ -113,6 +125,9 @@ public class ByteCodeResolverTest {
      * 测试无效魔数检测
      */
     @Test(expected = RuntimeException.class)
+    /**
+     * testInvalidMagicNumber方法。
+     */
     public void testInvalidMagicNumber() {
         // 创建一个假的字节码文件（无效魔数）
         byte[] fakeBytes = new byte[]{
@@ -129,6 +144,9 @@ public class ByteCodeResolverTest {
      * 测试获取方法数量
      */
     @Test
+    /**
+     * testGetMethodCount方法。
+     */
     public void testGetMethodCount() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         assertNotNull("测试类字节码资源未找到", is);

@@ -12,9 +12,16 @@ import java.io.InputStream;
 /**
  * U2类。
  */
+/**
+ * U2类。
+ */
 public class U2 {
     public short value;
 
+    /**
+     * U2方法。
+     *      * @param value short类型参数
+     */
     /**
      * U2方法。
      *      * @param value short类型参数
@@ -23,6 +30,11 @@ public class U2 {
         this.value = value;
     }
 
+    /**
+     * read方法。
+     *      * @param stream InputStream类型参数
+     * @return static U2类型返回值
+     */
     /**
      * read方法。
      *      * @param stream InputStream类型参数
@@ -45,6 +57,10 @@ public class U2 {
         return u2;
     }
 
+    /**
+     * getValue方法。
+     * @return short类型返回值
+     */
     /**
      * getValue方法。
      * @return short类型返回值

@@ -7,9 +7,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * QLearningTest类。
+ */
 public class QLearningTest {
 
     @Test
+    /**
+     * testQLearningConverges方法。
+     */
     public void testQLearningConverges() {
         // Simple grid world: 2 states, 2 actions
         // State 0 -> State 1 with reward 1, State 1 is terminal
@@ -27,6 +33,9 @@ public class QLearningTest {
     }
 
     @Test
+    /**
+     * testQLearningUpdate方法。
+     */
     public void testQLearningUpdate() {
         // Test that TD update changes Q-values
         QLearning agent = new QLearning(0.5, 0.9, 0.0, 1);
@@ -46,6 +55,9 @@ public class QLearningTest {
     }
 
     @Test
+    /**
+     * testQLearningBestAction方法。
+     */
     public void testQLearningBestAction() {
         QLearning agent = new QLearning(0.5, 0.9, 0.0, 1);
         
@@ -65,11 +77,19 @@ public class QLearningTest {
         }
         
         @Override
+    /**
+     * getState方法。
+     * @return Object类型返回值
+     */
         public Object getState() {
             return id;
         }
         
         @Override
+    /**
+     * getAvailableActions方法。
+     * @return List<QLearning.ActionResult>类型返回值
+     */
         public List<QLearning.ActionResult> getAvailableActions() {
             List<QLearning.ActionResult> actions = new ArrayList<>();
             // SimpleState 0 -> state 1 with reward 1
@@ -97,15 +117,31 @@ public class QLearningTest {
         }
         
         @Override
+    /**
+     * getAction方法。
+     * @return Object类型返回值
+     */
         public Object getAction() { return action; }
         
         @Override
+    /**
+     * getNextState方法。
+     * @return QLearning.State类型返回值
+     */
         public QLearning.State getNextState() { return nextState; }
         
         @Override
+    /**
+     * getReward方法。
+     * @return double类型返回值
+     */
         public double getReward() { return reward; }
         
         @Override
+    /**
+     * isTerminal方法。
+     * @return boolean类型返回值
+     */
         public boolean isTerminal() { return terminal; }
     }
 }

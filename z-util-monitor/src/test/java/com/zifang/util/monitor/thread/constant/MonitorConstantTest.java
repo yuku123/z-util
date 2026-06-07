@@ -3,9 +3,15 @@ package com.zifang.util.monitor.thread.constant;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * MonitorConstantTest类。
+ */
 public class MonitorConstantTest {
 
     @Test
+    /**
+     * testConstants方法。
+     */
     public void testConstants() {
         assertNotNull(MonitorConstant.INIT_STATUS);
         assertEquals("threadStartTime", MonitorConstant.THREAD_START_TIME);
@@ -13,6 +19,9 @@ public class MonitorConstantTest {
     }
 
     @Test
+    /**
+     * testPrivateConstructor方法。
+     */
     public void testPrivateConstructor() {
         // Test that the class cannot be instantiated
         try {

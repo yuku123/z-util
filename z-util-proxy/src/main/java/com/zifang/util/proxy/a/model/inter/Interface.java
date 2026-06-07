@@ -10,9 +10,16 @@ import com.zifang.util.proxy.a.model.readtype.U2;
 /**
  * Interface类。
  */
+/**
+ * Interface类。
+ */
 public class Interface {
     public U2 index;
 
+    /**
+     * Interface方法。
+     *      * @param index U2类型参数
+     */
     /**
      * Interface方法。
      *      * @param index U2类型参数

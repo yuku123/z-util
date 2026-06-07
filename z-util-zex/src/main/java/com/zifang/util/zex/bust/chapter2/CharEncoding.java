@@ -9,7 +9,15 @@ package com.zifang.util.zex.bust.chapter2;
  * @author zifang
  * @version 1.0
  */
+/**
+ * CharEncoding类。
+ */
 public class CharEncoding {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         char c0 = '\u5f20';
         System.out.println();

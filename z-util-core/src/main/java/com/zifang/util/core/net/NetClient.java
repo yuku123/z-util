@@ -13,6 +13,9 @@ import java.io.IOException;
 /**
  * NetClient接口。
  */
+/**
+ * NetClient接口。
+ */
 public interface NetClient extends Closeable {
 
     /**

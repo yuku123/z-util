@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * KMeansTest类。
+ */
 public class KMeansTest {
 
     private Random random = new Random(42);
@@ -51,6 +54,9 @@ public class KMeansTest {
     }
 
     @Test
+    /**
+     * testKMeansFit方法。
+     */
     public void testKMeansFit() {
         int nSamplesPerCluster = 30;
         NdArray X = generateClusteredData(nSamplesPerCluster);
@@ -74,6 +80,9 @@ public class KMeansTest {
     }
 
     @Test
+    /**
+     * testKMeansPredict方法。
+     */
     public void testKMeansPredict() {
         int nSamplesPerCluster = 25;
         NdArray Xtrain = generateClusteredData(nSamplesPerCluster);
@@ -102,6 +111,9 @@ public class KMeansTest {
     }
 
     @Test
+    /**
+     * testKMeansConvergence方法。
+     */
     public void testKMeansConvergence() {
         int nSamplesPerCluster = 20;
         NdArray X = generateClusteredData(nSamplesPerCluster);
@@ -118,6 +130,9 @@ public class KMeansTest {
     }
 
     @Test
+    /**
+     * testKMeansEmptyCluster方法。
+     */
     public void testKMeansEmptyCluster() {
         // Create data where one cluster might be empty due to initialization
         double[][] data = new double[30][2];

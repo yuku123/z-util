@@ -12,12 +12,20 @@ import java.util.Set;
 /**
  * Bits类。
  */
+/**
+ * Bits类。
+ */
 public class Bits {
 
     static final int MAXIMUM_CAPACITY = 1 << 30;
 
     /**
      * 得到int 与 long 二进制字符串
+     */
+    /**
+     * binaryStr方法。
+     *      * @param number Number类型参数
+     * @return static String类型返回值
      */
     /**
      * binaryStr方法。
@@ -45,12 +53,22 @@ public class Bits {
      *      * @param i int类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isOdd方法。
+     *      * @param i int类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isOdd(int i) {
         return (abs(i) & 1) != 0;
     }
 
     /**
      * 判断是偶数
+     */
+    /**
+     * isEven方法。
+     *      * @param i int类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isEven方法。
@@ -70,12 +88,23 @@ public class Bits {
      * @param y int类型参数
      * @return static int类型返回值
      */
+    /**
+     * avg方法。
+     *      * @param x int类型参数
+     * @param y int类型参数
+     * @return static int类型返回值
+     */
     public static int avg(int x, int y) {
         return (x & y) + ((x ^ y) >> 1);
     }
 
     /**
      * 是否是2的次方
+     */
+    /**
+     * isPowFrom2方法。
+     *      * @param x int类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isPowFrom2方法。
@@ -94,6 +123,11 @@ public class Bits {
      *      * @param x int类型参数
      * @return static int类型返回值
      */
+    /**
+     * abs方法。
+     *      * @param x int类型参数
+     * @return static int类型返回值
+     */
     public static int abs(int x) {
         int y = x >> 31;
         return (x ^ y) - y;
@@ -101,6 +135,12 @@ public class Bits {
 
     /**
      * 快速取模
+     */
+    /**
+     * mod方法。
+     *      * @param x int类型参数
+     * @param mod int类型参数
+     * @return static int类型返回值
      */
     /**
      * mod方法。
@@ -124,6 +164,11 @@ public class Bits {
      *      * @param n int类型参数
      * @return static int类型返回值
      */
+    /**
+     * multipleLess方法。
+     *      * @param n int类型参数
+     * @return static int类型返回值
+     */
     public static int multipleLess(int n) {
         n |= n >> 1;
         n |= n >> 2;
@@ -134,6 +179,11 @@ public class Bits {
 
     /**
      * 获得cap以上，最接近cap的2的倍数
+     */
+    /**
+     * multipleMore方法。
+     *      * @param cap int类型参数
+     * @return static int类型返回值
      */
     /**
      * multipleMore方法。
@@ -159,6 +209,12 @@ public class Bits {
      * @param k int类型参数
      * @return static int类型返回值
      */
+    /**
+     * at方法。
+     *      * @param i int类型参数
+     * @param k int类型参数
+     * @return static int类型返回值
+     */
     public static int at(int i, int k) {
         return 1; // todo
     }
@@ -170,6 +226,12 @@ public class Bits {
      * @time: 2020/9/5 17:15
      * @params: [flagSet, index] 请求参数
      * @return: long 响应参数
+     */
+    /**
+     * setFalse方法。
+     *      * @param flagSet long类型参数
+     * @param index int类型参数
+     * @return static long类型返回值
      */
     /**
      * setFalse方法。
@@ -195,6 +257,12 @@ public class Bits {
      * @param index int类型参数
      * @return static long类型返回值
      */
+    /**
+     * setTrue方法。
+     *      * @param flagSet long类型参数
+     * @param index int类型参数
+     * @return static long类型返回值
+     */
     public static long setTrue(long flagSet, int index) {
         return (flagSet | (1L << index));
     }
@@ -205,6 +273,12 @@ public class Bits {
      * @time: 2020/9/5 17:17
      * @params: [flagSet, index] 请求参数
      * @return: boolean 响应参数
+     */
+    /**
+     * getFlag方法。
+     *      * @param flagSet long类型参数
+     * @param index int类型参数
+     * @return static boolean类型返回值
      */
     /**
      * getFlag方法。
@@ -229,6 +303,12 @@ public class Bits {
      * @param index byte类型参数
      * @return static long类型返回值
      */
+    /**
+     * setFalse方法。
+     *      * @param flagSet long类型参数
+     * @param index byte类型参数
+     * @return static long类型返回值
+     */
     public static long setFalse(long flagSet, byte index) {
         return setFalse(flagSet, Integer.valueOf(index));
     }
@@ -239,6 +319,12 @@ public class Bits {
      * @time: 2020/9/5 17:15
      * @params: [flagSet, index] 请求参数
      * @return: long 响应参数
+     */
+    /**
+     * setTrue方法。
+     *      * @param flagSet long类型参数
+     * @param index byte类型参数
+     * @return static long类型返回值
      */
     /**
      * setTrue方法。
@@ -263,6 +349,12 @@ public class Bits {
      * @param index byte类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * getFlag方法。
+     *      * @param flagSet long类型参数
+     * @param index byte类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean getFlag(long flagSet, byte index) {
         return getFlag(flagSet, Integer.valueOf(index));
     }
@@ -273,6 +365,11 @@ public class Bits {
      * @time: 2020/12/7 18:07
      * @params: [flagSet] 请求参数
      * @return: boolean 响应参数
+     */
+    /**
+     * getAllTrueIndex方法。
+     *      * @param flagSet long类型参数
+     * @return static Set<Byte>类型返回值
      */
     /**
      * getAllTrueIndex方法。
@@ -296,6 +393,11 @@ public class Bits {
      * @time: 2020/12/7 18:07
      * @params: [flagSet] 请求参数
      * @return: boolean 响应参数
+     */
+    /**
+     * getAllFalseIndex方法。
+     *      * @param flagSet long类型参数
+     * @return static Set<Byte>类型返回值
      */
     /**
      * getAllFalseIndex方法。

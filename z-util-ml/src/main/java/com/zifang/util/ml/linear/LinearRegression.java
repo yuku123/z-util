@@ -12,6 +12,9 @@ import com.zifang.util.numpy.Shape;
 /**
  * LinearRegression类。
  */
+/**
+ * LinearRegression类。
+ */
 public class LinearRegression {
     
     private double lambda;
@@ -23,6 +26,10 @@ public class LinearRegression {
      * Create a new Linear Regression model.
      * 
      * @param lambda Ridge regularization parameter (0 for plain OLS)
+     */
+    /**
+     * LinearRegression方法。
+     *      * @param lambda double类型参数
      */
     /**
      * LinearRegression方法。
@@ -84,6 +91,11 @@ public class LinearRegression {
      *      * @param X NdArray类型参数
      * @param y double[]类型参数
      */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y double[]类型参数
+     */
     public void fit(NdArray X, double[] y) {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
@@ -100,6 +112,11 @@ public class LinearRegression {
      * 
      * @param X Feature matrix of shape [n_samples, n_features]
      * @param y Target values of shape [n_samples, n_targets]
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y NdArray类型参数
      */
     /**
      * fit方法。
@@ -164,6 +181,11 @@ public class LinearRegression {
      * 
      * @param X Feature matrix of shape [n_samples, n_features]
      * @return NdArray of predictions of shape [n_samples] or [n_samples, n_targets]
+     */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
      */
     /**
      * predict方法。

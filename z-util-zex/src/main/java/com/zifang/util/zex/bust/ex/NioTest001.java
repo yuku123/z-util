@@ -13,6 +13,9 @@ import org.junit.Test;
 
 import java.nio.*;
 
+/**
+ * NioTest001类。
+ */
 public class NioTest001 {
 
     // capacity（容量）
@@ -21,6 +24,9 @@ public class NioTest001 {
     //·mark（标记）
     // 0≤mark≤position≤limit≤capacity
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() {
         byte[] byteArray = new byte[]{1, 2, 3};
         short[] shortArray = new short[]{1, 2, 3, 4};

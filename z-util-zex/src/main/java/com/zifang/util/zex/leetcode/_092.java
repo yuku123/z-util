@@ -9,6 +9,9 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _092类。
+ */
 public class _092 {
     static class ListNode {
       int val;
@@ -18,6 +21,13 @@ public class _092 {
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
+    /**
+     * reverseBetween方法。
+     *      * @param head ListNode类型参数
+     * @param left int类型参数
+     * @param right int类型参数
+     * @return ListNode类型返回值
+     */
     public ListNode reverseBetween(ListNode head, int left, int right) {
 
         if(left == right){
@@ -61,6 +71,11 @@ public class _092 {
 
         return head;
     }
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         ListNode l5 = new ListNode(5);

@@ -12,11 +12,17 @@ import java.util.*;
 /**
  * OperandStack类。
  */
+/**
+ * OperandStack类。
+ */
 public class OperandStack {
 
     private final Deque<Object> stack;
     private final int maxSize;
 
+    /**
+     * OperandStack方法。
+     */
     /**
      * OperandStack方法。
      */
@@ -28,6 +34,10 @@ public class OperandStack {
      * OperandStack方法。
      *      * @param maxSize int类型参数
      */
+    /**
+     * OperandStack方法。
+     *      * @param maxSize int类型参数
+     */
     public OperandStack(int maxSize) {
         this.stack = new ArrayDeque<>(maxSize);
         this.maxSize = maxSize;
@@ -35,6 +45,10 @@ public class OperandStack {
 
     /**
      * 入栈
+     */
+    /**
+     * push方法。
+     *      * @param value Object类型参数
      */
     /**
      * push方法。
@@ -55,6 +69,10 @@ public class OperandStack {
      * pop方法。
      * @return <T> T类型返回值
      */
+    /**
+     * pop方法。
+     * @return <T> T类型返回值
+     */
     public <T> T pop() {
         if (stack.isEmpty()) {
             throw new IllegalStateException("Operand stack is empty");
@@ -66,6 +84,10 @@ public class OperandStack {
      * 查看栈顶元素
      */
     @SuppressWarnings("unchecked")
+    /**
+     * peek方法。
+     * @return <T> T类型返回值
+     */
     /**
      * peek方法。
      * @return <T> T类型返回值
@@ -85,6 +107,10 @@ public class OperandStack {
      * peekUnder方法。
      * @return <T> T类型返回值
      */
+    /**
+     * peekUnder方法。
+     * @return <T> T类型返回值
+     */
     public <T> T peekUnder() {
         if (stack.size() < 2) {
             throw new IllegalStateException("Not enough elements in stack");
@@ -100,6 +126,9 @@ public class OperandStack {
     /**
      * dup方法。
      */
+    /**
+     * dup方法。
+     */
     public void dup() {
         Object top = peek();
         push(top);
@@ -107,6 +136,9 @@ public class OperandStack {
 
     /**
      * 复制栈顶元素并插入下方
+     */
+    /**
+     * dupUnder方法。
      */
     /**
      * dupUnder方法。
@@ -125,6 +157,9 @@ public class OperandStack {
     /**
      * swap方法。
      */
+    /**
+     * swap方法。
+     */
     public void swap() {
         Object a = pop();
         Object b = pop();
@@ -134,6 +169,10 @@ public class OperandStack {
 
     /**
      * 栈大小
+     */
+    /**
+     * size方法。
+     * @return int类型返回值
      */
     /**
      * size方法。
@@ -150,6 +189,10 @@ public class OperandStack {
      * isEmpty方法。
      * @return boolean类型返回值
      */
+    /**
+     * isEmpty方法。
+     * @return boolean类型返回值
+     */
     public boolean isEmpty() {
         return stack.isEmpty();
     }
@@ -160,12 +203,19 @@ public class OperandStack {
     /**
      * clear方法。
      */
+    /**
+     * clear方法。
+     */
     public void clear() {
         stack.clear();
     }
 
     /**
      * 将栈转为列表
+     */
+    /**
+     * toList方法。
+     * @return List<Object>类型返回值
      */
     /**
      * toList方法。
@@ -182,11 +232,19 @@ public class OperandStack {
      * getStack方法。
      * @return List<Object>类型返回值
      */
+    /**
+     * getStack方法。
+     * @return List<Object>类型返回值
+     */
     public List<Object> getStack() {
         return new ArrayList<>(stack);
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

@@ -12,10 +12,18 @@ import java.util.concurrent.TimeUnit;
 /**
  * TerminalUtil类。
  */
+/**
+ * TerminalUtil类。
+ */
 public class TerminalUtil {
 
     /**
      * @param cmd the command that include pipeline executions such as >
+     */
+    /**
+     * runCommandAsShScript方法。
+     *      * @param cmd String类型参数
+     * @return static void类型返回值
      */
     /**
      * runCommandAsShScript方法。
@@ -37,6 +45,11 @@ public class TerminalUtil {
         }
     }
 
+    /**
+     * runExec方法。
+     *      * @param cmdarray String[]类型参数
+     * @return static void类型返回值
+     */
     /**
      * runExec方法。
      *      * @param cmdarray String[]类型参数
@@ -65,6 +78,11 @@ public class TerminalUtil {
      *      * @param command String类型参数
      * @return static String类型返回值
      */
+    /**
+     * runAndGetReturn方法。
+     *      * @param command String类型参数
+     * @return static String类型返回值
+     */
     public static String runAndGetReturn(String command) throws IOException {
         StringBuffer sb = new StringBuffer();
         Process process = Runtime.getRuntime().exec(command);
@@ -81,6 +99,11 @@ public class TerminalUtil {
      *      * @param command String类型参数
      * @return static void类型返回值
      */
+    /**
+     * runAndGetPrint方法。
+     *      * @param command String类型参数
+     * @return static void类型返回值
+     */
     public static void runAndGetPrint(String command) throws IOException {
         Process process = Runtime.getRuntime().exec(command);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
@@ -90,6 +113,12 @@ public class TerminalUtil {
         }
     }
 
+    /**
+     * runAndGetPrint方法。
+     *      * @param command String类型参数
+     * @param timeout long类型参数
+     * @return static void类型返回值
+     */
     /**
      * runAndGetPrint方法。
      *      * @param command String类型参数
@@ -126,6 +155,11 @@ public class TerminalUtil {
      *      * @param command String类型参数
      * @return static Integer类型返回值
      */
+    /**
+     * runAndGetReturnStatus方法。
+     *      * @param command String类型参数
+     * @return static Integer类型返回值
+     */
     public static Integer runAndGetReturnStatus(String command) throws IOException, InterruptedException {
         StringBuffer sb = new StringBuffer();
         Process process = Runtime.getRuntime().exec(command);
@@ -136,6 +170,11 @@ public class TerminalUtil {
      * @param command let os to execute the command and return the result of command
      *                if command do print something
      * @return String the result-print-out that when you execute in os,and in java console it will print out
+     */
+    /**
+     * runAndPrintLog方法。
+     *      * @param command String类型参数
+     * @return static String类型返回值
      */
     /**
      * runAndPrintLog方法。

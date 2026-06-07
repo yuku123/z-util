@@ -26,6 +26,9 @@ import java.util.Objects;
 /**
  * Task类。
  */
+/**
+ * Task类。
+ */
 public class Task {
 
     /**
@@ -54,6 +57,9 @@ public class Task {
     /**
      * Task方法。
      */
+    /**
+     * Task方法。
+     */
     public Task() {
     }
 
@@ -61,6 +67,10 @@ public class Task {
      * 获取工作流应用上下文
      *
      * @return 工作流应用上下文
+     */
+    /**
+     * getWorkFlowApplicationContext方法。
+     * @return WorkFlowApplicationContext类型返回值
      */
     /**
      * getWorkFlowApplicationContext方法。
@@ -79,6 +89,10 @@ public class Task {
      * setWorkFlowApplicationContext方法。
      *      * @param workFlowApplicationContext WorkFlowApplicationContext类型参数
      */
+    /**
+     * setWorkFlowApplicationContext方法。
+     *      * @param workFlowApplicationContext WorkFlowApplicationContext类型参数
+     */
     public void setWorkFlowApplicationContext(WorkFlowApplicationContext workFlowApplicationContext) {
         this.workFlowApplicationContext = workFlowApplicationContext;
     }
@@ -87,6 +101,10 @@ public class Task {
      * 获取起始节点
      *
      * @return 起始节点
+     */
+    /**
+     * getStart方法。
+     * @return ExecutableWorkflowNode类型返回值
      */
     /**
      * getStart方法。
@@ -105,6 +123,10 @@ public class Task {
      * setStart方法。
      *      * @param start ExecutableWorkflowNode类型参数
      */
+    /**
+     * setStart方法。
+     *      * @param start ExecutableWorkflowNode类型参数
+     */
     public void setStart(ExecutableWorkflowNode start) {
         this.start = start;
     }
@@ -113,6 +135,10 @@ public class Task {
      * 获取可执行工作流节点列表
      *
      * @return 可执行节点列表
+     */
+    /**
+     * getExecutableWorkNodes方法。
+     * @return List<ExecutableWorkflowNode>类型返回值
      */
     /**
      * getExecutableWorkNodes方法。
@@ -131,6 +157,10 @@ public class Task {
      * setExecutableWorkNodes方法。
      *      * @param executableWorkNodes ListExecutableWorkflowNode类型参数
      */
+    /**
+     * setExecutableWorkNodes方法。
+     *      * @param executableWorkNodes ListExecutableWorkflowNode类型参数
+     */
     public void setExecutableWorkNodes(List<ExecutableWorkflowNode> executableWorkNodes) {
         this.executableWorkNodes = executableWorkNodes;
     }
@@ -139,6 +169,10 @@ public class Task {
      * 获取节点ID到节点的映射表
      *
      * @return 节点映射表
+     */
+    /**
+     * getExecutableWorkNodeIdMap方法。
+     * @return Map<String, ExecutableWorkflowNode>类型返回值
      */
     /**
      * getExecutableWorkNodeIdMap方法。
@@ -157,6 +191,10 @@ public class Task {
      * setExecutableWorkNodeIdMap方法。
      *      * @param executableWorkNodeIdMap MapString,类型参数
      */
+    /**
+     * setExecutableWorkNodeIdMap方法。
+     *      * @param executableWorkNodeIdMap MapString,类型参数
+     */
     public void setExecutableWorkNodeIdMap(Map<String, ExecutableWorkflowNode> executableWorkNodeIdMap) {
         this.executableWorkNodeIdMap = executableWorkNodeIdMap;
     }
@@ -170,11 +208,18 @@ public class Task {
     /**
      * exec方法。
      */
+    /**
+     * exec方法。
+     */
     public void exec() {
         start.exec();
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -194,6 +239,11 @@ public class Task {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -205,6 +255,10 @@ public class Task {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

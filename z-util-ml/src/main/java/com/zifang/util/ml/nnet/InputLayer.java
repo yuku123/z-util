@@ -7,5 +7,8 @@ package com.zifang.util.ml.nnet;
 /**
  * InputLayer类。
  */
+/**
+ * InputLayer类。
+ */
 public class InputLayer {
 }

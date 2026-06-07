@@ -11,11 +11,19 @@ package com.zifang.util.core.pattern.chain;
 /**
  * NamedProcessor类。
  */
+/**
+ * NamedProcessor类。
+ */
 public class NamedProcessor<C extends ChainContext<?, ?>> implements Processor<C> {
 
     private final String name;
     private final Processor<C> delegate;
 
+    /**
+     * NamedProcessor方法。
+     *      * @param name String类型参数
+     * @param delegate ProcessorC类型参数
+     */
     /**
      * NamedProcessor方法。
      *      * @param name String类型参数
@@ -32,10 +40,19 @@ public class NamedProcessor<C extends ChainContext<?, ?>> implements Processor<C
      *      * @param context C类型参数
      * @return ProcessorResult类型返回值
      */
+    /**
+     * process方法。
+     *      * @param context C类型参数
+     * @return ProcessorResult类型返回值
+     */
     public ProcessorResult process(C context) {
         return delegate.process(context);
     }
 
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     /**
      * getName方法。
      * @return String类型返回值
@@ -48,11 +65,19 @@ public class NamedProcessor<C extends ChainContext<?, ?>> implements Processor<C
      * getDelegate方法。
      * @return Processor<C>类型返回值
      */
+    /**
+     * getDelegate方法。
+     * @return Processor<C>类型返回值
+     */
     public Processor<C> getDelegate() {
         return delegate;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

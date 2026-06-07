@@ -25,5 +25,8 @@ package com.zifang.util.db.helper;
 /**
  * SqlAnalyser类。
  */
+/**
+ * SqlAnalyser类。
+ */
 public class SqlAnalyser {
 }

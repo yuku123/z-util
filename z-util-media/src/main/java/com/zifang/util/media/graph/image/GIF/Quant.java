@@ -10,6 +10,9 @@ package com.zifang.util.media.graph.image.GIF;
 /**
  * Quant类。
  */
+/**
+ * Quant类。
+ */
 public class Quant {
     protected static final int netsize = 256; /* number of colours used */
 
@@ -20,6 +23,11 @@ public class Quant {
     protected static final int prime3 = 487;
     protected static final int prime4 = 503;
 
+    /**
+     * =方法。
+     *      * @param prime4 3类型参数
+     * @return static final int minpicturebytes类型返回值
+     */
     /**
      * =方法。
      *      * @param prime4 3类型参数
@@ -48,12 +56,22 @@ public class Quant {
      *      * @param 1 netsize类型参数
      * @return static final int maxnetpos类型返回值
      */
+    /**
+     * =方法。
+     *      * @param 1 netsize类型参数
+     * @return static final int maxnetpos类型返回值
+     */
     protected static final int maxnetpos = (netsize - 1);
     protected static final int netbiasshift = 4; /* bias for colour values */
     protected static final int ncycles = 100; /* no. of learning cycles */
 
     /* defs for freq and bias */
     protected static final int intbiasshift = 16; /* bias for fractions */
+    /**
+     * =方法。
+     *      * @param intbiasshift 1类型参数
+     * @return static final int intbias类型返回值
+     */
     /**
      * =方法。
      *      * @param intbiasshift 1类型参数
@@ -66,8 +84,18 @@ public class Quant {
      *      * @param gammashift 1类型参数
      * @return static final int gamma类型返回值
      */
+    /**
+     * =方法。
+     *      * @param gammashift 1类型参数
+     * @return static final int gamma类型返回值
+     */
     protected static final int gamma = (1 << gammashift);
     protected static final int betashift = 10;
+    /**
+     * =方法。
+     *      * @param betashift intbias类型参数
+     * @return static final int beta类型返回值
+     */
     /**
      * =方法。
      *      * @param betashift intbias类型参数
@@ -83,8 +111,18 @@ public class Quant {
      *      * @param 3 netsize类型参数
      * @return static final int initrad类型返回值
      */
+    /**
+     * =方法。
+     *      * @param 3 netsize类型参数
+     * @return static final int initrad类型返回值
+     */
     protected static final int initrad = (netsize >> 3); /* for 256 cols, radius starts */
     protected static final int radiusbiasshift = 6; /* at 32.0 biased by 6 bits */
+    /**
+     * =方法。
+     *      * @param radiusbiasshift 1类型参数
+     * @return static final int radiusbias类型返回值
+     */
     /**
      * =方法。
      *      * @param radiusbiasshift 1类型参数
@@ -96,11 +134,21 @@ public class Quant {
      *      * @param radiusbias initrad类型参数
      * @return static final int initradius类型返回值
      */
+    /**
+     * =方法。
+     *      * @param radiusbias initrad类型参数
+     * @return static final int initradius类型返回值
+     */
     protected static final int initradius = (initrad * radiusbias); /* and decreases by a */
     protected static final int radiusdec = 30; /* factor of 1/30 each cycle */
 
     /* defs for decreasing alpha factor */
     protected static final int alphabiasshift = 10; /* alpha starts at 1.0 */
+    /**
+     * =方法。
+     *      * @param alphabiasshift 1类型参数
+     * @return static final int initalpha类型返回值
+     */
     /**
      * =方法。
      *      * @param alphabiasshift 1类型参数
@@ -117,13 +165,28 @@ public class Quant {
      *      * @param radbiasshift 1类型参数
      * @return static final int radbias类型返回值
      */
+    /**
+     * =方法。
+     *      * @param radbiasshift 1类型参数
+     * @return static final int radbias类型返回值
+     */
     protected static final int radbias = (1 << radbiasshift);
     /**
      * =方法。
      *      * @param radbiasshift alphabiasshift类型参数
      * @return static final int alpharadbshift类型返回值
      */
+    /**
+     * =方法。
+     *      * @param radbiasshift alphabiasshift类型参数
+     * @return static final int alpharadbshift类型返回值
+     */
     protected static final int alpharadbshift = (alphabiasshift + radbiasshift);
+    /**
+     * =方法。
+     *      * @param alpharadbshift 1类型参数
+     * @return static final int alpharadbias类型返回值
+     */
     /**
      * =方法。
      *      * @param alpharadbshift 1类型参数
@@ -166,6 +229,12 @@ public class Quant {
      * @param len int类型参数
      * @param sample int类型参数
      */
+    /**
+     * Quant方法。
+     *      * @param thepic byte[]类型参数
+     * @param len int类型参数
+     * @param sample int类型参数
+     */
     public Quant(byte[] thepic, int len, int sample) {
 
         int i;
@@ -194,6 +263,10 @@ public class Quant {
      * colorMap方法。
      * @return byte[]类型返回值
      */
+    /**
+     * colorMap方法。
+     * @return byte[]类型返回值
+     */
     public byte[] colorMap() {
         byte[] map = new byte[3 * netsize];
         int[] index = new int[netsize];
@@ -212,6 +285,9 @@ public class Quant {
     /**
      * 插入排序：对网络进行排序并构建快速查找表 netindex。
      * 在 unbias 操作之后调用。
+     */
+    /**
+     * inxbuild方法。
      */
     /**
      * inxbuild方法。
@@ -270,6 +346,9 @@ public class Quant {
     /**
      * 主学习循环。
      * 通过迭代调整神经网络的权重，使其学习输入图像的颜色分布。
+     */
+    /**
+     * learn方法。
      */
     /**
      * learn方法。
@@ -363,6 +442,13 @@ public class Quant {
      * @param r int类型参数
      * @return int类型返回值
      */
+    /**
+     * map方法。
+     *      * @param b int类型参数
+     * @param g int类型参数
+     * @param r int类型参数
+     * @return int类型返回值
+     */
     public int map(int b, int g, int r) {
 
         int i, j, dist, a, bestd;
@@ -438,6 +524,10 @@ public class Quant {
      * process方法。
      * @return byte[]类型返回值
      */
+    /**
+     * process方法。
+     * @return byte[]类型返回值
+     */
     public byte[] process() {
         learn();
         unbiasnet();
@@ -448,6 +538,9 @@ public class Quant {
     /**
      * 去除网络偏差，将权重值偏移回 0..255 范围。
      * 并记录颜色编号，为排序做准备。
+     */
+    /**
+     * unbiasnet方法。
      */
     /**
      * unbiasnet方法。
@@ -473,6 +566,14 @@ public class Quant {
      * @param b   蓝色分量
      * @param g   绿色分量
      * @param r   红色分量
+     */
+    /**
+     * alterneigh方法。
+     *      * @param rad int类型参数
+     * @param i int类型参数
+     * @param b int类型参数
+     * @param g int类型参数
+     * @param r int类型参数
      */
     /**
      * alterneigh方法。
@@ -537,6 +638,14 @@ public class Quant {
      * @param g int类型参数
      * @param r int类型参数
      */
+    /**
+     * altersingle方法。
+     *      * @param alpha int类型参数
+     * @param i int类型参数
+     * @param b int类型参数
+     * @param g int类型参数
+     * @param r int类型参数
+     */
     protected void altersingle(int alpha, int i, int b, int g, int r) {
 
         /* alter hit neuron */
@@ -555,6 +664,13 @@ public class Quant {
      * @param g 绿色分量
      * @param r 红色分量
      * @return 最佳匹配神经元的索引
+     */
+    /**
+     * contest方法。
+     *      * @param b int类型参数
+     * @param g int类型参数
+     * @param r int类型参数
+     * @return int类型返回值
      */
     /**
      * contest方法。

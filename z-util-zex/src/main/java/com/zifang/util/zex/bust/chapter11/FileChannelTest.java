@@ -16,7 +16,15 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Arrays;
 
+/**
+ * FileChannelTest类。
+ */
 public class FileChannelTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException, InterruptedException {
         FileOutputStream fosRef = new FileOutputStream("/Users/zifang/workplace/idea_workplace/components/util-zex/src/main/resources/FileChannelTest001.txt");
         FileChannel fileChannel = fosRef.getChannel();
@@ -40,6 +48,9 @@ public class FileChannelTest {
 
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() throws IOException {
         FileOutputStream fosRef = new FileOutputStream("/Users/zifang/workplace/idea_workplace/components/util-zex/src/main/resources/FileChannelTest001.txt");
         FileChannel fileChannel = fosRef.getChannel();
@@ -89,6 +100,9 @@ public class FileChannelTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002() throws IOException {
         FileInputStream ref = new FileInputStream("/Users/zifang/workplace/idea_workplace/components/util-zex/src/main/resources/FileChannelTest002.txt");
         FileChannel fileChannel = ref.getChannel();
@@ -128,6 +142,9 @@ public class FileChannelTest {
     }
 
     @Test
+    /**
+     * test003方法。
+     */
     public void test003() throws IOException {
         ByteBuffer byteBuffer1 = ByteBuffer.wrap("12345678".getBytes());
         FileOutputStream fosRef = new FileOutputStream("/Users/zifang/workplace/idea_workplace/components/util-zex/src/main/resources/FileChannelTest003.txt");
@@ -143,6 +160,9 @@ public class FileChannelTest {
     }
 
     @Test
+    /**
+     * test004方法。
+     */
     public void test004() throws IOException {
         RandomAccessFile file1 = new RandomAccessFile("/Users/zifang/workplace/idea_workplace/components/util-zex/src/main/resources/FileChannelTest004_1.txt", "rw");
         RandomAccessFile file2 = new RandomAccessFile("/Users/zifang/workplace/idea_workplace/components/util-zex/src/main/resources/FileChannelTest004_2.txt", "rw");

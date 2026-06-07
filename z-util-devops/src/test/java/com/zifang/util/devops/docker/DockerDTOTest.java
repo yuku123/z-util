@@ -10,9 +10,15 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+/**
+ * DockerDTOTest类。
+ */
 public class DockerDTOTest {
 
     @Test
+    /**
+     * testContainerDTO方法。
+     */
     public void testContainerDTO() {
         ContainerDTO dto = new ContainerDTO();
         dto.setId("abc123");
@@ -35,6 +41,9 @@ public class DockerDTOTest {
     }
 
     @Test
+    /**
+     * testContainerDTOPortMapping方法。
+     */
     public void testContainerDTOPortMapping() {
         ContainerDTO.PortMapping pm = new ContainerDTO.PortMapping();
         pm.setHostIp("0.0.0.0");
@@ -50,6 +59,9 @@ public class DockerDTOTest {
     }
 
     @Test
+    /**
+     * testImageDTO方法。
+     */
     public void testImageDTO() {
         ImageDTO dto = new ImageDTO();
         dto.setId("sha256:abc123");
@@ -71,6 +83,9 @@ public class DockerDTOTest {
     }
 
     @Test
+    /**
+     * testNetworkDTO方法。
+     */
     public void testNetworkDTO() {
         NetworkDTO dto = new NetworkDTO();
         dto.setId("net123");
@@ -94,6 +109,9 @@ public class DockerDTOTest {
     }
 
     @Test
+    /**
+     * testVolumeDTO方法。
+     */
     public void testVolumeDTO() {
         VolumeDTO dto = new VolumeDTO();
         dto.setName("data_volume");

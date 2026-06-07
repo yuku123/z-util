@@ -12,12 +12,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.Assert.*;
 
+/**
+ * FixedMonitorableExecutorTest类。
+ */
 public class FixedMonitorableExecutorTest {
 
     private FixedMonitorableExecutor executor;
     private ThreadPoolConfigUnit configUnit;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         configUnit = new ThreadPoolConfigUnit();
         configUnit.setPoolName("TestExecutor");
@@ -31,6 +37,9 @@ public class FixedMonitorableExecutorTest {
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         if (executor != null && !executor.isShutdown()) {
             executor.shutdown();
@@ -43,6 +52,9 @@ public class FixedMonitorableExecutorTest {
     }
 
     @Test
+    /**
+     * testExecutorCreation方法。
+     */
     public void testExecutorCreation() {
         assertNotNull(executor);
         assertFalse(executor.isShutdown());
@@ -50,6 +62,9 @@ public class FixedMonitorableExecutorTest {
     }
 
     @Test
+    /**
+     * testExecuteTask方法。
+     */
     public void testExecuteTask() throws Exception {
         AtomicInteger counter = new AtomicInteger(0);
         executor.execute(() -> counter.incrementAndGet());
@@ -59,6 +74,9 @@ public class FixedMonitorableExecutorTest {
     }
 
     @Test
+    /**
+     * testSubmitTask方法。
+     */
     public void testSubmitTask() throws Exception {
         AtomicInteger counter = new AtomicInteger(0);
         executor.submit(() -> counter.incrementAndGet()).get();
@@ -67,6 +85,9 @@ public class FixedMonitorableExecutorTest {
     }
 
     @Test
+    /**
+     * testStatus方法。
+     */
     public void testStatus() {
         Status status = executor.status();
         assertNotNull(status);
@@ -74,23 +95,35 @@ public class FixedMonitorableExecutorTest {
     }
 
     @Test
+    /**
+     * testComponentName方法。
+     */
     public void testComponentName() {
         assertEquals("TestExecutor", executor.componentName());
     }
 
     @Test
+    /**
+     * testAlarm方法。
+     */
     public void testAlarm() {
         // Should not throw exception
         executor.alarm();
     }
 
     @Test
+    /**
+     * testShutdown方法。
+     */
     public void testShutdown() {
         executor.shutdown();
         assertTrue(executor.isShutdown());
     }
 
     @Test
+    /**
+     * testShutdownNow方法。
+     */
     public void testShutdownNow() {
         executor.shutdownNow();
         assertTrue(executor.isShutdown());

@@ -20,6 +20,10 @@ public final class FinderPatternFinder {
      * FinderPatternFinder方法。
      *      * @param matrix BitMatrix类型参数
      */
+    /**
+     * FinderPatternFinder方法。
+     *      * @param matrix BitMatrix类型参数
+     */
     public FinderPatternFinder(BitMatrix matrix) {
         this.matrix = matrix;
         this.width = matrix.getWidth();
@@ -40,6 +44,12 @@ public final class FinderPatternFinder {
      * @param y float类型参数
      * @param moduleSize float类型参数
      */
+    /**
+     * FinderPattern方法。
+     *      * @param x float类型参数
+     * @param y float类型参数
+     * @param moduleSize float类型参数
+     */
         public FinderPattern(float x, float y, float moduleSize) {
             this.x = x;
             this.y = y;
@@ -47,6 +57,10 @@ public final class FinderPatternFinder {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -60,6 +74,10 @@ public final class FinderPatternFinder {
      * Detects all three finder patterns.
      *
      * @return array of 3 FinderPattern objects, or null if not found
+     */
+    /**
+     * find方法。
+     * @return FinderPattern[]类型返回值
      */
     /**
      * find方法。
@@ -199,6 +217,11 @@ public final class FinderPatternFinder {
      *
      * @param patterns the three finder patterns
      * @return estimated version (1-40)
+     */
+    /**
+     * estimateVersion方法。
+     *      * @param patterns FinderPattern[]类型参数
+     * @return static int类型返回值
      */
     /**
      * estimateVersion方法。

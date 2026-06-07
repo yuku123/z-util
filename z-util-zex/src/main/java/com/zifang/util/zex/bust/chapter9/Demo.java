@@ -16,6 +16,9 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
+/**
+ * Demo注解。
+ */
 public @interface Demo {
     String value();
 }

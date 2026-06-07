@@ -6,15 +6,27 @@ import java.net.Socket;
 import java.text.ParseException;
 import java.util.Date;
 
+/**
+ * Time类。
+ */
 public class Time {
 
     private static final String HOSTNAME = "time.nist.gov";
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException, ParseException {
         Date d = Time.getDateFromNetwork();
         System.out.println("It is " + d);
     }
 
+    /**
+     * getDateFromNetwork方法。
+     * @return static Date类型返回值
+     */
     public static Date getDateFromNetwork() throws IOException, ParseException {
         // The time protocol sets the epoch at 1900,
         // the Java Date class at 1970. This number

@@ -14,6 +14,9 @@ import com.zifang.util.core.meta.StatusCode;
 /**
  * NoPrintBusinessException类。
  */
+/**
+ * NoPrintBusinessException类。
+ */
 public class NoPrintBusinessException extends BaseException {
 
     private static final long serialVersionUID = 2519740137508800641L;
@@ -23,6 +26,11 @@ public class NoPrintBusinessException extends BaseException {
      *
      * @param statusCode 状态码对象，不能为 null
      * @param e          原始异常，通常是导致当前异常的根本原因
+     */
+    /**
+     * NoPrintBusinessException方法。
+     *      * @param statusCode StatusCode类型参数
+     * @param e Throwable类型参数
      */
     /**
      * NoPrintBusinessException方法。
@@ -42,6 +50,10 @@ public class NoPrintBusinessException extends BaseException {
      * NoPrintBusinessException方法。
      *      * @param statusCode StatusCode类型参数
      */
+    /**
+     * NoPrintBusinessException方法。
+     *      * @param statusCode StatusCode类型参数
+     */
     public NoPrintBusinessException(StatusCode statusCode) {
         super(statusCode);
     }
@@ -53,6 +65,11 @@ public class NoPrintBusinessException extends BaseException {
      *
      * @param statusCode 状态码对象，不能为 null
      * @param params      格式化参数，用于填充错误信息中的占位符
+     */
+    /**
+     * NoPrintBusinessException方法。
+     *      * @param statusCode StatusCode类型参数
+     * @param params Object...类型参数
      */
     /**
      * NoPrintBusinessException方法。

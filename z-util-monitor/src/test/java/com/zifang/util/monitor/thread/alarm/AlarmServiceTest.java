@@ -3,9 +3,15 @@ package com.zifang.util.monitor.thread.alarm;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * AlarmServiceTest类。
+ */
 public class AlarmServiceTest {
 
     @Test
+    /**
+     * testLogAlarmServiceAlarm方法。
+     */
     public void testLogAlarmServiceAlarm() {
         AlarmService alarmService = new LogAlarmService();
         // Should not throw exception
@@ -15,6 +21,9 @@ public class AlarmServiceTest {
     }
 
     @Test
+    /**
+     * testLogAlarmServiceAlarmWithNull方法。
+     */
     public void testLogAlarmServiceAlarmWithNull() {
         AlarmService alarmService = new LogAlarmService();
         // Should not throw exception

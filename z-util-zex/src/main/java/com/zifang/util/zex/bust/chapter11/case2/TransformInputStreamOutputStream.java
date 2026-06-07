@@ -14,7 +14,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * TransformInputStreamOutputStream类。
+ */
 public class TransformInputStreamOutputStream {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
         InputStream in = new FileInputStream("XXX.txt");
         ByteArrayOutputStream out = new ByteArrayOutputStream();

@@ -10,6 +10,9 @@ import java.lang.reflect.Field;
 /**
  * UnsafeUtil类。
  */
+/**
+ * UnsafeUtil类。
+ */
 public class UnsafeUtil {
 
     private static final Unsafe UNSAFE;
@@ -58,6 +61,10 @@ public class UnsafeUtil {
      * getUnsageInstance方法。
      * @return static Unsafe类型返回值
      */
+    /**
+     * getUnsageInstance方法。
+     * @return static Unsafe类型返回值
+     */
     public static Unsafe getUnsageInstance() {
         Field f = null;
         Unsafe unsafe = null;
@@ -99,6 +106,10 @@ public class UnsafeUtil {
 
     /**
      * Returns <code>true</code> if system has the <code>Unsafe</code>.
+     */
+    /**
+     * getUnsafeInstance方法。
+     * @return static Unsafe类型返回值
      */
     /**
      * getUnsafeInstance方法。

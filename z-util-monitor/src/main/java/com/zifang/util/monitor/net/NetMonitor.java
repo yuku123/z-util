@@ -11,5 +11,8 @@ package com.zifang.util.monitor.net;
 /**
  * NetMonitor类。
  */
+/**
+ * NetMonitor类。
+ */
 public class NetMonitor {
 }

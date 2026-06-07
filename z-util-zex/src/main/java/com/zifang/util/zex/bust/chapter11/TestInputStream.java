@@ -24,9 +24,15 @@ import javax.swing.JFrame;
 
 import org.junit.Test;
 
+/**
+ * TestInputStream类。
+ */
 public class TestInputStream extends JFrame {
 
     @Test
+    /**
+     * testAudioInputStream方法。
+     */
     public void testAudioInputStream() {
         File file;
         AudioInputStream ais = null;
@@ -68,6 +74,9 @@ public class TestInputStream extends JFrame {
     }
 
     @Test
+    /**
+     * clipTest方法。
+     */
     public void clipTest() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Test Sound Clip");
@@ -96,6 +105,11 @@ public class TestInputStream extends JFrame {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new TestInputStream().clipTest();
     }

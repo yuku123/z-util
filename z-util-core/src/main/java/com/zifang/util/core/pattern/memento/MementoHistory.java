@@ -21,6 +21,9 @@ import java.util.function.Predicate;
 /**
  * MementoHistory类。
  */
+/**
+ * MementoHistory类。
+ */
 public class MementoHistory<T> {
 
     private final Originator<T> originator;
@@ -33,11 +36,20 @@ public class MementoHistory<T> {
      * MementoHistory方法。
      *      * @param originator OriginatorT类型参数
      */
+    /**
+     * MementoHistory方法。
+     *      * @param originator OriginatorT类型参数
+     */
     public MementoHistory(Originator<T> originator) {
         this.originator = originator;
         this.context = new MementoContext<>();
     }
 
+    /**
+     * MementoHistory方法。
+     *      * @param originator OriginatorT类型参数
+     * @param maxHistorySize int类型参数
+     */
     /**
      * MementoHistory方法。
      *      * @param originator OriginatorT类型参数
@@ -60,6 +72,10 @@ public class MementoHistory<T> {
      * execute方法。
      *      * @param newState T类型参数
      */
+    /**
+     * execute方法。
+     *      * @param newState T类型参数
+     */
     public void execute(T newState) {
         T oldState = originator.getState();
         originator.setState(newState);
@@ -77,6 +93,11 @@ public class MementoHistory<T> {
      *      * @param newState T类型参数
      * @param label String类型参数
      */
+    /**
+     * execute方法。
+     *      * @param newState T类型参数
+     * @param label String类型参数
+     */
     public void execute(T newState, String label) {
         T oldState = originator.getState();
         originator.setState(newState);
@@ -88,6 +109,10 @@ public class MementoHistory<T> {
 
     /**
      * 撤销
+     */
+    /**
+     * undo方法。
+     * @return boolean类型返回值
      */
     /**
      * undo方法。
@@ -113,6 +138,10 @@ public class MementoHistory<T> {
      * redo方法。
      * @return boolean类型返回值
      */
+    /**
+     * redo方法。
+     * @return boolean类型返回值
+     */
     public boolean redo() {
         if (!canRedo()) {
             return false;
@@ -133,12 +162,20 @@ public class MementoHistory<T> {
      * canUndo方法。
      * @return boolean类型返回值
      */
+    /**
+     * canUndo方法。
+     * @return boolean类型返回值
+     */
     public boolean canUndo() {
         return context.hasPrevious();
     }
 
     /**
      * 是否可以重做
+     */
+    /**
+     * canRedo方法。
+     * @return boolean类型返回值
      */
     /**
      * canRedo方法。
@@ -155,6 +192,10 @@ public class MementoHistory<T> {
      * getUndoStackSize方法。
      * @return int类型返回值
      */
+    /**
+     * getUndoStackSize方法。
+     * @return int类型返回值
+     */
     public int getUndoStackSize() {
         return undoStack.size();
     }
@@ -166,12 +207,19 @@ public class MementoHistory<T> {
      * getRedoStackSize方法。
      * @return int类型返回值
      */
+    /**
+     * getRedoStackSize方法。
+     * @return int类型返回值
+     */
     public int getRedoStackSize() {
         return redoStack.size();
     }
 
     /**
      * 清空历史
+     */
+    /**
+     * clearHistory方法。
      */
     /**
      * clearHistory方法。
@@ -190,12 +238,21 @@ public class MementoHistory<T> {
      * getHistory方法。
      * @return List<MementoContext.SnapshotMeta>类型返回值
      */
+    /**
+     * getHistory方法。
+     * @return List<MementoContext.SnapshotMeta>类型返回值
+     */
     public List<MementoContext.SnapshotMeta> getHistory() {
         return context.getSnapshotMetas();
     }
 
     /**
      * 按条件过滤历史
+     */
+    /**
+     * filterHistory方法。
+     *      * @param predicate PredicateMementoContext.SnapshotMeta类型参数
+     * @return List<MementoContext.SnapshotMeta>类型返回值
      */
     /**
      * filterHistory方法。
@@ -220,6 +277,11 @@ public class MementoHistory<T> {
      *      * @param index int类型参数
      * @return boolean类型返回值
      */
+    /**
+     * goTo方法。
+     *      * @param index int类型参数
+     * @return boolean类型返回值
+     */
     public boolean goTo(int index) {
         T state = context.moveTo(index);
         if (state != null) {
@@ -231,6 +293,11 @@ public class MementoHistory<T> {
 
     /**
      * 跳转到指定标签
+     */
+    /**
+     * goToLabel方法。
+     *      * @param label String类型参数
+     * @return Optional<T>类型返回值
      */
     /**
      * goToLabel方法。
@@ -251,12 +318,22 @@ public class MementoHistory<T> {
      *      * @param name String类型参数
      * @return String类型返回值
      */
+    /**
+     * createCheckpoint方法。
+     *      * @param name String类型参数
+     * @return String类型返回值
+     */
     public String createCheckpoint(String name) {
         return context.createCheckpoint(name);
     }
 
     /**
      * 跳转到检查点
+     */
+    /**
+     * goToCheckpoint方法。
+     *      * @param name String类型参数
+     * @return Optional<T>类型返回值
      */
     /**
      * goToCheckpoint方法。
@@ -276,6 +353,10 @@ public class MementoHistory<T> {
      * addListener方法。
      *      * @param listener HistoryListenerT类型参数
      */
+    /**
+     * addListener方法。
+     *      * @param listener HistoryListenerT类型参数
+     */
     public void addListener(HistoryListener<T> listener) {
         if (listener != null) {
             listeners.add(listener);
@@ -284,6 +365,10 @@ public class MementoHistory<T> {
 
     /**
      * 移除历史监听器
+     */
+    /**
+     * removeListener方法。
+     *      * @param listener HistoryListenerT类型参数
      */
     /**
      * removeListener方法。
@@ -308,12 +393,20 @@ public class MementoHistory<T> {
      * getOriginator方法。
      * @return Originator<T>类型返回值
      */
+    /**
+     * getOriginator方法。
+     * @return Originator<T>类型返回值
+     */
     public Originator<T> getOriginator() {
         return originator;
     }
 
     /**
      * 获取Context
+     */
+    /**
+     * getContext方法。
+     * @return MementoContext<T>类型返回值
      */
     /**
      * getContext方法。
@@ -329,6 +422,9 @@ public class MementoHistory<T> {
 /**
  * HistoryEvent枚举。
  */
+/**
+ * HistoryEvent枚举。
+ */
     public enum HistoryEvent {
         EXECUTE, UNDO, REDO, CLEAR
     }
@@ -337,6 +433,9 @@ public class MementoHistory<T> {
      * 历史监听器
      */
     @FunctionalInterface
+/**
+ * HistoryListener接口。
+ */
 /**
  * HistoryListener接口。
  */

@@ -13,6 +13,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * MemoryCache类。
  */
+/**
+ * MemoryCache类。
+ */
 public class MemoryCache implements Cache {
 
     private final String name;
@@ -24,6 +27,10 @@ public class MemoryCache implements Cache {
      * Create a new in-memory cache with the given name.
      *
      * @param name cache name
+     */
+    /**
+     * MemoryCache方法。
+     *      * @param name String类型参数
      */
     /**
      * MemoryCache方法。
@@ -44,6 +51,11 @@ public class MemoryCache implements Cache {
      *      * @param name String类型参数
      * @param initialCapacity int类型参数
      */
+    /**
+     * MemoryCache方法。
+     *      * @param name String类型参数
+     * @param initialCapacity int类型参数
+     */
     public MemoryCache(String name, int initialCapacity) {
         this(name, initialCapacity, 0);
     }
@@ -54,6 +66,12 @@ public class MemoryCache implements Cache {
      * @param name           cache name
      * @param initialCapacity initial capacity
      * @param defaultTtlSeconds default TTL in seconds, 0 means no expiration
+     */
+    /**
+     * MemoryCache方法。
+     *      * @param name String类型参数
+     * @param initialCapacity int类型参数
+     * @param defaultTtlSeconds long类型参数
      */
     /**
      * MemoryCache方法。
@@ -82,6 +100,11 @@ public class MemoryCache implements Cache {
      *      * @param key String类型参数
      * @return Object类型返回值
      */
+    /**
+     * get方法。
+     *      * @param key String类型参数
+     * @return Object类型返回值
+     */
     public Object get(String key) {
         CacheEntry entry = cache.get(key);
         if (entry == null) {
@@ -100,11 +123,22 @@ public class MemoryCache implements Cache {
      *      * @param key String类型参数
      * @param value Object类型参数
      */
+    /**
+     * put方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     */
     public void put(String key, Object value) {
         put(key, value, defaultTtlSeconds);
     }
 
     @Override
+    /**
+     * put方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     * @param ttl long类型参数
+     */
     /**
      * put方法。
      *      * @param key String类型参数
@@ -126,11 +160,21 @@ public class MemoryCache implements Cache {
      *      * @param key String类型参数
      * @return boolean类型返回值
      */
+    /**
+     * remove方法。
+     *      * @param key String类型参数
+     * @return boolean类型返回值
+     */
     public boolean remove(String key) {
         return cache.remove(key) != null;
     }
 
     @Override
+    /**
+     * contains方法。
+     *      * @param key String类型参数
+     * @return boolean类型返回值
+     */
     /**
      * contains方法。
      *      * @param key String类型参数
@@ -152,11 +196,18 @@ public class MemoryCache implements Cache {
     /**
      * clear方法。
      */
+    /**
+     * clear方法。
+     */
     public void clear() {
         cache.clear();
     }
 
     @Override
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     /**
      * getName方法。
      * @return String类型返回值
@@ -174,12 +225,19 @@ public class MemoryCache implements Cache {
      * size方法。
      * @return int类型返回值
      */
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         return cache.size();
     }
 
     /**
      * Shutdown the cleanup scheduler.
+     */
+    /**
+     * shutdown方法。
      */
     /**
      * shutdown方法。
@@ -191,6 +249,10 @@ public class MemoryCache implements Cache {
     // ==================== 持久化 ====================
 
     @Override
+    /**
+     * exportToFile方法。
+     *      * @param filePath String类型参数
+     */
     /**
      * exportToFile方法。
      *      * @param filePath String类型参数
@@ -215,6 +277,10 @@ public class MemoryCache implements Cache {
     }
 
     @Override
+    /**
+     * importFromFile方法。
+     *      * @param filePath String类型参数
+     */
     /**
      * importFromFile方法。
      *      * @param filePath String类型参数

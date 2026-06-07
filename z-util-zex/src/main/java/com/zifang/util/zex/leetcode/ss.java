@@ -9,7 +9,16 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * ss类。
+ */
 public class ss {
+    /**
+     * removeElement方法。
+     *      * @param nums int[]类型参数
+     * @param val int类型参数
+     * @return static int类型返回值
+     */
     public static int removeElement(int[] nums, int val) {
         int k = 0;
         int lastIndex = nums.length;
@@ -32,6 +41,11 @@ public class ss {
         return k;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         removeElement(new int[]{2},3);
     }

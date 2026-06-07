@@ -10,11 +10,17 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * ObjectUtilTest类。
+ */
 public class ObjectUtilTest {
 
     // --- deepCloneObject ---
 
     @Test
+    /**
+     * testDeepCloneObject_WithSerializableObject方法。
+     */
     public void testDeepCloneObject_WithSerializableObject() {
         TestSerializable original = new TestSerializable();
         original.setValue("test");
@@ -29,6 +35,9 @@ public class ObjectUtilTest {
     }
 
     @Test
+    /**
+     * testDeepCloneObject_ValuesAreIndependent方法。
+     */
     public void testDeepCloneObject_ValuesAreIndependent() {
         TestSerializable original = new TestSerializable();
         original.setValue("original");
@@ -41,12 +50,18 @@ public class ObjectUtilTest {
     }
 
     @Test
+    /**
+     * testDeepCloneObject_WithNull方法。
+     */
     public void testDeepCloneObject_WithNull() {
         String result = ObjectUtil.deepCloneObject(null);
         assertNull(result);
     }
 
     @Test
+    /**
+     * testDeepCloneObject_WithString方法。
+     */
     public void testDeepCloneObject_WithString() {
         String original = "test";
         String cloned = ObjectUtil.deepCloneObject(original);
@@ -57,6 +72,9 @@ public class ObjectUtilTest {
     // --- deepCloneCollection ---
 
     @Test
+    /**
+     * testDeepCloneCollection_WithList方法。
+     */
     public void testDeepCloneCollection_WithList() throws Exception {
         List<String> original = new ArrayList<>();
         original.add("a");
@@ -72,6 +90,9 @@ public class ObjectUtilTest {
     }
 
     @Test
+    /**
+     * testDeepCloneCollection_ValuesAreIndependent方法。
+     */
     public void testDeepCloneCollection_ValuesAreIndependent() throws Exception {
         List<String> original = new ArrayList<>();
         original.add("original");
@@ -85,6 +106,9 @@ public class ObjectUtilTest {
     }
 
     @Test
+    /**
+     * testDeepCloneCollection_WithEmptyList方法。
+     */
     public void testDeepCloneCollection_WithEmptyList() throws Exception {
         List<String> original = new ArrayList<>();
         Collection<String> cloned = ObjectUtil.deepCloneCollection(original);
@@ -95,6 +119,9 @@ public class ObjectUtilTest {
     }
 
     @Test
+    /**
+     * testDeepCloneCollection_WithArraysAsList方法。
+     */
     public void testDeepCloneCollection_WithArraysAsList() throws Exception {
         List<Integer> original = Arrays.asList(1, 2, 3);
         Collection<Integer> cloned = ObjectUtil.deepCloneCollection(original);
@@ -109,18 +136,34 @@ public class ObjectUtilTest {
         private String value;
         private int count;
 
+    /**
+     * getValue方法。
+     * @return String类型返回值
+     */
         public String getValue() {
             return value;
         }
 
+    /**
+     * setValue方法。
+     *      * @param value String类型参数
+     */
         public void setValue(String value) {
             this.value = value;
         }
 
+    /**
+     * getCount方法。
+     * @return int类型返回值
+     */
         public int getCount() {
             return count;
         }
 
+    /**
+     * setCount方法。
+     *      * @param count int类型参数
+     */
         public void setCount(int count) {
             this.count = count;
         }

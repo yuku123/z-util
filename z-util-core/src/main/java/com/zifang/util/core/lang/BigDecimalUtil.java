@@ -9,6 +9,9 @@ import java.util.Objects;
 /**
  * BigDecimalUtil类。
  */
+/**
+ * BigDecimalUtil类。
+ */
 public class BigDecimalUtil {
 
     /**
@@ -33,6 +36,12 @@ public class BigDecimalUtil {
      * @param v2 String类型参数
      * @return static String类型返回值
      */
+    /**
+     * add方法。
+     *      * @param v1 String类型参数
+     * @param v2 String类型参数
+     * @return static String类型返回值
+     */
     public static String add(String v1, String v2) {
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);
@@ -46,6 +55,14 @@ public class BigDecimalUtil {
      * @param v1    除数
      * @param v2    被除数
      * @param scale 精确精度
+     */
+    /**
+     * div方法。
+     *      * @param v1 String类型参数
+     * @param v2 String类型参数
+     * @param scale int类型参数
+     * @param round int类型参数
+     * @return static String类型返回值
      */
     /**
      * div方法。
@@ -86,6 +103,12 @@ public class BigDecimalUtil {
      * @param v2 String类型参数
      * @return static int类型返回值
      */
+    /**
+     * compareTo方法。
+     *      * @param v1 String类型参数
+     * @param v2 String类型参数
+     * @return static int类型返回值
+     */
     public static int compareTo(String v1, String v2) {
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);
@@ -98,6 +121,12 @@ public class BigDecimalUtil {
      * @param v1
      * @param v2
      * @return
+     */
+    /**
+     * returnMin方法。
+     *      * @param v1 String类型参数
+     * @param v2 String类型参数
+     * @return static String类型返回值
      */
     /**
      * returnMin方法。
@@ -124,6 +153,12 @@ public class BigDecimalUtil {
      * @param v2 String类型参数
      * @return static String类型返回值
      */
+    /**
+     * returnMax方法。
+     *      * @param v1 String类型参数
+     * @param v2 String类型参数
+     * @return static String类型返回值
+     */
     public static String returnMax(String v1, String v2) {
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);
@@ -143,6 +178,12 @@ public class BigDecimalUtil {
      * @param scale int类型参数
      * @return static BigDecimal类型返回值
      */
+    /**
+     * getValue方法。
+     *      * @param value BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static BigDecimal类型返回值
+     */
     public static BigDecimal getValue(BigDecimal value, int scale) {
 //		if(!ValidateHelper.isEmpty(value)){
 //			return value.setScale(scale, BigDecimal.ROUND_HALF_UP);
@@ -155,6 +196,11 @@ public class BigDecimalUtil {
      *
      * @param value 待转换的数值
      * @return
+     */
+    /**
+     * getBigDecimal方法。
+     *      * @param value Object类型参数
+     * @return static BigDecimal类型返回值
      */
     /**
      * getBigDecimal方法。
@@ -191,6 +237,12 @@ public class BigDecimalUtil {
      * @param resultValue BigDecimal类型参数
      * @return static BigDecimal类型返回值
      */
+    /**
+     * getBigDecimal方法。
+     *      * @param value Object类型参数
+     * @param resultValue BigDecimal类型参数
+     * @return static BigDecimal类型返回值
+     */
     public static BigDecimal getBigDecimal(Object value, BigDecimal resultValue) {
 //		if(ValidateHelper.isEmpty(value)){
 //			return resultValue;
@@ -212,6 +264,11 @@ public class BigDecimalUtil {
      *      * @param value BigDecimal类型参数
      * @return static Long类型返回值
      */
+    /**
+     * bigDecimalToLong方法。
+     *      * @param value BigDecimal类型参数
+     * @return static Long类型返回值
+     */
     public static Long bigDecimalToLong(BigDecimal value) {
         if (value != null) {
             return new Long(value.longValue());
@@ -224,6 +281,11 @@ public class BigDecimalUtil {
      *
      * @param value
      * @return
+     */
+    /**
+     * bigDecimalToInteger方法。
+     *      * @param value BigDecimal类型参数
+     * @return static Integer类型返回值
      */
     /**
      * bigDecimalToInteger方法。
@@ -255,6 +317,12 @@ public class BigDecimalUtil {
      * @param v2 BigDecimal类型参数
      * @return static BigDecimal类型返回值
      */
+    /**
+     * add方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @return static BigDecimal类型返回值
+     */
     public static BigDecimal add(BigDecimal v1, BigDecimal v2) {
         if (Objects.isNull(v1)) {
             v1 = BigDecimal.ZERO;
@@ -272,6 +340,13 @@ public class BigDecimalUtil {
      * @param v2    加数
      * @param scale 保留scale 位小数(必须>=0)
      * @return 两个参数的和
+     */
+    /**
+     * add方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static BigDecimal类型返回值
      */
     /**
      * add方法。
@@ -306,6 +381,12 @@ public class BigDecimalUtil {
      * @param v2 BigDecimal类型参数
      * @return static BigDecimal类型返回值
      */
+    /**
+     * sub方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @return static BigDecimal类型返回值
+     */
     public static BigDecimal sub(BigDecimal v1, BigDecimal v2) {
         if (Objects.isNull(v1)) {
             v1 = BigDecimal.ZERO;
@@ -324,6 +405,13 @@ public class BigDecimalUtil {
      * @param v2    减数
      * @param scale 保留scale 位小数(必须>=0)
      * @return 两个参数的差
+     */
+    /**
+     * sub方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static BigDecimal类型返回值
      */
     /**
      * sub方法。
@@ -358,6 +446,12 @@ public class BigDecimalUtil {
      * @param v2 BigDecimal类型参数
      * @return static BigDecimal类型返回值
      */
+    /**
+     * mul方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @return static BigDecimal类型返回值
+     */
     public static BigDecimal mul(BigDecimal v1, BigDecimal v2) {
         if (Objects.isNull(v1)) {
             v1 = BigDecimal.ZERO;
@@ -376,6 +470,13 @@ public class BigDecimalUtil {
      * @param v2    乘数
      * @param scale 保留scale 位小数(必须>=0)
      * @return 两个参数的积
+     */
+    /**
+     * mul方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static BigDecimal类型返回值
      */
     /**
      * mul方法。
@@ -412,6 +513,13 @@ public class BigDecimalUtil {
      * @param scale int类型参数
      * @return static BigDecimal类型返回值
      */
+    /**
+     * div方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static BigDecimal类型返回值
+     */
     public static BigDecimal div(BigDecimal v1, BigDecimal v2, int scale) {
         if (scale < 0) {
             return new BigDecimal(0);
@@ -427,6 +535,14 @@ public class BigDecimalUtil {
      * @param scale    表示表示需要保留的小数位数。(必须>=0)
      * @param accuracy 计算精度
      * @return 两个参数的商
+     */
+    /**
+     * div方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @param scale int类型参数
+     * @param accuracy int类型参数
+     * @return static BigDecimal类型返回值
      */
     /**
      * div方法。
@@ -457,6 +573,12 @@ public class BigDecimalUtil {
      * @param scale int类型参数
      * @return static BigDecimal类型返回值
      */
+    /**
+     * round方法。
+     *      * @param v BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static BigDecimal类型返回值
+     */
     public static BigDecimal round(BigDecimal v, int scale) {
         if (scale < 0) {
             return v;
@@ -470,6 +592,12 @@ public class BigDecimalUtil {
      * @param v     需要线上取整的数字
      * @param scale 小数点后保留几位
      * @return 线上取整的结果
+     */
+    /**
+     * roundUp方法。
+     *      * @param v BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static BigDecimal类型返回值
      */
     /**
      * roundUp方法。
@@ -500,6 +628,13 @@ public class BigDecimalUtil {
      * @param scale int类型参数
      * @return static BigDecimal类型返回值
      */
+    /**
+     * remainder方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static BigDecimal类型返回值
+     */
     public static BigDecimal remainder(BigDecimal v1, BigDecimal v2, int scale) {
         if (scale < 0) {
             return new BigDecimal(0);
@@ -513,6 +648,12 @@ public class BigDecimalUtil {
      * @param v1 被比较数
      * @param v2 比较数
      * @return 如果v1 大于v2 则 返回true 否则false
+     */
+    /**
+     * compare方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @return static boolean类型返回值
      */
     /**
      * compare方法。
@@ -544,6 +685,12 @@ public class BigDecimalUtil {
      * @param v2 BigDecimal类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * compareGreater方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean compareGreater(BigDecimal v1, BigDecimal v2) {
         if (Objects.isNull(v1)) {
             v1 = BigDecimal.ZERO;
@@ -561,6 +708,12 @@ public class BigDecimalUtil {
      * @param v1 被比较数
      * @param v2 比较数
      * @return 如果v1 等 v2 则 返回true 否则false
+     */
+    /**
+     * compareEqual方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @return static boolean类型返回值
      */
     /**
      * compareEqual方法。
@@ -592,6 +745,12 @@ public class BigDecimalUtil {
      * @param v2 long类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * compareEqual方法。
+     *      * @param v1 long类型参数
+     * @param v2 long类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean compareEqual(Long v1, Long v2) {
         if (Objects.isNull(v1)) {
             v1 = 0L;
@@ -616,6 +775,12 @@ public class BigDecimalUtil {
      * @param v2 BigDecimal类型参数
      * @return static BigDecimal[]类型返回值
      */
+    /**
+     * divideAndRemainder方法。
+     *      * @param v1 BigDecimal类型参数
+     * @param v2 BigDecimal类型参数
+     * @return static BigDecimal[]类型返回值
+     */
     public static BigDecimal[] divideAndRemainder(BigDecimal v1, BigDecimal v2) {
         return v1.divideAndRemainder(v2);
     }
@@ -626,6 +791,12 @@ public class BigDecimalUtil {
      * @param data  数据
      * @param scale 精度
      * @return
+     */
+    /**
+     * bigDecimal2String方法。
+     *      * @param data BigDecimal类型参数
+     * @param scale int类型参数
+     * @return static String类型返回值
      */
     /**
      * bigDecimal2String方法。

@@ -17,12 +17,19 @@ import com.zifang.util.numpy.Shape;
 /**
  * SGD类。
  */
+/**
+ * SGD类。
+ */
 public class SGD extends Optimizer {
     
     private double momentum;
     private boolean nesterov;
     private double dampening;
     
+    /**
+     * SGD方法。
+     *      * @param learningRate double类型参数
+     */
     /**
      * SGD方法。
      *      * @param learningRate double类型参数
@@ -36,10 +43,21 @@ public class SGD extends Optimizer {
      *      * @param learningRate double类型参数
      * @param momentum double类型参数
      */
+    /**
+     * SGD方法。
+     *      * @param learningRate double类型参数
+     * @param momentum double类型参数
+     */
     public SGD(double learningRate, double momentum) {
         this(learningRate, momentum, 0.0);
     }
     
+    /**
+     * SGD方法。
+     *      * @param learningRate double类型参数
+     * @param momentum double类型参数
+     * @param weightDecay double类型参数
+     */
     /**
      * SGD方法。
      *      * @param learningRate double类型参数
@@ -57,6 +75,13 @@ public class SGD extends Optimizer {
      * @param weightDecay double类型参数
      * @param nesterov boolean类型参数
      */
+    /**
+     * SGD方法。
+     *      * @param learningRate double类型参数
+     * @param momentum double类型参数
+     * @param weightDecay double类型参数
+     * @param nesterov boolean类型参数
+     */
     public SGD(double learningRate, double momentum, double weightDecay, boolean nesterov) {
         super(learningRate, weightDecay);
         this.momentum = momentum;
@@ -65,6 +90,9 @@ public class SGD extends Optimizer {
     }
     
     @Override
+    /**
+     * step方法。
+     */
     /**
      * step方法。
      */
@@ -123,12 +151,20 @@ public class SGD extends Optimizer {
      * setMomentum方法。
      *      * @param momentum double类型参数
      */
+    /**
+     * setMomentum方法。
+     *      * @param momentum double类型参数
+     */
     public void setMomentum(double momentum) {
         this.momentum = momentum;
     }
     
     /**
      * Get momentum coefficient.
+     */
+    /**
+     * getMomentum方法。
+     * @return double类型返回值
      */
     /**
      * getMomentum方法。
@@ -145,6 +181,10 @@ public class SGD extends Optimizer {
      * setDampening方法。
      *      * @param dampening double类型参数
      */
+    /**
+     * setDampening方法。
+     *      * @param dampening double类型参数
+     */
     public void setDampening(double dampening) {
         this.dampening = dampening;
     }
@@ -156,12 +196,20 @@ public class SGD extends Optimizer {
      * setNesterov方法。
      *      * @param nesterov boolean类型参数
      */
+    /**
+     * setNesterov方法。
+     *      * @param nesterov boolean类型参数
+     */
     public void setNesterov(boolean nesterov) {
         this.nesterov = nesterov;
     }
     
     /**
      * Check if Nesterov is enabled.
+     */
+    /**
+     * isNesterov方法。
+     * @return boolean类型返回值
      */
     /**
      * isNesterov方法。

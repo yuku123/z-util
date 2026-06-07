@@ -21,6 +21,9 @@ import java.util.stream.Collectors;
 /**
  * ClassParser类。
  */
+/**
+ * ClassParser类。
+ */
 public class ClassParser {
 
     /**
@@ -45,6 +48,10 @@ public class ClassParser {
      * ClassParser方法。
      *      * @param clazz Class?类型参数
      */
+    /**
+     * ClassParser方法。
+     *      * @param clazz Class?类型参数
+     */
     public ClassParser(Class<?> clazz) {
 
         this.clazz = clazz;
@@ -56,6 +63,10 @@ public class ClassParser {
      * 判断当前解析的类是否是普通的类（非接口、非抽象类、非枚举、非数组、非注解、非合成类、非原始类型）
      *
      * @return 是否是普通类
+     */
+    /**
+     * isNormalClass方法。
+     * @return boolean类型返回值
      */
     /**
      * isNormalClass方法。
@@ -81,6 +92,10 @@ public class ClassParser {
      * getCurrentPublicField方法。
      * @return List<Field>类型返回值
      */
+    /**
+     * getCurrentPublicField方法。
+     * @return List<Field>类型返回值
+     */
     public List<Field> getCurrentPublicField() {
         return getCurrentAllField().stream().filter(e -> Modifier.isPublic(e.getModifiers())).collect(Collectors.toList());
     }
@@ -89,6 +104,10 @@ public class ClassParser {
      * 获取当前类的所有protected字段
      *
      * @return protected字段列表
+     */
+    /**
+     * getCurrentProtectedField方法。
+     * @return List<Field>类型返回值
      */
     /**
      * getCurrentProtectedField方法。
@@ -107,6 +126,10 @@ public class ClassParser {
      * getCurrentPrivateField方法。
      * @return List<Field>类型返回值
      */
+    /**
+     * getCurrentPrivateField方法。
+     * @return List<Field>类型返回值
+     */
     public List<Field> getCurrentPrivateField() {
         return getCurrentAllField().stream().filter(e -> Modifier.isPrivate(e.getModifiers())).collect(Collectors.toList());
     }
@@ -115,6 +138,10 @@ public class ClassParser {
      * 获取当前类的所有字段（不含父类字段）
      *
      * @return 当前类所有声明字段列表
+     */
+    /**
+     * getCurrentAllField方法。
+     * @return List<Field>类型返回值
      */
     /**
      * getCurrentAllField方法。
@@ -133,6 +160,10 @@ public class ClassParser {
      * getCurrentProtectedMethod方法。
      * @return List<Method>类型返回值
      */
+    /**
+     * getCurrentProtectedMethod方法。
+     * @return List<Method>类型返回值
+     */
     public List<Method> getCurrentProtectedMethod() {
         return getCurrentAllMethod().stream().filter(e -> Modifier.isProtected(e.getModifiers())).collect(Collectors.toList());
     }
@@ -141,6 +172,10 @@ public class ClassParser {
      * 获取当前类的所有public方法
      *
      * @return public方法列表
+     */
+    /**
+     * getCurrentPublicMethod方法。
+     * @return List<Method>类型返回值
      */
     /**
      * getCurrentPublicMethod方法。
@@ -159,6 +194,10 @@ public class ClassParser {
      * getCurrentDefaultMethod方法。
      * @return List<Method>类型返回值
      */
+    /**
+     * getCurrentDefaultMethod方法。
+     * @return List<Method>类型返回值
+     */
     public List<Method> getCurrentDefaultMethod() {
         return getCurrentAllMethod().stream().filter(e -> e.getModifiers() == 0).collect(Collectors.toList());
     }
@@ -172,6 +211,10 @@ public class ClassParser {
      * getCurrentPrivateMethod方法。
      * @return List<Method>类型返回值
      */
+    /**
+     * getCurrentPrivateMethod方法。
+     * @return List<Method>类型返回值
+     */
     public List<Method> getCurrentPrivateMethod() {
         return getCurrentAllMethod().stream().filter(e -> Modifier.isPrivate(e.getModifiers())).collect(Collectors.toList());
     }
@@ -180,6 +223,10 @@ public class ClassParser {
      * 获取当前类的所有方法（不含父类方法）
      *
      * @return 当前类所有声明方法列表
+     */
+    /**
+     * getCurrentAllMethod方法。
+     * @return List<Method>类型返回值
      */
     /**
      * getCurrentAllMethod方法。
@@ -227,6 +274,11 @@ public class ClassParser {
      *
      * @param matchClassType 要匹配查找的类类型
      * @return 泛型Type信息，若未找到返回null
+     */
+    /**
+     * getGenericType方法。
+     *      * @param matchClassType Class?类型参数
+     * @return Type类型返回值
      */
     /**
      * getGenericType方法。

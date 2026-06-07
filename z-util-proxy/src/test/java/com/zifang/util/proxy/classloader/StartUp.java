@@ -6,6 +6,9 @@ import java.lang.reflect.Method;
 /**
  * 当StartUp测试类启动后， 我们可以手动修改personClass类， 并修改sayHello方法的内容。   将会看到热替换的效果。
  */
+/**
+ * StartUp类。
+ */
 public class StartUp {
 
     /**
@@ -21,6 +24,10 @@ public class StartUp {
      * 常。  所以，在替换Class的时候，  加载该Class的ClassLoader也必须用新的。
      *
      * @throws ClassNotFoundException
+     */
+    /**
+     * test1方法。
+     * @return static void类型返回值
      */
     public static void test1() throws Exception {
 
@@ -59,6 +66,10 @@ public class StartUp {
 
     }
 
+    /**
+     * test2方法。
+     * @return static void类型返回值
+     */
     public static void test2() throws Exception {
 
         while (true) {
@@ -84,6 +95,11 @@ public class StartUp {
 
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws Exception {
         test2();
     }

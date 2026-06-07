@@ -9,6 +9,9 @@ import java.util.Arrays;
 /**
  * Linalg类。
  */
+/**
+ * Linalg类。
+ */
 public class Linalg {
 
     private static double getDouble(NdArray a, int... indices) {
@@ -63,6 +66,12 @@ public class Linalg {
      * @param b NdArray类型参数
      * @return static NdArray类型返回值
      */
+    /**
+     * dot方法。
+     *      * @param a NdArray类型参数
+     * @param b NdArray类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray dot(NdArray a, NdArray b) {
         int aRows = a.getShape().get(0);
         int aCols = a.getShape().get(1);
@@ -109,6 +118,12 @@ public class Linalg {
      * @param b NdArray类型参数
      * @return static NdArray类型返回值
      */
+    /**
+     * matmul方法。
+     *      * @param a NdArray类型参数
+     * @param b NdArray类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray matmul(NdArray a, NdArray b) {
         return dot(a, b);
     }
@@ -121,12 +136,22 @@ public class Linalg {
      *      * @param a NdArray类型参数
      * @return static NdArray类型返回值
      */
+    /**
+     * transpose方法。
+     *      * @param a NdArray类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray transpose(NdArray a) {
         return a.transpose();
     }
 
     /**
      * Matrix inverse for square matrices.
+     */
+    /**
+     * inv方法。
+     *      * @param a NdArray类型参数
+     * @return static NdArray类型返回值
      */
     /**
      * inv方法。
@@ -204,6 +229,11 @@ public class Linalg {
      *      * @param a NdArray类型参数
      * @return static double类型返回值
      */
+    /**
+     * det方法。
+     *      * @param a NdArray类型参数
+     * @return static double类型返回值
+     */
     public static double det(NdArray a) {
         if (a.getShape().get(0) != a.getShape().get(1)) {
             throw new IllegalArgumentException("Matrix must be square for determinant");
@@ -257,6 +287,11 @@ public class Linalg {
     /**
      * Eigenvalues and eigenvectors of a symmetric matrix.
      * Returns [eigenvalues, eigenvectors] as NdArray[2].
+     */
+    /**
+     * eig方法。
+     *      * @param a NdArray类型参数
+     * @return static NdArray[]类型返回值
      */
     /**
      * eig方法。
@@ -358,6 +393,12 @@ public class Linalg {
      * @param b NdArray类型参数
      * @return static NdArray类型返回值
      */
+    /**
+     * solve方法。
+     *      * @param a NdArray类型参数
+     * @param b NdArray类型参数
+     * @return static NdArray类型返回值
+     */
     public static NdArray solve(NdArray a, NdArray b) {
         if (a.getShape().get(0) != a.getShape().get(1)) {
             throw new IllegalArgumentException("Matrix A must be square");
@@ -427,6 +468,12 @@ public class Linalg {
      * @param ord int类型参数
      * @return static double类型返回值
      */
+    /**
+     * norm方法。
+     *      * @param a NdArray类型参数
+     * @param ord int类型参数
+     * @return static double类型返回值
+     */
     public static double norm(NdArray a, int ord) {
         int rows = a.getShape().get(0);
         int cols = a.getShape().get(1);
@@ -469,6 +516,11 @@ public class Linalg {
      *      * @param a NdArray类型参数
      * @return static double类型返回值
      */
+    /**
+     * norm方法。
+     *      * @param a NdArray类型参数
+     * @return static double类型返回值
+     */
     public static double norm(NdArray a) {
         return norm(a, 2);
     }
@@ -476,6 +528,11 @@ public class Linalg {
     /**
      * Singular Value Decomposition.
      * Returns [U, S, V] where A = U * S * V^T
+     */
+    /**
+     * svd方法。
+     *      * @param a NdArray类型参数
+     * @return static NdArray[]类型返回值
      */
     /**
      * svd方法。
@@ -643,6 +700,11 @@ public class Linalg {
      *      * @param a NdArray类型参数
      * @return static NdArray[]类型返回值
      */
+    /**
+     * qr方法。
+     *      * @param a NdArray类型参数
+     * @return static NdArray[]类型返回值
+     */
     public static NdArray[] qr(NdArray a) {
         int m = a.getShape().get(0);
         int n = a.getShape().get(1);
@@ -691,6 +753,12 @@ public class Linalg {
     /**
      * Least squares solution.
      * Returns x that minimizes ||Ax - b||^2.
+     */
+    /**
+     * lstsq方法。
+     *      * @param a NdArray类型参数
+     * @param b NdArray类型参数
+     * @return static NdArray类型返回值
      */
     /**
      * lstsq方法。

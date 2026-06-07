@@ -9,6 +9,9 @@ import java.util.List;
 /**
  * DynamicMethod类。
  */
+/**
+ * DynamicMethod类。
+ */
 public class DynamicMethod {
 
     private String methodName;
@@ -20,6 +23,14 @@ public class DynamicMethod {
     private String body;
 
     private List<?> parameters = new ArrayList<>();
+    /**
+     * of方法。
+     *      * @param methodName String类型参数
+     * @param parameters List?类型参数
+     * @param returnType String类型参数
+     * @param body String类型参数
+     * @return static DynamicMethod类型返回值
+     */
     /**
      * of方法。
      *      * @param methodName String类型参数
@@ -41,10 +52,18 @@ public class DynamicMethod {
      * getMethodName方法。
      * @return String类型返回值
      */
+    /**
+     * getMethodName方法。
+     * @return String类型返回值
+     */
     public String getMethodName() {
         return methodName;
     }
 
+    /**
+     * setMethodName方法。
+     *      * @param methodName String类型参数
+     */
     /**
      * setMethodName方法。
      *      * @param methodName String类型参数
@@ -57,10 +76,18 @@ public class DynamicMethod {
      * getReturnType方法。
      * @return String类型返回值
      */
+    /**
+     * getReturnType方法。
+     * @return String类型返回值
+     */
     public String getReturnType() {
         return returnType;
     }
 
+    /**
+     * setReturnType方法。
+     *      * @param returnType String类型参数
+     */
     /**
      * setReturnType方法。
      *      * @param returnType String类型参数
@@ -73,10 +100,18 @@ public class DynamicMethod {
      * getDesc方法。
      * @return String类型返回值
      */
+    /**
+     * getDesc方法。
+     * @return String类型返回值
+     */
     public String getDesc() {
         return desc;
     }
 
+    /**
+     * setDesc方法。
+     *      * @param desc String类型参数
+     */
     /**
      * setDesc方法。
      *      * @param desc String类型参数
@@ -89,10 +124,18 @@ public class DynamicMethod {
      * getBody方法。
      * @return String类型返回值
      */
+    /**
+     * getBody方法。
+     * @return String类型返回值
+     */
     public String getBody() {
         return body;
     }
 
+    /**
+     * setBody方法。
+     *      * @param body String类型参数
+     */
     /**
      * setBody方法。
      *      * @param body String类型参数
@@ -105,10 +148,18 @@ public class DynamicMethod {
      * getParameters方法。
      * @return List<?>类型返回值
      */
+    /**
+     * getParameters方法。
+     * @return List<?>类型返回值
+     */
     public List<?> getParameters() {
         return parameters;
     }
 
+    /**
+     * setParameters方法。
+     *      * @param parameters List?类型参数
+     */
     /**
      * setParameters方法。
      *      * @param parameters List?类型参数

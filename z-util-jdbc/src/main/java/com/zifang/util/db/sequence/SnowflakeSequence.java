@@ -39,6 +39,9 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * SnowflakeSequence类。
  */
+/**
+ * SnowflakeSequence类。
+ */
 public class SnowflakeSequence implements Sequence {
 
     private static final Logger log = LoggerFactory.getLogger(SnowflakeSequence.class);
@@ -76,6 +79,10 @@ public class SnowflakeSequence implements Sequence {
      * SnowflakeSequence方法。
      *      * @param nodeId long类型参数
      */
+    /**
+     * SnowflakeSequence方法。
+     *      * @param nodeId long类型参数
+     */
     public SnowflakeSequence(long nodeId) {
         this(nodeId, DEFAULT_EPOCH);
     }
@@ -85,6 +92,11 @@ public class SnowflakeSequence implements Sequence {
      *
      * @param nodeId 节点号（0 ~ 1023）
      * @param epoch  起始时间戳（毫秒），通常设为服务上线日期
+     */
+    /**
+     * SnowflakeSequence方法。
+     *      * @param nodeId long类型参数
+     * @param epoch long类型参数
      */
     /**
      * SnowflakeSequence方法。
@@ -108,6 +120,10 @@ public class SnowflakeSequence implements Sequence {
      * 生成下一个唯一 ID
      */
     @Override
+    /**
+     * next方法。
+     * @return long类型返回值
+     */
     /**
      * next方法。
      * @return long类型返回值
@@ -145,6 +161,11 @@ public class SnowflakeSequence implements Sequence {
     }
 
     @Override
+    /**
+     * next方法。
+     *      * @param count int类型参数
+     * @return long[]类型返回值
+     */
     /**
      * next方法。
      *      * @param count int类型参数
@@ -194,6 +215,11 @@ public class SnowflakeSequence implements Sequence {
      *      * @param id long类型参数
      * @return String类型返回值
      */
+    /**
+     * parse方法。
+     *      * @param id long类型参数
+     * @return String类型返回值
+     */
     public String parse(long id) {
         long ts = ((id >> TIMESTAMP_SHIFT) & ~(-1L << 41)) + epoch;
         long nid = (id >> NODE_ID_SHIFT) & MAX_NODE_ID;
@@ -208,6 +234,10 @@ public class SnowflakeSequence implements Sequence {
      * getNodeId方法。
      * @return long类型返回值
      */
+    /**
+     * getNodeId方法。
+     * @return long类型返回值
+     */
     public long getNodeId() {
         return nodeId;
     }
@@ -216,10 +246,19 @@ public class SnowflakeSequence implements Sequence {
      * getTotalGenerated方法。
      * @return long类型返回值
      */
+    /**
+     * getTotalGenerated方法。
+     * @return long类型返回值
+     */
     public long getTotalGenerated() {
         return totalGenerated.get();
     }
 
+    /**
+     * getTimestampOf方法。
+     *      * @param id long类型参数
+     * @return long类型返回值
+     */
     /**
      * getTimestampOf方法。
      *      * @param id long类型参数
@@ -234,10 +273,20 @@ public class SnowflakeSequence implements Sequence {
      *      * @param id long类型参数
      * @return long类型返回值
      */
+    /**
+     * getNodeIdOf方法。
+     *      * @param id long类型参数
+     * @return long类型返回值
+     */
     public long getNodeIdOf(long id) {
         return (id >> NODE_ID_SHIFT) & MAX_NODE_ID;
     }
 
+    /**
+     * getSeqOf方法。
+     *      * @param id long类型参数
+     * @return long类型返回值
+     */
     /**
      * getSeqOf方法。
      *      * @param id long类型参数
@@ -248,6 +297,10 @@ public class SnowflakeSequence implements Sequence {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

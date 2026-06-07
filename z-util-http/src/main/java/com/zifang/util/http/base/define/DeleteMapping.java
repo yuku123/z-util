@@ -14,6 +14,9 @@ import java.lang.annotation.*;
 /**
  * DeleteMapping注解。
  */
+/**
+ * DeleteMapping注解。
+ */
 public @interface DeleteMapping {
 
     /**

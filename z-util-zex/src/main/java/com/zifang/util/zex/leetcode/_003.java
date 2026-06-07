@@ -9,8 +9,16 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _003类。
+ */
 public class _003 {
 
+    /**
+     * lengthOfLongestSubstring方法。
+     *      * @param s String类型参数
+     * @return int类型返回值
+     */
     public int lengthOfLongestSubstring(String s) {
         int max=0;
         int count=0;
@@ -27,6 +35,11 @@ public class _003 {
         return max;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InstantiationException, IllegalAccessException {
         new _003().lengthOfLongestSubstring("abada");
     }

@@ -37,6 +37,9 @@ import java.util.Collection;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Multiset_Study类。
+ */
 public class Multiset_Study {
     /**
      * 允许重复，但是不保证顺序.
@@ -44,6 +47,9 @@ public class Multiset_Study {
      * 底层结构HashMap<E, Count>()，Multiset遍历时可以遍历出Map.keySize * count个元素，而map却不可以，itertator和Entry<T,Count>的iterator实现。
      */
     @Test
+    /**
+     * HashMultisetTest方法。
+     */
     public void HashMultisetTest() {
         Multiset<String> list = HashMultiset.create();
         list.add("a");
@@ -72,6 +78,9 @@ public class Multiset_Study {
      * 底层结构为ConcurrentHashMap<E, AtomicInteger>().
      */
     @Test
+    /**
+     * ConcurrentHashMulisetTest方法。
+     */
     public void ConcurrentHashMulisetTest() {
         Multiset<String> con = ConcurrentHashMultiset.create();
         con.add("a");

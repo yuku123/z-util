@@ -26,6 +26,12 @@ public final class ProxyUtil {
      * @param aspectClass Class?类型参数
      * @return static <T> T类型返回值
      */
+    /**
+     * proxy方法。
+     *      * @param target T类型参数
+     * @param aspectClass Class?类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T proxy(T target, Class<? extends Aspect> aspectClass) {
         return ProxyFactory.createProxy(target, aspectClass);
     }
@@ -37,6 +43,12 @@ public final class ProxyUtil {
      * @param target 被代理对象
      * @param aspect 切面对象
      * @return 代理对象
+     */
+    /**
+     * proxy方法。
+     *      * @param target T类型参数
+     * @param aspect Aspect类型参数
+     * @return static <T> T类型返回值
      */
     /**
      * proxy方法。
@@ -72,6 +84,13 @@ public final class ProxyUtil {
      * @param interfaces Class?...类型参数
      * @return static <T> T类型返回值
      */
+    /**
+     * newProxyInstance方法。
+     *      * @param classloader ClassLoader类型参数
+     * @param invocationHandler InvocationHandler类型参数
+     * @param interfaces Class?...类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T newProxyInstance(ClassLoader classloader, InvocationHandler invocationHandler, Class<?>... interfaces) {
         return (T) Proxy.newProxyInstance(classloader, interfaces, invocationHandler);
     }
@@ -90,6 +109,12 @@ public final class ProxyUtil {
      * @param interfaces Class?...类型参数
      * @return static <T> T类型返回值
      */
+    /**
+     * newProxyInstance方法。
+     *      * @param invocationHandler InvocationHandler类型参数
+     * @param interfaces Class?...类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T newProxyInstance(InvocationHandler invocationHandler, Class<?>... interfaces) {
         return newProxyInstance(ClassLoaderUtil.getContextClassLoader(), invocationHandler, interfaces);
     }
@@ -101,6 +126,12 @@ public final class ProxyUtil {
      * @param invocationHandler {@link InvocationHandler} ，被代理类通过实现此接口提供动态代理功能
      * @param interfaces        代理类中需要实现的被代理类的接口方法
      * @return 代理类
+     */
+    /**
+     * newProxyInstance方法。
+     *      * @param invocationHandler Class?类型参数
+     * @param interfaces Class?...类型参数
+     * @return static <T> T类型返回值
      */
     /**
      * newProxyInstance方法。

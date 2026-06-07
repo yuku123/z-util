@@ -13,11 +13,18 @@ import java.io.InputStream;
 /**
  * ConstantMethodTypeInfo类。
  */
+/**
+ * ConstantMethodTypeInfo类。
+ */
 public class ConstantMethodTypeInfo extends AbstractConstantPool {
 
     private U2 descriptorIndex;
 
 
+    /**
+     * ConstantMethodTypeInfo方法。
+     *      * @param tag byte类型参数
+     */
     /**
      * ConstantMethodTypeInfo方法。
      *      * @param tag byte类型参数
@@ -30,10 +37,18 @@ public class ConstantMethodTypeInfo extends AbstractConstantPool {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     public void read(InputStream inputStream) {
         this.descriptorIndex = U2.read(inputStream);
     }
 
+    /**
+     * getDescriptorIndex方法。
+     * @return U2类型返回值
+     */
     /**
      * getDescriptorIndex方法。
      * @return U2类型返回值

@@ -5,6 +5,12 @@ package com.zifang.util.yaml.define;
  *
  * @author zifang
  */
+/**
+ * YamlNodeType枚举。
+ */
+/**
+ * YamlNodeType枚举。
+ */
 public enum YamlNodeType {
     /** 空节点（null 或空） */
     NULL,

@@ -16,6 +16,9 @@ import org.junit.runners.Suite;
     // Server 测试
     HttpServerProxyTest.class
 })
+/**
+ * AllTests类。
+ */
 public class AllTests {
     // 测试套件入口
 }

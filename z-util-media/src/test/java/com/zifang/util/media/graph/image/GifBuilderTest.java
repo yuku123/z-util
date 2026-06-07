@@ -7,15 +7,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import static org.junit.Assert.*;
 
+/**
+ * GifBuilderTest类。
+ */
 public class GifBuilderTest {
 
     @Test
+    /**
+     * testConstruction方法。
+     */
     public void testConstruction() {
         GifBuilder builder = new GifBuilder();
         assertNotNull(builder);
     }
 
     @Test
+    /**
+     * testSize方法。
+     */
     public void testSize() {
         GifBuilder builder = new GifBuilder();
         GifBuilder result = builder.size(400, 300);
@@ -23,6 +32,9 @@ public class GifBuilderTest {
     }
 
     @Test
+    /**
+     * testDelay方法。
+     */
     public void testDelay() {
         GifBuilder builder = new GifBuilder();
         GifBuilder result = builder.delay(100);
@@ -30,6 +42,9 @@ public class GifBuilderTest {
     }
 
     @Test
+    /**
+     * testRepeat方法。
+     */
     public void testRepeat() {
         GifBuilder builder = new GifBuilder();
         GifBuilder result = builder.repeat(0);
@@ -37,6 +52,9 @@ public class GifBuilderTest {
     }
 
     @Test
+    /**
+     * testQuality方法。
+     */
     public void testQuality() {
         GifBuilder builder = new GifBuilder();
         GifBuilder result = builder.quality(10);
@@ -44,6 +62,9 @@ public class GifBuilderTest {
     }
 
     @Test
+    /**
+     * testAddFrame方法。
+     */
     public void testAddFrame() {
         GifBuilder builder = new GifBuilder();
         BufferedImage frame = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
@@ -52,6 +73,9 @@ public class GifBuilderTest {
     }
 
     @Test
+    /**
+     * testBuild方法。
+     */
     public void testBuild() throws IOException {
         GifBuilder builder = new GifBuilder();
         builder.size(100, 100);
@@ -61,6 +85,9 @@ public class GifBuilderTest {
     }
 
     @Test(expected = IllegalStateException.class)
+    /**
+     * testBuildWithoutFrames方法。
+     */
     public void testBuildWithoutFrames() throws IOException {
         GifBuilder builder = new GifBuilder();
         builder.size(100, 100);
@@ -68,6 +95,9 @@ public class GifBuilderTest {
     }
 
     @Test
+    /**
+     * testToBytes方法。
+     */
     public void testToBytes() throws IOException {
         GifBuilder builder = new GifBuilder();
         builder.size(50, 50);
@@ -79,6 +109,9 @@ public class GifBuilderTest {
     }
 
     @Test
+    /**
+     * testWriteWithoutFrames方法。
+     */
     public void testWriteWithoutFrames() throws IOException {
         GifBuilder builder = new GifBuilder();
         // Should throw exception

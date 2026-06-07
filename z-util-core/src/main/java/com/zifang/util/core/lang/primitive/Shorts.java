@@ -12,6 +12,9 @@ import java.util.Arrays;
 /**
  * Shorts类。
  */
+/**
+ * Shorts类。
+ */
 public class Shorts {
 
     private Shorts() {
@@ -19,6 +22,12 @@ public class Shorts {
 
     /**
      * 将短整数数组用指定分隔符连接成字符串。
+     */
+    /**
+     * join方法。
+     *      * @param array short[]类型参数
+     * @param delimiter String类型参数
+     * @return static String类型返回值
      */
     /**
      * join方法。
@@ -42,6 +51,11 @@ public class Shorts {
 
     /**
      * 将多个短整数数组合并为一个。
+     */
+    /**
+     * concat方法。
+     *      * @param arrays short[]...类型参数
+     * @return static short[]类型返回值
      */
     /**
      * concat方法。
@@ -74,6 +88,11 @@ public class Shorts {
      *      * @param array short[]类型参数
      * @return static short[]类型返回值
      */
+    /**
+     * reverse方法。
+     *      * @param array short[]类型参数
+     * @return static short[]类型返回值
+     */
     public static short[] reverse(short[] array) {
         if (array == null || array.length <= 1) {
             return array != null ? array : new short[0];
@@ -87,6 +106,11 @@ public class Shorts {
 
     /**
      * 将短整数数组转换为字符串。
+     */
+    /**
+     * toString方法。
+     *      * @param array short[]类型参数
+     * @return static String类型返回值
      */
     /**
      * toString方法。
@@ -116,6 +140,11 @@ public class Shorts {
      *      * @param array short[]类型参数
      * @return static int类型返回值
      */
+    /**
+     * sum方法。
+     *      * @param array short[]类型参数
+     * @return static int类型返回值
+     */
     public static int sum(short[] array) {
         if (array == null || array.length == 0) {
             return 0;
@@ -129,6 +158,11 @@ public class Shorts {
 
     /**
      * 获取短整数数组中的最小值。
+     */
+    /**
+     * min方法。
+     *      * @param array short[]类型参数
+     * @return static short类型返回值
      */
     /**
      * min方法。
@@ -150,6 +184,11 @@ public class Shorts {
 
     /**
      * 获取短整数数组中的最大值。
+     */
+    /**
+     * max方法。
+     *      * @param array short[]类型参数
+     * @return static short类型返回值
      */
     /**
      * max方法。
@@ -178,6 +217,12 @@ public class Shorts {
      * @param value short类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * contains方法。
+     *      * @param array short[]类型参数
+     * @param value short类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean contains(short[] array, short value) {
         if (array == null || array.length == 0) {
             return false;
@@ -199,6 +244,12 @@ public class Shorts {
      * @param value short类型参数
      * @return static int类型返回值
      */
+    /**
+     * indexOf方法。
+     *      * @param array short[]类型参数
+     * @param value short类型参数
+     * @return static int类型返回值
+     */
     public static int indexOf(short[] array, short value) {
         if (array == null || array.length == 0) {
             return -1;
@@ -213,6 +264,11 @@ public class Shorts {
 
     /**
      * 将字符串解析为短整数。
+     */
+    /**
+     * parseShort方法。
+     *      * @param str String类型参数
+     * @return static Short类型返回值
      */
     /**
      * parseShort方法。

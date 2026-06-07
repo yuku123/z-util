@@ -5,6 +5,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * ReadWriteLockDemo类。
+ */
 public class ReadWriteLockDemo {
 
     private static Lock lock = new ReentrantLock();
@@ -14,6 +17,11 @@ public class ReadWriteLockDemo {
 
     private int value;
 
+    /**
+     * handleRead方法。
+     *      * @param lock Lock类型参数
+     * @return Object类型返回值
+     */
     public Object handleRead(Lock lock) {
         try {
             lock.lock();
@@ -28,6 +36,11 @@ public class ReadWriteLockDemo {
         return null;
     }
 
+    /**
+     * handleWrite方法。
+     *      * @param lock Lock类型参数
+     * @param index int类型参数
+     */
     public void handleWrite(Lock lock, int index) {
         try {
             lock.lock();
@@ -41,10 +54,18 @@ public class ReadWriteLockDemo {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         ReadWriteLockDemo readWriteLockDemo = new ReadWriteLockDemo();
         Runnable readRunnable = new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 readWriteLockDemo.handleRead(readLock);
                 //readWriteLockDemo.handleRead(lock);
@@ -53,6 +74,9 @@ public class ReadWriteLockDemo {
 
         Runnable writeRunnable = new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 readWriteLockDemo.handleWrite(writeLock, new Random().nextInt());
                 //readWriteLockDemo.handleWrite(lock, new Random().nextInt());

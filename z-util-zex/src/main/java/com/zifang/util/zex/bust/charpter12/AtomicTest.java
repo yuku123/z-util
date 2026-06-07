@@ -13,15 +13,31 @@ import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * AtomicTest类。
+ */
 public class AtomicTest {
 
+    /**
+     * AtomicInteger方法。
+     *      * @param 0 Object类型参数
+     * @return volatile static AtomicInteger i = new类型返回值
+     */
     public volatile static AtomicInteger i = new AtomicInteger(0);
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
 
         Thread thread1 = new Thread(new Runnable() {
             int i = 0;
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 while(i++ < 10000){
                     AtomicTest.i.incrementAndGet();
@@ -31,6 +47,9 @@ public class AtomicTest {
         Thread thread2 = new Thread(new Runnable() {
             int i = 0;
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 while(i++ < 10000){
                     AtomicTest.i.incrementAndGet();

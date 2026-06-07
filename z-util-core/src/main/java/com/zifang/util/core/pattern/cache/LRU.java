@@ -14,6 +14,9 @@ import java.util.Map;
 /**
  * LRU类。
  */
+/**
+ * LRU类。
+ */
 public class LRU<K, V> extends LinkedHashMap<K, V> {
 
     // 保存缓存的容量
@@ -24,6 +27,11 @@ public class LRU<K, V> extends LinkedHashMap<K, V> {
      *
      * @param capacity  缓存容量，必须大于0
      * @param loadFactor 负载因子，用于确定扩容时机
+     */
+    /**
+     * LRU方法。
+     *      * @param capacity int类型参数
+     * @param loadFactor float类型参数
      */
     /**
      * LRU方法。
@@ -44,6 +52,11 @@ public class LRU<K, V> extends LinkedHashMap<K, V> {
      * @return 如果应该移除最旧元素则返回true，否则返回false
      */
     @Override
+    /**
+     * removeEldestEntry方法。
+     *      * @param eldest Map.EntryK,类型参数
+     * @return boolean类型返回值
+     */
     /**
      * removeEldestEntry方法。
      *      * @param eldest Map.EntryK,类型参数

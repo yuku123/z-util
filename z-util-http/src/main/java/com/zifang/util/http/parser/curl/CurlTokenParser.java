@@ -21,6 +21,9 @@ import java.util.Map;
 /**
  * CurlTokenParser类。
  */
+/**
+ * CurlTokenParser类。
+ */
 public class CurlTokenParser {
 
     /**
@@ -28,6 +31,11 @@ public class CurlTokenParser {
      *
      * @param tokens token 列表
      * @return HttpRequestDefinition
+     */
+    /**
+     * parse方法。
+     *      * @param tokens ListCurlLexer.Token类型参数
+     * @return static HttpRequestDefinition类型返回值
      */
     /**
      * parse方法。

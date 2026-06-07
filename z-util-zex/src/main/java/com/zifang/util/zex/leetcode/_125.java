@@ -9,7 +9,15 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _125类。
+ */
 public class _125 {
+    /**
+     * isNumberOrChar方法。
+     *      * @param c char类型参数
+     * @return boolean类型返回值
+     */
     public boolean isNumberOrChar(char c){
         if(c >= '0' && c <= '9'){
             return true;
@@ -26,10 +34,21 @@ public class _125 {
         return false;
     }
 
+    /**
+     * equa方法。
+     *      * @param c1 char类型参数
+     * @param c2 char类型参数
+     * @return boolean类型返回值
+     */
     public boolean equa(char c1, char c2){
         return String.valueOf(c1).compareToIgnoreCase(String.valueOf(c2)) == 0;
     }
 
+    /**
+     * isPalindrome方法。
+     *      * @param s String类型参数
+     * @return boolean类型返回值
+     */
     public boolean isPalindrome(String s) {
 
         if(s.equals("")){
@@ -75,6 +94,11 @@ public class _125 {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _125().isPalindrome(" ");
     }

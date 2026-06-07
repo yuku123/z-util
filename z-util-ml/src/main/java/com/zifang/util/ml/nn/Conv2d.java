@@ -12,6 +12,9 @@ import com.zifang.util.numpy.Shape;
 /**
  * Conv2d类。
  */
+/**
+ * Conv2d类。
+ */
 public class Conv2d extends Module {
     
     private final int inChannels;
@@ -33,6 +36,12 @@ public class Conv2d extends Module {
      * @param outChannels int类型参数
      * @param kernelSize int类型参数
      */
+    /**
+     * Conv2d方法。
+     *      * @param inChannels int类型参数
+     * @param outChannels int类型参数
+     * @param kernelSize int类型参数
+     */
     public Conv2d(int inChannels, int outChannels, int kernelSize) {
         this(inChannels, outChannels, kernelSize, 1, kernelSize / 2);
     }
@@ -45,10 +54,27 @@ public class Conv2d extends Module {
      * @param stride int类型参数
      * @param padding int类型参数
      */
+    /**
+     * Conv2d方法。
+     *      * @param inChannels int类型参数
+     * @param outChannels int类型参数
+     * @param kernelSize int类型参数
+     * @param stride int类型参数
+     * @param padding int类型参数
+     */
     public Conv2d(int inChannels, int outChannels, int kernelSize, int stride, int padding) {
         this(inChannels, outChannels, kernelSize, stride, padding, 1);
     }
     
+    /**
+     * Conv2d方法。
+     *      * @param inChannels int类型参数
+     * @param outChannels int类型参数
+     * @param kernelSize int类型参数
+     * @param stride int类型参数
+     * @param padding int类型参数
+     * @param dilation int类型参数
+     */
     /**
      * Conv2d方法。
      *      * @param inChannels int类型参数
@@ -78,6 +104,11 @@ public class Conv2d extends Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -145,6 +176,11 @@ public class Conv2d extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * backward方法。
      *      * @param gradOutput NdArray类型参数
@@ -254,7 +290,15 @@ public class Conv2d extends Module {
      * getInChannels方法。
      * @return int类型返回值
      */
+    /**
+     * getInChannels方法。
+     * @return int类型返回值
+     */
     public int getInChannels() { return inChannels; }
+    /**
+     * getOutChannels方法。
+     * @return int类型返回值
+     */
     /**
      * getOutChannels方法。
      * @return int类型返回值
@@ -264,7 +308,15 @@ public class Conv2d extends Module {
      * getKernelSize方法。
      * @return int类型返回值
      */
+    /**
+     * getKernelSize方法。
+     * @return int类型返回值
+     */
     public int getKernelSize() { return kernelSize; }
+    /**
+     * getStride方法。
+     * @return int类型返回值
+     */
     /**
      * getStride方法。
      * @return int类型返回值
@@ -274,12 +326,24 @@ public class Conv2d extends Module {
      * getPadding方法。
      * @return int类型返回值
      */
+    /**
+     * getPadding方法。
+     * @return int类型返回值
+     */
     public int getPadding() { return padding; }
     /**
      * getWeight方法。
      * @return NdArray类型返回值
      */
+    /**
+     * getWeight方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getWeight() { return weight; }
+    /**
+     * getBias方法。
+     * @return NdArray类型返回值
+     */
     /**
      * getBias方法。
      * @return NdArray类型返回值

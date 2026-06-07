@@ -11,8 +11,16 @@ package com.zifang.util.zex.bust.chapter10;
  */
 import java.lang.reflect.Modifier;
 
+/**
+ * ParserClassTest001类。
+ */
 public class ParserClassTest001 {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         // 获得类基础信息

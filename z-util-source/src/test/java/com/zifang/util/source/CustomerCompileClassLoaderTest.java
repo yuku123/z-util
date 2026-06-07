@@ -10,21 +10,33 @@ import static org.junit.Assert.*;
 /**
  * CustomerCompileClassLoader 测试
  */
+/**
+ * CustomerCompileClassLoaderTest类。
+ */
 public class CustomerCompileClassLoaderTest {
 
     @Test
+    /**
+     * testClassExtension方法。
+     */
     public void testClassExtension() {
         // 验证类文件扩展名
         assertEquals(".class", CustomerCompileClassLoader.CLASS_EXTENSION);
     }
 
     @Test
+    /**
+     * testConstructor方法。
+     */
     public void testConstructor() {
         CustomerCompileClassLoader classLoader = new CustomerCompileClassLoader(Thread.currentThread().getContextClassLoader());
         assertNotNull(classLoader);
     }
 
     @Test
+    /**
+     * testGetResourceAsStream方法。
+     */
     public void testGetResourceAsStream() {
         CustomerCompileClassLoader classLoader = new CustomerCompileClassLoader(Thread.currentThread().getContextClassLoader());
 

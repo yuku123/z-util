@@ -8,5 +8,8 @@ package com.zifang.util.core.pattern.cache;
 /**
  * MemoryCacheProvider类。
  */
+/**
+ * MemoryCacheProvider类。
+ */
 public class MemoryCacheProvider implements CacheProvider {
 }

@@ -4,9 +4,21 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * BeautifyYamlUtilsTest类。
+ */
+/**
+ * BeautifyYamlUtilsTest类。
+ */
 public class BeautifyYamlUtilsTest {
 
     @Test
+    /**
+     * testBeautify_SimpleYaml方法。
+     */
+    /**
+     * testBeautify_SimpleYaml方法。
+     */
     public void testBeautify_SimpleYaml() {
         String input = "name: test";
         String result = BeautifyYamlUtils.beautify(input);
@@ -15,16 +27,34 @@ public class BeautifyYamlUtilsTest {
     }
 
     @Test
+    /**
+     * testBeautify_Null方法。
+     */
+    /**
+     * testBeautify_Null方法。
+     */
     public void testBeautify_Null() {
         assertNull(BeautifyYamlUtils.beautify(null));
     }
 
     @Test
+    /**
+     * testBeautify_Empty方法。
+     */
+    /**
+     * testBeautify_Empty方法。
+     */
     public void testBeautify_Empty() {
         assertEquals("", BeautifyYamlUtils.beautify(""));
     }
 
     @Test
+    /**
+     * testMinify_SimpleYaml方法。
+     */
+    /**
+     * testMinify_SimpleYaml方法。
+     */
     public void testMinify_SimpleYaml() {
         String input = "name: test\n\n\n\nage: 18";
         String result = BeautifyYamlUtils.minify(input);
@@ -33,11 +63,23 @@ public class BeautifyYamlUtilsTest {
     }
 
     @Test
+    /**
+     * testMinify_Null方法。
+     */
+    /**
+     * testMinify_Null方法。
+     */
     public void testMinify_Null() {
         assertNull(BeautifyYamlUtils.minify(null));
     }
 
     @Test
+    /**
+     * testSortKeys_SimpleMap方法。
+     */
+    /**
+     * testSortKeys_SimpleMap方法。
+     */
     public void testSortKeys_SimpleMap() {
         String input = "zebra: 1\napple: 2\nbanana: 3";
         String result = BeautifyYamlUtils.sortKeys(input);
@@ -51,6 +93,12 @@ public class BeautifyYamlUtilsTest {
     }
 
     @Test
+    /**
+     * testSortKeys_NestedMap方法。
+     */
+    /**
+     * testSortKeys_NestedMap方法。
+     */
     public void testSortKeys_NestedMap() {
         String input = "z:\n  b: 1\n  a: 2";
         String result = BeautifyYamlUtils.sortKeys(input);
@@ -60,6 +108,12 @@ public class BeautifyYamlUtilsTest {
     }
 
     @Test
+    /**
+     * testSortKeys_Null方法。
+     */
+    /**
+     * testSortKeys_Null方法。
+     */
     public void testSortKeys_Null() {
         assertNull(BeautifyYamlUtils.sortKeys(null));
     }

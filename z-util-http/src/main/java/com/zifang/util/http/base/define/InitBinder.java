@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * InitBinder类。
  */
+/**
+ * InitBinder类。
+ */
 public class InitBinder {
 }

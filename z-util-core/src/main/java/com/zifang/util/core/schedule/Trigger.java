@@ -31,6 +31,9 @@ import java.util.TimeZone;
 /**
  * Trigger接口。
  */
+/**
+ * Trigger接口。
+ */
 public interface Trigger {
 
     /**
@@ -163,6 +166,10 @@ public interface Trigger {
      * self方法。
      * @return B类型返回值
      */
+    /**
+     * self方法。
+     * @return B类型返回值
+     */
         protected B self() {
             return (B) this;
         }
@@ -170,6 +177,11 @@ public interface Trigger {
         /**
          * 设置触发器名称。
          */
+    /**
+     * withName方法。
+     *      * @param name String类型参数
+     * @return B类型返回值
+     */
     /**
      * withName方法。
      *      * @param name String类型参数
@@ -188,6 +200,11 @@ public interface Trigger {
      *      * @param group String类型参数
      * @return B类型返回值
      */
+    /**
+     * withGroup方法。
+     *      * @param group String类型参数
+     * @return B类型返回值
+     */
         public B withGroup(String group) {
             this.group = Objects.requireNonNull(group, "trigger group must not be null");
             return self();
@@ -196,6 +213,11 @@ public interface Trigger {
         /**
          * 设置触发器描述。
          */
+    /**
+     * withDescription方法。
+     *      * @param description String类型参数
+     * @return B类型返回值
+     */
     /**
      * withDescription方法。
      *      * @param description String类型参数
@@ -214,6 +236,11 @@ public interface Trigger {
      *      * @param priority int类型参数
      * @return B类型返回值
      */
+    /**
+     * withPriority方法。
+     *      * @param priority int类型参数
+     * @return B类型返回值
+     */
         public B withPriority(int priority) {
             this.priority = priority;
             return self();
@@ -222,6 +249,11 @@ public interface Trigger {
         /**
          * 设置开始时间（java.util.Date）。
          */
+    /**
+     * startingAt方法。
+     *      * @param startTime Date类型参数
+     * @return B类型返回值
+     */
     /**
      * startingAt方法。
      *      * @param startTime Date类型参数
@@ -240,6 +272,11 @@ public interface Trigger {
      *      * @param startTime LocalDateTime类型参数
      * @return B类型返回值
      */
+    /**
+     * startingAt方法。
+     *      * @param startTime LocalDateTime类型参数
+     * @return B类型返回值
+     */
         public B startingAt(LocalDateTime startTime) {
             this.startTime = Date.from(startTime.atZone(ZoneId.systemDefault()).toInstant());
             return self();
@@ -248,6 +285,11 @@ public interface Trigger {
         /**
          * 设置结束时间（java.util.Date）。
          */
+    /**
+     * endingAt方法。
+     *      * @param endTime Date类型参数
+     * @return B类型返回值
+     */
     /**
      * endingAt方法。
      *      * @param endTime Date类型参数
@@ -266,6 +308,11 @@ public interface Trigger {
      *      * @param endTime LocalDateTime类型参数
      * @return B类型返回值
      */
+    /**
+     * endingAt方法。
+     *      * @param endTime LocalDateTime类型参数
+     * @return B类型返回值
+     */
         public B endingAt(LocalDateTime endTime) {
             this.endTime = Date.from(endTime.atZone(ZoneId.systemDefault()).toInstant());
             return self();
@@ -279,6 +326,11 @@ public interface Trigger {
      *      * @param jobKey org.quartz.JobKey类型参数
      * @return B类型返回值
      */
+    /**
+     * forJob方法。
+     *      * @param jobKey org.quartz.JobKey类型参数
+     * @return B类型返回值
+     */
         public B forJob(org.quartz.JobKey jobKey) {
             this.jobKey = jobKey;
             return self();
@@ -287,6 +339,11 @@ public interface Trigger {
         /**
          * 关联到指定 Job（通过 JobDetail）。
          */
+    /**
+     * forJob方法。
+     *      * @param jobDetail JobDetail类型参数
+     * @return B类型返回值
+     */
     /**
      * forJob方法。
      *      * @param jobDetail JobDetail类型参数
@@ -306,6 +363,12 @@ public interface Trigger {
      * @param jobGroup String类型参数
      * @return B类型返回值
      */
+    /**
+     * forJob方法。
+     *      * @param jobName String类型参数
+     * @param jobGroup String类型参数
+     * @return B类型返回值
+     */
         public B forJob(String jobName, String jobGroup) {
             this.jobKey = org.quartz.JobKey.jobKey(jobName, jobGroup);
             return self();
@@ -314,6 +377,11 @@ public interface Trigger {
         /**
          * 关联到指定 Job（通过名称，使用默认分组）。
          */
+    /**
+     * forJob方法。
+     *      * @param jobName String类型参数
+     * @return B类型返回值
+     */
     /**
      * forJob方法。
      *      * @param jobName String类型参数
@@ -335,6 +403,11 @@ public interface Trigger {
      *      * @param calendarName String类型参数
      * @return B类型返回值
      */
+    /**
+     * modifiedByCalendar方法。
+     *      * @param calendarName String类型参数
+     * @return B类型返回值
+     */
         public B modifiedByCalendar(String calendarName) {
             this.calendarName = calendarName;
             return self();
@@ -343,6 +416,11 @@ public interface Trigger {
         /**
          * 设置时区。
          */
+    /**
+     * inTimeZone方法。
+     *      * @param timeZone TimeZone类型参数
+     * @return B类型返回值
+     */
     /**
      * inTimeZone方法。
      *      * @param timeZone TimeZone类型参数
@@ -361,6 +439,11 @@ public interface Trigger {
      *      * @param zoneId ZoneId类型参数
      * @return B类型返回值
      */
+    /**
+     * inTimeZone方法。
+     *      * @param zoneId ZoneId类型参数
+     * @return B类型返回值
+     */
         public B inTimeZone(ZoneId zoneId) {
             this.timeZone = TimeZone.getTimeZone(zoneId);
             return self();
@@ -369,6 +452,11 @@ public interface Trigger {
         /**
          * 设置时区（通过 ZoneId 字符串，如 "Asia/Shanghai"）。
          */
+    /**
+     * inTimeZone方法。
+     *      * @param zoneId String类型参数
+     * @return B类型返回值
+     */
     /**
      * inTimeZone方法。
      *      * @param zoneId String类型参数
@@ -387,6 +475,11 @@ public interface Trigger {
      *      * @param misfirePolicy MisfirePolicy类型参数
      * @return B类型返回值
      */
+    /**
+     * withMisfirePolicy方法。
+     *      * @param misfirePolicy MisfirePolicy类型参数
+     * @return B类型返回值
+     */
         public B withMisfirePolicy(MisfirePolicy misfirePolicy) {
             this.misfirePolicy = misfirePolicy;
             return self();
@@ -395,6 +488,10 @@ public interface Trigger {
         /**
          * 构建触发器。子类必须实现。
          */
+    /**
+     * build方法。
+     * @return abstract Trigger类型返回值
+     */
     /**
      * build方法。
      * @return abstract Trigger类型返回值

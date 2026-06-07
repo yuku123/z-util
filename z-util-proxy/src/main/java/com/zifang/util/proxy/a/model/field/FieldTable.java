@@ -17,6 +17,9 @@ import java.util.List;
 /**
  * FieldTable类。
  */
+/**
+ * FieldTable类。
+ */
 public class FieldTable {
     private List<FieldInfo> fields = new ArrayList<>();
 
@@ -26,6 +29,12 @@ public class FieldTable {
      * @param stream      输入流
      * @param poolList    常量池列表
      * @param fieldCount  字段数量
+     */
+    /**
+     * FieldTable方法。
+     *      * @param stream InputStream类型参数
+     * @param poolList ListAbstractConstantPool类型参数
+     * @param fieldCount int类型参数
      */
     /**
      * FieldTable方法。
@@ -45,6 +54,12 @@ public class FieldTable {
      * @param inputStream 输入流
      * @param poolList    常量池列表
      * @return 解析后的字段信息
+     */
+    /**
+     * parseField方法。
+     *      * @param inputStream InputStream类型参数
+     * @param poolList ListAbstractConstantPool类型参数
+     * @return FieldInfo类型返回值
      */
     /**
      * parseField方法。
@@ -79,6 +94,10 @@ public class FieldTable {
      * getFields方法。
      * @return List<FieldInfo>类型返回值
      */
+    /**
+     * getFields方法。
+     * @return List<FieldInfo>类型返回值
+     */
     public List<FieldInfo> getFields() {
         return fields;
     }
@@ -87,6 +106,10 @@ public class FieldTable {
      * 获取字段数量
      *
      * @return 字段数量
+     */
+    /**
+     * getFieldCount方法。
+     * @return int类型返回值
      */
     /**
      * getFieldCount方法。
@@ -101,6 +124,11 @@ public class FieldTable {
      *
      * @param index 字段索引
      * @return 字段信息
+     */
+    /**
+     * getField方法。
+     *      * @param index int类型参数
+     * @return FieldInfo类型返回值
      */
     /**
      * getField方法。

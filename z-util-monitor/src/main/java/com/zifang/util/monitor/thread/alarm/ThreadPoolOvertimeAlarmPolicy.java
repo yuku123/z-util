@@ -12,6 +12,9 @@ import com.zifang.util.monitor.thread.utility.TimeUtil;
 /**
  * ThreadPoolOvertimeAlarmPolicy类。
  */
+/**
+ * ThreadPoolOvertimeAlarmPolicy类。
+ */
 public class ThreadPoolOvertimeAlarmPolicy extends AlarmPolicy {
 
     /**
@@ -21,6 +24,9 @@ public class ThreadPoolOvertimeAlarmPolicy extends AlarmPolicy {
 
     /**
      * 默认构造函数，使用默认告警阈值（2分钟）。
+     */
+    /**
+     * ThreadPoolOvertimeAlarmPolicy方法。
      */
     /**
      * ThreadPoolOvertimeAlarmPolicy方法。
@@ -37,11 +43,20 @@ public class ThreadPoolOvertimeAlarmPolicy extends AlarmPolicy {
      * ThreadPoolOvertimeAlarmPolicy方法。
      *      * @param alarmThreshold int类型参数
      */
+    /**
+     * ThreadPoolOvertimeAlarmPolicy方法。
+     *      * @param alarmThreshold int类型参数
+     */
     public ThreadPoolOvertimeAlarmPolicy(int alarmThreshold) {
         this.alarmThreshold = alarmThreshold;
     }
 
     @Override
+    /**
+     * needAlarm方法。
+     *      * @param status Status类型参数
+     * @return boolean类型返回值
+     */
     /**
      * needAlarm方法。
      *      * @param status Status类型参数

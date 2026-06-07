@@ -8,9 +8,15 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * CacheTest类。
+ */
 public class CacheTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() {
 
         // 缓存提供者
@@ -28,6 +34,9 @@ public class CacheTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002() throws InterruptedException, ExecutionException {
         String key = "id";
         //不设置过期时间

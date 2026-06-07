@@ -2,6 +2,9 @@ package com.zifang.util.http.net.bookdemo;
 
 import java.net.InetAddress;
 
+/**
+ * TestInetAddress类。
+ */
 public class TestInetAddress {
 
     /**
@@ -13,6 +16,11 @@ public class TestInetAddress {
      *
      * @param args
      * @throws Exception
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) throws Exception {
         //创建一个InetAddress对象：getByName()

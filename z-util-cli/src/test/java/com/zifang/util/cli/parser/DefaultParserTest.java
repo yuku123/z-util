@@ -21,6 +21,9 @@ import static org.junit.Assert.*;
  * Unit tests for DefaultParser.
  * Tests parsing of short options, long options, option groups, required options, and argument values.
  */
+/**
+ * DefaultParserTest类。
+ */
 public class DefaultParserTest {
 
     private DefaultParser parser = new DefaultParser();
@@ -28,6 +31,9 @@ public class DefaultParserTest {
     // ==================== parse(Options, String[]) tests ====================
 
     @Test
+    /**
+     * testParseEmptyArgs方法。
+     */
     public void testParseEmptyArgs() throws ParseException {
         Options options = new Options();
         CommandLine cmd = parser.parse(options, new String[]{});
@@ -36,6 +42,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseNullArgs方法。
+     */
     public void testParseNullArgs() throws ParseException {
         Options options = new Options();
         CommandLine cmd = parser.parse(options, null);
@@ -44,6 +53,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseShortOptionNoArg方法。
+     */
     public void testParseShortOptionNoArg() throws ParseException {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -56,6 +68,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseShortOptionWithValue方法。
+     */
     public void testParseShortOptionWithValue() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -66,6 +81,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseShortOptionWithAttachedValue方法。
+     */
     public void testParseShortOptionWithAttachedValue() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -76,6 +94,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseLongOptionNoArg方法。
+     */
     public void testParseLongOptionNoArg() throws ParseException {
         Options options = new Options();
         options.addOption(null, "verbose", false, "Verbose mode");
@@ -85,6 +106,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseLongOptionWithValue方法。
+     */
     public void testParseLongOptionWithValue() throws ParseException {
         Options options = new Options();
         options.addOption(null, "file", true, "Input file");
@@ -95,6 +119,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseLongOptionWithEquals方法。
+     */
     public void testParseLongOptionWithEquals() throws ParseException {
         Options options = new Options();
         options.addOption(null, "file", true, "Input file");
@@ -105,6 +132,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseCombinedShortOptions方法。
+     */
     public void testParseCombinedShortOptions() throws ParseException {
         Options options = new Options();
         options.addOption("v", false, "Verbose");
@@ -118,6 +148,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseShortOptionClusterWithArg方法。
+     */
     public void testParseShortOptionClusterWithArg() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -128,6 +161,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParsePositionalArgs方法。
+     */
     public void testParsePositionalArgs() throws ParseException {
         Options options = new Options();
         CommandLine cmd = parser.parse(options, new String[]{"arg1", "arg2", "arg3"});
@@ -139,6 +175,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseOptionWithPositionalArgs方法。
+     */
     public void testParseOptionWithPositionalArgs() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -153,6 +192,9 @@ public class DefaultParserTest {
     // ==================== parse(Options, String[], boolean) tests ====================
 
     @Test
+    /**
+     * testParseStopAtNonOption方法。
+     */
     public void testParseStopAtNonOption() throws ParseException {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -167,6 +209,9 @@ public class DefaultParserTest {
     // ==================== parse(Options, String[], Properties) tests ====================
 
     @Test
+    /**
+     * testParseWithProperties方法。
+     */
     public void testParseWithProperties() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -183,6 +228,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseWithPropertiesEmptyArgs方法。
+     */
     public void testParseWithPropertiesEmptyArgs() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -196,6 +244,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseWithPropertiesDoesNotOverride方法。
+     */
     public void testParseWithPropertiesDoesNotOverride() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -208,6 +259,9 @@ public class DefaultParserTest {
     }
 
     @Test(expected = UnrecognizedOptionException.class)
+    /**
+     * testParseWithUnknownPropertyOption方法。
+     */
     public void testParseWithUnknownPropertyOption() throws ParseException {
         Options options = new Options();
         Properties props = new Properties();
@@ -217,6 +271,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseWithPropertiesBooleanTrue方法。
+     */
     public void testParseWithPropertiesBooleanTrue() throws ParseException {
         Options options = new Options();
         options.addOption("v", false, "Verbose");
@@ -229,6 +286,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseWithPropertiesBooleanFalse方法。
+     */
     public void testParseWithPropertiesBooleanFalse() throws ParseException {
         Options options = new Options();
         options.addOption("v", false, "Verbose");
@@ -243,6 +303,9 @@ public class DefaultParserTest {
     // ==================== parse(Options, String[], Properties, boolean) tests ====================
 
     @Test
+    /**
+     * testParseFullSignature方法。
+     */
     public void testParseFullSignature() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -257,6 +320,9 @@ public class DefaultParserTest {
     // ==================== Required option tests ====================
 
     @Test(expected = MissingOptionException.class)
+    /**
+     * testParseMissingRequiredOption方法。
+     */
     public void testParseMissingRequiredOption() throws ParseException {
         Options options = new Options();
         options.addOption(Option.builder().opt("r").description("Required").required(true).build());
@@ -265,6 +331,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseRequiredOptionProvided方法。
+     */
     public void testParseRequiredOptionProvided() throws ParseException {
         Options options = new Options();
         options.addOption(Option.builder().opt("r").description("Required").required(true).build());
@@ -274,6 +343,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseMultipleRequiredOptionsAllProvided方法。
+     */
     public void testParseMultipleRequiredOptionsAllProvided() throws ParseException {
         Options options = new Options();
         options.addOption(Option.builder().opt("r").description("Required").required(true).build());
@@ -285,6 +357,9 @@ public class DefaultParserTest {
     }
 
     @Test(expected = MissingOptionException.class)
+    /**
+     * testParseMultipleRequiredOptionsOneMissing方法。
+     */
     public void testParseMultipleRequiredOptionsOneMissing() throws ParseException {
         Options options = new Options();
         options.addOption(Option.builder().opt("r").description("Required").required(true).build());
@@ -296,6 +371,9 @@ public class DefaultParserTest {
     // ==================== Option group tests ====================
 
     @Test
+    /**
+     * testParseOptionGroupOneSelected方法。
+     */
     public void testParseOptionGroupOneSelected() throws ParseException {
         Options options = new Options();
         OptionGroup group = new OptionGroup();
@@ -310,6 +388,9 @@ public class DefaultParserTest {
     }
 
     @Test(expected = AlreadySelectedException.class)
+    /**
+     * testParseOptionGroupSelectBoth方法。
+     */
     public void testParseOptionGroupSelectBoth() throws ParseException {
         Options options = new Options();
         OptionGroup group = new OptionGroup();
@@ -321,6 +402,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseOptionGroupRequiredAllowsEither方法。
+     */
     public void testParseOptionGroupRequiredAllowsEither() throws ParseException {
         Options options = new Options();
         OptionGroup group = new OptionGroup();
@@ -337,6 +421,9 @@ public class DefaultParserTest {
     // ==================== Exception tests ====================
 
     @Test(expected = UnrecognizedOptionException.class)
+    /**
+     * testParseUnrecognizedShortOption方法。
+     */
     public void testParseUnrecognizedShortOption() throws ParseException {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -345,6 +432,9 @@ public class DefaultParserTest {
     }
 
     @Test(expected = UnrecognizedOptionException.class)
+    /**
+     * testParseUnrecognizedLongOption方法。
+     */
     public void testParseUnrecognizedLongOption() throws ParseException {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -353,6 +443,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseUnrecognizedOptionExceptionMessage方法。
+     */
     public void testParseUnrecognizedOptionExceptionMessage() {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -368,6 +461,9 @@ public class DefaultParserTest {
     }
 
     @Test(expected = MissingArgumentException.class)
+    /**
+     * testParseMissingArgumentForOption方法。
+     */
     public void testParseMissingArgumentForOption() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -376,6 +472,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseMissingArgumentExceptionMessage方法。
+     */
     public void testParseMissingArgumentExceptionMessage() {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -392,6 +491,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testParseAmbiguousLongOption方法。
+     */
     public void testParseAmbiguousLongOption() {
         Options options = new Options();
         options.addOption(null, "foo", false, "Foo");
@@ -411,6 +513,9 @@ public class DefaultParserTest {
     // ==================== Double dash tests ====================
 
     @Test
+    /**
+     * testParseDoubleDashEndOfOptions方法。
+     */
     public void testParseDoubleDashEndOfOptions() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -424,6 +529,9 @@ public class DefaultParserTest {
     // ==================== Multiple values tests ====================
 
     @Test
+    /**
+     * testParseOptionMultipleValues方法。
+     */
     public void testParseOptionMultipleValues() throws ParseException {
         Options options = new Options();
         Option option = Option.builder()
@@ -446,6 +554,9 @@ public class DefaultParserTest {
     // ==================== Flatten method tests ====================
 
     @Test
+    /**
+     * testFlattenNullArguments方法。
+     */
     public void testFlattenNullArguments() throws ParseException {
         Options options = new Options();
         String[] flatArgs = parser.flatten(new String[]{null}, false);
@@ -453,6 +564,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testFlattenOnlyDoubleDash方法。
+     */
     public void testFlattenOnlyDoubleDash() throws ParseException {
         Options options = new Options();
         String[] flatArgs = parser.flatten(new String[]{"--"}, false);
@@ -463,36 +577,54 @@ public class DefaultParserTest {
     // ==================== indexOfEqual tests ====================
 
     @Test
+    /**
+     * testIndexOfEqualWithEqual方法。
+     */
     public void testIndexOfEqualWithEqual() {
         int index = DefaultParser.indexOfEqual("foo=bar");
         assertEquals(3, index);
     }
 
     @Test
+    /**
+     * testIndexOfEqualNoEqual方法。
+     */
     public void testIndexOfEqualNoEqual() {
         int index = DefaultParser.indexOfEqual("foobar");
         assertEquals(-1, index);
     }
 
     @Test
+    /**
+     * testIndexOfEqualEmptyString方法。
+     */
     public void testIndexOfEqualEmptyString() {
         int index = DefaultParser.indexOfEqual("");
         assertEquals(-1, index);
     }
 
     @Test
+    /**
+     * testIndexOfEqualMultipleEquals方法。
+     */
     public void testIndexOfEqualMultipleEquals() {
         int index = DefaultParser.indexOfEqual("a=b=c");
         assertEquals(1, index);
     }
 
     @Test
+    /**
+     * testIndexOfEqualAtStart方法。
+     */
     public void testIndexOfEqualAtStart() {
         int index = DefaultParser.indexOfEqual("=value");
         assertEquals(0, index);
     }
 
     @Test
+    /**
+     * testIndexOfEqualAtEnd方法。
+     */
     public void testIndexOfEqualAtEnd() {
         int index = DefaultParser.indexOfEqual("value=");
         assertEquals(5, index);
@@ -501,6 +633,9 @@ public class DefaultParserTest {
     // ==================== Option value retrieval tests ====================
 
     @Test
+    /**
+     * testGetOptionValueWithDefault方法。
+     */
     public void testGetOptionValueWithDefault() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -510,6 +645,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testGetOptionValueWhenNotSet方法。
+     */
     public void testGetOptionValueWhenNotSet() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -520,6 +658,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testHasOptionByString方法。
+     */
     public void testHasOptionByString() throws ParseException {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -530,6 +671,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testGetArgs方法。
+     */
     public void testGetArgs() throws ParseException {
         Options options = new Options();
         CommandLine cmd = parser.parse(options, new String[]{"arg1", "arg2"});
@@ -541,6 +685,9 @@ public class DefaultParserTest {
     }
 
     @Test
+    /**
+     * testGetOptions方法。
+     */
     public void testGetOptions() throws ParseException {
         Options options = new Options();
         options.addOption("a", false, "A");

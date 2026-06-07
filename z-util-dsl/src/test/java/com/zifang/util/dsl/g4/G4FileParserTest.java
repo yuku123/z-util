@@ -8,9 +8,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * G4FileParserTest类。
+ */
 public class G4FileParserTest {
 
     @Test
+    /**
+     * testParse_LexerGrammar方法。
+     */
     public void testParse_LexerGrammar() {
         String g4 = "lexer grammar TestLexer;\n" +
                 "ID : [a-z]+ ;\n" +
@@ -21,6 +27,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testParse_ParserGrammar方法。
+     */
     public void testParse_ParserGrammar() {
         String g4 = "parser grammar TestParser;\n" +
                 "prog : stat ;\n" +
@@ -31,6 +40,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testParse_CombinedGrammar方法。
+     */
     public void testParse_CombinedGrammar() {
         String g4 = "lexer grammar ExprLexer;\n" +
                 "ID : [a-z]+ ;\n" +
@@ -45,6 +57,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_LexerRules方法。
+     */
     public void testExtractRules_LexerRules() {
         String g4 = "lexer grammar Test;\n" +
                 "ID : [a-z]+ ;\n" +
@@ -61,6 +76,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_ParserRules方法。
+     */
     public void testExtractRules_ParserRules() {
         String g4 = "parser grammar Test;\n" +
                 "prog : stat ;\n" +
@@ -77,6 +95,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_FragmentRule方法。
+     */
     public void testExtractRules_FragmentRule() {
         String g4 = "lexer grammar Test;\n" +
                 "fragment LETTER : [a-z] ;\n" +
@@ -92,6 +113,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_HiddenToken方法。
+     */
     public void testExtractRules_HiddenToken() {
         String g4 = "lexer grammar Test;\n" +
                 "ID : [a-z]+ ;\n" +
@@ -106,6 +130,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_ColonSeparator方法。
+     */
     public void testExtractRules_ColonSeparator() {
         String g4 = "parser grammar Test;\n" +
                 "prog : stat ;\n";
@@ -116,6 +143,9 @@ public class G4FileParserTest {
     }
 
 @Test
+    /**
+     * testExtractRules_DoubleColonSeparator方法。
+     */
     public void testExtractRules_DoubleColonSeparator() {
         String g4 = "parser grammar Test;\n" +
                 "prog ::= stat ;\n";
@@ -128,6 +158,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_SkipComments方法。
+     */
     public void testExtractRules_SkipComments() {
         String g4 = "lexer grammar Test;\n" +
                 "// This is a comment\n" +
@@ -142,6 +175,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_InlineCommentRemoved方法。
+     */
     public void testExtractRules_InlineCommentRemoved() {
         String g4 = "lexer grammar Test;\n" +
                 "ID : [a-z]+ ; // inline comment\n" +
@@ -154,6 +190,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_ActionChannel方法。
+     */
     public void testExtractRules_ActionChannel() {
         String g4 = "lexer grammar Test;\n" +
                 "ML_COMMENT : '/*' .*? '*/' -> channel(HIDDEN) ;\n" +
@@ -169,6 +208,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_HeaderSection方法。
+     */
     public void testExtractRules_HeaderSection() {
         String g4 = "lexer grammar Test;\n" +
                 "@header { package com.example; }\n" +
@@ -180,6 +222,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_MembersSection方法。
+     */
     public void testExtractRules_MembersSection() {
         String g4 = "lexer grammar Test;\n" +
                 "@members { private int count; }\n" +
@@ -191,6 +236,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_EmptyLines方法。
+     */
     public void testExtractRules_EmptyLines() {
         String g4 = "lexer grammar Test;\n" +
                 "\n" +
@@ -204,6 +252,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_RuleTypeByUppercase方法。
+     */
     public void testExtractRules_RuleTypeByUppercase() {
         String g4 = "parser grammar Test;\n" +
                 "Start : expr ;\n" +
@@ -219,6 +270,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_CharClassWithEscapes方法。
+     */
     public void testExtractRules_CharClassWithEscapes() {
         String g4 = "lexer grammar Test;\n" +
                 "ESCAPE : [\\t\\r\\n\\\\] ;\n";
@@ -229,6 +283,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_MultipleCharRanges方法。
+     */
     public void testExtractRules_MultipleCharRanges() {
         String g4 = "lexer grammar Test;\n" +
                 "ALNUM : [a-zA-Z0-9] ;\n";
@@ -239,6 +296,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_NegatedCharClass方法。
+     */
     public void testExtractRules_NegatedCharClass() {
         String g4 = "lexer grammar Test;\n" +
                 "NON_SPACE : [^a-z] ;\n";
@@ -249,6 +309,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_StringLiteral方法。
+     */
     public void testExtractRules_StringLiteral() {
         String g4 = "lexer grammar Test;\n" +
                 "IF : 'if' ;\n" +
@@ -261,6 +324,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_ParenthesizedBody方法。
+     */
     public void testExtractRules_ParenthesizedBody() {
         String g4 = "parser grammar Test;\n" +
                 "expr : term (('+' | '-') term)* ;\n";
@@ -271,6 +337,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_SemicolonInCharClass方法。
+     */
     public void testExtractRules_SemicolonInCharClass() {
         String g4 = "lexer grammar Test;\n" +
                 "SEMI : [;] ;\n";
@@ -281,6 +350,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_SemicolonInString方法。
+     */
     public void testExtractRules_SemicolonInString() {
         String g4 = "lexer grammar Test;\n" +
                 "STR : ';' ;\n";
@@ -291,6 +363,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_MultipleSpaces方法。
+     */
     public void testExtractRules_MultipleSpaces() {
         String g4 = "parser grammar Test;\n" +
                 "prog    :    stat    ;\n";
@@ -301,6 +376,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_NoValidRule方法。
+     */
     public void testExtractRules_NoValidRule() {
         String g4 = "lexer grammar Test;\n" +
                 "// no rules here\n";
@@ -310,6 +388,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_InvalidSyntaxNoColon方法。
+     */
     public void testExtractRules_InvalidSyntaxNoColon() {
         String g4 = "lexer grammar Test;\n" +
                 "ID [a-z]+ ;\n";
@@ -319,6 +400,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_InvalidSyntaxNoSemicolon方法。
+     */
     public void testExtractRules_InvalidSyntaxNoSemicolon() {
         String g4 = "lexer grammar Test;\n" +
                 "ID : [a-z]+\n";
@@ -328,6 +412,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testExtractRules_NestedParentheses方法。
+     */
     public void testExtractRules_NestedParentheses() {
         String g4 = "parser grammar Test;\n" +
                 "expr : '(' expr ')' ;\n";
@@ -338,6 +425,9 @@ public class G4FileParserTest {
     }
 
     @Test
+    /**
+     * testParseFromFile_ValidPath方法。
+     */
     public void testParseFromFile_ValidPath() {
         // Using classpath resource for testing
         String g4 = "lexer grammar Test;\n" +

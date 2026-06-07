@@ -6,6 +6,9 @@ package com.zifang.util.core.pattern.state;
 /**
  * State类。
  */
+/**
+ * State类。
+ */
 public class State {
 
     private String code;
@@ -15,9 +18,17 @@ public class State {
     /**
      * State方法。
      */
+    /**
+     * State方法。
+     */
     public State() {
     }
 
+    /**
+     * State方法。
+     *      * @param code String类型参数
+     * @param name String类型参数
+     */
     /**
      * State方法。
      *      * @param code String类型参数
@@ -32,10 +43,18 @@ public class State {
      * getCode方法。
      * @return String类型返回值
      */
+    /**
+     * getCode方法。
+     * @return String类型返回值
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * setCode方法。
+     *      * @param code String类型参数
+     */
     /**
      * setCode方法。
      *      * @param code String类型参数
@@ -48,10 +67,18 @@ public class State {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
     /**
      * setName方法。
      *      * @param name String类型参数
@@ -61,6 +88,10 @@ public class State {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -75,6 +106,11 @@ public class State {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -84,6 +120,10 @@ public class State {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

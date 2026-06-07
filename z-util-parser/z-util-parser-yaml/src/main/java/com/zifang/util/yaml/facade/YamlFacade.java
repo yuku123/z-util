@@ -3,6 +3,12 @@ package com.zifang.util.yaml.facade;
 /**
  * YAML 序列化/反序列化统一门面接口。
  */
+/**
+ * YamlFacade接口。
+ */
+/**
+ * YamlFacade接口。
+ */
 public interface YamlFacade {
 
     String toYaml(Object obj);

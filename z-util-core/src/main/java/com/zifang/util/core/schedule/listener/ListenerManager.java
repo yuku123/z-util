@@ -36,6 +36,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * ListenerManager类。
  */
+/**
+ * ListenerManager类。
+ */
 public class ListenerManager {
 
     private final org.quartz.Scheduler quartzScheduler;
@@ -43,6 +46,10 @@ public class ListenerManager {
     private final Map<String, TriggerListener> triggerListeners = new ConcurrentHashMap<>();
     private final List<SchedulerListener> schedulerListeners = Collections.synchronizedList(new ArrayList<>());
 
+    /**
+     * ListenerManager方法。
+     *      * @param quartzScheduler org.quartz.Scheduler类型参数
+     */
     /**
      * ListenerManager方法。
      *      * @param quartzScheduler org.quartz.Scheduler类型参数
@@ -66,6 +73,11 @@ public class ListenerManager {
      *      * @param listener JobListener类型参数
      * @return ListenerManager类型返回值
      */
+    /**
+     * addJobListener方法。
+     *      * @param listener JobListener类型参数
+     * @return ListenerManager类型返回值
+     */
     public ListenerManager addJobListener(JobListener listener) {
         return addJobListener(listener, Matcher.anyJobs());
     }
@@ -75,6 +87,12 @@ public class ListenerManager {
      *
      * @param listener Job 监听器
      * @param matcher  匹配规则，决定监听器作用于哪些任务
+     */
+    /**
+     * addJobListener方法。
+     *      * @param listener JobListener类型参数
+     * @param matcher Matcher类型参数
+     * @return ListenerManager类型返回值
      */
     /**
      * addJobListener方法。
@@ -109,6 +127,11 @@ public class ListenerManager {
      *      * @param name String类型参数
      * @return ListenerManager类型返回值
      */
+    /**
+     * removeJobListener方法。
+     *      * @param name String类型参数
+     * @return ListenerManager类型返回值
+     */
     public ListenerManager removeJobListener(String name) {
         try {
             quartzScheduler.getListenerManager().removeJobListener(name);
@@ -126,12 +149,21 @@ public class ListenerManager {
      * getJobListeners方法。
      * @return Collection<JobListener>类型返回值
      */
+    /**
+     * getJobListeners方法。
+     * @return Collection<JobListener>类型返回值
+     */
     public Collection<JobListener> getJobListeners() {
         return Collections.unmodifiableCollection(jobListeners.values());
     }
 
     /**
      * 获取指定名称的 Job 监听器。
+     */
+    /**
+     * getJobListener方法。
+     *      * @param name String类型参数
+     * @return JobListener类型返回值
      */
     /**
      * getJobListener方法。
@@ -154,6 +186,11 @@ public class ListenerManager {
      *      * @param listener TriggerListener类型参数
      * @return ListenerManager类型返回值
      */
+    /**
+     * addTriggerListener方法。
+     *      * @param listener TriggerListener类型参数
+     * @return ListenerManager类型返回值
+     */
     public ListenerManager addTriggerListener(TriggerListener listener) {
         return addTriggerListener(listener, Matcher.anyTriggers());
     }
@@ -163,6 +200,12 @@ public class ListenerManager {
      *
      * @param listener Trigger 监听器
      * @param matcher  匹配规则
+     */
+    /**
+     * addTriggerListener方法。
+     *      * @param listener TriggerListener类型参数
+     * @param matcher Matcher类型参数
+     * @return ListenerManager类型返回值
      */
     /**
      * addTriggerListener方法。
@@ -197,6 +240,11 @@ public class ListenerManager {
      *      * @param name String类型参数
      * @return ListenerManager类型返回值
      */
+    /**
+     * removeTriggerListener方法。
+     *      * @param name String类型参数
+     * @return ListenerManager类型返回值
+     */
     public ListenerManager removeTriggerListener(String name) {
         try {
             quartzScheduler.getListenerManager().removeTriggerListener(name);
@@ -214,12 +262,21 @@ public class ListenerManager {
      * getTriggerListeners方法。
      * @return Collection<TriggerListener>类型返回值
      */
+    /**
+     * getTriggerListeners方法。
+     * @return Collection<TriggerListener>类型返回值
+     */
     public Collection<TriggerListener> getTriggerListeners() {
         return Collections.unmodifiableCollection(triggerListeners.values());
     }
 
     /**
      * 获取指定名称的 Trigger 监听器。
+     */
+    /**
+     * getTriggerListener方法。
+     *      * @param name String类型参数
+     * @return TriggerListener类型返回值
      */
     /**
      * getTriggerListener方法。
@@ -236,6 +293,11 @@ public class ListenerManager {
      * 添加 Scheduler 监听器。
      *
      * @param listener Scheduler 监听器
+     */
+    /**
+     * addSchedulerListener方法。
+     *      * @param listener SchedulerListener类型参数
+     * @return ListenerManager类型返回值
      */
     /**
      * addSchedulerListener方法。
@@ -263,6 +325,11 @@ public class ListenerManager {
      *      * @param listener SchedulerListener类型参数
      * @return ListenerManager类型返回值
      */
+    /**
+     * removeSchedulerListener方法。
+     *      * @param listener SchedulerListener类型参数
+     * @return ListenerManager类型返回值
+     */
     public ListenerManager removeSchedulerListener(SchedulerListener listener) {
         try {
             quartzScheduler.getListenerManager().removeSchedulerListener(
@@ -277,6 +344,10 @@ public class ListenerManager {
 
     /**
      * 获取所有已注册的 Scheduler 监听器。
+     */
+    /**
+     * getSchedulerListeners方法。
+     * @return List<SchedulerListener>类型返回值
      */
     /**
      * getSchedulerListeners方法。
@@ -318,11 +389,19 @@ public class ListenerManager {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
         public String getName() {
             return delegate.getName();
         }
 
         @Override
+    /**
+     * jobToBeExecuted方法。
+     *      * @param context org.quartz.JobExecutionContext类型参数
+     */
     /**
      * jobToBeExecuted方法。
      *      * @param context org.quartz.JobExecutionContext类型参数
@@ -336,11 +415,20 @@ public class ListenerManager {
      * jobExecutionVetoed方法。
      *      * @param context org.quartz.JobExecutionContext类型参数
      */
+    /**
+     * jobExecutionVetoed方法。
+     *      * @param context org.quartz.JobExecutionContext类型参数
+     */
         public void jobExecutionVetoed(org.quartz.JobExecutionContext context) {
             delegate.jobExecutionVetoed(new JobExecutionContextWrapper(context));
         }
 
         @Override
+    /**
+     * jobWasExecuted方法。
+     *      * @param context org.quartz.JobExecutionContext类型参数
+     * @param exception org.quartz.JobExecutionException类型参数
+     */
     /**
      * jobWasExecuted方法。
      *      * @param context org.quartz.JobExecutionContext类型参数
@@ -364,11 +452,20 @@ public class ListenerManager {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
         public String getName() {
             return delegate.getName();
         }
 
         @Override
+    /**
+     * triggerFired方法。
+     *      * @param trigger org.quartz.Trigger类型参数
+     * @param context org.quartz.JobExecutionContext类型参数
+     */
     /**
      * triggerFired方法。
      *      * @param trigger org.quartz.Trigger类型参数
@@ -388,6 +485,12 @@ public class ListenerManager {
      * @param context org.quartz.JobExecutionContext类型参数
      * @return boolean类型返回值
      */
+    /**
+     * vetoJobExecution方法。
+     *      * @param trigger org.quartz.Trigger类型参数
+     * @param context org.quartz.JobExecutionContext类型参数
+     * @return boolean类型返回值
+     */
         public boolean vetoJobExecution(org.quartz.Trigger trigger,
                                         org.quartz.JobExecutionContext context) {
             return delegate.vetoJobExecution(
@@ -400,11 +503,21 @@ public class ListenerManager {
      * triggerMisfired方法。
      *      * @param trigger org.quartz.Trigger类型参数
      */
+    /**
+     * triggerMisfired方法。
+     *      * @param trigger org.quartz.Trigger类型参数
+     */
         public void triggerMisfired(org.quartz.Trigger trigger) {
             delegate.triggerMisfired(toWrapper(trigger));
         }
 
         @Override
+    /**
+     * triggerComplete方法。
+     *      * @param trigger org.quartz.Trigger类型参数
+     * @param context org.quartz.JobExecutionContext类型参数
+     * @param instruction org.quartz.Trigger.CompletedExecutionInstruction类型参数
+     */
     /**
      * triggerComplete方法。
      *      * @param trigger org.quartz.Trigger类型参数
@@ -469,11 +582,19 @@ public class ListenerManager {
      * jobAdded方法。
      *      * @param jobDetail org.quartz.JobDetail类型参数
      */
+    /**
+     * jobAdded方法。
+     *      * @param jobDetail org.quartz.JobDetail类型参数
+     */
         public void jobAdded(org.quartz.JobDetail jobDetail) {
             delegate.jobAdded(new JobDetail(jobDetail));
         }
 
         @Override
+    /**
+     * jobDeleted方法。
+     *      * @param jobKey org.quartz.JobKey类型参数
+     */
     /**
      * jobDeleted方法。
      *      * @param jobKey org.quartz.JobKey类型参数
@@ -487,11 +608,19 @@ public class ListenerManager {
      * jobScheduled方法。
      *      * @param trigger org.quartz.Trigger类型参数
      */
+    /**
+     * jobScheduled方法。
+     *      * @param trigger org.quartz.Trigger类型参数
+     */
         public void jobScheduled(org.quartz.Trigger trigger) {
             delegate.jobScheduled(toWrapper(trigger));
         }
 
         @Override
+    /**
+     * jobUnscheduled方法。
+     *      * @param triggerKey org.quartz.TriggerKey类型参数
+     */
     /**
      * jobUnscheduled方法。
      *      * @param triggerKey org.quartz.TriggerKey类型参数
@@ -505,11 +634,19 @@ public class ListenerManager {
      * triggerPaused方法。
      *      * @param triggerKey org.quartz.TriggerKey类型参数
      */
+    /**
+     * triggerPaused方法。
+     *      * @param triggerKey org.quartz.TriggerKey类型参数
+     */
         public void triggerPaused(org.quartz.TriggerKey triggerKey) {
             delegate.triggerPaused(triggerKey);
         }
 
         @Override
+    /**
+     * triggersPaused方法。
+     *      * @param triggerGroup String类型参数
+     */
     /**
      * triggersPaused方法。
      *      * @param triggerGroup String类型参数
@@ -523,11 +660,19 @@ public class ListenerManager {
      * triggerResumed方法。
      *      * @param triggerKey org.quartz.TriggerKey类型参数
      */
+    /**
+     * triggerResumed方法。
+     *      * @param triggerKey org.quartz.TriggerKey类型参数
+     */
         public void triggerResumed(org.quartz.TriggerKey triggerKey) {
             delegate.triggerResumed(triggerKey);
         }
 
         @Override
+    /**
+     * triggersResumed方法。
+     *      * @param triggerGroup String类型参数
+     */
     /**
      * triggersResumed方法。
      *      * @param triggerGroup String类型参数
@@ -541,11 +686,19 @@ public class ListenerManager {
      * jobPaused方法。
      *      * @param jobKey org.quartz.JobKey类型参数
      */
+    /**
+     * jobPaused方法。
+     *      * @param jobKey org.quartz.JobKey类型参数
+     */
         public void jobPaused(org.quartz.JobKey jobKey) {
             delegate.jobPaused(jobKey);
         }
 
         @Override
+    /**
+     * jobsPaused方法。
+     *      * @param jobGroup String类型参数
+     */
     /**
      * jobsPaused方法。
      *      * @param jobGroup String类型参数
@@ -559,11 +712,19 @@ public class ListenerManager {
      * jobResumed方法。
      *      * @param jobKey org.quartz.JobKey类型参数
      */
+    /**
+     * jobResumed方法。
+     *      * @param jobKey org.quartz.JobKey类型参数
+     */
         public void jobResumed(org.quartz.JobKey jobKey) {
             delegate.jobResumed(jobKey);
         }
 
         @Override
+    /**
+     * jobsResumed方法。
+     *      * @param jobGroup String类型参数
+     */
     /**
      * jobsResumed方法。
      *      * @param jobGroup String类型参数
@@ -578,11 +739,19 @@ public class ListenerManager {
      *      * @param msg String类型参数
      * @param cause org.quartz.SchedulerException类型参数
      */
+    /**
+     * schedulerError方法。
+     *      * @param msg String类型参数
+     * @param cause org.quartz.SchedulerException类型参数
+     */
         public void schedulerError(String msg, org.quartz.SchedulerException cause) {
             delegate.schedulerError(msg, cause);
         }
 
         @Override
+    /**
+     * schedulerShutdown方法。
+     */
     /**
      * schedulerShutdown方法。
      */
@@ -595,11 +764,18 @@ public class ListenerManager {
      * triggerFinalized方法。
      *      * @param trigger org.quartz.Trigger类型参数
      */
+    /**
+     * triggerFinalized方法。
+     *      * @param trigger org.quartz.Trigger类型参数
+     */
         public void triggerFinalized(org.quartz.Trigger trigger) {
             delegate.triggerFinalized(toWrapper(trigger));
         }
 
         @Override
+    /**
+     * schedulingDataCleared方法。
+     */
     /**
      * schedulingDataCleared方法。
      */
@@ -611,11 +787,17 @@ public class ListenerManager {
     /**
      * schedulerStarting方法。
      */
+    /**
+     * schedulerStarting方法。
+     */
         public void schedulerStarting() {
             delegate.schedulerStarting();
         }
 
         @Override
+    /**
+     * schedulerStarted方法。
+     */
     /**
      * schedulerStarted方法。
      */
@@ -627,11 +809,17 @@ public class ListenerManager {
     /**
      * schedulerInStandbyMode方法。
      */
+    /**
+     * schedulerInStandbyMode方法。
+     */
         public void schedulerInStandbyMode() {
             delegate.schedulerInStandbyMode();
         }
 
         @Override
+    /**
+     * schedulerShuttingdown方法。
+     */
     /**
      * schedulerShuttingdown方法。
      */

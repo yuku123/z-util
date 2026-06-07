@@ -12,6 +12,9 @@ package com.zifang.util.crawler.pipeline;
 /**
  * Processor接口。
  */
+/**
+ * Processor接口。
+ */
 public interface Processor {
 
     /**

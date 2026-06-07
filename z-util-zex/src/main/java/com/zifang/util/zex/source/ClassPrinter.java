@@ -14,7 +14,15 @@ import java.util.stream.Collectors;
  * @author zifang
  * @version 1.0
  */
+/**
+ * ClassPrinter类。
+ */
 public class ClassPrinter {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Class c = AbstractQueuedSynchronizer.class;
 

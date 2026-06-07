@@ -39,6 +39,9 @@ import com.zifang.util.pandas.Series;
 /**
  * Correlation类。
  */
+/**
+ * Correlation类。
+ */
 public class Correlation {
 
     /**
@@ -46,6 +49,11 @@ public class Correlation {
      *
      * @param df 输入 DataFrame
      * @return 相关系数矩阵 DataFrame
+     */
+    /**
+     * corr方法。
+     *      * @param df DataFrame类型参数
+     * @return static DataFrame类型返回值
      */
     /**
      * corr方法。
@@ -61,6 +69,11 @@ public class Correlation {
      *
      * @param df 输入 DataFrame
      * @return 相关系数矩阵 DataFrame
+     */
+    /**
+     * pearson方法。
+     *      * @param df DataFrame类型参数
+     * @return static DataFrame类型返回值
      */
     /**
      * pearson方法。
@@ -131,6 +144,11 @@ public class Correlation {
      *
      * @param df 输入 DataFrame
      * @return 协方差矩阵 DataFrame
+     */
+    /**
+     * cov方法。
+     *      * @param df DataFrame类型参数
+     * @return static DataFrame类型返回值
      */
     /**
      * cov方法。

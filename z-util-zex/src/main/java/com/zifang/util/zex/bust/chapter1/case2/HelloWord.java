@@ -8,8 +8,16 @@ package com.zifang.util.zex.bust.chapter1.case2;
 /**
  * 但是一般为了美观，文档注释内部换行的话前面会再放个*
  */
+/**
+ * HelloWord类。
+ */
 public class HelloWord {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // 单行注释
         System.out.println("hello word");

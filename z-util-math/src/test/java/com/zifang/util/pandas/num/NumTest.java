@@ -11,9 +11,15 @@ import static org.junit.Assert.*;
 /**
  * Num 类测试
  */
+/**
+ * NumTest类。
+ */
 public class NumTest {
 
     @Test
+    /**
+     * testCreationWithIntArray方法。
+     */
     public void testCreationWithIntArray() {
         int[] intArray = {1, 2, 3, 4, 5};
         Num num = new Num(intArray);
@@ -22,6 +28,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testCreationWithDoubleArray方法。
+     */
     public void testCreationWithDoubleArray() {
         double[] doubleArray = {1.0, 2.0, 3.0, 4.0, 5.0};
         Num num = new Num(doubleArray);
@@ -30,6 +39,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testCreationWith2DArray方法。
+     */
     public void testCreationWith2DArray() {
         int[][] twoDimArray = {{1, 2, 3}, {4, 5, 6}};
         Num num = new Num(twoDimArray);
@@ -39,6 +51,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testCreationWithList方法。
+     */
     public void testCreationWithList() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         Num num = Nums.array(list);
@@ -47,6 +62,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testNDim1DArray方法。
+     */
     public void testNDim1DArray() {
         int[] array = {1, 2, 3};
         Num num = new Num(array);
@@ -54,6 +72,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testNDim2DArray方法。
+     */
     public void testNDim2DArray() {
         int[][] array = {{1, 2}, {3, 4}};
         Num num = new Num(array);
@@ -61,6 +82,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testNDim3DArray方法。
+     */
     public void testNDim3DArray() {
         int[][][] array = {{{1, 2}}, {{3, 4}}};
         Num num = new Num(array);
@@ -68,6 +92,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testShape1DArray方法。
+     */
     public void testShape1DArray() {
         int[] array = {1, 2, 3, 4, 5};
         Num num = new Num(array);
@@ -77,6 +104,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testShape2DArray方法。
+     */
     public void testShape2DArray() {
         int[][] array = {{1, 2, 3}, {4, 5, 6}};
         Num num = new Num(array);
@@ -87,6 +117,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testSize1DArray方法。
+     */
     public void testSize1DArray() {
         int[] array = {1, 2, 3, 4, 5};
         Num num = new Num(array);
@@ -94,6 +127,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testSize2DArray方法。
+     */
     public void testSize2DArray() {
         int[][] array = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         Num num = new Num(array);
@@ -102,6 +138,9 @@ public class NumTest {
 
     @Ignore
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         int[] array = {1, 2, 3};
         Num num = new Num(array);
@@ -113,6 +152,9 @@ public class NumTest {
     }
 
     @Test
+    /**
+     * testCreationWithDifferentTypes方法。
+     */
     public void testCreationWithDifferentTypes() {
         // 测试不同类型的数组
         byte[] byteArray = {1, 2, 3};
@@ -127,11 +169,17 @@ public class NumTest {
     }
 
     @Test(expected = RuntimeException.class)
+    /**
+     * testCreationWithNonArray方法。
+     */
     public void testCreationWithNonArray() {
         new Num("not an array");
     }
 
     @Test
+    /**
+     * testEmptyArray方法。
+     */
     public void testEmptyArray() {
         int[] emptyArray = {};
         Num num = new Num(emptyArray);
@@ -141,6 +189,9 @@ public class NumTest {
 
     @Ignore
     @Test
+    /**
+     * testJaggedArray方法。
+     */
     public void testJaggedArray() {
         // 不规则数组
         int[][] jaggedArray = {{1, 2, 3}, {4, 5}, {6}};

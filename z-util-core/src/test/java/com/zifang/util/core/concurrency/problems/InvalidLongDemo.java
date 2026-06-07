@@ -3,9 +3,17 @@ package com.zifang.util.core.concurrency.problems;
 /**
  * @author zifang Lee(oldratlee at gmail dot com)
  */
+/**
+ * InvalidLongDemo类。
+ */
 public class InvalidLongDemo {
     long count = 0;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // LoadMaker.makeLoad();
 
@@ -26,6 +34,9 @@ public class InvalidLongDemo {
 
     private class ConcurrencyCheckTask implements Runnable {
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             int c = 0;
             for (int i = 0; ; i++) {

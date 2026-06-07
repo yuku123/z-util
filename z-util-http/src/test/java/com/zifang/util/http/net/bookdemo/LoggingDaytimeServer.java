@@ -12,12 +12,20 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * LoggingDaytimeServer类。
+ */
 public class LoggingDaytimeServer {
 
     public final static int PORT = 13;
     private final static Logger auditlog = Logger.getLogger("requests");
     private final static Logger errorlog = Logger.getLogger("errors");
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         ExecutorService pool = Executors.newFixedThreadPool(50);
@@ -50,6 +58,10 @@ public class LoggingDaytimeServer {
         }
 
         @Override
+    /**
+     * call方法。
+     * @return Void类型返回值
+     */
         public Void call() {
             try {
                 Date now = new Date();

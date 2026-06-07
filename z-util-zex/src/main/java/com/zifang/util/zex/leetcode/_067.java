@@ -9,7 +9,16 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _067类。
+ */
 public class _067 {
+    /**
+     * addBinary方法。
+     *      * @param a String类型参数
+     * @param b String类型参数
+     * @return String类型返回值
+     */
     public String addBinary(String a, String b) {
         char[] ac = a.toCharArray();
         char[] bc = b.toCharArray();
@@ -50,6 +59,11 @@ public class _067 {
         return sb.toString();
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _067().addBinary("11","1");
     }

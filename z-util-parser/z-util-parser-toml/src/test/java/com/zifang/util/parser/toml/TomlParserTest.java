@@ -11,11 +11,17 @@ import static org.junit.Assert.*;
 /**
  * TOML 解析器测试
  */
+/**
+ * TomlParserTest类。
+ */
 public class TomlParserTest {
 
     private TomlParser parser;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         parser = new TomlParser();
     }
@@ -23,6 +29,9 @@ public class TomlParserTest {
     // ==================== 基本类型测试 ====================
 
     @Test
+    /**
+     * testBasicString方法。
+     */
     public void testBasicString() {
         String toml = "name = \"test\"\n";
         TomlDocument doc = parser.parse(toml);
@@ -31,6 +40,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testBasicInteger方法。
+     */
     public void testBasicInteger() {
         String toml = "count = 42\n";
         TomlDocument doc = parser.parse(toml);
@@ -39,6 +51,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testBasicFloat方法。
+     */
     public void testBasicFloat() {
         String toml = "price = 3.14\n";
         TomlDocument doc = parser.parse(toml);
@@ -47,6 +62,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testBasicBoolean方法。
+     */
     public void testBasicBoolean() {
         String toml = "enabled = true\n" +
                       "disabled = false\n";
@@ -57,6 +75,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testNegativeNumbers方法。
+     */
     public void testNegativeNumbers() {
         String toml = "negative = -10\n" +
                       "positive = +10\n" +
@@ -69,6 +90,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testStringWithSpecialChars方法。
+     */
     public void testStringWithSpecialChars() {
         String toml = "text = \"hello\\nworld\"\n";
         TomlDocument doc = parser.parse(toml);
@@ -77,6 +101,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testEmptyString方法。
+     */
     public void testEmptyString() {
         String toml = "empty = \"\"\n";
         TomlDocument doc = parser.parse(toml);
@@ -87,6 +114,9 @@ public class TomlParserTest {
     // ==================== Table 测试 ====================
 
     @Test
+    /**
+     * testBasicTable方法。
+     */
     public void testBasicTable() {
         String toml = "[server]\n" +
                       "host = \"localhost\"\n" +
@@ -100,6 +130,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testNestedTable方法。
+     */
     public void testNestedTable() {
         String toml = "[parent.child]\n" +
                       "value = 123\n";
@@ -111,6 +144,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testDeepNestedTable方法。
+     */
     public void testDeepNestedTable() {
         String toml = "[a.b.c.d]\n" +
                       "value = 456\n";
@@ -122,6 +158,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testMultipleTables方法。
+     */
     public void testMultipleTables() {
         String toml = "[database]\n" +
                       "name = \"mydb\"\n" +
@@ -137,6 +176,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testTableWithMultipleKeys方法。
+     */
     public void testTableWithMultipleKeys() {
         String toml = "[config]\n" +
                       "key1 = \"value1\"\n" +
@@ -153,6 +195,9 @@ public class TomlParserTest {
     // ==================== 数组测试 ====================
 
     @Test
+    /**
+     * testIntegerArray方法。
+     */
     public void testIntegerArray() {
         String toml = "numbers = [1, 2, 3]\n";
         TomlDocument doc = parser.parse(toml);
@@ -165,6 +210,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testStringArray方法。
+     */
     public void testStringArray() {
         String toml = "names = [\"alice\", \"bob\", \"charlie\"]\n";
         TomlDocument doc = parser.parse(toml);
@@ -177,6 +225,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testMixedArray方法。
+     */
     public void testMixedArray() {
         String toml = "mixed = [1, \"two\", 3.0]\n";
         TomlDocument doc = parser.parse(toml);
@@ -189,6 +240,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testEmptyArray方法。
+     */
     public void testEmptyArray() {
         String toml = "empty = []\n";
         TomlDocument doc = parser.parse(toml);
@@ -198,6 +252,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testNestedArray方法。
+     */
     public void testNestedArray() {
         String toml = "matrix = [[1, 2], [3, 4]]\n";
         TomlDocument doc = parser.parse(toml);
@@ -209,6 +266,9 @@ public class TomlParserTest {
     // ==================== Inline Table 测试 ====================
 
     @Test
+    /**
+     * testInlineTable方法。
+     */
     public void testInlineTable() {
         String toml = "point = { x = 1, y = 2 }\n";
         TomlDocument doc = parser.parse(toml);
@@ -220,6 +280,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testInlineTableWithString方法。
+     */
     public void testInlineTableWithString() {
         String toml = "person = { name = \"John\", age = 30 }\n";
         TomlDocument doc = parser.parse(toml);
@@ -231,6 +294,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testInlineTableNested方法。
+     */
     public void testInlineTableNested() {
         String toml = "config = { server = { host = \"localhost\", port = 8080 } }\n";
         TomlDocument doc = parser.parse(toml);
@@ -245,6 +311,9 @@ public class TomlParserTest {
     // ==================== 数组 of Tables 测试 ====================
 
     @Test
+    /**
+     * testArrayOfTables方法。
+     */
     public void testArrayOfTables() {
         String toml = "[[products]]\n" +
                       "name = \"widget\"\n" +
@@ -260,6 +329,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testArrayOfTablesWithNestedTable方法。
+     */
     public void testArrayOfTablesWithNestedTable() {
         String toml = "[[servers]]\n" +
                       "[servers.other]\n" +
@@ -275,6 +347,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testNestedArrayOfTables方法。
+     */
     public void testNestedArrayOfTables() {
         String toml = "[[fruit]]\n" +
                       "name = \"apple\"\n" +
@@ -300,6 +375,9 @@ public class TomlParserTest {
     // ==================== 注释测试 ====================
 
     @Test
+    /**
+     * testCommentLine方法。
+     */
     public void testCommentLine() {
         String toml = "# 这是一个注释\n" +
                       "name = \"test\"\n";
@@ -309,6 +387,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testCommentAfterKeyValue方法。
+     */
     public void testCommentAfterKeyValue() {
         String toml = "name = \"test\" # 这是注释\n" +
                       "value = 123\n";
@@ -319,6 +400,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testMultipleCommentLines方法。
+     */
     public void testMultipleCommentLines() {
         String toml = "# 注释1\n" +
                       "# 注释2\n" +
@@ -332,6 +416,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testEmptyLinesIgnored方法。
+     */
     public void testEmptyLinesIgnored() {
         String toml = "name = \"test\"\n\n\n\nvalue = 123\n";
         TomlDocument doc = parser.parse(toml);
@@ -343,6 +430,9 @@ public class TomlParserTest {
     // ==================== Round-trip 测试 ====================
 
     @Test
+    /**
+     * testRoundTripBasic方法。
+     */
     public void testRoundTripBasic() {
         String toml = "name = \"test\"\n" +
                       "value = 42\n";
@@ -355,6 +445,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testRoundTripWithTable方法。
+     */
     public void testRoundTripWithTable() {
         String toml = "[server]\n" +
                       "host = \"localhost\"\n" +
@@ -368,6 +461,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testRoundTripWithArray方法。
+     */
     public void testRoundTripWithArray() {
         String toml = "numbers = [1, 2, 3]\n";
         TomlDocument doc = parser.parse(toml);
@@ -380,6 +476,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testRoundTripWithInlineTable方法。
+     */
     public void testRoundTripWithInlineTable() {
         String toml = "point = { x = 1, y = 2 }\n";
         TomlDocument doc = parser.parse(toml);
@@ -393,6 +492,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testRoundTripComplex方法。
+     */
     public void testRoundTripComplex() {
         String toml = "# 配置文件示例\n" +
                       "title = \"TOML Example\"\n" +
@@ -430,6 +532,9 @@ public class TomlParserTest {
     // ==================== 边界测试 ====================
 
     @Test
+    /**
+     * testUnderscoreInNumbers方法。
+     */
     public void testUnderscoreInNumbers() {
         String toml = "big = 1_000_000\n";
         TomlDocument doc = parser.parse(toml);
@@ -438,6 +543,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testWhitespaceAroundKey方法。
+     */
     public void testWhitespaceAroundKey() {
         String toml = "key   = \"value\"\n";
         TomlDocument doc = parser.parse(toml);
@@ -446,6 +554,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testLiteralString方法。
+     */
     public void testLiteralString() {
         String toml = "path = 'C:\\Users\\test'\n";
         TomlDocument doc = parser.parse(toml);
@@ -454,6 +565,9 @@ public class TomlParserTest {
     }
 
     @Test
+    /**
+     * testMultiLineString方法。
+     */
     public void testMultiLineString() {
         String toml = "text = \"\"\"\n" +
                       "Line 1\n" +
@@ -465,18 +579,27 @@ public class TomlParserTest {
     }
 
     @Test(expected = TomlException.class)
+    /**
+     * testInvalidTableSyntax方法。
+     */
     public void testInvalidTableSyntax() {
         String toml = "[invalid\n";
         parser.parse(toml);
     }
 
     @Test(expected = TomlException.class)
+    /**
+     * testUnclosedString方法。
+     */
     public void testUnclosedString() {
         String toml = "str = \"unclosed\n";
         parser.parse(toml);
     }
 
     @Test
+    /**
+     * testZeroValues方法。
+     */
     public void testZeroValues() {
         String toml = "zero_int = 0\n" +
                       "zero_float = 0.0\n" +

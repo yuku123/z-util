@@ -21,6 +21,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * CustomerCompileClassLoader类。
  */
+/**
+ * CustomerCompileClassLoader类。
+ */
 public class CustomerCompileClassLoader extends ClassLoader {
 
     /**
@@ -37,6 +40,10 @@ public class CustomerCompileClassLoader extends ClassLoader {
      * 构造自定义类加载器
      *
      * @param parentClassLoader 父类加载器
+     */
+    /**
+     * CustomerCompileClassLoader方法。
+     *      * @param parentClassLoader ClassLoader类型参数
      */
     /**
      * CustomerCompileClassLoader方法。
@@ -62,6 +69,11 @@ public class CustomerCompileClassLoader extends ClassLoader {
      *      * @param name String类型参数
      * @return Class<?>类型返回值
      */
+    /**
+     * findClass方法。
+     *      * @param name String类型参数
+     * @return Class<?>类型返回值
+     */
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         JavaFileObject javaFileObject = javaFileObjectMap.get(name);
         if (null != javaFileObject) {
@@ -81,6 +93,11 @@ public class CustomerCompileClassLoader extends ClassLoader {
      * @return 输入流，如果未找到则返回null
      */
     @Override
+    /**
+     * getResourceAsStream方法。
+     *      * @param name String类型参数
+     * @return InputStream类型返回值
+     */
     /**
      * getResourceAsStream方法。
      *      * @param name String类型参数

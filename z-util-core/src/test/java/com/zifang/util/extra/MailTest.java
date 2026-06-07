@@ -9,9 +9,15 @@ import static org.junit.Assert.*;
 /**
  * 邮件工具测试
  */
+/**
+ * MailTest类。
+ */
 public class MailTest {
 
     @Test
+    /**
+     * testMailConfigOf163方法。
+     */
     public void testMailConfigOf163() {
         MailConfig config = MailConfig.of163("test@163.com", "password");
         assertEquals("smtp.163.com", config.getHost());
@@ -23,6 +29,9 @@ public class MailTest {
     }
 
     @Test
+    /**
+     * testMailConfigOfQQ方法。
+     */
     public void testMailConfigOfQQ() {
         MailConfig config = MailConfig.ofQQ("123456@qq.com", "password");
         assertEquals("smtp.qq.com", config.getHost());
@@ -31,6 +40,9 @@ public class MailTest {
     }
 
     @Test
+    /**
+     * testMailConfigBuilder方法。
+     */
     public void testMailConfigBuilder() {
         MailConfig config = MailConfig.of("smtp.example.com", "user", "pass")
                 .port(587)
@@ -48,6 +60,9 @@ public class MailTest {
     }
 
     @Test
+    /**
+     * testMailBuilder方法。
+     */
     public void testMailBuilder() {
         Mail mail = Mail.create()
                 .subject("Test Subject")
@@ -67,6 +82,9 @@ public class MailTest {
     }
 
     @Test
+    /**
+     * testMailHtml方法。
+     */
     public void testMailHtml() {
         Mail mail = Mail.create()
                 .to("recipient@example.com")
@@ -78,6 +96,9 @@ public class MailTest {
     }
 
     @Test(expected = IllegalStateException.class)
+    /**
+     * testMailValidateNoRecipient方法。
+     */
     public void testMailValidateNoRecipient() {
         Mail mail = Mail.create()
                 .subject("Test")
@@ -86,6 +107,9 @@ public class MailTest {
     }
 
     @Test(expected = IllegalStateException.class)
+    /**
+     * testMailValidateNoSubject方法。
+     */
     public void testMailValidateNoSubject() {
         Mail mail = Mail.create()
                 .to("recipient@example.com")
@@ -94,6 +118,9 @@ public class MailTest {
     }
 
     @Test
+    /**
+     * testMailWithAttachment方法。
+     */
     public void testMailWithAttachment() {
         Mail mail = Mail.create()
                 .to("recipient@example.com")
@@ -105,6 +132,9 @@ public class MailTest {
     }
 
     @Test
+    /**
+     * testMailMultipleRecipients方法。
+     */
     public void testMailMultipleRecipients() {
         Mail mail = Mail.create()
                 .to("a@example.com", "b@example.com", "c@example.com")

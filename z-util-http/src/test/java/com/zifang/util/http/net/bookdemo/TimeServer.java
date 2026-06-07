@@ -6,10 +6,18 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 
+/**
+ * TimeServer类。
+ */
 public class TimeServer {
 
     public final static int PORT = 37;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         // The time protocol sets the epoch at 1900,

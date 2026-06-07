@@ -6,11 +6,19 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * DaytimeUDPClient类。
+ */
 public class DaytimeUDPClient {
 
     private final static int PORT = 13;
     private static final String HOSTNAME = "time.nist.gov";
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try (DatagramSocket socket = new DatagramSocket(0)) {
             socket.setSoTimeout(10000);

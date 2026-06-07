@@ -11,10 +11,18 @@ import java.nio.charset.StandardCharsets;
 /**
  * Chars类。
  */
+/**
+ * Chars类。
+ */
 public class Chars {
 
     /**
      * 表达是否为字母
+     */
+    /**
+     * isAlpha方法。
+     *      * @param ch char类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isAlpha方法。
@@ -33,12 +41,22 @@ public class Chars {
      *      * @param ch char类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isDigit方法。
+     *      * @param ch char类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isDigit(char ch) {
         return ch >= '0' && ch <= '9';
     }
 
     /**
      * 表达是否为空白字符 -> ' ' , '\t' , '\n' 都算
+     */
+    /**
+     * isBlank方法。
+     *      * @param ch char类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isBlank方法。
@@ -57,12 +75,22 @@ public class Chars {
      *      * @param b byte类型参数
      * @return static char类型返回值
      */
+    /**
+     * toChar方法。
+     *      * @param b byte类型参数
+     * @return static char类型返回值
+     */
     public static char toChar(byte b) {
         return (char) (b & 0xFF);
     }
 
     /**
      * Converts char array into byte array by stripping the high byte of each character.
+     */
+    /**
+     * toSimpleByteArray方法。
+     *      * @param carr char[]类型参数
+     * @return static byte[]类型返回值
      */
     /**
      * toSimpleByteArray方法。
@@ -87,6 +115,11 @@ public class Chars {
      *      * @param charSequence CharSequence类型参数
      * @return static byte[]类型返回值
      */
+    /**
+     * toSimpleByteArray方法。
+     *      * @param charSequence CharSequence类型参数
+     * @return static byte[]类型返回值
+     */
     public  static byte[] toSimpleByteArray(CharSequence charSequence) {
         byte[] barr = new byte[charSequence.length()];
         for (int i = 0; i < barr.length; i++) {
@@ -99,6 +132,11 @@ public class Chars {
 
     /**
      * Converts byte array to char array by simply extending bytes to chars.
+     */
+    /**
+     * toSimpleCharArray方法。
+     *      * @param barr byte[]类型参数
+     * @return static char[]类型返回值
      */
     /**
      * toSimpleCharArray方法。
@@ -121,6 +159,11 @@ public class Chars {
      *      * @param c char类型参数
      * @return static int类型返回值
      */
+    /**
+     * toAscii方法。
+     *      * @param c char类型参数
+     * @return static int类型返回值
+     */
     public  static int toAscii(char c) {
         if (c <= 0xFF) {
             return c;
@@ -131,6 +174,11 @@ public class Chars {
 
     /**
      * Converts char array into {@link #toAscii(char) ASCII} array.
+     */
+    /**
+     * toAsciiByteArray方法。
+     *      * @param carr char[]类型参数
+     * @return static byte[]类型返回值
      */
     /**
      * toAsciiByteArray方法。
@@ -155,6 +203,11 @@ public class Chars {
      *      * @param charSequence CharSequence类型参数
      * @return static byte[]类型返回值
      */
+    /**
+     * toAsciiByteArray方法。
+     *      * @param charSequence CharSequence类型参数
+     * @return static byte[]类型返回值
+     */
     public  static byte[] toAsciiByteArray(CharSequence charSequence) {
         byte[] barr = new byte[charSequence.length()];
         for (int i = 0; i < barr.length; i++) {
@@ -166,6 +219,11 @@ public class Chars {
 
     /**
      * Converts char array into byte array by replacing each character with two bytes.
+     */
+    /**
+     * toRawByteArray方法。
+     *      * @param carr char[]类型参数
+     * @return static byte[]类型返回值
      */
     /**
      * toRawByteArray方法。
@@ -184,6 +242,11 @@ public class Chars {
 
     // ---------------------------------------------------------------- encoding
 
+    /**
+     * toRawCharArray方法。
+     *      * @param barr byte[]类型参数
+     * @return static char[]类型返回值
+     */
     /**
      * toRawCharArray方法。
      *      * @param barr byte[]类型参数
@@ -217,12 +280,23 @@ public class Chars {
      *      * @param carr char[]类型参数
      * @return static byte[]类型返回值
      */
+    /**
+     * toByteArray方法。
+     *      * @param carr char[]类型参数
+     * @return static byte[]类型返回值
+     */
     public  static byte[] toByteArray(char[] carr) throws UnsupportedEncodingException {
         return new String(carr).getBytes(StandardCharsets.UTF_8);
     }
 
     /**
      * Converts char array to byte array using provided encoding.
+     */
+    /**
+     * toByteArray方法。
+     *      * @param carr char[]类型参数
+     * @param charset String类型参数
+     * @return static byte[]类型返回值
      */
     /**
      * toByteArray方法。
@@ -242,6 +316,11 @@ public class Chars {
      *      * @param barr byte[]类型参数
      * @return static char[]类型返回值
      */
+    /**
+     * toCharArray方法。
+     *      * @param barr byte[]类型参数
+     * @return static char[]类型返回值
+     */
     public  static char[] toCharArray(byte[] barr) throws UnsupportedEncodingException {
         return new String(barr, StandardCharsets.UTF_8).toCharArray();
     }
@@ -250,6 +329,12 @@ public class Chars {
 
     /**
      * Converts byte array of specific encoding to char array.
+     */
+    /**
+     * toCharArray方法。
+     *      * @param barr byte[]类型参数
+     * @param charset String类型参数
+     * @return static char[]类型返回值
      */
     /**
      * toCharArray方法。
@@ -273,6 +358,12 @@ public class Chars {
      * @param match char[]类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * equalsOne方法。
+     *      * @param c char类型参数
+     * @param match char[]类型参数
+     * @return static boolean类型返回值
+     */
     public  static boolean equalsOne(char c, char[] match) {
         for (char aMatch : match) {
             if (c == aMatch) {
@@ -287,6 +378,13 @@ public class Chars {
      * given set of characters.
      *
      * @return index of matched character or -1
+     */
+    /**
+     * findFirstEqual方法。
+     *      * @param source char[]类型参数
+     * @param index int类型参数
+     * @param match char[]类型参数
+     * @return static int类型返回值
      */
     /**
      * findFirstEqual方法。
@@ -317,6 +415,13 @@ public class Chars {
      * @param match char类型参数
      * @return static int类型返回值
      */
+    /**
+     * findFirstEqual方法。
+     *      * @param source char[]类型参数
+     * @param index int类型参数
+     * @param match char类型参数
+     * @return static int类型返回值
+     */
     public  static int findFirstEqual(char[] source, int index, char match) {
         for (int i = index; i < source.length; i++) {
             if (source[i] == match) {
@@ -331,6 +436,13 @@ public class Chars {
      * given set of characters.
      *
      * @return index of matched character or -1
+     */
+    /**
+     * findFirstDiff方法。
+     *      * @param source char[]类型参数
+     * @param index int类型参数
+     * @param match char[]类型参数
+     * @return static int类型返回值
      */
     /**
      * findFirstDiff方法。
@@ -362,6 +474,13 @@ public class Chars {
      * @param match char类型参数
      * @return static int类型返回值
      */
+    /**
+     * findFirstDiff方法。
+     *      * @param source char[]类型参数
+     * @param index int类型参数
+     * @param match char类型参数
+     * @return static int类型返回值
+     */
     public  static int findFirstDiff(char[] source, int index, char match) {
         for (int i = index; i < source.length; i++) {
             if (source[i] != match) {
@@ -374,6 +493,11 @@ public class Chars {
     /**
      * Returns <code>true</code> if character is a white space ({@code <= ' '}).
      * White space definition is taken from String class (see: <code>trim()</code>).
+     */
+    /**
+     * isWhitespace方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isWhitespace方法。
@@ -393,6 +517,11 @@ public class Chars {
      *      * @param c char类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isLowercaseAlpha方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     public  static boolean isLowercaseAlpha(char c) {
         return (c >= 'a') && (c <= 'z');
     }
@@ -400,6 +529,11 @@ public class Chars {
     /**
      * Returns <code>true</code> if specified character is uppercase ASCII.
      * If user uses only ASCIIs, it is much much faster.
+     */
+    /**
+     * isUppercaseAlpha方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isUppercaseAlpha方法。
@@ -415,10 +549,20 @@ public class Chars {
      *      * @param c char类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isAlphaOrDigit方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     public  static boolean isAlphaOrDigit(char c) {
         return isDigit(c) || isAlpha(c);
     }
 
+    /**
+     * isWordChar方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     /**
      * isWordChar方法。
      *      * @param c char类型参数
@@ -429,6 +573,11 @@ public class Chars {
     }
 
 
+    /**
+     * isPropertyNameChar方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     /**
      * isPropertyNameChar方法。
      *      * @param c char类型参数
@@ -446,6 +595,11 @@ public class Chars {
      *      * @param c char类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isHexDigit方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     public  static boolean isHexDigit(char c) {
         return (c >= '0' && c <= '9') || ((c >= 'a') && (c <= 'f')) || ((c >= 'A') && (c <= 'F'));
     }
@@ -454,6 +608,11 @@ public class Chars {
      * Indicates whether the given character is in the <i>gen-delims</i> set.
      *
      * @see <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
+     */
+    /**
+     * isGenericDelimiter方法。
+     *      * @param c int类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isGenericDelimiter方法。
@@ -479,6 +638,11 @@ public class Chars {
      * Indicates whether the given character is in the <i>sub-delims</i> set.
      *
      * @see <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
+     */
+    /**
+     * isSubDelimiter方法。
+     *      * @param c int类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isSubDelimiter方法。
@@ -514,6 +678,11 @@ public class Chars {
      *      * @param c char类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isReserved方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     public  static boolean isReserved(char c) {
         return isGenericDelimiter(c) || isSubDelimiter(c);
     }
@@ -522,6 +691,11 @@ public class Chars {
      * Indicates whether the given character is in the <i>unreserved</i> set.
      *
      * @see <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986, appendix A</a>
+     */
+    /**
+     * isUnreserved方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isUnreserved方法。
@@ -543,12 +717,22 @@ public class Chars {
      *      * @param c char类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isPchar方法。
+     *      * @param c char类型参数
+     * @return static boolean类型返回值
+     */
     public  static boolean isPchar(char c) {
         return isUnreserved(c) || isSubDelimiter(c) || c == ':' || c == '@';
     }
 
     /**
      * Uppers lowercase ASCII char.
+     */
+    /**
+     * toUpperAscii方法。
+     *      * @param c char类型参数
+     * @return static char类型返回值
      */
     /**
      * toUpperAscii方法。
@@ -564,6 +748,11 @@ public class Chars {
 
     /**
      * Lowers uppercase ASCII char.
+     */
+    /**
+     * toLowerAscii方法。
+     *      * @param c char类型参数
+     * @return static char类型返回值
      */
     /**
      * toLowerAscii方法。

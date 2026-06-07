@@ -15,16 +15,26 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * ReentratTest类。
+ */
 public class ReentratTest {
     private static final Lock lock_test001 = new ReentrantLock();
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() throws InterruptedException {
         new Thread(() -> test001_innerFunction(), "线程1").start();
         new Thread(() -> test001_innerFunction(), "线程2").start();
         Thread.sleep(100000L);
     }
 
+    /**
+     * test001_innerFunction方法。
+     * @return static void类型返回值
+     */
     public static void test001_innerFunction() {
         try {
             lock_test001.lock();
@@ -41,12 +51,19 @@ public class ReentratTest {
     private static final Lock lock_test002 = new ReentrantLock(true);
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002() throws InterruptedException {
         new Thread(() -> test002_innerFunction(), "线程1").start();
         new Thread(() -> test002_innerFunction(), "线程2").start();
         Thread.sleep(100000L);
     }
 
+    /**
+     * test002_innerFunction方法。
+     * @return static void类型返回值
+     */
     public static void test002_innerFunction() {
         while (true) {
             lock_test002.lock();
@@ -64,12 +81,19 @@ public class ReentratTest {
     private static final Lock lock_test003 = new ReentrantLock(false);
 
     @Test
+    /**
+     * test003方法。
+     */
     public void test003() throws InterruptedException {
         new Thread(() -> test003_innerFunction(), "线程1").start();
         new Thread(() -> test003_innerFunction(), "线程2").start();
         Thread.sleep(100000L);
     }
 
+    /**
+     * test003_innerFunction方法。
+     * @return static void类型返回值
+     */
     public static void test003_innerFunction() {
         while (true) {
             lock_test003.lock();
@@ -88,6 +112,9 @@ public class ReentratTest {
     private static final Lock lock_test004_2 = new ReentrantLock();
 
     @Test
+    /**
+     * test004方法。
+     */
     public void test004() {
         Thread thread1 = new Thread(() -> test004_innerFunction(lock_test004_1, lock_test004_2), "线程1");
         Thread thread2 = new Thread(() -> test004_innerFunction(lock_test004_2, lock_test004_1), "线程2");
@@ -102,6 +129,12 @@ public class ReentratTest {
         }
     }
 
+    /**
+     * test004_innerFunction方法。
+     *      * @param lock1 Lock类型参数
+     * @param lock2 Lock类型参数
+     * @return static void类型返回值
+     */
     public static void test004_innerFunction(Lock lock1, Lock lock2) {
         try {
             lock1.lockInterruptibly();
@@ -120,6 +153,9 @@ public class ReentratTest {
     private static final Lock lock_test005 = new ReentrantLock();
 
     @Test
+    /**
+     * test005方法。
+     */
     public void test005() {
         Thread thread1 = new Thread(() -> test005_innerFunction(lock_test005), "线程1");
         Thread thread2 = new Thread(() -> test005_innerFunction(lock_test005), "线程2");
@@ -132,6 +168,11 @@ public class ReentratTest {
         }
     }
 
+    /**
+     * test005_innerFunction方法。
+     *      * @param lock Lock类型参数
+     * @return static void类型返回值
+     */
     public static void test005_innerFunction(Lock lock) {
         try {
             if (lock.tryLock(1, TimeUnit.SECONDS)) {

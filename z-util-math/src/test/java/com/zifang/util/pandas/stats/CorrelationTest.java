@@ -13,9 +13,15 @@ import static org.junit.Assert.*;
  * Correlation 相关性分析测试类
  * 测试相关系数计算和协方差矩阵功能
  */
+/**
+ * CorrelationTest类。
+ */
 public class CorrelationTest {
 
     @Test
+    /**
+     * testPerfectPositiveCorrelation方法。
+     */
     public void testPerfectPositiveCorrelation() {
         // 完全正相关
         Map<String, double[]> data = new HashMap<>();
@@ -34,6 +40,9 @@ public class CorrelationTest {
     }
 
     @Test
+    /**
+     * testPerfectNegativeCorrelation方法。
+     */
     public void testPerfectNegativeCorrelation() {
         // 完全负相关
         Map<String, double[]> data = new HashMap<>();
@@ -48,6 +57,9 @@ public class CorrelationTest {
     }
 
     @Test
+    /**
+     * testNoCorrelation方法。
+     */
     public void testNoCorrelation() {
         // 无明显相关性
         Map<String, double[]> data = new HashMap<>();
@@ -62,6 +74,9 @@ public class CorrelationTest {
     }
 
     @Test
+    /**
+     * testCovarianceMatrix方法。
+     */
     public void testCovarianceMatrix() {
         Map<String, double[]> data = new HashMap<>();
         data.put("X", new double[]{1, 2, 3, 4, 5});
@@ -79,6 +94,9 @@ public class CorrelationTest {
     }
 
     @Test
+    /**
+     * testMultipleColumns方法。
+     */
     public void testMultipleColumns() {
         // 测试多列数据
         Map<String, double[]> data = new HashMap<>();

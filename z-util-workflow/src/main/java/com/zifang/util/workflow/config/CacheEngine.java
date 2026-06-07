@@ -11,6 +11,9 @@ package com.zifang.util.workflow.config;
 /**
  * CacheEngine类。
  */
+/**
+ * CacheEngine类。
+ */
 public class CacheEngine {
 
     /**
@@ -29,6 +32,9 @@ public class CacheEngine {
     /**
      * CacheEngine方法。
      */
+    /**
+     * CacheEngine方法。
+     */
     public CacheEngine() {
     }
 
@@ -37,6 +43,11 @@ public class CacheEngine {
      *
      * @param engineType        缓存引擎类型，如redis、memcached等
      * @param cacheEngineService 缓存引擎服务标识，用于定位具体的缓存服务
+     */
+    /**
+     * CacheEngine方法。
+     *      * @param engineType String类型参数
+     * @param cacheEngineService String类型参数
      */
     /**
      * CacheEngine方法。
@@ -57,6 +68,10 @@ public class CacheEngine {
      * getEngineType方法。
      * @return String类型返回值
      */
+    /**
+     * getEngineType方法。
+     * @return String类型返回值
+     */
     public String getEngineType() {
         return engineType;
     }
@@ -65,6 +80,10 @@ public class CacheEngine {
      * 设置缓存引擎类型
      *
      * @param engineType 缓存引擎类型，如redis、memcached等
+     */
+    /**
+     * setEngineType方法。
+     *      * @param engineType String类型参数
      */
     /**
      * setEngineType方法。
@@ -83,6 +102,10 @@ public class CacheEngine {
      * getCacheEngineService方法。
      * @return String类型返回值
      */
+    /**
+     * getCacheEngineService方法。
+     * @return String类型返回值
+     */
     public String getCacheEngineService() {
         return cacheEngineService;
     }
@@ -91,6 +114,10 @@ public class CacheEngine {
      * 设置缓存引擎服务标识
      *
      * @param cacheEngineService 缓存引擎服务标识
+     */
+    /**
+     * setCacheEngineService方法。
+     *      * @param cacheEngineService String类型参数
      */
     /**
      * setCacheEngineService方法。
@@ -105,11 +132,20 @@ public class CacheEngine {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "CacheEngine{engineType=" + engineType + ", cacheEngineService=" + cacheEngineService + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -124,6 +160,10 @@ public class CacheEngine {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

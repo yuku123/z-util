@@ -10,6 +10,9 @@ import java.util.function.Predicate;
 /**
  * Maps类。
  */
+/**
+ * Maps类。
+ */
 public class Maps {
 
     /**
@@ -17,6 +20,11 @@ public class Maps {
      *
      * @param map 待处理Map，不能为null
      * @throws NullPointerException 如果map为null
+     */
+    /**
+     * removeNullKeys方法。
+     *      * @param map MapK,类型参数
+     * @return static <K, V> void类型返回值
      */
     /**
      * removeNullKeys方法。
@@ -38,6 +46,11 @@ public class Maps {
      *      * @param map MapK,类型参数
      * @return static <K, V> void类型返回值
      */
+    /**
+     * removeNullValues方法。
+     *      * @param map MapK,类型参数
+     * @return static <K, V> void类型返回值
+     */
     public static <K, V> void removeNullValues(Map<K, V> map) {
         removeValues(map, Objects::isNull);
     }
@@ -49,6 +62,12 @@ public class Maps {
      * @param map       待处理Map，不能为null
      * @param predicate 检验条件，用于判断key是否需要被移除
      * @throws NullPointerException 如果map或predicate为null
+     */
+    /**
+     * removeKeys方法。
+     *      * @param map MapK,类型参数
+     * @param predicate PredicateK类型参数
+     * @return static <K, V> void类型返回值
      */
     /**
      * removeKeys方法。
@@ -74,6 +93,12 @@ public class Maps {
      * @param predicate PredicateV类型参数
      * @return static <K, V> void类型返回值
      */
+    /**
+     * removeValues方法。
+     *      * @param map MapK,类型参数
+     * @param predicate PredicateV类型参数
+     * @return static <K, V> void类型返回值
+     */
     public static <K, V> void removeValues(Map<K, V> map, Predicate<V> predicate) {
         map.entrySet().removeIf(entry -> predicate.test(entry.getValue()));
     }
@@ -84,6 +109,12 @@ public class Maps {
      * @param map       待处理Map，不能为null
      * @param predicate 检验条件，同时对key和value进行判断
      * @throws NullPointerException 如果map或predicate为null
+     */
+    /**
+     * remove方法。
+     *      * @param map MapK,类型参数
+     * @param predicate PredicateMap.EntryK,类型参数
+     * @return static <K, V> void类型返回值
      */
     /**
      * remove方法。
@@ -109,6 +140,12 @@ public class Maps {
      * @param predicate PredicateMap.EntryK,类型参数
      * @return static <K, V> Map<K, V>类型返回值
      */
+    /**
+     * filter方法。
+     *      * @param map MapK,类型参数
+     * @param predicate PredicateMap.EntryK,类型参数
+     * @return static <K, V> Map<K, V>类型返回值
+     */
     public static <K, V> Map<K, V> filter(Map<K, V> map, Predicate<Map.Entry<K, V>> predicate) {
         Map<K, V> mapStore = new HashMap<>(map.size());
         remove(mapStore, predicate);
@@ -123,6 +160,13 @@ public class Maps {
      * @param acceptAsValue 将Set中每个元素转换为Map的value的函数，不能为null
      * @return Map<K, V> 根据给定规则生成的Map，key由acceptAsKey函数产生，value由acceptAsValue函数产生
      * @throws NullPointerException 如果set、acceptAsKey或acceptAsValue为null
+     */
+    /**
+     * populateMap方法。
+     *      * @param set SetU类型参数
+     * @param acceptAsKey FunctionU,类型参数
+     * @param acceptAsValue FunctionU,类型参数
+     * @return static <U, K, V> Map<K, V>类型返回值
      */
     /**
      * populateMap方法。

@@ -12,6 +12,9 @@ import java.util.Set;
 /**
  * BitUtil类。
  */
+/**
+ * BitUtil类。
+ */
 public class BitUtil {
 
 

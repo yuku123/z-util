@@ -13,8 +13,14 @@ import org.junit.Test;
 
 import java.nio.file.Paths;
 
+/**
+ * PathsTest类。
+ */
 public class PathsTest {
     @Test
+    /**
+     * test001方法。
+     */
     public void test001(){
         Paths.get("");
     }

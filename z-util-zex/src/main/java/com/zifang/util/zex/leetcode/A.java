@@ -9,8 +9,19 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * A类。
+ */
 public class A {
 
+    /**
+     * merge方法。
+     *      * @param nums1 int[]类型参数
+     * @param m int类型参数
+     * @param nums2 int[]类型参数
+     * @param n int类型参数
+     * @return static void类型返回值
+     */
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
         int size = m+n;
         int[] r = new int[size];
@@ -62,6 +73,11 @@ public class A {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         merge(new int[]{1,2,3,0,0,0},3, new int[]{2,5,6},3);
     }

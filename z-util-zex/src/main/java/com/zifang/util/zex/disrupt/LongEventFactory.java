@@ -11,6 +11,9 @@ import com.lmax.disruptor.EventFactory;
  * @author zifang
  * @version 1.0
  */
+/**
+ * LongEventFactory类。
+ */
 public class LongEventFactory implements EventFactory<LongEvent> {
 
     /**
@@ -19,6 +22,10 @@ public class LongEventFactory implements EventFactory<LongEvent> {
      * @return 新的LongEvent实例
      */
     @Override
+    /**
+     * newInstance方法。
+     * @return LongEvent类型返回值
+     */
     public LongEvent newInstance() {
         return new LongEvent();
     }

@@ -14,6 +14,9 @@ import java.lang.reflect.UndeclaredThrowableException;
 /**
  * ExceptionUtil类。
  */
+/**
+ * ExceptionUtil类。
+ */
 public class ExceptionUtil {
 
     /**
@@ -22,6 +25,11 @@ public class ExceptionUtil {
      * @time: 2021/11/9 10:54
      * @params: [throwable] request
      * @return: java.lang.Throwable response
+     */
+    /**
+     * getOriginThrowable方法。
+     *      * @param throwable Throwable类型参数
+     * @return static Throwable类型返回值
      */
     /**
      * getOriginThrowable方法。
@@ -37,6 +45,11 @@ public class ExceptionUtil {
         return originalThrowable;
     }
 
+    /**
+     * getOriginException方法。
+     *      * @param runtimeException RuntimeException类型参数
+     * @return static Throwable类型返回值
+     */
     /**
      * getOriginException方法。
      *      * @param runtimeException RuntimeException类型参数
@@ -58,12 +71,23 @@ public class ExceptionUtil {
      *      * @param e Throwable类型参数
      * @return static String类型返回值
      */
+    /**
+     * toString方法。
+     *      * @param e Throwable类型参数
+     * @return static String类型返回值
+     */
     public static String toString(Throwable e) {
         StringWriter stringWriter = new StringWriter();
         e.printStackTrace(new PrintWriter(stringWriter));
         return stringWriter.toString();
     }
 
+    /**
+     * toString方法。
+     *      * @param e Throwable类型参数
+     * @param retainLength int类型参数
+     * @return static String类型返回值
+     */
     /**
      * toString方法。
      *      * @param e Throwable类型参数
@@ -79,6 +103,12 @@ public class ExceptionUtil {
         return stringWriter.toString().substring(0, retainLength);
     }
 
+    /**
+     * doWithCatch方法。
+     *      * @param callback ExceptionCallbackReturnT类型参数
+     * @param wrapperException ClassE类型参数
+     * @return static <T, E extends RuntimeException> T类型返回值
+     */
     /**
      * doWithCatch方法。
      *      * @param callback ExceptionCallbackReturnT类型参数
@@ -105,6 +135,11 @@ public class ExceptionUtil {
      *      * @param callback ExceptionCallbackReturnT类型参数
      * @return static <T> T类型返回值
      */
+    /**
+     * doWithCatchReturn方法。
+     *      * @param callback ExceptionCallbackReturnT类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T doWithCatchReturn(ExceptionCallbackReturn<T> callback) {
         try {
             return callback.doOperate();
@@ -113,6 +148,11 @@ public class ExceptionUtil {
         }
     }
 
+    /**
+     * doWithCatch方法。
+     *      * @param callback ExceptionCallback类型参数
+     * @return static void类型返回值
+     */
     /**
      * doWithCatch方法。
      *      * @param callback ExceptionCallback类型参数
@@ -131,6 +171,11 @@ public class ExceptionUtil {
      *      * @param callback ExceptionCallback类型参数
      * @return static void类型返回值
      */
+    /**
+     * doWithIgnore方法。
+     *      * @param callback ExceptionCallback类型参数
+     * @return static void类型返回值
+     */
     public static void doWithIgnore(ExceptionCallback callback) {
         try {
             callback.doOperate();
@@ -138,6 +183,12 @@ public class ExceptionUtil {
         }
     }
 
+    /**
+     * assertTrue方法。
+     *      * @param condition boolean类型参数
+     * @param message String类型参数
+     * @return static void类型返回值
+     */
     /**
      * assertTrue方法。
      *      * @param condition boolean类型参数
@@ -154,12 +205,18 @@ public class ExceptionUtil {
 /**
  * ExceptionCallbackReturn接口。
  */
+/**
+ * ExceptionCallbackReturn接口。
+ */
     public interface ExceptionCallbackReturn<T> {
 
         T doOperate() throws Exception;
     }
 
     @FunctionalInterface
+/**
+ * ExceptionCallback接口。
+ */
 /**
  * ExceptionCallback接口。
  */

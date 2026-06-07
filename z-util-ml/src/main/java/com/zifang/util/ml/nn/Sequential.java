@@ -13,11 +13,18 @@ import java.util.List;
 /**
  * Sequential类。
  */
+/**
+ * Sequential类。
+ */
 public class Sequential extends Module {
     
     private final List<Module> modules = new ArrayList<>();
     private final List<NdArray> intermediateInputs = new ArrayList<>();
     
+    /**
+     * Sequential方法。
+     *      * @param modules Module...类型参数
+     */
     /**
      * Sequential方法。
      *      * @param modules Module...类型参数
@@ -35,6 +42,10 @@ public class Sequential extends Module {
      * add方法。
      *      * @param module Module类型参数
      */
+    /**
+     * add方法。
+     *      * @param module Module类型参数
+     */
     public void add(Module module) {
         modules.add(module);
         for (NdArray param : module.parameters()) {
@@ -43,6 +54,11 @@ public class Sequential extends Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -66,6 +82,11 @@ public class Sequential extends Module {
      *      * @param gradOutput NdArray类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray backward(NdArray gradOutput) {
         NdArray grad = gradOutput;
         
@@ -81,6 +102,9 @@ public class Sequential extends Module {
     /**
      * train方法。
      */
+    /**
+     * train方法。
+     */
     public void train() {
         super.train();
         for (Module module : modules) {
@@ -89,6 +113,9 @@ public class Sequential extends Module {
     }
     
     @Override
+    /**
+     * eval方法。
+     */
     /**
      * eval方法。
      */
@@ -106,12 +133,21 @@ public class Sequential extends Module {
      * size方法。
      * @return int类型返回值
      */
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         return modules.size();
     }
     
     /**
      * Returns the module at the given index
+     */
+    /**
+     * get方法。
+     *      * @param index int类型参数
+     * @return Module类型返回值
      */
     /**
      * get方法。

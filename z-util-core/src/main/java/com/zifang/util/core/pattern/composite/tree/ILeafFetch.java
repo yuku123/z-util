@@ -11,6 +11,9 @@ import java.util.function.Predicate;
 /**
  * ILeafFetch接口。
  */
+/**
+ * ILeafFetch接口。
+ */
 public interface ILeafFetch<T, R> {
 
     /**

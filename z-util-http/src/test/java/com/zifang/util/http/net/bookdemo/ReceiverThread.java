@@ -14,11 +14,17 @@ class ReceiverThread extends Thread {
         this.socket = socket;
     }
 
+    /**
+     * halt方法。
+     */
     public void halt() {
         this.stopped = true;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         byte[] buffer = new byte[65507];
         while (true) {

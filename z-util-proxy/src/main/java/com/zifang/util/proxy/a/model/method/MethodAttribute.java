@@ -8,5 +8,8 @@ package com.zifang.util.proxy.a.model.method;
 /**
  * MethodAttribute接口。
  */
+/**
+ * MethodAttribute接口。
+ */
 public interface MethodAttribute {
 }

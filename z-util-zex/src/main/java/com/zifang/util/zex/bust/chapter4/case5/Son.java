@@ -20,6 +20,10 @@ class Field {
         System.out.println("Field-not-initial-static");
     }
 
+    /**
+     * Field方法。
+     *      * @param str String类型参数
+     */
     public Field(String str){
         System.out.println(str+"-Field-construct");
     }
@@ -36,12 +40,18 @@ class Father{
         System.out.println("father-not-initial-static");
     }
 
+    /**
+     * Father方法。
+     */
     public Father(){
         System.out.println("father-construct");
     }
 
 }
 
+/**
+ * Son类。
+ */
 public class Son extends Father{
 
     private Field field = new Field("son");
@@ -54,10 +64,18 @@ public class Son extends Father{
         System.out.println("Son-not-initial-static");
     }
 
+    /**
+     * Son方法。
+     */
     public Son(){
         System.out.println("Son-construct");
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Son son = new Son();
     }

@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * Mapping类。
  */
+/**
+ * Mapping类。
+ */
 public class Mapping {
 }

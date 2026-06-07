@@ -14,14 +14,25 @@ import java.util.concurrent.Semaphore;
  * 单个信号量的Semaphore对象可以实现互斥锁的功能，并且可以是由一个线程获得了“锁”，
  * 再由另一个线程释放锁，这可应用于死锁恢复的一些场合
  */
+/**
+ * SemaphoreTest类。
+ */
 public class SemaphoreTest {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         ExecutorService service = Executors.newCachedThreadPool();
         final Semaphore sp = new Semaphore(3);
         for (int i = 0; i < 10; i++) {
             Runnable runnable = new Runnable() {
                 @Override
+    /**
+     * run方法。
+     */
                 public void run() {
                     try {
                         sp.acquire();

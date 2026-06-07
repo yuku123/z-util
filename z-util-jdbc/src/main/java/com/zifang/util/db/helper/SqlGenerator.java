@@ -29,5 +29,8 @@ package com.zifang.util.db.helper;
 /**
  * SqlGenerator类。
  */
+/**
+ * SqlGenerator类。
+ */
 public class SqlGenerator {
 }

@@ -6,5 +6,8 @@ package com.zifang.util.core.lang.converter.converters;
 /**
  * ObjectBigDecimalConverter类。
  */
+/**
+ * ObjectBigDecimalConverter类。
+ */
 public class ObjectBigDecimalConverter {
 }

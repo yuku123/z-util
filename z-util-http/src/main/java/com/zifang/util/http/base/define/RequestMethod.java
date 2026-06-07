@@ -11,6 +11,9 @@ package com.zifang.util.http.base.define;
 /**
  * RequestMethod枚举。
  */
+/**
+ * RequestMethod枚举。
+ */
 public enum RequestMethod {
 
     /**

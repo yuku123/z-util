@@ -12,9 +12,15 @@ import static org.junit.Assert.*;
 /**
  * PdfUtil的单元测试
  */
+/**
+ * PdfUtilTest类。
+ */
 public class PdfUtilTest {
 
     @Test
+    /**
+     * testFillImagesWithEmptyList方法。
+     */
     public void testFillImagesWithEmptyList() {
         // Test with empty list
         File tempFile = new File(System.getProperty("java.io.tmpdir"), "empty_test_" + System.currentTimeMillis() + ".pdf");
@@ -31,6 +37,9 @@ public class PdfUtilTest {
     }
 
     @Test
+    /**
+     * testFillImagesWithNonExistentFile方法。
+     */
     public void testFillImagesWithNonExistentFile() {
         // Test with non-existent file - should handle gracefully
         File tempFile = new File(System.getProperty("java.io.tmpdir"), "nonexistent_test_" + System.currentTimeMillis() + ".pdf");
@@ -50,6 +59,9 @@ public class PdfUtilTest {
     }
 
     @Test
+    /**
+     * testClassExists方法。
+     */
     public void testClassExists() {
         // Verify the class can be instantiated
         PdfUtil pdfUtil = new PdfUtil();

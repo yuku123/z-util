@@ -12,9 +12,15 @@ import static org.junit.Assert.*;
 /**
  * CSVWriter 测试
  */
+/**
+ * CSVWriterTest类。
+ */
 public class CSVWriterTest {
 
     @Test
+    /**
+     * testWriteAndReadRoundtrip方法。
+     */
     public void testWriteAndReadRoundtrip() throws IOException {
         DataFrame df = new DataFrame(Map.of(
                 "name", new double[]{1.0, 2.0},
@@ -28,6 +34,9 @@ public class CSVWriterTest {
     }
 
     @Test
+    /**
+     * testBuilderFluentInterface方法。
+     */
     public void testBuilderFluentInterface() {
         CSVWriter writer = CSVWriter.builder()
                 .delimiter(';')
@@ -43,6 +52,9 @@ public class CSVWriterTest {
     }
 
     @Test
+    /**
+     * testToCSVString方法。
+     */
     public void testToCSVString() throws IOException {
         DataFrame df = new DataFrame(Map.of(
                 "A", new double[]{1.0, 2.0},
@@ -56,6 +68,9 @@ public class CSVWriterTest {
     }
 
     @Test
+    /**
+     * testWriteWithInfinity方法。
+     */
     public void testWriteWithInfinity() throws IOException {
         DataFrame df = new DataFrame(Map.of("col", new double[]{1.0, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY}));
         String csv = CSVWriter.toCSVString(df);
@@ -63,6 +78,9 @@ public class CSVWriterTest {
     }
 
     @Test
+    /**
+     * testWriteIntegerValues方法。
+     */
     public void testWriteIntegerValues() throws IOException {
         DataFrame df = new DataFrame(Map.of(
                 "int_col", new double[]{1.0, 2.0, 3.0},
@@ -72,6 +90,9 @@ public class CSVWriterTest {
     }
 
     @Test
+    /**
+     * testWriteWithCustomDelimiter方法。
+     */
     public void testWriteWithCustomDelimiter() throws IOException {
         DataFrame df = new DataFrame(Map.of(
                 "A", new double[]{1.0},
@@ -84,6 +105,10 @@ public class CSVWriterTest {
         StringBuilder sb = new StringBuilder();
         writer.write(df, new java.io.OutputStream() {
             @Override
+    /**
+     * write方法。
+     *      * @param b int类型参数
+     */
             public void write(int b) {
                 sb.append((char) b);
             }

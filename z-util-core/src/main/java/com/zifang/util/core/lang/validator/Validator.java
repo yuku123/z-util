@@ -13,6 +13,9 @@ import java.util.function.Supplier;
 /**
  * Validator类。
  */
+/**
+ * Validator类。
+ */
 public class Validator {
 
     /**
@@ -21,6 +24,13 @@ public class Validator {
      * @param isTrue 是否成功
      * @param msg    错误消息
      * @param param  入参
+     */
+    /**
+     * defenseIfTrue方法。
+     *      * @param isTrue boolean类型参数
+     * @param msg String类型参数
+     * @param param Object类型参数
+     * @return static void类型返回值
      */
     /**
      * defenseIfTrue方法。
@@ -47,6 +57,13 @@ public class Validator {
      * @param param Object类型参数
      * @return static void类型返回值
      */
+    /**
+     * defenseIfNotTrue方法。
+     *      * @param isNotTrue boolean类型参数
+     * @param msg String类型参数
+     * @param param Object类型参数
+     * @return static void类型返回值
+     */
     public static void defenseIfNotTrue(boolean isNotTrue, String msg, Object param) {
         defenseIfTrue(ParamValidateStatusCode.PARAMETER_ERROR, !isNotTrue, msg, param);
     }
@@ -55,6 +72,11 @@ public class Validator {
      * 直接防御
      *
      * @param msg 错误消息
+     */
+    /**
+     * defenseDirectly方法。
+     *      * @param msg String类型参数
+     * @return static void类型返回值
      */
     /**
      * defenseDirectly方法。
@@ -78,6 +100,12 @@ public class Validator {
      * @param msg String类型参数
      * @return static void类型返回值
      */
+    /**
+     * requireNonNull方法。
+     *      * @param parameter Object类型参数
+     * @param msg String类型参数
+     * @return static void类型返回值
+     */
     public static void requireNonNull(Object parameter, String msg) {
         defenseIfTrue(ParamValidateStatusCode.PARAMETER_ERROR, parameter == null, msg, null);
     }
@@ -90,6 +118,13 @@ public class Validator {
      * @param supplier  异常消息的提供者
      * @param <T>       值类型
      * @throws IllegalArgumentException 如果值不满足谓词条件
+     */
+    /**
+     * validate方法。
+     *      * @param value T类型参数
+     * @param predicate PredicateT类型参数
+     * @param supplier final类型参数
+     * @return static <T> void类型返回值
      */
     /**
      * validate方法。
@@ -118,6 +153,13 @@ public class Validator {
      * @param param Object类型参数
      * @return static void类型返回值
      */
+    /**
+     * requireNonNull方法。
+     *      * @param parameter Object类型参数
+     * @param msg String类型参数
+     * @param param Object类型参数
+     * @return static void类型返回值
+     */
     public static void requireNonNull(Object parameter, String msg, Object param) {
         defenseIfTrue(ParamValidateStatusCode.PARAMETER_ERROR, parameter == null, msg, param);
     }
@@ -128,6 +170,13 @@ public class Validator {
      * @param parameter
      * @param msg
      * @param param
+     */
+    /**
+     * requireIsNull方法。
+     *      * @param parameter Object类型参数
+     * @param msg String类型参数
+     * @param param Object类型参数
+     * @return static void类型返回值
      */
     /**
      * requireIsNull方法。
@@ -170,6 +219,10 @@ public class Validator {
      * notNull方法。
      *      * @param obj Object类型参数
      */
+    /**
+     * notNull方法。
+     *      * @param obj Object类型参数
+     */
     public void notNull(Object obj) {
         if (obj == null) {
             throw newException(obj);
@@ -187,6 +240,11 @@ public class Validator {
      *      * @param obj Object类型参数
      * @param args Object...类型参数
      */
+    /**
+     * notNull方法。
+     *      * @param obj Object类型参数
+     * @param args Object...类型参数
+     */
     public void notNull(Object obj, Object... args) {
         if (obj == null) {
             throw newException(args);
@@ -198,6 +256,12 @@ public class Validator {
      *
      * @param object  待验证的对象
      * @param message 异常消息
+     */
+    /**
+     * notNull方法。
+     *      * @param object Object类型参数
+     * @param message String类型参数
+     * @return static void类型返回值
      */
     /**
      * notNull方法。

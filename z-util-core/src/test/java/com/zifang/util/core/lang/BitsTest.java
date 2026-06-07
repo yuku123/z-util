@@ -5,9 +5,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * BitsTest类。
+ */
 public class BitsTest {
 
     @Test
+    /**
+     * multipleLess方法。
+     */
     public void multipleLess() {
         // multipleLess rounds down to nearest power of 2
         assertEquals(2, Bits.multipleLess(3));
@@ -17,6 +23,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * multipleMore方法。
+     */
     public void multipleMore() {
         // multipleMore: round up to next power of 2
         assertEquals(4, Bits.multipleMore(3));
@@ -27,6 +36,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * avg方法。
+     */
     public void avg() {
         assertEquals(7, Bits.avg(5, 9));
         assertEquals(7, Bits.avg(5, 10));
@@ -34,6 +46,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * abs方法。
+     */
     public void abs() {
         assertEquals(2, Bits.abs(2));
         assertEquals(2, Bits.abs(-2));
@@ -42,6 +57,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * isOdd方法。
+     */
     public void isOdd() {
         // isOdd: (abs(x) & 1) != 0
         assertTrue(Bits.isOdd(1));
@@ -53,6 +71,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * isEven方法。
+     */
     public void isEven() {
         assertTrue(Bits.isEven(2));
         assertTrue(Bits.isEven(0));
@@ -62,6 +83,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * setTrueAndGetFlag方法。
+     */
     public void setTrueAndGetFlag() {
         long flags = Bits.setTrue(0L, 0);
         assertTrue(Bits.getFlag(flags, 0));
@@ -73,6 +97,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * setFalseAndGetFlag方法。
+     */
     public void setFalseAndGetFlag() {
         long allTrue = ~0L;
         long flags = Bits.setFalse(allTrue, 0);
@@ -81,6 +108,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * isPowFrom2方法。
+     */
     public void isPowFrom2() {
         assertTrue(Bits.isPowFrom2(1));
         assertTrue(Bits.isPowFrom2(2));
@@ -92,6 +122,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * getAllTrueIndex方法。
+     */
     public void getAllTrueIndex() {
         long flags = Bits.setTrue(Bits.setTrue(0L, (byte) 1), (byte) 3);
         java.util.Set<Byte> trueIndex = Bits.getAllTrueIndex(flags);
@@ -101,6 +134,9 @@ public class BitsTest {
     }
 
     @Test
+    /**
+     * getAllFalseIndex方法。
+     */
     public void getAllFalseIndex() {
         long flags = Bits.setTrue(0L, (byte) 0);
         java.util.Set<Byte> falseIndex = Bits.getAllFalseIndex(flags);

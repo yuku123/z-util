@@ -6,11 +6,17 @@ import java.util.*;
 
 import static org.junit.Assert.*;
 
+/**
+ * VennTest类。
+ */
 public class VennTest {
 
     // --- union ---
 
     @Test
+    /**
+     * testUnion_Normal方法。
+     */
     public void testUnion_Normal() {
         Collection<String> c1 = Arrays.asList("a", "b", "c");
         Collection<String> c2 = Arrays.asList("b", "c", "d");
@@ -21,6 +27,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testUnion_NoOverlap方法。
+     */
     public void testUnion_NoOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("c", "d");
@@ -30,6 +39,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testUnion_Identical方法。
+     */
     public void testUnion_Identical() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("a", "b");
@@ -39,6 +51,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testUnion_OneEmpty方法。
+     */
     public void testUnion_OneEmpty() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = new ArrayList<>();
@@ -48,6 +63,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testUnion_BothEmpty方法。
+     */
     public void testUnion_BothEmpty() {
         Collection<String> c1 = new ArrayList<>();
         Collection<String> c2 = new ArrayList<>();
@@ -60,6 +78,9 @@ public class VennTest {
     // --- unionCount ---
 
     @Test
+    /**
+     * testUnionCount_Normal方法。
+     */
     public void testUnionCount_Normal() {
         Collection<String> c1 = Arrays.asList("a", "b", "c");
         Collection<String> c2 = Arrays.asList("b", "c", "d");
@@ -68,6 +89,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testUnionCount_NoOverlap方法。
+     */
     public void testUnionCount_NoOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("c", "d");
@@ -76,6 +100,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testUnionCount_Empty方法。
+     */
     public void testUnionCount_Empty() {
         Collection<String> c1 = new ArrayList<>();
         Collection<String> c2 = new ArrayList<>();
@@ -86,6 +113,9 @@ public class VennTest {
     // --- intersection ---
 
     @Test
+    /**
+     * testIntersection_Normal方法。
+     */
     public void testIntersection_Normal() {
         Collection<String> c1 = Arrays.asList("a", "b", "c");
         Collection<String> c2 = Arrays.asList("b", "c", "d");
@@ -96,6 +126,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersection_NoOverlap方法。
+     */
     public void testIntersection_NoOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("c", "d");
@@ -105,6 +138,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersection_Identical方法。
+     */
     public void testIntersection_Identical() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("a", "b");
@@ -114,6 +150,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersection_OneEmpty方法。
+     */
     public void testIntersection_OneEmpty() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = new ArrayList<>();
@@ -123,6 +162,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersection_SingleOverlap方法。
+     */
     public void testIntersection_SingleOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b", "c");
         Collection<String> c2 = Arrays.asList("c", "d", "e");
@@ -135,6 +177,9 @@ public class VennTest {
     // --- intersectionLeft ---
 
     @Test
+    /**
+     * testIntersectionLeft_Normal方法。
+     */
     public void testIntersectionLeft_Normal() {
         Collection<String> c1 = Arrays.asList("a", "b", "c");
         Collection<String> c2 = Arrays.asList("b", "c", "d");
@@ -145,6 +190,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersectionLeft_NoOverlap方法。
+     */
     public void testIntersectionLeft_NoOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("c", "d");
@@ -154,6 +202,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersectionLeft_CompleteOverlap方法。
+     */
     public void testIntersectionLeft_CompleteOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("a", "b");
@@ -163,6 +214,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersectionLeft_OneEmpty方法。
+     */
     public void testIntersectionLeft_OneEmpty() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = new ArrayList<>();
@@ -174,6 +228,9 @@ public class VennTest {
     // --- intersectionRight ---
 
     @Test
+    /**
+     * testIntersectionRight_Normal方法。
+     */
     public void testIntersectionRight_Normal() {
         Collection<String> c1 = Arrays.asList("a", "b", "c");
         Collection<String> c2 = Arrays.asList("b", "c", "d");
@@ -184,6 +241,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersectionRight_NoOverlap方法。
+     */
     public void testIntersectionRight_NoOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("c", "d");
@@ -193,6 +253,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersectionRight_CompleteOverlap方法。
+     */
     public void testIntersectionRight_CompleteOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("a", "b");
@@ -204,6 +267,9 @@ public class VennTest {
     // --- intersectionCount ---
 
     @Test
+    /**
+     * testIntersectionCount_Normal方法。
+     */
     public void testIntersectionCount_Normal() {
         Collection<String> c1 = Arrays.asList("a", "b", "c");
         Collection<String> c2 = Arrays.asList("b", "c", "d");
@@ -212,6 +278,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersectionCount_NoOverlap方法。
+     */
     public void testIntersectionCount_NoOverlap() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("c", "d");
@@ -220,6 +289,9 @@ public class VennTest {
     }
 
     @Test
+    /**
+     * testIntersectionCount_Empty方法。
+     */
     public void testIntersectionCount_Empty() {
         Collection<String> c1 = new ArrayList<>();
         Collection<String> c2 = new ArrayList<>();
@@ -230,6 +302,9 @@ public class VennTest {
     // --- dicript (empty stub) ---
 
     @Test
+    /**
+     * testDicipt_Stub方法。
+     */
     public void testDicipt_Stub() {
         Collection<String> c1 = Arrays.asList("a", "b");
         Collection<String> c2 = Arrays.asList("c", "d");

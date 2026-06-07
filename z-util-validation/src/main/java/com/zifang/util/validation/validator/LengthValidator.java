@@ -12,9 +12,19 @@ import java.lang.reflect.Field;
 /**
  * LengthValidator类。
  */
+/**
+ * LengthValidator类。
+ */
 public class LengthValidator implements Validator<Length> {
 
     @Override
+    /**
+     * validate方法。
+     *      * @param target Object类型参数
+     * @param field Field类型参数
+     * @param annotation Length类型参数
+     * @param result ValidateResult类型参数
+     */
     /**
      * validate方法。
      *      * @param target Object类型参数

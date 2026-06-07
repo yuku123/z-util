@@ -1,9 +1,17 @@
 package com.zifang.util.http.net.bookdemo;
 
+/**
+ * AsynchronousChargenServer类。
+ */
 public class AsynchronousChargenServer {
 
     public static int DEFAULT_PORT = 19;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
   
     /*int port;

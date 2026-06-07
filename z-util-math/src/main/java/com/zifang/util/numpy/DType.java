@@ -6,6 +6,9 @@ package com.zifang.util.numpy;
 /**
  * DType枚举。
  */
+/**
+ * DType枚举。
+ */
 public enum DType {
     INT8("int8"),
     INT16("int16"),
@@ -27,10 +30,19 @@ public enum DType {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * fromClass方法。
+     *      * @param cls Class?类型参数
+     * @return static DType类型返回值
+     */
     /**
      * fromClass方法。
      *      * @param cls Class?类型参数
@@ -48,6 +60,10 @@ public enum DType {
         return OBJECT;
     }
 
+    /**
+     * toClass方法。
+     * @return Class<?>类型返回值
+     */
     /**
      * toClass方法。
      * @return Class<?>类型返回值

@@ -6,6 +6,9 @@ package com.zifang.util.cli.exception;
 /**
  * ParseException类。
  */
+/**
+ * ParseException类。
+ */
 public class ParseException extends Exception {
 
     private static final long serialVersionUID = 1L;
@@ -14,10 +17,19 @@ public class ParseException extends Exception {
      * ParseException方法。
      *      * @param message final类型参数
      */
+    /**
+     * ParseException方法。
+     *      * @param message final类型参数
+     */
     public ParseException(final String message) {
         super(message);
     }
 
+    /**
+     * ParseException方法。
+     *      * @param message final类型参数
+     * @param cause final类型参数
+     */
     /**
      * ParseException方法。
      *      * @param message final类型参数

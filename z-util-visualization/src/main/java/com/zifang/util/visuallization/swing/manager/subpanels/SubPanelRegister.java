@@ -11,6 +11,9 @@ import java.util.Map;
 /**
  * SubPanelRegister类。
  */
+/**
+ * SubPanelRegister类。
+ */
 public class SubPanelRegister {
 
     private Map<Integer, JPanel> registedPanel;
@@ -21,6 +24,12 @@ public class SubPanelRegister {
      * @param jPanel 面板实例
      * @return 当前注册器实例，支持链式调用
      * @throws RuntimeException 如果ID已存在
+     */
+    /**
+     * register方法。
+     *      * @param id int类型参数
+     * @param jPanel JPanel类型参数
+     * @return SubPanelRegister类型返回值
      */
     public SubPanelRegister register(Integer id, JPanel jPanel) {
         if (registedPanel.containsKey(id)) {

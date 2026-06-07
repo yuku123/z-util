@@ -21,6 +21,9 @@ import java.util.Map;
 /**
  * EngineFactory类。
  */
+/**
+ * EngineFactory类。
+ */
 public class EngineFactory {
 
     /**
@@ -30,10 +33,18 @@ public class EngineFactory {
      * HashMap<>方法。
      * @return static Map<String, AbstractEngine> engineCache = new类型返回值
      */
+    /**
+     * HashMap<>方法。
+     * @return static Map<String, AbstractEngine> engineCache = new类型返回值
+     */
     public static Map<String, AbstractEngine> engineCache = new HashMap<>();
 
     /**
      * 已注册的引擎类型映射表
+     */
+    /**
+     * AbstractEngine>>方法。
+     * @return static Map<String, Class<? extends AbstractEngine>> registeredEngineMap = new HashMap<String, Class<? extends类型返回值
      */
     /**
      * AbstractEngine>>方法。
@@ -54,6 +65,11 @@ public class EngineFactory {
      * @param engine 引擎配置，包含类型、模式及属性信息
      * @return 引擎实例，如果类型未注册则返回null
      * @throws IllegalArgumentException 如果引擎类型未注册
+     */
+    /**
+     * getEngine方法。
+     *      * @param engine Engine类型参数
+     * @return static AbstractEngine类型返回值
      */
     /**
      * getEngine方法。

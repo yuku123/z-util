@@ -13,10 +13,17 @@ import java.io.InputStream;
 /**
  * MethodRefInfo类。
  */
+/**
+ * MethodRefInfo类。
+ */
 public class MethodRefInfo extends AbstractConstantPool {
     private U2 classIndex;
     private U2 nameIndex;
 
+    /**
+     * MethodRefInfo方法。
+     *      * @param tag byte类型参数
+     */
     /**
      * MethodRefInfo方法。
      *      * @param tag byte类型参数
@@ -30,11 +37,19 @@ public class MethodRefInfo extends AbstractConstantPool {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     public void read(InputStream inputStream) {
         this.classIndex = U2.read(inputStream);
         this.nameIndex = U2.read(inputStream);
     }
 
+    /**
+     * getClassIndex方法。
+     * @return U2类型返回值
+     */
     /**
      * getClassIndex方法。
      * @return U2类型返回值
@@ -47,10 +62,18 @@ public class MethodRefInfo extends AbstractConstantPool {
      * setClassIndex方法。
      *      * @param classIndex U2类型参数
      */
+    /**
+     * setClassIndex方法。
+     *      * @param classIndex U2类型参数
+     */
     public void setClassIndex(U2 classIndex) {
         this.classIndex = classIndex;
     }
 
+    /**
+     * getNameIndex方法。
+     * @return U2类型返回值
+     */
     /**
      * getNameIndex方法。
      * @return U2类型返回值
@@ -63,12 +86,20 @@ public class MethodRefInfo extends AbstractConstantPool {
      * setNameIndex方法。
      *      * @param nameIndex U2类型参数
      */
+    /**
+     * setNameIndex方法。
+     *      * @param nameIndex U2类型参数
+     */
     public void setNameIndex(U2 nameIndex) {
         this.nameIndex = nameIndex;
     }
 
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

@@ -14,12 +14,19 @@ import java.util.function.Predicate;
 /**
  * CommandMacro类。
  */
+/**
+ * CommandMacro类。
+ */
 public class CommandMacro<C extends CommandContext> implements Command<C> {
 
     private final String name;
     private final List<Command<C>> commands;
     private final Predicate<C> canExecute;
 
+    /**
+     * CommandMacro方法。
+     *      * @param name String类型参数
+     */
     /**
      * CommandMacro方法。
      *      * @param name String类型参数
@@ -33,12 +40,22 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      *      * @param name String类型参数
      * @param commands ListCommandC类型参数
      */
+    /**
+     * CommandMacro方法。
+     *      * @param name String类型参数
+     * @param commands ListCommandC类型参数
+     */
     public CommandMacro(String name, List<Command<C>> commands) {
         this.name = name;
         this.commands = new ArrayList<>(commands);
         this.canExecute = null;
     }
 
+    /**
+     * CommandMacro方法。
+     *      * @param name String类型参数
+     * @param canExecute PredicateC类型参数
+     */
     /**
      * CommandMacro方法。
      *      * @param name String类型参数
@@ -56,6 +73,12 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      * @param canExecute PredicateC类型参数
      * @param commands ListCommandC类型参数
      */
+    /**
+     * CommandMacro方法。
+     *      * @param name String类型参数
+     * @param canExecute PredicateC类型参数
+     * @param commands ListCommandC类型参数
+     */
     public CommandMacro(String name, Predicate<C> canExecute, List<Command<C>> commands) {
         this.name = name;
         this.commands = new ArrayList<>(commands);
@@ -64,6 +87,11 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
 
     /**
      * 添加命令
+     */
+    /**
+     * add方法。
+     *      * @param command CommandC类型参数
+     * @return CommandMacro<C>类型返回值
      */
     /**
      * add方法。
@@ -86,6 +114,11 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      *      * @param commands CommandC...类型参数
      * @return final CommandMacro<C>类型返回值
      */
+    /**
+     * addAll方法。
+     *      * @param commands CommandC...类型参数
+     * @return final CommandMacro<C>类型返回值
+     */
     public final CommandMacro<C> addAll(Command<C>... commands) {
         for (Command<C> cmd : commands) {
             add(cmd);
@@ -95,6 +128,11 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
 
     /**
      * 在开头添加命令
+     */
+    /**
+     * addFirst方法。
+     *      * @param command CommandC类型参数
+     * @return CommandMacro<C>类型返回值
      */
     /**
      * addFirst方法。
@@ -116,6 +154,11 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      *      * @param command CommandC类型参数
      * @return CommandMacro<C>类型返回值
      */
+    /**
+     * remove方法。
+     *      * @param command CommandC类型参数
+     * @return CommandMacro<C>类型返回值
+     */
     public CommandMacro<C> remove(Command<C> command) {
         commands.remove(command);
         return this;
@@ -123,6 +166,10 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
 
     /**
      * 清空命令
+     */
+    /**
+     * clear方法。
+     * @return CommandMacro<C>类型返回值
      */
     /**
      * clear方法。
@@ -140,12 +187,20 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      * size方法。
      * @return int类型返回值
      */
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         return commands.size();
     }
 
     /**
      * 是否为空
+     */
+    /**
+     * isEmpty方法。
+     * @return boolean类型返回值
      */
     /**
      * isEmpty方法。
@@ -162,11 +217,19 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      * getCommands方法。
      * @return List<Command<C>>类型返回值
      */
+    /**
+     * getCommands方法。
+     * @return List<Command<C>>类型返回值
+     */
     public List<Command<C>> getCommands() {
         return Collections.unmodifiableList(commands);
     }
 
     @Override
+    /**
+     * execute方法。
+     *      * @param context C类型参数
+     */
     /**
      * execute方法。
      *      * @param context C类型参数
@@ -189,11 +252,19 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
     @Override
+    /**
+     * supportsUndo方法。
+     * @return boolean类型返回值
+     */
     /**
      * supportsUndo方法。
      * @return boolean类型返回值
@@ -209,6 +280,10 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
     }
 
     @Override
+    /**
+     * undo方法。
+     *      * @param context C类型参数
+     */
     /**
      * undo方法。
      *      * @param context C类型参数
@@ -233,6 +308,11 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      *      * @param name String类型参数
      * @return static <C extends CommandContext> CommandMacro<C>类型返回值
      */
+    /**
+     * of方法。
+     *      * @param name String类型参数
+     * @return static <C extends CommandContext> CommandMacro<C>类型返回值
+     */
     public static <C extends CommandContext> CommandMacro<C> of(String name) {
         return new CommandMacro<>(name);
     }
@@ -241,6 +321,12 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
      * 创建宏命令并添加初始命令
      */
     @SafeVarargs
+    /**
+     * of方法。
+     *      * @param name String类型参数
+     * @param commands CommandC...类型参数
+     * @return static <C extends CommandContext> CommandMacro<C>类型返回值
+     */
     /**
      * of方法。
      *      * @param name String类型参数

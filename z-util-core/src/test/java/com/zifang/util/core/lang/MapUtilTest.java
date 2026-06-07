@@ -9,11 +9,17 @@ import java.util.Properties;
 
 import static org.junit.Assert.*;
 
+/**
+ * MapUtilTest类。
+ */
 public class MapUtilTest {
 
     // --- newHashMap ---
 
     @Test
+    /**
+     * testNewHashMap_WithDefaultSize方法。
+     */
     public void testNewHashMap_WithDefaultSize() {
         HashMap<String, String> map = MapUtil.newHashMap();
         assertNotNull(map);
@@ -21,6 +27,9 @@ public class MapUtilTest {
     }
 
     @Test
+    /**
+     * testNewHashMap_WithExpectedSize方法。
+     */
     public void testNewHashMap_WithExpectedSize() {
         HashMap<String, String> map = MapUtil.newHashMap(10);
         assertNotNull(map);
@@ -28,6 +37,9 @@ public class MapUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testNewHashMap_WithNegativeSize方法。
+     */
     public void testNewHashMap_WithNegativeSize() {
         MapUtil.newHashMap(-1);
     }
@@ -35,6 +47,9 @@ public class MapUtilTest {
     // --- newLinkedHashMap ---
 
     @Test
+    /**
+     * testNewLinkedHashMap_WithExpectedSize方法。
+     */
     public void testNewLinkedHashMap_WithExpectedSize() {
         LinkedHashMap<String, String> map = MapUtil.newLinkedHashMap(10);
         assertNotNull(map);
@@ -42,6 +57,9 @@ public class MapUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testNewLinkedHashMap_WithNegativeSize方法。
+     */
     public void testNewLinkedHashMap_WithNegativeSize() {
         MapUtil.newLinkedHashMap(-1);
     }
@@ -49,16 +67,25 @@ public class MapUtilTest {
     // --- isEmpty ---
 
     @Test
+    /**
+     * testIsEmpty_WithNull方法。
+     */
     public void testIsEmpty_WithNull() {
         assertTrue(MapUtil.isEmpty(null));
     }
 
     @Test
+    /**
+     * testIsEmpty_WithEmptyMap方法。
+     */
     public void testIsEmpty_WithEmptyMap() {
         assertTrue(MapUtil.isEmpty(new HashMap<>()));
     }
 
     @Test
+    /**
+     * testIsEmpty_WithNonEmptyMap方法。
+     */
     public void testIsEmpty_WithNonEmptyMap() {
         Map<String, String> map = new HashMap<>();
         map.put("key", "value");
@@ -68,16 +95,25 @@ public class MapUtilTest {
     // --- isNotEmpty ---
 
     @Test
+    /**
+     * testIsNotEmpty_WithNull方法。
+     */
     public void testIsNotEmpty_WithNull() {
         assertFalse(MapUtil.isNotEmpty(null));
     }
 
     @Test
+    /**
+     * testIsNotEmpty_WithEmptyMap方法。
+     */
     public void testIsNotEmpty_WithEmptyMap() {
         assertFalse(MapUtil.isNotEmpty(new HashMap<>()));
     }
 
     @Test
+    /**
+     * testIsNotEmpty_WithNonEmptyMap方法。
+     */
     public void testIsNotEmpty_WithNonEmptyMap() {
         Map<String, String> map = new HashMap<>();
         map.put("key", "value");
@@ -87,16 +123,25 @@ public class MapUtilTest {
     // --- parseValue ---
 
     @Test
+    /**
+     * testParseValue_WithNullMap方法。
+     */
     public void testParseValue_WithNullMap() {
         assertNull(MapUtil.parseValue(null, "key"));
     }
 
     @Test
+    /**
+     * testParseValue_WithEmptyMap方法。
+     */
     public void testParseValue_WithEmptyMap() {
         assertNull(MapUtil.parseValue(new HashMap<>(), "key"));
     }
 
     @Test
+    /**
+     * testParseValue_WithExistingKey方法。
+     */
     public void testParseValue_WithExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", "value");
@@ -104,6 +149,9 @@ public class MapUtilTest {
     }
 
     @Test
+    /**
+     * testParseValue_WithNonExistingKey方法。
+     */
     public void testParseValue_WithNonExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", "value");
@@ -113,16 +161,25 @@ public class MapUtilTest {
     // --- parseValueOrDefault ---
 
     @Test
+    /**
+     * testParseValueOrDefault_WithNullMap方法。
+     */
     public void testParseValueOrDefault_WithNullMap() {
         assertEquals("default", MapUtil.parseValueOrDefault(null, "key", "default"));
     }
 
     @Test
+    /**
+     * testParseValueOrDefault_WithEmptyMap方法。
+     */
     public void testParseValueOrDefault_WithEmptyMap() {
         assertEquals("default", MapUtil.parseValueOrDefault(new HashMap<>(), "key", "default"));
     }
 
     @Test
+    /**
+     * testParseValueOrDefault_WithExistingKey方法。
+     */
     public void testParseValueOrDefault_WithExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", "value");
@@ -130,6 +187,9 @@ public class MapUtilTest {
     }
 
     @Test
+    /**
+     * testParseValueOrDefault_WithNonExistingKey方法。
+     */
     public void testParseValueOrDefault_WithNonExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", "value");
@@ -141,11 +201,17 @@ public class MapUtilTest {
     // --- parseStringValue ---
 
     @Test
+    /**
+     * testParseStringValue_WithNullMap方法。
+     */
     public void testParseStringValue_WithNullMap() {
         assertNull(MapUtil.parseStringValue(null, "key"));
     }
 
     @Test
+    /**
+     * testParseStringValue_WithExistingKey方法。
+     */
     public void testParseStringValue_WithExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", "value");
@@ -155,11 +221,17 @@ public class MapUtilTest {
     // --- parseByteValue ---
 
     @Test
+    /**
+     * testParseByteValue_WithNullMap方法。
+     */
     public void testParseByteValue_WithNullMap() {
         assertNull(MapUtil.parseByteValue(null, "key"));
     }
 
     @Test
+    /**
+     * testParseByteValue_WithExistingKey方法。
+     */
     public void testParseByteValue_WithExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", (byte) 5);
@@ -169,11 +241,17 @@ public class MapUtilTest {
     // --- parseShortValue ---
 
     @Test
+    /**
+     * testParseShortValue_WithNullMap方法。
+     */
     public void testParseShortValue_WithNullMap() {
         assertNull(MapUtil.parseShortValue(null, "key"));
     }
 
     @Test
+    /**
+     * testParseShortValue_WithExistingKey方法。
+     */
     public void testParseShortValue_WithExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", (short) 10);
@@ -183,11 +261,17 @@ public class MapUtilTest {
     // --- parseIntegerValue ---
 
     @Test
+    /**
+     * testParseIntegerValue_WithNullMap方法。
+     */
     public void testParseIntegerValue_WithNullMap() {
         assertNull(MapUtil.parseIntegerValue(null, "key"));
     }
 
     @Test
+    /**
+     * testParseIntegerValue_WithExistingKey方法。
+     */
     public void testParseIntegerValue_WithExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", 42);
@@ -197,11 +281,17 @@ public class MapUtilTest {
     // --- parseLongValue ---
 
     @Test
+    /**
+     * testParseLongValue_WithNullMap方法。
+     */
     public void testParseLongValue_WithNullMap() {
         assertNull(MapUtil.parseLongValue(null, "key"));
     }
 
     @Test
+    /**
+     * testParseLongValue_WithExistingKey方法。
+     */
     public void testParseLongValue_WithExistingKey() {
         Map<String, Object> map = new HashMap<>();
         map.put("key", 100L);
@@ -211,12 +301,18 @@ public class MapUtilTest {
     // --- fromProperties ---
 
     @Test
+    /**
+     * testFromProperties_WithNull方法。
+     */
     public void testFromProperties_WithNull() {
         assertNotNull(MapUtil.fromProperties(null));
         assertTrue(MapUtil.fromProperties(null).isEmpty());
     }
 
     @Test
+    /**
+     * testFromProperties_WithValidProperties方法。
+     */
     public void testFromProperties_WithValidProperties() {
         Properties props = new Properties();
         props.setProperty("key1", "value1");
@@ -231,6 +327,9 @@ public class MapUtilTest {
     // --- mergePropertiesIntoMap ---
 
     @Test
+    /**
+     * testMergePropertiesIntoMap_WithNullProperties方法。
+     */
     public void testMergePropertiesIntoMap_WithNullProperties() {
         Map<String, Object> map = new HashMap<>();
         MapUtil.mergePropertiesIntoMap(null, map);
@@ -238,6 +337,9 @@ public class MapUtilTest {
     }
 
     @Test
+    /**
+     * testMergePropertiesIntoMap_WithValidProperties方法。
+     */
     public void testMergePropertiesIntoMap_WithValidProperties() {
         Properties props = new Properties();
         props.setProperty("key1", "value1");
@@ -250,6 +352,9 @@ public class MapUtilTest {
     // --- replaceKey ---
 
     @Test
+    /**
+     * testReplaceKey_WithMatchingKeys方法。
+     */
     public void testReplaceKey_WithMatchingKeys() {
         Map<String, String> map = new HashMap<>();
         map.put("old_key", "value");
@@ -259,6 +364,9 @@ public class MapUtilTest {
     }
 
     @Test
+    /**
+     * testReplaceKey_WithNoMatchingKeys方法。
+     */
     public void testReplaceKey_WithNoMatchingKeys() {
         Map<String, String> map = new HashMap<>();
         map.put("unique_key", "value");
@@ -269,11 +377,17 @@ public class MapUtilTest {
     // --- trimValue ---
 
     @Test
+    /**
+     * testTrimValue_WithNull方法。
+     */
     public void testTrimValue_WithNull() {
         assertNull(MapUtil.trimValue(null));
     }
 
     @Test
+    /**
+     * testTrimValue_WithEmptyMap方法。
+     */
     public void testTrimValue_WithEmptyMap() {
         Map<String, String> map = new HashMap<>();
         Map<String, String> result = MapUtil.trimValue(map);
@@ -281,6 +395,9 @@ public class MapUtilTest {
     }
 
     @Test
+    /**
+     * testTrimValue_WithMixedValues方法。
+     */
     public void testTrimValue_WithMixedValues() {
         Map<String, String> map = new HashMap<>();
         map.put("key1", "value1");
@@ -294,6 +411,9 @@ public class MapUtilTest {
     }
 
     @Test
+    /**
+     * testTrimValue_ModifiesOriginalMap方法。
+     */
     public void testTrimValue_ModifiesOriginalMap() {
         Map<String, String> map = new HashMap<>();
         map.put("key1", "value1");

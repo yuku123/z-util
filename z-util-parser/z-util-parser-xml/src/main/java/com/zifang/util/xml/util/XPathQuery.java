@@ -23,12 +23,21 @@ import java.util.regex.Pattern;
  *
  * @author zifang
  */
+/**
+ * XPathQuery类。
+ */
 public class XPathQuery {
 
     // ===== 公开 API =====
 
     /**
      * 在 document 上执行 XPath 查询。
+     */
+    /**
+     * query方法。
+     *      * @param doc XDocument类型参数
+     * @param path String类型参数
+     * @return List<Object>类型返回值
      */
     public List<Object> query(XDocument doc, String path) {
         if (doc.getRoot() == null) {
@@ -40,6 +49,12 @@ public class XPathQuery {
     /**
      * 在 element 上执行 XPath 查询。
      */
+    /**
+     * query方法。
+     *      * @param element XElement类型参数
+     * @param path String类型参数
+     * @return List<Object>类型返回值
+     */
     public List<Object> query(XElement element, String path) {
         return queryNode(element, path);
     }
@@ -47,11 +62,23 @@ public class XPathQuery {
     /**
      * 查询，返回第一个结果。
      */
+    /**
+     * queryOne方法。
+     *      * @param doc XDocument类型参数
+     * @param path String类型参数
+     * @return Object类型返回值
+     */
     public Object queryOne(XDocument doc, String path) {
         List<Object> results = query(doc, path);
         return results.isEmpty() ? null : results.get(0);
     }
 
+    /**
+     * queryOne方法。
+     *      * @param element XElement类型参数
+     * @param path String类型参数
+     * @return Object类型返回值
+     */
     public Object queryOne(XElement element, String path) {
         List<Object> results = query(element, path);
         return results.isEmpty() ? null : results.get(0);

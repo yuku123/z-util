@@ -14,12 +14,19 @@ import java.util.List;
 /**
  * DynamicClassUnit类。
  */
+/**
+ * DynamicClassUnit类。
+ */
 public class DynamicClassUnit {
 
     private DynamicClass main;
 
     private List<DynamicClassUnit> sub = new ArrayList<>();
 
+    /**
+     * getMain方法。
+     * @return DynamicClass类型返回值
+     */
     /**
      * getMain方法。
      * @return DynamicClass类型返回值
@@ -32,10 +39,18 @@ public class DynamicClassUnit {
      * setMain方法。
      *      * @param main DynamicClass类型参数
      */
+    /**
+     * setMain方法。
+     *      * @param main DynamicClass类型参数
+     */
     public void setMain(DynamicClass main) {
         this.main = main;
     }
 
+    /**
+     * getSub方法。
+     * @return List<DynamicClassUnit>类型返回值
+     */
     /**
      * getSub方法。
      * @return List<DynamicClassUnit>类型返回值
@@ -48,10 +63,18 @@ public class DynamicClassUnit {
      * setSub方法。
      *      * @param sub ListDynamicClassUnit类型参数
      */
+    /**
+     * setSub方法。
+     *      * @param sub ListDynamicClassUnit类型参数
+     */
     public void setSub(List<DynamicClassUnit> sub) {
         this.sub = sub;
     }
 
+    /**
+     * collect方法。
+     * @return List<DynamicClass>类型返回值
+     */
     /**
      * collect方法。
      * @return List<DynamicClass>类型返回值

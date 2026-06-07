@@ -10,8 +10,15 @@ package com.zifang.util.core.schedule;
 /**
  * SchedulerRuntimeException类。
  */
+/**
+ * SchedulerRuntimeException类。
+ */
 public class SchedulerRuntimeException extends RuntimeException {
 
+    /**
+     * SchedulerRuntimeException方法。
+     *      * @param message String类型参数
+     */
     /**
      * SchedulerRuntimeException方法。
      *      * @param message String类型参数
@@ -25,10 +32,19 @@ public class SchedulerRuntimeException extends RuntimeException {
      *      * @param message String类型参数
      * @param cause Throwable类型参数
      */
+    /**
+     * SchedulerRuntimeException方法。
+     *      * @param message String类型参数
+     * @param cause Throwable类型参数
+     */
     public SchedulerRuntimeException(String message, Throwable cause) {
         super(message, cause);
     }
 
+    /**
+     * SchedulerRuntimeException方法。
+     *      * @param cause Throwable类型参数
+     */
     /**
      * SchedulerRuntimeException方法。
      *      * @param cause Throwable类型参数

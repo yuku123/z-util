@@ -26,8 +26,16 @@ package com.zifang.util.ml.inheritance.chapter5;
  *
  * @author zifang
  */
+/**
+ * TimetableGA类。
+ */
 public class TimetableGA {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // Get a Timetable object with all the available information.
         Timetable timetable = initializeTimetable();

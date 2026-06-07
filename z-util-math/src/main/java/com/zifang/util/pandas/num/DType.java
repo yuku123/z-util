@@ -6,6 +6,9 @@ package com.zifang.util.pandas.num;
 /**
  * DType枚举。
  */
+/**
+ * DType枚举。
+ */
 public enum DType {
     // 整数类型
     INT8("int8", 1, true),
@@ -42,10 +45,18 @@ public enum DType {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * getSize方法。
+     * @return int类型返回值
+     */
     /**
      * getSize方法。
      * @return int类型返回值
@@ -58,10 +69,18 @@ public enum DType {
      * isInteger方法。
      * @return boolean类型返回值
      */
+    /**
+     * isInteger方法。
+     * @return boolean类型返回值
+     */
     public boolean isInteger() {
         return integer;
     }
 
+    /**
+     * isFloat方法。
+     * @return boolean类型返回值
+     */
     /**
      * isFloat方法。
      * @return boolean类型返回值
@@ -74,12 +93,21 @@ public enum DType {
      * isNumeric方法。
      * @return boolean类型返回值
      */
+    /**
+     * isNumeric方法。
+     * @return boolean类型返回值
+     */
     public boolean isNumeric() {
         return integer || isFloat();
     }
 
     /**
      * 从字符串解析 dtype
+     */
+    /**
+     * fromString方法。
+     *      * @param dtype String类型参数
+     * @return static DType类型返回值
      */
     /**
      * fromString方法。

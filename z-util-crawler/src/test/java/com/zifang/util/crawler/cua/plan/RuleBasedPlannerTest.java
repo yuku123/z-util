@@ -12,18 +12,27 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * RuleBasedPlannerTest类。
+ */
 public class RuleBasedPlannerTest {
 
     private OperationRegistry registry;
     private RuleBasedPlanner planner;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         registry = new OperationRegistry();
         planner = new RuleBasedPlanner(registry);
     }
 
     @Test
+    /**
+     * testPlanWithMatchingRule方法。
+     */
     public void testPlanWithMatchingRule() {
         PipelineContext ctx = new PipelineContext();
         ctx.putParameter("browserClient", null); // Will cause step to fail but that's ok for this test
@@ -36,6 +45,9 @@ public class RuleBasedPlannerTest {
     }
 
     @Test
+    /**
+     * testPlanWithNoMatchingRule方法。
+     */
     public void testPlanWithNoMatchingRule() {
         PipelineContext ctx = new PipelineContext();
         
@@ -47,6 +59,9 @@ public class RuleBasedPlannerTest {
     }
 
     @Test
+    /**
+     * testPlanExtractData方法。
+     */
     public void testPlanExtractData() {
         PipelineContext ctx = new PipelineContext();
         ctx.putParameter("browserClient", null);
@@ -58,6 +73,9 @@ public class RuleBasedPlannerTest {
     }
 
     @Test
+    /**
+     * testPlanNavigate方法。
+     */
     public void testPlanNavigate() {
         PipelineContext ctx = new PipelineContext();
         ctx.putParameter("browserClient", null);
@@ -70,6 +88,9 @@ public class RuleBasedPlannerTest {
     }
 
     @Test
+    /**
+     * testAddRule方法。
+     */
     public void testAddRule() {
         planner.addRule("custom.*task", Arrays.asList("navigate", "click"));
         
@@ -81,6 +102,9 @@ public class RuleBasedPlannerTest {
     }
 
     @Test
+    /**
+     * testRuleMatches方法。
+     */
     public void testRuleMatches() {
         RuleBasedPlanner.Rule rule = new RuleBasedPlanner.Rule("click.*button", Arrays.asList("test"));
         
@@ -91,6 +115,9 @@ public class RuleBasedPlannerTest {
     }
 
     @Test
+    /**
+     * testRuleGetStepSequence方法。
+     */
     public void testRuleGetStepSequence() {
         List<String> steps = Arrays.asList("navigate", "click", "extract");
         RuleBasedPlanner.Rule rule = new RuleBasedPlanner.Rule("test.*pattern", steps);
@@ -99,6 +126,9 @@ public class RuleBasedPlannerTest {
     }
 
     @Test
+    /**
+     * testExecutePlanWithUnknownStep方法。
+     */
     public void testExecutePlanWithUnknownStep() {
         registry.register("unknown_step", com.zifang.util.crawler.cua.steps.NavigateStep.class);
         
@@ -117,6 +147,9 @@ public class RuleBasedPlannerTest {
     }
 
     @Test
+    /**
+     * testRuleCaseInsensitive方法。
+     */
     public void testRuleCaseInsensitive() {
         RuleBasedPlanner.Rule rule = new RuleBasedPlanner.Rule("TEST.*PATTERN", Arrays.asList("step"));
         

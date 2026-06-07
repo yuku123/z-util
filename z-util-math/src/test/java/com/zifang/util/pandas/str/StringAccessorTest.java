@@ -11,12 +11,18 @@ import static org.junit.Assert.*;
  * StringAccessor 字符串操作测试类
  * 测试字符串处理、正则表达式、文本提取等功能
  */
+/**
+ * StringAccessorTest类。
+ */
 public class StringAccessorTest {
 
     private Series stringSeries;
     private Series numericSeries;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         // 创建字符串测试数据
         stringSeries = Series.of(new String[]{"Hello World", "JAVA Programming", "  Test String  ", "lowercase", "123-456-789"});
@@ -28,6 +34,9 @@ public class StringAccessorTest {
 
     @Ignore
     @Test
+    /**
+     * testLength方法。
+     */
     public void testLength() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.length();
@@ -39,6 +48,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testLower方法。
+     */
     public void testLower() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.lower();
@@ -49,6 +61,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testUpper方法。
+     */
     public void testUpper() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.upper();
@@ -58,6 +73,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testStrip方法。
+     */
     public void testStrip() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.strip();
@@ -67,6 +85,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testReplace方法。
+     */
     public void testReplace() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.replace("World", "Java");
@@ -76,6 +97,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testReplaceRegex方法。
+     */
     public void testReplaceRegex() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.replaceRegex("[0-9]", "X");
@@ -86,6 +110,9 @@ public class StringAccessorTest {
 
     @Ignore
     @Test
+    /**
+     * testContains方法。
+     */
     public void testContains() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.contains("World");
@@ -96,6 +123,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testMatch方法。
+     */
     public void testMatch() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.match("^[A-Z].*");  // 以大写字母开头
@@ -105,6 +135,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testSlice方法。
+     */
     public void testSlice() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.slice(0, 5);
@@ -114,6 +147,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testSplit方法。
+     */
     public void testSplit() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.split(" ", 0);  // 按空格分割，取第一部分
@@ -123,6 +159,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testCat方法。
+     */
     public void testCat() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.cat("_suffix");
@@ -132,6 +171,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testRepeat方法。
+     */
     public void testRepeat() {
         StringAccessor accessor = new StringAccessor(stringSeries);
         Series result = accessor.repeat(2);
@@ -141,6 +183,9 @@ public class StringAccessorTest {
     }
 
     @Test
+    /**
+     * testNumericToStringOperations方法。
+     */
     public void testNumericToStringOperations() {
         // 测试数值序列的字符串操作
         StringAccessor accessor = new StringAccessor(numericSeries);

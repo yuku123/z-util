@@ -7,17 +7,26 @@ import java.util.concurrent.ThreadLocalRandom;
  * Java并发API提供指定的类在并发应用程序中生成伪随机。它是ThreadLocalRandom类，这是Java 7版本中的新类。它使用线程局部变量。每个线程希望以不同的生成器生成随机数，但它们是来自相同类的管理，这对程序员是透明的。在这种机制下，你将获得比使用共享的Random对象为所有线程生成随机数更好的性能。
  * 在这个指南中，你将学习如何在并发应用程序中使用ThreadLocalRandom生成随机数。
  */
+/**
+ * TaskLocalRandomDemo类。
+ */
 public class TaskLocalRandomDemo {
 
     // 1.创建一个TaskLocalRandom类，并指定它实现Runnable接口。
     static class TaskLocalRandom implements Runnable {
         // 2.实现这个类的构造器，通过使用current()方法给实际线程初始化随机数生成器。
+    /**
+     * TaskLocalRandom方法。
+     */
         public TaskLocalRandom() {
             ThreadLocalRandom.current();
         }
 
         // 3.实现run()方法。获取执行这个任务的线程名称，使用nextInt()方法写入10个随机整数到控制台。
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             String name = Thread.currentThread().getName();
             for (int i = 0; i < 10; i++) {
@@ -27,6 +36,11 @@ public class TaskLocalRandomDemo {
     }
 
     // 4.通过实现Main类，并添加main()方法，实现这个例子的主类。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // 5.为3个Thread对象创建一个数组。
         Thread[] threads = new Thread[3];

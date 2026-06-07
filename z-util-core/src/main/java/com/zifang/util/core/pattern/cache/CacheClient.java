@@ -8,6 +8,9 @@ package com.zifang.util.core.pattern.cache;
 /**
  * CacheClient接口。
  */
+/**
+ * CacheClient接口。
+ */
 public interface CacheClient {
 
     /**

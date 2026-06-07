@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug23Test类。
+ */
 public class JsonDebug23Test {
 
     @Test
+    /**
+     * testSplitElementsIsolated方法。
+     */
     public void testSplitElementsIsolated() throws Exception {
         DynamicParser parser = new DynamicParser();
 

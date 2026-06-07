@@ -4,9 +4,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * StepResultTest类。
+ */
 public class StepResultTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         StepResult result = new StepResult();
         assertNull(result.getStepName());
@@ -17,6 +23,9 @@ public class StepResultTest {
     }
 
     @Test
+    /**
+     * testTwoArgConstructor方法。
+     */
     public void testTwoArgConstructor() {
         StepResult result = new StepResult("click", true);
         assertEquals("click", result.getStepName());
@@ -24,6 +33,9 @@ public class StepResultTest {
     }
 
     @Test
+    /**
+     * testBuilder方法。
+     */
     public void testBuilder() {
         StepResult result = StepResult.builder()
                 .stepName("navigate")
@@ -41,6 +53,9 @@ public class StepResultTest {
     }
 
     @Test
+    /**
+     * testSettersAndGetters方法。
+     */
     public void testSettersAndGetters() {
         StepResult result = new StepResult();
 
@@ -61,6 +76,9 @@ public class StepResultTest {
     }
 
     @Test
+    /**
+     * testBuilderWithAllFields方法。
+     */
     public void testBuilderWithAllFields() {
         StepResult result = StepResult.builder()
                 .stepName("extract")
@@ -77,6 +95,9 @@ public class StepResultTest {
     }
 
     @Test
+    /**
+     * testBuilderWithFailedResult方法。
+     */
     public void testBuilderWithFailedResult() {
         StepResult result = StepResult.builder()
                 .stepName("click")

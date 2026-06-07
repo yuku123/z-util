@@ -30,10 +30,19 @@ class Father implements @Annotation("接口注解") SuperInterface{
     protected Integer fatherProtectedField;
 
     @Override
+    /**
+     * commonFunction方法。
+     */
     public void commonFunction() {}
 
+    /**
+     * fatherPublicFunction方法。
+     */
     public void fatherPublicFunction(){}
     private void fatherPrivateFunction(){}
+    /**
+     * fatherProtectedFunction方法。
+     */
     protected void fatherProtectedFunction(){}
 }
 
@@ -50,17 +59,31 @@ class Son <@AnnotationTest("类变量类型(泛型)上的注解") T0, T1> extend
 
 
     @AnnotationTest("构造函数上的注解")
+    /**
+     * Son方法。
+     */
     public Son(){}
+    /**
+     * Son方法。
+     *      * @param name String类型参数
+     */
     public Son(String name){}
     private Son(String name,Integer age){}
 
 
     @AnnotationTest("成员方法上的注解")
+    /**
+     * sonPublicFunction方法。
+     *      * @param @Annotation("son#sonPublicFunction:i方法字段" Object类型参数
+     */
     public void sonPublicFunction(@Annotation("son#sonPublicFunction:i方法字段") int i,
                                   @Annotation("son#sonPublicFunction:integer方法字段") Integer integer){}
     private void sonPrivateFunction(@Annotation("son#sonPrivateFunction:is方法字段") int[] is,
                                     @Annotation("son#sonPrivateFunction:integers方法字段") Integer[] integers){}
 
+/**
+ * SonSub类。
+ */
     public class SonSub{}
     public static class SonSubStatic{
     }
@@ -82,11 +105,17 @@ enum Code{
     String value();
 }
 
+/**
+ * ParserClass类。
+ */
 public class ParserClass {
 
     class FieldLocalClass{}
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001(){
         // 获得类基础信息
         Class<?> c = ParserClass.class;
@@ -97,6 +126,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002() throws ClassNotFoundException {
 
         System.out.printf("%s 类是否是枚举类型 : %s%n",ParserClass.class.getName(),ParserClass.class.isEnum());
@@ -127,6 +159,9 @@ public class ParserClass {
         System.out.printf("%s 类实例是是匿名类 : %s%n", ParserClass.class.getName(), new ParserClass().getClass().isAnonymousClass());
         System.out.printf("%s 类实例是是匿名类 : %s%n", Son.class.getName(), new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 System.out.println();
             }
@@ -151,11 +186,17 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test002_1方法。
+     */
     public void test002_1(){
         System.out.println(Modifier.isPublic(ParserClass.class.getModifiers()));
     }
 
     @Test
+    /**
+     * test003方法。
+     */
     public void test003(){
         Class c = Integer[].class;
         System.out.println("是否是一个数组："+c.isArray());
@@ -163,6 +204,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test004方法。
+     */
     public void test004(){
         Class c = Son.class;
         Class[] cs = c.getClasses();
@@ -172,6 +216,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test004_1方法。
+     */
     public void test004_1(){
         Class c = Son.SonSub.class;
         System.out.println("1. 获得内部类的声明类："+c.getDeclaringClass().getName());
@@ -185,6 +232,9 @@ public class ParserClass {
 
         Runnable runnable = new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
 
             }
@@ -202,6 +252,9 @@ public class ParserClass {
 
 
     @Test
+    /**
+     * test005方法。
+     */
     public void test005(){
         Class<?> c = Son.class;
 
@@ -223,6 +276,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test006方法。
+     */
     public void test006() throws NoSuchFieldException {
         Class<?> c = Son.class;
 
@@ -245,6 +301,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test007方法。
+     */
     public void test007(){
         Class<?> c = Son.class;
 
@@ -289,6 +348,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test008方法。
+     */
     public void test008(){
         Class<?> c = Son.class;
 
@@ -322,6 +384,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test009方法。
+     */
     public void test009(){
         Class<?> c = Son.class;
         System.out.println("son的父类："+c.getSuperclass().getName());
@@ -330,6 +395,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test010方法。
+     */
     public void test010() throws NoSuchMethodException {
         Class<Son> clazz = Son.class;
 
@@ -412,6 +480,9 @@ public class ParserClass {
     }
 
     @Test
+    /**
+     * test011方法。
+     */
     public void test011(){
 
     }

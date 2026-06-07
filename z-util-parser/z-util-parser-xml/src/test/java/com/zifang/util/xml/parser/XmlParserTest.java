@@ -11,11 +11,17 @@ import static org.junit.Assert.*;
 /**
  * XmlParser 核心功能测试。
  */
+/**
+ * XmlParserTest类。
+ */
 public class XmlParserTest {
 
     // ===== 基础解析 =====
 
     @Test
+    /**
+     * testParseEmptyElement方法。
+     */
     public void testParseEmptyElement() throws Exception {
         XDocument doc = XmlUtil.parse("<root/>");
         assertEquals("root", doc.getRoot().getName());
@@ -23,12 +29,18 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testParseElementWithText方法。
+     */
     public void testParseElementWithText() throws Exception {
         XDocument doc = XmlUtil.parse("<root>hello</root>");
         assertEquals("hello", doc.getRoot().getText());
     }
 
     @Test
+    /**
+     * testParseElementWithAttributes方法。
+     */
     public void testParseElementWithAttributes() throws Exception {
         XDocument doc = XmlUtil.parse("<root id=\"123\" name=\"test\"/>");
         assertEquals("123", doc.getRoot().getAttribute("id"));
@@ -36,6 +48,9 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testParseNestedElements方法。
+     */
     public void testParseNestedElements() throws Exception {
         XDocument doc = XmlUtil.parse("<root><child><grand>value</grand></child></root>");
         XElement root = doc.getRoot();
@@ -45,6 +60,9 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testParseMultipleChildren方法。
+     */
     public void testParseMultipleChildren() throws Exception {
         XDocument doc = XmlUtil.parse("<root><a>1</a><a>2</a><b>3</b></root>");
         List<XElement> aList = doc.getRoot().getChildElements("a");
@@ -56,6 +74,9 @@ public class XmlParserTest {
     // ===== 自闭合标签 =====
 
     @Test
+    /**
+     * testParseSelfClosingTag方法。
+     */
     public void testParseSelfClosingTag() throws Exception {
         XDocument doc = XmlUtil.parse("<root><br/><img src=\"x.png\"/></root>");
         List<XElement> children = doc.getRoot().getChildElements();
@@ -67,6 +88,9 @@ public class XmlParserTest {
     // ===== XML 声明 =====
 
     @Test
+    /**
+     * testParseDeclaration方法。
+     */
     public void testParseDeclaration() throws Exception {
         XDocument doc = XmlUtil.parse("<?xml version=\"1.0\" encoding=\"UTF-8\"?><root/>");
         assertNotNull(doc.getDeclaration());
@@ -75,6 +99,9 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testParseDeclarationWithStandalone方法。
+     */
     public void testParseDeclarationWithStandalone() throws Exception {
         XDocument doc = XmlUtil.parse("<?xml version=\"1.0\" standalone=\"yes\"?><root/>");
         assertEquals("yes", doc.getDeclaration().getStandalone());
@@ -83,6 +110,9 @@ public class XmlParserTest {
     // ===== 文本与混合内容 =====
 
     @Test
+    /**
+     * testParseMixedContent方法。
+     */
     public void testParseMixedContent() throws Exception {
         XDocument doc = XmlUtil.parse("<root>text<b>bold</b>more</root>");
         XElement root = doc.getRoot();
@@ -93,6 +123,9 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testParseTextWithWhitespace方法。
+     */
     public void testParseTextWithWhitespace() throws Exception {
         XDocument doc = XmlUtil.parse("<root>  spaces  </root>");
         assertEquals("  spaces  ", doc.getRoot().getText());
@@ -101,6 +134,9 @@ public class XmlParserTest {
     // ===== CDATA =====
 
     @Test
+    /**
+     * testParseCData方法。
+     */
     public void testParseCData() throws Exception {
         XDocument doc = XmlUtil.parse("<root><![CDATA[<>\"'&文字]]></root>");
         List<XCData> cdataNodes = doc.getRoot().getCDataNodes();
@@ -109,6 +145,9 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testParseCDataInMixedContent方法。
+     */
     public void testParseCDataInMixedContent() throws Exception {
         XDocument doc = XmlUtil.parse("<root>before<![CDATA[code]]>after</root>");
         assertEquals(3, doc.getRoot().getChildren().size());
@@ -120,6 +159,9 @@ public class XmlParserTest {
     // ===== 注释 =====
 
     @Test
+    /**
+     * testParseComment方法。
+     */
     public void testParseComment() throws Exception {
         XDocument doc = XmlUtil.parse("<!-- comment --><root/>");
         assertEquals(1, doc.getPrependNodes().size());
@@ -128,6 +170,9 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testParseCommentInElement方法。
+     */
     public void testParseCommentInElement() throws Exception {
         XDocument doc = XmlUtil.parse("<root><!-- inner -->text</root>");
         List<XNode> children = doc.getRoot().getChildren();
@@ -138,6 +183,9 @@ public class XmlParserTest {
     // ===== 处理指令 =====
 
     @Test
+    /**
+     * testParseProcessingInstruction方法。
+     */
     public void testParseProcessingInstruction() throws Exception {
         XDocument doc = XmlUtil.parse("<?xml-stylesheet type=\"text/xsl\" href=\"style.xsl\"?><root/>");
         assertEquals(1, doc.getPrependNodes().size());
@@ -149,24 +197,36 @@ public class XmlParserTest {
     // ===== 实体引用 =====
 
     @Test
+    /**
+     * testParseEntityReferences方法。
+     */
     public void testParseEntityReferences() throws Exception {
         XDocument doc = XmlUtil.parse("<root>&amp;&lt;&gt;&quot;&apos;</root>");
         assertEquals("&<>\"'", doc.getRoot().getText());
     }
 
     @Test
+    /**
+     * testParseNumericEntityReferences方法。
+     */
     public void testParseNumericEntityReferences() throws Exception {
         XDocument doc = XmlUtil.parse("<root>&#65;&#x41;</root>");
         assertEquals("AA", doc.getRoot().getText());
     }
 
     @Test
+    /**
+     * testParseChineseCharacters方法。
+     */
     public void testParseChineseCharacters() throws Exception {
         XDocument doc = XmlUtil.parse("<root>你好世界</root>");
         assertEquals("你好世界", doc.getRoot().getText());
     }
 
     @Test
+    /**
+     * testParseEntityInAttribute方法。
+     */
     public void testParseEntityInAttribute() throws Exception {
         XDocument doc = XmlUtil.parse("<root attr=\"a&lt;b\"/>");
         assertEquals("a<b", doc.getRoot().getAttribute("attr"));
@@ -175,11 +235,17 @@ public class XmlParserTest {
     // ===== 错误处理 =====
 
     @Test(expected = com.zifang.util.xml.exception.XmlParseException.class)
+    /**
+     * testParseMismatchedTags方法。
+     */
     public void testParseMismatchedTags() throws Exception {
         XmlUtil.parse("<root><child></wrong></root>");
     }
 
     @Test(expected = com.zifang.util.xml.exception.XmlParseException.class)
+    /**
+     * testParseUnclosedTag方法。
+     */
     public void testParseUnclosedTag() throws Exception {
         XmlUtil.parse("<root><child></root>");
     }
@@ -187,6 +253,9 @@ public class XmlParserTest {
     // ===== 序列化往返 =====
 
     @Test
+    /**
+     * testRoundtrip方法。
+     */
     public void testRoundtrip() throws Exception {
         String input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><root id=\"1\"><child>text</child></root>";
         XDocument doc = XmlUtil.parse(input);
@@ -197,6 +266,9 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testRoundtripComplex方法。
+     */
     public void testRoundtripComplex() throws Exception {
         String xml = "<?xml version=\"1.0\"?>\n" +
                 "<catalog>\n" +
@@ -215,6 +287,9 @@ public class XmlParserTest {
     // ===== XElement 导航 API =====
 
     @Test
+    /**
+     * testGetChildElement方法。
+     */
     public void testGetChildElement() throws Exception {
         XDocument doc = XmlUtil.parse("<root><a><b/></a><c/></root>");
         XElement a = doc.getRoot().getChildElement("a");
@@ -224,6 +299,9 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testGetDescendantElement方法。
+     */
     public void testGetDescendantElement() throws Exception {
         XDocument doc = XmlUtil.parse("<root><a><b><c/></b></a></root>");
         XElement c = doc.getRoot().getDescendantElement("c");
@@ -233,12 +311,18 @@ public class XmlParserTest {
     }
 
     @Test
+    /**
+     * testGetTextTrim方法。
+     */
     public void testGetTextTrim() throws Exception {
         XDocument doc = XmlUtil.parse("<root>  空格  </root>");
         assertEquals("空格", doc.getRoot().getTextTrim());
     }
 
     @Test
+    /**
+     * testSetText方法。
+     */
     public void testSetText() throws Exception {
         XElement e = XmlUtil.element("root");
         e.setText("hello");
@@ -248,6 +332,9 @@ public class XmlParserTest {
     // ===== valueless attribute =====
 
     @Test
+    /**
+     * testValuelessAttribute方法。
+     */
     public void testValuelessAttribute() throws Exception {
         XDocument doc = XmlUtil.parse("<root disabled/>");
         assertTrue(doc.getRoot().hasAttribute("disabled"));
@@ -257,6 +344,9 @@ public class XmlParserTest {
     // ===== Deep Clone =====
 
     @Test
+    /**
+     * testDeepClone方法。
+     */
     public void testDeepClone() throws Exception {
         XDocument doc = XmlUtil.parse("<root id=\"1\"><child>text</child></root>");
         XElement clone = doc.getRoot().deepClone();

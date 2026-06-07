@@ -13,17 +13,26 @@ import java.nio.file.Files;
 
 import static org.junit.Assert.*;
 
+/**
+ * FileUtilTest类。
+ */
 public class FileUtilTest {
 
     private File tempBaseDir;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() throws Exception {
         tempBaseDir = Files.createTempDirectory("fileutil-test-base").toFile();
         tempBaseDir.deleteOnExit();
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() throws Exception {
         if (tempBaseDir != null && tempBaseDir.exists()) {
             deleteRecursively(tempBaseDir);
@@ -45,12 +54,18 @@ public class FileUtilTest {
     // ==================== getFileName / getFilePath ====================
 
     @Test
+    /**
+     * testGetFileName方法。
+     */
     public void testGetFileName() {
         assertEquals("file.txt", FileUtil.getFileName("/home/user/file.txt"));
         assertEquals("file.txt", FileUtil.getFileName("C:\\Users\\user\\file.txt"));
     }
 
     @Test
+    /**
+     * testGetFilePath方法。
+     */
     public void testGetFilePath() {
         assertEquals("/home/user", FileUtil.getFilePath("/home/user/file.txt"));
     }
@@ -58,6 +73,9 @@ public class FileUtilTest {
     // ==================== toUNIXpath ====================
 
     @Test
+    /**
+     * testToUNIXpath方法。
+     */
     public void testToUNIXpath() {
         assertEquals("C:/Users/user/file.txt", FileUtil.toUNIXpath("C:\\Users\\user\\file.txt"));
     }
@@ -65,16 +83,25 @@ public class FileUtilTest {
     // ==================== getTypePart / getNamePart / trimType ====================
 
     @Test
+    /**
+     * testGetTypePart方法。
+     */
     public void testGetTypePart() {
         assertEquals("txt", FileUtil.getTypePart("file.txt"));
     }
 
     @Test
+    /**
+     * testGetNamePart方法。
+     */
     public void testGetNamePart() {
         assertEquals("file", FileUtil.getNamePart("file.txt"));
     }
 
     @Test
+    /**
+     * testTrimType方法。
+     */
     public void testTrimType() {
         assertEquals("file", FileUtil.trimType("file.txt"));
     }
@@ -82,6 +109,9 @@ public class FileUtilTest {
     // ==================== getSubpath ====================
 
     @Test
+    /**
+     * testGetSubpath方法。
+     */
     public void testGetSubpath() {
         assertEquals("user/file.txt", FileUtil.getSubpath("/home/user/file.txt", "/home"));
     }
@@ -89,6 +119,9 @@ public class FileUtilTest {
     // ==================== getPathPart ====================
 
     @Test
+    /**
+     * testGetPathPart方法。
+     */
     public void testGetPathPart() {
         assertEquals("/home/user", FileUtil.getPathPart("/home/user/file.txt"));
     }
@@ -96,6 +129,9 @@ public class FileUtilTest {
     // ==================== pathValidate ====================
 
     @Test
+    /**
+     * testPathValidate方法。
+     */
     public void testPathValidate() throws IOException {
         File f = File.createTempFile("validate", ".txt", tempBaseDir);
         assertTrue(FileUtil.pathValidate(f.getPath()));
@@ -106,6 +142,9 @@ public class FileUtilTest {
     // ==================== getFileContent ====================
 
     @Test
+    /**
+     * testGetFileContent方法。
+     */
     public void testGetFileContent() throws Exception {
         File f = new File(tempBaseDir, "content.txt");
         Files.write(f.toPath(), "hello content".getBytes(StandardCharsets.UTF_8));
@@ -113,6 +152,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testGetFileContentByPath方法。
+     */
     public void testGetFileContentByPath() throws Exception {
         File f = new File(tempBaseDir, "content2.txt");
         Files.write(f.toPath(), "path content".getBytes(StandardCharsets.UTF_8));
@@ -122,6 +164,9 @@ public class FileUtilTest {
     // ==================== readString from URL ====================
 
     @Test
+    /**
+     * testReadStringFromURL方法。
+     */
     public void testReadStringFromURL() throws Exception {
         File f = new File(tempBaseDir, "urltest.txt");
         Files.write(f.toPath(), "url test".getBytes(StandardCharsets.UTF_8));
@@ -132,6 +177,9 @@ public class FileUtilTest {
     // ==================== getFileContentFromCharset / saveFile2Charset ====================
 
     @Test
+    /**
+     * testGetFileContentFromCharset方法。
+     */
     public void testGetFileContentFromCharset() throws Exception {
         File f = new File(tempBaseDir, "charset.txt");
         Files.write(f.toPath(), "charset test".getBytes(StandardCharsets.UTF_8));
@@ -139,6 +187,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testSaveFile2Charset方法。
+     */
     public void testSaveFile2Charset() throws Exception {
         File f = new File(tempBaseDir, "save-charset.txt");
         FileUtil.saveFile2Charset(f, "UTF-8", "saved content");
@@ -148,6 +199,9 @@ public class FileUtilTest {
     // ==================== mkDir / mkdir / mkdirs ====================
 
     @Test
+    /**
+     * testMkDir方法。
+     */
     public void testMkDir() throws Exception {
         File dir = new File(tempBaseDir, "newdir");
         FileUtil.mkDir(dir);
@@ -156,11 +210,17 @@ public class FileUtilTest {
     }
 
     @Test(expected = FileNotFoundException.class)
+    /**
+     * testMkDirNull方法。
+     */
     public void testMkDirNull() throws Exception {
         FileUtil.mkDir(null);
     }
 
     @Test
+    /**
+     * testMkdirFromString方法。
+     */
     public void testMkdirFromString() throws Exception {
         File dir = new File(tempBaseDir, "mkdir-str");
         FileUtil.mkdir(dir.getPath());
@@ -168,6 +228,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testMkdirs方法。
+     */
     public void testMkdirs() throws Exception {
         File nested = new File(tempBaseDir, "a/b/c/d");
         FileUtil.mkdirs(nested.getPath());
@@ -177,6 +240,9 @@ public class FileUtilTest {
     // ==================== makeDirectory ====================
 
     @Test
+    /**
+     * testMakeDirectory方法。
+     */
     public void testMakeDirectory() throws Exception {
         File dir = new File(tempBaseDir, "makedir");
         boolean result = FileUtil.makeDirectory(dir);
@@ -185,6 +251,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testMakeDirectoryFalseForFile方法。
+     */
     public void testMakeDirectoryFalseForFile() throws Exception {
         File f = File.createTempFile("notadir", ".txt", tempBaseDir);
         boolean result = FileUtil.makeDirectory(f);
@@ -194,6 +263,9 @@ public class FileUtilTest {
     // ==================== touch ====================
 
     @Test
+    /**
+     * testTouchCreatesNewFile方法。
+     */
     public void testTouchCreatesNewFile() throws Exception {
         File f = new File(tempBaseDir, "touched.txt");
         FileUtil.touch(f);
@@ -201,6 +273,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testTouchUpdatesExistingFile方法。
+     */
     public void testTouchUpdatesExistingFile() throws Exception {
         File f = File.createTempFile("touch-existing", ".txt", tempBaseDir);
         long original = f.lastModified();
@@ -210,6 +285,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testTouchString方法。
+     */
     public void testTouchString() throws Exception {
         File f = new File(tempBaseDir, "touch-str.txt");
         FileUtil.touch(f.getPath());
@@ -219,6 +297,9 @@ public class FileUtilTest {
     // ==================== emptyDirectory ====================
 
     @Test
+    /**
+     * testEmptyDirectory方法。
+     */
     public void testEmptyDirectory() throws Exception {
         File dir = new File(tempBaseDir, "toempty");
         dir.mkdirs();
@@ -233,6 +314,9 @@ public class FileUtilTest {
     // ==================== deleteDirectory ====================
 
     @Test
+    /**
+     * testDeleteDirectory方法。
+     */
     public void testDeleteDirectory() throws Exception {
         File dir = new File(tempBaseDir, "todelete");
         dir.mkdirs();
@@ -246,6 +330,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testDeleteDir方法。
+     */
     public void testDeleteDir() {
         File dir = new File(tempBaseDir, "deletedir");
         dir.mkdirs();
@@ -255,6 +342,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testDeleteDirReturnsFalseForNonExistent方法。
+     */
     public void testDeleteDirReturnsFalseForNonExistent() {
         File nonExistent = new File(tempBaseDir, "non-existent-dir");
         assertFalse(FileUtil.deleteDir(nonExistent));
@@ -263,6 +353,9 @@ public class FileUtilTest {
     // ==================== dirRename ====================
 
     @Test
+    /**
+     * testDirRename方法。
+     */
     public void testDirRename() throws Exception {
         File dir = new File(tempBaseDir, "oldname");
         dir.mkdirs();
@@ -277,6 +370,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testDirRenameFile方法。
+     */
     public void testDirRenameFile() throws Exception {
         File file = File.createTempFile("oldfile", ".txt", tempBaseDir);
 
@@ -290,6 +386,9 @@ public class FileUtilTest {
     // ==================== getFileType (magic bytes) ====================
 
     @Test
+    /**
+     * testGetFileType方法。
+     */
     public void testGetFileType() throws Exception {
         // PNG magic bytes
         byte[] pngData = new byte[]{
@@ -305,6 +404,9 @@ public class FileUtilTest {
     // ==================== isImage ====================
 
     @Test
+    /**
+     * testIsImage方法。
+     */
     public void testIsImage() throws Exception {
         File png = new File(tempBaseDir, "test-is-image.png");
         byte[] pngData = new byte[]{
@@ -317,6 +419,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testIsImageFalseForTxt方法。
+     */
     public void testIsImageFalseForTxt() throws Exception {
         File txt = File.createTempFile("test-text", ".txt", tempBaseDir);
         assertFalse(FileUtil.isImage(txt.getPath()));
@@ -325,6 +430,9 @@ public class FileUtilTest {
     // ==================== CopyFile ====================
 
     @Test
+    /**
+     * testCopyFile方法。
+     */
     public void testCopyFile() throws Exception {
         File src = new File(tempBaseDir, "src-copy.txt");
         Files.write(src.toPath(), "copy source".getBytes(StandardCharsets.UTF_8));
@@ -337,6 +445,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testCopyFileWithChannel方法。
+     */
     public void testCopyFileWithChannel() throws Exception {
         File src = new File(tempBaseDir, "src-channel.txt");
         Files.write(src.toPath(), "channel copy".getBytes(StandardCharsets.UTF_8));
@@ -348,6 +459,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testCopyFileWithBuffer方法。
+     */
     public void testCopyFileWithBuffer() throws Exception {
         File src = new File(tempBaseDir, "src-buffer.txt");
         Files.write(src.toPath(), "buffer copy".getBytes(StandardCharsets.UTF_8));
@@ -361,6 +475,9 @@ public class FileUtilTest {
     // ==================== getURL ====================
 
     @Test
+    /**
+     * testGetURL方法。
+     */
     public void testGetURL() throws Exception {
         File f = File.createTempFile("urltest", ".txt", tempBaseDir);
         URL url = FileUtil.getURL(f);
@@ -370,6 +487,9 @@ public class FileUtilTest {
     // ==================== convert charset ====================
 
     @Test
+    /**
+     * testConvert方法。
+     */
     public void testConvert() throws Exception {
         File src = new File(tempBaseDir, "src-gbk.txt");
         Files.write(src.toPath(), "转换测试".getBytes(java.nio.charset.Charset.forName("GBK")));
@@ -381,6 +501,9 @@ public class FileUtilTest {
     // ==================== genModuleTpl ====================
 
     @Test
+    /**
+     * testGenModuleTpl方法。
+     */
     public void testGenModuleTpl() throws Exception {
         File f = new File(tempBaseDir, "module.txt");
         boolean result = FileUtil.genModuleTpl(f.getPath(), "module content here");
@@ -391,6 +514,9 @@ public class FileUtilTest {
     // ==================== listAll ====================
 
     @Test
+    /**
+     * testListAll方法。
+     */
     public void testListAll() throws Exception {
         File dir = new File(tempBaseDir, "listall");
         dir.mkdirs();
@@ -406,6 +532,9 @@ public class FileUtilTest {
     // ==================== getPicExtendName ====================
 
     @Test
+    /**
+     * testGetPicExtendName方法。
+     */
     public void testGetPicExtendName() throws Exception {
         File png = new File(tempBaseDir, "test.png");
         png.createNewFile();
@@ -413,6 +542,9 @@ public class FileUtilTest {
     }
 
     @Test
+    /**
+     * testGetPicExtendNameNoExtension方法。
+     */
     public void testGetPicExtendNameNoExtension() throws Exception {
         File f = new File(tempBaseDir, "noextension");
         f.createNewFile();

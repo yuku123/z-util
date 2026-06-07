@@ -8,16 +8,25 @@ import static org.junit.Assert.*;
 /**
  * INI 解析器测试
  */
+/**
+ * IniParserTest类。
+ */
 public class IniParserTest {
 
     private IniParser parser;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         parser = new IniParser();
     }
 
     @Test
+    /**
+     * testBasicSectionAndKeyValue方法。
+     */
     public void testBasicSectionAndKeyValue() {
         String ini = "[section1]\nkey1=value1\nkey2=value2\n";
         IniFile file = parser.parse(ini);
@@ -30,6 +39,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testGlobalKeyValue方法。
+     */
     public void testGlobalKeyValue() {
         String ini = "globalKey=globalValue\n[section1]\nkey1=value1\n";
         IniFile file = parser.parse(ini);
@@ -41,6 +53,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testMultipleSections方法。
+     */
     public void testMultipleSections() {
         String ini = "[section1]\nkey1=value1\n[section2]\nkey2=value2\nkey3=value3\n[section3]\nkey4=value4\n";
         IniFile file = parser.parse(ini);
@@ -56,6 +71,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testCommentLines方法。
+     */
     public void testCommentLines() {
         String ini = "; 这是注释行\n# 这也是注释行\n[section1]\nkey1=value1\n";
         IniFile file = parser.parse(ini);
@@ -66,6 +84,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testInlineComment方法。
+     */
     public void testInlineComment() {
         String ini = "[section1]\nkey1=value1 # 这是inline注释\nkey2=value2 ;这也是inline注释\n";
         IniFile file = parser.parse(ini);
@@ -75,6 +96,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testLineContinuation方法。
+     */
     public void testLineContinuation() {
         String ini = "[section1]\nkey1=value1 \\\nvalue2\nkey3=value3\n";
         IniFile file = parser.parse(ini);
@@ -84,6 +108,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testEmptySectionName方法。
+     */
     public void testEmptySectionName() {
         String ini = "[]\nkey1=value1\n";
         IniFile file = parser.parse(ini);
@@ -95,6 +122,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testEmptyLinesIgnored方法。
+     */
     public void testEmptyLinesIgnored() {
         String ini = "[section1]\n\n\nkey1=value1\n\n\n[section2]\n\nkey2=value2\n\n\n";
         IniFile file = parser.parse(ini);
@@ -105,6 +135,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testDuplicateKeyOverwrite方法。
+     */
     public void testDuplicateKeyOverwrite() {
         String ini = "[section1]\nkey1=value1\nkey1=value2\nkey1=value3\n";
         IniFile file = parser.parse(ini);
@@ -113,6 +146,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testStoreAndParseRoundTrip方法。
+     */
     public void testStoreAndParseRoundTrip() {
         String ini = "[section1]\nkey1=value1\nkey2=value2\n\n[section2]\nglobalKey=globalValue\nkey3=value3\n";
         IniFile file = parser.parse(ini);
@@ -125,6 +161,9 @@ public class IniParserTest {
     }
 
     @Test
+    /**
+     * testStoreGlobalSectionRoundTrip方法。
+     */
     public void testStoreGlobalSectionRoundTrip() {
         String ini = "globalKey=globalValue\n[section1]\nkey1=value1\n";
         IniFile file = parser.parse(ini);
@@ -136,6 +175,9 @@ public class IniParserTest {
     }
 
     @Test(expected = IniException.class)
+    /**
+     * testInvalidLineThrowsException方法。
+     */
     public void testInvalidLineThrowsException() {
         String ini = "[section1]\ninvalid line without equals sign\n";
         parser.parse(ini);

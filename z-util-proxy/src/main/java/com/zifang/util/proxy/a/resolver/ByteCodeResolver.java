@@ -41,11 +41,18 @@ import java.util.List;
 /**
  * ByteCodeResolver类。
  */
+/**
+ * ByteCodeResolver类。
+ */
 public class ByteCodeResolver {
 
     private final InputStream inputStream;
     private final ClassFile classFile;
 
+    /**
+     * ByteCodeResolver方法。
+     *      * @param inputStream InputStream类型参数
+     */
     /**
      * ByteCodeResolver方法。
      *      * @param inputStream InputStream类型参数
@@ -60,6 +67,11 @@ public class ByteCodeResolver {
      *
      * @param filePath .class文件路径
      * @return 解析后的ClassFile对象
+     */
+    /**
+     * parseFromFile方法。
+     *      * @param filePath String类型参数
+     * @return static ClassFile类型返回值
      */
     /**
      * parseFromFile方法。
@@ -85,6 +97,11 @@ public class ByteCodeResolver {
      *      * @param inputStream InputStream类型参数
      * @return static ClassFile类型返回值
      */
+    /**
+     * parseFromStream方法。
+     *      * @param inputStream InputStream类型参数
+     * @return static ClassFile类型返回值
+     */
     public static ClassFile parseFromStream(InputStream inputStream) {
         return new ByteCodeResolver(inputStream).parse();
     }
@@ -93,6 +110,10 @@ public class ByteCodeResolver {
      * 执行解析
      *
      * @return 解析后的ClassFile对象
+     */
+    /**
+     * parse方法。
+     * @return ClassFile类型返回值
      */
     /**
      * parse方法。
@@ -293,12 +314,21 @@ public class ByteCodeResolver {
      * getClassFile方法。
      * @return ClassFile类型返回值
      */
+    /**
+     * getClassFile方法。
+     * @return ClassFile类型返回值
+     */
     public ClassFile getClassFile() {
         return classFile;
     }
 
     /**
      * 主方法，用于命令行测试
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

@@ -8,9 +8,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.Assert.*;
 
+/**
+ * CuaAgentTest类。
+ */
 public class CuaAgentTest {
 
     @Test
+    /**
+     * testCuaAgentWithCustomBrowserClient方法。
+     */
     public void testCuaAgentWithCustomBrowserClient() {
         try {
             WebDriver driver = new ChromeDriver();
@@ -27,6 +33,9 @@ public class CuaAgentTest {
     }
 
     @Test
+    /**
+     * testGetRegistry方法。
+     */
     public void testGetRegistry() {
         try {
             WebDriver driver = new ChromeDriver();
@@ -52,6 +61,9 @@ public class CuaAgentTest {
     }
 
     @Test
+    /**
+     * testGetBrowserClient方法。
+     */
     public void testGetBrowserClient() {
         try {
             WebDriver driver = new ChromeDriver();
@@ -67,6 +79,9 @@ public class CuaAgentTest {
     }
 
     @Test
+    /**
+     * testExecuteStepNotFound方法。
+     */
     public void testExecuteStepNotFound() {
         try {
             WebDriver driver = new ChromeDriver();
@@ -90,6 +105,9 @@ public class CuaAgentTest {
     }
 
     @Test
+    /**
+     * testExecuteUnknownTask方法。
+     */
     public void testExecuteUnknownTask() {
         try {
             WebDriver driver = new ChromeDriver();

@@ -8,10 +8,18 @@ import java.nio.channels.Channels;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.WritableByteChannel;
 
+/**
+ * ChargenClient类。
+ */
 public class ChargenClient {
 
     public static int DEFAULT_PORT = 19;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         if (args.length == 0) {

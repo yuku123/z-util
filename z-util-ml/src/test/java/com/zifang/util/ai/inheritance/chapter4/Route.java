@@ -9,6 +9,9 @@ package com.zifang.util.ml.inheritance.chapter4;
  * @author zifang
  */
 
+/**
+ * Route类。
+ */
 public class Route {
     private City[] route;
     private double distance = 0;
@@ -18,6 +21,11 @@ public class Route {
      *
      * @param individual A GA individual
      * @param cities     The cities referenced
+     */
+    /**
+     * Route方法。
+     *      * @param individual Individual类型参数
+     * @param cities City[]类型参数
      */
     public Route(Individual individual, City[] cities) {
         // Get individual's chromosome
@@ -33,6 +41,10 @@ public class Route {
      * Get route distance
      *
      * @return distance The route's distance
+     */
+    /**
+     * getDistance方法。
+     * @return double类型返回值
      */
     public double getDistance() {
         if (this.distance > 0) {

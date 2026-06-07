@@ -5,21 +5,33 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * HttpServerProxyTest类。
+ */
 public class HttpServerProxyTest {
 
     @Test
+    /**
+     * testProxyReturnsNonNull方法。
+     */
     public void testProxyReturnsNonNull() {
         TestApi proxy = HttpServerProxy.proxy(TestApi.class);
         assertNotNull(proxy);
     }
 
     @Test
+    /**
+     * testProxyReturnsCorrectType方法。
+     */
     public void testProxyReturnsCorrectType() {
         TestApi proxy = HttpServerProxy.proxy(TestApi.class);
         assertTrue(proxy instanceof TestApi);
     }
 
     @RestController("/test")
+/**
+ * TestApi接口。
+ */
     public interface TestApi {
     }
 }

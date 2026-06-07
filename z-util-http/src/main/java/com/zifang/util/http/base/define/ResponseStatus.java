@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * ResponseStatus类。
  */
+/**
+ * ResponseStatus类。
+ */
 public class ResponseStatus {
 }

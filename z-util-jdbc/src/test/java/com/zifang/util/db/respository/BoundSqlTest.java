@@ -10,9 +10,15 @@ import static org.junit.Assert.*;
 /**
  * BoundSql 类测试
  */
+/**
+ * BoundSqlTest类。
+ */
 public class BoundSqlTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         BoundSql boundSql = new BoundSql();
         assertNotNull(boundSql);
@@ -24,6 +30,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testOriginSql方法。
+     */
     public void testOriginSql() {
         BoundSql boundSql = new BoundSql();
         boundSql.setOriginSql("SELECT * FROM user WHERE id = ?");
@@ -32,6 +41,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testTransformSql方法。
+     */
     public void testTransformSql() {
         BoundSql boundSql = new BoundSql();
         boundSql.setTransformSql("SELECT * FROM user WHERE id = #{id}");
@@ -40,6 +52,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testIndexName方法。
+     */
     public void testIndexName() {
         BoundSql boundSql = new BoundSql();
         Map<Integer, String> indexName = new HashMap<>();
@@ -54,6 +69,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testIndexValue方法。
+     */
     public void testIndexValue() {
         BoundSql boundSql = new BoundSql();
         Map<Integer, Object> indexValue = new HashMap<>();
@@ -68,6 +86,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testIndexValueInsert方法。
+     */
     public void testIndexValueInsert() {
         BoundSql boundSql = new BoundSql();
         Map<Integer, Object> indexValueInsert = new HashMap<>();
@@ -82,6 +103,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         BoundSql sql1 = new BoundSql();
         sql1.setOriginSql("SELECT 1");
@@ -93,6 +117,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentSql方法。
+     */
     public void testEqualsWithDifferentSql() {
         BoundSql sql1 = new BoundSql();
         sql1.setOriginSql("SELECT 1");
@@ -104,12 +131,18 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         BoundSql sql = new BoundSql();
         assertNotEquals(sql, null);
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         BoundSql sql1 = new BoundSql();
         sql1.setOriginSql("SELECT 1");
@@ -121,6 +154,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         BoundSql sql = new BoundSql();
         sql.setOriginSql("SELECT 1");
@@ -132,6 +168,9 @@ public class BoundSqlTest {
     }
 
     @Test
+    /**
+     * testFullConfiguration方法。
+     */
     public void testFullConfiguration() {
         BoundSql boundSql = new BoundSql();
         boundSql.setOriginSql("SELECT * FROM user WHERE id = ? AND name = ?");

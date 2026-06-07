@@ -16,6 +16,9 @@ import java.net.URISyntaxException;
 /**
  * SourceJavaFileObject类。
  */
+/**
+ * SourceJavaFileObject类。
+ */
 public class SourceJavaFileObject extends SimpleJavaFileObject {
 
 
@@ -35,6 +38,11 @@ public class SourceJavaFileObject extends SimpleJavaFileObject {
      *      * @param uri URI类型参数
      * @param kind Kind类型参数
      */
+    /**
+     * SourceJavaFileObject方法。
+     *      * @param uri URI类型参数
+     * @param kind Kind类型参数
+     */
     protected SourceJavaFileObject(URI uri, Kind kind) {
         super(uri, kind);
     }
@@ -44,6 +52,11 @@ public class SourceJavaFileObject extends SimpleJavaFileObject {
      *
      * @param className   类名
      * @param sourceCode  源代码内容
+     */
+    /**
+     * SourceJavaFileObject方法。
+     *      * @param className String类型参数
+     * @param sourceCode String类型参数
      */
     /**
      * SourceJavaFileObject方法。

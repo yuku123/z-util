@@ -15,12 +15,18 @@ import static org.junit.Assert.*;
  * WorkflowRuntimeEngine 端到端集成测试。
  * 从 BPMN XML → 解析 → 转换 → 执行，验证完整流程。
  */
+/**
+ * WorkflowRuntimeEngineTest类。
+ */
 public class WorkflowRuntimeEngineTest {
 
     private BpmnXmlParser parser;
     private BpmnModelConverter converter;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         parser = new BpmnXmlParser();
         converter = new BpmnModelConverter();
@@ -32,6 +38,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testInitializeAndStartLinearProcess方法。
+     */
     public void testInitializeAndStartLinearProcess() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -60,6 +69,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testInitializeAndStartWithVariables方法。
+     */
     public void testInitializeAndStartWithVariables() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -85,6 +97,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testGetCurrentResult方法。
+     */
     public void testGetCurrentResult() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -108,6 +123,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testGetPendingUserTasks方法。
+     */
     public void testGetPendingUserTasks() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -134,6 +152,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testVariablesArePreserved方法。
+     */
     public void testVariablesArePreserved() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -158,6 +179,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testProcessIdIsGenerated方法。
+     */
     public void testProcessIdIsGenerated() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -178,6 +202,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testNodeMapIsBuilt方法。
+     */
     public void testNodeMapIsBuilt() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -205,6 +232,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testConfigurationIsStored方法。
+     */
     public void testConfigurationIsStored() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -224,6 +254,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testMultipleExecutions方法。
+     */
     public void testMultipleExecutions() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -250,6 +283,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testEmptyWorkflow方法。
+     */
     public void testEmptyWorkflow() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -267,6 +303,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testErrorMessageOnResumeInvalidNode方法。
+     */
     public void testErrorMessageOnResumeInvalidNode() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +
@@ -290,6 +329,9 @@ public class WorkflowRuntimeEngineTest {
     }
 
     @Test
+    /**
+     * testGatewayBranchingWithConditions方法。
+     */
     public void testGatewayBranchingWithConditions() {
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\">\n" +

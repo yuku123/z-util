@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.UnknownHostException;
 
+/**
+ * WhoisGUI类。
+ */
 public class WhoisGUI extends JFrame {
 
     private JTextField searchString = new JTextField(30);
@@ -17,6 +20,10 @@ public class WhoisGUI extends JFrame {
     private JTextField chosenServer = new JTextField();
     private Whois server;
 
+    /**
+     * WhoisGUI方法。
+     *      * @param whois Whois类型参数
+     */
     public WhoisGUI(Whois whois) {
         super("Whois");
         this.server = whois;
@@ -121,6 +128,10 @@ public class WhoisGUI extends JFrame {
         p.add(chosenServer);
         chosenServer.addActionListener(new ActionListener() {
             @Override
+    /**
+     * actionPerformed方法。
+     *      * @param event ActionEvent类型参数
+     */
             public void actionPerformed(ActionEvent event) {
                 try {
                     server = new Whois(chosenServer.getText());
@@ -136,6 +147,10 @@ public class WhoisGUI extends JFrame {
     private class LookupNames implements ActionListener {
 
         @Override
+    /**
+     * actionPerformed方法。
+     *      * @param event ActionEvent类型参数
+     */
         public void actionPerformed(ActionEvent event) {
             names.setText("");
             SwingWorker<String, Object> worker = new Lookup();
@@ -146,6 +161,10 @@ public class WhoisGUI extends JFrame {
     private class Lookup extends SwingWorker<String, Object> {
 
         @Override
+    /**
+     * doInBackground方法。
+     * @return String类型返回值
+     */
         protected String doInBackground() throws Exception {
             Whois.SearchIn group = Whois.SearchIn.ALL;
             Whois.SearchFor category = Whois.SearchFor.ANY;
@@ -184,6 +203,9 @@ public class WhoisGUI extends JFrame {
         }
 
         @Override
+    /**
+     * done方法。
+     */
         protected void done() {
             try {
                 names.setText(get());
@@ -194,6 +216,11 @@ public class WhoisGUI extends JFrame {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try {
             Whois server = new Whois();
@@ -216,6 +243,9 @@ public class WhoisGUI extends JFrame {
         }
 
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             frame.setVisible(true);
         }

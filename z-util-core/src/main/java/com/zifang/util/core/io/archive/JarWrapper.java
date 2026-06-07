@@ -43,6 +43,9 @@ import java.util.stream.Collectors;
 /**
  * JarWrapper类。
  */
+/**
+ * JarWrapper类。
+ */
 public class JarWrapper implements Closeable {
 
     private final JarFile jarFile;
@@ -52,6 +55,10 @@ public class JarWrapper implements Closeable {
      *
      * @param jarFilePath JAR 文件路径（必须是存在的 .jar 文件）
      * @throws IOException 如果文件不存在或不是有效的 JAR 文件
+     */
+    /**
+     * JarWrapper方法。
+     *      * @param jarFilePath String类型参数
      */
     /**
      * JarWrapper方法。
@@ -71,6 +78,10 @@ public class JarWrapper implements Closeable {
      * JarWrapper方法。
      *      * @param jarFilePath File类型参数
      */
+    /**
+     * JarWrapper方法。
+     *      * @param jarFilePath File类型参数
+     */
     public JarWrapper(File jarFilePath) throws IOException {
         this.jarFile = new JarFile(jarFilePath);
     }
@@ -81,6 +92,10 @@ public class JarWrapper implements Closeable {
      * 返回 JAR 包内所有文件和目录条目的列表，按枚举顺序排列。
      *
      * @return 包含所有 JAR 条目的列表
+     */
+    /**
+     * getEntries方法。
+     * @return List<JarEntry>类型返回值
      */
     /**
      * getEntries方法。
@@ -104,6 +119,11 @@ public class JarWrapper implements Closeable {
      * @param pathInJar JAR 内的路径，例如 "META-INF/MANIFEST.MF" 或 "com/example/MyClass.class"
      * @return entry 内容字节数组，如果找不到则返回空数组
      * @throws UncheckedIOException 如果读取过程中发生 IO 错误
+     */
+    /**
+     * getBytes方法。
+     *      * @param pathInJar String类型参数
+     * @return byte[]类型返回值
      */
     /**
      * getBytes方法。
@@ -137,6 +157,11 @@ public class JarWrapper implements Closeable {
      *      * @param pathInJar String类型参数
      * @return String类型返回值
      */
+    /**
+     * getString方法。
+     *      * @param pathInJar String类型参数
+     * @return String类型返回值
+     */
     public String getString(String pathInJar) {
         byte[] bytes = getBytes(pathInJar);
         return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
@@ -151,6 +176,11 @@ public class JarWrapper implements Closeable {
      * @param predicate 过滤条件，例如 {@code e -> e.getName().endsWith(".class")}
      * @return 符合条件的 path -> bytes 映射，如果没有任何匹配则返回空映射
      * @throws UncheckedIOException 如果读取过程中发生 IO 错误
+     */
+    /**
+     * getFileBytes方法。
+     *      * @param predicate PredicateJarEntry类型参数
+     * @return Map<String, byte[]>类型返回值
      */
     /**
      * getFileBytes方法。
@@ -177,6 +207,9 @@ public class JarWrapper implements Closeable {
      * @throws IOException 如果关闭过程中发生 IO 错误
      */
     @Override
+    /**
+     * close方法。
+     */
     /**
      * close方法。
      */

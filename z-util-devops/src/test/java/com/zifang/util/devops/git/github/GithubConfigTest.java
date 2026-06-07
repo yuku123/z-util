@@ -5,9 +5,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * GithubConfigTest类。
+ */
 public class GithubConfigTest {
 
     @Test
+    /**
+     * testOfWithTokenOnly方法。
+     */
     public void testOfWithTokenOnly() {
         GithubConfig config = GithubConfig.of("my-secret-token");
         assertEquals("my-secret-token", config.getToken());
@@ -15,6 +21,9 @@ public class GithubConfigTest {
     }
 
     @Test
+    /**
+     * testOfWithTokenAndApiUrl方法。
+     */
     public void testOfWithTokenAndApiUrl() {
         GithubConfig config = GithubConfig.of("token", "https://github.example.com/api/v3");
         assertEquals("token", config.getToken());
@@ -22,6 +31,9 @@ public class GithubConfigTest {
     }
 
     @Test
+    /**
+     * testFromEnvThrowsWhenNotSet方法。
+     */
     public void testFromEnvThrowsWhenNotSet() {
         String originalToken = System.getenv("GITHUB_TOKEN");
         if (originalToken != null) {

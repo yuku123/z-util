@@ -9,9 +9,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.junit.Assert.*;
 
+/**
+ * ImageReadWriteTest类。
+ */
 public class ImageReadWriteTest {
 
     @Test
+    /**
+     * testReadFromByteArray方法。
+     */
     public void testReadFromByteArray() throws IOException {
         // Create a simple test image
         BufferedImage original = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
@@ -29,6 +35,9 @@ public class ImageReadWriteTest {
     }
 
     @Test
+    /**
+     * testInferFormat方法。
+     */
     public void testInferFormat() {
         assertEquals("png", ImageReadWrite.inferFormat("image.png"));
         assertEquals("jpeg", ImageReadWrite.inferFormat("image.jpg"));
@@ -38,17 +47,26 @@ public class ImageReadWriteTest {
     }
 
     @Test
+    /**
+     * testInferFormatNoExtension方法。
+     */
     public void testInferFormatNoExtension() {
         assertEquals("", ImageReadWrite.inferFormat("imageWithoutExtension"));
     }
 
     @Test
+    /**
+     * testIsSupported方法。
+     */
     public void testIsSupported() {
         assertTrue(ImageReadWrite.isSupported("image.png"));
         assertTrue(ImageReadWrite.isSupported("image.jpg"));
     }
 
     @Test
+    /**
+     * testWriteToOutputStream方法。
+     */
     public void testWriteToOutputStream() throws IOException {
         BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -57,6 +75,9 @@ public class ImageReadWriteTest {
     }
 
     @Test
+    /**
+     * testToBytes方法。
+     */
     public void testToBytes() throws IOException {
         BufferedImage image = new BufferedImage(5, 5, BufferedImage.TYPE_INT_RGB);
         byte[] bytes = ImageReadWrite.toBytes(image);
@@ -65,6 +86,9 @@ public class ImageReadWriteTest {
     }
 
     @Test
+    /**
+     * testToBytesWithFormat方法。
+     */
     public void testToBytesWithFormat() throws IOException {
         BufferedImage image = new BufferedImage(5, 5, BufferedImage.TYPE_INT_RGB);
         byte[] pngBytes = ImageReadWrite.toBytes(image, "png");

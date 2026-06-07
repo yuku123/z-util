@@ -8,10 +8,18 @@ import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * RecursiveTaskCancelDemo类。
+ */
 public class RecursiveTaskCancelDemo {
 
     // 1．创建一个名为ArrayGenerator的类。这个类将生成一个指定大小的随机整数数组。实现generateArray()方法，它将生成数字数组，接收一个int参数表示数组的大小。
     static class ArrayGenerator {
+    /**
+     * generateArray方法。
+     *      * @param size int类型参数
+     * @return int[]类型返回值
+     */
         public int[] generateArray(int size) {
             int[] array = new int[size];
             Random random = new Random();
@@ -28,16 +36,27 @@ public class RecursiveTaskCancelDemo {
         private List<ForkJoinTask<Integer>> tasks;
 
         // 4．实现类的构造器，用来初始化任务列表。
+    /**
+     * TaskManager方法。
+     */
         public TaskManager() {
             tasks = new ArrayList<>();
         }
 
         // 5．实现addTask()方法。增加一个ForkJoinTask对象到任务列表中。
+    /**
+     * addTask方法。
+     *      * @param task ForkJoinTaskInteger类型参数
+     */
         public void addTask(ForkJoinTask<Integer> task) {
             tasks.add(task);
         }
 
         // 6．实现cancelTasks()方法。遍历存储在列表中的所有ForkJoinTask对象，然后调用cancel()方法取消之。cancelTasks()方法接收一个要取消剩余任务的ForkJoinTask对象作为参数，然后取消所有的任务。
+    /**
+     * cancelTasks方法。
+     *      * @param cancelTask ForkJoinTaskInteger类型参数
+     */
         public void cancelTasks(ForkJoinTask<Integer> cancelTask) {
             for (ForkJoinTask<Integer> task : tasks) {
                 if (task != cancelTask) {
@@ -62,6 +81,14 @@ public class RecursiveTaskCancelDemo {
         private final static int NOT_FOUND = -1;
 
         // 13．实现类的构造器，用来初始化它的属性。
+    /**
+     * SearchNumberTask方法。
+     *      * @param numbers int[]类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     * @param number int类型参数
+     * @param manager TaskManager类型参数
+     */
         public SearchNumberTask(int[] numbers, int start, int end, int number, TaskManager manager) {
             this.numbers = numbers;
             this.start = start;
@@ -72,6 +99,10 @@ public class RecursiveTaskCancelDemo {
 
         // 14．实现compute()方法。在控制台输出信息表示任务开始，并输出start和end的属性值。
         @Override
+    /**
+     * compute方法。
+     * @return int类型返回值
+     */
         protected Integer compute() {
             System.out.println("Task: " + start + ":" + end);
             // 15．如果start和end属性值的差异大于10（任务必须处理大于10个元素的数组），那么，就调用launchTasks()方法将这个任务拆分为两个子任务。
@@ -131,12 +162,20 @@ public class RecursiveTaskCancelDemo {
         }
 
         // 26．实现writeCancelMessage()方法，在控制台输入信息表示任务已经取消了。
+    /**
+     * writeCancelMessage方法。
+     */
         public void writeCancelMessage() {
             System.out.printf("Task: Cancelled task from %d to %d", start, end);
         }
     }
 
     // 27．实现范例的主类，创建Main主类，并实现main()方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // 28．用ArrayGenerator类创建一个容量为1,000的数字数组。
         ArrayGenerator generator = new ArrayGenerator();

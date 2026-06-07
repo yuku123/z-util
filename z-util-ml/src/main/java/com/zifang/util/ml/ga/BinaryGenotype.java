@@ -8,6 +8,9 @@ import java.util.Random;
 /**
  * BinaryGenotype类。
  */
+/**
+ * BinaryGenotype类。
+ */
 public class BinaryGenotype extends Individual {
 
     private static final Random RANDOM = new Random();
@@ -16,6 +19,10 @@ public class BinaryGenotype extends Individual {
      * 构造一个具有指定染色体长度的二进制基因型个体
      *
      * @param length 染色体长度
+     */
+    /**
+     * BinaryGenotype方法。
+     *      * @param length int类型参数
      */
     /**
      * BinaryGenotype方法。
@@ -34,6 +41,10 @@ public class BinaryGenotype extends Individual {
      * BinaryGenotype方法。
      *      * @param chromosome Integer[]类型参数
      */
+    /**
+     * BinaryGenotype方法。
+     *      * @param chromosome Integer[]类型参数
+     */
     public BinaryGenotype(Integer[] chromosome) {
         super(chromosome);
     }
@@ -42,6 +53,9 @@ public class BinaryGenotype extends Individual {
      * 随机初始化染色体的每个基因
      */
     @Override
+    /**
+     * randomize方法。
+     */
     /**
      * randomize方法。
      */
@@ -56,6 +70,11 @@ public class BinaryGenotype extends Individual {
      *
      * @param index 基因索引
      * @return 基因值（0或1）
+     */
+    /**
+     * getGene方法。
+     *      * @param index int类型参数
+     * @return int类型返回值
      */
     /**
      * getGene方法。
@@ -77,6 +96,11 @@ public class BinaryGenotype extends Individual {
      *      * @param index int类型参数
      * @param gene int类型参数
      */
+    /**
+     * setGene方法。
+     *      * @param index int类型参数
+     * @param gene int类型参数
+     */
     public void setGene(int index, Integer gene) {
         super.setGene(index, gene);
     }
@@ -85,6 +109,10 @@ public class BinaryGenotype extends Individual {
      * 获取二进制字符串表示
      *
      * @return 由0和1组成的字符串
+     */
+    /**
+     * toBinaryString方法。
+     * @return String类型返回值
      */
     /**
      * toBinaryString方法。

@@ -39,6 +39,9 @@ import java.io.InputStream;
 /**
  * XmlParserByDOM类。
  */
+/**
+ * XmlParserByDOM类。
+ */
 public class XmlParserByDOM {
 
     /**
@@ -65,6 +68,11 @@ public class XmlParserByDOM {
      * @throws SAXException                 if parse error occurs
      * @throws IOException                  if an I/O error occurs
      * @throws NullPointerException         if xmlStream is null
+     */
+    /**
+     * parse方法。
+     *      * @param xmlStream InputStream类型参数
+     * @return static void类型返回值
      */
     /**
      * parse方法。

@@ -18,9 +18,15 @@ import static org.junit.Assert.*;
  * Task 类测试
  * 测试工作流任务执行单元的各种功能
  */
+/**
+ * TaskTest类。
+ */
 public class TaskTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         Task task = new Task();
         assertNotNull(task);
@@ -31,6 +37,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testGetterSetterWorkFlowApplicationContext方法。
+     */
     public void testGetterSetterWorkFlowApplicationContext() {
         Task task = new Task();
         WorkFlowApplicationContext context = new WorkFlowApplicationContext();
@@ -42,6 +51,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testGetterSetterStart方法。
+     */
     public void testGetterSetterStart() {
         Task task = new Task();
         ExecutableWorkflowNode startNode = new ExecutableWorkflowNode();
@@ -53,6 +65,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testGetterSetterExecutableWorkNodes方法。
+     */
     public void testGetterSetterExecutableWorkNodes() {
         Task task = new Task();
         List<ExecutableWorkflowNode> nodes = new ArrayList<>();
@@ -70,6 +85,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testGetterSetterExecutableWorkNodeIdMap方法。
+     */
     public void testGetterSetterExecutableWorkNodeIdMap() {
         Task task = new Task();
         Map<String, ExecutableWorkflowNode> nodeMap = new HashMap<>();
@@ -84,6 +102,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testEmptyExecutableWorkNodesList方法。
+     */
     public void testEmptyExecutableWorkNodesList() {
         Task task = new Task();
         task.setExecutableWorkNodes(new ArrayList<>());
@@ -93,6 +114,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testEmptyExecutableWorkNodeIdMap方法。
+     */
     public void testEmptyExecutableWorkNodeIdMap() {
         Task task = new Task();
         task.setExecutableWorkNodeIdMap(new HashMap<>());
@@ -102,6 +126,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testExecWithNullStart方法。
+     */
     public void testExecWithNullStart() {
         Task task = new Task();
         // When start is null, exec() throws NullPointerException
@@ -115,6 +142,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testExecWithValidStartNode方法。
+     */
     public void testExecWithValidStartNode() {
         Task task = new Task();
 
@@ -134,6 +164,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         Task task = new Task();
         String str = task.toString();
@@ -147,6 +180,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testToStringWithAllFieldsSet方法。
+     */
     public void testToStringWithAllFieldsSet() {
         Task task = new Task();
         WorkFlowApplicationContext context = new WorkFlowApplicationContext();
@@ -166,24 +202,36 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testEqualsSameInstance方法。
+     */
     public void testEqualsSameInstance() {
         Task task = new Task();
         assertTrue(task.equals(task));
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         Task task = new Task();
         assertFalse(task.equals(null));
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentClass方法。
+     */
     public void testEqualsWithDifferentClass() {
         Task task = new Task();
         assertFalse(task.equals("not a task"));
     }
 
     @Test
+    /**
+     * testEqualsWithSameFields方法。
+     */
     public void testEqualsWithSameFields() {
         Task task1 = new Task();
         Task task2 = new Task();
@@ -207,6 +255,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentContext方法。
+     */
     public void testEqualsWithDifferentContext() {
         Task task1 = new Task();
         Task task2 = new Task();
@@ -222,6 +273,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentStart方法。
+     */
     public void testEqualsWithDifferentStart() {
         Task task1 = new Task();
         Task task2 = new Task();
@@ -246,6 +300,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testHashCodeConsistency方法。
+     */
     public void testHashCodeConsistency() {
         Task task = new Task();
         WorkFlowApplicationContext context = new WorkFlowApplicationContext();
@@ -261,6 +318,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testHashCodeEqualsForEqualObjects方法。
+     */
     public void testHashCodeEqualsForEqualObjects() {
         Task task1 = new Task();
         Task task2 = new Task();
@@ -284,6 +344,9 @@ public class TaskTest {
     }
 
     @Test
+    /**
+     * testAllFieldsAccessible方法。
+     */
     public void testAllFieldsAccessible() {
         Task task = new Task();
 

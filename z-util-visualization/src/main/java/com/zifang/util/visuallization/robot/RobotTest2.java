@@ -11,10 +11,18 @@ import java.awt.event.KeyEvent;
 /**
  * RobotTest2类。
  */
+/**
+ * RobotTest2类。
+ */
 public class RobotTest2 {
 
     private static Robot robot;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try {
             robot = new Robot();// 创建Robot对象

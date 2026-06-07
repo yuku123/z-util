@@ -8,6 +8,9 @@ package com.zifang.util.core.pattern.pool.monitor;
 /**
  * PoolListener接口。
  */
+/**
+ * PoolListener接口。
+ */
 public interface PoolListener<T> {
 
     /**

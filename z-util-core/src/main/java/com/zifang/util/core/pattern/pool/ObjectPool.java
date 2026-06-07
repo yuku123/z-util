@@ -10,6 +10,9 @@ import java.util.NoSuchElementException;
 /**
  * ObjectPool接口。
  */
+/**
+ * ObjectPool接口。
+ */
 public interface ObjectPool<T> {
 
     /**

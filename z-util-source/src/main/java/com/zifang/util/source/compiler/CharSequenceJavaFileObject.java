@@ -20,6 +20,9 @@ import java.net.URI;
 /**
  * CharSequenceJavaFileObject类。
  */
+/**
+ * CharSequenceJavaFileObject类。
+ */
 public class CharSequenceJavaFileObject extends SimpleJavaFileObject {
 
     /**
@@ -43,6 +46,11 @@ public class CharSequenceJavaFileObject extends SimpleJavaFileObject {
      *      * @param className String类型参数
      * @param sourceCode CharSequence类型参数
      */
+    /**
+     * CharSequenceJavaFileObject方法。
+     *      * @param className String类型参数
+     * @param sourceCode CharSequence类型参数
+     */
     public CharSequenceJavaFileObject(String className, CharSequence sourceCode) {
         super(URI.create(className + Kind.SOURCE.extension), Kind.SOURCE);
         this.sourceCode = sourceCode;
@@ -53,6 +61,11 @@ public class CharSequenceJavaFileObject extends SimpleJavaFileObject {
      *
      * @param fullClassName 全限定类名
      * @param kind          文件类型
+     */
+    /**
+     * CharSequenceJavaFileObject方法。
+     *      * @param fullClassName String类型参数
+     * @param kind Kind类型参数
      */
     /**
      * CharSequenceJavaFileObject方法。
@@ -76,6 +89,11 @@ public class CharSequenceJavaFileObject extends SimpleJavaFileObject {
      *      * @param ignoreEncodingErrors boolean类型参数
      * @return CharSequence类型返回值
      */
+    /**
+     * getCharContent方法。
+     *      * @param ignoreEncodingErrors boolean类型参数
+     * @return CharSequence类型返回值
+     */
     public CharSequence getCharContent(boolean ignoreEncodingErrors) {
         return sourceCode;
     }
@@ -86,6 +104,10 @@ public class CharSequenceJavaFileObject extends SimpleJavaFileObject {
      * @return 字节码输入流
      */
     @Override
+    /**
+     * openInputStream方法。
+     * @return InputStream类型返回值
+     */
     /**
      * openInputStream方法。
      * @return InputStream类型返回值
@@ -106,6 +128,10 @@ public class CharSequenceJavaFileObject extends SimpleJavaFileObject {
      * openOutputStream方法。
      * @return OutputStream类型返回值
      */
+    /**
+     * openOutputStream方法。
+     * @return OutputStream类型返回值
+     */
     public OutputStream openOutputStream() {
         return byteCode;
     }
@@ -114,6 +140,10 @@ public class CharSequenceJavaFileObject extends SimpleJavaFileObject {
      * 获取编译后的字节码
      *
      * @return 字节码数组
+     */
+    /**
+     * getByteCode方法。
+     * @return byte[]类型返回值
      */
     /**
      * getByteCode方法。

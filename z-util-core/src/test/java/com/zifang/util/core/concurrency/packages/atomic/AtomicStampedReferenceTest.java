@@ -11,17 +11,28 @@ import java.util.concurrent.atomic.AtomicStampedReference;
  * 例如下面的代码分别用AtomicInteger和AtomicStampedReference来对初始值为100的原子整型变量进行更新，
  * AtomicInteger会成功执行CAS操作，而加上版本戳的AtomicStampedReference对于ABA问题会执行CAS失败：
  */
+/**
+ * AtomicStampedReferenceTest类。
+ */
 public class AtomicStampedReferenceTest {
 
     private static AtomicInteger atomicInt = new AtomicInteger(100);
 
     private static AtomicStampedReference<Integer> atomicStampedRef = new AtomicStampedReference<Integer>(100, 0);
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
 
         Thread intT1 = new Thread(new Runnable() {
 
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 atomicInt.compareAndSet(100, 101);
                 atomicInt.compareAndSet(101, 100);
@@ -32,6 +43,9 @@ public class AtomicStampedReferenceTest {
         Thread intT2 = new Thread(new Runnable() {
 
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 try {
                     TimeUnit.SECONDS.sleep(1);
@@ -50,6 +64,9 @@ public class AtomicStampedReferenceTest {
         Thread refT1 = new Thread(new Runnable() {
 
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 try {
                     TimeUnit.SECONDS.sleep(1);
@@ -64,6 +81,9 @@ public class AtomicStampedReferenceTest {
         Thread refT2 = new Thread(new Runnable() {
 
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
 
                 int stamp = atomicStampedRef.getStamp();

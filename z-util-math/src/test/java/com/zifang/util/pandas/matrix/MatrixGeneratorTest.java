@@ -8,9 +8,15 @@ import static org.junit.Assert.*;
 /**
  * MatrixGenerator 矩阵生成器测试
  */
+/**
+ * MatrixGeneratorTest类。
+ */
 public class MatrixGeneratorTest {
 
     @Test
+    /**
+     * testMatrixGeneratorInstantiation方法。
+     */
     public void testMatrixGeneratorInstantiation() {
         // 测试生成器可以实例化
         MatrixGenerator generator = new MatrixGenerator();
@@ -19,6 +25,9 @@ public class MatrixGeneratorTest {
 
     @Ignore
     @Test
+    /**
+     * testGenerateZeroMatrix方法。
+     */
     public void testGenerateZeroMatrix() {
         // 测试生成零矩阵（如果方法存在）
         Matrix matrix = new Matrix();
@@ -34,6 +43,9 @@ public class MatrixGeneratorTest {
 
     @Ignore
     @Test
+    /**
+     * testGenerateIdentityMatrix方法。
+     */
     public void testGenerateIdentityMatrix() {
         // 测试生成单位矩阵
         Matrix matrix = new Matrix();
@@ -49,6 +61,9 @@ public class MatrixGeneratorTest {
 
     @Ignore
     @Test
+    /**
+     * testGenerateRandomMatrix方法。
+     */
     public void testGenerateRandomMatrix() {
         // 测试生成随机矩阵
         Matrix matrix = new Matrix();
@@ -67,6 +82,9 @@ public class MatrixGeneratorTest {
 
     @Ignore
     @Test
+    /**
+     * testGenerateSequentialMatrix方法。
+     */
     public void testGenerateSequentialMatrix() {
         // 测试生成顺序矩阵
         Matrix matrix = new Matrix();
@@ -86,6 +104,9 @@ public class MatrixGeneratorTest {
 
     @Ignore
     @Test
+    /**
+     * testGenerateDiagonalMatrix方法。
+     */
     public void testGenerateDiagonalMatrix() {
         // 测试生成对角矩阵
         Matrix matrix = new Matrix();
@@ -110,6 +131,9 @@ public class MatrixGeneratorTest {
 
     @Ignore
     @Test
+    /**
+     * testGenerateSymmetricMatrix方法。
+     */
     public void testGenerateSymmetricMatrix() {
         // 测试生成对称矩阵
         Matrix matrix = new Matrix();
@@ -134,6 +158,9 @@ public class MatrixGeneratorTest {
 
     @Ignore
     @Test
+    /**
+     * testGenerateLargeMatrix方法。
+     */
     public void testGenerateLargeMatrix() {
         // 测试生成大矩阵
         Matrix matrix = new Matrix();
@@ -153,6 +180,9 @@ public class MatrixGeneratorTest {
 
     @Ignore
     @Test
+    /**
+     * testGenerateSparseMatrix方法。
+     */
     public void testGenerateSparseMatrix() {
         // 测试生成稀疏矩阵（大部分为零）
         Matrix matrix = new Matrix();

@@ -9,15 +9,24 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * FileUtilTest类。
+ */
 public class FileUtilTest {
 
     @Test
+    /**
+     * test1方法。
+     */
     public void test1() throws IOException {
         String a = FileUtil.readString(FileUtil.class.getResource("/music.json"), "utf-8");
         System.out.println(a);
     }
 
     @Test
+    /**
+     * test2方法。
+     */
     public void test2() throws IOException {
 
         String base = "Z:\\学习\\小说广播\\小说";

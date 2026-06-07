@@ -15,6 +15,9 @@ import java.util.function.Predicate;
 /**
  * BranchChain类。
  */
+/**
+ * BranchChain类。
+ */
 public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     private final Predicate<C> condition;
@@ -26,10 +29,19 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * BranchChain方法。
      *      * @param condition PredicateC类型参数
      */
+    /**
+     * BranchChain方法。
+     *      * @param condition PredicateC类型参数
+     */
     public BranchChain(Predicate<C> condition) {
         this(condition, "BranchChain-" + System.currentTimeMillis());
     }
 
+    /**
+     * BranchChain方法。
+     *      * @param condition PredicateC类型参数
+     * @param name String类型参数
+     */
     /**
      * BranchChain方法。
      *      * @param condition PredicateC类型参数
@@ -50,6 +62,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param chain ChainC类型参数
      * @return BranchChain<C>类型返回值
      */
+    /**
+     * whenTrue方法。
+     *      * @param chain ChainC类型参数
+     * @return BranchChain<C>类型返回值
+     */
     public BranchChain<C> whenTrue(Chain<C> chain) {
         this.trueChain = chain;
         return this;
@@ -57,6 +74,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * 设置条件为true时执行的处理器
+     */
+    /**
+     * whenTrue方法。
+     *      * @param processor ProcessorC类型参数
+     * @return BranchChain<C>类型返回值
      */
     /**
      * whenTrue方法。
@@ -76,6 +98,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param chain ChainC类型参数
      * @return BranchChain<C>类型返回值
      */
+    /**
+     * whenFalse方法。
+     *      * @param chain ChainC类型参数
+     * @return BranchChain<C>类型返回值
+     */
     public BranchChain<C> whenFalse(Chain<C> chain) {
         this.falseChain = chain;
         return this;
@@ -83,6 +110,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * 设置条件为false时执行的处理器
+     */
+    /**
+     * whenFalse方法。
+     *      * @param processor ProcessorC类型参数
+     * @return BranchChain<C>类型返回值
      */
     /**
      * whenFalse方法。
@@ -103,6 +135,12 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * @param falseBranch ChainC类型参数
      * @return BranchChain<C>类型返回值
      */
+    /**
+     * branch方法。
+     *      * @param trueBranch ChainC类型参数
+     * @param falseBranch ChainC类型参数
+     * @return BranchChain<C>类型返回值
+     */
     public BranchChain<C> branch(Chain<C> trueBranch, Chain<C> falseBranch) {
         this.trueChain = trueBranch;
         this.falseChain = falseBranch;
@@ -114,11 +152,19 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
     @Override
+    /**
+     * getProcessors方法。
+     * @return List<Processor<C>>类型返回值
+     */
     /**
      * getProcessors方法。
      * @return List<Processor<C>>类型返回值
@@ -141,6 +187,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param context C类型参数
      * @return ProcessorResult类型返回值
      */
+    /**
+     * process方法。
+     *      * @param context C类型参数
+     * @return ProcessorResult类型返回值
+     */
     public ProcessorResult process(C context) {
         if (condition.test(context)) {
             return trueChain.process(context);
@@ -155,12 +206,22 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * addProcessor方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addProcessor(Processor<C> processor) {
         trueChain.addProcessor(processor);
         return this;
     }
 
     @Override
+    /**
+     * addFirst方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     /**
      * addFirst方法。
      *      * @param processor ProcessorC类型参数
@@ -178,12 +239,23 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * addAt方法。
+     *      * @param index int类型参数
+     * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addAt(int index, Processor<C> processor) {
         trueChain.addAt(index, processor);
         return this;
     }
 
     @Override
+    /**
+     * remove方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     /**
      * remove方法。
      *      * @param processor ProcessorC类型参数
@@ -200,6 +272,10 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * clear方法。
      * @return Chain<C>类型返回值
      */
+    /**
+     * clear方法。
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> clear() {
         trueChain.clear();
         falseChain.clear();
@@ -212,6 +288,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param other ChainC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * prepend方法。
+     *      * @param other ChainC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> prepend(Chain<C> other) {
         trueChain.prepend(other);
         falseChain.prepend(other);
@@ -219,6 +300,11 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * append方法。
+     *      * @param other ChainC类型参数
+     * @return Chain<C>类型返回值
+     */
     /**
      * append方法。
      *      * @param other ChainC类型参数

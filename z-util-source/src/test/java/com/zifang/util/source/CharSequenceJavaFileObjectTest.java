@@ -12,9 +12,15 @@ import static org.junit.Assert.*;
 /**
  * CharSequenceJavaFileObject 测试
  */
+/**
+ * CharSequenceJavaFileObjectTest类。
+ */
 public class CharSequenceJavaFileObjectTest {
 
     @Test
+    /**
+     * testConstructorWithSource方法。
+     */
     public void testConstructorWithSource() {
         String sourceCode = "public class Test {}";
         CharSequenceJavaFileObject fileObject = new CharSequenceJavaFileObject("Test", sourceCode);
@@ -24,6 +30,9 @@ public class CharSequenceJavaFileObjectTest {
     }
 
     @Test
+    /**
+     * testConstructorWithKind方法。
+     */
     public void testConstructorWithKind() {
         CharSequenceJavaFileObject fileObject = new CharSequenceJavaFileObject("com.example.Test", JavaFileObject.Kind.CLASS);
 
@@ -32,6 +41,9 @@ public class CharSequenceJavaFileObjectTest {
     }
 
     @Test
+    /**
+     * testGetCharContent方法。
+     */
     public void testGetCharContent() {
         String sourceCode = "package com.example;\npublic class Hello {}\n";
         CharSequenceJavaFileObject fileObject = new CharSequenceJavaFileObject("Hello", sourceCode);
@@ -41,6 +53,9 @@ public class CharSequenceJavaFileObjectTest {
     }
 
     @Test
+    /**
+     * testOpenInputStream方法。
+     */
     public void testOpenInputStream() throws Exception {
         CharSequenceJavaFileObject fileObject = new CharSequenceJavaFileObject("com.example.Test", JavaFileObject.Kind.CLASS);
 
@@ -50,6 +65,9 @@ public class CharSequenceJavaFileObjectTest {
     }
 
     @Test
+    /**
+     * testOpenOutputStream方法。
+     */
     public void testOpenOutputStream() throws Exception {
         CharSequenceJavaFileObject fileObject = new CharSequenceJavaFileObject("com.example.Test", JavaFileObject.Kind.CLASS);
 
@@ -64,6 +82,9 @@ public class CharSequenceJavaFileObjectTest {
     }
 
     @Test
+    /**
+     * testGetByteCodeAfterCompile方法。
+     */
     public void testGetByteCodeAfterCompile() throws Exception {
         CharSequenceJavaFileObject fileObject = new CharSequenceJavaFileObject("Test", JavaFileObject.Kind.CLASS);
 
@@ -77,6 +98,9 @@ public class CharSequenceJavaFileObjectTest {
     }
 
     @Test
+    /**
+     * testGetName方法。
+     */
     public void testGetName() {
         CharSequenceJavaFileObject sourceFile = new CharSequenceJavaFileObject("com.example.Test", "source");
         assertTrue(sourceFile.getName().startsWith("com.example.Test"));

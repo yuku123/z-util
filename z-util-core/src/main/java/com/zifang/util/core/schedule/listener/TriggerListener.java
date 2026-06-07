@@ -16,6 +16,9 @@ import org.quartz.Trigger.CompletedExecutionInstruction;
 /**
  * TriggerListener接口。
  */
+/**
+ * TriggerListener接口。
+ */
 public interface TriggerListener {
 
     /**

@@ -14,6 +14,9 @@ import java.util.Map;
 /**
  * CommandLine类。
  */
+/**
+ * CommandLine类。
+ */
 public class CommandLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,8 +27,15 @@ public class CommandLine implements Serializable {
     /**
      * CommandLine方法。
      */
+    /**
+     * CommandLine方法。
+     */
     protected CommandLine() {}
 
+    /**
+     * builder方法。
+     * @return static Builder类型返回值
+     */
     /**
      * builder方法。
      * @return static Builder类型返回值
@@ -41,12 +51,20 @@ public class CommandLine implements Serializable {
      * get方法。
      * @return CommandLine类型返回值
      */
+    /**
+     * get方法。
+     * @return CommandLine类型返回值
+     */
         public CommandLine get() {
             return cmd;
         }
     }
 
     // package-private for parser access
+    /**
+     * addOption方法。
+     *      * @param option final类型参数
+     */
     /**
      * addOption方法。
      *      * @param option final类型参数
@@ -60,10 +78,19 @@ public class CommandLine implements Serializable {
      * addArg方法。
      *      * @param arg final类型参数
      */
+    /**
+     * addArg方法。
+     *      * @param arg final类型参数
+     */
     public void addArg(final String arg) {
         argList.add(arg);
     }
 
+    /**
+     * hasOption方法。
+     *      * @param opt final类型参数
+     * @return boolean类型返回值
+     */
     /**
      * hasOption方法。
      *      * @param opt final类型参数
@@ -79,6 +106,11 @@ public class CommandLine implements Serializable {
      *      * @param opt final类型参数
      * @return boolean类型返回值
      */
+    /**
+     * hasOption方法。
+     *      * @param opt final类型参数
+     * @return boolean类型返回值
+     */
     public boolean hasOption(final Option opt) {
         return options.containsKey(opt.getKey());
     }
@@ -88,10 +120,20 @@ public class CommandLine implements Serializable {
      *      * @param opt final类型参数
      * @return Option类型返回值
      */
+    /**
+     * getOptionObject方法。
+     *      * @param opt final类型参数
+     * @return Option类型返回值
+     */
     public Option getOptionObject(final String opt) {
         return options.get(opt);
     }
 
+    /**
+     * getOptionValue方法。
+     *      * @param opt final类型参数
+     * @return String类型返回值
+     */
     /**
      * getOptionValue方法。
      *      * @param opt final类型参数
@@ -108,11 +150,22 @@ public class CommandLine implements Serializable {
      * @param defaultValue final类型参数
      * @return String类型返回值
      */
+    /**
+     * getOptionValue方法。
+     *      * @param opt final类型参数
+     * @param defaultValue final类型参数
+     * @return String类型返回值
+     */
     public String getOptionValue(final String opt, final String defaultValue) {
         String value = getOptionValue(opt);
         return value != null ? value : defaultValue;
     }
 
+    /**
+     * getOptionValue方法。
+     *      * @param option final类型参数
+     * @return String类型返回值
+     */
     /**
      * getOptionValue方法。
      *      * @param option final类型参数
@@ -128,11 +181,22 @@ public class CommandLine implements Serializable {
      * @param defaultValue final类型参数
      * @return String类型返回值
      */
+    /**
+     * getOptionValue方法。
+     *      * @param option final类型参数
+     * @param defaultValue final类型参数
+     * @return String类型返回值
+     */
     public String getOptionValue(final Option option, final String defaultValue) {
         String value = getOptionValue(option);
         return value != null ? value : defaultValue;
     }
 
+    /**
+     * getOptionValues方法。
+     *      * @param opt final类型参数
+     * @return String[]类型返回值
+     */
     /**
      * getOptionValues方法。
      *      * @param opt final类型参数
@@ -151,10 +215,18 @@ public class CommandLine implements Serializable {
      * getArgList方法。
      * @return List<String>类型返回值
      */
+    /**
+     * getArgList方法。
+     * @return List<String>类型返回值
+     */
     public List<String> getArgList() {
         return argList;
     }
 
+    /**
+     * getArgs方法。
+     * @return String[]类型返回值
+     */
     /**
      * getArgs方法。
      * @return String[]类型返回值
@@ -167,6 +239,10 @@ public class CommandLine implements Serializable {
      * getOptions方法。
      * @return Collection<Option>类型返回值
      */
+    /**
+     * getOptions方法。
+     * @return Collection<Option>类型返回值
+     */
     public Collection<Option> getOptions() {
         return options.values();
     }
@@ -175,10 +251,18 @@ public class CommandLine implements Serializable {
      * hasOptions方法。
      * @return boolean类型返回值
      */
+    /**
+     * hasOptions方法。
+     * @return boolean类型返回值
+     */
     public boolean hasOptions() {
         return !options.isEmpty();
     }
 
+    /**
+     * hasArgs方法。
+     * @return boolean类型返回值
+     */
     /**
      * hasArgs方法。
      * @return boolean类型返回值

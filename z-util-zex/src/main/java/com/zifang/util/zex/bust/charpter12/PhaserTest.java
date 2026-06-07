@@ -11,12 +11,26 @@ package com.zifang.util.zex.bust.charpter12;
  */
 import java.util.concurrent.Phaser;
 
+/**
+ * PhaserTest类。
+ */
 public class PhaserTest {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         Phaser phaser = new Phaser(2) {
             @Override
+    /**
+     * onAdvance方法。
+     *      * @param phase int类型参数
+     * @param registeredParties int类型参数
+     * @return boolean类型返回值
+     */
             protected boolean onAdvance(int phase, int registeredParties) {
                 System.out.println("=======phase: " + phase + " finished=============");
                 return super.onAdvance(phase, registeredParties);

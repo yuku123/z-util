@@ -7,9 +7,15 @@ import java.lang.reflect.Type;
 
 import static org.junit.Assert.*;
 
+/**
+ * ClassParserTest类。
+ */
 public class ClassParserTest {
 
     @Test
+    /**
+     * test1方法。
+     */
     public void test1() {
         ClassParser a = new ClassParserFactory().getInstance(A.class);
 
@@ -28,12 +34,18 @@ public class ClassParserTest {
     }
 
     @Test
+    /**
+     * test2方法。
+     */
     public void test2() {
         ClassParser a = new ClassParserFactory().getInstance(A.class);
     }
 
     @Test
     @org.junit.Ignore("Lambda泛型擦除作业测试")
+    /**
+     * test3方法。
+     */
     public void test3() {
         ClassParser a = new ClassParserFactory().getInstance(A.class);
         ClassParser b = new ClassParserFactory().getInstance(B.class);
@@ -59,12 +71,18 @@ class A extends AbstractA implements IA1, IA2, IConverter<Integer, Long> {
     protected String a2;
     public String a3;
 
+    /**
+     * t1方法。
+     */
     public void t1() {
     }
 
     private void t2() {
     }
 
+    /**
+     * t3方法。
+     */
     protected void t3() {
     }
 
@@ -72,6 +90,12 @@ class A extends AbstractA implements IA1, IA2, IConverter<Integer, Long> {
     }
 
     @Override
+    /**
+     * to方法。
+     *      * @param integer int类型参数
+     * @param aLong long类型参数
+     * @return long类型返回值
+     */
     public Long to(Integer integer, Long aLong) {
         return null;
     }
@@ -94,6 +118,12 @@ class B {
 
 class BA extends A {
     @Override
+    /**
+     * to方法。
+     *      * @param integer int类型参数
+     * @param aLong long类型参数
+     * @return long类型返回值
+     */
     public Long to(Integer integer, Long aLong) {
         return null;
     }
@@ -101,6 +131,12 @@ class BA extends A {
 
 class C implements D {
     @Override
+    /**
+     * to方法。
+     *      * @param integer int类型参数
+     * @param aLong long类型参数
+     * @return long类型返回值
+     */
     public Long to(Integer integer, Long aLong) {
         return null;
     }

@@ -7,8 +7,15 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 
+/**
+ * Daytime类。
+ */
 public class Daytime {
 
+    /**
+     * getDateFromNetwork方法。
+     * @return static StringBuilder类型返回值
+     */
     public static StringBuilder getDateFromNetwork() throws IOException, ParseException {
         try (Socket socket = new Socket("time.nist.gov", 13)) {
             socket.setSoTimeout(15000);
@@ -22,6 +29,11 @@ public class Daytime {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws Exception {
         System.out.println(getDateFromNetwork().toString());
     }

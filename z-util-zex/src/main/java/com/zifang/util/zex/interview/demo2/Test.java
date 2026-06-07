@@ -11,6 +11,9 @@ import java.lang.reflect.Proxy;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Test类。
+ */
 public class Test {
 
 
@@ -21,6 +24,11 @@ public class Test {
         return o;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         IA ia = ProxyUtil.newProxyInstance((proxy, method, args1) -> {
             System.out.println(method.getName());

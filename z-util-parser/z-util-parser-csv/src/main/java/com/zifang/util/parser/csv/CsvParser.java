@@ -14,6 +14,9 @@ import java.util.List;
  * - Skip empty lines
  * - Trim fields
  */
+/**
+ * CsvParser类。
+ */
 public class CsvParser {
 
     private char delimiter;
@@ -30,26 +33,50 @@ public class CsvParser {
         private boolean skipEmptyLines = true;
         private boolean trimFields = false;
 
+    /**
+     * delimiter方法。
+     *      * @param delimiter char类型参数
+     * @return Builder类型返回值
+     */
         public Builder delimiter(char delimiter) {
             this.delimiter = delimiter;
             return this;
         }
 
+    /**
+     * firstLineAsHeader方法。
+     *      * @param firstLineAsHeader boolean类型参数
+     * @return Builder类型返回值
+     */
         public Builder firstLineAsHeader(boolean firstLineAsHeader) {
             this.firstLineAsHeader = firstLineAsHeader;
             return this;
         }
 
+    /**
+     * skipEmptyLines方法。
+     *      * @param skipEmptyLines boolean类型参数
+     * @return Builder类型返回值
+     */
         public Builder skipEmptyLines(boolean skipEmptyLines) {
             this.skipEmptyLines = skipEmptyLines;
             return this;
         }
 
+    /**
+     * trimFields方法。
+     *      * @param trimFields boolean类型参数
+     * @return Builder类型返回值
+     */
         public Builder trimFields(boolean trimFields) {
             this.trimFields = trimFields;
             return this;
         }
 
+    /**
+     * build方法。
+     * @return CsvParser类型返回值
+     */
         public CsvParser build() {
             return new CsvParser(this);
         }
@@ -62,12 +89,21 @@ public class CsvParser {
         this.trimFields = builder.trimFields;
     }
 
+    /**
+     * builder方法。
+     * @return static Builder类型返回值
+     */
     public static Builder builder() {
         return new Builder();
     }
 
     /**
      * Parse CSV content from a Reader
+     */
+    /**
+     * parse方法。
+     *      * @param reader Reader类型参数
+     * @return List<String[]>类型返回值
      */
     public List<String[]> parse(Reader reader) {
         List<String[]> result = new ArrayList<>();
@@ -133,12 +169,22 @@ public class CsvParser {
     /**
      * Parse CSV content from a String
      */
+    /**
+     * parse方法。
+     *      * @param content String类型参数
+     * @return List<String[]>类型返回值
+     */
     public List<String[]> parse(String content) {
         return parse(new StringReader(content));
     }
 
     /**
      * Parse CSV content and return as list of String arrays, with first line as headers
+     */
+    /**
+     * parseWithHeader方法。
+     *      * @param reader Reader类型参数
+     * @return ParseResult类型返回值
      */
     public ParseResult parseWithHeader(Reader reader) {
         List<String[]> allLines = parse(reader);
@@ -159,6 +205,11 @@ public class CsvParser {
 
     /**
      * Parse CSV content and return as list of String arrays, with first line as headers
+     */
+    /**
+     * parseWithHeader方法。
+     *      * @param content String类型参数
+     * @return ParseResult类型返回值
      */
     public ParseResult parseWithHeader(String content) {
         return parseWithHeader(new StringReader(content));
@@ -215,15 +266,28 @@ public class CsvParser {
         private final String[] headers;
         private final List<String[]> data;
 
+    /**
+     * ParseResult方法。
+     *      * @param headers String[]类型参数
+     * @param data ListString[]类型参数
+     */
         public ParseResult(String[] headers, List<String[]> data) {
             this.headers = headers;
             this.data = data;
         }
 
+    /**
+     * getHeaders方法。
+     * @return String[]类型返回值
+     */
         public String[] getHeaders() {
             return headers;
         }
 
+    /**
+     * getData方法。
+     * @return List<String[]>类型返回值
+     */
         public List<String[]> getData() {
             return data;
         }
@@ -231,6 +295,11 @@ public class CsvParser {
         /**
          * Get row as Map (header name -> value)
          */
+    /**
+     * getRowAsMap方法。
+     *      * @param index int类型参数
+     * @return String[]类型返回值
+     */
         public String[] getRowAsMap(int index) {
             if (index < 0 || index >= data.size()) {
                 throw new CsvException("Row index out of bounds: " + index);

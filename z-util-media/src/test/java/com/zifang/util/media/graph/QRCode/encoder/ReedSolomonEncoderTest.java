@@ -3,9 +3,15 @@ package com.zifang.util.media.graph.qrcode.encoder;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * ReedSolomonEncoderTest类。
+ */
 public class ReedSolomonEncoderTest {
 
     @Test
+    /**
+     * testEncodeSimpleData方法。
+     */
     public void testEncodeSimpleData() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
         byte[] data = new byte[]{0x12, 0x34, 0x56, 0x78};
@@ -15,6 +21,9 @@ public class ReedSolomonEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeProducesNonZeroECC方法。
+     */
     public void testEncodeProducesNonZeroECC() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
         byte[] data = new byte[]{0x00, 0x00, 0x00, 0x00};
@@ -32,6 +41,9 @@ public class ReedSolomonEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeDifferentDataLengths方法。
+     */
     public void testEncodeDifferentDataLengths() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
         // Test with different data lengths
@@ -52,6 +64,9 @@ public class ReedSolomonEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeNullDataThrows方法。
+     */
     public void testEncodeNullDataThrows() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
         try {
@@ -63,6 +78,9 @@ public class ReedSolomonEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeEmptyDataThrows方法。
+     */
     public void testEncodeEmptyDataThrows() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
         try {
@@ -74,6 +92,9 @@ public class ReedSolomonEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeNegativeECBytesThrows方法。
+     */
     public void testEncodeNegativeECBytesThrows() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
         try {
@@ -85,6 +106,9 @@ public class ReedSolomonEncoderTest {
     }
 
     @Test
+    /**
+     * testDecodeNoErrors方法。
+     */
     public void testDecodeNoErrors() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
         byte[] original = new byte[]{0x12, 0x34, 0x56, 0x78};
@@ -101,6 +125,9 @@ public class ReedSolomonEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeThenDecode方法。
+     */
     public void testEncodeThenDecode() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
         byte[] original = new byte[]{(byte)0xAB, (byte)0xCD, (byte)0xEF, (byte)0x01, (byte)0x23, (byte)0x45};

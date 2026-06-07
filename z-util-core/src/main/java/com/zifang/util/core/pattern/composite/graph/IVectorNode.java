@@ -10,6 +10,9 @@ import java.util.List;
 /**
  * IVectorNode接口。
  */
+/**
+ * IVectorNode接口。
+ */
 public interface IVectorNode extends INode {
 
     List<IVectorNode> getInputVectorNode();

@@ -30,6 +30,9 @@ import java.util.concurrent.*;
 /**
  * FixedMonitorableExecutor类。
  */
+/**
+ * FixedMonitorableExecutor类。
+ */
 public class FixedMonitorableExecutor extends ThreadPoolExecutor implements MonitorableExecutor {
 
     /**
@@ -54,6 +57,10 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
      * ThreadLocal<>方法。
      * @return final ThreadLocal<Long> workerThreadTimeRecorder = new类型返回值
      */
+    /**
+     * ThreadLocal<>方法。
+     * @return final ThreadLocal<Long> workerThreadTimeRecorder = new类型返回值
+     */
     protected final ThreadLocal<Long> workerThreadTimeRecorder = new ThreadLocal<>();
 
     /**
@@ -62,6 +69,12 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
      * @param threadPoolConfigUnit 组件配置。
      * @param workQueue            {@link ThreadPoolExecutor#ThreadPoolExecutor}
      * @param threadFactory        {@link ThreadPoolExecutor#ThreadPoolExecutor}
+     */
+    /**
+     * FixedMonitorableExecutor方法。
+     *      * @param threadPoolConfigUnit ThreadPoolConfigUnit类型参数
+     * @param workQueue BlockingQueueRunnable类型参数
+     * @param threadFactory ThreadFactory类型参数
      */
     /**
      * FixedMonitorableExecutor方法。
@@ -89,6 +102,10 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
      * execute方法。
      *      * @param command Runnable类型参数
      */
+    /**
+     * execute方法。
+     *      * @param command Runnable类型参数
+     */
     public void execute(Runnable command) {
         //任务提交数+1
         this.status.getSubmitCount().getAndIncrement();
@@ -96,6 +113,11 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
     }
 
     @Override
+    /**
+     * beforeExecute方法。
+     *      * @param t Thread类型参数
+     * @param r Runnable类型参数
+     */
     /**
      * beforeExecute方法。
      *      * @param t Thread类型参数
@@ -117,6 +139,11 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
      * @param t 产生的异常。
      */
     @Override
+    /**
+     * afterExecute方法。
+     *      * @param r Runnable类型参数
+     * @param t Throwable类型参数
+     */
     /**
      * afterExecute方法。
      *      * @param r Runnable类型参数
@@ -159,6 +186,10 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
      * 该方法会生成线程池中每个线程的状态、正在执行任务的状态以及线程池总体状态。
      *
      * @return 线程池的监控状态
+     */
+    /**
+     * status方法。
+     * @return Status类型返回值
      */
     /**
      * status方法。
@@ -288,6 +319,10 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
      * componentName方法。
      * @return String类型返回值
      */
+    /**
+     * componentName方法。
+     * @return String类型返回值
+     */
     public String componentName() {
         return this.threadPoolConfigUnit.getPoolName();
     }
@@ -298,6 +333,9 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
      * 当线程池状态异常时调用此方法，通知告警服务进行告警。
      */
     @Override
+    /**
+     * alarm方法。
+     */
     /**
      * alarm方法。
      */

@@ -8,6 +8,9 @@ package com.zifang.util.zex.disrupt;
  * @author zifang
  * @version 1.0
  */
+/**
+ * LongEvent类。
+ */
 public class LongEvent {
     private long value;
 
@@ -15,6 +18,10 @@ public class LongEvent {
      * 设置事件的值。
      *
      * @param value 事件值
+     */
+    /**
+     * set方法。
+     *      * @param value long类型参数
      */
     public void set(long value) {
         this.value = value;

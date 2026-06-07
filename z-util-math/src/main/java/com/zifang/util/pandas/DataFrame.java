@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 /**
  * DataFrame类。
  */
+/**
+ * DataFrame类。
+ */
 public class DataFrame {
 
     private Map<String, Series> columns;
@@ -21,6 +24,9 @@ public class DataFrame {
 
     // ==================== 构造函数 ====================
 
+    /**
+     * DataFrame方法。
+     */
     /**
      * DataFrame方法。
      */
@@ -34,10 +40,19 @@ public class DataFrame {
      * DataFrame方法。
      *      * @param data MapString,类型参数
      */
+    /**
+     * DataFrame方法。
+     *      * @param data MapString,类型参数
+     */
     public DataFrame(Map<String, double[]> data) {
         this(data, null);
     }
 
+    /**
+     * DataFrame方法。
+     *      * @param data MapString,类型参数
+     * @param index String[]类型参数
+     */
     /**
      * DataFrame方法。
      *      * @param data MapString,类型参数
@@ -64,6 +79,10 @@ public class DataFrame {
         }
     }
 
+    /**
+     * DataFrame方法。
+     *      * @param records ListMapString,类型参数
+     */
     /**
      * DataFrame方法。
      *      * @param records ListMapString,类型参数
@@ -106,6 +125,11 @@ public class DataFrame {
      *      * @param data MapString,类型参数
      * @return static DataFrame类型返回值
      */
+    /**
+     * fromMap方法。
+     *      * @param data MapString,类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame fromMap(Map<String, double[]> data) {
         return new DataFrame(data);
     }
@@ -115,10 +139,20 @@ public class DataFrame {
      *      * @param records ListMapString,类型参数
      * @return static DataFrame类型返回值
      */
+    /**
+     * fromRecords方法。
+     *      * @param records ListMapString,类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame fromRecords(List<Map<String, Object>> records) {
         return new DataFrame(records);
     }
 
+    /**
+     * fromCSV方法。
+     *      * @param csvContent String类型参数
+     * @return static DataFrame类型返回值
+     */
     /**
      * fromCSV方法。
      *      * @param csvContent String类型参数
@@ -155,10 +189,20 @@ public class DataFrame {
      *      * @param column String类型参数
      * @return Series类型返回值
      */
+    /**
+     * get方法。
+     *      * @param column String类型参数
+     * @return Series类型返回值
+     */
     public Series get(String column) {
         return columns.get(column);
     }
 
+    /**
+     * get方法。
+     *      * @param columns String...类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * get方法。
      *      * @param columns String...类型参数
@@ -181,6 +225,12 @@ public class DataFrame {
      * @param data double[]类型参数
      * @return DataFrame类型返回值
      */
+    /**
+     * addColumn方法。
+     *      * @param name String类型参数
+     * @param data double[]类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame addColumn(String name, double[] data) {
         Series series = new Series(data, this.index, name, null);
         this.columns.put(name, series);
@@ -188,6 +238,12 @@ public class DataFrame {
         return this;
     }
 
+    /**
+     * addColumn方法。
+     *      * @param name String类型参数
+     * @param series Series类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * addColumn方法。
      *      * @param name String类型参数
@@ -207,12 +263,22 @@ public class DataFrame {
      *      * @param name String类型参数
      * @return DataFrame类型返回值
      */
+    /**
+     * dropColumn方法。
+     *      * @param name String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame dropColumn(String name) {
         this.columns.remove(name);
         this.columnNames.remove(name);
         return this;
     }
 
+    /**
+     * rename方法。
+     *      * @param mapping MapString,类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * rename方法。
      *      * @param mapping MapString,类型参数
@@ -242,6 +308,10 @@ public class DataFrame {
      * nRows方法。
      * @return int类型返回值
      */
+    /**
+     * nRows方法。
+     * @return int类型返回值
+     */
     public int nRows() {
         return this.index.size();
     }
@@ -250,10 +320,19 @@ public class DataFrame {
      * nCols方法。
      * @return int类型返回值
      */
+    /**
+     * nCols方法。
+     * @return int类型返回值
+     */
     public int nCols() {
         return this.columnNames.size();
     }
 
+    /**
+     * head方法。
+     *      * @param n int类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * head方法。
      *      * @param n int类型参数
@@ -268,10 +347,19 @@ public class DataFrame {
      * head方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * head方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame head() {
         return head(5);
     }
 
+    /**
+     * tail方法。
+     *      * @param n int类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * tail方法。
      *      * @param n int类型参数
@@ -286,10 +374,20 @@ public class DataFrame {
      * tail方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * tail方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame tail() {
         return tail(5);
     }
 
+    /**
+     * slice方法。
+     *      * @param start int类型参数
+     * @param end int类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * slice方法。
      *      * @param start int类型参数
@@ -316,10 +414,19 @@ public class DataFrame {
      * index方法。
      * @return Index类型返回值
      */
+    /**
+     * index方法。
+     * @return Index类型返回值
+     */
     public Index index() {
         return this.index;
     }
 
+    /**
+     * setIndex方法。
+     *      * @param newIndex Index类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * setIndex方法。
      *      * @param newIndex Index类型参数
@@ -340,12 +447,22 @@ public class DataFrame {
      * columns方法。
      * @return List<String>类型返回值
      */
+    /**
+     * columns方法。
+     * @return List<String>类型返回值
+     */
     public List<String> columns() {
         return new ArrayList<>(this.columnNames);
     }
 
     // ==================== 过滤和选择 ====================
 
+    /**
+     * filter方法。
+     *      * @param condition FunctionSeries,类型参数
+     * @param column String类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * filter方法。
      *      * @param condition FunctionSeries,类型参数
@@ -377,6 +494,11 @@ public class DataFrame {
      *      * @param expression String类型参数
      * @return DataFrame类型返回值
      */
+    /**
+     * query方法。
+     *      * @param expression String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame query(String expression) {
         // 简化实现 - 实际应该解析表达式
         return this;
@@ -384,6 +506,12 @@ public class DataFrame {
 
     // ==================== 排序 ====================
 
+    /**
+     * sort_values方法。
+     *      * @param column String类型参数
+     * @param ascending boolean类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * sort_values方法。
      *      * @param column String类型参数
@@ -431,10 +559,20 @@ public class DataFrame {
      *      * @param column String类型参数
      * @return DataFrame类型返回值
      */
+    /**
+     * sort_values方法。
+     *      * @param column String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame sort_values(String column) {
         return sort_values(column, true);
     }
 
+    /**
+     * sort_index方法。
+     *      * @param ascending boolean类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * sort_index方法。
      *      * @param ascending boolean类型参数
@@ -475,12 +613,20 @@ public class DataFrame {
      * sort_index方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * sort_index方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame sort_index() {
         return sort_index(true);
     }
 
     // ==================== 统计方法 ====================
 
+    /**
+     * sum方法。
+     * @return Series类型返回值
+     */
     /**
      * sum方法。
      * @return Series类型返回值
@@ -498,6 +644,10 @@ public class DataFrame {
      * mean方法。
      * @return Series类型返回值
      */
+    /**
+     * mean方法。
+     * @return Series类型返回值
+     */
     public Series mean() {
         double[] means = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -507,6 +657,10 @@ public class DataFrame {
         return new Series(means, Index.of(this.columnNames.toArray(new String[0])), "mean", null);
     }
 
+    /**
+     * std方法。
+     * @return Series类型返回值
+     */
     /**
      * std方法。
      * @return Series类型返回值
@@ -524,6 +678,10 @@ public class DataFrame {
      * var方法。
      * @return Series类型返回值
      */
+    /**
+     * var方法。
+     * @return Series类型返回值
+     */
     public Series var() {
         double[] vars = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -533,6 +691,10 @@ public class DataFrame {
         return new Series(vars, Index.of(this.columnNames.toArray(new String[0])), "var", null);
     }
 
+    /**
+     * min方法。
+     * @return Series类型返回值
+     */
     /**
      * min方法。
      * @return Series类型返回值
@@ -550,6 +712,10 @@ public class DataFrame {
      * max方法。
      * @return Series类型返回值
      */
+    /**
+     * max方法。
+     * @return Series类型返回值
+     */
     public Series max() {
         double[] maxs = new double[this.columnNames.size()];
         for (int i = 0; i < this.columnNames.size(); i++) {
@@ -559,6 +725,10 @@ public class DataFrame {
         return new Series(maxs, Index.of(this.columnNames.toArray(new String[0])), "max", null);
     }
 
+    /**
+     * describe方法。
+     * @return DataFrame类型返回值
+     */
     /**
      * describe方法。
      * @return DataFrame类型返回值
@@ -591,6 +761,11 @@ public class DataFrame {
      *      * @param value double类型参数
      * @return DataFrame类型返回值
      */
+    /**
+     * fillna方法。
+     *      * @param value double类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame fillna(double value) {
         DataFrame result = new DataFrame();
         result.index = this.index;
@@ -604,6 +779,10 @@ public class DataFrame {
         return result;
     }
 
+    /**
+     * dropna方法。
+     * @return DataFrame类型返回值
+     */
     /**
      * dropna方法。
      * @return DataFrame类型返回值
@@ -647,6 +826,10 @@ public class DataFrame {
      * interpolate方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * interpolate方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame interpolate() {
         return interpolate("linear");
     }
@@ -655,6 +838,11 @@ public class DataFrame {
      * 使用指定方法进行插值
      * @param method 插值方法："linear", "forward", "backward"
      * @return 插值后的 DataFrame
+     */
+    /**
+     * interpolate方法。
+     *      * @param method String类型参数
+     * @return DataFrame类型返回值
      */
     /**
      * interpolate方法。
@@ -695,6 +883,10 @@ public class DataFrame {
      * dropDuplicates方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * dropDuplicates方法。
+     * @return DataFrame类型返回值
+     */
     public DataFrame dropDuplicates() {
         // 简化实现：基于所有列去重
         Set<List<Double>> seen = new LinkedHashSet<>();
@@ -720,6 +912,11 @@ public class DataFrame {
         return this.slice(start, end);
     }
 
+    /**
+     * dropDuplicates方法。
+     *      * @param columns String...类型参数
+     * @return DataFrame类型返回值
+     */
     /**
      * dropDuplicates方法。
      *      * @param columns String...类型参数
@@ -757,10 +954,18 @@ public class DataFrame {
      *      * @param column String类型参数
      * @return GroupBy类型返回值
      */
+    /**
+     * groupby方法。
+     *      * @param column String类型参数
+     * @return GroupBy类型返回值
+     */
     public GroupBy groupby(String column) {
         return new GroupBy(this, column);
     }
 
+/**
+ * GroupBy类。
+ */
 /**
  * GroupBy类。
  */
@@ -769,6 +974,11 @@ public class DataFrame {
         private String column;
         private Map<Double, List<Integer>> groups;
 
+    /**
+     * GroupBy方法。
+     *      * @param df DataFrame类型参数
+     * @param column String类型参数
+     */
     /**
      * GroupBy方法。
      *      * @param df DataFrame类型参数
@@ -790,10 +1000,18 @@ public class DataFrame {
      * sum方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * sum方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame sum() {
             return aggregate(Series::sum);
         }
 
+    /**
+     * mean方法。
+     * @return DataFrame类型返回值
+     */
     /**
      * mean方法。
      * @return DataFrame类型返回值
@@ -806,10 +1024,18 @@ public class DataFrame {
      * count方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * count方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame count() {
             return aggregate(series -> Double.valueOf(series.count()));
         }
 
+    /**
+     * min方法。
+     * @return DataFrame类型返回值
+     */
     /**
      * min方法。
      * @return DataFrame类型返回值
@@ -822,6 +1048,10 @@ public class DataFrame {
      * max方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * max方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame max() {
             return aggregate(Series::max);
         }
@@ -830,10 +1060,18 @@ public class DataFrame {
      * std方法。
      * @return DataFrame类型返回值
      */
+    /**
+     * std方法。
+     * @return DataFrame类型返回值
+     */
         public DataFrame std() {
             return aggregate(Series::std);
         }
 
+    /**
+     * var方法。
+     * @return DataFrame类型返回值
+     */
     /**
      * var方法。
      * @return DataFrame类型返回值
@@ -883,11 +1121,26 @@ public class DataFrame {
      * @param how String类型参数
      * @return DataFrame类型返回值
      */
+    /**
+     * join方法。
+     *      * @param other DataFrame类型参数
+     * @param how String类型参数
+     * @return DataFrame类型返回值
+     */
     public DataFrame join(DataFrame other, String how) {
         // 简化实现：基于索引连接
         return merge(this, other, this.index.toArray()[0], other.index.toArray()[0], how);
     }
 
+    /**
+     * merge方法。
+     *      * @param left DataFrame类型参数
+     * @param right DataFrame类型参数
+     * @param leftOn String类型参数
+     * @param rightOn String类型参数
+     * @param how String类型参数
+     * @return static DataFrame类型返回值
+     */
     /**
      * merge方法。
      *      * @param left DataFrame类型参数
@@ -961,6 +1214,10 @@ public class DataFrame {
      * toArray方法。
      * @return double[][]类型返回值
      */
+    /**
+     * toArray方法。
+     * @return double[][]类型返回值
+     */
     public double[][] toArray() {
         double[][] result = new double[this.nRows()][this.nCols()];
         for (int i = 0; i < this.nRows(); i++) {
@@ -976,6 +1233,10 @@ public class DataFrame {
      * toMap方法。
      * @return Map<String, double[]>类型返回值
      */
+    /**
+     * toMap方法。
+     * @return Map<String, double[]>类型返回值
+     */
     public Map<String, double[]> toMap() {
         Map<String, double[]> result = new LinkedHashMap<>();
         for (String col : this.columnNames) {
@@ -984,6 +1245,10 @@ public class DataFrame {
         return result;
     }
 
+    /**
+     * toCSV方法。
+     * @return String类型返回值
+     */
     /**
      * toCSV方法。
      * @return String类型返回值
@@ -1006,6 +1271,10 @@ public class DataFrame {
         return sb.toString();
     }
 
+    /**
+     * toJSON方法。
+     * @return String类型返回值
+     */
     /**
      * toJSON方法。
      * @return String类型返回值
@@ -1034,6 +1303,10 @@ public class DataFrame {
     // ==================== 描述和打印 ====================
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -1067,10 +1340,16 @@ public class DataFrame {
     /**
      * print方法。
      */
+    /**
+     * print方法。
+     */
     public void print() {
         System.out.println(this.toString());
     }
 
+    /**
+     * info方法。
+     */
     /**
      * info方法。
      */

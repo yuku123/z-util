@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * PCATest类。
+ */
 public class PCATest {
 
     private Random random = new Random(42);
@@ -24,6 +27,9 @@ public class PCATest {
     }
 
     @Test
+    /**
+     * testPCAVariance方法。
+     */
     public void testPCAVariance() {
         int nSamples = 100;
         int nFeatures = 5;
@@ -58,6 +64,9 @@ public class PCATest {
     }
 
     @Test
+    /**
+     * testPCAProjection方法。
+     */
     public void testPCAProjection() {
         int nSamples = 50;
         int nFeatures = 4;
@@ -80,6 +89,9 @@ public class PCATest {
     }
 
     @Test
+    /**
+     * testPCAReconstruction方法。
+     */
     public void testPCAReconstruction() {
         int nSamples = 30;
         int nFeatures = 3;

@@ -21,12 +21,23 @@ public final class PropertiesUtil {
      *      * @param key String类型参数
      * @return static String类型返回值
      */
+    /**
+     * key方法。
+     *      * @param key String类型参数
+     * @return static String类型返回值
+     */
     public static String key(String key) {
         return System.getProperty(key);
     }
 
     /**
      * 根据Key读取Value
+     */
+    /**
+     * getValueByKey方法。
+     *      * @param filePath String类型参数
+     * @param key String类型参数
+     * @return static String类型返回值
      */
     /**
      * getValueByKey方法。
@@ -65,6 +76,11 @@ public final class PropertiesUtil {
      *      * @param in InputStream类型参数
      * @return static Map<String, String>类型返回值
      */
+    /**
+     * properties方法。
+     *      * @param in InputStream类型参数
+     * @return static Map<String, String>类型返回值
+     */
     public static Map<String, String> properties(InputStream in) {
         Map<String, String> map = new HashMap<>();
         Properties pps = new Properties();
@@ -90,6 +106,11 @@ public final class PropertiesUtil {
      *      * @param filePath String类型参数
      * @return static Map<String, String>类型返回值
      */
+    /**
+     * GetAllProperties方法。
+     *      * @param filePath String类型参数
+     * @return static Map<String, String>类型返回值
+     */
     public static Map<String, String> GetAllProperties(String filePath) throws IOException {
         Map<String, String> map = new HashMap<>();
         Properties pps = new Properties();
@@ -103,6 +124,13 @@ public final class PropertiesUtil {
 
     /**
      * 写入Properties信息
+     */
+    /**
+     * WriteProperties方法。
+     *      * @param filePath String类型参数
+     * @param pKey String类型参数
+     * @param pValue String类型参数
+     * @return static void类型返回值
      */
     /**
      * WriteProperties方法。

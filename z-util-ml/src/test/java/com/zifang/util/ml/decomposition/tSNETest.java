@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * tSNETest类。
+ */
 public class tSNETest {
 
     private Random random = new Random(42);
@@ -24,6 +27,9 @@ public class tSNETest {
     }
 
     @Test
+    /**
+     * testTSNEOutputShape方法。
+     */
     public void testTSNEOutputShape() {
         int nSamples = 30;
         int nFeatures = 4;
@@ -46,6 +52,9 @@ public class tSNETest {
     }
 
     @Test
+    /**
+     * testTSNEConvergence方法。
+     */
     public void testTSNEConvergence() {
         int nSamples = 25;
         int nFeatures = 3;
@@ -70,6 +79,9 @@ public class tSNETest {
     }
 
     @Test
+    /**
+     * testTSNEPerplexity方法。
+     */
     public void testTSNEPerplexity() {
         int nSamples = 40;
         int nFeatures = 5;

@@ -12,11 +12,19 @@ import java.security.*;
 import java.security.cert.CertificateException;
 import java.util.Arrays;
 
+/**
+ * SecureOrderTaker类。
+ */
 public class SecureOrderTaker {
 
     public final static int PORT = 7000;
     public final static String algorithm = "SSL";
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try {
             SSLContext context = SSLContext.getInstance(algorithm);

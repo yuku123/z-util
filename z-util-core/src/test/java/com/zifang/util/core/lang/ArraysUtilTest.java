@@ -4,23 +4,35 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * ArraysUtilTest类。
+ */
 public class ArraysUtilTest {
 
     // ==================== array/asArray ====================
 
     @Test
+    /**
+     * testArray方法。
+     */
     public void testArray() {
         Integer[] result = ArraysUtil.array(1, 2, 3);
         assertArrayEquals(new Integer[]{1, 2, 3}, result);
     }
 
     @Test
+    /**
+     * testArrayEmpty方法。
+     */
     public void testArrayEmpty() {
         Integer[] result = ArraysUtil.array();
         assertArrayEquals(new Integer[]{}, result);
     }
 
     @Test
+    /**
+     * testAsArray方法。
+     */
     public void testAsArray() {
         String[] result = ArraysUtil.asArray("a", "b", "c");
         assertArrayEquals(new String[]{"a", "b", "c"}, result);
@@ -29,6 +41,9 @@ public class ArraysUtilTest {
     // ==================== join ====================
 
     @Test
+    /**
+     * testJoinTwoArrays方法。
+     */
     public void testJoinTwoArrays() {
         Integer[] arr1 = {1, 2};
         Integer[] arr2 = {3, 4};
@@ -37,6 +52,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testJoinThreeArrays方法。
+     */
     public void testJoinThreeArrays() {
         Integer[] arr1 = {1};
         Integer[] arr2 = {2};
@@ -46,6 +64,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testJoinWithClass方法。
+     */
     public void testJoinWithClass() {
         Integer[] arr1 = {1, 2};
         Integer[] arr2 = {3, 4};
@@ -55,6 +76,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testJoinSingleArray方法。
+     */
     public void testJoinSingleArray() {
         Integer[] arr1 = {1, 2, 3};
         Integer[] result = ArraysUtil.join(arr1);
@@ -64,6 +88,9 @@ public class ArraysUtilTest {
     // ==================== resize ====================
 
     @Test
+    /**
+     * testResizeExpand方法。
+     */
     public void testResizeExpand() {
         Integer[] original = {1, 2};
         Integer[] result = ArraysUtil.resize(original, 5);
@@ -76,6 +103,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testResizeShrink方法。
+     */
     public void testResizeShrink() {
         Integer[] original = {1, 2, 3, 4};
         Integer[] result = ArraysUtil.resize(original, 2);
@@ -85,6 +115,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testResizeSameSize方法。
+     */
     public void testResizeSameSize() {
         Integer[] original = {1, 2};
         Integer[] result = ArraysUtil.resize(original, 2);
@@ -96,6 +129,9 @@ public class ArraysUtilTest {
     // ==================== append ====================
 
     @Test
+    /**
+     * testAppendElement方法。
+     */
     public void testAppendElement() {
         Integer[] original = {1, 2};
         Integer[] result = ArraysUtil.append(original, 3);
@@ -109,6 +145,9 @@ public class ArraysUtilTest {
     // which returns a fixed-size list and then calls addAll(), causing UnsupportedOperationException
     // This test documents the buggy behavior
     @Test(expected = UnsupportedOperationException.class)
+    /**
+     * testAppendArray方法。
+     */
     public void testAppendArray() {
         Integer[] original = {1, 2};
         Integer[] toAppend = {3, 4};
@@ -119,6 +158,9 @@ public class ArraysUtilTest {
     // fixed-size list, then calls addAll() which throws UnsupportedOperationException.
     // Additionally, list.toArray() returns Object[] causing ClassCastException on cast.
     @Test
+    /**
+     * testAppendEmptyArray方法。
+     */
     public void testAppendEmptyArray() {
         Integer[] original = {1, 2};
         Integer[] toAppend = {};
@@ -136,6 +178,9 @@ public class ArraysUtilTest {
     // ==================== remove ====================
 
     @Test
+    /**
+     * testRemoveMiddle方法。
+     */
     public void testRemoveMiddle() {
         Integer[] original = {1, 2, 3, 4, 5};
         Integer[] result = ArraysUtil.remove(original, 1, 2);
@@ -146,6 +191,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testRemoveFromStart方法。
+     */
     public void testRemoveFromStart() {
         Integer[] original = {1, 2, 3};
         Integer[] result = ArraysUtil.remove(original, 0, 1);
@@ -155,6 +203,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testRemoveFromEnd方法。
+     */
     public void testRemoveFromEnd() {
         Integer[] original = {1, 2, 3};
         Integer[] result = ArraysUtil.remove(original, 2, 1);
@@ -164,6 +215,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testRemoveAll方法。
+     */
     public void testRemoveAll() {
         Integer[] original = {1, 2, 3};
         Integer[] result = ArraysUtil.remove(original, 0, 3);
@@ -173,6 +227,9 @@ public class ArraysUtilTest {
     // ==================== subarray ====================
 
     @Test
+    /**
+     * testSubarray方法。
+     */
     public void testSubarray() {
         Integer[] original = {1, 2, 3, 4, 5};
         Integer[] result = ArraysUtil.subarray(original, 1, 3);
@@ -183,6 +240,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testSubarrayFromStart方法。
+     */
     public void testSubarrayFromStart() {
         Integer[] original = {1, 2, 3};
         Integer[] result = ArraysUtil.subarray(original, 0, 2);
@@ -192,6 +252,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testSubarrayToEnd方法。
+     */
     public void testSubarrayToEnd() {
         Integer[] original = {1, 2, 3};
         Integer[] result = ArraysUtil.subarray(original, 1, 2);
@@ -203,6 +266,9 @@ public class ArraysUtilTest {
     // ==================== insert ====================
 
     @Test
+    /**
+     * testInsertElement方法。
+     */
     public void testInsertElement() {
         Integer[] original = {1, 2, 3};
         Integer[] result = ArraysUtil.insert(original, 9, 1);
@@ -214,6 +280,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testInsertArray方法。
+     */
     public void testInsertArray() {
         Integer[] dest = {1, 4};
         Integer[] src = {2, 3};
@@ -226,6 +295,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testInsertAtBeginning方法。
+     */
     public void testInsertAtBeginning() {
         Integer[] original = {3, 4};
         Integer[] result = ArraysUtil.insert(original, 1, 0);
@@ -236,6 +308,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testInsertAtEnd方法。
+     */
     public void testInsertAtEnd() {
         Integer[] original = {1, 2};
         Integer[] result = ArraysUtil.insert(original, 3, 2);
@@ -248,6 +323,9 @@ public class ArraysUtilTest {
     // Note: insertAt has a bug - it creates array of size dest.length + src.length - 1
     // instead of dest.length + src.length, so it effectively replaces instead of inserts
     @Test
+    /**
+     * testInsertAtArray方法。
+     */
     public void testInsertAtArray() {
         Integer[] dest = {1, 5};
         Integer[] src = {2, 3, 4};
@@ -262,6 +340,9 @@ public class ArraysUtilTest {
     // ==================== values (Object[] to primitive[]) ====================
 
     @Test
+    /**
+     * testValuesByte方法。
+     */
     public void testValuesByte() {
         Byte[] objectArray = {1, 2, 3};
         byte[] result = ArraysUtil.values(objectArray);
@@ -269,6 +350,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesByteWithNull方法。
+     */
     public void testValuesByteWithNull() {
         Byte[] objectArray = {1, null, 3};
         byte[] result = ArraysUtil.values(objectArray);
@@ -278,6 +362,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesCharacter方法。
+     */
     public void testValuesCharacter() {
         Character[] objectArray = {'a', 'b', 'c'};
         char[] result = ArraysUtil.values(objectArray);
@@ -285,6 +372,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesShort方法。
+     */
     public void testValuesShort() {
         Short[] objectArray = {1, 2, 3};
         short[] result = ArraysUtil.values(objectArray);
@@ -292,6 +382,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesInteger方法。
+     */
     public void testValuesInteger() {
         Integer[] objectArray = {1, 2, 3};
         int[] result = ArraysUtil.values(objectArray);
@@ -299,6 +392,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesLong方法。
+     */
     public void testValuesLong() {
         Long[] objectArray = {1L, 2L, 3L};
         long[] result = ArraysUtil.values(objectArray);
@@ -306,6 +402,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesFloat方法。
+     */
     public void testValuesFloat() {
         Float[] objectArray = {1.1f, 2.2f, 3.3f};
         float[] result = ArraysUtil.values(objectArray);
@@ -316,6 +415,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesDouble方法。
+     */
     public void testValuesDouble() {
         Double[] objectArray = {1.1, 2.2, 3.3};
         double[] result = ArraysUtil.values(objectArray);
@@ -326,6 +428,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesBoolean方法。
+     */
     public void testValuesBoolean() {
         Boolean[] objectArray = {true, false, true};
         boolean[] result = ArraysUtil.values(objectArray);
@@ -335,6 +440,9 @@ public class ArraysUtilTest {
     // ==================== valuesOf (primitive[] to Object[]) ====================
 
     @Test
+    /**
+     * testValuesOfByte方法。
+     */
     public void testValuesOfByte() {
         byte[] primitiveArray = {1, 2, 3};
         Byte[] result = ArraysUtil.valuesOf(primitiveArray);
@@ -342,6 +450,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesOfChar方法。
+     */
     public void testValuesOfChar() {
         char[] primitiveArray = {'a', 'b', 'c'};
         Character[] result = ArraysUtil.valuesOf(primitiveArray);
@@ -349,6 +460,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesOfShort方法。
+     */
     public void testValuesOfShort() {
         short[] primitiveArray = {1, 2, 3};
         Short[] result = ArraysUtil.valuesOf(primitiveArray);
@@ -356,6 +470,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesOfInt方法。
+     */
     public void testValuesOfInt() {
         int[] primitiveArray = {1, 2, 3};
         Integer[] result = ArraysUtil.valuesOf(primitiveArray);
@@ -363,6 +480,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesOfLong方法。
+     */
     public void testValuesOfLong() {
         long[] primitiveArray = {1, 2, 3};
         Long[] result = ArraysUtil.valuesOf(primitiveArray);
@@ -370,6 +490,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesOfFloat方法。
+     */
     public void testValuesOfFloat() {
         float[] primitiveArray = {1.1f, 2.2f};
         Float[] result = ArraysUtil.valuesOf(primitiveArray);
@@ -379,6 +502,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesOfDouble方法。
+     */
     public void testValuesOfDouble() {
         double[] primitiveArray = {1.1, 2.2};
         Double[] result = ArraysUtil.valuesOf(primitiveArray);
@@ -388,6 +514,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testValuesOfBoolean方法。
+     */
     public void testValuesOfBoolean() {
         boolean[] primitiveArray = {true, false, true};
         Boolean[] result = ArraysUtil.valuesOf(primitiveArray);
@@ -397,6 +526,9 @@ public class ArraysUtilTest {
     // ==================== indexOf / contains (primitive arrays) ====================
 
     @Test
+    /**
+     * testIndexOfByte方法。
+     */
     public void testIndexOfByte() {
         byte[] array = {1, 2, 3, 4, 3};
         assertEquals(0, ArraysUtil.indexOf(array, (byte) 1));
@@ -405,6 +537,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfByteWithStartIndex方法。
+     */
     public void testIndexOfByteWithStartIndex() {
         byte[] array = {1, 2, 3, 2, 3};
         assertEquals(1, ArraysUtil.indexOf(array, (byte) 2, 1));
@@ -413,6 +548,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfByteWithStartAndEndIndex方法。
+     */
     public void testIndexOfByteWithStartAndEndIndex() {
         byte[] array = {1, 2, 3, 2, 3};
         assertEquals(1, ArraysUtil.indexOf(array, (byte) 2, 0, 4));
@@ -421,6 +559,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsByte方法。
+     */
     public void testContainsByte() {
         byte[] array = {1, 2, 3};
         assertTrue(ArraysUtil.contains(array, (byte) 2));
@@ -428,6 +569,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfChar方法。
+     */
     public void testIndexOfChar() {
         char[] array = {'a', 'b', 'c'};
         assertEquals(0, ArraysUtil.indexOf(array, 'a'));
@@ -437,6 +581,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsChar方法。
+     */
     public void testContainsChar() {
         char[] array = {'a', 'b', 'c'};
         assertTrue(ArraysUtil.contains(array, 'b'));
@@ -444,6 +591,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfShort方法。
+     */
     public void testIndexOfShort() {
         short[] array = {1, 2, 3};
         assertEquals(0, ArraysUtil.indexOf(array, (short) 1));
@@ -451,6 +601,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsShort方法。
+     */
     public void testContainsShort() {
         short[] array = {1, 2, 3};
         assertTrue(ArraysUtil.contains(array, (short) 2));
@@ -458,6 +611,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfInt方法。
+     */
     public void testIndexOfInt() {
         int[] array = {1, 2, 3};
         assertEquals(0, ArraysUtil.indexOf(array, 1));
@@ -465,6 +621,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsInt方法。
+     */
     public void testContainsInt() {
         int[] array = {1, 2, 3};
         assertTrue(ArraysUtil.contains(array, 2));
@@ -472,6 +631,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfLong方法。
+     */
     public void testIndexOfLong() {
         long[] array = {1, 2, 3};
         assertEquals(0, ArraysUtil.indexOf(array, 1L));
@@ -479,6 +641,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsLong方法。
+     */
     public void testContainsLong() {
         long[] array = {1, 2, 3};
         assertTrue(ArraysUtil.contains(array, 2L));
@@ -486,6 +651,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfBoolean方法。
+     */
     public void testIndexOfBoolean() {
         boolean[] array = {true, false, true};
         assertEquals(0, ArraysUtil.indexOf(array, true));
@@ -493,6 +661,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsBoolean方法。
+     */
     public void testContainsBoolean() {
         boolean[] array = {true, false};
         assertTrue(ArraysUtil.contains(array, true));
@@ -500,6 +671,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfFloat方法。
+     */
     public void testIndexOfFloat() {
         float[] array = {1.1f, 2.2f, 3.3f};
         assertEquals(0, ArraysUtil.indexOf(array, 1.1f));
@@ -507,6 +681,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsFloat方法。
+     */
     public void testContainsFloat() {
         float[] array = {1.1f, 2.2f};
         assertTrue(ArraysUtil.contains(array, 2.2f));
@@ -514,6 +691,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfDouble方法。
+     */
     public void testIndexOfDouble() {
         double[] array = {1.1, 2.2, 3.3};
         assertEquals(0, ArraysUtil.indexOf(array, 1.1));
@@ -521,6 +701,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsDouble方法。
+     */
     public void testContainsDouble() {
         double[] array = {1.1, 2.2};
         assertTrue(ArraysUtil.contains(array, 2.2));
@@ -530,6 +713,9 @@ public class ArraysUtilTest {
     // ==================== indexOf / contains (array of arrays - subarray search) ====================
 
     @Test
+    /**
+     * testIndexOfByteArray方法。
+     */
     public void testIndexOfByteArray() {
         byte[] array = {1, 2, 3, 4, 5};
         byte[] sub = {2, 3};
@@ -537,6 +723,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfByteArrayNotFound方法。
+     */
     public void testIndexOfByteArrayNotFound() {
         byte[] array = {1, 2, 3};
         byte[] sub = {4, 5};
@@ -544,6 +733,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfByteArrayWithStartIndex方法。
+     */
     public void testIndexOfByteArrayWithStartIndex() {
         byte[] array = {1, 2, 1, 2, 3};
         byte[] sub = {1, 2};
@@ -551,6 +743,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsByteArray方法。
+     */
     public void testContainsByteArray() {
         byte[] array = {1, 2, 3, 4};
         byte[] sub = {2, 3};
@@ -559,6 +754,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfCharArray方法。
+     */
     public void testIndexOfCharArray() {
         char[] array = {'a', 'b', 'c'};
         char[] sub = {'b', 'c'};
@@ -566,6 +764,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsCharArray方法。
+     */
     public void testContainsCharArray() {
         char[] array = {'a', 'b', 'c'};
         char[] sub = {'b', 'c'};
@@ -573,6 +774,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfShortArray方法。
+     */
     public void testIndexOfShortArray() {
         short[] array = {1, 2, 3};
         short[] sub = {2, 3};
@@ -580,6 +784,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsShortArray方法。
+     */
     public void testContainsShortArray() {
         short[] array = {1, 2, 3};
         short[] sub = {2, 3};
@@ -587,6 +794,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfIntArray方法。
+     */
     public void testIndexOfIntArray() {
         int[] array = {1, 2, 3};
         int[] sub = {2, 3};
@@ -594,6 +804,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsIntArray方法。
+     */
     public void testContainsIntArray() {
         int[] array = {1, 2, 3};
         int[] sub = {2, 3};
@@ -601,6 +814,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfLongArray方法。
+     */
     public void testIndexOfLongArray() {
         long[] array = {1, 2, 3};
         long[] sub = {2, 3};
@@ -608,6 +824,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsLongArray方法。
+     */
     public void testContainsLongArray() {
         long[] array = {1, 2, 3};
         long[] sub = {2, 3};
@@ -615,6 +834,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfBooleanArray方法。
+     */
     public void testIndexOfBooleanArray() {
         boolean[] array = {true, false, true};
         boolean[] sub = {false, true};
@@ -622,6 +844,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsBooleanArray方法。
+     */
     public void testContainsBooleanArray() {
         boolean[] array = {true, false, true};
         boolean[] sub = {false, true};
@@ -629,6 +854,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfFloatArray方法。
+     */
     public void testIndexOfFloatArray() {
         float[] array = {1.1f, 2.2f, 3.3f};
         float[] sub = {2.2f, 3.3f};
@@ -636,6 +864,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsFloatArray方法。
+     */
     public void testContainsFloatArray() {
         float[] array = {1.1f, 2.2f, 3.3f};
         float[] sub = {2.2f, 3.3f};
@@ -643,6 +874,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfDoubleArray方法。
+     */
     public void testIndexOfDoubleArray() {
         double[] array = {1.1, 2.2, 3.3};
         double[] sub = {2.2, 3.3};
@@ -650,6 +884,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsDoubleArray方法。
+     */
     public void testContainsDoubleArray() {
         double[] array = {1.1, 2.2, 3.3};
         double[] sub = {2.2, 3.3};
@@ -659,6 +896,9 @@ public class ArraysUtilTest {
     // ==================== indexOf / contains (Object arrays) ====================
 
     @Test
+    /**
+     * testIndexOfObject方法。
+     */
     public void testIndexOfObject() {
         String[] array = {"a", "b", "c"};
         assertEquals(0, ArraysUtil.indexOf(array, "a"));
@@ -667,6 +907,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsObject方法。
+     */
     public void testContainsObject() {
         String[] array = {"a", "b", "c"};
         assertTrue(ArraysUtil.contains(array, "b"));
@@ -674,6 +917,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexOfObjectWithStartIndex方法。
+     */
     public void testIndexOfObjectWithStartIndex() {
         String[] array = {"a", "b", "a", "b"};
         assertEquals(2, ArraysUtil.indexOf(array, "a", 1));
@@ -681,6 +927,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testContainsObjectWithStartIndex方法。
+     */
     public void testContainsObjectWithStartIndex() {
         String[] array = {"a", "b", "c"};
         assertTrue(ArraysUtil.contains(array, "c", 2));
@@ -690,6 +939,9 @@ public class ArraysUtilTest {
     // ==================== toStringArray ====================
 
     @Test
+    /**
+     * testToStringArrayString方法。
+     */
     public void testToStringArrayString() {
         String[] input = {"a", "b", "c"};
         String[] result = ArraysUtil.toStringArray(input);
@@ -697,6 +949,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testToStringArrayByte方法。
+     */
     public void testToStringArrayByte() {
         byte[] input = {1, 2, 3};
         String[] result = ArraysUtil.toStringArray(input);
@@ -704,6 +959,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testToStringArrayChar方法。
+     */
     public void testToStringArrayChar() {
         char[] input = {'a', 'b'};
         String[] result = ArraysUtil.toStringArray(input);
@@ -711,6 +969,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testToStringArrayInt方法。
+     */
     public void testToStringArrayInt() {
         int[] input = {1, 2, 3};
         String[] result = ArraysUtil.toStringArray(input);
@@ -718,6 +979,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testToStringArrayLong方法。
+     */
     public void testToStringArrayLong() {
         long[] input = {1, 2, 3};
         String[] result = ArraysUtil.toStringArray(input);
@@ -725,6 +989,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testToStringArrayFloat方法。
+     */
     public void testToStringArrayFloat() {
         float[] input = {1.1f, 2.2f};
         String[] result = ArraysUtil.toStringArray(input);
@@ -732,6 +999,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testToStringArrayDouble方法。
+     */
     public void testToStringArrayDouble() {
         double[] input = {1.1, 2.2};
         String[] result = ArraysUtil.toStringArray(input);
@@ -739,6 +1009,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testToStringArrayBoolean方法。
+     */
     public void testToStringArrayBoolean() {
         boolean[] input = {true, false};
         String[] result = ArraysUtil.toStringArray(input);
@@ -746,6 +1019,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testToStringArrayNull方法。
+     */
     public void testToStringArrayNull() {
         assertNull(ArraysUtil.toStringArray((String[]) null));
     }
@@ -753,6 +1029,9 @@ public class ArraysUtilTest {
     // ==================== removeEmptyStrings ====================
 
     @Test
+    /**
+     * testRemoveEmptyStrings方法。
+     */
     public void testRemoveEmptyStrings() {
         String[] input = {"a", "", "b", "   ", "c"};
         String[] result = ArraysUtil.removeEmptyStrings(input);
@@ -760,11 +1039,17 @@ public class ArraysUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testRemoveEmptyStringsNull方法。
+     */
     public void testRemoveEmptyStringsNull() {
         ArraysUtil.removeEmptyStrings(null);
     }
 
     @Test
+    /**
+     * testRemoveEmptyStringsAllEmpty方法。
+     */
     public void testRemoveEmptyStringsAllEmpty() {
         String[] input = {"", "   ", ""};
         String[] result = ArraysUtil.removeEmptyStrings(input);
@@ -774,6 +1059,9 @@ public class ArraysUtilTest {
     // ==================== isNotEmptyArray ====================
 
     @Test
+    /**
+     * testIsNotEmptyArray方法。
+     */
     public void testIsNotEmptyArray() {
         assertTrue(ArraysUtil.isNotEmptyArray(new Integer[]{1, 2}));
         assertFalse(ArraysUtil.isNotEmptyArray(new Integer[]{}));
@@ -783,6 +1071,9 @@ public class ArraysUtilTest {
     // ==================== isDeeplyEqual ====================
 
     @Test
+    /**
+     * testIsDeeplyEqual方法。
+     */
     public void testIsDeeplyEqual() {
         Integer[] arr1 = {1, 2, 3};
         Integer[] arr2 = {1, 2, 3};
@@ -790,6 +1081,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIsDeeplyEqualDifferentLength方法。
+     */
     public void testIsDeeplyEqualDifferentLength() {
         Integer[] arr1 = {1, 2};
         Integer[] arr2 = {1, 2, 3};
@@ -797,6 +1091,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIsDeeplyEqualDifferentContent方法。
+     */
     public void testIsDeeplyEqualDifferentContent() {
         Integer[] arr1 = {1, 2, 3};
         Integer[] arr2 = {1, 2, 4};
@@ -804,11 +1101,17 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIsDeeplyEqualBothNull方法。
+     */
     public void testIsDeeplyEqualBothNull() {
         assertTrue(ArraysUtil.isDeeplyEqual(null, null));
     }
 
     @Test
+    /**
+     * testIsDeeplyEqualOneNull方法。
+     */
     public void testIsDeeplyEqualOneNull() {
         assertFalse(ArraysUtil.isDeeplyEqual(null, new Integer[]{1}));
         assertFalse(ArraysUtil.isDeeplyEqual(new Integer[]{1}, null));
@@ -817,6 +1120,9 @@ public class ArraysUtilTest {
     // ==================== isEmpty / isNotEmpty ====================
 
     @Test
+    /**
+     * testIsEmpty方法。
+     */
     public void testIsEmpty() {
         assertTrue(ArraysUtil.isEmpty(null));
         assertTrue(ArraysUtil.isEmpty(new Object[]{}));
@@ -824,6 +1130,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIsNotEmpty方法。
+     */
     public void testIsNotEmpty() {
         assertFalse(ArraysUtil.isNotEmpty(null));
         assertFalse(ArraysUtil.isNotEmpty(new Object[]{}));
@@ -833,6 +1142,9 @@ public class ArraysUtilTest {
     // ==================== Constants ====================
 
     @Test
+    /**
+     * testEmptyConstants方法。
+     */
     public void testEmptyConstants() {
         assertEquals(0, ArraysUtil.EMPTY_OBJECT_ARRAY.length);
         assertEquals(0, ArraysUtil.EMPTY_STRING_ARRAY.length);
@@ -847,6 +1159,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testEmptyObjectConstants方法。
+     */
     public void testEmptyObjectConstants() {
         assertEquals(0, ArraysUtil.EMPTY_CLASS_ARRAY.length);
         assertEquals(0, ArraysUtil.EMPTY_LONG_OBJECT_ARRAY.length);
@@ -860,6 +1175,9 @@ public class ArraysUtilTest {
     }
 
     @Test
+    /**
+     * testIndexNotFoundConstant方法。
+     */
     public void testIndexNotFoundConstant() {
         assertEquals(-1, ArraysUtil.INDEX_NOT_FOUND);
     }

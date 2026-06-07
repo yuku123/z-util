@@ -9,12 +9,19 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
+/**
+ * FalseSharingExample类。
+ */
 public class FalseSharingExample implements Runnable {
 
     public final static long ITERATIONS = 500L * 1000L * 100L;
     private int arrayIndex = 0;
     private static ValueNoPadding[] longs;
 
+    /**
+     * FalseSharingExample方法。
+     *      * @param arrayIndex final类型参数
+     */
     public FalseSharingExample(final int arrayIndex) {
         this.arrayIndex = arrayIndex;
     }
@@ -37,6 +44,9 @@ public class FalseSharingExample implements Runnable {
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         long i = ITERATIONS + 1;
         while (0 != --i) {
@@ -44,6 +54,11 @@ public class FalseSharingExample implements Runnable {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args final类型参数
+     * @return static void类型返回值
+     */
     public static void main(final String[] args) throws Exception {
         for (int i = 1; i < 10; i++) {
             System.gc();

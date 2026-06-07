@@ -19,6 +19,9 @@ import java.lang.management.ManagementFactory;
 /**
  * CompilationMXBeanDemo类。
  */
+/**
+ * CompilationMXBeanDemo类。
+ */
 public class CompilationMXBeanDemo {
 
 
@@ -35,6 +38,10 @@ public class CompilationMXBeanDemo {
      * </ul>
      *
      * @return 远程JVM的CompilationMXBean实例，连接失败返回null
+     */
+    /**
+     * getRemoteCompilationMXBean方法。
+     * @return static CompilationMXBean类型返回值
      */
     /**
      * getRemoteCompilationMXBean方法。
@@ -71,6 +78,10 @@ public class CompilationMXBeanDemo {
      * getLocalCompilationMXBean方法。
      * @return static CompilationMXBean类型返回值
      */
+    /**
+     * getLocalCompilationMXBean方法。
+     * @return static CompilationMXBean类型返回值
+     */
     public static CompilationMXBean getLocalCompilationMXBean() {
         return ManagementFactory.getCompilationMXBean();
     }
@@ -79,6 +90,11 @@ public class CompilationMXBeanDemo {
      * 主方法，演示获取JVM编译信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

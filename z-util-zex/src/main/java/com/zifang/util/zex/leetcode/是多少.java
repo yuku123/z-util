@@ -9,8 +9,17 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * 是多少类。
+ */
 public class 是多少 {
 
+    /**
+     * repeat方法。
+     *      * @param s String类型参数
+     * @param times int类型参数
+     * @return String类型返回值
+     */
     public String repeat(String s, int times){
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i< times; i++){
@@ -18,6 +27,11 @@ public class 是多少 {
         }
         return sb.toString();
     }
+    /**
+     * intToRoman方法。
+     *      * @param num int类型参数
+     * @return String类型返回值
+     */
     public String intToRoman(int num) {
 
         int q = num/1000;
@@ -76,6 +90,11 @@ public class 是多少 {
         return str.toString();
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         String s = "123";
         for(int i = s.length() -1 ; i >= 0 ; i--){

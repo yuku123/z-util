@@ -17,11 +17,18 @@ import java.util.regex.Pattern;
 /**
  * StringAccessor类。
  */
+/**
+ * StringAccessor类。
+ */
 public class StringAccessor {
 
     private final Series series;
     private final String[] stringData;
 
+    /**
+     * StringAccessor方法。
+     *      * @param series Series类型参数
+     */
     /**
      * StringAccessor方法。
      *      * @param series Series类型参数
@@ -52,6 +59,10 @@ public class StringAccessor {
      * length方法。
      * @return Series类型返回值
      */
+    /**
+     * length方法。
+     * @return Series类型返回值
+     */
     public Series length() {
         double[] result = new double[stringData.length];
         for (int i = 0; i < stringData.length; i++) {
@@ -62,6 +73,10 @@ public class StringAccessor {
 
     /**
      * 转换为小写
+     */
+    /**
+     * lower方法。
+     * @return Series类型返回值
      */
     /**
      * lower方法。
@@ -82,6 +97,10 @@ public class StringAccessor {
      * upper方法。
      * @return Series类型返回值
      */
+    /**
+     * upper方法。
+     * @return Series类型返回值
+     */
     public Series upper() {
         String[] result = new String[stringData.length];
         for (int i = 0; i < stringData.length; i++) {
@@ -92,6 +111,10 @@ public class StringAccessor {
 
     /**
      * 去除首尾空白字符
+     */
+    /**
+     * strip方法。
+     * @return Series类型返回值
      */
     /**
      * strip方法。
@@ -112,6 +135,10 @@ public class StringAccessor {
      * lstrip方法。
      * @return Series类型返回值
      */
+    /**
+     * lstrip方法。
+     * @return Series类型返回值
+     */
     public Series lstrip() {
         String[] result = new String[stringData.length];
         for (int i = 0; i < stringData.length; i++) {
@@ -127,6 +154,10 @@ public class StringAccessor {
 
     /**
      * 去除右侧空白字符
+     */
+    /**
+     * rstrip方法。
+     * @return Series类型返回值
      */
     /**
      * rstrip方法。
@@ -154,6 +185,12 @@ public class StringAccessor {
      * @param newStr String类型参数
      * @return Series类型返回值
      */
+    /**
+     * replace方法。
+     *      * @param oldStr String类型参数
+     * @param newStr String类型参数
+     * @return Series类型返回值
+     */
     public Series replace(String oldStr, String newStr) {
         String[] result = new String[stringData.length];
         for (int i = 0; i < stringData.length; i++) {
@@ -164,6 +201,12 @@ public class StringAccessor {
 
     /**
      * 正则表达式替换
+     */
+    /**
+     * replaceRegex方法。
+     *      * @param pattern String类型参数
+     * @param replacement String类型参数
+     * @return Series类型返回值
      */
     /**
      * replaceRegex方法。
@@ -187,6 +230,11 @@ public class StringAccessor {
      *      * @param subStr String类型参数
      * @return Series类型返回值
      */
+    /**
+     * contains方法。
+     *      * @param subStr String类型参数
+     * @return Series类型返回值
+     */
     public Series contains(String subStr) {
         double[] result = new double[stringData.length];
         for (int i = 0; i < stringData.length; i++) {
@@ -197,6 +245,11 @@ public class StringAccessor {
 
     /**
      * 正则表达式匹配
+     */
+    /**
+     * match方法。
+     *      * @param pattern String类型参数
+     * @return Series类型返回值
      */
     /**
      * match方法。
@@ -215,6 +268,12 @@ public class StringAccessor {
 
     /**
      * 提取匹配正则表达式的第一个分组
+     */
+    /**
+     * extract方法。
+     *      * @param pattern String类型参数
+     * @param group int类型参数
+     * @return Series类型返回值
      */
     /**
      * extract方法。
@@ -246,6 +305,12 @@ public class StringAccessor {
      * @param index int类型参数
      * @return Series类型返回值
      */
+    /**
+     * split方法。
+     *      * @param delimiter String类型参数
+     * @param index int类型参数
+     * @return Series类型返回值
+     */
     public Series split(String delimiter, int index) {
         String[] result = new String[stringData.length];
         for (int i = 0; i < stringData.length; i++) {
@@ -262,6 +327,12 @@ public class StringAccessor {
 
     /**
      * 切片字符串
+     */
+    /**
+     * slice方法。
+     *      * @param start int类型参数
+     * @param end int类型参数
+     * @return Series类型返回值
      */
     /**
      * slice方法。
@@ -292,6 +363,11 @@ public class StringAccessor {
      *      * @param n int类型参数
      * @return Series类型返回值
      */
+    /**
+     * repeat方法。
+     *      * @param n int类型参数
+     * @return Series类型返回值
+     */
     public Series repeat(int n) {
         String[] result = new String[stringData.length];
         for (int i = 0; i < stringData.length; i++) {
@@ -313,6 +389,11 @@ public class StringAccessor {
      *      * @param other String类型参数
      * @return Series类型返回值
      */
+    /**
+     * cat方法。
+     *      * @param other String类型参数
+     * @return Series类型返回值
+     */
     public Series cat(String other) {
         String[] result = new String[stringData.length];
         for (int i = 0; i < stringData.length; i++) {
@@ -321,6 +402,11 @@ public class StringAccessor {
         return createStringSeries(result, "cat");
     }
 
+    /**
+     * cat方法。
+     *      * @param other Series类型参数
+     * @return Series类型返回值
+     */
     /**
      * cat方法。
      *      * @param other Series类型参数

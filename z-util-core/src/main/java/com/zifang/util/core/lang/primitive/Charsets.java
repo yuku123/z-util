@@ -16,10 +16,18 @@ import java.nio.charset.StandardCharsets;
 /**
  * Charsets类。
  */
+/**
+ * Charsets类。
+ */
 public class Charsets {
 
     /**
      * 将字符编码转换成US-ASCII码
+     */
+    /**
+     * toASCII方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * toASCII方法。
@@ -38,12 +46,22 @@ public class Charsets {
      *      * @param str String类型参数
      * @return static String类型返回值
      */
+    /**
+     * toISO_8859_1方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
+     */
     public static String toISO_8859_1(String str) throws UnsupportedEncodingException {
         return changeCharset(str, Const.Charset.ISO_8859_1);
     }
 
     /**
      * 将字符编码转换成UTF-8码
+     */
+    /**
+     * toUTF_8方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * toUTF_8方法。
@@ -62,12 +80,22 @@ public class Charsets {
      *      * @param str String类型参数
      * @return static String类型返回值
      */
+    /**
+     * toUTF_16BE方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
+     */
     public static String toUTF_16BE(String str) throws UnsupportedEncodingException {
         return changeCharset(str, Const.Charset.UTF_16BE);
     }
 
     /**
      * 将字符编码转换成UTF-16LE码
+     */
+    /**
+     * toUTF_16LE方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * toUTF_16LE方法。
@@ -86,12 +114,22 @@ public class Charsets {
      *      * @param str String类型参数
      * @return static String类型返回值
      */
+    /**
+     * toUTF_16方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
+     */
     public static String toUTF_16(String str) throws UnsupportedEncodingException {
         return changeCharset(str, Const.Charset.UTF_16);
     }
 
     /**
      * 将字符编码转换成GBK码
+     */
+    /**
+     * toGBK方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
      */
     /**
      * toGBK方法。
@@ -114,6 +152,12 @@ public class Charsets {
      * @param newCharset String类型参数
      * @return static String类型返回值
      */
+    /**
+     * changeCharset方法。
+     *      * @param str String类型参数
+     * @param newCharset String类型参数
+     * @return static String类型返回值
+     */
     public static String changeCharset(String str, String newCharset) throws UnsupportedEncodingException {
         if (str != null) {
             // 用默认字符编码解码字符串。
@@ -124,6 +168,10 @@ public class Charsets {
         return null;
     }
 
+    /**
+     * getDefaultCharSet方法。
+     * @return static String类型返回值
+     */
     /**
      * getDefaultCharSet方法。
      * @return static String类型返回值
@@ -141,6 +189,13 @@ public class Charsets {
      * @param oldCharset 原编码
      * @param newCharset 目标编码
      * @return a
+     */
+    /**
+     * changeCharset方法。
+     *      * @param str String类型参数
+     * @param oldCharset String类型参数
+     * @param newCharset String类型参数
+     * @return static String类型返回值
      */
     /**
      * changeCharset方法。
@@ -172,6 +227,11 @@ public class Charsets {
      *      * @param input String类型参数
      * @return static String类型返回值
      */
+    /**
+     * toGBKWithUTF8方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
+     */
     public static String toGBKWithUTF8(String input) throws UnsupportedEncodingException {
         if (StringUtil.isEmpty(input)) {
             return "";
@@ -184,6 +244,11 @@ public class Charsets {
 
     /**
      * GBK转换成Unicode字符集
+     */
+    /**
+     * toUnicodeWithGBK方法。
+     *      * @param input String类型参数
+     * @return static String类型返回值
      */
     /**
      * toUnicodeWithGBK方法。

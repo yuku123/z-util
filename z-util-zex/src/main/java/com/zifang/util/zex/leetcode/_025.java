@@ -11,6 +11,9 @@ package com.zifang.util.zex.leetcode;
  */
 import java.util.Stack;
 
+/**
+ * _025类。
+ */
 public class _025 {
 
     static class ListNode {
@@ -21,6 +24,12 @@ public class _025 {
       ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
+    /**
+     * reverseKGroup方法。
+     *      * @param head ListNode类型参数
+     * @param k int类型参数
+     * @return ListNode类型返回值
+     */
     public ListNode reverseKGroup(ListNode head, int k) {
 
 
@@ -76,6 +85,11 @@ public class _025 {
         return first;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         ListNode l1 = new ListNode(1);
         ListNode l2 = new ListNode(2);

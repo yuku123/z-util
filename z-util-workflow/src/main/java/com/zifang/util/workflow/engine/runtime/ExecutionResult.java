@@ -15,6 +15,9 @@ import java.util.Objects;
 /**
  * ExecutionResult类。
  */
+/**
+ * ExecutionResult类。
+ */
 public class ExecutionResult {
 
     /**
@@ -60,12 +63,20 @@ public class ExecutionResult {
     /**
      * ExecutionResult方法。
      */
+    /**
+     * ExecutionResult方法。
+     */
     public ExecutionResult() {
         this.completedNodes = new ArrayList<>();
         this.pendingNodes = new ArrayList<>();
         this.pendingUserTaskNodes = new ArrayList<>();
     }
 
+    /**
+     * ExecutionResult方法。
+     *      * @param processId String类型参数
+     * @param status String类型参数
+     */
     /**
      * ExecutionResult方法。
      *      * @param processId String类型参数
@@ -88,6 +99,10 @@ public class ExecutionResult {
      * builder方法。
      * @return static ExecutionResultBuilder类型返回值
      */
+    /**
+     * builder方法。
+     * @return static ExecutionResultBuilder类型返回值
+     */
     public static ExecutionResultBuilder builder() {
         return new ExecutionResultBuilder();
     }
@@ -95,6 +110,11 @@ public class ExecutionResult {
     public static class ExecutionResultBuilder {
         private final ExecutionResult result = new ExecutionResult();
 
+    /**
+     * processId方法。
+     *      * @param processId String类型参数
+     * @return ExecutionResultBuilder类型返回值
+     */
     /**
      * processId方法。
      *      * @param processId String类型参数
@@ -110,11 +130,21 @@ public class ExecutionResult {
      *      * @param status String类型参数
      * @return ExecutionResultBuilder类型返回值
      */
+    /**
+     * status方法。
+     *      * @param status String类型参数
+     * @return ExecutionResultBuilder类型返回值
+     */
         public ExecutionResultBuilder status(String status) {
             result.status = status;
             return this;
         }
 
+    /**
+     * completedNodes方法。
+     *      * @param completedNodes ListString类型参数
+     * @return ExecutionResultBuilder类型返回值
+     */
     /**
      * completedNodes方法。
      *      * @param completedNodes ListString类型参数
@@ -130,11 +160,21 @@ public class ExecutionResult {
      *      * @param pendingNodes ListString类型参数
      * @return ExecutionResultBuilder类型返回值
      */
+    /**
+     * pendingNodes方法。
+     *      * @param pendingNodes ListString类型参数
+     * @return ExecutionResultBuilder类型返回值
+     */
         public ExecutionResultBuilder pendingNodes(List<String> pendingNodes) {
             result.pendingNodes = pendingNodes;
             return this;
         }
 
+    /**
+     * pendingUserTaskNodes方法。
+     *      * @param pendingUserTaskNodes ListString类型参数
+     * @return ExecutionResultBuilder类型返回值
+     */
     /**
      * pendingUserTaskNodes方法。
      *      * @param pendingUserTaskNodes ListString类型参数
@@ -150,11 +190,21 @@ public class ExecutionResult {
      *      * @param variables MapString,类型参数
      * @return ExecutionResultBuilder类型返回值
      */
+    /**
+     * variables方法。
+     *      * @param variables MapString,类型参数
+     * @return ExecutionResultBuilder类型返回值
+     */
         public ExecutionResultBuilder variables(Map<String, Object> variables) {
             result.variables = variables;
             return this;
         }
 
+    /**
+     * currentNodeId方法。
+     *      * @param currentNodeId String类型参数
+     * @return ExecutionResultBuilder类型返回值
+     */
     /**
      * currentNodeId方法。
      *      * @param currentNodeId String类型参数
@@ -170,11 +220,20 @@ public class ExecutionResult {
      *      * @param errorMessage String类型参数
      * @return ExecutionResultBuilder类型返回值
      */
+    /**
+     * errorMessage方法。
+     *      * @param errorMessage String类型参数
+     * @return ExecutionResultBuilder类型返回值
+     */
         public ExecutionResultBuilder errorMessage(String errorMessage) {
             result.errorMessage = errorMessage;
             return this;
         }
 
+    /**
+     * build方法。
+     * @return ExecutionResult类型返回值
+     */
     /**
      * build方法。
      * @return ExecutionResult类型返回值
@@ -190,10 +249,18 @@ public class ExecutionResult {
      * getProcessId方法。
      * @return String类型返回值
      */
+    /**
+     * getProcessId方法。
+     * @return String类型返回值
+     */
     public String getProcessId() {
         return processId;
     }
 
+    /**
+     * setProcessId方法。
+     *      * @param processId String类型参数
+     */
     /**
      * setProcessId方法。
      *      * @param processId String类型参数
@@ -206,10 +273,18 @@ public class ExecutionResult {
      * getStatus方法。
      * @return String类型返回值
      */
+    /**
+     * getStatus方法。
+     * @return String类型返回值
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * setStatus方法。
+     *      * @param status String类型参数
+     */
     /**
      * setStatus方法。
      *      * @param status String类型参数
@@ -222,10 +297,18 @@ public class ExecutionResult {
      * getCompletedNodes方法。
      * @return List<String>类型返回值
      */
+    /**
+     * getCompletedNodes方法。
+     * @return List<String>类型返回值
+     */
     public List<String> getCompletedNodes() {
         return completedNodes;
     }
 
+    /**
+     * setCompletedNodes方法。
+     *      * @param completedNodes ListString类型参数
+     */
     /**
      * setCompletedNodes方法。
      *      * @param completedNodes ListString类型参数
@@ -238,10 +321,18 @@ public class ExecutionResult {
      * getPendingNodes方法。
      * @return List<String>类型返回值
      */
+    /**
+     * getPendingNodes方法。
+     * @return List<String>类型返回值
+     */
     public List<String> getPendingNodes() {
         return pendingNodes;
     }
 
+    /**
+     * setPendingNodes方法。
+     *      * @param pendingNodes ListString类型参数
+     */
     /**
      * setPendingNodes方法。
      *      * @param pendingNodes ListString类型参数
@@ -254,10 +345,18 @@ public class ExecutionResult {
      * getPendingUserTaskNodes方法。
      * @return List<String>类型返回值
      */
+    /**
+     * getPendingUserTaskNodes方法。
+     * @return List<String>类型返回值
+     */
     public List<String> getPendingUserTaskNodes() {
         return pendingUserTaskNodes;
     }
 
+    /**
+     * setPendingUserTaskNodes方法。
+     *      * @param pendingUserTaskNodes ListString类型参数
+     */
     /**
      * setPendingUserTaskNodes方法。
      *      * @param pendingUserTaskNodes ListString类型参数
@@ -270,10 +369,18 @@ public class ExecutionResult {
      * getVariables方法。
      * @return Map<String, Object>类型返回值
      */
+    /**
+     * getVariables方法。
+     * @return Map<String, Object>类型返回值
+     */
     public Map<String, Object> getVariables() {
         return variables;
     }
 
+    /**
+     * setVariables方法。
+     *      * @param variables MapString,类型参数
+     */
     /**
      * setVariables方法。
      *      * @param variables MapString,类型参数
@@ -286,10 +393,18 @@ public class ExecutionResult {
      * getCurrentNodeId方法。
      * @return String类型返回值
      */
+    /**
+     * getCurrentNodeId方法。
+     * @return String类型返回值
+     */
     public String getCurrentNodeId() {
         return currentNodeId;
     }
 
+    /**
+     * setCurrentNodeId方法。
+     *      * @param currentNodeId String类型参数
+     */
     /**
      * setCurrentNodeId方法。
      *      * @param currentNodeId String类型参数
@@ -302,10 +417,18 @@ public class ExecutionResult {
      * getErrorMessage方法。
      * @return String类型返回值
      */
+    /**
+     * getErrorMessage方法。
+     * @return String类型返回值
+     */
     public String getErrorMessage() {
         return errorMessage;
     }
 
+    /**
+     * setErrorMessage方法。
+     *      * @param errorMessage String类型参数
+     */
     /**
      * setErrorMessage方法。
      *      * @param errorMessage String类型参数
@@ -320,12 +443,20 @@ public class ExecutionResult {
      * addCompletedNode方法。
      *      * @param nodeId String类型参数
      */
+    /**
+     * addCompletedNode方法。
+     *      * @param nodeId String类型参数
+     */
     public void addCompletedNode(String nodeId) {
         if (!this.completedNodes.contains(nodeId)) {
             this.completedNodes.add(nodeId);
         }
     }
 
+    /**
+     * addPendingNode方法。
+     *      * @param nodeId String类型参数
+     */
     /**
      * addPendingNode方法。
      *      * @param nodeId String类型参数
@@ -340,10 +471,18 @@ public class ExecutionResult {
      * removePendingNode方法。
      *      * @param nodeId String类型参数
      */
+    /**
+     * removePendingNode方法。
+     *      * @param nodeId String类型参数
+     */
     public void removePendingNode(String nodeId) {
         this.pendingNodes.remove(nodeId);
     }
 
+    /**
+     * addPendingUserTaskNode方法。
+     *      * @param nodeId String类型参数
+     */
     /**
      * addPendingUserTaskNode方法。
      *      * @param nodeId String类型参数
@@ -358,11 +497,19 @@ public class ExecutionResult {
      * removePendingUserTaskNode方法。
      *      * @param nodeId String类型参数
      */
+    /**
+     * removePendingUserTaskNode方法。
+     *      * @param nodeId String类型参数
+     */
     public void removePendingUserTaskNode(String nodeId) {
         this.pendingUserTaskNodes.remove(nodeId);
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -386,6 +533,11 @@ public class ExecutionResult {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -401,6 +553,10 @@ public class ExecutionResult {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

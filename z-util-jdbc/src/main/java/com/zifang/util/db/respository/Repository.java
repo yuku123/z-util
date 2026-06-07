@@ -10,6 +10,9 @@ package com.zifang.util.db.respository;
 /**
  * Repository接口。
  */
+/**
+ * Repository接口。
+ */
 public interface Repository<T, ID> {
 
 }

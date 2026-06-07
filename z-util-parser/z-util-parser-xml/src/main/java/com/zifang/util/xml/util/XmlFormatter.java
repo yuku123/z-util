@@ -10,29 +10,52 @@ import java.util.List;
  *
  * @author zifang
  */
+/**
+ * XmlFormatter类。
+ */
 public class XmlFormatter {
 
     private int indentSize = 2;
 
     private boolean preserveWhitespace = false;
 
+    /**
+     * XmlFormatter方法。
+     */
     public XmlFormatter() {
     }
 
+    /**
+     * XmlFormatter方法。
+     *      * @param indentSize int类型参数
+     */
     public XmlFormatter(int indentSize) {
         this.indentSize = indentSize;
     }
 
+    /**
+     * setIndentSize方法。
+     *      * @param indentSize int类型参数
+     */
     public void setIndentSize(int indentSize) {
         this.indentSize = indentSize;
     }
 
+    /**
+     * setPreserveWhitespace方法。
+     *      * @param preserveWhitespace boolean类型参数
+     */
     public void setPreserveWhitespace(boolean preserveWhitespace) {
         this.preserveWhitespace = preserveWhitespace;
     }
 
     /**
      * 将 XDocument 序列化为格式化的 XML 字符串。
+     */
+    /**
+     * format方法。
+     *      * @param doc XDocument类型参数
+     * @return String类型返回值
      */
     public String format(XDocument doc) {
         StringBuilder sb = new StringBuilder();
@@ -42,6 +65,11 @@ public class XmlFormatter {
 
     /**
      * 将 XElement 序列化为格式化的 XML 字符串（不带 declaration）。
+     */
+    /**
+     * format方法。
+     *      * @param element XElement类型参数
+     * @return String类型返回值
      */
     public String format(XElement element) {
         StringBuilder sb = new StringBuilder();
@@ -224,6 +252,11 @@ public class XmlFormatter {
     /**
      * 对 XML 元素内容进行转义。
      */
+    /**
+     * escapeXmlText方法。
+     *      * @param text String类型参数
+     * @return static String类型返回值
+     */
     public static String escapeXmlText(String text) {
         if (text == null) {
             return null;
@@ -252,6 +285,11 @@ public class XmlFormatter {
     /**
      * 对 XML 属性值进行转义。
      */
+    /**
+     * escapeXmlAttr方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String escapeXmlAttr(String value) {
         if (value == null) {
             return null;
@@ -278,6 +316,11 @@ public class XmlFormatter {
 
     /**
      * 对 CDATA 内容进行安全封装（检测是否含有 ]]>）。
+     */
+    /**
+     * wrapCData方法。
+     *      * @param data String类型参数
+     * @return static String类型返回值
      */
     public static String wrapCData(String data) {
         if (data == null) {

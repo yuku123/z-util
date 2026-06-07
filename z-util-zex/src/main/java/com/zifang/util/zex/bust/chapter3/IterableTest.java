@@ -15,9 +15,15 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * IterableTest类。
+ */
 public class IterableTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001(){
         Collection<String> c = Arrays.asList("1","2","3");
         Iterator<String> iterator =  c.iterator();
@@ -27,6 +33,9 @@ public class IterableTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002(){
         Collection<String> c = Arrays.asList("1","2","3");
         for(String s : c){

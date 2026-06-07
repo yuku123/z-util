@@ -8,6 +8,9 @@ package com.zifang.util.core.pattern.cache;
 /**
  * EvictStrategy类。
  */
+/**
+ * EvictStrategy类。
+ */
 public class EvictStrategy {
 
 }

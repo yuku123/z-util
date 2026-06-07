@@ -5,8 +5,16 @@ import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * HTTPSClient类。
+ */
 public class HTTPSClient {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         if (args.length == 0) {

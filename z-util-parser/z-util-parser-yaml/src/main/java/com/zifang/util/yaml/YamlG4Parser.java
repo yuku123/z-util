@@ -18,6 +18,12 @@ import java.util.*;
  * 使用 DynamicLexer + DynamicParser 加载 YamlLexer.g4 + YamlParser.g4，
  * 无任何第三方依赖。
  */
+/**
+ * YamlG4Parser类。
+ */
+/**
+ * YamlG4Parser类。
+ */
 public class YamlG4Parser {
 
     private static final String LEXER_G4 = "YamlLexer.g4";
@@ -25,6 +31,16 @@ public class YamlG4Parser {
 
     /**
      * 将 YAML 字符串解析为 Java 对象（Map/List/标量）。
+     */
+    /**
+     * parse方法。
+     *      * @param yaml String类型参数
+     * @return Object类型返回值
+     */
+    /**
+     * parse方法。
+     *      * @param yaml String类型参数
+     * @return Object类型返回值
      */
     public Object parse(String yaml) {
         try {
@@ -57,12 +73,32 @@ public class YamlG4Parser {
         }
     }
 
+    /**
+     * parseMap方法。
+     *      * @param yaml String类型参数
+     * @return YamlMap类型返回值
+     */
+    /**
+     * parseMap方法。
+     *      * @param yaml String类型参数
+     * @return YamlMap类型返回值
+     */
     public YamlMap parseMap(String yaml) {
         Object result = parse(yaml);
         if (result instanceof YamlMap) return (YamlMap) result;
         throw new YamlParseException("根节点不是映射类型");
     }
 
+    /**
+     * parseArray方法。
+     *      * @param yaml String类型参数
+     * @return YamlArray类型返回值
+     */
+    /**
+     * parseArray方法。
+     *      * @param yaml String类型参数
+     * @return YamlArray类型返回值
+     */
     public YamlArray parseArray(String yaml) {
         Object result = parse(yaml);
         if (result instanceof YamlArray) return (YamlArray) result;

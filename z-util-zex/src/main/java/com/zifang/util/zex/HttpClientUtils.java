@@ -31,6 +31,9 @@ import java.util.Map.Entry;
  * @author zifang
  * @version 1.0
  */
+/**
+ * HttpClientUtils类。
+ */
 public class HttpClientUtils {
 
     // 编码格式。发送编码格式统一用UTF-8
@@ -49,6 +52,11 @@ public class HttpClientUtils {
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
      */
+    /**
+     * doGet方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doGet(String url) throws Exception {
         return doGet(url, null, null);
     }
@@ -60,6 +68,12 @@ public class HttpClientUtils {
      * @param params 请求参数Map
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
+     */
+    /**
+     * doGet方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doGet(String url, Map<String, String> params) throws Exception {
         return doGet(url, null, params);
@@ -73,6 +87,13 @@ public class HttpClientUtils {
      * @param params  请求参数Map
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
+     */
+    /**
+     * doGet方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doGet(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         // 创建httpClient对象
@@ -120,6 +141,11 @@ public class HttpClientUtils {
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
      */
+    /**
+     * doPost方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doPost(String url) throws Exception {
         return doPost(url, null, null);
     }
@@ -131,6 +157,12 @@ public class HttpClientUtils {
      * @param params 请求参数Map
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
+     */
+    /**
+     * doPost方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doPost(String url, Map<String, String> params) throws Exception {
         return doPost(url, null, params);
@@ -144,6 +176,13 @@ public class HttpClientUtils {
      * @param params  请求参数Map
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
+     */
+    /**
+     * doPost方法。
+     *      * @param url String类型参数
+     * @param headers MapString,类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doPost(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
         // 创建httpClient对象
@@ -190,6 +229,11 @@ public class HttpClientUtils {
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
      */
+    /**
+     * doPut方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doPut(String url) throws Exception {
         return doPut(url);
     }
@@ -201,6 +245,12 @@ public class HttpClientUtils {
      * @param params 请求参数Map
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
+     */
+    /**
+     * doPut方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
      */
     public static HttpClientResult doPut(String url, Map<String, String> params) throws Exception {
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -226,6 +276,11 @@ public class HttpClientUtils {
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
      */
+    /**
+     * doDelete方法。
+     *      * @param url String类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doDelete(String url) throws Exception {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpDelete httpDelete = new HttpDelete(url);
@@ -248,6 +303,12 @@ public class HttpClientUtils {
      * @return HTTP响应结果封装对象
      * @throws Exception 如果请求失败则抛出异常
      */
+    /**
+     * doDelete方法。
+     *      * @param url String类型参数
+     * @param params MapString,类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult doDelete(String url, Map<String, String> params) throws Exception {
         if (params == null) {
             params = new HashMap<String, String>();
@@ -262,6 +323,12 @@ public class HttpClientUtils {
      *
      * @param params     请求头参数Map
      * @param httpMethod HTTP请求对象
+     */
+    /**
+     * packageHeader方法。
+     *      * @param params MapString,类型参数
+     * @param httpMethod HttpRequestBase类型参数
+     * @return static void类型返回值
      */
     public static void packageHeader(Map<String, String> params, HttpRequestBase httpMethod) {
         // 封装请求头
@@ -280,6 +347,12 @@ public class HttpClientUtils {
      * @param params     请求参数Map
      * @param httpMethod HTTP请求对象
      * @throws UnsupportedEncodingException 如果编码不支持则抛出异常
+     */
+    /**
+     * packageParam方法。
+     *      * @param params MapString,类型参数
+     * @param httpMethod HttpEntityEnclosingRequestBase类型参数
+     * @return static void类型返回值
      */
     public static void packageParam(Map<String, String> params, HttpEntityEnclosingRequestBase httpMethod)
             throws UnsupportedEncodingException {
@@ -305,6 +378,13 @@ public class HttpClientUtils {
      * @return HTTP响应结果封装对象
      * @throws Exception 如果获取响应失败则抛出异常
      */
+    /**
+     * getHttpClientResult方法。
+     *      * @param httpResponse CloseableHttpResponse类型参数
+     * @param httpClient CloseableHttpClient类型参数
+     * @param httpMethod HttpRequestBase类型参数
+     * @return static HttpClientResult类型返回值
+     */
     public static HttpClientResult getHttpClientResult(CloseableHttpResponse httpResponse,
                                                        CloseableHttpClient httpClient, HttpRequestBase httpMethod) throws Exception {
         // 执行请求
@@ -327,6 +407,12 @@ public class HttpClientUtils {
      * @param httpResponse HTTP响应对象
      * @param httpClient   HTTP客户端对象
      * @throws IOException 如果关闭流失败则抛出异常
+     */
+    /**
+     * release方法。
+     *      * @param httpResponse CloseableHttpResponse类型参数
+     * @param httpClient CloseableHttpClient类型参数
+     * @return static void类型返回值
      */
     public static void release(CloseableHttpResponse httpResponse, CloseableHttpClient httpClient) throws IOException {
         // 释放资源

@@ -22,6 +22,9 @@ import java.util.*;
  *
  * @author zifang
  */
+/**
+ * JsonUtil类。
+ */
 public class JsonUtil {
 
     private static final JSONParser PARSER = new JSONParser();
@@ -30,6 +33,11 @@ public class JsonUtil {
 
     /**
      * 将 JSON 字符串解析为 JsonObject。
+     */
+    /**
+     * parseObject方法。
+     *      * @param json String类型参数
+     * @return static JsonObject类型返回值
      */
     public static JsonObject parseObject(String json) {
         if (json == null || json.trim().isEmpty()) return new JsonObject();
@@ -40,6 +48,11 @@ public class JsonUtil {
 
     /**
      * 将 JSON 字符串解析为 JsonArray。
+     */
+    /**
+     * parseArray方法。
+     *      * @param json String类型参数
+     * @return static JsonArray类型返回值
      */
     public static JsonArray parseArray(String json) {
         if (json == null || json.trim().isEmpty()) return new JsonArray();
@@ -52,6 +65,11 @@ public class JsonUtil {
 
     /**
      * 将任意对象序列化为 JSON 字符串。
+     */
+    /**
+     * toJson方法。
+     *      * @param t T类型参数
+     * @return static <T> String类型返回值
      */
     public static <T> String toJson(T t) {
         if (t == null) return "null";
@@ -67,6 +85,11 @@ public class JsonUtil {
 
     /**
      * 将任意对象序列化为美化 JSON 字符串（带缩进）。
+     */
+    /**
+     * toJsonPretty方法。
+     *      * @param t T类型参数
+     * @return static <T> String类型返回值
      */
     public static <T> String toJsonPretty(T t) {
         return prettyPrint(toJson(t), 0);
@@ -110,6 +133,12 @@ public class JsonUtil {
      * 将 JSON 字符串反序列化为目标类型（支持泛型）。
      */
     @SuppressWarnings("unchecked")
+    /**
+     * fromJson方法。
+     *      * @param jsonStr String类型参数
+     * @param typeRef TypeReferenceT类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T fromJson(String jsonStr, TypeReference<T> typeRef) {
         if (jsonStr == null || jsonStr.trim().isEmpty()) return null;
         Object parsed = PARSER.fromJSON(jsonStr.trim());
@@ -118,6 +147,12 @@ public class JsonUtil {
 
     /**
      * 将 JSON 字符串反序列化为指定 Class。
+     */
+    /**
+     * fromJson方法。
+     *      * @param jsonStr String类型参数
+     * @param clazz ClassT类型参数
+     * @return static <T> T类型返回值
      */
     public static <T> T fromJson(String jsonStr, Class<T> clazz) {
         if (jsonStr == null || jsonStr.trim().isEmpty()) return null;

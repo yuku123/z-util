@@ -16,6 +16,9 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 /**
  * SwitchWindowStep类。
  */
+/**
+ * SwitchWindowStep类。
+ */
 public class SwitchWindowStep implements Step {
 
     public static final String NAME = "switch";
@@ -23,6 +26,10 @@ public class SwitchWindowStep implements Step {
     private String target;
 
     @Override
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     /**
      * getName方法。
      * @return String类型返回值
@@ -37,6 +44,11 @@ public class SwitchWindowStep implements Step {
      *      * @param key String类型参数
      * @param value Object类型参数
      */
+    /**
+     * setParameter方法。
+     *      * @param key String类型参数
+     * @param value Object类型参数
+     */
     public void setParameter(String key, Object value) {
         if ("type".equalsIgnoreCase(key)) {
             this.type = String.valueOf(value);
@@ -46,6 +58,11 @@ public class SwitchWindowStep implements Step {
     }
 
     @Override
+    /**
+     * execute方法。
+     *      * @param ctx PipelineContext类型参数
+     * @return StepResult类型返回值
+     */
     /**
      * execute方法。
      *      * @param ctx PipelineContext类型参数
@@ -109,6 +126,11 @@ public class SwitchWindowStep implements Step {
         }
     }
 
+    /**
+     * getBrowserClient方法。
+     *      * @param ctx PipelineContext类型参数
+     * @return BrowserClient类型返回值
+     */
     /**
      * getBrowserClient方法。
      *      * @param ctx PipelineContext类型参数

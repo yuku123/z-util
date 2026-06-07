@@ -24,6 +24,9 @@ import java.util.ServiceLoader;
 /**
  * SpiLoader类。
  */
+/**
+ * SpiLoader类。
+ */
 public class SpiLoader<T> {
 
     private final Class<T> clazz;
@@ -46,6 +49,11 @@ public class SpiLoader<T> {
      *      * @param clazz ClassT类型参数
      * @return static <T> SpiLoader<T>类型返回值
      */
+    /**
+     * getSpiLoader方法。
+     *      * @param clazz ClassT类型参数
+     * @return static <T> SpiLoader<T>类型返回值
+     */
     public static <T> SpiLoader<T> getSpiLoader(Class<T> clazz) {
         if (clazz == null) {
             throw new IllegalArgumentException("SPI interface type cannot be null");
@@ -57,6 +65,10 @@ public class SpiLoader<T> {
      * Load the first available implementation of the SPI interface.
      *
      * @return the first implementation instance, or null if none found
+     */
+    /**
+     * get方法。
+     * @return T类型返回值
      */
     /**
      * get方法。
@@ -79,6 +91,10 @@ public class SpiLoader<T> {
      * getAll方法。
      * @return List<T>类型返回值
      */
+    /**
+     * getAll方法。
+     * @return List<T>类型返回值
+     */
     public List<T> getAll() {
         List<T> result = new ArrayList<>();
         ServiceLoader<T> loader = ServiceLoader.load(clazz);
@@ -95,6 +111,11 @@ public class SpiLoader<T> {
      * @return implementation instance, or null if loading fails
      */
     @SuppressWarnings("unchecked")
+    /**
+     * get方法。
+     *      * @param className String类型参数
+     * @return T类型返回值
+     */
     /**
      * get方法。
      *      * @param className String类型参数
@@ -123,12 +144,20 @@ public class SpiLoader<T> {
      * getClassLoader方法。
      * @return ClassLoader类型返回值
      */
+    /**
+     * getClassLoader方法。
+     * @return ClassLoader类型返回值
+     */
     public ClassLoader getClassLoader() {
         return clazz.getClassLoader();
     }
 
     /**
      * Get the SPI interface class.
+     */
+    /**
+     * getClazz方法。
+     * @return Class<T>类型返回值
      */
     /**
      * getClazz方法。

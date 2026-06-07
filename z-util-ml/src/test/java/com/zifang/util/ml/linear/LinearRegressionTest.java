@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * LinearRegressionTest类。
+ */
 public class LinearRegressionTest {
 
     private Random random = new Random(42);
@@ -24,6 +27,9 @@ public class LinearRegressionTest {
     }
 
     @Test
+    /**
+     * testLinearRegressionFit方法。
+     */
     public void testLinearRegressionFit() {
         int nSamples = 100;
         double trueSlope = 2.0;
@@ -59,6 +65,9 @@ public class LinearRegressionTest {
     }
 
     @Test
+    /**
+     * testLinearRegressionRidge方法。
+     */
     public void testLinearRegressionRidge() {
         int nSamples = 50;
         
@@ -99,6 +108,9 @@ public class LinearRegressionTest {
     }
 
     @Test
+    /**
+     * testLinearRegressionMultiTarget方法。
+     */
     public void testLinearRegressionMultiTarget() {
         int nSamples = 40;
         int nTargets = 3;

@@ -14,11 +14,17 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * Test0类。
+ */
 public class Test0 {
 
     private static final Logger log = LoggerFactory.getLogger(Test0.class);
 
     @Before
+    /**
+     * init方法。
+     */
     public void init() {
 
         // 数据库上下文
@@ -33,6 +39,9 @@ public class Test0 {
 
     @Test
     @org.junit.Ignore("需要 MySQL 数据库连接")
+    /**
+     * test方法。
+     */
     public void test() {
 
         ResourceItemRepository resourceItemRepository = RepositoryProxy.proxy(ResourceItemRepository.class);
@@ -53,6 +62,9 @@ public class Test0 {
 
     @Test
     @org.junit.Ignore("需要 MySQL 数据库连接")
+    /**
+     * test1方法。
+     */
     public void test1() {
         ResourceItemRepository resourceItemRepository = RepositoryProxy.proxy(ResourceItemRepository.class);
 

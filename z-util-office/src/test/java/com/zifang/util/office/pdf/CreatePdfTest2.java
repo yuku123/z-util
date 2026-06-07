@@ -15,8 +15,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * CreatePdfTest2类。
+ */
 public class CreatePdfTest2 {
 
+    /**
+     * transform方法。
+     *      * @param output String类型参数
+     * @param imageFolder String类型参数
+     * @return static void类型返回值
+     */
     public static void transform(String output, String imageFolder) throws IOException {
         PDDocument document = new PDDocument();
 
@@ -64,6 +73,9 @@ public class CreatePdfTest2 {
     }
 
     @Test
+    /**
+     * test0方法。
+     */
     public void test0(){
 
         String baseFolder = "/Volumes/element/エロ/20200301";
@@ -129,6 +141,11 @@ public class CreatePdfTest2 {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
         String output = "/Volumes/zifang/工口/超电磁炮/(C78) [たくみなむち (たくみなむち)] 超電磁砲のまもりかた　上 (とある魔術の禁書目録) [無修正].pdf";
         String imageFolder = "/Volumes/zifang/工口/超电磁炮/(C78) [たくみなむち (たくみなむち)] 超電磁砲のまもりかた　上 (とある魔術の禁書目録) [無修正]";

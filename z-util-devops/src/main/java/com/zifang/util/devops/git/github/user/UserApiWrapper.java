@@ -21,10 +21,17 @@ import java.util.List;
 /**
  * UserApiWrapper类。
  */
+/**
+ * UserApiWrapper类。
+ */
 public class UserApiWrapper {
 
     private final GitHub github;
 
+    /**
+     * UserApiWrapper方法。
+     *      * @param github GitHub类型参数
+     */
     /**
      * UserApiWrapper方法。
      *      * @param github GitHub类型参数
@@ -40,12 +47,20 @@ public class UserApiWrapper {
      * me方法。
      * @return GHUser类型返回值
      */
+    /**
+     * me方法。
+     * @return GHUser类型返回值
+     */
     public GHUser me() throws IOException {
         return github.getMyself();
     }
 
     /**
      * 获取当前用户名
+     */
+    /**
+     * myLogin方法。
+     * @return String类型返回值
      */
     /**
      * myLogin方法。
@@ -63,12 +78,22 @@ public class UserApiWrapper {
      *      * @param username String类型参数
      * @return GHUser类型返回值
      */
+    /**
+     * get方法。
+     *      * @param username String类型参数
+     * @return GHUser类型返回值
+     */
     public GHUser get(String username) throws IOException {
         return github.getUser(username);
     }
 
     /**
      * 列出用户的仓库
+     */
+    /**
+     * listRepos方法。
+     *      * @param username String类型参数
+     * @return List<org.kohsuke.github.GHRepository>类型返回值
      */
     /**
      * listRepos方法。
@@ -91,6 +116,11 @@ public class UserApiWrapper {
      *      * @param username String类型参数
      * @return List<org.kohsuke.github.GHRepository>类型返回值
      */
+    /**
+     * listStarred方法。
+     *      * @param username String类型参数
+     * @return List<org.kohsuke.github.GHRepository>类型返回值
+     */
     public List<org.kohsuke.github.GHRepository> listStarred(String username) throws IOException {
         List<org.kohsuke.github.GHRepository> repos = new ArrayList<>();
         for (org.kohsuke.github.GHRepository r : github.getUser(username).listStarredRepositories()) {
@@ -101,6 +131,11 @@ public class UserApiWrapper {
 
     /**
      * 列出用户的 followers
+     */
+    /**
+     * listFollowers方法。
+     *      * @param username String类型参数
+     * @return List<GHUser>类型返回值
      */
     /**
      * listFollowers方法。
@@ -124,6 +159,11 @@ public class UserApiWrapper {
      *      * @param username String类型参数
      * @return List<GHUser>类型返回值
      */
+    /**
+     * listFollowing方法。
+     *      * @param username String类型参数
+     * @return List<GHUser>类型返回值
+     */
     public List<GHUser> listFollowing(String username) throws IOException {
         List<GHUser> users = new ArrayList<>();
         for (GHUser u : github.getUser(username).listFollows()) {
@@ -139,12 +179,20 @@ public class UserApiWrapper {
      * follow方法。
      *      * @param username String类型参数
      */
+    /**
+     * follow方法。
+     *      * @param username String类型参数
+     */
     public void follow(String username) throws IOException {
         github.getUser(username).follow();
     }
 
     /**
      * 取消关注用户
+     */
+    /**
+     * unfollow方法。
+     *      * @param username String类型参数
      */
     /**
      * unfollow方法。
@@ -177,6 +225,11 @@ public class UserApiWrapper {
          * @return UserInfo 实例
          * @throws IOException IO异常
          */
+    /**
+     * from方法。
+     *      * @param user GHUser类型参数
+     * @return static UserInfo类型返回值
+     */
     /**
      * from方法。
      *      * @param user GHUser类型参数

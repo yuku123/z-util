@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * CookieValue注解。
  */
+/**
+ * CookieValue注解。
+ */
 public @interface CookieValue {
 }

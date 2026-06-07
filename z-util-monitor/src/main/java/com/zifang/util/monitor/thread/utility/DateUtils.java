@@ -47,6 +47,11 @@ public final class DateUtils {
      *      * @param dateTimestamp long类型参数
      * @return static String类型返回值
      */
+    /**
+     * getDateString方法。
+     *      * @param dateTimestamp long类型参数
+     * @return static String类型返回值
+     */
     public static String getDateString(long dateTimestamp) {
         SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
         return df.format(dateTimestamp);
@@ -58,6 +63,10 @@ public final class DateUtils {
      * 格式为：2014-06-04
      *
      * @return 今天的日期字符串
+     */
+    /**
+     * getDateString方法。
+     * @return static String类型返回值
      */
     /**
      * getDateString方法。
@@ -75,6 +84,10 @@ public final class DateUtils {
      * 格式为：2014-06-04 13:23:22
      *
      * @return 今天的日期时间字符串
+     */
+    /**
+     * getDateAndTimeString方法。
+     * @return static String类型返回值
      */
     /**
      * getDateAndTimeString方法。
@@ -98,6 +111,11 @@ public final class DateUtils {
      *      * @param dateTimestamp long类型参数
      * @return static String类型返回值
      */
+    /**
+     * getNextDateString方法。
+     *      * @param dateTimestamp long类型参数
+     * @return static String类型返回值
+     */
     public static String getNextDateString(long dateTimestamp) {
         SimpleDateFormat df = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
         return df.format(dateTimestamp + dayTotalMilliseconds);
@@ -109,6 +127,12 @@ public final class DateUtils {
      * @param timestamp 毫秒时间戳
      * @param format    日期时间格式，如"yyyy-MM-dd HH:mm:ss"
      * @return 格式化后的日期时间字符串
+     */
+    /**
+     * getDateTimeString方法。
+     *      * @param timestamp long类型参数
+     * @param format String类型参数
+     * @return static String类型返回值
      */
     /**
      * getDateTimeString方法。
@@ -134,6 +158,12 @@ public final class DateUtils {
      * @param temp String类型参数
      * @return static String类型返回值
      */
+    /**
+     * dateToStr方法。
+     *      * @param date Date类型参数
+     * @param temp String类型参数
+     * @return static String类型返回值
+     */
     public static String dateToStr(Date date, String temp) {
         SimpleDateFormat format = new SimpleDateFormat(temp);
         String dateStr = format.format(date);
@@ -146,6 +176,12 @@ public final class DateUtils {
      * @param dateStr    日期字符串
      * @param formatStr  日期格式，如"yyyy-MM-dd"
      * @return 解析后的Date对象，如果解析失败返回null
+     */
+    /**
+     * strToDate方法。
+     *      * @param dateStr String类型参数
+     * @param formatStr String类型参数
+     * @return static Date类型返回值
      */
     /**
      * strToDate方法。
@@ -177,6 +213,12 @@ public final class DateUtils {
      * @param formatStr String类型参数
      * @return static long类型返回值
      */
+    /**
+     * strToDateMillisTimestamp方法。
+     *      * @param dateStr String类型参数
+     * @param formatStr String类型参数
+     * @return static long类型返回值
+     */
     public static long strToDateMillisTimestamp(String dateStr, String formatStr) {
         Date date = strToDate(dateStr, formatStr);
         return date != null ? date.getTime() : 0;
@@ -188,6 +230,12 @@ public final class DateUtils {
      * @param dateStr    日期字符串
      * @param formatStr  日期格式，如"yyyy-MM-dd"
      * @return 秒级时间戳，解析失败返回0
+     */
+    /**
+     * strToDateTimestamp方法。
+     *      * @param dateStr String类型参数
+     * @param formatStr String类型参数
+     * @return static int类型返回值
      */
     /**
      * strToDateTimestamp方法。
@@ -208,6 +256,13 @@ public final class DateUtils {
      * @param format 日期格式，如"yyyy-MM-dd"
      * @return 相差的天数（date1 - date2）
      * @throws Exception 如果日期解析失败则抛出异常
+     */
+    /**
+     * calcDay方法。
+     *      * @param date1 String类型参数
+     * @param date2 String类型参数
+     * @param format String类型参数
+     * @return static long类型返回值
      */
     /**
      * calcDay方法。
@@ -239,6 +294,12 @@ public final class DateUtils {
      * @param eDate Date类型参数
      * @return static int类型返回值
      */
+    /**
+     * compareDate方法。
+     *      * @param sDate Date类型参数
+     * @param eDate Date类型参数
+     * @return static int类型返回值
+     */
     public static int compareDate(Date sDate, Date eDate) {
         Calendar sC = Calendar.getInstance();
         sC.setTime(sDate);
@@ -254,6 +315,13 @@ public final class DateUtils {
      * @param eDate      结束日期字符串
      * @param formatStr  日期格式，如"yyyy-MM-dd"
      * @return 比较结果：0-相同，1-前者大，-1-后者大
+     */
+    /**
+     * compareDate方法。
+     *      * @param sDate String类型参数
+     * @param eDate String类型参数
+     * @param formatStr String类型参数
+     * @return static int类型返回值
      */
     /**
      * compareDate方法。

@@ -11,9 +11,15 @@ import static org.junit.Assert.*;
 /**
  * CustomerCompileJavaFileManager 测试
  */
+/**
+ * CustomerCompileJavaFileManagerTest类。
+ */
 public class CustomerCompileJavaFileManagerTest {
 
     @Test
+    /**
+     * testFromLocationClassPath方法。
+     */
     public void testFromLocationClassPath() throws Exception {
         URI uri = CustomerCompileJavaFileManager.fromLocation(
                 StandardLocation.CLASS_PATH,
@@ -28,6 +34,9 @@ public class CustomerCompileJavaFileManagerTest {
     }
 
     @Test
+    /**
+     * testFromLocationSourcePath方法。
+     */
     public void testFromLocationSourcePath() throws Exception {
         URI uri = CustomerCompileJavaFileManager.fromLocation(
                 StandardLocation.SOURCE_PATH,

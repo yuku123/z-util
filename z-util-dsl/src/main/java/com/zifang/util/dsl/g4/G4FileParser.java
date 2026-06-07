@@ -22,10 +22,18 @@ import java.util.regex.Pattern;
 /**
  * G4FileParser类。
  */
+/**
+ * G4FileParser类。
+ */
 public class G4FileParser {
 
     /**
      * Parse .g4 content
+     */
+    /**
+     * parse方法。
+     *      * @param g4Content String类型参数
+     * @return static G4File类型返回值
      */
     /**
      * parse方法。
@@ -43,6 +51,11 @@ public class G4FileParser {
     /**
      * Extract all rules from .g4 content
      * Uses character-by-character parsing instead of regex to avoid comment handling issues
+     */
+    /**
+     * extractRules方法。
+     *      * @param g4Content String类型参数
+     * @return static List<G4Rule>类型返回值
      */
     /**
      * extractRules方法。
@@ -340,6 +353,11 @@ public class G4FileParser {
 
     /**
      * Load and parse from file
+     */
+    /**
+     * parseFromFile方法。
+     *      * @param filePath String类型参数
+     * @return static G4File类型返回值
      */
     /**
      * parseFromFile方法。

@@ -13,11 +13,17 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * CompositeTest类。
+ */
 public class CompositeTest {
 
     // ==================== ILeaf Tests ====================
 
     @Test
+    /**
+     * testILeafBasicOperations方法。
+     */
     public void testILeafBasicOperations() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -39,6 +45,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testGetDepth方法。
+     */
     public void testGetDepth() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -57,6 +66,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testGetSubtreeSize方法。
+     */
     public void testGetSubtreeSize() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -74,6 +86,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testGetPathFromRoot方法。
+     */
     public void testGetPathFromRoot() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -90,6 +105,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTraversePreOrder方法。
+     */
     public void testTraversePreOrder() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -105,6 +123,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTraversePostOrder方法。
+     */
     public void testTraversePostOrder() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -120,6 +141,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testFind方法。
+     */
     public void testFind() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -133,6 +157,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testFindAll方法。
+     */
     public void testFindAll() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child", "root", "child");
@@ -146,6 +173,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testMap方法。
+     */
     public void testMap() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -162,6 +192,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testGetRoot方法。
+     */
     public void testGetRoot() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -178,6 +211,9 @@ public class CompositeTest {
     // ==================== LeafWrapper Tests ====================
 
     @Test
+    /**
+     * testLeafWrapperMetadata方法。
+     */
     public void testLeafWrapperMetadata() {
         LeafWrapper<String, String, String> node = new LeafWrapper<>("node", null, "node");
         node.setMeta("key1", "value1");
@@ -189,6 +225,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testLeafWrapperRemoveSubLeaf方法。
+     */
     public void testLeafWrapperRemoveSubLeaf() {
         LeafWrapper<String, String, String> parent = new LeafWrapper<>("parent", null, "parent");
         LeafWrapper<String, String, String> child = new LeafWrapper<>("child", "parent", "child");
@@ -202,6 +241,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testLeafWrapperSortChildren方法。
+     */
     public void testLeafWrapperSortChildren() {
         LeafWrapper<String, String, String> parent = new LeafWrapper<>("parent", null, "parent");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("b", "parent", "b");
@@ -220,6 +262,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testGetAllLeaves方法。
+     */
     public void testGetAllLeaves() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -239,6 +284,9 @@ public class CompositeTest {
     // ==================== Tree Tests ====================
 
     @Test
+    /**
+     * testTreeCreation方法。
+     */
     public void testTreeCreation() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         Tree tree = new Tree(root);
@@ -246,11 +294,17 @@ public class CompositeTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testTreeCreationWithNullRoot方法。
+     */
     public void testTreeCreationWithNullRoot() {
         new Tree(null);
     }
 
     @Test
+    /**
+     * testTreeDfs方法。
+     */
     public void testTreeDfs() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -267,6 +321,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeBfs方法。
+     */
     public void testTreeBfs() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -283,6 +340,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeFind方法。
+     */
     public void testTreeFind() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -297,6 +357,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeFindAll方法。
+     */
     public void testTreeFindAll() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child", "root", "child");
@@ -311,6 +374,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeGetNodeCount方法。
+     */
     public void testTreeGetNodeCount() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -326,6 +392,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeGetHeight方法。
+     */
     public void testTreeGetHeight() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -339,6 +408,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeGetLeafCount方法。
+     */
     public void testTreeGetLeafCount() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -352,6 +424,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeGetLCA方法。
+     */
     public void testTreeGetLCA() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -369,6 +444,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeGetDistance方法。
+     */
     public void testTreeGetDistance() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -386,6 +464,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeToList方法。
+     */
     public void testTreeToList() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -400,6 +481,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeToMap方法。
+     */
     public void testTreeToMap() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -412,6 +496,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeGetAverageDepth方法。
+     */
     public void testTreeGetAverageDepth() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -428,6 +515,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeFindAllPaths方法。
+     */
     public void testTreeFindAllPaths() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -447,6 +537,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeLevelOrderWithDepth方法。
+     */
     public void testTreeLevelOrderWithDepth() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> child1 = new LeafWrapper<>("child1", "root", "child1");
@@ -465,6 +558,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testIsBinaryTree方法。
+     */
     public void testIsBinaryTree() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> left = new LeafWrapper<>("left", "root", "left");
@@ -478,6 +574,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testIsBalanced方法。
+     */
     public void testIsBalanced() {
         LeafWrapper<String, String, String> root = new LeafWrapper<>("root", null, "root");
         LeafWrapper<String, String, String> left = new LeafWrapper<>("left", "root", "left");
@@ -493,6 +592,9 @@ public class CompositeTest {
     // ==================== TreeBuilder Tests ====================
 
     @Test
+    /**
+     * testTreeBuilderBasic方法。
+     */
     public void testTreeBuilderBasic() {
         TreeBuilder builder = TreeBuilder.create("root");
         builder.add("child1");
@@ -505,6 +607,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeBuilderWithDown方法。
+     */
     public void testTreeBuilderWithDown() {
         TreeBuilder builder = TreeBuilder.create("root");
         builder.add("child1");
@@ -518,6 +623,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeBuilderMetadata方法。
+     */
     public void testTreeBuilderMetadata() {
         TreeBuilder builder = TreeBuilder.create("root");
         builder.add("child1");
@@ -529,24 +637,51 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testTreeBuilderBuildFromHierarchy方法。
+     */
     public void testTreeBuilderBuildFromHierarchy() {
         List<TreeBuilder.HierarchyItem> items = new java.util.ArrayList<>();
         items.add(new TreeBuilder.HierarchyItem() {
             @Override
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
             public String getId() { return "1"; }
             @Override
+    /**
+     * getParentId方法。
+     * @return String类型返回值
+     */
             public String getParentId() { return null; }
         });
         items.add(new TreeBuilder.HierarchyItem() {
             @Override
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
             public String getId() { return "2"; }
             @Override
+    /**
+     * getParentId方法。
+     * @return String类型返回值
+     */
             public String getParentId() { return "1"; }
         });
         items.add(new TreeBuilder.HierarchyItem() {
             @Override
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
             public String getId() { return "3"; }
             @Override
+    /**
+     * getParentId方法。
+     * @return String类型返回值
+     */
             public String getParentId() { return "1"; }
         });
 
@@ -559,6 +694,9 @@ public class CompositeTest {
     // ==================== LeafHelper Tests ====================
 
     @Test
+    /**
+     * testLeafHelperPickRoot方法。
+     */
     public void testLeafHelperPickRoot() {
         LeafWrapper<String, String, String> root1 = new LeafWrapper<>("root1", null, "root1");
         LeafWrapper<String, String, String> root2 = new LeafWrapper<>("root2", null, "root2");
@@ -567,6 +705,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testLeafHelperHasDissociate方法。
+     */
     public void testLeafHelperHasDissociate() {
         LeafWrapper<String, String, String> root1 = new LeafWrapper<>("root1", null, "root1");
         LeafWrapper<String, String, String> root2 = new LeafWrapper<>("root2", null, "root2");
@@ -576,6 +717,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testLeafHelperWrapper方法。
+     */
     public void testLeafHelperWrapper() {
         LeafWrapper<String, String, String> wrapper = LeafHelper.wrapper("1", null, "data");
         assertEquals("1", wrapper.getId());
@@ -583,6 +727,9 @@ public class CompositeTest {
     }
 
     @Test
+    /**
+     * testLeafHelperTreeify方法。
+     */
     public void testLeafHelperTreeify() {
         List<LeafWrapper<String, String, String>> wrappers = new java.util.ArrayList<>();
         wrappers.add(new LeafWrapper<>("root", null, "root"));

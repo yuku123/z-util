@@ -7,6 +7,9 @@ import java.util.function.Function;
 
 import static org.junit.Assert.*;
 
+/**
+ * MapsTest类。
+ */
 public class MapsTest {
 
     private Map<String, Integer> newMap() {
@@ -22,6 +25,9 @@ public class MapsTest {
     // --- removeNullKeys ---
 
     @Test
+    /**
+     * testRemoveNullKeys_Normal方法。
+     */
     public void testRemoveNullKeys_Normal() {
         Map<String, Integer> map = newMap();
         Maps.removeNullKeys(map);
@@ -30,6 +36,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testRemoveNullKeys_NoNullKey方法。
+     */
     public void testRemoveNullKeys_NoNullKey() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2);
@@ -38,6 +47,9 @@ public class MapsTest {
     }
 
     @Test(expected = NullPointerException.class)
+    /**
+     * testRemoveNullKeys_Null方法。
+     */
     public void testRemoveNullKeys_Null() {
         Maps.removeNullKeys(null);
     }
@@ -45,6 +57,9 @@ public class MapsTest {
     // --- removeNullValues ---
 
     @Test
+    /**
+     * testRemoveNullValues_Normal方法。
+     */
     public void testRemoveNullValues_Normal() {
         Map<String, Integer> map = newMap();
         Maps.removeNullValues(map);
@@ -53,6 +68,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testRemoveNullValues_NoNullValue方法。
+     */
     public void testRemoveNullValues_NoNullValue() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2);
@@ -61,6 +79,9 @@ public class MapsTest {
     }
 
     @Test(expected = NullPointerException.class)
+    /**
+     * testRemoveNullValues_Null方法。
+     */
     public void testRemoveNullValues_Null() {
         Maps.removeNullValues(null);
     }
@@ -68,6 +89,9 @@ public class MapsTest {
     // --- removeKeys ---
 
     @Test
+    /**
+     * testRemoveKeys_Normal方法。
+     */
     public void testRemoveKeys_Normal() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2); map.put("c", 3);
@@ -79,6 +103,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testRemoveKeys_NoMatch方法。
+     */
     public void testRemoveKeys_NoMatch() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2);
@@ -87,6 +114,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testRemoveKeys_AllMatch方法。
+     */
     public void testRemoveKeys_AllMatch() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2);
@@ -97,6 +127,9 @@ public class MapsTest {
     // --- removeValues ---
 
     @Test
+    /**
+     * testRemoveValues_Normal方法。
+     */
     public void testRemoveValues_Normal() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2); map.put("c", 3);
@@ -106,6 +139,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testRemoveValues_NoMatch方法。
+     */
     public void testRemoveValues_NoMatch() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2);
@@ -116,6 +152,9 @@ public class MapsTest {
     // --- remove (entry predicate) ---
 
     @Test
+    /**
+     * testRemove_Normal方法。
+     */
     public void testRemove_Normal() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2); map.put("c", 3);
@@ -125,6 +164,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testRemove_NoMatch方法。
+     */
     public void testRemove_NoMatch() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1);
@@ -138,6 +180,9 @@ public class MapsTest {
     // the original map, so it always returns an empty map regardless of predicate.
     // This test documents the actual (broken) behavior.
     @Test
+    /**
+     * testFilter_BuggyBehavior方法。
+     */
     public void testFilter_BuggyBehavior() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2); map.put("c", 3);
@@ -148,6 +193,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testFilter_NoMatch方法。
+     */
     public void testFilter_NoMatch() {
         Map<String, Integer> map = new HashMap<>();
         map.put("a", 1); map.put("b", 2);
@@ -156,6 +204,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testFilter_Empty方法。
+     */
     public void testFilter_Empty() {
         Map<String, Integer> map = new HashMap<>();
         Map<String, Integer> result = Maps.filter(map, e -> true);
@@ -166,6 +217,9 @@ public class MapsTest {
     // --- populateMap ---
 
     @Test
+    /**
+     * testPopulateMap_Normal方法。
+     */
     public void testPopulateMap_Normal() {
         Set<String> set = new HashSet<>(Arrays.asList("a", "bb", "ccc"));
         Function<String, String> keyFunc = s -> s;
@@ -178,6 +232,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testPopulateMap_EmptySet方法。
+     */
     public void testPopulateMap_EmptySet() {
         Set<String> set = new HashSet<>();
         Function<String, String> keyFunc = s -> s;
@@ -187,6 +244,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testPopulateMap_SingleElement方法。
+     */
     public void testPopulateMap_SingleElement() {
         Set<String> set = new HashSet<>();
         set.add("x");
@@ -198,6 +258,9 @@ public class MapsTest {
     }
 
     @Test
+    /**
+     * testPopulateMap_ValueTransform方法。
+     */
     public void testPopulateMap_ValueTransform() {
         Set<Integer> set = new HashSet<>(Arrays.asList(1, 2, 3));
         Function<Integer, String> keyFunc = i -> "key_" + i;

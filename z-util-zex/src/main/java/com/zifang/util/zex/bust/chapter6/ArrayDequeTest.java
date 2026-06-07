@@ -13,9 +13,15 @@ import org.junit.Test;
 
 import java.util.ArrayDeque;
 
+/**
+ * ArrayDequeTest类。
+ */
 public class ArrayDequeTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001(){
         ArrayDeque<String> strings = new ArrayDeque<>();
 //        strings.remove("")

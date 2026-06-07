@@ -17,6 +17,9 @@ import java.lang.reflect.Field;
  * 当一个线程正在等待某个操作时，JVM调用Unsafe的park()方法来阻塞此线程
  * 当阻塞中的线程需要再次运行时，JVM调用Unsafe的unpark()方法来唤醒此线程
  */
+/**
+ * UnsafeDemo类。
+ */
 public class UnsafeDemo {
 
     private volatile int count = 0;
@@ -26,6 +29,9 @@ public class UnsafeDemo {
 
     @Test
     //只会分配内存给这个类，而不会去调用构造方法，因此打印出来age为1
+    /**
+     * createInstanceByUnsafe方法。
+     */
     public void createInstanceByUnsafe() throws InstantiationException {
         Unsafe unsafe = UnsafeUtil.getUnsageInstance();
         User user2 = (User) unsafe.allocateInstance(User.class);
@@ -35,6 +41,9 @@ public class UnsafeDemo {
 
     @Test
     //只会分配内存给这个类，而不会去调用构造方法，因此打印出来age为1
+    /**
+     * modifyInstanceFieldByUnsafe方法。
+     */
     public void modifyInstanceFieldByUnsafe() throws InstantiationException, NoSuchFieldException {
         Unsafe unsafe = UnsafeUtil.getUnsageInstance();
         User user = new User();
@@ -48,11 +57,18 @@ public class UnsafeDemo {
 
     @Test
     //只会分配内存给这个类，而不会去调用构造方法，因此打印出来age为1
+    /**
+     * cas方法。
+     */
     public void cas() throws InstantiationException, NoSuchFieldException {
         Unsafe unsafe = UnsafeUtil.getUnsageInstance();
         offset = unsafe.objectFieldOffset(UnsafeDemo.class.getDeclaredField("count"));
     }
 
+    /**
+     * increment方法。
+     *      * @param unsafe Unsafe类型参数
+     */
     public void increment(Unsafe unsafe) {
         int before = count;
         // 失败了就重试直到成功为止
@@ -64,10 +80,17 @@ public class UnsafeDemo {
     public static class User {
         int age;
 
+    /**
+     * User方法。
+     */
         public User() {
             this.age = 10;
         }
 
+    /**
+     * getAge方法。
+     * @return int类型返回值
+     */
         public int getAge() {
             return age;
         }

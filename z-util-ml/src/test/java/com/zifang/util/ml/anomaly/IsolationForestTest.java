@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * IsolationForestTest类。
+ */
 public class IsolationForestTest {
 
     @Test
+    /**
+     * testIsolationForestFit方法。
+     */
     public void testIsolationForestFit() {
         IsolationForest isoForest = new IsolationForest(10, 8, 0.1);
         
@@ -26,6 +32,9 @@ public class IsolationForestTest {
     }
 
     @Test
+    /**
+     * testIsolationForestPredict方法。
+     */
     public void testIsolationForestPredict() {
         IsolationForest isoForest = new IsolationForest(10, 8, 0.1);
         
@@ -58,6 +67,9 @@ public class IsolationForestTest {
     }
 
     @Test
+    /**
+     * testIsolationForestScores方法。
+     */
     public void testIsolationForestScores() {
         IsolationForest isoForest = new IsolationForest(10, 8, 0.1);
         

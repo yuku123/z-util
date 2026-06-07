@@ -12,11 +12,18 @@ import java.util.function.Function;
 /**
  * Expanding类。
  */
+/**
+ * Expanding类。
+ */
 public class Expanding {
 
     private final Series series;
     private final int minPeriods;
 
+    /**
+     * Expanding方法。
+     *      * @param series Series类型参数
+     */
     /**
      * Expanding方法。
      *      * @param series Series类型参数
@@ -30,6 +37,11 @@ public class Expanding {
      *      * @param series Series类型参数
      * @param minPeriods int类型参数
      */
+    /**
+     * Expanding方法。
+     *      * @param series Series类型参数
+     * @param minPeriods int类型参数
+     */
     public Expanding(Series series, int minPeriods) {
         this.series = series;
         this.minPeriods = minPeriods;
@@ -37,6 +49,10 @@ public class Expanding {
 
     /**
      * 计算扩展窗口的均值
+     */
+    /**
+     * mean方法。
+     * @return Series类型返回值
      */
     /**
      * mean方法。
@@ -59,6 +75,10 @@ public class Expanding {
      * sum方法。
      * @return Series类型返回值
      */
+    /**
+     * sum方法。
+     * @return Series类型返回值
+     */
     public Series sum() {
         return applyWindow(values -> {
             double sum = 0;
@@ -71,6 +91,10 @@ public class Expanding {
 
     /**
      * 计算扩展窗口的最大值
+     */
+    /**
+     * max方法。
+     * @return Series类型返回值
      */
     /**
      * max方法。
@@ -93,6 +117,10 @@ public class Expanding {
      * min方法。
      * @return Series类型返回值
      */
+    /**
+     * min方法。
+     * @return Series类型返回值
+     */
     public Series min() {
         return applyWindow(values -> {
             double min = Double.POSITIVE_INFINITY;
@@ -105,6 +133,10 @@ public class Expanding {
 
     /**
      * 计算扩展窗口的标准差
+     */
+    /**
+     * std方法。
+     * @return Series类型返回值
      */
     /**
      * std方法。
@@ -133,6 +165,10 @@ public class Expanding {
      * var方法。
      * @return Series类型返回值
      */
+    /**
+     * var方法。
+     * @return Series类型返回值
+     */
     public Series var() {
         return applyWindow(values -> {
             double mean = 0;
@@ -151,6 +187,10 @@ public class Expanding {
 
     /**
      * 计算扩展窗口的计数
+     */
+    /**
+     * count方法。
+     * @return Series类型返回值
      */
     /**
      * count方法。
@@ -175,6 +215,11 @@ public class Expanding {
 
     /**
      * 应用自定义聚合函数
+     */
+    /**
+     * apply方法。
+     *      * @param func FunctionSeries,类型参数
+     * @return Series类型返回值
      */
     /**
      * apply方法。

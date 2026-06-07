@@ -7,6 +7,9 @@ package com.zifang.util.db.monitor;
 /**
  * MetadataDescription类。
  */
+/**
+ * MetadataDescription类。
+ */
 public class MetadataDescription {
 
 }

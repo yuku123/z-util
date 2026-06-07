@@ -8,6 +8,9 @@ import java.lang.reflect.Method;
 /**
  * Aspect接口。
  */
+/**
+ * Aspect接口。
+ */
 public interface Aspect {
 
     /**

@@ -69,10 +69,18 @@ import java.util.Set;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * JGitExecutor类。
+ */
 public class JGitExecutor {
 
     // ==================== 仓库生命周期 ====================
 
+    /**
+     * init方法。
+     *      * @param dir File类型参数
+     * @return GitResult<GitRepository>类型返回值
+     */
     public GitResult<GitRepository> init(File dir) {
         if (dir == null) {
             return GitResult.fail("目录不能为空");
@@ -90,6 +98,11 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * open方法。
+     *      * @param repoDir File类型参数
+     * @return GitResult<GitRepository>类型返回值
+     */
     public GitResult<GitRepository> open(File repoDir) {
         if (repoDir == null || !repoDir.exists()) {
             return GitResult.fail("目录不存在: " + repoDir);
@@ -105,6 +118,14 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * clone方法。
+     *      * @param url String类型参数
+     * @param targetDir File类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return GitResult<GitRepository>类型返回值
+     */
     public GitResult<GitRepository> clone(String url, File targetDir, String username, String password) {
         if (url == null || url.isEmpty()) {
             return GitResult.fail("url 不能为空");
@@ -128,6 +149,12 @@ public class JGitExecutor {
 
     // ==================== 工作区操作 ====================
 
+    /**
+     * add方法。
+     *      * @param repo GitRepository类型参数
+     * @param patterns String...类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> add(GitRepository repo, String... patterns) {
         try (Git git = openGit(repo)) {
             org.eclipse.jgit.api.AddCommand cmd = git.add();
@@ -147,6 +174,13 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * rm方法。
+     *      * @param repo GitRepository类型参数
+     * @param cached boolean类型参数
+     * @param patterns String...类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> rm(GitRepository repo, boolean cached, String... patterns) {
         try (Git git = openGit(repo)) {
             org.eclipse.jgit.api.RmCommand cmd = git.rm();
@@ -165,6 +199,11 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * status方法。
+     *      * @param repo GitRepository类型参数
+     * @return GitResult<GitStatus>类型返回值
+     */
     public GitResult<GitStatus> status(GitRepository repo) {
         try (Git git = openGit(repo)) {
             Status s = git.status().call();
@@ -190,6 +229,14 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * commit方法。
+     *      * @param repo GitRepository类型参数
+     * @param author GitAuthor类型参数
+     * @param message String类型参数
+     * @param all boolean类型参数
+     * @return GitResult<String>类型返回值
+     */
     public GitResult<String> commit(GitRepository repo, GitAuthor author, String message, boolean all) {
         try (Git git = openGit(repo)) {
             org.eclipse.jgit.api.CommitCommand cmd = git.commit();
@@ -209,6 +256,13 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * reset方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @param mode String类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> reset(GitRepository repo, String ref, String mode) {
         try (Git git = openGit(repo)) {
             ResetCommand cmd = git.reset();
@@ -243,6 +297,12 @@ public class JGitExecutor {
 
     // ==================== 日志 ====================
 
+    /**
+     * log方法。
+     *      * @param repo GitRepository类型参数
+     * @param maxCount int类型参数
+     * @return GitResult<List<GitCommit>>类型返回值
+     */
     public GitResult<List<GitCommit>> log(GitRepository repo, int maxCount) {
         try (Git git = openGit(repo)) {
             // HEAD 不存在（空仓库）时，JGit log 会抛 NoHeadException。
@@ -266,6 +326,12 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * show方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @return GitResult<GitCommit>类型返回值
+     */
     public GitResult<GitCommit> show(GitRepository repo, String ref) {
         try (Git git = openGit(repo)) {
             ObjectId oid = git.getRepository().resolve(ref);
@@ -309,6 +375,11 @@ public class JGitExecutor {
     // JGit 5.13 的 diff API 跟新版本有差异；为了稳定，我们走 DirCache + FileTreeIterator
     // 返回带 ChangeType / 路径 / sha 的 GitDiffEntry 列表，但不包含 patch 文本（要 patch 走 shell diff）。
 
+    /**
+     * diffWorkTree方法。
+     *      * @param repo GitRepository类型参数
+     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
+     */
     public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffWorkTree(GitRepository repo) {
         // 对应 `git diff`：工作区 vs 索引（不是 vs HEAD）
         try (Git git = openGit(repo)) {
@@ -322,6 +393,11 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * diffIndex方法。
+     *      * @param repo GitRepository类型参数
+     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
+     */
     public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffIndex(GitRepository repo) {
         try (Git git = openGit(repo)) {
             Repository r = git.getRepository();
@@ -345,6 +421,13 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * diffRefs方法。
+     *      * @param repo GitRepository类型参数
+     * @param oldRef String类型参数
+     * @param newRef String类型参数
+     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
+     */
     public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffRefs(GitRepository repo, String oldRef, String newRef) {
         try (Git git = openGit(repo)) {
             Repository r = git.getRepository();
@@ -411,6 +494,12 @@ public class JGitExecutor {
 
     // ==================== 分支 ====================
 
+    /**
+     * branchList方法。
+     *      * @param repo GitRepository类型参数
+     * @param type GitBranch.Type类型参数
+     * @return GitResult<List<GitBranch>>类型返回值
+     */
     public GitResult<List<GitBranch>> branchList(GitRepository repo, GitBranch.Type type) {
         try (Git git = openGit(repo)) {
             ListBranchCommand cmd = git.branchList();
@@ -450,6 +539,12 @@ public class JGitExecutor {
         return fullName;
     }
 
+    /**
+     * branchCreate方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> branchCreate(GitRepository repo, String name) {
         try (Git git = openGit(repo)) {
             git.branchCreate().setName(name).call();
@@ -459,6 +554,13 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * branchDelete方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @param force boolean类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> branchDelete(GitRepository repo, String name, boolean force) {
         try (Git git = openGit(repo)) {
             git.branchDelete().setBranchNames(name).setForce(force).call();
@@ -468,6 +570,12 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * checkout方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> checkout(GitRepository repo, String ref) {
         try (Git git = openGit(repo)) {
             git.checkout().setName(ref).call();
@@ -477,6 +585,12 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * checkoutNewBranch方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> checkoutNewBranch(GitRepository repo, String name) {
         try (Git git = openGit(repo)) {
             git.checkout().setCreateBranch(true).setName(name).call();
@@ -486,6 +600,11 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * currentBranch方法。
+     *      * @param repo GitRepository类型参数
+     * @return GitResult<String>类型返回值
+     */
     public GitResult<String> currentBranch(GitRepository repo) {
         try (Git git = openGit(repo)) {
             String b = git.getRepository().getBranch();
@@ -504,6 +623,11 @@ public class JGitExecutor {
 
     // ==================== 远程 ====================
 
+    /**
+     * remoteList方法。
+     *      * @param repo GitRepository类型参数
+     * @return GitResult<List<GitRemote>>类型返回值
+     */
     public GitResult<List<GitRemote>> remoteList(GitRepository repo) {
         try (Git git = openGit(repo)) {
             StoredConfig cfg = git.getRepository().getConfig();
@@ -522,6 +646,13 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * remoteAdd方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @param url String类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> remoteAdd(GitRepository repo, String name, String url) {
         try (Git git = openGit(repo)) {
             git.remoteAdd().setName(name).setUri(new URIish(url)).call();
@@ -531,6 +662,12 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * remoteRemove方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> remoteRemove(GitRepository repo, String name) {
         try (Git git = openGit(repo)) {
             git.remoteRemove().setRemoteName(name).call();
@@ -542,6 +679,14 @@ public class JGitExecutor {
 
     // ==================== 同步 ====================
 
+    /**
+     * fetch方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return GitResult<FetchResult>类型返回值
+     */
     public GitResult<FetchResult> fetch(GitRepository repo, String remote, String username, String password) {
         try (Git git = openGit(repo)) {
             FetchCommand cmd = git.fetch();
@@ -558,6 +703,15 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * pull方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @param branch String类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return GitResult<PullResult>类型返回值
+     */
     public GitResult<PullResult> pull(GitRepository repo, String remote, String branch,
                                       String username, String password) {
         try (Git git = openGit(repo)) {
@@ -578,6 +732,15 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * push方法。
+     *      * @param repo GitRepository类型参数
+     * @param remote String类型参数
+     * @param refspec String类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return GitResult<Iterable<PushResult>>类型返回值
+     */
     public GitResult<Iterable<PushResult>> push(GitRepository repo, String remote, String refspec,
                                                 String username, String password) {
         try (Git git = openGit(repo)) {
@@ -600,6 +763,12 @@ public class JGitExecutor {
 
     // ==================== 合并 / 变基 ====================
 
+    /**
+     * merge方法。
+     *      * @param repo GitRepository类型参数
+     * @param ref String类型参数
+     * @return GitResult<MergeResult>类型返回值
+     */
     public GitResult<MergeResult> merge(GitRepository repo, String ref) {
         try (Git git = openGit(repo)) {
             MergeCommand cmd = git.merge();
@@ -616,6 +785,12 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * rebase方法。
+     *      * @param repo GitRepository类型参数
+     * @param upstream String类型参数
+     * @return GitResult<RebaseResult>类型返回值
+     */
     public GitResult<RebaseResult> rebase(GitRepository repo, String upstream) {
         try (Git git = openGit(repo)) {
             RebaseCommand cmd = git.rebase();
@@ -631,6 +806,11 @@ public class JGitExecutor {
 
     // ==================== Tag ====================
 
+    /**
+     * tagList方法。
+     *      * @param repo GitRepository类型参数
+     * @return GitResult<List<GitTag>>类型返回值
+     */
     public GitResult<List<GitTag>> tagList(GitRepository repo) {
         try (Git git = openGit(repo)) {
             List<Ref> refs = git.tagList().call();
@@ -664,6 +844,15 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * tagCreate方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @param message String类型参数
+     * @param annotated boolean类型参数
+     * @param ref String类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> tagCreate(GitRepository repo, String name, String message, boolean annotated, String ref) {
         try (Git git = openGit(repo)) {
             TagCommand cmd = git.tag().setName(name);
@@ -688,6 +877,12 @@ public class JGitExecutor {
         }
     }
 
+    /**
+     * tagDelete方法。
+     *      * @param repo GitRepository类型参数
+     * @param name String类型参数
+     * @return GitResult<Void>类型返回值
+     */
     public GitResult<Void> tagDelete(GitRepository repo, String name) {
         try (Git git = openGit(repo)) {
             git.tagDelete().setTags(name).call();

@@ -26,6 +26,12 @@ public final class ImageCompare {
      * @param image2 File类型参数
      * @return static float类型返回值
      */
+    /**
+     * compareImage方法。
+     *      * @param image1 File类型参数
+     * @param image2 File类型参数
+     * @return static float类型返回值
+     */
     public static float compareImage(File image1, File image2) throws IOException {
         BufferedImage bi1 = ImageIO.read(image1);
         BufferedImage bi2 = ImageIO.read(image2);
@@ -41,6 +47,12 @@ public final class ImageCompare {
      * @param bi1 图片1
      * @param bi2 图片2
      * @return 相似度百分比（0~100）
+     */
+    /**
+     * compareImage方法。
+     *      * @param bi1 BufferedImage类型参数
+     * @param bi2 BufferedImage类型参数
+     * @return static float类型返回值
      */
     /**
      * compareImage方法。
@@ -91,6 +103,12 @@ public final class ImageCompare {
      * @param image2 File类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isIdentical方法。
+     *      * @param image1 File类型参数
+     * @param image2 File类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isIdentical(File image1, File image2) throws IOException {
         BufferedImage bi1 = ImageIO.read(image1);
         BufferedImage bi2 = ImageIO.read(image2);
@@ -102,6 +120,12 @@ public final class ImageCompare {
 
     /**
      * 判断两张 BufferedImage 是否完全相同。
+     */
+    /**
+     * isIdentical方法。
+     *      * @param bi1 BufferedImage类型参数
+     * @param bi2 BufferedImage类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isIdentical方法。
@@ -140,6 +164,12 @@ public final class ImageCompare {
      * @param image2 File类型参数
      * @return static BufferedImage类型返回值
      */
+    /**
+     * diffImage方法。
+     *      * @param image1 File类型参数
+     * @param image2 File类型参数
+     * @return static BufferedImage类型返回值
+     */
     public static BufferedImage diffImage(File image1, File image2) throws IOException {
         BufferedImage bi1 = ImageIO.read(image1);
         BufferedImage bi2 = ImageIO.read(image2);
@@ -155,6 +185,12 @@ public final class ImageCompare {
      * @param bi1 图片1
      * @param bi2 图片2
      * @return 差异 BufferedImage，不同像素显示为红色
+     */
+    /**
+     * diffImage方法。
+     *      * @param bi1 BufferedImage类型参数
+     * @param bi2 BufferedImage类型参数
+     * @return static BufferedImage类型返回值
      */
     /**
      * diffImage方法。

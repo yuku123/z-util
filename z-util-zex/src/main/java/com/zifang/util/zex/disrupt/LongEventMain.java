@@ -18,7 +18,15 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+/**
+ * LongEventMain类。
+ */
 public class LongEventMain {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws Exception {
         // Executor that will be used to construct new threads for consumers
         //创建线程池

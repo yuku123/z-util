@@ -9,9 +9,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.junit.Assert.*;
 
+/**
+ * ImageCompareTest类。
+ */
 public class ImageCompareTest {
 
     @Test
+    /**
+     * testCompareIdenticalImages方法。
+     */
     public void testCompareIdenticalImages() {
         BufferedImage img1 = createTestImage(100, 100, Color.RED);
         BufferedImage img2 = createTestImage(100, 100, Color.RED);
@@ -21,6 +27,9 @@ public class ImageCompareTest {
     }
 
     @Test
+    /**
+     * testCompareDifferentImages方法。
+     */
     public void testCompareDifferentImages() {
         BufferedImage img1 = createTestImage(100, 100, Color.RED);
         BufferedImage img2 = createTestImage(100, 100, Color.BLUE);
@@ -30,6 +39,9 @@ public class ImageCompareTest {
     }
 
     @Test
+    /**
+     * testCompareDifferentSizes方法。
+     */
     public void testCompareDifferentSizes() {
         BufferedImage img1 = createTestImage(100, 100, Color.RED);
         BufferedImage img2 = createTestImage(50, 50, Color.RED);
@@ -39,6 +51,9 @@ public class ImageCompareTest {
     }
 
     @Test
+    /**
+     * testIsIdenticalSameImage方法。
+     */
     public void testIsIdenticalSameImage() {
         BufferedImage img1 = createTestImage(100, 100, Color.GREEN);
         BufferedImage img2 = createTestImage(100, 100, Color.GREEN);
@@ -47,6 +62,9 @@ public class ImageCompareTest {
     }
 
     @Test
+    /**
+     * testIsIdenticalDifferentImages方法。
+     */
     public void testIsIdenticalDifferentImages() {
         BufferedImage img1 = createTestImage(100, 100, Color.RED);
         BufferedImage img2 = createTestImage(100, 100, Color.BLUE);
@@ -55,6 +73,9 @@ public class ImageCompareTest {
     }
 
     @Test
+    /**
+     * testIsIdenticalDifferentSizes方法。
+     */
     public void testIsIdenticalDifferentSizes() {
         BufferedImage img1 = createTestImage(100, 100, Color.RED);
         BufferedImage img2 = createTestImage(50, 50, Color.RED);
@@ -63,6 +84,9 @@ public class ImageCompareTest {
     }
 
     @Test
+    /**
+     * testDiffImage方法。
+     */
     public void testDiffImage() {
         BufferedImage img1 = createTestImage(10, 10, Color.RED);
         BufferedImage img2 = createTestImage(10, 10, Color.BLUE);
@@ -74,6 +98,9 @@ public class ImageCompareTest {
     }
 
     @Test
+    /**
+     * testDiffImageSameImages方法。
+     */
     public void testDiffImageSameImages() {
         BufferedImage img1 = createTestImage(10, 10, Color.RED);
         BufferedImage img2 = createTestImage(10, 10, Color.RED);

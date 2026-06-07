@@ -11,12 +11,21 @@ package com.zifang.util.zex.bust.charpter12.test001;
  */
 import org.junit.Test;
 
+/**
+ * NotifyTest类。
+ */
 public class NotifyTest {
     @Test
+    /**
+     * test1方法。
+     */
     public void test1() {
         Object lock = new Object();
         new Thread(new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 System.out.println("线程A等待获取lock锁");
                 synchronized (lock) {
@@ -35,6 +44,9 @@ public class NotifyTest {
 
         new Thread(new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 System.out.println("线程B等待获取lock锁");
                 synchronized (lock) {

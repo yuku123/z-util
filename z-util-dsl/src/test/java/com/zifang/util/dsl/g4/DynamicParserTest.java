@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * DynamicParserTest类。
+ */
 public class DynamicParserTest {
 
     @Test
+    /**
+     * testLoadG4_BasicParserRule方法。
+     */
     public void testLoadG4_BasicParserRule() {
         DynamicParser parser = new DynamicParser();
         String g4 = "lexer grammar Test;\n" +
@@ -22,6 +28,9 @@ public class DynamicParserTest {
     }
 
     @Test
+    /**
+     * testParse_BasicRule方法。
+     */
     public void testParse_BasicRule() {
         DynamicLexer lexer = new DynamicLexer();
         String lexerG4 = "lexer grammar Test;\n" +
@@ -47,12 +56,18 @@ public class DynamicParserTest {
     }
 
     @Test
+    /**
+     * testParse_NoRulesLoaded方法。
+     */
     public void testParse_NoRulesLoaded() {
         DynamicParser parser = new DynamicParser();
         assertThrows(RuntimeException.class, () -> parser.parse());
     }
 
     @Test
+    /**
+     * testSetTokenReader方法。
+     */
     public void testSetTokenReader() {
         DynamicParser parser = new DynamicParser();
         DynamicLexer lexer = new DynamicLexer();
@@ -68,6 +83,9 @@ public class DynamicParserTest {
     }
 
     @Test
+    /**
+     * testLoadG4_ParserAndLexerCombined方法。
+     */
     public void testLoadG4_ParserAndLexerCombined() {
         DynamicLexer lexer = new DynamicLexer();
         DynamicParser parser = new DynamicParser();
@@ -102,6 +120,9 @@ public class DynamicParserTest {
     }
 
     @Test
+    /**
+     * testParse_SpecificStartRule方法。
+     */
     public void testParse_SpecificStartRule() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -123,6 +144,9 @@ public class DynamicParserTest {
     }
 
     @Test
+    /**
+     * testParse_UnknownRule方法。
+     */
     public void testParse_UnknownRule() {
         DynamicParser parser = new DynamicParser();
         String g4 = "lexer grammar Test;\n" +

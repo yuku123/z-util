@@ -8,6 +8,9 @@ import java.util.Arrays;
 /**
  * Index类。
  */
+/**
+ * Index类。
+ */
 public class Index {
     private final String[] labels;
     private final boolean isRangeIndex;
@@ -22,10 +25,21 @@ public class Index {
      *      * @param size int类型参数
      * @return static Index类型返回值
      */
+    /**
+     * range方法。
+     *      * @param size int类型参数
+     * @return static Index类型返回值
+     */
     public static Index range(int size) {
         return new Index(size);
     }
 
+    /**
+     * range方法。
+     *      * @param start int类型参数
+     * @param stop int类型参数
+     * @return static Index类型返回值
+     */
     /**
      * range方法。
      *      * @param start int类型参数
@@ -43,12 +57,24 @@ public class Index {
      * @param step int类型参数
      * @return static Index类型返回值
      */
+    /**
+     * range方法。
+     *      * @param start int类型参数
+     * @param stop int类型参数
+     * @param step int类型参数
+     * @return static Index类型返回值
+     */
     public static Index range(int start, int stop, int step) {
         return new Index(start, stop, step);
     }
 
     /**
      * 从字符串数组创建 Index
+     */
+    /**
+     * of方法。
+     *      * @param labels String...类型参数
+     * @return static Index类型返回值
      */
     /**
      * of方法。
@@ -85,6 +111,10 @@ public class Index {
      * Index方法。
      *      * @param labels String[]类型参数
      */
+    /**
+     * Index方法。
+     *      * @param labels String[]类型参数
+     */
     public Index(String[] labels) {
         this.isRangeIndex = false;
         this.start = 0;
@@ -93,6 +123,10 @@ public class Index {
     }
 
     // 公共方法
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     /**
      * size方法。
      * @return int类型返回值
@@ -106,6 +140,11 @@ public class Index {
      *      * @param i int类型参数
      * @return String类型返回值
      */
+    /**
+     * get方法。
+     *      * @param i int类型参数
+     * @return String类型返回值
+     */
     public String get(int i) {
         return labels[i];
     }
@@ -114,10 +153,19 @@ public class Index {
      * toArray方法。
      * @return String[]类型返回值
      */
+    /**
+     * toArray方法。
+     * @return String[]类型返回值
+     */
     public String[] toArray() {
         return labels.clone();
     }
 
+    /**
+     * getLocation方法。
+     *      * @param label String类型参数
+     * @return int类型返回值
+     */
     /**
      * getLocation方法。
      *      * @param label String类型参数
@@ -136,10 +184,20 @@ public class Index {
      * isRangeIndex方法。
      * @return boolean类型返回值
      */
+    /**
+     * isRangeIndex方法。
+     * @return boolean类型返回值
+     */
     public boolean isRangeIndex() {
         return isRangeIndex;
     }
 
+    /**
+     * slice方法。
+     *      * @param start int类型参数
+     * @param stop int类型参数
+     * @return Index类型返回值
+     */
     /**
      * slice方法。
      *      * @param start int类型参数
@@ -152,6 +210,10 @@ public class Index {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

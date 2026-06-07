@@ -22,6 +22,9 @@ import java.util.Random;
 /**
  * GAN类。
  */
+/**
+ * GAN类。
+ */
 public class GAN {
     
     private Module generator;
@@ -33,6 +36,14 @@ public class GAN {
     
     private static final double EPSILON = 1e-12;
     
+    /**
+     * GAN方法。
+     *      * @param generator Module类型参数
+     * @param discriminator Module类型参数
+     * @param latentDim int类型参数
+     * @param genOptimizer com.zifang.util.ml.optim.Optimizer类型参数
+     * @param discOptimizer com.zifang.util.ml.optim.Optimizer类型参数
+     */
     /**
      * GAN方法。
      *      * @param generator Module类型参数
@@ -68,6 +79,12 @@ public class GAN {
     
     /**
      * Train the GAN on real samples.
+     */
+    /**
+     * train方法。
+     *      * @param realSamples NdArray类型参数
+     * @param epochs int类型参数
+     * @param batchSize int类型参数
      */
     /**
      * train方法。
@@ -132,11 +149,20 @@ public class GAN {
      *      * @param nSamples int类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * generate方法。
+     *      * @param nSamples int类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray generate(int nSamples) {
         NdArray noise = generateNoise(nSamples);
         return generator.forward(noise);
     }
     
+    /**
+     * getGeneratorParams方法。
+     * @return NdArray[]类型返回值
+     */
     /**
      * getGeneratorParams方法。
      * @return NdArray[]类型返回值
@@ -276,10 +302,18 @@ public class GAN {
      * getGenerator方法。
      * @return Module类型返回值
      */
+    /**
+     * getGenerator方法。
+     * @return Module类型返回值
+     */
     public Module getGenerator() {
         return generator;
     }
     
+    /**
+     * getDiscriminator方法。
+     * @return Module类型返回值
+     */
     /**
      * getDiscriminator方法。
      * @return Module类型返回值
@@ -291,11 +325,17 @@ public class GAN {
     /**
      * train方法。
      */
+    /**
+     * train方法。
+     */
     public void train() {
         generator.train();
         discriminator.train();
     }
     
+    /**
+     * eval方法。
+     */
     /**
      * eval方法。
      */

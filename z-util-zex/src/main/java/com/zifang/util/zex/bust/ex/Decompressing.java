@@ -14,7 +14,15 @@ import java.io.FileInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+/**
+ * Decompressing类。
+ */
 public class Decompressing { // 创建文件
+    /**
+     * main方法。
+     *      * @param temp String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] temp) {
         ZipInputStream zin; // 创建ZipInputStream对象
         try { // try语句捕获可能发生的异常

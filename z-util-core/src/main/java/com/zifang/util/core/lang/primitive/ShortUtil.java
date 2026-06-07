@@ -9,8 +9,16 @@ package com.zifang.util.core.lang.primitive;
 /**
  * ShortUtil类。
  */
+/**
+ * ShortUtil类。
+ */
 public class ShortUtil {
 
+    /**
+     * parseShort方法。
+     *      * @param object Object类型参数
+     * @return static Short类型返回值
+     */
     /**
      * parseShort方法。
      *      * @param object Object类型参数
@@ -23,6 +31,12 @@ public class ShortUtil {
         return Short.parseShort(object.toString());
     }
 
+    /**
+     * parseShortOrDefault方法。
+     *      * @param object Object类型参数
+     * @param defaultValue short类型参数
+     * @return static Short类型返回值
+     */
     /**
      * parseShortOrDefault方法。
      *      * @param object Object类型参数

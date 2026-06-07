@@ -1,7 +1,15 @@
 package com.zifang.util.core.lang.beans;
 
+/**
+ * DefaultConverterTest类。
+ */
 public class DefaultConverterTest {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         String[] from = new String[]{"Byte", "Short", "Integer", "Long", "Float", "Double", "Character", "String"};
         String[] to = new String[]{"Byte", "Short", "Integer", "Long", "Float", "Double", "Character", "String"};

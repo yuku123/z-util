@@ -12,8 +12,16 @@ package com.zifang.util.zex.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * dddd类。
+ */
 public class dddd {
 
+    /**
+     * removeDuplicates方法。
+     *      * @param nums int[]类型参数
+     * @return static int类型返回值
+     */
     public static int removeDuplicates(int[] nums) {
         int k = 0;
         int base = nums[0];
@@ -51,6 +59,11 @@ public class dddd {
         return k;
     }
 
+    /**
+     * majorityElement方法。
+     *      * @param nums int[]类型参数
+     * @return int类型返回值
+     */
     public int majorityElement(int[] nums) {
         Map map = new HashMap();
         for(int i= 0; i< nums.length; i++){
@@ -70,6 +83,11 @@ public class dddd {
         return 1;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         removeDuplicates(new int[]{1,1,1,2,2,3});

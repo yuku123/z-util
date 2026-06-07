@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * RestControllerAdvice类。
  */
+/**
+ * RestControllerAdvice类。
+ */
 public class RestControllerAdvice {
 }

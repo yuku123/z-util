@@ -19,6 +19,9 @@ import org.openqa.selenium.WebDriver;
 /**
  * CuaAgent类。
  */
+/**
+ * CuaAgent类。
+ */
 public class CuaAgent {
 
     private final OperationRegistry registry;
@@ -27,6 +30,9 @@ public class CuaAgent {
 
     /**
      * 使用默认配置的 ChromeDriver 构造 CuaAgent。
+     */
+    /**
+     * CuaAgent方法。
      */
     /**
      * CuaAgent方法。
@@ -46,6 +52,10 @@ public class CuaAgent {
      * CuaAgent方法。
      *      * @param browserClient BrowserClient类型参数
      */
+    /**
+     * CuaAgent方法。
+     *      * @param browserClient BrowserClient类型参数
+     */
     public CuaAgent(BrowserClient browserClient) {
         this.registry = new OperationRegistry();
         this.planner = new RuleBasedPlanner(registry);
@@ -58,6 +68,12 @@ public class CuaAgent {
      * @param taskDescription natural language description of what to do
      * @param context         pipeline context with URL, cookies, existing data
      * @return execution result with steps taken and extracted data
+     */
+    /**
+     * execute方法。
+     *      * @param taskDescription String类型参数
+     * @param context PipelineContext类型参数
+     * @return CuResult类型返回值
      */
     /**
      * execute方法。
@@ -84,6 +100,12 @@ public class CuaAgent {
      * @param context PipelineContext类型参数
      * @return StepResult类型返回值
      */
+    /**
+     * executeStep方法。
+     *      * @param stepName String类型参数
+     * @param context PipelineContext类型参数
+     * @return StepResult类型返回值
+     */
     public StepResult executeStep(String stepName, PipelineContext context) {
         return planner.plan(stepName, context).getStepResults().stream()
                 .findFirst()
@@ -102,6 +124,10 @@ public class CuaAgent {
      * getRegistry方法。
      * @return OperationRegistry类型返回值
      */
+    /**
+     * getRegistry方法。
+     * @return OperationRegistry类型返回值
+     */
     public OperationRegistry getRegistry() {
         return registry;
     }
@@ -109,6 +135,10 @@ public class CuaAgent {
     /**
      * 获取浏览器客户端。
      * @return 浏览器客户端实例
+     */
+    /**
+     * getBrowserClient方法。
+     * @return BrowserClient类型返回值
      */
     /**
      * getBrowserClient方法。

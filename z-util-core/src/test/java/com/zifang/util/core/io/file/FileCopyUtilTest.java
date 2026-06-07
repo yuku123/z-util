@@ -13,17 +13,26 @@ import java.nio.file.Files;
 
 import static org.junit.Assert.*;
 
+/**
+ * FileCopyUtilTest类。
+ */
 public class FileCopyUtilTest {
 
     private File tempBaseDir;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() throws Exception {
         tempBaseDir = Files.createTempDirectory("copy-test-base").toFile();
         tempBaseDir.deleteOnExit();
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() throws Exception {
         if (tempBaseDir != null && tempBaseDir.exists()) {
             deleteRecursively(tempBaseDir);
@@ -45,6 +54,9 @@ public class FileCopyUtilTest {
     // ==================== copyFile ====================
 
     @Test
+    /**
+     * testCopyFileBasic方法。
+     */
     public void testCopyFileBasic() throws Exception {
         File src = new File(tempBaseDir, "src.txt");
         Files.write(src.toPath(), "hello world".getBytes(StandardCharsets.UTF_8));
@@ -57,6 +69,9 @@ public class FileCopyUtilTest {
     }
 
     @Test
+    /**
+     * testCopyFileOverwritesExisting方法。
+     */
     public void testCopyFileOverwritesExisting() throws Exception {
         File src = new File(tempBaseDir, "src2.txt");
         Files.write(src.toPath(), "new content".getBytes(StandardCharsets.UTF_8));
@@ -69,12 +84,18 @@ public class FileCopyUtilTest {
     }
 
     @Test(expected = NullPointerException.class)
+    /**
+     * testCopyFileWithNullSrc方法。
+     */
     public void testCopyFileWithNullSrc() throws Exception {
         File dest = new File(tempBaseDir, "dest-null.txt");
         FileCopyUtil.copyFile(null, dest);
     }
 
     @Test(expected = NullPointerException.class)
+    /**
+     * testCopyFileWithNullDest方法。
+     */
     public void testCopyFileWithNullDest() throws Exception {
         File src = new File(tempBaseDir, "src-null.txt");
         src.createNewFile();
@@ -82,6 +103,9 @@ public class FileCopyUtilTest {
     }
 
     @Test
+    /**
+     * testCopyFileWithSubdirCreation方法。
+     */
     public void testCopyFileWithSubdirCreation() throws Exception {
         File src = new File(tempBaseDir, "src-subdir.txt");
         Files.write(src.toPath(), "content".getBytes(StandardCharsets.UTF_8));
@@ -96,6 +120,9 @@ public class FileCopyUtilTest {
     // ==================== copyFile with overwrite flag ====================
 
     @Test
+    /**
+     * testCopyFileNoOverwrite方法。
+     */
     public void testCopyFileNoOverwrite() throws Exception {
         File src = new File(tempBaseDir, "src3.txt");
         Files.write(src.toPath(), "source".getBytes(StandardCharsets.UTF_8));
@@ -110,6 +137,9 @@ public class FileCopyUtilTest {
 
     @Test(expected = java.nio.file.FileAlreadyExistsException.class)
     @org.junit.Ignore("与 testCopyFileNoOverwrite 行为矛盾，实际应静默跳过")
+    /**
+     * testCopyFileNoOverwriteThrows方法。
+     */
     public void testCopyFileNoOverwriteThrows() throws Exception {
         File src = new File(tempBaseDir, "src4.txt");
         Files.write(src.toPath(), "source".getBytes(StandardCharsets.UTF_8));
@@ -123,6 +153,9 @@ public class FileCopyUtilTest {
     // ==================== copyFileToDir ====================
 
     @Test
+    /**
+     * testCopyFileToDir方法。
+     */
     public void testCopyFileToDir() throws Exception {
         File src = new File(tempBaseDir, "src5.txt");
         Files.write(src.toPath(), "hello".getBytes(StandardCharsets.UTF_8));
@@ -140,6 +173,9 @@ public class FileCopyUtilTest {
     // ==================== copyDir ====================
 
     @Test
+    /**
+     * testCopyDirBasic方法。
+     */
     public void testCopyDirBasic() throws Exception {
         File srcDir = new File(tempBaseDir, "srcdir");
         srcDir.mkdirs();
@@ -158,6 +194,9 @@ public class FileCopyUtilTest {
     }
 
     @Test
+    /**
+     * testCopyDirWithSubdirs方法。
+     */
     public void testCopyDirWithSubdirs() throws Exception {
         File srcDir = new File(tempBaseDir, "srcdir2");
         srcDir.mkdirs();
@@ -174,12 +213,18 @@ public class FileCopyUtilTest {
     }
 
     @Test(expected = NullPointerException.class)
+    /**
+     * testCopyDirWithNullSrc方法。
+     */
     public void testCopyDirWithNullSrc() throws Exception {
         File destDir = new File(tempBaseDir, "dest-null-dir");
         FileCopyUtil.copyDir((File) null, (String) null);
     }
 
     @Test(expected = NullPointerException.class)
+    /**
+     * testCopyDirWithNullDest方法。
+     */
     public void testCopyDirWithNullDest() throws Exception {
         File srcDir = new File(tempBaseDir, "src-null-dir");
         srcDir.mkdirs();
@@ -189,6 +234,9 @@ public class FileCopyUtilTest {
     // ==================== moveFile ====================
 
     @Test
+    /**
+     * testMoveFile方法。
+     */
     public void testMoveFile() throws Exception {
         File src = new File(tempBaseDir, "move-src.txt");
         Files.write(src.toPath(), "to be moved".getBytes(StandardCharsets.UTF_8));
@@ -202,6 +250,9 @@ public class FileCopyUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testMoveFileSrcNotExists方法。
+     */
     public void testMoveFileSrcNotExists() throws Exception {
         File src = new File(tempBaseDir, "non-existent-move.txt");
         File dest = new File(tempBaseDir, "move-dest2.txt");
@@ -211,6 +262,9 @@ public class FileCopyUtilTest {
     // ==================== moveDir ====================
 
     @Test
+    /**
+     * testMoveDir方法。
+     */
     public void testMoveDir() throws Exception {
         File srcDir = new File(tempBaseDir, "move-src-dir");
         srcDir.mkdirs();
@@ -226,6 +280,9 @@ public class FileCopyUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testMoveDirSrcNotExists方法。
+     */
     public void testMoveDirSrcNotExists() throws Exception {
         File srcDir = new File(tempBaseDir, "non-existent-move-dir");
         File destDir = new File(tempBaseDir, "move-dest-dir2");
@@ -235,6 +292,9 @@ public class FileCopyUtilTest {
     // ==================== copyStream ====================
 
     @Test
+    /**
+     * testCopyStreamBasic方法。
+     */
     public void testCopyStreamBasic() throws Exception {
         byte[] data = "stream content".getBytes(StandardCharsets.UTF_8);
         InputStream in = new ByteArrayInputStream(data);
@@ -246,6 +306,9 @@ public class FileCopyUtilTest {
     }
 
     @Test
+    /**
+     * testCopyStreamEmpty方法。
+     */
     public void testCopyStreamEmpty() throws Exception {
         InputStream in = new ByteArrayInputStream(new byte[0]);
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
@@ -256,6 +319,9 @@ public class FileCopyUtilTest {
     }
 
     @Test
+    /**
+     * testCopyStreamLarge方法。
+     */
     public void testCopyStreamLarge() throws Exception {
         byte[] large = new byte[100_000];
         for (int i = 0; i < large.length; i++) {
@@ -270,12 +336,18 @@ public class FileCopyUtilTest {
     }
 
     @Test(expected = NullPointerException.class)
+    /**
+     * testCopyStreamWithNullInput方法。
+     */
     public void testCopyStreamWithNullInput() throws Exception {
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
         FileCopyUtil.copyStream(null, out);
     }
 
     @Test(expected = NullPointerException.class)
+    /**
+     * testCopyStreamWithNullOutput方法。
+     */
     public void testCopyStreamWithNullOutput() throws Exception {
         InputStream in = new ByteArrayInputStream("test".getBytes(StandardCharsets.UTF_8));
         FileCopyUtil.copyStream(in, null);

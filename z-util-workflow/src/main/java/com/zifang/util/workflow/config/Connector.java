@@ -13,6 +13,9 @@ import java.util.List;
 /**
  * Connector类。
  */
+/**
+ * Connector类。
+ */
 public class Connector {
 
     /**
@@ -31,6 +34,9 @@ public class Connector {
     /**
      * Connector方法。
      */
+    /**
+     * Connector方法。
+     */
     public Connector() {
     }
 
@@ -39,6 +45,11 @@ public class Connector {
      *
      * @param pre  前置节点ID列表
      * @param post 后置节点ID列表
+     */
+    /**
+     * Connector方法。
+     *      * @param pre ListString类型参数
+     * @param post ListString类型参数
      */
     /**
      * Connector方法。
@@ -59,6 +70,10 @@ public class Connector {
      * getPre方法。
      * @return List<String>类型返回值
      */
+    /**
+     * getPre方法。
+     * @return List<String>类型返回值
+     */
     public List<String> getPre() {
         return pre;
     }
@@ -67,6 +82,10 @@ public class Connector {
      * 设置前置节点ID列表
      *
      * @param pre 前置节点ID列表
+     */
+    /**
+     * setPre方法。
+     *      * @param pre ListString类型参数
      */
     /**
      * setPre方法。
@@ -85,6 +104,10 @@ public class Connector {
      * getPost方法。
      * @return List<String>类型返回值
      */
+    /**
+     * getPost方法。
+     * @return List<String>类型返回值
+     */
     public List<String> getPost() {
         return post;
     }
@@ -93,6 +116,10 @@ public class Connector {
      * 设置后置节点ID列表
      *
      * @param post 后置节点ID列表
+     */
+    /**
+     * setPost方法。
+     *      * @param post ListString类型参数
      */
     /**
      * setPost方法。
@@ -107,11 +134,20 @@ public class Connector {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "Connector{pre=" + pre + ", post=" + post + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -126,6 +162,10 @@ public class Connector {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

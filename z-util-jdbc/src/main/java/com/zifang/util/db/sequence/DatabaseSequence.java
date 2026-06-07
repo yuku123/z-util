@@ -38,6 +38,9 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * DatabaseSequence类。
  */
+/**
+ * DatabaseSequence类。
+ */
 public class DatabaseSequence implements Sequence {
 
     private static final Logger log = LoggerFactory.getLogger(DatabaseSequence.class);
@@ -82,6 +85,11 @@ public class DatabaseSequence implements Sequence {
      *      * @param dataSource DataSource类型参数
      * @param name String类型参数
      */
+    /**
+     * DatabaseSequence方法。
+     *      * @param dataSource DataSource类型参数
+     * @param name String类型参数
+     */
     public DatabaseSequence(DataSource dataSource, String name) {
         this(dataSource, name, 1);
     }
@@ -92,6 +100,12 @@ public class DatabaseSequence implements Sequence {
      * @param dataSource 数据源
      * @param name      序列名称
      * @param batchSize 批量获取大小（每次从数据库申请的号段大小，推荐 100~1000）
+     */
+    /**
+     * DatabaseSequence方法。
+     *      * @param dataSource DataSource类型参数
+     * @param name String类型参数
+     * @param batchSize int类型参数
      */
     /**
      * DatabaseSequence方法。
@@ -118,6 +132,9 @@ public class DatabaseSequence implements Sequence {
 
     /**
      * 初始化序列（建表+插入记录）
+     */
+    /**
+     * initializeIfNotExists方法。
      */
     /**
      * initializeIfNotExists方法。
@@ -152,6 +169,10 @@ public class DatabaseSequence implements Sequence {
      * next方法。
      * @return synchronized long类型返回值
      */
+    /**
+     * next方法。
+     * @return synchronized long类型返回值
+     */
     public synchronized long next() {
         if (!initialized) {
             initializeIfNotExists();
@@ -170,6 +191,11 @@ public class DatabaseSequence implements Sequence {
      * 批量生成序号
      */
     @Override
+    /**
+     * next方法。
+     *      * @param count int类型参数
+     * @return long[]类型返回值
+     */
     /**
      * next方法。
      *      * @param count int类型参数
@@ -233,6 +259,10 @@ public class DatabaseSequence implements Sequence {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -244,12 +274,20 @@ public class DatabaseSequence implements Sequence {
      * getCurrentValue方法。
      * @return long类型返回值
      */
+    /**
+     * getCurrentValue方法。
+     * @return long类型返回值
+     */
     public long getCurrentValue() {
         return currentValue.get();
     }
 
     /**
      * 重置序列（慎用）
+     */
+    /**
+     * reset方法。
+     *      * @param startValue long类型参数
      */
     /**
      * reset方法。
@@ -271,6 +309,10 @@ public class DatabaseSequence implements Sequence {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

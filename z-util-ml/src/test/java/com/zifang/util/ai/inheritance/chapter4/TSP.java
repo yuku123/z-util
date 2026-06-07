@@ -13,9 +13,17 @@ package com.zifang.util.ml.inheritance.chapter4;
  *
  * @author zifang
  */
+/**
+ * TSP类。
+ */
 public class TSP {
     public static int maxGenerations = 10000;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         // Create cities

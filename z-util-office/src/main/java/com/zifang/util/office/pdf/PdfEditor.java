@@ -7,5 +7,8 @@ package com.zifang.util.office.pdf;
 /**
  * PdfEditor类。
  */
+/**
+ * PdfEditor类。
+ */
 public class PdfEditor {
 }

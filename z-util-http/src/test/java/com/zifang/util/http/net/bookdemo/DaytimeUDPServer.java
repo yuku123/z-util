@@ -8,12 +8,20 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * DaytimeUDPServer类。
+ */
 public class DaytimeUDPServer {
 
     private final static int PORT = 13;
     private final static Logger audit = Logger.getLogger("requests");
     private final static Logger errors = Logger.getLogger("errors");
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try (DatagramSocket socket = new DatagramSocket(PORT)) {
             while (true) {

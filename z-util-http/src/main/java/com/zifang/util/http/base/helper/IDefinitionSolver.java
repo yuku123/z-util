@@ -14,5 +14,8 @@ package com.zifang.util.http.base.helper;
 /**
  * IDefinitionSolver接口。
  */
+/**
+ * IDefinitionSolver接口。
+ */
 public interface IDefinitionSolver {
 }

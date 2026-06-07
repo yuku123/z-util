@@ -5,10 +5,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JvmTest类。
+ */
 public class JvmTest {
 
     @Test
     @org.junit.Ignore("JVM作业测试，故意触发OOM")
+    /**
+     * test0方法。
+     */
     public void test0() {
         List<HeapOOM> list = new ArrayList<>();
         while (true) {
@@ -18,6 +24,9 @@ public class JvmTest {
 
     @Test
     @org.junit.Ignore("JVM作业测试，故意触发StackOverflow")
+    /**
+     * test1方法。
+     */
     public void test1() {
         StackOverflow stackOverflowError = new StackOverflow();
         try {
@@ -35,6 +44,9 @@ public class JvmTest {
     static class StackOverflow {
         int stackLength = 1;
 
+    /**
+     * stackLeak方法。
+     */
         public void stackLeak() {
             stackLength++;
             stackLeak();

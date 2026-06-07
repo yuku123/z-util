@@ -28,6 +28,9 @@ import java.util.Arrays;
  * @author zifang
  * @since 1.0
  */
+/**
+ * MD5Utils类。
+ */
 public class MD5Utils {
 
     /** MD5 算法名称 */
@@ -53,6 +56,11 @@ public class MD5Utils {
      * @param value 待加密的字符串
      * @return MD5 十六进制小写字符串，若加密失败返回 null
      */
+    /**
+     * encrypt方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
+     */
     public static String encrypt(String value) {
         if (value == null) {
             return null;
@@ -65,6 +73,11 @@ public class MD5Utils {
      *
      * @param inputByteArray 待加密的字节数组
      * @return MD5 十六进制小写字符串，若加密失败返回 null
+     */
+    /**
+     * encrypt方法。
+     *      * @param inputByteArray byte[]类型参数
+     * @return static String类型返回值
      */
     public static String encrypt(byte[] inputByteArray) {
         if (inputByteArray == null) {
@@ -83,6 +96,12 @@ public class MD5Utils {
      * @param salt  盐值（建议长度为 16 字节或以上）
      * @return MD5 十六进制小写字符串，若加密失败返回 null
      */
+    /**
+     * encryptWithSalt方法。
+     *      * @param value String类型参数
+     * @param salt String类型参数
+     * @return static String类型返回值
+     */
     public static String encryptWithSalt(String value, String salt) {
         if (value == null || salt == null) {
             return null;
@@ -96,6 +115,12 @@ public class MD5Utils {
      * @param inputByteArray 待加密的字节数组
      * @param salt          盐值字节数组
      * @return MD5 十六进制小写字符串，若加密失败返回 null
+     */
+    /**
+     * encryptWithSalt方法。
+     *      * @param inputByteArray byte[]类型参数
+     * @param salt byte[]类型参数
+     * @return static String类型返回值
      */
     public static String encryptWithSalt(byte[] inputByteArray, byte[] salt) {
         if (inputByteArray == null || salt == null) {
@@ -115,6 +140,10 @@ public class MD5Utils {
      *
      * @return Base64 编码的盐值字符串
      */
+    /**
+     * generateSalt方法。
+     * @return static String类型返回值
+     */
     public static String generateSalt() {
         return generateSalt(DEFAULT_SALT_LENGTH);
     }
@@ -124,6 +153,11 @@ public class MD5Utils {
      *
      * @param length 盐值字节长度
      * @return Base64 编码的盐值字符串
+     */
+    /**
+     * generateSalt方法。
+     *      * @param length int类型参数
+     * @return static String类型返回值
      */
     public static String generateSalt(int length) {
         if (length <= 0) {
@@ -139,6 +173,10 @@ public class MD5Utils {
      *
      * @return 随机盐值字节数组
      */
+    /**
+     * generateSaltAsBytes方法。
+     * @return static byte[]类型返回值
+     */
     public static byte[] generateSaltAsBytes() {
         return generateSaltAsBytes(DEFAULT_SALT_LENGTH);
     }
@@ -148,6 +186,11 @@ public class MD5Utils {
      *
      * @param length 盐值字节长度
      * @return 随机盐值字节数组
+     */
+    /**
+     * generateSaltAsBytes方法。
+     *      * @param length int类型参数
+     * @return static byte[]类型返回值
      */
     public static byte[] generateSaltAsBytes(int length) {
         if (length <= 0) {
@@ -172,6 +215,13 @@ public class MD5Utils {
      * @param encryptedText 已加密的密文
      * @param salt          盐值（当密文为纯 MD5 时使用）
      * @return 若匹配返回 true，否则返回 false
+     */
+    /**
+     * verify方法。
+     *      * @param plainText String类型参数
+     * @param encryptedText String类型参数
+     * @param salt String类型参数
+     * @return static boolean类型返回值
      */
     public static boolean verify(String plainText, String encryptedText, String salt) {
         if (plainText == null || encryptedText == null) {
@@ -210,6 +260,12 @@ public class MD5Utils {
      * @param encryptedText 已加密的密文（格式：{MD5}:{SALT}）
      * @return 若匹配返回 true，否则返回 false
      */
+    /**
+     * verifyWithEmbeddedSalt方法。
+     *      * @param plainText String类型参数
+     * @param encryptedText String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean verifyWithEmbeddedSalt(String plainText, String encryptedText) {
         return verify(plainText, encryptedText, null);
     }
@@ -222,6 +278,11 @@ public class MD5Utils {
      *
      * @param plainText 明文密码
      * @return 格式为 {MD5}:{SALT} 的密文
+     */
+    /**
+     * encryptAndSalt方法。
+     *      * @param plainText String类型参数
+     * @return static String类型返回值
      */
     public static String encryptAndSalt(String plainText) {
         if (plainText == null) {

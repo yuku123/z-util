@@ -4,14 +4,28 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
+/**
+ * SemapDemo类。
+ */
 public class SemapDemo implements Runnable {
 
+    /**
+     * Semaphore方法。
+     *      * @param 5 Object类型参数
+     * @return Semaphore semaphore = new类型返回值
+     */
     public Semaphore semaphore = new Semaphore(5);//允许5个线程对这个参数进行同事的访问
 
+    /**
+     * SemapDemo方法。
+     */
     public SemapDemo() {
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         try {
             semaphore.acquire();
@@ -26,6 +40,11 @@ public class SemapDemo implements Runnable {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         ExecutorService exec = Executors.newFixedThreadPool(5);
         SemapDemo semapDemo = new SemapDemo();

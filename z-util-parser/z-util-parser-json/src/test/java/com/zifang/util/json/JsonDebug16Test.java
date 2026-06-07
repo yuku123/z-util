@@ -7,9 +7,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug16Test类。
+ */
 public class JsonDebug16Test {
 
     @Test
+    /**
+     * testTokenization方法。
+     */
     public void testTokenization() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         DynamicLexer lexer = new DynamicLexer();
@@ -32,6 +38,9 @@ public class JsonDebug16Test {
     }
 
     @Test
+    /**
+     * testParseNumber方法。
+     */
     public void testParseNumber() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -52,6 +61,9 @@ public class JsonDebug16Test {
     }
 
     @Test
+    /**
+     * testParseValue方法。
+     */
     public void testParseValue() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -71,6 +83,9 @@ public class JsonDebug16Test {
     }
 
     @Test
+    /**
+     * testParseJson方法。
+     */
     public void testParseJson() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -90,6 +105,9 @@ public class JsonDebug16Test {
     }
 
     @Test
+    /**
+     * testFullAstToJava方法。
+     */
     public void testFullAstToJava() throws Exception {
         JSONParser jsonParser = new JSONParser();
 

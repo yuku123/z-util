@@ -12,5 +12,8 @@ package com.zifang.util.http.base.define;
 /**
  * MatrixVariable类。
  */
+/**
+ * MatrixVariable类。
+ */
 public class MatrixVariable {
 }

@@ -7,9 +7,15 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
+/**
+ * CuResultTest类。
+ */
 public class CuResultTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         CuResult result = new CuResult();
         assertFalse(result.isSuccess());
@@ -20,6 +26,9 @@ public class CuResultTest {
     }
 
     @Test
+    /**
+     * testBuilder方法。
+     */
     public void testBuilder() {
         PipelineContext ctx = new PipelineContext();
         StepResult stepResult = StepResult.builder()
@@ -43,6 +52,9 @@ public class CuResultTest {
     }
 
     @Test
+    /**
+     * testSettersAndGetters方法。
+     */
     public void testSettersAndGetters() {
         CuResult result = new CuResult();
         
@@ -62,6 +74,9 @@ public class CuResultTest {
     }
 
     @Test
+    /**
+     * testSetStepResults方法。
+     */
     public void testSetStepResults() {
         CuResult result = new CuResult();
         StepResult step1 = StepResult.builder().stepName("step1").success(true).build();

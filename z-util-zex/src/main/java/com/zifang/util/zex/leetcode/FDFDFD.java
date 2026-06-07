@@ -9,8 +9,16 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * FDFDFD类。
+ */
 public class FDFDFD {
 
+    /**
+     * maxProfit方法。
+     *      * @param prices int[]类型参数
+     * @return static int类型返回值
+     */
     public static int maxProfit(int[] prices) {
 
 
@@ -53,6 +61,11 @@ public class FDFDFD {
         return p ;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         maxProfit(new int[]{1,2,3});
     }

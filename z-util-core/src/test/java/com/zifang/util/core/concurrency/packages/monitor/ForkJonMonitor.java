@@ -11,6 +11,9 @@ import java.util.concurrent.TimeUnit;
  * 此框架是为了解决可以使用 divide 和 conquer 技术，使用 fork() 和 join() 操作把任务分成小块的问题而设计的。主要的类实现这个行为的是 ForkJoinPool 类。
  * 在这个指南，你将学习从ForkJoinPool类可以获取的信息和如何获取这些信息。
  */
+/**
+ * ForkJonMonitor类。
+ */
 public class ForkJonMonitor {
 
     // 1. 创建一个类，名为 Task， 扩展 RecursiveAction 类。
@@ -24,6 +27,12 @@ public class ForkJonMonitor {
         private int end;
 
         // 4. 实现类的构造函数，初始化属性值。
+    /**
+     * Task方法。
+     *      * @param array int[]类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     */
         public Task(int[] array, int start, int end) {
             this.array = array;
             this.start = start;
@@ -34,6 +43,9 @@ public class ForkJonMonitor {
         // 方法。如果此任务已经处理了超过100任务，那么把元素集分成2部分，再创建2个任务分别来执行这些部分，使用 fork()
         // 方法开始执行，并使用
         // join() 方法等待它的终结。
+    /**
+     * compute方法。
+     */
         protected void compute() {
             if (end - start > 100) {
                 int mid = (start + end) / 2;
@@ -62,6 +74,11 @@ public class ForkJonMonitor {
     }
 
     // 7. 创建例子的主类通过创建一个类，名为 Main 并添加 main()方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws Exception {
 
         // 8. 创建 ForkJoinPool 对象，名为 pool。

@@ -13,6 +13,9 @@ import java.util.*;
 /**
  * CombinedChain类。
  */
+/**
+ * CombinedChain类。
+ */
 public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     private final Chain<C> first;
@@ -20,6 +23,11 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
     private final String name;
     private final List<Processor<C>> processors;
 
+    /**
+     * CombinedChain方法。
+     *      * @param first ChainC类型参数
+     * @param second ChainC类型参数
+     */
     /**
      * CombinedChain方法。
      *      * @param first ChainC类型参数
@@ -39,6 +47,10 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -48,11 +60,20 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * getProcessors方法。
      * @return List<Processor<C>>类型返回值
      */
+    /**
+     * getProcessors方法。
+     * @return List<Processor<C>>类型返回值
+     */
     public List<Processor<C>> getProcessors() {
         return Collections.unmodifiableList(processors);
     }
 
     @Override
+    /**
+     * process方法。
+     *      * @param context C类型参数
+     * @return ProcessorResult类型返回值
+     */
     /**
      * process方法。
      *      * @param context C类型参数
@@ -72,6 +93,11 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * addProcessor方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addProcessor(Processor<C> processor) {
         second.addProcessor(processor);
         this.processors.add(processor);
@@ -84,6 +110,11 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * addFirst方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addFirst(Processor<C> processor) {
         first.addFirst(processor);
         this.processors.add(0, processor);
@@ -91,6 +122,12 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * addAt方法。
+     *      * @param index int类型参数
+     * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     /**
      * addAt方法。
      *      * @param index int类型参数
@@ -113,6 +150,11 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * remove方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> remove(Processor<C> processor) {
         first.remove(processor);
         second.remove(processor);
@@ -121,6 +163,10 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * clear方法。
+     * @return Chain<C>类型返回值
+     */
     /**
      * clear方法。
      * @return Chain<C>类型返回值
@@ -138,6 +184,11 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param other ChainC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * prepend方法。
+     *      * @param other ChainC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> prepend(Chain<C> other) {
         first.prepend(other);
         this.processors.addAll(0, other.getProcessors());
@@ -145,6 +196,11 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * append方法。
+     *      * @param other ChainC类型参数
+     * @return Chain<C>类型返回值
+     */
     /**
      * append方法。
      *      * @param other ChainC类型参数

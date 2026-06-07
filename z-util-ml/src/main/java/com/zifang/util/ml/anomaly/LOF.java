@@ -21,6 +21,9 @@ import java.util.PriorityQueue;
 /**
  * LOF类。
  */
+/**
+ * LOF类。
+ */
 public class LOF {
     
     private int nNeighbors;
@@ -41,6 +44,11 @@ public class LOF {
      *      * @param nNeighbors int类型参数
      * @param contamination double类型参数
      */
+    /**
+     * LOF方法。
+     *      * @param nNeighbors int类型参数
+     * @param contamination double类型参数
+     */
     public LOF(int nNeighbors, double contamination) {
         this.nNeighbors = nNeighbors;
         this.contamination = contamination;
@@ -49,6 +57,10 @@ public class LOF {
     
     /**
      * Fit the LOF to the training data.
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
      */
     /**
      * fit方法。
@@ -195,6 +207,11 @@ public class LOF {
      *      * @param X NdArray类型参数
      * @return int[]类型返回值
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         int nSamples = Xdata.length;
@@ -214,6 +231,11 @@ public class LOF {
      * 
      * @param X Input data (nSamples x nFeatures)
      * @return Array of LOF scores (higher = more anomalous)
+     */
+    /**
+     * score方法。
+     *      * @param X NdArray类型参数
+     * @return double[]类型返回值
      */
     /**
      * score方法。

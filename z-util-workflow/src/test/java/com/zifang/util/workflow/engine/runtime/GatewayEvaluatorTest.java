@@ -16,11 +16,17 @@ import static org.junit.Assert.*;
  * - 括号分组: (expr)
  * - 三目运算符: condition ? trueVal : falseVal
  */
+/**
+ * GatewayEvaluatorTest类。
+ */
 public class GatewayEvaluatorTest {
 
     private GatewayEvaluator evaluator;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         evaluator = new GatewayEvaluator();
     }
@@ -28,6 +34,9 @@ public class GatewayEvaluatorTest {
     // ===== 基础比较运算符 =====
 
     @Test
+    /**
+     * testEvaluate_Equality_BooleanTrue方法。
+     */
     public void testEvaluate_Equality_BooleanTrue() {
         String expression = "${approved == true}";
         Map<String, Object> variables = new HashMap<>();
@@ -37,6 +46,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_Equality_BooleanFalse方法。
+     */
     public void testEvaluate_Equality_BooleanFalse() {
         String expression = "${approved == true}";
         Map<String, Object> variables = new HashMap<>();
@@ -46,6 +58,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_Equality_Numeric方法。
+     */
     public void testEvaluate_Equality_Numeric() {
         String expression = "${amount == 1000}";
 
@@ -59,6 +74,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_NotEqual方法。
+     */
     public void testEvaluate_NotEqual() {
         String expression = "${status != 'cancelled'}";
 
@@ -72,6 +90,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_GreaterThan方法。
+     */
     public void testEvaluate_GreaterThan() {
         String expression = "${amount > 1000}";
 
@@ -88,6 +109,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_LessThan方法。
+     */
     public void testEvaluate_LessThan() {
         String expression = "${temperature < 0}";
 
@@ -104,6 +128,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_GreaterThanOrEqual方法。
+     */
     public void testEvaluate_GreaterThanOrEqual() {
         String expression = "${score >= 60}";
 
@@ -120,6 +147,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_LessThanOrEqual方法。
+     */
     public void testEvaluate_LessThanOrEqual() {
         String expression = "${balance <= 0}";
 
@@ -138,6 +168,9 @@ public class GatewayEvaluatorTest {
     // ===== 逻辑运算符 =====
 
     @Test
+    /**
+     * testEvaluate_LogicalAnd方法。
+     */
     public void testEvaluate_LogicalAnd() {
         String expression = "${amount > 1000 && amount <= 5000}";
 
@@ -154,6 +187,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_LogicalOr方法。
+     */
     public void testEvaluate_LogicalOr() {
         String expression = "${status == 'vip' || status == 'premium'}";
 
@@ -170,6 +206,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_LogicalNot方法。
+     */
     public void testEvaluate_LogicalNot() {
         String expression = "${!isDisabled}";
 
@@ -183,6 +222,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_CompoundAnd方法。
+     */
     public void testEvaluate_CompoundAnd() {
         String expression = "${age >= 18 && income > 30000}";
 
@@ -202,6 +244,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_CompoundOr方法。
+     */
     public void testEvaluate_CompoundOr() {
         String expression = "${level == 1 || level == 2 || level == 3}";
 
@@ -220,6 +265,9 @@ public class GatewayEvaluatorTest {
     // ===== 复杂组合表达式 =====
 
     @Test
+    /**
+     * testEvaluate_MixedOperators方法。
+     */
     public void testEvaluate_MixedOperators() {
         String expression = "${age >= 18 && age <= 65 && income > 30000}";
 
@@ -239,6 +287,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_NegationWithComparison方法。
+     */
     public void testEvaluate_NegationWithComparison() {
         String expression = "${!(amount < 1000)}";
 
@@ -252,6 +303,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_ParenthesesGrouping方法。
+     */
     public void testEvaluate_ParenthesesGrouping() {
         String expression = "${(amount > 1000 || isVIP) && status == 'active'}";
 
@@ -279,6 +333,9 @@ public class GatewayEvaluatorTest {
     // ===== 单变量测试 =====
 
     @Test
+    /**
+     * testEvaluate_SingleVariableTrue方法。
+     */
     public void testEvaluate_SingleVariableTrue() {
         String expression = "${isActive}";
         Map<String, Object> variables = new HashMap<>();
@@ -288,6 +345,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_SingleVariableFalse方法。
+     */
     public void testEvaluate_SingleVariableFalse() {
         String expression = "${isActive}";
         Map<String, Object> variables = new HashMap<>();
@@ -299,6 +359,9 @@ public class GatewayEvaluatorTest {
     // ===== 边界条件测试 =====
 
     @Test
+    /**
+     * testEvaluate_NullExpression_ReturnsTrue方法。
+     */
     public void testEvaluate_NullExpression_ReturnsTrue() {
         Map<String, Object> variables = new HashMap<>();
 
@@ -306,6 +369,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_EmptyExpression_ReturnsTrue方法。
+     */
     public void testEvaluate_EmptyExpression_ReturnsTrue() {
         Map<String, Object> variables = new HashMap<>();
 
@@ -313,6 +379,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_WithMissingVariable方法。
+     */
     public void testEvaluate_WithMissingVariable() {
         String expression = "${unknownField == true}";
         Map<String, Object> variables = new HashMap<>();
@@ -322,6 +391,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_WithZeroValue方法。
+     */
     public void testEvaluate_WithZeroValue() {
         String expression = "${count > 0}";
         Map<String, Object> variables = new HashMap<>();
@@ -334,6 +406,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_WithNegativeNumber方法。
+     */
     public void testEvaluate_WithNegativeNumber() {
         String expression = "${balance < 0}";
         Map<String, Object> variables = new HashMap<>();
@@ -349,6 +424,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_WithDecimalNumber方法。
+     */
     public void testEvaluate_WithDecimalNumber() {
         String expression = "${price > 9.99}";
 
@@ -367,6 +445,9 @@ public class GatewayEvaluatorTest {
     // ===== 错误处理测试 =====
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testEvaluate_InvalidExpression_ThrowsException方法。
+     */
     public void testEvaluate_InvalidExpression_ThrowsException() {
         String expression = "${amount >>> 1000}";  // 无效操作符
         Map<String, Object> variables = new HashMap<>();
@@ -376,6 +457,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_InvalidExpression_NoBraces方法。
+     */
     public void testEvaluate_InvalidExpression_NoBraces() {
         // 没有 ${} 包裹的表达式的行为
         String expression = "amount > 1000";
@@ -389,6 +473,9 @@ public class GatewayEvaluatorTest {
     // ===== 性能测试 =====
 
     @Test
+    /**
+     * testEvaluate_ManyIterations方法。
+     */
     public void testEvaluate_ManyIterations() {
         String expression = "${count > 50}";
         Map<String, Object> variables = new HashMap<>();
@@ -408,6 +495,9 @@ public class GatewayEvaluatorTest {
     // ===== 业务场景测试 =====
 
     @Test
+    /**
+     * testEvaluate_LevelBasedApproval方法。
+     */
     public void testEvaluate_LevelBasedApproval() {
         // 多级审批: 1级及以上审批通过
         String expression = "${level >= 1}";
@@ -425,6 +515,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_AmountRangeBasedRouting方法。
+     */
     public void testEvaluate_AmountRangeBasedRouting() {
         // 根据金额范围路由: 1000 以下走快速审批，1000-5000 走标准审批，5000 以上走特殊审批
         String expression = "${amount <= 1000}";
@@ -439,6 +532,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_CreditScore方法。
+     */
     public void testEvaluate_CreditScore() {
         // 信用评分: >= 750 分才能通过
         String expression = "${creditScore >= 750}";
@@ -453,6 +549,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_InventoryCheck方法。
+     */
     public void testEvaluate_InventoryCheck() {
         // 库存检查 + 预留检查
         String expression = "${stock > 0 && reserved < stock}";
@@ -473,6 +572,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_TimeWindow方法。
+     */
     public void testEvaluate_TimeWindow() {
         // 时间窗口判断: 9:00 - 18:00
         String expression = "${hour >= 9 && hour <= 18}";
@@ -490,6 +592,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_VIPDiscount方法。
+     */
     public void testEvaluate_VIPDiscount() {
         // VIP 折扣: VIP 客户或消费满 1000
         String expression = "${isVIP == true || amount >= 1000}";
@@ -510,6 +615,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_ComplexBusinessLogic方法。
+     */
     public void testEvaluate_ComplexBusinessLogic() {
         // 复杂业务逻辑: 年龄 18-60 且收入 > 30000 或为 VIP
         String expression = "${(age >= 18 && age <= 60 && income > 30000) || isVIP == true}";
@@ -536,6 +644,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_EnumLikeComparison方法。
+     */
     public void testEvaluate_EnumLikeComparison() {
         // 枚举类型的状态比较
         String expression = "${status == 'APPROVED' && approvedBy == 'MANAGER'}";
@@ -552,6 +663,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_StringMatching方法。
+     */
     public void testEvaluate_StringMatching() {
         // 字符串包含判断
         String expression = "${email.contains('@') && email.contains('.')}";
@@ -566,6 +680,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_WithEmptyString方法。
+     */
     public void testEvaluate_WithEmptyString() {
         String expression = "${name != ''}";
 
@@ -583,6 +700,9 @@ public class GatewayEvaluatorTest {
     }
 
     @Test
+    /**
+     * testEvaluate_DecimalComparison方法。
+     */
     public void testEvaluate_DecimalComparison() {
         String expression = "${balance >= 1000.50}";
 

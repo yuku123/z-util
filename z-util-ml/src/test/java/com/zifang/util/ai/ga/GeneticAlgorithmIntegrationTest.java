@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * 遗传算法集成测试 - 使用GA解决OneMax问题
  */
+/**
+ * GeneticAlgorithmIntegrationTest类。
+ */
 public class GeneticAlgorithmIntegrationTest {
 
     @Test
@@ -56,6 +59,9 @@ public class GeneticAlgorithmIntegrationTest {
                 .elitismCount(2)
                 .individualFactory(() -> new Individual(chromosomeLength) {
                     @Override
+    /**
+     * randomize方法。
+     */
                     public void randomize() {
                         for (int i = 0; i < length(); i++) {
                             setGene(i, (int) (Math.random() * 10));

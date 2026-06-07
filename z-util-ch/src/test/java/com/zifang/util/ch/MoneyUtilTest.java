@@ -9,9 +9,15 @@ import static org.junit.Assert.*;
 /**
  * MoneyUtil 测试类
  */
+/**
+ * MoneyUtilTest类。
+ */
 public class MoneyUtilTest {
 
     @Test
+    /**
+     * testNumber2CNMontray方法。
+     */
     public void testNumber2CNMontray() {
         assertEquals("零元整", MoneyUtil.number2CNMontray("0"));
         assertEquals("零元整", MoneyUtil.number2CNMontray(BigDecimal.ZERO));
@@ -22,12 +28,18 @@ public class MoneyUtilTest {
     }
 
     @Test
+    /**
+     * testNumber2CNMontrayNegative方法。
+     */
     public void testNumber2CNMontrayNegative() {
         assertEquals("负壹元", MoneyUtil.number2CNMontray("-1"));
         assertEquals("负贰元", MoneyUtil.number2CNMontray("-2"));
     }
 
     @Test
+    /**
+     * testAccountantMoney方法。
+     */
     public void testAccountantMoney() {
         assertEquals("0.00", MoneyUtil.accountantMoney(BigDecimal.ZERO));
         assertEquals("1.00", MoneyUtil.accountantMoney(new BigDecimal("1")));
@@ -36,6 +48,9 @@ public class MoneyUtilTest {
     }
 
     @Test
+    /**
+     * testGetFormatMoney方法。
+     */
     public void testGetFormatMoney() {
         assertEquals("0.00元", MoneyUtil.getFormatMoney(BigDecimal.ZERO, 2, 1));
         assertEquals("100.00元", MoneyUtil.getFormatMoney(new BigDecimal("100"), 2, 1));
@@ -45,6 +60,9 @@ public class MoneyUtilTest {
     }
 
     @Test
+    /**
+     * testGetAccountantMoney方法。
+     */
     public void testGetAccountantMoney() {
         assertEquals("0.00元", MoneyUtil.getAccountantMoney(BigDecimal.ZERO, 2, 1));
         // 123456789 / 100000000 = 1.23, 千分位格式化后为1.23
@@ -52,6 +70,9 @@ public class MoneyUtilTest {
     }
 
     @Test
+    /**
+     * testDigitUppercase方法。
+     */
     public void testDigitUppercase() {
         assertEquals("零元整", MoneyUtil.digitUppercase(0));
         assertEquals("壹元整", MoneyUtil.digitUppercase(1));
@@ -66,12 +87,18 @@ public class MoneyUtilTest {
     }
 
     @Test
+    /**
+     * testDigitUppercaseLarge方法。
+     */
     public void testDigitUppercaseLarge() {
         assertEquals("壹万元整", MoneyUtil.digitUppercase(10000));
         assertEquals("壹亿元整", MoneyUtil.digitUppercase(100000000));
     }
 
     @Test(expected = NumberFormatException.class)
+    /**
+     * testNumber2CNMontrayInvalidInput方法。
+     */
     public void testNumber2CNMontrayInvalidInput() {
         MoneyUtil.number2CNMontray("abc");
     }

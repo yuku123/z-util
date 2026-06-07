@@ -8,9 +8,15 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * AprioriTest类。
+ */
 public class AprioriTest {
 
     @Test
+    /**
+     * testAprioriFrequentItemsets方法。
+     */
     public void testAprioriFrequentItemsets() {
         Apriori apriori = new Apriori(0.3, 0.5);
         
@@ -35,6 +41,9 @@ public class AprioriTest {
     }
 
     @Test
+    /**
+     * testAprioriEmptyTransactions方法。
+     */
     public void testAprioriEmptyTransactions() {
         Apriori apriori = new Apriori(0.5, 0.5);
         
@@ -46,6 +55,9 @@ public class AprioriTest {
     }
 
     @Test
+    /**
+     * testAprioriSingleItem方法。
+     */
     public void testAprioriSingleItem() {
         Apriori apriori = new Apriori(0.6, 0.5);
         

@@ -7,9 +7,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * SimpleASTNodeTest类。
+ */
 public class SimpleASTNodeTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         SimpleASTNode node = new SimpleASTNode();
         assertNotNull(node);
@@ -18,6 +24,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testParameterizedConstructor方法。
+     */
     public void testParameterizedConstructor() {
         SimpleASTNode node = new SimpleASTNode("type", "text", 1, 2);
         assertEquals("type", node.getType());
@@ -27,6 +36,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testGetSetType方法。
+     */
     public void testGetSetType() {
         SimpleASTNode node = new SimpleASTNode();
         node.setType("testType");
@@ -34,6 +46,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testGetSetText方法。
+     */
     public void testGetSetText() {
         SimpleASTNode node = new SimpleASTNode();
         node.setText("testText");
@@ -41,6 +56,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testGetSetLine方法。
+     */
     public void testGetSetLine() {
         SimpleASTNode node = new SimpleASTNode();
         node.setLine(10);
@@ -48,6 +66,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testGetSetColumn方法。
+     */
     public void testGetSetColumn() {
         SimpleASTNode node = new SimpleASTNode();
         node.setColumn(20);
@@ -55,6 +76,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testGetChildren方法。
+     */
     public void testGetChildren() {
         SimpleASTNode parent = new SimpleASTNode();
         SimpleASTNode child1 = new SimpleASTNode("child1", "text1", 1, 1);
@@ -70,6 +94,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testAddChild_SetsParent方法。
+     */
     public void testAddChild_SetsParent() {
         SimpleASTNode parent = new SimpleASTNode();
         SimpleASTNode child = new SimpleASTNode();
@@ -80,6 +107,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testGetParent方法。
+     */
     public void testGetParent() {
         SimpleASTNode parent = new SimpleASTNode();
         SimpleASTNode child = new SimpleASTNode();
@@ -90,6 +120,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testSetParent方法。
+     */
     public void testSetParent() {
         SimpleASTNode parent = new SimpleASTNode();
         SimpleASTNode child = new SimpleASTNode();
@@ -100,6 +133,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testGetSetToken方法。
+     */
     public void testGetSetToken() {
         SimpleASTNode node = new SimpleASTNode();
         Object token = new Object();
@@ -110,6 +146,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         SimpleASTNode node = new SimpleASTNode("type", "text", 1, 2);
         String str = node.toString();
@@ -121,6 +160,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testDump方法。
+     */
     public void testDump() {
         SimpleASTNode root = new SimpleASTNode("root", null, 1, 1);
         SimpleASTNode child1 = new SimpleASTNode("child1", "val1", 2, 1);
@@ -141,6 +183,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testDump_WithIndent方法。
+     */
     public void testDump_WithIndent() {
         SimpleASTNode root = new SimpleASTNode("root", null, 1, 1);
         SimpleASTNode child = new SimpleASTNode("child", "value", 2, 1);
@@ -156,6 +201,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testNestedChildren方法。
+     */
     public void testNestedChildren() {
         SimpleASTNode root = new SimpleASTNode("root", null, 1, 1);
         SimpleASTNode level1 = new SimpleASTNode("level1", null, 2, 1);
@@ -171,6 +219,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testNullTextHandling方法。
+     */
     public void testNullTextHandling() {
         SimpleASTNode node = new SimpleASTNode("type", null, 1, 1);
         assertNull(node.getText());
@@ -182,6 +233,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testEmptyTextHandling方法。
+     */
     public void testEmptyTextHandling() {
         SimpleASTNode node = new SimpleASTNode("type", "", 1, 1);
         assertEquals("", node.getText());
@@ -193,6 +247,9 @@ public class SimpleASTNodeTest {
     }
 
     @Test
+    /**
+     * testChildrenReadOnly方法。
+     */
     public void testChildrenReadOnly() {
         SimpleASTNode node = new SimpleASTNode();
         node.addChild(new SimpleASTNode("child", "1", 1, 1));

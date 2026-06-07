@@ -12,11 +12,17 @@ import static org.junit.Assert.*;
  * <p>
  * 通过反射调用 private 方法验证其正确性。
  */
+/**
+ * DockerClientUtilTest类。
+ */
 public class DockerClientUtilTest {
 
     private DockerClient client;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         client = new DockerClient();
     }
@@ -24,12 +30,18 @@ public class DockerClientUtilTest {
     // ==================== parseSize ====================
 
     @Test
+    /**
+     * testParseSizeBytes方法。
+     */
     public void testParseSizeBytes() {
         assertEquals(0L, parseSize("0B"));
         assertEquals(100L, parseSize("100B"));
     }
 
     @Test
+    /**
+     * testParseSizeKB方法。
+     */
     public void testParseSizeKB() {
         assertEquals(1024L, parseSize("1KB"));
         assertEquals(1024L, parseSize("1KB"));
@@ -37,24 +49,36 @@ public class DockerClientUtilTest {
     }
 
     @Test
+    /**
+     * testParseSizeMB方法。
+     */
     public void testParseSizeMB() {
         assertEquals(5 * 1024 * 1024, parseSize("5MB"));
         assertEquals((long) (1.5 * 1024 * 1024), parseSize("1.5MB"));
     }
 
     @Test
+    /**
+     * testParseSizeGB方法。
+     */
     public void testParseSizeGB() {
         assertEquals(2L * 1024 * 1024 * 1024, parseSize("2GB"));
         assertEquals((long) (1.25 * 1024 * 1024 * 1024), parseSize("1.25GB"));
     }
 
     @Test
+    /**
+     * testParseSizeNoSuffix方法。
+     */
     public void testParseSizeNoSuffix() {
         assertEquals(0L, parseSize(""));
         assertEquals(0L, parseSize(null));
     }
 
     @Test
+    /**
+     * testParseSizeWithSpace方法。
+     */
     public void testParseSizeWithSpace() {
         assertEquals(1024L, parseSize(" 1KB "));
         assertEquals(1024L, parseSize("  1KB  "));
@@ -63,6 +87,9 @@ public class DockerClientUtilTest {
     // ==================== parsePercent ====================
 
     @Test
+    /**
+     * testParsePercent方法。
+     */
     public void testParsePercent() {
         assertEquals(25.5, parsePercent("25.5%"), 0.001);
         assertEquals(0.0, parsePercent("0%"), 0.001);
@@ -70,11 +97,17 @@ public class DockerClientUtilTest {
     }
 
     @Test
+    /**
+     * testParsePercentWithSpace方法。
+     */
     public void testParsePercentWithSpace() {
         assertEquals(50.0, parsePercent(" 50% "), 0.001);
     }
 
     @Test
+    /**
+     * testParsePercentInvalid方法。
+     */
     public void testParsePercentInvalid() {
         assertEquals(0.0, parsePercent(""), 0.001);
         assertEquals(0.0, parsePercent(null), 0.001);
@@ -84,6 +117,9 @@ public class DockerClientUtilTest {
     // ==================== getJsonString ====================
 
     @Test
+    /**
+     * testGetJsonStringSimple方法。
+     */
     public void testGetJsonStringSimple() {
         JsonObject obj = new JsonObject();
         obj.addProperty("name", "nginx");
@@ -94,6 +130,9 @@ public class DockerClientUtilTest {
     }
 
     @Test
+    /**
+     * testGetJsonStringNested方法。
+     */
     public void testGetJsonStringNested() {
         JsonObject inner = new JsonObject();
         inner.addProperty("Image", "nginx:latest");
@@ -105,6 +144,9 @@ public class DockerClientUtilTest {
     }
 
     @Test
+    /**
+     * testGetJsonStringMissingKey方法。
+     */
     public void testGetJsonStringMissingKey() {
         JsonObject obj = new JsonObject();
         obj.addProperty("name", "nginx");
@@ -113,6 +155,9 @@ public class DockerClientUtilTest {
     }
 
     @Test
+    /**
+     * testGetJsonStringNullValue方法。
+     */
     public void testGetJsonStringNullValue() {
         JsonObject obj = new JsonObject();
         obj.addProperty("name", (String) null);

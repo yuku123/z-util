@@ -5,6 +5,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * ThreadPoolTest类。
+ */
 public class ThreadPoolTest {
 
     /**
@@ -22,6 +25,11 @@ public class ThreadPoolTest {
      *
      * @param args
      */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         //固定线程数
 //		ExecutorService threadPool = Executors.newFixedThreadPool(3);
@@ -33,6 +41,9 @@ public class ThreadPoolTest {
             final int task = i;
             threadPool.execute(new Runnable() {
                 @Override
+    /**
+     * run方法。
+     */
                 public void run() {
                     for (int j = 0; j < 10; j++) {
                         try {
@@ -54,6 +65,9 @@ public class ThreadPoolTest {
         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(2);
         scheduledThreadPool.schedule(new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 synchronized (ThreadPoolTest.class) {
                     try {
@@ -68,6 +82,9 @@ public class ThreadPoolTest {
 
         scheduledThreadPool.schedule(new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 synchronized (ThreadPoolTest.class) {
                     try {
@@ -82,6 +99,9 @@ public class ThreadPoolTest {
 
         scheduledThreadPool.schedule(new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 System.out.println("bombing3");
             }
@@ -90,6 +110,9 @@ public class ThreadPoolTest {
         //6秒后执行线程，然后每隔2秒执行一次
         Executors.newScheduledThreadPool(3).scheduleAtFixedRate(new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 System.out.println("bombing");
             }

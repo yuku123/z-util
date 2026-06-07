@@ -24,6 +24,9 @@ import java.lang.annotation.RetentionPolicy;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+/**
+ * AnnotationTest注解。
+ */
 public @interface AnnotationTest {
     String value() default "";
 }

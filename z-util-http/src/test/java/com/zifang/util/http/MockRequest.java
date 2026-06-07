@@ -3,6 +3,9 @@ package com.zifang.util.http;
 import com.zifang.util.http.base.define.*;
 
 @RestController("http://localhost:8011/test")
+/**
+ * MockRequest接口。
+ */
 public interface MockRequest {
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)

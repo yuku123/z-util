@@ -4,9 +4,15 @@ import com.zifang.util.media.graph.qrcode.encoder.BitMatrix;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * FinderPatternFinderTest类。
+ */
 public class FinderPatternFinderTest {
 
     @Test
+    /**
+     * testFindWithEmptyMatrix方法。
+     */
     public void testFindWithEmptyMatrix() {
         BitMatrix matrix = new BitMatrix(21, 21);
         FinderPatternFinder finder = new FinderPatternFinder(matrix);
@@ -16,6 +22,9 @@ public class FinderPatternFinderTest {
     }
 
     @Test
+    /**
+     * testFindWithSimplePattern方法。
+     */
     public void testFindWithSimplePattern() {
         BitMatrix matrix = new BitMatrix(21, 21);
         // Create a simple finder pattern simulation at position (10, 10)
@@ -31,12 +40,18 @@ public class FinderPatternFinderTest {
     }
 
     @Test
+    /**
+     * testEstimateVersionWithNull方法。
+     */
     public void testEstimateVersionWithNull() {
         int version = FinderPatternFinder.estimateVersion(null);
         assertEquals(1, version);
     }
 
     @Test
+    /**
+     * testEstimateVersionWithLessThanThree方法。
+     */
     public void testEstimateVersionWithLessThanThree() {
         BitMatrix matrix = new BitMatrix(21, 21);
         FinderPatternFinder.FinderPattern[] patterns = new FinderPatternFinder.FinderPattern[2];
@@ -47,6 +62,9 @@ public class FinderPatternFinderTest {
     }
 
     @Test
+    /**
+     * testEstimateVersionWithThreePatterns方法。
+     */
     public void testEstimateVersionWithThreePatterns() {
         FinderPatternFinder.FinderPattern[] patterns = new FinderPatternFinder.FinderPattern[3];
         patterns[0] = new FinderPatternFinder.FinderPattern(7, 7, 1.0f);
@@ -58,6 +76,9 @@ public class FinderPatternFinderTest {
     }
 
     @Test
+    /**
+     * testFinderPatternToString方法。
+     */
     public void testFinderPatternToString() {
         FinderPatternFinder.FinderPattern pattern = new FinderPatternFinder.FinderPattern(3.5f, 4.5f, 2.0f);
         String str = pattern.toString();

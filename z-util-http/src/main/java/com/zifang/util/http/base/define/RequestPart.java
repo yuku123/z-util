@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * RequestPart类。
  */
+/**
+ * RequestPart类。
+ */
 public class RequestPart {
 }

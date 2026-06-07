@@ -10,6 +10,9 @@ package com.zifang.util.core.lang;
 /**
  * StringSimilarity类。
  */
+/**
+ * StringSimilarity类。
+ */
 public class StringSimilarity {
 
     /**
@@ -18,6 +21,12 @@ public class StringSimilarity {
      * @param strA 字符串A
      * @param strB 字符串B
      * @return 相似度比例 [0, 1]，1 表示完全相同
+     */
+    /**
+     * lcsSimilarity方法。
+     *      * @param strA String类型参数
+     * @param strB String类型参数
+     * @return static double类型返回值
      */
     /**
      * lcsSimilarity方法。
@@ -48,6 +57,12 @@ public class StringSimilarity {
      * @param strA   字符串A
      * @param strB   字符串B
      * @return 相似度比例 [0, 1]，1 表示完全相同
+     */
+    /**
+     * levenshteinSimilarity方法。
+     *      * @param strA String类型参数
+     * @param strB String类型参数
+     * @return static double类型返回值
      */
     /**
      * levenshteinSimilarity方法。

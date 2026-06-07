@@ -9,6 +9,9 @@ package com.zifang.util.zex.sort;
  * @author zifang
  * @version 1.0
  */
+/**
+ * ShellSort类。
+ */
 public class ShellSort {
 
 }  

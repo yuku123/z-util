@@ -13,6 +13,9 @@ import java.util.Date;
 /**
  * DateFormatUtil类。
  */
+/**
+ * DateFormatUtil类。
+ */
 public class DateFormatUtil {
 
     public static final String DATE_YEAR = "yyyy";
@@ -35,6 +38,11 @@ public class DateFormatUtil {
      *   <li>10位 -> yyyyMMdd</li>
      *   <li>8位  -> yyyy-MM-dd</li>
      * </ul>
+     */
+    /**
+     * formatString方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * formatString方法。
@@ -76,10 +84,21 @@ public class DateFormatUtil {
      *      * @param dateStr String类型参数
      * @return static Date类型返回值
      */
+    /**
+     * parse方法。
+     *      * @param dateStr String类型参数
+     * @return static Date类型返回值
+     */
     public static Date parse(String dateStr) {
         return parse(dateStr, null);
     }
 
+    /**
+     * parse方法。
+     *      * @param dateStr String类型参数
+     * @param outPattern String类型参数
+     * @return static Date类型返回值
+     */
     /**
      * parse方法。
      *      * @param dateStr String类型参数
@@ -126,6 +145,12 @@ public class DateFormatUtil {
 
     /**
      * 格式化Date为指定格式字符串
+     */
+    /**
+     * format方法。
+     *      * @param date Date类型参数
+     * @param pattern String类型参数
+     * @return static String类型返回值
      */
     /**
      * format方法。

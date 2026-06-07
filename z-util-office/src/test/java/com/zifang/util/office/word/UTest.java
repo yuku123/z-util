@@ -16,9 +16,15 @@ import static org.junit.Assert.*;
 /**
  * U Word文档操作工具类的单元测试
  */
+/**
+ * UTest类。
+ */
 public class UTest {
 
     @Test
+    /**
+     * testAddText方法。
+     */
     public void testAddText() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -32,6 +38,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testAddTextWithSize方法。
+     */
     public void testAddTextWithSize() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -45,6 +54,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testAddTextCenter方法。
+     */
     public void testAddTextCenter() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -57,6 +69,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testAddTextRight方法。
+     */
     public void testAddTextRight() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -69,6 +84,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testAddTextList方法。
+     */
     public void testAddTextList() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -85,6 +103,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testAddLoopText方法。
+     */
     public void testAddLoopText() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -100,6 +121,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testCreateHeading1方法。
+     */
     public void testCreateHeading1() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -113,6 +137,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testCreateHeading2方法。
+     */
     public void testCreateHeading2() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -125,6 +152,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testHexToBytes方法。
+     */
     public void testHexToBytes() {
         byte[] result = U.hexToBytes("4288BC");
         
@@ -133,6 +163,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testInitialStyles方法。
+     */
     public void testInitialStyles() {
         try (XWPFDocument document = new XWPFDocument()) {
             U.initialStyles(document);
@@ -145,6 +178,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testMergeCellsHorizontal方法。
+     */
     public void testMergeCellsHorizontal() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFParagraph paragraph = document.createParagraph();
@@ -163,6 +199,9 @@ public class UTest {
     }
 
     @Test
+    /**
+     * testMergeCellsVertically方法。
+     */
     public void testMergeCellsVertically() {
         try (XWPFDocument document = new XWPFDocument()) {
             XWPFTable table = document.createTable();

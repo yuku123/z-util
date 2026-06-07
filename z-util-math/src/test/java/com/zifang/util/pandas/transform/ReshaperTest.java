@@ -14,11 +14,17 @@ import static org.junit.Assert.*;
  * Reshaper 数据转换操作测试类
  * 测试 pivot、melt、stack、unstack、transpose 等数据重塑功能
  */
+/**
+ * ReshaperTest类。
+ */
 public class ReshaperTest {
 
     private DataFrame sampleData;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         // 创建测试数据 - 销售数据示例
         List<Map<String, Object>> records = new ArrayList<>();
@@ -67,6 +73,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testPivotBasic方法。
+     */
     public void testPivotBasic() {
         // 测试基本透视功能
         DataFrame pivotTable = Reshaper.pivot(sampleData, "product", "region", "sales");
@@ -81,6 +90,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testPivotWithAggregation方法。
+     */
     public void testPivotWithAggregation() {
         // 测试带聚合函数的透视
         DataFrame pivotTable = Reshaper.pivot(sampleData, "product", "region", "sales", "sum");
@@ -93,6 +105,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testMeltBasic方法。
+     */
     public void testMeltBasic() {
         // 测试基本融合功能
         List<String> idVars = Arrays.asList("date", "product", "region");
@@ -115,6 +130,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testMeltDefaultNames方法。
+     */
     public void testMeltDefaultNames() {
         // 测试使用默认列名的融合
         List<String> idVars = Arrays.asList("date");
@@ -129,6 +147,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testStack方法。
+     */
     public void testStack() {
         // 测试堆叠操作
         // 创建一个简单的 2x2 数据框
@@ -158,6 +179,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testUnstack方法。
+     */
     public void testUnstack() {
         // 测试取消堆叠操作
         // 创建一个堆叠的 Series
@@ -174,6 +198,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testTranspose方法。
+     */
     public void testTranspose() {
         // 测试转置操作
         Map<String, double[]> data = new LinkedHashMap<>();
@@ -190,6 +217,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testCrosstab方法。
+     */
     public void testCrosstab() {
         // 测试交叉表功能
         DataFrame crosstab = Reshaper.crosstab(sampleData, "product", "region");
@@ -204,6 +234,9 @@ public class ReshaperTest {
     }
 
     @Test
+    /**
+     * testStackAndUnstackRoundTrip方法。
+     */
     public void testStackAndUnstackRoundTrip() {
         // 测试堆叠和取消堆叠的往返操作
         Map<String, double[]> data = new LinkedHashMap<>();

@@ -13,7 +13,14 @@ import javax.tools.JavaFileManager;
 /**
  * CommonJavaFileManager类。
  */
+/**
+ * CommonJavaFileManager类。
+ */
 public class CommonJavaFileManager extends CustomerJavaFileManager {
+    /**
+     * CommonJavaFileManager方法。
+     *      * @param fileManager JavaFileManager类型参数
+     */
     /**
      * CommonJavaFileManager方法。
      *      * @param fileManager JavaFileManager类型参数

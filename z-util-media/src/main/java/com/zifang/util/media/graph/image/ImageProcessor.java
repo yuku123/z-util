@@ -32,6 +32,10 @@ public final class ImageProcessor {
      * ImageProcessor方法。
      *      * @param image BufferedImage类型参数
      */
+    /**
+     * ImageProcessor方法。
+     *      * @param image BufferedImage类型参数
+     */
     public ImageProcessor(BufferedImage image) {
         this.image = image;
         this.width = image.getWidth();
@@ -46,6 +50,12 @@ public final class ImageProcessor {
      * @param newWidth  目标宽度
      * @param newHeight 目标高度
      * @return this
+     */
+    /**
+     * resize方法。
+     *      * @param newWidth int类型参数
+     * @param newHeight int类型参数
+     * @return ImageProcessor类型返回值
      */
     /**
      * resize方法。
@@ -79,6 +89,11 @@ public final class ImageProcessor {
      *      * @param scale double类型参数
      * @return ImageProcessor类型返回值
      */
+    /**
+     * scale方法。
+     *      * @param scale double类型参数
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor scale(double scale) {
         if (scale <= 0) scale = 0.01;
         return resize((int) (width * scale), (int) (height * scale));
@@ -92,6 +107,14 @@ public final class ImageProcessor {
      * @param width  裁剪宽度
      * @param height 裁剪高度
      * @return this
+     */
+    /**
+     * crop方法。
+     *      * @param x int类型参数
+     * @param y int类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     * @return ImageProcessor类型返回值
      */
     /**
      * crop方法。
@@ -124,6 +147,11 @@ public final class ImageProcessor {
      *      * @param degrees double类型参数
      * @return ImageProcessor类型返回值
      */
+    /**
+     * rotate方法。
+     *      * @param degrees double类型参数
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor rotate(double degrees) {
         AffineTransform tx = new AffineTransform();
         tx.rotate(Math.toRadians(degrees), width / 2.0, height / 2.0);
@@ -141,6 +169,10 @@ public final class ImageProcessor {
      * flipHorizontal方法。
      * @return ImageProcessor类型返回值
      */
+    /**
+     * flipHorizontal方法。
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor flipHorizontal() {
         AffineTransform tx = new AffineTransform(-1, 0, 0, 1, width, 0);
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
@@ -150,6 +182,10 @@ public final class ImageProcessor {
 
     /**
      * 垂直翻转。
+     */
+    /**
+     * flipVertical方法。
+     * @return ImageProcessor类型返回值
      */
     /**
      * flipVertical方法。
@@ -172,6 +208,10 @@ public final class ImageProcessor {
      * grayscale方法。
      * @return ImageProcessor类型返回值
      */
+    /**
+     * grayscale方法。
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor grayscale() {
         BufferedImage gray = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         ColorConvertOp op = new ColorConvertOp(null);
@@ -185,6 +225,11 @@ public final class ImageProcessor {
      *
      * @param delta 亮度调整值，-255~255
      * @return this
+     */
+    /**
+     * brightness方法。
+     *      * @param delta int类型参数
+     * @return ImageProcessor类型返回值
      */
     /**
      * brightness方法。
@@ -218,6 +263,11 @@ public final class ImageProcessor {
      *      * @param factor double类型参数
      * @return ImageProcessor类型返回值
      */
+    /**
+     * contrast方法。
+     *      * @param factor double类型参数
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor contrast(double factor) {
         int[] pixels = getPixels();
         for (int i = 0; i < pixels.length; i++) {
@@ -236,6 +286,10 @@ public final class ImageProcessor {
 
     /**
      * 反色。
+     */
+    /**
+     * invert方法。
+     * @return ImageProcessor类型返回值
      */
     /**
      * invert方法。
@@ -262,6 +316,11 @@ public final class ImageProcessor {
      *
      * @param threshold 阈值 0~255
      * @return this
+     */
+    /**
+     * threshold方法。
+     *      * @param threshold int类型参数
+     * @return ImageProcessor类型返回值
      */
     /**
      * threshold方法。
@@ -296,6 +355,11 @@ public final class ImageProcessor {
      *      * @param radius int类型参数
      * @return ImageProcessor类型返回值
      */
+    /**
+     * blur方法。
+     *      * @param radius int类型参数
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor blur(int radius) {
         float[] data = boxKernel(radius);
         convolve(data, radius);
@@ -304,6 +368,10 @@ public final class ImageProcessor {
 
     /**
      * 锐化。
+     */
+    /**
+     * sharpen方法。
+     * @return ImageProcessor类型返回值
      */
     /**
      * sharpen方法。
@@ -321,6 +389,10 @@ public final class ImageProcessor {
 
     /**
      * 边缘检测（Sobel-like Laplacian）。
+     */
+    /**
+     * edgeDetect方法。
+     * @return ImageProcessor类型返回值
      */
     /**
      * edgeDetect方法。
@@ -355,6 +427,14 @@ public final class ImageProcessor {
      * @param alpha float类型参数
      * @return ImageProcessor类型返回值
      */
+    /**
+     * overlay方法。
+     *      * @param overlay BufferedImage类型参数
+     * @param x int类型参数
+     * @param y int类型参数
+     * @param alpha float类型参数
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor overlay(BufferedImage overlay, int x, int y, float alpha) {
         Graphics2D g = image.createGraphics();
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
@@ -373,6 +453,16 @@ public final class ImageProcessor {
      * @param color    颜色
      * @param alpha    透明度 0~1
      * @return this
+     */
+    /**
+     * watermarkText方法。
+     *      * @param text String类型参数
+     * @param x int类型参数
+     * @param y int类型参数
+     * @param font Font类型参数
+     * @param color Color类型参数
+     * @param alpha float类型参数
+     * @return ImageProcessor类型返回值
      */
     /**
      * watermarkText方法。
@@ -412,6 +502,14 @@ public final class ImageProcessor {
      * @param alpha float类型参数
      * @return ImageProcessor类型返回值
      */
+    /**
+     * watermarkImage方法。
+     *      * @param watermark BufferedImage类型参数
+     * @param x int类型参数
+     * @param y int类型参数
+     * @param alpha float类型参数
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor watermarkImage(BufferedImage watermark, int x, int y, float alpha) {
         Graphics2D g = image.createGraphics();
         g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
@@ -427,6 +525,11 @@ public final class ImageProcessor {
      *
      * @param other 右侧图片
      * @return 拼接后的新图片（当前图片在左，other 在右）
+     */
+    /**
+     * concatRight方法。
+     *      * @param other BufferedImage类型参数
+     * @return ImageProcessor类型返回值
      */
     /**
      * concatRight方法。
@@ -458,6 +561,11 @@ public final class ImageProcessor {
      *      * @param other BufferedImage类型参数
      * @return ImageProcessor类型返回值
      */
+    /**
+     * concatBottom方法。
+     *      * @param other BufferedImage类型参数
+     * @return ImageProcessor类型返回值
+     */
     public ImageProcessor concatBottom(BufferedImage other) {
         int newWidth = Math.max(this.width, other.getWidth());
         int newHeight = this.height + other.getHeight();
@@ -481,12 +589,20 @@ public final class ImageProcessor {
      * getImage方法。
      * @return BufferedImage类型返回值
      */
+    /**
+     * getImage方法。
+     * @return BufferedImage类型返回值
+     */
     public BufferedImage getImage() {
         return image;
     }
 
     /**
      * 获取宽。
+     */
+    /**
+     * getWidth方法。
+     * @return int类型返回值
      */
     /**
      * getWidth方法。
@@ -503,12 +619,21 @@ public final class ImageProcessor {
      * getHeight方法。
      * @return int类型返回值
      */
+    /**
+     * getHeight方法。
+     * @return int类型返回值
+     */
     public int getHeight() {
         return height;
     }
 
     /**
      * 导出为 File。
+     */
+    /**
+     * write方法。
+     *      * @param format String类型参数
+     * @param path String类型参数
      */
     /**
      * write方法。
@@ -527,6 +652,11 @@ public final class ImageProcessor {
      *      * @param format String类型参数
      * @param out java.io.OutputStream类型参数
      */
+    /**
+     * write方法。
+     *      * @param format String类型参数
+     * @param out java.io.OutputStream类型参数
+     */
     public void write(String format, java.io.OutputStream out) throws java.io.IOException {
         ImageReadWrite.write(image, format, out);
     }
@@ -538,10 +668,19 @@ public final class ImageProcessor {
      * toBytes方法。
      * @return byte[]类型返回值
      */
+    /**
+     * toBytes方法。
+     * @return byte[]类型返回值
+     */
     public byte[] toBytes() throws java.io.IOException {
         return ImageReadWrite.toBytes(image);
     }
 
+    /**
+     * toBytes方法。
+     *      * @param format String类型参数
+     * @return byte[]类型返回值
+     */
     /**
      * toBytes方法。
      *      * @param format String类型参数
@@ -593,6 +732,11 @@ public final class ImageProcessor {
      *      * @param path String类型参数
      * @return static ImageProcessor类型返回值
      */
+    /**
+     * load方法。
+     *      * @param path String类型参数
+     * @return static ImageProcessor类型返回值
+     */
     public static ImageProcessor load(String path) throws java.io.IOException {
         return new ImageProcessor(ImageReadWrite.read(path));
     }
@@ -602,10 +746,20 @@ public final class ImageProcessor {
      *      * @param file File类型参数
      * @return static ImageProcessor类型返回值
      */
+    /**
+     * load方法。
+     *      * @param file File类型参数
+     * @return static ImageProcessor类型返回值
+     */
     public static ImageProcessor load(File file) throws java.io.IOException {
         return new ImageProcessor(ImageReadWrite.read(file));
     }
 
+    /**
+     * load方法。
+     *      * @param data byte[]类型参数
+     * @return static ImageProcessor类型返回值
+     */
     /**
      * load方法。
      *      * @param data byte[]类型参数

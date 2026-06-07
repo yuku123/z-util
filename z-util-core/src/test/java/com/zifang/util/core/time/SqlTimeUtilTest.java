@@ -11,9 +11,15 @@ import java.util.Date;
 
 import static org.junit.Assert.*;
 
+/**
+ * SqlTimeUtilTest类。
+ */
 public class SqlTimeUtilTest {
 
     @Test
+    /**
+     * testFormat方法。
+     */
     public void testFormat() {
         Time time = Time.valueOf("10:30:45");
         String result = SqlTimeUtil.format(time);
@@ -21,6 +27,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testFormatWithPattern方法。
+     */
     public void testFormatWithPattern() {
         Time time = Time.valueOf("10:30:45");
         String result = SqlTimeUtil.format(time, "HHmmss");
@@ -28,12 +37,18 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testFormatNull方法。
+     */
     public void testFormatNull() {
         assertNull(SqlTimeUtil.format(null));
         assertNull(SqlTimeUtil.format(null, "HH:mm:ss"));
     }
 
     @Test
+    /**
+     * testParse方法。
+     */
     public void testParse() {
         Time time = SqlTimeUtil.parse("10:30:45");
         assertNotNull(time);
@@ -43,6 +58,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testParseShort方法。
+     */
     public void testParseShort() {
         Time time = SqlTimeUtil.parse("10:30", "HH:mm");
         assertNotNull(time);
@@ -51,12 +69,18 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testParseNull方法。
+     */
     public void testParseNull() {
         assertNull(SqlTimeUtil.parse(null));
         assertNull(SqlTimeUtil.parse(""));
     }
 
     @Test
+    /**
+     * testNow方法。
+     */
     public void testNow() {
         Time now = SqlTimeUtil.now();
         assertNotNull(now);
@@ -64,6 +88,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testPlusHours方法。
+     */
     public void testPlusHours() {
         Time base = Time.valueOf("10:00:00");
         Time plus = SqlTimeUtil.plusHours(base, 2);
@@ -73,6 +100,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testPlusMinutes方法。
+     */
     public void testPlusMinutes() {
         Time base = Time.valueOf("10:30:00");
         Time plus = SqlTimeUtil.plusMinutes(base, 15);
@@ -82,6 +112,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testPlusSeconds方法。
+     */
     public void testPlusSeconds() {
         Time base = Time.valueOf("10:30:45");
         Time plus = SqlTimeUtil.plusSeconds(base, 15);
@@ -91,6 +124,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testCompare方法。
+     */
     public void testCompare() {
         Time earlier = Time.valueOf("10:00:00");
         Time later = Time.valueOf("15:00:00");
@@ -99,6 +135,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testMillisBetween方法。
+     */
     public void testMillisBetween() {
         Time start = Time.valueOf("10:00:00");
         Time end = Time.valueOf("10:01:00");
@@ -106,6 +145,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testSecondsBetween方法。
+     */
     public void testSecondsBetween() {
         Time start = Time.valueOf("10:00:00");
         Time end = Time.valueOf("10:01:00");
@@ -113,6 +155,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testMinutesBetween方法。
+     */
     public void testMinutesBetween() {
         Time start = Time.valueOf("10:00:00");
         Time end = Time.valueOf("11:00:00");
@@ -120,6 +165,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testHoursBetween方法。
+     */
     public void testHoursBetween() {
         Time start = Time.valueOf("10:00:00");
         Time end = Time.valueOf("13:00:00");
@@ -127,6 +175,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testGetParts方法。
+     */
     public void testGetParts() {
         Time time = Time.valueOf("10:30:45");
         assertEquals(10, SqlTimeUtil.getHour(time));
@@ -135,6 +186,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testToLocalTime方法。
+     */
     public void testToLocalTime() {
         Time time = Time.valueOf("10:30:45");
         LocalTime lt = SqlTimeUtil.toLocalTime(time);
@@ -145,6 +199,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testToLocalDate方法。
+     */
     public void testToLocalDate() {
         Time time = Time.valueOf("10:30:45");
         LocalDate ld = SqlTimeUtil.toLocalDate(time);
@@ -152,6 +209,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testToLocalDateTime方法。
+     */
     public void testToLocalDateTime() {
         Time time = Time.valueOf("10:30:45");
         LocalDateTime ldt = SqlTimeUtil.toLocalDateTime(time);
@@ -162,6 +222,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testToDate方法。
+     */
     public void testToDate() {
         Time time = Time.valueOf("10:30:45");
         Date date = SqlTimeUtil.toDate(time);
@@ -170,6 +233,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testToInstant方法。
+     */
     public void testToInstant() {
         Time time = Time.valueOf("10:30:45");
         Instant instant = SqlTimeUtil.toInstant(time);
@@ -178,6 +244,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testFromLocalTime方法。
+     */
     public void testFromLocalTime() {
         LocalTime lt = LocalTime.of(10, 30, 45);
         Time time = SqlTimeUtil.fromLocalTime(lt);
@@ -186,6 +255,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testFromLocalDateTime方法。
+     */
     public void testFromLocalDateTime() {
         LocalDateTime ldt = LocalDateTime.of(2024, 6, 15, 10, 30, 45);
         Time time = SqlTimeUtil.fromLocalDateTime(ldt);
@@ -194,6 +266,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testFromDate方法。
+     */
     public void testFromDate() {
         Date date = new Date(1718455200000L);
         Time time = SqlTimeUtil.fromDate(date);
@@ -202,6 +277,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testFromInstant方法。
+     */
     public void testFromInstant() {
         Instant instant = Instant.parse("2024-06-15T10:00:00Z");
         Time time = SqlTimeUtil.fromInstant(instant);
@@ -209,6 +287,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testFromEpochMilli方法。
+     */
     public void testFromEpochMilli() {
         Time time = SqlTimeUtil.fromEpochMilli(1718455200000L);
         assertNotNull(time);
@@ -216,6 +297,9 @@ public class SqlTimeUtilTest {
     }
 
     @Test
+    /**
+     * testNullHandling方法。
+     */
     public void testNullHandling() {
         assertNull(SqlTimeUtil.toLocalTime(null));
         assertNull(SqlTimeUtil.toLocalDate(null));

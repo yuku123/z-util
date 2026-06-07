@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug21Test类。
+ */
 public class JsonDebug21Test {
 
     @Test
+    /**
+     * testFullParseJsonObject方法。
+     */
     public void testFullParseJsonObject() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -35,6 +41,9 @@ public class JsonDebug21Test {
     }
 
     @Test
+    /**
+     * testFullParseJsonValue方法。
+     */
     public void testFullParseJsonValue() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -58,6 +67,9 @@ public class JsonDebug21Test {
     }
 
     @Test
+    /**
+     * testFullParseJson方法。
+     */
     public void testFullParseJson() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");
@@ -81,6 +93,9 @@ public class JsonDebug21Test {
     }
 
     @Test
+    /**
+     * testAstToJavaFull方法。
+     */
     public void testAstToJavaFull() throws Exception {
         JSONParser jsonParser = new JSONParser();
         System.out.println("=== fromJSON('{\"a\":1}') ===");

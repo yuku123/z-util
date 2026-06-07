@@ -12,7 +12,15 @@ package com.zifang.util.zex.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * _076类。
+ */
 public class _076 {
+    /**
+     * getCharCntMap方法。
+     *      * @param cs char[]类型参数
+     * @return HashMap<Character, Integer>类型返回值
+     */
     public HashMap<Character, Integer> getCharCntMap(char[] cs){
         HashMap<Character, Integer> m = new HashMap<>();
         for(int i= 0; i< cs.length; i++){
@@ -26,6 +34,12 @@ public class _076 {
     }
 
     // 判断是否是子序列
+    /**
+     * isSub方法。
+     *      * @param scm HashMapCharacter,Integer类型参数
+     * @param cs HashMapCharacter,Integer类型参数
+     * @return boolean类型返回值
+     */
     public boolean isSub(HashMap<Character,Integer> scm, HashMap<Character,Integer> cs){
         for(Map.Entry<Character,Integer> entry : cs.entrySet()){
             if(!scm.containsKey(entry.getKey())){
@@ -38,6 +52,12 @@ public class _076 {
         }
         return true;
     }
+    /**
+     * minWindow方法。
+     *      * @param s String类型参数
+     * @param t String类型参数
+     * @return String类型返回值
+     */
     public String minWindow(String s, String t) {
         // 先使用最大长度进行判断，然后逐渐缩小其左右
 
@@ -104,6 +124,11 @@ public class _076 {
         return s.substring(start,end+1);
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _076().minWindow("ADOBECODEBANC","ABC");
     }

@@ -6,6 +6,9 @@ package com.zifang.util.http.net.bookdemo;
 
 import java.io.*;
 
+/**
+ * SafeBufferedReaderTest类。
+ */
 public class SafeBufferedReaderTest {
 
     private static class MockReader extends Reader {
@@ -13,6 +16,13 @@ public class SafeBufferedReaderTest {
         private boolean read = false;
 
         @Override
+    /**
+     * read方法。
+     *      * @param dest char[]类型参数
+     * @param off int类型参数
+     * @param length int类型参数
+     * @return int类型返回值
+     */
         public int read(char[] dest, int off, int length) throws IOException {
             if (!read) {
                 read = true;
@@ -26,11 +36,17 @@ public class SafeBufferedReaderTest {
         }
 
         @Override
+    /**
+     * close方法。
+     */
         public void close() throws IOException {
         }
 
     }
 
+    /**
+     * testRead方法。
+     */
     public void testRead() throws IOException {
         String s = "Hello\r\nGoodbye";
         SafeBufferedReader reader = new SafeBufferedReader(new StringReader(s));
@@ -44,11 +60,19 @@ public class SafeBufferedReaderTest {
         private int counter = 0;
 
         @Override
+    /**
+     * available方法。
+     * @return int类型返回值
+     */
         public int available() {
             return counter - 4;
         }
 
         @Override
+    /**
+     * read方法。
+     * @return int类型返回值
+     */
         public int read() throws IOException {
             switch (counter) {
                 case 0:
@@ -79,6 +103,9 @@ public class SafeBufferedReaderTest {
         }
     }
 
+    /**
+     * testReadLine方法。
+     */
     public void testReadLine() throws IOException {
         BufferedReader reader = new BufferedReader(new MockReader());
 //		assertEquals("Hello", reader.readLine());

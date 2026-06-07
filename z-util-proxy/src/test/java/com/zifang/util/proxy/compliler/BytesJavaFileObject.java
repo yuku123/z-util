@@ -9,6 +9,9 @@ import java.net.URI;
 /**
  * 将输出流交给JavaCompiler，最后JavaCompiler将编译后的class文件写入输出流中
  */
+/**
+ * BytesJavaFileObject类。
+ */
 public class BytesJavaFileObject extends SimpleJavaFileObject {
 
     /**
@@ -22,6 +25,11 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
      * @param name
      * @param kind
      */
+    /**
+     * BytesJavaFileObject方法。
+     *      * @param name String类型参数
+     * @param kind Kind类型参数
+     */
     public BytesJavaFileObject(String name, Kind kind) {
         super(URI.create("string:///" + name.replace('.', '/') + kind.extension), kind);
     }
@@ -30,6 +38,10 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
      * 获取输出流为byte[]数组
      *
      * @return
+     */
+    /**
+     * getBytes方法。
+     * @return byte[]类型返回值
      */
     public byte[] getBytes() {
         return bos.toByteArray();
@@ -42,6 +54,10 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
      * @throws IOException
      */
     @Override
+    /**
+     * openOutputStream方法。
+     * @return OutputStream类型返回值
+     */
     public OutputStream openOutputStream() throws IOException {
         return bos;
     }
@@ -52,6 +68,9 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
      * @throws Throwable
      */
     @Override
+    /**
+     * finalize方法。
+     */
     protected void finalize() throws Throwable {
         super.finalize();
         bos.close();

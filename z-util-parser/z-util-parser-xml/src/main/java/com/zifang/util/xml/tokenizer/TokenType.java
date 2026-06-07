@@ -5,6 +5,9 @@ package com.zifang.util.xml.tokenizer;
  *
  * @author zifang
  */
+/**
+ * TokenType枚举。
+ */
 public enum TokenType {
     /**
      * 开始标签: &lt;tag
@@ -57,6 +60,10 @@ public enum TokenType {
         this.code = code;
     }
 
+    /**
+     * getTokenCode方法。
+     * @return int类型返回值
+     */
     public int getTokenCode() {
         return code;
     }

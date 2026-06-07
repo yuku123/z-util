@@ -7,10 +7,18 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+/**
+ * UDPDiscardClient类。
+ */
 public class UDPDiscardClient {
 
     public final static int PORT = 9;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         String hostname = args.length > 0 ? args[0] : "localhost";

@@ -10,6 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * CacheManager类。
  */
+/**
+ * CacheManager类。
+ */
 public class CacheManager {
 
     private static volatile CacheManager instance;
@@ -23,6 +26,10 @@ public class CacheManager {
      * Get the singleton instance of CacheManager.
      *
      * @return the CacheManager instance
+     */
+    /**
+     * getInstance方法。
+     * @return static CacheManager类型返回值
      */
     /**
      * getInstance方法。
@@ -50,6 +57,11 @@ public class CacheManager {
      *      * @param name String类型参数
      * @return MemoryCache类型返回值
      */
+    /**
+     * getMemoryCache方法。
+     *      * @param name String类型参数
+     * @return MemoryCache类型返回值
+     */
     public MemoryCache getMemoryCache(String name) {
         return getMemoryCache(name, 16);
     }
@@ -60,6 +72,12 @@ public class CacheManager {
      * @param name           cache name
      * @param initialCapacity initial capacity
      * @return the memory cache instance
+     */
+    /**
+     * getMemoryCache方法。
+     *      * @param name String类型参数
+     * @param initialCapacity int类型参数
+     * @return MemoryCache类型返回值
      */
     /**
      * getMemoryCache方法。
@@ -86,6 +104,13 @@ public class CacheManager {
      * @param defaultTtlSeconds long类型参数
      * @return MemoryCache类型返回值
      */
+    /**
+     * getMemoryCache方法。
+     *      * @param name String类型参数
+     * @param initialCapacity int类型参数
+     * @param defaultTtlSeconds long类型参数
+     * @return MemoryCache类型返回值
+     */
     public MemoryCache getMemoryCache(String name, int initialCapacity, long defaultTtlSeconds) {
         return getOrCreate(name, () -> new MemoryCache(name, initialCapacity, defaultTtlSeconds));
     }
@@ -96,6 +121,12 @@ public class CacheManager {
      * @param name cache name
      * @param type cache type ("memory", "redis")
      * @return the cache instance
+     */
+    /**
+     * getCache方法。
+     *      * @param name String类型参数
+     * @param type String类型参数
+     * @return Cache类型返回值
      */
     /**
      * getCache方法。
@@ -123,6 +154,12 @@ public class CacheManager {
      * @param cache Cache类型参数
      * @return Cache类型返回值
      */
+    /**
+     * registerCache方法。
+     *      * @param name String类型参数
+     * @param cache Cache类型参数
+     * @return Cache类型返回值
+     */
     public Cache registerCache(String name, Cache cache) {
         return caches.put(name, cache);
     }
@@ -132,6 +169,11 @@ public class CacheManager {
      *
      * @param name cache name
      * @return the cache instance, or null if not found
+     */
+    /**
+     * getCache方法。
+     *      * @param name String类型参数
+     * @return Cache类型返回值
      */
     /**
      * getCache方法。
@@ -153,6 +195,11 @@ public class CacheManager {
      *      * @param name String类型参数
      * @return Cache类型返回值
      */
+    /**
+     * removeCache方法。
+     *      * @param name String类型参数
+     * @return Cache类型返回值
+     */
     public Cache removeCache(String name) {
         Cache cache = caches.remove(name);
         if (cache instanceof MemoryCache) {
@@ -163,6 +210,9 @@ public class CacheManager {
 
     /**
      * Clear all caches.
+     */
+    /**
+     * clearAll方法。
      */
     /**
      * clearAll方法。

@@ -17,10 +17,18 @@ import java.net.URI;
 /**
  * BytesJavaFileObject类。
  */
+/**
+ * BytesJavaFileObject类。
+ */
 public class BytesJavaFileObject extends SimpleJavaFileObject {
 
     private final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
+    /**
+     * BytesJavaFileObject方法。
+     *      * @param name String类型参数
+     * @param kind Kind类型参数
+     */
     /**
      * BytesJavaFileObject方法。
      *      * @param name String类型参数
@@ -34,6 +42,10 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
      * getBytes方法。
      * @return byte[]类型返回值
      */
+    /**
+     * getBytes方法。
+     * @return byte[]类型返回值
+     */
     public byte[] getBytes() {
         return bos.toByteArray();
     }
@@ -43,11 +55,18 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
      * openOutputStream方法。
      * @return OutputStream类型返回值
      */
+    /**
+     * openOutputStream方法。
+     * @return OutputStream类型返回值
+     */
     public OutputStream openOutputStream() throws IOException {
         return bos;
     }
 
     @Override
+    /**
+     * finalize方法。
+     */
     /**
      * finalize方法。
      */

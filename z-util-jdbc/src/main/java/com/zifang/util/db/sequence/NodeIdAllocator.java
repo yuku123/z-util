@@ -27,6 +27,9 @@ import java.util.Properties;
 /**
  * NodeIdAllocator类。
  */
+/**
+ * NodeIdAllocator类。
+ */
 public class NodeIdAllocator {
 
     private static final Logger log = LoggerFactory.getLogger(NodeIdAllocator.class);
@@ -43,6 +46,11 @@ public class NodeIdAllocator {
      *
      * @param specifiedNodeId 指定节点号（小于 0 表示自动分配）
      * @return 节点号（0 ~ 1023）
+     */
+    /**
+     * allocate方法。
+     *      * @param specifiedNodeId long类型参数
+     * @return static long类型返回值
      */
     /**
      * allocate方法。
@@ -122,6 +130,11 @@ public class NodeIdAllocator {
 
     /**
      * 验证节点号是否合法
+     */
+    /**
+     * isValid方法。
+     *      * @param nodeId long类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isValid方法。

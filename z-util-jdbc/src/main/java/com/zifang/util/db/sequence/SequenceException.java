@@ -6,7 +6,14 @@ package com.zifang.util.db.sequence;
 /**
  * SequenceException类。
  */
+/**
+ * SequenceException类。
+ */
 public class SequenceException extends RuntimeException {
+    /**
+     * SequenceException方法。
+     *      * @param message String类型参数
+     */
     /**
      * SequenceException方法。
      *      * @param message String类型参数
@@ -15,6 +22,11 @@ public class SequenceException extends RuntimeException {
         super(message);
     }
 
+    /**
+     * SequenceException方法。
+     *      * @param message String类型参数
+     * @param cause Throwable类型参数
+     */
     /**
      * SequenceException方法。
      *      * @param message String类型参数

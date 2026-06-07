@@ -6,9 +6,15 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.*;
 
+/**
+ * FastByteBufferTest类。
+ */
 public class FastByteBufferTest {
 
     @Test
+    /**
+     * testAppendByte方法。
+     */
     public void testAppendByte() {
         FastByteBuffer buf = new FastByteBuffer();
         buf.append((byte) 'a');
@@ -19,6 +25,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testAppendByteArray方法。
+     */
     public void testAppendByteArray() {
         FastByteBuffer buf = new FastByteBuffer();
         buf.append("hello".getBytes());
@@ -27,6 +36,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testAppendByteArrayPartial方法。
+     */
     public void testAppendByteArrayPartial() {
         FastByteBuffer buf = new FastByteBuffer();
         byte[] data = "hello world".getBytes();
@@ -36,6 +48,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testAppendByteArrayWithOffset方法。
+     */
     public void testAppendByteArrayWithOffset() {
         FastByteBuffer buf = new FastByteBuffer();
         byte[] data = "hello world".getBytes();
@@ -45,6 +60,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testAppendAnotherBuffer方法。
+     */
     public void testAppendAnotherBuffer() {
         FastByteBuffer buf1 = new FastByteBuffer();
         buf1.append("hello".getBytes());
@@ -56,6 +74,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testSize方法。
+     */
     public void testSize() {
         FastByteBuffer buf = new FastByteBuffer();
         assertEquals(0, buf.size());
@@ -64,6 +85,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testIsEmpty方法。
+     */
     public void testIsEmpty() {
         FastByteBuffer buf = new FastByteBuffer();
         assertTrue(buf.isEmpty());
@@ -72,6 +96,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testReset方法。
+     */
     public void testReset() {
         FastByteBuffer buf = new FastByteBuffer();
         buf.append("hello".getBytes());
@@ -82,6 +109,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testGetByte方法。
+     */
     public void testGetByte() {
         FastByteBuffer buf = new FastByteBuffer();
         buf.append("abc".getBytes());
@@ -91,6 +121,9 @@ public class FastByteBufferTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
+    /**
+     * testGetByteOutOfBounds方法。
+     */
     public void testGetByteOutOfBounds() {
         FastByteBuffer buf = new FastByteBuffer();
         buf.append((byte) 'a');
@@ -98,6 +131,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testToArrayPartial方法。
+     */
     public void testToArrayPartial() {
         FastByteBuffer buf = new FastByteBuffer();
         buf.append("hello world".getBytes());
@@ -107,6 +143,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testIndexAndOffset方法。
+     */
     public void testIndexAndOffset() {
         FastByteBuffer buf = new FastByteBuffer();
         buf.append("abc".getBytes());
@@ -115,6 +154,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testLargeData方法。
+     */
     public void testLargeData() {
         FastByteBuffer buf = new FastByteBuffer();
         byte[] large = new byte[100_000];
@@ -127,6 +169,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testGrowBeyondInitialCapacity方法。
+     */
     public void testGrowBeyondInitialCapacity() {
         FastByteBuffer buf = new FastByteBuffer(1);
         // Append beyond single chunk size
@@ -140,6 +185,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testAppendEmptyByteArray方法。
+     */
     public void testAppendEmptyByteArray() {
         FastByteBuffer buf = new FastByteBuffer();
         buf.append("hello".getBytes());
@@ -148,6 +196,9 @@ public class FastByteBufferTest {
     }
 
     @Test
+    /**
+     * testAppendBufferEmpty方法。
+     */
     public void testAppendBufferEmpty() {
         FastByteBuffer buf1 = new FastByteBuffer();
         buf1.append("hello".getBytes());

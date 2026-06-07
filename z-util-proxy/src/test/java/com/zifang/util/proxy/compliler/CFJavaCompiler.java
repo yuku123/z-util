@@ -11,11 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * CFJavaCompiler类。
+ */
 public class CFJavaCompiler {
     private static final Logger log = LoggerFactory.getLogger(CFJavaCompiler.class);
 
     /**
      * 将javaCode 编译成为类
+     */
+    /**
+     * compile方法。
+     *      * @param className String类型参数
+     * @param javaCode String类型参数
+     * @return static Map<String, BytesJavaFileObject>类型返回值
      */
     public static Map<String, BytesJavaFileObject> compile(String className, String javaCode) throws Exception {
 

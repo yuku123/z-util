@@ -25,6 +25,9 @@ import java.util.Objects;
 /**
  * BpmnSequenceFlow类。
  */
+/**
+ * BpmnSequenceFlow类。
+ */
 public class BpmnSequenceFlow {
 
     private String id;
@@ -41,6 +44,9 @@ public class BpmnSequenceFlow {
     /**
      * BpmnSequenceFlow方法。
      */
+    /**
+     * BpmnSequenceFlow方法。
+     */
     public BpmnSequenceFlow() {
     }
 
@@ -50,6 +56,12 @@ public class BpmnSequenceFlow {
      * @param id        序列流唯一标识符
      * @param sourceRef 源节点 ID 引用
      * @param targetRef 目标节点 ID 引用
+     */
+    /**
+     * BpmnSequenceFlow方法。
+     *      * @param id String类型参数
+     * @param sourceRef String类型参数
+     * @param targetRef String类型参数
      */
     /**
      * BpmnSequenceFlow方法。
@@ -82,6 +94,15 @@ public class BpmnSequenceFlow {
      * @param conditionExpression String类型参数
      * @param isDefault boolean类型参数
      */
+    /**
+     * BpmnSequenceFlow方法。
+     *      * @param id String类型参数
+     * @param sourceRef String类型参数
+     * @param targetRef String类型参数
+     * @param name String类型参数
+     * @param conditionExpression String类型参数
+     * @param isDefault boolean类型参数
+     */
     public BpmnSequenceFlow(String id, String sourceRef, String targetRef, String name, String conditionExpression, boolean isDefault) {
         this.id = id;
         this.sourceRef = sourceRef;
@@ -100,6 +121,10 @@ public class BpmnSequenceFlow {
      * getId方法。
      * @return String类型返回值
      */
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
     public String getId() {
         return id;
     }
@@ -108,6 +133,10 @@ public class BpmnSequenceFlow {
      * 设置序列流唯一标识符。
      *
      * @param id 序列流 ID
+     */
+    /**
+     * setId方法。
+     *      * @param id String类型参数
      */
     /**
      * setId方法。
@@ -126,6 +155,10 @@ public class BpmnSequenceFlow {
      * getSourceRef方法。
      * @return String类型返回值
      */
+    /**
+     * getSourceRef方法。
+     * @return String类型返回值
+     */
     public String getSourceRef() {
         return sourceRef;
     }
@@ -134,6 +167,10 @@ public class BpmnSequenceFlow {
      * 设置序列流源节点 ID 引用。
      *
      * @param sourceRef 源节点 ID
+     */
+    /**
+     * setSourceRef方法。
+     *      * @param sourceRef String类型参数
      */
     /**
      * setSourceRef方法。
@@ -152,6 +189,10 @@ public class BpmnSequenceFlow {
      * getTargetRef方法。
      * @return String类型返回值
      */
+    /**
+     * getTargetRef方法。
+     * @return String类型返回值
+     */
     public String getTargetRef() {
         return targetRef;
     }
@@ -160,6 +201,10 @@ public class BpmnSequenceFlow {
      * 设置序列流目标节点 ID 引用。
      *
      * @param targetRef 目标节点 ID
+     */
+    /**
+     * setTargetRef方法。
+     *      * @param targetRef String类型参数
      */
     /**
      * setTargetRef方法。
@@ -178,6 +223,10 @@ public class BpmnSequenceFlow {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -186,6 +235,10 @@ public class BpmnSequenceFlow {
      * 设置序列流名称。
      *
      * @param name 序列流名称
+     */
+    /**
+     * setName方法。
+     *      * @param name String类型参数
      */
     /**
      * setName方法。
@@ -205,6 +258,10 @@ public class BpmnSequenceFlow {
      * getConditionExpression方法。
      * @return String类型返回值
      */
+    /**
+     * getConditionExpression方法。
+     * @return String类型返回值
+     */
     public String getConditionExpression() {
         return conditionExpression;
     }
@@ -213,6 +270,10 @@ public class BpmnSequenceFlow {
      * 设置序列流条件表达式。
      *
      * @param conditionExpression 条件表达式
+     */
+    /**
+     * setConditionExpression方法。
+     *      * @param conditionExpression String类型参数
      */
     /**
      * setConditionExpression方法。
@@ -232,6 +293,10 @@ public class BpmnSequenceFlow {
      * isDefault方法。
      * @return boolean类型返回值
      */
+    /**
+     * isDefault方法。
+     * @return boolean类型返回值
+     */
     public boolean isDefault() {
         return isDefault;
     }
@@ -240,6 +305,10 @@ public class BpmnSequenceFlow {
      * 设置是否为默认流向。
      *
      * @param isDefault 是否为默认流向
+     */
+    /**
+     * setDefault方法。
+     *      * @param isDefault boolean类型参数
      */
     /**
      * setDefault方法。
@@ -258,6 +327,10 @@ public class BpmnSequenceFlow {
      * getProperties方法。
      * @return Map<String, String>类型返回值
      */
+    /**
+     * getProperties方法。
+     * @return Map<String, String>类型返回值
+     */
     public Map<String, String> getProperties() {
         return properties;
     }
@@ -266,6 +339,10 @@ public class BpmnSequenceFlow {
      * 设置序列流的属性映射。
      *
      * @param properties 属性映射表
+     */
+    /**
+     * setProperties方法。
+     *      * @param properties MapString,类型参数
      */
     /**
      * setProperties方法。
@@ -280,6 +357,11 @@ public class BpmnSequenceFlow {
      *
      * @param key   属性键
      * @param value 属性值
+     */
+    /**
+     * setProperty方法。
+     *      * @param key String类型参数
+     * @param value String类型参数
      */
     /**
      * setProperty方法。
@@ -301,11 +383,20 @@ public class BpmnSequenceFlow {
      *      * @param key String类型参数
      * @return String类型返回值
      */
+    /**
+     * getProperty方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
     public String getProperty(String key) {
         return this.properties.get(key);
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -316,6 +407,11 @@ public class BpmnSequenceFlow {
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -334,6 +430,10 @@ public class BpmnSequenceFlow {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

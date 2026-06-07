@@ -10,51 +10,96 @@ import java.util.Date;
  * @author zifang
  * @version 1.0.0
  */
+/**
+ * GitAuthor类。
+ */
 public class GitAuthor {
 
     private String name;
     private String email;
     private Date when;
 
+    /**
+     * GitAuthor方法。
+     */
     public GitAuthor() {
     }
 
+    /**
+     * GitAuthor方法。
+     *      * @param name String类型参数
+     * @param email String类型参数
+     */
     public GitAuthor(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
+    /**
+     * GitAuthor方法。
+     *      * @param name String类型参数
+     * @param email String类型参数
+     * @param when Date类型参数
+     */
     public GitAuthor(String name, String email, Date when) {
         this.name = name;
         this.email = email;
         this.when = when;
     }
 
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * getEmail方法。
+     * @return String类型返回值
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * setEmail方法。
+     *      * @param email String类型参数
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * getWhen方法。
+     * @return Date类型返回值
+     */
     public Date getWhen() {
         return when;
     }
 
+    /**
+     * setWhen方法。
+     *      * @param when Date类型参数
+     */
     public void setWhen(Date when) {
         this.when = when;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return name + " <" + email + ">";
     }

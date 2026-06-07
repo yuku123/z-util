@@ -11,6 +11,9 @@ import java.util.Iterator;
 /**
  * NIO客户端
  */
+/**
+ * NIOClient类。
+ */
 public class NIOClient {
     // 通道管理器
     private Selector selector;
@@ -21,6 +24,11 @@ public class NIOClient {
      * @param ip   连接的服务器的ip
      * @param port 连接的服务器的端口号
      * @throws IOException
+     */
+    /**
+     * initClient方法。
+     *      * @param ip String类型参数
+     * @param port int类型参数
      */
     public void initClient(String ip, int port) throws IOException {
         // 获得一个Socket通道
@@ -43,6 +51,9 @@ public class NIOClient {
      * @throws IOException
      */
     @SuppressWarnings("unchecked")
+    /**
+     * listen方法。
+     */
     public void listen() throws IOException {
         // 轮询访问selector
         while (true) {
@@ -85,6 +96,10 @@ public class NIOClient {
      * @param key
      * @throws IOException
      */
+    /**
+     * read方法。
+     *      * @param key SelectionKey类型参数
+     */
     public void read(SelectionKey key) throws IOException {
         // 服务器可读取消息:得到事件发生的Socket通道
         SocketChannel channel = (SocketChannel) key.channel();
@@ -102,6 +117,11 @@ public class NIOClient {
      * 启动客户端测试
      *
      * @throws IOException
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) throws IOException {
         NIOClient client = new NIOClient();

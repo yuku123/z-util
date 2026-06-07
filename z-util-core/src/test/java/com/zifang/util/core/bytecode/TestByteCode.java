@@ -3,15 +3,26 @@ package com.zifang.util.core.bytecode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TestByteCode类。
+ */
 public class TestByteCode {
 
     private int int_2_2_1 = 1;
 
+    /**
+     * test2_1_1_1方法。
+     *      * @param i int类型参数
+     * @param j int类型参数
+     */
     public void test2_1_1_1(int i, int j) {
         int k = int_2_2_1 + i + j;
         System.out.println(k);
     }
 
+    /**
+     * test2_1_1_2方法。
+     */
     public void test2_1_1_2() {
         int i = 1;
         int j = 2;
@@ -19,6 +30,10 @@ public class TestByteCode {
         System.out.println(k);
     }
 
+    /**
+     * test2_1_2_1方法。
+     * @return int类型返回值
+     */
     public int test2_1_2_1() {
         int i = 1;
         int j = 2;
@@ -26,6 +41,11 @@ public class TestByteCode {
         return k;
     }
 
+    /**
+     * test2_3_1方法。
+     *      * @param n int类型参数
+     * @return int类型返回值
+     */
     public int test2_3_1(int n) {
         if (n > 0) {
             return 1;
@@ -34,6 +54,10 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test_2_2_1方法。
+     * @return static void类型返回值
+     */
     public static void test_2_2_1() {
         int i = 0;
         for (int j = 0; j < 50; j++) {
@@ -42,6 +66,10 @@ public class TestByteCode {
         System.out.println(i);
     }
 
+    /**
+     * test_2_2_2方法。
+     * @return static void类型返回值
+     */
     public static void test_2_2_2() {
         int i = 0;
         for (int j = 0; j < 50; j++) {
@@ -50,12 +78,19 @@ public class TestByteCode {
         System.out.println(i);
     }
 
+    /**
+     * test_2_3_2方法。
+     *      * @param c int[]类型参数
+     */
     public void test_2_3_2(int[] c) {
         for (int i = 0; i < c.length; i++) {
             System.out.println(i);
         }
     }
 
+    /**
+     * test_2_3_2_1_1方法。
+     */
     public void test_2_3_2_1_1() {
         int[] numbers = new int[]{1, 2, 3};
         for (int number : numbers) {
@@ -63,6 +98,9 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test_2_3_2_1_2方法。
+     */
     public void test_2_3_2_1_2() {
         List<String> a = new ArrayList<>();
         a.add("a");
@@ -73,6 +111,11 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test_2_3_3_1_1方法。
+     *      * @param i int类型参数
+     * @return int类型返回值
+     */
     public int test_2_3_3_1_1(int i) {
         switch (i) {
             case 100:
@@ -86,6 +129,11 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test_2_3_3_1_2方法。
+     *      * @param i int类型参数
+     * @return int类型返回值
+     */
     public int test_2_3_3_1_2(int i) {
         switch (i) {
             case 1:
@@ -99,6 +147,11 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test_2_3_3_2方法。
+     *      * @param name String类型参数
+     * @return int类型返回值
+     */
     public int test_2_3_3_2(String name) {
         switch (name) {
             case "吃饭1":
@@ -111,18 +164,31 @@ public class TestByteCode {
     }
 
 
+    /**
+     * test2_5_1_exception方法。
+     */
     public void test2_5_1_exception() {
         throw new RuntimeException();
     }
 
+    /**
+     * test2_5_1_handler方法。
+     *      * @param e Exception类型参数
+     */
     public void test2_5_1_handler(Exception e) {
         System.out.println("捕获到异常");
     }
 
+    /**
+     * test2_5_finally方法。
+     */
     public void test2_5_finally() {
         System.out.println("finally语句块");
     }
 
+    /**
+     * test2_5_1方法。
+     */
     public void test2_5_1() {
         try {
             test2_5_1_exception();
@@ -131,6 +197,9 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test2_5_2方法。
+     */
     public void test2_5_2() {
         try {
             test2_5_1_exception();
@@ -141,6 +210,9 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test2_5_3方法。
+     */
     public void test2_5_3() {
         try {
             test2_5_1_exception();
@@ -151,6 +223,10 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test2_5_3_1方法。
+     * @return int类型返回值
+     */
     public int test2_5_3_1() {
         try {
             int a = 1 / 0;
@@ -164,6 +240,10 @@ public class TestByteCode {
     }
 
 
+    /**
+     * test2_5_3_2方法。
+     * @return int类型返回值
+     */
     public int test2_5_3_2() {
         int i = 100;
         try {
@@ -173,6 +253,10 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test2_5_3_3方法。
+     * @return int类型返回值
+     */
     public int test2_5_3_3() {
         int i = 100;
         try {
@@ -182,6 +266,10 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test2_5_3_4方法。
+     * @return String类型返回值
+     */
     public String test2_5_3_4() {
         String s = "hello";
         try {
@@ -191,9 +279,15 @@ public class TestByteCode {
         }
     }
 
+    /**
+     * test2_7_1方法。
+     */
     public void test2_7_1() {
         Runnable r1 = new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 System.out.println("hello, inner class");
             }
@@ -201,12 +295,20 @@ public class TestByteCode {
         r1.run();
     }
 
+    /**
+     * test2_7_2方法。
+     */
     public void test2_7_2() {
         Runnable r1 = () -> System.out.println("hello, inner class");
         r1.run();
     }
 
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new TestByteCode().test2_1_2_1();
         test_2_2_2();

@@ -13,6 +13,9 @@ import java.util.Objects;
 /**
  * DataSourceTableDTO类。
  */
+/**
+ * DataSourceTableDTO类。
+ */
 public class DataSourceTableDTO {
 
     @Description("数据源下表 id")
@@ -39,6 +42,10 @@ public class DataSourceTableDTO {
      * getComponentCode方法。
      * @return String类型返回值
      */
+    /**
+     * getComponentCode方法。
+     * @return String类型返回值
+     */
     public String getComponentCode() {
         return datasourceCode + ":" + tableName;
     }
@@ -47,6 +54,10 @@ public class DataSourceTableDTO {
      * 获取数据源表id
      *
      * @return 数据源表id
+     */
+    /**
+     * getDatasourceTableId方法。
+     * @return long类型返回值
      */
     /**
      * getDatasourceTableId方法。
@@ -65,6 +76,10 @@ public class DataSourceTableDTO {
      * setDatasourceTableId方法。
      *      * @param datasourceTableId long类型参数
      */
+    /**
+     * setDatasourceTableId方法。
+     *      * @param datasourceTableId long类型参数
+     */
     public void setDatasourceTableId(Long datasourceTableId) {
         this.datasourceTableId = datasourceTableId;
     }
@@ -73,6 +88,10 @@ public class DataSourceTableDTO {
      * 获取数据标识
      *
      * @return 数据标识
+     */
+    /**
+     * getDatasourceCode方法。
+     * @return String类型返回值
      */
     /**
      * getDatasourceCode方法。
@@ -91,6 +110,10 @@ public class DataSourceTableDTO {
      * setDatasourceCode方法。
      *      * @param datasourceCode String类型参数
      */
+    /**
+     * setDatasourceCode方法。
+     *      * @param datasourceCode String类型参数
+     */
     public void setDatasourceCode(String datasourceCode) {
         this.datasourceCode = datasourceCode;
     }
@@ -99,6 +122,10 @@ public class DataSourceTableDTO {
      * 获取表名称
      *
      * @return 表名称
+     */
+    /**
+     * getTableName方法。
+     * @return String类型返回值
      */
     /**
      * getTableName方法。
@@ -117,6 +144,10 @@ public class DataSourceTableDTO {
      * setTableName方法。
      *      * @param tableName String类型参数
      */
+    /**
+     * setTableName方法。
+     *      * @param tableName String类型参数
+     */
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
@@ -125,6 +156,10 @@ public class DataSourceTableDTO {
      * 获取表描述
      *
      * @return 表描述
+     */
+    /**
+     * getDescriptions方法。
+     * @return String类型返回值
      */
     /**
      * getDescriptions方法。
@@ -143,6 +178,10 @@ public class DataSourceTableDTO {
      * setDescriptions方法。
      *      * @param descriptions String类型参数
      */
+    /**
+     * setDescriptions方法。
+     *      * @param descriptions String类型参数
+     */
     public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
     }
@@ -151,6 +190,10 @@ public class DataSourceTableDTO {
      * 获取字段列表
      *
      * @return 字段列表
+     */
+    /**
+     * getColumns方法。
+     * @return List<DataSourceTableColumnDTO>类型返回值
      */
     /**
      * getColumns方法。
@@ -169,6 +212,10 @@ public class DataSourceTableDTO {
      * setColumns方法。
      *      * @param columns ListDataSourceTableColumnDTO类型参数
      */
+    /**
+     * setColumns方法。
+     *      * @param columns ListDataSourceTableColumnDTO类型参数
+     */
     public void setColumns(List<DataSourceTableColumnDTO> columns) {
         this.columns = columns;
     }
@@ -178,11 +225,20 @@ public class DataSourceTableDTO {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "DataSourceTableDTO{datasourceTableId=" + datasourceTableId + ", datasourceCode=" + datasourceCode + ", tableName=" + tableName + ", descriptions=" + descriptions + ", columns=" + columns + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -200,6 +256,10 @@ public class DataSourceTableDTO {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

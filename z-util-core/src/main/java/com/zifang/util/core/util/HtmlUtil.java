@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
 /**
  * HtmlUtil类。
  */
+/**
+ * HtmlUtil类。
+ */
 public class HtmlUtil {
 
     private static final String EMPTY = "";
@@ -22,6 +25,12 @@ public class HtmlUtil {
      * @param str      需要处理的字符串
      * @param encoding 编码方式
      * @return 编码后的字符串
+     */
+    /**
+     * escape方法。
+     *      * @param str String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
      */
     /**
      * escape方法。
@@ -47,6 +56,12 @@ public class HtmlUtil {
      * @param str      需要处理的字符串
      * @param encoding 解码方式
      * @return 解码后的字符串
+     */
+    /**
+     * unescape方法。
+     *      * @param str String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
      */
     /**
      * unescape方法。
@@ -93,6 +108,11 @@ public class HtmlUtil {
      *      * @param content String类型参数
      * @return static String类型返回值
      */
+    /**
+     * unhtml方法。
+     *      * @param content String类型参数
+     * @return static String类型返回值
+     */
     public static String unhtml(String content) {
         if (content == null || content.isEmpty()) {
             return EMPTY;
@@ -117,6 +137,11 @@ public class HtmlUtil {
      *      * @param content String类型参数
      * @return static String类型返回值
      */
+    /**
+     * html方法。
+     *      * @param content String类型参数
+     * @return static String类型返回值
+     */
     public static String html(String content) {
         if (content == null || content.isEmpty()) {
             return EMPTY;
@@ -135,6 +160,11 @@ public class HtmlUtil {
      *
      * @param value 需要过滤的值
      * @return 过滤后的字符串
+     */
+    /**
+     * replaceXSS方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * replaceXSS方法。
@@ -207,6 +237,11 @@ public class HtmlUtil {
      *
      * @param value 需要过滤的值
      * @return 过滤后的字符串
+     */
+    /**
+     * filter方法。
+     *      * @param value String类型参数
+     * @return static String类型返回值
      */
     /**
      * filter方法。

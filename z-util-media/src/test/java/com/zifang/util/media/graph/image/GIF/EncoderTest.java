@@ -7,9 +7,15 @@ import java.io.OutputStream;
 import java.io.IOException;
 import static org.junit.Assert.*;
 
+/**
+ * EncoderTest类。
+ */
 public class EncoderTest {
 
     @Test
+    /**
+     * testEncoderExists方法。
+     */
     public void testEncoderExists() {
         // Encoder class has package-private constructor with args
         // Just verify the class is accessible

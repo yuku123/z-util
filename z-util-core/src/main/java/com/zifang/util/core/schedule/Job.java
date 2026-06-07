@@ -23,6 +23,9 @@ import org.quartz.JobExecutionException;
 /**
  * Job接口。
  */
+/**
+ * Job接口。
+ */
 public interface Job {
 
     /**

@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * PinyinGeneratorUtil 测试类
  */
+/**
+ * PinyinGeneratorUtilTest类。
+ */
 public class PinyinGeneratorUtilTest {
 
     @Test
+    /**
+     * testTransformToFullPinyin方法。
+     */
     public void testTransformToFullPinyin() {
         assertEquals("zifang", PinyinGeneratorUtil.transformToFullPinyin("子方"));
         assertEquals("zhongguo", PinyinGeneratorUtil.transformToFullPinyin("中国"));
@@ -18,6 +24,9 @@ public class PinyinGeneratorUtilTest {
     }
 
     @Test
+    /**
+     * testTransformToHeadPinyin方法。
+     */
     public void testTransformToHeadPinyin() {
         assertEquals("zf", PinyinGeneratorUtil.transformToHeadPinyin("子方"));
         assertEquals("zg", PinyinGeneratorUtil.transformToHeadPinyin("中国"));
@@ -25,24 +34,36 @@ public class PinyinGeneratorUtilTest {
     }
 
     @Test
+    /**
+     * testGetPingYin方法。
+     */
     public void testGetPingYin() {
         assertEquals("zhongguo", PinyinGeneratorUtil.getPingYin("中国"));
         assertEquals("hello", PinyinGeneratorUtil.getPingYin("hello"));
     }
 
     @Test
+    /**
+     * testGetFirstSpell方法。
+     */
     public void testGetFirstSpell() {
         assertEquals("zf", PinyinGeneratorUtil.getFirstSpell("子方"));
         assertEquals("zg", PinyinGeneratorUtil.getFirstSpell("中国"));
     }
 
     @Test
+    /**
+     * testGetFullSpell方法。
+     */
     public void testGetFullSpell() {
         assertEquals("zifang", PinyinGeneratorUtil.getFullSpell("子方"));
         assertEquals("zhongguo", PinyinGeneratorUtil.getFullSpell("中国"));
     }
 
     @Test
+    /**
+     * testIsChineseByREG方法。
+     */
     public void testIsChineseByREG() {
         assertTrue(PinyinGeneratorUtil.isChineseByREG("中国"));
         assertTrue(PinyinGeneratorUtil.isChineseByREG("hello中国"));
@@ -52,12 +73,18 @@ public class PinyinGeneratorUtilTest {
     }
 
     @Test
+    /**
+     * testIsChinese方法。
+     */
     public void testIsChinese() {
         assertTrue(PinyinGeneratorUtil.isChinese("中国"));
         assertFalse(PinyinGeneratorUtil.isChinese("hello"));
     }
 
     @Test
+    /**
+     * testIsChineseChar方法。
+     */
     public void testIsChineseChar() {
         assertTrue(PinyinGeneratorUtil.isChinese('中'));
         assertFalse(PinyinGeneratorUtil.isChinese('a'));
@@ -65,6 +92,9 @@ public class PinyinGeneratorUtilTest {
     }
 
     @Test
+    /**
+     * testChineseLength方法。
+     */
     public void testChineseLength() {
         assertEquals(2, PinyinGeneratorUtil.ChineseLength("中国"));
         assertEquals(3, PinyinGeneratorUtil.ChineseLength("中国人"));
@@ -72,6 +102,9 @@ public class PinyinGeneratorUtilTest {
     }
 
     @Test
+    /**
+     * testTransIDCard15to18方法。
+     */
     public void testTransIDCard15to18() {
         // 15位身份证：110105490311123 -> 18位
         String idcard15 = "110105490311123";

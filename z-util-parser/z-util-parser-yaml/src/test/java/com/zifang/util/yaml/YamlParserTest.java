@@ -12,6 +12,12 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * YamlParserTest类。
+ */
+/**
+ * YamlParserTest类。
+ */
 public class YamlParserTest {
 
     private final YamlParser parser = new YamlParser();
@@ -19,52 +25,106 @@ public class YamlParserTest {
     // --- parse(String) tests ---
 
     @Test
+    /**
+     * testParse_NullString方法。
+     */
+    /**
+     * testParse_NullString方法。
+     */
     public void testParse_NullString() {
         assertNull(parser.parse(null));
     }
 
     @Test
+    /**
+     * testParse_EmptyString方法。
+     */
+    /**
+     * testParse_EmptyString方法。
+     */
     public void testParse_EmptyString() {
         assertNull(parser.parse(""));
     }
 
     @Test
+    /**
+     * testParse_ScalarString方法。
+     */
+    /**
+     * testParse_ScalarString方法。
+     */
     public void testParse_ScalarString() {
         Object result = parser.parse("hello");
         assertEquals("hello", result);
     }
 
     @Test
+    /**
+     * testParse_ScalarNumber方法。
+     */
+    /**
+     * testParse_ScalarNumber方法。
+     */
     public void testParse_ScalarNumber() {
         Object result = parser.parse("42");
         assertEquals(42, result);
     }
 
     @Test
+    /**
+     * testParse_ScalarFloat方法。
+     */
+    /**
+     * testParse_ScalarFloat方法。
+     */
     public void testParse_ScalarFloat() {
         Object result = parser.parse("3.14");
         assertEquals(3.14, result);
     }
 
     @Test
+    /**
+     * testParse_BooleanTrue方法。
+     */
+    /**
+     * testParse_BooleanTrue方法。
+     */
     public void testParse_BooleanTrue() {
         Object result = parser.parse("true");
         assertEquals(Boolean.TRUE, result);
     }
 
     @Test
+    /**
+     * testParse_BooleanFalse方法。
+     */
+    /**
+     * testParse_BooleanFalse方法。
+     */
     public void testParse_BooleanFalse() {
         Object result = parser.parse("false");
         assertEquals(Boolean.FALSE, result);
     }
 
     @Test
+    /**
+     * testParse_Null方法。
+     */
+    /**
+     * testParse_Null方法。
+     */
     public void testParse_Null() {
         Object result = parser.parse("null");
         assertNull(result);
     }
 
     @Test
+    /**
+     * testParse_SimpleMap方法。
+     */
+    /**
+     * testParse_SimpleMap方法。
+     */
     public void testParse_SimpleMap() {
         String yaml = "name: zifang\nage: 18";
         Object result = parser.parse(yaml);
@@ -75,6 +135,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testParse_NestedMap方法。
+     */
+    /**
+     * testParse_NestedMap方法。
+     */
     public void testParse_NestedMap() {
         String yaml = "config:\n  database:\n    host: localhost\n    port: 3306";
         Object result = parser.parse(yaml);
@@ -88,6 +154,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testParse_SimpleArray方法。
+     */
+    /**
+     * testParse_SimpleArray方法。
+     */
     public void testParse_SimpleArray() {
         String yaml = "- apple\n- banana\n- cherry";
         Object result = parser.parse(yaml);
@@ -100,6 +172,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testParse_ArrayOfMaps方法。
+     */
+    /**
+     * testParse_ArrayOfMaps方法。
+     */
     public void testParse_ArrayOfMaps() {
         String yaml = "- name: Alice\n  age: 20\n- name: Bob\n  age: 30";
         Object result = parser.parse(yaml);
@@ -112,6 +190,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testParse_MixedStructure方法。
+     */
+    /**
+     * testParse_MixedStructure方法。
+     */
     public void testParse_MixedStructure() {
         String yaml = "name: test\nitems:\n  - id: 1\n    value: foo\n  - id: 2\n    value: bar";
         Object result = parser.parse(yaml);
@@ -124,6 +208,12 @@ public class YamlParserTest {
     }
 
     @Test(expected = YamlParseException.class)
+    /**
+     * testParse_InvalidYaml方法。
+     */
+    /**
+     * testParse_InvalidYaml方法。
+     */
     public void testParse_InvalidYaml() {
         parser.parse("  invalid:\nyaml: [");
     }
@@ -131,6 +221,12 @@ public class YamlParserTest {
     // --- toYaml(Object) tests ---
 
     @Test
+    /**
+     * testToYaml_Map方法。
+     */
+    /**
+     * testToYaml_Map方法。
+     */
     public void testToYaml_Map() {
         YamlMap map = new YamlMap();
         map.put("name", "test");
@@ -141,6 +237,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testToYaml_List方法。
+     */
+    /**
+     * testToYaml_List方法。
+     */
     public void testToYaml_List() {
         YamlArray array = new YamlArray();
         array.add("a");
@@ -151,6 +253,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testToYaml_Null方法。
+     */
+    /**
+     * testToYaml_Null方法。
+     */
     public void testToYaml_Null() {
         assertEquals("null\n", parser.toYaml(null));
     }
@@ -158,6 +266,12 @@ public class YamlParserTest {
     // --- toPrettyYaml(Object) tests ---
 
     @Test
+    /**
+     * testToPrettyYaml_Map方法。
+     */
+    /**
+     * testToPrettyYaml_Map方法。
+     */
     public void testToPrettyYaml_Map() {
         YamlMap map = new YamlMap();
         map.put("name", "test");
@@ -169,6 +283,12 @@ public class YamlParserTest {
     // --- parse(String, Class) tests ---
 
     @Test
+    /**
+     * testParseToClass方法。
+     */
+    /**
+     * testParseToClass方法。
+     */
     public void testParseToClass() {
         String yaml = "name: Alice\nage: 30";
         @SuppressWarnings("unchecked")
@@ -180,6 +300,12 @@ public class YamlParserTest {
     // --- toString() of model classes ---
 
     @Test
+    /**
+     * testYamlMapToString方法。
+     */
+    /**
+     * testYamlMapToString方法。
+     */
     public void testYamlMapToString() {
         YamlMap map = new YamlMap();
         map.put("key", "value");
@@ -187,6 +313,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testYamlArrayToString方法。
+     */
+    /**
+     * testYamlArrayToString方法。
+     */
     public void testYamlArrayToString() {
         YamlArray array = new YamlArray();
         array.add("item");
@@ -194,11 +326,23 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testYamlMapNodeType方法。
+     */
+    /**
+     * testYamlMapNodeType方法。
+     */
     public void testYamlMapNodeType() {
         assertEquals(YamlNodeType.MAP, new YamlMap().getNodeType());
     }
 
     @Test
+    /**
+     * testYamlArrayNodeType方法。
+     */
+    /**
+     * testYamlArrayNodeType方法。
+     */
     public void testYamlArrayNodeType() {
         assertEquals(YamlNodeType.SEQUENCE, new YamlArray().getNodeType());
     }
@@ -206,6 +350,12 @@ public class YamlParserTest {
     // --- YamlPathParser integration ---
 
     @Test
+    /**
+     * testYamlPathParser_SimpleKey方法。
+     */
+    /**
+     * testYamlPathParser_SimpleKey方法。
+     */
     public void testYamlPathParser_SimpleKey() {
         String yaml = "name: zifang\nage: 18";
         List<Object> results = new YamlPathParser().query(yaml, "$.name");
@@ -214,6 +364,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testYamlPathParser_NestedKey方法。
+     */
+    /**
+     * testYamlPathParser_NestedKey方法。
+     */
     public void testYamlPathParser_NestedKey() {
         String yaml = "config:\n  host: localhost";
         List<Object> results = new YamlPathParser().query(yaml, "$.config.host");
@@ -222,6 +378,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testYamlPathParser_ArrayIndex方法。
+     */
+    /**
+     * testYamlPathParser_ArrayIndex方法。
+     */
     public void testYamlPathParser_ArrayIndex() {
         String yaml = "items:\n  - apple\n  - banana";
         List<Object> results = new YamlPathParser().query(yaml, "$.items[0]");
@@ -230,6 +392,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testYamlPathParser_ArrayWildcard方法。
+     */
+    /**
+     * testYamlPathParser_ArrayWildcard方法。
+     */
     public void testYamlPathParser_ArrayWildcard() {
         String yaml = "items:\n  - a\n  - b";
         List<Object> results = new YamlPathParser().query(yaml, "$.items[*]");
@@ -237,6 +405,12 @@ public class YamlParserTest {
     }
 
     @Test
+    /**
+     * testYamlPathParser_InvalidPath方法。
+     */
+    /**
+     * testYamlPathParser_InvalidPath方法。
+     */
     public void testYamlPathParser_InvalidPath() {
         String yaml = "name: test";
         List<Object> results = new YamlPathParser().query(yaml, "$.nonexistent");

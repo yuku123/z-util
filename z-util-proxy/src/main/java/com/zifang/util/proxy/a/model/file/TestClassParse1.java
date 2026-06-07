@@ -11,6 +11,9 @@ package com.zifang.util.proxy.a.model.file;
 /**
  * TestClassParse1类。
  */
+/**
+ * TestClassParse1类。
+ */
 public class TestClassParse1 {
     public static int i = 0;
     public int n = 1;
@@ -19,10 +22,16 @@ public class TestClassParse1 {
     /**
      * method方法。
      */
+    /**
+     * method方法。
+     */
     public void method() {
         int j = 1;
     }
 
+    /**
+     * run方法。
+     */
     /**
      * run方法。
      */

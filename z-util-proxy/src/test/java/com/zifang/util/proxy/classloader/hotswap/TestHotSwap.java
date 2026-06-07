@@ -2,8 +2,16 @@ package com.zifang.util.proxy.classloader.hotswap;
 
 import java.lang.reflect.Method;
 
+/**
+ * TestHotSwap类。
+ */
 public class TestHotSwap {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws Exception {
         // 开启线程，如果class文件有修改，就热替换
         Thread t = new Thread(new MonitorHotSwap());
@@ -18,6 +26,9 @@ class MonitorHotSwap implements Runnable {
     private HotSwapURLClassLoader hotSwapCL = null;
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         try {
             while (true) {

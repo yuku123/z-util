@@ -22,11 +22,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * DedaoC类。
+ */
 public class DedaoC {
 
 
     public static String base = "/Users/zifang/Downloads/dedao";
     @Test
+    /**
+     * test方法。
+     */
     public void test() throws IOException {
 
         int page = 0;

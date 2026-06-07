@@ -15,6 +15,9 @@ import com.zifang.util.numpy.DType;
 /**
  * KMeans类。
  */
+/**
+ * KMeans类。
+ */
 public class KMeans {
     private int k;
     private int maxIterations;
@@ -28,12 +31,22 @@ public class KMeans {
      * @param maxIterations int类型参数
      * @param tolerance double类型参数
      */
+    /**
+     * KMeans方法。
+     *      * @param k int类型参数
+     * @param maxIterations int类型参数
+     * @param tolerance double类型参数
+     */
     public KMeans(int k, int maxIterations, double tolerance) {
         this.k = k;
         this.maxIterations = maxIterations;
         this.tolerance = tolerance;
     }
     
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     */
     /**
      * fit方法。
      *      * @param X NdArray类型参数
@@ -123,6 +136,11 @@ public class KMeans {
      *      * @param X NdArray类型参数
      * @return int[]类型返回值
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         double[][] centroidsData = toDouble2D(this.centroids);
@@ -136,6 +154,11 @@ public class KMeans {
         return predictions;
     }
     
+    /**
+     * fitPredict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     /**
      * fitPredict方法。
      *      * @param X NdArray类型参数

@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug22Test类。
+ */
 public class JsonDebug22Test {
 
     @Test
+    /**
+     * testSplitElementsInContext方法。
+     */
     public void testSplitElementsInContext() throws Exception {
         // Call splitElements via reflection INSIDE parseSequence context
         // and compare to direct call
@@ -49,6 +55,9 @@ public class JsonDebug22Test {
     }
 
     @Test
+    /**
+     * testSameInput方法。
+     */
     public void testSameInput() throws Exception {
         // Verify that splitElements gives same result whether called directly or inside parseSequence
         String lexerG4 = loadG4("JsonLexer.g4");

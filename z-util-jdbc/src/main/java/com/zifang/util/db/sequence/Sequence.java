@@ -6,6 +6,9 @@ package com.zifang.util.db.sequence;
 /**
  * Sequence接口。
  */
+/**
+ * Sequence接口。
+ */
 public interface Sequence {
 
     /**

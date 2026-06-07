@@ -6,6 +6,9 @@ package com.zifang.util.ml.ga;
 /**
  * TerminationCondition接口。
  */
+/**
+ * TerminationCondition接口。
+ */
 public interface TerminationCondition {
 
     /**

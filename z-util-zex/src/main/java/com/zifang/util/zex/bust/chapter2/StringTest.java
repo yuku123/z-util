@@ -19,20 +19,32 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * StringTest类。
+ */
 public class StringTest {
     @Test
+    /**
+     * test001方法。
+     */
     public void test001(){
         String a = "123";
         System.out.println(a);
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002(){
         String a = new String("123");
         System.out.println(a);
     }
 
     @Test
+    /**
+     * test003方法。
+     */
     public void test003(){
         String a = new String("12😄4");
 
@@ -43,6 +55,9 @@ public class StringTest {
 
     }
     @Test
+    /**
+     * test004方法。
+     */
     public void test004(){
 
         String a = new String("12😄4");
@@ -55,6 +70,9 @@ public class StringTest {
     }
 
     @Test
+    /**
+     * test005方法。
+     */
     public void test005(){
 
         String a = new String("abcd😄e");
@@ -67,12 +85,18 @@ public class StringTest {
     }
 
     @Test
+    /**
+     * test006方法。
+     */
     public void test006(){
         System.out.println();
         "aa".toLowerCase();
     }
 
     @Test
+    /**
+     * test007方法。
+     */
     public void test007(){
         String str = String.format("Hi,%s", "早安");
         System.out.println(str);
@@ -92,6 +116,9 @@ public class StringTest {
     }
 
     @Test
+    /**
+     * test009方法。
+     */
     public void test009(){
         String s0 = "1";
         String s1 = new String("1");
@@ -111,6 +138,9 @@ public class StringTest {
     }
 
     @Test
+    /**
+     * test010方法。
+     */
     public void test010(){
         String s0 = "1" + "2";
         String s1 = "1" + new String("2");
@@ -123,6 +153,9 @@ public class StringTest {
     }
 
     @Test
+    /**
+     * test011方法。
+     */
     public void test011(){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("123456");
@@ -149,6 +182,11 @@ public class StringTest {
 //    }
 
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         String str = "123";
         Integer sum = 0;

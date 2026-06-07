@@ -18,6 +18,9 @@ import java.util.Map;
 /**
  * HttpRequestProxy类。
  */
+/**
+ * HttpRequestProxy类。
+ */
 public class HttpRequestProxy {
 
     /**
@@ -27,6 +30,11 @@ public class HttpRequestProxy {
      * @param <T>              请求接口的类型
      * @return 请求接口的代理对象
      * @throws IllegalArgumentException 如果 requestInterface 为 null
+     */
+    /**
+     * proxy方法。
+     *      * @param requestInterface ClassT类型参数
+     * @return static <T> T类型返回值
      */
     /**
      * proxy方法。
@@ -45,6 +53,12 @@ public class HttpRequestProxy {
      * @param <T>              请求接口的类型
      * @return 请求接口的代理对象
      * @throws IllegalArgumentException 如果 requestInterface 为 null
+     */
+    /**
+     * proxy方法。
+     *      * @param requestInterface ClassT类型参数
+     * @param contextParams MapString,Object类型参数
+     * @return static <T> T类型返回值
      */
     /**
      * proxy方法。

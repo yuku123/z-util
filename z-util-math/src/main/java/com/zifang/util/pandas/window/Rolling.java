@@ -11,6 +11,9 @@ import java.util.function.Function;
 /**
  * Rolling类。
  */
+/**
+ * Rolling类。
+ */
 public class Rolling {
 
     private final Series series;
@@ -18,6 +21,11 @@ public class Rolling {
     private final int minPeriods;
     private final boolean center;
 
+    /**
+     * Rolling方法。
+     *      * @param series Series类型参数
+     * @param window int类型参数
+     */
     /**
      * Rolling方法。
      *      * @param series Series类型参数
@@ -34,6 +42,13 @@ public class Rolling {
      * @param minPeriods int类型参数
      * @param center boolean类型参数
      */
+    /**
+     * Rolling方法。
+     *      * @param series Series类型参数
+     * @param window int类型参数
+     * @param minPeriods int类型参数
+     * @param center boolean类型参数
+     */
     public Rolling(Series series, int window, int minPeriods, boolean center) {
         this.series = series;
         this.window = window;
@@ -43,6 +58,10 @@ public class Rolling {
 
     /**
      * 计算窗口内的均值
+     */
+    /**
+     * mean方法。
+     * @return Series类型返回值
      */
     /**
      * mean方法。
@@ -65,6 +84,10 @@ public class Rolling {
      * sum方法。
      * @return Series类型返回值
      */
+    /**
+     * sum方法。
+     * @return Series类型返回值
+     */
     public Series sum() {
         return applyWindow(values -> {
             double sum = 0;
@@ -77,6 +100,10 @@ public class Rolling {
 
     /**
      * 计算窗口内的最大值
+     */
+    /**
+     * max方法。
+     * @return Series类型返回值
      */
     /**
      * max方法。
@@ -99,6 +126,10 @@ public class Rolling {
      * min方法。
      * @return Series类型返回值
      */
+    /**
+     * min方法。
+     * @return Series类型返回值
+     */
     public Series min() {
         return applyWindow(values -> {
             double min = Double.POSITIVE_INFINITY;
@@ -111,6 +142,10 @@ public class Rolling {
 
     /**
      * 计算窗口内的标准差
+     */
+    /**
+     * std方法。
+     * @return Series类型返回值
      */
     /**
      * std方法。
@@ -139,6 +174,10 @@ public class Rolling {
      * var方法。
      * @return Series类型返回值
      */
+    /**
+     * var方法。
+     * @return Series类型返回值
+     */
     public Series var() {
         return applyWindow(values -> {
             double mean = 0;
@@ -157,6 +196,10 @@ public class Rolling {
 
     /**
      * 计算窗口内非空值的数量
+     */
+    /**
+     * count方法。
+     * @return Series类型返回值
      */
     /**
      * count方法。
@@ -184,6 +227,11 @@ public class Rolling {
 
     /**
      * 应用自定义聚合函数
+     */
+    /**
+     * apply方法。
+     *      * @param func FunctionSeries,类型参数
+     * @return Series类型返回值
      */
     /**
      * apply方法。

@@ -9,7 +9,15 @@ package com.zifang.util.zex.bust.chapter11.nio;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Test002类。
+ */
 public class Test002 {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
     }

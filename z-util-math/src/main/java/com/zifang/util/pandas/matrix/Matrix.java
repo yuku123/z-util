@@ -10,12 +10,19 @@ import java.util.List;
 /**
  * Matrix类。
  */
+/**
+ * Matrix类。
+ */
 public class Matrix {
 
     private List<List<Double>> data = new ArrayList<>();
 
     /**
      * 矩阵乘法
+     */
+    /**
+     * multiply方法。
+     *      * @param another Matrix类型参数
      */
     /**
      * multiply方法。
@@ -32,12 +39,19 @@ public class Matrix {
      * set方法。
      *      * @param arrays Double...类型参数
      */
+    /**
+     * set方法。
+     *      * @param arrays Double...类型参数
+     */
     public void set(Double... arrays) {
         data.add(Arrays.asList(arrays));
     }
 
     /**
      * 美化输出
+     */
+    /**
+     * format方法。
      */
     /**
      * format方法。
@@ -62,15 +76,24 @@ public class Matrix {
     /**
      * shape方法。
      */
+    /**
+     * shape方法。
+     */
     public void shape() {
     }
 
     /**
      * dtype方法。
      */
+    /**
+     * dtype方法。
+     */
     public void dtype() {
     }
 
+    /**
+     * ndim方法。
+     */
     /**
      * ndim方法。
      */
@@ -84,10 +107,18 @@ public class Matrix {
      * slice方法。
      * @return List<List<Double>>类型返回值
      */
+    /**
+     * slice方法。
+     * @return List<List<Double>>类型返回值
+     */
     public List<List<Double>> slice() {
         return null;
     }
 
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     /**
      * size方法。
      * @return int类型返回值

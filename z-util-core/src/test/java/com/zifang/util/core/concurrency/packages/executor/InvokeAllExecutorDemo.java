@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+/**
+ * InvokeAllExecutorDemo类。
+ */
 public class InvokeAllExecutorDemo {
     // 1．创建一个名为 Result 的类，用来存储范例中并发任务产生的结果。
     static class Result {
@@ -12,18 +15,34 @@ public class InvokeAllExecutorDemo {
         private int value;
 
         // 3．实现对应的 get() 和 set() 方法来设置和返回 name 和 value 属性。
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
         public String getName() {
             return name;
         }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
         public void setName(String name) {
             this.name = name;
         }
 
+    /**
+     * getValue方法。
+     * @return int类型返回值
+     */
         public int getValue() {
             return value;
         }
 
+    /**
+     * setValue方法。
+     *      * @param value int类型参数
+     */
         public void setValue(int value) {
             this.value = value;
         }
@@ -35,12 +54,20 @@ public class InvokeAllExecutorDemo {
         private String name;
 
         // 6．实现类的构造器，用来初始化类的属性。
+    /**
+     * Task方法。
+     *      * @param name String类型参数
+     */
         public Task(String name) {
             this.name = name;
         }
 
         // 7．实现call()方法。在这个范例中，这个方法将返回一个Result类型的对象。
         @Override
+    /**
+     * call方法。
+     * @return Result类型返回值
+     */
         public Result call() throws Exception {
             /// 8．在控制台输出表示任务开始的信息。
             System.out.printf("%s: Staring\n", this.name);
@@ -69,6 +96,11 @@ public class InvokeAllExecutorDemo {
     }
 
     // 14．实现范例的主类，创建Main主类，并实现main()方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         /// 15．通过Executors工厂类的newCachedThreadPool()方法创建一个ThreadPoolExecutor
         /// 执行器对象。

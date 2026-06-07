@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * 神经网络接口测试
  */
+/**
+ * NeuralNetworkInterfaceTest类。
+ */
 public class NeuralNetworkInterfaceTest {
 
     @Test

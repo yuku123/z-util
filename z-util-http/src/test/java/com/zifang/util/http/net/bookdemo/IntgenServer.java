@@ -11,10 +11,18 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * IntgenServer类。
+ */
 public class IntgenServer {
 
     public static int DEFAULT_PORT = 1919;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         int port;

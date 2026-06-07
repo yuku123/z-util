@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * DBSCANTest类。
+ */
 public class DBSCANTest {
 
     private Random random = new Random(42);
@@ -51,6 +54,9 @@ public class DBSCANTest {
     }
 
     @Test
+    /**
+     * testDBSCANClustering方法。
+     */
     public void testDBSCANClustering() {
         NdArray X = generateClusteredDataWithNoise();
         
@@ -70,6 +76,9 @@ public class DBSCANTest {
     }
 
     @Test
+    /**
+     * testDBSCANNoise方法。
+     */
     public void testDBSCANNoise() {
         NdArray X = generateClusteredDataWithNoise();
         
@@ -90,6 +99,9 @@ public class DBSCANTest {
     }
 
     @Test
+    /**
+     * testDBSCANPredict方法。
+     */
     public void testDBSCANPredict() {
         double[][] trainData = new double[30][2];
         for (int i = 0; i < 30; i++) {
@@ -116,6 +128,9 @@ public class DBSCANTest {
     }
 
     @Test
+    /**
+     * testDBSCANDenseRegion方法。
+     */
     public void testDBSCANDenseRegion() {
         // Create data with varying densities
         double[][] data = new double[60][2];

@@ -30,6 +30,9 @@ package com.zifang.util.ml.ga;
 /**
  * MutationOperator接口。
  */
+/**
+ * MutationOperator接口。
+ */
 public interface MutationOperator {
 
     /**

@@ -6,9 +6,15 @@ import java.io.ByteArrayOutputStream;
 
 import static org.junit.Assert.*;
 
+/**
+ * FastByteArrayOutputStreamTest类。
+ */
 public class FastByteArrayOutputStreamTest {
 
     @Test
+    /**
+     * testWriteSingleByte方法。
+     */
     public void testWriteSingleByte() {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write('a');
@@ -19,6 +25,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testWriteByteArray方法。
+     */
     public void testWriteByteArray() {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         byte[] data = "hello".getBytes();
@@ -28,6 +37,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testWritePartialByteArray方法。
+     */
     public void testWritePartialByteArray() {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         byte[] data = "hello world".getBytes();
@@ -37,6 +49,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testWriteToOutputStream方法。
+     */
     public void testWriteToOutputStream() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write("test".getBytes());
@@ -46,6 +61,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testToByteArray方法。
+     */
     public void testToByteArray() {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         byte[] data = "byteArray".getBytes();
@@ -54,6 +72,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testToStringWithCharset方法。
+     */
     public void testToStringWithCharset() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         byte[] data = "中文测试".getBytes("GBK");
@@ -62,6 +83,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testToStringWithCharsetObject方法。
+     */
     public void testToStringWithCharsetObject() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write("hello".getBytes());
@@ -69,6 +93,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testReset方法。
+     */
     public void testReset() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write("hello".getBytes());
@@ -79,6 +106,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testCloseIsNoOp方法。
+     */
     public void testCloseIsNoOp() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write("before close".getBytes());
@@ -89,6 +119,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testEmptyStream方法。
+     */
     public void testEmptyStream() {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         assertEquals(0, out.size());
@@ -97,6 +130,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testLargeWrite方法。
+     */
     public void testLargeWrite() {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         byte[] large = new byte[100_000];
@@ -109,6 +145,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testWriteToMultipleTimes方法。
+     */
     public void testWriteToMultipleTimes() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         out.write("first".getBytes());
@@ -120,6 +159,9 @@ public class FastByteArrayOutputStreamTest {
     }
 
     @Test
+    /**
+     * testConstructorWithInitialSize方法。
+     */
     public void testConstructorWithInitialSize() throws Exception {
         FastByteArrayOutputStream out = new FastByteArrayOutputStream(2048);
         byte[] data = "init".getBytes();

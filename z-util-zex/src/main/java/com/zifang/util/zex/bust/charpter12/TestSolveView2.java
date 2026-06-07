@@ -3,6 +3,9 @@ package com.zifang.util.zex.bust.charpter12;
 /**
  * 解决原子性问题，保留可见性
  */
+/**
+ * TestSolveView2类。
+ */
 public class TestSolveView2 {
     private static long count = 0;
 
@@ -13,6 +16,10 @@ public class TestSolveView2 {
         }
     }
 
+    /**
+     * calc方法。
+     * @return static long类型返回值
+     */
     public static long calc() throws InterruptedException {
         TestSolveView2 test = new TestSolveView2();
         // 创建两个线程，执行add()操作
@@ -47,6 +54,11 @@ public class TestSolveView2 {
         return count;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
         System.out.println(calc());
     }

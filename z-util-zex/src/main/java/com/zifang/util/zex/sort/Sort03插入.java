@@ -11,14 +11,31 @@ package com.zifang.util.zex.sort;
  */
 import java.util.Arrays;
 
+/**
+ * Sort03插入类。
+ */
 public class Sort03插入 {
 
+    /**
+     * insert方法。
+     *      * @param a int[]类型参数
+     * @param index int类型参数
+     * @param replace int类型参数
+     * @return static void类型返回值
+     */
     public static void insert(int[] a, int index, int replace) {
         System.arraycopy(a, index, a, index + 1, a.length - index - 1);
         a[index] = replace;
     }
 
     // end 是0位开始
+    /**
+     * index方法。
+     *      * @param a int[]类型参数
+     * @param end int类型参数
+     * @param compare int类型参数
+     * @return static int类型返回值
+     */
     public static int index(int[] a, int end, int compare) {
         if (compare <= a[0]) {
             return 0;
@@ -38,6 +55,11 @@ public class Sort03插入 {
         return 0;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         int[] a = new int[]{4, 6, 5, 1, 3, 7, 11, 22, 15, 12, 2};

@@ -11,9 +11,21 @@ import static org.junit.Assert.*;
 /**
  * 调试 G4 文件加载的测试。
  */
+/**
+ * YamlG4DebugTest类。
+ */
+/**
+ * YamlG4DebugTest类。
+ */
 public class YamlG4DebugTest {
 
     @Test
+    /**
+     * testExtractRulesFromYamlParserG4方法。
+     */
+    /**
+     * testExtractRulesFromYamlParserG4方法。
+     */
     public void testExtractRulesFromYamlParserG4() {
         String parserG4 = "";
         try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("YamlParser.g4")) {
@@ -35,6 +47,12 @@ public class YamlG4DebugTest {
     }
 
     @Test
+    /**
+     * testExtractRulesFromYamlLexerG4方法。
+     */
+    /**
+     * testExtractRulesFromYamlLexerG4方法。
+     */
     public void testExtractRulesFromYamlLexerG4() {
         String lexerG4 = "";
         try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("YamlLexer.g4")) {

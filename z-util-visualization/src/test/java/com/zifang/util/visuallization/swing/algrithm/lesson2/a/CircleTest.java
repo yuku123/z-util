@@ -10,11 +10,17 @@ import static org.junit.Assert.*;
  * Circle 单元测试
  * 测试圆形数据类的构造、移动、碰撞检测和包含判断
  */
+/**
+ * CircleTest类。
+ */
 public class CircleTest {
 
     // ==================== 构造函数测试 ====================
 
     @Test
+    /**
+     * testConstructorWithAllParameters方法。
+     */
     public void testConstructorWithAllParameters() {
         Circle circle = new Circle(100, 200, 50, 3, -2);
         assertEquals(100, circle.x);
@@ -26,12 +32,18 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testDefaultIsFilled方法。
+     */
     public void testDefaultIsFilled() {
         Circle circle = new Circle(0, 0, 10, 0, 0);
         assertFalse(circle.isFilled);
     }
 
     @Test
+    /**
+     * testConstructorWithZeroVelocity方法。
+     */
     public void testConstructorWithZeroVelocity() {
         Circle circle = new Circle(100, 100, 30, 0, 0);
         assertEquals(0, circle.vx);
@@ -39,6 +51,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testConstructorWithNegativeVelocity方法。
+     */
     public void testConstructorWithNegativeVelocity() {
         Circle circle = new Circle(100, 100, 30, -5, -10);
         assertEquals(-5, circle.vx);
@@ -46,6 +61,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testConstructorWithZeroRadius方法。
+     */
     public void testConstructorWithZeroRadius() {
         Circle circle = new Circle(100, 100, 0, 0, 0);
         assertEquals(0, circle.getR());
@@ -54,12 +72,18 @@ public class CircleTest {
     // ==================== getR 测试 ====================
 
     @Test
+    /**
+     * testGetR方法。
+     */
     public void testGetR() {
         Circle circle = new Circle(0, 0, 25, 0, 0);
         assertEquals(25, circle.getR());
     }
 
     @Test
+    /**
+     * testGetRWithLargeRadius方法。
+     */
     public void testGetRWithLargeRadius() {
         Circle circle = new Circle(0, 0, 1000, 0, 0);
         assertEquals(1000, circle.getR());
@@ -68,6 +92,9 @@ public class CircleTest {
     // ==================== move 测试 ====================
 
     @Test
+    /**
+     * testMoveBasic方法。
+     */
     public void testMoveBasic() {
         Circle circle = new Circle(100, 100, 10, 5, 3);
         circle.move(0, 0, 200, 200);
@@ -76,6 +103,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveWithZeroVelocity方法。
+     */
     public void testMoveWithZeroVelocity() {
         Circle circle = new Circle(100, 100, 10, 0, 0);
         circle.move(0, 0, 200, 200);
@@ -84,6 +114,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveNegativeVelocity方法。
+     */
     public void testMoveNegativeVelocity() {
         Circle circle = new Circle(100, 100, 10, -5, -3);
         circle.move(0, 0, 200, 200);
@@ -92,6 +125,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveMultipleTimes方法。
+     */
     public void testMoveMultipleTimes() {
         Circle circle = new Circle(50, 50, 10, 5, 5);
         circle.move(0, 0, 200, 200);
@@ -102,6 +138,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveCollisionWithLeftBoundary方法。
+     */
     public void testMoveCollisionWithLeftBoundary() {
         Circle circle = new Circle(15, 50, 10, -5, 0);
         circle.move(0, 0, 100, 100);
@@ -111,6 +150,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveCollisionWithRightBoundary方法。
+     */
     public void testMoveCollisionWithRightBoundary() {
         Circle circle = new Circle(50, 50, 10, 5, 0);
         int minx = 0, miny = 0, maxx = 100, maxy = 100;
@@ -121,6 +163,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveCollisionTopBoundary方法。
+     */
     public void testMoveCollisionTopBoundary() {
         Circle circle = new Circle(50, 50, 10, 0, -5);
         circle.move(0, 0, 100, 100);
@@ -129,6 +174,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveCollisionBottomBoundary方法。
+     */
     public void testMoveCollisionBottomBoundary() {
         Circle circle = new Circle(50, 50, 10, 0, 5);
         circle.move(0, 0, 100, 100);
@@ -137,6 +185,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveAtBoundaryNoCollision方法。
+     */
     public void testMoveAtBoundaryNoCollision() {
         Circle circle = new Circle(50, 50, 10, 0, 0);
         circle.move(0, 0, 100, 100);
@@ -147,6 +198,9 @@ public class CircleTest {
     // ==================== contain 测试 ====================
 
     @Test
+    /**
+     * testContainPointInside方法。
+     */
     public void testContainPointInside() {
         Circle circle = new Circle(100, 100, 50, 0, 0);
         Point p = new Point(100, 100);
@@ -154,6 +208,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainPointOnBoundary方法。
+     */
     public void testContainPointOnBoundary() {
         Circle circle = new Circle(100, 100, 50, 0, 0);
         // (100, 100)到(150, 100)的距离 = 50，正好等于半径
@@ -162,6 +219,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainPointOutside方法。
+     */
     public void testContainPointOutside() {
         Circle circle = new Circle(100, 100, 50, 0, 0);
         Point p = new Point(200, 200);
@@ -169,6 +229,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainPointOutsideFarAway方法。
+     */
     public void testContainPointOutsideFarAway() {
         Circle circle = new Circle(100, 100, 10, 0, 0);
         Point p = new Point(500, 500);
@@ -176,6 +239,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainPointInsideDifferentQuadrant方法。
+     */
     public void testContainPointInsideDifferentQuadrant() {
         Circle circle = new Circle(100, 100, 50, 0, 0);
         // 左上
@@ -193,6 +259,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainPointExactlyAtCenter方法。
+     */
     public void testContainPointExactlyAtCenter() {
         Circle circle = new Circle(100, 100, 30, 0, 0);
         Point center = new Point(100, 100);
@@ -200,6 +269,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainWithZeroRadiusCircleCenter方法。
+     */
     public void testContainWithZeroRadiusCircleCenter() {
         Circle circle = new Circle(100, 100, 0, 0, 0);
         Point p = new Point(100, 100);
@@ -207,6 +279,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainWithZeroRadiusCircleOutside方法。
+     */
     public void testContainWithZeroRadiusCircleOutside() {
         Circle circle = new Circle(100, 100, 0, 0, 0);
         Point p = new Point(101, 101);
@@ -214,6 +289,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainLargeRadius方法。
+     */
     public void testContainLargeRadius() {
         Circle circle = new Circle(0, 0, 1000, 0, 0);
         Point p = new Point(500, 500);
@@ -221,6 +299,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainSmallRadius方法。
+     */
     public void testContainSmallRadius() {
         Circle circle = new Circle(100, 100, 1, 0, 0);
         Point inside = new Point(100, 100);
@@ -230,6 +311,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testContainNegativeCoordinates方法。
+     */
     public void testContainNegativeCoordinates() {
         Circle circle = new Circle(-100, -100, 50, 0, 0);
         Point p = new Point(-100, -100);
@@ -239,6 +323,9 @@ public class CircleTest {
     // ==================== 边界和碰撞组合测试 ====================
 
     @Test
+    /**
+     * testMoveAndContainCombination方法。
+     */
     public void testMoveAndContainCombination() {
         Circle circle = new Circle(50, 50, 20, 10, 10);
         // 移动后位置 (60, 60)
@@ -249,6 +336,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testCollisionBounceOffLeftWall方法。
+     */
     public void testCollisionBounceOffLeftWall() {
         // 模拟碰撞左墙
         Circle circle = new Circle(15, 50, 10, -10, 0);
@@ -261,6 +351,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testCollisionBounceOffRightWall方法。
+     */
     public void testCollisionBounceOffRightWall() {
         Circle circle = new Circle(85, 50, 10, 10, 0);
         // x+r = 95 < 100，不会碰撞
@@ -271,6 +364,9 @@ public class CircleTest {
     // ==================== 字段修改测试 ====================
 
     @Test
+    /**
+     * testPublicFieldsModification方法。
+     */
     public void testPublicFieldsModification() {
         Circle circle = new Circle(100, 100, 50, 5, 5);
         circle.x = 200;
@@ -287,6 +383,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testMoveAfterVelocityChange方法。
+     */
     public void testMoveAfterVelocityChange() {
         Circle circle = new Circle(50, 50, 10, 5, 5);
         circle.move(0, 0, 200, 200);
@@ -301,6 +400,9 @@ public class CircleTest {
     }
 
     @Test
+    /**
+     * testIsFilledToggle方法。
+     */
     public void testIsFilledToggle() {
         Circle circle = new Circle(100, 100, 50, 0, 0);
         assertFalse(circle.isFilled);
@@ -315,18 +417,27 @@ public class CircleTest {
     // ==================== equals 和 hashCode 继承测试 ====================
 
     @Test
+    /**
+     * testCircleEqualsSameInstance方法。
+     */
     public void testCircleEqualsSameInstance() {
         Circle circle = new Circle(100, 100, 50, 5, 5);
         assertEquals(circle, circle);
     }
 
     @Test
+    /**
+     * testCircleEqualsNull方法。
+     */
     public void testCircleEqualsNull() {
         Circle circle = new Circle(100, 100, 50, 5, 5);
         assertNotEquals(circle, null);
     }
 
     @Test
+    /**
+     * testCircleEqualsDifferentClass方法。
+     */
     public void testCircleEqualsDifferentClass() {
         Circle circle = new Circle(100, 100, 50, 5, 5);
         assertNotEquals(circle, "not a circle");

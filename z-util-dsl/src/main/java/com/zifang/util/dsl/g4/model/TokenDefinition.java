@@ -7,6 +7,9 @@ package com.zifang.util.dsl.g4.model;
 /**
  * TokenDefinition类。
  */
+/**
+ * TokenDefinition类。
+ */
 public class TokenDefinition {
     
     private String name;
@@ -21,6 +24,9 @@ public class TokenDefinition {
     /**
      * TokenDefinition方法。
      */
+    /**
+     * TokenDefinition方法。
+     */
     public TokenDefinition() {
     }
     
@@ -29,6 +35,12 @@ public class TokenDefinition {
      * @param name Token名称
      * @param pattern 正则表达式模式
      * @param precedence 优先级（数值越小优先级越高）
+     */
+    /**
+     * TokenDefinition方法。
+     *      * @param name String类型参数
+     * @param pattern String类型参数
+     * @param precedence int类型参数
      */
     /**
      * TokenDefinition方法。
@@ -50,6 +62,10 @@ public class TokenDefinition {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -57,6 +73,10 @@ public class TokenDefinition {
     /**
      * 设置Token名称
      * @param name Token名称
+     */
+    /**
+     * setName方法。
+     *      * @param name String类型参数
      */
     /**
      * setName方法。
@@ -74,6 +94,10 @@ public class TokenDefinition {
      * getPattern方法。
      * @return String类型返回值
      */
+    /**
+     * getPattern方法。
+     * @return String类型返回值
+     */
     public String getPattern() {
         return pattern;
     }
@@ -81,6 +105,10 @@ public class TokenDefinition {
     /**
      * 设置正则表达式模式
      * @param pattern 正则表达式
+     */
+    /**
+     * setPattern方法。
+     *      * @param pattern String类型参数
      */
     /**
      * setPattern方法。
@@ -98,6 +126,10 @@ public class TokenDefinition {
      * getPrecedence方法。
      * @return int类型返回值
      */
+    /**
+     * getPrecedence方法。
+     * @return int类型返回值
+     */
     public int getPrecedence() {
         return precedence;
     }
@@ -105,6 +137,10 @@ public class TokenDefinition {
     /**
      * 设置优先级
      * @param precedence 优先级数值
+     */
+    /**
+     * setPrecedence方法。
+     *      * @param precedence int类型参数
      */
     /**
      * setPrecedence方法。
@@ -122,6 +158,10 @@ public class TokenDefinition {
      * isFragment方法。
      * @return boolean类型返回值
      */
+    /**
+     * isFragment方法。
+     * @return boolean类型返回值
+     */
     public boolean isFragment() {
         return isFragment;
     }
@@ -129,6 +169,10 @@ public class TokenDefinition {
     /**
      * 设置是否为fragment规则
      * @param fragment true表示是fragment规则
+     */
+    /**
+     * setFragment方法。
+     *      * @param fragment boolean类型参数
      */
     /**
      * setFragment方法。
@@ -146,6 +190,10 @@ public class TokenDefinition {
      * isHidden方法。
      * @return boolean类型返回值
      */
+    /**
+     * isHidden方法。
+     * @return boolean类型返回值
+     */
     public boolean isHidden() {
         return hidden;
     }
@@ -158,11 +206,19 @@ public class TokenDefinition {
      * setHidden方法。
      *      * @param hidden boolean类型参数
      */
+    /**
+     * setHidden方法。
+     *      * @param hidden boolean类型参数
+     */
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

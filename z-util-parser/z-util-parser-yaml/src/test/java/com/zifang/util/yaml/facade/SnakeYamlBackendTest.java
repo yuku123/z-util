@@ -9,6 +9,12 @@ import static org.junit.Assert.*;
 /**
  * SnakeYamlBackend 测试。
  */
+/**
+ * SnakeYamlBackendTest类。
+ */
+/**
+ * SnakeYamlBackendTest类。
+ */
 public class SnakeYamlBackendTest {
 
     private final SnakeYamlBackend backend = new SnakeYamlBackend();
@@ -16,6 +22,12 @@ public class SnakeYamlBackendTest {
     // ==================== toYaml / fromYaml ====================
 
     @Test
+    /**
+     * testToYamlFromYaml_Roundtrip方法。
+     */
+    /**
+     * testToYamlFromYaml_Roundtrip方法。
+     */
     public void testToYamlFromYaml_Roundtrip() {
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("name", "zifang");
@@ -31,11 +43,23 @@ public class SnakeYamlBackendTest {
     }
 
     @Test
+    /**
+     * testToYaml_Null方法。
+     */
+    /**
+     * testToYaml_Null方法。
+     */
     public void testToYaml_Null() {
         assertEquals("null", backend.toYaml(null));
     }
 
     @Test
+    /**
+     * testFromYaml_NullOrEmpty方法。
+     */
+    /**
+     * testFromYaml_NullOrEmpty方法。
+     */
     public void testFromYaml_NullOrEmpty() {
         assertNull(backend.fromYaml(null, Map.class));
         assertNull(backend.fromYaml("", Map.class));
@@ -43,6 +67,12 @@ public class SnakeYamlBackendTest {
     }
 
     @Test
+    /**
+     * testFromYaml_List方法。
+     */
+    /**
+     * testFromYaml_List方法。
+     */
     public void testFromYaml_List() {
         String yaml = "- name: alice\n  age: 25\n- name: bob\n  age: 30";
         YamlTypeBinding<List<Map<String, Object>>> binding = new YamlTypeBinding<List<Map<String, Object>>>() {};
@@ -52,6 +82,12 @@ public class SnakeYamlBackendTest {
     }
 
     @Test
+    /**
+     * testToPrettyYaml方法。
+     */
+    /**
+     * testToPrettyYaml方法。
+     */
     public void testToPrettyYaml() {
         Map<String, Object> data = new LinkedHashMap<>();
         data.put("name", "zifang");
@@ -65,6 +101,12 @@ public class SnakeYamlBackendTest {
     // ==================== engine ====================
 
     @Test
+    /**
+     * testEngine方法。
+     */
+    /**
+     * testEngine方法。
+     */
     public void testEngine() {
         assertEquals("SnakeYAML", backend.engine());
     }
@@ -72,6 +114,12 @@ public class SnakeYamlBackendTest {
     // ==================== isValidYaml ====================
 
     @Test
+    /**
+     * testIsValidYaml方法。
+     */
+    /**
+     * testIsValidYaml方法。
+     */
     public void testIsValidYaml() {
         assertTrue(backend.isValidYaml("name: test\nage: 30"));
         assertTrue(backend.isValidYaml("- a\n- b"));

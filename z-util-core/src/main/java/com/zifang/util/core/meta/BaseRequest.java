@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 /**
  * BaseRequest类。
  */
+/**
+ * BaseRequest类。
+ */
 public class BaseRequest implements Serializable {
 
     private static final long serialVersionUID = -4216068195245037766L;
@@ -36,11 +39,18 @@ public class BaseRequest implements Serializable {
     /**
      * BaseRequest方法。
      */
+    /**
+     * BaseRequest方法。
+     */
     public BaseRequest() {
         this.createTime = LocalDateTime.now();
         this.updateTime = LocalDateTime.now();
     }
 
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
     /**
      * getId方法。
      * @return String类型返回值
@@ -53,10 +63,18 @@ public class BaseRequest implements Serializable {
      * setId方法。
      *      * @param id String类型参数
      */
+    /**
+     * setId方法。
+     *      * @param id String类型参数
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * getCreateTime方法。
+     * @return LocalDateTime类型返回值
+     */
     /**
      * getCreateTime方法。
      * @return LocalDateTime类型返回值
@@ -69,10 +87,18 @@ public class BaseRequest implements Serializable {
      * setCreateTime方法。
      *      * @param createTime LocalDateTime类型参数
      */
+    /**
+     * setCreateTime方法。
+     *      * @param createTime LocalDateTime类型参数
+     */
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
+    /**
+     * getUpdateTime方法。
+     * @return LocalDateTime类型返回值
+     */
     /**
      * getUpdateTime方法。
      * @return LocalDateTime类型返回值
@@ -85,11 +111,19 @@ public class BaseRequest implements Serializable {
      * setUpdateTime方法。
      *      * @param updateTime LocalDateTime类型参数
      */
+    /**
+     * setUpdateTime方法。
+     *      * @param updateTime LocalDateTime类型参数
+     */
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

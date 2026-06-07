@@ -14,6 +14,10 @@ class FindMaxTask implements Callable<Integer> {
         this.end = end;
     }
 
+    /**
+     * call方法。
+     * @return int类型返回值
+     */
     public Integer call() {
         int max = Integer.MIN_VALUE;
         for (int i = start; i < end; i++) {

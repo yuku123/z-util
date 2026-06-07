@@ -9,10 +9,17 @@ import java.util.List;
 /**
  * Nums类。
  */
+/**
+ * Nums类。
+ */
 public class Nums {
 
     /**
      * 随机数生成器实例
+     */
+    /**
+     * NumRandom方法。
+     * @return static final NumRandom random = new类型返回值
      */
     /**
      * NumRandom方法。
@@ -24,6 +31,11 @@ public class Nums {
      * 从数组对象创建 Num 实例
      * @param array 数组对象，支持 double[]、int[] 等
      * @return Num 实例
+     */
+    /**
+     * array方法。
+     *      * @param array Object类型参数
+     * @return static Num类型返回值
      */
     /**
      * array方法。
@@ -44,6 +56,11 @@ public class Nums {
      *      * @param list List?类型参数
      * @return static Num类型返回值
      */
+    /**
+     * array方法。
+     *      * @param list List?类型参数
+     * @return static Num类型返回值
+     */
     public static Num array(List<?> list) {
         return new Num(list.toArray());
     }
@@ -53,6 +70,12 @@ public class Nums {
      * @param shape 数组形状
      * @param dType 数据类型
      * @return 空 Num 实例
+     */
+    /**
+     * array方法。
+     *      * @param shape int[]类型参数
+     * @param dType DType类型参数
+     * @return static Num类型返回值
      */
     /**
      * array方法。
@@ -78,6 +101,13 @@ public class Nums {
      * @param dType DType类型参数
      * @return static Num类型返回值
      */
+    /**
+     * array方法。
+     *      * @param shape int[]类型参数
+     * @param objs Object[]类型参数
+     * @param dType DType类型参数
+     * @return static Num类型返回值
+     */
     public static Num array(int[] shape, Object[] objs, DType dType) {
         return null;
     }
@@ -87,6 +117,12 @@ public class Nums {
      * @param num 目标 Num 实例
      * @param objs 用于填充的对象数组
      * @return 填充后的 Num 实例
+     */
+    /**
+     * fill方法。
+     *      * @param num Num类型参数
+     * @param objs Object[]类型参数
+     * @return static Num类型返回值
      */
     /**
      * fill方法。
@@ -110,6 +146,11 @@ public class Nums {
      * </ul>
      * @param i 可以是单个数字(结束值)或多个参数(开始, 结束, 步长)
      * @return 均匀间隔的数值数组
+     */
+    /**
+     * aRange方法。
+     *      * @param i Object...类型参数
+     * @return static Num类型返回值
      */
     /**
      * aRange方法。
@@ -143,6 +184,14 @@ public class Nums {
      * @param endPoint boolean类型参数
      * @return static Num类型返回值
      */
+    /**
+     * linSpace方法。
+     *      * @param i Number类型参数
+     * @param j Number类型参数
+     * @param num int类型参数
+     * @param endPoint boolean类型参数
+     * @return static Num类型返回值
+     */
     public static Num linSpace(Number i, Number j, Integer num, Boolean endPoint) {
         return null;
     }
@@ -158,6 +207,12 @@ public class Nums {
      * @param shapes 数组形状
      * @param dType  数据类型
      * @return 全零 Num 实例
+     */
+    /**
+     * zeros方法。
+     *      * @param shapes Integer[]类型参数
+     * @param dType DType类型参数
+     * @return static Num类型返回值
      */
     /**
      * zeros方法。
@@ -182,6 +237,10 @@ public class Nums {
      * ones方法。
      * @return static Num类型返回值
      */
+    /**
+     * ones方法。
+     * @return static Num类型返回值
+     */
     public static Num ones() {
         return null;
     }
@@ -199,6 +258,10 @@ public class Nums {
      * eye方法。
      * @return static Num类型返回值
      */
+    /**
+     * eye方法。
+     * @return static Num类型返回值
+     */
     public static Num eye() {
         return null;
     }
@@ -211,6 +274,9 @@ public class Nums {
     /**
      * hStack方法。
      */
+    /**
+     * hStack方法。
+     */
     public void hStack() {
 
     }
@@ -219,6 +285,9 @@ public class Nums {
      * 纵向连接多个数组
      * <p>
      * 类似于 numpy.vstack()
+     */
+    /**
+     * vStack方法。
      */
     /**
      * vStack方法。
@@ -238,6 +307,9 @@ public class Nums {
     /**
      * hsplit方法。
      */
+    /**
+     * hsplit方法。
+     */
     public void hsplit() {
 
     }
@@ -246,6 +318,9 @@ public class Nums {
      * 垂直分割数组
      * <p>
      * 类似于 numpy.vsplit()
+     */
+    /**
+     * vsplit方法。
      */
     /**
      * vsplit方法。

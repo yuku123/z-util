@@ -19,6 +19,9 @@ import java.util.Random;
 /**
  * QRCodeUtil类。
  */
+/**
+ * QRCodeUtil类。
+ */
 public class QRCodeUtil {
     private static final String CHARSET = "utf-8";
     private static final String FORMAT = "JPG";
@@ -105,6 +108,14 @@ public class QRCodeUtil {
      * @param needCompress boolean类型参数
      * @return static String类型返回值
      */
+    /**
+     * encode方法。
+     *      * @param content String类型参数
+     * @param logoPath String类型参数
+     * @param destPath String类型参数
+     * @param needCompress boolean类型参数
+     * @return static String类型返回值
+     */
     public static String encode(String content, String logoPath, String destPath, boolean needCompress) throws Exception {
         BufferedImage image = createImage(content, logoPath, needCompress);
         mkdirs(destPath);
@@ -122,6 +133,15 @@ public class QRCodeUtil {
      * @param destPath     存放目录
      * @param fileName     二维码文件名
      * @param needCompress 是否压缩LOGO
+     */
+    /**
+     * encode方法。
+     *      * @param content String类型参数
+     * @param logoPath String类型参数
+     * @param destPath String类型参数
+     * @param fileName String类型参数
+     * @param needCompress boolean类型参数
+     * @return static String类型返回值
      */
     /**
      * encode方法。
@@ -151,6 +171,11 @@ public class QRCodeUtil {
      *      * @param destPath String类型参数
      * @return static void类型返回值
      */
+    /**
+     * mkdirs方法。
+     *      * @param destPath String类型参数
+     * @return static void类型返回值
+     */
     public static void mkdirs(String destPath) {
         File file = new File(destPath);
         if (!file.exists() && !file.isDirectory()) {
@@ -164,6 +189,13 @@ public class QRCodeUtil {
      * @param content  内容
      * @param logoPath LOGO地址
      * @param destPath 存储地址
+     */
+    /**
+     * encode方法。
+     *      * @param content String类型参数
+     * @param logoPath String类型参数
+     * @param destPath String类型参数
+     * @return static String类型返回值
      */
     /**
      * encode方法。
@@ -190,6 +222,13 @@ public class QRCodeUtil {
      * @param needCompress boolean类型参数
      * @return static String类型返回值
      */
+    /**
+     * encode方法。
+     *      * @param content String类型参数
+     * @param destPath String类型参数
+     * @param needCompress boolean类型参数
+     * @return static String类型返回值
+     */
     public static String encode(String content, String destPath, boolean needCompress) throws Exception {
         return encode(content, null, destPath, needCompress);
     }
@@ -199,6 +238,12 @@ public class QRCodeUtil {
      *
      * @param content  内容
      * @param destPath 存储地址
+     */
+    /**
+     * encode方法。
+     *      * @param content String类型参数
+     * @param destPath String类型参数
+     * @return static String类型返回值
      */
     /**
      * encode方法。
@@ -226,6 +271,14 @@ public class QRCodeUtil {
      * @param needCompress boolean类型参数
      * @return static void类型返回值
      */
+    /**
+     * encode方法。
+     *      * @param content String类型参数
+     * @param logoPath String类型参数
+     * @param output OutputStream类型参数
+     * @param needCompress boolean类型参数
+     * @return static void类型返回值
+     */
     public static void encode(String content, String logoPath, OutputStream output, boolean needCompress)
             throws Exception {
         BufferedImage image = createImage(content, logoPath, needCompress);
@@ -244,6 +297,12 @@ public class QRCodeUtil {
      * @param output OutputStream类型参数
      * @return static void类型返回值
      */
+    /**
+     * encode方法。
+     *      * @param content String类型参数
+     * @param output OutputStream类型参数
+     * @return static void类型返回值
+     */
     public static void encode(String content, OutputStream output) throws Exception {
         encode(content, null, output, false);
     }
@@ -252,6 +311,11 @@ public class QRCodeUtil {
      * 解析二维码
      *
      * @param file 二维码图片
+     */
+    /**
+     * decode方法。
+     *      * @param file File类型参数
+     * @return static String类型返回值
      */
     /**
      * decode方法。
@@ -277,10 +341,20 @@ public class QRCodeUtil {
      *      * @param path String类型参数
      * @return static String类型返回值
      */
+    /**
+     * decode方法。
+     *      * @param path String类型参数
+     * @return static String类型返回值
+     */
     public static String decode(String path) throws Exception {
         return decode(new File(path));
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     /**
      * main方法。
      *      * @param args String[]类型参数

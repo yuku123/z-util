@@ -16,6 +16,9 @@ import java.util.Base64;
 /**
  * CurlBuilder类。
  */
+/**
+ * CurlBuilder类。
+ */
 public class CurlBuilder {
 
     private static final String INDENT = "  ";
@@ -25,6 +28,11 @@ public class CurlBuilder {
      *
      * @param definition HTTP 请求定义
      * @return cURL 命令文本
+     */
+    /**
+     * build方法。
+     *      * @param definition HttpRequestDefinition类型参数
+     * @return static String类型返回值
      */
     /**
      * build方法。
@@ -76,6 +84,11 @@ public class CurlBuilder {
      *
      * @param definition HTTP 请求定义
      * @return 格式化的 cURL 命令文本
+     */
+    /**
+     * buildPretty方法。
+     *      * @param definition HttpRequestDefinition类型参数
+     * @return static String类型返回值
      */
     /**
      * buildPretty方法。

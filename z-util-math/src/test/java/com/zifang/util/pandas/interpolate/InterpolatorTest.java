@@ -10,9 +10,15 @@ import static org.junit.Assert.*;
  * Interpolator 插值功能测试类
  * 测试线性插值、前向填充、后向填充等功能
  */
+/**
+ * InterpolatorTest类。
+ */
 public class InterpolatorTest {
 
     @Test
+    /**
+     * testLinearInterpolation方法。
+     */
     public void testLinearInterpolation() {
         // 创建带有缺失值的 Series
         double[] data = {1.0, Double.NaN, 3.0, Double.NaN, 5.0};
@@ -29,6 +35,9 @@ public class InterpolatorTest {
     }
 
     @Test
+    /**
+     * testForwardFill方法。
+     */
     public void testForwardFill() {
         double[] data = {1.0, Double.NaN, Double.NaN, 4.0, Double.NaN};
         Series series = new Series(data);
@@ -44,6 +53,9 @@ public class InterpolatorTest {
     }
 
     @Test
+    /**
+     * testBackwardFill方法。
+     */
     public void testBackwardFill() {
         double[] data = {Double.NaN, 2.0, Double.NaN, Double.NaN, 5.0};
         Series series = new Series(data);
@@ -59,6 +71,9 @@ public class InterpolatorTest {
     }
 
     @Test
+    /**
+     * testLinearWithNoNaN方法。
+     */
     public void testLinearWithNoNaN() {
         // 测试没有缺失值的情况
         double[] data = {1.0, 2.0, 3.0, 4.0, 5.0};
@@ -72,6 +87,9 @@ public class InterpolatorTest {
     }
 
     @Test
+    /**
+     * testLinearWithAllNaN方法。
+     */
     public void testLinearWithAllNaN() {
         // 测试全部缺失值的情况
         double[] data = {Double.NaN, Double.NaN, Double.NaN};
@@ -86,6 +104,9 @@ public class InterpolatorTest {
     }
 
     @Test
+    /**
+     * testDataFrameInterpolate方法。
+     */
     public void testDataFrameInterpolate() {
         // 创建带有缺失值的 DataFrame
         java.util.Map<String, double[]> data = new java.util.LinkedHashMap<>();
@@ -108,6 +129,9 @@ public class InterpolatorTest {
     }
 
     @Test
+    /**
+     * testForwardFillDataFrame方法。
+     */
     public void testForwardFillDataFrame() {
         java.util.Map<String, double[]> data = new java.util.LinkedHashMap<>();
         data.put("A", new double[]{1.0, Double.NaN, Double.NaN, 4.0, Double.NaN});

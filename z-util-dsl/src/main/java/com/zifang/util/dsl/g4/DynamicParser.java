@@ -17,6 +17,9 @@ import java.util.*;
 /**
  * DynamicParser类。
  */
+/**
+ * DynamicParser类。
+ */
 public class DynamicParser implements Parser {
 
     private TokenReader tokenReader;
@@ -31,12 +34,19 @@ public class DynamicParser implements Parser {
     /**
      * DynamicParser方法。
      */
+    /**
+     * DynamicParser方法。
+     */
     public DynamicParser() {
         this.parserRules = new HashMap<>();
     }
 
     /**
      * 加载G4文件并初始化
+     */
+    /**
+     * loadG4方法。
+     *      * @param g4Content String类型参数
      */
     /**
      * loadG4方法。
@@ -59,6 +69,10 @@ public class DynamicParser implements Parser {
      * loadG4File方法。
      *      * @param filePath String类型参数
      */
+    /**
+     * loadG4File方法。
+     *      * @param filePath String类型参数
+     */
     public void loadG4File(String filePath) {
         try {
             String content = new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(filePath)));
@@ -73,11 +87,19 @@ public class DynamicParser implements Parser {
      * setTokenReader方法。
      *      * @param tokenReader TokenReader类型参数
      */
+    /**
+     * setTokenReader方法。
+     *      * @param tokenReader TokenReader类型参数
+     */
     public void setTokenReader(TokenReader tokenReader) {
         this.tokenReader = tokenReader;
     }
 
     @Override
+    /**
+     * parse方法。
+     * @return ASTNode类型返回值
+     */
     /**
      * parse方法。
      * @return ASTNode类型返回值
@@ -92,6 +114,11 @@ public class DynamicParser implements Parser {
     }
 
     @Override
+    /**
+     * parse方法。
+     *      * @param startRule String类型参数
+     * @return ASTNode类型返回值
+     */
     /**
      * parse方法。
      *      * @param startRule String类型参数
@@ -135,11 +162,21 @@ public class DynamicParser implements Parser {
             }
         }
 
-        // 兜底：如果规则包含"空 alternative"（body 中有 | 出现后没有内容），
-        // 比如 YAML grammar 里的 `blockValue : EOL indent blockContent | ;`，
-        // 视为规则可空匹配（不消耗 token，返回无子节点的 matched 节点），
-        // 这样 `blockValue?` 之类的可选包装就能正常跳过。
-        if (body.contains("|")) {
+        // 兜底：只有当规则 body 真的含有显式空 alternative（splitAlternatives 后存在
+        // trim 后为空的分支）时，才视为规则可空匹配。比如 YAML grammar 里
+        // `blockValue : EOL indent blockContent | ;` 末尾的 `|` 是显式空分支，
+        // 没有它的话 `blockValue?` 之类的可选包装就跳过不去。
+        // 注意不能仅凭 body 含有 `|` 就 fallback —— 形如
+        // `value : object | array | string | number | bool | Null` 的 body 也含 `|`
+        // 但没有任何空 alt，value 匹配失败时必须抛错而不是悄悄匹配空。
+        boolean hasEmptyAlt = false;
+        for (String alt : splitAlternatives(body)) {
+            if (alt.trim().isEmpty()) {
+                hasEmptyAlt = true;
+                break;
+            }
+        }
+        if (hasEmptyAlt) {
             SimpleASTNode matched = new SimpleASTNode();
             matched.setType(ruleName);
             matched.setLine(node.getLine());

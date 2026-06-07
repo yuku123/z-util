@@ -19,6 +19,9 @@ import java.util.Arrays;
 /**
  * OneClassSVM类。
  */
+/**
+ * OneClassSVM类。
+ */
 public class OneClassSVM {
     
     private double nu;
@@ -48,6 +51,12 @@ public class OneClassSVM {
      * @param kernel String类型参数
      * @param gamma double类型参数
      */
+    /**
+     * OneClassSVM方法。
+     *      * @param nu double类型参数
+     * @param kernel String类型参数
+     * @param gamma double类型参数
+     */
     public OneClassSVM(double nu, String kernel, double gamma) {
         this.nu = nu;
         this.kernel = kernel.toUpperCase();
@@ -58,6 +67,10 @@ public class OneClassSVM {
     
     /**
      * Fit the One-Class SVM to the training data.
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
      */
     /**
      * fit方法。
@@ -234,6 +247,11 @@ public class OneClassSVM {
      *      * @param X NdArray类型参数
      * @return int[]类型返回值
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         int nSamples = Xdata.length;
@@ -253,6 +271,11 @@ public class OneClassSVM {
      * 
      * @param X Input data (nSamples x nFeatures)
      * @return Array of decision function values (positive = normal, negative = anomaly)
+     */
+    /**
+     * score方法。
+     *      * @param X NdArray类型参数
+     * @return double[]类型返回值
      */
     /**
      * score方法。

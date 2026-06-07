@@ -23,12 +23,19 @@ import java.util.Stack;
  * @author zifang
  * @version 1.0
  */
+/**
+ * QuickSort类。
+ */
 public class QuickSort {
 
     /**
      * 对整数数组进行快速排序（递归版本）。
      *
      * @param arr 待排序的整数数组
+     */
+    /**
+     * sort方法。
+     *      * @param arr int[]类型参数
      */
     public void sort(int[] arr) {
         int start = 0, end = arr.length - 1;
@@ -41,6 +48,12 @@ public class QuickSort {
      * @param arr   待排序数组
      * @param start 排序开始索引
      * @param end   排序结束索引
+     */
+    /**
+     * sort方法。
+     *      * @param arr int[]类型参数
+     * @param start int类型参数
+     * @param end int类型参数
      */
     public void sort(int[] arr, int start, int end) {
         int split;
@@ -99,6 +112,10 @@ public class QuickSort {
      * 用栈模拟递归实现快速排序比递归快速排序慢。
      *
      * @param arr 待排序的整数数组
+     */
+    /**
+     * sortStack方法。
+     *      * @param arr int[]类型参数
      */
     public void sortStack(int[] arr) {
         Stack<Integer> stack = new Stack<Integer>();

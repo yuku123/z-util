@@ -8,6 +8,12 @@ import com.zifang.util.yaml.model.YamlMap;
  *
  * @author zifang
  */
+/**
+ * BeautifyYamlUtils类。
+ */
+/**
+ * BeautifyYamlUtils类。
+ */
 public class BeautifyYamlUtils {
 
     private BeautifyYamlUtils() {
@@ -19,6 +25,16 @@ public class BeautifyYamlUtils {
      *
      * @param yamlStr 原始 YAML 字符串
      * @return 格式化后的 YAML 字符串
+     */
+    /**
+     * beautify方法。
+     *      * @param yamlStr String类型参数
+     * @return static String类型返回值
+     */
+    /**
+     * beautify方法。
+     *      * @param yamlStr String类型参数
+     * @return static String类型返回值
      */
     public static String beautify(String yamlStr) {
         if (yamlStr == null || yamlStr.trim().isEmpty()) {
@@ -33,6 +49,16 @@ public class BeautifyYamlUtils {
      *
      * @param yamlStr 原始 YAML 字符串
      * @return 压缩后的 YAML 字符串
+     */
+    /**
+     * minify方法。
+     *      * @param yamlStr String类型参数
+     * @return static String类型返回值
+     */
+    /**
+     * minify方法。
+     *      * @param yamlStr String类型参数
+     * @return static String类型返回值
      */
     public static String minify(String yamlStr) {
         if (yamlStr == null || yamlStr.trim().isEmpty()) {
@@ -49,6 +75,16 @@ public class BeautifyYamlUtils {
      *
      * @param yamlStr 原始 YAML 字符串
      * @return 键排序后的 YAML 字符串
+     */
+    /**
+     * sortKeys方法。
+     *      * @param yamlStr String类型参数
+     * @return static String类型返回值
+     */
+    /**
+     * sortKeys方法。
+     *      * @param yamlStr String类型参数
+     * @return static String类型返回值
      */
     public static String sortKeys(String yamlStr) {
         if (yamlStr == null || yamlStr.trim().isEmpty()) {

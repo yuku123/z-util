@@ -9,10 +9,18 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Disorder类。
+ */
 public class Disorder {
     private static int x = 0, y = 0;
     private static int a = 0, b = 0;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
         int i = 0;
         for (; ; ) {

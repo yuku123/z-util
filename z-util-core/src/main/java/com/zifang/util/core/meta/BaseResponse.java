@@ -9,12 +9,18 @@ package com.zifang.util.core.meta;
 /**
  * BaseResponse类。
  */
+/**
+ * BaseResponse类。
+ */
 public class BaseResponse {
 
     private String message;
 
     private ResultCode code = ResultCode.SUCCESS;
 
+    /**
+     * BaseResponse方法。
+     */
     /**
      * BaseResponse方法。
      */
@@ -26,6 +32,11 @@ public class BaseResponse {
      *
      * @param message 响应消息
      * @param code    响应状态码
+     */
+    /**
+     * BaseResponse方法。
+     *      * @param message String类型参数
+     * @param code ResultCode类型参数
      */
     /**
      * BaseResponse方法。
@@ -46,6 +57,10 @@ public class BaseResponse {
      * getMessage方法。
      * @return String类型返回值
      */
+    /**
+     * getMessage方法。
+     * @return String类型返回值
+     */
     public String getMessage() {
         return message;
     }
@@ -54,6 +69,10 @@ public class BaseResponse {
      * 设置响应消息
      *
      * @param message 消息内容
+     */
+    /**
+     * setMessage方法。
+     *      * @param message String类型参数
      */
     /**
      * setMessage方法。
@@ -72,6 +91,10 @@ public class BaseResponse {
      * getCode方法。
      * @return ResultCode类型返回值
      */
+    /**
+     * getCode方法。
+     * @return ResultCode类型返回值
+     */
     public ResultCode getCode() {
         return code;
     }
@@ -80,6 +103,10 @@ public class BaseResponse {
      * 设置响应状态码
      *
      * @param code 状态码枚举
+     */
+    /**
+     * setCode方法。
+     *      * @param code ResultCode类型参数
      */
     /**
      * setCode方法。
@@ -98,6 +125,10 @@ public class BaseResponse {
      * isSuccess方法。
      * @return boolean类型返回值
      */
+    /**
+     * isSuccess方法。
+     * @return boolean类型返回值
+     */
     public boolean isSuccess() {
         return code == ResultCode.SUCCESS;
     }
@@ -108,6 +139,10 @@ public class BaseResponse {
      * @return 字符串表示
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -128,6 +163,11 @@ public class BaseResponse {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -142,6 +182,10 @@ public class BaseResponse {
      * @return 哈希码
      */
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

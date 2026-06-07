@@ -9,11 +9,17 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * PipelineContextTest类。
+ */
 public class PipelineContextTest {
 
     private PipelineContext context;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         context = new PipelineContext();
     }
@@ -21,6 +27,9 @@ public class PipelineContextTest {
     // --- Constructor tests ---
 
     @Test
+    /**
+     * testConstructor_InitializesMaps方法。
+     */
     public void testConstructor_InitializesMaps() {
         assertNotNull(context.getHeaders());
         assertNotNull(context.getCookies());
@@ -33,12 +42,18 @@ public class PipelineContextTest {
     // --- URL tests ---
 
     @Test
+    /**
+     * testSetAndGetUrl方法。
+     */
     public void testSetAndGetUrl() {
         context.setUrl("https://example.com");
         assertEquals("https://example.com", context.getUrl());
     }
 
     @Test
+    /**
+     * testGetUrl_WhenNotSet_ReturnsNull方法。
+     */
     public void testGetUrl_WhenNotSet_ReturnsNull() {
         assertNull(context.getUrl());
     }
@@ -46,6 +61,9 @@ public class PipelineContextTest {
     // --- Headers tests ---
 
     @Test
+    /**
+     * testSetAndGetHeaders方法。
+     */
     public void testSetAndGetHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
@@ -58,6 +76,9 @@ public class PipelineContextTest {
     }
 
     @Test
+    /**
+     * testGetHeaders_WhenNotSet_ReturnsEmptyMap方法。
+     */
     public void testGetHeaders_WhenNotSet_ReturnsEmptyMap() {
         assertTrue(context.getHeaders().isEmpty());
     }
@@ -65,6 +86,9 @@ public class PipelineContextTest {
     // --- Cookies tests ---
 
     @Test
+    /**
+     * testSetAndGetCookies方法。
+     */
     public void testSetAndGetCookies() {
         Map<String, String> cookies = new HashMap<>();
         cookies.put("session", "abc123");
@@ -77,6 +101,9 @@ public class PipelineContextTest {
     }
 
     @Test
+    /**
+     * testGetCookies_WhenNotSet_ReturnsEmptyMap方法。
+     */
     public void testGetCookies_WhenNotSet_ReturnsEmptyMap() {
         assertTrue(context.getCookies().isEmpty());
     }
@@ -84,6 +111,9 @@ public class PipelineContextTest {
     // --- Data tests ---
 
     @Test
+    /**
+     * testSetAndGetData方法。
+     */
     public void testSetAndGetData() {
         Map<String, Object> data = new HashMap<>();
         data.put("title", "Test Page");
@@ -96,6 +126,9 @@ public class PipelineContextTest {
     }
 
     @Test
+    /**
+     * testPut方法。
+     */
     public void testPut() {
         context.put("key1", "value1");
         context.put("key2", 123);
@@ -105,23 +138,35 @@ public class PipelineContextTest {
     }
 
     @Test
+    /**
+     * testPutData方法。
+     */
     public void testPutData() {
         context.putData("dataKey", "dataValue");
         assertEquals("dataValue", context.getData("dataKey"));
     }
 
     @Test
+    /**
+     * testGetData_WithKey方法。
+     */
     public void testGetData_WithKey() {
         context.put("testKey", "testValue");
         assertEquals("testValue", context.getData("testKey"));
     }
 
     @Test
+    /**
+     * testGetData_WhenNotSet_ReturnsNull方法。
+     */
     public void testGetData_WhenNotSet_ReturnsNull() {
         assertNull(context.getData("nonexistent"));
     }
 
     @Test
+    /**
+     * testGetAlias方法。
+     */
     public void testGetAlias() {
         context.put("aliasKey", "aliasValue");
         assertEquals("aliasValue", context.get("aliasKey"));
@@ -130,12 +175,18 @@ public class PipelineContextTest {
     // --- Parameter tests (aliases) ---
 
     @Test
+    /**
+     * testGetParameter方法。
+     */
     public void testGetParameter() {
         context.putParameter("param1", "value1");
         assertEquals("value1", context.getParameter("param1"));
     }
 
     @Test
+    /**
+     * testPutParameter方法。
+     */
     public void testPutParameter() {
         context.putParameter("paramKey", "paramValue");
         assertEquals("paramValue", context.getParameter("paramKey"));
@@ -144,6 +195,9 @@ public class PipelineContextTest {
     // --- HTML tests ---
 
     @Test
+    /**
+     * testSetAndGetHtml方法。
+     */
     public void testSetAndGetHtml() {
         String html = "<html><body>Content</body></html>";
         context.setHtml(html);
@@ -151,6 +205,9 @@ public class PipelineContextTest {
     }
 
     @Test
+    /**
+     * testGetHtml_WhenNotSet_ReturnsNull方法。
+     */
     public void testGetHtml_WhenNotSet_ReturnsNull() {
         assertNull(context.getHtml());
     }
@@ -158,6 +215,9 @@ public class PipelineContextTest {
     // --- JSON tests ---
 
     @Test
+    /**
+     * testSetAndGetJson方法。
+     */
     public void testSetAndGetJson() {
         String json = "{\"name\":\"test\"}";
         context.setJson(json);
@@ -165,6 +225,9 @@ public class PipelineContextTest {
     }
 
     @Test
+    /**
+     * testGetJson_WhenNotSet_ReturnsNull方法。
+     */
     public void testGetJson_WhenNotSet_ReturnsNull() {
         assertNull(context.getJson());
     }
@@ -172,6 +235,9 @@ public class PipelineContextTest {
     // --- Errors tests ---
 
     @Test
+    /**
+     * testAddError方法。
+     */
     public void testAddError() {
         context.addError("http", "Connection timeout");
         assertFalse(context.getErrors().isEmpty());
@@ -179,17 +245,26 @@ public class PipelineContextTest {
     }
 
     @Test
+    /**
+     * testHasErrors_WhenErrorsExist_ReturnsTrue方法。
+     */
     public void testHasErrors_WhenErrorsExist_ReturnsTrue() {
         context.addError("stage1", "error message");
         assertTrue(context.hasErrors());
     }
 
     @Test
+    /**
+     * testHasErrors_WhenNoErrors_ReturnsFalse方法。
+     */
     public void testHasErrors_WhenNoErrors_ReturnsFalse() {
         assertFalse(context.hasErrors());
     }
 
     @Test
+    /**
+     * testHasErrors_AfterMultipleErrors_ReturnsTrue方法。
+     */
     public void testHasErrors_AfterMultipleErrors_ReturnsTrue() {
         context.addError("stage1", "error1");
         context.addError("stage2", "error2");
@@ -200,6 +275,9 @@ public class PipelineContextTest {
     // --- Screenshots tests ---
 
     @Test
+    /**
+     * testAddScreenshot方法。
+     */
     public void testAddScreenshot() {
         File screenshot = new File("/tmp/test_screenshot.png");
         context.addScreenshot("homepage", screenshot);
@@ -209,6 +287,9 @@ public class PipelineContextTest {
     }
 
     @Test
+    /**
+     * testGetScreenshots_WhenNotSet_ReturnsEmptyMap方法。
+     */
     public void testGetScreenshots_WhenNotSet_ReturnsEmptyMap() {
         assertTrue(context.getScreenshots().isEmpty());
     }
@@ -216,17 +297,26 @@ public class PipelineContextTest {
     // --- Metadata tests ---
 
     @Test
+    /**
+     * testSetMetadata方法。
+     */
     public void testSetMetadata() {
         context.setMetadata("customKey", "customValue");
         assertEquals("customValue", context.getMetadata("customKey"));
     }
 
     @Test
+    /**
+     * testGetMetadata_WhenNotSet_ReturnsNull方法。
+     */
     public void testGetMetadata_WhenNotSet_ReturnsNull() {
         assertNull(context.getMetadata("nonexistent"));
     }
 
     @Test
+    /**
+     * testGetMetadata_Map方法。
+     */
     public void testGetMetadata_Map() {
         Map<String, Object> metadata = context.getMetadata();
         metadata.put("key1", "value1");
@@ -238,6 +328,9 @@ public class PipelineContextTest {
     // --- Multiple data types test ---
 
     @Test
+    /**
+     * testPutVariousTypes方法。
+     */
     public void testPutVariousTypes() {
         context.put("string", "text");
         context.put("integer", 100);

@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * IdcardUtil 测试类
  */
+/**
+ * IdcardUtilTest类。
+ */
 public class IdcardUtilTest {
 
     @Test
+    /**
+     * testIsValidatedAllIdcard方法。
+     */
     public void testIsValidatedAllIdcard() {
         // 无效身份证
         assertFalse(IdcardUtil.isValidatedAllIdcard("123456789012345678"));
@@ -19,6 +25,9 @@ public class IdcardUtilTest {
     }
 
     @Test
+    /**
+     * testIsValidate18Idcard方法。
+     */
     public void testIsValidate18Idcard() {
         // 正确格式但校验位错误
         assertFalse(IdcardUtil.isValidate18Idcard("110105194910010010"));
@@ -30,6 +39,9 @@ public class IdcardUtilTest {
     }
 
     @Test
+    /**
+     * testIs18Idcard方法。
+     */
     public void testIs18Idcard() {
         assertTrue(IdcardUtil.is18Idcard("110105194910010011"));
         assertTrue(IdcardUtil.is18Idcard("11010519491001001x"));
@@ -38,6 +50,9 @@ public class IdcardUtilTest {
     }
 
     @Test
+    /**
+     * testGetUserSex方法。
+     */
     public void testGetUserSex() {
         // 18位身份证：第17位（索引16）决定性别
         // 110105194910010011 - 第17位是1（奇数）-> 男

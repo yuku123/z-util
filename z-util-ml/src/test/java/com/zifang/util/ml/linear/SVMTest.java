@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * SVMTest类。
+ */
 public class SVMTest {
 
     private Random random = new Random(42);
@@ -49,6 +52,9 @@ public class SVMTest {
     }
 
     @Test
+    /**
+     * testSVMLinear方法。
+     */
     public void testSVMLinear() {
         int nSamples = 100;
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));
@@ -79,6 +85,9 @@ public class SVMTest {
     }
 
     @Test
+    /**
+     * testSVMRBF方法。
+     */
     public void testSVMRBF() {
         // Create circular data where linear SVM would struggle
         int nSamples = 60;
@@ -119,6 +128,9 @@ public class SVMTest {
     }
 
     @Test
+    /**
+     * testSVMPredict方法。
+     */
     public void testSVMPredict() {
         int nSamples = 40;
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));

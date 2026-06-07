@@ -4,8 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Sort类。
+ */
 public class Sort {
 
+    /**
+     * print方法。
+     *      * @param list ListNode类型参数
+     */
     public void print(List<Node> list) {
         Node root = list.stream().filter(e -> 0 == e.getParentId()).findFirst().get(); // 得到根节点
         // 根据节点进行打印
@@ -24,6 +31,11 @@ public class Sort {
     }
 
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         List<Node> nodeList = getDataList();
         new Sort().print(nodeList);

@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * CacheEngine 类测试
  */
+/**
+ * CacheEngineTest类。
+ */
 public class CacheEngineTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         CacheEngine cacheEngine = new CacheEngine();
         assertNotNull(cacheEngine);
@@ -18,6 +24,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testConstructorWithParameters方法。
+     */
     public void testConstructorWithParameters() {
         CacheEngine cacheEngine = new CacheEngine("redis", "redis://localhost:6379");
 
@@ -26,6 +35,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testEngineType方法。
+     */
     public void testEngineType() {
         CacheEngine cacheEngine = new CacheEngine();
 
@@ -37,6 +49,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testCacheEngineService方法。
+     */
     public void testCacheEngineService() {
         CacheEngine cacheEngine = new CacheEngine();
 
@@ -48,6 +63,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         CacheEngine cache1 = new CacheEngine("redis", "redis://localhost:6379");
         CacheEngine cache2 = new CacheEngine("redis", "redis://localhost:6379");
@@ -56,6 +74,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentEngineType方法。
+     */
     public void testEqualsWithDifferentEngineType() {
         CacheEngine cache1 = new CacheEngine("redis", "redis://localhost:6379");
         CacheEngine cache2 = new CacheEngine("memcached", "redis://localhost:6379");
@@ -64,6 +85,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentService方法。
+     */
     public void testEqualsWithDifferentService() {
         CacheEngine cache1 = new CacheEngine("redis", "redis://localhost:6379");
         CacheEngine cache2 = new CacheEngine("redis", "redis://other:6379");
@@ -72,24 +96,36 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testEqualsWithSameObject方法。
+     */
     public void testEqualsWithSameObject() {
         CacheEngine cache = new CacheEngine();
         assertEquals(cache, cache);
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         CacheEngine cache = new CacheEngine();
         assertNotEquals(cache, null);
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentClass方法。
+     */
     public void testEqualsWithDifferentClass() {
         CacheEngine cache = new CacheEngine();
         assertNotEquals(cache, "not a cache engine");
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         CacheEngine cache1 = new CacheEngine("redis", "redis://localhost:6379");
         CacheEngine cache2 = new CacheEngine("redis", "redis://localhost:6379");
@@ -98,6 +134,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testHashCodeConsistency方法。
+     */
     public void testHashCodeConsistency() {
         CacheEngine cache = new CacheEngine("redis", "redis://localhost:6379");
         int hashCode1 = cache.hashCode();
@@ -107,6 +146,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         CacheEngine cacheEngine = new CacheEngine("redis", "redis://localhost:6379");
         String str = cacheEngine.toString();
@@ -118,6 +160,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testToStringWithNullValues方法。
+     */
     public void testToStringWithNullValues() {
         CacheEngine cacheEngine = new CacheEngine();
         String str = cacheEngine.toString();
@@ -127,6 +172,9 @@ public class CacheEngineTest {
     }
 
     @Test
+    /**
+     * testCommonCacheEngineTypes方法。
+     */
     public void testCommonCacheEngineTypes() {
         // Redis
         CacheEngine redis = new CacheEngine();

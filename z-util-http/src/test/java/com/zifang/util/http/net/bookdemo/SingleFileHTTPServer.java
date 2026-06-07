@@ -14,6 +14,9 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * SingleFileHTTPServer类。
+ */
 public class SingleFileHTTPServer {
 
     private static final Logger log = Logger.getLogger("SingleFileHTTPServer");
@@ -23,11 +26,25 @@ public class SingleFileHTTPServer {
     private final int port;
     private final String encoding;
 
+    /**
+     * SingleFileHTTPServer方法。
+     *      * @param data String类型参数
+     * @param encoding String类型参数
+     * @param mimeType String类型参数
+     * @param port int类型参数
+     */
     public SingleFileHTTPServer(String data, String encoding, String mimeType, int port)
             throws UnsupportedEncodingException {
         this(data.getBytes(encoding), encoding, mimeType, port);
     }
 
+    /**
+     * SingleFileHTTPServer方法。
+     *      * @param data byte[]类型参数
+     * @param encoding String类型参数
+     * @param mimeType String类型参数
+     * @param port int类型参数
+     */
     public SingleFileHTTPServer(byte[] data, String encoding, String mimeType, int port) {
         this.content = data;
         this.port = port;
@@ -37,6 +54,9 @@ public class SingleFileHTTPServer {
         this.header = header.getBytes(Charset.forName("US-ASCII"));
     }
 
+    /**
+     * start方法。
+     */
     public void start() {
         ExecutorService pool = Executors.newFixedThreadPool(100);
         try (ServerSocket server = new ServerSocket(this.port)) {
@@ -67,6 +87,10 @@ public class SingleFileHTTPServer {
         }
 
         @Override
+    /**
+     * call方法。
+     * @return Void类型返回值
+     */
         public Void call() throws IOException {
             try {
                 OutputStream out = new BufferedOutputStream(connection.getOutputStream());
@@ -94,6 +118,11 @@ public class SingleFileHTTPServer {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         // set the port to listen on

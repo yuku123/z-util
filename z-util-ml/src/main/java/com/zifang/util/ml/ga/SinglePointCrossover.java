@@ -8,6 +8,9 @@ import java.util.Random;
 /**
  * SinglePointCrossover类。
  */
+/**
+ * SinglePointCrossover类。
+ */
 public class SinglePointCrossover implements CrossoverOperator {
 
     private final Random random = new Random();
@@ -20,6 +23,12 @@ public class SinglePointCrossover implements CrossoverOperator {
      * @return 包含两个子代的数组
      */
     @Override
+    /**
+     * crossover方法。
+     *      * @param parent1 Individual类型参数
+     * @param parent2 Individual类型参数
+     * @return Individual[]类型返回值
+     */
     /**
      * crossover方法。
      *      * @param parent1 Individual类型参数

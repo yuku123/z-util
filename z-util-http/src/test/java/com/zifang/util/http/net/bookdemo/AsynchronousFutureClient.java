@@ -8,10 +8,18 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+/**
+ * AsynchronousFutureClient类。
+ */
 public class AsynchronousFutureClient {
 
     public static int DEFAULT_PORT = 19;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         if (args.length == 0) {

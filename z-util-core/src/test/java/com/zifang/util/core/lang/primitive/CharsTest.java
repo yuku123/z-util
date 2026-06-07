@@ -4,9 +4,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * CharsTest类。
+ */
 public class CharsTest {
 
     @Test
+    /**
+     * isAlpha方法。
+     */
     public void isAlpha() {
         assertTrue(Chars.isAlpha('a'));
         assertTrue(Chars.isAlpha('z'));
@@ -18,6 +24,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isDigit方法。
+     */
     public void isDigit() {
         assertTrue(Chars.isDigit('0'));
         assertTrue(Chars.isDigit('9'));
@@ -26,6 +35,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isBlank方法。
+     */
     public void isBlank() {
         assertTrue(Chars.isBlank(' '));
         assertTrue(Chars.isBlank('\t'));
@@ -35,6 +47,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toChar方法。
+     */
     public void toChar() {
         assertEquals(255, Chars.toChar((byte) -1));
         assertEquals(0, Chars.toChar((byte) 0));
@@ -43,6 +58,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toSimpleByteArray_charArray方法。
+     */
     public void toSimpleByteArray_charArray() {
         byte[] result = Chars.toSimpleByteArray(new char[]{'a', 'b', 'c'});
         assertEquals(3, result.length);
@@ -52,6 +70,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toSimpleByteArray_charSequence方法。
+     */
     public void toSimpleByteArray_charSequence() {
         byte[] result = Chars.toSimpleByteArray("abc");
         assertEquals(3, result.length);
@@ -61,6 +82,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toSimpleCharArray方法。
+     */
     public void toSimpleCharArray() {
         char[] result = Chars.toSimpleCharArray(new byte[]{'a', 'b', 'c'});
         assertEquals(3, result.length);
@@ -70,6 +94,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toAscii方法。
+     */
     public void toAscii() {
         assertEquals('a', Chars.toAscii('a'));
         assertEquals(0x3F, Chars.toAscii('\u0100'));
@@ -77,6 +104,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toAsciiByteArray_charArray方法。
+     */
     public void toAsciiByteArray_charArray() {
         byte[] result = Chars.toAsciiByteArray(new char[]{'a', 'b', '\u0100'});
         assertEquals(3, result.length);
@@ -86,6 +116,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toAsciiByteArray_charSequence方法。
+     */
     public void toAsciiByteArray_charSequence() {
         byte[] result = Chars.toAsciiByteArray("abc");
         assertEquals(3, result.length);
@@ -93,6 +126,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toRawByteArray方法。
+     */
     public void toRawByteArray() {
         byte[] result = Chars.toRawByteArray(new char[]{0x0102});
         assertEquals(2, result.length);
@@ -101,6 +137,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toRawCharArray方法。
+     */
     public void toRawCharArray() {
         byte[] barr = new byte[]{(byte) 0x01, (byte) 0x02};
         char[] result = Chars.toRawCharArray(barr);
@@ -109,6 +148,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toRawCharArray_oddLength方法。
+     */
     public void toRawCharArray_oddLength() {
         byte[] barr = new byte[]{(byte) 0x01};
         char[] result = Chars.toRawCharArray(barr);
@@ -116,6 +158,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toByteArray方法。
+     */
     public void toByteArray() throws Exception {
         char[] carr = new char[]{'a', 'b'};
         byte[] result = Chars.toByteArray(carr);
@@ -123,6 +168,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toByteArray_withCharset方法。
+     */
     public void toByteArray_withCharset() throws Exception {
         char[] carr = new char[]{'a', 'b'};
         byte[] result = Chars.toByteArray(carr, "UTF-8");
@@ -130,6 +178,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toCharArray_fromBytes方法。
+     */
     public void toCharArray_fromBytes() throws Exception {
         byte[] barr = "ab".getBytes("UTF-8");
         char[] result = Chars.toCharArray(barr);
@@ -139,6 +190,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toCharArray_fromBytes_withCharset方法。
+     */
     public void toCharArray_fromBytes_withCharset() throws Exception {
         byte[] barr = "ab".getBytes("UTF-8");
         char[] result = Chars.toCharArray(barr, "UTF-8");
@@ -146,6 +200,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * equalsOne方法。
+     */
     public void equalsOne() {
         assertTrue(Chars.equalsOne('a', new char[]{'a', 'b', 'c'}));
         assertTrue(Chars.equalsOne('b', new char[]{'a', 'b', 'c'}));
@@ -153,6 +210,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * findFirstEqual_charArray方法。
+     */
     public void findFirstEqual_charArray() {
         char[] source = new char[]{'a', 'b', 'c', 'd'};
         assertEquals(1, Chars.findFirstEqual(source, 0, new char[]{'b', 'c'}));
@@ -161,6 +221,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * findFirstEqual_singleChar方法。
+     */
     public void findFirstEqual_singleChar() {
         char[] source = new char[]{'a', 'b', 'c'};
         assertEquals(1, Chars.findFirstEqual(source, 0, 'b'));
@@ -168,6 +231,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * findFirstDiff_charArray方法。
+     */
     public void findFirstDiff_charArray() {
         char[] source = new char[]{'a', 'a', 'a', 'b'};
         assertEquals(3, Chars.findFirstDiff(source, 0, new char[]{'a'}));
@@ -175,6 +241,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * findFirstDiff_singleChar方法。
+     */
     public void findFirstDiff_singleChar() {
         char[] source = new char[]{'a', 'a', 'b'};
         assertEquals(2, Chars.findFirstDiff(source, 0, 'a'));
@@ -182,6 +251,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isWhitespace方法。
+     */
     public void isWhitespace() {
         assertTrue(Chars.isWhitespace(' '));
         assertTrue(Chars.isWhitespace('\t'));
@@ -192,6 +264,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isLowercaseAlpha方法。
+     */
     public void isLowercaseAlpha() {
         assertTrue(Chars.isLowercaseAlpha('a'));
         assertTrue(Chars.isLowercaseAlpha('z'));
@@ -201,6 +276,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isUppercaseAlpha方法。
+     */
     public void isUppercaseAlpha() {
         assertTrue(Chars.isUppercaseAlpha('A'));
         assertTrue(Chars.isUppercaseAlpha('Z'));
@@ -209,6 +287,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isAlphaOrDigit方法。
+     */
     public void isAlphaOrDigit() {
         assertTrue(Chars.isAlphaOrDigit('a'));
         assertTrue(Chars.isAlphaOrDigit('0'));
@@ -217,6 +298,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isWordChar方法。
+     */
     public void isWordChar() {
         assertTrue(Chars.isWordChar('a'));
         assertTrue(Chars.isWordChar('0'));
@@ -225,6 +309,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isPropertyNameChar方法。
+     */
     public void isPropertyNameChar() {
         assertTrue(Chars.isPropertyNameChar('a'));
         assertTrue(Chars.isPropertyNameChar('0'));
@@ -234,6 +321,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isHexDigit方法。
+     */
     public void isHexDigit() {
         assertTrue(Chars.isHexDigit('0'));
         assertTrue(Chars.isHexDigit('9'));
@@ -246,6 +336,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isGenericDelimiter方法。
+     */
     public void isGenericDelimiter() {
         assertTrue(Chars.isGenericDelimiter(':'));
         assertTrue(Chars.isGenericDelimiter('/'));
@@ -258,6 +351,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isSubDelimiter方法。
+     */
     public void isSubDelimiter() {
         assertTrue(Chars.isSubDelimiter('!'));
         assertTrue(Chars.isSubDelimiter('$'));
@@ -272,6 +368,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isReserved方法。
+     */
     public void isReserved() {
         assertTrue(Chars.isReserved(':'));
         assertTrue(Chars.isReserved('!'));
@@ -279,6 +378,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isUnreserved方法。
+     */
     public void isUnreserved() {
         assertTrue(Chars.isUnreserved('a'));
         assertTrue(Chars.isUnreserved('0'));
@@ -290,6 +392,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * isPchar方法。
+     */
     public void isPchar() {
         assertTrue(Chars.isPchar('a'));
         assertTrue(Chars.isPchar(':'));
@@ -298,6 +403,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toUpperAscii方法。
+     */
     public void toUpperAscii() {
         assertEquals('A', Chars.toUpperAscii('a'));
         assertEquals('Z', Chars.toUpperAscii('z'));
@@ -306,6 +414,9 @@ public class CharsTest {
     }
 
     @Test
+    /**
+     * toLowerAscii方法。
+     */
     public void toLowerAscii() {
         assertEquals('a', Chars.toLowerAscii('A'));
         assertEquals('z', Chars.toLowerAscii('Z'));

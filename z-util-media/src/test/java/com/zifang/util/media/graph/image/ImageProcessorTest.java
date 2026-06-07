@@ -7,9 +7,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import static org.junit.Assert.*;
 
+/**
+ * ImageProcessorTest类。
+ */
 public class ImageProcessorTest {
 
     @Test
+    /**
+     * testConstructor方法。
+     */
     public void testConstructor() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -19,6 +25,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testResize方法。
+     */
     public void testResize() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -28,6 +37,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testResizeInvalidWidth方法。
+     */
     public void testResizeInvalidWidth() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -36,6 +48,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testScale方法。
+     */
     public void testScale() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -45,6 +60,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testScaleInvalidScale方法。
+     */
     public void testScaleInvalidScale() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -53,6 +71,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testCrop方法。
+     */
     public void testCrop() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -62,6 +83,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testCropBeyondBounds方法。
+     */
     public void testCropBeyondBounds() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -71,6 +95,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testRotate方法。
+     */
     public void testRotate() {
         BufferedImage img = new BufferedImage(100, 50, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -80,6 +107,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testFlipHorizontal方法。
+     */
     public void testFlipHorizontal() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -88,6 +118,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testFlipVertical方法。
+     */
     public void testFlipVertical() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -96,6 +129,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testGrayscale方法。
+     */
     public void testGrayscale() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -104,6 +140,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testBrightness方法。
+     */
     public void testBrightness() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -112,6 +151,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testContrast方法。
+     */
     public void testContrast() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -120,6 +162,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testInvert方法。
+     */
     public void testInvert() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -128,6 +173,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testThreshold方法。
+     */
     public void testThreshold() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -136,6 +184,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testBlur方法。
+     */
     public void testBlur() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -144,6 +195,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testSharpen方法。
+     */
     public void testSharpen() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -152,6 +206,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testEdgeDetect方法。
+     */
     public void testEdgeDetect() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -160,6 +217,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testWatermarkText方法。
+     */
     public void testWatermarkText() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -168,6 +228,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testOverlay方法。
+     */
     public void testOverlay() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage overlay = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
@@ -177,6 +240,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testConcatRight方法。
+     */
     public void testConcatRight() {
         BufferedImage img1 = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
         BufferedImage img2 = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
@@ -187,6 +253,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testConcatBottom方法。
+     */
     public void testConcatBottom() {
         BufferedImage img1 = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
         BufferedImage img2 = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
@@ -197,6 +266,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testGetImage方法。
+     */
     public void testGetImage() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         ImageProcessor processor = new ImageProcessor(img);
@@ -204,6 +276,9 @@ public class ImageProcessorTest {
     }
 
     @Test
+    /**
+     * testLoadFromBytes方法。
+     */
     public void testLoadFromBytes() throws Exception {
         BufferedImage original = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

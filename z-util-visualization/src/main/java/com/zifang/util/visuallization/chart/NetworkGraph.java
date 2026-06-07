@@ -12,6 +12,9 @@ import java.util.List;
 /**
  * NetworkGraph类。
  */
+/**
+ * NetworkGraph类。
+ */
 public class NetworkGraph extends ChartFrame {
 
     private final List<LayerData> layers;
@@ -27,6 +30,12 @@ public class NetworkGraph extends ChartFrame {
      * @param width 图表宽度
      * @param height 图表高度
      */
+    /**
+     * NetworkGraph方法。
+     *      * @param title String类型参数
+     * @param width int类型参数
+     * @param height int类型参数
+     */
     public NetworkGraph(String title, int width, int height) {
         super(title, width, height);
         this.layers = new ArrayList<>();
@@ -35,6 +44,10 @@ public class NetworkGraph extends ChartFrame {
     /**
      * 创建网络拓扑图（使用默认尺寸800x600）
      * @param title 图表标题
+     */
+    /**
+     * NetworkGraph方法。
+     *      * @param title String类型参数
      */
     public NetworkGraph(String title) {
         this(title, 800, 600);
@@ -45,6 +58,12 @@ public class NetworkGraph extends ChartFrame {
      * @param layerIndex 层索引（从0开始）
      * @param nodeCount  该层神经元数量
      * @param layerName  层名称（如"Input", "Hidden", "Output"）
+     */
+    /**
+     * addLayer方法。
+     *      * @param layerIndex int类型参数
+     * @param nodeCount int类型参数
+     * @param layerName String类型参数
      */
     public void addLayer(int layerIndex, int nodeCount, String layerName) {
         while (layers.size() <= layerIndex) {
@@ -59,6 +78,11 @@ public class NetworkGraph extends ChartFrame {
      * @param nodeCount  该层神经元数量
      * @param layerName  层名称
      */
+    /**
+     * addLayer方法。
+     *      * @param nodeCount int类型参数
+     * @param layerName String类型参数
+     */
     public void addLayer(int nodeCount, String layerName) {
         layers.add(new LayerData());
         LayerData last = layers.get(layers.size() - 1);
@@ -69,6 +93,9 @@ public class NetworkGraph extends ChartFrame {
     /**
      * 清空所有层级数据
      */
+    /**
+     * clear方法。
+     */
     public void clear() {
         layers.clear();
     }
@@ -76,6 +103,10 @@ public class NetworkGraph extends ChartFrame {
     /**
      * 设置节点半径
      * @param radius 节点半径（像素）
+     */
+    /**
+     * setNodeRadius方法。
+     *      * @param radius int类型参数
      */
     public void setNodeRadius(int radius) {
         this.nodeRadius = radius;
@@ -85,6 +116,11 @@ public class NetworkGraph extends ChartFrame {
      * 设置某层的激活值（用于热力图显示）
      * @param layerIndex 层索引
      * @param activations 激活值列表，值范围建议为0-1
+     */
+    /**
+     * setLayerActivations方法。
+     *      * @param layerIndex int类型参数
+     * @param activations ListDouble类型参数
      */
     public void setLayerActivations(int layerIndex, List<Double> activations) {
         if (layerIndex < layers.size()) {
@@ -96,6 +132,9 @@ public class NetworkGraph extends ChartFrame {
      * 触发图表重绘
      */
     @Override
+    /**
+     * render方法。
+     */
     public void render() {
         canvas.repaint();
     }
@@ -105,6 +144,10 @@ public class NetworkGraph extends ChartFrame {
      * @return 网络图画布实例
      */
     @Override
+    /**
+     * createCanvas方法。
+     * @return ChartCanvas类型返回值
+     */
     protected ChartCanvas createCanvas() {
         return new NetworkCanvas();
     }
@@ -121,6 +164,10 @@ public class NetworkGraph extends ChartFrame {
     private class NetworkCanvas extends ChartCanvas {
 
         @Override
+    /**
+     * paintComponent方法。
+     *      * @param g Graphics类型参数
+     */
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;

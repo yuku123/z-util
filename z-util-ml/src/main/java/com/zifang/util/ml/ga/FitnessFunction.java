@@ -29,6 +29,9 @@ package com.zifang.util.ml.ga;
 /**
  * FitnessFunction接口。
  */
+/**
+ * FitnessFunction接口。
+ */
 public interface FitnessFunction {
 
     /**

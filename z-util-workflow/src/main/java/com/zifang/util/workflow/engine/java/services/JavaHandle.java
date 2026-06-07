@@ -13,5 +13,8 @@ package com.zifang.util.workflow.engine.java.services;
 /**
  * JavaHandle类。
  */
+/**
+ * JavaHandle类。
+ */
 public class JavaHandle {
 }

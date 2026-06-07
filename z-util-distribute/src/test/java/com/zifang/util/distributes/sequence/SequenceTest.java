@@ -7,9 +7,15 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 
+/**
+ * SequenceTest类。
+ */
 public class SequenceTest {
 
     @Test
+    /**
+     * testNextId_BasicFunctionality方法。
+     */
     public void testNextId_BasicFunctionality() {
         Sequence sequence = new Sequence(1, 1);
         long id = sequence.nextId();
@@ -17,6 +23,9 @@ public class SequenceTest {
     }
 
     @Test
+    /**
+     * testNextId_Uniqueness方法。
+     */
     public void testNextId_Uniqueness() {
         Sequence sequence = new Sequence(0, 0);
         Set<Long> ids = new HashSet<>();
@@ -32,6 +41,9 @@ public class SequenceTest {
     }
 
     @Test
+    /**
+     * testNextId_OrderedGeneration方法。
+     */
     public void testNextId_OrderedGeneration() {
         Sequence sequence = new Sequence(0, 0);
         long prevId = 0;
@@ -43,6 +55,9 @@ public class SequenceTest {
     }
 
     @Test
+    /**
+     * testNextId_IdStructure方法。
+     */
     public void testNextId_IdStructure() {
         Sequence sequence = new Sequence(5, 3);
         long id = sequence.nextId();
@@ -54,26 +69,41 @@ public class SequenceTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructor_InvalidWorkerId_Negative方法。
+     */
     public void testConstructor_InvalidWorkerId_Negative() {
         new Sequence(-1, 0);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructor_InvalidWorkerId_TooLarge方法。
+     */
     public void testConstructor_InvalidWorkerId_TooLarge() {
         new Sequence(32, 0);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructor_InvalidDatacenterId_Negative方法。
+     */
     public void testConstructor_InvalidDatacenterId_Negative() {
         new Sequence(0, -1);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructor_InvalidDatacenterId_TooLarge方法。
+     */
     public void testConstructor_InvalidDatacenterId_TooLarge() {
         new Sequence(0, 32);
     }
 
     @Test
+    /**
+     * testConstructor_ValidBoundaryValues方法。
+     */
     public void testConstructor_ValidBoundaryValues() {
         Sequence sequence1 = new Sequence(0, 0);
         Sequence sequence31 = new Sequence(31, 31);
@@ -86,6 +116,9 @@ public class SequenceTest {
     }
 
     @Test
+    /**
+     * testNextId_MultipleSequences方法。
+     */
     public void testNextId_MultipleSequences() {
         Sequence seq1 = new Sequence(1, 1);
         Sequence seq2 = new Sequence(2, 2);
@@ -100,6 +133,9 @@ public class SequenceTest {
     }
 
     @Test
+    /**
+     * testNextId_HighConcurrencyScenario方法。
+     */
     public void testNextId_HighConcurrencyScenario() {
         Sequence sequence = new Sequence(0, 0);
         Set<Long> ids = new HashSet<>();

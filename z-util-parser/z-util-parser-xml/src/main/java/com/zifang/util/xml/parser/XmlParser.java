@@ -29,6 +29,9 @@ import java.util.regex.Pattern;
  *
  * @author zifang
  */
+/**
+ * XmlParser类。
+ */
 public class XmlParser {
 
     private static final int TAG_OPEN_BIT = 1;
@@ -41,6 +44,11 @@ public class XmlParser {
     // 命名空间上下文（简化版，不做完整 NS 解析）
     private String currentDefaultNamespace;
 
+    /**
+     * parse方法。
+     *      * @param tokens TokenList类型参数
+     * @return XDocument类型返回值
+     */
     public XDocument parse(TokenList tokens) {
         this.tokens = tokens;
         tokens.reset();

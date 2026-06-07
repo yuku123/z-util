@@ -14,7 +14,16 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * _057类。
+ */
 public class _057 {
+    /**
+     * insert方法。
+     *      * @param intervals int[][]类型参数
+     * @param newInterval int[]类型参数
+     * @return int[][]类型返回值
+     */
     public int[][] insert(int[][] intervals, int[] newInterval) {
 
         if(intervals.length == 0){
@@ -23,6 +32,12 @@ public class _057 {
 
         Arrays.sort(intervals, new Comparator<int[]>(){
             @Override
+    /**
+     * compare方法。
+     *      * @param a1 int[]类型参数
+     * @param a2 int[]类型参数
+     * @return int类型返回值
+     */
             public int compare(int[] a1, int[] a2){
                 return a1[0] - a2[0];
             }
@@ -98,6 +113,12 @@ public class _057 {
 
         Arrays.sort(intervals, new Comparator<int[]>(){
             @Override
+    /**
+     * compare方法。
+     *      * @param a1 int[]类型参数
+     * @param a2 int[]类型参数
+     * @return int类型返回值
+     */
             public int compare(int[] a1, int[] a2){
                 return a1[0] - a2[0];
             }
@@ -106,6 +127,11 @@ public class _057 {
         return intervals;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _057().insert(new int[][]{new int[]{0,7},new int[]{8,8}, new int[]{9,11}}, new int[]{4,13});
     }

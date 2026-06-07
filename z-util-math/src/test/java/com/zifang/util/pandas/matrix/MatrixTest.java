@@ -9,15 +9,24 @@ import static org.junit.Assert.*;
 /**
  * Matrix 类测试
  */
+/**
+ * MatrixTest类。
+ */
 public class MatrixTest {
 
     @Test
+    /**
+     * testCreateEmptyMatrix方法。
+     */
     public void testCreateEmptyMatrix() {
         Matrix matrix = new Matrix();
         assertNotNull(matrix);
     }
 
     @Test
+    /**
+     * testSetRow方法。
+     */
     public void testSetRow() {
         Matrix matrix = new Matrix();
         matrix.set(1.0, 2.0, 3.0);
@@ -25,6 +34,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testSetMultipleRows方法。
+     */
     public void testSetMultipleRows() {
         Matrix matrix = new Matrix();
         matrix.set(1.0, 2.0, 3.0);
@@ -34,6 +46,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testSetSingleElement方法。
+     */
     public void testSetSingleElement() {
         Matrix matrix = new Matrix();
         matrix.set(5.0);
@@ -41,6 +56,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testSetEmptyRow方法。
+     */
     public void testSetEmptyRow() {
         Matrix matrix = new Matrix();
         matrix.set();
@@ -48,6 +66,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testMultiplyNotImplemented方法。
+     */
     public void testMultiplyNotImplemented() {
         Matrix matrix1 = new Matrix();
         matrix1.set(1.0, 2.0);
@@ -62,6 +83,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testFormatNotImplemented方法。
+     */
     public void testFormatNotImplemented() {
         Matrix matrix = new Matrix();
         matrix.set(1.0, 2.0, 3.0);
@@ -72,6 +96,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testShapeNotImplemented方法。
+     */
     public void testShapeNotImplemented() {
         Matrix matrix = new Matrix();
         matrix.set(1.0, 2.0, 3.0);
@@ -82,6 +109,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testDtypeNotImplemented方法。
+     */
     public void testDtypeNotImplemented() {
         Matrix matrix = new Matrix();
         matrix.set(1.0, 2.0, 3.0);
@@ -91,6 +121,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testNdimNotImplemented方法。
+     */
     public void testNdimNotImplemented() {
         Matrix matrix = new Matrix();
         matrix.set(1.0, 2.0, 3.0);
@@ -100,6 +133,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testSliceNotImplemented方法。
+     */
     public void testSliceNotImplemented() {
         Matrix matrix = new Matrix();
         matrix.set(1.0, 2.0, 3.0);
@@ -111,6 +147,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testWithNegativeValues方法。
+     */
     public void testWithNegativeValues() {
         Matrix matrix = new Matrix();
         matrix.set(-1.0, -2.0, -3.0);
@@ -119,6 +158,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testWithMixedValues方法。
+     */
     public void testWithMixedValues() {
         Matrix matrix = new Matrix();
         matrix.set(0.0, -1.5, 2.5);
@@ -127,6 +169,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testWithVeryLargeValues方法。
+     */
     public void testWithVeryLargeValues() {
         Matrix matrix = new Matrix();
         matrix.set(Double.MAX_VALUE, Double.MIN_VALUE);
@@ -134,6 +179,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testWithVerySmallValues方法。
+     */
     public void testWithVerySmallValues() {
         Matrix matrix = new Matrix();
         matrix.set(1e-308, 1e-309);
@@ -141,6 +189,9 @@ public class MatrixTest {
     }
 
     @Test
+    /**
+     * testMultipleRowsAndColumns方法。
+     */
     public void testMultipleRowsAndColumns() {
         Matrix matrix = new Matrix();
         // 创建 4x5 矩阵

@@ -1,5 +1,8 @@
 package com.zifang.util.ml.inheritance.chapter5;
 
+/**
+ * Individual类。
+ */
 public class Individual {
 
     /**
@@ -25,6 +28,10 @@ public class Individual {
      * each student group and module.
      *
      * @param timetable The timetable information
+     */
+    /**
+     * Individual方法。
+     *      * @param timetable Timetable类型参数
      */
     public Individual(Timetable timetable) {
         int numClasses = timetable.getNumClasses();
@@ -81,6 +88,10 @@ public class Individual {
      *
      * @param chromosomeLength The length of the individuals chromosome
      */
+    /**
+     * Individual方法。
+     *      * @param chromosomeLength int类型参数
+     */
     public Individual(int chromosomeLength) {
         // Create random individual
         int[] individual;
@@ -111,6 +122,10 @@ public class Individual {
      *
      * @param chromosome The chromosome to give individual
      */
+    /**
+     * Individual方法。
+     *      * @param chromosome int[]类型参数
+     */
     public Individual(int[] chromosome) {
         // Create individual chromosome
         this.chromosome = chromosome;
@@ -121,6 +136,10 @@ public class Individual {
      *
      * @return The individual's chromosome
      */
+    /**
+     * getChromosome方法。
+     * @return int[]类型返回值
+     */
     public int[] getChromosome() {
         return this.chromosome;
     }
@@ -129,6 +148,10 @@ public class Individual {
      * Gets individual's chromosome length
      *
      * @return The individual's chromosome length
+     */
+    /**
+     * getChromosomeLength方法。
+     * @return int类型返回值
      */
     public int getChromosomeLength() {
         return this.chromosome.length;
@@ -140,6 +163,11 @@ public class Individual {
      * @param gene
      * @param offset
      */
+    /**
+     * setGene方法。
+     *      * @param offset int类型参数
+     * @param gene int类型参数
+     */
     public void setGene(int offset, int gene) {
         this.chromosome[offset] = gene;
     }
@@ -150,6 +178,11 @@ public class Individual {
      * @param offset
      * @return gene
      */
+    /**
+     * getGene方法。
+     *      * @param offset int类型参数
+     * @return int类型返回值
+     */
     public int getGene(int offset) {
         return this.chromosome[offset];
     }
@@ -158,6 +191,10 @@ public class Individual {
      * Store individual's fitness
      *
      * @param fitness The individuals fitness
+     */
+    /**
+     * setFitness方法。
+     *      * @param fitness double类型参数
      */
     public void setFitness(double fitness) {
         this.fitness = fitness;
@@ -168,10 +205,18 @@ public class Individual {
      *
      * @return The individual's fitness
      */
+    /**
+     * getFitness方法。
+     * @return double类型返回值
+     */
     public double getFitness() {
         return this.fitness;
     }
 
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         String output = "";
         for (int gene = 0; gene < this.chromosome.length; gene++) {
@@ -189,6 +234,11 @@ public class Individual {
      *
      * @param gene
      * @return
+     */
+    /**
+     * containsGene方法。
+     *      * @param gene int类型参数
+     * @return boolean类型返回值
      */
     public boolean containsGene(int gene) {
         for (int i = 0; i < this.chromosome.length; i++) {

@@ -14,6 +14,9 @@ import java.io.IOException;
 /**
  * RobotPrintILoveYou类。
  */
+/**
+ * RobotPrintILoveYou类。
+ */
 public class RobotPrintILoveYou {
 
 // 打出一个大写的Q 
@@ -30,6 +33,11 @@ public class RobotPrintILoveYou {
 // 设置每次输入的延迟为200ms 
 //myRobot.setAutoDelay(200); ｉ
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         try {
 //创建Windows命令打开记事本

@@ -11,6 +11,9 @@ import java.util.function.Consumer;
 /**
  * Command接口。
  */
+/**
+ * Command接口。
+ */
 public interface Command<C> {
 
     /**

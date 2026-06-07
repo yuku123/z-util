@@ -10,6 +10,9 @@ import java.util.Objects;
 /**
  * DatabaseDTO类。
  */
+/**
+ * DatabaseDTO类。
+ */
 public class DatabaseDTO {
 
     private String databaseName;
@@ -26,6 +29,10 @@ public class DatabaseDTO {
      * DatabaseDTO方法。
      *      * @param databaseName String类型参数
      */
+    /**
+     * DatabaseDTO方法。
+     *      * @param databaseName String类型参数
+     */
     public DatabaseDTO(String databaseName) {
         this.databaseName = Objects.requireNonNull(databaseName, "数据库名不能为空").trim();
     }
@@ -34,6 +41,10 @@ public class DatabaseDTO {
      * 添加表（只有包含字段的表才会被添加）
      *
      * @param table 表对象
+     */
+    /**
+     * addTable方法。
+     *      * @param table TableDTO类型参数
      */
     /**
      * addTable方法。
@@ -54,6 +65,10 @@ public class DatabaseDTO {
      * getTables方法。
      * @return List<TableDTO>类型返回值
      */
+    /**
+     * getTables方法。
+     * @return List<TableDTO>类型返回值
+     */
     public List<TableDTO> getTables() {
         return new ArrayList<>(tables);
     }
@@ -62,6 +77,10 @@ public class DatabaseDTO {
      * 获取数据库名称
      *
      * @return 数据库名称
+     */
+    /**
+     * getDatabaseName方法。
+     * @return String类型返回值
      */
     /**
      * getDatabaseName方法。
@@ -80,6 +99,10 @@ public class DatabaseDTO {
      * setDatabaseName方法。
      *      * @param databaseName String类型参数
      */
+    /**
+     * setDatabaseName方法。
+     *      * @param databaseName String类型参数
+     */
     public void setDatabaseName(String databaseName) {
         this.databaseName = databaseName;
     }
@@ -88,6 +111,10 @@ public class DatabaseDTO {
      * 设置表列表
      *
      * @param tables 表列表，null时设置为空列表
+     */
+    /**
+     * setTables方法。
+     *      * @param tables ListTableDTO类型参数
      */
     /**
      * setTables方法。
@@ -102,11 +129,20 @@ public class DatabaseDTO {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "DatabaseDTO{databaseName=" + databaseName + ", tables=" + tables + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -121,6 +157,10 @@ public class DatabaseDTO {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

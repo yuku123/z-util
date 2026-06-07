@@ -9,11 +9,22 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * 相应的锁即可。如果你的代码中只读数据，可以很多人同时读，但不能同时写，那就上读写锁；如果你的代码修改数据，
  * 只能一个人在写，且不能同时读取，那就上写锁。总之，读的时候上读锁，写的时候上写锁！
  */
+/**
+ * ReadWriteLockTest类。
+ */
 public class ReadWriteLockTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         final Queue3 q3 = new Queue3();
         for (int i = 0; i < 3; i++) {
             new Thread() {
+    /**
+     * run方法。
+     */
                 public void run() {
                     while (true) {
                         q3.get();
@@ -22,6 +33,9 @@ public class ReadWriteLockTest {
             }.start();
 
             new Thread() {
+    /**
+     * run方法。
+     */
                 public void run() {
                     while (true) {
                         q3.put(new Random().nextInt(10000));
@@ -37,6 +51,9 @@ class Queue3 {
     private Object data = null;
     private ReadWriteLock rwl = new ReentrantReadWriteLock();
 
+    /**
+     * get方法。
+     */
     public void get() {
         rwl.readLock().lock();
         try {
@@ -50,6 +67,10 @@ class Queue3 {
         }
     }
 
+    /**
+     * put方法。
+     *      * @param data Object类型参数
+     */
     public void put(Object data) {
         rwl.writeLock().lock();
         try {

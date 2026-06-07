@@ -8,6 +8,9 @@ import java.io.Serializable;
 /**
  * DeprecatedAttributes类。
  */
+/**
+ * DeprecatedAttributes类。
+ */
 public class DeprecatedAttributes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,6 +19,9 @@ public class DeprecatedAttributes implements Serializable {
     private final String description;
     private final boolean forRemoval;
 
+    /**
+     * DeprecatedAttributes方法。
+     */
     /**
      * DeprecatedAttributes方法。
      */
@@ -28,10 +34,21 @@ public class DeprecatedAttributes implements Serializable {
      *      * @param since final类型参数
      * @param description final类型参数
      */
+    /**
+     * DeprecatedAttributes方法。
+     *      * @param since final类型参数
+     * @param description final类型参数
+     */
     public DeprecatedAttributes(final String since, final String description) {
         this(since, description, false);
     }
 
+    /**
+     * DeprecatedAttributes方法。
+     *      * @param since final类型参数
+     * @param description final类型参数
+     * @param forRemoval final类型参数
+     */
     /**
      * DeprecatedAttributes方法。
      *      * @param since final类型参数
@@ -48,10 +65,18 @@ public class DeprecatedAttributes implements Serializable {
      * getSince方法。
      * @return String类型返回值
      */
+    /**
+     * getSince方法。
+     * @return String类型返回值
+     */
     public String getSince() {
         return since;
     }
 
+    /**
+     * getDescription方法。
+     * @return String类型返回值
+     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -64,10 +89,18 @@ public class DeprecatedAttributes implements Serializable {
      * isForRemoval方法。
      * @return boolean类型返回值
      */
+    /**
+     * isForRemoval方法。
+     * @return boolean类型返回值
+     */
     public boolean isForRemoval() {
         return forRemoval;
     }
 
+    /**
+     * isDeprecated方法。
+     * @return boolean类型返回值
+     */
     /**
      * isDeprecated方法。
      * @return boolean类型返回值
@@ -77,6 +110,10 @@ public class DeprecatedAttributes implements Serializable {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

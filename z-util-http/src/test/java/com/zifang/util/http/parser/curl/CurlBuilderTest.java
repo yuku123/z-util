@@ -9,19 +9,31 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * CurlBuilderTest类。
+ */
 public class CurlBuilderTest {
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testBuildWithNullDefinition方法。
+     */
     public void testBuildWithNullDefinition() {
         CurlBuilder.build(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testBuildPrettyWithNullDefinition方法。
+     */
     public void testBuildPrettyWithNullDefinition() {
         CurlBuilder.buildPretty(null);
     }
 
     @Test
+    /**
+     * testBuildSimpleGetRequest方法。
+     */
     public void testBuildSimpleGetRequest() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         HttpRequestLine requestLine = new HttpRequestLine();
@@ -36,6 +48,9 @@ public class CurlBuilderTest {
     }
 
     @Test
+    /**
+     * testBuildPostRequestWithHeadersAndBody方法。
+     */
     public void testBuildPostRequestWithHeadersAndBody() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         
@@ -63,6 +78,9 @@ public class CurlBuilderTest {
     }
 
     @Test
+    /**
+     * testBuildPrettyFormat方法。
+     */
     public void testBuildPrettyFormat() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         HttpRequestLine requestLine = new HttpRequestLine();
@@ -77,6 +95,9 @@ public class CurlBuilderTest {
     }
 
     @Test
+    /**
+     * testEscapeForShellWithSpecialCharacters方法。
+     */
     public void testEscapeForShellWithSpecialCharacters() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         
@@ -94,6 +115,9 @@ public class CurlBuilderTest {
     }
 
     @Test
+    /**
+     * testBuildWithNullRequestLine方法。
+     */
     public void testBuildWithNullRequestLine() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         
@@ -103,6 +127,9 @@ public class CurlBuilderTest {
     }
 
     @Test
+    /**
+     * testBuildWithNullHeaders方法。
+     */
     public void testBuildWithNullHeaders() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         HttpRequestLine requestLine = new HttpRequestLine();
@@ -117,6 +144,9 @@ public class CurlBuilderTest {
     }
 
     @Test
+    /**
+     * testBuildWithNullBody方法。
+     */
     public void testBuildWithNullBody() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         HttpRequestLine requestLine = new HttpRequestLine();

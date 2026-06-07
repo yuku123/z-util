@@ -3,9 +3,15 @@ package com.zifang.util.media.graph.qrcode.encoder;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * BitMatrixTest类。
+ */
 public class BitMatrixTest {
 
     @Test
+    /**
+     * testConstructor方法。
+     */
     public void testConstructor() {
         BitMatrix matrix = new BitMatrix(10, 15);
         assertEquals(10, matrix.getWidth());
@@ -13,16 +19,25 @@ public class BitMatrixTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructorWithZeroWidth方法。
+     */
     public void testConstructorWithZeroWidth() {
         new BitMatrix(0, 10);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testConstructorWithZeroHeight方法。
+     */
     public void testConstructorWithZeroHeight() {
         new BitMatrix(10, 0);
     }
 
     @Test
+    /**
+     * testSetAndGet方法。
+     */
     public void testSetAndGet() {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(3, 5);
@@ -30,6 +45,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testUnset方法。
+     */
     public void testUnset() {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(3, 5);
@@ -38,6 +56,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testSetWithValue方法。
+     */
     public void testSetWithValue() {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(3, 5, true);
@@ -47,6 +68,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testFlip方法。
+     */
     public void testFlip() {
         BitMatrix matrix = new BitMatrix(10, 10);
         assertFalse(matrix.get(3, 5));
@@ -57,6 +81,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testClear方法。
+     */
     public void testClear() {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(3, 5);
@@ -67,6 +94,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testGetOutOfBounds方法。
+     */
     public void testGetOutOfBounds() {
         BitMatrix matrix = new BitMatrix(10, 10);
         // Should return false for out of bounds, not throw
@@ -77,6 +107,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testSetOutOfBounds方法。
+     */
     public void testSetOutOfBounds() {
         BitMatrix matrix = new BitMatrix(10, 10);
         // Should not throw for out of bounds
@@ -87,6 +120,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testGetTopLeftOnBit方法。
+     */
     public void testGetTopLeftOnBit() {
         BitMatrix matrix = new BitMatrix(10, 10);
         assertNull(matrix.getTopLeftOnBit());
@@ -101,6 +137,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testGetBottomRightOnBit方法。
+     */
     public void testGetBottomRightOnBit() {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(7, 2);
@@ -113,6 +152,9 @@ public class BitMatrixTest {
     }
 
     @Test
+    /**
+     * testClone方法。
+     */
     public void testClone() {
         BitMatrix matrix = new BitMatrix(10, 10);
         matrix.set(3, 5);

@@ -22,6 +22,9 @@ import java.util.List;
  *
  * @author zifang
  */
+/**
+ * ProtoParser类。
+ */
 public class ProtoParser {
 
     // ==================== Token types ====================
@@ -54,6 +57,10 @@ public class ProtoParser {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "Token{" + type + ", '" + value + "', " + line + ":" + column + "}";
         }
@@ -316,10 +323,20 @@ public class ProtoParser {
     private List<Token> tokens;
     private int pos = 0;
 
+    /**
+     * parse方法。
+     *      * @param content String类型参数
+     * @return ProtoDocument类型返回值
+     */
     public ProtoDocument parse(String content) {
         return parse(new CharSequenceReader(content));
     }
 
+    /**
+     * parse方法。
+     *      * @param reader Reader类型参数
+     * @return ProtoDocument类型返回值
+     */
     public ProtoDocument parse(Reader reader) {
         try {
             Lexer lexer = new Lexer(reader);
@@ -544,6 +561,11 @@ public class ProtoParser {
     }
 
     // Round-trip: convert ProtoDocument back to proto string
+    /**
+     * toProto方法。
+     *      * @param doc ProtoDocument类型参数
+     * @return String类型返回值
+     */
     public String toProto(ProtoDocument doc) {
         StringBuilder sb = new StringBuilder();
 
@@ -624,6 +646,13 @@ public class ProtoParser {
         }
 
         @Override
+    /**
+     * read方法。
+     *      * @param cbuf char[]类型参数
+     * @param off int类型参数
+     * @param len int类型参数
+     * @return int类型返回值
+     */
         public int read(char[] cbuf, int off, int len) throws IOException {
             if (position >= charSequence.length()) {
                 return -1;
@@ -639,6 +668,9 @@ public class ProtoParser {
         }
 
         @Override
+    /**
+     * close方法。
+     */
         public void close() throws IOException {
         }
     }

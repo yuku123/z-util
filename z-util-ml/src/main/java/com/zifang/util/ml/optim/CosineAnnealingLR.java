@@ -18,6 +18,9 @@ package com.zifang.util.ml.optim;
 /**
  * CosineAnnealingLR类。
  */
+/**
+ * CosineAnnealingLR类。
+ */
 public class CosineAnnealingLR implements LrScheduler {
     
     private final Optimizer optimizer;
@@ -37,6 +40,11 @@ public class CosineAnnealingLR implements LrScheduler {
      *      * @param optimizer Optimizer类型参数
      * @param tMax int类型参数
      */
+    /**
+     * CosineAnnealingLR方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param tMax int类型参数
+     */
     public CosineAnnealingLR(Optimizer optimizer, int tMax) {
         this(optimizer, tMax, 0.0, 1, 0, 0.0);
     }
@@ -47,10 +55,25 @@ public class CosineAnnealingLR implements LrScheduler {
      * @param tMax int类型参数
      * @param etaMin double类型参数
      */
+    /**
+     * CosineAnnealingLR方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param tMax int类型参数
+     * @param etaMin double类型参数
+     */
     public CosineAnnealingLR(Optimizer optimizer, int tMax, double etaMin) {
         this(optimizer, tMax, etaMin, 1, 0, 0.0);
     }
     
+    /**
+     * CosineAnnealingLR方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param tMax int类型参数
+     * @param etaMin double类型参数
+     * @param tMult int类型参数
+     * @param warmup_epochs int类型参数
+     * @param warmup_start_lr double类型参数
+     */
     /**
      * CosineAnnealingLR方法。
      *      * @param optimizer Optimizer类型参数
@@ -74,6 +97,9 @@ public class CosineAnnealingLR implements LrScheduler {
     }
     
     @Override
+    /**
+     * step方法。
+     */
     /**
      * step方法。
      */
@@ -115,12 +141,20 @@ public class CosineAnnealingLR implements LrScheduler {
      * getLastLR方法。
      * @return double类型返回值
      */
+    /**
+     * getLastLR方法。
+     * @return double类型返回值
+     */
     public double getLastLR() {
         return optimizer.getLearningRate();
     }
     
     /**
      * Get the current epoch.
+     */
+    /**
+     * getEpoch方法。
+     * @return int类型返回值
      */
     /**
      * getEpoch方法。
@@ -137,12 +171,20 @@ public class CosineAnnealingLR implements LrScheduler {
      * gettMax方法。
      * @return int类型返回值
      */
+    /**
+     * gettMax方法。
+     * @return int类型返回值
+     */
     public int gettMax() {
         return tMax;
     }
     
     /**
      * Get the minimum learning rate.
+     */
+    /**
+     * getEtaMin方法。
+     * @return double类型返回值
      */
     /**
      * getEtaMin方法。
@@ -159,12 +201,20 @@ public class CosineAnnealingLR implements LrScheduler {
      * gettMult方法。
      * @return int类型返回值
      */
+    /**
+     * gettMult方法。
+     * @return int类型返回值
+     */
     public int gettMult() {
         return tMult;
     }
     
     /**
      * Get the base learning rate.
+     */
+    /**
+     * getBaseLearningRate方法。
+     * @return double类型返回值
      */
     /**
      * getBaseLearningRate方法。

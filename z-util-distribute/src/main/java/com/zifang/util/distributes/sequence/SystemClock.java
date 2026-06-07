@@ -25,6 +25,9 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * SystemClock类。
  */
+/**
+ * SystemClock类。
+ */
 public class SystemClock {
 
     private final long period;
@@ -45,6 +48,11 @@ public class SystemClock {
      * 内部单例持有类
      */
     private static class InstanceHolder {
+    /**
+     * SystemClock方法。
+     *      * @param 1 Object类型参数
+     * @return static final SystemClock INSTANCE = new类型返回值
+     */
     /**
      * SystemClock方法。
      *      * @param 1 Object类型参数
@@ -72,6 +80,11 @@ public class SystemClock {
      *      * @param runnable Runnable类型参数
      * @return Thread类型返回值
      */
+    /**
+     * newThread方法。
+     *      * @param runnable Runnable类型参数
+     * @return Thread类型返回值
+     */
             public Thread newThread(Runnable runnable) {
                 Thread thread = new Thread(runnable, "System Clock");
                 thread.setDaemon(true);
@@ -79,6 +92,9 @@ public class SystemClock {
             }
         });
         scheduler.scheduleAtFixedRate(new Runnable() {
+    /**
+     * run方法。
+     */
     /**
      * run方法。
      */
@@ -108,6 +124,10 @@ public class SystemClock {
      * now方法。
      * @return static long类型返回值
      */
+    /**
+     * now方法。
+     * @return static long类型返回值
+     */
     public static long now() {
         return instance().currentTimeMillis();
     }
@@ -116,6 +136,10 @@ public class SystemClock {
      * 获取当前时间的日期字符串格式
      *
      * @return 当前时间戳对应的日期字符串，格式为yyyy-mm-dd hh:mm:ss.fffffffff
+     */
+    /**
+     * nowDate方法。
+     * @return static String类型返回值
      */
     /**
      * nowDate方法。

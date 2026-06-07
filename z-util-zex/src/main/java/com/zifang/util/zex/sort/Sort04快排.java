@@ -9,8 +9,18 @@ package com.zifang.util.zex.sort;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Sort04快排类。
+ */
 public class Sort04快排 {
 
+    /**
+     * func方法。
+     *      * @param a int[]类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     * @return static void类型返回值
+     */
     public static void func(int[] a, int start, int end) {
         // 支点
         int point = (start + end) / 2;
@@ -35,6 +45,11 @@ public class Sort04快排 {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         int[] a = new int[]{4, 2, 6, 5, 1, 3, 10};
         func(a, 0, a.length - 1);

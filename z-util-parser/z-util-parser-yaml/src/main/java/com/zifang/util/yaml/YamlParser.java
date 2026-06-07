@@ -17,10 +17,22 @@ import java.util.*;
  *
  * @author zifang
  */
+/**
+ * YamlParser类。
+ */
+/**
+ * YamlParser类。
+ */
 public class YamlParser {
 
     private final Yaml yaml;
 
+    /**
+     * YamlParser方法。
+     */
+    /**
+     * YamlParser方法。
+     */
     public YamlParser() {
         DumperOptions dumperOptions = new DumperOptions();
         Representer representer = new Representer(dumperOptions);
@@ -36,6 +48,16 @@ public class YamlParser {
      * @param yamlStr YAML 字符串
      * @return 解析后的对象
      * @throws YamlParseException 如果 YAML 格式非法
+     */
+    /**
+     * parse方法。
+     *      * @param yamlStr String类型参数
+     * @return Object类型返回值
+     */
+    /**
+     * parse方法。
+     *      * @param yamlStr String类型参数
+     * @return Object类型返回值
      */
     public Object parse(String yamlStr) {
         if (yamlStr == null || yamlStr.trim().isEmpty()) {
@@ -58,6 +80,18 @@ public class YamlParser {
      * @return 解析后的对象
      * @throws YamlParseException 如果 YAML 格式非法
      */
+    /**
+     * parse方法。
+     *      * @param yamlStr String类型参数
+     * @param clazz ClassT类型参数
+     * @return <T> T类型返回值
+     */
+    /**
+     * parse方法。
+     *      * @param yamlStr String类型参数
+     * @param clazz ClassT类型参数
+     * @return <T> T类型返回值
+     */
     public <T> T parse(String yamlStr, Class<T> clazz) {
         if (yamlStr == null || yamlStr.trim().isEmpty()) {
             return null;
@@ -78,6 +112,16 @@ public class YamlParser {
      * @param obj 待序列化的对象
      * @return YAML 字符串
      */
+    /**
+     * toYaml方法。
+     *      * @param obj Object类型参数
+     * @return String类型返回值
+     */
+    /**
+     * toYaml方法。
+     *      * @param obj Object类型参数
+     * @return String类型返回值
+     */
     public String toYaml(Object obj) {
         if (obj == null) {
             return "null\n";
@@ -90,6 +134,16 @@ public class YamlParser {
      *
      * @param obj 待序列化的对象
      * @return 格式化的 YAML 字符串
+     */
+    /**
+     * toPrettyYaml方法。
+     *      * @param obj Object类型参数
+     * @return String类型返回值
+     */
+    /**
+     * toPrettyYaml方法。
+     *      * @param obj Object类型参数
+     * @return String类型返回值
      */
     public String toPrettyYaml(Object obj) {
         if (obj == null) {

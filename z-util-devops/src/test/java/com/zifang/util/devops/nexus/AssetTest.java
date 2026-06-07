@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * Asset 类测试
  */
+/**
+ * AssetTest类。
+ */
 public class AssetTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         Asset asset = new Asset();
         assertNotNull(asset);
@@ -22,6 +28,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testIdSetterAndGetter方法。
+     */
     public void testIdSetterAndGetter() {
         Asset asset = new Asset();
         asset.setId("asset-123");
@@ -29,6 +38,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testRepositorySetterAndGetter方法。
+     */
     public void testRepositorySetterAndGetter() {
         Asset asset = new Asset();
         asset.setRepository("maven-releases");
@@ -36,6 +48,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testPathSetterAndGetter方法。
+     */
     public void testPathSetterAndGetter() {
         Asset asset = new Asset();
         asset.setPath("com/example/artifact-1.0.jar");
@@ -43,6 +58,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testDownloadUrlSetterAndGetter方法。
+     */
     public void testDownloadUrlSetterAndGetter() {
         Asset asset = new Asset();
         asset.setDownloadUrl("https://nexus.example.com/repository/maven-releases/com/example/artifact-1.0.jar");
@@ -50,6 +68,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testChecksumSetterAndGetter方法。
+     */
     public void testChecksumSetterAndGetter() {
         Asset asset = new Asset();
 
@@ -65,6 +86,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testFormatSetterAndGetter方法。
+     */
     public void testFormatSetterAndGetter() {
         Asset asset = new Asset();
         asset.setFormat("jar");
@@ -75,6 +99,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         Asset asset1 = new Asset();
         asset1.setId("id1");
@@ -94,6 +121,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentId方法。
+     */
     public void testEqualsWithDifferentId() {
         Asset asset1 = new Asset();
         asset1.setId("id1");
@@ -105,24 +135,36 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testEqualsWithSameObject方法。
+     */
     public void testEqualsWithSameObject() {
         Asset asset = new Asset();
         assertEquals(asset, asset);
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         Asset asset = new Asset();
         assertNotEquals(asset, null);
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentClass方法。
+     */
     public void testEqualsWithDifferentClass() {
         Asset asset = new Asset();
         assertNotEquals(asset, "not an asset");
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         Asset asset1 = new Asset();
         asset1.setId("id1");
@@ -136,6 +178,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testHashCodeConsistency方法。
+     */
     public void testHashCodeConsistency() {
         Asset asset = new Asset();
         asset.setId("id1");
@@ -147,6 +192,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         Asset asset = new Asset();
         asset.setId("test-id");
@@ -160,6 +208,9 @@ public class AssetTest {
     }
 
     @Test
+    /**
+     * testCompleteAsset方法。
+     */
     public void testCompleteAsset() {
         Asset asset = new Asset();
         asset.setId("asset-full");

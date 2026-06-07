@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * SimpleCacheResponse类。
+ */
 public class SimpleCacheResponse extends CacheResponse {
 
     private final Map<String, List<String>> headers;
@@ -17,6 +20,12 @@ public class SimpleCacheResponse extends CacheResponse {
     private final Date expires;
     private final CacheControl control;
 
+    /**
+     * SimpleCacheResponse方法。
+     *      * @param request SimpleCacheRequest类型参数
+     * @param uc URLConnection类型参数
+     * @param control CacheControl类型参数
+     */
     public SimpleCacheResponse(SimpleCacheRequest request, URLConnection uc, CacheControl control) throws IOException {
 
         this.request = request;
@@ -26,19 +35,35 @@ public class SimpleCacheResponse extends CacheResponse {
     }
 
     @Override
+    /**
+     * getBody方法。
+     * @return InputStream类型返回值
+     */
     public InputStream getBody() {
         return new ByteArrayInputStream(request.getData());
     }
 
     @Override
+    /**
+     * getHeaders方法。
+     * @return Map<String, List<String>>类型返回值
+     */
     public Map<String, List<String>> getHeaders() throws IOException {
         return headers;
     }
 
+    /**
+     * getControl方法。
+     * @return CacheControl类型返回值
+     */
     public CacheControl getControl() {
         return control;
     }
 
+    /**
+     * isExpired方法。
+     * @return boolean类型返回值
+     */
     public boolean isExpired() {
         Date now = new Date();
         if (control.getMaxAge().before(now))

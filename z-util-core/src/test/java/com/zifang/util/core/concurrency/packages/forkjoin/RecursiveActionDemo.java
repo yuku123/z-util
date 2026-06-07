@@ -6,6 +6,9 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * RecursiveActionDemo类。
+ */
 public class RecursiveActionDemo {
 
     // 1.创建一个名为Product的类，用来存储产品的名称和价格。
@@ -15,18 +18,34 @@ public class RecursiveActionDemo {
         private double price;
 
         // 3.实现两个属性各自的设值与取值方法。
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
         public String getName() {
             return name;
         }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
         public void setName(String name) {
             this.name = name;
         }
 
+    /**
+     * getPrice方法。
+     * @return double类型返回值
+     */
         public double getPrice() {
             return price;
         }
 
+    /**
+     * setPrice方法。
+     *      * @param price double类型参数
+     */
         public void setPrice(double price) {
             this.price = price;
         }
@@ -35,6 +54,11 @@ public class RecursiveActionDemo {
     // 4．创建一个名为ProductListGenerator的类，用来生成一个随机产品列表。
     static class ProductListGenerator {
         // 5．实现generate()方法。接收一个表示列表大小的int参数，并返回一个生成产品的List<Product>列表。
+    /**
+     * generate方法。
+     *      * @param size int类型参数
+     * @return List<Product>类型返回值
+     */
         public List<Product> generate(int size) {
             // 6．创建返回产品列表的对象ret。
             List<Product> ret = new ArrayList<Product>();
@@ -63,6 +87,13 @@ public class RecursiveActionDemo {
         private double increment;
 
         // 13．实现类的构造器，用来初始化类的这些属性。
+    /**
+     * Task方法。
+     *      * @param products ListProduct类型参数
+     * @param first int类型参数
+     * @param last int类型参数
+     * @param increment double类型参数
+     */
         public Task(List<Product> products, int first, int last, double increment) {
             this.products = products;
             this.first = first;
@@ -72,6 +103,9 @@ public class RecursiveActionDemo {
 
         // 14．实现compute()方法，实现任务的执行逻辑。
         @Override
+    /**
+     * compute方法。
+     */
         protected void compute() {
             // 15．如果last和first属性值的差异小于10（一个任务只能更新少于10件产品的价格），则调用updatePrices()方法增加这些产品的价格。
             if (last - first < 10) {
@@ -96,6 +130,11 @@ public class RecursiveActionDemo {
     }
 
     // 18．实现范例的主类，创建Main主类，并实现main()方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // 19．使用ProductListGenerator类创建一个有10,000个产品的列表
         ProductListGenerator generator = new ProductListGenerator();

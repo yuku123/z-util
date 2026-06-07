@@ -17,14 +17,27 @@ import java.util.List;
 /**
  * GnuParser类。
  */
+/**
+ * GnuParser类。
+ */
 public class GnuParser extends Parser {
 
+    /**
+     * GnuParser方法。
+     */
     /**
      * GnuParser方法。
      */
     public GnuParser() {}
 
     @Override
+    /**
+     * flatten方法。
+     *      * @param options final类型参数
+     * @param arguments final类型参数
+     * @param stopAtNonOption final类型参数
+     * @return String[]类型返回值
+     */
     /**
      * flatten方法。
      *      * @param options final类型参数

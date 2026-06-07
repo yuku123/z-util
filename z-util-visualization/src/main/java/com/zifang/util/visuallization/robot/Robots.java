@@ -13,6 +13,9 @@ import java.awt.*;
 /**
  * Robots类。
  */
+/**
+ * Robots类。
+ */
 public class Robots {
 
     /**
@@ -21,6 +24,11 @@ public class Robots {
      *
      * @param args 命令行参数（未使用）
      * @throws AWTException 如果创建Robot对象失败
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) throws AWTException {
         Robot robot = new Robot();

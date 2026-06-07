@@ -4,9 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * SimpleTokenTest类。
+ */
 public class SimpleTokenTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         SimpleToken token = new SimpleToken();
         assertNotNull(token);
@@ -15,6 +21,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testParameterizedConstructor方法。
+     */
     public void testParameterizedConstructor() {
         SimpleToken token = new SimpleToken(1, "test", 10, 20, "ID");
 
@@ -26,6 +35,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testGetSetType方法。
+     */
     public void testGetSetType() {
         SimpleToken token = new SimpleToken();
         token.setType(5);
@@ -33,6 +45,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testGetSetText方法。
+     */
     public void testGetSetText() {
         SimpleToken token = new SimpleToken();
         token.setText("hello");
@@ -40,6 +55,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testGetSetLine方法。
+     */
     public void testGetSetLine() {
         SimpleToken token = new SimpleToken();
         token.setLine(100);
@@ -47,6 +65,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testGetSetColumn方法。
+     */
     public void testGetSetColumn() {
         SimpleToken token = new SimpleToken();
         token.setColumn(50);
@@ -54,6 +75,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testGetSetTokenName方法。
+     */
     public void testGetSetTokenName() {
         SimpleToken token = new SimpleToken();
         token.setTokenName("KEYWORD");
@@ -61,6 +85,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         SimpleToken token = new SimpleToken(1, "test", 10, 20, "ID");
         String str = token.toString();
@@ -73,6 +100,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testToString_WithNullText方法。
+     */
     public void testToString_WithNullText() {
         SimpleToken token = new SimpleToken(1, null, 10, 20, "ID");
         String str = token.toString();
@@ -81,6 +111,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testTokenInterfaceMethods方法。
+     */
     public void testTokenInterfaceMethods() {
         SimpleToken token = new SimpleToken(42, "content", 5, 15, "STRING");
 
@@ -92,6 +125,9 @@ public class SimpleTokenTest {
     }
 
     @Test
+    /**
+     * testMultipleSetters方法。
+     */
     public void testMultipleSetters() {
         SimpleToken token = new SimpleToken();
 

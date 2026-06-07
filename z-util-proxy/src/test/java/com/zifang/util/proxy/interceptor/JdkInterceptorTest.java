@@ -7,9 +7,15 @@ import java.lang.reflect.Method;
 
 import static org.junit.Assert.*;
 
+/**
+ * JdkInterceptorTest类。
+ */
 public class JdkInterceptorTest {
 
     @Test
+    /**
+     * testGetTarget方法。
+     */
     public void testGetTarget() {
         TestTarget target = new TestTarget();
         TestAspect aspect = new TestAspect();
@@ -19,6 +25,9 @@ public class JdkInterceptorTest {
     }
 
     @Test
+    /**
+     * testBeforeReturningTrue方法。
+     */
     public void testBeforeReturningTrue() throws Throwable {
         TestTarget target = new TestTarget();
         TestAspect aspect = new TestAspect();
@@ -32,6 +41,9 @@ public class JdkInterceptorTest {
     }
 
     @Test
+    /**
+     * testBeforeReturningFalse方法。
+     */
     public void testBeforeReturningFalse() throws Throwable {
         TestTarget target = new TestTarget();
         BlockingAspect aspect = new BlockingAspect();
@@ -46,6 +58,9 @@ public class JdkInterceptorTest {
     }
 
     @Test
+    /**
+     * testAfterException方法。
+     */
     public void testAfterException() throws Throwable {
         TestTarget target = new TestTarget();
         ExceptionAspect aspect = new ExceptionAspect();
@@ -64,6 +79,9 @@ public class JdkInterceptorTest {
     }
 
     @Test
+    /**
+     * testAfterExceptionRethrow方法。
+     */
     public void testAfterExceptionRethrow() throws Throwable {
         TestTarget target = new TestTarget();
         RethrowAspect aspect = new RethrowAspect();
@@ -79,10 +97,17 @@ public class JdkInterceptorTest {
     }
 
     public static class TestTarget {
+    /**
+     * sayHello方法。
+     * @return String类型返回值
+     */
         public String sayHello() {
             return "Hello";
         }
         
+    /**
+     * throwException方法。
+     */
         public void throwException() {
             throw new RuntimeException("Test exception");
         }
@@ -93,23 +118,54 @@ public class JdkInterceptorTest {
         private boolean afterCalled = false;
 
         @Override
+    /**
+     * before方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return boolean类型返回值
+     */
         public boolean before(Object target, Method method, Object[] args) {
             beforeCalled = true;
             return true;
         }
 
         @Override
+    /**
+     * after方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param returnVal Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean after(Object target, Method method, Object[] args, Object returnVal) {
             afterCalled = true;
             return true;
         }
 
         @Override
+    /**
+     * afterException方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param e Throwable类型参数
+     * @return boolean类型返回值
+     */
         public boolean afterException(Object target, Method method, Object[] args, Throwable e) {
             return true;
         }
 
+    /**
+     * isBeforeCalled方法。
+     * @return boolean类型返回值
+     */
         public boolean isBeforeCalled() { return beforeCalled; }
+    /**
+     * isAfterCalled方法。
+     * @return boolean类型返回值
+     */
         public boolean isAfterCalled() { return afterCalled; }
     }
 
@@ -118,23 +174,54 @@ public class JdkInterceptorTest {
         private boolean afterCalled = false;
 
         @Override
+    /**
+     * before方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return boolean类型返回值
+     */
         public boolean before(Object target, Method method, Object[] args) {
             beforeCalled = true;
             return false;
         }
 
         @Override
+    /**
+     * after方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param returnVal Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean after(Object target, Method method, Object[] args, Object returnVal) {
             afterCalled = true;
             return true;
         }
 
         @Override
+    /**
+     * afterException方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param e Throwable类型参数
+     * @return boolean类型返回值
+     */
         public boolean afterException(Object target, Method method, Object[] args, Throwable e) {
             return true;
         }
 
+    /**
+     * isBeforeCalled方法。
+     * @return boolean类型返回值
+     */
         public boolean isBeforeCalled() { return beforeCalled; }
+    /**
+     * isAfterCalled方法。
+     * @return boolean类型返回值
+     */
         public boolean isAfterCalled() { return afterCalled; }
     }
 
@@ -143,38 +230,92 @@ public class JdkInterceptorTest {
         private boolean afterExceptionCalled = false;
 
         @Override
+    /**
+     * before方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return boolean类型返回值
+     */
         public boolean before(Object target, Method method, Object[] args) {
             beforeCalled = true;
             return true;
         }
 
         @Override
+    /**
+     * after方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param returnVal Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean after(Object target, Method method, Object[] args, Object returnVal) {
             return false;
         }
 
         @Override
+    /**
+     * afterException方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param e Throwable类型参数
+     * @return boolean类型返回值
+     */
         public boolean afterException(Object target, Method method, Object[] args, Throwable e) {
             afterExceptionCalled = true;
             return true;
         }
 
+    /**
+     * isBeforeCalled方法。
+     * @return boolean类型返回值
+     */
         public boolean isBeforeCalled() { return beforeCalled; }
+    /**
+     * isAfterExceptionCalled方法。
+     * @return boolean类型返回值
+     */
         public boolean isAfterExceptionCalled() { return afterExceptionCalled; }
     }
 
     public static class RethrowAspect implements Aspect {
         @Override
+    /**
+     * before方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return boolean类型返回值
+     */
         public boolean before(Object target, Method method, Object[] args) {
             return true;
         }
 
         @Override
+    /**
+     * after方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param returnVal Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean after(Object target, Method method, Object[] args, Object returnVal) {
             return true;
         }
 
         @Override
+    /**
+     * afterException方法。
+     *      * @param target Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @param e Throwable类型参数
+     * @return boolean类型返回值
+     */
         public boolean afterException(Object target, Method method, Object[] args, Throwable e) {
             return false;
         }

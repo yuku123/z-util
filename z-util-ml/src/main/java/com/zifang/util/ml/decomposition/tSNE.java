@@ -23,6 +23,9 @@ import com.zifang.util.numpy.Shape;
 /**
  * tSNE类。
  */
+/**
+ * tSNE类。
+ */
 public class tSNE {
     private int nComponents;
     private int perplexity;
@@ -47,6 +50,13 @@ public class tSNE {
      * @param nIterations int类型参数
      * @param learningRate double类型参数
      */
+    /**
+     * tSNE方法。
+     *      * @param nComponents int类型参数
+     * @param perplexity int类型参数
+     * @param nIterations int类型参数
+     * @param learningRate double类型参数
+     */
     public tSNE(int nComponents, int perplexity, int nIterations, double learningRate) {
         this.nComponents = nComponents;
         this.perplexity = perplexity;
@@ -60,6 +70,9 @@ public class tSNE {
     /**
      * tSNE方法。
      */
+    /**
+     * tSNE方法。
+     */
     public tSNE() {
         this(2, 30, 1000, 200.0);
     }
@@ -68,6 +81,11 @@ public class tSNE {
      * Fit and transform data to low-dimensional embedding
      * @param X High-dimensional data of shape [n_samples, n_features]
      * @return Low-dimensional embedding of shape [n_samples, n_components]
+     */
+    /**
+     * fitTransform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
      */
     /**
      * fitTransform方法。

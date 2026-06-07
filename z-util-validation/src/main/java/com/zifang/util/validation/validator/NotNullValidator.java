@@ -12,9 +12,19 @@ import java.lang.reflect.Field;
 /**
  * NotNullValidator类。
  */
+/**
+ * NotNullValidator类。
+ */
 public class NotNullValidator implements Validator<NotNull> {
 
     @Override
+    /**
+     * validate方法。
+     *      * @param target Object类型参数
+     * @param field Field类型参数
+     * @param annotation NotNull类型参数
+     * @param result ValidateResult类型参数
+     */
     /**
      * validate方法。
      *      * @param target Object类型参数

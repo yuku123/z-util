@@ -13,6 +13,9 @@ import java.util.*;
 /**
  * SARSA类。
  */
+/**
+ * SARSA类。
+ */
 public class SARSA {
     
     private double learningRate;
@@ -27,6 +30,9 @@ public class SARSA {
 /**
  * State接口。
  */
+/**
+ * State接口。
+ */
     public interface State {
         Object getState();
         List<ActionResult> getAvailableActions();
@@ -35,6 +41,9 @@ public class SARSA {
     /**
      * Interface for action results containing next state, reward, and terminal info.
      */
+/**
+ * ActionResult接口。
+ */
 /**
  * ActionResult接口。
  */
@@ -52,6 +61,13 @@ public class SARSA {
      * @param gamma Discount factor (γ)
      * @param epsilon Exploration rate for epsilon-greedy
      * @param nEpisodes Number of episodes to train
+     */
+    /**
+     * SARSA方法。
+     *      * @param learningRate double类型参数
+     * @param gamma double类型参数
+     * @param epsilon double类型参数
+     * @param nEpisodes int类型参数
      */
     /**
      * SARSA方法。
@@ -95,6 +111,12 @@ public class SARSA {
      * @param action Object类型参数
      * @return double类型返回值
      */
+    /**
+     * getQValue方法。
+     *      * @param state State类型参数
+     * @param action Object类型参数
+     * @return double类型返回值
+     */
     public double getQValue(State state, Object action) {
         String key = stateActionKey(state, action);
         return qTable.getOrDefault(key, 0.0);
@@ -113,6 +135,11 @@ public class SARSA {
      * 
      * @param state The current state
      * @return The action with the highest Q-value
+     */
+    /**
+     * getBestAction方法。
+     *      * @param state State类型参数
+     * @return Object类型返回值
      */
     /**
      * getBestAction方法。
@@ -175,6 +202,13 @@ public class SARSA {
      * @param reward double类型参数
      * @param nextState State类型参数
      */
+    /**
+     * update方法。
+     *      * @param state State类型参数
+     * @param action Object类型参数
+     * @param reward double类型参数
+     * @param nextState State类型参数
+     */
     public void update(State state, Object action, double reward, State nextState) {
         double currentQ = getQValue(state, action);
         
@@ -212,6 +246,11 @@ public class SARSA {
      *      * @param actionTaken Object类型参数
      * @param nextState State类型参数
      */
+    /**
+     * update方法。
+     *      * @param actionTaken Object类型参数
+     * @param nextState State类型参数
+     */
     public void update(Object actionTaken, State nextState) {
         // This method is used when following the on-policy approach
         // where we use the actual next action for the update
@@ -223,6 +262,10 @@ public class SARSA {
      * throughout the episode.
      * 
      * @param startState The initial state for each episode
+     */
+    /**
+     * learn方法。
+     *      * @param startState State类型参数
      */
     /**
      * learn方法。
@@ -317,12 +360,20 @@ public class SARSA {
      * getQTable方法。
      * @return HashMap<String, Double>类型返回值
      */
+    /**
+     * getQTable方法。
+     * @return HashMap<String, Double>类型返回值
+     */
     public HashMap<String, Double> getQTable() {
         return new HashMap<>(qTable);
     }
     
     /**
      * Gets the learning rate.
+     */
+    /**
+     * getLearningRate方法。
+     * @return double类型返回值
      */
     /**
      * getLearningRate方法。
@@ -339,12 +390,20 @@ public class SARSA {
      * setLearningRate方法。
      *      * @param learningRate double类型参数
      */
+    /**
+     * setLearningRate方法。
+     *      * @param learningRate double类型参数
+     */
     public void setLearningRate(double learningRate) {
         this.learningRate = learningRate;
     }
     
     /**
      * Gets the discount factor.
+     */
+    /**
+     * getGamma方法。
+     * @return double类型返回值
      */
     /**
      * getGamma方法。
@@ -361,6 +420,10 @@ public class SARSA {
      * getEpsilon方法。
      * @return double类型返回值
      */
+    /**
+     * getEpsilon方法。
+     * @return double类型返回值
+     */
     public double getEpsilon() {
         return epsilon;
     }
@@ -372,12 +435,20 @@ public class SARSA {
      * setEpsilon方法。
      *      * @param epsilon double类型参数
      */
+    /**
+     * setEpsilon方法。
+     *      * @param epsilon double类型参数
+     */
     public void setEpsilon(double epsilon) {
         this.epsilon = epsilon;
     }
     
     /**
      * Gets the number of episodes.
+     */
+    /**
+     * getnEpisodes方法。
+     * @return int类型返回值
      */
     /**
      * getnEpisodes方法。

@@ -11,6 +11,9 @@ import java.util.NoSuchElementException;
 /**
  * KeyedObjectPool接口。
  */
+/**
+ * KeyedObjectPool接口。
+ */
 public interface KeyedObjectPool<K, V> {
 
     /**

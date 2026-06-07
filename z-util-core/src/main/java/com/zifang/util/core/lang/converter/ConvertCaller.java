@@ -11,6 +11,9 @@ import java.lang.reflect.Method;
 /**
  * ConvertCaller类。
  */
+/**
+ * ConvertCaller类。
+ */
 public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     private Method method;
@@ -23,10 +26,18 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
      * getMethod方法。
      * @return Method类型返回值
      */
+    /**
+     * getMethod方法。
+     * @return Method类型返回值
+     */
     public Method getMethod() {
         return method;
     }
 
+    /**
+     * setMethod方法。
+     *      * @param method Method类型参数
+     */
     /**
      * setMethod方法。
      *      * @param method Method类型参数
@@ -39,10 +50,18 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
      * getCaller方法。
      * @return Object类型返回值
      */
+    /**
+     * getCaller方法。
+     * @return Object类型返回值
+     */
     public Object getCaller() {
         return caller;
     }
 
+    /**
+     * setCaller方法。
+     *      * @param caller Object类型参数
+     */
     /**
      * setCaller方法。
      *      * @param caller Object类型参数
@@ -55,10 +74,18 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
      * getFrom方法。
      * @return Class<?>类型返回值
      */
+    /**
+     * getFrom方法。
+     * @return Class<?>类型返回值
+     */
     public Class<?> getFrom() {
         return from;
     }
 
+    /**
+     * setFrom方法。
+     *      * @param from Class?类型参数
+     */
     /**
      * setFrom方法。
      *      * @param from Class?类型参数
@@ -71,6 +98,10 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
      * getTarget方法。
      * @return Class<?>类型返回值
      */
+    /**
+     * getTarget方法。
+     * @return Class<?>类型返回值
+     */
     public Class<?> getTarget() {
         return target;
     }
@@ -79,10 +110,19 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
      * setTarget方法。
      *      * @param target Class?类型参数
      */
+    /**
+     * setTarget方法。
+     *      * @param target Class?类型参数
+     */
     public void setTarget(Class<?> target) {
         this.target = target;
     }
 
+    /**
+     * to方法。
+     *      * @param o F类型参数
+     * @return T类型返回值
+     */
     /**
      * to方法。
      *      * @param o F类型参数
@@ -112,6 +152,12 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
      * @param defaultValue Object类型参数
      * @return T类型返回值
      */
+    /**
+     * to方法。
+     *      * @param o Object类型参数
+     * @param defaultValue Object类型参数
+     * @return T类型返回值
+     */
     public T to(Object o, Object defaultValue) {
         if (from == target) {
             return (T) o;
@@ -124,6 +170,10 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
         return null;
     }
 
+    /**
+     * copy方法。
+     * @return ConvertCaller<F, T>类型返回值
+     */
     /**
      * copy方法。
      * @return ConvertCaller<F, T>类型返回值
@@ -142,12 +192,21 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "ConvertCaller{method=" + method + ", caller=" + caller +
                 ", from=" + from + ", target=" + target + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -164,6 +223,10 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

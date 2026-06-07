@@ -24,6 +24,9 @@ import java.util.Set;
 /**
  * MemoryPoolMXBeanDemo类。
  */
+/**
+ * MemoryPoolMXBeanDemo类。
+ */
 public class MemoryPoolMXBeanDemo {
 
 
@@ -38,6 +41,10 @@ public class MemoryPoolMXBeanDemo {
      *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
      *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
      * </ul>
+     */
+    /**
+     * getRemoteMemoryPoolMXBean方法。
+     * @return static void类型返回值
      */
     /**
      * getRemoteMemoryPoolMXBean方法。
@@ -121,6 +128,10 @@ public class MemoryPoolMXBeanDemo {
      * getLocalMemoryPoolMXBean方法。
      * @return static void类型返回值
      */
+    /**
+     * getLocalMemoryPoolMXBean方法。
+     * @return static void类型返回值
+     */
     public static void getLocalMemoryPoolMXBean() {
         List<MemoryPoolMXBean> list = ManagementFactory.getMemoryPoolMXBeans();
         if (list != null) {
@@ -152,6 +163,11 @@ public class MemoryPoolMXBeanDemo {
      * 主方法，演示获取JVM内存池信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

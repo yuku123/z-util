@@ -39,6 +39,9 @@ import java.util.Map.Entry;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Joiner_Study类。
+ */
 public class Joiner_Study {
     String str1 = "a ";
 
@@ -55,6 +58,9 @@ public class Joiner_Study {
     static final MapJoiner mapJoin = Joiner.on(";").withKeyValueSeparator("-->"); // key-value分隔符
 
     @Test
+    /**
+     * basicTest方法。
+     */
     public void basicTest() {
         String result = joiner.join(str1, str2, str_null, str4);
         System.out.println(result); // a ;;d
@@ -71,6 +77,9 @@ public class Joiner_Study {
      * appendTo拼接StringBuffer需捕获IOException，拼接StringBuilder则不需要.
      */
     @Test
+    /**
+     * otherTest方法。
+     */
     public void otherTest() {
         String result = joiner.join(arr);
         System.out.println(result); // a;c
@@ -88,6 +97,9 @@ public class Joiner_Study {
     }
 
     @Test
+    /**
+     * mapJoinerTest方法。
+     */
     public void mapJoinerTest() {
         Map<String, String> map = new HashMap();
         map.put("name", "zxiaofan.com");
@@ -104,6 +116,9 @@ public class Joiner_Study {
      * Joiner优势：代码更优雅（null；末尾的分隔符）。
      */
     @Test
+    /**
+     * performanceCompare方法。
+     */
     public void performanceCompare() {
         System.out.println("----拼接Map---");
         joinCompareMap(5000);

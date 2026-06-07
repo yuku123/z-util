@@ -15,6 +15,9 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * NameThreadFactory类。
  */
+/**
+ * NameThreadFactory类。
+ */
 public class NameThreadFactory {
 
     private String nameFormat = null;
@@ -23,6 +26,9 @@ public class NameThreadFactory {
     private UncaughtExceptionHandler uncaughtExceptionHandler = null;
     private ThreadFactory backingThreadFactory = null;
 
+    /**
+     * NameThreadFactory方法。
+     */
     /**
      * NameThreadFactory方法。
      */
@@ -84,6 +90,11 @@ public class NameThreadFactory {
      *      * @param nameFormat String类型参数
      * @return NameThreadFactory类型返回值
      */
+    /**
+     * setNameFormat方法。
+     *      * @param nameFormat String类型参数
+     * @return NameThreadFactory类型返回值
+     */
     public NameThreadFactory setNameFormat(String nameFormat) {
         format(nameFormat, 0);
         this.nameFormat = nameFormat;
@@ -95,11 +106,21 @@ public class NameThreadFactory {
      *      * @param daemon boolean类型参数
      * @return NameThreadFactory类型返回值
      */
+    /**
+     * setDaemon方法。
+     *      * @param daemon boolean类型参数
+     * @return NameThreadFactory类型返回值
+     */
     public NameThreadFactory setDaemon(boolean daemon) {
         this.daemon = daemon;
         return this;
     }
 
+    /**
+     * setPriority方法。
+     *      * @param priority int类型参数
+     * @return NameThreadFactory类型返回值
+     */
     /**
      * setPriority方法。
      *      * @param priority int类型参数
@@ -117,6 +138,11 @@ public class NameThreadFactory {
      *      * @param uncaughtExceptionHandler UncaughtExceptionHandler类型参数
      * @return NameThreadFactory类型返回值
      */
+    /**
+     * setUncaughtExceptionHandler方法。
+     *      * @param uncaughtExceptionHandler UncaughtExceptionHandler类型参数
+     * @return NameThreadFactory类型返回值
+     */
     public NameThreadFactory setUncaughtExceptionHandler(
             UncaughtExceptionHandler uncaughtExceptionHandler) {
         this.uncaughtExceptionHandler = (UncaughtExceptionHandler) checkNotNull(
@@ -129,11 +155,20 @@ public class NameThreadFactory {
      *      * @param backingThreadFactory ThreadFactory类型参数
      * @return NameThreadFactory类型返回值
      */
+    /**
+     * setThreadFactory方法。
+     *      * @param backingThreadFactory ThreadFactory类型参数
+     * @return NameThreadFactory类型返回值
+     */
     public NameThreadFactory setThreadFactory(ThreadFactory backingThreadFactory) {
         this.backingThreadFactory = (ThreadFactory) checkNotNull(backingThreadFactory);
         return this;
     }
 
+    /**
+     * build方法。
+     * @return ThreadFactory类型返回值
+     */
     /**
      * build方法。
      * @return ThreadFactory类型返回值

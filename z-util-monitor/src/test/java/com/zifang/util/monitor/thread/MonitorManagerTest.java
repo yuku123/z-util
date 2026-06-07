@@ -9,16 +9,25 @@ import java.util.List;
 import java.util.Map;
 import static org.junit.Assert.*;
 
+/**
+ * MonitorManagerTest类。
+ */
 public class MonitorManagerTest {
 
     private MonitorManager monitorManager;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         monitorManager = new MonitorManager();
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         if (monitorManager != null) {
             monitorManager.shutdown(false);
@@ -26,11 +35,17 @@ public class MonitorManagerTest {
     }
 
     @Test
+    /**
+     * testMonitorManagerCreation方法。
+     */
     public void testMonitorManagerCreation() {
         assertNotNull(monitorManager);
     }
 
     @Test
+    /**
+     * testAddAllMonitor方法。
+     */
     public void testAddAllMonitor() {
         List<Monitorable> monitorables = new ArrayList<>();
         Map<Long, List<Monitorable>> aggregation = new HashMap<>();
@@ -41,6 +56,9 @@ public class MonitorManagerTest {
     }
 
     @Test(expected = IllegalStateException.class)
+    /**
+     * testAddAllMonitorTwice方法。
+     */
     public void testAddAllMonitorTwice() {
         List<Monitorable> monitorables = new ArrayList<>();
         Map<Long, List<Monitorable>> aggregation = new HashMap<>();
@@ -51,6 +69,9 @@ public class MonitorManagerTest {
     }
 
     @Test
+    /**
+     * testShutdown方法。
+     */
     public void testShutdown() {
         monitorManager.shutdown(false);
         monitorManager.shutdown(true);

@@ -27,6 +27,9 @@ import java.util.concurrent.*;
  *
  * @author zifang
  */
+/**
+ * CacheStudy类。
+ */
 public class CacheStudy {
     /**
      * 缓存项被移除时，RemovalListener会获取移除通知[RemovalNotification]，其中包含移除原因[RemovalCause]、键和值.
@@ -34,6 +37,10 @@ public class CacheStudy {
     RemovalListener<String, String> listener = new RemovalListener<String, String>() {
 
         @Override
+    /**
+     * onRemoval方法。
+     *      * @param notification RemovalNotificationString,类型参数
+     */
         public void onRemoval(RemovalNotification<String, String> notification) {
             System.out.println("RemovalListener:" + notification.getKey() + "," + notification.getValue() + "," + notification.getCause());
         }
@@ -44,6 +51,11 @@ public class CacheStudy {
      */
     LoadingCache<String, String> cacheBuilder = CacheBuilder.newBuilder().removalListener(listener).build(new CacheLoader<String, String>() {
         @Override
+    /**
+     * load方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
         public String load(String key) throws Exception {
             return initValue(key);
         }
@@ -51,6 +63,11 @@ public class CacheStudy {
         /**
          * 自我实现批量加载模式.
          */
+    /**
+     * loadAll方法。
+     *      * @param keys Iterable?类型参数
+     * @return Map<String, String>类型返回值
+     */
         public Map<String, String> loadAll(Iterable<? extends String> keys) throws Exception {
             Map<String, String> map = new HashMap<>();
             for (String key : keys) {
@@ -66,11 +83,22 @@ public class CacheStudy {
     LoadingCache<String, String> cacheWeight = CacheBuilder.newBuilder().maximumWeight(20).weigher(new Weigher<String, String>() {
 
         @Override
+    /**
+     * weigh方法。
+     *      * @param key String类型参数
+     * @param value String类型参数
+     * @return int类型返回值
+     */
         public int weigh(String key, String value) {
             return key.length();
         }
     }).build(new CacheLoader<String, String>() {
         @Override
+    /**
+     * load方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
         public String load(String key) {
             return initValue(key);
         }
@@ -81,6 +109,11 @@ public class CacheStudy {
      */
     LoadingCache<String, String> cacheTime = CacheBuilder.newBuilder().expireAfterAccess(10, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
         @Override
+    /**
+     * load方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
         public String load(String key) {
             return initValue(key);
         }
@@ -91,6 +124,11 @@ public class CacheStudy {
      */
     LoadingCache<String, String> cacheWriteTime = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
         @Override
+    /**
+     * load方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
         public String load(String key) {
             return initValue(key);
         }
@@ -102,6 +140,9 @@ public class CacheStudy {
     Cache<String, String> cache = CacheBuilder.newBuilder().maximumSize(5).build();
 
     @Test
+    /**
+     * cahceBuilderTest方法。
+     */
     public void cahceBuilderTest() {
         System.out.println(cacheBuilder.getIfPresent("pre")); // getIfPresent不存在则返回null
         System.out.println(cacheBuilder.getUnchecked("uncheck")); // getUnchecked不抛检查型异常（一旦CacheLoader声明了检查型异常，就不可以调用getUnchecked(K)）
@@ -125,8 +166,15 @@ public class CacheStudy {
     }
 
     @Test
+    /**
+     * callableTest方法。
+     */
     public void callableTest() throws ExecutionException {
         String valcal = cache.get("zxiaofan", new Callable<String>() {
+    /**
+     * call方法。
+     * @return String类型返回值
+     */
             public String call() {
                 return "hello " + "zxiaofan";
             }
@@ -137,6 +185,10 @@ public class CacheStudy {
         System.out.println(cache.get("cal", new Callable<String>() {
 
             @Override
+    /**
+     * call方法。
+     * @return String类型返回值
+     */
             public String call() throws Exception {
                 return "github_new";
             }
@@ -145,6 +197,9 @@ public class CacheStudy {
     }
 
     @Test
+    /**
+     * evictionTest方法。
+     */
     public void evictionTest() {
         // 容量回收（size-based eviction）
         // maximumSize基于容量的回收,缓存项的数目逼近限定值时,回收最近没有使用或总体上很少使用的缓存项。
@@ -189,6 +244,9 @@ public class CacheStudy {
      * 显示清除.
      */
     @Test
+    /**
+     * removeTest方法。
+     */
     public void removeTest() {
         initMap(cacheBuilder);
         cacheBuilder.invalidate("k1"); // 单个清除
@@ -207,6 +265,11 @@ public class CacheStudy {
     LoadingCache<String, String> cahceAsyLis = CacheBuilder.newBuilder().removalListener(RemovalListeners.asynchronous(listener, executor)).build(new CacheLoader<String, String>() {
 
         @Override
+    /**
+     * load方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
         public String load(String key) throws Exception {
             return initValue(key);
         }
@@ -220,6 +283,9 @@ public class CacheStudy {
      * 可以使用RemovalListeners.asynchronous(RemovalListener, Executor)把监听器装饰为异步操作。
      */
     @Test
+    /**
+     * removeListenerTest方法。
+     */
     public void removeListenerTest() {
         initMap(cacheBuilder);
         cacheBuilder.invalidate("k1");
@@ -244,6 +310,9 @@ public class CacheStudy {
      * @throws ExecutionException
      */
     @Test
+    /**
+     * clearWhenTest方法。
+     */
     public void clearWhenTest() throws ExecutionException {
         initMap(cacheTime);
         sleep(TimeUnit.SECONDS.toMillis(15)); // cahceTime:10s无读写则过期
@@ -257,6 +326,9 @@ public class CacheStudy {
         ScheduledExecutorService schedu = Executors.newScheduledThreadPool(1);
         schedu.scheduleAtFixedRate(new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 cacheWriteTime.cleanUp(); //
             }
@@ -279,16 +351,31 @@ public class CacheStudy {
     LoadingCache<String, String> cacheRefresh = CacheBuilder.newBuilder().refreshAfterWrite(5, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
 
         @Override
+    /**
+     * load方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
         public String load(String key) throws Exception {
             return "hello " + key + (int) (Math.random() * 10);
         }
 
+    /**
+     * reload方法。
+     *      * @param key final类型参数
+     * @param oldValue String类型参数
+     * @return ListenableFuture<String>类型返回值
+     */
         public ListenableFuture<String> reload(final String key, String oldValue) throws Exception {
             if (neverNeedRefresh(key)) { // 该key【不需要】刷新
                 return Futures.immediateFuture(oldValue); // oldValue为null则返回new ImmediateSuccessfulFuture<Object>(null)，否则返回原值
             } else { // asynchronous
                 ListenableFutureTask<String> task = ListenableFutureTask.create(new Callable<String>() {
                     @Override
+    /**
+     * call方法。
+     * @return String类型返回值
+     */
                     public String call() throws Exception {
                         return "hello new " + key;
                     }
@@ -312,6 +399,11 @@ public class CacheStudy {
     LoadingCache<String, String> cacheSyncRefresh = CacheBuilder.newBuilder().refreshAfterWrite(5, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
 
         @Override
+    /**
+     * load方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
         public String load(String key) throws Exception {
             return "hello " + key + (int) (Math.random() * 10);
         }
@@ -333,6 +425,9 @@ public class CacheStudy {
      * @throws ExecutionException
      */
     @Test
+    /**
+     * refreshTest方法。
+     */
     public void refreshTest() throws ExecutionException {
         System.out.println("异步刷新...");
         initMap(cacheRefresh);
@@ -367,6 +462,11 @@ public class CacheStudy {
     LoadingCache<String, String> cacheStats = CacheBuilder.newBuilder().recordStats().build(new CacheLoader<String, String>() {
 
         @Override
+    /**
+     * load方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
         public String load(String key) throws Exception {
             return initValue(key);
         }
@@ -382,6 +482,9 @@ public class CacheStudy {
      * @throws ExecutionException
      */
     @Test
+    /**
+     * statsTest方法。
+     */
     public void statsTest() throws ExecutionException {
         initMap(cacheStats);
         for (int i = 0; i < 9; i++) {
@@ -410,6 +513,9 @@ public class CacheStudy {
      * Guava Cache 无containsKey()
      */
     @Test
+    /**
+     * asMapTest方法。
+     */
     public void asMapTest() {
         initMap(cacheBuilder);
         Map<String, String> map = cacheBuilder.asMap();

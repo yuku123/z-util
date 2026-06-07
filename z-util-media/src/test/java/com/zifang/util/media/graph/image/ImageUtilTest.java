@@ -8,9 +8,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import static org.junit.Assert.*;
 
+/**
+ * ImageUtilTest类。
+ */
 public class ImageUtilTest {
 
     @Test
+    /**
+     * testResize方法。
+     */
     public void testResize() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage resized = ImageUtil.resize(img, 50, 50);
@@ -19,6 +25,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testCrop方法。
+     */
     public void testCrop() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage cropped = ImageUtil.crop(img, 10, 10, 50, 50);
@@ -27,6 +36,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testGrayscale方法。
+     */
     public void testGrayscale() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage gray = ImageUtil.grayscale(img);
@@ -34,6 +46,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testBrightness方法。
+     */
     public void testBrightness() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage bright = ImageUtil.brightness(img, 50);
@@ -41,6 +56,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testContrast方法。
+     */
     public void testContrast() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage contrasted = ImageUtil.contrast(img, 1.5);
@@ -48,6 +66,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testBlur方法。
+     */
     public void testBlur() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage blurred = ImageUtil.blur(img, 3);
@@ -55,6 +76,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testSharpen方法。
+     */
     public void testSharpen() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage sharpened = ImageUtil.sharpen(img);
@@ -62,6 +86,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testInvert方法。
+     */
     public void testInvert() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage inverted = ImageUtil.invert(img);
@@ -69,6 +96,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testThreshold方法。
+     */
     public void testThreshold() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage thresholded = ImageUtil.threshold(img, 128);
@@ -76,6 +106,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testRotate方法。
+     */
     public void testRotate() {
         BufferedImage img = new BufferedImage(100, 50, BufferedImage.TYPE_INT_RGB);
         BufferedImage rotated = ImageUtil.rotate(img, 90);
@@ -83,6 +116,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testFlipH方法。
+     */
     public void testFlipH() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage flipped = ImageUtil.flipH(img);
@@ -90,6 +126,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testFlipV方法。
+     */
     public void testFlipV() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage flipped = ImageUtil.flipV(img);
@@ -97,6 +136,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testWatermark方法。
+     */
     public void testWatermark() {
         BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
         BufferedImage watermarked = ImageUtil.watermark(img, "Test", 10, 10, null, Color.RED, 0.5f);
@@ -104,6 +146,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testConcatH方法。
+     */
     public void testConcatH() {
         BufferedImage left = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
         BufferedImage right = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
@@ -113,6 +158,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testConcatV方法。
+     */
     public void testConcatV() {
         BufferedImage top = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
         BufferedImage bottom = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
@@ -122,6 +170,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testToBytes方法。
+     */
     public void testToBytes() throws IOException {
         BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         byte[] bytes = ImageUtil.toBytes(img);
@@ -130,6 +181,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testToBytesWithFormat方法。
+     */
     public void testToBytesWithFormat() throws IOException {
         BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         byte[] bytes = ImageUtil.toBytes(img, "png");
@@ -137,6 +191,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testToBase64方法。
+     */
     public void testToBase64() throws IOException {
         BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         String base64 = ImageUtil.toBase64(img, "png");
@@ -145,6 +202,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testToPng方法。
+     */
     public void testToPng() {
         BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         BufferedImage png = ImageUtil.toPng(img);
@@ -152,6 +212,9 @@ public class ImageUtilTest {
     }
 
     @Test
+    /**
+     * testToJpg方法。
+     */
     public void testToJpg() {
         BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
         BufferedImage jpg = ImageUtil.toJpg(img);

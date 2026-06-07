@@ -8,9 +8,15 @@ import static org.junit.Assert.*;
 /**
  * Linalg 类测试 - pandas 版线性代数工具
  */
+/**
+ * LinalgTest类。
+ */
 public class LinalgTest {
 
     @Test
+    /**
+     * testDotVectorProduct方法。
+     */
     public void testDotVectorProduct() {
         Num a = new Num(new double[]{1.0, 2.0, 3.0});
         Num b = new Num(new double[]{4.0, 5.0, 6.0});
@@ -19,6 +25,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testDotInvalidDimensions方法。
+     */
     public void testDotInvalidDimensions() {
         Num a = new Num(new double[]{1.0, 2.0});
         Num b = new Num(new double[]{1.0});
@@ -31,6 +40,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testMatmul方法。
+     */
     public void testMatmul() {
         double[][] a = {{1.0, 2.0}, {3.0, 4.0}};
         double[][] b = {{5.0, 6.0}, {7.0, 8.0}};
@@ -45,6 +57,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testInner方法。
+     */
     public void testInner() {
         Num a = new Num(new double[]{1.0, 2.0, 3.0});
         Num b = new Num(new double[]{4.0, 5.0, 6.0});
@@ -53,6 +68,9 @@ public class LinalgTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testInnerInvalidDimensions方法。
+     */
     public void testInnerInvalidDimensions() {
         Num a = new Num(new double[][]{{1.0, 2.0}, {3.0, 4.0}});
         Num b = new Num(new double[]{1.0, 2.0});
@@ -60,6 +78,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testOuter方法。
+     */
     public void testOuter() {
         Num a = new Num(new double[]{1.0, 2.0});
         Num b = new Num(new double[]{3.0, 4.0});
@@ -72,6 +93,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testKron方法。
+     */
     public void testKron() {
         double[][] a = {{1.0, 2.0}, {3.0, 4.0}};
         double[][] b = {{0.0, 5.0}, {6.0, 7.0}};
@@ -84,6 +108,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testDet2x2方法。
+     */
     public void testDet2x2() {
         double[][] matrix = {{4.0, 7.0}, {2.0, 6.0}};
         Num num = new Num(matrix);
@@ -92,6 +119,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testDet3x3方法。
+     */
     public void testDet3x3() {
         double[][] matrix = {{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}};
         Num num = new Num(matrix);
@@ -100,6 +130,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testTrace方法。
+     */
     public void testTrace() {
         double[][] matrix = {{1.0, 2.0}, {3.0, 4.0}};
         Num num = new Num(matrix);
@@ -108,6 +141,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testMatrixRank方法。
+     */
     public void testMatrixRank() {
         double[][] matrix = {{1.0, 2.0}, {3.0, 4.0}};
         Num num = new Num(matrix);
@@ -116,6 +152,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testInv2x2方法。
+     */
     public void testInv2x2() {
         double[][] matrix = {{4.0, 7.0}, {2.0, 6.0}};
         Num num = new Num(matrix);
@@ -128,6 +167,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testNorm1方法。
+     */
     public void testNorm1() {
         Num num = new Num(new double[]{-3.0, 4.0});
         double result = Linalg.norm(num, 1);
@@ -135,6 +177,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testNorm2方法。
+     */
     public void testNorm2() {
         Num num = new Num(new double[]{3.0, 4.0});
         double result = Linalg.norm(num, 2);
@@ -142,6 +187,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testNormInf方法。
+     */
     public void testNormInf() {
         Num num = new Num(new double[]{-3.0, 4.0, -5.0});
         double result = Linalg.norm(num, Integer.MAX_VALUE);
@@ -149,6 +197,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testNormDefault方法。
+     */
     public void testNormDefault() {
         Num num = new Num(new double[]{3.0, 4.0});
         double result = Linalg.norm(num);
@@ -156,6 +207,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testNormFro方法。
+     */
     public void testNormFro() {
         Num num = new Num(new double[]{3.0, 4.0});
         double result = Linalg.norm(num, "fro");
@@ -163,6 +217,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testSvd方法。
+     */
     public void testSvd() {
         double[][] matrix = {{1.0, 2.0}, {3.0, 4.0}, {5.0, 6.0}};
         Num num = new Num(matrix);
@@ -173,6 +230,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testQr方法。
+     */
     public void testQr() {
         double[][] matrix = {{1.0, 2.0}, {3.0, 4.0}};
         Num num = new Num(matrix);
@@ -182,6 +242,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testCholesky方法。
+     */
     public void testCholesky() {
         double[][] matrix = {{4.0, 2.0}, {2.0, 5.0}};
         Num num = new Num(matrix);
@@ -190,6 +253,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testSolve方法。
+     */
     public void testSolve() {
         double[][] a = {{1.0, 1.0}, {1.0, -1.0}};
         double[] b = {5.0, 1.0};
@@ -204,6 +270,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testLstsq方法。
+     */
     public void testLstsq() {
         double[][] a = {{1.0, 1.0}, {1.0, -1.0}};
         double[] b = {5.0, 1.0};
@@ -218,6 +287,9 @@ public class LinalgTest {
     }
 
     @Test
+    /**
+     * testPinv方法。
+     */
     public void testPinv() {
         double[][] matrix = {{1.0, 2.0}, {3.0, 4.0}};
         Num num = new Num(matrix);

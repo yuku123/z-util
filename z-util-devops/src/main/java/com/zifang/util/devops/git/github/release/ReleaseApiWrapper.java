@@ -25,12 +25,19 @@ import java.util.List;
 /**
  * ReleaseApiWrapper类。
  */
+/**
+ * ReleaseApiWrapper类。
+ */
 public class ReleaseApiWrapper {
 
     private final GitHub github;
     private String owner;
     private String repo;
 
+    /**
+     * ReleaseApiWrapper方法。
+     *      * @param github GitHub类型参数
+     */
     /**
      * ReleaseApiWrapper方法。
      *      * @param github GitHub类型参数
@@ -45,12 +52,24 @@ public class ReleaseApiWrapper {
      * @param owner String类型参数
      * @param repo String类型参数
      */
+    /**
+     * ReleaseApiWrapper方法。
+     *      * @param github GitHub类型参数
+     * @param owner String类型参数
+     * @param repo String类型参数
+     */
     public ReleaseApiWrapper(GitHub github, String owner, String repo) {
         this.github = github;
         this.owner = owner;
         this.repo = repo;
     }
 
+    /**
+     * withRepo方法。
+     *      * @param owner String类型参数
+     * @param repo String类型参数
+     * @return ReleaseApiWrapper类型返回值
+     */
     /**
      * withRepo方法。
      *      * @param owner String类型参数
@@ -83,6 +102,13 @@ public class ReleaseApiWrapper {
      * @param body String类型参数
      * @return GHRelease类型返回值
      */
+    /**
+     * create方法。
+     *      * @param tagName String类型参数
+     * @param name String类型参数
+     * @param body String类型参数
+     * @return GHRelease类型返回值
+     */
     public GHRelease create(String tagName, String name, String body) throws IOException {
         return getRepo().createRelease(tagName)
                 .name(name)
@@ -92,6 +118,13 @@ public class ReleaseApiWrapper {
 
     /**
      * 创建 Draft Release
+     */
+    /**
+     * createDraft方法。
+     *      * @param tagName String类型参数
+     * @param name String类型参数
+     * @param body String类型参数
+     * @return GHRelease类型返回值
      */
     /**
      * createDraft方法。
@@ -116,6 +149,11 @@ public class ReleaseApiWrapper {
      *      * @param releaseId long类型参数
      * @return GHRelease类型返回值
      */
+    /**
+     * get方法。
+     *      * @param releaseId long类型参数
+     * @return GHRelease类型返回值
+     */
     public GHRelease get(long releaseId) throws IOException {
         return getRepo().getRelease(releaseId);
     }
@@ -128,12 +166,26 @@ public class ReleaseApiWrapper {
      *      * @param tag String类型参数
      * @return GHRelease类型返回值
      */
+    /**
+     * getByTag方法。
+     *      * @param tag String类型参数
+     * @return GHRelease类型返回值
+     */
     public GHRelease getByTag(String tag) throws IOException {
         return getRepo().getReleaseByTagName(tag);
     }
 
     /**
      * 更新 Release
+     */
+    /**
+     * update方法。
+     *      * @param releaseId long类型参数
+     * @param name String类型参数
+     * @param body String类型参数
+     * @param draft boolean类型参数
+     * @param prerelease boolean类型参数
+     * @return GHRelease类型返回值
      */
     /**
      * update方法。
@@ -160,6 +212,10 @@ public class ReleaseApiWrapper {
      * delete方法。
      *      * @param releaseId long类型参数
      */
+    /**
+     * delete方法。
+     *      * @param releaseId long类型参数
+     */
     public void delete(long releaseId) throws IOException {
         get(releaseId).delete();
     }
@@ -168,6 +224,10 @@ public class ReleaseApiWrapper {
 
     /**
      * 列出所有 Release
+     */
+    /**
+     * list方法。
+     * @return List<GHRelease>类型返回值
      */
     /**
      * list方法。
@@ -194,12 +254,27 @@ public class ReleaseApiWrapper {
      * @param mimeType String类型参数
      * @return GHAsset类型返回值
      */
+    /**
+     * uploadAsset方法。
+     *      * @param releaseId long类型参数
+     * @param file File类型参数
+     * @param mimeType String类型参数
+     * @return GHAsset类型返回值
+     */
     public GHAsset uploadAsset(long releaseId, File file, String mimeType) throws IOException {
         return get(releaseId).uploadAsset(file, mimeType);
     }
 
     /**
      * 上传 Release Asset（通过 InputStream）
+     */
+    /**
+     * uploadAsset方法。
+     *      * @param releaseId long类型参数
+     * @param fileName String类型参数
+     * @param data InputStream类型参数
+     * @param mimeType String类型参数
+     * @return GHAsset类型返回值
      */
     /**
      * uploadAsset方法。
@@ -221,6 +296,11 @@ public class ReleaseApiWrapper {
      *      * @param releaseId long类型参数
      * @return List<GHAsset>类型返回值
      */
+    /**
+     * listAssets方法。
+     *      * @param releaseId long类型参数
+     * @return List<GHAsset>类型返回值
+     */
     public List<GHAsset> listAssets(long releaseId) throws IOException {
         return get(releaseId).getAssets();
     }
@@ -229,6 +309,10 @@ public class ReleaseApiWrapper {
 
     /**
      * 获取最新的 Release
+     */
+    /**
+     * getLatest方法。
+     * @return GHRelease类型返回值
      */
     /**
      * getLatest方法。
@@ -261,6 +345,11 @@ public class ReleaseApiWrapper {
          * @param r Release 对象
          * @return ReleaseInfo 实例
          */
+    /**
+     * from方法。
+     *      * @param r GHRelease类型参数
+     * @return static ReleaseInfo类型返回值
+     */
     /**
      * from方法。
      *      * @param r GHRelease类型参数

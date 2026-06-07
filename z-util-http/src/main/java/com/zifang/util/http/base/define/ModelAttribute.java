@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * ModelAttribute类。
  */
+/**
+ * ModelAttribute类。
+ */
 public class ModelAttribute {
 }

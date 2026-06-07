@@ -7,31 +7,49 @@ import java.math.RoundingMode;
 
 import static org.junit.Assert.*;
 
+/**
+ * NumberUtilTest类。
+ */
 public class NumberUtilTest {
 
     // --- toInt ---
 
     @Test
+    /**
+     * testToInt_WithValidString方法。
+     */
     public void testToInt_WithValidString() {
         assertEquals(123, NumberUtil.toInt("123"));
     }
 
     @Test
+    /**
+     * testToInt_WithNull方法。
+     */
     public void testToInt_WithNull() {
         assertEquals(0, NumberUtil.toInt(null));
     }
 
     @Test
+    /**
+     * testToInt_WithEmptyString方法。
+     */
     public void testToInt_WithEmptyString() {
         assertEquals(0, NumberUtil.toInt(""));
     }
 
     @Test
+    /**
+     * testToInt_WithInvalidString方法。
+     */
     public void testToInt_WithInvalidString() {
         assertEquals(0, NumberUtil.toInt("abc"));
     }
 
     @Test
+    /**
+     * testToInt_WithNegativeNumber方法。
+     */
     public void testToInt_WithNegativeNumber() {
         assertEquals(-123, NumberUtil.toInt("-123"));
     }
@@ -39,21 +57,33 @@ public class NumberUtilTest {
     // --- toInt with default value ---
 
     @Test
+    /**
+     * testToIntWithDefault_WithValidString方法。
+     */
     public void testToIntWithDefault_WithValidString() {
         assertEquals(123, NumberUtil.toInt("123", 999));
     }
 
     @Test
+    /**
+     * testToIntWithDefault_WithNull方法。
+     */
     public void testToIntWithDefault_WithNull() {
         assertEquals(999, NumberUtil.toInt(null, 999));
     }
 
     @Test
+    /**
+     * testToIntWithDefault_WithEmptyString方法。
+     */
     public void testToIntWithDefault_WithEmptyString() {
         assertEquals(999, NumberUtil.toInt("", 999));
     }
 
     @Test
+    /**
+     * testToIntWithDefault_WithInvalidString方法。
+     */
     public void testToIntWithDefault_WithInvalidString() {
         assertEquals(999, NumberUtil.toInt("abc", 999));
     }
@@ -61,21 +91,33 @@ public class NumberUtilTest {
     // --- toLong ---
 
     @Test
+    /**
+     * testToLong_WithValidString方法。
+     */
     public void testToLong_WithValidString() {
         assertEquals(123L, NumberUtil.toLong("123"));
     }
 
     @Test
+    /**
+     * testToLong_WithNull方法。
+     */
     public void testToLong_WithNull() {
         assertEquals(0L, NumberUtil.toLong(null));
     }
 
     @Test
+    /**
+     * testToLong_WithEmptyString方法。
+     */
     public void testToLong_WithEmptyString() {
         assertEquals(0L, NumberUtil.toLong(""));
     }
 
     @Test
+    /**
+     * testToLong_WithInvalidString方法。
+     */
     public void testToLong_WithInvalidString() {
         assertEquals(0L, NumberUtil.toLong("abc"));
     }
@@ -83,11 +125,17 @@ public class NumberUtilTest {
     // --- toLong with default value ---
 
     @Test
+    /**
+     * testToLongWithDefault_WithValidString方法。
+     */
     public void testToLongWithDefault_WithValidString() {
         assertEquals(123L, NumberUtil.toLong("123", 999L));
     }
 
     @Test
+    /**
+     * testToLongWithDefault_WithNull方法。
+     */
     public void testToLongWithDefault_WithNull() {
         assertEquals(999L, NumberUtil.toLong(null, 999L));
     }
@@ -95,16 +143,25 @@ public class NumberUtilTest {
     // --- toFloat ---
 
     @Test
+    /**
+     * testToFloat_WithValidString方法。
+     */
     public void testToFloat_WithValidString() {
         assertEquals(123.5f, NumberUtil.toFloat("123.5"), 0.001);
     }
 
     @Test
+    /**
+     * testToFloat_WithNull方法。
+     */
     public void testToFloat_WithNull() {
         assertEquals(0.0f, NumberUtil.toFloat(null), 0.001);
     }
 
     @Test
+    /**
+     * testToFloat_WithEmptyString方法。
+     */
     public void testToFloat_WithEmptyString() {
         assertEquals(0.0f, NumberUtil.toFloat(""), 0.001);
     }
@@ -112,11 +169,17 @@ public class NumberUtilTest {
     // --- toFloat with default value ---
 
     @Test
+    /**
+     * testToFloatWithDefault_WithValidString方法。
+     */
     public void testToFloatWithDefault_WithValidString() {
         assertEquals(123.5f, NumberUtil.toFloat("123.5", 999.0f), 0.001);
     }
 
     @Test
+    /**
+     * testToFloatWithDefault_WithNull方法。
+     */
     public void testToFloatWithDefault_WithNull() {
         assertEquals(999.0f, NumberUtil.toFloat(null, 999.0f), 0.001);
     }
@@ -124,16 +187,25 @@ public class NumberUtilTest {
     // --- toDouble ---
 
     @Test
+    /**
+     * testToDouble_WithValidString方法。
+     */
     public void testToDouble_WithValidString() {
         assertEquals(123.5, NumberUtil.toDouble("123.5"), 0.001);
     }
 
     @Test
+    /**
+     * testToDouble_WithNull方法。
+     */
     public void testToDouble_WithNull() {
         assertEquals(0.0d, NumberUtil.toDouble((String) null), 0.001);
     }
 
     @Test
+    /**
+     * testToDouble_WithEmptyString方法。
+     */
     public void testToDouble_WithEmptyString() {
         assertEquals(0.0d, NumberUtil.toDouble(""), 0.001);
     }
@@ -141,11 +213,17 @@ public class NumberUtilTest {
     // --- toDouble with default value ---
 
     @Test
+    /**
+     * testToDoubleWithDefault_WithValidString方法。
+     */
     public void testToDoubleWithDefault_WithValidString() {
         assertEquals(123.5, NumberUtil.toDouble("123.5", 999.0), 0.001);
     }
 
     @Test
+    /**
+     * testToDoubleWithDefault_WithNull方法。
+     */
     public void testToDoubleWithDefault_WithNull() {
         assertEquals(999.0, NumberUtil.toDouble((String) null, 999.0), 0.001);
     }
@@ -153,23 +231,35 @@ public class NumberUtilTest {
     // --- toDouble with BigDecimal ---
 
     @Test
+    /**
+     * testToDoubleWithBigDecimal_WithValidValue方法。
+     */
     public void testToDoubleWithBigDecimal_WithValidValue() {
         BigDecimal bd = new BigDecimal("123.456");
         assertEquals(123.456, NumberUtil.toDouble(bd), 0.001);
     }
 
     @Test
+    /**
+     * testToDoubleWithBigDecimal_WithNull方法。
+     */
     public void testToDoubleWithBigDecimal_WithNull() {
         assertEquals(0.0d, NumberUtil.toDouble((BigDecimal) null), 0.001);
     }
 
     @Test
+    /**
+     * testToDoubleWithBigDecimalWithDefault_WithValidValue方法。
+     */
     public void testToDoubleWithBigDecimalWithDefault_WithValidValue() {
         BigDecimal bd = new BigDecimal("123.456");
         assertEquals(123.456, NumberUtil.toDouble(bd, 999.0), 0.001);
     }
 
     @Test
+    /**
+     * testToDoubleWithBigDecimalWithDefault_WithNull方法。
+     */
     public void testToDoubleWithBigDecimalWithDefault_WithNull() {
         assertEquals(999.0, NumberUtil.toDouble((BigDecimal) null, 999.0), 0.001);
     }
@@ -177,11 +267,17 @@ public class NumberUtilTest {
     // --- toByte ---
 
     @Test
+    /**
+     * testToByte_WithValidString方法。
+     */
     public void testToByte_WithValidString() {
         assertEquals((byte) 123, NumberUtil.toByte("123"));
     }
 
     @Test
+    /**
+     * testToByte_WithNull方法。
+     */
     public void testToByte_WithNull() {
         assertEquals((byte) 0, NumberUtil.toByte(null));
     }
@@ -189,11 +285,17 @@ public class NumberUtilTest {
     // --- toByte with default value ---
 
     @Test
+    /**
+     * testToByteWithDefault_WithValidString方法。
+     */
     public void testToByteWithDefault_WithValidString() {
         assertEquals((byte) 123, NumberUtil.toByte("123", (byte) 99));
     }
 
     @Test
+    /**
+     * testToByteWithDefault_WithNull方法。
+     */
     public void testToByteWithDefault_WithNull() {
         assertEquals((byte) 99, NumberUtil.toByte(null, (byte) 99));
     }
@@ -201,11 +303,17 @@ public class NumberUtilTest {
     // --- toShort ---
 
     @Test
+    /**
+     * testToShort_WithValidString方法。
+     */
     public void testToShort_WithValidString() {
         assertEquals((short) 123, NumberUtil.toShort("123"));
     }
 
     @Test
+    /**
+     * testToShort_WithNull方法。
+     */
     public void testToShort_WithNull() {
         assertEquals((short) 0, NumberUtil.toShort(null));
     }
@@ -213,11 +321,17 @@ public class NumberUtilTest {
     // --- toShort with default value ---
 
     @Test
+    /**
+     * testToShortWithDefault_WithValidString方法。
+     */
     public void testToShortWithDefault_WithValidString() {
         assertEquals((short) 123, NumberUtil.toShort("123", (short) 99));
     }
 
     @Test
+    /**
+     * testToShortWithDefault_WithNull方法。
+     */
     public void testToShortWithDefault_WithNull() {
         assertEquals((short) 99, NumberUtil.toShort(null, (short) 99));
     }
@@ -225,6 +339,9 @@ public class NumberUtilTest {
     // --- toScaledBigDecimal ---
 
     @Test
+    /**
+     * testToScaledBigDecimal_WithValidValue方法。
+     */
     public void testToScaledBigDecimal_WithValidValue() {
         BigDecimal bd = new BigDecimal("123.4567");
         BigDecimal result = NumberUtil.toScaledBigDecimal(bd);
@@ -233,12 +350,18 @@ public class NumberUtilTest {
     }
 
     @Test
+    /**
+     * testToScaledBigDecimal_WithNull方法。
+     */
     public void testToScaledBigDecimal_WithNull() {
         BigDecimal result = NumberUtil.toScaledBigDecimal((Double) null);
         assertEquals(BigDecimal.ZERO, result);
     }
 
     @Test
+    /**
+     * testToScaledBigDecimal_WithScaleAndRoundingMode方法。
+     */
     public void testToScaledBigDecimal_WithScaleAndRoundingMode() {
         BigDecimal bd = new BigDecimal("123.4567");
         BigDecimal result = NumberUtil.toScaledBigDecimal(bd, 3, RoundingMode.HALF_UP);
@@ -249,6 +372,9 @@ public class NumberUtilTest {
     // --- toScaledBigDecimal with Float ---
 
     @Test
+    /**
+     * testToScaledBigDecimalWithFloat_WithValidValue方法。
+     */
     public void testToScaledBigDecimalWithFloat_WithValidValue() {
         BigDecimal result = NumberUtil.toScaledBigDecimal(123.45f);
         assertNotNull(result);
@@ -256,6 +382,9 @@ public class NumberUtilTest {
     }
 
     @Test
+    /**
+     * testToScaledBigDecimalWithFloat_WithNull方法。
+     */
     public void testToScaledBigDecimalWithFloat_WithNull() {
         BigDecimal result = NumberUtil.toScaledBigDecimal((Float) null);
         assertEquals(BigDecimal.ZERO, result);
@@ -264,6 +393,9 @@ public class NumberUtilTest {
     // --- Constants ---
 
     @Test
+    /**
+     * testConstants方法。
+     */
     public void testConstants() {
         assertEquals(Long.valueOf(0L), NumberUtil.LONG_ZERO);
         assertEquals(Long.valueOf(1L), NumberUtil.LONG_ONE);

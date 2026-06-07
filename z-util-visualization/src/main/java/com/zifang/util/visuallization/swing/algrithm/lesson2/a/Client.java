@@ -11,6 +11,9 @@ package com.zifang.util.visuallization.swing.algrithm.lesson2.a;
 /**
  * Client类。
  */
+/**
+ * Client类。
+ */
 public class Client {
 
     /**
@@ -18,6 +21,11 @@ public class Client {
      * 创建可视化场景并启动动画演示
      *
      * @param args 命令行参数（未使用）
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) {
         int sceneWidth = 800;

@@ -12,7 +12,14 @@ package com.zifang.util.zex.sort;
  * 在序列中对当前还未排序的数，自上而下对相邻的两个数依次进行比较和调整，让较大的数往下沉，较小的往上冒。
  * 即：每当两相邻的数比较后发现它们的排序与排序要求相反时，就将它们互换。
  */
+/**
+ * BubbleSort2类。
+ */
 public class BubbleSort2 {
+    /**
+     * sort方法。
+     *      * @param arr int[]类型参数
+     */
     public void sort(int[] arr) {
         int i, j, tmp, len = arr.length;
 
@@ -44,6 +51,10 @@ public class BubbleSort2 {
      * 冒泡排序改进
      *
      * @param arr 待排序数组
+     */
+    /**
+     * sortAdv方法。
+     *      * @param arr int[]类型参数
      */
     public void sortAdv(int[] arr) {
         int len = arr.length;

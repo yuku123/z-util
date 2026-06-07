@@ -9,15 +9,24 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.*;
 
+/**
+ * TerminalUtilTest类。
+ */
 public class TerminalUtilTest {
 
 
     @Test
+    /**
+     * test1方法。
+     */
     public void test1() throws IOException {
         System.out.println(TerminalUtil.runAndGetReturn("python3 /home/zifang/workplace/idea_workplace/aa.py 1 2"));
     }
 
     @Test
+    /**
+     * test2_1方法。
+     */
     public void test2_1() throws IOException {
         ExecutorService executor = Executors.newFixedThreadPool(10);
          // String baseFolder = "I:\\书籍合集\\13000本";
@@ -26,6 +35,9 @@ public class TerminalUtilTest {
         doFolder(baseFolder, executor);
     }
      @Test
+    /**
+     * test2_2方法。
+     */
     public void test2_2() throws IOException {
         ExecutorService executor = Executors.newFixedThreadPool(10);
 
@@ -51,6 +63,9 @@ public class TerminalUtilTest {
     }
 
     @Test
+    /**
+     * test2方法。
+     */
     public void test2() throws IOException {
 
 

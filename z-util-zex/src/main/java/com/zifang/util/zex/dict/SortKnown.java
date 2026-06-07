@@ -11,17 +11,26 @@ import java.util.stream.Collectors;
 /**
  * @author zifang
  */
+/**
+ * SortKnown类。
+ */
 public class SortKnown {
 
     static Pattern pattern = Pattern.compile("[0-9]*");
 
     @Test
+    /**
+     * showKnown方法。
+     */
     public void showKnown() {
         Set<String> set = getKownSet();
         set.forEach(System.out::println);
     }
 
     @Test
+    /**
+     * analysisPrinciple方法。
+     */
     public void analysisPrinciple() {
 
         List<String> strings = getPrincipleSet();
@@ -30,6 +39,9 @@ public class SortKnown {
     }
 
     @Test
+    /**
+     * minus方法。
+     */
     public void minus() {
         Set<String> kownSet = getKownSet();
         List<String> principleSet = getPrincipleSet();
@@ -88,6 +100,11 @@ public class SortKnown {
     }
 
 
+    /**
+     * isStartWithNumber方法。
+     *      * @param str String类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isStartWithNumber(String str) {
         Matcher isNum = pattern.matcher(str.charAt(0) + "");
         if (!isNum.matches()) {

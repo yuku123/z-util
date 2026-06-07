@@ -16,12 +16,18 @@ import static org.junit.Assert.*;
  * <p>
  * 验证流程：解析 Java 源码 → ClassInfo → 生成源码 → 比较
  */
+/**
+ * SourceParserGeneratorTest类。
+ */
 public class SourceParserGeneratorTest {
 
     /**
      * 测试1: 解析 → 生成 → 再解析 → 比较 ClassInfo
      */
     @Test
+    /**
+     * testFullRoundTrip方法。
+     */
     public void testFullRoundTrip() throws Exception {
         String originalSource =
                 "package com.test;\n" +
@@ -61,6 +67,9 @@ public class SourceParserGeneratorTest {
      * 测试2: 复杂类 - 带父类、接口、多个方法
      */
     @Test
+    /**
+     * testComplexClass方法。
+     */
     public void testComplexClass() {
         String source =
                 "package com.example;\n" +
@@ -98,6 +107,9 @@ public class SourceParserGeneratorTest {
      * 测试3: 枚举解析
      */
     @Test
+    /**
+     * testEnumParsing方法。
+     */
     public void testEnumParsing() {
         String source =
                 "package com.example;\n" +
@@ -140,6 +152,9 @@ public class SourceParserGeneratorTest {
      * 测试4: 注解解析
      */
     @Test
+    /**
+     * testAnnotationParsing方法。
+     */
     public void testAnnotationParsing() {
         String source =
                 "package com.example;\n" +
@@ -169,6 +184,9 @@ public class SourceParserGeneratorTest {
      * 测试5: 带注解的类解析
      */
     @Test
+    /**
+     * testClassWithAnnotations方法。
+     */
     public void testClassWithAnnotations() {
         String source =
                 "package com.example;\n" +
@@ -213,6 +231,9 @@ public class SourceParserGeneratorTest {
      * 测试6: 内部类解析
      */
     @Test
+    /**
+     * testInnerClassParsing方法。
+     */
     public void testInnerClassParsing() {
         String source =
                 "package com.example;\n" +
@@ -257,6 +278,9 @@ public class SourceParserGeneratorTest {
      * 测试7: 完整循环 - 枚举
      */
     @Test
+    /**
+     * testEnumRoundTrip方法。
+     */
     public void testEnumRoundTrip() {
         String source =
                 "package com.example;\n" +
@@ -294,6 +318,9 @@ public class SourceParserGeneratorTest {
      * 测试8: 完整循环 - 带注解的类
      */
     @Test
+    /**
+     * testAnnotatedClassRoundTrip方法。
+     */
     public void testAnnotatedClassRoundTrip() {
         String source =
                 "package com.example;\n" +

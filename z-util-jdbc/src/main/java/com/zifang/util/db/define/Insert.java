@@ -25,5 +25,8 @@ package com.zifang.util.db.define;
 /**
  * Insert注解。
  */
+/**
+ * Insert注解。
+ */
 public @interface Insert {
 }

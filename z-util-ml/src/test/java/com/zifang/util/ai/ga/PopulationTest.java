@@ -9,9 +9,15 @@ import static org.junit.Assert.*;
 /**
  * Population 类测试
  */
+/**
+ * PopulationTest类。
+ */
 public class PopulationTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         Population population = new Population();
         assertNotNull(population);
@@ -20,6 +26,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testConstructorWithSize方法。
+     */
     public void testConstructorWithSize() {
         Population population = new Population(10);
         assertNotNull(population);
@@ -27,6 +36,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testAddIndividual方法。
+     */
     public void testAddIndividual() {
         Population population = new Population();
         Individual individual = new Individual(5);
@@ -37,6 +49,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testAddMultipleIndividuals方法。
+     */
     public void testAddMultipleIndividuals() {
         Population population = new Population();
 
@@ -48,6 +63,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testGetIndividual方法。
+     */
     public void testGetIndividual() {
         Population population = new Population();
         Individual individual1 = new Individual(5);
@@ -63,6 +81,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testSetIndividual方法。
+     */
     public void testSetIndividual() {
         Population population = new Population();
         Individual original = new Individual(5);
@@ -75,6 +96,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testGetIndividuals方法。
+     */
     public void testGetIndividuals() {
         Population population = new Population();
         Individual ind1 = new Individual(5);
@@ -89,12 +113,18 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testGetTotalFitness方法。
+     */
     public void testGetTotalFitness() {
         Population population = new Population();
         assertEquals(-1, population.getTotalFitness(), 0.0001);
     }
 
     @Test
+    /**
+     * testSetTotalFitness方法。
+     */
     public void testSetTotalFitness() {
         Population population = new Population();
         population.setTotalFitness(100.0);
@@ -102,6 +132,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testCalculateTotalFitness方法。
+     */
     public void testCalculateTotalFitness() {
         Population population = new Population();
         Individual ind1 = new Individual(5);
@@ -117,6 +150,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testGetFittest方法。
+     */
     public void testGetFittest() {
         Population population = new Population();
         Individual ind1 = new Individual(5);
@@ -131,6 +167,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testGetFittestOffset方法。
+     */
     public void testGetFittestOffset() {
         Population population = new Population();
         Individual ind1 = new Individual(5);
@@ -145,6 +184,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testRouletteSelect方法。
+     */
     public void testRouletteSelect() {
         Population population = new Population();
         for (int i = 0; i < 5; i++) {
@@ -160,6 +202,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testRouletteSelectWithZeroFitness方法。
+     */
     public void testRouletteSelectWithZeroFitness() {
         Population population = new Population();
         for (int i = 0; i < 3; i++) {
@@ -171,6 +216,9 @@ public class PopulationTest {
     }
 
     @Test
+    /**
+     * testShuffle方法。
+     */
     public void testShuffle() {
         Population population = new Population();
         for (int i = 0; i < 10; i++) {

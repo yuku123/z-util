@@ -21,16 +21,28 @@ class Test {
     private static Test1 staticTest1 = new Test1("staticTest1");
     private Test1 test1 = new Test1("Test1");
 
+    /**
+     * Test方法。
+     */
     public Test() {
         System.out.println("Test()");
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Test test = new Test();
     }
 }
 
 class Test1 {
+    /**
+     * Test1方法。
+     *      * @param str String类型参数
+     */
     public Test1(String str) {
         System.out.println("test1(" + str + ")");
     }

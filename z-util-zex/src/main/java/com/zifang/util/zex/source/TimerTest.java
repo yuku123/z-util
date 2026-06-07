@@ -12,11 +12,22 @@ import java.util.TimerTask;
  * @author zifang
  * @version 1.0
  */
+/**
+ * TimerTest类。
+ */
 public class TimerTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 System.out.println("执行："+System.currentTimeMillis());
             }

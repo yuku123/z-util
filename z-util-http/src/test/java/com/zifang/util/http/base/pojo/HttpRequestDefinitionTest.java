@@ -5,9 +5,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * HttpRequestDefinitionTest类。
+ */
 public class HttpRequestDefinitionTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         assertNull(definition.getHttpRequestLine());
@@ -16,6 +22,9 @@ public class HttpRequestDefinitionTest {
     }
 
     @Test
+    /**
+     * testSettersAndGetters方法。
+     */
     public void testSettersAndGetters() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         
@@ -39,6 +48,9 @@ public class HttpRequestDefinitionTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
         HttpRequestLine requestLine = new HttpRequestLine();
@@ -51,6 +63,9 @@ public class HttpRequestDefinitionTest {
     }
 
     @Test
+    /**
+     * testEqualsWithSameContent方法。
+     */
     public void testEqualsWithSameContent() {
         HttpRequestDefinition def1 = new HttpRequestDefinition();
         HttpRequestDefinition def2 = new HttpRequestDefinition();
@@ -66,6 +81,9 @@ public class HttpRequestDefinitionTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentContent方法。
+     */
     public void testEqualsWithDifferentContent() {
         HttpRequestDefinition def1 = new HttpRequestDefinition();
         HttpRequestLine line1 = new HttpRequestLine();
@@ -81,12 +99,18 @@ public class HttpRequestDefinitionTest {
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         HttpRequestDefinition def1 = new HttpRequestDefinition();
         assertNotEquals(null, def1);
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         HttpRequestDefinition def1 = new HttpRequestDefinition();
         HttpRequestDefinition def2 = new HttpRequestDefinition();

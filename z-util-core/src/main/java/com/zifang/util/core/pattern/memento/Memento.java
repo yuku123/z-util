@@ -9,6 +9,9 @@ package com.zifang.util.core.pattern.memento;
 /**
  * Memento接口。
  */
+/**
+ * Memento接口。
+ */
 public interface Memento<T> {
 
     /**

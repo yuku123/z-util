@@ -11,6 +11,9 @@ import static org.junit.Assert.*;
 /**
  * BeautifyJsonUtils 美化输出测试
  */
+/**
+ * BeautifyJsonUtilsTest类。
+ */
 public class BeautifyJsonUtilsTest {
 
     private JSONParser jsonParser = new JSONParser();
@@ -26,6 +29,9 @@ public class BeautifyJsonUtilsTest {
     // ===== 正常美化 =====
 
     @Test
+    /**
+     * testBeautifyEmptyObject方法。
+     */
     public void testBeautifyEmptyObject() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseObject("{}"));
         assertTrue(result.contains("{"));
@@ -34,6 +40,9 @@ public class BeautifyJsonUtilsTest {
     }
 
     @Test
+    /**
+     * testBeautifyEmptyArray方法。
+     */
     public void testBeautifyEmptyArray() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseArray("[]"));
         assertTrue(result.contains("["));
@@ -42,6 +51,9 @@ public class BeautifyJsonUtilsTest {
     }
 
     @Test
+    /**
+     * testBeautifySimpleObject方法。
+     */
     public void testBeautifySimpleObject() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseObject("{\"name\": \"zifang\", \"age\": 30}"));
         assertTrue(result.contains("\"name\""));
@@ -51,6 +63,9 @@ public class BeautifyJsonUtilsTest {
     }
 
     @Test
+    /**
+     * testBeautifyNestedObject方法。
+     */
     public void testBeautifyNestedObject() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseObject("{\"person\": {\"name\": \"alice\"}}"));
         assertTrue(result.contains("\"person\""));
@@ -59,6 +74,9 @@ public class BeautifyJsonUtilsTest {
     }
 
     @Test
+    /**
+     * testBeautifyArrayOfPrimitives方法。
+     */
     public void testBeautifyArrayOfPrimitives() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseArray("[\"a\", \"b\", \"c\"]"));
         assertTrue(result.contains("\"a\""));
@@ -67,6 +85,9 @@ public class BeautifyJsonUtilsTest {
     }
 
     @Test
+    /**
+     * testBeautifyArrayOfObjects方法。
+     */
     public void testBeautifyArrayOfObjects() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseArray("[{\"name\": \"a\"}, {\"name\": \"b\"}]"));
         assertTrue(result.contains("\"name\""));
@@ -77,6 +98,9 @@ public class BeautifyJsonUtilsTest {
     // ===== null 值处理 =====
 
     @Test
+    /**
+     * testBeautifyNullValue方法。
+     */
     public void testBeautifyNullValue() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseObject("{\"a\": null}"));
         assertTrue(result.contains("null"));
@@ -84,6 +108,9 @@ public class BeautifyJsonUtilsTest {
     }
 
     @Test
+    /**
+     * testBeautifyNullInArray方法。
+     */
     public void testBeautifyNullInArray() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseArray("[null, \"a\"]"));
         assertTrue(result.contains("null"));
@@ -92,6 +119,9 @@ public class BeautifyJsonUtilsTest {
     // ===== 多次调用 callDepth 不累积 =====
 
     @Test
+    /**
+     * testBeautifyMultipleCallsNoDepthLeak方法。
+     */
     public void testBeautifyMultipleCallsNoDepthLeak() throws Exception {
         // 连续调用不应因 static callDepth 累积而缩进错误
         String r1 = BeautifyJsonUtils.beautify(parseObject("{\"a\": 1}"));
@@ -104,6 +134,9 @@ public class BeautifyJsonUtilsTest {
     }
 
     @Test
+    /**
+     * testBeautifyThreeNestedObjects方法。
+     */
     public void testBeautifyThreeNestedObjects() throws Exception {
         String result = BeautifyJsonUtils.beautify(parseObject("{\"a\": {\"b\": {\"c\": 1}}}"));
         // 缩进深度逐层增加

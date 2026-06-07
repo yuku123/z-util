@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * ExcelUtils工具类的单元测试
  */
+/**
+ * ExcelUtilsTest类。
+ */
 public class ExcelUtilsTest {
 
     @Test
+    /**
+     * testClassExists方法。
+     */
     public void testClassExists() {
         // Verify the class can be instantiated
         ExcelUtils excelUtils = new ExcelUtils();

@@ -13,6 +13,9 @@ import java.util.List;
 /**
  * AnnotationInfo类。
  */
+/**
+ * AnnotationInfo类。
+ */
 public class AnnotationInfo {
 
     /**
@@ -28,9 +31,16 @@ public class AnnotationInfo {
     /**
      * AnnotationInfo方法。
      */
+    /**
+     * AnnotationInfo方法。
+     */
     public AnnotationInfo() {
     }
 
+    /**
+     * AnnotationInfo方法。
+     *      * @param type String类型参数
+     */
     /**
      * AnnotationInfo方法。
      *      * @param type String类型参数
@@ -43,10 +53,18 @@ public class AnnotationInfo {
      * getType方法。
      * @return String类型返回值
      */
+    /**
+     * getType方法。
+     * @return String类型返回值
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * setType方法。
+     *      * @param type String类型参数
+     */
     /**
      * setType方法。
      *      * @param type String类型参数
@@ -59,10 +77,18 @@ public class AnnotationInfo {
      * getMembers方法。
      * @return List<AnnotationMember>类型返回值
      */
+    /**
+     * getMembers方法。
+     * @return List<AnnotationMember>类型返回值
+     */
     public List<AnnotationMember> getMembers() {
         return members;
     }
 
+    /**
+     * setMembers方法。
+     *      * @param members ListAnnotationMember类型参数
+     */
     /**
      * setMembers方法。
      *      * @param members ListAnnotationMember类型参数
@@ -76,11 +102,20 @@ public class AnnotationInfo {
      *      * @param name String类型参数
      * @param value String类型参数
      */
+    /**
+     * addMember方法。
+     *      * @param name String类型参数
+     * @param value String类型参数
+     */
     public void addMember(String name, String value) {
         members.add(new AnnotationMember(name, value));
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -113,9 +148,17 @@ public class AnnotationInfo {
     /**
      * AnnotationMember方法。
      */
+    /**
+     * AnnotationMember方法。
+     */
         public AnnotationMember() {
         }
 
+    /**
+     * AnnotationMember方法。
+     *      * @param name String类型参数
+     * @param value String类型参数
+     */
     /**
      * AnnotationMember方法。
      *      * @param name String类型参数
@@ -130,10 +173,18 @@ public class AnnotationInfo {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
         public String getName() {
             return name;
         }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
     /**
      * setName方法。
      *      * @param name String类型参数
@@ -146,10 +197,18 @@ public class AnnotationInfo {
      * getValue方法。
      * @return String类型返回值
      */
+    /**
+     * getValue方法。
+     * @return String类型返回值
+     */
         public String getValue() {
             return value;
         }
 
+    /**
+     * setValue方法。
+     *      * @param value String类型参数
+     */
     /**
      * setValue方法。
      *      * @param value String类型参数

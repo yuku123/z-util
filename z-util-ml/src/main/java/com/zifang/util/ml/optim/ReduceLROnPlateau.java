@@ -19,8 +19,14 @@ package com.zifang.util.ml.optim;
 /**
  * ReduceLROnPlateau类。
  */
+/**
+ * ReduceLROnPlateau类。
+ */
 public class ReduceLROnPlateau implements LrScheduler {
     
+/**
+ * Mode枚举。
+ */
 /**
  * Mode枚举。
  */
@@ -49,10 +55,24 @@ public class ReduceLROnPlateau implements LrScheduler {
      * ReduceLROnPlateau方法。
      *      * @param optimizer Optimizer类型参数
      */
+    /**
+     * ReduceLROnPlateau方法。
+     *      * @param optimizer Optimizer类型参数
+     */
     public ReduceLROnPlateau(Optimizer optimizer) {
         this(optimizer, Mode.MIN, 0.1, 10, 1e-4, 1e-8, true);
     }
     
+    /**
+     * ReduceLROnPlateau方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param mode Mode类型参数
+     * @param factor double类型参数
+     * @param patience int类型参数
+     * @param threshold double类型参数
+     * @param minDelta double类型参数
+     * @param verbose boolean类型参数
+     */
     /**
      * ReduceLROnPlateau方法。
      *      * @param optimizer Optimizer类型参数
@@ -91,6 +111,16 @@ public class ReduceLROnPlateau implements LrScheduler {
      * @param minDelta double类型参数
      * @param verbose boolean类型参数
      */
+    /**
+     * ReduceLROnPlateau方法。
+     *      * @param optimizer Optimizer类型参数
+     * @param mode String类型参数
+     * @param factor double类型参数
+     * @param patience int类型参数
+     * @param threshold double类型参数
+     * @param minDelta double类型参数
+     * @param verbose boolean类型参数
+     */
     public ReduceLROnPlateau(Optimizer optimizer, String mode, double factor, int patience,
                               double threshold, double minDelta, boolean verbose) {
         this(optimizer, 
@@ -99,6 +129,10 @@ public class ReduceLROnPlateau implements LrScheduler {
     }
     
     @Override
+    /**
+     * step方法。
+     *      * @param metric double类型参数
+     */
     /**
      * step方法。
      *      * @param metric double类型参数
@@ -162,6 +196,9 @@ public class ReduceLROnPlateau implements LrScheduler {
     /**
      * step方法。
      */
+    /**
+     * step方法。
+     */
     public void step() {
         // Default implementation does nothing
         // Must call step(double metric) with actual metric
@@ -172,12 +209,20 @@ public class ReduceLROnPlateau implements LrScheduler {
      * getLastLR方法。
      * @return double类型返回值
      */
+    /**
+     * getLastLR方法。
+     * @return double类型返回值
+     */
     public double getLastLR() {
         return optimizer.getLearningRate();
     }
     
     /**
      * Get the current epoch.
+     */
+    /**
+     * getEpoch方法。
+     * @return int类型返回值
      */
     /**
      * getEpoch方法。
@@ -194,12 +239,20 @@ public class ReduceLROnPlateau implements LrScheduler {
      * getBestMetric方法。
      * @return double类型返回值
      */
+    /**
+     * getBestMetric方法。
+     * @return double类型返回值
+     */
     public double getBestMetric() {
         return bestMetric;
     }
     
     /**
      * Get the number of bad epochs.
+     */
+    /**
+     * getNumBadEpochs方法。
+     * @return int类型返回值
      */
     /**
      * getNumBadEpochs方法。
@@ -216,12 +269,20 @@ public class ReduceLROnPlateau implements LrScheduler {
      * isInCooldown方法。
      * @return boolean类型返回值
      */
+    /**
+     * isInCooldown方法。
+     * @return boolean类型返回值
+     */
     public boolean isInCooldown() {
         return inCooldown;
     }
     
     /**
      * Get the factor for reducing learning rate.
+     */
+    /**
+     * getFactor方法。
+     * @return double类型返回值
      */
     /**
      * getFactor方法。
@@ -238,6 +299,10 @@ public class ReduceLROnPlateau implements LrScheduler {
      * getPatience方法。
      * @return int类型返回值
      */
+    /**
+     * getPatience方法。
+     * @return int类型返回值
+     */
     public int getPatience() {
         return patience;
     }
@@ -249,12 +314,19 @@ public class ReduceLROnPlateau implements LrScheduler {
      * getMode方法。
      * @return Mode类型返回值
      */
+    /**
+     * getMode方法。
+     * @return Mode类型返回值
+     */
     public Mode getMode() {
         return mode;
     }
     
     /**
      * Reset the scheduler state.
+     */
+    /**
+     * reset方法。
      */
     /**
      * reset方法。

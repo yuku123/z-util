@@ -23,6 +23,9 @@ import java.util.Set;
 /**
  * GarbageCollectorMXBeanDemo类。
  */
+/**
+ * GarbageCollectorMXBeanDemo类。
+ */
 public class GarbageCollectorMXBeanDemo {
 
 
@@ -37,6 +40,10 @@ public class GarbageCollectorMXBeanDemo {
      *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
      *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
      * </ul>
+     */
+    /**
+     * getRemoteGarbageCollectorMXBean方法。
+     * @return static void类型返回值
      */
     /**
      * getRemoteGarbageCollectorMXBean方法。
@@ -86,6 +93,10 @@ public class GarbageCollectorMXBeanDemo {
      * getLocalGarbageCollectorMXBean方法。
      * @return static void类型返回值
      */
+    /**
+     * getLocalGarbageCollectorMXBean方法。
+     * @return static void类型返回值
+     */
     public static void getLocalGarbageCollectorMXBean() {
         List<GarbageCollectorMXBean> list = ManagementFactory.getGarbageCollectorMXBeans();
         if (list != null) {
@@ -104,6 +115,11 @@ public class GarbageCollectorMXBeanDemo {
      * 主方法，演示获取JVM垃圾回收器信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

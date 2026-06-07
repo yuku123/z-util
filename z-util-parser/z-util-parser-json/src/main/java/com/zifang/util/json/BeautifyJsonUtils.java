@@ -11,6 +11,9 @@ import java.util.Map;
  *
  * @author zifang
  */
+/**
+ * BeautifyJsonUtils类。
+ */
 public class BeautifyJsonUtils {
 
     private static final char SPACE_CHAR = ' ';
@@ -24,6 +27,11 @@ public class BeautifyJsonUtils {
      *
      * @param jsonObject 待美化的 JsonObject 对象
      * @return 格式化后的 JSON 字符串
+     */
+    /**
+     * beautify方法。
+     *      * @param jsonObject JsonObject类型参数
+     * @return static String类型返回值
      */
     public static String beautify(JsonObject jsonObject) {
 
@@ -79,6 +87,11 @@ public class BeautifyJsonUtils {
      *
      * @param jsonArray 待美化的 JsonArray 对象
      * @return 格式化后的 JSON 字符串
+     */
+    /**
+     * beautify方法。
+     *      * @param jsonArray JsonArray类型参数
+     * @return static String类型返回值
      */
     public static String beautify(JsonArray jsonArray) {
         StringBuilder sb = new StringBuilder();

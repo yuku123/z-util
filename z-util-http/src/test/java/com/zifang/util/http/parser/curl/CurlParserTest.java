@@ -9,9 +9,15 @@ import static org.junit.Assert.*;
 /**
  * cURL 解析器测试类
  */
+/**
+ * CurlParserTest类。
+ */
 public class CurlParserTest {
 
     @Test
+    /**
+     * testSimpleGet方法。
+     */
     public void testSimpleGet() {
         String curl = "curl https://api.example.com/users";
 
@@ -24,6 +30,9 @@ public class CurlParserTest {
     }
 
     @Test
+    /**
+     * testGetWithHeaders方法。
+     */
     public void testGetWithHeaders() {
         String curl = "curl -H 'Accept: application/json' -H 'Authorization: Bearer token123' https://api.example.com/users";
 
@@ -36,6 +45,9 @@ public class CurlParserTest {
     }
 
     @Test
+    /**
+     * testPostWithJson方法。
+     */
     public void testPostWithJson() {
         String curl = "curl -X POST -H 'Content-Type: application/json' -d '{\"name\":\"张三\",\"age\":25}' https://api.example.com/users";
 
@@ -49,6 +61,9 @@ public class CurlParserTest {
     }
 
     @Test
+    /**
+     * testBasicAuth方法。
+     */
     public void testBasicAuth() {
         String curl = "curl -u username:password https://api.example.com/protected";
 
@@ -60,6 +75,9 @@ public class CurlParserTest {
     }
 
     @Test
+    /**
+     * testCookies方法。
+     */
     public void testCookies() {
         String curl = "curl -b 'session=abc123; user=john' https://api.example.com/users";
 
@@ -70,6 +88,9 @@ public class CurlParserTest {
     }
 
     @Test
+    /**
+     * testPutRequest方法。
+     */
     public void testPutRequest() {
         String curl = "curl -X PUT -d 'name=updated' https://api.example.com/users/123";
 
@@ -80,6 +101,9 @@ public class CurlParserTest {
     }
 
     @Test
+    /**
+     * testDeleteRequest方法。
+     */
     public void testDeleteRequest() {
         String curl = "curl -X DELETE https://api.example.com/users/123";
 
@@ -89,6 +113,9 @@ public class CurlParserTest {
     }
 
     @Test
+    /**
+     * testQuotedUrl方法。
+     */
     public void testQuotedUrl() {
         String curl = "curl 'https://api.example.com/users?name=John&age=25'";
 
@@ -98,6 +125,9 @@ public class CurlParserTest {
     }
 
     @Test
+    /**
+     * testFormData方法。
+     */
     public void testFormData() {
         String curl = "curl -X POST -d 'name=John&age=25' https://api.example.com/users";
 
@@ -109,16 +139,25 @@ public class CurlParserTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testEmptyCommand方法。
+     */
     public void testEmptyCommand() {
         CurlParser.parse("");
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testNullCommand方法。
+     */
     public void testNullCommand() {
         CurlParser.parse(null);
     }
 
     @Test
+    /**
+     * testRoundTrip方法。
+     */
     public void testRoundTrip() {
         String originalCurl = "curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer token' -d '{\"name\":\"test\"}' https://api.example.com/users";
 

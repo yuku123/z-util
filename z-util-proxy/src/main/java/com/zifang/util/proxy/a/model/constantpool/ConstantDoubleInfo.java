@@ -13,9 +13,16 @@ import java.io.InputStream;
 /**
  * ConstantDoubleInfo类。
  */
+/**
+ * ConstantDoubleInfo类。
+ */
 public class ConstantDoubleInfo extends AbstractConstantPool {
     private U8 bytes;
 
+    /**
+     * ConstantDoubleInfo方法。
+     *      * @param tag byte类型参数
+     */
     /**
      * ConstantDoubleInfo方法。
      *      * @param tag byte类型参数
@@ -28,10 +35,18 @@ public class ConstantDoubleInfo extends AbstractConstantPool {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     public void read(InputStream inputStream) {
         this.bytes = U8.read(inputStream);
     }
 
+    /**
+     * getBytes方法。
+     * @return U8类型返回值
+     */
     /**
      * getBytes方法。
      * @return U8类型返回值

@@ -9,7 +9,15 @@ package com.zifang.util.zex.bust.chapter3;
  * @author zifang
  * @version 1.0
  */
+/**
+ * DoWhileTest类。
+ */
 public class DoWhileTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         int i = 0;
         do {

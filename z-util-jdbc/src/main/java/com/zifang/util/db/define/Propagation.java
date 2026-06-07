@@ -6,6 +6,9 @@ package com.zifang.util.db.define;
 /**
  * Propagation枚举。
  */
+/**
+ * Propagation枚举。
+ */
 public enum Propagation {
 
     /**

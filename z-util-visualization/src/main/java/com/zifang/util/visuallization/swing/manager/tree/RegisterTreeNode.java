@@ -11,6 +11,9 @@ import java.util.Objects;
 /**
  * RegisterTreeNode类。
  */
+/**
+ * RegisterTreeNode类。
+ */
 public class RegisterTreeNode {
 
     private List<TreeNode> treeNodes = new ArrayList<>();
@@ -18,12 +21,19 @@ public class RegisterTreeNode {
     /**
      * 创建树节点注册器
      */
+    /**
+     * RegisterTreeNode方法。
+     */
     public RegisterTreeNode() {
     }
 
     /**
      * 获取所有注册的节点
      * @return 节点列表
+     */
+    /**
+     * getTreeNodes方法。
+     * @return List<TreeNode>类型返回值
      */
     public List<TreeNode> getTreeNodes() {
         return treeNodes;
@@ -33,6 +43,10 @@ public class RegisterTreeNode {
      * 设置节点列表
      * @param treeNodes 节点列表
      */
+    /**
+     * setTreeNodes方法。
+     *      * @param treeNodes ListTreeNode类型参数
+     */
     public void setTreeNodes(List<TreeNode> treeNodes) {
         this.treeNodes = treeNodes;
     }
@@ -41,6 +55,11 @@ public class RegisterTreeNode {
      * 注册一个节点（支持链式调用）
      * @param treeNode 要注册的节点
      * @return 当前注册器实例
+     */
+    /**
+     * register方法。
+     *      * @param treeNode TreeNode类型参数
+     * @return RegisterTreeNode类型返回值
      */
     public RegisterTreeNode register(TreeNode treeNode) {
         treeNodes.add(treeNode);
@@ -53,6 +72,10 @@ public class RegisterTreeNode {
      * @return 包含所有树节点的字符串
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "RegisterTreeNode{treeNodes=" + treeNodes + "}";
     }
@@ -65,6 +88,11 @@ public class RegisterTreeNode {
      * @return 如果树节点列表相同返回true，否则返回false
      */
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -79,6 +107,10 @@ public class RegisterTreeNode {
      * @return 哈希码值
      */
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return Objects.hash(treeNodes);
     }

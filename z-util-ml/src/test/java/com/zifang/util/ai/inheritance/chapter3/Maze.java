@@ -19,10 +19,17 @@ import java.util.ArrayList;
  *
  * @author zifang
  */
+/**
+ * Maze类。
+ */
 public class Maze {
     private final int[][] maze;
     private int[] startPosition = {-1, -1};
 
+    /**
+     * Maze方法。
+     *      * @param maze int[][]类型参数
+     */
     public Maze(int[][] maze) {
         this.maze = maze;
     }
@@ -31,6 +38,10 @@ public class Maze {
      * Get start position of maze
      *
      * @return int[] x,y start position of maze
+     */
+    /**
+     * getStartPosition方法。
+     * @return int[]类型返回值
      */
     public int[] getStartPosition() {
         // Check we already found start position
@@ -63,6 +74,12 @@ public class Maze {
      * @param y position
      * @return int Position value
      */
+    /**
+     * getPositionValue方法。
+     *      * @param x int类型参数
+     * @param y int类型参数
+     * @return int类型返回值
+     */
     public int getPositionValue(int x, int y) {
         if (x < 0 || y < 0 || x >= this.maze.length || y >= this.maze[0].length) {
             return 1;
@@ -77,6 +94,12 @@ public class Maze {
      * @param y position
      * @return boolean
      */
+    /**
+     * isWall方法。
+     *      * @param x int类型参数
+     * @param y int类型参数
+     * @return boolean类型返回值
+     */
     public boolean isWall(int x, int y) {
         return (this.getPositionValue(x, y) == 1);
     }
@@ -86,6 +109,10 @@ public class Maze {
      *
      * @return int Max index
      */
+    /**
+     * getMaxX方法。
+     * @return int类型返回值
+     */
     public int getMaxX() {
         return this.maze[0].length - 1;
     }
@@ -94,6 +121,10 @@ public class Maze {
      * Gets maximum index of y position
      *
      * @return int Max index
+     */
+    /**
+     * getMaxY方法。
+     * @return int类型返回值
      */
     public int getMaxY() {
         return this.maze.length - 1;
@@ -108,6 +139,11 @@ public class Maze {
      * back and forth on the route.
      *
      * @return int Max index
+     */
+    /**
+     * scoreRoute方法。
+     *      * @param route ArrayListint[]类型参数
+     * @return int类型返回值
      */
     public int scoreRoute(ArrayList<int[]> route) {
         int score = 0;

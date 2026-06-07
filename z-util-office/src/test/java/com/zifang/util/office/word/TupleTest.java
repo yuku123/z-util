@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * Tuple键值对泛型类的单元测试
  */
+/**
+ * TupleTest类。
+ */
 public class TupleTest {
 
     @Test
+    /**
+     * testConstructorAndGetters方法。
+     */
     public void testConstructorAndGetters() {
         Tuple<String, Integer> tuple = new Tuple<>("key1", 100);
         
@@ -18,6 +24,9 @@ public class TupleTest {
     }
 
     @Test
+    /**
+     * testSetters方法。
+     */
     public void testSetters() {
         Tuple<String, String> tuple = new Tuple<>(null, null);
         
@@ -29,6 +38,9 @@ public class TupleTest {
     }
 
     @Test
+    /**
+     * testDifferentTypes方法。
+     */
     public void testDifferentTypes() {
         Tuple<Integer, Boolean> tuple = new Tuple<>(42, true);
         

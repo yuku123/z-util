@@ -14,10 +14,18 @@ import java.io.InputStream;
 /**
  * SourceFile类。
  */
+/**
+ * SourceFile类。
+ */
 public class SourceFile extends AbstractAttribute {
     private U2 sourceFileIndex;//java源文件名称
 
 
+    /**
+     * SourceFile方法。
+     *      * @param attributeNameIndex U2类型参数
+     * @param attributeLength U4类型参数
+     */
     /**
      * SourceFile方法。
      *      * @param attributeNameIndex U2类型参数
@@ -32,6 +40,10 @@ public class SourceFile extends AbstractAttribute {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     public void read(InputStream inputStream) {
 
     }
@@ -40,10 +52,18 @@ public class SourceFile extends AbstractAttribute {
      * getSourceFileIndex方法。
      * @return U2类型返回值
      */
+    /**
+     * getSourceFileIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getSourceFileIndex() {
         return sourceFileIndex;
     }
 
+    /**
+     * setSourceFileIndex方法。
+     *      * @param sourceFileIndex U2类型参数
+     */
     /**
      * setSourceFileIndex方法。
      *      * @param sourceFileIndex U2类型参数

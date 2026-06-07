@@ -16,8 +16,16 @@ import java.util.Set;
 /**
  * SequenceTest类。
  */
+/**
+ * SequenceTest类。
+ */
 public class SequenceTest {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     /**
      * main方法。
      *      * @param args String[]类型参数
@@ -49,12 +57,20 @@ public class SequenceTest {
      *      * @param set SetLong类型参数
      * @param idWorker Sequence类型参数
      */
+    /**
+     * IdWorkThread方法。
+     *      * @param set SetLong类型参数
+     * @param idWorker Sequence类型参数
+     */
         public IdWorkThread(Set<Long> set, Sequence idWorker) {
             this.set = set;
             this.idWorker = idWorker;
         }
 
         @Override
+    /**
+     * run方法。
+     */
     /**
      * run方法。
      */

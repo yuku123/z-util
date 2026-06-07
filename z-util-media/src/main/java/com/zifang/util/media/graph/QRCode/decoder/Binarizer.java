@@ -25,6 +25,12 @@ public final class Binarizer {
      * @param threshold int类型参数
      * @return static BitMatrix类型返回值
      */
+    /**
+     * binarize方法。
+     *      * @param image BufferedImage类型参数
+     * @param threshold int类型参数
+     * @return static BitMatrix类型返回值
+     */
     public static BitMatrix binarize(BufferedImage image, int threshold) {
         int width = image.getWidth();
         int height = image.getHeight();
@@ -46,6 +52,11 @@ public final class Binarizer {
 
     /**
      * Converts an image to a binary matrix using Otsu's automatic threshold.
+     */
+    /**
+     * binarize方法。
+     *      * @param image BufferedImage类型参数
+     * @return static BitMatrix类型返回值
      */
     /**
      * binarize方法。

@@ -12,7 +12,15 @@ import java.util.*;
  * @author zifang Horstmann
  * @version 1.00 2007-10-28
  */
+/**
+ * CompilerTest类。
+ */
 public class CompilerTest {
+    /**
+     * main方法。
+     *      * @param args final类型参数
+     * @return static void类型返回值
+     */
     public static void main(final String[] args) throws IOException, ClassNotFoundException {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
@@ -22,6 +30,14 @@ public class CompilerTest {
 
         JavaFileManager fileManager = compiler.getStandardFileManager(diagnostics, null, null);
         fileManager = new ForwardingJavaFileManager<JavaFileManager>(fileManager) {
+    /**
+     * getJavaFileForOutput方法。
+     *      * @param location Location类型参数
+     * @param className final类型参数
+     * @param kind Kind类型参数
+     * @param sibling FileObject类型参数
+     * @return JavaFileObject类型返回值
+     */
             public JavaFileObject getJavaFileForOutput(Location location, final String className,
                                                        Kind kind, FileObject sibling) throws IOException {
                 System.out.println("fileManager----" + className);
@@ -49,6 +65,9 @@ public class CompilerTest {
         }
 
         EventQueue.invokeLater(new Runnable() {
+    /**
+     * run方法。
+     */
             public void run() {
                 try {
                     Map<String, byte[]> byteCodeMap = new HashMap<>();

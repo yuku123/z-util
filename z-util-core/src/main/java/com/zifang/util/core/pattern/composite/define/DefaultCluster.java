@@ -11,4 +11,7 @@ package com.zifang.util.core.pattern.composite.define;
 /**
  * DefaultCluster类。
  */
+/**
+ * DefaultCluster类。
+ */
 public class DefaultCluster extends AbstractCluster {}

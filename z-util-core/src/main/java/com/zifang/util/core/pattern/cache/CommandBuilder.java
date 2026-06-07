@@ -8,6 +8,9 @@ package com.zifang.util.core.pattern.cache;
 /**
  * CommandBuilder类。
  */
+/**
+ * CommandBuilder类。
+ */
 public class CommandBuilder {
 
 }

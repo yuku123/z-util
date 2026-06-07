@@ -12,7 +12,16 @@ package com.zifang.util.zex.leetcode;
 import java.util.Arrays;
 import java.util.HashSet;
 
+/**
+ * _205类。
+ */
 public class _205 {
+    /**
+     * isIsomorphic方法。
+     *      * @param s String类型参数
+     * @param t String类型参数
+     * @return boolean类型返回值
+     */
     public boolean isIsomorphic(String s, String t) {
 
         HashSet<Character> h1 = new HashSet<>();
@@ -28,6 +37,11 @@ public class _205 {
         return h1.size() == h2.size();
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _205().isIsomorphic("foo","bar");
     }

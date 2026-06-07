@@ -11,9 +11,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
 
+/**
+ * MonitorableExecutorTest类。
+ */
 public class MonitorableExecutorTest {
 
     @Test
+    /**
+     * testMonitorableExecutorInterface方法。
+     */
     public void testMonitorableExecutorInterface() {
         FixedMonitorableExecutor executor = new FixedMonitorableExecutor(
                 createConfigUnit(),

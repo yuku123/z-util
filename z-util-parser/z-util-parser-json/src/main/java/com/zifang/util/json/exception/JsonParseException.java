@@ -5,12 +5,19 @@ package com.zifang.util.json.exception;
  *
  * @author zifang
  */
+/**
+ * JsonParseException类。
+ */
 public class JsonParseException extends RuntimeException {
 
     /**
      * 构造一个JSON解析异常。
      *
      * @param message 异常消息
+     */
+    /**
+     * JsonParseException方法。
+     *      * @param message String类型参数
      */
     public JsonParseException(String message) {
         super(message);

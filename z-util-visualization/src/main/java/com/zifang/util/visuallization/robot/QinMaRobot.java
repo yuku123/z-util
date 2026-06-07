@@ -11,8 +11,16 @@ import java.awt.event.KeyEvent;
 /**
  * QinMaRobot类。
  */
+/**
+ * QinMaRobot类。
+ */
 public class QinMaRobot {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws AWTException {
         Robot robot = new Robot();
         robot.mouseMove(500, 500);

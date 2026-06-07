@@ -3,15 +3,25 @@ package com.zifang.util.http.net.bookdemo;
 import java.io.*;
 import java.util.zip.GZIPOutputStream;
 
+/**
+ * GZipRunnable类。
+ */
 public class GZipRunnable implements Runnable {
 
     private final File input;
 
+    /**
+     * GZipRunnable方法。
+     *      * @param input File类型参数
+     */
     public GZipRunnable(File input) {
         this.input = input;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         // don't compress an already compressed file
         if (!input.getName().endsWith(".gz")) {

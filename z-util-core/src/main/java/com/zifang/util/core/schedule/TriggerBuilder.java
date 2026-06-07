@@ -38,6 +38,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * TriggerBuilder类。
  */
+/**
+ * TriggerBuilder类。
+ */
 public class TriggerBuilder {
 
     private TriggerBuilder() {
@@ -63,6 +66,10 @@ public class TriggerBuilder {
      * newSimpleTrigger方法。
      * @return static SimpleTrigger.SimpleBuilder类型返回值
      */
+    /**
+     * newSimpleTrigger方法。
+     * @return static SimpleTrigger.SimpleBuilder类型返回值
+     */
     public static SimpleTrigger.SimpleBuilder newSimpleTrigger() {
         return SimpleTrigger.newSimpleTrigger();
     }
@@ -78,6 +85,10 @@ public class TriggerBuilder {
      *     .withCronExpression("0 0 9 ? * MON-FRI")
      *     .build();
      * </pre>
+     */
+    /**
+     * newCronTrigger方法。
+     * @return static CronTrigger.CronBuilder类型返回值
      */
     /**
      * newCronTrigger方法。
@@ -103,6 +114,10 @@ public class TriggerBuilder {
      * newCalendarIntervalTrigger方法。
      * @return static CalendarIntervalTrigger.CalendarBuilder类型返回值
      */
+    /**
+     * newCalendarIntervalTrigger方法。
+     * @return static CalendarIntervalTrigger.CalendarBuilder类型返回值
+     */
     public static CalendarIntervalTrigger.CalendarBuilder newCalendarIntervalTrigger() {
         return CalendarIntervalTrigger.newCalendarIntervalTrigger();
     }
@@ -121,6 +136,10 @@ public class TriggerBuilder {
      *     .withIntervalInMinutes(30)
      *     .build();
      * </pre>
+     */
+    /**
+     * newDailyTimeIntervalTrigger方法。
+     * @return static DailyTimeIntervalTrigger.DailyBuilder类型返回值
      */
     /**
      * newDailyTimeIntervalTrigger方法。

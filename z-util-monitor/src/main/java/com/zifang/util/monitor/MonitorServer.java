@@ -37,6 +37,9 @@ import java.util.concurrent.Executors;
 /**
  * MonitorServer类。
  */
+/**
+ * MonitorServer类。
+ */
 public class MonitorServer {
 
     public static final int DEFAULT_PORT = 8849;
@@ -58,12 +61,20 @@ public class MonitorServer {
      * builder方法。
      * @return static Builder类型返回值
      */
+    /**
+     * builder方法。
+     * @return static Builder类型返回值
+     */
     public static Builder builder() {
         return new Builder();
     }
 
     /**
      * 启动服务器
+     */
+    /**
+     * start方法。
+     * @return MonitorServer类型返回值
      */
     /**
      * start方法。
@@ -103,6 +114,9 @@ public class MonitorServer {
     /**
      * stop方法。
      */
+    /**
+     * stop方法。
+     */
     public void stop() {
         if (!started || httpServer == null) {
             return;
@@ -119,12 +133,20 @@ public class MonitorServer {
      * restart方法。
      * @return MonitorServer类型返回值
      */
+    /**
+     * restart方法。
+     * @return MonitorServer类型返回值
+     */
     public MonitorServer restart() throws IOException {
         stop();
         Thread.yield();
         return start();
     }
 
+    /**
+     * getPort方法。
+     * @return int类型返回值
+     */
     /**
      * getPort方法。
      * @return int类型返回值
@@ -137,10 +159,18 @@ public class MonitorServer {
      * getCollector方法。
      * @return MetricsCollector类型返回值
      */
+    /**
+     * getCollector方法。
+     * @return MetricsCollector类型返回值
+     */
     public MetricsCollector getCollector() {
         return collector;
     }
 
+    /**
+     * getRegistry方法。
+     * @return MetricsRegistry类型返回值
+     */
     /**
      * getRegistry方法。
      * @return MetricsRegistry类型返回值
@@ -153,6 +183,10 @@ public class MonitorServer {
      * isStarted方法。
      * @return boolean类型返回值
      */
+    /**
+     * isStarted方法。
+     * @return boolean类型返回值
+     */
     public boolean isStarted() {
         return started;
     }
@@ -161,6 +195,12 @@ public class MonitorServer {
 
     /**
      * 注册自定义指标
+     */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param provider java.util.function.SupplierObject类型参数
+     * @return MonitorServer类型返回值
      */
     /**
      * register方法。
@@ -183,6 +223,13 @@ public class MonitorServer {
      * @param description String类型参数
      * @return MonitorServer类型返回值
      */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param provider java.util.function.SupplierObject类型参数
+     * @param description String类型参数
+     * @return MonitorServer类型返回值
+     */
     public MonitorServer register(String name, java.util.function.Supplier<Object> provider, String description) {
         collector.getRegistry().register(name, MetricsSnapshot.Category.CUSTOM, provider, description, null);
         return this;
@@ -190,6 +237,14 @@ public class MonitorServer {
 
     /**
      * 注册自定义指标（带描述和单位）
+     */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param provider java.util.function.SupplierObject类型参数
+     * @param description String类型参数
+     * @param unit String类型参数
+     * @return MonitorServer类型返回值
      */
     /**
      * register方法。
@@ -218,6 +273,10 @@ public class MonitorServer {
      * handle方法。
      *      * @param exchange HttpExchange类型参数
      */
+    /**
+     * handle方法。
+     *      * @param exchange HttpExchange类型参数
+     */
         public void handle(HttpExchange exchange) throws IOException {
             String response = new HtmlExporter(server.getRegistry()).export();
             sendResponse(exchange, "text/html; charset=utf-8", response);
@@ -232,6 +291,10 @@ public class MonitorServer {
         }
 
         @Override
+    /**
+     * handle方法。
+     *      * @param exchange HttpExchange类型参数
+     */
     /**
      * handle方法。
      *      * @param exchange HttpExchange类型参数
@@ -254,6 +317,10 @@ public class MonitorServer {
      * handle方法。
      *      * @param exchange HttpExchange类型参数
      */
+    /**
+     * handle方法。
+     *      * @param exchange HttpExchange类型参数
+     */
         public void handle(HttpExchange exchange) throws IOException {
             String status = server.getRegistry().isEnabled() ? "UP" : "DOWN";
             String response = "{\"status\":\"" + status + "\",\"timestamp\":" + System.currentTimeMillis() + "}";
@@ -269,6 +336,10 @@ public class MonitorServer {
         }
 
         @Override
+    /**
+     * handle方法。
+     *      * @param exchange HttpExchange类型参数
+     */
     /**
      * handle方法。
      *      * @param exchange HttpExchange类型参数
@@ -300,6 +371,11 @@ public class MonitorServer {
      *      * @param port int类型参数
      * @return Builder类型返回值
      */
+    /**
+     * port方法。
+     *      * @param port int类型参数
+     * @return Builder类型返回值
+     */
         public Builder port(int port) {
             this.port = port;
             return this;
@@ -312,11 +388,19 @@ public class MonitorServer {
      * registerDefaultMonitor方法。
      * @return Builder类型返回值
      */
+    /**
+     * registerDefaultMonitor方法。
+     * @return Builder类型返回值
+     */
         public Builder registerDefaultMonitor() {
             this.registerDefaultMonitor = true;
             return this;
         }
 
+    /**
+     * build方法。
+     * @return MonitorServer类型返回值
+     */
     /**
      * build方法。
      * @return MonitorServer类型返回值

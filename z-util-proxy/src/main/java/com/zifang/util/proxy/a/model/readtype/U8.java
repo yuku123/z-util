@@ -12,6 +12,9 @@ import java.io.InputStream;
 /**
  * U8类。
  */
+/**
+ * U8类。
+ */
 public class U8 {
 
     private long value;
@@ -20,10 +23,19 @@ public class U8 {
      * U8方法。
      *      * @param value long类型参数
      */
+    /**
+     * U8方法。
+     *      * @param value long类型参数
+     */
     public U8(long value) {
         this.value = value;
     }
 
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     * @return static U8类型返回值
+     */
     /**
      * read方法。
      *      * @param inputStream InputStream类型参数
@@ -45,6 +57,10 @@ public class U8 {
         return u8;
     }
 
+    /**
+     * getValue方法。
+     * @return long类型返回值
+     */
     /**
      * getValue方法。
      * @return long类型返回值

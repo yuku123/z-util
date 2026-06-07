@@ -20,6 +20,9 @@ import com.zifang.util.numpy.Linalg;
 /**
  * PCA类。
  */
+/**
+ * PCA类。
+ */
 public class PCA {
     private int nComponents;
     private NdArray principalComponents;  // Eigenvectors (loading vectors)
@@ -34,6 +37,10 @@ public class PCA {
      * PCA方法。
      *      * @param nComponents int类型参数
      */
+    /**
+     * PCA方法。
+     *      * @param nComponents int类型参数
+     */
     public PCA(int nComponents) {
         this.nComponents = nComponents;
     }
@@ -41,6 +48,10 @@ public class PCA {
     /**
      * Fit the PCA model to training data
      * @param X Training data of shape [n_samples, n_features]
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
      */
     /**
      * fit方法。
@@ -143,6 +154,11 @@ public class PCA {
      *      * @param X NdArray类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * transform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray transform(NdArray X) {
         // Center data
         double[][] Xdata = toDouble2D(X);
@@ -189,6 +205,11 @@ public class PCA {
      *      * @param X NdArray类型参数
      * @return NdArray类型返回值
      */
+    /**
+     * fitTransform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
+     */
     public NdArray fitTransform(NdArray X) {
         fit(X);
         return transform(X);
@@ -198,6 +219,11 @@ public class PCA {
      * Transform data back to original space (inverse transform)
      * @param X Transformed data of shape [n_samples, n_components]
      * @return Original space data of shape [n_samples, n_features]
+     */
+    /**
+     * inverseTransform方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
      */
     /**
      * inverseTransform方法。
@@ -239,6 +265,10 @@ public class PCA {
      * getPrincipalComponents方法。
      * @return NdArray类型返回值
      */
+    /**
+     * getPrincipalComponents方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getPrincipalComponents() {
         return principalComponents;
     }
@@ -250,12 +280,20 @@ public class PCA {
      * getExplainedVariance方法。
      * @return NdArray类型返回值
      */
+    /**
+     * getExplainedVariance方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getExplainedVariance() {
         return explainedVariance;
     }
 
     /**
      * Get total explained variance ratio
+     */
+    /**
+     * getExplainedVarianceRatio方法。
+     * @return double类型返回值
      */
     /**
      * getExplainedVarianceRatio方法。

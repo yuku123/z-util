@@ -16,22 +16,35 @@ import org.junit.Test;
 import java.util.WeakHashMap;
 import java.util.logging.Level;
 
+/**
+ * WeakHashMapTest类。
+ */
 public class WeakHashMapTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WeakHashMapTest.class);
 
      class WeakHashMapTest2{
         private String a;
+    /**
+     * WeakHashMapTest2方法。
+     *      * @param a String类型参数
+     */
         public WeakHashMapTest2(String a){
             this.a = a;
         }
 
     }
 
+    /**
+     * WeakHashMapTest方法。
+     */
     public WeakHashMapTest(){
 
     }
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() throws InterruptedException {
 
         WeakHashMap<WeakHashMapTest2,String> w = new WeakHashMap<>();

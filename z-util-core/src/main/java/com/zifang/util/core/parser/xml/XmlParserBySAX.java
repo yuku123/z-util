@@ -37,6 +37,9 @@ import java.io.InputStream;
 /**
  * XmlParserBySAX类。
  */
+/**
+ * XmlParserBySAX类。
+ */
 public class XmlParserBySAX {
 
     /**
@@ -59,6 +62,11 @@ public class XmlParserBySAX {
      * @param xmlStream XML输入流，不能为null
      * @throws Exception 如果解析过程中发生任何异常
      * @throws NullPointerException if xmlStream is null
+     */
+    /**
+     * parse方法。
+     *      * @param xmlStream InputStream类型参数
+     * @return static void类型返回值
      */
     /**
      * parse方法。
@@ -104,6 +112,13 @@ public class XmlParserBySAX {
      * @param qName String类型参数
      * @param attributes Attributes类型参数
      */
+    /**
+     * startElement方法。
+     *      * @param uri String类型参数
+     * @param localName String类型参数
+     * @param qName String类型参数
+     * @param attributes Attributes类型参数
+     */
         public void startElement(String uri, String localName, String qName, Attributes attributes) {
             System.out.println("START: " + qName);
             for (int i = 0; i < attributes.getLength(); i++) {
@@ -126,6 +141,12 @@ public class XmlParserBySAX {
      * @param start int类型参数
      * @param length int类型参数
      */
+    /**
+     * characters方法。
+     *      * @param ch char[]类型参数
+     * @param start int类型参数
+     * @param length int类型参数
+     */
         public void characters(char[] ch, int start, int length) {
             currentText.append(new String(ch, start, length));
         }
@@ -138,6 +159,12 @@ public class XmlParserBySAX {
          * @param qName      带命名空间前缀的限定名称
          */
         @Override
+    /**
+     * endElement方法。
+     *      * @param uri String类型参数
+     * @param localName String类型参数
+     * @param qName String类型参数
+     */
     /**
      * endElement方法。
      *      * @param uri String类型参数
@@ -169,6 +196,12 @@ public class XmlParserBySAX {
      * @param publicId String类型参数
      * @param systemId String类型参数
      */
+    /**
+     * startDTD方法。
+     *      * @param name String类型参数
+     * @param publicId String类型参数
+     * @param systemId String类型参数
+     */
         public void startDTD(String name, String publicId, String systemId) {
         }
 
@@ -176,6 +209,9 @@ public class XmlParserBySAX {
          * 处理DTD结束事件
          */
         @Override
+    /**
+     * endDTD方法。
+     */
     /**
      * endDTD方法。
      */
@@ -188,6 +224,10 @@ public class XmlParserBySAX {
          * @param name 实体名称
          */
         @Override
+    /**
+     * startEntity方法。
+     *      * @param name String类型参数
+     */
     /**
      * startEntity方法。
      *      * @param name String类型参数
@@ -205,6 +245,10 @@ public class XmlParserBySAX {
      * endEntity方法。
      *      * @param name String类型参数
      */
+    /**
+     * endEntity方法。
+     *      * @param name String类型参数
+     */
         public void endEntity(String name) {
         }
 
@@ -215,6 +259,9 @@ public class XmlParserBySAX {
     /**
      * startCDATA方法。
      */
+    /**
+     * startCDATA方法。
+     */
         public void startCDATA() {
         }
 
@@ -222,6 +269,9 @@ public class XmlParserBySAX {
          * 处理CDATA节结束事件
          */
         @Override
+    /**
+     * endCDATA方法。
+     */
     /**
      * endCDATA方法。
      */
@@ -236,6 +286,12 @@ public class XmlParserBySAX {
          * @param length 字符数量
          */
         @Override
+    /**
+     * comment方法。
+     *      * @param ch char[]类型参数
+     * @param start int类型参数
+     * @param length int类型参数
+     */
     /**
      * comment方法。
      *      * @param ch char[]类型参数

@@ -13,6 +13,9 @@ import com.zifang.util.numpy.Shape;
 /**
  * LayerNorm类。
  */
+/**
+ * LayerNorm类。
+ */
 public class LayerNorm extends Module {
     
     private final int normalizedShape;
@@ -27,10 +30,19 @@ public class LayerNorm extends Module {
      * LayerNorm方法。
      *      * @param normalizedShape int类型参数
      */
+    /**
+     * LayerNorm方法。
+     *      * @param normalizedShape int类型参数
+     */
     public LayerNorm(int normalizedShape) {
         this(normalizedShape, 1e-5f);
     }
     
+    /**
+     * LayerNorm方法。
+     *      * @param normalizedShape int类型参数
+     * @param eps float类型参数
+     */
     /**
      * LayerNorm方法。
      *      * @param normalizedShape int类型参数
@@ -48,6 +60,11 @@ public class LayerNorm extends Module {
     }
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -147,6 +164,11 @@ public class LayerNorm extends Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * backward方法。
      *      * @param gradOutput NdArray类型参数
@@ -256,7 +278,15 @@ public class LayerNorm extends Module {
      * getWeight方法。
      * @return NdArray类型返回值
      */
+    /**
+     * getWeight方法。
+     * @return NdArray类型返回值
+     */
     public NdArray getWeight() { return weight; }
+    /**
+     * getBias方法。
+     * @return NdArray类型返回值
+     */
     /**
      * getBias方法。
      * @return NdArray类型返回值

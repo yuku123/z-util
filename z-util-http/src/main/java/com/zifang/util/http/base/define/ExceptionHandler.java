@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * ExceptionHandler类。
  */
+/**
+ * ExceptionHandler类。
+ */
 public class ExceptionHandler {
 }

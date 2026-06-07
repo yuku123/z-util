@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug25Test类。
+ */
 public class JsonDebug25Test {
 
     @Test
+    /**
+     * testRuleBodyIsClean方法。
+     */
     public void testRuleBodyIsClean() throws Exception {
         String parserG4 = loadG4("JsonParser.g4");
         DynamicParser parser = new DynamicParser();
@@ -44,6 +50,9 @@ public class JsonDebug25Test {
     }
 
     @Test
+    /**
+     * testSimpleSequence方法。
+     */
     public void testSimpleSequence() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");

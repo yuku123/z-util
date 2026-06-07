@@ -14,6 +14,9 @@ import java.util.function.*;
 /**
  * Chain接口。
  */
+/**
+ * Chain接口。
+ */
 public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
 
     /**
@@ -158,12 +161,22 @@ public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
      * @param context C类型参数
      * @param result ProcessorResult类型参数
      */
+    /**
+     * ChainResult方法。
+     *      * @param chain ChainC类型参数
+     * @param context C类型参数
+     * @param result ProcessorResult类型参数
+     */
         public ChainResult(Chain<C> chain, C context, ProcessorResult result) {
             this.chain = chain;
             this.context = context;
             this.result = result;
         }
 
+    /**
+     * getChain方法。
+     * @return Chain<C>类型返回值
+     */
     /**
      * getChain方法。
      * @return Chain<C>类型返回值
@@ -176,10 +189,18 @@ public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
      * getContext方法。
      * @return C类型返回值
      */
+    /**
+     * getContext方法。
+     * @return C类型返回值
+     */
         public C getContext() {
             return context;
         }
 
+    /**
+     * getResult方法。
+     * @return ProcessorResult类型返回值
+     */
     /**
      * getResult方法。
      * @return ProcessorResult类型返回值
@@ -192,6 +213,10 @@ public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
      * isSuccess方法。
      * @return boolean类型返回值
      */
+    /**
+     * isSuccess方法。
+     * @return boolean类型返回值
+     */
         public boolean isSuccess() {
             return result.isSuccess();
         }
@@ -200,10 +225,18 @@ public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
      * isFinished方法。
      * @return boolean类型返回值
      */
+    /**
+     * isFinished方法。
+     * @return boolean类型返回值
+     */
         public boolean isFinished() {
             return result.isFinished();
         }
 
+    /**
+     * isContinued方法。
+     * @return boolean类型返回值
+     */
     /**
      * isContinued方法。
      * @return boolean类型返回值

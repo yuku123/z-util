@@ -14,6 +14,9 @@ package com.zifang.util.core.lang.primitive.mutable;
 /**
  * Mutable接口。
  */
+/**
+ * Mutable接口。
+ */
 public interface Mutable<T> {
 
     /**

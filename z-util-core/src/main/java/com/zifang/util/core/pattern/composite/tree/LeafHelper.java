@@ -14,10 +14,18 @@ import java.util.stream.Collectors;
 /**
  * LeafHelper类。
  */
+/**
+ * LeafHelper类。
+ */
 public class LeafHelper {
 
     /**
      * 转换平铺的叶子结点得到一个根节点
+     */
+    /**
+     * pickRootLeaf方法。
+     *      * @param leaves List?类型参数
+     * @return static ILeaf类型返回值
      */
     /**
      * pickRootLeaf方法。
@@ -39,6 +47,11 @@ public class LeafHelper {
      *      * @param leaves List?类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * hasDissociateLeaf方法。
+     *      * @param leaves List?类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean hasDissociateLeaf(List<? extends ILeaf> leaves) {
         if (leaves == null) {
             throw new NullPointerException();
@@ -48,6 +61,11 @@ public class LeafHelper {
 
     /**
      * 获得平铺的叶子结点里面所有的根节点串
+     */
+    /**
+     * solveStackLeaves方法。
+     *      * @param leaves ListILeaf类型参数
+     * @return static List<ILeaf>类型返回值
      */
     /**
      * solveStackLeaves方法。
@@ -73,12 +91,24 @@ public class LeafHelper {
      * @param bean C类型参数
      * @return static <ID, C> LeafWrapper<ID, ID, C>类型返回值
      */
+    /**
+     * wrapper方法。
+     *      * @param currentId ID类型参数
+     * @param parentId ID类型参数
+     * @param bean C类型参数
+     * @return static <ID, C> LeafWrapper<ID, ID, C>类型返回值
+     */
     public static <ID, C> LeafWrapper<ID, ID, C> wrapper(ID currentId, ID parentId, C bean) {
         return new LeafWrapper<>(currentId, parentId, bean);
     }
 
     /**
      * 树化结点包装
+     */
+    /**
+     * treeify方法。
+     *      * @param leafWrappers ListLeafWrapperID,类型参数
+     * @return static <ID, C> LeafWrapper<ID, ID, C>类型返回值
      */
     /**
      * treeify方法。

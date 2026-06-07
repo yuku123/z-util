@@ -7,6 +7,9 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 @SuperInfo(superInfo = "superInfo")
+/**
+ * ClassInfo注解。
+ */
 public @interface ClassInfo {
     String className();
     String value() default "default-class-value";

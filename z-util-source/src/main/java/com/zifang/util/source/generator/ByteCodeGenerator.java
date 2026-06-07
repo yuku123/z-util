@@ -12,6 +12,9 @@ package com.zifang.util.source.generator;
 /**
  * ByteCodeGenerator类。
  */
+/**
+ * ByteCodeGenerator类。
+ */
 public class ByteCodeGenerator {
 
 }

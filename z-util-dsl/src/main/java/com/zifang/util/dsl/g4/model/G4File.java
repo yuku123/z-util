@@ -7,6 +7,9 @@ package com.zifang.util.dsl.g4.model;
 /**
  * G4File类。
  */
+/**
+ * G4File类。
+ */
 public class G4File {
     
     private String grammarName;
@@ -19,12 +22,19 @@ public class G4File {
     /**
      * G4File方法。
      */
+    /**
+     * G4File方法。
+     */
     public G4File() {
     }
     
     /**
      * 获取语法名称
      * @return grammar名称
+     */
+    /**
+     * getGrammarName方法。
+     * @return String类型返回值
      */
     /**
      * getGrammarName方法。
@@ -42,6 +52,10 @@ public class G4File {
      * setGrammarName方法。
      *      * @param grammarName String类型参数
      */
+    /**
+     * setGrammarName方法。
+     *      * @param grammarName String类型参数
+     */
     public void setGrammarName(String grammarName) {
         this.grammarName = grammarName;
     }
@@ -49,6 +63,10 @@ public class G4File {
     /**
      * 获取词法分析器语法名称
      * @return lexer grammar名称
+     */
+    /**
+     * getLexerGrammarName方法。
+     * @return String类型返回值
      */
     /**
      * getLexerGrammarName方法。
@@ -66,6 +84,10 @@ public class G4File {
      * setLexerGrammarName方法。
      *      * @param lexerGrammarName String类型参数
      */
+    /**
+     * setLexerGrammarName方法。
+     *      * @param lexerGrammarName String类型参数
+     */
     public void setLexerGrammarName(String lexerGrammarName) {
         this.lexerGrammarName = lexerGrammarName;
     }
@@ -78,6 +100,10 @@ public class G4File {
      * getParserGrammarName方法。
      * @return String类型返回值
      */
+    /**
+     * getParserGrammarName方法。
+     * @return String类型返回值
+     */
     public String getParserGrammarName() {
         return parserGrammarName;
     }
@@ -85,6 +111,10 @@ public class G4File {
     /**
      * 设置语法分析器语法名称
      * @param parserGrammarName parser grammar名称
+     */
+    /**
+     * setParserGrammarName方法。
+     *      * @param parserGrammarName String类型参数
      */
     /**
      * setParserGrammarName方法。

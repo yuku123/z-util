@@ -3,9 +3,15 @@ package com.zifang.util.media.graph.qrcode.encoder;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * QRCodeEncoderTest类。
+ */
 public class QRCodeEncoderTest {
 
     @Test
+    /**
+     * testEncodeSimpleString方法。
+     */
     public void testEncodeSimpleString() {
         String content = "Hello";
         BitMatrix matrix = QRCodeEncoder.encode(content, 100, 100, ErrorCorrectionLevel.L, "UTF-8");
@@ -15,6 +21,9 @@ public class QRCodeEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeChineseContent方法。
+     */
     public void testEncodeChineseContent() {
         String content = "中文测试";
         BitMatrix matrix = QRCodeEncoder.encode(content, 100, 100, ErrorCorrectionLevel.M, "GB18030");
@@ -22,6 +31,9 @@ public class QRCodeEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeEmptyContentThrows方法。
+     */
     public void testEncodeEmptyContentThrows() {
         try {
             QRCodeEncoder.encode("", 100, 100, ErrorCorrectionLevel.L, "UTF-8");
@@ -32,6 +44,9 @@ public class QRCodeEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeNullContentThrows方法。
+     */
     public void testEncodeNullContentThrows() {
         try {
             QRCodeEncoder.encode(null, 100, 100, ErrorCorrectionLevel.L, "UTF-8");
@@ -42,6 +57,9 @@ public class QRCodeEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeWithAllErrorCorrectionLevels方法。
+     */
     public void testEncodeWithAllErrorCorrectionLevels() {
         String content = "Test";
         // L, M, Q, H levels
@@ -57,6 +75,9 @@ public class QRCodeEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeDifferentSizes方法。
+     */
     public void testEncodeDifferentSizes() {
         String content = "Test";
         // Different requested sizes
@@ -69,6 +90,9 @@ public class QRCodeEncoderTest {
     }
 
     @Test
+    /**
+     * testEncodeLongerContent方法。
+     */
     public void testEncodeLongerContent() {
         String content = "This is a longer test content that should use more data capacity";
         BitMatrix matrix = QRCodeEncoder.encode(content, 200, 200, ErrorCorrectionLevel.M, "UTF-8");
@@ -76,6 +100,9 @@ public class QRCodeEncoderTest {
     }
 
     @Test
+    /**
+     * testEncoderProducesValidBitMatrix方法。
+     */
     public void testEncoderProducesValidBitMatrix() {
         BitMatrix matrix = QRCodeEncoder.encode("Test", 100, 100, ErrorCorrectionLevel.L, "UTF-8");
         // Check finder pattern positions (should have bits set in corners)

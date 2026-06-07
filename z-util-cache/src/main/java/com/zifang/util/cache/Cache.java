@@ -7,6 +7,9 @@ package com.zifang.util.cache;
 /**
  * Cache接口。
  */
+/**
+ * Cache接口。
+ */
 public interface Cache {
 
     /**

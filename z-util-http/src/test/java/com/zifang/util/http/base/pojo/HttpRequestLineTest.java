@@ -5,9 +5,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * HttpRequestLineTest类。
+ */
 public class HttpRequestLineTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         HttpRequestLine httpRequestLine = new HttpRequestLine();
         assertNull(httpRequestLine.getRequestMethod());
@@ -15,6 +21,9 @@ public class HttpRequestLineTest {
     }
 
     @Test
+    /**
+     * testSettersAndGetters方法。
+     */
     public void testSettersAndGetters() {
         HttpRequestLine httpRequestLine = new HttpRequestLine();
         httpRequestLine.setRequestMethod(RequestMethod.GET);
@@ -25,6 +34,9 @@ public class HttpRequestLineTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         HttpRequestLine httpRequestLine = new HttpRequestLine();
         httpRequestLine.setRequestMethod(RequestMethod.POST);
@@ -36,6 +48,9 @@ public class HttpRequestLineTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         HttpRequestLine line1 = new HttpRequestLine();
         line1.setRequestMethod(RequestMethod.GET);
@@ -49,6 +64,9 @@ public class HttpRequestLineTest {
     }
 
     @Test
+    /**
+     * testNotEquals方法。
+     */
     public void testNotEquals() {
         HttpRequestLine line1 = new HttpRequestLine();
         line1.setRequestMethod(RequestMethod.GET);
@@ -62,6 +80,9 @@ public class HttpRequestLineTest {
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         HttpRequestLine line1 = new HttpRequestLine();
         line1.setRequestMethod(RequestMethod.GET);

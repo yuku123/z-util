@@ -17,6 +17,9 @@ import java.util.TreeMap;
 /**
  * HtmlExporter类。
  */
+/**
+ * HtmlExporter类。
+ */
 public class HtmlExporter {
 
     private static final String CSS =
@@ -54,10 +57,18 @@ public class HtmlExporter {
      * HtmlExporter方法。
      *      * @param registry MetricsRegistry类型参数
      */
+    /**
+     * HtmlExporter方法。
+     *      * @param registry MetricsRegistry类型参数
+     */
     public HtmlExporter(MetricsRegistry registry) {
         this.registry = registry;
     }
 
+    /**
+     * export方法。
+     * @return String类型返回值
+     */
     /**
      * export方法。
      * @return String类型返回值

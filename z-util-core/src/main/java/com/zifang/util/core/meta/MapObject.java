@@ -16,6 +16,9 @@ import java.util.Optional;
 /**
  * MapObject类。
  */
+/**
+ * MapObject类。
+ */
 public class MapObject extends HashMap<String, Object> {
 
     private static final long serialVersionUID = 5070417008655524317L;
@@ -25,10 +28,20 @@ public class MapObject extends HashMap<String, Object> {
      *      * @param key String类型参数
      * @return String类型返回值
      */
+    /**
+     * getString方法。
+     *      * @param key String类型参数
+     * @return String类型返回值
+     */
     public String getString(String key) {
         return Optional.ofNullable(get(key)).map(Object::toString).orElse(null);
     }
 
+    /**
+     * getLong方法。
+     *      * @param key String类型参数
+     * @return long类型返回值
+     */
     /**
      * getLong方法。
      *      * @param key String类型参数
@@ -44,11 +57,21 @@ public class MapObject extends HashMap<String, Object> {
      *      * @param key String类型参数
      * @return int类型返回值
      */
+    /**
+     * getInteger方法。
+     *      * @param key String类型参数
+     * @return int类型返回值
+     */
     public Integer getInteger(String key) {
         return Optional.ofNullable(get(key)).map(value -> Integer.parseInt(value.toString()))
                 .orElse(null);
     }
 
+    /**
+     * getShort方法。
+     *      * @param key String类型参数
+     * @return short类型返回值
+     */
     /**
      * getShort方法。
      *      * @param key String类型参数
@@ -64,11 +87,21 @@ public class MapObject extends HashMap<String, Object> {
      *      * @param key String类型参数
      * @return byte类型返回值
      */
+    /**
+     * getByte方法。
+     *      * @param key String类型参数
+     * @return byte类型返回值
+     */
     public Byte getByte(String key) {
         return Optional.ofNullable(get(key)).map(value -> Byte.parseByte(value.toString()))
                 .orElse(null);
     }
 
+    /**
+     * getDouble方法。
+     *      * @param key String类型参数
+     * @return double类型返回值
+     */
     /**
      * getDouble方法。
      *      * @param key String类型参数
@@ -84,11 +117,21 @@ public class MapObject extends HashMap<String, Object> {
      *      * @param key String类型参数
      * @return float类型返回值
      */
+    /**
+     * getFloat方法。
+     *      * @param key String类型参数
+     * @return float类型返回值
+     */
     public Float getFloat(String key) {
         return Optional.ofNullable(get(key)).map(value -> Float.parseFloat(value.toString()))
                 .orElse(null);
     }
 
+    /**
+     * getObject方法。
+     *      * @param key String类型参数
+     * @return <T> T类型返回值
+     */
     /**
      * getObject方法。
      *      * @param key String类型参数

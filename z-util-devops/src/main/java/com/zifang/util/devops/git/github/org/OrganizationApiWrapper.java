@@ -27,11 +27,18 @@ import java.util.Map;
 /**
  * OrganizationApiWrapper类。
  */
+/**
+ * OrganizationApiWrapper类。
+ */
 public class OrganizationApiWrapper {
 
     private final GitHub github;
     private String org;
 
+    /**
+     * OrganizationApiWrapper方法。
+     *      * @param github GitHub类型参数
+     */
     /**
      * OrganizationApiWrapper方法。
      *      * @param github GitHub类型参数
@@ -45,11 +52,21 @@ public class OrganizationApiWrapper {
      *      * @param github GitHub类型参数
      * @param org String类型参数
      */
+    /**
+     * OrganizationApiWrapper方法。
+     *      * @param github GitHub类型参数
+     * @param org String类型参数
+     */
     public OrganizationApiWrapper(GitHub github, String org) {
         this.github = github;
         this.org = org;
     }
 
+    /**
+     * withOrg方法。
+     *      * @param org String类型参数
+     * @return OrganizationApiWrapper类型返回值
+     */
     /**
      * withOrg方法。
      *      * @param org String类型参数
@@ -72,6 +89,10 @@ public class OrganizationApiWrapper {
      * get方法。
      * @return GHOrganization类型返回值
      */
+    /**
+     * get方法。
+     * @return GHOrganization类型返回值
+     */
     public GHOrganization get() throws IOException {
         return github.getOrganization(org);
     }
@@ -88,12 +109,21 @@ public class OrganizationApiWrapper {
      *      * @param org String类型参数
      * @return GHOrganization类型返回值
      */
+    /**
+     * get方法。
+     *      * @param org String类型参数
+     * @return GHOrganization类型返回值
+     */
     public GHOrganization get(String org) throws IOException {
         return github.getOrganization(org);
     }
 
     /**
      * 获取当前用户所属的所有组织
+     */
+    /**
+     * listMyOrgs方法。
+     * @return List<GHOrganization>类型返回值
      */
     /**
      * listMyOrgs方法。
@@ -113,6 +143,10 @@ public class OrganizationApiWrapper {
      * listMembers方法。
      * @return List<GHUser>类型返回值
      */
+    /**
+     * listMembers方法。
+     * @return List<GHUser>类型返回值
+     */
     public List<GHUser> listMembers() throws IOException {
         List<GHUser> users = new ArrayList<>();
         PagedIterator<GHUser> it = get().listMembers().iterator();
@@ -124,6 +158,10 @@ public class OrganizationApiWrapper {
 
     /**
      * 列出组织的 public 成员
+     */
+    /**
+     * listPublicMembers方法。
+     * @return List<GHUser>类型返回值
      */
     /**
      * listPublicMembers方法。
@@ -146,12 +184,21 @@ public class OrganizationApiWrapper {
      *      * @param username String类型参数
      * @return boolean类型返回值
      */
+    /**
+     * isMember方法。
+     *      * @param username String类型参数
+     * @return boolean类型返回值
+     */
     public boolean isMember(String username) throws IOException {
         return get().hasMember(github.getUser(username));
     }
 
     /**
      * 添加组织成员
+     */
+    /**
+     * addMember方法。
+     *      * @param username String类型参数
      */
     /**
      * addMember方法。
@@ -168,6 +215,10 @@ public class OrganizationApiWrapper {
      * removeMember方法。
      *      * @param username String类型参数
      */
+    /**
+     * removeMember方法。
+     *      * @param username String类型参数
+     */
     public void removeMember(String username) throws IOException {
         get().remove(github.getUser(username));
     }
@@ -176,6 +227,10 @@ public class OrganizationApiWrapper {
 
     /**
      * 列出组织下的所有 Team
+     */
+    /**
+     * listTeams方法。
+     * @return List<GHTeam>类型返回值
      */
     /**
      * listTeams方法。
@@ -198,12 +253,22 @@ public class OrganizationApiWrapper {
      *      * @param teamId long类型参数
      * @return GHTeam类型返回值
      */
+    /**
+     * getTeam方法。
+     *      * @param teamId long类型参数
+     * @return GHTeam类型返回值
+     */
     public GHTeam getTeam(long teamId) throws IOException {
         return get().getTeam(teamId);
     }
 
     /**
      * 创建 Team（无仓库）
+     */
+    /**
+     * createTeam方法。
+     *      * @param name String类型参数
+     * @return GHTeam类型返回值
      */
     /**
      * createTeam方法。
@@ -218,6 +283,12 @@ public class OrganizationApiWrapper {
 
     /**
      * 创建 Team（带仓库）
+     */
+    /**
+     * createTeam方法。
+     *      * @param name String类型参数
+     * @param repoNames String...类型参数
+     * @return GHTeam类型返回值
      */
     /**
      * createTeam方法。
@@ -242,6 +313,11 @@ public class OrganizationApiWrapper {
      *      * @param teamId long类型参数
      * @param username String类型参数
      */
+    /**
+     * addTeamMember方法。
+     *      * @param teamId long类型参数
+     * @param username String类型参数
+     */
     public void addTeamMember(long teamId, String username) throws IOException {
         getTeam(teamId).add(github.getUser(username));
     }
@@ -254,12 +330,24 @@ public class OrganizationApiWrapper {
      *      * @param teamId long类型参数
      * @param username String类型参数
      */
+    /**
+     * removeTeamMember方法。
+     *      * @param teamId long类型参数
+     * @param username String类型参数
+     */
     public void removeTeamMember(long teamId, String username) throws IOException {
         getTeam(teamId).remove(github.getUser(username));
     }
 
     /**
      * 将仓库添加到 Team（带权限）
+     */
+    /**
+     * addTeamRepository方法。
+     *      * @param teamId long类型参数
+     * @param repoOwner String类型参数
+     * @param repoName String类型参数
+     * @param permission Permission类型参数
      */
     /**
      * addTeamRepository方法。
@@ -282,6 +370,12 @@ public class OrganizationApiWrapper {
      * @param repoOwner String类型参数
      * @param repoName String类型参数
      */
+    /**
+     * removeTeamRepository方法。
+     *      * @param teamId long类型参数
+     * @param repoOwner String类型参数
+     * @param repoName String类型参数
+     */
     public void removeTeamRepository(long teamId, String repoOwner, String repoName) throws IOException {
         GHRepository repo = github.getRepository(repoOwner + "/" + repoName);
         getTeam(teamId).remove(repo);
@@ -291,6 +385,10 @@ public class OrganizationApiWrapper {
 
     /**
      * 列出组织下的所有仓库
+     */
+    /**
+     * listRepos方法。
+     * @return List<GHRepository>类型返回值
      */
     /**
      * listRepos方法。
@@ -307,6 +405,13 @@ public class OrganizationApiWrapper {
 
     /**
      * 在组织下创建仓库
+     */
+    /**
+     * createRepo方法。
+     *      * @param name String类型参数
+     * @param description String类型参数
+     * @param isPrivate boolean类型参数
+     * @return GHRepository类型返回值
      */
     /**
      * createRepo方法。

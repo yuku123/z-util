@@ -21,6 +21,9 @@ import java.util.Map;
 /**
  * BaseRepositoryInvocationHandler类。
  */
+/**
+ * BaseRepositoryInvocationHandler类。
+ */
 public class BaseRepositoryInvocationHandler implements InvocationHandler {
 
     private final Class<?> targetClass;
@@ -31,6 +34,10 @@ public class BaseRepositoryInvocationHandler implements InvocationHandler {
      * 构造调用处理器
      *
      * @param clazz Repository接口类型
+     */
+    /**
+     * BaseRepositoryInvocationHandler方法。
+     *      * @param clazz Class?类型参数
      */
     /**
      * BaseRepositoryInvocationHandler方法。
@@ -47,6 +54,13 @@ public class BaseRepositoryInvocationHandler implements InvocationHandler {
     }
 
     @Override
+    /**
+     * invoke方法。
+     *      * @param proxy Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return Object类型返回值
+     */
     /**
      * invoke方法。
      *      * @param proxy Object类型参数

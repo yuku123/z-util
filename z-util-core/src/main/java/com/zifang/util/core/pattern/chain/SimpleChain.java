@@ -11,6 +11,9 @@ import java.util.*;
 /**
  * SimpleChain类。
  */
+/**
+ * SimpleChain类。
+ */
 public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     private final String name;
@@ -19,10 +22,17 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
     /**
      * SimpleChain方法。
      */
+    /**
+     * SimpleChain方法。
+     */
     public SimpleChain() {
         this("SimpleChain-" + UUID.randomUUID().toString().substring(0, 8));
     }
 
+    /**
+     * SimpleChain方法。
+     *      * @param name String类型参数
+     */
     /**
      * SimpleChain方法。
      *      * @param name String类型参数
@@ -36,6 +46,10 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * SimpleChain方法。
      *      * @param processor ProcessorC类型参数
      */
+    /**
+     * SimpleChain方法。
+     *      * @param processor ProcessorC类型参数
+     */
     public SimpleChain(Processor<C> processor) {
         this();
         if (processor != null) {
@@ -43,6 +57,11 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
         }
     }
 
+    /**
+     * SimpleChain方法。
+     *      * @param name String类型参数
+     * @param processor ProcessorC类型参数
+     */
     /**
      * SimpleChain方法。
      *      * @param name String类型参数
@@ -61,6 +80,10 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -70,11 +93,20 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * getProcessors方法。
      * @return List<Processor<C>>类型返回值
      */
+    /**
+     * getProcessors方法。
+     * @return List<Processor<C>>类型返回值
+     */
     public List<Processor<C>> getProcessors() {
         return Collections.unmodifiableList(processors);
     }
 
     @Override
+    /**
+     * process方法。
+     *      * @param context C类型参数
+     * @return ProcessorResult类型返回值
+     */
     /**
      * process方法。
      *      * @param context C类型参数
@@ -103,6 +135,11 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * addProcessor方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addProcessor(Processor<C> processor) {
         if (processor != null) {
             this.processors.add(processor);
@@ -111,6 +148,11 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * addFirst方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     /**
      * addFirst方法。
      *      * @param processor ProcessorC类型参数
@@ -130,6 +172,12 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * addAt方法。
+     *      * @param index int类型参数
+     * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> addAt(int index, Processor<C> processor) {
         if (processor != null && index >= 0 && index <= processors.size()) {
             this.processors.add(index, processor);
@@ -138,6 +186,11 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * remove方法。
+     *      * @param processor ProcessorC类型参数
+     * @return Chain<C>类型返回值
+     */
     /**
      * remove方法。
      *      * @param processor ProcessorC类型参数
@@ -153,12 +206,21 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
      * clear方法。
      * @return Chain<C>类型返回值
      */
+    /**
+     * clear方法。
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> clear() {
         this.processors.clear();
         return this;
     }
 
     @Override
+    /**
+     * prepend方法。
+     *      * @param other ChainC类型参数
+     * @return Chain<C>类型返回值
+     */
     /**
      * prepend方法。
      *      * @param other ChainC类型参数
@@ -180,6 +242,11 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
      *      * @param other ChainC类型参数
      * @return Chain<C>类型返回值
      */
+    /**
+     * append方法。
+     *      * @param other ChainC类型参数
+     * @return Chain<C>类型返回值
+     */
     public Chain<C> append(Chain<C> other) {
         if (other != null && !other.isEmpty()) {
             this.processors.addAll(other.getProcessors());
@@ -188,6 +255,10 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

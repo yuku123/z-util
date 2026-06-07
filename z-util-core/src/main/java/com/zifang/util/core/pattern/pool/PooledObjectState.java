@@ -6,6 +6,9 @@ package com.zifang.util.core.pattern.pool;
 /**
  * PooledObjectState枚举。
  */
+/**
+ * PooledObjectState枚举。
+ */
 public enum PooledObjectState {
     /**
      * 空闲状态，可被借用

@@ -11,6 +11,9 @@ import java.util.concurrent.*;
  * 并发编程比较常见的一个问题是，当采用多个并发任务来解决一个问题时，往往只关心这些任务中的第一个结果。比如，对一个数组进行排序有很多种算法，可以并发启动所有算法，但是对于一个给定的数组，第一个得到排序结果的算法就是最快的排序算法。
  * 在本节，我们将学习如何使用 ThreadPoolExecutor 类来实现这个场景。范例允许用户可以通过两种验证机制进行验证，但是，只要有一种机制验证成功，那么这个用户就被验证通过了。
  */
+/**
+ * InvokeAnyExecutorDemo类。
+ */
 public class InvokeAnyExecutorDemo {
     /// 1．创建一个名为 UserValidator 的类，它将实现用户验证的过程。
     static class UserValidator {
@@ -18,12 +21,22 @@ public class InvokeAnyExecutorDemo {
         private String name;
 
         // 3．实现类的构造器，用来初始化类的属性。
+    /**
+     * UserValidator方法。
+     *      * @param name String类型参数
+     */
         public UserValidator(String name) {
             this.name = name;
         }
 
         // 4．实现 validate() 方法。它接收两个 String 参数，分别取名为用户名name 和密码
         // password，这两个参数也将被用来进行用户验证。
+    /**
+     * validate方法。
+     *      * @param name String类型参数
+     * @param password String类型参数
+     * @return boolean类型返回值
+     */
         public boolean validate(String name, String password) {
             /// 5．创建一个名为 random 的 Random 类型的随机对象。
             Random random = new Random();
@@ -40,6 +53,10 @@ public class InvokeAnyExecutorDemo {
         }
 
         // 8．实现 getName() 方法。这个方法返回 name 属性值。
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
         public String getName() {
             return name;
         }
@@ -56,6 +73,12 @@ public class InvokeAnyExecutorDemo {
         private String password;
 
         // 12．实现类的构造器，用来初始化类的属性。
+    /**
+     * TaskValidator方法。
+     *      * @param validator UserValidator类型参数
+     * @param user String类型参数
+     * @param password String类型参数
+     */
         public TaskValidator(UserValidator validator, String user, String password) {
             this.validator = validator;
             this.user = user;
@@ -64,6 +87,10 @@ public class InvokeAnyExecutorDemo {
 
         // 13．实现call()方法，并返回String对象。
         @Override
+    /**
+     * call方法。
+     * @return String类型返回值
+     */
         public String call() throws Exception {
             /// 14．如果用户没有通过 UserValidator 对象的验证，就在控制台输出没有找到这个用户，表明该用户未通过验证，并抛出
             /// Exception 类型的异常。
@@ -79,6 +106,11 @@ public class InvokeAnyExecutorDemo {
     }
     // 16．实现范例的主类，创建 Main 主类，并实现 main() 方法。
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         /// 17．创建两个 String 对象，分别取名为 username 和 password，并初始化这两个属性值为test。
         String username = "test";

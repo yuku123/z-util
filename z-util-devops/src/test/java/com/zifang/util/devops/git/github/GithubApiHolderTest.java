@@ -10,9 +10,15 @@ import static org.junit.Assert.*;
 /**
  * GithubApiHolder 单例持有者测试
  */
+/**
+ * GithubApiHolderTest类。
+ */
 public class GithubApiHolderTest {
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         // 恢复默认实例，避免影响其他测试
         try {
@@ -22,12 +28,18 @@ public class GithubApiHolderTest {
     }
 
     @Test
+    /**
+     * testGetInstance方法。
+     */
     public void testGetInstance() {
         GithubApiHolder instance = GithubApiHolder.getInstance();
         assertNotNull(instance);
     }
 
     @Test
+    /**
+     * testGetInstanceReturnsSameInstance方法。
+     */
     public void testGetInstanceReturnsSameInstance() {
         GithubApiHolder a = GithubApiHolder.getInstance();
         GithubApiHolder b = GithubApiHolder.getInstance();
@@ -35,6 +47,9 @@ public class GithubApiHolderTest {
     }
 
     @Test
+    /**
+     * testInitWithConfig方法。
+     */
     public void testInitWithConfig() {
         GithubConfig config = GithubConfig.of("test-token", "https://api.github.com");
         GithubApiHolder.init(config);
@@ -47,6 +62,9 @@ public class GithubApiHolderTest {
     }
 
     @Test
+    /**
+     * testInitThrowsWhenAlreadyInitialized方法。
+     */
     public void testInitThrowsWhenAlreadyInitialized() {
         GithubConfig config = GithubConfig.of("test-token", "https://api.github.com");
         GithubApiHolder.init(config);
@@ -60,6 +78,9 @@ public class GithubApiHolderTest {
     }
 
     @Test
+    /**
+     * testReset方法。
+     */
     public void testReset() {
         GithubConfig config = GithubConfig.of("test-token", "https://api.github.com");
         GithubApiHolder.init(config);
@@ -70,6 +91,9 @@ public class GithubApiHolderTest {
     }
 
     @Test
+    /**
+     * testGetGithub方法。
+     */
     public void testGetGithub() {
         GithubConfig config = GithubConfig.of("test-token");
         GithubApiHolder.init(config);
@@ -77,6 +101,9 @@ public class GithubApiHolderTest {
     }
 
     @Test
+    /**
+     * testGetConfig方法。
+     */
     public void testGetConfig() {
         GithubConfig config = GithubConfig.of("my-token", "https://github.example.com/api/v3");
         GithubApiHolder.init(config);
@@ -84,6 +111,9 @@ public class GithubApiHolderTest {
     }
 
     @Test
+    /**
+     * testInitWithEnterpriseUrl方法。
+     */
     public void testInitWithEnterpriseUrl() {
         GithubConfig config = GithubConfig.of("enterprise-token", "https://github.mycompany.com/api/v3");
         GithubApiHolder.init(config);

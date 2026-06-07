@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 /**
  * ByteCodeParserImpl类。
  */
+/**
+ * ByteCodeParserImpl类。
+ */
 public class ByteCodeParserImpl implements ByteCodeParser {
 
     private static final Logger log = LoggerFactory.getLogger(ByteCodeParserImpl.class);
@@ -18,9 +21,17 @@ public class ByteCodeParserImpl implements ByteCodeParser {
     /**
      * ByteCodeParserImpl方法。
      */
+    /**
+     * ByteCodeParserImpl方法。
+     */
     public ByteCodeParserImpl() {
     }
 
+    /**
+     * parse方法。
+     *      * @param bytecode byte[]类型参数
+     * @return ClassInfo类型返回值
+     */
     /**
      * parse方法。
      *      * @param bytecode byte[]类型参数
@@ -34,6 +45,11 @@ public class ByteCodeParserImpl implements ByteCodeParser {
         throw new UnsupportedOperationException("字节码解析尚未实现，请使用 SourceCodeParser");
     }
 
+    /**
+     * parse方法。
+     *      * @param clazz Class?类型参数
+     * @return ClassInfo类型返回值
+     */
     /**
      * parse方法。
      *      * @param clazz Class?类型参数

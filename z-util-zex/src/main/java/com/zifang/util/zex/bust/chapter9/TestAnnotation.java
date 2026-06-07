@@ -14,18 +14,38 @@ import java.lang.reflect.*;
 import java.util.Map;
 
 @AnnotationTest("类上的注解")
+/**
+ * TestAnnotation类。
+ */
+    /**
+     * TestAnnotation<@AnnotationTest方法。
+     *      * @param "类变量类型(泛型 Object类型参数
+     * @return class类型返回值
+     */
 public class TestAnnotation<@AnnotationTest("类变量类型(泛型)上的注解") T0, T1> {
 
     @AnnotationTest("成员变量上的注解")
     private Map<@AnnotationTest("成员变量泛型上的注解") String, String> map;
 
     @AnnotationTest("成员方法上的注解")
+    /**
+     * Test方法。
+     *      * @param @AnnotationTest("方法参数上的注解" Object类型参数
+     */
     public void Test(@AnnotationTest("方法参数上的注解") String s, @AnnotationTest("方法参数上的注解2") String s2) {}
 
     @AnnotationTest("构造函数上的注解")
+    /**
+     * TestAnnotation方法。
+     */
     public TestAnnotation() {}
 
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws NoSuchMethodException {
         Class<TestAnnotation> clazz = TestAnnotation.class;
         //获取类上的注解

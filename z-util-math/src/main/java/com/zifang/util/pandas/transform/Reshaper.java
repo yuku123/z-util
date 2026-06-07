@@ -14,6 +14,9 @@ import java.util.*;
 /**
  * Reshaper类。
  */
+/**
+ * Reshaper类。
+ */
 public class Reshaper {
 
     /**
@@ -25,6 +28,14 @@ public class Reshaper {
      * @param columns 作为列名的列名
      * @param values 作为值的列名
      * @return 透视后的数据框
+     */
+    /**
+     * pivot方法。
+     *      * @param df DataFrame类型参数
+     * @param index String类型参数
+     * @param columns String类型参数
+     * @param values String类型参数
+     * @return static DataFrame类型返回值
      */
     /**
      * pivot方法。
@@ -118,6 +129,15 @@ public class Reshaper {
      * @param valueName String类型参数
      * @return static DataFrame类型返回值
      */
+    /**
+     * melt方法。
+     *      * @param df DataFrame类型参数
+     * @param idVars ListString类型参数
+     * @param valueVars ListString类型参数
+     * @param varName String类型参数
+     * @param valueName String类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame melt(DataFrame df, List<String> idVars, List<String> valueVars,
                                   String varName, String valueName) {
         List<Map<String, Object>> records = new ArrayList<>();
@@ -152,6 +172,13 @@ public class Reshaper {
      * @param valueVars ListString类型参数
      * @return static DataFrame类型返回值
      */
+    /**
+     * melt方法。
+     *      * @param df DataFrame类型参数
+     * @param idVars ListString类型参数
+     * @param valueVars ListString类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame melt(DataFrame df, List<String> idVars, List<String> valueVars) {
         return melt(df, idVars, valueVars, "variable", "value");
     }
@@ -162,6 +189,11 @@ public class Reshaper {
      *
      * @param df 输入数据框
      * @return 堆叠后的 Series 或 DataFrame
+     */
+    /**
+     * stack方法。
+     *      * @param df DataFrame类型参数
+     * @return static Series类型返回值
      */
     /**
      * stack方法。
@@ -193,6 +225,11 @@ public class Reshaper {
      *
      * @param series 输入 Series（多级索引）
      * @return 取消堆叠后的 DataFrame
+     */
+    /**
+     * unstack方法。
+     *      * @param series Series类型参数
+     * @return static DataFrame类型返回值
      */
     /**
      * unstack方法。
@@ -262,6 +299,13 @@ public class Reshaper {
      * @param values 值列名（可选，如果不提供则计数）
  * @param aggFunc 聚合函数（可选，如果 values 提供则需要）
      * @return 交叉表 DataFrame
+     */
+    /**
+     * crosstab方法。
+     *      * @param df DataFrame类型参数
+     * @param rowVar String类型参数
+     * @param colVar String类型参数
+     * @return static DataFrame类型返回值
      */
     /**
      * crosstab方法。
@@ -342,6 +386,11 @@ public class Reshaper {
      *      * @param df DataFrame类型参数
      * @return static DataFrame类型返回值
      */
+    /**
+     * transpose方法。
+     *      * @param df DataFrame类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame transpose(DataFrame df) {
         // 转置后：原列名变为行索引，原行索引变为列名
         List<String> newColumnNames = new ArrayList<>();
@@ -390,6 +439,15 @@ public class Reshaper {
      * @param aggFunc String类型参数
      * @return static DataFrame类型返回值
      */
+    /**
+     * pivotTable方法。
+     *      * @param df DataFrame类型参数
+     * @param index ListString类型参数
+     * @param columns ListString类型参数
+     * @param values String类型参数
+     * @param aggFunc String类型参数
+     * @return static DataFrame类型返回值
+     */
     public static DataFrame pivotTable(DataFrame df, List<String> index, List<String> columns,
                                         String values, String aggFunc) {
         // 这是一个简化实现，实际应该根据 aggFunc 进行聚合
@@ -404,6 +462,15 @@ public class Reshaper {
 
     /**
      * 带聚合函数的 pivot
+     */
+    /**
+     * pivot方法。
+     *      * @param df DataFrame类型参数
+     * @param index String类型参数
+     * @param columns String类型参数
+     * @param values String类型参数
+     * @param aggFunc String类型参数
+     * @return static DataFrame类型返回值
      */
     /**
      * pivot方法。

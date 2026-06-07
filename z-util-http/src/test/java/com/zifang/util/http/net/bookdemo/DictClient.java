@@ -4,12 +4,20 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * DictClient类。
+ */
 public class DictClient {
 
     public static final String SERVER = "dict.org";
     public static final int PORT = 2628;
     public static final int TIMEOUT = 15000;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         Socket socket = null;

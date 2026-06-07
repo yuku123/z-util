@@ -14,6 +14,9 @@ import java.io.OutputStream;
 /**
  * Encoder类。
  */
+/**
+ * Encoder类。
+ */
 public class Encoder {
     private static final int EOF = -1;
 

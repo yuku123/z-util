@@ -12,11 +12,19 @@ import com.zifang.util.numpy.Shape;
 /**
  * Tanh类。
  */
+/**
+ * Tanh类。
+ */
 public class Tanh extends com.zifang.util.ml.nn.Module {
     
     private NdArray savedOutput;  // Store tanh(x) for backward pass
     
     @Override
+    /**
+     * forward方法。
+     *      * @param input NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -39,6 +47,11 @@ public class Tanh extends com.zifang.util.ml.nn.Module {
     }
     
     @Override
+    /**
+     * backward方法。
+     *      * @param gradOutput NdArray类型参数
+     * @return NdArray类型返回值
+     */
     /**
      * backward方法。
      *      * @param gradOutput NdArray类型参数

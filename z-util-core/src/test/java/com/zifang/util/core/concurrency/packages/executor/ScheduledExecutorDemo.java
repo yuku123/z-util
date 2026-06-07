@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit;
  * 执行器框架（Executor Framework）提供了 ThreadPoolExecutor 类，通过线程池来执行并发任务从而避免了所有线程的创建操作。当发送一个任务给执行器后，根据执行器的配置，它将尽快地执行这个任务。当任务执行结束后，这个任务就会从执行器中删除；如果想再次执行这个任务，则需要再次发送这个任务到执行器。
  * 但是，执行器框架提供了 ScheduledThreadPoolExecutor 类来执行周期性的任务。在本节，我们将学习如何使用这个类的功能来计划执行周期性的任务。
  */
+/**
+ * ScheduledExecutorDemo类。
+ */
 public class ScheduledExecutorDemo {
     // 1．创建一个名为 Task 的类，并实现 Runnable 接口。
     static class Task implements Runnable {
@@ -19,12 +22,19 @@ public class ScheduledExecutorDemo {
         private String name;
 
         // 3．实现类的构造器，用来初始化类的属性。
+    /**
+     * Task方法。
+     *      * @param name String类型参数
+     */
         public Task(String name) {
             this.name = name;
         }
 
         // 4．实现 run() 方法。在控制台输出实际的时间，用来检验任务将在指定的一段时间内执行。
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             try {
                 TimeUnit.SECONDS.sleep(1);
@@ -36,6 +46,11 @@ public class ScheduledExecutorDemo {
     }
 
     // 5．实现范例的主类，创建 Main 主类，并实现 main() 方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         /// 6．通过调用Executors工厂类的newScheduledThreadPool()方法创建ScheduledThreadPoolExecutor
         /// 执行器对象，传递 1 作为这个方法的参数。

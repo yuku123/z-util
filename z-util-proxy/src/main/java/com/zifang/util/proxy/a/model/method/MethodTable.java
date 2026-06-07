@@ -16,6 +16,9 @@ import java.util.List;
 /**
  * MethodTable类。
  */
+/**
+ * MethodTable类。
+ */
 public class MethodTable {
     private List<MethodInfo> methods = new ArrayList<>();
 
@@ -25,6 +28,12 @@ public class MethodTable {
      * @param stream       输入流
      * @param poolList     常量池列表
      * @param methodCount  方法数量
+     */
+    /**
+     * MethodTable方法。
+     *      * @param stream InputStream类型参数
+     * @param poolList ListAbstractConstantPool类型参数
+     * @param methodCount int类型参数
      */
     /**
      * MethodTable方法。
@@ -44,6 +53,12 @@ public class MethodTable {
      * @param inputStream 输入流
      * @param poolList    常量池列表
      * @return 解析后的方法信息
+     */
+    /**
+     * parseMethod方法。
+     *      * @param inputStream InputStream类型参数
+     * @param poolList ListAbstractConstantPool类型参数
+     * @return MethodInfo类型返回值
      */
     /**
      * parseMethod方法。
@@ -82,6 +97,10 @@ public class MethodTable {
      * getMethods方法。
      * @return List<MethodInfo>类型返回值
      */
+    /**
+     * getMethods方法。
+     * @return List<MethodInfo>类型返回值
+     */
     public List<MethodInfo> getMethods() {
         return methods;
     }
@@ -90,6 +109,10 @@ public class MethodTable {
      * 获取方法数量
      *
      * @return 方法数量
+     */
+    /**
+     * getMethodCount方法。
+     * @return int类型返回值
      */
     /**
      * getMethodCount方法。
@@ -104,6 +127,11 @@ public class MethodTable {
      *
      * @param index 方法索引
      * @return 方法信息
+     */
+    /**
+     * getMethod方法。
+     *      * @param index int类型参数
+     * @return MethodInfo类型返回值
      */
     /**
      * getMethod方法。

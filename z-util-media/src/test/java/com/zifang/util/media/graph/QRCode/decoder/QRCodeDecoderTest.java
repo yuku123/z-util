@@ -9,9 +9,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import static org.junit.Assert.*;
 
+/**
+ * QRCodeDecoderTest类。
+ */
 public class QRCodeDecoderTest {
 
     @Test
+    /**
+     * testDecodeSimpleImage方法。
+     */
     public void testDecodeSimpleImage() throws IOException {
         // Create a simple test image (white background)
         BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
@@ -32,6 +38,9 @@ public class QRCodeDecoderTest {
     }
 
     @Test
+    /**
+     * testDecodeWithGrayscaleImage方法。
+     */
     public void testDecodeWithGrayscaleImage() throws IOException {
         BufferedImage image = new BufferedImage(50, 50, BufferedImage.TYPE_BYTE_GRAY);
         Graphics2D g = image.createGraphics();
@@ -48,6 +57,9 @@ public class QRCodeDecoderTest {
     }
 
     @Test
+    /**
+     * testBinarizerAndFinderPatternWorkTogether方法。
+     */
     public void testBinarizerAndFinderPatternWorkTogether() {
         // Test that Binarizer and FinderPatternFinder can be used together
         BufferedImage image = new BufferedImage(21, 21, BufferedImage.TYPE_INT_RGB);

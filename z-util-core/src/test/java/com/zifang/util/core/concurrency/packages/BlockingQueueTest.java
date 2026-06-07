@@ -3,13 +3,24 @@ package com.zifang.util.core.concurrency.packages;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * BlockingQueueTest类。
+ */
 public class BlockingQueueTest {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         final BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(3);
 
         for (int i = 0; i < 2; i++) {
             new Thread() {
+    /**
+     * run方法。
+     */
                 public void run() {
                     while (true) {
                         try {
@@ -27,6 +38,9 @@ public class BlockingQueueTest {
             }.start();
         }
         new Thread() {
+    /**
+     * run方法。
+     */
             public void run() {
                 while (true) {
                     try {

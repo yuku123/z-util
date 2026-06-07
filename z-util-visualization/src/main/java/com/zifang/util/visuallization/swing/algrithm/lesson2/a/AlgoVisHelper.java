@@ -14,6 +14,9 @@ import java.awt.geom.Ellipse2D;
 /**
  * AlgoVisHelper类。
  */
+/**
+ * AlgoVisHelper类。
+ */
 public class AlgoVisHelper {
 
     /**
@@ -30,6 +33,14 @@ public class AlgoVisHelper {
      * @param y 圆心Y坐标（像素）
      * @param r 圆的半径（像素）
      */
+    /**
+     * strokeCircle方法。
+     *      * @param g Graphics2D类型参数
+     * @param x int类型参数
+     * @param y int类型参数
+     * @param r int类型参数
+     * @return static void类型返回值
+     */
     public static void strokeCircle(Graphics2D g, int x, int y, int r) {
 
         Ellipse2D circle = new Ellipse2D.Double(x - r, y - r, 2 * r, 2 * r);
@@ -44,6 +55,14 @@ public class AlgoVisHelper {
      * @param y 圆心Y坐标（像素）
      * @param r 圆的半径（像素）
      */
+    /**
+     * fillCircle方法。
+     *      * @param g Graphics2D类型参数
+     * @param x int类型参数
+     * @param y int类型参数
+     * @param r int类型参数
+     * @return static void类型返回值
+     */
     public static void fillCircle(Graphics2D g, int x, int y, int r) {
 
         Ellipse2D circle = new Ellipse2D.Double(x - r, y - r, 2 * r, 2 * r);
@@ -56,6 +75,12 @@ public class AlgoVisHelper {
      * @param g 图形上下文，用于设置颜色
      * @param color 要设置的Color对象，包括预定义颜色如Color.RED等
      */
+    /**
+     * setColor方法。
+     *      * @param g Graphics2D类型参数
+     * @param color Color类型参数
+     * @return static void类型返回值
+     */
     public static void setColor(Graphics2D g, Color color) {
         g.setColor(color);
     }
@@ -65,6 +90,12 @@ public class AlgoVisHelper {
      *
      * @param g 图形上下文，用于设置线条属性
      * @param w 线条宽度（像素）
+     */
+    /**
+     * setStrokeWidth方法。
+     *      * @param g Graphics2D类型参数
+     * @param w int类型参数
+     * @return static void类型返回值
      */
     public static void setStrokeWidth(Graphics2D g, int w) {
         int strokeWidth = w;
@@ -76,6 +107,11 @@ public class AlgoVisHelper {
      * 用于动画播放时的帧间隔控制
      *
      * @param t 暂停时间（毫秒）
+     */
+    /**
+     * pause方法。
+     *      * @param t int类型参数
+     * @return static void类型返回值
      */
     public static void pause(int t) {
         try {

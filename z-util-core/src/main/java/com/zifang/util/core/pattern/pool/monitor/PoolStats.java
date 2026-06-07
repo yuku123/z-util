@@ -8,6 +8,9 @@ import com.zifang.util.core.pattern.pool.PooledObject;
 /**
  * PoolStats接口。
  */
+/**
+ * PoolStats接口。
+ */
 public interface PoolStats {
 
     /**

@@ -25,6 +25,9 @@ import java.util.Objects;
 /**
  * WorkflowNode类。
  */
+/**
+ * WorkflowNode类。
+ */
 public class WorkflowNode {
 
     /**
@@ -75,6 +78,9 @@ public class WorkflowNode {
     /**
      * WorkflowNode方法。
      */
+    /**
+     * WorkflowNode方法。
+     */
     public WorkflowNode() {
     }
 
@@ -82,6 +88,10 @@ public class WorkflowNode {
      * 获取节点唯一标识号
      *
      * @return 节点唯一标识号
+     */
+    /**
+     * getNodeId方法。
+     * @return String类型返回值
      */
     /**
      * getNodeId方法。
@@ -100,6 +110,10 @@ public class WorkflowNode {
      * setNodeId方法。
      *      * @param nodeId String类型参数
      */
+    /**
+     * setNodeId方法。
+     *      * @param nodeId String类型参数
+     */
     public void setNodeId(String nodeId) {
         this.nodeId = nodeId;
     }
@@ -108,6 +122,10 @@ public class WorkflowNode {
      * 获取节点所属组别标识
      *
      * @return 节点组别标识，用于逻辑上归类同种处理单元
+     */
+    /**
+     * getGroupId方法。
+     * @return String类型返回值
      */
     /**
      * getGroupId方法。
@@ -126,6 +144,10 @@ public class WorkflowNode {
      * setGroupId方法。
      *      * @param groupId String类型参数
      */
+    /**
+     * setGroupId方法。
+     *      * @param groupId String类型参数
+     */
     public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
@@ -134,6 +156,10 @@ public class WorkflowNode {
      * 获取节点别名
      *
      * @return 节点别名
+     */
+    /**
+     * getName方法。
+     * @return String类型返回值
      */
     /**
      * getName方法。
@@ -152,6 +178,10 @@ public class WorkflowNode {
      * setName方法。
      *      * @param name String类型参数
      */
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -160,6 +190,10 @@ public class WorkflowNode {
      * 获取节点类型
      *
      * @return 节点类型，描述节点的性质
+     */
+    /**
+     * getType方法。
+     * @return String类型返回值
      */
     /**
      * getType方法。
@@ -178,6 +212,10 @@ public class WorkflowNode {
      * setType方法。
      *      * @param type String类型参数
      */
+    /**
+     * setType方法。
+     *      * @param type String类型参数
+     */
     public void setType(String type) {
         this.type = type;
     }
@@ -186,6 +224,10 @@ public class WorkflowNode {
      * 获取处理引擎的服务标识
      *
      * @return 服务单元标识
+     */
+    /**
+     * getServiceUnit方法。
+     * @return String类型返回值
      */
     /**
      * getServiceUnit方法。
@@ -204,6 +246,10 @@ public class WorkflowNode {
      * setServiceUnit方法。
      *      * @param serviceUnit String类型参数
      */
+    /**
+     * setServiceUnit方法。
+     *      * @param serviceUnit String类型参数
+     */
     public void setServiceUnit(String serviceUnit) {
         this.serviceUnit = serviceUnit;
     }
@@ -212,6 +258,10 @@ public class WorkflowNode {
      * 获取处理引擎的调用方法名
      *
      * @return 调用方法名，用于动态方法调用
+     */
+    /**
+     * getInvokeDynamic方法。
+     * @return String类型返回值
      */
     /**
      * getInvokeDynamic方法。
@@ -230,6 +280,10 @@ public class WorkflowNode {
      * setInvokeDynamic方法。
      *      * @param invokeDynamic String类型参数
      */
+    /**
+     * setInvokeDynamic方法。
+     *      * @param invokeDynamic String类型参数
+     */
     public void setInvokeDynamic(String invokeDynamic) {
         this.invokeDynamic = invokeDynamic;
     }
@@ -238,6 +292,10 @@ public class WorkflowNode {
      * 获取调用参数
      *
      * @return 调用参数对象，可被处理引擎识别和转换
+     */
+    /**
+     * getInvokeParameter方法。
+     * @return Object类型返回值
      */
     /**
      * getInvokeParameter方法。
@@ -256,6 +314,10 @@ public class WorkflowNode {
      * setInvokeParameter方法。
      *      * @param invokeParameter Object类型参数
      */
+    /**
+     * setInvokeParameter方法。
+     *      * @param invokeParameter Object类型参数
+     */
     public void setInvokeParameter(Object invokeParameter) {
         this.invokeParameter = invokeParameter;
     }
@@ -264,6 +326,10 @@ public class WorkflowNode {
      * 获取节点连接器
      *
      * @return 节点连接器，描述此节点与其他节点的关联情况
+     */
+    /**
+     * getConnector方法。
+     * @return Connector类型返回值
      */
     /**
      * getConnector方法。
@@ -282,6 +348,10 @@ public class WorkflowNode {
      * setConnector方法。
      *      * @param connector Connector类型参数
      */
+    /**
+     * setConnector方法。
+     *      * @param connector Connector类型参数
+     */
     public void setConnector(Connector connector) {
         this.connector = connector;
     }
@@ -290,6 +360,10 @@ public class WorkflowNode {
      * 获取节点缓存
      *
      * @return 节点缓存Map，键值对形式存储
+     */
+    /**
+     * getCache方法。
+     * @return HashMap<String, String>类型返回值
      */
     /**
      * getCache方法。
@@ -308,6 +382,10 @@ public class WorkflowNode {
      * setCache方法。
      *      * @param cache HashMapString,类型参数
      */
+    /**
+     * setCache方法。
+     *      * @param cache HashMapString,类型参数
+     */
     public void setCache(HashMap<String, String> cache) {
         this.cache = cache;
     }
@@ -316,6 +394,10 @@ public class WorkflowNode {
      * 防止重复添加值
      *
      * @param nodeId 待添加的后置节点ID
+     */
+    /**
+     * putPost方法。
+     *      * @param nodeId String类型参数
      */
     /**
      * putPost方法。
@@ -336,6 +418,10 @@ public class WorkflowNode {
      * putPre方法。
      *      * @param nodeId String类型参数
      */
+    /**
+     * putPre方法。
+     *      * @param nodeId String类型参数
+     */
     public void putPre(String nodeId) {
         if (!connector.getPre().contains(nodeId) && !this.nodeId.equals(nodeId)) {
             connector.getPre().add(nodeId);
@@ -347,11 +433,20 @@ public class WorkflowNode {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "WorkflowNode{nodeId=" + nodeId + ", groupId=" + groupId + ", name=" + name + ", type=" + type + ", serviceUnit=" + serviceUnit + ", invokeDynamic=" + invokeDynamic + ", invokeParameter=" + invokeParameter + ", connector=" + connector + ", cache=" + cache + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -373,6 +468,10 @@ public class WorkflowNode {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

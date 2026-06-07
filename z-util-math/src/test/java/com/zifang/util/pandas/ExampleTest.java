@@ -13,10 +13,16 @@ import static org.junit.Assert.*;
 /**
  * util-math 使用示例测试
  */
+/**
+ * ExampleTest类。
+ */
 public class ExampleTest {
 
     @Test
     @Ignore("Num.sum/multiply 实现 bug，结果与预期不符")
+    /**
+     * testNumBasicOperations方法。
+     */
     public void testNumBasicOperations() {
         // 创建 Num 数组
         Num arr = Num.arange(0, 10, 1);
@@ -33,6 +39,9 @@ public class ExampleTest {
     }
 
     @Test
+    /**
+     * testSeriesBasicOperations方法。
+     */
     public void testSeriesBasicOperations() {
         // 创建 Series
         double[] data = {1.0, 2.0, 3.0, 4.0, 5.0};
@@ -49,6 +58,9 @@ public class ExampleTest {
     }
 
     @Test
+    /**
+     * testDataFrameBasicOperations方法。
+     */
     public void testDataFrameBasicOperations() {
         // 创建 DataFrame
         Map<String, double[]> data = new HashMap<>();
@@ -69,6 +81,9 @@ public class ExampleTest {
 
     @Ignore
     @Test
+    /**
+     * testLinearAlgebra方法。
+     */
     public void testLinearAlgebra() {
         // 创建矩阵
         double[][] data = {
@@ -88,6 +103,9 @@ public class ExampleTest {
     }
 
     @Test
+    /**
+     * testMathFunctions方法。
+     */
     public void testMathFunctions() {
         Num arr = Num.linspace(0, Math.PI, 100);
 
@@ -102,6 +120,9 @@ public class ExampleTest {
 
     @Ignore
     @Test
+    /**
+     * testRandomNumbers方法。
+     */
     public void testRandomNumbers() {
         // 设置随机种子以便重现
         Nums.random.seed(42);
@@ -119,6 +140,9 @@ public class ExampleTest {
     }
 
     @Test
+    /**
+     * testPandasEntry方法。
+     */
     public void testPandasEntry() {
         // 使用 Pandas 统一入口
 

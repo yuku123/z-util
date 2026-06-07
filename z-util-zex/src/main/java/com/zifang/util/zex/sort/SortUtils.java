@@ -19,6 +19,9 @@ import java.util.Arrays;
  * @author zifang
  * @version 1.0
  */
+/**
+ * SortUtils类。
+ */
 public class SortUtils {
 
 
@@ -32,6 +35,10 @@ public class SortUtils {
      * 算法原理：从未排序序列中找到最小元素，存放到已排序序列的末尾，以此类推，直到所有元素均排序完毕。
      *
      * @param arr 待排序的整数数组，排序在原数组上进行
+     */
+    /**
+     * directSelectionSort方法。
+     *      * @param arr int[]类型参数
      */
     public void directSelectionSort(int[] arr) {
         int i, j, min, tmp, len = arr.length;
@@ -67,6 +74,10 @@ public class SortUtils {
      * 二分插入排序用二分法找出新记录在有序序列中的位置。
      *
      * @param arr 待排序的整数数组，排序在原数组上进行
+     */
+    /**
+     * binaryInsertionSort方法。
+     *      * @param arr int[]类型参数
      */
     public void binaryInsertionSort(int[] arr) {
         int i, j, left, right, center, tmp, len = arr.length;
@@ -106,6 +117,9 @@ public class SortUtils {
     /**
      * 冒泡排序。
      */
+    /**
+     * sort1方法。
+     */
     public void sort1() {
         int[] a = new int[]{4, 2, 6, 5, 1, 3};
 
@@ -123,6 +137,9 @@ public class SortUtils {
     }
 
     // 选择
+    /**
+     * sort2方法。
+     */
     public void sort2() {
         int[] a = new int[]{4, 2, 6, 5, 1, 3};
 
@@ -155,6 +172,10 @@ public class SortUtils {
      *
      * @param arr 待排序的整数数组，排序在原数组上进行
      */
+    /**
+     * directInsertSort方法。
+     *      * @param arr int[]类型参数
+     */
     public void directInsertSort(int[] arr) {
         int i, j, tmp;
 
@@ -186,6 +207,10 @@ public class SortUtils {
      *
      * @param arr 待排序的整数数组，排序在原数组上进行
      */
+    /**
+     * shellSort方法。
+     *      * @param arr int[]类型参数
+     */
     public void shellSort(int[] arr) {
         int i, j, tmp, len = arr.length;
         //希尔排序步长
@@ -210,6 +235,11 @@ public class SortUtils {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new SortUtils().directInsertSort(new int[]{2, 1, 4, 3, 9, 5});
     }

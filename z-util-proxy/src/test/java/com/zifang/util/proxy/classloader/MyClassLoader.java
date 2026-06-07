@@ -12,6 +12,9 @@ import java.nio.channels.FileChannel;
  * Object、String等等一些类。  当然，这些类在classpath是找不到的。
  * 所以就会抛出ClassNotFoundException 。
  */
+/**
+ * MyClassLoader类。
+ */
 public class MyClassLoader extends ClassLoader {
 //	@Override
 //	public Class<?> loadClass(String name) throws ClassNotFoundException {
@@ -19,6 +22,11 @@ public class MyClassLoader extends ClassLoader {
 //	}
 
     @Override
+    /**
+     * findClass方法。
+     *      * @param name String类型参数
+     * @return Class<?>类型返回值
+     */
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         String classPath = MyClassLoader.class.getResource("/").getPath(); // 得到classpath
         String fileName = name.replace(".", "/") + ".class";

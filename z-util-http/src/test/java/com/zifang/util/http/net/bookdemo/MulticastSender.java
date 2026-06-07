@@ -3,8 +3,16 @@ package com.zifang.util.http.net.bookdemo;
 import java.io.IOException;
 import java.net.*;
 
+/**
+ * MulticastSender类。
+ */
 public class MulticastSender {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         InetAddress ia = null;

@@ -2,6 +2,9 @@ package com.zifang.util.core.concurrency.packages.atomic;
 
 import java.util.concurrent.atomic.AtomicIntegerFieldUpdater;
 
+/**
+ * AtomicIntegerFieldUpdaterTest类。
+ */
 public class AtomicIntegerFieldUpdaterTest {
 
     private static Class<Person> cls;
@@ -16,6 +19,11 @@ public class AtomicIntegerFieldUpdaterTest {
      *
      * @param args
      */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // 新建AtomicLongFieldUpdater对象，传递参数是“class对象”和“long类型在类中对应的名称”
         AtomicIntegerFieldUpdater<Person> mAtoLong = AtomicIntegerFieldUpdater.newUpdater(Person.class, "id");
@@ -28,14 +36,26 @@ public class AtomicIntegerFieldUpdaterTest {
 class Person {
     volatile int id;
 
+    /**
+     * Person方法。
+     *      * @param id int类型参数
+     */
     public Person(int id) {
         this.id = id;
     }
 
+    /**
+     * setId方法。
+     *      * @param id int类型参数
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * getId方法。
+     * @return int类型返回值
+     */
     public int getId() {
         return id;
     }

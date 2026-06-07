@@ -15,6 +15,10 @@ import java.util.Map;
 public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
     private static final Logger log = LoggerFactory.getLogger(CFJavaFileManager.class);
 
+    /**
+     * getFileObjectHashMap方法。
+     * @return Map<String, BytesJavaFileObject>类型返回值
+     */
     public Map<String, BytesJavaFileObject> getFileObjectHashMap() {
         return fileObjectHashMap;
     }
@@ -29,6 +33,10 @@ public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
      *
      * @param fileManager delegate to this file manager
      */
+    /**
+     * CFJavaFileManager方法。
+     *      * @param fileManager JavaFileManager类型参数
+     */
     protected CFJavaFileManager(JavaFileManager fileManager) {
         super(fileManager);
     }
@@ -37,6 +45,14 @@ public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
      * 将JavaFileObject对象的引用交给JavaCompiler，让它将编译好后的Class文件装载进来
      */
     @Override
+    /**
+     * getJavaFileForOutput方法。
+     *      * @param location Location类型参数
+     * @param className String类型参数
+     * @param kind JavaFileObject.Kind类型参数
+     * @param sibling FileObject类型参数
+     * @return JavaFileObject类型返回值
+     */
     public JavaFileObject getJavaFileForOutput(Location location, String className, JavaFileObject.Kind kind, FileObject sibling) {
 
         BytesJavaFileObject fileObject = fileObjectHashMap.get(className);
@@ -51,11 +67,22 @@ public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
     }
 
     @Override
+    /**
+     * hasLocation方法。
+     *      * @param location Location类型参数
+     * @return boolean类型返回值
+     */
     public boolean hasLocation(Location location) {
         return super.hasLocation(location);
     }
 
     @Override
+    /**
+     * isSameFile方法。
+     *      * @param a FileObject类型参数
+     * @param b FileObject类型参数
+     * @return boolean类型返回值
+     */
     public boolean isSameFile(FileObject a, FileObject b) {
         log.info("isSameFile : {}", a);
 
@@ -70,11 +97,22 @@ public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
      * @return
      */
     @Override
+    /**
+     * handleOption方法。
+     *      * @param current String类型参数
+     * @param remaining Iterator类型参数
+     * @return boolean类型返回值
+     */
     public boolean handleOption(String current, Iterator remaining) {
         return super.handleOption(current, remaining);
     }
 
     @Override
+    /**
+     * isSupportedOption方法。
+     *      * @param option String类型参数
+     * @return int类型返回值
+     */
     public int isSupportedOption(String option) {
         log.info("isSupportedOption : {}", option);
 
@@ -82,6 +120,13 @@ public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
     }
 
     @Override
+    /**
+     * getJavaFileForInput方法。
+     *      * @param location Location类型参数
+     * @param className String类型参数
+     * @param kind JavaFileObject.Kind类型参数
+     * @return JavaFileObject类型返回值
+     */
     public JavaFileObject getJavaFileForInput(Location location, String className, JavaFileObject.Kind kind) throws IOException {
         log.info("getJavaFileForInput : {}", location);
 
@@ -89,6 +134,13 @@ public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
     }
 
     @Override
+    /**
+     * getFileForInput方法。
+     *      * @param location Location类型参数
+     * @param packageName String类型参数
+     * @param relativeName String类型参数
+     * @return FileObject类型返回值
+     */
     public FileObject getFileForInput(Location location, String packageName, String relativeName) throws IOException {
         log.info("getFileForInput : {}", location);
 
@@ -96,6 +148,14 @@ public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
     }
 
     @Override
+    /**
+     * getFileForOutput方法。
+     *      * @param location Location类型参数
+     * @param packageName String类型参数
+     * @param relativeName String类型参数
+     * @param sibling FileObject类型参数
+     * @return FileObject类型返回值
+     */
     public FileObject getFileForOutput(Location location, String packageName, String relativeName, FileObject sibling) throws IOException {
         log.info("getFileForOutput : {}", location);
 
@@ -103,11 +163,17 @@ public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
     }
 
     @Override
+    /**
+     * flush方法。
+     */
     public void flush() throws IOException {
         super.flush();
     }
 
     @Override
+    /**
+     * close方法。
+     */
     public void close() throws IOException {
         super.close();
     }

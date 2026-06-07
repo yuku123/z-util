@@ -13,10 +13,18 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 // Requires Java 7 for try-with-resources and multi-catch
+/**
+ * PooledWeblog类。
+ */
 public class PooledWeblog {
 
     private final static int NUM_THREADS = 4;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
         ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
         Queue<LogEntry> results = new LinkedList<LogEntry>();

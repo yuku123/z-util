@@ -9,6 +9,9 @@ package com.zifang.util.zex.sort;
  * 代码风格来看感觉不如之前TimSort的代码风格好。代码中的变量命名大部分都是a, b, i, k, j, t这种，让人不好理解。所以建议大家日常写代码也不要使用这种不明含义的命名。最好能做到让其它人一看就懂，比如说用index代替i, 用 temp代替t等等。好在它的核心代码部分注释很全，看起来到不麻烦。
  * *
  */
+/**
+ * DualPivotQuicksort类。
+ */
 public class DualPivotQuicksort {
 
 
@@ -43,6 +46,11 @@ public class DualPivotQuicksort {
      *
      * @param a 指定的数组
      */
+    /**
+     * sort方法。
+     *      * @param a int[]类型参数
+     * @return static void类型返回值
+     */
     public static void sort(int[] a) {
         sort(a, 0, a.length - 1);
     }
@@ -53,6 +61,13 @@ public class DualPivotQuicksort {
      * @param a     指定的数组
      * @param left  指定范围的第一个元素(包括)
      * @param right 指定范围的最后一个元素(不包括)
+     */
+    /**
+     * sort方法。
+     *      * @param a int[]类型参数
+     * @param left int类型参数
+     * @param right int类型参数
+     * @return static void类型返回值
      */
     public static void sort(int[] a, int left, int right) {
 

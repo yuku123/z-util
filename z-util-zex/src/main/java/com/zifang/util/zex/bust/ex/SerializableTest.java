@@ -13,9 +13,15 @@ import org.junit.Test;
 
 import java.io.*;
 
+/**
+ * SerializableTest类。
+ */
 public class SerializableTest {
 
     @Test
+    /**
+     * test0方法。
+     */
     public void test0() throws IOException, ClassNotFoundException {
         //初始化一个User实例，并填充一部分数据
         User user = new User();
@@ -39,28 +45,53 @@ class User implements Serializable {
     private String name;
     private int age;
 
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * setName方法。
+     *      * @param name String类型参数
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * getAge方法。
+     * @return int类型返回值
+     */
     public int getAge() {
         return age;
     }
 
+    /**
+     * setAge方法。
+     *      * @param age int类型参数
+     */
     public void setAge(int age) {
         this.age = age;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "User{name=" + name + ", age=" + age + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -69,6 +100,10 @@ class User implements Serializable {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     public int hashCode() {
         return java.util.Objects.hash(name, age);
     }

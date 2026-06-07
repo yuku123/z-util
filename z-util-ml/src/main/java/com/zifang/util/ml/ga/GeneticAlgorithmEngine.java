@@ -8,6 +8,9 @@ import java.util.Random;
 /**
  * GeneticAlgorithmEngine类。
  */
+/**
+ * GeneticAlgorithmEngine类。
+ */
 public class GeneticAlgorithmEngine {
 
     private final int populationSize;
@@ -47,6 +50,10 @@ public class GeneticAlgorithmEngine {
      * builder方法。
      * @return static Builder类型返回值
      */
+    /**
+     * builder方法。
+     * @return static Builder类型返回值
+     */
     public static Builder builder() {
         return new Builder();
     }
@@ -58,6 +65,11 @@ public class GeneticAlgorithmEngine {
      * @return 最终的种群对象
      */
     @SuppressWarnings("unchecked")
+    /**
+     * evolve方法。
+     *      * @param maxGenerations int类型参数
+     * @return Population类型返回值
+     */
     /**
      * evolve方法。
      *      * @param maxGenerations int类型参数
@@ -136,6 +148,9 @@ public class GeneticAlgorithmEngine {
 /**
  * IndividualFactory接口。
  */
+/**
+ * IndividualFactory接口。
+ */
     public interface IndividualFactory {
         Individual create();
     }
@@ -166,6 +181,11 @@ public class GeneticAlgorithmEngine {
      *      * @param populationSize int类型参数
      * @return Builder类型返回值
      */
+    /**
+     * populationSize方法。
+     *      * @param populationSize int类型参数
+     * @return Builder类型返回值
+     */
         public Builder populationSize(int populationSize) {
             this.populationSize = populationSize;
             return this;
@@ -177,6 +197,11 @@ public class GeneticAlgorithmEngine {
          * @param mutationRate 变异率，范围[0, 1]
          * @return this Builder实例
          */
+    /**
+     * mutationRate方法。
+     *      * @param mutationRate double类型参数
+     * @return Builder类型返回值
+     */
     /**
      * mutationRate方法。
      *      * @param mutationRate double类型参数
@@ -198,6 +223,11 @@ public class GeneticAlgorithmEngine {
      *      * @param crossoverRate double类型参数
      * @return Builder类型返回值
      */
+    /**
+     * crossoverRate方法。
+     *      * @param crossoverRate double类型参数
+     * @return Builder类型返回值
+     */
         public Builder crossoverRate(double crossoverRate) {
             this.crossoverRate = crossoverRate;
             return this;
@@ -209,6 +239,11 @@ public class GeneticAlgorithmEngine {
          * @param elitismCount 精英个数，用于保留最优个体到下一代
          * @return this Builder实例
          */
+    /**
+     * elitismCount方法。
+     *      * @param elitismCount int类型参数
+     * @return Builder类型返回值
+     */
     /**
      * elitismCount方法。
      *      * @param elitismCount int类型参数
@@ -230,6 +265,11 @@ public class GeneticAlgorithmEngine {
      *      * @param individualFactory IndividualFactory类型参数
      * @return Builder类型返回值
      */
+    /**
+     * individualFactory方法。
+     *      * @param individualFactory IndividualFactory类型参数
+     * @return Builder类型返回值
+     */
         public Builder individualFactory(IndividualFactory individualFactory) {
             this.individualFactory = individualFactory;
             return this;
@@ -241,6 +281,11 @@ public class GeneticAlgorithmEngine {
          * @param fitnessFunction 用于评估个体适应度的函数
          * @return this Builder实例
          */
+    /**
+     * fitnessFunction方法。
+     *      * @param fitnessFunction FitnessFunction类型参数
+     * @return Builder类型返回值
+     */
     /**
      * fitnessFunction方法。
      *      * @param fitnessFunction FitnessFunction类型参数
@@ -262,6 +307,11 @@ public class GeneticAlgorithmEngine {
      *      * @param crossoverOperator CrossoverOperator类型参数
      * @return Builder类型返回值
      */
+    /**
+     * crossoverOperator方法。
+     *      * @param crossoverOperator CrossoverOperator类型参数
+     * @return Builder类型返回值
+     */
         public Builder crossoverOperator(CrossoverOperator crossoverOperator) {
             this.crossoverOperator = crossoverOperator;
             return this;
@@ -273,6 +323,11 @@ public class GeneticAlgorithmEngine {
          * @param mutationOperator 用于对个体进行变异的操作
          * @return this Builder实例
          */
+    /**
+     * mutationOperator方法。
+     *      * @param mutationOperator MutationOperator类型参数
+     * @return Builder类型返回值
+     */
     /**
      * mutationOperator方法。
      *      * @param mutationOperator MutationOperator类型参数
@@ -294,6 +349,11 @@ public class GeneticAlgorithmEngine {
      *      * @param selectionOperator SelectionOperator类型参数
      * @return Builder类型返回值
      */
+    /**
+     * selectionOperator方法。
+     *      * @param selectionOperator SelectionOperator类型参数
+     * @return Builder类型返回值
+     */
         public Builder selectionOperator(SelectionOperator selectionOperator) {
             this.selectionOperator = selectionOperator;
             return this;
@@ -310,6 +370,11 @@ public class GeneticAlgorithmEngine {
      *      * @param terminationCondition TerminationCondition类型参数
      * @return Builder类型返回值
      */
+    /**
+     * terminationCondition方法。
+     *      * @param terminationCondition TerminationCondition类型参数
+     * @return Builder类型返回值
+     */
         public Builder terminationCondition(TerminationCondition terminationCondition) {
             this.terminationCondition = terminationCondition;
             return this;
@@ -321,6 +386,10 @@ public class GeneticAlgorithmEngine {
          * @return 构建好的遗传算法引擎实例
          * @throws IllegalStateException 如果缺少必需的组件
          */
+    /**
+     * build方法。
+     * @return GeneticAlgorithmEngine类型返回值
+     */
     /**
      * build方法。
      * @return GeneticAlgorithmEngine类型返回值

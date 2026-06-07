@@ -11,11 +11,17 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * DockerClientTest类。
+ */
 public class DockerClientTest {
 
     private DockerClient client;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         client = new DockerClient();
     }
@@ -29,24 +35,36 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         DockerClient c = new DockerClient();
         assertNotNull(c);
     }
 
     @Test
+    /**
+     * testConstructorWithCustomHost方法。
+     */
     public void testConstructorWithCustomHost() {
         DockerClient c = new DockerClient("tcp://localhost:2375");
         assertNotNull(c);
     }
 
     @Test
+    /**
+     * testIsDockerAvailable方法。
+     */
     public void testIsDockerAvailable() {
         boolean available = client.isDockerAvailable();
         assertTrue(available == true || available == false);
     }
 
     @Test
+    /**
+     * testListContainersWhenDockerAvailable方法。
+     */
     public void testListContainersWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -56,6 +74,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testListAllContainersWhenDockerAvailable方法。
+     */
     public void testListAllContainersWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -65,6 +86,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testListRunningContainersWhenDockerAvailable方法。
+     */
     public void testListRunningContainersWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -74,6 +98,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testListImagesWhenDockerAvailable方法。
+     */
     public void testListImagesWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -83,6 +110,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testListNetworksWhenDockerAvailable方法。
+     */
     public void testListNetworksWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -92,6 +122,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testListVolumesWhenDockerAvailable方法。
+     */
     public void testListVolumesWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -101,6 +134,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testGetVersionWhenDockerAvailable方法。
+     */
     public void testGetVersionWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -110,6 +146,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testInspectContainerWhenDockerAvailable方法。
+     */
     public void testInspectContainerWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -119,6 +158,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testInspectImageWhenDockerAvailable方法。
+     */
     public void testInspectImageWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -128,6 +170,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testInspectNetworkWhenDockerAvailable方法。
+     */
     public void testInspectNetworkWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -137,6 +182,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testInspectVolumeWhenDockerAvailable方法。
+     */
     public void testInspectVolumeWhenDockerAvailable() {
         if (!isDockerAvailable()) {
             return;
@@ -146,6 +194,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testGetContainerLogsWithNullTail方法。
+     */
     public void testGetContainerLogsWithNullTail() {
         if (!isDockerAvailable()) {
             return;
@@ -155,6 +206,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testGetContainerLogsWithTail方法。
+     */
     public void testGetContainerLogsWithTail() {
         if (!isDockerAvailable()) {
             return;
@@ -164,6 +218,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testStatsDTOSettersAndGetters方法。
+     */
     public void testStatsDTOSettersAndGetters() {
         DockerClient.StatsDTO stats = new DockerClient.StatsDTO();
         stats.setCpuPercent(25.5);
@@ -186,6 +243,9 @@ public class DockerClientTest {
     }
 
     @Test
+    /**
+     * testStatsDTOFormatSizes方法。
+     */
     public void testStatsDTOFormatSizes() {
         DockerClient.StatsDTO stats = new DockerClient.StatsDTO();
 

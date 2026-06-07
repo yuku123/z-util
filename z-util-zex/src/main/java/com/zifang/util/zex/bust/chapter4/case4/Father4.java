@@ -13,6 +13,9 @@ class Father4 {
 
     protected int money = 100;
 
+    /**
+     * fishing方法。
+     */
     public void fishing() {
         System.out.println("钓鱼");
     }
@@ -23,15 +26,26 @@ class Son4 extends Father4 {
 
     private int money = 50;
 
+    /**
+     * writeCode方法。
+     */
     public void writeCode() {
         System.out.println("写代码");
     }
 
+    /**
+     * getMoney方法。
+     */
     public void getMoney() {
         System.out.println(super.money);
     }
 
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Son4 son = new Son4();
         son.fishing();

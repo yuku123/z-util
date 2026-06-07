@@ -4,6 +4,9 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * RecursiveTaskExceptionDemo类。
+ */
 public class RecursiveTaskExceptionDemo {
     // 1．创建名为Task的类，并继承RecursiveTask类，RecursiveTask类的泛型参数为Integer 类型。
     static class Task extends RecursiveTask<Integer> {
@@ -13,6 +16,12 @@ public class RecursiveTaskExceptionDemo {
         private int start, end;
 
         // 4．实现类的构造器，用来初始化类的属性。
+    /**
+     * Task方法。
+     *      * @param array int[]类型参数
+     * @param start int类型参数
+     * @param end int类型参数
+     */
         public Task(int[] array, int start, int end) {
             this.array = array;
             this.start = start;
@@ -21,6 +30,10 @@ public class RecursiveTaskExceptionDemo {
 
         // 5．实现任务的compute()方法。由于指定了Integer类型作为RecursiveTask的泛型类型，因此这个方法必须返回一个Integer对象。在控制台输出start和end属性。
         @Override
+    /**
+     * compute方法。
+     * @return int类型返回值
+     */
         protected Integer compute() {
 
             System.out.printf("Task: Start from %d to %d\n", start, end);
@@ -52,6 +65,11 @@ public class RecursiveTaskExceptionDemo {
         // 10．实现范例的主类，创建Main主类，并实现main()方法。
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // 11．创建一个名为array并能容纳100个整数的int数组。
         int[] array = new int[100];

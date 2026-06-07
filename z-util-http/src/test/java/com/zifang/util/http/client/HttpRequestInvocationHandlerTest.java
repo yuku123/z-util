@@ -9,15 +9,24 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * HttpRequestInvocationHandlerTest类。
+ */
 public class HttpRequestInvocationHandlerTest {
 
     @Test
+    /**
+     * testConstructorWithInterface方法。
+     */
     public void testConstructorWithInterface() {
         HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
         assertEquals(TestApi.class, handler.getTarget());
     }
 
     @Test
+    /**
+     * testConstructorWithInterfaceAndContextParams方法。
+     */
     public void testConstructorWithInterfaceAndContextParams() {
         Map<String, Object> params = new HashMap<>();
         params.put("key", "value");
@@ -28,6 +37,9 @@ public class HttpRequestInvocationHandlerTest {
     }
 
     @Test
+    /**
+     * testSetContextParams方法。
+     */
     public void testSetContextParams() {
         HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
         Map<String, Object> params = new HashMap<>();
@@ -38,12 +50,18 @@ public class HttpRequestInvocationHandlerTest {
     }
 
     @Test
+    /**
+     * testGetContextParams方法。
+     */
     public void testGetContextParams() {
         HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
         assertNull(handler.getContextParams());
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
         String str = handler.toString();
@@ -52,6 +70,9 @@ public class HttpRequestInvocationHandlerTest {
     }
 
     @Test
+    /**
+     * testEqualsWithSameContent方法。
+     */
     public void testEqualsWithSameContent() {
         Map<String, Object> params1 = new HashMap<>();
         Map<String, Object> params2 = new HashMap<>();
@@ -63,6 +84,9 @@ public class HttpRequestInvocationHandlerTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentParams方法。
+     */
     public void testEqualsWithDifferentParams() {
         Map<String, Object> params1 = new HashMap<>();
         params1.put("key1", "value1");
@@ -77,18 +101,27 @@ public class HttpRequestInvocationHandlerTest {
     }
 
     @Test
+    /**
+     * testEqualsWithSelf方法。
+     */
     public void testEqualsWithSelf() {
         HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
         assertEquals(handler, handler);
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         HttpRequestInvocationHandler handler = new HttpRequestInvocationHandler(TestApi.class);
         assertNotEquals(null, handler);
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         Map<String, Object> params = new HashMap<>();
         HttpRequestInvocationHandler handler1 = new HttpRequestInvocationHandler(TestApi.class, params);
@@ -98,6 +131,9 @@ public class HttpRequestInvocationHandlerTest {
     }
 
     @RestController("/test")
+/**
+ * TestApi接口。
+ */
     public interface TestApi {
     }
 }

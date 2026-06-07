@@ -6,7 +6,15 @@ import java.io.IOException;
 /**
  * @author zifang
  */
+/**
+ * ReadFile类。
+ */
 public class ReadFile {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
         FileInputStream fis = null;
         try {

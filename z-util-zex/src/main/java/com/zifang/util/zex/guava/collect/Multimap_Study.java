@@ -42,11 +42,17 @@ import java.util.Map.Entry;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Multimap_Study类。
+ */
 public class Multimap_Study {
     /**
      * 基本使用.
      */
     @Test
+    /**
+     * basicTest方法。
+     */
     public void basicTest() {
         Multimap<String, String> map = ArrayListMultimap.create(); // 类似于Map<String,List<String>>，不需要检查List中的对象是否存在
         map.put("a", "a1"); // ==>multimap.get(key).add(value)
@@ -74,6 +80,9 @@ public class Multimap_Study {
      * 暂仅发现asMap.get()返回集合支持转换为List<>，其余视图转换时均报ClassCastException
      */
     @Test
+    /**
+     * viewTest方法。
+     */
     public void viewTest() {
         //
         // asMap
@@ -128,6 +137,9 @@ public class Multimap_Study {
      * LinkedHashMultimap保留了映射项的插入顺序，包括键插入的顺序，以及键映射的所有值的插入顺序.
      */
     @Test
+    /**
+     * LinkedHashMultimapTest方法。
+     */
     public void LinkedHashMultimapTest() {
         Multimap<String, String> map = LinkedHashMultimap.create();
         map.put("c", "c2");

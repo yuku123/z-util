@@ -10,10 +10,17 @@ import java.util.Properties;
 /**
  * JvmPropertiesUtil类。
  */
+/**
+ * JvmPropertiesUtil类。
+ */
 public class JvmPropertiesUtil {
 
     /**
      * @return java环境下参数
+     */
+    /**
+     * getJvmProperties方法。
+     * @return static JvmProperties类型返回值
      */
     /**
      * getJvmProperties方法。
@@ -30,6 +37,11 @@ public class JvmPropertiesUtil {
      *
      * @param jvmPropertyKey java环境的参数key
      * @return java环境的数据值
+     */
+    /**
+     * getJvmProperty方法。
+     *      * @param jvmPropertyKey String类型参数
+     * @return static String类型返回值
      */
     /**
      * getJvmProperty方法。
@@ -53,6 +65,12 @@ public class JvmPropertiesUtil {
      * @param propertyDefault String类型参数
      * @return static String类型返回值
      */
+    /**
+     * getJvmProperty方法。
+     *      * @param jvmPropertyKey String类型参数
+     * @param propertyDefault String类型参数
+     * @return static String类型返回值
+     */
     public static String getJvmProperty(String jvmPropertyKey, String propertyDefault) {
         Properties properties = System.getProperties();
         return properties.getProperty(jvmPropertyKey, propertyDefault);
@@ -64,6 +82,12 @@ public class JvmPropertiesUtil {
      * @param jvmPropertyKey   java环境的key值
      * @param jvmPropertyValue java环境的value值
      * @return 返回成功替换之后的就值
+     */
+    /**
+     * setJvmProperty方法。
+     *      * @param jvmPropertyKey String类型参数
+     * @param jvmPropertyValue String类型参数
+     * @return static String类型返回值
      */
     /**
      * setJvmProperty方法。

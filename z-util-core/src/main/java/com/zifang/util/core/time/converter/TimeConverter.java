@@ -13,6 +13,9 @@ import java.util.Date;
 /**
  * TimeConverter类。
  */
+/**
+ * TimeConverter类。
+ */
 public class TimeConverter {
 
     private TimeConverter() {
@@ -20,6 +23,11 @@ public class TimeConverter {
 
     // ==================== Date <-> LocalDateTime ====================
 
+    /**
+     * toLocalDateTime方法。
+     *      * @param date Date类型参数
+     * @return static LocalDateTime类型返回值
+     */
     /**
      * toLocalDateTime方法。
      *      * @param date Date类型参数
@@ -36,6 +44,12 @@ public class TimeConverter {
      * @param zoneId ZoneId类型参数
      * @return static LocalDateTime类型返回值
      */
+    /**
+     * toLocalDateTime方法。
+     *      * @param date Date类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalDateTime类型返回值
+     */
     public static LocalDateTime toLocalDateTime(Date date, ZoneId zoneId) {
         if (date == null) return null;
         return date.toInstant().atZone(zoneId).toLocalDateTime();
@@ -46,11 +60,22 @@ public class TimeConverter {
      *      * @param localDateTime LocalDateTime类型参数
      * @return static Date类型返回值
      */
+    /**
+     * toDate方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static Date类型返回值
+     */
     public static Date toDate(LocalDateTime localDateTime) {
         if (localDateTime == null) return null;
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
+    /**
+     * toDate方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static Date类型返回值
+     */
     /**
      * toDate方法。
      *      * @param localDateTime LocalDateTime类型参数
@@ -69,11 +94,22 @@ public class TimeConverter {
      *      * @param date Date类型参数
      * @return static LocalDate类型返回值
      */
+    /**
+     * toLocalDate方法。
+     *      * @param date Date类型参数
+     * @return static LocalDate类型返回值
+     */
     public static LocalDate toLocalDate(Date date) {
         if (date == null) return null;
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
+    /**
+     * toLocalDate方法。
+     *      * @param date Date类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalDate类型返回值
+     */
     /**
      * toLocalDate方法。
      *      * @param date Date类型参数
@@ -90,11 +126,22 @@ public class TimeConverter {
      *      * @param localDate LocalDate类型参数
      * @return static Date类型返回值
      */
+    /**
+     * toDate方法。
+     *      * @param localDate LocalDate类型参数
+     * @return static Date类型返回值
+     */
     public static Date toDate(LocalDate localDate) {
         if (localDate == null) return null;
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
+    /**
+     * toDate方法。
+     *      * @param localDate LocalDate类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static Date类型返回值
+     */
     /**
      * toDate方法。
      *      * @param localDate LocalDate类型参数
@@ -113,11 +160,22 @@ public class TimeConverter {
      *      * @param date Date类型参数
      * @return static LocalTime类型返回值
      */
+    /**
+     * toLocalTime方法。
+     *      * @param date Date类型参数
+     * @return static LocalTime类型返回值
+     */
     public static LocalTime toLocalTime(Date date) {
         if (date == null) return null;
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
     }
 
+    /**
+     * toLocalTime方法。
+     *      * @param date Date类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalTime类型返回值
+     */
     /**
      * toLocalTime方法。
      *      * @param date Date类型参数
@@ -136,11 +194,21 @@ public class TimeConverter {
      *      * @param date Date类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * toInstant方法。
+     *      * @param date Date类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant toInstant(Date date) {
         if (date == null) return null;
         return date.toInstant();
     }
 
+    /**
+     * toDate方法。
+     *      * @param instant Instant类型参数
+     * @return static Date类型返回值
+     */
     /**
      * toDate方法。
      *      * @param instant Instant类型参数
@@ -158,6 +226,11 @@ public class TimeConverter {
      *      * @param date Date类型参数
      * @return static ZonedDateTime类型返回值
      */
+    /**
+     * toZonedDateTime方法。
+     *      * @param date Date类型参数
+     * @return static ZonedDateTime类型返回值
+     */
     public static ZonedDateTime toZonedDateTime(Date date) {
         if (date == null) return null;
         return date.toInstant().atZone(ZoneId.systemDefault());
@@ -169,11 +242,22 @@ public class TimeConverter {
      * @param zoneId ZoneId类型参数
      * @return static ZonedDateTime类型返回值
      */
+    /**
+     * toZonedDateTime方法。
+     *      * @param date Date类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static ZonedDateTime类型返回值
+     */
     public static ZonedDateTime toZonedDateTime(Date date, ZoneId zoneId) {
         if (date == null) return null;
         return date.toInstant().atZone(zoneId);
     }
 
+    /**
+     * toDate方法。
+     *      * @param zonedDateTime ZonedDateTime类型参数
+     * @return static Date类型返回值
+     */
     /**
      * toDate方法。
      *      * @param zonedDateTime ZonedDateTime类型参数
@@ -191,6 +275,11 @@ public class TimeConverter {
      *      * @param localDateTime LocalDateTime类型参数
      * @return static LocalDate类型返回值
      */
+    /**
+     * toLocalDate方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static LocalDate类型返回值
+     */
     public static LocalDate toLocalDate(LocalDateTime localDateTime) {
         if (localDateTime == null) return null;
         return localDateTime.toLocalDate();
@@ -201,11 +290,22 @@ public class TimeConverter {
      *      * @param localDate LocalDate类型参数
      * @return static LocalDateTime类型返回值
      */
+    /**
+     * toLocalDateTime方法。
+     *      * @param localDate LocalDate类型参数
+     * @return static LocalDateTime类型返回值
+     */
     public static LocalDateTime toLocalDateTime(LocalDate localDate) {
         if (localDate == null) return null;
         return localDate.atStartOfDay();
     }
 
+    /**
+     * toLocalDateTime方法。
+     *      * @param localDate LocalDate类型参数
+     * @param localTime LocalTime类型参数
+     * @return static LocalDateTime类型返回值
+     */
     /**
      * toLocalDateTime方法。
      *      * @param localDate LocalDate类型参数
@@ -224,11 +324,21 @@ public class TimeConverter {
      *      * @param localDateTime LocalDateTime类型参数
      * @return static LocalTime类型返回值
      */
+    /**
+     * toLocalTime方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static LocalTime类型返回值
+     */
     public static LocalTime toLocalTime(LocalDateTime localDateTime) {
         if (localDateTime == null) return null;
         return localDateTime.toLocalTime();
     }
 
+    /**
+     * toLocalDateTime方法。
+     *      * @param localTime LocalTime类型参数
+     * @return static LocalDateTime类型返回值
+     */
     /**
      * toLocalDateTime方法。
      *      * @param localTime LocalTime类型参数
@@ -246,11 +356,22 @@ public class TimeConverter {
      *      * @param localDateTime LocalDateTime类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * toInstant方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant toInstant(LocalDateTime localDateTime) {
         if (localDateTime == null) return null;
         return localDateTime.atZone(ZoneId.systemDefault()).toInstant();
     }
 
+    /**
+     * toInstant方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static Instant类型返回值
+     */
     /**
      * toInstant方法。
      *      * @param localDateTime LocalDateTime类型参数
@@ -267,11 +388,22 @@ public class TimeConverter {
      *      * @param instant Instant类型参数
      * @return static LocalDateTime类型返回值
      */
+    /**
+     * toLocalDateTime方法。
+     *      * @param instant Instant类型参数
+     * @return static LocalDateTime类型返回值
+     */
     public static LocalDateTime toLocalDateTime(Instant instant) {
         if (instant == null) return null;
         return instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
+    /**
+     * toLocalDateTime方法。
+     *      * @param instant Instant类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalDateTime类型返回值
+     */
     /**
      * toLocalDateTime方法。
      *      * @param instant Instant类型参数
@@ -290,6 +422,11 @@ public class TimeConverter {
      *      * @param localDateTime LocalDateTime类型参数
      * @return static ZonedDateTime类型返回值
      */
+    /**
+     * toZonedDateTime方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static ZonedDateTime类型返回值
+     */
     public static ZonedDateTime toZonedDateTime(LocalDateTime localDateTime) {
         if (localDateTime == null) return null;
         return localDateTime.atZone(ZoneId.systemDefault());
@@ -301,11 +438,22 @@ public class TimeConverter {
      * @param zoneId ZoneId类型参数
      * @return static ZonedDateTime类型返回值
      */
+    /**
+     * toZonedDateTime方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static ZonedDateTime类型返回值
+     */
     public static ZonedDateTime toZonedDateTime(LocalDateTime localDateTime, ZoneId zoneId) {
         if (localDateTime == null) return null;
         return localDateTime.atZone(zoneId);
     }
 
+    /**
+     * toLocalDateTime方法。
+     *      * @param zonedDateTime ZonedDateTime类型参数
+     * @return static LocalDateTime类型返回值
+     */
     /**
      * toLocalDateTime方法。
      *      * @param zonedDateTime ZonedDateTime类型参数
@@ -323,11 +471,22 @@ public class TimeConverter {
      *      * @param localDate LocalDate类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * toInstant方法。
+     *      * @param localDate LocalDate类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant toInstant(LocalDate localDate) {
         if (localDate == null) return null;
         return localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
     }
 
+    /**
+     * toInstant方法。
+     *      * @param localDate LocalDate类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static Instant类型返回值
+     */
     /**
      * toInstant方法。
      *      * @param localDate LocalDate类型参数
@@ -344,11 +503,22 @@ public class TimeConverter {
      *      * @param instant Instant类型参数
      * @return static LocalDate类型返回值
      */
+    /**
+     * toLocalDate方法。
+     *      * @param instant Instant类型参数
+     * @return static LocalDate类型返回值
+     */
     public static LocalDate toLocalDate(Instant instant) {
         if (instant == null) return null;
         return instant.atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
+    /**
+     * toLocalDate方法。
+     *      * @param instant Instant类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalDate类型返回值
+     */
     /**
      * toLocalDate方法。
      *      * @param instant Instant类型参数
@@ -367,11 +537,22 @@ public class TimeConverter {
      *      * @param localTime LocalTime类型参数
      * @return static Instant类型返回值
      */
+    /**
+     * toInstant方法。
+     *      * @param localTime LocalTime类型参数
+     * @return static Instant类型返回值
+     */
     public static Instant toInstant(LocalTime localTime) {
         if (localTime == null) return null;
         return LocalDate.now().atTime(localTime).atZone(ZoneId.systemDefault()).toInstant();
     }
 
+    /**
+     * toInstant方法。
+     *      * @param localTime LocalTime类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static Instant类型返回值
+     */
     /**
      * toInstant方法。
      *      * @param localTime LocalTime类型参数
@@ -388,11 +569,22 @@ public class TimeConverter {
      *      * @param instant Instant类型参数
      * @return static LocalTime类型返回值
      */
+    /**
+     * toLocalTime方法。
+     *      * @param instant Instant类型参数
+     * @return static LocalTime类型返回值
+     */
     public static LocalTime toLocalTime(Instant instant) {
         if (instant == null) return null;
         return instant.atZone(ZoneId.systemDefault()).toLocalTime();
     }
 
+    /**
+     * toLocalTime方法。
+     *      * @param instant Instant类型参数
+     * @param zoneId ZoneId类型参数
+     * @return static LocalTime类型返回值
+     */
     /**
      * toLocalTime方法。
      *      * @param instant Instant类型参数
@@ -411,6 +603,11 @@ public class TimeConverter {
      *      * @param date Date类型参数
      * @return static long类型返回值
      */
+    /**
+     * toEpochMilli方法。
+     *      * @param date Date类型参数
+     * @return static long类型返回值
+     */
     public static long toEpochMilli(Date date) {
         if (date == null) return 0;
         return date.getTime();
@@ -421,10 +618,20 @@ public class TimeConverter {
      *      * @param epochMilli long类型参数
      * @return static Date类型返回值
      */
+    /**
+     * toDateFromEpochMilli方法。
+     *      * @param epochMilli long类型参数
+     * @return static Date类型返回值
+     */
     public static Date toDateFromEpochMilli(long epochMilli) {
         return new Date(epochMilli);
     }
 
+    /**
+     * toEpochMilli方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static long类型返回值
+     */
     /**
      * toEpochMilli方法。
      *      * @param localDateTime LocalDateTime类型参数
@@ -440,10 +647,20 @@ public class TimeConverter {
      *      * @param epochMilli long类型参数
      * @return static LocalDateTime类型返回值
      */
+    /**
+     * fromEpochMilli方法。
+     *      * @param epochMilli long类型参数
+     * @return static LocalDateTime类型返回值
+     */
     public static LocalDateTime fromEpochMilli(long epochMilli) {
         return Instant.ofEpochMilli(epochMilli).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
+    /**
+     * toEpochSecond方法。
+     *      * @param localDateTime LocalDateTime类型参数
+     * @return static long类型返回值
+     */
     /**
      * toEpochSecond方法。
      *      * @param localDateTime LocalDateTime类型参数
@@ -454,6 +671,11 @@ public class TimeConverter {
         return localDateTime.atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
     }
 
+    /**
+     * fromEpochSecond方法。
+     *      * @param epochSecond long类型参数
+     * @return static LocalDateTime类型返回值
+     */
     /**
      * fromEpochSecond方法。
      *      * @param epochSecond long类型参数
@@ -470,10 +692,20 @@ public class TimeConverter {
      *      * @param duration Duration类型参数
      * @return static long类型返回值
      */
+    /**
+     * toMillis方法。
+     *      * @param duration Duration类型参数
+     * @return static long类型返回值
+     */
     public static long toMillis(Duration duration) {
         return DurationUtil.toMillis(duration);
     }
 
+    /**
+     * toDuration方法。
+     *      * @param millis long类型参数
+     * @return static Duration类型返回值
+     */
     /**
      * toDuration方法。
      *      * @param millis long类型参数
@@ -488,10 +720,20 @@ public class TimeConverter {
      *      * @param duration Duration类型参数
      * @return static long类型返回值
      */
+    /**
+     * toSeconds方法。
+     *      * @param duration Duration类型参数
+     * @return static long类型返回值
+     */
     public static long toSeconds(Duration duration) {
         return DurationUtil.toSeconds(duration);
     }
 
+    /**
+     * toDurationSeconds方法。
+     *      * @param seconds long类型参数
+     * @return static Duration类型返回值
+     */
     /**
      * toDurationSeconds方法。
      *      * @param seconds long类型参数

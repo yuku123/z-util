@@ -12,7 +12,15 @@ package com.zifang.util.zex.bust.chapter11.case1;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * WriteFile类。
+ */
 public class WriteFile {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws IOException {
         FileOutputStream fout = null;
         try {

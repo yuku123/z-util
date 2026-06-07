@@ -9,8 +9,16 @@ package com.zifang.util.core.lang.primitive;
 /**
  * IntegerUtil类。
  */
+/**
+ * IntegerUtil类。
+ */
 public class IntegerUtil {
 
+    /**
+     * parseInteger方法。
+     *      * @param object Object类型参数
+     * @return static Integer类型返回值
+     */
     /**
      * parseInteger方法。
      *      * @param object Object类型参数
@@ -29,6 +37,12 @@ public class IntegerUtil {
      * @param defaultValue int类型参数
      * @return static Integer类型返回值
      */
+    /**
+     * parseIntegerOrDefault方法。
+     *      * @param object Object类型参数
+     * @param defaultValue int类型参数
+     * @return static Integer类型返回值
+     */
     public static Integer parseIntegerOrDefault(Object object, Integer defaultValue) {
         if (null == object) {
             return defaultValue;
@@ -36,6 +50,11 @@ public class IntegerUtil {
         return Integer.parseInt(object.toString());
     }
 
+    /**
+     * saturatedCast方法。
+     *      * @param value long类型参数
+     * @return static int类型返回值
+     */
     /**
      * saturatedCast方法。
      *      * @param value long类型参数

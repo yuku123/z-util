@@ -13,6 +13,9 @@ import java.io.InputStream;
 /**
  * FieldRefInfo类。
  */
+/**
+ * FieldRefInfo类。
+ */
 public class FieldRefInfo extends AbstractConstantPool {
 
     private U2 classIndex;
@@ -22,10 +25,18 @@ public class FieldRefInfo extends AbstractConstantPool {
      * FieldRefInfo方法。
      *      * @param tag byte类型参数
      */
+    /**
+     * FieldRefInfo方法。
+     *      * @param tag byte类型参数
+     */
     public FieldRefInfo(byte tag) {
         super(tag);
     }
 
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     /**
      * read方法。
      *      * @param inputStream InputStream类型参数
@@ -39,10 +50,18 @@ public class FieldRefInfo extends AbstractConstantPool {
      * getClassIndex方法。
      * @return U2类型返回值
      */
+    /**
+     * getClassIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getClassIndex() {
         return classIndex;
     }
 
+    /**
+     * setClassIndex方法。
+     *      * @param classIndex U2类型参数
+     */
     /**
      * setClassIndex方法。
      *      * @param classIndex U2类型参数
@@ -55,10 +74,18 @@ public class FieldRefInfo extends AbstractConstantPool {
      * getNameIndex方法。
      * @return U2类型返回值
      */
+    /**
+     * getNameIndex方法。
+     * @return U2类型返回值
+     */
     public U2 getNameIndex() {
         return nameIndex;
     }
 
+    /**
+     * setNameIndex方法。
+     *      * @param nameIndex U2类型参数
+     */
     /**
      * setNameIndex方法。
      *      * @param nameIndex U2类型参数
@@ -68,6 +95,10 @@ public class FieldRefInfo extends AbstractConstantPool {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

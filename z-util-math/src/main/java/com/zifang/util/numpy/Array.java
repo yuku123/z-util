@@ -11,6 +11,12 @@ public final class Array {
      * @param size int类型参数
      * @return static Object类型返回值
      */
+    /**
+     * createZeroArray方法。
+     *      * @param dtype DType类型参数
+     * @param size int类型参数
+     * @return static Object类型返回值
+     */
     public static Object createZeroArray(DType dtype, int size) {
         switch (dtype) {
             case INT8: return new byte[size];
@@ -25,6 +31,12 @@ public final class Array {
         }
     }
 
+    /**
+     * createOneArray方法。
+     *      * @param dtype DType类型参数
+     * @param size int类型参数
+     * @return static Object类型返回值
+     */
     /**
      * createOneArray方法。
      *      * @param dtype DType类型参数
@@ -81,6 +93,15 @@ public final class Array {
      * @param size int类型参数
      * @return static Object类型返回值
      */
+    /**
+     * arange方法。
+     *      * @param dtype DType类型参数
+     * @param start int类型参数
+     * @param stop int类型参数
+     * @param step int类型参数
+     * @param size int类型参数
+     * @return static Object类型返回值
+     */
     public static Object arange(DType dtype, int start, int stop, int step, int size) {
         switch (dtype) {
             case INT8:
@@ -120,6 +141,12 @@ public final class Array {
      * @param index int类型参数
      * @return static Object类型返回值
      */
+    /**
+     * get方法。
+     *      * @param array Object类型参数
+     * @param index int类型参数
+     * @return static Object类型返回值
+     */
     public static Object get(Object array, int index) {
         if (array instanceof byte[]) return ((byte[]) array)[index];
         if (array instanceof short[]) return ((short[]) array)[index];
@@ -133,6 +160,13 @@ public final class Array {
         throw new IllegalArgumentException("Unsupported array type");
     }
 
+    /**
+     * set方法。
+     *      * @param array Object类型参数
+     * @param index int类型参数
+     * @param value Object类型参数
+     * @return static void类型返回值
+     */
     /**
      * set方法。
      *      * @param array Object类型参数
@@ -164,6 +198,13 @@ public final class Array {
         }
     }
 
+    /**
+     * copy方法。
+     *      * @param src Object类型参数
+     * @param size int类型参数
+     * @param dtype DType类型参数
+     * @return static Object类型返回值
+     */
     /**
      * copy方法。
      *      * @param src Object类型参数
@@ -210,11 +251,26 @@ public final class Array {
      * @param dstIdx int类型参数
      * @return static void类型返回值
      */
+    /**
+     * copy方法。
+     *      * @param src Object类型参数
+     * @param srcIdx int类型参数
+     * @param dst Object类型参数
+     * @param dstIdx int类型参数
+     * @return static void类型返回值
+     */
     public static void copy(Object src, int srcIdx, Object dst, int dstIdx) {
         Object value = get(src, srcIdx);
         set(dst, dstIdx, value);
     }
 
+    /**
+     * fill方法。
+     *      * @param array Object类型参数
+     * @param value Object类型参数
+     * @param size int类型参数
+     * @return static void类型返回值
+     */
     /**
      * fill方法。
      *      * @param array Object类型参数
@@ -284,6 +340,13 @@ public final class Array {
         return 0;
     }
 
+    /**
+     * transpose方法。
+     *      * @param data Object类型参数
+     * @param shape int[]类型参数
+     * @param axes int...类型参数
+     * @return static Object类型返回值
+     */
     /**
      * transpose方法。
      *      * @param data Object类型参数

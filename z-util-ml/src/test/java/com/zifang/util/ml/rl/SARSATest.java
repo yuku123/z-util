@@ -7,9 +7,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * SARSATest类。
+ */
 public class SARSATest {
 
     @Test
+    /**
+     * testSARSALearns方法。
+     */
     public void testSARSALearns() {
         // Simple grid world: 2 states, 2 actions
         // State 0 -> State 1 with reward 1, State 1 is terminal
@@ -27,6 +33,9 @@ public class SARSATest {
     }
 
     @Test
+    /**
+     * testSARSABestAction方法。
+     */
     public void testSARSABestAction() {
         SARSA agent = new SARSA(0.5, 0.9, 0.0, 1);
         
@@ -45,11 +54,19 @@ public class SARSATest {
         }
         
         @Override
+    /**
+     * getState方法。
+     * @return Object类型返回值
+     */
         public Object getState() {
             return id;
         }
         
         @Override
+    /**
+     * getAvailableActions方法。
+     * @return List<SARSA.ActionResult>类型返回值
+     */
         public List<SARSA.ActionResult> getAvailableActions() {
             List<SARSA.ActionResult> actions = new ArrayList<>();
             if (id == 0) {
@@ -75,15 +92,31 @@ public class SARSATest {
         }
         
         @Override
+    /**
+     * getAction方法。
+     * @return Object类型返回值
+     */
         public Object getAction() { return action; }
         
         @Override
+    /**
+     * getNextState方法。
+     * @return SARSA.State类型返回值
+     */
         public SARSA.State getNextState() { return nextState; }
         
         @Override
+    /**
+     * getReward方法。
+     * @return double类型返回值
+     */
         public double getReward() { return reward; }
         
         @Override
+    /**
+     * isTerminal方法。
+     * @return boolean类型返回值
+     */
         public boolean isTerminal() { return terminal; }
     }
 }

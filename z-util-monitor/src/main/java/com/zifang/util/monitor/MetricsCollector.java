@@ -23,6 +23,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * MetricsCollector类。
  */
+/**
+ * MetricsCollector类。
+ */
 public class MetricsCollector {
 
     private final MetricsRegistry registry;
@@ -38,6 +41,9 @@ public class MetricsCollector {
     private final ClassLoadingMXBean classLoadingMXBean;
     private final List<GarbageCollectorMXBean> gcMXBeans;
 
+    /**
+     * MetricsCollector方法。
+     */
     /**
      * MetricsCollector方法。
      */
@@ -57,6 +63,9 @@ public class MetricsCollector {
     /**
      * enableAll方法。
      */
+    /**
+     * enableAll方法。
+     */
     public void enableAll() {
         enableJvm();
         enableOs();
@@ -65,6 +74,9 @@ public class MetricsCollector {
 
     /**
      * 禁用所有内置指标采集
+     */
+    /**
+     * disableAll方法。
      */
     /**
      * disableAll方法。
@@ -78,6 +90,9 @@ public class MetricsCollector {
 
     /**
      * 启用 JVM 指标采集
+     */
+    /**
+     * enableJvm方法。
      */
     /**
      * enableJvm方法。
@@ -146,6 +161,9 @@ public class MetricsCollector {
     /**
      * disableJvm方法。
      */
+    /**
+     * disableJvm方法。
+     */
     public void disableJvm() {
         if (!jvmEnabled) {
             return;
@@ -163,6 +181,9 @@ public class MetricsCollector {
 
     /**
      * 启用操作系统指标采集
+     */
+    /**
+     * enableOs方法。
      */
     /**
      * enableOs方法。
@@ -197,6 +218,9 @@ public class MetricsCollector {
     /**
      * disableOs方法。
      */
+    /**
+     * disableOs方法。
+     */
     public void disableOs() {
         if (!osEnabled) {
             return;
@@ -212,6 +236,9 @@ public class MetricsCollector {
 
     /**
      * 启用线程指标采集
+     */
+    /**
+     * enableThread方法。
      */
     /**
      * enableThread方法。
@@ -275,6 +302,9 @@ public class MetricsCollector {
     /**
      * disableThread方法。
      */
+    /**
+     * disableThread方法。
+     */
     public void disableThread() {
         if (!threadEnabled) {
             return;
@@ -292,10 +322,18 @@ public class MetricsCollector {
      * isJvmEnabled方法。
      * @return boolean类型返回值
      */
+    /**
+     * isJvmEnabled方法。
+     * @return boolean类型返回值
+     */
     public boolean isJvmEnabled() {
         return jvmEnabled;
     }
 
+    /**
+     * isOsEnabled方法。
+     * @return boolean类型返回值
+     */
     /**
      * isOsEnabled方法。
      * @return boolean类型返回值
@@ -308,10 +346,18 @@ public class MetricsCollector {
      * isThreadEnabled方法。
      * @return boolean类型返回值
      */
+    /**
+     * isThreadEnabled方法。
+     * @return boolean类型返回值
+     */
     public boolean isThreadEnabled() {
         return threadEnabled;
     }
 
+    /**
+     * getRegistry方法。
+     * @return MetricsRegistry类型返回值
+     */
     /**
      * getRegistry方法。
      * @return MetricsRegistry类型返回值

@@ -12,6 +12,9 @@ package com.zifang.util.zex.bust.chapter4.case4;
 class Human11 {
     private String age;
 
+    /**
+     * eat方法。
+     */
     public void eat() {
         System.out.println("我要吃饭");
         goWc();
@@ -23,10 +26,18 @@ class Human11 {
 }
 
 class Coder1 extends Human11 {
+    /**
+     * wirteCode方法。
+     */
     public void wirteCode() {
         System.out.println("愉快地写代码");
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Coder1 coder = new Coder1();
         coder.eat();// human的行为

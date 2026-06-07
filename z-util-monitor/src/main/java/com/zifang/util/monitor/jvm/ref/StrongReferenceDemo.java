@@ -11,12 +11,20 @@ package com.zifang.util.monitor.jvm.ref;
 /**
  * StrongReferenceDemo类。
  */
+/**
+ * StrongReferenceDemo类。
+ */
 public class StrongReferenceDemo {
 
     /**
      * 主方法，演示强引用的特性。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

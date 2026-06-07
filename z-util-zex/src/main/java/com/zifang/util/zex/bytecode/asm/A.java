@@ -15,7 +15,15 @@ import java.io.FileOutputStream;
  * @author zifang
  * @version 1.0
  */
+/**
+ * A类。
+ */
 public class A {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws Exception {
         //读取
         ClassReader classReader = new ClassReader("com/zifang/util/zex/bytecode/asm/Base");
@@ -36,16 +44,38 @@ public class A {
 
 class MyClassVisitor extends ClassVisitor implements Opcodes {
 
+    /**
+     * MyClassVisitor方法。
+     *      * @param cv ClassVisitor类型参数
+     */
     public MyClassVisitor(ClassVisitor cv) {
         super(ASM5, cv);
     }
 
     @Override
+    /**
+     * visit方法。
+     *      * @param version int类型参数
+     * @param access int类型参数
+     * @param name String类型参数
+     * @param signature String类型参数
+     * @param superName String类型参数
+     * @param interfaces String[]类型参数
+     */
     public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
         cv.visit(version, access, name, signature, superName, interfaces);
     }
 
     @Override
+    /**
+     * visitMethod方法。
+     *      * @param access int类型参数
+     * @param name String类型参数
+     * @param desc String类型参数
+     * @param signature String类型参数
+     * @param exceptions String[]类型参数
+     * @return MethodVisitor类型返回值
+     */
     public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
         MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
         //Base类中有两个方法：无参构造以及process方法，这里不增强构造方法
@@ -56,11 +86,18 @@ class MyClassVisitor extends ClassVisitor implements Opcodes {
     }
 
     class MyMethodVisitor extends MethodVisitor implements Opcodes {
+    /**
+     * MyMethodVisitor方法。
+     *      * @param mv MethodVisitor类型参数
+     */
         public MyMethodVisitor(MethodVisitor mv) {
             super(Opcodes.ASM5, mv);
         }
 
         @Override
+    /**
+     * visitCode方法。
+     */
         public void visitCode() {
             super.visitCode();
             mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
@@ -69,6 +106,10 @@ class MyClassVisitor extends ClassVisitor implements Opcodes {
         }
 
         @Override
+    /**
+     * visitInsn方法。
+     *      * @param opcode int类型参数
+     */
         public void visitInsn(int opcode) {
             if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN) || opcode == Opcodes.ATHROW) {
                 //方法在返回之前，打印"end"

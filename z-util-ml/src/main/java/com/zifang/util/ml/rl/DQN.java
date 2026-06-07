@@ -23,6 +23,9 @@ import java.util.Random;
 /**
  * DQN类。
  */
+/**
+ * DQN类。
+ */
 public class DQN {
     
     private int stateDim;
@@ -58,6 +61,20 @@ public class DQN {
      * @param replayBufferSize Size of the experience replay buffer
      * @param batchSize Batch size for training
      * @param targetUpdateFreq Frequency of target network updates (in steps)
+     */
+    /**
+     * DQN方法。
+     *      * @param stateDim int类型参数
+     * @param actionCount int类型参数
+     * @param hiddenLayers int类型参数
+     * @param learningRate double类型参数
+     * @param gamma double类型参数
+     * @param epsilon double类型参数
+     * @param epsilonDecay double类型参数
+     * @param epsilonMin double类型参数
+     * @param replayBufferSize double类型参数
+     * @param batchSize int类型参数
+     * @param targetUpdateFreq double类型参数
      */
     /**
      * DQN方法。
@@ -165,6 +182,11 @@ public class DQN {
      *      * @param state NdArray类型参数
      * @return int类型返回值
      */
+    /**
+     * selectAction方法。
+     *      * @param state NdArray类型参数
+     * @return int类型返回值
+     */
     public int selectAction(NdArray state) {
         Random random = new Random();
         if (random.nextDouble() < epsilon) {
@@ -204,6 +226,14 @@ public class DQN {
      * @param reward The reward received
      * @param nextState The resulting state
      * @param done Whether the episode is done
+     */
+    /**
+     * train方法。
+     *      * @param state NdArray类型参数
+     * @param action int类型参数
+     * @param reward double类型参数
+     * @param nextState NdArray类型参数
+     * @param done boolean类型参数
      */
     /**
      * train方法。
@@ -344,6 +374,15 @@ public class DQN {
      * @param dones boolean[]类型参数
      * @param episodes int类型参数
      */
+    /**
+     * fit方法。
+     *      * @param states NdArray[]类型参数
+     * @param actions int[]类型参数
+     * @param rewards double[]类型参数
+     * @param nextStates NdArray[]类型参数
+     * @param dones boolean[]类型参数
+     * @param episodes int类型参数
+     */
     public void fit(NdArray[] states, int[] actions, double[] rewards, 
                     NdArray[] nextStates, boolean[] dones, int episodes) {
         // This method expects the data to be provided in a specific format
@@ -363,6 +402,10 @@ public class DQN {
      * getEpsilon方法。
      * @return double类型返回值
      */
+    /**
+     * getEpsilon方法。
+     * @return double类型返回值
+     */
     public double getEpsilon() {
         return epsilon;
     }
@@ -374,12 +417,20 @@ public class DQN {
      * getOnlineNetwork方法。
      * @return Sequential类型返回值
      */
+    /**
+     * getOnlineNetwork方法。
+     * @return Sequential类型返回值
+     */
     public Sequential getOnlineNetwork() {
         return onlineNetwork;
     }
     
     /**
      * Gets the target network.
+     */
+    /**
+     * getTargetNetwork方法。
+     * @return Sequential类型返回值
      */
     /**
      * getTargetNetwork方法。
@@ -408,6 +459,10 @@ public class DQN {
      * ExperienceReplayBuffer方法。
      *      * @param capacity int类型参数
      */
+    /**
+     * ExperienceReplayBuffer方法。
+     *      * @param capacity int类型参数
+     */
         public ExperienceReplayBuffer(int capacity) {
             this.capacity = capacity;
             this.buffer = new Transition[capacity];
@@ -423,6 +478,14 @@ public class DQN {
         /**
          * Adds a transition to the buffer.
          */
+    /**
+     * add方法。
+     *      * @param state NdArray类型参数
+     * @param action int类型参数
+     * @param reward double类型参数
+     * @param nextState NdArray类型参数
+     * @param done boolean类型参数
+     */
     /**
      * add方法。
      *      * @param state NdArray类型参数
@@ -452,6 +515,11 @@ public class DQN {
      *      * @param batchSize int类型参数
      * @return Transition[]类型返回值
      */
+    /**
+     * sample方法。
+     *      * @param batchSize int类型参数
+     * @return Transition[]类型返回值
+     */
         public Transition[] sample(int batchSize) {
             Transition[] batch = new Transition[batchSize];
             Random random = new Random();
@@ -467,6 +535,10 @@ public class DQN {
         /**
          * Returns the current size of the buffer.
          */
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     /**
      * size方法。
      * @return int类型返回值

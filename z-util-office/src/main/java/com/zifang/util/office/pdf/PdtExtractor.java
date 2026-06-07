@@ -7,5 +7,8 @@ package com.zifang.util.office.pdf;
 /**
  * PdtExtractor类。
  */
+/**
+ * PdtExtractor类。
+ */
 public class PdtExtractor {
 }

@@ -4,9 +4,15 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+/**
+ * JsEvaluatorTest类。
+ */
 public class JsEvaluatorTest {
 
     @Test
+    /**
+     * testJsEvaluatorConstruction方法。
+     */
     public void testJsEvaluatorConstruction() {
         // JsEvaluator requires a WebDriver that implements JavascriptExecutor
         // Since we cannot easily mock in this environment, we do a basic
@@ -24,6 +30,9 @@ public class JsEvaluatorTest {
     }
 
     @Test
+    /**
+     * testJsEvaluatorWithNullDriver方法。
+     */
     public void testJsEvaluatorWithNullDriver() {
         // Test that JsEvaluator can be constructed - verification of basic structure
         // Actual execution requires a proper WebDriver

@@ -6,10 +6,17 @@ package com.zifang.util.validation.core;
 /**
  * ValidationException类。
  */
+/**
+ * ValidationException类。
+ */
 public class ValidationException extends RuntimeException {
 
     private final ValidateResult result;
 
+    /**
+     * ValidationException方法。
+     *      * @param result ValidateResult类型参数
+     */
     /**
      * ValidationException方法。
      *      * @param result ValidateResult类型参数
@@ -19,6 +26,10 @@ public class ValidationException extends RuntimeException {
         this.result = result;
     }
 
+    /**
+     * getResult方法。
+     * @return ValidateResult类型返回值
+     */
     /**
      * getResult方法。
      * @return ValidateResult类型返回值

@@ -35,10 +35,16 @@ import java.util.List;
 /**
  * SourceCodeParser类。
  */
+/**
+ * SourceCodeParser类。
+ */
 public class SourceCodeParser {
 
     private JavaParser javaParser;
 
+    /**
+     * SourceCodeParser方法。
+     */
     /**
      * SourceCodeParser方法。
      */
@@ -56,12 +62,22 @@ public class SourceCodeParser {
      *      * @param filePath String类型参数
      * @return ClassInfo类型返回值
      */
+    /**
+     * parse方法。
+     *      * @param filePath String类型参数
+     * @return ClassInfo类型返回值
+     */
     public ClassInfo parse(String filePath) throws IOException {
         return parse(new File(filePath));
     }
 
     /**
      * 从 File 对象解析 Java 源码
+     */
+    /**
+     * parse方法。
+     *      * @param file File类型参数
+     * @return ClassInfo类型返回值
      */
     /**
      * parse方法。
@@ -82,6 +98,11 @@ public class SourceCodeParser {
      *      * @param is InputStream类型参数
      * @return ClassInfo类型返回值
      */
+    /**
+     * parse方法。
+     *      * @param is InputStream类型参数
+     * @return ClassInfo类型返回值
+     */
     public ClassInfo parse(InputStream is) {
         CompilationUnit cu = javaParser.parse(is).getResult().orElseThrow(
                 () -> new RuntimeException("Failed to parse Java source")
@@ -91,6 +112,11 @@ public class SourceCodeParser {
 
     /**
      * 从字符串解析 Java 源码
+     */
+    /**
+     * parseSource方法。
+     *      * @param sourceCode String类型参数
+     * @return ClassInfo类型返回值
      */
     /**
      * parseSource方法。

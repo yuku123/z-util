@@ -1,6 +1,9 @@
 package com.zifang.util.ml.inheritance.chapter5;
 
 
+/**
+ * GeneticAlgorithm类。
+ */
 public class GeneticAlgorithm {
 
     private int populationSize;
@@ -9,6 +12,14 @@ public class GeneticAlgorithm {
     private int elitismCount;
     protected int tournamentSize;
 
+    /**
+     * GeneticAlgorithm方法。
+     *      * @param populationSize int类型参数
+     * @param mutationRate double类型参数
+     * @param crossoverRate double类型参数
+     * @param elitismCount int类型参数
+     * @param tournamentSize int类型参数
+     */
     public GeneticAlgorithm(int populationSize, double mutationRate, double crossoverRate, int elitismCount,
                             int tournamentSize) {
 
@@ -25,6 +36,11 @@ public class GeneticAlgorithm {
      * @param chromosomeLength The length of the individuals chromosome
      * @return population The initial population generated
      */
+    /**
+     * initPopulation方法。
+     *      * @param timetable Timetable类型参数
+     * @return Population类型返回值
+     */
     public Population initPopulation(Timetable timetable) {
         // Initialize population
         Population population = new Population(this.populationSize, timetable);
@@ -38,6 +54,12 @@ public class GeneticAlgorithm {
      * @param maxGenerations   Number of generations to terminate after
      * @return boolean True if termination condition met, otherwise, false
      */
+    /**
+     * isTerminationConditionMet方法。
+     *      * @param generationsCount int类型参数
+     * @param maxGenerations int类型参数
+     * @return boolean类型返回值
+     */
     public boolean isTerminationConditionMet(int generationsCount, int maxGenerations) {
         return (generationsCount > maxGenerations);
     }
@@ -47,6 +69,11 @@ public class GeneticAlgorithm {
      *
      * @param population
      * @return boolean True if termination condition met, otherwise, false
+     */
+    /**
+     * isTerminationConditionMet方法。
+     *      * @param population Population类型参数
+     * @return boolean类型返回值
      */
     public boolean isTerminationConditionMet(Population population) {
         return population.getFittest(0).getFitness() == 1.0;
@@ -58,6 +85,12 @@ public class GeneticAlgorithm {
      * @param individual
      * @param timetable
      * @return fitness
+     */
+    /**
+     * calcFitness方法。
+     *      * @param individual Individual类型参数
+     * @param timetable Timetable类型参数
+     * @return double类型返回值
      */
     public double calcFitness(Individual individual, Timetable timetable) {
 
@@ -80,6 +113,11 @@ public class GeneticAlgorithm {
      * @param population
      * @param timetable
      */
+    /**
+     * evalPopulation方法。
+     *      * @param population Population类型参数
+     * @param timetable Timetable类型参数
+     */
     public void evalPopulation(Population population, Timetable timetable) {
         double populationFitness = 0;
 
@@ -100,6 +138,11 @@ public class GeneticAlgorithm {
      *
      * @param population
      * @return The individual selected as a parent
+     */
+    /**
+     * selectParent方法。
+     *      * @param population Population类型参数
+     * @return Individual类型返回值
      */
     public Individual selectParent(Population population) {
         // Create tournament
@@ -123,6 +166,12 @@ public class GeneticAlgorithm {
      * @param population
      * @param timetable
      * @return The mutated population
+     */
+    /**
+     * mutatePopulation方法。
+     *      * @param population Population类型参数
+     * @param timetable Timetable类型参数
+     * @return Population类型返回值
      */
     public Population mutatePopulation(Population population, Timetable timetable) {
         // Initialize new population
@@ -160,6 +209,11 @@ public class GeneticAlgorithm {
      *
      * @param population The population to apply crossover to
      * @return The new population
+     */
+    /**
+     * crossoverPopulation方法。
+     *      * @param population Population类型参数
+     * @return Population类型返回值
      */
     public Population crossoverPopulation(Population population) {
         // Create new population

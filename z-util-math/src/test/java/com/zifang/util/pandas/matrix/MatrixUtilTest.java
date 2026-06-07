@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * MatrixUtil 工具类测试
  */
+/**
+ * MatrixUtilTest类。
+ */
 public class MatrixUtilTest {
 
     @Test
+    /**
+     * testMatrixUtilInstantiation方法。
+     */
     public void testMatrixUtilInstantiation() {
         // 测试工具类可以被实例化（虽然通常工具类应该有私有构造函数）
         MatrixUtil util = new MatrixUtil();
@@ -17,6 +23,9 @@ public class MatrixUtilTest {
     }
 
     @Test
+    /**
+     * testMatrixCreation方法。
+     */
     public void testMatrixCreation() {
         // 测试通过工具类创建矩阵（如果有相关方法）
         Matrix matrix = new Matrix();
@@ -24,6 +33,9 @@ public class MatrixUtilTest {
     }
 
     @Test
+    /**
+     * testMatrixOperations方法。
+     */
     public void testMatrixOperations() {
         // 测试矩阵操作工具方法
         Matrix matrix = new Matrix();
@@ -35,6 +47,9 @@ public class MatrixUtilTest {
     }
 
     @Test
+    /**
+     * testEmptyMatrixOperations方法。
+     */
     public void testEmptyMatrixOperations() {
         // 测试空矩阵的操作
         Matrix matrix = new Matrix();
@@ -46,6 +61,9 @@ public class MatrixUtilTest {
     }
 
     @Test
+    /**
+     * testLargeMatrix方法。
+     */
     public void testLargeMatrix() {
         // 测试大矩阵的性能和内存处理
         Matrix matrix = new Matrix();
@@ -63,6 +81,9 @@ public class MatrixUtilTest {
     }
 
     @Test
+    /**
+     * testMatrixWithSpecialValues方法。
+     */
     public void testMatrixWithSpecialValues() {
         // 测试包含特殊值的矩阵
         Matrix matrix = new Matrix();

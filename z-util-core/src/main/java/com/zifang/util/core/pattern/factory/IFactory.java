@@ -10,6 +10,9 @@ package com.zifang.util.core.pattern.factory;
 /**
  * IFactory接口。
  */
+/**
+ * IFactory接口。
+ */
 public interface IFactory<K, T> {
 
     /**

@@ -6,9 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * CRFTest类。
+ */
 public class CRFTest {
 
     @Test
+    /**
+     * testCRFFit方法。
+     */
     public void testCRFFit() {
         CRF crf = new CRF(3, 5, 0.1, 0.01);
         
@@ -32,6 +38,9 @@ public class CRFTest {
     }
 
     @Test
+    /**
+     * testCRFPredict方法。
+     */
     public void testCRFPredict() {
         CRF crf = new CRF(2, 4, 0.1, 0.01);
         

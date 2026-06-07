@@ -4,7 +4,15 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 
+/**
+ * Test类。
+ */
 public class Test {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws UnknownHostException {
         showIntAddress(InetAddress.getByName("www.oreilly.com"));
         showIntAddress(InetAddress.getByName("208.201.239.100"));
@@ -15,6 +23,11 @@ public class Test {
         showIntAddress(InetAddress.getByAddress("www.baidu.com", new byte[]{(byte) 180, 101, 49, 12}));
     }
 
+    /**
+     * showIntAddress方法。
+     *      * @param inetAddress InetAddress类型参数
+     * @return static void类型返回值
+     */
     public static void showIntAddress(InetAddress inetAddress) {
         System.out.println("inetAddress.getAddress()               " + Arrays.toString(inetAddress.getAddress()));
         System.out.println("inetAddress.getHostName()              " + inetAddress.getHostName());

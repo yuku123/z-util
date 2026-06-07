@@ -73,6 +73,9 @@ import java.security.NoSuchAlgorithmException;
 /**
  * HMAC类。
  */
+/**
+ * HMAC类。
+ */
 public class HMAC {
     /**
      * 定义加密方式
@@ -99,6 +102,9 @@ public class HMAC {
     /**
      * HMAC方法。
      */
+    /**
+     * HMAC方法。
+     */
     public HMAC() {
 
     }
@@ -109,6 +115,11 @@ public class HMAC {
      * @param key 需要加密的字节数组
      * @return 字符串
      * @throws Exception
+     */
+    /**
+     * encryptBase64方法。
+     *      * @param key byte[]类型参数
+     * @return static String类型返回值
      */
     /**
      * encryptBase64方法。
@@ -131,6 +142,11 @@ public class HMAC {
      *      * @param key String类型参数
      * @return static byte[]类型返回值
      */
+    /**
+     * decryptBase64方法。
+     *      * @param key String类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] decryptBase64(String key) throws Exception {
         return java.util.Base64.getDecoder().decode((key));
     }
@@ -139,6 +155,10 @@ public class HMAC {
      * 初始化HMAC密钥
      *
      * @return
+     */
+    /**
+     * init方法。
+     * @return static String类型返回值
      */
     /**
      * init方法。
@@ -172,6 +192,12 @@ public class HMAC {
      * @param key String类型参数
      * @return static byte[]类型返回值
      */
+    /**
+     * encryptHMAC方法。
+     *      * @param data byte[]类型参数
+     * @param key String类型参数
+     * @return static byte[]类型返回值
+     */
     public static byte[] encryptHMAC(byte[] data, String key) {
         SecretKey secretKey;
         byte[] bytes = null;
@@ -192,6 +218,12 @@ public class HMAC {
      * @param data 需要加密的字符串
      * @param key  密钥
      * @return 字符串
+     */
+    /**
+     * encryptHMAC方法。
+     *      * @param data String类型参数
+     * @param key String类型参数
+     * @return static String类型返回值
      */
     /**
      * encryptHMAC方法。
@@ -243,6 +275,11 @@ public class HMAC {
      * 测试方法
      *
      * @param args
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。

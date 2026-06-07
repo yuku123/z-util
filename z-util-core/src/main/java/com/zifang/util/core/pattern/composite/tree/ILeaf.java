@@ -18,6 +18,9 @@ import java.util.stream.Collectors;
 /**
  * ILeaf接口。
  */
+/**
+ * ILeaf接口。
+ */
 public interface ILeaf {
 
     String ROOT = "ROOT";

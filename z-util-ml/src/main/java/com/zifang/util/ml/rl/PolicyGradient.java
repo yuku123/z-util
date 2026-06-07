@@ -26,6 +26,9 @@ import java.util.Random;
 /**
  * PolicyGradient类。
  */
+/**
+ * PolicyGradient类。
+ */
 public class PolicyGradient {
     
     private int stateDim;
@@ -44,6 +47,14 @@ public class PolicyGradient {
      * @param hiddenLayers Number of neurons in hidden layers
      * @param learningRate Learning rate for the optimizer
      * @param gamma Discount factor
+     */
+    /**
+     * PolicyGradient方法。
+     *      * @param stateDim int类型参数
+     * @param actionCount int类型参数
+     * @param hiddenLayers int类型参数
+     * @param learningRate double类型参数
+     * @param gamma double类型参数
      */
     /**
      * PolicyGradient方法。
@@ -90,6 +101,11 @@ public class PolicyGradient {
      * 
      * @param state The current state
      * @return The sampled action index
+     */
+    /**
+     * selectAction方法。
+     *      * @param state NdArray类型参数
+     * @return int类型返回值
      */
     /**
      * selectAction方法。
@@ -179,6 +195,12 @@ public class PolicyGradient {
      * @param trajectoryStates Array of states in the trajectory
      * @param trajectoryActions Array of actions taken
      * @param trajectoryRewards Array of rewards received
+     */
+    /**
+     * update方法。
+     *      * @param trajectoryStates NdArray[]类型参数
+     * @param trajectoryActions int[]类型参数
+     * @param trajectoryRewards double[]类型参数
      */
     /**
      * update方法。
@@ -318,6 +340,12 @@ public class PolicyGradient {
      * @param actions int[]类型参数
      * @param discountedRewards double[]类型参数
      */
+    /**
+     * fit方法。
+     *      * @param states NdArray[]类型参数
+     * @param actions int[]类型参数
+     * @param discountedRewards double[]类型参数
+     */
     public void fit(NdArray[] states, int[] actions, double[] discountedRewards) {
         // Compute policy gradient update for the batch
         int batchSize = states.length;
@@ -353,6 +381,12 @@ public class PolicyGradient {
      * @param gamma double类型参数
      * @return static double[]类型返回值
      */
+    /**
+     * computeDiscountedRewards方法。
+     *      * @param rewards double[]类型参数
+     * @param gamma double类型参数
+     * @return static double[]类型返回值
+     */
     public static double[] computeDiscountedRewards(double[] rewards, double gamma) {
         int length = rewards.length;
         double[] discountedRewards = new double[length];
@@ -373,6 +407,10 @@ public class PolicyGradient {
      * getPolicyNetwork方法。
      * @return Sequential类型返回值
      */
+    /**
+     * getPolicyNetwork方法。
+     * @return Sequential类型返回值
+     */
     public Sequential getPolicyNetwork() {
         return policyNetwork;
     }
@@ -384,12 +422,20 @@ public class PolicyGradient {
      * getLearningRate方法。
      * @return double类型返回值
      */
+    /**
+     * getLearningRate方法。
+     * @return double类型返回值
+     */
     public double getLearningRate() {
         return learningRate;
     }
     
     /**
      * Gets the discount factor.
+     */
+    /**
+     * getGamma方法。
+     * @return double类型返回值
      */
     /**
      * getGamma方法。

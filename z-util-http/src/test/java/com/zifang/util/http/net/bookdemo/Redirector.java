@@ -9,6 +9,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Redirector类。
+ */
 public class Redirector {
 
     private static final Logger log = Logger.getLogger("Redirector");
@@ -16,11 +19,19 @@ public class Redirector {
     private final int port;
     private final String newSite;
 
+    /**
+     * Redirector方法。
+     *      * @param newSite String类型参数
+     * @param port int类型参数
+     */
     public Redirector(String newSite, int port) {
         this.port = port;
         this.newSite = newSite;
     }
 
+    /**
+     * start方法。
+     */
     public void start() {
         try (ServerSocket server = new ServerSocket(port)) {
             log.info("Redirecting connections on port " + server.getLocalPort() + " to " + newSite);
@@ -51,6 +62,9 @@ public class Redirector {
             this.connection = s;
         }
 
+    /**
+     * run方法。
+     */
         public void run() {
             try {
                 Writer out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), StandardCharsets.US_ASCII));
@@ -99,6 +113,11 @@ public class Redirector {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         int thePort;

@@ -10,6 +10,9 @@ import com.zifang.util.numpy.NdArray;
 /**
  * Dataset接口。
  */
+/**
+ * Dataset接口。
+ */
 public interface Dataset {
 
     /**

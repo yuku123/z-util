@@ -10,15 +10,24 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * HttpServerInvocationHandlerTest类。
+ */
 public class HttpServerInvocationHandlerTest {
 
     @Test
+    /**
+     * testConstructorWithInterface方法。
+     */
     public void testConstructorWithInterface() {
         HttpServerInvocationHandler handler = new HttpServerInvocationHandler(TestApi.class);
         assertEquals(TestApi.class, getTargetFieldValue(handler));
     }
 
     @Test
+    /**
+     * testConstructorWithInterfaceAndContextParams方法。
+     */
     public void testConstructorWithInterfaceAndContextParams() {
         Map<String, Object> params = new HashMap<>();
         params.put("key", "value");
@@ -49,6 +58,9 @@ public class HttpServerInvocationHandlerTest {
     }
 
     @RestController("/test")
+/**
+ * TestApi接口。
+ */
     public interface TestApi {
     }
 }

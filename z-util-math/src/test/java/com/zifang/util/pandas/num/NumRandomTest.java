@@ -8,15 +8,24 @@ import static org.junit.Assert.*;
 /**
  * NumRandom 随机数生成器测试
  */
+/**
+ * NumRandomTest类。
+ */
 public class NumRandomTest {
 
     @Test
+    /**
+     * testNumRandomCreation方法。
+     */
     public void testNumRandomCreation() {
         NumRandom random = new NumRandom();
         assertNotNull(random);
     }
 
     @Test
+    /**
+     * testRandMethod方法。
+     */
     public void testRandMethod() {
         NumRandom random = new NumRandom();
 
@@ -30,6 +39,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testRandWithZeroSize方法。
+     */
     public void testRandWithZeroSize() {
         NumRandom random = new NumRandom();
         Num result = random.rand(0);
@@ -40,6 +52,9 @@ public class NumRandomTest {
 
     @Ignore
     @Test
+    /**
+     * testRandWithNegativeSize方法。
+     */
     public void testRandWithNegativeSize() {
         NumRandom random = new NumRandom();
 
@@ -54,6 +69,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testRandWithLargeSize方法。
+     */
     public void testRandWithLargeSize() {
         NumRandom random = new NumRandom();
 
@@ -64,6 +82,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testNormalMethod方法。
+     */
     public void testNormalMethod() {
         NumRandom random = new NumRandom();
 
@@ -76,6 +97,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testMultipleCalls方法。
+     */
     public void testMultipleCalls() {
         NumRandom random = new NumRandom();
 
@@ -92,6 +116,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testRandomDistribution方法。
+     */
     public void testRandomDistribution() {
         NumRandom random = new NumRandom();
 
@@ -107,6 +134,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testNormalDistribution方法。
+     */
     public void testNormalDistribution() {
         NumRandom random = new NumRandom();
 
@@ -120,6 +150,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testSeedReproducibility方法。
+     */
     public void testSeedReproducibility() {
         // 测试随机种子可重复性
         // 使用相同种子应该生成相同序列
@@ -133,6 +166,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testThreadSafety方法。
+     */
     public void testThreadSafety() {
         // 测试线程安全性
         // 在多线程环境中使用同一个 NumRandom 实例
@@ -142,6 +178,9 @@ public class NumRandomTest {
     }
 
     @Test
+    /**
+     * testEdgeCases方法。
+     */
     public void testEdgeCases() {
         NumRandom random = new NumRandom();
 

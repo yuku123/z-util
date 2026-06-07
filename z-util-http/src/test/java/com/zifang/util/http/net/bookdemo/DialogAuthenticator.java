@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 
+/**
+ * DialogAuthenticator类。
+ */
 public class DialogAuthenticator extends Authenticator {
 
     private JDialog passwordDialog;
@@ -16,18 +19,34 @@ public class DialogAuthenticator extends Authenticator {
     private JButton cancelButton = new JButton("Cancel");
     private JLabel mainLabel = new JLabel("Please enter username and password: ");
 
+    /**
+     * DialogAuthenticator方法。
+     */
     public DialogAuthenticator() {
         this("", new JFrame());
     }
 
+    /**
+     * DialogAuthenticator方法。
+     *      * @param username String类型参数
+     */
     public DialogAuthenticator(String username) {
         this(username, new JFrame());
     }
 
+    /**
+     * DialogAuthenticator方法。
+     *      * @param parent JFrame类型参数
+     */
     public DialogAuthenticator(JFrame parent) {
         this("", parent);
     }
 
+    /**
+     * DialogAuthenticator方法。
+     *      * @param username String类型参数
+     * @param parent JFrame类型参数
+     */
     public DialogAuthenticator(String username, JFrame parent) {
         this.passwordDialog = new JDialog(parent, true);
         Container pane = passwordDialog.getContentPane();
@@ -82,6 +101,10 @@ public class DialogAuthenticator extends Authenticator {
 
     class OKResponse implements ActionListener {
         @Override
+    /**
+     * actionPerformed方法。
+     *      * @param e ActionEvent类型参数
+     */
         public void actionPerformed(ActionEvent e) {
             passwordDialog.setVisible(false);
             // The password is returned as an array of
@@ -96,6 +119,10 @@ public class DialogAuthenticator extends Authenticator {
 
     class CancelResponse implements ActionListener {
         @Override
+    /**
+     * actionPerformed方法。
+     *      * @param e ActionEvent类型参数
+     */
         public void actionPerformed(ActionEvent e) {
             passwordDialog.setVisible(false);
             // Erase the password in case this is used again.
@@ -104,6 +131,10 @@ public class DialogAuthenticator extends Authenticator {
         }
     }
 
+    /**
+     * getPasswordAuthentication方法。
+     * @return PasswordAuthentication类型返回值
+     */
     public PasswordAuthentication getPasswordAuthentication() {
         this.show();
         return this.response;

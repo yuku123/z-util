@@ -23,12 +23,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * DedaoE类。
+ */
 public class DedaoE {
 
     public static String base = "/Users/zifang/Downloads/dedao";
 
     public static String baseTaget = "/Users/zifang/Downloads/dedao_target";
     @Test
+    /**
+     * test方法。
+     */
     public void test() throws IOException {
 
         File[] files = new File(base).listFiles();

@@ -13,16 +13,28 @@ import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
 @Demo("类注解")
+/**
+ * ElementTest类。
+ */
 public class ElementTest {
 
     @Demo("字段注解")
     private String name;
 
     @Demo("方法注解")
+    /**
+     * f方法。
+     *      * @param @Demo("参数a" Object类型参数
+     */
     public void f(@Demo("参数a") String a, @Demo("参数b") String b) {
 
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Class<?> clazz = ElementTest.class;
         //根据指定注解类型获取该注解

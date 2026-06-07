@@ -12,6 +12,9 @@ import java.util.Arrays;
 /**
  * Discretizer类。
  */
+/**
+ * Discretizer类。
+ */
 public class Discretizer {
 
     /**
@@ -21,6 +24,12 @@ public class Discretizer {
      * @param series 输入数据
      * @param bins 分箱数量
      * @return 分箱后的标签 Series
+     */
+    /**
+     * cut方法。
+     *      * @param series Series类型参数
+     * @param bins int类型参数
+     * @return static Series类型返回值
      */
     /**
      * cut方法。
@@ -75,6 +84,12 @@ public class Discretizer {
      * @param series 输入数据
      * @param q 分位数数量
      * @return 分箱后的标签 Series
+     */
+    /**
+     * qcut方法。
+     *      * @param series Series类型参数
+     * @param q int类型参数
+     * @return static Series类型返回值
      */
     /**
      * qcut方法。

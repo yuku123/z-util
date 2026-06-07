@@ -15,11 +15,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Iterator;
 
+/**
+ * NonblockingSingleFileHTTPServer类。
+ */
 public class NonblockingSingleFileHTTPServer {
 
     private ByteBuffer contentBuffer;
     private int port = 80;
 
+    /**
+     * NonblockingSingleFileHTTPServer方法。
+     *      * @param data ByteBuffer类型参数
+     * @param encoding String类型参数
+     * @param MIMEType String类型参数
+     * @param port int类型参数
+     */
     public NonblockingSingleFileHTTPServer(ByteBuffer data, String encoding, String MIMEType, int port) {
 
         this.port = port;
@@ -34,6 +44,9 @@ public class NonblockingSingleFileHTTPServer {
         this.contentBuffer = buffer;
     }
 
+    /**
+     * run方法。
+     */
     public void run() throws IOException {
         ServerSocketChannel serverChannel = ServerSocketChannel.open();
         ServerSocket serverSocket = serverChannel.socket();
@@ -84,6 +97,11 @@ public class NonblockingSingleFileHTTPServer {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Usage: java NonblockingSingleFileHTTPServer file port encoding");

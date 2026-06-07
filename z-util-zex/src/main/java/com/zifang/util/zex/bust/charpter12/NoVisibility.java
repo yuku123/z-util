@@ -9,6 +9,9 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
+/**
+ * NoVisibility类。
+ */
 public class NoVisibility {
 
     private static int n1 = 0;
@@ -18,6 +21,9 @@ public class NoVisibility {
     private static void test1() {
         new Thread() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 try {
                     Thread.sleep(1000L);
@@ -32,6 +38,11 @@ public class NoVisibility {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         test1();

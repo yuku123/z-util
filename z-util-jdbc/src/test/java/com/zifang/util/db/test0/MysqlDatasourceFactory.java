@@ -5,11 +5,18 @@ import com.zifang.util.db.context.DatasourceFactory;
 
 import javax.sql.DataSource;
 
+/**
+ * MysqlDatasourceFactory类。
+ */
 public class MysqlDatasourceFactory implements DatasourceFactory {
 
     private DruidDataSource dataSource = null;
 
     @Override
+    /**
+     * getDatasource方法。
+     * @return DataSource类型返回值
+     */
     public DataSource getDatasource() {
 
         try {

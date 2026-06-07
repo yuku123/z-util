@@ -13,6 +13,9 @@ import java.util.function.Predicate;
 /**
  * SimpleCommand类。
  */
+/**
+ * SimpleCommand类。
+ */
 public class SimpleCommand<C extends CommandContext> implements Command<C> {
 
     private final String name;
@@ -26,10 +29,21 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
      *      * @param name String类型参数
      * @param action ConsumerC类型参数
      */
+    /**
+     * SimpleCommand方法。
+     *      * @param name String类型参数
+     * @param action ConsumerC类型参数
+     */
     public SimpleCommand(String name, Consumer<C> action) {
         this(name, "", ctx -> true, action, null);
     }
 
+    /**
+     * SimpleCommand方法。
+     *      * @param name String类型参数
+     * @param description String类型参数
+     * @param action ConsumerC类型参数
+     */
     /**
      * SimpleCommand方法。
      *      * @param name String类型参数
@@ -46,10 +60,23 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
      * @param action ConsumerC类型参数
      * @param undoAction ConsumerC类型参数
      */
+    /**
+     * SimpleCommand方法。
+     *      * @param name String类型参数
+     * @param action ConsumerC类型参数
+     * @param undoAction ConsumerC类型参数
+     */
     public SimpleCommand(String name, Consumer<C> action, Consumer<C> undoAction) {
         this(name, "", ctx -> true, action, undoAction);
     }
 
+    /**
+     * SimpleCommand方法。
+     *      * @param name String类型参数
+     * @param description String类型参数
+     * @param action ConsumerC类型参数
+     * @param undoAction ConsumerC类型参数
+     */
     /**
      * SimpleCommand方法。
      *      * @param name String类型参数
@@ -73,6 +100,14 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
      * @param action ConsumerC类型参数
      * @param undoAction ConsumerC类型参数
      */
+    /**
+     * SimpleCommand方法。
+     *      * @param name String类型参数
+     * @param description String类型参数
+     * @param canExecute PredicateC类型参数
+     * @param action ConsumerC类型参数
+     * @param undoAction ConsumerC类型参数
+     */
     public SimpleCommand(String name, String description, Predicate<C> canExecute, Consumer<C> action, Consumer<C> undoAction) {
         this.name = name;
         this.description = description;
@@ -82,6 +117,10 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
     }
 
     @Override
+    /**
+     * execute方法。
+     *      * @param context C类型参数
+     */
     /**
      * execute方法。
      *      * @param context C类型参数
@@ -98,11 +137,19 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
 
     @Override
+    /**
+     * getDescription方法。
+     * @return String类型返回值
+     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -116,11 +163,19 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
      * supportsUndo方法。
      * @return boolean类型返回值
      */
+    /**
+     * supportsUndo方法。
+     * @return boolean类型返回值
+     */
     public boolean supportsUndo() {
         return undoAction != null;
     }
 
     @Override
+    /**
+     * undo方法。
+     *      * @param context C类型参数
+     */
     /**
      * undo方法。
      *      * @param context C类型参数
@@ -142,6 +197,12 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
      * @param action ConsumerC类型参数
      * @return static <C extends CommandContext> SimpleCommand<C>类型返回值
      */
+    /**
+     * of方法。
+     *      * @param name String类型参数
+     * @param action ConsumerC类型参数
+     * @return static <C extends CommandContext> SimpleCommand<C>类型返回值
+     */
     public static <C extends CommandContext> SimpleCommand<C> of(String name, Consumer<C> action) {
         return new SimpleCommand<>(name, action);
     }
@@ -156,12 +217,26 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
      * @param undoAction ConsumerC类型参数
      * @return static <C extends CommandContext> SimpleCommand<C>类型返回值
      */
+    /**
+     * of方法。
+     *      * @param name String类型参数
+     * @param action ConsumerC类型参数
+     * @param undoAction ConsumerC类型参数
+     * @return static <C extends CommandContext> SimpleCommand<C>类型返回值
+     */
     public static <C extends CommandContext> SimpleCommand<C> of(String name, Consumer<C> action, Consumer<C> undoAction) {
         return new SimpleCommand<>(name, action, undoAction);
     }
 
     /**
      * 创建命名命令
+     */
+    /**
+     * named方法。
+     *      * @param name String类型参数
+     * @param description String类型参数
+     * @param action ConsumerC类型参数
+     * @return static <C extends CommandContext> SimpleCommand<C>类型返回值
      */
     /**
      * named方法。

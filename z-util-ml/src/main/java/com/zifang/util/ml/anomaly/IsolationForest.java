@@ -17,6 +17,9 @@ import java.util.Random;
 /**
  * IsolationForest类。
  */
+/**
+ * IsolationForest类。
+ */
 public class IsolationForest {
     
     private int nEstimators;
@@ -38,6 +41,9 @@ public class IsolationForest {
         public double threshold;
         public int size;
         
+    /**
+     * IsolationTreeNode方法。
+     */
     /**
      * IsolationTreeNode方法。
      */
@@ -63,12 +69,20 @@ public class IsolationForest {
      * IsolationTree方法。
      *      * @param maxNodes int类型参数
      */
+    /**
+     * IsolationTree方法。
+     *      * @param maxNodes int类型参数
+     */
         public IsolationTree(int maxNodes) {
             this.nodes = new IsolationTreeNode[maxNodes];
             this.rootIndex = -1;
             this.nodeCount = 0;
         }
         
+    /**
+     * addNode方法。
+     * @return int类型返回值
+     */
     /**
      * addNode方法。
      * @return int类型返回值
@@ -81,6 +95,15 @@ public class IsolationForest {
             return nodeCount++;
         }
         
+    /**
+     * pathLength方法。
+     *      * @param point double[]类型参数
+     * @param nodeIndex int类型参数
+     * @param featureValues double[]类型参数
+     * @param sampleIndices int[]类型参数
+     * @param currentSize int类型参数
+     * @return int类型返回值
+     */
     /**
      * pathLength方法。
      *      * @param point double[]类型参数
@@ -126,6 +149,12 @@ public class IsolationForest {
      * @param maxSamples int类型参数
      * @param contamination double类型参数
      */
+    /**
+     * IsolationForest方法。
+     *      * @param nEstimators int类型参数
+     * @param maxSamples int类型参数
+     * @param contamination double类型参数
+     */
     public IsolationForest(int nEstimators, int maxSamples, double contamination) {
         this.nEstimators = nEstimators;
         this.maxSamples = maxSamples;
@@ -137,6 +166,10 @@ public class IsolationForest {
     
     /**
      * Fit the IsolationForest to the training data.
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
      */
     /**
      * fit方法。
@@ -311,6 +344,11 @@ public class IsolationForest {
      *      * @param X NdArray类型参数
      * @return int[]类型返回值
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         int nSamples = Xdata.length;
@@ -330,6 +368,11 @@ public class IsolationForest {
      * 
      * @param X Input data (nSamples x nFeatures)
      * @return Array of anomaly scores (higher = more anomalous)
+     */
+    /**
+     * score方法。
+     *      * @param X NdArray类型参数
+     * @return double[]类型返回值
      */
     /**
      * score方法。

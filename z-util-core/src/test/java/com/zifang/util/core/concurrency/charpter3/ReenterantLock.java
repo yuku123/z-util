@@ -2,12 +2,23 @@ package com.zifang.util.core.concurrency.charpter3;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * ReenterantLock类。
+ */
 public class ReenterantLock implements Runnable {
 
+    /**
+     * ReentrantLock方法。
+     *      * @param true Object类型参数
+     * @return static ReentrantLock lock = new类型返回值
+     */
     public static ReentrantLock lock = new ReentrantLock(true);//重入锁
     public static int i = 0;
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         for (int j = 0; j < 1000; j++) {
             lock.lock();
@@ -21,6 +32,11 @@ public class ReenterantLock implements Runnable {
         System.out.println(i);
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
         ReenterantLock reenterantLock = new ReenterantLock();
         Thread t1 = new Thread(reenterantLock);

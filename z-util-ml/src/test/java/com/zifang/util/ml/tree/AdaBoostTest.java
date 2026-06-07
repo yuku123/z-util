@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * AdaBoostTest类。
+ */
 public class AdaBoostTest {
 
     private Random random = new Random(42);
@@ -45,6 +48,9 @@ public class AdaBoostTest {
     }
 
     @Test
+    /**
+     * testAdaBoostFit方法。
+     */
     public void testAdaBoostFit() {
         int nSamples = 80;
         NdArray X = generateClassificationData(nSamples);
@@ -76,6 +82,9 @@ public class AdaBoostTest {
     }
 
     @Test
+    /**
+     * testAdaBoostWeights方法。
+     */
     public void testAdaBoostWeights() {
         int nSamples = 60;
         NdArray X = generateClassificationData(nSamples);
@@ -90,6 +99,9 @@ public class AdaBoostTest {
     }
 
     @Test
+    /**
+     * testAdaBoostPredict方法。
+     */
     public void testAdaBoostPredict() {
         int nSamples = 50;
         NdArray X = generateClassificationData(nSamples);

@@ -9,6 +9,9 @@ import java.util.concurrent.*;
  * CompletionService类有一个方法用来发送任务给执行器，还有一个方法为下一个已经执行结束的任务获取Future对象。从内部实现机制来看，CompletionService类使用 Executor对象来执行任务。这个行为的优势是可以共享CompletionService对象，并发送任务到执行器，然后其他的对象可以处理任务的结果。第二个方法有一个不足之处，它只能为已经执行结束的任务获取Future对象，因此，这些Future对象只能被用来获取任务的结果。
  * 在本节，我们将学习如何使用CompletionService类，在执行器中来分离任务的启动与结果的处理。
  */
+/**
+ * CompletionServiceExecutorDemo2类。
+ */
 public class CompletionServiceExecutorDemo2 {
 
     // 1．创建名为 ReportGenerator 的类，并实现 Callable 接口，接口的泛型参数为 String 类型。
@@ -18,6 +21,11 @@ public class CompletionServiceExecutorDemo2 {
         private String title;
 
         // 3．实现类的构造器，用来初始化这两个属性。
+    /**
+     * ReportGenerator方法。
+     *      * @param sender String类型参数
+     * @param title String类型参数
+     */
         public ReportGenerator(String sender, String title) {
             this.sender = sender;
             this.title = title;
@@ -26,6 +34,10 @@ public class CompletionServiceExecutorDemo2 {
         // 4．实现call()方法。让线程休眠一段随机时间。
         @Override
 
+    /**
+     * call方法。
+     * @return String类型返回值
+     */
         public String call() throws Exception {
             try {
                 long duration = (long) (Math.random() * 10);
@@ -49,6 +61,11 @@ public class CompletionServiceExecutorDemo2 {
         private CompletionService<String> service;
 
         // 9．实现类的构造器，并初始化这两个属性。
+    /**
+     * ReportRequest方法。
+     *      * @param name String类型参数
+     * @param service CompletionServiceString类型参数
+     */
         public ReportRequest(String name, CompletionService<String> service) {
             this.name = name;
             this.service = service;
@@ -56,6 +73,9 @@ public class CompletionServiceExecutorDemo2 {
 
         // 10．实现run()方法。创建ReportGenerator对象，然后调用CompletionService对象的submit()方法将ReportGenerator对象发送给CompletionService对象。
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             ReportGenerator reportGenerator = new ReportGenerator(name, "Report");
             service.submit(reportGenerator);
@@ -71,6 +91,10 @@ public class CompletionServiceExecutorDemo2 {
         private boolean end;
 
         // 14．实现类的构造器，并初始化这两个属性。
+    /**
+     * ReportProcessor方法。
+     *      * @param service CompletionServiceString类型参数
+     */
         public ReportProcessor(CompletionService<String> service) {
             this.service = service;
             end = false;
@@ -79,6 +103,9 @@ public class CompletionServiceExecutorDemo2 {
         // 15．实现run()方法。如果end属性值为false，则调用CompletionService接口的poll()
         // 方法，来获取下一个已经完成任务的Future对象；当然，这个任务是采用 CompletionService来完成的。
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             while (!end) {
                 try {
@@ -96,12 +123,21 @@ public class CompletionServiceExecutorDemo2 {
         }
 
         // 17．实现setEnd()设置方法，修改end的属性值。
+    /**
+     * setEnd方法。
+     *      * @param end boolean类型参数
+     */
         public void setEnd(boolean end) {
             this.end = end;
         }
     }
     // 18．实现范例的主类，创建 Main 主类，并实现 main() 方法。
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         /// 19．调用Executors工厂类的newCachedThreadPool()方法创建ThreadPoolExecutor执行器对象。
         ExecutorService executor = Executors.newCachedThreadPool();

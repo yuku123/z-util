@@ -4,9 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * HMMTest类。
+ */
 public class HMMTest {
 
     @Test
+    /**
+     * testHMMViterbi方法。
+     */
     public void testHMMViterbi() {
         // Simple HMM: 2 states, 3 observations
         HMM hmm = new HMM(2, 3);
@@ -30,6 +36,9 @@ public class HMMTest {
     }
 
     @Test
+    /**
+     * testHMMScore方法。
+     */
     public void testHMMScore() {
         HMM hmm = new HMM(2, 3);
         
@@ -44,6 +53,9 @@ public class HMMTest {
     }
 
     @Test
+    /**
+     * testHMMParameters方法。
+     */
     public void testHMMParameters() {
         HMM hmm = new HMM(3, 4);
         

@@ -11,12 +11,18 @@ import static org.junit.Assert.*;
 /**
  * SrcCreator 反编译测试
  */
+/**
+ * SrcCreatorTest类。
+ */
 public class SrcCreatorTest {
 
     /**
      * 测试简单类的反编译
      */
     @Test
+    /**
+     * testSimpleClassDecompile方法。
+     */
     public void testSimpleClassDecompile() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);
@@ -44,6 +50,9 @@ public class SrcCreatorTest {
      * 测试方法体生成 - 局部变量赋值
      */
     @Test
+    /**
+     * testLocalVariableAssignment方法。
+     */
     public void testLocalVariableAssignment() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);
@@ -57,6 +66,9 @@ public class SrcCreatorTest {
      * 测试方法体生成 - 字段赋值
      */
     @Test
+    /**
+     * testFieldAssignment方法。
+     */
     public void testFieldAssignment() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);
@@ -70,6 +82,9 @@ public class SrcCreatorTest {
      * 测试方法体生成 - return 语句
      */
     @Test
+    /**
+     * testReturnStatement方法。
+     */
     public void testReturnStatement() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);
@@ -85,6 +100,9 @@ public class SrcCreatorTest {
      * 测试方法体生成 - 空方法
      */
     @Test
+    /**
+     * testEmptyMethod方法。
+     */
     public void testEmptyMethod() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);
@@ -98,6 +116,9 @@ public class SrcCreatorTest {
      * 测试方法体生成 - 静态初始化块
      */
     @Test
+    /**
+     * testStaticInitializer方法。
+     */
     public void testStaticInitializer() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);
@@ -112,6 +133,9 @@ public class SrcCreatorTest {
      * 测试字节码解析和反编译的集成
      */
     @Test
+    /**
+     * testBytecodeToSource方法。
+     */
     public void testBytecodeToSource() {
         InputStream is = getClass().getResourceAsStream("/testclass/TestClassParse1.class");
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);

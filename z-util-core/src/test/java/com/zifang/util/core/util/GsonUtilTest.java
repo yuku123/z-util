@@ -12,21 +12,33 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
+/**
+ * GsonUtilTest类。
+ */
 public class GsonUtilTest {
 
     @Test
+    /**
+     * testObjectToJsonStr_WithString方法。
+     */
     public void testObjectToJsonStr_WithString() {
         String result = GsonUtil.objectToJsonStr("hello");
         assertEquals("\"hello\"", result);
     }
 
     @Test
+    /**
+     * testObjectToJsonStr_WithInteger方法。
+     */
     public void testObjectToJsonStr_WithInteger() {
         String result = GsonUtil.objectToJsonStr(123);
         assertEquals("123", result);
     }
 
     @Test
+    /**
+     * testObjectToJsonStr_WithMap方法。
+     */
     public void testObjectToJsonStr_WithMap() {
         Map<String, Object> map = new HashMap<>();
         map.put("name", "test");
@@ -39,6 +51,9 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testObjectToJsonStr_WithList方法。
+     */
     public void testObjectToJsonStr_WithList() {
         List<String> list = Arrays.asList("a", "b", "c");
         String result = GsonUtil.objectToJsonStr(list);
@@ -48,12 +63,18 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testObjectToJsonStr_WithNull方法。
+     */
     public void testObjectToJsonStr_WithNull() {
         String result = GsonUtil.objectToJsonStr(null);
         assertEquals("null", result);
     }
 
     @Test
+    /**
+     * testJsonStrToObject_WithString方法。
+     */
     public void testJsonStrToObject_WithString() {
         String json = "\"hello\"";
         String result = GsonUtil.jsonStrToObject(json, String.class);
@@ -61,6 +82,9 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testJsonStrToObject_WithInteger方法。
+     */
     public void testJsonStrToObject_WithInteger() {
         String json = "123";
         Integer result = GsonUtil.jsonStrToObject(json, Integer.class);
@@ -68,6 +92,9 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testJsonStrToObject_WithMap方法。
+     */
     public void testJsonStrToObject_WithMap() {
         String json = "{\"name\":\"test\",\"value\":123}";
         Map result = GsonUtil.jsonStrToObject(json, Map.class);
@@ -76,6 +103,9 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testJsonStrToObject_WithTypeReference方法。
+     */
     public void testJsonStrToObject_WithTypeReference() {
         String json = "[1,2,3]";
         Type type = new TypeToken<List<Integer>>() {}.getType();
@@ -84,6 +114,9 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testJsonStrToObject_WithLocalDateTime方法。
+     */
     public void testJsonStrToObject_WithLocalDateTime() {
         String json = "\"2024-01-15T10:30:00\"";
         LocalDateTime result = GsonUtil.jsonStrToObject(json, LocalDateTime.class);
@@ -96,6 +129,9 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testChangeToSubClass方法。
+     */
     public void testChangeToSubClass() {
         Parent parent = new Parent("test", 100);
         Child child = GsonUtil.changeToSubClass(parent, Child.class);
@@ -105,6 +141,9 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testToMap方法。
+     */
     public void testToMap() {
         TestBean bean = new TestBean("hello", 123);
         Map<String, Object> result = GsonUtil.toMap(bean);
@@ -114,6 +153,9 @@ public class GsonUtilTest {
     }
 
     @Test
+    /**
+     * testRoundTrip方法。
+     */
     public void testRoundTrip() {
         TestBean original = new TestBean("roundTrip", 999);
         String json = GsonUtil.objectToJsonStr(original);
@@ -127,6 +169,11 @@ public class GsonUtilTest {
     private static class Parent {
         public String name;
         public int value;
+    /**
+     * Parent方法。
+     *      * @param name String类型参数
+     * @param value int类型参数
+     */
         public Parent(String name, int value) {
             this.name = name;
             this.value = value;
@@ -134,6 +181,11 @@ public class GsonUtilTest {
     }
 
     private static class Child extends Parent {
+    /**
+     * Child方法。
+     *      * @param name String类型参数
+     * @param value int类型参数
+     */
         public Child(String name, int value) {
             super(name, value);
         }
@@ -142,6 +194,11 @@ public class GsonUtilTest {
     private static class TestBean {
         public String name;
         public int value;
+    /**
+     * TestBean方法。
+     *      * @param name String类型参数
+     * @param value int类型参数
+     */
         public TestBean(String name, int value) {
             this.name = name;
             this.value = value;

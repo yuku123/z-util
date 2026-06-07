@@ -10,6 +10,9 @@ import java.lang.reflect.Field;
 /**
  * Validator接口。
  */
+/**
+ * Validator接口。
+ */
 public interface Validator<T> {
 
     /**

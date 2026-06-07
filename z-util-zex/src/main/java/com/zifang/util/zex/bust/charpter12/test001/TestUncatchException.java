@@ -11,9 +11,15 @@ package com.zifang.util.zex.bust.charpter12.test001;
  */
 import org.junit.Test;
 
+/**
+ * TestUncatchException类。
+ */
 public class TestUncatchException {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() {
         try {
             Thread test = new Thread(() -> {
@@ -22,6 +28,11 @@ public class TestUncatchException {
             Thread.UncaughtExceptionHandler ss = new Thread.UncaughtExceptionHandler() {
 
                 @Override
+    /**
+     * uncaughtException方法。
+     *      * @param t Thread类型参数
+     * @param e Throwable类型参数
+     */
                 public void uncaughtException(Thread t, Throwable e) {
                     System.out.println(t.getName() + ": " + e.getMessage());
                     throw new RuntimeException();

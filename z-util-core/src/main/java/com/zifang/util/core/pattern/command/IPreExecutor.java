@@ -8,6 +8,9 @@ package com.zifang.util.core.pattern.command;
 /**
  * IPreExecutor接口。
  */
+/**
+ * IPreExecutor接口。
+ */
 public interface IPreExecutor {
 
     /**

@@ -12,6 +12,9 @@ import java.util.Properties;
 /**
  * CommandLineParser接口。
  */
+/**
+ * CommandLineParser接口。
+ */
 public interface CommandLineParser {
 
     /**

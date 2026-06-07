@@ -7,12 +7,18 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * ThreadPoolOvertimeAlarmPolicyTest类。
+ */
 public class ThreadPoolOvertimeAlarmPolicyTest {
 
     private ThreadPoolOvertimeAlarmPolicy policy;
     private ThreadPoolStatus status;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         policy = new ThreadPoolOvertimeAlarmPolicy();
         status = new ThreadPoolStatus();
@@ -20,12 +26,18 @@ public class ThreadPoolOvertimeAlarmPolicyTest {
     }
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         ThreadPoolOvertimeAlarmPolicy p = new ThreadPoolOvertimeAlarmPolicy();
         assertNotNull(p);
     }
 
     @Test
+    /**
+     * testConstructorWithThreshold方法。
+     */
     public void testConstructorWithThreshold() {
         int customThreshold = 60000;
         ThreadPoolOvertimeAlarmPolicy p = new ThreadPoolOvertimeAlarmPolicy(customThreshold);
@@ -33,6 +45,9 @@ public class ThreadPoolOvertimeAlarmPolicyTest {
     }
 
     @Test
+    /**
+     * testNoAlarmWhenLastFinishTimeAfterLastStartTime方法。
+     */
     public void testNoAlarmWhenLastFinishTimeAfterLastStartTime() {
         // Task finished, no alarm needed
         status.getLastStartTime().set(System.currentTimeMillis() - 100000);
@@ -41,6 +56,9 @@ public class ThreadPoolOvertimeAlarmPolicyTest {
     }
 
     @Test
+    /**
+     * testNoAlarmWhenTaskRunningButWithinThreshold方法。
+     */
     public void testNoAlarmWhenTaskRunningButWithinThreshold() {
         // Task still running but within threshold
         status.getLastStartTime().set(System.currentTimeMillis() - 1000);

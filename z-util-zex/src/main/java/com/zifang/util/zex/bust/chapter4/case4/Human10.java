@@ -22,6 +22,9 @@ class Human10 {
 
     private String age;
 
+    /**
+     * eat方法。
+     */
     public void eat() {
         System.out.println("我要吃饭");
         goWc();
@@ -31,6 +34,11 @@ class Human10 {
         System.out.println("吃完饭就上个厕所");
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Human10 human = new Human10();
         human.eat();

@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * RequestAttribute注解。
  */
+/**
+ * RequestAttribute注解。
+ */
 public @interface RequestAttribute {
 }

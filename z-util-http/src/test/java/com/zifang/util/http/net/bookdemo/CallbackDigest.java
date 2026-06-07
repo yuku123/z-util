@@ -6,15 +6,25 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * CallbackDigest类。
+ */
 public class CallbackDigest implements Runnable {
 
     private String filename;
 
+    /**
+     * CallbackDigest方法。
+     *      * @param filename String类型参数
+     */
     public CallbackDigest(String filename) {
         this.filename = filename;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         try {
             FileInputStream in = new FileInputStream(filename);

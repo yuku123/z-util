@@ -7,9 +7,15 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * ConvertRegisterTest类。
+ */
 public class ConvertRegisterTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() {
         assert Converters.findConverter(Byte.class, Byte.class).to((byte) 1) == ((byte) 1);
         assert Converters.findConverter(Byte.class, Short.class).to((byte) 1) == ((short) 1);
@@ -76,6 +82,9 @@ public class ConvertRegisterTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002(){
         assert Converters.findConverter(Byte.class, Byte.class).to(null) == ((byte) 0);
         assert Converters.findConverter(Byte.class, Short.class).to(null) == ((short) 0);
@@ -89,9 +98,18 @@ public class ConvertRegisterTest {
 
     @Test
     @org.junit.Ignore("Lambda内部类泛型作业测试")
+    /**
+     * test003方法。
+     */
     public void test003(){
         IConverter<Map<String,String>, String> converter = new IConverter<Map<String,String>, String>(){
             @Override
+    /**
+     * to方法。
+     *      * @param value MapString,String类型参数
+     * @param defaultValue String类型参数
+     * @return String类型返回值
+     */
             public String to(Map<String,String> value, String defaultValue) {
                 return String.join(",",value.keySet());
             }
@@ -107,6 +125,9 @@ public class ConvertRegisterTest {
     }
 
     @Test
+    /**
+     * test004方法。
+     */
     public void test004(){
         IConverter<Map<String,String>, String> converter = (value, defaultValue) -> String.join(",",value.keySet());
         Converters.registerConverter(converter, Map.class, String.class);

@@ -15,6 +15,9 @@ import java.util.List;
 /**
  * DockerCommandResult类。
  */
+/**
+ * DockerCommandResult类。
+ */
 public class DockerCommandResult<T> {
 
     private boolean success;
@@ -27,6 +30,9 @@ public class DockerCommandResult<T> {
     /**
      * DockerCommandResult方法。
      */
+    /**
+     * DockerCommandResult方法。
+     */
     public DockerCommandResult() {
     }
 
@@ -36,6 +42,11 @@ public class DockerCommandResult<T> {
      * @param data 结果数据
      * @param <T>  数据类型
      * @return 成功结果对象
+     */
+    /**
+     * success方法。
+     *      * @param data T类型参数
+     * @return static <T> DockerCommandResult<T>类型返回值
      */
     /**
      * success方法。
@@ -55,6 +66,11 @@ public class DockerCommandResult<T> {
      * @param stdout 标准输出内容
      * @param <T>    数据类型
      * @return 成功结果对象
+     */
+    /**
+     * success方法。
+     *      * @param stdout String类型参数
+     * @return static <T> DockerCommandResult<T>类型返回值
      */
     /**
      * success方法。
@@ -82,6 +98,12 @@ public class DockerCommandResult<T> {
      * @param stderr String类型参数
      * @return static <T> DockerCommandResult<T>类型返回值
      */
+    /**
+     * fail方法。
+     *      * @param exitCode int类型参数
+     * @param stderr String类型参数
+     * @return static <T> DockerCommandResult<T>类型返回值
+     */
     public static <T> DockerCommandResult<T> fail(int exitCode, String stderr) {
         DockerCommandResult<T> result = new DockerCommandResult<>();
         result.success = false;
@@ -102,6 +124,11 @@ public class DockerCommandResult<T> {
      *      * @param message String类型参数
      * @return static <T> DockerCommandResult<T>类型返回值
      */
+    /**
+     * fail方法。
+     *      * @param message String类型参数
+     * @return static <T> DockerCommandResult<T>类型返回值
+     */
     public static <T> DockerCommandResult<T> fail(String message) {
         DockerCommandResult<T> result = new DockerCommandResult<>();
         result.success = false;
@@ -109,6 +136,10 @@ public class DockerCommandResult<T> {
         return result;
     }
 
+    /**
+     * isSuccess方法。
+     * @return boolean类型返回值
+     */
     /**
      * isSuccess方法。
      * @return boolean类型返回值
@@ -121,10 +152,18 @@ public class DockerCommandResult<T> {
      * setSuccess方法。
      *      * @param success boolean类型参数
      */
+    /**
+     * setSuccess方法。
+     *      * @param success boolean类型参数
+     */
     public void setSuccess(boolean success) {
         this.success = success;
     }
 
+    /**
+     * getExitCode方法。
+     * @return int类型返回值
+     */
     /**
      * getExitCode方法。
      * @return int类型返回值
@@ -137,10 +176,18 @@ public class DockerCommandResult<T> {
      * setExitCode方法。
      *      * @param exitCode int类型参数
      */
+    /**
+     * setExitCode方法。
+     *      * @param exitCode int类型参数
+     */
     public void setExitCode(int exitCode) {
         this.exitCode = exitCode;
     }
 
+    /**
+     * getStdout方法。
+     * @return String类型返回值
+     */
     /**
      * getStdout方法。
      * @return String类型返回值
@@ -153,10 +200,18 @@ public class DockerCommandResult<T> {
      * setStdout方法。
      *      * @param stdout String类型参数
      */
+    /**
+     * setStdout方法。
+     *      * @param stdout String类型参数
+     */
     public void setStdout(String stdout) {
         this.stdout = stdout;
     }
 
+    /**
+     * getStderr方法。
+     * @return String类型返回值
+     */
     /**
      * getStderr方法。
      * @return String类型返回值
@@ -169,10 +224,18 @@ public class DockerCommandResult<T> {
      * setStderr方法。
      *      * @param stderr String类型参数
      */
+    /**
+     * setStderr方法。
+     *      * @param stderr String类型参数
+     */
     public void setStderr(String stderr) {
         this.stderr = stderr;
     }
 
+    /**
+     * getData方法。
+     * @return T类型返回值
+     */
     /**
      * getData方法。
      * @return T类型返回值
@@ -185,10 +248,18 @@ public class DockerCommandResult<T> {
      * setData方法。
      *      * @param data T类型参数
      */
+    /**
+     * setData方法。
+     *      * @param data T类型参数
+     */
     public void setData(T data) {
         this.data = data;
     }
 
+    /**
+     * getMessage方法。
+     * @return String类型返回值
+     */
     /**
      * getMessage方法。
      * @return String类型返回值
@@ -201,11 +272,19 @@ public class DockerCommandResult<T> {
      * setMessage方法。
      *      * @param message String类型参数
      */
+    /**
+     * setMessage方法。
+     *      * @param message String类型参数
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

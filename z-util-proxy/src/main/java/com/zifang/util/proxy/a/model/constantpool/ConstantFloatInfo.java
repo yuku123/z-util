@@ -12,10 +12,17 @@ import java.io.InputStream;
 /**
  * ConstantFloatInfo类。
  */
+/**
+ * ConstantFloatInfo类。
+ */
 public class ConstantFloatInfo extends AbstractConstantPool {
     private U4 bytes;
 
 
+    /**
+     * ConstantFloatInfo方法。
+     *      * @param tag byte类型参数
+     */
     /**
      * ConstantFloatInfo方法。
      *      * @param tag byte类型参数
@@ -28,6 +35,10 @@ public class ConstantFloatInfo extends AbstractConstantPool {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     public void read(InputStream inputStream) {
         this.bytes = U4.read(inputStream);
     }
@@ -36,10 +47,18 @@ public class ConstantFloatInfo extends AbstractConstantPool {
      * getBytes方法。
      * @return U4类型返回值
      */
+    /**
+     * getBytes方法。
+     * @return U4类型返回值
+     */
     public U4 getBytes() {
         return bytes;
     }
 
+    /**
+     * setBytes方法。
+     *      * @param bytes U4类型参数
+     */
     /**
      * setBytes方法。
      *      * @param bytes U4类型参数

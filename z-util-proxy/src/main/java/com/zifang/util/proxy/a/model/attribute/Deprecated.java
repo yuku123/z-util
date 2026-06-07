@@ -14,9 +14,17 @@ import java.io.InputStream;
 /**
  * Deprecated类。
  */
+/**
+ * Deprecated类。
+ */
 public class Deprecated extends AbstractAttribute {
 
 
+    /**
+     * Deprecated方法。
+     *      * @param attributeNameIndex U2类型参数
+     * @param attributeLength U4类型参数
+     */
     /**
      * Deprecated方法。
      *      * @param attributeNameIndex U2类型参数
@@ -27,6 +35,10 @@ public class Deprecated extends AbstractAttribute {
     }
 
     @Override
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     /**
      * read方法。
      *      * @param inputStream InputStream类型参数

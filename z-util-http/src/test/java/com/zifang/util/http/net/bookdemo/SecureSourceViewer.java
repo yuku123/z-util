@@ -5,8 +5,16 @@ import java.net.Authenticator;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * SecureSourceViewer类。
+ */
 public class SecureSourceViewer {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // args = new
         // String[]{"http://192.168.10.125:8080/mss3.1/meta/mssDataLogAction!mssDataLog.action"};

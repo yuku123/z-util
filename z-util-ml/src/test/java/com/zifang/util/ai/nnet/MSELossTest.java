@@ -7,9 +7,15 @@ import static org.junit.Assert.*;
 /**
  * MSELoss 类测试
  */
+/**
+ * MSELossTest类。
+ */
 public class MSELossTest {
 
     @Test
+    /**
+     * testComputePerfectPrediction方法。
+     */
     public void testComputePerfectPrediction() {
         MSELoss mseLoss = new MSELoss();
 
@@ -22,6 +28,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testComputeWithError方法。
+     */
     public void testComputeWithError() {
         MSELoss mseLoss = new MSELoss();
 
@@ -35,6 +44,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testComputeSingleElement方法。
+     */
     public void testComputeSingleElement() {
         MSELoss mseLoss = new MSELoss();
 
@@ -48,6 +60,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testComputeLargeError方法。
+     */
     public void testComputeLargeError() {
         MSELoss mseLoss = new MSELoss();
 
@@ -61,6 +76,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testComputeNegativeValues方法。
+     */
     public void testComputeNegativeValues() {
         MSELoss mseLoss = new MSELoss();
 
@@ -74,6 +92,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testComputeZeroPredictions方法。
+     */
     public void testComputeZeroPredictions() {
         MSELoss mseLoss = new MSELoss();
 
@@ -87,6 +108,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testComputeZeroTargets方法。
+     */
     public void testComputeZeroTargets() {
         MSELoss mseLoss = new MSELoss();
 
@@ -100,6 +124,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testGradientPerfectPrediction方法。
+     */
     public void testGradientPerfectPrediction() {
         MSELoss mseLoss = new MSELoss();
 
@@ -115,6 +142,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testGradientWithError方法。
+     */
     public void testGradientWithError() {
         MSELoss mseLoss = new MSELoss();
 
@@ -131,6 +161,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testGradientSingleElement方法。
+     */
     public void testGradientSingleElement() {
         MSELoss mseLoss = new MSELoss();
 
@@ -145,6 +178,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testGradientSymmetry方法。
+     */
     public void testGradientSymmetry() {
         MSELoss mseLoss = new MSELoss();
 
@@ -162,6 +198,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testGradientZeroPredictions方法。
+     */
     public void testGradientZeroPredictions() {
         MSELoss mseLoss = new MSELoss();
 
@@ -176,6 +215,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testGradientZeroTargets方法。
+     */
     public void testGradientZeroTargets() {
         MSELoss mseLoss = new MSELoss();
 
@@ -190,6 +232,9 @@ public class MSELossTest {
     }
 
     @Test
+    /**
+     * testComputeAndGradientConsistency方法。
+     */
     public void testComputeAndGradientConsistency() {
         MSELoss mseLoss = new MSELoss();
 

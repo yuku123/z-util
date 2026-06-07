@@ -14,6 +14,9 @@ import java.util.Vector;
 /**
  * ClassLoaderUtil类。
  */
+/**
+ * ClassLoaderUtil类。
+ */
 public class ClassLoaderUtil {
 
     private static final Logger log = LoggerFactory.getLogger(ClassLoaderUtil.class);
@@ -32,12 +35,21 @@ public class ClassLoaderUtil {
      * getContextClassLoader方法。
      * @return static ClassLoader类型返回值
      */
+    /**
+     * getContextClassLoader方法。
+     * @return static ClassLoader类型返回值
+     */
     public static ClassLoader getContextClassLoader() {
         return overrideClassLoader != null ? overrideClassLoader : Thread.currentThread().getContextClassLoader();
     }
 
     /**
      * 加载指定的类
+     */
+    /**
+     * loadClass方法。
+     *      * @param className String类型参数
+     * @return static Class<?>类型返回值
      */
     /**
      * loadClass方法。
@@ -62,6 +74,11 @@ public class ClassLoaderUtil {
      * @return 已加载的类列表
      * @throws NoSuchFieldException   如果找不到classes字段
      * @throws IllegalAccessException 如果无法访问classes字段
+     */
+    /**
+     * getLoaderClass方法。
+     *      * @param classLoader ClassLoader类型参数
+     * @return static List<Class>类型返回值
      */
     /**
      * getLoaderClass方法。

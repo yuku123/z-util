@@ -6,8 +6,14 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * VennOpTest类。
+ */
 public class VennOpTest {
     @Test
+    /**
+     * test0方法。
+     */
     public void test0() {
         List<String> l1 = Arrays.asList("0", "1", "2", "3", "3");
         List<String> l2 = Arrays.asList("2", "3", "4", "4");

@@ -7,6 +7,9 @@ package com.zifang.util.ml.optim;
 /**
  * LrScheduler接口。
  */
+/**
+ * LrScheduler接口。
+ */
 public interface LrScheduler {
     
     /**

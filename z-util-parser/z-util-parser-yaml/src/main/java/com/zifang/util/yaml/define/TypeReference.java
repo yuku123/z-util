@@ -8,12 +8,24 @@ package com.zifang.util.yaml.define;
  * @param <T> 目标类型
  * @author zifang
  */
+/**
+ * TypeReference类。
+ */
+/**
+ * TypeReference类。
+ */
 public class TypeReference<T> {
 
     private final Class<? super T> rawType;
     private final java.lang.reflect.Type type;
 
     @SuppressWarnings("unchecked")
+    /**
+     * TypeReference方法。
+     */
+    /**
+     * TypeReference方法。
+     */
     protected TypeReference() {
         java.lang.reflect.Type superclass = getClass().getGenericSuperclass();
         if (superclass instanceof java.lang.reflect.ParameterizedType) {
@@ -26,15 +38,39 @@ public class TypeReference<T> {
         }
     }
 
+    /**
+     * getRawType方法。
+     * @return Class<? super T>类型返回值
+     */
+    /**
+     * getRawType方法。
+     * @return Class<? super T>类型返回值
+     */
     public Class<? super T> getRawType() {
         return rawType;
     }
 
+    /**
+     * getType方法。
+     * @return java.lang.reflect.Type类型返回值
+     */
+    /**
+     * getType方法。
+     * @return java.lang.reflect.Type类型返回值
+     */
     public java.lang.reflect.Type getType() {
         return type;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "TypeReference{" +
                 "type=" + type +

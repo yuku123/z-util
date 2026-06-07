@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
 /**
  * TOML v1.0.0 解析器（子集实现）
  */
+/**
+ * TomlParser类。
+ */
 public class TomlParser {
 
     private static final Pattern INTEGER_PATTERN = Pattern.compile("[+-]?[0-9_]+(?:_[0-9_]+)*");
@@ -27,11 +30,19 @@ public class TomlParser {
     private TomlDocument document;
     private TomlDocument.TomlTable currentTable;
 
+    /**
+     * TomlParser方法。
+     */
     public TomlParser() {
     }
 
     /**
      * 解析 TOML 格式字符串
+     */
+    /**
+     * parse方法。
+     *      * @param content String类型参数
+     * @return TomlDocument类型返回值
      */
     public TomlDocument parse(String content) {
         return parse(new StringReader(content));
@@ -39,6 +50,11 @@ public class TomlParser {
 
     /**
      * 解析 TOML 格式 Reader
+     */
+    /**
+     * parse方法。
+     *      * @param reader Reader类型参数
+     * @return TomlDocument类型返回值
      */
     public TomlDocument parse(Reader reader) {
         try {
@@ -606,6 +622,11 @@ public class TomlParser {
 
     /**
      * 将 TomlDocument 写回 TOML 格式字符串
+     */
+    /**
+     * store方法。
+     *      * @param doc TomlDocument类型参数
+     * @return String类型返回值
      */
     public String store(TomlDocument doc) {
         StringBuilder sb = new StringBuilder();

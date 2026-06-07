@@ -9,9 +9,15 @@ import static org.junit.Assert.*;
  * Discretizer 数据离散化和分箱测试类
  * 测试等宽分箱(cut)和等频分箱(qcut)功能
  */
+/**
+ * DiscretizerTest类。
+ */
 public class DiscretizerTest {
 
     @Test
+    /**
+     * testCutBasic方法。
+     */
     public void testCutBasic() {
         // 创建测试数据: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
         double[] data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -32,6 +38,9 @@ public class DiscretizerTest {
     }
 
     @Test
+    /**
+     * testCutMultipleBins方法。
+     */
     public void testCutMultipleBins() {
         double[] data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         Series series = new Series(data);
@@ -55,6 +64,9 @@ public class DiscretizerTest {
     }
 
     @Test
+    /**
+     * testCutWithNaN方法。
+     */
     public void testCutWithNaN() {
         double[] data = {1, Double.NaN, 3, 4, Double.NaN, 6};
         Series series = new Series(data);
@@ -67,6 +79,9 @@ public class DiscretizerTest {
     }
 
     @Test
+    /**
+     * testQcutBasic方法。
+     */
     public void testQcutBasic() {
         // 创建 10 个均匀分布的数据点
         double[] data = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
@@ -91,6 +106,9 @@ public class DiscretizerTest {
     }
 
     @Test
+    /**
+     * testQcutQuartiles方法。
+     */
     public void testQcutQuartiles() {
         // 创建 20 个均匀分布的数据点
         double[] data = new double[20];
@@ -121,6 +139,9 @@ public class DiscretizerTest {
     }
 
     @Test
+    /**
+     * testQcutWithDuplicates方法。
+     */
     public void testQcutWithDuplicates() {
         // 测试包含重复值的数据
         double[] data = {1, 1, 1, 2, 2, 3, 4, 5, 5, 5};
@@ -137,6 +158,9 @@ public class DiscretizerTest {
     }
 
     @Test
+    /**
+     * testQcutWithNaN方法。
+     */
     public void testQcutWithNaN() {
         double[] data = {1, Double.NaN, 3, 4, Double.NaN, 6};
         Series series = new Series(data);
@@ -149,6 +173,9 @@ public class DiscretizerTest {
     }
 
     @Test
+    /**
+     * testSingleValue方法。
+     */
     public void testSingleValue() {
         // 测试只有一个唯一值的情况
         double[] data = {5, 5, 5, 5, 5};

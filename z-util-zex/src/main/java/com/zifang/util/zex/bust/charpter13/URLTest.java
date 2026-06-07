@@ -16,9 +16,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.*;
 
+/**
+ * URLTest类。
+ */
 public class URLTest {
 
     @Test
+    /**
+     * test0方法。
+     */
     public void test0() throws URISyntaxException, IOException {
         URL url = new URL("http://aa:123@localhost:8080/search?name=doge#anchor-1");
         print(url);
@@ -39,6 +45,9 @@ public class URLTest {
     }
 
     @Test
+    /**
+     * test2方法。
+     */
     public void test2() throws IOException {
         URL u = new URL("http://www.baidu.com");
         InputStream inputStream = u.openStream();
@@ -49,6 +58,9 @@ public class URLTest {
 
 
     @Test
+    /**
+     * client方法。
+     */
     public void client() throws IOException {
         ServerSocket server = new ServerSocket(50000);
         Socket socket = null;
@@ -59,6 +71,9 @@ public class URLTest {
 
             new Thread(new Runnable() {
                 @Override
+    /**
+     * run方法。
+     */
                 public void run() {
                     try {
                         printMessageFromInputStream(inputStream);
@@ -69,6 +84,9 @@ public class URLTest {
             }).start();
             new Thread(new Runnable() {
                 @Override
+    /**
+     * run方法。
+     */
                 public void run() {
                     try {
                         writeOutStream(outputStream);
@@ -80,6 +98,11 @@ public class URLTest {
         }
     }
 
+    /**
+     * printMessageFromInputStream方法。
+     *      * @param inputStream InputStream类型参数
+     * @return static void类型返回值
+     */
     public static void printMessageFromInputStream(InputStream inputStream) throws IOException {
         byte[] bytes = new byte[1024];
         int len;
@@ -88,6 +111,11 @@ public class URLTest {
         }
     }
 
+    /**
+     * writeOutStream方法。
+     *      * @param outputStream OutputStream类型参数
+     * @return static void类型返回值
+     */
     public static void writeOutStream(OutputStream outputStream) throws IOException {
 
         String content = "HTTP/1.1 200 OK\r\n" +
@@ -102,6 +130,9 @@ public class URLTest {
     }
 
     @Test
+    /**
+     * test3方法。
+     */
     public void test3() {
         try {
             URL url = new URL("http://127.0.0.1:50000");
@@ -127,6 +158,9 @@ public class URLTest {
     }
 
     @Test
+    /**
+     * test4方法。
+     */
     public void test4() throws IOException {
         URL url = new URL("http://www.baidu.com");
         URLConnection connection = url.openConnection();

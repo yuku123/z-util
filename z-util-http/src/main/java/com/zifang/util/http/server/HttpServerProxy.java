@@ -16,6 +16,9 @@ import com.zifang.util.proxy.ProxyUtil;
 /**
  * HttpServerProxy类。
  */
+/**
+ * HttpServerProxy类。
+ */
 public class HttpServerProxy {
 
     /**
@@ -25,6 +28,11 @@ public class HttpServerProxy {
      * @param <T>             服务接口的类型
      * @return 服务接口的代理对象
      * @throws IllegalArgumentException 如果 serverInterface 为 null
+     */
+    /**
+     * proxy方法。
+     *      * @param serverInterface ClassT类型参数
+     * @return static <T> T类型返回值
      */
     /**
      * proxy方法。

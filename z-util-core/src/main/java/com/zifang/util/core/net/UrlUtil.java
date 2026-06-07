@@ -42,6 +42,9 @@ import java.util.Map;
  * @author zifang
  * @since 1.0
  */
+/**
+ * UrlUtil类。
+ */
 public class UrlUtil {
 
     /** UTF-8 字符集 */
@@ -58,6 +61,11 @@ public class UrlUtil {
      * @param url 待编码的字符串
      * @return 编码后的字符串
      */
+    /**
+     * encode方法。
+     *      * @param url String类型参数
+     * @return static String类型返回值
+     */
     public static String encode(String url) {
         return encode(url, CHARSET_UTF_8);
     }
@@ -72,6 +80,12 @@ public class UrlUtil {
      * @param url      待编码的字符串
      * @param encoding 编码字符集
      * @return 编码后的字符串
+     */
+    /**
+     * encode方法。
+     *      * @param url String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
      */
     public static String encode(String url, String encoding) {
         if (url == null) {
@@ -91,6 +105,11 @@ public class UrlUtil {
      * @param url 待解码的字符串
      * @return 解码后的字符串
      */
+    /**
+     * decode方法。
+     *      * @param url String类型参数
+     * @return static String类型返回值
+     */
     public static String decode(String url) {
         return decode(url, CHARSET_UTF_8);
     }
@@ -101,6 +120,12 @@ public class UrlUtil {
      * @param url      待解码的字符串
      * @param encoding 解码字符集
      * @return 解码后的字符串
+     */
+    /**
+     * decode方法。
+     *      * @param url String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
      */
     public static String decode(String url, String encoding) {
         if (url == null) {
@@ -121,6 +146,13 @@ public class UrlUtil {
      * @param paramName  参数名
      * @param paramValue 参数值（会自动 URL 编码）
      * @return 添加/修改参数后的 URL
+     */
+    /**
+     * setParam方法。
+     *      * @param url String类型参数
+     * @param paramName String类型参数
+     * @param paramValue String类型参数
+     * @return static String类型返回值
      */
     public static String setParam(String url, String paramName, String paramValue) {
         if (paramName == null) {
@@ -158,6 +190,12 @@ public class UrlUtil {
      * @param paramName 参数名
      * @return 参数值（未找到返回 null）
      */
+    /**
+     * getParamValue方法。
+     *      * @param url String类型参数
+     * @param paramName String类型参数
+     * @return static String类型返回值
+     */
     public static String getParamValue(String url, String paramName) {
         if (url == null || paramName == null) {
             return null;
@@ -182,6 +220,12 @@ public class UrlUtil {
      * @param url        URL 字符串
      * @param paramNames 要移除的参数名（支持多个）
      * @return 移除参数后的 URL
+     */
+    /**
+     * removeParam方法。
+     *      * @param url String类型参数
+     * @param paramNames String...类型参数
+     * @return static String类型返回值
      */
     public static String removeParam(String url, String... paramNames) {
         if (url == null || paramNames == null) {
@@ -230,6 +274,12 @@ public class UrlUtil {
      * @param locationHeader Location 响应头
      * @return 拼接后的完整 URL
      */
+    /**
+     * urlJoin方法。
+     *      * @param baseUrl URL类型参数
+     * @param locationHeader String类型参数
+     * @return static String类型返回值
+     */
     public static String urlJoin(URL baseUrl, String locationHeader) {
         if (baseUrl == null || locationHeader == null) {
             return baseUrl != null ? baseUrl.toString() : locationHeader;
@@ -254,6 +304,11 @@ public class UrlUtil {
      *
      * @param request HTTP 请求对象
      * @return 参数名到参数值的映射
+     */
+    /**
+     * getRequestParams方法。
+     *      * @param request HttpServletRequest类型参数
+     * @return static Map<String, String>类型返回值
      */
     public static Map<String, String> getRequestParams(HttpServletRequest request) {
         Map<String, String> params = new HashMap<>();
@@ -288,6 +343,14 @@ public class UrlUtil {
      * @param split2 键值分隔符（通常为 =）
      * @param dupLink 多值连接符（为 null 时后者覆盖前者）
      * @return 解析后的 Map
+     */
+    /**
+     * parseQuery方法。
+     *      * @param query String类型参数
+     * @param split1 char类型参数
+     * @param split2 char类型参数
+     * @param dupLink String类型参数
+     * @return static Map<String, String>类型返回值
      */
     public static Map<String, String> parseQuery(String query, char split1, char split2, String dupLink) {
         if (query == null || query.isEmpty() || query.indexOf(split2) <= 0) {
@@ -345,6 +408,11 @@ public class UrlUtil {
      * @param queryUri 查询字符串（不含 ?）
      * @return 解析后的 Map
      */
+    /**
+     * httpParseQuery方法。
+     *      * @param queryUri String类型参数
+     * @return static Map<String, String>类型返回值
+     */
     public static Map<String, String> httpParseQuery(String queryUri) {
         if (queryUri == null || queryUri.isEmpty()) {
             return new HashMap<>();
@@ -358,6 +426,11 @@ public class UrlUtil {
      * @param source 待解码的字符串
      * @return 解码后的字符串
      */
+    /**
+     * decodeQuery方法。
+     *      * @param source String类型参数
+     * @return static String类型返回值
+     */
     public static String decodeQuery(String source) {
         return decodeQuery(source, CHARSET_UTF_8);
     }
@@ -368,6 +441,12 @@ public class UrlUtil {
      * @param source   待解码的字符串
      * @param encoding 字符编码
      * @return 解码后的字符串
+     */
+    /**
+     * decodeQuery方法。
+     *      * @param source String类型参数
+     * @param encoding String类型参数
+     * @return static String类型返回值
      */
     public static String decodeQuery(String source, String encoding) {
         if (source == null) {
@@ -406,6 +485,12 @@ public class UrlUtil {
          * @param encodePath 是否对路径进行 URL 编码
          * @param encoding   编码字符集
          */
+    /**
+     * Builder方法。
+     *      * @param path String类型参数
+     * @param encodePath boolean类型参数
+     * @param encoding String类型参数
+     */
         public Builder(String path, boolean encodePath, String encoding) {
             this.encoding = encoding;
             this.url = new StringBuilder();
@@ -442,6 +527,10 @@ public class UrlUtil {
          *
          * @param path 初始路径
          */
+    /**
+     * Builder方法。
+     *      * @param path String类型参数
+     */
         public Builder(String path) {
             this(path, true, StandardCharsets.UTF_8.name());
         }
@@ -453,6 +542,12 @@ public class UrlUtil {
          * @param value 参数值（会自动编码）
          * @return this
          */
+    /**
+     * queryParam方法。
+     *      * @param name String类型参数
+     * @param value String类型参数
+     * @return Builder类型返回值
+     */
         public Builder queryParam(String name, String value) {
             if (name == null) {
                 return this;
@@ -473,6 +568,11 @@ public class UrlUtil {
          * @param params 参数映射
          * @return this
          */
+    /**
+     * queryParams方法。
+     *      * @param params MapString,类型参数
+     * @return Builder类型返回值
+     */
         public Builder queryParams(Map<String, String> params) {
             if (params != null) {
                 for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -488,6 +588,11 @@ public class UrlUtil {
          * @param segment 路径片段
          * @return this
          */
+    /**
+     * pathSegment方法。
+     *      * @param segment String类型参数
+     * @return Builder类型返回值
+     */
         public Builder pathSegment(String segment) {
             if (segment == null || segment.isEmpty()) {
                 return this;
@@ -507,6 +612,10 @@ public class UrlUtil {
          * @return URL 字符串
          */
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return url.toString();
         }
@@ -516,6 +625,10 @@ public class UrlUtil {
          *
          * @return URL 字符串
          */
+    /**
+     * build方法。
+     * @return String类型返回值
+     */
         public String build() {
             return toString();
         }

@@ -9,15 +9,24 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * HttpServerRequestHandlerTest类。
+ */
 public class HttpServerRequestHandlerTest {
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testHandleRequestWithNullDefinition方法。
+     */
     public void testHandleRequestWithNullDefinition() {
         HttpServerRequestHandler handler = new HttpServerRequestHandler(new TestController());
         handler.handleRequest(null);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testHandleRequestWithNullRequestLine方法。
+     */
     public void testHandleRequestWithNullRequestLine() {
         HttpServerRequestHandler handler = new HttpServerRequestHandler(new TestController());
         HttpRequestDefinition definition = new HttpRequestDefinition();
@@ -25,6 +34,9 @@ public class HttpServerRequestHandlerTest {
     }
 
     @Test
+    /**
+     * testConstructor方法。
+     */
     public void testConstructor() {
         TestController controller = new TestController();
         HttpServerRequestHandler handler = new HttpServerRequestHandler(controller);
@@ -33,6 +45,9 @@ public class HttpServerRequestHandlerTest {
 
     @Ignore
     @Test
+    /**
+     * testGetMappingInfo方法。
+     */
     public void testGetMappingInfo() {
         TestController controller = new TestController();
         HttpServerRequestHandler handler = new HttpServerRequestHandler(controller);
@@ -55,11 +70,20 @@ public class HttpServerRequestHandlerTest {
     @RestController("/api")
     public static class TestController {
         @GetMapping("/test")
+    /**
+     * testMethod方法。
+     * @return String类型返回值
+     */
         public String testMethod() {
             return "test";
         }
 
         @PostMapping("/post")
+    /**
+     * postMethod方法。
+     *      * @param body String类型参数
+     * @return String类型返回值
+     */
         public String postMethod(String body) {
             return body;
         }

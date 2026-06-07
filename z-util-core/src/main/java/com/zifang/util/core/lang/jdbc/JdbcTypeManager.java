@@ -11,6 +11,9 @@ package com.zifang.util.core.lang.jdbc;
 /**
  * JdbcTypeManager类。
  */
+/**
+ * JdbcTypeManager类。
+ */
 public class JdbcTypeManager {
     // TINYINT -> byte | short
     // SMALLINT -> short

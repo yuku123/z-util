@@ -7,6 +7,9 @@ package com.zifang.util.media.graph.qrcode.encoder;
 /**
  * ReedSolomonEncoder类。
  */
+/**
+ * ReedSolomonEncoder类。
+ */
 public class ReedSolomonEncoder {
     
     private static final int GENERATOR_POLY_DEGREE = 120; // Enough for all cases
@@ -60,6 +63,12 @@ public class ReedSolomonEncoder {
      * @param data The data bytes
      * @param numEcBytes The number of error correction bytes to generate
      * @return The error correction codewords
+     */
+    /**
+     * encode方法。
+     *      * @param data byte[]类型参数
+     * @param numEcBytes int类型参数
+     * @return byte[]类型返回值
      */
     /**
      * encode方法。
@@ -128,6 +137,12 @@ public class ReedSolomonEncoder {
      * @param numEcBytes The number of error correction bytes
      * @return Corrected data bytes (without ECC)
      * @throws RuntimeException if too many errors to correct
+     */
+    /**
+     * decode方法。
+     *      * @param data byte[]类型参数
+     * @param numEcBytes int类型参数
+     * @return byte[]类型返回值
      */
     /**
      * decode方法。

@@ -15,9 +15,15 @@ import java.lang.reflect.Field;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
+/**
+ * Test001类。
+ */
 public class Test001 {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() throws Exception {
         // 我们定义出一个数组，里面10个参数
         byte[] byteArray = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -41,6 +47,9 @@ public class Test001 {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002() throws Exception {
         // 我们定义出一个数组，里面10个参数
         byte[] byteArray = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -68,6 +77,9 @@ public class Test001 {
     }
 
     @Test
+    /**
+     * test03方法。
+     */
     public void test03() throws Exception {
         // 我们定义出一个数组，里面10个参数
         byte[] byteArray = new byte[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -95,6 +107,9 @@ public class Test001 {
     }
 
     @Test
+    /**
+     * test4方法。
+     */
     public void test4() {
         ByteBuffer byteBuffer1 = ByteBuffer.wrap(new byte[100]);
         ByteBuffer byteBuffer2 = ByteBuffer.wrap(new byte[100], 1, 100);
@@ -111,6 +126,10 @@ public class Test001 {
         }
     }
 
+    /**
+     * print4Point方法。
+     *      * @param byteBuffer ByteBuffer类型参数
+     */
     public void print4Point(ByteBuffer byteBuffer) throws Exception {
         // mark的值没有显式的获取方式，我们用反射直接获取
         Field field = Buffer.class.getDeclaredField("mark");

@@ -1,11 +1,22 @@
 package com.zifang.util.core.concurrency.packages;
 
+/**
+ * TraditionalThread类。
+ */
 public class TraditionalThread {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         Thread thread = new Thread() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 while (true) {
                     try {
@@ -22,6 +33,9 @@ public class TraditionalThread {
 
         Thread thread2 = new Thread(new Runnable() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 while (true) {
                     try {
@@ -40,6 +54,9 @@ public class TraditionalThread {
 
             //此runnable不会运行，因为 thread的run方法被重写了，掉用不了runnable的方法
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 while (true) {
                     try {
@@ -52,6 +69,9 @@ public class TraditionalThread {
 
             }
         }) {
+    /**
+     * run方法。
+     */
             public void run() {
                 while (true) {
                     try {

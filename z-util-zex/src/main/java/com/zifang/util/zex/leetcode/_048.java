@@ -9,7 +9,14 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _048类。
+ */
 public class _048 {
+    /**
+     * rotate方法。
+     *      * @param matrix int[][]类型参数
+     */
     public void rotate(int[][] matrix) {
 
         // 矩阵大小
@@ -36,6 +43,11 @@ public class _048 {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _048().rotate(new int[][]{new int[]{5,1,9,11},new int[]{2,4,8,10},new int[]{13,3,6,7},new int[]{15,14,12,16}});
     }

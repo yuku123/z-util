@@ -7,5 +7,8 @@ package com.zifang.util.db.generater;
 /**
  * MybaitsStratige类。
  */
+/**
+ * MybaitsStratige类。
+ */
 public class MybaitsStratige {
 }

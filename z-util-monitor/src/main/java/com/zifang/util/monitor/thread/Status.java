@@ -8,6 +8,9 @@ package com.zifang.util.monitor.thread;
 /**
  * Status类。
  */
+/**
+ * Status类。
+ */
 public class Status {
 
     /**
@@ -29,6 +32,10 @@ public class Status {
      * getStatus方法。
      * @return String类型返回值
      */
+    /**
+     * getStatus方法。
+     * @return String类型返回值
+     */
     public String getStatus() {
         return status;
     }
@@ -37,6 +44,10 @@ public class Status {
      * 设置状态描述。
      *
      * @param status 状态描述。
+     */
+    /**
+     * setStatus方法。
+     *      * @param status String类型参数
      */
     /**
      * setStatus方法。
@@ -55,6 +66,10 @@ public class Status {
      * getLevel方法。
      * @return StatusLevel类型返回值
      */
+    /**
+     * getLevel方法。
+     * @return StatusLevel类型返回值
+     */
     public StatusLevel getLevel() {
         return level;
     }
@@ -63,6 +78,10 @@ public class Status {
      * 设置状态。
      *
      * @param level 待设置的状态。
+     */
+    /**
+     * setLevel方法。
+     *      * @param level StatusLevel类型参数
      */
     /**
      * setLevel方法。
@@ -78,6 +97,10 @@ public class Status {
      * @return 包含status和level的字符串表示
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

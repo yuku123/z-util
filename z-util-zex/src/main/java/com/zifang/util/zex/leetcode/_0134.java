@@ -9,7 +9,16 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _0134类。
+ */
 public class _0134 {
+    /**
+     * canCompleteCircuit方法。
+     *      * @param gas int[]类型参数
+     * @param cost int[]类型参数
+     * @return int类型返回值
+     */
     public int canCompleteCircuit(int[] gas, int[] cost) {
         if (gas == null || cost == null) return -1;
 
@@ -29,6 +38,11 @@ public class _0134 {
         return sum < 0 ? -1 : resIdx;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _0134().canCompleteCircuit(new int[]{1,2,3,4,5}, new int[]{3,4,5,1,2});
     }

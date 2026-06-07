@@ -8,6 +8,9 @@ package com.zifang.util.ml.nnet;
 /**
  * LossFunction接口。
  */
+/**
+ * LossFunction接口。
+ */
 public interface LossFunction {
 
     /**

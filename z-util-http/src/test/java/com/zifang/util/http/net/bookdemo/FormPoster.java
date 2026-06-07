@@ -6,12 +6,19 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * FormPoster类。
+ */
 public class FormPoster {
 
     private URL url;
     // from Chapter 5, Example 5-8
     private QueryString query = new QueryString();
 
+    /**
+     * FormPoster方法。
+     *      * @param url URL类型参数
+     */
     public FormPoster(URL url) {
         if (!url.getProtocol().toLowerCase().startsWith("http")) {
             throw new IllegalArgumentException("Posting only works for http URLs");
@@ -19,14 +26,27 @@ public class FormPoster {
         this.url = url;
     }
 
+    /**
+     * add方法。
+     *      * @param name String类型参数
+     * @param value String类型参数
+     */
     public void add(String name, String value) {
         query.add(name, value);
     }
 
+    /**
+     * getURL方法。
+     * @return URL类型返回值
+     */
     public URL getURL() {
         return this.url;
     }
 
+    /**
+     * post方法。
+     * @return InputStream类型返回值
+     */
     public InputStream post() throws IOException {
 
         // open the connection and prepare it to POST
@@ -46,6 +66,11 @@ public class FormPoster {
         return uc.getInputStream();
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         URL url;
         if (args.length > 0) {

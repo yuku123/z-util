@@ -17,9 +17,15 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
+/**
+ * InetAddressTest类。
+ */
 public class InetAddressTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() throws UnknownHostException {
         InetAddress inetAddress1 = InetAddress.getByName("www.baidu.com");
         InetAddress[] inetAddress2 = InetAddress.getAllByName("www.baidu.com");
@@ -28,6 +34,9 @@ public class InetAddressTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002() throws UnknownHostException {
         InetAddress inetAddress1 = InetAddress.getLoopbackAddress();
         InetAddress inetAddress2 = InetAddress.getLocalHost();
@@ -36,6 +45,9 @@ public class InetAddressTest {
     }
 
     @Test
+    /**
+     * test3方法。
+     */
     public void test3() throws UnknownHostException {
         showIntAddress(InetAddress.getByName("www.oreilly.com"));
         showIntAddress(InetAddress.getByName("208.201.239.100"));
@@ -46,6 +58,11 @@ public class InetAddressTest {
         showIntAddress(InetAddress.getByAddress("www.baidu.com", new byte[]{(byte) 180, 101, 49, 12}));
     }
 
+    /**
+     * showIntAddress方法。
+     *      * @param inetAddress InetAddress类型参数
+     * @return static void类型返回值
+     */
     public static void showIntAddress(InetAddress inetAddress) {
         System.out.println("inetAddress.getAddress()               " + Arrays.toString(inetAddress.getAddress()));
         System.out.println("inetAddress.getHostName()              " + inetAddress.getHostName());
@@ -66,6 +83,9 @@ public class InetAddressTest {
     }
 
     @Test
+    /**
+     * test4方法。
+     */
     public void test4() throws SocketException {
         Enumeration<NetworkInterface> networkInterface = NetworkInterface.getNetworkInterfaces();
         List<NetworkInterface> networkInterfaceList = new ArrayList<>();
@@ -75,6 +95,9 @@ public class InetAddressTest {
     }
 
     @Test
+    /**
+     * test0方法。
+     */
     public void test0() throws URISyntaxException {
         URI uri = URI.create("foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose");
 

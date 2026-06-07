@@ -12,7 +12,15 @@ package com.zifang.util.zex.leetcode;
 import java.util.Deque;
 import java.util.LinkedList;
 
+/**
+ * _224类。
+ */
 public class _224 {
+    /**
+     * calculate方法。
+     *      * @param s String类型参数
+     * @return int类型返回值
+     */
     public int calculate(String s) {
         Deque<Integer> ops = new LinkedList<Integer>();
         ops.push(1);
@@ -48,6 +56,11 @@ public class _224 {
         return ret;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _224().calculate("(1+(4+5+2)-3)+(6+8)");
     }

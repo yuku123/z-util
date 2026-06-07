@@ -14,6 +14,9 @@ import java.util.Map;
 /**
  * DataSourceManager类。
  */
+/**
+ * DataSourceManager类。
+ */
 public class DataSourceManager {
 
     private static final String MYSQL8 = "com.mysql.cj.jdbc.Driver";
@@ -39,6 +42,16 @@ public class DataSourceManager {
      * @param password      密码
      * @return 创建的数据源对象，注册失败返回null
      * @throws RuntimeException 如果必要参数为空或数据源名称已存在
+     */
+    /**
+     * registerDataSource方法。
+     *      * @param name String类型参数
+     * @param datasourceUrl String类型参数
+     * @param port int类型参数
+     * @param schemaMark String类型参数
+     * @param username String类型参数
+     * @param password String类型参数
+     * @return static DataSource类型返回值
      */
     /**
      * registerDataSource方法。

@@ -13,8 +13,16 @@ package com.zifang.util.core.lang.tuples;
 /**
  * Tuples类。
  */
+/**
+ * Tuples类。
+ */
 public class Tuples {
 
+    /**
+     * of方法。
+     *      * @param a A类型参数
+     * @return static <A> Unit<A>类型返回值
+     */
     /**
      * of方法。
      *      * @param a A类型参数
@@ -30,10 +38,23 @@ public class Tuples {
      * @param b B类型参数
      * @return static <A,B> Pair<A,B>类型返回值
      */
+    /**
+     * of方法。
+     *      * @param a A类型参数
+     * @param b B类型参数
+     * @return static <A,B> Pair<A,B>类型返回值
+     */
     public static <A,B> Pair<A,B> of(A a,B b){
         return new Pair<>(a,b);
     }
 
+    /**
+     * of方法。
+     *      * @param a A类型参数
+     * @param b B类型参数
+     * @param c C类型参数
+     * @return static <A,B,C> Triplet<A,B,C>类型返回值
+     */
     /**
      * of方法。
      *      * @param a A类型参数

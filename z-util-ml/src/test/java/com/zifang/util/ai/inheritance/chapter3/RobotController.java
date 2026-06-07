@@ -9,6 +9,9 @@ package com.zifang.util.ml.inheritance.chapter3;
  *
  * @author zifang
  */
+/**
+ * RobotController类。
+ */
 public class RobotController {
 
     /**
@@ -18,6 +21,11 @@ public class RobotController {
      */
     public static int maxGenerations = 1000;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         /**

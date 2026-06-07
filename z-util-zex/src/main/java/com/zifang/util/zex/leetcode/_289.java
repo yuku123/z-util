@@ -14,7 +14,19 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * _289类。
+ */
 public class _289 {
+    /**
+     * getValue方法。
+     *      * @param board int[][]类型参数
+     * @param m int类型参数
+     * @param n int类型参数
+     * @param x int类型参数
+     * @param y int类型参数
+     * @return int类型返回值
+     */
     public int getValue(int[][] board, int m, int n, int x, int y){
         if(x < 0 || x > n-1){
             return 0;
@@ -33,6 +45,15 @@ public class _289 {
             return val;
         }
     }
+    /**
+     * getCnt方法。
+     *      * @param board int[][]类型参数
+     * @param m int类型参数
+     * @param n int类型参数
+     * @param x int类型参数
+     * @param y int类型参数
+     * @return int类型返回值
+     */
     public int getCnt(int[][] board, int m, int n, int x, int y){
         int cnt = 0;
         cnt = cnt + getValue(board,m,n, x-1, y-1);
@@ -52,6 +73,12 @@ public class _289 {
     // 活 -> 死 ：-1
     // 死 -> 活 ：-2
     // 死 -> 死 ：0
+    /**
+     * calValue方法。
+     *      * @param originValue int类型参数
+     * @param cnt int类型参数
+     * @return int类型返回值
+     */
     public int calValue(int originValue, int cnt){
         if(cnt < 2){
             if(originValue == 0){
@@ -87,6 +114,10 @@ public class _289 {
 
         return 0;
     }
+    /**
+     * gameOfLife方法。
+     *      * @param board int[][]类型参数
+     */
     public void gameOfLife(int[][] board) {
 
         // y方向
@@ -123,12 +154,23 @@ public class _289 {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _289().gameOfLife(new int[][]{new int[]{0,1,0}, new int[]{0,0,1},new int[]{1,1,1}, new int[]{0,0,0}});
 
         int[][] a = new int[][]{};
         Arrays.sort(a, new Comparator<int[]>() {
             @Override
+    /**
+     * compare方法。
+     *      * @param o1 int[]类型参数
+     * @param o2 int[]类型参数
+     * @return int类型返回值
+     */
             public int compare(int[] o1, int[] o2) {
                 return 0;
             }

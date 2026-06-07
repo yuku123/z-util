@@ -23,5 +23,8 @@ package com.zifang.util.db.plugin;
 /**
  * IChain接口。
  */
+/**
+ * IChain接口。
+ */
 public interface IChain {
 }

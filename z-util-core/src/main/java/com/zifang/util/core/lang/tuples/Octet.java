@@ -6,10 +6,24 @@ package com.zifang.util.core.lang.tuples;
 /**
  * Octet类。
  */
+/**
+ * Octet类。
+ */
 public class Octet<A, B, C, D, E, F, G, H> extends Septet<A, B, C, D, E, F, G> {
 
     protected H h;
 
+    /**
+     * Octet方法。
+     *      * @param a A类型参数
+     * @param b B类型参数
+     * @param c C类型参数
+     * @param d D类型参数
+     * @param e E类型参数
+     * @param f F类型参数
+     * @param g G类型参数
+     * @param h H类型参数
+     */
     /**
      * Octet方法。
      *      * @param a A类型参数
@@ -30,10 +44,18 @@ public class Octet<A, B, C, D, E, F, G, H> extends Septet<A, B, C, D, E, F, G> {
      * getH方法。
      * @return H类型返回值
      */
+    /**
+     * getH方法。
+     * @return H类型返回值
+     */
     public H getH() {
         return h;
     }
 
+    /**
+     * setH方法。
+     *      * @param h H类型参数
+     */
     /**
      * setH方法。
      *      * @param h H类型参数
@@ -43,6 +65,10 @@ public class Octet<A, B, C, D, E, F, G, H> extends Septet<A, B, C, D, E, F, G> {
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -57,6 +83,11 @@ public class Octet<A, B, C, D, E, F, G, H> extends Septet<A, B, C, D, E, F, G> {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -66,6 +97,10 @@ public class Octet<A, B, C, D, E, F, G, H> extends Septet<A, B, C, D, E, F, G> {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

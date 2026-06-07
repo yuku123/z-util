@@ -20,6 +20,9 @@ import java.util.*;
 /**
  * MemoryLeakDemo类。
  */
+/**
+ * MemoryLeakDemo类。
+ */
 public class MemoryLeakDemo {
 
     /**
@@ -30,6 +33,10 @@ public class MemoryLeakDemo {
     static Vector v = new Vector(10);
     static List list = new ArrayList();
 
+    /**
+     * test1方法。
+     * @return static void类型返回值
+     */
     /**
      * test1方法。
      * @return static void类型返回值
@@ -53,6 +60,10 @@ public class MemoryLeakDemo {
 
     /**
      * 2、当集合里面的对象属性被修改后，再调用remove（）方法时不起作用。
+     */
+    /**
+     * test2方法。
+     * @return static void类型返回值
      */
     /**
      * test2方法。
@@ -133,6 +144,11 @@ public class MemoryLeakDemo {
      *      * @param args String[]类型参数
      * @return static void类型返回值
      */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         test1();
         test2();
@@ -142,6 +158,11 @@ public class MemoryLeakDemo {
         private String userName;
         private int age;
 
+    /**
+     * Person方法。
+     *      * @param userName String类型参数
+     * @param age int类型参数
+     */
     /**
      * Person方法。
      *      * @param userName String类型参数
@@ -157,10 +178,18 @@ public class MemoryLeakDemo {
      * getUserName方法。
      * @return String类型返回值
      */
+    /**
+     * getUserName方法。
+     * @return String类型返回值
+     */
         public String getUserName() {
             return userName;
         }
 
+    /**
+     * setUserName方法。
+     *      * @param userName String类型参数
+     */
     /**
      * setUserName方法。
      *      * @param userName String类型参数
@@ -173,10 +202,18 @@ public class MemoryLeakDemo {
      * getAge方法。
      * @return int类型返回值
      */
+    /**
+     * getAge方法。
+     * @return int类型返回值
+     */
         public int getAge() {
             return age;
         }
 
+    /**
+     * setAge方法。
+     *      * @param age int类型参数
+     */
     /**
      * setAge方法。
      *      * @param age int类型参数
@@ -190,6 +227,10 @@ public class MemoryLeakDemo {
      * hashCode方法。
      * @return int类型返回值
      */
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
         public int hashCode() {
             final int prime = 31;
             int result = 1;
@@ -199,6 +240,11 @@ public class MemoryLeakDemo {
         }
 
         @Override
+    /**
+     * equals方法。
+     *      * @param obj Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param obj Object类型参数
@@ -220,6 +266,10 @@ public class MemoryLeakDemo {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

@@ -10,6 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+/**
+ * RequestProcessor类。
+ */
 public class RequestProcessor implements Runnable {
     private static final Logger log = Logger.getLogger("RequestProcessor");
 
@@ -18,6 +21,12 @@ public class RequestProcessor implements Runnable {
     private String indexFileName = "index.html";
     private Socket connection;
 
+    /**
+     * RequestProcessor方法。
+     *      * @param rootDirectory File类型参数
+     * @param indexFileName String类型参数
+     * @param connection Socket类型参数
+     */
     public RequestProcessor(File rootDirectory, String indexFileName, Socket connection) {
 
         if (rootDirectory.isFile()) {
@@ -35,6 +44,9 @@ public class RequestProcessor implements Runnable {
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         // for security checks
         String root = rootDirectory.getPath();

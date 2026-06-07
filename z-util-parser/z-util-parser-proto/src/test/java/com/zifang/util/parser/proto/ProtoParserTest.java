@@ -10,6 +10,9 @@ import java.util.List;
  *
  * @author zifang
  */
+/**
+ * ProtoParserTest类。
+ */
 public class ProtoParserTest {
 
     private ProtoParser parser = new ProtoParser();
@@ -17,6 +20,9 @@ public class ProtoParserTest {
     // ==================== 1. 基本 message ====================
 
     @Test
+    /**
+     * testBasicMessage方法。
+     */
     public void testBasicMessage() {
         String input = "syntax = \"proto3\";\n" +
                 "message Person {}\n";
@@ -31,6 +37,9 @@ public class ProtoParserTest {
     // ==================== 2. 多字段 ====================
 
     @Test
+    /**
+     * testMultipleFields方法。
+     */
     public void testMultipleFields() {
         String input = "syntax = \"proto3\";\n" +
                 "message Person {\n" +
@@ -58,6 +67,9 @@ public class ProtoParserTest {
     // ==================== 3. repeated/string/int32 ====================
 
     @Test
+    /**
+     * testRepeatedStringInt32方法。
+     */
     public void testRepeatedStringInt32() {
         String input = "syntax = \"proto3\";\n" +
                 "message Person {\n" +
@@ -87,6 +99,9 @@ public class ProtoParserTest {
     // ==================== 4. Enum ====================
 
     @Test
+    /**
+     * testEnum方法。
+     */
     public void testEnum() {
         String input = "syntax = \"proto3\";\n" +
                 "message Status {\n" +
@@ -114,6 +129,9 @@ public class ProtoParserTest {
     // ==================== 5. Service + RPC ====================
 
     @Test
+    /**
+     * testServiceRpc方法。
+     */
     public void testServiceRpc() {
         String input = "syntax = \"proto3\";\n" +
                 "message Request {}\n" +
@@ -144,6 +162,9 @@ public class ProtoParserTest {
     // ==================== 6. 嵌套 message ====================
 
     @Test
+    /**
+     * testNestedMessage方法。
+     */
     public void testNestedMessage() {
         String input = "syntax = \"proto3\";\n" +
                 "message Outer {\n" +
@@ -170,6 +191,9 @@ public class ProtoParserTest {
     // ==================== 7. package + import ====================
 
     @Test
+    /**
+     * testPackageImport方法。
+     */
     public void testPackageImport() {
         String input = "syntax = \"proto3\";\n" +
                 "package com.example;\n" +
@@ -190,6 +214,9 @@ public class ProtoParserTest {
     // ==================== 8. // 和 /* */ 注释 ====================
 
     @Test
+    /**
+     * testSingleLineComment方法。
+     */
     public void testSingleLineComment() {
         String input = "syntax = \"proto3\";\n" +
                 "// This is a single line comment\n" +
@@ -204,6 +231,9 @@ public class ProtoParserTest {
     }
 
     @Test
+    /**
+     * testMultiLineComment方法。
+     */
     public void testMultiLineComment() {
         String input = "syntax = \"proto3\";\n" +
                 "/* This is a\n" +
@@ -223,6 +253,9 @@ public class ProtoParserTest {
     // ==================== 9. syntax = "proto3" ====================
 
     @Test
+    /**
+     * testSyntax方法。
+     */
     public void testSyntax() {
         String input = "syntax = \"proto3\";\n" +
                 "message Person {}\n";
@@ -234,6 +267,9 @@ public class ProtoParserTest {
     // ==================== 10. 完整 proto round-trip ====================
 
     @Test
+    /**
+     * testRoundTrip方法。
+     */
     public void testRoundTrip() {
         String input = "syntax = \"proto3\";\n" +
                 "package com.example;\n" +
@@ -300,6 +336,9 @@ public class ProtoParserTest {
     // ==================== Additional Tests ====================
 
     @Test
+    /**
+     * testComplexEnum方法。
+     */
     public void testComplexEnum() {
         String input = "syntax = \"proto3\";\n" +
                 "enum Color {\n" +
@@ -320,6 +359,9 @@ public class ProtoParserTest {
     }
 
     @Test
+    /**
+     * testMessageWithEnumInside方法。
+     */
     public void testMessageWithEnumInside() {
         String input = "syntax = \"proto3\";\n" +
                 "message Status {\n" +

@@ -12,5 +12,8 @@ package com.zifang.util.visuallization.robot.common;
 /**
  * OperationAction类。
  */
+/**
+ * OperationAction类。
+ */
 public class OperationAction {
 }

@@ -14,17 +14,26 @@ import java.util.zip.ZipOutputStream;
 
 import static org.junit.Assert.*;
 
+/**
+ * ZipUtilTest类。
+ */
 public class ZipUtilTest {
 
     private File tempBaseDir;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() throws Exception {
         tempBaseDir = Files.createTempDirectory("zip-test-base").toFile();
         tempBaseDir.deleteOnExit();
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() throws Exception {
         if (tempBaseDir != null && tempBaseDir.exists()) {
             deleteRecursively(tempBaseDir);
@@ -46,6 +55,9 @@ public class ZipUtilTest {
     // ==================== zipFile (folder -> zip) ====================
 
     @Test
+    /**
+     * testZipFileFolder方法。
+     */
     public void testZipFileFolder() throws Exception {
         // Create a folder with files
         File folder = new File(tempBaseDir, "myfolder");
@@ -74,6 +86,9 @@ public class ZipUtilTest {
     // ==================== zipFolder ====================
 
     @Test
+    /**
+     * testZipFolder方法。
+     */
     public void testZipFolder() throws Exception {
         File folder = new File(tempBaseDir, "tozip");
         folder.mkdirs();
@@ -99,6 +114,9 @@ public class ZipUtilTest {
     }
 
     @Test
+    /**
+     * testZipFolderWithExplicitExtension方法。
+     */
     public void testZipFolderWithExplicitExtension() throws Exception {
         File folder = new File(tempBaseDir, "tozip2");
         folder.mkdirs();
@@ -112,11 +130,17 @@ public class ZipUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testZipFolderNonExistent方法。
+     */
     public void testZipFolderNonExistent() throws Exception {
         ZipUtil.zipFolder("/non/existent", tempBaseDir.getPath(), "result");
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testZipFolderIsFile方法。
+     */
     public void testZipFolderIsFile() throws Exception {
         File tmpFile = File.createTempFile("notafolder", ".txt", tempBaseDir);
         ZipUtil.zipFolder(tmpFile.getPath(), tempBaseDir.getPath(), "result");
@@ -125,6 +149,9 @@ public class ZipUtilTest {
     // ==================== zipFile (single file -> zip) ====================
 
     @Test
+    /**
+     * testZipSingleFile方法。
+     */
     public void testZipSingleFile() throws Exception {
         File srcFile = new File(tempBaseDir, "single.txt");
         Files.write(srcFile.toPath(), "single file content".getBytes(StandardCharsets.UTF_8));
@@ -143,6 +170,9 @@ public class ZipUtilTest {
     // ==================== unZip ====================
 
     @Test
+    /**
+     * testUnZip方法。
+     */
     public void testUnZip() throws Exception {
         // Create a zip manually
         File zipFile = new File(tempBaseDir, "manual.zip");
@@ -168,6 +198,9 @@ public class ZipUtilTest {
     }
 
     @Test
+    /**
+     * testUnZipCreatesDestDir方法。
+     */
     public void testUnZipCreatesDestDir() throws Exception {
         File zipFile = new File(tempBaseDir, "small.zip");
         try (ZipOutputStream zos = new ZipOutputStream(new java.io.FileOutputStream(zipFile))) {
@@ -185,6 +218,9 @@ public class ZipUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testUnZipNonExistentZip方法。
+     */
     public void testUnZipNonExistentZip() throws Exception {
         ZipUtil.unZip("/non/existent.zip", tempBaseDir.getPath());
     }

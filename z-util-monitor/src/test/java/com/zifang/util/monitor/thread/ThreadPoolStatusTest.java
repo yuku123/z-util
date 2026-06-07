@@ -6,16 +6,25 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import static org.junit.Assert.*;
 
+/**
+ * ThreadPoolStatusTest类。
+ */
 public class ThreadPoolStatusTest {
 
     private ThreadPoolStatus status;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         status = new ThreadPoolStatus();
     }
 
     @Test
+    /**
+     * testDefaultValues方法。
+     */
     public void testDefaultValues() {
         assertNotNull(status.getStartTime());
         assertTrue(status.getStartTime() > 0);
@@ -33,6 +42,9 @@ public class ThreadPoolStatusTest {
     }
 
     @Test
+    /**
+     * testSubmitCountIncrement方法。
+     */
     public void testSubmitCountIncrement() {
         int before = status.getSubmitCount().get();
         status.getSubmitCount().incrementAndGet();
@@ -40,6 +52,9 @@ public class ThreadPoolStatusTest {
     }
 
     @Test
+    /**
+     * testStartCountIncrement方法。
+     */
     public void testStartCountIncrement() {
         int before = status.getStartCount().get();
         status.getStartCount().incrementAndGet();
@@ -47,6 +62,9 @@ public class ThreadPoolStatusTest {
     }
 
     @Test
+    /**
+     * testSucessCountIncrement方法。
+     */
     public void testSucessCountIncrement() {
         int before = status.getSucessCount().get();
         status.getSucessCount().incrementAndGet();
@@ -54,6 +72,9 @@ public class ThreadPoolStatusTest {
     }
 
     @Test
+    /**
+     * testFailCountIncrement方法。
+     */
     public void testFailCountIncrement() {
         int before = status.getFailCount().get();
         status.getFailCount().incrementAndGet();
@@ -61,6 +82,9 @@ public class ThreadPoolStatusTest {
     }
 
     @Test
+    /**
+     * testLastStartTimeUpdate方法。
+     */
     public void testLastStartTimeUpdate() {
         long before = status.getLastStartTime().get();
         status.getLastStartTime().set(System.currentTimeMillis());
@@ -68,6 +92,9 @@ public class ThreadPoolStatusTest {
     }
 
     @Test
+    /**
+     * testLastFinishTimeUpdate方法。
+     */
     public void testLastFinishTimeUpdate() {
         long before = status.getLastFinishTime().get();
         status.getLastFinishTime().set(System.currentTimeMillis());
@@ -75,12 +102,18 @@ public class ThreadPoolStatusTest {
     }
 
     @Test
+    /**
+     * testTotalTimeConsumingUpdate方法。
+     */
     public void testTotalTimeConsumingUpdate() {
         status.getTotalTimeConsuming().addAndGet(100);
         assertEquals(100, status.getTotalTimeConsuming().get());
     }
 
     @Test
+    /**
+     * testAlarmTimesIncrement方法。
+     */
     public void testAlarmTimesIncrement() {
         int before = status.getAlarmTimes().get();
         status.getAlarmTimes().incrementAndGet();
@@ -88,12 +121,18 @@ public class ThreadPoolStatusTest {
     }
 
     @Test
+    /**
+     * testMonitorIntervalSetter方法。
+     */
     public void testMonitorIntervalSetter() {
         status.setMonitorInterval(20000);
         assertEquals(20000, status.getMonitorInterval());
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         String result = status.toString();
         assertNotNull(result);

@@ -15,6 +15,9 @@ import java.util.concurrent.SynchronousQueue;
  * @author zifang
  * @version 1.0
  */
+/**
+ * SynchronousQueueExample类。
+ */
 public class SynchronousQueueExample {
 
     /**
@@ -25,11 +28,18 @@ public class SynchronousQueueExample {
         protected BlockingQueue<String> blockingQueue;
         final Random random = new Random();
 
+    /**
+     * SynchronousQueueProducer方法。
+     *      * @param queue BlockingQueueString类型参数
+     */
         public SynchronousQueueProducer(BlockingQueue<String> queue) {
             this.blockingQueue = queue;
         }
 
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             while (true) {
                 try {
@@ -52,11 +62,18 @@ public class SynchronousQueueExample {
 
         protected BlockingQueue<String> blockingQueue;
 
+    /**
+     * SynchronousQueueConsumer方法。
+     *      * @param queue BlockingQueueString类型参数
+     */
         public SynchronousQueueConsumer(BlockingQueue<String> queue) {
             this.blockingQueue = queue;
         }
 
         @Override
+    /**
+     * run方法。
+     */
         public void run() {
             while (true) {
                 try {
@@ -71,6 +88,11 @@ public class SynchronousQueueExample {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         BlockingQueue<String>  q = new SynchronousQueue<>();
 

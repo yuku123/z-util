@@ -5,8 +5,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * MultithreadedMaxFinder类。
+ */
 public class MultithreadedMaxFinder {
 
+    /**
+     * max方法。
+     *      * @param data int[]类型参数
+     * @return static int类型返回值
+     */
     public static int max(int[] data) throws InterruptedException, ExecutionException {
 
         if (data.length == 1) {

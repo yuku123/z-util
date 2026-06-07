@@ -16,6 +16,9 @@ import static org.junit.Assert.*;
  * FileHashUtil 测试
  * 覆盖：md5/sha1/sha256/hash/fileType/isImage
  */
+/**
+ * FileHashUtilTest类。
+ */
 public class FileHashUtilTest {
 
     private File tmpFile(String content) throws Exception {
@@ -54,6 +57,9 @@ public class FileHashUtilTest {
     // ==================== md5 ====================
 
     @Test
+    /**
+     * testMd5File方法。
+     */
     public void testMd5File() throws Exception {
         File tmp = tmpFile("hello world");
         String expected = md5Bytes("hello world");
@@ -61,6 +67,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testMd5FileChinese方法。
+     */
     public void testMd5FileChinese() throws Exception {
         File tmp = tmpFile("中文测试");
         String expected = md5Bytes("中文测试");
@@ -68,6 +77,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testMd5FileEmpty方法。
+     */
     public void testMd5FileEmpty() throws Exception {
         File tmp = tmpFile("");
         String expected = md5Bytes("");
@@ -75,11 +87,17 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testMd5Null方法。
+     */
     public void testMd5Null() throws Exception {
         FileHashUtil.md5(null);
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testMd5NonExistent方法。
+     */
     public void testMd5NonExistent() throws Exception {
         FileHashUtil.md5(new File("/non/existent/file.txt"));
     }
@@ -87,6 +105,9 @@ public class FileHashUtilTest {
     // ==================== sha1 ====================
 
     @Test
+    /**
+     * testSha1File方法。
+     */
     public void testSha1File() throws Exception {
         File tmp = tmpFile("hello world");
         String expected = sha1Bytes("hello world");
@@ -94,11 +115,17 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testSha1Null方法。
+     */
     public void testSha1Null() throws Exception {
         FileHashUtil.sha1(null);
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testSha1NonExistent方法。
+     */
     public void testSha1NonExistent() throws Exception {
         FileHashUtil.sha1(new File("/non/existent/file.txt"));
     }
@@ -106,6 +133,9 @@ public class FileHashUtilTest {
     // ==================== sha256 ====================
 
     @Test
+    /**
+     * testSha256File方法。
+     */
     public void testSha256File() throws Exception {
         File tmp = tmpFile("hello world");
         String expected = sha256Bytes("hello world");
@@ -113,6 +143,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testSha256FileChinese方法。
+     */
     public void testSha256FileChinese() throws Exception {
         File tmp = tmpFile("中文测试");
         String expected = sha256Bytes("中文测试");
@@ -120,6 +153,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testSha256FileEmpty方法。
+     */
     public void testSha256FileEmpty() throws Exception {
         File tmp = tmpFile("");
         String expected = sha256Bytes("");
@@ -127,11 +163,17 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testSha256Null方法。
+     */
     public void testSha256Null() throws Exception {
         FileHashUtil.sha256(null);
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testSha256NonExistent方法。
+     */
     public void testSha256NonExistent() throws Exception {
         FileHashUtil.sha256(new File("/non/existent/file.txt"));
     }
@@ -139,6 +181,9 @@ public class FileHashUtilTest {
     // ==================== hash (generic) ====================
 
     @Test
+    /**
+     * testHashFile方法。
+     */
     public void testHashFile() throws Exception {
         File tmp = tmpFile("hello world");
         String expected = sha256Bytes("hello world");
@@ -146,6 +191,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testHashFileMD5方法。
+     */
     public void testHashFileMD5() throws Exception {
         File tmp = tmpFile("hello world");
         String expected = md5Bytes("hello world");
@@ -153,6 +201,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testHashFileSHA1方法。
+     */
     public void testHashFileSHA1() throws Exception {
         File tmp = tmpFile("hello world");
         String expected = sha1Bytes("hello world");
@@ -160,18 +211,27 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = NoSuchAlgorithmException.class)
+    /**
+     * testHashInvalidAlgorithm方法。
+     */
     public void testHashInvalidAlgorithm() throws Exception {
         File tmp = tmpFile("test");
         FileHashUtil.hash(tmp, "INVALID_ALGO");
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testHashAlgorithmNull方法。
+     */
     public void testHashAlgorithmNull() throws Exception {
         File tmp = tmpFile("test");
         FileHashUtil.hash(tmp, null);
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testHashFileNull方法。
+     */
     public void testHashFileNull() throws Exception {
         FileHashUtil.hash(null, "MD5");
     }
@@ -179,6 +239,9 @@ public class FileHashUtilTest {
     // ==================== fileType (magic bytes) ====================
 
     @Test
+    /**
+     * testFileTypePng方法。
+     */
     public void testFileTypePng() throws Exception {
         // PNG magic bytes: 89 50 4E 47 0D 0A 1A 0A
         byte[] pngData = new byte[]{
@@ -193,6 +256,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testFileTypeJpg方法。
+     */
     public void testFileTypeJpg() throws Exception {
         // JPEG magic bytes: FF D8 FF
         byte[] jpgData = new byte[]{
@@ -207,6 +273,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testFileTypeGif方法。
+     */
     public void testFileTypeGif() throws Exception {
         // GIF magic bytes: 47 49 46 38 (GIF8)
         byte[] gifData = new byte[]{
@@ -221,6 +290,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testFileTypePdf方法。
+     */
     public void testFileTypePdf() throws Exception {
         // PDF magic bytes: 25 50 44 46 (%PDF)
         byte[] pdfData = new byte[]{
@@ -235,6 +307,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testFileTypeZip方法。
+     */
     public void testFileTypeZip() throws Exception {
         // ZIP magic bytes: 50 4B 03 04
         byte[] zipData = new byte[]{
@@ -248,6 +323,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testFileTypeHtml方法。
+     */
     public void testFileTypeHtml() throws Exception {
         byte[] htmlData = "<!DOCTYPE html>".getBytes(StandardCharsets.UTF_8);
         File tmp = File.createTempFile("magic", ".html");
@@ -258,6 +336,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testFileTypeBmp方法。
+     */
     public void testFileTypeBmp() throws Exception {
         // BMP magic bytes: 42 4D (BM)
         byte[] bmpData = new byte[]{
@@ -272,17 +353,26 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testFileTypeUnknown方法。
+     */
     public void testFileTypeUnknown() throws Exception {
         File tmp = tmpFile("random content with no magic bytes");
         assertNull(FileHashUtil.fileType(tmp));
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testFileTypeNull方法。
+     */
     public void testFileTypeNull() throws Exception {
         FileHashUtil.fileType(null);
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testFileTypeNonExistent方法。
+     */
     public void testFileTypeNonExistent() throws Exception {
         FileHashUtil.fileType(new File("/non/existent/file.txt"));
     }
@@ -290,6 +380,9 @@ public class FileHashUtilTest {
     // ==================== isImage ====================
 
     @Test
+    /**
+     * testIsImagePng方法。
+     */
     public void testIsImagePng() throws Exception {
         byte[] pngData = new byte[]{
                 (byte) 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A
@@ -302,6 +395,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testIsImageJpg方法。
+     */
     public void testIsImageJpg() throws Exception {
         byte[] jpgData = new byte[]{
                 (byte) 0xFF, (byte) 0xD8, (byte) 0xFF, (byte) 0xE0
@@ -314,6 +410,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testIsImageGif方法。
+     */
     public void testIsImageGif() throws Exception {
         byte[] gifData = new byte[]{
                 0x47, 0x49, 0x46, 0x38, 0x39, 0x61
@@ -326,12 +425,18 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testIsImageNotImage方法。
+     */
     public void testIsImageNotImage() throws Exception {
         File tmp = tmpFile("not an image");
         assertFalse(FileHashUtil.isImage(tmp));
     }
 
     @Test
+    /**
+     * testIsImageBmp方法。
+     */
     public void testIsImageBmp() throws Exception {
         byte[] bmpData = new byte[]{0x42, 0x4D};
         File tmp = File.createTempFile("image", ".bmp");
@@ -342,6 +447,9 @@ public class FileHashUtilTest {
     }
 
     @Test
+    /**
+     * testIsImageTiff方法。
+     */
     public void testIsImageTiff() throws Exception {
         byte[] tiffData = new byte[]{
                 (byte) 0x49, 0x49, 0x2A, 0x00
@@ -354,11 +462,17 @@ public class FileHashUtilTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testIsImageNull方法。
+     */
     public void testIsImageNull() throws Exception {
         FileHashUtil.isImage(null);
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testIsImageNonExistent方法。
+     */
     public void testIsImageNonExistent() throws Exception {
         FileHashUtil.isImage(new File("/non/existent/file.txt"));
     }

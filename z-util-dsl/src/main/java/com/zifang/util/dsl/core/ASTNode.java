@@ -8,6 +8,9 @@ import java.util.List;
 /**
  * ASTNode接口。
  */
+/**
+ * ASTNode接口。
+ */
 public interface ASTNode {
 
     /**

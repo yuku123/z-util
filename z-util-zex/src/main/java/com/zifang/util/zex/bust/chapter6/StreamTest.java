@@ -16,9 +16,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * StreamTest类。
+ */
 public class StreamTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001(){
 
         List<List<Integer>> list1 = Arrays.asList(
@@ -39,6 +45,9 @@ public class StreamTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002(){
 
         List<Integer> list = Arrays.asList(1,2,3,4,5);

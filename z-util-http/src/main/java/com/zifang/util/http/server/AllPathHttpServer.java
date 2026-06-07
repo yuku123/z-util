@@ -27,6 +27,9 @@ import java.util.Map;
 /**
  * AllPathHttpServer类。
  */
+/**
+ * AllPathHttpServer类。
+ */
 public class AllPathHttpServer {
 
     /**
@@ -37,6 +40,11 @@ public class AllPathHttpServer {
      *
      * @param args 命令行参数（未使用）
      * @throws IOException 如果服务器创建或启动失败
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。
@@ -68,6 +76,10 @@ public class AllPathHttpServer {
      */
     static class AllRequestHandler implements HttpHandler {
         @Override
+    /**
+     * handle方法。
+     *      * @param exchange HttpExchange类型参数
+     */
     /**
      * handle方法。
      *      * @param exchange HttpExchange类型参数

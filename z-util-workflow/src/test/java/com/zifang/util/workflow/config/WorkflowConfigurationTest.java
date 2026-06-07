@@ -12,9 +12,15 @@ import static org.junit.Assert.*;
 /**
  * WorkflowConfiguration 类测试
  */
+/**
+ * WorkflowConfigurationTest类。
+ */
 public class WorkflowConfigurationTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         WorkflowConfiguration config = new WorkflowConfiguration();
         assertNotNull(config);
@@ -23,6 +29,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testConstructorWithParameters方法。
+     */
     public void testConstructorWithParameters() {
         Configurations configurations = new Configurations();
         configurations.setWorkflowConfigurationId(1);
@@ -41,6 +50,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testConfigurationsGetterAndSetter方法。
+     */
     public void testConfigurationsGetterAndSetter() {
         WorkflowConfiguration config = new WorkflowConfiguration();
 
@@ -54,6 +66,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testWorkflowNodeListGetterAndSetter方法。
+     */
     public void testWorkflowNodeListGetterAndSetter() {
         WorkflowConfiguration config = new WorkflowConfiguration();
 
@@ -68,6 +83,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testWorkflowNodeListCanBeNull方法。
+     */
     public void testWorkflowNodeListCanBeNull() {
         WorkflowConfiguration config = new WorkflowConfiguration();
         config.setWorkflowNodeList(null);
@@ -75,6 +93,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testConfigurationsCanBeNull方法。
+     */
     public void testConfigurationsCanBeNull() {
         WorkflowConfiguration config = new WorkflowConfiguration();
         config.setConfigurations(null);
@@ -82,6 +103,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         Configurations configs1 = new Configurations();
         configs1.setWorkflowConfigurationId(1);
@@ -106,6 +130,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentIds方法。
+     */
     public void testEqualsWithDifferentIds() {
         Configurations configs1 = new Configurations();
         configs1.setWorkflowConfigurationId(1);
@@ -120,24 +147,36 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testEqualsWithSameObject方法。
+     */
     public void testEqualsWithSameObject() {
         WorkflowConfiguration config = new WorkflowConfiguration();
         assertEquals(config, config);
     }
 
     @Test
+    /**
+     * testEqualsWithNull方法。
+     */
     public void testEqualsWithNull() {
         WorkflowConfiguration config = new WorkflowConfiguration();
         assertNotEquals(config, null);
     }
 
     @Test
+    /**
+     * testEqualsWithDifferentClass方法。
+     */
     public void testEqualsWithDifferentClass() {
         WorkflowConfiguration config = new WorkflowConfiguration();
         assertNotEquals(config, "not a workflow configuration");
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         Configurations configs = new Configurations();
         configs.setWorkflowConfigurationId(1);
@@ -154,6 +193,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testHashCodeConsistency方法。
+     */
     public void testHashCodeConsistency() {
         Configurations configs = new Configurations();
         configs.setWorkflowConfigurationId(1);
@@ -167,6 +209,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         WorkflowConfiguration config = new WorkflowConfiguration();
         String str = config.toString();
@@ -176,6 +221,9 @@ public class WorkflowConfigurationTest {
     }
 
     @Test
+    /**
+     * testComplexWorkflowConfiguration方法。
+     */
     public void testComplexWorkflowConfiguration() {
         // 创建 Engine 配置
         Engine engine = new Engine();

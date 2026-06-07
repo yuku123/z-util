@@ -7,15 +7,25 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * DigestRunnable类。
+ */
 public class DigestRunnable implements Runnable {
 
     private String filename;
 
+    /**
+     * DigestRunnable方法。
+     *      * @param filename String类型参数
+     */
     public DigestRunnable(String filename) {
         this.filename = filename;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         try {
             FileInputStream in = new FileInputStream(filename);
@@ -37,6 +47,11 @@ public class DigestRunnable implements Runnable {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         for (String filename : args) {
             DigestRunnable dr = new DigestRunnable(filename);

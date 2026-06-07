@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
 /**
  * INI 文件解析器
  */
+/**
+ * IniParser类。
+ */
 public class IniParser {
 
     private static final Pattern SECTION_PATTERN = Pattern.compile("^\\[([^\\]]*)\\]\\s*$");
@@ -20,12 +23,22 @@ public class IniParser {
     /**
      * 解析 INI 格式字符串
      */
+    /**
+     * parse方法。
+     *      * @param content String类型参数
+     * @return IniFile类型返回值
+     */
     public IniFile parse(String content) {
         return parse(new StringReader(content));
     }
 
     /**
      * 解析 INI 格式 Reader
+     */
+    /**
+     * parse方法。
+     *      * @param reader Reader类型参数
+     * @return IniFile类型返回值
      */
     public IniFile parse(Reader reader) {
         IniFile iniFile = new IniFile();
@@ -153,6 +166,11 @@ public class IniParser {
 
     /**
      * 将 IniFile 写回 INI 格式字符串
+     */
+    /**
+     * store方法。
+     *      * @param iniFile IniFile类型参数
+     * @return String类型返回值
      */
     public String store(IniFile iniFile) {
         StringBuilder sb = new StringBuilder();

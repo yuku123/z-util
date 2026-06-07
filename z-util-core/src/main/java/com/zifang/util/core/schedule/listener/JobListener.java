@@ -40,6 +40,9 @@ import org.quartz.JobExecutionException;
 /**
  * JobListener接口。
  */
+/**
+ * JobListener接口。
+ */
 public interface JobListener {
 
     /**

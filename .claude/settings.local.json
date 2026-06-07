@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find util-ai:*)",
+      "Bash(mvn clean:*)",
+      "Bash(echo ======================================== echo '   测试用例整理与补充完成报告' echo ======================================== echo echo '📊 新增测试文件统计：' echo ---------------------------------------- echo echo '📁 util-math 模块 \\(6个测试类\\):' ls util-math/src/test/java/com/zifang/util/pandas/*/*.java)",
+      "Bash(while read:*)",
+      "Bash(do echo:*)",
+      "Bash(done ls:*)",
+      "Bash(done echo:*)",
+      "Bash(done 2)",
+      "Bash(/dev/null ls:*)",
+      "Bash(/dev/null echo:*)",
+      "Bash(mvn compile:*)",
+      "Bash(mvn test-compile:*)",
+      "Bash(mvn test:*)",
+      "Bash(java -version)",
+      "Bash(wc -l /Users/zifang/workplace/idea_workplace/components/util-math/src/main/java/com/zifang/util/pandas/*.java /Users/zifang/workplace/idea_workplace/components/util-math/src/main/java/com/zifang/util/pandas/*/*.java)",
+      "Bash(find /Users/zifang/workplace/idea_workplace/components/util-math/src/test/java/com/zifang/util/pandas -name *.java)",
+      "Bash(ls:*)",
+      "Bash(javac --version)",
+      "Bash(java --version)",
+      "Bash(mvn -v)"
+    ]
+  }
+}

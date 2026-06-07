@@ -15,6 +15,9 @@ import java.util.Random;
 /**
  * HMM类。
  */
+/**
+ * HMM类。
+ */
 public class HMM {
     
     private int nStates;
@@ -29,6 +32,11 @@ public class HMM {
      * 
      * @param nStates Number of hidden states
      * @param nObservations Number of possible observations
+     */
+    /**
+     * HMM方法。
+     *      * @param nStates int类型参数
+     * @param nObservations int类型参数
      */
     /**
      * HMM方法。
@@ -70,6 +78,12 @@ public class HMM {
      * @param observations Array of observation indices
      * @param states Array of corresponding hidden state indices
      * @param nIterations Number of iterations (for Baum-Welch component if used)
+     */
+    /**
+     * fit方法。
+     *      * @param observations int[]类型参数
+     * @param states int[]类型参数
+     * @param nIterations int类型参数
      */
     /**
      * fit方法。
@@ -138,6 +152,11 @@ public class HMM {
      *      * @param observations int[]类型参数
      * @param nIterations int类型参数
      */
+    /**
+     * fit方法。
+     *      * @param observations int[]类型参数
+     * @param nIterations int类型参数
+     */
     public void fit(int[] observations, int nIterations) {
         // For supervised learning, we need states. This method is for
         // Baum-Welch (unsupervised) training which is optional.
@@ -151,6 +170,11 @@ public class HMM {
      * 
      * @param observations Array of observation indices
      * @param nIterations Number of EM iterations
+     */
+    /**
+     * fitUnsupervised方法。
+     *      * @param observations int[]类型参数
+     * @param nIterations int类型参数
      */
     /**
      * fitUnsupervised方法。
@@ -304,6 +328,11 @@ public class HMM {
      *      * @param observations int[]类型参数
      * @return int[]类型返回值
      */
+    /**
+     * predictOptimalStateSeq方法。
+     *      * @param observations int[]类型参数
+     * @return int[]类型返回值
+     */
     public int[] predictOptimalStateSeq(int[] observations) {
         int T = observations.length;
         
@@ -367,6 +396,11 @@ public class HMM {
      *      * @param observations int[]类型参数
      * @return int[]类型返回值
      */
+    /**
+     * predict方法。
+     *      * @param observations int[]类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(int[] observations) {
         return predictOptimalStateSeq(observations);
     }
@@ -378,6 +412,12 @@ public class HMM {
      * @param observations Array of observation indices
      * @param states Array of hidden state indices
      * @return Probability of observation sequence given state sequence
+     */
+    /**
+     * score方法。
+     *      * @param observations int[]类型参数
+     * @param states int[]类型参数
+     * @return double类型返回值
      */
     /**
      * score方法。
@@ -425,6 +465,11 @@ public class HMM {
      *      * @param observations int[]类型参数
      * @return double类型返回值
      */
+    /**
+     * score方法。
+     *      * @param observations int[]类型参数
+     * @return double类型返回值
+     */
     public double score(int[] observations) {
         double[][] alpha = forward(observations);
         double prob = 0;
@@ -443,6 +488,10 @@ public class HMM {
      * getPi方法。
      * @return double[]类型返回值
      */
+    /**
+     * getPi方法。
+     * @return double[]类型返回值
+     */
     public double[] getPi() {
         return pi.clone();
     }
@@ -451,6 +500,10 @@ public class HMM {
      * Get transition matrix.
      * 
      * @return Copy of transition matrix A where A[i][j] = P(s_j | s_i)
+     */
+    /**
+     * getA方法。
+     * @return double[][]类型返回值
      */
     /**
      * getA方法。
@@ -473,6 +526,10 @@ public class HMM {
      * getB方法。
      * @return double[][]类型返回值
      */
+    /**
+     * getB方法。
+     * @return double[][]类型返回值
+     */
     public double[][] getB() {
         double[][] copy = new double[nStates][nObservations];
         for (int i = 0; i < nStates; i++) {
@@ -490,6 +547,10 @@ public class HMM {
      * getNStates方法。
      * @return int类型返回值
      */
+    /**
+     * getNStates方法。
+     * @return int类型返回值
+     */
     public int getNStates() {
         return nStates;
     }
@@ -498,6 +559,10 @@ public class HMM {
      * Get number of possible observations.
      * 
      * @return Number of observations
+     */
+    /**
+     * getNObservations方法。
+     * @return int类型返回值
      */
     /**
      * getNObservations方法。

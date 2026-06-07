@@ -10,6 +10,9 @@ import java.util.List;
 /**
  * Lexer接口。
  */
+/**
+ * Lexer接口。
+ */
 public interface Lexer {
 
     /**

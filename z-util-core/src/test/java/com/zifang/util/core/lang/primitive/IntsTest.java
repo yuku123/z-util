@@ -4,9 +4,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * IntsTest类。
+ */
 public class IntsTest {
 
     @Test
+    /**
+     * isAlpha方法。
+     */
     public void isAlpha() {
         assertTrue(Ints.isAlpha('a'));
         assertTrue(Ints.isAlpha('z'));
@@ -17,6 +23,9 @@ public class IntsTest {
     }
 
     @Test
+    /**
+     * isDigit方法。
+     */
     public void isDigit() {
         assertTrue(Ints.isDigit('0'));
         assertTrue(Ints.isDigit('9'));
@@ -25,6 +34,9 @@ public class IntsTest {
     }
 
     @Test
+    /**
+     * isBlank方法。
+     */
     public void isBlank() {
         assertTrue(Ints.isBlank(' '));
         assertTrue(Ints.isBlank('\t'));

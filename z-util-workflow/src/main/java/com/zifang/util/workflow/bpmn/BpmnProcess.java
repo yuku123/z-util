@@ -28,6 +28,9 @@ import java.util.Objects;
 /**
  * BpmnProcess类。
  */
+/**
+ * BpmnProcess类。
+ */
 public class BpmnProcess {
 
     /**
@@ -56,6 +59,9 @@ public class BpmnProcess {
     /**
      * BpmnProcess方法。
      */
+    /**
+     * BpmnProcess方法。
+     */
     public BpmnProcess() {
         this.nodes = new ArrayList<>();
         this.flows = new ArrayList<>();
@@ -68,6 +74,13 @@ public class BpmnProcess {
      * @param name  流程名称
      * @param nodes 流程节点列表
      * @param flows 序列流列表
+     */
+    /**
+     * BpmnProcess方法。
+     *      * @param id String类型参数
+     * @param name String类型参数
+     * @param nodes ListBpmnFlowNode类型参数
+     * @param flows ListBpmnSequenceFlow类型参数
      */
     /**
      * BpmnProcess方法。
@@ -92,6 +105,10 @@ public class BpmnProcess {
      * getId方法。
      * @return String类型返回值
      */
+    /**
+     * getId方法。
+     * @return String类型返回值
+     */
     public String getId() {
         return id;
     }
@@ -100,6 +117,10 @@ public class BpmnProcess {
      * 设置流程唯一标识符
      *
      * @param id 流程ID
+     */
+    /**
+     * setId方法。
+     *      * @param id String类型参数
      */
     /**
      * setId方法。
@@ -118,6 +139,10 @@ public class BpmnProcess {
      * getName方法。
      * @return String类型返回值
      */
+    /**
+     * getName方法。
+     * @return String类型返回值
+     */
     public String getName() {
         return name;
     }
@@ -126,6 +151,10 @@ public class BpmnProcess {
      * 设置流程名称
      *
      * @param name 流程名称
+     */
+    /**
+     * setName方法。
+     *      * @param name String类型参数
      */
     /**
      * setName方法。
@@ -144,6 +173,10 @@ public class BpmnProcess {
      * getNodes方法。
      * @return List<BpmnFlowNode>类型返回值
      */
+    /**
+     * getNodes方法。
+     * @return List<BpmnFlowNode>类型返回值
+     */
     public List<BpmnFlowNode> getNodes() {
         return nodes;
     }
@@ -152,6 +185,10 @@ public class BpmnProcess {
      * 设置流程节点列表
      *
      * @param nodes 流程节点列表
+     */
+    /**
+     * setNodes方法。
+     *      * @param nodes ListBpmnFlowNode类型参数
      */
     /**
      * setNodes方法。
@@ -170,6 +207,10 @@ public class BpmnProcess {
      * getFlows方法。
      * @return List<BpmnSequenceFlow>类型返回值
      */
+    /**
+     * getFlows方法。
+     * @return List<BpmnSequenceFlow>类型返回值
+     */
     public List<BpmnSequenceFlow> getFlows() {
         return flows;
     }
@@ -178,6 +219,10 @@ public class BpmnProcess {
      * 设置序列流列表
      *
      * @param flows 序列流列表
+     */
+    /**
+     * setFlows方法。
+     *      * @param flows ListBpmnSequenceFlow类型参数
      */
     /**
      * setFlows方法。
@@ -192,11 +237,20 @@ public class BpmnProcess {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "BpmnProcess{id='" + id + "', name='" + name + "', nodes=" + nodes + ", flows=" + flows + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -213,6 +267,10 @@ public class BpmnProcess {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

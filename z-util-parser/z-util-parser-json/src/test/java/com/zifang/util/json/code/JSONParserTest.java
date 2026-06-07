@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
 /**
  * JSONParser (tokenizer + recursive descent parser) 核心功能测试
  */
+/**
+ * JSONParserTest类。
+ */
 public class JSONParserTest {
 
     private JSONParser jsonParser = new JSONParser();
@@ -17,48 +20,72 @@ public class JSONParserTest {
     // ===== 基础类型 =====
 
     @Test
+    /**
+     * testParseNull方法。
+     */
     public void testParseNull() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": null}");
         assertNull(obj.get("k"));
     }
 
     @Test
+    /**
+     * testParseTrue方法。
+     */
     public void testParseTrue() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": true}");
         assertEquals(Boolean.TRUE, obj.get("k"));
     }
 
     @Test
+    /**
+     * testParseFalse方法。
+     */
     public void testParseFalse() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": false}");
         assertEquals(Boolean.FALSE, obj.get("k"));
     }
 
     @Test
+    /**
+     * testParsePositiveInt方法。
+     */
     public void testParsePositiveInt() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": 123}");
         assertEquals(123, obj.get("k"));
     }
 
     @Test
+    /**
+     * testParseNegativeInt方法。
+     */
     public void testParseNegativeInt() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": -456}");
         assertEquals(-456, obj.get("k"));
     }
 
     @Test
+    /**
+     * testParsePositiveDouble方法。
+     */
     public void testParsePositiveDouble() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": 3.14}");
         assertEquals(3.14, obj.get("k"));
     }
 
     @Test
+    /**
+     * testParseNegativeDouble方法。
+     */
     public void testParseNegativeDouble() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": -2.718}");
         assertEquals(-2.718, obj.get("k"));
     }
 
     @Test
+    /**
+     * testParseScientificNotation方法。
+     */
     public void testParseScientificNotation() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": 1.23e10}");
         assertEquals(1.23e10, obj.get("k"));
@@ -74,6 +101,9 @@ public class JSONParserTest {
     }
 
     @Test
+    /**
+     * testParseString方法。
+     */
     public void testParseString() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"k\": \"hello\"}");
         assertEquals("hello", obj.get("k"));
@@ -82,18 +112,27 @@ public class JSONParserTest {
     // ===== 对象 =====
 
     @Test
+    /**
+     * testParseEmptyObject方法。
+     */
     public void testParseEmptyObject() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{}");
         assertEquals(0, obj.getAllKeyValue().size());
     }
 
     @Test
+    /**
+     * testParseSimpleObject方法。
+     */
     public void testParseSimpleObject() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"name\": \"zifang\"}");
         assertEquals("zifang", obj.get("name"));
     }
 
     @Test
+    /**
+     * testParseNestedObject方法。
+     */
     public void testParseNestedObject() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"outer\": {\"inner\": \"value\"}}");
         JsonObject inner = obj.getJsonObject("outer");
@@ -103,12 +142,18 @@ public class JSONParserTest {
     // ===== 数组 =====
 
     @Test
+    /**
+     * testParseEmptyArray方法。
+     */
     public void testParseEmptyArray() throws Exception {
         JsonArray arr = (JsonArray) jsonParser.fromJSON("[]");
         assertEquals(0, arr.size());
     }
 
     @Test
+    /**
+     * testParseSimpleArray方法。
+     */
     public void testParseSimpleArray() throws Exception {
         JsonArray arr = (JsonArray) jsonParser.fromJSON("[1, 2, 3]");
         assertEquals(3, arr.size());
@@ -118,6 +163,9 @@ public class JSONParserTest {
     }
 
     @Test
+    /**
+     * testParseArrayMixedTypes方法。
+     */
     public void testParseArrayMixedTypes() throws Exception {
         JsonArray arr = (JsonArray) jsonParser.fromJSON("[0.1, \"a\", 123, 999, true, false, null]");
         assertEquals(0.1, arr.get(0));
@@ -132,6 +180,9 @@ public class JSONParserTest {
     // ===== 复杂结构 =====
 
     @Test
+    /**
+     * testParseComplexObject方法。
+     */
     public void testParseComplexObject() throws Exception {
         String json = "{\"a\": 1, \"b\": \"b\", \"c\": {\"a\": 1, \"b\": null, \"d\": [0.1, \"a\", 1, 2, 123, 999.0, true, false, null]}}";
         JsonObject obj = (JsonObject) jsonParser.fromJSON(json);
@@ -154,6 +205,9 @@ public class JSONParserTest {
     }
 
     @Test
+    /**
+     * testParseNestedArray方法。
+     */
     public void testParseNestedArray() throws Exception {
         JsonArray arr = (JsonArray) jsonParser.fromJSON("[[1, 2, 3, \"中\"]]");
         JsonArray inner = arr.getJsonArray(0);
@@ -166,6 +220,9 @@ public class JSONParserTest {
     // ===== Unicode =====
 
     @Test
+    /**
+     * testParseChineseString方法。
+     */
     public void testParseChineseString() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"name\": \"狄仁杰\", \"type\": \"射手\"}");
         assertEquals("狄仁杰", obj.get("name"));
@@ -175,24 +232,36 @@ public class JSONParserTest {
     // ===== getJsonObject / getJsonArray 异常 =====
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testGetJsonObjectMissingKey方法。
+     */
     public void testGetJsonObjectMissingKey() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"a\": 1}");
         obj.getJsonObject("notexist");
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testGetJsonArrayMissingKey方法。
+     */
     public void testGetJsonArrayMissingKey() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"a\": 1}");
         obj.getJsonArray("notexist");
     }
 
     @Test(expected = com.zifang.util.json.exception.JsonTypeException.class)
+    /**
+     * testGetJsonObjectWrongType方法。
+     */
     public void testGetJsonObjectWrongType() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"a\": 1}");
         obj.getJsonObject("a");
     }
 
     @Test(expected = com.zifang.util.json.exception.JsonTypeException.class)
+    /**
+     * testGetJsonArrayWrongType方法。
+     */
     public void testGetJsonArrayWrongType() throws Exception {
         JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"a\": \"str\"}");
         obj.getJsonArray("a");

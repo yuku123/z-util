@@ -8,9 +8,15 @@ import static org.junit.Assert.*;
 /**
  * FieldInfo 模型测试
  */
+/**
+ * FieldInfoTest类。
+ */
 public class FieldInfoTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         FieldInfo fieldInfo = new FieldInfo();
         assertNull(fieldInfo.getType());
@@ -18,6 +24,9 @@ public class FieldInfoTest {
     }
 
     @Test
+    /**
+     * testTwoParamConstructor方法。
+     */
     public void testTwoParamConstructor() {
         FieldInfo fieldInfo = new FieldInfo("String", "name");
         assertEquals("String", fieldInfo.getType());
@@ -26,6 +35,9 @@ public class FieldInfoTest {
     }
 
     @Test
+    /**
+     * testFourParamConstructor方法。
+     */
     public void testFourParamConstructor() {
         FieldInfo fieldInfo = new FieldInfo(
                 "int", "age", 
@@ -39,6 +51,9 @@ public class FieldInfoTest {
     }
 
     @Test
+    /**
+     * testEquals方法。
+     */
     public void testEquals() {
         FieldInfo f1 = new FieldInfo("String", "name");
         FieldInfo f2 = new FieldInfo("int", "name");
@@ -50,6 +65,9 @@ public class FieldInfoTest {
     }
 
     @Test
+    /**
+     * testHashCode方法。
+     */
     public void testHashCode() {
         FieldInfo f1 = new FieldInfo("String", "name");
         FieldInfo f2 = new FieldInfo("String", "name");
@@ -58,18 +76,27 @@ public class FieldInfoTest {
     }
 
     @Test
+    /**
+     * testToString方法。
+     */
     public void testToString() {
         FieldInfo fieldInfo = new FieldInfo("String", "name", new int[]{}, "\"default\"");
         assertEquals("String name = \"default\";", fieldInfo.toString());
     }
 
     @Test
+    /**
+     * testToStringWithoutInitializer方法。
+     */
     public void testToStringWithoutInitializer() {
         FieldInfo fieldInfo = new FieldInfo("String", "name");
         assertEquals("String name = null;", fieldInfo.toString());
     }
 
     @Test
+    /**
+     * testModifiers方法。
+     */
     public void testModifiers() {
         FieldInfo fieldInfo = new FieldInfo();
         fieldInfo.setModifiers(new int[]{
@@ -83,6 +110,9 @@ public class FieldInfoTest {
     }
 
     @Test
+    /**
+     * testSetModifier方法。
+     */
     public void testSetModifier() {
         FieldInfo fieldInfo = new FieldInfo();
         fieldInfo.setModifier(java.lang.reflect.Modifier.PUBLIC);
@@ -92,6 +122,9 @@ public class FieldInfoTest {
     }
 
     @Test
+    /**
+     * testAnnotations方法。
+     */
     public void testAnnotations() {
         FieldInfo fieldInfo = new FieldInfo("String", "name");
         com.zifang.util.source.generator.info.AnnotationInfo annot = 

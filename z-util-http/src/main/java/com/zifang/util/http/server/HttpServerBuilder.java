@@ -25,6 +25,9 @@ import java.util.regex.Pattern;
 /**
  * HttpServerBuilder类。
  */
+/**
+ * HttpServerBuilder类。
+ */
 public class HttpServerBuilder {
 
     private int port = 8080;
@@ -37,6 +40,11 @@ public class HttpServerBuilder {
      *
      * @param port 端口号
      * @return HttpServerBuilder实例
+     */
+    /**
+     * bindPort方法。
+     *      * @param port int类型参数
+     * @return static HttpServerBuilder类型返回值
      */
     /**
      * bindPort方法。
@@ -60,6 +68,11 @@ public class HttpServerBuilder {
      *      * @param controller Object类型参数
      * @return HttpServerBuilder类型返回值
      */
+    /**
+     * proxy方法。
+     *      * @param controller Object类型参数
+     * @return HttpServerBuilder类型返回值
+     */
     public HttpServerBuilder proxy(Object controller) {
         this.controllers.add(controller);
         return this;
@@ -69,6 +82,10 @@ public class HttpServerBuilder {
      * 启动HTTP服务器
      *
      * @return HttpServerBuilder实例
+     */
+    /**
+     * start方法。
+     * @return HttpServerBuilder类型返回值
      */
     /**
      * start方法。
@@ -104,6 +121,9 @@ public class HttpServerBuilder {
 
     /**
      * 停止HTTP服务器
+     */
+    /**
+     * stop方法。
      */
     /**
      * stop方法。
@@ -236,6 +256,10 @@ public class HttpServerBuilder {
      */
     private class RootHandler implements HttpHandler {
         @Override
+    /**
+     * handle方法。
+     *      * @param exchange HttpExchange类型参数
+     */
     /**
      * handle方法。
      *      * @param exchange HttpExchange类型参数

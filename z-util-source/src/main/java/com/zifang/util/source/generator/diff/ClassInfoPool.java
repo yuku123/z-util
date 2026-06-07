@@ -12,6 +12,9 @@ package com.zifang.util.source.generator.diff;
 /**
  * ClassInfoPool类。
  */
+/**
+ * ClassInfoPool类。
+ */
 public class ClassInfoPool {
 
 }

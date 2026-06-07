@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * PerceptronTest类。
+ */
 public class PerceptronTest {
 
     private Random random = new Random(42);
@@ -49,6 +52,9 @@ public class PerceptronTest {
     }
 
     @Test
+    /**
+     * testPerceptronConvergence方法。
+     */
     public void testPerceptronConvergence() {
         int nSamples = 80;
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));
@@ -74,6 +80,9 @@ public class PerceptronTest {
     }
 
     @Test
+    /**
+     * testPerceptronPredict方法。
+     */
     public void testPerceptronPredict() {
         int nSamples = 50;
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));
@@ -94,6 +103,9 @@ public class PerceptronTest {
     }
 
     @Test
+    /**
+     * testPerceptronScore方法。
+     */
     public void testPerceptronScore() {
         int nSamples = 60;
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));

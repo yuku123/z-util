@@ -29,14 +29,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * WorkFlowApplication类。
  */
+/**
+ * WorkFlowApplication类。
+ */
 public class WorkFlowApplication {
 
     /**
      * HashMap<>方法。
      * @return static Map<Integer, WorkFlowApplicationContext> workFlowContextMap = new类型返回值
      */
+    /**
+     * HashMap<>方法。
+     * @return static Map<Integer, WorkFlowApplicationContext> workFlowContextMap = new类型返回值
+     */
     public static Map<Integer, WorkFlowApplicationContext> workFlowContextMap = new HashMap<>();
 
+    /**
+     * Executors.newFixedThreadPool方法。
+     *      * @param 100 Object类型参数
+     * @return static ExecutorService threadPool =类型返回值
+     */
     /**
      * Executors.newFixedThreadPool方法。
      *      * @param 100 Object类型参数
@@ -49,12 +61,22 @@ public class WorkFlowApplication {
      *      * @param 0 Object类型参数
      * @return static AtomicInteger workflowContextId = new类型返回值
      */
+    /**
+     * AtomicInteger方法。
+     *      * @param 0 Object类型参数
+     * @return static AtomicInteger workflowContextId = new类型返回值
+     */
     public static AtomicInteger workflowContextId = new AtomicInteger(0);
 
     /**
      * 通过一个workflowConfiguration 主动创造一个workflow的上下文
      * <p>
      * return WorkFlowApplicationContextId
+     */
+    /**
+     * createWorkflowContext方法。
+     *      * @param workflowConfiguration WorkflowConfiguration类型参数
+     * @return synchronized Integer类型返回值
      */
     /**
      * createWorkflowContext方法。
@@ -93,6 +115,12 @@ public class WorkFlowApplication {
      * @param workflowNode WorkflowNode类型参数
      * @return synchronized Boolean类型返回值
      */
+    /**
+     * addSimpleWorkflowNode方法。
+     *      * @param workFlowApplicationContextId int类型参数
+     * @param workflowNode WorkflowNode类型参数
+     * @return synchronized Boolean类型返回值
+     */
     public synchronized Boolean addSimpleWorkflowNode(Integer workFlowApplicationContextId, WorkflowNode workflowNode) {
 
         //从共享上下文池内得到缓存
@@ -117,6 +145,12 @@ public class WorkFlowApplication {
         return true;
     }
 
+    /**
+     * removeWorkflownNode方法。
+     *      * @param workFlowApplicationContextId int类型参数
+     * @param nodeId String类型参数
+     * @return synchronized Boolean类型返回值
+     */
     /**
      * removeWorkflownNode方法。
      *      * @param workFlowApplicationContextId int类型参数
@@ -178,6 +212,12 @@ public class WorkFlowApplication {
      * @param workflowNode WorkflowNode类型参数
      * @return synchronized Boolean类型返回值
      */
+    /**
+     * modifyWorkflowNodeConfiguration方法。
+     *      * @param workFlowApplicationContextId int类型参数
+     * @param workflowNode WorkflowNode类型参数
+     * @return synchronized Boolean类型返回值
+     */
     public synchronized Boolean modifyWorkflowNodeConfiguration(Integer workFlowApplicationContextId, WorkflowNode workflowNode) {
 
         //从共享上下文池内得到缓存
@@ -202,6 +242,10 @@ public class WorkFlowApplication {
      * resetWorkflowNode方法。
      * @return synchronized Boolean类型返回值
      */
+    /**
+     * resetWorkflowNode方法。
+     * @return synchronized Boolean类型返回值
+     */
     public synchronized Boolean resetWorkflowNode() {
         return null;
     }
@@ -213,12 +257,20 @@ public class WorkFlowApplication {
      * startReferTo方法。
      * @return synchronized Boolean类型返回值
      */
+    /**
+     * startReferTo方法。
+     * @return synchronized Boolean类型返回值
+     */
     public synchronized Boolean startReferTo() {
         return null;
     }
 
     /**
      * 强制这个上下文暂停，并返回状态
+     */
+    /**
+     * forcePause方法。
+     * @return synchronized Boolean类型返回值
      */
     /**
      * forcePause方法。
@@ -235,6 +287,10 @@ public class WorkFlowApplication {
      * resume方法。
      * @return synchronized Boolean类型返回值
      */
+    /**
+     * resume方法。
+     * @return synchronized Boolean类型返回值
+     */
     public synchronized Boolean resume() {
         return null;
     }
@@ -246,12 +302,21 @@ public class WorkFlowApplication {
      * status方法。
      * @return boolean类型返回值
      */
+    /**
+     * status方法。
+     * @return boolean类型返回值
+     */
     public Boolean status() {
         return null;
     }
 
     /**
      * 根据workflowContextId 得到对应的 WorkFlowApplicationContext
+     */
+    /**
+     * getWorkFlowApplicationContext方法。
+     *      * @param workflowContextId int类型参数
+     * @return WorkFlowApplicationContext类型返回值
      */
     /**
      * getWorkFlowApplicationContext方法。

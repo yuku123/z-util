@@ -16,6 +16,9 @@ import java.lang.reflect.Method;
 /**
  * AnnotationUtil类。
  */
+/**
+ * AnnotationUtil类。
+ */
 public class AnnotationUtil {
 
     public static ElementType[] defaultElementTypes = new ElementType[]{
@@ -41,6 +44,11 @@ public class AnnotationUtil {
      *      * @param annotationType Class?类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * isDocumented方法。
+     *      * @param annotationType Class?类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean isDocumented(Class<? extends Annotation> annotationType) {
         return annotationType.isAnnotationPresent(Documented.class);
     }
@@ -50,6 +58,11 @@ public class AnnotationUtil {
      *
      * @param annotationType 注解类
      * @return 是否会保存到 Javadoc 文档中
+     */
+    /**
+     * isInherited方法。
+     *      * @param annotationType Class?类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isInherited方法。
@@ -72,6 +85,12 @@ public class AnnotationUtil {
      * @param annotatedElement AnnotatedElement类型参数
      * @return static boolean类型返回值
      */
+    /**
+     * hasAnnotationOn方法。
+     *      * @param annotationClass Class?类型参数
+     * @param annotatedElement AnnotatedElement类型参数
+     * @return static boolean类型返回值
+     */
     public static boolean hasAnnotationOn(Class<? extends Annotation> annotationClass, AnnotatedElement annotatedElement) {
         return annotatedElement.isAnnotationPresent(annotationClass);
     }
@@ -81,6 +100,11 @@ public class AnnotationUtil {
      *
      * @param annotationEle 注解元素
      * @return 组合注解元素
+     */
+    /**
+     * toCombination方法。
+     *      * @param annotationEle AnnotatedElement类型参数
+     * @return static CombinationAnnotationElement类型返回值
      */
     /**
      * toCombination方法。
@@ -107,6 +131,12 @@ public class AnnotationUtil {
      * @param isToCombination boolean类型参数
      * @return static Annotation[]类型返回值
      */
+    /**
+     * getAnnotations方法。
+     *      * @param annotationEle AnnotatedElement类型参数
+     * @param isToCombination boolean类型参数
+     * @return static Annotation[]类型返回值
+     */
     public static Annotation[] getAnnotations(AnnotatedElement annotationEle, boolean isToCombination) {
         return (null == annotationEle) ? null : (isToCombination ? toCombination(annotationEle) : annotationEle).getAnnotations();
     }
@@ -118,6 +148,12 @@ public class AnnotationUtil {
      * @param annotationEle  {@link AnnotatedElement}，可以是Class、Method、Field、Constructor、ReflectPermission
      * @param annotationType 注解类型
      * @return 注解对象
+     */
+    /**
+     * getAnnotation方法。
+     *      * @param annotationEle AnnotatedElement类型参数
+     * @param annotationType ClassA类型参数
+     * @return static <A extends Annotation> A类型返回值
      */
     /**
      * getAnnotation方法。
@@ -144,6 +180,12 @@ public class AnnotationUtil {
      * @param annotationType Class?类型参数
      * @return static <T> T类型返回值
      */
+    /**
+     * getAnnotationValue方法。
+     *      * @param annotationEle AnnotatedElement类型参数
+     * @param annotationType Class?类型参数
+     * @return static <T> T类型返回值
+     */
     public static <T> T getAnnotationValue(AnnotatedElement annotationEle, Class<? extends Annotation> annotationType) {
         return getAnnotationValue(annotationEle, annotationType, "value");
     }
@@ -157,6 +199,13 @@ public class AnnotationUtil {
      * @param annotationType 注解类型
      * @param propertyName   属性名，例如注解中定义了name()方法，则 此处传入name
      * @return 注解对象
+     */
+    /**
+     * getAnnotationValue方法。
+     *      * @param annotationEle AnnotatedElement类型参数
+     * @param annotationType Class?类型参数
+     * @param propertyName String类型参数
+     * @return static <T> T类型返回值
      */
     /**
      * getAnnotationValue方法。
@@ -193,6 +242,11 @@ public class AnnotationUtil {
      *      * @param annotationType Class?类型参数
      * @return static RetentionPolicy类型返回值
      */
+    /**
+     * getRetentionPolicy方法。
+     *      * @param annotationType Class?类型参数
+     * @return static RetentionPolicy类型返回值
+     */
     public static RetentionPolicy getRetentionPolicy(Class<? extends Annotation> annotationType) {
         final Retention retention = annotationType.getAnnotation(Retention.class);
         if (null == retention) {
@@ -208,6 +262,11 @@ public class AnnotationUtil {
      *
      * @param annotationType 注解类
      * @return 注解修饰的程序元素数组
+     */
+    /**
+     * getTargetType方法。
+     *      * @param annotationType Class?类型参数
+     * @return static ElementType[]类型返回值
      */
     /**
      * getTargetType方法。

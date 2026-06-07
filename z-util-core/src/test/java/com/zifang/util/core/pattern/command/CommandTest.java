@@ -13,9 +13,15 @@ import static org.junit.Assert.*;
 /**
  * 命令模式测试
  */
+/**
+ * CommandTest类。
+ */
 public class CommandTest {
 
     @Test
+    /**
+     * testCommandContext方法。
+     */
     public void testCommandContext() {
         CommandContext context = new CommandContext();
         context.put("name", "test");
@@ -28,6 +34,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testOperandStack方法。
+     */
     public void testOperandStack() {
         OperandStack stack = new OperandStack();
 
@@ -52,6 +61,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testOperandStackSwap方法。
+     */
     public void testOperandStackSwap() {
         OperandStack stack = new OperandStack();
         stack.push(1);
@@ -63,6 +75,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testOperandStackContext方法。
+     */
     public void testOperandStackContext() {
         OperandStackContext context = new OperandStackContext();
 
@@ -76,6 +91,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testSimpleCommand方法。
+     */
     public void testSimpleCommand() {
         AtomicBoolean executed = new AtomicBoolean(false);
 
@@ -93,6 +111,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testSimpleCommandWithUndo方法。
+     */
     public void testSimpleCommandWithUndo() {
         AtomicInteger value = new AtomicInteger(0);
 
@@ -112,6 +133,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandRegistry方法。
+     */
     public void testCommandRegistry() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
@@ -130,6 +154,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandRegistryByCategory方法。
+     */
     public void testCommandRegistryByCategory() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
@@ -146,6 +173,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandExecutor方法。
+     */
     public void testCommandExecutor() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
         registry.register("step1", SimpleCommand.of("step1", ctx -> ctx.put("step1", 1)));
@@ -162,6 +192,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandExecutorWithListener方法。
+     */
     public void testCommandExecutorWithListener() {
         AtomicBoolean beforeCalled = new AtomicBoolean(false);
         AtomicBoolean afterCalled = new AtomicBoolean(false);
@@ -172,11 +205,23 @@ public class CommandTest {
         CommandExecutor<CommandContext> executor = registry.executor();
         executor.addListener(new CommandExecutor.CommandListener<CommandContext>() {
             @Override
+    /**
+     * onBeforeExecute方法。
+     *      * @param command CommandCommandContext类型参数
+     * @param context CommandContext类型参数
+     */
             public void onBeforeExecute(Command<CommandContext> command, CommandContext context) {
                 beforeCalled.set(true);
             }
 
             @Override
+    /**
+     * onAfterExecute方法。
+     *      * @param command CommandCommandContext类型参数
+     * @param context CommandContext类型参数
+     * @param duration long类型参数
+     * @param error Exception类型参数
+     */
             public void onAfterExecute(Command<CommandContext> command, CommandContext context, long duration, Exception error) {
                 afterCalled.set(true);
             }
@@ -190,6 +235,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandMacro方法。
+     */
     public void testCommandMacro() {
         AtomicInteger counter = new AtomicInteger(0);
 
@@ -207,6 +255,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandMacroWithUndo方法。
+     */
     public void testCommandMacroWithUndo() {
         AtomicInteger value = new AtomicInteger(0);
 
@@ -229,6 +280,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandParserBasic方法。
+     */
     public void testCommandParserBasic() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
@@ -245,6 +299,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandParserWithParameters方法。
+     */
     public void testCommandParserWithParameters() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
@@ -261,6 +318,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandParserWithList方法。
+     */
     public void testCommandParserWithList() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
@@ -283,6 +343,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testInterrupt方法。
+     */
     public void testInterrupt() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
@@ -300,6 +363,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testCommandRegistryRemove方法。
+     */
     public void testCommandRegistryRemove() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
@@ -315,18 +381,27 @@ public class CommandTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testCommandRegistryNullName方法。
+     */
     public void testCommandRegistryNullName() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
         registry.register(null, SimpleCommand.of("test", ctx -> {}));
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testCommandRegistryNullCommand方法。
+     */
     public void testCommandRegistryNullCommand() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
         registry.register("test", null);
     }
 
     @Test
+    /**
+     * testCommandParserSupportsParameters方法。
+     */
     public void testCommandParserSupportsParameters() {
         // Test parameter parsing without conditions
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
@@ -344,6 +419,9 @@ public class CommandTest {
     }
 
     @Test
+    /**
+     * testOperandStackPushPop方法。
+     */
     public void testOperandStackPushPop() {
         OperandStackContext context = new OperandStackContext();
 

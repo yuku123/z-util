@@ -2,17 +2,35 @@ package com.zifang.util.core.concurrency.charpter3;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Intlock类。
+ */
 public class Intlock implements Runnable {
 
+    /**
+     * ReentrantLock方法。
+     * @return static ReentrantLock lock1 = new类型返回值
+     */
     public static ReentrantLock lock1 = new ReentrantLock();
+    /**
+     * ReentrantLock方法。
+     * @return static ReentrantLock lock2 = new类型返回值
+     */
     public static ReentrantLock lock2 = new ReentrantLock();
     int lock;
 
+    /**
+     * Intlock方法。
+     *      * @param lock int类型参数
+     */
     public Intlock(int lock) {
         this.lock = lock;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         try {
             if (lock == 1) {
@@ -45,6 +63,11 @@ public class Intlock implements Runnable {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
         Intlock intlock1 = new Intlock(1);
         Intlock intlock2 = new Intlock(2);

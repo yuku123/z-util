@@ -3,6 +3,9 @@ package com.zifang.util.http.net.bookdemo;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * CacheControl类。
+ */
 public class CacheControl {
 
     private Date maxAge = null;
@@ -14,6 +17,10 @@ public class CacheControl {
     private boolean publicCache = false;
     private boolean privateCache = false;
 
+    /**
+     * CacheControl方法。
+     *      * @param s String类型参数
+     */
     public CacheControl(String s) {
         if (s == null || !s.contains(":")) {
             return; // default policy
@@ -49,34 +56,66 @@ public class CacheControl {
         }
     }
 
+    /**
+     * getMaxAge方法。
+     * @return Date类型返回值
+     */
     public Date getMaxAge() {
         return maxAge;
     }
 
+    /**
+     * getSharedMaxAge方法。
+     * @return Date类型返回值
+     */
     public Date getSharedMaxAge() {
         return sMaxAge;
     }
 
+    /**
+     * mustRevalidate方法。
+     * @return boolean类型返回值
+     */
     public boolean mustRevalidate() {
         return mustRevalidate;
     }
 
+    /**
+     * proxyRevalidate方法。
+     * @return boolean类型返回值
+     */
     public boolean proxyRevalidate() {
         return proxyRevalidate;
     }
 
+    /**
+     * noStore方法。
+     * @return boolean类型返回值
+     */
     public boolean noStore() {
         return noStore;
     }
 
+    /**
+     * noCache方法。
+     * @return boolean类型返回值
+     */
     public boolean noCache() {
         return noCache;
     }
 
+    /**
+     * publicCache方法。
+     * @return boolean类型返回值
+     */
     public boolean publicCache() {
         return publicCache;
     }
 
+    /**
+     * privateCache方法。
+     * @return boolean类型返回值
+     */
     public boolean privateCache() {
         return privateCache;
     }

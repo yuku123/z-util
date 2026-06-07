@@ -6,6 +6,9 @@ package com.zifang.util.http.base.pojo;
 /**
  * HttpRequestDefinition类。
  */
+/**
+ * HttpRequestDefinition类。
+ */
 public class HttpRequestDefinition {
 
     /**
@@ -27,10 +30,18 @@ public class HttpRequestDefinition {
      * getHttpRequestLine方法。
      * @return HttpRequestLine类型返回值
      */
+    /**
+     * getHttpRequestLine方法。
+     * @return HttpRequestLine类型返回值
+     */
     public HttpRequestLine getHttpRequestLine() {
         return httpRequestLine;
     }
 
+    /**
+     * setHttpRequestLine方法。
+     *      * @param httpRequestLine HttpRequestLine类型参数
+     */
     /**
      * setHttpRequestLine方法。
      *      * @param httpRequestLine HttpRequestLine类型参数
@@ -43,10 +54,18 @@ public class HttpRequestDefinition {
      * getHttpRequestHeader方法。
      * @return HttpRequestHeader类型返回值
      */
+    /**
+     * getHttpRequestHeader方法。
+     * @return HttpRequestHeader类型返回值
+     */
     public HttpRequestHeader getHttpRequestHeader() {
         return httpRequestHeader;
     }
 
+    /**
+     * setHttpRequestHeader方法。
+     *      * @param httpRequestHeader HttpRequestHeader类型参数
+     */
     /**
      * setHttpRequestHeader方法。
      *      * @param httpRequestHeader HttpRequestHeader类型参数
@@ -59,10 +78,18 @@ public class HttpRequestDefinition {
      * getHttpRequestBody方法。
      * @return HttpRequestBody类型返回值
      */
+    /**
+     * getHttpRequestBody方法。
+     * @return HttpRequestBody类型返回值
+     */
     public HttpRequestBody getHttpRequestBody() {
         return httpRequestBody;
     }
 
+    /**
+     * setHttpRequestBody方法。
+     *      * @param httpRequestBody HttpRequestBody类型参数
+     */
     /**
      * setHttpRequestBody方法。
      *      * @param httpRequestBody HttpRequestBody类型参数
@@ -76,11 +103,20 @@ public class HttpRequestDefinition {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "HttpRequestDefinition{httpRequestLine=" + httpRequestLine + ", httpRequestHeader=" + httpRequestHeader + ", httpRequestBody=" + httpRequestBody + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -98,6 +134,10 @@ public class HttpRequestDefinition {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

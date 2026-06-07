@@ -38,6 +38,11 @@ class Base64Utils {
      *      * @param data byte[]类型参数
      * @return static String类型返回值
      */
+    /**
+     * encrypt方法。
+     *      * @param data byte[]类型参数
+     * @return static String类型返回值
+     */
     protected static String encrypt(byte[] data) {
         StringBuffer sb = new StringBuffer();
         int len = data.length;
@@ -79,6 +84,11 @@ class Base64Utils {
      * @throws UnsupportedEncodingException
      * @author zifang chenssy
      * @date : 2016年5月20日 下午5:11:51
+     */
+    /**
+     * decrypt方法。
+     *      * @param str String类型参数
+     * @return static byte[]类型返回值
      */
     /**
      * decrypt方法。

@@ -31,6 +31,9 @@ import javax.sql.DataSource;
 /**
  * DatasourceFactory接口。
  */
+/**
+ * DatasourceFactory接口。
+ */
 public interface DatasourceFactory {
 
     /**

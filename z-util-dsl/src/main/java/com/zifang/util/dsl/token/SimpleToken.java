@@ -7,6 +7,9 @@ package com.zifang.util.dsl.token;
 /**
  * SimpleToken类。
  */
+/**
+ * SimpleToken类。
+ */
 public class SimpleToken implements Token {
 
     private int type;
@@ -17,6 +20,9 @@ public class SimpleToken implements Token {
 
     /**
      * 默认构造函数
+     */
+    /**
+     * SimpleToken方法。
      */
     /**
      * SimpleToken方法。
@@ -40,6 +46,14 @@ public class SimpleToken implements Token {
      * @param column int类型参数
      * @param tokenName String类型参数
      */
+    /**
+     * SimpleToken方法。
+     *      * @param type int类型参数
+     * @param text String类型参数
+     * @param line int类型参数
+     * @param column int类型参数
+     * @param tokenName String类型参数
+     */
     public SimpleToken(int type, String text, int line, int column, String tokenName) {
         this.type = type;
         this.text = text;
@@ -49,6 +63,10 @@ public class SimpleToken implements Token {
     }
 
     @Override
+    /**
+     * getType方法。
+     * @return int类型返回值
+     */
     /**
      * getType方法。
      * @return int类型返回值
@@ -65,11 +83,19 @@ public class SimpleToken implements Token {
      * setType方法。
      *      * @param type int类型参数
      */
+    /**
+     * setType方法。
+     *      * @param type int类型参数
+     */
     public void setType(int type) {
         this.type = type;
     }
 
     @Override
+    /**
+     * getText方法。
+     * @return String类型返回值
+     */
     /**
      * getText方法。
      * @return String类型返回值
@@ -86,11 +112,19 @@ public class SimpleToken implements Token {
      * setText方法。
      *      * @param text String类型参数
      */
+    /**
+     * setText方法。
+     *      * @param text String类型参数
+     */
     public void setText(String text) {
         this.text = text;
     }
 
     @Override
+    /**
+     * getLine方法。
+     * @return int类型返回值
+     */
     /**
      * getLine方法。
      * @return int类型返回值
@@ -107,11 +141,19 @@ public class SimpleToken implements Token {
      * setLine方法。
      *      * @param line int类型参数
      */
+    /**
+     * setLine方法。
+     *      * @param line int类型参数
+     */
     public void setLine(int line) {
         this.line = line;
     }
 
     @Override
+    /**
+     * getColumn方法。
+     * @return int类型返回值
+     */
     /**
      * getColumn方法。
      * @return int类型返回值
@@ -128,11 +170,19 @@ public class SimpleToken implements Token {
      * setColumn方法。
      *      * @param column int类型参数
      */
+    /**
+     * setColumn方法。
+     *      * @param column int类型参数
+     */
     public void setColumn(int column) {
         this.column = column;
     }
 
     @Override
+    /**
+     * getTokenName方法。
+     * @return String类型返回值
+     */
     /**
      * getTokenName方法。
      * @return String类型返回值
@@ -149,11 +199,19 @@ public class SimpleToken implements Token {
      * setTokenName方法。
      *      * @param tokenName String类型参数
      */
+    /**
+     * setTokenName方法。
+     *      * @param tokenName String类型参数
+     */
     public void setTokenName(String tokenName) {
         this.tokenName = tokenName;
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

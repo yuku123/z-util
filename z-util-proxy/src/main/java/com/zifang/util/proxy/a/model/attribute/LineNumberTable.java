@@ -16,10 +16,18 @@ import java.util.List;
 /**
  * LineNumberTable类。
  */
+/**
+ * LineNumberTable类。
+ */
 public class LineNumberTable extends AbstractAttribute {
     private U2 lineNumTableLength;
     private List<LineNumberInfo> lineNumberTable = new ArrayList<>();
 
+    /**
+     * LineNumberTable方法。
+     *      * @param attributeNameIndex U2类型参数
+     * @param attributeLength U4类型参数
+     */
     /**
      * LineNumberTable方法。
      *      * @param attributeNameIndex U2类型参数
@@ -30,6 +38,10 @@ public class LineNumberTable extends AbstractAttribute {
     }
 
     @Override
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     /**
      * read方法。
      *      * @param inputStream InputStream类型参数
@@ -48,10 +60,18 @@ public class LineNumberTable extends AbstractAttribute {
 /**
  * LineNumberInfo类。
  */
+/**
+ * LineNumberInfo类。
+ */
     public class LineNumberInfo {
         private U2 startPc;//字节码行号
         private U2 lineNumber;//java源码行号
 
+    /**
+     * LineNumberInfo方法。
+     *      * @param startPc U2类型参数
+     * @param lineNumber U2类型参数
+     */
     /**
      * LineNumberInfo方法。
      *      * @param startPc U2类型参数
@@ -66,10 +86,18 @@ public class LineNumberTable extends AbstractAttribute {
      * getStartPc方法。
      * @return U2类型返回值
      */
+    /**
+     * getStartPc方法。
+     * @return U2类型返回值
+     */
         public U2 getStartPc() {
             return startPc;
         }
 
+    /**
+     * setStartPc方法。
+     *      * @param startPc U2类型参数
+     */
     /**
      * setStartPc方法。
      *      * @param startPc U2类型参数
@@ -82,10 +110,18 @@ public class LineNumberTable extends AbstractAttribute {
      * getLineNumber方法。
      * @return U2类型返回值
      */
+    /**
+     * getLineNumber方法。
+     * @return U2类型返回值
+     */
         public U2 getLineNumber() {
             return lineNumber;
         }
 
+    /**
+     * setLineNumber方法。
+     *      * @param lineNumber U2类型参数
+     */
     /**
      * setLineNumber方法。
      *      * @param lineNumber U2类型参数
@@ -99,10 +135,18 @@ public class LineNumberTable extends AbstractAttribute {
      * getLineNumTableLength方法。
      * @return U2类型返回值
      */
+    /**
+     * getLineNumTableLength方法。
+     * @return U2类型返回值
+     */
     public U2 getLineNumTableLength() {
         return lineNumTableLength;
     }
 
+    /**
+     * getLineNumberTable方法。
+     * @return List<LineNumberInfo>类型返回值
+     */
     /**
      * getLineNumberTable方法。
      * @return List<LineNumberInfo>类型返回值

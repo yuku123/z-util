@@ -8,9 +8,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * DynamicLexerTest类。
+ */
 public class DynamicLexerTest {
 
     @Test
+    /**
+     * testLoadG4_BasicLexerRule方法。
+     */
     public void testLoadG4_BasicLexerRule() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -28,6 +34,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testLoadG4_MultipleTokens方法。
+     */
     public void testLoadG4_MultipleTokens() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -46,6 +55,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testLoadG4_StringLiteral方法。
+     */
     public void testLoadG4_StringLiteral() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -61,6 +73,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testLoadG4_Keywords方法。
+     */
     public void testLoadG4_Keywords() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -79,6 +94,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testSetInput_String方法。
+     */
     public void testSetInput_String() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -94,6 +112,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testSetInput_CharArray方法。
+     */
     public void testSetInput_CharArray() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -109,6 +130,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testTokenize_EmptyInput方法。
+     */
     public void testTokenize_EmptyInput() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -123,6 +147,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testTokenize_LineAndColumnTracking方法。
+     */
     public void testTokenize_LineAndColumnTracking() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -140,6 +167,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testTokenize_NumberMatching方法。
+     */
     public void testTokenize_NumberMatching() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -155,6 +185,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testTokenize_UnknownCharacter方法。
+     */
     public void testTokenize_UnknownCharacter() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -166,6 +199,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testLoadG4_HiddenTokens方法。
+     */
     public void testLoadG4_HiddenTokens() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -181,6 +217,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testTokenize_FragmentRule方法。
+     */
     public void testTokenize_FragmentRule() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -197,6 +236,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testTokenize_LongestMatchWins方法。
+     */
     public void testTokenize_LongestMatchWins() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +
@@ -214,6 +256,9 @@ public class DynamicLexerTest {
     }
 
     @Test
+    /**
+     * testGetTokenReader方法。
+     */
     public void testGetTokenReader() {
         DynamicLexer lexer = new DynamicLexer();
         String g4 = "lexer grammar Test;\n" +

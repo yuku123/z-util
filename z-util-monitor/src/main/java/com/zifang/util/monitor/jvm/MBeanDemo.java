@@ -27,12 +27,20 @@ import java.util.List;
 /**
  * MBeanDemo类。
  */
+/**
+ * MBeanDemo类。
+ */
 public class MBeanDemo {
 
     /**
      * 主方法，演示获取JVM各类管理信息。
      *
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     /**
      * main方法。
@@ -58,6 +66,10 @@ public class MBeanDemo {
      * showJvmInfo方法。
      * @return static void类型返回值
      */
+    /**
+     * showJvmInfo方法。
+     * @return static void类型返回值
+     */
     public static void showJvmInfo() {
         RuntimeMXBean mxbean = ManagementFactory.getRuntimeMXBean();
         String vendor = mxbean.getVmVendor();
@@ -74,6 +86,10 @@ public class MBeanDemo {
      * showMemoryInfo方法。
      * @return static void类型返回值
      */
+    /**
+     * showMemoryInfo方法。
+     * @return static void类型返回值
+     */
     public static void showMemoryInfo() {
         MemoryMXBean mem = ManagementFactory.getMemoryMXBean();
         MemoryUsage heap = mem.getHeapMemoryUsage();
@@ -83,6 +99,10 @@ public class MBeanDemo {
 
     /**
      * Java 虚拟机在其上运行的操作系统
+     */
+    /**
+     * showSystem方法。
+     * @return static void类型返回值
      */
     /**
      * showSystem方法。
@@ -104,6 +124,10 @@ public class MBeanDemo {
      * showClassLoading方法。
      * @return static void类型返回值
      */
+    /**
+     * showClassLoading方法。
+     * @return static void类型返回值
+     */
     public static void showClassLoading() {
         ClassLoadingMXBean cl = ManagementFactory.getClassLoadingMXBean();
         System.out.println("TotalLoadedClassCount: " + cl.getTotalLoadedClassCount());
@@ -113,6 +137,10 @@ public class MBeanDemo {
 
     /**
      * Java 虚拟机的编译系统
+     */
+    /**
+     * showCompilation方法。
+     * @return static void类型返回值
      */
     /**
      * showCompilation方法。
@@ -131,6 +159,10 @@ public class MBeanDemo {
      * showThread方法。
      * @return static void类型返回值
      */
+    /**
+     * showThread方法。
+     * @return static void类型返回值
+     */
     public static void showThread() {
         ThreadMXBean thread = ManagementFactory.getThreadMXBean();
         System.out.println("ThreadCount" + thread.getThreadCount());
@@ -141,6 +173,10 @@ public class MBeanDemo {
 
     /**
      * Java 虚拟机中的垃圾回收器。
+     */
+    /**
+     * showGarbageCollector方法。
+     * @return static void类型返回值
      */
     /**
      * showGarbageCollector方法。
@@ -162,6 +198,10 @@ public class MBeanDemo {
      * showMemoryManager方法。
      * @return static void类型返回值
      */
+    /**
+     * showMemoryManager方法。
+     * @return static void类型返回值
+     */
     public static void showMemoryManager() {
         List<MemoryManagerMXBean> mm = ManagementFactory.getMemoryManagerMXBeans();
         for (MemoryManagerMXBean eachmm : mm) {
@@ -172,6 +212,10 @@ public class MBeanDemo {
 
     /**
      * Java 虚拟机中的内存池
+     */
+    /**
+     * showMemoryPool方法。
+     * @return static void类型返回值
      */
     /**
      * showMemoryPool方法。
@@ -188,6 +232,10 @@ public class MBeanDemo {
 
     /**
      * 访问 MXBean 的方法的三种方法
+     */
+    /**
+     * visitMBean方法。
+     * @return static void类型返回值
      */
     /**
      * visitMBean方法。

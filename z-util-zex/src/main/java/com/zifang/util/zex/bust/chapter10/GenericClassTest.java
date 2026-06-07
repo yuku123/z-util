@@ -27,10 +27,20 @@ class GenericFather<T,R> implements GenericInterface<T,R>{
     public T t;
 
     @Override
+    /**
+     * call方法。
+     *      * @param t T类型参数
+     * @return R类型返回值
+     */
     public R call(T t) {
         return null;
     }
 
+    /**
+     * doCall方法。
+     *      * @param t T类型参数
+     * @return static <T,R> R类型返回值
+     */
     public static <T,R> R doCall(T t){
         return null;
     }
@@ -38,6 +48,11 @@ class GenericFather<T,R> implements GenericInterface<T,R>{
 
 class GenericSon extends GenericFather<String,Integer> implements GenericInterface<String,Integer>{
 
+    /**
+     * doA方法。
+     *      * @param list ListString类型参数
+     * @return static Map<String,Integer>类型返回值
+     */
     public static Map<String,Integer> doA(List<String> list){
         return null;
     }
@@ -45,9 +60,15 @@ class GenericSon extends GenericFather<String,Integer> implements GenericInterfa
 }
 
 
+/**
+ * GenericClassTest类。
+ */
 public class GenericClassTest {
 
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() throws NoSuchMethodException {
         GenericSon genericSon  = new GenericSon();
         Class<?> c1 = genericSon.getClass();
@@ -93,6 +114,9 @@ public class GenericClassTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002(){
         GenericFather<String,Integer> father = new GenericFather<>();
 

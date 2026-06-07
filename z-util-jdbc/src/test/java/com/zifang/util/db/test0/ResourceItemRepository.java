@@ -8,6 +8,9 @@ import com.zifang.util.db.respository.CrudRepository;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * ResourceItemRepository接口。
+ */
 public interface ResourceItemRepository extends CrudRepository<ResourceItem, Long> {
 
     @Select("select * from resource_item where cms_id = :cmsId and shared = :shared")

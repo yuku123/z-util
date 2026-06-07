@@ -9,6 +9,9 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * GMMTest类。
+ */
 public class GMMTest {
 
     private Random random = new Random(42);
@@ -48,6 +51,9 @@ public class GMMTest {
     }
 
     @Test
+    /**
+     * testGMMFit方法。
+     */
     public void testGMMFit() {
         int nSamples = 90;
         NdArray X = generateGMMData(nSamples);
@@ -73,6 +79,9 @@ public class GMMTest {
     }
 
     @Test
+    /**
+     * testGMMProba方法。
+     */
     public void testGMMProba() {
         int nSamples = 60;
         NdArray X = generateGMMData(nSamples);
@@ -98,6 +107,9 @@ public class GMMTest {
     }
 
     @Test
+    /**
+     * testGMMConvergence方法。
+     */
     public void testGMMConvergence() {
         int nSamples = 45;
         NdArray X = generateGMMData(nSamples);

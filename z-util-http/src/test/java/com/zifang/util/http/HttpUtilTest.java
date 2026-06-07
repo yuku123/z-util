@@ -7,9 +7,15 @@ import java.util.Base64;
 
 import static org.junit.Assert.*;
 
+/**
+ * HttpUtilTest类。
+ */
 public class HttpUtilTest {
 
     @Test
+    /**
+     * testToBasicAuthValue方法。
+     */
     public void testToBasicAuthValue() {
         String authValue = HttpUtil.toBasicAuthValue("testuser", "testpass");
         
@@ -23,6 +29,9 @@ public class HttpUtilTest {
     }
 
     @Test
+    /**
+     * testToBasicAuthValueWithSpecialCharacters方法。
+     */
     public void testToBasicAuthValueWithSpecialCharacters() {
         String authValue = HttpUtil.toBasicAuthValue("user@domain", "pass:word");
         
@@ -35,6 +44,9 @@ public class HttpUtilTest {
     }
 
     @Test
+    /**
+     * testToBasicAuthValueWithEmptyPassword方法。
+     */
     public void testToBasicAuthValueWithEmptyPassword() {
         String authValue = HttpUtil.toBasicAuthValue("testuser", "");
         

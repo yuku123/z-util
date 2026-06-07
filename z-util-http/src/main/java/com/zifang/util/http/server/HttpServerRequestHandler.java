@@ -15,12 +15,19 @@ import java.util.Map;
 /**
  * HttpServerRequestHandler类。
  */
+/**
+ * HttpServerRequestHandler类。
+ */
 public class HttpServerRequestHandler {
 
     private final Object target;
     private final Map<String, MethodMapping> methodMappings;
     private final String contextPath;
 
+    /**
+     * HttpServerRequestHandler方法。
+     *      * @param target Object类型参数
+     */
     /**
      * HttpServerRequestHandler方法。
      *      * @param target Object类型参数
@@ -97,6 +104,11 @@ public class HttpServerRequestHandler {
      *
      * @param requestDefinition HTTP 请求定义
      * @return 处理结果
+     */
+    /**
+     * handleRequest方法。
+     *      * @param requestDefinition HttpRequestDefinition类型参数
+     * @return Object类型返回值
      */
     /**
      * handleRequest方法。
@@ -399,6 +411,15 @@ public class HttpServerRequestHandler {
      * @param putMapping PutMapping类型参数
      * @param deleteMapping DeleteMapping类型参数
      */
+    /**
+     * MethodMapping方法。
+     *      * @param method Method类型参数
+     * @param mapping RequestMapping类型参数
+     * @param getMapping GetMapping类型参数
+     * @param postMapping PostMapping类型参数
+     * @param putMapping PutMapping类型参数
+     * @param deleteMapping DeleteMapping类型参数
+     */
         public MethodMapping(Method method, RequestMapping mapping, GetMapping getMapping,
                              PostMapping postMapping, PutMapping putMapping, DeleteMapping deleteMapping) {
             this.method = method;
@@ -413,10 +434,18 @@ public class HttpServerRequestHandler {
      * getMethod方法。
      * @return Method类型返回值
      */
+    /**
+     * getMethod方法。
+     * @return Method类型返回值
+     */
         public Method getMethod() {
             return method;
         }
 
+    /**
+     * getHttpMethod方法。
+     * @return String类型返回值
+     */
     /**
      * getHttpMethod方法。
      * @return String类型返回值
@@ -430,6 +459,10 @@ public class HttpServerRequestHandler {
             return "GET";
         }
 
+    /**
+     * getPath方法。
+     * @return String类型返回值
+     */
     /**
      * getPath方法。
      * @return String类型返回值

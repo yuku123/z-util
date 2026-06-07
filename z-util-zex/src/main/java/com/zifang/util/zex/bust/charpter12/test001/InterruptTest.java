@@ -11,10 +11,16 @@ package com.zifang.util.zex.bust.charpter12.test001;
  */
 import org.junit.Test;
 
+/**
+ * InterruptTest类。
+ */
 public class InterruptTest {
     volatile boolean isStop = false;
 
     @Test
+    /**
+     * test0方法。
+     */
     public void test0() throws InterruptedException {
         new Thread(() -> {
             while (!isStop) {
@@ -29,9 +35,15 @@ public class InterruptTest {
     }
 
     @Test
+    /**
+     * test1方法。
+     */
     public void test1() throws InterruptedException {
         Thread thread = new Thread() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 while (!isInterrupted()) {
                     System.out.println("运行------");
@@ -50,9 +62,15 @@ public class InterruptTest {
     }
 
     @Test
+    /**
+     * test2方法。
+     */
     public void test2() throws InterruptedException {
         Thread thread = new Thread() {
             @Override
+    /**
+     * run方法。
+     */
             public void run() {
                 try {
                     System.out.println("开始睡眠------");

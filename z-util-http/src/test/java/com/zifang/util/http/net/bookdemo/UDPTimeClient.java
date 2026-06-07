@@ -4,11 +4,19 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
 
+/**
+ * UDPTimeClient类。
+ */
 public class UDPTimeClient {
 
     public final static int PORT = 37;
     public final static String DEFAULT_HOST = "time.nist.gov";
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         InetAddress host;

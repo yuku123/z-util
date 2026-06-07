@@ -6,9 +6,15 @@ import java.lang.reflect.Method;
 
 import static org.junit.Assert.*;
 
+/**
+ * SimpleAspectTest类。
+ */
 public class SimpleAspectTest {
 
     @Test
+    /**
+     * testBeforeReturnsTrue方法。
+     */
     public void testBeforeReturnsTrue() {
         SimpleAspect aspect = new SimpleAspect();
         Method method = null;
@@ -19,6 +25,9 @@ public class SimpleAspectTest {
     }
 
     @Test
+    /**
+     * testAfterReturnsTrue方法。
+     */
     public void testAfterReturnsTrue() {
         SimpleAspect aspect = new SimpleAspect();
         Method method = null;
@@ -29,6 +38,9 @@ public class SimpleAspectTest {
     }
 
     @Test
+    /**
+     * testAfterWithReturnValReturnsTrue方法。
+     */
     public void testAfterWithReturnValReturnsTrue() {
         SimpleAspect aspect = new SimpleAspect();
         Method method = null;
@@ -39,6 +51,9 @@ public class SimpleAspectTest {
     }
 
     @Test
+    /**
+     * testAfterExceptionReturnsTrue方法。
+     */
     public void testAfterExceptionReturnsTrue() {
         SimpleAspect aspect = new SimpleAspect();
         Method method = null;
@@ -49,6 +64,9 @@ public class SimpleAspectTest {
     }
 
     @Test
+    /**
+     * testSerialization方法。
+     */
     public void testSerialization() {
         SimpleAspect aspect = new SimpleAspect();
         assertNotNull(aspect);

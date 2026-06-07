@@ -11,5 +11,8 @@ package com.zifang.util.http.base.define;
 /**
  * PatchMapping类。
  */
+/**
+ * PatchMapping类。
+ */
 public class PatchMapping {
 }

@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug20Test类。
+ */
 public class JsonDebug20Test {
 
     @Test
+    /**
+     * testSplitElementsInner方法。
+     */
     public void testSplitElementsInner() throws Exception {
         String input = "(pair (Comma pair)*)";
         java.lang.reflect.Method splitMeth = DynamicParser.class.getDeclaredMethod("splitElements", String.class);
@@ -36,6 +42,9 @@ public class JsonDebug20Test {
     }
 
     @Test
+    /**
+     * testParseSequenceDirectly方法。
+     */
     public void testParseSequenceDirectly() throws Exception {
         String lexerG4 = loadG4("JsonLexer.g4");
         String parserG4 = loadG4("JsonParser.g4");

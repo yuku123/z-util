@@ -4,8 +4,16 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * ThreadPoolExecutorTest类。
+ */
 public class ThreadPoolExecutorTest {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         ThreadPoolExecutor executor = new ThreadPoolExecutor(
@@ -32,11 +40,18 @@ public class ThreadPoolExecutorTest {
 
 class MyTask implements Runnable {
     private int taskNum;
+    /**
+     * MyTask方法。
+     *      * @param num int类型参数
+     */
     public MyTask(int num) {
         this.taskNum = num;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     public void run() {
         System.out.println("正在执行task " + taskNum);
 

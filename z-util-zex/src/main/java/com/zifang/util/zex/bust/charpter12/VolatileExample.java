@@ -9,9 +9,17 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
+/**
+ * VolatileExample类。
+ */
 public class VolatileExample {
     public static boolean stop = false;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
         Thread t1 = new Thread(() -> {
             int i = 0;

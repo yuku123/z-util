@@ -16,9 +16,15 @@ import java.io.StringWriter;
 
 import static org.junit.Assert.*;
 
+/**
+ * CLITest类。
+ */
 public class CLITest {
 
     @Test
+    /**
+     * testBasicShortOption方法。
+     */
     public void testBasicShortOption() throws Exception {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -33,6 +39,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testShortOptionWithValue方法。
+     */
     public void testShortOptionWithValue() throws Exception {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -45,6 +54,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testShortOptionWithAttachedValue方法。
+     */
     public void testShortOptionWithAttachedValue() throws Exception {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -57,6 +69,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testLongOptionWithSpace方法。
+     */
     public void testLongOptionWithSpace() throws Exception {
         Options options = new Options();
         options.addOption(null, "file", true, "Input file");
@@ -69,6 +84,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testLongOptionWithEquals方法。
+     */
     public void testLongOptionWithEquals() throws Exception {
         Options options = new Options();
         options.addOption(null, "file", true, "Input file");
@@ -81,6 +99,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testPositionalArgs方法。
+     */
     public void testPositionalArgs() throws Exception {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -95,6 +116,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testOptionWithPositionalArgs方法。
+     */
     public void testOptionWithPositionalArgs() throws Exception {
         Options options = new Options();
         options.addOption("f", true, "Input file");
@@ -109,6 +133,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testOptionGroup方法。
+     */
     public void testOptionGroup() throws Exception {
         Options options = new Options();
         OptionGroup group = new OptionGroup();
@@ -125,6 +152,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testOptionGroupRejectsBoth方法。
+     */
     public void testOptionGroupRejectsBoth() {
         Options options = new Options();
         OptionGroup group = new OptionGroup();
@@ -144,6 +174,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testRequiredOptionMissing方法。
+     */
     public void testRequiredOptionMissing() {
         Options options = new Options();
         options.addOption(Option.builder().opt("r").description("Required").required(true).build());
@@ -160,6 +193,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testUnrecognizedShortOption方法。
+     */
     public void testUnrecognizedShortOption() {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -176,6 +212,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testUnrecognizedLongOption方法。
+     */
     public void testUnrecognizedLongOption() {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -192,6 +231,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testHelpFormatter方法。
+     */
     public void testHelpFormatter() {
         Options options = new Options();
         options.addOption("h", "help", false, "Display this help message");
@@ -214,6 +256,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testStopAtNonOption方法。
+     */
     public void testStopAtNonOption() throws Exception {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -228,6 +273,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testOptionBuilder方法。
+     */
     public void testOptionBuilder() {
         Option opt = Option.builder()
                 .opt("f")
@@ -246,6 +294,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testNegatedOption方法。
+     */
     public void testNegatedOption() throws Exception {
         Options options = new Options();
         options.addOption("a", false, "Toggle A");
@@ -257,6 +308,9 @@ public class CLITest {
     }
 
     @Test
+    /**
+     * testCombinedShortOptions方法。
+     */
     public void testCombinedShortOptions() throws Exception {
         Options options = new Options();
         options.addOption("v", false, "Verbose");

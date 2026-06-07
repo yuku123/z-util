@@ -15,5 +15,8 @@ package com.zifang.util.distributes;
 /**
  * A类。
  */
+/**
+ * A类。
+ */
 public class A {
 }

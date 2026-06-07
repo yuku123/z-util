@@ -8,5 +8,8 @@ package com.zifang.util.core.pattern.composite.net;
 /**
  * NetWork类。
  */
+/**
+ * NetWork类。
+ */
 public class NetWork {
 }

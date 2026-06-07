@@ -13,6 +13,9 @@ package com.zifang.util.source.generator.diff;
 /**
  * ClassInfoDiffer类。
  */
+/**
+ * ClassInfoDiffer类。
+ */
 public class ClassInfoDiffer {
 
 }

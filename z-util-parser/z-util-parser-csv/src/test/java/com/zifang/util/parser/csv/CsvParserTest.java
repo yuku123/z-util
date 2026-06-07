@@ -14,11 +14,17 @@ import static org.junit.Assert.*;
 /**
  * Test cases for CsvParser, CsvReader, and CsvWriter
  */
+/**
+ * CsvParserTest类。
+ */
 public class CsvParserTest {
 
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Test
+    /**
+     * testBasicCommaSeparated方法。
+     */
     public void testBasicCommaSeparated() {
         CsvParser parser = CsvParser.builder().build();
         List<String[]> result = parser.parse("a,b,c" + LINE_SEPARATOR + "1,2,3");
@@ -29,6 +35,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testQuotedFieldWithCommas方法。
+     */
     public void testQuotedFieldWithCommas() {
         CsvParser parser = CsvParser.builder().build();
         List<String[]> result = parser.parse("\"field,with,commas\",normal");
@@ -38,6 +47,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testEscapedQuotes方法。
+     */
     public void testEscapedQuotes() {
         CsvParser parser = CsvParser.builder().build();
         List<String[]> result = parser.parse("\"field\"\"with\"\"quotes\"");
@@ -47,6 +59,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testCustomDelimiterPipe方法。
+     */
     public void testCustomDelimiterPipe() {
         CsvParser parser = CsvParser.builder().delimiter('|').build();
         List<String[]> result = parser.parse("a|b|c" + LINE_SEPARATOR + "1|2|3");
@@ -57,6 +72,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testCustomDelimiterTab方法。
+     */
     public void testCustomDelimiterTab() {
         CsvParser parser = CsvParser.builder().delimiter('\t').build();
         List<String[]> result = parser.parse("a\tb\tc" + LINE_SEPARATOR + "1\t2\t3");
@@ -67,6 +85,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testSkipEmptyLines方法。
+     */
     public void testSkipEmptyLines() {
         CsvParser parser = CsvParser.builder().skipEmptyLines(true).build();
         List<String[]> result = parser.parse("a,b,c" + LINE_SEPARATOR + LINE_SEPARATOR + "1,2,3");
@@ -77,6 +98,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testTrimFields方法。
+     */
     public void testTrimFields() {
         CsvParser parser = CsvParser.builder().trimFields(true).build();
         List<String[]> result = parser.parse("  a  ,  b  ,  c  ");
@@ -86,6 +110,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testWriterParserRoundTrip方法。
+     */
     public void testWriterParserRoundTrip() throws IOException {
         // Write CSV
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -109,6 +136,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testEmptyFields方法。
+     */
     public void testEmptyFields() {
         CsvParser parser = CsvParser.builder().build();
         List<String[]> result = parser.parse(",,");
@@ -118,6 +148,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testCsvReaderStreaming方法。
+     */
     public void testCsvReaderStreaming() throws IOException {
         String csv = "a,b,c" + LINE_SEPARATOR + "1,2,3" + LINE_SEPARATOR + "4,5,6";
         ByteArrayInputStream bais = new ByteArrayInputStream(csv.getBytes());
@@ -140,6 +173,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testPureNumericFieldsNotQuoted方法。
+     */
     public void testPureNumericFieldsNotQuoted() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CsvWriter writer = CsvWriter.builder()
@@ -154,6 +190,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testFirstLineAsHeader方法。
+     */
     public void testFirstLineAsHeader() {
         CsvParser parser = CsvParser.builder().firstLineAsHeader(true).build();
         CsvParser.ParseResult result = parser.parseWithHeader("name,age,city" + LINE_SEPARATOR + "Alice,30,NYC");
@@ -164,6 +203,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testComplexQuotedField方法。
+     */
     public void testComplexQuotedField() {
         CsvParser parser = CsvParser.builder().build();
         List<String[]> result = parser.parse("\"Hello \"\"World\"\"\",\"value,with,commas\"");
@@ -173,6 +215,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testMixedQuotedAndUnquoted方法。
+     */
     public void testMixedQuotedAndUnquoted() {
         CsvParser parser = CsvParser.builder().build();
         List<String[]> result = parser.parse("normal,\"quoted\",also normal");
@@ -182,6 +227,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testWriterWithSpecialCharacters方法。
+     */
     public void testWriterWithSpecialCharacters() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CsvWriter writer = CsvWriter.builder()
@@ -197,6 +245,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testCsvReaderIteratorRemove方法。
+     */
     public void testCsvReaderIteratorRemove() throws IOException {
         String csv = "a,b" + LINE_SEPARATOR + "1,2";
         ByteArrayInputStream bais = new ByteArrayInputStream(csv.getBytes());
@@ -218,6 +269,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testEmptyFile方法。
+     */
     public void testEmptyFile() {
         CsvParser parser = CsvParser.builder().build();
         List<String[]> result = parser.parse("");
@@ -226,6 +280,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testSingleField方法。
+     */
     public void testSingleField() {
         CsvParser parser = CsvParser.builder().build();
         List<String[]> result = parser.parse("onlyonefield");
@@ -235,6 +292,9 @@ public class CsvParserTest {
     }
 
     @Test
+    /**
+     * testWriterMultipleRows方法。
+     */
     public void testWriterMultipleRows() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CsvWriter writer = CsvWriter.builder()
@@ -261,6 +321,9 @@ public class CsvParserTest {
      * Test 1: CRLF line ending (Windows) - \r\n
      */
     @Test
+    /**
+     * testCRLFLineEnding方法。
+     */
     public void testCRLFLineEnding() {
         CsvParser parser = CsvParser.builder().trimFields(true).build();
         // Use raw string with \r\n - readLine() strips \n but leaves \r
@@ -278,6 +341,9 @@ public class CsvParserTest {
      * Test 2: LF line ending (old Mac) - \n only
      */
     @Test
+    /**
+     * testLFLineEnding方法。
+     */
     public void testLFLineEnding() {
         CsvParser parser = CsvParser.builder().build();
         String csvWithLF = "a,b,c\n1,2,3\n4,5,6";
@@ -293,6 +359,9 @@ public class CsvParserTest {
      * Test 3: UTF-8 BOM header - files with BOM marker
      */
     @Test
+    /**
+     * testBOMHeader方法。
+     */
     public void testBOMHeader() {
         CsvParser parser = CsvParser.builder().build();
         // UTF-8 BOM (EF BB BF) + content
@@ -309,6 +378,9 @@ public class CsvParserTest {
      * Test 4: UTF-8 BOM write and read round-trip
      */
     @Test
+    /**
+     * testBOMWriteAndRead方法。
+     */
     public void testBOMWriteAndRead() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CsvWriter writer = CsvWriter.builder().build(baos);
@@ -334,6 +406,9 @@ public class CsvParserTest {
      * Test 5: Streaming large file simulation - using Iterator to process line by line
      */
     @Test
+    /**
+     * testStreamingLargeFile方法。
+     */
     public void testStreamingLargeFile() throws IOException {
         // Simulate large CSV with 10000 lines
         StringBuilder sb = new StringBuilder();
@@ -362,6 +437,9 @@ public class CsvParserTest {
      * Test 6: Comment lines (starting with #)
      */
     @Test
+    /**
+     * testCommentLines方法。
+     */
     public void testCommentLines() {
         CsvParser parser = CsvParser.builder().build();
         // Current implementation does not skip comments by default
@@ -380,6 +458,9 @@ public class CsvParserTest {
      * Test 7: Quoted field containing newline (RFC 4180 compliant)
      */
     @Test
+    /**
+     * testQuotedFieldWithNewline方法。
+     */
     public void testQuotedFieldWithNewline() {
         CsvParser parser = CsvParser.builder().build();
         // RFC 4180: fields containing newlines should be quoted
@@ -397,6 +478,9 @@ public class CsvParserTest {
      * Test 8: Consecutive delimiters (empty fields)
      */
     @Test
+    /**
+     * testConsecutiveDelimiters方法。
+     */
     public void testConsecutiveDelimiters() {
         CsvParser parser = CsvParser.builder().build();
         String csvWithEmptyFields = "a,,b,,,c";
@@ -410,6 +494,9 @@ public class CsvParserTest {
      * Test 9: First line is NOT header (header=false)
      */
     @Test
+    /**
+     * testFirstLineNotAsHeader方法。
+     */
     public void testFirstLineNotAsHeader() {
         CsvParser parser = CsvParser.builder().firstLineAsHeader(false).build();
         CsvParser.ParseResult result = parser.parseWithHeader("data1,data2,data3\nvalue1,value2,value3");
@@ -425,6 +512,9 @@ public class CsvParserTest {
      * Test 10: Skip consecutive empty lines
      */
     @Test
+    /**
+     * testSkipMultipleEmptyLines方法。
+     */
     public void testSkipMultipleEmptyLines() {
         CsvParser parser = CsvParser.builder().skipEmptyLines(true).build();
         String csv = "a,b,c" + LINE_SEPARATOR + LINE_SEPARATOR + LINE_SEPARATOR + "1,2,3";
@@ -439,6 +529,9 @@ public class CsvParserTest {
      * Test 11: Write single row only
      */
     @Test
+    /**
+     * testWriteSingleRow方法。
+     */
     public void testWriteSingleRow() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CsvWriter writer = CsvWriter.builder().build(baos);
@@ -453,6 +546,9 @@ public class CsvParserTest {
      * Test 12: Different quote character (single quote)
      */
     @Test
+    /**
+     * testSingleQuoteCharacter方法。
+     */
     public void testSingleQuoteCharacter() {
         CsvParser parser = CsvParser.builder().build();
         // Current implementation only supports double quote as quote character
@@ -469,6 +565,9 @@ public class CsvParserTest {
      * Test 13: Escape mode vs quote mode
      */
     @Test
+    /**
+     * testEscapeVsQuoteMode方法。
+     */
     public void testEscapeVsQuoteMode() {
         CsvParser parser = CsvParser.builder().build();
         // Current implementation uses doubled quotes ("") for escaping
@@ -487,6 +586,9 @@ public class CsvParserTest {
      * Test 14: Inconsistent column count (different fields per row)
      */
     @Test
+    /**
+     * testInconsistentColumnCount方法。
+     */
     public void testInconsistentColumnCount() {
         CsvParser parser = CsvParser.builder().build();
         String csv = "a,b,c\n1,2\nx\np,q,r,s,t";
@@ -503,6 +605,9 @@ public class CsvParserTest {
      * Test 15: Unicode content (Chinese/Japanese characters)
      */
     @Test
+    /**
+     * testUnicodeContent方法。
+     */
     public void testUnicodeContent() {
         CsvParser parser = CsvParser.builder().build();
         String csv = "姓名,年齢,都市\n张三,30,北京\n田中,25,東京\n李四,35,上海";
@@ -519,6 +624,9 @@ public class CsvParserTest {
      * Test Unicode content with Writer
      */
     @Test
+    /**
+     * testUnicodeContentWithWriter方法。
+     */
     public void testUnicodeContentWithWriter() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CsvWriter writer = CsvWriter.builder().build(baos);
@@ -541,6 +649,9 @@ public class CsvParserTest {
      * Test streaming Unicode content
      */
     @Test
+    /**
+     * testStreamingUnicodeContent方法。
+     */
     public void testStreamingUnicodeContent() throws IOException {
         String csv = "名前,年齢\n佐藤,35\n鈴木,28\n高橋,42";
         ByteArrayInputStream bais = new ByteArrayInputStream(csv.getBytes("UTF-8"));

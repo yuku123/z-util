@@ -8,11 +8,17 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 
+/**
+ * StreamsTest类。
+ */
 public class StreamsTest {
 
     // --- streamOf(Iterator) ---
 
     @Test
+    /**
+     * testStreamOfIterator_Normal方法。
+     */
     public void testStreamOfIterator_Normal() {
         List<String> list = Arrays.asList("a", "b", "c");
         Iterator<String> iterator = list.iterator();
@@ -23,6 +29,9 @@ public class StreamsTest {
     }
 
     @Test
+    /**
+     * testStreamOfIterator_SingleElement方法。
+     */
     public void testStreamOfIterator_SingleElement() {
         List<String> list = new ArrayList<>();
         list.add("x");
@@ -33,6 +42,9 @@ public class StreamsTest {
     }
 
     @Test
+    /**
+     * testStreamOfIterator_Empty方法。
+     */
     public void testStreamOfIterator_Empty() {
         List<String> list = new ArrayList<>();
         Iterator<String> iterator = list.iterator();
@@ -44,6 +56,9 @@ public class StreamsTest {
     // --- streamOf(Iterable) ---
 
     @Test
+    /**
+     * testStreamOfIterable_Normal方法。
+     */
     public void testStreamOfIterable_Normal() {
         List<String> list = Arrays.asList("a", "b", "c");
         Stream<String> stream = Streams.streamOf((Iterable<String>) list);
@@ -52,6 +67,9 @@ public class StreamsTest {
     }
 
     @Test
+    /**
+     * testStreamOfIterable_SingleElement方法。
+     */
     public void testStreamOfIterable_SingleElement() {
         List<String> list = new ArrayList<>();
         list.add("x");
@@ -61,6 +79,9 @@ public class StreamsTest {
     }
 
     @Test
+    /**
+     * testStreamOfIterable_Empty方法。
+     */
     public void testStreamOfIterable_Empty() {
         List<String> list = new ArrayList<>();
         Stream<String> stream = Streams.streamOf((Iterable<String>) list);
@@ -69,6 +90,9 @@ public class StreamsTest {
     }
 
     @Test
+    /**
+     * testStreamOfIterable_Set方法。
+     */
     public void testStreamOfIterable_Set() {
         Set<String> set = new HashSet<>(Arrays.asList("a", "b"));
         Stream<String> stream = Streams.streamOf((Iterable<String>) set);
@@ -79,6 +103,9 @@ public class StreamsTest {
     // --- parallelStreamOf(Iterator) ---
 
     @Test
+    /**
+     * testParallelStreamOfIterator_Normal方法。
+     */
     public void testParallelStreamOfIterator_Normal() {
         List<String> list = Arrays.asList("a", "b", "c");
         Iterator<String> iterator = list.iterator();
@@ -89,6 +116,9 @@ public class StreamsTest {
     }
 
     @Test
+    /**
+     * testParallelStreamOfIterator_Empty方法。
+     */
     public void testParallelStreamOfIterator_Empty() {
         List<String> list = new ArrayList<>();
         Iterator<String> iterator = list.iterator();
@@ -101,6 +131,9 @@ public class StreamsTest {
     // --- parallelStreamOf(Iterable) ---
 
     @Test
+    /**
+     * testParallelStreamOfIterable_Normal方法。
+     */
     public void testParallelStreamOfIterable_Normal() {
         List<String> list = Arrays.asList("a", "b", "c");
         Stream<String> stream = Streams.parallelStreamOf((Iterable<String>) list);
@@ -110,6 +143,9 @@ public class StreamsTest {
     }
 
     @Test
+    /**
+     * testParallelStreamOfIterable_SingleElement方法。
+     */
     public void testParallelStreamOfIterable_SingleElement() {
         List<String> list = new ArrayList<>();
         list.add("x");
@@ -120,6 +156,9 @@ public class StreamsTest {
     }
 
     @Test
+    /**
+     * testParallelStreamOfIterable_Empty方法。
+     */
     public void testParallelStreamOfIterable_Empty() {
         List<String> list = new ArrayList<>();
         Stream<String> stream = Streams.parallelStreamOf((Iterable<String>) list);

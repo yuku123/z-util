@@ -12,6 +12,12 @@ MODULES = [
     'z-util-crawler', 'z-util-office', 'z-util-source', 'z-util-visualization',
     'z-util-cache', 'z-util-cli', 'z-util-validation', 'z-util-distribute',
     'z-util-ch', 'z-util-dsl',
+    'z-util-parser/z-util-parser-json', 'z-util-parser/z-util-parser-yaml',
+    'z-util-parser/z-util-parser-properties', 'z-util-parser/z-util-parser-xml',
+    'z-util-parser/z-util-parser-csv', 'z-util-parser/z-util-parser-ini',
+    'z-util-parser/z-util-parser-toml', 'z-util-parser/z-util-parser-proto',
+    'z-util-parser/z-util-parser-yaml', 'z-util-parser',
+    'z-util-expr', 'z-util-zex',
 ]
 
 
@@ -252,7 +258,6 @@ def main():
         mc, mm, fc = 0, 0, 0
         
         for root, dirs, files in os.walk(js):
-            if '/test/' in root: continue
             for fn in files:
                 if not fn.endswith('.java') or fn in ['package-info.java', 'module-info.java']: continue
                 fpath = os.path.join(root, fn)
@@ -261,6 +266,20 @@ def main():
                     fc += 1
                     mc += c
                     mm += m
+        
+        # 同时处理 test 目录
+        ts = os.path.join(mp, 'src', 'test', 'java')
+        if os.path.exists(ts):
+            print(f"  处理 test 目录: {ts}")
+            for root, dirs, files in os.walk(ts):
+                for fn in files:
+                    if not fn.endswith('.java') or fn in ['package-info.java', 'module-info.java']: continue
+                    fpath = os.path.join(root, fn)
+                    c, m = process_file(fpath)
+                    if c or m:
+                        fc += 1
+                        mc += c
+                        mm += m
         
         print(f"  文件: {fc}, 类Javadoc: {mc}, 方法Javadoc: {mm}")
         tc += mc

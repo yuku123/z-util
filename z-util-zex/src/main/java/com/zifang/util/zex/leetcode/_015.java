@@ -13,7 +13,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * _015类。
+ */
 public class _015 {
+    /**
+     * threeSum方法。
+     *      * @param nums int[]类型参数
+     * @return List<List<Integer>>类型返回值
+     */
     public List<List<Integer>> threeSum(int[] nums) {
 
         List<List<Integer>> r = new ArrayList<>();
@@ -64,6 +72,11 @@ public class _015 {
         return r;
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _015().threeSum(new int[]{-1,0,1,2,-1,-4});
     }

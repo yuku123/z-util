@@ -11,10 +11,18 @@ package com.zifang.util.zex.bust.chapter8;
  */
 import java.lang.reflect.Array;
 
+/**
+ * GenericArray类。
+ */
 public class GenericArray<T> {
     private T[] t;
 
     @SuppressWarnings({"unchecked", "hiding"})
+    /**
+     * init方法。
+     *      * @param clazz ClassT类型参数
+     * @param length int类型参数
+     */
     public void init(Class<T> clazz, int length) {
         t = (T[]) Array.newInstance(clazz, length);
     }

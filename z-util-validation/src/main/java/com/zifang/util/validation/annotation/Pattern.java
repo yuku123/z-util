@@ -11,6 +11,9 @@ import java.lang.annotation.*;
 /**
  * Pattern注解。
  */
+/**
+ * Pattern注解。
+ */
 public @interface Pattern {
     String regex();
     String message() default "格式不匹配";

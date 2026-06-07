@@ -15,6 +15,9 @@ import java.util.concurrent.locks.StampedLock;
  * @author zifang
  * @version 1.0
  */
+/**
+ * StampedLockTest类。
+ */
 public class StampedLockTest {
     final static HashMap<String, String> data = new HashMap<>();
     final static StampedLock lock = new StampedLock();
@@ -26,6 +29,12 @@ public class StampedLockTest {
      * @param key   键
      * @param value 值
      * @return 旧值
+     */
+    /**
+     * write方法。
+     *      * @param key String类型参数
+     * @param value String类型参数
+     * @return static Object类型返回值
      */
     public static Object write(String key, String value) {
         long stamp = lock.writeLock();
@@ -49,6 +58,11 @@ public class StampedLockTest {
      * @param key 键
      * @return 值
      */
+    /**
+     * pessimisticRead方法。
+     *      * @param key String类型参数
+     * @return static Object类型返回值
+     */
     public static Object pessimisticRead(String key) {
         System.out.println(new Date() + ":  进入过写模式，只能悲观读");
         long stamp = lock.readLock();
@@ -69,6 +83,11 @@ public class StampedLockTest {
      *
      * @param key 键
      * @return 值
+     */
+    /**
+     * optimisticRead方法。
+     *      * @param key String类型参数
+     * @return static Object类型返回值
      */
     public static Object optimisticRead(String key) {
         String value = null;
@@ -92,6 +111,11 @@ public class StampedLockTest {
         }
     }
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) throws InterruptedException {
         data.put("initKey", "initValue");
 

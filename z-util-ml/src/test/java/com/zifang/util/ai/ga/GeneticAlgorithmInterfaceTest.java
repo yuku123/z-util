@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * 遗传算法接口测试
  */
+/**
+ * GeneticAlgorithmInterfaceTest类。
+ */
 public class GeneticAlgorithmInterfaceTest {
 
     @Test

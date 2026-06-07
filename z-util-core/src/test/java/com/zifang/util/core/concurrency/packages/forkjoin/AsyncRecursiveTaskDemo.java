@@ -7,6 +7,9 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * AsyncRecursiveTaskDemo类。
+ */
 public class AsyncRecursiveTaskDemo {
 
     // 1．创建名为FolderProcessor的类，并继承RecursiveTask类，RecursiveTask类的泛型参数为List<String>类型。
@@ -19,6 +22,11 @@ public class AsyncRecursiveTaskDemo {
         private String extension;
 
         // 5．实现类的构造器，用来初始化这些属性。
+    /**
+     * FolderProcessor方法。
+     *      * @param path String类型参数
+     * @param extension String类型参数
+     */
         public FolderProcessor(String path, String extension) {
             this.path = path;
             this.extension = extension;
@@ -26,6 +34,10 @@ public class AsyncRecursiveTaskDemo {
 
         // 6．实现compute()方法。既然指定了RecursiveTask类泛型参数为List<String>类型，那么，这个方法必须返回一个同样类型的对象。
         @Override
+    /**
+     * compute方法。
+     * @return List<String>类型返回值
+     */
         protected List<String> compute() {
             // 7．声明一个名为list的String对象列表，用来存储文件夹中文件的名称。
             List<String> list = new ArrayList<>();
@@ -74,6 +86,11 @@ public class AsyncRecursiveTaskDemo {
     }
 
     // 17．实现范例的主类，创建Main主类，并实现main()方法。
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         // 18．通过默认的构造器创建ForkJoinPool线程池。
         ForkJoinPool pool = new ForkJoinPool();

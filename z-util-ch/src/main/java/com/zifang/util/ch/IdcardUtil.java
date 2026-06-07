@@ -16,6 +16,9 @@ import java.util.regex.Pattern;
 /**
  * IdcardUtil类。
  */
+/**
+ * IdcardUtil类。
+ */
 public class IdcardUtil {
 
     /**
@@ -42,6 +45,11 @@ public class IdcardUtil {
      *
      * @param idcard 待验证的身份证号码
      * @return 如果身份证合法返回true，否则返回false
+     */
+    /**
+     * isValidatedAllIdcard方法。
+     *      * @param idcard String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isValidatedAllIdcard方法。
@@ -76,6 +84,11 @@ public class IdcardUtil {
      *
      * @param idcard 待验证的18位身份证号码
      * @return 如果是合法的身份证返回true，否则返回false
+     */
+    /**
+     * isValidate18Idcard方法。
+     *      * @param idcard String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * isValidate18Idcard方法。
@@ -125,6 +138,11 @@ public class IdcardUtil {
      *
      * @param idcard 待验证的身份证号码
      * @return 如果格式符合18位身份证标准返回true，否则返回false
+     */
+    /**
+     * is18Idcard方法。
+     *      * @param idcard String类型参数
+     * @return static boolean类型返回值
      */
     /**
      * is18Idcard方法。
@@ -240,6 +258,11 @@ public class IdcardUtil {
      *
      * @param idno 身份证号码（15位或18位）
      * @return 性别标识，1表示男性，0表示女性
+     */
+    /**
+     * getUserSex方法。
+     *      * @param idno String类型参数
+     * @return static int类型返回值
      */
     /**
      * getUserSex方法。

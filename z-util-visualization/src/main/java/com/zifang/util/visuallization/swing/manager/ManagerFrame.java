@@ -21,6 +21,9 @@ import java.util.Enumeration;
 /**
  * ManagerFrame类。
  */
+/**
+ * ManagerFrame类。
+ */
 public class ManagerFrame extends JFrame {
 
     private static final int DISCONTIGUOUS_TREE_SELECTION = 4;//单选的常量值为1，连选的常量值为2，多选的常量值为4
@@ -48,6 +51,10 @@ public class ManagerFrame extends JFrame {
         treePointed.addTreeSelectionListener(new TreeSelectionListener() {
 
             @Override
+    /**
+     * valueChanged方法。
+     *      * @param e TreeSelectionEvent类型参数
+     */
             public void valueChanged(TreeSelectionEvent e) {
 
                 if (!treePointed.isSelectionEmpty()) {//判断节点是否被选中，被选中为0，没被选中为1
@@ -149,6 +156,11 @@ public class ManagerFrame extends JFrame {
     /**
      * 启动管理界面
      * @param args 命令行参数
+     */
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
      */
     public static void main(String[] args) {
         ManagerFrame managerFrame = new ManagerFrame();

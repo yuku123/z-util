@@ -9,7 +9,15 @@ package com.zifang.util.zex.bust.chapter4.enumCase;
  * @author zifang
  * @version 1.0
  */
+/**
+ * HungryLevelEnumTest类。
+ */
 public class HungryLevelEnumTest {
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         Enum.valueOf(HungryLevelEnum.class, "HUNGRY_LEVEL_1");
         System.out.println(HungryLevelEnum.HUNGRY_LEVEL_1);

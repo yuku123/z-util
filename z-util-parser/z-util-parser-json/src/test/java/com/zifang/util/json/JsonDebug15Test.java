@@ -4,9 +4,15 @@ import com.zifang.util.dsl.g4.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug15Test类。
+ */
 public class JsonDebug15Test {
 
     @Test
+    /**
+     * testBasicParse方法。
+     */
     public void testBasicParse() throws Exception {
         String g4 = loadG4("JsonParser.g4");
         System.out.println("G4 length: " + g4.length());

@@ -21,6 +21,9 @@ import java.util.Map;
  *
  * @author zifang
  */
+/**
+ * PropertiesParser类。
+ */
 public class PropertiesParser extends java.util.Properties {
 
     private final Map<String, String> comments = new LinkedHashMap<>();
@@ -33,6 +36,11 @@ public class PropertiesParser extends java.util.Properties {
      * @return 解析后的 PropertiesModel
      * @throws PropertiesException 如果解析失败
      */
+    /**
+     * parse方法。
+     *      * @param content String类型参数
+     * @return PropertiesModel类型返回值
+     */
     public PropertiesModel parse(String content) {
         return parse(new CharSequenceReader(content));
     }
@@ -43,6 +51,11 @@ public class PropertiesParser extends java.util.Properties {
      * @param file File 对象
      * @return 解析后的 PropertiesModel
      * @throws PropertiesException 如果解析失败或文件不存在
+     */
+    /**
+     * parse方法。
+     *      * @param file java.io.File类型参数
+     * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(java.io.File file) {
         try {
@@ -62,6 +75,12 @@ public class PropertiesParser extends java.util.Properties {
      * @return 解析后的 PropertiesModel
      * @throws PropertiesException 如果解析失败或文件不存在
      */
+    /**
+     * parse方法。
+     *      * @param file java.io.File类型参数
+     * @param charset String类型参数
+     * @return PropertiesModel类型返回值
+     */
     public PropertiesModel parse(java.io.File file, String charset) {
         try {
             return parse(new java.io.InputStreamReader(new java.io.FileInputStream(file), charset));
@@ -79,6 +98,11 @@ public class PropertiesParser extends java.util.Properties {
      * @return 解析后的 PropertiesModel
      * @throws PropertiesException 如果解析失败
      */
+    /**
+     * parse方法。
+     *      * @param in java.io.InputStream类型参数
+     * @return PropertiesModel类型返回值
+     */
     public PropertiesModel parse(java.io.InputStream in) {
         return parse(new java.io.InputStreamReader(in));
     }
@@ -90,6 +114,12 @@ public class PropertiesParser extends java.util.Properties {
      * @param charset 字符编码
      * @return 解析后的 PropertiesModel
      * @throws PropertiesException 如果解析失败
+     */
+    /**
+     * parse方法。
+     *      * @param in java.io.InputStream类型参数
+     * @param charset String类型参数
+     * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(java.io.InputStream in, String charset) {
         try {
@@ -105,6 +135,11 @@ public class PropertiesParser extends java.util.Properties {
      * @param reader Reader 对象
      * @return 解析后的 PropertiesModel
      * @throws PropertiesException 如果解析失败
+     */
+    /**
+     * parse方法。
+     *      * @param reader Reader类型参数
+     * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(Reader reader) {
         PropertiesModel model = new PropertiesModel();
@@ -338,6 +373,11 @@ public class PropertiesParser extends java.util.Properties {
      * @param model 数据模型
      * @return Properties 格式字符串
      */
+    /**
+     * store方法。
+     *      * @param model PropertiesModel类型参数
+     * @return String类型返回值
+     */
     public String store(PropertiesModel model) {
         StringBuilder sb = new StringBuilder();
 
@@ -367,6 +407,11 @@ public class PropertiesParser extends java.util.Properties {
      * @param model  数据模型
      * @param writer Writer 对象
      * @throws PropertiesException 如果写入失败
+     */
+    /**
+     * storeToWriter方法。
+     *      * @param model PropertiesModel类型参数
+     * @param writer java.io.Writer类型参数
      */
     public void storeToWriter(PropertiesModel model, java.io.Writer writer) {
         try {
@@ -451,6 +496,13 @@ public class PropertiesParser extends java.util.Properties {
         }
 
         @Override
+    /**
+     * read方法。
+     *      * @param cbuf char[]类型参数
+     * @param off int类型参数
+     * @param len int类型参数
+     * @return int类型返回值
+     */
         public int read(char[] cbuf, int off, int len) throws IOException {
             if (position >= charSequence.length()) {
                 return -1;
@@ -466,6 +518,9 @@ public class PropertiesParser extends java.util.Properties {
         }
 
         @Override
+    /**
+     * close方法。
+     */
         public void close() throws IOException {
         }
     }

@@ -4,15 +4,24 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * HttpRequestHeaderTest类。
+ */
 public class HttpRequestHeaderTest {
 
     @Test
+    /**
+     * testDefaultConstructor方法。
+     */
     public void testDefaultConstructor() {
         HttpRequestHeader header = new HttpRequestHeader();
         assertTrue(header.isEmpty());
     }
 
     @Test
+    /**
+     * testPutAndGet方法。
+     */
     public void testPutAndGet() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Content-Type", "application/json");
@@ -21,6 +30,9 @@ public class HttpRequestHeaderTest {
     }
 
     @Test
+    /**
+     * testContainsKey方法。
+     */
     public void testContainsKey() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
@@ -30,6 +42,9 @@ public class HttpRequestHeaderTest {
     }
 
     @Test
+    /**
+     * testRemove方法。
+     */
     public void testRemove() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
@@ -39,6 +54,9 @@ public class HttpRequestHeaderTest {
     }
 
     @Test
+    /**
+     * testClear方法。
+     */
     public void testClear() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
@@ -49,6 +67,9 @@ public class HttpRequestHeaderTest {
     }
 
     @Test
+    /**
+     * testSize方法。
+     */
     public void testSize() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
@@ -58,6 +79,9 @@ public class HttpRequestHeaderTest {
     }
 
     @Test
+    /**
+     * testKeySet方法。
+     */
     public void testKeySet() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
@@ -69,6 +93,9 @@ public class HttpRequestHeaderTest {
     }
 
     @Test
+    /**
+     * testValues方法。
+     */
     public void testValues() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
@@ -80,6 +107,9 @@ public class HttpRequestHeaderTest {
     }
 
     @Test
+    /**
+     * testEntrySet方法。
+     */
     public void testEntrySet() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
@@ -88,6 +118,9 @@ public class HttpRequestHeaderTest {
     }
 
     @Test
+    /**
+     * testPutAll方法。
+     */
     public void testPutAll() {
         HttpRequestHeader header1 = new HttpRequestHeader();
         header1.put("Accept", "text/html");

@@ -8,16 +8,29 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * 使用读写锁实现缓存的例子
  */
+/**
+ * CacheDemo类。
+ */
 public class CacheDemo {
 
     private Map<String, Object> cache = new HashMap<String, Object>();
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
     }
 
     private ReadWriteLock rwl = new ReentrantReadWriteLock();
 
+    /**
+     * getData方法。
+     *      * @param key String类型参数
+     * @return synchronized Object类型返回值
+     */
     public synchronized Object getData(String key) {
         rwl.readLock().lock();
         Object value = null;

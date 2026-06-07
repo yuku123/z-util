@@ -25,5 +25,8 @@ package com.zifang.util.db.generater;
 /**
  * JpaStratege类。
  */
+/**
+ * JpaStratege类。
+ */
 public class JpaStratege {
 }

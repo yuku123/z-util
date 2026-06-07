@@ -23,6 +23,9 @@ import java.lang.annotation.*;
 /**
  * RestController注解。
  */
+/**
+ * RestController注解。
+ */
 public @interface RestController {
 
     /**

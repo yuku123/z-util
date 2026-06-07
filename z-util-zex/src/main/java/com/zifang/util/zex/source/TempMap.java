@@ -12,6 +12,9 @@ import java.util.Set;
  * @author zifang
  * @version 1.0
  */
+/**
+ * TempMap类。
+ */
 public class TempMap<K, V> extends AbstractMap<K, V> {
 
     /**
@@ -20,6 +23,10 @@ public class TempMap<K, V> extends AbstractMap<K, V> {
      * @return 条目集合
      */
     @Override
+    /**
+     * entrySet方法。
+     * @return Set<Entry<K, V>>类型返回值
+     */
     public Set<Entry<K, V>> entrySet() {
         return null;
     }
@@ -32,6 +39,12 @@ public class TempMap<K, V> extends AbstractMap<K, V> {
      * @return 旧值
      */
     @Override
+    /**
+     * put方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
+     * @return V类型返回值
+     */
     public V put(K key, V value) {
         return super.put(key, value);
     }

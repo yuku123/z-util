@@ -14,8 +14,14 @@ import org.junit.Test;
 import java.io.*;
 import java.util.Arrays;
 
+/**
+ * IOTest类。
+ */
 public class IOTest {
     @Test
+    /**
+     * test001方法。
+     */
     public void test001() {
         FileInputStream fis = null;
         try {
@@ -41,6 +47,9 @@ public class IOTest {
     }
 
     @Test
+    /**
+     * test002方法。
+     */
     public void test002(){
         String str = "abcdef";
 
@@ -55,6 +64,12 @@ public class IOTest {
         // 从键盘读，输出到显示器
         transform(System.in, System.out);
     }
+    /**
+     * transform方法。
+     *      * @param in InputStream类型参数
+     * @param out OutputStream类型参数
+     * @return static void类型返回值
+     */
     public static void transform(InputStream in, OutputStream out) {
         int ch = 0;
 
@@ -69,6 +84,9 @@ public class IOTest {
     }
 
     @Test
+    /**
+     * test0003方法。
+     */
     public void test0003() throws IOException {
         /*定义管道字节流*/
         PipedInputStream  inputStream = new PipedInputStream();
@@ -95,6 +113,11 @@ public class IOTest {
     }
 
 
+    /**
+     * writeData方法。
+     *      * @param out PipedOutputStream类型参数
+     * @return static void类型返回值
+     */
     public static void writeData(PipedOutputStream out) throws IOException {
         /*把0-100 之间的数写入管道中*/
         for (int i = 0; i < 100; i++) {
@@ -105,6 +128,11 @@ public class IOTest {
     }
 
 
+    /**
+     * readData方法。
+     *      * @param input PipedInputStream类型参数
+     * @return static void类型返回值
+     */
     public static void readData(PipedInputStream input) throws IOException {
         /*从管道中读取0-100*/
         byte[] bytes = new byte[1024];
@@ -118,6 +146,9 @@ public class IOTest {
     }
 
     @Test
+    /**
+     * test004方法。
+     */
     public void test004(){
         //定义流
         SequenceInputStream sis = null;
@@ -161,6 +192,9 @@ public class IOTest {
 
 
     @Test
+    /**
+     * test005_1方法。
+     */
     public void test005_1(){
 
         //定义对象流
@@ -190,6 +224,9 @@ public class IOTest {
     }
 
     @Test
+    /**
+     * test005_2方法。
+     */
     public void test005_2(){
         //定义对象流
         ObjectInputStream ois = null;

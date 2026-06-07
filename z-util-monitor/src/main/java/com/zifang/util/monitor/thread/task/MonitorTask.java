@@ -17,6 +17,9 @@ import java.util.Collection;
 /**
  * MonitorTask类。
  */
+/**
+ * MonitorTask类。
+ */
 public class MonitorTask implements Runnable {
 
     /**
@@ -38,11 +41,18 @@ public class MonitorTask implements Runnable {
      * MonitorTask方法。
      *      * @param monitorSet CollectionMonitorable类型参数
      */
+    /**
+     * MonitorTask方法。
+     *      * @param monitorSet CollectionMonitorable类型参数
+     */
     public MonitorTask(Collection<Monitorable> monitorSet) {
         this.monitorSet = monitorSet;
     }
 
     @Override
+    /**
+     * run方法。
+     */
     /**
      * run方法。
      */

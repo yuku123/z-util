@@ -8,6 +8,9 @@ import java.util.List;
 /**
  * Const类。
  */
+/**
+ * Const类。
+ */
 public class Const {
 
     interface EnumCollectors<T> {
@@ -50,6 +53,11 @@ public class Const {
      *      * @param " ";类型参数
      * @return static String LEFT_BRACKET =类型返回值
      */
+    /**
+     * "方法。
+     *      * @param " ";类型参数
+     * @return static String LEFT_BRACKET =类型返回值
+     */
         public static String LEFT_BRACKET = "(";
         public static String RIGHT_BRACKET = ")";
     }
@@ -73,11 +81,20 @@ public class Const {
      *      * @param system String类型参数
      * @param lowerSystem String类型参数
      */
+    /**
+     * OperateSystem方法。
+     *      * @param system String类型参数
+     * @param lowerSystem String类型参数
+     */
         public OperateSystem(String system, String lowerSystem) {
             this.system = system;
             this.lowerSystem = lowerSystem;
         }
 
+    /**
+     * getSystem方法。
+     * @return String类型返回值
+     */
     /**
      * getSystem方法。
      * @return String类型返回值
@@ -90,10 +107,19 @@ public class Const {
      * getLowerSystem方法。
      * @return String类型返回值
      */
+    /**
+     * getLowerSystem方法。
+     * @return String类型返回值
+     */
         public String getLowerSystem() {
             return lowerSystem;
         }
 
+    /**
+     * getOperateSystem方法。
+     *      * @param info String类型参数
+     * @return OperateSystem类型返回值
+     */
     /**
      * getOperateSystem方法。
      *      * @param info String类型参数
@@ -111,11 +137,20 @@ public class Const {
      * getList方法。
      * @return List<OperateSystem>类型返回值
      */
+    /**
+     * getList方法。
+     * @return List<OperateSystem>类型返回值
+     */
         public List<OperateSystem> getList() {
             return null;
         }
 
         @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -134,6 +169,10 @@ public class Const {
      * hashCode方法。
      * @return int类型返回值
      */
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
         public int hashCode() {
             return java.util.Objects.hash(system, lowerSystem);
         }
@@ -143,11 +182,18 @@ public class Const {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
         public String toString() {
             return "OperateSystem{system=" + system + ", lowerSystem=" + lowerSystem + "}";
         }
     }
 
+/**
+ * TimeFormat类。
+ */
 /**
  * TimeFormat类。
  */
@@ -172,10 +218,18 @@ public class Const {
      * getChineseCharacterLength方法。
      * @return int类型返回值
      */
+    /**
+     * getChineseCharacterLength方法。
+     * @return int类型返回值
+     */
         public int getChineseCharacterLength() {
             return CHINESE_CHARACTER_LENGTH;
         }
 
+    /**
+     * getChineseCharacterStart方法。
+     * @return int类型返回值
+     */
     /**
      * getChineseCharacterStart方法。
      * @return int类型返回值
@@ -185,6 +239,10 @@ public class Const {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -200,6 +258,11 @@ public class Const {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -209,6 +272,10 @@ public class Const {
         }
 
         @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值
@@ -231,10 +298,17 @@ public class Const {
     /**
      * Charset方法。
      */
+    /**
+     * Charset方法。
+     */
         public Charset() {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -251,6 +325,11 @@ public class Const {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -259,6 +338,10 @@ public class Const {
         }
 
         @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值
@@ -327,10 +410,17 @@ public class Const {
     /**
      * JvmProperties方法。
      */
+    /**
+     * JvmProperties方法。
+     */
         public JvmProperties() {
         }
 
         @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -351,6 +441,11 @@ public class Const {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -359,6 +454,10 @@ public class Const {
         }
 
         @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

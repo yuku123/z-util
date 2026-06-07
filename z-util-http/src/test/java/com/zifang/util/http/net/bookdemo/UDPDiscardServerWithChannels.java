@@ -7,11 +7,19 @@ import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
+/**
+ * UDPDiscardServerWithChannels类。
+ */
 public class UDPDiscardServerWithChannels {
 
     public final static int PORT = 9;
     public final static int MAX_PACKET_SIZE = 65507;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
 
         try {

@@ -7,11 +7,19 @@ import java.io.IOException;
 /**
  * XML 分词器，将 XML 字符串分解为 Token 序列。
  */
+/**
+ * Tokenizer类。
+ */
 public class Tokenizer {
 
     private CharReader cr;
     private TokenList tokens;
 
+    /**
+     * tokenize方法。
+     *      * @param cr CharReader类型参数
+     * @return TokenList类型返回值
+     */
     public TokenList tokenize(CharReader cr) throws IOException {
         this.cr = cr;
         this.tokens = new TokenList();

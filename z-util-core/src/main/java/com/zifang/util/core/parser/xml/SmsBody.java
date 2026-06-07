@@ -11,6 +11,9 @@ import javax.xml.bind.annotation.XmlElement;
 /**
  * SmsBody类。
  */
+/**
+ * SmsBody类。
+ */
 public class SmsBody {
 
     /**
@@ -32,6 +35,10 @@ public class SmsBody {
      * getContent方法。
      * @return String类型返回值
      */
+    /**
+     * getContent方法。
+     * @return String类型返回值
+     */
     public String getContent() {
         return content;
     }
@@ -41,10 +48,18 @@ public class SmsBody {
      * setContent方法。
      *      * @param content String类型参数
      */
+    /**
+     * setContent方法。
+     *      * @param content String类型参数
+     */
     public void setContent(String content) {
         this.content = content;
     }
 
+    /**
+     * getSourceAddr方法。
+     * @return String类型返回值
+     */
     /**
      * getSourceAddr方法。
      * @return String类型返回值
@@ -58,10 +73,18 @@ public class SmsBody {
      * setSourceAddr方法。
      *      * @param sourceAddr String类型参数
      */
+    /**
+     * setSourceAddr方法。
+     *      * @param sourceAddr String类型参数
+     */
     public void setSourceAddr(String sourceAddr) {
         this.sourceAddr = sourceAddr;
     }
 
+    /**
+     * getDestAddr方法。
+     * @return String类型返回值
+     */
     /**
      * getDestAddr方法。
      * @return String类型返回值
@@ -75,6 +98,10 @@ public class SmsBody {
      * setDestAddr方法。
      *      * @param destAddr String类型参数
      */
+    /**
+     * setDestAddr方法。
+     *      * @param destAddr String类型参数
+     */
     public void setDestAddr(String destAddr) {
         this.destAddr = destAddr;
     }
@@ -84,11 +111,20 @@ public class SmsBody {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "SmsBody{content=" + content + ", sourceAddr=" + sourceAddr + ", destAddr=" + destAddr + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -104,6 +140,10 @@ public class SmsBody {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值

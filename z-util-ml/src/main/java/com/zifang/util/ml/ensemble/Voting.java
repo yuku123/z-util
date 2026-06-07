@@ -10,6 +10,9 @@ import com.zifang.util.numpy.DType;
 /**
  * Voting类。
  */
+/**
+ * Voting类。
+ */
 public class Voting {
     public static final String HARD = "HARD";
     public static final String SOFT = "SOFT";
@@ -28,6 +31,11 @@ public class Voting {
      *      * @param estimators Estimator[]类型参数
      * @param voting String类型参数
      */
+    /**
+     * Voting方法。
+     *      * @param estimators Estimator[]类型参数
+     * @param voting String类型参数
+     */
     public Voting(Estimator[] estimators, String voting) {
         this.estimators = estimators;
         this.voting = voting;
@@ -37,6 +45,11 @@ public class Voting {
      * Fit all estimators on training data.
      * @param X Training features
      * @param y Training labels
+     */
+    /**
+     * fit方法。
+     *      * @param X NdArray类型参数
+     * @param y int[]类型参数
      */
     /**
      * fit方法。
@@ -61,6 +74,11 @@ public class Voting {
      *      * @param X NdArray类型参数
      * @return int[]类型返回值
      */
+    /**
+     * predict方法。
+     *      * @param X NdArray类型参数
+     * @return int[]类型返回值
+     */
     public int[] predict(NdArray X) {
         int nSamples = X.getShape().get(0);
         int nEst = estimators.length;
@@ -76,6 +94,11 @@ public class Voting {
      * Predict class probabilities.
      * @param X Features to predict
      * @return Probability array of shape (n_samples, n_classes)
+     */
+    /**
+     * predictProba方法。
+     *      * @param X NdArray类型参数
+     * @return NdArray类型返回值
      */
     /**
      * predictProba方法。
@@ -256,10 +279,18 @@ public class Voting {
      * getEstimators方法。
      * @return Estimator[]类型返回值
      */
+    /**
+     * getEstimators方法。
+     * @return Estimator[]类型返回值
+     */
     public Estimator[] getEstimators() {
         return estimators;
     }
 
+    /**
+     * getVoting方法。
+     * @return String类型返回值
+     */
     /**
      * getVoting方法。
      * @return String类型返回值

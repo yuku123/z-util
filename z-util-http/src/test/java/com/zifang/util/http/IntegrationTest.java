@@ -31,11 +31,17 @@ import static org.junit.Assert.*;
  * 4. CurlParserUtils  - cURL 命令解析
  * 5. HttpRequestProxy - 客户端动态代理（接口 → 真实 HTTP 请求）
  */
+/**
+ * IntegrationTest类。
+ */
 public class IntegrationTest {
 
     // ==================== 服务端接口定义 ====================
 
     @RestController("/api")
+/**
+ * ApiService接口。
+ */
     public interface ApiService {
 
         @GetMapping("/users")
@@ -63,36 +69,72 @@ public class IntegrationTest {
     public static class ApiServiceImpl implements ApiService {
 
         @Override
+    /**
+     * listUsers方法。
+     * @return String类型返回值
+     */
         public String listUsers() {
             return "[\"Alice\",\"Bob\",\"Charlie\"]";
         }
 
         @Override
+    /**
+     * getUser方法。
+     *      * @param id long类型参数
+     * @return String类型返回值
+     */
         public String getUser(Long id) {
             return "{\"id\":" + id + ",\"name\":\"User\"}";
         }
 
         @Override
+    /**
+     * createUser方法。
+     *      * @param body String类型参数
+     * @return String类型返回值
+     */
         public String createUser(String body) {
             return "{\"created\":true,\"body\":\"" + body + "\"}";
         }
 
         @Override
+    /**
+     * updateUser方法。
+     *      * @param id long类型参数
+     * @param body String类型参数
+     * @return String类型返回值
+     */
         public String updateUser(Long id, String body) {
             return "{\"updated\":true,\"id\":" + id + ",\"body\":\"" + body + "\"}";
         }
 
         @Override
+    /**
+     * deleteUser方法。
+     *      * @param id long类型参数
+     * @return String类型返回值
+     */
         public String deleteUser(Long id) {
             return "{\"deleted\":true,\"id\":" + id + "}";
         }
 
         @Override
+    /**
+     * search方法。
+     *      * @param keyword String类型参数
+     * @param page int类型参数
+     * @return String类型返回值
+     */
         public String search(String keyword, int page) {
             return "{\"keyword\":\"" + keyword + "\",\"page\":" + page + "}";
         }
 
         @Override
+    /**
+     * echo方法。
+     *      * @param body String类型参数
+     * @return String类型返回值
+     */
         public String echo(String body) {
             return body;
         }
@@ -108,6 +150,10 @@ public class IntegrationTest {
     // ==================== 测试初始化 ====================
 
     @BeforeClass
+    /**
+     * setup方法。
+     * @return static void类型返回值
+     */
     public static void setup() throws Exception {
         // 找一个可用端口
         serverPort = findAvailablePort();
@@ -143,6 +189,10 @@ public class IntegrationTest {
     }
 
     @AfterClass
+    /**
+     * teardown方法。
+     * @return static void类型返回值
+     */
     public static void teardown() {
         if (httpServer != null) {
             httpServer.stop(0);
@@ -168,6 +218,10 @@ public class IntegrationTest {
         }
 
         @Override
+    /**
+     * handle方法。
+     *      * @param exchange com.sun.net.httpserver.HttpExchange类型参数
+     */
         public void handle(com.sun.net.httpserver.HttpExchange exchange) throws IOException {
             String method = exchange.getRequestMethod();
             String path = exchange.getRequestURI().getPath();
@@ -257,6 +311,9 @@ public class IntegrationTest {
     // --- 1. HttpUtil (Apache HttpClient) ---
 
     @Test
+    /**
+     * testHttpUtil_get方法。
+     */
     public void testHttpUtil_get() throws Exception {
         System.out.println("\n=== Test: HttpUtil GET ===");
         String url = baseUrl + "/api/users";
@@ -267,6 +324,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpUtil_getWithParams方法。
+     */
     public void testHttpUtil_getWithParams() throws Exception {
         System.out.println("\n=== Test: HttpUtil GET with params ===");
         String url = baseUrl + "/api/search";
@@ -281,6 +341,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpUtil_getWithHeaders方法。
+     */
     public void testHttpUtil_getWithHeaders() throws Exception {
         System.out.println("\n=== Test: HttpUtil GET with headers ===");
         String url = baseUrl + "/api/users";
@@ -292,6 +355,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpUtil_post方法。
+     */
     public void testHttpUtil_post() throws Exception {
         System.out.println("\n=== Test: HttpUtil POST ===");
         String url = baseUrl + "/api/users";
@@ -305,6 +371,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpUtil_put方法。
+     */
     public void testHttpUtil_put() throws Exception {
         System.out.println("\n=== Test: HttpUtil PUT ===");
         // PUT 不能带 body，需要通过 URL 参数传递
@@ -318,6 +387,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpUtil_delete方法。
+     */
     public void testHttpUtil_delete() throws Exception {
         System.out.println("\n=== Test: HttpUtil DELETE ===");
         String url = baseUrl + "/api/users/999";
@@ -328,6 +400,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpUtil_basicAuth方法。
+     */
     public void testHttpUtil_basicAuth() throws Exception {
         System.out.println("\n=== Test: HttpUtil BasicAuth ===");
         String authValue = HttpUtil.toBasicAuthValue("admin", "password123");
@@ -345,6 +420,9 @@ public class IntegrationTest {
     // --- 2. OkHttpUtil ---
 
     @Test
+    /**
+     * testOkHttpUtil_get方法。
+     */
     public void testOkHttpUtil_get() throws Exception {
         System.out.println("\n=== Test: OkHttpUtil GET ===");
         HttpClientResult result = OkHttpUtil.get(baseUrl + "/api/users");
@@ -354,6 +432,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testOkHttpUtil_getWithParams方法。
+     */
     public void testOkHttpUtil_getWithParams() throws Exception {
         System.out.println("\n=== Test: OkHttpUtil GET with params ===");
         Map<String, String> params = new HashMap<>();
@@ -366,6 +447,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testOkHttpUtil_postJson方法。
+     */
     public void testOkHttpUtil_postJson() throws Exception {
         System.out.println("\n=== Test: OkHttpUtil POST JSON ===");
         String json = "{\"name\":\"OkHttpTest\",\"age\":100}";
@@ -376,6 +460,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testOkHttpUtil_postForm方法。
+     */
     public void testOkHttpUtil_postForm() throws Exception {
         System.out.println("\n=== Test: OkHttpUtil POST FORM ===");
         Map<String, String> params = new HashMap<>();
@@ -387,6 +474,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testOkHttpUtil_basicAuth方法。
+     */
     public void testOkHttpUtil_basicAuth() throws Exception {
         System.out.println("\n=== Test: OkHttpUtil BasicAuth ===");
         String auth = OkHttpUtil.basicAuth("admin", "password123");
@@ -398,6 +488,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testOkHttpUtil_async方法。
+     */
     public void testOkHttpUtil_async() throws Exception {
         System.out.println("\n=== Test: OkHttpUtil async GET ===");
         CountDownLatch latch = new CountDownLatch(1);
@@ -409,12 +502,22 @@ public class IntegrationTest {
 
         OkHttpUtil.async(request, new okhttp3.Callback() {
             @Override
+    /**
+     * onFailure方法。
+     *      * @param call okhttp3.Call类型参数
+     * @param e IOException类型参数
+     */
             public void onFailure(okhttp3.Call call, IOException e) {
                 response.set("error: " + e.getMessage());
                 latch.countDown();
             }
 
             @Override
+    /**
+     * onResponse方法。
+     *      * @param call okhttp3.Call类型参数
+     * @param res okhttp3.Response类型参数
+     */
             public void onResponse(okhttp3.Call call, okhttp3.Response res) throws IOException {
                 try (okhttp3.ResponseBody body = res.body()) {
                     response.set(res.code() + " " + (body != null ? body.string() : ""));
@@ -432,6 +535,9 @@ public class IntegrationTest {
     // --- 3. CurlParserUtils ---
 
     @Test
+    /**
+     * testCurlParser_simpleGet方法。
+     */
     public void testCurlParser_simpleGet() {
         System.out.println("\n=== Test: CurlParser simple GET ===");
         String curl = "curl " + baseUrl + "/api/users";
@@ -443,6 +549,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testCurlParser_getWithHeaders方法。
+     */
     public void testCurlParser_getWithHeaders() {
         System.out.println("\n=== Test: CurlParser GET with headers ===");
         String curl = "curl -H 'Accept: application/json' -H 'X-Custom: test' " + baseUrl + "/api/users";
@@ -453,6 +562,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testCurlParser_postWithJson方法。
+     */
     public void testCurlParser_postWithJson() {
         System.out.println("\n=== Test: CurlParser POST JSON ===");
         String curl = "curl -X POST -H 'Content-Type: application/json' -d '{\"name\":\"CurlTest\"}' " + baseUrl + "/api/users";
@@ -464,6 +576,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testCurlParser_basicAuth方法。
+     */
     public void testCurlParser_basicAuth() {
         System.out.println("\n=== Test: CurlParser BasicAuth ===");
         String curl = "curl -u admin:secret123 " + baseUrl + "/api/users";
@@ -475,6 +590,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testCurlParser_cookies方法。
+     */
     public void testCurlParser_cookies() {
         System.out.println("\n=== Test: CurlParser Cookies ===");
         String curl = "curl -b 'session=abc123; token=xyz789' " + baseUrl + "/api/users";
@@ -486,6 +604,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testCurlParser_roundTrip方法。
+     */
     public void testCurlParser_roundTrip() {
         System.out.println("\n=== Test: CurlParser RoundTrip ===");
         String original = "curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer token123' -d '{\"name\":\"roundtrip\"}' " + baseUrl + "/api/users";
@@ -499,6 +620,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testCurlParser_multiple方法。
+     */
     public void testCurlParser_multiple() {
         System.out.println("\n=== Test: CurlParser multiple commands ===");
         String multi = "curl " + baseUrl + "/api/users\ncurl -X POST -d '{\"name\":\"test\"}' " + baseUrl + "/api/users";
@@ -510,6 +634,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testCurlParser_utils方法。
+     */
     public void testCurlParser_utils() {
         System.out.println("\n=== Test: CurlParserUtils utility methods ===");
         String curl = "curl -H 'Accept: application/json' " + baseUrl + "/api/users";
@@ -530,6 +657,9 @@ public class IntegrationTest {
     // --- 4. HttpServerBuilder (嵌入式服务器) ---
 
     @RestController("/builder")
+/**
+ * BuilderTestApi接口。
+ */
     public interface BuilderTestApi {
         @GetMapping("/hello")
         String hello();
@@ -543,22 +673,39 @@ public class IntegrationTest {
 
     public static class BuilderTestApiImpl implements BuilderTestApi {
         @Override
+    /**
+     * hello方法。
+     * @return String类型返回值
+     */
         public String hello() {
             return "Hello from Builder!";
         }
 
         @Override
+    /**
+     * user方法。
+     *      * @param id long类型参数
+     * @return String类型返回值
+     */
         public String user(Long id) {
             return "User: " + id;
         }
 
         @Override
+    /**
+     * echo方法。
+     *      * @param body String类型参数
+     * @return String类型返回值
+     */
         public String echo(String body) {
             return "Echo: " + body;
         }
     }
 
     @Test
+    /**
+     * testHttpServerBuilder方法。
+     */
     public void testHttpServerBuilder() throws Exception {
         System.out.println("\n=== Test: HttpServerBuilder ===");
         int builderPort = findAvailablePort();
@@ -644,6 +791,9 @@ public class IntegrationTest {
     // --- 5. HttpRequestProxy (客户端动态代理) ---
 
     @Test
+    /**
+     * testHttpRequestProxy_get方法。
+     */
     public void testHttpRequestProxy_get() throws Exception {
         System.out.println("\n=== Test: HttpRequestProxy GET ===");
         String result = apiServiceProxy.listUsers();
@@ -653,6 +803,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpRequestProxy_getWithPathVariable方法。
+     */
     public void testHttpRequestProxy_getWithPathVariable() throws Exception {
         System.out.println("\n=== Test: HttpRequestProxy GET with path variable ===");
         String result = apiServiceProxy.getUser(42L);
@@ -662,6 +815,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpRequestProxy_postWithBody方法。
+     */
     public void testHttpRequestProxy_postWithBody() throws Exception {
         System.out.println("\n=== Test: HttpRequestProxy POST with body ===");
         String body = "{\"name\":\"ProxyTest\"}";
@@ -673,6 +829,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpRequestProxy_putWithPathAndBody方法。
+     */
     public void testHttpRequestProxy_putWithPathAndBody() throws Exception {
         System.out.println("\n=== Test: HttpRequestProxy PUT with path + body ===");
         String body = "{\"name\":\"UpdatedViaProxy\"}";
@@ -684,6 +843,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpRequestProxy_delete方法。
+     */
     public void testHttpRequestProxy_delete() throws Exception {
         System.out.println("\n=== Test: HttpRequestProxy DELETE ===");
         String result = apiServiceProxy.deleteUser(123L);
@@ -694,6 +856,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpRequestProxy_search方法。
+     */
     public void testHttpRequestProxy_search() throws Exception {
         System.out.println("\n=== Test: HttpRequestProxy search with query params ===");
         String result = apiServiceProxy.search("proxy keyword", 9);
@@ -704,6 +869,9 @@ public class IntegrationTest {
     }
 
     @Test
+    /**
+     * testHttpRequestProxy_echo方法。
+     */
     public void testHttpRequestProxy_echo() throws Exception {
         System.out.println("\n=== Test: HttpRequestProxy echo ===");
         String input = "Hello from HttpRequestProxy!";
@@ -715,6 +883,9 @@ public class IntegrationTest {
     // --- 6. HttpRequestDefinition POJO ---
 
     @Test
+    /**
+     * testHttpRequestDefinition_pojo方法。
+     */
     public void testHttpRequestDefinition_pojo() {
         System.out.println("\n=== Test: HttpRequestDefinition POJO ===");
         HttpRequestDefinition def = new HttpRequestDefinition();
@@ -752,6 +923,9 @@ public class IntegrationTest {
     // --- 7. AllPathHttpServer (简单服务器) ---
 
     @Test
+    /**
+     * testAllPathHttpServer方法。
+     */
     public void testAllPathHttpServer() throws Exception {
         System.out.println("\n=== Test: AllPathHttpServer (basic) ===");
         int testPort = findAvailablePort();
@@ -780,6 +954,9 @@ public class IntegrationTest {
     // --- 8. HttpClientResult POJO ---
 
     @Test
+    /**
+     * testHttpClientResult方法。
+     */
     public void testHttpClientResult() {
         System.out.println("\n=== Test: HttpClientResult POJO ===");
         HttpClientResult r1 = new HttpClientResult(200, "OK");

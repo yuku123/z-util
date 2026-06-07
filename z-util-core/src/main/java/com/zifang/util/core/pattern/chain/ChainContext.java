@@ -19,6 +19,9 @@ import java.util.function.Predicate;
 /**
  * ChainContext类。
  */
+/**
+ * ChainContext类。
+ */
 public class ChainContext<K, V> implements Map<K, V> {
 
     private final Map<K, V> data;
@@ -28,12 +31,19 @@ public class ChainContext<K, V> implements Map<K, V> {
     /**
      * ChainContext方法。
      */
+    /**
+     * ChainContext方法。
+     */
     public ChainContext() {
         this.data = new HashMap<>();
         this.history = new ArrayList<>();
         this.executed = false;
     }
 
+    /**
+     * ChainContext方法。
+     *      * @param initialData MapK,类型参数
+     */
     /**
      * ChainContext方法。
      *      * @param initialData MapK,类型参数
@@ -51,10 +61,19 @@ public class ChainContext<K, V> implements Map<K, V> {
      * create方法。
      * @return static <K, V> ChainContext<K, V>类型返回值
      */
+    /**
+     * create方法。
+     * @return static <K, V> ChainContext<K, V>类型返回值
+     */
     public static <K, V> ChainContext<K, V> create() {
         return new ChainContext<>();
     }
 
+    /**
+     * create方法。
+     *      * @param initialData MapK,类型参数
+     * @return static <K, V> ChainContext<K, V>类型返回值
+     */
     /**
      * create方法。
      *      * @param initialData MapK,类型参数
@@ -68,6 +87,12 @@ public class ChainContext<K, V> implements Map<K, V> {
      * 获取值并自动类型转换
      */
     @SuppressWarnings("unchecked")
+    /**
+     * get方法。
+     *      * @param key K类型参数
+     * @param type ClassT类型参数
+     * @return <T extends V> T类型返回值
+     */
     /**
      * get方法。
      *      * @param key K类型参数
@@ -91,6 +116,12 @@ public class ChainContext<K, V> implements Map<K, V> {
      * @param defaultValue V类型参数
      * @return V类型返回值
      */
+    /**
+     * getOrDefaultValue方法。
+     *      * @param key K类型参数
+     * @param defaultValue V类型参数
+     * @return V类型返回值
+     */
     public V getOrDefaultValue(K key, V defaultValue) {
         V value = data.get(key);
         return value != null ? value : defaultValue;
@@ -98,6 +129,12 @@ public class ChainContext<K, V> implements Map<K, V> {
 
     /**
      * 如果不存在则插入
+     */
+    /**
+     * putIfAbsent方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
+     * @return V类型返回值
      */
     /**
      * putIfAbsent方法。
@@ -118,6 +155,12 @@ public class ChainContext<K, V> implements Map<K, V> {
      * @param value V类型参数
      * @return ChainContext<K, V>类型返回值
      */
+    /**
+     * putChain方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
+     * @return ChainContext<K, V>类型返回值
+     */
     public ChainContext<K, V> putChain(K key, V value) {
         data.put(key, value);
         return this;
@@ -125,6 +168,10 @@ public class ChainContext<K, V> implements Map<K, V> {
 
     /**
      * 获取执行历史
+     */
+    /**
+     * getHistory方法。
+     * @return List<ChainContext<K, V>>类型返回值
      */
     /**
      * getHistory方法。
@@ -140,6 +187,9 @@ public class ChainContext<K, V> implements Map<K, V> {
     /**
      * markExecuted方法。
      */
+    /**
+     * markExecuted方法。
+     */
     public void markExecuted() {
         this.executed = true;
     }
@@ -151,12 +201,20 @@ public class ChainContext<K, V> implements Map<K, V> {
      * isExecuted方法。
      * @return boolean类型返回值
      */
+    /**
+     * isExecuted方法。
+     * @return boolean类型返回值
+     */
     public boolean isExecuted() {
         return executed;
     }
 
     /**
      * 复制上下文
+     */
+    /**
+     * copy方法。
+     * @return ChainContext<K, V>类型返回值
      */
     /**
      * copy方法。
@@ -176,6 +234,10 @@ public class ChainContext<K, V> implements Map<K, V> {
      * size方法。
      * @return int类型返回值
      */
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         return data.size();
     }
@@ -185,11 +247,20 @@ public class ChainContext<K, V> implements Map<K, V> {
      * isEmpty方法。
      * @return boolean类型返回值
      */
+    /**
+     * isEmpty方法。
+     * @return boolean类型返回值
+     */
     public boolean isEmpty() {
         return data.isEmpty();
     }
 
     @Override
+    /**
+     * containsKey方法。
+     *      * @param key Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * containsKey方法。
      *      * @param key Object类型参数
@@ -205,11 +276,21 @@ public class ChainContext<K, V> implements Map<K, V> {
      *      * @param value Object类型参数
      * @return boolean类型返回值
      */
+    /**
+     * containsValue方法。
+     *      * @param value Object类型参数
+     * @return boolean类型返回值
+     */
     public boolean containsValue(Object value) {
         return data.containsValue(value);
     }
 
     @Override
+    /**
+     * get方法。
+     *      * @param key Object类型参数
+     * @return V类型返回值
+     */
     /**
      * get方法。
      *      * @param key Object类型参数
@@ -226,11 +307,22 @@ public class ChainContext<K, V> implements Map<K, V> {
      * @param value V类型参数
      * @return V类型返回值
      */
+    /**
+     * put方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
+     * @return V类型返回值
+     */
     public V put(K key, V value) {
         return data.put(key, value);
     }
 
     @Override
+    /**
+     * remove方法。
+     *      * @param key Object类型参数
+     * @return V类型返回值
+     */
     /**
      * remove方法。
      *      * @param key Object类型参数
@@ -245,6 +337,10 @@ public class ChainContext<K, V> implements Map<K, V> {
      * putAll方法。
      *      * @param m Map?类型参数
      */
+    /**
+     * putAll方法。
+     *      * @param m Map?类型参数
+     */
     public void putAll(Map<? extends K, ? extends V> m) {
         data.putAll(m);
     }
@@ -253,11 +349,18 @@ public class ChainContext<K, V> implements Map<K, V> {
     /**
      * clear方法。
      */
+    /**
+     * clear方法。
+     */
     public void clear() {
         data.clear();
     }
 
     @Override
+    /**
+     * keySet方法。
+     * @return Set<K>类型返回值
+     */
     /**
      * keySet方法。
      * @return Set<K>类型返回值
@@ -271,6 +374,10 @@ public class ChainContext<K, V> implements Map<K, V> {
      * values方法。
      * @return Collection<V>类型返回值
      */
+    /**
+     * values方法。
+     * @return Collection<V>类型返回值
+     */
     public Collection<V> values() {
         return data.values();
     }
@@ -280,11 +387,19 @@ public class ChainContext<K, V> implements Map<K, V> {
      * entrySet方法。
      * @return Set<Entry<K, V>>类型返回值
      */
+    /**
+     * entrySet方法。
+     * @return Set<Entry<K, V>>类型返回值
+     */
     public Set<Entry<K, V>> entrySet() {
         return data.entrySet();
     }
 
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

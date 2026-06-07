@@ -9,6 +9,9 @@ import java.util.Objects;
 /**
  * ColumnDTO类。
  */
+/**
+ * ColumnDTO类。
+ */
 public class ColumnDTO {
     private final String columnName;
     private final String javaFieldName;
@@ -28,6 +31,15 @@ public class ColumnDTO {
      * @param nullable     是否可为空
      * @param isPrimaryKey 是否为主键
      * @param comment      字段备注
+     */
+    /**
+     * ColumnDTO方法。
+     *      * @param columnName String类型参数
+     * @param dataType String类型参数
+     * @param columnSize int类型参数
+     * @param nullable boolean类型参数
+     * @param isPrimaryKey boolean类型参数
+     * @param comment String类型参数
      */
     /**
      * ColumnDTO方法。
@@ -58,6 +70,10 @@ public class ColumnDTO {
      * getColumnName方法。
      * @return String类型返回值
      */
+    /**
+     * getColumnName方法。
+     * @return String类型返回值
+     */
     public String getColumnName() {
         return columnName;
     }
@@ -66,6 +82,10 @@ public class ColumnDTO {
      * 获取Java字段名（驼峰形式）
      *
      * @return Java字段名
+     */
+    /**
+     * getJavaFieldName方法。
+     * @return String类型返回值
      */
     /**
      * getJavaFieldName方法。
@@ -84,6 +104,10 @@ public class ColumnDTO {
      * getDataType方法。
      * @return String类型返回值
      */
+    /**
+     * getDataType方法。
+     * @return String类型返回值
+     */
     public String getDataType() {
         return dataType;
     }
@@ -92,6 +116,10 @@ public class ColumnDTO {
      * 获取Java类型
      *
      * @return Java类型
+     */
+    /**
+     * getJavaType方法。
+     * @return String类型返回值
      */
     /**
      * getJavaType方法。
@@ -110,6 +138,10 @@ public class ColumnDTO {
      * getColumnSize方法。
      * @return int类型返回值
      */
+    /**
+     * getColumnSize方法。
+     * @return int类型返回值
+     */
     public int getColumnSize() {
         return columnSize;
     }
@@ -118,6 +150,10 @@ public class ColumnDTO {
      * 获取是否可为空
      *
      * @return 是否可为空
+     */
+    /**
+     * isNullable方法。
+     * @return boolean类型返回值
      */
     /**
      * isNullable方法。
@@ -136,6 +172,10 @@ public class ColumnDTO {
      * isPrimaryKey方法。
      * @return boolean类型返回值
      */
+    /**
+     * isPrimaryKey方法。
+     * @return boolean类型返回值
+     */
     public boolean isPrimaryKey() {
         return isPrimaryKey;
     }
@@ -144,6 +184,10 @@ public class ColumnDTO {
      * 获取字段备注
      *
      * @return 字段备注
+     */
+    /**
+     * getComment方法。
+     * @return String类型返回值
      */
     /**
      * getComment方法。
@@ -158,11 +202,20 @@ public class ColumnDTO {
      * toString方法。
      * @return String类型返回值
      */
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     public String toString() {
         return "ColumnDTO{columnName=" + columnName + ", javaFieldName=" + javaFieldName + ", dataType=" + dataType + ", javaType=" + javaType + ", columnSize=" + columnSize + ", nullable=" + nullable + ", isPrimaryKey=" + isPrimaryKey + ", comment=" + comment + "}";
     }
 
     @Override
+    /**
+     * equals方法。
+     *      * @param o Object类型参数
+     * @return boolean类型返回值
+     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -183,6 +236,10 @@ public class ColumnDTO {
     }
 
     @Override
+    /**
+     * hashCode方法。
+     * @return int类型返回值
+     */
     /**
      * hashCode方法。
      * @return int类型返回值
@@ -211,6 +268,11 @@ public class ColumnDTO {
         return result.toString();
     }
 
+    /**
+     * underlineToCamelUpper方法。
+     *      * @param str String类型参数
+     * @return static String类型返回值
+     */
     /**
      * underlineToCamelUpper方法。
      *      * @param str String类型参数

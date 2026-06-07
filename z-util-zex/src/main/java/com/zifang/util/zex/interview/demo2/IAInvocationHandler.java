@@ -12,16 +12,31 @@ import java.lang.reflect.Method;
  * @author zifang
  * @version 1.0
  */
+/**
+ * IAInvocationHandler类。
+ */
 public class IAInvocationHandler implements InvocationHandler {
     private String s;
     private IAImplement iaImplement;
 
+    /**
+     * IAInvocationHandler方法。
+     *      * @param iaImplement IAImplement类型参数
+     * @param s String类型参数
+     */
     public IAInvocationHandler(IAImplement iaImplement, String s) {
         this.iaImplement = iaImplement;
         this.s = s;
     }
 
     @Override
+    /**
+     * invoke方法。
+     *      * @param proxy Object类型参数
+     * @param method Method类型参数
+     * @param args Object[]类型参数
+     * @return Object类型返回值
+     */
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object returns = null;
         if (method.getName().equals(iaImplement.getMethod())) {

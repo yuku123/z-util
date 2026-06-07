@@ -4,6 +4,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * BoundedBuffer类。
+ */
 public class BoundedBuffer {
     final Lock lock = new ReentrantLock();
     final Condition notFull = lock.newCondition();
@@ -12,6 +15,10 @@ public class BoundedBuffer {
     final Object[] items = new Object[100];
     int putptr, takeptr, count;
 
+    /**
+     * put方法。
+     *      * @param x Object类型参数
+     */
     public void put(Object x) throws InterruptedException {
         lock.lock();
         try {
@@ -27,6 +34,10 @@ public class BoundedBuffer {
         }
     }
 
+    /**
+     * take方法。
+     * @return Object类型返回值
+     */
     public Object take() throws InterruptedException {
         lock.lock();
         try {

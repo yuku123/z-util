@@ -9,7 +9,16 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+/**
+ * _209类。
+ */
 public class _209 {
+    /**
+     * minSubArrayLen方法。
+     *      * @param target int类型参数
+     * @param nums int[]类型参数
+     * @return int类型返回值
+     */
     public int minSubArrayLen(int target, int[] nums) {
         int startIndex = 0;
         int endIndex = 0;
@@ -67,6 +76,11 @@ public class _209 {
         }
         return minLength;
     }
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         new _209().minSubArrayLen(15, new int[]{1,2,3,4,5});
     }

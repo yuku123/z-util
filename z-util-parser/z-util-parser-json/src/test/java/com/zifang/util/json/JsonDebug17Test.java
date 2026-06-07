@@ -8,9 +8,15 @@ import com.zifang.util.dsl.token.*;
 import org.junit.Test;
 import java.util.*;
 
+/**
+ * JsonDebug17Test类。
+ */
 public class JsonDebug17Test {
 
     @Test
+    /**
+     * testAstToJava方法。
+     */
     public void testAstToJava() throws Exception {
         // Directly test astToJava with a manually constructed AST
         JSONParser jsonParser = new JSONParser();
@@ -29,6 +35,9 @@ public class JsonDebug17Test {
     }
 
     @Test
+    /**
+     * testParseScalar方法。
+     */
     public void testParseScalar() throws Exception {
         JSONParser jsonParser = new JSONParser();
 

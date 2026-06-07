@@ -9,16 +9,25 @@ import static org.junit.Assert.*;
 /**
  * Unit tests for CacheManager.
  */
+/**
+ * CacheManagerTest类。
+ */
 public class CacheManagerTest {
 
     private CacheManager cacheManager;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() {
         cacheManager = CacheManager.getInstance();
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         cacheManager.clearAll();
         // Clear all registered caches
@@ -40,6 +49,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testGetInstance方法。
+     */
     public void testGetInstance() {
         CacheManager instance1 = CacheManager.getInstance();
         CacheManager instance2 = CacheManager.getInstance();
@@ -47,6 +59,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testGetMemoryCache方法。
+     */
     public void testGetMemoryCache() {
         MemoryCache cache = cacheManager.getMemoryCache("test-memory");
         assertNotNull(cache);
@@ -54,6 +69,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testGetMemoryCacheWithCapacity方法。
+     */
     public void testGetMemoryCacheWithCapacity() {
         MemoryCache cache = cacheManager.getMemoryCache("test-capacity", 32);
         assertNotNull(cache);
@@ -66,6 +84,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testGetMemoryCacheWithTTL方法。
+     */
     public void testGetMemoryCacheWithTTL() {
         MemoryCache cache = cacheManager.getMemoryCache("test-ttl", 16, 60);
         assertNotNull(cache);
@@ -75,6 +96,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testGetCacheReturnsSameInstance方法。
+     */
     public void testGetCacheReturnsSameInstance() {
         MemoryCache cache1 = cacheManager.getMemoryCache("singleton-test");
         MemoryCache cache2 = cacheManager.getMemoryCache("singleton-test");
@@ -82,6 +106,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testRegisterCache方法。
+     */
     public void testRegisterCache() {
         MemoryCache customCache = new MemoryCache("custom-cache");
         Cache previous = cacheManager.registerCache("custom-cache", customCache);
@@ -92,6 +119,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testRegisterCacheOverwrite方法。
+     */
     public void testRegisterCacheOverwrite() {
         MemoryCache cache1 = new MemoryCache("overwrite-test");
         MemoryCache cache2 = new MemoryCache("overwrite-test-2");
@@ -104,6 +134,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testGetCacheByName方法。
+     */
     public void testGetCacheByName() {
         MemoryCache memoryCache = cacheManager.getMemoryCache("by-name-test");
         Cache cache = cacheManager.getCache("by-name-test");
@@ -112,12 +145,18 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testGetNonExistentCache方法。
+     */
     public void testGetNonExistentCache() {
         Cache cache = cacheManager.getCache("non-existent");
         assertNull(cache);
     }
 
     @Test
+    /**
+     * testRemoveCache方法。
+     */
     public void testRemoveCache() {
         MemoryCache cache = cacheManager.getMemoryCache("remove-test");
         Cache removed = cacheManager.removeCache("remove-test");
@@ -127,12 +166,18 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testRemoveNonExistentCache方法。
+     */
     public void testRemoveNonExistentCache() {
         Cache removed = cacheManager.removeCache("non-existent");
         assertNull(removed);
     }
 
     @Test
+    /**
+     * testClearAll方法。
+     */
     public void testClearAll() {
         MemoryCache cache1 = cacheManager.getMemoryCache("clear-1");
         MemoryCache cache2 = cacheManager.getMemoryCache("clear-2");
@@ -150,6 +195,9 @@ public class CacheManagerTest {
     }
 
     @Test
+    /**
+     * testGetCacheWithType方法。
+     */
     public void testGetCacheWithType() {
         Cache cache = cacheManager.getCache("type-test", "memory");
         assertNotNull(cache);
@@ -157,6 +205,9 @@ public class CacheManagerTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    /**
+     * testGetCacheWithUnsupportedType方法。
+     */
     public void testGetCacheWithUnsupportedType() {
         cacheManager.getCache("invalid-type", "redis");
     }

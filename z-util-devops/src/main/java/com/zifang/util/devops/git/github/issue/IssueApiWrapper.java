@@ -27,12 +27,19 @@ import java.util.List;
 /**
  * IssueApiWrapper类。
  */
+/**
+ * IssueApiWrapper类。
+ */
 public class IssueApiWrapper {
 
     private final GitHub github;
     private String owner;
     private String repo;
 
+    /**
+     * IssueApiWrapper方法。
+     *      * @param github GitHub类型参数
+     */
     /**
      * IssueApiWrapper方法。
      *      * @param github GitHub类型参数
@@ -47,12 +54,24 @@ public class IssueApiWrapper {
      * @param owner String类型参数
      * @param repo String类型参数
      */
+    /**
+     * IssueApiWrapper方法。
+     *      * @param github GitHub类型参数
+     * @param owner String类型参数
+     * @param repo String类型参数
+     */
     public IssueApiWrapper(GitHub github, String owner, String repo) {
         this.github = github;
         this.owner = owner;
         this.repo = repo;
     }
 
+    /**
+     * withRepo方法。
+     *      * @param owner String类型参数
+     * @param repo String类型参数
+     * @return IssueApiWrapper类型返回值
+     */
     /**
      * withRepo方法。
      *      * @param owner String类型参数
@@ -81,6 +100,13 @@ public class IssueApiWrapper {
      * @param labels String...类型参数
      * @return GHIssue类型返回值
      */
+    /**
+     * create方法。
+     *      * @param title String类型参数
+     * @param body String类型参数
+     * @param labels String...类型参数
+     * @return GHIssue类型返回值
+     */
     public GHIssue create(String title, String body, String... labels) throws IOException {
         GHIssueBuilder builder = github.getRepository(fullName()).createIssue(title).body(body);
         for (String l : labels) {
@@ -91,6 +117,14 @@ public class IssueApiWrapper {
 
     /**
      * 创建 Issue 并指定 assignee
+     */
+    /**
+     * create方法。
+     *      * @param title String类型参数
+     * @param body String类型参数
+     * @param assignee String类型参数
+     * @param labels ListString类型参数
+     * @return GHIssue类型返回值
      */
     /**
      * create方法。
@@ -121,12 +155,24 @@ public class IssueApiWrapper {
      *      * @param number int类型参数
      * @return GHIssue类型返回值
      */
+    /**
+     * get方法。
+     *      * @param number int类型参数
+     * @return GHIssue类型返回值
+     */
     public GHIssue get(int number) throws IOException {
         return github.getRepository(fullName()).getIssue(number);
     }
 
     /**
      * 更新 Issue
+     */
+    /**
+     * update方法。
+     *      * @param number int类型参数
+     * @param title String类型参数
+     * @param body String类型参数
+     * @return GHIssue类型返回值
      */
     /**
      * update方法。
@@ -149,12 +195,20 @@ public class IssueApiWrapper {
      * close方法。
      *      * @param number int类型参数
      */
+    /**
+     * close方法。
+     *      * @param number int类型参数
+     */
     public void close(int number) throws IOException {
         get(number).close();
     }
 
     /**
      * 重新打开 Issue
+     */
+    /**
+     * reopen方法。
+     *      * @param number int类型参数
      */
     /**
      * reopen方法。
@@ -173,6 +227,10 @@ public class IssueApiWrapper {
      * listOpen方法。
      * @return List<GHIssue>类型返回值
      */
+    /**
+     * listOpen方法。
+     * @return List<GHIssue>类型返回值
+     */
     public List<GHIssue> listOpen() throws IOException {
         return github.getRepository(fullName()).getIssues(GHIssueState.OPEN);
     }
@@ -184,12 +242,21 @@ public class IssueApiWrapper {
      * listClosed方法。
      * @return List<GHIssue>类型返回值
      */
+    /**
+     * listClosed方法。
+     * @return List<GHIssue>类型返回值
+     */
     public List<GHIssue> listClosed() throws IOException {
         return github.getRepository(fullName()).getIssues(GHIssueState.CLOSED);
     }
 
     /**
      * 搜索 Issue（传入完整查询字符串，如 "is:issue is:open label:bug"）
+     */
+    /**
+     * search方法。
+     *      * @param query String类型参数
+     * @return List<GHIssue>类型返回值
      */
     /**
      * search方法。
@@ -215,6 +282,12 @@ public class IssueApiWrapper {
      * @param labels String...类型参数
      * @return List<GHLabel>类型返回值
      */
+    /**
+     * addLabels方法。
+     *      * @param number int类型参数
+     * @param labels String...类型参数
+     * @return List<GHLabel>类型返回值
+     */
     public List<GHLabel> addLabels(int number, String... labels) throws IOException {
         return get(number).addLabels(labels);
     }
@@ -228,12 +301,22 @@ public class IssueApiWrapper {
      * @param label String类型参数
      * @return List<GHLabel>类型返回值
      */
+    /**
+     * removeLabel方法。
+     *      * @param number int类型参数
+     * @param label String类型参数
+     * @return List<GHLabel>类型返回值
+     */
     public List<GHLabel> removeLabel(int number, String label) throws IOException {
         return get(number).removeLabel(label);
     }
 
     /**
      * 获取当前仓库的所有标签
+     */
+    /**
+     * listLabels方法。
+     * @return List<GHLabel>类型返回值
      */
     /**
      * listLabels方法。
@@ -258,6 +341,13 @@ public class IssueApiWrapper {
      * @param description String类型参数
      * @return GHLabel类型返回值
      */
+    /**
+     * createLabel方法。
+     *      * @param name String类型参数
+     * @param color String类型参数
+     * @param description String类型参数
+     * @return GHLabel类型返回值
+     */
     public GHLabel createLabel(String name, String color, String description) throws IOException {
         return github.getRepository(fullName()).createLabel(name, color, description);
     }
@@ -266,6 +356,11 @@ public class IssueApiWrapper {
 
     /**
      * 添加 assignee
+     */
+    /**
+     * addAssignees方法。
+     *      * @param number int类型参数
+     * @param assignees String...类型参数
      */
     /**
      * addAssignees方法。
@@ -288,6 +383,11 @@ public class IssueApiWrapper {
      *      * @param number int类型参数
      * @param assignee String类型参数
      */
+    /**
+     * removeAssignee方法。
+     *      * @param number int类型参数
+     * @param assignee String类型参数
+     */
     public void removeAssignee(int number, String assignee) throws IOException {
         get(number).removeAssignees(github.getUser(assignee));
     }
@@ -296,6 +396,12 @@ public class IssueApiWrapper {
 
     /**
      * 添加评论
+     */
+    /**
+     * comment方法。
+     *      * @param number int类型参数
+     * @param body String类型参数
+     * @return GHIssueComment类型返回值
      */
     /**
      * comment方法。
@@ -315,6 +421,11 @@ public class IssueApiWrapper {
      *      * @param number int类型参数
      * @return List<GHIssueComment>类型返回值
      */
+    /**
+     * listComments方法。
+     *      * @param number int类型参数
+     * @return List<GHIssueComment>类型返回值
+     */
     public List<GHIssueComment> listComments(int number) throws IOException {
         List<GHIssueComment> comments = new ArrayList<>();
         PagedIterable<GHIssueComment> iterable = get(number).listComments();
@@ -326,6 +437,10 @@ public class IssueApiWrapper {
 
     /**
      * 删除评论
+     */
+    /**
+     * deleteComment方法。
+     *      * @param comment GHIssueComment类型参数
      */
     /**
      * deleteComment方法。
@@ -359,6 +474,11 @@ public class IssueApiWrapper {
          * @return IssueInfo 实例
          * @throws IOException IO异常
          */
+    /**
+     * from方法。
+     *      * @param issue GHIssue类型参数
+     * @return static IssueInfo类型返回值
+     */
     /**
      * from方法。
      *      * @param issue GHIssue类型参数

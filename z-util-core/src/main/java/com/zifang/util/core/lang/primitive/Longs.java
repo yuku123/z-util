@@ -6,12 +6,20 @@ package com.zifang.util.core.lang.primitive;
 /**
  * Longs类。
  */
+/**
+ * Longs类。
+ */
 public class Longs {
 
     /**
      * byte数组 转 long
      */
 
+    /**
+     * of方法。
+     *      * @param bytes byte[]类型参数
+     * @return static long类型返回值
+     */
     /**
      * of方法。
      *      * @param bytes byte[]类型参数

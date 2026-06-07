@@ -14,6 +14,9 @@ import java.util.function.Predicate;
 /**
  * CommandRegistry类。
  */
+/**
+ * CommandRegistry类。
+ */
 public class CommandRegistry<C extends CommandContext> {
 
     private final Map<String, Command<C>> commands;
@@ -21,6 +24,9 @@ public class CommandRegistry<C extends CommandContext> {
     private final Map<String, String> descriptions;
     private CommandFactory<C> factory;
 
+    /**
+     * CommandRegistry方法。
+     */
     /**
      * CommandRegistry方法。
      */
@@ -33,6 +39,12 @@ public class CommandRegistry<C extends CommandContext> {
 
     /**
      * 注册命令
+     */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param command CommandC类型参数
+     * @return CommandRegistry<C>类型返回值
      */
     /**
      * register方法。
@@ -61,6 +73,13 @@ public class CommandRegistry<C extends CommandContext> {
      * @param command CommandC类型参数
      * @return CommandRegistry<C>类型返回值
      */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param category String类型参数
+     * @param command CommandC类型参数
+     * @return CommandRegistry<C>类型返回值
+     */
     public CommandRegistry<C> register(String name, String category, Command<C> command) {
         register(name, command);
         categories.put(name, category);
@@ -69,6 +88,14 @@ public class CommandRegistry<C extends CommandContext> {
 
     /**
      * 注册命令并设置描述
+     */
+    /**
+     * register方法。
+     *      * @param name String类型参数
+     * @param category String类型参数
+     * @param description String类型参数
+     * @param command CommandC类型参数
+     * @return CommandRegistry<C>类型返回值
      */
     /**
      * register方法。
@@ -93,6 +120,11 @@ public class CommandRegistry<C extends CommandContext> {
      *      * @param pairs PairString,类型参数
      * @return final CommandRegistry<C>类型返回值
      */
+    /**
+     * registerAll方法。
+     *      * @param pairs PairString,类型参数
+     * @return final CommandRegistry<C>类型返回值
+     */
     public final CommandRegistry<C> registerAll(Pair<String, Command<C>>... pairs) {
         for (Pair<String, Command<C>> pair : pairs) {
             register(pair.getKey(), pair.getValue());
@@ -102,6 +134,11 @@ public class CommandRegistry<C extends CommandContext> {
 
     /**
      * 获取命令
+     */
+    /**
+     * get方法。
+     *      * @param name String类型参数
+     * @return Command<C>类型返回值
      */
     /**
      * get方法。
@@ -120,12 +157,22 @@ public class CommandRegistry<C extends CommandContext> {
      *      * @param name String类型参数
      * @return boolean类型返回值
      */
+    /**
+     * contains方法。
+     *      * @param name String类型参数
+     * @return boolean类型返回值
+     */
     public boolean contains(String name) {
         return commands.containsKey(name);
     }
 
     /**
      * 移除命令
+     */
+    /**
+     * remove方法。
+     *      * @param name String类型参数
+     * @return Command<C>类型返回值
      */
     /**
      * remove方法。
@@ -146,12 +193,22 @@ public class CommandRegistry<C extends CommandContext> {
      *      * @param name String类型参数
      * @return String类型返回值
      */
+    /**
+     * getCategory方法。
+     *      * @param name String类型参数
+     * @return String类型返回值
+     */
     public String getCategory(String name) {
         return categories.get(name);
     }
 
     /**
      * 获取命令描述
+     */
+    /**
+     * getDescription方法。
+     *      * @param name String类型参数
+     * @return String类型返回值
      */
     /**
      * getDescription方法。
@@ -174,6 +231,10 @@ public class CommandRegistry<C extends CommandContext> {
      * getCommandNames方法。
      * @return Set<String>类型返回值
      */
+    /**
+     * getCommandNames方法。
+     * @return Set<String>类型返回值
+     */
     public Set<String> getCommandNames() {
         return Collections.unmodifiableSet(commands.keySet());
     }
@@ -185,12 +246,21 @@ public class CommandRegistry<C extends CommandContext> {
      * getCommands方法。
      * @return Map<String, Command<C>>类型返回值
      */
+    /**
+     * getCommands方法。
+     * @return Map<String, Command<C>>类型返回值
+     */
     public Map<String, Command<C>> getCommands() {
         return Collections.unmodifiableMap(commands);
     }
 
     /**
      * 按分类获取命令
+     */
+    /**
+     * getCommandsByCategory方法。
+     *      * @param category String类型参数
+     * @return Map<String, Command<C>>类型返回值
      */
     /**
      * getCommandsByCategory方法。
@@ -217,12 +287,21 @@ public class CommandRegistry<C extends CommandContext> {
      * getCategories方法。
      * @return Set<String>类型返回值
      */
+    /**
+     * getCategories方法。
+     * @return Set<String>类型返回值
+     */
     public Set<String> getCategories() {
         return Collections.unmodifiableSet(new HashSet<>(categories.values()));
     }
 
     /**
      * 按名称过滤器查找命令
+     */
+    /**
+     * find方法。
+     *      * @param filter PredicateString类型参数
+     * @return Map<String, Command<C>>类型返回值
      */
     /**
      * find方法。
@@ -246,6 +325,10 @@ public class CommandRegistry<C extends CommandContext> {
      * size方法。
      * @return int类型返回值
      */
+    /**
+     * size方法。
+     * @return int类型返回值
+     */
     public int size() {
         return commands.size();
     }
@@ -257,12 +340,19 @@ public class CommandRegistry<C extends CommandContext> {
      * isEmpty方法。
      * @return boolean类型返回值
      */
+    /**
+     * isEmpty方法。
+     * @return boolean类型返回值
+     */
     public boolean isEmpty() {
         return commands.isEmpty();
     }
 
     /**
      * 清空所有命令
+     */
+    /**
+     * clear方法。
      */
     /**
      * clear方法。
@@ -281,6 +371,11 @@ public class CommandRegistry<C extends CommandContext> {
      *      * @param factory CommandFactoryC类型参数
      * @return CommandRegistry<C>类型返回值
      */
+    /**
+     * setFactory方法。
+     *      * @param factory CommandFactoryC类型参数
+     * @return CommandRegistry<C>类型返回值
+     */
     public CommandRegistry<C> setFactory(CommandFactory<C> factory) {
         this.factory = factory;
         return this;
@@ -288,6 +383,10 @@ public class CommandRegistry<C extends CommandContext> {
 
     /**
      * 创建命令执行器
+     */
+    /**
+     * executor方法。
+     * @return CommandExecutor<C>类型返回值
      */
     /**
      * executor方法。
@@ -304,6 +403,10 @@ public class CommandRegistry<C extends CommandContext> {
      * getFactory方法。
      * @return CommandFactory<C>类型返回值
      */
+    /**
+     * getFactory方法。
+     * @return CommandFactory<C>类型返回值
+     */
     public CommandFactory<C> getFactory() {
         return factory;
     }
@@ -311,6 +414,9 @@ public class CommandRegistry<C extends CommandContext> {
     /**
      * 命令工厂接口
      */
+/**
+ * CommandFactory接口。
+ */
 /**
  * CommandFactory接口。
  */
@@ -323,6 +429,11 @@ public class CommandRegistry<C extends CommandContext> {
      */
     private static class DefaultCommandFactory<C extends CommandContext> implements CommandFactory<C> {
         @Override
+    /**
+     * create方法。
+     *      * @param name String类型参数
+     * @return Command<C>类型返回值
+     */
     /**
      * create方法。
      *      * @param name String类型参数
@@ -345,11 +456,20 @@ public class CommandRegistry<C extends CommandContext> {
      *      * @param key K类型参数
      * @param value V类型参数
      */
+    /**
+     * Pair方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
+     */
         public Pair(K key, V value) {
             this.key = key;
             this.value = value;
         }
 
+    /**
+     * getKey方法。
+     * @return K类型返回值
+     */
     /**
      * getKey方法。
      * @return K类型返回值
@@ -362,10 +482,20 @@ public class CommandRegistry<C extends CommandContext> {
      * getValue方法。
      * @return V类型返回值
      */
+    /**
+     * getValue方法。
+     * @return V类型返回值
+     */
         public V getValue() {
             return value;
         }
 
+    /**
+     * of方法。
+     *      * @param key K类型参数
+     * @param value V类型参数
+     * @return static <K, V> Pair<K, V>类型返回值
+     */
     /**
      * of方法。
      *      * @param key K类型参数

@@ -4,8 +4,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 
+/**
+ * SafeBufferedReader类。
+ */
 public class SafeBufferedReader extends BufferedReader {
 
+    /**
+     * SafeBufferedReader方法。
+     *      * @param in Reader类型参数
+     */
     public SafeBufferedReader(Reader in) {
         super(in);
     }
@@ -18,6 +25,10 @@ public class SafeBufferedReader extends BufferedReader {
     private boolean lookingForLineFeed = false;
 
     @Override
+    /**
+     * read方法。
+     * @return int类型返回值
+     */
     public int read() throws IOException {
         int c = super.read();
         if (c == '\n') {
@@ -36,6 +47,10 @@ public class SafeBufferedReader extends BufferedReader {
         }
     }
 
+    /**
+     * readLine方法。
+     * @return String类型返回值
+     */
     public String readLine() throws IOException {
         StringBuilder sb = new StringBuilder();
         while (true) {

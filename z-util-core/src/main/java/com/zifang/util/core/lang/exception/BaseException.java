@@ -16,6 +16,9 @@ import static com.zifang.util.core.meta.Result.buildMessage;
 /**
  * BaseException类。
  */
+/**
+ * BaseException类。
+ */
 public class BaseException extends RuntimeException {
 
     private static final long serialVersionUID = 2059913032332171665L;
@@ -34,6 +37,10 @@ public class BaseException extends RuntimeException {
      * 使用指定的状态码创建异常实例。
      *
      * @param statusCode 状态码对象，不能为 null
+     */
+    /**
+     * BaseException方法。
+     *      * @param statusCode StatusCode类型参数
      */
     /**
      * BaseException方法。
@@ -58,6 +65,11 @@ public class BaseException extends RuntimeException {
      *      * @param statusCode StatusCode类型参数
      * @param params Object...类型参数
      */
+    /**
+     * BaseException方法。
+     *      * @param statusCode StatusCode类型参数
+     * @param params Object...类型参数
+     */
     public BaseException(StatusCode statusCode, Object... params) {
         super(statusCode.getMessage());
         this.statusCode = statusCode;
@@ -70,6 +82,11 @@ public class BaseException extends RuntimeException {
      *
      * @param statusCode 状态码对象，不能为 null
      * @param e          原始异常，通常是导致当前异常的根本原因
+     */
+    /**
+     * BaseException方法。
+     *      * @param statusCode StatusCode类型参数
+     * @param e Throwable类型参数
      */
     /**
      * BaseException方法。
@@ -93,9 +110,18 @@ public class BaseException extends RuntimeException {
      *      * @param result Result?类型参数
      * @param params Object...类型参数
      */
+    /**
+     * BaseException方法。
+     *      * @param result Result?类型参数
+     * @param params Object...类型参数
+     */
     public BaseException(Result<?> result, Object... params) {
         this(new StatusCode() {
             @Override
+    /**
+     * getCode方法。
+     * @return int类型返回值
+     */
     /**
      * getCode方法。
      * @return int类型返回值
@@ -105,6 +131,10 @@ public class BaseException extends RuntimeException {
             }
 
             @Override
+    /**
+     * getMessage方法。
+     * @return String类型返回值
+     */
     /**
      * getMessage方法。
      * @return String类型返回值
@@ -126,9 +156,18 @@ public class BaseException extends RuntimeException {
      *      * @param result Result?类型参数
      * @param e Throwable类型参数
      */
+    /**
+     * BaseException方法。
+     *      * @param result Result?类型参数
+     * @param e Throwable类型参数
+     */
     public BaseException(Result<?> result, Throwable e) {
         this(new StatusCode() {
             @Override
+    /**
+     * getCode方法。
+     * @return int类型返回值
+     */
     /**
      * getCode方法。
      * @return int类型返回值
@@ -138,6 +177,10 @@ public class BaseException extends RuntimeException {
             }
 
             @Override
+    /**
+     * getMessage方法。
+     * @return String类型返回值
+     */
     /**
      * getMessage方法。
      * @return String类型返回值
@@ -157,9 +200,17 @@ public class BaseException extends RuntimeException {
      * BaseException方法。
      *      * @param result Result?类型参数
      */
+    /**
+     * BaseException方法。
+     *      * @param result Result?类型参数
+     */
     public BaseException(Result<?> result) {
         this(new StatusCode() {
             @Override
+    /**
+     * getCode方法。
+     * @return int类型返回值
+     */
     /**
      * getCode方法。
      * @return int类型返回值
@@ -169,6 +220,10 @@ public class BaseException extends RuntimeException {
             }
 
             @Override
+    /**
+     * getMessage方法。
+     * @return String类型返回值
+     */
     /**
      * getMessage方法。
      * @return String类型返回值
@@ -188,6 +243,10 @@ public class BaseException extends RuntimeException {
      * getStatusCode方法。
      * @return StatusCode类型返回值
      */
+    /**
+     * getStatusCode方法。
+     * @return StatusCode类型返回值
+     */
     public StatusCode getStatusCode() {
         return statusCode;
     }
@@ -196,6 +255,10 @@ public class BaseException extends RuntimeException {
      * 获取错误码。
      *
      * @return 错误码数字
+     */
+    /**
+     * getCode方法。
+     * @return int类型返回值
      */
     /**
      * getCode方法。
@@ -218,6 +281,10 @@ public class BaseException extends RuntimeException {
      * getMessage方法。
      * @return String类型返回值
      */
+    /**
+     * getMessage方法。
+     * @return String类型返回值
+     */
     public String getMessage() {
         return this.message;
     }
@@ -228,6 +295,10 @@ public class BaseException extends RuntimeException {
      * @return 包含状态码、错误码和错误信息的字符串
      */
     @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
     /**
      * toString方法。
      * @return String类型返回值

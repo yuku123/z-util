@@ -9,6 +9,9 @@ package com.zifang.util.core.pattern.spi;
 /**
  * SpiManager类。
  */
+/**
+ * SpiManager类。
+ */
 public class SpiManager {
 
 }

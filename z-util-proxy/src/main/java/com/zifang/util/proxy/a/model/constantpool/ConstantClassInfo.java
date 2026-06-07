@@ -13,10 +13,17 @@ import java.io.InputStream;
 /**
  * ConstantClassInfo类。
  */
+/**
+ * ConstantClassInfo类。
+ */
 public class ConstantClassInfo extends AbstractConstantPool {
 
     private U2 stringIndex;
 
+    /**
+     * ConstantClassInfo方法。
+     *      * @param tag byte类型参数
+     */
     /**
      * ConstantClassInfo方法。
      *      * @param tag byte类型参数
@@ -29,10 +36,18 @@ public class ConstantClassInfo extends AbstractConstantPool {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
+    /**
+     * read方法。
+     *      * @param inputStream InputStream类型参数
+     */
     public void read(InputStream inputStream) {
         this.stringIndex = U2.read(inputStream);
     }
 
+    /**
+     * getStringIndex方法。
+     * @return U2类型返回值
+     */
     /**
      * getStringIndex方法。
      * @return U2类型返回值

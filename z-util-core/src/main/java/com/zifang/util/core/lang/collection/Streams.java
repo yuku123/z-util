@@ -12,6 +12,9 @@ import java.util.stream.StreamSupport;
 /**
  * Streams类。
  */
+/**
+ * Streams类。
+ */
 public class Streams {
 
     /**
@@ -20,6 +23,11 @@ public class Streams {
      * @param iterator 迭代器
      * @param <T>      元素类型
      * @return 对应元素的 Stream
+     */
+    /**
+     * streamOf方法。
+     *      * @param iterator IteratorT类型参数
+     * @return static <T> Stream<T>类型返回值
      */
     /**
      * streamOf方法。
@@ -42,6 +50,11 @@ public class Streams {
      *      * @param iterable IterableT类型参数
      * @return static <T> Stream<T>类型返回值
      */
+    /**
+     * streamOf方法。
+     *      * @param iterable IterableT类型参数
+     * @return static <T> Stream<T>类型返回值
+     */
     public static <T> Stream<T> streamOf(Iterable<T> iterable) {
         return StreamSupport.stream(iterable.spliterator(), false);
     }
@@ -58,6 +71,11 @@ public class Streams {
      *      * @param iterator IteratorT类型参数
      * @return static <T> Stream<T>类型返回值
      */
+    /**
+     * parallelStreamOf方法。
+     *      * @param iterator IteratorT类型参数
+     * @return static <T> Stream<T>类型返回值
+     */
     public static <T> Stream<T> parallelStreamOf(Iterator<T> iterator) {
         return StreamSupport.stream(((Iterable<T>) () -> iterator).spliterator(), true);
     }
@@ -68,6 +86,11 @@ public class Streams {
      * @param iterable 可迭代对象
      * @param <T>      元素类型
      * @return 对应元素的并行 Stream
+     */
+    /**
+     * parallelStreamOf方法。
+     *      * @param iterable IterableT类型参数
+     * @return static <T> Stream<T>类型返回值
      */
     /**
      * parallelStreamOf方法。

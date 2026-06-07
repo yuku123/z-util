@@ -6,8 +6,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
+/**
+ * LastModified类。
+ */
 public class LastModified {
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     public static void main(String[] args) {
         args = new String[]{"http://www.suntray.com"};
         for (int i = 0; i < args.length; i++) {

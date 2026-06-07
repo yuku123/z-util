@@ -4,9 +4,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * NexusModelTest类。
+ */
 public class NexusModelTest {
 
     @Test
+    /**
+     * testChecksum方法。
+     */
     public void testChecksum() {
         Checksum cs = new Checksum();
         cs.setSha1("abc123def456");
@@ -21,6 +27,9 @@ public class NexusModelTest {
     }
 
     @Test
+    /**
+     * testChecksumEquals方法。
+     */
     public void testChecksumEquals() {
         Checksum cs1 = new Checksum();
         cs1.setSha1("abc");
@@ -40,6 +49,9 @@ public class NexusModelTest {
     }
 
     @Test
+    /**
+     * testAsset方法。
+     */
     public void testAsset() {
         Asset asset = new Asset();
         asset.setId("asset-id-1");
@@ -61,6 +73,9 @@ public class NexusModelTest {
     }
 
     @Test
+    /**
+     * testAssetEquals方法。
+     */
     public void testAssetEquals() {
         Asset a1 = new Asset();
         a1.setId("id1");
@@ -84,6 +99,9 @@ public class NexusModelTest {
     }
 
     @Test
+    /**
+     * testComponent方法。
+     */
     public void testComponent() {
         Component comp = new Component();
         comp.setId("comp-id");
@@ -102,6 +120,9 @@ public class NexusModelTest {
     }
 
     @Test
+    /**
+     * testComponentCompareTo方法。
+     */
     public void testComponentCompareTo() {
         Component c1 = new Component();
         c1.setVersion("1.0.0");
@@ -118,6 +139,9 @@ public class NexusModelTest {
     }
 
     @Test
+    /**
+     * testComponentEquals方法。
+     */
     public void testComponentEquals() {
         Component c1 = new Component();
         c1.setId("id1");

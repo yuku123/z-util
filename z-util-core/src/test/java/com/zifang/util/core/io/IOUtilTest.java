@@ -13,12 +13,18 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * IOUtilTest类。
+ */
 public class IOUtilTest {
 
     private byte[] testData;
     private File tempFile;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() throws Exception {
         testData = "hello world\nline2\nline3中文".getBytes(StandardCharsets.UTF_8);
         tempFile = File.createTempFile("io-util-test", ".txt");
@@ -26,6 +32,9 @@ public class IOUtilTest {
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() {
         if (tempFile != null && tempFile.exists()) {
             tempFile.delete();
@@ -35,6 +44,9 @@ public class IOUtilTest {
     // ==================== readString ====================
 
     @Test
+    /**
+     * testReadStringFromInputStream方法。
+     */
     public void testReadStringFromInputStream() throws Exception {
         try (InputStream in = new ByteArrayInputStream(testData)) {
             String result = IOUtil.readString(in);
@@ -43,6 +55,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testReadStringWithCharset方法。
+     */
     public void testReadStringWithCharset() throws Exception {
         try (InputStream in = new ByteArrayInputStream(testData)) {
             String result = IOUtil.readString(in, "UTF-8");
@@ -51,6 +66,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testReadStringWithGBKCharset方法。
+     */
     public void testReadStringWithGBKCharset() throws Exception {
         byte[] gbkData = "你好世界".getBytes("GBK");
         try (InputStream in = new ByteArrayInputStream(gbkData)) {
@@ -60,6 +78,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testReadStringEmptyStream方法。
+     */
     public void testReadStringEmptyStream() throws Exception {
         try (InputStream in = new ByteArrayInputStream(new byte[0])) {
             String result = IOUtil.readString(in);
@@ -70,6 +91,9 @@ public class IOUtilTest {
     // ==================== readToBuffer ====================
 
     @Test
+    /**
+     * testReadToBuffer方法。
+     */
     public void testReadToBuffer() throws Exception {
         try (InputStream in = new ByteArrayInputStream(testData)) {
             FastByteArrayOutputStream out = IOUtil.readToBuffer(in);
@@ -78,6 +102,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testReadToBufferNotCloseInput方法。
+     */
     public void testReadToBufferNotCloseInput() throws Exception {
         InputStream in = new ByteArrayInputStream(testData);
         IOUtil.readToBuffer(in, false);
@@ -86,6 +113,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testReadToBufferClosesInputByDefault方法。
+     */
     public void testReadToBufferClosesInputByDefault() throws Exception {
         InputStream in = new ByteArrayInputStream(testData);
         IOUtil.readToBuffer(in);
@@ -95,6 +125,9 @@ public class IOUtilTest {
     // ==================== readLines ====================
 
     @Test
+    /**
+     * testReadLinesFromReader方法。
+     */
     public void testReadLinesFromReader() throws Exception {
         try (Reader reader = new StringReader("line1\nline2\nline3")) {
             List<String> lines = IOUtil.readLines(reader);
@@ -106,6 +139,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testReadLinesWithEmptyLines方法。
+     */
     public void testReadLinesWithEmptyLines() throws Exception {
         try (Reader reader = new StringReader("line1\n\nline3")) {
             List<String> lines = IOUtil.readLines(reader);
@@ -115,6 +151,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testReadLinesConsumer方法。
+     */
     public void testReadLinesConsumer() throws Exception {
         try (InputStream in = new ByteArrayInputStream("a\nb\nc".getBytes(StandardCharsets.UTF_8))) {
             StringBuilder sb = new StringBuilder();
@@ -126,6 +165,9 @@ public class IOUtilTest {
     // ==================== copy ====================
 
     @Test
+    /**
+     * testCopySmallStream方法。
+     */
     public void testCopySmallStream() throws Exception {
         try (InputStream in = new ByteArrayInputStream(testData);
              ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -136,6 +178,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testCopyLargeStream方法。
+     */
     public void testCopyLargeStream() throws Exception {
         byte[] largeData = new byte[100_000];
         for (int i = 0; i < largeData.length; i++) {
@@ -150,6 +195,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testCopyReturnsZeroForEmptyStream方法。
+     */
     public void testCopyReturnsZeroForEmptyStream() throws Exception {
         try (InputStream in = new ByteArrayInputStream(new byte[0]);
              ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -161,6 +209,9 @@ public class IOUtilTest {
     // ==================== channelCopy ====================
 
     @Test
+    /**
+     * testChannelCopy方法。
+     */
     public void testChannelCopy() throws Exception {
         byte[] data = "channel test data".getBytes(StandardCharsets.UTF_8);
         try (InputStream in = new ByteArrayInputStream(data);
@@ -173,6 +224,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testChannelCopyClear方法。
+     */
     public void testChannelCopyClear() throws Exception {
         byte[] data = "channel clear test".getBytes(StandardCharsets.UTF_8);
         try (InputStream in = new ByteArrayInputStream(data);
@@ -187,6 +241,9 @@ public class IOUtilTest {
     // ==================== skipFully ====================
 
     @Test
+    /**
+     * testSkipFully方法。
+     */
     public void testSkipFully() throws Exception {
         byte[] data = "0123456789".getBytes(StandardCharsets.UTF_8);
         try (InputStream in = new ByteArrayInputStream(data)) {
@@ -197,6 +254,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testSkipFullyBeyondEOF方法。
+     */
     public void testSkipFullyBeyondEOF() throws Exception {
         byte[] data = "123".getBytes(StandardCharsets.UTF_8);
         try (InputStream in = new ByteArrayInputStream(data)) {
@@ -207,6 +267,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testSkipFullyZero方法。
+     */
     public void testSkipFullyZero() throws Exception {
         byte[] data = "abc".getBytes(StandardCharsets.UTF_8);
         try (InputStream in = new ByteArrayInputStream(data)) {
@@ -219,16 +282,25 @@ public class IOUtilTest {
     // ==================== close ====================
 
     @Test
+    /**
+     * testCloseNull方法。
+     */
     public void testCloseNull() {
         IOUtil.close(null); // should not throw
     }
 
     @Test
+    /**
+     * testCloseQuietly方法。
+     */
     public void testCloseQuietly() {
         IOUtil.closeQuietly(null); // should not throw
     }
 
     @Test
+    /**
+     * testCloseAlreadyClosed方法。
+     */
     public void testCloseAlreadyClosed() throws Exception {
         InputStream in = new ByteArrayInputStream(testData);
         in.close();
@@ -236,6 +308,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testCloseIO方法。
+     */
     public void testCloseIO() throws Exception {
         InputStream in = new ByteArrayInputStream(testData);
         IOUtil.close(in);
@@ -243,6 +318,9 @@ public class IOUtilTest {
     }
 
     @Test
+    /**
+     * testCloseOutputStream方法。
+     */
     public void testCloseOutputStream() throws Exception {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         IOUtil.close(out);
@@ -254,6 +332,9 @@ public class IOUtilTest {
     // ==================== FastByteArrayOutputStream integration ====================
 
     @Test
+    /**
+     * testReadToBufferAndWriteToFile方法。
+     */
     public void testReadToBufferAndWriteToFile() throws Exception {
         try (FileOutputStream fos = new FileOutputStream(tempFile);
              InputStream in = new ByteArrayInputStream(testData)) {

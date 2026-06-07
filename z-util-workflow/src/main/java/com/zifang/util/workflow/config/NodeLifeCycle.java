@@ -19,6 +19,9 @@ package com.zifang.util.workflow.config;
 /**
  * NodeLifeCycle接口。
  */
+/**
+ * NodeLifeCycle接口。
+ */
 public interface NodeLifeCycle {
 
     /**

@@ -11,17 +11,26 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * FileDirUtilTest类。
+ */
 public class FileDirUtilTest {
 
     private File tempBaseDir;
 
     @Before
+    /**
+     * setUp方法。
+     */
     public void setUp() throws Exception {
         tempBaseDir = Files.createTempDirectory("dir-test-base").toFile();
         tempBaseDir.deleteOnExit();
     }
 
     @After
+    /**
+     * tearDown方法。
+     */
     public void tearDown() throws Exception {
         if (tempBaseDir != null && tempBaseDir.exists()) {
             deleteRecursively(tempBaseDir);
@@ -43,6 +52,9 @@ public class FileDirUtilTest {
     // ==================== mkdir ====================
 
     @Test
+    /**
+     * testMkdirCreatesDirectory方法。
+     */
     public void testMkdirCreatesDirectory() throws Exception {
         File newDir = new File(tempBaseDir, "newdir");
         FileDirUtil.mkdir(newDir);
@@ -51,6 +63,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testMkdirFromPathString方法。
+     */
     public void testMkdirFromPathString() throws Exception {
         File newDir = new File(tempBaseDir, "newdir2");
         FileDirUtil.mkdir(newDir.getPath());
@@ -59,6 +74,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testMkdirDoesNotThrowWhenExists方法。
+     */
     public void testMkdirDoesNotThrowWhenExists() throws Exception {
         File existingDir = new File(tempBaseDir, "existing");
         existingDir.mkdirs();
@@ -67,11 +85,17 @@ public class FileDirUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testMkdirWithNullPath方法。
+     */
     public void testMkdirWithNullPath() throws Exception {
         FileDirUtil.mkdir((String) null);
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testMkdirWithEmptyPath方法。
+     */
     public void testMkdirWithEmptyPath() throws Exception {
         FileDirUtil.mkdir("");
     }
@@ -79,6 +103,9 @@ public class FileDirUtilTest {
     // ==================== mkdirs ====================
 
     @Test
+    /**
+     * testMkdirsCreatesNestedDirectories方法。
+     */
     public void testMkdirsCreatesNestedDirectories() throws Exception {
         File nested = new File(tempBaseDir, "a/b/c/d");
         FileDirUtil.mkdirs(nested.getAbsolutePath());
@@ -87,6 +114,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testMkdirsFromPathString方法。
+     */
     public void testMkdirsFromPathString() throws Exception {
         File nested = new File(tempBaseDir, "x/y/z");
         FileDirUtil.mkdirs(nested.getPath());
@@ -97,6 +127,9 @@ public class FileDirUtilTest {
     // ==================== cleanDir ====================
 
     @Test
+    /**
+     * testCleanDirRemovesFiles方法。
+     */
     public void testCleanDirRemovesFiles() throws Exception {
         File dir = new File(tempBaseDir, "cleanme");
         dir.mkdirs();
@@ -110,6 +143,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testCleanDirRemovesSubdirs方法。
+     */
     public void testCleanDirRemovesSubdirs() throws Exception {
         File dir = new File(tempBaseDir, "cleansub");
         dir.mkdirs();
@@ -123,11 +159,17 @@ public class FileDirUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testCleanDirWithNull方法。
+     */
     public void testCleanDirWithNull() throws Exception {
         FileDirUtil.cleanDir(null);
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testCleanDirWithNonExistent方法。
+     */
     public void testCleanDirWithNonExistent() throws Exception {
         FileDirUtil.cleanDir(new File(tempBaseDir, "non-existent"));
     }
@@ -135,6 +177,9 @@ public class FileDirUtilTest {
     // ==================== deleteDir ====================
 
     @Test
+    /**
+     * testDeleteDirRemovesDirAndContents方法。
+     */
     public void testDeleteDirRemovesDirAndContents() throws Exception {
         File dir = new File(tempBaseDir, "deleteme");
         dir.mkdirs();
@@ -148,12 +193,18 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testDeleteDirDoesNotThrowIfNotExists方法。
+     */
     public void testDeleteDirDoesNotThrowIfNotExists() throws Exception {
         File nonExistent = new File(tempBaseDir, "non-existent-dir");
         FileDirUtil.deleteDir(nonExistent); // should not throw
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testDeleteDirWithNull方法。
+     */
     public void testDeleteDirWithNull() throws Exception {
         FileDirUtil.deleteDir((File) null);
     }
@@ -161,6 +212,9 @@ public class FileDirUtilTest {
     // ==================== deleteFile ====================
 
     @Test
+    /**
+     * testDeleteFileRemovesFile方法。
+     */
     public void testDeleteFileRemovesFile() throws Exception {
         File file = new File(tempBaseDir, "deletefile.txt");
         file.createNewFile();
@@ -169,12 +223,18 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testDeleteFileDoesNotThrowIfNotExists方法。
+     */
     public void testDeleteFileDoesNotThrowIfNotExists() throws Exception {
         File nonExistent = new File(tempBaseDir, "non-existent-file.txt");
         FileDirUtil.deleteFile(nonExistent); // should not throw
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testDeleteFileWithNull方法。
+     */
     public void testDeleteFileWithNull() throws Exception {
         FileDirUtil.deleteFile((File) null);
     }
@@ -182,6 +242,9 @@ public class FileDirUtilTest {
     // ==================== isEmptyDir ====================
 
     @Test
+    /**
+     * testIsEmptyDirWithEmptyDir方法。
+     */
     public void testIsEmptyDirWithEmptyDir() throws Exception {
         File emptyDir = new File(tempBaseDir, "empty");
         emptyDir.mkdirs();
@@ -189,6 +252,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testIsEmptyDirWithNonEmptyDir方法。
+     */
     public void testIsEmptyDirWithNonEmptyDir() throws Exception {
         File dir = new File(tempBaseDir, "nonempty");
         dir.mkdirs();
@@ -197,6 +263,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testIsEmptyDirWithFile方法。
+     */
     public void testIsEmptyDirWithFile() throws Exception {
         File file = new File(tempBaseDir, "afile.txt");
         file.createNewFile();
@@ -204,6 +273,9 @@ public class FileDirUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testIsEmptyDirWithNull方法。
+     */
     public void testIsEmptyDirWithNull() throws Exception {
         FileDirUtil.isEmptyDir(null);
     }
@@ -211,6 +283,9 @@ public class FileDirUtilTest {
     // ==================== listFiles ====================
 
     @Test
+    /**
+     * testListFilesReturnsFiles方法。
+     */
     public void testListFilesReturnsFiles() throws Exception {
         File dir = new File(tempBaseDir, "listfiles");
         dir.mkdirs();
@@ -224,6 +299,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testListFilesWithEmptyDir方法。
+     */
     public void testListFilesWithEmptyDir() throws Exception {
         File emptyDir = new File(tempBaseDir, "empty-list");
         emptyDir.mkdirs();
@@ -232,6 +310,9 @@ public class FileDirUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testListFilesWithNull方法。
+     */
     public void testListFilesWithNull() throws Exception {
         FileDirUtil.listFiles(null);
     }
@@ -239,6 +320,9 @@ public class FileDirUtilTest {
     // ==================== listFiles with extension filter ====================
 
     @Test
+    /**
+     * testListFilesWithExtension方法。
+     */
     public void testListFilesWithExtension() throws Exception {
         File dir = new File(tempBaseDir, "extfilter");
         dir.mkdirs();
@@ -251,6 +335,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testListFilesWithExtensionNoMatch方法。
+     */
     public void testListFilesWithExtensionNoMatch() throws Exception {
         File dir = new File(tempBaseDir, "extnomatch");
         dir.mkdirs();
@@ -262,6 +349,9 @@ public class FileDirUtilTest {
     // ==================== listFilesRecursively ====================
 
     @Test
+    /**
+     * testListFilesRecursively方法。
+     */
     public void testListFilesRecursively() throws Exception {
         File dir = new File(tempBaseDir, "recursive");
         dir.mkdirs();
@@ -275,6 +365,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testListFilesRecursivelyEmptyDir方法。
+     */
     public void testListFilesRecursivelyEmptyDir() throws Exception {
         File emptyDir = new File(tempBaseDir, "empty-recursive");
         emptyDir.mkdirs();
@@ -283,6 +376,9 @@ public class FileDirUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testListFilesRecursivelyWithNull方法。
+     */
     public void testListFilesRecursivelyWithNull() throws Exception {
         FileDirUtil.listFilesRecursively(null);
     }
@@ -290,6 +386,9 @@ public class FileDirUtilTest {
     // ==================== searchFile ====================
 
     @Test
+    /**
+     * testSearchFileFindsFile方法。
+     */
     public void testSearchFileFindsFile() throws Exception {
         File dir = new File(tempBaseDir, "search");
         dir.mkdirs();
@@ -302,6 +401,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testSearchFileInSubdir方法。
+     */
     public void testSearchFileInSubdir() throws Exception {
         File dir = new File(tempBaseDir, "searchsub");
         dir.mkdirs();
@@ -316,6 +418,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testSearchFileNotFound方法。
+     */
     public void testSearchFileNotFound() throws Exception {
         File dir = new File(tempBaseDir, "notfound");
         dir.mkdirs();
@@ -324,11 +429,17 @@ public class FileDirUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testSearchFileWithNullDir方法。
+     */
     public void testSearchFileWithNullDir() throws Exception {
         FileDirUtil.searchFile(null, "file.txt");
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testSearchFileWithNullName方法。
+     */
     public void testSearchFileWithNullName() throws Exception {
         FileDirUtil.searchFile(tempBaseDir, null);
     }
@@ -336,6 +447,9 @@ public class FileDirUtilTest {
     // ==================== ensureDirExists ====================
 
     @Test
+    /**
+     * testEnsureDirExistsCreatesNewDir方法。
+     */
     public void testEnsureDirExistsCreatesNewDir() throws Exception {
         File newDir = new File(tempBaseDir, "ensure-new");
         FileDirUtil.ensureDirExists(newDir);
@@ -343,6 +457,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testEnsureDirExistsReturnsExistingDir方法。
+     */
     public void testEnsureDirExistsReturnsExistingDir() throws Exception {
         File existing = new File(tempBaseDir, "ensure-existing");
         existing.mkdirs();
@@ -351,6 +468,9 @@ public class FileDirUtilTest {
     }
 
     @Test
+    /**
+     * testEnsureDirExistsCreatesNestedDirs方法。
+     */
     public void testEnsureDirExistsCreatesNestedDirs() throws Exception {
         File nested = new File(tempBaseDir, "ensure/nested/dir");
         FileDirUtil.ensureDirExists(nested);
@@ -358,6 +478,9 @@ public class FileDirUtilTest {
     }
 
     @Test(expected = IOException.class)
+    /**
+     * testEnsureDirExistsWithNull方法。
+     */
     public void testEnsureDirExistsWithNull() throws Exception {
         FileDirUtil.ensureDirExists(null);
     }

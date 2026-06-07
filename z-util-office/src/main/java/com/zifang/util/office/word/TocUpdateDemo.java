@@ -11,10 +11,18 @@ import org.docx4j.toc.TocGenerator;
 /**
  * TocUpdateDemo类。
  */
+/**
+ * TocUpdateDemo类。
+ */
 public class TocUpdateDemo {
 
     static boolean update = false;
 
+    /**
+     * main方法。
+     *      * @param args String[]类型参数
+     * @return static void类型返回值
+     */
     /**
      * main方法。
      *      * @param args String[]类型参数

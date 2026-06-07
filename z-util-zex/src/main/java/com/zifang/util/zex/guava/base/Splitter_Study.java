@@ -43,6 +43,9 @@ import java.util.List;
  * @author zifang
  * @version 1.0
  */
+/**
+ * Splitter_Study类。
+ */
 public class Splitter_Study {
     String str = ",a,,b,";
 
@@ -68,6 +71,9 @@ public class Splitter_Study {
      * trimResults()移除结果字符串的前导空白和尾部空白；trimResults(CharMatcher)给定匹配器，移除结果字符串的前导匹配字符和尾部匹配字符
      */
     @Test
+    /**
+     * basicTest方法。
+     */
     public void basicTest() {
         System.out.println("str:" + str);
         List<String> arr = Arrays.asList(str.split(","));
@@ -90,6 +96,9 @@ public class Splitter_Study {
      * 修剪[trim]、折叠[collapse]、移除[remove]、保留[retain]
      */
     @Test
+    /**
+     * matcherTest方法。
+     */
     public void matcherTest() {
         System.out.println("str2:" + str2);
         String theDigits = CharMatcher.digit().retainFrom(str2); // 只保留数字字符
@@ -106,6 +115,9 @@ public class Splitter_Study {
     }
 
     @Test
+    /**
+     * separatorTest方法。
+     */
     public void separatorTest() {
         System.out.println("ee" + System.lineSeparator() + "ff"); // ee、ff分两行输出
         System.out.println("a\rbc"); // bc
@@ -130,6 +142,9 @@ public class Splitter_Study {
      * 驼峰转换，写代码生成器时很有用
      */
     @Test
+    /**
+     * caseFormat方法。
+     */
     public void caseFormat() {
         String str = "helloZxiaofanCom";
         System.out.println(CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_HYPHEN, str)); // hello-zxiaofan-com

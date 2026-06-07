@@ -8,6 +8,9 @@ import java.util.ArrayList;
  *
  * @author zifang
  */
+/**
+ * Robot类。
+ */
 public class Robot {
     private enum Direction {NORTH, EAST, SOUTH, WEST}
 
@@ -28,6 +31,12 @@ public class Robot {
      * @param maze          The maze the robot will use
      * @param maxMoves      The maximum number of moves the robot can make
      */
+    /**
+     * Robot方法。
+     *      * @param sensorActions int[]类型参数
+     * @param maze Maze类型参数
+     * @param maxMoves int类型参数
+     */
     public Robot(int[] sensorActions, Maze maze, int maxMoves) {
         this.sensorActions = this.calcSensorActions(sensorActions);
         this.maze = maze;
@@ -44,6 +53,9 @@ public class Robot {
 
     /**
      * Runs the robot's actions based on sensor inputs
+     */
+    /**
+     * run方法。
      */
     public void run() {
         while (true) {
@@ -100,6 +112,9 @@ public class Robot {
 
     /**
      * Runs the next action
+     */
+    /**
+     * makeNextAction方法。
      */
     public void makeNextAction() {
         // If move forward
@@ -174,6 +189,10 @@ public class Robot {
      *
      * @return int Next action
      */
+    /**
+     * getNextAction方法。
+     * @return int类型返回值
+     */
     public int getNextAction() {
         return this.sensorActions[this.getSensorValue()];
     }
@@ -182,6 +201,10 @@ public class Robot {
      * Get sensor value
      *
      * @return int Next sensor value
+     */
+    /**
+     * getSensorValue方法。
+     * @return int类型返回值
      */
     public int getSensorValue() {
         // If sensor value has already been calculated
@@ -255,6 +278,10 @@ public class Robot {
      *
      * @return int[] Array with robot's position
      */
+    /**
+     * getPosition方法。
+     * @return int[]类型返回值
+     */
     public int[] getPosition() {
         return new int[]{this.xPosition, this.yPosition};
     }
@@ -273,6 +300,10 @@ public class Robot {
      *
      * @return ArrayList<int> Robot's route
      */
+    /**
+     * getRoute方法。
+     * @return ArrayList<int[]>类型返回值
+     */
     public ArrayList<int[]> getRoute() {
         return this.route;
     }
@@ -281,6 +312,10 @@ public class Robot {
      * Returns route in printable format
      *
      * @return String Robot's route
+     */
+    /**
+     * printRoute方法。
+     * @return String类型返回值
      */
     public String printRoute() {
         String route = "";
