@@ -87,9 +87,20 @@ public class DynamicLexer implements Lexer {
                 // Fragment规则不产生Token
                 continue;
             }
-            
-            // 转换G4规则为正则表达式
-            String pattern = convertToRegex(rule.getBody());
+            // 词法分析器只处理 LEXER 规则，跳过 PARSER 规则
+            if (rule.getType() != G4Rule.RuleType.LEXER) {
+                continue;
+            }
+
+            // 特殊处理：空模式 (例如 EOF: ;) 视为文件结束标记，用一个永远不在
+            // 输入中匹配成功的哨兵正则（(?!)），让 longest-match 走完后由 nextToken 主动发射
+            String rawBody = rule.getBody().trim();
+            String pattern;
+            if (rawBody.isEmpty()) {
+                pattern = "(?!)";
+            } else {
+                pattern = convertToRegex(rawBody);
+            }
 
             TokenDefinition def = new TokenDefinition(
                 rule.getName(),
@@ -437,14 +448,23 @@ public class DynamicLexer implements Lexer {
         pos = 0;
         line = 1;
         column = 1;
-        
+
         while (pos < chars.length) {
             Token token = nextToken();
             if (token != null) {
                 tokens.add(token);
             }
         }
-        
+        // 输入末尾再调一次 nextToken，让它有机会发射 EOF 等哨兵令牌
+        while (true) {
+            Token token = nextToken();
+            if (token == null) break;
+            tokens.add(token);
+            // 如果是 EOF，nextToken 会一直发射同一个 EOF，循环会爆。
+            // 哨兵 EOF 的 text 为空且不再推进 pos，所以最多发一次即可。
+            break;
+        }
+
         return tokens;
     }
 
@@ -462,8 +482,18 @@ public class DynamicLexer implements Lexer {
             }
             pos++;
         }
-        
+
         if (pos >= chars.length) {
+            // 输入末尾：发射 EOF（如果声明了 EOF 规则），否则返回 null
+            if (tokenTypeMap.containsKey("EOF")) {
+                SimpleToken token = new SimpleToken();
+                token.setType(tokenTypeMap.get("EOF"));
+                token.setText("");
+                token.setLine(line);
+                token.setColumn(column);
+                token.setTokenName("EOF");
+                return token;
+            }
             return null;
         }
         

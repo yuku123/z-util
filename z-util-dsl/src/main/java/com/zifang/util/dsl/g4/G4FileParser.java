@@ -61,28 +61,54 @@ public class G4FileParser {
         boolean inLexer = false;
         boolean inParser = false;
 
+        // 支持多行规则：累积非空非注释行直到遇到 `;`，合并为单行再解析
+        StringBuilder buffer = new StringBuilder();
+
         String[] lines = g4Content.split("\n");
         for (String line : lines) {
-            line = line.trim();
+            String trimmed = line.trim();
 
-            if (line.startsWith("lexer grammar")) {
+            if (trimmed.startsWith("lexer grammar")) {
                 inLexer = true;
                 inParser = false;
                 continue;
-            } else if (line.startsWith("parser grammar")) {
+            } else if (trimmed.startsWith("parser grammar")) {
                 inLexer = false;
                 inParser = true;
                 continue;
             }
 
             // Skip empty lines, single-line comments, /* lines
-            if (line.isEmpty() || line.startsWith("//") || line.startsWith("/*") || line.startsWith("*")) {
+            if (trimmed.isEmpty() || trimmed.startsWith("//") || trimmed.startsWith("/*") || trimmed.startsWith("*")) {
                 continue;
             }
 
-            G4Rule rule = parseRuleLine(line, inLexer ? G4Rule.RuleType.LEXER : G4Rule.RuleType.PARSER);
-            if (rule != null) {
-                rules.add(rule);
+            // Skip G4 顶层声明（options { ... }、tokens { ... }、channels { ... } 等），它们不是规则定义
+            if (trimmed.startsWith("options") || trimmed.startsWith("tokens") || trimmed.startsWith("channels")) {
+                continue;
+            }
+
+            // Skip ANTLR4 注解（@header { ... }、@members { ... }、@parser::context 等）
+            if (trimmed.startsWith("@")) {
+                continue;
+            }
+
+            // Append current line to buffer
+            if (buffer.length() > 0) {
+                buffer.append(' ');
+            }
+            buffer.append(trimmed);
+
+            // If buffer has a top-level `;`, treat the buffer as one rule
+            // findSemicolon 跟踪括号/字符串，能正确判断 `;` 是否在顶层（不在括号内/字符串里）
+            String buffered = buffer.toString();
+            int semiPos = findSemicolon(buffered, 0);
+            if (semiPos >= 0) {
+                G4Rule rule = parseRuleLine(buffered, inLexer ? G4Rule.RuleType.LEXER : G4Rule.RuleType.PARSER);
+                if (rule != null) {
+                    rules.add(rule);
+                }
+                buffer.setLength(0);
             }
         }
 

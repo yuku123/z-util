@@ -55,7 +55,7 @@ public class DedaoE {
                 String mdContent = "";
                 mdContent = mdContent+"---\n" +
                         "title: " + stringObjectMap.get("title") + "\n" +
-                        "date: " + DateUtil.format(new Date(), DateUtil.DATE_FORMAT_WHIFFLETREE_SECOND) + "\n" +
+                        "date: " + DateUtil.format(new Date(), DateUtil.PATTERN_DEFAULT) + "\n" +
                         "tags: " + stringObjectMap.get("tags") + "\n" +
                         "---\n";
                 for(Map<String,Object> item : rawMap){

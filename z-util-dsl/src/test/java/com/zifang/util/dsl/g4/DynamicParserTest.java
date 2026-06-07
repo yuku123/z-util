@@ -72,15 +72,22 @@ public class DynamicParserTest {
         DynamicLexer lexer = new DynamicLexer();
         DynamicParser parser = new DynamicParser();
 
+        // 合并 grammar：词法规则需要覆盖表达式里的运算符和括号，否则 lexer 无法 tokenize 输入
         String combinedG4 = "lexer grammar ExprLexer;\n" +
                 "ID : [a-z]+ ;\n" +
                 "NUM : [0-9]+ ;\n" +
                 "WS : [ \\t\\n]+ -> channel(HIDDEN) ;\n" +
+                "PLUS : '+' ;\n" +
+                "MINUS : '-' ;\n" +
+                "MUL : '*' ;\n" +
+                "DIV : '/' ;\n" +
+                "LPAREN : '(' ;\n" +
+                "RPAREN : ')' ;\n" +
                 "parser grammar ExprParser;\n" +
                 "prog : expr ;\n" +
-                "expr : term (('+' | '-') term)* ;\n" +
-                "term : factor (('*' | '/') factor)* ;\n" +
-                "factor : NUM | '(' expr ')' ;\n";
+                "expr : term ((PLUS | MINUS) term)* ;\n" +
+                "term : factor ((MUL | DIV) factor)* ;\n" +
+                "factor : ID | LPAREN expr RPAREN ;\n";
 
         lexer.loadG4(combinedG4);
         parser.loadG4(combinedG4);

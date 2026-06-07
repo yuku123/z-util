@@ -44,7 +44,9 @@ public class YamlG4Parser {
             DynamicParser parser = new DynamicParser();
             parser.loadG4(parserG4);
             parser.setTokenReader(tokenReader);
-            ASTNode ast = parser.parse();
+            // 显式指定起始规则为 "yaml"，避免 hashMap 迭代顺序不确定导致
+            // 第一个被遍历到的规则不一定是入口规则
+            ASTNode ast = parser.parse("yaml");
 
             return astToJava(ast);
 
@@ -111,9 +113,27 @@ public class YamlG4Parser {
     // ==================== AST → Java 对象 ====================
 
     private Object astToJava(ASTNode node) {
+        if (node == null) {
+            System.err.println("[DBG-YAML] astToJava got null node");
+            return null;
+        }
         String type = node.getType();
         String text = node.getText();
         List<ASTNode> children = node.getChildren();
+        if (children == null) {
+            System.err.println("[DBG-YAML] children is null for type=" + type);
+            return null;
+        }
+        if (type == null) {
+            System.err.println("[DBG-YAML] type is null, children=" + children.size() + " text='" + text + "'");
+            return null;
+        }
+        if (type.equals("yaml")) {
+            System.err.println("[DBG-YAML] yaml type, children=" + children.size() + " text='" + text + "'");
+            for (ASTNode c : children) {
+                System.err.println("  child: type=" + c.getType() + " text='" + c.getText() + "' children=" + c.getChildren().size());
+            }
+        }
 
         if (children.isEmpty() && (text == null || text.isEmpty())) return null;
         if (children.isEmpty()) return parseScalar(type, text);

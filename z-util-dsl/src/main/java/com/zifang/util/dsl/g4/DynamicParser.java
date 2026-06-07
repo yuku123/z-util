@@ -135,6 +135,18 @@ public class DynamicParser implements Parser {
             }
         }
 
+        // 兜底：如果规则包含"空 alternative"（body 中有 | 出现后没有内容），
+        // 比如 YAML grammar 里的 `blockValue : EOL indent blockContent | ;`，
+        // 视为规则可空匹配（不消耗 token，返回无子节点的 matched 节点），
+        // 这样 `blockValue?` 之类的可选包装就能正常跳过。
+        if (body.contains("|")) {
+            SimpleASTNode matched = new SimpleASTNode();
+            matched.setType(ruleName);
+            matched.setLine(node.getLine());
+            matched.setColumn(node.getColumn());
+            return matched;
+        }
+
         // 所有alternative都空了（没有consume任何token），抛异常让上层感知失败
         throw new ParseException("Rule '" + ruleName + "' failed to match");
     }
@@ -208,16 +220,20 @@ public class DynamicParser implements Parser {
         // 可选元素 (...)
         if (element.startsWith("(") && element.endsWith(")")) {
             String inner = element.substring(1, element.length() - 1);
-            SimpleASTNode node = new SimpleASTNode();
-            node.setType("group");
-            node.setLine(getCurrentLine());
-            node.setColumn(getCurrentColumn());
-            try {
-                parseSequence(inner, node);
-            } catch (ParseException e) {
-                // 可选组，不匹配时不报错
+            SimpleASTNode groupNode = new SimpleASTNode();
+            groupNode.setType("group");
+            groupNode.setLine(getCurrentLine());
+            groupNode.setColumn(getCurrentColumn());
+            // 改用 parseAlternatives 让组内也支持 | 分隔的 alternatives；
+            // parseAlternatives 不把 altNode 挂到 parent，所以这里手动把第一个非空 alt 加到 groupNode 下
+            List<ParseResult> alts = parseAlternatives(inner, null);
+            for (ParseResult r : alts) {
+                if (!r.node.getChildren().isEmpty()) {
+                    groupNode.addChild(r.node);
+                    break;
+                }
             }
-            return node;
+            return groupNode;
         }
 
         // 可选元素 ?
@@ -249,12 +265,18 @@ public class DynamicParser implements Parser {
 
             try {
                 while (true) {
+                    // 记录 token 游标，检测本轮是否真的消耗了 token
+                    int beforePos = tokenReader.hasNext() ? safeTokenIndex() : -1;
                     ASTNode child = parseElement(inner);
+                    int afterPos = tokenReader.hasNext() ? safeTokenIndex() : -1;
+
                     if (child == null) {
                         break;
                     }
-                    // 防止空匹配造成死循环：例如 (a)* 中 a 不匹配时 group 仍返回空节点
-                    if (child.getChildren().isEmpty()) {
+                    // 防止空匹配造成死循环：
+                    // - 子节点本身没有 children
+                    // - 或者本轮没消耗任何 token（empty match 路径）
+                    if (child.getChildren().isEmpty() || beforePos == afterPos) {
                         break;
                     }
                     node.addChild(child);

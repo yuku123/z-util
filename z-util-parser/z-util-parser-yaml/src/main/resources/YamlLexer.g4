@@ -11,6 +11,8 @@ EOL: '\r'? '\n' -> channel(HIDDEN);
 Space: [ \t]+ -> channel(HIDDEN);
 // 注释（跳过）
 Comment: '#' [^\n\r]* -> channel(HIDDEN);
+// 文件结束
+EOF: ;
 
 // 文档分隔符
 DocStart: '---';
