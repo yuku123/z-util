@@ -79,23 +79,170 @@ public class StateMachine<S, E, C> {
 
     private final S initialState;
     private final Map<S, Map<E, Transition<S, E, C>>> transitionTable;
-    private final Map<S, S> parentMap = new HashMap<>();            // 子态 -> 父态（顶层为 null）
-    private final Map<S, S> compositeInitialMap = new HashMap<>();  // composite -> 初始子态
-    private final Map<S, BiConsumer<S, C>> entryActions = new HashMap<>();
-    private final Map<S, BiConsumer<S, C>> exitActions = new HashMap<>();
-    private final Set<S> historyStates = new HashSet<>();
-    private final Map<S, S> lastActiveSubstate = new HashMap<>();   // composite -> 上次激活的子态（H 用）
-    private final Map<S, S> historyParentMap = new HashMap<>();     // H 状态 -> 其父 composite
+    // 不可变配置（在 build 时由 builder 一次性填充）。copy 构造器复用引用。
+    private Map<S, S> parentMap = new HashMap<>();            // 子态 -> 父态（顶层为 null）
+    private Map<S, S> compositeInitialMap = new HashMap<>();  // composite -> 初始子态
+    private Map<S, BiConsumer<S, C>> entryActions = new HashMap<>();
+    private Map<S, BiConsumer<S, C>> exitActions = new HashMap<>();
+    private Set<S> historyStates = new HashSet<>();
+    // 每实例可变状态
+    private Map<S, S> lastActiveSubstate = new HashMap<>();   // composite -> 上次激活的子态（H 用）
+    // 不可变配置续
+    private Map<S, S> historyParentMap = new HashMap<>();     // H 状态 -> 其父 composite
+    private Map<S, HistoryType> historyTypes = new HashMap<>(); // H 状态 -> 恢复类型
+    private Set<S> finalStates = new HashSet<>();             // 终态集合
 
-    private final CopyOnWriteArrayList<StateListener<S, E, C>> listeners = new CopyOnWriteArrayList<>();
+    // 监听器需在 copy 构造器里被覆盖（每实例独立），非 final
+    private CopyOnWriteArrayList<StateListener<S, E, C>> listeners = new CopyOnWriteArrayList<>();
 
     private volatile S currentState;
 
     private StateMachine(S initialState,
                          Map<S, Map<E, Transition<S, E, C>>> transitionTable) {
         this.initialState = Objects.requireNonNull(initialState, "initialState");
-        this.currentState = initialState;
         this.transitionTable = transitionTable;
+        // 注意：此时 parentMap / compositeInitialMap 等还没填充，初始下钻放到 build() 里完成
+        this.currentState = initialState;
+    }
+
+    /**
+     * 基于"模板"（已构建完成的实例）复制出一个新的实例：共享不可变配置（转移表/层级结构），
+     * 但拥有独立的 currentState / lastActiveSubstate / listeners。
+     * <p>
+     * 主要供 {@link StateMachineFactory} 使用，业务上一个独立对象（如一个订单）对应一个实例。
+     */
+    private StateMachine(StateMachine<S, E, C> template) {
+        this.initialState = template.initialState;
+        this.transitionTable = template.transitionTable;
+        this.parentMap = template.parentMap;
+        this.compositeInitialMap = template.compositeInitialMap;
+        this.entryActions = template.entryActions;
+        this.exitActions = template.exitActions;
+        this.historyStates = template.historyStates;
+        this.historyParentMap = template.historyParentMap;
+        this.historyTypes = template.historyTypes;
+        this.finalStates = template.finalStates;
+        // 独立可变状态
+        this.lastActiveSubstate = new HashMap<>();
+        this.listeners = new CopyOnWriteArrayList<>();
+        this.currentState = descendIntoInitial(this.initialState, null);
+    }
+
+    /**
+     * 复制一个独立实例（共享配置、独立状态）。等价于 {@code template.newInstance()}。
+     */
+    public StateMachine<S, E, C> newInstance() {
+        return new StateMachine<>(this);
+    }
+
+    /**
+     * 导出 Graphviz DOT 格式的状态图字符串，可粘贴到 <a href="https://dreampuf.github.io/GraphvizOnline/">在线渲染</a>
+     * 或用 {@code dot -Tpng} 生成本地图片。
+     * <p>
+     * 形状约定：
+     * <ul>
+     *   <li>普通状态：椭圆</li>
+     *   <li>composite：双圈（doublecircle）</li>
+     *   <li>history（H）：八角形（octagon）</li>
+     *   <li>终态（final）：粗体</li>
+     * </ul>
+     * 转移标签：{@code <event> [guard] / action}，internal 转移标 {@code (int)}。
+     */
+    public String toDot() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("digraph StateMachine {\n");
+        sb.append("  rankdir=LR;\n");
+        sb.append("  node [shape=ellipse, fontname=\"Helvetica\"];\n");
+        sb.append("  edge [fontname=\"Helvetica\", fontsize=10];\n\n");
+
+        // 初始状态：带个入口空心节点指向它
+        sb.append("  __start__ [shape=point, width=0, height=0];\n");
+        sb.append("  __start__ -> ").append(dotId(initialState)).append(";\n\n");
+
+        // 节点
+        for (S s : allStates()) {
+            String shape;
+            if (historyStates.contains(s)) {
+                shape = "octagon";
+            } else if (compositeInitialMap.containsKey(s)) {
+                shape = "doublecircle";
+            } else if (finalStates.contains(s)) {
+                shape = "ellipse";
+            } else {
+                shape = "ellipse";
+            }
+            sb.append("  ").append(dotId(s));
+            sb.append(" [label=\"").append(escape(s.toString())).append("\"");
+            if (finalStates.contains(s)) sb.append(", style=bold");
+            sb.append(", shape=").append(shape);
+            sb.append("];\n");
+        }
+        sb.append("\n");
+
+        // 转移边
+        for (S from : allStates()) {
+            Map<E, Transition<S, E, C>> m = transitionTable.get(from);
+            if (m == null) continue;
+            for (Map.Entry<E, Transition<S, E, C>> e : m.entrySet()) {
+                E event = e.getKey();
+                Transition<S, E, C> t = e.getValue();
+                String label = escape(String.valueOf(event));
+                if (t.isInternal()) {
+                    label += " (internal)";
+                } else if (t.hasBranches()) {
+                    label += " [choice]";
+                }
+                sb.append("  ").append(dotId(from)).append(" -> ").append(dotId(t.getTo()));
+                sb.append(" [label=\"").append(label).append("\"];\n");
+            }
+        }
+        // composite 初始进入边（initial -> initialChild）
+        for (Map.Entry<S, S> e : compositeInitialMap.entrySet()) {
+            sb.append("  ").append(dotId(e.getKey())).append(" -> ")
+              .append(dotId(e.getValue())).append(" [label=\"(initial)\", style=dashed];\n");
+        }
+
+        sb.append("}\n");
+        return sb.toString();
+    }
+
+    private String dotId(S state) {
+        // DOT 节点 ID 不能含空格或特殊字符
+        return "\"" + state.toString().replace("\"", "\\\"") + "\"";
+    }
+
+    private static String escape(String s) {
+        return s.replace("\"", "\\\"");
+    }
+
+    private java.util.Set<S> allStates() {
+        java.util.Set<S> all = new java.util.LinkedHashSet<>();
+        all.add(initialState);
+        all.addAll(transitionTable.keySet());
+        for (Map<E, Transition<S, E, C>> m : transitionTable.values()) {
+            for (Transition<S, E, C> t : m.values()) {
+                all.add(t.getTo());
+                if (t.hasBranches()) {
+                    for (Transition.Branch<S, C> b : t.getBranches()) {
+                        all.add(b.target);
+                    }
+                }
+            }
+        }
+        all.addAll(parentMap.keySet());
+        all.addAll(compositeInitialMap.keySet());
+        all.addAll(compositeInitialMap.values());
+        all.addAll(historyStates);
+        all.addAll(historyParentMap.keySet());
+        all.addAll(finalStates);
+        return all;
+    }
+
+    /**
+     * 构造完成后由 build() 调用：从初始状态沿 composite 下钻到真正激活的叶子，并跑 entry actions。
+     */
+    private void descendOnInit() {
+        this.currentState = descendIntoInitial(this.initialState, null);
     }
 
     /**
@@ -191,6 +338,16 @@ public class StateMachine<S, E, C> {
      */
     public synchronized S fire(E event, C context, boolean failFast) {
         S from = currentState;
+        // 终态：拒绝所有事件
+        if (finalStates.contains(from)) {
+            String reason = "State machine is completed at final state '" + from
+                    + "'; event '" + event + "' is not accepted";
+            notifyRefused(from, event, context, reason);
+            if (failFast) {
+                throw new StateMachineException(reason);
+            }
+            return from;
+        }
         Transition<S, E, C> t = resolveTransition(from, event);
         if (t == null) {
             String reason = "No transition from state '" + from + "' on event '" + event + "'";
@@ -210,8 +367,22 @@ public class StateMachine<S, E, C> {
         }
 
         S transitionFrom = t.getFrom();
-        S to = t.getTo();
+        // choice 转移：根据 context 解析出真实目标
+        S to = t.resolveTarget(context);
         S lca = findLCA(from, to);
+
+        // 内部转移（自循环）：不触发 exit/enter，只跑 action
+        if (t.isInternal()) {
+            try {
+                t.executeAction(transitionFrom, context);
+            } catch (RuntimeException ex) {
+                notifyError(from, event, context, ex);
+                throw new StateMachineException("Action failed during internal transition from '"
+                        + from + "' on event '" + event + "'", ex);
+            }
+            notifyEnd(from, from, event, context);
+            return from;
+        }
 
         // 进入转移的"begin"通知（在 exit 之前，转移尚未发生）
         notifyBegin(transitionFrom, to, event, context);
@@ -273,6 +444,10 @@ public class StateMachine<S, E, C> {
             ancestor = parent;
         }
         notifyEnd(from, resolved, event, context);
+        // 如果 resolved 是终态，通知状态机完成
+        if (finalStates.contains(resolved)) {
+            notifyComplete(resolved, context);
+        }
         return resolved;
     }
 
@@ -288,7 +463,7 @@ public class StateMachine<S, E, C> {
     public S accept(E event, C context) {
         Transition<S, E, C> t = resolveTransition(currentState, event);
         if (t != null && t.isAllowed(context)) {
-            return resolveTargetAfterEntry(t.getTo());
+            return resolveTargetAfterEntry(t.resolveTarget(context));
         }
         return null;
     }
@@ -328,6 +503,41 @@ public class StateMachine<S, E, C> {
      */
     public boolean isHistory(S state) {
         return historyStates.contains(state);
+    }
+
+    /**
+     * 判断是否为终态（进入后状态机视为完成，所有事件都会被拒收）。
+     */
+    public boolean isFinal(S state) {
+        return finalStates.contains(state);
+    }
+
+    /**
+     * 判断当前状态机是否已完成（已进入终态）。
+     */
+    public boolean isCompleted() {
+        return finalStates.contains(currentState);
+    }
+
+    /**
+     * 取得当前状态机的可序列化快照（用于持久化）。
+     * <p>
+     * 包含 {@code currentState} 与每个 composite 的 {@code lastActiveSubstate}（H 恢复用）。
+     */
+    public StateMachineSnapshot<S> getSnapshot() {
+        return new StateMachineSnapshot<>(currentState, new HashMap<>(lastActiveSubstate));
+    }
+
+    /**
+     * 从快照恢复运行时状态。会在 fire 之外被调用，因此需要自行加锁。
+     */
+    public synchronized void restoreFromSnapshot(StateMachineSnapshot<S> snapshot) {
+        if (snapshot == null) {
+            throw new IllegalArgumentException("snapshot must not be null");
+        }
+        this.currentState = snapshot.getCurrentState();
+        this.lastActiveSubstate.clear();
+        this.lastActiveSubstate.putAll(snapshot.getLastActiveSubstate());
     }
 
     /**
@@ -420,15 +630,27 @@ public class StateMachine<S, E, C> {
         S s = state;
         // 防死循环：visited 集合
         java.util.Set<S> visited = new java.util.HashSet<>();
+        // 是否处于 history 恢复中（H 触发后的下钻用 lastActive；普通下钻只用 initial）
+        boolean restoring = false;
         while (visited.add(s)) {
             if (historyStates.contains(s)) {
                 // History 状态：恢复到其父 composite 上次激活的子态
                 S parent = historyParentMap.get(s);
                 S last = parent != null ? lastActiveSubstate.get(parent) : null;
+                HistoryType type = historyTypes.getOrDefault(s, HistoryType.DEEP);
                 if (last != null) {
+                    if (type == HistoryType.SHALLOW) {
+                        // 浅历史：只回到 parent 的直接子态
+                        while (parentMap.get(last) != null && parentMap.get(last) != parent) {
+                            last = parentMap.get(last);
+                        }
+                        restoring = false; // 浅历史：从直接子态开始按 initial 下钻
+                    } else {
+                        restoring = true;  // 深历史：递归按 lastActive 下钻
+                    }
                     s = last;
                 } else if (parent != null) {
-                    // 没有上次记录，下钻到 parent 的 initial
+                    restoring = false;
                     s = parent;
                 } else {
                     // 没有父（孤立 H），保持 H
@@ -436,11 +658,17 @@ public class StateMachine<S, E, C> {
                 }
                 continue;
             }
-            S init = compositeInitialMap.get(s);
-            if (init == null) break;
-            BiConsumer<S, C> entry = entryActions.get(init);
-            if (entry != null) entry.accept(init, context);
-            s = init;
+            // 普通 composite：深历史恢复中用 lastActive，否则用 initial
+            S next;
+            if (restoring && lastActiveSubstate.containsKey(s)) {
+                next = lastActiveSubstate.get(s);
+            } else {
+                next = compositeInitialMap.get(s);
+            }
+            if (next == null) break;
+            BiConsumer<S, C> entry = entryActions.get(next);
+            if (entry != null) entry.accept(next, context);
+            s = next;
         }
         return s;
     }
@@ -483,6 +711,12 @@ public class StateMachine<S, E, C> {
         }
     }
 
+    private void notifyComplete(S finalState, C context) {
+        for (StateListener<S, E, C> l : listeners) {
+            try { l.onStateMachineComplete(finalState, context); } catch (RuntimeException ignored) {}
+        }
+    }
+
     // ==================== Builder ====================
 
     public static class StateMachineBuilder<S, E, C> {
@@ -498,6 +732,10 @@ public class StateMachine<S, E, C> {
         private final Set<S> historyStates = new HashSet<>();
         // H 状态 -> 其父 composite 映射
         private final Map<S, S> historyParentMap = new HashMap<>();
+        // H 状态 -> 恢复类型
+        private final Map<S, HistoryType> historyTypes = new HashMap<>();
+        // 终态集合
+        private final Set<S> finalStates = new HashSet<>();
         // 最近一次 composite 声明的 state（用于把后续 state(s).history() 关联到这个 composite）
         private S lastComposite = null;
 
@@ -587,11 +825,54 @@ public class StateMachine<S, E, C> {
             return this;
         }
 
+        /**
+         * 声明一个 history（H）状态，并指定恢复类型（{@link HistoryType#DEEP 深} 或 {@link HistoryType#SHALLOW 浅}）。
+         */
+        public StateMachineBuilder<S, E, C> history(S state, HistoryType type) {
+            this.historyStates.add(state);
+            this.historyTypes.put(state, type);
+            return this;
+        }
+
+        /**
+         * 声明一个终态（end / final state）。状态机进入此状态后，
+         * 后续事件全部被拒收，{@link StateMachine#isCompleted()} 返回 true。
+         */
+        public StateMachineBuilder<S, E, C> end(S state) {
+            this.finalStates.add(state);
+            return this;
+        }
+
         StateMachineBuilder<S, E, C> register(S from, E event, S to,
                                              Predicate<C> guard,
                                              BiConsumer<S, C> action) {
             table.computeIfAbsent(from, k -> new HashMap<>())
                  .put(event, new Transition<>(from, event, to, guard, action));
+            return this;
+        }
+
+        /**
+         * 注册一条内部转移（自循环，不触发 from 的 exit/to 的 enter）。
+         * 等价于 {@code register(from, event, from, guard, action, internal=true)}。
+         */
+        StateMachineBuilder<S, E, C> registerInternal(S from, E event,
+                                                      Predicate<C> guard,
+                                                      BiConsumer<S, C> action) {
+            table.computeIfAbsent(from, k -> new HashMap<>())
+                 .put(event, new Transition<>(from, event, from, guard, action, true));
+            return this;
+        }
+
+        /**
+         * 注册一条 choice（条件分支）转移。branches 按顺序匹配首个 guard 命中的 target，
+         * 否则用 defaultTarget。
+         */
+        StateMachineBuilder<S, E, C> registerChoice(S from, E event, S defaultTarget,
+                                                    java.util.List<Transition.Branch<S, C>> branches,
+                                                    Predicate<C> guard,
+                                                    BiConsumer<S, C> action) {
+            table.computeIfAbsent(from, k -> new HashMap<>())
+                 .put(event, new Transition<S, E, C>(from, event, defaultTarget, branches, guard, action, false));
             return this;
         }
 
@@ -613,12 +894,27 @@ public class StateMachine<S, E, C> {
 
         void registerHistory(S state) {
             this.historyStates.add(state);
+            this.historyTypes.put(state, HistoryType.DEEP);
             if (lastComposite != null) {
                 this.historyParentMap.put(state, lastComposite);
                 this.parentMap.put(state, lastComposite);
             }
             // 消费完 lastComposite 后清掉，避免污染后续 state 声明
             this.lastComposite = null;
+        }
+
+        void registerHistory(S state, HistoryType type) {
+            this.historyStates.add(state);
+            this.historyTypes.put(state, type);
+            if (lastComposite != null) {
+                this.historyParentMap.put(state, lastComposite);
+                this.parentMap.put(state, lastComposite);
+            }
+            this.lastComposite = null;
+        }
+
+        void registerFinal(S state) {
+            this.finalStates.add(state);
         }
 
     /**
@@ -641,10 +937,22 @@ public class StateMachine<S, E, C> {
             sm.exitActions.putAll(this.exitActions);
             sm.historyStates.addAll(this.historyStates);
             sm.historyParentMap.putAll(this.historyParentMap);
+            sm.historyTypes.putAll(this.historyTypes);
+            sm.finalStates.addAll(this.finalStates);
             for (StateListener<S, E, C> l : listeners) {
                 if (l != null) sm.listeners.add(l);
             }
+            // 初始下钻（在所有 map 都就绪后）
+            sm.descendOnInit();
             return sm;
+        }
+
+        /**
+         * 构建一个 {@link StateMachineFactory}：后续可用 {@code factory.create()} 批量
+         * 创建独立实例（共享配置、独占状态）。
+         */
+        public StateMachineFactory<S, E, C> buildFactory() {
+            return new StateMachineFactory<>(build());
         }
     }
 
@@ -727,17 +1035,103 @@ public class StateMachine<S, E, C> {
          * 如果本步在 composite 子机构建上下文内（{@code composite(...)} 的 lambda 内），
          * 则把 to 自动注册为该 composite 的子态。
          */
-    /**
-     * to方法。
-     *      * @param to S类型参数
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
         public StateMachineBuilder<S, E, C> to(S to) {
             parent.register(from, event, to, guard, action);
             if (inComposite != null) {
                 parent.registerParent(to, inComposite);
             }
             return parent;
+        }
+
+        /**
+         * 声明一条内部转移（自循环）：事件触发后，状态保持不变，不调用 from 的 exit/to 的 enter，
+         * 仅执行 action。等价于 {@code .to(from)}，但语义更清晰、避免误用。
+         * <p>
+         * 示例：
+         * <pre>{@code
+         *   .from(STATE_BUSY).on(Event.TICK).internal()
+         *       .action((from, ctx) -> log.info("tick"));
+         * }</pre>
+         */
+        public StateMachineBuilder<S, E, C> internal() {
+            parent.registerInternal(from, event, guard, action);
+            return parent;
+        }
+
+        /**
+         * 开启 choice（条件分支）配置：本次转移不再固定到单一目标，而是按
+         * {@link ChoiceStep#when} 注册的顺序匹配 guard，第一个通过的作为目标；
+         * 都没命中则用 {@link ChoiceStep#otherwise} 给的默认目标。
+         * <p>
+         * 示例：
+         * <pre>{@code
+         *   .from(CHECK).on(CHECK_EVENT).choice()
+         *       .when(ctx -> ctx.amount > 1000, HIGH)
+         *       .when(ctx -> ctx.amount > 0,    LOW)
+         *       .otherwise(FAIL)
+         * }</pre>
+         */
+        public ChoiceStep<S, E, C> choice() {
+            return new ChoiceStep<>(parent, from, event, guard, action, inComposite);
+        }
+    }
+
+    /**
+     * Choice 配置步骤：依次 {@link #when} 注册条件分支，{@link #otherwise} 给默认，最后 {@link #end} 收尾。
+     */
+    public static class ChoiceStep<S, E, C> {
+        private final StateMachineBuilder<S, E, C> root;
+        private final S from;
+        private final E event;
+        private final Predicate<C> guard;
+        private final BiConsumer<S, C> action;
+        private final S inComposite;
+        private final java.util.List<Transition.Branch<S, C>> branches = new java.util.ArrayList<>();
+        private S defaultTarget;
+
+        ChoiceStep(StateMachineBuilder<S, E, C> root, S from, E event,
+                   Predicate<C> guard, BiConsumer<S, C> action, S inComposite) {
+            this.root = root;
+            this.from = from;
+            this.event = event;
+            this.guard = guard;
+            this.action = action;
+            this.inComposite = inComposite;
+        }
+
+        /**
+         * 添加一个条件分支：guard 通过时跳到 target。
+         */
+        public ChoiceStep<S, E, C> when(Predicate<C> branchGuard, S target) {
+            branches.add(new Transition.Branch<>(branchGuard, target));
+            if (inComposite != null) {
+                root.registerParent(target, inComposite);
+            }
+            return this;
+        }
+
+        /**
+         * 设置默认目标（所有分支 guard 都不命中时使用）。通常对应"错误/兜底"路径。
+         */
+        public ChoiceStep<S, E, C> otherwise(S target) {
+            this.defaultTarget = target;
+            if (inComposite != null) {
+                root.registerParent(target, inComposite);
+            }
+            return this;
+        }
+
+        /**
+         * 收尾注册到 builder。必须在 {@link #otherwise} 之后调用。
+         */
+        public StateMachineBuilder<S, E, C> end() {
+            if (defaultTarget == null) {
+                throw new StateMachineException(
+                        "Choice transition from '" + from + "' on '" + event
+                                + "' must call otherwise(target) before end()");
+            }
+            root.registerChoice(from, event, defaultTarget, branches, guard, action);
+            return root;
         }
     }
 
@@ -780,6 +1174,22 @@ public class StateMachine<S, E, C> {
      */
         public StateMachineBuilder<S, E, C> history() {
             parent.registerHistory(state);
+            return parent;
+        }
+
+        /**
+         * 同 {@link #history()}，但可指定恢复类型。
+         */
+        public StateMachineBuilder<S, E, C> history(HistoryType type) {
+            parent.registerHistory(state, type);
+            return parent;
+        }
+
+        /**
+         * 把当前 state 声明为终态。状态机进入此状态后，所有事件被拒收。
+         */
+        public StateMachineBuilder<S, E, C> end() {
+            parent.registerFinal(state);
             return parent;
         }
 
@@ -837,6 +1247,18 @@ public class StateMachine<S, E, C> {
      */
         public SubMachineBuilder<S, E, C> child(S state) {
             root.registerParent(state, composite);
+            return this;
+        }
+
+        /**
+         * 在子机里再嵌套一个 composite（grand-composite）。在子机 lambda 内调用时
+         * 等价于 {@code root.composite(state, initialChild, sub -> ...)}。
+         */
+        public SubMachineBuilder<S, E, C> composite(S state, S initialChild,
+                                                     java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
+            SubMachineBuilder<S, E, C> sub = new SubMachineBuilder<>(root, state, initialChild);
+            subConfig.accept(sub);
+            sub.end();
             return this;
         }
 

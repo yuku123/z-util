@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +22,7 @@ public class StateMachineTest {
     // ==================== 基础 flat 流 ====================
 
     enum S { A, B, C, D }
-    enum E { GO_B, GO_C, GO_D, RESET }
+    enum E { GO_B, GO_C, GO_D, RESET, TICK }
 
     @Test
     /**
@@ -419,6 +420,506 @@ public class StateMachineTest {
                 .build();
         assertTrue(sm.isHistory(OrderState.H));
         assertFalse(sm.isHistory(OrderState.CREATED));
+    }
+
+    enum Sub { OUT, H, MID, A, B }
+    enum Evt2 { A_TO_B, B_TO_A, GO_HISTORY }
+
+    @Test
+    /**
+     * testHistory_shallow_restoresDirectSubstateOnly方法。
+     */
+    public void testHistory_shallow_restoresDirectSubstateOnly() {
+        // 结构：OUT (composite, initial=MID) -> MID (composite, initial=A) -> {A, B}
+        // H 是 OUT 的 history 状态 (SHALLOW)
+        StateMachine<Sub, Evt2, Object> sm = StateMachine
+                .<Sub, Evt2, Object>builder()
+                .initial(Sub.OUT)
+                .composite(Sub.OUT, Sub.MID, sub -> sub
+                        .composite(Sub.MID, Sub.A, midSub -> midSub
+                                .from(Sub.A).on(Evt2.A_TO_B).to(Sub.B)
+                                .from(Sub.B).on(Evt2.B_TO_A).to(Sub.A)
+                        )
+                        .from(Sub.MID).on(Evt2.GO_HISTORY).to(Sub.H)
+                )
+                .state(Sub.H).history(HistoryType.SHALLOW)
+                .build();
+        // 初始：OUT -> MID -> A
+        assertEquals(Sub.A, sm.getCurrentState());
+        // A -> B
+        sm.fire(Evt2.A_TO_B, null);
+        assertEquals(Sub.B, sm.getCurrentState());
+        // 此时 lastActiveSubstate[OUT] = B (深)；lastActiveSubstate[MID] = B
+        // 触发 GO_HISTORY -> H（H 是 OUT 的 SHALLOW history）
+        sm.fire(Evt2.GO_HISTORY, null);
+        // SHALLOW：恢复到 OUT 的直接子态 = MID，再按 MID 的 initial 下钻 = A
+        assertEquals(Sub.A, sm.getCurrentState());
+    }
+
+    @Test
+    /**
+     * testHistory_deep_restoresToLeaf方法。
+     */
+    public void testHistory_deep_restoresToLeaf() {
+        // 同上结构，但 history 是 DEEP
+        StateMachine<Sub, Evt2, Object> sm = StateMachine
+                .<Sub, Evt2, Object>builder()
+                .initial(Sub.OUT)
+                .composite(Sub.OUT, Sub.MID, sub -> sub
+                        .composite(Sub.MID, Sub.A, midSub -> midSub
+                                .from(Sub.A).on(Evt2.A_TO_B).to(Sub.B)
+                                .from(Sub.B).on(Evt2.B_TO_A).to(Sub.A)
+                        )
+                        .from(Sub.MID).on(Evt2.GO_HISTORY).to(Sub.H)
+                )
+                .state(Sub.H).history(HistoryType.DEEP)
+                .build();
+        // 初始：OUT -> MID -> A
+        assertEquals(Sub.A, sm.getCurrentState());
+        sm.fire(Evt2.A_TO_B, null);
+        assertEquals(Sub.B, sm.getCurrentState());
+        // DEEP：恢复到上次叶子 = B
+        sm.fire(Evt2.GO_HISTORY, null);
+        assertEquals(Sub.B, sm.getCurrentState());
+    }
+
+    // ==================== Final / End State ====================
+
+    @Test
+    /**
+     * testFinal_rejectsAllEventsAfterEnter方法。
+     */
+    public void testFinal_rejectsAllEventsAfterEnter() {
+        StateMachine<S, E, Object> sm = StateMachine.<S, E, Object>builder()
+                .initial(S.A)
+                .from(S.A).on(E.GO_B).to(S.B)
+                .end(S.D)
+                .from(S.B).on(E.GO_C).to(S.C)
+                .from(S.C).on(E.GO_D).to(S.D)
+                .from(S.D).on(E.GO_B).to(S.B)
+                .build();
+        sm.fire(E.GO_B, null);
+        sm.fire(E.GO_C, null);
+        sm.fire(E.GO_D, null);
+        assertTrue(sm.isCompleted());
+        assertEquals(S.D, sm.getCurrentState());
+        // 再发事件被拒收
+        S result = sm.fire(E.GO_B, null, false);
+        assertEquals(S.D, result);
+    }
+
+    @Test
+    /**
+     * testFinal_fireFastThrows方法。
+     */
+    public void testFinal_fireFastThrows() {
+        StateMachine<S, E, Object> sm = StateMachine.<S, E, Object>builder()
+                .initial(S.A)
+                .end(S.D)
+                .from(S.A).on(E.GO_B).to(S.D)
+                .build();
+        sm.fire(E.GO_B, null);
+        assertTrue(sm.isCompleted());
+        try {
+            sm.fire(E.GO_B, null);
+            fail("expected exception");
+        } catch (StateMachineException expected) { /* ok */ }
+    }
+
+    @Test
+    /**
+     * testFinal_listenerNotified方法。
+     */
+    public void testFinal_listenerNotified() {
+        AtomicReference<Sub> completedAt = new AtomicReference<>();
+        StateMachine<Sub, Evt2, Object> sm = StateMachine
+                .<Sub, Evt2, Object>builder()
+                .initial(Sub.OUT)
+                .composite(Sub.OUT, Sub.MID, sub -> sub
+                        .composite(Sub.MID, Sub.A, midSub -> midSub
+                                .from(Sub.A).on(Evt2.A_TO_B).to(Sub.B)
+                        )
+                        .from(Sub.MID).on(Evt2.GO_HISTORY).to(Sub.H)
+                )
+                .state(Sub.H).end()
+                .listener(new StateListener<Sub, Evt2, Object>() {
+                    @Override
+    /**
+     * onStateMachineComplete方法。
+     *      * @param finalState Sub类型参数
+     * @param context Object类型参数
+     */
+                    public void onStateMachineComplete(Sub finalState, Object context) {
+                        completedAt.set(finalState);
+                    }
+                })
+                .build();
+        sm.fire(Evt2.A_TO_B, null);
+        assertFalse(sm.isCompleted());
+        sm.fire(Evt2.GO_HISTORY, null);
+        assertTrue(sm.isCompleted());
+        assertEquals(Sub.H, completedAt.get());
+    }
+
+    // ==================== StateMachineFactory ====================
+
+    @Test
+    /**
+     * testFactory_createsIndependentInstances方法。
+     */
+    public void testFactory_createsIndependentInstances() {
+        StateMachineFactory<S, E, Object> factory = StateMachine.<S, E, Object>builder()
+                .initial(S.A)
+                .from(S.A).on(E.GO_B).to(S.B)
+                .from(S.B).on(E.GO_C).to(S.C)
+                .buildFactory();
+
+        StateMachine<S, E, Object> inst1 = factory.create();
+        StateMachine<S, E, Object> inst2 = factory.create();
+
+        assertEquals(S.A, inst1.getCurrentState());
+        assertEquals(S.A, inst2.getCurrentState());
+
+        inst1.fire(E.GO_B, null);
+        assertEquals(S.B, inst1.getCurrentState());
+        assertEquals(S.A, inst2.getCurrentState()); // inst2 不受影响
+
+        inst2.fire(E.GO_B, null);
+        inst2.fire(E.GO_C, null);
+        assertEquals(S.C, inst2.getCurrentState());
+        assertEquals(S.B, inst1.getCurrentState()); // inst1 不受影响
+    }
+
+    @Test
+    /**
+     * testFactory_independentLastActiveSubstate方法。
+     */
+    public void testFactory_independentLastActiveSubstate() {
+        StateMachineFactory<Sub, Evt2, Object> factory = StateMachine
+                .<Sub, Evt2, Object>builder()
+                .initial(Sub.OUT)
+                .composite(Sub.OUT, Sub.MID, sub -> sub
+                        .composite(Sub.MID, Sub.A, midSub -> midSub
+                                .from(Sub.A).on(Evt2.A_TO_B).to(Sub.B)
+                        )
+                        .from(Sub.MID).on(Evt2.GO_HISTORY).to(Sub.H)
+                )
+                .state(Sub.H).history(HistoryType.DEEP)
+                .buildFactory();
+        StateMachine<Sub, Evt2, Object> inst1 = factory.create();
+        StateMachine<Sub, Evt2, Object> inst2 = factory.create();
+        // inst1 推进到 B
+        inst1.fire(Evt2.A_TO_B, null);
+        // inst2 保持在 A
+        inst1.fire(Evt2.GO_HISTORY, null);
+        inst2.fire(Evt2.GO_HISTORY, null);
+        assertEquals(Sub.B, inst1.getCurrentState()); // inst1 恢复到 B
+        assertEquals(Sub.A, inst2.getCurrentState()); // inst2 恢复到 A
+    }
+
+    // ==================== Choice State ====================
+
+    @Test
+    /**
+     * testChoice_picksFirstMatchingGuard方法。
+     */
+    public void testChoice_picksFirstMatchingGuard() {
+        // CREATED 上 PAY 事件，按 ctx 大小分到不同目标
+        StateMachine<OrderState, OrderEvent, Integer> sm = StateMachine
+                .<OrderState, OrderEvent, Integer>builder()
+                .initial(OrderState.CREATED)
+                .from(OrderState.CREATED).on(OrderEvent.PAY).choice()
+                .when(ctx -> ctx > 1000, OrderState.PAID)
+                .when(ctx -> ctx > 0,    OrderState.CANCELLED)
+                .otherwise(OrderState.SHIPPED)
+                .end()
+                .build();
+        sm.fire(OrderEvent.PAY, 500);
+        assertEquals(OrderState.CANCELLED, sm.getCurrentState());
+    }
+
+    @Test
+    /**
+     * testChoice_factoryAcrossInstances方法。
+     */
+    public void testChoice_factoryAcrossInstances() {
+        // 验证 choice 解析在 factory 创建的实例上独立工作
+        StateMachineFactory<OrderState, OrderEvent, Integer> factory = StateMachine
+                .<OrderState, OrderEvent, Integer>builder()
+                .initial(OrderState.CREATED)
+                .from(OrderState.CREATED).on(OrderEvent.PAY).choice()
+                .when(ctx -> ctx > 100, OrderState.PAID)
+                .otherwise(OrderState.CANCELLED)
+                .end()
+                .buildFactory();
+        StateMachine<OrderState, OrderEvent, Integer> inst1 = factory.create();
+        StateMachine<OrderState, OrderEvent, Integer> inst2 = factory.create();
+        inst1.fire(OrderEvent.PAY, 50);   // 否则
+        inst2.fire(OrderEvent.PAY, 200);  // 命中 when
+        assertEquals(OrderState.CANCELLED, inst1.getCurrentState());
+        assertEquals(OrderState.PAID, inst2.getCurrentState());
+    }
+
+    @Test
+    /**
+     * testChoice_fallsThroughToOtherwise方法。
+     */
+    public void testChoice_fallsThroughToOtherwise() {
+        StateMachine<OrderState, OrderEvent, Integer> sm = StateMachine
+                .<OrderState, OrderEvent, Integer>builder()
+                .initial(OrderState.CREATED)
+                .from(OrderState.CREATED).on(OrderEvent.PAY).choice()
+                .when(ctx -> ctx > 10000, OrderState.PAID)
+                .otherwise(OrderState.SHIPPED)
+                .end()
+                .build();
+        sm.fire(OrderEvent.PAY, 100); // 都不命中 → otherwise
+        assertEquals(OrderState.SHIPPED, sm.getCurrentState());
+    }
+
+    @Test(expected = StateMachineException.class)
+    /**
+     * testChoice_endWithoutOtherwiseThrows方法。
+     */
+    public void testChoice_endWithoutOtherwiseThrows() {
+        StateMachine.<OrderState, OrderEvent, Integer>builder()
+                .initial(OrderState.CREATED)
+                .from(OrderState.CREATED).on(OrderEvent.PAY).choice()
+                .when(ctx -> ctx > 0, OrderState.PAID)
+                // 故意漏掉 otherwise
+                .end()
+                .build();
+    }
+
+    // ==================== Persistence SPI ====================
+
+    @Test
+    /**
+     * testSnapshot_captureAndRestore方法。
+     */
+    public void testSnapshot_captureAndRestore() {
+        StateMachineFactory<OrderState, OrderEvent, Object> factory = StateMachine
+                .<OrderState, OrderEvent, Object>builder()
+                .initial(OrderState.CREATED)
+                .from(OrderState.CREATED).on(OrderEvent.PAY).to(OrderState.PAID)
+                .composite(OrderState.PAID, OrderState.PENDING_INVOICE, sub -> sub
+                        .from(OrderState.PENDING_INVOICE).on(OrderEvent.ISSUE_INVOICE).to(OrderState.INVOICED)
+                )
+                .buildFactory();
+        StateMachine<OrderState, OrderEvent, Object> inst1 = factory.create();
+        inst1.fire(OrderEvent.PAY, null);                    // -> PAID -> PENDING_INVOICE
+        inst1.fire(OrderEvent.ISSUE_INVOICE, null);          // -> INVOICED
+        StateMachineSnapshot<OrderState> snap = inst1.getSnapshot();
+        assertEquals(OrderState.INVOICED, snap.getCurrentState());
+
+        // 用一个全新的实例 + 同一个工厂恢复
+        StateMachine<OrderState, OrderEvent, Object> inst2 = factory.create();
+        assertEquals(OrderState.CREATED, inst2.getCurrentState());  // 新实例在初始
+        inst2.restoreFromSnapshot(snap);
+        assertEquals(OrderState.INVOICED, inst2.getCurrentState());
+    }
+
+    @Test
+    /**
+     * testSnapshot_inMemoryPersister方法。
+     */
+    public void testSnapshot_inMemoryPersister() {
+        // 模拟一个内存版的 persister：用 HashMap 存快照
+        StateMachineFactory<OrderState, OrderEvent, Object> factory = StateMachine
+                .<OrderState, OrderEvent, Object>builder()
+                .initial(OrderState.CREATED)
+                .from(OrderState.CREATED).on(OrderEvent.PAY).to(OrderState.PAID)
+                .buildFactory();
+
+        java.util.Map<String, StateMachineSnapshot<OrderState>> store = new java.util.HashMap<>();
+        StateMachinePersister<OrderState, OrderEvent, Object, String> persister =
+                new StateMachinePersister<OrderState, OrderEvent, Object, String>() {
+                    @Override
+    /**
+     * persist方法。
+     *      * @param sm StateMachineOrderState,类型参数
+     * @param key String类型参数
+     */
+                    public void persist(StateMachine<OrderState, OrderEvent, Object> sm, String key) {
+                        store.put(key, sm.getSnapshot());
+                    }
+                    @Override
+    /**
+     * restore方法。
+     *      * @param sm StateMachineOrderState,类型参数
+     * @param key String类型参数
+     */
+                    public void restore(StateMachine<OrderState, OrderEvent, Object> sm, String key) {
+                        StateMachineSnapshot<OrderState> snap = store.get(key);
+                        if (snap != null) sm.restoreFromSnapshot(snap);
+                    }
+                };
+
+        // 模拟请求 1：创建实例 + fire + 持久化
+        StateMachine<OrderState, OrderEvent, Object> req1 = factory.create();
+        req1.fire(OrderEvent.PAY, null);
+        assertEquals(OrderState.PAID, req1.getCurrentState());
+        persister.persist(req1, "order-1");
+
+        // 模拟请求 2：新建实例 + 恢复 + 继续
+        StateMachine<OrderState, OrderEvent, Object> req2 = factory.create();
+        assertEquals(OrderState.CREATED, req2.getCurrentState()); // 新实例
+        persister.restore(req2, "order-1");
+        assertEquals(OrderState.PAID, req2.getCurrentState());    // 恢复成功
+    }
+
+    // ==================== DOT Export ====================
+
+    @Test
+    /**
+     * testDot_containsStatesAndTransitions方法。
+     */
+    public void testDot_containsStatesAndTransitions() {
+        StateMachine<OrderState, OrderEvent, Object> sm = StateMachine
+                .<OrderState, OrderEvent, Object>builder()
+                .initial(OrderState.CREATED)
+                .from(OrderState.CREATED).on(OrderEvent.PAY).to(OrderState.PAID)
+                .end(OrderState.DONE)
+                .from(OrderState.PAID).on(OrderEvent.COMPLETE).to(OrderState.DONE)
+                .build();
+        String dot = sm.toDot();
+        assertTrue(dot.contains("digraph StateMachine"));
+        assertTrue(dot.contains("CREATED"));
+        assertTrue(dot.contains("PAID"));
+        assertTrue(dot.contains("DONE"));
+        assertTrue(dot.contains("PAY"));
+        assertTrue(dot.contains("COMPLETE"));
+        // 终态应带 style=bold
+        assertTrue(dot.contains("DONE\"") && dot.contains("style=bold"));
+    }
+
+    @Test
+    /**
+     * testDot_compositeUsesDoubleCircle方法。
+     */
+    public void testDot_compositeUsesDoubleCircle() {
+        StateMachine<OrderState, OrderEvent, Object> sm = StateMachine
+                .<OrderState, OrderEvent, Object>builder()
+                .initial(OrderState.CREATED)
+                .from(OrderState.CREATED).on(OrderEvent.PAY).to(OrderState.PAID)
+                .composite(OrderState.PAID, OrderState.PENDING_INVOICE, sub -> sub
+                        .from(OrderState.PENDING_INVOICE).on(OrderEvent.ISSUE_INVOICE).to(OrderState.INVOICED)
+                )
+                .build();
+        String dot = sm.toDot();
+        System.out.println("DOT:\n" + dot);
+        assertTrue(dot.contains("\"PAID\"") && dot.contains("doublecircle"));
+        assertTrue(dot.contains("\"PAID\" -> \"PENDING_INVOICE\""));
+    }
+
+    @Test
+    /**
+     * testDot_internalLabeled方法。
+     */
+    public void testDot_internalLabeled() {
+        StateMachine<S, E, Object> sm = StateMachine.<S, E, Object>builder()
+                .initial(S.A)
+                .from(S.A).on(E.TICK).internal()
+                .build();
+        String dot = sm.toDot();
+        assertTrue(dot.contains("TICK (internal)"));
+    }
+
+    // ==================== Parallel State Group (fan-out) ====================
+
+    enum UnifiedState { PAY_INIT, PAY_DONE, SHIP_INIT, SHIP_DONE, OTHER_INIT, OTHER_DONE }
+    enum CommonEvent { PAY, SHIP, OTHER }
+
+    @Test
+    /**
+     * testParallelGroup_fireBothRegions方法。
+     */
+    public void testParallelGroup_fireBothRegions() {
+        // 用统一 enum 表达所有 region 的状态；每个 region 只关心自己的子集
+        ParallelStateGroup<UnifiedState, CommonEvent, Object> group = ParallelStateGroup
+                .<UnifiedState, CommonEvent, Object>builder()
+                .region("payment", StateMachine.<UnifiedState, CommonEvent, Object>builder()
+                        .initial(UnifiedState.PAY_INIT)
+                        .from(UnifiedState.PAY_INIT).on(CommonEvent.PAY).to(UnifiedState.PAY_DONE)
+                        .end(UnifiedState.PAY_DONE)
+                        .build())
+                .region("shipping", StateMachine.<UnifiedState, CommonEvent, Object>builder()
+                        .initial(UnifiedState.SHIP_INIT)
+                        .from(UnifiedState.SHIP_INIT).on(CommonEvent.SHIP).to(UnifiedState.SHIP_DONE)
+                        .end(UnifiedState.SHIP_DONE)
+                        .build())
+                .build();
+        // fire PAY：payment region 响应，shipping region 忽略（无 PAY 转移）
+        List<UnifiedState> payResult = group.fire(CommonEvent.PAY, null);
+        assertEquals(UnifiedState.PAY_DONE, payResult.get(0));
+        assertEquals(UnifiedState.SHIP_INIT, payResult.get(1));
+        assertFalse(group.isAllCompleted()); // shipping 还没完成
+        // fire SHIP：shipping 响应
+        List<UnifiedState> shipResult = group.fire(CommonEvent.SHIP, null);
+        assertEquals(UnifiedState.PAY_DONE, shipResult.get(0));
+        assertEquals(UnifiedState.SHIP_DONE, shipResult.get(1));
+        assertTrue(group.isAllCompleted());
+    }
+
+    @Test
+    /**
+     * testParallelGroup_getCurrentStates方法。
+     */
+    public void testParallelGroup_getCurrentStates() {
+        ParallelStateGroup<UnifiedState, CommonEvent, Object> group = ParallelStateGroup
+                .<UnifiedState, CommonEvent, Object>builder()
+                .region("r1", StateMachine.<UnifiedState, CommonEvent, Object>builder()
+                        .initial(UnifiedState.OTHER_INIT)
+                        .from(UnifiedState.OTHER_INIT).on(CommonEvent.OTHER).to(UnifiedState.OTHER_DONE)
+                        .build())
+                .region("r2", StateMachine.<UnifiedState, CommonEvent, Object>builder()
+                        .initial(UnifiedState.SHIP_INIT)
+                        .build())
+                .build();
+        assertEquals(2, group.regionCount());
+        assertEquals(java.util.Arrays.asList("r1", "r2"), group.getRegionNames());
+        List<UnifiedState> states = group.getCurrentStates();
+        assertEquals(UnifiedState.OTHER_INIT, states.get(0));
+        assertEquals(UnifiedState.SHIP_INIT, states.get(1));
+    }
+
+    // ==================== Internal Transition ====================
+
+    @Test
+    /**
+     * testInternal_doesNotInvokeExitOrEntry方法。
+     */
+    public void testInternal_doesNotInvokeExitOrEntry() {
+        List<String> log = new ArrayList<>();
+        StateMachine<S, E, Object> sm = StateMachine.<S, E, Object>builder()
+                .initial(S.A)
+                .state(S.A).exit((s, c) -> log.add("exit A"))
+                .state(S.A).entry((s, c) -> log.add("enter A"))
+                .from(S.A).on(E.TICK).action((from, c) -> log.add("tick action")).internal()
+                .build();
+        sm.fire(E.TICK, null);
+        assertEquals(S.A, sm.getCurrentState());
+        assertEquals(Arrays.asList("tick action"), log);
+        sm.fire(E.TICK, null);
+        assertEquals(S.A, sm.getCurrentState());
+        assertEquals(Arrays.asList("tick action", "tick action"), log);
+    }
+
+    @Test
+    /**
+     * testInternal_keepsLastActiveSubstate方法。
+     */
+    public void testInternal_keepsLastActiveSubstate() {
+        // 内部转移不应覆盖 lastActiveSubstate，否则 H 恢复会失灵
+        StateMachine<S, E, Object> sm = StateMachine.<S, E, Object>builder()
+                .initial(S.A)
+                .from(S.A).on(E.TICK).internal()
+                .from(S.A).on(E.GO_B).to(S.B)
+                .build();
+        sm.fire(E.TICK, null);
+        sm.fire(E.GO_B, null);
+        // 即使 internal 触发过，G 仍然能正常转移到 B
+        assertEquals(S.B, sm.getCurrentState());
     }
 
     // ==================== 并发安全 ====================

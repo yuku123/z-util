@@ -70,4 +70,12 @@ public interface StateListener<S, E, C> {
      * @param error   异常
      */
     default void onError(S state, E event, C context, Throwable error) {}
+
+    /**
+     * 状态机进入终态回调（仅当 to 是终态时触发一次）。
+     *
+     * @param finalState 进入的终态
+     * @param context    业务上下文
+     */
+    default void onStateMachineComplete(S finalState, C context) {}
 }
