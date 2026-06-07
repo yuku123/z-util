@@ -265,18 +265,16 @@ public class DynamicParser implements Parser {
 
             try {
                 while (true) {
-                    // 记录 token 游标，检测本轮是否真的消耗了 token
-                    int beforePos = tokenReader.hasNext() ? safeTokenIndex() : -1;
+                    // 记录当前 token 对象；如果本轮没消耗 token，peek 返回的还是同一个，
+                    // 据此可检测"零进展"循环（例如空 alternative 引起的 empty match）
+                    com.zifang.util.dsl.token.Token before = tokenReader.hasNext() ? tokenReader.peek() : null;
                     ASTNode child = parseElement(inner);
-                    int afterPos = tokenReader.hasNext() ? safeTokenIndex() : -1;
+                    com.zifang.util.dsl.token.Token after = tokenReader.hasNext() ? tokenReader.peek() : null;
 
                     if (child == null) {
                         break;
                     }
-                    // 防止空匹配造成死循环：
-                    // - 子节点本身没有 children
-                    // - 或者本轮没消耗任何 token（empty match 路径）
-                    if (child.getChildren().isEmpty() || beforePos == afterPos) {
+                    if (child.getChildren().isEmpty() || before == after) {
                         break;
                     }
                     node.addChild(child);
