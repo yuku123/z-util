@@ -1,5 +1,7 @@
 package com.zifang.util.workflow.engine.runtime;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zifang.util.workflow.config.Configurations;
 import com.zifang.util.workflow.config.Connector;
 import com.zifang.util.workflow.config.ExecutableWorkflowNode;
@@ -8,7 +10,10 @@ import com.zifang.util.workflow.config.WorkflowNode;
 import com.zifang.util.workflow.engine.interfaces.AbstractEngine;
 import com.zifang.util.workflow.engine.interfaces.AbstractEngineService;
 import com.zifang.util.workflow.engine.interfaces.EngineFactory;
+import com.zifang.util.workflow.persistence.WorkflowPersistencePlugin;
+import com.zifang.util.workflow.persistence.WorkflowSnapshot;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +50,8 @@ public class WorkflowRuntimeEngine {
     private String processId;
     private AtomicInteger nodeIdGenerator;
     private AbstractEngine abstractEngine;
+    private WorkflowPersistencePlugin persistencePlugin;
+    private ObjectMapper objectMapper;
 
     /**
      * 构造函数，初始化运行时引擎。
@@ -60,6 +67,7 @@ public class WorkflowRuntimeEngine {
         this.variables = new HashMap<>();
         this.currentResult = new ExecutionResult();
         this.nodeIdGenerator = new AtomicInteger(0);
+        this.objectMapper = new ObjectMapper();
     }
 
     /**
@@ -344,6 +352,7 @@ public class WorkflowRuntimeEngine {
             if ("userTask".equalsIgnoreCase(node.getType())) {
                 currentResult.addPendingUserTaskNode(nodeId);
                 currentResult.setStatus(STATUS_PAUSED);
+                saveSnapshot();
                 return;
             }
 
@@ -354,6 +363,7 @@ public class WorkflowRuntimeEngine {
             node.setStatus("failed");
             currentResult.setStatus(STATUS_FAILED);
             currentResult.setErrorMessage("Node execution failed: " + nodeId + " - " + e.getMessage());
+            saveSnapshot();
         }
     }
 
@@ -389,6 +399,7 @@ public class WorkflowRuntimeEngine {
         if (allCompleted) {
             currentResult.setStatus(STATUS_COMPLETED);
             currentResult.setCurrentNodeId(null);
+            saveSnapshot();
         }
     }
 
@@ -484,6 +495,139 @@ public class WorkflowRuntimeEngine {
      */
     public Map<String, Object> getVariables() {
         return new HashMap<>(variables);
+    }
+
+    // -------- Persistence Plugin Methods --------
+
+    /**
+     * Set the persistence plugin for snapshot save/restore.
+     *
+     * @param plugin the persistence plugin implementation
+     */
+    public void setPersistencePlugin(WorkflowPersistencePlugin plugin) {
+        this.persistencePlugin = plugin;
+    }
+
+    /**
+     * Save the current workflow state as a snapshot.
+     * If no persistence plugin is set, this method does nothing.
+     */
+    public void saveSnapshot() {
+        if (persistencePlugin == null) {
+            return;
+        }
+        WorkflowSnapshot snapshot = buildSnapshot();
+        persistencePlugin.save(snapshot);
+    }
+
+    /**
+     * Restore workflow state from a previously saved snapshot.
+     * This reconstructs the nodeMap, variables, execution result, etc.
+     *
+     * @param processId the process ID to restore
+     */
+    public void restoreFromSnapshot(String processId) {
+        if (persistencePlugin == null) {
+            throw new IllegalStateException("Persistence plugin is not set");
+        }
+
+        WorkflowSnapshot snapshot = persistencePlugin.load(processId);
+        if (snapshot == null) {
+            throw new IllegalArgumentException("No snapshot found for process: " + processId);
+        }
+
+        // Restore basic state
+        this.processId = snapshot.getProcessId();
+        this.variables = new HashMap<>();
+        if (snapshot.getVariables() != null) {
+            this.variables.putAll(snapshot.getVariables());
+        }
+
+        // Reconstruct configuration from JSON
+        if (snapshot.getWorkflowConfigurationJson() != null) {
+            try {
+                this.configuration = objectMapper.readValue(snapshot.getWorkflowConfigurationJson(), WorkflowConfiguration.class);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to deserialize workflow configuration for process: " + processId, e);
+            }
+        }
+
+        // Rebuild nodeMap from configuration
+        this.nodeMap.clear();
+        if (configuration != null && configuration.getWorkflowNodeList() != null) {
+            for (WorkflowNode workflowNode : configuration.getWorkflowNodeList()) {
+                ExecutableWorkflowNode executableNode = new ExecutableWorkflowNode(workflowNode);
+                nodeMap.put(workflowNode.getNodeId(), executableNode);
+            }
+        }
+
+        // Restore node statuses
+        if (snapshot.getCompletedNodes() != null) {
+            for (String nodeId : snapshot.getCompletedNodes()) {
+                ExecutableWorkflowNode node = nodeMap.get(nodeId);
+                if (node != null) {
+                    node.setStatus("executed");
+                }
+            }
+        }
+        if (snapshot.getPendingNodes() != null) {
+            for (String nodeId : snapshot.getPendingNodes()) {
+                ExecutableWorkflowNode node = nodeMap.get(nodeId);
+                if (node != null && node.getStatus() == null) {
+                    node.setStatus("pending");
+                }
+            }
+        }
+
+        // Restore currentResult
+        this.currentResult = new ExecutionResult();
+        this.currentResult.setProcessId(snapshot.getProcessId());
+        this.currentResult.setStatus(snapshot.getStatus());
+        this.currentResult.setCurrentNodeId(snapshot.getCurrentNodeId());
+        this.currentResult.setErrorMessage(snapshot.getErrorMessage());
+        this.currentResult.setCompletedNodes(new ArrayList<>());
+        this.currentResult.setPendingNodes(new ArrayList<>());
+        this.currentResult.setPendingUserTaskNodes(new ArrayList<>());
+
+        if (snapshot.getCompletedNodes() != null) {
+            this.currentResult.getCompletedNodes().addAll(snapshot.getCompletedNodes());
+        }
+        if (snapshot.getPendingNodes() != null) {
+            this.currentResult.getPendingNodes().addAll(snapshot.getPendingNodes());
+        }
+        if (snapshot.getPendingUserTaskNodes() != null) {
+            this.currentResult.getPendingUserTaskNodes().addAll(snapshot.getPendingUserTaskNodes());
+        }
+        if (snapshot.getVariables() != null) {
+            this.currentResult.setVariables(new HashMap<>(snapshot.getVariables()));
+        }
+    }
+
+    /**
+     * Build a WorkflowSnapshot from the current engine state.
+     */
+    private WorkflowSnapshot buildSnapshot() {
+        WorkflowSnapshot snapshot = new WorkflowSnapshot();
+        snapshot.setProcessId(processId);
+        snapshot.setStatus(currentResult.getStatus());
+        snapshot.setCompletedNodes(new ArrayList<>(currentResult.getCompletedNodes()));
+        snapshot.setPendingNodes(new ArrayList<>(currentResult.getPendingNodes()));
+        snapshot.setPendingUserTaskNodes(new ArrayList<>(currentResult.getPendingUserTaskNodes()));
+        snapshot.setVariables(new HashMap<>(variables));
+        snapshot.setCurrentNodeId(currentResult.getCurrentNodeId());
+        snapshot.setErrorMessage(currentResult.getErrorMessage());
+        snapshot.setLastUpdatedTime(System.currentTimeMillis());
+
+        // Serialize configuration to JSON
+        if (configuration != null) {
+            try {
+                snapshot.setWorkflowConfigurationJson(objectMapper.writeValueAsString(configuration));
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException("Failed to serialize workflow configuration for process: " + processId, e);
+            }
+        }
+
+        return snapshot;
     }
 
     // -------- Getters and Setters --------

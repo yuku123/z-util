@@ -1,0 +1,104 @@
+package com.zifang.util.workflow.persistence;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * File-based implementation of WorkflowPersistencePlugin.
+ * Each process snapshot is saved as a JSON file in the configured directory.
+ * Default directory is ~/.z-workflow/.
+ */
+public class FileWorkflowPersistencePlugin implements WorkflowPersistencePlugin {
+
+    private static final String DEFAULT_DIR = System.getProperty("user.home") + File.separator + ".z-workflow";
+
+    private final File storageDir;
+    private final ObjectMapper objectMapper;
+
+    /**
+     * Constructor using default directory (~/.z-workflow/).
+     */
+    public FileWorkflowPersistencePlugin() {
+        this(DEFAULT_DIR);
+    }
+
+    /**
+     * Constructor with custom directory path.
+     *
+     * @param directoryPath the directory path to store snapshot files
+     */
+    public FileWorkflowPersistencePlugin(String directoryPath) {
+        this.storageDir = new File(directoryPath);
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        ensureDirectoryExists();
+    }
+
+    private void ensureDirectoryExists() {
+        if (!storageDir.exists()) {
+            boolean created = storageDir.mkdirs();
+            if (!created) {
+                throw new RuntimeException("Failed to create persistence directory: " + storageDir.getAbsolutePath());
+            }
+        }
+    }
+
+    private File getSnapshotFile(String processId) {
+        return new File(storageDir, processId + ".json");
+    }
+
+    @Override
+    public void save(WorkflowSnapshot snapshot) {
+        try {
+            File file = getSnapshotFile(snapshot.getProcessId());
+            snapshot.setLastUpdatedTime(System.currentTimeMillis());
+            objectMapper.writeValue(file, snapshot);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to save workflow snapshot for process: " + snapshot.getProcessId(), e);
+        }
+    }
+
+    @Override
+    public WorkflowSnapshot load(String processId) {
+        File file = getSnapshotFile(processId);
+        if (!file.exists()) {
+            return null;
+        }
+        try {
+            return objectMapper.readValue(file, WorkflowSnapshot.class);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load workflow snapshot for process: " + processId, e);
+        }
+    }
+
+    @Override
+    public void delete(String processId) {
+        File file = getSnapshotFile(processId);
+        if (file.exists()) {
+            boolean deleted = file.delete();
+            if (!deleted) {
+                throw new RuntimeException("Failed to delete workflow snapshot for process: " + processId);
+            }
+        }
+    }
+
+    @Override
+    public List<String> listProcessIds() {
+        List<String> processIds = new ArrayList<>();
+        File[] files = storageDir.listFiles((dir, name) -> name.endsWith(".json"));
+        if (files != null) {
+            for (File file : files) {
+                String name = file.getName();
+                String processId = name.substring(0, name.length() - ".json".length());
+                processIds.add(processId);
+            }
+        }
+        return processIds;
+    }
+}
