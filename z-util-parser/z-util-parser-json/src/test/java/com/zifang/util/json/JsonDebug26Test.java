@@ -55,8 +55,13 @@ public class JsonDebug26Test {
     }
 
     private static String loadG4(String name) throws Exception {
-        try (java.io.InputStream is = JsonDebug26Test.class.getClassLoader().getResourceAsStream(name)) {
-            return new String(is.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8);
-        }
+        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+        java.io.InputStream is = JsonDebug26Test.class.getClassLoader().getResourceAsStream(name);
+        if (is == null) throw new Exception("Resource not found: " + name);
+        byte[] buf = new byte[4096];
+        int len;
+        while ((len = is.read(buf)) != -1) baos.write(buf, 0, len);
+        is.close();
+        return baos.toString(java.nio.charset.StandardCharsets.UTF_8.name());
     }
 }
