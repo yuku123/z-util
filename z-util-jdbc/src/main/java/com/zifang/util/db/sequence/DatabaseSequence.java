@@ -89,7 +89,7 @@ public class DatabaseSequence implements Sequence {
         if (dataSource == null) {
             throw new IllegalArgumentException("dataSource 不能为 null");
         }
-        if (name == null || name.isBlank()) {
+        if (name == null || com.zifang.util.core.lang.StringUtil.isBlank(name)) {
             throw new IllegalArgumentException("序列名称不能为空");
         }
         if (batchSize <= 0 || batchSize > 10000) {
