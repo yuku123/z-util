@@ -8,28 +8,12 @@ package com.zifang.util.monitor.jvm.ref;
  *
  * @author zifang
  */
-/**
- * WeakReferenceDemo类。
- */
-/**
- * WeakReferenceDemo类。
- */
 public class WeakReferenceDemo {
 
     /**
      * 主方法。
      *
      * @param args 命令行参数
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
 

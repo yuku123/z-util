@@ -28,9 +28,6 @@ import java.lang.annotation.*;
 /**
  * Param注解。
  */
-/**
- * Param注解。
- */
 public @interface Param {
     /**
      * 指定参数的名称

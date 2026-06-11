@@ -3,9 +3,6 @@ package com.zifang.util.distributes.sequence;
 /**
  * SnowflakeIdWorker类。
  */
-/**
- * SnowflakeIdWorker类。
- */
 public class SnowflakeIdWorker {
     // ==============================Fields==================
     /**
@@ -72,16 +69,6 @@ public class SnowflakeIdWorker {
      * @param workerId     工作ID (0~31)
      * @param datacenterId 数据中心ID (0~31)
      */
-    /**
-     * SnowflakeIdWorker方法。
-     *      * @param workerId long类型参数
-     * @param datacenterId long类型参数
-     */
-    /**
-     * SnowflakeIdWorker方法。
-     *      * @param workerId long类型参数
-     * @param datacenterId long类型参数
-     */
     public SnowflakeIdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
@@ -98,14 +85,6 @@ public class SnowflakeIdWorker {
      * 获得下一个ID (该方法是线程安全的)
      *
      * @return SnowflakeId
-     */
-    /**
-     * nextId方法。
-     * @return synchronized long类型返回值
-     */
-    /**
-     * nextId方法。
-     * @return synchronized long类型返回值
      */
     public synchronized long nextId() {
         long timestamp = timeGen();
@@ -142,16 +121,6 @@ public class SnowflakeIdWorker {
      * @param lastTimestamp 上次生成ID的时间戳
      * @return 当前时间戳（毫秒）
      */
-    /**
-     * tilNextMillis方法。
-     *      * @param lastTimestamp long类型参数
-     * @return long类型返回值
-     */
-    /**
-     * tilNextMillis方法。
-     *      * @param lastTimestamp long类型参数
-     * @return long类型返回值
-     */
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
@@ -165,14 +134,6 @@ public class SnowflakeIdWorker {
      *
      * @return 当前时间(毫秒)
      */
-    /**
-     * timeGen方法。
-     * @return long类型返回值
-     */
-    /**
-     * timeGen方法。
-     * @return long类型返回值
-     */
     protected long timeGen() {
         return System.currentTimeMillis();
     }
@@ -180,16 +141,6 @@ public class SnowflakeIdWorker {
 
     /**
      * 测试
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
         SnowflakeIdWorker idWorker = new SnowflakeIdWorker(0, 0);

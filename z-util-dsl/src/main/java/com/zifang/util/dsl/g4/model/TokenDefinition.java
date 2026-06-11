@@ -4,12 +4,6 @@ package com.zifang.util.dsl.g4.model;
  * Token定义（用于动态词法分析器）
  * 表示从G4文件解析出的Token规则
  */
-/**
- * TokenDefinition类。
- */
-/**
- * TokenDefinition类。
- */
 public class TokenDefinition {
     
     private String name;
@@ -21,12 +15,6 @@ public class TokenDefinition {
     /**
      * 默认构造函数
      */
-    /**
-     * TokenDefinition方法。
-     */
-    /**
-     * TokenDefinition方法。
-     */
     public TokenDefinition() {
     }
     
@@ -35,18 +23,6 @@ public class TokenDefinition {
      * @param name Token名称
      * @param pattern 正则表达式模式
      * @param precedence 优先级（数值越小优先级越高）
-     */
-    /**
-     * TokenDefinition方法。
-     *      * @param name String类型参数
-     * @param pattern String类型参数
-     * @param precedence int类型参数
-     */
-    /**
-     * TokenDefinition方法。
-     *      * @param name String类型参数
-     * @param pattern String类型参数
-     * @param precedence int类型参数
      */
     public TokenDefinition(String name, String pattern, int precedence) {
         this.name = name;
@@ -58,14 +34,6 @@ public class TokenDefinition {
      * 获取Token名称
      * @return Token名称
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return name;
     }
@@ -73,14 +41,6 @@ public class TokenDefinition {
     /**
      * 设置Token名称
      * @param name Token名称
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -90,14 +50,6 @@ public class TokenDefinition {
      * 获取正则表达式模式
      * @return 正则表达式字符串
      */
-    /**
-     * getPattern方法。
-     * @return String类型返回值
-     */
-    /**
-     * getPattern方法。
-     * @return String类型返回值
-     */
     public String getPattern() {
         return pattern;
     }
@@ -105,14 +57,6 @@ public class TokenDefinition {
     /**
      * 设置正则表达式模式
      * @param pattern 正则表达式
-     */
-    /**
-     * setPattern方法。
-     *      * @param pattern String类型参数
-     */
-    /**
-     * setPattern方法。
-     *      * @param pattern String类型参数
      */
     public void setPattern(String pattern) {
         this.pattern = pattern;
@@ -122,14 +66,6 @@ public class TokenDefinition {
      * 获取优先级
      * @return 优先级数值
      */
-    /**
-     * getPrecedence方法。
-     * @return int类型返回值
-     */
-    /**
-     * getPrecedence方法。
-     * @return int类型返回值
-     */
     public int getPrecedence() {
         return precedence;
     }
@@ -137,14 +73,6 @@ public class TokenDefinition {
     /**
      * 设置优先级
      * @param precedence 优先级数值
-     */
-    /**
-     * setPrecedence方法。
-     *      * @param precedence int类型参数
-     */
-    /**
-     * setPrecedence方法。
-     *      * @param precedence int类型参数
      */
     public void setPrecedence(int precedence) {
         this.precedence = precedence;
@@ -154,14 +82,6 @@ public class TokenDefinition {
      * 判断是否为fragment规则
      * @return true表示是fragment规则
      */
-    /**
-     * isFragment方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isFragment方法。
-     * @return boolean类型返回值
-     */
     public boolean isFragment() {
         return isFragment;
     }
@@ -169,14 +89,6 @@ public class TokenDefinition {
     /**
      * 设置是否为fragment规则
      * @param fragment true表示是fragment规则
-     */
-    /**
-     * setFragment方法。
-     *      * @param fragment boolean类型参数
-     */
-    /**
-     * setFragment方法。
-     *      * @param fragment boolean类型参数
      */
     public void setFragment(boolean fragment) {
         isFragment = fragment;
@@ -186,14 +98,6 @@ public class TokenDefinition {
      * 判断是否为HIDDEN channel
      * @return true表示隐藏在HIDDEN channel
      */
-    /**
-     * isHidden方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isHidden方法。
-     * @return boolean类型返回值
-     */
     public boolean isHidden() {
         return hidden;
     }
@@ -202,23 +106,11 @@ public class TokenDefinition {
      * 设置是否为HIDDEN channel
      * @param hidden true表示隐藏在HIDDEN channel
      */
-    /**
-     * setHidden方法。
-     *      * @param hidden boolean类型参数
-     */
-    /**
-     * setHidden方法。
-     *      * @param hidden boolean类型参数
-     */
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

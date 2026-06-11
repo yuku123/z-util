@@ -20,12 +20,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ExtractStep类。
- */
-/**
- * ExtractStep类。
- */
 public class ExtractStep implements Step {
 
     public static final String NAME = "extract";
@@ -40,20 +34,11 @@ public class ExtractStep implements Step {
      * getName方法。
      * @return String类型返回值
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return NAME;
     }
 
     @Override
-    /**
-     * setParameter方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     */
     /**
      * setParameter方法。
      *      * @param key String类型参数
@@ -74,11 +59,6 @@ public class ExtractStep implements Step {
     }
 
     @Override
-    /**
-     * execute方法。
-     *      * @param ctx PipelineContext类型参数
-     * @return StepResult类型返回值
-     */
     /**
      * execute方法。
      *      * @param ctx PipelineContext类型参数
@@ -161,11 +141,6 @@ public class ExtractStep implements Step {
         return element.text();
     }
 
-    /**
-     * getBrowserClient方法。
-     *      * @param ctx PipelineContext类型参数
-     * @return BrowserClient类型返回值
-     */
     /**
      * getBrowserClient方法。
      *      * @param ctx PipelineContext类型参数

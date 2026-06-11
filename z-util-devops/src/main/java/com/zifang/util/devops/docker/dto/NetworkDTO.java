@@ -11,12 +11,6 @@ import java.util.Map;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * NetworkDTO类。
- */
-/**
- * NetworkDTO类。
- */
 public class NetworkDTO {
 
     private String id;
@@ -34,18 +28,10 @@ public class NetworkDTO {
      * getId方法。
      * @return String类型返回值
      */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
     public String getId() {
         return id;
     }
 
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
     /**
      * setId方法。
      *      * @param id String类型参数
@@ -58,18 +44,10 @@ public class NetworkDTO {
      * getName方法。
      * @return String类型返回值
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
     /**
      * setName方法。
      *      * @param name String类型参数
@@ -82,18 +60,10 @@ public class NetworkDTO {
      * getDriver方法。
      * @return String类型返回值
      */
-    /**
-     * getDriver方法。
-     * @return String类型返回值
-     */
     public String getDriver() {
         return driver;
     }
 
-    /**
-     * setDriver方法。
-     *      * @param driver String类型参数
-     */
     /**
      * setDriver方法。
      *      * @param driver String类型参数
@@ -106,18 +76,10 @@ public class NetworkDTO {
      * getScope方法。
      * @return String类型返回值
      */
-    /**
-     * getScope方法。
-     * @return String类型返回值
-     */
     public String getScope() {
         return scope;
     }
 
-    /**
-     * setScope方法。
-     *      * @param scope String类型参数
-     */
     /**
      * setScope方法。
      *      * @param scope String类型参数
@@ -130,18 +92,10 @@ public class NetworkDTO {
      * isInternal方法。
      * @return boolean类型返回值
      */
-    /**
-     * isInternal方法。
-     * @return boolean类型返回值
-     */
     public boolean isInternal() {
         return internal;
     }
 
-    /**
-     * setInternal方法。
-     *      * @param internal boolean类型参数
-     */
     /**
      * setInternal方法。
      *      * @param internal boolean类型参数
@@ -154,18 +108,10 @@ public class NetworkDTO {
      * isAttachable方法。
      * @return boolean类型返回值
      */
-    /**
-     * isAttachable方法。
-     * @return boolean类型返回值
-     */
     public boolean isAttachable() {
         return attachable;
     }
 
-    /**
-     * setAttachable方法。
-     *      * @param attachable boolean类型参数
-     */
     /**
      * setAttachable方法。
      *      * @param attachable boolean类型参数
@@ -178,18 +124,10 @@ public class NetworkDTO {
      * getSubnet方法。
      * @return String类型返回值
      */
-    /**
-     * getSubnet方法。
-     * @return String类型返回值
-     */
     public String getSubnet() {
         return subnet;
     }
 
-    /**
-     * setSubnet方法。
-     *      * @param subnet String类型参数
-     */
     /**
      * setSubnet方法。
      *      * @param subnet String类型参数
@@ -202,18 +140,10 @@ public class NetworkDTO {
      * getGateway方法。
      * @return String类型返回值
      */
-    /**
-     * getGateway方法。
-     * @return String类型返回值
-     */
     public String getGateway() {
         return gateway;
     }
 
-    /**
-     * setGateway方法。
-     *      * @param gateway String类型参数
-     */
     /**
      * setGateway方法。
      *      * @param gateway String类型参数
@@ -226,18 +156,10 @@ public class NetworkDTO {
      * getLabels方法。
      * @return Map<String, String>类型返回值
      */
-    /**
-     * getLabels方法。
-     * @return Map<String, String>类型返回值
-     */
     public Map<String, String> getLabels() {
         return labels;
     }
 
-    /**
-     * setLabels方法。
-     *      * @param labels MapString,类型参数
-     */
     /**
      * setLabels方法。
      *      * @param labels MapString,类型参数
@@ -250,18 +172,10 @@ public class NetworkDTO {
      * getContainerCount方法。
      * @return int类型返回值
      */
-    /**
-     * getContainerCount方法。
-     * @return int类型返回值
-     */
     public int getContainerCount() {
         return containerCount;
     }
 
-    /**
-     * setContainerCount方法。
-     *      * @param containerCount int类型参数
-     */
     /**
      * setContainerCount方法。
      *      * @param containerCount int类型参数
@@ -271,10 +185,6 @@ public class NetworkDTO {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

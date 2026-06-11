@@ -25,9 +25,6 @@ import java.lang.annotation.Target;
 /**
  * Transactional注解。
  */
-/**
- * Transactional注解。
- */
 public @interface Transactional {
 
     /**

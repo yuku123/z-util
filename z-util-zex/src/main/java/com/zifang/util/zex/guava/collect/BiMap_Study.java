@@ -38,9 +38,6 @@ import java.util.Map;
  * @author zifang
  * @version 1.0
  */
-/**
- * BiMap_Study类。
- */
 public class BiMap_Study {
     /**
      * BiMap基础方法，其他实现类亦有如下方法.

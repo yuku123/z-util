@@ -10,12 +10,6 @@ import javax.swing.*;
  * @version 1.0
  * @since 2020-01-01
  */
-/**
- * TreeComponent类。
- */
-/**
- * TreeComponent类。
- */
 public class TreeComponent extends JTree {
 
 }

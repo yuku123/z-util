@@ -7,19 +7,8 @@ import java.util.List;
 /**
  * cURL 解析器使用示例
  */
-/**
- * CurlParserExample类。
- */
-/**
- * CurlParserExample类。
- */
 public class CurlParserExample {
 
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
     /**
      * main方法。
      *      * @param args String[]类型参数

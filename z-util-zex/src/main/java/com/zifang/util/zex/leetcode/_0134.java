@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _0134类。
- */
 public class _0134 {
     /**
      * canCompleteCircuit方法。

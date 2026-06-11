@@ -9,20 +9,11 @@ import com.zifang.util.numpy.Shape;
  * f(x) = x if x > 0, else alpha * (exp(x) - 1)
  * f'(x) = 1 if x > 0, else alpha * exp(x)
  */
-/**
- * ELU类。
- */
-/**
- * ELU类。
- */
 public class ELU extends com.zifang.util.ml.nn.Module {
     
     private final float alpha;
     private NdArray savedInput;
     
-    /**
-     * ELU方法。
-     */
     /**
      * ELU方法。
      */
@@ -34,20 +25,11 @@ public class ELU extends com.zifang.util.ml.nn.Module {
      * ELU方法。
      *      * @param alpha float类型参数
      */
-    /**
-     * ELU方法。
-     *      * @param alpha float类型参数
-     */
     public ELU(float alpha) {
         this.alpha = alpha;
     }
     
     @Override
-    /**
-     * forward方法。
-     *      * @param input NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -76,11 +58,6 @@ public class ELU extends com.zifang.util.ml.nn.Module {
      *      * @param gradOutput NdArray类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * backward方法。
-     *      * @param gradOutput NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray backward(NdArray gradOutput) {
         NdArray gradInput = NdArray.zeros(gradOutput.getShape(), DType.FLOAT32);
         Object gInData = gradInput.getData();
@@ -98,10 +75,6 @@ public class ELU extends com.zifang.util.ml.nn.Module {
         return gradInput;
     }
     
-    /**
-     * getAlpha方法。
-     * @return float类型返回值
-     */
     /**
      * getAlpha方法。
      * @return float类型返回值

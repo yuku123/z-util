@@ -16,12 +16,6 @@ import java.lang.management.ManagementFactory;
  *
  * @author zifang
  */
-/**
- * CompilationMXBeanDemo类。
- */
-/**
- * CompilationMXBeanDemo类。
- */
 public class CompilationMXBeanDemo {
 
 
@@ -38,14 +32,6 @@ public class CompilationMXBeanDemo {
      * </ul>
      *
      * @return 远程JVM的CompilationMXBean实例，连接失败返回null
-     */
-    /**
-     * getRemoteCompilationMXBean方法。
-     * @return static CompilationMXBean类型返回值
-     */
-    /**
-     * getRemoteCompilationMXBean方法。
-     * @return static CompilationMXBean类型返回值
      */
     public static CompilationMXBean getRemoteCompilationMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -74,14 +60,6 @@ public class CompilationMXBeanDemo {
      *
      * @return 当前JVM的CompilationMXBean实例
      */
-    /**
-     * getLocalCompilationMXBean方法。
-     * @return static CompilationMXBean类型返回值
-     */
-    /**
-     * getLocalCompilationMXBean方法。
-     * @return static CompilationMXBean类型返回值
-     */
     public static CompilationMXBean getLocalCompilationMXBean() {
         return ManagementFactory.getCompilationMXBean();
     }
@@ -90,16 +68,6 @@ public class CompilationMXBeanDemo {
      * 主方法，演示获取JVM编译信息。
      *
      * @param args 命令行参数
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
         CompilationMXBean compilationMXBean = getRemoteCompilationMXBean();

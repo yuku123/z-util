@@ -9,12 +9,6 @@ package com.zifang.util.source.generator.info;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ClassInfoPool类。
- */
-/**
- * ClassInfoPool类。
- */
 public class ClassInfoPool {
 
 }

@@ -6,12 +6,6 @@ import com.zifang.util.numpy.NdArray;
  * Interface for estimators used in ensemble methods.
  * Defines the common interface for base estimators in Stacking and Voting.
  */
-/**
- * Estimator接口。
- */
-/**
- * Estimator接口。
- */
 public interface Estimator {
     /**
      * Fit the estimator on training data.

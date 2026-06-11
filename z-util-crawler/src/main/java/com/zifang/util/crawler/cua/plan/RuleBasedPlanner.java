@@ -22,12 +22,6 @@ import java.util.regex.Pattern;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * RuleBasedPlanner类。
- */
-/**
- * RuleBasedPlanner类。
- */
 public class RuleBasedPlanner {
 
     private final OperationRegistry registry;
@@ -45,16 +39,6 @@ public class RuleBasedPlanner {
          * @param regex 正则表达式模式（不区分大小写）
          * @param stepSequence 步骤关键字序列
          */
-    /**
-     * Rule方法。
-     *      * @param regex String类型参数
-     * @param stepSequence ListString类型参数
-     */
-    /**
-     * Rule方法。
-     *      * @param regex String类型参数
-     * @param stepSequence ListString类型参数
-     */
         public Rule(String regex, List<String> stepSequence) {
             this.pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
             this.stepSequence = stepSequence;
@@ -65,16 +49,6 @@ public class RuleBasedPlanner {
          * @param taskDescription 任务描述
          * @return 是否匹配
          */
-    /**
-     * matches方法。
-     *      * @param taskDescription String类型参数
-     * @return boolean类型返回值
-     */
-    /**
-     * matches方法。
-     *      * @param taskDescription String类型参数
-     * @return boolean类型返回值
-     */
         public boolean matches(String taskDescription) {
             return pattern.matcher(taskDescription).find();
         }
@@ -83,23 +57,11 @@ public class RuleBasedPlanner {
          * 获取步骤序列。
          * @return 步骤关键字列表
          */
-    /**
-     * getStepSequence方法。
-     * @return List<String>类型返回值
-     */
-    /**
-     * getStepSequence方法。
-     * @return List<String>类型返回值
-     */
         public List<String> getStepSequence() {
             return stepSequence;
         }
     }
 
-    /**
-     * RuleBasedPlanner方法。
-     *      * @param registry OperationRegistry类型参数
-     */
     /**
      * RuleBasedPlanner方法。
      *      * @param registry OperationRegistry类型参数
@@ -115,16 +77,6 @@ public class RuleBasedPlanner {
      * @param regex 正则表达式模式
      * @param stepSequence 步骤序列
      */
-    /**
-     * addRule方法。
-     *      * @param regex String类型参数
-     * @param stepSequence ListString类型参数
-     */
-    /**
-     * addRule方法。
-     *      * @param regex String类型参数
-     * @param stepSequence ListString类型参数
-     */
     public void addRule(String regex, List<String> stepSequence) {
         rules.add(new Rule(regex, stepSequence));
     }
@@ -132,18 +84,6 @@ public class RuleBasedPlanner {
     /**
      * Plan the execution by matching the task description against rules.
      * Returns a CuResult with the planned step sequence or an error if no rule matches.
-     */
-    /**
-     * plan方法。
-     *      * @param taskDescription String类型参数
-     * @param context PipelineContext类型参数
-     * @return CuResult类型返回值
-     */
-    /**
-     * plan方法。
-     *      * @param taskDescription String类型参数
-     * @param context PipelineContext类型参数
-     * @return CuResult类型返回值
      */
     public CuResult plan(String taskDescription, PipelineContext context) {
         for (Rule rule : rules) {

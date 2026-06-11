@@ -12,12 +12,6 @@ import java.util.Map;
 /**
  * @author zifang
  */
-/**
- * GsonUtil类。
- */
-/**
- * GsonUtil类。
- */
 public class GsonUtil {
 
 //    private static Gson gson = new Gson();
@@ -46,11 +40,6 @@ public class GsonUtil {
      *      * @param object T类型参数
      * @return static <T> String类型返回值
      */
-    /**
-     * objectToJsonStr方法。
-     *      * @param object T类型参数
-     * @return static <T> String类型返回值
-     */
     public static <T> String objectToJsonStr(T object) {
         return gson.toJson(object);
     }
@@ -61,22 +50,10 @@ public class GsonUtil {
      * @param classOfT ClassT类型参数
      * @return static <T> T类型返回值
      */
-    /**
-     * jsonStrToObject方法。
-     *      * @param jsonStr String类型参数
-     * @param classOfT ClassT类型参数
-     * @return static <T> T类型返回值
-     */
     public static <T> T jsonStrToObject(String jsonStr, Class<T> classOfT) {
         return gson.fromJson(jsonStr, classOfT);
     }
 
-    /**
-     * jsonStrToObject方法。
-     *      * @param jsonStr String类型参数
-     * @param typeReference Type类型参数
-     * @return static <T> T类型返回值
-     */
     /**
      * jsonStrToObject方法。
      *      * @param jsonStr String类型参数
@@ -94,21 +71,10 @@ public class GsonUtil {
      * @param t ClassT类型参数
      * @return static <T> T类型返回值
      */
-    /**
-     * changeToSubClass方法。
-     *      * @param o Object类型参数
-     * @param t ClassT类型参数
-     * @return static <T> T类型返回值
-     */
     public static <T> T changeToSubClass(Object o, Class<T> t) {
         return jsonStrToObject(objectToJsonStr(o), t);
     }
 
-    /**
-     * toMap方法。
-     *      * @param o Object类型参数
-     * @return static Map<String, Object>类型返回值
-     */
     /**
      * toMap方法。
      *      * @param o Object类型参数

@@ -22,34 +22,32 @@ import java.util.regex.Pattern;
  * HTTP服务器构建器
  * 用于快速构建基于注解的HTTP服务器
  */
-/**
- * HttpServerBuilder类。
- */
-/**
- * HttpServerBuilder类。
- */
 public class HttpServerBuilder {
 
     private int port = 8080;
     private final List<Object> controllers = new ArrayList<>();
     private HttpServer httpServer;
     private final Map<String, RouteHandler> routeHandlers = new ConcurrentHashMap<>();
+    private final List<RouteHandler> allHandlers = new ArrayList<>();
+    private final List<Runnable> postStartCallbacks = new ArrayList<>();
+
+    public HttpServer getHttpServer() { return httpServer; }
+    List<RouteHandler> getRouteHandlers() { return allHandlers; }
+
+    /**
+     * 注册完成后回调（用于直接操作底层 HttpServer 实现 SSE 等高级特性）。
+     * 在所有路由注册完毕、HttpServer 创建之后调用。
+     */
+    public HttpServerBuilder afterRegister(Runnable callback) {
+        postStartCallbacks.add(callback);
+        return this;
+    }
 
     /**
      * 绑定端口
      *
      * @param port 端口号
      * @return HttpServerBuilder实例
-     */
-    /**
-     * bindPort方法。
-     *      * @param port int类型参数
-     * @return static HttpServerBuilder类型返回值
-     */
-    /**
-     * bindPort方法。
-     *      * @param port int类型参数
-     * @return static HttpServerBuilder类型返回值
      */
     public static HttpServerBuilder bindPort(int port) {
         HttpServerBuilder builder = new HttpServerBuilder();
@@ -63,16 +61,6 @@ public class HttpServerBuilder {
      * @param controller 控制器实例
      * @return HttpServerBuilder实例
      */
-    /**
-     * proxy方法。
-     *      * @param controller Object类型参数
-     * @return HttpServerBuilder类型返回值
-     */
-    /**
-     * proxy方法。
-     *      * @param controller Object类型参数
-     * @return HttpServerBuilder类型返回值
-     */
     public HttpServerBuilder proxy(Object controller) {
         this.controllers.add(controller);
         return this;
@@ -82,14 +70,6 @@ public class HttpServerBuilder {
      * 启动HTTP服务器
      *
      * @return HttpServerBuilder实例
-     */
-    /**
-     * start方法。
-     * @return HttpServerBuilder类型返回值
-     */
-    /**
-     * start方法。
-     * @return HttpServerBuilder类型返回值
      */
     public HttpServerBuilder start() {
         try {
@@ -110,6 +90,11 @@ public class HttpServerBuilder {
 
             System.out.println("HTTP Server started on port " + port);
 
+            // 执行 afterRegister 回调（httpServer 已创建完毕）
+            for (Runnable cb : postStartCallbacks) {
+                cb.run();
+            }
+
             // 添加关闭钩子
             Runtime.getRuntime().addShutdownHook(new Thread(this::stop));
 
@@ -121,12 +106,6 @@ public class HttpServerBuilder {
 
     /**
      * 停止HTTP服务器
-     */
-    /**
-     * stop方法。
-     */
-    /**
-     * stop方法。
      */
     public void stop() {
         if (httpServer != null) {
@@ -231,6 +210,7 @@ public class HttpServerBuilder {
         // 注册路由处理器
         RouteHandler handler = new RouteHandler(controller, method, pattern, fullPath);
         routeHandlers.put(routeKey, handler);
+        allHandlers.add(handler);
 
         System.out.println("Registered route: " + routeKey);
     }
@@ -256,10 +236,6 @@ public class HttpServerBuilder {
      */
     private class RootHandler implements HttpHandler {
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
     /**
      * handle方法。
      *      * @param exchange HttpExchange类型参数

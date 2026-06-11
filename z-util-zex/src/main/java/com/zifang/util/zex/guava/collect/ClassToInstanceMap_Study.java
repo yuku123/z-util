@@ -27,9 +27,6 @@ import org.junit.Test;
  * @author zifang
  * @version 1.0
  */
-/**
- * ClassToInstanceMap_Study类。
- */
 public class ClassToInstanceMap_Study {
 
     @SuppressWarnings({"unchecked", "rawtypes"})

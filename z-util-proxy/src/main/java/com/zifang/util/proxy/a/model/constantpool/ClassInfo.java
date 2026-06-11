@@ -10,19 +10,9 @@ import java.io.InputStream;
  * CONSTANT_Class_info用于表示类或接口的完全限定名。
  * name_index指向常量池中CONSTANT_Utf8_info常量的索引。
  */
-/**
- * ClassInfo类。
- */
-/**
- * ClassInfo类。
- */
 public class ClassInfo extends AbstractConstantPool {
     private U2 nameIndex;
 
-    /**
-     * ClassInfo方法。
-     *      * @param tag byte类型参数
-     */
     /**
      * ClassInfo方法。
      *      * @param tag byte类型参数
@@ -35,18 +25,10 @@ public class ClassInfo extends AbstractConstantPool {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
-    /**
-     * read方法。
-     *      * @param inputStream InputStream类型参数
-     */
     public void read(InputStream inputStream) {
         this.nameIndex = U2.read(inputStream);
     }
 
-    /**
-     * getNameIndex方法。
-     * @return U2类型返回值
-     */
     /**
      * getNameIndex方法。
      * @return U2类型返回值
@@ -59,19 +41,11 @@ public class ClassInfo extends AbstractConstantPool {
      * setNameIndex方法。
      *      * @param nameIndex U2类型参数
      */
-    /**
-     * setNameIndex方法。
-     *      * @param nameIndex U2类型参数
-     */
     public void setNameIndex(U2 nameIndex) {
         this.nameIndex = nameIndex;
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

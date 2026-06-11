@@ -54,16 +54,6 @@ public final class RsaUtil {
      * @return
      * @throws Exception
      */
-    /**
-     * decryptBASE64方法。
-     *      * @param key String类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * decryptBASE64方法。
-     *      * @param key String类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] decryptBASE64(String key) throws Exception {
         return Base64Utils.decrypt(key);
     }
@@ -74,16 +64,6 @@ public final class RsaUtil {
      * @param key
      * @return
      * @throws Exception
-     */
-    /**
-     * encryptBASE64方法。
-     *      * @param key byte[]类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * encryptBASE64方法。
-     *      * @param key byte[]类型参数
-     * @return static String类型返回值
      */
     public static String encryptBASE64(byte[] key) throws Exception {
         return Base64Utils.encrypt(key);
@@ -97,14 +77,6 @@ public final class RsaUtil {
      *
      * @return
      * @throws Exception
-     */
-    /**
-     * genKeyPair方法。
-     * @return static Map<String, Object>类型返回值
-     */
-    /**
-     * genKeyPair方法。
-     * @return static Map<String, Object>类型返回值
      */
     public static Map<String, Object> genKeyPair() throws Exception {
         KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
@@ -128,18 +100,6 @@ public final class RsaUtil {
      * @return
      * @throws Exception
      */
-    /**
-     * sign方法。
-     *      * @param data byte[]类型参数
-     * @param privateKey String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * sign方法。
-     *      * @param data byte[]类型参数
-     * @param privateKey String类型参数
-     * @return static String类型返回值
-     */
     public static String sign(byte[] data, String privateKey) throws Exception {
         byte[] keyBytes = decryptBASE64(privateKey);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
@@ -162,20 +122,6 @@ public final class RsaUtil {
      * @return
      * @throws Exception
      */
-    /**
-     * verify方法。
-     *      * @param data byte[]类型参数
-     * @param publicKey String类型参数
-     * @param sign String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * verify方法。
-     *      * @param data byte[]类型参数
-     * @param publicKey String类型参数
-     * @param sign String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean verify(byte[] data, String publicKey, String sign) throws Exception {
         byte[] keyBytes = decryptBASE64(publicKey);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
@@ -196,18 +142,6 @@ public final class RsaUtil {
      * @param privateKey    私钥(BASE64编码)
      * @return
      * @throws Exception
-     */
-    /**
-     * decryptByPrivateKey方法。
-     *      * @param encryptedData byte[]类型参数
-     * @param privateKey String类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * decryptByPrivateKey方法。
-     *      * @param encryptedData byte[]类型参数
-     * @param privateKey String类型参数
-     * @return static byte[]类型返回值
      */
     public static byte[] decryptByPrivateKey(byte[] encryptedData, String privateKey) throws Exception {
         byte[] keyBytes = decryptBASE64(privateKey);
@@ -238,28 +172,6 @@ public final class RsaUtil {
     }
 
     /** */
-    /**
-     * <p>
-     * 公钥解密
-     * </p>
-     *
-     * @param encryptedData 已加密数据
-     * @param publicKey     公钥(BASE64编码)
-     * @return
-     * @throws Exception
-     */
-    /**
-     * decryptByPublicKey方法。
-     *      * @param encryptedData byte[]类型参数
-     * @param publicKey String类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * decryptByPublicKey方法。
-     *      * @param encryptedData byte[]类型参数
-     * @param publicKey String类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] decryptByPublicKey(byte[] encryptedData, String publicKey) throws Exception {
         byte[] keyBytes = decryptBASE64(publicKey);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
@@ -289,28 +201,6 @@ public final class RsaUtil {
     }
 
     /** */
-    /**
-     * <p>
-     * 公钥加密
-     * </p>
-     *
-     * @param data      源数据
-     * @param publicKey 公钥(BASE64编码)
-     * @return
-     * @throws Exception
-     */
-    /**
-     * encryptByPublicKey方法。
-     *      * @param data byte[]类型参数
-     * @param publicKey String类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * encryptByPublicKey方法。
-     *      * @param data byte[]类型参数
-     * @param publicKey String类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] encryptByPublicKey(byte[] data, String publicKey) throws Exception {
         byte[] keyBytes = decryptBASE64(publicKey);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
@@ -350,18 +240,6 @@ public final class RsaUtil {
      * @return
      * @throws Exception
      */
-    /**
-     * encryptByPrivateKey方法。
-     *      * @param data byte[]类型参数
-     * @param privateKey String类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * encryptByPrivateKey方法。
-     *      * @param data byte[]类型参数
-     * @param privateKey String类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] encryptByPrivateKey(byte[] data, String privateKey) throws Exception {
         byte[] keyBytes = decryptBASE64(privateKey);
         PKCS8EncodedKeySpec pkcs8KeySpec = new PKCS8EncodedKeySpec(keyBytes);
@@ -399,16 +277,6 @@ public final class RsaUtil {
      * @return
      * @throws Exception
      */
-    /**
-     * getPrivateKey方法。
-     *      * @param keyMap MapString,类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getPrivateKey方法。
-     *      * @param keyMap MapString,类型参数
-     * @return static String类型返回值
-     */
     public static String getPrivateKey(Map<String, Object> keyMap) throws Exception {
         Key key = (Key) keyMap.get(PRIVATE_KEY);
         return encryptBASE64(key.getEncoded());
@@ -423,16 +291,6 @@ public final class RsaUtil {
      * @return
      * @throws Exception
      */
-    /**
-     * getPublicKey方法。
-     *      * @param keyMap MapString,类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getPublicKey方法。
-     *      * @param keyMap MapString,类型参数
-     * @return static String类型返回值
-     */
     public static String getPublicKey(Map<String, Object> keyMap) throws Exception {
         Key key = (Key) keyMap.get(PUBLIC_KEY);
         return encryptBASE64(key.getEncoded());
@@ -446,18 +304,6 @@ public final class RsaUtil {
      * @return
      * @throws Exception
      */
-    /**
-     * encryptedDataWithPriKey方法。
-     *      * @param data String类型参数
-     * @param PRIVATEKEY String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * encryptedDataWithPriKey方法。
-     *      * @param data String类型参数
-     * @param PRIVATEKEY String类型参数
-     * @return static String类型返回值
-     */
     public static String encryptedDataWithPriKey(String data, String PRIVATEKEY) throws Exception {
         return encryptBASE64(encryptByPrivateKey(data.getBytes(), PRIVATEKEY));
     }
@@ -467,18 +313,6 @@ public final class RsaUtil {
      * java端私钥解密
      *
      * @throws Exception
-     */
-    /**
-     * decryptDataWithPubKey方法。
-     *      * @param data String类型参数
-     * @param PUBLICKEY String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * decryptDataWithPubKey方法。
-     *      * @param data String类型参数
-     * @param PUBLICKEY String类型参数
-     * @return static String类型返回值
      */
     public static String decryptDataWithPubKey(String data, String PUBLICKEY) throws Exception {
         byte[] rs = decryptBASE64(data);
@@ -491,18 +325,6 @@ public final class RsaUtil {
      *
      * @throws Exception
      */
-    /**
-     * encryptedDataWithPubKey方法。
-     *      * @param data String类型参数
-     * @param PUBLICKEY String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * encryptedDataWithPubKey方法。
-     *      * @param data String类型参数
-     * @param PUBLICKEY String类型参数
-     * @return static String类型返回值
-     */
     public static String encryptedDataWithPubKey(String data, String PUBLICKEY) throws Exception {
         data = encryptBASE64(encryptByPublicKey(data.getBytes(), PUBLICKEY));
         return data;
@@ -512,18 +334,6 @@ public final class RsaUtil {
      * java端私钥解密
      *
      * @throws Exception
-     */
-    /**
-     * decryptDataWithPriKey方法。
-     *      * @param data String类型参数
-     * @param PRIVATEKEY String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * decryptDataWithPriKey方法。
-     *      * @param data String类型参数
-     * @param PRIVATEKEY String类型参数
-     * @return static String类型返回值
      */
     public static String decryptDataWithPriKey(String data, String PRIVATEKEY) throws Exception {
         byte[] rs = decryptBASE64(data);

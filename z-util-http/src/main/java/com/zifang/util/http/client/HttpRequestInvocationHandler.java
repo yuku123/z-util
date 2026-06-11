@@ -20,12 +20,6 @@ import java.util.Map;
  * @author zifang
  * @see InvocationHandler
  */
-/**
- * HttpRequestInvocationHandler类。
- */
-/**
- * HttpRequestInvocationHandler类。
- */
 public class HttpRequestInvocationHandler implements InvocationHandler {
 
     /**
@@ -43,14 +37,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      *
      * @param requestInterface HTTP请求接口类，必须带有 {@link RestController} 注解
      */
-    /**
-     * HttpRequestInvocationHandler方法。
-     *      * @param requestInterface Class?类型参数
-     */
-    /**
-     * HttpRequestInvocationHandler方法。
-     *      * @param requestInterface Class?类型参数
-     */
     public HttpRequestInvocationHandler(Class<?> requestInterface) {
         this.target = requestInterface;
     }
@@ -60,16 +46,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      *
      * @param requestInterface HTTP请求接口类，必须带有 {@link RestController} 注解
      * @param contextParams    上下文参数映射，用于在请求过程中传递额外数据
-     */
-    /**
-     * HttpRequestInvocationHandler方法。
-     *      * @param requestInterface Class?类型参数
-     * @param contextParams MapString,类型参数
-     */
-    /**
-     * HttpRequestInvocationHandler方法。
-     *      * @param requestInterface Class?类型参数
-     * @param contextParams MapString,类型参数
      */
     public HttpRequestInvocationHandler(Class<?> requestInterface, Map<String, Object> contextParams) {
         this.target = requestInterface;
@@ -96,13 +72,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      * @throws Throwable                                如果HTTP请求或反序列化过程中发生错误
      */
     @Override
-    /**
-     * invoke方法。
-     *      * @param proxy Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @return Object类型返回值
-     */
     /**
      * invoke方法。
      *      * @param proxy Object类型参数
@@ -154,14 +123,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      *
      * @return 上下文参数映射
      */
-    /**
-     * getContextParams方法。
-     * @return Map<String, Object>类型返回值
-     */
-    /**
-     * getContextParams方法。
-     * @return Map<String, Object>类型返回值
-     */
     public Map<String, Object> getContextParams() {
         return contextParams;
     }
@@ -171,14 +132,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      *
      * @param contextParams 上下文参数映射，用于在请求过程中传递额外数据
      */
-    /**
-     * setContextParams方法。
-     *      * @param contextParams MapString,类型参数
-     */
-    /**
-     * setContextParams方法。
-     *      * @param contextParams MapString,类型参数
-     */
     public void setContextParams(Map<String, Object> contextParams) {
         this.contextParams = contextParams;
     }
@@ -187,14 +140,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      * 获取代理的目标接口类。
      *
      * @return 目标接口类
-     */
-    /**
-     * getTarget方法。
-     * @return Class<?>类型返回值
-     */
-    /**
-     * getTarget方法。
-     * @return Class<?>类型返回值
      */
     public Class<?> getTarget() {
         return target;
@@ -206,10 +151,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      * @return 包含 contextParams 和 target 的字符串表示
      */
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -233,11 +174,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -253,10 +189,6 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      * @return 哈希码值
      */
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

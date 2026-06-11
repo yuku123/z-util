@@ -9,21 +9,12 @@ import java.util.*;
  *
  * @author zifang
  */
-/**
- * CommandContext类。
- */
-/**
- * CommandContext类。
- */
 public class CommandContext implements Map<String, Object> {
 
     private final Map<String, Object> data;
     private final List<Command<?>> executedCommands;
     private boolean interrupted;
 
-    /**
-     * CommandContext方法。
-     */
     /**
      * CommandContext方法。
      */
@@ -37,10 +28,6 @@ public class CommandContext implements Map<String, Object> {
      * CommandContext方法。
      *      * @param initialData MapString,类型参数
      */
-    /**
-     * CommandContext方法。
-     *      * @param initialData MapString,类型参数
-     */
     public CommandContext(Map<String, Object> initialData) {
         this.data = new HashMap<>(initialData);
         this.executedCommands = new ArrayList<>();
@@ -50,28 +37,12 @@ public class CommandContext implements Map<String, Object> {
     /**
      * 添加已执行的命令
      */
-    /**
-     * addExecutedCommand方法。
-     *      * @param command Command?类型参数
-     */
-    /**
-     * addExecutedCommand方法。
-     *      * @param command Command?类型参数
-     */
     public void addExecutedCommand(Command<?> command) {
         this.executedCommands.add(command);
     }
 
     /**
      * 获取已执行的命令列表
-     */
-    /**
-     * getExecutedCommands方法。
-     * @return List<Command<?>>类型返回值
-     */
-    /**
-     * getExecutedCommands方法。
-     * @return List<Command<?>>类型返回值
      */
     public List<Command<?>> getExecutedCommands() {
         return Collections.unmodifiableList(executedCommands);
@@ -80,26 +51,12 @@ public class CommandContext implements Map<String, Object> {
     /**
      * 中断命令执行
      */
-    /**
-     * interrupt方法。
-     */
-    /**
-     * interrupt方法。
-     */
     public void interrupt() {
         this.interrupted = true;
     }
 
     /**
      * 是否被中断
-     */
-    /**
-     * isInterrupted方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isInterrupted方法。
-     * @return boolean类型返回值
      */
     public boolean isInterrupted() {
         return interrupted;
@@ -109,12 +66,6 @@ public class CommandContext implements Map<String, Object> {
      * 获取值并类型转换
      */
     @SuppressWarnings("unchecked")
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @param type ClassT类型参数
-     * @return <T> T类型返回值
-     */
     /**
      * get方法。
      *      * @param key String类型参数
@@ -132,18 +83,6 @@ public class CommandContext implements Map<String, Object> {
     /**
      * 获取值，带默认值
      */
-    /**
-     * getOrDefault方法。
-     *      * @param key String类型参数
-     * @param defaultValue Object类型参数
-     * @return Object类型返回值
-     */
-    /**
-     * getOrDefault方法。
-     *      * @param key String类型参数
-     * @param defaultValue Object类型参数
-     * @return Object类型返回值
-     */
     public Object getOrDefault(String key, Object defaultValue) {
         Object value = data.get(key);
         return value != null ? value : defaultValue;
@@ -152,10 +91,6 @@ public class CommandContext implements Map<String, Object> {
     // Map接口实现
 
     @Override
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
     /**
      * size方法。
      * @return int类型返回值
@@ -169,20 +104,11 @@ public class CommandContext implements Map<String, Object> {
      * isEmpty方法。
      * @return boolean类型返回值
      */
-    /**
-     * isEmpty方法。
-     * @return boolean类型返回值
-     */
     public boolean isEmpty() {
         return data.isEmpty();
     }
 
     @Override
-    /**
-     * containsKey方法。
-     *      * @param key Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * containsKey方法。
      *      * @param key Object类型参数
@@ -198,21 +124,11 @@ public class CommandContext implements Map<String, Object> {
      *      * @param value Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * containsValue方法。
-     *      * @param value Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean containsValue(Object value) {
         return data.containsValue(value);
     }
 
     @Override
-    /**
-     * get方法。
-     *      * @param key Object类型参数
-     * @return Object类型返回值
-     */
     /**
      * get方法。
      *      * @param key Object类型参数
@@ -229,22 +145,11 @@ public class CommandContext implements Map<String, Object> {
      * @param value Object类型参数
      * @return Object类型返回值
      */
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     * @return Object类型返回值
-     */
     public Object put(String key, Object value) {
         return data.put(key, value);
     }
 
     @Override
-    /**
-     * remove方法。
-     *      * @param key Object类型参数
-     * @return Object类型返回值
-     */
     /**
      * remove方法。
      *      * @param key Object类型参数
@@ -259,10 +164,6 @@ public class CommandContext implements Map<String, Object> {
      * putAll方法。
      *      * @param m Map?类型参数
      */
-    /**
-     * putAll方法。
-     *      * @param m Map?类型参数
-     */
     public void putAll(Map<? extends String, ?> m) {
         data.putAll(m);
     }
@@ -271,18 +172,11 @@ public class CommandContext implements Map<String, Object> {
     /**
      * clear方法。
      */
-    /**
-     * clear方法。
-     */
     public void clear() {
         data.clear();
     }
 
     @Override
-    /**
-     * keySet方法。
-     * @return Set<String>类型返回值
-     */
     /**
      * keySet方法。
      * @return Set<String>类型返回值
@@ -296,10 +190,6 @@ public class CommandContext implements Map<String, Object> {
      * values方法。
      * @return Collection<Object>类型返回值
      */
-    /**
-     * values方法。
-     * @return Collection<Object>类型返回值
-     */
     public Collection<Object> values() {
         return data.values();
     }
@@ -309,19 +199,11 @@ public class CommandContext implements Map<String, Object> {
      * entrySet方法。
      * @return Set<Entry<String, Object>>类型返回值
      */
-    /**
-     * entrySet方法。
-     * @return Set<Entry<String, Object>>类型返回值
-     */
     public Set<Entry<String, Object>> entrySet() {
         return data.entrySet();
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

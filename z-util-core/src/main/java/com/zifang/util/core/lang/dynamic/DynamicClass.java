@@ -7,13 +7,6 @@ import java.util.stream.Collectors;
 /**
  * @author zifang
  */
-
-/**
- * DynamicClass类。
- */
-/**
- * DynamicClass类。
- */
 public class DynamicClass {
 
     private List<String> imports = new ArrayList<>();
@@ -51,18 +44,10 @@ public class DynamicClass {
      * getImplementClasses方法。
      * @return List<DynamicClass>类型返回值
      */
-    /**
-     * getImplementClasses方法。
-     * @return List<DynamicClass>类型返回值
-     */
     public List<DynamicClass> getImplementClasses() {
         return implementClasses;
     }
 
-    /**
-     * setImplementClasses方法。
-     *      * @param implementClasses ListDynamicClass类型参数
-     */
     /**
      * setImplementClasses方法。
      *      * @param implementClasses ListDynamicClass类型参数
@@ -75,18 +60,10 @@ public class DynamicClass {
      * getExtendClass方法。
      * @return DynamicClass类型返回值
      */
-    /**
-     * getExtendClass方法。
-     * @return DynamicClass类型返回值
-     */
     public DynamicClass getExtendClass() {
         return extendClass;
     }
 
-    /**
-     * setExtendClass方法。
-     *      * @param extendClass DynamicClass类型参数
-     */
     /**
      * setExtendClass方法。
      *      * @param extendClass DynamicClass类型参数
@@ -99,18 +76,10 @@ public class DynamicClass {
      * getFields方法。
      * @return List<DynamicField>类型返回值
      */
-    /**
-     * getFields方法。
-     * @return List<DynamicField>类型返回值
-     */
     public List<DynamicField> getFields() {
         return fields;
     }
 
-    /**
-     * setFields方法。
-     *      * @param fields ListDynamicField类型参数
-     */
     /**
      * setFields方法。
      *      * @param fields ListDynamicField类型参数
@@ -123,18 +92,10 @@ public class DynamicClass {
      * getMethods方法。
      * @return List<DynamicMethod>类型返回值
      */
-    /**
-     * getMethods方法。
-     * @return List<DynamicMethod>类型返回值
-     */
     public List<DynamicMethod> getMethods() {
         return methods;
     }
 
-    /**
-     * setMethods方法。
-     *      * @param methods ListDynamicMethod类型参数
-     */
     /**
      * setMethods方法。
      *      * @param methods ListDynamicMethod类型参数
@@ -147,18 +108,10 @@ public class DynamicClass {
      * getPackageName方法。
      * @return String类型返回值
      */
-    /**
-     * getPackageName方法。
-     * @return String类型返回值
-     */
     public String getPackageName() {
         return packageName;
     }
 
-    /**
-     * setPackageName方法。
-     *      * @param packageName String类型参数
-     */
     /**
      * setPackageName方法。
      *      * @param packageName String类型参数
@@ -171,18 +124,10 @@ public class DynamicClass {
      * getClassName方法。
      * @return String类型返回值
      */
-    /**
-     * getClassName方法。
-     * @return String类型返回值
-     */
     public String getClassName() {
         return className;
     }
 
-    /**
-     * setClassName方法。
-     *      * @param className String类型参数
-     */
     /**
      * setClassName方法。
      *      * @param className String类型参数
@@ -195,18 +140,10 @@ public class DynamicClass {
      * getInterface方法。
      * @return boolean类型返回值
      */
-    /**
-     * getInterface方法。
-     * @return boolean类型返回值
-     */
     public Boolean getInterface() {
         return isInterface;
     }
 
-    /**
-     * setInterface方法。
-     *      * @param anInterface boolean类型参数
-     */
     /**
      * setInterface方法。
      *      * @param anInterface boolean类型参数
@@ -219,18 +156,10 @@ public class DynamicClass {
      * getImports方法。
      * @return List<String>类型返回值
      */
-    /**
-     * getImports方法。
-     * @return List<String>类型返回值
-     */
     public List<String> getImports() {
         return imports;
     }
 
-    /**
-     * setImports方法。
-     *      * @param imports ListString类型参数
-     */
     /**
      * setImports方法。
      *      * @param imports ListString类型参数
@@ -243,10 +172,6 @@ public class DynamicClass {
      * getAnnotations方法。
      * @return List<?>类型返回值
      */
-    /**
-     * getAnnotations方法。
-     * @return List<?>类型返回值
-     */
     public List<?> getAnnotations() {
         return annotations;
     }
@@ -255,18 +180,10 @@ public class DynamicClass {
      * setAnnotations方法。
      *      * @param annotations List?类型参数
      */
-    /**
-     * setAnnotations方法。
-     *      * @param annotations List?类型参数
-     */
     public void setAnnotations(List<?> annotations) {
         this.annotations = annotations;
     }
 
-    /**
-     * generateSourceCode方法。
-     * @return String类型返回值
-     */
     /**
      * generateSourceCode方法。
      * @return String类型返回值
@@ -305,10 +222,6 @@ public class DynamicClass {
      * getType方法。
      * @return String类型返回值
      */
-    /**
-     * getType方法。
-     * @return String类型返回值
-     */
     public String getType(){
         if(packageName == null){
             return className;
@@ -317,11 +230,6 @@ public class DynamicClass {
         }
     }
 
-    /**
-     * addField方法。
-     *      * @param key String类型参数
-     * @param clazz Class?类型参数
-     */
     /**
      * addField方法。
      *      * @param key String类型参数
@@ -338,24 +246,10 @@ public class DynamicClass {
      * @param generateGetter boolean类型参数
      * @param generateSetter boolean类型参数
      */
-    /**
-     * addField方法。
-     *      * @param key String类型参数
-     * @param clazz Class?类型参数
-     * @param generateGetter boolean类型参数
-     * @param generateSetter boolean类型参数
-     */
     public void addField(String key, Class<?> clazz, boolean generateGetter, boolean generateSetter) {
         addField(key,clazz.getName(), generateGetter, generateSetter);
     }
 
-    /**
-     * addField方法。
-     *      * @param key String类型参数
-     * @param type String类型参数
-     * @param generateGetter boolean类型参数
-     * @param generateSetter boolean类型参数
-     */
     /**
      * addField方法。
      *      * @param key String类型参数

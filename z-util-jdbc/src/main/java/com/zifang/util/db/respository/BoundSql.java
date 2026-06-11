@@ -8,12 +8,6 @@ import java.util.Objects;
  *
  * @author zifang
  */
-/**
- * BoundSql类。
- */
-/**
- * BoundSql类。
- */
 public class BoundSql {
 
     private String originSql;
@@ -31,14 +25,6 @@ public class BoundSql {
      *
      * @return 原始SQL语句
      */
-    /**
-     * getOriginSql方法。
-     * @return String类型返回值
-     */
-    /**
-     * getOriginSql方法。
-     * @return String类型返回值
-     */
     public String getOriginSql() {
         return originSql;
     }
@@ -47,14 +33,6 @@ public class BoundSql {
      * 设置原始SQL
      *
      * @param originSql 原始SQL语句
-     */
-    /**
-     * setOriginSql方法。
-     *      * @param originSql String类型参数
-     */
-    /**
-     * setOriginSql方法。
-     *      * @param originSql String类型参数
      */
     public void setOriginSql(String originSql) {
         this.originSql = originSql;
@@ -65,14 +43,6 @@ public class BoundSql {
      *
      * @return 转换后的SQL语句
      */
-    /**
-     * getTransformSql方法。
-     * @return String类型返回值
-     */
-    /**
-     * getTransformSql方法。
-     * @return String类型返回值
-     */
     public String getTransformSql() {
         return transformSql;
     }
@@ -81,14 +51,6 @@ public class BoundSql {
      * 设置转换后的SQL
      *
      * @param transformSql 转换后的SQL语句
-     */
-    /**
-     * setTransformSql方法。
-     *      * @param transformSql String类型参数
-     */
-    /**
-     * setTransformSql方法。
-     *      * @param transformSql String类型参数
      */
     public void setTransformSql(String transformSql) {
         this.transformSql = transformSql;
@@ -99,14 +61,6 @@ public class BoundSql {
      *
      * @return 参数索引到名称的映射
      */
-    /**
-     * getIndexName方法。
-     * @return Map<Integer, String>类型返回值
-     */
-    /**
-     * getIndexName方法。
-     * @return Map<Integer, String>类型返回值
-     */
     public Map<Integer, String> getIndexName() {
         return indexName;
     }
@@ -115,14 +69,6 @@ public class BoundSql {
      * 设置参数索引到名称的映射
      *
      * @param indexName 参数索引到名称的映射
-     */
-    /**
-     * setIndexName方法。
-     *      * @param indexName MapInteger,类型参数
-     */
-    /**
-     * setIndexName方法。
-     *      * @param indexName MapInteger,类型参数
      */
     public void setIndexName(Map<Integer, String> indexName) {
         this.indexName = indexName;
@@ -133,14 +79,6 @@ public class BoundSql {
      *
      * @return 参数索引到值的映射
      */
-    /**
-     * getIndexValue方法。
-     * @return Map<Integer, Object>类型返回值
-     */
-    /**
-     * getIndexValue方法。
-     * @return Map<Integer, Object>类型返回值
-     */
     public Map<Integer, Object> getIndexValue() {
         return indexValue;
     }
@@ -149,14 +87,6 @@ public class BoundSql {
      * 设置参数索引到值的映射
      *
      * @param indexValue 参数索引到值的映射
-     */
-    /**
-     * setIndexValue方法。
-     *      * @param indexValue MapInteger,类型参数
-     */
-    /**
-     * setIndexValue方法。
-     *      * @param indexValue MapInteger,类型参数
      */
     public void setIndexValue(Map<Integer, Object> indexValue) {
         this.indexValue = indexValue;
@@ -167,14 +97,6 @@ public class BoundSql {
      *
      * @return 插入参数的映射
      */
-    /**
-     * getIndexValueInsert方法。
-     * @return Map<Integer, Object>类型返回值
-     */
-    /**
-     * getIndexValueInsert方法。
-     * @return Map<Integer, Object>类型返回值
-     */
     public Map<Integer, Object> getIndexValueInsert() {
         return indexValueInsert;
     }
@@ -183,14 +105,6 @@ public class BoundSql {
      * 设置插入参数的索引到值的映射
      *
      * @param indexValueInsert 插入参数的映射
-     */
-    /**
-     * setIndexValueInsert方法。
-     *      * @param indexValueInsert MapInteger,类型参数
-     */
-    /**
-     * setIndexValueInsert方法。
-     *      * @param indexValueInsert MapInteger,类型参数
      */
     public void setIndexValueInsert(Map<Integer, Object> indexValueInsert) {
         this.indexValueInsert = indexValueInsert;
@@ -201,20 +115,11 @@ public class BoundSql {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "BoundSql{originSql=" + originSql + ", transformSql=" + transformSql + ", indexName=" + indexName + ", indexValue=" + indexValue + ", indexValueInsert=" + indexValueInsert + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -232,10 +137,6 @@ public class BoundSql {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

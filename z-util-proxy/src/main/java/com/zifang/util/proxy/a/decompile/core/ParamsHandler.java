@@ -8,12 +8,6 @@ import java.util.List;
  * <p>
  * 处理字节码方法参数的转换和解析。
  */
-/**
- * ParamsHandler类。
- */
-/**
- * ParamsHandler类。
- */
 public class ParamsHandler {
 
     /**
@@ -28,18 +22,6 @@ public class ParamsHandler {
      *
      * @param src
      * @param params
-     */
-    /**
-     * getParams方法。
-     *      * @param src String类型参数
-     * @param params ListString类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * getParams方法。
-     *      * @param src String类型参数
-     * @param params ListString类型参数
-     * @return static void类型返回值
      */
     public static void getParams(String src, List<String> params) {
 
@@ -131,18 +113,6 @@ public class ParamsHandler {
      *
      * @param src
      * @param params
-     */
-    /**
-     * pureBasicTypeFill方法。
-     *      * @param src String类型参数
-     * @param params ListString类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * pureBasicTypeFill方法。
-     *      * @param src String类型参数
-     * @param params ListString类型参数
-     * @return static void类型返回值
      */
     public static void pureBasicTypeFill(String src, List<String> params) {
         for (int i = 0; i < src.length(); i++) {

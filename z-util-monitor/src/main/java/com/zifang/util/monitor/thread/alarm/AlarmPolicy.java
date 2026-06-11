@@ -19,15 +19,5 @@ public abstract class AlarmPolicy {
      * @param status 待判断的状态体，包含监控组件的当前状态信息
      * @return 如果需要告警，返回true，否则返回false
      */
-    /**
-     * needAlarm方法。
-     *      * @param status Status类型参数
-     * @return abstract boolean类型返回值
-     */
-    /**
-     * needAlarm方法。
-     *      * @param status Status类型参数
-     * @return abstract boolean类型返回值
-     */
     public abstract boolean needAlarm(Status status);
 }

@@ -20,26 +20,10 @@ import java.util.stream.Collectors;
  *
  * @author zifang
  */
-/**
- * JavaSourceGenerator类。
- */
-/**
- * JavaSourceGenerator类。
- */
 public class JavaSourceGenerator {
 
     /**
      * 从 ClassInfo 生成完整的 Java 源码
-     */
-    /**
-     * generate方法。
-     *      * @param classInfo ClassInfo类型参数
-     * @return String类型返回值
-     */
-    /**
-     * generate方法。
-     *      * @param classInfo ClassInfo类型参数
-     * @return String类型返回值
      */
     public String generate(ClassInfo classInfo) {
         StringBuilder sb = new StringBuilder();

@@ -7,12 +7,6 @@ import java.lang.reflect.Field;
  *
  * @param <T> 注解类型
  */
-/**
- * Validator接口。
- */
-/**
- * Validator接口。
- */
 public interface Validator<T> {
 
     /**

@@ -3,12 +3,6 @@ package com.zifang.util.core.pattern.pool;
 /**
  * 池化对象状态
  */
-/**
- * PooledObjectState枚举。
- */
-/**
- * PooledObjectState枚举。
- */
 public enum PooledObjectState {
     /**
      * 空闲状态，可被借用

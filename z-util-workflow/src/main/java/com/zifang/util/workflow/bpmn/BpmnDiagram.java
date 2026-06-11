@@ -22,12 +22,6 @@ import java.util.Map;
  * @see BpmnXmlParser
  * @see BpmnModelConverter
  */
-/**
- * BpmnDiagram类。
- */
-/**
- * BpmnDiagram类。
- */
 public class BpmnDiagram {
 
     private String id;
@@ -39,12 +33,6 @@ public class BpmnDiagram {
     /**
      * 默认构造函数。
      */
-    /**
-     * BpmnDiagram方法。
-     */
-    /**
-     * BpmnDiagram方法。
-     */
     public BpmnDiagram() {
     }
 
@@ -53,16 +41,6 @@ public class BpmnDiagram {
      *
      * @param id   BPMN 图的唯一标识符
      * @param name BPMN 图的名称
-     */
-    /**
-     * BpmnDiagram方法。
-     *      * @param id String类型参数
-     * @param name String类型参数
-     */
-    /**
-     * BpmnDiagram方法。
-     *      * @param id String类型参数
-     * @param name String类型参数
      */
     public BpmnDiagram(String id, String name) {
         this.id = id;
@@ -74,14 +52,6 @@ public class BpmnDiagram {
      *
      * @return BPMN 图的 ID
      */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
     public String getId() {
         return id;
     }
@@ -90,14 +60,6 @@ public class BpmnDiagram {
      * 设置 BPMN 图的唯一标识符。
      *
      * @param id BPMN 图的 ID
-     */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -108,14 +70,6 @@ public class BpmnDiagram {
      *
      * @return BPMN 图的名称
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return name;
     }
@@ -124,14 +78,6 @@ public class BpmnDiagram {
      * 设置 BPMN 图的名称。
      *
      * @param name BPMN 图的名称
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -142,14 +88,6 @@ public class BpmnDiagram {
      *
      * @return BPMN 节点列表
      */
-    /**
-     * getNodes方法。
-     * @return List<BpmnNode>类型返回值
-     */
-    /**
-     * getNodes方法。
-     * @return List<BpmnNode>类型返回值
-     */
     public List<BpmnNode> getNodes() {
         return nodes;
     }
@@ -158,14 +96,6 @@ public class BpmnDiagram {
      * 设置 BPMN 节点列表。
      *
      * @param nodes BPMN 节点列表
-     */
-    /**
-     * setNodes方法。
-     *      * @param nodes ListBpmnNode类型参数
-     */
-    /**
-     * setNodes方法。
-     *      * @param nodes ListBpmnNode类型参数
      */
     public void setNodes(List<BpmnNode> nodes) {
         this.nodes = nodes;
@@ -176,14 +106,6 @@ public class BpmnDiagram {
      *
      * @return 序列流列表
      */
-    /**
-     * getSequenceFlows方法。
-     * @return List<BpmnSequenceFlow>类型返回值
-     */
-    /**
-     * getSequenceFlows方法。
-     * @return List<BpmnSequenceFlow>类型返回值
-     */
     public List<BpmnSequenceFlow> getSequenceFlows() {
         return sequenceFlows;
     }
@@ -192,14 +114,6 @@ public class BpmnDiagram {
      * 设置序列流列表。
      *
      * @param sequenceFlows 序列流列表
-     */
-    /**
-     * setSequenceFlows方法。
-     *      * @param sequenceFlows ListBpmnSequenceFlow类型参数
-     */
-    /**
-     * setSequenceFlows方法。
-     *      * @param sequenceFlows ListBpmnSequenceFlow类型参数
      */
     public void setSequenceFlows(List<BpmnSequenceFlow> sequenceFlows) {
         this.sequenceFlows = sequenceFlows;
@@ -210,14 +124,6 @@ public class BpmnDiagram {
      *
      * @return 节点映射图
      */
-    /**
-     * getNodeMap方法。
-     * @return Map<String, BpmnNode>类型返回值
-     */
-    /**
-     * getNodeMap方法。
-     * @return Map<String, BpmnNode>类型返回值
-     */
     public Map<String, BpmnNode> getNodeMap() {
         return nodeMap;
     }
@@ -226,14 +132,6 @@ public class BpmnDiagram {
      * 设置节点映射图。
      *
      * @param nodeMap 节点 ID 到节点的映射图
-     */
-    /**
-     * setNodeMap方法。
-     *      * @param nodeMap MapString,类型参数
-     */
-    /**
-     * setNodeMap方法。
-     *      * @param nodeMap MapString,类型参数
      */
     public void setNodeMap(Map<String, BpmnNode> nodeMap) {
         this.nodeMap = nodeMap;
@@ -244,14 +142,6 @@ public class BpmnDiagram {
      *
      * @param node 要添加的 BPMN 节点
      */
-    /**
-     * addNode方法。
-     *      * @param node BpmnNode类型参数
-     */
-    /**
-     * addNode方法。
-     *      * @param node BpmnNode类型参数
-     */
     public void addNode(BpmnNode node) {
         this.nodes.add(node);
         this.nodeMap.put(node.getId(), node);
@@ -261,14 +151,6 @@ public class BpmnDiagram {
      * 向图中添加一个序列流连接。
      *
      * @param flow 要添加的序列流
-     */
-    /**
-     * addSequenceFlow方法。
-     *      * @param flow BpmnSequenceFlow类型参数
-     */
-    /**
-     * addSequenceFlow方法。
-     *      * @param flow BpmnSequenceFlow类型参数
      */
     public void addSequenceFlow(BpmnSequenceFlow flow) {
         this.sequenceFlows.add(flow);
@@ -287,12 +169,6 @@ public class BpmnDiagram {
         /**
          * 默认构造函数。
          */
-    /**
-     * BpmnNode方法。
-     */
-    /**
-     * BpmnNode方法。
-     */
         public BpmnNode() {
         }
 
@@ -303,18 +179,6 @@ public class BpmnDiagram {
          * @param name 节点名称
          * @param type 节点类型，如 "startEvent"、"userTask"、"exclusiveGateway" 等
          */
-    /**
-     * BpmnNode方法。
-     *      * @param id String类型参数
-     * @param name String类型参数
-     * @param type String类型参数
-     */
-    /**
-     * BpmnNode方法。
-     *      * @param id String类型参数
-     * @param name String类型参数
-     * @param type String类型参数
-     */
         public BpmnNode(String id, String name, String type) {
             this.id = id;
             this.name = name;
@@ -326,14 +190,6 @@ public class BpmnDiagram {
          *
          * @return 节点 ID
          */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
         public String getId() {
             return id;
         }
@@ -343,14 +199,6 @@ public class BpmnDiagram {
          *
          * @param id 节点 ID
          */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
         public void setId(String id) {
             this.id = id;
         }
@@ -360,14 +208,6 @@ public class BpmnDiagram {
          *
          * @return 节点名称
          */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
         public String getName() {
             return name;
         }
@@ -377,14 +217,6 @@ public class BpmnDiagram {
          *
          * @param name 节点名称
          */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
         public void setName(String name) {
             this.name = name;
         }
@@ -394,14 +226,6 @@ public class BpmnDiagram {
          *
          * @return 节点类型，如 "startEvent"、"userTask"、"exclusiveGateway" 等
          */
-    /**
-     * getType方法。
-     * @return String类型返回值
-     */
-    /**
-     * getType方法。
-     * @return String类型返回值
-     */
         public String getType() {
             return type;
         }
@@ -411,14 +235,6 @@ public class BpmnDiagram {
          *
          * @param type 节点类型
          */
-    /**
-     * setType方法。
-     *      * @param type String类型参数
-     */
-    /**
-     * setType方法。
-     *      * @param type String类型参数
-     */
         public void setType(String type) {
             this.type = type;
         }
@@ -428,14 +244,6 @@ public class BpmnDiagram {
          *
          * @return 属性映射表
          */
-    /**
-     * getProperties方法。
-     * @return Map<String, String>类型返回值
-     */
-    /**
-     * getProperties方法。
-     * @return Map<String, String>类型返回值
-     */
         public Map<String, String> getProperties() {
             return properties;
         }
@@ -445,14 +253,6 @@ public class BpmnDiagram {
          *
          * @param properties 属性映射表
          */
-    /**
-     * setProperties方法。
-     *      * @param properties MapString,类型参数
-     */
-    /**
-     * setProperties方法。
-     *      * @param properties MapString,类型参数
-     */
         public void setProperties(Map<String, String> properties) {
             this.properties = properties;
         }
@@ -463,16 +263,6 @@ public class BpmnDiagram {
          * @param key   属性键
          * @param value 属性值
          */
-    /**
-     * setProperty方法。
-     *      * @param key String类型参数
-     * @param value String类型参数
-     */
-    /**
-     * setProperty方法。
-     *      * @param key String类型参数
-     * @param value String类型参数
-     */
         public void setProperty(String key, String value) {
             this.properties.put(key, value);
         }
@@ -483,16 +273,6 @@ public class BpmnDiagram {
          * @param key 属性键
          * @return 属性值，如果不存在则返回 null
          */
-    /**
-     * getProperty方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
-    /**
-     * getProperty方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
         public String getProperty(String key) {
             return this.properties.get(key);
         }
@@ -514,12 +294,6 @@ public class BpmnDiagram {
         /**
          * 默认构造函数。
          */
-    /**
-     * BpmnSequenceFlow方法。
-     */
-    /**
-     * BpmnSequenceFlow方法。
-     */
         public BpmnSequenceFlow() {
         }
 
@@ -530,18 +304,6 @@ public class BpmnDiagram {
          * @param sourceRef 源节点 ID 引用
          * @param targetRef 目标节点 ID 引用
          */
-    /**
-     * BpmnSequenceFlow方法。
-     *      * @param id String类型参数
-     * @param sourceRef String类型参数
-     * @param targetRef String类型参数
-     */
-    /**
-     * BpmnSequenceFlow方法。
-     *      * @param id String类型参数
-     * @param sourceRef String类型参数
-     * @param targetRef String类型参数
-     */
         public BpmnSequenceFlow(String id, String sourceRef, String targetRef) {
             this.id = id;
             this.sourceRef = sourceRef;
@@ -553,14 +315,6 @@ public class BpmnDiagram {
          *
          * @return 序列流 ID
          */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
         public String getId() {
             return id;
         }
@@ -570,14 +324,6 @@ public class BpmnDiagram {
          *
          * @param id 序列流 ID
          */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
         public void setId(String id) {
             this.id = id;
         }
@@ -587,14 +333,6 @@ public class BpmnDiagram {
          *
          * @return 序列流名称
          */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
         public String getName() {
             return name;
         }
@@ -604,14 +342,6 @@ public class BpmnDiagram {
          *
          * @param name 序列流名称
          */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
         public void setName(String name) {
             this.name = name;
         }
@@ -621,14 +351,6 @@ public class BpmnDiagram {
          *
          * @return 源节点 ID
          */
-    /**
-     * getSourceRef方法。
-     * @return String类型返回值
-     */
-    /**
-     * getSourceRef方法。
-     * @return String类型返回值
-     */
         public String getSourceRef() {
             return sourceRef;
         }
@@ -638,14 +360,6 @@ public class BpmnDiagram {
          *
          * @param sourceRef 源节点 ID
          */
-    /**
-     * setSourceRef方法。
-     *      * @param sourceRef String类型参数
-     */
-    /**
-     * setSourceRef方法。
-     *      * @param sourceRef String类型参数
-     */
         public void setSourceRef(String sourceRef) {
             this.sourceRef = sourceRef;
         }
@@ -655,14 +369,6 @@ public class BpmnDiagram {
          *
          * @return 目标节点 ID
          */
-    /**
-     * getTargetRef方法。
-     * @return String类型返回值
-     */
-    /**
-     * getTargetRef方法。
-     * @return String类型返回值
-     */
         public String getTargetRef() {
             return targetRef;
         }
@@ -672,14 +378,6 @@ public class BpmnDiagram {
          *
          * @param targetRef 目标节点 ID
          */
-    /**
-     * setTargetRef方法。
-     *      * @param targetRef String类型参数
-     */
-    /**
-     * setTargetRef方法。
-     *      * @param targetRef String类型参数
-     */
         public void setTargetRef(String targetRef) {
             this.targetRef = targetRef;
         }
@@ -690,14 +388,6 @@ public class BpmnDiagram {
          *
          * @return 条件表达式字符串
          */
-    /**
-     * getConditionExpression方法。
-     * @return String类型返回值
-     */
-    /**
-     * getConditionExpression方法。
-     * @return String类型返回值
-     */
         public String getConditionExpression() {
             return conditionExpression;
         }
@@ -707,14 +397,6 @@ public class BpmnDiagram {
          *
          * @param conditionExpression 条件表达式
          */
-    /**
-     * setConditionExpression方法。
-     *      * @param conditionExpression String类型参数
-     */
-    /**
-     * setConditionExpression方法。
-     *      * @param conditionExpression String类型参数
-     */
         public void setConditionExpression(String conditionExpression) {
             this.conditionExpression = conditionExpression;
         }
@@ -725,14 +407,6 @@ public class BpmnDiagram {
          *
          * @return 如果是默认流向返回 true
          */
-    /**
-     * isDefault方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isDefault方法。
-     * @return boolean类型返回值
-     */
         public boolean isDefault() {
             return isDefault;
         }
@@ -742,14 +416,6 @@ public class BpmnDiagram {
          *
          * @param isDefault 是否为默认流向
          */
-    /**
-     * setDefault方法。
-     *      * @param isDefault boolean类型参数
-     */
-    /**
-     * setDefault方法。
-     *      * @param isDefault boolean类型参数
-     */
         public void setDefault(boolean isDefault) {
             this.isDefault = isDefault;
         }
@@ -759,14 +425,6 @@ public class BpmnDiagram {
          *
          * @return 属性映射表
          */
-    /**
-     * getProperties方法。
-     * @return Map<String, String>类型返回值
-     */
-    /**
-     * getProperties方法。
-     * @return Map<String, String>类型返回值
-     */
         public Map<String, String> getProperties() {
             return properties;
         }
@@ -776,14 +434,6 @@ public class BpmnDiagram {
          *
          * @param properties 属性映射表
          */
-    /**
-     * setProperties方法。
-     *      * @param properties MapString,类型参数
-     */
-    /**
-     * setProperties方法。
-     *      * @param properties MapString,类型参数
-     */
         public void setProperties(Map<String, String> properties) {
             this.properties = properties;
         }
@@ -794,16 +444,6 @@ public class BpmnDiagram {
          * @param key   属性键
          * @param value 属性值
          */
-    /**
-     * setProperty方法。
-     *      * @param key String类型参数
-     * @param value String类型参数
-     */
-    /**
-     * setProperty方法。
-     *      * @param key String类型参数
-     * @param value String类型参数
-     */
         public void setProperty(String key, String value) {
             this.properties.put(key, value);
         }
@@ -814,16 +454,6 @@ public class BpmnDiagram {
          * @param key 属性键
          * @return 属性值，如果不存在则返回 null
          */
-    /**
-     * getProperty方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
-    /**
-     * getProperty方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
         public String getProperty(String key) {
             return this.properties.get(key);
         }

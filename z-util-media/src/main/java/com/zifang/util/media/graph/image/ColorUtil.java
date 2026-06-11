@@ -15,16 +15,6 @@ public final class ColorUtil {
      * @param str 十六进制颜色字符串，必须以 # 开头
      * @return 对应的 Color 对象
      */
-    /**
-     * String2Color方法。
-     *      * @param str String类型参数
-     * @return final static Color类型返回值
-     */
-    /**
-     * String2Color方法。
-     *      * @param str String类型参数
-     * @return final static Color类型返回值
-     */
     public final static Color String2Color(String str) {
         String hex = str.substring(1);
         if (hex.length() == 6) {
@@ -48,16 +38,6 @@ public final class ColorUtil {
      *
      * @param color Color 对象
      * @return 十六进制颜色字符串，格式如 "#FF0000"
-     */
-    /**
-     * Color2String方法。
-     *      * @param color Color类型参数
-     * @return final static String类型返回值
-     */
-    /**
-     * Color2String方法。
-     *      * @param color Color类型参数
-     * @return final static String类型返回值
      */
     public final static String Color2String(Color color) {
         String R = Integer.toHexString(color.getRed());

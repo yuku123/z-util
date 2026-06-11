@@ -5,12 +5,6 @@ import java.lang.reflect.Method;
 /**
  * 切面接口
  */
-/**
- * Aspect接口。
- */
-/**
- * Aspect接口。
- */
 public interface Aspect {
 
     /**

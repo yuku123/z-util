@@ -53,16 +53,6 @@ public final class FileDirUtil {
      * @param dirPath the path of the directory to create
      * @throws IOException if the directory cannot be created or if an I/O error occurs
      */
-    /**
-     * mkdir方法。
-     *      * @param dirPath String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * mkdir方法。
-     *      * @param dirPath String类型参数
-     * @return static void类型返回值
-     */
     public static void mkdir(String dirPath) throws IOException {
         if (dirPath == null || dirPath.trim().isEmpty()) {
             throw new IOException("Directory path cannot be null or empty");
@@ -79,16 +69,6 @@ public final class FileDirUtil {
      *
      * @param dir the File object representing the directory to create
      * @throws IOException if the directory cannot be created or if an I/O error occurs
-     */
-    /**
-     * mkdir方法。
-     *      * @param dir File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * mkdir方法。
-     *      * @param dir File类型参数
-     * @return static void类型返回值
      */
     public static void mkdir(File dir) throws IOException {
         if (dir == null) {
@@ -118,16 +98,6 @@ public final class FileDirUtil {
      * @param dirPath the path of the directory to create
      * @throws IOException if the directory cannot be created or if an I/O error occurs
      */
-    /**
-     * mkdirs方法。
-     *      * @param dirPath String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * mkdirs方法。
-     *      * @param dirPath String类型参数
-     * @return static void类型返回值
-     */
     public static void mkdirs(String dirPath) throws IOException {
         mkdir(dirPath);
     }
@@ -142,16 +112,6 @@ public final class FileDirUtil {
      *
      * @param dir the directory to empty
      * @throws IOException if the directory cannot be emptied or if an I/O error occurs
-     */
-    /**
-     * cleanDir方法。
-     *      * @param dir File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * cleanDir方法。
-     *      * @param dir File类型参数
-     * @return static void类型返回值
      */
     public static void cleanDir(File dir) throws IOException {
         if (dir == null) {
@@ -201,16 +161,6 @@ public final class FileDirUtil {
      *
      * @param dir the directory to delete
      * @throws IOException if the directory cannot be deleted or if an I/O error occurs
-     */
-    /**
-     * deleteDir方法。
-     *      * @param dir File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * deleteDir方法。
-     *      * @param dir File类型参数
-     * @return static void类型返回值
      */
     public static void deleteDir(File dir) throws IOException {
         if (dir == null) {
@@ -265,16 +215,6 @@ public final class FileDirUtil {
      * @param dirPath the path of the directory to delete
      * @throws IOException if the directory cannot be deleted or if an I/O error occurs
      */
-    /**
-     * deleteDir方法。
-     *      * @param dirPath String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * deleteDir方法。
-     *      * @param dirPath String类型参数
-     * @return static void类型返回值
-     */
     public static void deleteDir(String dirPath) throws IOException {
         if (dirPath == null || dirPath.trim().isEmpty()) {
             throw new IOException("Directory path cannot be null or empty");
@@ -292,16 +232,6 @@ public final class FileDirUtil {
      *
      * @param file the file to delete
      * @throws IOException if the file cannot be deleted or if an I/O error occurs
-     */
-    /**
-     * deleteFile方法。
-     *      * @param file File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * deleteFile方法。
-     *      * @param file File类型参数
-     * @return static void类型返回值
      */
     public static void deleteFile(File file) throws IOException {
         if (file == null) {
@@ -330,16 +260,6 @@ public final class FileDirUtil {
      * @param filePath the path of the file to delete
      * @throws IOException if the file cannot be deleted or if an I/O error occurs
      */
-    /**
-     * deleteFile方法。
-     *      * @param filePath String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * deleteFile方法。
-     *      * @param filePath String类型参数
-     * @return static void类型返回值
-     */
     public static void deleteFile(String filePath) throws IOException {
         if (filePath == null || filePath.trim().isEmpty()) {
             throw new IOException("File path cannot be null or empty");
@@ -353,16 +273,6 @@ public final class FileDirUtil {
      * @param dir the directory to check
      * @return {@code true} if the directory is empty, {@code false} otherwise
      * @throws IOException if the directory cannot be accessed or if an I/O error occurs
-     */
-    /**
-     * isEmptyDir方法。
-     *      * @param dir File类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isEmptyDir方法。
-     *      * @param dir File类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isEmptyDir(File dir) throws IOException {
         if (dir == null) {
@@ -395,16 +305,6 @@ public final class FileDirUtil {
      * @param dir the directory to list files from
      * @return a list of File objects representing the files in the directory, or an empty list if the directory is empty
      * @throws IOException if the directory cannot be accessed or if an I/O error occurs
-     */
-    /**
-     * listFiles方法。
-     *      * @param dir File类型参数
-     * @return static List<File>类型返回值
-     */
-    /**
-     * listFiles方法。
-     *      * @param dir File类型参数
-     * @return static List<File>类型返回值
      */
     public static List<File> listFiles(File dir) throws IOException {
         if (dir == null) {
@@ -442,16 +342,6 @@ public final class FileDirUtil {
      * @param dir the root directory to list files from
      * @return a list of File objects representing all files found, or an empty list if no files are found
      * @throws IOException if the directory cannot be accessed or if an I/O error occurs
-     */
-    /**
-     * listFilesRecursively方法。
-     *      * @param dir File类型参数
-     * @return static List<File>类型返回值
-     */
-    /**
-     * listFilesRecursively方法。
-     *      * @param dir File类型参数
-     * @return static List<File>类型返回值
      */
     public static List<File> listFilesRecursively(File dir) throws IOException {
         if (dir == null) {
@@ -505,18 +395,6 @@ public final class FileDirUtil {
      * @return a list of File objects representing the matching files, or an empty list if no files match
      * @throws IOException if the directory cannot be accessed or if an I/O error occurs
      */
-    /**
-     * listFiles方法。
-     *      * @param dir File类型参数
-     * @param postfix String类型参数
-     * @return static List<File>类型返回值
-     */
-    /**
-     * listFiles方法。
-     *      * @param dir File类型参数
-     * @param postfix String类型参数
-     * @return static List<File>类型返回值
-     */
     public static List<File> listFiles(File dir, String postfix) throws IOException {
         if (dir == null) {
             throw new IOException("Directory file cannot be null");
@@ -558,18 +436,6 @@ public final class FileDirUtil {
      * @param fileName the name of the file to search for
      * @return the File object if found, or {@code null} if not found
      * @throws IOException if the directory cannot be accessed or if an I/O error occurs
-     */
-    /**
-     * searchFile方法。
-     *      * @param dir File类型参数
-     * @param fileName String类型参数
-     * @return static File类型返回值
-     */
-    /**
-     * searchFile方法。
-     *      * @param dir File类型参数
-     * @param fileName String类型参数
-     * @return static File类型返回值
      */
     public static File searchFile(File dir, String fileName) throws IOException {
         if (dir == null) {
@@ -631,16 +497,6 @@ public final class FileDirUtil {
      *
      * @param dir the directory whose existence is to be ensured
      * @throws IOException if the directory cannot be created or if an I/O error occurs
-     */
-    /**
-     * ensureDirExists方法。
-     *      * @param dir File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * ensureDirExists方法。
-     *      * @param dir File类型参数
-     * @return static void类型返回值
      */
     public static void ensureDirExists(File dir) throws IOException {
         if (dir == null) {

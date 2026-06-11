@@ -21,16 +21,10 @@ import java.io.IOException;
 /**
  * KeepLongSerializer类。
  */
-/**
- * KeepLongSerializer类。
- */
 public class KeepLongSerializer extends NumberSerializers.Base<Object> {
 
     private static final long serialVersionUID = -1194198701939237302L;
 
-    /**
-     * KeepLongSerializer方法。
-     */
     /**
      * KeepLongSerializer方法。
      */
@@ -39,12 +33,6 @@ public class KeepLongSerializer extends NumberSerializers.Base<Object> {
     }
 
     @Override
-    /**
-     * serialize方法。
-     *      * @param value Object类型参数
-     * @param gen JsonGenerator类型参数
-     * @param provider SerializerProvider类型参数
-     */
     /**
      * serialize方法。
      *      * @param value Object类型参数

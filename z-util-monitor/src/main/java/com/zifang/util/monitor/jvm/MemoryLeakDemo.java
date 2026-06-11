@@ -17,12 +17,6 @@ import java.util.*;
  *
  * @author zifang
  */
-/**
- * MemoryLeakDemo类。
- */
-/**
- * MemoryLeakDemo类。
- */
 public class MemoryLeakDemo {
 
     /**
@@ -33,10 +27,6 @@ public class MemoryLeakDemo {
     static Vector v = new Vector(10);
     static List list = new ArrayList();
 
-    /**
-     * test1方法。
-     * @return static void类型返回值
-     */
     /**
      * test1方法。
      * @return static void类型返回值
@@ -60,14 +50,6 @@ public class MemoryLeakDemo {
 
     /**
      * 2、当集合里面的对象属性被修改后，再调用remove（）方法时不起作用。
-     */
-    /**
-     * test2方法。
-     * @return static void类型返回值
-     */
-    /**
-     * test2方法。
-     * @return static void类型返回值
      */
     public static void test2() {
         Set<Person> set = new HashSet<Person>();
@@ -94,61 +76,6 @@ public class MemoryLeakDemo {
      * 在java 编程中，我们都需要和监听器打交道，通常一个应用当中会用到很多监听器，我们会调用一个控件的诸如addXXXListener()等方法来增加监听器，
      * 但往往在释放对象的时候却没有记住去删除这些监听器，从而增加了内存泄漏的机会。
      */
-
-    /**
-     * 4、各种连接
-     * 比如数据库连接（dataSourse.getConnection()），网络连接(socket)和io连接，除非其显式的调用了其close（）方法将其连接关闭，
-     * 否则是不会自动被GC 回收的。对于Resultset 和Statement 对象可以不进行显式回收，但Connection 一定要显式回收，
-     * 因为Connection 在任何时候都无法自动回收，而Connection一旦回收，Resultset 和Statement 对象就会立即为NULL。
-     * 但是如果使用连接池，情况就不一样了，除了要显式地关闭连接，还必须显式地关闭Resultset Statement 对象（关闭其中一个，另外一个也会关闭），
-     * 否则就会造成大量的Statement 对象无法释放，从而引起内存泄漏。这种情况下一般都会在try里面去的连接，在finally里面释放连接。
-     */
-
-    /**
-     * 5、内部类和外部模块等的引用
-     * 内部类的引用是比较容易遗忘的一种，而且一旦没释放可能导致一系列的后继类对象没有释放。此外程序员还要小心外部模块不经意的引用，
-     * 例如程序员A 负责A 模块，调用了B 模块的一个方法如：
-     * public void registerMsg(Object b);
-     * 这种调用就要非常小心了，传入了一个对象，很可能模块B就保持了对该对象的引用，这时候就需要注意模块B 是否提供相应的操作去除引用。
-     */
-
-    /**
-     * 6、单例模式
-     * 不正确使用单例模式是引起内存泄露的一个常见问题，单例对象在被初始化后将在JVM的整个生命周期中存在（以静态变量的方式），
-     * 如果单例对象持有外部对象的引用，那么这个外部对象将不能被jvm正常回收，导致内存泄露，考虑下面的例子：
-     * class A{
-     * public A(){
-     * B.getInstance().setA(this);
-     * }
-     * ....
-     * }
-     * <p>
-     * //B类采用单例模式
-     * class B{
-     * private A a;
-     * private static B instance=new B();
-     * public B(){}
-     * public static B getInstance(){
-     * return instance;
-     * }
-     * public void setA(A a){
-     * this.a=a;
-     * }
-     * //getter...
-     * }
-     * 显然B采用singleton模式，它持有一个A对象的引用，而这个A类的对象将不能被回收。想象下如果A是个比较复杂的对象或者集合类型会发生什么情况
-     */
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
     public static void main(String[] args) {
         test1();
         test2();
@@ -158,11 +85,6 @@ public class MemoryLeakDemo {
         private String userName;
         private int age;
 
-    /**
-     * Person方法。
-     *      * @param userName String类型参数
-     * @param age int类型参数
-     */
     /**
      * Person方法。
      *      * @param userName String类型参数
@@ -178,18 +100,10 @@ public class MemoryLeakDemo {
      * getUserName方法。
      * @return String类型返回值
      */
-    /**
-     * getUserName方法。
-     * @return String类型返回值
-     */
         public String getUserName() {
             return userName;
         }
 
-    /**
-     * setUserName方法。
-     *      * @param userName String类型参数
-     */
     /**
      * setUserName方法。
      *      * @param userName String类型参数
@@ -202,18 +116,10 @@ public class MemoryLeakDemo {
      * getAge方法。
      * @return int类型返回值
      */
-    /**
-     * getAge方法。
-     * @return int类型返回值
-     */
         public int getAge() {
             return age;
         }
 
-    /**
-     * setAge方法。
-     *      * @param age int类型参数
-     */
     /**
      * setAge方法。
      *      * @param age int类型参数
@@ -227,10 +133,6 @@ public class MemoryLeakDemo {
      * hashCode方法。
      * @return int类型返回值
      */
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
         public int hashCode() {
             final int prime = 31;
             int result = 1;
@@ -240,11 +142,6 @@ public class MemoryLeakDemo {
         }
 
         @Override
-    /**
-     * equals方法。
-     *      * @param obj Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param obj Object类型参数
@@ -266,10 +163,6 @@ public class MemoryLeakDemo {
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

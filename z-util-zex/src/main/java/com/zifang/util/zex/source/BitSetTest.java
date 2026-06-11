@@ -11,9 +11,6 @@ import java.util.BitSet;
  * @author zifang
  * @version 1.0
  */
-/**
- * BitSetTest类。
- */
 public class BitSetTest {
     /**
      * main方法。

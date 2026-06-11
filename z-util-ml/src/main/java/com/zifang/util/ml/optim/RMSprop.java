@@ -19,12 +19,6 @@ import com.zifang.util.numpy.DType;
  *       m = momentum * m + lr * grad / (sqrt(v) + eps)
  *       param = param - m
  */
-/**
- * RMSprop类。
- */
-/**
- * RMSprop类。
- */
 public class RMSprop extends Optimizer {
     
     private double rho;
@@ -36,22 +30,10 @@ public class RMSprop extends Optimizer {
      * RMSprop方法。
      *      * @param learningRate double类型参数
      */
-    /**
-     * RMSprop方法。
-     *      * @param learningRate double类型参数
-     */
     public RMSprop(double learningRate) {
         this(learningRate, 0.9, 1e-10, 0.0, false);
     }
     
-    /**
-     * RMSprop方法。
-     *      * @param learningRate double类型参数
-     * @param rho double类型参数
-     * @param eps double类型参数
-     * @param momentum double类型参数
-     * @param centered boolean类型参数
-     */
     /**
      * RMSprop方法。
      *      * @param learningRate double类型参数
@@ -69,9 +51,6 @@ public class RMSprop extends Optimizer {
     }
     
     @Override
-    /**
-     * step方法。
-     */
     /**
      * step方法。
      */
@@ -148,28 +127,12 @@ public class RMSprop extends Optimizer {
     /**
      * Set rho (decay rate) coefficient.
      */
-    /**
-     * setRho方法。
-     *      * @param rho double类型参数
-     */
-    /**
-     * setRho方法。
-     *      * @param rho double类型参数
-     */
     public void setRho(double rho) {
         this.rho = rho;
     }
     
     /**
      * Get rho coefficient.
-     */
-    /**
-     * getRho方法。
-     * @return double类型返回值
-     */
-    /**
-     * getRho方法。
-     * @return double类型返回值
      */
     public double getRho() {
         return rho;
@@ -178,28 +141,12 @@ public class RMSprop extends Optimizer {
     /**
      * Set epsilon for numerical stability.
      */
-    /**
-     * setEps方法。
-     *      * @param eps double类型参数
-     */
-    /**
-     * setEps方法。
-     *      * @param eps double类型参数
-     */
     public void setEps(double eps) {
         this.eps = eps;
     }
     
     /**
      * Get epsilon.
-     */
-    /**
-     * getEps方法。
-     * @return double类型返回值
-     */
-    /**
-     * getEps方法。
-     * @return double类型返回值
      */
     public double getEps() {
         return eps;
@@ -208,28 +155,12 @@ public class RMSprop extends Optimizer {
     /**
      * Set momentum coefficient.
      */
-    /**
-     * setMomentum方法。
-     *      * @param momentum double类型参数
-     */
-    /**
-     * setMomentum方法。
-     *      * @param momentum double类型参数
-     */
     public void setMomentum(double momentum) {
         this.momentum = momentum;
     }
     
     /**
      * Get momentum coefficient.
-     */
-    /**
-     * getMomentum方法。
-     * @return double类型返回值
-     */
-    /**
-     * getMomentum方法。
-     * @return double类型返回值
      */
     public double getMomentum() {
         return momentum;
@@ -238,28 +169,12 @@ public class RMSprop extends Optimizer {
     /**
      * Enable or disable centered version.
      */
-    /**
-     * setCentered方法。
-     *      * @param centered boolean类型参数
-     */
-    /**
-     * setCentered方法。
-     *      * @param centered boolean类型参数
-     */
     public void setCentered(boolean centered) {
         this.centered = centered;
     }
     
     /**
      * Check if centered version is enabled.
-     */
-    /**
-     * isCentered方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isCentered方法。
-     * @return boolean类型返回值
      */
     public boolean isCentered() {
         return centered;

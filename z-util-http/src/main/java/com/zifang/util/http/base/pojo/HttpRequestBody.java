@@ -8,12 +8,6 @@ package com.zifang.util.http.base.pojo;
  *
  * @author zifang
  */
-/**
- * HttpRequestBody类。
- */
-/**
- * HttpRequestBody类。
- */
 public class HttpRequestBody {
 
     /**
@@ -26,14 +20,6 @@ public class HttpRequestBody {
      *
      * @return 请求体字节数组
      */
-    /**
-     * getBody方法。
-     * @return byte[]类型返回值
-     */
-    /**
-     * getBody方法。
-     * @return byte[]类型返回值
-     */
     public byte[] getBody() {
         return body;
     }
@@ -42,14 +28,6 @@ public class HttpRequestBody {
      * 设置请求体字节数组。
      *
      * @param body 请求体字节数组
-     */
-    /**
-     * setBody方法。
-     *      * @param body byte[]类型参数
-     */
-    /**
-     * setBody方法。
-     *      * @param body byte[]类型参数
      */
     public void setBody(byte[] body) {
         this.body = body;
@@ -60,20 +38,11 @@ public class HttpRequestBody {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "HttpRequestBody{body=" + (body != null ? "byte[" + body.length + "]" : "null") + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -93,10 +62,6 @@ public class HttpRequestBody {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

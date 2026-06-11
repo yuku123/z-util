@@ -17,16 +17,7 @@ import java.util.PriorityQueue;
  * - AVERAGE: avg distance
  * - WARD: minimize variance increase
  */
-/**
- * HierarchicalClustering类。
- */
-/**
- * HierarchicalClustering类。
- */
 public class HierarchicalClustering {
-/**
- * Linkage枚举。
- */
 /**
  * Linkage枚举。
  */
@@ -45,11 +36,6 @@ public class HierarchicalClustering {
      *      * @param nClusters int类型参数
      * @param linkage Linkage类型参数
      */
-    /**
-     * HierarchicalClustering方法。
-     *      * @param nClusters int类型参数
-     * @param linkage Linkage类型参数
-     */
     public HierarchicalClustering(int nClusters, Linkage linkage) {
         this.nClusters = nClusters;
         this.linkage = linkage;
@@ -60,16 +46,6 @@ public class HierarchicalClustering {
      * 
      * @param X NdArray of shape [n_samples, n_features]
      * @return cluster labels array
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
      */
     public int[] fit(NdArray X) {
         this.Xdata = toDouble2D(X);
@@ -253,14 +229,6 @@ public class HierarchicalClustering {
      * Returns array of shape [n-1 x 3] where each row is [idx1, idx2, distance].
      * 
      * @return NdArray containing merge history
-     */
-    /**
-     * getDendrogram方法。
-     * @return NdArray类型返回值
-     */
-    /**
-     * getDendrogram方法。
-     * @return NdArray类型返回值
      */
     public NdArray getDendrogram() {
         return this.dendrogram;

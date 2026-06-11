@@ -8,9 +8,6 @@ package com.zifang.util.zex.interview.demo2;
  * @author zifang
  * @version 1.0
  */
-/**
- * IA接口。
- */
 public interface IA {
 
     /**

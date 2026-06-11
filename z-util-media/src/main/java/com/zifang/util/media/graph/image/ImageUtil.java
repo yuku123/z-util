@@ -33,32 +33,12 @@ public final class ImageUtil {
     /**
      * 从文件路径加载图片。
      */
-    /**
-     * from方法。
-     *      * @param path String类型参数
-     * @return static ImageProcessor类型返回值
-     */
-    /**
-     * from方法。
-     *      * @param path String类型参数
-     * @return static ImageProcessor类型返回值
-     */
     public static ImageProcessor from(String path) throws IOException {
         return ImageProcessor.load(path);
     }
 
     /**
      * 从 File 对象加载图片。
-     */
-    /**
-     * from方法。
-     *      * @param file File类型参数
-     * @return static ImageProcessor类型返回值
-     */
-    /**
-     * from方法。
-     *      * @param file File类型参数
-     * @return static ImageProcessor类型返回值
      */
     public static ImageProcessor from(File file) throws IOException {
         return ImageProcessor.load(file);
@@ -67,16 +47,6 @@ public final class ImageUtil {
     /**
      * 从 byte[] 加载图片。
      */
-    /**
-     * from方法。
-     *      * @param data byte[]类型参数
-     * @return static ImageProcessor类型返回值
-     */
-    /**
-     * from方法。
-     *      * @param data byte[]类型参数
-     * @return static ImageProcessor类型返回值
-     */
     public static ImageProcessor from(byte[] data) throws IOException {
         return ImageProcessor.load(data);
     }
@@ -84,32 +54,12 @@ public final class ImageUtil {
     /**
      * 从 InputStream 加载图片。
      */
-    /**
-     * from方法。
-     *      * @param in InputStream类型参数
-     * @return static ImageProcessor类型返回值
-     */
-    /**
-     * from方法。
-     *      * @param in InputStream类型参数
-     * @return static ImageProcessor类型返回值
-     */
     public static ImageProcessor from(InputStream in) throws IOException {
         return new ImageProcessor(ImageReadWrite.read(in));
     }
 
     /**
      * 从 Path 加载图片。
-     */
-    /**
-     * from方法。
-     *      * @param path Path类型参数
-     * @return static ImageProcessor类型返回值
-     */
-    /**
-     * from方法。
-     *      * @param path Path类型参数
-     * @return static ImageProcessor类型返回值
      */
     public static ImageProcessor from(Path path) throws IOException {
         return ImageProcessor.load(path.toFile());
@@ -120,44 +70,12 @@ public final class ImageUtil {
     /**
      * 调整图片尺寸。
      */
-    /**
-     * resize方法。
-     *      * @param src BufferedImage类型参数
-     * @param width int类型参数
-     * @param height int类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * resize方法。
-     *      * @param src BufferedImage类型参数
-     * @param width int类型参数
-     * @param height int类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage resize(BufferedImage src, int width, int height) {
         return new ImageProcessor(src).resize(width, height).getImage();
     }
 
     /**
      * 裁剪图片。
-     */
-    /**
-     * crop方法。
-     *      * @param src BufferedImage类型参数
-     * @param x int类型参数
-     * @param y int类型参数
-     * @param width int类型参数
-     * @param height int类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * crop方法。
-     *      * @param src BufferedImage类型参数
-     * @param x int类型参数
-     * @param y int类型参数
-     * @param width int类型参数
-     * @param height int类型参数
-     * @return static BufferedImage类型返回值
      */
     public static BufferedImage crop(BufferedImage src, int x, int y, int width, int height) {
         return new ImageProcessor(src).crop(x, y, width, height).getImage();
@@ -166,34 +84,12 @@ public final class ImageUtil {
     /**
      * 灰度化。
      */
-    /**
-     * grayscale方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * grayscale方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage grayscale(BufferedImage src) {
         return new ImageProcessor(src).grayscale().getImage();
     }
 
     /**
      * 调整亮度。
-     */
-    /**
-     * brightness方法。
-     *      * @param src BufferedImage类型参数
-     * @param delta int类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * brightness方法。
-     *      * @param src BufferedImage类型参数
-     * @param delta int类型参数
-     * @return static BufferedImage类型返回值
      */
     public static BufferedImage brightness(BufferedImage src, int delta) {
         return new ImageProcessor(src).brightness(delta).getImage();
@@ -202,36 +98,12 @@ public final class ImageUtil {
     /**
      * 调整对比度。
      */
-    /**
-     * contrast方法。
-     *      * @param src BufferedImage类型参数
-     * @param factor double类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * contrast方法。
-     *      * @param src BufferedImage类型参数
-     * @param factor double类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage contrast(BufferedImage src, double factor) {
         return new ImageProcessor(src).contrast(factor).getImage();
     }
 
     /**
      * 模糊。
-     */
-    /**
-     * blur方法。
-     *      * @param src BufferedImage类型参数
-     * @param radius int类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * blur方法。
-     *      * @param src BufferedImage类型参数
-     * @param radius int类型参数
-     * @return static BufferedImage类型返回值
      */
     public static BufferedImage blur(BufferedImage src, int radius) {
         return new ImageProcessor(src).blur(radius).getImage();
@@ -240,32 +112,12 @@ public final class ImageUtil {
     /**
      * 锐化。
      */
-    /**
-     * sharpen方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * sharpen方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage sharpen(BufferedImage src) {
         return new ImageProcessor(src).sharpen().getImage();
     }
 
     /**
      * 反色。
-     */
-    /**
-     * invert方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * invert方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
      */
     public static BufferedImage invert(BufferedImage src) {
         return new ImageProcessor(src).invert().getImage();
@@ -274,36 +126,12 @@ public final class ImageUtil {
     /**
      * 二值化。
      */
-    /**
-     * threshold方法。
-     *      * @param src BufferedImage类型参数
-     * @param threshold int类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * threshold方法。
-     *      * @param src BufferedImage类型参数
-     * @param threshold int类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage threshold(BufferedImage src, int threshold) {
         return new ImageProcessor(src).threshold(threshold).getImage();
     }
 
     /**
      * 旋转。
-     */
-    /**
-     * rotate方法。
-     *      * @param src BufferedImage类型参数
-     * @param degrees double类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * rotate方法。
-     *      * @param src BufferedImage类型参数
-     * @param degrees double类型参数
-     * @return static BufferedImage类型返回值
      */
     public static BufferedImage rotate(BufferedImage src, double degrees) {
         return new ImageProcessor(src).rotate(degrees).getImage();
@@ -312,32 +140,12 @@ public final class ImageUtil {
     /**
      * 水平翻转。
      */
-    /**
-     * flipH方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * flipH方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage flipH(BufferedImage src) {
         return new ImageProcessor(src).flipHorizontal().getImage();
     }
 
     /**
      * 垂直翻转。
-     */
-    /**
-     * flipV方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * flipV方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
      */
     public static BufferedImage flipV(BufferedImage src) {
         return new ImageProcessor(src).flipVertical().getImage();
@@ -346,28 +154,6 @@ public final class ImageUtil {
     /**
      * 添加文字水印。
      */
-    /**
-     * watermark方法。
-     *      * @param src BufferedImage类型参数
-     * @param text String类型参数
-     * @param x int类型参数
-     * @param y int类型参数
-     * @param font Font类型参数
-     * @param color Color类型参数
-     * @param alpha float类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * watermark方法。
-     *      * @param src BufferedImage类型参数
-     * @param text String类型参数
-     * @param x int类型参数
-     * @param y int类型参数
-     * @param font Font类型参数
-     * @param color Color类型参数
-     * @param alpha float类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage watermark(BufferedImage src, String text, int x, int y, Font font, Color color, float alpha) {
         return new ImageProcessor(src).watermarkText(text, x, y, font, color, alpha).getImage();
     }
@@ -375,36 +161,12 @@ public final class ImageUtil {
     /**
      * 横向拼接两张图片。
      */
-    /**
-     * concatH方法。
-     *      * @param left BufferedImage类型参数
-     * @param right BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * concatH方法。
-     *      * @param left BufferedImage类型参数
-     * @param right BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage concatH(BufferedImage left, BufferedImage right) {
         return new ImageProcessor(left).concatRight(right).getImage();
     }
 
     /**
      * 纵向拼接两张图片。
-     */
-    /**
-     * concatV方法。
-     *      * @param top BufferedImage类型参数
-     * @param bottom BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * concatV方法。
-     *      * @param top BufferedImage类型参数
-     * @param bottom BufferedImage类型参数
-     * @return static BufferedImage类型返回值
      */
     public static BufferedImage concatV(BufferedImage top, BufferedImage bottom) {
         return new ImageProcessor(top).concatBottom(bottom).getImage();
@@ -415,18 +177,6 @@ public final class ImageUtil {
     /**
      * 将 BufferedImage 写出到文件（根据扩展名推断格式）。
      */
-    /**
-     * write方法。
-     *      * @param image BufferedImage类型参数
-     * @param path String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * write方法。
-     *      * @param image BufferedImage类型参数
-     * @param path String类型参数
-     * @return static void类型返回值
-     */
     public static void write(BufferedImage image, String path) throws IOException {
         String format = ImageReadWrite.inferFormat(path);
         ImageReadWrite.write(image, format, path);
@@ -435,40 +185,12 @@ public final class ImageUtil {
     /**
      * 将 BufferedImage 写出到文件。
      */
-    /**
-     * write方法。
-     *      * @param image BufferedImage类型参数
-     * @param formatName String类型参数
-     * @param path String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * write方法。
-     *      * @param image BufferedImage类型参数
-     * @param formatName String类型参数
-     * @param path String类型参数
-     * @return static void类型返回值
-     */
     public static void write(BufferedImage image, String formatName, String path) throws IOException {
         ImageReadWrite.write(image, formatName, path);
     }
 
     /**
      * 将 BufferedImage 写出到 OutputStream。
-     */
-    /**
-     * write方法。
-     *      * @param image BufferedImage类型参数
-     * @param formatName String类型参数
-     * @param out OutputStream类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * write方法。
-     *      * @param image BufferedImage类型参数
-     * @param formatName String类型参数
-     * @param out OutputStream类型参数
-     * @return static void类型返回值
      */
     public static void write(BufferedImage image, String formatName, OutputStream out) throws IOException {
         ImageReadWrite.write(image, formatName, out);
@@ -477,16 +199,6 @@ public final class ImageUtil {
     /**
      * 将 BufferedImage 转为 byte[]。
      */
-    /**
-     * toBytes方法。
-     *      * @param image BufferedImage类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * toBytes方法。
-     *      * @param image BufferedImage类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] toBytes(BufferedImage image) throws IOException {
         return ImageReadWrite.toBytes(image);
     }
@@ -494,36 +206,12 @@ public final class ImageUtil {
     /**
      * 将 BufferedImage 转为指定格式的 byte[]。
      */
-    /**
-     * toBytes方法。
-     *      * @param image BufferedImage类型参数
-     * @param formatName String类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * toBytes方法。
-     *      * @param image BufferedImage类型参数
-     * @param formatName String类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] toBytes(BufferedImage image, String formatName) throws IOException {
         return ImageReadWrite.toBytes(image, formatName);
     }
 
     /**
      * 将 BufferedImage 转为 base64 字符串（DataURL 形式）。
-     */
-    /**
-     * toBase64方法。
-     *      * @param image BufferedImage类型参数
-     * @param format String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * toBase64方法。
-     *      * @param image BufferedImage类型参数
-     * @param format String类型参数
-     * @return static String类型返回值
      */
     public static String toBase64(BufferedImage image, String format) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -537,16 +225,6 @@ public final class ImageUtil {
     /**
      * 将任意图片转换为 PNG。
      */
-    /**
-     * toPng方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * toPng方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
     public static BufferedImage toPng(BufferedImage src) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
@@ -559,16 +237,6 @@ public final class ImageUtil {
 
     /**
      * 将任意图片转换为 JPG（自动处理透明背景为白色）。
-     */
-    /**
-     * toJpg方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
-     */
-    /**
-     * toJpg方法。
-     *      * @param src BufferedImage类型参数
-     * @return static BufferedImage类型返回值
      */
     public static BufferedImage toJpg(BufferedImage src) {
         BufferedImage jpg = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_RGB);

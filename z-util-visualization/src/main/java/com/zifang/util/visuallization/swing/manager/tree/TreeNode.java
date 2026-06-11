@@ -4,12 +4,6 @@ package com.zifang.util.visuallization.swing.manager.tree;
  * 树形节点数据类
  * 存储树形节点的ID、名称和父节点ID信息
  */
-/**
- * TreeNode类。
- */
-/**
- * TreeNode类。
- */
 public class TreeNode {
     private String id;
     private String name;
@@ -17,9 +11,6 @@ public class TreeNode {
 
     /**
      * 创建树节点
-     */
-    /**
-     * TreeNode方法。
      */
     public TreeNode() {
     }
@@ -29,12 +20,6 @@ public class TreeNode {
      * @param id 节点唯一标识
      * @param name 节点显示名称
      * @param parentId 父节点ID（null表示根节点）
-     */
-    /**
-     * TreeNode方法。
-     *      * @param id String类型参数
-     * @param name String类型参数
-     * @param parentId String类型参数
      */
     public TreeNode(String id, String name, String parentId) {
         this.id = id;
@@ -46,10 +31,6 @@ public class TreeNode {
      * 获取节点ID
      * @return 节点ID
      */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
     public String getId() {
         return id;
     }
@@ -57,10 +38,6 @@ public class TreeNode {
     /**
      * 设置节点ID
      * @param id 节点ID
-     */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -70,10 +47,6 @@ public class TreeNode {
      * 获取节点名称
      * @return 节点名称
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return name;
     }
@@ -81,10 +54,6 @@ public class TreeNode {
     /**
      * 设置节点名称
      * @param name 节点名称
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -94,10 +63,6 @@ public class TreeNode {
      * 获取父节点ID
      * @return 父节点ID，null表示根节点
      */
-    /**
-     * getParentId方法。
-     * @return String类型返回值
-     */
     public String getParentId() {
         return parentId;
     }
@@ -105,10 +70,6 @@ public class TreeNode {
     /**
      * 设置父节点ID
      * @param parentId 父节点ID
-     */
-    /**
-     * setParentId方法。
-     *      * @param parentId String类型参数
      */
     public void setParentId(String parentId) {
         this.parentId = parentId;

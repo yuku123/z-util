@@ -6,9 +6,6 @@ import java.io.IOException;
 /**
  * @author zifang
  */
-/**
- * ReadFile类。
- */
 public class ReadFile {
     /**
      * main方法。

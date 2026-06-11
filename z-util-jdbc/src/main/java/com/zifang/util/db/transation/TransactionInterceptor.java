@@ -27,12 +27,6 @@ import java.lang.reflect.Method;
  * proxyFactory.addAspect(interceptor);
  * </pre>
  */
-/**
- * TransactionInterceptor类。
- */
-/**
- * TransactionInterceptor类。
- */
 public class TransactionInterceptor implements Aspect {
 
     private static final Logger log = LoggerFactory.getLogger(TransactionInterceptor.class);
@@ -43,22 +37,11 @@ public class TransactionInterceptor implements Aspect {
      * TransactionInterceptor方法。
      *      * @param transactionManager TranslationManager类型参数
      */
-    /**
-     * TransactionInterceptor方法。
-     *      * @param transactionManager TranslationManager类型参数
-     */
     public TransactionInterceptor(TranslationManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 
     @Override
-    /**
-     * before方法。
-     *      * @param target Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @return boolean类型返回值
-     */
     /**
      * before方法。
      *      * @param target Object类型参数
@@ -97,14 +80,6 @@ public class TransactionInterceptor implements Aspect {
      * @param returnVal Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * after方法。
-     *      * @param target Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @param returnVal Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean after(Object target, Method method, Object[] args, Object returnVal) {
         Transactional transactional = findTransactional(target.getClass(), method);
         if (transactional == null) {
@@ -127,14 +102,6 @@ public class TransactionInterceptor implements Aspect {
     }
 
     @Override
-    /**
-     * afterException方法。
-     *      * @param target Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @param e Throwable类型参数
-     * @return boolean类型返回值
-     */
     /**
      * afterException方法。
      *      * @param target Object类型参数

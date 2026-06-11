@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter4.enumCase;
  * @author zifang
  * @version 1.0
  */
-/**
- * HungryLevelEnumTest类。
- */
 public class HungryLevelEnumTest {
     /**
      * main方法。

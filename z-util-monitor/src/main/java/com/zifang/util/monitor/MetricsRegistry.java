@@ -11,20 +11,10 @@ import java.util.function.Supplier;
  * 指标注册表
  * 负责管理所有指标的注册和采集
  */
-/**
- * MetricsRegistry类。
- */
-/**
- * MetricsRegistry类。
- */
 public class MetricsRegistry {
 
     private static final MetricsRegistry INSTANCE = new MetricsRegistry();
 
-    /**
-     * getInstance方法。
-     * @return static MetricsRegistry类型返回值
-     */
     /**
      * getInstance方法。
      * @return static MetricsRegistry类型返回值
@@ -51,14 +41,6 @@ public class MetricsRegistry {
      * @param description String类型参数
      * @param unit String类型参数
      */
-    /**
-     * MetricEntry方法。
-     *      * @param name String类型参数
-     * @param category MetricsSnapshot.Category类型参数
-     * @param provider SupplierObject类型参数
-     * @param description String类型参数
-     * @param unit String类型参数
-     */
         public MetricEntry(String name, MetricsSnapshot.Category category, Supplier<Object> provider,
                           String description, String unit) {
             this.name = name;
@@ -72,18 +54,10 @@ public class MetricsRegistry {
      * getName方法。
      * @return String类型返回值
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
         public String getName() {
             return name;
         }
 
-    /**
-     * getCategory方法。
-     * @return MetricsSnapshot.Category类型返回值
-     */
     /**
      * getCategory方法。
      * @return MetricsSnapshot.Category类型返回值
@@ -96,10 +70,6 @@ public class MetricsRegistry {
      * getProvider方法。
      * @return Supplier<Object>类型返回值
      */
-    /**
-     * getProvider方法。
-     * @return Supplier<Object>类型返回值
-     */
         public Supplier<Object> getProvider() {
             return provider;
         }
@@ -108,18 +78,10 @@ public class MetricsRegistry {
      * getDescription方法。
      * @return String类型返回值
      */
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
         public String getDescription() {
             return description;
         }
 
-    /**
-     * getUnit方法。
-     * @return String类型返回值
-     */
     /**
      * getUnit方法。
      * @return String类型返回值
@@ -138,22 +100,6 @@ public class MetricsRegistry {
     /**
      * 注册一个指标
      */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param category MetricsSnapshot.Category类型参数
-     * @param provider SupplierObject类型参数
-     * @param description String类型参数
-     * @param unit String类型参数
-     */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param category MetricsSnapshot.Category类型参数
-     * @param provider SupplierObject类型参数
-     * @param description String类型参数
-     * @param unit String类型参数
-     */
     public void register(String name, MetricsSnapshot.Category category, Supplier<Object> provider,
                         String description, String unit) {
         entries.put(name, new MetricEntry(name, category, provider, description, unit));
@@ -162,38 +108,12 @@ public class MetricsRegistry {
     /**
      * 注册一个指标（简化版本）
      */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param category MetricsSnapshot.Category类型参数
-     * @param provider SupplierObject类型参数
-     */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param category MetricsSnapshot.Category类型参数
-     * @param provider SupplierObject类型参数
-     */
     public void register(String name, MetricsSnapshot.Category category, Supplier<Object> provider) {
         register(name, category, provider, null, null);
     }
 
     /**
      * 注册一个指标（带描述）
-     */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param category MetricsSnapshot.Category类型参数
-     * @param provider SupplierObject类型参数
-     * @param description String类型参数
-     */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param category MetricsSnapshot.Category类型参数
-     * @param provider SupplierObject类型参数
-     * @param description String类型参数
      */
     public void register(String name, MetricsSnapshot.Category category, Supplier<Object> provider, String description) {
         register(name, category, provider, description, null);
@@ -202,14 +122,6 @@ public class MetricsRegistry {
     /**
      * 注销一个指标
      */
-    /**
-     * unregister方法。
-     *      * @param name String类型参数
-     */
-    /**
-     * unregister方法。
-     *      * @param name String类型参数
-     */
     public void unregister(String name) {
         entries.remove(name);
     }
@@ -217,26 +129,12 @@ public class MetricsRegistry {
     /**
      * 注销所有指标
      */
-    /**
-     * clear方法。
-     */
-    /**
-     * clear方法。
-     */
     public void clear() {
         entries.clear();
     }
 
     /**
      * 采集所有指标
-     */
-    /**
-     * collect方法。
-     * @return List<MetricsSnapshot>类型返回值
-     */
-    /**
-     * collect方法。
-     * @return List<MetricsSnapshot>类型返回值
      */
     public List<MetricsSnapshot> collect() {
         if (!enabled) {
@@ -262,16 +160,6 @@ public class MetricsRegistry {
 
     /**
      * 按分类采集指标
-     */
-    /**
-     * collect方法。
-     *      * @param category MetricsSnapshot.Category类型参数
-     * @return List<MetricsSnapshot>类型返回值
-     */
-    /**
-     * collect方法。
-     *      * @param category MetricsSnapshot.Category类型参数
-     * @return List<MetricsSnapshot>类型返回值
      */
     public List<MetricsSnapshot> collect(MetricsSnapshot.Category category) {
         if (!enabled) {
@@ -300,30 +188,12 @@ public class MetricsRegistry {
     /**
      * 获取所有指标名称
      */
-    /**
-     * getMetricNames方法。
-     * @return List<String>类型返回值
-     */
-    /**
-     * getMetricNames方法。
-     * @return List<String>类型返回值
-     */
     public List<String> getMetricNames() {
         return new ArrayList<>(entries.keySet());
     }
 
     /**
      * 获取所有指标名称（按分类）
-     */
-    /**
-     * getMetricNames方法。
-     *      * @param category MetricsSnapshot.Category类型参数
-     * @return List<String>类型返回值
-     */
-    /**
-     * getMetricNames方法。
-     *      * @param category MetricsSnapshot.Category类型参数
-     * @return List<String>类型返回值
      */
     public List<String> getMetricNames(MetricsSnapshot.Category category) {
         List<String> names = new ArrayList<>();
@@ -338,14 +208,6 @@ public class MetricsRegistry {
     /**
      * 启用/禁用监控
      */
-    /**
-     * setEnabled方法。
-     *      * @param enabled boolean类型参数
-     */
-    /**
-     * setEnabled方法。
-     *      * @param enabled boolean类型参数
-     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
@@ -353,30 +215,12 @@ public class MetricsRegistry {
     /**
      * 是否启用
      */
-    /**
-     * isEnabled方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isEnabled方法。
-     * @return boolean类型返回值
-     */
     public boolean isEnabled() {
         return enabled;
     }
 
     /**
      * 获取指标条目
-     */
-    /**
-     * getEntry方法。
-     *      * @param name String类型参数
-     * @return MetricEntry类型返回值
-     */
-    /**
-     * getEntry方法。
-     *      * @param name String类型参数
-     * @return MetricEntry类型返回值
      */
     public MetricEntry getEntry(String name) {
         return entries.get(name);

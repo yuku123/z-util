@@ -31,9 +31,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0
  */
-/**
- * Collections2_Study类。
- */
 public class Collections2_Study {
     List<UserBo> listUser = Lists.newArrayList(null, new UserBo("nameA", 12), new UserBo("nameB", 16), new UserBo("nameAC", 19));
 

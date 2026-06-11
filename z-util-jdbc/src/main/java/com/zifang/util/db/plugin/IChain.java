@@ -20,11 +20,5 @@ package com.zifang.util.db.plugin;
  *
  * @see org.apache.ibatis.plugin.Interceptor
  */
-/**
- * IChain接口。
- */
-/**
- * IChain接口。
- */
 public interface IChain {
 }

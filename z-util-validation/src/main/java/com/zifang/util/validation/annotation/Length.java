@@ -11,9 +11,6 @@ import java.lang.annotation.*;
 /**
  * Length注解。
  */
-/**
- * Length注解。
- */
 public @interface Length {
     int min() default 0;
     int max() default Integer.MAX_VALUE;

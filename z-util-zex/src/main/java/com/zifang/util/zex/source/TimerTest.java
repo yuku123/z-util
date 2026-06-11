@@ -12,9 +12,6 @@ import java.util.TimerTask;
  * @author zifang
  * @version 1.0
  */
-/**
- * TimerTest类。
- */
 public class TimerTest {
     /**
      * main方法。

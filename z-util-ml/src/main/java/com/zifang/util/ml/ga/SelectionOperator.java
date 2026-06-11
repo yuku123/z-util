@@ -3,12 +3,6 @@ package com.zifang.util.ml.ga;
 /**
  * 选择算子接口
  */
-/**
- * SelectionOperator接口。
- */
-/**
- * SelectionOperator接口。
- */
 public interface SelectionOperator {
 
     /**

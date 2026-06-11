@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _209类。
- */
 public class _209 {
     /**
      * minSubArrayLen方法。

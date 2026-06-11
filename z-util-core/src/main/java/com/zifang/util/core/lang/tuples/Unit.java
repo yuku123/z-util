@@ -11,20 +11,10 @@ import java.util.Map;
 /**
  * @author zifang
  */
-/**
- * Unit类。
- */
-/**
- * Unit类。
- */
 public class Unit<A> {
 
     protected A a;
 
-    /**
-     * Unit方法。
-     *      * @param a A类型参数
-     */
     /**
      * Unit方法。
      *      * @param a A类型参数
@@ -37,10 +27,6 @@ public class Unit<A> {
      * getA方法。
      * @return A类型返回值
      */
-    /**
-     * getA方法。
-     * @return A类型返回值
-     */
     public A getA() {
         return a;
     }
@@ -49,18 +35,10 @@ public class Unit<A> {
      * setA方法。
      *      * @param a A类型参数
      */
-    /**
-     * setA方法。
-     *      * @param a A类型参数
-     */
     public void setA(A a) {
         this.a = a;
     }
 
-    /**
-     * toMap方法。
-     * @return Map<String, Object>类型返回值
-     */
     /**
      * toMap方法。
      * @return Map<String, Object>类型返回值
@@ -79,20 +57,11 @@ public class Unit<A> {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "Unit{a=" + a + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -106,10 +75,6 @@ public class Unit<A> {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

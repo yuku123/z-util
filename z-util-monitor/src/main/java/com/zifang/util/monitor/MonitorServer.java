@@ -34,12 +34,6 @@ import java.util.concurrent.Executors;
  * server.stop();
  * }</pre>
  */
-/**
- * MonitorServer类。
- */
-/**
- * MonitorServer类。
- */
 public class MonitorServer {
 
     public static final int DEFAULT_PORT = 8849;
@@ -57,28 +51,12 @@ public class MonitorServer {
     /**
      * 创建构建器
      */
-    /**
-     * builder方法。
-     * @return static Builder类型返回值
-     */
-    /**
-     * builder方法。
-     * @return static Builder类型返回值
-     */
     public static Builder builder() {
         return new Builder();
     }
 
     /**
      * 启动服务器
-     */
-    /**
-     * start方法。
-     * @return MonitorServer类型返回值
-     */
-    /**
-     * start方法。
-     * @return MonitorServer类型返回值
      */
     public MonitorServer start() throws IOException {
         if (started) {
@@ -111,12 +89,6 @@ public class MonitorServer {
     /**
      * 停止服务器
      */
-    /**
-     * stop方法。
-     */
-    /**
-     * stop方法。
-     */
     public void stop() {
         if (!started || httpServer == null) {
             return;
@@ -129,24 +101,12 @@ public class MonitorServer {
     /**
      * 重新启动服务器
      */
-    /**
-     * restart方法。
-     * @return MonitorServer类型返回值
-     */
-    /**
-     * restart方法。
-     * @return MonitorServer类型返回值
-     */
     public MonitorServer restart() throws IOException {
         stop();
         Thread.yield();
         return start();
     }
 
-    /**
-     * getPort方法。
-     * @return int类型返回值
-     */
     /**
      * getPort方法。
      * @return int类型返回值
@@ -159,10 +119,6 @@ public class MonitorServer {
      * getCollector方法。
      * @return MetricsCollector类型返回值
      */
-    /**
-     * getCollector方法。
-     * @return MetricsCollector类型返回值
-     */
     public MetricsCollector getCollector() {
         return collector;
     }
@@ -171,18 +127,10 @@ public class MonitorServer {
      * getRegistry方法。
      * @return MetricsRegistry类型返回值
      */
-    /**
-     * getRegistry方法。
-     * @return MetricsRegistry类型返回值
-     */
     public MetricsRegistry getRegistry() {
         return collector.getRegistry();
     }
 
-    /**
-     * isStarted方法。
-     * @return boolean类型返回值
-     */
     /**
      * isStarted方法。
      * @return boolean类型返回值
@@ -196,18 +144,6 @@ public class MonitorServer {
     /**
      * 注册自定义指标
      */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param provider java.util.function.SupplierObject类型参数
-     * @return MonitorServer类型返回值
-     */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param provider java.util.function.SupplierObject类型参数
-     * @return MonitorServer类型返回值
-     */
     public MonitorServer register(String name, java.util.function.Supplier<Object> provider) {
         collector.getRegistry().register(name, MetricsSnapshot.Category.CUSTOM, provider);
         return this;
@@ -216,20 +152,6 @@ public class MonitorServer {
     /**
      * 注册自定义指标（带描述）
      */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param provider java.util.function.SupplierObject类型参数
-     * @param description String类型参数
-     * @return MonitorServer类型返回值
-     */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param provider java.util.function.SupplierObject类型参数
-     * @param description String类型参数
-     * @return MonitorServer类型返回值
-     */
     public MonitorServer register(String name, java.util.function.Supplier<Object> provider, String description) {
         collector.getRegistry().register(name, MetricsSnapshot.Category.CUSTOM, provider, description, null);
         return this;
@@ -237,22 +159,6 @@ public class MonitorServer {
 
     /**
      * 注册自定义指标（带描述和单位）
-     */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param provider java.util.function.SupplierObject类型参数
-     * @param description String类型参数
-     * @param unit String类型参数
-     * @return MonitorServer类型返回值
-     */
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param provider java.util.function.SupplierObject类型参数
-     * @param description String类型参数
-     * @param unit String类型参数
-     * @return MonitorServer类型返回值
      */
     public MonitorServer register(String name, java.util.function.Supplier<Object> provider, String description, String unit) {
         collector.getRegistry().register(name, MetricsSnapshot.Category.CUSTOM, provider, description, unit);
@@ -269,10 +175,6 @@ public class MonitorServer {
         }
 
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
     /**
      * handle方法。
      *      * @param exchange HttpExchange类型参数
@@ -295,10 +197,6 @@ public class MonitorServer {
      * handle方法。
      *      * @param exchange HttpExchange类型参数
      */
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
         public void handle(HttpExchange exchange) throws IOException {
             String response = new JsonExporter(server.getRegistry()).export();
             sendResponse(exchange, "application/json; charset=utf-8", response);
@@ -313,10 +211,6 @@ public class MonitorServer {
         }
 
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
     /**
      * handle方法。
      *      * @param exchange HttpExchange类型参数
@@ -336,10 +230,6 @@ public class MonitorServer {
         }
 
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
     /**
      * handle方法。
      *      * @param exchange HttpExchange类型参数
@@ -371,11 +261,6 @@ public class MonitorServer {
      *      * @param port int类型参数
      * @return Builder类型返回值
      */
-    /**
-     * port方法。
-     *      * @param port int类型参数
-     * @return Builder类型返回值
-     */
         public Builder port(int port) {
             this.port = port;
             return this;
@@ -384,23 +269,11 @@ public class MonitorServer {
         /**
          * 注册所有内置指标（JVM、OS、线程）
          */
-    /**
-     * registerDefaultMonitor方法。
-     * @return Builder类型返回值
-     */
-    /**
-     * registerDefaultMonitor方法。
-     * @return Builder类型返回值
-     */
         public Builder registerDefaultMonitor() {
             this.registerDefaultMonitor = true;
             return this;
         }
 
-    /**
-     * build方法。
-     * @return MonitorServer类型返回值
-     */
     /**
      * build方法。
      * @return MonitorServer类型返回值

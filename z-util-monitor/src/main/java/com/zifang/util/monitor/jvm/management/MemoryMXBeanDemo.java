@@ -17,12 +17,6 @@ import java.lang.management.MemoryUsage;
  *
  * @author zifang
  */
-/**
- * MemoryMXBeanDemo类。
- */
-/**
- * MemoryMXBeanDemo类。
- */
 public class MemoryMXBeanDemo {
 
 
@@ -39,14 +33,6 @@ public class MemoryMXBeanDemo {
      * </ul>
      *
      * @return 远程JVM的MemoryMXBean实例，连接失败返回null
-     */
-    /**
-     * getRemoteMemoryMXBean方法。
-     * @return static MemoryMXBean类型返回值
-     */
-    /**
-     * getRemoteMemoryMXBean方法。
-     * @return static MemoryMXBean类型返回值
      */
     public static MemoryMXBean getRemoteMemoryMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -75,14 +61,6 @@ public class MemoryMXBeanDemo {
      *
      * @return 当前JVM的MemoryMXBean实例
      */
-    /**
-     * getLocalMemoryMXBean方法。
-     * @return static MemoryMXBean类型返回值
-     */
-    /**
-     * getLocalMemoryMXBean方法。
-     * @return static MemoryMXBean类型返回值
-     */
     public static MemoryMXBean getLocalMemoryMXBean() {
         return ManagementFactory.getMemoryMXBean();
     }
@@ -109,16 +87,6 @@ public class MemoryMXBeanDemo {
      * 主方法，演示获取JVM内存信息。
      *
      * @param args 命令行参数
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
         MemoryMXBean memoryMXBean = getRemoteMemoryMXBean();

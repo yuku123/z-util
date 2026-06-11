@@ -9,9 +9,6 @@ import java.lang.reflect.Field;
  *
  * @author zifang
  */
-/**
- * TestSolveAtomic类。
- */
 public class TestSolveAtomic {
 
     public long count = 0;

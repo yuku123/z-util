@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
-/**
- * VolatileExample类。
- */
 public class VolatileExample {
     public static boolean stop = false;
 

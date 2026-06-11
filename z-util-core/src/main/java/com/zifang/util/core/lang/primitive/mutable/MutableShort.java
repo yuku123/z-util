@@ -9,12 +9,6 @@ import com.zifang.util.core.lang.NumberUtil;
  * it is not treated by String.format() as a Short parameter.
  * @version: JDK 1.8
  */
-/**
- * MutableShort类。
- */
-/**
- * MutableShort类。
- */
 public class MutableShort extends Number implements Comparable<MutableShort>, Mutable<Number>,
         Cloneable {
 
@@ -33,12 +27,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
     /**
      * Constructs a new MutableShort with the default value of zero.
      */
-    /**
-     * MutableShort方法。
-     */
-    /**
-     * MutableShort方法。
-     */
     public MutableShort() {
     }
 
@@ -46,14 +34,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * Constructs a new MutableShort with the specified value.
      *
      * @param value the initial value to store
-     */
-    /**
-     * MutableShort方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableShort方法。
-     *      * @param value final类型参数
      */
     public MutableShort(final short value) {
         this.value = value;
@@ -65,14 +45,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @param value the initial value to store, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * MutableShort方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableShort方法。
-     *      * @param value final类型参数
-     */
     public MutableShort(final Number value) {
         this.value = value.shortValue();
     }
@@ -82,14 +54,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      *
      * @param value the string to parse, not null
      * @throws NumberFormatException if the string cannot be parsed into a short
-     */
-    /**
-     * MutableShort方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableShort方法。
-     *      * @param value final类型参数
      */
     public MutableShort(final String value) {
         this.value = Short.parseShort(value);
@@ -107,10 +71,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * getValue方法。
      * @return short类型返回值
      */
-    /**
-     * getValue方法。
-     * @return short类型返回值
-     */
     public Short getValue() {
         return this.value;
     }
@@ -119,14 +79,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * Sets the value.
      *
      * @param value the value to set
-     */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
      */
     public void setValue(final short value) {
         this.value = value;
@@ -143,10 +95,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * setValue方法。
      *      * @param value final类型参数
      */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
     public void setValue(final Number value) {
         this.value = value.shortValue();
     }
@@ -155,12 +103,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
 
     /**
      * Increments the value.
-     */
-    /**
-     * increment方法。
-     */
-    /**
-     * increment方法。
      */
     public void increment() {
         value++;
@@ -171,14 +113,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * instance immediately prior to the increment operation. This method is not thread safe.
      *
      * @return the value associated with the instance before it was incremented
-     */
-    /**
-     * getAndIncrement方法。
-     * @return short类型返回值
-     */
-    /**
-     * getAndIncrement方法。
-     * @return short类型返回值
      */
     public short getAndIncrement() {
         final short last = value;
@@ -192,14 +126,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      *
      * @return the value associated with the instance after it is incremented
      */
-    /**
-     * incrementAndGet方法。
-     * @return short类型返回值
-     */
-    /**
-     * incrementAndGet方法。
-     * @return short类型返回值
-     */
     public short incrementAndGet() {
         value++;
         return value;
@@ -207,12 +133,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
 
     /**
      * Decrements the value.
-     */
-    /**
-     * decrement方法。
-     */
-    /**
-     * decrement方法。
      */
     public void decrement() {
         value--;
@@ -223,14 +143,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * instance immediately prior to the decrement operation. This method is not thread safe.
      *
      * @return the value associated with the instance before it was decremented
-     */
-    /**
-     * getAndDecrement方法。
-     * @return short类型返回值
-     */
-    /**
-     * getAndDecrement方法。
-     * @return short类型返回值
      */
     public short getAndDecrement() {
         final short last = value;
@@ -244,14 +156,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      *
      * @return the value associated with the instance after it is decremented
      */
-    /**
-     * decrementAndGet方法。
-     * @return short类型返回值
-     */
-    /**
-     * decrementAndGet方法。
-     * @return short类型返回值
-     */
     public short decrementAndGet() {
         value--;
         return value;
@@ -264,14 +168,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      *
      * @param operand the value to add, not null
      */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
     public void add(final short operand) {
         this.value += operand;
     }
@@ -282,14 +178,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @param operand the value to add, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
     public void add(final Number operand) {
         this.value += operand.shortValue();
     }
@@ -298,14 +186,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * Subtracts a value from the value of this instance.
      *
      * @param operand the value to subtract, not null
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
      */
     public void subtract(final short operand) {
         this.value -= operand;
@@ -317,14 +197,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @param operand the value to subtract, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
     public void subtract(final Number operand) {
         this.value -= operand.shortValue();
     }
@@ -335,16 +207,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance after adding the operand
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return short类型返回值
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return short类型返回值
      */
     public short addAndGet(final short operand) {
         this.value += operand;
@@ -359,16 +221,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @return the value associated with this instance after adding the operand
      * @throws NullPointerException if {@code operand} is null
      */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return short类型返回值
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return short类型返回值
-     */
     public short addAndGet(final Number operand) {
         this.value += operand.shortValue();
         return value;
@@ -380,16 +232,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return short类型返回值
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return short类型返回值
      */
     public short getAndAdd(final short operand) {
         final short last = value;
@@ -404,16 +246,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
      * @throws NullPointerException if {@code operand} is null
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return short类型返回值
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return short类型返回值
      */
     public short getAndAdd(final Number operand) {
         final short last = value;
@@ -434,10 +266,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * shortValue方法。
      * @return short类型返回值
      */
-    /**
-     * shortValue方法。
-     * @return short类型返回值
-     */
     public short shortValue() {
         return value;
     }
@@ -448,10 +276,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @return the numeric value represented by this object after conversion to type int.
      */
     @Override
-    /**
-     * intValue方法。
-     * @return int类型返回值
-     */
     /**
      * intValue方法。
      * @return int类型返回值
@@ -470,10 +294,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * longValue方法。
      * @return long类型返回值
      */
-    /**
-     * longValue方法。
-     * @return long类型返回值
-     */
     public long longValue() {
         return value;
     }
@@ -484,10 +304,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @return the numeric value represented by this object after conversion to type float.
      */
     @Override
-    /**
-     * floatValue方法。
-     * @return float类型返回值
-     */
     /**
      * floatValue方法。
      * @return float类型返回值
@@ -506,10 +322,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * doubleValue方法。
      * @return double类型返回值
      */
-    /**
-     * doubleValue方法。
-     * @return double类型返回值
-     */
     public double doubleValue() {
         return value;
     }
@@ -520,14 +332,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * Gets this mutable as an instance of Short.
      *
      * @return a Short instance containing the value from this mutable, never null
-     */
-    /**
-     * toShort方法。
-     * @return short类型返回值
-     */
-    /**
-     * toShort方法。
-     * @return short类型返回值
      */
     public Short toShort() {
         return shortValue();
@@ -544,11 +348,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @return {@code true} if the objects are the same; {@code false} otherwise.
      */
     @Override
-    /**
-     * equals方法。
-     *      * @param obj final类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param obj final类型参数
@@ -571,10 +370,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * hashCode方法。
      * @return int类型返回值
      */
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     public int hashCode() {
         return value;
     }
@@ -588,11 +383,6 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * @return negative if this is less, zero if equal, positive if greater
      */
     @Override
-    /**
-     * compareTo方法。
-     *      * @param other final类型参数
-     * @return int类型返回值
-     */
     /**
      * compareTo方法。
      *      * @param other final类型参数
@@ -614,19 +404,11 @@ public class MutableShort extends Number implements Comparable<MutableShort>, Mu
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return String.valueOf(value);
     }
 
     @Override
-    /**
-     * clone方法。
-     * @return MutableShort类型返回值
-     */
     /**
      * clone方法。
      * @return MutableShort类型返回值

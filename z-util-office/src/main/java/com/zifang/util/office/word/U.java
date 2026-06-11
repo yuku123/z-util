@@ -20,24 +20,11 @@ import java.util.Map;
  * @author zifang
  * @version 1.0
  */
-/**
- * U类。
- */
-/**
- * U类。
- */
 public class U {
 
     public static Integer WIDTH = 9072;
 
 
-    /**
-     * addText方法。
-     *      * @param p1 XWPFParagraph类型参数
-     * @param s String类型参数
-     * @param i int类型参数
-     * @return static XWPFRun类型返回值
-     */
     /**
      * addText方法。
      *      * @param p1 XWPFParagraph类型参数
@@ -58,18 +45,6 @@ public class U {
      * @param s 要添加的文本内容
      * @return 创建的文本运行对象
      */
-    /**
-     * addText方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param s String类型参数
-     * @return static XWPFRun类型返回值
-     */
-    /**
-     * addText方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param s String类型参数
-     * @return static XWPFRun类型返回值
-     */
     public static XWPFRun addText(XWPFParagraph titleParagraph, String s) {
         XWPFRun titleParagraphRun = titleParagraph.createRun();
         titleParagraphRun.addCarriageReturn();
@@ -83,18 +58,6 @@ public class U {
      * @param titleParagraph 目标段落
      * @param s 要添加的文本内容
      * @return 创建的文本运行对象
-     */
-    /**
-     * addTextCenter方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param s String类型参数
-     * @return static XWPFRun类型返回值
-     */
-    /**
-     * addTextCenter方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param s String类型参数
-     * @return static XWPFRun类型返回值
      */
     public static XWPFRun addTextCenter(XWPFParagraph titleParagraph, String s) {
         XWPFRun titleParagraphRun = titleParagraph.createRun();
@@ -110,18 +73,6 @@ public class U {
      * @param s 要添加的文本内容
      * @return 创建的文本运行对象
      */
-    /**
-     * addTextRight方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param s String类型参数
-     * @return static XWPFRun类型返回值
-     */
-    /**
-     * addTextRight方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param s String类型参数
-     * @return static XWPFRun类型返回值
-     */
     public static XWPFRun addTextRight(XWPFParagraph titleParagraph, String s) {
         XWPFRun titleParagraphRun = titleParagraph.createRun();
         titleParagraph.setAlignment(ParagraphAlignment.RIGHT);
@@ -135,18 +86,6 @@ public class U {
      * @param titleParagraph 目标段落
      * @param textList 要添加的文本列表
      * @return 创建的文本运行对象
-     */
-    /**
-     * addText方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param textList ListString类型参数
-     * @return static XWPFRun类型返回值
-     */
-    /**
-     * addText方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param textList ListString类型参数
-     * @return static XWPFRun类型返回值
      */
     public static XWPFRun addText(XWPFParagraph titleParagraph, List<String> textList) {
         XWPFRun titleParagraphRun = titleParagraph.createRun();
@@ -165,20 +104,6 @@ public class U {
      * @param s 要重复添加的文本内容
      * @param loopTimes 重复次数
      */
-    /**
-     * addLoopText方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param s String类型参数
-     * @param loopTimes int类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * addLoopText方法。
-     *      * @param titleParagraph XWPFParagraph类型参数
-     * @param s String类型参数
-     * @param loopTimes int类型参数
-     * @return static void类型返回值
-     */
     public static void addLoopText(XWPFParagraph titleParagraph, String s, Integer loopTimes) {
         for (Integer i = 0; i < loopTimes; i++) {
             XWPFRun titleParagraphRun = titleParagraph.createRun();
@@ -193,18 +118,6 @@ public class U {
      * @param paragraph 目标段落
      * @param title 标题文本
      */
-    /**
-     * createHeading1方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param title String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * createHeading1方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param title String类型参数
-     * @return static void类型返回值
-     */
     public static void createHeading1(XWPFParagraph paragraph, String title) {
         paragraph.setStyle("Heading 1");
         XWPFRun run = paragraph.createRun();
@@ -218,18 +131,6 @@ public class U {
      * @param paragraph 目标段落
      * @param title 标题文本
      */
-    /**
-     * createHeading2方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param title String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * createHeading2方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param title String类型参数
-     * @return static void类型返回值
-     */
     public static void createHeading2(XWPFParagraph paragraph, String title) {
         paragraph.setStyle("Heading 2");
         XWPFRun run = paragraph.createRun();
@@ -242,18 +143,6 @@ public class U {
      *
      * @param paragraph 目标段落
      * @param title 标题文本
-     */
-    /**
-     * createHeading3方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param title String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * createHeading3方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param title String类型参数
-     * @return static void类型返回值
      */
     public static void createHeading3(XWPFParagraph paragraph, String title) {
         paragraph.setStyle("Heading 3");
@@ -269,18 +158,6 @@ public class U {
      * @param paragraph 目标段落
      * @param title 标题文本
      */
-    /**
-     * createHeading4方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param title String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * createHeading4方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param title String类型参数
-     * @return static void类型返回值
-     */
     public static void createHeading4(XWPFParagraph paragraph, String title) {
         paragraph.setStyle("Heading 4");
         XWPFRun run = paragraph.createRun();
@@ -294,18 +171,6 @@ public class U {
      * @param paragraph 目标段落
      * @param path 图片文件路径
      * @throws Throwable 如果文件不存在或图片格式错误则抛出异常
-     */
-    /**
-     * createGraph方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param path String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * createGraph方法。
-     *      * @param paragraph XWPFParagraph类型参数
-     * @param path String类型参数
-     * @return static void类型返回值
      */
     public static void createGraph(XWPFParagraph paragraph, String path) throws Throwable {
         if (!new File(path).exists()) {
@@ -329,20 +194,6 @@ public class U {
      * @param docxDocument Word文档对象
      * @param strStyleId 样式ID
      * @param headingLevel 标题级别
-     */
-    /**
-     * addCustomHeadingStyle方法。
-     *      * @param docxDocument XWPFDocument类型参数
-     * @param strStyleId String类型参数
-     * @param headingLevel int类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * addCustomHeadingStyle方法。
-     *      * @param docxDocument XWPFDocument类型参数
-     * @param strStyleId String类型参数
-     * @param headingLevel int类型参数
-     * @return static void类型返回值
      */
     public static void addCustomHeadingStyle(XWPFDocument docxDocument, String strStyleId, int headingLevel) {
 
@@ -381,26 +232,6 @@ public class U {
      * @param headingLevel 标题级别
      * @param pointSize 字体大小（磅）
      * @param hexColor 十六进制颜色值，如"4288BC"
-     */
-    /**
-     * addCustomHeadingStyle方法。
-     *      * @param docxDocument XWPFDocument类型参数
-     * @param styles XWPFStyles类型参数
-     * @param strStyleId String类型参数
-     * @param headingLevel int类型参数
-     * @param pointSize int类型参数
-     * @param hexColor String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * addCustomHeadingStyle方法。
-     *      * @param docxDocument XWPFDocument类型参数
-     * @param styles XWPFStyles类型参数
-     * @param strStyleId String类型参数
-     * @param headingLevel int类型参数
-     * @param pointSize int类型参数
-     * @param hexColor String类型参数
-     * @return static void类型返回值
      */
     public static void addCustomHeadingStyle(XWPFDocument docxDocument, XWPFStyles styles, String strStyleId, int headingLevel, int pointSize, String hexColor) {
 
@@ -464,16 +295,6 @@ public class U {
      * @param hexString 十六进制颜色字符串，如"4288BC"
      * @return 转换后的字节数组
      */
-    /**
-     * hexToBytes方法。
-     *      * @param hexString String类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * hexToBytes方法。
-     *      * @param hexString String类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] hexToBytes(String hexString) {
         HexBinaryAdapter adapter = new HexBinaryAdapter();
         byte[] bytes = adapter.unmarshal(hexString);
@@ -485,16 +306,6 @@ public class U {
      * 设置1-4级标题的样式（字体大小、颜色等）
      *
      * @param document Word文档对象
-     */
-    /**
-     * initialStyles方法。
-     *      * @param document XWPFDocument类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * initialStyles方法。
-     *      * @param document XWPFDocument类型参数
-     * @return static void类型返回值
      */
     public static void initialStyles(XWPFDocument document) {
         XWPFStyles styles = document.createStyles();
@@ -511,20 +322,6 @@ public class U {
      * @param document Word文档对象
      * @param list 表头列表，每项为键值对(key为表头名称，value为数据字段名)
      * @param dataMapList 数据列表，每项为一个Map对象
-     */
-    /**
-     * addSimpleTable方法。
-     *      * @param document XWPFDocument类型参数
-     * @param list ListTupleString,类型参数
-     * @param dataMapList ListMapString,类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * addSimpleTable方法。
-     *      * @param document XWPFDocument类型参数
-     * @param list ListTupleString,类型参数
-     * @param dataMapList ListMapString,类型参数
-     * @return static void类型返回值
      */
     public static void addSimpleTable(XWPFDocument document, List<Tuple<String, String>> list, List<Map<String, Object>> dataMapList) {
         //基本信息表格
@@ -613,22 +410,6 @@ public class U {
      * @param dataMapList 数据列表，每项为一个Map对象
      * @param dimention 列宽映射，key为列索引，value为宽度值
      */
-    /**
-     * addSimpleTable方法。
-     *      * @param document XWPFDocument类型参数
-     * @param list ListTupleString,类型参数
-     * @param dataMapList ListMapString,类型参数
-     * @param dimention MapInteger,类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * addSimpleTable方法。
-     *      * @param document XWPFDocument类型参数
-     * @param list ListTupleString,类型参数
-     * @param dataMapList ListMapString,类型参数
-     * @param dimention MapInteger,类型参数
-     * @return static void类型返回值
-     */
     public static void addSimpleTable(XWPFDocument document, List<Tuple<String, String>> list, List<Map<String, Object>> dataMapList, Map<Integer, String> dimention) {
         //基本信息表格
         XWPFTable infoTable = document.createTable();
@@ -676,22 +457,6 @@ public class U {
      * @param fromCell 起始单元格索引
      * @param toCell 结束单元格索引
      */
-    /**
-     * mergeCellsHorizontal方法。
-     *      * @param table XWPFTable类型参数
-     * @param row int类型参数
-     * @param fromCell int类型参数
-     * @param toCell int类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * mergeCellsHorizontal方法。
-     *      * @param table XWPFTable类型参数
-     * @param row int类型参数
-     * @param fromCell int类型参数
-     * @param toCell int类型参数
-     * @return static void类型返回值
-     */
     public static void mergeCellsHorizontal(XWPFTable table, int row, int fromCell, int toCell) {
 
         Integer start = null;
@@ -721,22 +486,6 @@ public class U {
      * @param fromRow 起始行索引
      * @param toRow 结束行索引
      */
-    /**
-     * mergeCellsVertically方法。
-     *      * @param table XWPFTable类型参数
-     * @param col int类型参数
-     * @param fromRow int类型参数
-     * @param toRow int类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * mergeCellsVertically方法。
-     *      * @param table XWPFTable类型参数
-     * @param col int类型参数
-     * @param fromRow int类型参数
-     * @param toRow int类型参数
-     * @return static void类型返回值
-     */
     public static void mergeCellsVertically(XWPFTable table, int col, int fromRow, int toRow) {
         for (int rowIndex = fromRow; rowIndex <= toRow; rowIndex++) {
             XWPFTableCell cell = table.getRow(rowIndex).getCell(col);
@@ -756,18 +505,6 @@ public class U {
      * @param t_1_5_1 目标表格
      * @param mapList 数据列表，每项为一个Map对象
      */
-    /**
-     * appendingBody方法。
-     *      * @param t_1_5_1 XWPFTable类型参数
-     * @param mapList ListMapString,类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * appendingBody方法。
-     *      * @param t_1_5_1 XWPFTable类型参数
-     * @param mapList ListMapString,类型参数
-     * @return static void类型返回值
-     */
     public static void appendingBody(XWPFTable t_1_5_1, List<Map<String, Object>> mapList) {
         for (Map<String, Object> map : mapList) {
             XWPFTableRow row = t_1_5_1.createRow();
@@ -783,16 +520,6 @@ public class U {
      * 该方法创建一个包含书龄、销售（品种、册数、码洋）、库存（品种、册数、码洋）的复杂表头
      *
      * @param infoTable 目标表格
-     */
-    /**
-     * do_1_5_1_SpecialHeader方法。
-     *      * @param infoTable XWPFTable类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * do_1_5_1_SpecialHeader方法。
-     *      * @param infoTable XWPFTable类型参数
-     * @return static void类型返回值
      */
     public static void do_1_5_1_SpecialHeader(XWPFTable infoTable) {
 

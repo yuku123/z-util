@@ -8,16 +8,10 @@ package com.zifang.util.zex.bytecode.asm;
  * @author zifang
  * @version 1.0
  */
-/**
- * Base类。
- */
 public class Base {
 
     /**
      * 处理方法。
-     */
-    /**
-     * process方法。
      */
     public void process() {
         System.out.println("process");

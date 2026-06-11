@@ -39,23 +39,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @see com.zifang.util.workflow.config.WorkflowConfiguration
  * @see com.zifang.util.workflow.config.ExecutableWorkflowNode
  */
-/**
- * WorkFlowApplicationContext类。
- */
-/**
- * WorkFlowApplicationContext类。
- */
 public class WorkFlowApplicationContext {
 
     private static final Logger log = LoggerFactory.getLogger(WorkFlowApplicationContext.class);
 
     private volatile AtomicInteger nodeId = new AtomicInteger(0);
 
-    /**
-     * Random方法。
-     *      * @param System.currentTimeMillis( Object类型参数
-     * @return static Random random = new类型返回值
-     */
     /**
      * Random方法。
      *      * @param System.currentTimeMillis( Object类型参数
@@ -92,16 +81,9 @@ public class WorkFlowApplicationContext {
     /**
      * WorkFlowApplicationContext方法。
      */
-    /**
-     * WorkFlowApplicationContext方法。
-     */
     public WorkFlowApplicationContext() {
     }
 
-    /**
-     * WorkFlowApplicationContext方法。
-     *      * @param filePath String类型参数
-     */
     /**
      * WorkFlowApplicationContext方法。
      *      * @param filePath String类型参数
@@ -116,18 +98,10 @@ public class WorkFlowApplicationContext {
      * getNodeId方法。
      * @return AtomicInteger类型返回值
      */
-    /**
-     * getNodeId方法。
-     * @return AtomicInteger类型返回值
-     */
     public AtomicInteger getNodeId() {
         return nodeId;
     }
 
-    /**
-     * setNodeId方法。
-     *      * @param nodeId AtomicInteger类型参数
-     */
     /**
      * setNodeId方法。
      *      * @param nodeId AtomicInteger类型参数
@@ -140,18 +114,10 @@ public class WorkFlowApplicationContext {
      * getWorkFlowApplicationContextId方法。
      * @return int类型返回值
      */
-    /**
-     * getWorkFlowApplicationContextId方法。
-     * @return int类型返回值
-     */
     public Integer getWorkFlowApplicationContextId() {
         return workFlowApplicationContextId;
     }
 
-    /**
-     * setWorkFlowApplicationContextId方法。
-     *      * @param workFlowApplicationContextId int类型参数
-     */
     /**
      * setWorkFlowApplicationContextId方法。
      *      * @param workFlowApplicationContextId int类型参数
@@ -164,18 +130,10 @@ public class WorkFlowApplicationContext {
      * getAbstractEngine方法。
      * @return AbstractEngine类型返回值
      */
-    /**
-     * getAbstractEngine方法。
-     * @return AbstractEngine类型返回值
-     */
     public AbstractEngine getAbstractEngine() {
         return abstractEngine;
     }
 
-    /**
-     * setAbstractEngine方法。
-     *      * @param abstractEngine AbstractEngine类型参数
-     */
     /**
      * setAbstractEngine方法。
      *      * @param abstractEngine AbstractEngine类型参数
@@ -188,18 +146,10 @@ public class WorkFlowApplicationContext {
      * getCacheEngineService方法。
      * @return CacheEngineService类型返回值
      */
-    /**
-     * getCacheEngineService方法。
-     * @return CacheEngineService类型返回值
-     */
     public CacheEngineService getCacheEngineService() {
         return cacheEngineService;
     }
 
-    /**
-     * setCacheEngineService方法。
-     *      * @param cacheEngineService CacheEngineService类型参数
-     */
     /**
      * setCacheEngineService方法。
      *      * @param cacheEngineService CacheEngineService类型参数
@@ -212,18 +162,10 @@ public class WorkFlowApplicationContext {
      * getWorkflowNodeMap方法。
      * @return Map<String, WorkflowNode>类型返回值
      */
-    /**
-     * getWorkflowNodeMap方法。
-     * @return Map<String, WorkflowNode>类型返回值
-     */
     public Map<String, WorkflowNode> getWorkflowNodeMap() {
         return workflowNodeMap;
     }
 
-    /**
-     * setWorkflowNodeMap方法。
-     *      * @param workflowNodeMap MapString,类型参数
-     */
     /**
      * setWorkflowNodeMap方法。
      *      * @param workflowNodeMap MapString,类型参数
@@ -236,18 +178,10 @@ public class WorkFlowApplicationContext {
      * getExecutableWorkNodes方法。
      * @return List<ExecutableWorkflowNode>类型返回值
      */
-    /**
-     * getExecutableWorkNodes方法。
-     * @return List<ExecutableWorkflowNode>类型返回值
-     */
     public List<ExecutableWorkflowNode> getExecutableWorkNodes() {
         return executableWorkNodes;
     }
 
-    /**
-     * setExecutableWorkNodes方法。
-     *      * @param executableWorkNodes ListExecutableWorkflowNode类型参数
-     */
     /**
      * setExecutableWorkNodes方法。
      *      * @param executableWorkNodes ListExecutableWorkflowNode类型参数
@@ -260,18 +194,10 @@ public class WorkFlowApplicationContext {
      * getExecutableWorkNodeIdMap方法。
      * @return Map<String, ExecutableWorkflowNode>类型返回值
      */
-    /**
-     * getExecutableWorkNodeIdMap方法。
-     * @return Map<String, ExecutableWorkflowNode>类型返回值
-     */
     public Map<String, ExecutableWorkflowNode> getExecutableWorkNodeIdMap() {
         return executableWorkNodeIdMap;
     }
 
-    /**
-     * setExecutableWorkNodeIdMap方法。
-     *      * @param executableWorkNodeIdMap MapString,类型参数
-     */
     /**
      * setExecutableWorkNodeIdMap方法。
      *      * @param executableWorkNodeIdMap MapString,类型参数
@@ -284,18 +210,10 @@ public class WorkFlowApplicationContext {
      * getFilePath方法。
      * @return String类型返回值
      */
-    /**
-     * getFilePath方法。
-     * @return String类型返回值
-     */
     public String getFilePath() {
         return filePath;
     }
 
-    /**
-     * setFilePath方法。
-     *      * @param filePath String类型参数
-     */
     /**
      * setFilePath方法。
      *      * @param filePath String类型参数
@@ -308,18 +226,10 @@ public class WorkFlowApplicationContext {
      * getTask方法。
      * @return Task类型返回值
      */
-    /**
-     * getTask方法。
-     * @return Task类型返回值
-     */
     public Task getTask() {
         return task;
     }
 
-    /**
-     * setTask方法。
-     *      * @param task Task类型参数
-     */
     /**
      * setTask方法。
      *      * @param task Task类型参数
@@ -332,18 +242,10 @@ public class WorkFlowApplicationContext {
      * getWorkflowConfiguration方法。
      * @return WorkflowConfiguration类型返回值
      */
-    /**
-     * getWorkflowConfiguration方法。
-     * @return WorkflowConfiguration类型返回值
-     */
     public WorkflowConfiguration getWorkflowConfiguration() {
         return workflowConfiguration;
     }
 
-    /**
-     * setWorkflowConfiguration方法。
-     *      * @param workflowConfiguration WorkflowConfiguration类型参数
-     */
     /**
      * setWorkflowConfiguration方法。
      *      * @param workflowConfiguration WorkflowConfiguration类型参数
@@ -358,20 +260,11 @@ public class WorkFlowApplicationContext {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "WorkFlowApplicationContext{nodeId=" + nodeId + ", workFlowApplicationContextId=" + workFlowApplicationContextId + ", abstractEngine=" + abstractEngine + ", cacheEngineService=" + cacheEngineService + ", workflowNodeMap=" + workflowNodeMap + ", executableWorkNodes=" + executableWorkNodes + ", executableWorkNodeIdMap=" + executableWorkNodeIdMap + ", filePath=" + filePath + ", task=" + task + ", workflowConfiguration=" + workflowConfiguration + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -398,19 +291,11 @@ public class WorkFlowApplicationContext {
      * hashCode方法。
      * @return int类型返回值
      */
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     public int hashCode() {
         return Objects.hash(nodeId, workFlowApplicationContextId, abstractEngine, cacheEngineService, workflowNodeMap, executableWorkNodes, executableWorkNodeIdMap, filePath, task, workflowConfiguration);
     }
 
     // -------- Business Methods --------
-    /**
-     * initialByLocalFilePath方法。
-     *      * @param filePath String类型参数
-     */
     /**
      * initialByLocalFilePath方法。
      *      * @param filePath String类型参数
@@ -431,19 +316,11 @@ public class WorkFlowApplicationContext {
      * initialByWorkflowConfigurationInstance方法。
      *      * @param workflowConfiguration WorkflowConfiguration类型参数
      */
-    /**
-     * initialByWorkflowConfigurationInstance方法。
-     *      * @param workflowConfiguration WorkflowConfiguration类型参数
-     */
     public void initialByWorkflowConfigurationInstance(WorkflowConfiguration workflowConfiguration) {
         this.workflowConfiguration = workflowConfiguration;
         initial();
     }
 
-    /**
-     * initialByJsonStream方法。
-     *      * @param json String类型参数
-     */
     /**
      * initialByJsonStream方法。
      *      * @param json String类型参数
@@ -596,9 +473,6 @@ public class WorkFlowApplicationContext {
     /**
      * executeTask方法。
      */
-    /**
-     * executeTask方法。
-     */
     public void executeTask() {
         task.exec();
     }
@@ -607,26 +481,12 @@ public class WorkFlowApplicationContext {
     /**
      * 返回当前的上下文的全量信息
      */
-    /**
-     * getDescriptionMsg方法。
-     * @return Object类型返回值
-     */
-    /**
-     * getDescriptionMsg方法。
-     * @return Object类型返回值
-     */
     public Object getDescriptionMsg() {
         return null;
     }
 
     /**
      * 更新源信息，并相互关联
-     */
-    /**
-     * refreshWorkflowConfiguration方法。
-     */
-    /**
-     * refreshWorkflowConfiguration方法。
      */
     public void refreshWorkflowConfiguration() {
 
@@ -666,17 +526,10 @@ public class WorkFlowApplicationContext {
      * produceNodeId方法。
      * @return String类型返回值
      */
-    /**
-     * produceNodeId方法。
-     * @return String类型返回值
-     */
     public String produceNodeId() {
         return String.valueOf(nodeId.getAndIncrement());
     }
 
-    /**
-     * refreshExecutableNodeByWorkflowConfiguration方法。
-     */
     /**
      * refreshExecutableNodeByWorkflowConfiguration方法。
      */
@@ -686,10 +539,6 @@ public class WorkFlowApplicationContext {
     }
 
 
-    /**
-     * replaceWorkflowNode方法。
-     *      * @param workflowNode WorkflowNode类型参数
-     */
     /**
      * replaceWorkflowNode方法。
      *      * @param workflowNode WorkflowNode类型参数
@@ -713,14 +562,6 @@ public class WorkFlowApplicationContext {
      *
      * @param xmlContent BPMN 2.0 XML string
      */
-    /**
-     * loadFromBpmnXml方法。
-     *      * @param xmlContent String类型参数
-     */
-    /**
-     * loadFromBpmnXml方法。
-     *      * @param xmlContent String类型参数
-     */
     public void loadFromBpmnXml(String xmlContent) {
         BpmnXmlParser parser = new BpmnXmlParser();
         BpmnDiagram diagram = parser.parse(xmlContent);
@@ -734,14 +575,6 @@ public class WorkFlowApplicationContext {
      * Reinitializes engines, transforms nodes, and reconnects.
      *
      * @param config the new workflow configuration
-     */
-    /**
-     * refreshByWorkflowConfiguration方法。
-     *      * @param config WorkflowConfiguration类型参数
-     */
-    /**
-     * refreshByWorkflowConfiguration方法。
-     *      * @param config WorkflowConfiguration类型参数
      */
     public void refreshByWorkflowConfiguration(WorkflowConfiguration config) {
         this.workflowConfiguration = config;

@@ -6,12 +6,6 @@ import java.awt.*;
  * 图表颜色定义
  * 提供预设的调色板和颜色获取方法
  */
-/**
- * ChartColors类。
- */
-/**
- * ChartColors类。
- */
 public class ChartColors {
 
     private ChartColors() {}
@@ -36,11 +30,6 @@ public class ChartColors {
      * 根据索引获取颜色（循环调色板）
      * @param index 颜色索引
      * @return 对应的颜色
-     */
-    /**
-     * getColor方法。
-     *      * @param index int类型参数
-     * @return static Color类型返回值
      */
     public static Color getColor(int index) {
         return PALETTE[index % PALETTE.length];

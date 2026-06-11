@@ -14,12 +14,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * CuResult类。
- */
-/**
- * CuResult类。
- */
 public class CuResult {
 
     private boolean success;
@@ -30,12 +24,6 @@ public class CuResult {
     /**
      * 构造 CuResult。
      */
-    /**
-     * CuResult方法。
-     */
-    /**
-     * CuResult方法。
-     */
     public CuResult() {
         this.stepResults = new ArrayList<>();
     }
@@ -43,14 +31,6 @@ public class CuResult {
     /**
      * 获取执行是否成功。
      * @return 是否成功
-     */
-    /**
-     * isSuccess方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isSuccess方法。
-     * @return boolean类型返回值
      */
     public boolean isSuccess() {
         return success;
@@ -60,14 +40,6 @@ public class CuResult {
      * 设置执行是否成功。
      * @param success 是否成功
      */
-    /**
-     * setSuccess方法。
-     *      * @param success boolean类型参数
-     */
-    /**
-     * setSuccess方法。
-     *      * @param success boolean类型参数
-     */
     public void setSuccess(boolean success) {
         this.success = success;
     }
@@ -75,14 +47,6 @@ public class CuResult {
     /**
      * 获取步骤结果列表。
      * @return 步骤结果列表
-     */
-    /**
-     * getStepResults方法。
-     * @return List<StepResult>类型返回值
-     */
-    /**
-     * getStepResults方法。
-     * @return List<StepResult>类型返回值
      */
     public List<StepResult> getStepResults() {
         return stepResults;
@@ -92,14 +56,6 @@ public class CuResult {
      * 设置步骤结果列表。
      * @param stepResults 步骤结果列表
      */
-    /**
-     * setStepResults方法。
-     *      * @param stepResults ListStepResult类型参数
-     */
-    /**
-     * setStepResults方法。
-     *      * @param stepResults ListStepResult类型参数
-     */
     public void setStepResults(List<StepResult> stepResults) {
         this.stepResults = stepResults;
     }
@@ -107,14 +63,6 @@ public class CuResult {
     /**
      * 添加步骤结果。
      * @param stepResult 步骤结果
-     */
-    /**
-     * addStepResult方法。
-     *      * @param stepResult StepResult类型参数
-     */
-    /**
-     * addStepResult方法。
-     *      * @param stepResult StepResult类型参数
      */
     public void addStepResult(StepResult stepResult) {
         this.stepResults.add(stepResult);
@@ -124,14 +72,6 @@ public class CuResult {
      * 获取上下文。
      * @return 管道上下文
      */
-    /**
-     * getContext方法。
-     * @return PipelineContext类型返回值
-     */
-    /**
-     * getContext方法。
-     * @return PipelineContext类型返回值
-     */
     public PipelineContext getContext() {
         return context;
     }
@@ -139,14 +79,6 @@ public class CuResult {
     /**
      * 设置上下文。
      * @param context 管道上下文
-     */
-    /**
-     * setContext方法。
-     *      * @param context PipelineContext类型参数
-     */
-    /**
-     * setContext方法。
-     *      * @param context PipelineContext类型参数
      */
     public void setContext(PipelineContext context) {
         this.context = context;
@@ -156,14 +88,6 @@ public class CuResult {
      * 获取错误信息。
      * @return 错误信息
      */
-    /**
-     * getErrorMessage方法。
-     * @return String类型返回值
-     */
-    /**
-     * getErrorMessage方法。
-     * @return String类型返回值
-     */
     public String getErrorMessage() {
         return errorMessage;
     }
@@ -172,14 +96,6 @@ public class CuResult {
      * 设置错误信息。
      * @param errorMessage 错误信息
      */
-    /**
-     * setErrorMessage方法。
-     *      * @param errorMessage String类型参数
-     */
-    /**
-     * setErrorMessage方法。
-     *      * @param errorMessage String类型参数
-     */
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
@@ -187,14 +103,6 @@ public class CuResult {
     /**
      * 获取 Builder 实例。
      * @return Builder 对象
-     */
-    /**
-     * builder方法。
-     * @return static Builder类型返回值
-     */
-    /**
-     * builder方法。
-     * @return static Builder类型返回值
      */
     public static Builder builder() {
         return new Builder();
@@ -211,21 +119,11 @@ public class CuResult {
      *      * @param success boolean类型参数
      * @return Builder类型返回值
      */
-    /**
-     * success方法。
-     *      * @param success boolean类型参数
-     * @return Builder类型返回值
-     */
         public Builder success(boolean success) {
             this.success = success;
             return this;
         }
 
-    /**
-     * stepResults方法。
-     *      * @param stepResults ListStepResult类型参数
-     * @return Builder类型返回值
-     */
     /**
      * stepResults方法。
      *      * @param stepResults ListStepResult类型参数
@@ -241,11 +139,6 @@ public class CuResult {
      *      * @param context PipelineContext类型参数
      * @return Builder类型返回值
      */
-    /**
-     * context方法。
-     *      * @param context PipelineContext类型参数
-     * @return Builder类型返回值
-     */
         public Builder context(PipelineContext context) {
             this.context = context;
             return this;
@@ -256,20 +149,11 @@ public class CuResult {
      *      * @param errorMessage String类型参数
      * @return Builder类型返回值
      */
-    /**
-     * errorMessage方法。
-     *      * @param errorMessage String类型参数
-     * @return Builder类型返回值
-     */
         public Builder errorMessage(String errorMessage) {
             this.errorMessage = errorMessage;
             return this;
         }
 
-    /**
-     * build方法。
-     * @return CuResult类型返回值
-     */
     /**
      * build方法。
      * @return CuResult类型返回值

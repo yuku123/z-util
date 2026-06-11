@@ -11,12 +11,6 @@ import java.util.Random;
  * Reweights samples at each round based on misclassification
  * Final prediction via weighted majority vote
  */
-/**
- * AdaBoost类。
- */
-/**
- * AdaBoost类。
- */
 public class AdaBoost {
     private int nEstimators;
     private double learningRate;
@@ -38,20 +32,11 @@ public class AdaBoost {
      * DecisionStump方法。
      *      * @param nClasses int类型参数
      */
-    /**
-     * DecisionStump方法。
-     *      * @param nClasses int类型参数
-     */
         public DecisionStump(int nClasses) {
             this.nClasses = nClasses;
             this.predictions = new int[2];  // Prediction for left and right
         }
 
-    /**
-     * predict方法。
-     *      * @param x double[]类型参数
-     * @return int类型返回值
-     */
     /**
      * predict方法。
      *      * @param x double[]类型参数
@@ -65,11 +50,6 @@ public class AdaBoost {
             }
         }
 
-    /**
-     * predictIndex方法。
-     *      * @param x double[]类型参数
-     * @return int类型返回值
-     */
     /**
      * predictIndex方法。
      *      * @param x double[]类型参数
@@ -89,22 +69,12 @@ public class AdaBoost {
      *      * @param nEstimators int类型参数
      * @param learningRate double类型参数
      */
-    /**
-     * AdaBoost方法。
-     *      * @param nEstimators int类型参数
-     * @param learningRate double类型参数
-     */
     public AdaBoost(int nEstimators, double learningRate) {
         this.nEstimators = nEstimators;
         this.learningRate = learningRate;
         this.random = new Random();
     }
 
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @param y int[]类型参数
-     */
     /**
      * fit方法。
      *      * @param X NdArray类型参数
@@ -167,11 +137,6 @@ public class AdaBoost {
      *      * @param X NdArray类型参数
      * @return int[]类型返回值
      */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);
         int nSamples = Xdata.length;
@@ -183,11 +148,6 @@ public class AdaBoost {
         return predictions;
     }
 
-    /**
-     * predictProba方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * predictProba方法。
      *      * @param X NdArray类型参数

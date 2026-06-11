@@ -9,22 +9,12 @@ import com.zifang.util.numpy.Shape;
  * Input: (batchSize, channels, height, width)
  * Output: (batchSize, channels, outHeight, outWidth)
  */
-/**
- * AvgPool2d类。
- */
-/**
- * AvgPool2d类。
- */
 public class AvgPool2d extends Module {
     
     private final int kernelSize;
     private final int stride;
     private int[] inputShape;  // Save input shape for backward pass
     
-    /**
-     * AvgPool2d方法。
-     *      * @param kernelSize int类型参数
-     */
     /**
      * AvgPool2d方法。
      *      * @param kernelSize int类型参数
@@ -38,22 +28,12 @@ public class AvgPool2d extends Module {
      *      * @param kernelSize int类型参数
      * @param stride int类型参数
      */
-    /**
-     * AvgPool2d方法。
-     *      * @param kernelSize int类型参数
-     * @param stride int类型参数
-     */
     public AvgPool2d(int kernelSize, int stride) {
         this.kernelSize = kernelSize;
         this.stride = stride;
     }
     
     @Override
-    /**
-     * forward方法。
-     *      * @param input NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -113,11 +93,6 @@ public class AvgPool2d extends Module {
      *      * @param gradOutput NdArray类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * backward方法。
-     *      * @param gradOutput NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray backward(NdArray gradOutput) {
         int batchSize = gradOutput.getShape().get(0);
         int channels = gradOutput.getShape().get(1);
@@ -164,15 +139,7 @@ public class AvgPool2d extends Module {
      * getKernelSize方法。
      * @return int类型返回值
      */
-    /**
-     * getKernelSize方法。
-     * @return int类型返回值
-     */
     public int getKernelSize() { return kernelSize; }
-    /**
-     * getStride方法。
-     * @return int类型返回值
-     */
     /**
      * getStride方法。
      * @return int类型返回值

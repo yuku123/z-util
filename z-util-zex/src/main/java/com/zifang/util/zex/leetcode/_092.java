@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _092类。
- */
 public class _092 {
     static class ListNode {
       int val;

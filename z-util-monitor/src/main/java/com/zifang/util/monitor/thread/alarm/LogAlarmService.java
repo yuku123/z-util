@@ -8,12 +8,6 @@ import org.slf4j.LoggerFactory;
  *
  * @author zifang
  */
-/**
- * LogAlarmService类。
- */
-/**
- * LogAlarmService类。
- */
 public class LogAlarmService implements AlarmService {
 
     /**
@@ -22,10 +16,6 @@ public class LogAlarmService implements AlarmService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogAlarmService.class);
 
     @Override
-    /**
-     * alarm方法。
-     *      * @param arg Object...类型参数
-     */
     /**
      * alarm方法。
      *      * @param arg Object...类型参数

@@ -16,9 +16,6 @@ import java.util.function.Predicate;
 /**
  * Processor接口。
  */
-/**
- * Processor接口。
- */
 public interface Processor<C extends ChainContext<?, ?>> {
 
     /**

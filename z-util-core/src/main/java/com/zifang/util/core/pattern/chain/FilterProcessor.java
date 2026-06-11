@@ -11,24 +11,12 @@ import java.util.function.Consumer;
  * @param <C> 上下文类型
  * @author zifang
  */
-/**
- * FilterProcessor类。
- */
-/**
- * FilterProcessor类。
- */
 public class FilterProcessor<C extends ChainContext<?, ?>> implements Processor<C> {
 
     private final Consumer<C> before;
     private final Consumer<C> after;
     private final BiFunction<C, ProcessorResult, ProcessorResult> process;
 
-    /**
-     * FilterProcessor方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @param process BiFunctionC,类型参数
-     */
     /**
      * FilterProcessor方法。
      *      * @param before ConsumerC类型参数
@@ -43,11 +31,6 @@ public class FilterProcessor<C extends ChainContext<?, ?>> implements Processor<
     }
 
     @Override
-    /**
-     * process方法。
-     *      * @param context C类型参数
-     * @return ProcessorResult类型返回值
-     */
     /**
      * process方法。
      *      * @param context C类型参数
@@ -83,18 +66,6 @@ public class FilterProcessor<C extends ChainContext<?, ?>> implements Processor<
     /**
      * 创建一个简单的过滤器，只执行前后置处理
      */
-    /**
-     * of方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @return static <C extends ChainContext<?, ?>> FilterProcessor<C>类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @return static <C extends ChainContext<?, ?>> FilterProcessor<C>类型返回值
-     */
     public static <C extends ChainContext<?, ?>> FilterProcessor<C> of(
             Consumer<C> before,
             Consumer<C> after) {
@@ -103,20 +74,6 @@ public class FilterProcessor<C extends ChainContext<?, ?>> implements Processor<
 
     /**
      * 创建一个过滤器，包含前置处理、核心处理和后置处理
-     */
-    /**
-     * of方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @param process BiFunctionC,类型参数
-     * @return static <C extends ChainContext<?, ?>> FilterProcessor<C>类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @param process BiFunctionC,类型参数
-     * @return static <C extends ChainContext<?, ?>> FilterProcessor<C>类型返回值
      */
     public static <C extends ChainContext<?, ?>> FilterProcessor<C> of(
             Consumer<C> before,

@@ -69,9 +69,6 @@ import java.util.Set;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * JGitExecutor类。
- */
 public class JGitExecutor {
 
     // ==================== 仓库生命周期 ====================

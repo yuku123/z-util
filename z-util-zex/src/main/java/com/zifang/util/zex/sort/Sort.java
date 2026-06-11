@@ -22,9 +22,6 @@ import java.util.Arrays;
  * @author zifang
  * @version 1.0
  */
-/**
- * Sort类。
- */
 public class Sort {
 
 }

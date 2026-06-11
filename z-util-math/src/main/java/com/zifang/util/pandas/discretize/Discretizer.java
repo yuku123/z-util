@@ -9,12 +9,6 @@ import java.util.Arrays;
  * 对标 pandas.cut 和 pandas.qcut
  * 提供等宽分箱和等频分箱功能
  */
-/**
- * Discretizer类。
- */
-/**
- * Discretizer类。
- */
 public class Discretizer {
 
     /**
@@ -24,18 +18,6 @@ public class Discretizer {
      * @param series 输入数据
      * @param bins 分箱数量
      * @return 分箱后的标签 Series
-     */
-    /**
-     * cut方法。
-     *      * @param series Series类型参数
-     * @param bins int类型参数
-     * @return static Series类型返回值
-     */
-    /**
-     * cut方法。
-     *      * @param series Series类型参数
-     * @param bins int类型参数
-     * @return static Series类型返回值
      */
     public static Series cut(Series series, int bins) {
         double[] data = series.toArray();
@@ -84,18 +66,6 @@ public class Discretizer {
      * @param series 输入数据
      * @param q 分位数数量
      * @return 分箱后的标签 Series
-     */
-    /**
-     * qcut方法。
-     *      * @param series Series类型参数
-     * @param q int类型参数
-     * @return static Series类型返回值
-     */
-    /**
-     * qcut方法。
-     *      * @param series Series类型参数
-     * @param q int类型参数
-     * @return static Series类型返回值
      */
     public static Series qcut(Series series, int q) {
         double[] data = series.toArray();

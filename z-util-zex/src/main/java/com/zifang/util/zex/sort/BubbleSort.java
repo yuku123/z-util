@@ -23,9 +23,6 @@ package com.zifang.util.zex.sort;
  * @author zifang
  * @version 1.0
  */
-/**
- * BubbleSort类。
- */
 public class BubbleSort {
 
     /**
@@ -37,11 +34,6 @@ public class BubbleSort {
      *
      * @param arr 待排序的整数数组，不能为null
      * @return 排序后的整数数组（实际为原数组本身，排序在原数组上进行）
-     */
-    /**
-     * bubbleSort方法。
-     *      * @param arr int[]类型参数
-     * @return static int[]类型返回值
      */
     public static int[] bubbleSort(int[] arr) {
         int m = 0;    //循环次数

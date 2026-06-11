@@ -11,9 +11,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * GitStatus类。
- */
 public class GitStatus {
 
     /** 当前分支名（detached HEAD 时为 null） */

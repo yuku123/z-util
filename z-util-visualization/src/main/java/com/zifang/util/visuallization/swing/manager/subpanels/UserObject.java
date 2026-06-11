@@ -6,12 +6,6 @@ import java.util.Objects;
  * 用户对象数据类
  * 存储用户ID和显示名称信息
  */
-/**
- * UserObject类。
- */
-/**
- * UserObject类。
- */
 public class UserObject {
 
     private Integer id;
@@ -21,19 +15,12 @@ public class UserObject {
     /**
      * 创建用户对象
      */
-    /**
-     * UserObject方法。
-     */
     public UserObject() {
     }
 
     /**
      * 获取用户ID
      * @return 用户ID
-     */
-    /**
-     * getId方法。
-     * @return int类型返回值
      */
     public Integer getId() {
         return id;
@@ -43,10 +30,6 @@ public class UserObject {
      * 设置用户ID
      * @param id 用户ID
      */
-    /**
-     * setId方法。
-     *      * @param id int类型参数
-     */
     public void setId(Integer id) {
         this.id = id;
     }
@@ -55,10 +38,6 @@ public class UserObject {
      * 获取显示名称
      * @return 显示名称
      */
-    /**
-     * getDisplayName方法。
-     * @return String类型返回值
-     */
     public String getDisplayName() {
         return displayName;
     }
@@ -66,10 +45,6 @@ public class UserObject {
     /**
      * 设置显示名称
      * @param displayName 显示名称
-     */
-    /**
-     * setDisplayName方法。
-     *      * @param displayName String类型参数
      */
     public void setDisplayName(String displayName) {
         this.displayName = displayName;

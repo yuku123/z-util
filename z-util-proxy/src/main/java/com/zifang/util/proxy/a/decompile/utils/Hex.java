@@ -11,12 +11,6 @@ package com.zifang.util.proxy.a.decompile.utils;
  * http://www.blogjava.net/lijinglin/archive/2011/11/02/362567.html
  * </pre>
  */
-/**
- * Hex类。
- */
-/**
- * Hex类。
- */
 public class Hex {
     /**
      * 字符串转换成十六进制字符串
@@ -24,16 +18,6 @@ public class Hex {
      * str 待转换的ASCII字符串
      *
      * @return String 每个Byte之间空格分隔，如: [61 6C 6B]
-     */
-    /**
-     * str2HexStr方法。
-     *      * @param str String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * str2HexStr方法。
-     *      * @param str String类型参数
-     * @return static String类型返回值
      */
     public static String str2HexStr(String str) {
 
@@ -59,16 +43,6 @@ public class Hex {
      *
      * @return String 对应的字符串
      */
-    /**
-     * hexStr2Str方法。
-     *      * @param hexStr String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * hexStr2Str方法。
-     *      * @param hexStr String类型参数
-     * @return static String类型返回值
-     */
     public static String hexStr2Str(String hexStr) {
         String str = "0123456789ABCDEF";
         char[] hexs = hexStr.toCharArray();
@@ -88,16 +62,6 @@ public class Hex {
      *
      * @return String 每个Byte值之间空格分隔
      */
-    /**
-     * byte2HexStr方法。
-     *      * @param b byte[]类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * byte2HexStr方法。
-     *      * @param b byte[]类型参数
-     * @return static String类型返回值
-     */
     public static String byte2HexStr(byte[] b) {
         String stmp = "";
         StringBuilder sb = new StringBuilder("");
@@ -115,16 +79,6 @@ public class Hex {
      * src Byte字符串，每个Byte之间没有分隔符
      *
      * @return byte[]
-     */
-    /**
-     * hexStr2Bytes方法。
-     *      * @param src String类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * hexStr2Bytes方法。
-     *      * @param src String类型参数
-     * @return static byte[]类型返回值
      */
     public static byte[] hexStr2Bytes(String src) {
         int m = 0, n = 0;
@@ -146,16 +100,6 @@ public class Hex {
      *
      * @return String 每个unicode之间无分隔符
      * @throws Exception
-     */
-    /**
-     * strToUnicode方法。
-     *      * @param strText String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * strToUnicode方法。
-     *      * @param strText String类型参数
-     * @return static String类型返回值
      */
     public static String strToUnicode(String strText) throws Exception {
         char c;
@@ -183,16 +127,6 @@ public class Hex {
      *
      * @return String 全角字符串
      */
-    /**
-     * unicodeToString方法。
-     *      * @param hex String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * unicodeToString方法。
-     *      * @param hex String类型参数
-     * @return static String类型返回值
-     */
     public static String unicodeToString(String hex) {
         int t = hex.length() / 6;
         StringBuilder str = new StringBuilder();
@@ -217,26 +151,11 @@ public class Hex {
      * @param cp_count_hexstr
      * @return
      */
-    /**
-     * hex2Integer方法。
-     *      * @param cp_count_hexstr String类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * hex2Integer方法。
-     *      * @param cp_count_hexstr String类型参数
-     * @return static int类型返回值
-     */
     public static int hex2Integer(String cp_count_hexstr) {
         return Integer.parseInt(cp_count_hexstr, 16);
     }
 
 
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
     /**
      * main方法。
      *      * @param args String[]类型参数

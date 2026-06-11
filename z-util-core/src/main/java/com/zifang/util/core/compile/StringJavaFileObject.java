@@ -12,21 +12,10 @@ import java.net.URI;
  * @param <T> 内容类型
  * @see SimpleJavaFileObject
  */
-/**
- * StringJavaFileObject类。
- */
-/**
- * StringJavaFileObject类。
- */
 public class StringJavaFileObject<T> extends SimpleJavaFileObject {
 
     private T content;
 
-    /**
-     * StringJavaFileObject方法。
-     *      * @param className String类型参数
-     * @param content T类型参数
-     */
     /**
      * StringJavaFileObject方法。
      *      * @param className String类型参数
@@ -39,11 +28,6 @@ public class StringJavaFileObject<T> extends SimpleJavaFileObject {
     }
 
     @Override
-    /**
-     * getCharContent方法。
-     *      * @param ignoreEncodingErrors boolean类型参数
-     * @return String类型返回值
-     */
     /**
      * getCharContent方法。
      *      * @param ignoreEncodingErrors boolean类型参数

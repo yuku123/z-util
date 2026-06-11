@@ -11,12 +11,6 @@ import java.util.Date;
  * <p>
  * 只处理LocalTime类型，提供LocalTime的格式化、解析、计算等功能
  */
-/**
- * LocalTimeUtil类。
- */
-/**
- * LocalTimeUtil类。
- */
 public class LocalTimeUtil {
 
     public static final String PATTERN_DEFAULT = "HH:mm:ss";
@@ -30,17 +24,7 @@ public class LocalTimeUtil {
      *      * @param PATTERN_DEFAULT Object类型参数
      * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
      */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_DEFAULT Object类型参数
-     * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
-     */
     public static final DateTimeFormatter FMT_DEFAULT = DateTimeFormatter.ofPattern(PATTERN_DEFAULT);
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_COMPACT Object类型参数
-     * @return static final DateTimeFormatter FMT_COMPACT =类型返回值
-     */
     /**
      * DateTimeFormatter.ofPattern方法。
      *      * @param PATTERN_COMPACT Object类型参数
@@ -52,17 +36,7 @@ public class LocalTimeUtil {
      *      * @param PATTERN_SHORT Object类型参数
      * @return static final DateTimeFormatter FMT_SHORT =类型返回值
      */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_SHORT Object类型参数
-     * @return static final DateTimeFormatter FMT_SHORT =类型返回值
-     */
     public static final DateTimeFormatter FMT_SHORT = DateTimeFormatter.ofPattern(PATTERN_SHORT);
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_CHINESE Object类型参数
-     * @return static final DateTimeFormatter FMT_CHINESE =类型返回值
-     */
     /**
      * DateTimeFormatter.ofPattern方法。
      *      * @param PATTERN_CHINESE Object类型参数
@@ -72,11 +46,6 @@ public class LocalTimeUtil {
 
     // ==================== 格式化 ====================
 
-    /**
-     * format方法。
-     *      * @param time LocalTime类型参数
-     * @return static String类型返回值
-     */
     /**
      * format方法。
      *      * @param time LocalTime类型参数
@@ -92,23 +61,11 @@ public class LocalTimeUtil {
      * @param pattern String类型参数
      * @return static String类型返回值
      */
-    /**
-     * format方法。
-     *      * @param time LocalTime类型参数
-     * @param pattern String类型参数
-     * @return static String类型返回值
-     */
     public static String format(LocalTime time, String pattern) {
         if (time == null) return null;
         return time.format(DateTimeFormatter.ofPattern(pattern));
     }
 
-    /**
-     * format方法。
-     *      * @param time LocalTime类型参数
-     * @param formatter DateTimeFormatter类型参数
-     * @return static String类型返回值
-     */
     /**
      * format方法。
      *      * @param time LocalTime类型参数
@@ -127,21 +84,10 @@ public class LocalTimeUtil {
      *      * @param timeStr String类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * parse方法。
-     *      * @param timeStr String类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime parse(String timeStr) {
         return parse(timeStr, PATTERN_DEFAULT);
     }
 
-    /**
-     * parse方法。
-     *      * @param timeStr String类型参数
-     * @param pattern String类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * parse方法。
      *      * @param timeStr String类型参数
@@ -159,10 +105,6 @@ public class LocalTimeUtil {
      * now方法。
      * @return static LocalTime类型返回值
      */
-    /**
-     * now方法。
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime now() {
         return LocalTime.now();
     }
@@ -173,23 +115,10 @@ public class LocalTimeUtil {
      * @param minute int类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * of方法。
-     *      * @param hour int类型参数
-     * @param minute int类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime of(int hour, int minute) {
         return LocalTime.of(hour, minute);
     }
 
-    /**
-     * of方法。
-     *      * @param hour int类型参数
-     * @param minute int类型参数
-     * @param second int类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * of方法。
      *      * @param hour int类型参数
@@ -209,23 +138,10 @@ public class LocalTimeUtil {
      * @param nanoOfSecond int类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * of方法。
-     *      * @param hour int类型参数
-     * @param minute int类型参数
-     * @param second int类型参数
-     * @param nanoOfSecond int类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime of(int hour, int minute, int second, int nanoOfSecond) {
         return LocalTime.of(hour, minute, second, nanoOfSecond);
     }
 
-    /**
-     * ofSecondOfDay方法。
-     *      * @param secondOfDay long类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * ofSecondOfDay方法。
      *      * @param secondOfDay long类型参数
@@ -240,11 +156,6 @@ public class LocalTimeUtil {
      *      * @param nanoOfDay long类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * ofNanoOfDay方法。
-     *      * @param nanoOfDay long类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime ofNanoOfDay(long nanoOfDay) {
         return LocalTime.ofNanoOfDay(nanoOfDay);
     }
@@ -253,18 +164,10 @@ public class LocalTimeUtil {
      * midnight方法。
      * @return static LocalTime类型返回值
      */
-    /**
-     * midnight方法。
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime midnight() {
         return LocalTime.MIDNIGHT;
     }
 
-    /**
-     * noon方法。
-     * @return static LocalTime类型返回值
-     */
     /**
      * noon方法。
      * @return static LocalTime类型返回值
@@ -281,22 +184,10 @@ public class LocalTimeUtil {
      * @param hours long类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * plusHours方法。
-     *      * @param time LocalTime类型参数
-     * @param hours long类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime plusHours(LocalTime time, long hours) {
         return time.plusHours(hours);
     }
 
-    /**
-     * minusHours方法。
-     *      * @param time LocalTime类型参数
-     * @param hours long类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * minusHours方法。
      *      * @param time LocalTime类型参数
@@ -313,22 +204,10 @@ public class LocalTimeUtil {
      * @param minutes long类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * plusMinutes方法。
-     *      * @param time LocalTime类型参数
-     * @param minutes long类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime plusMinutes(LocalTime time, long minutes) {
         return time.plusMinutes(minutes);
     }
 
-    /**
-     * minusMinutes方法。
-     *      * @param time LocalTime类型参数
-     * @param minutes long类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * minusMinutes方法。
      *      * @param time LocalTime类型参数
@@ -345,22 +224,10 @@ public class LocalTimeUtil {
      * @param seconds long类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * plusSeconds方法。
-     *      * @param time LocalTime类型参数
-     * @param seconds long类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime plusSeconds(LocalTime time, long seconds) {
         return time.plusSeconds(seconds);
     }
 
-    /**
-     * minusSeconds方法。
-     *      * @param time LocalTime类型参数
-     * @param seconds long类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * minusSeconds方法。
      *      * @param time LocalTime类型参数
@@ -377,22 +244,10 @@ public class LocalTimeUtil {
      * @param nanos long类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * plusNanos方法。
-     *      * @param time LocalTime类型参数
-     * @param nanos long类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime plusNanos(LocalTime time, long nanos) {
         return time.plusNanos(nanos);
     }
 
-    /**
-     * minusNanos方法。
-     *      * @param time LocalTime类型参数
-     * @param nanos long类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * minusNanos方法。
      *      * @param time LocalTime类型参数
@@ -411,12 +266,6 @@ public class LocalTimeUtil {
      * @param time2 LocalTime类型参数
      * @return static boolean类型返回值
      */
-    /**
-     * isBefore方法。
-     *      * @param time1 LocalTime类型参数
-     * @param time2 LocalTime类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isBefore(LocalTime time1, LocalTime time2) {
         return time1.isBefore(time2);
     }
@@ -427,22 +276,10 @@ public class LocalTimeUtil {
      * @param time2 LocalTime类型参数
      * @return static boolean类型返回值
      */
-    /**
-     * isAfter方法。
-     *      * @param time1 LocalTime类型参数
-     * @param time2 LocalTime类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isAfter(LocalTime time1, LocalTime time2) {
         return time1.isAfter(time2);
     }
 
-    /**
-     * isEqual方法。
-     *      * @param time1 LocalTime类型参数
-     * @param time2 LocalTime类型参数
-     * @return static boolean类型返回值
-     */
     /**
      * isEqual方法。
      *      * @param time1 LocalTime类型参数
@@ -461,22 +298,10 @@ public class LocalTimeUtil {
      * @param end LocalTime类型参数
      * @return static long类型返回值
      */
-    /**
-     * hoursBetween方法。
-     *      * @param start LocalTime类型参数
-     * @param end LocalTime类型参数
-     * @return static long类型返回值
-     */
     public static long hoursBetween(LocalTime start, LocalTime end) {
         return java.time.temporal.ChronoUnit.HOURS.between(start, end);
     }
 
-    /**
-     * minutesBetween方法。
-     *      * @param start LocalTime类型参数
-     * @param end LocalTime类型参数
-     * @return static long类型返回值
-     */
     /**
      * minutesBetween方法。
      *      * @param start LocalTime类型参数
@@ -493,12 +318,6 @@ public class LocalTimeUtil {
      * @param end LocalTime类型参数
      * @return static long类型返回值
      */
-    /**
-     * secondsBetween方法。
-     *      * @param start LocalTime类型参数
-     * @param end LocalTime类型参数
-     * @return static long类型返回值
-     */
     public static long secondsBetween(LocalTime start, LocalTime end) {
         return java.time.temporal.ChronoUnit.SECONDS.between(start, end);
     }
@@ -509,22 +328,10 @@ public class LocalTimeUtil {
      * @param end LocalTime类型参数
      * @return static long类型返回值
      */
-    /**
-     * millisBetween方法。
-     *      * @param start LocalTime类型参数
-     * @param end LocalTime类型参数
-     * @return static long类型返回值
-     */
     public static long millisBetween(LocalTime start, LocalTime end) {
         return java.time.temporal.ChronoUnit.MILLIS.between(start, end);
     }
 
-    /**
-     * nanosBetween方法。
-     *      * @param start LocalTime类型参数
-     * @param end LocalTime类型参数
-     * @return static long类型返回值
-     */
     /**
      * nanosBetween方法。
      *      * @param start LocalTime类型参数
@@ -542,20 +349,10 @@ public class LocalTimeUtil {
      *      * @param time LocalTime类型参数
      * @return static int类型返回值
      */
-    /**
-     * getHour方法。
-     *      * @param time LocalTime类型参数
-     * @return static int类型返回值
-     */
     public static int getHour(LocalTime time) {
         return time.getHour();
     }
 
-    /**
-     * getMinute方法。
-     *      * @param time LocalTime类型参数
-     * @return static int类型返回值
-     */
     /**
      * getMinute方法。
      *      * @param time LocalTime类型参数
@@ -570,20 +367,10 @@ public class LocalTimeUtil {
      *      * @param time LocalTime类型参数
      * @return static int类型返回值
      */
-    /**
-     * getSecond方法。
-     *      * @param time LocalTime类型参数
-     * @return static int类型返回值
-     */
     public static int getSecond(LocalTime time) {
         return time.getSecond();
     }
 
-    /**
-     * getNano方法。
-     *      * @param time LocalTime类型参数
-     * @return static int类型返回值
-     */
     /**
      * getNano方法。
      *      * @param time LocalTime类型参数
@@ -598,20 +385,10 @@ public class LocalTimeUtil {
      *      * @param time LocalTime类型参数
      * @return static long类型返回值
      */
-    /**
-     * toSecondOfDay方法。
-     *      * @param time LocalTime类型参数
-     * @return static long类型返回值
-     */
     public static long toSecondOfDay(LocalTime time) {
         return time.toSecondOfDay();
     }
 
-    /**
-     * toNanoOfDay方法。
-     *      * @param time LocalTime类型参数
-     * @return static long类型返回值
-     */
     /**
      * toNanoOfDay方法。
      *      * @param time LocalTime类型参数
@@ -628,20 +405,10 @@ public class LocalTimeUtil {
      *      * @param time LocalTime类型参数
      * @return static boolean类型返回值
      */
-    /**
-     * isMidnight方法。
-     *      * @param time LocalTime类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isMidnight(LocalTime time) {
         return time.equals(LocalTime.MIDNIGHT);
     }
 
-    /**
-     * isNoon方法。
-     *      * @param time LocalTime类型参数
-     * @return static boolean类型返回值
-     */
     /**
      * isNoon方法。
      *      * @param time LocalTime类型参数
@@ -658,21 +425,11 @@ public class LocalTimeUtil {
      *      * @param time LocalTime类型参数
      * @return static Date类型返回值
      */
-    /**
-     * toDate方法。
-     *      * @param time LocalTime类型参数
-     * @return static Date类型返回值
-     */
     public static Date toDate(LocalTime time) {
         if (time == null) return null;
         return TimeConverter.toDate(LocalDate.now().atTime(time));
     }
 
-    /**
-     * toInstant方法。
-     *      * @param time LocalTime类型参数
-     * @return static Instant类型返回值
-     */
     /**
      * toInstant方法。
      *      * @param time LocalTime类型参数
@@ -687,21 +444,10 @@ public class LocalTimeUtil {
      *      * @param time LocalTime类型参数
      * @return static LocalDateTime类型返回值
      */
-    /**
-     * toLocalDateTime方法。
-     *      * @param time LocalTime类型参数
-     * @return static LocalDateTime类型返回值
-     */
     public static LocalDateTime toLocalDateTime(LocalTime time) {
         return TimeConverter.toLocalDateTime(time);
     }
 
-    /**
-     * toLocalDateTime方法。
-     *      * @param date LocalDate类型参数
-     * @param time LocalTime类型参数
-     * @return static LocalDateTime类型返回值
-     */
     /**
      * toLocalDateTime方法。
      *      * @param date LocalDate类型参数
@@ -719,20 +465,10 @@ public class LocalTimeUtil {
      *      * @param date Date类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * fromDate方法。
-     *      * @param date Date类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime fromDate(Date date) {
         return TimeConverter.toLocalTime(date);
     }
 
-    /**
-     * fromInstant方法。
-     *      * @param instant Instant类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * fromInstant方法。
      *      * @param instant Instant类型参数
@@ -747,20 +483,10 @@ public class LocalTimeUtil {
      *      * @param localDateTime LocalDateTime类型参数
      * @return static LocalTime类型返回值
      */
-    /**
-     * fromLocalDateTime方法。
-     *      * @param localDateTime LocalDateTime类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime fromLocalDateTime(LocalDateTime localDateTime) {
         return TimeConverter.toLocalTime(localDateTime);
     }
 
-    /**
-     * fromSecondOfDay方法。
-     *      * @param secondOfDay long类型参数
-     * @return static LocalTime类型返回值
-     */
     /**
      * fromSecondOfDay方法。
      *      * @param secondOfDay long类型参数

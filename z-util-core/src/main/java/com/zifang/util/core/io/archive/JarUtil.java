@@ -21,12 +21,6 @@ import java.util.jar.JarFile;
  * @author zifang
  * @see JarFile
  */
-/**
- * JarUtil类。
- */
-/**
- * JarUtil类。
- */
 public class JarUtil {
 
     /**
@@ -40,18 +34,6 @@ public class JarUtil {
      * @throws IOException              如果 JAR 文件不存在或格式无效
      * @throws IllegalArgumentException 如果 jarPath 或 targetDir 为空
      * @throws SecurityException        如果由于安全原因无法读取 JAR 文件
-     */
-    /**
-     * unPack方法。
-     *      * @param jarPath String类型参数
-     * @param targetDir String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * unPack方法。
-     *      * @param jarPath String类型参数
-     * @param targetDir String类型参数
-     * @return static void类型返回值
      */
     public static void unPack(String jarPath, String targetDir) throws IOException {
         File jarFile = new File(jarPath);

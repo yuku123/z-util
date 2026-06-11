@@ -5,12 +5,6 @@ package com.zifang.util.core.pattern.pool;
  *
  * @param <T> 对象类型
  */
-/**
- * PooledObjectFactory接口。
- */
-/**
- * PooledObjectFactory接口。
- */
 public interface PooledObjectFactory<T> {
 
     /**

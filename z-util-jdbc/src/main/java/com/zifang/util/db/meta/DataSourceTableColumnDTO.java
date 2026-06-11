@@ -10,12 +10,6 @@ import java.util.Objects;
  *
  * @author zifang
  */
-/**
- * DataSourceTableColumnDTO类。
- */
-/**
- * DataSourceTableColumnDTO类。
- */
 public class DataSourceTableColumnDTO {
 
     @Description("列id")
@@ -43,18 +37,10 @@ public class DataSourceTableColumnDTO {
      * nativeSignature方法。
      * @return String类型返回值
      */
-    /**
-     * nativeSignature方法。
-     * @return String类型返回值
-     */
     public String nativeSignature() {
         return tableName + ":" + columnType + ":" + columnComment;
     }
 
-    /**
-     * getDatasourceTableColumnId方法。
-     * @return long类型返回值
-     */
     /**
      * getDatasourceTableColumnId方法。
      * @return long类型返回值
@@ -67,18 +53,10 @@ public class DataSourceTableColumnDTO {
      * setDatasourceTableColumnId方法。
      *      * @param datasourceTableColumnId long类型参数
      */
-    /**
-     * setDatasourceTableColumnId方法。
-     *      * @param datasourceTableColumnId long类型参数
-     */
     public void setDatasourceTableColumnId(Long datasourceTableColumnId) {
         this.datasourceTableColumnId = datasourceTableColumnId;
     }
 
-    /**
-     * getDatasourceCode方法。
-     * @return String类型返回值
-     */
     /**
      * getDatasourceCode方法。
      * @return String类型返回值
@@ -91,18 +69,10 @@ public class DataSourceTableColumnDTO {
      * setDatasourceCode方法。
      *      * @param datasourceCode String类型参数
      */
-    /**
-     * setDatasourceCode方法。
-     *      * @param datasourceCode String类型参数
-     */
     public void setDatasourceCode(String datasourceCode) {
         this.datasourceCode = datasourceCode;
     }
 
-    /**
-     * getTableName方法。
-     * @return String类型返回值
-     */
     /**
      * getTableName方法。
      * @return String类型返回值
@@ -115,18 +85,10 @@ public class DataSourceTableColumnDTO {
      * setTableName方法。
      *      * @param tableName String类型参数
      */
-    /**
-     * setTableName方法。
-     *      * @param tableName String类型参数
-     */
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
-    /**
-     * getColumnName方法。
-     * @return String类型返回值
-     */
     /**
      * getColumnName方法。
      * @return String类型返回值
@@ -139,18 +101,10 @@ public class DataSourceTableColumnDTO {
      * setColumnName方法。
      *      * @param columnName String类型参数
      */
-    /**
-     * setColumnName方法。
-     *      * @param columnName String类型参数
-     */
     public void setColumnName(String columnName) {
         this.columnName = columnName;
     }
 
-    /**
-     * getColumnType方法。
-     * @return String类型返回值
-     */
     /**
      * getColumnType方法。
      * @return String类型返回值
@@ -163,18 +117,10 @@ public class DataSourceTableColumnDTO {
      * setColumnType方法。
      *      * @param columnType String类型参数
      */
-    /**
-     * setColumnType方法。
-     *      * @param columnType String类型参数
-     */
     public void setColumnType(String columnType) {
         this.columnType = columnType;
     }
 
-    /**
-     * getColumnLength方法。
-     * @return String类型返回值
-     */
     /**
      * getColumnLength方法。
      * @return String类型返回值
@@ -187,10 +133,6 @@ public class DataSourceTableColumnDTO {
      * setColumnLength方法。
      *      * @param columnLength String类型参数
      */
-    /**
-     * setColumnLength方法。
-     *      * @param columnLength String类型参数
-     */
     public void setColumnLength(String columnLength) {
         this.columnLength = columnLength;
     }
@@ -199,18 +141,10 @@ public class DataSourceTableColumnDTO {
      * getColumnComment方法。
      * @return String类型返回值
      */
-    /**
-     * getColumnComment方法。
-     * @return String类型返回值
-     */
     public String getColumnComment() {
         return columnComment;
     }
 
-    /**
-     * setColumnComment方法。
-     *      * @param columnComment String类型参数
-     */
     /**
      * setColumnComment方法。
      *      * @param columnComment String类型参数
@@ -224,20 +158,11 @@ public class DataSourceTableColumnDTO {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "DataSourceTableColumnDTO{datasourceTableColumnId=" + datasourceTableColumnId + ", datasourceCode=" + datasourceCode + ", tableName=" + tableName + ", columnName=" + columnName + ", columnType=" + columnType + ", columnLength=" + columnLength + ", columnComment=" + columnComment + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -257,10 +182,6 @@ public class DataSourceTableColumnDTO {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

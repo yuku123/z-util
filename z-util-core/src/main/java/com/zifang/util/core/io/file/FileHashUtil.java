@@ -101,16 +101,6 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    /**
-     * md5方法。
-     *      * @param file File类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * md5方法。
-     *      * @param file File类型参数
-     * @return static String类型返回值
-     */
     public static String md5(File file) throws IOException, NoSuchAlgorithmException {
         return hash(file, "MD5");
     }
@@ -127,16 +117,6 @@ public final class FileHashUtil {
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
-    /**
-     * sha1方法。
-     *      * @param file File类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * sha1方法。
-     *      * @param file File类型参数
-     * @return static String类型返回值
-     */
     public static String sha1(File file) throws IOException, NoSuchAlgorithmException {
         return hash(file, "SHA-1");
     }
@@ -152,16 +132,6 @@ public final class FileHashUtil {
      * @return the SHA-256 hash as a 64-character hexadecimal string
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
-     */
-    /**
-     * sha256方法。
-     *      * @param file File类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * sha256方法。
-     *      * @param file File类型参数
-     * @return static String类型返回值
      */
     public static String sha256(File file) throws IOException, NoSuchAlgorithmException {
         return hash(file, "SHA-256");
@@ -192,18 +162,6 @@ public final class FileHashUtil {
      * @throws IOException               if the file cannot be read
      * @throws IllegalArgumentException  if the file is null or algorithm is null/empty
      * @throws NoSuchAlgorithmException  if the specified algorithm is not available
-     */
-    /**
-     * hash方法。
-     *      * @param file File类型参数
-     * @param algorithm String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * hash方法。
-     *      * @param file File类型参数
-     * @param algorithm String类型参数
-     * @return static String类型返回值
      */
     public static String hash(File file, String algorithm) throws IOException, NoSuchAlgorithmException {
         if (file == null) {
@@ -271,16 +229,6 @@ public final class FileHashUtil {
      * @return the file type identifier (e.g., "jpg", "png", "pdf") or null if unknown
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
-     */
-    /**
-     * fileType方法。
-     *      * @param file File类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * fileType方法。
-     *      * @param file File类型参数
-     * @return static String类型返回值
      */
     public static String fileType(File file) throws IOException {
         if (file == null) {
@@ -350,16 +298,6 @@ public final class FileHashUtil {
      * @return true if the file is a valid image, false otherwise
      * @throws IOException          if the file cannot be read
      * @throws IllegalArgumentException if the file is null
-     */
-    /**
-     * isImage方法。
-     *      * @param file File类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isImage方法。
-     *      * @param file File类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isImage(File file) throws IOException {
         if (file == null) {

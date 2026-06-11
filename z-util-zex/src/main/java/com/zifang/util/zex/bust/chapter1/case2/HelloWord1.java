@@ -8,9 +8,6 @@ package com.zifang.util.zex.bust.chapter1.case2;
  * @author zifang
  * @version 1.0-snapshot
  */
-/**
- * HelloWord1类。
- */
 public class HelloWord1 {
 
 
@@ -20,12 +17,6 @@ public class HelloWord1 {
      * @param a 参数a
      * @param b 参数b
      * @return 返回
-     */
-    /**
-     * f方法。
-     *      * @param a String类型参数
-     * @param b String类型参数
-     * @return Object类型返回值
      */
     public Object f(String a, String b) {
         return null;

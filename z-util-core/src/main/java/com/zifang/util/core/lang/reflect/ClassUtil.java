@@ -24,12 +24,6 @@ import static com.zifang.util.core.lang.reflect.ClassLoaderUtil.loadClass;
  *
  * @author zifang
  */
-/**
- * ClassUtil类。
- */
-/**
- * ClassUtil类。
- */
 public class ClassUtil {
 
     private static final Logger log = LoggerFactory.getLogger(ClassUtil.class);
@@ -44,60 +38,6 @@ public class ClassUtil {
 
     /**
      * 获取指定目录下所有的类名
-     */
-
-    /**
-     * 从项目文件获取某包下所有类
-     *
-     * @param filePath     文件路径
-     * @param childPackage 是否遍历子包
-     * @return 类的完整名称
-     */
-
-    /**
-     * 从jar获取某包下所有类
-     *
-     * @param jarPath jar文件路径
-     * @return 类的完整名称
-     */
-
-    /**
-     * 获取jar包中的非*.class外的全部资源文件名字
-     *
-     * @param jarPath jar文件路径
-     * @return 返回资源名称数组
-     */
-
-
-    /**
-     * 获取jar包中的非*.class外的全部的以suffix结尾的资源文件
-     *
-     * @param jarPath jar包的路径
-     * @param suffix  后缀名称
-     * @return 返回资源名称数组
-     */
-    /**
-     * 获取类加载器已经加载的类
-     * @param classLoader
-     * @return
-     * @throws NoSuchFieldException
-     * @throws IllegalAccessException
-     */
-    
-    /**
-     * 判断typesTarget 是否都是 typesFrom的子类
-     */
-    /**
-     * isAllAssignableFrom方法。
-     *      * @param typesTarget Class?[]类型参数
-     * @param typesFrom Class?[]类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isAllAssignableFrom方法。
-     *      * @param typesTarget Class?[]类型参数
-     * @param typesFrom Class?[]类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isAllAssignableFrom(Class<?>[] typesTarget, Class<?>[] typesFrom) {
         if (typesTarget.length == typesFrom.length) {
@@ -116,21 +56,10 @@ public class ClassUtil {
      *      * @param clazz Class?类型参数
      * @return static Field[]类型返回值
      */
-    /**
-     * getAccessibleFields方法。
-     *      * @param clazz Class?类型参数
-     * @return static Field[]类型返回值
-     */
     public static Field[] getAccessibleFields(Class<?> clazz) {
         return getAccessibleFields(clazz, Object.class);
     }
 
-    /**
-     * getAccessibleFields方法。
-     *      * @param clazz Class?类型参数
-     * @param limit Class?类型参数
-     * @return static Field[]类型返回值
-     */
     /**
      * getAccessibleFields方法。
      *      * @param clazz Class?类型参数
@@ -205,16 +134,6 @@ public class ClassUtil {
      * @param clazz 类
      * @return 是否为标准类
      */
-    /**
-     * isNormalClass方法。
-     *      * @param clazz Class?类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isNormalClass方法。
-     *      * @param clazz Class?类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isNormalClass(Class<?> clazz) {
         return null != clazz //
                 && !clazz.isInterface() //
@@ -232,11 +151,6 @@ public class ClassUtil {
      *      * @param clazz Class类型参数
      * @return static Method[]类型返回值
      */
-    /**
-     * getSupportedMethods方法。
-     *      * @param clazz Class类型参数
-     * @return static Method[]类型返回值
-     */
     public static Method[] getSupportedMethods(Class clazz) {
         return getSupportedMethods(clazz, Object.class);
     }
@@ -247,18 +161,6 @@ public class ClassUtil {
      * or any of its superclasses. Note that limit is usually used to eliminate
      * them methods defined by <code>java.lang.Object</code>. If limit is <code>null</code> then all
      * methods are returned.
-     */
-    /**
-     * getSupportedMethods方法。
-     *      * @param clazz Class类型参数
-     * @param limit Class类型参数
-     * @return static Method[]类型返回值
-     */
-    /**
-     * getSupportedMethods方法。
-     *      * @param clazz Class类型参数
-     * @param limit Class类型参数
-     * @return static Method[]类型返回值
      */
     public static Method[] getSupportedMethods(Class clazz, Class limit) {
         ArrayList<Method> supportedMethods = new ArrayList<>();
@@ -286,21 +188,10 @@ public class ClassUtil {
      *      * @param clazz Class类型参数
      * @return static Field[]类型返回值
      */
-    /**
-     * getSupportedFields方法。
-     *      * @param clazz Class类型参数
-     * @return static Field[]类型返回值
-     */
     public static Field[] getSupportedFields(Class clazz) {
         return getSupportedFields(clazz, Object.class);
     }
 
-    /**
-     * getSupportedFields方法。
-     *      * @param clazz Class类型参数
-     * @param limit Class类型参数
-     * @return static Field[]类型返回值
-     */
     /**
      * getSupportedFields方法。
      *      * @param clazz Class类型参数
@@ -333,18 +224,6 @@ public class ClassUtil {
     /**
      * Compares method declarations: signature and return types.
      */
-    /**
-     * compareDeclarations方法。
-     *      * @param first Method类型参数
-     * @param second Method类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * compareDeclarations方法。
-     *      * @param first Method类型参数
-     * @param second Method类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean compareDeclarations(Method first, Method second) {
         if (first.getReturnType() != second.getReturnType()) {
             return false;
@@ -355,18 +234,6 @@ public class ClassUtil {
     /**
      * Compares method signatures: names and parameters.
      */
-    /**
-     * compareSignatures方法。
-     *      * @param first Method类型参数
-     * @param second Method类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * compareSignatures方法。
-     *      * @param first Method类型参数
-     * @param second Method类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean compareSignatures(Method first, Method second) {
         if (!first.getName().equals(second.getName())) {
             return false;
@@ -376,18 +243,6 @@ public class ClassUtil {
 
     /**
      * Compares constructor signatures: names and parameters.
-     */
-    /**
-     * compareSignatures方法。
-     *      * @param first Constructor类型参数
-     * @param second Constructor类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * compareSignatures方法。
-     *      * @param first Constructor类型参数
-     * @param second Constructor类型参数
-     * @return static boolean类型返回值
      */
     public static boolean compareSignatures(Constructor first, Constructor second) {
         if (!first.getName().equals(second.getName())) {
@@ -402,30 +257,12 @@ public class ClassUtil {
      * @param second Field类型参数
      * @return static boolean类型返回值
      */
-    /**
-     * compareSignatures方法。
-     *      * @param first Field类型参数
-     * @param second Field类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean compareSignatures(Field first, Field second) {
         return first.getName().equals(second.getName());
     }
 
     /**
      * Compares classes, usually method or ctor parameters.
-     */
-    /**
-     * compareParameters方法。
-     *      * @param first Class[]类型参数
-     * @param second Class[]类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * compareParameters方法。
-     *      * @param first Class[]类型参数
-     * @param second Class[]类型参数
-     * @return static boolean类型返回值
      */
     public static boolean compareParameters(Class[] first, Class[] second) {
         if (first.length != second.length) {
@@ -444,16 +281,6 @@ public class ClassUtil {
     /**
      * Suppress access check against a reflection object. SecurityException is silently ignored.
      * Checks first if the object is already accessible.
-     */
-    /**
-     * forceAccess方法。
-     *      * @param accObject AccessibleObject类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * forceAccess方法。
-     *      * @param accObject AccessibleObject类型参数
-     * @return static void类型返回值
      */
     public static void forceAccess(AccessibleObject accObject) {
         try {
@@ -481,18 +308,6 @@ public class ClassUtil {
      *
      * @see #getComponentTypes(Type)
      */
-    /**
-     * getComponentType方法。
-     *      * @param type Type类型参数
-     * @param index int类型参数
-     * @return static Class类型返回值
-     */
-    /**
-     * getComponentType方法。
-     *      * @param type Type类型参数
-     * @param index int类型参数
-     * @return static Class类型返回值
-     */
     public static Class getComponentType(Type type, int index) {
         return getComponentType(type, null, index);
     }
@@ -506,20 +321,6 @@ public class ClassUtil {
      * <p>
      *
      * @see #getComponentTypes(Type, Class)
-     */
-    /**
-     * getComponentType方法。
-     *      * @param type Type类型参数
-     * @param implClass Class类型参数
-     * @param index int类型参数
-     * @return static Class类型返回值
-     */
-    /**
-     * getComponentType方法。
-     *      * @param type Type类型参数
-     * @param implClass Class类型参数
-     * @param index int类型参数
-     * @return static Class类型返回值
      */
     public static Class getComponentType(Type type, Class implClass, int index) {
         Class[] componentTypes = getComponentTypes(type, implClass);
@@ -541,16 +342,6 @@ public class ClassUtil {
     /**
      * @see #getComponentTypes(Type, Class)
      */
-    /**
-     * getComponentTypes方法。
-     *      * @param type Type类型参数
-     * @return static Class[]类型返回值
-     */
-    /**
-     * getComponentTypes方法。
-     *      * @param type Type类型参数
-     * @return static Class[]类型返回值
-     */
     public static Class[] getComponentTypes(Type type) {
         return getComponentTypes(type, null);
     }
@@ -566,18 +357,6 @@ public class ClassUtil {
      * <li>Bar&lt;? super MyClass&gt;</li>
      * <li>&lt;T extends MyClass&gt; T[]</li>
      * </ul>
-     */
-    /**
-     * getComponentTypes方法。
-     *      * @param type Type类型参数
-     * @param implClass Class类型参数
-     * @return static Class[]类型返回值
-     */
-    /**
-     * getComponentTypes方法。
-     *      * @param type Type类型参数
-     * @param implClass Class类型参数
-     * @return static Class[]类型返回值
      */
     public static Class[] getComponentTypes(Type type, Class implClass) {
         if (type instanceof Class) {
@@ -618,16 +397,6 @@ public class ClassUtil {
      *
      * @see #getComponentTypes(Type)
      */
-    /**
-     * getGenericSupertypes方法。
-     *      * @param type Class类型参数
-     * @return static Class[]类型返回值
-     */
-    /**
-     * getGenericSupertypes方法。
-     *      * @param type Class类型参数
-     * @return static Class[]类型返回值
-     */
     public static Class[] getGenericSupertypes(Class type) {
         return getComponentTypes(type.getGenericSuperclass());
     }
@@ -636,18 +405,6 @@ public class ClassUtil {
      * Shortcut for <code>getComponentType(type.getGenericSuperclass())</code>.
      *
      * @see #getComponentType(Type, int)
-     */
-    /**
-     * getGenericSupertype方法。
-     *      * @param type Class类型参数
-     * @param index int类型参数
-     * @return static Class类型返回值
-     */
-    /**
-     * getGenericSupertype方法。
-     *      * @param type Class类型参数
-     * @param index int类型参数
-     * @return static Class类型返回值
      */
     public static Class getGenericSupertype(Class type, int index) {
         return getComponentType(type.getGenericSuperclass(), index);
@@ -662,16 +419,6 @@ public class ClassUtil {
      * @return the closest class representing the given <code>type</code>
      * @see #getRawType(Type, Class)
      */
-    /**
-     * getRawType方法。
-     *      * @param type Type类型参数
-     * @return static Class类型返回值
-     */
-    /**
-     * getRawType方法。
-     *      * @param type Type类型参数
-     * @return static Class类型返回值
-     */
     public static Class getRawType(Type type) {
         return getRawType(type, null);
     }
@@ -681,18 +428,6 @@ public class ClassUtil {
      * and it makes difference.
      *
      * @see #resolveVariable(TypeVariable, Class)
-     */
-    /**
-     * getRawType方法。
-     *      * @param type Type类型参数
-     * @param implClass Class类型参数
-     * @return static Class<?>类型返回值
-     */
-    /**
-     * getRawType方法。
-     *      * @param type Type类型参数
-     * @param implClass Class类型参数
-     * @return static Class<?>类型返回值
      */
     public static Class<?> getRawType(Type type, Class implClass) {
         if (type instanceof Class) {
@@ -743,18 +478,6 @@ public class ClassUtil {
 
     /**
      * Resolves <code>TypeVariable</code> with given implementation class.
-     */
-    /**
-     * resolveVariable方法。
-     *      * @param variable TypeVariable类型参数
-     * @param implClass Class类型参数
-     * @return static Type类型返回值
-     */
-    /**
-     * resolveVariable方法。
-     *      * @param variable TypeVariable类型参数
-     * @param implClass Class类型参数
-     * @return static Type类型返回值
      */
     public static Type resolveVariable(TypeVariable variable, Class implClass) {
         Class rawType = getRawType(implClass, null);
@@ -817,16 +540,6 @@ public class ClassUtil {
      * <li><code>java.lang.reflect.WildcardType</code> - wildcard type (<code>List&lt;? extends Number&gt;</code>, <code>"? extends Number</code> - wildcard type)</li>
      * <li><code>java.lang.reflect.GenericArrayType</code> - type for generic array (e.g. <code>T[]</code>, <code>T</code> - array type)</li>
      * </ul>
-     */
-    /**
-     * typeToString方法。
-     *      * @param type Type类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * typeToString方法。
-     *      * @param type Type类型参数
-     * @return static String类型返回值
      */
     public static String typeToString(Type type) {
         StringBuilder sb = new StringBuilder();
@@ -906,18 +619,6 @@ public class ClassUtil {
      * Reads annotation value. Returns <code>null</code> on error
      * (e.g. when value name not found).
      */
-    /**
-     * readAnnotationValue方法。
-     *      * @param annotation Annotation类型参数
-     * @param name String类型参数
-     * @return static Object类型返回值
-     */
-    /**
-     * readAnnotationValue方法。
-     *      * @param annotation Annotation类型参数
-     * @param name String类型参数
-     * @return static Object类型返回值
-     */
     public static Object readAnnotationValue(Annotation annotation, String name) {
         try {
             Method method = annotation.annotationType().getDeclaredMethod(name);
@@ -930,11 +631,6 @@ public class ClassUtil {
     // ---------------------------------------------------------------- caller
 
     private static class ReflectUtilSecurityManager extends SecurityManager {
-    /**
-     * getCallerClass方法。
-     *      * @param callStackDepth int类型参数
-     * @return Class类型返回值
-     */
     /**
      * getCallerClass方法。
      *      * @param callStackDepth int类型参数
@@ -970,16 +666,6 @@ public class ClassUtil {
      * Note that original <code>Reflection.getCallerClass</code> is way faster
      * then any emulation.
      */
-    /**
-     * getCallerClass方法。
-     *      * @param framesToSkip int类型参数
-     * @return static Class类型返回值
-     */
-    /**
-     * getCallerClass方法。
-     *      * @param framesToSkip int类型参数
-     * @return static Class类型返回值
-     */
     public static Class getCallerClass(int framesToSkip) {
         if (SECURITY_MANAGER != null) {
             return SECURITY_MANAGER.getCallerClass(framesToSkip);
@@ -1005,16 +691,6 @@ public class ClassUtil {
     /**
      * Returns <code>enum</code> class or <code>null</code> if class is not an enum.
      */
-    /**
-     * findEnum方法。
-     *      * @param target Class类型参数
-     * @return static Class类型返回值
-     */
-    /**
-     * findEnum方法。
-     *      * @param target Class类型参数
-     * @return static Class类型返回值
-     */
     public static Class findEnum(Class target) {
         if (target.isPrimitive()) {
             return null;
@@ -1037,18 +713,6 @@ public class ClassUtil {
      * Returns the class of the immediate subclass of the given parent class for
      * the given object instance; or null if such immediate subclass cannot be
      * uniquely identified for the given object instance.
-     */
-    /**
-     * childClassOf方法。
-     *      * @param parentClass Class?类型参数
-     * @param instance Object类型参数
-     * @return static Class<?>类型返回值
-     */
-    /**
-     * childClassOf方法。
-     *      * @param parentClass Class?类型参数
-     * @param instance Object类型参数
-     * @return static Class<?>类型返回值
      */
     public static Class<?> childClassOf(Class<?> parentClass, Object instance) {
 
@@ -1078,16 +742,6 @@ public class ClassUtil {
     /**
      * Returns the jar file from which the given class is loaded; or null
      * if no such jar file can be located.
-     */
-    /**
-     * jarFileOf方法。
-     *      * @param klass Class?类型参数
-     * @return static JarFile类型返回值
-     */
-    /**
-     * jarFileOf方法。
-     *      * @param klass Class?类型参数
-     * @return static JarFile类型返回值
      */
     public static JarFile jarFileOf(Class<?> klass) throws UnsupportedEncodingException {
         URL url = klass.getResource(
@@ -1123,16 +777,6 @@ public class ClassUtil {
      * Resolves class file name from class name by replacing dot's with '/' separator
      * and adding class extension at the end. If array, component type is returned.
      */
-    /**
-     * convertClassNameToFileName方法。
-     *      * @param clazz Class类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * convertClassNameToFileName方法。
-     *      * @param clazz Class类型参数
-     * @return static String类型返回值
-     */
     public static String convertClassNameToFileName(Class clazz) {
         if (clazz.isArray()) {
             clazz = clazz.getComponentType();
@@ -1143,32 +787,12 @@ public class ClassUtil {
     /**
      * Resolves class file name from class name by replacing dot's with '/' separator.
      */
-    /**
-     * convertClassNameToFileName方法。
-     *      * @param className String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * convertClassNameToFileName方法。
-     *      * @param className String类型参数
-     * @return static String类型返回值
-     */
     public static String convertClassNameToFileName(String className) {
         return className.replace('.', '/') + ".class";
     }
 
     /**
      * 得到类的短名
-     */
-    /**
-     * getShortClassName方法。
-     *      * @param clazz Class类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getShortClassName方法。
-     *      * @param clazz Class类型参数
-     * @return static String类型返回值
      */
     public static String getShortClassName(Class clazz) {
         return getShortClassName(clazz, 1);
@@ -1245,12 +869,6 @@ public class ClassUtil {
      * @param childPackage boolean类型参数
      * @return static List<String>类型返回值
      */
-    /**
-     * getClassNameByFile方法。
-     *      * @param filePath String类型参数
-     * @param childPackage boolean类型参数
-     * @return static List<String>类型返回值
-     */
     public static List<String> getClassNameByFile(String filePath, boolean childPackage) {
         List<String> myClassName = new ArrayList<>();
         List<File> files = new ArrayList<>();
@@ -1267,11 +885,6 @@ public class ClassUtil {
     }
 
 
-    /**
-     * getClassNameByJar方法。
-     *      * @param jarPath String类型参数
-     * @return static List<String>类型返回值
-     */
     /**
      * getClassNameByJar方法。
      *      * @param jarPath String类型参数
@@ -1336,11 +949,6 @@ public class ClassUtil {
      *      * @param className String类型参数
      * @return static String[]类型返回值
      */
-    /**
-     * getSuperClassChian方法。
-     *      * @param className String类型参数
-     * @return static String[]类型返回值
-     */
     public static String[] getSuperClassChian(String className) {
         Class classz = loadClass(className);
         List<String> list = new ArrayList<>();
@@ -1357,16 +965,6 @@ public class ClassUtil {
 
     /**
      * 获取资源文件
-     */
-    /**
-     * getFile方法。
-     *      * @param resourceLocation String类型参数
-     * @return static File类型返回值
-     */
-    /**
-     * getFile方法。
-     *      * @param resourceLocation String类型参数
-     * @return static File类型返回值
      */
     public static File getFile(String resourceLocation) throws FileNotFoundException {
         Validator.notNull(resourceLocation, "Resource location must not be null");
@@ -1394,21 +992,10 @@ public class ClassUtil {
      *      * @param resourceUrl URL类型参数
      * @return static File类型返回值
      */
-    /**
-     * getFile方法。
-     *      * @param resourceUrl URL类型参数
-     * @return static File类型返回值
-     */
     public static File getFile(URL resourceUrl) throws FileNotFoundException {
         return getFile(resourceUrl, "URL");
     }
 
-    /**
-     * getFile方法。
-     *      * @param resourceUrl URL类型参数
-     * @param description String类型参数
-     * @return static File类型返回值
-     */
     /**
      * getFile方法。
      *      * @param resourceUrl URL类型参数
@@ -1433,20 +1020,10 @@ public class ClassUtil {
      *      * @param url URL类型参数
      * @return static URI类型返回值
      */
-    /**
-     * toURI方法。
-     *      * @param url URL类型参数
-     * @return static URI类型返回值
-     */
     public static URI toURI(URL url) throws URISyntaxException {
         return toURI(url.toString());
     }
 
-    /**
-     * toURI方法。
-     *      * @param location String类型参数
-     * @return static URI类型返回值
-     */
     /**
      * toURI方法。
      *      * @param location String类型参数

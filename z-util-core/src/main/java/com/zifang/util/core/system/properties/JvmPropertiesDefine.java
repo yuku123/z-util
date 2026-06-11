@@ -7,18 +7,8 @@ import java.util.Map;
 /**
  * @author zifang
  */
-/**
- * JvmPropertiesDefine类。
- */
-/**
- * JvmPropertiesDefine类。
- */
 public class JvmPropertiesDefine {
 
-    /**
-     * LinkedHashMap<>方法。
-     * @return static Map<String, String> defineMap = new类型返回值
-     */
     /**
      * LinkedHashMap<>方法。
      * @return static Map<String, String> defineMap = new类型返回值

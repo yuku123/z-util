@@ -13,12 +13,6 @@ import java.util.List;
  * LocalVariableTable_attribute用于描述方法局部变量的信息。
  * 包括变量名、类型、作用域范围等。
  */
-/**
- * LocalVariableTable类。
- */
-/**
- * LocalVariableTable类。
- */
 public class LocalVariableTable extends AbstractAttribute {
     private U2 localVariableTableLength;//局部变量槽的数量
     private List<LocalVariableInfo> localVariableTable = new ArrayList<>();//局部变量表的详细信息
@@ -29,20 +23,11 @@ public class LocalVariableTable extends AbstractAttribute {
      *      * @param attributeNameIndex U2类型参数
      * @param attributeLength U4类型参数
      */
-    /**
-     * LocalVariableTable方法。
-     *      * @param attributeNameIndex U2类型参数
-     * @param attributeLength U4类型参数
-     */
     public LocalVariableTable(U2 attributeNameIndex, U4 attributeLength) {
         super(attributeNameIndex, attributeLength);
     }
 
     @Override
-    /**
-     * read方法。
-     *      * @param inputStream InputStream类型参数
-     */
     /**
      * read方法。
      *      * @param inputStream InputStream类型参数
@@ -61,9 +46,6 @@ public class LocalVariableTable extends AbstractAttribute {
 /**
  * LocalVariableInfo类。
  */
-/**
- * LocalVariableInfo类。
- */
     public class LocalVariableInfo {
         private U2 startPc;//开始行号
         private U2 length;//偏移量   startPc+length 就是这个局部变量的作用范围
@@ -72,14 +54,6 @@ public class LocalVariableTable extends AbstractAttribute {
         private U2 index;//位于第几个变量槽
 
 
-    /**
-     * LocalVariableInfo方法。
-     *      * @param startPc U2类型参数
-     * @param length U2类型参数
-     * @param nameIndex U2类型参数
-     * @param descriptorIndex U2类型参数
-     * @param index U2类型参数
-     */
     /**
      * LocalVariableInfo方法。
      *      * @param startPc U2类型参数
@@ -100,19 +74,11 @@ public class LocalVariableTable extends AbstractAttribute {
      * getStartPc方法。
      * @return U2类型返回值
      */
-    /**
-     * getStartPc方法。
-     * @return U2类型返回值
-     */
         public U2 getStartPc() {
 
             return startPc;
         }
 
-    /**
-     * setStartPc方法。
-     *      * @param startPc U2类型参数
-     */
     /**
      * setStartPc方法。
      *      * @param startPc U2类型参数
@@ -125,18 +91,10 @@ public class LocalVariableTable extends AbstractAttribute {
      * getLength方法。
      * @return U2类型返回值
      */
-    /**
-     * getLength方法。
-     * @return U2类型返回值
-     */
         public U2 getLength() {
             return length;
         }
 
-    /**
-     * setLength方法。
-     *      * @param length U2类型参数
-     */
     /**
      * setLength方法。
      *      * @param length U2类型参数
@@ -149,18 +107,10 @@ public class LocalVariableTable extends AbstractAttribute {
      * getNameIndex方法。
      * @return U2类型返回值
      */
-    /**
-     * getNameIndex方法。
-     * @return U2类型返回值
-     */
         public U2 getNameIndex() {
             return nameIndex;
         }
 
-    /**
-     * setNameIndex方法。
-     *      * @param nameIndex U2类型参数
-     */
     /**
      * setNameIndex方法。
      *      * @param nameIndex U2类型参数
@@ -173,18 +123,10 @@ public class LocalVariableTable extends AbstractAttribute {
      * getDescriptorIndex方法。
      * @return U2类型返回值
      */
-    /**
-     * getDescriptorIndex方法。
-     * @return U2类型返回值
-     */
         public U2 getDescriptorIndex() {
             return descriptorIndex;
         }
 
-    /**
-     * setDescriptorIndex方法。
-     *      * @param descriptorIndex U2类型参数
-     */
     /**
      * setDescriptorIndex方法。
      *      * @param descriptorIndex U2类型参数
@@ -197,18 +139,10 @@ public class LocalVariableTable extends AbstractAttribute {
      * getIndex方法。
      * @return U2类型返回值
      */
-    /**
-     * getIndex方法。
-     * @return U2类型返回值
-     */
         public U2 getIndex() {
             return index;
         }
 
-    /**
-     * setIndex方法。
-     *      * @param index U2类型参数
-     */
     /**
      * setIndex方法。
      *      * @param index U2类型参数
@@ -222,18 +156,10 @@ public class LocalVariableTable extends AbstractAttribute {
      * getLocalVariableTableLength方法。
      * @return U2类型返回值
      */
-    /**
-     * getLocalVariableTableLength方法。
-     * @return U2类型返回值
-     */
     public U2 getLocalVariableTableLength() {
         return localVariableTableLength;
     }
 
-    /**
-     * getLocalVariableTable方法。
-     * @return List<LocalVariableInfo>类型返回值
-     */
     /**
      * getLocalVariableTable方法。
      * @return List<LocalVariableInfo>类型返回值

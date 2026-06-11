@@ -13,19 +13,8 @@ import java.util.*;
  * @description: map util
  * @version: JDK 1.8
  */
-/**
- * MapUtil类。
- */
-/**
- * MapUtil类。
- */
 public class MapUtil {
 
-    /**
-     * <<方法。
-     *      * @param 2 Integer.SIZE类型参数
-     * @return static final int MAX_POWER_OF_TWO = 1类型返回值
-     */
     /**
      * <<方法。
      *      * @param 2 Integer.SIZE类型参数
@@ -38,18 +27,6 @@ public class MapUtil {
      *
      * @param props 要合并的Properties对象
      * @param map   目标Map对象
-     */
-    /**
-     * mergePropertiesIntoMap方法。
-     *      * @param props Properties类型参数
-     * @param map MapK,类型参数
-     * @return static <K, V> void类型返回值
-     */
-    /**
-     * mergePropertiesIntoMap方法。
-     *      * @param props Properties类型参数
-     * @param map MapK,类型参数
-     * @return static <K, V> void类型返回值
      */
     public static <K, V> void mergePropertiesIntoMap(Properties props, Map<K, V> map) {
         if (props != null) {
@@ -71,16 +48,6 @@ public class MapUtil {
      * @param expectedSize 预期的键值对数量
      * @return 新的HashMap实例
      */
-    /**
-     * newHashMap方法。
-     *      * @param expectedSize int类型参数
-     * @return static <K, V> HashMap<K, V>类型返回值
-     */
-    /**
-     * newHashMap方法。
-     *      * @param expectedSize int类型参数
-     * @return static <K, V> HashMap<K, V>类型返回值
-     */
     public static <K, V> HashMap<K, V> newHashMap(int expectedSize) {
         return new HashMap<>(capacity(expectedSize));
     }
@@ -89,14 +56,6 @@ public class MapUtil {
      * 创建一个默认大小的HashMap（初始容量为16）
      *
      * @return 新的HashMap实例
-     */
-    /**
-     * newHashMap方法。
-     * @return static <K, V> HashMap<K, V>类型返回值
-     */
-    /**
-     * newHashMap方法。
-     * @return static <K, V> HashMap<K, V>类型返回值
      */
     public static <K, V> HashMap<K, V> newHashMap() {
         return newHashMap(16);
@@ -109,16 +68,6 @@ public class MapUtil {
      * @param expectedSize 预期的键值对数量
      * @return 新的LinkedHashMap实例
      */
-    /**
-     * newLinkedHashMap方法。
-     *      * @param expectedSize int类型参数
-     * @return static <K, V> LinkedHashMap<K, V>类型返回值
-     */
-    /**
-     * newLinkedHashMap方法。
-     *      * @param expectedSize int类型参数
-     * @return static <K, V> LinkedHashMap<K, V>类型返回值
-     */
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize) {
         return new LinkedHashMap<>(capacity(expectedSize));
     }
@@ -128,16 +77,6 @@ public class MapUtil {
      *
      * @param expectedSize 预期的键值对数量
      * @return 计算后的初始容量
-     */
-    /**
-     * capacity方法。
-     *      * @param expectedSize int类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * capacity方法。
-     *      * @param expectedSize int类型参数
-     * @return static int类型返回值
      */
     protected static int capacity(int expectedSize) {
         if (expectedSize < 3) {
@@ -166,16 +105,6 @@ public class MapUtil {
      * @param map 要检查的Map对象
      * @return 如果Map为null或为空返回true，否则返回false
      */
-    /**
-     * isEmpty方法。
-     *      * @param map MapK,类型参数
-     * @return static <K, V> boolean类型返回值
-     */
-    /**
-     * isEmpty方法。
-     *      * @param map MapK,类型参数
-     * @return static <K, V> boolean类型返回值
-     */
     public static <K, V> boolean isEmpty(Map<K, V> map) {
         return (map == null || map.isEmpty());
     }
@@ -185,16 +114,6 @@ public class MapUtil {
      *
      * @param map 要检查的Map对象
      * @return 如果Map不为null且不为空返回true，否则返回false
-     */
-    /**
-     * isNotEmpty方法。
-     *      * @param map MapK,类型参数
-     * @return static <K, V> boolean类型返回值
-     */
-    /**
-     * isNotEmpty方法。
-     *      * @param map MapK,类型参数
-     * @return static <K, V> boolean类型返回值
      */
     public static <K, V> boolean isNotEmpty(Map<K, V> map) {
         return !isEmpty(map);
@@ -206,18 +125,6 @@ public class MapUtil {
      * @param map Map对象
      * @param key 键
      * @return 如果Map为空返回null，否则返回对应的值
-     */
-    /**
-     * parseValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> V类型返回值
-     */
-    /**
-     * parseValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> V类型返回值
      */
     public static <K, V> V parseValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
@@ -233,18 +140,6 @@ public class MapUtil {
      * @param key 键
      * @return 如果Map为空返回null，否则返回对应的String值
      */
-    /**
-     * parseStringValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> String类型返回值
-     */
-    /**
-     * parseStringValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> String类型返回值
-     */
     public static <K, V> String parseStringValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -258,18 +153,6 @@ public class MapUtil {
      * @param map Map对象
      * @param key 键
      * @return 如果Map为空返回null，否则返回对应的Byte值
-     */
-    /**
-     * parseByteValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> Byte类型返回值
-     */
-    /**
-     * parseByteValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> Byte类型返回值
      */
     public static <K, V> Byte parseByteValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
@@ -285,18 +168,6 @@ public class MapUtil {
      * @param key 键
      * @return 如果Map为空返回null，否则返回对应的Short值
      */
-    /**
-     * parseShortValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> Short类型返回值
-     */
-    /**
-     * parseShortValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> Short类型返回值
-     */
     public static <K, V> Short parseShortValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -310,18 +181,6 @@ public class MapUtil {
      * @param map Map对象
      * @param key 键
      * @return 如果Map为空返回null，否则返回对应的Integer值
-     */
-    /**
-     * parseIntegerValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> Integer类型返回值
-     */
-    /**
-     * parseIntegerValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> Integer类型返回值
      */
     public static <K, V> Integer parseIntegerValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
@@ -338,18 +197,6 @@ public class MapUtil {
      * @param key 键
      * @return 如果Map为空返回null，否则返回对应的Long值
      */
-    /**
-     * parseLongValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> Long类型返回值
-     */
-    /**
-     * parseLongValue方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @return static <K, V> Long类型返回值
-     */
     public static <K, V> Long parseLongValue(Map<K, V> map, K key) {
         if (isEmpty(map)) {
             return null;
@@ -365,20 +212,6 @@ public class MapUtil {
      * @param defaultValue 默认值
      * @return 如果Map非空且包含key则返回对应的值，否则返回默认值
      */
-    /**
-     * parseValueOrDefault方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @param defaultValue V类型参数
-     * @return static <K, V> V类型返回值
-     */
-    /**
-     * parseValueOrDefault方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
-     * @param defaultValue V类型参数
-     * @return static <K, V> V类型返回值
-     */
     public static <K, V> V parseValueOrDefault(Map<K, V> map, K key, V defaultValue) {
         if (isEmpty(map)) {
             return defaultValue;
@@ -392,16 +225,6 @@ public class MapUtil {
      *
      * @param properties Properties对象
      * @return 转换后的Map，如果properties为null则返回空Map
-     */
-    /**
-     * fromProperties方法。
-     *      * @param properties Properties类型参数
-     * @return static Map<String, String>类型返回值
-     */
-    /**
-     * fromProperties方法。
-     *      * @param properties Properties类型参数
-     * @return static Map<String, String>类型返回值
      */
     public static Map<String, String> fromProperties(Properties properties) {
         if (null == properties) {
@@ -426,20 +249,6 @@ public class MapUtil {
      * @param replace 替换后的字符串
      * @return 键被替换后的新Map
      */
-    /**
-     * replaceKey方法。
-     *      * @param map MapString,类型参数
-     * @param search String类型参数
-     * @param replace String类型参数
-     * @return static <T> Map<String, T>类型返回值
-     */
-    /**
-     * replaceKey方法。
-     *      * @param map MapString,类型参数
-     * @param search String类型参数
-     * @param replace String类型参数
-     * @return static <T> Map<String, T>类型返回值
-     */
     public static <T> Map<String, T> replaceKey(Map<String, T> map, String search, String replace) {
         Map<String, T> newMap = MapUtil.newHashMap(map.size());
         map.forEach((key, value) -> {
@@ -459,16 +268,6 @@ public class MapUtil {
      *
      * @param sourceMap 原Map对象
      * @return 剔除null值后的Map
-     */
-    /**
-     * trimValue方法。
-     *      * @param sourceMap MapString,类型参数
-     * @return static <T> Map<String, T>类型返回值
-     */
-    /**
-     * trimValue方法。
-     *      * @param sourceMap MapString,类型参数
-     * @return static <T> Map<String, T>类型返回值
      */
     public static <T> Map<String, T> trimValue(Map<String, T> sourceMap) {
         if (isEmpty(sourceMap)) {

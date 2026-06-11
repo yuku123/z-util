@@ -25,12 +25,6 @@ import java.util.Properties;
  *
  * @author zifang
  */
-/**
- * SendMailUtil类。
- */
-/**
- * SendMailUtil类。
- */
 public class SendMailUtil {
 
     private SendMailUtil() {
@@ -39,38 +33,12 @@ public class SendMailUtil {
     /**
      * 使用配置发送邮件
      */
-    /**
-     * send方法。
-     *      * @param config MailConfig类型参数
-     * @param mail Mail类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * send方法。
-     *      * @param config MailConfig类型参数
-     * @param mail Mail类型参数
-     * @return static void类型返回值
-     */
     public static void send(MailConfig config, Mail mail) {
         send(config, mail, null);
     }
 
     /**
      * 使用配置发送邮件（带回调）
-     */
-    /**
-     * send方法。
-     *      * @param config MailConfig类型参数
-     * @param mail Mail类型参数
-     * @param callback SendCallback类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * send方法。
-     *      * @param config MailConfig类型参数
-     * @param mail Mail类型参数
-     * @param callback SendCallback类型参数
-     * @return static void类型返回值
      */
     public static void send(MailConfig config, Mail mail, SendCallback callback) {
         mail.validate();
@@ -101,22 +69,6 @@ public class SendMailUtil {
     /**
      * 发送简单文本邮件
      */
-    /**
-     * send方法。
-     *      * @param config MailConfig类型参数
-     * @param to String类型参数
-     * @param subject String类型参数
-     * @param content String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * send方法。
-     *      * @param config MailConfig类型参数
-     * @param to String类型参数
-     * @param subject String类型参数
-     * @param content String类型参数
-     * @return static void类型返回值
-     */
     public static void send(MailConfig config, String to, String subject, String content) {
         Mail mail = Mail.create()
                 .to(to)
@@ -128,22 +80,6 @@ public class SendMailUtil {
     /**
      * 发送HTML邮件
      */
-    /**
-     * sendHtml方法。
-     *      * @param config MailConfig类型参数
-     * @param to String类型参数
-     * @param subject String类型参数
-     * @param htmlContent String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * sendHtml方法。
-     *      * @param config MailConfig类型参数
-     * @param to String类型参数
-     * @param subject String类型参数
-     * @param htmlContent String类型参数
-     * @return static void类型返回值
-     */
     public static void sendHtml(MailConfig config, String to, String subject, String htmlContent) {
         Mail mail = Mail.create()
                 .to(to)
@@ -154,24 +90,6 @@ public class SendMailUtil {
 
     /**
      * 发送带附件的邮件
-     */
-    /**
-     * sendWithAttachment方法。
-     *      * @param config MailConfig类型参数
-     * @param to String类型参数
-     * @param subject String类型参数
-     * @param content String类型参数
-     * @param attachments File...类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * sendWithAttachment方法。
-     *      * @param config MailConfig类型参数
-     * @param to String类型参数
-     * @param subject String类型参数
-     * @param content String类型参数
-     * @param attachments File...类型参数
-     * @return static void类型返回值
      */
     public static void sendWithAttachment(MailConfig config, String to, String subject, String content, File... attachments) {
         Mail mail = Mail.create()
@@ -260,12 +178,6 @@ public class SendMailUtil {
     /**
      * 发送回调接口
      */
-/**
- * SendCallback接口。
- */
-/**
- * SendCallback接口。
- */
     public interface SendCallback {
         void onSuccess(Mail mail);
         void onError(Mail mail, Exception e);

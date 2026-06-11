@@ -15,12 +15,6 @@ import java.util.Random;
  * Provides an iterable over batches of data with configurable batch size,
  * shuffling, and drop-last option for incomplete batches.
  */
-/**
- * DataLoader类。
- */
-/**
- * DataLoader类。
- */
 public class DataLoader implements Iterable<DataLoader.Batch> {
 
     private final Dataset dataset;
@@ -36,20 +30,6 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
      * @param batchSize  Number of samples per batch
      * @param shuffle    Whether to shuffle data before each epoch
      * @param dropLast   Whether to drop the last incomplete batch
-     */
-    /**
-     * DataLoader方法。
-     *      * @param dataset Dataset类型参数
-     * @param batchSize int类型参数
-     * @param shuffle boolean类型参数
-     * @param dropLast boolean类型参数
-     */
-    /**
-     * DataLoader方法。
-     *      * @param dataset Dataset类型参数
-     * @param batchSize int类型参数
-     * @param shuffle boolean类型参数
-     * @param dropLast boolean类型参数
      */
     public DataLoader(Dataset dataset, int batchSize, boolean shuffle, boolean dropLast) {
         if (batchSize <= 0) {
@@ -69,16 +49,6 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
      * @param dataset   Source dataset
      * @param batchSize Number of samples per batch
      */
-    /**
-     * DataLoader方法。
-     *      * @param dataset Dataset类型参数
-     * @param batchSize int类型参数
-     */
-    /**
-     * DataLoader方法。
-     *      * @param dataset Dataset类型参数
-     * @param batchSize int类型参数
-     */
     public DataLoader(Dataset dataset, int batchSize) {
         this(dataset, batchSize, false, false);
     }
@@ -87,14 +57,6 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
      * Get the number of batches per epoch.
      *
      * @return Number of batches
-     */
-    /**
-     * getNumBatches方法。
-     * @return int类型返回值
-     */
-    /**
-     * getNumBatches方法。
-     * @return int类型返回值
      */
     public int getNumBatches() {
         int nSamples = dataset.size();
@@ -110,23 +72,11 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
      *
      * @return Number of samples
      */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
     public int size() {
         return dataset.size();
     }
 
     @Override
-    /**
-     * iterator方法。
-     * @return Iterator<Batch>类型返回值
-     */
     /**
      * iterator方法。
      * @return Iterator<Batch>类型返回值
@@ -147,20 +97,11 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
      *      * @param features NdArray类型参数
      * @param labels NdArray类型参数
      */
-    /**
-     * Batch方法。
-     *      * @param features NdArray类型参数
-     * @param labels NdArray类型参数
-     */
         public Batch(NdArray features, NdArray labels) {
             this.features = features;
             this.labels = labels;
         }
 
-    /**
-     * getFeatures方法。
-     * @return NdArray类型返回值
-     */
     /**
      * getFeatures方法。
      * @return NdArray类型返回值
@@ -173,18 +114,10 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
      * getLabels方法。
      * @return NdArray类型返回值
      */
-    /**
-     * getLabels方法。
-     * @return NdArray类型返回值
-     */
         public NdArray getLabels() {
             return labels;
         }
 
-    /**
-     * getSize方法。
-     * @return int类型返回值
-     */
     /**
      * getSize方法。
      * @return int类型返回值
@@ -227,10 +160,6 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
      * hasNext方法。
      * @return boolean类型返回值
      */
-    /**
-     * hasNext方法。
-     * @return boolean类型返回值
-     */
         public boolean hasNext() {
             int nSamples = dataset.size();
             int maxIndex = dropLast
@@ -241,10 +170,6 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
         }
 
         @Override
-    /**
-     * next方法。
-     * @return Batch类型返回值
-     */
     /**
      * next方法。
      * @return Batch类型返回值

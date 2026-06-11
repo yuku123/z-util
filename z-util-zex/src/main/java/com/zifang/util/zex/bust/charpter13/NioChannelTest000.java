@@ -13,9 +13,6 @@ import java.net.Socket;
 /**
  * @author zifang
  */
-/**
- * NioChannelTest000类。
- */
 public class NioChannelTest000 {
 
     public static String host = "127.0.0.1";

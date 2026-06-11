@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
-/**
- * NoVisibility2类。
- */
 public class NoVisibility2 {
 
     private static int n1 = 0;

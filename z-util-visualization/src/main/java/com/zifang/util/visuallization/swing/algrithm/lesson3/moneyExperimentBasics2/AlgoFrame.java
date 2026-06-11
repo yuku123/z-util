@@ -7,12 +7,6 @@ import java.awt.*;
  * 金钱实验可视化框架（增强版）
  * 支持正负财富的显示，蓝色表示正值，红色表示负值
  */
-/**
- * AlgoFrame类。
- */
-/**
- * AlgoFrame类。
- */
 public class AlgoFrame extends JFrame {
 
     private int canvasWidth;
@@ -23,12 +17,6 @@ public class AlgoFrame extends JFrame {
      * @param title 窗口标题
      * @param canvasWidth 画布宽度
      * @param canvasHeight 画布高度
-     */
-    /**
-     * AlgoFrame方法。
-     *      * @param title String类型参数
-     * @param canvasWidth int类型参数
-     * @param canvasHeight int类型参数
      */
     public AlgoFrame(String title, int canvasWidth, int canvasHeight) {
 
@@ -51,10 +39,6 @@ public class AlgoFrame extends JFrame {
      * 创建可视化框架（默认尺寸1024x768）
      * @param title 窗口标题
      */
-    /**
-     * AlgoFrame方法。
-     *      * @param title String类型参数
-     */
     public AlgoFrame(String title) {
 
         this(title, 1024, 768);
@@ -64,10 +48,6 @@ public class AlgoFrame extends JFrame {
      * 获取画布宽度
      * @return 画布宽度
      */
-    /**
-     * getCanvasWidth方法。
-     * @return int类型返回值
-     */
     public int getCanvasWidth() {
         return canvasWidth;
     }
@@ -75,10 +55,6 @@ public class AlgoFrame extends JFrame {
     /**
      * 获取画布高度
      * @return 画布高度
-     */
-    /**
-     * getCanvasHeight方法。
-     * @return int类型返回值
      */
     public int getCanvasHeight() {
         return canvasHeight;
@@ -89,10 +65,6 @@ public class AlgoFrame extends JFrame {
     /**
      * 渲染财富数据
      * @param money 财富数组
-     */
-    /**
-     * render方法。
-     *      * @param money int[]类型参数
      */
     public void render(int[] money) {
         this.money = money;

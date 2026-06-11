@@ -8,12 +8,6 @@ import java.util.function.Predicate;
  * @param <R> r
  * @author zifang
  */
-/**
- * ILeafFetch接口。
- */
-/**
- * ILeafFetch接口。
- */
 public interface ILeafFetch<T, R> {
 
     /**

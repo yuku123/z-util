@@ -7,23 +7,10 @@ import java.lang.reflect.Method;
  * 简单切面类，不做任何操作<br>
  * 可以继承此类实现自己需要的方法即可
  */
-/**
- * SimpleAspect类。
- */
-/**
- * SimpleAspect类。
- */
 public class SimpleAspect implements Aspect, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Override
-    /**
-     * before方法。
-     *      * @param target Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @return boolean类型返回值
-     */
     /**
      * before方法。
      *      * @param target Object类型参数
@@ -40,20 +27,6 @@ public class SimpleAspect implements Aspect, Serializable {
     /**
      * 目标方法执行后的操作
      */
-    /**
-     * after方法。
-     *      * @param target Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @return boolean类型返回值
-     */
-    /**
-     * after方法。
-     *      * @param target Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @return boolean类型返回值
-     */
     public boolean after(Object target, Method method, Object[] args) {
         //继承此类后实现此方法
         return after(target, method, args, null);
@@ -68,28 +41,12 @@ public class SimpleAspect implements Aspect, Serializable {
      * @param returnVal Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * after方法。
-     *      * @param target Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @param returnVal Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean after(Object target, Method method, Object[] args, Object returnVal) {
         //继承此类后实现此方法
         return true;
     }
 
     @Override
-    /**
-     * afterException方法。
-     *      * @param target Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @param e Throwable类型参数
-     * @return boolean类型返回值
-     */
     /**
      * afterException方法。
      *      * @param target Object类型参数

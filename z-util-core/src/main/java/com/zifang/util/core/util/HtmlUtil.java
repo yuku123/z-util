@@ -9,12 +9,6 @@ import java.util.regex.Pattern;
  * <p>
  * 提供HTML标签转义、XSS过滤等功能
  */
-/**
- * HtmlUtil类。
- */
-/**
- * HtmlUtil类。
- */
 public class HtmlUtil {
 
     private static final String EMPTY = "";
@@ -25,18 +19,6 @@ public class HtmlUtil {
      * @param str      需要处理的字符串
      * @param encoding 编码方式
      * @return 编码后的字符串
-     */
-    /**
-     * escape方法。
-     *      * @param str String类型参数
-     * @param encoding String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * escape方法。
-     *      * @param str String类型参数
-     * @param encoding String类型参数
-     * @return static String类型返回值
      */
     public static String escape(String str, String encoding) throws UnsupportedEncodingException {
         if (str == null || str.isEmpty()) {
@@ -56,18 +38,6 @@ public class HtmlUtil {
      * @param str      需要处理的字符串
      * @param encoding 解码方式
      * @return 解码后的字符串
-     */
-    /**
-     * unescape方法。
-     *      * @param str String类型参数
-     * @param encoding String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * unescape方法。
-     *      * @param str String类型参数
-     * @param encoding String类型参数
-     * @return static String类型返回值
      */
     public static String unescape(String str, String encoding) {
         if (str == null || str.isEmpty()) {
@@ -103,16 +73,6 @@ public class HtmlUtil {
      * @param content 需要转义的内容
      * @return 转义后的字符串
      */
-    /**
-     * unhtml方法。
-     *      * @param content String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * unhtml方法。
-     *      * @param content String类型参数
-     * @return static String类型返回值
-     */
     public static String unhtml(String content) {
         if (content == null || content.isEmpty()) {
             return EMPTY;
@@ -132,16 +92,6 @@ public class HtmlUtil {
      * @param content 转义后的内容
      * @return 原始字符串
      */
-    /**
-     * html方法。
-     *      * @param content String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * html方法。
-     *      * @param content String类型参数
-     * @return static String类型返回值
-     */
     public static String html(String content) {
         if (content == null || content.isEmpty()) {
             return EMPTY;
@@ -160,16 +110,6 @@ public class HtmlUtil {
      *
      * @param value 需要过滤的值
      * @return 过滤后的字符串
-     */
-    /**
-     * replaceXSS方法。
-     *      * @param value String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * replaceXSS方法。
-     *      * @param value String类型参数
-     * @return static String类型返回值
      */
     public static String replaceXSS(String value) {
         if (value == null) {
@@ -237,16 +177,6 @@ public class HtmlUtil {
      *
      * @param value 需要过滤的值
      * @return 过滤后的字符串
-     */
-    /**
-     * filter方法。
-     *      * @param value String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * filter方法。
-     *      * @param value String类型参数
-     * @return static String类型返回值
      */
     public static String filter(String value) {
         if (value == null) {

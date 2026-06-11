@@ -10,20 +10,10 @@ import java.util.List;
  * <p>
  * 存储ClassFile中完整的常量池数据，包括常量池大小和常量项列表。
  */
-/**
- * ConstantPoolInfo类。
- */
-/**
- * ConstantPoolInfo类。
- */
 public class ConstantPoolInfo {
     private U2 poolSize;
     private List<AbstractConstantPool> poolList;
 
-    /**
-     * ConstantPoolInfo方法。
-     *      * @param poolSize short类型参数
-     */
     /**
      * ConstantPoolInfo方法。
      *      * @param poolSize short类型参数
@@ -37,18 +27,10 @@ public class ConstantPoolInfo {
      * getPoolSize方法。
      * @return U2类型返回值
      */
-    /**
-     * getPoolSize方法。
-     * @return U2类型返回值
-     */
     public U2 getPoolSize() {
         return poolSize;
     }
 
-    /**
-     * setPoolSize方法。
-     *      * @param poolSize U2类型参数
-     */
     /**
      * setPoolSize方法。
      *      * @param poolSize U2类型参数
@@ -61,18 +43,10 @@ public class ConstantPoolInfo {
      * getPoolList方法。
      * @return List<AbstractConstantPool>类型返回值
      */
-    /**
-     * getPoolList方法。
-     * @return List<AbstractConstantPool>类型返回值
-     */
     public List<AbstractConstantPool> getPoolList() {
         return poolList;
     }
 
-    /**
-     * setPoolList方法。
-     *      * @param poolList ListAbstractConstantPool类型参数
-     */
     /**
      * setPoolList方法。
      *      * @param poolList ListAbstractConstantPool类型参数
@@ -82,10 +56,6 @@ public class ConstantPoolInfo {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

@@ -37,9 +37,6 @@ package com.zifang.util.core.schedule;
 /**
  * RunnableJob接口。
  */
-/**
- * RunnableJob接口。
- */
 public interface RunnableJob {
 
     /**

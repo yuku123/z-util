@@ -37,9 +37,6 @@ import java.util.Collection;
  * @author zifang
  * @version 1.0
  */
-/**
- * Multiset_Study类。
- */
 public class Multiset_Study {
     /**
      * 允许重复，但是不保证顺序.

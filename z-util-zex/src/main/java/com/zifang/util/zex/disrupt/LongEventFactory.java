@@ -11,9 +11,6 @@ import com.lmax.disruptor.EventFactory;
  * @author zifang
  * @version 1.0
  */
-/**
- * LongEventFactory类。
- */
 public class LongEventFactory implements EventFactory<LongEvent> {
 
     /**

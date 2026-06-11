@@ -10,11 +10,5 @@ package com.zifang.util.source.generator.diff;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * MethodDiffer类。
- */
-/**
- * MethodDiffer类。
- */
 public class MethodDiffer {
 }

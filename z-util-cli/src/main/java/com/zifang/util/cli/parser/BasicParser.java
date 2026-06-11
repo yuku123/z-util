@@ -11,27 +11,14 @@ import com.zifang.util.cli.model.Options;
 /**
  * BasicParser类。
  */
-/**
- * BasicParser类。
- */
 public class BasicParser extends Parser {
 
-    /**
-     * BasicParser方法。
-     */
     /**
      * BasicParser方法。
      */
     public BasicParser() {}
 
     @Override
-    /**
-     * flatten方法。
-     *      * @param options final类型参数
-     * @param arguments final类型参数
-     * @param stopAtNonOption final类型参数
-     * @return String[]类型返回值
-     */
     /**
      * flatten方法。
      *      * @param options final类型参数

@@ -19,12 +19,6 @@ public final class MatrixToImageConfig {
     /**
      * 创建默认配置，使用黑色作为点上颜色，白色作为点外颜色。
      */
-    /**
-     * MatrixToImageConfig方法。
-     */
-    /**
-     * MatrixToImageConfig方法。
-     */
     public MatrixToImageConfig() {
         this(BLACK, WHITE);
     }
@@ -34,16 +28,6 @@ public final class MatrixToImageConfig {
      *
      * @param onColor  像素点上颜色，ARGB 格式的 int 值
      * @param offColor 像素点外颜色，ARGB 格式的 int 值
-     */
-    /**
-     * MatrixToImageConfig方法。
-     *      * @param onColor int类型参数
-     * @param offColor int类型参数
-     */
-    /**
-     * MatrixToImageConfig方法。
-     *      * @param onColor int类型参数
-     * @param offColor int类型参数
      */
     public MatrixToImageConfig(int onColor, int offColor) {
         this.onColor = onColor;
@@ -55,14 +39,6 @@ public final class MatrixToImageConfig {
      *
      * @return ARGB 格式的颜色值
      */
-    /**
-     * getPixelOnColor方法。
-     * @return int类型返回值
-     */
-    /**
-     * getPixelOnColor方法。
-     * @return int类型返回值
-     */
     public int getPixelOnColor() {
         return onColor;
     }
@@ -71,14 +47,6 @@ public final class MatrixToImageConfig {
      * 获取像素点外颜色。
      *
      * @return ARGB 格式的颜色值
-     */
-    /**
-     * getPixelOffColor方法。
-     * @return int类型返回值
-     */
-    /**
-     * getPixelOffColor方法。
-     * @return int类型返回值
      */
     public int getPixelOffColor() {
         return offColor;

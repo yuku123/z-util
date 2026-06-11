@@ -13,9 +13,6 @@ import java.nio.ByteBuffer;
  * @author zifang
  * @version 1.0
  */
-/**
- * LongEventProducer类。
- */
 public class LongEventProducer {
 
     /**
@@ -28,10 +25,6 @@ public class LongEventProducer {
      *
      * @param ringBuffer 环形缓冲区
      */
-    /**
-     * LongEventProducer方法。
-     *      * @param ringBuffer RingBufferLongEvent类型参数
-     */
     public LongEventProducer(RingBuffer<LongEvent> ringBuffer) {
         this.ringBuffer = ringBuffer;
     }
@@ -42,10 +35,6 @@ public class LongEventProducer {
      * 将数据装载到ringBuffer中，只有发布后的数据才会真正被消费者看见。
      *
      * @param bb 字节缓冲区，包含要设置的数据
-     */
-    /**
-     * onData方法。
-     *      * @param bb ByteBuffer类型参数
      */
     public void onData(ByteBuffer bb) {
         long sequence = ringBuffer.next(); // 获取下一个可用的序列号

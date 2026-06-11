@@ -6,12 +6,6 @@ package com.zifang.util.core.lang.primitive;
  * @description: byte util
  * @version: JDK 1.8
  */
-/**
- * ByteUtil类。
- */
-/**
- * ByteUtil类。
- */
 public class ByteUtil {
 
     /**
@@ -19,16 +13,6 @@ public class ByteUtil {
      *
      * @param number 短整型数值
      * @return 2字节数组
-     */
-    /**
-     * shortToByte方法。
-     *      * @param number short类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * shortToByte方法。
-     *      * @param number short类型参数
-     * @return static byte[]类型返回值
      */
     public static byte[] shortToByte(short number) {
         int temp = number;
@@ -46,16 +30,6 @@ public class ByteUtil {
      * @param b 2字节数组
      * @return 短整型数值
      */
-    /**
-     * byteToShort方法。
-     *      * @param b byte[]类型参数
-     * @return static short类型返回值
-     */
-    /**
-     * byteToShort方法。
-     *      * @param b byte[]类型参数
-     * @return static short类型返回值
-     */
     public static short byteToShort(byte[] b) {
         short s0 = (short) (b[0] & 0xff);
         short s1 = (short) (b[1] & 0xff);
@@ -68,16 +42,6 @@ public class ByteUtil {
      *
      * @param i 整型数值
      * @return 4字节数组
-     */
-    /**
-     * intToByte方法。
-     *      * @param i int类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * intToByte方法。
-     *      * @param i int类型参数
-     * @return static byte[]类型返回值
      */
     public static byte[] intToByte(int i) {
         byte[] bt = new byte[4];
@@ -94,16 +58,6 @@ public class ByteUtil {
      * @param bytes 4字节数组
      * @return 整型数值
      */
-    /**
-     * bytesToInt方法。
-     *      * @param bytes byte[]类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * bytesToInt方法。
-     *      * @param bytes byte[]类型参数
-     * @return static int类型返回值
-     */
     public static int bytesToInt(byte[] bytes) {
         int num = bytes[0] & 0xFF;
         num |= ((bytes[1] << 8) & 0xFF00);
@@ -117,16 +71,6 @@ public class ByteUtil {
      *
      * @param arr 整型数组
      * @return 字节数组
-     */
-    /**
-     * intToByte方法。
-     *      * @param arr int[]类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * intToByte方法。
-     *      * @param arr int[]类型参数
-     * @return static byte[]类型返回值
      */
     public static byte[] intToByte(int[] arr) {
         byte[] bt = new byte[arr.length * 4];
@@ -143,16 +87,6 @@ public class ByteUtil {
      * @param number 长整型数值
      * @return 8字节数组
      */
-    /**
-     * longToByte方法。
-     *      * @param number long类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * longToByte方法。
-     *      * @param number long类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] longToByte(long number) {
         long temp = number;
         byte[] b = new byte[8];
@@ -168,16 +102,6 @@ public class ByteUtil {
      *
      * @param b 8字节数组
      * @return 长整型数值
-     */
-    /**
-     * byteToLong方法。
-     *      * @param b byte[]类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * byteToLong方法。
-     *      * @param b byte[]类型参数
-     * @return static long类型返回值
      */
     public static long byteToLong(byte[] b) {
         long s0 = b[0] & 0xff;
@@ -206,18 +130,6 @@ public class ByteUtil {
      * @param split  分隔字符（通常为 '%'）
      * @return 编码后的字节数组
      */
-    /**
-     * encodeBytes方法。
-     *      * @param source byte[]类型参数
-     * @param split char类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * encodeBytes方法。
-     *      * @param source byte[]类型参数
-     * @param split char类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] encodeBytes(byte[] source, char split) {
         java.io.ByteArrayOutputStream bos = new java.io.ByteArrayOutputStream(source.length);
         for (byte b : source) {
@@ -239,18 +151,6 @@ public class ByteUtil {
      * @time: 2021-11-22 13:21
      * @params: [a, b] request
      * @return: byte[] response
-     */
-    /**
-     * merge方法。
-     *      * @param origin byte[]类型参数
-     * @param extra byte[]...类型参数
-     * @return static byte[]类型返回值
-     */
-    /**
-     * merge方法。
-     *      * @param origin byte[]类型参数
-     * @param extra byte[]...类型参数
-     * @return static byte[]类型返回值
      */
     public static byte[] merge(byte[] origin, byte[]... extra) {
         if (null == origin) {
@@ -286,12 +186,6 @@ public class ByteUtil {
      * @param length int类型参数
      * @return static byte[]类型返回值
      */
-    /**
-     * rightPaddingZero方法。
-     *      * @param data byte[]类型参数
-     * @param length int类型参数
-     * @return static byte[]类型返回值
-     */
     public static byte[] rightPaddingZero(byte[] data, int length) {
         if (length == 0) {
             throw new RuntimeException("Length don't allow is zero");
@@ -306,11 +200,6 @@ public class ByteUtil {
     }
 
 
-    /**
-     * bytesToHexString方法。
-     *      * @param src byte[]类型参数
-     * @return static String类型返回值
-     */
     /**
      * bytesToHexString方法。
      *      * @param src byte[]类型参数
@@ -333,11 +222,6 @@ public class ByteUtil {
     }
 
 
-    /**
-     * hexStringToBytes方法。
-     *      * @param hexString String类型参数
-     * @return static byte[]类型返回值
-     */
     /**
      * hexStringToBytes方法。
      *      * @param hexString String类型参数
@@ -367,11 +251,6 @@ public class ByteUtil {
      *      * @param object Object类型参数
      * @return static Byte类型返回值
      */
-    /**
-     * parseByte方法。
-     *      * @param object Object类型参数
-     * @return static Byte类型返回值
-     */
     public static Byte parseByte(Object object) {
         if (null == object) {
             return null;
@@ -379,12 +258,6 @@ public class ByteUtil {
         return Byte.parseByte(object.toString());
     }
 
-    /**
-     * parseByteOrDefault方法。
-     *      * @param object Object类型参数
-     * @param defaultValue byte类型参数
-     * @return static Byte类型返回值
-     */
     /**
      * parseByteOrDefault方法。
      *      * @param object Object类型参数

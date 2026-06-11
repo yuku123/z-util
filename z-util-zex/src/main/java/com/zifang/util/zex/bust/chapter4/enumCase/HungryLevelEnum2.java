@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter4.enumCase;
  * @author zifang
  * @version 1.0
  */
-/**
- * HungryLevelEnum2枚举。
- */
 public enum HungryLevelEnum2 {
     HUNGRY_LEVEL_1("一成饱"),
     HUNGRY_LEVEL_2("五成饱"),

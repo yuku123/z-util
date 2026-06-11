@@ -8,12 +8,6 @@ import java.util.regex.Pattern;
  *
  * @author zifang
  */
-/**
- * Mat类。
- */
-/**
- * Mat类。
- */
 public class Mat {
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
@@ -37,18 +31,6 @@ public class Mat {
      * @param regex 正则表达式
      * @return 是否匹配
      */
-    /**
-     * isMatch方法。
-     *      * @param input String类型参数
-     * @param regex String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isMatch方法。
-     *      * @param input String类型参数
-     * @param regex String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isMatch(String input, String regex) {
         if (input == null || regex == null) {
             return false;
@@ -63,18 +45,6 @@ public class Mat {
      * @param pattern 正则模式
      * @return 是否匹配
      */
-    /**
-     * isMatch方法。
-     *      * @param input String类型参数
-     * @param pattern Pattern类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isMatch方法。
-     *      * @param input String类型参数
-     * @param pattern Pattern类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isMatch(String input, Pattern pattern) {
         if (input == null || pattern == null) {
             return false;
@@ -88,18 +58,6 @@ public class Mat {
      * @param input 待提取字符串
      * @param regex 正则表达式
      * @return 匹配的子串，未匹配返回 null
-     */
-    /**
-     * getFirst方法。
-     *      * @param input String类型参数
-     * @param regex String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getFirst方法。
-     *      * @param input String类型参数
-     * @param regex String类型参数
-     * @return static String类型返回值
      */
     public static String getFirst(String input, String regex) {
         if (input == null || regex == null) {
@@ -120,18 +78,6 @@ public class Mat {
      * @param regex 正则表达式
      * @return 匹配的子串数组
      */
-    /**
-     * getAll方法。
-     *      * @param input String类型参数
-     * @param regex String类型参数
-     * @return static String[]类型返回值
-     */
-    /**
-     * getAll方法。
-     *      * @param input String类型参数
-     * @param regex String类型参数
-     * @return static String[]类型返回值
-     */
     public static String[] getAll(String input, String regex) {
         if (input == null || regex == null) {
             return new String[0];
@@ -148,32 +94,12 @@ public class Mat {
     /**
      * 验证邮箱格式。
      */
-    /**
-     * isEmail方法。
-     *      * @param input String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isEmail方法。
-     *      * @param input String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isEmail(String input) {
         return isMatch(input, EMAIL_PATTERN);
     }
 
     /**
      * 验证IP地址格式。
-     */
-    /**
-     * isIp方法。
-     *      * @param input String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isIp方法。
-     *      * @param input String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isIp(String input) {
         return isMatch(input, IP_PATTERN);
@@ -182,32 +108,12 @@ public class Mat {
     /**
      * 验证手机号格式。
      */
-    /**
-     * isMobile方法。
-     *      * @param input String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isMobile方法。
-     *      * @param input String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isMobile(String input) {
         return isMatch(input, MOBILE_PATTERN);
     }
 
     /**
      * 验证身份证号格式。
-     */
-    /**
-     * isIdCard方法。
-     *      * @param input String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isIdCard方法。
-     *      * @param input String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isIdCard(String input) {
         return isMatch(input, ID_CARD_PATTERN);
@@ -220,20 +126,6 @@ public class Mat {
      * @param regex      正则表达式
      * @param replacement 替换内容
      * @return 替换后的字符串
-     */
-    /**
-     * replaceAll方法。
-     *      * @param input String类型参数
-     * @param regex String类型参数
-     * @param replacement String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * replaceAll方法。
-     *      * @param input String类型参数
-     * @param regex String类型参数
-     * @param replacement String类型参数
-     * @return static String类型返回值
      */
     public static String replaceAll(String input, String regex, String replacement) {
         if (input == null || regex == null) {

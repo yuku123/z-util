@@ -11,12 +11,6 @@ import java.util.regex.Pattern;
  * cURL 解析工具类
  * 提供便捷的解析方法
  */
-/**
- * CurlParserUtils类。
- */
-/**
- * CurlParserUtils类。
- */
 public class CurlParserUtils {
 
     // 匹配多个连续 cURL 命令的正则（以 curl 开头，直到下一个 curl 或结束）
@@ -31,16 +25,6 @@ public class CurlParserUtils {
      * @param curlCommand cURL 命令文本
      * @return HttpRequestDefinition
      */
-    /**
-     * parse方法。
-     *      * @param curlCommand String类型参数
-     * @return static HttpRequestDefinition类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param curlCommand String类型参数
-     * @return static HttpRequestDefinition类型返回值
-     */
     public static HttpRequestDefinition parse(String curlCommand) {
         return CurlParser.parse(curlCommand);
     }
@@ -50,16 +34,6 @@ public class CurlParserUtils {
      *
      * @param curlCommands 多个 cURL 命令文本
      * @return HttpRequestDefinition 列表
-     */
-    /**
-     * parseMultiple方法。
-     *      * @param curlCommands String类型参数
-     * @return static List<HttpRequestDefinition>类型返回值
-     */
-    /**
-     * parseMultiple方法。
-     *      * @param curlCommands String类型参数
-     * @return static List<HttpRequestDefinition>类型返回值
      */
     public static List<HttpRequestDefinition> parseMultiple(String curlCommands) {
         List<HttpRequestDefinition> definitions = new ArrayList<>();
@@ -100,16 +74,6 @@ public class CurlParserUtils {
      * @param definition HTTP 请求定义
      * @return cURL 命令文本
      */
-    /**
-     * toCurlCommand方法。
-     *      * @param definition HttpRequestDefinition类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * toCurlCommand方法。
-     *      * @param definition HttpRequestDefinition类型参数
-     * @return static String类型返回值
-     */
     public static String toCurlCommand(HttpRequestDefinition definition) {
         return CurlBuilder.build(definition);
     }
@@ -120,16 +84,6 @@ public class CurlParserUtils {
      * @param definition HTTP 请求定义
      * @return 格式化的 cURL 命令文本
      */
-    /**
-     * toPrettyCurlCommand方法。
-     *      * @param definition HttpRequestDefinition类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * toPrettyCurlCommand方法。
-     *      * @param definition HttpRequestDefinition类型参数
-     * @return static String类型返回值
-     */
     public static String toPrettyCurlCommand(HttpRequestDefinition definition) {
         return CurlBuilder.buildPretty(definition);
     }
@@ -139,16 +93,6 @@ public class CurlParserUtils {
      *
      * @param curlCommand cURL 命令文本
      * @return 是否有效
-     */
-    /**
-     * isValid方法。
-     *      * @param curlCommand String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isValid方法。
-     *      * @param curlCommand String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isValid(String curlCommand) {
         if (curlCommand == null || curlCommand.trim().isEmpty()) {
@@ -168,16 +112,6 @@ public class CurlParserUtils {
      *
      * @param curlCommand cURL 命令文本
      * @return URL 字符串，如果不存在返回 null
-     */
-    /**
-     * extractUrl方法。
-     *      * @param curlCommand String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * extractUrl方法。
-     *      * @param curlCommand String类型参数
-     * @return static String类型返回值
      */
     public static String extractUrl(String curlCommand) {
         if (curlCommand == null || curlCommand.trim().isEmpty()) {

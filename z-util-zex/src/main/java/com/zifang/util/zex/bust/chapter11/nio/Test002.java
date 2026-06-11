@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter11.nio;
  * @author zifang
  * @version 1.0
  */
-/**
- * Test002类。
- */
 public class Test002 {
     /**
      * main方法。

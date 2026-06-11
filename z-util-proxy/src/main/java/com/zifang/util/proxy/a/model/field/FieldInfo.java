@@ -10,12 +10,6 @@ import java.util.List;
  * <p>
  * 表示ClassFile中的字段表项，包含字段访问标志、名称索引、描述符索引和属性。
  */
-/**
- * FieldInfo类。
- */
-/**
- * FieldInfo类。
- */
 public class FieldInfo {
     private U2 accessFlags;
     private U2 nameIndex;
@@ -23,14 +17,6 @@ public class FieldInfo {
     private U2 attributesCount;
     private List<AbstractAttribute> attributes;
 
-    /**
-     * FieldInfo方法。
-     *      * @param accessFlags U2类型参数
-     * @param nameIndex U2类型参数
-     * @param descriptorIndex U2类型参数
-     * @param attributesCount U2类型参数
-     * @param attributes ListAbstractAttribute类型参数
-     */
     /**
      * FieldInfo方法。
      *      * @param accessFlags U2类型参数
@@ -52,18 +38,10 @@ public class FieldInfo {
      * getAccessFlags方法。
      * @return U2类型返回值
      */
-    /**
-     * getAccessFlags方法。
-     * @return U2类型返回值
-     */
     public U2 getAccessFlags() {
         return accessFlags;
     }
 
-    /**
-     * getNameIndex方法。
-     * @return U2类型返回值
-     */
     /**
      * getNameIndex方法。
      * @return U2类型返回值
@@ -76,18 +54,10 @@ public class FieldInfo {
      * getDescriptorIndex方法。
      * @return U2类型返回值
      */
-    /**
-     * getDescriptorIndex方法。
-     * @return U2类型返回值
-     */
     public U2 getDescriptorIndex() {
         return descriptorIndex;
     }
 
-    /**
-     * getAttributesCount方法。
-     * @return U2类型返回值
-     */
     /**
      * getAttributesCount方法。
      * @return U2类型返回值
@@ -100,19 +70,11 @@ public class FieldInfo {
      * getAttributes方法。
      * @return List<AbstractAttribute>类型返回值
      */
-    /**
-     * getAttributes方法。
-     * @return List<AbstractAttribute>类型返回值
-     */
     public List<AbstractAttribute> getAttributes() {
         return attributes;
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

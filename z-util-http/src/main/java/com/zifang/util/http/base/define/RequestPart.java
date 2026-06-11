@@ -8,11 +8,5 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * RequestPart类。
- */
-/**
- * RequestPart类。
- */
 public class RequestPart {
 }

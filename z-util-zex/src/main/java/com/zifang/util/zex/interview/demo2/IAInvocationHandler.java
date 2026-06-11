@@ -12,9 +12,6 @@ import java.lang.reflect.Method;
  * @author zifang
  * @version 1.0
  */
-/**
- * IAInvocationHandler类。
- */
 public class IAInvocationHandler implements InvocationHandler {
     private String s;
     private IAImplement iaImplement;

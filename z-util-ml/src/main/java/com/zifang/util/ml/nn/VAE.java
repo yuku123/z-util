@@ -17,12 +17,6 @@ import java.util.Random;
  * Loss: BCE(reconstruction, x) + KL(mu, logVar)
  * where KL = -0.5 * sum(1 + log(σ²) - μ² - σ²)
  */
-/**
- * VAE类。
- */
-/**
- * VAE类。
- */
 public class VAE extends Module {
     
     private Module encoder;
@@ -37,12 +31,6 @@ public class VAE extends Module {
     private NdArray savedZ;
     private NdArray savedReconstruction;
     
-    /**
-     * VAE方法。
-     *      * @param inputDim int类型参数
-     * @param latentDim int类型参数
-     * @param hiddenDims int[]类型参数
-     */
     /**
      * VAE方法。
      *      * @param inputDim int类型参数
@@ -98,11 +86,6 @@ public class VAE extends Module {
      *      * @param x NdArray类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * forward方法。
-     *      * @param x NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray forward(NdArray x) {
         NdArray encoderOutput = encoder.forward(x);
         
@@ -137,11 +120,6 @@ public class VAE extends Module {
      *      * @param gradOutput NdArray类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * backward方法。
-     *      * @param gradOutput NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray backward(NdArray gradOutput) {
         int batchSize = gradOutput.getShape().get(0);
         
@@ -156,12 +134,6 @@ public class VAE extends Module {
         return gradInput;
     }
     
-    /**
-     * sample方法。
-     *      * @param mu NdArray类型参数
-     * @param logVar NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * sample方法。
      *      * @param mu NdArray类型参数
@@ -199,23 +171,10 @@ public class VAE extends Module {
      *      * @param z NdArray类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * decode方法。
-     *      * @param z NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray decode(NdArray z) {
         return decoder.forward(z);
     }
     
-    /**
-     * computeLoss方法。
-     *      * @param x NdArray类型参数
-     * @param reconstruction NdArray类型参数
-     * @param mu NdArray类型参数
-     * @param logVar NdArray类型参数
-     * @return double类型返回值
-     */
     /**
      * computeLoss方法。
      *      * @param x NdArray类型参数
@@ -270,10 +229,6 @@ public class VAE extends Module {
      * getEncoder方法。
      * @return Module类型返回值
      */
-    /**
-     * getEncoder方法。
-     * @return Module类型返回值
-     */
     public Module getEncoder() {
         return encoder;
     }
@@ -282,18 +237,10 @@ public class VAE extends Module {
      * getDecoder方法。
      * @return Module类型返回值
      */
-    /**
-     * getDecoder方法。
-     * @return Module类型返回值
-     */
     public Module getDecoder() {
         return decoder;
     }
     
-    /**
-     * getLatentDim方法。
-     * @return int类型返回值
-     */
     /**
      * getLatentDim方法。
      * @return int类型返回值
@@ -363,9 +310,6 @@ public class VAE extends Module {
     /**
      * train方法。
      */
-    /**
-     * train方法。
-     */
     public void train() {
         super.train();
         encoder.train();
@@ -373,9 +317,6 @@ public class VAE extends Module {
     }
     
     @Override
-    /**
-     * eval方法。
-     */
     /**
      * eval方法。
      */

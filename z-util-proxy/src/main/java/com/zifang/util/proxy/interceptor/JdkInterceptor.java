@@ -11,12 +11,6 @@ import java.lang.reflect.Modifier;
 /**
  * JDK实现的动态代理切面
  */
-/**
- * JdkInterceptor类。
- */
-/**
- * JdkInterceptor类。
- */
 public class JdkInterceptor implements InvocationHandler, Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -29,16 +23,6 @@ public class JdkInterceptor implements InvocationHandler, Serializable {
      * @param target 被代理对象
      * @param aspect 切面实现
      */
-    /**
-     * JdkInterceptor方法。
-     *      * @param target Object类型参数
-     * @param aspect Aspect类型参数
-     */
-    /**
-     * JdkInterceptor方法。
-     *      * @param target Object类型参数
-     * @param aspect Aspect类型参数
-     */
     public JdkInterceptor(Object target, Aspect aspect) {
         this.target = target;
         this.aspect = aspect;
@@ -48,22 +32,11 @@ public class JdkInterceptor implements InvocationHandler, Serializable {
      * getTarget方法。
      * @return Object类型返回值
      */
-    /**
-     * getTarget方法。
-     * @return Object类型返回值
-     */
     public Object getTarget() {
         return this.target;
     }
 
     @Override
-    /**
-     * invoke方法。
-     *      * @param proxy Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @return Object类型返回值
-     */
     /**
      * invoke方法。
      *      * @param proxy Object类型参数

@@ -15,12 +15,6 @@ import java.io.File;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ScreenshotStep类。
- */
-/**
- * ScreenshotStep类。
- */
 public class ScreenshotStep implements Step {
 
     public static final String NAME = "screenshot";
@@ -28,10 +22,6 @@ public class ScreenshotStep implements Step {
     private boolean fullPage = false;
 
     @Override
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     /**
      * getName方法。
      * @return String类型返回值
@@ -46,11 +36,6 @@ public class ScreenshotStep implements Step {
      *      * @param key String类型参数
      * @param value Object类型参数
      */
-    /**
-     * setParameter方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     */
     public void setParameter(String key, Object value) {
         if ("path".equalsIgnoreCase(key) || "file".equalsIgnoreCase(key) || "filename".equalsIgnoreCase(key)) {
             this.path = String.valueOf(value);
@@ -60,11 +45,6 @@ public class ScreenshotStep implements Step {
     }
 
     @Override
-    /**
-     * execute方法。
-     *      * @param ctx PipelineContext类型参数
-     * @return StepResult类型返回值
-     */
     /**
      * execute方法。
      *      * @param ctx PipelineContext类型参数
@@ -109,11 +89,6 @@ public class ScreenshotStep implements Step {
         }
     }
 
-    /**
-     * getBrowserClient方法。
-     *      * @param ctx PipelineContext类型参数
-     * @return BrowserClient类型返回值
-     */
     /**
      * getBrowserClient方法。
      *      * @param ctx PipelineContext类型参数

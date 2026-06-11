@@ -5,11 +5,5 @@ package com.zifang.util.core.pattern.composite.net;
  *
  * @author zifang
  */
-/**
- * NetWork类。
- */
-/**
- * NetWork类。
- */
 public class NetWork {
 }

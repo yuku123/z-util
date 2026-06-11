@@ -9,11 +9,5 @@ package com.zifang.util.visuallization.robot;
  * @version 1.0
  * @since 2020-01-01
  */
-/**
- * RobotEngine类。
- */
-/**
- * RobotEngine类。
- */
 public class RobotEngine {
 }

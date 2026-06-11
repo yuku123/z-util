@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _125类。
- */
 public class _125 {
     /**
      * isNumberOrChar方法。

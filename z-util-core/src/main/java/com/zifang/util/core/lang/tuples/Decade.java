@@ -3,28 +3,9 @@ package com.zifang.util.core.lang.tuples;
 /**
  * @author zifang
  */
-/**
- * Decade类。
- */
-/**
- * Decade类。
- */
 public class Decade<A, B, C, D, E, F, G, H, I, J> extends Ennead<A, B, C, D, E, F, G, H, I> {
     protected J j;
 
-    /**
-     * Decade方法。
-     *      * @param a A类型参数
-     * @param b B类型参数
-     * @param c C类型参数
-     * @param d D类型参数
-     * @param e E类型参数
-     * @param f F类型参数
-     * @param g G类型参数
-     * @param h H类型参数
-     * @param i I类型参数
-     * @param j J类型参数
-     */
     /**
      * Decade方法。
      *      * @param a A类型参数
@@ -47,18 +28,10 @@ public class Decade<A, B, C, D, E, F, G, H, I, J> extends Ennead<A, B, C, D, E, 
      * getJ方法。
      * @return J类型返回值
      */
-    /**
-     * getJ方法。
-     * @return J类型返回值
-     */
     public J getJ() {
         return j;
     }
 
-    /**
-     * setJ方法。
-     *      * @param j J类型参数
-     */
     /**
      * setJ方法。
      *      * @param j J类型参数
@@ -68,10 +41,6 @@ public class Decade<A, B, C, D, E, F, G, H, I, J> extends Ennead<A, B, C, D, E, 
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -86,11 +55,6 @@ public class Decade<A, B, C, D, E, F, G, H, I, J> extends Ennead<A, B, C, D, E, 
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -100,10 +64,6 @@ public class Decade<A, B, C, D, E, F, G, H, I, J> extends Ennead<A, B, C, D, E, 
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

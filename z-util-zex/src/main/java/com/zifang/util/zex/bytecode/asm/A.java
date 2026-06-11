@@ -15,9 +15,6 @@ import java.io.FileOutputStream;
  * @author zifang
  * @version 1.0
  */
-/**
- * A类。
- */
 public class A {
     /**
      * main方法。

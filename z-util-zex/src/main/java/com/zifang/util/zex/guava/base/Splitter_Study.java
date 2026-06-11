@@ -43,9 +43,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0
  */
-/**
- * Splitter_Study类。
- */
 public class Splitter_Study {
     String str = ",a,,b,";
 

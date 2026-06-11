@@ -30,12 +30,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @see GatewayEvaluator
  * @see ExecutableWorkflowNode
  */
-/**
- * WorkflowRuntimeEngine类。
- */
-/**
- * WorkflowRuntimeEngine类。
- */
 public class WorkflowRuntimeEngine {
 
     private static final String STATUS_RUNNING = "RUNNING";
@@ -56,12 +50,6 @@ public class WorkflowRuntimeEngine {
     /**
      * 构造函数，初始化运行时引擎。
      */
-    /**
-     * WorkflowRuntimeEngine方法。
-     */
-    /**
-     * WorkflowRuntimeEngine方法。
-     */
     public WorkflowRuntimeEngine() {
         this.nodeMap = new HashMap<>();
         this.variables = new HashMap<>();
@@ -76,14 +64,6 @@ public class WorkflowRuntimeEngine {
      *
      * @param configuration 工作流配置
      * @throws IllegalArgumentException 如果配置为空或节点列表为空
-     */
-    /**
-     * initialize方法。
-     *      * @param configuration WorkflowConfiguration类型参数
-     */
-    /**
-     * initialize方法。
-     *      * @param configuration WorkflowConfiguration类型参数
      */
     public void initialize(WorkflowConfiguration configuration) {
         this.configuration = configuration;
@@ -197,14 +177,6 @@ public class WorkflowRuntimeEngine {
      * @return 执行结果
      * @see #resume(String)
      */
-    /**
-     * start方法。
-     * @return ExecutionResult类型返回值
-     */
-    /**
-     * start方法。
-     * @return ExecutionResult类型返回值
-     */
     public ExecutionResult start() {
         List<ExecutableWorkflowNode> startNodes = findStartNodes();
         if (startNodes.isEmpty()) {
@@ -231,16 +203,6 @@ public class WorkflowRuntimeEngine {
      * @param nodeId 要恢复执行的节点ID
      * @return 执行结果
      * @throws IllegalStateException 如果节点不存在
-     */
-    /**
-     * resume方法。
-     *      * @param nodeId String类型参数
-     * @return ExecutionResult类型返回值
-     */
-    /**
-     * resume方法。
-     *      * @param nodeId String类型参数
-     * @return ExecutionResult类型返回值
      */
     public ExecutionResult resume(String nodeId) {
         ExecutableWorkflowNode node = nodeMap.get(nodeId);
@@ -408,14 +370,6 @@ public class WorkflowRuntimeEngine {
      *
      * @return 当前执行结果
      */
-    /**
-     * getCurrentResult方法。
-     * @return ExecutionResult类型返回值
-     */
-    /**
-     * getCurrentResult方法。
-     * @return ExecutionResult类型返回值
-     */
     public ExecutionResult getCurrentResult() {
         return currentResult;
     }
@@ -424,14 +378,6 @@ public class WorkflowRuntimeEngine {
      * 获取待处理的用户任务节点列表。
      *
      * @return 待处理用户任务节点ID列表
-     */
-    /**
-     * getPendingUserTasks方法。
-     * @return List<String>类型返回值
-     */
-    /**
-     * getPendingUserTasks方法。
-     * @return List<String>类型返回值
      */
     public List<String> getPendingUserTasks() {
         return currentResult.getPendingUserTaskNodes();
@@ -442,16 +388,6 @@ public class WorkflowRuntimeEngine {
      *
      * @param key   变量键名
      * @param value 变量值
-     */
-    /**
-     * setVariable方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     */
-    /**
-     * setVariable方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
      */
     public void setVariable(String key, Object value) {
         variables.put(key, value);
@@ -466,16 +402,6 @@ public class WorkflowRuntimeEngine {
      * @param key 变量键名
      * @return 变量值，如果不存在则返回null
      */
-    /**
-     * getVariable方法。
-     *      * @param key String类型参数
-     * @return Object类型返回值
-     */
-    /**
-     * getVariable方法。
-     *      * @param key String类型参数
-     * @return Object类型返回值
-     */
     public Object getVariable(String key) {
         return variables.get(key);
     }
@@ -484,14 +410,6 @@ public class WorkflowRuntimeEngine {
      * 获取所有运行时变量。
      *
      * @return 变量映射表的副本
-     */
-    /**
-     * getVariables方法。
-     * @return Map<String, Object>类型返回值
-     */
-    /**
-     * getVariables方法。
-     * @return Map<String, Object>类型返回值
      */
     public Map<String, Object> getVariables() {
         return new HashMap<>(variables);
@@ -637,14 +555,6 @@ public class WorkflowRuntimeEngine {
      *
      * @return 工作流配置
      */
-    /**
-     * getConfiguration方法。
-     * @return WorkflowConfiguration类型返回值
-     */
-    /**
-     * getConfiguration方法。
-     * @return WorkflowConfiguration类型返回值
-     */
     public WorkflowConfiguration getConfiguration() {
         return configuration;
     }
@@ -654,14 +564,6 @@ public class WorkflowRuntimeEngine {
      *
      * @return 节点ID到可执行节点的映射
      */
-    /**
-     * getNodeMap方法。
-     * @return Map<String, ExecutableWorkflowNode>类型返回值
-     */
-    /**
-     * getNodeMap方法。
-     * @return Map<String, ExecutableWorkflowNode>类型返回值
-     */
     public Map<String, ExecutableWorkflowNode> getNodeMap() {
         return nodeMap;
     }
@@ -670,14 +572,6 @@ public class WorkflowRuntimeEngine {
      * 获取流程实例ID。
      *
      * @return 流程实例ID
-     */
-    /**
-     * getProcessId方法。
-     * @return String类型返回值
-     */
-    /**
-     * getProcessId方法。
-     * @return String类型返回值
      */
     public String getProcessId() {
         return processId;

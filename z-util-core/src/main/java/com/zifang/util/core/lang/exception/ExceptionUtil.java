@@ -6,9 +6,6 @@ import java.io.StringWriter;
 /**
  * ExceptionUtil类。
  */
-/**
- * ExceptionUtil类。
- */
 public class ExceptionUtil {
 
     /**
@@ -17,18 +14,6 @@ public class ExceptionUtil {
      * @param e           异常信息
      * @param packageName 只转换某个包下的信息
      * @return string
-     */
-    /**
-     * stackTraceToString方法。
-     *      * @param e Throwable类型参数
-     * @param packageName String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * stackTraceToString方法。
-     *      * @param e Throwable类型参数
-     * @param packageName String类型参数
-     * @return static String类型返回值
      */
     public static String stackTraceToString(Throwable e, String packageName) {
         StringWriter sw = new StringWriter();
@@ -54,16 +39,6 @@ public class ExceptionUtil {
      *
      * @param e 异常信息
      * @return string
-     */
-    /**
-     * stackTraceToString方法。
-     *      * @param e Throwable类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * stackTraceToString方法。
-     *      * @param e Throwable类型参数
-     * @return static String类型返回值
      */
     public static String stackTraceToString(Throwable e) {
         StringWriter sw = new StringWriter();

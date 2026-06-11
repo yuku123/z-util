@@ -11,12 +11,6 @@ import com.zifang.util.core.lang.tuples.Pair;
  * @param <F> 源类型
  * @param <T> 目标类型
  */
-/**
- * IConverter接口。
- */
-/**
- * IConverter接口。
- */
 public interface IConverter<F, T> {
 
     default T to(F value){

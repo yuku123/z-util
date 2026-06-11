@@ -11,12 +11,6 @@ import java.util.function.*;
  * @param <C> 上下文类型
  * @author zifang
  */
-/**
- * ChainBuilder类。
- */
-/**
- * ChainBuilder类。
- */
 public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Processor<C> {
 
     private final String name;
@@ -38,30 +32,12 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     /**
      * 创建命名的链构建器
      */
-    /**
-     * create方法。
-     *      * @param name String类型参数
-     * @return static <C extends ChainContext<?, ?>> ChainBuilder<C>类型返回值
-     */
-    /**
-     * create方法。
-     *      * @param name String类型参数
-     * @return static <C extends ChainContext<?, ?>> ChainBuilder<C>类型返回值
-     */
     public static <C extends ChainContext<?, ?>> ChainBuilder<C> create(String name) {
         return new ChainBuilder<>(name);
     }
 
     /**
      * 创建链构建器
-     */
-    /**
-     * create方法。
-     * @return static <C extends ChainContext<?, ?>> ChainBuilder<C>类型返回值
-     */
-    /**
-     * create方法。
-     * @return static <C extends ChainContext<?, ?>> ChainBuilder<C>类型返回值
      */
     public static <C extends ChainContext<?, ?>> ChainBuilder<C> create() {
         return new ChainBuilder<>("ChainBuilder-" + UUID.randomUUID().toString().substring(0, 8));
@@ -70,14 +46,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     /**
      * 开始构建子链
      */
-    /**
-     * startSubChain方法。
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * startSubChain方法。
-     * @return ChainBuilder<C>类型返回值
-     */
     public ChainBuilder<C> startSubChain() {
         chainStack.push(Chain.empty());
         return this;
@@ -85,16 +53,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
 
     /**
      * 开始构建子链并给个名字
-     */
-    /**
-     * startSubChain方法。
-     *      * @param name String类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * startSubChain方法。
-     *      * @param name String类型参数
-     * @return ChainBuilder<C>类型返回值
      */
     public ChainBuilder<C> startSubChain(String name) {
         chainStack.push(Chain.named(name));
@@ -109,10 +67,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      * endSubChain方法。
      * @return ChainBuilder<C>类型返回值
      */
-    /**
-     * endSubChain方法。
-     * @return ChainBuilder<C>类型返回值
-     */
     public ChainBuilder<C> endSubChain() {
         if (!chainStack.isEmpty()) {
             Chain<C> subChain = chainStack.pop();
@@ -123,16 +77,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
 
     /**
      * 添加处理器
-     */
-    /**
-     * add方法。
-     *      * @param processor ProcessorC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * add方法。
-     *      * @param processor ProcessorC类型参数
-     * @return ChainBuilder<C>类型返回值
      */
     public ChainBuilder<C> add(Processor<C> processor) {
         if (processor != null) {
@@ -150,11 +94,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      *      * @param processors ProcessorC...类型参数
      * @return final ChainBuilder<C>类型返回值
      */
-    /**
-     * addAll方法。
-     *      * @param processors ProcessorC...类型参数
-     * @return final ChainBuilder<C>类型返回值
-     */
     public final ChainBuilder<C> addAll(Processor<C>... processors) {
         for (Processor<C> p : processors) {
             add(p);
@@ -165,38 +104,12 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     /**
      * 添加条件处理器
      */
-    /**
-     * addWhen方法。
-     *      * @param predicate PredicateC类型参数
-     * @param processor ProcessorC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * addWhen方法。
-     *      * @param predicate PredicateC类型参数
-     * @param processor ProcessorC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
     public ChainBuilder<C> addWhen(Predicate<C> predicate, Processor<C> processor) {
         return add(Processor.when(predicate, processor));
     }
 
     /**
      * 添加过滤器
-     */
-    /**
-     * addFilter方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @param process BiFunctionC,类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * addFilter方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @param process BiFunctionC,类型参数
-     * @return ChainBuilder<C>类型返回值
      */
     public ChainBuilder<C> addFilter(
             Consumer<C> before,
@@ -208,36 +121,12 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     /**
      * 添加过滤器（只有前后置处理）
      */
-    /**
-     * addFilter方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * addFilter方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
     public ChainBuilder<C> addFilter(Consumer<C> before, Consumer<C> after) {
         return add(FilterProcessor.of(before, after));
     }
 
     /**
      * 条件分支
-     */
-    /**
-     * branch方法。
-     *      * @param condition PredicateC类型参数
-     * @param branchConsumer ConsumerBranchChainC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * branch方法。
-     *      * @param condition PredicateC类型参数
-     * @param branchConsumer ConsumerBranchChainC类型参数
-     * @return ChainBuilder<C>类型返回值
      */
     public ChainBuilder<C> branch(Predicate<C> condition, Consumer<BranchChain<C>> branchConsumer) {
         BranchChain<C> branch = new BranchChain<>(condition);
@@ -248,20 +137,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
 
     /**
      * IF-ELSE分支
-     */
-    /**
-     * ifElse方法。
-     *      * @param condition PredicateC类型参数
-     * @param trueProcessor ProcessorC类型参数
-     * @param falseProcessor ProcessorC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * ifElse方法。
-     *      * @param condition PredicateC类型参数
-     * @param trueProcessor ProcessorC类型参数
-     * @param falseProcessor ProcessorC类型参数
-     * @return ChainBuilder<C>类型返回值
      */
     public ChainBuilder<C> ifElse(Predicate<C> condition,
                                   Processor<C> trueProcessor,
@@ -276,32 +151,12 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     /**
      * 添加命名处理器
      */
-    /**
-     * addNamed方法。
-     *      * @param name String类型参数
-     * @param processor ProcessorC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * addNamed方法。
-     *      * @param name String类型参数
-     * @param processor ProcessorC类型参数
-     * @return ChainBuilder<C>类型返回值
-     */
     public ChainBuilder<C> addNamed(String name, Processor<C> processor) {
         return add(new NamedProcessor<>(name, processor));
     }
 
     /**
      * 设置处理器执行顺序的反转
-     */
-    /**
-     * reversed方法。
-     * @return ChainBuilder<C>类型返回值
-     */
-    /**
-     * reversed方法。
-     * @return ChainBuilder<C>类型返回值
      */
     public ChainBuilder<C> reversed() {
         Collections.reverse(this.processors);
@@ -311,14 +166,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     /**
      * 构建链
      */
-    /**
-     * build方法。
-     * @return Chain<C>类型返回值
-     */
-    /**
-     * build方法。
-     * @return Chain<C>类型返回值
-     */
     public Chain<C> build() {
         return this;
     }
@@ -326,10 +173,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     // Chain接口实现
 
     @Override
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     /**
      * getName方法。
      * @return String类型返回值
@@ -343,20 +186,11 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      * getProcessors方法。
      * @return List<Processor<C>>类型返回值
      */
-    /**
-     * getProcessors方法。
-     * @return List<Processor<C>>类型返回值
-     */
     public List<Processor<C>> getProcessors() {
         return Collections.unmodifiableList(processors);
     }
 
     @Override
-    /**
-     * process方法。
-     *      * @param context C类型参数
-     * @return ProcessorResult类型返回值
-     */
     /**
      * process方法。
      *      * @param context C类型参数
@@ -372,21 +206,11 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      *      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
-    /**
-     * addProcessor方法。
-     *      * @param processor ProcessorC类型参数
-     * @return Chain<C>类型返回值
-     */
     public Chain<C> addProcessor(Processor<C> processor) {
         return add(processor);
     }
 
     @Override
-    /**
-     * addFirst方法。
-     *      * @param processor ProcessorC类型参数
-     * @return Chain<C>类型返回值
-     */
     /**
      * addFirst方法。
      *      * @param processor ProcessorC类型参数
@@ -398,12 +222,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     }
 
     @Override
-    /**
-     * addAt方法。
-     *      * @param index int类型参数
-     * @param processor ProcessorC类型参数
-     * @return Chain<C>类型返回值
-     */
     /**
      * addAt方法。
      *      * @param index int类型参数
@@ -423,11 +241,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      *      * @param processor ProcessorC类型参数
      * @return Chain<C>类型返回值
      */
-    /**
-     * remove方法。
-     *      * @param processor ProcessorC类型参数
-     * @return Chain<C>类型返回值
-     */
     public Chain<C> remove(Processor<C> processor) {
         this.processors.remove(processor);
         return this;
@@ -438,21 +251,12 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      * clear方法。
      * @return Chain<C>类型返回值
      */
-    /**
-     * clear方法。
-     * @return Chain<C>类型返回值
-     */
     public Chain<C> clear() {
         this.processors.clear();
         return this;
     }
 
     @Override
-    /**
-     * prepend方法。
-     *      * @param other ChainC类型参数
-     * @return Chain<C>类型返回值
-     */
     /**
      * prepend方法。
      *      * @param other ChainC类型参数
@@ -469,11 +273,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      *      * @param other ChainC类型参数
      * @return Chain<C>类型返回值
      */
-    /**
-     * append方法。
-     *      * @param other ChainC类型参数
-     * @return Chain<C>类型返回值
-     */
     public Chain<C> append(Chain<C> other) {
         this.processors.addAll(other.getProcessors());
         return this;
@@ -482,16 +281,6 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     /**
      * 执行构建的链
      */
-    /**
-     * execute方法。
-     *      * @param context C类型参数
-     * @return ProcessorResult类型返回值
-     */
-    /**
-     * execute方法。
-     *      * @param context C类型参数
-     * @return ProcessorResult类型返回值
-     */
     public ProcessorResult execute(C context) {
         return process(context);
     }
@@ -499,25 +288,11 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     /**
      * 执行构建的链并返回结果
      */
-    /**
-     * executeWithResult方法。
-     *      * @param context C类型参数
-     * @return Chain.ChainResult<C>类型返回值
-     */
-    /**
-     * executeWithResult方法。
-     *      * @param context C类型参数
-     * @return Chain.ChainResult<C>类型返回值
-     */
     public Chain.ChainResult<C> executeWithResult(C context) {
         return Chain.of(processors.toArray(new Processor[0])).executeWithResult(context);
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -539,19 +314,10 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      * ChainBuilderRunner方法。
      *      * @param chain ChainC类型参数
      */
-    /**
-     * ChainBuilderRunner方法。
-     *      * @param chain ChainC类型参数
-     */
         public ChainBuilderRunner(Chain<C> chain) {
             this.chain = chain;
         }
 
-    /**
-     * then方法。
-     *      * @param processor ProcessorC类型参数
-     * @return Chain<C>类型返回值
-     */
     /**
      * then方法。
      *      * @param processor ProcessorC类型参数
@@ -565,19 +331,10 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
      * get方法。
      * @return Chain<C>类型返回值
      */
-    /**
-     * get方法。
-     * @return Chain<C>类型返回值
-     */
         public Chain<C> get() {
             return chain;
         }
 
-    /**
-     * execute方法。
-     *      * @param context C类型参数
-     * @return ProcessorResult类型返回值
-     */
     /**
      * execute方法。
      *      * @param context C类型参数

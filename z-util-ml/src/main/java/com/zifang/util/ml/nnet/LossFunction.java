@@ -5,12 +5,6 @@ package com.zifang.util.ml.nnet;
  * <p>
  * 定义损失函数所需的基本操作，用于评估神经网络的预测结果与真实结果的差异
  */
-/**
- * LossFunction接口。
- */
-/**
- * LossFunction接口。
- */
 public interface LossFunction {
 
     /**

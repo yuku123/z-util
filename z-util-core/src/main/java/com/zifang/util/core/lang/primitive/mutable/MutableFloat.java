@@ -7,12 +7,6 @@ package com.zifang.util.core.lang.primitive.mutable;
  * it is not treated by String.format() as a Float parameter.
  * @version: JDK 1.8
  */
-/**
- * MutableFloat类。
- */
-/**
- * MutableFloat类。
- */
 public class MutableFloat extends Number implements Comparable<MutableFloat>, Mutable<Number>,
         Cloneable {
 
@@ -32,12 +26,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
     /**
      * Constructs a new MutableFloat with the default value of zero.
      */
-    /**
-     * MutableFloat方法。
-     */
-    /**
-     * MutableFloat方法。
-     */
     public MutableFloat() {
     }
 
@@ -45,14 +33,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * Constructs a new MutableFloat with the specified value.
      *
      * @param value the initial value to store
-     */
-    /**
-     * MutableFloat方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableFloat方法。
-     *      * @param value final类型参数
      */
     public MutableFloat(final float value) {
         this.value = value;
@@ -64,14 +44,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @param value the initial value to store, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * MutableFloat方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableFloat方法。
-     *      * @param value final类型参数
-     */
     public MutableFloat(final Number value) {
         this.value = value.floatValue();
     }
@@ -81,14 +53,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *
      * @param value the string to parse, not null
      * @throws NumberFormatException if the string cannot be parsed into a float
-     */
-    /**
-     * MutableFloat方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableFloat方法。
-     *      * @param value final类型参数
      */
     public MutableFloat(final String value) {
         this.value = Float.parseFloat(value);
@@ -106,10 +70,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * getValue方法。
      * @return float类型返回值
      */
-    /**
-     * getValue方法。
-     * @return float类型返回值
-     */
     public Float getValue() {
         return this.value;
     }
@@ -118,14 +78,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * Sets the value.
      *
      * @param value the value to set
-     */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
      */
     public void setValue(final float value) {
         this.value = value;
@@ -142,10 +94,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * setValue方法。
      *      * @param value final类型参数
      */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
     public void setValue(final Number value) {
         this.value = value.floatValue();
     }
@@ -157,14 +105,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *
      * @return true if NaN
      */
-    /**
-     * isNaN方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isNaN方法。
-     * @return boolean类型返回值
-     */
     public boolean isNaN() {
         return Float.isNaN(value);
     }
@@ -173,14 +113,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * Checks whether the float value is infinite.
      *
      * @return true if infinite
-     */
-    /**
-     * isInfinite方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isInfinite方法。
-     * @return boolean类型返回值
      */
     public boolean isInfinite() {
         return Float.isInfinite(value);
@@ -191,12 +123,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
     /**
      * Increments the value.
      */
-    /**
-     * increment方法。
-     */
-    /**
-     * increment方法。
-     */
     public void increment() {
         value++;
     }
@@ -206,14 +132,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * instance immediately prior to the increment operation. This method is not thread safe.
      *
      * @return the value associated with the instance before it was incremented
-     */
-    /**
-     * getAndIncrement方法。
-     * @return float类型返回值
-     */
-    /**
-     * getAndIncrement方法。
-     * @return float类型返回值
      */
     public float getAndIncrement() {
         final float last = value;
@@ -227,14 +145,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *
      * @return the value associated with the instance after it is incremented
      */
-    /**
-     * incrementAndGet方法。
-     * @return float类型返回值
-     */
-    /**
-     * incrementAndGet方法。
-     * @return float类型返回值
-     */
     public float incrementAndGet() {
         value++;
         return value;
@@ -242,12 +152,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
 
     /**
      * Decrements the value.
-     */
-    /**
-     * decrement方法。
-     */
-    /**
-     * decrement方法。
      */
     public void decrement() {
         value--;
@@ -258,14 +162,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * instance immediately prior to the decrement operation. This method is not thread safe.
      *
      * @return the value associated with the instance before it was decremented
-     */
-    /**
-     * getAndDecrement方法。
-     * @return float类型返回值
-     */
-    /**
-     * getAndDecrement方法。
-     * @return float类型返回值
      */
     public float getAndDecrement() {
         final float last = value;
@@ -279,14 +175,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *
      * @return the value associated with the instance after it is decremented
      */
-    /**
-     * decrementAndGet方法。
-     * @return float类型返回值
-     */
-    /**
-     * decrementAndGet方法。
-     * @return float类型返回值
-     */
     public float decrementAndGet() {
         value--;
         return value;
@@ -299,14 +187,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *
      * @param operand the value to add, not null
      */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
     public void add(final float operand) {
         this.value += operand;
     }
@@ -317,14 +197,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @param operand the value to add, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
     public void add(final Number operand) {
         this.value += operand.floatValue();
     }
@@ -333,14 +205,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * Subtracts a value from the value of this instance.
      *
      * @param operand the value to subtract
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
      */
     public void subtract(final float operand) {
         this.value -= operand;
@@ -352,14 +216,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @param operand the value to subtract, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
     public void subtract(final Number operand) {
         this.value -= operand.floatValue();
     }
@@ -370,16 +226,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance after adding the operand
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return float类型返回值
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return float类型返回值
      */
     public float addAndGet(final float operand) {
         this.value += operand;
@@ -394,16 +240,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @return the value associated with this instance after adding the operand
      * @throws NullPointerException if {@code operand} is null
      */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return float类型返回值
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return float类型返回值
-     */
     public float addAndGet(final Number operand) {
         this.value += operand.floatValue();
         return value;
@@ -415,16 +251,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return float类型返回值
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return float类型返回值
      */
     public float getAndAdd(final float operand) {
         final float last = value;
@@ -439,16 +265,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
      * @throws NullPointerException if {@code operand} is null
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return float类型返回值
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return float类型返回值
      */
     public float getAndAdd(final Number operand) {
         final float last = value;
@@ -469,10 +285,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * intValue方法。
      * @return int类型返回值
      */
-    /**
-     * intValue方法。
-     * @return int类型返回值
-     */
     public int intValue() {
         return (int) value;
     }
@@ -483,10 +295,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @return the numeric value represented by this object after conversion to type long.
      */
     @Override
-    /**
-     * longValue方法。
-     * @return long类型返回值
-     */
     /**
      * longValue方法。
      * @return long类型返回值
@@ -505,10 +313,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * floatValue方法。
      * @return float类型返回值
      */
-    /**
-     * floatValue方法。
-     * @return float类型返回值
-     */
     public float floatValue() {
         return value;
     }
@@ -523,10 +327,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * doubleValue方法。
      * @return double类型返回值
      */
-    /**
-     * doubleValue方法。
-     * @return double类型返回值
-     */
     public double doubleValue() {
         return value;
     }
@@ -537,14 +337,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * Gets this mutable as an instance of Float.
      *
      * @return a Float instance containing the value from this mutable, never null
-     */
-    /**
-     * toFloat方法。
-     * @return float类型返回值
-     */
-    /**
-     * toFloat方法。
-     * @return float类型返回值
      */
     public Float toFloat() {
         return Float.valueOf(floatValue());
@@ -589,11 +381,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *      * @param obj final类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param obj final类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(final Object obj) {
         return obj instanceof MutableFloat
                 && Float.floatToIntBits(((MutableFloat) obj).value) == Float.floatToIntBits(value);
@@ -605,10 +392,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * @return a suitable hash code
      */
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值
@@ -631,11 +414,6 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      *      * @param other final类型参数
      * @return int类型返回值
      */
-    /**
-     * compareTo方法。
-     *      * @param other final类型参数
-     * @return int类型返回值
-     */
     public int compareTo(final MutableFloat other) {
         return Float.compare(this.value, other.value);
     }
@@ -652,19 +430,11 @@ public class MutableFloat extends Number implements Comparable<MutableFloat>, Mu
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return String.valueOf(value);
     }
 
     @Override
-    /**
-     * clone方法。
-     * @return MutableFloat类型返回值
-     */
     /**
      * clone方法。
      * @return MutableFloat类型返回值

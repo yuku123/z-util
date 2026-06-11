@@ -8,12 +8,6 @@ import java.util.regex.Pattern;
  *
  * @author zifang
  */
-/**
- * RegexUtil类。
- */
-/**
- * RegexUtil类。
- */
 public class RegexUtil {
 
     /**
@@ -79,29 +73,9 @@ public class RegexUtil {
     /**
      * HTML
      */
-    /**
-     * "<方法。
-     *      * @param \\S*? Object类型参数
-     * @return static final String REG_HTML =类型返回值
-     */
-    /**
-     * "<方法。
-     *      * @param \\S*? Object类型参数
-     * @return static final String REG_HTML =类型返回值
-     */
     public static final String REG_HTML = "<(\\S*?)[^>]*>.*?</\\1>|<.*? />";
     /**
      * Email
-     */
-    /**
-     * "^\\w+方法。
-     *      * @param [-+.]\\w+ Object类型参数
-     * @return static final String REG_EMAIL =类型返回值
-     */
-    /**
-     * "^\\w+方法。
-     *      * @param [-+.]\\w+ Object类型参数
-     * @return static final String REG_EMAIL =类型返回值
      */
     public static final String REG_EMAIL = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
     /**
@@ -111,16 +85,6 @@ public class RegexUtil {
     /**
      * 邮政编码
      */
-    /**
-     * "[1-9]\\d{5}方法。
-     *      * @param ?!\\d Object类型参数
-     * @return static final String REG_POSTALCODE =类型返回值
-     */
-    /**
-     * "[1-9]\\d{5}方法。
-     *      * @param ?!\\d Object类型参数
-     * @return static final String REG_POSTALCODE =类型返回值
-     */
     public static final String REG_POSTALCODE = "[1-9]\\d{5}(?!\\d)";
     /**
      * 身份证编码
@@ -129,29 +93,9 @@ public class RegexUtil {
     /**
      * URL地址
      */
-    /**
-     * "^http://方法。
-     *      * @param [w-]+. Object类型参数
-     * @return static final String REG_URL =类型返回值
-     */
-    /**
-     * "^http://方法。
-     *      * @param [w-]+. Object类型参数
-     * @return static final String REG_URL =类型返回值
-     */
     public static final String REG_URL = "^http://([w-]+.)+[w-]+(/[w-./?%&=]*)?$";
     /**
      * 移动电话
-     */
-    /**
-     * "^方法。
-     *      * @param 13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9] Object类型参数
-     * @return static final String REG_MOBILE_TELEPHONE =类型返回值
-     */
-    /**
-     * "^方法。
-     *      * @param 13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9] Object类型参数
-     * @return static final String REG_MOBILE_TELEPHONE =类型返回值
      */
     public static final String REG_MOBILE_TELEPHONE = "^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$";
     /**
@@ -160,16 +104,6 @@ public class RegexUtil {
     public static final String REG_LEGAL_ACCOUNT = "^[a-zA-Z][a-zA-Z0-9_]{4,15}$";
     /**
      * i地址
-     */
-    /**
-     * "方法。
-     *      * @param (2[0-4]\\d|25[0-5]|[01]?\\d\\d? Object类型参数
-     * @return static final String REG_IP =类型返回值
-     */
-    /**
-     * "方法。
-     *      * @param (2[0-4]\\d|25[0-5]|[01]?\\d\\d? Object类型参数
-     * @return static final String REG_IP =类型返回值
      */
     public static final String REG_IP = "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
     private static Pattern numericPattern = Pattern.compile("^[0-9\\-]+$");
@@ -182,16 +116,6 @@ public class RegexUtil {
      *
      * @param src 源字符串
      * @return 是否数字的标志
-     */
-    /**
-     * isNumeric方法。
-     *      * @param src String类型参数
-     * @return final static boolean类型返回值
-     */
-    /**
-     * isNumeric方法。
-     *      * @param src String类型参数
-     * @return final static boolean类型返回值
      */
     public final static boolean isNumeric(String src) {
         boolean return_value = false;
@@ -209,16 +133,6 @@ public class RegexUtil {
      *
      * @param src 源字符串
      * @return 是否纯字母组合的标志
-     */
-    /**
-     * isABC方法。
-     *      * @param src String类型参数
-     * @return final static boolean类型返回值
-     */
-    /**
-     * isABC方法。
-     *      * @param src String类型参数
-     * @return final static boolean类型返回值
      */
     public final static boolean isABC(String src) {
         boolean return_value = false;
@@ -238,16 +152,6 @@ public class RegexUtil {
      * @param src 源字符串
      * @return 是否数字的标志
      */
-    /**
-     * isFloatNumeric方法。
-     *      * @param src String类型参数
-     * @return final static boolean类型返回值
-     */
-    /**
-     * isFloatNumeric方法。
-     *      * @param src String类型参数
-     * @return final static boolean类型返回值
-     */
     public final static boolean isFloatNumeric(String src) {
         boolean return_value = false;
         if (src != null && src.length() > 0) {
@@ -266,18 +170,6 @@ public class RegexUtil {
      * @param reg 正则
      * @return 是否匹配
      */
-    /**
-     * isMatche方法。
-     *      * @param str String类型参数
-     * @param reg String类型参数
-     * @return final static boolean类型返回值
-     */
-    /**
-     * isMatche方法。
-     *      * @param str String类型参数
-     * @param reg String类型参数
-     * @return final static boolean类型返回值
-     */
     public final static boolean isMatche(String str, String reg) {
         Pattern pattern = Pattern.compile(reg);
         Matcher isNum = pattern.matcher(str);
@@ -290,18 +182,6 @@ public class RegexUtil {
      * @param str 需要处理的字符串
      * @param reg 正则
      * @return 出现的次数
-     */
-    /**
-     * countSubStrReg方法。
-     *      * @param str String类型参数
-     * @param reg String类型参数
-     * @return final static int类型返回值
-     */
-    /**
-     * countSubStrReg方法。
-     *      * @param str String类型参数
-     * @param reg String类型参数
-     * @return final static int类型返回值
      */
     public final static int countSubStrReg(String str, String reg) {
         Pattern p = Pattern.compile(reg);
@@ -320,16 +200,6 @@ public class RegexUtil {
      * @param email 判断的字符串
      * @return 是否是符合的邮箱
      */
-    /**
-     * isEmail方法。
-     *      * @param email String类型参数
-     * @return final static boolean类型返回值
-     */
-    /**
-     * isEmail方法。
-     *      * @param email String类型参数
-     * @return final static boolean类型返回值
-     */
     public final static boolean isEmail(String email) {
         if (email == null || email.length() < 1 || email.length() > 256) {
             return false;
@@ -345,18 +215,6 @@ public class RegexUtil {
      * @param regex
      * @return
      */
-    /**
-     * find方法。
-     *      * @param str String类型参数
-     * @param regex String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * find方法。
-     *      * @param str String类型参数
-     * @param regex String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean find(String str, String regex) {
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(str);
@@ -370,16 +228,6 @@ public class RegexUtil {
      * @param value 传入的字符串
      * @return
      */
-    /**
-     * isChinese方法。
-     *      * @param value String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isChinese方法。
-     *      * @param value String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isChinese(String value) {
         Pattern pattern = Pattern.compile("[\u0391-\uFFE5]+$");
         return pattern.matcher(value).matches();
@@ -391,16 +239,6 @@ public class RegexUtil {
      * @param value 传入的字符串
      * @return
      */
-    /**
-     * isDouble方法。
-     *      * @param value String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isDouble方法。
-     *      * @param value String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isDouble(String value) {
         Pattern pattern = Pattern.compile("^[-\\+]?\\d+\\.\\d+$");
         return pattern.matcher(value).matches();
@@ -411,16 +249,6 @@ public class RegexUtil {
      *
      * @param value 传入的字符串
      * @return
-     */
-    /**
-     * isInteger方法。
-     *      * @param value String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isInteger方法。
-     *      * @param value String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isInteger(String value) {
         Pattern pattern = Pattern.compile("^[-\\+]?[\\d]+$");
@@ -436,16 +264,6 @@ public class RegexUtil {
      * @param email email地址，格式：zhangsan@zuidaima.com，zhangsan@xxx.com.cn，xxx代表邮件服务商
      * @return 验证成功返回true，验证失败返回false
      */
-    /**
-     * checkEmail方法。
-     *      * @param email String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkEmail方法。
-     *      * @param email String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean checkEmail(String email) {
         String regex = "\\w+@\\w+\\.[a-z]+(\\.[a-z]+)?";
         return Pattern.matches(regex, email);
@@ -456,16 +274,6 @@ public class RegexUtil {
      *
      * @param idCard 居民身份证号码15位或18位，最后一位可能是数字或字母
      * @return 验证成功返回true，验证失败返回false
-     */
-    /**
-     * checkIdCard方法。
-     *      * @param idCard String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkIdCard方法。
-     *      * @param idCard String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean checkIdCard(String idCard) {
         String regex = "[1-9]\\d{13,16}[a-zA-Z0-9]{1}";
@@ -481,16 +289,6 @@ public class RegexUtil {
      *               <p>联通的号段：130、131、132、155、156（世界风专用）、185（未启用）、186（3g）</p>
      *               <p>电信的号段：133、153、180（未启用）、189</p>
      * @return 验证成功返回true，验证失败返回false
-     */
-    /**
-     * checkMobile方法。
-     *      * @param mobile String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkMobile方法。
-     *      * @param mobile String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean checkMobile(String mobile) {
         String regex = "(\\+\\d+)?1[34578]\\d{9}$";
@@ -508,16 +306,6 @@ public class RegexUtil {
      *              <p><b>电话号码：</b>这包含从 0 到 9 的一个或多个数字 </p>
      * @return 验证成功返回true，验证失败返回false
      */
-    /**
-     * checkPhone方法。
-     *      * @param phone String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkPhone方法。
-     *      * @param phone String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean checkPhone(String phone) {
         String regex = "(\\+\\d+)?(\\d{3,4}\\-?)?\\d{7,8}$";
         return Pattern.matches(regex, phone);
@@ -528,16 +316,6 @@ public class RegexUtil {
      *
      * @param digit 一位或多位0-9之间的整数
      * @return 验证成功返回true，验证失败返回false
-     */
-    /**
-     * checkDigit方法。
-     *      * @param digit String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkDigit方法。
-     *      * @param digit String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean checkDigit(String digit) {
         String regex = "\\-?[1-9]\\d+";
@@ -550,16 +328,6 @@ public class RegexUtil {
      * @param decimals 一位或多位0-9之间的浮点数，如：1.23，233.30
      * @return 验证成功返回true，验证失败返回false
      */
-    /**
-     * checkDecimals方法。
-     *      * @param decimals String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkDecimals方法。
-     *      * @param decimals String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean checkDecimals(String decimals) {
         String regex = "\\-?[1-9]\\d+(\\.\\d+)?";
         return Pattern.matches(regex, decimals);
@@ -570,16 +338,6 @@ public class RegexUtil {
      *
      * @param blankSpace 空白字符，包括：空格、\t、\n、\r、\f、\x0B
      * @return 验证成功返回true，验证失败返回false
-     */
-    /**
-     * checkBlankSpace方法。
-     *      * @param blankSpace String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkBlankSpace方法。
-     *      * @param blankSpace String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean checkBlankSpace(String blankSpace) {
         String regex = "\\s+";
@@ -592,16 +350,6 @@ public class RegexUtil {
      * @param chinese 中文字符
      * @return 验证成功返回true，验证失败返回false
      */
-    /**
-     * checkChinese方法。
-     *      * @param chinese String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkChinese方法。
-     *      * @param chinese String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean checkChinese(String chinese) {
         String regex = "^[\u4E00-\u9FA5]+$";
         return Pattern.matches(regex, chinese);
@@ -613,16 +361,6 @@ public class RegexUtil {
      * @param birthday 日期，格式：1992-09-03，或1992.09.03
      * @return 验证成功返回true，验证失败返回false
      */
-    /**
-     * checkBirthday方法。
-     *      * @param birthday String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkBirthday方法。
-     *      * @param birthday String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean checkBirthday(String birthday) {
         String regex = "[1-9]{4}([-./])\\d{1,2}\\1\\d{1,2}";
         return Pattern.matches(regex, birthday);
@@ -633,16 +371,6 @@ public class RegexUtil {
      *
      * @param url 格式：http://blog.csdn.net:80/xyang81/article/details/7705960? 或 http://www.csdn.net:80
      * @return 验证成功返回true，验证失败返回false
-     */
-    /**
-     * checkURL方法。
-     *      * @param url String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkURL方法。
-     *      * @param url String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean checkURL(String url) {
         String regex = "(https?://(w{3}\\.)?)?\\w+\\.\\w+(\\.[a-zA-Z]+)*(:\\d{1,5})?(/\\w*)*(\\??(.+=.*)?(&.+=.*)?)?";
@@ -656,16 +384,6 @@ public class RegexUtil {
      *
      * @param url
      * @return
-     */
-    /**
-     * getDomain方法。
-     *      * @param url String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getDomain方法。
-     *      * @param url String类型参数
-     * @return static String类型返回值
      */
     public static String getDomain(String url) {
         Pattern p = Pattern.compile("(?<=http://|\\.)[^.]*?\\.(com|cn|net|org|biz|info|cc|tv)", Pattern.CASE_INSENSITIVE);
@@ -682,16 +400,6 @@ public class RegexUtil {
      * @param postcode 邮政编码
      * @return 验证成功返回true，验证失败返回false
      */
-    /**
-     * checkPostcode方法。
-     *      * @param postcode String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkPostcode方法。
-     *      * @param postcode String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean checkPostcode(String postcode) {
         String regex = "[1-9]\\d{5}";
         return Pattern.matches(regex, postcode);
@@ -702,16 +410,6 @@ public class RegexUtil {
      *
      * @param ipAddress IPv4标准地址
      * @return 验证成功返回true，验证失败返回false
-     */
-    /**
-     * checkIpAddress方法。
-     *      * @param ipAddress String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * checkIpAddress方法。
-     *      * @param ipAddress String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean checkIpAddress(String ipAddress) {
         String regex = "[1-9](\\d{1,2})?\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))";
@@ -728,55 +426,18 @@ public class RegexUtil {
      *      * @param \\.\\w+ Object类型参数
      * @return static final String EMAIL =类型返回值
      */
-    /**
-     * "\\w+方法。
-     *      * @param \\.\\w+ Object类型参数
-     * @return static final String EMAIL =类型返回值
-     */
     public static final String EMAIL = "\\w+(\\.\\w+)*@\\w+(\\.\\w+)+";
     /**
      * 电话号码正则表达式= (^(\d{2,4}[-_－—]?)?\d{3,8}([-_－—]?\d{3,8})?([-_－—]?\d{1,7})?$)|(^0?1[35]\d{9}$)
-     */
-    /**
-     * "方法。
-     *      * @param ^(\\d{2 Object类型参数
-     * @param 4}[-_－—]? Object类型参数
-     * @return static final String PHONE =类型返回值
-     */
-    /**
-     * "方法。
-     *      * @param ^(\\d{2 Object类型参数
-     * @param 4}[-_－—]? Object类型参数
-     * @return static final String PHONE =类型返回值
      */
     public static final String PHONE = "(^(\\d{2,4}[-_－—]?)?\\d{3,8}([-_－—]?\\d{3,8})?([-_－—]?\\d{1,7})?$)|(^0?1[35]\\d{9}$)";
     /**
      * 手机号码正则表达式=^(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$
      */
-    /**
-     * "^方法。
-     *      * @param 13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9] Object类型参数
-     * @return static final String MOBILE =类型返回值
-     */
-    /**
-     * "^方法。
-     *      * @param 13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9] Object类型参数
-     * @return static final String MOBILE =类型返回值
-     */
     public static final String MOBILE = "^(13[0-9]|14[0-9]|15[0-9]|17[0-9]|18[0-9])\\d{8}$";
 
     /**
      * Integer正则表达式 ^-?(([1-9]\d*$)|0)
-     */
-    /**
-     * "^-?方法。
-     *      * @param ([1-9]\\d*$ Object类型参数
-     * @return static final String INTEGER =类型返回值
-     */
-    /**
-     * "^-?方法。
-     *      * @param ([1-9]\\d*$ Object类型参数
-     * @return static final String INTEGER =类型返回值
      */
     public static final String INTEGER = "^-?(([1-9]\\d*$)|0)";
     /**
@@ -790,16 +451,6 @@ public class RegexUtil {
     /**
      * Double正则表达式 ^-?([1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0)$
      */
-    /**
-     * "^-?方法。
-     *      * @param [1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0 Object类型参数
-     * @return static final String DOUBLE =类型返回值
-     */
-    /**
-     * "^-?方法。
-     *      * @param [1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0 Object类型参数
-     * @return static final String DOUBLE =类型返回值
-     */
     public static final String DOUBLE = "^-?([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*|0?\\.0+|0)$";
     /**
      * 正Double正则表达式 >=0  ^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|0?\.0+|0$
@@ -808,43 +459,13 @@ public class RegexUtil {
     /**
      * 负Double正则表达式 <= 0  ^(-([1-9]\d*\.\d*|0\.\d*[1-9]\d*))|0?\.0+|0$
      */
-    /**
-     * "^方法。
-     *      * @param -([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d* Object类型参数
-     * @return static final String DOUBLE_POSITIVE =类型返回值
-     */
-    /**
-     * "^方法。
-     *      * @param -([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d* Object类型参数
-     * @return static final String DOUBLE_POSITIVE =类型返回值
-     */
     public static final String DOUBLE_POSITIVE = "^(-([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*))|0?\\.0+|0$";
     /**
      * 年龄正则表达式 ^(?:[1-9][0-9]?|1[01][0-9]|120)$ 匹配0-120岁
      */
-    /**
-     * "^方法。
-     *      * @param ?:[1-9][0-9]?|1[01][0-9]|120 Object类型参数
-     * @return static final String AGE =类型返回值
-     */
-    /**
-     * "^方法。
-     *      * @param ?:[1-9][0-9]?|1[01][0-9]|120 Object类型参数
-     * @return static final String AGE =类型返回值
-     */
     public static final String AGE = "^(?:[1-9][0-9]?|1[01][0-9]|120)$";
     /**
      * 邮编正则表达式  [0-9]\d{5}(?!\d) 国内6位邮编
-     */
-    /**
-     * "[0-9]\\d{5}方法。
-     *      * @param ?!\\d Object类型参数
-     * @return static final String CODE =类型返回值
-     */
-    /**
-     * "[0-9]\\d{5}方法。
-     *      * @param ?!\\d Object类型参数
-     * @return static final String CODE =类型返回值
      */
     public static final String CODE = "[0-9]\\d{5}(?!\\d)";
     /**
@@ -863,14 +484,6 @@ public class RegexUtil {
      * 过滤特殊字符串正则
      * regEx="[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
      */
-    /**
-     * "[`~!@#$%^&*方法。
-     * @return static final String STR_SPECIAL =类型返回值
-     */
-    /**
-     * "[`~!@#$%^&*方法。
-     * @return static final String STR_SPECIAL =类型返回值
-     */
     public static final String STR_SPECIAL = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
     /***
      * 日期正则 支持：
@@ -879,16 +492,6 @@ public class RegexUtil {
      *  YYYY_MM_DD
      *  YYYYMMDD
      *  YYYY.MM.DD的形式
-     */
-    /**
-     * "方法。
-     *      * @param (^((1[8-9]\\d{2} Object类型参数
-     * @return static final String DATE_ALL =类型返回值
-     */
-    /**
-     * "方法。
-     *      * @param (^((1[8-9]\\d{2} Object类型参数
-     * @return static final String DATE_ALL =类型返回值
      */
     public static final String DATE_ALL = "((^((1[8-9]\\d{2})|([2-9]\\d{3}))([-\\/\\._]?)(10|12|0?[13578])([-\\/\\._]?)(3[01]|[12][0-9]|0?[1-9])$)" +
             "|(^((1[8-9]\\d{2})|([2-9]\\d{3}))([-\\/\\._]?)(11|0?[469])([-\\/\\._]?)(30|[12][0-9]|0?[1-9])$)" +
@@ -903,31 +506,11 @@ public class RegexUtil {
      * 日期正则 支持：
      *  YYYY-MM-DD
      */
-    /**
-     * "方法。
-     *      * @param ([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3} Object类型参数
-     * @return static final String DATE_FORMAT1 =类型返回值
-     */
-    /**
-     * "方法。
-     *      * @param ([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3} Object类型参数
-     * @return static final String DATE_FORMAT1 =类型返回值
-     */
     public static final String DATE_FORMAT1 = "(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)";
 
     /**
      * URL正则表达式
      * 匹配 http www ftp
-     */
-    /**
-     * "^方法。
-     *      * @param http|www|ftp| Object类型参数
-     * @return static final String URL =类型返回值
-     */
-    /**
-     * "^方法。
-     *      * @param http|www|ftp| Object类型参数
-     * @return static final String URL =类型返回值
      */
     public static final String URL = "^(http|www|ftp|)?(://)?(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*((:\\d+)?)(/(\\w+(-\\w+)*))*(\\.?(\\w)*)(\\?)?" +
             "(((\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*(\\w*%)*(\\w*\\?)*" +
@@ -936,16 +519,6 @@ public class RegexUtil {
 
     /**
      * 身份证正则表达式
-     */
-    /**
-     * "方法。
-     *      * @param (11|12|13|14|15|21|22|23|31|32|33|34|35|36|37|41|42|43|44|45|46|50|51|52|53|54|61|62|63|64|65 Object类型参数
-     * @return static final String IDCARD =类型返回值
-     */
-    /**
-     * "方法。
-     *      * @param (11|12|13|14|15|21|22|23|31|32|33|34|35|36|37|41|42|43|44|45|46|50|51|52|53|54|61|62|63|64|65 Object类型参数
-     * @return static final String IDCARD =类型返回值
      */
     public static final String IDCARD = "((11|12|13|14|15|21|22|23|31|32|33|34|35|36|37|41|42|43|44|45|46|50|51|52|53|54|61|62|63|64|65)[0-9]{4})" +
             "(([1|2][0-9]{3}[0|1][0-9][0-3][0-9][0-9]{3}" +
@@ -969,16 +542,6 @@ public class RegexUtil {
      * @param str
      * @return boolean
      */
-    /**
-     * StrisNull方法。
-     *      * @param str String类型参数
-     * @return static synchronized boolean类型返回值
-     */
-    /**
-     * StrisNull方法。
-     *      * @param str String类型参数
-     * @return static synchronized boolean类型返回值
-     */
     public static synchronized boolean StrisNull(String str) {
         return null == str || str.trim().length() <= 0;
     }
@@ -988,16 +551,6 @@ public class RegexUtil {
      *
      * @param str
      * @return boolean
-     */
-    /**
-     * StrNotNull方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * StrNotNull方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean StrNotNull(String str) {
         return !StrisNull(str);
@@ -1009,16 +562,6 @@ public class RegexUtil {
      * @param str
      * @return boolean
      */
-    /**
-     * nulltoStr方法。
-     *      * @param str String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * nulltoStr方法。
-     *      * @param str String类型参数
-     * @return static String类型返回值
-     */
     public static String nulltoStr(String str) {
         return StrisNull(str) ? "" : str;
     }
@@ -1029,18 +572,6 @@ public class RegexUtil {
      * @param str    目标字符串
      * @param defaut 默认值
      * @return String
-     */
-    /**
-     * nulltoStr方法。
-     *      * @param str String类型参数
-     * @param defaut String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * nulltoStr方法。
-     *      * @param str String类型参数
-     * @param defaut String类型参数
-     * @return static String类型返回值
      */
     public static String nulltoStr(String str, String defaut) {
         return StrisNull(str) ? defaut : str;
@@ -1060,16 +591,6 @@ public class RegexUtil {
      * @param str
      * @return boolean
      */
-    /**
-     * isPhone方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isPhone方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isPhone(String str) {
         return Regular(str, PHONE);
     }
@@ -1079,16 +600,6 @@ public class RegexUtil {
      *
      * @param str
      * @return boolean
-     */
-    /**
-     * isMobile方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isMobile方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isMobile(String str) {
         return Regular(str, MOBILE);
@@ -1100,16 +611,6 @@ public class RegexUtil {
      * @param str
      * @return boolean
      */
-    /**
-     * isUrl方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isUrl方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isUrl(String str) {
         return Regular(str, URL);
     }
@@ -1119,16 +620,6 @@ public class RegexUtil {
      *
      * @param str
      * @return boolean
-     */
-    /**
-     * isNumber方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isNumber方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isNumber(String str) {
         return Regular(str, DOUBLE);
@@ -1148,16 +639,6 @@ public class RegexUtil {
      * @param str
      * @return boolean
      */
-    /**
-     * isINTEGER_NEGATIVE方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isINTEGER_NEGATIVE方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isINTEGER_NEGATIVE(String str) {
         return Regular(str, INTEGER_NEGATIVE);
     }
@@ -1167,16 +648,6 @@ public class RegexUtil {
      *
      * @param str
      * @return boolean
-     */
-    /**
-     * isINTEGER_POSITIVE方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isINTEGER_POSITIVE方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isINTEGER_POSITIVE(String str) {
         return Regular(str, INTEGER_POSITIVE);
@@ -1196,16 +667,6 @@ public class RegexUtil {
      * @param str
      * @return boolean
      */
-    /**
-     * isDOUBLE_NEGATIVE方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isDOUBLE_NEGATIVE方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isDOUBLE_NEGATIVE(String str) {
         return Regular(str, DOUBLE_NEGATIVE);
     }
@@ -1215,16 +676,6 @@ public class RegexUtil {
      *
      * @param str
      * @return boolean
-     */
-    /**
-     * isDOUBLE_POSITIVE方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isDOUBLE_POSITIVE方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isDOUBLE_POSITIVE(String str) {
         return Regular(str, DOUBLE_POSITIVE);
@@ -1236,16 +687,6 @@ public class RegexUtil {
      * @param str
      * @return boolean
      */
-    /**
-     * isDate方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isDate方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isDate(String str) {
         return Regular(str, DATE_ALL);
     }
@@ -1256,16 +697,6 @@ public class RegexUtil {
      * @param str
      * @return
      */
-    /**
-     * isDate1方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isDate1方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isDate1(String str) {
         return Regular(str, DATE_FORMAT1);
     }
@@ -1275,16 +706,6 @@ public class RegexUtil {
      *
      * @param str
      * @return boolean
-     */
-    /**
-     * isAge方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isAge方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isAge(String str) {
         return Regular(str, AGE);
@@ -1298,34 +719,12 @@ public class RegexUtil {
      * @param leng
      * @return boolean
      */
-    /**
-     * isLengOut方法。
-     *      * @param str String类型参数
-     * @param leng int类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isLengOut方法。
-     *      * @param str String类型参数
-     * @param leng int类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isLengOut(String str, int leng) {
         return !StrisNull(str) && str.trim().length() > leng;
     }
 
     /**
      * 判断字段是否为身份证 符合返回ture
-     */
-    /**
-     * isIdCard方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isIdCard方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isIdCard(String str) {
         if (StrisNull(str)) {
@@ -1341,16 +740,6 @@ public class RegexUtil {
     /**
      * 判断字段是否为邮编 符合返回ture
      */
-    /**
-     * isCode方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isCode方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isCode(String str) {
         return Regular(str, CODE);
     }
@@ -1358,32 +747,12 @@ public class RegexUtil {
     /**
      * 判断字符串是不是全部是英文字母
      */
-    /**
-     * isEnglish方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isEnglish方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isEnglish(String str) {
         return Regular(str, STR_ENG);
     }
 
     /**
      * 判断字符串是不是全部是英文字母+数字
-     */
-    /**
-     * isENG_NUM方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isENG_NUM方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isENG_NUM(String str) {
         return Regular(str, STR_ENG_NUM);
@@ -1395,16 +764,6 @@ public class RegexUtil {
      * @param str
      * @return boolean
      */
-    /**
-     * isENG_NUM_方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isENG_NUM_方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isENG_NUM_(String str) {
         return Regular(str, STR_ENG_NUM_);
     }
@@ -1414,16 +773,6 @@ public class RegexUtil {
      *
      * @param str
      * @return boolean
-     */
-    /**
-     * filterStr方法。
-     *      * @param str String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * filterStr方法。
-     *      * @param str String类型参数
-     * @return static String类型返回值
      */
     public static String filterStr(String str) {
         Pattern p = Pattern.compile(STR_SPECIAL);
@@ -1436,16 +785,6 @@ public class RegexUtil {
      *
      * @return
      */
-    /**
-     * isJigouCode方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isJigouCode方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isJigouCode(String str) {
         return Regular(str, JIGOU_CODE);
     }
@@ -1455,16 +794,6 @@ public class RegexUtil {
      *
      * @param str
      * @return boolean
-     */
-    /**
-     * isSTR_NUM方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isSTR_NUM方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isSTR_NUM(String str) {
         return Regular(str, STR_NUM);

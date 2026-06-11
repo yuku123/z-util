@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * ss类。
- */
 public class ss {
     /**
      * removeElement方法。

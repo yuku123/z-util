@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter3;
  * @author zifang
  * @version 1.0
  */
-/**
- * DoWhileTest类。
- */
 public class DoWhileTest {
     /**
      * main方法。

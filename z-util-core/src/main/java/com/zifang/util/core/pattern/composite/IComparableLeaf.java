@@ -5,12 +5,6 @@ import com.zifang.util.core.pattern.composite.tree.ILeaf;
 /**
  * @author zifang
  */
-/**
- * IComparableLeaf接口。
- */
-/**
- * IComparableLeaf接口。
- */
 public interface IComparableLeaf<T> extends ILeaf, Comparable<T> {
 
 }

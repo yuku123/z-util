@@ -21,12 +21,6 @@ import java.util.Set;
  *
  * @author zifang
  */
-/**
- * MemoryManagerMXBeanDemo类。
- */
-/**
- * MemoryManagerMXBeanDemo类。
- */
 public class MemoryManagerMXBeanDemo {
 
 
@@ -41,14 +35,6 @@ public class MemoryManagerMXBeanDemo {
      *   <li>-Dcom.sun.management.jmxremote.ssl=false</li>
      *   <li>-Dcom.sun.management.jmxremote.authenticate=false</li>
      * </ul>
-     */
-    /**
-     * getRemoteMemoryManagerMXBean方法。
-     * @return static void类型返回值
-     */
-    /**
-     * getRemoteMemoryManagerMXBean方法。
-     * @return static void类型返回值
      */
     public static void getRemoteMemoryManagerMXBean() {
         String jmxURL = "service:jmx:rmi:///jndi/rmi://192.168.10.98:9999/jmxrmi";
@@ -90,14 +76,6 @@ public class MemoryManagerMXBeanDemo {
     /**
      * 获取当前虚拟机内存管理信息。
      */
-    /**
-     * getLocalMemoryManagerMXBean方法。
-     * @return static void类型返回值
-     */
-    /**
-     * getLocalMemoryManagerMXBean方法。
-     * @return static void类型返回值
-     */
     public static void getLocalMemoryManagerMXBean() {
         List<MemoryManagerMXBean> list = ManagementFactory.getMemoryManagerMXBeans();
         if (list != null) {
@@ -115,16 +93,6 @@ public class MemoryManagerMXBeanDemo {
      * 主方法，演示获取JVM内存管理信息。
      *
      * @param args 命令行参数
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
         getRemoteMemoryManagerMXBean();

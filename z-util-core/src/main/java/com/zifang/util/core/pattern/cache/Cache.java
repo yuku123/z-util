@@ -12,12 +12,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author zifang
  */
-/**
- * Cache类。
- */
-/**
- * Cache类。
- */
 public class Cache {
 
     //键值对集合
@@ -32,18 +26,6 @@ public class Cache {
      * @param key  键
      * @param data 值
      */
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param data Object类型参数
-     * @return synchronized static void类型返回值
-     */
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param data Object类型参数
-     * @return synchronized static void类型返回值
-     */
     public synchronized static void put(String key, Object data) {
         Cache.put(key, data, 0);
     }
@@ -55,20 +37,6 @@ public class Cache {
      * @param data   值
      * @param expire 过期时间，单位：毫秒， 0表示无限长
      */
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param data Object类型参数
-     * @param expire long类型参数
-     * @return synchronized static void类型返回值
-     */
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param data Object类型参数
-     * @param expire long类型参数
-     * @return synchronized static void类型返回值
-     */
     public synchronized static void put(String key, Object data, long expire) {
         //清除原键值对
         Cache.remove(key);
@@ -76,9 +44,6 @@ public class Cache {
         if (expire > 0) {
             Future future = executor.schedule(new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
     /**
      * run方法。
      */
@@ -102,16 +67,6 @@ public class Cache {
      * @param key 键
      * @return 缓存的值，如果键不存在则返回null
      */
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @return synchronized static Object类型返回值
-     */
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @return synchronized static Object类型返回值
-     */
     public synchronized static Object get(String key) {
         Entity entity = map.get(key);
         return entity == null ? null : entity.getValue();
@@ -125,18 +80,6 @@ public class Cache {
      * @param <T>   泛型类型
      * @return 转换后的缓存值，如果键不存在则返回null
      */
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @param clazz ClassT类型参数
-     * @return synchronized static <T> T类型返回值
-     */
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @param clazz ClassT类型参数
-     * @return synchronized static <T> T类型返回值
-     */
     public synchronized static <T> T get(String key, Class<T> clazz) {
         return clazz.cast(Cache.get(key));
     }
@@ -146,16 +89,6 @@ public class Cache {
      *
      * @param key 键
      * @return 被移除的缓存值，如果键不存在则返回null
-     */
-    /**
-     * remove方法。
-     *      * @param key String类型参数
-     * @return synchronized static Object类型返回值
-     */
-    /**
-     * remove方法。
-     *      * @param key String类型参数
-     * @return synchronized static Object类型返回值
      */
     public synchronized static Object remove(String key) {
         //清除原缓存数据
@@ -176,14 +109,6 @@ public class Cache {
      *
      * @return 当前缓存中的键值对数量
      */
-    /**
-     * size方法。
-     * @return synchronized static int类型返回值
-     */
-    /**
-     * size方法。
-     * @return synchronized static int类型返回值
-     */
     public synchronized static int size() {
         return map.size();
     }
@@ -202,11 +127,6 @@ public class Cache {
      *      * @param value Object类型参数
      * @param future Future类型参数
      */
-    /**
-     * Entity方法。
-     *      * @param value Object类型参数
-     * @param future Future类型参数
-     */
         public Entity(Object value, Future future) {
             this.value = value;
             this.future = future;
@@ -217,14 +137,6 @@ public class Cache {
          *
          * @return
          */
-    /**
-     * getValue方法。
-     * @return Object类型返回值
-     */
-    /**
-     * getValue方法。
-     * @return Object类型返回值
-     */
         public Object getValue() {
             return value;
         }
@@ -234,14 +146,6 @@ public class Cache {
          *
          * @return
          */
-    /**
-     * getFuture方法。
-     * @return Future类型返回值
-     */
-    /**
-     * getFuture方法。
-     * @return Future类型返回值
-     */
         public Future getFuture() {
             return future;
         }

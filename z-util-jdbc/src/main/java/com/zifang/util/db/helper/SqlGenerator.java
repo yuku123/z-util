@@ -26,11 +26,5 @@ package com.zifang.util.db.helper;
  * @see SqlAnalyser
  * @see SqlBuilder
  */
-/**
- * SqlGenerator类。
- */
-/**
- * SqlGenerator类。
- */
 public class SqlGenerator {
 }

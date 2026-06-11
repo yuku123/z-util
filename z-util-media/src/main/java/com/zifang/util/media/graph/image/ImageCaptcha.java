@@ -36,19 +36,10 @@ public final class ImageCaptcha {
      * create方法。
      * @return static ImageCaptcha类型返回值
      */
-    /**
-     * create方法。
-     * @return static ImageCaptcha类型返回值
-     */
     public static ImageCaptcha create() {
         return new ImageCaptcha();
     }
 
-    /**
-     * width方法。
-     *      * @param width int类型参数
-     * @return ImageCaptcha类型返回值
-     */
     /**
      * width方法。
      *      * @param width int类型参数
@@ -64,21 +55,11 @@ public final class ImageCaptcha {
      *      * @param height int类型参数
      * @return ImageCaptcha类型返回值
      */
-    /**
-     * height方法。
-     *      * @param height int类型参数
-     * @return ImageCaptcha类型返回值
-     */
     public ImageCaptcha height(int height) {
         this.height = height;
         return this;
     }
 
-    /**
-     * length方法。
-     *      * @param length int类型参数
-     * @return ImageCaptcha类型返回值
-     */
     /**
      * length方法。
      *      * @param length int类型参数
@@ -94,11 +75,6 @@ public final class ImageCaptcha {
      *      * @param chars String类型参数
      * @return ImageCaptcha类型返回值
      */
-    /**
-     * chars方法。
-     *      * @param chars String类型参数
-     * @return ImageCaptcha类型返回值
-     */
     public ImageCaptcha chars(String chars) {
         this.chars = chars;
         return this;
@@ -106,14 +82,6 @@ public final class ImageCaptcha {
 
     /**
      * 生成随机验证码字符串。
-     */
-    /**
-     * randomCode方法。
-     * @return String类型返回值
-     */
-    /**
-     * randomCode方法。
-     * @return String类型返回值
      */
     public String randomCode() {
         StringBuilder sb = new StringBuilder();
@@ -126,32 +94,12 @@ public final class ImageCaptcha {
     /**
      * 生成 PNG 验证码 BufferedImage。
      */
-    /**
-     * pngImage方法。
-     *      * @param code String类型参数
-     * @return BufferedImage类型返回值
-     */
-    /**
-     * pngImage方法。
-     *      * @param code String类型参数
-     * @return BufferedImage类型返回值
-     */
     public BufferedImage pngImage(String code) {
         return CaptchaUtil.pngCaptcha(code, width, height);
     }
 
     /**
      * 生成 PNG 验证码并写出到文件，返回验证码字符串。
-     */
-    /**
-     * pngToFile方法。
-     *      * @param filePath String类型参数
-     * @return String类型返回值
-     */
-    /**
-     * pngToFile方法。
-     *      * @param filePath String类型参数
-     * @return String类型返回值
      */
     public String pngToFile(String filePath) throws IOException {
         String code = randomCode();
@@ -165,30 +113,12 @@ public final class ImageCaptcha {
     /**
      * 生成 PNG 验证码并返回 Base64 DataURL。
      */
-    /**
-     * pngToBase64方法。
-     *      * @param code String类型参数
-     * @return String类型返回值
-     */
-    /**
-     * pngToBase64方法。
-     *      * @param code String类型参数
-     * @return String类型返回值
-     */
     public String pngToBase64(String code) {
         return CaptchaUtil.pngCaptchaBase64(code, width, height);
     }
 
     /**
      * 生成 PNG 验证码的 Base64，返回验证码字符串和 Base64 元组。
-     */
-    /**
-     * pngToBase64方法。
-     * @return CaptchaResult类型返回值
-     */
-    /**
-     * pngToBase64方法。
-     * @return CaptchaResult类型返回值
      */
     public CaptchaResult pngToBase64() throws IOException {
         String code = randomCode();
@@ -198,16 +128,6 @@ public final class ImageCaptcha {
 
     /**
      * 生成 GIF 动态验证码并写出到文件。
-     */
-    /**
-     * gifToFile方法。
-     *      * @param filePath String类型参数
-     * @return String类型返回值
-     */
-    /**
-     * gifToFile方法。
-     *      * @param filePath String类型参数
-     * @return String类型返回值
      */
     public String gifToFile(String filePath) throws IOException {
         String code = randomCode();
@@ -224,30 +144,12 @@ public final class ImageCaptcha {
     /**
      * 生成 GIF 验证码并返回 Base64 DataURL。
      */
-    /**
-     * gifToBase64方法。
-     *      * @param code String类型参数
-     * @return String类型返回值
-     */
-    /**
-     * gifToBase64方法。
-     *      * @param code String类型参数
-     * @return String类型返回值
-     */
     public String gifToBase64(String code) {
         return CaptchaUtil.gifCaptchaBase64(code, width, height, 100);
     }
 
     /**
      * 生成 GIF 验证码的 Base64。
-     */
-    /**
-     * gifToBase64方法。
-     * @return CaptchaResult类型返回值
-     */
-    /**
-     * gifToBase64方法。
-     * @return CaptchaResult类型返回值
      */
     public CaptchaResult gifToBase64() throws IOException {
         String code = randomCode();
@@ -262,11 +164,6 @@ public final class ImageCaptcha {
         public final String code;
         public final String base64;
 
-    /**
-     * CaptchaResult方法。
-     *      * @param code String类型参数
-     * @param base64 String类型参数
-     */
     /**
      * CaptchaResult方法。
      *      * @param code String类型参数

@@ -25,12 +25,6 @@ import java.util.Set;
  * @see ListenerManager#addJobListener(JobListener, Matcher)
  * @see ListenerManager#addTriggerListener(TriggerListener, Matcher)
  */
-/**
- * Matcher类。
- */
-/**
- * Matcher类。
- */
 public class Matcher {
 
     private Matcher() {
@@ -42,14 +36,6 @@ public class Matcher {
     /**
      * Match all jobs.
      */
-    /**
-     * anyJobs方法。
-     * @return static Matcher类型返回值
-     */
-    /**
-     * anyJobs方法。
-     * @return static Matcher类型返回值
-     */
     public static Matcher anyJobs() {
         return new GroupMatcherWrapper(
                 GroupMatcher.anyJobGroup(),
@@ -59,16 +45,6 @@ public class Matcher {
 
     /**
      * Match all jobs in the specified groups.
-     */
-    /**
-     * jobGroupEqualsTo方法。
-     *      * @param groups String...类型参数
-     * @return static Matcher类型返回值
-     */
-    /**
-     * jobGroupEqualsTo方法。
-     *      * @param groups String...类型参数
-     * @return static Matcher类型返回值
      */
     public static Matcher jobGroupEqualsTo(String... groups) {
         if (groups == null || groups.length == 0) {
@@ -87,16 +63,6 @@ public class Matcher {
     /**
      * Match jobs with the specified name in the default group.
      */
-    /**
-     * jobNameEqualsTo方法。
-     *      * @param name String类型参数
-     * @return static Matcher类型返回值
-     */
-    /**
-     * jobNameEqualsTo方法。
-     *      * @param name String类型参数
-     * @return static Matcher类型返回值
-     */
     public static Matcher jobNameEqualsTo(String name) {
         return new GroupMatcherWrapper(
                 GroupMatcher.jobGroupEquals(org.quartz.JobKey.DEFAULT_GROUP),
@@ -106,16 +72,6 @@ public class Matcher {
 
     /**
      * Match jobs whose name starts with the specified prefix in the default group.
-     */
-    /**
-     * jobNameStartsWith方法。
-     *      * @param prefix String类型参数
-     * @return static Matcher类型返回值
-     */
-    /**
-     * jobNameStartsWith方法。
-     *      * @param prefix String类型参数
-     * @return static Matcher类型返回值
      */
     public static Matcher jobNameStartsWith(String prefix) {
         return new GroupMatcherWrapper(
@@ -129,14 +85,6 @@ public class Matcher {
     /**
      * Match all triggers.
      */
-    /**
-     * anyTriggers方法。
-     * @return static Matcher类型返回值
-     */
-    /**
-     * anyTriggers方法。
-     * @return static Matcher类型返回值
-     */
     public static Matcher anyTriggers() {
         return new GroupMatcherWrapper(
                 GroupMatcher.anyJobGroup(),
@@ -146,16 +94,6 @@ public class Matcher {
 
     /**
      * Match all triggers in the specified groups.
-     */
-    /**
-     * triggerGroupEqualsTo方法。
-     *      * @param groups String...类型参数
-     * @return static Matcher类型返回值
-     */
-    /**
-     * triggerGroupEqualsTo方法。
-     *      * @param groups String...类型参数
-     * @return static Matcher类型返回值
      */
     public static Matcher triggerGroupEqualsTo(String... groups) {
         if (groups == null || groups.length == 0) {

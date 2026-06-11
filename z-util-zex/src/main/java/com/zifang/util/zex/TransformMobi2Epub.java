@@ -11,9 +11,6 @@ import java.io.File;
  * @author zifang
  * @version 1.0
  */
-/**
- * TransformMobi2Epub类。
- */
 public class TransformMobi2Epub {
     /**
      * main方法。

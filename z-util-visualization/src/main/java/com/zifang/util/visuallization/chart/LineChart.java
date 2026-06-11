@@ -9,12 +9,6 @@ import java.util.List;
  * 折线图组件
  * 用于可视化连续数据的变化趋势，支持多系列数据展示、坐标轴标签、图例和网格线
  */
-/**
- * LineChart类。
- */
-/**
- * LineChart类。
- */
 public class LineChart extends ChartFrame {
 
     private final List<ChartSeries> seriesList;
@@ -34,12 +28,6 @@ public class LineChart extends ChartFrame {
      * @param width 图表宽度
      * @param height 图表高度
      */
-    /**
-     * LineChart方法。
-     *      * @param title String类型参数
-     * @param width int类型参数
-     * @param height int类型参数
-     */
     public LineChart(String title, int width, int height) {
         super(title, width, height);
         this.seriesList = new ArrayList<>();
@@ -49,10 +37,6 @@ public class LineChart extends ChartFrame {
      * 创建折线图（使用默认尺寸800x600）
      * @param title 图表标题
      */
-    /**
-     * LineChart方法。
-     *      * @param title String类型参数
-     */
     public LineChart(String title) {
         this(title, 800, 600);
     }
@@ -60,10 +44,6 @@ public class LineChart extends ChartFrame {
     /**
      * 添加数据系列
      * @param series 数据系列对象
-     */
-    /**
-     * addSeries方法。
-     *      * @param series ChartSeries类型参数
      */
     public void addSeries(ChartSeries series) {
         seriesList.add(series);
@@ -75,11 +55,6 @@ public class LineChart extends ChartFrame {
      * @param name 系列名称
      * @param data 数据列表
      */
-    /**
-     * addSeries方法。
-     *      * @param name String类型参数
-     * @param data ListDouble类型参数
-     */
     public void addSeries(String name, List<Double> data) {
         addSeries(new ChartSeries(name, data));
     }
@@ -88,11 +63,6 @@ public class LineChart extends ChartFrame {
      * 向指定系列添加单个数据点
      * @param seriesName 系列名称（不存在则创建新系列）
      * @param value 数据值
-     */
-    /**
-     * addData方法。
-     *      * @param seriesName String类型参数
-     * @param value double类型参数
      */
     public void addData(String seriesName, double value) {
         ChartSeries series = findSeries(seriesName);
@@ -107,9 +77,6 @@ public class LineChart extends ChartFrame {
     /**
      * 清空所有数据
      */
-    /**
-     * clear方法。
-     */
     public void clear() {
         for (ChartSeries series : seriesList) {
             series.clear();
@@ -122,11 +89,6 @@ public class LineChart extends ChartFrame {
      * 设置坐标轴标签
      * @param xAxisLabel X轴标签
      * @param yAxisLabel Y轴标签
-     */
-    /**
-     * setAxisLabels方法。
-     *      * @param xAxisLabel String类型参数
-     * @param yAxisLabel String类型参数
      */
     public void setAxisLabels(String xAxisLabel, String yAxisLabel) {
         this.xAxisLabel = xAxisLabel;

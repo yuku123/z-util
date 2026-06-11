@@ -10,12 +10,6 @@ import java.util.Optional;
  *
  * @author zifang
  */
-/**
- * EnumUtil类。
- */
-/**
- * EnumUtil类。
- */
 public class EnumUtil {
 
     /**
@@ -25,18 +19,6 @@ public class EnumUtil {
      * @param name      枚举名称（不区分大小写）
      * @param <E>       枚举类型
      * @return 对应的枚举实例，不存在则返回 Optional.empty()
-     */
-    /**
-     * getEnumIgnoreCase方法。
-     *      * @param enumClass ClassE类型参数
-     * @param name String类型参数
-     * @return static <E extends Enum<E>> Optional<E>类型返回值
-     */
-    /**
-     * getEnumIgnoreCase方法。
-     *      * @param enumClass ClassE类型参数
-     * @param name String类型参数
-     * @return static <E extends Enum<E>> Optional<E>类型返回值
      */
     public static <E extends Enum<E>> Optional<E> getEnumIgnoreCase(Class<E> enumClass, String name) {
         if (enumClass == null || name == null) {
@@ -56,20 +38,6 @@ public class EnumUtil {
      * @param <E>          枚举类型
      * @return 对应的枚举实例或默认值
      */
-    /**
-     * getEnumOrDefault方法。
-     *      * @param enumClass ClassE类型参数
-     * @param name String类型参数
-     * @param defaultValue E类型参数
-     * @return static <E extends Enum<E>> E类型返回值
-     */
-    /**
-     * getEnumOrDefault方法。
-     *      * @param enumClass ClassE类型参数
-     * @param name String类型参数
-     * @param defaultValue E类型参数
-     * @return static <E extends Enum<E>> E类型返回值
-     */
     public static <E extends Enum<E>> E getEnumOrDefault(Class<E> enumClass, String name, E defaultValue) {
         return getEnumIgnoreCase(enumClass, name).orElse(defaultValue);
     }
@@ -80,16 +48,6 @@ public class EnumUtil {
      * @param enumClass 枚举类
      * @param <E>       枚举类型
      * @return 枚举名称数组
-     */
-    /**
-     * getEnumNames方法。
-     *      * @param enumClass ClassE类型参数
-     * @return static <E extends Enum<E>> String[]类型返回值
-     */
-    /**
-     * getEnumNames方法。
-     *      * @param enumClass ClassE类型参数
-     * @return static <E extends Enum<E>> String[]类型返回值
      */
     public static <E extends Enum<E>> String[] getEnumNames(Class<E> enumClass) {
         return Arrays.stream(enumClass.getEnumConstants())
@@ -103,16 +61,6 @@ public class EnumUtil {
      * @param enumClass 枚举类
      * @param <E>       枚举类型
      * @return 枚举值数组
-     */
-    /**
-     * getEnumValues方法。
-     *      * @param enumClass ClassE类型参数
-     * @return static <E extends Enum<E>> E[]类型返回值
-     */
-    /**
-     * getEnumValues方法。
-     *      * @param enumClass ClassE类型参数
-     * @return static <E extends Enum<E>> E[]类型返回值
      */
     public static <E extends Enum<E>> E[] getEnumValues(Class<E> enumClass) {
         return enumClass.getEnumConstants();

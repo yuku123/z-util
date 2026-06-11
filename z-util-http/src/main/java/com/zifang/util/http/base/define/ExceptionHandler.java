@@ -8,11 +8,5 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * ExceptionHandler类。
- */
-/**
- * ExceptionHandler类。
- */
 public class ExceptionHandler {
 }

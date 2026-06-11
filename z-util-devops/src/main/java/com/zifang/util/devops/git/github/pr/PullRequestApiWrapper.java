@@ -22,22 +22,12 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * PullRequestApiWrapper类。
- */
-/**
- * PullRequestApiWrapper类。
- */
 public class PullRequestApiWrapper {
 
     private final GitHub github;
     private String owner;
     private String repo;
 
-    /**
-     * PullRequestApiWrapper方法。
-     *      * @param github GitHub类型参数
-     */
     /**
      * PullRequestApiWrapper方法。
      *      * @param github GitHub类型参数
@@ -52,24 +42,12 @@ public class PullRequestApiWrapper {
      * @param owner String类型参数
      * @param repo String类型参数
      */
-    /**
-     * PullRequestApiWrapper方法。
-     *      * @param github GitHub类型参数
-     * @param owner String类型参数
-     * @param repo String类型参数
-     */
     public PullRequestApiWrapper(GitHub github, String owner, String repo) {
         this.github = github;
         this.owner = owner;
         this.repo = repo;
     }
 
-    /**
-     * withRepo方法。
-     *      * @param owner String类型参数
-     * @param repo String类型参数
-     * @return PullRequestApiWrapper类型返回值
-     */
     /**
      * withRepo方法。
      *      * @param owner String类型参数
@@ -94,22 +72,6 @@ public class PullRequestApiWrapper {
      * @param head 源分支（带前缀，如 "user:feature-branch"）
      * @param base 目标分支（如 "main"）
      */
-    /**
-     * create方法。
-     *      * @param title String类型参数
-     * @param head String类型参数
-     * @param base String类型参数
-     * @param body String类型参数
-     * @return GHPullRequest类型返回值
-     */
-    /**
-     * create方法。
-     *      * @param title String类型参数
-     * @param head String类型参数
-     * @param base String类型参数
-     * @param body String类型参数
-     * @return GHPullRequest类型返回值
-     */
     public GHPullRequest create(String title, String head, String base, String body) throws IOException {
         return github.getRepository(fullName()).createPullRequest(title, head, base, body);
     }
@@ -117,36 +79,12 @@ public class PullRequestApiWrapper {
     /**
      * 获取 PR
      */
-    /**
-     * get方法。
-     *      * @param number int类型参数
-     * @return GHPullRequest类型返回值
-     */
-    /**
-     * get方法。
-     *      * @param number int类型参数
-     * @return GHPullRequest类型返回值
-     */
     public GHPullRequest get(int number) throws IOException {
         return github.getRepository(fullName()).getPullRequest(number);
     }
 
     /**
      * 更新 PR
-     */
-    /**
-     * update方法。
-     *      * @param number int类型参数
-     * @param title String类型参数
-     * @param body String类型参数
-     * @return GHPullRequest类型返回值
-     */
-    /**
-     * update方法。
-     *      * @param number int类型参数
-     * @param title String类型参数
-     * @param body String类型参数
-     * @return GHPullRequest类型返回值
      */
     public GHPullRequest update(int number, String title, String body) throws IOException {
         GHPullRequest pr = get(number);
@@ -158,30 +96,12 @@ public class PullRequestApiWrapper {
     /**
      * 关闭 PR
      */
-    /**
-     * close方法。
-     *      * @param number int类型参数
-     */
-    /**
-     * close方法。
-     *      * @param number int类型参数
-     */
     public void close(int number) throws IOException {
         get(number).close();
     }
 
     /**
      * 合并 PR
-     */
-    /**
-     * merge方法。
-     *      * @param number int类型参数
-     * @param commitMessage String类型参数
-     */
-    /**
-     * merge方法。
-     *      * @param number int类型参数
-     * @param commitMessage String类型参数
      */
     public void merge(int number, String commitMessage) throws IOException {
         get(number).merge(commitMessage);
@@ -192,28 +112,12 @@ public class PullRequestApiWrapper {
     /**
      * 列出所有 open PR
      */
-    /**
-     * listOpen方法。
-     * @return List<GHPullRequest>类型返回值
-     */
-    /**
-     * listOpen方法。
-     * @return List<GHPullRequest>类型返回值
-     */
     public List<GHPullRequest> listOpen() throws IOException {
         return github.getRepository(fullName()).getPullRequests(GHIssueState.OPEN);
     }
 
     /**
      * 列出所有 closed PR
-     */
-    /**
-     * listClosed方法。
-     * @return List<GHPullRequest>类型返回值
-     */
-    /**
-     * listClosed方法。
-     * @return List<GHPullRequest>类型返回值
      */
     public List<GHPullRequest> listClosed() throws IOException {
         return github.getRepository(fullName()).getPullRequests(GHIssueState.CLOSED);
@@ -223,16 +127,6 @@ public class PullRequestApiWrapper {
 
     /**
      * 请求 Review（按用户名）
-     */
-    /**
-     * requestReview方法。
-     *      * @param number int类型参数
-     * @param reviewers String...类型参数
-     */
-    /**
-     * requestReview方法。
-     *      * @param number int类型参数
-     * @param reviewers String...类型参数
      */
     public void requestReview(int number, String... reviewers) throws IOException {
         List<GHUser> users = new ArrayList<>();
@@ -245,16 +139,6 @@ public class PullRequestApiWrapper {
     /**
      * 添加 Reviewer
      */
-    /**
-     * addReviewers方法。
-     *      * @param number int类型参数
-     * @param reviewers ListString类型参数
-     */
-    /**
-     * addReviewers方法。
-     *      * @param number int类型参数
-     * @param reviewers ListString类型参数
-     */
     public void addReviewers(int number, List<String> reviewers) throws IOException {
         List<GHUser> users = new ArrayList<>();
         for (String r : reviewers) {
@@ -265,16 +149,6 @@ public class PullRequestApiWrapper {
 
     /**
      * 获取 PR 的 Review 列表
-     */
-    /**
-     * listReviews方法。
-     *      * @param number int类型参数
-     * @return List<GHPullRequestReview>类型返回值
-     */
-    /**
-     * listReviews方法。
-     *      * @param number int类型参数
-     * @return List<GHPullRequestReview>类型返回值
      */
     public List<GHPullRequestReview> listReviews(int number) throws IOException {
         List<GHPullRequestReview> reviews = new ArrayList<>();
@@ -290,16 +164,6 @@ public class PullRequestApiWrapper {
     /**
      * 创建 PR 评论
      */
-    /**
-     * comment方法。
-     *      * @param number int类型参数
-     * @param body String类型参数
-     */
-    /**
-     * comment方法。
-     *      * @param number int类型参数
-     * @param body String类型参数
-     */
     public void comment(int number, String body) throws IOException {
         get(number).comment(body);
     }
@@ -309,32 +173,12 @@ public class PullRequestApiWrapper {
     /**
      * 检查 PR 是否已合并
      */
-    /**
-     * isMerged方法。
-     *      * @param number int类型参数
-     * @return boolean类型返回值
-     */
-    /**
-     * isMerged方法。
-     *      * @param number int类型参数
-     * @return boolean类型返回值
-     */
     public boolean isMerged(int number) throws IOException {
         return get(number).isMerged();
     }
 
     /**
      * 获取 PR head SHA
-     */
-    /**
-     * getHeadSha方法。
-     *      * @param number int类型参数
-     * @return String类型返回值
-     */
-    /**
-     * getHeadSha方法。
-     *      * @param number int类型参数
-     * @return String类型返回值
      */
     public String getHeadSha(int number) throws IOException {
         return get(number).getHead().getSha();
@@ -364,16 +208,6 @@ public class PullRequestApiWrapper {
          * @return PRInfo 实例
          * @throws IOException IO异常
          */
-    /**
-     * from方法。
-     *      * @param pr GHPullRequest类型参数
-     * @return static PRInfo类型返回值
-     */
-    /**
-     * from方法。
-     *      * @param pr GHPullRequest类型参数
-     * @return static PRInfo类型返回值
-     */
         public static PRInfo from(GHPullRequest pr) throws IOException {
             PRInfo info = new PRInfo();
             info.number = pr.getNumber();

@@ -3,9 +3,6 @@ package com.zifang.util.zex.bust.charpter12;
 /**
  * 解决原子性问题，保留可见性
  */
-/**
- * TestSolveView2类。
- */
 public class TestSolveView2 {
     private static long count = 0;
 

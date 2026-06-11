@@ -23,9 +23,6 @@ import java.util.Set;
  * @author zifang
  * @version 1.0
  */
-/**
- * Range_Study类。
- */
 public class Range_Study {
     @Test
     /**

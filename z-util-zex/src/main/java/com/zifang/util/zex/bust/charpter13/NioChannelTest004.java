@@ -13,9 +13,6 @@ import java.nio.channels.SocketChannel;
 /**
  * @author zifang
  */
-/**
- * NioChannelTest004类。
- */
 public class NioChannelTest004 {
 
     public static String host = "127.0.0.1";

@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _067类。
- */
 public class _067 {
     /**
      * addBinary方法。

@@ -14,12 +14,6 @@ import java.util.Objects;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * Component类。
- */
-/**
- * Component类。
- */
 public class Component implements Comparable<Component> {
 
     private String id;
@@ -40,18 +34,10 @@ public class Component implements Comparable<Component> {
      * getId方法。
      * @return String类型返回值
      */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
     public String getId() {
         return id;
     }
 
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
     /**
      * setId方法。
      *      * @param id String类型参数
@@ -64,18 +50,10 @@ public class Component implements Comparable<Component> {
      * getRepository方法。
      * @return String类型返回值
      */
-    /**
-     * getRepository方法。
-     * @return String类型返回值
-     */
     public String getRepository() {
         return repository;
     }
 
-    /**
-     * setRepository方法。
-     *      * @param repository String类型参数
-     */
     /**
      * setRepository方法。
      *      * @param repository String类型参数
@@ -88,18 +66,10 @@ public class Component implements Comparable<Component> {
      * getGroup方法。
      * @return String类型返回值
      */
-    /**
-     * getGroup方法。
-     * @return String类型返回值
-     */
     public String getGroup() {
         return group;
     }
 
-    /**
-     * setGroup方法。
-     *      * @param group String类型参数
-     */
     /**
      * setGroup方法。
      *      * @param group String类型参数
@@ -112,18 +82,10 @@ public class Component implements Comparable<Component> {
      * getName方法。
      * @return String类型返回值
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
     /**
      * setName方法。
      *      * @param name String类型参数
@@ -136,18 +98,10 @@ public class Component implements Comparable<Component> {
      * getVersion方法。
      * @return String类型返回值
      */
-    /**
-     * getVersion方法。
-     * @return String类型返回值
-     */
     public String getVersion() {
         return version;
     }
 
-    /**
-     * setVersion方法。
-     *      * @param version String类型参数
-     */
     /**
      * setVersion方法。
      *      * @param version String类型参数
@@ -160,18 +114,10 @@ public class Component implements Comparable<Component> {
      * getFormat方法。
      * @return String类型返回值
      */
-    /**
-     * getFormat方法。
-     * @return String类型返回值
-     */
     public String getFormat() {
         return format;
     }
 
-    /**
-     * setFormat方法。
-     *      * @param format String类型参数
-     */
     /**
      * setFormat方法。
      *      * @param format String类型参数
@@ -184,18 +130,10 @@ public class Component implements Comparable<Component> {
      * getAssets方法。
      * @return List<Asset>类型返回值
      */
-    /**
-     * getAssets方法。
-     * @return List<Asset>类型返回值
-     */
     public List<Asset> getAssets() {
         return assets;
     }
 
-    /**
-     * setAssets方法。
-     *      * @param assets ListAsset类型参数
-     */
     /**
      * setAssets方法。
      *      * @param assets ListAsset类型参数
@@ -216,20 +154,11 @@ public class Component implements Comparable<Component> {
      *      * @param o Component类型参数
      * @return int类型返回值
      */
-    /**
-     * compareTo方法。
-     *      * @param o Component类型参数
-     * @return int类型返回值
-     */
     public int compareTo(Component o) {
         return this.version.compareTo(o.getVersion());
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -244,11 +173,6 @@ public class Component implements Comparable<Component> {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -257,10 +181,6 @@ public class Component implements Comparable<Component> {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

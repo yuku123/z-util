@@ -5,12 +5,6 @@ package com.zifang.util.ml.nnet;
  * <p>
  * f(x) = 1 / (1 + e^(-x))
  */
-/**
- * SigmoidActivation类。
- */
-/**
- * SigmoidActivation类。
- */
 public class SigmoidActivation implements ActivationFunction {
 
     /**
@@ -20,11 +14,6 @@ public class SigmoidActivation implements ActivationFunction {
      * @return 激活值，范围在(0, 1)之间
      */
     @Override
-    /**
-     * activate方法。
-     *      * @param input double类型参数
-     * @return double类型返回值
-     */
     /**
      * activate方法。
      *      * @param input double类型参数
@@ -41,11 +30,6 @@ public class SigmoidActivation implements ActivationFunction {
      * @return 导数值，f'(x) = f(x) * (1 - f(x))
      */
     @Override
-    /**
-     * derivative方法。
-     *      * @param input double类型参数
-     * @return double类型返回值
-     */
     /**
      * derivative方法。
      *      * @param input double类型参数

@@ -7,12 +7,6 @@ package com.zifang.util.media.graph.qrcode.encoder;
  * Q: 25% recovery capacity
  * H: 30% recovery capacity
  */
-/**
- * ErrorCorrectionLevel枚举。
- */
-/**
- * ErrorCorrectionLevel枚举。
- */
 public enum ErrorCorrectionLevel {
     L(1, 7),
     M(0, 15),
@@ -31,10 +25,6 @@ public enum ErrorCorrectionLevel {
      * getBits方法。
      * @return int类型返回值
      */
-    /**
-     * getBits方法。
-     * @return int类型返回值
-     */
     public int getBits() {
         return bits;
     }
@@ -43,19 +33,10 @@ public enum ErrorCorrectionLevel {
      * getRecoveryPercent方法。
      * @return int类型返回值
      */
-    /**
-     * getRecoveryPercent方法。
-     * @return int类型返回值
-     */
     public int getRecoveryPercent() {
         return recoveryPercent;
     }
 
-    /**
-     * fromBits方法。
-     *      * @param bits int类型参数
-     * @return static ErrorCorrectionLevel类型返回值
-     */
     /**
      * fromBits方法。
      *      * @param bits int类型参数

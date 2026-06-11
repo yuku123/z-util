@@ -8,11 +8,5 @@ package com.zifang.util.monitor.net;
  *
  * @author zifang
  */
-/**
- * NetMonitor类。
- */
-/**
- * NetMonitor类。
- */
 public class NetMonitor {
 }

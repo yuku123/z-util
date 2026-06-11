@@ -3,12 +3,6 @@ package com.zifang.util.dsl.core;
 /**
  * 语法分析器接口
  */
-/**
- * Parser接口。
- */
-/**
- * Parser接口。
- */
 public interface Parser {
 
     /**

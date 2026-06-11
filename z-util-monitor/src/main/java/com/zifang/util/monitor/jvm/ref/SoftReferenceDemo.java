@@ -12,12 +12,6 @@ import java.lang.ref.SoftReference;
  *
  * @author zifang
  */
-/**
- * SoftReferenceDemo类。
- */
-/**
- * SoftReferenceDemo类。
- */
 public class SoftReferenceDemo {
 
     /**
@@ -32,20 +26,11 @@ public class SoftReferenceDemo {
      *      * @param name String类型参数
      * @param age int类型参数
      */
-    /**
-     * Bean方法。
-     *      * @param name String类型参数
-     * @param age int类型参数
-     */
         public Bean(String name, int age) {
             this.name = name;
             this.age = age;
         }
 
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     /**
      * getName方法。
      * @return String类型返回值
@@ -58,18 +43,10 @@ public class SoftReferenceDemo {
      * setName方法。
      *      * @param name String类型参数
      */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
         public void setName(String name) {
             this.name = name;
         }
 
-    /**
-     * getAge方法。
-     * @return int类型返回值
-     */
     /**
      * getAge方法。
      * @return int类型返回值
@@ -82,10 +59,6 @@ public class SoftReferenceDemo {
      * setAge方法。
      *      * @param age int类型参数
      */
-    /**
-     * setAge方法。
-     *      * @param age int类型参数
-     */
         public void setAge(int age) {
             this.age = age;
         }
@@ -94,14 +67,6 @@ public class SoftReferenceDemo {
 
     /**
      * 测试软引用的基本用法。
-     */
-    /**
-     * test1方法。
-     * @return static void类型返回值
-     */
-    /**
-     * test1方法。
-     * @return static void类型返回值
      */
     public static void test1() {
         SoftReference<Bean> softBean = new SoftReference<Bean>(new Bean("name", 10));
@@ -119,14 +84,6 @@ public class SoftReferenceDemo {
      * <p>
      * JVM参数：-Xmx2m -Xms2m
      */
-    /**
-     * test2方法。
-     * @return static void类型返回值
-     */
-    /**
-     * test2方法。
-     * @return static void类型返回值
-     */
     public static void test2() {
         Reference<Bean>[] referent = new SoftReference[100000];
         for (int i = 0; i < referent.length; i++) {
@@ -139,16 +96,6 @@ public class SoftReferenceDemo {
      * 主方法，执行软引用测试。
      *
      * @param args 命令行参数
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
         test1();

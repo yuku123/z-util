@@ -10,11 +10,5 @@ package com.zifang.util.monitor.jvm;
  * @author zifang
  * @see java.lang.management.ManagementFactory
  */
-/**
- * JvmMonitor类。
- */
-/**
- * JvmMonitor类。
- */
 public class JvmMonitor {
 }

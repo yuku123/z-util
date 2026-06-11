@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _048类。
- */
 public class _048 {
     /**
      * rotate方法。

@@ -10,9 +10,6 @@ import java.util.Date;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * GitAuthor类。
- */
 public class GitAuthor {
 
     private String name;

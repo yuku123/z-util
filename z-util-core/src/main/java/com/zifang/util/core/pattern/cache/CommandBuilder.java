@@ -5,12 +5,6 @@ package com.zifang.util.core.pattern.cache;
  *
  * @author zifang
  */
-/**
- * CommandBuilder类。
- */
-/**
- * CommandBuilder类。
- */
 public class CommandBuilder {
 
 }

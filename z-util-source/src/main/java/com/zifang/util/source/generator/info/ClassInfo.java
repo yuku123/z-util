@@ -20,12 +20,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ClassInfo类。
- */
-/**
- * ClassInfo类。
- */
 public class ClassInfo {
 
     /**
@@ -96,14 +90,6 @@ public class ClassInfo {
      *
      * @return 包名.类名的格式
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return packageName + "." + simpleClassName;
     }
@@ -112,14 +98,6 @@ public class ClassInfo {
      * 批量添加字段
      *
      * @param fieldInfos 字段信息列表
-     */
-    /**
-     * appendFields方法。
-     *      * @param fieldInfos ListFieldInfo类型参数
-     */
-    /**
-     * appendFields方法。
-     *      * @param fieldInfos ListFieldInfo类型参数
      */
     public void appendFields(List<FieldInfo> fieldInfos) {
         checkField();
@@ -131,14 +109,6 @@ public class ClassInfo {
      *
      * @param fieldInfo 字段信息
      */
-    /**
-     * appendField方法。
-     *      * @param fieldInfo FieldInfo类型参数
-     */
-    /**
-     * appendField方法。
-     *      * @param fieldInfo FieldInfo类型参数
-     */
     public void appendField(FieldInfo fieldInfo) {
         checkField();
         fields.add(fieldInfo);
@@ -148,14 +118,6 @@ public class ClassInfo {
      * 批量添加方法
      *
      * @param methodInfos 方法信息列表
-     */
-    /**
-     * appendMethods方法。
-     *      * @param methodInfos ListMethodInfo类型参数
-     */
-    /**
-     * appendMethods方法。
-     *      * @param methodInfos ListMethodInfo类型参数
      */
     public void appendMethods(List<MethodInfo> methodInfos) {
         checkMethod();
@@ -167,14 +129,6 @@ public class ClassInfo {
      *
      * @param methodInfo 方法信息
      */
-    /**
-     * appendMethod方法。
-     *      * @param methodInfo MethodInfo类型参数
-     */
-    /**
-     * appendMethod方法。
-     *      * @param methodInfo MethodInfo类型参数
-     */
     public void appendMethod(MethodInfo methodInfo) {
         checkMethod();
         methods.add(methodInfo);
@@ -184,14 +138,6 @@ public class ClassInfo {
      * 批量添加接口
      *
      * @param interfaceClassInfos 接口信息列表
-     */
-    /**
-     * appendInterfaces方法。
-     *      * @param interfaceClassInfos ListClassInfo类型参数
-     */
-    /**
-     * appendInterfaces方法。
-     *      * @param interfaceClassInfos ListClassInfo类型参数
      */
     public void appendInterfaces(List<ClassInfo> interfaceClassInfos) {
         checkInterface();
@@ -203,14 +149,6 @@ public class ClassInfo {
      *
      * @param interfaceClassInfo 接口信息
      */
-    /**
-     * appendInterfaces方法。
-     *      * @param interfaceClassInfo ClassInfo类型参数
-     */
-    /**
-     * appendInterfaces方法。
-     *      * @param interfaceClassInfo ClassInfo类型参数
-     */
     public void appendInterfaces(ClassInfo interfaceClassInfo) {
         checkInterface();
         interfaces.add(interfaceClassInfo);
@@ -221,16 +159,6 @@ public class ClassInfo {
      *
      * @param clazz 要解析的Class对象
      * @return 解析后的ClassInfo对象
-     */
-    /**
-     * parser方法。
-     *      * @param clazz Class类型参数
-     * @return static ClassInfo类型返回值
-     */
-    /**
-     * parser方法。
-     *      * @param clazz Class类型参数
-     * @return static ClassInfo类型返回值
      */
     public static ClassInfo parser(Class clazz) {
         return null; // @todo
@@ -251,32 +179,6 @@ public class ClassInfo {
      * @param fieldInfos     字段列表
      * @param methodInfos    方法列表
      * @return 构建完成的ClassInfo对象
-     */
-    /**
-     * build方法。
-     *      * @param interfaceType boolean类型参数
-     * @param modifiers int类型参数
-     * @param packageName String类型参数
-     * @param comments ListString类型参数
-     * @param simpleClassName String类型参数
-     * @param superClass ClassInfo类型参数
-     * @param interfaces ListClassInfo类型参数
-     * @param fieldInfos ListFieldInfo类型参数
-     * @param methodInfos ListMethodInfo类型参数
-     * @return static ClassInfo类型返回值
-     */
-    /**
-     * build方法。
-     *      * @param interfaceType boolean类型参数
-     * @param modifiers int类型参数
-     * @param packageName String类型参数
-     * @param comments ListString类型参数
-     * @param simpleClassName String类型参数
-     * @param superClass ClassInfo类型参数
-     * @param interfaces ListClassInfo类型参数
-     * @param fieldInfos ListFieldInfo类型参数
-     * @param methodInfos ListMethodInfo类型参数
-     * @return static ClassInfo类型返回值
      */
     public static ClassInfo build(
             Boolean interfaceType,
@@ -306,18 +208,10 @@ public class ClassInfo {
      * getComments方法。
      * @return List<String>类型返回值
      */
-    /**
-     * getComments方法。
-     * @return List<String>类型返回值
-     */
     public List<String> getComments() {
         return comments;
     }
 
-    /**
-     * setComments方法。
-     *      * @param comments ListString类型参数
-     */
     /**
      * setComments方法。
      *      * @param comments ListString类型参数
@@ -330,18 +224,10 @@ public class ClassInfo {
      * getSimpleClassName方法。
      * @return String类型返回值
      */
-    /**
-     * getSimpleClassName方法。
-     * @return String类型返回值
-     */
     public String getSimpleClassName() {
         return simpleClassName;
     }
 
-    /**
-     * setSimpleClassName方法。
-     *      * @param simpleClassName String类型参数
-     */
     /**
      * setSimpleClassName方法。
      *      * @param simpleClassName String类型参数
@@ -354,18 +240,10 @@ public class ClassInfo {
      * getPackageName方法。
      * @return String类型返回值
      */
-    /**
-     * getPackageName方法。
-     * @return String类型返回值
-     */
     public String getPackageName() {
         return packageName;
     }
 
-    /**
-     * setPackageName方法。
-     *      * @param packageName String类型参数
-     */
     /**
      * setPackageName方法。
      *      * @param packageName String类型参数
@@ -378,18 +256,10 @@ public class ClassInfo {
      * getSuperClass方法。
      * @return ClassInfo类型返回值
      */
-    /**
-     * getSuperClass方法。
-     * @return ClassInfo类型返回值
-     */
     public ClassInfo getSuperClass() {
         return superClass;
     }
 
-    /**
-     * setSuperClass方法。
-     *      * @param superClass ClassInfo类型参数
-     */
     /**
      * setSuperClass方法。
      *      * @param superClass ClassInfo类型参数
@@ -402,18 +272,10 @@ public class ClassInfo {
      * getInterfaces方法。
      * @return List<ClassInfo>类型返回值
      */
-    /**
-     * getInterfaces方法。
-     * @return List<ClassInfo>类型返回值
-     */
     public List<ClassInfo> getInterfaces() {
         return interfaces;
     }
 
-    /**
-     * setInterfaces方法。
-     *      * @param interfaces ListClassInfo类型参数
-     */
     /**
      * setInterfaces方法。
      *      * @param interfaces ListClassInfo类型参数
@@ -426,18 +288,10 @@ public class ClassInfo {
      * getFields方法。
      * @return List<FieldInfo>类型返回值
      */
-    /**
-     * getFields方法。
-     * @return List<FieldInfo>类型返回值
-     */
     public List<FieldInfo> getFields() {
         return fields;
     }
 
-    /**
-     * setFields方法。
-     *      * @param fields ListFieldInfo类型参数
-     */
     /**
      * setFields方法。
      *      * @param fields ListFieldInfo类型参数
@@ -450,18 +304,10 @@ public class ClassInfo {
      * getMethods方法。
      * @return List<MethodInfo>类型返回值
      */
-    /**
-     * getMethods方法。
-     * @return List<MethodInfo>类型返回值
-     */
     public List<MethodInfo> getMethods() {
         return methods;
     }
 
-    /**
-     * setMethods方法。
-     *      * @param methods ListMethodInfo类型参数
-     */
     /**
      * setMethods方法。
      *      * @param methods ListMethodInfo类型参数
@@ -474,18 +320,10 @@ public class ClassInfo {
      * getModifiers方法。
      * @return int类型返回值
      */
-    /**
-     * getModifiers方法。
-     * @return int类型返回值
-     */
     public int getModifiers() {
         return modifiers;
     }
 
-    /**
-     * setModifiers方法。
-     *      * @param modifiers int类型参数
-     */
     /**
      * setModifiers方法。
      *      * @param modifiers int类型参数
@@ -498,18 +336,10 @@ public class ClassInfo {
      * getImports方法。
      * @return List<String>类型返回值
      */
-    /**
-     * getImports方法。
-     * @return List<String>类型返回值
-     */
     public List<String> getImports() {
         return imports;
     }
 
-    /**
-     * setImports方法。
-     *      * @param imports ListString类型参数
-     */
     /**
      * setImports方法。
      *      * @param imports ListString类型参数
@@ -522,18 +352,10 @@ public class ClassInfo {
      * getInterfaceType方法。
      * @return boolean类型返回值
      */
-    /**
-     * getInterfaceType方法。
-     * @return boolean类型返回值
-     */
     public Boolean getInterfaceType() {
         return interfaceType;
     }
 
-    /**
-     * setInterfaceType方法。
-     *      * @param interfaceType boolean类型参数
-     */
     /**
      * setInterfaceType方法。
      *      * @param interfaceType boolean类型参数
@@ -546,18 +368,10 @@ public class ClassInfo {
      * getInnerClasses方法。
      * @return List<ClassInfo>类型返回值
      */
-    /**
-     * getInnerClasses方法。
-     * @return List<ClassInfo>类型返回值
-     */
     public List<ClassInfo> getInnerClasses() {
         return innerClasses;
     }
 
-    /**
-     * setInnerClasses方法。
-     *      * @param innerClasses ListClassInfo类型参数
-     */
     /**
      * setInnerClasses方法。
      *      * @param innerClasses ListClassInfo类型参数
@@ -570,18 +384,10 @@ public class ClassInfo {
      * getAnnotations方法。
      * @return List<AnnotationInfo>类型返回值
      */
-    /**
-     * getAnnotations方法。
-     * @return List<AnnotationInfo>类型返回值
-     */
     public List<AnnotationInfo> getAnnotations() {
         return annotations;
     }
 
-    /**
-     * setAnnotations方法。
-     *      * @param annotations ListAnnotationInfo类型参数
-     */
     /**
      * setAnnotations方法。
      *      * @param annotations ListAnnotationInfo类型参数

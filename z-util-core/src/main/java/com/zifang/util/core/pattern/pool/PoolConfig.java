@@ -3,12 +3,6 @@ package com.zifang.util.core.pattern.pool;
 /**
  * 对象池配置
  */
-/**
- * PoolConfig类。
- */
-/**
- * PoolConfig类。
- */
 public class PoolConfig {
 
     /**
@@ -64,18 +58,9 @@ public class PoolConfig {
     /**
      * PoolConfig方法。
      */
-    /**
-     * PoolConfig方法。
-     */
     public PoolConfig() {
     }
 
-    /**
-     * PoolConfig方法。
-     *      * @param maxTotal int类型参数
-     * @param maxIdle int类型参数
-     * @param minIdle int类型参数
-     */
     /**
      * PoolConfig方法。
      *      * @param maxTotal int类型参数
@@ -94,18 +79,10 @@ public class PoolConfig {
      * getMaxTotal方法。
      * @return int类型返回值
      */
-    /**
-     * getMaxTotal方法。
-     * @return int类型返回值
-     */
     public int getMaxTotal() {
         return maxTotal;
     }
 
-    /**
-     * setMaxTotal方法。
-     *      * @param maxTotal int类型参数
-     */
     /**
      * setMaxTotal方法。
      *      * @param maxTotal int类型参数
@@ -118,18 +95,10 @@ public class PoolConfig {
      * getMaxIdle方法。
      * @return int类型返回值
      */
-    /**
-     * getMaxIdle方法。
-     * @return int类型返回值
-     */
     public int getMaxIdle() {
         return maxIdle;
     }
 
-    /**
-     * setMaxIdle方法。
-     *      * @param maxIdle int类型参数
-     */
     /**
      * setMaxIdle方法。
      *      * @param maxIdle int类型参数
@@ -142,18 +111,10 @@ public class PoolConfig {
      * getMinIdle方法。
      * @return int类型返回值
      */
-    /**
-     * getMinIdle方法。
-     * @return int类型返回值
-     */
     public int getMinIdle() {
         return minIdle;
     }
 
-    /**
-     * setMinIdle方法。
-     *      * @param minIdle int类型参数
-     */
     /**
      * setMinIdle方法。
      *      * @param minIdle int类型参数
@@ -166,18 +127,10 @@ public class PoolConfig {
      * isTestOnBorrow方法。
      * @return boolean类型返回值
      */
-    /**
-     * isTestOnBorrow方法。
-     * @return boolean类型返回值
-     */
     public boolean isTestOnBorrow() {
         return testOnBorrow;
     }
 
-    /**
-     * setTestOnBorrow方法。
-     *      * @param testOnBorrow boolean类型参数
-     */
     /**
      * setTestOnBorrow方法。
      *      * @param testOnBorrow boolean类型参数
@@ -190,18 +143,10 @@ public class PoolConfig {
      * isTestOnReturn方法。
      * @return boolean类型返回值
      */
-    /**
-     * isTestOnReturn方法。
-     * @return boolean类型返回值
-     */
     public boolean isTestOnReturn() {
         return testOnReturn;
     }
 
-    /**
-     * setTestOnReturn方法。
-     *      * @param testOnReturn boolean类型参数
-     */
     /**
      * setTestOnReturn方法。
      *      * @param testOnReturn boolean类型参数
@@ -214,18 +159,10 @@ public class PoolConfig {
      * isTestWhileIdle方法。
      * @return boolean类型返回值
      */
-    /**
-     * isTestWhileIdle方法。
-     * @return boolean类型返回值
-     */
     public boolean isTestWhileIdle() {
         return testWhileIdle;
     }
 
-    /**
-     * setTestWhileIdle方法。
-     *      * @param testWhileIdle boolean类型参数
-     */
     /**
      * setTestWhileIdle方法。
      *      * @param testWhileIdle boolean类型参数
@@ -238,18 +175,10 @@ public class PoolConfig {
      * getDurationBetweenEvictionRuns方法。
      * @return long类型返回值
      */
-    /**
-     * getDurationBetweenEvictionRuns方法。
-     * @return long类型返回值
-     */
     public long getDurationBetweenEvictionRuns() {
         return durationBetweenEvictionRuns;
     }
 
-    /**
-     * setDurationBetweenEvictionRuns方法。
-     *      * @param durationBetweenEvictionRuns long类型参数
-     */
     /**
      * setDurationBetweenEvictionRuns方法。
      *      * @param durationBetweenEvictionRuns long类型参数
@@ -262,18 +191,10 @@ public class PoolConfig {
      * getMaxWaitMillis方法。
      * @return int类型返回值
      */
-    /**
-     * getMaxWaitMillis方法。
-     * @return int类型返回值
-     */
     public int getMaxWaitMillis() {
         return maxWaitMillis;
     }
 
-    /**
-     * setMaxWaitMillis方法。
-     *      * @param maxWaitMillis int类型参数
-     */
     /**
      * setMaxWaitMillis方法。
      *      * @param maxWaitMillis int类型参数
@@ -286,18 +207,10 @@ public class PoolConfig {
      * isBlockWhenExhausted方法。
      * @return boolean类型返回值
      */
-    /**
-     * isBlockWhenExhausted方法。
-     * @return boolean类型返回值
-     */
     public boolean isBlockWhenExhausted() {
         return blockWhenExhausted;
     }
 
-    /**
-     * setBlockWhenExhausted方法。
-     *      * @param blockWhenExhausted boolean类型参数
-     */
     /**
      * setBlockWhenExhausted方法。
      *      * @param blockWhenExhausted boolean类型参数
@@ -310,18 +223,10 @@ public class PoolConfig {
      * isSoftMinIdle方法。
      * @return boolean类型返回值
      */
-    /**
-     * isSoftMinIdle方法。
-     * @return boolean类型返回值
-     */
     public boolean isSoftMinIdle() {
         return softMinIdle;
     }
 
-    /**
-     * setSoftMinIdle方法。
-     *      * @param softMinIdle boolean类型参数
-     */
     /**
      * setSoftMinIdle方法。
      *      * @param softMinIdle boolean类型参数
@@ -333,28 +238,12 @@ public class PoolConfig {
     /**
      * 创建默认配置
      */
-    /**
-     * createDefault方法。
-     * @return static PoolConfig类型返回值
-     */
-    /**
-     * createDefault方法。
-     * @return static PoolConfig类型返回值
-     */
     public static PoolConfig createDefault() {
         return new PoolConfig();
     }
 
     /**
      * 创建配置Builder
-     */
-    /**
-     * builder方法。
-     * @return static Builder类型返回值
-     */
-    /**
-     * builder方法。
-     * @return static Builder类型返回值
      */
     public static Builder builder() {
         return new Builder();
@@ -363,11 +252,6 @@ public class PoolConfig {
     public static class Builder {
         private final PoolConfig config = new PoolConfig();
 
-    /**
-     * maxTotal方法。
-     *      * @param maxTotal int类型参数
-     * @return Builder类型返回值
-     */
     /**
      * maxTotal方法。
      *      * @param maxTotal int类型参数
@@ -383,21 +267,11 @@ public class PoolConfig {
      *      * @param maxIdle int类型参数
      * @return Builder类型返回值
      */
-    /**
-     * maxIdle方法。
-     *      * @param maxIdle int类型参数
-     * @return Builder类型返回值
-     */
         public Builder maxIdle(int maxIdle) {
             config.setMaxIdle(maxIdle);
             return this;
         }
 
-    /**
-     * minIdle方法。
-     *      * @param minIdle int类型参数
-     * @return Builder类型返回值
-     */
     /**
      * minIdle方法。
      *      * @param minIdle int类型参数
@@ -413,21 +287,11 @@ public class PoolConfig {
      *      * @param testOnBorrow boolean类型参数
      * @return Builder类型返回值
      */
-    /**
-     * testOnBorrow方法。
-     *      * @param testOnBorrow boolean类型参数
-     * @return Builder类型返回值
-     */
         public Builder testOnBorrow(boolean testOnBorrow) {
             config.setTestOnBorrow(testOnBorrow);
             return this;
         }
 
-    /**
-     * testOnReturn方法。
-     *      * @param testOnReturn boolean类型参数
-     * @return Builder类型返回值
-     */
     /**
      * testOnReturn方法。
      *      * @param testOnReturn boolean类型参数
@@ -443,21 +307,11 @@ public class PoolConfig {
      *      * @param testWhileIdle boolean类型参数
      * @return Builder类型返回值
      */
-    /**
-     * testWhileIdle方法。
-     *      * @param testWhileIdle boolean类型参数
-     * @return Builder类型返回值
-     */
         public Builder testWhileIdle(boolean testWhileIdle) {
             config.setTestWhileIdle(testWhileIdle);
             return this;
         }
 
-    /**
-     * durationBetweenEvictionRuns方法。
-     *      * @param durationBetweenEvictionRuns long类型参数
-     * @return Builder类型返回值
-     */
     /**
      * durationBetweenEvictionRuns方法。
      *      * @param durationBetweenEvictionRuns long类型参数
@@ -473,11 +327,6 @@ public class PoolConfig {
      *      * @param maxWaitMillis int类型参数
      * @return Builder类型返回值
      */
-    /**
-     * maxWaitMillis方法。
-     *      * @param maxWaitMillis int类型参数
-     * @return Builder类型返回值
-     */
         public Builder maxWaitMillis(int maxWaitMillis) {
             config.setMaxWaitMillis(maxWaitMillis);
             return this;
@@ -488,20 +337,11 @@ public class PoolConfig {
      *      * @param blockWhenExhausted boolean类型参数
      * @return Builder类型返回值
      */
-    /**
-     * blockWhenExhausted方法。
-     *      * @param blockWhenExhausted boolean类型参数
-     * @return Builder类型返回值
-     */
         public Builder blockWhenExhausted(boolean blockWhenExhausted) {
             config.setBlockWhenExhausted(blockWhenExhausted);
             return this;
         }
 
-    /**
-     * build方法。
-     * @return PoolConfig类型返回值
-     */
     /**
      * build方法。
      * @return PoolConfig类型返回值

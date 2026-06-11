@@ -10,11 +10,5 @@ package com.zifang.util.workflow.engine.spark.services;
  *
  * @see AbstractSparkEngineService
  */
-/**
- * DiscriptionHandler类。
- */
-/**
- * DiscriptionHandler类。
- */
 public class DiscriptionHandler {
 }

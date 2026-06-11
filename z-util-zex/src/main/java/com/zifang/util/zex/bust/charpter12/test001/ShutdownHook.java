@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.charpter12.test001;
  * @author zifang
  * @version 1.0
  */
-/**
- * ShutdownHook类。
- */
 public class ShutdownHook {
     /**
      * main方法。

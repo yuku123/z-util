@@ -8,18 +8,8 @@ import java.util.*;
  * @param <C> 上下文类型
  * @author zifang
  */
-/**
- * NamedChain类。
- */
-/**
- * NamedChain类。
- */
 public class NamedChain<C extends ChainContext<?, ?>> extends SimpleChain<C> {
 
-    /**
-     * NamedChain方法。
-     *      * @param name String类型参数
-     */
     /**
      * NamedChain方法。
      *      * @param name String类型参数
@@ -28,11 +18,6 @@ public class NamedChain<C extends ChainContext<?, ?>> extends SimpleChain<C> {
         super(name);
     }
 
-    /**
-     * NamedChain方法。
-     *      * @param name String类型参数
-     * @param processor ProcessorC类型参数
-     */
     /**
      * NamedChain方法。
      *      * @param name String类型参数

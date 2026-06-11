@@ -6,12 +6,6 @@ import java.util.*;
  * FP-Growth algorithm for frequent itemset mining and association rule generation.
  * More efficient than Apriori as it avoids candidate generation and multiple database scans.
  */
-/**
- * FPGrowth类。
- */
-/**
- * FPGrowth类。
- */
 public class FPGrowth {
 
     private final double minSupport;
@@ -25,16 +19,6 @@ public class FPGrowth {
      *
      * @param minSupport      Minimum support threshold (0-1), used for finding frequent itemsets
      * @param minSupportCount Minimum absolute support count
-     */
-    /**
-     * FPGrowth方法。
-     *      * @param minSupport double类型参数
-     * @param minSupportCount int类型参数
-     */
-    /**
-     * FPGrowth方法。
-     *      * @param minSupport double类型参数
-     * @param minSupportCount int类型参数
      */
     public FPGrowth(double minSupport, int minSupportCount) {
         if (minSupport < 0 || minSupport > 1) {
@@ -54,16 +38,6 @@ public class FPGrowth {
      *
      * @param transactions List of transactions, where each transaction is an array of item IDs
      * @return List of frequent itemsets
-     */
-    /**
-     * findFrequentItemsets方法。
-     *      * @param transactions Listint[]类型参数
-     * @return List<Set<Integer>>类型返回值
-     */
-    /**
-     * findFrequentItemsets方法。
-     *      * @param transactions Listint[]类型参数
-     * @return List<Set<Integer>>类型返回值
      */
     public List<Set<Integer>> findFrequentItemsets(List<int[]> transactions) {
         if (transactions == null || transactions.isEmpty()) {
@@ -167,16 +141,6 @@ public class FPGrowth {
      *
      * @param transactions List of transactions
      * @return List of association rules
-     */
-    /**
-     * findAssociationRules方法。
-     *      * @param transactions Listint[]类型参数
-     * @return List<AssociationRule>类型返回值
-     */
-    /**
-     * findAssociationRules方法。
-     *      * @param transactions Listint[]类型参数
-     * @return List<AssociationRule>类型返回值
      */
     public List<AssociationRule> findAssociationRules(List<int[]> transactions) {
         if (transactions == null || transactions.isEmpty()) {
@@ -499,12 +463,6 @@ public class FPGrowth {
      * @param count int类型参数
      * @param parent FPTreeNode类型参数
      */
-    /**
-     * FPTreeNode方法。
-     *      * @param item int类型参数
-     * @param count int类型参数
-     * @param parent FPTreeNode类型参数
-     */
         public FPTreeNode(int item, int count, FPTreeNode parent) {
             this.item = item;
             this.count = count;
@@ -526,20 +484,11 @@ public class FPGrowth {
      *      * @param itemset SetInteger类型参数
      * @param support int类型参数
      */
-    /**
-     * FrequentPattern方法。
-     *      * @param itemset SetInteger类型参数
-     * @param support int类型参数
-     */
         public FrequentPattern(Set<Integer> itemset, int support) {
             this.itemset = new HashSet<>(itemset);
             this.support = support;
         }
 
-    /**
-     * getItemset方法。
-     * @return Set<Integer>类型返回值
-     */
     /**
      * getItemset方法。
      * @return Set<Integer>类型返回值
@@ -552,19 +501,11 @@ public class FPGrowth {
      * getSupport方法。
      * @return int类型返回值
      */
-    /**
-     * getSupport方法。
-     * @return int类型返回值
-     */
         public int getSupport() {
             return support;
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -592,14 +533,6 @@ public class FPGrowth {
      * @param confidence double类型参数
      * @param lift double类型参数
      */
-    /**
-     * AssociationRule方法。
-     *      * @param antecedent SetInteger类型参数
-     * @param consequent SetInteger类型参数
-     * @param support double类型参数
-     * @param confidence double类型参数
-     * @param lift double类型参数
-     */
         public AssociationRule(Set<Integer> antecedent, Set<Integer> consequent,
                                double support, double confidence, double lift) {
             this.antecedent = new HashSet<>(antecedent);
@@ -613,18 +546,10 @@ public class FPGrowth {
      * getAntecedent方法。
      * @return Set<Integer>类型返回值
      */
-    /**
-     * getAntecedent方法。
-     * @return Set<Integer>类型返回值
-     */
         public Set<Integer> getAntecedent() {
             return new HashSet<>(antecedent);
         }
 
-    /**
-     * getConsequent方法。
-     * @return Set<Integer>类型返回值
-     */
     /**
      * getConsequent方法。
      * @return Set<Integer>类型返回值
@@ -637,18 +562,10 @@ public class FPGrowth {
      * getSupport方法。
      * @return double类型返回值
      */
-    /**
-     * getSupport方法。
-     * @return double类型返回值
-     */
         public double getSupport() {
             return support;
         }
 
-    /**
-     * getConfidence方法。
-     * @return double类型返回值
-     */
     /**
      * getConfidence方法。
      * @return double类型返回值
@@ -661,19 +578,11 @@ public class FPGrowth {
      * getLift方法。
      * @return double类型返回值
      */
-    /**
-     * getLift方法。
-     * @return double类型返回值
-     */
         public double getLift() {
             return lift;
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

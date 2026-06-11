@@ -14,12 +14,6 @@ import java.util.regex.Pattern;
 /**
  * Handles conversion of option string values to typed values.
  */
-/**
- * TypeHandler类。
- */
-/**
- * TypeHandler类。
- */
 public class TypeHandler {
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
@@ -28,18 +22,6 @@ public class TypeHandler {
 
     /**
      * Convert a string value to a Number.
-     */
-    /**
-     * toNumber方法。
-     *      * @param value final类型参数
-     * @param targetClass final类型参数
-     * @return static Number类型返回值
-     */
-    /**
-     * toNumber方法。
-     *      * @param value final类型参数
-     * @param targetClass final类型参数
-     * @return static Number类型返回值
      */
     public static Number toNumber(final String value, final Class<?> targetClass) throws ParseException {
         if (value == null) {
@@ -69,18 +51,6 @@ public class TypeHandler {
     /**
      * Convert a string value to a Date using the given pattern.
      */
-    /**
-     * toDate方法。
-     *      * @param value final类型参数
-     * @param pattern final类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * toDate方法。
-     *      * @param value final类型参数
-     * @param pattern final类型参数
-     * @return static Date类型返回值
-     */
     public static Date toDate(final String value, final String pattern) throws ParseException {
         if (value == null) {
             return null;
@@ -92,16 +62,6 @@ public class TypeHandler {
     /**
      * Convert a string value to a Date using the default format.
      */
-    /**
-     * toDate方法。
-     *      * @param value final类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * toDate方法。
-     *      * @param value final类型参数
-     * @return static Date类型返回值
-     */
     public static Date toDate(final String value) throws ParseException {
         if (value == null) {
             return null;
@@ -111,16 +71,6 @@ public class TypeHandler {
 
     /**
      * Convert a string value to a URI.
-     */
-    /**
-     * toURI方法。
-     *      * @param value final类型参数
-     * @return static URI类型返回值
-     */
-    /**
-     * toURI方法。
-     *      * @param value final类型参数
-     * @return static URI类型返回值
      */
     public static URI toURI(final String value) {
         if (value == null) {
@@ -132,16 +82,6 @@ public class TypeHandler {
     /**
      * Convert a string value to a URL.
      */
-    /**
-     * toURL方法。
-     *      * @param value final类型参数
-     * @return static URL类型返回值
-     */
-    /**
-     * toURL方法。
-     *      * @param value final类型参数
-     * @return static URL类型返回值
-     */
     public static URL toURL(final String value) throws java.net.MalformedURLException {
         if (value == null) {
             return null;
@@ -151,16 +91,6 @@ public class TypeHandler {
 
     /**
      * Convert a string value to a File.
-     */
-    /**
-     * toFile方法。
-     *      * @param value final类型参数
-     * @return static File类型返回值
-     */
-    /**
-     * toFile方法。
-     *      * @param value final类型参数
-     * @return static File类型返回值
      */
     public static File toFile(final String value) {
         if (value == null) {
@@ -178,11 +108,6 @@ public class TypeHandler {
      *      * @param value final类型参数
      * @return static <T> Class<T>类型返回值
      */
-    /**
-     * toClass方法。
-     *      * @param value final类型参数
-     * @return static <T> Class<T>类型返回值
-     */
     public static <T> Class<T> toClass(final String value) throws ClassNotFoundException {
         if (value == null) {
             return null;
@@ -192,16 +117,6 @@ public class TypeHandler {
 
     /**
      * Check if a string represents a number.
-     */
-    /**
-     * isNumber方法。
-     *      * @param value final类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isNumber方法。
-     *      * @param value final类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isNumber(final String value) {
         if (value == null) {
@@ -214,12 +129,6 @@ public class TypeHandler {
      * Convert a string value to the specified type.
      */
     @SuppressWarnings("unchecked")
-    /**
-     * cast方法。
-     *      * @param value final类型参数
-     * @param targetClass final类型参数
-     * @return static <T> T类型返回值
-     */
     /**
      * cast方法。
      *      * @param value final类型参数

@@ -12,12 +12,6 @@ import java.util.stream.Collectors;
  *
  * @author zifang
  */
-/**
- * CommandParser类。
- */
-/**
- * CommandParser类。
- */
 public class CommandParser<C extends CommandContext> {
 
     private final CommandRegistry<C> registry;
@@ -25,10 +19,6 @@ public class CommandParser<C extends CommandContext> {
     private final Pattern paramPattern = Pattern.compile("(\\w+)(?:\\((.*)\\))?");
     private final Pattern kvPattern = Pattern.compile("(\\w+)=([^,]+)");
 
-    /**
-     * CommandParser方法。
-     *      * @param registry CommandRegistryC类型参数
-     */
     /**
      * CommandParser方法。
      *      * @param registry CommandRegistryC类型参数
@@ -48,16 +38,6 @@ public class CommandParser<C extends CommandContext> {
      * @param script 命令脚本
      * @param context 执行上下文
      */
-    /**
-     * parseAndExecute方法。
-     *      * @param script String类型参数
-     * @param context C类型参数
-     */
-    /**
-     * parseAndExecute方法。
-     *      * @param script String类型参数
-     * @param context C类型参数
-     */
     public void parseAndExecute(String script, C context) {
         if (script == null || script.trim().isEmpty()) {
             return;
@@ -76,16 +56,6 @@ public class CommandParser<C extends CommandContext> {
 
     /**
      * 解析并执行命令列表
-     */
-    /**
-     * parseAndExecute方法。
-     *      * @param commandLines ListString类型参数
-     * @param context C类型参数
-     */
-    /**
-     * parseAndExecute方法。
-     *      * @param commandLines ListString类型参数
-     * @param context C类型参数
      */
     public void parseAndExecute(List<String> commandLines, C context) {
         for (String line : commandLines) {
@@ -261,28 +231,12 @@ public class CommandParser<C extends CommandContext> {
     /**
      * 获取命令执行器
      */
-    /**
-     * getExecutor方法。
-     * @return CommandExecutor<C>类型返回值
-     */
-    /**
-     * getExecutor方法。
-     * @return CommandExecutor<C>类型返回值
-     */
     public CommandExecutor<C> getExecutor() {
         return executor;
     }
 
     /**
      * 获取注册表
-     */
-    /**
-     * getRegistry方法。
-     * @return CommandRegistry<C>类型返回值
-     */
-    /**
-     * getRegistry方法。
-     * @return CommandRegistry<C>类型返回值
      */
     public CommandRegistry<C> getRegistry() {
         return registry;

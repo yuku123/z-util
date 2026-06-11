@@ -10,12 +10,6 @@ import com.zifang.util.numpy.NdArray;
  * <p>
  * Used for binary classification problems.
  */
-/**
- * BinaryCrossEntropyLoss类。
- */
-/**
- * BinaryCrossEntropyLoss类。
- */
 public class BinaryCrossEntropyLoss implements LossFunction {
 
     private static final double EPSILON = 1e-7;
@@ -28,12 +22,6 @@ public class BinaryCrossEntropyLoss implements LossFunction {
      * @return Scalar loss value
      */
     @Override
-    /**
-     * compute方法。
-     *      * @param predictions NdArray类型参数
-     * @param targets NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * compute方法。
      *      * @param predictions NdArray类型参数
@@ -66,12 +54,6 @@ public class BinaryCrossEntropyLoss implements LossFunction {
      * @return Gradient array with same shape as predictions
      */
     @Override
-    /**
-     * gradient方法。
-     *      * @param predictions NdArray类型参数
-     * @param targets NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * gradient方法。
      *      * @param predictions NdArray类型参数

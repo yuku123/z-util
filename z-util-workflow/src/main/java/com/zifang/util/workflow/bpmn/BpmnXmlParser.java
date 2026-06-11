@@ -35,12 +35,6 @@ import java.util.Map;
  * @see BpmnDiagram
  * @see BpmnModelConverter
  */
-/**
- * BpmnXmlParser类。
- */
-/**
- * BpmnXmlParser类。
- */
 public class BpmnXmlParser {
 
     private static final String BPMN_NS = "http://www.omg.org/spec/BPMN/20100524/MODEL";
@@ -49,9 +43,6 @@ public class BpmnXmlParser {
 
     private boolean namespaceAware = true;
 
-    /**
-     * BpmnXmlParser方法。
-     */
     /**
      * BpmnXmlParser方法。
      */
@@ -66,14 +57,6 @@ public class BpmnXmlParser {
      *                       适用于标准 BPMN 2.0 XML；禁用后使用宽松匹配，
      *                       可能适用于某些非标准格式的 XML。
      */
-    /**
-     * BpmnXmlParser方法。
-     *      * @param namespaceAware boolean类型参数
-     */
-    /**
-     * BpmnXmlParser方法。
-     *      * @param namespaceAware boolean类型参数
-     */
     public BpmnXmlParser(boolean namespaceAware) {
         this.namespaceAware = namespaceAware;
     }
@@ -83,16 +66,6 @@ public class BpmnXmlParser {
      *
      * @param xmlContent BPMN 2.0 XML string
      * @return BpmnDiagram model
-     */
-    /**
-     * parse方法。
-     *      * @param xmlContent String类型参数
-     * @return BpmnDiagram类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param xmlContent String类型参数
-     * @return BpmnDiagram类型返回值
      */
     public BpmnDiagram parse(String xmlContent) {
         try {
@@ -115,16 +88,6 @@ public class BpmnXmlParser {
      *
      * @param xmlBytes BPMN XML bytes
      * @return BpmnDiagram model
-     */
-    /**
-     * parse方法。
-     *      * @param xmlBytes byte[]类型参数
-     * @return BpmnDiagram类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param xmlBytes byte[]类型参数
-     * @return BpmnDiagram类型返回值
      */
     public BpmnDiagram parse(byte[] xmlBytes) {
         try {

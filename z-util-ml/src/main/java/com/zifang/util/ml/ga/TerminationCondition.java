@@ -3,12 +3,6 @@ package com.zifang.util.ml.ga;
 /**
  * 终止条件接口 - 定义算法何时停止
  */
-/**
- * TerminationCondition接口。
- */
-/**
- * TerminationCondition接口。
- */
 public interface TerminationCondition {
 
     /**

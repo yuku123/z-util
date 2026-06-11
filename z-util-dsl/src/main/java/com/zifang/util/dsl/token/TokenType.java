@@ -4,12 +4,6 @@ package com.zifang.util.dsl.token;
  * Token类型接口
  * 定义Token类型的基本信息
  */
-/**
- * TokenType接口。
- */
-/**
- * TokenType接口。
- */
 public interface TokenType {
 
     /**

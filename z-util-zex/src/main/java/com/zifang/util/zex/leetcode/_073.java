@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _073类。
- */
 public class _073 {
     /**
      * setZeroes方法。

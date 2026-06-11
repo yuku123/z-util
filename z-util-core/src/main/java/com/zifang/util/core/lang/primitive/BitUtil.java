@@ -9,12 +9,6 @@ import java.util.Set;
  * @description: 位操作工具类
  * @version: JDK 1.8
  */
-/**
- * BitUtil类。
- */
-/**
- * BitUtil类。
- */
 public class BitUtil {
 
 

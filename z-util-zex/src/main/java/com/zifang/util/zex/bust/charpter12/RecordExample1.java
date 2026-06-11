@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
-/**
- * RecordExample1类。
- */
 public class RecordExample1 {
 
     /**

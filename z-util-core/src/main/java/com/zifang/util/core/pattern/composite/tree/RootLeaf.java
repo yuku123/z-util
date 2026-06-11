@@ -12,17 +12,9 @@ public abstract class RootLeaf implements ILeaf {
      * getSubLeaves方法。
      * @return abstract List<ILeaf>类型返回值
      */
-    /**
-     * getSubLeaves方法。
-     * @return abstract List<ILeaf>类型返回值
-     */
     public abstract List<ILeaf> getSubLeaves();
 
     @Override
-    /**
-     * getParentLeaf方法。
-     * @return ILeaf类型返回值
-     */
     /**
      * getParentLeaf方法。
      * @return ILeaf类型返回值

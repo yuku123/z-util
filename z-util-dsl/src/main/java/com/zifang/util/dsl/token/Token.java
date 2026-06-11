@@ -4,12 +4,6 @@ package com.zifang.util.dsl.token;
  * Token接口
  * 表示词法分析产生的词法单元
  */
-/**
- * Token接口。
- */
-/**
- * Token接口。
- */
 public interface Token {
 
     /**

@@ -12,9 +12,6 @@ import java.lang.reflect.Method;
  * @author zifang
  * @version 1.0
  */
-/**
- * IntegerTest类。
- */
 public class IntegerTest {
     @Test
     /**

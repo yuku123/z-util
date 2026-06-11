@@ -9,11 +9,5 @@ package com.zifang.util.visuallization.robot.define;
  * @version 1.0
  * @since 2020-01-01
  */
-/**
- * OperationEnum类。
- */
-/**
- * OperationEnum类。
- */
 public class OperationEnum {
 }

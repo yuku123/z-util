@@ -19,9 +19,6 @@ import java.util.List;
 /**
  * PosixParser类。
  */
-/**
- * PosixParser类。
- */
 public class PosixParser extends Parser {
 
     private final List<String> tokens = new ArrayList<>();
@@ -32,19 +29,9 @@ public class PosixParser extends Parser {
     /**
      * PosixParser方法。
      */
-    /**
-     * PosixParser方法。
-     */
     public PosixParser() {}
 
     @Override
-    /**
-     * flatten方法。
-     *      * @param options final类型参数
-     * @param arguments final类型参数
-     * @param stopAtNonOption final类型参数
-     * @return String[]类型返回值
-     */
     /**
      * flatten方法。
      *      * @param options final类型参数

@@ -15,24 +15,10 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * CompileContext类。
- */
-/**
- * CompileContext类。
- */
 public class CompileContext {
 
     /**
      * 上下文唯一标识，基于时间戳生成
-     */
-    /**
-     * System.currentTimeMillis方法。
-     * @return static Long id =类型返回值
-     */
-    /**
-     * System.currentTimeMillis方法。
-     * @return static Long id =类型返回值
      */
     public static Long id = System.currentTimeMillis();
 
@@ -73,16 +59,6 @@ public class CompileContext {
      * @param uri            URI
      * @param javaFileObject Java文件对象
      */
-    /**
-     * addJavaObject方法。
-     *      * @param uri URI类型参数
-     * @param javaFileObject CharSequenceJavaFileObject类型参数
-     */
-    /**
-     * addJavaObject方法。
-     *      * @param uri URI类型参数
-     * @param javaFileObject CharSequenceJavaFileObject类型参数
-     */
     public void addJavaObject(URI uri, CharSequenceJavaFileObject javaFileObject) {
 
         this.customerCompileJavaFileManager.addJavaFileObject(uri, javaFileObject);
@@ -95,12 +71,6 @@ public class CompileContext {
      * 初始化编译上下文
      * <p>
      * 初始化编译器实例、标准文件管理器、自定义类加载器和自定义文件管理器
-     */
-    /**
-     * initial方法。
-     */
-    /**
-     * initial方法。
      */
     public void initial() {
 
@@ -117,12 +87,6 @@ public class CompileContext {
      * <p>
      * 使用初始化的组件执行Java源代码编译，
      * 编译参数设置为1.8版本以确保兼容性
-     */
-    /**
-     * compile方法。
-     */
-    /**
-     * compile方法。
      */
     public void compile() {
 
@@ -154,16 +118,6 @@ public class CompileContext {
      *
      * @param className 类名
      * @return Class对象，如果加载失败返回null
-     */
-    /**
-     * load方法。
-     *      * @param className String类型参数
-     * @return Class<?>类型返回值
-     */
-    /**
-     * load方法。
-     *      * @param className String类型参数
-     * @return Class<?>类型返回值
      */
     public Class<?> load(String className) {
         try {

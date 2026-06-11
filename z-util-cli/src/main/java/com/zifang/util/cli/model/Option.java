@@ -9,12 +9,6 @@ import java.util.List;
  * Represents a command-line option. Supports short opt (-s), long opt (--long),
  * argument requirements, value conversion, and deprecation metadata.
  */
-/**
- * Option类。
- */
-/**
- * Option类。
- */
 public class Option implements Cloneable, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,23 +30,10 @@ public class Option implements Cloneable, Serializable {
      * @param hasArg final类型参数
      * @param description final类型参数
      */
-    /**
-     * Option方法。
-     *      * @param opt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     */
     protected Option(final String opt, final boolean hasArg, final String description) {
         this(opt, null, hasArg, null, description, false, false, 1, null);
     }
 
-    /**
-     * Option方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     */
     /**
      * Option方法。
      *      * @param opt final类型参数
@@ -75,35 +56,12 @@ public class Option implements Cloneable, Serializable {
      * @param optionalArg final类型参数
      * @param maxArgs final类型参数
      */
-    /**
-     * Option方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
-     * @param argName final类型参数
-     * @param description final类型参数
-     * @param required final类型参数
-     * @param optionalArg final类型参数
-     * @param maxArgs final类型参数
-     */
     protected Option(final String opt, final String longOpt, final boolean hasArg,
                     final String argName, final String description, final boolean required,
                     final boolean optionalArg, final int maxArgs) {
         this(opt, longOpt, hasArg, argName, description, required, optionalArg, maxArgs, null);
     }
 
-    /**
-     * Option方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
-     * @param argName final类型参数
-     * @param description final类型参数
-     * @param required final类型参数
-     * @param optionalArg final类型参数
-     * @param maxArgs final类型参数
-     * @param deprecated final类型参数
-     */
     /**
      * Option方法。
      *      * @param opt final类型参数
@@ -138,20 +96,12 @@ public class Option implements Cloneable, Serializable {
      * Option方法。
      *      * @param builder final类型参数
      */
-    /**
-     * Option方法。
-     *      * @param builder final类型参数
-     */
     protected Option(final Builder builder) {
         this(builder.opt, builder.longOpt, builder.hasArg, builder.argName,
              builder.description, builder.required, builder.optionalArg,
              builder.maxArgs, builder.deprecated);
     }
 
-    /**
-     * builder方法。
-     * @return static Builder类型返回值
-     */
     /**
      * builder方法。
      * @return static Builder类型返回值
@@ -164,18 +114,10 @@ public class Option implements Cloneable, Serializable {
      * getKey方法。
      * @return String类型返回值
      */
-    /**
-     * getKey方法。
-     * @return String类型返回值
-     */
     public String getKey() {
         return opt != null ? opt : longOpt;
     }
 
-    /**
-     * getOpt方法。
-     * @return String类型返回值
-     */
     /**
      * getOpt方法。
      * @return String类型返回值
@@ -188,18 +130,10 @@ public class Option implements Cloneable, Serializable {
      * getLongOpt方法。
      * @return String类型返回值
      */
-    /**
-     * getLongOpt方法。
-     * @return String类型返回值
-     */
     public String getLongOpt() {
         return longOpt;
     }
 
-    /**
-     * hasArg方法。
-     * @return boolean类型返回值
-     */
     /**
      * hasArg方法。
      * @return boolean类型返回值
@@ -212,18 +146,10 @@ public class Option implements Cloneable, Serializable {
      * getDescription方法。
      * @return String类型返回值
      */
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * isRequired方法。
-     * @return boolean类型返回值
-     */
     /**
      * isRequired方法。
      * @return boolean类型返回值
@@ -236,18 +162,10 @@ public class Option implements Cloneable, Serializable {
      * getArgName方法。
      * @return String类型返回值
      */
-    /**
-     * getArgName方法。
-     * @return String类型返回值
-     */
     public String getArgName() {
         return argName;
     }
 
-    /**
-     * hasOptionalArg方法。
-     * @return boolean类型返回值
-     */
     /**
      * hasOptionalArg方法。
      * @return boolean类型返回值
@@ -260,18 +178,10 @@ public class Option implements Cloneable, Serializable {
      * getMaxArgs方法。
      * @return int类型返回值
      */
-    /**
-     * getMaxArgs方法。
-     * @return int类型返回值
-     */
     public int getMaxArgs() {
         return maxArgs;
     }
 
-    /**
-     * getDeprecated方法。
-     * @return DeprecatedAttributes类型返回值
-     */
     /**
      * getDeprecated方法。
      * @return DeprecatedAttributes类型返回值
@@ -284,18 +194,10 @@ public class Option implements Cloneable, Serializable {
      * isDeprecated方法。
      * @return boolean类型返回值
      */
-    /**
-     * isDeprecated方法。
-     * @return boolean类型返回值
-     */
     public boolean isDeprecated() {
         return deprecated != null && deprecated.isDeprecated();
     }
 
-    /**
-     * getSince方法。
-     * @return String类型返回值
-     */
     /**
      * getSince方法。
      * @return String类型返回值
@@ -308,10 +210,6 @@ public class Option implements Cloneable, Serializable {
      * getValues方法。
      * @return List<String>类型返回值
      */
-    /**
-     * getValues方法。
-     * @return List<String>类型返回值
-     */
     public List<String> getValues() {
         return values;
     }
@@ -320,19 +218,10 @@ public class Option implements Cloneable, Serializable {
      * getValue方法。
      * @return String类型返回值
      */
-    /**
-     * getValue方法。
-     * @return String类型返回值
-     */
     public String getValue() {
         return values.isEmpty() ? null : values.get(0);
     }
 
-    /**
-     * getValue方法。
-     *      * @param index final类型参数
-     * @return String类型返回值
-     */
     /**
      * getValue方法。
      *      * @param index final类型参数
@@ -347,11 +236,6 @@ public class Option implements Cloneable, Serializable {
      *      * @param defaultValue final类型参数
      * @return String类型返回值
      */
-    /**
-     * getValue方法。
-     *      * @param defaultValue final类型参数
-     * @return String类型返回值
-     */
     public String getValue(final String defaultValue) {
         return values.isEmpty() ? defaultValue : values.get(0);
     }
@@ -360,18 +244,10 @@ public class Option implements Cloneable, Serializable {
      * hasValue方法。
      * @return boolean类型返回值
      */
-    /**
-     * hasValue方法。
-     * @return boolean类型返回值
-     */
     public boolean hasValue() {
         return !values.isEmpty();
     }
 
-    /**
-     * addValueForProcessing方法。
-     *      * @param value final类型参数
-     */
     /**
      * addValueForProcessing方法。
      *      * @param value final类型参数
@@ -387,18 +263,10 @@ public class Option implements Cloneable, Serializable {
      * processValue方法。
      *      * @param value final类型参数
      */
-    /**
-     * processValue方法。
-     *      * @param value final类型参数
-     */
     public void processValue(final String value) {
         addValueForProcessing(value);
     }
 
-    /**
-     * isValuesEmpty方法。
-     * @return boolean类型返回值
-     */
     /**
      * isValuesEmpty方法。
      * @return boolean类型返回值
@@ -410,17 +278,10 @@ public class Option implements Cloneable, Serializable {
     /**
      * clearValues方法。
      */
-    /**
-     * clearValues方法。
-     */
     public void clearValues() {
         values.clear();
     }
 
-    /**
-     * acceptsArg方法。
-     * @return boolean类型返回值
-     */
     /**
      * acceptsArg方法。
      * @return boolean类型返回值
@@ -433,19 +294,11 @@ public class Option implements Cloneable, Serializable {
      * setDeprecated方法。
      *      * @param deprecated final类型参数
      */
-    /**
-     * setDeprecated方法。
-     *      * @param deprecated final类型参数
-     */
     public void setDeprecated(final DeprecatedAttributes deprecated) {
         this.deprecated = deprecated;
     }
 
     @Override
-    /**
-     * clone方法。
-     * @return Object类型返回值
-     */
     /**
      * clone方法。
      * @return Object类型返回值
@@ -460,10 +313,6 @@ public class Option implements Cloneable, Serializable {
         }
     }
 
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -497,16 +346,8 @@ public class Option implements Cloneable, Serializable {
     /**
      * Builder方法。
      */
-    /**
-     * Builder方法。
-     */
         public Builder() {}
 
-    /**
-     * opt方法。
-     *      * @param opt final类型参数
-     * @return Builder类型返回值
-     */
     /**
      * opt方法。
      *      * @param opt final类型参数
@@ -522,11 +363,6 @@ public class Option implements Cloneable, Serializable {
      *      * @param longOpt final类型参数
      * @return Builder类型返回值
      */
-    /**
-     * longOpt方法。
-     *      * @param longOpt final类型参数
-     * @return Builder类型返回值
-     */
         public Builder longOpt(final String longOpt) {
             this.longOpt = longOpt;
             return this;
@@ -537,21 +373,11 @@ public class Option implements Cloneable, Serializable {
      *      * @param hasArg final类型参数
      * @return Builder类型返回值
      */
-    /**
-     * hasArg方法。
-     *      * @param hasArg final类型参数
-     * @return Builder类型返回值
-     */
         public Builder hasArg(final boolean hasArg) {
             this.hasArg = hasArg;
             return this;
         }
 
-    /**
-     * hasArg方法。
-     *      * @param argName final类型参数
-     * @return Builder类型返回值
-     */
     /**
      * hasArg方法。
      *      * @param argName final类型参数
@@ -568,21 +394,11 @@ public class Option implements Cloneable, Serializable {
      *      * @param argName final类型参数
      * @return Builder类型返回值
      */
-    /**
-     * argName方法。
-     *      * @param argName final类型参数
-     * @return Builder类型返回值
-     */
         public Builder argName(final String argName) {
             this.argName = argName;
             return this;
         }
 
-    /**
-     * description方法。
-     *      * @param description final类型参数
-     * @return Builder类型返回值
-     */
     /**
      * description方法。
      *      * @param description final类型参数
@@ -598,21 +414,11 @@ public class Option implements Cloneable, Serializable {
      *      * @param required final类型参数
      * @return Builder类型返回值
      */
-    /**
-     * required方法。
-     *      * @param required final类型参数
-     * @return Builder类型返回值
-     */
         public Builder required(final boolean required) {
             this.required = required;
             return this;
         }
 
-    /**
-     * optionalArg方法。
-     *      * @param optionalArg final类型参数
-     * @return Builder类型返回值
-     */
     /**
      * optionalArg方法。
      *      * @param optionalArg final类型参数
@@ -628,21 +434,11 @@ public class Option implements Cloneable, Serializable {
      *      * @param maxArgs final类型参数
      * @return Builder类型返回值
      */
-    /**
-     * maxArgs方法。
-     *      * @param maxArgs final类型参数
-     * @return Builder类型返回值
-     */
         public Builder maxArgs(final int maxArgs) {
             this.maxArgs = maxArgs;
             return this;
         }
 
-    /**
-     * deprecated方法。
-     *      * @param deprecated final类型参数
-     * @return Builder类型返回值
-     */
     /**
      * deprecated方法。
      *      * @param deprecated final类型参数
@@ -659,21 +455,11 @@ public class Option implements Cloneable, Serializable {
      * @param description final类型参数
      * @return Builder类型返回值
      */
-    /**
-     * deprecated方法。
-     *      * @param since final类型参数
-     * @param description final类型参数
-     * @return Builder类型返回值
-     */
         public Builder deprecated(final String since, final String description) {
             this.deprecated = new DeprecatedAttributes(since, description);
             return this;
         }
 
-    /**
-     * build方法。
-     * @return Option类型返回值
-     */
     /**
      * build方法。
      * @return Option类型返回值

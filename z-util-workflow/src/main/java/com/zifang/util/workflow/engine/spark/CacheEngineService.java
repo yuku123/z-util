@@ -10,12 +10,6 @@ import com.zifang.util.workflow.config.CacheEngine;
  *
  * @see CacheEngine
  */
-/**
- * CacheEngineService类。
- */
-/**
- * CacheEngineService类。
- */
 public class CacheEngineService {
 
     private CacheEngine cacheEngine;
@@ -24,14 +18,6 @@ public class CacheEngineService {
      * 使用缓存引擎配置构造缓存服务。
      *
      * @param cacheEngine 缓存引擎配置
-     */
-    /**
-     * CacheEngineService方法。
-     *      * @param cacheEngine CacheEngine类型参数
-     */
-    /**
-     * CacheEngineService方法。
-     *      * @param cacheEngine CacheEngine类型参数
      */
     public CacheEngineService(CacheEngine cacheEngine) {
         this.cacheEngine = cacheEngine;

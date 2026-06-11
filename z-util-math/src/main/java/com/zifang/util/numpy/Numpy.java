@@ -15,21 +15,10 @@ public final class Numpy {
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * array方法。
-     *      * @param data Object类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray array(Object data, DType dtype) {
         return NdArray.array(data, dtype);
     }
 
-    /**
-     * array方法。
-     *      * @param data Object类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * array方法。
      *      * @param data Object类型参数
@@ -46,12 +35,6 @@ public final class Numpy {
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * zeros方法。
-     *      * @param shape Shape类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray zeros(Shape shape, DType dtype) {
         return NdArray.zeros(shape, dtype);
     }
@@ -61,21 +44,10 @@ public final class Numpy {
      *      * @param shape int...类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * zeros方法。
-     *      * @param shape int...类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray zeros(int... shape) {
         return NdArray.zeros(new Shape(shape), DType.FLOAT64);
     }
 
-    /**
-     * zeros方法。
-     *      * @param dtype DType类型参数
-     * @param shape int...类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * zeros方法。
      *      * @param dtype DType类型参数
@@ -92,21 +64,10 @@ public final class Numpy {
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * ones方法。
-     *      * @param shape Shape类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray ones(Shape shape, DType dtype) {
         return NdArray.ones(shape, dtype);
     }
 
-    /**
-     * ones方法。
-     *      * @param shape int...类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * ones方法。
      *      * @param shape int...类型参数
@@ -122,24 +83,10 @@ public final class Numpy {
      * @param shape int...类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * ones方法。
-     *      * @param dtype DType类型参数
-     * @param shape int...类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray ones(DType dtype, int... shape) {
         return NdArray.ones(new Shape(shape), dtype);
     }
 
-    /**
-     * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @param step int类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * arange方法。
      *      * @param start int类型参数
@@ -159,23 +106,10 @@ public final class Numpy {
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray arange(int start, int stop, DType dtype) {
         return NdArray.arange(start, stop, 1, dtype);
     }
 
-    /**
-     * arange方法。
-     *      * @param stop int类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * arange方法。
      *      * @param stop int类型参数
@@ -192,21 +126,10 @@ public final class Numpy {
      * @param stop int类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray arange(int start, int stop) {
         return NdArray.arange(start, stop, 1, DType.INT32);
     }
 
-    /**
-     * arange方法。
-     *      * @param stop int类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * arange方法。
      *      * @param stop int类型参数
@@ -222,12 +145,6 @@ public final class Numpy {
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * empty方法。
-     *      * @param shape Shape类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray empty(Shape shape, DType dtype) {
         return NdArray.zeros(shape, dtype);
     }
@@ -237,21 +154,10 @@ public final class Numpy {
      *      * @param shape int...类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * empty方法。
-     *      * @param shape int...类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray empty(int... shape) {
         return NdArray.zeros(new Shape(shape), DType.FLOAT64);
     }
 
-    /**
-     * empty方法。
-     *      * @param dtype DType类型参数
-     * @param shape int...类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * empty方法。
      *      * @param dtype DType类型参数
@@ -268,21 +174,10 @@ public final class Numpy {
      * @param newShape int...类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * reshape方法。
-     *      * @param arr NdArray类型参数
-     * @param newShape int...类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray reshape(NdArray arr, int... newShape) {
         return arr.reshape(newShape);
     }
 
-    /**
-     * transpose方法。
-     *      * @param arr NdArray类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * transpose方法。
      *      * @param arr NdArray类型参数
@@ -298,21 +193,10 @@ public final class Numpy {
      * @param axes int...类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * transpose方法。
-     *      * @param arr NdArray类型参数
-     * @param axes int...类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray transpose(NdArray arr, int... axes) {
         return arr.transpose(axes);
     }
 
-    /**
-     * copy方法。
-     *      * @param arr NdArray类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * copy方法。
      *      * @param arr NdArray类型参数
@@ -328,21 +212,10 @@ public final class Numpy {
      * @param value Object类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * fill方法。
-     *      * @param arr NdArray类型参数
-     * @param value Object类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray fill(NdArray arr, Object value) {
         return arr.fill(value);
     }
 
-    /**
-     * shape方法。
-     *      * @param arr NdArray类型参数
-     * @return static Shape类型返回值
-     */
     /**
      * shape方法。
      *      * @param arr NdArray类型参数
@@ -357,20 +230,10 @@ public final class Numpy {
      *      * @param arr NdArray类型参数
      * @return static DType类型返回值
      */
-    /**
-     * dtype方法。
-     *      * @param arr NdArray类型参数
-     * @return static DType类型返回值
-     */
     public static DType dtype(NdArray arr) {
         return arr.getDtype();
     }
 
-    /**
-     * size方法。
-     *      * @param arr NdArray类型参数
-     * @return static int类型返回值
-     */
     /**
      * size方法。
      *      * @param arr NdArray类型参数
@@ -385,20 +248,10 @@ public final class Numpy {
      *      * @param arr NdArray类型参数
      * @return static int类型返回值
      */
-    /**
-     * ndim方法。
-     *      * @param arr NdArray类型参数
-     * @return static int类型返回值
-     */
     public static int ndim(NdArray arr) {
         return arr.ndim();
     }
 
-    /**
-     * sum方法。
-     *      * @param a NdArray类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * sum方法。
      *      * @param a NdArray类型参数
@@ -422,11 +275,6 @@ public final class Numpy {
      *      * @param a NdArray类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * mean方法。
-     *      * @param a NdArray类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray mean(NdArray a) {
         if (a.size() == 0) {
             return a.copy();
@@ -438,11 +286,6 @@ public final class Numpy {
         return NdArray.create(data, a.getDtype(), new Shape(1));
     }
 
-    /**
-     * max方法。
-     *      * @param a NdArray类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * max方法。
      *      * @param a NdArray类型参数
@@ -464,11 +307,6 @@ public final class Numpy {
         return NdArray.create(data, a.getDtype(), new Shape(1));
     }
 
-    /**
-     * min方法。
-     *      * @param a NdArray类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * min方法。
      *      * @param a NdArray类型参数

@@ -11,9 +11,6 @@ import java.io.Serializable;
  * @author zifang
  * @version 1.0
  */
-/**
- * HttpClientResult类。
- */
 public class HttpClientResult implements Serializable {
 
     private static final long serialVersionUID = 2168152194164783950L;

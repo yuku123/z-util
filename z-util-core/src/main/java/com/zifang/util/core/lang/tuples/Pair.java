@@ -3,20 +3,9 @@ package com.zifang.util.core.lang.tuples;
 /**
  * @author zifang
  */
-/**
- * Pair类。
- */
-/**
- * Pair类。
- */
 public class Pair<A, B> extends Unit<A> {
     protected B b;
 
-    /**
-     * Pair方法。
-     *      * @param a A类型参数
-     * @param b B类型参数
-     */
     /**
      * Pair方法。
      *      * @param a A类型参数
@@ -31,18 +20,10 @@ public class Pair<A, B> extends Unit<A> {
      * getB方法。
      * @return B类型返回值
      */
-    /**
-     * getB方法。
-     * @return B类型返回值
-     */
     public B getB() {
         return b;
     }
 
-    /**
-     * setB方法。
-     *      * @param b B类型参数
-     */
     /**
      * setB方法。
      *      * @param b B类型参数
@@ -52,10 +33,6 @@ public class Pair<A, B> extends Unit<A> {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -70,11 +47,6 @@ public class Pair<A, B> extends Unit<A> {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this.toString().equals(o.toString())) {
             return true;
@@ -83,10 +55,6 @@ public class Pair<A, B> extends Unit<A> {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

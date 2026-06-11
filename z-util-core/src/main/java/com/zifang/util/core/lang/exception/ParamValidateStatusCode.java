@@ -6,12 +6,6 @@ import com.zifang.util.core.meta.StatusCode;
 /**
  * 接口参数异常错误码定义
  */
-/**
- * ParamValidateStatusCode枚举。
- */
-/**
- * ParamValidateStatusCode枚举。
- */
 public enum ParamValidateStatusCode implements StatusCode {
 
     PARAMETER_ERROR(1, "{}");
@@ -29,19 +23,11 @@ public enum ParamValidateStatusCode implements StatusCode {
      * getCode方法。
      * @return int类型返回值
      */
-    /**
-     * getCode方法。
-     * @return int类型返回值
-     */
     public int getCode() {
         return code;
     }
 
     @Override
-    /**
-     * getMessage方法。
-     * @return String类型返回值
-     */
     /**
      * getMessage方法。
      * @return String类型返回值

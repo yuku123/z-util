@@ -13,12 +13,6 @@ import org.quartz.Trigger.CompletedExecutionInstruction;
  * @see JobListener
  * @see SchedulerListener
  */
-/**
- * TriggerListener接口。
- */
-/**
- * TriggerListener接口。
- */
 public interface TriggerListener {
 
     /**

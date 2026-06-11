@@ -4,22 +4,11 @@ package com.zifang.util.media.graph.qrcode.encoder;
  * A 2D boolean matrix implementation for QR code encoding/decoding.
  * This replaces com.google.zxing.common.BitMatrix.
  */
-/**
- * BitMatrix类。
- */
-/**
- * BitMatrix类。
- */
 public class BitMatrix {
     private final int width;
     private final int height;
     private final boolean[] bits;
 
-    /**
-     * BitMatrix方法。
-     *      * @param width int类型参数
-     * @param height int类型参数
-     */
     /**
      * BitMatrix方法。
      *      * @param width int类型参数
@@ -40,12 +29,6 @@ public class BitMatrix {
      * @param y int类型参数
      * @return boolean类型返回值
      */
-    /**
-     * get方法。
-     *      * @param x int类型参数
-     * @param y int类型参数
-     * @return boolean类型返回值
-     */
     public boolean get(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             return false;
@@ -53,11 +36,6 @@ public class BitMatrix {
         return bits[y * width + x];
     }
 
-    /**
-     * set方法。
-     *      * @param x int类型参数
-     * @param y int类型参数
-     */
     /**
      * set方法。
      *      * @param x int类型参数
@@ -73,18 +51,6 @@ public class BitMatrix {
     /**
      * Sets the bit at (x, y) to the given value.
      */
-    /**
-     * set方法。
-     *      * @param x int类型参数
-     * @param y int类型参数
-     * @param value boolean类型参数
-     */
-    /**
-     * set方法。
-     *      * @param x int类型参数
-     * @param y int类型参数
-     * @param value boolean类型参数
-     */
     public void set(int x, int y, boolean value) {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             return;
@@ -92,11 +58,6 @@ public class BitMatrix {
         bits[y * width + x] = value;
     }
 
-    /**
-     * unset方法。
-     *      * @param x int类型参数
-     * @param y int类型参数
-     */
     /**
      * unset方法。
      *      * @param x int类型参数
@@ -114,11 +75,6 @@ public class BitMatrix {
      *      * @param x int类型参数
      * @param y int类型参数
      */
-    /**
-     * flip方法。
-     *      * @param x int类型参数
-     * @param y int类型参数
-     */
     public void flip(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height) {
             return;
@@ -126,9 +82,6 @@ public class BitMatrix {
         bits[y * width + x] = !bits[y * width + x];
     }
 
-    /**
-     * clear方法。
-     */
     /**
      * clear方法。
      */
@@ -142,18 +95,10 @@ public class BitMatrix {
      * getWidth方法。
      * @return int类型返回值
      */
-    /**
-     * getWidth方法。
-     * @return int类型返回值
-     */
     public int getWidth() {
         return width;
     }
 
-    /**
-     * getHeight方法。
-     * @return int类型返回值
-     */
     /**
      * getHeight方法。
      * @return int类型返回值
@@ -165,14 +110,6 @@ public class BitMatrix {
     /**
      * Finds the top-left on bit in the matrix.
      * @return int[] array of [x, y] or null if no bits are set
-     */
-    /**
-     * getTopLeftOnBit方法。
-     * @return int[]类型返回值
-     */
-    /**
-     * getTopLeftOnBit方法。
-     * @return int[]类型返回值
      */
     public int[] getTopLeftOnBit() {
         for (int y = 0; y < height; y++) {
@@ -189,14 +126,6 @@ public class BitMatrix {
      * Finds the bottom-right on bit in the matrix.
      * @return int[] array of [x, y] or null if no bits are set
      */
-    /**
-     * getBottomRightOnBit方法。
-     * @return int[]类型返回值
-     */
-    /**
-     * getBottomRightOnBit方法。
-     * @return int[]类型返回值
-     */
     public int[] getBottomRightOnBit() {
         for (int y = height - 1; y >= 0; y--) {
             for (int x = width - 1; x >= 0; x--) {
@@ -209,10 +138,6 @@ public class BitMatrix {
     }
 
     @Override
-    /**
-     * clone方法。
-     * @return BitMatrix类型返回值
-     */
     /**
      * clone方法。
      * @return BitMatrix类型返回值

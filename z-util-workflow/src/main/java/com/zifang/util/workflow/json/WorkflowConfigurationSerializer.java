@@ -20,12 +20,6 @@ import java.nio.file.Paths;
  * @see WorkflowConfiguration
  * @see ObjectMapper
  */
-/**
- * WorkflowConfigurationSerializer类。
- */
-/**
- * WorkflowConfigurationSerializer类。
- */
 public class WorkflowConfigurationSerializer {
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -41,16 +35,6 @@ public class WorkflowConfigurationSerializer {
      * @param config the workflow configuration to serialize
      * @return JSON string representation
      */
-    /**
-     * toJson方法。
-     *      * @param config WorkflowConfiguration类型参数
-     * @return String类型返回值
-     */
-    /**
-     * toJson方法。
-     *      * @param config WorkflowConfiguration类型参数
-     * @return String类型返回值
-     */
     public String toJson(WorkflowConfiguration config) {
         try {
             return objectMapper.writeValueAsString(config);
@@ -65,16 +49,6 @@ public class WorkflowConfigurationSerializer {
      * @param json JSON string
      * @return WorkflowConfiguration instance
      */
-    /**
-     * fromJson方法。
-     *      * @param json String类型参数
-     * @return WorkflowConfiguration类型返回值
-     */
-    /**
-     * fromJson方法。
-     *      * @param json String类型参数
-     * @return WorkflowConfiguration类型返回值
-     */
     public WorkflowConfiguration fromJson(String json) {
         try {
             return objectMapper.readValue(json, WorkflowConfiguration.class);
@@ -88,16 +62,6 @@ public class WorkflowConfigurationSerializer {
      *
      * @param config the workflow configuration to write
      * @param file   the target file
-     */
-    /**
-     * toJsonFile方法。
-     *      * @param config WorkflowConfiguration类型参数
-     * @param file File类型参数
-     */
-    /**
-     * toJsonFile方法。
-     *      * @param config WorkflowConfiguration类型参数
-     * @param file File类型参数
      */
     public void toJsonFile(WorkflowConfiguration config, File file) {
         try {
@@ -114,16 +78,6 @@ public class WorkflowConfigurationSerializer {
      *
      * @param file the source file
      * @return WorkflowConfiguration instance
-     */
-    /**
-     * fromJsonFile方法。
-     *      * @param file File类型参数
-     * @return WorkflowConfiguration类型返回值
-     */
-    /**
-     * fromJsonFile方法。
-     *      * @param file File类型参数
-     * @return WorkflowConfiguration类型返回值
      */
     public WorkflowConfiguration fromJsonFile(File file) {
         try {

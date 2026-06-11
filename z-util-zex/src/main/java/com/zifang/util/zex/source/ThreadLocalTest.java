@@ -9,9 +9,6 @@ package com.zifang.util.zex.source;
  * @author zifang
  * @version 1.0
  */
-/**
- * ThreadLocalTest类。
- */
 public class ThreadLocalTest {
 
     //共享的 ThreadLocal类，里面包裹着线程访问的值
@@ -22,19 +19,12 @@ public class ThreadLocalTest {
      *
      * @param value 要设置的值
      */
-    /**
-     * setThreadLocal方法。
-     *      * @param value String类型参数
-     */
     public void setThreadLocal(String value) {
         threadLocal.set(value);
     }
 
     /**
      * 获取ThreadLocal的值。
-     */
-    /**
-     * getThreadLocal方法。
      */
     public void getThreadLocal() {
         System.out.println(threadLocal.get());

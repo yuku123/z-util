@@ -23,9 +23,6 @@ import java.lang.annotation.*;
 /**
  * EngineService注解。
  */
-/**
- * EngineService注解。
- */
 public @interface EngineService {
     /**
      * 服务单元名称，用于唯一标识服务。

@@ -5,12 +5,6 @@ import java.util.List;
 /**
  * Thrown when required options are missing from the command line.
  */
-/**
- * MissingOptionException类。
- */
-/**
- * MissingOptionException类。
- */
 public class MissingOptionException extends ParseException {
 
     private static final long serialVersionUID = 1L;
@@ -20,19 +14,11 @@ public class MissingOptionException extends ParseException {
      * MissingOptionException方法。
      *      * @param message final类型参数
      */
-    /**
-     * MissingOptionException方法。
-     *      * @param message final类型参数
-     */
     public MissingOptionException(final String message) {
         super(message);
         this.missingOptions = null;
     }
 
-    /**
-     * MissingOptionException方法。
-     *      * @param missingOptions final类型参数
-     */
     /**
      * MissingOptionException方法。
      *      * @param missingOptions final类型参数
@@ -49,10 +35,6 @@ public class MissingOptionException extends ParseException {
         return buf.append(string.substring(1, string.length() - 1)).toString();
     }
 
-    /**
-     * getMissingOptions方法。
-     * @return List类型返回值
-     */
     /**
      * getMissingOptions方法。
      * @return List类型返回值

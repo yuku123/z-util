@@ -8,9 +8,6 @@ import java.lang.annotation.*;
 /**
  * RequestParam注解。
  */
-/**
- * RequestParam注解。
- */
 public @interface RequestParam {
 
     String value() default "";

@@ -3,12 +3,6 @@ package com.zifang.util.core.meta;
 /**
  * 基础的状态码定义
  */
-/**
- * BaseStatusCode枚举。
- */
-/**
- * BaseStatusCode枚举。
- */
 public enum BaseStatusCode implements StatusCode {
     OK(200, "success"),
     UN_LOGIN(401, "未登录"),
@@ -32,19 +26,11 @@ public enum BaseStatusCode implements StatusCode {
      * getCode方法。
      * @return int类型返回值
      */
-    /**
-     * getCode方法。
-     * @return int类型返回值
-     */
     public int getCode() {
         return code;
     }
 
     @Override
-    /**
-     * getMessage方法。
-     * @return String类型返回值
-     */
     /**
      * getMessage方法。
      * @return String类型返回值

@@ -34,12 +34,6 @@ import com.zifang.util.pandas.num.Num;
  * @see Num
  * @see Matrix
  */
-/**
- * Linalg类。
- */
-/**
- * Linalg类。
- */
 public class Linalg {
 
     // ==================== 矩阵乘法 ====================
@@ -50,18 +44,6 @@ public class Linalg {
      * @param b 第二个矩阵或向量
      * @return 点积结果
      * @throws UnsupportedOperationException 当维度不支持时抛出
-     */
-    /**
-     * dot方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * dot方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
      */
     public static Num dot(Num a, Num b) {
         if (a.nDim() == 1 && b.nDim() == 1) {
@@ -100,18 +82,6 @@ public class Linalg {
      * @return 矩阵乘法结果
      * @throws UnsupportedOperationException 当维度不支持时抛出
      */
-    /**
-     * matmul方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * matmul方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num matmul(Num a, Num b) {
         return dot(a, b);
     }
@@ -122,18 +92,6 @@ public class Linalg {
      * @param b 第二个向量（必须是一维）
      * @return 内积结果
      * @throws IllegalArgumentException 当输入不是一维数组时抛出
-     */
-    /**
-     * inner方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * inner方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static double类型返回值
      */
     public static double inner(Num a, Num b) {
         if (a.nDim() != 1 || b.nDim() != 1) {
@@ -154,18 +112,6 @@ public class Linalg {
      * @param b 第二个向量（必须是一维）
      * @return 外积结果矩阵
      * @throws IllegalArgumentException 当输入不是一维数组时抛出
-     */
-    /**
-     * outer方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * outer方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
      */
     public static Num outer(Num a, Num b) {
         if (a.nDim() != 1 || b.nDim() != 1) {
@@ -189,20 +135,6 @@ public class Linalg {
      * @param axes 指定参与运算的轴
      * @return 张量点积结果
      */
-    /**
-     * tensordot方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @param axes int[]类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * tensordot方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @param axes int[]类型参数
-     * @return static Num类型返回值
-     */
     public static Num tensordot(Num a, Num b, int[] axes) {
         // 简化实现
         return dot(a, b);
@@ -214,18 +146,6 @@ public class Linalg {
      * @param b 第二个矩阵（必须二维）
      * @return 克罗内克积结果
      * @throws UnsupportedOperationException 当输入不是二维数组时抛出
-     */
-    /**
-     * kron方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * kron方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
      */
     public static Num kron(Num a, Num b) {
         if (a.nDim() == 2 && b.nDim() == 2) {
@@ -256,16 +176,6 @@ public class Linalg {
      * @param a 输入矩阵（必须二维）
      * @return SVDResult 包含 U、S、Vh 三个矩阵
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
-     */
-    /**
-     * svd方法。
-     *      * @param a Num类型参数
-     * @return static SVDResult类型返回值
-     */
-    /**
-     * svd方法。
-     *      * @param a Num类型参数
-     * @return static SVDResult类型返回值
      */
     public static SVDResult svd(Num a) {
         if (a.nDim() != 2) {
@@ -319,18 +229,6 @@ public class Linalg {
          * @param s 奇异值向量
          * @param vh 右奇异向量矩阵
          */
-    /**
-     * SVDResult方法。
-     *      * @param u Num类型参数
-     * @param s Num类型参数
-     * @param vh Num类型参数
-     */
-    /**
-     * SVDResult方法。
-     *      * @param u Num类型参数
-     * @param s Num类型参数
-     * @param vh Num类型参数
-     */
         public SVDResult(Num u, Num s, Num vh) {
             this.U = u;
             this.S = s;
@@ -343,16 +241,6 @@ public class Linalg {
      * @param a 输入矩阵（必须二维）
      * @return QRResult 包含 Q（正交矩阵）和 R（上三角矩阵）
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
-     */
-    /**
-     * qr方法。
-     *      * @param a Num类型参数
-     * @return static QRResult类型返回值
-     */
-    /**
-     * qr方法。
-     *      * @param a Num类型参数
-     * @return static QRResult类型返回值
      */
     public static QRResult qr(Num a) {
         if (a.nDim() != 2) {
@@ -396,16 +284,6 @@ public class Linalg {
          * @param q 正交矩阵
          * @param r 上三角矩阵
          */
-    /**
-     * QRResult方法。
-     *      * @param q Num类型参数
-     * @param r Num类型参数
-     */
-    /**
-     * QRResult方法。
-     *      * @param q Num类型参数
-     * @param r Num类型参数
-     */
         public QRResult(Num q, Num r) {
             this.Q = q;
             this.R = r;
@@ -417,16 +295,6 @@ public class Linalg {
      * @param a 输入矩阵（必须二维且对称正定）
      * @return 下三角矩阵 L，满足 A = L * L^T
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
-     */
-    /**
-     * cholesky方法。
-     *      * @param a Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * cholesky方法。
-     *      * @param a Num类型参数
-     * @return static Num类型返回值
      */
     public static Num cholesky(Num a) {
         if (a.nDim() != 2) {
@@ -453,16 +321,6 @@ public class Linalg {
      * @param a 输入矩阵（必须二维）
      * @return 行列式值
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
-     */
-    /**
-     * det方法。
-     *      * @param a Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * det方法。
-     *      * @param a Num类型参数
-     * @return static double类型返回值
      */
     public static double det(Num a) {
         if (a.nDim() != 2) {
@@ -491,16 +349,6 @@ public class Linalg {
      * @return 矩阵秩
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
-    /**
-     * matrix_rank方法。
-     *      * @param a Num类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * matrix_rank方法。
-     *      * @param a Num类型参数
-     * @return static int类型返回值
-     */
     public static int matrix_rank(Num a) {
         if (a.nDim() != 2) {
             throw new IllegalArgumentException("Matrix rank requires 2D array");
@@ -514,16 +362,6 @@ public class Linalg {
      * @param a 输入矩阵（必须二维）
      * @return 矩阵迹
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
-     */
-    /**
-     * trace方法。
-     *      * @param a Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * trace方法。
-     *      * @param a Num类型参数
-     * @return static double类型返回值
      */
     public static double trace(Num a) {
         if (a.nDim() != 2) {
@@ -545,16 +383,6 @@ public class Linalg {
      * @param a 输入矩阵（必须二维且方阵）
      * @return 逆矩阵
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
-     */
-    /**
-     * inv方法。
-     *      * @param a Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * inv方法。
-     *      * @param a Num类型参数
-     * @return static Num类型返回值
      */
     public static Num inv(Num a) {
         if (a.nDim() != 2) {
@@ -588,16 +416,6 @@ public class Linalg {
      * @param a 输入矩阵
      * @return 伪逆矩阵
      */
-    /**
-     * pinv方法。
-     *      * @param a Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * pinv方法。
-     *      * @param a Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num pinv(Num a) {
         // 简化实现，返回普通逆矩阵
         return inv(a);
@@ -609,18 +427,6 @@ public class Linalg {
      * @param b 常数向量 b
      * @return 解向量 x
      */
-    /**
-     * solve方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * solve方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num solve(Num a, Num b) {
         // 简化实现: x = A^(-1) * b
         return dot(inv(a), b);
@@ -631,18 +437,6 @@ public class Linalg {
      * @param a 系数矩阵 A
      * @param b 常数向量 b
      * @return 最小二乘解向量
-     */
-    /**
-     * lstsq方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * lstsq方法。
-     *      * @param a Num类型参数
-     * @param b Num类型参数
-     * @return static Num类型返回值
      */
     public static Num lstsq(Num a, Num b) {
         // 简化实现
@@ -656,16 +450,6 @@ public class Linalg {
      * @param x 输入向量或矩阵
      * @return 2-范数（欧几里得范数）
      */
-    /**
-     * norm方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * norm方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
     public static double norm(Num x) {
         return norm(x, 2);
     }
@@ -675,18 +459,6 @@ public class Linalg {
      * @param x 输入向量或矩阵
      * @param ord 范数类型（1, 2, Integer.MAX_VALUE）
      * @return 指定类型的范数
-     */
-    /**
-     * norm方法。
-     *      * @param x Num类型参数
-     * @param ord int类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * norm方法。
-     *      * @param x Num类型参数
-     * @param ord int类型参数
-     * @return static double类型返回值
      */
     public static double norm(Num x, int ord) {
         if (x.nDim() == 1) {
@@ -714,18 +486,6 @@ public class Linalg {
      * @param ord 范数类型字符串（如 "fro" 表示 Frobenius 范数）
      * @return 指定类型的范数
      */
-    /**
-     * norm方法。
-     *      * @param x Num类型参数
-     * @param ord String类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * norm方法。
-     *      * @param x Num类型参数
-     * @param ord String类型参数
-     * @return static double类型返回值
-     */
     public static double norm(Num x, String ord) {
         if ("fro".equals(ord)) {
             return norm(x, 2);
@@ -740,16 +500,6 @@ public class Linalg {
      * @param a 输入矩阵（必须二维）
      * @return EigenResult 包含特征值 w 和特征向量 v
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
-     */
-    /**
-     * eig方法。
-     *      * @param a Num类型参数
-     * @return static EigenResult类型返回值
-     */
-    /**
-     * eig方法。
-     *      * @param a Num类型参数
-     * @return static EigenResult类型返回值
      */
     public static EigenResult eig(Num a) {
         if (a.nDim() != 2) {
@@ -775,16 +525,6 @@ public class Linalg {
      * @return 特征值向量
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
      */
-    /**
-     * eigvals方法。
-     *      * @param a Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * eigvals方法。
-     *      * @param a Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num eigvals(Num a) {
         return eig(a).w;
     }
@@ -807,16 +547,6 @@ public class Linalg {
          * @param w 特征值向量
          * @param v 特征向量矩阵
          */
-    /**
-     * EigenResult方法。
-     *      * @param w Num类型参数
-     * @param v Num类型参数
-     */
-    /**
-     * EigenResult方法。
-     *      * @param w Num类型参数
-     * @param v Num类型参数
-     */
         public EigenResult(Num w, Num v) {
             this.w = w;
             this.v = v;

@@ -10,12 +10,6 @@ import com.zifang.util.core.meta.StatusCode;
  *
  * @author zifang
  */
-/**
- * BusinessException类。
- */
-/**
- * BusinessException类。
- */
 public class BusinessException extends BaseException {
 
     private static final long serialVersionUID = 1646453246258984129L;
@@ -25,16 +19,6 @@ public class BusinessException extends BaseException {
      *
      * @param statusCode 状态码对象，不能为 null
      * @param msg        错误信息，将覆盖状态码中的默认信息
-     */
-    /**
-     * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
-     * @param msg String类型参数
-     */
-    /**
-     * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
-     * @param msg String类型参数
      */
     public BusinessException(StatusCode statusCode, String msg) {
         super(statusCode, msg);
@@ -46,16 +30,6 @@ public class BusinessException extends BaseException {
      * @param statusCode 状态码对象，不能为 null
      * @param e          原始异常，通常是导致当前异常的根本原因
      */
-    /**
-     * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
-     * @param e Throwable类型参数
-     */
-    /**
-     * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
-     * @param e Throwable类型参数
-     */
     public BusinessException(StatusCode statusCode, Throwable e) {
         super(statusCode, e);
     }
@@ -64,14 +38,6 @@ public class BusinessException extends BaseException {
      * 使用指定的状态码创建业务异常。
      *
      * @param statusCode 状态码对象，不能为 null
-     */
-    /**
-     * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
-     */
-    /**
-     * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
      */
     public BusinessException(StatusCode statusCode) {
         super(statusCode);
@@ -84,16 +50,6 @@ public class BusinessException extends BaseException {
      *
      * @param statusCode 状态码对象，不能为 null
      * @param params      格式化参数，用于填充错误信息中的占位符
-     */
-    /**
-     * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
-     * @param params Object...类型参数
-     */
-    /**
-     * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
-     * @param params Object...类型参数
      */
     public BusinessException(StatusCode statusCode, Object... params) {
         super(statusCode, params);

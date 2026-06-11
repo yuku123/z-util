@@ -11,12 +11,6 @@ import javax.swing.*;
  * @version 1.0
  * @since 2020-01-01
  */
-/**
- * CommonPanel类。
- */
-/**
- * CommonPanel类。
- */
 public class CommonPanel extends JPanel {
 
 }

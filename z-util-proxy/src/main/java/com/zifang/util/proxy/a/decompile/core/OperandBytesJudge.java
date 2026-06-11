@@ -5,27 +5,11 @@ package com.zifang.util.proxy.a.decompile.core;
  * <p>
  * 根据操作码判断操作数所占的字节数。
  */
-/**
- * OperandBytesJudge类。
- */
-/**
- * OperandBytesJudge类。
- */
 public class OperandBytesJudge {
     /**
      * 十六进制 和 字节码指令 转换
      *
      * @return
-     */
-    /**
-     * operandBytesCount方法。
-     *      * @param opcode String类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * operandBytesCount方法。
-     *      * @param opcode String类型参数
-     * @return static int类型返回值
      */
     public static int operandBytesCount(String opcode) {
         switch (opcode) {

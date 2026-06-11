@@ -15,12 +15,6 @@ import com.zifang.util.numpy.DType;
  *   grad_sum = grad_sum + grad^2
  *   param = param - lr * grad / (sqrt(grad_sum) + eps)
  */
-/**
- * Adagrad类。
- */
-/**
- * Adagrad类。
- */
 public class Adagrad extends Optimizer {
     
     private double eps;
@@ -30,19 +24,10 @@ public class Adagrad extends Optimizer {
      * Adagrad方法。
      *      * @param learningRate double类型参数
      */
-    /**
-     * Adagrad方法。
-     *      * @param learningRate double类型参数
-     */
     public Adagrad(double learningRate) {
         this(learningRate, 1e-10, 0.0);
     }
     
-    /**
-     * Adagrad方法。
-     *      * @param learningRate double类型参数
-     * @param eps double类型参数
-     */
     /**
      * Adagrad方法。
      *      * @param learningRate double类型参数
@@ -58,12 +43,6 @@ public class Adagrad extends Optimizer {
      * @param eps double类型参数
      * @param weightDecay double类型参数
      */
-    /**
-     * Adagrad方法。
-     *      * @param learningRate double类型参数
-     * @param eps double类型参数
-     * @param weightDecay double类型参数
-     */
     public Adagrad(double learningRate, double eps, double weightDecay) {
         super(learningRate, weightDecay);
         this.eps = eps;
@@ -71,9 +50,6 @@ public class Adagrad extends Optimizer {
     }
     
     @Override
-    /**
-     * step方法。
-     */
     /**
      * step方法。
      */
@@ -121,28 +97,12 @@ public class Adagrad extends Optimizer {
     /**
      * Set epsilon for numerical stability.
      */
-    /**
-     * setEps方法。
-     *      * @param eps double类型参数
-     */
-    /**
-     * setEps方法。
-     *      * @param eps double类型参数
-     */
     public void setEps(double eps) {
         this.eps = eps;
     }
     
     /**
      * Get epsilon.
-     */
-    /**
-     * getEps方法。
-     * @return double类型返回值
-     */
-    /**
-     * getEps方法。
-     * @return double类型返回值
      */
     public double getEps() {
         return eps;
@@ -151,28 +111,12 @@ public class Adagrad extends Optimizer {
     /**
      * Set initial accumulator value.
      */
-    /**
-     * setInitialAccumulatorValue方法。
-     *      * @param value double类型参数
-     */
-    /**
-     * setInitialAccumulatorValue方法。
-     *      * @param value double类型参数
-     */
     public void setInitialAccumulatorValue(double value) {
         this.initialAccumulatorValue = value;
     }
     
     /**
      * Get initial accumulator value.
-     */
-    /**
-     * getInitialAccumulatorValue方法。
-     * @return double类型返回值
-     */
-    /**
-     * getInitialAccumulatorValue方法。
-     * @return double类型返回值
      */
     public double getInitialAccumulatorValue() {
         return initialAccumulatorValue;

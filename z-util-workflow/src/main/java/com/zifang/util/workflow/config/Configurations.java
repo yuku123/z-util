@@ -9,12 +9,6 @@ import java.util.Map;
  * @see Engine
  * @see CacheEngine
  */
-/**
- * Configurations类。
- */
-/**
- * Configurations类。
- */
 public class Configurations {
 
     /**
@@ -45,12 +39,6 @@ public class Configurations {
     /**
      * 默认构造函数
      */
-    /**
-     * Configurations方法。
-     */
-    /**
-     * Configurations方法。
-     */
     public Configurations() {
     }
 
@@ -58,14 +46,6 @@ public class Configurations {
      * 获取工作流配置ID
      *
      * @return 工作流配置ID，与工作流上下文的ID绑定
-     */
-    /**
-     * getWorkflowConfigurationId方法。
-     * @return int类型返回值
-     */
-    /**
-     * getWorkflowConfigurationId方法。
-     * @return int类型返回值
      */
     public Integer getWorkflowConfigurationId() {
         return workflowConfigurationId;
@@ -76,14 +56,6 @@ public class Configurations {
      *
      * @param workflowConfigurationId 工作流配置ID，与工作流上下文的ID绑定
      */
-    /**
-     * setWorkflowConfigurationId方法。
-     *      * @param workflowConfigurationId int类型参数
-     */
-    /**
-     * setWorkflowConfigurationId方法。
-     *      * @param workflowConfigurationId int类型参数
-     */
     public void setWorkflowConfigurationId(Integer workflowConfigurationId) {
         this.workflowConfigurationId = workflowConfigurationId;
     }
@@ -92,14 +64,6 @@ public class Configurations {
      * 获取执行引擎配置
      *
      * @return 执行引擎配置对象
-     */
-    /**
-     * getEngine方法。
-     * @return Engine类型返回值
-     */
-    /**
-     * getEngine方法。
-     * @return Engine类型返回值
      */
     public Engine getEngine() {
         return engine;
@@ -110,14 +74,6 @@ public class Configurations {
      *
      * @param engine 执行引擎配置对象
      */
-    /**
-     * setEngine方法。
-     *      * @param engine Engine类型参数
-     */
-    /**
-     * setEngine方法。
-     *      * @param engine Engine类型参数
-     */
     public void setEngine(Engine engine) {
         this.engine = engine;
     }
@@ -126,14 +82,6 @@ public class Configurations {
      * 获取缓存引擎配置
      *
      * @return 缓存引擎配置对象
-     */
-    /**
-     * getCacheEngine方法。
-     * @return CacheEngine类型返回值
-     */
-    /**
-     * getCacheEngine方法。
-     * @return CacheEngine类型返回值
      */
     public CacheEngine getCacheEngine() {
         return cacheEngine;
@@ -144,14 +92,6 @@ public class Configurations {
      *
      * @param cacheEngine 缓存引擎配置对象
      */
-    /**
-     * setCacheEngine方法。
-     *      * @param cacheEngine CacheEngine类型参数
-     */
-    /**
-     * setCacheEngine方法。
-     *      * @param cacheEngine CacheEngine类型参数
-     */
     public void setCacheEngine(CacheEngine cacheEngine) {
         this.cacheEngine = cacheEngine;
     }
@@ -160,14 +100,6 @@ public class Configurations {
      * 获取个人环境参数
      *
      * @return 个人环境参数Map，为每个操作者提供专属的参数
-     */
-    /**
-     * getPersonalEnvironment方法。
-     * @return Map<String, String>类型返回值
-     */
-    /**
-     * getPersonalEnvironment方法。
-     * @return Map<String, String>类型返回值
      */
     public Map<String, String> getPersonalEnvironment() {
         return personalEnvironment;
@@ -178,14 +110,6 @@ public class Configurations {
      *
      * @param personalEnvironment 个人环境参数Map，为每个操作者提供专属的参数
      */
-    /**
-     * setPersonalEnvironment方法。
-     *      * @param personalEnvironment MapString,类型参数
-     */
-    /**
-     * setPersonalEnvironment方法。
-     *      * @param personalEnvironment MapString,类型参数
-     */
     public void setPersonalEnvironment(Map<String, String> personalEnvironment) {
         this.personalEnvironment = personalEnvironment;
     }
@@ -194,14 +118,6 @@ public class Configurations {
      * 获取运行时参数
      *
      * @return 运行时参数Map
-     */
-    /**
-     * getRuntimeParameter方法。
-     * @return Map<String, String>类型返回值
-     */
-    /**
-     * getRuntimeParameter方法。
-     * @return Map<String, String>类型返回值
      */
     public Map<String, String> getRuntimeParameter() {
         return runtimeParameter;
@@ -212,14 +128,6 @@ public class Configurations {
      *
      * @param runtimeParameter 运行时参数Map
      */
-    /**
-     * setRuntimeParameter方法。
-     *      * @param runtimeParameter MapString,类型参数
-     */
-    /**
-     * setRuntimeParameter方法。
-     *      * @param runtimeParameter MapString,类型参数
-     */
     public void setRuntimeParameter(Map<String, String> runtimeParameter) {
         this.runtimeParameter = runtimeParameter;
     }
@@ -229,20 +137,11 @@ public class Configurations {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "Configurations{workflowConfigurationId=" + workflowConfigurationId + ", engine=" + engine + ", cacheEngine=" + cacheEngine + ", personalEnvironment=" + personalEnvironment + ", runtimeParameter=" + runtimeParameter + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -260,10 +159,6 @@ public class Configurations {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

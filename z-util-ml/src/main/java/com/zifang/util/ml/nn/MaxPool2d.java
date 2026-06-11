@@ -9,12 +9,6 @@ import com.zifang.util.numpy.Shape;
  * Input: (batchSize, channels, height, width)
  * Output: (batchSize, channels, outHeight, outWidth)
  */
-/**
- * MaxPool2d类。
- */
-/**
- * MaxPool2d类。
- */
 public class MaxPool2d extends Module {
     
     private final int kernelSize;
@@ -23,10 +17,6 @@ public class MaxPool2d extends Module {
     private int[] outputShape;
     private int[] inputShape;  // Save input shape for backward pass
     
-    /**
-     * MaxPool2d方法。
-     *      * @param kernelSize int类型参数
-     */
     /**
      * MaxPool2d方法。
      *      * @param kernelSize int类型参数
@@ -40,22 +30,12 @@ public class MaxPool2d extends Module {
      *      * @param kernelSize int类型参数
      * @param stride int类型参数
      */
-    /**
-     * MaxPool2d方法。
-     *      * @param kernelSize int类型参数
-     * @param stride int类型参数
-     */
     public MaxPool2d(int kernelSize, int stride) {
         this.kernelSize = kernelSize;
         this.stride = stride;
     }
     
     @Override
-    /**
-     * forward方法。
-     *      * @param input NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -122,11 +102,6 @@ public class MaxPool2d extends Module {
      *      * @param gradOutput NdArray类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * backward方法。
-     *      * @param gradOutput NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray backward(NdArray gradOutput) {
         int batchSize = gradOutput.getShape().get(0);
         int channels = gradOutput.getShape().get(1);
@@ -164,15 +139,7 @@ public class MaxPool2d extends Module {
      * getKernelSize方法。
      * @return int类型返回值
      */
-    /**
-     * getKernelSize方法。
-     * @return int类型返回值
-     */
     public int getKernelSize() { return kernelSize; }
-    /**
-     * getStride方法。
-     * @return int类型返回值
-     */
     /**
      * getStride方法。
      * @return int类型返回值

@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter3;
  * @author zifang
  * @version 1.0
  */
-/**
- * For4Test类。
- */
 public class For4Test {
     /**
      * main方法。

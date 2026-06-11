@@ -18,12 +18,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * JsonExtractor类。
- */
-/**
- * JsonExtractor类。
- */
 public class JsonExtractor {
 
     private JsonExtractor() {
@@ -35,18 +29,6 @@ public class JsonExtractor {
      * @param jsonString JSON 字符串
      * @param jsonPath 点号路径
      * @return 提取的值，未找到或解析失败返回 null
-     */
-    /**
-     * extract方法。
-     *      * @param jsonString String类型参数
-     * @param jsonPath String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * extract方法。
-     *      * @param jsonString String类型参数
-     * @param jsonPath String类型参数
-     * @return static String类型返回值
      */
     public static String extract(String jsonString, String jsonPath) {
         try {
@@ -62,18 +44,6 @@ public class JsonExtractor {
      * @param jsonString JSON 字符串
      * @param jsonPath 点号路径
      * @return 提取的值列表
-     */
-    /**
-     * extractAll方法。
-     *      * @param jsonString String类型参数
-     * @param jsonPath String类型参数
-     * @return static List<String>类型返回值
-     */
-    /**
-     * extractAll方法。
-     *      * @param jsonString String类型参数
-     * @param jsonPath String类型参数
-     * @return static List<String>类型返回值
      */
     public static List<String> extractAll(String jsonString, String jsonPath) {
         List<String> results = new ArrayList<>();

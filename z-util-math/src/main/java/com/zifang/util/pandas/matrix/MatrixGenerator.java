@@ -32,12 +32,6 @@ import java.util.List;
  * @see Matrix
  * @see com.zifang.util.pandas.num.Num
  */
-/**
- * MatrixGenerator类。
- */
-/**
- * MatrixGenerator类。
- */
 public class MatrixGenerator {
 
 
@@ -45,16 +39,6 @@ public class MatrixGenerator {
      * 从 List 创建矩阵
      * @param list 包含矩阵元素的列表
      * @return Matrix 实例
-     */
-    /**
-     * array方法。
-     *      * @param list List?类型参数
-     * @return Matrix类型返回值
-     */
-    /**
-     * array方法。
-     *      * @param list List?类型参数
-     * @return Matrix类型返回值
      */
     public Matrix array(List<? extends Object> list) {
         Matrix numpyArray = new Matrix();
@@ -65,16 +49,6 @@ public class MatrixGenerator {
      * 从 double 数组创建矩阵
      * @param arrys double 类型数组
      * @return Matrix 实例
-     */
-    /**
-     * array方法。
-     *      * @param arrys double[]类型参数
-     * @return Matrix类型返回值
-     */
-    /**
-     * array方法。
-     *      * @param arrys double[]类型参数
-     * @return Matrix类型返回值
      */
     public Matrix array(double[] arrys) {
         List<? extends Object> list = Arrays.asList(arrys);
@@ -102,16 +76,6 @@ public class MatrixGenerator {
      * @param dimension 矩阵维度（方阵）
      * @return 全零矩阵
      */
-    /**
-     * zeros方法。
-     *      * @param dimension int类型参数
-     * @return static Matrix类型返回值
-     */
-    /**
-     * zeros方法。
-     *      * @param dimension int类型参数
-     * @return static Matrix类型返回值
-     */
     public static Matrix zeros(Integer dimension) {
         return null;
     }
@@ -119,24 +83,12 @@ public class MatrixGenerator {
     /**
      * 创建一个空矩阵
      */
-    /**
-     * empty方法。
-     */
-    /**
-     * empty方法。
-     */
     public void empty() {
     }
 
     /**
      * 生成指定范围的数组，类似于 numpy.arange()
      * @return 生成的数组
-     */
-    /**
-     * arrange方法。
-     */
-    /**
-     * arrange方法。
      */
     public void arrange() {
     }
@@ -147,24 +99,9 @@ public class MatrixGenerator {
      * @param end 结束值（不包含）
      * @return 生成的数组
      */
-    /**
-     * arrange方法。
-     *      * @param start int类型参数
-     * @param end int类型参数
-     */
-    /**
-     * arrange方法。
-     *      * @param start int类型参数
-     * @param end int类型参数
-     */
     public void arrange(Integer start, Integer end) {
     }
 
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
     /**
      * main方法。
      *      * @param args String[]类型参数

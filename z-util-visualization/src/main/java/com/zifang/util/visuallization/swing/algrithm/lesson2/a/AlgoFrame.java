@@ -7,12 +7,6 @@ import java.awt.*;
  * 算法可视化框架 - 画布框架
  * 提供算法可视化所需的绘图基础组件
  */
-/**
- * AlgoFrame类。
- */
-/**
- * AlgoFrame类。
- */
 public class AlgoFrame extends JFrame {
 
     private int canvasWidth;
@@ -23,13 +17,6 @@ public class AlgoFrame extends JFrame {
      * @param title 窗口标题
      * @param canvasWidth 画布宽度
      * @param canvasHeight 画布高度
-     */
-
-    /**
-     * AlgoFrame方法。
-     *      * @param title String类型参数
-     * @param canvasWidth int类型参数
-     * @param canvasHeight int类型参数
      */
     public AlgoFrame(String title, int canvasWidth, int canvasHeight) {
 
@@ -52,10 +39,6 @@ public class AlgoFrame extends JFrame {
      * 创建算法可视化框架（使用默认尺寸1024x768）
      * @param title 窗口标题
      */
-    /**
-     * AlgoFrame方法。
-     *      * @param title String类型参数
-     */
     public AlgoFrame(String title) {
 
         this(title, 1024, 768);
@@ -65,10 +48,6 @@ public class AlgoFrame extends JFrame {
      * 获取画布宽度
      * @return 画布宽度
      */
-    /**
-     * getCanvasWidth方法。
-     * @return int类型返回值
-     */
     public int getCanvasWidth() {
         return canvasWidth;
     }
@@ -76,10 +55,6 @@ public class AlgoFrame extends JFrame {
     /**
      * 获取画布高度
      * @return 画布高度
-     */
-    /**
-     * getCanvasHeight方法。
-     * @return int类型返回值
      */
     public int getCanvasHeight() {
         return canvasHeight;
@@ -90,10 +65,6 @@ public class AlgoFrame extends JFrame {
     /**
      * 渲染圆形数据
      * @param circles 圆形数组
-     */
-    /**
-     * render方法。
-     *      * @param circles Circle[]类型参数
      */
     public void render(Circle[] circles) {
         this.circles = circles;
@@ -111,9 +82,6 @@ public class AlgoFrame extends JFrame {
          * 创建算法画布
          * 启用双缓冲以减少闪烁
          */
-    /**
-     * AlgoCanvas方法。
-     */
         public AlgoCanvas() {
             // 双缓存
             super(true);

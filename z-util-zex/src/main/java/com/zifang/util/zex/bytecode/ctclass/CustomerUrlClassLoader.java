@@ -18,9 +18,6 @@ import java.util.Map;
  * @author zifang
  * @version 1.0
  */
-/**
- * CustomerUrlClassLoader类。
- */
 public class CustomerUrlClassLoader extends URLClassLoader {
 
     private static final Logger log = LoggerFactory.getLogger(CustomerUrlClassLoader.class);

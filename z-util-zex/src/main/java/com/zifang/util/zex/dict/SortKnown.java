@@ -11,9 +11,6 @@ import java.util.stream.Collectors;
 /**
  * @author zifang
  */
-/**
- * SortKnown类。
- */
 public class SortKnown {
 
     static Pattern pattern = Pattern.compile("[0-9]*");

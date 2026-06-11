@@ -15,12 +15,6 @@ import java.util.Arrays;
  * @version 1.0
  * @since 2020-01-01
  */
-/**
- * AlgoVisualizer类。
- */
-/**
- * AlgoVisualizer类。
- */
 public class AlgoVisualizer {
 
     private static int DELAY = 40;
@@ -32,11 +26,6 @@ public class AlgoVisualizer {
      *
      * @param sceneWidth  场景宽度（像素）
      * @param sceneHeight 场景高度（像素）
-     */
-    /**
-     * AlgoVisualizer方法。
-     *      * @param sceneWidth int类型参数
-     * @param sceneHeight int类型参数
      */
     public AlgoVisualizer(int sceneWidth, int sceneHeight) {
 
@@ -55,9 +44,6 @@ public class AlgoVisualizer {
     /**
      * 运行动画循环
      * 批量执行财富随机分配实验，每批50次转移
-     */
-    /**
-     * run方法。
      */
     public void run() {
 
@@ -82,11 +68,6 @@ public class AlgoVisualizer {
      * 创建一个宽度1000、高度800的可视化窗口
      *
      * @param args 命令行参数（未使用）
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
 

@@ -12,12 +12,6 @@ import com.zifang.util.numpy.NdArray;
  * The log_softmax is computed internally for numerical stability:
  * log_softmax(x)[i] = x[i] - log(Σexp(x[j]))
  */
-/**
- * CrossEntropyLoss类。
- */
-/**
- * CrossEntropyLoss类。
- */
 public class CrossEntropyLoss implements LossFunction {
 
     /**
@@ -28,12 +22,6 @@ public class CrossEntropyLoss implements LossFunction {
      * @return Scalar loss value
      */
     @Override
-    /**
-     * compute方法。
-     *      * @param predictions NdArray类型参数
-     * @param targets NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * compute方法。
      *      * @param predictions NdArray类型参数
@@ -66,12 +54,6 @@ public class CrossEntropyLoss implements LossFunction {
      * @return Gradient array with same shape as predictions
      */
     @Override
-    /**
-     * gradient方法。
-     *      * @param predictions NdArray类型参数
-     * @param targets NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * gradient方法。
      *      * @param predictions NdArray类型参数

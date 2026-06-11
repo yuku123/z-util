@@ -11,9 +11,6 @@ import java.util.concurrent.*;
  * @author zifang
  * @version 1.0
  */
-/**
- * ThreadPoolExtend类。
- */
 public class ThreadPoolExtend {
     /**
      * main方法。

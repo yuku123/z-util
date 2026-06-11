@@ -13,11 +13,5 @@ package com.zifang.util.workflow.engine.spark.services;
  *
  * @see AbstractSparkEngineService
  */
-/**
- * StandardSingleViewHandler类。
- */
-/**
- * StandardSingleViewHandler类。
- */
 public class StandardSingleViewHandler {
 }

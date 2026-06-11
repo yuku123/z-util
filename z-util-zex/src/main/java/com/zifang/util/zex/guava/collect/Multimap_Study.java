@@ -42,9 +42,6 @@ import java.util.Map.Entry;
  * @author zifang
  * @version 1.0
  */
-/**
- * Multimap_Study类。
- */
 public class Multimap_Study {
     /**
      * 基本使用.

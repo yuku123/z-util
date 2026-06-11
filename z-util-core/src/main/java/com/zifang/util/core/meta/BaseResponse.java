@@ -6,21 +6,12 @@ package com.zifang.util.core.meta;
  * 提供通用的响应消息和状态码封装，用于业务层统一返回格式。
  * </p>
  */
-/**
- * BaseResponse类。
- */
-/**
- * BaseResponse类。
- */
 public class BaseResponse {
 
     private String message;
 
     private ResultCode code = ResultCode.SUCCESS;
 
-    /**
-     * BaseResponse方法。
-     */
     /**
      * BaseResponse方法。
      */
@@ -33,16 +24,6 @@ public class BaseResponse {
      * @param message 响应消息
      * @param code    响应状态码
      */
-    /**
-     * BaseResponse方法。
-     *      * @param message String类型参数
-     * @param code ResultCode类型参数
-     */
-    /**
-     * BaseResponse方法。
-     *      * @param message String类型参数
-     * @param code ResultCode类型参数
-     */
     public BaseResponse(String message, ResultCode code) {
         this.message = message;
         this.code = code;
@@ -53,14 +34,6 @@ public class BaseResponse {
      *
      * @return 消息内容
      */
-    /**
-     * getMessage方法。
-     * @return String类型返回值
-     */
-    /**
-     * getMessage方法。
-     * @return String类型返回值
-     */
     public String getMessage() {
         return message;
     }
@@ -69,14 +42,6 @@ public class BaseResponse {
      * 设置响应消息
      *
      * @param message 消息内容
-     */
-    /**
-     * setMessage方法。
-     *      * @param message String类型参数
-     */
-    /**
-     * setMessage方法。
-     *      * @param message String类型参数
      */
     public void setMessage(String message) {
         this.message = message;
@@ -87,14 +52,6 @@ public class BaseResponse {
      *
      * @return 状态码枚举
      */
-    /**
-     * getCode方法。
-     * @return ResultCode类型返回值
-     */
-    /**
-     * getCode方法。
-     * @return ResultCode类型返回值
-     */
     public ResultCode getCode() {
         return code;
     }
@@ -104,14 +61,6 @@ public class BaseResponse {
      *
      * @param code 状态码枚举
      */
-    /**
-     * setCode方法。
-     *      * @param code ResultCode类型参数
-     */
-    /**
-     * setCode方法。
-     *      * @param code ResultCode类型参数
-     */
     public void setCode(ResultCode code) {
         this.code = code;
     }
@@ -120,14 +69,6 @@ public class BaseResponse {
      * 判断请求是否成功
      *
      * @return 是否成功，当状态码为SUCCESS时返回true
-     */
-    /**
-     * isSuccess方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isSuccess方法。
-     * @return boolean类型返回值
      */
     public boolean isSuccess() {
         return code == ResultCode.SUCCESS;
@@ -139,10 +80,6 @@ public class BaseResponse {
      * @return 字符串表示
      */
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -163,11 +100,6 @@ public class BaseResponse {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -182,10 +114,6 @@ public class BaseResponse {
      * @return 哈希码
      */
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

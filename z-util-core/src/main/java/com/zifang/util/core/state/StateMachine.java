@@ -72,9 +72,6 @@ import java.util.function.Predicate;
  * @param <E> 事件类型
  * @param <C> 业务上下文类型
  */
-/**
- * StateMachine类。
- */
 public class StateMachine<S, E, C> {
 
     private final S initialState;
@@ -274,21 +271,12 @@ public class StateMachine<S, E, C> {
     /**
      * 重置回初始状态（不触发 entry/exit）。
      */
-    /**
-     * reset方法。
-     * @return synchronized void类型返回值
-     */
     public synchronized void reset() {
         this.currentState = initialState;
     }
 
     /**
      * 强制设到目标状态（跳过守卫/动作/监听器）。用于持久化恢复。
-     */
-    /**
-     * forceState方法。
-     *      * @param state S类型参数
-     * @return synchronized void类型返回值
      */
     public synchronized void forceState(S state) {
         Objects.requireNonNull(state, "state");
@@ -314,12 +302,6 @@ public class StateMachine<S, E, C> {
     /**
      * 触发一个事件，找不到匹配或守卫拒绝时抛 {@link StateMachineException}。
      */
-    /**
-     * fire方法。
-     *      * @param event E类型参数
-     * @param context C类型参数
-     * @return synchronized S类型返回值
-     */
     public synchronized S fire(E event, C context) {
         return fire(event, context, true);
     }
@@ -328,13 +310,6 @@ public class StateMachine<S, E, C> {
      * 触发一个事件。
      *
      * @param failFast true 表示无匹配转移或守卫失败抛异常；false 表示静默忽略并保留当前态
-     */
-    /**
-     * fire方法。
-     *      * @param event E类型参数
-     * @param context C类型参数
-     * @param failFast boolean类型参数
-     * @return synchronized S类型返回值
      */
     public synchronized S fire(E event, C context, boolean failFast) {
         S from = currentState;
@@ -454,12 +429,6 @@ public class StateMachine<S, E, C> {
     /**
      * 在不修改状态的前提下试探事件是否允许触发。
      */
-    /**
-     * accept方法。
-     *      * @param event E类型参数
-     * @param context C类型参数
-     * @return S类型返回值
-     */
     public S accept(E event, C context) {
         Transition<S, E, C> t = resolveTransition(currentState, event);
         if (t != null && t.isAllowed(context)) {
@@ -471,12 +440,6 @@ public class StateMachine<S, E, C> {
     /**
      * 查询在指定状态、给定事件，是否存在注册转移（不评估守卫）。
      */
-    /**
-     * hasTransition方法。
-     *      * @param state S类型参数
-     * @param event E类型参数
-     * @return boolean类型返回值
-     */
     public boolean hasTransition(S state, E event) {
         return resolveTransition(state, event) != null;
     }
@@ -484,22 +447,12 @@ public class StateMachine<S, E, C> {
     /**
      * 判断某状态是否为 composite（有子状态）。
      */
-    /**
-     * isComposite方法。
-     *      * @param state S类型参数
-     * @return boolean类型返回值
-     */
     public boolean isComposite(S state) {
         return compositeInitialMap.containsKey(state);
     }
 
     /**
      * 判断某状态是否为 history（H）状态。
-     */
-    /**
-     * isHistory方法。
-     *      * @param state S类型参数
-     * @return boolean类型返回值
      */
     public boolean isHistory(S state) {
         return historyStates.contains(state);
@@ -542,11 +495,6 @@ public class StateMachine<S, E, C> {
 
     /**
      * 取得指定状态的所有祖先（从自身到根）。
-     */
-    /**
-     * ancestorsOf方法。
-     *      * @param state S类型参数
-     * @return List<S>类型返回值
      */
     public List<S> ancestorsOf(S state) {
         List<S> ancestors = new ArrayList<>();
@@ -754,11 +702,6 @@ public class StateMachine<S, E, C> {
         /**
          * 启动 from 配置，链上下一步是 {@link #on(Object)}。
          */
-    /**
-     * from方法。
-     *      * @param state S类型参数
-     * @return FromStateStep<S, E, C>类型返回值
-     */
         public FromStateStep<S, E, C> from(S state) {
             return new FromStateStep<>(this, state);
         }
@@ -781,11 +724,6 @@ public class StateMachine<S, E, C> {
          * .state(OrderState.SHIPPED).entry(ctx -> log.info("shipped")).exit(ctx -> log.info("leaving shipped"))
          * }</pre>
          */
-    /**
-     * state方法。
-     *      * @param state S类型参数
-     * @return StateConfigStep<S, E, C>类型返回值
-     */
         public StateConfigStep<S, E, C> state(S state) {
             return new StateConfigStep<>(this, state);
         }
@@ -793,13 +731,6 @@ public class StateMachine<S, E, C> {
         /**
          * 便捷方法：声明 state 为 composite，并指定初始子态与子状态机配置。
          */
-    /**
-     * composite方法。
-     *      * @param state S类型参数
-     * @param initialChild S类型参数
-     * @param subConfig java.util.function.ConsumerSubMachineBuilderS,类型参数
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
         public StateMachineBuilder<S, E, C> composite(S state, S initialChild,
                                                        java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
             SubMachineBuilder<S, E, C> sub = new SubMachineBuilder<>(this, state, initialChild);
@@ -813,11 +744,6 @@ public class StateMachine<S, E, C> {
         /**
          * 声明一个 history（H）状态 — 属于其父 composite，激活时恢复到父 composite 上次激活的子态。
          */
-    /**
-     * history方法。
-     *      * @param state S类型参数
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
         public StateMachineBuilder<S, E, C> history(S state) {
             this.historyStates.add(state);
             // H 状态视为 composite（拥有 default 子态），以便下钻
@@ -1196,11 +1122,6 @@ public class StateMachine<S, E, C> {
         /**
          * 链式回到 transfer 配置入口（{@link #on(Object)} 之后）。
          */
-    /**
-     * from方法。
-     *      * @param from S类型参数
-     * @return FromStateStep<S, E, C>类型返回值
-     */
         public FromStateStep<S, E, C> from(S from) {
             return new FromStateStep<>(parent, from);
         }
@@ -1208,12 +1129,6 @@ public class StateMachine<S, E, C> {
         /**
          * 把 state 声明为 composite，指定初始子态并通过 sub 配置子状态机。
          */
-    /**
-     * composite方法。
-     *      * @param initialChild S类型参数
-     * @param subConfig java.util.function.ConsumerSubMachineBuilderS,类型参数
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
         public StateMachineBuilder<S, E, C> composite(S initialChild,
                                                        java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
             SubMachineBuilder<S, E, C> sub = new SubMachineBuilder<>(parent, state, initialChild);
@@ -1274,10 +1189,6 @@ public class StateMachine<S, E, C> {
         /**
          * 显式结束子机构建（通常不必调用，链式 API 会自动回到 root）。
          */
-    /**
-     * end方法。
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
         public StateMachineBuilder<S, E, C> end() {
             // 标记 composite 本身 — 在 end 时一次性注册 composite 关系
             root.registerComposite(composite, initialChild);

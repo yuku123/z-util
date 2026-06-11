@@ -15,19 +15,8 @@ import java.io.IOException;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * GithubApiHolder类。
- */
-/**
- * GithubApiHolder类。
- */
 public class GithubApiHolder {
 
-    /**
-     * GithubApiHolder方法。
-     *      * @param null Object类型参数
-     * @return static GithubApiHolder INSTANCE = new类型返回值
-     */
     /**
      * GithubApiHolder方法。
      *      * @param null Object类型参数
@@ -65,14 +54,6 @@ public class GithubApiHolder {
      *
      * @return GitHub 客户端对象，可能为 null（如果未初始化）
      */
-    /**
-     * getGithub方法。
-     * @return GitHub类型返回值
-     */
-    /**
-     * getGithub方法。
-     * @return GitHub类型返回值
-     */
     public GitHub getGithub() {
         return github;
     }
@@ -82,14 +63,6 @@ public class GithubApiHolder {
      *
      * @return GithubConfig 配置对象，可能为 null
      */
-    /**
-     * getConfig方法。
-     * @return GithubConfig类型返回值
-     */
-    /**
-     * getConfig方法。
-     * @return GithubConfig类型返回值
-     */
     public GithubConfig getConfig() {
         return config;
     }
@@ -98,14 +71,6 @@ public class GithubApiHolder {
      * 获取 GithubApiHolder 单例实例
      *
      * @return GithubApiHolder 实例
-     */
-    /**
-     * getInstance方法。
-     * @return static GithubApiHolder类型返回值
-     */
-    /**
-     * getInstance方法。
-     * @return static GithubApiHolder类型返回值
      */
     public static GithubApiHolder getInstance() {
         return INSTANCE;
@@ -117,16 +82,6 @@ public class GithubApiHolder {
      * @param config GitHub 配置
      * @throws IllegalStateException 当已经初始化过再次调用时抛出
      */
-    /**
-     * init方法。
-     *      * @param config GithubConfig类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * init方法。
-     *      * @param config GithubConfig类型参数
-     * @return static void类型返回值
-     */
     public static void init(GithubConfig config) {
         if (INSTANCE.config != null) {
             throw new IllegalStateException("GithubApiHolder has already been initialized");
@@ -136,14 +91,6 @@ public class GithubApiHolder {
 
     /**
      * 重置 GithubApiHolder 到未初始化状态
-     */
-    /**
-     * reset方法。
-     * @return static void类型返回值
-     */
-    /**
-     * reset方法。
-     * @return static void类型返回值
      */
     public static void reset() {
         INSTANCE = new GithubApiHolder(null);

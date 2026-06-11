@@ -17,12 +17,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @description: Expression util
  * @version: JDK 1.8
  */
-/**
- * ScriptUtil类。
- */
-/**
- * ScriptUtil类。
- */
 public class ScriptUtil {
 //
 //    private static final Map<String, String> SCRIPT_TEMPLATE_CACHE = new ConcurrentHashMap<>();

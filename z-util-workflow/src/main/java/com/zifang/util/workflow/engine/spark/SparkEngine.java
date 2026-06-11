@@ -13,24 +13,10 @@ import java.util.Map;
  * @see AbstractSparkEngine
  * @see AbstractEngineService
  */
-/**
- * SparkEngine类。
- */
-/**
- * SparkEngine类。
- */
 public class SparkEngine extends AbstractSparkEngine {
 
     /**
      * 已注册的引擎服务映射表
-     */
-    /**
-     * AbstractEngineService>>方法。
-     * @return Map<String, Class<? extends AbstractEngineService>> registeredEngineServiceMap = new HashMap<String, Class<? extends类型返回值
-     */
-    /**
-     * AbstractEngineService>>方法。
-     * @return Map<String, Class<? extends AbstractEngineService>> registeredEngineServiceMap = new HashMap<String, Class<? extends类型返回值
      */
     public Map<String, Class<? extends AbstractEngineService>> registeredEngineServiceMap = new HashMap<String, Class<? extends AbstractEngineService>>() {
     };
@@ -41,10 +27,6 @@ public class SparkEngine extends AbstractSparkEngine {
      * @return 服务单元名称到服务类类型的映射
      */
     @Override
-    /**
-     * getRegisteredEngineServiceMap方法。
-     * @return Map<String, Class<? extends AbstractEngineService>>类型返回值
-     */
     /**
      * getRegisteredEngineServiceMap方法。
      * @return Map<String, Class<? extends AbstractEngineService>>类型返回值
@@ -66,11 +48,6 @@ public class SparkEngine extends AbstractSparkEngine {
      *      * @param serviceUnit String类型参数
      * @return AbstractEngineService类型返回值
      */
-    /**
-     * getRegisteredEngineService方法。
-     *      * @param serviceUnit String类型参数
-     * @return AbstractEngineService类型返回值
-     */
     public AbstractEngineService getRegisteredEngineService(String serviceUnit) {
         return null;
     }
@@ -82,11 +59,6 @@ public class SparkEngine extends AbstractSparkEngine {
      * @param engineService 服务类类型
      */
     @Override
-    /**
-     * register方法。
-     *      * @param name String类型参数
-     * @param engineService Class?类型参数
-     */
     /**
      * register方法。
      *      * @param name String类型参数
@@ -104,17 +76,9 @@ public class SparkEngine extends AbstractSparkEngine {
     /**
      * doInitial方法。
      */
-    /**
-     * doInitial方法。
-     */
     public void doInitial() {
     }
 
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
     /**
      * main方法。
      *      * @param args String[]类型参数

@@ -15,12 +15,6 @@ import java.util.List;
  * Input shape: [seqLen, batch, inputSize]
  * Output shape: [seqLen, batch, hiddenSize]
  */
-/**
- * RNN类。
- */
-/**
- * RNN类。
- */
 public class RNN extends Module {
     
     private int inputSize;
@@ -35,12 +29,6 @@ public class RNN extends Module {
     private List<NdArray> savedInputs;         // For BPTT
     private List<NdArray> savedOutputs;        // For BPTT
     
-    /**
-     * RNN方法。
-     *      * @param inputSize int类型参数
-     * @param hiddenSize int类型参数
-     * @param numLayers int类型参数
-     */
     /**
      * RNN方法。
      *      * @param inputSize int类型参数
@@ -75,11 +63,6 @@ public class RNN extends Module {
     }
     
     @Override
-    /**
-     * forward方法。
-     *      * @param input NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -145,11 +128,6 @@ public class RNN extends Module {
     }
     
     @Override
-    /**
-     * backward方法。
-     *      * @param gradOutput NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * backward方法。
      *      * @param gradOutput NdArray类型参数

@@ -21,12 +21,6 @@ import java.util.regex.Pattern;
 /**
  * 方法解析出http的请求
  */
-/**
- * HttpDefinitionSolver类。
- */
-/**
- * HttpDefinitionSolver类。
- */
 public class HttpDefinitionSolver implements IDefinitionSolver {
 
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\$\\{([^}]+)}");
@@ -50,22 +44,10 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
      * getHttpRequestDefinition方法。
      * @return HttpRequestDefinition类型返回值
      */
-    /**
-     * getHttpRequestDefinition方法。
-     * @return HttpRequestDefinition类型返回值
-     */
     public HttpRequestDefinition getHttpRequestDefinition() {
         return httpRequestDefinition;
     }
 
-    /**
-     * set方法。
-     *      * @param target Class?类型参数
-     * @param proxy Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
-     * @param contextParams MapString,Object类型参数
-     */
     /**
      * set方法。
      *      * @param target Class?类型参数
@@ -82,9 +64,6 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
         this.contextParams = contextParams;
     }
 
-    /**
-     * solve方法。
-     */
     /**
      * solve方法。
      */

@@ -15,12 +15,6 @@ import java.lang.reflect.Parameter;
  * @author zifang
  * @see Pair
  */
-/**
- * ParameterValuePair类。
- */
-/**
- * ParameterValuePair类。
- */
 public class ParameterValuePair extends Pair<Parameter, Object> {
 
     /**
@@ -28,16 +22,6 @@ public class ParameterValuePair extends Pair<Parameter, Object> {
      *
      * @param parameter 方法参数
      * @param obj       参数对应的值
-     */
-    /**
-     * ParameterValuePair方法。
-     *      * @param parameter Parameter类型参数
-     * @param obj Object类型参数
-     */
-    /**
-     * ParameterValuePair方法。
-     *      * @param parameter Parameter类型参数
-     * @param obj Object类型参数
      */
     public ParameterValuePair(Parameter parameter, Object obj) {
         super(parameter, obj);
@@ -48,14 +32,6 @@ public class ParameterValuePair extends Pair<Parameter, Object> {
      *
      * @return 方法参数
      */
-    /**
-     * getParameter方法。
-     * @return Parameter类型返回值
-     */
-    /**
-     * getParameter方法。
-     * @return Parameter类型返回值
-     */
     public Parameter getParameter() {
         return getA();
     }
@@ -64,14 +40,6 @@ public class ParameterValuePair extends Pair<Parameter, Object> {
      * 获取参数值。
      *
      * @return 参数对应的值
-     */
-    /**
-     * getObj方法。
-     * @return Object类型返回值
-     */
-    /**
-     * getObj方法。
-     * @return Object类型返回值
      */
     public Object getObj() {
         return getB();

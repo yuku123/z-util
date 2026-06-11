@@ -16,9 +16,6 @@ package com.zifang.util.zex.guava.collect;
  * @author zifang
  * @version 1.0
  */
-/**
- * UserBo类。
- */
 public class UserBo {
     private String name;
 

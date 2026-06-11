@@ -3,9 +3,6 @@ package com.zifang.util.zex.bust.chapter1.case1;
 /**
  * hello word 程序
  */
-/**
- * HelloWord类。
- */
 public class HelloWord {
     /**
      * main方法。

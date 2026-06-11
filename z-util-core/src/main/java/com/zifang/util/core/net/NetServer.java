@@ -12,12 +12,6 @@ import java.net.SocketAddress;
  *
  * @author zifang
  */
-/**
- * NetServer接口。
- */
-/**
- * NetServer接口。
- */
 public interface NetServer extends Closeable {
 
     /**

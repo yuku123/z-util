@@ -9,20 +9,11 @@ import com.zifang.util.numpy.Shape;
  * f(x) = x if x > 0, else negative_slope * x
  * f'(x) = 1 if x > 0, else negative_slope
  */
-/**
- * LeakyReLU类。
- */
-/**
- * LeakyReLU类。
- */
 public class LeakyReLU extends com.zifang.util.ml.nn.Module {
     
     private final float negativeSlope;
     private NdArray savedInput;
     
-    /**
-     * LeakyReLU方法。
-     */
     /**
      * LeakyReLU方法。
      */
@@ -34,20 +25,11 @@ public class LeakyReLU extends com.zifang.util.ml.nn.Module {
      * LeakyReLU方法。
      *      * @param negativeSlope float类型参数
      */
-    /**
-     * LeakyReLU方法。
-     *      * @param negativeSlope float类型参数
-     */
     public LeakyReLU(float negativeSlope) {
         this.negativeSlope = negativeSlope;
     }
     
     @Override
-    /**
-     * forward方法。
-     *      * @param input NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * forward方法。
      *      * @param input NdArray类型参数
@@ -75,11 +57,6 @@ public class LeakyReLU extends com.zifang.util.ml.nn.Module {
      *      * @param gradOutput NdArray类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * backward方法。
-     *      * @param gradOutput NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray backward(NdArray gradOutput) {
         NdArray gradInput = NdArray.zeros(gradOutput.getShape(), DType.FLOAT32);
         Object gInData = gradInput.getData();
@@ -97,10 +74,6 @@ public class LeakyReLU extends com.zifang.util.ml.nn.Module {
         return gradInput;
     }
     
-    /**
-     * getNegativeSlope方法。
-     * @return float类型返回值
-     */
     /**
      * getNegativeSlope方法。
      * @return float类型返回值

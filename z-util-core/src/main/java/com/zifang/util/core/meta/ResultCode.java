@@ -10,12 +10,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @see HttpServletResponse
  */
-/**
- * ResultCode枚举。
- */
-/**
- * ResultCode枚举。
- */
 public enum ResultCode {
 
     /**
@@ -102,14 +96,6 @@ public enum ResultCode {
      *
      * @return HTTP状态码
      */
-    /**
-     * getCode方法。
-     * @return int类型返回值
-     */
-    /**
-     * getCode方法。
-     * @return int类型返回值
-     */
     public Integer getCode() {
         return code;
     }
@@ -118,14 +104,6 @@ public enum ResultCode {
      * 获取状态描述信息
      *
      * @return 状态描述
-     */
-    /**
-     * getMsg方法。
-     * @return String类型返回值
-     */
-    /**
-     * getMsg方法。
-     * @return String类型返回值
      */
     public String getMsg() {
         return msg;

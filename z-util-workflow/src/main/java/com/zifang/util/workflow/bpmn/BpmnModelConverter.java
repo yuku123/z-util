@@ -41,12 +41,6 @@ import java.util.Map;
  * @see BpmnDiagram
  * @see WorkflowConfiguration
  */
-/**
- * BpmnModelConverter类。
- */
-/**
- * BpmnModelConverter类。
- */
 public class BpmnModelConverter {
 
     /**
@@ -63,12 +57,6 @@ public class BpmnModelConverter {
     /**
      * 默认构造函数，使用 "java" 作为默认引擎类型。
      */
-    /**
-     * BpmnModelConverter方法。
-     */
-    /**
-     * BpmnModelConverter方法。
-     */
     public BpmnModelConverter() {
     }
 
@@ -77,14 +65,6 @@ public class BpmnModelConverter {
      *
      * @param engineType 引擎类型，如 "java"、"spark"、"python" 等
      * @throws IllegalArgumentException 如果 engineType 为空或 null
-     */
-    /**
-     * BpmnModelConverter方法。
-     *      * @param engineType String类型参数
-     */
-    /**
-     * BpmnModelConverter方法。
-     *      * @param engineType String类型参数
      */
     public BpmnModelConverter(String engineType) {
         if (engineType != null && !engineType.trim().isEmpty()) {
@@ -97,14 +77,6 @@ public class BpmnModelConverter {
      *
      * @param engineType engine type (e.g., "java", "spark", "python")
      */
-    /**
-     * setEngineType方法。
-     *      * @param engineType String类型参数
-     */
-    /**
-     * setEngineType方法。
-     *      * @param engineType String类型参数
-     */
     public void setEngineType(String engineType) {
         if (engineType != null && !engineType.trim().isEmpty()) {
             this.engineType = engineType;
@@ -115,14 +87,6 @@ public class BpmnModelConverter {
      * Set the cache engine type.
      *
      * @param cacheEngineType cache engine type (e.g., "memory", "redis")
-     */
-    /**
-     * setCacheEngineType方法。
-     *      * @param cacheEngineType String类型参数
-     */
-    /**
-     * setCacheEngineType方法。
-     *      * @param cacheEngineType String类型参数
      */
     public void setCacheEngineType(String cacheEngineType) {
         if (cacheEngineType != null && !cacheEngineType.trim().isEmpty()) {
@@ -135,16 +99,6 @@ public class BpmnModelConverter {
      *
      * @param diagram BPMN diagram model
      * @return WorkflowConfiguration
-     */
-    /**
-     * convert方法。
-     *      * @param diagram BpmnDiagram类型参数
-     * @return WorkflowConfiguration类型返回值
-     */
-    /**
-     * convert方法。
-     *      * @param diagram BpmnDiagram类型参数
-     * @return WorkflowConfiguration类型返回值
      */
     public WorkflowConfiguration convert(BpmnDiagram diagram) {
         WorkflowConfiguration config = new WorkflowConfiguration();

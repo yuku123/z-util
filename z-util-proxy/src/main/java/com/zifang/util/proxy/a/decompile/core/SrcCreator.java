@@ -19,12 +19,6 @@ import java.util.Map.Entry;
  * <p>
  * 将 ClassFile 反编译为 Java 源代码。
  */
-/**
- * SrcCreator类。
- */
-/**
- * SrcCreator类。
- */
 public class SrcCreator {
 
     private static final String INDENT = "\t\t";
@@ -34,16 +28,6 @@ public class SrcCreator {
      *
      * @param classFile ClassFile 对象
      * @return Java 源代码字符串
-     */
-    /**
-     * createJavaFileSrc方法。
-     *      * @param classFile ClassFile类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * createJavaFileSrc方法。
-     *      * @param classFile ClassFile类型参数
-     * @return static String类型返回值
      */
     public static String createJavaFileSrc(ClassFile classFile) {
         StringBuilder sb = new StringBuilder();

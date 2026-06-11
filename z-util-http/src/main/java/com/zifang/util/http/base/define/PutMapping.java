@@ -14,9 +14,6 @@ import java.lang.annotation.*;
 /**
  * PutMapping注解。
  */
-/**
- * PutMapping注解。
- */
 public @interface PutMapping {
 
     /**

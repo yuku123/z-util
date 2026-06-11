@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter2;
  * @author zifang
  * @version 1.0
  */
-/**
- * CharEncoding类。
- */
 public class CharEncoding {
     /**
      * main方法。

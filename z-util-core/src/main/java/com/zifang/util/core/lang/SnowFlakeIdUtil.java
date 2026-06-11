@@ -7,20 +7,10 @@ package com.zifang.util.core.lang;
  * @description: snowFlake id util
  * @version: JDK 1.8
  */
-/**
- * SnowFlakeIdUtil类。
- */
-/**
- * SnowFlakeIdUtil类。
- */
 public class SnowFlakeIdUtil {
 
     private static final SnowFlakeIdWorker SNOWFLAKE_ID_WORKER = SnowFlakeIdWorker.getInstance();
 
-    /**
-     * nextId方法。
-     * @return static long类型返回值
-     */
     /**
      * nextId方法。
      * @return static long类型返回值
@@ -33,10 +23,6 @@ public class SnowFlakeIdUtil {
      * nextIdByCacheWhenClockMoved方法。
      * @return static long类型返回值
      */
-    /**
-     * nextIdByCacheWhenClockMoved方法。
-     * @return static long类型返回值
-     */
     public static long nextIdByCacheWhenClockMoved() {
         return SNOWFLAKE_ID_WORKER.nextIdByCacheWhenClockMoved();
     }
@@ -45,18 +31,10 @@ public class SnowFlakeIdUtil {
      * stringNextId方法。
      * @return static String类型返回值
      */
-    /**
-     * stringNextId方法。
-     * @return static String类型返回值
-     */
     public static String stringNextId() {
         return String.valueOf(nextId());
     }
 
-    /**
-     * stringNextIdByCacheWhenClockMoved方法。
-     * @return static String类型返回值
-     */
     /**
      * stringNextIdByCacheWhenClockMoved方法。
      * @return static String类型返回值

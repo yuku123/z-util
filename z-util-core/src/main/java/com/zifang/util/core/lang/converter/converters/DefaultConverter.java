@@ -11,23 +11,11 @@ import java.lang.reflect.Method;
 /**
  * @author zifang
  */
-/**
- * DefaultConverter类。
- */
-/**
- * DefaultConverter类。
- */
 public class DefaultConverter<F,T> implements IConverter<F,T> {
 
     private static final Logger log = LoggerFactory.getLogger(DefaultConverter.class);
 
     @Override
-    /**
-     * to方法。
-     *      * @param value F类型参数
-     * @param defaultValue T类型参数
-     * @return T类型返回值
-     */
     /**
      * to方法。
      *      * @param value F类型参数
@@ -111,12 +99,6 @@ public class DefaultConverter<F,T> implements IConverter<F,T> {
         return null;
     }
 
-    /**
-     * to方法。
-     *      * @param value Number类型参数
-     * @param defaultValue Number类型参数
-     * @return Number类型返回值
-     */
     /**
      * to方法。
      *      * @param value Number类型参数

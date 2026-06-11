@@ -23,12 +23,6 @@ import java.util.regex.Pattern;
  * cURL 命令解析器
  * 将 cURL 命令文本解析为 HttpRequestDefinition 标准结构
  */
-/**
- * CurlParser类。
- */
-/**
- * CurlParser类。
- */
 public class CurlParser {
 
     // 正则表达式匹配各种 cURL 参数
@@ -48,16 +42,6 @@ public class CurlParser {
      *
      * @param curlCommand cURL 命令文本
      * @return HttpRequestDefinition HTTP 请求定义
-     */
-    /**
-     * parse方法。
-     *      * @param curlCommand String类型参数
-     * @return static HttpRequestDefinition类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param curlCommand String类型参数
-     * @return static HttpRequestDefinition类型返回值
      */
     public static HttpRequestDefinition parse(String curlCommand) {
         if (curlCommand == null || curlCommand.trim().isEmpty()) {
@@ -249,16 +233,6 @@ public class CurlParser {
      *
      * @param curlCommands cURL 命令列表
      * @return HttpRequestDefinition 列表
-     */
-    /**
-     * parseList方法。
-     *      * @param curlCommands ListString类型参数
-     * @return static List<HttpRequestDefinition>类型返回值
-     */
-    /**
-     * parseList方法。
-     *      * @param curlCommands ListString类型参数
-     * @return static List<HttpRequestDefinition>类型返回值
      */
     public static List<HttpRequestDefinition> parseList(List<String> curlCommands) {
         List<HttpRequestDefinition> definitions = new ArrayList<>();

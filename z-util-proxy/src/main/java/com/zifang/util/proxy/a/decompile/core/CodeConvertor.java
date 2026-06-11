@@ -5,28 +5,12 @@ package com.zifang.util.proxy.a.decompile.core;
  * <p>
  * 将十六进制字节码转换为可读的指令格式。
  */
-/**
- * CodeConvertor类。
- */
-/**
- * CodeConvertor类。
- */
 public class CodeConvertor {
     /**
      * 十六进制 和 字节码指令 转换
      *
      * @param code_everyone_hexString
      * @return
-     */
-    /**
-     * codeConvertor方法。
-     *      * @param code_everyone_hexString String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * codeConvertor方法。
-     *      * @param code_everyone_hexString String类型参数
-     * @return static String类型返回值
      */
     public static String codeConvertor(String code_everyone_hexString) {
         switch (code_everyone_hexString) {

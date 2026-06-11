@@ -27,9 +27,6 @@ import java.util.concurrent.*;
  *
  * @author zifang
  */
-/**
- * CacheStudy类。
- */
 public class CacheStudy {
     /**
      * 缓存项被移除时，RemovalListener会获取移除通知[RemovalNotification]，其中包含移除原因[RemovalCause]、键和值.
@@ -63,11 +60,6 @@ public class CacheStudy {
         /**
          * 自我实现批量加载模式.
          */
-    /**
-     * loadAll方法。
-     *      * @param keys Iterable?类型参数
-     * @return Map<String, String>类型返回值
-     */
         public Map<String, String> loadAll(Iterable<? extends String> keys) throws Exception {
             Map<String, String> map = new HashMap<>();
             for (String key : keys) {

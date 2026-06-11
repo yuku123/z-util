@@ -8,11 +8,5 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * RestControllerAdvice类。
- */
-/**
- * RestControllerAdvice类。
- */
 public class RestControllerAdvice {
 }

@@ -14,12 +14,6 @@ import java.util.Map;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * Step接口。
- */
-/**
- * Step接口。
- */
 public interface Step {
 
     /**

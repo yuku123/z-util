@@ -8,12 +8,6 @@ import com.zifang.util.numpy.NdArray;
  * Defines the basic operations required for loss functions
  * to evaluate predictions against targets.
  */
-/**
- * LossFunction接口。
- */
-/**
- * LossFunction接口。
- */
 public interface LossFunction {
 
     /**

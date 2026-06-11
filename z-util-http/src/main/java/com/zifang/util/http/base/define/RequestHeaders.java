@@ -11,9 +11,6 @@ import java.lang.annotation.*;
 /**
  * RequestHeaders注解。
  */
-/**
- * RequestHeaders注解。
- */
 public @interface RequestHeaders {
     RequestHeader[] value();
 }

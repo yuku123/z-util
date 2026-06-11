@@ -14,9 +14,6 @@ import java.util.stream.Collectors;
  * @author zifang
  * @version 1.0
  */
-/**
- * ClassPrinter类。
- */
 public class ClassPrinter {
     /**
      * main方法。

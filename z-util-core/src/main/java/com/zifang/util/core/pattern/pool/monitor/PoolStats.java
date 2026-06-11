@@ -5,12 +5,6 @@ import com.zifang.util.core.pattern.pool.PooledObject;
 /**
  * 池监控信息接口
  */
-/**
- * PoolStats接口。
- */
-/**
- * PoolStats接口。
- */
 public interface PoolStats {
 
     /**

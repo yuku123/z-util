@@ -5,12 +5,6 @@ package com.zifang.util.monitor.thread;
  *
  * @author zifang
  */
-/**
- * StatusLevel枚举。
- */
-/**
- * StatusLevel枚举。
- */
 public enum StatusLevel {
 
     /**

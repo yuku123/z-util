@@ -18,9 +18,6 @@ import java.lang.annotation.*;
 /**
  * PathVariable注解。
  */
-/**
- * PathVariable注解。
- */
 public @interface PathVariable {
 
     /**

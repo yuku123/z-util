@@ -10,12 +10,6 @@ import java.util.List;
  * 遗传算法可视化器
  * 用于可视化遗传算法进化过程中的适应度变化和最优染色体
  */
-/**
- * GAVisualizer类。
- */
-/**
- * GAVisualizer类。
- */
 public class GAVisualizer {
 
     private final LineChart fitnessChart;
@@ -27,9 +21,6 @@ public class GAVisualizer {
     /**
      * 创建遗传算法可视化器
      */
-    /**
-     * GAVisualizer方法。
-     */
     public GAVisualizer() {
         this.fitnessChart = new LineChart("GA - Fitness Evolution", 600, 400);
         this.chromosomeChart = new BarChart("GA - Best Chromosome", 600, 400);
@@ -40,10 +31,6 @@ public class GAVisualizer {
     /**
      * 更新可视化数据
      * @param population 当前种群
-     */
-    /**
-     * update方法。
-     *      * @param population Population类型参数
      */
     public void update(Population population) {
         Individual fittest = population.getFittest();
@@ -61,10 +48,6 @@ public class GAVisualizer {
      * 获取适应度曲线图组件
      * @return 适应度曲线图实例
      */
-    /**
-     * getFitnessChart方法。
-     * @return LineChart类型返回值
-     */
     public LineChart getFitnessChart() {
         return fitnessChart;
     }
@@ -72,10 +55,6 @@ public class GAVisualizer {
     /**
      * 获取染色体条形图组件
      * @return 染色体条形图实例
-     */
-    /**
-     * getChromosomeChart方法。
-     * @return BarChart类型返回值
      */
     public BarChart getChromosomeChart() {
         return chromosomeChart;
@@ -85,10 +64,6 @@ public class GAVisualizer {
      * 获取当前代数
      * @return 当前进化代数
      */
-    /**
-     * getGeneration方法。
-     * @return int类型返回值
-     */
     public int getGeneration() {
         return generation;
     }
@@ -96,10 +71,6 @@ public class GAVisualizer {
     /**
      * 获取最优适应度历史记录
      * @return 最优适应度列表副本
-     */
-    /**
-     * getBestFitnessHistory方法。
-     * @return List<Double>类型返回值
      */
     public List<Double> getBestFitnessHistory() {
         return new ArrayList<>(bestFitnessHistory);

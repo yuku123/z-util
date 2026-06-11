@@ -14,9 +14,6 @@ import java.util.stream.Collectors;
 /**
  * IPageable接口。
  */
-/**
- * IPageable接口。
- */
 public interface IPageable<T> extends Serializable {
 
     /**

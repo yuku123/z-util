@@ -9,12 +9,6 @@ package com.zifang.util.source.generator.info;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * MethodParameterPair类。
- */
-/**
- * MethodParameterPair类。
- */
 public class MethodParameterPair {
 
     /**
@@ -32,18 +26,10 @@ public class MethodParameterPair {
      * getParamType方法。
      * @return String类型返回值
      */
-    /**
-     * getParamType方法。
-     * @return String类型返回值
-     */
     public String getParamType() {
         return paramType;
     }
 
-    /**
-     * setParamType方法。
-     *      * @param paramType String类型参数
-     */
     /**
      * setParamType方法。
      *      * @param paramType String类型参数
@@ -56,18 +42,10 @@ public class MethodParameterPair {
      * getParamName方法。
      * @return String类型返回值
      */
-    /**
-     * getParamName方法。
-     * @return String类型返回值
-     */
     public String getParamName() {
         return paramName;
     }
 
-    /**
-     * setParamName方法。
-     *      * @param paramName String类型参数
-     */
     /**
      * setParamName方法。
      *      * @param paramName String类型参数
@@ -77,10 +55,6 @@ public class MethodParameterPair {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

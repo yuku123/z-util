@@ -6,12 +6,6 @@ package com.zifang.util.core.pattern.spi;
  *
  * @author zifang
  */
-/**
- * SpiManager类。
- */
-/**
- * SpiManager类。
- */
 public class SpiManager {
 
 }

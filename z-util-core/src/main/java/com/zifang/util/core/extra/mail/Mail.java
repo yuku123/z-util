@@ -7,12 +7,6 @@ import java.util.List;
 /**
  * 邮件消息类
  */
-/**
- * Mail类。
- */
-/**
- * Mail类。
- */
 public class Mail {
 
     private String subject;
@@ -28,16 +22,9 @@ public class Mail {
     /**
      * Mail方法。
      */
-    /**
-     * Mail方法。
-     */
     public Mail() {
     }
 
-    /**
-     * create方法。
-     * @return static Mail类型返回值
-     */
     /**
      * create方法。
      * @return static Mail类型返回值
@@ -46,11 +33,6 @@ public class Mail {
         return new Mail();
     }
 
-    /**
-     * subject方法。
-     *      * @param subject String类型参数
-     * @return Mail类型返回值
-     */
     /**
      * subject方法。
      *      * @param subject String类型参数
@@ -66,11 +48,6 @@ public class Mail {
      *      * @param from String类型参数
      * @return Mail类型返回值
      */
-    /**
-     * from方法。
-     *      * @param from String类型参数
-     * @return Mail类型返回值
-     */
     public Mail from(String from) {
         this.from = from;
         return this;
@@ -81,21 +58,11 @@ public class Mail {
      *      * @param fromName String类型参数
      * @return Mail类型返回值
      */
-    /**
-     * fromName方法。
-     *      * @param fromName String类型参数
-     * @return Mail类型返回值
-     */
     public Mail fromName(String fromName) {
         this.fromName = fromName;
         return this;
     }
 
-    /**
-     * to方法。
-     *      * @param to String...类型参数
-     * @return Mail类型返回值
-     */
     /**
      * to方法。
      *      * @param to String...类型参数
@@ -113,21 +80,11 @@ public class Mail {
      *      * @param to ListString类型参数
      * @return Mail类型返回值
      */
-    /**
-     * to方法。
-     *      * @param to ListString类型参数
-     * @return Mail类型返回值
-     */
     public Mail to(List<String> to) {
         this.to.addAll(to);
         return this;
     }
 
-    /**
-     * cc方法。
-     *      * @param cc String...类型参数
-     * @return Mail类型返回值
-     */
     /**
      * cc方法。
      *      * @param cc String...类型参数
@@ -145,21 +102,11 @@ public class Mail {
      *      * @param cc ListString类型参数
      * @return Mail类型返回值
      */
-    /**
-     * cc方法。
-     *      * @param cc ListString类型参数
-     * @return Mail类型返回值
-     */
     public Mail cc(List<String> cc) {
         this.cc.addAll(cc);
         return this;
     }
 
-    /**
-     * bcc方法。
-     *      * @param bcc String...类型参数
-     * @return Mail类型返回值
-     */
     /**
      * bcc方法。
      *      * @param bcc String...类型参数
@@ -177,21 +124,11 @@ public class Mail {
      *      * @param bcc ListString类型参数
      * @return Mail类型返回值
      */
-    /**
-     * bcc方法。
-     *      * @param bcc ListString类型参数
-     * @return Mail类型返回值
-     */
     public Mail bcc(List<String> bcc) {
         this.bcc.addAll(bcc);
         return this;
     }
 
-    /**
-     * content方法。
-     *      * @param content String类型参数
-     * @return Mail类型返回值
-     */
     /**
      * content方法。
      *      * @param content String类型参数
@@ -207,22 +144,12 @@ public class Mail {
      *      * @param htmlContent String类型参数
      * @return Mail类型返回值
      */
-    /**
-     * html方法。
-     *      * @param htmlContent String类型参数
-     * @return Mail类型返回值
-     */
     public Mail html(String htmlContent) {
         this.content = htmlContent;
         this.html = true;
         return this;
     }
 
-    /**
-     * attach方法。
-     *      * @param attachments File...类型参数
-     * @return Mail类型返回值
-     */
     /**
      * attach方法。
      *      * @param attachments File...类型参数
@@ -240,20 +167,11 @@ public class Mail {
      *      * @param attachments ListFile类型参数
      * @return Mail类型返回值
      */
-    /**
-     * attach方法。
-     *      * @param attachments ListFile类型参数
-     * @return Mail类型返回值
-     */
     public Mail attach(List<File> attachments) {
         this.attachments.addAll(attachments);
         return this;
     }
 
-    /**
-     * getSubject方法。
-     * @return String类型返回值
-     */
     /**
      * getSubject方法。
      * @return String类型返回值
@@ -266,18 +184,10 @@ public class Mail {
      * getFrom方法。
      * @return String类型返回值
      */
-    /**
-     * getFrom方法。
-     * @return String类型返回值
-     */
     public String getFrom() {
         return from;
     }
 
-    /**
-     * getFromName方法。
-     * @return String类型返回值
-     */
     /**
      * getFromName方法。
      * @return String类型返回值
@@ -290,18 +200,10 @@ public class Mail {
      * getTo方法。
      * @return List<String>类型返回值
      */
-    /**
-     * getTo方法。
-     * @return List<String>类型返回值
-     */
     public List<String> getTo() {
         return to;
     }
 
-    /**
-     * getCc方法。
-     * @return List<String>类型返回值
-     */
     /**
      * getCc方法。
      * @return List<String>类型返回值
@@ -314,18 +216,10 @@ public class Mail {
      * getBcc方法。
      * @return List<String>类型返回值
      */
-    /**
-     * getBcc方法。
-     * @return List<String>类型返回值
-     */
     public List<String> getBcc() {
         return bcc;
     }
 
-    /**
-     * getContent方法。
-     * @return String类型返回值
-     */
     /**
      * getContent方法。
      * @return String类型返回值
@@ -338,10 +232,6 @@ public class Mail {
      * isHtml方法。
      * @return boolean类型返回值
      */
-    /**
-     * isHtml方法。
-     * @return boolean类型返回值
-     */
     public boolean isHtml() {
         return html;
     }
@@ -350,17 +240,10 @@ public class Mail {
      * getAttachments方法。
      * @return List<File>类型返回值
      */
-    /**
-     * getAttachments方法。
-     * @return List<File>类型返回值
-     */
     public List<File> getAttachments() {
         return attachments;
     }
 
-    /**
-     * validate方法。
-     */
     /**
      * validate方法。
      */
@@ -375,14 +258,6 @@ public class Mail {
 
     /**
      * 发送邮件的便捷方法
-     */
-    /**
-     * send方法。
-     *      * @param config MailConfig类型参数
-     */
-    /**
-     * send方法。
-     *      * @param config MailConfig类型参数
      */
     public void send(MailConfig config) {
         SendMailUtil.send(config, this);

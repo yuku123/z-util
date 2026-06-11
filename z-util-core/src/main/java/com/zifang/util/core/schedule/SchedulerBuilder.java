@@ -34,12 +34,6 @@ import java.util.Properties;
  *
  * @see SchedulerManager
  */
-/**
- * SchedulerBuilder类。
- */
-/**
- * SchedulerBuilder类。
- */
 public class SchedulerBuilder {
 
     private String name = "Scheduler";
@@ -59,14 +53,6 @@ public class SchedulerBuilder {
     /**
      * 创建新的调度器构建器。
      */
-    /**
-     * newScheduler方法。
-     * @return static SchedulerBuilder类型返回值
-     */
-    /**
-     * newScheduler方法。
-     * @return static SchedulerBuilder类型返回值
-     */
     public static SchedulerBuilder newScheduler() {
         return new SchedulerBuilder();
     }
@@ -75,16 +61,6 @@ public class SchedulerBuilder {
 
     /**
      * 设置调度器名称。
-     */
-    /**
-     * withName方法。
-     *      * @param name String类型参数
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withName方法。
-     *      * @param name String类型参数
-     * @return SchedulerBuilder类型返回值
      */
     public SchedulerBuilder withName(String name) {
         this.name = name;
@@ -96,16 +72,6 @@ public class SchedulerBuilder {
      * <p>
      * 集群环境下推荐使用 {@code "AUTO"} 自动生成唯一 ID。
      */
-    /**
-     * withInstanceId方法。
-     *      * @param instanceId String类型参数
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withInstanceId方法。
-     *      * @param instanceId String类型参数
-     * @return SchedulerBuilder类型返回值
-     */
     public SchedulerBuilder withInstanceId(String instanceId) {
         this.instanceId = instanceId;
         return this;
@@ -113,14 +79,6 @@ public class SchedulerBuilder {
 
     /**
      * 设置调度器实例 ID 为自动生成。
-     */
-    /**
-     * withAutoInstanceId方法。
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withAutoInstanceId方法。
-     * @return SchedulerBuilder类型返回值
      */
     public SchedulerBuilder withAutoInstanceId() {
         this.instanceId = "AUTO";
@@ -136,16 +94,6 @@ public class SchedulerBuilder {
      *
      * @param count 线程数量
      */
-    /**
-     * withThreadCount方法。
-     *      * @param count int类型参数
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withThreadCount方法。
-     *      * @param count int类型参数
-     * @return SchedulerBuilder类型返回值
-     */
     public SchedulerBuilder withThreadCount(int count) {
         this.threadCount = count;
         return this;
@@ -157,16 +105,6 @@ public class SchedulerBuilder {
      * 默认值：{@link Thread#NORM_PRIORITY}
      *
      * @param priority 线程优先级（1-10）
-     */
-    /**
-     * withThreadPriority方法。
-     *      * @param priority int类型参数
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withThreadPriority方法。
-     *      * @param priority int类型参数
-     * @return SchedulerBuilder类型返回值
      */
     public SchedulerBuilder withThreadPriority(int priority) {
         this.threadPriority = priority;
@@ -180,14 +118,6 @@ public class SchedulerBuilder {
      * <p>
      * 需要在 classpath 下提供 quartz.properties 或设置相关数据源。
      */
-    /**
-     * withJdbcStore方法。
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withJdbcStore方法。
-     * @return SchedulerBuilder类型返回值
-     */
     public SchedulerBuilder withJdbcStore() {
         this.jdbcProperties = new Properties();
         return this;
@@ -197,16 +127,6 @@ public class SchedulerBuilder {
      * 设置 JDBC 存储的额外属性。
      *
      * @param props Quartz JDBC 配置属性
-     */
-    /**
-     * withJdbcProperties方法。
-     *      * @param props Properties类型参数
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withJdbcProperties方法。
-     *      * @param props Properties类型参数
-     * @return SchedulerBuilder类型返回值
      */
     public SchedulerBuilder withJdbcProperties(Properties props) {
         this.jdbcProperties = props;
@@ -223,16 +143,6 @@ public class SchedulerBuilder {
      * <p>
      * 必须配合 {@link #withJdbcStore()} 使用。
      */
-    /**
-     * withClusterEnabled方法。
-     *      * @param enabled boolean类型参数
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withClusterEnabled方法。
-     *      * @param enabled boolean类型参数
-     * @return SchedulerBuilder类型返回值
-     */
     public SchedulerBuilder withClusterEnabled(boolean enabled) {
         this.clusterEnabled = enabled;
         return this;
@@ -245,14 +155,6 @@ public class SchedulerBuilder {
      *
      * @return 配置好的 SchedulerManager 实例
      * @throws SchedulerRuntimeException 构建失败时抛出
-     */
-    /**
-     * build方法。
-     * @return SchedulerManager类型返回值
-     */
-    /**
-     * build方法。
-     * @return SchedulerManager类型返回值
      */
     public SchedulerManager build() {
         try {
@@ -326,14 +228,6 @@ public class SchedulerBuilder {
      * 构建完成后自动启动调度器。
      * <p>
      * 默认不自动启动，需要手动调用 {@link SchedulerManager#start()}。
-     */
-    /**
-     * withAutoStart方法。
-     * @return SchedulerBuilder类型返回值
-     */
-    /**
-     * withAutoStart方法。
-     * @return SchedulerBuilder类型返回值
      */
     public SchedulerBuilder withAutoStart() {
         this.autoStart = true;

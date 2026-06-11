@@ -9,9 +9,6 @@ package com.zifang.util.zex.interview.demo2;
  * @author zifang
  * @version 1.0
  */
-/**
- * IAImplement类。
- */
 public class IAImplement implements IA, IB {
 
     private String className;

@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
-/**
- * FalseSharingExample类。
- */
 public class FalseSharingExample implements Runnable {
 
     public final static long ITERATIONS = 500L * 1000L * 100L;

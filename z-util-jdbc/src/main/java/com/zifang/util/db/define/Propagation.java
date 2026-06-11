@@ -3,12 +3,6 @@ package com.zifang.util.db.define;
 /**
  * 事务传播行为枚举
  */
-/**
- * Propagation枚举。
- */
-/**
- * Propagation枚举。
- */
 public enum Propagation {
 
     /**

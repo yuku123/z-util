@@ -11,12 +11,6 @@ import java.io.Serializable;
  * Boolean, it is not treated by String.format() as a Boolean parameter.
  * @version: JDK 1.8
  */
-/**
- * MutableBoolean类。
- */
-/**
- * MutableBoolean类。
- */
 public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoolean>, Serializable,
         Cloneable {
 
@@ -35,12 +29,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
     /**
      * Constructs a new MutableBoolean with the default value of false.
      */
-    /**
-     * MutableBoolean方法。
-     */
-    /**
-     * MutableBoolean方法。
-     */
     public MutableBoolean() {
     }
 
@@ -48,14 +36,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      * Constructs a new MutableBoolean with the specified value.
      *
      * @param value the initial value to store
-     */
-    /**
-     * MutableBoolean方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableBoolean方法。
-     *      * @param value final类型参数
      */
     public MutableBoolean(final boolean value) {
         this.value = value;
@@ -66,14 +46,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      *
      * @param value the initial value to store, not null
      * @throws NullPointerException if the object is null
-     */
-    /**
-     * MutableBoolean方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableBoolean方法。
-     *      * @param value final类型参数
      */
     public MutableBoolean(final Boolean value) {
         this.value = value;
@@ -91,10 +63,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      * getValue方法。
      * @return boolean类型返回值
      */
-    /**
-     * getValue方法。
-     * @return boolean类型返回值
-     */
     public Boolean getValue() {
         return this.value;
     }
@@ -103,14 +71,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      * Sets the value.
      *
      * @param value the value to set
-     */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
      */
     public void setValue(final boolean value) {
         this.value = value;
@@ -127,10 +87,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      * setValue方法。
      *      * @param value final类型参数
      */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
     public void setValue(final Boolean value) {
         this.value = value;
     }
@@ -138,24 +94,12 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
     /**
      * Sets the value to false.
      */
-    /**
-     * setFalse方法。
-     */
-    /**
-     * setFalse方法。
-     */
     public void setFalse() {
         this.value = false;
     }
 
     /**
      * Sets the value to true.
-     */
-    /**
-     * setTrue方法。
-     */
-    /**
-     * setTrue方法。
      */
     public void setTrue() {
         this.value = true;
@@ -168,14 +112,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      *
      * @return {@code true} if the current value is {@code true}
      */
-    /**
-     * isTrue方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isTrue方法。
-     * @return boolean类型返回值
-     */
     public boolean isTrue() {
         return value;
     }
@@ -184,14 +120,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      * Checks if the current value is {@code false}.
      *
      * @return {@code true} if the current value is {@code false}
-     */
-    /**
-     * isFalse方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isFalse方法。
-     * @return boolean类型返回值
      */
     public boolean isFalse() {
         return !value;
@@ -204,14 +132,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      *
      * @return the boolean value represented by this object.
      */
-    /**
-     * booleanValue方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * booleanValue方法。
-     * @return boolean类型返回值
-     */
     public boolean booleanValue() {
         return value;
     }
@@ -222,14 +142,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      * Gets this mutable as an instance of Boolean.
      *
      * @return a Boolean instance containing the value from this mutable, never null
-     */
-    /**
-     * toBoolean方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * toBoolean方法。
-     * @return boolean类型返回值
      */
     public Boolean toBoolean() {
         return booleanValue();
@@ -251,11 +163,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      *      * @param obj final类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param obj final类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(final Object obj) {
         if (obj instanceof MutableBoolean) {
             return value == ((MutableBoolean) obj).booleanValue();
@@ -269,10 +176,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      * @return the hash code returned by {@code Boolean.TRUE} or {@code Boolean.FALSE}
      */
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值
@@ -296,11 +199,6 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      *      * @param other final类型参数
      * @return int类型返回值
      */
-    /**
-     * compareTo方法。
-     *      * @param other final类型参数
-     * @return int类型返回值
-     */
     public int compareTo(final MutableBoolean other) {
         return BooleanUtil.compare(this.value, other.value);
     }
@@ -317,19 +215,11 @@ public class MutableBoolean implements Mutable<Boolean>, Comparable<MutableBoole
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return String.valueOf(value);
     }
 
     @Override
-    /**
-     * clone方法。
-     * @return MutableBoolean类型返回值
-     */
     /**
      * clone方法。
      * @return MutableBoolean类型返回值

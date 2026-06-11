@@ -9,12 +9,6 @@ package com.zifang.util.source.generator;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ByteCodeGenerator类。
- */
-/**
- * ByteCodeGenerator类。
- */
 public class ByteCodeGenerator {
 
 }

@@ -11,9 +11,6 @@ import java.lang.annotation.*;
 /**
  * RequestHeader注解。
  */
-/**
- * RequestHeader注解。
- */
 public @interface RequestHeader {
     String key();
 

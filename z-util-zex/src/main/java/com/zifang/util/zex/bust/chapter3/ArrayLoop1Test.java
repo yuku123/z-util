@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter3;
  * @author zifang
  * @version 1.0
  */
-/**
- * ArrayLoop1Test类。
- */
 public class ArrayLoop1Test {
     /**
      * main方法。

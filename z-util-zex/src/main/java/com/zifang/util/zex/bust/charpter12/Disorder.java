@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
-/**
- * Disorder类。
- */
 public class Disorder {
     private static int x = 0, y = 0;
     private static int a = 0, b = 0;

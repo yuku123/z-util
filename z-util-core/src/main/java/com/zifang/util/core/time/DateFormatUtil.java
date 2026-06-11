@@ -10,12 +10,6 @@ import java.util.Date;
  * 仅处理字符串格式之间的转换，不涉及Date对象。
  * Date对象的格式化请使用 DateUtil
  */
-/**
- * DateFormatUtil类。
- */
-/**
- * DateFormatUtil类。
- */
 public class DateFormatUtil {
 
     public static final String DATE_YEAR = "yyyy";
@@ -38,16 +32,6 @@ public class DateFormatUtil {
      *   <li>10位 -> yyyyMMdd</li>
      *   <li>8位  -> yyyy-MM-dd</li>
      * </ul>
-     */
-    /**
-     * formatString方法。
-     *      * @param value String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * formatString方法。
-     *      * @param value String类型参数
-     * @return static String类型返回值
      */
     public static String formatString(String value) {
         if (value == null || value.isEmpty()) {
@@ -79,26 +63,10 @@ public class DateFormatUtil {
      *   <li>6位:  yyyyMM</li>
      * </ul>
      */
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @return static Date类型返回值
-     */
     public static Date parse(String dateStr) {
         return parse(dateStr, null);
     }
 
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @param outPattern String类型参数
-     * @return static Date类型返回值
-     */
     /**
      * parse方法。
      *      * @param dateStr String类型参数
@@ -145,18 +113,6 @@ public class DateFormatUtil {
 
     /**
      * 格式化Date为指定格式字符串
-     */
-    /**
-     * format方法。
-     *      * @param date Date类型参数
-     * @param pattern String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * format方法。
-     *      * @param date Date类型参数
-     * @param pattern String类型参数
-     * @return static String类型返回值
      */
     public static String format(Date date, String pattern) {
         if (date == null) {

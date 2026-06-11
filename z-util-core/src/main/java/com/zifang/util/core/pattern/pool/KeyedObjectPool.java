@@ -8,12 +8,6 @@ import java.util.NoSuchElementException;
  * @param <K> 键类型
  * @param <V> 对象类型
  */
-/**
- * KeyedObjectPool接口。
- */
-/**
- * KeyedObjectPool接口。
- */
 public interface KeyedObjectPool<K, V> {
 
     /**

@@ -13,12 +13,6 @@ import java.awt.event.MouseAdapter;
  * @version 1.0
  * @since 2020-01-01
  */
-/**
- * AlgoVisualizer类。
- */
-/**
- * AlgoVisualizer类。
- */
 public class AlgoVisualizer {
 
     private Object data;
@@ -29,11 +23,6 @@ public class AlgoVisualizer {
      *
      * @param sceneWidth  场景宽度（像素）
      * @param sceneHeight 场景高度（像素）
-     */
-    /**
-     * AlgoVisualizer方法。
-     *      * @param sceneWidth int类型参数
-     * @param sceneHeight int类型参数
      */
     public AlgoVisualizer(int sceneWidth, int sceneHeight) {
 
@@ -72,11 +61,6 @@ public class AlgoVisualizer {
      * 创建一个宽度800、高度800的可视化窗口
      *
      * @param args 命令行参数（未使用）
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
 

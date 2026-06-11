@@ -5,9 +5,6 @@ import java.util.Collection;
 /**
  * ICluster接口。
  */
-/**
- * ICluster接口。
- */
 public interface ICluster {
 
     /**

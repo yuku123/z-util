@@ -20,22 +20,6 @@ public final class CoordinateUtil {
      * @return 两点之间的距离，单位：米
      * @throws IllegalArgumentException 如果经纬度参数超出合法范围
      */
-    /**
-     * distance方法。
-     *      * @param long1 double类型参数
-     * @param lat1 double类型参数
-     * @param long2 double类型参数
-     * @param lat2 double类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * distance方法。
-     *      * @param long1 double类型参数
-     * @param lat1 double类型参数
-     * @param long2 double类型参数
-     * @param lat2 double类型参数
-     * @return static double类型返回值
-     */
     public static double distance(double long1, double lat1, double long2, double lat2) {
         double a, b, R;
         R = 6378137; // 地球半径

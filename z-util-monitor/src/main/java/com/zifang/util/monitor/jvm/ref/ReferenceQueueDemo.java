@@ -13,12 +13,6 @@ import java.util.Map;
  *
  * @author zifang
  */
-/**
- * ReferenceQueueDemo类。
- */
-/**
- * ReferenceQueueDemo类。
- */
 public class ReferenceQueueDemo {
 
     /**
@@ -33,16 +27,6 @@ public class ReferenceQueueDemo {
      *
      * @param args 命令行参数
      */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
     public static void main(String[] args) {
         ReferenceQueue<Object> weakReferenceReferenceQueue = new ReferenceQueue<>();
 
@@ -53,9 +37,6 @@ public class ReferenceQueueDemo {
         //创建一个线程监听回收的对象
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
     /**
      * run方法。
      */

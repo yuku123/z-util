@@ -22,11 +22,5 @@ package com.zifang.util.db.define;
  * @see Select
  * @see Param
  */
-/**
- * Update注解。
- */
-/**
- * Update注解。
- */
 public @interface Update {
 }

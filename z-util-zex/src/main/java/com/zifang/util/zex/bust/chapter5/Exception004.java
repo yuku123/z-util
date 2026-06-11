@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter5;
  * @author zifang
  * @version 1.0
  */
-/**
- * Exception004类。
- */
 public class Exception004 {
 
     /**

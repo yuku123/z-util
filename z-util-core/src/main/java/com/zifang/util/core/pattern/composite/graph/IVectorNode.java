@@ -7,12 +7,6 @@ import java.util.List;
 /**
  * 在网状结构体的 基础上 增加方向属性
  */
-/**
- * IVectorNode接口。
- */
-/**
- * IVectorNode接口。
- */
 public interface IVectorNode extends INode {
 
     List<IVectorNode> getInputVectorNode();

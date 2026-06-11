@@ -9,12 +9,6 @@ package com.zifang.util.source.define;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ByteCodeGenerator接口。
- */
-/**
- * ByteCodeGenerator接口。
- */
 public interface ByteCodeGenerator {
 
 }

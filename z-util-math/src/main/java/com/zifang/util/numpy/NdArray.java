@@ -5,12 +5,6 @@ import java.util.Arrays;
 /**
  * N-dimensional array implementation
  */
-/**
- * NdArray类。
- */
-/**
- * NdArray类。
- */
 public class NdArray {
     private Object data;
     private final DType dtype;
@@ -29,23 +23,10 @@ public class NdArray {
      * @param shape Shape类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * create方法。
-     *      * @param data Object类型参数
-     * @param dtype DType类型参数
-     * @param shape Shape类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray create(Object data, DType dtype, Shape shape) {
         return new NdArray(data, dtype, shape);
     }
 
-    /**
-     * zeros方法。
-     *      * @param shape Shape类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * zeros方法。
      *      * @param shape Shape类型参数
@@ -64,26 +45,12 @@ public class NdArray {
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * ones方法。
-     *      * @param shape Shape类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray ones(Shape shape, DType dtype) {
         int size = shape.size();
         Object data = Array.createOneArray(dtype, size);
         return new NdArray(data, dtype, shape);
     }
 
-    /**
-     * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @param step int类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * arange方法。
      *      * @param start int类型参数
@@ -108,13 +75,6 @@ public class NdArray {
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray arange(int start, int stop, DType dtype) {
         return arange(start, stop, 1, dtype);
     }
@@ -125,22 +85,10 @@ public class NdArray {
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
-    /**
-     * arange方法。
-     *      * @param stop int类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     public static NdArray arange(int stop, DType dtype) {
         return arange(0, stop, 1, dtype);
     }
 
-    /**
-     * array方法。
-     *      * @param data Object类型参数
-     * @param dtype DType类型参数
-     * @return static NdArray类型返回值
-     */
     /**
      * array方法。
      *      * @param data Object类型参数
@@ -187,18 +135,10 @@ public class NdArray {
      * getData方法。
      * @return Object类型返回值
      */
-    /**
-     * getData方法。
-     * @return Object类型返回值
-     */
     public Object getData() {
         return data;
     }
 
-    /**
-     * getDtype方法。
-     * @return DType类型返回值
-     */
     /**
      * getDtype方法。
      * @return DType类型返回值
@@ -211,10 +151,6 @@ public class NdArray {
      * getShape方法。
      * @return Shape类型返回值
      */
-    /**
-     * getShape方法。
-     * @return Shape类型返回值
-     */
     public Shape getShape() {
         return shape;
     }
@@ -223,18 +159,10 @@ public class NdArray {
      * size方法。
      * @return int类型返回值
      */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
     public int size() {
         return shape.size();
     }
 
-    /**
-     * ndim方法。
-     * @return int类型返回值
-     */
     /**
      * ndim方法。
      * @return int类型返回值
@@ -248,11 +176,6 @@ public class NdArray {
      *      * @param indices int...类型参数
      * @return Object类型返回值
      */
-    /**
-     * get方法。
-     *      * @param indices int...类型参数
-     * @return Object类型返回值
-     */
     public Object get(int... indices) {
         if (indices.length != shape.ndim()) {
             throw new IllegalArgumentException("Number of indices must match dimensions");
@@ -261,11 +184,6 @@ public class NdArray {
         return Array.get(data, flatIndex);
     }
 
-    /**
-     * set方法。
-     *      * @param value Object类型参数
-     * @param indices int...类型参数
-     */
     /**
      * set方法。
      *      * @param value Object类型参数
@@ -294,11 +212,6 @@ public class NdArray {
      *      * @param newShape int...类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * reshape方法。
-     *      * @param newShape int...类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray reshape(int... newShape) {
         int size = shape.size();
         int expectedSize = 1;
@@ -311,10 +224,6 @@ public class NdArray {
         return new NdArray(data, dtype, new Shape(newShape));
     }
 
-    /**
-     * transpose方法。
-     * @return NdArray类型返回值
-     */
     /**
      * transpose方法。
      * @return NdArray类型返回值
@@ -336,11 +245,6 @@ public class NdArray {
      *      * @param axes int...类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * transpose方法。
-     *      * @param axes int...类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray transpose(int... axes) {
         if (axes.length != shape.ndim()) {
             throw new IllegalArgumentException("Number of axes must match dimensions");
@@ -353,11 +257,6 @@ public class NdArray {
         return new NdArray(transposedData, dtype, new Shape(newShape));
     }
 
-    /**
-     * slice方法。
-     *      * @param slices Slice...类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * slice方法。
      *      * @param slices Slice...类型参数
@@ -413,20 +312,11 @@ public class NdArray {
      * copy方法。
      * @return NdArray类型返回值
      */
-    /**
-     * copy方法。
-     * @return NdArray类型返回值
-     */
     public NdArray copy() {
         Object newData = Array.copy(data, shape.size(), dtype);
         return new NdArray(newData, dtype, shape);
     }
 
-    /**
-     * fill方法。
-     *      * @param value Object类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * fill方法。
      *      * @param value Object类型参数
@@ -438,10 +328,6 @@ public class NdArray {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -462,11 +348,6 @@ public class NdArray {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -476,10 +357,6 @@ public class NdArray {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

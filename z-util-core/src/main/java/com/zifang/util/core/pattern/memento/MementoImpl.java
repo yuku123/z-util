@@ -6,12 +6,6 @@ package com.zifang.util.core.pattern.memento;
  * @param <T> 状态类型
  * @author zifang
  */
-/**
- * MementoImpl类。
- */
-/**
- * MementoImpl类。
- */
 public class MementoImpl<T> implements Memento<T> {
 
     private final T state;
@@ -30,19 +24,10 @@ public class MementoImpl<T> implements Memento<T> {
      * builder方法。
      * @return static <T> Builder<T>类型返回值
      */
-    /**
-     * builder方法。
-     * @return static <T> Builder<T>类型返回值
-     */
     public static <T> Builder<T> builder() {
         return new Builder<>();
     }
 
-    /**
-     * of方法。
-     *      * @param state T类型参数
-     * @return static <T> MementoImpl<T>类型返回值
-     */
     /**
      * of方法。
      *      * @param state T类型参数
@@ -58,21 +43,11 @@ public class MementoImpl<T> implements Memento<T> {
      * @param label String类型参数
      * @return static <T> MementoImpl<T>类型返回值
      */
-    /**
-     * of方法。
-     *      * @param state T类型参数
-     * @param label String类型参数
-     * @return static <T> MementoImpl<T>类型返回值
-     */
     public static <T> MementoImpl<T> of(T state, String label) {
         return new Builder<T>().state(state).label(label).build();
     }
 
     @Override
-    /**
-     * getState方法。
-     * @return T类型返回值
-     */
     /**
      * getState方法。
      * @return T类型返回值
@@ -86,10 +61,6 @@ public class MementoImpl<T> implements Memento<T> {
      * getTimestamp方法。
      * @return long类型返回值
      */
-    /**
-     * getTimestamp方法。
-     * @return long类型返回值
-     */
     public long getTimestamp() {
         return timestamp;
     }
@@ -99,19 +70,11 @@ public class MementoImpl<T> implements Memento<T> {
      * getLabel方法。
      * @return String类型返回值
      */
-    /**
-     * getLabel方法。
-     * @return String类型返回值
-     */
     public String getLabel() {
         return label;
     }
 
     @Override
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -133,21 +96,11 @@ public class MementoImpl<T> implements Memento<T> {
      *      * @param state T类型参数
      * @return Builder<T>类型返回值
      */
-    /**
-     * state方法。
-     *      * @param state T类型参数
-     * @return Builder<T>类型返回值
-     */
         public Builder<T> state(T state) {
             this.state = state;
             return this;
         }
 
-    /**
-     * timestamp方法。
-     *      * @param timestamp long类型参数
-     * @return Builder<T>类型返回值
-     */
     /**
      * timestamp方法。
      *      * @param timestamp long类型参数
@@ -163,11 +116,6 @@ public class MementoImpl<T> implements Memento<T> {
      *      * @param label String类型参数
      * @return Builder<T>类型返回值
      */
-    /**
-     * label方法。
-     *      * @param label String类型参数
-     * @return Builder<T>类型返回值
-     */
         public Builder<T> label(String label) {
             this.label = label;
             return this;
@@ -178,20 +126,11 @@ public class MementoImpl<T> implements Memento<T> {
      *      * @param description String类型参数
      * @return Builder<T>类型返回值
      */
-    /**
-     * description方法。
-     *      * @param description String类型参数
-     * @return Builder<T>类型返回值
-     */
         public Builder<T> description(String description) {
             this.description = description;
             return this;
         }
 
-    /**
-     * build方法。
-     * @return MementoImpl<T>类型返回值
-     */
     /**
      * build方法。
      * @return MementoImpl<T>类型返回值

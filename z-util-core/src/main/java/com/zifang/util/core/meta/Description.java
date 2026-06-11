@@ -15,9 +15,6 @@ import java.lang.annotation.*;
 /**
  * Description注解。
  */
-/**
- * Description注解。
- */
 public @interface Description {
     String value();
 }

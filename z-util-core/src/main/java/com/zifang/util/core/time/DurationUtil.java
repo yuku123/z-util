@@ -31,12 +31,6 @@ import java.time.temporal.ChronoUnit;
  * @see java.time.Period
  * @see ChronoUnit
  */
-/**
- * DurationUtil类。
- */
-/**
- * DurationUtil类。
- */
 public class DurationUtil {
 
     // ==================== Duration 创建 ====================
@@ -46,16 +40,6 @@ public class DurationUtil {
      *
      * @param millis 毫秒数
      * @return 对应的Duration对象
-     */
-    /**
-     * ofMillis方法。
-     *      * @param millis long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * ofMillis方法。
-     *      * @param millis long类型参数
-     * @return static Duration类型返回值
      */
     public static Duration ofMillis(long millis) {
         return Duration.ofMillis(millis);
@@ -67,16 +51,6 @@ public class DurationUtil {
      * @param seconds 秒数
      * @return 对应的Duration对象
      */
-    /**
-     * ofSeconds方法。
-     *      * @param seconds long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * ofSeconds方法。
-     *      * @param seconds long类型参数
-     * @return static Duration类型返回值
-     */
     public static Duration ofSeconds(long seconds) {
         return Duration.ofSeconds(seconds);
     }
@@ -86,16 +60,6 @@ public class DurationUtil {
      *
      * @param minutes 分钟数
      * @return 对应的Duration对象
-     */
-    /**
-     * ofMinutes方法。
-     *      * @param minutes long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * ofMinutes方法。
-     *      * @param minutes long类型参数
-     * @return static Duration类型返回值
      */
     public static Duration ofMinutes(long minutes) {
         return Duration.ofMinutes(minutes);
@@ -107,16 +71,6 @@ public class DurationUtil {
      * @param hours 小时数
      * @return 对应的Duration对象
      */
-    /**
-     * ofHours方法。
-     *      * @param hours long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * ofHours方法。
-     *      * @param hours long类型参数
-     * @return static Duration类型返回值
-     */
     public static Duration ofHours(long hours) {
         return Duration.ofHours(hours);
     }
@@ -126,16 +80,6 @@ public class DurationUtil {
      *
      * @param days 天数
      * @return 对应的Duration对象
-     */
-    /**
-     * ofDays方法。
-     *      * @param days long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * ofDays方法。
-     *      * @param days long类型参数
-     * @return static Duration类型返回值
      */
     public static Duration ofDays(long days) {
         return Duration.ofDays(days);
@@ -148,18 +92,6 @@ public class DurationUtil {
      * @param endExclusive   结束时间点（不包含）
      * @return 两个时间点之间的Duration
      * @throws NullPointerException if startInclusive or endExclusive is null
-     */
-    /**
-     * between方法。
-     *      * @param startInclusive java.time.temporal.Temporal类型参数
-     * @param endExclusive java.time.temporal.Temporal类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * between方法。
-     *      * @param startInclusive java.time.temporal.Temporal类型参数
-     * @param endExclusive java.time.temporal.Temporal类型参数
-     * @return static Duration类型返回值
      */
     public static Duration between(java.time.temporal.Temporal startInclusive, java.time.temporal.Temporal endExclusive) {
         return Duration.between(startInclusive, endExclusive);
@@ -174,16 +106,6 @@ public class DurationUtil {
      *
      * @param duration 要格式化的Duration
      * @return 格式化后的字符串，如果输入为null则返回null
-     */
-    /**
-     * format方法。
-     *      * @param duration Duration类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * format方法。
-     *      * @param duration Duration类型参数
-     * @return static String类型返回值
      */
     public static String format(Duration duration) {
         if (duration == null) return null;
@@ -203,16 +125,6 @@ public class DurationUtil {
      * @param duration 要格式化的Duration
      * @return 格式化后的字符串，如果输入为null则返回null
      */
-    /**
-     * formatHMS方法。
-     *      * @param duration Duration类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * formatHMS方法。
-     *      * @param duration Duration类型参数
-     * @return static String类型返回值
-     */
     public static String formatHMS(Duration duration) {
         if (duration == null) return null;
         long hours = duration.toHours();
@@ -228,16 +140,6 @@ public class DurationUtil {
      *
      * @param duration 要格式化的Duration
      * @return 格式化后的字符串，如果输入为null则返回null
-     */
-    /**
-     * formatDHMS方法。
-     *      * @param duration Duration类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * formatDHMS方法。
-     *      * @param duration Duration类型参数
-     * @return static String类型返回值
      */
     public static String formatDHMS(Duration duration) {
         if (duration == null) return null;
@@ -261,18 +163,6 @@ public class DurationUtil {
      * @return 增加后的新Duration对象
      * @throws NullPointerException if duration is null
      */
-    /**
-     * plusMillis方法。
-     *      * @param duration Duration类型参数
-     * @param millis long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * plusMillis方法。
-     *      * @param duration Duration类型参数
-     * @param millis long类型参数
-     * @return static Duration类型返回值
-     */
     public static Duration plusMillis(Duration duration, long millis) {
         return duration.plusMillis(millis);
     }
@@ -284,18 +174,6 @@ public class DurationUtil {
      * @param millis   要减少的毫秒数
      * @return 减少后的新Duration对象
      * @throws NullPointerException if duration is null
-     */
-    /**
-     * minusMillis方法。
-     *      * @param duration Duration类型参数
-     * @param millis long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * minusMillis方法。
-     *      * @param duration Duration类型参数
-     * @param millis long类型参数
-     * @return static Duration类型返回值
      */
     public static Duration minusMillis(Duration duration, long millis) {
         return duration.minusMillis(millis);
@@ -309,18 +187,6 @@ public class DurationUtil {
      * @return 增加后的新Duration对象
      * @throws NullPointerException if duration is null
      */
-    /**
-     * plusSeconds方法。
-     *      * @param duration Duration类型参数
-     * @param seconds long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * plusSeconds方法。
-     *      * @param duration Duration类型参数
-     * @param seconds long类型参数
-     * @return static Duration类型返回值
-     */
     public static Duration plusSeconds(Duration duration, long seconds) {
         return duration.plusSeconds(seconds);
     }
@@ -333,18 +199,6 @@ public class DurationUtil {
      * @return 减少后的新Duration对象
      * @throws NullPointerException if duration is null
      */
-    /**
-     * minusSeconds方法。
-     *      * @param duration Duration类型参数
-     * @param seconds long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * minusSeconds方法。
-     *      * @param duration Duration类型参数
-     * @param seconds long类型参数
-     * @return static Duration类型返回值
-     */
     public static Duration minusSeconds(Duration duration, long seconds) {
         return duration.minusSeconds(seconds);
     }
@@ -356,18 +210,6 @@ public class DurationUtil {
      * @param multiplicand 乘数
      * @return 乘积后的新Duration对象
      * @throws NullPointerException if duration is null
-     */
-    /**
-     * multipliedBy方法。
-     *      * @param duration Duration类型参数
-     * @param multiplicand long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * multipliedBy方法。
-     *      * @param duration Duration类型参数
-     * @param multiplicand long类型参数
-     * @return static Duration类型返回值
      */
     public static Duration multipliedBy(Duration duration, long multiplicand) {
         return duration.multipliedBy(multiplicand);
@@ -382,18 +224,6 @@ public class DurationUtil {
      * @throws NullPointerException if duration is null
      * @throws ArithmeticException   if divisor is zero
      */
-    /**
-     * dividedBy方法。
-     *      * @param duration Duration类型参数
-     * @param divisor long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * dividedBy方法。
-     *      * @param duration Duration类型参数
-     * @param divisor long类型参数
-     * @return static Duration类型返回值
-     */
     public static Duration dividedBy(Duration duration, long divisor) {
         return duration.dividedBy(divisor);
     }
@@ -406,16 +236,6 @@ public class DurationUtil {
      * @param duration 原Duration，不能为null
      * @return 绝对值后的Duration对象
      * @throws NullPointerException if duration is null
-     */
-    /**
-     * abs方法。
-     *      * @param duration Duration类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * abs方法。
-     *      * @param duration Duration类型参数
-     * @return static Duration类型返回值
      */
     public static Duration abs(Duration duration) {
         return duration.isNegative() ? duration.negated() : duration;
@@ -431,18 +251,6 @@ public class DurationUtil {
      * @return 如果duration1小于duration2则返回true
      * @throws NullPointerException if duration1 or duration2 is null
      */
-    /**
-     * isBefore方法。
-     *      * @param duration1 Duration类型参数
-     * @param duration2 Duration类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isBefore方法。
-     *      * @param duration1 Duration类型参数
-     * @param duration2 Duration类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isBefore(Duration duration1, Duration duration2) {
         return duration1.compareTo(duration2) < 0;
     }
@@ -455,18 +263,6 @@ public class DurationUtil {
      * @return 如果duration1大于duration2则返回true
      * @throws NullPointerException if duration1 or duration2 is null
      */
-    /**
-     * isAfter方法。
-     *      * @param duration1 Duration类型参数
-     * @param duration2 Duration类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isAfter方法。
-     *      * @param duration1 Duration类型参数
-     * @param duration2 Duration类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isAfter(Duration duration1, Duration duration2) {
         return duration1.compareTo(duration2) > 0;
     }
@@ -478,16 +274,6 @@ public class DurationUtil {
      * @return 如果为负数则返回true
      * @throws NullPointerException if duration is null
      */
-    /**
-     * isNegative方法。
-     *      * @param duration Duration类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isNegative方法。
-     *      * @param duration Duration类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isNegative(Duration duration) {
         return duration.isNegative();
     }
@@ -498,16 +284,6 @@ public class DurationUtil {
      * @param duration 要判断的Duration，不能为null
      * @return 如果为零则返回true
      * @throws NullPointerException if duration is null
-     */
-    /**
-     * isZero方法。
-     *      * @param duration Duration类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isZero方法。
-     *      * @param duration Duration类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isZero(Duration duration) {
         return duration.isZero();
@@ -521,16 +297,6 @@ public class DurationUtil {
      * @param duration 要转换的Duration
      * @return 毫秒值，如果输入为null则返回0
      */
-    /**
-     * toMillis方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toMillis方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
     public static long toMillis(Duration duration) {
         if (duration == null) return 0;
         return duration.toMillis();
@@ -541,16 +307,6 @@ public class DurationUtil {
      *
      * @param duration 要转换的Duration
      * @return 秒值（总计秒数），如果输入为null则返回0
-     */
-    /**
-     * toSeconds方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toSeconds方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
      */
     public static long toSeconds(Duration duration) {
         if (duration == null) return 0;
@@ -563,16 +319,6 @@ public class DurationUtil {
      * @param duration 要转换的Duration
      * @return 分钟值（总计分钟数），如果输入为null则返回0
      */
-    /**
-     * toMinutes方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toMinutes方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
     public static long toMinutes(Duration duration) {
         if (duration == null) return 0;
         return duration.toMinutes();
@@ -583,16 +329,6 @@ public class DurationUtil {
      *
      * @param duration 要转换的Duration
      * @return 小时值（总计小时数），如果输入为null则返回0
-     */
-    /**
-     * toHours方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toHours方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
      */
     public static long toHours(Duration duration) {
         if (duration == null) return 0;
@@ -605,16 +341,6 @@ public class DurationUtil {
      * @param duration 要转换的Duration
      * @return 天数（总天数），如果输入为null则返回0
      */
-    /**
-     * toDays方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toDays方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
     public static long toDays(Duration duration) {
         if (duration == null) return 0;
         return duration.toDays();
@@ -625,16 +351,6 @@ public class DurationUtil {
      *
      * @param duration 要转换的Duration
      * @return 纳秒值（总纳秒数），如果输入为null则返回0
-     */
-    /**
-     * toNanos方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toNanos方法。
-     *      * @param duration Duration类型参数
-     * @return static long类型返回值
      */
     public static long toNanos(Duration duration) {
         if (duration == null) return 0;
@@ -651,18 +367,6 @@ public class DurationUtil {
      * @return 对应的Duration对象
      * @throws NullPointerException if unit is null
      */
-    /**
-     * of方法。
-     *      * @param unit ChronoUnit类型参数
-     * @param amount long类型参数
-     * @return static Duration类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param unit ChronoUnit类型参数
-     * @param amount long类型参数
-     * @return static Duration类型返回值
-     */
     public static Duration of(ChronoUnit unit, long amount) {
         return Duration.of(amount, unit);
     }
@@ -674,18 +378,6 @@ public class DurationUtil {
      * @param unit     目标时间单位，不能为null
      * @return 转换后的数量
      * @throws NullPointerException if duration or unit is null
-     */
-    /**
-     * toUnit方法。
-     *      * @param duration Duration类型参数
-     * @param unit ChronoUnit类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toUnit方法。
-     *      * @param duration Duration类型参数
-     * @param unit ChronoUnit类型参数
-     * @return static long类型返回值
      */
     public static long toUnit(Duration duration, ChronoUnit unit) {
         return unit.between(java.time.Instant.EPOCH, java.time.Instant.EPOCH.plus(duration));
@@ -699,16 +391,6 @@ public class DurationUtil {
      * @param days 天数
      * @return 对应的Period对象
      */
-    /**
-     * ofDays方法。
-     *      * @param days int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * ofDays方法。
-     *      * @param days int类型参数
-     * @return static Period类型返回值
-     */
     public static Period ofDays(int days) {
         return Period.ofDays(days);
     }
@@ -718,16 +400,6 @@ public class DurationUtil {
      *
      * @param weeks 周数
      * @return 对应的Period对象
-     */
-    /**
-     * ofWeeks方法。
-     *      * @param weeks int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * ofWeeks方法。
-     *      * @param weeks int类型参数
-     * @return static Period类型返回值
      */
     public static Period ofWeeks(int weeks) {
         return Period.ofWeeks(weeks);
@@ -739,16 +411,6 @@ public class DurationUtil {
      * @param months 月数
      * @return 对应的Period对象
      */
-    /**
-     * ofMonths方法。
-     *      * @param months int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * ofMonths方法。
-     *      * @param months int类型参数
-     * @return static Period类型返回值
-     */
     public static Period ofMonths(int months) {
         return Period.ofMonths(months);
     }
@@ -758,16 +420,6 @@ public class DurationUtil {
      *
      * @param years 年数
      * @return 对应的Period对象
-     */
-    /**
-     * ofYears方法。
-     *      * @param years int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * ofYears方法。
-     *      * @param years int类型参数
-     * @return static Period类型返回值
      */
     public static Period ofYears(int years) {
         return Period.ofYears(years);
@@ -781,20 +433,6 @@ public class DurationUtil {
      * @param days   天数
      * @return 对应的Period对象
      */
-    /**
-     * of方法。
-     *      * @param years int类型参数
-     * @param months int类型参数
-     * @param days int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param years int类型参数
-     * @param months int类型参数
-     * @param days int类型参数
-     * @return static Period类型返回值
-     */
     public static Period of(int years, int months, int days) {
         return Period.of(years, months, days);
     }
@@ -806,18 +444,6 @@ public class DurationUtil {
      * @param end   结束日期（包含）
      * @return 两个日期之间的Period
      * @throws NullPointerException if start or end is null
-     */
-    /**
-     * between方法。
-     *      * @param start java.time.LocalDate类型参数
-     * @param end java.time.LocalDate类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * between方法。
-     *      * @param start java.time.LocalDate类型参数
-     * @param end java.time.LocalDate类型参数
-     * @return static Period类型返回值
      */
     public static Period between(java.time.LocalDate start, java.time.LocalDate end) {
         return Period.between(start, end);
@@ -832,16 +458,6 @@ public class DurationUtil {
      *
      * @param period 要格式化的Period
      * @return 格式化后的字符串，如果输入为null则返回null
-     */
-    /**
-     * format方法。
-     *      * @param period Period类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * format方法。
-     *      * @param period Period类型参数
-     * @return static String类型返回值
      */
     public static String format(Period period) {
         if (period == null) return null;
@@ -866,16 +482,6 @@ public class DurationUtil {
      * @param period 要格式化的Period
      * @return 格式化后的字符串，如果输入为null则返回null
      */
-    /**
-     * formatYMD方法。
-     *      * @param period Period类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * formatYMD方法。
-     *      * @param period Period类型参数
-     * @return static String类型返回值
-     */
     public static String formatYMD(Period period) {
         if (period == null) return null;
         return String.format("%d年%d月%d日", period.getYears(), period.getMonths(), period.getDays());
@@ -891,18 +497,6 @@ public class DurationUtil {
      * @return 增加后的新Period对象
      * @throws NullPointerException if period is null
      */
-    /**
-     * plusDays方法。
-     *      * @param period Period类型参数
-     * @param days int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * plusDays方法。
-     *      * @param period Period类型参数
-     * @param days int类型参数
-     * @return static Period类型返回值
-     */
     public static Period plusDays(Period period, int days) {
         return period.plusDays(days);
     }
@@ -914,18 +508,6 @@ public class DurationUtil {
      * @param days   要减少的天数
      * @return 减少后的新Period对象
      * @throws NullPointerException if period is null
-     */
-    /**
-     * minusDays方法。
-     *      * @param period Period类型参数
-     * @param days int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * minusDays方法。
-     *      * @param period Period类型参数
-     * @param days int类型参数
-     * @return static Period类型返回值
      */
     public static Period minusDays(Period period, int days) {
         return period.minusDays(days);
@@ -939,18 +521,6 @@ public class DurationUtil {
      * @return 增加后的新Period对象
      * @throws NullPointerException if period is null
      */
-    /**
-     * plusMonths方法。
-     *      * @param period Period类型参数
-     * @param months int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * plusMonths方法。
-     *      * @param period Period类型参数
-     * @param months int类型参数
-     * @return static Period类型返回值
-     */
     public static Period plusMonths(Period period, int months) {
         return period.plusMonths(months);
     }
@@ -962,18 +532,6 @@ public class DurationUtil {
      * @param months 要减少的月数
      * @return 减少后的新Period对象
      * @throws NullPointerException if period is null
-     */
-    /**
-     * minusMonths方法。
-     *      * @param period Period类型参数
-     * @param months int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * minusMonths方法。
-     *      * @param period Period类型参数
-     * @param months int类型参数
-     * @return static Period类型返回值
      */
     public static Period minusMonths(Period period, int months) {
         return period.minusMonths(months);
@@ -987,18 +545,6 @@ public class DurationUtil {
      * @return 增加后的新Period对象
      * @throws NullPointerException if period is null
      */
-    /**
-     * plusYears方法。
-     *      * @param period Period类型参数
-     * @param years int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * plusYears方法。
-     *      * @param period Period类型参数
-     * @param years int类型参数
-     * @return static Period类型返回值
-     */
     public static Period plusYears(Period period, int years) {
         return period.plusYears(years);
     }
@@ -1010,18 +556,6 @@ public class DurationUtil {
      * @param years  要减少的年数
      * @return 减少后的新Period对象
      * @throws NullPointerException if period is null
-     */
-    /**
-     * minusYears方法。
-     *      * @param period Period类型参数
-     * @param years int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * minusYears方法。
-     *      * @param period Period类型参数
-     * @param years int类型参数
-     * @return static Period类型返回值
      */
     public static Period minusYears(Period period, int years) {
         return period.minusYears(years);
@@ -1035,18 +569,6 @@ public class DurationUtil {
      * @return 乘积后的新Period对象
      * @throws NullPointerException if period is null
      */
-    /**
-     * multipliedBy方法。
-     *      * @param period Period类型参数
-     * @param multiplicand int类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * multipliedBy方法。
-     *      * @param period Period类型参数
-     * @param multiplicand int类型参数
-     * @return static Period类型返回值
-     */
     public static Period multipliedBy(Period period, int multiplicand) {
         return period.multipliedBy(multiplicand);
     }
@@ -1059,16 +581,6 @@ public class DurationUtil {
      * @param period 原Period，不能为null
      * @return 标准化后的新Period对象
      * @throws NullPointerException if period is null
-     */
-    /**
-     * normalized方法。
-     *      * @param period Period类型参数
-     * @return static Period类型返回值
-     */
-    /**
-     * normalized方法。
-     *      * @param period Period类型参数
-     * @return static Period类型返回值
      */
     public static Period normalized(Period period) {
         return period.normalized();
@@ -1084,16 +596,6 @@ public class DurationUtil {
      * @param period 要转换的Period
      * @return 总天数，如果输入为null则返回0
      */
-    /**
-     * toDays方法。
-     *      * @param period Period类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toDays方法。
-     *      * @param period Period类型参数
-     * @return static long类型返回值
-     */
     public static long toDays(Period period) {
         if (period == null) return 0;
         return period.getDays() + (long) period.getMonths() * 30 + (long) period.getYears() * 365;
@@ -1106,16 +608,6 @@ public class DurationUtil {
      * @return 年数
      * @throws NullPointerException if period is null
      */
-    /**
-     * getYears方法。
-     *      * @param period Period类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * getYears方法。
-     *      * @param period Period类型参数
-     * @return static int类型返回值
-     */
     public static int getYears(Period period) {
         return period.getYears();
     }
@@ -1127,16 +619,6 @@ public class DurationUtil {
      * @return 月数
      * @throws NullPointerException if period is null
      */
-    /**
-     * getMonths方法。
-     *      * @param period Period类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * getMonths方法。
-     *      * @param period Period类型参数
-     * @return static int类型返回值
-     */
     public static int getMonths(Period period) {
         return period.getMonths();
     }
@@ -1147,16 +629,6 @@ public class DurationUtil {
      * @param period 要获取的Period，不能为null
      * @return 天数
      * @throws NullPointerException if period is null
-     */
-    /**
-     * getDays方法。
-     *      * @param period Period类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * getDays方法。
-     *      * @param period Period类型参数
-     * @return static int类型返回值
      */
     public static int getDays(Period period) {
         return period.getDays();

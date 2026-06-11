@@ -16,26 +16,12 @@ import java.util.*;
  * @see JobBuilder
  * @see SchedulerManager#scheduleJob(JobDetail, Trigger)
  */
-/**
- * JobDetail类。
- */
-/**
- * JobDetail类。
- */
 public class JobDetail {
 
     private final org.quartz.JobDetail delegate;
 
     /**
      * 内部构造器，从 Quartz JobDetail 构建。
-     */
-    /**
-     * JobDetail方法。
-     *      * @param delegate org.quartz.JobDetail类型参数
-     */
-    /**
-     * JobDetail方法。
-     *      * @param delegate org.quartz.JobDetail类型参数
      */
     public JobDetail(org.quartz.JobDetail delegate) {
         this.delegate = Objects.requireNonNull(delegate, "delegate must not be null");
@@ -52,10 +38,6 @@ public class JobDetail {
      * create方法。
      * @return static JobDetail类型返回值
      */
-    /**
-     * create方法。
-     * @return static JobDetail类型返回值
-     */
     public static JobDetail create() {
         return new JobDetail(new JobDetailImpl());
     }
@@ -65,14 +47,6 @@ public class JobDetail {
     /**
      * 获取任务名称。
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return delegate.getKey().getName();
     }
@@ -80,28 +54,12 @@ public class JobDetail {
     /**
      * 获取任务所属分组。
      */
-    /**
-     * getGroup方法。
-     * @return String类型返回值
-     */
-    /**
-     * getGroup方法。
-     * @return String类型返回值
-     */
     public String getGroup() {
         return delegate.getKey().getGroup();
     }
 
     /**
      * 获取任务键。
-     */
-    /**
-     * getKey方法。
-     * @return JobKey类型返回值
-     */
-    /**
-     * getKey方法。
-     * @return JobKey类型返回值
      */
     public JobKey getKey() {
         return delegate.getKey();
@@ -115,24 +73,12 @@ public class JobDetail {
      * getJobClass方法。
      * @return Class<? extends org.quartz.Job>类型返回值
      */
-    /**
-     * getJobClass方法。
-     * @return Class<? extends org.quartz.Job>类型返回值
-     */
     public Class<? extends org.quartz.Job> getJobClass() {
         return delegate.getJobClass();
     }
 
     /**
      * 获取任务描述。
-     */
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
-    /**
-     * getDescription方法。
-     * @return String类型返回值
      */
     public String getDescription() {
         return delegate.getDescription();
@@ -145,14 +91,6 @@ public class JobDetail {
      *
      * @return 可修改的 JobDataMap
      */
-    /**
-     * getJobDataMap方法。
-     * @return Map<String, Object>类型返回值
-     */
-    /**
-     * getJobDataMap方法。
-     * @return Map<String, Object>类型返回值
-     */
     public Map<String, Object> getJobDataMap() {
         Map<String, Object> result = new HashMap<>();
         delegate.getJobDataMap().forEach(result::put);
@@ -161,14 +99,6 @@ public class JobDetail {
 
     /**
      * 获取可写的 JobDataMap 视图。
-     */
-    /**
-     * getRawJobDataMap方法。
-     * @return org.quartz.JobDataMap类型返回值
-     */
-    /**
-     * getRawJobDataMap方法。
-     * @return org.quartz.JobDataMap类型返回值
      */
     public org.quartz.JobDataMap getRawJobDataMap() {
         return delegate.getJobDataMap();
@@ -180,14 +110,6 @@ public class JobDetail {
      * 是否持久化。
      * 默认 true。
      */
-    /**
-     * isDurable方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isDurable方法。
-     * @return boolean类型返回值
-     */
     public boolean isDurable() {
         return delegate.isDurable();
     }
@@ -196,14 +118,6 @@ public class JobDetail {
      * 是否不允许并发执行。
      *
      * @see StatefulJob
-     */
-    /**
-     * isConcurrentExectionDisallowed方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isConcurrentExectionDisallowed方法。
-     * @return boolean类型返回值
      */
     public boolean isConcurrentExectionDisallowed() {
         return delegate.isConcurrentExectionDisallowed();
@@ -214,14 +128,6 @@ public class JobDetail {
      *
      * @see StatefulJob
      */
-    /**
-     * isPersistJobDataAfterExecution方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isPersistJobDataAfterExecution方法。
-     * @return boolean类型返回值
-     */
     public boolean isPersistJobDataAfterExecution() {
         return delegate.isPersistJobDataAfterExecution();
     }
@@ -229,14 +135,6 @@ public class JobDetail {
     /**
      * 是否请求恢复。
      * 在 Scheduler 重新启动后，标记为请求恢复的任务会被重新执行。
-     */
-    /**
-     * requestsRecovery方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * requestsRecovery方法。
-     * @return boolean类型返回值
      */
     public boolean requestsRecovery() {
         return delegate.requestsRecovery();
@@ -249,23 +147,11 @@ public class JobDetail {
      * <p>
      * 谨慎使用，仅在需要直接操作 Quartz API 时调用。
      */
-    /**
-     * getDelegate方法。
-     * @return org.quartz.JobDetail类型返回值
-     */
-    /**
-     * getDelegate方法。
-     * @return org.quartz.JobDetail类型返回值
-     */
     public org.quartz.JobDetail getDelegate() {
         return delegate;
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

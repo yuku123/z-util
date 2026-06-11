@@ -6,12 +6,6 @@ package com.zifang.util.core.pattern.command;
  *
  * @author zifang
  */
-/**
- * ICommand接口。
- */
-/**
- * ICommand接口。
- */
 public interface ICommand extends IPostExecutor, IPreExecutor {
 
     /**

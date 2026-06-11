@@ -11,11 +11,5 @@ package com.zifang.util.monitor.thread;
  * @see MonitorManager
  * @see Monitorable
  */
-/**
- * ThreadMonitor类。
- */
-/**
- * ThreadMonitor类。
- */
 public class ThreadMonitor {
 }

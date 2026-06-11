@@ -8,11 +8,5 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * ResponseStatus类。
- */
-/**
- * ResponseStatus类。
- */
 public class ResponseStatus {
 }

@@ -8,12 +8,6 @@ import java.awt.event.KeyEvent;
  * 秦码Robot演示类
  * 使用Robot自动化输入"HelloWorld"
  */
-/**
- * QinMaRobot类。
- */
-/**
- * QinMaRobot类。
- */
 public class QinMaRobot {
 
     /**

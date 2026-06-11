@@ -6,22 +6,11 @@ import java.util.Iterator;
 /**
  * Thrown when an option cannot be uniquely identified from a partial name.
  */
-/**
- * AmbiguousOptionException类。
- */
-/**
- * AmbiguousOptionException类。
- */
 public class AmbiguousOptionException extends UnrecognizedOptionException {
 
     private static final long serialVersionUID = 1L;
     private final Collection<String> matchingOptions;
 
-    /**
-     * AmbiguousOptionException方法。
-     *      * @param option final类型参数
-     * @param matchingOptions final类型参数
-     */
     /**
      * AmbiguousOptionException方法。
      *      * @param option final类型参数
@@ -49,10 +38,6 @@ public class AmbiguousOptionException extends UnrecognizedOptionException {
         return buf.toString();
     }
 
-    /**
-     * getMatchingOptions方法。
-     * @return Collection<String>类型返回值
-     */
     /**
      * getMatchingOptions方法。
      * @return Collection<String>类型返回值

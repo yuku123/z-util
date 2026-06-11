@@ -57,18 +57,6 @@ public final class FileCopyUtil {
      * @throws IOException if the source file does not exist, or copying fails
      * @throws NullPointerException if src or dest is {@code null}
      */
-    /**
-     * copyFile方法。
-     *      * @param src File类型参数
-     * @param dest File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * copyFile方法。
-     *      * @param src File类型参数
-     * @param dest File类型参数
-     * @return static void类型返回值
-     */
     public static void copyFile(File src, File dest) throws IOException {
         copyFile(src, dest, true);
     }
@@ -87,20 +75,6 @@ public final class FileCopyUtil {
      * @throws IOException if the source file does not exist, or copying fails
      * @throws NullPointerException if src or dest is {@code null}
      * @throws FileExistsException if overwrite is false and dest already exists
-     */
-    /**
-     * copyFile方法。
-     *      * @param src File类型参数
-     * @param dest File类型参数
-     * @param overwrite boolean类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * copyFile方法。
-     *      * @param src File类型参数
-     * @param dest File类型参数
-     * @param overwrite boolean类型参数
-     * @return static void类型返回值
      */
     public static void copyFile(File src, File dest, boolean overwrite) throws IOException {
         if (src == null) {
@@ -154,18 +128,6 @@ public final class FileCopyUtil {
      * @throws IOException if the source directory does not exist, or copying fails
      * @throws NullPointerException if srcDir or destDirPath is {@code null}
      */
-    /**
-     * copyDir方法。
-     *      * @param srcDir File类型参数
-     * @param destDirPath String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * copyDir方法。
-     *      * @param srcDir File类型参数
-     * @param destDirPath String类型参数
-     * @return static void类型返回值
-     */
     public static void copyDir(File srcDir, String destDirPath) throws IOException {
         if (srcDir == null) {
             throw new NullPointerException("Source directory must not be null");
@@ -196,18 +158,6 @@ public final class FileCopyUtil {
      * @param destDirPath the path to the destination directory
      * @throws IOException if the source directory does not exist, or copying fails
      * @throws NullPointerException if srcDirPath or destDirPath is {@code null}
-     */
-    /**
-     * copyDir方法。
-     *      * @param srcDirPath String类型参数
-     * @param destDirPath String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * copyDir方法。
-     *      * @param srcDirPath String类型参数
-     * @param destDirPath String类型参数
-     * @return static void类型返回值
      */
     public static void copyDir(String srcDirPath, String destDirPath) throws IOException {
         if (srcDirPath == null) {
@@ -271,18 +221,6 @@ public final class FileCopyUtil {
      * @throws NullPointerException if srcFile or destDir is {@code null}
      * @throws IOException if destDir is not a directory
      */
-    /**
-     * copyFileToDir方法。
-     *      * @param srcFile File类型参数
-     * @param destDir File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * copyFileToDir方法。
-     *      * @param srcFile File类型参数
-     * @param destDir File类型参数
-     * @return static void类型返回值
-     */
     public static void copyFileToDir(File srcFile, File destDir) throws IOException {
         if (srcFile == null) {
             throw new NullPointerException("Source file must not be null");
@@ -312,18 +250,6 @@ public final class FileCopyUtil {
      * @param dest the destination file, must not be {@code null}
      * @throws IOException if the source file does not exist, or moving fails
      * @throws NullPointerException if src or dest is {@code null}
-     */
-    /**
-     * moveFile方法。
-     *      * @param src File类型参数
-     * @param dest File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * moveFile方法。
-     *      * @param src File类型参数
-     * @param dest File类型参数
-     * @return static void类型返回值
      */
     public static void moveFile(File src, File dest) throws IOException {
         if (src == null) {
@@ -375,18 +301,6 @@ public final class FileCopyUtil {
      * @param destDir the destination directory, must not be {@code null}
      * @throws IOException if the source directory does not exist, or moving fails
      * @throws NullPointerException if srcDir or destDir is {@code null}
-     */
-    /**
-     * moveDir方法。
-     *      * @param srcDir File类型参数
-     * @param destDir File类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * moveDir方法。
-     *      * @param srcDir File类型参数
-     * @param destDir File类型参数
-     * @return static void类型返回值
      */
     public static void moveDir(File srcDir, File destDir) throws IOException {
         if (srcDir == null) {
@@ -456,18 +370,6 @@ public final class FileCopyUtil {
      * @param out the output stream to write to, must not be {@code null}
      * @throws IOException if an I/O error occurs
      * @throws NullPointerException if in or out is {@code null}
-     */
-    /**
-     * copyStream方法。
-     *      * @param in InputStream类型参数
-     * @param out OutputStream类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * copyStream方法。
-     *      * @param in InputStream类型参数
-     * @param out OutputStream类型参数
-     * @return static void类型返回值
      */
     public static void copyStream(InputStream in, OutputStream out) throws IOException {
         if (in == null) {

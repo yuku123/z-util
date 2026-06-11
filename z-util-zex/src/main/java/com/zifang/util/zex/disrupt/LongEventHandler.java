@@ -11,9 +11,6 @@ import com.lmax.disruptor.EventHandler;
  * @author zifang
  * @version 1.0
  */
-/**
- * LongEventHandler类。
- */
 public class LongEventHandler implements EventHandler<LongEvent> {
 
     /**

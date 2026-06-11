@@ -13,12 +13,6 @@ import java.util.Map;
  * @param <k> 键类型
  * @param <v> 值类型
  */
-/**
- * LFU类。
- */
-/**
- * LFU类。
- */
 public class LFU<k, v> {
 
     private final int capcity;
@@ -32,14 +26,6 @@ public class LFU<k, v> {
      *
      * @param capcity 缓存容量，必须大于0
      */
-    /**
-     * LFU方法。
-     *      * @param capcity int类型参数
-     */
-    /**
-     * LFU方法。
-     *      * @param capcity int类型参数
-     */
     public LFU(int capcity) {
         this.capcity = capcity;
     }
@@ -52,16 +38,6 @@ public class LFU<k, v> {
      *
      * @param key   键
      * @param value 值
-     */
-    /**
-     * put方法。
-     *      * @param key k类型参数
-     * @param value v类型参数
-     */
-    /**
-     * put方法。
-     *      * @param key k类型参数
-     * @param value v类型参数
      */
     public void put(k key, v value) {
         v v = cache.get(key);
@@ -83,16 +59,6 @@ public class LFU<k, v> {
      *
      * @param key 键
      * @return 缓存的值，如果键不存在则返回null
-     */
-    /**
-     * get方法。
-     *      * @param key k类型参数
-     * @return v类型返回值
-     */
-    /**
-     * get方法。
-     *      * @param key k类型参数
-     * @return v类型返回值
      */
     public v get(k key) {
         v value = cache.get(key);
@@ -162,22 +128,12 @@ public class LFU<k, v> {
      *      * @param o HitRate类型参数
      * @return int类型返回值
      */
-    /**
-     * compareTo方法。
-     *      * @param o HitRate类型参数
-     * @return int类型返回值
-     */
         public int compareTo(HitRate o) {
             int compare = Integer.compare(this.hitCount, o.hitCount);
             return compare == 0 ? Long.compare(this.lastTime, o.lastTime) : compare;
         }
     }
 
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
     /**
      * main方法。
      *      * @param args String[]类型参数

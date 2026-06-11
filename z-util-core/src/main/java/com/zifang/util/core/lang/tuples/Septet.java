@@ -13,25 +13,9 @@ package com.zifang.util.core.lang.tuples;
  * @param <G> 第七个元素类型
  * @see Sextet
  */
-/**
- * Septet类。
- */
-/**
- * Septet类。
- */
 public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
     protected G g;
 
-    /**
-     * Septet方法。
-     *      * @param a A类型参数
-     * @param b B类型参数
-     * @param c C类型参数
-     * @param d D类型参数
-     * @param e E类型参数
-     * @param f F类型参数
-     * @param g G类型参数
-     */
     /**
      * Septet方法。
      *      * @param a A类型参数
@@ -51,18 +35,10 @@ public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
      * getG方法。
      * @return G类型返回值
      */
-    /**
-     * getG方法。
-     * @return G类型返回值
-     */
     public G getG() {
         return g;
     }
 
-    /**
-     * setG方法。
-     *      * @param g G类型参数
-     */
     /**
      * setG方法。
      *      * @param g G类型参数
@@ -72,10 +48,6 @@ public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -90,11 +62,6 @@ public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -104,10 +71,6 @@ public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

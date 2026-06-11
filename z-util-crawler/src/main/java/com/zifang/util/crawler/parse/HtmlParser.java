@@ -17,12 +17,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * HtmlParser类。
- */
-/**
- * HtmlParser类。
- */
 public class HtmlParser {
 
     private HtmlParser() {
@@ -33,18 +27,6 @@ public class HtmlParser {
      * @param html HTML 字符串
      * @param cssSelector CSS 选择器
      * @return 元素文本内容，未找到则返回 null
-     */
-    /**
-     * parse方法。
-     *      * @param html String类型参数
-     * @param cssSelector String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param html String类型参数
-     * @param cssSelector String类型参数
-     * @return static String类型返回值
      */
     public static String parse(String html, String cssSelector) {
         Document doc = Jsoup.parse(html);
@@ -57,18 +39,6 @@ public class HtmlParser {
      * @param html HTML 字符串
      * @param cssSelector CSS 选择器
      * @return 文本内容列表
-     */
-    /**
-     * parseAll方法。
-     *      * @param html String类型参数
-     * @param cssSelector String类型参数
-     * @return static List<String>类型返回值
-     */
-    /**
-     * parseAll方法。
-     *      * @param html String类型参数
-     * @param cssSelector String类型参数
-     * @return static List<String>类型返回值
      */
     public static List<String> parseAll(String html, String cssSelector) {
         Document doc = Jsoup.parse(html);
@@ -87,20 +57,6 @@ public class HtmlParser {
      * @param attrName 属性名
      * @return 属性值，未找到则返回 null
      */
-    /**
-     * parseAttr方法。
-     *      * @param html String类型参数
-     * @param cssSelector String类型参数
-     * @param attrName String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * parseAttr方法。
-     *      * @param html String类型参数
-     * @param cssSelector String类型参数
-     * @param attrName String类型参数
-     * @return static String类型返回值
-     */
     public static String parseAttr(String html, String cssSelector, String attrName) {
         Document doc = Jsoup.parse(html);
         Element element = doc.selectFirst(cssSelector);
@@ -111,16 +67,6 @@ public class HtmlParser {
      * 解析 HTML 并返回 Jsoup Document 对象，用于高级操作。
      * @param html HTML 字符串
      * @return Jsoup Document 对象
-     */
-    /**
-     * parse方法。
-     *      * @param html String类型参数
-     * @return static Document类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param html String类型参数
-     * @return static Document类型返回值
      */
     public static Document parse(String html) {
         return Jsoup.parse(html);

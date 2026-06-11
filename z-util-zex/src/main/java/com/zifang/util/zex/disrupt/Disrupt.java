@@ -9,9 +9,6 @@ package com.zifang.util.zex.disrupt;
  * @author zifang
  * @version 1.0
  */
-/**
- * Disrupt类。
- */
 public class Disrupt {
 
 }

@@ -16,9 +16,6 @@ package com.zifang.util.core.state;
  * @param <E> 事件类型
  * @param <C> 上下文类型
  */
-/**
- * StateListener接口。
- */
 public interface StateListener<S, E, C> {
 
     /**

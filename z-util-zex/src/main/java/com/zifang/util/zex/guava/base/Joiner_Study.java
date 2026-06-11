@@ -39,9 +39,6 @@ import java.util.Map.Entry;
  * @author zifang
  * @version 1.0
  */
-/**
- * Joiner_Study类。
- */
 public class Joiner_Study {
     String str1 = "a ";
 

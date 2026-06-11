@@ -8,9 +8,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * GitCommit类。
- */
 public class GitCommit {
 
     /** 完整 SHA-1 */

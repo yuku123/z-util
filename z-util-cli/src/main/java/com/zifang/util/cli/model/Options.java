@@ -12,12 +12,6 @@ import java.util.Map;
 /**
  * Main container for all command-line options.
  */
-/**
- * Options类。
- */
-/**
- * Options类。
- */
 public class Options implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,16 +25,8 @@ public class Options implements Serializable {
     /**
      * Options方法。
      */
-    /**
-     * Options方法。
-     */
     public Options() {}
 
-    /**
-     * addOption方法。
-     *      * @param option final类型参数
-     * @return Options类型返回值
-     */
     /**
      * addOption方法。
      *      * @param option final类型参数
@@ -67,13 +53,6 @@ public class Options implements Serializable {
      * @param description final类型参数
      * @return Options类型返回值
      */
-    /**
-     * addOption方法。
-     *      * @param opt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     * @return Options类型返回值
-     */
     public Options addOption(final String opt, final boolean hasArg, final String description) {
         return addOption(new Option(opt, hasArg, description));
     }
@@ -86,26 +65,10 @@ public class Options implements Serializable {
      * @param description final类型参数
      * @return Options类型返回值
      */
-    /**
-     * addOption方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     * @return Options类型返回值
-     */
     public Options addOption(final String opt, final String longOpt, final boolean hasArg, final String description) {
         return addOption(new Option(opt, longOpt, hasArg, description));
     }
 
-    /**
-     * addRequiredOption方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     * @return Options类型返回值
-     */
     /**
      * addRequiredOption方法。
      *      * @param opt final类型参数
@@ -130,11 +93,6 @@ public class Options implements Serializable {
      *      * @param group final类型参数
      * @return Options类型返回值
      */
-    /**
-     * addOptionGroup方法。
-     *      * @param group final类型参数
-     * @return Options类型返回值
-     */
     public Options addOptionGroup(final OptionGroup group) {
         for (Option option : group.getOptions()) {
             optionGroups.put(option, group);
@@ -147,11 +105,6 @@ public class Options implements Serializable {
         return this;
     }
 
-    /**
-     * getOption方法。
-     *      * @param opt final类型参数
-     * @return Option类型返回值
-     */
     /**
      * getOption方法。
      *      * @param opt final类型参数
@@ -170,20 +123,10 @@ public class Options implements Serializable {
      *      * @param opt final类型参数
      * @return boolean类型返回值
      */
-    /**
-     * hasOption方法。
-     *      * @param opt final类型参数
-     * @return boolean类型返回值
-     */
     public boolean hasOption(final String opt) {
         return shortOpts.containsKey(opt) || longOpts.containsKey(opt);
     }
 
-    /**
-     * hasShortOption方法。
-     *      * @param opt final类型参数
-     * @return boolean类型返回值
-     */
     /**
      * hasShortOption方法。
      *      * @param opt final类型参数
@@ -198,20 +141,10 @@ public class Options implements Serializable {
      *      * @param opt final类型参数
      * @return boolean类型返回值
      */
-    /**
-     * hasLongOption方法。
-     *      * @param opt final类型参数
-     * @return boolean类型返回值
-     */
     public boolean hasLongOption(final String opt) {
         return longOpts.containsKey(opt);
     }
 
-    /**
-     * getOptionGroup方法。
-     *      * @param option final类型参数
-     * @return OptionGroup类型返回值
-     */
     /**
      * getOptionGroup方法。
      *      * @param option final类型参数
@@ -225,19 +158,11 @@ public class Options implements Serializable {
      * getOptions方法。
      * @return Collection<Option>类型返回值
      */
-    /**
-     * getOptions方法。
-     * @return Collection<Option>类型返回值
-     */
     public Collection<Option> getOptions() {
         List<Option> opts = new ArrayList<>(shortOpts.values());
         return Collections.unmodifiableCollection(opts);
     }
 
-    /**
-     * getOptionGroups方法。
-     * @return List<OptionGroup>类型返回值
-     */
     /**
      * getOptionGroups方法。
      * @return List<OptionGroup>类型返回值
@@ -250,18 +175,10 @@ public class Options implements Serializable {
      * getRequiredOptions方法。
      * @return List<Option>类型返回值
      */
-    /**
-     * getRequiredOptions方法。
-     * @return List<Option>类型返回值
-     */
     public List<Option> getRequiredOptions() {
         return Collections.unmodifiableList(requiredOptions);
     }
 
-    /**
-     * getOptionsSortedByKey方法。
-     * @return List<Option>类型返回值
-     */
     /**
      * getOptionsSortedByKey方法。
      * @return List<Option>类型返回值
@@ -272,11 +189,6 @@ public class Options implements Serializable {
         return opts;
     }
 
-    /**
-     * getMatchingOptions方法。
-     *      * @param opt final类型参数
-     * @return List<String>类型返回值
-     */
     /**
      * getMatchingOptions方法。
      *      * @param opt final类型参数
@@ -293,10 +205,6 @@ public class Options implements Serializable {
         return matching;
     }
 
-    /**
-     * helpOptions方法。
-     * @return List<Option>类型返回值
-     */
     /**
      * helpOptions方法。
      * @return List<Option>类型返回值

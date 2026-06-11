@@ -5,12 +5,6 @@ package com.zifang.util.monitor.thread.alarm;
  *
  * @author zifang
  */
-/**
- * Alarmable接口。
- */
-/**
- * Alarmable接口。
- */
 public interface Alarmable {
 
     /**

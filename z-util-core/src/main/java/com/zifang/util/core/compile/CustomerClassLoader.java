@@ -8,18 +8,8 @@ package com.zifang.util.core.compile;
  * @author zifang
  * @see ClassLoader
  */
-/**
- * CustomerClassLoader类。
- */
-/**
- * CustomerClassLoader类。
- */
 public class CustomerClassLoader extends ClassLoader{
 
-    /**
-     * CustomerClassLoader方法。
-     *      * @param parent ClassLoader类型参数
-     */
     /**
      * CustomerClassLoader方法。
      *      * @param parent ClassLoader类型参数
@@ -27,12 +17,6 @@ public class CustomerClassLoader extends ClassLoader{
     public CustomerClassLoader(ClassLoader parent) {
         super(parent);
     }
-    /**
-     * defineClass方法。
-     *      * @param className String类型参数
-     * @param bytes byte[]类型参数
-     * @return Class<?>类型返回值
-     */
     /**
      * defineClass方法。
      *      * @param className String类型参数

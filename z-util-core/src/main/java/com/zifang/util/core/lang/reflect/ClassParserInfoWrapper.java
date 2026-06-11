@@ -5,12 +5,6 @@ import java.lang.reflect.Type;
 /**
  * ClassParserInfoWrapper
  */
-/**
- * ClassParserInfoWrapper类。
- */
-/**
- * ClassParserInfoWrapper类。
- */
 public class ClassParserInfoWrapper {
 
     private Class<?> clazz;
@@ -19,17 +13,9 @@ public class ClassParserInfoWrapper {
     /**
      * ClassParserInfoWrapper方法。
      */
-    /**
-     * ClassParserInfoWrapper方法。
-     */
     public ClassParserInfoWrapper() {
     }
 
-    /**
-     * ClassParserInfoWrapper方法。
-     *      * @param clazz Class?类型参数
-     * @param type Type类型参数
-     */
     /**
      * ClassParserInfoWrapper方法。
      *      * @param clazz Class?类型参数
@@ -44,18 +30,10 @@ public class ClassParserInfoWrapper {
      * getClazz方法。
      * @return Class<?>类型返回值
      */
-    /**
-     * getClazz方法。
-     * @return Class<?>类型返回值
-     */
     public Class<?> getClazz() {
         return clazz;
     }
 
-    /**
-     * setClazz方法。
-     *      * @param clazz Class?类型参数
-     */
     /**
      * setClazz方法。
      *      * @param clazz Class?类型参数
@@ -68,18 +46,10 @@ public class ClassParserInfoWrapper {
      * getType方法。
      * @return Type类型返回值
      */
-    /**
-     * getType方法。
-     * @return Type类型返回值
-     */
     public Type getType() {
         return type;
     }
 
-    /**
-     * setType方法。
-     *      * @param type Type类型参数
-     */
     /**
      * setType方法。
      *      * @param type Type类型参数
@@ -89,10 +59,6 @@ public class ClassParserInfoWrapper {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -107,11 +73,6 @@ public class ClassParserInfoWrapper {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -121,10 +82,6 @@ public class ClassParserInfoWrapper {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

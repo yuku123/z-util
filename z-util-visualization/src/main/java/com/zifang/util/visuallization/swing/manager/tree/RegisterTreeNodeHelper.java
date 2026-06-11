@@ -8,23 +8,12 @@ import java.util.stream.Collectors;
  * 树形节点注册帮助类
  * 负责将注册的节点转换为Swing可用的树形结构
  */
-/**
- * RegisterTreeNodeHelper类。
- */
-/**
- * RegisterTreeNodeHelper类。
- */
 public class RegisterTreeNodeHelper {
     /**
      * 将注册的节点转换为DefaultMutableTreeNode
      * @param registerTreeNode 节点注册器
      * @return Swing树形结构的根节点
      * @throws RuntimeException 如果有多个根节点或存在游离节点
-     */
-    /**
-     * solve方法。
-     *      * @param registerTreeNode RegisterTreeNode类型参数
-     * @return static DefaultMutableTreeNode类型返回值
      */
     public static DefaultMutableTreeNode solve(RegisterTreeNode registerTreeNode) {
 

@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _045类。
- */
 public class _045 {
     /**
      * jump方法。

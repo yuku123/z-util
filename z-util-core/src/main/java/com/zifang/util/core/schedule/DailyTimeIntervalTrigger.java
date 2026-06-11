@@ -25,20 +25,10 @@ import java.util.TimeZone;
  * @see CalendarIntervalTrigger
  * @see TriggerBuilder
  */
-/**
- * DailyTimeIntervalTrigger类。
- */
-/**
- * DailyTimeIntervalTrigger类。
- */
 public class DailyTimeIntervalTrigger implements Trigger {
 
     private final org.quartz.DailyTimeIntervalTrigger delegate;
 
-    /**
-     * DailyTimeIntervalTrigger方法。
-     *      * @param delegate org.quartz.DailyTimeIntervalTrigger类型参数
-     */
     /**
      * DailyTimeIntervalTrigger方法。
      *      * @param delegate org.quartz.DailyTimeIntervalTrigger类型参数
@@ -52,14 +42,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
     /**
      * 创建新的 DailyTimeIntervalTrigger Builder。
      */
-    /**
-     * newDailyTimeIntervalTrigger方法。
-     * @return static DailyBuilder类型返回值
-     */
-    /**
-     * newDailyTimeIntervalTrigger方法。
-     * @return static DailyBuilder类型返回值
-     */
     public static DailyBuilder newDailyTimeIntervalTrigger() {
         return new DailyBuilder();
     }
@@ -67,10 +49,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
     // ==================== Trigger 接口实现 ====================
 
     @Override
-    /**
-     * getKey方法。
-     * @return org.quartz.TriggerKey类型返回值
-     */
     /**
      * getKey方法。
      * @return org.quartz.TriggerKey类型返回值
@@ -84,19 +62,11 @@ public class DailyTimeIntervalTrigger implements Trigger {
      * getName方法。
      * @return String类型返回值
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return delegate.getKey().getName();
     }
 
     @Override
-    /**
-     * getGroup方法。
-     * @return String类型返回值
-     */
     /**
      * getGroup方法。
      * @return String类型返回值
@@ -110,19 +80,11 @@ public class DailyTimeIntervalTrigger implements Trigger {
      * getJobKey方法。
      * @return org.quartz.JobKey类型返回值
      */
-    /**
-     * getJobKey方法。
-     * @return org.quartz.JobKey类型返回值
-     */
     public org.quartz.JobKey getJobKey() {
         return delegate.getJobKey();
     }
 
     @Override
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -136,19 +98,11 @@ public class DailyTimeIntervalTrigger implements Trigger {
      * getNextFireTime方法。
      * @return Date类型返回值
      */
-    /**
-     * getNextFireTime方法。
-     * @return Date类型返回值
-     */
     public Date getNextFireTime() {
         return delegate.getNextFireTime();
     }
 
     @Override
-    /**
-     * getPreviousFireTime方法。
-     * @return Date类型返回值
-     */
     /**
      * getPreviousFireTime方法。
      * @return Date类型返回值
@@ -162,19 +116,11 @@ public class DailyTimeIntervalTrigger implements Trigger {
      * getPriority方法。
      * @return int类型返回值
      */
-    /**
-     * getPriority方法。
-     * @return int类型返回值
-     */
     public int getPriority() {
         return delegate.getPriority();
     }
 
     @Override
-    /**
-     * getStartTime方法。
-     * @return Date类型返回值
-     */
     /**
      * getStartTime方法。
      * @return Date类型返回值
@@ -188,19 +134,11 @@ public class DailyTimeIntervalTrigger implements Trigger {
      * getEndTime方法。
      * @return Date类型返回值
      */
-    /**
-     * getEndTime方法。
-     * @return Date类型返回值
-     */
     public Date getEndTime() {
         return delegate.getEndTime();
     }
 
     @Override
-    /**
-     * getMisfirePolicy方法。
-     * @return MisfirePolicy类型返回值
-     */
     /**
      * getMisfirePolicy方法。
      * @return MisfirePolicy类型返回值
@@ -220,10 +158,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
      * getCalendarName方法。
      * @return String类型返回值
      */
-    /**
-     * getCalendarName方法。
-     * @return String类型返回值
-     */
     public String getCalendarName() {
         return delegate.getCalendarName();
     }
@@ -237,10 +171,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
      * getTimeZone方法。
      * @return TimeZone类型返回值
      */
-    /**
-     * getTimeZone方法。
-     * @return TimeZone类型返回值
-     */
     public TimeZone getTimeZone() {
         return TimeZone.getDefault();
     }
@@ -250,19 +180,11 @@ public class DailyTimeIntervalTrigger implements Trigger {
      * getDelegate方法。
      * @return org.quartz.Trigger类型返回值
      */
-    /**
-     * getDelegate方法。
-     * @return org.quartz.Trigger类型返回值
-     */
     public org.quartz.Trigger getDelegate() {
         return delegate;
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -282,28 +204,12 @@ public class DailyTimeIntervalTrigger implements Trigger {
     /**
      * 获取每日开始时间。
      */
-    /**
-     * getStartTimeOfDay方法。
-     * @return org.quartz.TimeOfDay类型返回值
-     */
-    /**
-     * getStartTimeOfDay方法。
-     * @return org.quartz.TimeOfDay类型返回值
-     */
     public org.quartz.TimeOfDay getStartTimeOfDay() {
         return delegate.getStartTimeOfDay();
     }
 
     /**
      * 获取每日结束时间。
-     */
-    /**
-     * getEndTimeOfDay方法。
-     * @return org.quartz.TimeOfDay类型返回值
-     */
-    /**
-     * getEndTimeOfDay方法。
-     * @return org.quartz.TimeOfDay类型返回值
      */
     public org.quartz.TimeOfDay getEndTimeOfDay() {
         return delegate.getEndTimeOfDay();
@@ -312,28 +218,12 @@ public class DailyTimeIntervalTrigger implements Trigger {
     /**
      * 获取重复间隔数量。
      */
-    /**
-     * getRepeatInterval方法。
-     * @return int类型返回值
-     */
-    /**
-     * getRepeatInterval方法。
-     * @return int类型返回值
-     */
     public int getRepeatInterval() {
         return delegate.getRepeatInterval();
     }
 
     /**
      * 获取重复间隔单位。
-     */
-    /**
-     * getRepeatIntervalUnit方法。
-     * @return org.quartz.DateBuilder.IntervalUnit类型返回值
-     */
-    /**
-     * getRepeatIntervalUnit方法。
-     * @return org.quartz.DateBuilder.IntervalUnit类型返回值
      */
     public org.quartz.DateBuilder.IntervalUnit getRepeatIntervalUnit() {
         return delegate.getRepeatIntervalUnit();
@@ -342,14 +232,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
     /**
      * 获取触发在一周中的哪些天。
      */
-    /**
-     * getDaysOfWeek方法。
-     * @return Set<Integer>类型返回值
-     */
-    /**
-     * getDaysOfWeek方法。
-     * @return Set<Integer>类型返回值
-     */
     public Set<Integer> getDaysOfWeek() {
         return delegate.getDaysOfWeek();
     }
@@ -357,28 +239,12 @@ public class DailyTimeIntervalTrigger implements Trigger {
     /**
      * 获取最大触发次数。
      */
-    /**
-     * getRepeatCount方法。
-     * @return int类型返回值
-     */
-    /**
-     * getRepeatCount方法。
-     * @return int类型返回值
-     */
     public int getRepeatCount() {
         return delegate.getRepeatCount();
     }
 
     /**
      * 获取已触发次数。
-     */
-    /**
-     * getTimesTriggered方法。
-     * @return int类型返回值
-     */
-    /**
-     * getTimesTriggered方法。
-     * @return int类型返回值
      */
     public int getTimesTriggered() {
         return delegate.getTimesTriggered();
@@ -401,16 +267,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置每日开始时间。
          */
-    /**
-     * startingDailyAt方法。
-     *      * @param time org.quartz.TimeOfDay类型参数
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * startingDailyAt方法。
-     *      * @param time org.quartz.TimeOfDay类型参数
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder startingDailyAt(org.quartz.TimeOfDay time) {
             this.startTimeOfDay = Objects.requireNonNull(time);
             return this;
@@ -419,16 +275,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置每日结束时间。
          */
-    /**
-     * endingDailyAt方法。
-     *      * @param time org.quartz.TimeOfDay类型参数
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * endingDailyAt方法。
-     *      * @param time org.quartz.TimeOfDay类型参数
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder endingDailyAt(org.quartz.TimeOfDay time) {
             this.endTimeOfDay = Objects.requireNonNull(time);
             return this;
@@ -437,20 +283,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置每日开始时间（小时:分钟:秒）。
          */
-    /**
-     * startingDailyAt方法。
-     *      * @param hour int类型参数
-     * @param minute int类型参数
-     * @param second int类型参数
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * startingDailyAt方法。
-     *      * @param hour int类型参数
-     * @param minute int类型参数
-     * @param second int类型参数
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder startingDailyAt(int hour, int minute, int second) {
             this.startTimeOfDay = org.quartz.TimeOfDay.hourMinuteAndSecondOfDay(hour, minute, second);
             return this;
@@ -459,20 +291,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置每日结束时间（小时:分钟:秒）。
          */
-    /**
-     * endingDailyAt方法。
-     *      * @param hour int类型参数
-     * @param minute int类型参数
-     * @param second int类型参数
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * endingDailyAt方法。
-     *      * @param hour int类型参数
-     * @param minute int类型参数
-     * @param second int类型参数
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder endingDailyAt(int hour, int minute, int second) {
             this.endTimeOfDay = org.quartz.TimeOfDay.hourMinuteAndSecondOfDay(hour, minute, second);
             return this;
@@ -481,16 +299,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置按秒重复间隔。
          */
-    /**
-     * withIntervalInSeconds方法。
-     *      * @param seconds int类型参数
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * withIntervalInSeconds方法。
-     *      * @param seconds int类型参数
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder withIntervalInSeconds(int seconds) {
             this.repeatInterval = seconds;
             this.repeatIntervalUnit = org.quartz.DateBuilder.IntervalUnit.SECOND;
@@ -500,16 +308,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置按分钟重复间隔。
          */
-    /**
-     * withIntervalInMinutes方法。
-     *      * @param minutes int类型参数
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * withIntervalInMinutes方法。
-     *      * @param minutes int类型参数
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder withIntervalInMinutes(int minutes) {
             this.repeatInterval = minutes;
             this.repeatIntervalUnit = org.quartz.DateBuilder.IntervalUnit.MINUTE;
@@ -519,16 +317,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置按小时重复间隔。
          */
-    /**
-     * withIntervalInHours方法。
-     *      * @param hours int类型参数
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * withIntervalInHours方法。
-     *      * @param hours int类型参数
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder withIntervalInHours(int hours) {
             this.repeatInterval = hours;
             this.repeatIntervalUnit = org.quartz.DateBuilder.IntervalUnit.HOUR;
@@ -538,18 +326,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置按指定单位重复间隔。
          */
-    /**
-     * withInterval方法。
-     *      * @param interval int类型参数
-     * @param unit org.quartz.DateBuilder.IntervalUnit类型参数
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * withInterval方法。
-     *      * @param interval int类型参数
-     * @param unit org.quartz.DateBuilder.IntervalUnit类型参数
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder withInterval(int interval,
                                           org.quartz.DateBuilder.IntervalUnit unit) {
             this.repeatInterval = interval;
@@ -568,11 +344,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
      *      * @param days Integer...类型参数
      * @return final DailyBuilder类型返回值
      */
-    /**
-     * onDaysOfTheWeek方法。
-     *      * @param days Integer...类型参数
-     * @return final DailyBuilder类型返回值
-     */
         public final DailyBuilder onDaysOfTheWeek(Integer... days) {
             this.daysOfWeek = new java.util.HashSet<>(java.util.Arrays.asList(days));
             return this;
@@ -581,14 +352,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置工作日（周一到周五）。
          */
-    /**
-     * onWeekdays方法。
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * onWeekdays方法。
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder onWeekdays() {
             this.daysOfWeek = DailyTimeIntervalScheduleBuilder.MONDAY_THROUGH_FRIDAY;
             return this;
@@ -597,14 +360,6 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置周末（周六、周日）。
          */
-    /**
-     * onWeekendDays方法。
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * onWeekendDays方法。
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder onWeekendDays() {
             this.daysOfWeek = DailyTimeIntervalScheduleBuilder.SATURDAY_AND_SUNDAY;
             return this;
@@ -613,24 +368,12 @@ public class DailyTimeIntervalTrigger implements Trigger {
         /**
          * 设置每天（默认）。
          */
-    /**
-     * onEveryDay方法。
-     * @return DailyBuilder类型返回值
-     */
-    /**
-     * onEveryDay方法。
-     * @return DailyBuilder类型返回值
-     */
         public DailyBuilder onEveryDay() {
             this.daysOfWeek = null;
             return this;
         }
 
         @Override
-    /**
-     * build方法。
-     * @return DailyTimeIntervalTrigger类型返回值
-     */
     /**
      * build方法。
      * @return DailyTimeIntervalTrigger类型返回值

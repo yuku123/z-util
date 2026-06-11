@@ -17,12 +17,6 @@ package com.zifang.util.workflow.conponents;
  * @see WorkFlowApplication
  * @see WorkFlowApplicationContext
  */
-/**
- * WorkFlowApplicationBuilder类。
- */
-/**
- * WorkFlowApplicationBuilder类。
- */
 public class WorkFlowApplicationBuilder {
 
     /**
@@ -30,16 +24,6 @@ public class WorkFlowApplicationBuilder {
      *
      * @param engineType 引擎类型，如 "spark"、"java"、"python"
      * @return 构建器实例，支持链式调用
-     */
-    /**
-     * withEngineType方法。
-     *      * @param engineType String类型参数
-     * @return WorkFlowApplicationBuilder类型返回值
-     */
-    /**
-     * withEngineType方法。
-     *      * @param engineType String类型参数
-     * @return WorkFlowApplicationBuilder类型返回值
      */
     public WorkFlowApplicationBuilder withEngineType(String engineType) {
         return this;
@@ -51,16 +35,6 @@ public class WorkFlowApplicationBuilder {
      * @param cacheType 缓存类型，如 "memory"、"redis"
      * @return 构建器实例，支持链式调用
      */
-    /**
-     * withCacheType方法。
-     *      * @param cacheType String类型参数
-     * @return WorkFlowApplicationBuilder类型返回值
-     */
-    /**
-     * withCacheType方法。
-     *      * @param cacheType String类型参数
-     * @return WorkFlowApplicationBuilder类型返回值
-     */
     public WorkFlowApplicationBuilder withCacheType(String cacheType) {
         return this;
     }
@@ -69,14 +43,6 @@ public class WorkFlowApplicationBuilder {
      * 构建工作流应用程序实例。
      *
      * @return 工作流应用程序实例
-     */
-    /**
-     * build方法。
-     * @return WorkFlowApplication类型返回值
-     */
-    /**
-     * build方法。
-     * @return WorkFlowApplication类型返回值
      */
     public WorkFlowApplication build() {
         return new WorkFlowApplication();

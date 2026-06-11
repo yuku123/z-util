@@ -17,12 +17,6 @@ package com.zifang.util.workflow.engine.spark.services;
  *
  * @see AbstractSparkEngineService
  */
-/**
- * WindowHandler类。
- */
-/**
- * WindowHandler类。
- */
 public class WindowHandler {
 }
 

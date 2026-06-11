@@ -21,22 +21,12 @@ import java.util.Map;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * RepositoryApiWrapper类。
- */
-/**
- * RepositoryApiWrapper类。
- */
 public class RepositoryApiWrapper {
 
     private final GitHub github;
     private String owner;
     private String repo;
 
-    /**
-     * RepositoryApiWrapper方法。
-     *      * @param github GitHub类型参数
-     */
     /**
      * RepositoryApiWrapper方法。
      *      * @param github GitHub类型参数
@@ -51,24 +41,12 @@ public class RepositoryApiWrapper {
      * @param owner String类型参数
      * @param repo String类型参数
      */
-    /**
-     * RepositoryApiWrapper方法。
-     *      * @param github GitHub类型参数
-     * @param owner String类型参数
-     * @param repo String类型参数
-     */
     public RepositoryApiWrapper(GitHub github, String owner, String repo) {
         this.github = github;
         this.owner = owner;
         this.repo = repo;
     }
 
-    /**
-     * withRepo方法。
-     *      * @param owner String类型参数
-     * @param repo String类型参数
-     * @return RepositoryApiWrapper类型返回值
-     */
     /**
      * withRepo方法。
      *      * @param owner String类型参数
@@ -94,20 +72,6 @@ public class RepositoryApiWrapper {
     /**
      * 创建仓库
      */
-    /**
-     * create方法。
-     *      * @param name String类型参数
-     * @param description String类型参数
-     * @param isPrivate boolean类型参数
-     * @return GHRepository类型返回值
-     */
-    /**
-     * create方法。
-     *      * @param name String类型参数
-     * @param description String类型参数
-     * @param isPrivate boolean类型参数
-     * @return GHRepository类型返回值
-     */
     public GHRepository create(String name, String description, boolean isPrivate) throws IOException {
         return github.createRepository(name)
                 .description(description)
@@ -117,22 +81,6 @@ public class RepositoryApiWrapper {
 
     /**
      * 创建组织仓库
-     */
-    /**
-     * createOrgRepo方法。
-     *      * @param org String类型参数
-     * @param name String类型参数
-     * @param description String类型参数
-     * @param isPrivate boolean类型参数
-     * @return GHRepository类型返回值
-     */
-    /**
-     * createOrgRepo方法。
-     *      * @param org String类型参数
-     * @param name String类型参数
-     * @param description String类型参数
-     * @param isPrivate boolean类型参数
-     * @return GHRepository类型返回值
      */
     public GHRepository createOrgRepo(String org, String name, String description, boolean isPrivate) throws IOException {
         return github.createRepository(name)
@@ -145,26 +93,10 @@ public class RepositoryApiWrapper {
     /**
      * 获取仓库
      */
-    /**
-     * get方法。
-     *      * @param owner String类型参数
-     * @param repo String类型参数
-     * @return GHRepository类型返回值
-     */
-    /**
-     * get方法。
-     *      * @param owner String类型参数
-     * @param repo String类型参数
-     * @return GHRepository类型返回值
-     */
     public GHRepository get(String owner, String repo) throws IOException {
         return github.getRepository(owner + "/" + repo);
     }
 
-    /**
-     * get方法。
-     * @return GHRepository类型返回值
-     */
     /**
      * get方法。
      * @return GHRepository类型返回值
@@ -176,23 +108,10 @@ public class RepositoryApiWrapper {
     /**
      * 删除仓库（慎用）
      */
-    /**
-     * delete方法。
-     *      * @param owner String类型参数
-     * @param repo String类型参数
-     */
-    /**
-     * delete方法。
-     *      * @param owner String类型参数
-     * @param repo String类型参数
-     */
     public void delete(String owner, String repo) throws IOException {
         github.getRepository(owner + "/" + repo).delete();
     }
 
-    /**
-     * delete方法。
-     */
     /**
      * delete方法。
      */
@@ -205,22 +124,10 @@ public class RepositoryApiWrapper {
     /**
      * 获取仓库基本信息
      */
-    /**
-     * info方法。
-     * @return RepositoryInfo类型返回值
-     */
-    /**
-     * info方法。
-     * @return RepositoryInfo类型返回值
-     */
     public RepositoryInfo info() throws IOException {
         return RepositoryInfo.from(getRepo());
     }
 
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -233,18 +140,10 @@ public class RepositoryApiWrapper {
      * getDefaultBranch方法。
      * @return String类型返回值
      */
-    /**
-     * getDefaultBranch方法。
-     * @return String类型返回值
-     */
     public String getDefaultBranch() throws IOException {
         return getRepo().getDefaultBranch();
     }
 
-    /**
-     * getLanguage方法。
-     * @return String类型返回值
-     */
     /**
      * getLanguage方法。
      * @return String类型返回值
@@ -257,18 +156,10 @@ public class RepositoryApiWrapper {
      * getStargazersCount方法。
      * @return int类型返回值
      */
-    /**
-     * getStargazersCount方法。
-     * @return int类型返回值
-     */
     public int getStargazersCount() throws IOException {
         return getRepo().getStargazersCount();
     }
 
-    /**
-     * getForksCount方法。
-     * @return int类型返回值
-     */
     /**
      * getForksCount方法。
      * @return int类型返回值
@@ -282,14 +173,6 @@ public class RepositoryApiWrapper {
     /**
      * 获取分支列表
      */
-    /**
-     * listBranches方法。
-     * @return List<String>类型返回值
-     */
-    /**
-     * listBranches方法。
-     * @return List<String>类型返回值
-     */
     public List<String> listBranches() throws IOException {
         Map<String, GHBranch> branches = getRepo().getBranches();
         return new ArrayList<>(branches.keySet());
@@ -297,16 +180,6 @@ public class RepositoryApiWrapper {
 
     /**
      * 获取分支详情
-     */
-    /**
-     * getBranch方法。
-     *      * @param branch String类型参数
-     * @return GHBranch类型返回值
-     */
-    /**
-     * getBranch方法。
-     *      * @param branch String类型参数
-     * @return GHBranch类型返回值
      */
     public GHBranch getBranch(String branch) throws IOException {
         return getRepo().getBranch(branch);
@@ -317,34 +190,12 @@ public class RepositoryApiWrapper {
     /**
      * 搜索仓库
      */
-    /**
-     * search方法。
-     *      * @param keyword String类型参数
-     * @return List<GHRepository>类型返回值
-     */
-    /**
-     * search方法。
-     *      * @param keyword String类型参数
-     * @return List<GHRepository>类型返回值
-     */
     public List<GHRepository> search(String keyword) throws IOException {
         return search(keyword, null);
     }
 
     /**
      * 搜索仓库（带语言过滤）
-     */
-    /**
-     * search方法。
-     *      * @param keyword String类型参数
-     * @param language String类型参数
-     * @return List<GHRepository>类型返回值
-     */
-    /**
-     * search方法。
-     *      * @param keyword String类型参数
-     * @param language String类型参数
-     * @return List<GHRepository>类型返回值
      */
     public List<GHRepository> search(String keyword, String language) throws IOException {
         GHRepositorySearchBuilder builder = github.searchRepositories().q(keyword);
@@ -363,16 +214,6 @@ public class RepositoryApiWrapper {
     /**
      * 列出指定用户的仓库
      */
-    /**
-     * listUserRepos方法。
-     *      * @param username String类型参数
-     * @return List<GHRepository>类型返回值
-     */
-    /**
-     * listUserRepos方法。
-     *      * @param username String类型参数
-     * @return List<GHRepository>类型返回值
-     */
     public List<GHRepository> listUserRepos(String username) throws IOException {
         List<GHRepository> list = new ArrayList<>();
         for (GHRepository r : github.getUser(username).listRepositories(100)) {
@@ -383,14 +224,6 @@ public class RepositoryApiWrapper {
 
     /**
      * 列出当前认证用户的仓库
-     */
-    /**
-     * listMyRepos方法。
-     * @return List<GHRepository>类型返回值
-     */
-    /**
-     * listMyRepos方法。
-     * @return List<GHRepository>类型返回值
      */
     public List<GHRepository> listMyRepos() throws IOException {
         List<GHRepository> list = new ArrayList<>();
@@ -405,28 +238,12 @@ public class RepositoryApiWrapper {
     /**
      * Fork 仓库
      */
-    /**
-     * fork方法。
-     * @return GHRepository类型返回值
-     */
-    /**
-     * fork方法。
-     * @return GHRepository类型返回值
-     */
     public GHRepository fork() throws IOException {
         return getRepo().fork();
     }
 
     /**
      * 列出仓库的 Fork
-     */
-    /**
-     * listForks方法。
-     * @return List<GHRepository>类型返回值
-     */
-    /**
-     * listForks方法。
-     * @return List<GHRepository>类型返回值
      */
     public List<GHRepository> listForks() throws IOException {
         List<GHRepository> list = new ArrayList<>();
@@ -440,14 +257,6 @@ public class RepositoryApiWrapper {
 
     /**
      * 列出 Stargazers
-     */
-    /**
-     * listStargazers方法。
-     * @return List<org.kohsuke.github.GHUser>类型返回值
-     */
-    /**
-     * listStargazers方法。
-     * @return List<org.kohsuke.github.GHUser>类型返回值
      */
     public List<org.kohsuke.github.GHUser> listStargazers() throws IOException {
         List<org.kohsuke.github.GHUser> list = new ArrayList<>();
@@ -478,15 +287,7 @@ public class RepositoryApiWrapper {
      * getFullName方法。
      * @return String类型返回值
      */
-    /**
-     * getFullName方法。
-     * @return String类型返回值
-     */
         public String getFullName() { return fullName; }
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -496,15 +297,7 @@ public class RepositoryApiWrapper {
      * getDefaultBranch方法。
      * @return String类型返回值
      */
-    /**
-     * getDefaultBranch方法。
-     * @return String类型返回值
-     */
         public String getDefaultBranch() { return defaultBranch; }
-    /**
-     * getLanguage方法。
-     * @return String类型返回值
-     */
     /**
      * getLanguage方法。
      * @return String类型返回值
@@ -514,15 +307,7 @@ public class RepositoryApiWrapper {
      * getStargazersCount方法。
      * @return int类型返回值
      */
-    /**
-     * getStargazersCount方法。
-     * @return int类型返回值
-     */
         public int getStargazersCount() { return stargazersCount; }
-    /**
-     * getForksCount方法。
-     * @return int类型返回值
-     */
     /**
      * getForksCount方法。
      * @return int类型返回值
@@ -532,15 +317,7 @@ public class RepositoryApiWrapper {
      * isPrivate方法。
      * @return boolean类型返回值
      */
-    /**
-     * isPrivate方法。
-     * @return boolean类型返回值
-     */
         public boolean isPrivate() { return isPrivate; }
-    /**
-     * getHtmlUrl方法。
-     * @return String类型返回值
-     */
     /**
      * getHtmlUrl方法。
      * @return String类型返回值
@@ -553,16 +330,6 @@ public class RepositoryApiWrapper {
          * @param r 仓库对象
          * @return RepositoryInfo 实例
          */
-    /**
-     * from方法。
-     *      * @param r GHRepository类型参数
-     * @return static RepositoryInfo类型返回值
-     */
-    /**
-     * from方法。
-     *      * @param r GHRepository类型参数
-     * @return static RepositoryInfo类型返回值
-     */
         public static RepositoryInfo from(GHRepository r) {
             RepositoryInfo info = new RepositoryInfo();
             info.fullName = r.getFullName();

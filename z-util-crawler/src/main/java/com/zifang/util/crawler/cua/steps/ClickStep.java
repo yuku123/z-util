@@ -13,12 +13,6 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ClickStep类。
- */
-/**
- * ClickStep类。
- */
 public class ClickStep implements Step {
 
     public static final String NAME = "click";
@@ -26,10 +20,6 @@ public class ClickStep implements Step {
     private long waitMs = 0;
 
     @Override
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     /**
      * getName方法。
      * @return String类型返回值
@@ -44,11 +34,6 @@ public class ClickStep implements Step {
      *      * @param key String类型参数
      * @param value Object类型参数
      */
-    /**
-     * setParameter方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     */
     public void setParameter(String key, Object value) {
         if ("css".equalsIgnoreCase(key)) {
             this.css = String.valueOf(value);
@@ -58,11 +43,6 @@ public class ClickStep implements Step {
     }
 
     @Override
-    /**
-     * execute方法。
-     *      * @param ctx PipelineContext类型参数
-     * @return StepResult类型返回值
-     */
     /**
      * execute方法。
      *      * @param ctx PipelineContext类型参数
@@ -104,11 +84,6 @@ public class ClickStep implements Step {
         }
     }
 
-    /**
-     * getBrowserClient方法。
-     *      * @param ctx PipelineContext类型参数
-     * @return BrowserClient类型返回值
-     */
     /**
      * getBrowserClient方法。
      *      * @param ctx PipelineContext类型参数

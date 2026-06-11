@@ -12,11 +12,6 @@ public abstract class DataHandler {
      *      * @param cutStr String类型参数
      * @return abstract Object类型返回值
      */
-    /**
-     * handle方法。
-     *      * @param cutStr String类型参数
-     * @return abstract Object类型返回值
-     */
     public abstract Object handle(String cutStr);
 
 }

@@ -7,12 +7,6 @@ import java.util.List;
  *
  * @author zifang
  */
-/**
- * INode接口。
- */
-/**
- * INode接口。
- */
 public interface INode {
 
     /**

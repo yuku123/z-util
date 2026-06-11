@@ -3,18 +3,8 @@ package com.zifang.util.cache;
 /**
  * Exception thrown by cache operations.
  */
-/**
- * CacheException类。
- */
-/**
- * CacheException类。
- */
 public class CacheException extends RuntimeException {
 
-    /**
-     * CacheException方法。
-     *      * @param message String类型参数
-     */
     /**
      * CacheException方法。
      *      * @param message String类型参数
@@ -23,11 +13,6 @@ public class CacheException extends RuntimeException {
         super(message);
     }
 
-    /**
-     * CacheException方法。
-     *      * @param message String类型参数
-     * @param cause Throwable类型参数
-     */
     /**
      * CacheException方法。
      *      * @param message String类型参数

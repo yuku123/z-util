@@ -9,12 +9,6 @@ package com.zifang.util.core.meta;
  * @param <T> 数据类型
  * @see BaseResponse
  */
-/**
- * GenericResponse类。
- */
-/**
- * GenericResponse类。
- */
 public class GenericResponse<T> extends BaseResponse {
 
     private T data;
@@ -22,18 +16,9 @@ public class GenericResponse<T> extends BaseResponse {
     /**
      * GenericResponse方法。
      */
-    /**
-     * GenericResponse方法。
-     */
     public GenericResponse() {
     }
 
-    /**
-     * GenericResponse方法。
-     *      * @param message String类型参数
-     * @param code ResultCode类型参数
-     * @param data T类型参数
-     */
     /**
      * GenericResponse方法。
      *      * @param message String类型参数
@@ -49,18 +34,10 @@ public class GenericResponse<T> extends BaseResponse {
      * getData方法。
      * @return T类型返回值
      */
-    /**
-     * getData方法。
-     * @return T类型返回值
-     */
     public T getData() {
         return data;
     }
 
-    /**
-     * setData方法。
-     *      * @param data T类型参数
-     */
     /**
      * setData方法。
      *      * @param data T类型参数
@@ -74,20 +51,11 @@ public class GenericResponse<T> extends BaseResponse {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "GenericResponse{" + super.toString() + ", data=" + data + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -106,10 +74,6 @@ public class GenericResponse<T> extends BaseResponse {
      * hashCode方法。
      * @return int类型返回值
      */
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     public int hashCode() {
         return java.util.Objects.hash(super.hashCode(), data);
     }
@@ -119,11 +83,6 @@ public class GenericResponse<T> extends BaseResponse {
         private ResultCode code = ResultCode.SUCCESS;
         private T data;
 
-    /**
-     * message方法。
-     *      * @param message String类型参数
-     * @return Builder<T>类型返回值
-     */
     /**
      * message方法。
      *      * @param message String类型参数
@@ -139,21 +98,11 @@ public class GenericResponse<T> extends BaseResponse {
      *      * @param code ResultCode类型参数
      * @return Builder<T>类型返回值
      */
-    /**
-     * code方法。
-     *      * @param code ResultCode类型参数
-     * @return Builder<T>类型返回值
-     */
         public Builder<T> code(ResultCode code) {
             this.code = code;
             return this;
         }
 
-    /**
-     * data方法。
-     *      * @param data T类型参数
-     * @return Builder<T>类型返回值
-     */
     /**
      * data方法。
      *      * @param data T类型参数
@@ -168,19 +117,11 @@ public class GenericResponse<T> extends BaseResponse {
      * build方法。
      * @return GenericResponse<T>类型返回值
      */
-    /**
-     * build方法。
-     * @return GenericResponse<T>类型返回值
-     */
         public GenericResponse<T> build() {
             return new GenericResponse<>(message, code, data);
         }
     }
 
-    /**
-     * builder方法。
-     * @return static <T> GenericResponse<T>类型返回值
-     */
     /**
      * builder方法。
      * @return static <T> GenericResponse<T>类型返回值

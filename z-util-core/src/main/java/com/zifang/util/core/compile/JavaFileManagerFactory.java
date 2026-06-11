@@ -12,21 +12,10 @@ import java.util.logging.Logger;
  * @author zifang
  * @see CustomerJavaFileManager
  */
-/**
- * JavaFileManagerFactory类。
- */
-/**
- * JavaFileManagerFactory类。
- */
 public class JavaFileManagerFactory {
 
     private static final Logger log = Logger.getLogger(JavaFileManagerFactory.class.getName());
 
-    /**
-     * getJavaFileManager方法。
-     *      * @param standardManager StandardJavaFileManager类型参数
-     * @return static CustomerJavaFileManager类型返回值
-     */
     /**
      * getJavaFileManager方法。
      *      * @param standardManager StandardJavaFileManager类型参数

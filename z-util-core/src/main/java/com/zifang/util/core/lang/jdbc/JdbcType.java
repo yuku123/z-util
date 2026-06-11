@@ -7,11 +7,5 @@ package com.zifang.util.core.lang.jdbc;
  *
  * @author zifang
  */
-/**
- * JdbcType类。
- */
-/**
- * JdbcType类。
- */
 public class JdbcType {
 }

@@ -19,12 +19,6 @@ import java.util.List;
  * Input shape: [seqLen, batch, dModel]
  * Output shape: [seqLen, batch, dModel]
  */
-/**
- * TransformerEncoder类。
- */
-/**
- * TransformerEncoder类。
- */
 public class TransformerEncoder extends Module {
     
     private int dModel;
@@ -58,14 +52,6 @@ public class TransformerEncoder extends Module {
     private List<NdArray> savedAttentionOutputs;
     private List<NdArray> savedFFNInputs;
     
-    /**
-     * TransformerEncoder方法。
-     *      * @param dModel int类型参数
-     * @param nhead int类型参数
-     * @param dimFeedforward int类型参数
-     * @param numLayers int类型参数
-     * @param dropout double类型参数
-     */
     /**
      * TransformerEncoder方法。
      *      * @param dModel int类型参数
@@ -155,11 +141,6 @@ public class TransformerEncoder extends Module {
      *      * @param src NdArray类型参数
      * @return NdArray类型返回值
      */
-    /**
-     * forward方法。
-     *      * @param src NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray forward(NdArray src) {
         // Input shape: [seqLen, batch, dModel]
         int seqLen = src.getShape().get(0);
@@ -220,11 +201,6 @@ public class TransformerEncoder extends Module {
     }
     
     @Override
-    /**
-     * backward方法。
-     *      * @param gradOutput NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * backward方法。
      *      * @param gradOutput NdArray类型参数

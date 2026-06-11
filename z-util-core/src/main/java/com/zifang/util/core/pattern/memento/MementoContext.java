@@ -23,12 +23,6 @@ import java.util.function.Consumer;
  * @param <T> 状态类型
  * @author zifang
  */
-/**
- * MementoContext类。
- */
-/**
- * MementoContext类。
- */
 public class MementoContext<T> {
 
     private final List<Snapshot<T>> snapshots = new ArrayList<>();
@@ -40,17 +34,10 @@ public class MementoContext<T> {
     /**
      * MementoContext方法。
      */
-    /**
-     * MementoContext方法。
-     */
     public MementoContext() {
         this(100);
     }
 
-    /**
-     * MementoContext方法。
-     *      * @param maxSize int类型参数
-     */
     /**
      * MementoContext方法。
      *      * @param maxSize int类型参数
@@ -62,14 +49,6 @@ public class MementoContext<T> {
     /**
      * 保存当前状态（简单模式）
      */
-    /**
-     * save方法。
-     *      * @param state T类型参数
-     */
-    /**
-     * save方法。
-     *      * @param state T类型参数
-     */
     public void save(T state) {
         save(state, null, null);
     }
@@ -77,36 +56,12 @@ public class MementoContext<T> {
     /**
      * 保存当前状态（带标签）
      */
-    /**
-     * save方法。
-     *      * @param state T类型参数
-     * @param label String类型参数
-     */
-    /**
-     * save方法。
-     *      * @param state T类型参数
-     * @param label String类型参数
-     */
     public void save(T state, String label) {
         save(state, label, null);
     }
 
     /**
      * 保存当前状态（完整模式）
-     */
-    /**
-     * save方法。
-     *      * @param state T类型参数
-     * @param label String类型参数
-     * @param description String类型参数
-     * @return synchronized void类型返回值
-     */
-    /**
-     * save方法。
-     *      * @param state T类型参数
-     * @param label String类型参数
-     * @param description String类型参数
-     * @return synchronized void类型返回值
      */
     public synchronized void save(T state, String label, String description) {
         Objects.requireNonNull(state, "State cannot be null");
@@ -132,14 +87,6 @@ public class MementoContext<T> {
     /**
      * 前进到下一个状态（重做）
      */
-    /**
-     * next方法。
-     * @return synchronized T类型返回值
-     */
-    /**
-     * next方法。
-     * @return synchronized T类型返回值
-     */
     public synchronized T next() {
         if (!hasNext()) {
             throw new IndexOutOfBoundsException("Already at the last state, cannot move forward");
@@ -152,14 +99,6 @@ public class MementoContext<T> {
 
     /**
      * 后退到上一个状态（撤销）
-     */
-    /**
-     * previous方法。
-     * @return synchronized T类型返回值
-     */
-    /**
-     * previous方法。
-     * @return synchronized T类型返回值
      */
     public synchronized T previous() {
         if (!hasPrevious()) {
@@ -174,16 +113,6 @@ public class MementoContext<T> {
     /**
      * 移动到指定索引位置
      */
-    /**
-     * moveTo方法。
-     *      * @param index int类型参数
-     * @return synchronized T类型返回值
-     */
-    /**
-     * moveTo方法。
-     *      * @param index int类型参数
-     * @return synchronized T类型返回值
-     */
     public synchronized T moveTo(int index) {
         if (index < 0 || index >= snapshots.size()) {
             throw new IndexOutOfBoundsException("Index out of bounds: " + index);
@@ -197,16 +126,6 @@ public class MementoContext<T> {
     /**
      * 移动到指定标签的快照
      */
-    /**
-     * moveToLabel方法。
-     *      * @param label String类型参数
-     * @return synchronized Optional<T>类型返回值
-     */
-    /**
-     * moveToLabel方法。
-     *      * @param label String类型参数
-     * @return synchronized Optional<T>类型返回值
-     */
     public synchronized Optional<T> moveToLabel(String label) {
         for (int i = 0; i < snapshots.size(); i++) {
             if (Objects.equals(label, snapshots.get(i).getLabel())) {
@@ -219,14 +138,6 @@ public class MementoContext<T> {
     /**
      * 获取当前状态
      */
-    /**
-     * current方法。
-     * @return synchronized T类型返回值
-     */
-    /**
-     * current方法。
-     * @return synchronized T类型返回值
-     */
     public synchronized T current() {
         if (pointer < 0 || pointer >= snapshots.size()) {
             return null;
@@ -236,14 +147,6 @@ public class MementoContext<T> {
 
     /**
      * 获取当前快照
-     */
-    /**
-     * currentSnapshot方法。
-     * @return synchronized Snapshot<T>类型返回值
-     */
-    /**
-     * currentSnapshot方法。
-     * @return synchronized Snapshot<T>类型返回值
      */
     public synchronized Snapshot<T> currentSnapshot() {
         if (pointer < 0 || pointer >= snapshots.size()) {
@@ -255,28 +158,12 @@ public class MementoContext<T> {
     /**
      * 是否可以前进
      */
-    /**
-     * hasNext方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * hasNext方法。
-     * @return boolean类型返回值
-     */
     public boolean hasNext() {
         return pointer < snapshots.size() - 1;
     }
 
     /**
      * 是否可以后退
-     */
-    /**
-     * hasPrevious方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * hasPrevious方法。
-     * @return boolean类型返回值
      */
     public boolean hasPrevious() {
         return pointer > 0;
@@ -285,28 +172,12 @@ public class MementoContext<T> {
     /**
      * 获取快照总数
      */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
     public int size() {
         return snapshots.size();
     }
 
     /**
      * 获取当前指针位置
-     */
-    /**
-     * getPointer方法。
-     * @return int类型返回值
-     */
-    /**
-     * getPointer方法。
-     * @return int类型返回值
      */
     public int getPointer() {
         return pointer;
@@ -315,14 +186,6 @@ public class MementoContext<T> {
     /**
      * 获取最大容量
      */
-    /**
-     * getMaxSize方法。
-     * @return int类型返回值
-     */
-    /**
-     * getMaxSize方法。
-     * @return int类型返回值
-     */
     public int getMaxSize() {
         return maxSize;
     }
@@ -330,28 +193,12 @@ public class MementoContext<T> {
     /**
      * 获取已用容量
      */
-    /**
-     * getUsedSize方法。
-     * @return int类型返回值
-     */
-    /**
-     * getUsedSize方法。
-     * @return int类型返回值
-     */
     public int getUsedSize() {
         return snapshots.size();
     }
 
     /**
      * 清空所有快照
-     */
-    /**
-     * clear方法。
-     * @return synchronized void类型返回值
-     */
-    /**
-     * clear方法。
-     * @return synchronized void类型返回值
      */
     public synchronized void clear() {
         snapshots.clear();
@@ -362,28 +209,12 @@ public class MementoContext<T> {
     /**
      * 获取所有快照
      */
-    /**
-     * getAllSnapshots方法。
-     * @return synchronized List<Snapshot<T>>类型返回值
-     */
-    /**
-     * getAllSnapshots方法。
-     * @return synchronized List<Snapshot<T>>类型返回值
-     */
     public synchronized List<Snapshot<T>> getAllSnapshots() {
         return new ArrayList<>(snapshots);
     }
 
     /**
      * 获取快照列表（不包含状态）
-     */
-    /**
-     * getSnapshotMetas方法。
-     * @return synchronized List<SnapshotMeta>类型返回值
-     */
-    /**
-     * getSnapshotMetas方法。
-     * @return synchronized List<SnapshotMeta>类型返回值
      */
     public synchronized List<SnapshotMeta> getSnapshotMetas() {
         List<SnapshotMeta> metas = new ArrayList<>();
@@ -397,14 +228,6 @@ public class MementoContext<T> {
     /**
      * 跳转到第一个状态
      */
-    /**
-     * first方法。
-     * @return synchronized T类型返回值
-     */
-    /**
-     * first方法。
-     * @return synchronized T类型返回值
-     */
     public synchronized T first() {
         if (snapshots.isEmpty()) {
             return null;
@@ -414,14 +237,6 @@ public class MementoContext<T> {
 
     /**
      * 跳转到最后一个状态
-     */
-    /**
-     * last方法。
-     * @return synchronized T类型返回值
-     */
-    /**
-     * last方法。
-     * @return synchronized T类型返回值
      */
     public synchronized T last() {
         if (snapshots.isEmpty()) {
@@ -433,16 +248,6 @@ public class MementoContext<T> {
     /**
      * 前进N步
      */
-    /**
-     * stepForward方法。
-     *      * @param steps int类型参数
-     * @return synchronized T类型返回值
-     */
-    /**
-     * stepForward方法。
-     *      * @param steps int类型参数
-     * @return synchronized T类型返回值
-     */
     public synchronized T stepForward(int steps) {
         int target = Math.min(pointer + steps, snapshots.size() - 1);
         return moveTo(target);
@@ -451,16 +256,6 @@ public class MementoContext<T> {
     /**
      * 后退N步
      */
-    /**
-     * stepBackward方法。
-     *      * @param steps int类型参数
-     * @return synchronized T类型返回值
-     */
-    /**
-     * stepBackward方法。
-     *      * @param steps int类型参数
-     * @return synchronized T类型返回值
-     */
     public synchronized T stepBackward(int steps) {
         int target = Math.max(pointer - steps, 0);
         return moveTo(target);
@@ -468,16 +263,6 @@ public class MementoContext<T> {
 
     /**
      * 创建检查点
-     */
-    /**
-     * createCheckpoint方法。
-     *      * @param name String类型参数
-     * @return synchronized String类型返回值
-     */
-    /**
-     * createCheckpoint方法。
-     *      * @param name String类型参数
-     * @return synchronized String类型返回值
      */
     public synchronized String createCheckpoint(String name) {
         T state = current();
@@ -491,30 +276,12 @@ public class MementoContext<T> {
     /**
      * 获取检查点
      */
-    /**
-     * getCheckpoint方法。
-     *      * @param name String类型参数
-     * @return synchronized Optional<T>类型返回值
-     */
-    /**
-     * getCheckpoint方法。
-     *      * @param name String类型参数
-     * @return synchronized Optional<T>类型返回值
-     */
     public synchronized Optional<T> getCheckpoint(String name) {
         return moveToLabel("[Checkpoint] " + name);
     }
 
     /**
      * 添加监听器
-     */
-    /**
-     * addListener方法。
-     *      * @param listener MementoListenerT类型参数
-     */
-    /**
-     * addListener方法。
-     *      * @param listener MementoListenerT类型参数
      */
     public void addListener(MementoListener<T> listener) {
         if (listener != null) {
@@ -524,14 +291,6 @@ public class MementoContext<T> {
 
     /**
      * 移除监听器
-     */
-    /**
-     * removeListener方法。
-     *      * @param listener MementoListenerT类型参数
-     */
-    /**
-     * removeListener方法。
-     *      * @param listener MementoListenerT类型参数
      */
     public void removeListener(MementoListener<T> listener) {
         listeners.remove(listener);
@@ -550,30 +309,12 @@ public class MementoContext<T> {
     /**
      * 获取当前分支
      */
-    /**
-     * getCurrentBranch方法。
-     * @return String类型返回值
-     */
-    /**
-     * getCurrentBranch方法。
-     * @return String类型返回值
-     */
     public String getCurrentBranch() {
         return currentBranch;
     }
 
     /**
      * 切换分支
-     */
-    /**
-     * switchBranch方法。
-     *      * @param branch String类型参数
-     * @return synchronized void类型返回值
-     */
-    /**
-     * switchBranch方法。
-     *      * @param branch String类型参数
-     * @return synchronized void类型返回值
      */
     public synchronized void switchBranch(String branch) {
         this.currentBranch = branch;
@@ -582,12 +323,6 @@ public class MementoContext<T> {
     /**
      * 事件类型
      */
-/**
- * EventType枚举。
- */
-/**
- * EventType枚举。
- */
     public enum EventType {
         SAVE, UNDO, REDO, MOVE_TO, CLEAR
     }
@@ -612,15 +347,6 @@ public class MementoContext<T> {
      * @param timestamp long类型参数
      * @param isCurrent boolean类型参数
      */
-    /**
-     * SnapshotMeta方法。
-     *      * @param index int类型参数
-     * @param label String类型参数
-     * @param description String类型参数
-     * @param branch String类型参数
-     * @param timestamp long类型参数
-     * @param isCurrent boolean类型参数
-     */
         public SnapshotMeta(int index, String label, String description, String branch, long timestamp, boolean isCurrent) {
             this.index = index;
             this.label = label;
@@ -634,15 +360,7 @@ public class MementoContext<T> {
      * getIndex方法。
      * @return int类型返回值
      */
-    /**
-     * getIndex方法。
-     * @return int类型返回值
-     */
         public int getIndex() { return index; }
-    /**
-     * getLabel方法。
-     * @return String类型返回值
-     */
     /**
      * getLabel方法。
      * @return String类型返回值
@@ -652,15 +370,7 @@ public class MementoContext<T> {
      * getDescription方法。
      * @return String类型返回值
      */
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
         public String getDescription() { return description; }
-    /**
-     * getBranch方法。
-     * @return String类型返回值
-     */
     /**
      * getBranch方法。
      * @return String类型返回值
@@ -670,15 +380,7 @@ public class MementoContext<T> {
      * getTimestamp方法。
      * @return long类型返回值
      */
-    /**
-     * getTimestamp方法。
-     * @return long类型返回值
-     */
         public long getTimestamp() { return timestamp; }
-    /**
-     * isCurrent方法。
-     * @return boolean类型返回值
-     */
     /**
      * isCurrent方法。
      * @return boolean类型返回值
@@ -708,15 +410,7 @@ public class MementoContext<T> {
      * getState方法。
      * @return T类型返回值
      */
-    /**
-     * getState方法。
-     * @return T类型返回值
-     */
         public T getState() { return state; }
-    /**
-     * getLabel方法。
-     * @return String类型返回值
-     */
     /**
      * getLabel方法。
      * @return String类型返回值
@@ -726,24 +420,12 @@ public class MementoContext<T> {
      * getDescription方法。
      * @return String类型返回值
      */
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
         public String getDescription() { return description; }
     /**
      * getBranch方法。
      * @return String类型返回值
      */
-    /**
-     * getBranch方法。
-     * @return String类型返回值
-     */
         public String getBranch() { return branch; }
-    /**
-     * getTimestamp方法。
-     * @return long类型返回值
-     */
     /**
      * getTimestamp方法。
      * @return long类型返回值
@@ -755,9 +437,6 @@ public class MementoContext<T> {
      * 备忘录监听器
      */
     @FunctionalInterface
-/**
- * MementoListener接口。
- */
 /**
  * MementoListener接口。
  */

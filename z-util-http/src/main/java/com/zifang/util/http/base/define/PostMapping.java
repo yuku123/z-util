@@ -19,9 +19,6 @@ import java.lang.annotation.*;
 /**
  * PostMapping注解。
  */
-/**
- * PostMapping注解。
- */
 public @interface PostMapping {
 
     /**

@@ -12,12 +12,6 @@ import com.zifang.util.proxy.a.model.ClassFile;
  * 1. ByteCodeResolver 解析字节码 → ClassFile
  * 2. SrcCreator 生成 Java 源码
  */
-/**
- * App类。
- */
-/**
- * App类。
- */
 public class App {
 
     /**
@@ -25,18 +19,6 @@ public class App {
      *
      * @param classPath class 文件路径
      * @param outputDir 输出目录（可选，为 null 则只输出到控制台）
-     */
-    /**
-     * decompile方法。
-     *      * @param classPath String类型参数
-     * @param outputDir String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * decompile方法。
-     *      * @param classPath String类型参数
-     * @param outputDir String类型参数
-     * @return static void类型返回值
      */
     public static void decompile(String classPath, String outputDir) {
         try {
@@ -65,16 +47,6 @@ public class App {
      *
      * @param classPath class 文件路径
      */
-    /**
-     * decompile方法。
-     *      * @param classPath String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * decompile方法。
-     *      * @param classPath String类型参数
-     * @return static void类型返回值
-     */
     public static void decompile(String classPath) {
         decompile(classPath, null);
     }
@@ -84,16 +56,6 @@ public class App {
      *
      * @param classData class 文件字节数组
      * @return 生成的 Java 源码
-     */
-    /**
-     * decompile方法。
-     *      * @param classData byte[]类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * decompile方法。
-     *      * @param classData byte[]类型参数
-     * @return static String类型返回值
      */
     public static String decompile(byte[] classData) {
         try {
@@ -115,16 +77,6 @@ public class App {
      * @param inputStream class 文件输入流
      * @return 生成的 Java 源码
      */
-    /**
-     * decompile方法。
-     *      * @param inputStream java.io.InputStream类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * decompile方法。
-     *      * @param inputStream java.io.InputStream类型参数
-     * @return static String类型返回值
-     */
     public static String decompile(java.io.InputStream inputStream) {
         try {
             // 1. 使用 ByteCodeResolver 解析字节码
@@ -143,18 +95,6 @@ public class App {
      *
      * @param className 完整类名（如 com.example.MyClass）
      * @param classLoader 类加载器
-     */
-    /**
-     * decompileByName方法。
-     *      * @param className String类型参数
-     * @param classLoader ClassLoader类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * decompileByName方法。
-     *      * @param className String类型参数
-     * @param classLoader ClassLoader类型参数
-     * @return static void类型返回值
      */
     public static void decompileByName(String className, ClassLoader classLoader) {
         try {
@@ -178,16 +118,6 @@ public class App {
      *
      * @param className 完整类名（如 com.example.MyClass）
      */
-    /**
-     * decompileByName方法。
-     *      * @param className String类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * decompileByName方法。
-     *      * @param className String类型参数
-     * @return static void类型返回值
-     */
     public static void decompileByName(String className) {
         decompileByName(className, App.class.getClassLoader());
     }
@@ -196,16 +126,6 @@ public class App {
      * 从 Class 对象反编译
      *
      * @param clazz Class 对象
-     */
-    /**
-     * decompile方法。
-     *      * @param clazz Class?类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * decompile方法。
-     *      * @param clazz Class?类型参数
-     * @return static void类型返回值
      */
     public static void decompile(Class<?> clazz) {
         decompileByName(clazz.getName(), clazz.getClassLoader());
@@ -224,16 +144,6 @@ public class App {
 
     /**
      * 主方法 - 命令行入口
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
         if (args.length == 0) {

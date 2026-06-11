@@ -22,12 +22,6 @@ import java.util.Map;
  * @see IConverter
  * @see ConvertCaller
  */
-/**
- * Converters类。
- */
-/**
- * Converters类。
- */
 public class Converters {
 
     private static final Map<Pair<Class<?>,Class<?>>,IConverter<?,?>> converterCache = new HashMap<>();
@@ -49,12 +43,6 @@ public class Converters {
         }
     }
 
-    /**
-     * findConverter方法。
-     *      * @param from ClassF类型参数
-     * @param target ClassT类型参数
-     * @return static <F,T> IConverter<F,T>类型返回值
-     */
     /**
      * findConverter方法。
      *      * @param from ClassF类型参数
@@ -116,11 +104,6 @@ public class Converters {
      *      * @param clazz Class?类型参数
      * @return static <F,T> void类型返回值
      */
-    /**
-     * registerConverter方法。
-     *      * @param clazz Class?类型参数
-     * @return static <F,T> void类型返回值
-     */
     public static <F,T> void registerConverter(Class<? extends IConverter<F,T>> clazz) {
         try {
             Object instance = clazz.newInstance();
@@ -131,13 +114,6 @@ public class Converters {
     }
 
 
-    /**
-     * registerConverter方法。
-     *      * @param converter IConverterF,类型参数
-     * @param from Class?类型参数
-     * @param target Class?类型参数
-     * @return static <F,T> void类型返回值
-     */
     /**
      * registerConverter方法。
      *      * @param converter IConverterF,类型参数
@@ -163,11 +139,6 @@ public class Converters {
         }
     }
 
-    /**
-     * registerConverter方法。
-     *      * @param converter IConverterF,类型参数
-     * @return static <F,T> void类型返回值
-     */
     /**
      * registerConverter方法。
      *      * @param converter IConverterF,类型参数
@@ -208,12 +179,6 @@ public class Converters {
 
 
 
-    /**
-     * to方法。
-     *      * @param value Object类型参数
-     * @param clazz ClassT类型参数
-     * @return static <F,T> T类型返回值
-     */
     /**
      * to方法。
      *      * @param value Object类型参数

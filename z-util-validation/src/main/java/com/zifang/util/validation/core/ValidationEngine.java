@@ -11,12 +11,6 @@ import java.util.Map;
 /**
  * 校验引擎 - 核心校验器
  */
-/**
- * ValidationEngine类。
- */
-/**
- * ValidationEngine类。
- */
 public class ValidationEngine {
 
     private static final Map<Class<? extends Annotation>, Validator<? extends Annotation>> VALIDATORS = new HashMap<>();
@@ -32,34 +26,12 @@ public class ValidationEngine {
     /**
      * 注册自定义校验器
      */
-    /**
-     * registerValidator方法。
-     *      * @param annotationClass ClassT类型参数
-     * @param validator ValidatorT类型参数
-     * @return static <T extends Annotation> void类型返回值
-     */
-    /**
-     * registerValidator方法。
-     *      * @param annotationClass ClassT类型参数
-     * @param validator ValidatorT类型参数
-     * @return static <T extends Annotation> void类型返回值
-     */
     public static <T extends Annotation> void registerValidator(Class<T> annotationClass, Validator<T> validator) {
         VALIDATORS.put(annotationClass, validator);
     }
 
     /**
      * 校验对象
-     */
-    /**
-     * validate方法。
-     *      * @param target Object类型参数
-     * @return static ValidateResult类型返回值
-     */
-    /**
-     * validate方法。
-     *      * @param target Object类型参数
-     * @return static ValidateResult类型返回值
      */
     public static ValidateResult validate(Object target) {
         ValidateResult result = new ValidateResult();
@@ -85,16 +57,6 @@ public class ValidationEngine {
     /**
      * 快速校验 - 如果有错误则抛出异常
      */
-    /**
-     * validateAndThrow方法。
-     *      * @param target Object类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * validateAndThrow方法。
-     *      * @param target Object类型参数
-     * @return static void类型返回值
-     */
     public static void validateAndThrow(Object target) {
         ValidateResult result = validate(target);
         if (result.hasErrors()) {
@@ -104,18 +66,6 @@ public class ValidationEngine {
 
     /**
      * 校验对象指定字段
-     */
-    /**
-     * validateField方法。
-     *      * @param target Object类型参数
-     * @param fieldName String类型参数
-     * @return static ValidateResult类型返回值
-     */
-    /**
-     * validateField方法。
-     *      * @param target Object类型参数
-     * @param fieldName String类型参数
-     * @return static ValidateResult类型返回值
      */
     public static ValidateResult validateField(Object target, String fieldName) {
         ValidateResult result = new ValidateResult();

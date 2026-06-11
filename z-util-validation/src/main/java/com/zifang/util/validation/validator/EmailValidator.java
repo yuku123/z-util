@@ -10,12 +10,6 @@ import java.util.regex.Pattern;
 /**
  * 邮箱格式校验器
  */
-/**
- * EmailValidator类。
- */
-/**
- * EmailValidator类。
- */
 public class EmailValidator implements Validator<Email> {
 
     private static final Pattern EMAIL_PATTERN = Pattern.compile(
@@ -23,13 +17,6 @@ public class EmailValidator implements Validator<Email> {
     );
 
     @Override
-    /**
-     * validate方法。
-     *      * @param target Object类型参数
-     * @param field Field类型参数
-     * @param annotation Email类型参数
-     * @param result ValidateResult类型参数
-     */
     /**
      * validate方法。
      *      * @param target Object类型参数

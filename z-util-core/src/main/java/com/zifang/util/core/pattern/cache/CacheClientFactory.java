@@ -5,26 +5,12 @@ package com.zifang.util.core.pattern.cache;
  *
  * @author zifang
  */
-/**
- * CacheClientFactory类。
- */
-/**
- * CacheClientFactory类。
- */
 public class CacheClientFactory {
 
     /**
      * 获取默认的内存缓存客户端
      *
      * @return 默认的缓存客户端实例
-     */
-    /**
-     * getDefaultMemoryCacheClient方法。
-     * @return CacheClient类型返回值
-     */
-    /**
-     * getDefaultMemoryCacheClient方法。
-     * @return CacheClient类型返回值
      */
     public CacheClient getDefaultMemoryCacheClient() {
         return null;

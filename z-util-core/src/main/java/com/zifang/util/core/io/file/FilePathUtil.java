@@ -74,16 +74,6 @@ public final class FilePathUtil {
      * @return the file name, or empty string if path ends with separator
      * @throws IllegalArgumentException if filePath is null
      */
-    /**
-     * getName方法。
-     *      * @param filePath String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getName方法。
-     *      * @param filePath String类型参数
-     * @return static String类型返回值
-     */
     public static String getName(String filePath) {
         if (filePath == null) {
             throw new IllegalArgumentException("File path must not be null");
@@ -114,16 +104,6 @@ public final class FilePathUtil {
      * @param filePath the file path to extract the base name from
      * @return the base name without extension, or empty string if path ends with separator
      * @throws IllegalArgumentException if filePath is null
-     */
-    /**
-     * getBaseName方法。
-     *      * @param filePath String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getBaseName方法。
-     *      * @param filePath String类型参数
-     * @return static String类型返回值
      */
     public static String getBaseName(String filePath) {
         String name = getName(filePath);
@@ -158,16 +138,6 @@ public final class FilePathUtil {
      * @return the file extension without the leading dot, or empty string if no extension
      * @throws IllegalArgumentException if path is null
      */
-    /**
-     * getExtension方法。
-     *      * @param path String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getExtension方法。
-     *      * @param path String类型参数
-     * @return static String类型返回值
-     */
     public static String getExtension(String path) {
         if (path == null) {
             throw new IllegalArgumentException("Path must not be null");
@@ -201,16 +171,6 @@ public final class FilePathUtil {
      * @param filePath the file path to extract the parent from
      * @return the parent directory path, or empty string if no parent
      * @throws IllegalArgumentException if filePath is null
-     */
-    /**
-     * getParent方法。
-     *      * @param filePath String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getParent方法。
-     *      * @param filePath String类型参数
-     * @return static String类型返回值
      */
     public static String getParent(String filePath) {
         if (filePath == null) {
@@ -249,16 +209,6 @@ public final class FilePathUtil {
      * @param path the path to normalize
      * @return the normalized path, or empty string if path is empty
      * @throws IllegalArgumentException if path is null
-     */
-    /**
-     * normalize方法。
-     *      * @param path String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * normalize方法。
-     *      * @param path String类型参数
-     * @return static String类型返回值
      */
     public static String normalize(String path) {
         if (path == null) {
@@ -305,16 +255,6 @@ public final class FilePathUtil {
      * @return the path with forward slashes, or empty string if path is empty
      * @throws IllegalArgumentException if path is null
      */
-    /**
-     * toUNIXPath方法。
-     *      * @param path String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * toUNIXPath方法。
-     *      * @param path String类型参数
-     * @return static String类型返回值
-     */
     public static String toUNIXPath(String path) {
         if (path == null) {
             return null;
@@ -344,16 +284,6 @@ public final class FilePathUtil {
      * @param filename the filename to extract the prefix from
      * @return the prefix portion of the filename
      * @throws IllegalArgumentException if filename is null
-     */
-    /**
-     * getPrefix方法。
-     *      * @param filename String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getPrefix方法。
-     *      * @param filename String类型参数
-     * @return static String类型返回值
      */
     public static String getPrefix(String filename) {
         if (filename == null) {
@@ -427,16 +357,6 @@ public final class FilePathUtil {
      * @return the suffix (extension) portion of the filename
      * @throws IllegalArgumentException if filename is null
      */
-    /**
-     * getSuffix方法。
-     *      * @param filename String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getSuffix方法。
-     *      * @param filename String类型参数
-     * @return static String类型返回值
-     */
     public static String getSuffix(String filename) {
         if (filename == null) {
             return null;
@@ -472,16 +392,6 @@ public final class FilePathUtil {
      * @param filename the filename to trim the extension from
      * @return the filename without its extension
      * @throws IllegalArgumentException if filename is null
-     */
-    /**
-     * trimExtension方法。
-     *      * @param filename String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * trimExtension方法。
-     *      * @param filename String类型参数
-     * @return static String类型返回值
      */
     public static String trimExtension(String filename) {
         if (filename == null) {
@@ -520,18 +430,6 @@ public final class FilePathUtil {
      * @return the relative path from base to file, or the full path if no common prefix
      * @throws IllegalArgumentException if fullPath or basePath is null
      */
-    /**
-     * getSubpath方法。
-     *      * @param fullPath String类型参数
-     * @param basePath String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * getSubpath方法。
-     *      * @param fullPath String类型参数
-     * @param basePath String类型参数
-     * @return static String类型返回值
-     */
     public static String getSubpath(String fullPath, String basePath) {
         if (fullPath == null) {
             return null;
@@ -565,16 +463,6 @@ public final class FilePathUtil {
      * @return {@code true} if the path exists, {@code false} otherwise
      * @throws IllegalArgumentException if path is null
      */
-    /**
-     * isExist方法。
-     *      * @param path String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isExist方法。
-     *      * @param path String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isExist(String path) {
         if (path == null) {
             return false;
@@ -598,16 +486,6 @@ public final class FilePathUtil {
      * @return {@code true} if the path is a directory and exists, {@code false} otherwise
      * @throws IllegalArgumentException if path is null
      */
-    /**
-     * isDirectory方法。
-     *      * @param path String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isDirectory方法。
-     *      * @param path String类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isDirectory(String path) {
         if (path == null) {
             return false;
@@ -630,16 +508,6 @@ public final class FilePathUtil {
      * @param path the path to check
      * @return {@code true} if the path is a regular file and exists, {@code false} otherwise
      * @throws IllegalArgumentException if path is null
-     */
-    /**
-     * isFile方法。
-     *      * @param path String类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isFile方法。
-     *      * @param path String类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isFile(String path) {
         if (path == null) {

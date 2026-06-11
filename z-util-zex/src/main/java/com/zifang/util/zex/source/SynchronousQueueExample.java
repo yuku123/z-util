@@ -15,9 +15,6 @@ import java.util.concurrent.SynchronousQueue;
  * @author zifang
  * @version 1.0
  */
-/**
- * SynchronousQueueExample类。
- */
 public class SynchronousQueueExample {
 
     /**

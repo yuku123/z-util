@@ -5,12 +5,6 @@ package com.zifang.util.core.pattern.cache;
  *
  * @author zifang
  */
-/**
- * EvictStrategy类。
- */
-/**
- * EvictStrategy类。
- */
 public class EvictStrategy {
 
 }

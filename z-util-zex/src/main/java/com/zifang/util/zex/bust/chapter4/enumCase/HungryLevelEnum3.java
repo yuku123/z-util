@@ -9,9 +9,6 @@ package com.zifang.util.zex.bust.chapter4.enumCase;
  * @author zifang
  * @version 1.0
  */
-/**
- * HungryLevelEnum3枚举。
- */
 public enum HungryLevelEnum3 {
     HUNGRY_LEVEL_1("一成饱") {
         @Override

@@ -7,12 +7,6 @@ package com.zifang.util.core.pattern.factory;
  * @param <T> 创建的实例类型
  * @author zifang
  */
-/**
- * IFactory接口。
- */
-/**
- * IFactory接口。
- */
 public interface IFactory<K, T> {
 
     /**

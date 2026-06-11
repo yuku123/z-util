@@ -12,9 +12,6 @@ import java.io.StringWriter;
 /**
  * XmlTransformer类。
  */
-/**
- * XmlTransformer类。
- */
 public class XmlTransformer {
 
 
@@ -27,18 +24,6 @@ public class XmlTransformer {
      * @param t
      * @return
      * @throws JAXBException
-     */
-    /**
-     * xmlToBean方法。
-     *      * @param xml String类型参数
-     * @param t T类型参数
-     * @return static <T> T类型返回值
-     */
-    /**
-     * xmlToBean方法。
-     *      * @param xml String类型参数
-     * @param t T类型参数
-     * @return static <T> T类型返回值
      */
     public static <T> T xmlToBean(String xml, T t) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(t.getClass());
@@ -55,16 +40,6 @@ public class XmlTransformer {
      * @return
      * @throws JAXBException
      * @throws FileNotFoundException
-     */
-    /**
-     * beanToXml方法。
-     *      * @param t T类型参数
-     * @return static <T> StringWriter类型返回值
-     */
-    /**
-     * beanToXml方法。
-     *      * @param t T类型参数
-     * @return static <T> StringWriter类型返回值
      */
     public static <T> StringWriter beanToXml(T t) throws JAXBException, FileNotFoundException {
         JAXBContext context = JAXBContext.newInstance(t.getClass());

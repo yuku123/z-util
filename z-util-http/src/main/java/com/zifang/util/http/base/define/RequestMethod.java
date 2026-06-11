@@ -8,12 +8,6 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * RequestMethod枚举。
- */
-/**
- * RequestMethod枚举。
- */
 public enum RequestMethod {
 
     /**

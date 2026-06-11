@@ -23,12 +23,6 @@ import java.util.Map;
  * @author zifang
  * @see Document
  */
-/**
- * XmlUtil类。
- */
-/**
- * XmlUtil类。
- */
 public class XmlUtil {
 
     public static final String INVALID_REGEX = "[\\x00-\\x08\\x0b-\\x0c\\x0e-\\x1f]";
@@ -46,11 +40,6 @@ public class XmlUtil {
      *      * @param xmlStr String类型参数
      * @return static Map<String, Object>类型返回值
      */
-    /**
-     * xmlToMap方法。
-     *      * @param xmlStr String类型参数
-     * @return static Map<String, Object>类型返回值
-     */
     public static Map<String, Object> xmlToMap(String xmlStr) {
         return xmlToMap(xmlStr, new HashMap<>());
     }
@@ -61,23 +50,10 @@ public class XmlUtil {
      * @param rootName String类型参数
      * @return static Document类型返回值
      */
-    /**
-     * mapToXml方法。
-     *      * @param data Map?,类型参数
-     * @param rootName String类型参数
-     * @return static Document类型返回值
-     */
     public static Document mapToXml(Map<?, ?> data, String rootName) {
         return mapToXml(data, rootName, null);
     }
 
-    /**
-     * mapToXml方法。
-     *      * @param data Map?,类型参数
-     * @param rootName String类型参数
-     * @param namespace String类型参数
-     * @return static Document类型返回值
-     */
     /**
      * mapToXml方法。
      *      * @param data Map?,类型参数
@@ -100,13 +76,6 @@ public class XmlUtil {
      * @param namespace String类型参数
      * @return static Element类型返回值
      */
-    /**
-     * appendChild方法。
-     *      * @param node Node类型参数
-     * @param tagName String类型参数
-     * @param namespace String类型参数
-     * @return static Element类型返回值
-     */
     public static Element appendChild(Node node, String tagName, String namespace) {
         final Document doc = getOwnerDocument(node);
         final Element child =
@@ -115,11 +84,6 @@ public class XmlUtil {
         return child;
     }
 
-    /**
-     * getOwnerDocument方法。
-     *      * @param node Node类型参数
-     * @return static Document类型返回值
-     */
     /**
      * getOwnerDocument方法。
      *      * @param node Node类型参数
@@ -182,22 +146,10 @@ public class XmlUtil {
      * @param tagName String类型参数
      * @return static Element类型返回值
      */
-    /**
-     * appendChild方法。
-     *      * @param node Node类型参数
-     * @param tagName String类型参数
-     * @return static Element类型返回值
-     */
     public static Element appendChild(Node node, String tagName) {
         return appendChild(node, tagName, null);
     }
 
-    /**
-     * xmlToMap方法。
-     *      * @param xmlStr String类型参数
-     * @param result MapString,类型参数
-     * @return static Map<String, Object>类型返回值
-     */
     /**
      * xmlToMap方法。
      *      * @param xmlStr String类型参数
@@ -212,12 +164,6 @@ public class XmlUtil {
         return xmlToMap(root, result);
     }
 
-    /**
-     * xmlToMap方法。
-     *      * @param node Node类型参数
-     * @param result MapString,类型参数
-     * @return static Map<String, Object>类型返回值
-     */
     /**
      * xmlToMap方法。
      *      * @param node Node类型参数
@@ -273,11 +219,6 @@ public class XmlUtil {
      *      * @param node Node类型参数
      * @return static Map<String, Object>类型返回值
      */
-    /**
-     * xmlToMap方法。
-     *      * @param node Node类型参数
-     * @return static Map<String, Object>类型返回值
-     */
     public static Map<String, Object> xmlToMap(Node node) {
         return xmlToMap(node, new HashMap<>());
     }
@@ -288,16 +229,6 @@ public class XmlUtil {
      * @time: 2022-04-12 10:36:00
      * @params: [xmlStr] in XML格式字符串
      * @return: org.w3c.dom.Document out 出参
-     */
-    /**
-     * parseXml方法。
-     *      * @param xmlStr String类型参数
-     * @return static Document类型返回值
-     */
-    /**
-     * parseXml方法。
-     *      * @param xmlStr String类型参数
-     * @return static Document类型返回值
      */
     public static Document parseXml(String xmlStr) {
         if (StringUtil.isBlank(xmlStr)) {
@@ -312,20 +243,10 @@ public class XmlUtil {
      *      * @param reader Reader类型参数
      * @return static Document类型返回值
      */
-    /**
-     * readXml方法。
-     *      * @param reader Reader类型参数
-     * @return static Document类型返回值
-     */
     public static Document readXml(Reader reader) {
         return readXml(new InputSource(reader));
     }
 
-    /**
-     * readXml方法。
-     *      * @param source InputSource类型参数
-     * @return static Document类型返回值
-     */
     /**
      * readXml方法。
      *      * @param source InputSource类型参数
@@ -344,10 +265,6 @@ public class XmlUtil {
      * createDocumentBuilder方法。
      * @return static DocumentBuilder类型返回值
      */
-    /**
-     * createDocumentBuilder方法。
-     * @return static DocumentBuilder类型返回值
-     */
     public static DocumentBuilder createDocumentBuilder() {
         DocumentBuilder builder;
         try {
@@ -358,10 +275,6 @@ public class XmlUtil {
         return builder;
     }
 
-    /**
-     * createDocumentBuilderFactory方法。
-     * @return static DocumentBuilderFactory类型返回值
-     */
     /**
      * createDocumentBuilderFactory方法。
      * @return static DocumentBuilderFactory类型返回值
@@ -422,16 +335,6 @@ public class XmlUtil {
      * @params: [xmlContent] in XML文本
      * @return: java.lang.String out 出参
      */
-    /**
-     * cleanInvalid方法。
-     *      * @param xmlContent String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * cleanInvalid方法。
-     *      * @param xmlContent String类型参数
-     * @return static String类型返回值
-     */
     public static String cleanInvalid(String xmlContent) {
         if (null == xmlContent) {
             return null;
@@ -439,11 +342,6 @@ public class XmlUtil {
         return xmlContent.replaceAll(INVALID_REGEX, "");
     }
 
-    /**
-     * getRootElement方法。
-     *      * @param doc Document类型参数
-     * @return static Element类型返回值
-     */
     /**
      * getRootElement方法。
      *      * @param doc Document类型参数
@@ -458,19 +356,10 @@ public class XmlUtil {
      *      * @param node Node类型参数
      * @return static boolean类型返回值
      */
-    /**
-     * isElement方法。
-     *      * @param node Node类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isElement(Node node) {
         return (null != node) && Node.ELEMENT_NODE == node.getNodeType();
     }
 
-    /**
-     * createXml方法。
-     * @return static Document类型返回值
-     */
     /**
      * createXml方法。
      * @return static Document类型返回值

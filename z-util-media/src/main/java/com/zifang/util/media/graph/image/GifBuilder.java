@@ -38,25 +38,10 @@ public final class GifBuilder {
     /**
      * GifBuilder方法。
      */
-    /**
-     * GifBuilder方法。
-     */
     public GifBuilder() {}
 
     /**
      * 设置 GIF 尺寸。
-     */
-    /**
-     * size方法。
-     *      * @param width int类型参数
-     * @param height int类型参数
-     * @return GifBuilder类型返回值
-     */
-    /**
-     * size方法。
-     *      * @param width int类型参数
-     * @param height int类型参数
-     * @return GifBuilder类型返回值
      */
     public GifBuilder size(int width, int height) {
         this.width = width;
@@ -69,16 +54,6 @@ public final class GifBuilder {
      *
      * @param delayMs 毫秒
      */
-    /**
-     * delay方法。
-     *      * @param delayMs int类型参数
-     * @return GifBuilder类型返回值
-     */
-    /**
-     * delay方法。
-     *      * @param delayMs int类型参数
-     * @return GifBuilder类型返回值
-     */
     public GifBuilder delay(int delayMs) {
         this.delay = delayMs;
         return this;
@@ -88,16 +63,6 @@ public final class GifBuilder {
      * 设置循环次数。
      *
      * @param count 0=无限循环
-     */
-    /**
-     * repeat方法。
-     *      * @param count int类型参数
-     * @return GifBuilder类型返回值
-     */
-    /**
-     * repeat方法。
-     *      * @param count int类型参数
-     * @return GifBuilder类型返回值
      */
     public GifBuilder repeat(int count) {
         this.repeat = count;
@@ -109,16 +74,6 @@ public final class GifBuilder {
      *
      * @param quality 1（最好）~20（最快）
      */
-    /**
-     * quality方法。
-     *      * @param quality int类型参数
-     * @return GifBuilder类型返回值
-     */
-    /**
-     * quality方法。
-     *      * @param quality int类型参数
-     * @return GifBuilder类型返回值
-     */
     public GifBuilder quality(int quality) {
         this.quality = quality;
         return this;
@@ -127,16 +82,6 @@ public final class GifBuilder {
     /**
      * 添加一帧。
      * 帧会被自动缩放到指定尺寸。
-     */
-    /**
-     * addFrame方法。
-     *      * @param frame BufferedImage类型参数
-     * @return GifBuilder类型返回值
-     */
-    /**
-     * addFrame方法。
-     *      * @param frame BufferedImage类型参数
-     * @return GifBuilder类型返回值
      */
     public GifBuilder addFrame(BufferedImage frame) {
         // 缩放至统一尺寸
@@ -156,16 +101,6 @@ public final class GifBuilder {
     /**
      * 添加一帧（从文件）。
      */
-    /**
-     * addFrame方法。
-     *      * @param path String类型参数
-     * @return GifBuilder类型返回值
-     */
-    /**
-     * addFrame方法。
-     *      * @param path String类型参数
-     * @return GifBuilder类型返回值
-     */
     public GifBuilder addFrame(String path) throws IOException {
         return addFrame(ImageReadWrite.read(path));
     }
@@ -174,14 +109,6 @@ public final class GifBuilder {
      * 构建 GIF。
      *
      * @throws IllegalStateException 未添加帧或未调用 build
-     */
-    /**
-     * build方法。
-     * @return GifBuilder类型返回值
-     */
-    /**
-     * build方法。
-     * @return GifBuilder类型返回值
      */
     public GifBuilder build() throws IOException {
         if (frames.isEmpty()) {
@@ -194,28 +121,12 @@ public final class GifBuilder {
     /**
      * 写入到文件。
      */
-    /**
-     * write方法。
-     *      * @param path String类型参数
-     */
-    /**
-     * write方法。
-     *      * @param path String类型参数
-     */
     public void write(String path) throws IOException {
         write(new File(path));
     }
 
     /**
      * 写入到 File。
-     */
-    /**
-     * write方法。
-     *      * @param file File类型参数
-     */
-    /**
-     * write方法。
-     *      * @param file File类型参数
      */
     public void write(File file) throws IOException {
         OutputStream out = new FileOutputStream(file);
@@ -228,14 +139,6 @@ public final class GifBuilder {
 
     /**
      * 写入到 OutputStream（调用方负责关闭流）。
-     */
-    /**
-     * write方法。
-     *      * @param out OutputStream类型参数
-     */
-    /**
-     * write方法。
-     *      * @param out OutputStream类型参数
      */
     public void write(OutputStream out) throws IOException {
         if (frames.isEmpty()) {
@@ -255,14 +158,6 @@ public final class GifBuilder {
 
     /**
      * 导出为 byte[]。
-     */
-    /**
-     * toBytes方法。
-     * @return byte[]类型返回值
-     */
-    /**
-     * toBytes方法。
-     * @return byte[]类型返回值
      */
     public byte[] toBytes() throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();

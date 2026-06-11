@@ -9,9 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-/**
- * _042类。
- */
 public class _042 {
     /**
      * trap方法。

@@ -5,9 +5,6 @@ package com.zifang.util.core.state;
  * <p>
  * 用于包装状态机在 fire 过程中遇到的非法转移、守卫失败、动作异常等情况。
  */
-/**
- * StateMachineException类。
- */
 public class StateMachineException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;

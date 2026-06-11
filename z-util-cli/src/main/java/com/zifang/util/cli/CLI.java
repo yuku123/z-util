@@ -38,30 +38,12 @@ public final class CLI {
     /**
      * Create a new Options builder.
      */
-    /**
-     * builder方法。
-     * @return static OptionsBuilder类型返回值
-     */
-    /**
-     * builder方法。
-     * @return static OptionsBuilder类型返回值
-     */
     public static OptionsBuilder builder() {
         return new OptionsBuilder();
     }
 
     /**
      * Create a new Options builder with an existing Options instance.
-     */
-    /**
-     * builder方法。
-     *      * @param options final类型参数
-     * @return static OptionsBuilder类型返回值
-     */
-    /**
-     * builder方法。
-     *      * @param options final类型参数
-     * @return static OptionsBuilder类型返回值
      */
     public static OptionsBuilder builder(final Options options) {
         return new OptionsBuilder(options);
@@ -70,28 +52,12 @@ public final class CLI {
     /**
      * Create a new CommandLineParser.
      */
-    /**
-     * parser方法。
-     * @return static CommandLineParser类型返回值
-     */
-    /**
-     * parser方法。
-     * @return static CommandLineParser类型返回值
-     */
     public static CommandLineParser parser() {
         return new DefaultParser();
     }
 
     /**
      * Create a new HelpFormatter.
-     */
-    /**
-     * helpFormatter方法。
-     * @return static HelpFormatter类型返回值
-     */
-    /**
-     * helpFormatter方法。
-     * @return static HelpFormatter类型返回值
      */
     public static HelpFormatter helpFormatter() {
         return new HelpFormatter();
@@ -100,38 +66,12 @@ public final class CLI {
     /**
      * Parse arguments with default options.
      */
-    /**
-     * parse方法。
-     *      * @param options final类型参数
-     * @param args final类型参数
-     * @return static CommandLine类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param options final类型参数
-     * @param args final类型参数
-     * @return static CommandLine类型返回值
-     */
     public static CommandLine parse(final Options options, final String[] args) throws com.zifang.util.cli.exception.ParseException {
         return parser().parse(options, args);
     }
 
     /**
      * Parse arguments with default options and properties.
-     */
-    /**
-     * parse方法。
-     *      * @param options final类型参数
-     * @param args final类型参数
-     * @param properties final类型参数
-     * @return static CommandLine类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param options final类型参数
-     * @param args final类型参数
-     * @param properties final类型参数
-     * @return static CommandLine类型返回值
      */
     public static CommandLine parse(final Options options, final String[] args, final Properties properties)
             throws com.zifang.util.cli.exception.ParseException {
@@ -147,17 +87,10 @@ public final class CLI {
     /**
      * OptionsBuilder方法。
      */
-    /**
-     * OptionsBuilder方法。
-     */
         public OptionsBuilder() {
             this.options = new Options();
         }
 
-    /**
-     * OptionsBuilder方法。
-     *      * @param options final类型参数
-     */
     /**
      * OptionsBuilder方法。
      *      * @param options final类型参数
@@ -171,21 +104,11 @@ public final class CLI {
      *      * @param option final类型参数
      * @return OptionsBuilder类型返回值
      */
-    /**
-     * withOption方法。
-     *      * @param option final类型参数
-     * @return OptionsBuilder类型返回值
-     */
         public OptionsBuilder withOption(final Option option) {
             options.addOption(option);
             return this;
         }
 
-    /**
-     * withRequiredOption方法。
-     *      * @param option final类型参数
-     * @return OptionsBuilder类型返回值
-     */
     /**
      * withRequiredOption方法。
      *      * @param option final类型参数
@@ -209,23 +132,11 @@ public final class CLI {
      *      * @param group final类型参数
      * @return OptionsBuilder类型返回值
      */
-    /**
-     * withOptionGroup方法。
-     *      * @param group final类型参数
-     * @return OptionsBuilder类型返回值
-     */
         public OptionsBuilder withOptionGroup(final OptionGroup group) {
             options.addOptionGroup(group);
             return this;
         }
 
-    /**
-     * withOption方法。
-     *      * @param opt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     * @return OptionsBuilder类型返回值
-     */
     /**
      * withOption方法。
      *      * @param opt final类型参数
@@ -246,23 +157,11 @@ public final class CLI {
      * @param description final类型参数
      * @return OptionsBuilder类型返回值
      */
-    /**
-     * withOption方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     * @return OptionsBuilder类型返回值
-     */
         public OptionsBuilder withOption(final String opt, final String longOpt, final boolean hasArg, final String description) {
             options.addOption(opt, longOpt, hasArg, description);
             return this;
         }
 
-    /**
-     * build方法。
-     * @return Options类型返回值
-     */
     /**
      * build方法。
      * @return Options类型返回值

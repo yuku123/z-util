@@ -7,12 +7,6 @@ import com.zifang.util.numpy.DType;
  * Stacking (Stacked Generalization) ensemble classifier.
  * Uses base estimators to generate meta-features, then trains a meta-estimator on them.
  */
-/**
- * Stacking类。
- */
-/**
- * Stacking类。
- */
 public class Stacking {
     private Estimator[] baseEstimators;
     private Estimator metaEstimator;
@@ -24,16 +18,6 @@ public class Stacking {
      * @param baseEstimators Array of base estimators
      * @param metaEstimator Meta-estimator to combine base predictions
      */
-    /**
-     * Stacking方法。
-     *      * @param baseEstimators Estimator[]类型参数
-     * @param metaEstimator Estimator类型参数
-     */
-    /**
-     * Stacking方法。
-     *      * @param baseEstimators Estimator[]类型参数
-     * @param metaEstimator Estimator类型参数
-     */
     public Stacking(Estimator[] baseEstimators, Estimator metaEstimator) {
         this.baseEstimators = baseEstimators;
         this.metaEstimator = metaEstimator;
@@ -44,16 +28,6 @@ public class Stacking {
      * Trains each base estimator and generates out-of-fold meta-features.
      * @param X Training features
      * @param y Training labels
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @param y int[]类型参数
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @param y int[]类型参数
      */
     public void fit(NdArray X, int[] y) {
         this.nSamples = X.getShape().get(0);
@@ -95,16 +69,6 @@ public class Stacking {
      * @param X Features to predict
      * @return Predicted class labels
      */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
     public int[] predict(NdArray X) {
         int nBase = baseEstimators.length;
         int nMetaFeatures = nBase * nClasses;
@@ -141,16 +105,6 @@ public class Stacking {
      * Predict class probabilities.
      * @param X Features to predict
      * @return Probability array of shape (n_samples, n_classes)
-     */
-    /**
-     * predictProba方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
-     */
-    /**
-     * predictProba方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
      */
     public NdArray predictProba(NdArray X) {
         int[] predictions = predict(X);
@@ -250,18 +204,10 @@ public class Stacking {
      * getBaseEstimators方法。
      * @return Estimator[]类型返回值
      */
-    /**
-     * getBaseEstimators方法。
-     * @return Estimator[]类型返回值
-     */
     public Estimator[] getBaseEstimators() {
         return baseEstimators;
     }
 
-    /**
-     * getMetaEstimator方法。
-     * @return Estimator类型返回值
-     */
     /**
      * getMetaEstimator方法。
      * @return Estimator类型返回值

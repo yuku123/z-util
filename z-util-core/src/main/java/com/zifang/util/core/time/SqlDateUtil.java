@@ -49,12 +49,6 @@ import java.time.format.DateTimeFormatter;
  * @see LocalDate
  * @see DateTimeFormatter
  */
-/**
- * SqlDateUtil类。
- */
-/**
- * SqlDateUtil类。
- */
 public class SqlDateUtil {
 
     /**
@@ -80,45 +74,15 @@ public class SqlDateUtil {
     /**
      * 默认日期格式化器
      */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_DEFAULT Object类型参数
-     * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
-     */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_DEFAULT Object类型参数
-     * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
-     */
     public static final DateTimeFormatter FMT_DEFAULT = DateTimeFormatter.ofPattern(PATTERN_DEFAULT);
 
     /**
      * 紧凑日期格式化器
      */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_COMPACT Object类型参数
-     * @return static final DateTimeFormatter FMT_COMPACT =类型返回值
-     */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_COMPACT Object类型参数
-     * @return static final DateTimeFormatter FMT_COMPACT =类型返回值
-     */
     public static final DateTimeFormatter FMT_COMPACT = DateTimeFormatter.ofPattern(PATTERN_COMPACT);
 
     /**
      * 中文日期格式化器
-     */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_CHINESE Object类型参数
-     * @return static final DateTimeFormatter FMT_CHINESE =类型返回值
-     */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_CHINESE Object类型参数
-     * @return static final DateTimeFormatter FMT_CHINESE =类型返回值
      */
     public static final DateTimeFormatter FMT_CHINESE = DateTimeFormatter.ofPattern(PATTERN_CHINESE);
 
@@ -129,16 +93,6 @@ public class SqlDateUtil {
      *
      * @param date 要格式化的日期（为 null 时返回 null）
      * @return 格式化后的日期字符串，如果 date 为 null 则返回 null
-     */
-    /**
-     * format方法。
-     *      * @param date Date类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * format方法。
-     *      * @param date Date类型参数
-     * @return static String类型返回值
      */
     public static String format(Date date) {
         return format(date, PATTERN_DEFAULT);
@@ -152,18 +106,6 @@ public class SqlDateUtil {
      * @return 格式化后的日期字符串，如果 date 为 null 则返回 null
      * @throws IllegalArgumentException 如果 pattern 格式无效
      */
-    /**
-     * format方法。
-     *      * @param date Date类型参数
-     * @param pattern String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * format方法。
-     *      * @param date Date类型参数
-     * @param pattern String类型参数
-     * @return static String类型返回值
-     */
     public static String format(Date date, String pattern) {
         if (date == null) return null;
         return new java.text.SimpleDateFormat(pattern).format(date);
@@ -175,18 +117,6 @@ public class SqlDateUtil {
      * @param date     要格式化的日期（为 null 时返回 null）
      * @param formatter 日期时间格式化器
      * @return 格式化后的日期字符串，如果 date 为 null 则返回 null
-     */
-    /**
-     * format方法。
-     *      * @param date Date类型参数
-     * @param formatter DateTimeFormatter类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * format方法。
-     *      * @param date Date类型参数
-     * @param formatter DateTimeFormatter类型参数
-     * @return static String类型返回值
      */
     public static String format(Date date, DateTimeFormatter formatter) {
         if (date == null) return null;
@@ -201,16 +131,6 @@ public class SqlDateUtil {
      * @param dateStr 日期字符串（为 null 或空时返回 null）
      * @return 解析后的 Date 对象，解析失败返回 null
      */
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @return static Date类型返回值
-     */
     public static Date parse(String dateStr) {
         return parse(dateStr, PATTERN_DEFAULT);
     }
@@ -222,18 +142,6 @@ public class SqlDateUtil {
      * @param pattern 日期模式，例如 "yyyy-MM-dd"
      * @return 解析后的 Date 对象，解析失败返回 null
      * @throws IllegalArgumentException 如果 pattern 格式无效
-     */
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @param pattern String类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @param pattern String类型参数
-     * @return static Date类型返回值
      */
     public static Date parse(String dateStr, String pattern) {
         if (dateStr == null || dateStr.trim().isEmpty()) return null;
@@ -254,18 +162,6 @@ public class SqlDateUtil {
      * @param patterns 多种日期模式，按尝试顺序排列
      * @return 解析后的 Date 对象，所有模式都失败返回 null
      */
-    /**
-     * parseStrict方法。
-     *      * @param dateStr String类型参数
-     * @param patterns String...类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * parseStrict方法。
-     *      * @param dateStr String类型参数
-     * @param patterns String...类型参数
-     * @return static Date类型返回值
-     */
     public static Date parseStrict(String dateStr, String... patterns) {
         if (dateStr == null || dateStr.trim().isEmpty()) return null;
         for (String pattern : patterns) {
@@ -282,14 +178,6 @@ public class SqlDateUtil {
      *
      * @return 表示当前时刻的 Date 对象
      */
-    /**
-     * now方法。
-     * @return static Date类型返回值
-     */
-    /**
-     * now方法。
-     * @return static Date类型返回值
-     */
     public static Date now() {
         return new Date(System.currentTimeMillis());
     }
@@ -298,14 +186,6 @@ public class SqlDateUtil {
      * 获取今天的 java.sql.Date（等价于 now）
      *
      * @return 表示今天的 Date 对象
-     */
-    /**
-     * today方法。
-     * @return static Date类型返回值
-     */
-    /**
-     * today方法。
-     * @return static Date类型返回值
      */
     public static Date today() {
         return new Date(System.currentTimeMillis());
@@ -320,18 +200,6 @@ public class SqlDateUtil {
      * @param days 要增加的天数（可以为负数）
      * @return 计算后的日期，如果 date 为 null 则返回 null
      */
-    /**
-     * plusDays方法。
-     *      * @param date Date类型参数
-     * @param days long类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * plusDays方法。
-     *      * @param date Date类型参数
-     * @param days long类型参数
-     * @return static Date类型返回值
-     */
     public static Date plusDays(Date date, long days) {
         if (date == null) return null;
         LocalDate ld = toLocalDate(date);
@@ -344,18 +212,6 @@ public class SqlDateUtil {
      * @param date 原始日期（为 null 时返回 null）
      * @param days 要减少的天数（可以为负数）
      * @return 计算后的日期，如果 date 为 null 则返回 null
-     */
-    /**
-     * minusDays方法。
-     *      * @param date Date类型参数
-     * @param days long类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * minusDays方法。
-     *      * @param date Date类型参数
-     * @param days long类型参数
-     * @return static Date类型返回值
      */
     public static Date minusDays(Date date, long days) {
         if (date == null) return null;
@@ -370,18 +226,6 @@ public class SqlDateUtil {
      * @param months 要增加的月数（可以为负数）
      * @return 计算后的日期，如果 date 为 null 则返回 null
      */
-    /**
-     * plusMonths方法。
-     *      * @param date Date类型参数
-     * @param months long类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * plusMonths方法。
-     *      * @param date Date类型参数
-     * @param months long类型参数
-     * @return static Date类型返回值
-     */
     public static Date plusMonths(Date date, long months) {
         if (date == null) return null;
         LocalDate ld = toLocalDate(date);
@@ -394,18 +238,6 @@ public class SqlDateUtil {
      * @param date   原始日期（为 null 时返回 null）
      * @param months 要减少的月数（可以为负数）
      * @return 计算后的日期，如果 date 为 null 则返回 null
-     */
-    /**
-     * minusMonths方法。
-     *      * @param date Date类型参数
-     * @param months long类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * minusMonths方法。
-     *      * @param date Date类型参数
-     * @param months long类型参数
-     * @return static Date类型返回值
      */
     public static Date minusMonths(Date date, long months) {
         if (date == null) return null;
@@ -420,18 +252,6 @@ public class SqlDateUtil {
      * @param years 要增加的年数（可以为负数）
      * @return 计算后的日期，如果 date 为 null 则返回 null
      */
-    /**
-     * plusYears方法。
-     *      * @param date Date类型参数
-     * @param years long类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * plusYears方法。
-     *      * @param date Date类型参数
-     * @param years long类型参数
-     * @return static Date类型返回值
-     */
     public static Date plusYears(Date date, long years) {
         if (date == null) return null;
         LocalDate ld = toLocalDate(date);
@@ -444,18 +264,6 @@ public class SqlDateUtil {
      * @param date  原始日期（为 null 时返回 null）
      * @param years 要减少的年数（可以为负数）
      * @return 计算后的日期，如果 date 为 null 则返回 null
-     */
-    /**
-     * minusYears方法。
-     *      * @param date Date类型参数
-     * @param years long类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * minusYears方法。
-     *      * @param date Date类型参数
-     * @param years long类型参数
-     * @return static Date类型返回值
      */
     public static Date minusYears(Date date, long years) {
         if (date == null) return null;
@@ -472,18 +280,6 @@ public class SqlDateUtil {
      * @param date2 第二个日期
      * @return date1 是否在 date2 之前
      */
-    /**
-     * isBefore方法。
-     *      * @param date1 Date类型参数
-     * @param date2 Date类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isBefore方法。
-     *      * @param date1 Date类型参数
-     * @param date2 Date类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isBefore(Date date1, Date date2) {
         return date1.before(date2);
     }
@@ -495,18 +291,6 @@ public class SqlDateUtil {
      * @param date2 第二个日期
      * @return date1 是否在 date2 之后
      */
-    /**
-     * isAfter方法。
-     *      * @param date1 Date类型参数
-     * @param date2 Date类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isAfter方法。
-     *      * @param date1 Date类型参数
-     * @param date2 Date类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isAfter(Date date1, Date date2) {
         return date1.after(date2);
     }
@@ -517,18 +301,6 @@ public class SqlDateUtil {
      * @param date1 第一个日期
      * @param date2 第二个日期
      * @return 两个日期是否是同一天
-     */
-    /**
-     * isSameDay方法。
-     *      * @param date1 Date类型参数
-     * @param date2 Date类型参数
-     * @return static boolean类型返回值
-     */
-    /**
-     * isSameDay方法。
-     *      * @param date1 Date类型参数
-     * @param date2 Date类型参数
-     * @return static boolean类型返回值
      */
     public static boolean isSameDay(Date date1, Date date2) {
         LocalDate d1 = toLocalDate(date1);
@@ -545,18 +317,6 @@ public class SqlDateUtil {
      * @param end   结束日期（为 null 时返回 0）
      * @return 天数差（end - start），可以为负数
      */
-    /**
-     * daysBetween方法。
-     *      * @param start Date类型参数
-     * @param end Date类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * daysBetween方法。
-     *      * @param start Date类型参数
-     * @param end Date类型参数
-     * @return static long类型返回值
-     */
     public static long daysBetween(Date start, Date end) {
         LocalDate d1 = toLocalDate(start);
         LocalDate d2 = toLocalDate(end);
@@ -571,16 +331,6 @@ public class SqlDateUtil {
      * @param date 日期（为 null 时返回 0）
      * @return 年份值
      */
-    /**
-     * getYear方法。
-     *      * @param date Date类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * getYear方法。
-     *      * @param date Date类型参数
-     * @return static int类型返回值
-     */
     public static int getYear(Date date) {
         return toLocalDate(date).getYear();
     }
@@ -590,16 +340,6 @@ public class SqlDateUtil {
      *
      * @param date 日期（为 null 时返回 0）
      * @return 月份值（1-12）
-     */
-    /**
-     * getMonth方法。
-     *      * @param date Date类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * getMonth方法。
-     *      * @param date Date类型参数
-     * @return static int类型返回值
      */
     public static int getMonth(Date date) {
         return toLocalDate(date).getMonthValue();
@@ -611,16 +351,6 @@ public class SqlDateUtil {
      * @param date 日期（为 null 时返回 0）
      * @return 日值（1-31）
      */
-    /**
-     * getDayOfMonth方法。
-     *      * @param date Date类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * getDayOfMonth方法。
-     *      * @param date Date类型参数
-     * @return static int类型返回值
-     */
     public static int getDayOfMonth(Date date) {
         return toLocalDate(date).getDayOfMonth();
     }
@@ -630,16 +360,6 @@ public class SqlDateUtil {
      *
      * @param date 日期（为 null 时返回 0）
      * @return 星期几（1=Monday, 7=Sunday）
-     */
-    /**
-     * getDayOfWeek方法。
-     *      * @param date Date类型参数
-     * @return static int类型返回值
-     */
-    /**
-     * getDayOfWeek方法。
-     *      * @param date Date类型参数
-     * @return static int类型返回值
      */
     public static int getDayOfWeek(Date date) {
         return toLocalDate(date).getDayOfWeek().getValue();
@@ -655,16 +375,6 @@ public class SqlDateUtil {
      * @param date java.sql.Date（为 null 时返回 null）
      * @return java.util.Date，如果输入为 null 则返回 null
      */
-    /**
-     * toUtilDate方法。
-     *      * @param date Date类型参数
-     * @return static java.util.Date类型返回值
-     */
-    /**
-     * toUtilDate方法。
-     *      * @param date Date类型参数
-     * @return static java.util.Date类型返回值
-     */
     public static java.util.Date toUtilDate(Date date) {
         if (date == null) return null;
         return new java.util.Date(date.getTime());
@@ -675,16 +385,6 @@ public class SqlDateUtil {
      *
      * @param date java.sql.Date（为 null 时返回 null）
      * @return LocalDate，如果输入为 null 则返回 null
-     */
-    /**
-     * toLocalDate方法。
-     *      * @param date Date类型参数
-     * @return static LocalDate类型返回值
-     */
-    /**
-     * toLocalDate方法。
-     *      * @param date Date类型参数
-     * @return static LocalDate类型返回值
      */
     public static LocalDate toLocalDate(Date date) {
         if (date == null) return null;
@@ -699,16 +399,6 @@ public class SqlDateUtil {
      * @param date java.sql.Date（为 null 时返回 null）
      * @return LocalDateTime，如果输入为 null 则返回 null
      */
-    /**
-     * toLocalDateTime方法。
-     *      * @param date Date类型参数
-     * @return static LocalDateTime类型返回值
-     */
-    /**
-     * toLocalDateTime方法。
-     *      * @param date Date类型参数
-     * @return static LocalDateTime类型返回值
-     */
     public static LocalDateTime toLocalDateTime(Date date) {
         if (date == null) return null;
         return date.toLocalDate().atStartOfDay();
@@ -722,16 +412,6 @@ public class SqlDateUtil {
      * @param date java.sql.Date（为 null 时返回 null）
      * @return LocalTime.MIDNIGHT (00:00)，如果输入为 null 则返回 null
      */
-    /**
-     * toLocalTime方法。
-     *      * @param date Date类型参数
-     * @return static LocalTime类型返回值
-     */
-    /**
-     * toLocalTime方法。
-     *      * @param date Date类型参数
-     * @return static LocalTime类型返回值
-     */
     public static LocalTime toLocalTime(Date date) {
         if (date == null) return null;
         return LocalTime.MIDNIGHT;
@@ -743,16 +423,6 @@ public class SqlDateUtil {
      * @param date java.sql.Date（为 null 时返回 null）
      * @return Instant，如果输入为 null 则返回 null
      */
-    /**
-     * toInstant方法。
-     *      * @param date Date类型参数
-     * @return static Instant类型返回值
-     */
-    /**
-     * toInstant方法。
-     *      * @param date Date类型参数
-     * @return static Instant类型返回值
-     */
     public static Instant toInstant(Date date) {
         if (date == null) return null;
         return Instant.ofEpochMilli(date.getTime());
@@ -763,16 +433,6 @@ public class SqlDateUtil {
      *
      * @param date java.sql.Date（为 null 时返回 0）
      * @return epoch 毫秒数
-     */
-    /**
-     * toEpochMilli方法。
-     *      * @param date Date类型参数
-     * @return static long类型返回值
-     */
-    /**
-     * toEpochMilli方法。
-     *      * @param date Date类型参数
-     * @return static long类型返回值
      */
     public static long toEpochMilli(Date date) {
         if (date == null) return 0;
@@ -787,16 +447,6 @@ public class SqlDateUtil {
      * @param date java.util.Date（为 null 时返回 null）
      * @return java.sql.Date，如果输入为 null 则返回 null
      */
-    /**
-     * fromUtilDate方法。
-     *      * @param date java.util.Date类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * fromUtilDate方法。
-     *      * @param date java.util.Date类型参数
-     * @return static Date类型返回值
-     */
     public static Date fromUtilDate(java.util.Date date) {
         if (date == null) return null;
         return new Date(date.getTime());
@@ -807,16 +457,6 @@ public class SqlDateUtil {
      *
      * @param localDate LocalDate（为 null 时返回 null）
      * @return java.sql.Date，如果输入为 null 则返回 null
-     */
-    /**
-     * fromLocalDate方法。
-     *      * @param localDate LocalDate类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * fromLocalDate方法。
-     *      * @param localDate LocalDate类型参数
-     * @return static Date类型返回值
      */
     public static Date fromLocalDate(LocalDate localDate) {
         if (localDate == null) return null;
@@ -831,16 +471,6 @@ public class SqlDateUtil {
      * @param localDateTime LocalDateTime（为 null 时返回 null）
      * @return java.sql.Date，如果输入为 null 则返回 null
      */
-    /**
-     * fromLocalDateTime方法。
-     *      * @param localDateTime LocalDateTime类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * fromLocalDateTime方法。
-     *      * @param localDateTime LocalDateTime类型参数
-     * @return static Date类型返回值
-     */
     public static Date fromLocalDateTime(LocalDateTime localDateTime) {
         if (localDateTime == null) return null;
         return Date.valueOf(localDateTime.toLocalDate());
@@ -852,16 +482,6 @@ public class SqlDateUtil {
      * @param instant Instant（为 null 时返回 null）
      * @return java.sql.Date，如果输入为 null 则返回 null
      */
-    /**
-     * fromInstant方法。
-     *      * @param instant Instant类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * fromInstant方法。
-     *      * @param instant Instant类型参数
-     * @return static Date类型返回值
-     */
     public static Date fromInstant(Instant instant) {
         if (instant == null) return null;
         return new Date(instant.toEpochMilli());
@@ -872,16 +492,6 @@ public class SqlDateUtil {
      *
      * @param epochMilli epoch 毫秒数
      * @return 对应的 java.sql.Date
-     */
-    /**
-     * fromEpochMilli方法。
-     *      * @param epochMilli long类型参数
-     * @return static Date类型返回值
-     */
-    /**
-     * fromEpochMilli方法。
-     *      * @param epochMilli long类型参数
-     * @return static Date类型返回值
      */
     public static Date fromEpochMilli(long epochMilli) {
         return new Date(epochMilli);

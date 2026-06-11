@@ -18,12 +18,6 @@ import com.zifang.util.numpy.DType;
  * For AdamW, weight decay is applied separately:
  *   param = param - lr * (weight_decay * param + m_hat / (sqrt(v_hat) + eps))
  */
-/**
- * Adam类。
- */
-/**
- * Adam类。
- */
 public class Adam extends Optimizer {
     
     private double beta1;
@@ -36,22 +30,10 @@ public class Adam extends Optimizer {
      * Adam方法。
      *      * @param learningRate double类型参数
      */
-    /**
-     * Adam方法。
-     *      * @param learningRate double类型参数
-     */
     public Adam(double learningRate) {
         this(learningRate, 0.9, 0.999, 1e-8, false);
     }
     
-    /**
-     * Adam方法。
-     *      * @param learningRate double类型参数
-     * @param beta1 double类型参数
-     * @param beta2 double类型参数
-     * @param eps double类型参数
-     * @param adamw boolean类型参数
-     */
     /**
      * Adam方法。
      *      * @param learningRate double类型参数
@@ -74,23 +56,10 @@ public class Adam extends Optimizer {
      *      * @param learningRate double类型参数
      * @return static Adam类型返回值
      */
-    /**
-     * AdamW方法。
-     *      * @param learningRate double类型参数
-     * @return static Adam类型返回值
-     */
     public static Adam AdamW(double learningRate) {
         return new Adam(learningRate, 0.9, 0.999, 1e-8, true);
     }
     
-    /**
-     * AdamW方法。
-     *      * @param learningRate double类型参数
-     * @param beta1 double类型参数
-     * @param beta2 double类型参数
-     * @param eps double类型参数
-     * @return static Adam类型返回值
-     */
     /**
      * AdamW方法。
      *      * @param learningRate double类型参数
@@ -104,9 +73,6 @@ public class Adam extends Optimizer {
     }
     
     @Override
-    /**
-     * step方法。
-     */
     /**
      * step方法。
      */
@@ -170,28 +136,12 @@ public class Adam extends Optimizer {
     /**
      * Set beta1 coefficient.
      */
-    /**
-     * setBeta1方法。
-     *      * @param beta1 double类型参数
-     */
-    /**
-     * setBeta1方法。
-     *      * @param beta1 double类型参数
-     */
     public void setBeta1(double beta1) {
         this.beta1 = beta1;
     }
     
     /**
      * Get beta1 coefficient.
-     */
-    /**
-     * getBeta1方法。
-     * @return double类型返回值
-     */
-    /**
-     * getBeta1方法。
-     * @return double类型返回值
      */
     public double getBeta1() {
         return beta1;
@@ -200,28 +150,12 @@ public class Adam extends Optimizer {
     /**
      * Set beta2 coefficient.
      */
-    /**
-     * setBeta2方法。
-     *      * @param beta2 double类型参数
-     */
-    /**
-     * setBeta2方法。
-     *      * @param beta2 double类型参数
-     */
     public void setBeta2(double beta2) {
         this.beta2 = beta2;
     }
     
     /**
      * Get beta2 coefficient.
-     */
-    /**
-     * getBeta2方法。
-     * @return double类型返回值
-     */
-    /**
-     * getBeta2方法。
-     * @return double类型返回值
      */
     public double getBeta2() {
         return beta2;
@@ -230,14 +164,6 @@ public class Adam extends Optimizer {
     /**
      * Set epsilon for numerical stability.
      */
-    /**
-     * setEps方法。
-     *      * @param eps double类型参数
-     */
-    /**
-     * setEps方法。
-     *      * @param eps double类型参数
-     */
     public void setEps(double eps) {
         this.eps = eps;
     }
@@ -245,22 +171,11 @@ public class Adam extends Optimizer {
     /**
      * Get epsilon.
      */
-    /**
-     * getEps方法。
-     * @return double类型返回值
-     */
-    /**
-     * getEps方法。
-     * @return double类型返回值
-     */
     public double getEps() {
         return eps;
     }
     
     @Override
-    /**
-     * clearState方法。
-     */
     /**
      * clearState方法。
      */

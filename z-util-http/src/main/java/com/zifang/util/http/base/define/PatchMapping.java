@@ -8,11 +8,5 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * PatchMapping类。
- */
-/**
- * PatchMapping类。
- */
 public class PatchMapping {
 }

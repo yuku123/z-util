@@ -9,9 +9,6 @@ package com.zifang.util.zex.sort;
  * @author zifang
  * @version 1.0
  */
-/**
- * Sort04快排类。
- */
 public class Sort04快排 {
 
     /**

@@ -12,12 +12,6 @@ import java.util.function.Predicate;
 /**
  * 分页请求
  */
-/**
- * PageRequest类。
- */
-/**
- * PageRequest类。
- */
 public class PageRequest extends BaseRequest {
     private static final long serialVersionUID = -8059516751569851680L;
 
@@ -32,16 +26,9 @@ public class PageRequest extends BaseRequest {
     /**
      * PageRequest方法。
      */
-    /**
-     * PageRequest方法。
-     */
     public PageRequest() {
     }
 
-    /**
-     * getCurrent方法。
-     * @return long类型返回值
-     */
     /**
      * getCurrent方法。
      * @return long类型返回值
@@ -54,18 +41,10 @@ public class PageRequest extends BaseRequest {
      * setCurrent方法。
      *      * @param current long类型参数
      */
-    /**
-     * setCurrent方法。
-     *      * @param current long类型参数
-     */
     public void setCurrent(Long current) {
         this.current = current;
     }
 
-    /**
-     * getSize方法。
-     * @return long类型返回值
-     */
     /**
      * getSize方法。
      * @return long类型返回值
@@ -78,18 +57,10 @@ public class PageRequest extends BaseRequest {
      * setSize方法。
      *      * @param size long类型参数
      */
-    /**
-     * setSize方法。
-     *      * @param size long类型参数
-     */
     public void setSize(Long size) {
         this.size = size;
     }
 
-    /**
-     * getOrders方法。
-     * @return List<SortField>类型返回值
-     */
     /**
      * getOrders方法。
      * @return List<SortField>类型返回值
@@ -102,20 +73,10 @@ public class PageRequest extends BaseRequest {
      * setOrders方法。
      *      * @param orders ListSortField类型参数
      */
-    /**
-     * setOrders方法。
-     *      * @param orders ListSortField类型参数
-     */
     public void setOrders(List<SortField> orders) {
         this.orders = orders;
     }
 
-    /**
-     * of方法。
-     *      * @param current long类型参数
-     * @param size long类型参数
-     * @return static PageRequest类型返回值
-     */
     /**
      * of方法。
      *      * @param current long类型参数
@@ -136,13 +97,6 @@ public class PageRequest extends BaseRequest {
      * @param orders ListSortField类型参数
      * @return static PageRequest类型返回值
      */
-    /**
-     * of方法。
-     *      * @param current long类型参数
-     * @param size long类型参数
-     * @param orders ListSortField类型参数
-     * @return static PageRequest类型返回值
-     */
     public static PageRequest of(Long current, Long size, List<SortField> orders){
         PageRequest pageRequest = of(current, size);
         pageRequest.setOrders(orders);
@@ -155,16 +109,6 @@ public class PageRequest extends BaseRequest {
      * @param items 条件
      * @return 返回分页参数本身
      */
-    /**
-     * addOrder方法。
-     *      * @param items ListSortField类型参数
-     * @return PageRequest类型返回值
-     */
-    /**
-     * addOrder方法。
-     *      * @param items ListSortField类型参数
-     * @return PageRequest类型返回值
-     */
     public PageRequest addOrder(List<SortField> items) {
         orders.addAll(items);
         return this;
@@ -174,14 +118,6 @@ public class PageRequest extends BaseRequest {
      * 移除符合条件的条件
      *
      * @param filter 条件判断
-     */
-    /**
-     * removeOrder方法。
-     *      * @param filter PredicateSortField类型参数
-     */
-    /**
-     * removeOrder方法。
-     *      * @param filter PredicateSortField类型参数
      */
     public void removeOrder(Predicate<SortField> filter) {
         for (int i = orders.size() - 1; i >= 0; i--) {
@@ -196,16 +132,6 @@ public class PageRequest extends BaseRequest {
      *
      * @param filter 过滤器
      * @return 返回正序排列的字段数组
-     */
-    /**
-     * mapOrderToArray方法。
-     *      * @param filter PredicateSortField类型参数
-     * @return String[]类型返回值
-     */
-    /**
-     * mapOrderToArray方法。
-     *      * @param filter PredicateSortField类型参数
-     * @return String[]类型返回值
      */
     public String[] mapOrderToArray(Predicate<SortField> filter) {
         List<String> columns = new ArrayList<>(orders.size());
@@ -222,20 +148,11 @@ public class PageRequest extends BaseRequest {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "PageRequest{current=" + current + ", size=" + size + ", orders=" + orders + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -251,10 +168,6 @@ public class PageRequest extends BaseRequest {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

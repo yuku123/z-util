@@ -8,11 +8,5 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * RequestAttribute注解。
- */
-/**
- * RequestAttribute注解。
- */
 public @interface RequestAttribute {
 }

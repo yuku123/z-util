@@ -5,12 +5,6 @@ package com.zifang.util.core.pattern.chain;
  *
  * @author zifang
  */
-/**
- * ProcessorResult枚举。
- */
-/**
- * ProcessorResult枚举。
- */
 public enum ProcessorResult {
 
     /**
@@ -48,24 +42,12 @@ public enum ProcessorResult {
      * isSuccess方法。
      * @return boolean类型返回值
      */
-    /**
-     * isSuccess方法。
-     * @return boolean类型返回值
-     */
     public boolean isSuccess() {
         return success;
     }
 
     /**
      * 是否继续传递给下一个处理器
-     */
-    /**
-     * shouldContinue方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * shouldContinue方法。
-     * @return boolean类型返回值
      */
     public boolean shouldContinue() {
         return this == CONTINUE || this == SKIP;
@@ -74,30 +56,12 @@ public enum ProcessorResult {
     /**
      * 转换为成功状态
      */
-    /**
-     * isFinished方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isFinished方法。
-     * @return boolean类型返回值
-     */
     public boolean isFinished() {
         return this == FINISHED;
     }
 
     /**
      * 组合结果：只有两者都成功才成功
-     */
-    /**
-     * and方法。
-     *      * @param other ProcessorResult类型参数
-     * @return ProcessorResult类型返回值
-     */
-    /**
-     * and方法。
-     *      * @param other ProcessorResult类型参数
-     * @return ProcessorResult类型返回值
      */
     public ProcessorResult and(ProcessorResult other) {
         if (!this.success || !other.success) {

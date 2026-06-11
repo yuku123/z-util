@@ -5,12 +5,6 @@ package com.zifang.util.core.pattern.cache;
  *
  * @author zifang
  */
-/**
- * CacheClient接口。
- */
-/**
- * CacheClient接口。
- */
 public interface CacheClient {
 
     /**

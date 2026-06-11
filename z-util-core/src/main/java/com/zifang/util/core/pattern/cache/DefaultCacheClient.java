@@ -5,12 +5,6 @@ package com.zifang.util.core.pattern.cache;
  *
  * @author zifang
  */
-/**
- * DefaultCacheClient类。
- */
-/**
- * DefaultCacheClient类。
- */
 public class DefaultCacheClient implements CacheClient {
 
     private CacheProvider cacheProvider;
@@ -27,11 +21,6 @@ public class DefaultCacheClient implements CacheClient {
      *      * @param key String类型参数
      * @param value Object类型参数
      */
-    /**
-     * set方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     */
     public void set(String key, Object value) {
 
     }
@@ -43,11 +32,6 @@ public class DefaultCacheClient implements CacheClient {
      * @return 缓存值，如果键不存在则返回null
      */
     @Override
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @return Object类型返回值
-     */
     /**
      * get方法。
      *      * @param key String类型参数

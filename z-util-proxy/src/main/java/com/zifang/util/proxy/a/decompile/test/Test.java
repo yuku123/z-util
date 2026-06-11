@@ -7,19 +7,8 @@ import com.zifang.util.proxy.a.decompile.app.App;
  * <p>
  * 用于测试类文件反编译功能。
  */
-/**
- * Test类。
- */
-/**
- * Test类。
- */
 public class Test {
 
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
     /**
      * main方法。
      *      * @param args String[]类型参数

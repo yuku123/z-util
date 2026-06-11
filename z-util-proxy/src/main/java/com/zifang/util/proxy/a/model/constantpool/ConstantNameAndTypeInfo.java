@@ -10,12 +10,6 @@ import java.io.InputStream;
  * CONSTANT_NameAndType_info用于表示字段或方法的名称和类型的符号引用。
  * 包含name_index和descriptor_index两个指向UTF-8常量的索引。
  */
-/**
- * ConstantNameAndTypeInfo类。
- */
-/**
- * ConstantNameAndTypeInfo类。
- */
 public class ConstantNameAndTypeInfo extends AbstractConstantPool {
     private U2 nameIndex;
     private U2 descriptorIndex;
@@ -25,18 +19,10 @@ public class ConstantNameAndTypeInfo extends AbstractConstantPool {
      * ConstantNameAndTypeInfo方法。
      *      * @param tag byte类型参数
      */
-    /**
-     * ConstantNameAndTypeInfo方法。
-     *      * @param tag byte类型参数
-     */
     public ConstantNameAndTypeInfo(byte tag) {
         super(tag);
     }
 
-    /**
-     * read方法。
-     *      * @param inputStream InputStream类型参数
-     */
     /**
      * read方法。
      *      * @param inputStream InputStream类型参数
@@ -50,18 +36,10 @@ public class ConstantNameAndTypeInfo extends AbstractConstantPool {
      * getNameIndex方法。
      * @return U2类型返回值
      */
-    /**
-     * getNameIndex方法。
-     * @return U2类型返回值
-     */
     public U2 getNameIndex() {
         return nameIndex;
     }
 
-    /**
-     * getDescriptorIndex方法。
-     * @return U2类型返回值
-     */
     /**
      * getDescriptorIndex方法。
      * @return U2类型返回值
@@ -71,10 +49,6 @@ public class ConstantNameAndTypeInfo extends AbstractConstantPool {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

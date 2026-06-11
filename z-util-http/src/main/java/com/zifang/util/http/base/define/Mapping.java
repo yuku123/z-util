@@ -8,11 +8,5 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * Mapping类。
- */
-/**
- * Mapping类。
- */
 public class Mapping {
 }

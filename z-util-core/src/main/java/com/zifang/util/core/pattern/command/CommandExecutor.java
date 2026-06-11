@@ -11,22 +11,12 @@ import java.util.function.Consumer;
  * @param <C> 上下文类型
  * @author zifang
  */
-/**
- * CommandExecutor类。
- */
-/**
- * CommandExecutor类。
- */
 public class CommandExecutor<C extends CommandContext> {
 
     private final CommandRegistry<C> registry;
     private final List<CommandListener<C>> listeners;
     private Command<C> lastExecuted;
 
-    /**
-     * CommandExecutor方法。
-     *      * @param registry CommandRegistryC类型参数
-     */
     /**
      * CommandExecutor方法。
      *      * @param registry CommandRegistryC类型参数
@@ -39,16 +29,6 @@ public class CommandExecutor<C extends CommandContext> {
     /**
      * 执行单个命令
      */
-    /**
-     * execute方法。
-     *      * @param context C类型参数
-     * @param commandName String类型参数
-     */
-    /**
-     * execute方法。
-     *      * @param context C类型参数
-     * @param commandName String类型参数
-     */
     public void execute(C context, String commandName) {
         Command<C> command = registry.get(commandName);
         if (command == null) {
@@ -59,16 +39,6 @@ public class CommandExecutor<C extends CommandContext> {
 
     /**
      * 执行命令链（按顺序）
-     */
-    /**
-     * executeChain方法。
-     *      * @param context C类型参数
-     * @param commandNames String...类型参数
-     */
-    /**
-     * executeChain方法。
-     *      * @param context C类型参数
-     * @param commandNames String...类型参数
      */
     public void executeChain(C context, String... commandNames) {
         for (String name : commandNames) {
@@ -81,16 +51,6 @@ public class CommandExecutor<C extends CommandContext> {
 
     /**
      * 执行命令链（列表）
-     */
-    /**
-     * executeChain方法。
-     *      * @param context C类型参数
-     * @param commandNames ListString类型参数
-     */
-    /**
-     * executeChain方法。
-     *      * @param context C类型参数
-     * @param commandNames ListString类型参数
      */
     public void executeChain(C context, List<String> commandNames) {
         executeChain(context, commandNames.toArray(new String[0]));
@@ -120,30 +80,12 @@ public class CommandExecutor<C extends CommandContext> {
     /**
      * 获取最后执行的命令
      */
-    /**
-     * getLastExecuted方法。
-     * @return Command<C>类型返回值
-     */
-    /**
-     * getLastExecuted方法。
-     * @return Command<C>类型返回值
-     */
     public Command<C> getLastExecuted() {
         return lastExecuted;
     }
 
     /**
      * 添加监听器
-     */
-    /**
-     * addListener方法。
-     *      * @param listener CommandListenerC类型参数
-     * @return CommandExecutor<C>类型返回值
-     */
-    /**
-     * addListener方法。
-     *      * @param listener CommandListenerC类型参数
-     * @return CommandExecutor<C>类型返回值
      */
     public CommandExecutor<C> addListener(CommandListener<C> listener) {
         if (listener != null) {
@@ -154,16 +96,6 @@ public class CommandExecutor<C extends CommandContext> {
 
     /**
      * 移除监听器
-     */
-    /**
-     * removeListener方法。
-     *      * @param listener CommandListenerC类型参数
-     * @return CommandExecutor<C>类型返回值
-     */
-    /**
-     * removeListener方法。
-     *      * @param listener CommandListenerC类型参数
-     * @return CommandExecutor<C>类型返回值
      */
     public CommandExecutor<C> removeListener(CommandListener<C> listener) {
         listeners.remove(listener);
@@ -197,14 +129,6 @@ public class CommandExecutor<C extends CommandContext> {
     /**
      * 获取注册表
      */
-    /**
-     * getRegistry方法。
-     * @return CommandRegistry<C>类型返回值
-     */
-    /**
-     * getRegistry方法。
-     * @return CommandRegistry<C>类型返回值
-     */
     public CommandRegistry<C> getRegistry() {
         return registry;
     }
@@ -212,12 +136,6 @@ public class CommandExecutor<C extends CommandContext> {
     /**
      * 命令监听器接口
      */
-/**
- * CommandListener接口。
- */
-/**
- * CommandListener接口。
- */
     public interface CommandListener<C extends CommandContext> {
         default void onBeforeExecute(Command<C> command, C context) {}
         default void onAfterExecute(Command<C> command, C context, long duration, Exception error) {}
@@ -233,17 +151,10 @@ public class CommandExecutor<C extends CommandContext> {
     /**
      * LoggingListener方法。
      */
-    /**
-     * LoggingListener方法。
-     */
         public LoggingListener() {
             this.logger = java.util.logging.Logger.getLogger(CommandExecutor.class.getName());
         }
 
-    /**
-     * LoggingListener方法。
-     *      * @param logger java.util.logging.Logger类型参数
-     */
     /**
      * LoggingListener方法。
      *      * @param logger java.util.logging.Logger类型参数
@@ -253,11 +164,6 @@ public class CommandExecutor<C extends CommandContext> {
         }
 
         @Override
-    /**
-     * onBeforeExecute方法。
-     *      * @param command CommandC类型参数
-     * @param context C类型参数
-     */
     /**
      * onBeforeExecute方法。
      *      * @param command CommandC类型参数
@@ -275,13 +181,6 @@ public class CommandExecutor<C extends CommandContext> {
      * @param duration long类型参数
      * @param error Exception类型参数
      */
-    /**
-     * onAfterExecute方法。
-     *      * @param command CommandC类型参数
-     * @param context C类型参数
-     * @param duration long类型参数
-     * @param error Exception类型参数
-     */
         public void onAfterExecute(Command<C> command, C context, long duration, Exception error) {
             if (error != null) {
                 logger.warning("Command '" + command.getName() + "' failed after " + duration + "ms: " + error.getMessage());
@@ -291,13 +190,6 @@ public class CommandExecutor<C extends CommandContext> {
         }
 
         @Override
-    /**
-     * onError方法。
-     *      * @param command CommandC类型参数
-     * @param context C类型参数
-     * @param error Exception类型参数
-     * @param duration long类型参数
-     */
     /**
      * onError方法。
      *      * @param command CommandC类型参数

@@ -8,12 +8,6 @@ import java.util.function.Consumer;
  * @param <C> 上下文类型
  * @author zifang
  */
-/**
- * Command接口。
- */
-/**
- * Command接口。
- */
 public interface Command<C> {
 
     /**

@@ -14,12 +14,6 @@ import java.util.Random;
  * 
  * Uses NdArray for matrix operations where possible.
  */
-/**
- * GMM类。
- */
-/**
- * GMM类。
- */
 public class GMM {
     private int nComponents;
     private int maxIterations;
@@ -40,12 +34,6 @@ public class GMM {
      * @param maxIterations int类型参数
      * @param tolerance double类型参数
      */
-    /**
-     * GMM方法。
-     *      * @param nComponents int类型参数
-     * @param maxIterations int类型参数
-     * @param tolerance double类型参数
-     */
     public GMM(int nComponents, int maxIterations, double tolerance) {
         this.nComponents = nComponents;
         this.maxIterations = maxIterations;
@@ -56,14 +44,6 @@ public class GMM {
      * Fit the GMM to the data.
      * 
      * @param X NdArray of shape [n_samples, n_features]
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
      */
     public void fit(NdArray X) {
         this.Xdata = toDouble2D(X);
@@ -98,16 +78,6 @@ public class GMM {
      * @param X NdArray of shape [n_samples, n_features]
      * @return cluster labels array
      */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
     public int[] predict(NdArray X) {
         double[][] Xtest = toDouble2D(X);
         int n = Xtest.length;
@@ -135,16 +105,6 @@ public class GMM {
      * 
      * @param X NdArray of shape [n_samples, n_features]
      * @return NdArray of shape [n_samples x n_components] with probabilities
-     */
-    /**
-     * predictProba方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
-     */
-    /**
-     * predictProba方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
      */
     public NdArray predictProba(NdArray X) {
         double[][] Xtest = toDouble2D(X);
@@ -183,16 +143,6 @@ public class GMM {
      * 
      * @param X NdArray of shape [n_samples, n_features]
      * @return cluster labels array
-     */
-    /**
-     * fitPredict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
-    /**
-     * fitPredict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
      */
     public int[] fitPredict(NdArray X) {
         fit(X);

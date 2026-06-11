@@ -13,12 +13,6 @@ import java.util.function.Function;
  * Series 类 - 对标 pandas Series
  * 带标签的一维数组
  */
-/**
- * Series类。
- */
-/**
- * Series类。
- */
 public class Series {
 
     private Num data;
@@ -32,19 +26,10 @@ public class Series {
      * Series方法。
      *      * @param data Object类型参数
      */
-    /**
-     * Series方法。
-     *      * @param data Object类型参数
-     */
     public Series(Object data) {
         this(data, (Index) null, null, null);
     }
 
-    /**
-     * Series方法。
-     *      * @param data Object类型参数
-     * @param index String[]类型参数
-     */
     /**
      * Series方法。
      *      * @param data Object类型参数
@@ -59,11 +44,6 @@ public class Series {
      *      * @param data Object类型参数
      * @param index Index类型参数
      */
-    /**
-     * Series方法。
-     *      * @param data Object类型参数
-     * @param index Index类型参数
-     */
     public Series(Object data, Index index) {
         this(data, index, null, null);
     }
@@ -73,22 +53,10 @@ public class Series {
      *      * @param data Object类型参数
      * @param name String类型参数
      */
-    /**
-     * Series方法。
-     *      * @param data Object类型参数
-     * @param name String类型参数
-     */
     public Series(Object data, String name) {
         this(data, (Index) null, name, null);
     }
 
-    /**
-     * Series方法。
-     *      * @param data Object类型参数
-     * @param index Index类型参数
-     * @param name String类型参数
-     * @param dtype DType类型参数
-     */
     /**
      * Series方法。
      *      * @param data Object类型参数
@@ -142,16 +110,6 @@ public class Series {
      * @param values 可变参数值列表
      * @return 新创建的 Series 对象
      */
-    /**
-     * of方法。
-     *      * @param values String[]类型参数
-     * @return static Series类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param values String[]类型参数
-     * @return static Series类型返回值
-     */
     public static Series of(String[] values) {
         // 将字符串值转换为数值索引，同时保留字符串信息
         double[] numericValues = new double[values.length];
@@ -171,27 +129,12 @@ public class Series {
     /**
      * 整数类型的便捷工厂方法
      */
-    /**
-     * of方法。
-     *      * @param values int[]类型参数
-     * @return static Series类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param values int[]类型参数
-     * @return static Series类型返回值
-     */
     public static Series of(int[] values) {
         return new Series(values);
     }
 
 
 
-    /**
-     * fromMap方法。
-     *      * @param map MapString,类型参数
-     * @return static Series类型返回值
-     */
     /**
      * fromMap方法。
      *      * @param map MapString,类型参数
@@ -217,16 +160,6 @@ public class Series {
      * @param values 可变参数数值列表
      * @return 新创建的 Series 对象
      */
-    /**
-     * of方法。
-     *      * @param values double[]类型参数
-     * @return static Series类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param values double[]类型参数
-     * @return static Series类型返回值
-     */
     public static Series of(double[] values) {
         return new Series(values);
     }
@@ -237,18 +170,6 @@ public class Series {
      * @param index 索引数组
      * @param values 数值数组
      * @return 新创建的 Series 对象
-     */
-    /**
-     * of方法。
-     *      * @param index String[]类型参数
-     * @param values double[]类型参数
-     * @return static Series类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param index String[]类型参数
-     * @param values double[]类型参数
-     * @return static Series类型返回值
      */
     public static Series of(String[] index, double[] values) {
         return new Series(values, index);
@@ -261,20 +182,10 @@ public class Series {
      *      * @param i int类型参数
      * @return double类型返回值
      */
-    /**
-     * get方法。
-     *      * @param i int类型参数
-     * @return double类型返回值
-     */
     public double get(int i) {
         return getDataAsDoubleArray()[i];
     }
 
-    /**
-     * get方法。
-     *      * @param label String类型参数
-     * @return double类型返回值
-     */
     /**
      * get方法。
      *      * @param label String类型参数
@@ -293,11 +204,6 @@ public class Series {
      *      * @param labels String[]类型参数
      * @return Series类型返回值
      */
-    /**
-     * get方法。
-     *      * @param labels String[]类型参数
-     * @return Series类型返回值
-     */
     public Series get(String[] labels) {
         double[] values = new double[labels.length];
         for (int i = 0; i < labels.length; i++) {
@@ -306,11 +212,6 @@ public class Series {
         return new Series(values, Index.of(labels), name, dtype);
     }
 
-    /**
-     * get方法。
-     *      * @param indices int[]类型参数
-     * @return Series类型返回值
-     */
     /**
      * get方法。
      *      * @param indices int[]类型参数
@@ -333,22 +234,10 @@ public class Series {
      * @param stop int类型参数
      * @return Series类型返回值
      */
-    /**
-     * slice方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @return Series类型返回值
-     */
     public Series slice(int start, int stop) {
         return get(Arrays.copyOfRange(getIndexAsIntArray(), start, stop));
     }
 
-    /**
-     * loc方法。
-     *      * @param start String类型参数
-     * @param end String类型参数
-     * @return Series类型返回值
-     */
     /**
      * loc方法。
      *      * @param start String类型参数
@@ -370,23 +259,12 @@ public class Series {
      * @param end int类型参数
      * @return Series类型返回值
      */
-    /**
-     * iloc方法。
-     *      * @param start int类型参数
-     * @param end int类型参数
-     * @return Series类型返回值
-     */
     public Series iloc(int start, int end) {
         return slice(start, end);
     }
 
     // ==================== 布尔索引和过滤 ====================
 
-    /**
-     * filter方法。
-     *      * @param condition FunctionDouble,类型参数
-     * @return Series类型返回值
-     */
     /**
      * filter方法。
      *      * @param condition FunctionDouble,类型参数
@@ -413,13 +291,6 @@ public class Series {
      * @param elseValue double类型参数
      * @return Series类型返回值
      */
-    /**
-     * where方法。
-     *      * @param condition FunctionDouble,类型参数
-     * @param thenValue double类型参数
-     * @param elseValue double类型参数
-     * @return Series类型返回值
-     */
     public Series where(Function<Double, Boolean> condition, double thenValue, double elseValue) {
         double[] data = getDataAsDoubleArray();
         double[] result = new double[data.length];
@@ -436,11 +307,6 @@ public class Series {
      *      * @param other Series类型参数
      * @return Series类型返回值
      */
-    /**
-     * add方法。
-     *      * @param other Series类型参数
-     * @return Series类型返回值
-     */
     public Series add(Series other) {
         checkAlignment(other);
         return new Series(data.add(other.data), index, name, dtype);
@@ -451,20 +317,10 @@ public class Series {
      *      * @param scalar double类型参数
      * @return Series类型返回值
      */
-    /**
-     * add方法。
-     *      * @param scalar double类型参数
-     * @return Series类型返回值
-     */
     public Series add(double scalar) {
         return new Series(data.add(scalar), index, name, dtype);
     }
 
-    /**
-     * subtract方法。
-     *      * @param other Series类型参数
-     * @return Series类型返回值
-     */
     /**
      * subtract方法。
      *      * @param other Series类型参数
@@ -480,20 +336,10 @@ public class Series {
      *      * @param scalar double类型参数
      * @return Series类型返回值
      */
-    /**
-     * subtract方法。
-     *      * @param scalar double类型参数
-     * @return Series类型返回值
-     */
     public Series subtract(double scalar) {
         return new Series(data.subtract(scalar), index, name, dtype);
     }
 
-    /**
-     * multiply方法。
-     *      * @param other Series类型参数
-     * @return Series类型返回值
-     */
     /**
      * multiply方法。
      *      * @param other Series类型参数
@@ -509,20 +355,10 @@ public class Series {
      *      * @param scalar double类型参数
      * @return Series类型返回值
      */
-    /**
-     * multiply方法。
-     *      * @param scalar double类型参数
-     * @return Series类型返回值
-     */
     public Series multiply(double scalar) {
         return new Series(data.multiply(scalar), index, name, dtype);
     }
 
-    /**
-     * divide方法。
-     *      * @param other Series类型参数
-     * @return Series类型返回值
-     */
     /**
      * divide方法。
      *      * @param other Series类型参数
@@ -538,20 +374,10 @@ public class Series {
      *      * @param scalar double类型参数
      * @return Series类型返回值
      */
-    /**
-     * divide方法。
-     *      * @param scalar double类型参数
-     * @return Series类型返回值
-     */
     public Series divide(double scalar) {
         return new Series(data.divide(scalar), index, name, dtype);
     }
 
-    /**
-     * pow方法。
-     *      * @param exponent double类型参数
-     * @return Series类型返回值
-     */
     /**
      * pow方法。
      *      * @param exponent double类型参数
@@ -565,18 +391,10 @@ public class Series {
      * abs方法。
      * @return Series类型返回值
      */
-    /**
-     * abs方法。
-     * @return Series类型返回值
-     */
     public Series abs() {
         return new Series(data.abs(), index, name, dtype);
     }
 
-    /**
-     * sqrt方法。
-     * @return Series类型返回值
-     */
     /**
      * sqrt方法。
      * @return Series类型返回值
@@ -589,18 +407,10 @@ public class Series {
      * log方法。
      * @return Series类型返回值
      */
-    /**
-     * log方法。
-     * @return Series类型返回值
-     */
     public Series log() {
         return new Series(data.log(), index, name, dtype);
     }
 
-    /**
-     * exp方法。
-     * @return Series类型返回值
-     */
     /**
      * exp方法。
      * @return Series类型返回值
@@ -615,18 +425,10 @@ public class Series {
      * sum方法。
      * @return double类型返回值
      */
-    /**
-     * sum方法。
-     * @return double类型返回值
-     */
     public double sum() {
         return data.sum();
     }
 
-    /**
-     * mean方法。
-     * @return double类型返回值
-     */
     /**
      * mean方法。
      * @return double类型返回值
@@ -639,18 +441,10 @@ public class Series {
      * max方法。
      * @return double类型返回值
      */
-    /**
-     * max方法。
-     * @return double类型返回值
-     */
     public double max() {
         return data.max();
     }
 
-    /**
-     * min方法。
-     * @return double类型返回值
-     */
     /**
      * min方法。
      * @return double类型返回值
@@ -663,10 +457,6 @@ public class Series {
      * std方法。
      * @return double类型返回值
      */
-    /**
-     * std方法。
-     * @return double类型返回值
-     */
     public double std() {
         return data.std();
     }
@@ -675,18 +465,10 @@ public class Series {
      * var方法。
      * @return double类型返回值
      */
-    /**
-     * var方法。
-     * @return double类型返回值
-     */
     public double var() {
         return data.var();
     }
 
-    /**
-     * median方法。
-     * @return double类型返回值
-     */
     /**
      * median方法。
      * @return double类型返回值
@@ -702,11 +484,6 @@ public class Series {
         }
     }
 
-    /**
-     * percentile方法。
-     *      * @param q double类型参数
-     * @return double类型返回值
-     */
     /**
      * percentile方法。
      *      * @param q double类型参数
@@ -729,10 +506,6 @@ public class Series {
      * count方法。
      * @return long类型返回值
      */
-    /**
-     * count方法。
-     * @return long类型返回值
-     */
     public long count() {
         return getDataAsDoubleArray().length;
     }
@@ -741,18 +514,10 @@ public class Series {
      * sem方法。
      * @return double类型返回值
      */
-    /**
-     * sem方法。
-     * @return double类型返回值
-     */
     public double sem() {
         return std() / Math.sqrt(count());
     }
 
-    /**
-     * cumsum方法。
-     * @return Series类型返回值
-     */
     /**
      * cumsum方法。
      * @return Series类型返回值
@@ -772,10 +537,6 @@ public class Series {
      * cumprod方法。
      * @return Series类型返回值
      */
-    /**
-     * cumprod方法。
-     * @return Series类型返回值
-     */
     public Series cumprod() {
         double[] data = getDataAsDoubleArray();
         double[] result = new double[data.length];
@@ -787,11 +548,6 @@ public class Series {
         return new Series(result, index, name, dtype);
     }
 
-    /**
-     * diff方法。
-     *      * @param periods int类型参数
-     * @return Series类型返回值
-     */
     /**
      * diff方法。
      *      * @param periods int类型参数
@@ -814,19 +570,10 @@ public class Series {
      * diff方法。
      * @return Series类型返回值
      */
-    /**
-     * diff方法。
-     * @return Series类型返回值
-     */
     public Series diff() {
         return diff(1);
     }
 
-    /**
-     * pct_change方法。
-     *      * @param periods int类型参数
-     * @return Series类型返回值
-     */
     /**
      * pct_change方法。
      *      * @param periods int类型参数
@@ -849,10 +596,6 @@ public class Series {
      * pct_change方法。
      * @return Series类型返回值
      */
-    /**
-     * pct_change方法。
-     * @return Series类型返回值
-     */
     public Series pct_change() {
         return pct_change(1);
     }
@@ -864,20 +607,10 @@ public class Series {
      *      * @param value double类型参数
      * @return Series类型返回值
      */
-    /**
-     * eq方法。
-     *      * @param value double类型参数
-     * @return Series类型返回值
-     */
     public Series eq(double value) {
         return compare(v -> v == value);
     }
 
-    /**
-     * eq方法。
-     *      * @param other Series类型参数
-     * @return Series类型返回值
-     */
     /**
      * eq方法。
      *      * @param other Series类型参数
@@ -899,20 +632,10 @@ public class Series {
      *      * @param value double类型参数
      * @return Series类型返回值
      */
-    /**
-     * ne方法。
-     *      * @param value double类型参数
-     * @return Series类型返回值
-     */
     public Series ne(double value) {
         return compare(v -> v != value);
     }
 
-    /**
-     * gt方法。
-     *      * @param value double类型参数
-     * @return Series类型返回值
-     */
     /**
      * gt方法。
      *      * @param value double类型参数
@@ -927,11 +650,6 @@ public class Series {
      *      * @param value double类型参数
      * @return Series类型返回值
      */
-    /**
-     * ge方法。
-     *      * @param value double类型参数
-     * @return Series类型返回值
-     */
     public Series ge(double value) {
         return compare(v -> v >= value);
     }
@@ -941,20 +659,10 @@ public class Series {
      *      * @param value double类型参数
      * @return Series类型返回值
      */
-    /**
-     * lt方法。
-     *      * @param value double类型参数
-     * @return Series类型返回值
-     */
     public Series lt(double value) {
         return compare(v -> v < value);
     }
 
-    /**
-     * le方法。
-     *      * @param value double类型参数
-     * @return Series类型返回值
-     */
     /**
      * le方法。
      *      * @param value double类型参数
@@ -977,10 +685,6 @@ public class Series {
      * all方法。
      * @return boolean类型返回值
      */
-    /**
-     * all方法。
-     * @return boolean类型返回值
-     */
     public boolean all() {
         double[] data = getDataAsDoubleArray();
         for (double v : data) {
@@ -991,10 +695,6 @@ public class Series {
         return true;
     }
 
-    /**
-     * any方法。
-     * @return boolean类型返回值
-     */
     /**
      * any方法。
      * @return boolean类型返回值
@@ -1015,10 +715,6 @@ public class Series {
      * isna方法。
      * @return Series类型返回值
      */
-    /**
-     * isna方法。
-     * @return Series类型返回值
-     */
     public Series isna() {
         double[] data = getDataAsDoubleArray();
         double[] result = new double[data.length];
@@ -1028,10 +724,6 @@ public class Series {
         return new Series(result, index, name, dtype);
     }
 
-    /**
-     * notna方法。
-     * @return Series类型返回值
-     */
     /**
      * notna方法。
      * @return Series类型返回值
@@ -1050,11 +742,6 @@ public class Series {
      *      * @param value double类型参数
      * @return Series类型返回值
      */
-    /**
-     * fillna方法。
-     *      * @param value double类型参数
-     * @return Series类型返回值
-     */
     public Series fillna(double value) {
         double[] data = getDataAsDoubleArray();
         double[] result = new double[data.length];
@@ -1064,10 +751,6 @@ public class Series {
         return new Series(result, index, name, dtype);
     }
 
-    /**
-     * dropna方法。
-     * @return Series类型返回值
-     */
     /**
      * dropna方法。
      * @return Series类型返回值
@@ -1095,19 +778,10 @@ public class Series {
      * copy方法。
      * @return Series类型返回值
      */
-    /**
-     * copy方法。
-     * @return Series类型返回值
-     */
     public Series copy() {
         return new Series(data, index, name, dtype);
     }
 
-    /**
-     * head方法。
-     *      * @param n int类型参数
-     * @return Series类型返回值
-     */
     /**
      * head方法。
      *      * @param n int类型参数
@@ -1121,19 +795,10 @@ public class Series {
      * head方法。
      * @return Series类型返回值
      */
-    /**
-     * head方法。
-     * @return Series类型返回值
-     */
     public Series head() {
         return head(5);
     }
 
-    /**
-     * tail方法。
-     *      * @param n int类型参数
-     * @return Series类型返回值
-     */
     /**
      * tail方法。
      *      * @param n int类型参数
@@ -1148,10 +813,6 @@ public class Series {
      * tail方法。
      * @return Series类型返回值
      */
-    /**
-     * tail方法。
-     * @return Series类型返回值
-     */
     public Series tail() {
         return tail(5);
     }
@@ -1160,19 +821,10 @@ public class Series {
      * sort_values方法。
      * @return Series类型返回值
      */
-    /**
-     * sort_values方法。
-     * @return Series类型返回值
-     */
     public Series sort_values() {
         return sort_values(true);
     }
 
-    /**
-     * sort_values方法。
-     *      * @param ascending boolean类型参数
-     * @return Series类型返回值
-     */
     /**
      * sort_values方法。
      *      * @param ascending boolean类型参数
@@ -1201,19 +853,10 @@ public class Series {
      * sort_index方法。
      * @return Series类型返回值
      */
-    /**
-     * sort_index方法。
-     * @return Series类型返回值
-     */
     public Series sort_index() {
         return sort_index(true);
     }
 
-    /**
-     * sort_index方法。
-     *      * @param ascending boolean类型参数
-     * @return Series类型返回值
-     */
     /**
      * sort_index方法。
      *      * @param ascending boolean类型参数
@@ -1244,11 +887,6 @@ public class Series {
      *      * @param decimals int类型参数
      * @return Series类型返回值
      */
-    /**
-     * round方法。
-     *      * @param decimals int类型参数
-     * @return Series类型返回值
-     */
     public Series round(int decimals) {
         double[] data = getDataAsDoubleArray();
         double[] result = new double[data.length];
@@ -1263,20 +901,10 @@ public class Series {
      * round方法。
      * @return Series类型返回值
      */
-    /**
-     * round方法。
-     * @return Series类型返回值
-     */
     public Series round() {
         return round(0);
     }
 
-    /**
-     * clip方法。
-     *      * @param lower double类型参数
-     * @param upper double类型参数
-     * @return Series类型返回值
-     */
     /**
      * clip方法。
      *      * @param lower double类型参数
@@ -1298,12 +926,6 @@ public class Series {
      * @param right double类型参数
      * @return Series类型返回值
      */
-    /**
-     * between方法。
-     *      * @param left double类型参数
-     * @param right double类型参数
-     * @return Series类型返回值
-     */
     public Series between(double left, double right) {
         double[] data = getDataAsDoubleArray();
         double[] result = new double[data.length];
@@ -1313,10 +935,6 @@ public class Series {
         return new Series(result, index, name, dtype);
     }
 
-    /**
-     * unique方法。
-     * @return Series类型返回值
-     */
     /**
      * unique方法。
      * @return Series类型返回值
@@ -1339,18 +957,10 @@ public class Series {
      * nunique方法。
      * @return int类型返回值
      */
-    /**
-     * nunique方法。
-     * @return int类型返回值
-     */
     public int nunique() {
         return (int) unique().count();
     }
 
-    /**
-     * value_counts方法。
-     * @return Series类型返回值
-     */
     /**
      * value_counts方法。
      * @return Series类型返回值
@@ -1376,18 +986,10 @@ public class Series {
      * is_unique方法。
      * @return boolean类型返回值
      */
-    /**
-     * is_unique方法。
-     * @return boolean类型返回值
-     */
     public boolean is_unique() {
         return nunique() == count();
     }
 
-    /**
-     * is_monotonic_increasing方法。
-     * @return boolean类型返回值
-     */
     /**
      * is_monotonic_increasing方法。
      * @return boolean类型返回值
@@ -1402,10 +1004,6 @@ public class Series {
         return true;
     }
 
-    /**
-     * is_monotonic_decreasing方法。
-     * @return boolean类型返回值
-     */
     /**
      * is_monotonic_decreasing方法。
      * @return boolean类型返回值
@@ -1427,16 +1025,6 @@ public class Series {
      * @param window 窗口大小
      * @return Rolling 窗口对象
      */
-    /**
-     * rolling方法。
-     *      * @param window int类型参数
-     * @return com.zifang.util.pandas.window.Rolling类型返回值
-     */
-    /**
-     * rolling方法。
-     *      * @param window int类型参数
-     * @return com.zifang.util.pandas.window.Rolling类型返回值
-     */
     public com.zifang.util.pandas.window.Rolling rolling(int window) {
         return new com.zifang.util.pandas.window.Rolling(this, window);
     }
@@ -1444,14 +1032,6 @@ public class Series {
     /**
      * 创建扩展窗口对象
      * @return Expanding 窗口对象
-     */
-    /**
-     * expanding方法。
-     * @return com.zifang.util.pandas.window.Expanding类型返回值
-     */
-    /**
-     * expanding方法。
-     * @return com.zifang.util.pandas.window.Expanding类型返回值
      */
     public com.zifang.util.pandas.window.Expanding expanding() {
         return new com.zifang.util.pandas.window.Expanding(this);
@@ -1462,16 +1042,6 @@ public class Series {
      * @param alpha 衰减因子
      * @return EWM 窗口对象
      */
-    /**
-     * ewm方法。
-     *      * @param alpha double类型参数
-     * @return com.zifang.util.pandas.window.EWM类型返回值
-     */
-    /**
-     * ewm方法。
-     *      * @param alpha double类型参数
-     * @return com.zifang.util.pandas.window.EWM类型返回值
-     */
     public com.zifang.util.pandas.window.EWM ewm(double alpha) {
         return new com.zifang.util.pandas.window.EWM(this, alpha);
     }
@@ -1481,16 +1051,6 @@ public class Series {
      * @param com 质心
      * @return EWM 窗口对象
      */
-    /**
-     * ewmCom方法。
-     *      * @param com double类型参数
-     * @return com.zifang.util.pandas.window.EWM类型返回值
-     */
-    /**
-     * ewmCom方法。
-     *      * @param com double类型参数
-     * @return com.zifang.util.pandas.window.EWM类型返回值
-     */
     public com.zifang.util.pandas.window.EWM ewmCom(double com) {
         return EWM.com(this, com);
     }
@@ -1499,16 +1059,6 @@ public class Series {
      * 使用跨度创建 EWM
      * @param span 跨度
      * @return EWM 窗口对象
-     */
-    /**
-     * ewmSpan方法。
-     *      * @param span double类型参数
-     * @return com.zifang.util.pandas.window.EWM类型返回值
-     */
-    /**
-     * ewmSpan方法。
-     *      * @param span double类型参数
-     * @return com.zifang.util.pandas.window.EWM类型返回值
      */
     public com.zifang.util.pandas.window.EWM ewmSpan(double span) {
         return com.zifang.util.pandas.window.EWM.span(this, span);
@@ -1520,25 +1070,12 @@ public class Series {
      * 获取字符串访问器，用于执行字符串操作
      * @return StringAccessor 字符串操作访问器
      */
-    /**
-     * str方法。
-     * @return com.zifang.util.pandas.str.StringAccessor类型返回值
-     */
-    /**
-     * str方法。
-     * @return com.zifang.util.pandas.str.StringAccessor类型返回值
-     */
     public com.zifang.util.pandas.str.StringAccessor str() {
         return new com.zifang.util.pandas.str.StringAccessor(this);
     }
 
     // ==================== apply 和 map ====================
 
-    /**
-     * apply方法。
-     *      * @param func FunctionDouble,类型参数
-     * @return Series类型返回值
-     */
     /**
      * apply方法。
      *      * @param func FunctionDouble,类型参数
@@ -1558,22 +1095,12 @@ public class Series {
      *      * @param mapping MapDouble,类型参数
      * @return Series类型返回值
      */
-    /**
-     * map方法。
-     *      * @param mapping MapDouble,类型参数
-     * @return Series类型返回值
-     */
     public Series map(Map<Double, Double> mapping) {
         return apply(v -> mapping.getOrDefault(v, v));
     }
 
     // ==================== 重命名和元数据 ====================
 
-    /**
-     * rename方法。
-     *      * @param newName String类型参数
-     * @return Series类型返回值
-     */
     /**
      * rename方法。
      *      * @param newName String类型参数
@@ -1587,19 +1114,10 @@ public class Series {
      * name方法。
      * @return String类型返回值
      */
-    /**
-     * name方法。
-     * @return String类型返回值
-     */
     public String name() {
         return name;
     }
 
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     * @return Series类型返回值
-     */
     /**
      * setName方法。
      *      * @param name String类型参数
@@ -1614,19 +1132,10 @@ public class Series {
      * index方法。
      * @return Index类型返回值
      */
-    /**
-     * index方法。
-     * @return Index类型返回值
-     */
     public Index index() {
         return index;
     }
 
-    /**
-     * setIndex方法。
-     *      * @param newIndex Index类型参数
-     * @return Series类型返回值
-     */
     /**
      * setIndex方法。
      *      * @param newIndex Index类型参数
@@ -1644,19 +1153,10 @@ public class Series {
      *      * @param newIndex String[]类型参数
      * @return Series类型返回值
      */
-    /**
-     * setIndex方法。
-     *      * @param newIndex String[]类型参数
-     * @return Series类型返回值
-     */
     public Series setIndex(String[] newIndex) {
         return setIndex(Index.of(newIndex));
     }
 
-    /**
-     * dtype方法。
-     * @return DType类型返回值
-     */
     /**
      * dtype方法。
      * @return DType类型返回值
@@ -1671,18 +1171,10 @@ public class Series {
      * toArray方法。
      * @return double[]类型返回值
      */
-    /**
-     * toArray方法。
-     * @return double[]类型返回值
-     */
     public double[] toArray() {
         return getDataAsDoubleArray().clone();
     }
 
-    /**
-     * toList方法。
-     * @return List<Double>类型返回值
-     */
     /**
      * toList方法。
      * @return List<Double>类型返回值
@@ -1700,10 +1192,6 @@ public class Series {
      * toMap方法。
      * @return Map<String, Double>类型返回值
      */
-    /**
-     * toMap方法。
-     * @return Map<String, Double>类型返回值
-     */
     public Map<String, Double> toMap() {
         Map<String, Double> map = new LinkedHashMap<>();
         double[] data = getDataAsDoubleArray();
@@ -1717,20 +1205,12 @@ public class Series {
      * toNum方法。
      * @return Num类型返回值
      */
-    /**
-     * toNum方法。
-     * @return Num类型返回值
-     */
     public Num toNum() {
         return data;
     }
 
     // ==================== 描述和打印 ====================
 
-    /**
-     * describe方法。
-     * @return String类型返回值
-     */
     /**
      * describe方法。
      * @return String类型返回值
@@ -1749,10 +1229,6 @@ public class Series {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -1797,10 +1273,6 @@ public class Series {
         }
     }
 
-    /**
-     * length方法。
-     * @return int类型返回值
-     */
     /**
      * length方法。
      * @return int类型返回值

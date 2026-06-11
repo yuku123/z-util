@@ -29,9 +29,6 @@ import java.util.List;
  * @author zifang
  * @version 1.0
  */
-/**
- * Table_Study类。
- */
 public class Table_Study {
     @Test
     /**

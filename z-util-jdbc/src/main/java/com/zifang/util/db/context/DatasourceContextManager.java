@@ -6,12 +6,6 @@ import java.util.Map;
 /**
  * 数据源上下文管理器，用于管理多个数据源上下文
  */
-/**
- * DatasourceContextManager类。
- */
-/**
- * DatasourceContextManager类。
- */
 public class DatasourceContextManager {
 
     public static final String DEFAULT = "default";
@@ -28,18 +22,6 @@ public class DatasourceContextManager {
      * @param dataSourceFactory     数据源上下文实例
      * @throws RuntimeException 如果名称已存在
      */
-    /**
-     * register方法。
-     *      * @param dataSourceContextName String类型参数
-     * @param dataSourceFactory DataSourceContext类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * register方法。
-     *      * @param dataSourceContextName String类型参数
-     * @param dataSourceFactory DataSourceContext类型参数
-     * @return static void类型返回值
-     */
     public static void register(String dataSourceContextName, DataSourceContext dataSourceFactory) {
         assert dataSourceContextName != null && !"".equals(dataSourceContextName);
         if (dataSourceContextMap.get(dataSourceContextName) != null) {
@@ -53,16 +35,6 @@ public class DatasourceContextManager {
      *
      * @param dataSourceContextName 上下文名称
      * @return 数据源上下文，不存在返回null
-     */
-    /**
-     * fetchContext方法。
-     *      * @param dataSourceContextName String类型参数
-     * @return static DataSourceContext类型返回值
-     */
-    /**
-     * fetchContext方法。
-     *      * @param dataSourceContextName String类型参数
-     * @return static DataSourceContext类型返回值
      */
     public static DataSourceContext fetchContext(String dataSourceContextName) {
         return dataSourceContextMap.get(dataSourceContextName);

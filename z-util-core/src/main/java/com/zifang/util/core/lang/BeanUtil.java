@@ -15,12 +15,6 @@ import java.util.Map;
  *
  * @author zifang
  */
-/**
- * BeanUtil类。
- */
-/**
- * BeanUtil类。
- */
 public class BeanUtil {
 
     /**
@@ -30,16 +24,6 @@ public class BeanUtil {
      * 2. Bean 应该提供 getter 和 setter 方法。
      * 3. 使用 getter 方法读取可读属性的值。
      * 4. Bean 应该实现 java.io.serializable
-     */
-    /**
-     * isBean方法。
-     *      * @param bean T类型参数
-     * @return static <T> boolean类型返回值
-     */
-    /**
-     * isBean方法。
-     *      * @param bean T类型参数
-     * @return static <T> boolean类型返回值
      */
     public static <T> boolean isBean(T bean) {
         // @todo
@@ -58,16 +42,6 @@ public class BeanUtil {
     /**
      * t通过序列化的方式进行深复制
      */
-    /**
-     * cloneBean方法。
-     *      * @param bean final类型参数
-     * @return static <T> T类型返回值
-     */
-    /**
-     * cloneBean方法。
-     *      * @param bean final类型参数
-     * @return static <T> T类型返回值
-     */
     public static <T> T cloneBean(final T bean) throws IllegalAccessException, InstantiationException, InvocationTargetException, IntrospectionException {
         T t = (T) bean.getClass().newInstance();
         PropertyDescriptor[] pro = Introspector.getBeanInfo(bean.getClass(), Object.class).getPropertyDescriptors();
@@ -81,18 +55,6 @@ public class BeanUtil {
 
     /**
      * 输入map，输出组装好了的bean
-     */
-    /**
-     * mapToBean方法。
-     *      * @param clazz ClassT类型参数
-     * @param map MapString,类型参数
-     * @return static <T> T类型返回值
-     */
-    /**
-     * mapToBean方法。
-     *      * @param clazz ClassT类型参数
-     * @param map MapString,类型参数
-     * @return static <T> T类型返回值
      */
     public static <T> T mapToBean(Class<T> clazz, Map<String, ? extends Object> map) throws IllegalAccessException, InstantiationException, IntrospectionException {
         T t = clazz.newInstance();
@@ -114,16 +76,6 @@ public class BeanUtil {
     /**
      * 输入bean 输出这个bean第一层value值
      */
-    /**
-     * beanToMap方法。
-     *      * @param t final类型参数
-     * @return static <T> Map<String, Object>类型返回值
-     */
-    /**
-     * beanToMap方法。
-     *      * @param t final类型参数
-     * @return static <T> Map<String, Object>类型返回值
-     */
     public static <T> Map<String, Object> beanToMap(final T t) throws IllegalAccessException, IntrospectionException, InvocationTargetException {
         Map<String, Object> map = new LinkedHashMap<>();
         PropertyDescriptor[] pro = Introspector.getBeanInfo(t.getClass(), Object.class).getPropertyDescriptors();
@@ -143,20 +95,6 @@ public class BeanUtil {
      * @param name  设入的字段名
      * @param value 设入的字段值
      */
-    /**
-     * setProperty方法。
-     *      * @param obj Object类型参数
-     * @param name String类型参数
-     * @param value Object类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * setProperty方法。
-     *      * @param obj Object类型参数
-     * @param name String类型参数
-     * @param value Object类型参数
-     * @return static void类型返回值
-     */
     public static void setProperty(Object obj, String name, Object value) {
         try {
             PropertyDescriptor[] pro = Introspector.getBeanInfo(obj.getClass(), Object.class).getPropertyDescriptors();
@@ -175,18 +113,6 @@ public class BeanUtil {
      * @param obj  等待被摄取的实例
      * @param name 摄取的字段名
      * @return 字段值
-     */
-    /**
-     * getProperty方法。
-     *      * @param obj Object类型参数
-     * @param name String类型参数
-     * @return static Object类型返回值
-     */
-    /**
-     * getProperty方法。
-     *      * @param obj Object类型参数
-     * @param name String类型参数
-     * @return static Object类型返回值
      */
     public static Object getProperty(Object obj, String name) {
         try {
@@ -216,27 +142,4 @@ public class BeanUtil {
     /**
      * 拆解bean 可以很方便得到bean的一些参数
      * */
-
-    /**
-     * 判断自己定义的而非继承的属性pro是否存在
-     *
-     * @param bean 判断的目标bean
-     * @param pro  判断的属性
-     * @return 是否存在
-     */
-
-    /**
-     * 判断属性是否存在忽略大小写
-     *
-     * @param bean 判断的目标bean
-     * @param pro  判断的属性
-     * @return 是否存在
-     */
-
-    /**
-     * 复制同名属性
-     *
-     * @param srcBean  源Bean
-     * @param destBean 目标Bean
-     */
 }

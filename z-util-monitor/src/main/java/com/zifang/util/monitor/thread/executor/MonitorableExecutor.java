@@ -14,11 +14,5 @@ import com.zifang.util.monitor.thread.alarm.Alarmable;
  * @see Monitorable
  * @see Alarmable
  */
-/**
- * MonitorableExecutor接口。
- */
-/**
- * MonitorableExecutor接口。
- */
 public interface MonitorableExecutor extends Monitorable, Alarmable {
 }

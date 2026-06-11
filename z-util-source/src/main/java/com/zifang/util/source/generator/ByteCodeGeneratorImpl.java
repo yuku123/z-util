@@ -8,12 +8,6 @@ import org.slf4j.LoggerFactory;
 /**
  * 基于 ASM 的字节码生成实现
  */
-/**
- * ByteCodeGeneratorImpl类。
- */
-/**
- * ByteCodeGeneratorImpl类。
- */
 public class ByteCodeGeneratorImpl implements ByteCodeGenerator {
 
     private static final Logger log = LoggerFactory.getLogger(ByteCodeGeneratorImpl.class);
@@ -21,17 +15,9 @@ public class ByteCodeGeneratorImpl implements ByteCodeGenerator {
     /**
      * ByteCodeGeneratorImpl方法。
      */
-    /**
-     * ByteCodeGeneratorImpl方法。
-     */
     public ByteCodeGeneratorImpl() {
     }
 
-    /**
-     * generate方法。
-     *      * @param classInfo ClassInfo类型参数
-     * @return byte[]类型返回值
-     */
     /**
      * generate方法。
      *      * @param classInfo ClassInfo类型参数

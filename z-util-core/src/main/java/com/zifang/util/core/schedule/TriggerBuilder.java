@@ -35,12 +35,6 @@ import java.util.concurrent.TimeUnit;
  * @see CalendarIntervalTrigger
  * @see DailyTimeIntervalTrigger
  */
-/**
- * TriggerBuilder类。
- */
-/**
- * TriggerBuilder类。
- */
 public class TriggerBuilder {
 
     private TriggerBuilder() {
@@ -62,14 +56,6 @@ public class TriggerBuilder {
      *     .build();
      * </pre>
      */
-    /**
-     * newSimpleTrigger方法。
-     * @return static SimpleTrigger.SimpleBuilder类型返回值
-     */
-    /**
-     * newSimpleTrigger方法。
-     * @return static SimpleTrigger.SimpleBuilder类型返回值
-     */
     public static SimpleTrigger.SimpleBuilder newSimpleTrigger() {
         return SimpleTrigger.newSimpleTrigger();
     }
@@ -86,14 +72,6 @@ public class TriggerBuilder {
      *     .build();
      * </pre>
      */
-    /**
-     * newCronTrigger方法。
-     * @return static CronTrigger.CronBuilder类型返回值
-     */
-    /**
-     * newCronTrigger方法。
-     * @return static CronTrigger.CronBuilder类型返回值
-     */
     public static CronTrigger.CronBuilder newCronTrigger() {
         return CronTrigger.newCronTrigger();
     }
@@ -109,14 +87,6 @@ public class TriggerBuilder {
      *     .withIntervalInMonths(1)
      *     .build();
      * </pre>
-     */
-    /**
-     * newCalendarIntervalTrigger方法。
-     * @return static CalendarIntervalTrigger.CalendarBuilder类型返回值
-     */
-    /**
-     * newCalendarIntervalTrigger方法。
-     * @return static CalendarIntervalTrigger.CalendarBuilder类型返回值
      */
     public static CalendarIntervalTrigger.CalendarBuilder newCalendarIntervalTrigger() {
         return CalendarIntervalTrigger.newCalendarIntervalTrigger();
@@ -136,14 +106,6 @@ public class TriggerBuilder {
      *     .withIntervalInMinutes(30)
      *     .build();
      * </pre>
-     */
-    /**
-     * newDailyTimeIntervalTrigger方法。
-     * @return static DailyTimeIntervalTrigger.DailyBuilder类型返回值
-     */
-    /**
-     * newDailyTimeIntervalTrigger方法。
-     * @return static DailyTimeIntervalTrigger.DailyBuilder类型返回值
      */
     public static DailyTimeIntervalTrigger.DailyBuilder newDailyTimeIntervalTrigger() {
         return DailyTimeIntervalTrigger.newDailyTimeIntervalTrigger();

@@ -10,21 +10,10 @@ import java.io.InputStream;
  * <p>
  * CONSTANT_ConstantValue_attribute用于表示静态字段的常量值。
  */
-/**
- * ConstantValue类。
- */
-/**
- * ConstantValue类。
- */
 public class ConstantValue extends AbstractAttribute {
 
     private U2 constantValueIndex;
 
-    /**
-     * ConstantValue方法。
-     *      * @param attributeNameIndex U2类型参数
-     * @param attributeLength U4类型参数
-     */
     /**
      * ConstantValue方法。
      *      * @param attributeNameIndex U2类型参数
@@ -39,18 +28,10 @@ public class ConstantValue extends AbstractAttribute {
      * getConstantValueIndex方法。
      * @return U2类型返回值
      */
-    /**
-     * getConstantValueIndex方法。
-     * @return U2类型返回值
-     */
     public U2 getConstantValueIndex() {
         return constantValueIndex;
     }
 
-    /**
-     * setConstantValueIndex方法。
-     *      * @param constantValueIndex U2类型参数
-     */
     /**
      * setConstantValueIndex方法。
      *      * @param constantValueIndex U2类型参数
@@ -63,20 +44,12 @@ public class ConstantValue extends AbstractAttribute {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
-    /**
-     * read方法。
-     *      * @param inputStream InputStream类型参数
-     */
     public void read(InputStream inputStream) {
         constantValueIndex = U2.read(inputStream);
     }
 
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

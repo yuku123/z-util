@@ -9,12 +9,6 @@ package com.zifang.util.devops.nexus;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * Asset类。
- */
-/**
- * Asset类。
- */
 public class Asset {
 
     private String id;
@@ -33,18 +27,10 @@ public class Asset {
      * getId方法。
      * @return String类型返回值
      */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
     public String getId() {
         return id;
     }
 
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
     /**
      * setId方法。
      *      * @param id String类型参数
@@ -57,18 +43,10 @@ public class Asset {
      * getRepository方法。
      * @return String类型返回值
      */
-    /**
-     * getRepository方法。
-     * @return String类型返回值
-     */
     public String getRepository() {
         return repository;
     }
 
-    /**
-     * setRepository方法。
-     *      * @param repository String类型参数
-     */
     /**
      * setRepository方法。
      *      * @param repository String类型参数
@@ -81,18 +59,10 @@ public class Asset {
      * getPath方法。
      * @return String类型返回值
      */
-    /**
-     * getPath方法。
-     * @return String类型返回值
-     */
     public String getPath() {
         return path;
     }
 
-    /**
-     * setPath方法。
-     *      * @param path String类型参数
-     */
     /**
      * setPath方法。
      *      * @param path String类型参数
@@ -105,18 +75,10 @@ public class Asset {
      * getDownloadUrl方法。
      * @return String类型返回值
      */
-    /**
-     * getDownloadUrl方法。
-     * @return String类型返回值
-     */
     public String getDownloadUrl() {
         return downloadUrl;
     }
 
-    /**
-     * setDownloadUrl方法。
-     *      * @param downloadUrl String类型参数
-     */
     /**
      * setDownloadUrl方法。
      *      * @param downloadUrl String类型参数
@@ -129,18 +91,10 @@ public class Asset {
      * getChecksum方法。
      * @return Checksum类型返回值
      */
-    /**
-     * getChecksum方法。
-     * @return Checksum类型返回值
-     */
     public Checksum getChecksum() {
         return checksum;
     }
 
-    /**
-     * setChecksum方法。
-     *      * @param checksum Checksum类型参数
-     */
     /**
      * setChecksum方法。
      *      * @param checksum Checksum类型参数
@@ -153,18 +107,10 @@ public class Asset {
      * getFormat方法。
      * @return String类型返回值
      */
-    /**
-     * getFormat方法。
-     * @return String类型返回值
-     */
     public String getFormat() {
         return format;
     }
 
-    /**
-     * setFormat方法。
-     *      * @param format String类型参数
-     */
     /**
      * setFormat方法。
      *      * @param format String类型参数
@@ -174,10 +120,6 @@ public class Asset {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -192,11 +134,6 @@ public class Asset {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -205,10 +142,6 @@ public class Asset {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

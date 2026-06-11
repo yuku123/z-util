@@ -36,12 +36,6 @@ import java.util.Objects;
  * @see JobDetail
  * @see SchedulerManager#scheduleJob(JobDetail, Trigger)
  */
-/**
- * JobBuilder类。
- */
-/**
- * JobBuilder类。
- */
 public class JobBuilder {
 
     private JobBuilder() {
@@ -54,16 +48,6 @@ public class JobBuilder {
      * @param jobClass 任务类，必须实现本框架的 {@link Job} 接口
      * @return 新的 Builder 实例
      */
-    /**
-     * newJob方法。
-     *      * @param jobClass Class?类型参数
-     * @return static JobDetailBuilder类型返回值
-     */
-    /**
-     * newJob方法。
-     *      * @param jobClass Class?类型参数
-     * @return static JobDetailBuilder类型返回值
-     */
     public static JobDetailBuilder newJob(Class<? extends Job> jobClass) {
         return new JobDetailBuilder(jobClass);
     }
@@ -74,16 +58,6 @@ public class JobBuilder {
      * @param runnable 执行逻辑
      * @return 新的 Builder 实例
      * @see JobBuilder#ofType(Class)
-     */
-    /**
-     * newJob方法。
-     *      * @param runnable RunnableJob类型参数
-     * @return static JobDetailBuilder类型返回值
-     */
-    /**
-     * newJob方法。
-     *      * @param runnable RunnableJob类型参数
-     * @return static JobDetailBuilder类型返回值
      */
     public static JobDetailBuilder newJob(RunnableJob runnable) {
         Objects.requireNonNull(runnable, "runnable must not be null");
@@ -112,16 +86,6 @@ public class JobBuilder {
         /**
          * 设置任务名称。
          */
-    /**
-     * withName方法。
-     *      * @param name String类型参数
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * withName方法。
-     *      * @param name String类型参数
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder withName(String name) {
             this.name = Objects.requireNonNull(name, "job name must not be null");
             return this;
@@ -130,18 +94,6 @@ public class JobBuilder {
         /**
          * 设置任务名称和分组。
          */
-    /**
-     * withIdentity方法。
-     *      * @param name String类型参数
-     * @param group String类型参数
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * withIdentity方法。
-     *      * @param name String类型参数
-     * @param group String类型参数
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder withIdentity(String name, String group) {
             this.name = Objects.requireNonNull(name, "job name must not be null");
             this.group = Objects.requireNonNull(group, "job group must not be null");
@@ -151,16 +103,6 @@ public class JobBuilder {
         /**
          * 设置任务名称（使用默认分组）。
          */
-    /**
-     * withIdentity方法。
-     *      * @param name String类型参数
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * withIdentity方法。
-     *      * @param name String类型参数
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder withIdentity(String name) {
             this.name = Objects.requireNonNull(name, "job name must not be null");
             return this;
@@ -169,16 +111,6 @@ public class JobBuilder {
         /**
          * 设置描述。
          */
-    /**
-     * withDescription方法。
-     *      * @param description String类型参数
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * withDescription方法。
-     *      * @param description String类型参数
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder withDescription(String description) {
             this.description = description;
             return this;
@@ -189,18 +121,6 @@ public class JobBuilder {
         /**
          * 添加任务数据。
          */
-    /**
-     * usingJobData方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * usingJobData方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder usingJobData(String key, Object value) {
             jobData.put(key, value);
             return this;
@@ -209,16 +129,6 @@ public class JobBuilder {
         /**
          * 添加多个任务数据。
          */
-    /**
-     * usingJobData方法。
-     *      * @param data MapString,类型参数
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * usingJobData方法。
-     *      * @param data MapString,类型参数
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder usingJobData(Map<String, ?> data) {
             jobData.putAll(data);
             return this;
@@ -231,14 +141,6 @@ public class JobBuilder {
          * <p>
          * 持久任务在没有任何 Trigger 引用时也不会被删除。
          */
-    /**
-     * durable方法。
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * durable方法。
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder durable() {
             this.durable = true;
             return this;
@@ -247,14 +149,6 @@ public class JobBuilder {
         /**
          * 设置为持久任务（别名）。
          */
-    /**
-     * storeDurably方法。
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * storeDurably方法。
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder storeDurably() {
             return durable();
         }
@@ -264,14 +158,6 @@ public class JobBuilder {
          * <p>
          * 当 Scheduler 异常关闭后重启，已执行过的任务如果支持恢复，会被重新执行。
          */
-    /**
-     * requestRecovery方法。
-     * @return JobDetailBuilder类型返回值
-     */
-    /**
-     * requestRecovery方法。
-     * @return JobDetailBuilder类型返回值
-     */
         public JobDetailBuilder requestRecovery() {
             this.requestsRecovery = true;
             return this;
@@ -284,14 +170,6 @@ public class JobBuilder {
          *
          * @return 配置完整的 JobDetail
          */
-    /**
-     * build方法。
-     * @return JobDetail类型返回值
-     */
-    /**
-     * build方法。
-     * @return JobDetail类型返回值
-     */
         public JobDetail build() {
             // 始终使用 RunnableJobAdapter 作为实际 Quartz Job，
             // 用户的 Job 实现类通过 JobDataMap 传递给适配器。

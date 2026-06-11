@@ -10,18 +10,8 @@ import java.util.List;
  * <p>
  * 存储ClassFile中所有实现的接口，包含接口计数和接口列表。
  */
-/**
- * InterfaceIndex类。
- */
-/**
- * InterfaceIndex类。
- */
 public class InterfaceIndex {
     public U2 length;
-    /**
-     * ArrayList<>方法。
-     * @return List<Interface> list = new类型返回值
-     */
     /**
      * ArrayList<>方法。
      * @return List<Interface> list = new类型返回值
@@ -31,16 +21,9 @@ public class InterfaceIndex {
     /**
      * InterfaceIndex方法。
      */
-    /**
-     * InterfaceIndex方法。
-     */
     public InterfaceIndex() {
     }
 
-    /**
-     * addIndex方法。
-     *      * @param index U2类型参数
-     */
     /**
      * addIndex方法。
      *      * @param index U2类型参数

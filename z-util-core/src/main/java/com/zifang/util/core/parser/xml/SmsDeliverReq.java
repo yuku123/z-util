@@ -18,9 +18,6 @@ import java.util.List;
 /**
  * SmsDeliverReq类。
  */
-/**
- * SmsDeliverReq类。
- */
 public class SmsDeliverReq {
 
     private ReqHeader reqHeader;
@@ -32,18 +29,10 @@ public class SmsDeliverReq {
      * getReqHeader方法。
      * @return ReqHeader类型返回值
      */
-    /**
-     * getReqHeader方法。
-     * @return ReqHeader类型返回值
-     */
     public ReqHeader getReqHeader() {
         return reqHeader;
     }
 
-    /**
-     * setReqHeader方法。
-     *      * @param reqHeader ReqHeader类型参数
-     */
     /**
      * setReqHeader方法。
      *      * @param reqHeader ReqHeader类型参数
@@ -58,18 +47,10 @@ public class SmsDeliverReq {
      * getSmsBodys方法。
      * @return List<SmsBody>类型返回值
      */
-    /**
-     * getSmsBodys方法。
-     * @return List<SmsBody>类型返回值
-     */
     public List<SmsBody> getSmsBodys() {
         return smsBodys;
     }
 
-    /**
-     * setSmsBodys方法。
-     *      * @param smsBodys ListSmsBody类型参数
-     */
     /**
      * setSmsBodys方法。
      *      * @param smsBodys ListSmsBody类型参数

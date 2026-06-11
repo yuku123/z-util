@@ -6,9 +6,6 @@ package com.zifang.util.devops.git.operations.core;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * GitTag类。
- */
 public class GitTag {
 
 /**

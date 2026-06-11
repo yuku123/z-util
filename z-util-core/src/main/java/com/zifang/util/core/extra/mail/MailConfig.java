@@ -6,12 +6,6 @@ import javax.mail.PasswordAuthentication;
 /**
  * 邮件配置类
  */
-/**
- * MailConfig类。
- */
-/**
- * MailConfig类。
- */
 public class MailConfig {
 
     private String host;
@@ -27,19 +21,9 @@ public class MailConfig {
     /**
      * MailConfig方法。
      */
-    /**
-     * MailConfig方法。
-     */
     public MailConfig() {
     }
 
-    /**
-     * of方法。
-     *      * @param host String类型参数
-     * @param username String类型参数
-     * @param password String类型参数
-     * @return static MailConfig类型返回值
-     */
     /**
      * of方法。
      *      * @param host String类型参数
@@ -61,12 +45,6 @@ public class MailConfig {
      * @param password String类型参数
      * @return static MailConfig类型返回值
      */
-    /**
-     * of163方法。
-     *      * @param username String类型参数
-     * @param password String类型参数
-     * @return static MailConfig类型返回值
-     */
     public static MailConfig of163(String username, String password) {
         MailConfig config = new MailConfig();
         config.host = "smtp.163.com";
@@ -77,12 +55,6 @@ public class MailConfig {
         return config;
     }
 
-    /**
-     * ofQQ方法。
-     *      * @param username String类型参数
-     * @param password String类型参数
-     * @return static MailConfig类型返回值
-     */
     /**
      * ofQQ方法。
      *      * @param username String类型参数
@@ -106,12 +78,6 @@ public class MailConfig {
      * @param password String类型参数
      * @return static MailConfig类型返回值
      */
-    /**
-     * ofGmail方法。
-     *      * @param username String类型参数
-     * @param password String类型参数
-     * @return static MailConfig类型返回值
-     */
     public static MailConfig ofGmail(String username, String password) {
         MailConfig config = new MailConfig();
         config.host = "smtp.gmail.com";
@@ -128,21 +94,11 @@ public class MailConfig {
      *      * @param host String类型参数
      * @return MailConfig类型返回值
      */
-    /**
-     * host方法。
-     *      * @param host String类型参数
-     * @return MailConfig类型返回值
-     */
     public MailConfig host(String host) {
         this.host = host;
         return this;
     }
 
-    /**
-     * port方法。
-     *      * @param port int类型参数
-     * @return MailConfig类型返回值
-     */
     /**
      * port方法。
      *      * @param port int类型参数
@@ -158,21 +114,11 @@ public class MailConfig {
      *      * @param username String类型参数
      * @return MailConfig类型返回值
      */
-    /**
-     * username方法。
-     *      * @param username String类型参数
-     * @return MailConfig类型返回值
-     */
     public MailConfig username(String username) {
         this.username = username;
         return this;
     }
 
-    /**
-     * password方法。
-     *      * @param password String类型参数
-     * @return MailConfig类型返回值
-     */
     /**
      * password方法。
      *      * @param password String类型参数
@@ -188,21 +134,11 @@ public class MailConfig {
      *      * @param useSsl boolean类型参数
      * @return MailConfig类型返回值
      */
-    /**
-     * useSsl方法。
-     *      * @param useSsl boolean类型参数
-     * @return MailConfig类型返回值
-     */
     public MailConfig useSsl(boolean useSsl) {
         this.useSsl = useSsl;
         return this;
     }
 
-    /**
-     * useTls方法。
-     *      * @param useTls boolean类型参数
-     * @return MailConfig类型返回值
-     */
     /**
      * useTls方法。
      *      * @param useTls boolean类型参数
@@ -218,21 +154,11 @@ public class MailConfig {
      *      * @param from String类型参数
      * @return MailConfig类型返回值
      */
-    /**
-     * from方法。
-     *      * @param from String类型参数
-     * @return MailConfig类型返回值
-     */
     public MailConfig from(String from) {
         this.from = from;
         return this;
     }
 
-    /**
-     * fromName方法。
-     *      * @param fromName String类型参数
-     * @return MailConfig类型返回值
-     */
     /**
      * fromName方法。
      *      * @param fromName String类型参数
@@ -248,20 +174,11 @@ public class MailConfig {
      *      * @param debug boolean类型参数
      * @return MailConfig类型返回值
      */
-    /**
-     * debug方法。
-     *      * @param debug boolean类型参数
-     * @return MailConfig类型返回值
-     */
     public MailConfig debug(boolean debug) {
         this.debug = debug;
         return this;
     }
 
-    /**
-     * getHost方法。
-     * @return String类型返回值
-     */
     /**
      * getHost方法。
      * @return String类型返回值
@@ -274,18 +191,10 @@ public class MailConfig {
      * getPort方法。
      * @return int类型返回值
      */
-    /**
-     * getPort方法。
-     * @return int类型返回值
-     */
     public int getPort() {
         return port;
     }
 
-    /**
-     * getUsername方法。
-     * @return String类型返回值
-     */
     /**
      * getUsername方法。
      * @return String类型返回值
@@ -298,18 +207,10 @@ public class MailConfig {
      * getPassword方法。
      * @return String类型返回值
      */
-    /**
-     * getPassword方法。
-     * @return String类型返回值
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * isUseSsl方法。
-     * @return boolean类型返回值
-     */
     /**
      * isUseSsl方法。
      * @return boolean类型返回值
@@ -322,18 +223,10 @@ public class MailConfig {
      * isUseTls方法。
      * @return boolean类型返回值
      */
-    /**
-     * isUseTls方法。
-     * @return boolean类型返回值
-     */
     public boolean isUseTls() {
         return useTls;
     }
 
-    /**
-     * getFrom方法。
-     * @return String类型返回值
-     */
     /**
      * getFrom方法。
      * @return String类型返回值
@@ -346,18 +239,10 @@ public class MailConfig {
      * getFromName方法。
      * @return String类型返回值
      */
-    /**
-     * getFromName方法。
-     * @return String类型返回值
-     */
     public String getFromName() {
         return fromName;
     }
 
-    /**
-     * isDebug方法。
-     * @return boolean类型返回值
-     */
     /**
      * isDebug方法。
      * @return boolean类型返回值
@@ -370,17 +255,9 @@ public class MailConfig {
      * getAuthenticator方法。
      * @return Authenticator类型返回值
      */
-    /**
-     * getAuthenticator方法。
-     * @return Authenticator类型返回值
-     */
     public Authenticator getAuthenticator() {
         return new Authenticator() {
             @Override
-    /**
-     * getPasswordAuthentication方法。
-     * @return PasswordAuthentication类型返回值
-     */
     /**
      * getPasswordAuthentication方法。
      * @return PasswordAuthentication类型返回值
@@ -391,10 +268,6 @@ public class MailConfig {
         };
     }
 
-    /**
-     * toProperties方法。
-     * @return java.util.Properties类型返回值
-     */
     /**
      * toProperties方法。
      * @return java.util.Properties类型返回值

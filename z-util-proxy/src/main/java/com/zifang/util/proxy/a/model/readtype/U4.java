@@ -9,12 +9,6 @@ import java.io.InputStream;
  * 用于从输入流中读取4字节的无符号整数，范围为0-4294967295。
  * JVM中用于表示float类型的位模式存储。
  */
-/**
- * U4类。
- */
-/**
- * U4类。
- */
 public class U4 {
 
     public int value;
@@ -25,21 +19,11 @@ public class U4 {
      *      * @param value int类型参数
      * @param bytes byte[]类型参数
      */
-    /**
-     * U4方法。
-     *      * @param value int类型参数
-     * @param bytes byte[]类型参数
-     */
     public U4(int value, byte[] bytes) {
         this.value = value;
         this.bytes = bytes;
     }
 
-    /**
-     * read方法。
-     *      * @param inputStream InputStream类型参数
-     * @return static U4类型返回值
-     */
     /**
      * read方法。
      *      * @param inputStream InputStream类型参数
@@ -64,10 +48,6 @@ public class U4 {
         return u4;
     }
 
-    /**
-     * getValue方法。
-     * @return int类型返回值
-     */
     /**
      * getValue方法。
      * @return int类型返回值

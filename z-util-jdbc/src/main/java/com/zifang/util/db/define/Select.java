@@ -33,9 +33,6 @@ import java.lang.annotation.*;
 /**
  * Select注解。
  */
-/**
- * Select注解。
- */
 public @interface Select {
     /**
      * 指定查询SQL语句

@@ -16,9 +16,6 @@ import java.lang.annotation.*;
 /**
  * ResponseBody注解。
  */
-/**
- * ResponseBody注解。
- */
 public @interface ResponseBody {
 
 }

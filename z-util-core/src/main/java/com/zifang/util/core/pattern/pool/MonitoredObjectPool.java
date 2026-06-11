@@ -13,23 +13,11 @@ import java.util.NoSuchElementException;
  *
  * @param <T> 对象类型
  */
-/**
- * MonitoredObjectPool类。
- */
-/**
- * MonitoredObjectPool类。
- */
 public class MonitoredObjectPool<T> implements ObjectPool<T> {
 
     private final ObjectPool<T> pool;
     private final PoolMonitor<T> monitor;
 
-    /**
-     * MonitoredObjectPool方法。
-     *      * @param pool ObjectPoolT类型参数
-     * @param config PoolConfig类型参数
-     * @param listener PoolListenerT类型参数
-     */
     /**
      * MonitoredObjectPool方法。
      *      * @param pool ObjectPoolT类型参数
@@ -47,21 +35,11 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
      * @param config PoolConfig类型参数
      * @param listener PoolListenerT类型参数
      */
-    /**
-     * MonitoredObjectPool方法。
-     *      * @param factory PooledObjectFactoryT类型参数
-     * @param config PoolConfig类型参数
-     * @param listener PoolListenerT类型参数
-     */
     public MonitoredObjectPool(PooledObjectFactory<T> factory, PoolConfig config, PoolListener<T> listener) {
         this.pool = new StackObjectPool<>(factory, config);
         this.monitor = new PoolMonitor<>(listener);
     }
 
-    /**
-     * getMonitor方法。
-     * @return PoolMonitor<T>类型返回值
-     */
     /**
      * getMonitor方法。
      * @return PoolMonitor<T>类型返回值
@@ -74,19 +52,11 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
      * getStats方法。
      * @return PoolStats类型返回值
      */
-    /**
-     * getStats方法。
-     * @return PoolStats类型返回值
-     */
     public PoolStats getStats() {
         return monitor.getStats();
     }
 
     @Override
-    /**
-     * borrowObject方法。
-     * @return T类型返回值
-     */
     /**
      * borrowObject方法。
      * @return T类型返回值
@@ -108,10 +78,6 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
      * returnObject方法。
      *      * @param obj T类型参数
      */
-    /**
-     * returnObject方法。
-     *      * @param obj T类型参数
-     */
     public void returnObject(T obj) throws Exception {
         long start = System.currentTimeMillis();
         try {
@@ -128,10 +94,6 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
      * invalidateObject方法。
      *      * @param obj T类型参数
      */
-    /**
-     * invalidateObject方法。
-     *      * @param obj T类型参数
-     */
     public void invalidateObject(T obj) throws Exception {
         pool.invalidateObject(obj);
     }
@@ -140,17 +102,11 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
     /**
      * clear方法。
      */
-    /**
-     * clear方法。
-     */
     public void clear() throws Exception {
         pool.clear();
     }
 
     @Override
-    /**
-     * close方法。
-     */
     /**
      * close方法。
      */
@@ -167,10 +123,6 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
      * getNumActive方法。
      * @return int类型返回值
      */
-    /**
-     * getNumActive方法。
-     * @return int类型返回值
-     */
     public int getNumActive() {
         return pool.getNumActive();
     }
@@ -180,19 +132,11 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
      * getNumIdle方法。
      * @return int类型返回值
      */
-    /**
-     * getNumIdle方法。
-     * @return int类型返回值
-     */
     public int getNumIdle() {
         return pool.getNumIdle();
     }
 
     @Override
-    /**
-     * getConfig方法。
-     * @return PoolConfig类型返回值
-     */
     /**
      * getConfig方法。
      * @return PoolConfig类型返回值

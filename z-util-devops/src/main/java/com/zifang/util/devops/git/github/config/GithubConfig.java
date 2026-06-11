@@ -11,12 +11,6 @@ import org.apache.commons.lang3.StringUtils;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * GithubConfig类。
- */
-/**
- * GithubConfig类。
- */
 public class GithubConfig {
 
     /**
@@ -38,10 +32,6 @@ public class GithubConfig {
      * getToken方法。
      * @return String类型返回值
      */
-    /**
-     * getToken方法。
-     * @return String类型返回值
-     */
     public String getToken() {
         return token;
     }
@@ -50,19 +40,10 @@ public class GithubConfig {
      * getApiUrl方法。
      * @return String类型返回值
      */
-    /**
-     * getApiUrl方法。
-     * @return String类型返回值
-     */
     public String getApiUrl() {
         return apiUrl;
     }
 
-    /**
-     * of方法。
-     *      * @param token String类型参数
-     * @return static GithubConfig类型返回值
-     */
     /**
      * of方法。
      *      * @param token String类型参数
@@ -79,18 +60,6 @@ public class GithubConfig {
      * @param apiUrl GitHub Enterprise API 地址（可选）
      * @return GithubConfig 实例
      */
-    /**
-     * of方法。
-     *      * @param token String类型参数
-     * @param apiUrl String类型参数
-     * @return static GithubConfig类型返回值
-     */
-    /**
-     * of方法。
-     *      * @param token String类型参数
-     * @param apiUrl String类型参数
-     * @return static GithubConfig类型返回值
-     */
     public static GithubConfig of(String token, String apiUrl) {
         return new GithubConfig(token, apiUrl);
     }
@@ -100,14 +69,6 @@ public class GithubConfig {
      *
      * @return GithubConfig 实例
      * @throws IllegalStateException 当环境变量 GITHUB_TOKEN 未设置时抛出
-     */
-    /**
-     * fromEnv方法。
-     * @return static GithubConfig类型返回值
-     */
-    /**
-     * fromEnv方法。
-     * @return static GithubConfig类型返回值
      */
     public static GithubConfig fromEnv() {
         String token = System.getenv("GITHUB_TOKEN");

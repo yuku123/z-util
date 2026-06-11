@@ -14,18 +14,6 @@ import java.util.List;
  * <p>
  * 根据属性名称创建对应的属性解析对象。
  */
-/**
- * 属性工厂类
- * <p>
- * 根据属性名称创建对应的属性实例。
- * 支持Code、ConstantValue、LineNumberTable、LocalVariableTable等标准属性。
- */
-/**
- * AttributeFactory类。
- */
-/**
- * AttributeFactory类。
- */
 public class AttributeFactory {
     private static final HashMap<String, AbstractAttribute> attrMap = new HashMap<>(29);
 
@@ -35,18 +23,6 @@ public class AttributeFactory {
      * @param inputStream 输入流
      * @param poolList    常量池列表，用于解析属性名称
      * @return 属性对象，如果不支持该属性则返回null
-     */
-    /**
-     * getAttributeTable方法。
-     *      * @param inputStream InputStream类型参数
-     * @param poolList ListAbstractConstantPool类型参数
-     * @return static AbstractAttribute类型返回值
-     */
-    /**
-     * getAttributeTable方法。
-     *      * @param inputStream InputStream类型参数
-     * @param poolList ListAbstractConstantPool类型参数
-     * @return static AbstractAttribute类型返回值
      */
     public static AbstractAttribute getAttributeTable(InputStream inputStream, List<AbstractConstantPool> poolList) {
         U2 attributeNameIndex = U2.read(inputStream);

@@ -11,12 +11,6 @@ import java.io.IOException;
  * Robot打印"ILoveYou"演示类
  * 演示使用Robot自动打开记事本并输入文字
  */
-/**
- * RobotPrintILoveYou类。
- */
-/**
- * RobotPrintILoveYou类。
- */
 public class RobotPrintILoveYou {
 
 // 打出一个大写的Q 

@@ -17,10 +17,6 @@ public abstract class AbstractCluster implements ICluster {
      * getName方法。
      * @return String类型返回值
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return null;
     }
@@ -30,19 +26,11 @@ public abstract class AbstractCluster implements ICluster {
      * getId方法。
      * @return String类型返回值
      */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
     public String getId() {
         return null;
     }
 
     @Override
-    /**
-     * members方法。
-     * @return Collection<INode>类型返回值
-     */
     /**
      * members方法。
      * @return Collection<INode>类型返回值

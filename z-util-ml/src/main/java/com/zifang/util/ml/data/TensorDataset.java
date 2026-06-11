@@ -14,12 +14,6 @@ import java.util.List;
  * Each sample consists of one or more tensors (e.g., features and labels).
  * This provides a convenient way to create datasets from existing NdArray data.
  */
-/**
- * TensorDataset类。
- */
-/**
- * TensorDataset类。
- */
 public class TensorDataset implements Dataset {
 
     private final List<NdArray[]> samples;
@@ -31,16 +25,6 @@ public class TensorDataset implements Dataset {
      *
      * @param features Features tensor of shape (n_samples, ...)
      * @param labels  Labels tensor of shape (n_samples, ...)
-     */
-    /**
-     * TensorDataset方法。
-     *      * @param features NdArray类型参数
-     * @param labels NdArray类型参数
-     */
-    /**
-     * TensorDataset方法。
-     *      * @param features NdArray类型参数
-     * @param labels NdArray类型参数
      */
     public TensorDataset(NdArray features, NdArray labels) {
         this.samples = new ArrayList<>();
@@ -62,14 +46,6 @@ public class TensorDataset implements Dataset {
      * Create a TensorDataset from a list of (features, labels) pairs.
      *
      * @param data List of NdArray pairs where each pair is [features, labels]
-     */
-    /**
-     * TensorDataset方法。
-     *      * @param data ListNdArray[]类型参数
-     */
-    /**
-     * TensorDataset方法。
-     *      * @param data ListNdArray[]类型参数
      */
     public TensorDataset(List<NdArray[]> data) {
         this.samples = new ArrayList<>(data);
@@ -96,10 +72,6 @@ public class TensorDataset implements Dataset {
      * size方法。
      * @return int类型返回值
      */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
     public int size() {
         return samples.size();
     }
@@ -111,11 +83,6 @@ public class TensorDataset implements Dataset {
      * @return Array of NdArrays representing [features, labels]
      */
     @Override
-    /**
-     * get方法。
-     *      * @param index int类型参数
-     * @return NdArray[]类型返回值
-     */
     /**
      * get方法。
      *      * @param index int类型参数
@@ -152,10 +119,6 @@ public class TensorDataset implements Dataset {
      * getFeatureShape方法。
      * @return int[]类型返回值
      */
-    /**
-     * getFeatureShape方法。
-     * @return int[]类型返回值
-     */
     public int[] getFeatureShape() {
         return featureShape;
     }
@@ -170,10 +133,6 @@ public class TensorDataset implements Dataset {
      * getLabelShape方法。
      * @return int[]类型返回值
      */
-    /**
-     * getLabelShape方法。
-     * @return int[]类型返回值
-     */
     public int[] getLabelShape() {
         return labelShape;
     }
@@ -182,14 +141,6 @@ public class TensorDataset implements Dataset {
      * Get all samples as a list.
      *
      * @return List of all samples
-     */
-    /**
-     * getAllSamples方法。
-     * @return List<NdArray[]>类型返回值
-     */
-    /**
-     * getAllSamples方法。
-     * @return List<NdArray[]>类型返回值
      */
     public List<NdArray[]> getAllSamples() {
         return new ArrayList<>(samples);

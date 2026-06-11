@@ -12,12 +12,6 @@ import java.util.Date;
  * <p>
  * 只处理LocalDate类型，提供LocalDate的格式化、解析、计算等功能
  */
-/**
- * LocalDateUtil类。
- */
-/**
- * LocalDateUtil类。
- */
 public class LocalDateUtil {
 
     public static final String PATTERN_DEFAULT = "yyyy-MM-dd";
@@ -32,17 +26,7 @@ public class LocalDateUtil {
      *      * @param PATTERN_DEFAULT Object类型参数
      * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
      */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_DEFAULT Object类型参数
-     * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
-     */
     public static final DateTimeFormatter FMT_DEFAULT = DateTimeFormatter.ofPattern(PATTERN_DEFAULT);
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_COMPACT Object类型参数
-     * @return static final DateTimeFormatter FMT_COMPACT =类型返回值
-     */
     /**
      * DateTimeFormatter.ofPattern方法。
      *      * @param PATTERN_COMPACT Object类型参数
@@ -54,17 +38,7 @@ public class LocalDateUtil {
      *      * @param PATTERN_MONTH Object类型参数
      * @return static final DateTimeFormatter FMT_MONTH =类型返回值
      */
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_MONTH Object类型参数
-     * @return static final DateTimeFormatter FMT_MONTH =类型返回值
-     */
     public static final DateTimeFormatter FMT_MONTH = DateTimeFormatter.ofPattern(PATTERN_MONTH);
-    /**
-     * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_CHINESE Object类型参数
-     * @return static final DateTimeFormatter FMT_CHINESE =类型返回值
-     */
     /**
      * DateTimeFormatter.ofPattern方法。
      *      * @param PATTERN_CHINESE Object类型参数
@@ -74,11 +48,6 @@ public class LocalDateUtil {
 
     // ==================== 格式化 ====================
 
-    /**
-     * format方法。
-     *      * @param date LocalDate类型参数
-     * @return static String类型返回值
-     */
     /**
      * format方法。
      *      * @param date LocalDate类型参数
@@ -94,23 +63,11 @@ public class LocalDateUtil {
      * @param pattern String类型参数
      * @return static String类型返回值
      */
-    /**
-     * format方法。
-     *      * @param date LocalDate类型参数
-     * @param pattern String类型参数
-     * @return static String类型返回值
-     */
     public static String format(LocalDate date, String pattern) {
         if (date == null) return null;
         return date.format(DateTimeFormatter.ofPattern(pattern));
     }
 
-    /**
-     * format方法。
-     *      * @param date LocalDate类型参数
-     * @param formatter DateTimeFormatter类型参数
-     * @return static String类型返回值
-     */
     /**
      * format方法。
      *      * @param date LocalDate类型参数
@@ -129,21 +86,10 @@ public class LocalDateUtil {
      *      * @param dateStr String类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate parse(String dateStr) {
         return parse(dateStr, PATTERN_DEFAULT);
     }
 
-    /**
-     * parse方法。
-     *      * @param dateStr String类型参数
-     * @param pattern String类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * parse方法。
      *      * @param dateStr String类型参数
@@ -155,12 +101,6 @@ public class LocalDateUtil {
         return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(pattern));
     }
 
-    /**
-     * parseStrict方法。
-     *      * @param dateStr String类型参数
-     * @param patterns String...类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * parseStrict方法。
      *      * @param dateStr String类型参数
@@ -185,18 +125,10 @@ public class LocalDateUtil {
      * now方法。
      * @return static LocalDate类型返回值
      */
-    /**
-     * now方法。
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate now() {
         return LocalDate.now();
     }
 
-    /**
-     * today方法。
-     * @return static LocalDate类型返回值
-     */
     /**
      * today方法。
      * @return static LocalDate类型返回值
@@ -212,23 +144,10 @@ public class LocalDateUtil {
      * @param dayOfMonth int类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * of方法。
-     *      * @param year int类型参数
-     * @param month int类型参数
-     * @param dayOfMonth int类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate of(int year, int month, int dayOfMonth) {
         return LocalDate.of(year, month, dayOfMonth);
     }
 
-    /**
-     * ofYearDay方法。
-     *      * @param year int类型参数
-     * @param dayOfYear int类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * ofYearDay方法。
      *      * @param year int类型参数
@@ -247,22 +166,10 @@ public class LocalDateUtil {
      * @param days long类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * plusDays方法。
-     *      * @param date LocalDate类型参数
-     * @param days long类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate plusDays(LocalDate date, long days) {
         return date.plusDays(days);
     }
 
-    /**
-     * minusDays方法。
-     *      * @param date LocalDate类型参数
-     * @param days long类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * minusDays方法。
      *      * @param date LocalDate类型参数
@@ -279,22 +186,10 @@ public class LocalDateUtil {
      * @param weeks long类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * plusWeeks方法。
-     *      * @param date LocalDate类型参数
-     * @param weeks long类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate plusWeeks(LocalDate date, long weeks) {
         return date.plusWeeks(weeks);
     }
 
-    /**
-     * minusWeeks方法。
-     *      * @param date LocalDate类型参数
-     * @param weeks long类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * minusWeeks方法。
      *      * @param date LocalDate类型参数
@@ -311,22 +206,10 @@ public class LocalDateUtil {
      * @param months long类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * plusMonths方法。
-     *      * @param date LocalDate类型参数
-     * @param months long类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate plusMonths(LocalDate date, long months) {
         return date.plusMonths(months);
     }
 
-    /**
-     * minusMonths方法。
-     *      * @param date LocalDate类型参数
-     * @param months long类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * minusMonths方法。
      *      * @param date LocalDate类型参数
@@ -343,22 +226,10 @@ public class LocalDateUtil {
      * @param years long类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * plusYears方法。
-     *      * @param date LocalDate类型参数
-     * @param years long类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate plusYears(LocalDate date, long years) {
         return date.plusYears(years);
     }
 
-    /**
-     * minusYears方法。
-     *      * @param date LocalDate类型参数
-     * @param years long类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * minusYears方法。
      *      * @param date LocalDate类型参数
@@ -376,20 +247,10 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * firstDayOfMonth方法。
-     *      * @param date LocalDate类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate firstDayOfMonth(LocalDate date) {
         return date.with(TemporalAdjusters.firstDayOfMonth());
     }
 
-    /**
-     * lastDayOfMonth方法。
-     *      * @param date LocalDate类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * lastDayOfMonth方法。
      *      * @param date LocalDate类型参数
@@ -404,20 +265,10 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * firstDayOfYear方法。
-     *      * @param date LocalDate类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate firstDayOfYear(LocalDate date) {
         return date.with(TemporalAdjusters.firstDayOfYear());
     }
 
-    /**
-     * lastDayOfYear方法。
-     *      * @param date LocalDate类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * lastDayOfYear方法。
      *      * @param date LocalDate类型参数
@@ -432,11 +283,6 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * firstDayOfWeek方法。
-     *      * @param date LocalDate类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate firstDayOfWeek(LocalDate date) {
         return date.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
     }
@@ -446,20 +292,10 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * lastDayOfWeek方法。
-     *      * @param date LocalDate类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate lastDayOfWeek(LocalDate date) {
         return date.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
     }
 
-    /**
-     * nextWorkingDay方法。
-     *      * @param date LocalDate类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * nextWorkingDay方法。
      *      * @param date LocalDate类型参数
@@ -477,22 +313,10 @@ public class LocalDateUtil {
      * @param date2 LocalDate类型参数
      * @return static boolean类型返回值
      */
-    /**
-     * isBefore方法。
-     *      * @param date1 LocalDate类型参数
-     * @param date2 LocalDate类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isBefore(LocalDate date1, LocalDate date2) {
         return date1.isBefore(date2);
     }
 
-    /**
-     * isAfter方法。
-     *      * @param date1 LocalDate类型参数
-     * @param date2 LocalDate类型参数
-     * @return static boolean类型返回值
-     */
     /**
      * isAfter方法。
      *      * @param date1 LocalDate类型参数
@@ -509,21 +333,10 @@ public class LocalDateUtil {
      * @param date2 LocalDate类型参数
      * @return static boolean类型返回值
      */
-    /**
-     * isEqual方法。
-     *      * @param date1 LocalDate类型参数
-     * @param date2 LocalDate类型参数
-     * @return static boolean类型返回值
-     */
     public static boolean isEqual(LocalDate date1, LocalDate date2) {
         return date1.isEqual(date2);
     }
 
-    /**
-     * isWeekend方法。
-     *      * @param date LocalDate类型参数
-     * @return static boolean类型返回值
-     */
     /**
      * isWeekend方法。
      *      * @param date LocalDate类型参数
@@ -534,11 +347,6 @@ public class LocalDateUtil {
         return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
     }
 
-    /**
-     * isLeapYear方法。
-     *      * @param date LocalDate类型参数
-     * @return static boolean类型返回值
-     */
     /**
      * isLeapYear方法。
      *      * @param date LocalDate类型参数
@@ -556,22 +364,10 @@ public class LocalDateUtil {
      * @param end LocalDate类型参数
      * @return static long类型返回值
      */
-    /**
-     * daysBetween方法。
-     *      * @param start LocalDate类型参数
-     * @param end LocalDate类型参数
-     * @return static long类型返回值
-     */
     public static long daysBetween(LocalDate start, LocalDate end) {
         return java.time.temporal.ChronoUnit.DAYS.between(start, end);
     }
 
-    /**
-     * weeksBetween方法。
-     *      * @param start LocalDate类型参数
-     * @param end LocalDate类型参数
-     * @return static long类型返回值
-     */
     /**
      * weeksBetween方法。
      *      * @param start LocalDate类型参数
@@ -588,22 +384,10 @@ public class LocalDateUtil {
      * @param end LocalDate类型参数
      * @return static long类型返回值
      */
-    /**
-     * monthsBetween方法。
-     *      * @param start LocalDate类型参数
-     * @param end LocalDate类型参数
-     * @return static long类型返回值
-     */
     public static long monthsBetween(LocalDate start, LocalDate end) {
         return java.time.temporal.ChronoUnit.MONTHS.between(start, end);
     }
 
-    /**
-     * yearsBetween方法。
-     *      * @param start LocalDate类型参数
-     * @param end LocalDate类型参数
-     * @return static long类型返回值
-     */
     /**
      * yearsBetween方法。
      *      * @param start LocalDate类型参数
@@ -621,20 +405,10 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static int类型返回值
      */
-    /**
-     * getYear方法。
-     *      * @param date LocalDate类型参数
-     * @return static int类型返回值
-     */
     public static int getYear(LocalDate date) {
         return date.getYear();
     }
 
-    /**
-     * getMonth方法。
-     *      * @param date LocalDate类型参数
-     * @return static int类型返回值
-     */
     /**
      * getMonth方法。
      *      * @param date LocalDate类型参数
@@ -649,20 +423,10 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static int类型返回值
      */
-    /**
-     * getDayOfMonth方法。
-     *      * @param date LocalDate类型参数
-     * @return static int类型返回值
-     */
     public static int getDayOfMonth(LocalDate date) {
         return date.getDayOfMonth();
     }
 
-    /**
-     * getDayOfYear方法。
-     *      * @param date LocalDate类型参数
-     * @return static int类型返回值
-     */
     /**
      * getDayOfYear方法。
      *      * @param date LocalDate类型参数
@@ -677,11 +441,6 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static DayOfWeek类型返回值
      */
-    /**
-     * getDayOfWeek方法。
-     *      * @param date LocalDate类型参数
-     * @return static DayOfWeek类型返回值
-     */
     public static DayOfWeek getDayOfWeek(LocalDate date) {
         return date.getDayOfWeek();
     }
@@ -691,20 +450,10 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static String类型返回值
      */
-    /**
-     * getWeekdayName方法。
-     *      * @param date LocalDate类型参数
-     * @return static String类型返回值
-     */
     public static String getWeekdayName(LocalDate date) {
         return date.getDayOfWeek().getDisplayName(java.time.format.TextStyle.FULL, java.util.Locale.CHINESE);
     }
 
-    /**
-     * getMonthName方法。
-     *      * @param date LocalDate类型参数
-     * @return static String类型返回值
-     */
     /**
      * getMonthName方法。
      *      * @param date LocalDate类型参数
@@ -721,20 +470,10 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static Date类型返回值
      */
-    /**
-     * toDate方法。
-     *      * @param date LocalDate类型参数
-     * @return static Date类型返回值
-     */
     public static Date toDate(LocalDate date) {
         return TimeConverter.toDate(date);
     }
 
-    /**
-     * toLocalDateTime方法。
-     *      * @param date LocalDate类型参数
-     * @return static LocalDateTime类型返回值
-     */
     /**
      * toLocalDateTime方法。
      *      * @param date LocalDate类型参数
@@ -750,21 +489,10 @@ public class LocalDateUtil {
      * @param localTime LocalTime类型参数
      * @return static LocalDateTime类型返回值
      */
-    /**
-     * toLocalDateTime方法。
-     *      * @param date LocalDate类型参数
-     * @param localTime LocalTime类型参数
-     * @return static LocalDateTime类型返回值
-     */
     public static LocalDateTime toLocalDateTime(LocalDate date, LocalTime localTime) {
         return TimeConverter.toLocalDateTime(date, localTime);
     }
 
-    /**
-     * toInstant方法。
-     *      * @param date LocalDate类型参数
-     * @return static Instant类型返回值
-     */
     /**
      * toInstant方法。
      *      * @param date LocalDate类型参数
@@ -779,21 +507,11 @@ public class LocalDateUtil {
      *      * @param date LocalDate类型参数
      * @return static long类型返回值
      */
-    /**
-     * toEpochMilli方法。
-     *      * @param date LocalDate类型参数
-     * @return static long类型返回值
-     */
     public static long toEpochMilli(LocalDate date) {
         if (date == null) return 0;
         return date.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
     }
 
-    /**
-     * toEpochDay方法。
-     *      * @param date LocalDate类型参数
-     * @return static String类型返回值
-     */
     /**
      * toEpochDay方法。
      *      * @param date LocalDate类型参数
@@ -810,20 +528,10 @@ public class LocalDateUtil {
      *      * @param date Date类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * fromDate方法。
-     *      * @param date Date类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate fromDate(Date date) {
         return TimeConverter.toLocalDate(date);
     }
 
-    /**
-     * fromLocalDateTime方法。
-     *      * @param localDateTime LocalDateTime类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * fromLocalDateTime方法。
      *      * @param localDateTime LocalDateTime类型参数
@@ -838,20 +546,10 @@ public class LocalDateUtil {
      *      * @param epochDay long类型参数
      * @return static LocalDate类型返回值
      */
-    /**
-     * fromEpochDay方法。
-     *      * @param epochDay long类型参数
-     * @return static LocalDate类型返回值
-     */
     public static LocalDate fromEpochDay(long epochDay) {
         return LocalDate.ofEpochDay(epochDay);
     }
 
-    /**
-     * fromInstant方法。
-     *      * @param instant Instant类型参数
-     * @return static LocalDate类型返回值
-     */
     /**
      * fromInstant方法。
      *      * @param instant Instant类型参数

@@ -6,12 +6,6 @@ import java.awt.*;
  * 二维码 Logo 配置类。
  * 用于配置二维码中间 Logo 图标的样式和大小。
  */
-/**
- * MatrixToLogoImageConfig类。
- */
-/**
- * MatrixToLogoImageConfig类。
- */
 public class MatrixToLogoImageConfig {
     /** 默认 Logo 边框颜色 */
     public static final Color DEFAULT_BORDERCOLOR = Color.RED;
@@ -28,12 +22,6 @@ public class MatrixToLogoImageConfig {
      * 创建默认 Logo 配置。
      * 边框颜色为红色，边框宽度为 2，Logo 大小为二维码的 1/5。
      */
-    /**
-     * MatrixToLogoImageConfig方法。
-     */
-    /**
-     * MatrixToLogoImageConfig方法。
-     */
     public MatrixToLogoImageConfig() {
         this(DEFAULT_BORDERCOLOR, DEFAULT_LOGOPART);
     }
@@ -43,16 +31,6 @@ public class MatrixToLogoImageConfig {
      *
      * @param borderColor 边框颜色
      * @param logoPart    Logo 大小分母，如为 5 则 Logo 大小为二维码的 1/5
-     */
-    /**
-     * MatrixToLogoImageConfig方法。
-     *      * @param borderColor Color类型参数
-     * @param logoPart int类型参数
-     */
-    /**
-     * MatrixToLogoImageConfig方法。
-     *      * @param borderColor Color类型参数
-     * @param logoPart int类型参数
      */
     public MatrixToLogoImageConfig(Color borderColor, int logoPart) {
         this.borderColor = borderColor;
@@ -64,14 +42,6 @@ public class MatrixToLogoImageConfig {
      *
      * @return 边框颜色
      */
-    /**
-     * getBorderColor方法。
-     * @return Color类型返回值
-     */
-    /**
-     * getBorderColor方法。
-     * @return Color类型返回值
-     */
     public Color getBorderColor() {
         return borderColor;
     }
@@ -81,14 +51,6 @@ public class MatrixToLogoImageConfig {
      *
      * @return 边框宽度
      */
-    /**
-     * getBorder方法。
-     * @return int类型返回值
-     */
-    /**
-     * getBorder方法。
-     * @return int类型返回值
-     */
     public int getBorder() {
         return border;
     }
@@ -97,14 +59,6 @@ public class MatrixToLogoImageConfig {
      * 获取 Logo 大小分母。
      *
      * @return Logo 大小分母
-     */
-    /**
-     * getLogoPart方法。
-     * @return int类型返回值
-     */
-    /**
-     * getLogoPart方法。
-     * @return int类型返回值
      */
     public int getLogoPart() {
         return logoPart;

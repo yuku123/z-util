@@ -6,23 +6,12 @@ import com.zifang.util.cli.model.OptionGroup;
 /**
  * Thrown when more than one option in an option group has been provided.
  */
-/**
- * AlreadySelectedException类。
- */
-/**
- * AlreadySelectedException类。
- */
 public class AlreadySelectedException extends ParseException {
 
     private static final long serialVersionUID = 1L;
     private final OptionGroup optionGroup;
     private final Option option;
 
-    /**
-     * AlreadySelectedException方法。
-     *      * @param optionGroup final类型参数
-     * @param option final类型参数
-     */
     /**
      * AlreadySelectedException方法。
      *      * @param optionGroup final类型参数
@@ -43,18 +32,10 @@ public class AlreadySelectedException extends ParseException {
      * getOption方法。
      * @return Option类型返回值
      */
-    /**
-     * getOption方法。
-     * @return Option类型返回值
-     */
     public Option getOption() {
         return option;
     }
 
-    /**
-     * getOptionGroup方法。
-     * @return OptionGroup类型返回值
-     */
     /**
      * getOptionGroup方法。
      * @return OptionGroup类型返回值

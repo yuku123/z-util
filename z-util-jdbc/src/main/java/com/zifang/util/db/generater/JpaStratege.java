@@ -22,11 +22,5 @@ package com.zifang.util.db.generater;
  * @author zifang
  * @see MybaitsStratige
  */
-/**
- * JpaStratege类。
- */
-/**
- * JpaStratege类。
- */
 public class JpaStratege {
 }

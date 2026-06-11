@@ -8,12 +8,6 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * BasicAuth注解。
- */
-/**
- * BasicAuth注解。
- */
 public @interface BasicAuth {
 
     /**

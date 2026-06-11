@@ -7,12 +7,6 @@ import java.util.Properties;
 /**
  * @author zifang
  */
-/**
- * JvmProperties类。
- */
-/**
- * JvmProperties类。
- */
 public class JvmProperties {
 
     private String awtToolkit;
@@ -76,17 +70,10 @@ public class JvmProperties {
     /**
      * JvmProperties方法。
      */
-    /**
-     * JvmProperties方法。
-     */
     public JvmProperties() {
         this.properties = System.getProperties();
     }
 
-    /**
-     * getAwtToolkit方法。
-     * @return String类型返回值
-     */
     /**
      * getAwtToolkit方法。
      * @return String类型返回值
@@ -99,18 +86,10 @@ public class JvmProperties {
      * setAwtToolkit方法。
      *      * @param awtToolkit String类型参数
      */
-    /**
-     * setAwtToolkit方法。
-     *      * @param awtToolkit String类型参数
-     */
     public void setAwtToolkit(String awtToolkit) {
         this.awtToolkit = awtToolkit;
     }
 
-    /**
-     * getFileEncoding方法。
-     * @return String类型返回值
-     */
     /**
      * getFileEncoding方法。
      * @return String类型返回值
@@ -123,18 +102,10 @@ public class JvmProperties {
      * setFileEncoding方法。
      *      * @param fileEncoding String类型参数
      */
-    /**
-     * setFileEncoding方法。
-     *      * @param fileEncoding String类型参数
-     */
     public void setFileEncoding(String fileEncoding) {
         this.fileEncoding = fileEncoding;
     }
 
-    /**
-     * getFileEncodingPkg方法。
-     * @return String类型返回值
-     */
     /**
      * getFileEncodingPkg方法。
      * @return String类型返回值
@@ -147,18 +118,10 @@ public class JvmProperties {
      * setFileEncodingPkg方法。
      *      * @param fileEncodingPkg String类型参数
      */
-    /**
-     * setFileEncodingPkg方法。
-     *      * @param fileEncodingPkg String类型参数
-     */
     public void setFileEncodingPkg(String fileEncodingPkg) {
         this.fileEncodingPkg = fileEncodingPkg;
     }
 
-    /**
-     * getFileSeparator方法。
-     * @return String类型返回值
-     */
     /**
      * getFileSeparator方法。
      * @return String类型返回值
@@ -171,18 +134,10 @@ public class JvmProperties {
      * setFileSeparator方法。
      *      * @param fileSeparator String类型参数
      */
-    /**
-     * setFileSeparator方法。
-     *      * @param fileSeparator String类型参数
-     */
     public void setFileSeparator(String fileSeparator) {
         this.fileSeparator = fileSeparator;
     }
 
-    /**
-     * getGopherProxySet方法。
-     * @return String类型返回值
-     */
     /**
      * getGopherProxySet方法。
      * @return String类型返回值
@@ -195,18 +150,10 @@ public class JvmProperties {
      * setGopherProxySet方法。
      *      * @param gopherProxySet String类型参数
      */
-    /**
-     * setGopherProxySet方法。
-     *      * @param gopherProxySet String类型参数
-     */
     public void setGopherProxySet(String gopherProxySet) {
         this.gopherProxySet = gopherProxySet;
     }
 
-    /**
-     * getIdeaTestCyclicBufferSize方法。
-     * @return String类型返回值
-     */
     /**
      * getIdeaTestCyclicBufferSize方法。
      * @return String类型返回值
@@ -219,18 +166,10 @@ public class JvmProperties {
      * setIdeaTestCyclicBufferSize方法。
      *      * @param ideaTestCyclicBufferSize String类型参数
      */
-    /**
-     * setIdeaTestCyclicBufferSize方法。
-     *      * @param ideaTestCyclicBufferSize String类型参数
-     */
     public void setIdeaTestCyclicBufferSize(String ideaTestCyclicBufferSize) {
         this.ideaTestCyclicBufferSize = ideaTestCyclicBufferSize;
     }
 
-    /**
-     * getJavaAwtGraphicsenv方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaAwtGraphicsenv方法。
      * @return String类型返回值
@@ -243,18 +182,10 @@ public class JvmProperties {
      * setJavaAwtGraphicsenv方法。
      *      * @param javaAwtGraphicsenv String类型参数
      */
-    /**
-     * setJavaAwtGraphicsenv方法。
-     *      * @param javaAwtGraphicsenv String类型参数
-     */
     public void setJavaAwtGraphicsenv(String javaAwtGraphicsenv) {
         this.javaAwtGraphicsenv = javaAwtGraphicsenv;
     }
 
-    /**
-     * getJavaAwtPrinterjob方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaAwtPrinterjob方法。
      * @return String类型返回值
@@ -267,18 +198,10 @@ public class JvmProperties {
      * setJavaAwtPrinterjob方法。
      *      * @param javaAwtPrinterjob String类型参数
      */
-    /**
-     * setJavaAwtPrinterjob方法。
-     *      * @param javaAwtPrinterjob String类型参数
-     */
     public void setJavaAwtPrinterjob(String javaAwtPrinterjob) {
         this.javaAwtPrinterjob = javaAwtPrinterjob;
     }
 
-    /**
-     * getJavaClassPath方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaClassPath方法。
      * @return String类型返回值
@@ -291,18 +214,10 @@ public class JvmProperties {
      * setJavaClassPath方法。
      *      * @param javaClassPath String类型参数
      */
-    /**
-     * setJavaClassPath方法。
-     *      * @param javaClassPath String类型参数
-     */
     public void setJavaClassPath(String javaClassPath) {
         this.javaClassPath = javaClassPath;
     }
 
-    /**
-     * getJavaClassVersion方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaClassVersion方法。
      * @return String类型返回值
@@ -315,18 +230,10 @@ public class JvmProperties {
      * setJavaClassVersion方法。
      *      * @param javaClassVersion String类型参数
      */
-    /**
-     * setJavaClassVersion方法。
-     *      * @param javaClassVersion String类型参数
-     */
     public void setJavaClassVersion(String javaClassVersion) {
         this.javaClassVersion = javaClassVersion;
     }
 
-    /**
-     * getJavaEndorsedDirs方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaEndorsedDirs方法。
      * @return String类型返回值
@@ -339,18 +246,10 @@ public class JvmProperties {
      * setJavaEndorsedDirs方法。
      *      * @param javaEndorsedDirs String类型参数
      */
-    /**
-     * setJavaEndorsedDirs方法。
-     *      * @param javaEndorsedDirs String类型参数
-     */
     public void setJavaEndorsedDirs(String javaEndorsedDirs) {
         this.javaEndorsedDirs = javaEndorsedDirs;
     }
 
-    /**
-     * getJavaExtDirs方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaExtDirs方法。
      * @return String类型返回值
@@ -363,18 +262,10 @@ public class JvmProperties {
      * setJavaExtDirs方法。
      *      * @param javaExtDirs String类型参数
      */
-    /**
-     * setJavaExtDirs方法。
-     *      * @param javaExtDirs String类型参数
-     */
     public void setJavaExtDirs(String javaExtDirs) {
         this.javaExtDirs = javaExtDirs;
     }
 
-    /**
-     * getJavaHome方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaHome方法。
      * @return String类型返回值
@@ -387,18 +278,10 @@ public class JvmProperties {
      * setJavaHome方法。
      *      * @param javaHome String类型参数
      */
-    /**
-     * setJavaHome方法。
-     *      * @param javaHome String类型参数
-     */
     public void setJavaHome(String javaHome) {
         this.javaHome = javaHome;
     }
 
-    /**
-     * getJavaIoTmpdir方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaIoTmpdir方法。
      * @return String类型返回值
@@ -411,18 +294,10 @@ public class JvmProperties {
      * setJavaIoTmpdir方法。
      *      * @param javaIoTmpdir String类型参数
      */
-    /**
-     * setJavaIoTmpdir方法。
-     *      * @param javaIoTmpdir String类型参数
-     */
     public void setJavaIoTmpdir(String javaIoTmpdir) {
         this.javaIoTmpdir = javaIoTmpdir;
     }
 
-    /**
-     * getJavaLibraryPath方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaLibraryPath方法。
      * @return String类型返回值
@@ -435,18 +310,10 @@ public class JvmProperties {
      * setJavaLibraryPath方法。
      *      * @param javaLibraryPath String类型参数
      */
-    /**
-     * setJavaLibraryPath方法。
-     *      * @param javaLibraryPath String类型参数
-     */
     public void setJavaLibraryPath(String javaLibraryPath) {
         this.javaLibraryPath = javaLibraryPath;
     }
 
-    /**
-     * getJavaRuntimeName方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaRuntimeName方法。
      * @return String类型返回值
@@ -459,18 +326,10 @@ public class JvmProperties {
      * setJavaRuntimeName方法。
      *      * @param javaRuntimeName String类型参数
      */
-    /**
-     * setJavaRuntimeName方法。
-     *      * @param javaRuntimeName String类型参数
-     */
     public void setJavaRuntimeName(String javaRuntimeName) {
         this.javaRuntimeName = javaRuntimeName;
     }
 
-    /**
-     * getJavaRuntimeVersion方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaRuntimeVersion方法。
      * @return String类型返回值
@@ -483,18 +342,10 @@ public class JvmProperties {
      * setJavaRuntimeVersion方法。
      *      * @param javaRuntimeVersion String类型参数
      */
-    /**
-     * setJavaRuntimeVersion方法。
-     *      * @param javaRuntimeVersion String类型参数
-     */
     public void setJavaRuntimeVersion(String javaRuntimeVersion) {
         this.javaRuntimeVersion = javaRuntimeVersion;
     }
 
-    /**
-     * getJavaSpecificationName方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaSpecificationName方法。
      * @return String类型返回值
@@ -507,18 +358,10 @@ public class JvmProperties {
      * setJavaSpecificationName方法。
      *      * @param javaSpecificationName String类型参数
      */
-    /**
-     * setJavaSpecificationName方法。
-     *      * @param javaSpecificationName String类型参数
-     */
     public void setJavaSpecificationName(String javaSpecificationName) {
         this.javaSpecificationName = javaSpecificationName;
     }
 
-    /**
-     * getJavaSpecificationVendor方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaSpecificationVendor方法。
      * @return String类型返回值
@@ -531,18 +374,10 @@ public class JvmProperties {
      * setJavaSpecificationVendor方法。
      *      * @param javaSpecificationVendor String类型参数
      */
-    /**
-     * setJavaSpecificationVendor方法。
-     *      * @param javaSpecificationVendor String类型参数
-     */
     public void setJavaSpecificationVendor(String javaSpecificationVendor) {
         this.javaSpecificationVendor = javaSpecificationVendor;
     }
 
-    /**
-     * getJavaSpecificationVersion方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaSpecificationVersion方法。
      * @return String类型返回值
@@ -555,18 +390,10 @@ public class JvmProperties {
      * setJavaSpecificationVersion方法。
      *      * @param javaSpecificationVersion String类型参数
      */
-    /**
-     * setJavaSpecificationVersion方法。
-     *      * @param javaSpecificationVersion String类型参数
-     */
     public void setJavaSpecificationVersion(String javaSpecificationVersion) {
         this.javaSpecificationVersion = javaSpecificationVersion;
     }
 
-    /**
-     * getJavaVendor方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVendor方法。
      * @return String类型返回值
@@ -579,18 +406,10 @@ public class JvmProperties {
      * setJavaVendor方法。
      *      * @param javaVendor String类型参数
      */
-    /**
-     * setJavaVendor方法。
-     *      * @param javaVendor String类型参数
-     */
     public void setJavaVendor(String javaVendor) {
         this.javaVendor = javaVendor;
     }
 
-    /**
-     * getJavaVendorUrl方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVendorUrl方法。
      * @return String类型返回值
@@ -603,18 +422,10 @@ public class JvmProperties {
      * setJavaVendorUrl方法。
      *      * @param javaVendorUrl String类型参数
      */
-    /**
-     * setJavaVendorUrl方法。
-     *      * @param javaVendorUrl String类型参数
-     */
     public void setJavaVendorUrl(String javaVendorUrl) {
         this.javaVendorUrl = javaVendorUrl;
     }
 
-    /**
-     * getJavaVendorUrlBug方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVendorUrlBug方法。
      * @return String类型返回值
@@ -627,18 +438,10 @@ public class JvmProperties {
      * setJavaVendorUrlBug方法。
      *      * @param javaVendorUrlBug String类型参数
      */
-    /**
-     * setJavaVendorUrlBug方法。
-     *      * @param javaVendorUrlBug String类型参数
-     */
     public void setJavaVendorUrlBug(String javaVendorUrlBug) {
         this.javaVendorUrlBug = javaVendorUrlBug;
     }
 
-    /**
-     * getJavaVersion方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVersion方法。
      * @return String类型返回值
@@ -651,18 +454,10 @@ public class JvmProperties {
      * setJavaVersion方法。
      *      * @param javaVersion String类型参数
      */
-    /**
-     * setJavaVersion方法。
-     *      * @param javaVersion String类型参数
-     */
     public void setJavaVersion(String javaVersion) {
         this.javaVersion = javaVersion;
     }
 
-    /**
-     * getJavaVmInfo方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVmInfo方法。
      * @return String类型返回值
@@ -675,18 +470,10 @@ public class JvmProperties {
      * setJavaVmInfo方法。
      *      * @param javaVmInfo String类型参数
      */
-    /**
-     * setJavaVmInfo方法。
-     *      * @param javaVmInfo String类型参数
-     */
     public void setJavaVmInfo(String javaVmInfo) {
         this.javaVmInfo = javaVmInfo;
     }
 
-    /**
-     * getJavaVmName方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVmName方法。
      * @return String类型返回值
@@ -699,18 +486,10 @@ public class JvmProperties {
      * setJavaVmName方法。
      *      * @param javaVmName String类型参数
      */
-    /**
-     * setJavaVmName方法。
-     *      * @param javaVmName String类型参数
-     */
     public void setJavaVmName(String javaVmName) {
         this.javaVmName = javaVmName;
     }
 
-    /**
-     * getJavaVmSpecificationName方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVmSpecificationName方法。
      * @return String类型返回值
@@ -723,18 +502,10 @@ public class JvmProperties {
      * setJavaVmSpecificationName方法。
      *      * @param javaVmSpecificationName String类型参数
      */
-    /**
-     * setJavaVmSpecificationName方法。
-     *      * @param javaVmSpecificationName String类型参数
-     */
     public void setJavaVmSpecificationName(String javaVmSpecificationName) {
         this.javaVmSpecificationName = javaVmSpecificationName;
     }
 
-    /**
-     * getJavaVmSpecificationVendor方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVmSpecificationVendor方法。
      * @return String类型返回值
@@ -747,18 +518,10 @@ public class JvmProperties {
      * setJavaVmSpecificationVendor方法。
      *      * @param javaVmSpecificationVendor String类型参数
      */
-    /**
-     * setJavaVmSpecificationVendor方法。
-     *      * @param javaVmSpecificationVendor String类型参数
-     */
     public void setJavaVmSpecificationVendor(String javaVmSpecificationVendor) {
         this.javaVmSpecificationVendor = javaVmSpecificationVendor;
     }
 
-    /**
-     * getJavaVmSpecificationVersion方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVmSpecificationVersion方法。
      * @return String类型返回值
@@ -771,18 +534,10 @@ public class JvmProperties {
      * setJavaVmSpecificationVersion方法。
      *      * @param javaVmSpecificationVersion String类型参数
      */
-    /**
-     * setJavaVmSpecificationVersion方法。
-     *      * @param javaVmSpecificationVersion String类型参数
-     */
     public void setJavaVmSpecificationVersion(String javaVmSpecificationVersion) {
         this.javaVmSpecificationVersion = javaVmSpecificationVersion;
     }
 
-    /**
-     * getJavaVmVendor方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVmVendor方法。
      * @return String类型返回值
@@ -795,18 +550,10 @@ public class JvmProperties {
      * setJavaVmVendor方法。
      *      * @param javaVmVendor String类型参数
      */
-    /**
-     * setJavaVmVendor方法。
-     *      * @param javaVmVendor String类型参数
-     */
     public void setJavaVmVendor(String javaVmVendor) {
         this.javaVmVendor = javaVmVendor;
     }
 
-    /**
-     * getJavaVmVersion方法。
-     * @return String类型返回值
-     */
     /**
      * getJavaVmVersion方法。
      * @return String类型返回值
@@ -819,18 +566,10 @@ public class JvmProperties {
      * setJavaVmVersion方法。
      *      * @param javaVmVersion String类型参数
      */
-    /**
-     * setJavaVmVersion方法。
-     *      * @param javaVmVersion String类型参数
-     */
     public void setJavaVmVersion(String javaVmVersion) {
         this.javaVmVersion = javaVmVersion;
     }
 
-    /**
-     * getLineSeparator方法。
-     * @return String类型返回值
-     */
     /**
      * getLineSeparator方法。
      * @return String类型返回值
@@ -843,18 +582,10 @@ public class JvmProperties {
      * setLineSeparator方法。
      *      * @param lineSeparator String类型参数
      */
-    /**
-     * setLineSeparator方法。
-     *      * @param lineSeparator String类型参数
-     */
     public void setLineSeparator(String lineSeparator) {
         this.lineSeparator = lineSeparator;
     }
 
-    /**
-     * getOsArch方法。
-     * @return String类型返回值
-     */
     /**
      * getOsArch方法。
      * @return String类型返回值
@@ -867,18 +598,10 @@ public class JvmProperties {
      * setOsArch方法。
      *      * @param osArch String类型参数
      */
-    /**
-     * setOsArch方法。
-     *      * @param osArch String类型参数
-     */
     public void setOsArch(String osArch) {
         this.osArch = osArch;
     }
 
-    /**
-     * getOsName方法。
-     * @return String类型返回值
-     */
     /**
      * getOsName方法。
      * @return String类型返回值
@@ -891,18 +614,10 @@ public class JvmProperties {
      * setOsName方法。
      *      * @param osName String类型参数
      */
-    /**
-     * setOsName方法。
-     *      * @param osName String类型参数
-     */
     public void setOsName(String osName) {
         this.osName = osName;
     }
 
-    /**
-     * getOsVersion方法。
-     * @return String类型返回值
-     */
     /**
      * getOsVersion方法。
      * @return String类型返回值
@@ -915,18 +630,10 @@ public class JvmProperties {
      * setOsVersion方法。
      *      * @param osVersion String类型参数
      */
-    /**
-     * setOsVersion方法。
-     *      * @param osVersion String类型参数
-     */
     public void setOsVersion(String osVersion) {
         this.osVersion = osVersion;
     }
 
-    /**
-     * getPathSeparator方法。
-     * @return String类型返回值
-     */
     /**
      * getPathSeparator方法。
      * @return String类型返回值
@@ -939,18 +646,10 @@ public class JvmProperties {
      * setPathSeparator方法。
      *      * @param pathSeparator String类型参数
      */
-    /**
-     * setPathSeparator方法。
-     *      * @param pathSeparator String类型参数
-     */
     public void setPathSeparator(String pathSeparator) {
         this.pathSeparator = pathSeparator;
     }
 
-    /**
-     * getSunArchDataModel方法。
-     * @return String类型返回值
-     */
     /**
      * getSunArchDataModel方法。
      * @return String类型返回值
@@ -963,18 +662,10 @@ public class JvmProperties {
      * setSunArchDataModel方法。
      *      * @param sunArchDataModel String类型参数
      */
-    /**
-     * setSunArchDataModel方法。
-     *      * @param sunArchDataModel String类型参数
-     */
     public void setSunArchDataModel(String sunArchDataModel) {
         this.sunArchDataModel = sunArchDataModel;
     }
 
-    /**
-     * getSunBootClassPath方法。
-     * @return String类型返回值
-     */
     /**
      * getSunBootClassPath方法。
      * @return String类型返回值
@@ -987,18 +678,10 @@ public class JvmProperties {
      * setSunBootClassPath方法。
      *      * @param sunBootClassPath String类型参数
      */
-    /**
-     * setSunBootClassPath方法。
-     *      * @param sunBootClassPath String类型参数
-     */
     public void setSunBootClassPath(String sunBootClassPath) {
         this.sunBootClassPath = sunBootClassPath;
     }
 
-    /**
-     * getSunBootLibraryPath方法。
-     * @return String类型返回值
-     */
     /**
      * getSunBootLibraryPath方法。
      * @return String类型返回值
@@ -1011,18 +694,10 @@ public class JvmProperties {
      * setSunBootLibraryPath方法。
      *      * @param sunBootLibraryPath String类型参数
      */
-    /**
-     * setSunBootLibraryPath方法。
-     *      * @param sunBootLibraryPath String类型参数
-     */
     public void setSunBootLibraryPath(String sunBootLibraryPath) {
         this.sunBootLibraryPath = sunBootLibraryPath;
     }
 
-    /**
-     * getSunCpuEndian方法。
-     * @return String类型返回值
-     */
     /**
      * getSunCpuEndian方法。
      * @return String类型返回值
@@ -1035,18 +710,10 @@ public class JvmProperties {
      * setSunCpuEndian方法。
      *      * @param sunCpuEndian String类型参数
      */
-    /**
-     * setSunCpuEndian方法。
-     *      * @param sunCpuEndian String类型参数
-     */
     public void setSunCpuEndian(String sunCpuEndian) {
         this.sunCpuEndian = sunCpuEndian;
     }
 
-    /**
-     * getSunCpuIsalist方法。
-     * @return String类型返回值
-     */
     /**
      * getSunCpuIsalist方法。
      * @return String类型返回值
@@ -1059,18 +726,10 @@ public class JvmProperties {
      * setSunCpuIsalist方法。
      *      * @param sunCpuIsalist String类型参数
      */
-    /**
-     * setSunCpuIsalist方法。
-     *      * @param sunCpuIsalist String类型参数
-     */
     public void setSunCpuIsalist(String sunCpuIsalist) {
         this.sunCpuIsalist = sunCpuIsalist;
     }
 
-    /**
-     * getSunIoUnicodeEncoding方法。
-     * @return String类型返回值
-     */
     /**
      * getSunIoUnicodeEncoding方法。
      * @return String类型返回值
@@ -1083,18 +742,10 @@ public class JvmProperties {
      * setSunIoUnicodeEncoding方法。
      *      * @param sunIoUnicodeEncoding String类型参数
      */
-    /**
-     * setSunIoUnicodeEncoding方法。
-     *      * @param sunIoUnicodeEncoding String类型参数
-     */
     public void setSunIoUnicodeEncoding(String sunIoUnicodeEncoding) {
         this.sunIoUnicodeEncoding = sunIoUnicodeEncoding;
     }
 
-    /**
-     * getSunJavaCommand方法。
-     * @return String类型返回值
-     */
     /**
      * getSunJavaCommand方法。
      * @return String类型返回值
@@ -1107,18 +758,10 @@ public class JvmProperties {
      * setSunJavaCommand方法。
      *      * @param sunJavaCommand String类型参数
      */
-    /**
-     * setSunJavaCommand方法。
-     *      * @param sunJavaCommand String类型参数
-     */
     public void setSunJavaCommand(String sunJavaCommand) {
         this.sunJavaCommand = sunJavaCommand;
     }
 
-    /**
-     * getSunJavaLauncher方法。
-     * @return String类型返回值
-     */
     /**
      * getSunJavaLauncher方法。
      * @return String类型返回值
@@ -1131,18 +774,10 @@ public class JvmProperties {
      * setSunJavaLauncher方法。
      *      * @param sunJavaLauncher String类型参数
      */
-    /**
-     * setSunJavaLauncher方法。
-     *      * @param sunJavaLauncher String类型参数
-     */
     public void setSunJavaLauncher(String sunJavaLauncher) {
         this.sunJavaLauncher = sunJavaLauncher;
     }
 
-    /**
-     * getSunJnuEncoding方法。
-     * @return String类型返回值
-     */
     /**
      * getSunJnuEncoding方法。
      * @return String类型返回值
@@ -1155,18 +790,10 @@ public class JvmProperties {
      * setSunJnuEncoding方法。
      *      * @param sunJnuEncoding String类型参数
      */
-    /**
-     * setSunJnuEncoding方法。
-     *      * @param sunJnuEncoding String类型参数
-     */
     public void setSunJnuEncoding(String sunJnuEncoding) {
         this.sunJnuEncoding = sunJnuEncoding;
     }
 
-    /**
-     * getSunManagementCompiler方法。
-     * @return String类型返回值
-     */
     /**
      * getSunManagementCompiler方法。
      * @return String类型返回值
@@ -1179,18 +806,10 @@ public class JvmProperties {
      * setSunManagementCompiler方法。
      *      * @param sunManagementCompiler String类型参数
      */
-    /**
-     * setSunManagementCompiler方法。
-     *      * @param sunManagementCompiler String类型参数
-     */
     public void setSunManagementCompiler(String sunManagementCompiler) {
         this.sunManagementCompiler = sunManagementCompiler;
     }
 
-    /**
-     * getSunOsPatchLevel方法。
-     * @return String类型返回值
-     */
     /**
      * getSunOsPatchLevel方法。
      * @return String类型返回值
@@ -1203,18 +822,10 @@ public class JvmProperties {
      * setSunOsPatchLevel方法。
      *      * @param sunOsPatchLevel String类型参数
      */
-    /**
-     * setSunOsPatchLevel方法。
-     *      * @param sunOsPatchLevel String类型参数
-     */
     public void setSunOsPatchLevel(String sunOsPatchLevel) {
         this.sunOsPatchLevel = sunOsPatchLevel;
     }
 
-    /**
-     * getUserCountry方法。
-     * @return String类型返回值
-     */
     /**
      * getUserCountry方法。
      * @return String类型返回值
@@ -1227,18 +838,10 @@ public class JvmProperties {
      * setUserCountry方法。
      *      * @param userCountry String类型参数
      */
-    /**
-     * setUserCountry方法。
-     *      * @param userCountry String类型参数
-     */
     public void setUserCountry(String userCountry) {
         this.userCountry = userCountry;
     }
 
-    /**
-     * getUserCountryFormat方法。
-     * @return String类型返回值
-     */
     /**
      * getUserCountryFormat方法。
      * @return String类型返回值
@@ -1251,18 +854,10 @@ public class JvmProperties {
      * setUserCountryFormat方法。
      *      * @param userCountryFormat String类型参数
      */
-    /**
-     * setUserCountryFormat方法。
-     *      * @param userCountryFormat String类型参数
-     */
     public void setUserCountryFormat(String userCountryFormat) {
         this.userCountryFormat = userCountryFormat;
     }
 
-    /**
-     * getUserDir方法。
-     * @return String类型返回值
-     */
     /**
      * getUserDir方法。
      * @return String类型返回值
@@ -1275,18 +870,10 @@ public class JvmProperties {
      * setUserDir方法。
      *      * @param userDir String类型参数
      */
-    /**
-     * setUserDir方法。
-     *      * @param userDir String类型参数
-     */
     public void setUserDir(String userDir) {
         this.userDir = userDir;
     }
 
-    /**
-     * getUserHome方法。
-     * @return String类型返回值
-     */
     /**
      * getUserHome方法。
      * @return String类型返回值
@@ -1299,18 +886,10 @@ public class JvmProperties {
      * setUserHome方法。
      *      * @param userHome String类型参数
      */
-    /**
-     * setUserHome方法。
-     *      * @param userHome String类型参数
-     */
     public void setUserHome(String userHome) {
         this.userHome = userHome;
     }
 
-    /**
-     * getUserLanguage方法。
-     * @return String类型返回值
-     */
     /**
      * getUserLanguage方法。
      * @return String类型返回值
@@ -1323,18 +902,10 @@ public class JvmProperties {
      * setUserLanguage方法。
      *      * @param userLanguage String类型参数
      */
-    /**
-     * setUserLanguage方法。
-     *      * @param userLanguage String类型参数
-     */
     public void setUserLanguage(String userLanguage) {
         this.userLanguage = userLanguage;
     }
 
-    /**
-     * getUserName方法。
-     * @return String类型返回值
-     */
     /**
      * getUserName方法。
      * @return String类型返回值
@@ -1347,18 +918,10 @@ public class JvmProperties {
      * setUserName方法。
      *      * @param userName String类型参数
      */
-    /**
-     * setUserName方法。
-     *      * @param userName String类型参数
-     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    /**
-     * getUserTimezone方法。
-     * @return String类型返回值
-     */
     /**
      * getUserTimezone方法。
      * @return String类型返回值
@@ -1371,18 +934,10 @@ public class JvmProperties {
      * setUserTimezone方法。
      *      * @param userTimezone String类型参数
      */
-    /**
-     * setUserTimezone方法。
-     *      * @param userTimezone String类型参数
-     */
     public void setUserTimezone(String userTimezone) {
         this.userTimezone = userTimezone;
     }
 
-    /**
-     * getVisualvmId方法。
-     * @return String类型返回值
-     */
     /**
      * getVisualvmId方法。
      * @return String类型返回值
@@ -1395,18 +950,10 @@ public class JvmProperties {
      * setVisualvmId方法。
      *      * @param visualvmId String类型参数
      */
-    /**
-     * setVisualvmId方法。
-     *      * @param visualvmId String类型参数
-     */
     public void setVisualvmId(String visualvmId) {
         this.visualvmId = visualvmId;
     }
 
-    /**
-     * getProperties方法。
-     * @return Properties类型返回值
-     */
     /**
      * getProperties方法。
      * @return Properties类型返回值
@@ -1419,17 +966,10 @@ public class JvmProperties {
      * setProperties方法。
      *      * @param properties Properties类型参数
      */
-    /**
-     * setProperties方法。
-     *      * @param properties Properties类型参数
-     */
     public void setProperties(Properties properties) {
         this.properties = properties;
     }
 
-    /**
-     * init方法。
-     */
     /**
      * init方法。
      */
@@ -1446,10 +986,6 @@ public class JvmProperties {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -1485,11 +1021,6 @@ public class JvmProperties {
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -1558,10 +1089,6 @@ public class JvmProperties {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

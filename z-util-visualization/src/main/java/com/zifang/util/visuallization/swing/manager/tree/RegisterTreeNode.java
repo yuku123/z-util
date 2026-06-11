@@ -8,12 +8,6 @@ import java.util.Objects;
  * 树形节点注册器
  * 用于注册和管理树形结构中的节点信息
  */
-/**
- * RegisterTreeNode类。
- */
-/**
- * RegisterTreeNode类。
- */
 public class RegisterTreeNode {
 
     private List<TreeNode> treeNodes = new ArrayList<>();
@@ -21,19 +15,12 @@ public class RegisterTreeNode {
     /**
      * 创建树节点注册器
      */
-    /**
-     * RegisterTreeNode方法。
-     */
     public RegisterTreeNode() {
     }
 
     /**
      * 获取所有注册的节点
      * @return 节点列表
-     */
-    /**
-     * getTreeNodes方法。
-     * @return List<TreeNode>类型返回值
      */
     public List<TreeNode> getTreeNodes() {
         return treeNodes;
@@ -43,10 +30,6 @@ public class RegisterTreeNode {
      * 设置节点列表
      * @param treeNodes 节点列表
      */
-    /**
-     * setTreeNodes方法。
-     *      * @param treeNodes ListTreeNode类型参数
-     */
     public void setTreeNodes(List<TreeNode> treeNodes) {
         this.treeNodes = treeNodes;
     }
@@ -55,11 +38,6 @@ public class RegisterTreeNode {
      * 注册一个节点（支持链式调用）
      * @param treeNode 要注册的节点
      * @return 当前注册器实例
-     */
-    /**
-     * register方法。
-     *      * @param treeNode TreeNode类型参数
-     * @return RegisterTreeNode类型返回值
      */
     public RegisterTreeNode register(TreeNode treeNode) {
         treeNodes.add(treeNode);

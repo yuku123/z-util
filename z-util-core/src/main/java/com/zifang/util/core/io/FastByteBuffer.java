@@ -3,9 +3,6 @@ package com.zifang.util.core.io;
 /**
  * FastByteBuffer类。
  */
-/**
- * FastByteBuffer类。
- */
 public class FastByteBuffer {
 
     /**
@@ -41,17 +38,10 @@ public class FastByteBuffer {
     /**
      * FastByteBuffer方法。
      */
-    /**
-     * FastByteBuffer方法。
-     */
     public FastByteBuffer() {
         this.minChunkLen = 1024;
     }
 
-    /**
-     * FastByteBuffer方法。
-     *      * @param size int类型参数
-     */
     /**
      * FastByteBuffer方法。
      *      * @param size int类型参数
@@ -91,20 +81,6 @@ public class FastByteBuffer {
      * @param off   偏移量
      * @param len   字节数
      * @return 快速缓冲自身 @see FastByteBuffer
-     */
-    /**
-     * append方法。
-     *      * @param array byte[]类型参数
-     * @param off int类型参数
-     * @param len int类型参数
-     * @return FastByteBuffer类型返回值
-     */
-    /**
-     * append方法。
-     *      * @param array byte[]类型参数
-     * @param off int类型参数
-     * @param len int类型参数
-     * @return FastByteBuffer类型返回值
      */
     public FastByteBuffer append(byte[] array, int off, int len) {
         int end = off + len;
@@ -148,16 +124,6 @@ public class FastByteBuffer {
      * @param array 数据
      * @return 快速缓冲自身 @see FastByteBuffer
      */
-    /**
-     * append方法。
-     *      * @param array byte[]类型参数
-     * @return FastByteBuffer类型返回值
-     */
-    /**
-     * append方法。
-     *      * @param array byte[]类型参数
-     * @return FastByteBuffer类型返回值
-     */
     public FastByteBuffer append(byte[] array) {
         return append(array, 0, array.length);
     }
@@ -167,16 +133,6 @@ public class FastByteBuffer {
      *
      * @param element 一个字节的数据
      * @return 快速缓冲自身 @see FastByteBuffer
-     */
-    /**
-     * append方法。
-     *      * @param element byte类型参数
-     * @return FastByteBuffer类型返回值
-     */
-    /**
-     * append方法。
-     *      * @param element byte类型参数
-     * @return FastByteBuffer类型返回值
      */
     public FastByteBuffer append(byte element) {
         if ((currentBuffer == null) || (offset == currentBuffer.length)) {
@@ -196,16 +152,6 @@ public class FastByteBuffer {
      * @param buff 快速缓冲
      * @return 快速缓冲自身 @see FastByteBuffer
      */
-    /**
-     * append方法。
-     *      * @param buff FastByteBuffer类型参数
-     * @return FastByteBuffer类型返回值
-     */
-    /**
-     * append方法。
-     *      * @param buff FastByteBuffer类型参数
-     * @return FastByteBuffer类型返回值
-     */
     public FastByteBuffer append(FastByteBuffer buff) {
         if (buff.size == 0) {
             return this;
@@ -221,18 +167,10 @@ public class FastByteBuffer {
      * size方法。
      * @return int类型返回值
      */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
     public int size() {
         return size;
     }
 
-    /**
-     * isEmpty方法。
-     * @return boolean类型返回值
-     */
     /**
      * isEmpty方法。
      * @return boolean类型返回值
@@ -246,22 +184,10 @@ public class FastByteBuffer {
      *
      * @return {@link #currentBufferIndex}
      */
-    /**
-     * index方法。
-     * @return int类型返回值
-     */
-    /**
-     * index方法。
-     * @return int类型返回值
-     */
     public int index() {
         return currentBufferIndex;
     }
 
-    /**
-     * offset方法。
-     * @return int类型返回值
-     */
     /**
      * offset方法。
      * @return int类型返回值
@@ -276,23 +202,10 @@ public class FastByteBuffer {
      * @param index 索引位
      * @return 缓冲
      */
-    /**
-     * array方法。
-     *      * @param index int类型参数
-     * @return byte[]类型返回值
-     */
-    /**
-     * array方法。
-     *      * @param index int类型参数
-     * @return byte[]类型返回值
-     */
     public byte[] array(int index) {
         return buffers[index];
     }
 
-    /**
-     * reset方法。
-     */
     /**
      * reset方法。
      */
@@ -308,14 +221,6 @@ public class FastByteBuffer {
      * 返回快速缓冲中的数据
      *
      * @return 快速缓冲中的数据
-     */
-    /**
-     * toArray方法。
-     * @return byte[]类型返回值
-     */
-    /**
-     * toArray方法。
-     * @return byte[]类型返回值
      */
     public byte[] toArray() {
         int pos = 0;
@@ -342,18 +247,6 @@ public class FastByteBuffer {
      * @param start 逻辑起始位置
      * @param len   逻辑字节长
      * @return 快速缓冲中的数据
-     */
-    /**
-     * toArray方法。
-     *      * @param start int类型参数
-     * @param len int类型参数
-     * @return byte[]类型返回值
-     */
-    /**
-     * toArray方法。
-     *      * @param start int类型参数
-     * @param len int类型参数
-     * @return byte[]类型返回值
      */
     public byte[] toArray(int start, int len) {
         int remaining = len;
@@ -390,16 +283,6 @@ public class FastByteBuffer {
      *
      * @param index 索引位
      * @return 一个字节
-     */
-    /**
-     * get方法。
-     *      * @param index int类型参数
-     * @return byte类型返回值
-     */
-    /**
-     * get方法。
-     *      * @param index int类型参数
-     * @return byte类型返回值
      */
     public byte get(int index) {
         if ((index >= size) || (index < 0)) {

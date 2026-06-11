@@ -17,11 +17,6 @@ import java.util.Map;
 /**
  * TestAnnotation类。
  */
-    /**
-     * TestAnnotation<@AnnotationTest方法。
-     *      * @param "类变量类型(泛型 Object类型参数
-     * @return class类型返回值
-     */
 public class TestAnnotation<@AnnotationTest("类变量类型(泛型)上的注解") T0, T1> {
 
     @AnnotationTest("成员变量上的注解")

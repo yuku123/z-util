@@ -8,11 +8,5 @@ package com.zifang.util.http.base.define;
  *
  * @author zifang
  */
-/**
- * ModelAttribute类。
- */
-/**
- * ModelAttribute类。
- */
 public class ModelAttribute {
 }

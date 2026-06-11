@@ -10,11 +10,5 @@ package com.zifang.util.workflow.engine.spark.services;
  *
  * @see AbstractSparkEngineService
  */
-/**
- * CastColumnHandler类。
- */
-/**
- * CastColumnHandler类。
- */
 public class CastColumnHandler {
 }

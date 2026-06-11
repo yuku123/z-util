@@ -13,12 +13,6 @@ import java.util.Random;
  * Creates multiple DecisionTree estimators, each trained on a bootstrap sample,
  * and aggregates predictions via majority vote (classification) or averaging (regression).
  */
-/**
- * Bagging类。
- */
-/**
- * Bagging类。
- */
 public class Bagging {
     private int nEstimators;
     private int maxDepth;
@@ -34,18 +28,6 @@ public class Bagging {
      * @param maxDepth Maximum depth of each DecisionTree
      * @param minSamplesSplit Minimum samples required to split a node
      */
-    /**
-     * Bagging方法。
-     *      * @param nEstimators int类型参数
-     * @param maxDepth int类型参数
-     * @param minSamplesSplit int类型参数
-     */
-    /**
-     * Bagging方法。
-     *      * @param nEstimators int类型参数
-     * @param maxDepth int类型参数
-     * @param minSamplesSplit int类型参数
-     */
     public Bagging(int nEstimators, int maxDepth, int minSamplesSplit) {
         this.nEstimators = nEstimators;
         this.maxDepth = maxDepth;
@@ -59,16 +41,6 @@ public class Bagging {
      * Creates bootstrap samples and trains a DecisionTree on each.
      * @param X Training features
      * @param y Training labels
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @param y int[]类型参数
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @param y int[]类型参数
      */
     public void fit(NdArray X, int[] y) {
         int nSamples = X.getShape().get(0);
@@ -107,16 +79,6 @@ public class Bagging {
      * @param X Features to predict
      * @return Predicted class labels
      */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
     public int[] predict(NdArray X) {
         int nSamples = X.getShape().get(0);
         int[][] predictions = new int[nEstimators][nSamples];
@@ -152,16 +114,6 @@ public class Bagging {
      * Predict class probabilities by averaging probabilities from all estimators.
      * @param X Features to predict
      * @return Probability array of shape (n_samples, n_classes)
-     */
-    /**
-     * predictProba方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
-     */
-    /**
-     * predictProba方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
      */
     public NdArray predictProba(NdArray X) {
         int nSamples = X.getShape().get(0);
@@ -283,18 +235,10 @@ public class Bagging {
      * getNEstimators方法。
      * @return int类型返回值
      */
-    /**
-     * getNEstimators方法。
-     * @return int类型返回值
-     */
     public int getNEstimators() {
         return nEstimators;
     }
 
-    /**
-     * getEstimators方法。
-     * @return List<DecisionTree>类型返回值
-     */
     /**
      * getEstimators方法。
      * @return List<DecisionTree>类型返回值

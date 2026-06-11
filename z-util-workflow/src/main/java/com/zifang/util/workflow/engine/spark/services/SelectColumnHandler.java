@@ -10,11 +10,5 @@ package com.zifang.util.workflow.engine.spark.services;
  *
  * @see AbstractSparkEngineService
  */
-/**
- * SelectColumnHandler类。
- */
-/**
- * SelectColumnHandler类。
- */
 public class SelectColumnHandler {
 }

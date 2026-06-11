@@ -8,12 +8,6 @@ import java.util.function.Function;
  *
  * @author zifang
  */
-/**
- * TreeBuilder类。
- */
-/**
- * TreeBuilder类。
- */
 public class TreeBuilder {
 
     private final ILeaf root;
@@ -38,20 +32,10 @@ public class TreeBuilder {
      *      * @param rootName String类型参数
      * @return static TreeBuilder类型返回值
      */
-    /**
-     * create方法。
-     *      * @param rootName String类型参数
-     * @return static TreeBuilder类型返回值
-     */
     public static TreeBuilder create(String rootName) {
         return new TreeBuilder(rootName);
     }
 
-    /**
-     * create方法。
-     *      * @param root ILeaf类型参数
-     * @return static TreeBuilder类型返回值
-     */
     /**
      * create方法。
      *      * @param root ILeaf类型参数
@@ -69,11 +53,6 @@ public class TreeBuilder {
      *      * @param name String类型参数
      * @return TreeBuilder类型返回值
      */
-    /**
-     * add方法。
-     *      * @param name String类型参数
-     * @return TreeBuilder类型返回值
-     */
     public TreeBuilder add(String name) {
         ILeaf child = new LeafWrapper<>(name, name, name);
         current.appendSubLeaf(child);
@@ -86,22 +65,12 @@ public class TreeBuilder {
      *      * @param leaf ILeaf类型参数
      * @return TreeBuilder类型返回值
      */
-    /**
-     * add方法。
-     *      * @param leaf ILeaf类型参数
-     * @return TreeBuilder类型返回值
-     */
     public TreeBuilder add(ILeaf leaf) {
         current.appendSubLeaf(leaf);
         nodeMap.put(leaf.getId(), leaf);
         return this;
     }
 
-    /**
-     * child方法。
-     *      * @param name String类型参数
-     * @return TreeBuilder类型返回值
-     */
     /**
      * child方法。
      *      * @param name String类型参数
@@ -119,10 +88,6 @@ public class TreeBuilder {
      * up方法。
      * @return TreeBuilder类型返回值
      */
-    /**
-     * up方法。
-     * @return TreeBuilder类型返回值
-     */
     public TreeBuilder up() {
         if (current.getParentLeaf() != null) {
             current = current.getParentLeaf();
@@ -130,11 +95,6 @@ public class TreeBuilder {
         return this;
     }
 
-    /**
-     * down方法。
-     *      * @param name String类型参数
-     * @return TreeBuilder类型返回值
-     */
     /**
      * down方法。
      *      * @param name String类型参数
@@ -163,11 +123,6 @@ public class TreeBuilder {
      *      * @param name String类型参数
      * @return TreeBuilder类型返回值
      */
-    /**
-     * name方法。
-     *      * @param name String类型参数
-     * @return TreeBuilder类型返回值
-     */
     public TreeBuilder name(String name) {
         if (current instanceof LeafWrapper) {
             ((LeafWrapper<?, ?, ?>) current).setName(name);
@@ -175,12 +130,6 @@ public class TreeBuilder {
         return this;
     }
 
-    /**
-     * meta方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     * @return TreeBuilder类型返回值
-     */
     /**
      * meta方法。
      *      * @param key String类型参数
@@ -198,18 +147,10 @@ public class TreeBuilder {
      * current方法。
      * @return ILeaf类型返回值
      */
-    /**
-     * current方法。
-     * @return ILeaf类型返回值
-     */
     public ILeaf current() {
         return current;
     }
 
-    /**
-     * root方法。
-     * @return ILeaf类型返回值
-     */
     /**
      * root方法。
      * @return ILeaf类型返回值
@@ -222,19 +163,10 @@ public class TreeBuilder {
      * build方法。
      * @return Tree类型返回值
      */
-    /**
-     * build方法。
-     * @return Tree类型返回值
-     */
     public Tree build() {
         return new Tree(root);
     }
 
-    /**
-     * buildFromList方法。
-     *      * @param nodes List?类型参数
-     * @return static Tree类型返回值
-     */
     /**
      * buildFromList方法。
      *      * @param nodes List?类型参数
@@ -265,11 +197,6 @@ public class TreeBuilder {
         return new Tree(root);
     }
 
-    /**
-     * buildFromHierarchy方法。
-     *      * @param items List?类型参数
-     * @return static Tree类型返回值
-     */
     /**
      * buildFromHierarchy方法。
      *      * @param items List?类型参数
@@ -314,12 +241,6 @@ public class TreeBuilder {
     /**
      * 层级数据项接口
      */
-/**
- * HierarchyItem接口。
- */
-/**
- * HierarchyItem接口。
- */
     public interface HierarchyItem {
         String getId();
         String getParentId();

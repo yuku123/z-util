@@ -8,23 +8,10 @@ import java.util.Map;
 /**
  * @author zifang
  */
-/**
- * Compiler类。
- */
-/**
- * Compiler类。
- */
 public class Compiler {
 
     private static CustomerClassLoader defineClassLoader = new CustomerClassLoader(Thread.currentThread().getContextClassLoader());
 
-    /**
-     * compile方法。
-     *      * @param packageName String类型参数
-     * @param simpleName String类型参数
-     * @param script String类型参数
-     * @return static Class<?>类型返回值
-     */
     /**
      * compile方法。
      *      * @param packageName String类型参数
@@ -51,12 +38,6 @@ public class Compiler {
         return clazz;
     }
 
-    /**
-     * compile方法。
-     *      * @param scripts ListStringJavaFileObject类型参数
-     * @param getClass String类型参数
-     * @return static Class<?>类型返回值
-     */
     /**
      * compile方法。
      *      * @param scripts ListStringJavaFileObject类型参数
@@ -90,12 +71,6 @@ public class Compiler {
     }
 
 
-    /**
-     * compile方法。
-     *      * @param scriptCodeMap MapString,String类型参数
-     * @param getClass String类型参数
-     * @return static Class<?>类型返回值
-     */
     /**
      * compile方法。
      *      * @param scriptCodeMap MapString,String类型参数

@@ -8,12 +8,6 @@ import java.util.Optional;
  * @param <T> 实体类型
  * @param <ID> 主键类型
  */
-/**
- * CrudRepository接口。
- */
-/**
- * CrudRepository接口。
- */
 public interface CrudRepository<T, ID> extends Repository<T, ID> {
 
     /**

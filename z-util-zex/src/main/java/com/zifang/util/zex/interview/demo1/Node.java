@@ -9,9 +9,6 @@ package com.zifang.util.zex.interview.demo1;
  * @author zifang
  * @version 1.0
  */
-/**
- * Node类。
- */
 public class Node {
     private int id;
     private int parentId;

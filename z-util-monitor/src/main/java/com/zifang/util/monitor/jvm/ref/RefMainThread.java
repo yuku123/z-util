@@ -15,12 +15,6 @@ import java.util.Map;
  *
  * @author zifang
  */
-/**
- * RefMainThread类。
- */
-/**
- * RefMainThread类。
- */
 public class RefMainThread {
 
     /**
@@ -33,18 +27,10 @@ public class RefMainThread {
      * getId方法。
      * @return int类型返回值
      */
-    /**
-     * getId方法。
-     * @return int类型返回值
-     */
         public int getId() {
             return id;
         }
 
-    /**
-     * setId方法。
-     *      * @param id int类型参数
-     */
     /**
      * setId方法。
      *      * @param id int类型参数
@@ -58,10 +44,6 @@ public class RefMainThread {
      * hashCode方法。
      * @return int类型返回值
      */
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
         public int hashCode() {
             return super.hashCode();
         }
@@ -71,18 +53,11 @@ public class RefMainThread {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
         public String toString() {
             return super.toString() + "[id=" + this.id + "]";
         }
 
         @Override
-    /**
-     * finalize方法。
-     */
     /**
      * finalize方法。
      */
@@ -100,16 +75,6 @@ public class RefMainThread {
      * 主方法，演示四种引用类型的回收机制。
      *
      * @param args 命令行参数
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
      */
     public static void main(String[] args) {
         // 创建三种不同的引用类型所需对象
@@ -195,16 +160,6 @@ public class RefMainThread {
      * 打印引用对象及其所指向对象的信息。
      *
      * @param ref 引用对象
-     */
-    /**
-     * print方法。
-     *      * @param ref ReferenceRefTestObj类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * print方法。
-     *      * @param ref ReferenceRefTestObj类型参数
-     * @return static void类型返回值
      */
     public static void print(Reference<RefTestObj> ref) {
         RefTestObj obj = ref.get();

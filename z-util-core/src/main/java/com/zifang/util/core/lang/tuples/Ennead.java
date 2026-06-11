@@ -3,27 +3,9 @@ package com.zifang.util.core.lang.tuples;
 /**
  * @author zifang
  */
-/**
- * Ennead类。
- */
-/**
- * Ennead类。
- */
 public class Ennead<A, B, C, D, E, F, G, H, I> extends Octet<A, B, C, D, E, F, G, H> {
     protected I i;
 
-    /**
-     * Ennead方法。
-     *      * @param a A类型参数
-     * @param b B类型参数
-     * @param c C类型参数
-     * @param d D类型参数
-     * @param e E类型参数
-     * @param f F类型参数
-     * @param g G类型参数
-     * @param h H类型参数
-     * @param i I类型参数
-     */
     /**
      * Ennead方法。
      *      * @param a A类型参数
@@ -45,18 +27,10 @@ public class Ennead<A, B, C, D, E, F, G, H, I> extends Octet<A, B, C, D, E, F, G
      * getI方法。
      * @return I类型返回值
      */
-    /**
-     * getI方法。
-     * @return I类型返回值
-     */
     public I getI() {
         return i;
     }
 
-    /**
-     * setI方法。
-     *      * @param i I类型参数
-     */
     /**
      * setI方法。
      *      * @param i I类型参数
@@ -66,10 +40,6 @@ public class Ennead<A, B, C, D, E, F, G, H, I> extends Octet<A, B, C, D, E, F, G
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -84,11 +54,6 @@ public class Ennead<A, B, C, D, E, F, G, H, I> extends Octet<A, B, C, D, E, F, G
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -98,10 +63,6 @@ public class Ennead<A, B, C, D, E, F, G, H, I> extends Octet<A, B, C, D, E, F, G
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

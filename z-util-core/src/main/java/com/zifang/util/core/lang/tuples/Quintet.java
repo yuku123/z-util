@@ -3,23 +3,9 @@ package com.zifang.util.core.lang.tuples;
 /**
  * @author zifang
  */
-/**
- * Quintet类。
- */
-/**
- * Quintet类。
- */
 public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
     protected E e;
 
-    /**
-     * Quintet方法。
-     *      * @param a A类型参数
-     * @param b B类型参数
-     * @param c C类型参数
-     * @param d D类型参数
-     * @param e E类型参数
-     */
     /**
      * Quintet方法。
      *      * @param a A类型参数
@@ -37,18 +23,10 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
      * getE方法。
      * @return E类型返回值
      */
-    /**
-     * getE方法。
-     * @return E类型返回值
-     */
     public E getE() {
         return e;
     }
 
-    /**
-     * setE方法。
-     *      * @param e E类型参数
-     */
     /**
      * setE方法。
      *      * @param e E类型参数
@@ -58,10 +36,6 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -76,11 +50,6 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -90,10 +59,6 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

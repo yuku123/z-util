@@ -18,23 +18,12 @@ import java.util.Set;
  * - Noise: neither core nor border
  * - Expand cluster from core points via density-reachability
  */
-/**
- * DBSCAN类。
- */
-/**
- * DBSCAN类。
- */
 public class DBSCAN {
     private double eps;
     private int minPts;
     private int[] labels;
     private double[][] centroids;
     
-    /**
-     * DBSCAN方法。
-     *      * @param eps double类型参数
-     * @param minPts int类型参数
-     */
     /**
      * DBSCAN方法。
      *      * @param eps double类型参数
@@ -51,16 +40,6 @@ public class DBSCAN {
      * 
      * @param X NdArray of shape [n_samples, n_features]
      * @return cluster labels array
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
      */
     public int[] fit(NdArray X) {
         double[][] Xdata = toDouble2D(X);
@@ -104,16 +83,6 @@ public class DBSCAN {
      * 
      * @param X NdArray of shape [n_samples, n_features]
      * @return cluster labels array
-     */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
      */
     public int[] predict(NdArray X) {
         double[][] Xdata = toDouble2D(X);

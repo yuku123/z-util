@@ -12,12 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @param <K> 键类型
  * @param <V> 值类型
  */
-/**
- * Register类。
- */
-/**
- * Register类。
- */
 public class Register<K, V> {
 
     private final Map<K, V> registry = new ConcurrentHashMap<>();
@@ -27,16 +21,6 @@ public class Register<K, V> {
      *
      * @param key   键
      * @param value 值
-     */
-    /**
-     * register方法。
-     *      * @param key K类型参数
-     * @param value V类型参数
-     */
-    /**
-     * register方法。
-     *      * @param key K类型参数
-     * @param value V类型参数
      */
     public void register(K key, V value) {
         if (key == null) {
@@ -51,16 +35,6 @@ public class Register<K, V> {
      * @param key 键
      * @return 值，如果不存在返回null
      */
-    /**
-     * get方法。
-     *      * @param key K类型参数
-     * @return V类型返回值
-     */
-    /**
-     * get方法。
-     *      * @param key K类型参数
-     * @return V类型返回值
-     */
     public V get(K key) {
         return registry.get(key);
     }
@@ -71,16 +45,6 @@ public class Register<K, V> {
      * @param key 键
      * @return 被移除的值，如果不存在返回null
      */
-    /**
-     * unregister方法。
-     *      * @param key K类型参数
-     * @return V类型返回值
-     */
-    /**
-     * unregister方法。
-     *      * @param key K类型参数
-     * @return V类型返回值
-     */
     public V unregister(K key) {
         return registry.remove(key);
     }
@@ -89,14 +53,6 @@ public class Register<K, V> {
      * 获取所有注册的键值对。
      *
      * @return 不可修改的键值对列表
-     */
-    /**
-     * listAll方法。
-     * @return List<Map.Entry<K, V>>类型返回值
-     */
-    /**
-     * listAll方法。
-     * @return List<Map.Entry<K, V>>类型返回值
      */
     public List<Map.Entry<K, V>> listAll() {
         return Collections.unmodifiableList(new ArrayList<>(registry.entrySet()));
@@ -108,28 +64,12 @@ public class Register<K, V> {
      * @param key 键
      * @return 是否包含
      */
-    /**
-     * contains方法。
-     *      * @param key K类型参数
-     * @return boolean类型返回值
-     */
-    /**
-     * contains方法。
-     *      * @param key K类型参数
-     * @return boolean类型返回值
-     */
     public boolean contains(K key) {
         return registry.containsKey(key);
     }
 
     /**
      * 清除所有注册项。
-     */
-    /**
-     * clear方法。
-     */
-    /**
-     * clear方法。
      */
     public void clear() {
         registry.clear();
@@ -139,14 +79,6 @@ public class Register<K, V> {
      * 获取注册数量。
      *
      * @return 数量
-     */
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
-    /**
-     * size方法。
-     * @return int类型返回值
      */
     public int size() {
         return registry.size();

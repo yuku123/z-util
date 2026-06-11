@@ -11,12 +11,6 @@ import com.zifang.util.numpy.NdArray;
  * <p>
  * Computations are done on logits (before sigmoid) for better numerical stability.
  */
-/**
- * BCEWithLogitsLoss类。
- */
-/**
- * BCEWithLogitsLoss类。
- */
 public class BCEWithLogitsLoss implements LossFunction {
 
     private static final double EPSILON = 1e-7;
@@ -29,12 +23,6 @@ public class BCEWithLogitsLoss implements LossFunction {
      * @return Scalar loss value
      */
     @Override
-    /**
-     * compute方法。
-     *      * @param logits NdArray类型参数
-     * @param targets NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * compute方法。
      *      * @param logits NdArray类型参数
@@ -71,12 +59,6 @@ public class BCEWithLogitsLoss implements LossFunction {
      * @return Gradient with same shape as logits
      */
     @Override
-    /**
-     * gradient方法。
-     *      * @param logits NdArray类型参数
-     * @param targets NdArray类型参数
-     * @return NdArray类型返回值
-     */
     /**
      * gradient方法。
      *      * @param logits NdArray类型参数

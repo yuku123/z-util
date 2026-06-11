@@ -12,12 +12,6 @@ import java.util.List;
  * @see Configurations
  * @see WorkflowNode
  */
-/**
- * WorkflowConfiguration类。
- */
-/**
- * WorkflowConfiguration类。
- */
 public class WorkflowConfiguration {
 
     /**
@@ -33,12 +27,6 @@ public class WorkflowConfiguration {
     /**
      * 默认构造函数，创建一个空的流程配置
      */
-    /**
-     * WorkflowConfiguration方法。
-     */
-    /**
-     * WorkflowConfiguration方法。
-     */
     public WorkflowConfiguration() {
     }
 
@@ -47,16 +35,6 @@ public class WorkflowConfiguration {
      *
      * @param configurations    全局配置信息，包含执行引擎、缓存引擎等配置
      * @param workflowNodeList  工作流节点列表，包含所有业务流程节点定义
-     */
-    /**
-     * WorkflowConfiguration方法。
-     *      * @param configurations Configurations类型参数
-     * @param workflowNodeList ListWorkflowNode类型参数
-     */
-    /**
-     * WorkflowConfiguration方法。
-     *      * @param configurations Configurations类型参数
-     * @param workflowNodeList ListWorkflowNode类型参数
      */
     public WorkflowConfiguration(Configurations configurations, List<WorkflowNode> workflowNodeList) {
         this.configurations = configurations;
@@ -68,14 +46,6 @@ public class WorkflowConfiguration {
      *
      * @return 全局配置对象，包含流引擎配置、缓存引擎配置等
      */
-    /**
-     * getConfigurations方法。
-     * @return Configurations类型返回值
-     */
-    /**
-     * getConfigurations方法。
-     * @return Configurations类型返回值
-     */
     public Configurations getConfigurations() {
         return configurations;
     }
@@ -84,14 +54,6 @@ public class WorkflowConfiguration {
      * 设置全局配置信息
      *
      * @param configurations 全局配置对象，不能为null
-     */
-    /**
-     * setConfigurations方法。
-     *      * @param configurations Configurations类型参数
-     */
-    /**
-     * setConfigurations方法。
-     *      * @param configurations Configurations类型参数
      */
     public void setConfigurations(Configurations configurations) {
         this.configurations = configurations;
@@ -102,14 +64,6 @@ public class WorkflowConfiguration {
      *
      * @return 工作流节点列表，包含所有业务流程节点定义
      */
-    /**
-     * getWorkflowNodeList方法。
-     * @return List<WorkflowNode>类型返回值
-     */
-    /**
-     * getWorkflowNodeList方法。
-     * @return List<WorkflowNode>类型返回值
-     */
     public List<WorkflowNode> getWorkflowNodeList() {
         return workflowNodeList;
     }
@@ -119,23 +73,11 @@ public class WorkflowConfiguration {
      *
      * @param workflowNodeList 工作流节点列表，不能为null
      */
-    /**
-     * setWorkflowNodeList方法。
-     *      * @param workflowNodeList ListWorkflowNode类型参数
-     */
-    /**
-     * setWorkflowNodeList方法。
-     *      * @param workflowNodeList ListWorkflowNode类型参数
-     */
     public void setWorkflowNodeList(List<WorkflowNode> workflowNodeList) {
         this.workflowNodeList = workflowNodeList;
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -150,11 +92,6 @@ public class WorkflowConfiguration {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -164,10 +101,6 @@ public class WorkflowConfiguration {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

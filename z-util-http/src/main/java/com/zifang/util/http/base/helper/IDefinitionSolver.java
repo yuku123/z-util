@@ -11,11 +11,5 @@ package com.zifang.util.http.base.helper;
  * @see HttpDefinitionSolver
  * @see com.zifang.util.http.base.pojo.HttpRequestDefinition
  */
-/**
- * IDefinitionSolver接口。
- */
-/**
- * IDefinitionSolver接口。
- */
 public interface IDefinitionSolver {
 }

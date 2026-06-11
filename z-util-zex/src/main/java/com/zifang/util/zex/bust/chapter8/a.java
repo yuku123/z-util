@@ -9,8 +9,5 @@ package com.zifang.util.zex.bust.chapter8;
  * @author zifang
  * @version 1.0
  */
-/**
- * a类。
- */
 public class a {
 }

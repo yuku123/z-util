@@ -9,20 +9,10 @@ import java.io.InputStream;
  * <p>
  * CONSTANT_Integer_info用于表示4字节的int类型常量值。
  */
-/**
- * ConstantIntegerInfo类。
- */
-/**
- * ConstantIntegerInfo类。
- */
 public class ConstantIntegerInfo extends AbstractConstantPool {
 
     private U4 bytes;
 
-    /**
-     * ConstantIntegerInfo方法。
-     *      * @param tag byte类型参数
-     */
     /**
      * ConstantIntegerInfo方法。
      *      * @param tag byte类型参数
@@ -35,18 +25,10 @@ public class ConstantIntegerInfo extends AbstractConstantPool {
      * read方法。
      *      * @param inputStream InputStream类型参数
      */
-    /**
-     * read方法。
-     *      * @param inputStream InputStream类型参数
-     */
     public void read(InputStream inputStream) {
         this.bytes = U4.read(inputStream);
     }
 
-    /**
-     * getBytes方法。
-     * @return U4类型返回值
-     */
     /**
      * getBytes方法。
      * @return U4类型返回值
@@ -59,19 +41,11 @@ public class ConstantIntegerInfo extends AbstractConstantPool {
      * setBytes方法。
      *      * @param bytes U4类型参数
      */
-    /**
-     * setBytes方法。
-     *      * @param bytes U4类型参数
-     */
     public void setBytes(U4 bytes) {
         this.bytes = bytes;
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

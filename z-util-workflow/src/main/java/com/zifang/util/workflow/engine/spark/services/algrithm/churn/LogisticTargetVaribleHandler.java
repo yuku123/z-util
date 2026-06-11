@@ -10,11 +10,5 @@ package com.zifang.util.workflow.engine.spark.services.algrithm.churn;
  *
  * @see com.zifang.util.workflow.engine.spark.services.AlgrithmHandler
  */
-/**
- * LogisticTargetVaribleHandler类。
- */
-/**
- * LogisticTargetVaribleHandler类。
- */
 public class LogisticTargetVaribleHandler {
 }

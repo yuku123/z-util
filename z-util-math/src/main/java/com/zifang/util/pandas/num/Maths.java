@@ -4,12 +4,6 @@ package com.zifang.util.pandas.num;
  * Maths 类 - 对标 numpy 的数学函数
  * 提供各种数学和统计函数
  */
-/**
- * Maths类。
- */
-/**
- * Maths类。
- */
 public class Maths {
 
     // ==================== 三角函数 ====================
@@ -18,16 +12,6 @@ public class Maths {
      * 计算正弦值，等同于 numpy.sin()
      * @param x 输入数组
      * @return 正弦值数组
-     */
-    /**
-     * sin方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * sin方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num sin(Num x) {
         return x.sin();
@@ -38,16 +22,6 @@ public class Maths {
      * @param x 输入数组
      * @return 余弦值数组
      */
-    /**
-     * cos方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * cos方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num cos(Num x) {
         return x.cos();
     }
@@ -56,16 +30,6 @@ public class Maths {
      * 计算正切值，等同于 numpy.tan()
      * @param x 输入数组
      * @return 正切值数组
-     */
-    /**
-     * tan方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * tan方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num tan(Num x) {
         return x.tan();
@@ -76,16 +40,6 @@ public class Maths {
      * @param x 输入数组，元素范围 [-1, 1]
      * @return 反正弦值数组
      */
-    /**
-     * arcsin方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * arcsin方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num arcsin(Num x) {
         return x.apply(Math::asin);
     }
@@ -94,16 +48,6 @@ public class Maths {
      * 计算反余弦值，等同于 numpy.arccos()
      * @param x 输入数组，元素范围 [-1, 1]
      * @return 反余弦值数组
-     */
-    /**
-     * arccos方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * arccos方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num arccos(Num x) {
         return x.apply(Math::acos);
@@ -114,16 +58,6 @@ public class Maths {
      * @param x 输入数组
      * @return 反正切值数组
      */
-    /**
-     * arctan方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * arctan方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num arctan(Num x) {
         return x.apply(Math::atan);
     }
@@ -133,18 +67,6 @@ public class Maths {
      * @param y y坐标数组
      * @param x x坐标数组
      * @return 反正切值数组，范围 (-π, π]
-     */
-    /**
-     * arctan2方法。
-     *      * @param y Num类型参数
-     * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * arctan2方法。
-     *      * @param y Num类型参数
-     * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num arctan2(Num y, Num x) {
         return apply2(y, x, Math::atan2);
@@ -157,16 +79,6 @@ public class Maths {
      * @param x 输入数组
      * @return 双曲正弦值数组
      */
-    /**
-     * sinh方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * sinh方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num sinh(Num x) {
         return x.apply(Math::sinh);
     }
@@ -176,16 +88,6 @@ public class Maths {
      * @param x 输入数组
      * @return 双曲余弦值数组
      */
-    /**
-     * cosh方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * cosh方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num cosh(Num x) {
         return x.apply(Math::cosh);
     }
@@ -194,16 +96,6 @@ public class Maths {
      * 计算双曲正切值，等同于 numpy.tanh()
      * @param x 输入数组
      * @return 双曲正切值数组
-     */
-    /**
-     * tanh方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * tanh方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num tanh(Num x) {
         return x.apply(Math::tanh);
@@ -216,16 +108,6 @@ public class Maths {
      * @param x 输入数组
      * @return e^x 值数组
      */
-    /**
-     * exp方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * exp方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num exp(Num x) {
         return x.exp();
     }
@@ -236,16 +118,6 @@ public class Maths {
      * @param x 输入数组
      * @return exp(x) - 1 值数组
      */
-    /**
-     * expm1方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * expm1方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num expm1(Num x) {
         return x.apply(Math::expm1);
     }
@@ -254,16 +126,6 @@ public class Maths {
      * 计算自然对数，等同于 numpy.log()
      * @param x 输入数组，元素必须大于 0
      * @return ln(x) 值数组
-     */
-    /**
-     * log方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * log方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num log(Num x) {
         return x.log();
@@ -274,16 +136,6 @@ public class Maths {
      * @param x 输入数组，元素必须大于 0
      * @return log10(x) 值数组
      */
-    /**
-     * log10方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * log10方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num log10(Num x) {
         return x.log10();
     }
@@ -292,16 +144,6 @@ public class Maths {
      * 计算以 2 为底的对数，等同于 numpy.log2()
      * @param x 输入数组，元素必须大于 0
      * @return log2(x) 值数组
-     */
-    /**
-     * log2方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * log2方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num log2(Num x) {
         return x.apply(v -> Math.log(v) / Math.log(2));
@@ -312,16 +154,6 @@ public class Maths {
      * 对于接近零的 x 值更精确
      * @param x 输入数组
      * @return log(1 + x) 值数组
-     */
-    /**
-     * log1p方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * log1p方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num log1p(Num x) {
         return x.apply(Math::log1p);
@@ -334,16 +166,6 @@ public class Maths {
      * @param x 输入数组，元素必须大于等于 0
      * @return sqrt(x) 值数组
      */
-    /**
-     * sqrt方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * sqrt方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num sqrt(Num x) {
         return x.sqrt();
     }
@@ -352,16 +174,6 @@ public class Maths {
      * 计算立方根，等同于 numpy.cbrt()
      * @param x 输入数组
      * @return cbrt(x) 值数组
-     */
-    /**
-     * cbrt方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * cbrt方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num cbrt(Num x) {
         return x.apply(Math::cbrt);
@@ -373,18 +185,6 @@ public class Maths {
      * @param exponent 指数
      * @return x^exponent 值数组
      */
-    /**
-     * pow方法。
-     *      * @param x Num类型参数
-     * @param exponent double类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * pow方法。
-     *      * @param x Num类型参数
-     * @param exponent double类型参数
-     * @return static Num类型返回值
-     */
     public static Num pow(Num x, double exponent) {
         return x.pow(exponent);
     }
@@ -394,18 +194,6 @@ public class Maths {
      * @param base 底数
      * @param exponent 指数数组
      * @return base^exponent 值数组
-     */
-    /**
-     * pow方法。
-     *      * @param base double类型参数
-     * @param exponent Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * pow方法。
-     *      * @param base double类型参数
-     * @param exponent Num类型参数
-     * @return static Num类型返回值
      */
     public static Num pow(double base, Num exponent) {
         return exponent.apply(exp -> Math.pow(base, exp));
@@ -418,16 +206,6 @@ public class Maths {
      * @param x 输入数组
      * @return 四舍五入后的值数组
      */
-    /**
-     * round方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * round方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num round(Num x) {
         return x.apply(Math::round);
     }
@@ -436,16 +214,6 @@ public class Maths {
      * 向下取整，等同于 numpy.floor()
      * @param x 输入数组
      * @return 向下取整后的值数组
-     */
-    /**
-     * floor方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * floor方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num floor(Num x) {
         return x.apply(Math::floor);
@@ -456,16 +224,6 @@ public class Maths {
      * @param x 输入数组
      * @return 向上取整后的值数组
      */
-    /**
-     * ceil方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * ceil方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num ceil(Num x) {
         return x.apply(Math::ceil);
     }
@@ -474,16 +232,6 @@ public class Maths {
      * 向零取整，等同于 numpy.trunc()
      * @param x 输入数组
      * @return 向零取整后的值数组
-     */
-    /**
-     * trunc方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * trunc方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num trunc(Num x) {
         return x.apply(Math::floor);
@@ -496,16 +244,6 @@ public class Maths {
      * @param x 输入数组
      * @return 绝对值数组
      */
-    /**
-     * abs方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * abs方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num abs(Num x) {
         return x.abs();
     }
@@ -514,16 +252,6 @@ public class Maths {
      * 计算符号函数，等同于 numpy.sign()
      * @param x 输入数组
      * @return 符号数组：正数返回 1.0，负数返回 -1.0，零返回 0.0
-     */
-    /**
-     * sign方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * sign方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num sign(Num x) {
         return x.apply(v -> {
@@ -538,16 +266,6 @@ public class Maths {
      * @param x 输入数组
      * @return 与输入相同的数组
      */
-    /**
-     * positive方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * positive方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
     public static Num positive(Num x) {
         return x.apply(v -> +v);
     }
@@ -556,16 +274,6 @@ public class Maths {
      * 返回原值的相反数，等同于 numpy.negative()
      * @param x 输入数组
      * @return 取反后的数组
-     */
-    /**
-     * negative方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
-     */
-    /**
-     * negative方法。
-     *      * @param x Num类型参数
-     * @return static Num类型返回值
      */
     public static Num negative(Num x) {
         return x.apply(v -> -v);
@@ -578,16 +286,6 @@ public class Maths {
      * @param x 输入数组
      * @return 最大值
      */
-    /**
-     * max方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * max方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
     public static double max(Num x) {
         return x.max();
     }
@@ -596,16 +294,6 @@ public class Maths {
      * 计算最小值，等同于 numpy.min()
      * @param x 输入数组
      * @return 最小值
-     */
-    /**
-     * min方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * min方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
      */
     public static double min(Num x) {
         return x.min();
@@ -616,16 +304,6 @@ public class Maths {
      * @param x 输入数组
      * @return 所有元素的总和
      */
-    /**
-     * sum方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * sum方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
     public static double sum(Num x) {
         return x.sum();
     }
@@ -634,16 +312,6 @@ public class Maths {
      * 计算平均值，等同于 numpy.mean()
      * @param x 输入数组
      * @return 平均值
-     */
-    /**
-     * mean方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * mean方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
      */
     public static double mean(Num x) {
         return x.mean();
@@ -654,16 +322,6 @@ public class Maths {
      * @param x 输入数组
      * @return 标准差
      */
-    /**
-     * std方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * std方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
     public static double std(Num x) {
         return x.std();
     }
@@ -672,16 +330,6 @@ public class Maths {
      * 计算方差，等同于 numpy.var()
      * @param x 输入数组
      * @return 方差
-     */
-    /**
-     * var方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
-     */
-    /**
-     * var方法。
-     *      * @param x Num类型参数
-     * @return static double类型返回值
      */
     public static double var(Num x) {
         return x.var();
@@ -695,11 +343,6 @@ public class Maths {
     public static final double NINF = Double.NEGATIVE_INFINITY;
     public static final double NAN = Double.NaN;
 
-    /**
-     * Math.ulp方法。
-     *      * @param 1.0 Object类型参数
-     * @return static final double EPSILON =类型返回值
-     */
     /**
      * Math.ulp方法。
      *      * @param 1.0 Object类型参数

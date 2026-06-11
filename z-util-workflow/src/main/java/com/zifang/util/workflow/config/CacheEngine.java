@@ -8,12 +8,6 @@ package com.zifang.util.workflow.config;
  *
  * @see Configurations
  */
-/**
- * CacheEngine类。
- */
-/**
- * CacheEngine类。
- */
 public class CacheEngine {
 
     /**
@@ -29,12 +23,6 @@ public class CacheEngine {
     /**
      * 默认构造函数
      */
-    /**
-     * CacheEngine方法。
-     */
-    /**
-     * CacheEngine方法。
-     */
     public CacheEngine() {
     }
 
@@ -43,16 +31,6 @@ public class CacheEngine {
      *
      * @param engineType        缓存引擎类型，如redis、memcached等
      * @param cacheEngineService 缓存引擎服务标识，用于定位具体的缓存服务
-     */
-    /**
-     * CacheEngine方法。
-     *      * @param engineType String类型参数
-     * @param cacheEngineService String类型参数
-     */
-    /**
-     * CacheEngine方法。
-     *      * @param engineType String类型参数
-     * @param cacheEngineService String类型参数
      */
     public CacheEngine(String engineType, String cacheEngineService) {
         this.engineType = engineType;
@@ -64,14 +42,6 @@ public class CacheEngine {
      *
      * @return 缓存引擎类型，如redis、memcached等
      */
-    /**
-     * getEngineType方法。
-     * @return String类型返回值
-     */
-    /**
-     * getEngineType方法。
-     * @return String类型返回值
-     */
     public String getEngineType() {
         return engineType;
     }
@@ -80,14 +50,6 @@ public class CacheEngine {
      * 设置缓存引擎类型
      *
      * @param engineType 缓存引擎类型，如redis、memcached等
-     */
-    /**
-     * setEngineType方法。
-     *      * @param engineType String类型参数
-     */
-    /**
-     * setEngineType方法。
-     *      * @param engineType String类型参数
      */
     public void setEngineType(String engineType) {
         this.engineType = engineType;
@@ -98,14 +60,6 @@ public class CacheEngine {
      *
      * @return 缓存引擎服务标识
      */
-    /**
-     * getCacheEngineService方法。
-     * @return String类型返回值
-     */
-    /**
-     * getCacheEngineService方法。
-     * @return String类型返回值
-     */
     public String getCacheEngineService() {
         return cacheEngineService;
     }
@@ -115,23 +69,11 @@ public class CacheEngine {
      *
      * @param cacheEngineService 缓存引擎服务标识
      */
-    /**
-     * setCacheEngineService方法。
-     *      * @param cacheEngineService String类型参数
-     */
-    /**
-     * setCacheEngineService方法。
-     *      * @param cacheEngineService String类型参数
-     */
     public void setCacheEngineService(String cacheEngineService) {
         this.cacheEngineService = cacheEngineService;
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值
@@ -146,11 +88,6 @@ public class CacheEngine {
      *      * @param o Object类型参数
      * @return boolean类型返回值
      */
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -160,10 +97,6 @@ public class CacheEngine {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

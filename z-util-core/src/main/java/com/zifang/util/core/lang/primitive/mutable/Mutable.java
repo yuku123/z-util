@@ -11,12 +11,6 @@ package com.zifang.util.core.lang.primitive.mutable;
  * objects.
  * @version: JDK 1.8
  */
-/**
- * Mutable接口。
- */
-/**
- * Mutable接口。
- */
 public interface Mutable<T> {
 
     /**

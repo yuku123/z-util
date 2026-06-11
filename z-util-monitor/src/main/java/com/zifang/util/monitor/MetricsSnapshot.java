@@ -7,12 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * 指标快照数据模型
  * 用于存储单个时间点的指标数据
  */
-/**
- * MetricsSnapshot类。
- */
-/**
- * MetricsSnapshot类。
- */
 public class MetricsSnapshot {
 
     private final long timestamp;
@@ -22,11 +16,6 @@ public class MetricsSnapshot {
     private final String unit;
     private final Category category;
 
-    /**
-     * MetricsSnapshot方法。
-     *      * @param name String类型参数
-     * @param value Object类型参数
-     */
     /**
      * MetricsSnapshot方法。
      *      * @param name String类型参数
@@ -43,25 +32,10 @@ public class MetricsSnapshot {
      * @param description String类型参数
      * @param unit String类型参数
      */
-    /**
-     * MetricsSnapshot方法。
-     *      * @param name String类型参数
-     * @param value Object类型参数
-     * @param description String类型参数
-     * @param unit String类型参数
-     */
     public MetricsSnapshot(String name, Object value, String description, String unit) {
         this(name, value, description, unit, null);
     }
 
-    /**
-     * MetricsSnapshot方法。
-     *      * @param name String类型参数
-     * @param value Object类型参数
-     * @param description String类型参数
-     * @param unit String类型参数
-     * @param category Category类型参数
-     */
     /**
      * MetricsSnapshot方法。
      *      * @param name String类型参数
@@ -83,18 +57,10 @@ public class MetricsSnapshot {
      * getTimestamp方法。
      * @return long类型返回值
      */
-    /**
-     * getTimestamp方法。
-     * @return long类型返回值
-     */
     public long getTimestamp() {
         return timestamp;
     }
 
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     /**
      * getName方法。
      * @return String类型返回值
@@ -107,18 +73,10 @@ public class MetricsSnapshot {
      * getValue方法。
      * @return Object类型返回值
      */
-    /**
-     * getValue方法。
-     * @return Object类型返回值
-     */
     public Object getValue() {
         return value;
     }
 
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
     /**
      * getDescription方法。
      * @return String类型返回值
@@ -131,18 +89,10 @@ public class MetricsSnapshot {
      * getUnit方法。
      * @return String类型返回值
      */
-    /**
-     * getUnit方法。
-     * @return String类型返回值
-     */
     public String getUnit() {
         return unit;
     }
 
-    /**
-     * getCategory方法。
-     * @return MetricsSnapshot.Category类型返回值
-     */
     /**
      * getCategory方法。
      * @return MetricsSnapshot.Category类型返回值
@@ -154,12 +104,6 @@ public class MetricsSnapshot {
     /**
      * 指标分类
      */
-/**
- * Category枚举。
- */
-/**
- * Category枚举。
- */
     public enum Category {
         JVM("JVM 指标"),
         THREAD("线程指标"),
@@ -172,10 +116,6 @@ public class MetricsSnapshot {
             this.label = label;
         }
 
-    /**
-     * getLabel方法。
-     * @return String类型返回值
-     */
     /**
      * getLabel方法。
      * @return String类型返回值

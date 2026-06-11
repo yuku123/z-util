@@ -14,12 +14,6 @@ import java.util.TreeMap;
  * 生成 Druid 风格的 HTML 监控页面
  * </p>
  */
-/**
- * HtmlExporter类。
- */
-/**
- * HtmlExporter类。
- */
 public class HtmlExporter {
 
     private static final String CSS =
@@ -57,18 +51,10 @@ public class HtmlExporter {
      * HtmlExporter方法。
      *      * @param registry MetricsRegistry类型参数
      */
-    /**
-     * HtmlExporter方法。
-     *      * @param registry MetricsRegistry类型参数
-     */
     public HtmlExporter(MetricsRegistry registry) {
         this.registry = registry;
     }
 
-    /**
-     * export方法。
-     * @return String类型返回值
-     */
     /**
      * export方法。
      * @return String类型返回值

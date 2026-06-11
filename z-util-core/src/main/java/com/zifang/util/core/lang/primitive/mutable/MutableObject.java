@@ -8,12 +8,6 @@ import java.io.Serializable;
  * @description: mutable {@code Object} wrapper.
  * @version: JDK 1.8
  */
-/**
- * MutableObject类。
- */
-/**
- * MutableObject类。
- */
 public class MutableObject<T> implements Mutable<T>, Serializable, Cloneable {
 
     /**
@@ -31,12 +25,6 @@ public class MutableObject<T> implements Mutable<T>, Serializable, Cloneable {
     /**
      * Constructs a new MutableObject with the default value of {@code null}.
      */
-    /**
-     * MutableObject方法。
-     */
-    /**
-     * MutableObject方法。
-     */
     public MutableObject() {
     }
 
@@ -44,14 +32,6 @@ public class MutableObject<T> implements Mutable<T>, Serializable, Cloneable {
      * Constructs a new MutableObject with the specified value.
      *
      * @param value the initial value to store
-     */
-    /**
-     * MutableObject方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableObject方法。
-     *      * @param value final类型参数
      */
     public MutableObject(final T value) {
         this.value = value;
@@ -69,10 +49,6 @@ public class MutableObject<T> implements Mutable<T>, Serializable, Cloneable {
      * getValue方法。
      * @return T类型返回值
      */
-    /**
-     * getValue方法。
-     * @return T类型返回值
-     */
     public T getValue() {
         return this.value;
     }
@@ -83,10 +59,6 @@ public class MutableObject<T> implements Mutable<T>, Serializable, Cloneable {
      * @param value the value to set
      */
     @Override
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
     /**
      * setValue方法。
      *      * @param value final类型参数
@@ -109,11 +81,6 @@ public class MutableObject<T> implements Mutable<T>, Serializable, Cloneable {
      * {@code value} fields; {@code false} otherwise.
      */
     @Override
-    /**
-     * equals方法。
-     *      * @param obj final类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param obj final类型参数
@@ -143,10 +110,6 @@ public class MutableObject<T> implements Mutable<T>, Serializable, Cloneable {
      * hashCode方法。
      * @return int类型返回值
      */
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     public int hashCode() {
         return value == null ? 0 : value.hashCode();
     }
@@ -163,19 +126,11 @@ public class MutableObject<T> implements Mutable<T>, Serializable, Cloneable {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return value == null ? "null" : value.toString();
     }
 
     @Override
-    /**
-     * clone方法。
-     * @return MutableObject<T>类型返回值
-     */
     /**
      * clone方法。
      * @return MutableObject<T>类型返回值

@@ -5,12 +5,6 @@ package com.zifang.util.ml.nnet;
  * <p>
  * 定义激活函数所需的基本操作，用于为神经元引入非线性
  */
-/**
- * ActivationFunction接口。
- */
-/**
- * ActivationFunction接口。
- */
 public interface ActivationFunction {
 
     /**

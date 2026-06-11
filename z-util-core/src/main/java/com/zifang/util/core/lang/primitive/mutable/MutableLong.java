@@ -9,12 +9,6 @@ import com.zifang.util.core.lang.NumberUtil;
  * is not treated by String.format() as a Long parameter.
  * @version: JDK 1.8
  */
-/**
- * MutableLong类。
- */
-/**
- * MutableLong类。
- */
 public class MutableLong extends Number implements Comparable<MutableLong>, Mutable<Number>,
         Cloneable {
 
@@ -33,12 +27,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
     /**
      * Constructs a new MutableLong with the default value of zero.
      */
-    /**
-     * MutableLong方法。
-     */
-    /**
-     * MutableLong方法。
-     */
     public MutableLong() {
     }
 
@@ -46,14 +34,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * Constructs a new MutableLong with the specified value.
      *
      * @param value the initial value to store
-     */
-    /**
-     * MutableLong方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableLong方法。
-     *      * @param value final类型参数
      */
     public MutableLong(final long value) {
         this.value = value;
@@ -65,14 +45,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * @param value the initial value to store, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * MutableLong方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableLong方法。
-     *      * @param value final类型参数
-     */
     public MutableLong(final Number value) {
         this.value = value.longValue();
     }
@@ -82,14 +54,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      *
      * @param value the string to parse, not null
      * @throws NumberFormatException if the string cannot be parsed into a long
-     */
-    /**
-     * MutableLong方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * MutableLong方法。
-     *      * @param value final类型参数
      */
     public MutableLong(final String value) {
         this.value = Long.parseLong(value);
@@ -107,10 +71,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * getValue方法。
      * @return long类型返回值
      */
-    /**
-     * getValue方法。
-     * @return long类型返回值
-     */
     public Long getValue() {
         return this.value;
     }
@@ -119,14 +79,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * Sets the value.
      *
      * @param value the value to set
-     */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
      */
     public void setValue(final long value) {
         this.value = value;
@@ -143,10 +95,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * setValue方法。
      *      * @param value final类型参数
      */
-    /**
-     * setValue方法。
-     *      * @param value final类型参数
-     */
     public void setValue(final Number value) {
         this.value = value.longValue();
     }
@@ -155,12 +103,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
 
     /**
      * Increments the value.
-     */
-    /**
-     * increment方法。
-     */
-    /**
-     * increment方法。
      */
     public void increment() {
         value++;
@@ -171,14 +113,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * instance immediately prior to the increment operation. This method is not thread safe.
      *
      * @return the value associated with the instance before it was incremented
-     */
-    /**
-     * getAndIncrement方法。
-     * @return long类型返回值
-     */
-    /**
-     * getAndIncrement方法。
-     * @return long类型返回值
      */
     public long getAndIncrement() {
         final long last = value;
@@ -192,14 +126,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      *
      * @return the value associated with the instance after it is incremented
      */
-    /**
-     * incrementAndGet方法。
-     * @return long类型返回值
-     */
-    /**
-     * incrementAndGet方法。
-     * @return long类型返回值
-     */
     public long incrementAndGet() {
         value++;
         return value;
@@ -207,12 +133,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
 
     /**
      * Decrements the value.
-     */
-    /**
-     * decrement方法。
-     */
-    /**
-     * decrement方法。
      */
     public void decrement() {
         value--;
@@ -223,14 +143,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * instance immediately prior to the decrement operation. This method is not thread safe.
      *
      * @return the value associated with the instance before it was decremented
-     */
-    /**
-     * getAndDecrement方法。
-     * @return long类型返回值
-     */
-    /**
-     * getAndDecrement方法。
-     * @return long类型返回值
      */
     public long getAndDecrement() {
         final long last = value;
@@ -244,14 +156,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      *
      * @return the value associated with the instance after it is decremented
      */
-    /**
-     * decrementAndGet方法。
-     * @return long类型返回值
-     */
-    /**
-     * decrementAndGet方法。
-     * @return long类型返回值
-     */
     public long decrementAndGet() {
         value--;
         return value;
@@ -264,14 +168,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      *
      * @param operand the value to add, not null
      */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
     public void add(final long operand) {
         this.value += operand;
     }
@@ -282,14 +178,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * @param operand the value to add, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * add方法。
-     *      * @param operand final类型参数
-     */
     public void add(final Number operand) {
         this.value += operand.longValue();
     }
@@ -298,14 +186,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * Subtracts a value from the value of this instance.
      *
      * @param operand the value to subtract, not null
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
      */
     public void subtract(final long operand) {
         this.value -= operand;
@@ -317,14 +197,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * @param operand the value to subtract, not null
      * @throws NullPointerException if the object is null
      */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
-    /**
-     * subtract方法。
-     *      * @param operand final类型参数
-     */
     public void subtract(final Number operand) {
         this.value -= operand.longValue();
     }
@@ -335,16 +207,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance after adding the operand
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return long类型返回值
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return long类型返回值
      */
     public long addAndGet(final long operand) {
         this.value += operand;
@@ -359,16 +221,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * @return the value associated with this instance after adding the operand
      * @throws NullPointerException if {@code operand} is null
      */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return long类型返回值
-     */
-    /**
-     * addAndGet方法。
-     *      * @param operand final类型参数
-     * @return long类型返回值
-     */
     public long addAndGet(final Number operand) {
         this.value += operand.longValue();
         return value;
@@ -380,16 +232,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      *
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return long类型返回值
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return long类型返回值
      */
     public long getAndAdd(final long operand) {
         final long last = value;
@@ -404,16 +246,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * @param operand the quantity to add, not null
      * @return the value associated with this instance immediately before the operand was added
      * @throws NullPointerException if {@code operand} is null
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return long类型返回值
-     */
-    /**
-     * getAndAdd方法。
-     *      * @param operand final类型参数
-     * @return long类型返回值
      */
     public long getAndAdd(final Number operand) {
         final long last = value;
@@ -434,10 +266,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * intValue方法。
      * @return int类型返回值
      */
-    /**
-     * intValue方法。
-     * @return int类型返回值
-     */
     public int intValue() {
         return (int) value;
     }
@@ -448,10 +276,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * @return the numeric value represented by this object after conversion to type long.
      */
     @Override
-    /**
-     * longValue方法。
-     * @return long类型返回值
-     */
     /**
      * longValue方法。
      * @return long类型返回值
@@ -470,10 +294,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * floatValue方法。
      * @return float类型返回值
      */
-    /**
-     * floatValue方法。
-     * @return float类型返回值
-     */
     public float floatValue() {
         return value;
     }
@@ -488,10 +308,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * doubleValue方法。
      * @return double类型返回值
      */
-    /**
-     * doubleValue方法。
-     * @return double类型返回值
-     */
     public double doubleValue() {
         return value;
     }
@@ -502,14 +318,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * Gets this mutable as an instance of Long.
      *
      * @return a Long instance containing the value from this mutable, never null
-     */
-    /**
-     * toLong方法。
-     * @return long类型返回值
-     */
-    /**
-     * toLong方法。
-     * @return long类型返回值
      */
     public Long toLong() {
         return longValue();
@@ -526,11 +334,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * @return {@code true} if the objects are the same; {@code false} otherwise.
      */
     @Override
-    /**
-     * equals方法。
-     *      * @param obj final类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param obj final类型参数
@@ -553,10 +356,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * hashCode方法。
      * @return int类型返回值
      */
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     public int hashCode() {
         return (int) (value ^ (value >>> 32));
     }
@@ -570,11 +369,6 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * @return negative if this is less, zero if equal, positive if greater
      */
     @Override
-    /**
-     * compareTo方法。
-     *      * @param other final类型参数
-     * @return int类型返回值
-     */
     /**
      * compareTo方法。
      *      * @param other final类型参数
@@ -596,19 +390,11 @@ public class MutableLong extends Number implements Comparable<MutableLong>, Muta
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return String.valueOf(value);
     }
 
     @Override
-    /**
-     * clone方法。
-     * @return MutableLong类型返回值
-     */
     /**
      * clone方法。
      * @return MutableLong类型返回值

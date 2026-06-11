@@ -25,12 +25,6 @@ import java.util.Objects;
  * @see BpmnSequenceFlow
  * @see BpmnModelConverter
  */
-/**
- * BpmnProcess类。
- */
-/**
- * BpmnProcess类。
- */
 public class BpmnProcess {
 
     /**
@@ -56,12 +50,6 @@ public class BpmnProcess {
     /**
      * 默认构造函数，初始化空列表
      */
-    /**
-     * BpmnProcess方法。
-     */
-    /**
-     * BpmnProcess方法。
-     */
     public BpmnProcess() {
         this.nodes = new ArrayList<>();
         this.flows = new ArrayList<>();
@@ -75,20 +63,6 @@ public class BpmnProcess {
      * @param nodes 流程节点列表
      * @param flows 序列流列表
      */
-    /**
-     * BpmnProcess方法。
-     *      * @param id String类型参数
-     * @param name String类型参数
-     * @param nodes ListBpmnFlowNode类型参数
-     * @param flows ListBpmnSequenceFlow类型参数
-     */
-    /**
-     * BpmnProcess方法。
-     *      * @param id String类型参数
-     * @param name String类型参数
-     * @param nodes ListBpmnFlowNode类型参数
-     * @param flows ListBpmnSequenceFlow类型参数
-     */
     public BpmnProcess(String id, String name, List<BpmnFlowNode> nodes, List<BpmnSequenceFlow> flows) {
         this.id = id;
         this.name = name;
@@ -101,14 +75,6 @@ public class BpmnProcess {
      *
      * @return 流程ID
      */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
     public String getId() {
         return id;
     }
@@ -117,14 +83,6 @@ public class BpmnProcess {
      * 设置流程唯一标识符
      *
      * @param id 流程ID
-     */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
-    /**
-     * setId方法。
-     *      * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -135,14 +93,6 @@ public class BpmnProcess {
      *
      * @return 流程名称
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return name;
     }
@@ -151,14 +101,6 @@ public class BpmnProcess {
      * 设置流程名称
      *
      * @param name 流程名称
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
-    /**
-     * setName方法。
-     *      * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -169,14 +111,6 @@ public class BpmnProcess {
      *
      * @return 流程节点列表
      */
-    /**
-     * getNodes方法。
-     * @return List<BpmnFlowNode>类型返回值
-     */
-    /**
-     * getNodes方法。
-     * @return List<BpmnFlowNode>类型返回值
-     */
     public List<BpmnFlowNode> getNodes() {
         return nodes;
     }
@@ -185,14 +119,6 @@ public class BpmnProcess {
      * 设置流程节点列表
      *
      * @param nodes 流程节点列表
-     */
-    /**
-     * setNodes方法。
-     *      * @param nodes ListBpmnFlowNode类型参数
-     */
-    /**
-     * setNodes方法。
-     *      * @param nodes ListBpmnFlowNode类型参数
      */
     public void setNodes(List<BpmnFlowNode> nodes) {
         this.nodes = nodes;
@@ -203,14 +129,6 @@ public class BpmnProcess {
      *
      * @return 序列流列表
      */
-    /**
-     * getFlows方法。
-     * @return List<BpmnSequenceFlow>类型返回值
-     */
-    /**
-     * getFlows方法。
-     * @return List<BpmnSequenceFlow>类型返回值
-     */
     public List<BpmnSequenceFlow> getFlows() {
         return flows;
     }
@@ -219,14 +137,6 @@ public class BpmnProcess {
      * 设置序列流列表
      *
      * @param flows 序列流列表
-     */
-    /**
-     * setFlows方法。
-     *      * @param flows ListBpmnSequenceFlow类型参数
-     */
-    /**
-     * setFlows方法。
-     *      * @param flows ListBpmnSequenceFlow类型参数
      */
     public void setFlows(List<BpmnSequenceFlow> flows) {
         this.flows = flows;
@@ -237,20 +147,11 @@ public class BpmnProcess {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "BpmnProcess{id='" + id + "', name='" + name + "', nodes=" + nodes + ", flows=" + flows + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -267,10 +168,6 @@ public class BpmnProcess {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

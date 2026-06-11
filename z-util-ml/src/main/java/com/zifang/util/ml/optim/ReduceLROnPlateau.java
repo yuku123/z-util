@@ -16,17 +16,8 @@ package com.zifang.util.ml.optim;
  * - threshold: threshold to consider metric as improved
  * - min_delta: minimum change to qualify as improvement
  */
-/**
- * ReduceLROnPlateau类。
- */
-/**
- * ReduceLROnPlateau类。
- */
 public class ReduceLROnPlateau implements LrScheduler {
     
-/**
- * Mode枚举。
- */
 /**
  * Mode枚举。
  */
@@ -55,24 +46,10 @@ public class ReduceLROnPlateau implements LrScheduler {
      * ReduceLROnPlateau方法。
      *      * @param optimizer Optimizer类型参数
      */
-    /**
-     * ReduceLROnPlateau方法。
-     *      * @param optimizer Optimizer类型参数
-     */
     public ReduceLROnPlateau(Optimizer optimizer) {
         this(optimizer, Mode.MIN, 0.1, 10, 1e-4, 1e-8, true);
     }
     
-    /**
-     * ReduceLROnPlateau方法。
-     *      * @param optimizer Optimizer类型参数
-     * @param mode Mode类型参数
-     * @param factor double类型参数
-     * @param patience int类型参数
-     * @param threshold double类型参数
-     * @param minDelta double类型参数
-     * @param verbose boolean类型参数
-     */
     /**
      * ReduceLROnPlateau方法。
      *      * @param optimizer Optimizer类型参数
@@ -111,16 +88,6 @@ public class ReduceLROnPlateau implements LrScheduler {
      * @param minDelta double类型参数
      * @param verbose boolean类型参数
      */
-    /**
-     * ReduceLROnPlateau方法。
-     *      * @param optimizer Optimizer类型参数
-     * @param mode String类型参数
-     * @param factor double类型参数
-     * @param patience int类型参数
-     * @param threshold double类型参数
-     * @param minDelta double类型参数
-     * @param verbose boolean类型参数
-     */
     public ReduceLROnPlateau(Optimizer optimizer, String mode, double factor, int patience,
                               double threshold, double minDelta, boolean verbose) {
         this(optimizer, 
@@ -129,10 +96,6 @@ public class ReduceLROnPlateau implements LrScheduler {
     }
     
     @Override
-    /**
-     * step方法。
-     *      * @param metric double类型参数
-     */
     /**
      * step方法。
      *      * @param metric double类型参数
@@ -196,19 +159,12 @@ public class ReduceLROnPlateau implements LrScheduler {
     /**
      * step方法。
      */
-    /**
-     * step方法。
-     */
     public void step() {
         // Default implementation does nothing
         // Must call step(double metric) with actual metric
     }
     
     @Override
-    /**
-     * getLastLR方法。
-     * @return double类型返回值
-     */
     /**
      * getLastLR方法。
      * @return double类型返回值
@@ -220,28 +176,12 @@ public class ReduceLROnPlateau implements LrScheduler {
     /**
      * Get the current epoch.
      */
-    /**
-     * getEpoch方法。
-     * @return int类型返回值
-     */
-    /**
-     * getEpoch方法。
-     * @return int类型返回值
-     */
     public int getEpoch() {
         return epoch;
     }
     
     /**
      * Get the best metric value seen so far.
-     */
-    /**
-     * getBestMetric方法。
-     * @return double类型返回值
-     */
-    /**
-     * getBestMetric方法。
-     * @return double类型返回值
      */
     public double getBestMetric() {
         return bestMetric;
@@ -250,28 +190,12 @@ public class ReduceLROnPlateau implements LrScheduler {
     /**
      * Get the number of bad epochs.
      */
-    /**
-     * getNumBadEpochs方法。
-     * @return int类型返回值
-     */
-    /**
-     * getNumBadEpochs方法。
-     * @return int类型返回值
-     */
     public int getNumBadEpochs() {
         return numBadEpochs;
     }
     
     /**
      * Check if currently in cooldown period.
-     */
-    /**
-     * isInCooldown方法。
-     * @return boolean类型返回值
-     */
-    /**
-     * isInCooldown方法。
-     * @return boolean类型返回值
      */
     public boolean isInCooldown() {
         return inCooldown;
@@ -280,28 +204,12 @@ public class ReduceLROnPlateau implements LrScheduler {
     /**
      * Get the factor for reducing learning rate.
      */
-    /**
-     * getFactor方法。
-     * @return double类型返回值
-     */
-    /**
-     * getFactor方法。
-     * @return double类型返回值
-     */
     public double getFactor() {
         return factor;
     }
     
     /**
      * Get the patience.
-     */
-    /**
-     * getPatience方法。
-     * @return int类型返回值
-     */
-    /**
-     * getPatience方法。
-     * @return int类型返回值
      */
     public int getPatience() {
         return patience;
@@ -310,26 +218,12 @@ public class ReduceLROnPlateau implements LrScheduler {
     /**
      * Get the mode (MIN or MAX).
      */
-    /**
-     * getMode方法。
-     * @return Mode类型返回值
-     */
-    /**
-     * getMode方法。
-     * @return Mode类型返回值
-     */
     public Mode getMode() {
         return mode;
     }
     
     /**
      * Reset the scheduler state.
-     */
-    /**
-     * reset方法。
-     */
-    /**
-     * reset方法。
      */
     public void reset() {
         epoch = 0;

@@ -5,19 +5,8 @@ package com.zifang.util.proxy.a.decompile.core;
  * <p>
  * 将JVM访问标志转换为Java源码中的访问修饰符。
  */
-/**
- * AccessFlagConvertor类。
- */
-/**
- * AccessFlagConvertor类。
- */
 public class AccessFlagConvertor {
 
-    /**
-     * classAccessFlagConvertor方法。
-     *      * @param hexString String类型参数
-     * @return static String类型返回值
-     */
     /**
      * classAccessFlagConvertor方法。
      *      * @param hexString String类型参数
@@ -74,11 +63,6 @@ public class AccessFlagConvertor {
      *      * @param hexString String类型参数
      * @return static String类型返回值
      */
-    /**
-     * methodAccessFlagConvertor方法。
-     *      * @param hexString String类型参数
-     * @return static String类型返回值
-     */
     public static String methodAccessFlagConvertor(String hexString) { // 0x0001
         String[] array = new String[4];
         for (int i = 0; i < 4; i++) {
@@ -130,16 +114,6 @@ public class AccessFlagConvertor {
      *
      * @param hexString
      * @return
-     */
-    /**
-     * fieldAccessFlagConvertor方法。
-     *      * @param hexString String类型参数
-     * @return static String类型返回值
-     */
-    /**
-     * fieldAccessFlagConvertor方法。
-     *      * @param hexString String类型参数
-     * @return static String类型返回值
      */
     public static String fieldAccessFlagConvertor(String hexString) {
         String[] array = new String[4];

@@ -36,12 +36,6 @@ import java.io.InputStream;
  * @see XmlParserBySAX
  * @see <a href="https://docs.oracle.com/javase/tutorial/jaxp/dom/index.html">Java DOM Tutorial</a>
  */
-/**
- * XmlParserByDOM类。
- */
-/**
- * XmlParserByDOM类。
- */
 public class XmlParserByDOM {
 
     /**
@@ -68,16 +62,6 @@ public class XmlParserByDOM {
      * @throws SAXException                 if parse error occurs
      * @throws IOException                  if an I/O error occurs
      * @throws NullPointerException         if xmlStream is null
-     */
-    /**
-     * parse方法。
-     *      * @param xmlStream InputStream类型参数
-     * @return static void类型返回值
-     */
-    /**
-     * parse方法。
-     *      * @param xmlStream InputStream类型参数
-     * @return static void类型返回值
      */
     public static void parse(InputStream xmlStream) throws ParserConfigurationException, SAXException, IOException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

@@ -22,9 +22,6 @@ import java.util.concurrent.TimeUnit;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ShellExecutor类。
- */
 public class ShellExecutor {
 
     /** 默认超时：5 分钟 */
@@ -66,11 +63,6 @@ public class ShellExecutor {
      * @param args git 子命令及参数（不含 "git" 本身）
      * @return 执行结果
      */
-    /**
-     * exec方法。
-     *      * @param args String...类型参数
-     * @return GitResult<String>类型返回值
-     */
     public GitResult<String> exec(String... args) {
         return exec(null, args);
     }
@@ -81,12 +73,6 @@ public class ShellExecutor {
      * @param workDir 工作目录（可为 null 表示当前目录）
      * @param args    git 子命令及参数
      * @return 执行结果
-     */
-    /**
-     * exec方法。
-     *      * @param workDir File类型参数
-     * @param args String...类型参数
-     * @return GitResult<String>类型返回值
      */
     public GitResult<String> exec(File workDir, String... args) {
         return exec(workDir, null, args);
@@ -100,13 +86,6 @@ public class ShellExecutor {
      * @param args      git 子命令及参数
      * @return 执行结果
      */
-    /**
-     * exec方法。
-     *      * @param workDir File类型参数
-     * @param envExtra MapString,类型参数
-     * @param args String...类型参数
-     * @return GitResult<String>类型返回值
-     */
     public GitResult<String> exec(File workDir, Map<String, String> envExtra, String... args) {
         if (args == null || args.length == 0) {
             return GitResult.fail("git 参数不能为空");
@@ -119,12 +98,6 @@ public class ShellExecutor {
 
     /**
      * 执行通用命令（非 git）
-     */
-    /**
-     * execRaw方法。
-     *      * @param workDir File类型参数
-     * @param command ListString类型参数
-     * @return GitResult<String>类型返回值
      */
     public GitResult<String> execRaw(File workDir, List<String> command) {
         return runProcess(workDir, null, command);
@@ -183,10 +156,6 @@ public class ShellExecutor {
 
     /**
      * 检查 git 二进制是否可用
-     */
-    /**
-     * isAvailable方法。
-     * @return boolean类型返回值
      */
     public boolean isAvailable() {
         try {

@@ -12,12 +12,6 @@ import java.util.Map;
  * @author zifang
  * @version 1.0.0
  */
-/**
- * ContainerDTO类。
- */
-/**
- * ContainerDTO类。
- */
 public class ContainerDTO {
 
     private String id;
@@ -39,18 +33,10 @@ public class ContainerDTO {
      * getId方法。
      * @return String类型返回值
      */
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
     public String getId() {
         return id;
     }
 
-    /**
-     * setId方法。
-     *      * @param id String类型参数
-     */
     /**
      * setId方法。
      *      * @param id String类型参数
@@ -63,18 +49,10 @@ public class ContainerDTO {
      * getName方法。
      * @return String类型返回值
      */
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
     /**
      * setName方法。
      *      * @param name String类型参数
@@ -87,18 +65,10 @@ public class ContainerDTO {
      * getImage方法。
      * @return String类型返回值
      */
-    /**
-     * getImage方法。
-     * @return String类型返回值
-     */
     public String getImage() {
         return image;
     }
 
-    /**
-     * setImage方法。
-     *      * @param image String类型参数
-     */
     /**
      * setImage方法。
      *      * @param image String类型参数
@@ -111,18 +81,10 @@ public class ContainerDTO {
      * getImageId方法。
      * @return String类型返回值
      */
-    /**
-     * getImageId方法。
-     * @return String类型返回值
-     */
     public String getImageId() {
         return imageId;
     }
 
-    /**
-     * setImageId方法。
-     *      * @param imageId String类型参数
-     */
     /**
      * setImageId方法。
      *      * @param imageId String类型参数
@@ -135,18 +97,10 @@ public class ContainerDTO {
      * getCommand方法。
      * @return String类型返回值
      */
-    /**
-     * getCommand方法。
-     * @return String类型返回值
-     */
     public String getCommand() {
         return command;
     }
 
-    /**
-     * setCommand方法。
-     *      * @param command String类型参数
-     */
     /**
      * setCommand方法。
      *      * @param command String类型参数
@@ -159,18 +113,10 @@ public class ContainerDTO {
      * getCreated方法。
      * @return String类型返回值
      */
-    /**
-     * getCreated方法。
-     * @return String类型返回值
-     */
     public String getCreated() {
         return created;
     }
 
-    /**
-     * setCreated方法。
-     *      * @param created String类型参数
-     */
     /**
      * setCreated方法。
      *      * @param created String类型参数
@@ -183,18 +129,10 @@ public class ContainerDTO {
      * getState方法。
      * @return String类型返回值
      */
-    /**
-     * getState方法。
-     * @return String类型返回值
-     */
     public String getState() {
         return state;
     }
 
-    /**
-     * setState方法。
-     *      * @param state String类型参数
-     */
     /**
      * setState方法。
      *      * @param state String类型参数
@@ -207,18 +145,10 @@ public class ContainerDTO {
      * getStatus方法。
      * @return String类型返回值
      */
-    /**
-     * getStatus方法。
-     * @return String类型返回值
-     */
     public String getStatus() {
         return status;
     }
 
-    /**
-     * setStatus方法。
-     *      * @param status String类型参数
-     */
     /**
      * setStatus方法。
      *      * @param status String类型参数
@@ -231,18 +161,10 @@ public class ContainerDTO {
      * getPort方法。
      * @return String类型返回值
      */
-    /**
-     * getPort方法。
-     * @return String类型返回值
-     */
     public String getPort() {
         return port;
     }
 
-    /**
-     * setPort方法。
-     *      * @param port String类型参数
-     */
     /**
      * setPort方法。
      *      * @param port String类型参数
@@ -255,18 +177,10 @@ public class ContainerDTO {
      * getLabels方法。
      * @return Map<String, String>类型返回值
      */
-    /**
-     * getLabels方法。
-     * @return Map<String, String>类型返回值
-     */
     public Map<String, String> getLabels() {
         return labels;
     }
 
-    /**
-     * setLabels方法。
-     *      * @param labels MapString,类型参数
-     */
     /**
      * setLabels方法。
      *      * @param labels MapString,类型参数
@@ -279,18 +193,10 @@ public class ContainerDTO {
      * getPorts方法。
      * @return List<PortMapping>类型返回值
      */
-    /**
-     * getPorts方法。
-     * @return List<PortMapping>类型返回值
-     */
     public List<PortMapping> getPorts() {
         return ports;
     }
 
-    /**
-     * setPorts方法。
-     *      * @param ports ListPortMapping类型参数
-     */
     /**
      * setPorts方法。
      *      * @param ports ListPortMapping类型参数
@@ -303,18 +209,10 @@ public class ContainerDTO {
      * getMount方法。
      * @return String类型返回值
      */
-    /**
-     * getMount方法。
-     * @return String类型返回值
-     */
     public String getMount() {
         return mount;
     }
 
-    /**
-     * setMount方法。
-     *      * @param mount String类型参数
-     */
     /**
      * setMount方法。
      *      * @param mount String类型参数
@@ -327,18 +225,10 @@ public class ContainerDTO {
      * getNetwork方法。
      * @return String类型返回值
      */
-    /**
-     * getNetwork方法。
-     * @return String类型返回值
-     */
     public String getNetwork() {
         return network;
     }
 
-    /**
-     * setNetwork方法。
-     *      * @param network String类型参数
-     */
     /**
      * setNetwork方法。
      *      * @param network String类型参数
@@ -351,18 +241,10 @@ public class ContainerDTO {
      * getNetworks方法。
      * @return List<String>类型返回值
      */
-    /**
-     * getNetworks方法。
-     * @return List<String>类型返回值
-     */
     public List<String> getNetworks() {
         return networks;
     }
 
-    /**
-     * setNetworks方法。
-     *      * @param networks ListString类型参数
-     */
     /**
      * setNetworks方法。
      *      * @param networks ListString类型参数
@@ -386,18 +268,10 @@ public class ContainerDTO {
      * getHostIp方法。
      * @return String类型返回值
      */
-    /**
-     * getHostIp方法。
-     * @return String类型返回值
-     */
         public String getHostIp() {
             return hostIp;
         }
 
-    /**
-     * setHostIp方法。
-     *      * @param hostIp String类型参数
-     */
     /**
      * setHostIp方法。
      *      * @param hostIp String类型参数
@@ -410,18 +284,10 @@ public class ContainerDTO {
      * getHostPort方法。
      * @return int类型返回值
      */
-    /**
-     * getHostPort方法。
-     * @return int类型返回值
-     */
         public int getHostPort() {
             return hostPort;
         }
 
-    /**
-     * setHostPort方法。
-     *      * @param hostPort int类型参数
-     */
     /**
      * setHostPort方法。
      *      * @param hostPort int类型参数
@@ -434,18 +300,10 @@ public class ContainerDTO {
      * getContainerPort方法。
      * @return int类型返回值
      */
-    /**
-     * getContainerPort方法。
-     * @return int类型返回值
-     */
         public int getContainerPort() {
             return containerPort;
         }
 
-    /**
-     * setContainerPort方法。
-     *      * @param containerPort int类型参数
-     */
     /**
      * setContainerPort方法。
      *      * @param containerPort int类型参数
@@ -458,18 +316,10 @@ public class ContainerDTO {
      * getProtocol方法。
      * @return String类型返回值
      */
-    /**
-     * getProtocol方法。
-     * @return String类型返回值
-     */
         public String getProtocol() {
             return protocol;
         }
 
-    /**
-     * setProtocol方法。
-     *      * @param protocol String类型参数
-     */
     /**
      * setProtocol方法。
      *      * @param protocol String类型参数
@@ -483,20 +333,12 @@ public class ContainerDTO {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
         public String toString() {
             return hostPort + ":" + containerPort + "/" + protocol;
         }
     }
 
     @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     /**
      * toString方法。
      * @return String类型返回值

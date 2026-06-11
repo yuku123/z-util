@@ -7,12 +7,6 @@ import java.util.Objects;
 /**
  * 表数据传输对象
  */
-/**
- * TableDTO类。
- */
-/**
- * TableDTO类。
- */
 public class TableDTO {
     public final String tableName;
     public final String entityName;
@@ -26,16 +20,6 @@ public class TableDTO {
      * @param tableName 表名，不能为空
      * @param comment   表备注
      * @throws IllegalArgumentException 表名为空或空白时抛出
-     */
-    /**
-     * TableDTO方法。
-     *      * @param tableName String类型参数
-     * @param comment String类型参数
-     */
-    /**
-     * TableDTO方法。
-     *      * @param tableName String类型参数
-     * @param comment String类型参数
      */
     public TableDTO(String tableName, String comment) {
         String trimmedName = Objects.requireNonNull(tableName, "表名不能为空").trim();
@@ -52,14 +36,6 @@ public class TableDTO {
      *
      * @param column 字段对象
      */
-    /**
-     * addColumn方法。
-     *      * @param column ColumnDTO类型参数
-     */
-    /**
-     * addColumn方法。
-     *      * @param column ColumnDTO类型参数
-     */
     public void addColumn(ColumnDTO column) {
         if (column != null) {
             columns.add(column);
@@ -74,26 +50,12 @@ public class TableDTO {
      *
      * @return 字段列表
      */
-    /**
-     * getColumns方法。
-     * @return List<ColumnDTO>类型返回值
-     */
-    /**
-     * getColumns方法。
-     * @return List<ColumnDTO>类型返回值
-     */
     public List<ColumnDTO> getColumns() {
         return new ArrayList<>(columns);
     }
 
     /**
      * 打印调试信息
-     */
-    /**
-     * debugPrint方法。
-     */
-    /**
-     * debugPrint方法。
      */
     public void debugPrint() {
         System.out.println("=== TableDTO调试 ===");
@@ -108,14 +70,6 @@ public class TableDTO {
      *
      * @return 表名
      */
-    /**
-     * getTableName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getTableName方法。
-     * @return String类型返回值
-     */
     public String getTableName() {
         return tableName;
     }
@@ -124,14 +78,6 @@ public class TableDTO {
      * 获取实体名（首字母大写的驼峰形式）
      *
      * @return 实体名
-     */
-    /**
-     * getEntityName方法。
-     * @return String类型返回值
-     */
-    /**
-     * getEntityName方法。
-     * @return String类型返回值
      */
     public String getEntityName() {
         return entityName;
@@ -142,14 +88,6 @@ public class TableDTO {
      *
      * @return 表备注
      */
-    /**
-     * getComment方法。
-     * @return String类型返回值
-     */
-    /**
-     * getComment方法。
-     * @return String类型返回值
-     */
     public String getComment() {
         return comment;
     }
@@ -158,14 +96,6 @@ public class TableDTO {
      * 获取主键字段
      *
      * @return 主键字段，没有主键返回null
-     */
-    /**
-     * getPrimaryKey方法。
-     * @return ColumnDTO类型返回值
-     */
-    /**
-     * getPrimaryKey方法。
-     * @return ColumnDTO类型返回值
      */
     public ColumnDTO getPrimaryKey() {
         return primaryKey;
@@ -176,14 +106,6 @@ public class TableDTO {
      *
      * @param primaryKey 主键字段
      */
-    /**
-     * setPrimaryKey方法。
-     *      * @param primaryKey ColumnDTO类型参数
-     */
-    /**
-     * setPrimaryKey方法。
-     *      * @param primaryKey ColumnDTO类型参数
-     */
     public void setPrimaryKey(ColumnDTO primaryKey) {
         this.primaryKey = primaryKey;
     }
@@ -193,20 +115,11 @@ public class TableDTO {
      * toString方法。
      * @return String类型返回值
      */
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
     public String toString() {
         return "TableDTO{tableName=" + tableName + ", entityName=" + entityName + ", comment=" + comment + ", columns=" + columns + ", primaryKey=" + primaryKey + "}";
     }
 
     @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
     /**
      * equals方法。
      *      * @param o Object类型参数
@@ -224,10 +137,6 @@ public class TableDTO {
     }
 
     @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
     /**
      * hashCode方法。
      * @return int类型返回值

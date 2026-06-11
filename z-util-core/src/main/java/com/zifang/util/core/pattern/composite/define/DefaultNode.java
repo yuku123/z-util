@@ -9,10 +9,4 @@ package com.zifang.util.core.pattern.composite.define;
  * @param <T> 节点数据类型
  * @see AbstractNode
  */
-/**
- * DefaultNode类。
- */
-/**
- * DefaultNode类。
- */
 public class DefaultNode<T> extends AbstractNode {}

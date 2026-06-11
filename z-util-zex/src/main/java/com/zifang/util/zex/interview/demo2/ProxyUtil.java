@@ -6,9 +6,6 @@ import java.lang.reflect.Proxy;
 /**
  * 动态代理工具类
  */
-/**
- * ProxyUtil类。
- */
 public class ProxyUtil {
 
     @SuppressWarnings("unchecked")

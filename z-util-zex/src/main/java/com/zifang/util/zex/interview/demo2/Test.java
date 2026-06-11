@@ -11,9 +11,6 @@ import java.lang.reflect.Proxy;
  * @author zifang
  * @version 1.0
  */
-/**
- * Test类。
- */
 public class Test {
 
 

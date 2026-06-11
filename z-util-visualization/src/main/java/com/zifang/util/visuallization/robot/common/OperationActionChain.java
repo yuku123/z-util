@@ -9,11 +9,5 @@ package com.zifang.util.visuallization.robot.common;
  * @version 1.0
  * @since 2020-01-01
  */
-/**
- * OperationActionChain类。
- */
-/**
- * OperationActionChain类。
- */
 public class OperationActionChain {
 }

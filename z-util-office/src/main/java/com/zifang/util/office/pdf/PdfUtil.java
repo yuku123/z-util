@@ -15,12 +15,6 @@ import java.util.List;
  * PDF文档操作工具类
  * 提供PDF文档的创建、编辑等常用操作
  */
-/**
- * PdfUtil类。
- */
-/**
- * PdfUtil类。
- */
 public class PdfUtil {
 
     /**
@@ -32,20 +26,6 @@ public class PdfUtil {
      * @param errorFlag 是否返回错误文件列表，true返回错误列表，false返回成功列表
      * @return 根据errorFlag返回成功或失败的文件列表
      * @throws RuntimeException 如果保存PDF失败则抛出运行时异常
-     */
-    /**
-     * fillImages方法。
-     *      * @param pdfTargetFilePath String类型参数
-     * @param imageFiles ListFile类型参数
-     * @param errorFlag boolean类型参数
-     * @return static List<File>类型返回值
-     */
-    /**
-     * fillImages方法。
-     *      * @param pdfTargetFilePath String类型参数
-     * @param imageFiles ListFile类型参数
-     * @param errorFlag boolean类型参数
-     * @return static List<File>类型返回值
      */
     public static List<File> fillImages(String pdfTargetFilePath , List<File> imageFiles, boolean errorFlag){
 

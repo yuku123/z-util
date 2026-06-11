@@ -12,22 +12,12 @@ import org.quartz.JobExecutionException;
  * @see Job
  * @see RunnableJob
  */
-/**
- * RunnableJobAdapter类。
- */
-/**
- * RunnableJobAdapter类。
- */
 public class RunnableJobAdapter implements org.quartz.Job, Job {
 
     private static final String RUNNABLE_KEY = "_runnable";
     private static final String JOB_CLASS_KEY = "_jobClass";
 
     @Override
-    /**
-     * execute方法。
-     *      * @param context JobExecutionContext类型参数
-     */
     /**
      * execute方法。
      *      * @param context JobExecutionContext类型参数
