@@ -279,7 +279,10 @@ public final class SqlFunctions {
     @SqlFunction("SPACE")
     public static Object space(Map<String, Object> row, Object n) {
         if (n == null) return null;
-        return " ".repeat(Integer.parseInt(n.toString()));
+        int count = Integer.parseInt(n.toString());
+        StringBuilder sb = new StringBuilder(count);
+        for (int i = 0; i < count; i++) sb.append(' ');
+        return sb.toString();
     }
 
     @SqlFunction("ASCII")
@@ -291,7 +294,7 @@ public final class SqlFunctions {
     @SqlFunction("CHAR")
     public static Object char_(Map<String, Object> row, Object code) {
         if (code == null) return null;
-        return Character.toString(Integer.parseInt(code.toString()));
+        return Character.toString((char) Integer.parseInt(code.toString()));
     }
 
     // ===================== 日期/时间函数 =====================
