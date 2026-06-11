@@ -135,10 +135,16 @@ public class YamlG4Parser {
 
     // ==================== G4 加载 ====================
 
-    private String loadG4(String name) {
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream(name)) {
+ private String loadG4(String name) {
+        try {
+            InputStream is = getClass().getClassLoader().getResourceAsStream(name);
             if (is == null) throw new YamlParseException("G4文件未找到: " + name);
-            return new String(is.readAllBytes(), StandardCharsets.UTF_8);
+            java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+            byte[] buf = new byte[4096];
+            int len;
+            while ((len = is.read(buf)) != -1) baos.write(buf, 0, len);
+            is.close();
+            return baos.toString(StandardCharsets.UTF_8.name());
         } catch (YamlParseException e) {
             throw e;
         } catch (Exception e) {
@@ -192,7 +198,7 @@ public class YamlG4Parser {
             default:
                 if (children.size() == 1) return astToJava(children.get(0));
                 if (text != null && !text.isEmpty()) return parseScalar(type, text);
-                return children.stream().map(this::astToJava).toList();
+                return children.stream().map(this::astToJava).collect(java.util.stream.Collectors.toList());
         }
     }
 
