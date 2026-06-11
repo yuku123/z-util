@@ -22,10 +22,7 @@ public class CSVWriterTest {
      * testWriteAndReadRoundtrip方法。
      */
     public void testWriteAndReadRoundtrip() throws IOException {
-        DataFrame df = new DataFrame(Map.of(
-                "name", new double[]{1.0, 2.0},
-                "age", new double[]{25.0, 30.0}
-        ));
+        DataFrame df = new DataFrame(new java.util.HashMap<String, double[]>() {{ put("name", new double[]{1.0, 2.0}); put("age", new double[]{25.0, 30.0}); }});
 
         String csv = CSVWriter.toCSVString(df);
         assertNotNull(csv);
@@ -56,10 +53,7 @@ public class CSVWriterTest {
      * testToCSVString方法。
      */
     public void testToCSVString() throws IOException {
-        DataFrame df = new DataFrame(Map.of(
-                "A", new double[]{1.0, 2.0},
-                "B", new double[]{3.0, 4.0}
-        ));
+        DataFrame df = new DataFrame(new java.util.HashMap<String, double[]>() {{ put("A", new double[]{1.0, 2.0}); put("B", new double[]{3.0, 4.0}); }});
 
         String csv = CSVWriter.toCSVString(df);
         assertNotNull(csv);
@@ -72,7 +66,7 @@ public class CSVWriterTest {
      * testWriteWithInfinity方法。
      */
     public void testWriteWithInfinity() throws IOException {
-        DataFrame df = new DataFrame(Map.of("col", new double[]{1.0, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY}));
+        DataFrame df = new DataFrame(new java.util.HashMap<String, double[]>() {{ put("col", new double[]{1.0, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY}); }});
         String csv = CSVWriter.toCSVString(df);
         assertNotNull(csv);
     }
@@ -82,9 +76,7 @@ public class CSVWriterTest {
      * testWriteIntegerValues方法。
      */
     public void testWriteIntegerValues() throws IOException {
-        DataFrame df = new DataFrame(Map.of(
-                "int_col", new double[]{1.0, 2.0, 3.0},
-                "float_col", new double[]{1.5, 2.5, 3.5}));
+        DataFrame df = new DataFrame(new java.util.HashMap<String, double[]>() {{ put("int_col", new double[]{1.0, 2.0, 3.0}); put("float_col", new double[]{1.5, 2.5, 3.5}); }});
         String csv = CSVWriter.toCSVString(df);
         assertNotNull(csv);
     }
@@ -94,10 +86,7 @@ public class CSVWriterTest {
      * testWriteWithCustomDelimiter方法。
      */
     public void testWriteWithCustomDelimiter() throws IOException {
-        DataFrame df = new DataFrame(Map.of(
-                "A", new double[]{1.0},
-                "B", new double[]{2.0}
-        ));
+        DataFrame df = new DataFrame(new java.util.HashMap<String, double[]>() {{ put("A", new double[]{1.0}); put("B", new double[]{2.0}); }});
 
         CSVWriter writer = CSVWriter.builder()
                 .delimiter(';')
@@ -105,10 +94,10 @@ public class CSVWriterTest {
         StringBuilder sb = new StringBuilder();
         writer.write(df, new java.io.OutputStream() {
             @Override
-    /**
-     * write方法。
-     *      * @param b int类型参数
-     */
+            /**
+             * write方法。
+             *      * @param b int类型参数
+             */
             public void write(int b) {
                 sb.append((char) b);
             }

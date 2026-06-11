@@ -104,7 +104,7 @@ public class SeriesTest {
      * testStaticFactoryFromMap方法。
      */
     public void testStaticFactoryFromMap() {
-        Map<String, Double> map = Map.of("a", 1.0, "b", 2.0, "c", 3.0);
+        Map<String, Double> map = new java.util.HashMap<String, Double>() {{ put("a", 1.0); put("b", 2.0); put("c", 3.0); }};
         Series series = Series.fromMap(map);
         assertNotNull(series);
         assertEquals(3, series.count());
