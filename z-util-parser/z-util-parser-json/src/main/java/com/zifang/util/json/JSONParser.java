@@ -6,6 +6,7 @@ import com.zifang.util.dsl.g4.DynamicParser;
 import com.zifang.util.dsl.core.TokenReader;
 import com.zifang.util.dsl.token.Token;
 import com.zifang.util.json.exception.JsonParseException;
+import com.zifang.util.core.io.FileUtil;
 import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
 
@@ -121,12 +122,9 @@ public class JSONParser {
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream(name);
             if (is == null) throw new JsonParseException("G4文件未找到: " + name);
-            java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-            byte[] buf = new byte[4096];
-            int len;
-            while ((len = is.read(buf)) != -1) baos.write(buf, 0, len);
+            byte[] bytes = FileUtil.readAllBytes(is);
             is.close();
-            return baos.toString(StandardCharsets.UTF_8.name());
+            return new String(bytes, StandardCharsets.UTF_8);
         } catch (JsonParseException e) {
             throw e;
         } catch (Exception e) {

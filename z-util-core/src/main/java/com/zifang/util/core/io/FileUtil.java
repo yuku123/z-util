@@ -940,6 +940,17 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 从 InputStream 读取全部字节（Java 8 兼容，替代 readAllBytes）
+     */
+    public static byte[] readAllBytes(InputStream is) throws IOException {
+        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+        byte[] buf = new byte[4096];
+        int len;
+        while ((len = is.read(buf)) != -1) baos.write(buf, 0, len);
+        return baos.toByteArray();
+    }
+
     // ==================== Rename Operations ====================
 
     /**

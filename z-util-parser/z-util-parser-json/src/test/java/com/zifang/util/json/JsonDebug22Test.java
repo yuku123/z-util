@@ -76,13 +76,10 @@ public class JsonDebug22Test {
     }
 
     private static String loadG4(String name) throws Exception {
-        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
         java.io.InputStream is = JsonDebug22Test.class.getClassLoader().getResourceAsStream(name);
         if (is == null) throw new Exception("Resource not found: " + name);
-        byte[] buf = new byte[4096];
-        int len;
-        while ((len = is.read(buf)) != -1) baos.write(buf, 0, len);
+        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
         is.close();
-        return baos.toString(java.nio.charset.StandardCharsets.UTF_8.name());
+        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
     }
 }

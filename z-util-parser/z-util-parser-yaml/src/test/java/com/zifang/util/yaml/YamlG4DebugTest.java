@@ -28,8 +28,13 @@ public class YamlG4DebugTest {
      */
     public void testExtractRulesFromYamlParserG4() {
         String parserG4 = "";
-        try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("YamlParser.g4")) {
-            parserG4 = new String(is.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8);
+        try {
+            java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("YamlParser.g4");
+            if (is != null) {
+                byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+                is.close();
+                parserG4 = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+            }
         } catch (Exception e) {
             fail("Failed to load YamlParser.g4: " + e.getMessage());
         }
@@ -55,8 +60,13 @@ public class YamlG4DebugTest {
      */
     public void testExtractRulesFromYamlLexerG4() {
         String lexerG4 = "";
-        try (java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("YamlLexer.g4")) {
-            lexerG4 = new String(is.readAllBytes(), java.nio.charset.StandardCharsets.UTF_8);
+        try {
+            java.io.InputStream is = getClass().getClassLoader().getResourceAsStream("YamlLexer.g4");
+            if (is != null) {
+                byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+                is.close();
+                lexerG4 = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+            }
         } catch (Exception e) {
             fail("Failed to load YamlLexer.g4: " + e.getMessage());
         }
