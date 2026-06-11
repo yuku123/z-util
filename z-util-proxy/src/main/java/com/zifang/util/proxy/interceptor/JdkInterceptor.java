@@ -61,7 +61,7 @@ public class JdkInterceptor implements InvocationHandler, Serializable {
             // 总是抛出原始异常（afterException 返回值只影响 after() 是否调用）
             aspect.afterException(target, method, args, e.getTargetException());
             throw e;
-        } catch (IllegalAccessException | java.lang.reflect.InaccessibleObjectException e) {
+        } catch (IllegalAccessException e) {
             aspect.afterException(target, method, args, e);
             throw e;
         }
