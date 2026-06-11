@@ -204,9 +204,10 @@ public class DynamicParser implements Parser {
             if (element.isEmpty()) continue;
 
             ASTNode child = parseElement(element);
-            if (child != null) {
-                parent.addChild(child);
+            if (child == null) {
+                break;
             }
+            parent.addChild(child);
         }
     }
 
@@ -273,9 +274,13 @@ public class DynamicParser implements Parser {
                     if (child == null) {
                         break;
                     }
-                    if (child.getChildren().isEmpty() || before == after) {
+                    // child 不为 null 但 before == after：说明有嵌套结构（如 Scalar token）
+                    // 但 token 未推进，不添加并继续下一轮尝试
+                    if (before == after) {
                         break;
                     }
+                    // child.getChildren().isEmpty() 但 before != after：说明 token 推进了，
+                    // 但当前分支是死路（如 keyScalar 成功但 valueToken 失败），继续尝试
                     node.addChild(child);
                     count++;
                 }

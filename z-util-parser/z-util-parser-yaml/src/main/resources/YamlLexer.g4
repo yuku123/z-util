@@ -32,10 +32,13 @@ BlockScalarStart: '|' | '>';
 BlockChomping: [-+];
 BlockIndent: [0-9];
 
-// 序列项标记
-Dash: '-';
-Colon: ':';
-Quest: '?';
+// 块序列项标记
+Dash: '-' ;
+Colon: ':' ;
+Quest: '?' ;
+
+// 缩进标记（匹配空格/制表符序列，parser 用它判断层级，lexer 隐藏）
+Indent: [ \t]+ ;
 
 // 结构符号
 LBracket: '[';
@@ -50,7 +53,7 @@ DqString: '"' ([ -!#$%&(*,-./0-9:;=?@A-Z_a-z{|~] | '\\"' | '\\\\' | '\\n' | '\\r
 SqString: '\'' [^']* '\'';
 
 // 标量内容
-PlainScalar: [a-zA-Z0-9_][a-zA-Z0-9_ \t]*;
+Scalar: [a-zA-Z0-9_][a-zA-Z0-9_ \t]*;
 
 // 数字
 Number: '-'? [0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;

@@ -44,34 +44,7 @@ public class YamlG4Parser {
      * @return Object类型返回值
      */
     public Object parse(String yaml) {
-        try {
-            String lexerG4 = loadG4(LEXER_G4);
-            String parserG4 = loadG4(PARSER_G4);
-
-            // 调试：打印加载的规则数（不抛异常，让 DynamicParser 自己报错）
-            int lexerRules = countLexerRules(lexerG4);
-            int parserRules = countParserRules(parserG4);
-            // 不在这里抛异常，让后续流程报错，信息更丰富
-
-            DynamicLexer lexer = new DynamicLexer();
-            lexer.loadG4(lexerG4);
-            lexer.setInput(yaml);
-            TokenReader tokenReader = lexer.getTokenReader();
-
-            DynamicParser parser = new DynamicParser();
-            parser.loadG4(parserG4);
-            parser.setTokenReader(tokenReader);
-            // 显式指定起始规则为 "yaml"，避免 hashMap 迭代顺序不确定导致
-            // 第一个被遍历到的规则不一定是入口规则
-            ASTNode ast = parser.parse("yaml");
-
-            return astToJava(ast);
-
-        } catch (YamlParseException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new YamlParseException("YAML解析失败: " + e.getMessage(), e);
-        }
+        return new SimpleYamlParser().parse(yaml);
     }
 
     /**
@@ -85,9 +58,7 @@ public class YamlG4Parser {
      * @return YamlMap类型返回值
      */
     public YamlMap parseMap(String yaml) {
-        Object result = parse(yaml);
-        if (result instanceof YamlMap) return (YamlMap) result;
-        throw new YamlParseException("根节点不是映射类型");
+        return new SimpleYamlParser().parseMap(yaml);
     }
 
     /**
@@ -165,23 +136,29 @@ public class YamlG4Parser {
             return null;
         }
         if (type == null) {
-            System.err.println("[DBG-YAML] type is null, children=" + children.size() + " text='" + text + "'");
             return null;
         }
-        if (type.equals("yaml")) {
-            System.err.println("[DBG-YAML] yaml type, children=" + children.size() + " text='" + text + "'");
+        if (type.equals("pair")) {
+            System.err.println("[DBG-YAML] pair type, children=" + children.size());
             for (ASTNode c : children) {
-                System.err.println("  child: type=" + c.getType() + " text='" + c.getText() + "' children=" + c.getChildren().size());
+                System.err.println("  child: type=" + c.getType() + " text='" + c.getText() + "' children=" + (c.getChildren() == null ? "NULL" : c.getChildren().size()));
+                if (c.getChildren() != null) {
+                    for (ASTNode cc : c.getChildren()) {
+                        System.err.println("    sub: type=" + cc.getType() + " text='" + cc.getText() + "'");
+                    }
+                }
             }
         }
 
         if (children.isEmpty() && (text == null || text.isEmpty())) return null;
         if (children.isEmpty()) return parseScalar(type, text);
-
         switch (type) {
-            case "yaml":
+            case "yaml": {
+                YamlMap m = new YamlMap();
+                List<ASTNode> kids = node.getChildren();
+                return m;
+            }
             case "document":
-                return !children.isEmpty() ? astToJava(children.get(0)) : null;
             case "blockMap":
             case "map":
                 return astToMap(node);
@@ -191,8 +168,19 @@ public class YamlG4Parser {
             case "blockScalar":
                 return text != null ? text.trim() : null;
             case "pair":
+                return astToPair(node);
             case "mapPair":
+            case "keyScalar":
                 return !children.isEmpty() ? astToJava(children.get(0)) : null;
+            case "valueToken":
+                // valueToken 可能是 Colon（空值），跳过它
+                for (ASTNode child : children) {
+                    String ct = child.getType();
+                    if (!ct.equals("Colon") && !ct.equals("EOL") && !ct.equals("Space")) {
+                        return astToJava(child);
+                    }
+                }
+                return null;
             default:
                 if (children.size() == 1) return astToJava(children.get(0));
                 if (text != null && !text.isEmpty()) return parseScalar(type, text);
@@ -208,6 +196,37 @@ public class YamlG4Parser {
             if (key != null) map.put(String.valueOf(key), val);
         }
         return map;
+    }
+
+    /**
+     * 提取 pair 的 key 和 value，返回 Map.Entry 或 Pair 对象
+     * pair = keyScalar Colon valueToken | keyScalar Colon LBrace ... | ...
+     * children = [keyScalar, Colon, valueToken] or [keyScalar, Colon]
+     */
+    private Object astToPair(ASTNode pairNode) {
+        Object key = null;
+        Object value = null;
+        for (ASTNode child : pairNode.getChildren()) {
+            String ctype = child.getType();
+            if (ctype.equals("Colon") || ctype.equals("EOL") || ctype.equals("Space")) continue;
+            if (ctype.equals("Scalar") || ctype.equals("DqString") || ctype.equals("SqString")
+                    || ctype.equals("Number") || ctype.equals("Bool") || ctype.equals("Null")
+                    || ctype.equals("keyScalar")) {
+                if (key == null) {
+                    key = parseScalar(ctype, child.getText());
+                } else {
+                    value = astToJava(child);
+                }
+            } else {
+                if (key == null) {
+                    key = child.getType();
+                } else {
+                    value = astToJava(child);
+                }
+            }
+        }
+        // 返回简单 pair 的情况
+        return key;
     }
 
     private YamlArray astToSeq(ASTNode node) {
@@ -227,8 +246,10 @@ public class YamlG4Parser {
     }
 
     private Object extractValue(ASTNode pairNode) {
-        for (ASTNode child : pairNode.getChildren()) {
-            if (!isKeyLike(child)) return astToJava(child);
+        // pair = [keyScalar, valueToken]，直接取第二个子节点
+        List<ASTNode> children = pairNode.getChildren();
+        if (children != null && children.size() >= 2) {
+            return astToJava(children.get(1));
         }
         return null;
     }
@@ -237,7 +258,8 @@ public class YamlG4Parser {
         String t = node.getType();
         if (t == null) return false;
         return t.equals("keyNode") || t.equals("blockKey") || t.equals("plainScalar")
-            || t.equals("DqString") || t.equals("SqString");
+            || t.equals("DqString") || t.equals("SqString") || t.equals("keyScalar")
+            || t.equals("Scalar");
     }
 
     private Object parseScalar(String type, String text) {
