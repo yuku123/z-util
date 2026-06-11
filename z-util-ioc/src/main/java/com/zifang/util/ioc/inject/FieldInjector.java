@@ -39,14 +39,14 @@ public class FieldInjector {
                 "Cannot resolve dependency for field '" + field.getName() +
                 "' of type " + type.getName() + " in " + target.getClass().getName());
         }
-        boolean accessible = field.canAccess(target);
+        boolean wasAccessible = field.isAccessible();
         field.setAccessible(true);
         try {
             field.set(target, value);
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Failed to inject field: " + field, e);
         } finally {
-            field.setAccessible(accessible);
+            field.setAccessible(wasAccessible);
         }
     }
 }
