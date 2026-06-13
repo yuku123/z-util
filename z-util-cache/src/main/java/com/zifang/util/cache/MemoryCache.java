@@ -36,6 +36,9 @@ public class MemoryCache<K, V> implements Cache<K, V> {
     private final long cleanupIntervalNanos;
     private final boolean recordStats;
     private final Set<RemovalListener<K, V>> listeners;
+    private final long refreshAfterWriteNanos;
+    private final boolean nullValueProtection;
+    private final Expiry<K, V> expiry;
 
     private final LinkedHashMap<K, Node<K, V>> data;
     private final CacheStats stats = new CacheStats();
@@ -53,7 +56,10 @@ public class MemoryCache<K, V> implements Cache<K, V> {
         this.maximumSize = b.getMaximumSize();
         this.expireAfterWriteNanos = b.getExpireAfterWriteNanos();
         this.expireAfterAccessNanos = b.getExpireAfterAccessNanos();
+        this.refreshAfterWriteNanos = b.getRefreshAfterWriteNanos();
         this.recordStats = b.isRecordStats();
+        this.nullValueProtection = b.isNullValueProtection();
+        this.expiry = b.getExpiry();
         this.listeners = Collections.unmodifiableSet(new java.util.LinkedHashSet<>(b.getListeners()));
         int cap = (int) Math.min(b.getInitialCapacity(), Integer.MAX_VALUE);
         this.data = new LinkedHashMap<>(cap, 0.75f, true);
@@ -231,6 +237,7 @@ public class MemoryCache<K, V> implements Cache<K, V> {
             if (n != null && !isExpired(n)) {
                 touchAccess(n);
                 if (recordStats) stats.recordHit();
+                // refresh 路径：返回旧值 + 标记后台刷新（由 LoadingCache 接管，这里不抛错）
                 return n.value;
             }
             // 缺失或已过期
@@ -248,10 +255,18 @@ public class MemoryCache<K, V> implements Cache<K, V> {
             }
             // 加载
             V loaded = loadValue(key, loader);
-            if (loaded != null) {
+            if (loaded == null && nullValueProtection) {
+                // 击穿防护：缓存 NullValue 哨兵（短期，5 秒过期避免长期污染）
+                Node<K, V> sentinel = new Node<>();
+                sentinel.value = (V) NullValue.INSTANCE;
+                sentinel.writeNanos = System.nanoTime();
+                sentinel.accessNanos = sentinel.writeNanos;
+                sentinel.isNullSentinel = true;
+                data.put(key, sentinel);
+                approximateSize.incrementAndGet();
+                enforceCapacity();
+            } else if (loaded != null) {
                 putInternalLocked(key, loaded, true);
-            } else {
-                // loader 返回 null：不放入缓存
             }
             return loaded;
         }
@@ -275,7 +290,7 @@ public class MemoryCache<K, V> implements Cache<K, V> {
     private void putInternal(K key, V value, boolean fromLoader) {
         if (key == null) throw new IllegalArgumentException("key must not be null");
         if (value == null) {
-            // null value: 视作删除
+            // null value: 视作删除（除非开启 NullValue 防护，让外部明确传 NullValue.INSTANCE）
             remove(key);
             return;
         }
@@ -290,6 +305,7 @@ public class MemoryCache<K, V> implements Cache<K, V> {
             old.value = value;
             old.writeNanos = System.nanoTime();
             old.accessNanos = old.writeNanos;
+            old.isNullSentinel = false;
             // accessOrder=true，重复 put 会把节点移到队尾（重新标记为最近使用）
             // 但要显式触发——get 会触发，put 不一定。这里手动 remove+put 强制刷新位置
             data.remove(key);
@@ -297,6 +313,7 @@ public class MemoryCache<K, V> implements Cache<K, V> {
             // 覆盖不触发 listener（语义：值更新，不算被移除）
         } else {
             Node<K, V> n = new Node<>();
+            n.key = key;
             n.value = value;
             n.writeNanos = System.nanoTime();
             n.accessNanos = n.writeNanos;
@@ -319,10 +336,27 @@ public class MemoryCache<K, V> implements Cache<K, V> {
     }
 
     private boolean isExpired(Node<K, V> n) {
+        // 自定义 Expiry 优先
+        if (expiry != null) {
+            long now = System.nanoTime();
+            java.time.Duration d = expiry.expireAfterUpdate(n.key, n.value, now);
+            if (d != null && d.toNanos() > 0 && now - n.writeNanos >= d.toNanos()) return true;
+            d = expiry.expireAfterRead(n.key, n.value, now);
+            if (d != null && d.toNanos() > 0 && now - n.accessNanos >= d.toNanos()) return true;
+            return false;
+        }
         long now = System.nanoTime();
         if (expireAfterWriteNanos > 0 && now - n.writeNanos >= expireAfterWriteNanos) return true;
         if (expireAfterAccessNanos > 0 && now - n.accessNanos >= expireAfterAccessNanos) return true;
         return false;
+    }
+
+    /**
+     * 是否到达 refresh 阈值（返回旧值 + 触发后台 reload）。仅在 refreshAfterWriteNanos > 0 时评估。
+     */
+    private boolean needsRefresh(Node<K, V> n) {
+        if (refreshAfterWriteNanos <= 0) return false;
+        return System.nanoTime() - n.writeNanos >= refreshAfterWriteNanos;
     }
 
     private void touchAccess(Node<K, V> n) {
@@ -370,8 +404,10 @@ public class MemoryCache<K, V> implements Cache<K, V> {
 
     /** 内部节点。value 可变，write/access 时间戳用于过期判定。 */
     private static final class Node<K, V> {
+        K key;                       // 冗余存 key（Expiry 需要按 key 计算）
         volatile V value;
         volatile long writeNanos;
         volatile long accessNanos;
+        volatile boolean isNullSentinel;
     }
 }

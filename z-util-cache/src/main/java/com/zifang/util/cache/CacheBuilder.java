@@ -144,7 +144,10 @@ public class CacheBuilder<K, V> {
     long getMaximumSize() { return maximumSize; }
     long getExpireAfterWriteNanos() { return expireAfterWriteNanos; }
     long getExpireAfterAccessNanos() { return expireAfterAccessNanos; }
+    long getRefreshAfterWriteNanos() { return refreshAfterWriteNanos; }
     long getInitialCapacity() { return initialCapacity; }
     boolean isRecordStats() { return recordStats; }
+    boolean isNullValueProtection() { return nullValueProtection; }
+    Expiry<K, V> getExpiry() { return expiry; }
     Set<RemovalListener<K, V>> getListeners() { return listeners; }
 }

@@ -10,27 +10,28 @@ import java.time.Duration;
  * @param <K> 键类型
  * @param <V> 值类型
  */
-@FunctionalInterface
 public interface Expiry<K, V> {
 
     /**
      * 条目创建后多久过期。返回 {@link Duration#ZERO} 或负值表示永不过期。
      */
-    default Duration expireAfterCreate(K key, V value) {
-        return Duration.ofNanos(Long.MAX_VALUE);
-    }
+    Duration expireAfterCreate(K key, V value);
 
     /**
      * 条目最近一次读/写后多久过期。
      */
-    default Duration expireAfterUpdate(K key, V value, long currentTimeNanos) {
-        return expireAfterCreate(key, value);
-    }
+    Duration expireAfterUpdate(K key, V value, long currentTimeNanos);
 
     /**
      * 条目最近一次读后多久过期。
      */
-    default Duration expireAfterRead(K key, V value, long currentTimeNanos) {
-        return currentTimeNanos == 0 ? Duration.ofNanos(Long.MAX_VALUE) : Duration.ofNanos(Long.MAX_VALUE);
-    }
+    Duration expireAfterRead(K key, V value, long currentTimeNanos);
+
+    /** 永不过期的便利实现。 */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    Expiry NEVER = new Expiry() {
+        @Override public Duration expireAfterCreate(Object k, Object v) { return Duration.ofNanos(Long.MAX_VALUE); }
+        @Override public Duration expireAfterUpdate(Object k, Object v, long t) { return Duration.ofNanos(Long.MAX_VALUE); }
+        @Override public Duration expireAfterRead(Object k, Object v, long t) { return Duration.ofNanos(Long.MAX_VALUE); }
+    };
 }
