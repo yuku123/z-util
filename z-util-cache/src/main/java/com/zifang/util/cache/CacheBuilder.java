@@ -33,8 +33,11 @@ public class CacheBuilder<K, V> {
     private long maximumSize = -1L;            // -1 表示无界
     private long expireAfterWriteNanos = -1L;  // -1 表示不过期
     private long expireAfterAccessNanos = -1L; // -1 表示不过期
+    private long refreshAfterWriteNanos = -1L; // -1 表示不刷新
     private long initialCapacity = 16;
     private boolean recordStats = false;
+    private boolean nullValueProtection = false;
+    private Expiry<K, V> expiry = null;          // 自定义过期
     private final Set<RemovalListener<K, V>> listeners = new HashSet<>();
 
     private CacheBuilder() {}
@@ -89,6 +92,34 @@ public class CacheBuilder<K, V> {
 
     public CacheBuilder<K, V> addListener(RemovalListener<K, V> listener) {
         if (listener != null) this.listeners.add(listener);
+        return this;
+    }
+
+    /**
+     * 写入后多久"软过期"——访问时仍返回旧值，但异步触发 reload。
+     * 注意：必须配合 {@code build(loader)} 一起用才有效（纯 {@code build()} 时与 expireAfterWrite 行为一致）。
+     */
+    public CacheBuilder<K, V> refreshAfterWrite(Duration duration) {
+        this.refreshAfterWriteNanos = duration == null ? -1L : duration.toNanos();
+        return this;
+    }
+
+    /**
+     * 启用 NullValue 击穿防护：loader 返回 null 时缓存 {@link NullValue#INSTANCE}，避免
+     * 恶意/不存在 key 反复穿透到下游。
+     */
+    public CacheBuilder<K, V> nullValueProtection() {
+        this.nullValueProtection = true;
+        return this;
+    }
+
+    /**
+     * 自定义过期策略（与 expireAfterWrite/expireAfterAccess 互斥；同时设置时优先 Expiry）。
+     */
+    public CacheBuilder<K, V> expireAfter(Expiry<? super K, ? super V> expiry) {
+        @SuppressWarnings("unchecked")
+        Expiry<K, V> cast = (Expiry<K, V>) expiry;
+        this.expiry = cast;
         return this;
     }
 
