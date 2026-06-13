@@ -38,6 +38,7 @@ public class CacheBuilder<K, V> {
     private boolean recordStats = false;
     private boolean nullValueProtection = false;
     private Expiry<K, V> expiry = null;          // 自定义过期
+    private Algorithm algorithm = Algorithm.LRU; // 淘汰算法（默认 LRU）
     private final Set<RemovalListener<K, V>> listeners = new HashSet<>();
 
     private CacheBuilder() {}
@@ -124,9 +125,28 @@ public class CacheBuilder<K, V> {
     }
 
     /**
+     * 缓存淘汰算法选择（默认 {@link Algorithm#LRU}）。
+     * <ul>
+     *   <li>LRU：标准最近最少使用（{@link MemoryCache}）</li>
+     *   <li>WTINYLFU：自研 W-TinyLFU（Window + Main LRU + 4-bit Count-Min Sketch），
+     *       抗扫描（scan resistant）、高命中率。容量 ≤ 1 时回退到 LRU。</li>
+     * </ul>
+     */
+    public CacheBuilder<K, V> algorithm(Algorithm algorithm) {
+        this.algorithm = algorithm;
+        return this;
+    }
+
+    /** 缓存淘汰算法枚举。 */
+    public enum Algorithm { LRU, WTINYLFU }
+
+    /**
      * 构建一个普通 {@link Cache}。
      */
     public Cache<K, V> build() {
+        if (algorithm == Algorithm.WTINYLFU) {
+            return new WTinyLfuCache<>(this);
+        }
         return new MemoryCache<>(this);
     }
 
@@ -134,7 +154,8 @@ public class CacheBuilder<K, V> {
      * 构建一个 {@link LoadingCache}，loader 在 key 缺失时被调用。
      */
     public LoadingCache<K, V> build(CacheLoader<K, V> loader) {
-        if (loader == null) throw new IllegalArgumentException("loader must not be null");
+        if (loader == null) throw new NullPointerException("loader must not be null");
+        // LoadingCache 暂不接入 W-TinyLFU
         return new LoadingMemoryCache<>(this, loader);
     }
 

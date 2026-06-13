@@ -24,6 +24,21 @@ public class CacheStats {
     public void recordEviction()    { evictionCount.increment(); }
     public void recordExpiration()  { expirationCount.increment(); }
 
+    /** 按移除原因分类计数。 */
+    public void recordRemoval(com.zifang.util.cache.RemovalListener.RemovalCause cause) {
+        if (cause == null) return;
+        switch (cause) {
+            case SIZE_LIMIT: case COLLECTED:
+                evictionCount.increment(); break;
+            case EXPIRED: case ACCESS_EXPIRED: case REPLACED:
+                expirationCount.increment(); break;
+            case EXPLICIT:
+            default:
+                // 不单独计
+                break;
+        }
+    }
+
     public long hitCount()          { return hitCount.sum(); }
     public long missCount()         { return missCount.sum(); }
     public long loadSuccessCount()  { return loadSuccessCount.sum(); }
