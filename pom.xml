@@ -62,6 +62,10 @@
         <module>z-util-jwt</module>
         <module>z-util-ratelimit</module>
         <module>z-util-lock</module>
+        <module>z-util-trace</module>
+        <module>z-util-resilience</module>
+        <module>z-util-feature</module>
+        <module>z-util-bean</module>
 
         <module>z-util-all</module>
     </modules>
