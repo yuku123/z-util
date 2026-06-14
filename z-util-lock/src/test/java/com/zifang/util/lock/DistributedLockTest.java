@@ -1,7 +1,5 @@
 package com.zifang.util.lock;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.nio.file.Files;
@@ -10,37 +8,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
 
-/** 自研分布式锁测试（用 H2 in-memory 测 DB 锁）。 */
+/**
+ * 文件锁测试（自研，对标 Redisson FileLock）。
+ * <p>
+ * DB 分布式锁已迁移到 z-util-jdbc 的 {@code com.zifang.util.db.lock.DbDistributedLock}。
+ */
 public class DistributedLockTest {
-
-    private static org.h2.jdbcx.JdbcDataSource DS;
-
-    @BeforeClass
-    public static void setupDb() throws Exception {
-        DS = new org.h2.jdbcx.JdbcDataSource();
-        DS.setURL("jdbc:h2:mem:locktest;DB_CLOSE_DELAY=-1");
-        DS.setUser("sa");
-        DS.setPassword("");
-        try (java.sql.Connection c = DS.getConnection();
-             java.sql.Statement s = c.createStatement()) {
-            s.execute("CREATE TABLE distributed_lock (" +
-                    "lock_key VARCHAR(128) PRIMARY KEY, " +
-                    "token VARCHAR(64) NOT NULL, " +
-                    "expire_at BIGINT NOT NULL)");
-        }
-    }
-
-    @AfterClass
-    public static void tearDown() throws Exception {
-        if (DS != null) {
-            try (java.sql.Connection c = DS.getConnection();
-                 java.sql.Statement s = c.createStatement()) {
-                s.execute("DROP ALL OBJECTS");
-            }
-        }
-    }
-
-    // ===== FileDistributedLock =====
 
     @Test
     public void testFileLock_mutualExclusion() throws Exception {
@@ -88,47 +61,5 @@ public class DistributedLockTest {
         for (Thread t : threads) t.start();
         for (Thread t : threads) t.join();
         assertTrue("expected at least 1 acquire, got " + acquired.get(), acquired.get() >= 1);
-    }
-
-    // ===== DbDistributedLock =====
-
-    @Test
-    public void testDbLock_acquireAndRelease() {
-        DbDistributedLock lock = new DbDistributedLock(DS, "order:create", 5000, DbDistributedLock.STANDARD);
-        String t1 = lock.tryLock();
-        assertNotNull(t1);
-        // 立即再抢（不等待）→ 应失败
-        String t2 = lock.tryLock();
-        assertNull("second acquire without wait should fail", t2);
-        // CAS 释放
-        assertTrue(lock.unlock(t1));
-        // 释放后能再拿
-        String t3 = lock.tryLock();
-        assertNotNull(t3);
-        assertTrue(lock.unlock(t3));
-    }
-
-    @Test
-    public void testDbLock_wait() throws Exception {
-        DbDistributedLock lock = new DbDistributedLock(DS, "order:pay", 200, DbDistributedLock.STANDARD);   // 200ms 过期
-        String t1 = lock.tryLock();
-        assertNotNull(t1);
-        // 等 300ms 让锁自动过期
-        Thread.sleep(300);
-        // 第二次应能拿到（基于 expire_at 判定过期）
-        String t2 = lock.tryLock();
-        assertNotNull("after expiration should re-acquire", t2);
-        lock.unlock(t2);
-    }
-
-    @Test
-    public void testDbLock_wrongTokenNotReleased() {
-        DbDistributedLock lock = new DbDistributedLock(DS, "any:key", 5000, DbDistributedLock.STANDARD);
-        String t1 = lock.tryLock();
-        assertNotNull(t1);
-        // 别人用错的 token 释放不了
-        assertFalse(lock.unlock("not-mine"));
-        // 自己还能正常释放
-        assertTrue(lock.unlock(t1));
     }
 }

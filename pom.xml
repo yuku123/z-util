@@ -82,6 +82,11 @@
                 <artifactId>z-util-monitor</artifactId>
                 <version>${util.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-lock</artifactId>
+                <version>${util.version}</version>
+            </dependency>
 
             
 

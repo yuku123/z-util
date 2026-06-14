@@ -1,4 +1,6 @@
-package com.zifang.util.lock;
+package com.zifang.util.db.lock;
+
+import com.zifang.util.lock.DistributedLock;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -14,8 +16,8 @@ import java.util.concurrent.ConcurrentMap;
  * <p>
  * 原理：每把锁对应一行 {@code (lock_key, token, expire_at)}。
  * <ul>
- *   <li>获取：{@code INSERT ... ON DUPLICATE KEY UPDATE}（MySQL）或 {@code MERGE}（其他库）
- *       ——若 row 不存在或持有 token 等于自己/已过期，则抢锁成功。</li>
+ *   <li>获取：查询现有 row；不存在则 INSERT；存在但已过期则 CAS UPDATE 抢锁；
+ *       存在且未过期则失败（除非是自己续期）。</li>
  *   <li>释放：{@code DELETE WHERE token = ?}（CAS 释放，删错就是别人）。</li>
  * </ul>
  * <p>
@@ -28,7 +30,10 @@ import java.util.concurrent.ConcurrentMap;
  *   );
  * }</pre>
  *
- * <p>此实现依赖 MySQL 方言。若用其它数据库，请扩展方言或自行实现类似接口。
+ * <h3>位置说明</h3>
+ * 本类归属 z-util-jdbc 模块：DB 锁天然依赖 DataSource / Connection 生命周期，
+ * 与 z-util-jdbc 的 connection pool / transaction 管理同源。z-util-lock 只保留
+ * 不依赖数据源的文件锁 / 进程锁实现。
  */
 public class DbDistributedLock implements DistributedLock {
 
@@ -108,7 +113,6 @@ public class DbDistributedLock implements DistributedLock {
             }
             // 2) 决定是 INSERT 还是 UPDATE
             if (currentToken == null) {
-                // 没有 row → INSERT
                 try (PreparedStatement ps = c.prepareStatement(
                         "INSERT INTO distributed_lock (lock_key, token, expire_at) VALUES (?, ?, ?)")) {
                     ps.setString(1, key);
@@ -145,26 +149,11 @@ public class DbDistributedLock implements DistributedLock {
                     return ps.executeUpdate() > 0;
                 }
             } else {
-                // 别人持锁且未过期 → 抢不到
                 return false;
             }
         } catch (SQLException e) {
             return false;
         }
-    }
-
-    private boolean verifyOwnership(Connection c, String token) throws SQLException {
-        try (PreparedStatement ps = c.prepareStatement("SELECT token, expire_at FROM distributed_lock WHERE lock_key = ?")) {
-            ps.setString(1, key);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    String t = rs.getString(1);
-                    long exp = rs.getLong(2);
-                    return token.equals(t) && exp > System.currentTimeMillis();
-                }
-            }
-        }
-        return false;
     }
 
     @Override
