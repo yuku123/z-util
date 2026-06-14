@@ -26,5 +26,10 @@
       <option name="name" value="maven-central" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="github" />
+      <option name="name" value="github" />
+      <option name="url" value="https://maven.pkg.github.com/yuku123/z-maven-repo" />
+    </remote-repository>
   </component>
 </project>

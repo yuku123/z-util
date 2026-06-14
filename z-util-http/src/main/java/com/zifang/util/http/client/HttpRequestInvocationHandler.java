@@ -3,7 +3,6 @@ package com.zifang.util.http.client;
 import com.zifang.util.http.base.define.RestController;
 import com.zifang.util.http.base.helper.HttpDefinitionSolver;
 import com.zifang.util.http.base.pojo.HttpRequestDefinition;
-import com.zifang.util.http.base.helper.HttpRequestProducer;
 import com.zifang.util.core.util.GsonUtil;
 
 import java.lang.reflect.InvocationHandler;
@@ -93,9 +92,9 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
         HttpRequestDefinition httpRequestDefinition = httpDefinitionSolver.getHttpRequestDefinition();
 
         // 4 产生请求
-        HttpRequestProducer httpRequestProducer = new HttpRequestProducer();
-        Object response = httpRequestProducer.produceRequest(httpRequestDefinition);
-        String jsonStr = String.valueOf(response);
+        HttpExecutor httpExecutor = HttpExecutor.getDefault();
+        HttpExecutionResult response = httpExecutor.execute(httpRequestDefinition);
+        String jsonStr = response.getBody() == null ? "" : response.getBody();
 
         // 如果返回类型是 String，处理 JSON 字符串值（可能带外层引号）
         if (method.getGenericReturnType() == String.class) {

@@ -3,7 +3,8 @@ package com.zifang.util.http.server;
 import com.zifang.util.http.base.define.RestController;
 import com.zifang.util.http.base.helper.HttpDefinitionSolver;
 import com.zifang.util.http.base.pojo.HttpRequestDefinition;
-import com.zifang.util.http.base.helper.HttpRequestProducer;
+import com.zifang.util.http.client.HttpExecutionResult;
+import com.zifang.util.http.client.HttpExecutor;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -66,9 +67,9 @@ public class HttpServerInvocationHandler implements InvocationHandler {
         // 3 获得标准请求定义
         HttpRequestDefinition httpRequestDefinition = httpDefinitionSolver.getHttpRequestDefinition();
 
-        // 4 产生请求
-        HttpRequestProducer httpRequestProducer = new HttpRequestProducer();
-        return httpRequestProducer.produceRequest(httpRequestDefinition);
+        // 4 产生请求（统一走 HttpExecutor，OkHttp 实现）
+        HttpExecutionResult result = HttpExecutor.getDefault().execute(httpRequestDefinition);
+        return result.isSuccess() ? result.getBody() : null;
 
     }
 
