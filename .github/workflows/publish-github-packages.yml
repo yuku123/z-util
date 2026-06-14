@@ -1,4 +1,12 @@
 # GitHub Actions: 发布 z-util 到 GitHub Packages
+#
+# 触发条件：
+#   - push main 或 master
+#   - 创建 v*.*.* tag
+#   - 手动触发 (workflow_dispatch)
+#
+# 所需 Secret（在 GitHub repo → Settings → Secrets and variables → Actions）：
+#   - MAVEN_GITHUB_TOKEN：GitHub PAT，至少需要 write:packages 权限
 name: Publish to GitHub Packages
 
 on:
@@ -7,7 +15,7 @@ on:
     tags: [ 'v*.*.*' ]
   workflow_dispatch:
 
-# 2023+ GitHub 默认 GITHUB_TOKEN 是 read-only，写 Packages 必须显式开 packages: write
+# GitHub 2023+ 默认 GITHUB_TOKEN 是 read-only，写 Packages 必须显式开 packages: write
 permissions:
   contents: read
   packages: write
@@ -29,15 +37,17 @@ jobs:
         run: mvn -B -DskipTests=true clean install
 
       - name: Write Maven settings.xml (GitHub Packages auth)
+        env:
+          MAVEN_GITHUB_TOKEN: ${{ secrets.MAVEN_GITHUB_TOKEN }}
         run: |
           mkdir -p ~/.m2
-          cat > ~/.m2/settings.xml <<'EOF'
+          cat > ~/.m2/settings.xml <<EOF
           <settings>
             <servers>
               <server>
                 <id>github</id>
                 <username>yuku123</username>
-                <password>${env.MAVEN_GITHUB_TOKEN}</password>
+                <password>${MAVEN_GITHUB_TOKEN}</password>
               </server>
             </servers>
           </settings>
