@@ -1,341 +1,142 @@
 package com.zifang.util.zex;
 
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.*;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import com.zifang.util.http.client.HttpExecutionResult;
+import com.zifang.util.http.client.HttpExecutor;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.*;
-import java.util.Map.Entry;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
- * HTTP客户端工具类。
+ * HTTP 客户端工具类。
  * <p>
- * 此类提供了发送HTTP请求的常用方法，包括GET、POST、PUT、DELETE等请求方式。
- * 内部使用Apache HttpClient实现，统一使用UTF-8编码格式。
+ * 提供 GET/POST/PUT/DELETE 等常用 HTTP 请求方法。
+ * 内部统一走 z-util-http 的 {@link HttpExecutor}（OkHttp 实现），与 z-opc 全栈保持一致。
  * <p>
- * 连接配置：
- * <ul>
- *   <li>连接超时时间：6000毫秒</li>
- *   <li>响应超时时间：6000毫秒</li>
- * </ul>
+ * 编码：UTF-8。
  *
  * @author zifang
- * @version 1.0
+ * @version 2.0  // migrated from Apache HttpClient to HttpExecutor
  */
 public class HttpClientUtils {
 
-    // 编码格式。发送编码格式统一用UTF-8
-    private static final String ENCODING = "UTF-8";
-
-    // 设置连接超时时间，单位毫秒。
-    private static final int CONNECT_TIMEOUT = 6000;
-
-    // 请求获取数据的超时时间(即响应时间)，单位毫秒。
-    private static final int SOCKET_TIMEOUT = 6000;
-
     /**
-     * 发送GET请求，不带请求头和请求参数。
-     *
-     * @param url 请求地址
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 GET 请求，不带请求头和请求参数。
      */
-    public static HttpClientResult doGet(String url) throws Exception {
+    public static HttpExecutionResult doGet(String url) throws Exception {
         return doGet(url, null, null);
     }
 
     /**
-     * 发送GET请求，带请求参数。
-     *
-     * @param url    请求地址
-     * @param params 请求参数Map
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 GET 请求，带请求参数。
      */
-    public static HttpClientResult doGet(String url, Map<String, String> params) throws Exception {
+    public static HttpExecutionResult doGet(String url, Map<String, String> params) throws Exception {
         return doGet(url, null, params);
     }
 
     /**
-     * 发送GET请求，带请求头和请求参数。
-     *
-     * @param url     请求地址
-     * @param headers 请求头Map
-     * @param params  请求参数Map
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 GET 请求，带请求头和请求参数。
      */
-    public static HttpClientResult doGet(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
-        // 创建httpClient对象
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-
-        // 创建访问的地址
-        URIBuilder uriBuilder = new URIBuilder(url);
-        if (params != null) {
-            Set<Entry<String, String>> entrySet = params.entrySet();
-            for (Entry<String, String> entry : entrySet) {
-                uriBuilder.setParameter(entry.getKey(), entry.getValue());
-            }
-        }
-
-        // 创建http对象
-        HttpGet httpGet = new HttpGet(uriBuilder.build());
-        /**
-         * setConnectTimeout：设置连接超时时间，单位毫秒。
-         * setConnectionRequestTimeout：设置从connect Manager(连接池)获取Connection
-         * 超时时间，单位毫秒。这个属性是新加的属性，因为目前版本是可以共享连接池的。
-         * setSocketTimeout：请求获取数据的超时时间(即响应时间)，单位毫秒。 如果访问一个接口，多少时间内无法返回数据，就直接放弃此次调用。
-         */
-        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(CONNECT_TIMEOUT).setSocketTimeout(SOCKET_TIMEOUT).build();
-        httpGet.setConfig(requestConfig);
-
-        // 设置请求头
-        packageHeader(headers, httpGet);
-
-        // 创建httpResponse对象
-        CloseableHttpResponse httpResponse = null;
-
-        try {
-            // 执行请求并获得响应结果
-            return getHttpClientResult(httpResponse, httpClient, httpGet);
-        } finally {
-            // 释放资源
-            release(httpResponse, httpClient);
-        }
+    public static HttpExecutionResult doGet(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
+        String fullUrl = appendQueryString(url, params);
+        return HttpExecutor.getDefault().executeByMethodUrl("GET", fullUrl, headers, null);
     }
 
     /**
-     * 发送POST请求，不带请求头和请求参数。
-     *
-     * @param url 请求地址
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 POST 请求，不带请求头和请求参数。
      */
-    public static HttpClientResult doPost(String url) throws Exception {
+    public static HttpExecutionResult doPost(String url) throws Exception {
         return doPost(url, null, null);
     }
 
     /**
-     * 发送POST请求，带请求参数。
-     *
-     * @param url    请求地址
-     * @param params 请求参数Map
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 POST 请求，带请求参数（form-encoded）。
      */
-    public static HttpClientResult doPost(String url, Map<String, String> params) throws Exception {
+    public static HttpExecutionResult doPost(String url, Map<String, String> params) throws Exception {
         return doPost(url, null, params);
     }
 
     /**
-     * 发送POST请求，带请求头和请求参数。
-     *
-     * @param url     请求地址
-     * @param headers 请求头Map
-     * @param params  请求参数Map
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 POST 请求，带请求头和请求参数（form-encoded）。
      */
-    public static HttpClientResult doPost(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
-        // 创建httpClient对象
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-
-        // 创建http对象
-        HttpPost httpPost = new HttpPost(url);
-        /**
-         * setConnectTimeout：设置连接超时时间，单位毫秒。
-         * setConnectionRequestTimeout：设置从connect Manager(连接池)获取Connection
-         * 超时时间，单位毫秒。这个属性是新加的属性，因为目前版本是可以共享连接池的。
-         * setSocketTimeout：请求获取数据的超时时间(即响应时间)，单位毫秒。 如果访问一个接口，多少时间内无法返回数据，就直接放弃此次调用。
-         */
-        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(CONNECT_TIMEOUT).setSocketTimeout(SOCKET_TIMEOUT).build();
-        httpPost.setConfig(requestConfig);
-        // 设置请求头
-		/*httpPost.setHeader("Cookie", "");
-		httpPost.setHeader("Connection", "keep-alive");
-		httpPost.setHeader("Accept", "application/json");
-		httpPost.setHeader("Accept-Language", "zh-CN,zh;q=0.9");
-		httpPost.setHeader("Accept-Encoding", "gzip, deflate, br");
-		httpPost.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");*/
-        packageHeader(headers, httpPost);
-
-        // 封装请求参数
-        packageParam(params, httpPost);
-
-        // 创建httpResponse对象
-        CloseableHttpResponse httpResponse = null;
-
-        try {
-            // 执行请求并获得响应结果
-            return getHttpClientResult(httpResponse, httpClient, httpPost);
-        } finally {
-            // 释放资源
-            release(httpResponse, httpClient);
-        }
+    public static HttpExecutionResult doPost(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
+        String body = formEncode(params);
+        Map<String, String> hh = withContentType(headers, "application/x-www-form-urlencoded");
+        return HttpExecutor.getDefault().executeByMethodUrl("POST", url, hh, body);
     }
 
     /**
-     * 发送PUT请求，不带请求参数。
-     *
-     * @param url 请求地址
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 PUT 请求，不带请求参数。
      */
-    public static HttpClientResult doPut(String url) throws Exception {
-        return doPut(url);
+    public static HttpExecutionResult doPut(String url) throws Exception {
+        return doPut(url, null);
     }
 
     /**
-     * 发送PUT请求，带请求参数。
-     *
-     * @param url    请求地址
-     * @param params 请求参数Map
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 PUT 请求，带请求参数（form-encoded）。
      */
-    public static HttpClientResult doPut(String url, Map<String, String> params) throws Exception {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpPut httpPut = new HttpPut(url);
-        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(CONNECT_TIMEOUT).setSocketTimeout(SOCKET_TIMEOUT).build();
-        httpPut.setConfig(requestConfig);
-
-        packageParam(params, httpPut);
-
-        CloseableHttpResponse httpResponse = null;
-
-        try {
-            return getHttpClientResult(httpResponse, httpClient, httpPut);
-        } finally {
-            release(httpResponse, httpClient);
-        }
+    public static HttpExecutionResult doPut(String url, Map<String, String> params) throws Exception {
+        String body = formEncode(params);
+        Map<String, String> hh = withContentType(null, "application/x-www-form-urlencoded");
+        return HttpExecutor.getDefault().executeByMethodUrl("PUT", url, hh, body);
     }
 
     /**
-     * 发送DELETE请求，不带请求参数。
-     *
-     * @param url 请求地址
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 DELETE 请求，不带请求参数。
      */
-    public static HttpClientResult doDelete(String url) throws Exception {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        HttpDelete httpDelete = new HttpDelete(url);
-        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(CONNECT_TIMEOUT).setSocketTimeout(SOCKET_TIMEOUT).build();
-        httpDelete.setConfig(requestConfig);
-
-        CloseableHttpResponse httpResponse = null;
-        try {
-            return getHttpClientResult(httpResponse, httpClient, httpDelete);
-        } finally {
-            release(httpResponse, httpClient);
-        }
+    public static HttpExecutionResult doDelete(String url) throws Exception {
+        return HttpExecutor.getDefault().executeByMethodUrl("DELETE", url, null, null);
     }
 
     /**
-     * 发送DELETE请求，带请求参数。
-     *
-     * @param url    请求地址
-     * @param params 请求参数Map
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果请求失败则抛出异常
+     * 发送 DELETE 请求，带请求参数。
+     * <p>
+     * 兼容旧实现：把 _method=delete 写入 form 参数，底层走 POST。
+     * 这是因为部分老后端只接受 form-encoded + POST 来实现"伪 DELETE"。
      */
-    public static HttpClientResult doDelete(String url, Map<String, String> params) throws Exception {
+    public static HttpExecutionResult doDelete(String url, Map<String, String> params) throws Exception {
         if (params == null) {
-            params = new HashMap<String, String>();
+            params = new java.util.HashMap<>();
         }
-
         params.put("_method", "delete");
         return doPost(url, params);
     }
 
-    /**
-     * 封装请求头。
-     *
-     * @param params     请求头参数Map
-     * @param httpMethod HTTP请求对象
-     */
-    public static void packageHeader(Map<String, String> params, HttpRequestBase httpMethod) {
-        // 封装请求头
-        if (params != null) {
-            Set<Entry<String, String>> entrySet = params.entrySet();
-            for (Entry<String, String> entry : entrySet) {
-                // 设置到请求头到HttpRequestBase对象中
-                httpMethod.setHeader(entry.getKey(), entry.getValue());
-            }
+    // ===================== 内部工具 =====================
+
+    private static String appendQueryString(String url, Map<String, String> params) {
+        if (params == null || params.isEmpty()) return url;
+        StringBuilder sb = new StringBuilder(url);
+        sb.append(url.contains("?") ? "&" : "?");
+        boolean first = true;
+        for (Map.Entry<String, String> e : params.entrySet()) {
+            if (!first) sb.append("&");
+            sb.append(URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8));
+            sb.append("=");
+            sb.append(URLEncoder.encode(e.getValue() == null ? "" : e.getValue(), StandardCharsets.UTF_8));
+            first = false;
         }
+        return sb.toString();
     }
 
-    /**
-     * 封装请求参数。
-     *
-     * @param params     请求参数Map
-     * @param httpMethod HTTP请求对象
-     * @throws UnsupportedEncodingException 如果编码不支持则抛出异常
-     */
-    public static void packageParam(Map<String, String> params, HttpEntityEnclosingRequestBase httpMethod)
-            throws UnsupportedEncodingException {
-        // 封装请求参数
-        if (params != null) {
-            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-            Set<Entry<String, String>> entrySet = params.entrySet();
-            for (Entry<String, String> entry : entrySet) {
-                nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-            }
-
-            // 设置到请求的http对象中
-            httpMethod.setEntity(new UrlEncodedFormEntity(nvps, ENCODING));
+    private static String formEncode(Map<String, String> params) {
+        if (params == null || params.isEmpty()) return "";
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for (Map.Entry<String, String> e : params.entrySet()) {
+            if (!first) sb.append("&");
+            sb.append(URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8));
+            sb.append("=");
+            sb.append(URLEncoder.encode(e.getValue() == null ? "" : e.getValue(), StandardCharsets.UTF_8));
+            first = false;
         }
+        return sb.toString();
     }
 
-    /**
-     * 获得响应结果。
-     *
-     * @param httpResponse HTTP响应对象
-     * @param httpClient   HTTP客户端对象
-     * @param httpMethod   HTTP请求对象
-     * @return HTTP响应结果封装对象
-     * @throws Exception 如果获取响应失败则抛出异常
-     */
-    public static HttpClientResult getHttpClientResult(CloseableHttpResponse httpResponse,
-                                                       CloseableHttpClient httpClient, HttpRequestBase httpMethod) throws Exception {
-        // 执行请求
-        httpResponse = httpClient.execute(httpMethod);
-
-        // 获取返回结果
-        if (httpResponse != null && httpResponse.getStatusLine() != null) {
-            String content = "";
-            if (httpResponse.getEntity() != null) {
-                content = EntityUtils.toString(httpResponse.getEntity(), ENCODING);
-            }
-            return new HttpClientResult(httpResponse.getStatusLine().getStatusCode(), content);
-        }
-        return new HttpClientResult(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+    private static Map<String, String> withContentType(Map<String, String> headers, String contentType) {
+        java.util.LinkedHashMap<String, String> m = new java.util.LinkedHashMap<>();
+        if (headers != null) m.putAll(headers);
+        m.put("Content-Type", contentType);
+        return m;
     }
-    
-    /**
-     * 释放资源。
-     *
-     * @param httpResponse HTTP响应对象
-     * @param httpClient   HTTP客户端对象
-     * @throws IOException 如果关闭流失败则抛出异常
-     */
-    public static void release(CloseableHttpResponse httpResponse, CloseableHttpClient httpClient) throws IOException {
-        // 释放资源
-        if (httpResponse != null) {
-            httpResponse.close();
-        }
-        if (httpClient != null) {
-            httpClient.close();
-        }
-    }
-
 }

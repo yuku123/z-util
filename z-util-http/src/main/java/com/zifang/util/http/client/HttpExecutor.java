@@ -229,12 +229,16 @@ public class HttpExecutor {
         String method = m == null ? "GET" : m.name();
         RequestBody body = null;
 
-        if (def.getHttpRequestBody() != null && def.getHttpRequestBody().getBody() != null
-                && ("POST".equalsIgnoreCase(method) || "PUT".equalsIgnoreCase(method)
-                || "PATCH".equalsIgnoreCase(method) || "DELETE".equalsIgnoreCase(method))) {
+        boolean bodyMethod = "POST".equalsIgnoreCase(method) || "PUT".equalsIgnoreCase(method)
+                || "PATCH".equalsIgnoreCase(method) || "DELETE".equalsIgnoreCase(method);
+        if (def.getHttpRequestBody() != null && def.getHttpRequestBody().getBody() != null && bodyMethod) {
             String text = new String(def.getHttpRequestBody().getBody(), StandardCharsets.UTF_8);
             MediaType mt = MediaType.parse(detectContentType(text));
             body = RequestBody.create(text, mt);
+        } else if (bodyMethod) {
+            // OkHttp 4.12 严格要求 POST/PUT/PATCH/DELETE 必须有非空 RequestBody。
+            // 调用方没传 body 时，回退到一个 0 字节 body，避免 IllegalArgumentException。
+            body = RequestBody.create(new byte[0], null);
         }
 
         Request.Builder rb = new Request.Builder().url(url);

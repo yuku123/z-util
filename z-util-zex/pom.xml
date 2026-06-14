@@ -21,6 +21,11 @@
             <artifactId>z-util-proxy</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-http</artifactId>
+            <version>${util.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.dozermapper</groupId>
             <artifactId>dozer-core</artifactId>
         </dependency>

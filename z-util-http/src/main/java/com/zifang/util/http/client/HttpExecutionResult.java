@@ -42,7 +42,10 @@ public class HttpExecutionResult {
 
     public static HttpExecutionResult ok(int status, Map<String, String> headers, String body, long durationMs) {
         HttpExecutionResult r = new HttpExecutionResult();
-        r.success = status >= 200 && status < 400;
+        // ok() 表示"HTTP 调用本身完成了"（未抛异常、拿到了 Response）。
+        // 状态码语义（2xx/4xx/5xx）是业务侧的事，调用方应根据 r.getStatus() 自行判断。
+        // 因此 success 始终为 true，5xx 不会让 isSuccess()=false。
+        r.success = true;
         r.status = status;
         r.headers = headers == null ? new LinkedHashMap<>() : headers;
         r.body = body;
@@ -72,6 +75,7 @@ public class HttpExecutionResult {
         HttpExecutionResult r = new HttpExecutionResult();
         r.success = true;
         r.status = 200;
+        r.source = "SSE";
         r.context.put("event", event);
         r.body = data;
         return r;
