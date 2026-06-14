@@ -66,6 +66,7 @@
         <module>z-util-resilience</module>
         <module>z-util-feature</module>
         <module>z-util-bean</module>
+        <module>z-util-e2e</module>
 
         <module>z-util-all</module>
     </modules>
@@ -85,6 +86,56 @@
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-lock</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-distribute</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-cache</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-aop</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-trace</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-ratelimit</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-resilience</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-feature</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-bean</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-jwt</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-jdbc</artifactId>
                 <version>${util.version}</version>
             </dependency>
 
