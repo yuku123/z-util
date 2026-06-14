@@ -24,6 +24,14 @@
         </repository>
     </distributionManagement>
 
+    <!-- GitHub Packages 仓库认证（使用环境变量 MAVEN_GITHUB_TOKEN / GITHUB_TOKEN） -->
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/yuku123/z-maven-repo</url>
+        </repository>
+    </repositories>
+
     <modules>
         <module>z-util-core</module>
         <module>z-util-office</module>
@@ -50,6 +58,10 @@
         <module>z-util-validation</module>
         <module>z-util-cache</module>
         <module>z-util-ioc</module>
+        <module>z-util-aop</module>
+        <module>z-util-jwt</module>
+        <module>z-util-ratelimit</module>
+        <module>z-util-lock</module>
 
         <module>z-util-all</module>
     </modules>

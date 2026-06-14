@@ -1,0 +1,44 @@
+# GitHub Actions: 发布 z-util 到 GitHub Packages
+#
+# 触发条件：
+#   - push main 或 master
+#   - 创建 v*.*.* tag
+#
+# 所需 Secret（在 GitHub repo → Settings → Secrets → Actions）：
+#   - MAVEN_GITHUB_TOKEN：GitHub PAT，至少需要 write:packages 权限
+#     (或用官方的 GITHUB_TOKEN——但官方 token 默认对当前 repo 之外的 workflow 没 write:packages，
+#      推荐用 PAT)
+name: Publish to GitHub Packages
+
+on:
+  push:
+    branches: [ main, master ]
+    tags: [ 'v*.*.*' ]
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+
+      - name: Build (skip tests for speed on PR-style push)
+        run: mvn -B -DskipTests=true clean install
+        # 注：CI 上用 mvn verify 跑测试可放后面单独 workflow；这里先保证 release 可发
+
+      - name: Publish to GitHub Packages
+        run: mvn -B -DskipTests=true deploy
+        env:
+          MAVEN_GITHUB_TOKEN: ${{ secrets.MAVEN_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build success notification
+        if: success()
+        run: echo "✅ Published z-util to https://maven.pkg.github.com/yuku123/z-maven-repo"
