@@ -15,7 +15,7 @@ import java.util.Map;
  *   <li>key with no value</li>
  *   <li>空白行</li>
  *   <li>转义字符：\\t \\n \\r \\" \\\\</li>
- *   <li>Unicode 转义：\\uXXXX 格式</li>
+ *   <li>Unicode 转义：\\u005CuXXXX 格式</li>
  *   <li>多行续行：行尾反斜杠</li>
  * </ul>
  *
@@ -477,7 +477,7 @@ public class PropertiesParser extends java.util.Properties {
                     break;
                 default:
                     if (c < 0x20 || c > 0x7e) {
-                        sb.append("\\u");
+                        sb.append("\\u005Cu");
                         String hex = Integer.toHexString(c);
                         while (hex.length() < 4) {
                             hex = "0" + hex;

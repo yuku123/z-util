@@ -1445,13 +1445,13 @@ public class StringUtil {
      */
     public static String unicodeEscaped(char ch) {
         if (ch < 0x10) {
-            return "\\u000" + Integer.toHexString(ch);
+            return "\\u005Cu000" + Integer.toHexString(ch);
         } else if (ch < 0x100) {
-            return "\\u00" + Integer.toHexString(ch);
+            return "\\u005Cu00" + Integer.toHexString(ch);
         } else if (ch < 0x1000) {
-            return "\\u0" + Integer.toHexString(ch);
+            return "\\u005Cu0" + Integer.toHexString(ch);
         }
-        return "\\u" + Integer.toHexString(ch);
+        return "\\u005Cu" + Integer.toHexString(ch);
     }
 
     /**
@@ -1486,7 +1486,7 @@ public class StringUtil {
     public static String string2Unicode(String string) {
         StringBuilder uni = new StringBuilder();
         for (int i = 0; i < string.length(); i++) {
-            String temp = "\\u" + Integer.toHexString(string.charAt(i));
+            String temp = "\\u005Cu" + Integer.toHexString(string.charAt(i));
             uni.append(temp);
         }
         return uni.toString();
@@ -1499,7 +1499,7 @@ public class StringUtil {
      */
     public static String unicode2String(String unicode) {
         StringBuilder str = new StringBuilder();
-        String[] hex = unicode.split("\\\\u");
+        String[] hex = unicode.split("\\\\u005Cu");
         for (int i = 1; i < hex.length; i++) {
             int data = Integer.parseInt(hex[i], 16);
             str.append((char) data);

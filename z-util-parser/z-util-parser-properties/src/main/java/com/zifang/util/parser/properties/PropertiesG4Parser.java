@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
  * 无任何第三方依赖。
  * <p>
  * 支持：key=value、key:value、注释（# 或 !）、空行。
- * 转义序列（\\t \\n \\r \\" \\\\ \\uXXXX）和续行（行尾 \\）由本类在 AST 转换时处理。
+ * 转义序列（\\t \\n \\r \\" \\\\ \\u005CuXXXX）和续行（行尾 \\）由本类在 AST 转换时处理。
  */
 /**
  * PropertiesG4Parser类。

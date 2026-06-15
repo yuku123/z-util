@@ -95,7 +95,7 @@ public final class Jwt {
                     sb.append("\\t");
                     break;
                 default:
-                    if (c < 0x20) sb.append(String.format("\\u%04x", (int) c));
+                    if (c < 0x20) sb.append(String.format("\\u005Cu%04x", (int) c));
                     else sb.append(c);
             }
         }

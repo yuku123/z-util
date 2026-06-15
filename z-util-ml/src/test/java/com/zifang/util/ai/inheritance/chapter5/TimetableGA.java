@@ -1,4 +1,4 @@
-package com.zifang.util.ml.inheritance.chapter5;
+package com.zifang.util.ai.inheritance.chapter5;
 
 /**
  * Don't be daunted by the number of classes in this chapter -- most of them are
@@ -27,7 +27,7 @@ package com.zifang.util.ml.inheritance.chapter5;
  * @author zifang
  */
 
-import java.lang.Class;
+import java.util.Random;
 
 /**
  * TimetableGA类。

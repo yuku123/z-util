@@ -24,7 +24,7 @@ public class FilePathUtilTest {
      * testGetNameWithWindowsPath方法。
      */
     public void testGetNameWithWindowsPath() {
-        assertEquals("file.txt", FilePathUtil.getName("C:\\Users\\user\\file.txt"));
+        assertEquals("file.txt", FilePathUtil.getName("C:\\Users\\u005Cuser\\file.txt"));
     }
 
     @Test
@@ -166,7 +166,7 @@ public class FilePathUtilTest {
      * testGetParentWithWindowsPath方法。
      */
     public void testGetParentWithWindowsPath() {
-        assertEquals("C:\\Users\\user", FilePathUtil.getParent("C:\\Users\\user\\file.txt"));
+        assertEquals("C:\\Users\\u005Cuser", FilePathUtil.getParent("C:\\Users\\u005Cuser\\file.txt"));
     }
 
     @Test
@@ -238,7 +238,7 @@ public class FilePathUtilTest {
      * testToUNIXPathWithWindowsPath方法。
      */
     public void testToUNIXPathWithWindowsPath() {
-        String result = FilePathUtil.toUNIXPath("C:\\Users\\user\\file.txt");
+        String result = FilePathUtil.toUNIXPath("C:\\Users\\u005Cuser\\file.txt");
         assertEquals("C:/Users/user/file.txt", result);
     }
 
@@ -274,7 +274,7 @@ public class FilePathUtilTest {
      * testGetPrefixWithWindowsDriveLetter方法。
      */
     public void testGetPrefixWithWindowsDriveLetter() {
-        String prefix = FilePathUtil.getPrefix("C:\\Users\\user\\file.txt");
+        String prefix = FilePathUtil.getPrefix("C:\\Users\\u005Cuser\\file.txt");
         assertEquals("C:\\", prefix);
     }
 

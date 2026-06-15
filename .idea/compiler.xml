@@ -7,16 +7,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for z-util" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+        </processorPath>
         <module name="z-util-crawler" />
         <module name="z-util-distribute" />
-        <module name="z-util-proxy" />
         <module name="z-util-parser-json" />
+        <module name="z-util-proxy" />
         <module name="z-util-expr-lua" />
         <module name="z-util-jdbc" />
         <module name="z-util-parser-csv" />
         <module name="z-util-expr-groovy" />
-        <module name="z-util-visualization" />
         <module name="z-util-parser-properties" />
+        <module name="z-util-visualization" />
         <module name="z-util-monitor" />
         <module name="z-util-workflow" />
         <module name="z-util-expr-js" />
@@ -35,8 +43,8 @@
         <module name="z-util-parser-toml" />
         <module name="z-util-expr-sql" />
         <module name="z-util-parser-ini" />
-        <module name="z-util-parser-xml" />
         <module name="z-util-e2e" />
+        <module name="z-util-parser-xml" />
         <module name="z-util-devops" />
         <module name="z-util-http" />
         <module name="z-util-validation" />

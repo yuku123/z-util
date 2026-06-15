@@ -141,7 +141,7 @@ final class JsonParser {
                         sb.append('\f');
                         break;
                     case 'u':
-                        if (pos + 4 > s.length()) throw new IllegalArgumentException("bad \\u");
+                        if (pos + 4 > s.length()) throw new IllegalArgumentException("bad \\u005Cu");
                         sb.append((char) Integer.parseInt(s.substring(pos, pos + 4), 16));
                         pos += 4;
                         break;

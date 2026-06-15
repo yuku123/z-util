@@ -490,7 +490,7 @@ public class PropertiesParserTest {
      * testMultipleBackslashes方法。
      */
     public void testMultipleBackslashes() {
-        String input = "single=c:\\\\path\ndouble=before\\\\\\\\after\npath=c:\\\\users\\\\name";
+        String input = "single=c:\\\\path\ndouble=before\\\\\\\\after\npath=c:\\\\u005Cusers\\\\name";
         PropertiesModel model = parser.parse(input);
 
         // single backslash should remain as one
@@ -498,6 +498,6 @@ public class PropertiesParserTest {
         // double backslash should become one
         Assert.assertEquals("before\\\\after", model.getProperty("double"));
         // path style
-        Assert.assertEquals("c:\\users\\name", model.getProperty("path"));
+        Assert.assertEquals("c:\\u005Cusers\\name", model.getProperty("path"));
     }
 }

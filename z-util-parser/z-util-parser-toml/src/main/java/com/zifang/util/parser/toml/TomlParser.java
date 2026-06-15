@@ -466,7 +466,7 @@ public class TomlParser {
         try {
             return String.valueOf((char) Integer.parseInt(hex, 16));
         } catch (NumberFormatException e) {
-            throw new TomlException("行 " + line + ": 无效的 Unicode 转义序列 \\u" + hex);
+            throw new TomlException("行 " + line + ": 无效的 Unicode 转义序列 \\u005Cu" + hex);
         }
     }
 
