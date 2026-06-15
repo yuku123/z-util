@@ -15,6 +15,20 @@ public class SortKnown {
 
     static Pattern pattern = Pattern.compile("[0-9]*");
 
+    /**
+     * isStartWithNumber方法。
+     * * @param str String类型参数
+     *
+     * @return static boolean类型返回值
+     */
+    public static boolean isStartWithNumber(String str) {
+        Matcher isNum = pattern.matcher(str.charAt(0) + "");
+        if (!isNum.matches()) {
+            return false;
+        }
+        return true;
+    }
+
     @Test
     /**
      * showKnown方法。
@@ -94,20 +108,6 @@ public class SortKnown {
         strings.sort(Comparator.naturalOrder());
 
         return strings;
-    }
-
-
-    /**
-     * isStartWithNumber方法。
-     *      * @param str String类型参数
-     * @return static boolean类型返回值
-     */
-    public static boolean isStartWithNumber(String str) {
-        Matcher isNum = pattern.matcher(str.charAt(0) + "");
-        if (!isNum.matches()) {
-            return false;
-        }
-        return true;
     }
 
 }

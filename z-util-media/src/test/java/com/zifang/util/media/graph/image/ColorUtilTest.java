@@ -1,7 +1,9 @@
 package com.zifang.util.media.graph.image;
 
 import org.junit.Test;
-import java.awt.Color;
+
+import java.awt.*;
+
 import static org.junit.Assert.*;
 
 /**

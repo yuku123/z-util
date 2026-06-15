@@ -8,13 +8,6 @@ package com.zifang.util.devops.git.operations.core;
  */
 public class GitTag {
 
-/**
- * Type枚举。
- */
-    public enum Type {
-        LIGHTWEIGHT, ANNOTATED
-    }
-
     private String name;
     private String sha;
     private String message;
@@ -23,6 +16,7 @@ public class GitTag {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -31,7 +25,7 @@ public class GitTag {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -39,6 +33,7 @@ public class GitTag {
 
     /**
      * getSha方法。
+     *
      * @return String类型返回值
      */
     public String getSha() {
@@ -47,7 +42,7 @@ public class GitTag {
 
     /**
      * setSha方法。
-     *      * @param sha String类型参数
+     * * @param sha String类型参数
      */
     public void setSha(String sha) {
         this.sha = sha;
@@ -55,6 +50,7 @@ public class GitTag {
 
     /**
      * getMessage方法。
+     *
      * @return String类型返回值
      */
     public String getMessage() {
@@ -63,7 +59,7 @@ public class GitTag {
 
     /**
      * setMessage方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public void setMessage(String message) {
         this.message = message;
@@ -71,6 +67,7 @@ public class GitTag {
 
     /**
      * getTagger方法。
+     *
      * @return GitAuthor类型返回值
      */
     public GitAuthor getTagger() {
@@ -79,7 +76,7 @@ public class GitTag {
 
     /**
      * setTagger方法。
-     *      * @param tagger GitAuthor类型参数
+     * * @param tagger GitAuthor类型参数
      */
     public void setTagger(GitAuthor tagger) {
         this.tagger = tagger;
@@ -87,6 +84,7 @@ public class GitTag {
 
     /**
      * getType方法。
+     *
      * @return Type类型返回值
      */
     public Type getType() {
@@ -95,7 +93,7 @@ public class GitTag {
 
     /**
      * setType方法。
-     *      * @param type Type类型参数
+     * * @param type Type类型参数
      */
     public void setType(Type type) {
         this.type = type;
@@ -108,5 +106,12 @@ public class GitTag {
      */
     public String toString() {
         return (type == Type.ANNOTATED ? "[annotated] " : "") + name + " " + sha;
+    }
+
+    /**
+     * Type枚举。
+     */
+    public enum Type {
+        LIGHTWEIGHT, ANNOTATED
     }
 }

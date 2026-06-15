@@ -1,7 +1,5 @@
 package com.zifang.util.core.lang.primitive;
 
-import java.util.Arrays;
-
 /**
  * Float 工具类。
  * <p>

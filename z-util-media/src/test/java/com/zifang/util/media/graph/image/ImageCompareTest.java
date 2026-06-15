@@ -1,12 +1,10 @@
 package com.zifang.util.media.graph.image;
 
 import org.junit.Test;
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
 import static org.junit.Assert.*;
 
 /**

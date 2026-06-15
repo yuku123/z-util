@@ -75,7 +75,7 @@ public class Linalg {
         // Matrix multiplication: (m,n) dot (n,p) = (m,p)
         if (aCols != bRows) {
             throw new IllegalArgumentException(
-                "Matrix dimensions incompatible for dot product: " + aCols + " != " + bRows);
+                    "Matrix dimensions incompatible for dot product: " + aCols + " != " + bRows);
         }
 
         double[][] result = new double[aRows][bCols];
@@ -419,7 +419,8 @@ public class Linalg {
 
     /**
      * norm方法。
-     *      * @param a NdArray类型参数
+     * * @param a NdArray类型参数
+     *
      * @return static double类型返回值
      */
     public static double norm(NdArray a) {
@@ -495,9 +496,9 @@ public class Linalg {
         }
 
         return new NdArray[]{
-            fromDoubleArray(u),
-            fromDoubleArray(s),
-            fromDoubleArray(sortedV).transpose()
+                fromDoubleArray(u),
+                fromDoubleArray(s),
+                fromDoubleArray(sortedV).transpose()
         };
     }
 

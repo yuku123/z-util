@@ -9,12 +9,12 @@ package com.zifang.util.zex.bust.chapter6;
  * @author zifang
  * @version 1.0
  */
+
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.junit.Test;
 
 import java.util.WeakHashMap;
-import java.util.logging.Level;
 
 /**
  * WeakHashMapTest类。
@@ -23,34 +23,23 @@ public class WeakHashMapTest {
 
     private static final Logger logger = LoggerFactory.getLogger(WeakHashMapTest.class);
 
-     class WeakHashMapTest2{
-        private String a;
-    /**
-     * WeakHashMapTest2方法。
-     *      * @param a String类型参数
-     */
-        public WeakHashMapTest2(String a){
-            this.a = a;
-        }
-
-    }
-
     /**
      * WeakHashMapTest方法。
      */
-    public WeakHashMapTest(){
+    public WeakHashMapTest() {
 
     }
+
     @Test
     /**
      * test001方法。
      */
     public void test001() throws InterruptedException {
 
-        WeakHashMap<WeakHashMapTest2,String> w = new WeakHashMap<>();
-        w.put(new WeakHashMapTest2("1"),"1");
-        w.put(new WeakHashMapTest2("2"),"2");
-        w.put(new WeakHashMapTest2("3"),"3");
+        WeakHashMap<WeakHashMapTest2, String> w = new WeakHashMap<>();
+        w.put(new WeakHashMapTest2("1"), "1");
+        w.put(new WeakHashMapTest2("2"), "2");
+        w.put(new WeakHashMapTest2("3"), "3");
         byte[] bArray = new byte[1024 * 1024 * 1024];
         byte[] bArra1 = new byte[1024 * 1024 * 1024];
         System.out.println("WeakHashMap 的内容：" + w);
@@ -69,6 +58,18 @@ public class WeakHashMapTest {
         System.gc();
 
 
+    }
+
+    class WeakHashMapTest2 {
+        private String a;
+
+        /**
+         * WeakHashMapTest2方法。
+         * * @param a String类型参数
+         */
+        public WeakHashMapTest2(String a) {
+            this.a = a;
+        }
 
     }
 }

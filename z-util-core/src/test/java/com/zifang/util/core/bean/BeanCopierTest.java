@@ -7,26 +7,10 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-/** 自研属性拷贝测试。 */
+/**
+ * 自研属性拷贝测试。
+ */
 public class BeanCopierTest {
-
-    public static class User {
-        private String name;
-        private int age;
-        private String email;
-        public String getName() { return name; }
-        public void setName(String n) { this.name = n; }
-        public int getAge() { return age; }
-        public void setAge(int a) { this.age = a; }
-        public String getEmail() { return email; }
-        public void setEmail(String e) { this.email = e; }
-    }
-
-    public static class UserDto {
-        private String name;
-        private int age;
-        private String city;
-    }
 
     @Test
     public void testCopy_sameFields() {
@@ -79,5 +63,41 @@ public class BeanCopierTest {
     public void testNullSource() {
         assertNull(BeanCopier.copy(null, UserDto.class));
         assertNotNull(BeanCopier.toMap(null));
+    }
+
+    public static class User {
+        private String name;
+        private int age;
+        private String email;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String n) {
+            this.name = n;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int a) {
+            this.age = a;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String e) {
+            this.email = e;
+        }
+    }
+
+    public static class UserDto {
+        private String name;
+        private int age;
+        private String city;
     }
 }

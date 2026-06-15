@@ -8,6 +8,38 @@ import java.util.concurrent.TimeUnit;
  * RecursiveTaskExceptionDemo类。
  */
 public class RecursiveTaskExceptionDemo {
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        // 11．创建一个名为array并能容纳100个整数的int数组。
+        int[] array = new int[100];
+        // 12．创建一个Task对象来处理这个数组。
+        Task task = new Task(array, 0, 100);
+        // 13．通过默认的构造器创建ForkJoinPool对象。
+        ForkJoinPool pool = new ForkJoinPool();
+        // 14．调用execute()方法在线程池中执行任务。
+        pool.execute(task);
+        // 15．调用shutdown()方法关闭线程池。
+        pool.shutdown();
+        // 16．
+        // 调用awaitTermination()方法等待任务执行结束。如果想一直等待到任务执行完成，那就传递值1和TimeUnit.DAYS作为参数给这个方法。
+        try {
+            pool.awaitTermination(1, TimeUnit.DAYS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // 17.
+        // 调用isCompletedAbnormally()方法来检查主任务或者它的子任务之一是否抛出了异常。在这个示例中，在控制台输出信息就表示有异常抛出。调用ForkJoinTask类的getException()方法来获取异常信息。
+        if (task.isCompletedAbnormally()) {
+            System.out.printf("Main: An exception has ocurred\n");
+            System.out.printf("Main: %s\n", task.getException());
+        }
+    }
+
     // 1．创建名为Task的类，并继承RecursiveTask类，RecursiveTask类的泛型参数为Integer 类型。
     static class Task extends RecursiveTask<Integer> {
         // 2．声明一个名为array的私有int数组。用来模拟在这个范例中即将处理的数据数组。
@@ -16,12 +48,14 @@ public class RecursiveTaskExceptionDemo {
         private int start, end;
 
         // 4．实现类的构造器，用来初始化类的属性。
-    /**
-     * Task方法。
-     *      * @param array int[]类型参数
-     * @param start int类型参数
-     * @param end int类型参数
-     */
+
+        /**
+         * Task方法。
+         * * @param array int[]类型参数
+         *
+         * @param start int类型参数
+         * @param end   int类型参数
+         */
         public Task(int[] array, int start, int end) {
             this.array = array;
             this.start = start;
@@ -30,10 +64,10 @@ public class RecursiveTaskExceptionDemo {
 
         // 5．实现任务的compute()方法。由于指定了Integer类型作为RecursiveTask的泛型类型，因此这个方法必须返回一个Integer对象。在控制台输出start和end属性。
         @Override
-    /**
-     * compute方法。
-     * @return int类型返回值
-     */
+        /**
+         * compute方法。
+         * @return int类型返回值
+         */
         protected Integer compute() {
 
             System.out.printf("Task: Start from %d to %d\n", start, end);
@@ -63,37 +97,6 @@ public class RecursiveTaskExceptionDemo {
             return 0;
         }
         // 10．实现范例的主类，创建Main主类，并实现main()方法。
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        // 11．创建一个名为array并能容纳100个整数的int数组。
-        int[] array = new int[100];
-        // 12．创建一个Task对象来处理这个数组。
-        Task task = new Task(array, 0, 100);
-        // 13．通过默认的构造器创建ForkJoinPool对象。
-        ForkJoinPool pool = new ForkJoinPool();
-        // 14．调用execute()方法在线程池中执行任务。
-        pool.execute(task);
-        // 15．调用shutdown()方法关闭线程池。
-        pool.shutdown();
-        // 16．
-        // 调用awaitTermination()方法等待任务执行结束。如果想一直等待到任务执行完成，那就传递值1和TimeUnit.DAYS作为参数给这个方法。
-        try {
-            pool.awaitTermination(1, TimeUnit.DAYS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // 17.
-        // 调用isCompletedAbnormally()方法来检查主任务或者它的子任务之一是否抛出了异常。在这个示例中，在控制台输出信息就表示有异常抛出。调用ForkJoinTask类的getException()方法来获取异常信息。
-        if (task.isCompletedAbnormally()) {
-            System.out.printf("Main: An exception has ocurred\n");
-            System.out.printf("Main: %s\n", task.getException());
-        }
     }
 
 }

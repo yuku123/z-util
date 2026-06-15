@@ -1,6 +1,5 @@
 package com.zifang.util.yaml;
 
-import com.zifang.util.yaml.define.TypeReference;
 import com.zifang.util.yaml.exception.YamlParseException;
 import org.junit.Test;
 
@@ -11,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * YamlUtilTest类。
  */
+
 /**
  * YamlUtilTest类。
  */

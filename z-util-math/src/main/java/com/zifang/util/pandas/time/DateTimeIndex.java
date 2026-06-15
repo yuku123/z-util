@@ -21,6 +21,42 @@ public class DateTimeIndex extends Index {
     // ==================== 静态工厂方法 ====================
 
     /**
+     * DateTimeIndex方法。
+     * * @param dates ListLocalDateTime类型参数
+     *
+     * @param freq      String类型参数
+     * @param formatter DateTimeFormatter类型参数
+     */
+    public DateTimeIndex(List<LocalDateTime> dates, String freq, DateTimeFormatter formatter) {
+        super(generateLabels(dates, formatter));
+        this.dates = new ArrayList<>(dates);
+        this.freq = freq;
+        this.formatter = formatter != null ? formatter : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    }
+
+    /**
+     * DateTimeIndex方法。
+     * * @param dates ListLocalDateTime类型参数
+     */
+    public DateTimeIndex(List<LocalDateTime> dates) {
+        this(dates, null, null);
+    }
+
+    /**
+     * DateTimeIndex方法。
+     * * @param dateStrings String[]类型参数
+     */
+    public DateTimeIndex(String[] dateStrings) {
+        super(dateStrings);
+        this.dates = new ArrayList<>();
+        for (String s : dateStrings) {
+            this.dates.add(parseDateTime(s));
+        }
+        this.freq = null;
+        this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    }
+
+    /**
      * 创建日期范围
      * 对标 pandas.date_range
      */
@@ -39,9 +75,12 @@ public class DateTimeIndex extends Index {
         return new DateTimeIndex(dates, freq, null);
     }
 
+    // ==================== 构造函数 ====================
+
     /**
      * dateRange方法。
-     *      * @param start String类型参数
+     * * @param start String类型参数
+     *
      * @param end String类型参数
      * @return static DateTimeIndex类型返回值
      */
@@ -65,205 +104,7 @@ public class DateTimeIndex extends Index {
         return dateRange(start, end, freq);
     }
 
-    // ==================== 构造函数 ====================
-
-    /**
-     * DateTimeIndex方法。
-     *      * @param dates ListLocalDateTime类型参数
-     * @param freq String类型参数
-     * @param formatter DateTimeFormatter类型参数
-     */
-    public DateTimeIndex(List<LocalDateTime> dates, String freq, DateTimeFormatter formatter) {
-        super(generateLabels(dates, formatter));
-        this.dates = new ArrayList<>(dates);
-        this.freq = freq;
-        this.formatter = formatter != null ? formatter : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    }
-
-    /**
-     * DateTimeIndex方法。
-     *      * @param dates ListLocalDateTime类型参数
-     */
-    public DateTimeIndex(List<LocalDateTime> dates) {
-        this(dates, null, null);
-    }
-
-    /**
-     * DateTimeIndex方法。
-     *      * @param dateStrings String[]类型参数
-     */
-    public DateTimeIndex(String[] dateStrings) {
-        super(dateStrings);
-        this.dates = new ArrayList<>();
-        for (String s : dateStrings) {
-            this.dates.add(parseDateTime(s));
-        }
-        this.freq = null;
-        this.formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    }
-
     // ==================== 核心方法 ====================
-
-    /**
-     * getDate方法。
-     *      * @param i int类型参数
-     * @return LocalDateTime类型返回值
-     */
-    public LocalDateTime getDate(int i) {
-        return dates.get(i);
-    }
-
-    /**
-     * getDates方法。
-     * @return List<LocalDateTime>类型返回值
-     */
-    public List<LocalDateTime> getDates() {
-        return new ArrayList<>(dates);
-    }
-
-    /**
-     * getFreq方法。
-     * @return String类型返回值
-     */
-    public String getFreq() {
-        return freq;
-    }
-
-    /**
-     * size方法。
-     * @return int类型返回值
-     */
-    public int size() {
-        return dates.size();
-    }
-
-    // ==================== 时间操作 ====================
-
-    /**
-     * 获取年份
-     */
-    public int[] year() {
-        return dates.stream().mapToInt(LocalDateTime::getYear).toArray();
-    }
-
-    /**
-     * 获取月份
-     */
-    public int[] month() {
-        return dates.stream().mapToInt(LocalDateTime::getMonthValue).toArray();
-    }
-
-    /**
-     * 获取日
-     */
-    public int[] day() {
-        return dates.stream().mapToInt(LocalDateTime::getDayOfMonth).toArray();
-    }
-
-    /**
-     * 获取小时
-     */
-    public int[] hour() {
-        return dates.stream().mapToInt(LocalDateTime::getHour).toArray();
-    }
-
-    /**
-     * 获取分钟
-     */
-    public int[] minute() {
-        return dates.stream().mapToInt(LocalDateTime::getMinute).toArray();
-    }
-
-    /**
-     * 获取秒
-     */
-    public int[] second() {
-        return dates.stream().mapToInt(LocalDateTime::getSecond).toArray();
-    }
-
-    /**
-     * 获取星期几
-     */
-    public int[] dayofweek() {
-        return dates.stream().mapToInt(d -> d.getDayOfWeek().getValue()).toArray();
-    }
-
-    /**
-     * 获取年中第几天
-     */
-    public int[] dayofyear() {
-        return dates.stream().mapToInt(d -> d.getDayOfYear()).toArray();
-    }
-
-    /**
-     * 获取季度
-     */
-    public int[] quarter() {
-        return dates.stream().mapToInt(d -> (d.getMonthValue() - 1) / 3 + 1).toArray();
-    }
-
-    // ==================== 切片和选择 ====================
-
-    /**
-     * 按日期范围切片
-     */
-    public DateTimeIndex slice(String start, String end) {
-        LocalDateTime startDate = parseDateTime(start);
-        LocalDateTime endDate = parseDateTime(end);
-
-        List<LocalDateTime> sliced = new ArrayList<>();
-        for (LocalDateTime date : dates) {
-            if (!date.isBefore(startDate) && !date.isAfter(endDate)) {
-                sliced.add(date);
-            }
-        }
-
-        return new DateTimeIndex(sliced, freq, formatter);
-    }
-
-    /**
-     * 按年份切片
-     */
-    public DateTimeIndex sliceYear(int year) {
-        List<LocalDateTime> sliced = new ArrayList<>();
-        for (LocalDateTime date : dates) {
-            if (date.getYear() == year) {
-                sliced.add(date);
-            }
-        }
-        return new DateTimeIndex(sliced, freq, formatter);
-    }
-
-    // ==================== 转换 ====================
-
-    /**
-     * toStringArray方法。
-     * @return String[]类型返回值
-     */
-    public String[] toStringArray() {
-        return dates.stream()
-                .map(d -> d.format(formatter))
-                .toArray(String[]::new);
-    }
-
-    @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("DateTimeIndex(['");
-        sb.append(String.join("', '", toStringArray()));
-        sb.append("']");
-        if (freq != null) {
-            sb.append(", dtype='datetime64[ns]', freq='").append(freq).append("'");
-        }
-        sb.append(")");
-        return sb.toString();
-    }
-
-    // ==================== 静态辅助方法 ====================
 
     private static LocalDateTime parseDateTime(String str) {
         // 尝试不同的格式
@@ -348,5 +189,171 @@ public class DateTimeIndex extends Index {
         return dates.stream()
                 .map(d -> d.format(finalFormatter))
                 .toArray(String[]::new);
+    }
+
+    /**
+     * getDate方法。
+     * * @param i int类型参数
+     *
+     * @return LocalDateTime类型返回值
+     */
+    public LocalDateTime getDate(int i) {
+        return dates.get(i);
+    }
+
+    // ==================== 时间操作 ====================
+
+    /**
+     * getDates方法。
+     *
+     * @return List<LocalDateTime>类型返回值
+     */
+    public List<LocalDateTime> getDates() {
+        return new ArrayList<>(dates);
+    }
+
+    /**
+     * getFreq方法。
+     *
+     * @return String类型返回值
+     */
+    public String getFreq() {
+        return freq;
+    }
+
+    /**
+     * size方法。
+     *
+     * @return int类型返回值
+     */
+    public int size() {
+        return dates.size();
+    }
+
+    /**
+     * 获取年份
+     */
+    public int[] year() {
+        return dates.stream().mapToInt(LocalDateTime::getYear).toArray();
+    }
+
+    /**
+     * 获取月份
+     */
+    public int[] month() {
+        return dates.stream().mapToInt(LocalDateTime::getMonthValue).toArray();
+    }
+
+    /**
+     * 获取日
+     */
+    public int[] day() {
+        return dates.stream().mapToInt(LocalDateTime::getDayOfMonth).toArray();
+    }
+
+    /**
+     * 获取小时
+     */
+    public int[] hour() {
+        return dates.stream().mapToInt(LocalDateTime::getHour).toArray();
+    }
+
+    /**
+     * 获取分钟
+     */
+    public int[] minute() {
+        return dates.stream().mapToInt(LocalDateTime::getMinute).toArray();
+    }
+
+    /**
+     * 获取秒
+     */
+    public int[] second() {
+        return dates.stream().mapToInt(LocalDateTime::getSecond).toArray();
+    }
+
+    // ==================== 切片和选择 ====================
+
+    /**
+     * 获取星期几
+     */
+    public int[] dayofweek() {
+        return dates.stream().mapToInt(d -> d.getDayOfWeek().getValue()).toArray();
+    }
+
+    /**
+     * 获取年中第几天
+     */
+    public int[] dayofyear() {
+        return dates.stream().mapToInt(d -> d.getDayOfYear()).toArray();
+    }
+
+    // ==================== 转换 ====================
+
+    /**
+     * 获取季度
+     */
+    public int[] quarter() {
+        return dates.stream().mapToInt(d -> (d.getMonthValue() - 1) / 3 + 1).toArray();
+    }
+
+    /**
+     * 按日期范围切片
+     */
+    public DateTimeIndex slice(String start, String end) {
+        LocalDateTime startDate = parseDateTime(start);
+        LocalDateTime endDate = parseDateTime(end);
+
+        List<LocalDateTime> sliced = new ArrayList<>();
+        for (LocalDateTime date : dates) {
+            if (!date.isBefore(startDate) && !date.isAfter(endDate)) {
+                sliced.add(date);
+            }
+        }
+
+        return new DateTimeIndex(sliced, freq, formatter);
+    }
+
+    // ==================== 静态辅助方法 ====================
+
+    /**
+     * 按年份切片
+     */
+    public DateTimeIndex sliceYear(int year) {
+        List<LocalDateTime> sliced = new ArrayList<>();
+        for (LocalDateTime date : dates) {
+            if (date.getYear() == year) {
+                sliced.add(date);
+            }
+        }
+        return new DateTimeIndex(sliced, freq, formatter);
+    }
+
+    /**
+     * toStringArray方法。
+     *
+     * @return String[]类型返回值
+     */
+    public String[] toStringArray() {
+        return dates.stream()
+                .map(d -> d.format(formatter))
+                .toArray(String[]::new);
+    }
+
+    @Override
+    /**
+     * toString方法。
+     * @return String类型返回值
+     */
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("DateTimeIndex(['");
+        sb.append(String.join("', '", toStringArray()));
+        sb.append("']");
+        if (freq != null) {
+            sb.append(", dtype='datetime64[ns]', freq='").append(freq).append("'");
+        }
+        sb.append(")");
+        return sb.toString();
     }
 }

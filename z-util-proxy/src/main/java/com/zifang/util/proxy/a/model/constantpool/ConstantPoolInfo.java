@@ -16,7 +16,7 @@ public class ConstantPoolInfo {
 
     /**
      * ConstantPoolInfo方法。
-     *      * @param poolSize short类型参数
+     * * @param poolSize short类型参数
      */
     public ConstantPoolInfo(short poolSize) {
         this.poolSize = new U2(poolSize);
@@ -25,6 +25,7 @@ public class ConstantPoolInfo {
 
     /**
      * getPoolSize方法。
+     *
      * @return U2类型返回值
      */
     public U2 getPoolSize() {
@@ -33,7 +34,7 @@ public class ConstantPoolInfo {
 
     /**
      * setPoolSize方法。
-     *      * @param poolSize U2类型参数
+     * * @param poolSize U2类型参数
      */
     public void setPoolSize(U2 poolSize) {
         this.poolSize = poolSize;
@@ -41,6 +42,7 @@ public class ConstantPoolInfo {
 
     /**
      * getPoolList方法。
+     *
      * @return List<AbstractConstantPool>类型返回值
      */
     public List<AbstractConstantPool> getPoolList() {
@@ -49,7 +51,7 @@ public class ConstantPoolInfo {
 
     /**
      * setPoolList方法。
-     *      * @param poolList ListAbstractConstantPool类型参数
+     * * @param poolList ListAbstractConstantPool类型参数
      */
     public void setPoolList(List<AbstractConstantPool> poolList) {
         this.poolList = poolList;

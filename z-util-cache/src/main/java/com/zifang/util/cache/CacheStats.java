@@ -17,21 +17,47 @@ public class CacheStats {
     private final LongAdder expirationCount = new LongAdder();
     private final LongAdder totalLoadTimeNanos = new LongAdder();
 
-    public void recordHit()         { hitCount.increment(); }
-    public void recordMiss()        { missCount.increment(); }
-    public void recordLoadSuccess(long nanos) { loadSuccessCount.increment(); totalLoadTimeNanos.add(nanos); }
-    public void recordLoadFailure(long nanos) { loadFailureCount.increment(); totalLoadTimeNanos.add(nanos); }
-    public void recordEviction()    { evictionCount.increment(); }
-    public void recordExpiration()  { expirationCount.increment(); }
+    public void recordHit() {
+        hitCount.increment();
+    }
 
-    /** 按移除原因分类计数。 */
+    public void recordMiss() {
+        missCount.increment();
+    }
+
+    public void recordLoadSuccess(long nanos) {
+        loadSuccessCount.increment();
+        totalLoadTimeNanos.add(nanos);
+    }
+
+    public void recordLoadFailure(long nanos) {
+        loadFailureCount.increment();
+        totalLoadTimeNanos.add(nanos);
+    }
+
+    public void recordEviction() {
+        evictionCount.increment();
+    }
+
+    public void recordExpiration() {
+        expirationCount.increment();
+    }
+
+    /**
+     * 按移除原因分类计数。
+     */
     public void recordRemoval(com.zifang.util.cache.RemovalListener.RemovalCause cause) {
         if (cause == null) return;
         switch (cause) {
-            case SIZE_LIMIT: case COLLECTED:
-                evictionCount.increment(); break;
-            case EXPIRED: case ACCESS_EXPIRED: case REPLACED:
-                expirationCount.increment(); break;
+            case SIZE_LIMIT:
+            case COLLECTED:
+                evictionCount.increment();
+                break;
+            case EXPIRED:
+            case ACCESS_EXPIRED:
+            case REPLACED:
+                expirationCount.increment();
+                break;
             case EXPLICIT:
             default:
                 // 不单独计
@@ -39,15 +65,37 @@ public class CacheStats {
         }
     }
 
-    public long hitCount()          { return hitCount.sum(); }
-    public long missCount()         { return missCount.sum(); }
-    public long loadSuccessCount()  { return loadSuccessCount.sum(); }
-    public long loadFailureCount()  { return loadFailureCount.sum(); }
-    public long evictionCount()     { return evictionCount.sum(); }
-    public long expirationCount()   { return expirationCount.sum(); }
-    public long totalLoadTimeNanos(){ return totalLoadTimeNanos.sum(); }
+    public long hitCount() {
+        return hitCount.sum();
+    }
 
-    /** 命中率（0-1）。无请求时返回 0。 */
+    public long missCount() {
+        return missCount.sum();
+    }
+
+    public long loadSuccessCount() {
+        return loadSuccessCount.sum();
+    }
+
+    public long loadFailureCount() {
+        return loadFailureCount.sum();
+    }
+
+    public long evictionCount() {
+        return evictionCount.sum();
+    }
+
+    public long expirationCount() {
+        return expirationCount.sum();
+    }
+
+    public long totalLoadTimeNanos() {
+        return totalLoadTimeNanos.sum();
+    }
+
+    /**
+     * 命中率（0-1）。无请求时返回 0。
+     */
     public double hitRate() {
         long h = hitCount.sum();
         long m = missCount.sum();
@@ -55,7 +103,9 @@ public class CacheStats {
         return t == 0 ? 0.0 : (double) h / t;
     }
 
-    /** 平均加载耗时（纳秒）。无加载时返回 0。 */
+    /**
+     * 平均加载耗时（纳秒）。无加载时返回 0。
+     */
     public double averageLoadPenaltyNanos() {
         long n = loadSuccessCount.sum() + loadFailureCount.sum();
         return n == 0 ? 0.0 : (double) totalLoadTimeNanos.sum() / n;

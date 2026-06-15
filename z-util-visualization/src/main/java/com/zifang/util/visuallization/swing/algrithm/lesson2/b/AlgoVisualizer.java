@@ -37,6 +37,21 @@ public class AlgoVisualizer {
     }
 
     /**
+     * 主方法，程序入口
+     * 创建一个宽度800、高度800的可视化窗口
+     *
+     * @param args 命令行参数（未使用）
+     */
+    public static void main(String[] args) {
+
+        int sceneWidth = 800;
+        int sceneHeight = 800;
+
+        // TODO: 根据需要设置其他参数，初始化visualizer
+        AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight);
+    }
+
+    /**
      * 动画逻辑（由子类实现）
      */
     private void run() {
@@ -54,20 +69,5 @@ public class AlgoVisualizer {
      * 预留用于处理鼠标点击事件
      */
     private class AlgoMouseListener extends MouseAdapter {
-    }
-
-    /**
-     * 主方法，程序入口
-     * 创建一个宽度800、高度800的可视化窗口
-     *
-     * @param args 命令行参数（未使用）
-     */
-    public static void main(String[] args) {
-
-        int sceneWidth = 800;
-        int sceneHeight = 800;
-
-        // TODO: 根据需要设置其他参数，初始化visualizer
-        AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight);
     }
 }

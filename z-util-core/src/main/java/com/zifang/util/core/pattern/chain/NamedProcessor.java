@@ -15,7 +15,8 @@ public class NamedProcessor<C extends ChainContext<?, ?>> implements Processor<C
 
     /**
      * NamedProcessor方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param delegate ProcessorC类型参数
      */
     public NamedProcessor(String name, Processor<C> delegate) {
@@ -35,6 +36,7 @@ public class NamedProcessor<C extends ChainContext<?, ?>> implements Processor<C
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -43,6 +45,7 @@ public class NamedProcessor<C extends ChainContext<?, ?>> implements Processor<C
 
     /**
      * getDelegate方法。
+     *
      * @return Processor<C>类型返回值
      */
     public Processor<C> getDelegate() {

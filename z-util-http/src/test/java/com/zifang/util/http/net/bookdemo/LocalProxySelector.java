@@ -14,7 +14,8 @@ public class LocalProxySelector extends ProxySelector {
 
     /**
      * select方法。
-     *      * @param uri URI类型参数
+     * * @param uri URI类型参数
+     *
      * @return List<Proxy>类型返回值
      */
     public List<Proxy> select(URI uri) {
@@ -33,9 +34,10 @@ public class LocalProxySelector extends ProxySelector {
 
     /**
      * connectFailed方法。
-     *      * @param uri URI类型参数
+     * * @param uri URI类型参数
+     *
      * @param address SocketAddress类型参数
-     * @param ex IOException类型参数
+     * @param ex      IOException类型参数
      */
     public void connectFailed(URI uri, SocketAddress address, IOException ex) {
         failed.add(uri);

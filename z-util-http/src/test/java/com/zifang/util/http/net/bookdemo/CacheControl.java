@@ -19,7 +19,7 @@ public class CacheControl {
 
     /**
      * CacheControl方法。
-     *      * @param s String类型参数
+     * * @param s String类型参数
      */
     public CacheControl(String s) {
         if (s == null || !s.contains(":")) {
@@ -58,6 +58,7 @@ public class CacheControl {
 
     /**
      * getMaxAge方法。
+     *
      * @return Date类型返回值
      */
     public Date getMaxAge() {
@@ -66,6 +67,7 @@ public class CacheControl {
 
     /**
      * getSharedMaxAge方法。
+     *
      * @return Date类型返回值
      */
     public Date getSharedMaxAge() {
@@ -74,6 +76,7 @@ public class CacheControl {
 
     /**
      * mustRevalidate方法。
+     *
      * @return boolean类型返回值
      */
     public boolean mustRevalidate() {
@@ -82,6 +85,7 @@ public class CacheControl {
 
     /**
      * proxyRevalidate方法。
+     *
      * @return boolean类型返回值
      */
     public boolean proxyRevalidate() {
@@ -90,6 +94,7 @@ public class CacheControl {
 
     /**
      * noStore方法。
+     *
      * @return boolean类型返回值
      */
     public boolean noStore() {
@@ -98,6 +103,7 @@ public class CacheControl {
 
     /**
      * noCache方法。
+     *
      * @return boolean类型返回值
      */
     public boolean noCache() {
@@ -106,6 +112,7 @@ public class CacheControl {
 
     /**
      * publicCache方法。
+     *
      * @return boolean类型返回值
      */
     public boolean publicCache() {
@@ -114,6 +121,7 @@ public class CacheControl {
 
     /**
      * privateCache方法。
+     *
      * @return boolean类型返回值
      */
     public boolean privateCache() {

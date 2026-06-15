@@ -25,10 +25,11 @@ public class NonblockingSingleFileHTTPServer {
 
     /**
      * NonblockingSingleFileHTTPServer方法。
-     *      * @param data ByteBuffer类型参数
+     * * @param data ByteBuffer类型参数
+     *
      * @param encoding String类型参数
      * @param MIMEType String类型参数
-     * @param port int类型参数
+     * @param port     int类型参数
      */
     public NonblockingSingleFileHTTPServer(ByteBuffer data, String encoding, String MIMEType, int port) {
 
@@ -42,6 +43,47 @@ public class NonblockingSingleFileHTTPServer {
         buffer.put(data);
         buffer.flip();
         this.contentBuffer = buffer;
+    }
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Usage: java NonblockingSingleFileHTTPServer file port encoding");
+            return;
+        }
+
+        try {
+            // read the single file to serve
+            String contentType = URLConnection.getFileNameMap().getContentTypeFor(args[0]);
+            Path file = FileSystems.getDefault().getPath(args[0]);
+            byte[] data = Files.readAllBytes(file);
+            ByteBuffer input = ByteBuffer.wrap(data);
+
+            // set the port to listen on
+            int port;
+            try {
+                port = Integer.parseInt(args[1]);
+                if (port < 1 || port > 65535)
+                    port = 80;
+            } catch (RuntimeException ex) {
+                port = 80;
+            }
+
+            String encoding = "UTF-8";
+            if (args.length > 2)
+                encoding = args[2];
+
+            NonblockingSingleFileHTTPServer server = new NonblockingSingleFileHTTPServer(input, encoding, contentType,
+                    port);
+            server.run();
+        } catch (IOException ex) {
+            System.err.println(ex);
+        }
     }
 
     /**
@@ -94,46 +136,6 @@ public class NonblockingSingleFileHTTPServer {
                     }
                 }
             }
-        }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Usage: java NonblockingSingleFileHTTPServer file port encoding");
-            return;
-        }
-
-        try {
-            // read the single file to serve
-            String contentType = URLConnection.getFileNameMap().getContentTypeFor(args[0]);
-            Path file = FileSystems.getDefault().getPath(args[0]);
-            byte[] data = Files.readAllBytes(file);
-            ByteBuffer input = ByteBuffer.wrap(data);
-
-            // set the port to listen on
-            int port;
-            try {
-                port = Integer.parseInt(args[1]);
-                if (port < 1 || port > 65535)
-                    port = 80;
-            } catch (RuntimeException ex) {
-                port = 80;
-            }
-
-            String encoding = "UTF-8";
-            if (args.length > 2)
-                encoding = args[2];
-
-            NonblockingSingleFileHTTPServer server = new NonblockingSingleFileHTTPServer(input, encoding, contentType,
-                    port);
-            server.run();
-        } catch (IOException ex) {
-            System.err.println(ex);
         }
     }
 }

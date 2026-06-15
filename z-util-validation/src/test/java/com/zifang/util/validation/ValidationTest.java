@@ -1,8 +1,8 @@
 package com.zifang.util.validation;
 
 import com.zifang.util.validation.annotation.*;
-import com.zifang.util.validation.core.ValidationEngine;
 import com.zifang.util.validation.core.ValidateResult;
+import com.zifang.util.validation.core.ValidationEngine;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,68 +10,13 @@ import static org.junit.Assert.*;
 /**
  * 校验框架测试
  */
+
 /**
  * ValidationTest类。
  */
 public class ValidationTest {
 
     // ==================== 测试模型类 ====================
-
-    static class User {
-        @NotNull(message = "用户名不能为空")
-        String username;
-
-        @NotNull(message = "密码不能为空")
-        @Length(min = 6, max = 20, message = "密码长度必须在6-20之间")
-        String password;
-
-        @Email(message = "邮箱格式不正确")
-        String email;
-
-        @Range(min = 0, max = 150, message = "年龄必须在0-150之间")
-        int age;
-
-        @Pattern(regex = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
-        String phone;
-
-    /**
-     * User方法。
-     *      * @param username String类型参数
-     * @param password String类型参数
-     * @param email String类型参数
-     * @param age int类型参数
-     * @param phone String类型参数
-     */
-        public User(String username, String password, String email, int age, String phone) {
-            this.username = username;
-            this.password = password;
-            this.email = email;
-            this.age = age;
-            this.phone = phone;
-        }
-    }
-
-    static class Product {
-        @NotNull(message = "产品名称不能为空")
-        @Length(min = 2, max = 100, message = "产品名称长度必须在2-100之间")
-        String name;
-
-        @NotNull(message = "价格不能为空")
-        @Range(min = 0.01, max = 999999.99, message = "价格必须在合理范围内")
-        double price;
-
-    /**
-     * Product方法。
-     *      * @param name String类型参数
-     * @param price double类型参数
-     */
-        public Product(String name, double price) {
-            this.name = name;
-            this.price = price;
-        }
-    }
-
-    // ==================== NotNull 测试 ====================
 
     @Test
     /**
@@ -94,7 +39,7 @@ public class ValidationTest {
         assertNotNull(result.getErrors().get("username"));
     }
 
-    // ==================== Length 测试 ====================
+    // ==================== NotNull 测试 ====================
 
     @Test
     /**
@@ -116,6 +61,8 @@ public class ValidationTest {
         assertTrue("密码过短应有错误", result.hasErrors());
     }
 
+    // ==================== Length 测试 ====================
+
     @Test
     /**
      * testLengthTooLong方法。
@@ -125,8 +72,6 @@ public class ValidationTest {
         ValidateResult result = ValidationEngine.validate(user);
         assertTrue("密码过长应有错误", result.hasErrors());
     }
-
-    // ==================== Email 测试 ====================
 
     @Test
     /**
@@ -148,7 +93,7 @@ public class ValidationTest {
         assertTrue("邮箱格式错误应有错误", result.hasErrors());
     }
 
-    // ==================== Range 测试 ====================
+    // ==================== Email 测试 ====================
 
     @Test
     /**
@@ -170,7 +115,7 @@ public class ValidationTest {
         assertTrue("价格为负应有错误", result.hasErrors());
     }
 
-    // ==================== Pattern 测试 ====================
+    // ==================== Range 测试 ====================
 
     @Test
     /**
@@ -192,7 +137,7 @@ public class ValidationTest {
         assertTrue("手机号格式错误应有错误", result.hasErrors());
     }
 
-    // ==================== 多字段综合测试 ====================
+    // ==================== Pattern 测试 ====================
 
     @Test
     /**
@@ -216,7 +161,7 @@ public class ValidationTest {
         assertFalse("所有字段有效时不应有错误", result.hasErrors());
     }
 
-    // ==================== 异常测试 ====================
+    // ==================== 多字段综合测试 ====================
 
     @Test(expected = com.zifang.util.validation.core.ValidationException.class)
     /**
@@ -226,8 +171,6 @@ public class ValidationTest {
         User user = new User(null, "123", "invalid-email", 25, "12345");
         ValidationEngine.validateAndThrow(user);
     }
-
-    // ==================== ValidateResult 测试 ====================
 
     @Test
     /**
@@ -240,6 +183,8 @@ public class ValidationTest {
         assertTrue("toString应包含valid", str.contains("valid"));
     }
 
+    // ==================== 异常测试 ====================
+
     @Test
     /**
      * testValidateResultFirstError方法。
@@ -248,5 +193,63 @@ public class ValidationTest {
         User user = new User(null, "123", "invalid-email", 25, "12345");
         ValidateResult result = ValidationEngine.validate(user);
         assertTrue(result.getFirstError().isPresent());
+    }
+
+    // ==================== ValidateResult 测试 ====================
+
+    static class User {
+        @NotNull(message = "用户名不能为空")
+        String username;
+
+        @NotNull(message = "密码不能为空")
+        @Length(min = 6, max = 20, message = "密码长度必须在6-20之间")
+        String password;
+
+        @Email(message = "邮箱格式不正确")
+        String email;
+
+        @Range(min = 0, max = 150, message = "年龄必须在0-150之间")
+        int age;
+
+        @Pattern(regex = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
+        String phone;
+
+        /**
+         * User方法。
+         * * @param username String类型参数
+         *
+         * @param password String类型参数
+         * @param email    String类型参数
+         * @param age      int类型参数
+         * @param phone    String类型参数
+         */
+        public User(String username, String password, String email, int age, String phone) {
+            this.username = username;
+            this.password = password;
+            this.email = email;
+            this.age = age;
+            this.phone = phone;
+        }
+    }
+
+    static class Product {
+        @NotNull(message = "产品名称不能为空")
+        @Length(min = 2, max = 100, message = "产品名称长度必须在2-100之间")
+        String name;
+
+        @NotNull(message = "价格不能为空")
+        @Range(min = 0.01, max = 999999.99, message = "价格必须在合理范围内")
+        double price;
+
+        /**
+         * Product方法。
+         * * @param name String类型参数
+         *
+         * @param price double类型参数
+         */
+        public Product(String name, double price) {
+            this.name = name;
+            this.price = price;
+        }
     }
 }

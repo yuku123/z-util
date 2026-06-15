@@ -10,7 +10,8 @@ public class PhaserDemo1 {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -30,7 +31,8 @@ class MyThread implements Runnable {
 
     /**
      * MyThread方法。
-     *      * @param phaser Phaser类型参数
+     * * @param phaser Phaser类型参数
+     *
      * @param info String类型参数
      */
     public MyThread(Phaser phaser, String info) {

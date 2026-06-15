@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 /**
  * @author zifang
  */
+
 /**
  * Utils类。
  */
@@ -17,6 +18,7 @@ public class Utils {
 
     /**
      * makeLoad方法。
+     *
      * @return static synchronized void类型返回值
      */
     public static synchronized void makeLoad() {
@@ -25,9 +27,9 @@ public class Utils {
         for (int i = 0; i < THREAD_COUNT; ++i) {
             executorService.submit(new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
+                /**
+                 * run方法。
+                 */
                 public void run() {
                     for (int i = 1; ; ++i) {
                         if (i % 1000000 == 0) {
@@ -41,7 +43,8 @@ public class Utils {
 
     /**
      * sleep方法。
-     *      * @param l long类型参数
+     * * @param l long类型参数
+     *
      * @return static void类型返回值
      */
     public static void sleep(long l) {

@@ -44,6 +44,15 @@ public class DatabaseDTO {
     }
 
     /**
+     * 设置表列表
+     *
+     * @param tables 表列表，null时设置为空列表
+     */
+    public void setTables(List<TableDTO> tables) {
+        this.tables = tables == null ? new ArrayList<>() : tables;
+    }
+
+    /**
      * 获取数据库名称
      *
      * @return 数据库名称
@@ -59,15 +68,6 @@ public class DatabaseDTO {
      */
     public void setDatabaseName(String databaseName) {
         this.databaseName = databaseName;
-    }
-
-    /**
-     * 设置表列表
-     *
-     * @param tables 表列表，null时设置为空列表
-     */
-    public void setTables(List<TableDTO> tables) {
-        this.tables = tables == null ? new ArrayList<>() : tables;
     }
 
     @Override

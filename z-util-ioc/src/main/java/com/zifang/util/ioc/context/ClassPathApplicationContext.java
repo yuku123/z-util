@@ -1,17 +1,16 @@
 package com.zifang.util.ioc.context;
 
+import com.zifang.util.ioc.annotation.Bean;
+import com.zifang.util.ioc.annotation.Component;
+import com.zifang.util.ioc.annotation.Configuration;
 import com.zifang.util.ioc.core.BeanRegistry;
 import com.zifang.util.ioc.core.DefaultBeanRegistry;
-import com.zifang.util.ioc.inject.FieldInjector;
-import com.zifang.util.ioc.inject.Instantiator;
+import com.zifang.util.ioc.exception.NoSuchBeanException;
 import com.zifang.util.ioc.inject.InjectorContext;
+import com.zifang.util.ioc.inject.Instantiator;
 import com.zifang.util.ioc.lifecycle.LifecycleManager;
 import com.zifang.util.ioc.metadata.BeanDefinition;
 import com.zifang.util.ioc.metadata.Scope;
-import com.zifang.util.ioc.annotation.Component;
-import com.zifang.util.ioc.annotation.Configuration;
-import com.zifang.util.ioc.annotation.Bean;
-import com.zifang.util.ioc.exception.NoSuchBeanException;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -20,7 +19,9 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * IOC 容器上下文。
@@ -54,7 +55,9 @@ public class ClassPathApplicationContext {
         this.basePackage = basePackage;
     }
 
-    /** 触发容器初始化：扫描注册 → 实例化所有 singleton → 字段注入 → PostConstruct */
+    /**
+     * 触发容器初始化：扫描注册 → 实例化所有 singleton → 字段注入 → PostConstruct
+     */
     public void init() {
         if (initialized) return;
         injectorContext = new InjectorContext(registry, instantiator);
@@ -63,7 +66,9 @@ public class ClassPathApplicationContext {
         initialized = true;
     }
 
-    /** 扫描包，注册所有 @Component 类和 @Configuration 类 */
+    /**
+     * 扫描包，注册所有 @Component 类和 @Configuration 类
+     */
     private void scanAndRegister(String pkg) {
         // 简化实现：依赖手动 registerBeanClass
         // 完整包扫描需要 ASM/BCEL，可后续引入 z-util-source 或 reflections
@@ -161,7 +166,9 @@ public class ClassPathApplicationContext {
         return Character.toLowerCase(s.charAt(0)) + s.substring(1);
     }
 
-    /** 实例化所有 singleton 并注入 */
+    /**
+     * 实例化所有 singleton 并注入
+     */
     private void instantiateSingletons() {
         for (BeanDefinition bd : registry.getAll()) {
             if (bd.isSingleton() && bd.getInstance() == null) {
@@ -174,7 +181,9 @@ public class ClassPathApplicationContext {
         }
     }
 
-    /** 获取 Bean 实例 */
+    /**
+     * 获取 Bean 实例
+     */
     @SuppressWarnings("unchecked")
     public <T> T getBean(Class<T> type) {
         checkInit();
@@ -202,7 +211,9 @@ public class ClassPathApplicationContext {
         return registry.getAll();
     }
 
-    /** 关闭容器：调用所有 PreDestroy（逆序） */
+    /**
+     * 关闭容器：调用所有 PreDestroy（逆序）
+     */
     public void close() {
         List<Object> singletons = lifecycleManager.getInitializedSingletons(new ArrayList<>(registry.getAll()));
         lifecycleManager.destroySingletons(singletons);

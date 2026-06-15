@@ -24,7 +24,8 @@ public class JHTTP {
 
     /**
      * JHTTP方法。
-     *      * @param rootDirectory File类型参数
+     * * @param rootDirectory File类型参数
+     *
      * @param port int类型参数
      */
     public JHTTP(File rootDirectory, int port) throws IOException {
@@ -37,29 +38,9 @@ public class JHTTP {
     }
 
     /**
-     * start方法。
-     */
-    public void start() throws IOException {
-        ExecutorService pool = Executors.newFixedThreadPool(NUM_THREADS);
-        try (ServerSocket server = new ServerSocket(port)) {
-            log.info("Accepting connections on port " + server.getLocalPort());
-            log.info("Document Root: " + rootDirectory);
-
-            while (true) {
-                try {
-                    Socket request = server.accept();
-                    Runnable r = new RequestProcessor(rootDirectory, INDEX_FILE, request);
-                    pool.submit(r);
-                } catch (IOException ex) {
-                    log.log(Level.WARNING, "Error accepting connection", ex);
-                }
-            }
-        }
-    }
-
-    /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -88,6 +69,27 @@ public class JHTTP {
             webserver.start();
         } catch (IOException ex) {
             log.log(Level.SEVERE, "Server could not start", ex);
+        }
+    }
+
+    /**
+     * start方法。
+     */
+    public void start() throws IOException {
+        ExecutorService pool = Executors.newFixedThreadPool(NUM_THREADS);
+        try (ServerSocket server = new ServerSocket(port)) {
+            log.info("Accepting connections on port " + server.getLocalPort());
+            log.info("Document Root: " + rootDirectory);
+
+            while (true) {
+                try {
+                    Socket request = server.accept();
+                    Runnable r = new RequestProcessor(rootDirectory, INDEX_FILE, request);
+                    pool.submit(r);
+                } catch (IOException ex) {
+                    log.log(Level.WARNING, "Error accepting connection", ex);
+                }
+            }
         }
     }
 }

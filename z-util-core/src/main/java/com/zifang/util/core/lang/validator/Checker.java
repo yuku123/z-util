@@ -106,7 +106,7 @@ public class Checker {
      * @param map 待验证的map
      * @return 如果map不为null且不为空返回true，否则返回false
      */
-    public static boolean valid(Map<?,?> map) {
+    public static boolean valid(Map<?, ?> map) {
         return !(map == null || map.isEmpty());
     }
 
@@ -116,8 +116,8 @@ public class Checker {
      * @param maps map数组
      * @return 如果所有map都有效返回true，否则返回false
      */
-    public static boolean valid(Map<?,?>... maps) {
-        for (Map<?,?> m : maps) {
+    public static boolean valid(Map<?, ?>... maps) {
+        for (Map<?, ?> m : maps) {
             if (!valid(m)) {
                 return false;
             }

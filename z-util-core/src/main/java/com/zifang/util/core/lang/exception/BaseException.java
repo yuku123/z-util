@@ -68,25 +68,25 @@ public class BaseException extends RuntimeException {
     /**
      * 使用指定的 Result 对象和格式化参数创建异常实例。
      *
-     * @param result  Result 对象，包含错误码和错误信息
-     * @param params  格式化参数，用于填充错误信息中的占位符
+     * @param result Result 对象，包含错误码和错误信息
+     * @param params 格式化参数，用于填充错误信息中的占位符
      */
     public BaseException(Result<?> result, Object... params) {
         this(new StatusCode() {
             @Override
-    /**
-     * getCode方法。
-     * @return int类型返回值
-     */
+            /**
+             * getCode方法。
+             * @return int类型返回值
+             */
             public int getCode() {
                 return result.getCode();
             }
 
             @Override
-    /**
-     * getMessage方法。
-     * @return String类型返回值
-     */
+            /**
+             * getMessage方法。
+             * @return String类型返回值
+             */
             public String getMessage() {
                 return result.getMessage();
             }
@@ -102,19 +102,19 @@ public class BaseException extends RuntimeException {
     public BaseException(Result<?> result, Throwable e) {
         this(new StatusCode() {
             @Override
-    /**
-     * getCode方法。
-     * @return int类型返回值
-     */
+            /**
+             * getCode方法。
+             * @return int类型返回值
+             */
             public int getCode() {
                 return result.getCode();
             }
 
             @Override
-    /**
-     * getMessage方法。
-     * @return String类型返回值
-     */
+            /**
+             * getMessage方法。
+             * @return String类型返回值
+             */
             public String getMessage() {
                 return result.getMessage();
             }
@@ -129,19 +129,19 @@ public class BaseException extends RuntimeException {
     public BaseException(Result<?> result) {
         this(new StatusCode() {
             @Override
-    /**
-     * getCode方法。
-     * @return int类型返回值
-     */
+            /**
+             * getCode方法。
+             * @return int类型返回值
+             */
             public int getCode() {
                 return result.getCode();
             }
 
             @Override
-    /**
-     * getMessage方法。
-     * @return String类型返回值
-     */
+            /**
+             * getMessage方法。
+             * @return String类型返回值
+             */
             public String getMessage() {
                 return result.getMessage();
             }

@@ -19,7 +19,8 @@ public class MapObject extends HashMap<String, Object> {
 
     /**
      * getString方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return String类型返回值
      */
     public String getString(String key) {
@@ -28,7 +29,8 @@ public class MapObject extends HashMap<String, Object> {
 
     /**
      * getLong方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return long类型返回值
      */
     public Long getLong(String key) {
@@ -38,7 +40,8 @@ public class MapObject extends HashMap<String, Object> {
 
     /**
      * getInteger方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return int类型返回值
      */
     public Integer getInteger(String key) {
@@ -48,7 +51,8 @@ public class MapObject extends HashMap<String, Object> {
 
     /**
      * getShort方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return short类型返回值
      */
     public Short getShort(String key) {
@@ -58,7 +62,8 @@ public class MapObject extends HashMap<String, Object> {
 
     /**
      * getByte方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return byte类型返回值
      */
     public Byte getByte(String key) {
@@ -68,7 +73,8 @@ public class MapObject extends HashMap<String, Object> {
 
     /**
      * getDouble方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return double类型返回值
      */
     public Double getDouble(String key) {
@@ -78,7 +84,8 @@ public class MapObject extends HashMap<String, Object> {
 
     /**
      * getFloat方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return float类型返回值
      */
     public Float getFloat(String key) {
@@ -88,7 +95,8 @@ public class MapObject extends HashMap<String, Object> {
 
     /**
      * getObject方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return <T> T类型返回值
      */
     public <T> T getObject(String key) {

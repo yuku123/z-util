@@ -22,16 +22,19 @@ public class CustomerJavaCompiler {
 
     /**
      * ArrayList<>方法。
+     *
      * @return static List<String> jarInnerLibPathList = new类型返回值
      */
     public static List<String> jarInnerLibPathList = new ArrayList<>();
     private static Boolean jarInnerLibPathListGeneratedFlag = false;
+
     /**
      * generateClassPath方法。
+     *
      * @return static void类型返回值
      */
     public static void generateClassPath() {
-        if(!jarInnerLibPathListGeneratedFlag){
+        if (!jarInnerLibPathListGeneratedFlag) {
 //            ApplicationHome  applicationHome = new ApplicationHome();
 //            if(applicationHome.getSource() != null){
 //                String jarPath = applicationHome.getSource().getAbsolutePath();
@@ -48,10 +51,11 @@ public class CustomerJavaCompiler {
 //                    e.printStackTrace();
 //                    LoggerUtil.error("产生ClassPath失败"+ e.getMessage());
 //                }
-            } else {
-                jarInnerLibPathListGeneratedFlag = true;
-            }
+        } else {
+            jarInnerLibPathListGeneratedFlag = true;
+        }
     }
+
     /**
      * 将javaCode 编译成为类
      */
@@ -69,8 +73,8 @@ public class CustomerJavaCompiler {
         // 产生附带jar
         generateClassPath();
         String classPath = System.getProperty("java.class.path");
-        if(jarInnerLibPathList != null && jarInnerLibPathList.size() > 0){
-            classPath = classPath + ":"+String.join(":", jarInnerLibPathList);
+        if (jarInnerLibPathList != null && jarInnerLibPathList.size() > 0) {
+            classPath = classPath + ":" + String.join(":", jarInnerLibPathList);
         }
 
 
@@ -105,7 +109,8 @@ public class CustomerJavaCompiler {
 
     /**
      * compile方法。
-     *      * @param stringJavaFileObjects ListStringJavaFileObject类型参数
+     * * @param stringJavaFileObjects ListStringJavaFileObject类型参数
+     *
      * @return static Map<String, BytesJavaFileObject>类型返回值
      */
     public static Map<String, BytesJavaFileObject> compile(List<StringJavaFileObject> stringJavaFileObjects) throws Exception {
@@ -122,8 +127,8 @@ public class CustomerJavaCompiler {
         // 产生附带jar
         generateClassPath();
         String classPath = System.getProperty("java.class.path");
-        if(jarInnerLibPathList != null && jarInnerLibPathList.size() > 0){
-            classPath = classPath + ":"+String.join(":", jarInnerLibPathList);
+        if (jarInnerLibPathList != null && jarInnerLibPathList.size() > 0) {
+            classPath = classPath + ":" + String.join(":", jarInnerLibPathList);
         }
 
 

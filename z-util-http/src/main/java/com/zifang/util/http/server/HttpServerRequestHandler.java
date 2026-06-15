@@ -20,7 +20,7 @@ public class HttpServerRequestHandler {
 
     /**
      * HttpServerRequestHandler方法。
-     *      * @param target Object类型参数
+     * * @param target Object类型参数
      */
     public HttpServerRequestHandler(Object target) {
         this.target = target;
@@ -71,10 +71,10 @@ public class HttpServerRequestHandler {
             DeleteMapping deleteMapping = method.getAnnotation(DeleteMapping.class);
 
             if (mapping != null || getMapping != null || postMapping != null ||
-                putMapping != null || deleteMapping != null) {
+                    putMapping != null || deleteMapping != null) {
 
                 MethodMapping methodMapping = new MethodMapping(method, mapping, getMapping,
-                    postMapping, putMapping, deleteMapping);
+                        postMapping, putMapping, deleteMapping);
 
                 String key = generateKey(methodMapping);
                 methodMappings.put(key, methodMapping);
@@ -211,6 +211,7 @@ public class HttpServerRequestHandler {
 
     /**
      * 匹配路径（支持路径变量如 /users/{id}），同时提取变量值
+     *
      * @return 路径变量名->值的 Map，若不匹配则返回 null
      */
     private Map<String, String> matchPathWithParams(String pattern, String path) {
@@ -382,15 +383,16 @@ public class HttpServerRequestHandler {
         private final PutMapping putMapping;
         private final DeleteMapping deleteMapping;
 
-    /**
-     * MethodMapping方法。
-     *      * @param method Method类型参数
-     * @param mapping RequestMapping类型参数
-     * @param getMapping GetMapping类型参数
-     * @param postMapping PostMapping类型参数
-     * @param putMapping PutMapping类型参数
-     * @param deleteMapping DeleteMapping类型参数
-     */
+        /**
+         * MethodMapping方法。
+         * * @param method Method类型参数
+         *
+         * @param mapping       RequestMapping类型参数
+         * @param getMapping    GetMapping类型参数
+         * @param postMapping   PostMapping类型参数
+         * @param putMapping    PutMapping类型参数
+         * @param deleteMapping DeleteMapping类型参数
+         */
         public MethodMapping(Method method, RequestMapping mapping, GetMapping getMapping,
                              PostMapping postMapping, PutMapping putMapping, DeleteMapping deleteMapping) {
             this.method = method;
@@ -401,18 +403,20 @@ public class HttpServerRequestHandler {
             this.deleteMapping = deleteMapping;
         }
 
-    /**
-     * getMethod方法。
-     * @return Method类型返回值
-     */
+        /**
+         * getMethod方法。
+         *
+         * @return Method类型返回值
+         */
         public Method getMethod() {
             return method;
         }
 
-    /**
-     * getHttpMethod方法。
-     * @return String类型返回值
-     */
+        /**
+         * getHttpMethod方法。
+         *
+         * @return String类型返回值
+         */
         public String getHttpMethod() {
             if (getMapping != null) return "GET";
             if (postMapping != null) return "POST";
@@ -422,10 +426,11 @@ public class HttpServerRequestHandler {
             return "GET";
         }
 
-    /**
-     * getPath方法。
-     * @return String类型返回值
-     */
+        /**
+         * getPath方法。
+         *
+         * @return String类型返回值
+         */
         public String getPath() {
             if (getMapping != null) return getMapping.value();
             if (postMapping != null) return postMapping.value();

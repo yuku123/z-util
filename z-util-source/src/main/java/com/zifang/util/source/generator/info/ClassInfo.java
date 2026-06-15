@@ -86,6 +86,55 @@ public class ClassInfo {
     private List<AnnotationInfo> annotations = new ArrayList<>();
 
     /**
+     * 将一个运行态class直接解析转化为ClassInfo
+     *
+     * @param clazz 要解析的Class对象
+     * @return 解析后的ClassInfo对象
+     */
+    public static ClassInfo parser(Class clazz) {
+        return null; // @todo
+    }
+
+    /**
+     * 最小闭环构造器
+     * <p>
+     * 使用提供的所有参数创建一个完整的ClassInfo对象
+     *
+     * @param interfaceType   是否为接口
+     * @param modifiers       类修饰符
+     * @param packageName     包名
+     * @param comments        类注释列表
+     * @param simpleClassName 简单类名
+     * @param superClass      父类信息
+     * @param interfaces      接口列表
+     * @param fieldInfos      字段列表
+     * @param methodInfos     方法列表
+     * @return 构建完成的ClassInfo对象
+     */
+    public static ClassInfo build(
+            Boolean interfaceType,
+            Integer modifiers,
+            String packageName,
+            List<String> comments,
+            String simpleClassName,
+            ClassInfo superClass,
+            List<ClassInfo> interfaces,
+            List<FieldInfo> fieldInfos,
+            List<MethodInfo> methodInfos) {
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.setInterfaceType(interfaceType);
+        classInfo.setModifiers(modifiers);
+        classInfo.setPackageName(packageName);
+        classInfo.setComments(comments);
+        classInfo.setSimpleClassName(simpleClassName);
+        classInfo.setSuperClass(superClass);
+        classInfo.setInterfaces(interfaces);
+        classInfo.setFields(fieldInfos);
+        classInfo.setMethods(methodInfos);
+        return classInfo;
+    }
+
+    /**
      * 获取全类路径名称
      *
      * @return 包名.类名的格式
@@ -155,57 +204,8 @@ public class ClassInfo {
     }
 
     /**
-     * 将一个运行态class直接解析转化为ClassInfo
-     *
-     * @param clazz 要解析的Class对象
-     * @return 解析后的ClassInfo对象
-     */
-    public static ClassInfo parser(Class clazz) {
-        return null; // @todo
-    }
-
-    /**
-     * 最小闭环构造器
-     * <p>
-     * 使用提供的所有参数创建一个完整的ClassInfo对象
-     *
-     * @param interfaceType   是否为接口
-     * @param modifiers      类修饰符
-     * @param packageName     包名
-     * @param comments       类注释列表
-     * @param simpleClassName 简单类名
-     * @param superClass     父类信息
-     * @param interfaces     接口列表
-     * @param fieldInfos     字段列表
-     * @param methodInfos    方法列表
-     * @return 构建完成的ClassInfo对象
-     */
-    public static ClassInfo build(
-            Boolean interfaceType,
-            Integer modifiers,
-            String packageName,
-            List<String> comments,
-            String simpleClassName,
-            ClassInfo superClass,
-            List<ClassInfo> interfaces,
-            List<FieldInfo> fieldInfos,
-            List<MethodInfo> methodInfos) {
-        ClassInfo classInfo = new ClassInfo();
-        classInfo.setInterfaceType(interfaceType);
-        classInfo.setModifiers(modifiers);
-        classInfo.setPackageName(packageName);
-        classInfo.setComments(comments);
-        classInfo.setSimpleClassName(simpleClassName);
-        classInfo.setSuperClass(superClass);
-        classInfo.setInterfaces(interfaces);
-        classInfo.setFields(fieldInfos);
-        classInfo.setMethods(methodInfos);
-        return classInfo;
-    }
-
-
-    /**
      * getComments方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getComments() {
@@ -214,7 +214,7 @@ public class ClassInfo {
 
     /**
      * setComments方法。
-     *      * @param comments ListString类型参数
+     * * @param comments ListString类型参数
      */
     public void setComments(List<String> comments) {
         this.comments = comments;
@@ -222,6 +222,7 @@ public class ClassInfo {
 
     /**
      * getSimpleClassName方法。
+     *
      * @return String类型返回值
      */
     public String getSimpleClassName() {
@@ -230,7 +231,7 @@ public class ClassInfo {
 
     /**
      * setSimpleClassName方法。
-     *      * @param simpleClassName String类型参数
+     * * @param simpleClassName String类型参数
      */
     public void setSimpleClassName(String simpleClassName) {
         this.simpleClassName = simpleClassName;
@@ -238,6 +239,7 @@ public class ClassInfo {
 
     /**
      * getPackageName方法。
+     *
      * @return String类型返回值
      */
     public String getPackageName() {
@@ -246,7 +248,7 @@ public class ClassInfo {
 
     /**
      * setPackageName方法。
-     *      * @param packageName String类型参数
+     * * @param packageName String类型参数
      */
     public void setPackageName(String packageName) {
         this.packageName = packageName;
@@ -254,6 +256,7 @@ public class ClassInfo {
 
     /**
      * getSuperClass方法。
+     *
      * @return ClassInfo类型返回值
      */
     public ClassInfo getSuperClass() {
@@ -262,7 +265,7 @@ public class ClassInfo {
 
     /**
      * setSuperClass方法。
-     *      * @param superClass ClassInfo类型参数
+     * * @param superClass ClassInfo类型参数
      */
     public void setSuperClass(ClassInfo superClass) {
         this.superClass = superClass;
@@ -270,6 +273,7 @@ public class ClassInfo {
 
     /**
      * getInterfaces方法。
+     *
      * @return List<ClassInfo>类型返回值
      */
     public List<ClassInfo> getInterfaces() {
@@ -278,7 +282,7 @@ public class ClassInfo {
 
     /**
      * setInterfaces方法。
-     *      * @param interfaces ListClassInfo类型参数
+     * * @param interfaces ListClassInfo类型参数
      */
     public void setInterfaces(List<ClassInfo> interfaces) {
         this.interfaces = interfaces;
@@ -286,6 +290,7 @@ public class ClassInfo {
 
     /**
      * getFields方法。
+     *
      * @return List<FieldInfo>类型返回值
      */
     public List<FieldInfo> getFields() {
@@ -294,7 +299,7 @@ public class ClassInfo {
 
     /**
      * setFields方法。
-     *      * @param fields ListFieldInfo类型参数
+     * * @param fields ListFieldInfo类型参数
      */
     public void setFields(List<FieldInfo> fields) {
         this.fields = fields;
@@ -302,6 +307,7 @@ public class ClassInfo {
 
     /**
      * getMethods方法。
+     *
      * @return List<MethodInfo>类型返回值
      */
     public List<MethodInfo> getMethods() {
@@ -310,7 +316,7 @@ public class ClassInfo {
 
     /**
      * setMethods方法。
-     *      * @param methods ListMethodInfo类型参数
+     * * @param methods ListMethodInfo类型参数
      */
     public void setMethods(List<MethodInfo> methods) {
         this.methods = methods;
@@ -318,6 +324,7 @@ public class ClassInfo {
 
     /**
      * getModifiers方法。
+     *
      * @return int类型返回值
      */
     public int getModifiers() {
@@ -326,7 +333,7 @@ public class ClassInfo {
 
     /**
      * setModifiers方法。
-     *      * @param modifiers int类型参数
+     * * @param modifiers int类型参数
      */
     public void setModifiers(int modifiers) {
         this.modifiers = modifiers;
@@ -334,6 +341,7 @@ public class ClassInfo {
 
     /**
      * getImports方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getImports() {
@@ -342,7 +350,7 @@ public class ClassInfo {
 
     /**
      * setImports方法。
-     *      * @param imports ListString类型参数
+     * * @param imports ListString类型参数
      */
     public void setImports(List<String> imports) {
         this.imports = imports;
@@ -350,6 +358,7 @@ public class ClassInfo {
 
     /**
      * getInterfaceType方法。
+     *
      * @return boolean类型返回值
      */
     public Boolean getInterfaceType() {
@@ -358,7 +367,7 @@ public class ClassInfo {
 
     /**
      * setInterfaceType方法。
-     *      * @param interfaceType boolean类型参数
+     * * @param interfaceType boolean类型参数
      */
     public void setInterfaceType(Boolean interfaceType) {
         this.interfaceType = interfaceType;
@@ -366,6 +375,7 @@ public class ClassInfo {
 
     /**
      * getInnerClasses方法。
+     *
      * @return List<ClassInfo>类型返回值
      */
     public List<ClassInfo> getInnerClasses() {
@@ -374,7 +384,7 @@ public class ClassInfo {
 
     /**
      * setInnerClasses方法。
-     *      * @param innerClasses ListClassInfo类型参数
+     * * @param innerClasses ListClassInfo类型参数
      */
     public void setInnerClasses(List<ClassInfo> innerClasses) {
         this.innerClasses = innerClasses;
@@ -382,6 +392,7 @@ public class ClassInfo {
 
     /**
      * getAnnotations方法。
+     *
      * @return List<AnnotationInfo>类型返回值
      */
     public List<AnnotationInfo> getAnnotations() {
@@ -390,7 +401,7 @@ public class ClassInfo {
 
     /**
      * setAnnotations方法。
-     *      * @param annotations ListAnnotationInfo类型参数
+     * * @param annotations ListAnnotationInfo类型参数
      */
     public void setAnnotations(List<AnnotationInfo> annotations) {
         this.annotations = annotations;

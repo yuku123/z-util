@@ -12,13 +12,12 @@ import java.io.OutputStream;
  * @version 1.0
  */
 public class Encoder {
+    static final int BITS = 12;
+    static final int HSIZE = 5003; // 80% occupancy
     private static final int EOF = -1;
-
-    private int imgW, imgH;
-    private byte[] pixAry;
-    private int initCodeSize;
-    private int remaining;
-    private int curPixel;
+    int n_bits; // number of bits/code
+    int maxbits = BITS; // user settable max # bits/code
+    int maxcode; // maximum code, given n_bits
 
     // GIFCOMPR.C       - GIF Image compression routines
     //
@@ -26,10 +25,8 @@ public class Encoder {
     // David Rowley (mgardi@watdcsu.waterloo.edu)
 
     // General DEFINEs
-
-    static final int BITS = 12;
-
-    static final int HSIZE = 5003; // 80% occupancy
+    int maxmaxcode = 1 << BITS; // should NEVER generate this code
+    int[] htab = new int[HSIZE];
 
     // GIF Image compression - modified 'compress'
     //
@@ -41,22 +38,17 @@ public class Encoder {
     //              Ken Turkowski          (decvax!decwrl!turtlevax!ken)
     //              James A. Woods         (decvax!ihnp4!ames!jaw)
     //              Joe Orost              (decvax!vax135!petsd!joe)
-
-    int n_bits; // number of bits/code
-    int maxbits = BITS; // user settable max # bits/code
-    int maxcode; // maximum code, given n_bits
-    int maxmaxcode = 1 << BITS; // should NEVER generate this code
-
-    int[] htab = new int[HSIZE];
     int[] codetab = new int[HSIZE];
-
     int hsize = HSIZE; // for dynamic table sizing
-
     int free_ent = 0; // first unused entry
-
     // block compression parameters -- after all codes are used up,
     // and compression rate changes, start over.
     boolean clear_flg = false;
+    int g_init_bits;
+    int ClearCode;
+    int EOFCode;
+    int cur_accum = 0;
+    int cur_bits = 0;
 
     // Algorithm:  use open addressing double hashing (no chaining) on the
     // prefix code / next character combination.  We do a variant of Knuth's
@@ -69,30 +61,6 @@ public class Encoder {
     // for the decompressor.  Late addition:  construct the table according to
     // file size for noticeable speed improvement on small files.  Please direct
     // questions about this implementation to ames!jaw.
-
-    int g_init_bits;
-
-    int ClearCode;
-    int EOFCode;
-
-    // output
-    //
-    // Output the given code.
-    // Inputs:
-    //      code:   A n_bits-bit integer.  If == -1, then EOF.  This assumes
-    //              that n_bits =< wordsize - 1.
-    // Outputs:
-    //      Outputs code to the file.
-    // Assumptions:
-    //      Chars are 8 bits long.
-    // Algorithm:
-    //      Maintain a BITS character long buffer (so that 8 codes will
-    // fit in it exactly).  Use the VAX insv instruction to insert each
-    // code in turn.  When the buffer fills up empty it and start over.
-
-    int cur_accum = 0;
-    int cur_bits = 0;
-
     int[] masks =
             {
                     0x0000,
@@ -112,14 +80,33 @@ public class Encoder {
                     0x3FFF,
                     0x7FFF,
                     0xFFFF};
-
     // Number of characters so far in this 'packet'
     int a_count;
-
     // Define the storage for the packet accumulator
     byte[] accum = new byte[256];
 
+    // output
+    //
+    // Output the given code.
+    // Inputs:
+    //      code:   A n_bits-bit integer.  If == -1, then EOF.  This assumes
+    //              that n_bits =< wordsize - 1.
+    // Outputs:
+    //      Outputs code to the file.
+    // Assumptions:
+    //      Chars are 8 bits long.
+    // Algorithm:
+    //      Maintain a BITS character long buffer (so that 8 codes will
+    // fit in it exactly).  Use the VAX insv instruction to insert each
+    // code in turn.  When the buffer fills up empty it and start over.
+    private int imgW, imgH;
+    private byte[] pixAry;
+    private int initCodeSize;
+    private int remaining;
+    private int curPixel;
+
     //----------------------------------------------------------------------------
+
     /**
      * 构造编码器。
      *
@@ -251,6 +238,7 @@ public class Encoder {
     }
 
     //----------------------------------------------------------------------------
+
     /**
      * 编码图像并写入输出流。
      * 首先写入初始代码大小字节，然后压缩并写入像素数据。
@@ -270,6 +258,7 @@ public class Encoder {
     }
 
     // Flush the packet to disk, and reset the accumulator
+
     /**
      * 刷新数据包到磁盘，并重置累加器。
      *
@@ -295,6 +284,7 @@ public class Encoder {
     }
 
     //----------------------------------------------------------------------------
+
     /**
      * 获取图像中的下一个像素。
      *

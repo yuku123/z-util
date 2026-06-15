@@ -1,18 +1,16 @@
 package com.zifang.util.json;
 
+import com.zifang.util.core.io.FileUtil;
 import com.zifang.util.dsl.core.ASTNode;
+import com.zifang.util.dsl.core.TokenReader;
 import com.zifang.util.dsl.g4.DynamicLexer;
 import com.zifang.util.dsl.g4.DynamicParser;
-import com.zifang.util.dsl.core.TokenReader;
-import com.zifang.util.dsl.token.Token;
 import com.zifang.util.json.exception.JsonParseException;
-import com.zifang.util.core.io.FileUtil;
 import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +22,7 @@ import java.util.stream.Collectors;
  * <p>
  * 对标 com.zifang.util.json.JSONParser，提供 fromJSON(String) 入口。
  */
+
 /**
  * JSONParser类。
  */
@@ -41,7 +40,8 @@ public class JSONParser {
      */
     /**
      * fromJSON方法。
-     *      * @param json String类型参数
+     * * @param json String类型参数
+     *
      * @return Object类型返回值
      */
     public Object fromJSON(String json) {
@@ -83,7 +83,8 @@ public class JSONParser {
      */
     /**
      * parseObject方法。
-     *      * @param json String类型参数
+     * * @param json String类型参数
+     *
      * @return JsonObject类型返回值
      */
     public JsonObject parseObject(String json) {
@@ -104,7 +105,8 @@ public class JSONParser {
      */
     /**
      * parseArray方法。
-     *      * @param json String类型参数
+     * * @param json String类型参数
+     *
      * @return JsonArray类型返回值
      */
     public JsonArray parseArray(String json) {
@@ -203,8 +205,8 @@ public class JSONParser {
 
     private boolean isBracketTerminal(String type) {
         return "LBrace".equals(type) || "RBrace".equals(type)
-            || "LBracket".equals(type) || "RBracket".equals(type)
-            || "Comma".equals(type);
+                || "LBracket".equals(type) || "RBracket".equals(type)
+                || "Comma".equals(type);
     }
 
     private String extractStringValue(ASTNode stringNode) {
@@ -242,7 +244,10 @@ public class JSONParser {
             case "number":
             case "Number":
                 if (text.contains(".") || text.contains("e") || text.contains("E")) {
-                    try { return Double.parseDouble(text); } catch (NumberFormatException ignored) {}
+                    try {
+                        return Double.parseDouble(text);
+                    } catch (NumberFormatException ignored) {
+                    }
                 }
                 try {
                     long v = Long.parseLong(text);
@@ -250,7 +255,8 @@ public class JSONParser {
                         return (int) v;
                     }
                     return v;
-                } catch (NumberFormatException ignored) {}
+                } catch (NumberFormatException ignored) {
+                }
                 break;
             case "string":
             case "StringLiteral":

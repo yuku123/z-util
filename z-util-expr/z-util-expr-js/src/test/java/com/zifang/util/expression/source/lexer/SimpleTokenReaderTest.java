@@ -121,8 +121,8 @@ public class SimpleTokenReaderTest {
     @Test
     public void testPositionTracking() {
         SimpleTokenReader reader = createReader(
-            TokenType.Identifier, TokenType.Assignment,
-            TokenType.IntLiteral, TokenType.SemiColon
+                TokenType.Identifier, TokenType.Assignment,
+                TokenType.IntLiteral, TokenType.SemiColon
         );
         assertEquals(0, reader.getPosition());
         reader.read();
@@ -136,8 +136,8 @@ public class SimpleTokenReaderTest {
     @Test
     public void testSetPosition() {
         SimpleTokenReader reader = createReader(
-            TokenType.Identifier, TokenType.Assignment,
-            TokenType.IntLiteral, TokenType.SemiColon
+                TokenType.Identifier, TokenType.Assignment,
+                TokenType.IntLiteral, TokenType.SemiColon
         );
         reader.read();
         reader.read();
@@ -150,8 +150,8 @@ public class SimpleTokenReaderTest {
     @Test
     public void testSetPositionToMiddle() {
         SimpleTokenReader reader = createReader(
-            TokenType.Identifier, TokenType.Assignment,
-            TokenType.IntLiteral, TokenType.SemiColon
+                TokenType.Identifier, TokenType.Assignment,
+                TokenType.IntLiteral, TokenType.SemiColon
         );
         reader.setPosition(2);
         assertEquals(2, reader.getPosition());

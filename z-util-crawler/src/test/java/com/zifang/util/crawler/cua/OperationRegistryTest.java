@@ -1,6 +1,9 @@
 package com.zifang.util.crawler.cua;
 
-import com.zifang.util.crawler.cua.steps.*;
+import com.zifang.util.crawler.cua.steps.ExtractStep;
+import com.zifang.util.crawler.cua.steps.InputStep;
+import com.zifang.util.crawler.cua.steps.NavigateStep;
+import com.zifang.util.crawler.cua.steps.Step;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -98,7 +101,7 @@ public class OperationRegistryTest {
     public void testRegisterCustomStep() {
         registry.register("my_step", ExtractStep.class);
         assertTrue(registry.isRegistered("my_step"));
-        
+
         Step step = registry.resolve("my_step");
         assertNotNull(step);
         assertTrue(step instanceof ExtractStep);

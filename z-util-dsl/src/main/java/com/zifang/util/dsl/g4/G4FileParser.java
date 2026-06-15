@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * G4 file parser
  * Parses .g4 files, extracts lexer and parser rules
- *
+ * <p>
  * G4 format:
  * - lexer grammar Name;
  * - parser grammar Name;
@@ -228,7 +228,7 @@ public class G4FileParser {
             if (bytes[i] == '/' && i + 1 < bytes.length
                     && bytes[i + 1] == '*'
                     && bracketDepth == 0) {
-                int end = findByteSequence(bytes, i + 2, new byte[]{ (byte) '*', (byte) '/' });
+                int end = findByteSequence(bytes, i + 2, new byte[]{(byte) '*', (byte) '/'});
                 if (end >= 0) {
                     i = end + 2;
                     continue;
@@ -300,8 +300,8 @@ public class G4FileParser {
      */
     private static String extractGrammarName(String content, String type) {
         Pattern pattern = Pattern.compile(
-            type + "\\s+grammar\\s+(\\w+)\\s*;",
-            Pattern.CASE_INSENSITIVE
+                type + "\\s+grammar\\s+(\\w+)\\s*;",
+                Pattern.CASE_INSENSITIVE
         );
         Matcher matcher = pattern.matcher(content);
         if (matcher.find()) {
@@ -315,8 +315,8 @@ public class G4FileParser {
      */
     private static String extractGrammarName(String content) {
         Pattern pattern = Pattern.compile(
-            "(?:lexer|parser)\\s+grammar\\s+(\\w+)\\s*;",
-            Pattern.CASE_INSENSITIVE
+                "(?:lexer|parser)\\s+grammar\\s+(\\w+)\\s*;",
+                Pattern.CASE_INSENSITIVE
         );
         Matcher matcher = pattern.matcher(content);
         if (matcher.find()) {

@@ -15,7 +15,7 @@ public class ClassInfo extends AbstractConstantPool {
 
     /**
      * ClassInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public ClassInfo(byte tag) {
         super(tag);
@@ -23,7 +23,7 @@ public class ClassInfo extends AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         this.nameIndex = U2.read(inputStream);
@@ -31,6 +31,7 @@ public class ClassInfo extends AbstractConstantPool {
 
     /**
      * getNameIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getNameIndex() {
@@ -39,7 +40,7 @@ public class ClassInfo extends AbstractConstantPool {
 
     /**
      * setNameIndex方法。
-     *      * @param nameIndex U2类型参数
+     * * @param nameIndex U2类型参数
      */
     public void setNameIndex(U2 nameIndex) {
         this.nameIndex = nameIndex;

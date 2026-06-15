@@ -9,6 +9,7 @@ import java.net.URI;
 /**
  * 将输出流交给JavaCompiler，最后JavaCompiler将编译后的class文件写入输出流中
  */
+
 /**
  * BytesJavaFileObject类。
  */
@@ -27,7 +28,8 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
      */
     /**
      * BytesJavaFileObject方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param kind Kind类型参数
      */
     public BytesJavaFileObject(String name, Kind kind) {
@@ -41,6 +43,7 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
      */
     /**
      * getBytes方法。
+     *
      * @return byte[]类型返回值
      */
     public byte[] getBytes() {

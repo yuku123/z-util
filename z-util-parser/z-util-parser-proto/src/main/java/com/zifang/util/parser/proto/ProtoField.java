@@ -7,6 +7,7 @@ import java.util.Objects;
  *
  * @author zifang
  */
+
 /**
  * ProtoField类。
  */
@@ -34,9 +35,10 @@ public class ProtoField {
 
     /**
      * ProtoField方法。
-     *      * @param type String类型参数
-     * @param name String类型参数
-     * @param tag int类型参数
+     * * @param type String类型参数
+     *
+     * @param name     String类型参数
+     * @param tag      int类型参数
      * @param repeated boolean类型参数
      */
     public ProtoField(String type, String name, int tag, boolean repeated) {
@@ -48,6 +50,7 @@ public class ProtoField {
 
     /**
      * getType方法。
+     *
      * @return String类型返回值
      */
     public String getType() {
@@ -56,6 +59,7 @@ public class ProtoField {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -64,6 +68,7 @@ public class ProtoField {
 
     /**
      * getTag方法。
+     *
      * @return int类型返回值
      */
     public int getTag() {
@@ -72,6 +77,7 @@ public class ProtoField {
 
     /**
      * isRepeated方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isRepeated() {

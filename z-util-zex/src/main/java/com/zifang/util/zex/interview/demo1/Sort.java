@@ -16,31 +16,9 @@ import java.util.stream.Collectors;
 public class Sort {
 
     /**
-     * 打印树形结构。
-     *
-     * @param list 节点列表
-     */
-    public void print(List<Node> list) {
-        Node root = list.stream().filter(e -> 0 == e.getParentId()).findFirst().get(); // 得到根节点
-        // 根据节点进行打印
-        print(list, root, "");
-    }
-
-    private void print(List<Node> list, Node root, String padding) {
-        System.out.println(padding + root.getName());
-        // 得到这个节点的子节点
-        List<Node> subNodes = list.stream().filter(e -> root.getId() == e.getParentId()).collect(Collectors.toList());
-        if (subNodes.size() != 0) {
-            for (Node node : subNodes) {
-                print(list, node, padding + " ");
-            }
-        }
-    }
-
-
-    /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -62,5 +40,27 @@ public class Sort {
         nodes.add(new Node(3, 1, "CC"));
         nodes.add(new Node(4, 3, "DD"));
         return nodes;
+    }
+
+    /**
+     * 打印树形结构。
+     *
+     * @param list 节点列表
+     */
+    public void print(List<Node> list) {
+        Node root = list.stream().filter(e -> 0 == e.getParentId()).findFirst().get(); // 得到根节点
+        // 根据节点进行打印
+        print(list, root, "");
+    }
+
+    private void print(List<Node> list, Node root, String padding) {
+        System.out.println(padding + root.getName());
+        // 得到这个节点的子节点
+        List<Node> subNodes = list.stream().filter(e -> root.getId() == e.getParentId()).collect(Collectors.toList());
+        if (subNodes.size() != 0) {
+            for (Node node : subNodes) {
+                print(list, node, padding + " ");
+            }
+        }
     }
 }

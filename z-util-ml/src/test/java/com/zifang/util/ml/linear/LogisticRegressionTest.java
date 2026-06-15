@@ -2,12 +2,12 @@ package com.zifang.util.ml.linear;
 
 import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * LogisticRegressionTest类。
@@ -24,19 +24,6 @@ public class LogisticRegressionTest {
             }
         }
         return NdArray.array(flat, DType.FLOAT32).reshape(rows, cols);
-    }
-
-    /**
-     * Generate linearly separable data AND labels together (two classes separated by x > 0).
-     * Returns an object containing both X and y.
-     */
-    private static class DataWithLabels {
-        NdArray X;
-        int[] y;
-        DataWithLabels(NdArray X, int[] y) {
-            this.X = X;
-            this.y = y;
-        }
     }
 
     private DataWithLabels generateLinearlySeparableDataWithLabels(int nSamples, Random rnd) {
@@ -82,14 +69,14 @@ public class LogisticRegressionTest {
         DataWithLabels dwl = generateLinearlySeparableDataWithLabels(nSamples, new Random(42));
         NdArray X = dwl.X;
         int[] y = dwl.y;
-        
+
         LogisticRegression lr = new LogisticRegression(0.1, 1000, 0.01);
         lr.fit(X, y);
-        
+
         int[] predictions = lr.predict(X);
-        
+
         assertEquals(nSamples, predictions.length);
-        
+
         // Calculate accuracy
         int correct = 0;
         for (int i = 0; i < nSamples; i++) {
@@ -162,5 +149,19 @@ public class LogisticRegressionTest {
 
         assertTrue(correctLow > 0);
         assertTrue(correctHigh > 0);
+    }
+
+    /**
+     * Generate linearly separable data AND labels together (two classes separated by x > 0).
+     * Returns an object containing both X and y.
+     */
+    private static class DataWithLabels {
+        NdArray X;
+        int[] y;
+
+        DataWithLabels(NdArray X, int[] y) {
+            this.X = X;
+            this.y = y;
+        }
     }
 }

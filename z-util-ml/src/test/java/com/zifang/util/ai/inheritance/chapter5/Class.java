@@ -3,6 +3,7 @@ package com.zifang.util.ml.inheritance.chapter5;
 /**
  * A simple class abstraction -- basically a container for class, group, module, professor, timeslot, and room IDs
  */
+
 /**
  * Class类。
  */
@@ -23,8 +24,9 @@ public class Class {
      */
     /**
      * Class方法。
-     *      * @param classId int类型参数
-     * @param groupId int类型参数
+     * * @param classId int类型参数
+     *
+     * @param groupId  int类型参数
      * @param moduleId int类型参数
      */
     public Class(int classId, int groupId, int moduleId) {
@@ -40,7 +42,7 @@ public class Class {
      */
     /**
      * addProfessor方法。
-     *      * @param professorId int类型参数
+     * * @param professorId int类型参数
      */
     public void addProfessor(int professorId) {
         this.professorId = professorId;
@@ -53,7 +55,7 @@ public class Class {
      */
     /**
      * addTimeslot方法。
-     *      * @param timeslotId int类型参数
+     * * @param timeslotId int类型参数
      */
     public void addTimeslot(int timeslotId) {
         this.timeslotId = timeslotId;
@@ -64,21 +66,10 @@ public class Class {
      *
      * @param roomId
      */
-    /**
-     * setRoomId方法。
-     *      * @param roomId int类型参数
-     */
-    public void setRoomId(int roomId) {
-        this.roomId = roomId;
-    }
 
     /**
-     * Get classId
-     *
-     * @return classId
-     */
-    /**
      * getClassId方法。
+     *
      * @return int类型返回值
      */
     public int getClassId() {
@@ -86,12 +77,14 @@ public class Class {
     }
 
     /**
-     * Get groupId
+     * Get classId
      *
-     * @return groupId
+     * @return classId
      */
+
     /**
      * getGroupId方法。
+     *
      * @return int类型返回值
      */
     public int getGroupId() {
@@ -99,12 +92,14 @@ public class Class {
     }
 
     /**
-     * Get moduleId
+     * Get groupId
      *
-     * @return moduleId
+     * @return groupId
      */
+
     /**
      * getModuleId方法。
+     *
      * @return int类型返回值
      */
     public int getModuleId() {
@@ -112,12 +107,14 @@ public class Class {
     }
 
     /**
-     * Get professorId
+     * Get moduleId
      *
-     * @return professorId
+     * @return moduleId
      */
+
     /**
      * getProfessorId方法。
+     *
      * @return int类型返回值
      */
     public int getProfessorId() {
@@ -125,12 +122,14 @@ public class Class {
     }
 
     /**
-     * Get timeslotId
+     * Get professorId
      *
-     * @return timeslotId
+     * @return professorId
      */
+
     /**
      * getTimeslotId方法。
+     *
      * @return int类型返回值
      */
     public int getTimeslotId() {
@@ -138,16 +137,32 @@ public class Class {
     }
 
     /**
-     * Get roomId
+     * Get timeslotId
      *
-     * @return roomId
+     * @return timeslotId
      */
+
     /**
      * getRoomId方法。
+     *
      * @return int类型返回值
      */
     public int getRoomId() {
         return this.roomId;
+    }
+
+    /**
+     * Get roomId
+     *
+     * @return roomId
+     */
+
+    /**
+     * setRoomId方法。
+     * * @param roomId int类型参数
+     */
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 }
 

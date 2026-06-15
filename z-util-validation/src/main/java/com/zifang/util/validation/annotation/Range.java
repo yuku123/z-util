@@ -13,6 +13,8 @@ import java.lang.annotation.*;
  */
 public @interface Range {
     double min() default Double.MIN_VALUE;
+
     double max() default Double.MAX_VALUE;
+
     String message() default "数值不在合法范围内";
 }

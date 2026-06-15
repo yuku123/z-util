@@ -7,7 +7,7 @@ import com.zifang.util.workflow.config.WorkflowConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
  * WorkflowRuntimeEngine 端到端集成测试。
  * 从 BPMN XML → 解析 → 转换 → 执行，验证完整流程。
  */
+
 /**
  * WorkflowRuntimeEngineTest类。
  */

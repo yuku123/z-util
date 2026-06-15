@@ -15,8 +15,8 @@ public class CurlParserUtils {
 
     // 匹配多个连续 cURL 命令的正则（以 curl 开头，直到下一个 curl 或结束）
     private static final Pattern MULTI_CURL_PATTERN = Pattern.compile(
-        "(curl\\s+.*?)(?=\\s*curl\\s|$)",
-        Pattern.CASE_INSENSITIVE | Pattern.DOTALL
+            "(curl\\s+.*?)(?=\\s*curl\\s|$)",
+            Pattern.CASE_INSENSITIVE | Pattern.DOTALL
     );
 
     /**

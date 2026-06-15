@@ -2,7 +2,6 @@ package com.zifang.util.http.dedao;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONPath;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.zifang.util.core.io.FileUtil;
 import com.zifang.util.core.time.DateUtil;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -16,7 +15,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
@@ -31,6 +29,8 @@ public class DedaoE {
     public static String base = "/Users/zifang/Downloads/dedao";
 
     public static String baseTaget = "/Users/zifang/Downloads/dedao_target";
+    private static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+
     @Test
     /**
      * test方法。
@@ -39,40 +39,40 @@ public class DedaoE {
 
         File[] files = new File(base).listFiles();
 
-        for(File file :files){
+        for (File file : files) {
             try {
                 String content = FileUtil.getFileContent(file);
                 Map<String, Object> stringObjectMap = JSON.parseObject(content);
                 String timeStamp = JSONPath.read(content, "$.bookDetail.c.article.PublishTime").toString();
                 String raw = JSONPath.read(content, "$.bookDetail.c.content").toString();
-                List<Map<String,Object>> rawMap = (List<Map<String,Object>>)JSON.parse(raw);
+                List<Map<String, Object>> rawMap = (List<Map<String, Object>>) JSON.parse(raw);
 
                 LocalDateTime localDateTime = DateUtil.timestampToLocalDateTime(Long.parseLong(timeStamp) * 1000);
 
-                String year = localDateTime.getYear()+"";
-                String month = localDateTime.getMonthValue()+"";
+                String year = localDateTime.getYear() + "";
+                String month = localDateTime.getMonthValue() + "";
 
-                String targetFolder = baseTaget+"/"+year+"/"+year+"-"+month;
+                String targetFolder = baseTaget + "/" + year + "/" + year + "-" + month;
                 File targetFolderFile = new File(targetFolder);
-                if(!targetFolderFile.exists()){
+                if (!targetFolderFile.exists()) {
                     targetFolderFile.mkdirs();
                 }
 
                 String mdContent = "";
-                mdContent = mdContent+"---\n" +
+                mdContent = mdContent + "---\n" +
                         "title: " + stringObjectMap.get("title") + "\n" +
                         "date: " + DateUtil.format(new Date(), DateUtil.PATTERN_DEFAULT) + "\n" +
                         "tags: " + stringObjectMap.get("tags") + "\n" +
                         "---\n";
-                for(Map<String,Object> item : rawMap){
-                    if(item.containsKey("text")){
-                        mdContent = mdContent+item.get("text").toString() + "\n";
+                for (Map<String, Object> item : rawMap) {
+                    if (item.containsKey("text")) {
+                        mdContent = mdContent + item.get("text").toString() + "\n";
                     }
                 }
 
-                File targetFile = new File(targetFolder+"/"+file.getName().replace(".json","")+".md");
-                FileUtil.write(targetFile, mdContent,"utf-8");
-            }catch (Exception E){
+                File targetFile = new File(targetFolder + "/" + file.getName().replace(".json", "") + ".md");
+                FileUtil.write(targetFile, mdContent, "utf-8");
+            } catch (Exception E) {
                 System.out.println(file.getName());
             }
 
@@ -81,10 +81,10 @@ public class DedaoE {
     }
 
     private Map<String, Object> getBookDetail(String urlEncode) throws IOException {
-        HttpGet httpGet = new HttpGet("https://www.dedao.cn/pc/odob/pc/audio/article/get?token="+urlEncode);
+        HttpGet httpGet = new HttpGet("https://www.dedao.cn/pc/odob/pc/audio/article/get?token=" + urlEncode);
         CloseableHttpResponse response = httpClient.execute(httpGet);
         String res = EntityUtils.toString(response.getEntity());
-        Map<String,Object> ress = (Map<String, Object>) JSON.parse(res.toString());
+        Map<String, Object> ress = (Map<String, Object>) JSON.parse(res.toString());
         return ress;
     }
 
@@ -97,12 +97,9 @@ public class DedaoE {
         httpPost.setEntity(new StringEntity(JSON.toJSONString(params)));
         CloseableHttpResponse response = httpClient.execute(httpPost);
         String res = EntityUtils.toString(response.getEntity());
-        Map<String,Object> ress = (Map<String, Object>)JSONPath.read(res, "$.c");
+        Map<String, Object> ress = (Map<String, Object>) JSONPath.read(res, "$.c");
         return ress;
     }
-
-    private static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-
 
     private List<Map<String, Object>> getBooks(int page, int pageSize) throws IOException {
 
@@ -118,7 +115,7 @@ public class DedaoE {
         httpPost.setEntity(new StringEntity(JSON.toJSONString(params)));
         CloseableHttpResponse response = httpClient.execute(httpPost);
         String res = EntityUtils.toString(response.getEntity());
-        List<Map<String,Object>> ress = (List<Map<String, Object>>) JSONPath.read(res, "$.c.product_list");
+        List<Map<String, Object>> ress = (List<Map<String, Object>>) JSONPath.read(res, "$.c.product_list");
 
         return ress;
     }

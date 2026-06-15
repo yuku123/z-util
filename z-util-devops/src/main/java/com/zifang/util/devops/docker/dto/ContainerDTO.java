@@ -31,6 +31,7 @@ public class ContainerDTO {
 
     /**
      * getId方法。
+     *
      * @return String类型返回值
      */
     public String getId() {
@@ -39,7 +40,7 @@ public class ContainerDTO {
 
     /**
      * setId方法。
-     *      * @param id String类型参数
+     * * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -47,6 +48,7 @@ public class ContainerDTO {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -55,7 +57,7 @@ public class ContainerDTO {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -63,6 +65,7 @@ public class ContainerDTO {
 
     /**
      * getImage方法。
+     *
      * @return String类型返回值
      */
     public String getImage() {
@@ -71,7 +74,7 @@ public class ContainerDTO {
 
     /**
      * setImage方法。
-     *      * @param image String类型参数
+     * * @param image String类型参数
      */
     public void setImage(String image) {
         this.image = image;
@@ -79,6 +82,7 @@ public class ContainerDTO {
 
     /**
      * getImageId方法。
+     *
      * @return String类型返回值
      */
     public String getImageId() {
@@ -87,7 +91,7 @@ public class ContainerDTO {
 
     /**
      * setImageId方法。
-     *      * @param imageId String类型参数
+     * * @param imageId String类型参数
      */
     public void setImageId(String imageId) {
         this.imageId = imageId;
@@ -95,6 +99,7 @@ public class ContainerDTO {
 
     /**
      * getCommand方法。
+     *
      * @return String类型返回值
      */
     public String getCommand() {
@@ -103,7 +108,7 @@ public class ContainerDTO {
 
     /**
      * setCommand方法。
-     *      * @param command String类型参数
+     * * @param command String类型参数
      */
     public void setCommand(String command) {
         this.command = command;
@@ -111,6 +116,7 @@ public class ContainerDTO {
 
     /**
      * getCreated方法。
+     *
      * @return String类型返回值
      */
     public String getCreated() {
@@ -119,7 +125,7 @@ public class ContainerDTO {
 
     /**
      * setCreated方法。
-     *      * @param created String类型参数
+     * * @param created String类型参数
      */
     public void setCreated(String created) {
         this.created = created;
@@ -127,6 +133,7 @@ public class ContainerDTO {
 
     /**
      * getState方法。
+     *
      * @return String类型返回值
      */
     public String getState() {
@@ -135,7 +142,7 @@ public class ContainerDTO {
 
     /**
      * setState方法。
-     *      * @param state String类型参数
+     * * @param state String类型参数
      */
     public void setState(String state) {
         this.state = state;
@@ -143,6 +150,7 @@ public class ContainerDTO {
 
     /**
      * getStatus方法。
+     *
      * @return String类型返回值
      */
     public String getStatus() {
@@ -151,7 +159,7 @@ public class ContainerDTO {
 
     /**
      * setStatus方法。
-     *      * @param status String类型参数
+     * * @param status String类型参数
      */
     public void setStatus(String status) {
         this.status = status;
@@ -159,6 +167,7 @@ public class ContainerDTO {
 
     /**
      * getPort方法。
+     *
      * @return String类型返回值
      */
     public String getPort() {
@@ -167,7 +176,7 @@ public class ContainerDTO {
 
     /**
      * setPort方法。
-     *      * @param port String类型参数
+     * * @param port String类型参数
      */
     public void setPort(String port) {
         this.port = port;
@@ -175,6 +184,7 @@ public class ContainerDTO {
 
     /**
      * getLabels方法。
+     *
      * @return Map<String, String>类型返回值
      */
     public Map<String, String> getLabels() {
@@ -183,7 +193,7 @@ public class ContainerDTO {
 
     /**
      * setLabels方法。
-     *      * @param labels MapString,类型参数
+     * * @param labels MapString,类型参数
      */
     public void setLabels(Map<String, String> labels) {
         this.labels = labels;
@@ -191,6 +201,7 @@ public class ContainerDTO {
 
     /**
      * getPorts方法。
+     *
      * @return List<PortMapping>类型返回值
      */
     public List<PortMapping> getPorts() {
@@ -199,7 +210,7 @@ public class ContainerDTO {
 
     /**
      * setPorts方法。
-     *      * @param ports ListPortMapping类型参数
+     * * @param ports ListPortMapping类型参数
      */
     public void setPorts(List<PortMapping> ports) {
         this.ports = ports;
@@ -207,6 +218,7 @@ public class ContainerDTO {
 
     /**
      * getMount方法。
+     *
      * @return String类型返回值
      */
     public String getMount() {
@@ -215,7 +227,7 @@ public class ContainerDTO {
 
     /**
      * setMount方法。
-     *      * @param mount String类型参数
+     * * @param mount String类型参数
      */
     public void setMount(String mount) {
         this.mount = mount;
@@ -223,6 +235,7 @@ public class ContainerDTO {
 
     /**
      * getNetwork方法。
+     *
      * @return String类型返回值
      */
     public String getNetwork() {
@@ -231,7 +244,7 @@ public class ContainerDTO {
 
     /**
      * setNetwork方法。
-     *      * @param network String类型参数
+     * * @param network String类型参数
      */
     public void setNetwork(String network) {
         this.network = network;
@@ -239,6 +252,7 @@ public class ContainerDTO {
 
     /**
      * getNetworks方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getNetworks() {
@@ -247,95 +261,10 @@ public class ContainerDTO {
 
     /**
      * setNetworks方法。
-     *      * @param networks ListString类型参数
+     * * @param networks ListString类型参数
      */
     public void setNetworks(List<String> networks) {
         this.networks = networks;
-    }
-
-    /**
-     * 端口映射
-     * <p>
-     * 用于表示容器与宿主机之间的端口映射关系
-     */
-    public static class PortMapping {
-        private String hostIp;
-        private int hostPort;
-        private int containerPort;
-        private String protocol;
-
-    /**
-     * getHostIp方法。
-     * @return String类型返回值
-     */
-        public String getHostIp() {
-            return hostIp;
-        }
-
-    /**
-     * setHostIp方法。
-     *      * @param hostIp String类型参数
-     */
-        public void setHostIp(String hostIp) {
-            this.hostIp = hostIp;
-        }
-
-    /**
-     * getHostPort方法。
-     * @return int类型返回值
-     */
-        public int getHostPort() {
-            return hostPort;
-        }
-
-    /**
-     * setHostPort方法。
-     *      * @param hostPort int类型参数
-     */
-        public void setHostPort(int hostPort) {
-            this.hostPort = hostPort;
-        }
-
-    /**
-     * getContainerPort方法。
-     * @return int类型返回值
-     */
-        public int getContainerPort() {
-            return containerPort;
-        }
-
-    /**
-     * setContainerPort方法。
-     *      * @param containerPort int类型参数
-     */
-        public void setContainerPort(int containerPort) {
-            this.containerPort = containerPort;
-        }
-
-    /**
-     * getProtocol方法。
-     * @return String类型返回值
-     */
-        public String getProtocol() {
-            return protocol;
-        }
-
-    /**
-     * setProtocol方法。
-     *      * @param protocol String类型参数
-     */
-        public void setProtocol(String protocol) {
-            this.protocol = protocol;
-        }
-
-        @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
-        public String toString() {
-            return hostPort + ":" + containerPort + "/" + protocol;
-        }
     }
 
     @Override
@@ -351,5 +280,94 @@ public class ContainerDTO {
                 ", state='" + state + '\'' +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    /**
+     * 端口映射
+     * <p>
+     * 用于表示容器与宿主机之间的端口映射关系
+     */
+    public static class PortMapping {
+        private String hostIp;
+        private int hostPort;
+        private int containerPort;
+        private String protocol;
+
+        /**
+         * getHostIp方法。
+         *
+         * @return String类型返回值
+         */
+        public String getHostIp() {
+            return hostIp;
+        }
+
+        /**
+         * setHostIp方法。
+         * * @param hostIp String类型参数
+         */
+        public void setHostIp(String hostIp) {
+            this.hostIp = hostIp;
+        }
+
+        /**
+         * getHostPort方法。
+         *
+         * @return int类型返回值
+         */
+        public int getHostPort() {
+            return hostPort;
+        }
+
+        /**
+         * setHostPort方法。
+         * * @param hostPort int类型参数
+         */
+        public void setHostPort(int hostPort) {
+            this.hostPort = hostPort;
+        }
+
+        /**
+         * getContainerPort方法。
+         *
+         * @return int类型返回值
+         */
+        public int getContainerPort() {
+            return containerPort;
+        }
+
+        /**
+         * setContainerPort方法。
+         * * @param containerPort int类型参数
+         */
+        public void setContainerPort(int containerPort) {
+            this.containerPort = containerPort;
+        }
+
+        /**
+         * getProtocol方法。
+         *
+         * @return String类型返回值
+         */
+        public String getProtocol() {
+            return protocol;
+        }
+
+        /**
+         * setProtocol方法。
+         * * @param protocol String类型参数
+         */
+        public void setProtocol(String protocol) {
+            this.protocol = protocol;
+        }
+
+        @Override
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
+        public String toString() {
+            return hostPort + ":" + containerPort + "/" + protocol;
+        }
     }
 }

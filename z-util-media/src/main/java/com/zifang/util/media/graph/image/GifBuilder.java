@@ -26,6 +26,7 @@ import java.util.List;
  */
 public final class GifBuilder {
 
+    private final List<BufferedImage> frames = new ArrayList<>();
     private int width = 200;
     private int height = 200;
     private int delay = 100;      // 帧间隔，毫秒
@@ -33,12 +34,11 @@ public final class GifBuilder {
     private int quality = 10;    // 1=最好（慢），20=最快
     private boolean started = false;
 
-    private final List<BufferedImage> frames = new ArrayList<>();
-
     /**
      * GifBuilder方法。
      */
-    public GifBuilder() {}
+    public GifBuilder() {
+    }
 
     /**
      * 设置 GIF 尺寸。

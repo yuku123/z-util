@@ -17,7 +17,8 @@ public class Whois {
 
     /**
      * Whois方法。
-     *      * @param host InetAddress类型参数
+     * * @param host InetAddress类型参数
+     *
      * @param port int类型参数
      */
     public Whois(InetAddress host, int port) {
@@ -27,7 +28,7 @@ public class Whois {
 
     /**
      * Whois方法。
-     *      * @param host InetAddress类型参数
+     * * @param host InetAddress类型参数
      */
     public Whois(InetAddress host) {
         this(host, DEFAULT_PORT);
@@ -35,7 +36,8 @@ public class Whois {
 
     /**
      * Whois方法。
-     *      * @param hostname String类型参数
+     * * @param hostname String类型参数
+     *
      * @param port int类型参数
      */
     public Whois(String hostname, int port) throws UnknownHostException {
@@ -44,7 +46,7 @@ public class Whois {
 
     /**
      * Whois方法。
-     *      * @param hostname String类型参数
+     * * @param hostname String类型参数
      */
     public Whois(String hostname) throws UnknownHostException {
         this(InetAddress.getByName(hostname), DEFAULT_PORT);
@@ -58,39 +60,13 @@ public class Whois {
     }
 
     // Items to search for
-/**
- * SearchFor枚举。
- */
-    public enum SearchFor {
-        ANY("Any"), NETWORK("Network"), PERSON("Person"), HOST("Host"), DOMAIN("Domain"), ORGANIZATION(
-                "Organization"), GROUP("Group"), GATEWAY("Gateway"), ASN("ASN");
-
-        private String label;
-
-        SearchFor(String label) {
-            this.label = label;
-        }
-    }
-
-    // Categories to search in
-/**
- * SearchIn枚举。
- */
-    public enum SearchIn {
-        ALL(""), NAME("Name"), MAILBOX("Mailbox"), HANDLE("!");
-
-        private String label;
-
-        SearchIn(String label) {
-            this.label = label;
-        }
-    }
 
     /**
      * lookUpNames方法。
-     *      * @param target String类型参数
-     * @param category SearchFor类型参数
-     * @param group SearchIn类型参数
+     * * @param target String类型参数
+     *
+     * @param category   SearchFor类型参数
+     * @param group      SearchIn类型参数
      * @param exactMatch boolean类型参数
      * @return String类型返回值
      */
@@ -125,8 +101,11 @@ public class Whois {
         }
     }
 
+    // Categories to search in
+
     /**
      * getHost方法。
+     *
      * @return InetAddress类型返回值
      */
     public InetAddress getHost() {
@@ -135,9 +114,36 @@ public class Whois {
 
     /**
      * setHost方法。
-     *      * @param host String类型参数
+     * * @param host String类型参数
      */
     public void setHost(String host) throws UnknownHostException {
         this.host = InetAddress.getByName(host);
+    }
+
+    /**
+     * SearchFor枚举。
+     */
+    public enum SearchFor {
+        ANY("Any"), NETWORK("Network"), PERSON("Person"), HOST("Host"), DOMAIN("Domain"), ORGANIZATION(
+                "Organization"), GROUP("Group"), GATEWAY("Gateway"), ASN("ASN");
+
+        private String label;
+
+        SearchFor(String label) {
+            this.label = label;
+        }
+    }
+
+    /**
+     * SearchIn枚举。
+     */
+    public enum SearchIn {
+        ALL(""), NAME("Name"), MAILBOX("Mailbox"), HANDLE("!");
+
+        private String label;
+
+        SearchIn(String label) {
+            this.label = label;
+        }
     }
 }

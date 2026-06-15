@@ -19,6 +19,7 @@ import java.util.ArrayList;
  *
  * @author zifang
  */
+
 /**
  * Maze类。
  */
@@ -28,7 +29,7 @@ public class Maze {
 
     /**
      * Maze方法。
-     *      * @param maze int[][]类型参数
+     * * @param maze int[][]类型参数
      */
     public Maze(int[][] maze) {
         this.maze = maze;
@@ -41,6 +42,7 @@ public class Maze {
      */
     /**
      * getStartPosition方法。
+     *
      * @return int[]类型返回值
      */
     public int[] getStartPosition() {
@@ -76,7 +78,8 @@ public class Maze {
      */
     /**
      * getPositionValue方法。
-     *      * @param x int类型参数
+     * * @param x int类型参数
+     *
      * @param y int类型参数
      * @return int类型返回值
      */
@@ -96,7 +99,8 @@ public class Maze {
      */
     /**
      * isWall方法。
-     *      * @param x int类型参数
+     * * @param x int类型参数
+     *
      * @param y int类型参数
      * @return boolean类型返回值
      */
@@ -111,6 +115,7 @@ public class Maze {
      */
     /**
      * getMaxX方法。
+     *
      * @return int类型返回值
      */
     public int getMaxX() {
@@ -124,6 +129,7 @@ public class Maze {
      */
     /**
      * getMaxY方法。
+     *
      * @return int类型返回值
      */
     public int getMaxY() {
@@ -142,7 +148,8 @@ public class Maze {
      */
     /**
      * scoreRoute方法。
-     *      * @param route ArrayListint[]类型参数
+     * * @param route ArrayListint[]类型参数
+     *
      * @return int类型返回值
      */
     public int scoreRoute(ArrayList<int[]> route) {

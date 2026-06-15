@@ -7,7 +7,8 @@ public class MultiThreadShareData {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -26,7 +27,7 @@ class MyRunnable1 implements Runnable {
 
     /**
      * MyRunnable1方法。
-     *      * @param myData ShareData类型参数
+     * * @param myData ShareData类型参数
      */
     public MyRunnable1(ShareData myData) {
         this.myData = myData;
@@ -53,7 +54,7 @@ class MyRunnable2 implements Runnable {
 
     /**
      * MyRunnable2方法。
-     *      * @param myData ShareData类型参数
+     * * @param myData ShareData类型参数
      */
     public MyRunnable2(ShareData myData) {
         this.myData = myData;
@@ -80,6 +81,7 @@ class ShareData {
 
     /**
      * increment方法。
+     *
      * @return synchronized void类型返回值
      */
     public synchronized void increment() {
@@ -89,6 +91,7 @@ class ShareData {
 
     /**
      * decrement方法。
+     *
      * @return synchronized void类型返回值
      */
     public synchronized void decrement() {

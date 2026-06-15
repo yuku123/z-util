@@ -1,7 +1,6 @@
 package com.zifang.util.monitor.thread.alarm;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  * AlarmServiceTest类。

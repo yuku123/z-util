@@ -28,7 +28,9 @@ public class Retry {
         this.retryOn = b.retryOn;
     }
 
-    public static Builder builder() { return new Builder(); }
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public <T> T call(java.util.concurrent.Callable<T> task) {
         Throwable last = null;
@@ -40,8 +42,12 @@ public class Retry {
                 last = t;
                 if (attempt == maxAttempts) break;
                 if (!retryOn.test(t)) break;
-                try { Thread.sleep(delay / 1_000_000L, (int) (delay % 1_000_000L)); }
-                catch (InterruptedException ie) { Thread.currentThread().interrupt(); break; }
+                try {
+                    Thread.sleep(delay / 1_000_000L, (int) (delay % 1_000_000L));
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
                 delay = Math.min((long) (delay * multiplier), maxDelayNanos);
             }
         }
@@ -55,15 +61,31 @@ public class Retry {
         private long maxDelayNanos = 5_000_000_000L;     // 5s
         private Predicate<Throwable> retryOn = t -> t instanceof RuntimeException;
 
-        public Builder maxAttempts(int n) { this.maxAttempts = n; return this; }
+        public Builder maxAttempts(int n) {
+            this.maxAttempts = n;
+            return this;
+        }
+
         public Builder initialDelay(long d, java.util.concurrent.TimeUnit u) {
-            this.initialDelayNanos = u.toNanos(d); return this;
+            this.initialDelayNanos = u.toNanos(d);
+            return this;
         }
-        public Builder multiplier(double m) { this.multiplier = m; return this; }
+
+        public Builder multiplier(double m) {
+            this.multiplier = m;
+            return this;
+        }
+
         public Builder maxDelay(long d, java.util.concurrent.TimeUnit u) {
-            this.maxDelayNanos = u.toNanos(d); return this;
+            this.maxDelayNanos = u.toNanos(d);
+            return this;
         }
-        public Builder retryOn(Predicate<Throwable> p) { this.retryOn = p; return this; }
+
+        public Builder retryOn(Predicate<Throwable> p) {
+            this.retryOn = p;
+            return this;
+        }
+
         public Builder retryOn(Class<? extends Throwable>... classes) {
             this.retryOn = t -> {
                 for (Class<? extends Throwable> c : classes) if (c.isInstance(t)) return true;
@@ -71,6 +93,9 @@ public class Retry {
             };
             return this;
         }
-        public Retry build() { return new Retry(this); }
+
+        public Retry build() {
+            return new Retry(this);
+        }
     }
 }

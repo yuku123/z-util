@@ -22,10 +22,10 @@ public class CuaAgentTest {
             WebDriver driver = new ChromeDriver();
             BrowserClient browserClient = new BrowserClient(driver);
             CuaAgent agent = new CuaAgent(browserClient);
-            
+
             assertNotNull(agent.getRegistry());
             assertNotNull(agent.getBrowserClient());
-            
+
             driver.quit();
         } catch (Exception e) {
             // ChromeDriver not available - skip actual test
@@ -41,10 +41,10 @@ public class CuaAgentTest {
             WebDriver driver = new ChromeDriver();
             BrowserClient browserClient = new BrowserClient(driver);
             CuaAgent agent = new CuaAgent(browserClient);
-            
+
             OperationRegistry registry = agent.getRegistry();
             assertNotNull(registry);
-            
+
             // Should have built-in steps registered
             assertTrue(registry.isRegistered("navigate"));
             assertTrue(registry.isRegistered("click"));
@@ -53,7 +53,7 @@ public class CuaAgentTest {
             assertTrue(registry.isRegistered("extract"));
             assertTrue(registry.isRegistered("screenshot"));
             assertTrue(registry.isRegistered("switch"));
-            
+
             driver.quit();
         } catch (Exception e) {
             // ChromeDriver not available - skip
@@ -69,9 +69,9 @@ public class CuaAgentTest {
             WebDriver driver = new ChromeDriver();
             BrowserClient browserClient = new BrowserClient(driver);
             CuaAgent agent = new CuaAgent(browserClient);
-            
+
             assertEquals(browserClient, agent.getBrowserClient());
-            
+
             driver.quit();
         } catch (Exception e) {
             // ChromeDriver not available - skip
@@ -87,17 +87,17 @@ public class CuaAgentTest {
             WebDriver driver = new ChromeDriver();
             BrowserClient browserClient = new BrowserClient(driver);
             CuaAgent agent = new CuaAgent(browserClient);
-            
+
             PipelineContext ctx = new PipelineContext();
             ctx.putParameter("browserClient", browserClient);
-            
+
             StepResult result = agent.executeStep("nonexistent_step_xyz", ctx);
-            
+
             assertNotNull(result);
             assertFalse(result.isSuccess());
             assertEquals("nonexistent_step_xyz", result.getStepName());
             assertEquals("Step not executed", result.getErrorMessage());
-            
+
             driver.quit();
         } catch (Exception e) {
             // ChromeDriver not available - skip
@@ -113,16 +113,16 @@ public class CuaAgentTest {
             WebDriver driver = new ChromeDriver();
             BrowserClient browserClient = new BrowserClient(driver);
             CuaAgent agent = new CuaAgent(browserClient);
-            
+
             PipelineContext ctx = new PipelineContext();
             ctx.putParameter("browserClient", browserClient);
-            
+
             CuResult result = agent.execute("do something totally unknown xyz12345", ctx);
-            
+
             assertNotNull(result);
             assertFalse(result.isSuccess());
             assertTrue(result.getErrorMessage().contains("No matching rule"));
-            
+
             driver.quit();
         } catch (Exception e) {
             // ChromeDriver not available - skip

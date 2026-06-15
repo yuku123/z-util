@@ -12,7 +12,8 @@ package com.zifang.util.zex.bust.chapter5;
 public class Exception001 {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -22,6 +23,7 @@ public class Exception001 {
 
     /**
      * f1方法。
+     *
      * @return static void类型返回值
      */
     public static void f1() {
@@ -33,7 +35,8 @@ public class Exception001 {
 
     /**
      * f2方法。
-     *      * @param num1 int类型参数
+     * * @param num1 int类型参数
+     *
      * @param num2 int类型参数
      * @return static int类型返回值
      */

@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * WorkflowConfiguration 类测试
  */
+
 /**
  * WorkflowConfigurationTest类。
  */

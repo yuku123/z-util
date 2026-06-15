@@ -21,7 +21,7 @@ public class CharUtilTest {
         assertTrue(CharUtil.isAscii('3'));
         assertTrue(CharUtil.isAscii('-'));
         assertTrue(CharUtil.isAscii('\n'));
-        assertTrue(CharUtil.isAscii((char)127));
+        assertTrue(CharUtil.isAscii((char) 127));
     }
 
     @Test
@@ -29,8 +29,8 @@ public class CharUtilTest {
      * testIsAscii_WithNonAsciiChars方法。
      */
     public void testIsAscii_WithNonAsciiChars() {
-        assertFalse(CharUtil.isAscii((char)128));
-        assertFalse(CharUtil.isAscii((char)255));
+        assertFalse(CharUtil.isAscii((char) 128));
+        assertFalse(CharUtil.isAscii((char) 255));
         assertFalse(CharUtil.isAscii('\u00E9'));
     }
 
@@ -45,8 +45,8 @@ public class CharUtilTest {
         assertTrue(CharUtil.isAsciiPrintable('A'));
         assertTrue(CharUtil.isAsciiPrintable('3'));
         assertTrue(CharUtil.isAsciiPrintable('-'));
-        assertTrue(CharUtil.isAsciiPrintable((char)32));
-        assertTrue(CharUtil.isAsciiPrintable((char)126));
+        assertTrue(CharUtil.isAsciiPrintable((char) 32));
+        assertTrue(CharUtil.isAsciiPrintable((char) 126));
     }
 
     @Test
@@ -56,8 +56,8 @@ public class CharUtilTest {
     public void testIsAsciiPrintable_WithNonPrintableChars() {
         assertFalse(CharUtil.isAsciiPrintable('\n'));
         assertFalse(CharUtil.isAsciiPrintable('\t'));
-        assertFalse(CharUtil.isAsciiPrintable((char)31));
-        assertFalse(CharUtil.isAsciiPrintable((char)127));
+        assertFalse(CharUtil.isAsciiPrintable((char) 31));
+        assertFalse(CharUtil.isAsciiPrintable((char) 127));
     }
 
     // --- isAsciiControl ---
@@ -69,9 +69,9 @@ public class CharUtilTest {
     public void testIsAsciiControl_WithControlChars() {
         assertTrue(CharUtil.isAsciiControl('\n'));
         assertTrue(CharUtil.isAsciiControl('\r'));
-        assertTrue(CharUtil.isAsciiControl((char)0));
-        assertTrue(CharUtil.isAsciiControl((char)31));
-        assertTrue(CharUtil.isAsciiControl((char)127));
+        assertTrue(CharUtil.isAsciiControl((char) 0));
+        assertTrue(CharUtil.isAsciiControl((char) 31));
+        assertTrue(CharUtil.isAsciiControl((char) 127));
     }
 
     @Test

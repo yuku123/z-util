@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * BoundSql 类测试
  */
+
 /**
  * BoundSqlTest类。
  */

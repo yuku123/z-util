@@ -6,9 +6,9 @@
     <resultMap id="BaseResultMap" type="${basePackage}.entity.${entityName}">
         <#list columns as column>
             <#if column.primaryKey>
-                <id column="${column.columnName}" property="${column.javaFieldName}" />
+                <id column="${column.columnName}" property="${column.javaFieldName}"/>
             <#else>
-                <result column="${column.columnName}" property="${column.javaFieldName}" />
+                <result column="${column.columnName}" property="${column.javaFieldName}"/>
             </#if>
         </#list>
     </resultMap>
@@ -40,7 +40,7 @@
     <!-- 根据ID查询 -->
     <select id="selectById" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         FROM ${tableName}
         WHERE
         <#list columns as column>

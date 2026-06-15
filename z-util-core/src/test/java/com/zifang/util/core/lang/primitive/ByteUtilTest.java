@@ -32,9 +32,9 @@ public class ByteUtilTest {
      */
     public void merge_multipleArrays() {
         byte[] result = ByteUtil.merge(
-            new byte[]{1, 2},
-            new byte[]{3, 4},
-            new byte[]{5}
+                new byte[]{1, 2},
+                new byte[]{3, 4},
+                new byte[]{5}
         );
         assertArrayEquals(new byte[]{1, 2, 3, 4, 5}, result);
     }

@@ -2,7 +2,6 @@ package com.zifang.util.ioc.inject;
 
 import com.zifang.util.ioc.core.BeanRegistry;
 import com.zifang.util.ioc.metadata.BeanDefinition;
-import com.zifang.util.ioc.metadata.Scope;
 
 /**
  * 依赖解析上下文，负责根据类型从容器中获取 Bean 实例。

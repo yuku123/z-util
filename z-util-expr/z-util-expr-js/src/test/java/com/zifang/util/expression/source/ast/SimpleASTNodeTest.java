@@ -52,7 +52,7 @@ public class SimpleASTNodeTest {
         List<ASTNode> children = node.getChildren();
         try {
             children.clear();
-        } catch (UnsupportedOperationException e){
+        } catch (UnsupportedOperationException e) {
             assert true;
         }
     }

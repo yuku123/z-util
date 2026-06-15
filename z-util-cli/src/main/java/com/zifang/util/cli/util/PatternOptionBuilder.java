@@ -109,16 +109,24 @@ public class PatternOptionBuilder {
             return String.class;
         }
         switch (typeStr.toUpperCase()) {
-            case "STRING": return String.class;
+            case "STRING":
+                return String.class;
             case "NUMBER":
-            case "NUM": return Number.class;
-            case "DATE": return Date.class;
-            case "FILE": return File.class;
-            case "URL": return URL.class;
-            case "URI": return URI.class;
+            case "NUM":
+                return Number.class;
+            case "DATE":
+                return Date.class;
+            case "FILE":
+                return File.class;
+            case "URL":
+                return URL.class;
+            case "URI":
+                return URI.class;
             case "CLASS":
-            case "CLASSNAME": return Object.class;
-            default: return String.class;
+            case "CLASSNAME":
+                return Object.class;
+            default:
+                return String.class;
         }
     }
 

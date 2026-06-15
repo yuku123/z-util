@@ -12,5 +12,6 @@ import java.lang.annotation.*;
  */
 public @interface ClassInfo {
     String className();
+
     String value() default "default-class-value";
 }

@@ -1,7 +1,9 @@
 package com.zifang.util.core.pattern.chain;
 
 import java.util.*;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * 链构建器
@@ -310,36 +312,39 @@ public class ChainBuilder<C extends ChainContext<?, ?>> implements Chain<C>, Pro
     public static class ChainBuilderRunner<C extends ChainContext<?, ?>> {
         private final Chain<C> chain;
 
-    /**
-     * ChainBuilderRunner方法。
-     *      * @param chain ChainC类型参数
-     */
+        /**
+         * ChainBuilderRunner方法。
+         * * @param chain ChainC类型参数
+         */
         public ChainBuilderRunner(Chain<C> chain) {
             this.chain = chain;
         }
 
-    /**
-     * then方法。
-     *      * @param processor ProcessorC类型参数
-     * @return Chain<C>类型返回值
-     */
+        /**
+         * then方法。
+         * * @param processor ProcessorC类型参数
+         *
+         * @return Chain<C>类型返回值
+         */
         public Chain<C> then(Processor<C> processor) {
             return chain.addProcessor(processor);
         }
 
-    /**
-     * get方法。
-     * @return Chain<C>类型返回值
-     */
+        /**
+         * get方法。
+         *
+         * @return Chain<C>类型返回值
+         */
         public Chain<C> get() {
             return chain;
         }
 
-    /**
-     * execute方法。
-     *      * @param context C类型参数
-     * @return ProcessorResult类型返回值
-     */
+        /**
+         * execute方法。
+         * * @param context C类型参数
+         *
+         * @return ProcessorResult类型返回值
+         */
         public ProcessorResult execute(C context) {
             return chain.process(context);
         }

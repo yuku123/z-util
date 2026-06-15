@@ -49,6 +49,20 @@ public class ConsistentHash<T> {
         }
     }
 
+    private static long hash(String key) {
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] digest = md5.digest(key.getBytes(StandardCharsets.UTF_8));
+            // 取前 4 字节拼成 long
+            return ((long) (digest[3] & 0xFF) << 24)
+                    | ((long) (digest[2] & 0xFF) << 16)
+                    | ((long) (digest[1] & 0xFF) << 8)
+                    | ((long) (digest[0] & 0xFF));
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("MD5 not available", e);
+        }
+    }
+
     public void add(T node) {
         if (node == null) {
             throw new IllegalArgumentException("node must not be null");
@@ -69,7 +83,9 @@ public class ConsistentHash<T> {
         }
     }
 
-    /** 根据 key 找到顺时针最近的节点。 */
+    /**
+     * 根据 key 找到顺时针最近的节点。
+     */
     public T get(Object key) {
         if (circle.isEmpty()) {
             return null;
@@ -89,19 +105,5 @@ public class ConsistentHash<T> {
 
     public int circleSize() {
         return circle.size();
-    }
-
-    private static long hash(String key) {
-        try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            byte[] digest = md5.digest(key.getBytes(StandardCharsets.UTF_8));
-            // 取前 4 字节拼成 long
-            return ((long) (digest[3] & 0xFF) << 24)
-                    | ((long) (digest[2] & 0xFF) << 16)
-                    | ((long) (digest[1] & 0xFF) << 8)
-                    | ((long) (digest[0] & 0xFF));
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException("MD5 not available", e);
-        }
     }
 }

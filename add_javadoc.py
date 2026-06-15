@@ -76,21 +76,21 @@ def find_public_methods(content):
             open_p = line.count('(')
             close_p = line.count(')')
             diff = open_p - close_p
-            
+
             while j < len(lines) and diff > 0:
                 method_lines.append(lines[j])
                 open_p += lines[j].count('(')
                 close_p += lines[j].count(')')
                 diff = open_p - close_p
                 j += 1
-            
+
             if diff == 0:
                 full = ' '.join(method_lines)
                 paren = full.find('(')
                 if paren > 0:
                     before = full[:paren].strip()
                     after = full[paren:]
-                    
+
                     mod_match = re.match(r'^(public|protected)', before)
                     if mod_match:
                         remaining = before[mod_match.end():].strip()
@@ -102,11 +102,11 @@ def find_public_methods(content):
                         else:
                             i = j
                             continue
-                        
+
                         params_m = re.match(r'\(([^)]*)\)', after)
                         params = params_m.group(1) if params_m else ''
                         pos = sum(len(l) + 1 for l in lines[:i])
-                        
+
                         methods.append({
                             'name': name,
                             'return_type': ret_type,
@@ -153,22 +153,24 @@ def gen_method_javadoc(m):
     name = m['name']
     ret = simple_type(m['return_type'])
     params = m['params']
-    
+
     pds = []
     if params.strip():
         pl = []
         depth = 0
         cur = ''
         for c in params:
-            if c == '<': depth += 1
-            elif c == '>': depth -= 1
+            if c == '<':
+                depth += 1
+            elif c == '>':
+                depth -= 1
             elif c == ',' and depth == 0:
                 if cur.strip(): pl.append(cur.strip())
                 cur = ''
             else:
                 cur += c
         if cur.strip(): pl.append(cur.strip())
-        
+
         for p in pl:
             p = p.strip()
             if not p: continue
@@ -180,10 +182,10 @@ def gen_method_javadoc(m):
             else:
                 continue
             pds.append(f'@param {pn} {pt}类型参数')
-    
+
     ret_j = '' if ret == 'void' else f'\n     * @return {ret}类型返回值'
     pj = '\n'.join(f'     * {pd}' for pd in pds) if pds else ''
-    
+
     if pj:
         return f'    /**\n     * {name}方法。\n     * {pj}{ret_j}\n     */'
     else:
@@ -196,15 +198,15 @@ def process_file(filepath):
             content = f.read()
     except:
         return 0, 0
-    
+
     # 跳过注释文件
     stripped = content.strip()
     if stripped.startswith('//') and '\n' not in stripped[2:]:
         return 0, 0
-    
+
     orig = content
     ca, ma = 0, 0
-    
+
     try:
         # 处理类
         classes = find_public_classes(content)
@@ -212,7 +214,7 @@ def process_file(filepath):
             if not has_proper_javadoc(content, cls['pos']):
                 content = content[:cls['pos']] + gen_class_javadoc(cls) + '\n' + content[cls['pos']:]
                 ca += 1
-        
+
         # 处理方法
         methods = find_public_methods(content)
         for m in reversed(methods):
@@ -222,27 +224,27 @@ def process_file(filepath):
     except Exception as e:
         print(f"Error {filepath}: {e}")
         return 0, 0
-    
+
     if content != orig:
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(content)
-    
+
     return ca, ma
 
 
 def main():
     base = '/Users/zifang/workplace/idea_workplace/z-util'
     tc, tm = 0, 0
-    
+
     for mod in MODULES:
         mp = os.path.join(base, mod)
         if not os.path.exists(mp): continue
         js = os.path.join(mp, 'src', 'main', 'java')
         if not os.path.exists(js): continue
-        
+
         print(f"\n处理模块: {mod}")
         mc, mm, fc = 0, 0, 0
-        
+
         for root, dirs, files in os.walk(js):
             for fn in files:
                 if not fn.endswith('.java') or fn in ['package-info.java', 'module-info.java']: continue
@@ -252,7 +254,7 @@ def main():
                     fc += 1
                     mc += c
                     mm += m
-        
+
         # 同时处理 test 目录
         ts = os.path.join(mp, 'src', 'test', 'java')
         if os.path.exists(ts):
@@ -266,12 +268,12 @@ def main():
                         fc += 1
                         mc += c
                         mm += m
-        
+
         print(f"  文件: {fc}, 类Javadoc: {mc}, 方法Javadoc: {mm}")
         tc += mc
         tm += mm
-    
-    print(f"\n{'='*50}")
+
+    print(f"\n{'=' * 50}")
     print(f"总计增加: {tc} 个类Javadoc, {tm} 个方法Javadoc")
 
 

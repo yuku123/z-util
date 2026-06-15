@@ -20,7 +20,7 @@ public class Utf8Info extends AbstractConstantPool {
 
     /**
      * Utf8Info方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public Utf8Info(byte tag) {
         super(tag);
@@ -48,6 +48,7 @@ public class Utf8Info extends AbstractConstantPool {
 
     /**
      * getValue方法。
+     *
      * @return String类型返回值
      */
     public String getValue() {

@@ -5,13 +5,18 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 
-/** HMAC-SHA512 签名算法。 */
+/**
+ * HMAC-SHA512 签名算法。
+ */
 final class HmacSha512 implements SigningAlgorithm {
 
     static final HmacSha512 INSTANCE = new HmacSha512();
     private static final String ALG = "HmacSHA512";
 
-    @Override public String name() { return "HS512"; }
+    @Override
+    public String name() {
+        return "HS512";
+    }
 
     @Override
     public byte[] sign(byte[] data, String secret) throws GeneralSecurityException {

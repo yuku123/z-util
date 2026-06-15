@@ -22,7 +22,7 @@ public class PooledObject<T> {
 
     /**
      * PooledObject方法。
-     *      * @param object T类型参数
+     * * @param object T类型参数
      */
     public PooledObject(T object) {
         this.object = object;

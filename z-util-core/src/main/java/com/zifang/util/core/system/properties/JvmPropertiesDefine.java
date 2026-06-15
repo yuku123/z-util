@@ -12,14 +12,6 @@ import java.util.Map;
  */
 public class JvmPropertiesDefine {
 
-    private static final Logger log = LoggerFactory.getLogger(JvmPropertiesDefine.class);
-
-    /**
-     * LinkedHashMap<>方法。
-     * @return static Map<String, String> defineMap = new类型返回值
-     */
-    public static Map<String, String> defineMap = new LinkedHashMap<>();
-
     public static final String awtToolkit = "awt.toolkit";
     public static final String fileEncoding = "file.encoding";
     public static final String fileEncodingPkg = "file.encoding.pkg";
@@ -74,6 +66,13 @@ public class JvmPropertiesDefine {
     public static final String userName = "user.name";
     public static final String userTimezone = "user.timezone";
     public static final String visualvmId = "visualvm.id";
+    private static final Logger log = LoggerFactory.getLogger(JvmPropertiesDefine.class);
+    /**
+     * LinkedHashMap<>方法。
+     *
+     * @return static Map<String, String> defineMap = new类型返回值
+     */
+    public static Map<String, String> defineMap = new LinkedHashMap<>();
 
     static {
         Field[] fields = JvmPropertiesDefine.class.getFields();

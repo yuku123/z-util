@@ -19,7 +19,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * IAImplement方法。
-     *      * @param controlStr String类型参数
+     * * @param controlStr String类型参数
      */
     public IAImplement(String controlStr) {
         this.controlStr = controlStr;
@@ -30,6 +30,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * getClassName方法。
+     *
      * @return String类型返回值
      */
     public String getClassName() {
@@ -38,7 +39,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * setClassName方法。
-     *      * @param className String类型参数
+     * * @param className String类型参数
      */
     public void setClassName(String className) {
         this.className = className;
@@ -46,6 +47,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * getMethod方法。
+     *
      * @return String类型返回值
      */
     public String getMethod() {
@@ -54,7 +56,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * setMethod方法。
-     *      * @param method String类型参数
+     * * @param method String类型参数
      */
     public void setMethod(String method) {
         this.method = method;
@@ -62,6 +64,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * getReturns方法。
+     *
      * @return String类型返回值
      */
     public String getReturns() {
@@ -70,7 +73,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * setReturns方法。
-     *      * @param returns String类型参数
+     * * @param returns String类型参数
      */
     public void setReturns(String returns) {
         this.returns = returns;
@@ -78,6 +81,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * getControlStr方法。
+     *
      * @return String类型返回值
      */
     public String getControlStr() {
@@ -86,7 +90,7 @@ public class IAImplement implements IA, IB {
 
     /**
      * setControlStr方法。
-     *      * @param controlStr String类型参数
+     * * @param controlStr String类型参数
      */
     public void setControlStr(String controlStr) {
         this.controlStr = controlStr;

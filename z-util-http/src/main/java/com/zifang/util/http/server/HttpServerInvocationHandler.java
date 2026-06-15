@@ -26,11 +26,11 @@ public class HttpServerInvocationHandler implements InvocationHandler {
     private final Class<?> target;
 
     // 调用过程中需要的上下文参数
-    private Map<String,Object> contextParams;
+    private Map<String, Object> contextParams;
 
     /**
      * HttpServerInvocationHandler方法。
-     *      * @param requestInterface Class?类型参数
+     * * @param requestInterface Class?类型参数
      */
     public HttpServerInvocationHandler(Class<?> requestInterface) {
         this.target = requestInterface;
@@ -38,10 +38,11 @@ public class HttpServerInvocationHandler implements InvocationHandler {
 
     /**
      * HttpServerInvocationHandler方法。
-     *      * @param requestInterface Class?类型参数
+     * * @param requestInterface Class?类型参数
+     *
      * @param contextParams MapString,Object类型参数
      */
-    public HttpServerInvocationHandler(Class<?> requestInterface, Map<String,Object> contextParams) {
+    public HttpServerInvocationHandler(Class<?> requestInterface, Map<String, Object> contextParams) {
         this.target = requestInterface;
         this.contextParams = contextParams;
     }

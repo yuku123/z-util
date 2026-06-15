@@ -2,11 +2,13 @@ package com.zifang.util.ml.nnet;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * 神经网络接口测试
  */
+
 /**
  * NeuralNetworkInterfaceTest类。
  */

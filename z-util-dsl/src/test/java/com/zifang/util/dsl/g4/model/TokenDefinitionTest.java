@@ -28,7 +28,7 @@ public class TokenDefinitionTest {
      */
     public void testThreeParamConstructor() {
         TokenDefinition def = new TokenDefinition("ID", "[a-z]+", 1);
-        
+
         assertEquals("ID", def.getName());
         assertEquals("[a-z]+", def.getPattern());
         assertEquals(1, def.getPrecedence());
@@ -71,10 +71,10 @@ public class TokenDefinitionTest {
     public void testSetFragment() {
         TokenDefinition def = new TokenDefinition();
         assertFalse(def.isFragment());
-        
+
         def.setFragment(true);
         assertTrue(def.isFragment());
-        
+
         def.setFragment(false);
         assertFalse(def.isFragment());
     }
@@ -86,10 +86,10 @@ public class TokenDefinitionTest {
     public void testSetHidden() {
         TokenDefinition def = new TokenDefinition();
         assertFalse(def.isHidden());
-        
+
         def.setHidden(true);
         assertTrue(def.isHidden());
-        
+
         def.setHidden(false);
         assertFalse(def.isHidden());
     }
@@ -139,7 +139,7 @@ public class TokenDefinitionTest {
     public void testToString() {
         TokenDefinition def = new TokenDefinition("ID", "[a-z]+", 1);
         String str = def.toString();
-        
+
         assertTrue(str.contains("ID"));
         assertTrue(str.contains("[a-z]+"));
         assertTrue(str.contains("1"));
@@ -154,7 +154,7 @@ public class TokenDefinitionTest {
         def.setFragment(true);
         def.setHidden(true);
         String str = def.toString();
-        
+
         assertTrue(str.contains("isFragment=true"));
         assertTrue(str.contains("hidden=true"));
     }
@@ -166,7 +166,7 @@ public class TokenDefinitionTest {
     public void testPrecedence_LowerNumberHigherPriority() {
         TokenDefinition def1 = new TokenDefinition("KW", "if", 0);
         TokenDefinition def2 = new TokenDefinition("ID", "[a-z]+", 1);
-        
+
         assertEquals(0, def1.getPrecedence());
         assertEquals(1, def2.getPrecedence());
     }
@@ -182,7 +182,7 @@ public class TokenDefinitionTest {
         def.setPrecedence(10);
         def.setFragment(true);
         def.setHidden(true);
-        
+
         assertEquals("TEST", def.getName());
         assertEquals("test", def.getPattern());
         assertEquals(10, def.getPrecedence());

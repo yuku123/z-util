@@ -7,11 +7,17 @@ import java.awt.*;
  * 用于配置二维码中间 Logo 图标的样式和大小。
  */
 public class MatrixToLogoImageConfig {
-    /** 默认 Logo 边框颜色 */
+    /**
+     * 默认 Logo 边框颜色
+     */
     public static final Color DEFAULT_BORDERCOLOR = Color.RED;
-    /** 默认 Logo 边框宽度 */
+    /**
+     * 默认 Logo 边框宽度
+     */
     public static final int DEFAULT_BORDER = 2;
-    /** 默认 Logo 大小为二维码的 1/5 */
+    /**
+     * 默认 Logo 大小为二维码的 1/5
+     */
     public static final int DEFAULT_LOGOPART = 5;
 
     private final int border = DEFAULT_BORDER;

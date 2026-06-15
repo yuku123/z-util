@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * Component 类测试
  */
+
 /**
  * ComponentTest类。
  */

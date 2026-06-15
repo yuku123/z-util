@@ -19,15 +19,37 @@ public class FilterProcessor<C extends ChainContext<?, ?>> implements Processor<
 
     /**
      * FilterProcessor方法。
-     *      * @param before ConsumerC类型参数
-     * @param after ConsumerC类型参数
+     * * @param before ConsumerC类型参数
+     *
+     * @param after   ConsumerC类型参数
      * @param process BiFunctionC,类型参数
      */
     public FilterProcessor(Consumer<C> before, Consumer<C> after,
                            BiFunction<C, ProcessorResult, ProcessorResult> process) {
-        this.before = before != null ? before : ctx -> {};
-        this.after = after != null ? after : ctx -> {};
+        this.before = before != null ? before : ctx -> {
+        };
+        this.after = after != null ? after : ctx -> {
+        };
         this.process = process != null ? process : (ctx, result) -> result;
+    }
+
+    /**
+     * 创建一个简单的过滤器，只执行前后置处理
+     */
+    public static <C extends ChainContext<?, ?>> FilterProcessor<C> of(
+            Consumer<C> before,
+            Consumer<C> after) {
+        return new FilterProcessor<>(before, after, (ctx, result) -> result);
+    }
+
+    /**
+     * 创建一个过滤器，包含前置处理、核心处理和后置处理
+     */
+    public static <C extends ChainContext<?, ?>> FilterProcessor<C> of(
+            Consumer<C> before,
+            Consumer<C> after,
+            BiFunction<C, ProcessorResult, ProcessorResult> process) {
+        return new FilterProcessor<>(before, after, process);
     }
 
     @Override
@@ -61,24 +83,5 @@ public class FilterProcessor<C extends ChainContext<?, ?>> implements Processor<
         }
 
         return result;
-    }
-
-    /**
-     * 创建一个简单的过滤器，只执行前后置处理
-     */
-    public static <C extends ChainContext<?, ?>> FilterProcessor<C> of(
-            Consumer<C> before,
-            Consumer<C> after) {
-        return new FilterProcessor<>(before, after, (ctx, result) -> result);
-    }
-
-    /**
-     * 创建一个过滤器，包含前置处理、核心处理和后置处理
-     */
-    public static <C extends ChainContext<?, ?>> FilterProcessor<C> of(
-            Consumer<C> before,
-            Consumer<C> after,
-            BiFunction<C, ProcessorResult, ProcessorResult> process) {
-        return new FilterProcessor<>(before, after, process);
     }
 }

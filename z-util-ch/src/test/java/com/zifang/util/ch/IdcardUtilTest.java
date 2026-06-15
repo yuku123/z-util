@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 /**
  * IdcardUtil 测试类
  */
+
 /**
  * IdcardUtilTest类。
  */

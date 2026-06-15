@@ -23,10 +23,14 @@ import java.util.function.Function;
  */
 public interface Cache<K, V> {
 
-    /** 根据 key 取值；不存在或已过期返回 null。命中统计 +1。 */
+    /**
+     * 根据 key 取值；不存在或已过期返回 null。命中统计 +1。
+     */
     V get(K key);
 
-    /** key 存在且未过期返回 true。 */
+    /**
+     * key 存在且未过期返回 true。
+     */
     boolean contains(K key);
 
     /**
@@ -41,10 +45,14 @@ public interface Cache<K, V> {
      */
     Map<K, V> getAllPresent(Iterable<? extends K> keys);
 
-    /** 存值，使用默认过期策略。覆盖旧值时触发 RemovalListener。 */
+    /**
+     * 存值，使用默认过期策略。覆盖旧值时触发 RemovalListener。
+     */
     void put(K key, V value);
 
-    /** 批量存。 */
+    /**
+     * 批量存。
+     */
     void putAll(Map<? extends K, ? extends V> map);
 
     /**
@@ -53,22 +61,34 @@ public interface Cache<K, V> {
      */
     void put(K key, Function<? super K, ? extends V> loader);
 
-    /** 删除一个 key；不存在返回 false。 */
+    /**
+     * 删除一个 key；不存在返回 false。
+     */
     boolean remove(K key);
 
-    /** 清空所有条目（触发 RemovalListener 回调，cause = COLLECTED）。 */
+    /**
+     * 清空所有条目（触发 RemovalListener 回调，cause = COLLECTED）。
+     */
     void invalidateAll();
 
-    /** 清空所有 key（已废弃的别名，保留向后兼容）。 */
+    /**
+     * 清空所有 key（已废弃的别名，保留向后兼容）。
+     */
     void clear();
 
-    /** 当前条目数（不包含已过期但未清理的）。 */
+    /**
+     * 当前条目数（不包含已过期但未清理的）。
+     */
     long size();
 
-    /** 缓存名。 */
+    /**
+     * 缓存名。
+     */
     String getName();
 
-    /** 统计快照。返回的是实时统计的实现，非副本。 */
+    /**
+     * 统计快照。返回的是实时统计的实现，非副本。
+     */
     CacheStats stats();
 
     /**
@@ -77,9 +97,13 @@ public interface Cache<K, V> {
      */
     Map<K, V> asMap();
 
-    /** 监听器（只读）。 */
+    /**
+     * 监听器（只读）。
+     */
     Set<RemovalListener<K, V>> removalListeners();
 
-    /** 关闭后台线程（清理调度器等）。实现保证幂等。 */
+    /**
+     * 关闭后台线程（清理调度器等）。实现保证幂等。
+     */
     void shutdown();
 }

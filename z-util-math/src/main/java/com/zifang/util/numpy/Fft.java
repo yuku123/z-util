@@ -37,7 +37,8 @@ public class Fft {
 
     /**
      * fft方法。
-     *      * @param x NdArray类型参数
+     * * @param x NdArray类型参数
+     *
      * @return static ComplexNdArray类型返回值
      */
     public static ComplexNdArray fft(NdArray x) {
@@ -121,7 +122,8 @@ public class Fft {
 
     /**
      * ifft方法。
-     *      * @param x NdArray类型参数
+     * * @param x NdArray类型参数
+     *
      * @return static ComplexNdArray类型返回值
      */
     public static ComplexNdArray ifft(NdArray x) {
@@ -160,7 +162,8 @@ public class Fft {
 
     /**
      * fft2方法。
-     *      * @param x NdArray类型参数
+     * * @param x NdArray类型参数
+     *
      * @return static ComplexNdArray类型返回值
      */
     public static ComplexNdArray fft2(NdArray x) {
@@ -199,7 +202,8 @@ public class Fft {
 
     /**
      * ifft2方法。
-     *      * @param x NdArray类型参数
+     * * @param x NdArray类型参数
+     *
      * @return static ComplexNdArray类型返回值
      */
     public static ComplexNdArray ifft2(NdArray x) {
@@ -209,6 +213,7 @@ public class Fft {
     /**
      * FFT frequency bins.
      * Returns the frequencies for the FFT output.
+     *
      * @param n Number of samples
      * @param d Sample spacing
      */
@@ -278,11 +283,12 @@ public class Fft {
         private final int rows;
         private final int cols;
 
-    /**
-     * ComplexNdArray方法。
-     *      * @param real double[]类型参数
-     * @param imag double[]类型参数
-     */
+        /**
+         * ComplexNdArray方法。
+         * * @param real double[]类型参数
+         *
+         * @param imag double[]类型参数
+         */
         public ComplexNdArray(double[] real, double[] imag) {
             this.re = real.clone();
             this.im = imag.clone();
@@ -291,11 +297,12 @@ public class Fft {
             this.cols = real.length;
         }
 
-    /**
-     * ComplexNdArray方法。
-     *      * @param rows int类型参数
-     * @param cols int类型参数
-     */
+        /**
+         * ComplexNdArray方法。
+         * * @param rows int类型参数
+         *
+         * @param cols int类型参数
+         */
         public ComplexNdArray(int rows, int cols) {
             this.rows = rows;
             this.cols = cols;
@@ -304,76 +311,84 @@ public class Fft {
             this.im = new double[length];
         }
 
-    /**
-     * re方法。
-     *      * @param i int类型参数
-     * @return double类型返回值
-     */
+        /**
+         * re方法。
+         * * @param i int类型参数
+         *
+         * @return double类型返回值
+         */
         public double re(int i) {
             return re[i];
         }
 
-    /**
-     * im方法。
-     *      * @param i int类型参数
-     * @return double类型返回值
-     */
+        /**
+         * im方法。
+         * * @param i int类型参数
+         *
+         * @return double类型返回值
+         */
         public double im(int i) {
             return im[i];
         }
 
-    /**
-     * length方法。
-     * @return int类型返回值
-     */
+        /**
+         * length方法。
+         *
+         * @return int类型返回值
+         */
         public int length() {
             return length;
         }
 
-    /**
-     * rows方法。
-     * @return int类型返回值
-     */
+        /**
+         * rows方法。
+         *
+         * @return int类型返回值
+         */
         public int rows() {
             return rows;
         }
 
-    /**
-     * cols方法。
-     * @return int类型返回值
-     */
+        /**
+         * cols方法。
+         *
+         * @return int类型返回值
+         */
         public int cols() {
             return cols;
         }
 
-    /**
-     * set方法。
-     *      * @param i int类型参数
-     * @param real double类型参数
-     * @param imag double类型参数
-     */
+        /**
+         * set方法。
+         * * @param i int类型参数
+         *
+         * @param real double类型参数
+         * @param imag double类型参数
+         */
         public void set(int i, double real, double imag) {
             re[i] = real;
             im[i] = imag;
         }
 
-    /**
-     * set方法。
-     *      * @param row int类型参数
-     * @param col int类型参数
-     * @param real double类型参数
-     * @param imag double类型参数
-     */
+        /**
+         * set方法。
+         * * @param row int类型参数
+         *
+         * @param col  int类型参数
+         * @param real double类型参数
+         * @param imag double类型参数
+         */
         public void set(int row, int col, double real, double imag) {
             re[row * cols + col] = real;
             im[row * cols + col] = imag;
         }
 
-    /**
-     * getRow方法。
-     *      * @param row int类型参数
-     * @return ComplexNdArray类型返回值
-     */
+        /**
+         * getRow方法。
+         * * @param row int类型参数
+         *
+         * @return ComplexNdArray类型返回值
+         */
         public ComplexNdArray getRow(int row) {
             double[] rowRe = new double[cols];
             double[] rowIm = new double[cols];
@@ -384,11 +399,12 @@ public class Fft {
             return new ComplexNdArray(rowRe, rowIm);
         }
 
-    /**
-     * getColumn方法。
-     *      * @param col int类型参数
-     * @return ComplexNdArray类型返回值
-     */
+        /**
+         * getColumn方法。
+         * * @param col int类型参数
+         *
+         * @return ComplexNdArray类型返回值
+         */
         public ComplexNdArray getColumn(int col) {
             double[] colRe = new double[rows];
             double[] colIm = new double[rows];
@@ -399,18 +415,20 @@ public class Fft {
             return new ComplexNdArray(colRe, colIm);
         }
 
-    /**
-     * copy方法。
-     * @return ComplexNdArray类型返回值
-     */
+        /**
+         * copy方法。
+         *
+         * @return ComplexNdArray类型返回值
+         */
         public ComplexNdArray copy() {
             return new ComplexNdArray(re.clone(), im.clone());
         }
 
-    /**
-     * conjugate方法。
-     * @return ComplexNdArray类型返回值
-     */
+        /**
+         * conjugate方法。
+         *
+         * @return ComplexNdArray类型返回值
+         */
         public ComplexNdArray conjugate() {
             double[] conjRe = re.clone();
             double[] conjIm = new double[length];
@@ -420,20 +438,21 @@ public class Fft {
             return new ComplexNdArray(conjRe, conjIm);
         }
 
-    /**
-     * magnitude方法。
-     *      * @param i int类型参数
-     * @return double类型返回值
-     */
+        /**
+         * magnitude方法。
+         * * @param i int类型参数
+         *
+         * @return double类型返回值
+         */
         public double magnitude(int i) {
             return Math.sqrt(re[i] * re[i] + im[i] * im[i]);
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append("[");

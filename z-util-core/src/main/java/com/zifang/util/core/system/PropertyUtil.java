@@ -42,7 +42,8 @@ public class PropertyUtil {
 
     /**
      * getProperty方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return static String类型返回值
      */
     public static String getProperty(String key) {

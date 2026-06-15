@@ -1,11 +1,6 @@
 package com.zifang.util.devops.git.github.release;
 
-import org.kohsuke.github.GHAsset;
-import org.kohsuke.github.GHRelease;
-import org.kohsuke.github.GHReleaseUpdater;
-import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GitHub;
-import org.kohsuke.github.PagedIterator;
+import org.kohsuke.github.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +25,7 @@ public class ReleaseApiWrapper {
 
     /**
      * ReleaseApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
      */
     public ReleaseApiWrapper(GitHub github) {
         this.github = github;
@@ -38,9 +33,10 @@ public class ReleaseApiWrapper {
 
     /**
      * ReleaseApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
+     *
      * @param owner String类型参数
-     * @param repo String类型参数
+     * @param repo  String类型参数
      */
     public ReleaseApiWrapper(GitHub github, String owner, String repo) {
         this.github = github;
@@ -50,7 +46,8 @@ public class ReleaseApiWrapper {
 
     /**
      * withRepo方法。
-     *      * @param owner String类型参数
+     * * @param owner String类型参数
+     *
      * @param repo String类型参数
      * @return ReleaseApiWrapper类型返回值
      */

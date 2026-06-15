@@ -2,12 +2,12 @@ package com.zifang.util.ml.clustering;
 
 import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * GMMTest类。
@@ -28,25 +28,25 @@ public class GMMTest {
 
     private NdArray generateGMMData(int nSamples) {
         double[][] data = new double[nSamples][2];
-        
+
         // Component 1: centered at (0, 0)
         for (int i = 0; i < nSamples / 3; i++) {
             data[i][0] = random.nextGaussian() * 0.5;
             data[i][1] = random.nextGaussian() * 0.5;
         }
-        
+
         // Component 2: centered at (5, 5)
         for (int i = nSamples / 3; i < 2 * nSamples / 3; i++) {
             data[i][0] = random.nextGaussian() * 0.5 + 5.0;
             data[i][1] = random.nextGaussian() * 0.5 + 5.0;
         }
-        
+
         // Component 3: centered at (0, 5)
         for (int i = 2 * nSamples / 3; i < nSamples; i++) {
             data[i][0] = random.nextGaussian() * 0.5;
             data[i][1] = random.nextGaussian() * 0.5 + 5.0;
         }
-        
+
         return createNdArray(data, nSamples, 2);
     }
 
@@ -57,17 +57,17 @@ public class GMMTest {
     public void testGMMFit() {
         int nSamples = 90;
         NdArray X = generateGMMData(nSamples);
-        
+
         GMM gmm = new GMM(3, 100, 1e-4);
         int[] labels = gmm.fitPredict(X);
-        
+
         assertEquals(nSamples, labels.length);
-        
+
         // All labels should be valid (0, 1, or 2)
         for (int label : labels) {
             assertTrue(label >= 0 && label < 3, "Labels should be 0, 1, or 2");
         }
-        
+
         // Each cluster should have some points
         int[] clusterCounts = new int[3];
         for (int label : labels) {
@@ -85,15 +85,15 @@ public class GMMTest {
     public void testGMMProba() {
         int nSamples = 60;
         NdArray X = generateGMMData(nSamples);
-        
+
         GMM gmm = new GMM(3, 100, 1e-4);
         gmm.fit(X);
-        
+
         NdArray proba = gmm.predictProba(X);
-        
+
         assertEquals(nSamples, proba.getShape().get(0));
         assertEquals(3, proba.getShape().get(1));
-        
+
         // Probabilities should sum to 1 for each sample
         for (int i = 0; i < nSamples; i++) {
             double sum = 0;
@@ -113,13 +113,13 @@ public class GMMTest {
     public void testGMMConvergence() {
         int nSamples = 45;
         NdArray X = generateGMMData(nSamples);
-        
+
         // Should terminate without error
         GMM gmm = new GMM(3, 50, 1e-6);
         int[] labels = gmm.fitPredict(X);
-        
+
         assertEquals(nSamples, labels.length);
-        
+
         // Predictions should work
         NdArray proba = gmm.predictProba(X);
         assertEquals(nSamples, proba.getShape().get(0));

@@ -16,7 +16,7 @@ public class Expanding {
 
     /**
      * Expanding方法。
-     *      * @param series Series类型参数
+     * * @param series Series类型参数
      */
     public Expanding(Series series) {
         this(series, 1);
@@ -24,7 +24,8 @@ public class Expanding {
 
     /**
      * Expanding方法。
-     *      * @param series Series类型参数
+     * * @param series Series类型参数
+     *
      * @param minPeriods int类型参数
      */
     public Expanding(Series series, int minPeriods) {

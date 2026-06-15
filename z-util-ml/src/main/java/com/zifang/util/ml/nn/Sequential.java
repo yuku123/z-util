@@ -1,7 +1,6 @@
 package com.zifang.util.ml.nn;
 
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +10,20 @@ import java.util.List;
  * Data flows through each module sequentially.
  */
 public class Sequential extends Module {
-    
+
     private final List<Module> modules = new ArrayList<>();
     private final List<NdArray> intermediateInputs = new ArrayList<>();
-    
+
     /**
      * Sequential方法。
-     *      * @param modules Module...类型参数
+     * * @param modules Module...类型参数
      */
     public Sequential(Module... modules) {
         for (Module module : modules) {
             add(module);
         }
     }
-    
+
     /**
      * Adds a module to the sequential container
      */
@@ -34,7 +33,7 @@ public class Sequential extends Module {
             registerParameter("sequential_param", param);
         }
     }
-    
+
     @Override
     /**
      * forward方法。
@@ -45,14 +44,14 @@ public class Sequential extends Module {
         intermediateInputs.clear();
         NdArray current = input;
         intermediateInputs.add(current.copy());
-        
+
         for (Module module : modules) {
             current = module.forward(current);
             intermediateInputs.add(current.copy());
         }
         return current;
     }
-    
+
     @Override
     /**
      * backward方法。
@@ -61,7 +60,7 @@ public class Sequential extends Module {
      */
     public NdArray backward(NdArray gradOutput) {
         NdArray grad = gradOutput;
-        
+
         // Backward through modules in reverse order
         for (int i = modules.size() - 1; i >= 0; i--) {
             Module module = modules.get(i);
@@ -69,7 +68,7 @@ public class Sequential extends Module {
         }
         return grad;
     }
-    
+
     @Override
     /**
      * train方法。
@@ -80,7 +79,7 @@ public class Sequential extends Module {
             module.train();
         }
     }
-    
+
     @Override
     /**
      * eval方法。
@@ -91,14 +90,14 @@ public class Sequential extends Module {
             module.eval();
         }
     }
-    
+
     /**
      * Returns the number of modules in the sequential container
      */
     public int size() {
         return modules.size();
     }
-    
+
     /**
      * Returns the module at the given index
      */

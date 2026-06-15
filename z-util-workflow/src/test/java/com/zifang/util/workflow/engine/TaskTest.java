@@ -1,8 +1,8 @@
 package com.zifang.util.workflow.engine;
 
+import com.zifang.util.workflow.config.Connector;
 import com.zifang.util.workflow.config.ExecutableWorkflowNode;
 import com.zifang.util.workflow.config.WorkflowNode;
-import com.zifang.util.workflow.config.Connector;
 import com.zifang.util.workflow.conponents.Task;
 import com.zifang.util.workflow.conponents.WorkFlowApplicationContext;
 import org.junit.Test;
@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
  * Task 类测试
  * 测试工作流任务执行单元的各种功能
  */
+
 /**
  * TaskTest类。
  */

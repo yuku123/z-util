@@ -27,7 +27,8 @@ public class U {
 
     /**
      * addText方法。
-     *      * @param p1 XWPFParagraph类型参数
+     * * @param p1 XWPFParagraph类型参数
+     *
      * @param s String类型参数
      * @param i int类型参数
      * @return static XWPFRun类型返回值
@@ -42,7 +43,7 @@ public class U {
      * 向段落中添加文本
      *
      * @param titleParagraph 目标段落
-     * @param s 要添加的文本内容
+     * @param s              要添加的文本内容
      * @return 创建的文本运行对象
      */
     public static XWPFRun addText(XWPFParagraph titleParagraph, String s) {
@@ -56,7 +57,7 @@ public class U {
      * 向段落中添加居中对齐的文本
      *
      * @param titleParagraph 目标段落
-     * @param s 要添加的文本内容
+     * @param s              要添加的文本内容
      * @return 创建的文本运行对象
      */
     public static XWPFRun addTextCenter(XWPFParagraph titleParagraph, String s) {
@@ -70,7 +71,7 @@ public class U {
      * 向段落中添加右对齐的文本
      *
      * @param titleParagraph 目标段落
-     * @param s 要添加的文本内容
+     * @param s              要添加的文本内容
      * @return 创建的文本运行对象
      */
     public static XWPFRun addTextRight(XWPFParagraph titleParagraph, String s) {
@@ -84,7 +85,7 @@ public class U {
      * 向段落中添加多行文本列表
      *
      * @param titleParagraph 目标段落
-     * @param textList 要添加的文本列表
+     * @param textList       要添加的文本列表
      * @return 创建的文本运行对象
      */
     public static XWPFRun addText(XWPFParagraph titleParagraph, List<String> textList) {
@@ -101,8 +102,8 @@ public class U {
      * 向段落中添加循环重复的文本
      *
      * @param titleParagraph 目标段落
-     * @param s 要重复添加的文本内容
-     * @param loopTimes 重复次数
+     * @param s              要重复添加的文本内容
+     * @param loopTimes      重复次数
      */
     public static void addLoopText(XWPFParagraph titleParagraph, String s, Integer loopTimes) {
         for (Integer i = 0; i < loopTimes; i++) {
@@ -116,7 +117,7 @@ public class U {
      * 创建一级标题
      *
      * @param paragraph 目标段落
-     * @param title 标题文本
+     * @param title     标题文本
      */
     public static void createHeading1(XWPFParagraph paragraph, String title) {
         paragraph.setStyle("Heading 1");
@@ -129,7 +130,7 @@ public class U {
      * 创建二级标题
      *
      * @param paragraph 目标段落
-     * @param title 标题文本
+     * @param title     标题文本
      */
     public static void createHeading2(XWPFParagraph paragraph, String title) {
         paragraph.setStyle("Heading 2");
@@ -142,7 +143,7 @@ public class U {
      * 创建三级标题
      *
      * @param paragraph 目标段落
-     * @param title 标题文本
+     * @param title     标题文本
      */
     public static void createHeading3(XWPFParagraph paragraph, String title) {
         paragraph.setStyle("Heading 3");
@@ -156,7 +157,7 @@ public class U {
      * 创建四级标题
      *
      * @param paragraph 目标段落
-     * @param title 标题文本
+     * @param title     标题文本
      */
     public static void createHeading4(XWPFParagraph paragraph, String title) {
         paragraph.setStyle("Heading 4");
@@ -169,7 +170,7 @@ public class U {
      * 向段落中添加图片
      *
      * @param paragraph 目标段落
-     * @param path 图片文件路径
+     * @param path      图片文件路径
      * @throws Throwable 如果文件不存在或图片格式错误则抛出异常
      */
     public static void createGraph(XWPFParagraph paragraph, String path) throws Throwable {
@@ -192,7 +193,7 @@ public class U {
      * 添加自定义标题样式
      *
      * @param docxDocument Word文档对象
-     * @param strStyleId 样式ID
+     * @param strStyleId   样式ID
      * @param headingLevel 标题级别
      */
     public static void addCustomHeadingStyle(XWPFDocument docxDocument, String strStyleId, int headingLevel) {
@@ -227,11 +228,11 @@ public class U {
      * 添加自定义标题样式（带字体大小和颜色配置）
      *
      * @param docxDocument Word文档对象
-     * @param styles 样式集合
-     * @param strStyleId 样式ID
+     * @param styles       样式集合
+     * @param strStyleId   样式ID
      * @param headingLevel 标题级别
-     * @param pointSize 字体大小（磅）
-     * @param hexColor 十六进制颜色值，如"4288BC"
+     * @param pointSize    字体大小（磅）
+     * @param hexColor     十六进制颜色值，如"4288BC"
      */
     public static void addCustomHeadingStyle(XWPFDocument docxDocument, XWPFStyles styles, String strStyleId, int headingLevel, int pointSize, String hexColor) {
 
@@ -319,8 +320,8 @@ public class U {
     /**
      * 向文档中添加简单的数据表格
      *
-     * @param document Word文档对象
-     * @param list 表头列表，每项为键值对(key为表头名称，value为数据字段名)
+     * @param document    Word文档对象
+     * @param list        表头列表，每项为键值对(key为表头名称，value为数据字段名)
      * @param dataMapList 数据列表，每项为一个Map对象
      */
     public static void addSimpleTable(XWPFDocument document, List<Tuple<String, String>> list, List<Map<String, Object>> dataMapList) {
@@ -405,10 +406,10 @@ public class U {
      * 向文档中添加简单的数据表格（支持自定义列宽）
      * 支持调节行内各自间距
      *
-     * @param document Word文档对象
-     * @param list 表头列表，每项为键值对(key为表头名称，value为数据字段名)
+     * @param document    Word文档对象
+     * @param list        表头列表，每项为键值对(key为表头名称，value为数据字段名)
      * @param dataMapList 数据列表，每项为一个Map对象
-     * @param dimention 列宽映射，key为列索引，value为宽度值
+     * @param dimention   列宽映射，key为列索引，value为宽度值
      */
     public static void addSimpleTable(XWPFDocument document, List<Tuple<String, String>> list, List<Map<String, Object>> dataMapList, Map<Integer, String> dimention) {
         //基本信息表格
@@ -452,10 +453,10 @@ public class U {
     /**
      * 水平合并表格单元格
      *
-     * @param table 目标表格
-     * @param row 行索引
+     * @param table    目标表格
+     * @param row      行索引
      * @param fromCell 起始单元格索引
-     * @param toCell 结束单元格索引
+     * @param toCell   结束单元格索引
      */
     public static void mergeCellsHorizontal(XWPFTable table, int row, int fromCell, int toCell) {
 
@@ -478,13 +479,14 @@ public class U {
     }
 
     // word跨行并单元格
+
     /**
      * 垂直合并表格单元格（跨行合并）
      *
-     * @param table 目标表格
-     * @param col 列索引
+     * @param table   目标表格
+     * @param col     列索引
      * @param fromRow 起始行索引
-     * @param toRow 结束行索引
+     * @param toRow   结束行索引
      */
     public static void mergeCellsVertically(XWPFTable table, int col, int fromRow, int toRow) {
         for (int rowIndex = fromRow; rowIndex <= toRow; rowIndex++) {

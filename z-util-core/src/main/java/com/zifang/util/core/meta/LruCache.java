@@ -29,7 +29,7 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
 
     /**
      * LruCache方法。
-     *      * @param maxCapacity int类型参数
+     * * @param maxCapacity int类型参数
      */
     public LruCache(int maxCapacity) {
         super(16, DEFAULT_LOAD_FACTOR, true);
@@ -136,6 +136,7 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
 
     /**
      * getMaxCapacity方法。
+     *
      * @return int类型返回值
      */
     public int getMaxCapacity() {
@@ -144,7 +145,7 @@ public class LruCache<K, V> extends LinkedHashMap<K, V> {
 
     /**
      * setMaxCapacity方法。
-     *      * @param maxCapacity int类型参数
+     * * @param maxCapacity int类型参数
      */
     public void setMaxCapacity(int maxCapacity) {
         this.maxCapacity = maxCapacity;

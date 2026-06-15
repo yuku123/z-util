@@ -108,19 +108,25 @@ public class Maps {
 
     public static <K, V> java.util.Map<K, V> of(K k1, V v1, K k2, V v2) {
         java.util.Map<K, V> m = new java.util.LinkedHashMap<>(4);
-        m.put(k1, v1); m.put(k2, v2);
+        m.put(k1, v1);
+        m.put(k2, v2);
         return java.util.Collections.unmodifiableMap(m);
     }
 
     public static <K, V> java.util.Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
         java.util.Map<K, V> m = new java.util.LinkedHashMap<>(8);
-        m.put(k1, v1); m.put(k2, v2); m.put(k3, v3);
+        m.put(k1, v1);
+        m.put(k2, v2);
+        m.put(k3, v3);
         return java.util.Collections.unmodifiableMap(m);
     }
 
     public static <K, V> java.util.Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
         java.util.Map<K, V> m = new java.util.LinkedHashMap<>(8);
-        m.put(k1, v1); m.put(k2, v2); m.put(k3, v3); m.put(k4, v4);
+        m.put(k1, v1);
+        m.put(k2, v2);
+        m.put(k3, v3);
+        m.put(k4, v4);
         return java.util.Collections.unmodifiableMap(m);
     }
 }

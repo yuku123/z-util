@@ -21,16 +21,9 @@ public enum DType {
     }
 
     /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
      * fromClass方法。
-     *      * @param cls Class?类型参数
+     * * @param cls Class?类型参数
+     *
      * @return static DType类型返回值
      */
     public static DType fromClass(Class<?> cls) {
@@ -46,20 +39,39 @@ public enum DType {
     }
 
     /**
+     * getName方法。
+     *
+     * @return String类型返回值
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * toClass方法。
+     *
      * @return Class<?>类型返回值
      */
     public Class<?> toClass() {
         switch (this) {
-            case INT8: return byte.class;
-            case INT16: return short.class;
-            case INT32: return int.class;
-            case INT64: return long.class;
-            case FLOAT32: return float.class;
-            case FLOAT64: return double.class;
-            case BOOL: return boolean.class;
-            case STRING: return String.class;
-            default: return Object.class;
+            case INT8:
+                return byte.class;
+            case INT16:
+                return short.class;
+            case INT32:
+                return int.class;
+            case INT64:
+                return long.class;
+            case FLOAT32:
+                return float.class;
+            case FLOAT64:
+                return double.class;
+            case BOOL:
+                return boolean.class;
+            case STRING:
+                return String.class;
+            default:
+                return Object.class;
         }
     }
 }

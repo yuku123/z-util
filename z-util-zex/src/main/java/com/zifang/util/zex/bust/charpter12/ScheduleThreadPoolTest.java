@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
+
 import java.util.concurrent.*;
 
 /**
@@ -19,14 +20,15 @@ public class ScheduleThreadPoolTest {
 
     /**
      * method1方法。
+     *
      * @return static void类型返回值
      */
     public static void method1() {
         exec.schedule(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 System.out.println("1");
             }
@@ -35,15 +37,16 @@ public class ScheduleThreadPoolTest {
 
     /**
      * method2方法。
+     *
      * @return static void类型返回值
      */
     public static void method2() {
         ScheduledFuture<String> future = exec.schedule(new Callable<String>() {
             @Override
-    /**
-     * call方法。
-     * @return String类型返回值
-     */
+            /**
+             * call方法。
+             * @return String类型返回值
+             */
             public String call() throws Exception {
                 return "Callable";
             }
@@ -57,7 +60,8 @@ public class ScheduleThreadPoolTest {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

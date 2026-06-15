@@ -2,8 +2,9 @@ package com.zifang.util.media.graph.qrcode.decoder;
 
 import com.zifang.util.media.graph.qrcode.encoder.BitMatrix;
 import org.junit.Test;
-import java.awt.*;
+
 import java.awt.image.BufferedImage;
+
 import static org.junit.Assert.*;
 
 /**

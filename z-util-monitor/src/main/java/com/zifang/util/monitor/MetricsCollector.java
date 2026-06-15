@@ -1,17 +1,7 @@
 package com.zifang.util.monitor;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.MemoryMXBean;
-import java.lang.management.MemoryUsage;
-import java.lang.management.ThreadMXBean;
-import java.lang.management.ThreadInfo;
-import java.lang.management.OperatingSystemMXBean;
-import java.lang.management.RuntimeMXBean;
-import java.lang.management.ClassLoadingMXBean;
-import java.lang.management.GarbageCollectorMXBean;
+import java.lang.management.*;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 内置指标采集器
@@ -23,10 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MetricsCollector {
 
     private final MetricsRegistry registry;
-    private boolean jvmEnabled = false;
-    private boolean osEnabled = false;
-    private boolean threadEnabled = false;
-
     // MXBeans
     private final MemoryMXBean memoryMXBean;
     private final ThreadMXBean threadMXBean;
@@ -34,6 +20,9 @@ public class MetricsCollector {
     private final RuntimeMXBean runtimeMXBean;
     private final ClassLoadingMXBean classLoadingMXBean;
     private final List<GarbageCollectorMXBean> gcMXBeans;
+    private boolean jvmEnabled = false;
+    private boolean osEnabled = false;
+    private boolean threadEnabled = false;
 
     /**
      * MetricsCollector方法。
@@ -263,6 +252,7 @@ public class MetricsCollector {
 
     /**
      * isJvmEnabled方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isJvmEnabled() {
@@ -271,6 +261,7 @@ public class MetricsCollector {
 
     /**
      * isOsEnabled方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isOsEnabled() {
@@ -279,6 +270,7 @@ public class MetricsCollector {
 
     /**
      * isThreadEnabled方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isThreadEnabled() {
@@ -287,6 +279,7 @@ public class MetricsCollector {
 
     /**
      * getRegistry方法。
+     *
      * @return MetricsRegistry类型返回值
      */
     public MetricsRegistry getRegistry() {

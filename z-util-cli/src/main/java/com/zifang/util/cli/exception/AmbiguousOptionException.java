@@ -13,7 +13,8 @@ public class AmbiguousOptionException extends UnrecognizedOptionException {
 
     /**
      * AmbiguousOptionException方法。
-     *      * @param option final类型参数
+     * * @param option final类型参数
+     *
      * @param matchingOptions final类型参数
      */
     public AmbiguousOptionException(final String option, final Collection<String> matchingOptions) {
@@ -40,6 +41,7 @@ public class AmbiguousOptionException extends UnrecognizedOptionException {
 
     /**
      * getMatchingOptions方法。
+     *
      * @return Collection<String>类型返回值
      */
     public Collection<String> getMatchingOptions() {

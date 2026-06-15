@@ -27,6 +27,28 @@ public class ResultSetHandler {
 
     private ResultSetMetaData resultSetMetaData;
 
+    private static String handleColumn(Field field) {
+        Column column = field.getAnnotation(Column.class);
+        if (column == null) {
+            StringBuilder convertName = new StringBuilder();
+            for (int i = 0; i < field.getName().length(); i++) {
+                //如果是大写前面先加一个_
+                if (isUpperCase(field.getName().charAt(i))) {
+                    convertName.append("_");
+                }
+                convertName.append(field.getName().charAt(i));
+            }
+            return convertName.toString().toLowerCase();
+        } else {
+            return column.name();
+        }
+    }
+
+    //字母是否是大写
+    private static boolean isUpperCase(char c) {
+        return c >= 65 && c <= 90;
+    }
+
     /**
      * 处理ResultSet并转换为目标类型
      *
@@ -108,28 +130,6 @@ public class ResultSetHandler {
             }
         }
         return o;
-    }
-
-    private static String handleColumn(Field field) {
-        Column column = field.getAnnotation(Column.class);
-        if (column == null) {
-            StringBuilder convertName = new StringBuilder();
-            for (int i = 0; i < field.getName().length(); i++) {
-                //如果是大写前面先加一个_
-                if (isUpperCase(field.getName().charAt(i))) {
-                    convertName.append("_");
-                }
-                convertName.append(field.getName().charAt(i));
-            }
-            return convertName.toString().toLowerCase();
-        } else {
-            return column.name();
-        }
-    }
-
-    //字母是否是大写
-    private static boolean isUpperCase(char c) {
-        return c >= 65 && c <= 90;
     }
 
     private List<Map<String, Object>> fetch(ResultSet resultSet) throws SQLException {

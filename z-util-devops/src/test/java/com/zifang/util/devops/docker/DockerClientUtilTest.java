@@ -1,17 +1,18 @@
 package com.zifang.util.devops.docker;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * DockerClient 内部工具方法测试
  * <p>
  * 通过反射调用 private 方法验证其正确性。
  */
+
 /**
  * DockerClientUtilTest类。
  */

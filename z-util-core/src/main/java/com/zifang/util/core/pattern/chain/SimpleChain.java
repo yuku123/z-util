@@ -1,6 +1,9 @@
 package com.zifang.util.core.pattern.chain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * 简单链实现
@@ -22,7 +25,7 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * SimpleChain方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public SimpleChain(String name) {
         this.name = name;
@@ -31,7 +34,7 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * SimpleChain方法。
-     *      * @param processor ProcessorC类型参数
+     * * @param processor ProcessorC类型参数
      */
     public SimpleChain(Processor<C> processor) {
         this();
@@ -42,7 +45,8 @@ public class SimpleChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * SimpleChain方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param processor ProcessorC类型参数
      */
     public SimpleChain(String name, Processor<C> processor) {

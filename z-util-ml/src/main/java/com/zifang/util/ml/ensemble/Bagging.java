@@ -1,8 +1,8 @@
 package com.zifang.util.ml.ensemble;
 
-import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.DType;
 import com.zifang.util.ml.tree.DecisionTree;
+import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +24,9 @@ public class Bagging {
 
     /**
      * Create a Bagging ensemble.
-     * @param nEstimators Number of base estimators
-     * @param maxDepth Maximum depth of each DecisionTree
+     *
+     * @param nEstimators     Number of base estimators
+     * @param maxDepth        Maximum depth of each DecisionTree
      * @param minSamplesSplit Minimum samples required to split a node
      */
     public Bagging(int nEstimators, int maxDepth, int minSamplesSplit) {
@@ -39,6 +40,7 @@ public class Bagging {
     /**
      * Fit the Bagging ensemble on training data.
      * Creates bootstrap samples and trains a DecisionTree on each.
+     *
      * @param X Training features
      * @param y Training labels
      */
@@ -76,6 +78,7 @@ public class Bagging {
 
     /**
      * Predict class labels using majority vote.
+     *
      * @param X Features to predict
      * @return Predicted class labels
      */
@@ -112,6 +115,7 @@ public class Bagging {
 
     /**
      * Predict class probabilities by averaging probabilities from all estimators.
+     *
      * @param X Features to predict
      * @return Probability array of shape (n_samples, n_classes)
      */
@@ -233,6 +237,7 @@ public class Bagging {
 
     /**
      * getNEstimators方法。
+     *
      * @return int类型返回值
      */
     public int getNEstimators() {
@@ -241,6 +246,7 @@ public class Bagging {
 
     /**
      * getEstimators方法。
+     *
      * @return List<DecisionTree>类型返回值
      */
     public List<DecisionTree> getEstimators() {

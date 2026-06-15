@@ -1,12 +1,13 @@
 package com.zifang.util.ml.loss;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
-import com.zifang.util.numpy.Shape;
+import com.zifang.util.numpy.NdArray;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests for loss functions: MSELoss and CrossEntropyLoss.

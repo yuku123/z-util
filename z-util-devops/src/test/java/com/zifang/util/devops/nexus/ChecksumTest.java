@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Checksum 类测试
  */
+
 /**
  * ChecksumTest类。
  */

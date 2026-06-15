@@ -1,15 +1,7 @@
 package com.zifang.util.core.pattern.spi;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ServiceLoader;
 
 /**
@@ -23,8 +15,8 @@ import java.util.ServiceLoader;
  */
 public class SpiLoader<T> {
 
-    private final Class<T> clazz;
     private static final String META_INF_SERVICES = "META-INF/services/";
+    private final Class<T> clazz;
 
     private SpiLoader(Class<T> clazz) {
         this.clazz = clazz;

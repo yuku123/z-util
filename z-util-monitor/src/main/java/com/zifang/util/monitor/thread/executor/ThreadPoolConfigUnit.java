@@ -152,21 +152,21 @@ public class ThreadPoolConfigUnit {
     }
 
     /**
-     * 获取告警服务。
-     *
-     * @return 告警服务对象
-     */
-    public AlarmService getAlarmService() {
-        return alarmService;
-    }
-
-    /**
      * 设置告警策略。
      *
      * @param alarmPolicy 待设置告警策略。
      */
     public void setAlarmPolicy(AlarmPolicy alarmPolicy) {
         this.alarmPolicy = alarmPolicy;
+    }
+
+    /**
+     * 获取告警服务。
+     *
+     * @return 告警服务对象
+     */
+    public AlarmService getAlarmService() {
+        return alarmService;
     }
 
     /**

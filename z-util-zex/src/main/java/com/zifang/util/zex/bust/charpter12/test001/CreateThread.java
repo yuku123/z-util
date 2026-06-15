@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.charpter12.test001;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.util.concurrent.Callable;
@@ -19,6 +20,36 @@ import java.util.concurrent.FutureTask;
  * CreateThread类。
  */
 public class CreateThread {
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        Thread thread = new Thread() {
+            @Override
+            /**
+             * run方法。
+             */
+            public void run() {
+                while (true) {
+                    System.out.print("");
+                }
+            }
+        };
+
+        thread.start();
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(thread.getName());
+        thread.setName("吃饭");
+        System.out.println(thread.getName());
+    }
+
     @Test
     /**
      * test0方法。
@@ -27,9 +58,9 @@ public class CreateThread {
         System.out.println("开始运行整体_" + System.currentTimeMillis());
         Thread thread = new Thread() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 System.out.println("线程开始运行_" + System.currentTimeMillis());
                 try {
@@ -56,9 +87,9 @@ public class CreateThread {
         System.out.println("开始运行整体_" + System.currentTimeMillis());
         Runnable runnable = new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 System.out.println("线程开始运行_" + System.currentTimeMillis());
                 try {
@@ -85,9 +116,9 @@ public class CreateThread {
         System.out.println("开始运行整体_" + System.currentTimeMillis());
         Runnable runnable = new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 System.out.println("线程开始运行_" + System.currentTimeMillis());
                 try {
@@ -102,9 +133,9 @@ public class CreateThread {
         };
         new Thread(runnable) {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 System.out.println("吃饭吃饭吃饭吃饭");
             }
@@ -122,10 +153,10 @@ public class CreateThread {
         System.out.println("开始运行整体_" + System.currentTimeMillis());
         FutureTask<Long> futureTask = new FutureTask<>(new Callable<Long>() {
             @Override
-    /**
-     * call方法。
-     * @return long类型返回值
-     */
+            /**
+             * call方法。
+             * @return long类型返回值
+             */
             public Long call() {
                 System.out.println("线程开始运行_" + System.currentTimeMillis());
                 try {
@@ -145,34 +176,5 @@ public class CreateThread {
         Thread.sleep(2000);
         System.out.println("main结束睡眠_" + System.currentTimeMillis());
         System.out.println("futureTask计算得到的数据为：" + futureTask.get());
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        Thread thread = new Thread() {
-            @Override
-    /**
-     * run方法。
-     */
-            public void run() {
-                while (true) {
-                    System.out.print("");
-                }
-            }
-        };
-
-        thread.start();
-        try {
-            Thread.sleep(1000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(thread.getName());
-        thread.setName("吃饭");
-        System.out.println(thread.getName());
     }
 }

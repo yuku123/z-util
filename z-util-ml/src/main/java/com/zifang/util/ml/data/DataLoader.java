@@ -2,7 +2,6 @@ package com.zifang.util.ml.data;
 
 import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,10 +25,10 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
     /**
      * Create a DataLoader.
      *
-     * @param dataset    Source dataset
-     * @param batchSize  Number of samples per batch
-     * @param shuffle    Whether to shuffle data before each epoch
-     * @param dropLast   Whether to drop the last incomplete batch
+     * @param dataset   Source dataset
+     * @param batchSize Number of samples per batch
+     * @param shuffle   Whether to shuffle data before each epoch
+     * @param dropLast  Whether to drop the last incomplete batch
      */
     public DataLoader(Dataset dataset, int batchSize, boolean shuffle, boolean dropLast) {
         if (batchSize <= 0) {
@@ -92,36 +91,40 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
         private final NdArray features;
         private final NdArray labels;
 
-    /**
-     * Batch方法。
-     *      * @param features NdArray类型参数
-     * @param labels NdArray类型参数
-     */
+        /**
+         * Batch方法。
+         * * @param features NdArray类型参数
+         *
+         * @param labels NdArray类型参数
+         */
         public Batch(NdArray features, NdArray labels) {
             this.features = features;
             this.labels = labels;
         }
 
-    /**
-     * getFeatures方法。
-     * @return NdArray类型返回值
-     */
+        /**
+         * getFeatures方法。
+         *
+         * @return NdArray类型返回值
+         */
         public NdArray getFeatures() {
             return features;
         }
 
-    /**
-     * getLabels方法。
-     * @return NdArray类型返回值
-     */
+        /**
+         * getLabels方法。
+         *
+         * @return NdArray类型返回值
+         */
         public NdArray getLabels() {
             return labels;
         }
 
-    /**
-     * getSize方法。
-     * @return int类型返回值
-     */
+        /**
+         * getSize方法。
+         *
+         * @return int类型返回值
+         */
         public int getSize() {
             return features.getShape().get(0);
         }
@@ -156,10 +159,10 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
         }
 
         @Override
-    /**
-     * hasNext方法。
-     * @return boolean类型返回值
-     */
+        /**
+         * hasNext方法。
+         * @return boolean类型返回值
+         */
         public boolean hasNext() {
             int nSamples = dataset.size();
             int maxIndex = dropLast
@@ -170,10 +173,10 @@ public class DataLoader implements Iterable<DataLoader.Batch> {
         }
 
         @Override
-    /**
-     * next方法。
-     * @return Batch类型返回值
-     */
+        /**
+         * next方法。
+         * @return Batch类型返回值
+         */
         public Batch next() {
             if (!hasNext()) {
                 throw new java.util.NoSuchElementException();

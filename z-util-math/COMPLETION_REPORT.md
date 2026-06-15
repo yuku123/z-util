@@ -9,6 +9,7 @@
 ### 1. 核心数据结构 (已完成 ✅)
 
 #### Num 类 - 多维数组 (numpy.ndarray)
+
 - ✅ 多维数组创建和操作
 - ✅ 数组切片、索引、变形
 - ✅ 广播机制支持
@@ -16,6 +17,7 @@
 - ✅ 文件 I/O (save/load)
 
 #### Series 类 - 一维标记数组 (pandas.Series)
+
 - ✅ 带标签的一维数组
 - ✅ 多种数据选择方式（位置、标签、布尔索引）
 - ✅ 丰富的统计方法（mean, std, sum, count, min, max, median, percentile 等）
@@ -25,6 +27,7 @@
 - ✅ **插值方法** (interpolate)
 
 #### DataFrame 类 - 二维表格数据 (pandas.DataFrame)
+
 - ✅ 二维表格数据结构
 - ✅ 列操作（添加、删除、重命名）
 - ✅ 行操作（切片、排序、过滤）
@@ -37,6 +40,7 @@
 ### 2. 新增功能模块 (已完成 ✅)
 
 #### 2.1 数据转换和重塑 (transform.Reshaper) ✅
+
 - ✅ pivot - 数据透视表
 - ✅ melt - 数据融合
 - ✅ stack/unstack - 堆叠/取消堆叠
@@ -44,6 +48,7 @@
 - ✅ transpose - 转置
 
 #### 2.2 字符串操作 (str.StringAccessor) ✅
+
 - ✅ 大小写转换 (lower, upper)
 - ✅ 空白处理 (strip, lstrip, rstrip)
 - ✅ 查找和替换 (contains, replace, replaceRegex)
@@ -52,27 +57,33 @@
 - ✅ 其他操作 (length, cat, repeat)
 
 #### 2.3 缺失值插值 (interpolate.Interpolator) ✅
+
 - ✅ 线性插值 (linear)
 - ✅ 前向填充 (forward)
 - ✅ 后向填充 (backward)
 
 #### 2.4 相关性分析 (stats.Correlation) ✅
+
 - ✅ Pearson 相关系数矩阵 (corr, pearson)
 - ✅ 协方差矩阵 (cov)
 
 #### 2.5 数据分箱 (discretize.Discretizer) ✅
+
 - ✅ 等宽分箱 (cut)
 - ✅ 等频分箱 (qcut)
 
 ### 3. 窗口函数 (已完成 ✅)
 
 #### 3.1 滚动窗口 (Rolling) ✅
+
 - ✅ mean, sum, max, min, std, var, count
 
 #### 3.2 扩展窗口 (Expanding) ✅
+
 - ✅ mean, sum, max, min, std, var, count
 
 #### 3.3 指数加权移动窗口 (EWM) ✅
+
 - ✅ mean, sum, std, var
 - ✅ 支持 alpha, span, com, halflife 参数
 
@@ -81,31 +92,37 @@
 在 `Pandas.java` 中添加了以下静态快捷方法：
 
 #### 数据转换 ✅
+
 - `Pandas.pivot(df, index, columns, values)`
 - `Pandas.melt(df, idVars, valueVars)`
 - `Pandas.stack(df)`
 - `Pandas.unstack(series)`
 
 #### 插值 ✅
+
 - `Pandas.interpolate(series)`
 - `Pandas.interpolate(series, method)`
 - `Pandas.interpolate(df)`
 - `Pandas.interpolate(df, method)`
 
 #### 相关性分析 ✅
+
 - `Pandas.corr(df)`
 - `Pandas.cov(df)`
 
 #### 数据分箱 ✅
+
 - `Pandas.cut(series, bins)`
 - `Pandas.qcut(series, q)`
 
 #### 转置 ✅
+
 - `Pandas.T(df)`
 
 ## 文件清单
 
 ### 源代码文件 (11个)
+
 1. `Pandas.java` - 入口类
 2. `Series.java` - 一维数组
 3. `DataFrame.java` - 二维表格
@@ -119,6 +136,7 @@
 11. `window/EWM.java` - 指数加权移动窗口
 
 ### 测试文件 (11个)
+
 1. `transform/ReshaperTest.java`
 2. `str/StringAccessorTest.java`
 3. `interpolate/InterpolatorTest.java`
@@ -132,6 +150,7 @@
 11. `NumTest.java` (已有)
 
 ### 文档文件 (4个)
+
 1. `FEATURES.md` - 完整功能文档
 2. `NEW_FEATURES.md` - 新增功能文档
 3. `IMPLEMENTATION_SUMMARY.md` - 实现总结
@@ -139,17 +158,17 @@
 
 ## 功能统计
 
-| 功能类别 | 功能数量 | 状态 |
-|---------|---------|------|
-| 核心数据结构 | 3 | ✅ 完成 |
-| 数据转换和重塑 | 6 | ✅ 完成 |
-| 字符串操作 | 20+ | ✅ 完成 |
-| 插值功能 | 3 | ✅ 完成 |
-| 相关性分析 | 2 | ✅ 完成 |
-| 数据分箱 | 2 | ✅ 完成 |
-| 窗口函数 | 3 | ✅ 完成 |
-| Pandas 入口方法 | 20+ | ✅ 完成 |
-| **总计** | **80+** | **✅ 全部完成** |
+| 功能类别        | 功能数量    | 状态         |
+|-------------|---------|------------|
+| 核心数据结构      | 3       | ✅ 完成       |
+| 数据转换和重塑     | 6       | ✅ 完成       |
+| 字符串操作       | 20+     | ✅ 完成       |
+| 插值功能        | 3       | ✅ 完成       |
+| 相关性分析       | 2       | ✅ 完成       |
+| 数据分箱        | 2       | ✅ 完成       |
+| 窗口函数        | 3       | ✅ 完成       |
+| Pandas 入口方法 | 20+     | ✅ 完成       |
+| **总计**      | **80+** | **✅ 全部完成** |
 
 ## 结论
 
@@ -161,7 +180,8 @@ util-math 模块现已完全实现，包含：
 4. **完善的窗口函数**：rolling, expanding, ewm
 5. **便捷的入口类**：Pandas 类提供静态快捷方法
 
-所有功能均已实现并经过测试，util-math 现在可以作为一个功能完整的 Java 数学计算库，完全替代 Python 的 numpy 和 pandas 在 Java 项目中的使用。
+所有功能均已实现并经过测试，util-math 现在可以作为一个功能完整的 Java 数学计算库，完全替代 Python 的 numpy 和 pandas 在
+Java 项目中的使用。
 
 ---
 

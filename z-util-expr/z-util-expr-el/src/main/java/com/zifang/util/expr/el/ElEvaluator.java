@@ -27,8 +27,8 @@ import java.util.Map;
 public class ElEvaluator {
 
     private final ExpressionParser parser;
-    private StandardEvaluationContext evaluationContext;
     private final Map<String, Object> variableMap;
+    private StandardEvaluationContext evaluationContext;
 
     public ElEvaluator() {
         this.parser = new SpelExpressionParser();
@@ -78,7 +78,7 @@ public class ElEvaluator {
      * Evaluate an EL expression with a set of variables.
      *
      * @param expression the EL expression to evaluate
-     * @param variables the variables to set in the evaluation context
+     * @param variables  the variables to set in the evaluation context
      * @return the result of the expression evaluation
      * @throws ElException if the expression evaluation fails
      */
@@ -119,19 +119,6 @@ public class ElEvaluator {
     }
 
     /**
-     * Set multiple variables in the default evaluation context.
-     *
-     * @param variables a map of variable names to values
-     */
-    public void setVariables(Map<String, Object> variables) {
-        if (variables != null) {
-            for (Map.Entry<String, Object> entry : variables.entrySet()) {
-                setVariable(entry.getKey(), entry.getValue());
-            }
-        }
-    }
-
-    /**
      * Clear all variables from the default evaluation context.
      */
     public void clearVariables() {
@@ -146,5 +133,18 @@ public class ElEvaluator {
      */
     public Map<String, Object> getVariables() {
         return new HashMap<>(variableMap);
+    }
+
+    /**
+     * Set multiple variables in the default evaluation context.
+     *
+     * @param variables a map of variable names to values
+     */
+    public void setVariables(Map<String, Object> variables) {
+        if (variables != null) {
+            for (Map.Entry<String, Object> entry : variables.entrySet()) {
+                setVariable(entry.getKey(), entry.getValue());
+            }
+        }
     }
 }

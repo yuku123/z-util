@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 /**
  * BeautifyYamlUtilsTest类。
  */
+
 /**
  * BeautifyYamlUtilsTest类。
  */

@@ -16,7 +16,9 @@ final class JsonParser {
     private final String s;
     private int pos;
 
-    private JsonParser(String s) { this.s = s; }
+    private JsonParser(String s) {
+        this.s = s;
+    }
 
     static Object parse(String input) {
         JsonParser p = new JsonParser(input.trim());
@@ -34,11 +36,17 @@ final class JsonParser {
         if (pos >= s.length()) throw new IllegalArgumentException("unexpected EOF");
         char c = s.charAt(pos);
         switch (c) {
-            case '{': return parseObject();
-            case '[': return parseArray();
-            case '"': return parseString();
-            case 't': case 'f': return parseBool();
-            case 'n': return parseNull();
+            case '{':
+                return parseObject();
+            case '[':
+                return parseArray();
+            case '"':
+                return parseString();
+            case 't':
+            case 'f':
+                return parseBool();
+            case 'n':
+                return parseNull();
             default:
                 if (c == '-' || (c >= '0' && c <= '9')) return parseNumber();
                 throw new IllegalArgumentException("unexpected char at " + pos + ": " + c);
@@ -49,7 +57,10 @@ final class JsonParser {
         expect('{');
         Map<String, Object> map = new LinkedHashMap<>();
         skipWs();
-        if (peek() == '}') { pos++; return map; }
+        if (peek() == '}') {
+            pos++;
+            return map;
+        }
         while (true) {
             skipWs();
             String key = parseString();
@@ -59,8 +70,14 @@ final class JsonParser {
             map.put(key, value);
             skipWs();
             char ch = peek();
-            if (ch == ',') { pos++; continue; }
-            if (ch == '}') { pos++; return map; }
+            if (ch == ',') {
+                pos++;
+                continue;
+            }
+            if (ch == '}') {
+                pos++;
+                return map;
+            }
             throw new IllegalArgumentException("expected , or } at " + pos);
         }
     }
@@ -69,13 +86,22 @@ final class JsonParser {
         expect('[');
         List<Object> list = new ArrayList<>();
         skipWs();
-        if (peek() == ']') { pos++; return list; }
+        if (peek() == ']') {
+            pos++;
+            return list;
+        }
         while (true) {
             list.add(parseValue());
             skipWs();
             char ch = peek();
-            if (ch == ',') { pos++; continue; }
-            if (ch == ']') { pos++; return list; }
+            if (ch == ',') {
+                pos++;
+                continue;
+            }
+            if (ch == ']') {
+                pos++;
+                return list;
+            }
             throw new IllegalArgumentException("expected , or ] at " + pos);
         }
     }
@@ -90,20 +116,37 @@ final class JsonParser {
                 if (pos >= s.length()) throw new IllegalArgumentException("bad escape");
                 char esc = s.charAt(pos++);
                 switch (esc) {
-                    case '"': sb.append('"'); break;
-                    case '\\': sb.append('\\'); break;
-                    case '/': sb.append('/'); break;
-                    case 'n': sb.append('\n'); break;
-                    case 'r': sb.append('\r'); break;
-                    case 't': sb.append('\t'); break;
-                    case 'b': sb.append('\b'); break;
-                    case 'f': sb.append('\f'); break;
+                    case '"':
+                        sb.append('"');
+                        break;
+                    case '\\':
+                        sb.append('\\');
+                        break;
+                    case '/':
+                        sb.append('/');
+                        break;
+                    case 'n':
+                        sb.append('\n');
+                        break;
+                    case 'r':
+                        sb.append('\r');
+                        break;
+                    case 't':
+                        sb.append('\t');
+                        break;
+                    case 'b':
+                        sb.append('\b');
+                        break;
+                    case 'f':
+                        sb.append('\f');
+                        break;
                     case 'u':
                         if (pos + 4 > s.length()) throw new IllegalArgumentException("bad \\u");
                         sb.append((char) Integer.parseInt(s.substring(pos, pos + 4), 16));
                         pos += 4;
                         break;
-                    default: throw new IllegalArgumentException("bad escape: " + esc);
+                    default:
+                        throw new IllegalArgumentException("bad escape: " + esc);
                 }
             } else {
                 sb.append(c);
@@ -126,13 +169,22 @@ final class JsonParser {
     }
 
     private Boolean parseBool() {
-        if (s.startsWith("true", pos)) { pos += 4; return Boolean.TRUE; }
-        if (s.startsWith("false", pos)) { pos += 5; return Boolean.FALSE; }
+        if (s.startsWith("true", pos)) {
+            pos += 4;
+            return Boolean.TRUE;
+        }
+        if (s.startsWith("false", pos)) {
+            pos += 5;
+            return Boolean.FALSE;
+        }
         throw new IllegalArgumentException("expected true/false at " + pos);
     }
 
     private Object parseNull() {
-        if (s.startsWith("null", pos)) { pos += 4; return null; }
+        if (s.startsWith("null", pos)) {
+            pos += 4;
+            return null;
+        }
         throw new IllegalArgumentException("expected null at " + pos);
     }
 

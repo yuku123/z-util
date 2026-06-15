@@ -12,7 +12,7 @@ public class GZipRunnable implements Runnable {
 
     /**
      * GZipRunnable方法。
-     *      * @param input File类型参数
+     * * @param input File类型参数
      */
     public GZipRunnable(File input) {
         this.input = input;

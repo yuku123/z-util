@@ -1,6 +1,5 @@
 package com.zifang.util.core.pattern.pool.monitor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
@@ -27,7 +26,7 @@ public class PoolMonitor<T> {
 
     /**
      * PoolMonitor方法。
-     *      * @param listener PoolListenerT类型参数
+     * * @param listener PoolListenerT类型参数
      */
     public PoolMonitor(PoolListener<T> listener) {
         if (listener != null) {
@@ -61,18 +60,19 @@ public class PoolMonitor<T> {
     }
 
     /**
-     * 启用/禁用监控
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /**
      * isEnabled方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isEnabled() {
         return enabled;
+    }
+
+    /**
+     * 启用/禁用监控
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     /**
@@ -93,7 +93,8 @@ public class PoolMonitor<T> {
 
     /**
      * recordBorrow方法。
-     *      * @param object T类型参数
+     * * @param object T类型参数
+     *
      * @param waitTime long类型参数
      */
     public void recordBorrow(T object, long waitTime) {
@@ -105,7 +106,8 @@ public class PoolMonitor<T> {
 
     /**
      * recordReturn方法。
-     *      * @param object T类型参数
+     * * @param object T类型参数
+     *
      * @param waitTime long类型参数
      */
     public void recordReturn(T object, long waitTime) {
@@ -117,7 +119,7 @@ public class PoolMonitor<T> {
 
     /**
      * recordCreate方法。
-     *      * @param object T类型参数
+     * * @param object T类型参数
      */
     public void recordCreate(T object) {
         if (!enabled) return;
@@ -128,7 +130,7 @@ public class PoolMonitor<T> {
 
     /**
      * recordDestroy方法。
-     *      * @param object T类型参数
+     * * @param object T类型参数
      */
     public void recordDestroy(T object) {
         if (!enabled) return;
@@ -139,7 +141,8 @@ public class PoolMonitor<T> {
 
     /**
      * recordValidate方法。
-     *      * @param object T类型参数
+     * * @param object T类型参数
+     *
      * @param valid boolean类型参数
      */
     public void recordValidate(T object, boolean valid) {
@@ -150,7 +153,7 @@ public class PoolMonitor<T> {
 
     /**
      * recordEvict方法。
-     *      * @param object T类型参数
+     * * @param object T类型参数
      */
     public void recordEvict(T object) {
         if (!enabled) return;

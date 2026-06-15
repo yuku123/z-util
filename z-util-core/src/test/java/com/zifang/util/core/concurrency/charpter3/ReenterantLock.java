@@ -9,11 +9,31 @@ public class ReenterantLock implements Runnable {
 
     /**
      * ReentrantLock方法。
-     *      * @param true Object类型参数
+     * * @param true Object类型参数
+     *
      * @return static ReentrantLock lock = new类型返回值
      */
     public static ReentrantLock lock = new ReentrantLock(true);//重入锁
     public static int i = 0;
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) throws InterruptedException {
+        ReenterantLock reenterantLock = new ReenterantLock();
+        Thread t1 = new Thread(reenterantLock);
+        t1.setName("T1");
+        Thread t2 = new Thread(reenterantLock);
+        t2.setName("T2");
+        t1.start();
+//        t2.start();
+//        t1.join();
+//        t2.join();
+        System.out.println(i);
+    }
 
     @Override
     /**
@@ -29,24 +49,6 @@ public class ReenterantLock implements Runnable {
                 lock.unlock();
             }
         }
-        System.out.println(i);
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) throws InterruptedException {
-        ReenterantLock reenterantLock = new ReenterantLock();
-        Thread t1 = new Thread(reenterantLock);
-        t1.setName("T1");
-        Thread t2 = new Thread(reenterantLock);
-        t2.setName("T2");
-        t1.start();
-//        t2.start();
-//        t1.join();
-//        t2.join();
         System.out.println(i);
     }
 }

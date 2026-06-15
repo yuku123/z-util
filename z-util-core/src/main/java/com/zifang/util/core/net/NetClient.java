@@ -24,8 +24,8 @@ public interface NetClient extends Closeable {
     /**
      * 连接到指定主机和端口，指定超时时间。
      *
-     * @param host     主机地址
-     * @param port     端口号
+     * @param host      主机地址
+     * @param port      端口号
      * @param timeoutMs 超时时间（毫秒）
      * @throws IOException 连接异常
      */

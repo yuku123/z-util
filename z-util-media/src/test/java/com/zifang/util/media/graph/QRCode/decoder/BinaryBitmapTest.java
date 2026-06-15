@@ -2,6 +2,7 @@ package com.zifang.util.media.graph.qrcode.decoder;
 
 import com.zifang.util.media.graph.qrcode.encoder.BitMatrix;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**

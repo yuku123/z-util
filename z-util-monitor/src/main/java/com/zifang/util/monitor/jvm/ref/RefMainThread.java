@@ -1,11 +1,6 @@
 package com.zifang.util.monitor.jvm.ref;
 
-import java.lang.ref.PhantomReference;
-import java.lang.ref.Reference;
-import java.lang.ref.SoftReference;
-import java.lang.ref.WeakReference;
-import java.lang.ref.ReferenceQueue;
-import java.util.Map;
+import java.lang.ref.*;
 
 /**
  * 引用类型主测试类。
@@ -16,60 +11,6 @@ import java.util.Map;
  * @author zifang
  */
 public class RefMainThread {
-
-    /**
-     * 测试用内部类。
-     */
-    static class RefTestObj {
-        private int id;
-
-    /**
-     * getId方法。
-     * @return int类型返回值
-     */
-        public int getId() {
-            return id;
-        }
-
-    /**
-     * setId方法。
-     *      * @param id int类型参数
-     */
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
-        public int hashCode() {
-            return super.hashCode();
-        }
-
-        @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
-        public String toString() {
-            return super.toString() + "[id=" + this.id + "]";
-        }
-
-        @Override
-    /**
-     * finalize方法。
-     */
-        protected void finalize() {
-            System.out.println("Object [" + this.hashCode() + "][ id=" + this.id + "] come into finalize");
-            try {
-                super.finalize();
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     /**
      * 主方法，演示四种引用类型的回收机制。
@@ -165,5 +106,60 @@ public class RefMainThread {
         RefTestObj obj = ref.get();
         System.out.println("The Reference is " + ref.toString() + " and with object " + obj + " which is "
                 + (obj == null ? "null" : "not null"));
+    }
+
+    /**
+     * 测试用内部类。
+     */
+    static class RefTestObj {
+        private int id;
+
+        /**
+         * getId方法。
+         *
+         * @return int类型返回值
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * setId方法。
+         * * @param id int类型参数
+         */
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        @Override
+        /**
+         * hashCode方法。
+         * @return int类型返回值
+         */
+        public int hashCode() {
+            return super.hashCode();
+        }
+
+        @Override
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
+        public String toString() {
+            return super.toString() + "[id=" + this.id + "]";
+        }
+
+        @Override
+        /**
+         * finalize方法。
+         */
+        protected void finalize() {
+            System.out.println("Object [" + this.hashCode() + "][ id=" + this.id + "] come into finalize");
+            try {
+                super.finalize();
+            } catch (Throwable e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

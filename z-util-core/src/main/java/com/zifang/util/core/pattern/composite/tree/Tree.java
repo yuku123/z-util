@@ -1,7 +1,10 @@
 package com.zifang.util.core.pattern.composite.tree;
 
 import java.util.*;
-import java.util.function.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * 组合模式树结构
@@ -14,7 +17,7 @@ public class Tree {
 
     /**
      * Tree方法。
-     *      * @param root ILeaf类型参数
+     * * @param root ILeaf类型参数
      */
     public Tree(ILeaf root) {
         if (root == null) {
@@ -28,6 +31,7 @@ public class Tree {
 
     /**
      * getRoot方法。
+     *
      * @return ILeaf类型返回值
      */
     public ILeaf getRoot() {
@@ -38,7 +42,7 @@ public class Tree {
 
     /**
      * dfs方法。
-     *      * @param action ConsumerILeaf类型参数
+     * * @param action ConsumerILeaf类型参数
      */
     public void dfs(Consumer<ILeaf> action) {
         Deque<ILeaf> stack = new ArrayDeque<>();
@@ -57,7 +61,7 @@ public class Tree {
 
     /**
      * bfs方法。
-     *      * @param action ConsumerILeaf类型参数
+     * * @param action ConsumerILeaf类型参数
      */
     public void bfs(Consumer<ILeaf> action) {
         Queue<ILeaf> queue = new LinkedList<>();
@@ -73,7 +77,7 @@ public class Tree {
 
     /**
      * preOrder方法。
-     *      * @param action ConsumerILeaf类型参数
+     * * @param action ConsumerILeaf类型参数
      */
     public void preOrder(Consumer<ILeaf> action) {
         root.traversePreOrder(action);
@@ -81,7 +85,7 @@ public class Tree {
 
     /**
      * postOrder方法。
-     *      * @param action ConsumerILeaf类型参数
+     * * @param action ConsumerILeaf类型参数
      */
     public void postOrder(Consumer<ILeaf> action) {
         root.traversePostOrder(action);
@@ -89,7 +93,7 @@ public class Tree {
 
     /**
      * levelOrder方法。
-     *      * @param action ConsumerILeaf类型参数
+     * * @param action ConsumerILeaf类型参数
      */
     public void levelOrder(Consumer<ILeaf> action) {
         bfs(action);
@@ -97,7 +101,7 @@ public class Tree {
 
     /**
      * levelOrder方法。
-     *      * @param action BiConsumerInteger,类型参数
+     * * @param action BiConsumerInteger,类型参数
      */
     public void levelOrder(BiConsumer<Integer, ILeaf> action) {
         Queue<AbstractMap.SimpleEntry<Integer, ILeaf>> queue = new LinkedList<>();
@@ -115,7 +119,7 @@ public class Tree {
 
     /**
      * traverseLeaves方法。
-     *      * @param action ConsumerILeaf类型参数
+     * * @param action ConsumerILeaf类型参数
      */
     public void traverseLeaves(Consumer<ILeaf> action) {
         dfs(node -> {
@@ -129,7 +133,8 @@ public class Tree {
 
     /**
      * find方法。
-     *      * @param predicate PredicateILeaf类型参数
+     * * @param predicate PredicateILeaf类型参数
+     *
      * @return ILeaf类型返回值
      */
     public ILeaf find(Predicate<ILeaf> predicate) {
@@ -138,7 +143,8 @@ public class Tree {
 
     /**
      * findByName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return ILeaf类型返回值
      */
     public ILeaf findByName(String name) {
@@ -147,7 +153,8 @@ public class Tree {
 
     /**
      * findById方法。
-     *      * @param id String类型参数
+     * * @param id String类型参数
+     *
      * @return ILeaf类型返回值
      */
     public ILeaf findById(String id) {
@@ -156,7 +163,8 @@ public class Tree {
 
     /**
      * findAll方法。
-     *      * @param predicate PredicateILeaf类型参数
+     * * @param predicate PredicateILeaf类型参数
+     *
      * @return List<ILeaf>类型返回值
      */
     public List<ILeaf> findAll(Predicate<ILeaf> predicate) {
@@ -165,7 +173,8 @@ public class Tree {
 
     /**
      * findAllByName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return List<ILeaf>类型返回值
      */
     public List<ILeaf> findAllByName(String name) {
@@ -174,7 +183,8 @@ public class Tree {
 
     /**
      * findAllPaths方法。
-     *      * @param predicate PredicateILeaf类型参数
+     * * @param predicate PredicateILeaf类型参数
+     *
      * @return List<List<ILeaf>>类型返回值
      */
     public List<List<ILeaf>> findAllPaths(Predicate<ILeaf> predicate) {
@@ -200,7 +210,8 @@ public class Tree {
 
     /**
      * getPath方法。
-     *      * @param target ILeaf类型参数
+     * * @param target ILeaf类型参数
+     *
      * @return List<ILeaf>类型返回值
      */
     public List<ILeaf> getPath(ILeaf target) {
@@ -209,7 +220,8 @@ public class Tree {
 
     /**
      * getLowestCommonAncestor方法。
-     *      * @param node1 ILeaf类型参数
+     * * @param node1 ILeaf类型参数
+     *
      * @param node2 ILeaf类型参数
      * @return ILeaf类型返回值
      */
@@ -232,7 +244,8 @@ public class Tree {
 
     /**
      * getDistance方法。
-     *      * @param node1 ILeaf类型参数
+     * * @param node1 ILeaf类型参数
+     *
      * @param node2 ILeaf类型参数
      * @return int类型返回值
      */
@@ -248,6 +261,7 @@ public class Tree {
 
     /**
      * getNodeCount方法。
+     *
      * @return int类型返回值
      */
     public int getNodeCount() {
@@ -256,6 +270,7 @@ public class Tree {
 
     /**
      * getLeafCount方法。
+     *
      * @return int类型返回值
      */
     public int getLeafCount() {
@@ -266,6 +281,7 @@ public class Tree {
 
     /**
      * getHeight方法。
+     *
      * @return int类型返回值
      */
     public int getHeight() {
@@ -274,6 +290,7 @@ public class Tree {
 
     /**
      * getDepth方法。
+     *
      * @return int类型返回值
      */
     public int getDepth() {
@@ -282,7 +299,8 @@ public class Tree {
 
     /**
      * getDepth方法。
-     *      * @param node ILeaf类型参数
+     * * @param node ILeaf类型参数
+     *
      * @return int类型返回值
      */
     public int getDepth(ILeaf node) {
@@ -291,7 +309,8 @@ public class Tree {
 
     /**
      * getDegree方法。
-     *      * @param node ILeaf类型参数
+     * * @param node ILeaf类型参数
+     *
      * @return int类型返回值
      */
     public int getDegree(ILeaf node) {
@@ -300,6 +319,7 @@ public class Tree {
 
     /**
      * getAverageDepth方法。
+     *
      * @return double类型返回值
      */
     public double getAverageDepth() {
@@ -316,6 +336,7 @@ public class Tree {
 
     /**
      * isBinaryTree方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isBinaryTree() {
@@ -343,6 +364,7 @@ public class Tree {
 
     /**
      * isBalanced方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isBalanced() {
@@ -376,6 +398,7 @@ public class Tree {
 
     /**
      * toList方法。
+     *
      * @return List<ILeaf>类型返回值
      */
     public List<ILeaf> toList() {
@@ -386,6 +409,7 @@ public class Tree {
 
     /**
      * toMap方法。
+     *
      * @return Map<String, ILeaf>类型返回值
      */
     public Map<String, ILeaf> toMap() {
@@ -396,7 +420,8 @@ public class Tree {
 
     /**
      * map方法。
-     *      * @param mapper FunctionILeaf,类型参数
+     * * @param mapper FunctionILeaf,类型参数
+     *
      * @return <R> List<R>类型返回值
      */
     public <R> List<R> map(Function<ILeaf, R> mapper) {
@@ -414,6 +439,7 @@ public class Tree {
 
     /**
      * toTreeString方法。
+     *
      * @return String类型返回值
      */
     public String toTreeString() {
@@ -422,6 +448,7 @@ public class Tree {
 
     /**
      * toIndentString方法。
+     *
      * @return String类型返回值
      */
     public String toIndentString() {

@@ -16,7 +16,7 @@ public class ReturnDigest extends Thread {
 
     /**
      * ReturnDigest方法。
-     *      * @param filename String类型参数
+     * * @param filename String类型参数
      */
     public ReturnDigest(String filename) {
         this.filename = filename;
@@ -44,6 +44,7 @@ public class ReturnDigest extends Thread {
 
     /**
      * getDigest方法。
+     *
      * @return byte[]类型返回值
      */
     public byte[] getDigest() {

@@ -11,68 +11,15 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  * 1.添加大量的数据到一个列表中；
  * 2.从同一个列表中移除大量的数据。
  */
+
 /**
  * ConcurrentLinkedDequeDemo类。
  */
 public class ConcurrentLinkedDequeDemo {
-    // 1．创建一个名为AddTask的类，实现Runnable接口。
-    static class AddTask implements Runnable {
-        // 2．声明一个私有的ConcurrentLinkedDeque属性list，并指定它的泛型参数是String型的。
-        private ConcurrentLinkedDeque<String> list;
-
-        // 3．实现类的构造器来初始化属性。
-    /**
-     * AddTask方法。
-     *      * @param list ConcurrentLinkedDequeString类型参数
-     */
-        public AddTask(ConcurrentLinkedDeque<String> list) {
-            this.list = list;
-        }
-
-        // 4．实现run()方法。这个方法将10,000个字符串存放到列表中，这些字符串由当前执行任务的线程的名称和数字组成。
-        @Override
-    /**
-     * run方法。
-     */
-        public void run() {
-            String name = Thread.currentThread().getName();
-            for (int i = 0; i < 10000; i++) {
-                list.add(name + ": Element " + i);
-            }
-        }
-    }
-
-    // 5．创建名为PollTask的类，并实现Runnable接口。
-    static class PollTask implements Runnable {
-        /// 6．声明一个私有的ConcurrentLinkedDeque属性list，并指定它的泛型参数是String型的。
-        private ConcurrentLinkedDeque<String> list;
-
-        // 7．实现类的构造器来初始化属性。
-    /**
-     * PollTask方法。
-     *      * @param list ConcurrentLinkedDequeString类型参数
-     */
-        public PollTask(ConcurrentLinkedDeque<String> list) {
-            this.list = list;
-        }
-
-        // 8．实现run()方法。这个方法将列表中的10,000个字符串取出，总共取5,000次，每次取两个元素。
-        @Override
-    /**
-     * run方法。
-     */
-        public void run() {
-            for (int i = 0; i < 5000; i++) {
-                list.pollFirst();
-                list.pollLast();
-            }
-        }
-    }
-
-    // 9．创建范例的主类Main，并添加main()方法。
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -114,6 +61,64 @@ public class ConcurrentLinkedDequeDemo {
         }
         // 17．将列表的元素数量打印到控制台。
         System.out.printf("Main: Size of the List: %d\n", list.size());
+    }
+
+    // 1．创建一个名为AddTask的类，实现Runnable接口。
+    static class AddTask implements Runnable {
+        // 2．声明一个私有的ConcurrentLinkedDeque属性list，并指定它的泛型参数是String型的。
+        private ConcurrentLinkedDeque<String> list;
+
+        // 3．实现类的构造器来初始化属性。
+
+        /**
+         * AddTask方法。
+         * * @param list ConcurrentLinkedDequeString类型参数
+         */
+        public AddTask(ConcurrentLinkedDeque<String> list) {
+            this.list = list;
+        }
+
+        // 4．实现run()方法。这个方法将10,000个字符串存放到列表中，这些字符串由当前执行任务的线程的名称和数字组成。
+        @Override
+        /**
+         * run方法。
+         */
+        public void run() {
+            String name = Thread.currentThread().getName();
+            for (int i = 0; i < 10000; i++) {
+                list.add(name + ": Element " + i);
+            }
+        }
+    }
+
+    // 9．创建范例的主类Main，并添加main()方法。
+
+    // 5．创建名为PollTask的类，并实现Runnable接口。
+    static class PollTask implements Runnable {
+        /// 6．声明一个私有的ConcurrentLinkedDeque属性list，并指定它的泛型参数是String型的。
+        private ConcurrentLinkedDeque<String> list;
+
+        // 7．实现类的构造器来初始化属性。
+
+        /**
+         * PollTask方法。
+         * * @param list ConcurrentLinkedDequeString类型参数
+         */
+        public PollTask(ConcurrentLinkedDeque<String> list) {
+            this.list = list;
+        }
+
+        // 8．实现run()方法。这个方法将列表中的10,000个字符串取出，总共取5,000次，每次取两个元素。
+        @Override
+        /**
+         * run方法。
+         */
+        public void run() {
+            for (int i = 0; i < 5000; i++) {
+                list.pollFirst();
+                list.pollLast();
+            }
+        }
     }
 }
 /**

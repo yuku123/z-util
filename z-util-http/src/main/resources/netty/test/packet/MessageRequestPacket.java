@@ -7,16 +7,16 @@ public class MessageRequestPacket extends Packet {
     private String message;
     private String userTo;
 
+    public MessageRequestPacket(String message) {
+        this.message = message;
+    }
+
     public String getUserTo() {
         return userTo;
     }
 
     public void setUserTo(String userTo) {
         this.userTo = userTo;
-    }
-
-    public MessageRequestPacket(String message) {
-        this.message = message;
     }
 
     public String getMessage() {

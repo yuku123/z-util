@@ -16,36 +16,41 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 /**
  * 统一 HTTP 执行器 - z-util-http 的核心执行入口
- *
+ * <p>
  * 设计目标: 取代分散的 OkHttpUtil、HttpRequestProducer、HttpRequestProxy 各自为政的局面。
- *          所有 HTTP 执行都走这里，对外暴露统一的 HttpExecutionResult。
- *
+ * 所有 HTTP 执行都走这里，对外暴露统一的 HttpExecutionResult。
+ * <p>
  * 4 个入口:
- *   1. execute(definition)              - 直接拿 HttpRequestDefinition 跑
- *   2. executeByCurl(curl)              - 用 curl 字符串跑（CurlParser 转换）
- *   3. executeByMethodUrl(method, url)  - 用 method+url 直接跑（最快路径）
- *   4. executeByDefinitionString(json)  - 用 JSON 字符串形式的 HttpRequestDefinition 跑
- *
+ * 1. execute(definition)              - 直接拿 HttpRequestDefinition 跑
+ * 2. executeByCurl(curl)              - 用 curl 字符串跑（CurlParser 转换）
+ * 3. executeByMethodUrl(method, url)  - 用 method+url 直接跑（最快路径）
+ * 4. executeByDefinitionString(json)  - 用 JSON 字符串形式的 HttpRequestDefinition 跑
+ * <p>
  * 4 种执行模式:
- *   - send(definition)                  - 同步
- *   - sendAsync(definition)             - 异步（CompletableFuture）
- *   - sendSse(definition, consumer)     - SSE 流
- *   - sendUpload(definition, file)      - 文件上传
- *
+ * - send(definition)                  - 同步
+ * - sendAsync(definition)             - 异步（CompletableFuture）
+ * - sendSse(definition, consumer)     - SSE 流
+ * - sendUpload(definition, file)      - 文件上传
+ * <p>
  * 全部走 OkHttp（自带连接池、超时、连接复用），不再用 HttpURLConnection 或 Apache HttpClient。
  */
 public class HttpExecutor {
 
     private static final Logger log = LoggerFactory.getLogger(HttpExecutor.class);
 
-    /** 共享 OkHttpClient（自带连接池和默认超时） */
+    /**
+     * 共享 OkHttpClient（自带连接池和默认超时）
+     */
     private static final OkHttpClient DEFAULT_CLIENT = new OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
@@ -53,22 +58,28 @@ public class HttpExecutor {
             .connectionPool(new ConnectionPool(20, 5, TimeUnit.MINUTES))
             .retryOnConnectionFailure(true)
             .build();
-
+    private static final HttpExecutor DEFAULT = new HttpExecutor();
     private final OkHttpClient client;
 
     public HttpExecutor() {
         this.client = DEFAULT_CLIENT;
     }
 
-    public HttpExecutor(OkHttpClient client) {
-        this.client = client == null ? DEFAULT_CLIENT : client;
-    }
-
     // =================================================================
     // 4 个入口
     // =================================================================
 
-    /** 入口1: 直接拿 HttpRequestDefinition 跑（最常用） */
+    public HttpExecutor(OkHttpClient client) {
+        this.client = client == null ? DEFAULT_CLIENT : client;
+    }
+
+    public static HttpExecutor getDefault() {
+        return DEFAULT;
+    }
+
+    /**
+     * 入口1: 直接拿 HttpRequestDefinition 跑（最常用）
+     */
     public HttpExecutionResult execute(HttpRequestDefinition def) {
         long start = System.currentTimeMillis();
         try {
@@ -80,7 +91,9 @@ public class HttpExecutor {
         }
     }
 
-    /** 入口2: curl 字符串直接跑（CurlParser → HttpRequestDefinition → execute） */
+    /**
+     * 入口2: curl 字符串直接跑（CurlParser → HttpRequestDefinition → execute）
+     */
     public HttpExecutionResult executeByCurl(String curlCommand) {
         try {
             HttpRequestDefinition def = CurlParser.parse(curlCommand);
@@ -92,7 +105,13 @@ public class HttpExecutor {
         }
     }
 
-    /** 入口3: 用 method+url 直接跑（最快路径） */
+    // =================================================================
+    // 4 种执行模式
+    // =================================================================
+
+    /**
+     * 入口3: 用 method+url 直接跑（最快路径）
+     */
     public HttpExecutionResult executeByMethodUrl(String method, String url,
                                                   Map<String, String> headers, String body) {
         HttpRequestDefinition def = new HttpRequestDefinition();
@@ -121,7 +140,9 @@ public class HttpExecutor {
         return r;
     }
 
-    /** 入口4: 用 JSON 字符串形式的 HttpRequestDefinition 跑（适合 RPC 调度） */
+    /**
+     * 入口4: 用 JSON 字符串形式的 HttpRequestDefinition 跑（适合 RPC 调度）
+     */
     public HttpExecutionResult executeByDefinitionJson(String json) {
         try {
             HttpRequestDefinition def = com.alibaba.fastjson.JSON.parseObject(json, HttpRequestDefinition.class);
@@ -134,21 +155,27 @@ public class HttpExecutor {
         }
     }
 
-    // =================================================================
-    // 4 种执行模式
-    // =================================================================
-
-    /** 同步 */
+    /**
+     * 同步
+     */
     public HttpExecutionResult send(HttpRequestDefinition def) {
         return execute(def);
     }
 
-    /** 异步 */
+    /**
+     * 异步
+     */
     public CompletableFuture<HttpExecutionResult> sendAsync(HttpRequestDefinition def) {
         return CompletableFuture.supplyAsync(() -> execute(def));
     }
 
-    /** SSE 流 - 持续回调直到连接关闭 */
+    // =================================================================
+    // 内部 - 真正执行 OkHttp 调用
+    // =================================================================
+
+    /**
+     * SSE 流 - 持续回调直到连接关闭
+     */
     public void sendSse(HttpRequestDefinition def, Consumer<HttpExecutionResult> onEvent) {
         long start = System.currentTimeMillis();
         try {
@@ -165,18 +192,26 @@ public class HttpExecutor {
                     HttpExecutionResult ev = HttpExecutionResult.sseEvent(type, data);
                     ev.setDurationMs(System.currentTimeMillis() - start);
                     ev.setSource("SSE");
-                    try { onEvent.accept(ev); } catch (Exception ignore) {}
+                    try {
+                        onEvent.accept(ev);
+                    } catch (Exception ignore) {
+                    }
                 }
+
                 @Override
                 public void onClosed(EventSource es) {
                     log.info("SSE closed");
                 }
+
                 @Override
                 public void onFailure(EventSource es, Throwable t, Response r) {
                     HttpExecutionResult err = HttpExecutionResult.fail("SSE failure: " + (t == null ? "?" : t.getMessage()), t);
                     err.setStatus(r == null ? 0 : r.code());
                     err.setSource("SSE");
-                    try { onEvent.accept(err); } catch (Exception ignore) {}
+                    try {
+                        onEvent.accept(err);
+                    } catch (Exception ignore) {
+                    }
                 }
             });
         } catch (Exception e) {
@@ -186,7 +221,9 @@ public class HttpExecutor {
         }
     }
 
-    /** 文件上传 */
+    /**
+     * 文件上传
+     */
     public HttpExecutionResult sendUpload(HttpRequestDefinition def, String fileField, File file) {
         long start = System.currentTimeMillis();
         try {
@@ -215,10 +252,6 @@ public class HttpExecutor {
             return HttpExecutionResult.fail("Upload failed: " + e.getMessage(), e);
         }
     }
-
-    // =================================================================
-    // 内部 - 真正执行 OkHttp 调用
-    // =================================================================
 
     private Request buildRequest(HttpRequestDefinition def) {
         String url = def.getHttpRequestLine() == null ? null : def.getHttpRequestLine().getUrl();
@@ -254,6 +287,10 @@ public class HttpExecutor {
         return rb.build();
     }
 
+    // =================================================================
+    // 单例访问（避免每个调用方都 new 一个）
+    // =================================================================
+
     private HttpExecutionResult doCall(Request req, String source, long start) throws IOException {
         try (Response res = client.newCall(req).execute()) {
             Map<String, String> headers = new LinkedHashMap<>();
@@ -267,7 +304,10 @@ public class HttpExecutor {
             if (res.priorResponse() != null) {
                 List<String> chain = new ArrayList<>();
                 Response p = res.priorResponse();
-                while (p != null) { chain.add(p.request().url().toString()); p = p.priorResponse(); }
+                while (p != null) {
+                    chain.add(p.request().url().toString());
+                    p = p.priorResponse();
+                }
                 r.setRedirectChain(chain);
             }
             return r;
@@ -280,15 +320,5 @@ public class HttpExecutor {
         if (trimmed.startsWith("{") || trimmed.startsWith("[")) return "application/json; charset=utf-8";
         if (trimmed.startsWith("<")) return "application/xml; charset=utf-8";
         return "text/plain; charset=utf-8";
-    }
-
-    // =================================================================
-    // 单例访问（避免每个调用方都 new 一个）
-    // =================================================================
-
-    private static final HttpExecutor DEFAULT = new HttpExecutor();
-
-    public static HttpExecutor getDefault() {
-        return DEFAULT;
     }
 }

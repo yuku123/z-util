@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
  * Circle 单元测试
  * 测试圆形数据类的构造、移动、碰撞检测和包含判断
  */
+
 /**
  * CircleTest类。
  */
@@ -374,7 +375,7 @@ public class CircleTest {
         circle.vx = -10;
         circle.vy = -20;
         circle.isFilled = true;
-        
+
         assertEquals(200, circle.x);
         assertEquals(300, circle.y);
         assertEquals(-10, circle.vx);
@@ -390,11 +391,11 @@ public class CircleTest {
         Circle circle = new Circle(50, 50, 10, 5, 5);
         circle.move(0, 0, 200, 200);
         assertEquals(55, circle.x);
-        
+
         // 修改速度
         circle.vx = 100;
         circle.vy = 100;
-        
+
         circle.move(0, 0, 200, 200);
         assertEquals(155, circle.x);
     }
@@ -406,10 +407,10 @@ public class CircleTest {
     public void testIsFilledToggle() {
         Circle circle = new Circle(100, 100, 50, 0, 0);
         assertFalse(circle.isFilled);
-        
+
         circle.isFilled = true;
         assertTrue(circle.isFilled);
-        
+
         circle.isFilled = false;
         assertFalse(circle.isFilled);
     }

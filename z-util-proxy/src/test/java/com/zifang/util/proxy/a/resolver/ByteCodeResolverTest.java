@@ -4,8 +4,6 @@ import com.zifang.util.proxy.a.model.ClassFile;
 import com.zifang.util.proxy.a.model.constantpool.AbstractConstantPool;
 import com.zifang.util.proxy.a.model.constantpool.ClassInfo;
 import com.zifang.util.proxy.a.model.constantpool.Utf8Info;
-import com.zifang.util.proxy.a.model.field.FieldTable;
-import com.zifang.util.proxy.a.model.method.MethodTable;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -17,6 +15,7 @@ import static org.junit.Assert.*;
  * <p>
  * 测试字节码解析器的核心功能：解析 .class 文件并提取类信息。
  */
+
 /**
  * ByteCodeResolverTest类。
  */
@@ -114,9 +113,9 @@ public class ByteCodeResolverTest {
     public void testParseFromFilePath() {
         // 使用测试资源文件
         String resourcePath = getClass().getResource("/testclass/TestClassParse1.class").getFile();
-        
+
         ClassFile classFile = ByteCodeResolver.parseFromFile(resourcePath);
-        
+
         assertNotNull("ClassFile 不应为 null", classFile);
         assertNotNull("Magic 不应为 null", classFile.magic);
     }
@@ -135,7 +134,7 @@ public class ByteCodeResolverTest {
                 0x00, 0x03,  // minor version
                 0x00, 0x34   // major version (Java 8)
         };
-        
+
         InputStream is = new java.io.ByteArrayInputStream(fakeBytes);
         ByteCodeResolver.parseFromStream(is);
     }
@@ -152,7 +151,7 @@ public class ByteCodeResolverTest {
         assertNotNull("测试类字节码资源未找到", is);
 
         ClassFile classFile = ByteCodeResolver.parseFromStream(is);
-        
+
         // TestClassParse1 有两个方法: method() 和 run()
         int methodCount = classFile.getMethodCount();
         assertTrue("方法数量应 >= 0", methodCount >= 0);

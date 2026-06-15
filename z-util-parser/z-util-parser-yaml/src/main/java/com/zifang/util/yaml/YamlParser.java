@@ -10,7 +10,8 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.StringReader;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * YAML 解析器，将 YAML 字符串解析为 Java 对象。
@@ -20,6 +21,7 @@ import java.util.*;
 /**
  * YamlParser类。
  */
+
 /**
  * YamlParser类。
  */
@@ -56,7 +58,8 @@ public class YamlParser {
      */
     /**
      * parse方法。
-     *      * @param yamlStr String类型参数
+     * * @param yamlStr String类型参数
+     *
      * @return Object类型返回值
      */
     public Object parse(String yamlStr) {
@@ -88,7 +91,8 @@ public class YamlParser {
      */
     /**
      * parse方法。
-     *      * @param yamlStr String类型参数
+     * * @param yamlStr String类型参数
+     *
      * @param clazz ClassT类型参数
      * @return <T> T类型返回值
      */
@@ -119,7 +123,8 @@ public class YamlParser {
      */
     /**
      * toYaml方法。
-     *      * @param obj Object类型参数
+     * * @param obj Object类型参数
+     *
      * @return String类型返回值
      */
     public String toYaml(Object obj) {
@@ -142,7 +147,8 @@ public class YamlParser {
      */
     /**
      * toPrettyYaml方法。
-     *      * @param obj Object类型参数
+     * * @param obj Object类型参数
+     *
      * @return String类型返回值
      */
     public String toPrettyYaml(Object obj) {

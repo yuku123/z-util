@@ -18,6 +18,7 @@ public class Tuple<A, B> {
 
     /**
      * empty方法。
+     *
      * @return static <A, B> Tuple<A, B>类型返回值
      */
     public static <A, B> Tuple<A, B> empty() {
@@ -26,7 +27,8 @@ public class Tuple<A, B> {
 
     /**
      * of方法。
-     *      * @param first A类型参数
+     * * @param first A类型参数
+     *
      * @param second B类型参数
      * @return static <A, B> Tuple<A, B>类型返回值
      */
@@ -39,6 +41,7 @@ public class Tuple<A, B> {
 
     /**
      * getFirst方法。
+     *
      * @return A类型返回值
      */
     public A getFirst() {
@@ -47,7 +50,7 @@ public class Tuple<A, B> {
 
     /**
      * setFirst方法。
-     *      * @param first A类型参数
+     * * @param first A类型参数
      */
     public void setFirst(A first) {
         this.first = first;
@@ -55,6 +58,7 @@ public class Tuple<A, B> {
 
     /**
      * getSecond方法。
+     *
      * @return B类型返回值
      */
     public B getSecond() {
@@ -63,7 +67,7 @@ public class Tuple<A, B> {
 
     /**
      * setSecond方法。
-     *      * @param second B类型参数
+     * * @param second B类型参数
      */
     public void setSecond(B second) {
         this.second = second;

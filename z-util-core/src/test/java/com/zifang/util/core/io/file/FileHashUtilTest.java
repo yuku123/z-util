@@ -1,6 +1,5 @@
 package com.zifang.util.core.io.file;
 
-import com.zifang.util.core.io.FastByteBuffer;
 import org.junit.Test;
 
 import java.io.File;
@@ -16,6 +15,7 @@ import static org.junit.Assert.*;
  * FileHashUtil 测试
  * 覆盖：md5/sha1/sha256/hash/fileType/isImage
  */
+
 /**
  * FileHashUtilTest类。
  */

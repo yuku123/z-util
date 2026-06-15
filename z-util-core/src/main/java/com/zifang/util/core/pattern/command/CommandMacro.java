@@ -1,6 +1,8 @@
 package com.zifang.util.core.pattern.command;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -19,7 +21,7 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
 
     /**
      * CommandMacro方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public CommandMacro(String name) {
         this(name, new ArrayList<>());
@@ -27,7 +29,8 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
 
     /**
      * CommandMacro方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param commands ListCommandC类型参数
      */
     public CommandMacro(String name, List<Command<C>> commands) {
@@ -38,7 +41,8 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
 
     /**
      * CommandMacro方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param canExecute PredicateC类型参数
      */
     public CommandMacro(String name, Predicate<C> canExecute) {
@@ -49,14 +53,40 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
 
     /**
      * CommandMacro方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param canExecute PredicateC类型参数
-     * @param commands ListCommandC类型参数
+     * @param commands   ListCommandC类型参数
      */
     public CommandMacro(String name, Predicate<C> canExecute, List<Command<C>> commands) {
         this.name = name;
         this.commands = new ArrayList<>(commands);
         this.canExecute = canExecute;
+    }
+
+    /**
+     * 创建宏命令
+     */
+    public static <C extends CommandContext> CommandMacro<C> of(String name) {
+        return new CommandMacro<>(name);
+    }
+
+    /**
+     * 创建宏命令并添加初始命令
+     */
+    @SafeVarargs
+    /**
+     * of方法。
+     *      * @param name String类型参数
+     * @param commands CommandC...类型参数
+     * @return static <C extends CommandContext> CommandMacro<C>类型返回值
+     */
+    public static <C extends CommandContext> CommandMacro<C> of(String name, Command<C>... commands) {
+        CommandMacro<C> macro = new CommandMacro<>(name);
+        for (Command<C> cmd : commands) {
+            macro.add(cmd);
+        }
+        return macro;
     }
 
     /**
@@ -189,30 +219,5 @@ public class CommandMacro<C extends CommandContext> implements Command<C> {
                 command.undo(context);
             }
         }
-    }
-
-    /**
-     * 创建宏命令
-     */
-    public static <C extends CommandContext> CommandMacro<C> of(String name) {
-        return new CommandMacro<>(name);
-    }
-
-    /**
-     * 创建宏命令并添加初始命令
-     */
-    @SafeVarargs
-    /**
-     * of方法。
-     *      * @param name String类型参数
-     * @param commands CommandC...类型参数
-     * @return static <C extends CommandContext> CommandMacro<C>类型返回值
-     */
-    public static <C extends CommandContext> CommandMacro<C> of(String name, Command<C>... commands) {
-        CommandMacro<C> macro = new CommandMacro<>(name);
-        for (Command<C> cmd : commands) {
-            macro.add(cmd);
-        }
-        return macro;
     }
 }

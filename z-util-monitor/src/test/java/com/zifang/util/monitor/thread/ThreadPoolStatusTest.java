@@ -2,8 +2,7 @@ package com.zifang.util.monitor.thread;
 
 import org.junit.Before;
 import org.junit.Test;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
+
 import static org.junit.Assert.*;
 
 /**

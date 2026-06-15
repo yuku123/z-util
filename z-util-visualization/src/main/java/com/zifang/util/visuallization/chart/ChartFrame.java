@@ -15,8 +15,9 @@ public abstract class ChartFrame extends JFrame {
 
     /**
      * 创建图表窗口框架
-     * @param title 窗口标题
-     * @param canvasWidth 画布宽度
+     *
+     * @param title        窗口标题
+     * @param canvasWidth  画布宽度
      * @param canvasHeight 画布高度
      */
     public ChartFrame(String title, int canvasWidth, int canvasHeight) {
@@ -28,10 +29,24 @@ public abstract class ChartFrame extends JFrame {
 
     /**
      * 创建图表窗口框架（使用默认尺寸800x600）
+     *
      * @param title 窗口标题
      */
     public ChartFrame(String title) {
         this(title, 800, 600);
+    }
+
+    /**
+     * 暂停指定时间（用于动画控制）
+     *
+     * @param millis 暂停时间（毫秒）
+     */
+    public static void pause(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     /**
@@ -48,12 +63,14 @@ public abstract class ChartFrame extends JFrame {
 
     /**
      * 创建具体的画布实例（抽象方法，由子类实现）
+     *
      * @return 画布组件
      */
     protected abstract ChartCanvas createCanvas();
 
     /**
      * 获取画布宽度
+     *
      * @return 画布宽度（像素）
      */
     public int getCanvasWidth() {
@@ -62,6 +79,7 @@ public abstract class ChartFrame extends JFrame {
 
     /**
      * 获取画布高度
+     *
      * @return 画布高度（像素）
      */
     public int getCanvasHeight() {
@@ -77,28 +95,28 @@ public abstract class ChartFrame extends JFrame {
 
     protected class ChartCanvas extends JPanel {
 
-    /**
-     * ChartCanvas方法。
-     */
+        /**
+         * ChartCanvas方法。
+         */
         public ChartCanvas() {
             super(true);
         }
 
         @Override
-    /**
-     * paintComponent方法。
-     *      * @param g Graphics类型参数
-     */
+        /**
+         * paintComponent方法。
+         *      * @param g Graphics类型参数
+         */
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
             enableAntialiasing(g2d);
         }
 
-    /**
-     * enableAntialiasing方法。
-     *      * @param g2d Graphics2D类型参数
-     */
+        /**
+         * enableAntialiasing方法。
+         * * @param g2d Graphics2D类型参数
+         */
         protected void enableAntialiasing(Graphics2D g2d) {
             RenderingHints hints = new RenderingHints(
                     RenderingHints.KEY_ANTIALIASING,
@@ -108,24 +126,12 @@ public abstract class ChartFrame extends JFrame {
         }
 
         @Override
-    /**
-     * getPreferredSize方法。
-     * @return Dimension类型返回值
-     */
+        /**
+         * getPreferredSize方法。
+         * @return Dimension类型返回值
+         */
         public Dimension getPreferredSize() {
             return new Dimension(canvasWidth, canvasHeight);
-        }
-    }
-
-    /**
-     * 暂停指定时间（用于动画控制）
-     * @param millis 暂停时间（毫秒）
-     */
-    public static void pause(int millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
         }
     }
 }

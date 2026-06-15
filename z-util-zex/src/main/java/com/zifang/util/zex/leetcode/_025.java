@@ -9,6 +9,7 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+
 import java.util.Stack;
 
 /**
@@ -16,78 +17,10 @@ import java.util.Stack;
  */
 public class _025 {
 
-    static class ListNode {
-      int val;
-      ListNode next;
-      ListNode() {}
-      ListNode(int val) { this.val = val; }
-      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-    }
-
-    /**
-     * reverseKGroup方法。
-     *      * @param head ListNode类型参数
-     * @param k int类型参数
-     * @return ListNode类型返回值
-     */
-    public ListNode reverseKGroup(ListNode head, int k) {
-
-
-        Stack<ListNode> stack = new Stack<>();
-
-        ListNode first = head;
-        ListNode last = null;
-        ListNode currentHead = head;
-        while(currentHead!=null){
-            if(stack.size() == k){
-                while(stack.size() != 0){
-                    if(last == null){
-                        last = stack.pop();
-                        first = last;
-                    } else {
-                        ListNode poped = stack.pop();
-                        last.next = poped;
-                        last = poped;
-                    }
-                }
-            } else {
-                stack.push(currentHead);
-                currentHead = currentHead.next;
-            }
-        }
-
-        if(stack.size() == k){
-            while(stack.size() != 0){
-                if(last == null){
-                    last = stack.pop();
-                    first = last;
-                } else {
-                    ListNode poped = stack.pop();
-                    last.next = poped;
-                    last = poped;
-                }
-            }
-        } else {
-            while(true){
-                if(stack.size()==1){
-                    if(last == null){
-                        first = stack.pop();
-                    } else {
-                        last.next = stack.pop();
-                    }
-                    break;
-                } else {
-                    stack.pop();
-                }
-            }
-        }
-
-        return first;
-    }
-
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -103,5 +36,84 @@ public class _025 {
 
         new _025().reverseKGroup(l1, 3);
 
+    }
+
+    /**
+     * reverseKGroup方法。
+     * * @param head ListNode类型参数
+     *
+     * @param k int类型参数
+     * @return ListNode类型返回值
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+
+
+        Stack<ListNode> stack = new Stack<>();
+
+        ListNode first = head;
+        ListNode last = null;
+        ListNode currentHead = head;
+        while (currentHead != null) {
+            if (stack.size() == k) {
+                while (stack.size() != 0) {
+                    if (last == null) {
+                        last = stack.pop();
+                        first = last;
+                    } else {
+                        ListNode poped = stack.pop();
+                        last.next = poped;
+                        last = poped;
+                    }
+                }
+            } else {
+                stack.push(currentHead);
+                currentHead = currentHead.next;
+            }
+        }
+
+        if (stack.size() == k) {
+            while (stack.size() != 0) {
+                if (last == null) {
+                    last = stack.pop();
+                    first = last;
+                } else {
+                    ListNode poped = stack.pop();
+                    last.next = poped;
+                    last = poped;
+                }
+            }
+        } else {
+            while (true) {
+                if (stack.size() == 1) {
+                    if (last == null) {
+                        first = stack.pop();
+                    } else {
+                        last.next = stack.pop();
+                    }
+                    break;
+                } else {
+                    stack.pop();
+                }
+            }
+        }
+
+        return first;
+    }
+
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 }

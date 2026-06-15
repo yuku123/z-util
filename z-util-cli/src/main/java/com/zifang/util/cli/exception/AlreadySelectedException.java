@@ -14,7 +14,8 @@ public class AlreadySelectedException extends ParseException {
 
     /**
      * AlreadySelectedException方法。
-     *      * @param optionGroup final类型参数
+     * * @param optionGroup final类型参数
+     *
      * @param option final类型参数
      */
     public AlreadySelectedException(final OptionGroup optionGroup, final Option option) {
@@ -30,6 +31,7 @@ public class AlreadySelectedException extends ParseException {
 
     /**
      * getOption方法。
+     *
      * @return Option类型返回值
      */
     public Option getOption() {
@@ -38,6 +40,7 @@ public class AlreadySelectedException extends ParseException {
 
     /**
      * getOptionGroup方法。
+     *
      * @return OptionGroup类型返回值
      */
     public OptionGroup getOptionGroup() {

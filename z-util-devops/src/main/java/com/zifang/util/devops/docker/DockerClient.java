@@ -151,9 +151,9 @@ public class DockerClient {
     /**
      * 创建并启动容器
      *
-     * @param image   镜像
-     * @param name    容器名
-     * @param cmd     启动命令
+     * @param image 镜像
+     * @param name  容器名
+     * @param cmd   启动命令
      * @return 容器ID
      */
     public String createContainer(String image, String name, String... cmd) {
@@ -191,7 +191,7 @@ public class DockerClient {
      * 删除容器
      *
      * @param containerIdOrName 容器ID或名称
-     * @param force              强制删除
+     * @param force             强制删除
      */
     public void removeContainer(String containerIdOrName, boolean force) {
         String[] cmd = force
@@ -268,7 +268,7 @@ public class DockerClient {
      * 获取容器日志
      *
      * @param containerIdOrName 容器ID或名称
-     * @param tail             显示尾行数，null表示全部
+     * @param tail              显示尾行数，null表示全部
      */
     public String getContainerLogs(String containerIdOrName, Integer tail) {
         String[] cmd;
@@ -840,162 +840,174 @@ public class DockerClient {
         private long blockRead;
         private long blockWrite;
 
-    /**
-     * getCpuPercent方法。
-     * @return double类型返回值
-     */
+        /**
+         * getCpuPercent方法。
+         *
+         * @return double类型返回值
+         */
         public double getCpuPercent() {
             return cpuPercent;
         }
 
-    /**
-     * setCpuPercent方法。
-     *      * @param cpuPercent double类型参数
-     */
+        /**
+         * setCpuPercent方法。
+         * * @param cpuPercent double类型参数
+         */
         public void setCpuPercent(double cpuPercent) {
             this.cpuPercent = cpuPercent;
         }
 
-    /**
-     * getMemoryPercent方法。
-     * @return double类型返回值
-     */
+        /**
+         * getMemoryPercent方法。
+         *
+         * @return double类型返回值
+         */
         public double getMemoryPercent() {
             return memoryPercent;
         }
 
-    /**
-     * setMemoryPercent方法。
-     *      * @param memoryPercent double类型参数
-     */
+        /**
+         * setMemoryPercent方法。
+         * * @param memoryPercent double类型参数
+         */
         public void setMemoryPercent(double memoryPercent) {
             this.memoryPercent = memoryPercent;
         }
 
-    /**
-     * getMemoryUsage方法。
-     * @return long类型返回值
-     */
+        /**
+         * getMemoryUsage方法。
+         *
+         * @return long类型返回值
+         */
         public long getMemoryUsage() {
             return memoryUsage;
         }
 
-    /**
-     * setMemoryUsage方法。
-     *      * @param memoryUsage long类型参数
-     */
+        /**
+         * setMemoryUsage方法。
+         * * @param memoryUsage long类型参数
+         */
         public void setMemoryUsage(long memoryUsage) {
             this.memoryUsage = memoryUsage;
         }
 
-    /**
-     * getMemoryLimit方法。
-     * @return long类型返回值
-     */
+        /**
+         * getMemoryLimit方法。
+         *
+         * @return long类型返回值
+         */
         public long getMemoryLimit() {
             return memoryLimit;
         }
 
-    /**
-     * setMemoryLimit方法。
-     *      * @param memoryLimit long类型参数
-     */
+        /**
+         * setMemoryLimit方法。
+         * * @param memoryLimit long类型参数
+         */
         public void setMemoryLimit(long memoryLimit) {
             this.memoryLimit = memoryLimit;
         }
 
-    /**
-     * getNetworkRx方法。
-     * @return long类型返回值
-     */
+        /**
+         * getNetworkRx方法。
+         *
+         * @return long类型返回值
+         */
         public long getNetworkRx() {
             return networkRx;
         }
 
-    /**
-     * setNetworkRx方法。
-     *      * @param networkRx long类型参数
-     */
+        /**
+         * setNetworkRx方法。
+         * * @param networkRx long类型参数
+         */
         public void setNetworkRx(long networkRx) {
             this.networkRx = networkRx;
         }
 
-    /**
-     * getNetworkTx方法。
-     * @return long类型返回值
-     */
+        /**
+         * getNetworkTx方法。
+         *
+         * @return long类型返回值
+         */
         public long getNetworkTx() {
             return networkTx;
         }
 
-    /**
-     * setNetworkTx方法。
-     *      * @param networkTx long类型参数
-     */
+        /**
+         * setNetworkTx方法。
+         * * @param networkTx long类型参数
+         */
         public void setNetworkTx(long networkTx) {
             this.networkTx = networkTx;
         }
 
-    /**
-     * getBlockRead方法。
-     * @return long类型返回值
-     */
+        /**
+         * getBlockRead方法。
+         *
+         * @return long类型返回值
+         */
         public long getBlockRead() {
             return blockRead;
         }
 
-    /**
-     * setBlockRead方法。
-     *      * @param blockRead long类型参数
-     */
+        /**
+         * setBlockRead方法。
+         * * @param blockRead long类型参数
+         */
         public void setBlockRead(long blockRead) {
             this.blockRead = blockRead;
         }
 
-    /**
-     * getBlockWrite方法。
-     * @return long类型返回值
-     */
+        /**
+         * getBlockWrite方法。
+         *
+         * @return long类型返回值
+         */
         public long getBlockWrite() {
             return blockWrite;
         }
 
-    /**
-     * setBlockWrite方法。
-     *      * @param blockWrite long类型参数
-     */
+        /**
+         * setBlockWrite方法。
+         * * @param blockWrite long类型参数
+         */
         public void setBlockWrite(long blockWrite) {
             this.blockWrite = blockWrite;
         }
 
-    /**
-     * getNetworkRxFmt方法。
-     * @return String类型返回值
-     */
+        /**
+         * getNetworkRxFmt方法。
+         *
+         * @return String类型返回值
+         */
         public String getNetworkRxFmt() {
             return formatSize(networkRx);
         }
 
-    /**
-     * getNetworkTxFmt方法。
-     * @return String类型返回值
-     */
+        /**
+         * getNetworkTxFmt方法。
+         *
+         * @return String类型返回值
+         */
         public String getNetworkTxFmt() {
             return formatSize(networkTx);
         }
 
-    /**
-     * getBlockReadFmt方法。
-     * @return String类型返回值
-     */
+        /**
+         * getBlockReadFmt方法。
+         *
+         * @return String类型返回值
+         */
         public String getBlockReadFmt() {
             return formatSize(blockRead);
         }
 
-    /**
-     * getBlockWriteFmt方法。
-     * @return String类型返回值
-     */
+        /**
+         * getBlockWriteFmt方法。
+         *
+         * @return String类型返回值
+         */
         public String getBlockWriteFmt() {
             return formatSize(blockWrite);
         }

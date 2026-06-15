@@ -16,9 +16,9 @@ public class HiddenLayerImpl implements Layer {
     /**
      * 创建隐藏层
      *
-     * @param inputCount          输入数量（上一层的神经元数量）
-     * @param neuronCount         当前层的神经元数量
-     * @param activationFunction  激活函数
+     * @param inputCount         输入数量（上一层的神经元数量）
+     * @param neuronCount        当前层的神经元数量
+     * @param activationFunction 激活函数
      * @throws IllegalArgumentException 当参数小于1时
      */
     public HiddenLayerImpl(int inputCount, int neuronCount, ActivationFunction activationFunction) {

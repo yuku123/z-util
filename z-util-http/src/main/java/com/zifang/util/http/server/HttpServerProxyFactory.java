@@ -16,7 +16,8 @@ public class HttpServerProxyFactory<T> {
 
     /**
      * HttpServerProxyFactory方法。
-     *      * @param interfaceClass ClassT类型参数
+     * * @param interfaceClass ClassT类型参数
+     *
      * @param target T类型参数
      */
     public HttpServerProxyFactory(Class<T> interfaceClass, T target) {

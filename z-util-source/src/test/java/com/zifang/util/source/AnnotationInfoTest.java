@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 /**
  * AnnotationInfo 模型测试
  */
+
 /**
  * AnnotationInfoTest类。
  */

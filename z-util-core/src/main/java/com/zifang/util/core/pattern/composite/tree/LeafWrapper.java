@@ -23,9 +23,10 @@ public class LeafWrapper<A, B, C> extends Triplet<A, B, C> implements ILeaf {
 
     /**
      * LeafWrapper方法。
-     *      * @param currentId A类型参数
+     * * @param currentId A类型参数
+     *
      * @param parentId B类型参数
-     * @param bean C类型参数
+     * @param bean     C类型参数
      */
     public LeafWrapper(A currentId, B parentId, C bean) {
         super(currentId, parentId, bean);
@@ -83,7 +84,7 @@ public class LeafWrapper<A, B, C> extends Triplet<A, B, C> implements ILeaf {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -101,6 +102,7 @@ public class LeafWrapper<A, B, C> extends Triplet<A, B, C> implements ILeaf {
 
     /**
      * getParentId方法。
+     *
      * @return B类型返回值
      */
     public B getParentId() {
@@ -109,6 +111,7 @@ public class LeafWrapper<A, B, C> extends Triplet<A, B, C> implements ILeaf {
 
     /**
      * getBean方法。
+     *
      * @return C类型返回值
      */
     public C getBean() {
@@ -117,7 +120,8 @@ public class LeafWrapper<A, B, C> extends Triplet<A, B, C> implements ILeaf {
 
     /**
      * setMeta方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @param value Object类型参数
      */
     public void setMeta(String key, Object value) {
@@ -129,7 +133,8 @@ public class LeafWrapper<A, B, C> extends Triplet<A, B, C> implements ILeaf {
 
     /**
      * getMeta方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return Object类型返回值
      */
     public Object getMeta(String key) {
@@ -138,6 +143,7 @@ public class LeafWrapper<A, B, C> extends Triplet<A, B, C> implements ILeaf {
 
     /**
      * getMetadata方法。
+     *
      * @return Map<String, Object>类型返回值
      */
     public Map<String, Object> getMetadata() {

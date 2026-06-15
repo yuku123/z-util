@@ -15,7 +15,7 @@
 //
 //import static com.github.javaparser.ast.Modifier.Keyword.PUBLIC;
 //
-///**
+/// **
 // * 生产接口代码的 生产者
 // */
 //public class JavaInterfaceSourceGenerator implements IGenerator {

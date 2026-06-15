@@ -1,16 +1,9 @@
 package com.zifang.util.devops.git.github.pr;
 
-import org.kohsuke.github.GHIssueState;
-import org.kohsuke.github.GHPullRequest;
-import org.kohsuke.github.GHPullRequestReview;
-import org.kohsuke.github.GHUser;
-import org.kohsuke.github.GitHub;
-import org.kohsuke.github.PagedIterable;
-import org.kohsuke.github.PagedIterator;
+import org.kohsuke.github.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,7 +23,7 @@ public class PullRequestApiWrapper {
 
     /**
      * PullRequestApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
      */
     public PullRequestApiWrapper(GitHub github) {
         this.github = github;
@@ -38,9 +31,10 @@ public class PullRequestApiWrapper {
 
     /**
      * PullRequestApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
+     *
      * @param owner String类型参数
-     * @param repo String类型参数
+     * @param repo  String类型参数
      */
     public PullRequestApiWrapper(GitHub github, String owner, String repo) {
         this.github = github;
@@ -50,7 +44,8 @@ public class PullRequestApiWrapper {
 
     /**
      * withRepo方法。
-     *      * @param owner String类型参数
+     * * @param owner String类型参数
+     *
      * @param repo String类型参数
      * @return PullRequestApiWrapper类型返回值
      */

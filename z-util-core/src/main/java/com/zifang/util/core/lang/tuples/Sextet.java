@@ -3,13 +3,13 @@ package com.zifang.util.core.lang.tuples;
 /**
  * 六元组，包含6个元素的不可变元组。
  *
- * @author zifang
  * @param <A> 第一个元素类型
  * @param <B> 第二个元素类型
  * @param <C> 第三个元素类型
  * @param <D> 第四个元素类型
  * @param <E> 第五个元素类型
  * @param <F> 第六个元素类型
+ * @author zifang
  * @see Quintet
  */
 public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
@@ -18,7 +18,8 @@ public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
 
     /**
      * Sextet方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      * @param c C类型参数
      * @param d D类型参数
@@ -32,6 +33,7 @@ public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
 
     /**
      * getF方法。
+     *
      * @return F类型返回值
      */
     public F getF() {
@@ -40,7 +42,7 @@ public class Sextet<A, B, C, D, E, F> extends Quintet<A, B, C, D, E> {
 
     /**
      * setF方法。
-     *      * @param f F类型参数
+     * * @param f F类型参数
      */
     public void setF(F f) {
         this.f = f;

@@ -24,7 +24,8 @@ public class GitAuthor {
 
     /**
      * GitAuthor方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param email String类型参数
      */
     public GitAuthor(String name, String email) {
@@ -34,9 +35,10 @@ public class GitAuthor {
 
     /**
      * GitAuthor方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param email String类型参数
-     * @param when Date类型参数
+     * @param when  Date类型参数
      */
     public GitAuthor(String name, String email, Date when) {
         this.name = name;
@@ -46,6 +48,7 @@ public class GitAuthor {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -54,7 +57,7 @@ public class GitAuthor {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -62,6 +65,7 @@ public class GitAuthor {
 
     /**
      * getEmail方法。
+     *
      * @return String类型返回值
      */
     public String getEmail() {
@@ -70,7 +74,7 @@ public class GitAuthor {
 
     /**
      * setEmail方法。
-     *      * @param email String类型参数
+     * * @param email String类型参数
      */
     public void setEmail(String email) {
         this.email = email;
@@ -78,6 +82,7 @@ public class GitAuthor {
 
     /**
      * getWhen方法。
+     *
      * @return Date类型返回值
      */
     public Date getWhen() {
@@ -86,7 +91,7 @@ public class GitAuthor {
 
     /**
      * setWhen方法。
-     *      * @param when Date类型参数
+     * * @param when Date类型参数
      */
     public void setWhen(Date when) {
         this.when = when;

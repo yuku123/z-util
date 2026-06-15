@@ -1,14 +1,8 @@
 package com.zifang.util.devops.git.github.org;
 
-import org.kohsuke.github.GHOrganization;
+import org.kohsuke.github.*;
 import org.kohsuke.github.GHOrganization.Permission;
 import org.kohsuke.github.GHOrganization.Role;
-import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GHTeam;
-import org.kohsuke.github.GHTeamBuilder;
-import org.kohsuke.github.GHUser;
-import org.kohsuke.github.GitHub;
-import org.kohsuke.github.PagedIterator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +25,7 @@ public class OrganizationApiWrapper {
 
     /**
      * OrganizationApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
      */
     public OrganizationApiWrapper(GitHub github) {
         this.github = github;
@@ -39,7 +33,8 @@ public class OrganizationApiWrapper {
 
     /**
      * OrganizationApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
+     *
      * @param org String类型参数
      */
     public OrganizationApiWrapper(GitHub github, String org) {
@@ -49,7 +44,8 @@ public class OrganizationApiWrapper {
 
     /**
      * withOrg方法。
-     *      * @param org String类型参数
+     * * @param org String类型参数
+     *
      * @return OrganizationApiWrapper类型返回值
      */
     public OrganizationApiWrapper withOrg(String org) {

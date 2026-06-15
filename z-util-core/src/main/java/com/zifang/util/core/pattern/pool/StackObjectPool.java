@@ -1,7 +1,9 @@
 package com.zifang.util.core.pattern.pool;
 
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -21,16 +23,14 @@ public class StackObjectPool<T> implements ObjectPool<T> {
     private final Deque<PooledObject<T>> idleObjects;
     private final Map<T, PooledObject<T>> allocatedObjects;
     private final AtomicInteger numActive;
-
-    private volatile boolean closed;
     private final ReentrantLock lock = new ReentrantLock();
     private final Condition condition = lock.newCondition();
-
+    private volatile boolean closed;
     private EvictionTimer evictionTimer;
 
     /**
      * StackObjectPool方法。
-     *      * @param factory PooledObjectFactoryT类型参数
+     * * @param factory PooledObjectFactoryT类型参数
      */
     public StackObjectPool(PooledObjectFactory<T> factory) {
         this(factory, new PoolConfig());
@@ -38,7 +38,8 @@ public class StackObjectPool<T> implements ObjectPool<T> {
 
     /**
      * StackObjectPool方法。
-     *      * @param factory PooledObjectFactoryT类型参数
+     * * @param factory PooledObjectFactoryT类型参数
+     *
      * @param config PoolConfig类型参数
      */
     public StackObjectPool(PooledObjectFactory<T> factory, PoolConfig config) {
@@ -47,8 +48,9 @@ public class StackObjectPool<T> implements ObjectPool<T> {
 
     /**
      * StackObjectPool方法。
-     *      * @param factory PooledObjectFactoryT类型参数
-     * @param config PoolConfig类型参数
+     * * @param factory PooledObjectFactoryT类型参数
+     *
+     * @param config      PoolConfig类型参数
      * @param maxPoolSize int类型参数
      */
     public StackObjectPool(PooledObjectFactory<T> factory, PoolConfig config, int maxPoolSize) {

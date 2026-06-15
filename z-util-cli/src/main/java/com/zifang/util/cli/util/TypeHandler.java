@@ -18,7 +18,8 @@ public class TypeHandler {
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(\\.\\d+)?");
 
-    private TypeHandler() {}
+    private TypeHandler() {
+    }
 
     /**
      * Convert a string value to a Number.

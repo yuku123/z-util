@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter11.nio;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.lang.reflect.Field;
@@ -128,7 +129,7 @@ public class Test001 {
 
     /**
      * print4Point方法。
-     *      * @param byteBuffer ByteBuffer类型参数
+     * * @param byteBuffer ByteBuffer类型参数
      */
     public void print4Point(ByteBuffer byteBuffer) throws Exception {
         // mark的值没有显式的获取方式，我们用反射直接获取

@@ -2,11 +2,12 @@ package com.zifang.util.devops.common;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * GavInfo 类测试
  */
+
 /**
  * GavInfoTest类。
  */

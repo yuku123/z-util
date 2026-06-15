@@ -22,7 +22,7 @@ public class CacheClientBuilder {
      * 带参数的构造函数
      *
      * @param cacheProvider 缓存提供者
-     * @param dbNum        数据库编号
+     * @param dbNum         数据库编号
      */
     public CacheClientBuilder(CacheProvider cacheProvider, String dbNum) {
         this.cacheProvider = cacheProvider;

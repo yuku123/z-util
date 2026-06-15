@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter11.case2;
  * @author zifang
  * @version 1.0
  */
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,7 +21,8 @@ import java.io.InputStream;
 public class TransformInputStreamOutputStream {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws IOException {

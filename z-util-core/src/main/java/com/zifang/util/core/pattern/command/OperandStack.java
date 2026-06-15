@@ -23,7 +23,7 @@ public class OperandStack {
 
     /**
      * OperandStack方法。
-     *      * @param maxSize int类型参数
+     * * @param maxSize int类型参数
      */
     public OperandStack(int maxSize) {
         this.stack = new ArrayDeque<>(maxSize);

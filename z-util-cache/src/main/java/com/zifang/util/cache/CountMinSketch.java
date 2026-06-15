@@ -11,9 +11,13 @@ package com.zifang.util.cache;
  */
 final class CountMinSketch {
 
-    /** 一行的宽度（必须是 2 的幂，便于位运算取模） */
+    /**
+     * 一行的宽度（必须是 2 的幂，便于位运算取模）
+     */
     private final int tableMask;
-    /** 计数器数组（一维：[row][col]） */
+    /**
+     * 计数器数组（一维：[row][col]）
+     */
     private final long[] table;          // 每格 4 bit → 一个 long 装 16 格
     private final int tableLength;       // 计数器格数
     private final int sampleSize;        // 重置阈值
@@ -31,7 +35,14 @@ final class CountMinSketch {
         this.sampleSize = sampleSize;
     }
 
-    /** 估频次：4 个 hash 位置取最小值。 */
+    private static int spread(int x) {
+        x = ((x >>> 16) ^ x) * 0x45d9f3b;
+        return (x ^ (x >>> 16));
+    }
+
+    /**
+     * 估频次：4 个 hash 位置取最小值。
+     */
     int estimate(Object key) {
         int h1 = spread(key.hashCode());
         int h2 = h1 >>> 16;
@@ -44,7 +55,9 @@ final class CountMinSketch {
         return min;
     }
 
-    /** 频次 +1（饱和到 15）。 */
+    /**
+     * 频次 +1（饱和到 15）。
+     */
     void increment(Object key) {
         int h1 = spread(key.hashCode());
         int h2 = h1 >>> 16;
@@ -70,10 +83,16 @@ final class CountMinSketch {
         }
     }
 
-    /** 测试用：当前 sampleCount。 */
-    int sampleCount() { return sampleCount; }
+    /**
+     * 测试用：当前 sampleCount。
+     */
+    int sampleCount() {
+        return sampleCount;
+    }
 
-    /** 所有计数器右移 1 位（除以 2），实现时间衰减。 */
+    /**
+     * 所有计数器右移 1 位（除以 2），实现时间衰减。
+     */
     void reset() {
         int count = 0;
         for (int i = 0; i < table.length; i++) {
@@ -86,7 +105,9 @@ final class CountMinSketch {
         sampleCount = 0;
     }
 
-    int totalCount() { return totalCount; }
+    int totalCount() {
+        return totalCount;
+    }
 
     // ===== 工具 =====
     private int indexOf(int h1, int h2, int row) {
@@ -94,10 +115,5 @@ final class CountMinSketch {
         h = (h ^ (h >>> 16)) * 0x85ebca6b;
         h = (h ^ (h >>> 13)) * 0xc2b2ae35;
         return (h ^ (h >>> 16)) & tableMask;
-    }
-
-    private static int spread(int x) {
-        x = ((x >>> 16) ^ x) * 0x45d9f3b;
-        return (x ^ (x >>> 16));
     }
 }

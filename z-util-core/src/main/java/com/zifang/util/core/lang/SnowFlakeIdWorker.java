@@ -162,6 +162,7 @@ public class SnowFlakeIdWorker {
 
     /**
      * getInstance方法。
+     *
      * @return static SnowFlakeIdWorker类型返回值
      */
     public static SnowFlakeIdWorker getInstance() {
@@ -206,6 +207,7 @@ public class SnowFlakeIdWorker {
 
     /**
      * nextIdByCacheWhenClockMoved方法。
+     *
      * @return synchronized long类型返回值
      */
     public synchronized long nextIdByCacheWhenClockMoved() {

@@ -1,23 +1,28 @@
 # GitHub API 封装
 
-基于 [github-api](https://github.com/kohsuke/github-api) (kohsuke) 的轻量封装，统一入口 `GithubApiWrapper`，告别每次 new GitHub + Credential 的重复代码。
+基于 [github-api](https://github.com/kohsuke/github-api) (kohsuke) 的轻量封装，统一入口 `GithubApiWrapper`，告别每次 new
+GitHub + Credential 的重复代码。
 
 ## 初始化
 
 **方式一：环境变量（推荐）**
+
 ```bash
 export GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
+
 ```java
 GithubApiHolder.init(GithubConfig.fromEnv());
 ```
 
 **方式二：手动传入 Token**
+
 ```java
 GithubApiHolder.init(GithubConfig.of("ghp_xxxx", "https://api.github.com"));
 ```
 
 **方式三：Enterprise（私有 GitHub）**
+
 ```java
 GithubApiHolder.init(GithubConfig.of("ghp_xxxx", "https://github.mycompany.com/api/v3"));
 ```

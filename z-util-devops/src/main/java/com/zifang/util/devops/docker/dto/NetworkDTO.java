@@ -26,6 +26,7 @@ public class NetworkDTO {
 
     /**
      * getId方法。
+     *
      * @return String类型返回值
      */
     public String getId() {
@@ -34,7 +35,7 @@ public class NetworkDTO {
 
     /**
      * setId方法。
-     *      * @param id String类型参数
+     * * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -42,6 +43,7 @@ public class NetworkDTO {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -50,7 +52,7 @@ public class NetworkDTO {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -58,6 +60,7 @@ public class NetworkDTO {
 
     /**
      * getDriver方法。
+     *
      * @return String类型返回值
      */
     public String getDriver() {
@@ -66,7 +69,7 @@ public class NetworkDTO {
 
     /**
      * setDriver方法。
-     *      * @param driver String类型参数
+     * * @param driver String类型参数
      */
     public void setDriver(String driver) {
         this.driver = driver;
@@ -74,6 +77,7 @@ public class NetworkDTO {
 
     /**
      * getScope方法。
+     *
      * @return String类型返回值
      */
     public String getScope() {
@@ -82,7 +86,7 @@ public class NetworkDTO {
 
     /**
      * setScope方法。
-     *      * @param scope String类型参数
+     * * @param scope String类型参数
      */
     public void setScope(String scope) {
         this.scope = scope;
@@ -90,6 +94,7 @@ public class NetworkDTO {
 
     /**
      * isInternal方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isInternal() {
@@ -98,7 +103,7 @@ public class NetworkDTO {
 
     /**
      * setInternal方法。
-     *      * @param internal boolean类型参数
+     * * @param internal boolean类型参数
      */
     public void setInternal(boolean internal) {
         this.internal = internal;
@@ -106,6 +111,7 @@ public class NetworkDTO {
 
     /**
      * isAttachable方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isAttachable() {
@@ -114,7 +120,7 @@ public class NetworkDTO {
 
     /**
      * setAttachable方法。
-     *      * @param attachable boolean类型参数
+     * * @param attachable boolean类型参数
      */
     public void setAttachable(boolean attachable) {
         this.attachable = attachable;
@@ -122,6 +128,7 @@ public class NetworkDTO {
 
     /**
      * getSubnet方法。
+     *
      * @return String类型返回值
      */
     public String getSubnet() {
@@ -130,7 +137,7 @@ public class NetworkDTO {
 
     /**
      * setSubnet方法。
-     *      * @param subnet String类型参数
+     * * @param subnet String类型参数
      */
     public void setSubnet(String subnet) {
         this.subnet = subnet;
@@ -138,6 +145,7 @@ public class NetworkDTO {
 
     /**
      * getGateway方法。
+     *
      * @return String类型返回值
      */
     public String getGateway() {
@@ -146,7 +154,7 @@ public class NetworkDTO {
 
     /**
      * setGateway方法。
-     *      * @param gateway String类型参数
+     * * @param gateway String类型参数
      */
     public void setGateway(String gateway) {
         this.gateway = gateway;
@@ -154,6 +162,7 @@ public class NetworkDTO {
 
     /**
      * getLabels方法。
+     *
      * @return Map<String, String>类型返回值
      */
     public Map<String, String> getLabels() {
@@ -162,7 +171,7 @@ public class NetworkDTO {
 
     /**
      * setLabels方法。
-     *      * @param labels MapString,类型参数
+     * * @param labels MapString,类型参数
      */
     public void setLabels(Map<String, String> labels) {
         this.labels = labels;
@@ -170,6 +179,7 @@ public class NetworkDTO {
 
     /**
      * getContainerCount方法。
+     *
      * @return int类型返回值
      */
     public int getContainerCount() {
@@ -178,7 +188,7 @@ public class NetworkDTO {
 
     /**
      * setContainerCount方法。
-     *      * @param containerCount int类型参数
+     * * @param containerCount int类型参数
      */
     public void setContainerCount(int containerCount) {
         this.containerCount = containerCount;

@@ -1,7 +1,7 @@
 package com.zifang.util.visuallization.chart;
 
-import com.zifang.util.ml.ga.Population;
 import com.zifang.util.ml.ga.Individual;
+import com.zifang.util.ml.ga.Population;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,7 @@ public class GAVisualizer {
 
     /**
      * 更新可视化数据
+     *
      * @param population 当前种群
      */
     public void update(Population population) {
@@ -46,6 +47,7 @@ public class GAVisualizer {
 
     /**
      * 获取适应度曲线图组件
+     *
      * @return 适应度曲线图实例
      */
     public LineChart getFitnessChart() {
@@ -54,6 +56,7 @@ public class GAVisualizer {
 
     /**
      * 获取染色体条形图组件
+     *
      * @return 染色体条形图实例
      */
     public BarChart getChromosomeChart() {
@@ -62,6 +65,7 @@ public class GAVisualizer {
 
     /**
      * 获取当前代数
+     *
      * @return 当前进化代数
      */
     public int getGeneration() {
@@ -70,6 +74,7 @@ public class GAVisualizer {
 
     /**
      * 获取最优适应度历史记录
+     *
      * @return 最优适应度列表副本
      */
     public List<Double> getBestFitnessHistory() {
@@ -89,6 +94,7 @@ public class GAVisualizer {
 
     /**
      * 更新染色体图表
+     *
      * @param individual 最优个体
      */
     private void updateChromosomeChart(Individual individual) {

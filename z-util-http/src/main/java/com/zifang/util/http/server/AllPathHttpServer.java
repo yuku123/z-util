@@ -49,6 +49,39 @@ public class AllPathHttpServer {
     }
 
     // 处理所有路径和所有HTTP方法的处理器
+
+    // 工具方法：手动读取输入流（替代Java 9+的readAllBytes()）
+    private static byte[] readInputStream(InputStream is) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024]; // 缓冲区大小，可调整
+        int len;
+        // 循环读取流内容到缓冲区
+        while ((len = is.read(buffer)) != -1) {
+            baos.write(buffer, 0, len);
+        }
+        is.close(); // 关闭输入流
+        return baos.toByteArray(); // 转换为字节数组返回
+    }
+
+    // 工具方法：解析参数（GET取URL参数，其他方法取请求体）
+    private static Map<String, String> parseParams(String method, String query, String body) {
+        Map<String, String> params = new HashMap<>();
+        String paramStr = "GET".equals(method) ? query : body; // 根据方法选择参数来源
+        if (paramStr == null || paramStr.isEmpty()) {
+            return params;
+        }
+
+        // 分割参数（key=value&key2=value2格式）
+        String[] pairs = paramStr.split("&");
+        for (String pair : pairs) {
+            String[] keyValue = pair.split("=", 2); // 最多分割为2部分（兼容value含=的情况）
+            String key = keyValue[0];
+            String value = keyValue.length > 1 ? keyValue[1] : ""; // 无value时设为空字符串
+            params.put(key, value);
+        }
+        return params;
+    }
+
     /**
      * 全局请求处理器
      * <p>
@@ -60,10 +93,10 @@ public class AllPathHttpServer {
      */
     static class AllRequestHandler implements HttpHandler {
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
+        /**
+         * handle方法。
+         *      * @param exchange HttpExchange类型参数
+         */
         public void handle(HttpExchange exchange) throws IOException {
             // 1. 获取请求基本信息
             String method = exchange.getRequestMethod(); // 请求方法（GET/POST/PUT/DELETE等）
@@ -98,37 +131,5 @@ public class AllPathHttpServer {
             }
             exchange.close();
         }
-    }
-
-    // 工具方法：手动读取输入流（替代Java 9+的readAllBytes()）
-    private static byte[] readInputStream(InputStream is) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024]; // 缓冲区大小，可调整
-        int len;
-        // 循环读取流内容到缓冲区
-        while ((len = is.read(buffer)) != -1) {
-            baos.write(buffer, 0, len);
-        }
-        is.close(); // 关闭输入流
-        return baos.toByteArray(); // 转换为字节数组返回
-    }
-
-    // 工具方法：解析参数（GET取URL参数，其他方法取请求体）
-    private static Map<String, String> parseParams(String method, String query, String body) {
-        Map<String, String> params = new HashMap<>();
-        String paramStr = "GET".equals(method) ? query : body; // 根据方法选择参数来源
-        if (paramStr == null || paramStr.isEmpty()) {
-            return params;
-        }
-
-        // 分割参数（key=value&key2=value2格式）
-        String[] pairs = paramStr.split("&");
-        for (String pair : pairs) {
-            String[] keyValue = pair.split("=", 2); // 最多分割为2部分（兼容value含=的情况）
-            String key = keyValue[0];
-            String value = keyValue.length > 1 ? keyValue[1] : ""; // 无value时设为空字符串
-            params.put(key, value);
-        }
-        return params;
     }
 }

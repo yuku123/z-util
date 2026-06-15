@@ -10,7 +10,7 @@ package com.zifang.util.core.concurrency.packages.monitor;//package com.zifang.u
 //import java.util.logging.LogRecord;
 //import java.util.logging.log;
 //
-///**
+/// **
 // * 写有效的日志
 //
 //	log工具提供了允许你写信息到一个或者多个目的地的机制。一个log是由以下这些组成：

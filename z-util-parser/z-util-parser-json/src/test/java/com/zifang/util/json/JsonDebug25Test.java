@@ -1,17 +1,29 @@
 package com.zifang.util.json;
 
-import com.zifang.util.dsl.g4.*;
-import com.zifang.util.dsl.g4.model.*;
-import com.zifang.util.dsl.ast.*;
-import com.zifang.util.dsl.core.*;
-import com.zifang.util.dsl.token.*;
+import com.zifang.util.dsl.ast.SimpleASTNode;
+import com.zifang.util.dsl.core.ASTNode;
+import com.zifang.util.dsl.core.TokenReader;
+import com.zifang.util.dsl.g4.DynamicLexer;
+import com.zifang.util.dsl.g4.DynamicParser;
+import com.zifang.util.dsl.g4.model.G4Rule;
 import org.junit.Test;
-import java.util.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * JsonDebug25Test类。
  */
 public class JsonDebug25Test {
+
+    private static String loadG4(String name) throws Exception {
+        java.io.InputStream is = JsonDebug25Test.class.getClassLoader().getResourceAsStream(name);
+        if (is == null) throw new Exception("Resource not found: " + name);
+        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+        is.close();
+        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+    }
 
     @Test
     /**
@@ -78,13 +90,5 @@ public class JsonDebug25Test {
         } catch (Exception e) {
             System.out.println("parseSequence('LBrace RBrace') EXCEPTION: " + (e.getCause() != null ? e.getCause().getMessage() : e.getMessage()));
         }
-    }
-
-    private static String loadG4(String name) throws Exception {
-        java.io.InputStream is = JsonDebug25Test.class.getClassLoader().getResourceAsStream(name);
-        if (is == null) throw new Exception("Resource not found: " + name);
-        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
-        is.close();
-        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
     }
 }

@@ -23,7 +23,8 @@ public class DynamicClassUtil {
 
     /**
      * parser方法。
-     *      * @param clazz Class?类型参数
+     * * @param clazz Class?类型参数
+     *
      * @return static DynamicClass类型返回值
      */
     public static DynamicClass parser(Class<?> clazz) {
@@ -56,7 +57,8 @@ public class DynamicClassUtil {
 
     /**
      * parser方法。
-     *      * @param field Field类型参数
+     * * @param field Field类型参数
+     *
      * @return static DynamicField类型返回值
      */
     public static DynamicField parser(Field field) {
@@ -75,7 +77,8 @@ public class DynamicClassUtil {
 
     /**
      * parser方法。
-     *      * @param method Method类型参数
+     * * @param method Method类型参数
+     *
      * @return static DynamicMethod类型返回值
      */
     public static DynamicMethod parser(Method method) {
@@ -93,7 +96,8 @@ public class DynamicClassUtil {
 
     /**
      * parserClass方法。
-     *      * @param clazzes ListClass?类型参数
+     * * @param clazzes ListClass?类型参数
+     *
      * @return static List<DynamicClass>类型返回值
      */
     public static List<DynamicClass> parserClass(List<Class<?>> clazzes) {
@@ -102,7 +106,8 @@ public class DynamicClassUtil {
 
     /**
      * parserMethods方法。
-     *      * @param methods ListMethod类型参数
+     * * @param methods ListMethod类型参数
+     *
      * @return static List<DynamicMethod>类型返回值
      */
     public static List<DynamicMethod> parserMethods(List<Method> methods) {
@@ -111,7 +116,8 @@ public class DynamicClassUtil {
 
     /**
      * parserFields方法。
-     *      * @param fields ListField类型参数
+     * * @param fields ListField类型参数
+     *
      * @return static List<DynamicField>类型返回值
      */
     public static List<DynamicField> parserFields(List<Field> fields) {
@@ -124,7 +130,8 @@ public class DynamicClassUtil {
 
     /**
      * parser方法。
-     *      * @param dynamicClass DynamicClass类型参数
+     * * @param dynamicClass DynamicClass类型参数
+     *
      * @return static Class<?>类型返回值
      */
     public static Class<?> parser(DynamicClass dynamicClass) {
@@ -135,7 +142,8 @@ public class DynamicClassUtil {
 
     /**
      * parserAsCode方法。
-     *      * @param dynamicClass DynamicClass类型参数
+     * * @param dynamicClass DynamicClass类型参数
+     *
      * @return static String类型返回值
      */
     public static String parserAsCode(DynamicClass dynamicClass) {
@@ -144,7 +152,8 @@ public class DynamicClassUtil {
 
     /**
      * generateClassSource方法。
-     *      * @param dynamicBean DynamicClass类型参数
+     * * @param dynamicBean DynamicClass类型参数
+     *
      * @return static String类型返回值
      */
     public static String generateClassSource(DynamicClass dynamicBean) {
@@ -152,12 +161,12 @@ public class DynamicClassUtil {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        
+
         // Package
         if (dynamicBean.getPackageName() != null && !dynamicBean.getPackageName().isEmpty()) {
             sb.append("package ").append(dynamicBean.getPackageName()).append(";\n\n");
         }
-        
+
         // Annotations
         for (Object annotationObj : dynamicBean.getAnnotations()) {
             if (annotationObj instanceof Map) {
@@ -166,20 +175,20 @@ public class DynamicClassUtil {
                 sb.append("@").append(annotation.get("name")).append("\n");
             }
         }
-        
+
         // Class declaration
         String classKeyword = Boolean.TRUE.equals(dynamicBean.getInterface()) ? "interface" : "class";
         sb.append("public ").append(classKeyword).append(" ").append(dynamicBean.getClassName()).append(" {\n");
-        
+
         // Fields
         for (DynamicField field : dynamicBean.getFields()) {
             sb.append("    private ").append(field.getType()).append(" ").append(field.getName()).append(";\n");
         }
-        
+
         // Methods
         for (DynamicMethod method : dynamicBean.getMethods()) {
             sb.append("    public ").append(method.getReturnType()).append(" ")
-              .append(method.getMethodName()).append("(");
+                    .append(method.getMethodName()).append("(");
             @SuppressWarnings("unchecked")
             List<String> params = (List<String>) method.getParameters();
             sb.append(String.join(", ", params));
@@ -189,25 +198,28 @@ public class DynamicClassUtil {
             }
             sb.append("\n    }\n");
         }
-        
+
         sb.append("}");
         return sb.toString();
     }
 
     /**
      * generateClassSource方法。
-     *      * @param json String类型参数
+     * * @param json String类型参数
+     *
      * @return static List<String>类型返回值
      */
-    public static List<String> generateClassSource(String json){
+    public static List<String> generateClassSource(String json) {
         return generateClassSource(GsonUtil.toMap(json));
     }
+
     /**
      * generateClassSource方法。
-     *      * @param map MapString,Object类型参数
+     * * @param map MapString,Object类型参数
+     *
      * @return static List<String>类型返回值
      */
-    public static List<String> generateClassSource(Map<String,Object> map){
+    public static List<String> generateClassSource(Map<String, Object> map) {
         List<DynamicClass> dynamicClasses = parserAsDynamicClass(map);
         return dynamicClasses.stream().map(DynamicClass::generateSourceCode).collect(Collectors.toList());
     }
@@ -215,34 +227,35 @@ public class DynamicClassUtil {
     private static List<DynamicClass> parserAsDynamicClass(Map<String, Object> map) {
         return parserAsDynamicClassUnit(map).collect();
     }
+
     private static DynamicClassUnit parserAsDynamicClassUnit(Map<String, Object> map) {
         DynamicClassUnit dynamicClassUnit = new DynamicClassUnit();
         DynamicClass dynamicClass = new DynamicClass();
-        dynamicClass.setClassName("Bean_"+System.currentTimeMillis());
-        for(Map.Entry<String,Object> entry : map.entrySet()){
+        dynamicClass.setClassName("Bean_" + System.currentTimeMillis());
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
             // 无值 归纳为String
-            if(entry.getValue() == null){
-                dynamicClass.addField(entry.getKey(),String.class, true, true);
+            if (entry.getValue() == null) {
+                dynamicClass.addField(entry.getKey(), String.class, true, true);
                 continue;
             }
 
-            if(Map.class.isAssignableFrom(entry.getValue().getClass())){
-                DynamicClassUnit sub = parserAsDynamicClassUnit((Map<String,Object>) entry.getValue());
-                dynamicClass.addField(entry.getKey(),sub.getMain().getType(), true, true);
+            if (Map.class.isAssignableFrom(entry.getValue().getClass())) {
+                DynamicClassUnit sub = parserAsDynamicClassUnit((Map<String, Object>) entry.getValue());
+                dynamicClass.addField(entry.getKey(), sub.getMain().getType(), true, true);
                 dynamicClassUnit.getSub().add(sub);
             }
 
-            if(List.class.isAssignableFrom(entry.getValue().getClass())){
+            if (List.class.isAssignableFrom(entry.getValue().getClass())) {
                 List<Object> list = (List<Object>) entry.getValue();
                 Object o = list.get(0);
-                if(o instanceof Map){
+                if (o instanceof Map) {
                     // result.addAll(parserAsDynamicClass((Map<String, Object>) o));
-                } else if(o instanceof List){
+                } else if (o instanceof List) {
                     // result.addAll(parserAsDynamicClass((Map<String, Object>) o));
                 }
             }
 
-            dynamicClass.addField(entry.getKey(),String.class, true, true);
+            dynamicClass.addField(entry.getKey(), String.class, true, true);
         }
 
         dynamicClassUnit.setMain(dynamicClass);

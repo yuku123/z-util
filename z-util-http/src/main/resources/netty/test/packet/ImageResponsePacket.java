@@ -6,6 +6,7 @@ import static com.zifang.util.core.demo.thirdpart.components.netty.im.ch9.Comman
 public class ImageResponsePacket extends Packet {
 
     private String message;
+    private byte[] bufferedImage;
 
     public byte[] getBufferedImage() {
         return bufferedImage;
@@ -14,8 +15,6 @@ public class ImageResponsePacket extends Packet {
     public void setBufferedImage(byte[] bufferedImage) {
         this.bufferedImage = bufferedImage;
     }
-
-    private byte[] bufferedImage;
 
     public String getMessage() {
         return message;

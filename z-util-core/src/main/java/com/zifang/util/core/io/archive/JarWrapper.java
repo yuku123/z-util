@@ -1,15 +1,7 @@
 package com.zifang.util.core.io.archive;
 
-import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -62,6 +54,23 @@ public class JarWrapper implements Closeable {
      */
     public JarWrapper(File jarFilePath) throws IOException {
         this.jarFile = new JarFile(jarFilePath);
+    }
+
+    /**
+     * 将输入流转换为字节数组
+     *
+     * @param input 输入流（不能为 null）
+     * @return 包含输入流全部内容的字节数组
+     * @throws IOException 如果读取过程中发生 IO 错误
+     */
+    private static byte[] toByteArray(InputStream input) throws IOException {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int n;
+        while (-1 != (n = input.read(buffer))) {
+            output.write(buffer, 0, n);
+        }
+        return output.toByteArray();
     }
 
     /**
@@ -154,23 +163,6 @@ public class JarWrapper implements Closeable {
         if (jarFile != null) {
             jarFile.close();
         }
-    }
-
-    /**
-     * 将输入流转换为字节数组
-     *
-     * @param input 输入流（不能为 null）
-     * @return 包含输入流全部内容的字节数组
-     * @throws IOException 如果读取过程中发生 IO 错误
-     */
-    private static byte[] toByteArray(InputStream input) throws IOException {
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        byte[] buffer = new byte[4096];
-        int n;
-        while (-1 != (n = input.read(buffer))) {
-            output.write(buffer, 0, n);
-        }
-        return output.toByteArray();
     }
 
     /**

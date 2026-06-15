@@ -1,10 +1,6 @@
 package com.zifang.util.core.lang;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,7 +112,9 @@ public class ProcessExecutor {
         return new Result(exit, out.getOutput(), err.getOutput(), exit == 0, false);
     }
 
-    /** 输出消费者，用于流式处理子进程输出。 */
+    /**
+     * 输出消费者，用于流式处理子进程输出。
+     */
     public interface ProcessOutputConsumer {
         void consume(String line);
     }
@@ -136,11 +134,25 @@ public class ProcessExecutor {
             this.timedOut = timedOut;
         }
 
-        public int getExitCode() { return exitCode; }
-        public String getStdout() { return stdout; }
-        public String getStderr() { return stderr; }
-        public boolean isSuccess() { return success; }
-        public boolean isTimedOut() { return timedOut; }
+        public int getExitCode() {
+            return exitCode;
+        }
+
+        public String getStdout() {
+            return stdout;
+        }
+
+        public String getStderr() {
+            return stderr;
+        }
+
+        public boolean isSuccess() {
+            return success;
+        }
+
+        public boolean isTimedOut() {
+            return timedOut;
+        }
     }
 
     private static class StreamGobbler extends Thread {

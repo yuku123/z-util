@@ -20,7 +20,8 @@ public class InnerClasses extends AbstractAttribute {
 
     /**
      * InnerClasses方法。
-     *      * @param attributeNameIndex U2类型参数
+     * * @param attributeNameIndex U2类型参数
+     *
      * @param attributeLength U4类型参数
      */
     public InnerClasses(U2 attributeNameIndex, U4 attributeLength) {
@@ -36,9 +37,9 @@ public class InnerClasses extends AbstractAttribute {
 
     }
 
-/**
- * InnerClassInfo类。
- */
+    /**
+     * InnerClassInfo类。
+     */
     public class InnerClassInfo {
         private U2 innerClassInfoIndex;
         private U2 outerClassInfoIndex;

@@ -4,10 +4,11 @@ import com.zifang.util.monitor.thread.alarm.AlarmPolicy;
 import com.zifang.util.monitor.thread.alarm.AlarmService;
 import com.zifang.util.monitor.thread.alarm.LogAlarmService;
 import com.zifang.util.monitor.thread.alarm.ThreadPoolOvertimeAlarmPolicy;
-import com.zifang.util.monitor.thread.utility.TimeUtil;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * ThreadPoolConfigUnitTest类。

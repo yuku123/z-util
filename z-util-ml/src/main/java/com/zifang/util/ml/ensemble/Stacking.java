@@ -1,7 +1,7 @@
 package com.zifang.util.ml.ensemble;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 
 /**
  * Stacking (Stacked Generalization) ensemble classifier.
@@ -15,8 +15,9 @@ public class Stacking {
 
     /**
      * Create a Stacking ensemble.
+     *
      * @param baseEstimators Array of base estimators
-     * @param metaEstimator Meta-estimator to combine base predictions
+     * @param metaEstimator  Meta-estimator to combine base predictions
      */
     public Stacking(Estimator[] baseEstimators, Estimator metaEstimator) {
         this.baseEstimators = baseEstimators;
@@ -26,6 +27,7 @@ public class Stacking {
     /**
      * Fit the Stacking ensemble.
      * Trains each base estimator and generates out-of-fold meta-features.
+     *
      * @param X Training features
      * @param y Training labels
      */
@@ -66,6 +68,7 @@ public class Stacking {
 
     /**
      * Predict class labels.
+     *
      * @param X Features to predict
      * @return Predicted class labels
      */
@@ -103,6 +106,7 @@ public class Stacking {
 
     /**
      * Predict class probabilities.
+     *
      * @param X Features to predict
      * @return Probability array of shape (n_samples, n_classes)
      */
@@ -202,6 +206,7 @@ public class Stacking {
 
     /**
      * getBaseEstimators方法。
+     *
      * @return Estimator[]类型返回值
      */
     public Estimator[] getBaseEstimators() {
@@ -210,6 +215,7 @@ public class Stacking {
 
     /**
      * getMetaEstimator方法。
+     *
      * @return Estimator类型返回值
      */
     public Estimator getMetaEstimator() {

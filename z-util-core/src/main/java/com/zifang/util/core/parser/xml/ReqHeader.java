@@ -24,6 +24,7 @@ public class ReqHeader {
 
     /**
      * getSysId方法。
+     *
      * @return String类型返回值
      */
     public String getSysId() {
@@ -41,6 +42,7 @@ public class ReqHeader {
 
     /**
      * getAuthCode方法。
+     *
      * @return String类型返回值
      */
     public String getAuthCode() {
@@ -58,6 +60,7 @@ public class ReqHeader {
 
     /**
      * getReqNo方法。
+     *
      * @return String类型返回值
      */
     public String getReqNo() {

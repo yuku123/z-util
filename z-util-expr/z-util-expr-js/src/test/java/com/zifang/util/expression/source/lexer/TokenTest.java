@@ -2,7 +2,8 @@ package com.zifang.util.expression.source.lexer;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Token 接口和 SimpleToken 实现完整测试

@@ -18,7 +18,8 @@ public class QueryString {
 
     /**
      * add方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param value String类型参数
      * @return synchronized void类型返回值
      */
@@ -39,6 +40,7 @@ public class QueryString {
 
     /**
      * getQuery方法。
+     *
      * @return synchronized String类型返回值
      */
     public synchronized String getQuery() {

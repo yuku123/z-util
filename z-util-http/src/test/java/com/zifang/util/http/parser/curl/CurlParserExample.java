@@ -5,6 +5,7 @@ import com.zifang.util.http.base.pojo.HttpRequestDefinition;
 /**
  * cURL 解析器使用示例
  */
+
 /**
  * CurlParserExample类。
  */
@@ -12,7 +13,8 @@ public class CurlParserExample {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -175,9 +177,9 @@ public class CurlParserExample {
         System.out.println("------------------------------");
 
         String multipleCurls =
-            "curl -X GET https://api.example.com/users\n" +
-            "curl -X POST -H 'Content-Type: application/json' -d '{\"name\":\"test\"}' https://api.example.com/users\n" +
-            "curl -X DELETE https://api.example.com/users/123";
+                "curl -X GET https://api.example.com/users\n" +
+                        "curl -X POST -H 'Content-Type: application/json' -d '{\"name\":\"test\"}' https://api.example.com/users\n" +
+                        "curl -X DELETE https://api.example.com/users/123";
 
         System.out.println("原始多个 cURL 命令:");
         System.out.println(multipleCurls);

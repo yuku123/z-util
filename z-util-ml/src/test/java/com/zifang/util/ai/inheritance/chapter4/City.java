@@ -6,6 +6,7 @@ package com.zifang.util.ml.inheritance.chapter4;
  *
  * @author zifang
  */
+
 /**
  * City类。
  */
@@ -21,7 +22,8 @@ public class City {
      */
     /**
      * City方法。
-     *      * @param x int类型参数
+     * * @param x int类型参数
+     *
      * @param y int类型参数
      */
     public City(int x, int y) {
@@ -39,7 +41,8 @@ public class City {
      */
     /**
      * distanceFrom方法。
-     *      * @param city City类型参数
+     * * @param city City类型参数
+     *
      * @return double类型返回值
      */
     public double distanceFrom(City city) {
@@ -59,6 +62,7 @@ public class City {
      */
     /**
      * getX方法。
+     *
      * @return int类型返回值
      */
     public int getX() {
@@ -72,6 +76,7 @@ public class City {
      */
     /**
      * getY方法。
+     *
      * @return int类型返回值
      */
     public int getY() {

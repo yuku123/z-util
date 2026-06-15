@@ -11,6 +11,24 @@ import java.util.concurrent.RecursiveTask;
  */
 public class ForkJoinTaskDemo {
 
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        int[] arr = new int[100];
+        for (int i = 0; i < 100; i++) {
+            arr[i] = i + 1;
+        }
+
+        ForkJoinPool pool = new ForkJoinPool();
+        ForkJoinTask<Integer> result = pool.submit(new ForkJoinTaskDemo().new SumTask(arr, 0, arr.length));
+        System.out.println("最终计算结果: " + result.invoke());
+        pool.shutdown();
+    }
+
     private class SumTask extends RecursiveTask<Integer> {
 
         private static final int THRESHOLD = 20;
@@ -19,12 +37,13 @@ public class ForkJoinTaskDemo {
         private int start;
         private int end;
 
-    /**
-     * SumTask方法。
-     *      * @param arr int[]类型参数
-     * @param start int类型参数
-     * @param end int类型参数
-     */
+        /**
+         * SumTask方法。
+         * * @param arr int[]类型参数
+         *
+         * @param start int类型参数
+         * @param end   int类型参数
+         */
         public SumTask(int[] arr, int start, int end) {
             this.arr = arr;
             this.start = start;
@@ -41,10 +60,10 @@ public class ForkJoinTaskDemo {
         }
 
         @Override
-    /**
-     * compute方法。
-     * @return int类型返回值
-     */
+        /**
+         * compute方法。
+         * @return int类型返回值
+         */
         protected Integer compute() {
 
             if ((end - start) <= THRESHOLD) {
@@ -59,23 +78,6 @@ public class ForkJoinTaskDemo {
                 return left.join() + right.join();
             }
         }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-        int[] arr = new int[100];
-        for (int i = 0; i < 100; i++) {
-            arr[i] = i + 1;
-        }
-
-        ForkJoinPool pool = new ForkJoinPool();
-        ForkJoinTask<Integer> result = pool.submit(new ForkJoinTaskDemo().new SumTask(arr, 0, arr.length));
-        System.out.println("最终计算结果: " + result.invoke());
-        pool.shutdown();
     }
 
 }

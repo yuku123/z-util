@@ -26,7 +26,7 @@ public class CalendarIntervalTrigger implements Trigger {
 
     /**
      * CalendarIntervalTrigger方法。
-     *      * @param delegate org.quartz.CalendarIntervalTrigger类型参数
+     * * @param delegate org.quartz.CalendarIntervalTrigger类型参数
      */
     public CalendarIntervalTrigger(org.quartz.CalendarIntervalTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
@@ -221,6 +221,7 @@ public class CalendarIntervalTrigger implements Trigger {
         private int interval = 1;
         private org.quartz.DateBuilder.IntervalUnit intervalUnit =
                 org.quartz.DateBuilder.IntervalUnit.DAY;
+        private boolean skipDayIfHourDoesNotExist = false;
 
         /**
          * 设置按天递增。
@@ -280,13 +281,11 @@ public class CalendarIntervalTrigger implements Trigger {
             return this;
         }
 
-        private boolean skipDayIfHourDoesNotExist = false;
-
         @Override
-    /**
-     * build方法。
-     * @return CalendarIntervalTrigger类型返回值
-     */
+        /**
+         * build方法。
+         * @return CalendarIntervalTrigger类型返回值
+         */
         public CalendarIntervalTrigger build() {
             CalendarIntervalScheduleBuilder scheduleBuilder =
                     CalendarIntervalScheduleBuilder.calendarIntervalSchedule()

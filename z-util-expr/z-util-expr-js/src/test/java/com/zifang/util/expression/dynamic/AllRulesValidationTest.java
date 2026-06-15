@@ -18,8 +18,8 @@ public class AllRulesValidationTest {
         int lexerStart = content.indexOf("lexer grammar");
         int parserStart = content.indexOf("parser grammar");
         String lexerSection = parserStart == -1
-            ? content.substring(lexerStart)
-            : content.substring(lexerStart, parserStart);
+                ? content.substring(lexerStart)
+                : content.substring(lexerStart, parserStart);
         DynamicLexer lexer = new DynamicLexer();
         lexer.loadG4(lexerSection);
         return lexer;
@@ -223,10 +223,10 @@ public class AllRulesValidationTest {
     public void testComplexCode() throws Exception {
         DynamicLexer lexer = createLexer();
         String code = "function fib(n) {\n" +
-                      "  if (n <= 1) return n;\n" +
-                      "  return fib(n - 1) + fib(n - 2);\n" +
-                      "}\n" +
-                      "var result = fib(10);";
+                "  if (n <= 1) return n;\n" +
+                "  return fib(n - 1) + fib(n - 2);\n" +
+                "}\n" +
+                "var result = fib(10);";
         lexer.setInput(code);
         List<Token> tokens = lexer.tokenize();
         org.junit.Assert.assertTrue("Should have many tokens", tokens.size() > 20);

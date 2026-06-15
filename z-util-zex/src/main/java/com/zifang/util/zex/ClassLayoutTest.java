@@ -8,6 +8,7 @@ package com.zifang.util.zex;
  * @author zifang
  * @version 1.0
  */
+
 import org.openjdk.jol.info.ClassLayout;
 
 /**
@@ -16,7 +17,8 @@ import org.openjdk.jol.info.ClassLayout;
 public class ClassLayoutTest {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

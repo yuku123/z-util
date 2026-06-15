@@ -6,8 +6,6 @@ import com.zifang.util.xml.tokenizer.Token;
 import com.zifang.util.xml.tokenizer.TokenList;
 import com.zifang.util.xml.tokenizer.TokenType;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,6 +27,7 @@ import java.util.regex.Pattern;
  *
  * @author zifang
  */
+
 /**
  * XmlParser类。
  */
@@ -46,7 +45,8 @@ public class XmlParser {
 
     /**
      * parse方法。
-     *      * @param tokens TokenList类型参数
+     * * @param tokens TokenList类型参数
+     *
      * @return XDocument类型返回值
      */
     public XDocument parse(TokenList tokens) {

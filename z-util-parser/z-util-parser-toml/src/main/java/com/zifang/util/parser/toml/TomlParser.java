@@ -6,12 +6,12 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * TOML v1.0.0 解析器（子集实现）
  */
+
 /**
  * TomlParser类。
  */
@@ -41,7 +41,8 @@ public class TomlParser {
      */
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return TomlDocument类型返回值
      */
     public TomlDocument parse(String content) {
@@ -53,7 +54,8 @@ public class TomlParser {
      */
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return TomlDocument类型返回值
      */
     public TomlDocument parse(Reader reader) {
@@ -184,9 +186,9 @@ public class TomlParser {
 
     private void parseTable(String tablePath) {
         String[] parts = tablePath.split("\\.");
-        TomlDocument.TomlTable table = document.getTables().isEmpty() 
-            ? new TomlDocument.TomlTable(parts[0])
-            : new TomlDocument.TomlTable(parts[parts.length - 1]);
+        TomlDocument.TomlTable table = document.getTables().isEmpty()
+                ? new TomlDocument.TomlTable(parts[0])
+                : new TomlDocument.TomlTable(parts[parts.length - 1]);
 
         if (parts.length == 1) {
             document.addTable(parts[0], table);
@@ -235,7 +237,7 @@ public class TomlParser {
             // 先查找是否已经存在于 tables 中
             StringBuilder pathBuilder = new StringBuilder();
             TomlDocument.TomlTable parent = null;
-            
+
             // 先检查 tables 中是否有父表
             for (int i = 0; i < parts.length - 1; i++) {
                 if (i > 0) {
@@ -244,7 +246,7 @@ public class TomlParser {
                 pathBuilder.append(parts[i]);
             }
             parent = document.getTable(pathBuilder.toString());
-            
+
             // 如果 tables 中没有，尝试从 arrayOfTables 中找最后一个
             if (parent == null) {
                 String parentName = parts[0];
@@ -253,7 +255,7 @@ public class TomlParser {
                     parent = arrTables.get(arrTables.size() - 1);
                 }
             }
-            
+
             if (parent != null) {
                 // 构建完整的嵌套路径
                 TomlDocument.TomlTable current = parent;
@@ -281,7 +283,7 @@ public class TomlParser {
                 // 解析这个路径的父表
                 TomlDocument.TomlTable newParent = new TomlDocument.TomlTable(parts[0]);
                 document.addTable(parts[0], newParent);
-                
+
                 TomlDocument.TomlTable current = newParent;
                 for (int i = 1; i < parts.length - 1; i++) {
                     TomlDocument.TomlTable sub = new TomlDocument.TomlTable(parts[i]);
@@ -329,8 +331,8 @@ public class TomlParser {
     }
 
     private boolean isBareKeyChar(char c) {
-        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || 
-               (c >= '0' && c <= '9') || c == '_' || c == '-';
+        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') ||
+                (c >= '0' && c <= '9') || c == '_' || c == '-';
     }
 
     private Object parseValue() {
@@ -370,8 +372,8 @@ public class TomlParser {
         if (isMultiLine) {
             // 多行字符串
             while (pos < content.length()) {
-                if (content.charAt(pos) == '"' && pos + 2 < content.length() && 
-                    content.charAt(pos + 1) == '"' && content.charAt(pos + 2) == '"') {
+                if (content.charAt(pos) == '"' && pos + 2 < content.length() &&
+                        content.charAt(pos + 1) == '"' && content.charAt(pos + 2) == '"') {
                     pos += 3;
                     column += 3;
                     break;
@@ -380,12 +382,24 @@ public class TomlParser {
                 if (ch == '\\') {
                     ch = nextChar();
                     switch (ch) {
-                        case 'n': sb.append('\n'); break;
-                        case 'r': sb.append('\r'); break;
-                        case 't': sb.append('\t'); break;
-                        case '\\': sb.append('\\'); break;
-                        case '"': sb.append('"'); break;
-                        default: sb.append(ch); break;
+                        case 'n':
+                            sb.append('\n');
+                            break;
+                        case 'r':
+                            sb.append('\r');
+                            break;
+                        case 't':
+                            sb.append('\t');
+                            break;
+                        case '\\':
+                            sb.append('\\');
+                            break;
+                        case '"':
+                            sb.append('"');
+                            break;
+                        default:
+                            sb.append(ch);
+                            break;
                     }
                 } else {
                     sb.append(ch);
@@ -408,15 +422,28 @@ public class TomlParser {
                     column++;
                     ch = nextChar();
                     switch (ch) {
-                        case 'n': sb.append('\n'); break;
-                        case 'r': sb.append('\r'); break;
-                        case 't': sb.append('\t'); break;
-                        case '\\': sb.append('\\'); break;
-                        case '"': sb.append('"'); break;
-                        case 'u': case 'x':
+                        case 'n':
+                            sb.append('\n');
+                            break;
+                        case 'r':
+                            sb.append('\r');
+                            break;
+                        case 't':
+                            sb.append('\t');
+                            break;
+                        case '\\':
+                            sb.append('\\');
+                            break;
+                        case '"':
+                            sb.append('"');
+                            break;
+                        case 'u':
+                        case 'x':
                             sb.append(parseUnicodeEscape());
                             break;
-                        default: sb.append(ch); break;
+                        default:
+                            sb.append(ch);
+                            break;
                     }
                 } else {
                     sb.append(ch);
@@ -625,7 +652,8 @@ public class TomlParser {
      */
     /**
      * store方法。
-     *      * @param doc TomlDocument类型参数
+     * * @param doc TomlDocument类型参数
+     *
      * @return String类型返回值
      */
     public String store(TomlDocument doc) {

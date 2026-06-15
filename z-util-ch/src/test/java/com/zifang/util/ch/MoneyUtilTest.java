@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 /**
  * MoneyUtil 测试类
  */
+
 /**
  * MoneyUtilTest类。
  */

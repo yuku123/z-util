@@ -6,7 +6,7 @@ import com.zifang.util.aop.ProxyFactory;
 import com.zifang.util.cache.Cache;
 import com.zifang.util.cache.CacheBuilder;
 import com.zifang.util.cache.decorator.MeteredCache;
-import com.zifang.util.trace.TraceContextHolder;
+import com.zifang.util.core.trace.TraceContextHolder;
 import org.junit.Test;
 
 import java.lang.reflect.Method;

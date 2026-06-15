@@ -12,7 +12,7 @@ public class MissingOptionException extends ParseException {
 
     /**
      * MissingOptionException方法。
-     *      * @param message final类型参数
+     * * @param message final类型参数
      */
     public MissingOptionException(final String message) {
         super(message);
@@ -21,7 +21,7 @@ public class MissingOptionException extends ParseException {
 
     /**
      * MissingOptionException方法。
-     *      * @param missingOptions final类型参数
+     * * @param missingOptions final类型参数
      */
     public MissingOptionException(final List missingOptions) {
         super(createMessage(missingOptions));
@@ -37,6 +37,7 @@ public class MissingOptionException extends ParseException {
 
     /**
      * getMissingOptions方法。
+     *
      * @return List类型返回值
      */
     public List getMissingOptions() {

@@ -91,7 +91,8 @@ public class ScreenshotStep implements Step {
 
     /**
      * getBrowserClient方法。
-     *      * @param ctx PipelineContext类型参数
+     * * @param ctx PipelineContext类型参数
+     *
      * @return BrowserClient类型返回值
      */
     protected BrowserClient getBrowserClient(PipelineContext ctx) {

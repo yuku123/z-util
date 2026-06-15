@@ -9,8 +9,6 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
-import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * _056类。
@@ -18,7 +16,8 @@ import java.util.Comparator;
 public class _056 {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

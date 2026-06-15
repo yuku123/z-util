@@ -11,7 +11,8 @@ import java.util.concurrent.TimeUnit;
 public class DaemonDemo {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -34,7 +35,7 @@ class WriterTask implements Runnable {
 
     /**
      * WriterTask方法。
-     *      * @param deque DequeEvent类型参数
+     * * @param deque DequeEvent类型参数
      */
     public WriterTask(Deque<Event> deque) {
         this.deque = deque;
@@ -66,7 +67,7 @@ class CleanerTask extends Thread {
 
     /**
      * CleanerTask方法。
-     *      * @param deque DequeEvent类型参数
+     * * @param deque DequeEvent类型参数
      */
     public CleanerTask(Deque<Event> deque) {
         this.deque = deque;
@@ -115,6 +116,7 @@ class Event {
 
     /**
      * getDate方法。
+     *
      * @return Date类型返回值
      */
     public Date getDate() {
@@ -123,7 +125,7 @@ class Event {
 
     /**
      * setDate方法。
-     *      * @param date Date类型参数
+     * * @param date Date类型参数
      */
     public void setDate(Date date) {
         this.date = date;
@@ -131,6 +133,7 @@ class Event {
 
     /**
      * getEvent方法。
+     *
      * @return String类型返回值
      */
     public String getEvent() {
@@ -139,7 +142,7 @@ class Event {
 
     /**
      * setEvent方法。
-     *      * @param event String类型参数
+     * * @param event String类型参数
      */
     public void setEvent(String event) {
         this.event = event;

@@ -19,12 +19,25 @@ public final class TraceContext {
         this.startNanos = System.nanoTime();
     }
 
-    public String traceId() { return traceId; }
-    public String spanId() { return spanId; }
-    public String parentSpanId() { return parentSpanId; }
-    public long startNanos() { return startNanos; }
+    public String traceId() {
+        return traceId;
+    }
 
-    public long elapsedNanos() { return System.nanoTime() - startNanos; }
+    public String spanId() {
+        return spanId;
+    }
+
+    public String parentSpanId() {
+        return parentSpanId;
+    }
+
+    public long startNanos() {
+        return startNanos;
+    }
+
+    public long elapsedNanos() {
+        return System.nanoTime() - startNanos;
+    }
 
     @Override
     public String toString() {

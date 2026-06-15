@@ -1,8 +1,6 @@
 package com.zifang.util.core.lock;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.lang.reflect.Method;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;

@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 /**
  * PinyinGeneratorUtil 测试类
  */
+
 /**
  * PinyinGeneratorUtilTest类。
  */
@@ -112,7 +113,7 @@ public class PinyinGeneratorUtilTest {
         assertNotNull(idcard18);
         assertEquals(18, idcard18.length());
         assertTrue(idcard18.startsWith("1101051949"));
-        
+
         // 无效输入返回null
         assertNull(PinyinGeneratorUtil.transIDCard15to18(null));
         assertNull(PinyinGeneratorUtil.transIDCard15to18("123")); // 长度不足

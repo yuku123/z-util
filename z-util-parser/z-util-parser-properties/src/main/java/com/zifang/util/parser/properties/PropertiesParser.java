@@ -21,6 +21,7 @@ import java.util.Map;
  *
  * @author zifang
  */
+
 /**
  * PropertiesParser类。
  */
@@ -38,7 +39,8 @@ public class PropertiesParser extends java.util.Properties {
      */
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(String content) {
@@ -54,7 +56,8 @@ public class PropertiesParser extends java.util.Properties {
      */
     /**
      * parse方法。
-     *      * @param file java.io.File类型参数
+     * * @param file java.io.File类型参数
+     *
      * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(java.io.File file) {
@@ -77,7 +80,8 @@ public class PropertiesParser extends java.util.Properties {
      */
     /**
      * parse方法。
-     *      * @param file java.io.File类型参数
+     * * @param file java.io.File类型参数
+     *
      * @param charset String类型参数
      * @return PropertiesModel类型返回值
      */
@@ -100,7 +104,8 @@ public class PropertiesParser extends java.util.Properties {
      */
     /**
      * parse方法。
-     *      * @param in java.io.InputStream类型参数
+     * * @param in java.io.InputStream类型参数
+     *
      * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(java.io.InputStream in) {
@@ -117,7 +122,8 @@ public class PropertiesParser extends java.util.Properties {
      */
     /**
      * parse方法。
-     *      * @param in java.io.InputStream类型参数
+     * * @param in java.io.InputStream类型参数
+     *
      * @param charset String类型参数
      * @return PropertiesModel类型返回值
      */
@@ -138,7 +144,8 @@ public class PropertiesParser extends java.util.Properties {
      */
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(Reader reader) {
@@ -375,7 +382,8 @@ public class PropertiesParser extends java.util.Properties {
      */
     /**
      * store方法。
-     *      * @param model PropertiesModel类型参数
+     * * @param model PropertiesModel类型参数
+     *
      * @return String类型返回值
      */
     public String store(PropertiesModel model) {
@@ -410,7 +418,8 @@ public class PropertiesParser extends java.util.Properties {
      */
     /**
      * storeToWriter方法。
-     *      * @param model PropertiesModel类型参数
+     * * @param model PropertiesModel类型参数
+     *
      * @param writer java.io.Writer类型参数
      */
     public void storeToWriter(PropertiesModel model, java.io.Writer writer) {
@@ -496,13 +505,13 @@ public class PropertiesParser extends java.util.Properties {
         }
 
         @Override
-    /**
-     * read方法。
-     *      * @param cbuf char[]类型参数
-     * @param off int类型参数
-     * @param len int类型参数
-     * @return int类型返回值
-     */
+        /**
+         * read方法。
+         *      * @param cbuf char[]类型参数
+         * @param off int类型参数
+         * @param len int类型参数
+         * @return int类型返回值
+         */
         public int read(char[] cbuf, int off, int len) throws IOException {
             if (position >= charSequence.length()) {
                 return -1;
@@ -518,9 +527,9 @@ public class PropertiesParser extends java.util.Properties {
         }
 
         @Override
-    /**
-     * close方法。
-     */
+        /**
+         * close方法。
+         */
         public void close() throws IOException {
         }
     }

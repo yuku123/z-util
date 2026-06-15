@@ -15,10 +15,9 @@ import java.util.Map;
  */
 public class PrimitiveUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(PrimitiveUtil.class);
-
     /**
      * Object>方法。
+     *
      * @return static final Map<Class<?>, Object> primitiveTypeDefaults = new LinkedHashMap<Class<?>,类型返回值
      */
     public static final Map<Class<?>, Object> primitiveTypeDefaults = new LinkedHashMap<Class<?>, Object>() {
@@ -33,7 +32,7 @@ public class PrimitiveUtil {
             put(Boolean.class, false);
         }
     };
-
+    private static final Logger log = LoggerFactory.getLogger(PrimitiveUtil.class);
     /**
      * 原始类型的集合
      */
@@ -71,11 +70,11 @@ public class PrimitiveUtil {
      */
     public static Object defaultValue(Class<?> clazz) {
 
-        if(isPrimitive(clazz)){
+        if (isPrimitive(clazz)) {
             return primitiveTypeDefaults.get(getPrimitiveWrapper(clazz));
         }
 
-        if(isPrimitiveWrapper(clazz)){
+        if (isPrimitiveWrapper(clazz)) {
             return primitiveTypeDefaults.get(clazz);
         }
 
@@ -108,7 +107,7 @@ public class PrimitiveUtil {
      */
     public static Class<?> getPrimitive(Class<?> clazz) {
 
-        if(isPrimitive(clazz)){
+        if (isPrimitive(clazz)) {
             return clazz;
         }
 
@@ -126,11 +125,11 @@ public class PrimitiveUtil {
      */
     public static Class<?> getPrimitiveWrapper(Class<?> clazz) {
 
-        if(isPrimitiveWrapper(clazz)){
+        if (isPrimitiveWrapper(clazz)) {
             return clazz;
         }
 
-        if(isPrimitive(clazz)){
+        if (isPrimitive(clazz)) {
             return primitiveWrapperTypeList.get(primitiveTypeList.indexOf(clazz));
         } else {
             return clazz;

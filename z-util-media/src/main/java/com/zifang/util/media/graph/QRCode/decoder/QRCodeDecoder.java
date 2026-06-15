@@ -1,8 +1,6 @@
 package com.zifang.util.media.graph.qrcode.decoder;
 
 import com.zifang.util.media.graph.qrcode.encoder.BitMatrix;
-import com.zifang.util.media.graph.qrcode.encoder.ErrorCorrectionLevel;
-import com.zifang.util.media.graph.qrcode.encoder.ReedSolomonEncoder;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -15,11 +13,12 @@ import java.util.List;
 public final class QRCodeDecoder {
 
     private static final int[] VERSION_SPECIFIC_PATTERNS = {
-        0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8,
-        10, 10, 10, 10, 10, 10, 10, 12, 12, 12, 12, 12, 12, 12, 14, 14, 14, 14, 14, 14
+            0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6, 8, 8, 8, 8, 8, 8, 8,
+            10, 10, 10, 10, 10, 10, 10, 12, 12, 12, 12, 12, 12, 12, 14, 14, 14, 14, 14, 14
     };
 
-    private QRCodeDecoder() {}
+    private QRCodeDecoder() {
+    }
 
     /**
      * Decodes a QR code from the given image.
@@ -216,7 +215,7 @@ public final class QRCodeDecoder {
             return new int[]{};
         }
         int[] allPositions = {
-            6, 18, 30, 42, 54, 66, 78, 90, 102, 114, 126, 138, 150, 162, 174, 186, 198, 210, 222, 234
+                6, 18, 30, 42, 54, 66, 78, 90, 102, 114, 126, 138, 150, 162, 174, 186, 198, 210, 222, 234
         };
         int count = (version / 7) + 2;
         int start = 6;
@@ -233,10 +232,10 @@ public final class QRCodeDecoder {
     private static int getDataBitsForVersion(int version) {
         // Approximate data capacity for byte mode, L EC level
         int[] capacities = {
-            152, 272, 440, 640, 864, 1088, 1248, 1552, 1856, 2192,
-            2592, 2960, 3424, 3688, 4184, 4712, 5176, 5768, 6360, 6888,
-            7456, 8048, 8712, 9216, 10040, 10672, 11408, 12048, 12648, 13328,
-            14248, 15040, 15800, 16608, 17468, 18268, 19068, 19868, 20768, 21608
+                152, 272, 440, 640, 864, 1088, 1248, 1552, 1856, 2192,
+                2592, 2960, 3424, 3688, 4184, 4712, 5176, 5768, 6360, 6888,
+                7456, 8048, 8712, 9216, 10040, 10672, 11408, 12048, 12648, 13328,
+                14248, 15040, 15800, 16608, 17468, 18268, 19068, 19868, 20768, 21608
         };
         if (version >= 1 && version <= 40) {
             return capacities[version - 1];

@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
  * 这就好比整个公司的人员利用周末的时间集体郊游一样，先各自从家出发到公司集合后，在同时出发到公园玩，
  * 在指定地点集合后再同时开始就餐
  */
+
 /**
  * CyclicBarrierTest类。
  */
@@ -17,7 +18,8 @@ public class CyclicBarrierTest {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -27,9 +29,9 @@ public class CyclicBarrierTest {
         for (int i = 0; i < 3; i++) {
             Runnable runnable = new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
+                /**
+                 * run方法。
+                 */
                 public void run() {
                     try {
                         Thread.sleep((long) (Math.random() * 10000));

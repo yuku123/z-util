@@ -44,6 +44,7 @@ public class MyForkJoinTask<V> extends ForkJoinTask<V> {
 
     /**
      * isSuccess方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isSuccess() {
@@ -52,7 +53,7 @@ public class MyForkJoinTask<V> extends ForkJoinTask<V> {
 
     /**
      * setSuccess方法。
-     *      * @param isSuccess boolean类型参数
+     * * @param isSuccess boolean类型参数
      */
     public void setSuccess(boolean isSuccess) {
         this.success = isSuccess;

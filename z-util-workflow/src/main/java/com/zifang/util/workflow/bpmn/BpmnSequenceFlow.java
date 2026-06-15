@@ -224,8 +224,8 @@ public class BpmnSequenceFlow {
      * @return String类型返回值
      */
     public String toString() {
-        return "BpmnSequenceFlow{id='" + id + "', sourceRef='" + sourceRef + "', targetRef='" + targetRef + 
-               "', name='" + name + "', conditionExpression='" + conditionExpression + "', isDefault=" + isDefault + "}";
+        return "BpmnSequenceFlow{id='" + id + "', sourceRef='" + sourceRef + "', targetRef='" + targetRef +
+                "', name='" + name + "', conditionExpression='" + conditionExpression + "', isDefault=" + isDefault + "}";
     }
 
     @Override

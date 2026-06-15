@@ -2,7 +2,6 @@ package com.zifang.util.core.io;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 
 /**
  * 基于快速缓冲FastByteBuffer的OutputStream，随着数据的增长自动扩充缓冲区
@@ -57,6 +56,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {
@@ -83,7 +83,7 @@ public class FastByteArrayOutputStream extends OutputStream {
 
     /**
      * writeTo方法。
-     *      * @param out OutputStream类型参数
+     * * @param out OutputStream类型参数
      */
     public void writeTo(OutputStream out) throws IOException {
         final int index = buffer.index();

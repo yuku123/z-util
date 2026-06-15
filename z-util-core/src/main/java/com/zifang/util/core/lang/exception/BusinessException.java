@@ -49,7 +49,7 @@ public class BusinessException extends BaseException {
      * 错误信息将通过格式化参数进行填充。
      *
      * @param statusCode 状态码对象，不能为 null
-     * @param params      格式化参数，用于填充错误信息中的占位符
+     * @param params     格式化参数，用于填充错误信息中的占位符
      */
     public BusinessException(StatusCode statusCode, Object... params) {
         super(statusCode, params);

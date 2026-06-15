@@ -4,7 +4,8 @@ import com.zifang.util.dsl.core.ASTNode;
 import com.zifang.util.dsl.core.TokenReader;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * DynamicParserTest类。

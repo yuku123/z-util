@@ -16,7 +16,8 @@ public class ConstantValue extends AbstractAttribute {
 
     /**
      * ConstantValue方法。
-     *      * @param attributeNameIndex U2类型参数
+     * * @param attributeNameIndex U2类型参数
+     *
      * @param attributeLength U4类型参数
      */
     public ConstantValue(U2 attributeNameIndex, U4 attributeLength) {
@@ -26,6 +27,7 @@ public class ConstantValue extends AbstractAttribute {
 
     /**
      * getConstantValueIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getConstantValueIndex() {
@@ -34,7 +36,7 @@ public class ConstantValue extends AbstractAttribute {
 
     /**
      * setConstantValueIndex方法。
-     *      * @param constantValueIndex U2类型参数
+     * * @param constantValueIndex U2类型参数
      */
     public void setConstantValueIndex(U2 constantValueIndex) {
         this.constantValueIndex = constantValueIndex;
@@ -42,7 +44,7 @@ public class ConstantValue extends AbstractAttribute {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         constantValueIndex = U2.read(inputStream);

@@ -2,14 +2,13 @@ package com.zifang.util.yaml.facade;
 
 import org.yaml.snakeyaml.Yaml;
 
-import java.util.*;
-
 /**
  * SnakeYAML 后端实现。
  */
 /**
  * SnakeYamlBackend类。
  */
+
 /**
  * SnakeYamlBackend类。
  */

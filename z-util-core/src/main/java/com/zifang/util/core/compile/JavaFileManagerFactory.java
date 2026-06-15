@@ -18,7 +18,8 @@ public class JavaFileManagerFactory {
 
     /**
      * getJavaFileManager方法。
-     *      * @param standardManager StandardJavaFileManager类型参数
+     * * @param standardManager StandardJavaFileManager类型参数
+     *
      * @return static CustomerJavaFileManager类型返回值
      */
     public static CustomerJavaFileManager getJavaFileManager(StandardJavaFileManager standardManager) {

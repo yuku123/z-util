@@ -17,7 +17,8 @@ public class Rolling {
 
     /**
      * Rolling方法。
-     *      * @param series Series类型参数
+     * * @param series Series类型参数
+     *
      * @param window int类型参数
      */
     public Rolling(Series series, int window) {
@@ -26,10 +27,11 @@ public class Rolling {
 
     /**
      * Rolling方法。
-     *      * @param series Series类型参数
-     * @param window int类型参数
+     * * @param series Series类型参数
+     *
+     * @param window     int类型参数
      * @param minPeriods int类型参数
-     * @param center boolean类型参数
+     * @param center     boolean类型参数
      */
     public Rolling(Series series, int window, int minPeriods, boolean center) {
         this.series = series;

@@ -19,39 +19,33 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class ExecutorManager {
 
     /**
-     * 日志对象。
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExecutorManager.class);
-
-    /**
-     * 每个任务对应一个单工作线程线程池。
-     */
-    private ConcurrentHashMap<String, ExecutorService> threadPoolMap;
-
-    /**
-     * 监控组件管理器。
-     */
-    private final MonitorManager monitorManager;
-
-    /**
-     * 线程池配置列表。
-     */
-    private List<ThreadPoolConfigUnit> threadPoolConfigUnitList;
-
-    /**
      * 获取任务类型的掩码。二进制位11111111。
      */
     public static final byte TASK_EXECUTE_TYPE_MASK = 0xF;
-
     /**
      * CPU密集型任务。二进制位00000001。
      */
     public static final byte CPU_INTENSIVE = 0x1;
-
     /**
      * IO密集型任务。二进制位00000010。
      */
     public static final byte IO_INTENSIVE = 0x2;
+    /**
+     * 日志对象。
+     */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExecutorManager.class);
+    /**
+     * 监控组件管理器。
+     */
+    private final MonitorManager monitorManager;
+    /**
+     * 每个任务对应一个单工作线程线程池。
+     */
+    private ConcurrentHashMap<String, ExecutorService> threadPoolMap;
+    /**
+     * 线程池配置列表。
+     */
+    private List<ThreadPoolConfigUnit> threadPoolConfigUnitList;
 
     /**
      * 构造函数。

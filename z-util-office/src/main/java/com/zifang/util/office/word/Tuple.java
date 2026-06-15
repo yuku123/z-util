@@ -12,6 +12,17 @@ public class Tuple<K, V> {
     private V value;
 
     /**
+     * 构造方法
+     *
+     * @param key   键
+     * @param value 值
+     */
+    public Tuple(K key, V value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    /**
      * 获取键
      *
      * @return 键
@@ -44,17 +55,6 @@ public class Tuple<K, V> {
      * @param value 值
      */
     public void setValue(V value) {
-        this.value = value;
-    }
-
-    /**
-     * 构造方法
-     *
-     * @param key 键
-     * @param value 值
-     */
-    public Tuple(K key, V value) {
-        this.key = key;
         this.value = value;
     }
 }

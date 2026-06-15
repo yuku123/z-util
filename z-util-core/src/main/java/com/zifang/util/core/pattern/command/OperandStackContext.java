@@ -1,6 +1,6 @@
 package com.zifang.util.core.pattern.command;
 
-import java.util.*;
+import java.util.Map;
 
 /**
  * 带操作数栈的命令上下文
@@ -20,7 +20,7 @@ public class OperandStackContext extends CommandContext {
 
     /**
      * OperandStackContext方法。
-     *      * @param initialData MapString,类型参数
+     * * @param initialData MapString,类型参数
      */
     public OperandStackContext(Map<String, Object> initialData) {
         super(initialData);
@@ -29,7 +29,7 @@ public class OperandStackContext extends CommandContext {
 
     /**
      * OperandStackContext方法。
-     *      * @param stackSize int类型参数
+     * * @param stackSize int类型参数
      */
     public OperandStackContext(int stackSize) {
         this.operandStack = new OperandStack(stackSize);
@@ -37,7 +37,8 @@ public class OperandStackContext extends CommandContext {
 
     /**
      * OperandStackContext方法。
-     *      * @param initialData MapString,类型参数
+     * * @param initialData MapString,类型参数
+     *
      * @param stackSize int类型参数
      */
     public OperandStackContext(Map<String, Object> initialData, int stackSize) {

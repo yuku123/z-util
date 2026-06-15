@@ -15,7 +15,7 @@ public class U8 {
 
     /**
      * U8方法。
-     *      * @param value long类型参数
+     * * @param value long类型参数
      */
     public U8(long value) {
         this.value = value;
@@ -23,7 +23,8 @@ public class U8 {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
+     *
      * @return static U8类型返回值
      */
     public static U8 read(InputStream inputStream) {
@@ -44,6 +45,7 @@ public class U8 {
 
     /**
      * getValue方法。
+     *
      * @return long类型返回值
      */
     public long getValue() {

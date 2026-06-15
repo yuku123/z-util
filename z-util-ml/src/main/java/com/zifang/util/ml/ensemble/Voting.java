@@ -1,7 +1,7 @@
 package com.zifang.util.ml.ensemble;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 
 /**
  * Voting Classifier for combining multiple estimators.
@@ -17,8 +17,9 @@ public class Voting {
 
     /**
      * Create a Voting classifier.
+     *
      * @param estimators Array of estimators
-     * @param voting Voting mode: "HARD" for majority vote, "SOFT" for average probabilities
+     * @param voting     Voting mode: "HARD" for majority vote, "SOFT" for average probabilities
      */
     public Voting(Estimator[] estimators, String voting) {
         this.estimators = estimators;
@@ -27,6 +28,7 @@ public class Voting {
 
     /**
      * Fit all estimators on training data.
+     *
      * @param X Training features
      * @param y Training labels
      */
@@ -40,6 +42,7 @@ public class Voting {
 
     /**
      * Predict class labels.
+     *
      * @param X Features to predict
      * @return Predicted class labels
      */
@@ -56,13 +59,14 @@ public class Voting {
 
     /**
      * Predict class probabilities.
+     *
      * @param X Features to predict
      * @return Probability array of shape (n_samples, n_classes)
      */
     public NdArray predictProba(NdArray X) {
         if (!SOFT.equalsIgnoreCase(voting)) {
             throw new UnsupportedOperationException(
-                "predictProba is only supported for SOFT voting. Use voting=SOFT.");
+                    "predictProba is only supported for SOFT voting. Use voting=SOFT.");
         }
 
         int nSamples = X.getShape().get(0);
@@ -231,6 +235,7 @@ public class Voting {
 
     /**
      * getEstimators方法。
+     *
      * @return Estimator[]类型返回值
      */
     public Estimator[] getEstimators() {
@@ -239,6 +244,7 @@ public class Voting {
 
     /**
      * getVoting方法。
+     *
      * @return String类型返回值
      */
     public String getVoting() {

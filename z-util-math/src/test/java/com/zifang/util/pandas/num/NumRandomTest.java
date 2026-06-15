@@ -3,11 +3,12 @@ package com.zifang.util.pandas.num;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * NumRandom 随机数生成器测试
  */
+
 /**
  * NumRandomTest类。
  */

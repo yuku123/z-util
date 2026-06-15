@@ -2,7 +2,6 @@ package com.zifang.util.workflow.engine.runtime;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zifang.util.workflow.config.Configurations;
 import com.zifang.util.workflow.config.Connector;
 import com.zifang.util.workflow.config.ExecutableWorkflowNode;
 import com.zifang.util.workflow.config.WorkflowConfiguration;

@@ -30,7 +30,8 @@ public class UserBo {
 
     /**
      * UserBo方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param age int类型参数
      */
     public UserBo(String name, Integer age) {
@@ -40,6 +41,7 @@ public class UserBo {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -48,7 +50,7 @@ public class UserBo {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -56,6 +58,7 @@ public class UserBo {
 
     /**
      * getAge方法。
+     *
      * @return int类型返回值
      */
     public Integer getAge() {
@@ -64,7 +67,7 @@ public class UserBo {
 
     /**
      * setAge方法。
-     *      * @param age int类型参数
+     * * @param age int类型参数
      */
     public void setAge(Integer age) {
         this.age = age;

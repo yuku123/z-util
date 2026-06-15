@@ -18,7 +18,8 @@ public class ClassParserInfoWrapper {
 
     /**
      * ClassParserInfoWrapper方法。
-     *      * @param clazz Class?类型参数
+     * * @param clazz Class?类型参数
+     *
      * @param type Type类型参数
      */
     public ClassParserInfoWrapper(Class<?> clazz, Type type) {
@@ -28,6 +29,7 @@ public class ClassParserInfoWrapper {
 
     /**
      * getClazz方法。
+     *
      * @return Class<?>类型返回值
      */
     public Class<?> getClazz() {
@@ -36,7 +38,7 @@ public class ClassParserInfoWrapper {
 
     /**
      * setClazz方法。
-     *      * @param clazz Class?类型参数
+     * * @param clazz Class?类型参数
      */
     public void setClazz(Class<?> clazz) {
         this.clazz = clazz;
@@ -44,6 +46,7 @@ public class ClassParserInfoWrapper {
 
     /**
      * getType方法。
+     *
      * @return Type类型返回值
      */
     public Type getType() {
@@ -52,7 +55,7 @@ public class ClassParserInfoWrapper {
 
     /**
      * setType方法。
-     *      * @param type Type类型参数
+     * * @param type Type类型参数
      */
     public void setType(Type type) {
         this.type = type;

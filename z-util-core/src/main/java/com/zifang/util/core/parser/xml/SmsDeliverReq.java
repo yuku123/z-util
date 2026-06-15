@@ -35,7 +35,7 @@ public class SmsDeliverReq {
 
     /**
      * setReqHeader方法。
-     *      * @param reqHeader ReqHeader类型参数
+     * * @param reqHeader ReqHeader类型参数
      */
     public void setReqHeader(ReqHeader reqHeader) {
         this.reqHeader = reqHeader;
@@ -53,7 +53,7 @@ public class SmsDeliverReq {
 
     /**
      * setSmsBodys方法。
-     *      * @param smsBodys ListSmsBody类型参数
+     * * @param smsBodys ListSmsBody类型参数
      */
     public void setSmsBodys(List<SmsBody> smsBodys) {
         this.smsBodys = smsBodys;

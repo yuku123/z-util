@@ -23,9 +23,10 @@ public class RequestProcessor implements Runnable {
 
     /**
      * RequestProcessor方法。
-     *      * @param rootDirectory File类型参数
+     * * @param rootDirectory File类型参数
+     *
      * @param indexFileName String类型参数
-     * @param connection Socket类型参数
+     * @param connection    Socket类型参数
      */
     public RequestProcessor(File rootDirectory, String indexFileName, Socket connection) {
 

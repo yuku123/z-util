@@ -2,8 +2,6 @@ package com.zifang.util.core.lang.primitive;
 
 import org.junit.Test;
 
-import java.io.UnsupportedEncodingException;
-
 import static org.junit.Assert.*;
 
 /**

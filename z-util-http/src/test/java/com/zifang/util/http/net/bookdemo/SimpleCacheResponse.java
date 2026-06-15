@@ -22,8 +22,9 @@ public class SimpleCacheResponse extends CacheResponse {
 
     /**
      * SimpleCacheResponse方法。
-     *      * @param request SimpleCacheRequest类型参数
-     * @param uc URLConnection类型参数
+     * * @param request SimpleCacheRequest类型参数
+     *
+     * @param uc      URLConnection类型参数
      * @param control CacheControl类型参数
      */
     public SimpleCacheResponse(SimpleCacheRequest request, URLConnection uc, CacheControl control) throws IOException {
@@ -54,6 +55,7 @@ public class SimpleCacheResponse extends CacheResponse {
 
     /**
      * getControl方法。
+     *
      * @return CacheControl类型返回值
      */
     public CacheControl getControl() {
@@ -62,6 +64,7 @@ public class SimpleCacheResponse extends CacheResponse {
 
     /**
      * isExpired方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isExpired() {

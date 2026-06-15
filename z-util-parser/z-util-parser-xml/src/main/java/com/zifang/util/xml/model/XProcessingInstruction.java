@@ -5,6 +5,7 @@ package com.zifang.util.xml.model;
  *
  * @author zifang
  */
+
 /**
  * XProcessingInstruction类。
  */
@@ -16,7 +17,8 @@ public class XProcessingInstruction implements XNode {
 
     /**
      * XProcessingInstruction方法。
-     *      * @param target String类型参数
+     * * @param target String类型参数
+     *
      * @param data String类型参数
      */
     public XProcessingInstruction(String target, String data) {
@@ -26,6 +28,7 @@ public class XProcessingInstruction implements XNode {
 
     /**
      * getTarget方法。
+     *
      * @return String类型返回值
      */
     public String getTarget() {
@@ -34,6 +37,7 @@ public class XProcessingInstruction implements XNode {
 
     /**
      * getData方法。
+     *
      * @return String类型返回值
      */
     public String getData() {

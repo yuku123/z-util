@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /**
  * G4文件解析器
  * 解析.g4文件，提取词法和语法规则
- * 
+ * <p>
  * G4格式参考:
  * - lexer grammar Name;
  * - parser grammar Name;
@@ -26,13 +26,13 @@ public class G4FileParser {
      */
     public static G4File parse(String g4Content) {
         G4File g4File = new G4File();
-        
+
         // 提取grammar名称
         g4File.setGrammarName(extractGrammarName(g4Content));
-        
+
         // 提取所有规则
         List<G4Rule> rules = extractRules(g4Content);
-        
+
         return g4File;
     }
 
@@ -42,19 +42,19 @@ public class G4FileParser {
      */
     public static List<G4Rule> extractRules(String g4Content) {
         List<G4Rule> rules = new ArrayList<>();
-        
+
         // 首先提取 lexer grammar 和 parser grammar 的名称
         String lexerName = extractGrammarName(g4Content, "lexer");
         String parserName = extractGrammarName(g4Content, "parser");
-        
+
         boolean inLexer = false;
         boolean inParser = false;
-        
+
         // 逐行解析
         String[] lines = g4Content.split("\n");
         for (String line : lines) {
             line = line.trim();
-            
+
             if (line.startsWith("lexer grammar")) {
                 inLexer = true;
                 inParser = false;
@@ -64,22 +64,22 @@ public class G4FileParser {
                 inParser = true;
                 continue;
             }
-            
+
             // 跳过空行和注释行
             if (line.isEmpty() || line.startsWith("//") || line.startsWith("/*") || line.startsWith("*")) {
                 continue;
             }
-            
+
             // 解析规则行: ruleName : body ;
             G4Rule rule = parseRuleLine(line, inLexer ? G4Rule.RuleType.LEXER : G4Rule.RuleType.PARSER);
             if (rule != null) {
                 rules.add(rule);
             }
         }
-        
+
         return rules;
     }
-    
+
     /**
      * 解析单行规则
      */
@@ -89,46 +89,46 @@ public class G4FileParser {
         if (line.isEmpty() || line.startsWith("//") || line.startsWith("/*")) {
             return null;
         }
-        
+
         // 移除行尾注释（但不在字符串内）
         line = removeLineComment(line);
-        
+
         // 解析规则名称和body
         // 格式: [fragment] name : body ;
         // 或: [fragment] name ::= body ;
-        
+
         boolean isFragment = false;
         String name = null;
         String body = null;
-        
+
         if (line.startsWith("fragment")) {
             isFragment = true;
             line = line.substring(8).trim();
         }
-        
+
         // 查找 : 或 ::= 分隔符
         int colonIdx = line.indexOf(':');
         int colon2Idx = line.indexOf("::=");
-        
+
         int sepIdx = -1;
         if (colon2Idx >= 0 && (colonIdx < 0 || colon2Idx < colonIdx)) {
             sepIdx = colon2Idx;
         } else if (colonIdx >= 0) {
             sepIdx = colonIdx;
         }
-        
+
         if (sepIdx < 0) {
             return null;
         }
-        
+
         name = line.substring(0, sepIdx).trim();
-        
+
         // 从分隔符位置往后找到 ; 结束
         int semiIdx = findSemicolon(line, sepIdx);
         if (semiIdx < 0) {
             return null;
         }
-        
+
         body = line.substring(sepIdx + (colon2Idx >= 0 && colon2Idx == sepIdx ? 2 : 1), semiIdx).trim();
 
         // 剥离 -> channel(HIDDEN) 等动作，并检测HIDDEN标记
@@ -141,28 +141,28 @@ public class G4FileParser {
             }
             body = body.substring(0, actionIdx).trim();
         }
-        
+
         // 判断类型
         G4Rule.RuleType type = G4Rule.RuleType.PARSER;
         if (name.length() > 0 && name.charAt(0) >= 'A' && name.charAt(0) <= 'Z') {
             type = G4Rule.RuleType.LEXER;
         }
-        
+
         G4Rule rule = new G4Rule(name, type, body, isFragment);
         rule.setHidden(isHidden);
         return rule;
     }
-    
+
     /**
      * 移除行尾注释（不在字符串内）
      */
     private static String removeLineComment(String line) {
         boolean inString = false;
         char stringChar = 0;
-        
+
         for (int i = 0; i < line.length() - 1; i++) {
             char ch = line.charAt(i);
-            
+
             if (!inString && (ch == '\'' || ch == '"')) {
                 inString = true;
                 stringChar = ch;
@@ -178,10 +178,10 @@ public class G4FileParser {
                 return before.isEmpty() ? "" : before;
             }
         }
-        
+
         return line;
     }
-    
+
     /**
      * 从给定位置开始查找分号（考虑字符串、字符类和括号嵌套）
      */
@@ -190,10 +190,10 @@ public class G4FileParser {
         boolean inString = false;
         char stringChar = 0;
         boolean inCharClass = false;
-        
+
         for (int i = start; i < s.length(); i++) {
             char ch = s.charAt(i);
-            
+
             // String delimiters are only recognized outside char classes
             if (!inString && !inCharClass && (ch == '\'' || ch == '"')) {
                 inString = true;
@@ -219,7 +219,7 @@ public class G4FileParser {
                 }
             }
         }
-        
+
         return -1;
     }
 
@@ -228,8 +228,8 @@ public class G4FileParser {
      */
     private static String extractGrammarName(String content, String type) {
         Pattern pattern = Pattern.compile(
-            type + "\\s+grammar\\s+(\\w+)\\s*;",
-            Pattern.CASE_INSENSITIVE
+                type + "\\s+grammar\\s+(\\w+)\\s*;",
+                Pattern.CASE_INSENSITIVE
         );
         Matcher matcher = pattern.matcher(content);
         if (matcher.find()) {
@@ -237,14 +237,14 @@ public class G4FileParser {
         }
         return "Unknown";
     }
-    
+
     /**
      * 提取grammar名称（自动检测lexer或parser）
      */
     private static String extractGrammarName(String content) {
         Pattern pattern = Pattern.compile(
-            "(?:lexer|parser)\\s+grammar\\s+(\\w+)\\s*;",
-            Pattern.CASE_INSENSITIVE
+                "(?:lexer|parser)\\s+grammar\\s+(\\w+)\\s*;",
+                Pattern.CASE_INSENSITIVE
         );
         Matcher matcher = pattern.matcher(content);
         if (matcher.find()) {

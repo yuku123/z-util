@@ -10,7 +10,8 @@ public class BooleanUtil {
 
     /**
      * parseBoolean方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @return static Boolean类型返回值
      */
     public static Boolean parseBoolean(Object object) {
@@ -22,7 +23,8 @@ public class BooleanUtil {
 
     /**
      * parseBooleanOrDefault方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @param defaultValue boolean类型参数
      * @return static Boolean类型返回值
      */

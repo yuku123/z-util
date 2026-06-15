@@ -8,7 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
 
-/** DB 分布式锁测试（用 H2 in-memory）。 */
+/**
+ * DB 分布式锁测试（用 H2 in-memory）。
+ */
 public class DbDistributedLockTest {
 
     private static org.h2.jdbcx.JdbcDataSource DS;
@@ -88,7 +90,10 @@ public class DbDistributedLockTest {
                     if (t != null) {
                         int c = insideCount.incrementAndGet();
                         maxConcurrent.updateAndGet(prev -> Math.max(prev, c));
-                        try { Thread.sleep(5); } catch (InterruptedException ignored) {}
+                        try {
+                            Thread.sleep(5);
+                        } catch (InterruptedException ignored) {
+                        }
                         insideCount.decrementAndGet();
                         lock.unlock(t);
                     }

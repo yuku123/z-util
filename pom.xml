@@ -91,7 +91,42 @@
                 <artifactId>z-util-aop</artifactId>
                 <version>${util.version}</version>
             </dependency>
-<dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-jwt</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-ratelimit</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-lock</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-trace</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-resilience</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-feature</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-bean</artifactId>
+                <version>${util.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-jdbc</artifactId>
                 <version>${util.version}</version>

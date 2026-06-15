@@ -1,7 +1,7 @@
 package com.zifang.util.ml.nn;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.Shape;
 
 /**
@@ -10,29 +10,30 @@ import com.zifang.util.numpy.Shape;
  * Output: (batchSize, channels, outHeight, outWidth)
  */
 public class AvgPool2d extends Module {
-    
+
     private final int kernelSize;
     private final int stride;
     private int[] inputShape;  // Save input shape for backward pass
-    
+
     /**
      * AvgPool2d方法。
-     *      * @param kernelSize int类型参数
+     * * @param kernelSize int类型参数
      */
     public AvgPool2d(int kernelSize) {
         this(kernelSize, kernelSize);
     }
-    
+
     /**
      * AvgPool2d方法。
-     *      * @param kernelSize int类型参数
+     * * @param kernelSize int类型参数
+     *
      * @param stride int类型参数
      */
     public AvgPool2d(int kernelSize, int stride) {
         this.kernelSize = kernelSize;
         this.stride = stride;
     }
-    
+
     @Override
     /**
      * forward方法。
@@ -43,50 +44,50 @@ public class AvgPool2d extends Module {
         if (input.ndim() != 4) {
             throw new IllegalArgumentException("Input must be 4D: (batchSize, channels, height, width)");
         }
-        
+
         int batchSize = input.getShape().get(0);
         int channels = input.getShape().get(1);
         int inH = input.getShape().get(2);
         int inW = input.getShape().get(3);
-        
+
         int outH = (inH - kernelSize) / stride + 1;
         int outW = (inW - kernelSize) / stride + 1;
-        
+
         inputShape = new int[]{batchSize, channels, inH, inW};
         NdArray output = NdArray.zeros(new Shape(batchSize, channels, outH, outW), DType.FLOAT32);
-        
+
         Object inData = input.getData();
         Object outData = output.getData();
-        
+
         float kernelArea = kernelSize * kernelSize;
-        
+
         for (int b = 0; b < batchSize; b++) {
             for (int c = 0; c < channels; c++) {
                 for (int outY = 0; outY < outH; outY++) {
                     for (int outX = 0; outX < outW; outX++) {
                         float sum = 0.0f;
-                        
+
                         for (int kY = 0; kY < kernelSize; kY++) {
                             for (int kX = 0; kX < kernelSize; kX++) {
                                 int inY = outY * stride + kY;
                                 int inX = outX * stride + kX;
-                                
+
                                 int inIdx = ((b * channels + c) * inH + inY) * inW + inX;
                                 float val = ((Number) com.zifang.util.numpy.Array.get(inData, inIdx)).floatValue();
                                 sum += val;
                             }
                         }
-                        
+
                         int outIdx = ((b * channels + c) * outH + outY) * outW + outX;
                         com.zifang.util.numpy.Array.set(outData, outIdx, sum / kernelArea);
                     }
                 }
             }
         }
-        
+
         return output;
     }
-    
+
     @Override
     /**
      * backward方法。
@@ -98,17 +99,17 @@ public class AvgPool2d extends Module {
         int channels = gradOutput.getShape().get(1);
         int outH = gradOutput.getShape().get(2);
         int outW = gradOutput.getShape().get(3);
-        
+
         // Use saved input shape
         int inH = inputShape[2];
         int inW = inputShape[3];
-        
+
         NdArray gradInput = NdArray.zeros(new Shape(batchSize, channels, inH, inW), DType.FLOAT32);
         Object gOutData = gradOutput.getData();
         Object gInData = gradInput.getData();
-        
+
         float kernelArea = kernelSize * kernelSize;
-        
+
         for (int b = 0; b < batchSize; b++) {
             for (int c = 0; c < channels; c++) {
                 for (int outY = 0; outY < outH; outY++) {
@@ -116,12 +117,12 @@ public class AvgPool2d extends Module {
                         int outIdx = ((b * channels + c) * outH + outY) * outW + outX;
                         float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, outIdx)).floatValue();
                         float gVal = gOut / kernelArea;
-                        
+
                         for (int kY = 0; kY < kernelSize; kY++) {
                             for (int kX = 0; kX < kernelSize; kX++) {
                                 int inY = outY * stride + kY;
                                 int inX = outX * stride + kX;
-                                
+
                                 int inIdx = ((b * channels + c) * inH + inY) * inW + inX;
                                 float existing = ((Number) com.zifang.util.numpy.Array.get(gInData, inIdx)).floatValue();
                                 com.zifang.util.numpy.Array.set(gInData, inIdx, existing + gVal);
@@ -131,18 +132,25 @@ public class AvgPool2d extends Module {
                 }
             }
         }
-        
+
         return gradInput;
     }
-    
+
     /**
      * getKernelSize方法。
+     *
      * @return int类型返回值
      */
-    public int getKernelSize() { return kernelSize; }
+    public int getKernelSize() {
+        return kernelSize;
+    }
+
     /**
      * getStride方法。
+     *
      * @return int类型返回值
      */
-    public int getStride() { return stride; }
+    public int getStride() {
+        return stride;
+    }
 }

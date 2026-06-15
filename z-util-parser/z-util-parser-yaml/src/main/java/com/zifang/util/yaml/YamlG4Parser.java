@@ -1,18 +1,14 @@
 package com.zifang.util.yaml;
 
+import com.zifang.util.core.io.FileUtil;
 import com.zifang.util.dsl.core.ASTNode;
-import com.zifang.util.dsl.g4.DynamicLexer;
-import com.zifang.util.dsl.g4.DynamicParser;
-import com.zifang.util.dsl.core.TokenReader;
-import com.zifang.util.dsl.token.Token;
 import com.zifang.util.yaml.exception.YamlParseException;
 import com.zifang.util.yaml.model.YamlArray;
 import com.zifang.util.yaml.model.YamlMap;
-import com.zifang.util.core.io.FileUtil;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.List;
 
 /**
  * 基于 G4 DSL 的 YAML 解析器。
@@ -22,6 +18,7 @@ import java.util.*;
 /**
  * YamlG4Parser类。
  */
+
 /**
  * YamlG4Parser类。
  */
@@ -40,7 +37,8 @@ public class YamlG4Parser {
      */
     /**
      * parse方法。
-     *      * @param yaml String类型参数
+     * * @param yaml String类型参数
+     *
      * @return Object类型返回值
      */
     public Object parse(String yaml) {
@@ -54,7 +52,8 @@ public class YamlG4Parser {
      */
     /**
      * parseMap方法。
-     *      * @param yaml String类型参数
+     * * @param yaml String类型参数
+     *
      * @return YamlMap类型返回值
      */
     public YamlMap parseMap(String yaml) {
@@ -68,7 +67,8 @@ public class YamlG4Parser {
      */
     /**
      * parseArray方法。
-     *      * @param yaml String类型参数
+     * * @param yaml String类型参数
+     *
      * @return YamlArray类型返回值
      */
     public YamlArray parseArray(String yaml) {
@@ -83,8 +83,14 @@ public class YamlG4Parser {
         boolean inLexer = false;
         for (String line : g4.split("\n")) {
             line = line.trim();
-            if (line.startsWith("lexer grammar")) { inLexer = true; continue; }
-            if (line.startsWith("parser grammar")) { inLexer = false; continue; }
+            if (line.startsWith("lexer grammar")) {
+                inLexer = true;
+                continue;
+            }
+            if (line.startsWith("parser grammar")) {
+                inLexer = false;
+                continue;
+            }
             if (line.startsWith("options") || line.startsWith("//") || line.isEmpty()) continue;
             if (inLexer && line.contains(":")) count++;
         }
@@ -97,8 +103,14 @@ public class YamlG4Parser {
         boolean inParser = false;
         for (String line : g4.split("\n")) {
             line = line.trim();
-            if (line.startsWith("parser grammar")) { inParser = true; continue; }
-            if (line.startsWith("lexer grammar")) { inParser = false; continue; }
+            if (line.startsWith("parser grammar")) {
+                inParser = true;
+                continue;
+            }
+            if (line.startsWith("lexer grammar")) {
+                inParser = false;
+                continue;
+            }
             if (line.startsWith("options") || line.startsWith("//") || line.isEmpty()) continue;
             if (inParser && line.contains(":")) count++;
         }
@@ -107,7 +119,7 @@ public class YamlG4Parser {
 
     // ==================== G4 加载 ====================
 
- private String loadG4(String name) {
+    private String loadG4(String name) {
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream(name);
             if (is == null) throw new YamlParseException("G4文件未找到: " + name);
@@ -258,8 +270,8 @@ public class YamlG4Parser {
         String t = node.getType();
         if (t == null) return false;
         return t.equals("keyNode") || t.equals("blockKey") || t.equals("plainScalar")
-            || t.equals("DqString") || t.equals("SqString") || t.equals("keyScalar")
-            || t.equals("Scalar");
+                || t.equals("DqString") || t.equals("SqString") || t.equals("keyScalar")
+                || t.equals("Scalar");
     }
 
     private Object parseScalar(String type, String text) {
@@ -273,7 +285,8 @@ public class YamlG4Parser {
                 return Double.parseDouble(text);
             }
             return Long.parseLong(text);
-        } catch (NumberFormatException ignored) {}
+        } catch (NumberFormatException ignored) {
+        }
         return text;
     }
 }

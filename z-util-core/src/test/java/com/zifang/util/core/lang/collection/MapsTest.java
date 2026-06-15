@@ -41,7 +41,8 @@ public class MapsTest {
      */
     public void testRemoveNullKeys_NoNullKey() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2);
+        map.put("a", 1);
+        map.put("b", 2);
         Maps.removeNullKeys(map);
         assertEquals(2, map.size());
     }
@@ -73,7 +74,8 @@ public class MapsTest {
      */
     public void testRemoveNullValues_NoNullValue() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2);
+        map.put("a", 1);
+        map.put("b", 2);
         Maps.removeNullValues(map);
         assertEquals(2, map.size());
     }
@@ -94,7 +96,9 @@ public class MapsTest {
      */
     public void testRemoveKeys_Normal() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2); map.put("c", 3);
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 3);
         Maps.removeKeys(map, k -> k.equals("b"));
         assertEquals(2, map.size());
         assertFalse(map.containsKey("b"));
@@ -108,7 +112,8 @@ public class MapsTest {
      */
     public void testRemoveKeys_NoMatch() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2);
+        map.put("a", 1);
+        map.put("b", 2);
         Maps.removeKeys(map, k -> k.equals("c"));
         assertEquals(2, map.size());
     }
@@ -119,7 +124,8 @@ public class MapsTest {
      */
     public void testRemoveKeys_AllMatch() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2);
+        map.put("a", 1);
+        map.put("b", 2);
         Maps.removeKeys(map, k -> true);
         assertTrue(map.isEmpty());
     }
@@ -132,7 +138,9 @@ public class MapsTest {
      */
     public void testRemoveValues_Normal() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2); map.put("c", 3);
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 3);
         Maps.removeValues(map, v -> v == 2);
         assertEquals(2, map.size());
         assertFalse(map.containsValue(2));
@@ -144,7 +152,8 @@ public class MapsTest {
      */
     public void testRemoveValues_NoMatch() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2);
+        map.put("a", 1);
+        map.put("b", 2);
         Maps.removeValues(map, v -> v == 99);
         assertEquals(2, map.size());
     }
@@ -157,7 +166,9 @@ public class MapsTest {
      */
     public void testRemove_Normal() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2); map.put("c", 3);
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 3);
         Maps.remove(map, e -> e.getKey().equals("b") || e.getValue() == 3);
         assertEquals(1, map.size());
         assertTrue(map.containsKey("a"));
@@ -185,7 +196,9 @@ public class MapsTest {
      */
     public void testFilter_BuggyBehavior() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2); map.put("c", 3);
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 3);
         Map<String, Integer> result = Maps.filter(map, e -> e.getValue() > 1);
         // Actual buggy behavior: returns empty map
         assertNotNull(result);
@@ -198,7 +211,8 @@ public class MapsTest {
      */
     public void testFilter_NoMatch() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("a", 1); map.put("b", 2);
+        map.put("a", 1);
+        map.put("b", 2);
         Map<String, Integer> result = Maps.filter(map, e -> e.getValue() > 99);
         assertTrue(result.isEmpty());
     }

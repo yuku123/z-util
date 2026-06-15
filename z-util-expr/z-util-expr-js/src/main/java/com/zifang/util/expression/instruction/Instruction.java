@@ -19,6 +19,13 @@ public class Instruction {
      */
     private Object[] params;
 
+    public static Instruction of(String instructionCode, Object[] params) {
+        Instruction instruction = new Instruction();
+        instruction.setInstructionCode(instructionCode);
+        instruction.setParams(params);
+        return instruction;
+    }
+
     public String getInstructionCode() {
         return instructionCode;
     }
@@ -53,12 +60,5 @@ public class Instruction {
         int result = java.util.Objects.hash(instructionCode);
         result = 31 * result + java.util.Arrays.hashCode(params);
         return result;
-    }
-
-    public static Instruction of(String instructionCode, Object[] params) {
-        Instruction instruction = new Instruction();
-        instruction.setInstructionCode(instructionCode);
-        instruction.setParams(params);
-        return instruction;
     }
 }

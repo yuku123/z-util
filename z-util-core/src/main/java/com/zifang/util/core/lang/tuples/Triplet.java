@@ -9,7 +9,8 @@ public class Triplet<A, B, C> extends Pair<A, B> {
 
     /**
      * Triplet方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      * @param c C类型参数
      */
@@ -20,6 +21,7 @@ public class Triplet<A, B, C> extends Pair<A, B> {
 
     /**
      * getC方法。
+     *
      * @return C类型返回值
      */
     public C getC() {
@@ -28,7 +30,7 @@ public class Triplet<A, B, C> extends Pair<A, B> {
 
     /**
      * setC方法。
-     *      * @param c C类型参数
+     * * @param c C类型参数
      */
     public void setC(C c) {
         this.c = c;

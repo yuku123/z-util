@@ -2,7 +2,8 @@ package com.zifang.util.expression.instruction;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Operator 运算符枚举完整测试

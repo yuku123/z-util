@@ -10,7 +10,8 @@ public class TraditionalThreadSynchronized {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -21,9 +22,9 @@ public class TraditionalThreadSynchronized {
     private void init() {
         final Outputer outputer = new Outputer();
         new Thread() {
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 while (true) {
                     try {
@@ -37,9 +38,9 @@ public class TraditionalThreadSynchronized {
         }.start();
 
         new Thread() {
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 while (true) {
                     try {

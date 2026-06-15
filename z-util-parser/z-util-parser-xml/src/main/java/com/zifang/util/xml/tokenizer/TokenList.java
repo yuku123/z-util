@@ -8,6 +8,7 @@ import java.util.List;
  *
  * @author zifang
  */
+
 /**
  * TokenList类。
  */
@@ -19,7 +20,7 @@ public class TokenList {
 
     /**
      * add方法。
-     *      * @param token Token类型参数
+     * * @param token Token类型参数
      */
     public void add(Token token) {
         tokens.add(token);
@@ -36,6 +37,7 @@ public class TokenList {
 
     /**
      * peek方法。
+     *
      * @return Token类型返回值
      */
     public Token peek() {
@@ -44,6 +46,7 @@ public class TokenList {
 
     /**
      * peekPrevious方法。
+     *
      * @return Token类型返回值
      */
     public Token peekPrevious() {
@@ -52,6 +55,7 @@ public class TokenList {
 
     /**
      * next方法。
+     *
      * @return Token类型返回值
      */
     public Token next() {
@@ -60,6 +64,7 @@ public class TokenList {
 
     /**
      * hasMore方法。
+     *
      * @return boolean类型返回值
      */
     public boolean hasMore() {
@@ -68,6 +73,7 @@ public class TokenList {
 
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {
@@ -76,6 +82,7 @@ public class TokenList {
 
     /**
      * getTokens方法。
+     *
      * @return List<Token>类型返回值
      */
     public List<Token> getTokens() {

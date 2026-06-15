@@ -1,7 +1,9 @@
 package com.zifang.util.pandas;
 
 import com.zifang.util.pandas.matrix.Linalg;
-import com.zifang.util.pandas.num.*;
+import com.zifang.util.pandas.num.Maths;
+import com.zifang.util.pandas.num.Num;
+import com.zifang.util.pandas.num.Nums;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -13,6 +15,7 @@ import static org.junit.Assert.*;
 /**
  * util-math 使用示例测试
  */
+
 /**
  * ExampleTest类。
  */
@@ -87,9 +90,9 @@ public class ExampleTest {
     public void testLinearAlgebra() {
         // 创建矩阵
         double[][] data = {
-            {1, 2, 3},
-            {4, 5, 6},
-            {7, 8, 10}
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 10}
         };
         Num matrix = new Num(data);
 

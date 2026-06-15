@@ -37,9 +37,9 @@ public class ReferenceQueueDemo {
         //创建一个线程监听回收的对象
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 try {
                     int cnt = 0;

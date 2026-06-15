@@ -32,6 +32,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * getId方法。
+     *
      * @return String类型返回值
      */
     public String getId() {
@@ -40,7 +41,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * setId方法。
-     *      * @param id String类型参数
+     * * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -48,6 +49,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * getRepository方法。
+     *
      * @return String类型返回值
      */
     public String getRepository() {
@@ -56,7 +58,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * setRepository方法。
-     *      * @param repository String类型参数
+     * * @param repository String类型参数
      */
     public void setRepository(String repository) {
         this.repository = repository;
@@ -64,6 +66,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * getGroup方法。
+     *
      * @return String类型返回值
      */
     public String getGroup() {
@@ -72,7 +75,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * setGroup方法。
-     *      * @param group String类型参数
+     * * @param group String类型参数
      */
     public void setGroup(String group) {
         this.group = group;
@@ -80,6 +83,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -88,7 +92,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -96,6 +100,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * getVersion方法。
+     *
      * @return String类型返回值
      */
     public String getVersion() {
@@ -104,7 +109,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * setVersion方法。
-     *      * @param version String类型参数
+     * * @param version String类型参数
      */
     public void setVersion(String version) {
         this.version = version;
@@ -112,6 +117,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * getFormat方法。
+     *
      * @return String类型返回值
      */
     public String getFormat() {
@@ -120,7 +126,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * setFormat方法。
-     *      * @param format String类型参数
+     * * @param format String类型参数
      */
     public void setFormat(String format) {
         this.format = format;
@@ -128,6 +134,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * getAssets方法。
+     *
      * @return List<Asset>类型返回值
      */
     public List<Asset> getAssets() {
@@ -136,7 +143,7 @@ public class Component implements Comparable<Component> {
 
     /**
      * setAssets方法。
-     *      * @param assets ListAsset类型参数
+     * * @param assets ListAsset类型参数
      */
     public void setAssets(List<Asset> assets) {
         this.assets = assets;

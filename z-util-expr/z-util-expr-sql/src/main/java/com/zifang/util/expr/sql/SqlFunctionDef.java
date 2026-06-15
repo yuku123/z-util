@@ -1,7 +1,6 @@
 package com.zifang.util.expr.sql;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -19,8 +18,13 @@ public class SqlFunctionDef {
                 && method.getParameterTypes()[method.getParameterCount() - 1].isArray());
     }
 
-    public String getName() { return name; }
-    public Method getMethod() { return method; }
+    public String getName() {
+        return name;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
 
     public Object exec(java.util.Map<String, Object> row, Object... args) {
         try {
@@ -56,7 +60,18 @@ public class SqlFunctionDef {
         }
     }
 
-    @Override public boolean equals(Object o) { return o instanceof SqlFunctionDef && name.equals(((SqlFunctionDef) o).name) && method.equals(((SqlFunctionDef) o).method); }
-    @Override public int hashCode() { return Objects.hash(name, method); }
-    @Override public String toString() { return "SqlFunctionDef{name='" + name + "', method=" + method.getName() + "}"; }
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof SqlFunctionDef && name.equals(((SqlFunctionDef) o).name) && method.equals(((SqlFunctionDef) o).method);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, method);
+    }
+
+    @Override
+    public String toString() {
+        return "SqlFunctionDef{name='" + name + "', method=" + method.getName() + "}";
+    }
 }

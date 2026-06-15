@@ -33,21 +33,18 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
      * 日志对象。
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(FixedMonitorableExecutor.class);
-
-    /**
-     * 线程池配置。
-     */
-    private ThreadPoolConfigUnit threadPoolConfigUnit;
-
-    /**
-     * 线程池状态。
-     */
-    private ThreadPoolStatus status;
-
     /**
      * 保存每个工作线程在方法中特定点的时间戳。
      */
     protected final ThreadLocal<Long> workerThreadTimeRecorder = new ThreadLocal<>();
+    /**
+     * 线程池配置。
+     */
+    private ThreadPoolConfigUnit threadPoolConfigUnit;
+    /**
+     * 线程池状态。
+     */
+    private ThreadPoolStatus status;
 
     /**
      * {@link ThreadPoolExecutor#ThreadPoolExecutor}

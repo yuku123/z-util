@@ -1,12 +1,14 @@
 package com.zifang.util.ml.ensemble;
 
-import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.DType;
 import com.zifang.util.ml.tree.DecisionTree;
+import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Tests for Voting ensemble classifier.
@@ -115,11 +117,11 @@ class VotingTest {
         }
 
         @Override
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @param y Object类型参数
-     */
+        /**
+         * fit方法。
+         *      * @param X NdArray类型参数
+         * @param y Object类型参数
+         */
         public void fit(NdArray X, Object y) {
             if (y instanceof int[]) {
                 tree.fit(X, (int[]) y);
@@ -127,21 +129,21 @@ class VotingTest {
         }
 
         @Override
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return Object类型返回值
-     */
+        /**
+         * predict方法。
+         *      * @param X NdArray类型参数
+         * @return Object类型返回值
+         */
         public Object predict(NdArray X) {
             return tree.predict(X);
         }
 
         @Override
-    /**
-     * predictProba方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
-     */
+        /**
+         * predictProba方法。
+         *      * @param X NdArray类型参数
+         * @return NdArray类型返回值
+         */
         public NdArray predictProba(NdArray X) {
             return tree.predictProba(X);
         }

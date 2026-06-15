@@ -5,9 +5,14 @@ import com.zifang.util.expr.sql.annotation.SqlFunction;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * 内置 SQL 函数集。
@@ -15,7 +20,8 @@ import java.util.*;
  */
 public final class SqlFunctions {
 
-    private SqlFunctions() {}
+    private SqlFunctions() {
+    }
 
     // ===================== 数学函数 =====================
 
@@ -457,13 +463,20 @@ public final class SqlFunctions {
             long amount = Long.parseLong(interval.toString());
             String u = unit.toString().toUpperCase();
             switch (u) {
-                case "DAY": return ldt.plusDays(amount);
-                case "MONTH": return ldt.plusMonths(amount);
-                case "YEAR": return ldt.plusYears(amount);
-                case "HOUR": return ldt.plusHours(amount);
-                case "MINUTE": return ldt.plusMinutes(amount);
-                case "SECOND": return ldt.plusSeconds(amount);
-                default: return ldt.plusDays(amount);
+                case "DAY":
+                    return ldt.plusDays(amount);
+                case "MONTH":
+                    return ldt.plusMonths(amount);
+                case "YEAR":
+                    return ldt.plusYears(amount);
+                case "HOUR":
+                    return ldt.plusHours(amount);
+                case "MINUTE":
+                    return ldt.plusMinutes(amount);
+                case "SECOND":
+                    return ldt.plusSeconds(amount);
+                default:
+                    return ldt.plusDays(amount);
             }
         } catch (Exception e) {
             return null;
@@ -518,17 +531,33 @@ public final class SqlFunctions {
         String t = asType.toString().toUpperCase().replace("AS ", "").trim();
         try {
             switch (t) {
-                case "INTEGER": case "INT": return Integer.parseInt(v.toString().trim().split("\\.")[0]);
-                case "BIGINT": return Long.parseLong(v.toString().trim().split("\\.")[0]);
-                case "DOUBLE": case "FLOAT": case "REAL": return Double.parseDouble(v.toString());
-                case "DECIMAL": case "NUMERIC": return new BigDecimal(v.toString());
-                case "VARCHAR": case "CHAR": case "STRING": return v.toString();
-                case "BOOLEAN": case "BOOL":
+                case "INTEGER":
+                case "INT":
+                    return Integer.parseInt(v.toString().trim().split("\\.")[0]);
+                case "BIGINT":
+                    return Long.parseLong(v.toString().trim().split("\\.")[0]);
+                case "DOUBLE":
+                case "FLOAT":
+                case "REAL":
+                    return Double.parseDouble(v.toString());
+                case "DECIMAL":
+                case "NUMERIC":
+                    return new BigDecimal(v.toString());
+                case "VARCHAR":
+                case "CHAR":
+                case "STRING":
+                    return v.toString();
+                case "BOOLEAN":
+                case "BOOL":
                     String sv = v.toString().toLowerCase();
                     return "true".equals(sv) || "1".equals(sv) || "t".equals(sv);
-                case "DATE": return LocalDate.parse(v.toString().substring(0, 10));
-                case "DATETIME": case "TIMESTAMP": return LocalDateTime.parse(v.toString());
-                default: return v;
+                case "DATE":
+                    return LocalDate.parse(v.toString().substring(0, 10));
+                case "DATETIME":
+                case "TIMESTAMP":
+                    return LocalDateTime.parse(v.toString());
+                default:
+                    return v;
             }
         } catch (Exception e) {
             throw new SqlException("Cannot CAST '" + v + "' to " + t, e);

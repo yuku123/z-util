@@ -6,6 +6,7 @@ import java.util.Map;
 /**
  * INI Section 模型
  */
+
 /**
  * IniSection类。
  */
@@ -23,7 +24,7 @@ public class IniSection {
 
     /**
      * IniSection方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public IniSection(String name) {
         this.name = name;
@@ -32,6 +33,7 @@ public class IniSection {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -40,7 +42,7 @@ public class IniSection {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -48,6 +50,7 @@ public class IniSection {
 
     /**
      * getValues方法。
+     *
      * @return Map<String, String>类型返回值
      */
     public Map<String, String> getValues() {
@@ -56,7 +59,7 @@ public class IniSection {
 
     /**
      * setValues方法。
-     *      * @param values MapString,类型参数
+     * * @param values MapString,类型参数
      */
     public void setValues(Map<String, String> values) {
         this.values = values;
@@ -64,7 +67,8 @@ public class IniSection {
 
     /**
      * get方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return String类型返回值
      */
     public String get(String key) {
@@ -73,7 +77,8 @@ public class IniSection {
 
     /**
      * put方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @param value String类型参数
      */
     public void put(String key, String value) {

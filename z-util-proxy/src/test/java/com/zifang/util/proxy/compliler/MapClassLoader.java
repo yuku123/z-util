@@ -9,6 +9,7 @@ import java.util.Map;
  * @author zifang Horstmann
  * @version 1.00 2007-11-02
  */
+
 /**
  * MapClassLoader类。
  */
@@ -17,7 +18,7 @@ public class MapClassLoader extends ClassLoader {
 
     /**
      * MapClassLoader方法。
-     *      * @param classes MapString,类型参数
+     * * @param classes MapString,类型参数
      */
     public MapClassLoader(Map<String, byte[]> classes) {
         this.classes = classes;
@@ -25,7 +26,8 @@ public class MapClassLoader extends ClassLoader {
 
     /**
      * findClass方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return Class<?>类型返回值
      */
     protected Class<?> findClass(String name) throws ClassNotFoundException {

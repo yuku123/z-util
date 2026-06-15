@@ -10,7 +10,8 @@ public class DoubleUtil {
 
     /**
      * parseDouble方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @return static Double类型返回值
      */
     public static Double parseDouble(Object object) {
@@ -22,7 +23,8 @@ public class DoubleUtil {
 
     /**
      * parseDoubleOrDefault方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @param defaultValue double类型参数
      * @return static Double类型返回值
      */

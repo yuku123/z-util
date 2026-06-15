@@ -22,15 +22,19 @@ import java.util.function.Consumer;
  */
 public class EventBus {
 
-    /** 标注订阅方法。 */
-    @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
-    @java.lang.annotation.Target(java.lang.annotation.ElementType.METHOD)
-    public @interface Subscribe {
-    }
-
     private final Map<Class<?>, CopyOnWriteArrayList<Subscriber>> subscribers = new ConcurrentHashMap<>();
 
-    /** 注册一个监听者（其 public 方法中带 {@link Subscribe} 的会被订阅）。 */
+    private static Method invokeConsumer(Class<?> eventType) {
+        try {
+            return Consumer.class.getMethod("accept", Object.class);
+        } catch (NoSuchMethodException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    /**
+     * 注册一个监听者（其 public 方法中带 {@link Subscribe} 的会被订阅）。
+     */
     public void register(Object listener) {
         if (listener == null) {
             throw new IllegalArgumentException("listener must not be null");
@@ -44,7 +48,9 @@ public class EventBus {
         }
     }
 
-    /** 注销监听者。 */
+    /**
+     * 注销监听者。
+     */
     public void unregister(Object listener) {
         if (listener == null) return;
         for (CopyOnWriteArrayList<Subscriber> list : subscribers.values()) {
@@ -52,7 +58,9 @@ public class EventBus {
         }
     }
 
-    /** 发布事件。 */
+    /**
+     * 发布事件。
+     */
     public void post(Object event) {
         if (event == null) return;
         CopyOnWriteArrayList<Subscriber> list = subscribers.get(event.getClass());
@@ -65,12 +73,6 @@ public class EventBus {
                         "EventBus invocation failed for " + s.method, e);
             }
         }
-    }
-
-    private static final class Subscriber {
-        final Object target;
-        final Method method;
-        Subscriber(Object t, Method m) { this.target = t; this.method = m; }
     }
 
     /**
@@ -86,11 +88,21 @@ public class EventBus {
                 .add(new Subscriber(handler, invokeConsumer(eventType)));
     }
 
-    private static Method invokeConsumer(Class<?> eventType) {
-        try {
-            return Consumer.class.getMethod("accept", Object.class);
-        } catch (NoSuchMethodException e) {
-            throw new IllegalStateException(e);
+    /**
+     * 标注订阅方法。
+     */
+    @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
+    @java.lang.annotation.Target(java.lang.annotation.ElementType.METHOD)
+    public @interface Subscribe {
+    }
+
+    private static final class Subscriber {
+        final Object target;
+        final Method method;
+
+        Subscriber(Object t, Method m) {
+            this.target = t;
+            this.method = m;
         }
     }
 }

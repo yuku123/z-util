@@ -10,6 +10,7 @@ package com.zifang.util.zex.bust.charpter12;
  * @version 1.0
  */
 //  b = 30;a = 10
+
 /**
  * VisibilityProblem类。
  */
@@ -18,19 +19,10 @@ public class VisibilityProblem {
     int a = 10;
     int b = 20;
 
-    private void change() {
-        a = 30;
-        b = a;
-    }
-
-
-    private void print() {
-        System.out.println("b=" + b + ";a=" + a);
-    }
-
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -38,9 +30,9 @@ public class VisibilityProblem {
             VisibilityProblem problem = new VisibilityProblem();
             new Thread(new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
+                /**
+                 * run方法。
+                 */
                 public void run() {
                     try {
                         Thread.sleep(1);
@@ -53,9 +45,9 @@ public class VisibilityProblem {
 
             new Thread(new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
+                /**
+                 * run方法。
+                 */
                 public void run() {
                     try {
                         Thread.sleep(1);
@@ -68,5 +60,14 @@ public class VisibilityProblem {
 
 
         }
+    }
+
+    private void change() {
+        a = 30;
+        b = a;
+    }
+
+    private void print() {
+        System.out.println("b=" + b + ";a=" + a);
     }
 }

@@ -15,8 +15,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +27,8 @@ public class DedaoC {
 
 
     public static String base = "/Users/zifang/Downloads/dedao";
+    private static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+
     @Test
     /**
      * test方法。
@@ -37,48 +37,48 @@ public class DedaoC {
 
         int page = 0;
         int pageSize = 100;
-        while(true){
-            List<Map<String,Object>> books = getBooks(page, pageSize);
-            System.out.println("开始获取第"+page+"页数据");
-            if(books != null && books.size() > 0){
-                page = page +1;
-            } else{
+        while (true) {
+            List<Map<String, Object>> books = getBooks(page, pageSize);
+            System.out.println("开始获取第" + page + "页数据");
+            if (books != null && books.size() > 0) {
+                page = page + 1;
+            } else {
                 break;
             }
 
-            for(Map<String,Object> book : books){
+            for (Map<String, Object> book : books) {
                 try {
 
                     String aliasId = null;
-                    if(book.get("alias_id") == null || String.valueOf(book.get("alias_id")).equals("")){
-                        aliasId = ((List)book.get("odob_alias_list")).get(0).toString();
+                    if (book.get("alias_id") == null || String.valueOf(book.get("alias_id")).equals("")) {
+                        aliasId = ((List) book.get("odob_alias_list")).get(0).toString();
                     } else {
                         aliasId = book.get("alias_id").toString();
                     }
 
 
                     // 获得听书的描述信息
-                    Map<String,Object> bookDescribeInfo = getBookDescribeInfo(aliasId);
+                    Map<String, Object> bookDescribeInfo = getBookDescribeInfo(aliasId);
 
                     String dd_article_token = bookDescribeInfo.get("dd_article_token").toString();
                     String urlEncode = URLEncoder.encode(dd_article_token, "utf-8");
                     Map<String, Object> bookDetail = getBookDetail(urlEncode);
 
-                    String booName = String.valueOf(book.get("name")).split("\\|")[0].replace("《","").replace("》","")
-                            .replace("：","")
-                            .replace(".","_")
-                            .replace("?","？")
-                            .replace(" ","")
-                            .replace("<","_")
-                            .replace(">","_");
-                    Map<String,Object> context = new HashMap<>();
-                    context.put("book",book);
-                    context.put("bookDescribeInfo",bookDescribeInfo);
-                    context.put("bookDetail",bookDetail);
+                    String booName = String.valueOf(book.get("name")).split("\\|")[0].replace("《", "").replace("》", "")
+                            .replace("：", "")
+                            .replace(".", "_")
+                            .replace("?", "？")
+                            .replace(" ", "")
+                            .replace("<", "_")
+                            .replace(">", "_");
+                    Map<String, Object> context = new HashMap<>();
+                    context.put("book", book);
+                    context.put("bookDescribeInfo", bookDescribeInfo);
+                    context.put("bookDetail", bookDetail);
 
-                    FileUtil.write(new File(base+"/"+booName+".json"), JSON.toJSONString(context, SerializerFeature.PrettyFormat),"utf-8");
-                    System.out.println("----开始写出+"+booName );
-                }catch (Exception e){
+                    FileUtil.write(new File(base + "/" + booName + ".json"), JSON.toJSONString(context, SerializerFeature.PrettyFormat), "utf-8");
+                    System.out.println("----开始写出+" + booName);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -86,10 +86,10 @@ public class DedaoC {
     }
 
     private Map<String, Object> getBookDetail(String urlEncode) throws IOException {
-        HttpGet httpGet = new HttpGet("https://www.dedao.cn/pc/odob/pc/audio/article/get?token="+urlEncode+"&is_new=1");
+        HttpGet httpGet = new HttpGet("https://www.dedao.cn/pc/odob/pc/audio/article/get?token=" + urlEncode + "&is_new=1");
         CloseableHttpResponse response = httpClient.execute(httpGet);
         String res = EntityUtils.toString(response.getEntity());
-        Map<String,Object> ress = (Map<String, Object>) JSON.parse(res.toString());
+        Map<String, Object> ress = (Map<String, Object>) JSON.parse(res.toString());
         return ress;
     }
 
@@ -102,12 +102,9 @@ public class DedaoC {
         httpPost.setEntity(new StringEntity(JSON.toJSONString(params)));
         CloseableHttpResponse response = httpClient.execute(httpPost);
         String res = EntityUtils.toString(response.getEntity());
-        Map<String,Object> ress = (Map<String, Object>)JSONPath.read(res, "$.c");
+        Map<String, Object> ress = (Map<String, Object>) JSONPath.read(res, "$.c");
         return ress;
     }
-
-    private static CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-
 
     private List<Map<String, Object>> getBooks(int page, int pageSize) throws IOException {
 
@@ -123,7 +120,7 @@ public class DedaoC {
         httpPost.setEntity(new StringEntity(JSON.toJSONString(params)));
         CloseableHttpResponse response = httpClient.execute(httpPost);
         String res = EntityUtils.toString(response.getEntity());
-        List<Map<String,Object>> ress = (List<Map<String, Object>>) JSONPath.read(res, "$.c.product_list");
+        List<Map<String, Object>> ress = (List<Map<String, Object>>) JSONPath.read(res, "$.c.product_list");
 
         return ress;
     }

@@ -6,11 +6,13 @@ import org.junit.Test;
 import javax.tools.StandardLocation;
 import java.net.URI;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * CustomerCompileJavaFileManager 测试
  */
+
 /**
  * CustomerCompileJavaFileManagerTest类。
  */

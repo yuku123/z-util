@@ -5,9 +5,9 @@
 ## Features
 
 - **SnowflakeIdWorker** — Twitter Snowflake 算法实现
-  - 不依赖外部存储
-  - 毫秒级时间戳 + 机器 ID + 序列号
-  - 支持分布式多节点
+    - 不依赖外部存储
+    - 毫秒级时间戳 + 机器 ID + 序列号
+    - 支持分布式多节点
 - **Sequence** — 顺序号生成器
 - **SystemClock** — 系统时钟工具
 

@@ -16,7 +16,8 @@ public class U4 {
 
     /**
      * U4方法。
-     *      * @param value int类型参数
+     * * @param value int类型参数
+     *
      * @param bytes byte[]类型参数
      */
     public U4(int value, byte[] bytes) {
@@ -26,7 +27,8 @@ public class U4 {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
+     *
      * @return static U4类型返回值
      */
     public static U4 read(InputStream inputStream) {
@@ -50,6 +52,7 @@ public class U4 {
 
     /**
      * getValue方法。
+     *
      * @return int类型返回值
      */
     public int getValue() {

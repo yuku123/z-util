@@ -10,11 +10,7 @@ import com.github.javaparser.ast.expr.MemberValuePair;
 import com.github.javaparser.ast.expr.NormalAnnotationExpr;
 import com.github.javaparser.ast.expr.SingleMemberAnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.zifang.util.source.generator.info.AnnotationInfo;
-import com.zifang.util.source.generator.info.ClassInfo;
-import com.zifang.util.source.generator.info.FieldInfo;
-import com.zifang.util.source.generator.info.MethodInfo;
-import com.zifang.util.source.generator.info.MethodParameterPair;
+import com.zifang.util.source.generator.info.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -355,18 +351,30 @@ public class SourceCodeParser {
      */
     private int modifierKeywordToInt(String keywordName) {
         switch (keywordName) {
-            case "PUBLIC": return java.lang.reflect.Modifier.PUBLIC;
-            case "PRIVATE": return java.lang.reflect.Modifier.PRIVATE;
-            case "PROTECTED": return java.lang.reflect.Modifier.PROTECTED;
-            case "STATIC": return java.lang.reflect.Modifier.STATIC;
-            case "FINAL": return java.lang.reflect.Modifier.FINAL;
-            case "ABSTRACT": return java.lang.reflect.Modifier.ABSTRACT;
-            case "SYNCHRONIZED": return java.lang.reflect.Modifier.SYNCHRONIZED;
-            case "VOLATILE": return java.lang.reflect.Modifier.VOLATILE;
-            case "TRANSIENT": return java.lang.reflect.Modifier.TRANSIENT;
-            case "NATIVE": return java.lang.reflect.Modifier.NATIVE;
-            case "STRICTFP": return java.lang.reflect.Modifier.STRICT;
-            default: return 0;
+            case "PUBLIC":
+                return java.lang.reflect.Modifier.PUBLIC;
+            case "PRIVATE":
+                return java.lang.reflect.Modifier.PRIVATE;
+            case "PROTECTED":
+                return java.lang.reflect.Modifier.PROTECTED;
+            case "STATIC":
+                return java.lang.reflect.Modifier.STATIC;
+            case "FINAL":
+                return java.lang.reflect.Modifier.FINAL;
+            case "ABSTRACT":
+                return java.lang.reflect.Modifier.ABSTRACT;
+            case "SYNCHRONIZED":
+                return java.lang.reflect.Modifier.SYNCHRONIZED;
+            case "VOLATILE":
+                return java.lang.reflect.Modifier.VOLATILE;
+            case "TRANSIENT":
+                return java.lang.reflect.Modifier.TRANSIENT;
+            case "NATIVE":
+                return java.lang.reflect.Modifier.NATIVE;
+            case "STRICTFP":
+                return java.lang.reflect.Modifier.STRICT;
+            default:
+                return 0;
         }
     }
 }

@@ -3,7 +3,6 @@ package com.zifang.util.core.pattern.memento;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * 备忘录发起人（Originator）- 增强版
@@ -22,25 +21,9 @@ import java.util.function.Supplier;
  */
 public class Originator<T> {
 
-    private T state;
     private final StateValidator<T> validator;
     private final StateCopier<T> copier;
-
-    @FunctionalInterface
-/**
- * StateValidator接口。
- */
-    public interface StateValidator<T> {
-        boolean validate(T state);
-    }
-
-    @FunctionalInterface
-/**
- * StateCopier接口。
- */
-    public interface StateCopier<T> {
-        T copy(T original);
-    }
+    private T state;
 
     /**
      * Originator方法。
@@ -51,7 +34,7 @@ public class Originator<T> {
 
     /**
      * Originator方法。
-     *      * @param validator StateValidatorT类型参数
+     * * @param validator StateValidatorT类型参数
      */
     public Originator(StateValidator<T> validator) {
         this(validator, null);
@@ -59,7 +42,8 @@ public class Originator<T> {
 
     /**
      * Originator方法。
-     *      * @param validator StateValidatorT类型参数
+     * * @param validator StateValidatorT类型参数
+     *
      * @param copier StateCopierT类型参数
      */
     public Originator(StateValidator<T> validator, StateCopier<T> copier) {
@@ -192,6 +176,22 @@ public class Originator<T> {
         }
     }
 
+    @FunctionalInterface
+/**
+ * StateValidator接口。
+ */
+    public interface StateValidator<T> {
+        boolean validate(T state);
+    }
+
+    @FunctionalInterface
+/**
+ * StateCopier接口。
+ */
+    public interface StateCopier<T> {
+        T copy(T original);
+    }
+
     /**
      * 状态更新器
      */
@@ -243,41 +243,54 @@ public class Originator<T> {
         private final long timestamp;
         private final String label;
 
-    /**
-     * Memento方法。
-     *      * @param state T类型参数
-     * @param timestamp long类型参数
-     */
+        /**
+         * Memento方法。
+         * * @param state T类型参数
+         *
+         * @param timestamp long类型参数
+         */
         public Memento(T state, long timestamp) {
             this(state, timestamp, null);
         }
 
-    /**
-     * Memento方法。
-     *      * @param state T类型参数
-     * @param timestamp long类型参数
-     * @param label String类型参数
-     */
+        /**
+         * Memento方法。
+         * * @param state T类型参数
+         *
+         * @param timestamp long类型参数
+         * @param label     String类型参数
+         */
         public Memento(T state, long timestamp, String label) {
             this.state = state;
             this.timestamp = timestamp;
             this.label = label;
         }
 
-    /**
-     * getState方法。
-     * @return T类型返回值
-     */
-        public T getState() { return state; }
-    /**
-     * getTimestamp方法。
-     * @return long类型返回值
-     */
-        public long getTimestamp() { return timestamp; }
-    /**
-     * getLabel方法。
-     * @return String类型返回值
-     */
-        public String getLabel() { return label; }
+        /**
+         * getState方法。
+         *
+         * @return T类型返回值
+         */
+        public T getState() {
+            return state;
+        }
+
+        /**
+         * getTimestamp方法。
+         *
+         * @return long类型返回值
+         */
+        public long getTimestamp() {
+            return timestamp;
+        }
+
+        /**
+         * getLabel方法。
+         *
+         * @return String类型返回值
+         */
+        public String getLabel() {
+            return label;
+        }
     }
 }

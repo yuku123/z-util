@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/** 自研 JWT 工具测试（无 JJWT 依赖）。 */
+/**
+ * 自研 JWT 工具测试（无 JJWT 依赖）。
+ */
 public class JwtTest {
 
     @Test

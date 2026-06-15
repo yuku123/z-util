@@ -52,7 +52,10 @@ public class DistributedLockTest {
                     String t = lock.tryLock(200_000_000L);
                     if (t != null) {
                         acquired.incrementAndGet();
-                        try { Thread.sleep(2); } catch (InterruptedException ignored) {}
+                        try {
+                            Thread.sleep(2);
+                        } catch (InterruptedException ignored) {
+                        }
                         lock.unlock(t);
                     }
                 }

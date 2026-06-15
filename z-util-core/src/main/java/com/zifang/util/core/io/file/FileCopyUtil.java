@@ -4,9 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 
 /**
  * Utility class for file and directory copy operations.
@@ -54,7 +51,7 @@ public final class FileCopyUtil {
      *
      * @param src  the source file to copy, must not be {@code null}
      * @param dest the destination file, must not be {@code null}
-     * @throws IOException if the source file does not exist, or copying fails
+     * @throws IOException          if the source file does not exist, or copying fails
      * @throws NullPointerException if src or dest is {@code null}
      */
     public static void copyFile(File src, File dest) throws IOException {
@@ -69,12 +66,12 @@ public final class FileCopyUtil {
      * will be created if they do not exist.
      * </p>
      *
-     * @param src      the source file to copy, must not be {@code null}
-     * @param dest     the destination file, must not be {@code null}
+     * @param src       the source file to copy, must not be {@code null}
+     * @param dest      the destination file, must not be {@code null}
      * @param overwrite whether to overwrite if the destination already exists
-     * @throws IOException if the source file does not exist, or copying fails
+     * @throws IOException          if the source file does not exist, or copying fails
      * @throws NullPointerException if src or dest is {@code null}
-     * @throws FileExistsException if overwrite is false and dest already exists
+     * @throws FileExistsException  if overwrite is false and dest already exists
      */
     public static void copyFile(File src, File dest, boolean overwrite) throws IOException {
         if (src == null) {
@@ -125,7 +122,7 @@ public final class FileCopyUtil {
      *
      * @param srcDir      the source directory to copy, must not be {@code null}
      * @param destDirPath the path to the destination directory
-     * @throws IOException if the source directory does not exist, or copying fails
+     * @throws IOException          if the source directory does not exist, or copying fails
      * @throws NullPointerException if srcDir or destDirPath is {@code null}
      */
     public static void copyDir(File srcDir, String destDirPath) throws IOException {
@@ -156,7 +153,7 @@ public final class FileCopyUtil {
      *
      * @param srcDirPath  the path to the source directory
      * @param destDirPath the path to the destination directory
-     * @throws IOException if the source directory does not exist, or copying fails
+     * @throws IOException          if the source directory does not exist, or copying fails
      * @throws NullPointerException if srcDirPath or destDirPath is {@code null}
      */
     public static void copyDir(String srcDirPath, String destDirPath) throws IOException {
@@ -217,9 +214,9 @@ public final class FileCopyUtil {
      *
      * @param srcFile the source file to copy, must not be {@code null}
      * @param destDir the destination directory, must not be {@code null}
-     * @throws IOException if the source file does not exist, or copying fails
+     * @throws IOException          if the source file does not exist, or copying fails
      * @throws NullPointerException if srcFile or destDir is {@code null}
-     * @throws IOException if destDir is not a directory
+     * @throws IOException          if destDir is not a directory
      */
     public static void copyFileToDir(File srcFile, File destDir) throws IOException {
         if (srcFile == null) {
@@ -248,7 +245,7 @@ public final class FileCopyUtil {
      *
      * @param src  the source file to move, must not be {@code null}
      * @param dest the destination file, must not be {@code null}
-     * @throws IOException if the source file does not exist, or moving fails
+     * @throws IOException          if the source file does not exist, or moving fails
      * @throws NullPointerException if src or dest is {@code null}
      */
     public static void moveFile(File src, File dest) throws IOException {
@@ -299,7 +296,7 @@ public final class FileCopyUtil {
      *
      * @param srcDir  the source directory to move, must not be {@code null}
      * @param destDir the destination directory, must not be {@code null}
-     * @throws IOException if the source directory does not exist, or moving fails
+     * @throws IOException          if the source directory does not exist, or moving fails
      * @throws NullPointerException if srcDir or destDir is {@code null}
      */
     public static void moveDir(File srcDir, File destDir) throws IOException {
@@ -368,7 +365,7 @@ public final class FileCopyUtil {
      *
      * @param in  the input stream to read from, must not be {@code null}
      * @param out the output stream to write to, must not be {@code null}
-     * @throws IOException if an I/O error occurs
+     * @throws IOException          if an I/O error occurs
      * @throws NullPointerException if in or out is {@code null}
      */
     public static void copyStream(InputStream in, OutputStream out) throws IOException {

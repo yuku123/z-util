@@ -10,9 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * cURL Token 解析器
@@ -82,7 +80,7 @@ public class CurlTokenParser {
         // 首先查找显式的 URL token（以 http:// 或 https:// 开头）
         for (CurlLexer.Token token : tokens) {
             if (token.type == CurlLexer.TokenType.VALUE &&
-                (token.value.startsWith("http://") || token.value.startsWith("https://"))) {
+                    (token.value.startsWith("http://") || token.value.startsWith("https://"))) {
                 return token.value;
             }
         }
@@ -98,7 +96,7 @@ public class CurlTokenParser {
         for (int i = 0; i < tokens.size(); i++) {
             CurlLexer.Token token = tokens.get(i);
             if (token.type == CurlLexer.TokenType.OPTION_SHORT ||
-                token.type == CurlLexer.TokenType.OPTION_LONG) {
+                    token.type == CurlLexer.TokenType.OPTION_LONG) {
 
                 for (String optionName : optionNames) {
                     if (token.value.equals(optionName) && i + 1 < tokens.size()) {
@@ -119,7 +117,7 @@ public class CurlTokenParser {
     private static boolean hasOption(List<CurlLexer.Token> tokens, String... optionNames) {
         for (CurlLexer.Token token : tokens) {
             if (token.type == CurlLexer.TokenType.OPTION_SHORT ||
-                token.type == CurlLexer.TokenType.OPTION_LONG) {
+                    token.type == CurlLexer.TokenType.OPTION_LONG) {
                 for (String optionName : optionNames) {
                     if (token.value.equals(optionName)) {
                         return true;
@@ -140,7 +138,7 @@ public class CurlTokenParser {
         for (int i = 0; i < tokens.size(); i++) {
             CurlLexer.Token token = tokens.get(i);
             if (token.type == CurlLexer.TokenType.OPTION_SHORT ||
-                token.type == CurlLexer.TokenType.OPTION_LONG) {
+                    token.type == CurlLexer.TokenType.OPTION_LONG) {
 
                 if (token.value.equals("-H") || token.value.equals("--header")) {
                     if (i + 1 < tokens.size() && tokens.get(i + 1).type == CurlLexer.TokenType.VALUE) {
@@ -162,7 +160,7 @@ public class CurlTokenParser {
             String[] parts = userValue.split(":", 2);
             if (parts.length == 2) {
                 String basicAuth = Base64.getEncoder()
-                    .encodeToString((parts[0] + ":" + parts[1]).getBytes(StandardCharsets.UTF_8));
+                        .encodeToString((parts[0] + ":" + parts[1]).getBytes(StandardCharsets.UTF_8));
                 headers.put("Authorization", "Basic " + basicAuth);
             }
         }
@@ -217,10 +215,10 @@ public class CurlTokenParser {
         for (int i = 0; i < tokens.size(); i++) {
             CurlLexer.Token token = tokens.get(i);
             if (token.type == CurlLexer.TokenType.OPTION_SHORT ||
-                token.type == CurlLexer.TokenType.OPTION_LONG) {
+                    token.type == CurlLexer.TokenType.OPTION_LONG) {
 
                 if (token.value.equals("-d") || token.value.equals("--data") ||
-                    token.value.equals("--data-raw") || token.value.equals("--data-binary")) {
+                        token.value.equals("--data-raw") || token.value.equals("--data-binary")) {
                     if (i + 1 < tokens.size() && tokens.get(i + 1).type == CurlLexer.TokenType.VALUE) {
                         return tokens.get(i + 1).value;
                     }

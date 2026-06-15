@@ -2,7 +2,10 @@ package com.zifang.util.yaml.model;
 
 import com.zifang.util.yaml.define.YamlNodeType;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * YAML 映射节点，对应 YAML 中的映射（mapping）结构，
@@ -13,6 +16,7 @@ import java.util.*;
 /**
  * YamlMap类。
  */
+
 /**
  * YamlMap类。
  */
@@ -192,6 +196,7 @@ public class YamlMap implements Map<String, Object> {
      */
     /**
      * getNodeType方法。
+     *
      * @return YamlNodeType类型返回值
      */
     public YamlNodeType getNodeType() {
@@ -211,7 +216,8 @@ public class YamlMap implements Map<String, Object> {
      */
     /**
      * getString方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return String类型返回值
      */
     public String getString(String key) {
@@ -232,7 +238,8 @@ public class YamlMap implements Map<String, Object> {
      */
     /**
      * getInt方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return int类型返回值
      */
     public Integer getInt(String key) {
@@ -256,7 +263,8 @@ public class YamlMap implements Map<String, Object> {
      */
     /**
      * getMap方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return YamlMap类型返回值
      */
     public YamlMap getMap(String key) {
@@ -277,7 +285,8 @@ public class YamlMap implements Map<String, Object> {
      */
     /**
      * getArray方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return YamlArray类型返回值
      */
     public YamlArray getArray(String key) {

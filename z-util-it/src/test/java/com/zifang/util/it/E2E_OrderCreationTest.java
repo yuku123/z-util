@@ -73,10 +73,55 @@ public class E2E_OrderCreationTest {
         }
     }
 
-    /** 号段加载器（真实生产连 MySQL）。 */
+    @Test
+    public void testOrderCreation() throws Exception {
+        OrderService svc = new OrderService(DS);
+        String orderNo = svc.createOrder("alice", "PROD-001", 2);
+        assertNotNull(orderNo);
+        assertTrue("orderNo should start with O, got " + orderNo, orderNo.startsWith("O"));
+
+        try (Connection c = DS.getConnection();
+             Statement s = c.createStatement();
+             ResultSet rs = s.executeQuery("SELECT COUNT(*) FROM t_order")) {
+            assertTrue(rs.next());
+            assertEquals(1, rs.getInt(1));
+        }
+    }
+
+    @Test
+    public void testConcurrentOrders_idUnique() throws Exception {
+        OrderService svc = new OrderService(DS);
+        int n = 20;
+        Set<String> orderNos = java.util.Collections.synchronizedSet(new HashSet<>());
+        Thread[] ts = new Thread[4];
+        for (int i = 0; i < ts.length; i++) {
+            ts[i] = new Thread(() -> {
+                for (int j = 0; j < n; j++) {
+                    try {
+                        // 用 (thread, j) 做 user → 80 个不同 user，不互锁
+                        String no = svc.createOrder("u" + Thread.currentThread().getId() + "_" + j, "p", 1);
+                        orderNos.add(no);
+                    } catch (Exception e) {
+                        fail("unexpected: " + e.getMessage());
+                    }
+                }
+            });
+        }
+        for (Thread t : ts) t.start();
+        for (Thread t : ts) t.join();
+        assertEquals(4 * n, orderNos.size());
+    }
+
+    /**
+     * 号段加载器（真实生产连 MySQL）。
+     */
     static class DbSegmentLoader implements SegmentIdGenerator.SegmentLoader {
         private final DataSource ds;
-        DbSegmentLoader(DataSource ds) { this.ds = ds; }
+
+        DbSegmentLoader(DataSource ds) {
+            this.ds = ds;
+        }
+
         @Override
         public long[] loadSegment(String bizTag, int step) {
             try (Connection c = ds.getConnection()) {
@@ -146,44 +191,5 @@ public class E2E_OrderCreationTest {
                 lock.unlock(token);
             }
         }
-    }
-
-    @Test
-    public void testOrderCreation() throws Exception {
-        OrderService svc = new OrderService(DS);
-        String orderNo = svc.createOrder("alice", "PROD-001", 2);
-        assertNotNull(orderNo);
-        assertTrue("orderNo should start with O, got " + orderNo, orderNo.startsWith("O"));
-
-        try (Connection c = DS.getConnection();
-             Statement s = c.createStatement();
-             ResultSet rs = s.executeQuery("SELECT COUNT(*) FROM t_order")) {
-            assertTrue(rs.next());
-            assertEquals(1, rs.getInt(1));
-        }
-    }
-
-    @Test
-    public void testConcurrentOrders_idUnique() throws Exception {
-        OrderService svc = new OrderService(DS);
-        int n = 20;
-        Set<String> orderNos = java.util.Collections.synchronizedSet(new HashSet<>());
-        Thread[] ts = new Thread[4];
-        for (int i = 0; i < ts.length; i++) {
-            ts[i] = new Thread(() -> {
-                for (int j = 0; j < n; j++) {
-                    try {
-                        // 用 (thread, j) 做 user → 80 个不同 user，不互锁
-                        String no = svc.createOrder("u" + Thread.currentThread().getId() + "_" + j, "p", 1);
-                        orderNos.add(no);
-                    } catch (Exception e) {
-                        fail("unexpected: " + e.getMessage());
-                    }
-                }
-            });
-        }
-        for (Thread t : ts) t.start();
-        for (Thread t : ts) t.join();
-        assertEquals(4 * n, orderNos.size());
     }
 }

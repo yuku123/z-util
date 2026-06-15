@@ -44,7 +44,9 @@ import java.util.Map;
  */
 public class UrlUtil {
 
-    /** UTF-8 字符集 */
+    /**
+     * UTF-8 字符集
+     */
     private static final String CHARSET_UTF_8 = StandardCharsets.UTF_8.name();
 
     private UrlUtil() {
@@ -285,7 +287,7 @@ public class UrlUtil {
      *
      * @param query   查询字符串
      * @param split1  参数分隔符（通常为 &）
-     * @param split2 键值分隔符（通常为 =）
+     * @param split2  键值分隔符（通常为 =）
      * @param dupLink 多值连接符（为 null 时后者覆盖前者）
      * @return 解析后的 Map
      */
@@ -419,6 +421,15 @@ public class UrlUtil {
         }
 
         /**
+         * 创建默认 UTF-8 编码的 URL 构建器
+         *
+         * @param path 初始路径
+         */
+        public Builder(String path) {
+            this(path, true, StandardCharsets.UTF_8.name());
+        }
+
+        /**
          * 编码路径段：保留 / 分隔符，只对每段做 URL 编码
          */
         private String encodePath(String path, String encoding) {
@@ -435,15 +446,6 @@ public class UrlUtil {
                 sb.append(encode(segments[i], encoding));
             }
             return sb.toString();
-        }
-
-        /**
-         * 创建默认 UTF-8 编码的 URL 构建器
-         *
-         * @param path 初始路径
-         */
-        public Builder(String path) {
-            this(path, true, StandardCharsets.UTF_8.name());
         }
 
         /**
@@ -507,10 +509,10 @@ public class UrlUtil {
          * @return URL 字符串
          */
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return url.toString();
         }

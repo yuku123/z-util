@@ -314,11 +314,11 @@ public class Collections {
     /**
      * 将 Map 中的键值对以指定分隔符连接成字符串
      *
-     * @param map         待连接的 Map
-     * @param separator   键值对之间的分隔符（如 "，"）
-     * @param separator1  键与值之间的分隔符（如 "="）
-     * @param <K>         键的泛型类型
-     * @param <V>         值的泛型类型
+     * @param map        待连接的 Map
+     * @param separator  键值对之间的分隔符（如 "，"）
+     * @param separator1 键与值之间的分隔符（如 "="）
+     * @param <K>        键的泛型类型
+     * @param <V>        值的泛型类型
      * @return 连接后的字符串；末尾不包含键值对分隔符
      */
     public static <K, V> String join(Map<K, V> map, String separator, String separator1) {

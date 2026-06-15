@@ -1,17 +1,10 @@
 package com.zifang.util.cli.help;
 
 import com.zifang.util.cli.model.Option;
-import com.zifang.util.cli.model.OptionGroup;
 import com.zifang.util.cli.model.Options;
 
 import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Formats help text for command-line options.
@@ -19,34 +12,54 @@ import java.util.List;
  */
 public class HelpFormatter {
 
-    /** Default output width */
+    /**
+     * Default output width
+     */
     public static final int DEFAULT_WIDTH = 74;
 
-    /** Default left padding */
+    /**
+     * Default left padding
+     */
     public static final int DEFAULT_LEFT_PAD = 1;
 
-    /** Default description indentation */
+    /**
+     * Default description indentation
+     */
     public static final int DEFAULT_DESC_INDENT = 3;
 
-    /** Default number of characters per line */
+    /**
+     * Default number of characters per line
+     */
     public static final int DEFAULT_SYNTAX_INDENT = 3;
 
-    /** Default option prefix */
+    /**
+     * Default option prefix
+     */
     public static final String DEFAULT_OPT_PREFIX = "-";
 
-    /** Default long option prefix */
+    /**
+     * Default long option prefix
+     */
     public static final String DEFAULT_LONG_OPT_PREFIX = "--";
 
-    /** Default argument name delimiter start */
+    /**
+     * Default argument name delimiter start
+     */
     public static final String DEFAULT_ARG_NAME_OPEN = "<";
 
-    /** Default argument name delimiter end */
+    /**
+     * Default argument name delimiter end
+     */
     public static final String DEFAULT_ARG_NAME_CLOSE = ">";
 
-    /** Default syntax prefix */
+    /**
+     * Default syntax prefix
+     */
     public static final String DEFAULT_SYNTAX_PREFIX = "usage: ";
 
-    /** Default separator between option and argument */
+    /**
+     * Default separator between option and argument
+     */
     public static final String DEFAULT_SEPARATOR = " ";
 
     protected int width = DEFAULT_WIDTH;
@@ -63,10 +76,12 @@ public class HelpFormatter {
     /**
      * HelpFormatter方法。
      */
-    public HelpFormatter() {}
+    public HelpFormatter() {
+    }
 
     /**
      * getWidth方法。
+     *
      * @return int类型返回值
      */
     public int getWidth() {
@@ -75,7 +90,7 @@ public class HelpFormatter {
 
     /**
      * setWidth方法。
-     *      * @param width final类型参数
+     * * @param width final类型参数
      */
     public void setWidth(final int width) {
         this.width = width;
@@ -83,6 +98,7 @@ public class HelpFormatter {
 
     /**
      * getLeftPad方法。
+     *
      * @return int类型返回值
      */
     public int getLeftPad() {
@@ -91,7 +107,7 @@ public class HelpFormatter {
 
     /**
      * setLeftPad方法。
-     *      * @param leftPad final类型参数
+     * * @param leftPad final类型参数
      */
     public void setLeftPad(final int leftPad) {
         this.leftPad = leftPad;
@@ -99,6 +115,7 @@ public class HelpFormatter {
 
     /**
      * getDescPad方法。
+     *
      * @return int类型返回值
      */
     public int getDescPad() {
@@ -107,7 +124,7 @@ public class HelpFormatter {
 
     /**
      * setDescPad方法。
-     *      * @param descPad final类型参数
+     * * @param descPad final类型参数
      */
     public void setDescPad(final int descPad) {
         this.descPad = descPad;
@@ -115,6 +132,7 @@ public class HelpFormatter {
 
     /**
      * getSyntaxIndent方法。
+     *
      * @return int类型返回值
      */
     public int getSyntaxIndent() {
@@ -123,7 +141,7 @@ public class HelpFormatter {
 
     /**
      * setSyntaxIndent方法。
-     *      * @param syntaxIndent final类型参数
+     * * @param syntaxIndent final类型参数
      */
     public void setSyntaxIndent(final int syntaxIndent) {
         this.syntaxIndent = syntaxIndent;
@@ -131,6 +149,7 @@ public class HelpFormatter {
 
     /**
      * getOptPrefix方法。
+     *
      * @return String类型返回值
      */
     public String getOptPrefix() {
@@ -139,7 +158,7 @@ public class HelpFormatter {
 
     /**
      * setOptPrefix方法。
-     *      * @param optPrefix final类型参数
+     * * @param optPrefix final类型参数
      */
     public void setOptPrefix(final String optPrefix) {
         this.optPrefix = optPrefix;
@@ -147,6 +166,7 @@ public class HelpFormatter {
 
     /**
      * getLongOptPrefix方法。
+     *
      * @return String类型返回值
      */
     public String getLongOptPrefix() {
@@ -155,7 +175,7 @@ public class HelpFormatter {
 
     /**
      * setLongOptPrefix方法。
-     *      * @param longOptPrefix final类型参数
+     * * @param longOptPrefix final类型参数
      */
     public void setLongOptPrefix(final String longOptPrefix) {
         this.longOptPrefix = longOptPrefix;
@@ -163,6 +183,7 @@ public class HelpFormatter {
 
     /**
      * getSyntaxPrefix方法。
+     *
      * @return String类型返回值
      */
     public String getSyntaxPrefix() {
@@ -171,7 +192,7 @@ public class HelpFormatter {
 
     /**
      * setSyntaxPrefix方法。
-     *      * @param syntaxPrefix final类型参数
+     * * @param syntaxPrefix final类型参数
      */
     public void setSyntaxPrefix(final String syntaxPrefix) {
         this.syntaxPrefix = syntaxPrefix;
@@ -179,6 +200,7 @@ public class HelpFormatter {
 
     /**
      * getArgNameOpen方法。
+     *
      * @return String类型返回值
      */
     public String getArgNameOpen() {
@@ -187,7 +209,7 @@ public class HelpFormatter {
 
     /**
      * setArgNameOpen方法。
-     *      * @param argNameOpen final类型参数
+     * * @param argNameOpen final类型参数
      */
     public void setArgNameOpen(final String argNameOpen) {
         this.argNameOpen = argNameOpen;
@@ -195,6 +217,7 @@ public class HelpFormatter {
 
     /**
      * getArgNameClose方法。
+     *
      * @return String类型返回值
      */
     public String getArgNameClose() {
@@ -203,7 +226,7 @@ public class HelpFormatter {
 
     /**
      * setArgNameClose方法。
-     *      * @param argNameClose final类型参数
+     * * @param argNameClose final类型参数
      */
     public void setArgNameClose(final String argNameClose) {
         this.argNameClose = argNameClose;
@@ -211,6 +234,7 @@ public class HelpFormatter {
 
     /**
      * getSeparator方法。
+     *
      * @return String类型返回值
      */
     public String getSeparator() {
@@ -219,7 +243,7 @@ public class HelpFormatter {
 
     /**
      * setSeparator方法。
-     *      * @param separator final类型参数
+     * * @param separator final类型参数
      */
     public void setSeparator(final String separator) {
         this.separator = separator;
@@ -266,7 +290,7 @@ public class HelpFormatter {
      * Print help text to a PrintWriter.
      */
     public void printHelp(final PrintWriter pw, final int width, final String cmdLineSyntax,
-                         final String header, final Options options, final String footer, final boolean autoUsage) {
+                          final String header, final Options options, final String footer, final boolean autoUsage) {
         if (cmdLineSyntax == null || cmdLineSyntax.isEmpty()) {
             throw new IllegalArgumentException("cmdLineSyntax cannot be null or empty");
         }
@@ -505,12 +529,12 @@ public class HelpFormatter {
         List<Option> opts = new ArrayList<>(options.getOptions());
         Collections.sort(opts, new Comparator<Option>() {
             @Override
-    /**
-     * compare方法。
-     *      * @param o1 final类型参数
-     * @param o2 final类型参数
-     * @return int类型返回值
-     */
+            /**
+             * compare方法。
+             *      * @param o1 final类型参数
+             * @param o2 final类型参数
+             * @return int类型返回值
+             */
             public int compare(final Option o1, final Option o2) {
                 String k1 = o1.getKey();
                 String k2 = o2.getKey();

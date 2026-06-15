@@ -12,7 +12,8 @@ public class Parameter {
 
     /**
      * Parameter方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param data NdArray类型参数
      */
     public Parameter(String name, NdArray data) {
@@ -23,6 +24,7 @@ public class Parameter {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -31,6 +33,7 @@ public class Parameter {
 
     /**
      * getData方法。
+     *
      * @return NdArray类型返回值
      */
     public NdArray getData() {
@@ -39,6 +42,7 @@ public class Parameter {
 
     /**
      * getGradient方法。
+     *
      * @return NdArray类型返回值
      */
     public NdArray getGradient() {
@@ -47,7 +51,7 @@ public class Parameter {
 
     /**
      * setGradient方法。
-     *      * @param gradient NdArray类型参数
+     * * @param gradient NdArray类型参数
      */
     public void setGradient(NdArray gradient) {
         this.gradient = gradient;
@@ -55,7 +59,8 @@ public class Parameter {
 
     /**
      * getData方法。
-     *      * @param grad NdArray类型参数
+     * * @param grad NdArray类型参数
+     *
      * @return NdArray类型返回值
      */
     public NdArray getData(NdArray grad) {

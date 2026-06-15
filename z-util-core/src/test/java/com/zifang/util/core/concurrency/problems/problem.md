@@ -62,7 +62,8 @@ kissing_heart:
 :beer: 无同步的修改在另一个线程中会读不到
 ----------------------------------
 
-Demo类[`com.oldratlee.fucking.concurrency.NoPublishDemo`](src/main/java/com/oldratlee/fucking/concurrency/NoPublishDemo.java)
+Demo类[
+`com.oldratlee.fucking.concurrency.NoPublishDemo`](src/main/java/com/oldratlee/fucking/concurrency/NoPublishDemo.java)
 。
 
 ### Demo说明
@@ -83,7 +84,8 @@ mvn compile exec:java -Dexec.mainClass=com.oldratlee.fucking.concurrency.NoPubli
 ----------------------------------
 
 这个问题在[疫苗：Java HashMap的死循环](http://coolshell.cn/articles/9606.html)等多个地方都有讲解。    
-Demo类[`com.oldratlee.fucking.concurrency.HashMapHangDemo`](src/main/java/com/oldratlee/fucking/concurrency/HashMapHangDemo.java)
+Demo类[
+`com.oldratlee.fucking.concurrency.HashMapHangDemo`](src/main/java/com/oldratlee/fucking/concurrency/HashMapHangDemo.java)
 ，可以复现这个问题。
 
 ### Demo说明
@@ -110,7 +112,8 @@ mvn compile exec:java -Dexec.mainClass=com.oldratlee.fucking.concurrency.HashMap
 ### Demo说明
 
 主线程修改多个状态，为了方便检查，每次写入有个固定的关系：第2个状态是第1个状态值的2倍。在任务线程中读取多个状态。  
-Demo类[`com.oldratlee.fucking.concurrency.InvalidCombinationStateDemo`](src/main/java/com/oldratlee/fucking/concurrency/InvalidCombinationStateDemo.java)
+Demo类[
+`com.oldratlee.fucking.concurrency.InvalidCombinationStateDemo`](src/main/java/com/oldratlee/fucking/concurrency/InvalidCombinationStateDemo.java)
 。
 
 ### 问题说明
@@ -129,7 +132,8 @@ mvn compile exec:java -Dexec.mainClass=com.oldratlee.fucking.concurrency.Invalid
 无效值 是指 从来没有设置过的值。
 
 `long`变量读写不是原子的，会分为2次4字节操作。     
-Demo类[`com.oldratlee.fucking.concurrency.InvalidLongDemo`](src/main/java/com/oldratlee/fucking/concurrency/InvalidLongDemo.java)
+Demo类[
+`com.oldratlee.fucking.concurrency.InvalidLongDemo`](src/main/java/com/oldratlee/fucking/concurrency/InvalidLongDemo.java)
 。
 
 ### Demo说明
@@ -149,7 +153,8 @@ mvn compile exec:java -Dexec.mainClass=com.oldratlee.fucking.concurrency.Invalid
 :beer: 无同步的并发计数结果不对
 ----------------------------------
 
-Demo类[`com.oldratlee.fucking.concurrency.WrongCounterDemo`](src/main/java/com/oldratlee/fucking/concurrency/WrongCounterDemo.java)
+Demo类[
+`com.oldratlee.fucking.concurrency.WrongCounterDemo`](src/main/java/com/oldratlee/fucking/concurrency/WrongCounterDemo.java)
 。
 
 ### Demo说明
@@ -174,7 +179,8 @@ mvn compile exec:java -Dexec.mainClass=com.oldratlee.fucking.concurrency.WrongCo
 问题分析见文章链接：[在易变域上的同步](http://www.ibm.com/developerworks/cn/java/j-concurrencybugpatterns/#N100DA)
 ，对应的英文文章：[Synchronization
 on mutable fields](http://www.ibm.com/developerworks/library/j-concurrencybugpatterns/#N100E7)    
-Demo类[`com.oldratlee.fucking.concurrency.SynchronizationOnMutableFieldDemo`](src/main/java/com/oldratlee/fucking/concurrency/SynchronizationOnMutableFieldDemo.java)
+Demo类[
+`com.oldratlee.fucking.concurrency.SynchronizationOnMutableFieldDemo`](src/main/java/com/oldratlee/fucking/concurrency/SynchronizationOnMutableFieldDemo.java)
 。
 
 ### Demo说明
@@ -198,7 +204,8 @@ mvn compile exec:java -Dexec.mainClass=com.oldratlee.fucking.concurrency.Synchro
 问题分析见文章链接：[对称锁死锁](http://www.ibm.com/developerworks/cn/java/j-concurrencybugpatterns/#N101B4)
 ，对应的英文文章：[Synchronization
 on mutable fields](http://www.ibm.com/developerworks/library/j-concurrencybugpatterns/#N101C1)    
-Demo类[`com.oldratlee.fucking.concurrency.SymmetricLockDeadlockDemo`](src/main/java/com/oldratlee/fucking/concurrency/SymmetricLockDeadlockDemo.java)
+Demo类[
+`com.oldratlee.fucking.concurrency.SymmetricLockDeadlockDemo`](src/main/java/com/oldratlee/fucking/concurrency/SymmetricLockDeadlockDemo.java)
 。
 
 ### Demo说明
@@ -218,7 +225,8 @@ mvn compile exec:java -Dexec.mainClass=com.oldratlee.fucking.concurrency.Symmetr
 一些并发的问题讨论和资料
 -------------------------
 
-- [ibm developerworks - 多核系统上的`Java`并发缺陷模式（`bug patterns`）](http://www.ibm.com/developerworks/cn/java/j-concurrencybugpatterns/)
+- [ibm developerworks - 多核系统上的`Java`并发缺陷模式（
+  `bug patterns`）](http://www.ibm.com/developerworks/cn/java/j-concurrencybugpatterns/)
 - [stackoverflow - What is the most frequent concurrency issue you've encountered in Java?](http://stackoverflow.com/questions/461896/what-is-the-most-frequent-concurrency-issue-youve-encountered-in-java)
 - [Java Concurrency Gotchas](http://www.slideshare.net/alexmiller/java-concurrency-gotchas-3666977)
 - [Common problems of concurrency (Multi-Threading) in Java](http://www.somanyword.com/2014/03/common-problems-of-concurrency-multi-threading-in-java/)

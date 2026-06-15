@@ -11,11 +11,13 @@ public class AlgoFrame extends JFrame {
 
     private int canvasWidth;
     private int canvasHeight;
+    private Object data;
 
     /**
      * 创建算法可视化框架
-     * @param title 窗口标题
-     * @param canvasWidth 画布宽度
+     *
+     * @param title        窗口标题
+     * @param canvasWidth  画布宽度
      * @param canvasHeight 画布高度
      */
     public AlgoFrame(String title, int canvasWidth, int canvasHeight) {
@@ -37,6 +39,7 @@ public class AlgoFrame extends JFrame {
 
     /**
      * 创建算法可视化框架（使用默认尺寸1024x768）
+     *
      * @param title 窗口标题
      */
     public AlgoFrame(String title) {
@@ -46,6 +49,7 @@ public class AlgoFrame extends JFrame {
 
     /**
      * 获取画布宽度
+     *
      * @return 画布宽度
      */
     public int getCanvasWidth() {
@@ -54,16 +58,16 @@ public class AlgoFrame extends JFrame {
 
     /**
      * 获取画布高度
+     *
      * @return 画布高度
      */
     public int getCanvasHeight() {
         return canvasHeight;
     }
 
-    private Object data;
-
     /**
      * 渲染数据
+     *
      * @param data 要渲染的数据对象
      */
     public void render(Object data) {
@@ -88,10 +92,10 @@ public class AlgoFrame extends JFrame {
         }
 
         @Override
-    /**
-     * paintComponent方法。
-     *      * @param g Graphics类型参数
-     */
+        /**
+         * paintComponent方法。
+         *      * @param g Graphics类型参数
+         */
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
@@ -109,10 +113,10 @@ public class AlgoFrame extends JFrame {
         }
 
         @Override
-    /**
-     * getPreferredSize方法。
-     * @return Dimension类型返回值
-     */
+        /**
+         * getPreferredSize方法。
+         * @return Dimension类型返回值
+         */
         public Dimension getPreferredSize() {
             return new Dimension(canvasWidth, canvasHeight);
         }

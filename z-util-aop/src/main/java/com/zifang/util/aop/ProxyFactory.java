@@ -30,11 +30,14 @@ import java.util.concurrent.ConcurrentMap;
  */
 public final class ProxyFactory {
 
-    /** advice 实例缓存：adviseClass → 实例。 */
+    /**
+     * advice 实例缓存：adviseClass → 实例。
+     */
     @SuppressWarnings("rawtypes")
     private static final ConcurrentMap<Class<? extends Advise>, Advise> ADVICE_CACHE = new ConcurrentHashMap<>();
 
-    private ProxyFactory() {}
+    private ProxyFactory() {
+    }
 
     /**
      * 给目标对象生成代理。目标对象必须实现至少一个接口（{@link Proxy} 限制）。
@@ -57,7 +60,9 @@ public final class ProxyFactory {
                 new InterceptHandler<>(target));
     }
 
-    /** 收集 target 类的所有接口（包括父类链上的）。 */
+    /**
+     * 收集 target 类的所有接口（包括父类链上的）。
+     */
     private static Class<?>[] collectInterfaces(Class<?> klass) {
         java.util.LinkedHashSet<Class<?>> set = new java.util.LinkedHashSet<>();
         while (klass != null) {
@@ -78,11 +83,15 @@ public final class ProxyFactory {
         });
     }
 
-    /** 内部：拦截处理器。 */
+    /**
+     * 内部：拦截处理器。
+     */
     private static final class InterceptHandler<T> implements InvocationHandler {
         private final T target;
 
-        InterceptHandler(T target) { this.target = target; }
+        InterceptHandler(T target) {
+            this.target = target;
+        }
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {

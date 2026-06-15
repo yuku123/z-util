@@ -18,7 +18,8 @@ import java.io.FileOutputStream;
 public class A {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws Exception {
@@ -43,7 +44,7 @@ class MyClassVisitor extends ClassVisitor implements Opcodes {
 
     /**
      * MyClassVisitor方法。
-     *      * @param cv ClassVisitor类型参数
+     * * @param cv ClassVisitor类型参数
      */
     public MyClassVisitor(ClassVisitor cv) {
         super(ASM5, cv);
@@ -83,18 +84,18 @@ class MyClassVisitor extends ClassVisitor implements Opcodes {
     }
 
     class MyMethodVisitor extends MethodVisitor implements Opcodes {
-    /**
-     * MyMethodVisitor方法。
-     *      * @param mv MethodVisitor类型参数
-     */
+        /**
+         * MyMethodVisitor方法。
+         * * @param mv MethodVisitor类型参数
+         */
         public MyMethodVisitor(MethodVisitor mv) {
             super(Opcodes.ASM5, mv);
         }
 
         @Override
-    /**
-     * visitCode方法。
-     */
+        /**
+         * visitCode方法。
+         */
         public void visitCode() {
             super.visitCode();
             mv.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
@@ -103,10 +104,10 @@ class MyClassVisitor extends ClassVisitor implements Opcodes {
         }
 
         @Override
-    /**
-     * visitInsn方法。
-     *      * @param opcode int类型参数
-     */
+        /**
+         * visitInsn方法。
+         *      * @param opcode int类型参数
+         */
         public void visitInsn(int opcode) {
             if ((opcode >= Opcodes.IRETURN && opcode <= Opcodes.RETURN) || opcode == Opcodes.ATHROW) {
                 //方法在返回之前，打印"end"

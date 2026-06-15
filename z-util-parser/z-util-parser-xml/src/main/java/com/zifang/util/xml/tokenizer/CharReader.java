@@ -9,6 +9,7 @@ import java.io.Reader;
  *
  * @author zifang
  */
+
 /**
  * CharReader类。
  */
@@ -26,7 +27,7 @@ public class CharReader {
 
     /**
      * CharReader方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
      */
     public CharReader(Reader reader) {
         this.reader = reader;
@@ -38,6 +39,7 @@ public class CharReader {
      */
     /**
      * peek方法。
+     *
      * @return char类型返回值
      */
     public char peek() throws IOException {
@@ -55,6 +57,7 @@ public class CharReader {
      */
     /**
      * peekPrevious方法。
+     *
      * @return char类型返回值
      */
     public char peekPrevious() {
@@ -69,6 +72,7 @@ public class CharReader {
      */
     /**
      * peekNext方法。
+     *
      * @return char类型返回值
      */
     public char peekNext() throws IOException {
@@ -88,6 +92,7 @@ public class CharReader {
      */
     /**
      * next方法。
+     *
      * @return char类型返回值
      */
     public char next() throws IOException {
@@ -117,6 +122,7 @@ public class CharReader {
      */
     /**
      * hasMore方法。
+     *
      * @return boolean类型返回值
      */
     public boolean hasMore() throws IOException {

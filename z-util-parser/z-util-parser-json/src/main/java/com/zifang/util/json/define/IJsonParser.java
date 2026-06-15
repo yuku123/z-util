@@ -6,6 +6,7 @@ package com.zifang.util.json.define;
  * @author zifang
  * @see com.zifang.util.json.parser.Parser
  */
+
 /**
  * IJsonParser接口。
  */

@@ -1,17 +1,28 @@
 package com.zifang.util.json;
 
-import com.zifang.util.dsl.g4.*;
-import com.zifang.util.dsl.g4.model.*;
-import com.zifang.util.dsl.ast.*;
-import com.zifang.util.dsl.core.*;
-import com.zifang.util.dsl.token.*;
+import com.zifang.util.dsl.core.ASTNode;
+import com.zifang.util.dsl.core.TokenReader;
+import com.zifang.util.dsl.g4.DynamicLexer;
+import com.zifang.util.dsl.g4.DynamicParser;
+import com.zifang.util.dsl.g4.model.G4Rule;
+import com.zifang.util.dsl.token.Token;
 import org.junit.Test;
-import java.util.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * JsonDebug19Test类。
  */
 public class JsonDebug19Test {
+
+    private static String loadG4(String name) throws Exception {
+        java.io.InputStream is = JsonDebug19Test.class.getClassLoader().getResourceAsStream(name);
+        if (is == null) throw new Exception("Resource not found: " + name);
+        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+        is.close();
+        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+    }
 
     @Test
     /**
@@ -128,16 +139,11 @@ public class JsonDebug19Test {
     }
 
     private void printTree(ASTNode node, String indent) {
-        if (node == null) { System.out.println(indent + "null"); return; }
+        if (node == null) {
+            System.out.println(indent + "null");
+            return;
+        }
         System.out.println(indent + "type=" + node.getType() + " text='" + node.getText() + "' children=" + node.getChildren().size());
         for (ASTNode child : node.getChildren()) printTree(child, indent + "  ");
-    }
-
-    private static String loadG4(String name) throws Exception {
-        java.io.InputStream is = JsonDebug19Test.class.getClassLoader().getResourceAsStream(name);
-        if (is == null) throw new Exception("Resource not found: " + name);
-        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
-        is.close();
-        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
     }
 }

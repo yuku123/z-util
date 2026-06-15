@@ -16,12 +16,6 @@ public abstract class ButtonFrame extends JFrame {
     protected JButton redButton;
 
     /**
-     * addEventHandlers方法。
-     * @return abstract void类型返回值
-     */
-    protected abstract void addEventHandlers();
-
-    /**
      * ButtonFrame方法。
      */
     public ButtonFrame() {
@@ -40,4 +34,11 @@ public abstract class ButtonFrame extends JFrame {
 
         addEventHandlers();
     }
+
+    /**
+     * addEventHandlers方法。
+     *
+     * @return abstract void类型返回值
+     */
+    protected abstract void addEventHandlers();
 }

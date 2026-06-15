@@ -9,118 +9,15 @@ import java.util.concurrent.atomic.AtomicLong;
  * 原子变量不使用任何锁或者其他同步机制来保护它们的值的访问。他们的全部操作都是基于CAS操作。它保证几个线程可以同时操作一个原子对象也不会出现数据不一致的错误，并且它的性能比使用受同步机制保护的正常变量要好。
  * 在这个指南，你将学习怎样使用原子变量实现一个银行账户和2个不同的任务：一个存钱到账户和另一个从账户提取钱。在例子的实现中，你将使用 AtomicLong 类。
  */
+
 /**
  * AtomicLongDemo类。
  */
 public class AtomicLongDemo {
-    // 1. 创建一个类，名为 Account，来模拟银行账号。
-    static class Account {
-        // 2. 声明一个私有 AtomicLong 属性，名为 balance，用来储存账号的余额。
-        private AtomicLong balance;
-
-        // 3. 实现类的构造函数，初始化它的属性值。
-    /**
-     * Account方法。
-     */
-        public Account() {
-            balance = new AtomicLong();
-        }
-
-        // 4. 实现一个方法，名为 getBalance()，用来返回余额属性值。
-    /**
-     * getBalance方法。
-     * @return long类型返回值
-     */
-        public long getBalance() {
-            return balance.get();
-        }
-
-        // 5. 实现一个方法，名为 setBalance()，用来设置余额属性值。
-    /**
-     * setBalance方法。
-     *      * @param balance long类型参数
-     */
-        public void setBalance(long balance) {
-            this.balance.set(balance);
-        }
-
-        // 6. 实现一个方法，名为 addAmount()，来增加余额属性值。
-    /**
-     * addAmount方法。
-     *      * @param amount long类型参数
-     */
-        public void addAmount(long amount) {
-            this.balance.getAndAdd(amount);
-        }
-
-        // 7. 实现一个方法，名为 substractAmount() 来减少余额属性值。
-    /**
-     * subtractAmount方法。
-     *      * @param amount long类型参数
-     */
-        public void subtractAmount(long amount) {
-            this.balance.getAndAdd(-amount);
-        }
-    }
-
-    // 8. 创建一个类，名为 并一定实现 Runnable 接口。这个类会模拟公司付款。
-    static class Company implements Runnable {
-        // 9. 声明一个私有 Account 属性，名为 account。
-        private Account account;
-
-        // 10. 实现类的构造函数，初始化它的属性值。
-    /**
-     * Company方法。
-     *      * @param account Account类型参数
-     */
-        public Company(Account account) {
-            this.account = account;
-        }
-
-        // 11. 实现任务的 run() 方法。 使用 account 的
-        // addAmount()方法来让它的余额做10次的递增，递增额为1000。
-        @Override
-    /**
-     * run方法。
-     */
-        public void run() {
-            for (int i = 0; i < 10; i++) {
-                account.addAmount(1000);
-            }
-        }
-    }
-
-    // 12. 创建一个类，名为 Bank，并一定实现 Runnable 接口。这个类会模拟从一个账号提款。
-    static class Bank implements Runnable {
-        // 13. 声明一个私有 Account 属性，名为 account。
-        private Account account;
-
-        // 14. 实现类的构造函数，初始化它的属性值。
-    /**
-     * Bank方法。
-     *      * @param account Account类型参数
-     */
-        public Bank(Account account) {
-            this.account = account;
-        }
-
-        // 15. 实现任务的 run() 方法。使用 account 的 subtractAmount()
-        // 方法来让它的余额做10次的递减，递减额为1000。
-        @Override
-    /**
-     * run方法。
-     */
-        public void run() {
-            for (int i = 0; i < 10; i++) {
-                account.subtractAmount(1000);
-            }
-        }
-    }
-
-    // 16. 创建例子的主类通过创建一个类，名为 Main 并添加 main()方法。
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -145,6 +42,120 @@ public class AtomicLongDemo {
             System.out.printf("Account : Final Balance: %d\n", account.getBalance());
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    // 1. 创建一个类，名为 Account，来模拟银行账号。
+    static class Account {
+        // 2. 声明一个私有 AtomicLong 属性，名为 balance，用来储存账号的余额。
+        private AtomicLong balance;
+
+        // 3. 实现类的构造函数，初始化它的属性值。
+
+        /**
+         * Account方法。
+         */
+        public Account() {
+            balance = new AtomicLong();
+        }
+
+        // 4. 实现一个方法，名为 getBalance()，用来返回余额属性值。
+
+        /**
+         * getBalance方法。
+         *
+         * @return long类型返回值
+         */
+        public long getBalance() {
+            return balance.get();
+        }
+
+        // 5. 实现一个方法，名为 setBalance()，用来设置余额属性值。
+
+        /**
+         * setBalance方法。
+         * * @param balance long类型参数
+         */
+        public void setBalance(long balance) {
+            this.balance.set(balance);
+        }
+
+        // 6. 实现一个方法，名为 addAmount()，来增加余额属性值。
+
+        /**
+         * addAmount方法。
+         * * @param amount long类型参数
+         */
+        public void addAmount(long amount) {
+            this.balance.getAndAdd(amount);
+        }
+
+        // 7. 实现一个方法，名为 substractAmount() 来减少余额属性值。
+
+        /**
+         * subtractAmount方法。
+         * * @param amount long类型参数
+         */
+        public void subtractAmount(long amount) {
+            this.balance.getAndAdd(-amount);
+        }
+    }
+
+    // 8. 创建一个类，名为 并一定实现 Runnable 接口。这个类会模拟公司付款。
+    static class Company implements Runnable {
+        // 9. 声明一个私有 Account 属性，名为 account。
+        private Account account;
+
+        // 10. 实现类的构造函数，初始化它的属性值。
+
+        /**
+         * Company方法。
+         * * @param account Account类型参数
+         */
+        public Company(Account account) {
+            this.account = account;
+        }
+
+        // 11. 实现任务的 run() 方法。 使用 account 的
+        // addAmount()方法来让它的余额做10次的递增，递增额为1000。
+        @Override
+        /**
+         * run方法。
+         */
+        public void run() {
+            for (int i = 0; i < 10; i++) {
+                account.addAmount(1000);
+            }
+        }
+    }
+
+    // 16. 创建例子的主类通过创建一个类，名为 Main 并添加 main()方法。
+
+    // 12. 创建一个类，名为 Bank，并一定实现 Runnable 接口。这个类会模拟从一个账号提款。
+    static class Bank implements Runnable {
+        // 13. 声明一个私有 Account 属性，名为 account。
+        private Account account;
+
+        // 14. 实现类的构造函数，初始化它的属性值。
+
+        /**
+         * Bank方法。
+         * * @param account Account类型参数
+         */
+        public Bank(Account account) {
+            this.account = account;
+        }
+
+        // 15. 实现任务的 run() 方法。使用 account 的 subtractAmount()
+        // 方法来让它的余额做10次的递减，递减额为1000。
+        @Override
+        /**
+         * run方法。
+         */
+        public void run() {
+            for (int i = 0; i < 10; i++) {
+                account.subtractAmount(1000);
+            }
         }
     }
 }

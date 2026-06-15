@@ -9,7 +9,6 @@ import com.zifang.util.proxy.a.model.constantpool.*;
 import com.zifang.util.proxy.a.model.field.FieldInfo;
 import com.zifang.util.proxy.a.model.method.MethodInfo;
 import com.zifang.util.proxy.a.model.readtype.U1;
-import com.zifang.util.proxy.a.model.readtype.U2;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -231,8 +230,12 @@ public class SrcCreator {
             String type;
             int width;
             switch (c) {
-                case 'B': case 'C': case 'F': case 'I':
-                case 'S': case 'Z':
+                case 'B':
+                case 'C':
+                case 'F':
+                case 'I':
+                case 'S':
+                case 'Z':
                     type = "int";
                     width = 1;
                     break;
@@ -261,13 +264,27 @@ public class SrcCreator {
                     char elemType = paramTypes.charAt(j);
                     String elemTypeStr = null;
                     switch (elemType) {
-                        case 'B': elemTypeStr = "byte"; break;
-                        case 'C': elemTypeStr = "char"; break;
-                        case 'F': elemTypeStr = "float"; break;
-                        case 'I': elemTypeStr = "int"; break;
-                        case 'J': elemTypeStr = "long"; break;
-                        case 'S': elemTypeStr = "short"; break;
-                        case 'Z': elemTypeStr = "boolean"; break;
+                        case 'B':
+                            elemTypeStr = "byte";
+                            break;
+                        case 'C':
+                            elemTypeStr = "char";
+                            break;
+                        case 'F':
+                            elemTypeStr = "float";
+                            break;
+                        case 'I':
+                            elemTypeStr = "int";
+                            break;
+                        case 'J':
+                            elemTypeStr = "long";
+                            break;
+                        case 'S':
+                            elemTypeStr = "short";
+                            break;
+                        case 'Z':
+                            elemTypeStr = "boolean";
+                            break;
                         case 'L':
                             int end = paramTypes.indexOf(';', j);
                             elemTypeStr = paramTypes.substring(j + 1, end);
@@ -535,7 +552,7 @@ public class SrcCreator {
                                           List<AbstractConstantPool> poolList) {
         for (DecompilerInstruction inst : instructions) {
             if (("invokespecial".equals(inst.opcode) || "invokestatic".equals(inst.opcode)
-                 || "invokevirtual".equals(inst.opcode)) && inst.operand != null) {
+                    || "invokevirtual".equals(inst.opcode)) && inst.operand != null) {
                 String methodName = resolveMethodName((Integer) inst.operand, poolList);
                 if (methodName != null) {
                     // 跳过 Object.<init> 调用，在构造方法中自动调用
@@ -553,20 +570,34 @@ public class SrcCreator {
      * 从指令序列推断值
      */
     private static String inferValue(List<DecompilerInstruction> instructions,
-                                      List<AbstractConstantPool> poolList) {
+                                     List<AbstractConstantPool> poolList) {
         if (instructions.isEmpty()) return null;
 
         List<String> stack = new ArrayList<>();
         for (DecompilerInstruction inst : instructions) {
             switch (inst.opcode) {
                 // int 常量
-                case "iconst_m1": stack.add("-1"); break;
-                case "iconst_0": stack.add("0"); break;
-                case "iconst_1": stack.add("1"); break;
-                case "iconst_2": stack.add("2"); break;
-                case "iconst_3": stack.add("3"); break;
-                case "iconst_4": stack.add("4"); break;
-                case "iconst_5": stack.add("5"); break;
+                case "iconst_m1":
+                    stack.add("-1");
+                    break;
+                case "iconst_0":
+                    stack.add("0");
+                    break;
+                case "iconst_1":
+                    stack.add("1");
+                    break;
+                case "iconst_2":
+                    stack.add("2");
+                    break;
+                case "iconst_3":
+                    stack.add("3");
+                    break;
+                case "iconst_4":
+                    stack.add("4");
+                    break;
+                case "iconst_5":
+                    stack.add("5");
+                    break;
                 case "bipush":
                 case "sipush":
                     if (inst.operand != null) {
@@ -574,15 +605,29 @@ public class SrcCreator {
                     }
                     break;
                 // long 常量
-                case "lconst_0": stack.add("0L"); break;
-                case "lconst_1": stack.add("1L"); break;
+                case "lconst_0":
+                    stack.add("0L");
+                    break;
+                case "lconst_1":
+                    stack.add("1L");
+                    break;
                 // float 常量
-                case "fconst_0": stack.add("0.0f"); break;
-                case "fconst_1": stack.add("1.0f"); break;
-                case "fconst_2": stack.add("2.0f"); break;
+                case "fconst_0":
+                    stack.add("0.0f");
+                    break;
+                case "fconst_1":
+                    stack.add("1.0f");
+                    break;
+                case "fconst_2":
+                    stack.add("2.0f");
+                    break;
                 // double 常量
-                case "dconst_0": stack.add("0.0"); break;
-                case "dconst_1": stack.add("1.0"); break;
+                case "dconst_0":
+                    stack.add("0.0");
+                    break;
+                case "dconst_1":
+                    stack.add("1.0");
+                    break;
                 // 加载常量 (ldc) - 从常量池加载
                 case "ldc":
                 case "ldc_w":
@@ -610,7 +655,7 @@ public class SrcCreator {
                     break;
                 default:
                     if (!inst.opcode.startsWith("istore") && !inst.opcode.startsWith("astore")
-                        && !inst.opcode.startsWith("putstatic") && !inst.opcode.startsWith("putfield")) {
+                            && !inst.opcode.startsWith("putstatic") && !inst.opcode.startsWith("putfield")) {
                         // stack.add("/* " + inst.opcode + " */");
                     }
                     break;
@@ -737,7 +782,7 @@ public class SrcCreator {
      * 解码字节码指令
      */
     private static List<DecompilerInstruction> decodeInstructions(List<U1> codeBytes,
-                                                                   List<AbstractConstantPool> poolList) {
+                                                                  List<AbstractConstantPool> poolList) {
         List<DecompilerInstruction> instructions = new ArrayList<>();
 
         int pc = 0;
@@ -782,7 +827,7 @@ public class SrcCreator {
      * 收集局部变量信息
      */
     private static void collectLocalVariables(Code codeAttr, ClassFile classFile,
-                                            Map<Integer, String> localVars) {
+                                              Map<Integer, String> localVars) {
         if (codeAttr.getAttributes() == null) {
             return;
         }

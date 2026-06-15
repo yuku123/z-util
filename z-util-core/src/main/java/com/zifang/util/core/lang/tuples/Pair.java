@@ -8,7 +8,8 @@ public class Pair<A, B> extends Unit<A> {
 
     /**
      * Pair方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      */
     public Pair(A a, B b) {
@@ -18,6 +19,7 @@ public class Pair<A, B> extends Unit<A> {
 
     /**
      * getB方法。
+     *
      * @return B类型返回值
      */
     public B getB() {
@@ -26,7 +28,7 @@ public class Pair<A, B> extends Unit<A> {
 
     /**
      * setB方法。
-     *      * @param b B类型参数
+     * * @param b B类型参数
      */
     public void setB(B b) {
         this.b = b;

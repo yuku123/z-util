@@ -7,16 +7,17 @@ public class TraditionalThreadCommunication {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
         final Business business = new Business();
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 for (int i = 0; i < 5; i++) {
                     business.sub(i);
@@ -37,7 +38,8 @@ class Business {
 
     /**
      * sub方法。
-     *      * @param i int类型参数
+     * * @param i int类型参数
+     *
      * @return synchronized void类型返回值
      */
     public synchronized void sub(int i) {
@@ -57,7 +59,8 @@ class Business {
 
     /**
      * main方法。
-     *      * @param i int类型参数
+     * * @param i int类型参数
+     *
      * @return synchronized void类型返回值
      */
     public synchronized void main(int i) {

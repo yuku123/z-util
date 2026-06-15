@@ -36,46 +36,6 @@ public enum DType {
     }
 
     /**
-     * getName方法。
-     * @return String类型返回值
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * getSize方法。
-     * @return int类型返回值
-     */
-    public int getSize() {
-        return size;
-    }
-
-    /**
-     * isInteger方法。
-     * @return boolean类型返回值
-     */
-    public boolean isInteger() {
-        return integer;
-    }
-
-    /**
-     * isFloat方法。
-     * @return boolean类型返回值
-     */
-    public boolean isFloat() {
-        return this == FLOAT32 || this == FLOAT64;
-    }
-
-    /**
-     * isNumeric方法。
-     * @return boolean类型返回值
-     */
-    public boolean isNumeric() {
-        return integer || isFloat();
-    }
-
-    /**
      * 从字符串解析 dtype
      */
     public static DType fromString(String dtype) {
@@ -85,5 +45,50 @@ public enum DType {
         } catch (IllegalArgumentException e) {
             return FLOAT64;
         }
+    }
+
+    /**
+     * getName方法。
+     *
+     * @return String类型返回值
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * getSize方法。
+     *
+     * @return int类型返回值
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * isInteger方法。
+     *
+     * @return boolean类型返回值
+     */
+    public boolean isInteger() {
+        return integer;
+    }
+
+    /**
+     * isFloat方法。
+     *
+     * @return boolean类型返回值
+     */
+    public boolean isFloat() {
+        return this == FLOAT32 || this == FLOAT64;
+    }
+
+    /**
+     * isNumeric方法。
+     *
+     * @return boolean类型返回值
+     */
+    public boolean isNumeric() {
+        return integer || isFloat();
     }
 }

@@ -9,6 +9,7 @@ package com.zifang.util.zex.sort;
  * @author zifang
  * @version 1.0
  */
+
 import java.util.Arrays;
 
 /**
@@ -18,8 +19,9 @@ public class Sort03插入 {
 
     /**
      * insert方法。
-     *      * @param a int[]类型参数
-     * @param index int类型参数
+     * * @param a int[]类型参数
+     *
+     * @param index   int类型参数
      * @param replace int类型参数
      * @return static void类型返回值
      */
@@ -29,10 +31,12 @@ public class Sort03插入 {
     }
 
     // end 是0位开始
+
     /**
      * index方法。
-     *      * @param a int[]类型参数
-     * @param end int类型参数
+     * * @param a int[]类型参数
+     *
+     * @param end     int类型参数
      * @param compare int类型参数
      * @return static int类型返回值
      */
@@ -57,7 +61,8 @@ public class Sort03插入 {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

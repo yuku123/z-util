@@ -36,8 +36,8 @@ public class FieldInjector {
         Object value = context.resolve(type);
         if (value == null) {
             throw new IllegalStateException(
-                "Cannot resolve dependency for field '" + field.getName() +
-                "' of type " + type.getName() + " in " + target.getClass().getName());
+                    "Cannot resolve dependency for field '" + field.getName() +
+                            "' of type " + type.getName() + " in " + target.getClass().getName());
         }
         boolean wasAccessible = field.isAccessible();
         field.setAccessible(true);

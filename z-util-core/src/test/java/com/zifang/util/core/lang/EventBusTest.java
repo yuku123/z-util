@@ -4,25 +4,9 @@ import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class EventBusTest {
-
-    static class OrderEvent {
-        final String orderId;
-        OrderEvent(String id) { this.orderId = id; }
-    }
-
-    static class MyListener {
-        final AtomicInteger received = new AtomicInteger();
-        String lastOrderId;
-
-        @EventBus.Subscribe
-        public void onOrder(OrderEvent e) {
-            received.incrementAndGet();
-            lastOrderId = e.orderId;
-        }
-    }
 
     @Test
     public void testRegisterAndPost() {
@@ -61,5 +45,24 @@ public class EventBusTest {
         EventBus bus = new EventBus();
         // 不应抛异常
         bus.post(null);
+    }
+
+    static class OrderEvent {
+        final String orderId;
+
+        OrderEvent(String id) {
+            this.orderId = id;
+        }
+    }
+
+    static class MyListener {
+        final AtomicInteger received = new AtomicInteger();
+        String lastOrderId;
+
+        @EventBus.Subscribe
+        public void onOrder(OrderEvent e) {
+            received.incrementAndGet();
+            lastOrderId = e.orderId;
+        }
     }
 }

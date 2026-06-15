@@ -8,7 +8,8 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
     /**
      * Quartet方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      * @param c C类型参数
      * @param d D类型参数
@@ -20,6 +21,7 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
     /**
      * getD方法。
+     *
      * @return D类型返回值
      */
     public D getD() {
@@ -28,7 +30,7 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
     /**
      * setD方法。
-     *      * @param d D类型参数
+     * * @param d D类型参数
      */
     public void setD(D d) {
         this.d = d;

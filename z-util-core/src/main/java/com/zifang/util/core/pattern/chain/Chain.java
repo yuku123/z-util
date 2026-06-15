@@ -1,7 +1,7 @@
 package com.zifang.util.core.pattern.chain;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * 链接口
@@ -12,6 +12,53 @@ import java.util.function.*;
  * @author zifang
  */
 public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
+
+    /**
+     * 创建空链
+     */
+    static <C extends ChainContext<?, ?>> Chain<C> empty() {
+        return new SimpleChain<>();
+    }
+
+    /**
+     * 创建只有一个处理器的链
+     */
+    static <C extends ChainContext<?, ?>> Chain<C> of(Processor<C> processor) {
+        return new SimpleChain<>(processor);
+    }
+
+    /**
+     * 创建链并添加多个处理器
+     */
+    @SafeVarargs
+    static <C extends ChainContext<?, ?>> Chain<C> of(Processor<C>... processors) {
+        Chain<C> chain = new SimpleChain<>();
+        for (Processor<C> p : processors) {
+            chain.addProcessor(p);
+        }
+        return chain;
+    }
+
+    /**
+     * 创建一个命名链
+     */
+    static <C extends ChainContext<?, ?>> Chain<C> named(String name) {
+        return new NamedChain<>(name);
+    }
+
+    /**
+     * 创建一个分支链 - 根据条件选择子链
+     */
+    static <C extends ChainContext<?, ?>> BranchChain<C> branch(Predicate<C> condition) {
+        return new BranchChain<>(condition);
+    }
+
+    /**
+     * 创建一个链构建器
+     */
+    static <C extends ChainContext<?, ?>> ChainBuilder<C> builder() {
+        return ChainBuilder.create();
+    }
 
     /**
      * 获取链名称
@@ -87,53 +134,6 @@ public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
     }
 
     /**
-     * 创建空链
-     */
-    static <C extends ChainContext<?, ?>> Chain<C> empty() {
-        return new SimpleChain<>();
-    }
-
-    /**
-     * 创建只有一个处理器的链
-     */
-    static <C extends ChainContext<?, ?>> Chain<C> of(Processor<C> processor) {
-        return new SimpleChain<>(processor);
-    }
-
-    /**
-     * 创建链并添加多个处理器
-     */
-    @SafeVarargs
-    static <C extends ChainContext<?, ?>> Chain<C> of(Processor<C>... processors) {
-        Chain<C> chain = new SimpleChain<>();
-        for (Processor<C> p : processors) {
-            chain.addProcessor(p);
-        }
-        return chain;
-    }
-
-    /**
-     * 创建一个命名链
-     */
-    static <C extends ChainContext<?, ?>> Chain<C> named(String name) {
-        return new NamedChain<>(name);
-    }
-
-    /**
-     * 创建一个分支链 - 根据条件选择子链
-     */
-    static <C extends ChainContext<?, ?>> BranchChain<C> branch(Predicate<C> condition) {
-        return new BranchChain<>(condition);
-    }
-
-    /**
-     * 创建一个链构建器
-     */
-    static <C extends ChainContext<?, ?>> ChainBuilder<C> builder() {
-        return ChainBuilder.create();
-    }
-
-    /**
      * 执行链并收集结果
      */
     default ChainResult<C> executeWithResult(C context) {
@@ -149,62 +149,69 @@ public interface Chain<C extends ChainContext<?, ?>> extends Processor<C> {
         private final C context;
         private final ProcessorResult result;
 
-    /**
-     * ChainResult方法。
-     *      * @param chain ChainC类型参数
-     * @param context C类型参数
-     * @param result ProcessorResult类型参数
-     */
+        /**
+         * ChainResult方法。
+         * * @param chain ChainC类型参数
+         *
+         * @param context C类型参数
+         * @param result  ProcessorResult类型参数
+         */
         public ChainResult(Chain<C> chain, C context, ProcessorResult result) {
             this.chain = chain;
             this.context = context;
             this.result = result;
         }
 
-    /**
-     * getChain方法。
-     * @return Chain<C>类型返回值
-     */
+        /**
+         * getChain方法。
+         *
+         * @return Chain<C>类型返回值
+         */
         public Chain<C> getChain() {
             return chain;
         }
 
-    /**
-     * getContext方法。
-     * @return C类型返回值
-     */
+        /**
+         * getContext方法。
+         *
+         * @return C类型返回值
+         */
         public C getContext() {
             return context;
         }
 
-    /**
-     * getResult方法。
-     * @return ProcessorResult类型返回值
-     */
+        /**
+         * getResult方法。
+         *
+         * @return ProcessorResult类型返回值
+         */
         public ProcessorResult getResult() {
             return result;
         }
 
-    /**
-     * isSuccess方法。
-     * @return boolean类型返回值
-     */
+        /**
+         * isSuccess方法。
+         *
+         * @return boolean类型返回值
+         */
         public boolean isSuccess() {
             return result.isSuccess();
         }
 
-    /**
-     * isFinished方法。
-     * @return boolean类型返回值
-     */
+        /**
+         * isFinished方法。
+         *
+         * @return boolean类型返回值
+         */
         public boolean isFinished() {
             return result.isFinished();
         }
 
-    /**
-     * isContinued方法。
-     * @return boolean类型返回值
-     */
+        /**
+         * isContinued方法。
+         *
+         * @return boolean类型返回值
+         */
         public boolean isContinued() {
             return result.shouldContinue();
         }

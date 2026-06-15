@@ -1,7 +1,8 @@
 package com.zifang.util.monitor;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * OsMonitorTest类。

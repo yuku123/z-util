@@ -14,12 +14,18 @@ import java.util.Set;
  */
 public interface FeatureStore {
 
-    /** 开关是否启用。 */
+    /**
+     * 开关是否启用。
+     */
     boolean isEnabled(String featureKey);
 
-    /** 开关是否启用 + 检查属性条件（attr != null 时按值匹配）。 */
+    /**
+     * 开关是否启用 + 检查属性条件（attr != null 时按值匹配）。
+     */
     boolean isEnabled(String featureKey, Map<String, String> attributes);
 
-    /** 列出所有特性 key。 */
+    /**
+     * 列出所有特性 key。
+     */
     Set<String> featureKeys();
 }

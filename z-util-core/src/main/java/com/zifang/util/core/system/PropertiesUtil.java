@@ -51,7 +51,8 @@ public final class PropertiesUtil {
 
     /**
      * properties方法。
-     *      * @param in InputStream类型参数
+     * * @param in InputStream类型参数
+     *
      * @return static Map<String, String>类型返回值
      */
     public static Map<String, String> properties(InputStream in) {

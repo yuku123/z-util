@@ -1,6 +1,5 @@
 package com.zifang.util.core.schedule;
 
-import org.quartz.JobKey;
 import org.quartz.Scheduler;
 
 import java.util.Map;
@@ -70,12 +69,12 @@ public class JobBuilder {
      */
     public static class JobDetailBuilder {
         private final Class<? extends Job> jobClass;
+        private final java.util.Map<String, Object> jobData = new java.util.HashMap<>();
         private String name;
         private String group = Scheduler.DEFAULT_GROUP;
         private String description;
         private boolean durable = false;
         private boolean requestsRecovery = false;
-        private final java.util.Map<String, Object> jobData = new java.util.HashMap<>();
 
         JobDetailBuilder(Class<? extends Job> jobClass) {
             this.jobClass = Objects.requireNonNull(jobClass, "jobClass must not be null");

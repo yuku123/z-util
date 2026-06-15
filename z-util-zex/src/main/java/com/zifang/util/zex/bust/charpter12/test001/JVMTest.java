@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.charpter12.test001;
  * @author zifang
  * @version 1.0
  */
+
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
@@ -19,7 +20,8 @@ import java.lang.management.ThreadMXBean;
 public class JVMTest {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws Exception {

@@ -1,19 +1,19 @@
 package com.zifang.util.parser.csv;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
 /**
  * Test cases for CsvParser, CsvReader, and CsvWriter
  */
+
 /**
  * CsvParserTest类。
  */
@@ -365,7 +365,7 @@ public class CsvParserTest {
     public void testBOMHeader() {
         CsvParser parser = CsvParser.builder().build();
         // UTF-8 BOM (EF BB BF) + content
-        byte[] bomContent = new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF, 'n', 'a', 'm', 'e', ',', 'a', 'g', 'e'};
+        byte[] bomContent = new byte[]{(byte) 0xEF, (byte) 0xBB, (byte) 0xBF, 'n', 'a', 'm', 'e', ',', 'a', 'g', 'e'};
         String csvWithBOM = new String(bomContent, java.nio.charset.StandardCharsets.UTF_8);
         List<String[]> result = parser.parse(csvWithBOM);
 
@@ -390,7 +390,7 @@ public class CsvParserTest {
 
         byte[] writtenBytes = baos.toByteArray();
         // Verify BOM is NOT added by default writer
-        assertFalse(writtenBytes.length > 0 && writtenBytes[0] == (byte)0xEF);
+        assertFalse(writtenBytes.length > 0 && writtenBytes[0] == (byte) 0xEF);
 
         // Parse the written content
         String csvContent = baos.toString("UTF-8");

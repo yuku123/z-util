@@ -5,6 +5,7 @@ package com.zifang.util.xml.model;
  *
  * @author zifang
  */
+
 /**
  * XDeclaration类。
  */
@@ -24,8 +25,9 @@ public class XDeclaration {
 
     /**
      * XDeclaration方法。
-     *      * @param version String类型参数
-     * @param encoding String类型参数
+     * * @param version String类型参数
+     *
+     * @param encoding   String类型参数
      * @param standalone String类型参数
      */
     public XDeclaration(String version, String encoding, String standalone) {
@@ -36,6 +38,7 @@ public class XDeclaration {
 
     /**
      * getVersion方法。
+     *
      * @return String类型返回值
      */
     public String getVersion() {
@@ -44,7 +47,7 @@ public class XDeclaration {
 
     /**
      * setVersion方法。
-     *      * @param version String类型参数
+     * * @param version String类型参数
      */
     public void setVersion(String version) {
         this.version = version;
@@ -52,6 +55,7 @@ public class XDeclaration {
 
     /**
      * getEncoding方法。
+     *
      * @return String类型返回值
      */
     public String getEncoding() {
@@ -60,7 +64,7 @@ public class XDeclaration {
 
     /**
      * setEncoding方法。
-     *      * @param encoding String类型参数
+     * * @param encoding String类型参数
      */
     public void setEncoding(String encoding) {
         this.encoding = encoding;
@@ -68,6 +72,7 @@ public class XDeclaration {
 
     /**
      * getStandalone方法。
+     *
      * @return String类型返回值
      */
     public String getStandalone() {
@@ -76,7 +81,7 @@ public class XDeclaration {
 
     /**
      * setStandalone方法。
-     *      * @param standalone String类型参数
+     * * @param standalone String类型参数
      */
     public void setStandalone(String standalone) {
         this.standalone = standalone;

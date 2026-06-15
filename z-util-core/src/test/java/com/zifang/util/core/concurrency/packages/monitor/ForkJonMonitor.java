@@ -11,72 +11,16 @@ import java.util.concurrent.TimeUnit;
  * 此框架是为了解决可以使用 divide 和 conquer 技术，使用 fork() 和 join() 操作把任务分成小块的问题而设计的。主要的类实现这个行为的是 ForkJoinPool 类。
  * 在这个指南，你将学习从ForkJoinPool类可以获取的信息和如何获取这些信息。
  */
+
 /**
  * ForkJonMonitor类。
  */
 public class ForkJonMonitor {
 
-    // 1. 创建一个类，名为 Task， 扩展 RecursiveAction 类。
-    static class Task extends RecursiveAction {
-
-        // 2. 声明一个私有 int array 属性，名为 array，用来储存你要增加的 array 的元素。
-        private int[] array;
-
-        // 3. 声明2个私有 int 属性，名为 start 和 end，用来储存 此任务已经处理的元素块的头和尾的位置。
-        private int start;
-        private int end;
-
-        // 4. 实现类的构造函数，初始化属性值。
-    /**
-     * Task方法。
-     *      * @param array int[]类型参数
-     * @param start int类型参数
-     * @param end int类型参数
-     */
-        public Task(int[] array, int start, int end) {
-            this.array = array;
-            this.start = start;
-            this.end = end;
-        }
-
-        // 5. 用任务的中心逻辑来实现 compute()
-        // 方法。如果此任务已经处理了超过100任务，那么把元素集分成2部分，再创建2个任务分别来执行这些部分，使用 fork()
-        // 方法开始执行，并使用
-        // join() 方法等待它的终结。
-    /**
-     * compute方法。
-     */
-        protected void compute() {
-            if (end - start > 100) {
-                int mid = (start + end) / 2;
-                Task task1 = new Task(array, start, mid);
-                Task task2 = new Task(array, mid, end);
-
-                task1.fork();
-                task2.fork();
-
-                task1.join();
-                task2.join();
-
-                // 6. 如果任务已经处理了100个元素或者更少，那么在每次操作之后让线程进入休眠5毫秒来增加元素。
-            } else {
-                for (int i = start; i < end; i++) {
-                    array[i]++;
-
-                    try {
-                        Thread.sleep(5);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    }
-
-    // 7. 创建例子的主类通过创建一个类，名为 Main 并添加 main()方法。
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws Exception {
@@ -110,6 +54,8 @@ public class ForkJonMonitor {
         System.out.printf("Main: End of the program.\n");
     }
 
+    // 7. 创建例子的主类通过创建一个类，名为 Main 并添加 main()方法。
+
     // 16. 实现 showLog() 方法。它接收 ForkJoinPool 对象作为参数和写关于线程和任务的执行的状态的信息。
     private static void showLog(ForkJoinPool pool) {
         System.out.printf("**********************\n");
@@ -124,6 +70,66 @@ public class ForkJonMonitor {
         System.out.printf("Main: Fork/Join Pool: Steal Count:%d\n", pool.getStealCount());
         System.out.printf("Main: Fork/Join Pool: Terminated :%s\n", pool.isTerminated());
         System.out.printf("**********************\n");
+    }
+
+    // 1. 创建一个类，名为 Task， 扩展 RecursiveAction 类。
+    static class Task extends RecursiveAction {
+
+        // 2. 声明一个私有 int array 属性，名为 array，用来储存你要增加的 array 的元素。
+        private int[] array;
+
+        // 3. 声明2个私有 int 属性，名为 start 和 end，用来储存 此任务已经处理的元素块的头和尾的位置。
+        private int start;
+        private int end;
+
+        // 4. 实现类的构造函数，初始化属性值。
+
+        /**
+         * Task方法。
+         * * @param array int[]类型参数
+         *
+         * @param start int类型参数
+         * @param end   int类型参数
+         */
+        public Task(int[] array, int start, int end) {
+            this.array = array;
+            this.start = start;
+            this.end = end;
+        }
+
+        // 5. 用任务的中心逻辑来实现 compute()
+        // 方法。如果此任务已经处理了超过100任务，那么把元素集分成2部分，再创建2个任务分别来执行这些部分，使用 fork()
+        // 方法开始执行，并使用
+        // join() 方法等待它的终结。
+
+        /**
+         * compute方法。
+         */
+        protected void compute() {
+            if (end - start > 100) {
+                int mid = (start + end) / 2;
+                Task task1 = new Task(array, start, mid);
+                Task task2 = new Task(array, mid, end);
+
+                task1.fork();
+                task2.fork();
+
+                task1.join();
+                task2.join();
+
+                // 6. 如果任务已经处理了100个元素或者更少，那么在每次操作之后让线程进入休眠5毫秒来增加元素。
+            } else {
+                for (int i = start; i < end; i++) {
+                    array[i]++;
+
+                    try {
+                        Thread.sleep(5);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 }
 

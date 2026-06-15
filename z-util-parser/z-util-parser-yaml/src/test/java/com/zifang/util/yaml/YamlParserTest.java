@@ -15,6 +15,7 @@ import static org.junit.Assert.*;
 /**
  * YamlParserTest类。
  */
+
 /**
  * YamlParserTest类。
  */

@@ -1,8 +1,8 @@
 package com.zifang.util.proxy.a.model;
 
+import com.zifang.util.proxy.a.model.constantpool.AbstractConstantPool;
 import com.zifang.util.proxy.a.model.constantpool.ClassInfo;
 import com.zifang.util.proxy.a.model.constantpool.ConstantPoolInfo;
-import com.zifang.util.proxy.a.model.constantpool.AbstractConstantPool;
 import com.zifang.util.proxy.a.model.constantpool.Utf8Info;
 import com.zifang.util.proxy.a.model.field.FieldTable;
 import com.zifang.util.proxy.a.model.inter.InterfaceIndex;
@@ -16,37 +16,59 @@ import com.zifang.util.proxy.a.model.readtype.U4;
  * 代表一个完整的.class文件结构，遵循JVM规范。
  */
 public class ClassFile {
-    /** 魔数，固定为0xCAFEBABE */
+    /**
+     * 魔数，固定为0xCAFEBABE
+     */
     public U4 magic;
 
-    /** 次版本号 */
+    /**
+     * 次版本号
+     */
     public U2 minorVersion;
 
-    /** 主版本号 (52=Java8, 55=Java11, 61=Java17) */
+    /**
+     * 主版本号 (52=Java8, 55=Java11, 61=Java17)
+     */
     public U2 majorVersion;
 
-    /** 常量池大小 */
+    /**
+     * 常量池大小
+     */
     public U2 constantPoolSize;
 
-    /** 常量池内容 */
+    /**
+     * 常量池内容
+     */
     public ConstantPoolInfo poolInfo;
 
-    /** 类的访问标志 (ACC_PUBLIC, ACC_FINAL等) */
+    /**
+     * 类的访问标志 (ACC_PUBLIC, ACC_FINAL等)
+     */
     public U2 accessFlag;
 
-    /** 类索引，指向常量池中的CONSTANT_Class_info */
+    /**
+     * 类索引，指向常量池中的CONSTANT_Class_info
+     */
     public U2 classIndex;
 
-    /** 父类索引，指向常量池中的CONSTANT_Class_info */
+    /**
+     * 父类索引，指向常量池中的CONSTANT_Class_info
+     */
     public U2 superClassIndex;
 
-    /** 接口索引表 */
+    /**
+     * 接口索引表
+     */
     public InterfaceIndex interfaceIndex;
 
-    /** 字段表 */
+    /**
+     * 字段表
+     */
     public FieldTable fieldInfo;
 
-    /** 方法表 */
+    /**
+     * 方法表
+     */
     public MethodTable methodInfo;
 
     /**
@@ -108,6 +130,7 @@ public class ClassFile {
 
     /**
      * getMagic方法。
+     *
      * @return U4类型返回值
      */
     public U4 getMagic() {
@@ -116,7 +139,7 @@ public class ClassFile {
 
     /**
      * setMagic方法。
-     *      * @param magic U4类型参数
+     * * @param magic U4类型参数
      */
     public void setMagic(U4 magic) {
         this.magic = magic;
@@ -124,6 +147,7 @@ public class ClassFile {
 
     /**
      * getMinorVersion方法。
+     *
      * @return U2类型返回值
      */
     public U2 getMinorVersion() {
@@ -132,7 +156,7 @@ public class ClassFile {
 
     /**
      * setMinorVersion方法。
-     *      * @param minorVersion U2类型参数
+     * * @param minorVersion U2类型参数
      */
     public void setMinorVersion(U2 minorVersion) {
         this.minorVersion = minorVersion;
@@ -140,6 +164,7 @@ public class ClassFile {
 
     /**
      * getMajorVersion方法。
+     *
      * @return U2类型返回值
      */
     public U2 getMajorVersion() {
@@ -148,7 +173,7 @@ public class ClassFile {
 
     /**
      * setMajorVersion方法。
-     *      * @param majorVersion U2类型参数
+     * * @param majorVersion U2类型参数
      */
     public void setMajorVersion(U2 majorVersion) {
         this.majorVersion = majorVersion;
@@ -156,6 +181,7 @@ public class ClassFile {
 
     /**
      * getConstantPoolSize方法。
+     *
      * @return U2类型返回值
      */
     public U2 getConstantPoolSize() {
@@ -164,7 +190,7 @@ public class ClassFile {
 
     /**
      * setConstantPoolSize方法。
-     *      * @param constantPoolSize U2类型参数
+     * * @param constantPoolSize U2类型参数
      */
     public void setConstantPoolSize(U2 constantPoolSize) {
         this.constantPoolSize = constantPoolSize;
@@ -172,6 +198,7 @@ public class ClassFile {
 
     /**
      * getPoolInfo方法。
+     *
      * @return ConstantPoolInfo类型返回值
      */
     public ConstantPoolInfo getPoolInfo() {
@@ -180,7 +207,7 @@ public class ClassFile {
 
     /**
      * setPoolInfo方法。
-     *      * @param poolInfo ConstantPoolInfo类型参数
+     * * @param poolInfo ConstantPoolInfo类型参数
      */
     public void setPoolInfo(ConstantPoolInfo poolInfo) {
         this.poolInfo = poolInfo;
@@ -188,6 +215,7 @@ public class ClassFile {
 
     /**
      * getAccessFlag方法。
+     *
      * @return U2类型返回值
      */
     public U2 getAccessFlag() {
@@ -196,7 +224,7 @@ public class ClassFile {
 
     /**
      * setAccessFlag方法。
-     *      * @param accessFlag U2类型参数
+     * * @param accessFlag U2类型参数
      */
     public void setAccessFlag(U2 accessFlag) {
         this.accessFlag = accessFlag;
@@ -204,6 +232,7 @@ public class ClassFile {
 
     /**
      * getClassIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getClassIndex() {
@@ -212,7 +241,7 @@ public class ClassFile {
 
     /**
      * setClassIndex方法。
-     *      * @param classIndex U2类型参数
+     * * @param classIndex U2类型参数
      */
     public void setClassIndex(U2 classIndex) {
         this.classIndex = classIndex;
@@ -220,6 +249,7 @@ public class ClassFile {
 
     /**
      * getSuperClassIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getSuperClassIndex() {
@@ -228,7 +258,7 @@ public class ClassFile {
 
     /**
      * setSuperClassIndex方法。
-     *      * @param superClassIndex U2类型参数
+     * * @param superClassIndex U2类型参数
      */
     public void setSuperClassIndex(U2 superClassIndex) {
         this.superClassIndex = superClassIndex;
@@ -236,6 +266,7 @@ public class ClassFile {
 
     /**
      * getInterfaceIndex方法。
+     *
      * @return InterfaceIndex类型返回值
      */
     public InterfaceIndex getInterfaceIndex() {
@@ -244,7 +275,7 @@ public class ClassFile {
 
     /**
      * setInterfaceIndex方法。
-     *      * @param interfaceIndex InterfaceIndex类型参数
+     * * @param interfaceIndex InterfaceIndex类型参数
      */
     public void setInterfaceIndex(InterfaceIndex interfaceIndex) {
         this.interfaceIndex = interfaceIndex;
@@ -252,6 +283,7 @@ public class ClassFile {
 
     /**
      * getFieldInfo方法。
+     *
      * @return FieldTable类型返回值
      */
     public FieldTable getFieldInfo() {
@@ -260,7 +292,7 @@ public class ClassFile {
 
     /**
      * setFieldInfo方法。
-     *      * @param fieldInfo FieldTable类型参数
+     * * @param fieldInfo FieldTable类型参数
      */
     public void setFieldInfo(FieldTable fieldInfo) {
         this.fieldInfo = fieldInfo;
@@ -268,6 +300,7 @@ public class ClassFile {
 
     /**
      * getMethodInfo方法。
+     *
      * @return MethodTable类型返回值
      */
     public MethodTable getMethodInfo() {
@@ -276,7 +309,7 @@ public class ClassFile {
 
     /**
      * setMethodInfo方法。
-     *      * @param methodInfo MethodTable类型参数
+     * * @param methodInfo MethodTable类型参数
      */
     public void setMethodInfo(MethodTable methodInfo) {
         this.methodInfo = methodInfo;

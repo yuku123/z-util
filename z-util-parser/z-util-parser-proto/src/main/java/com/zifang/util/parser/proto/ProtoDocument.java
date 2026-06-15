@@ -10,16 +10,17 @@ import java.util.Objects;
  *
  * @author zifang
  */
+
 /**
  * ProtoDocument类。
  */
 public class ProtoDocument {
 
-    private String syntax;
-    private String packageName;
     private final List<String> imports;
     private final List<ProtoMessage> messages;
     private final List<ProtoService> services;
+    private String syntax;
+    private String packageName;
 
     /**
      * ProtoDocument方法。
@@ -32,6 +33,7 @@ public class ProtoDocument {
 
     /**
      * getSyntax方法。
+     *
      * @return String类型返回值
      */
     public String getSyntax() {
@@ -40,7 +42,7 @@ public class ProtoDocument {
 
     /**
      * setSyntax方法。
-     *      * @param syntax String类型参数
+     * * @param syntax String类型参数
      */
     public void setSyntax(String syntax) {
         this.syntax = syntax;
@@ -48,6 +50,7 @@ public class ProtoDocument {
 
     /**
      * getPackageName方法。
+     *
      * @return String类型返回值
      */
     public String getPackageName() {
@@ -56,7 +59,7 @@ public class ProtoDocument {
 
     /**
      * setPackageName方法。
-     *      * @param packageName String类型参数
+     * * @param packageName String类型参数
      */
     public void setPackageName(String packageName) {
         this.packageName = packageName;
@@ -64,6 +67,7 @@ public class ProtoDocument {
 
     /**
      * getImports方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getImports() {
@@ -72,7 +76,7 @@ public class ProtoDocument {
 
     /**
      * addImport方法。
-     *      * @param importStmt String类型参数
+     * * @param importStmt String类型参数
      */
     public void addImport(String importStmt) {
         imports.add(importStmt);
@@ -80,6 +84,7 @@ public class ProtoDocument {
 
     /**
      * getMessages方法。
+     *
      * @return List<ProtoMessage>类型返回值
      */
     public List<ProtoMessage> getMessages() {
@@ -88,7 +93,7 @@ public class ProtoDocument {
 
     /**
      * addMessage方法。
-     *      * @param message ProtoMessage类型参数
+     * * @param message ProtoMessage类型参数
      */
     public void addMessage(ProtoMessage message) {
         messages.add(message);
@@ -96,6 +101,7 @@ public class ProtoDocument {
 
     /**
      * getServices方法。
+     *
      * @return List<ProtoService>类型返回值
      */
     public List<ProtoService> getServices() {
@@ -104,7 +110,7 @@ public class ProtoDocument {
 
     /**
      * addService方法。
-     *      * @param service ProtoService类型参数
+     * * @param service ProtoService类型参数
      */
     public void addService(ProtoService service) {
         services.add(service);

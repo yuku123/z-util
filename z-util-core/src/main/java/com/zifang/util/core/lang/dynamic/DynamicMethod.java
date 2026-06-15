@@ -17,12 +17,14 @@ public class DynamicMethod {
     private String body;
 
     private List<?> parameters = new ArrayList<>();
+
     /**
      * of方法。
-     *      * @param methodName String类型参数
+     * * @param methodName String类型参数
+     *
      * @param parameters List?类型参数
      * @param returnType String类型参数
-     * @param body String类型参数
+     * @param body       String类型参数
      * @return static DynamicMethod类型返回值
      */
     public static DynamicMethod of(String methodName, List<?> parameters, String returnType, String body) {
@@ -36,6 +38,7 @@ public class DynamicMethod {
 
     /**
      * getMethodName方法。
+     *
      * @return String类型返回值
      */
     public String getMethodName() {
@@ -44,7 +47,7 @@ public class DynamicMethod {
 
     /**
      * setMethodName方法。
-     *      * @param methodName String类型参数
+     * * @param methodName String类型参数
      */
     public void setMethodName(String methodName) {
         this.methodName = methodName;
@@ -52,6 +55,7 @@ public class DynamicMethod {
 
     /**
      * getReturnType方法。
+     *
      * @return String类型返回值
      */
     public String getReturnType() {
@@ -60,7 +64,7 @@ public class DynamicMethod {
 
     /**
      * setReturnType方法。
-     *      * @param returnType String类型参数
+     * * @param returnType String类型参数
      */
     public void setReturnType(String returnType) {
         this.returnType = returnType;
@@ -68,6 +72,7 @@ public class DynamicMethod {
 
     /**
      * getDesc方法。
+     *
      * @return String类型返回值
      */
     public String getDesc() {
@@ -76,7 +81,7 @@ public class DynamicMethod {
 
     /**
      * setDesc方法。
-     *      * @param desc String类型参数
+     * * @param desc String类型参数
      */
     public void setDesc(String desc) {
         this.desc = desc;
@@ -84,6 +89,7 @@ public class DynamicMethod {
 
     /**
      * getBody方法。
+     *
      * @return String类型返回值
      */
     public String getBody() {
@@ -92,7 +98,7 @@ public class DynamicMethod {
 
     /**
      * setBody方法。
-     *      * @param body String类型参数
+     * * @param body String类型参数
      */
     public void setBody(String body) {
         this.body = body;
@@ -100,6 +106,7 @@ public class DynamicMethod {
 
     /**
      * getParameters方法。
+     *
      * @return List<?>类型返回值
      */
     public List<?> getParameters() {
@@ -108,7 +115,7 @@ public class DynamicMethod {
 
     /**
      * setParameters方法。
-     *      * @param parameters List?类型参数
+     * * @param parameters List?类型参数
      */
     public void setParameters(List<?> parameters) {
         this.parameters = parameters;

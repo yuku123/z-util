@@ -128,21 +128,6 @@ public class JsonUtilTest {
 
     // ==================== toJson POJO ====================
 
-    public static class Person {
-        public String name;
-        public int age;
-    /**
-     * Person方法。
-     */
-        public Person() {}
-    /**
-     * Person方法。
-     *      * @param name String类型参数
-     * @param age int类型参数
-     */
-        public Person(String name, int age) { this.name = name; this.age = age; }
-    }
-
     @Test
     /**
      * testToJsonPojo方法。
@@ -167,8 +152,6 @@ public class JsonUtilTest {
         assertTrue(json.contains("null"));
     }
 
-    // ==================== parseObject / parseArray ====================
-
     @Test
     /**
      * testParseObject方法。
@@ -178,6 +161,8 @@ public class JsonUtilTest {
         assertEquals("test", obj.get("name"));
         assertEquals(18L, ((Number) obj.get("age")).longValue());
     }
+
+    // ==================== parseObject / parseArray ====================
 
     @Test
     /**
@@ -207,8 +192,6 @@ public class JsonUtilTest {
         assertEquals(0, arr.size());
     }
 
-    // ==================== fromJson 基本类型 ====================
-
     @Test
     /**
      * testFromJsonString方法。
@@ -217,6 +200,8 @@ public class JsonUtilTest {
         String result = JsonUtil.fromJson("\"hello\"", String.class);
         assertEquals("hello", result);
     }
+
+    // ==================== fromJson 基本类型 ====================
 
     @Test
     /**
@@ -263,20 +248,21 @@ public class JsonUtilTest {
         assertNull(result);
     }
 
-    // ==================== fromJson 泛型 ====================
-
     @Test
     /**
      * testFromJsonListTypeRef方法。
      */
     public void testFromJsonListTypeRef() {
         String json = "[1,2,3]";
-        List<Integer> result = JsonUtil.fromJson(json, new TypeReference<List<Integer>>() {});
+        List<Integer> result = JsonUtil.fromJson(json, new TypeReference<List<Integer>>() {
+        });
         assertEquals(3, result.size());
         assertEquals(1, (int) result.get(0));
         assertEquals(2, (int) result.get(1));
         assertEquals(3, (int) result.get(2));
     }
+
+    // ==================== fromJson 泛型 ====================
 
     @Test
     /**
@@ -284,7 +270,8 @@ public class JsonUtilTest {
      */
     public void testFromJsonListOfObjects() {
         String json = "[{\"name\":\"Tom\"},{\"name\":\"Jerry\"}]";
-        List<Person> result = JsonUtil.fromJson(json, new TypeReference<List<Person>>() {});
+        List<Person> result = JsonUtil.fromJson(json, new TypeReference<List<Person>>() {
+        });
         assertEquals(2, result.size());
         assertEquals("Tom", result.get(0).name);
         assertEquals("Jerry", result.get(1).name);
@@ -296,12 +283,11 @@ public class JsonUtilTest {
      */
     public void testFromJsonMapTypeRef() {
         String json = "{\"name\":\"test\",\"age\":18}";
-        Map<String, Object> result = JsonUtil.fromJson(json, new TypeReference<Map<String, Object>>() {});
+        Map<String, Object> result = JsonUtil.fromJson(json, new TypeReference<Map<String, Object>>() {
+        });
         assertEquals("test", result.get("name"));
         assertEquals(18L, ((Number) result.get("age")).longValue());
     }
-
-    // ==================== fromJson POJO ====================
 
     @Test
     /**
@@ -314,7 +300,7 @@ public class JsonUtilTest {
         assertEquals(20, p.age);
     }
 
-    // ==================== roundtrip ====================
+    // ==================== fromJson POJO ====================
 
     @Test
     /**
@@ -327,6 +313,8 @@ public class JsonUtilTest {
         assertEquals("Alice", restored.name);
         assertEquals(30, restored.age);
     }
+
+    // ==================== roundtrip ====================
 
     @Test
     /**
@@ -342,8 +330,6 @@ public class JsonUtilTest {
         assertEquals("Bob", person.get("name"));
     }
 
-    // ==================== 边界情况 ====================
-
     @Test
     /**
      * testToJsonEmptyPojo方法。
@@ -353,6 +339,8 @@ public class JsonUtilTest {
         assertTrue(json.contains("\"name\""));
         assertTrue(json.contains("\"age\""));
     }
+
+    // ==================== 边界情况 ====================
 
     @Test
     /**
@@ -382,5 +370,27 @@ public class JsonUtilTest {
         assertTrue(json.contains("\\t"));
         assertTrue(json.contains("\\r"));
         assertTrue(json.contains("\\n"));
+    }
+
+    public static class Person {
+        public String name;
+        public int age;
+
+        /**
+         * Person方法。
+         */
+        public Person() {
+        }
+
+        /**
+         * Person方法。
+         * * @param name String类型参数
+         *
+         * @param age int类型参数
+         */
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
     }
 }

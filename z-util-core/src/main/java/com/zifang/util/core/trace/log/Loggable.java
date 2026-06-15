@@ -37,23 +37,35 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Loggable {
 
-    /** 日志级别：默认 INFO。 */
+    /**
+     * 日志级别：默认 INFO。
+     */
     Level level() default Level.INFO;
 
-    /** 是否记录入参（默认 true，敏感方法可关）。 */
+    /**
+     * 是否记录入参（默认 true，敏感方法可关）。
+     */
     boolean logArgs() default true;
 
-    /** 是否记录返回值（默认 true）。 */
+    /**
+     * 是否记录返回值（默认 true）。
+     */
     boolean logResult() default true;
 
-    /** 是否记录异常（默认 true，会用 ERROR 级别）。 */
+    /**
+     * 是否记录异常（默认 true，会用 ERROR 级别）。
+     */
     boolean logException() default true;
 
-    /** 超过此毫秒数自动升级到 WARN，0 表示不升级。 */
+    /**
+     * 超过此毫秒数自动升级到 WARN，0 表示不升级。
+     */
     long slowThresholdMs() default 0;
 
-    /** 标记 marker 名（可选，用于日志路由）。 */
+    /**
+     * 标记 marker 名（可选，用于日志路由）。
+     */
     String marker() default "";
 
-    enum Level { TRACE, DEBUG, INFO, WARN, ERROR }
+    enum Level {TRACE, DEBUG, INFO, WARN, ERROR}
 }

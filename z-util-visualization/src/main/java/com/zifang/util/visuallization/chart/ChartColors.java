@@ -8,8 +8,6 @@ import java.awt.*;
  */
 public class ChartColors {
 
-    private ChartColors() {}
-
     /**
      * 预定义的颜色调色板
      */
@@ -26,8 +24,12 @@ public class ChartColors {
             new Color(0x607D8B),  // BlueGrey
     };
 
+    private ChartColors() {
+    }
+
     /**
      * 根据索引获取颜色（循环调色板）
+     *
      * @param index 颜色索引
      * @return 对应的颜色
      */

@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 /**
  * ClassInfo 模型测试
  */
+
 /**
  * ClassInfoTest类。
  */
@@ -201,8 +202,8 @@ public class ClassInfoTest {
         ClassInfo classInfo = new ClassInfo();
         classInfo.setSimpleClassName("Test");
 
-        com.zifang.util.source.generator.info.AnnotationInfo annot = 
-            new com.zifang.util.source.generator.info.AnnotationInfo("Deprecated");
+        com.zifang.util.source.generator.info.AnnotationInfo annot =
+                new com.zifang.util.source.generator.info.AnnotationInfo("Deprecated");
         List<com.zifang.util.source.generator.info.AnnotationInfo> annotations = new ArrayList<>();
         annotations.add(annot);
         classInfo.setAnnotations(annotations);

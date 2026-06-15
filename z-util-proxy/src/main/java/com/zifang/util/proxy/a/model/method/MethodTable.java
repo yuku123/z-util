@@ -19,9 +19,9 @@ public class MethodTable {
     /**
      * 构造函数
      *
-     * @param stream       输入流
-     * @param poolList     常量池列表
-     * @param methodCount  方法数量
+     * @param stream      输入流
+     * @param poolList    常量池列表
+     * @param methodCount 方法数量
      */
     public MethodTable(InputStream stream, List<AbstractConstantPool> poolList, int methodCount) {
         for (int i = 0; i < methodCount; i++) {
@@ -37,13 +37,13 @@ public class MethodTable {
      * @return 解析后的方法信息
      */
     public MethodInfo parseMethod(InputStream inputStream, List<AbstractConstantPool> poolList) {
-        com.zifang.util.proxy.a.model.readtype.U2 accessFlags = 
+        com.zifang.util.proxy.a.model.readtype.U2 accessFlags =
                 com.zifang.util.proxy.a.model.readtype.U2.read(inputStream);
-        com.zifang.util.proxy.a.model.readtype.U2 nameIndex = 
+        com.zifang.util.proxy.a.model.readtype.U2 nameIndex =
                 com.zifang.util.proxy.a.model.readtype.U2.read(inputStream);
-        com.zifang.util.proxy.a.model.readtype.U2 descriptorIndex = 
+        com.zifang.util.proxy.a.model.readtype.U2 descriptorIndex =
                 com.zifang.util.proxy.a.model.readtype.U2.read(inputStream);
-        com.zifang.util.proxy.a.model.readtype.U2 attributesCount = 
+        com.zifang.util.proxy.a.model.readtype.U2 attributesCount =
                 com.zifang.util.proxy.a.model.readtype.U2.read(inputStream);
 
         List<AbstractAttribute> attributes = new ArrayList<>();

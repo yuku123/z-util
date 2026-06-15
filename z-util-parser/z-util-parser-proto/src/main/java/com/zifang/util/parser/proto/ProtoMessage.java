@@ -1,12 +1,15 @@
 package com.zifang.util.parser.proto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Proto Message 模型。
  *
  * @author zifang
  */
+
 /**
  * ProtoMessage类。
  */
@@ -19,7 +22,7 @@ public class ProtoMessage {
 
     /**
      * ProtoMessage方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public ProtoMessage(String name) {
         this.name = name;
@@ -30,6 +33,7 @@ public class ProtoMessage {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -38,6 +42,7 @@ public class ProtoMessage {
 
     /**
      * getFields方法。
+     *
      * @return List<ProtoField>类型返回值
      */
     public List<ProtoField> getFields() {
@@ -46,7 +51,7 @@ public class ProtoMessage {
 
     /**
      * addField方法。
-     *      * @param field ProtoField类型参数
+     * * @param field ProtoField类型参数
      */
     public void addField(ProtoField field) {
         fields.add(field);
@@ -54,6 +59,7 @@ public class ProtoMessage {
 
     /**
      * getEnums方法。
+     *
      * @return List<ProtoEnum>类型返回值
      */
     public List<ProtoEnum> getEnums() {
@@ -62,7 +68,7 @@ public class ProtoMessage {
 
     /**
      * addEnum方法。
-     *      * @param protoEnum ProtoEnum类型参数
+     * * @param protoEnum ProtoEnum类型参数
      */
     public void addEnum(ProtoEnum protoEnum) {
         enums.add(protoEnum);
@@ -70,6 +76,7 @@ public class ProtoMessage {
 
     /**
      * getMessages方法。
+     *
      * @return List<ProtoMessage>类型返回值
      */
     public List<ProtoMessage> getMessages() {
@@ -78,7 +85,7 @@ public class ProtoMessage {
 
     /**
      * addMessage方法。
-     *      * @param message ProtoMessage类型参数
+     * * @param message ProtoMessage类型参数
      */
     public void addMessage(ProtoMessage message) {
         messages.add(message);

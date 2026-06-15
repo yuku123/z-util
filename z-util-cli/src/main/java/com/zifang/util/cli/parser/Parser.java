@@ -23,7 +23,8 @@ public abstract class Parser implements CommandLineParser {
     /**
      * Parser方法。
      */
-    protected Parser() {}
+    protected Parser() {
+    }
 
     /**
      * checkRequiredOptions方法。
@@ -36,8 +37,9 @@ public abstract class Parser implements CommandLineParser {
 
     /**
      * flatten方法。
-     *      * @param opts Options类型参数
-     * @param arguments String[]类型参数
+     * * @param opts Options类型参数
+     *
+     * @param arguments       String[]类型参数
      * @param stopAtNonOption boolean类型参数
      * @return abstract String[]类型返回值
      */
@@ -45,6 +47,7 @@ public abstract class Parser implements CommandLineParser {
 
     /**
      * getOptions方法。
+     *
      * @return Options类型返回值
      */
     protected Options getOptions() {
@@ -52,7 +55,17 @@ public abstract class Parser implements CommandLineParser {
     }
 
     /**
+     * setOptions方法。
+     * * @param options final类型参数
+     */
+    protected void setOptions(final Options options) {
+        this.options = options;
+        this.requiredOptions = new java.util.ArrayList<>(options.getRequiredOptions());
+    }
+
+    /**
      * getRequiredOptions方法。
+     *
      * @return java.util.List类型返回值
      */
     protected java.util.List getRequiredOptions() {
@@ -158,7 +171,8 @@ public abstract class Parser implements CommandLineParser {
 
     /**
      * processOption方法。
-     *      * @param arg final类型参数
+     * * @param arg final类型参数
+     *
      * @param iter final类型参数
      */
     protected void processOption(final String arg, final java.util.ListIterator<String> iter) throws ParseException {
@@ -188,7 +202,8 @@ public abstract class Parser implements CommandLineParser {
 
     /**
      * processArgs方法。
-     *      * @param opt final类型参数
+     * * @param opt final类型参数
+     *
      * @param iter final类型参数
      */
     public void processArgs(final Option opt, final java.util.ListIterator<String> iter) throws ParseException {
@@ -212,7 +227,7 @@ public abstract class Parser implements CommandLineParser {
 
     /**
      * processProperties方法。
-     *      * @param properties final类型参数
+     * * @param properties final类型参数
      */
     protected void processProperties(final Properties properties) throws ParseException {
         if (properties == null) return;
@@ -230,7 +245,8 @@ public abstract class Parser implements CommandLineParser {
                     if (opt.isValuesEmpty()) {
                         try {
                             opt.processValue(value);
-                        } catch (RuntimeException exp) {}
+                        } catch (RuntimeException exp) {
+                        }
                     }
                 } else if (!"yes".equalsIgnoreCase(value) && !"true".equalsIgnoreCase(value) && !"1".equalsIgnoreCase(value)) {
                     continue;
@@ -239,15 +255,6 @@ public abstract class Parser implements CommandLineParser {
                 updateRequiredOptions(opt);
             }
         }
-    }
-
-    /**
-     * setOptions方法。
-     *      * @param options final类型参数
-     */
-    protected void setOptions(final Options options) {
-        this.options = options;
-        this.requiredOptions = new java.util.ArrayList<>(options.getRequiredOptions());
     }
 
     private void updateRequiredOptions(final Option opt) {

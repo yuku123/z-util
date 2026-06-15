@@ -9,15 +9,16 @@ import java.awt.*;
 public class Circle {
 
     public int x, y;
-    private int r;
     public int vx, vy;
     public boolean isFilled = false;
+    private int r;
 
     /**
      * 创建圆形
-     * @param x X坐标
-     * @param y Y坐标
-     * @param r 半径
+     *
+     * @param x  X坐标
+     * @param y  Y坐标
+     * @param r  半径
      * @param vx X方向速度
      * @param vy Y方向速度
      */
@@ -31,6 +32,7 @@ public class Circle {
 
     /**
      * 获取半径
+     *
      * @return 半径
      */
     public int getR() {
@@ -39,6 +41,7 @@ public class Circle {
 
     /**
      * 移动圆形（带边界碰撞检测）
+     *
      * @param minx 最小X坐标
      * @param miny 最小Y坐标
      * @param maxx 最大X坐标

@@ -12,13 +12,15 @@ import java.lang.annotation.Annotation;
  */
 public final class Scope {
 
-    private Scope() {}
-
     public static final Scope SINGLETON = new Scope();
-    public static final Scope PROTOTYPE  = new Scope();
-    public static final Scope DEFAULT    = SINGLETON;
+    public static final Scope PROTOTYPE = new Scope();
+    public static final Scope DEFAULT = SINGLETON;
+    private Scope() {
+    }
 
-    /** 从注解实例解析作用域 */
+    /**
+     * 从注解实例解析作用域
+     */
     public static Scope fromAnnotation(Annotation annotation) {
         if (annotation instanceof javax.inject.Singleton) {
             return SINGLETON;

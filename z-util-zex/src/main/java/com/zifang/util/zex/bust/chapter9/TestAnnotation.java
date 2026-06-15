@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter9;
  * @author zifang
  * @version 1.0
  */
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.Map;
@@ -22,23 +23,17 @@ public class TestAnnotation<@AnnotationTest("类变量类型(泛型)上的注解
     @AnnotationTest("成员变量上的注解")
     private Map<@AnnotationTest("成员变量泛型上的注解") String, String> map;
 
-    @AnnotationTest("成员方法上的注解")
-    /**
-     * Test方法。
-     *      * @param @AnnotationTest("方法参数上的注解" Object类型参数
-     */
-    public void Test(@AnnotationTest("方法参数上的注解") String s, @AnnotationTest("方法参数上的注解2") String s2) {}
-
     @AnnotationTest("构造函数上的注解")
     /**
      * TestAnnotation方法。
      */
-    public TestAnnotation() {}
-
+    public TestAnnotation() {
+    }
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws NoSuchMethodException {
@@ -104,5 +99,13 @@ public class TestAnnotation<@AnnotationTest("类变量类型(泛型)上的注解
             System.out.println(annotation);
         }
 
+    }
+
+    @AnnotationTest("成员方法上的注解")
+    /**
+     * Test方法。
+     *      * @param @AnnotationTest("方法参数上的注解" Object类型参数
+     */
+    public void Test(@AnnotationTest("方法参数上的注解") String s, @AnnotationTest("方法参数上的注解2") String s2) {
     }
 }

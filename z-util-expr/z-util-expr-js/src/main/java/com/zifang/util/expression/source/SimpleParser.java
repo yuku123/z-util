@@ -304,6 +304,19 @@ public class SimpleParser {
     }
 
     /**
+     * 打印输出AST的树状结构。
+     *
+     * @param node   AST节点
+     * @param indent 缩进字符，由tab组成，每一级多一个tab
+     */
+    void dumpAST(ASTNode node, String indent) {
+        System.out.println(indent + node.getType() + " " + node.getText());
+        for (ASTNode child : node.getChildren()) {
+            dumpAST(child, indent + "\t");
+        }
+    }
+
+    /**
      * 一个简单的AST节点。
      * 属性包括：类型、文本值、父节点、子节点。
      */
@@ -344,18 +357,5 @@ public class SimpleParser {
             child.parent = this;
         }
 
-    }
-
-    /**
-     * 打印输出AST的树状结构。
-     *
-     * @param node   AST节点
-     * @param indent 缩进字符，由tab组成，每一级多一个tab
-     */
-    void dumpAST(ASTNode node, String indent) {
-        System.out.println(indent + node.getType() + " " + node.getText());
-        for (ASTNode child : node.getChildren()) {
-            dumpAST(child, indent + "\t");
-        }
     }
 }

@@ -13,6 +13,52 @@ import java.util.concurrent.TimeUnit;
  */
 public class RecursiveTaskDemo {
 
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        // 30．创建Document对象，包含100行，每行1,000个词。
+        Document mock = new Document();
+
+        String[][] document = mock.generateDocument(100, 1000, "the");
+        // 31．创建一个DocumentTask对象，用来更新整个文档。传递数字0给参数start，以及数字100给参数end。
+        DocumentTask task = new DocumentTask(document, 0, 100, "the");
+        // 32．采用无参的构造器创建一个ForkJoinPool对象，然后调用execute()方法在线程池里执行这个任务。
+        ForkJoinPool pool = new ForkJoinPool();
+        pool.execute(task);
+        // 33．实现代码块，显示线程池的进展信息，每秒钟在控制台输出线程池的一些参数，直到任务执行结束。
+        do {
+            System.out.printf("******************************************\n");
+            System.out.printf("Main: Parallelism: %d\n", pool.getParallelism());
+            System.out.printf("Main: Active Threads: %d\n", pool.getActiveThreadCount());
+            System.out.printf("Main: Task Count: %d\n", pool.getQueuedTaskCount());
+            System.out.printf("Main: Steal Count: %d\n", pool.getStealCount());
+            System.out.printf("******************************************\n");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (!task.isDone());
+        // 34．调用shutdown()方法关闭线程池。
+        pool.shutdown();
+        // 35．调用awaitTermination()等待任务执行结束。
+        try {
+            pool.awaitTermination(1, TimeUnit.DAYS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // 36．在控制台输出文档中出现要查找的词的次数。检验这个数字与DocumentMock类输出的数字是否一致。
+        try {
+            System.out.printf("Main: The word appears %d in the document", task.get());
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
     // 1．创建一个名为DocumentMock的类。它将生成一个字符串矩阵来模拟一个文档。
     static class Document {
         // 2．用一些词来创建一个字符串数组。这个数组将被用来生成字符串矩阵。
@@ -20,13 +66,15 @@ public class RecursiveTaskDemo {
                 "main"};
 
         // 3．实现generateDocument()方法。它接收3个参数，分别是行数numLines，每一行词的个数numWords，和准备查找的词word。然后返回一个字符串矩阵。
-    /**
-     * generateDocument方法。
-     *      * @param numLines int类型参数
-     * @param numWords int类型参数
-     * @param word String类型参数
-     * @return String[][]类型返回值
-     */
+
+        /**
+         * generateDocument方法。
+         * * @param numLines int类型参数
+         *
+         * @param numWords int类型参数
+         * @param word     String类型参数
+         * @return String[][]类型返回值
+         */
         public String[][] generateDocument(int numLines, int numWords, String word) {
             // 4．创建用来生成文档所需要的对象：String矩阵，和用来生成随机数的Random对象。
             int counter = 0;
@@ -58,13 +106,15 @@ public class RecursiveTaskDemo {
         private String word;
 
         // 9．实现类的构造器，用来初始化类的所有属性。
-    /**
-     * DocumentTask方法。
-     *      * @param document String[][]类型参数
-     * @param start int类型参数
-     * @param end int类型参数
-     * @param word String类型参数
-     */
+
+        /**
+         * DocumentTask方法。
+         * * @param document String[][]类型参数
+         *
+         * @param start int类型参数
+         * @param end   int类型参数
+         * @param word  String类型参数
+         */
         public DocumentTask(String[][] document, int start, int end, String word) {
             this.document = document;
             this.start = start;
@@ -74,10 +124,10 @@ public class RecursiveTaskDemo {
 
         // 10．实现compute()方法。如果end和start的差异小于10，则调用processLines()方法，来计算这两个位置之间要查找的词出现的次数。
         @Override
-    /**
-     * compute方法。
-     * @return int类型返回值
-     */
+        /**
+         * compute方法。
+         * @return int类型返回值
+         */
         protected Integer compute() {
             int result = 0;
             if (end - start < 10) {
@@ -130,6 +180,8 @@ public class RecursiveTaskDemo {
 
     }
 
+    // 29．实现范例的主类，创建Main主类，并实现main()方法。
+
     // 18．创建名为LineTask的类，并继承RecursiveTask类，RecursiveTask类的泛型参数为Integer类型。这个RecursiveTask类实现了一个任务，用来计算所要查找的词在一行中出现的次数。
     static class LineTask extends RecursiveTask<Integer> {
         // 19．声明类的serialVersionUID属性。这个元素是必需的，因为RecursiveTask的父类ForkJoinTask实现了Serializable接口。声明一个名为line的私有String数组属性和两个名为start和end的私有int属性。最后，声明一个名为word的私有String属性。
@@ -139,13 +191,15 @@ public class RecursiveTaskDemo {
         private String word;
 
         // 20．实现类的构造器，用来初始化它的属性。
-    /**
-     * LineTask方法。
-     *      * @param line String[]类型参数
-     * @param start int类型参数
-     * @param end int类型参数
-     * @param word String类型参数
-     */
+
+        /**
+         * LineTask方法。
+         * * @param line String[]类型参数
+         *
+         * @param start int类型参数
+         * @param end   int类型参数
+         * @param word  String类型参数
+         */
         public LineTask(String[] line, int start, int end, String word) {
             this.line = line;
             this.start = start;
@@ -155,10 +209,10 @@ public class RecursiveTaskDemo {
 
         // 21．实现compute()方法。如果end和start属性的差异小于100，那么任务将采用count()方法，在由start与end属性所决定的行的片断中查找词。
         @Override
-    /**
-     * compute方法。
-     * @return int类型返回值
-     */
+        /**
+         * compute方法。
+         * @return int类型返回值
+         */
         protected Integer compute() {
             Integer result = null;
             if (end - start < 100) {
@@ -204,52 +258,6 @@ public class RecursiveTaskDemo {
             Integer result;
             result = number1 + number2;
             return result;
-        }
-    }
-
-    // 29．实现范例的主类，创建Main主类，并实现main()方法。
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        // 30．创建Document对象，包含100行，每行1,000个词。
-        Document mock = new Document();
-
-        String[][] document = mock.generateDocument(100, 1000, "the");
-        // 31．创建一个DocumentTask对象，用来更新整个文档。传递数字0给参数start，以及数字100给参数end。
-        DocumentTask task = new DocumentTask(document, 0, 100, "the");
-        // 32．采用无参的构造器创建一个ForkJoinPool对象，然后调用execute()方法在线程池里执行这个任务。
-        ForkJoinPool pool = new ForkJoinPool();
-        pool.execute(task);
-        // 33．实现代码块，显示线程池的进展信息，每秒钟在控制台输出线程池的一些参数，直到任务执行结束。
-        do {
-            System.out.printf("******************************************\n");
-            System.out.printf("Main: Parallelism: %d\n", pool.getParallelism());
-            System.out.printf("Main: Active Threads: %d\n", pool.getActiveThreadCount());
-            System.out.printf("Main: Task Count: %d\n", pool.getQueuedTaskCount());
-            System.out.printf("Main: Steal Count: %d\n", pool.getStealCount());
-            System.out.printf("******************************************\n");
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } while (!task.isDone());
-        // 34．调用shutdown()方法关闭线程池。
-        pool.shutdown();
-        // 35．调用awaitTermination()等待任务执行结束。
-        try {
-            pool.awaitTermination(1, TimeUnit.DAYS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // 36．在控制台输出文档中出现要查找的词的次数。检验这个数字与DocumentMock类输出的数字是否一致。
-        try {
-            System.out.printf("Main: The word appears %d in the document", task.get());
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
         }
     }
 }

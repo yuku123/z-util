@@ -23,7 +23,8 @@ public class SortField implements Serializable {
 
     /**
      * SortField方法。
-     *      * @param column String类型参数
+     * * @param column String类型参数
+     *
      * @param asc boolean类型参数
      */
     public SortField(String column, boolean asc) {
@@ -38,40 +39,9 @@ public class SortField implements Serializable {
     }
 
     /**
-     * getColumn方法。
-     * @return String类型返回值
-     */
-    public String getColumn() {
-        return column;
-    }
-
-    /**
-     * setColumn方法。
-     *      * @param column String类型参数
-     */
-    public void setColumn(String column) {
-        this.column = column;
-    }
-
-    /**
-     * isAsc方法。
-     * @return boolean类型返回值
-     */
-    public boolean isAsc() {
-        return asc;
-    }
-
-    /**
-     * setAsc方法。
-     *      * @param asc boolean类型参数
-     */
-    public void setAsc(boolean asc) {
-        this.asc = asc;
-    }
-
-    /**
      * asc方法。
-     *      * @param column String类型参数
+     * * @param column String类型参数
+     *
      * @return static SortField类型返回值
      */
     public static SortField asc(String column) {
@@ -80,7 +50,8 @@ public class SortField implements Serializable {
 
     /**
      * desc方法。
-     *      * @param column String类型参数
+     * * @param column String类型参数
+     *
      * @return static SortField类型返回值
      */
     public static SortField desc(String column) {
@@ -89,7 +60,8 @@ public class SortField implements Serializable {
 
     /**
      * ascs方法。
-     *      * @param columns String...类型参数
+     * * @param columns String...类型参数
+     *
      * @return static List<SortField>类型返回值
      */
     public static List<SortField> ascs(String... columns) {
@@ -98,7 +70,8 @@ public class SortField implements Serializable {
 
     /**
      * descs方法。
-     *      * @param columns String...类型参数
+     * * @param columns String...类型参数
+     *
      * @return static List<SortField>类型返回值
      */
     public static List<SortField> descs(String... columns) {
@@ -107,6 +80,40 @@ public class SortField implements Serializable {
 
     private static SortField build(String column, boolean asc) {
         return new SortField(column, asc);
+    }
+
+    /**
+     * getColumn方法。
+     *
+     * @return String类型返回值
+     */
+    public String getColumn() {
+        return column;
+    }
+
+    /**
+     * setColumn方法。
+     * * @param column String类型参数
+     */
+    public void setColumn(String column) {
+        this.column = column;
+    }
+
+    /**
+     * isAsc方法。
+     *
+     * @return boolean类型返回值
+     */
+    public boolean isAsc() {
+        return asc;
+    }
+
+    /**
+     * setAsc方法。
+     * * @param asc boolean类型参数
+     */
+    public void setAsc(boolean asc) {
+        this.asc = asc;
     }
 
     @Override

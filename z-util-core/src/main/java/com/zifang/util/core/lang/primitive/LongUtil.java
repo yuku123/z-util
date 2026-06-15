@@ -10,7 +10,8 @@ public class LongUtil {
 
     /**
      * parseLong方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @return static Long类型返回值
      */
     public static Long parseLong(Object object) {
@@ -22,7 +23,8 @@ public class LongUtil {
 
     /**
      * parseLongOrDefault方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @param defaultValue long类型参数
      * @return static Long类型返回值
      */
@@ -35,7 +37,8 @@ public class LongUtil {
 
     /**
      * length方法。
-     *      * @param value long类型参数
+     * * @param value long类型参数
+     *
      * @return static int类型返回值
      */
     public static int length(Long value) {

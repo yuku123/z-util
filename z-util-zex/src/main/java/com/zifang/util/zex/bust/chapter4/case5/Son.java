@@ -12,7 +12,7 @@ package com.zifang.util.zex.bust.chapter4.case5;
  */
 class Field {
 
-    static{
+    static {
         System.out.println("Field-initial-static");
     }
 
@@ -22,19 +22,20 @@ class Field {
 
     /**
      * Field方法。
-     *      * @param str String类型参数
+     * * @param str String类型参数
      */
-    public Field(String str){
-        System.out.println(str+"-Field-construct");
+    public Field(String str) {
+        System.out.println(str + "-Field-construct");
     }
 }
-class Father{
 
-    private Field field = new Field("father");
+class Father {
 
-    static{
+    static {
         System.out.println("father-initial-static");
     }
+
+    private Field field = new Field("father");
 
     {
         System.out.println("father-not-initial-static");
@@ -43,7 +44,7 @@ class Father{
     /**
      * Father方法。
      */
-    public Father(){
+    public Father() {
         System.out.println("father-construct");
     }
 
@@ -52,13 +53,13 @@ class Father{
 /**
  * Son类。
  */
-public class Son extends Father{
+public class Son extends Father {
 
-    private Field field = new Field("son");
-
-    static{
+    static {
         System.out.println("Son-initial-static");
     }
+
+    private Field field = new Field("son");
 
     {
         System.out.println("Son-not-initial-static");
@@ -67,13 +68,14 @@ public class Son extends Father{
     /**
      * Son方法。
      */
-    public Son(){
+    public Son() {
         System.out.println("Son-construct");
     }
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

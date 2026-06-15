@@ -11,6 +11,7 @@ package com.zifang.util.yaml.define;
 /**
  * TypeReference类。
  */
+
 /**
  * TypeReference类。
  */
@@ -44,6 +45,7 @@ public class TypeReference<T> {
      */
     /**
      * getRawType方法。
+     *
      * @return Class<? super T>类型返回值
      */
     public Class<? super T> getRawType() {
@@ -56,6 +58,7 @@ public class TypeReference<T> {
      */
     /**
      * getType方法。
+     *
      * @return java.lang.reflect.Type类型返回值
      */
     public java.lang.reflect.Type getType() {

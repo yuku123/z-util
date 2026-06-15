@@ -28,8 +28,9 @@ public class OperationRegistry {
 
     /**
      * 注册任务关键字对应的步骤类。
+     *
      * @param taskKeyword 任务关键字（如 "navigate", "click" 等）
-     * @param stepClass 步骤实现类
+     * @param stepClass   步骤实现类
      */
     public void register(String taskKeyword, Class<? extends Step> stepClass) {
         stepMap.put(taskKeyword.toLowerCase(), stepClass);
@@ -37,6 +38,7 @@ public class OperationRegistry {
 
     /**
      * 解析任务关键字对应的步骤实例。
+     *
      * @param taskKeyword 任务关键字
      * @return 步骤实例，如果未注册则返回 null
      * @throws RuntimeException 如果步骤类无法实例化
@@ -55,6 +57,7 @@ public class OperationRegistry {
 
     /**
      * 检查任务关键字是否已注册。
+     *
      * @param taskKeyword 任务关键字
      * @return 是否已注册
      */

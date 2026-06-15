@@ -21,7 +21,8 @@ public class AtomicIntegerFieldUpdaterTest {
      */
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -38,25 +39,26 @@ class Person {
 
     /**
      * Person方法。
-     *      * @param id int类型参数
+     * * @param id int类型参数
      */
     public Person(int id) {
         this.id = id;
     }
 
     /**
-     * setId方法。
-     *      * @param id int类型参数
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * getId方法。
+     *
      * @return int类型返回值
      */
     public int getId() {
         return id;
+    }
+
+    /**
+     * setId方法。
+     * * @param id int类型参数
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -1,18 +1,19 @@
 package com.zifang.util.source;
 
-import com.zifang.util.source.compiler.*;
-import org.junit.After;
+import com.zifang.util.source.compiler.CharSequenceJavaFileObject;
+import com.zifang.util.source.compiler.CompileContext;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.tools.JavaFileObject;
 import java.net.URI;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * CompileContext 测试
  */
+
 /**
  * CompileContextTest类。
  */

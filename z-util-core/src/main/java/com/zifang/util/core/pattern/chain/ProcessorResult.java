@@ -40,6 +40,7 @@ public enum ProcessorResult {
 
     /**
      * isSuccess方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isSuccess() {

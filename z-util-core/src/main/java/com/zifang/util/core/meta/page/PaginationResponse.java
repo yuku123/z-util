@@ -8,8 +8,8 @@ import com.zifang.util.core.meta.ResultCode;
  * <p>
  * 用于 API 分页数据的统一响应封装，包含数据、总页数、当前页等信息。
  *
- * @author zifang
  * @param <T> 数据类型
+ * @author zifang
  * @see BaseResponse
  */
 public class PaginationResponse<T> extends BaseResponse {
@@ -27,12 +27,13 @@ public class PaginationResponse<T> extends BaseResponse {
 
     /**
      * PaginationResponse方法。
-     *      * @param message String类型参数
-     * @param code ResultCode类型参数
-     * @param data T类型参数
-     * @param limit int类型参数
+     * * @param message String类型参数
+     *
+     * @param code    ResultCode类型参数
+     * @param data    T类型参数
+     * @param limit   int类型参数
      * @param current int类型参数
-     * @param total int类型参数
+     * @param total   int类型参数
      */
     public PaginationResponse(String message, ResultCode code, T data, int limit, int current, int total) {
         super(message, code);
@@ -43,7 +44,17 @@ public class PaginationResponse<T> extends BaseResponse {
     }
 
     /**
+     * builder方法。
+     *
+     * @return static <T> PaginationResponse<T>类型返回值
+     */
+    public static <T> PaginationResponse<T> builder() {
+        return new Builder<T>().build();
+    }
+
+    /**
      * getData方法。
+     *
      * @return T类型返回值
      */
     public T getData() {
@@ -52,7 +63,7 @@ public class PaginationResponse<T> extends BaseResponse {
 
     /**
      * setData方法。
-     *      * @param data T类型参数
+     * * @param data T类型参数
      */
     public void setData(T data) {
         this.data = data;
@@ -60,6 +71,7 @@ public class PaginationResponse<T> extends BaseResponse {
 
     /**
      * getLimit方法。
+     *
      * @return int类型返回值
      */
     public int getLimit() {
@@ -68,7 +80,7 @@ public class PaginationResponse<T> extends BaseResponse {
 
     /**
      * setLimit方法。
-     *      * @param limit int类型参数
+     * * @param limit int类型参数
      */
     public void setLimit(int limit) {
         this.limit = limit;
@@ -76,6 +88,7 @@ public class PaginationResponse<T> extends BaseResponse {
 
     /**
      * getCurrent方法。
+     *
      * @return int类型返回值
      */
     public int getCurrent() {
@@ -84,7 +97,7 @@ public class PaginationResponse<T> extends BaseResponse {
 
     /**
      * setCurrent方法。
-     *      * @param current int类型参数
+     * * @param current int类型参数
      */
     public void setCurrent(int current) {
         this.current = current;
@@ -92,6 +105,7 @@ public class PaginationResponse<T> extends BaseResponse {
 
     /**
      * getTotal方法。
+     *
      * @return int类型返回值
      */
     public int getTotal() {
@@ -100,7 +114,7 @@ public class PaginationResponse<T> extends BaseResponse {
 
     /**
      * setTotal方法。
-     *      * @param total int类型参数
+     * * @param total int类型参数
      */
     public void setTotal(int total) {
         this.total = total;
@@ -148,80 +162,79 @@ public class PaginationResponse<T> extends BaseResponse {
         private int current;
         private int total;
 
-    /**
-     * message方法。
-     *      * @param message String类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * message方法。
+         * * @param message String类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> message(String message) {
             this.message = message;
             return this;
         }
 
-    /**
-     * code方法。
-     *      * @param code ResultCode类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * code方法。
+         * * @param code ResultCode类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> code(ResultCode code) {
             this.code = code;
             return this;
         }
 
-    /**
-     * data方法。
-     *      * @param data T类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * data方法。
+         * * @param data T类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> data(T data) {
             this.data = data;
             return this;
         }
 
-    /**
-     * limit方法。
-     *      * @param limit int类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * limit方法。
+         * * @param limit int类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> limit(int limit) {
             this.limit = limit;
             return this;
         }
 
-    /**
-     * current方法。
-     *      * @param current int类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * current方法。
+         * * @param current int类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> current(int current) {
             this.current = current;
             return this;
         }
 
-    /**
-     * total方法。
-     *      * @param total int类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * total方法。
+         * * @param total int类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> total(int total) {
             this.total = total;
             return this;
         }
 
-    /**
-     * build方法。
-     * @return PaginationResponse<T>类型返回值
-     */
+        /**
+         * build方法。
+         *
+         * @return PaginationResponse<T>类型返回值
+         */
         public PaginationResponse<T> build() {
             return new PaginationResponse<>(message, code, data, limit, current, total);
         }
-    }
-
-    /**
-     * builder方法。
-     * @return static <T> PaginationResponse<T>类型返回值
-     */
-    public static <T> PaginationResponse<T> builder() {
-        return new Builder<T>().build();
     }
 }

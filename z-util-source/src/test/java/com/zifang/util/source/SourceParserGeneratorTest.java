@@ -1,13 +1,9 @@
 package com.zifang.util.source;
 
 import com.zifang.util.source.generator.JavaSourceGenerator;
-import com.zifang.util.source.generator.info.*;
+import com.zifang.util.source.generator.info.ClassInfo;
 import com.zifang.util.source.parser.SourceCodeParser;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -16,6 +12,7 @@ import static org.junit.Assert.*;
  * <p>
  * 验证流程：解析 Java 源码 → ClassInfo → 生成源码 → 比较
  */
+
 /**
  * SourceParserGeneratorTest类。
  */
@@ -31,22 +28,22 @@ public class SourceParserGeneratorTest {
     public void testFullRoundTrip() throws Exception {
         String originalSource =
                 "package com.test;\n" +
-                "\n" +
-                "public class User {\n" +
-                "    private String name;\n" +
-                "    private int age;\n" +
-                "\n" +
-                "    public User() {\n" +
-                "    }\n" +
-                "\n" +
-                "    public String getName() {\n" +
-                "        return this.name;\n" +
-                "    }\n" +
-                "\n" +
-                "    public void setName(String name) {\n" +
-                "        this.name = name;\n" +
-                "    }\n" +
-                "}\n";
+                        "\n" +
+                        "public class User {\n" +
+                        "    private String name;\n" +
+                        "    private int age;\n" +
+                        "\n" +
+                        "    public User() {\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    public String getName() {\n" +
+                        "        return this.name;\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    public void setName(String name) {\n" +
+                        "        this.name = name;\n" +
+                        "    }\n" +
+                        "}\n";
 
         SourceCodeParser parser = new SourceCodeParser();
         ClassInfo classInfo1 = parser.parseSource(originalSource);
@@ -73,17 +70,17 @@ public class SourceParserGeneratorTest {
     public void testComplexClass() {
         String source =
                 "package com.example;\n" +
-                "\n" +
-                "public abstract class Animal extends Object implements Runnable {\n" +
-                "    protected String name;\n" +
-                "    public static final int MAX_AGE = 100;\n" +
-                "\n" +
-                "    public abstract void speak();\n" +
-                "\n" +
-                "    public void run() {\n" +
-                "        System.out.println(\"Running\");\n" +
-                "    }\n" +
-                "}\n";
+                        "\n" +
+                        "public abstract class Animal extends Object implements Runnable {\n" +
+                        "    protected String name;\n" +
+                        "    public static final int MAX_AGE = 100;\n" +
+                        "\n" +
+                        "    public abstract void speak();\n" +
+                        "\n" +
+                        "    public void run() {\n" +
+                        "        System.out.println(\"Running\");\n" +
+                        "    }\n" +
+                        "}\n";
 
         SourceCodeParser parser = new SourceCodeParser();
         ClassInfo classInfo = parser.parseSource(source);
@@ -113,23 +110,23 @@ public class SourceParserGeneratorTest {
     public void testEnumParsing() {
         String source =
                 "package com.example;\n" +
-                "\n" +
-                "public enum Season {\n" +
-                "    SPRING(\"春天\"),\n" +
-                "    SUMMER(\"夏天\"),\n" +
-                "    AUTUMN(\"秋天\"),\n" +
-                "    WINTER(\"冬天\");\n" +
-                "\n" +
-                "    private String chineseName;\n" +
-                "\n" +
-                "    private Season(String chineseName) {\n" +
-                "        this.chineseName = chineseName;\n" +
-                "    }\n" +
-                "\n" +
-                "    public String getChineseName() {\n" +
-                "        return this.chineseName;\n" +
-                "    }\n" +
-                "}\n";
+                        "\n" +
+                        "public enum Season {\n" +
+                        "    SPRING(\"春天\"),\n" +
+                        "    SUMMER(\"夏天\"),\n" +
+                        "    AUTUMN(\"秋天\"),\n" +
+                        "    WINTER(\"冬天\");\n" +
+                        "\n" +
+                        "    private String chineseName;\n" +
+                        "\n" +
+                        "    private Season(String chineseName) {\n" +
+                        "        this.chineseName = chineseName;\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    public String getChineseName() {\n" +
+                        "        return this.chineseName;\n" +
+                        "    }\n" +
+                        "}\n";
 
         SourceCodeParser parser = new SourceCodeParser();
         ClassInfo classInfo = parser.parseSource(source);
@@ -158,11 +155,11 @@ public class SourceParserGeneratorTest {
     public void testAnnotationParsing() {
         String source =
                 "package com.example;\n" +
-                "\n" +
-                "public @interface MyAnnotation {\n" +
-                "    String value() default \"\";\n" +
-                "    int count() default 0;\n" +
-                "}\n";
+                        "\n" +
+                        "public @interface MyAnnotation {\n" +
+                        "    String value() default \"\";\n" +
+                        "    int count() default 0;\n" +
+                        "}\n";
 
         SourceCodeParser parser = new SourceCodeParser();
         ClassInfo classInfo = parser.parseSource(source);
@@ -190,22 +187,22 @@ public class SourceParserGeneratorTest {
     public void testClassWithAnnotations() {
         String source =
                 "package com.example;\n" +
-                "\n" +
-                "@Deprecated\n" +
-                "public class Person {\n" +
-                "    @Deprecated\n" +
-                "    private String name;\n" +
-                "\n" +
-                "    @Deprecated\n" +
-                "    public Person(@Deprecated String name) {\n" +
-                "        this.name = name;\n" +
-                "    }\n" +
-                "\n" +
-                "    @Override\n" +
-                "    public String toString() {\n" +
-                "        return \"Person{name='\" + name + '\\'' + '}';\n" +
-                "    }\n" +
-                "}\n";
+                        "\n" +
+                        "@Deprecated\n" +
+                        "public class Person {\n" +
+                        "    @Deprecated\n" +
+                        "    private String name;\n" +
+                        "\n" +
+                        "    @Deprecated\n" +
+                        "    public Person(@Deprecated String name) {\n" +
+                        "        this.name = name;\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    @Override\n" +
+                        "    public String toString() {\n" +
+                        "        return \"Person{name='\" + name + '\\'' + '}';\n" +
+                        "    }\n" +
+                        "}\n";
 
         SourceCodeParser parser = new SourceCodeParser();
         ClassInfo classInfo = parser.parseSource(source);
@@ -237,25 +234,25 @@ public class SourceParserGeneratorTest {
     public void testInnerClassParsing() {
         String source =
                 "package com.example;\n" +
-                "\n" +
-                "public class Outer {\n" +
-                "    private String outerField;\n" +
-                "\n" +
-                "    public class Inner {\n" +
-                "        private String innerField;\n" +
-                "\n" +
-                "        public String getInnerField() {\n" +
-                "            return innerField;\n" +
-                "        }\n" +
-                "    }\n" +
-                "\n" +
-                "    public Outer() {\n" +
-                "    }\n" +
-                "\n" +
-                "    public String getOuterField() {\n" +
-                "        return outerField;\n" +
-                "    }\n" +
-                "}\n";
+                        "\n" +
+                        "public class Outer {\n" +
+                        "    private String outerField;\n" +
+                        "\n" +
+                        "    public class Inner {\n" +
+                        "        private String innerField;\n" +
+                        "\n" +
+                        "        public String getInnerField() {\n" +
+                        "            return innerField;\n" +
+                        "        }\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    public Outer() {\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    public String getOuterField() {\n" +
+                        "        return outerField;\n" +
+                        "    }\n" +
+                        "}\n";
 
         SourceCodeParser parser = new SourceCodeParser();
         ClassInfo classInfo = parser.parseSource(source);
@@ -284,20 +281,20 @@ public class SourceParserGeneratorTest {
     public void testEnumRoundTrip() {
         String source =
                 "package com.example;\n" +
-                "\n" +
-                "public enum Color {\n" +
-                "    RED, GREEN, BLUE;\n" +
-                "\n" +
-                "    private int value;\n" +
-                "\n" +
-                "    private Color() {\n" +
-                "        this.value = ordinal();\n" +
-                "    }\n" +
-                "\n" +
-                "    public int getValue() {\n" +
-                "        return this.value;\n" +
-                "    }\n" +
-                "}\n";
+                        "\n" +
+                        "public enum Color {\n" +
+                        "    RED, GREEN, BLUE;\n" +
+                        "\n" +
+                        "    private int value;\n" +
+                        "\n" +
+                        "    private Color() {\n" +
+                        "        this.value = ordinal();\n" +
+                        "    }\n" +
+                        "\n" +
+                        "    public int getValue() {\n" +
+                        "        return this.value;\n" +
+                        "    }\n" +
+                        "}\n";
 
         SourceCodeParser parser = new SourceCodeParser();
         ClassInfo classInfo1 = parser.parseSource(source);
@@ -324,17 +321,17 @@ public class SourceParserGeneratorTest {
     public void testAnnotatedClassRoundTrip() {
         String source =
                 "package com.example;\n" +
-                "\n" +
-                "@Deprecated\n" +
-                "public class AnnotatedClass {\n" +
-                "    @SuppressWarnings(\"unchecked\")\n" +
-                "    private String data;\n" +
-                "\n" +
-                "    @Override\n" +
-                "    public int hashCode() {\n" +
-                "        return 0;\n" +
-                "    }\n" +
-                "}\n";
+                        "\n" +
+                        "@Deprecated\n" +
+                        "public class AnnotatedClass {\n" +
+                        "    @SuppressWarnings(\"unchecked\")\n" +
+                        "    private String data;\n" +
+                        "\n" +
+                        "    @Override\n" +
+                        "    public int hashCode() {\n" +
+                        "        return 0;\n" +
+                        "    }\n" +
+                        "}\n";
 
         SourceCodeParser parser = new SourceCodeParser();
         ClassInfo classInfo1 = parser.parseSource(source);

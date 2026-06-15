@@ -10,7 +10,7 @@ public class UnrecognizedOptionException extends ParseException {
 
     /**
      * UnrecognizedOptionException方法。
-     *      * @param message final类型参数
+     * * @param message final类型参数
      */
     public UnrecognizedOptionException(final String message) {
         this(message, null);
@@ -18,7 +18,8 @@ public class UnrecognizedOptionException extends ParseException {
 
     /**
      * UnrecognizedOptionException方法。
-     *      * @param message final类型参数
+     * * @param message final类型参数
+     *
      * @param option final类型参数
      */
     public UnrecognizedOptionException(final String message, final String option) {
@@ -28,6 +29,7 @@ public class UnrecognizedOptionException extends ParseException {
 
     /**
      * getOption方法。
+     *
      * @return String类型返回值
      */
     public String getOption() {

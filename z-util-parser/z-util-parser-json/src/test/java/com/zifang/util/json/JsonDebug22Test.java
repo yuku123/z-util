@@ -1,17 +1,26 @@
 package com.zifang.util.json;
 
-import com.zifang.util.dsl.g4.*;
-import com.zifang.util.dsl.g4.model.*;
-import com.zifang.util.dsl.ast.*;
-import com.zifang.util.dsl.core.*;
-import com.zifang.util.dsl.token.*;
+import com.zifang.util.dsl.ast.SimpleASTNode;
+import com.zifang.util.dsl.core.ASTNode;
+import com.zifang.util.dsl.core.TokenReader;
+import com.zifang.util.dsl.g4.DynamicLexer;
+import com.zifang.util.dsl.g4.DynamicParser;
 import org.junit.Test;
-import java.util.*;
+
+import java.util.List;
 
 /**
  * JsonDebug22Test类。
  */
 public class JsonDebug22Test {
+
+    private static String loadG4(String name) throws Exception {
+        java.io.InputStream is = JsonDebug22Test.class.getClassLoader().getResourceAsStream(name);
+        if (is == null) throw new Exception("Resource not found: " + name);
+        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+        is.close();
+        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+    }
 
     @Test
     /**
@@ -73,13 +82,5 @@ public class JsonDebug22Test {
         @SuppressWarnings("unchecked")
         List<String> result = (List<String>) splitMeth.invoke(parser, input);
         System.out.println("splitElements result: " + result);
-    }
-
-    private static String loadG4(String name) throws Exception {
-        java.io.InputStream is = JsonDebug22Test.class.getClassLoader().getResourceAsStream(name);
-        if (is == null) throw new Exception("Resource not found: " + name);
-        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
-        is.close();
-        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
     }
 }

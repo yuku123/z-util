@@ -57,13 +57,25 @@ package com.zifang.util.zex.leetcode;
  */
 class TwoSum {
 
-    class Solution {
     /**
-     * twoSum方法。
-     *      * @param nums int[]类型参数
-     * @param target int类型参数
-     * @return int[]类型返回值
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
      */
+    public static void main(String[] args) {
+        Solution solution = new TwoSum().new Solution();
+        System.out.println(solution);
+    }
+
+    class Solution {
+        /**
+         * twoSum方法。
+         * * @param nums int[]类型参数
+         *
+         * @param target int类型参数
+         * @return int[]类型返回值
+         */
         public int[] twoSum(int[] nums, int target) {
             int a = 0;
             int b = 0;
@@ -80,15 +92,5 @@ class TwoSum {
             }
             return new int[]{a, b};
         }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        Solution solution = new TwoSum().new Solution();
-        System.out.println(solution);
     }
 }

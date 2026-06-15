@@ -12,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * <p>
  * 三个线程交替执行
  */
+
 /**
  * ThreeConditionCommunicatioin类。
  */
@@ -19,16 +20,17 @@ public class ThreeConditionCommunicatioin {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
         final Business business = new Business();
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 for (int i = 0; i < 5; i++) {
                     business.sub2(i);
@@ -38,9 +40,9 @@ public class ThreeConditionCommunicatioin {
 
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 for (int i = 0; i < 5; i++) {
                     business.sub3(i);
@@ -61,10 +63,10 @@ public class ThreeConditionCommunicatioin {
         Condition condition3 = lock.newCondition();
         int flag = 1;
 
-    /**
-     * sub2方法。
-     *      * @param i int类型参数
-     */
+        /**
+         * sub2方法。
+         * * @param i int类型参数
+         */
         public void sub2(int i) {
             lock.lock();
             try {
@@ -85,10 +87,10 @@ public class ThreeConditionCommunicatioin {
             }
         }
 
-    /**
-     * sub3方法。
-     *      * @param i int类型参数
-     */
+        /**
+         * sub3方法。
+         * * @param i int类型参数
+         */
         public void sub3(int i) {
             lock.lock();
             try {
@@ -109,10 +111,10 @@ public class ThreeConditionCommunicatioin {
             }
         }
 
-    /**
-     * main方法。
-     *      * @param i int类型参数
-     */
+        /**
+         * main方法。
+         * * @param i int类型参数
+         */
         public void main(int i) {
             try {
                 lock.lock();

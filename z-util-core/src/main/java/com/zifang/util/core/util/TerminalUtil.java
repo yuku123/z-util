@@ -34,7 +34,8 @@ public class TerminalUtil {
 
     /**
      * runExec方法。
-     *      * @param cmdarray String[]类型参数
+     * * @param cmdarray String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void runExec(String[] cmdarray) {
@@ -68,7 +69,8 @@ public class TerminalUtil {
 
     /**
      * runAndGetPrint方法。
-     *      * @param command String类型参数
+     * * @param command String类型参数
+     *
      * @return static void类型返回值
      */
     public static void runAndGetPrint(String command) throws IOException {
@@ -82,7 +84,8 @@ public class TerminalUtil {
 
     /**
      * runAndGetPrint方法。
-     *      * @param command String类型参数
+     * * @param command String类型参数
+     *
      * @param timeout long类型参数
      * @return static void类型返回值
      */
@@ -95,7 +98,7 @@ public class TerminalUtil {
             throw new RuntimeException(e);
         }
 
-        if(!pass){
+        if (!pass) {
             throw new RuntimeException();
         }
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));

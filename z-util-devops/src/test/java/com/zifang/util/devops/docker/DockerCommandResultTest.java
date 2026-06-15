@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 /**
  * DockerCommandResult 类测试
  */
+
 /**
  * DockerCommandResultTest类。
  */

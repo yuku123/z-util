@@ -19,7 +19,8 @@ public class Quant {
 
     /**
      * =方法。
-     *      * @param prime4 3类型参数
+     * * @param prime4 3类型参数
+     *
      * @return static final int minpicturebytes类型返回值
      */
     protected static final int minpicturebytes = (3 * prime4);
@@ -42,7 +43,8 @@ public class Quant {
 
     /**
      * =方法。
-     *      * @param 1 netsize类型参数
+     * * @param 1 netsize类型参数
+     *
      * @return static final int maxnetpos类型返回值
      */
     protected static final int maxnetpos = (netsize - 1);
@@ -53,44 +55,50 @@ public class Quant {
     protected static final int intbiasshift = 16; /* bias for fractions */
     /**
      * =方法。
-     *      * @param intbiasshift 1类型参数
+     * * @param intbiasshift 1类型参数
+     *
      * @return static final int intbias类型返回值
      */
     protected static final int intbias = (1 << intbiasshift);
-    protected static final int gammashift = 10; /* gamma = 1024 */
     /**
      * =方法。
-     *      * @param gammashift 1类型参数
-     * @return static final int gamma类型返回值
-     */
-    protected static final int gamma = (1 << gammashift);
-    protected static final int betashift = 10;
-    /**
-     * =方法。
-     *      * @param betashift intbias类型参数
+     * * @param betashift intbias类型参数
+     *
      * @return static final int beta类型返回值
      */
     protected static final int beta = (intbias >> betashift); /* beta = 1/1024 */
     protected static final int betagamma =
             (intbias << (gammashift - betashift));
+    protected static final int gammashift = 10; /* gamma = 1024 */
+    /**
+     * =方法。
+     * * @param gammashift 1类型参数
+     *
+     * @return static final int gamma类型返回值
+     */
+    protected static final int gamma = (1 << gammashift);
+    protected static final int betashift = 10;
 
     /* defs for decreasing radius factor */
     /**
      * =方法。
-     *      * @param 3 netsize类型参数
+     * * @param 3 netsize类型参数
+     *
      * @return static final int initrad类型返回值
      */
     protected static final int initrad = (netsize >> 3); /* for 256 cols, radius starts */
     protected static final int radiusbiasshift = 6; /* at 32.0 biased by 6 bits */
     /**
      * =方法。
-     *      * @param radiusbiasshift 1类型参数
+     * * @param radiusbiasshift 1类型参数
+     *
      * @return static final int radiusbias类型返回值
      */
     protected static final int radiusbias = (1 << radiusbiasshift);
     /**
      * =方法。
-     *      * @param radiusbias initrad类型参数
+     * * @param radiusbias initrad类型参数
+     *
      * @return static final int initradius类型返回值
      */
     protected static final int initradius = (initrad * radiusbias); /* and decreases by a */
@@ -100,37 +108,38 @@ public class Quant {
     protected static final int alphabiasshift = 10; /* alpha starts at 1.0 */
     /**
      * =方法。
-     *      * @param alphabiasshift 1类型参数
+     * * @param alphabiasshift 1类型参数
+     *
      * @return static final int initalpha类型返回值
      */
     protected static final int initalpha = (1 << alphabiasshift);
-
-    protected int alphadec; /* biased by 10 bits */
-
     /* radbias and alpharadbias used for radpower calculation */
     protected static final int radbiasshift = 8;
     /**
      * =方法。
-     *      * @param radbiasshift 1类型参数
+     * * @param radbiasshift 1类型参数
+     *
      * @return static final int radbias类型返回值
      */
     protected static final int radbias = (1 << radbiasshift);
     /**
      * =方法。
-     *      * @param radbiasshift alphabiasshift类型参数
+     * * @param radbiasshift alphabiasshift类型参数
+     *
      * @return static final int alpharadbshift类型返回值
      */
     protected static final int alpharadbshift = (alphabiasshift + radbiasshift);
     /**
      * =方法。
-     *      * @param alpharadbshift 1类型参数
+     * * @param alpharadbshift 1类型参数
+     *
      * @return static final int alpharadbias类型返回值
      */
     protected static final int alpharadbias = (1 << alpharadbshift);
+    protected int alphadec; /* biased by 10 bits */
 
 	/* Types and Global Variables
 	-------------------------- */
-
     protected byte[] thepicture; /* the input image itself */
     protected int lengthcount; /* lengthcount = H*W*3 */
 
@@ -150,6 +159,7 @@ public class Quant {
 
     /* Initialise network in range (0,0,0) to (255,255,255) and set parameters
        ----------------------------------------------------------------------- */
+
     /**
      * 初始化网络，将神经元权重初始化为 (0,0,0) 到 (255,255,255) 范围内的值。
      *

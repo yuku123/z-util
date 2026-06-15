@@ -2,7 +2,10 @@ package com.zifang.util.yaml.facade;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +15,7 @@ import static org.junit.Assert.*;
 /**
  * SnakeYamlBackendTest类。
  */
+
 /**
  * SnakeYamlBackendTest类。
  */
@@ -75,7 +79,8 @@ public class SnakeYamlBackendTest {
      */
     public void testFromYaml_List() {
         String yaml = "- name: alice\n  age: 25\n- name: bob\n  age: 30";
-        YamlTypeBinding<List<Map<String, Object>>> binding = new YamlTypeBinding<List<Map<String, Object>>>() {};
+        YamlTypeBinding<List<Map<String, Object>>> binding = new YamlTypeBinding<List<Map<String, Object>>>() {
+        };
         List<Map<String, Object>> list = backend.fromYaml(yaml, binding);
         assertEquals(2, list.size());
         assertEquals("alice", list.get(0).get("name"));

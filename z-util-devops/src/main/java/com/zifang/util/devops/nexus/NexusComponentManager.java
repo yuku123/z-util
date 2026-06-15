@@ -23,54 +23,23 @@ import java.util.stream.Collectors;
  */
 public class NexusComponentManager {
 
+    public static final String respository = "maven-releases";
     /**
      * nexus访问地址
      */
     private static final String NEXUS_URL = "http://nexus.cfuture.cc";
-
     /**
      * nexus账号
      */
     private static final String NEXUS_USERNAME = "admin";
-
     /**
      * nexus密码
      */
     private static final String NEXUS_PASSWORD = "admin@123";
-
-
-    public static final String respository = "maven-releases";
-
     /**
      * 成功删除的组件数量
      */
     private int successDeleteTotal;
-
-
-    /**
-     * 删除组件
-     *
-     * @param component 组件对象
-     */
-    public void delete(Component component) {
-        String url = String.format("%s/service/rest/v1/components/%s", NEXUS_URL, component.getId());
-        HttpResponse response = null;
-        try {
-            response = Unirest.delete(url).basicAuth(NEXUS_USERNAME, NEXUS_PASSWORD).asBinary();
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        if (response == null) {
-            System.out.println(String.format("组件【%s-%s-%s】删除失败，HTTP 响应为空", component.getRepository(), component.getGroup(), component.getName(), component.getVersion()));
-            return;
-        }
-        int status = response.getStatus();
-        if (status == 204) {
-            successDeleteTotal++;
-        } else {
-            System.out.println(String.format("组件【%s-%s-%s】删除失败，http响应代码：%d", component.getRepository(), component.getGroup(), component.getName(), component.getVersion(), status));
-        }
-    }
 
     /**
      * 搜索组件
@@ -123,11 +92,36 @@ public class NexusComponentManager {
     }
 
     /**
+     * 删除组件
+     *
+     * @param component 组件对象
+     */
+    public void delete(Component component) {
+        String url = String.format("%s/service/rest/v1/components/%s", NEXUS_URL, component.getId());
+        HttpResponse response = null;
+        try {
+            response = Unirest.delete(url).basicAuth(NEXUS_USERNAME, NEXUS_PASSWORD).asBinary();
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+        if (response == null) {
+            System.out.println(String.format("组件【%s-%s-%s】删除失败，HTTP 响应为空", component.getRepository(), component.getGroup(), component.getName(), component.getVersion()));
+            return;
+        }
+        int status = response.getStatus();
+        if (status == 204) {
+            successDeleteTotal++;
+        } else {
+            System.out.println(String.format("组件【%s-%s-%s】删除失败，http响应代码：%d", component.getRepository(), component.getGroup(), component.getName(), component.getVersion(), status));
+        }
+    }
+
+    /**
      * 根据 GAV 坐标查找组件
      *
      * @param groupId    组ID
-     * @param artifactId  构件ID
-     * @param version     版本号
+     * @param artifactId 构件ID
+     * @param version    版本号
      * @return 匹配的组件对象，未找到返回 null
      */
     public Component findByGav(String groupId, String artifactId, String version) {
@@ -148,8 +142,8 @@ public class NexusComponentManager {
      * 检查指定 GAV 坐标的组件是否存在
      *
      * @param groupId    组ID
-     * @param artifactId  构件ID
-     * @param version     版本号
+     * @param artifactId 构件ID
+     * @param version    版本号
      * @return 存在返回 true，不存在返回 false
      */
     public Boolean checkExistGav(String groupId, String artifactId, String version) {

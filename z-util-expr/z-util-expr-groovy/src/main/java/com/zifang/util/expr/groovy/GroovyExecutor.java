@@ -56,19 +56,6 @@ public class GroovyExecutor {
     }
 
     /**
-     * Set multiple variables in the binding scope.
-     *
-     * @param variables a map of variable names to values
-     */
-    public void setVariables(Map<String, Object> variables) {
-        if (variables != null) {
-            for (Map.Entry<String, Object> entry : variables.entrySet()) {
-                binding.setVariable(entry.getKey(), entry.getValue());
-            }
-        }
-    }
-
-    /**
      * Get all variables from the binding scope.
      *
      * @return a map of all bound variables
@@ -80,6 +67,19 @@ public class GroovyExecutor {
             result.put(name, binding.getVariable(name));
         }
         return result;
+    }
+
+    /**
+     * Set multiple variables in the binding scope.
+     *
+     * @param variables a map of variable names to values
+     */
+    public void setVariables(Map<String, Object> variables) {
+        if (variables != null) {
+            for (Map.Entry<String, Object> entry : variables.entrySet()) {
+                binding.setVariable(entry.getKey(), entry.getValue());
+            }
+        }
     }
 
     /**

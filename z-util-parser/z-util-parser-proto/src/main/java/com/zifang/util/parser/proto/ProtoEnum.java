@@ -9,6 +9,7 @@ import java.util.Objects;
  *
  * @author zifang
  */
+
 /**
  * ProtoEnum类。
  */
@@ -19,7 +20,7 @@ public class ProtoEnum {
 
     /**
      * ProtoEnum方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public ProtoEnum(String name) {
         this.name = name;
@@ -28,6 +29,7 @@ public class ProtoEnum {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -36,7 +38,8 @@ public class ProtoEnum {
 
     /**
      * addValue方法。
-     *      * @param enumName String类型参数
+     * * @param enumName String类型参数
+     *
      * @param number int类型参数
      */
     public void addValue(String enumName, int number) {
@@ -45,6 +48,7 @@ public class ProtoEnum {
 
     /**
      * getValues方法。
+     *
      * @return Map<String, Integer>类型返回值
      */
     public Map<String, Integer> getValues() {
@@ -53,7 +57,8 @@ public class ProtoEnum {
 
     /**
      * getValue方法。
-     *      * @param enumName String类型参数
+     * * @param enumName String类型参数
+     *
      * @return int类型返回值
      */
     public int getValue(String enumName) {

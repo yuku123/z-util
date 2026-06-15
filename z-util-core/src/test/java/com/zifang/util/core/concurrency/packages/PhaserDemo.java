@@ -24,10 +24,12 @@ class FileSearch implements Runnable {
     private Phaser phaser;
 
     // 6. 实现类的构造函数，初始化类的属性们。它接收初始文件夹的路径，文件的扩展名，和phaser 作为参数。
+
     /**
      * FileSearch方法。
-     *      * @param initPath String类型参数
-     * @param end String类型参数
+     * * @param initPath String类型参数
+     *
+     * @param end    String类型参数
      * @param phaser Phaser类型参数
      */
     public FileSearch(String initPath, String end, Phaser phaser) {
@@ -204,6 +206,7 @@ class FileSearch implements Runnable {
  * Termination 状态， awaitAdvance() 和 arriveAndAwaitAdvance()
  * 方法立刻返回一个负值，而不是一般情况下的正值如果你知道你的phaser可能终止了，那么你可以用这些方法来确认他是否真的终止了。
  */
+
 /**
  * PhaserDemo类。
  */
@@ -211,7 +214,8 @@ public class PhaserDemo {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

@@ -100,8 +100,8 @@ public final class DateUtils {
     /**
      * 将Date对象转换为指定格式的字符串。
      *
-     * @param date  日期对象
-     * @param temp  日期格式，如"yyyy-MM-dd"
+     * @param date 日期对象
+     * @param temp 日期格式，如"yyyy-MM-dd"
      * @return 格式化后的日期字符串
      */
     public static String dateToStr(Date date, String temp) {
@@ -113,8 +113,8 @@ public final class DateUtils {
     /**
      * 将字符串转换为Date对象。
      *
-     * @param dateStr    日期字符串
-     * @param formatStr  日期格式，如"yyyy-MM-dd"
+     * @param dateStr   日期字符串
+     * @param formatStr 日期格式，如"yyyy-MM-dd"
      * @return 解析后的Date对象，如果解析失败返回null
      */
     public static Date strToDate(String dateStr, String formatStr) {
@@ -131,8 +131,8 @@ public final class DateUtils {
     /**
      * 将字符串转换为Date对象后，返回毫秒时间戳。
      *
-     * @param dateStr    日期字符串
-     * @param formatStr  日期格式，如"yyyy-MM-dd"
+     * @param dateStr   日期字符串
+     * @param formatStr 日期格式，如"yyyy-MM-dd"
      * @return 毫秒时间戳，解析失败返回0
      */
     public static long strToDateMillisTimestamp(String dateStr, String formatStr) {
@@ -143,8 +143,8 @@ public final class DateUtils {
     /**
      * 将字符串转换为Date对象后，返回秒级时间戳。
      *
-     * @param dateStr    日期字符串
-     * @param formatStr  日期格式，如"yyyy-MM-dd"
+     * @param dateStr   日期字符串
+     * @param formatStr 日期格式，如"yyyy-MM-dd"
      * @return 秒级时间戳，解析失败返回0
      */
     public static int strToDateTimestamp(String dateStr, String formatStr) {
@@ -189,9 +189,9 @@ public final class DateUtils {
     /**
      * 比较两个String类型的日期大小。
      *
-     * @param sDate      开始日期字符串
-     * @param eDate      结束日期字符串
-     * @param formatStr  日期格式，如"yyyy-MM-dd"
+     * @param sDate     开始日期字符串
+     * @param eDate     结束日期字符串
+     * @param formatStr 日期格式，如"yyyy-MM-dd"
      * @return 比较结果：0-相同，1-前者大，-1-后者大
      */
     public static int compareDate(String sDate, String eDate, String formatStr) {

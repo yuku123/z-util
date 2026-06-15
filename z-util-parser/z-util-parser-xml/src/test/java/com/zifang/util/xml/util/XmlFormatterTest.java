@@ -1,7 +1,8 @@
 package com.zifang.util.xml.util;
 
 import com.zifang.util.xml.XmlUtil;
-import com.zifang.util.xml.model.*;
+import com.zifang.util.xml.model.XDocument;
+import com.zifang.util.xml.model.XElement;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * XmlFormatter 格式化功能测试。
  */
+
 /**
  * XmlFormatterTest类。
  */

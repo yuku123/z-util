@@ -151,10 +151,12 @@ public class Configurations {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Configurations that = (Configurations) o;
-        if (workflowConfigurationId != null ? !workflowConfigurationId.equals(that.workflowConfigurationId) : that.workflowConfigurationId != null) return false;
+        if (workflowConfigurationId != null ? !workflowConfigurationId.equals(that.workflowConfigurationId) : that.workflowConfigurationId != null)
+            return false;
         if (engine != null ? !engine.equals(that.engine) : that.engine != null) return false;
         if (cacheEngine != null ? !cacheEngine.equals(that.cacheEngine) : that.cacheEngine != null) return false;
-        if (personalEnvironment != null ? !personalEnvironment.equals(that.personalEnvironment) : that.personalEnvironment != null) return false;
+        if (personalEnvironment != null ? !personalEnvironment.equals(that.personalEnvironment) : that.personalEnvironment != null)
+            return false;
         return runtimeParameter != null ? runtimeParameter.equals(that.runtimeParameter) : that.runtimeParameter == null;
     }
 

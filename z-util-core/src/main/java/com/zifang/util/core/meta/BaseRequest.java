@@ -37,6 +37,7 @@ public class BaseRequest implements Serializable {
 
     /**
      * getId方法。
+     *
      * @return String类型返回值
      */
     public String getId() {
@@ -45,7 +46,7 @@ public class BaseRequest implements Serializable {
 
     /**
      * setId方法。
-     *      * @param id String类型参数
+     * * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -53,6 +54,7 @@ public class BaseRequest implements Serializable {
 
     /**
      * getCreateTime方法。
+     *
      * @return LocalDateTime类型返回值
      */
     public LocalDateTime getCreateTime() {
@@ -61,7 +63,7 @@ public class BaseRequest implements Serializable {
 
     /**
      * setCreateTime方法。
-     *      * @param createTime LocalDateTime类型参数
+     * * @param createTime LocalDateTime类型参数
      */
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
@@ -69,6 +71,7 @@ public class BaseRequest implements Serializable {
 
     /**
      * getUpdateTime方法。
+     *
      * @return LocalDateTime类型返回值
      */
     public LocalDateTime getUpdateTime() {
@@ -77,7 +80,7 @@ public class BaseRequest implements Serializable {
 
     /**
      * setUpdateTime方法。
-     *      * @param updateTime LocalDateTime类型参数
+     * * @param updateTime LocalDateTime类型参数
      */
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;

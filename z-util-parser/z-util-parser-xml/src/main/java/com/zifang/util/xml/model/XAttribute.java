@@ -5,6 +5,7 @@ package com.zifang.util.xml.model;
  *
  * @author zifang
  */
+
 /**
  * XAttribute类。
  */
@@ -16,7 +17,8 @@ public class XAttribute {
 
     /**
      * XAttribute方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param value String类型参数
      */
     public XAttribute(String name, String value) {
@@ -26,6 +28,7 @@ public class XAttribute {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -34,6 +37,7 @@ public class XAttribute {
 
     /**
      * getValue方法。
+     *
      * @return String类型返回值
      */
     public String getValue() {
@@ -42,7 +46,7 @@ public class XAttribute {
 
     /**
      * setValue方法。
-     *      * @param value String类型参数
+     * * @param value String类型参数
      */
     public void setValue(String value) {
         this.value = value;

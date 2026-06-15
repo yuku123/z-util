@@ -108,32 +108,49 @@ public class CollectionsTest {
     /**
      * testIsEmptyCollection_Null方法。
      */
-    public void testIsEmptyCollection_Null() { assertTrue(Collections.isEmptyCollection(null)); }
+    public void testIsEmptyCollection_Null() {
+        assertTrue(Collections.isEmptyCollection(null));
+    }
+
     @Test
     /**
      * testIsEmptyCollection_Empty方法。
      */
-    public void testIsEmptyCollection_Empty() { assertTrue(Collections.isEmptyCollection(new ArrayList<>())); }
+    public void testIsEmptyCollection_Empty() {
+        assertTrue(Collections.isEmptyCollection(new ArrayList<>()));
+    }
+
     @Test
     /**
      * testIsEmptyCollection_Normal方法。
      */
-    public void testIsEmptyCollection_Normal() { assertFalse(Collections.isEmptyCollection(Arrays.asList("a"))); }
+    public void testIsEmptyCollection_Normal() {
+        assertFalse(Collections.isEmptyCollection(Arrays.asList("a")));
+    }
+
     @Test
     /**
      * testIsNotEmptyCollection_Null方法。
      */
-    public void testIsNotEmptyCollection_Null() { assertFalse(Collections.isNotEmptyCollection(null)); }
+    public void testIsNotEmptyCollection_Null() {
+        assertFalse(Collections.isNotEmptyCollection(null));
+    }
+
     @Test
     /**
      * testIsNotEmptyCollection_Empty方法。
      */
-    public void testIsNotEmptyCollection_Empty() { assertFalse(Collections.isNotEmptyCollection(new ArrayList<>())); }
+    public void testIsNotEmptyCollection_Empty() {
+        assertFalse(Collections.isNotEmptyCollection(new ArrayList<>()));
+    }
+
     @Test
     /**
      * testIsNotEmptyCollection_Normal方法。
      */
-    public void testIsNotEmptyCollection_Normal() { assertTrue(Collections.isNotEmptyCollection(Arrays.asList("a"))); }
+    public void testIsNotEmptyCollection_Normal() {
+        assertTrue(Collections.isNotEmptyCollection(Arrays.asList("a")));
+    }
 
     // --- isEmptyMap / isNotEmptyMap ---
 
@@ -141,12 +158,18 @@ public class CollectionsTest {
     /**
      * testIsEmptyMap_Null方法。
      */
-    public void testIsEmptyMap_Null() { assertTrue(Collections.isEmptyMap(null)); }
+    public void testIsEmptyMap_Null() {
+        assertTrue(Collections.isEmptyMap(null));
+    }
+
     @Test
     /**
      * testIsEmptyMap_Empty方法。
      */
-    public void testIsEmptyMap_Empty() { assertTrue(Collections.isEmptyMap(new HashMap<>())); }
+    public void testIsEmptyMap_Empty() {
+        assertTrue(Collections.isEmptyMap(new HashMap<>()));
+    }
+
     @Test
     /**
      * testIsEmptyMap_Normal方法。
@@ -156,16 +179,23 @@ public class CollectionsTest {
         map.put("k", "v");
         assertFalse(Collections.isEmptyMap(map));
     }
+
     @Test
     /**
      * testIsNotEmptyMap_Null方法。
      */
-    public void testIsNotEmptyMap_Null() { assertFalse(Collections.isNotEmptyMap(null)); }
+    public void testIsNotEmptyMap_Null() {
+        assertFalse(Collections.isNotEmptyMap(null));
+    }
+
     @Test
     /**
      * testIsNotEmptyMap_Empty方法。
      */
-    public void testIsNotEmptyMap_Empty() { assertFalse(Collections.isNotEmptyMap(new HashMap<>())); }
+    public void testIsNotEmptyMap_Empty() {
+        assertFalse(Collections.isNotEmptyMap(new HashMap<>()));
+    }
+
     @Test
     /**
      * testIsNotEmptyMap_Normal方法。
@@ -333,9 +363,13 @@ public class CollectionsTest {
      */
     public void testIntersectionMap_Normal() {
         Map<String, Integer> m1 = new HashMap<>();
-        m1.put("a", 1); m1.put("b", 2); m1.put("c", 3);
+        m1.put("a", 1);
+        m1.put("b", 2);
+        m1.put("c", 3);
         Map<String, Integer> m2 = new HashMap<>();
-        m2.put("b", 2); m2.put("c", 3); m2.put("d", 4);
+        m2.put("b", 2);
+        m2.put("c", 3);
+        m2.put("d", 4);
         Map<String, Integer> result = Collections.intersection(m1, m2);
         assertEquals(2, result.size());
         assertTrue(result.containsKey("b"));
@@ -451,9 +485,11 @@ public class CollectionsTest {
      */
     public void testUniconMap_Normal() {
         Map<String, Integer> m1 = new HashMap<>();
-        m1.put("a", 1); m1.put("b", 2);
+        m1.put("a", 1);
+        m1.put("b", 2);
         Map<String, Integer> m2 = new HashMap<>();
-        m2.put("c", 3); m2.put("d", 4);
+        m2.put("c", 3);
+        m2.put("d", 4);
         Map<String, Integer> result = Collections.unicon(m1, m2);
         assertEquals(4, result.size());
     }
@@ -464,9 +500,11 @@ public class CollectionsTest {
      */
     public void testUniconMap_OverlappingKeys() {
         Map<String, Integer> m1 = new HashMap<>();
-        m1.put("a", 1); m1.put("b", 2);
+        m1.put("a", 1);
+        m1.put("b", 2);
         Map<String, Integer> m2 = new HashMap<>();
-        m2.put("b", 20); m2.put("c", 3);
+        m2.put("b", 20);
+        m2.put("c", 3);
         Map<String, Integer> result = Collections.unicon(m1, m2);
         assertEquals(3, result.size());
         assertEquals(Integer.valueOf(20), result.get("b"));
@@ -589,9 +627,12 @@ public class CollectionsTest {
      */
     public void testSubtractMap_Normal() {
         Map<String, Integer> m1 = new HashMap<>();
-        m1.put("a", 1); m1.put("b", 2); m1.put("c", 3);
+        m1.put("a", 1);
+        m1.put("b", 2);
+        m1.put("c", 3);
         Map<String, Integer> m2 = new HashMap<>();
-        m2.put("b", 2); m2.put("c", 3);
+        m2.put("b", 2);
+        m2.put("c", 3);
         Map<String, Integer> result = Collections.subtract(m1, m2);
         assertEquals(1, result.size());
         assertTrue(result.containsKey("a"));
@@ -603,9 +644,11 @@ public class CollectionsTest {
      */
     public void testSubtractMap_NoOverlap() {
         Map<String, Integer> m1 = new HashMap<>();
-        m1.put("a", 1); m1.put("b", 2);
+        m1.put("a", 1);
+        m1.put("b", 2);
         Map<String, Integer> m2 = new HashMap<>();
-        m2.put("c", 3); m2.put("d", 4);
+        m2.put("c", 3);
+        m2.put("d", 4);
         Map<String, Integer> result = Collections.subtract(m1, m2);
         assertEquals(2, result.size());
     }
@@ -686,7 +729,8 @@ public class CollectionsTest {
      */
     public void testJoinMap_Normal() {
         Map<String, Integer> map = new LinkedHashMap<>();
-        map.put("k1", 1); map.put("k2", 2);
+        map.put("k1", 1);
+        map.put("k2", 2);
         String result = Collections.join(map, ",", "=");
         assertEquals("k1=1,k2=2", result);
     }
@@ -729,7 +773,9 @@ public class CollectionsTest {
      */
     public void testKeyJoin_Normal() {
         Map<String, Integer> map = new LinkedHashMap<>();
-        map.put("a", 1); map.put("b", 2); map.put("c", 3);
+        map.put("a", 1);
+        map.put("b", 2);
+        map.put("c", 3);
         String result = Collections.keyJoin(map, ",");
         assertEquals("a,b,c", result);
     }
@@ -763,7 +809,9 @@ public class CollectionsTest {
      */
     public void testValueJoin_Normal() {
         Map<String, Integer> map = new LinkedHashMap<>();
-        map.put("k1", 1); map.put("k2", 2); map.put("k3", 3);
+        map.put("k1", 1);
+        map.put("k2", 2);
+        map.put("k3", 3);
         String result = Collections.valueJoin(map, ",");
         assertEquals("1,2,3", result);
     }

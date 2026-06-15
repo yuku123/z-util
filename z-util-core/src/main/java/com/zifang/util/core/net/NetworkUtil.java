@@ -57,7 +57,7 @@ public class NetworkUtil {
      *
      * @return MAC地址字符串，格式如 "AA-BB-CC-DD-EE-FF"
      * @throws SocketException      如果发生网络接口访问错误
-     * @throws UnknownHostException  如果无法确定本地主机地址
+     * @throws UnknownHostException 如果无法确定本地主机地址
      */
     public static String getMac() throws SocketException, UnknownHostException {
         return getMac(MINUS);
@@ -132,6 +132,7 @@ public class NetworkUtil {
 
     /**
      * 获取本地第一个有效IPv4地址（非回环、非禁用、非IPv6）
+     *
      * @return 本地IP字符串，获取失败返回null
      */
     public static String getLocalIp() {
@@ -187,9 +188,11 @@ public class NetworkUtil {
     }
 
     // 测试
+
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws UnknownHostException {

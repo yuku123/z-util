@@ -2,8 +2,8 @@ package com.zifang.util.proxy.a.decompile.app;
 
 import com.zifang.util.proxy.a.decompile.core.FileCreator;
 import com.zifang.util.proxy.a.decompile.core.SrcCreator;
-import com.zifang.util.proxy.a.resolver.ByteCodeResolver;
 import com.zifang.util.proxy.a.model.ClassFile;
+import com.zifang.util.proxy.a.resolver.ByteCodeResolver;
 
 /**
  * 反编译器入口类
@@ -61,7 +61,7 @@ public class App {
         try {
             // 1. 使用 ByteCodeResolver 解析字节码
             ClassFile classFile = ByteCodeResolver.parseFromStream(
-                new java.io.ByteArrayInputStream(classData));
+                    new java.io.ByteArrayInputStream(classData));
 
             // 2. 使用 SrcCreator 直接生成 Java 源码
             return SrcCreator.createJavaFileSrc(classFile);
@@ -93,7 +93,7 @@ public class App {
     /**
      * 从类名获取 class 文件路径并反编译
      *
-     * @param className 完整类名（如 com.example.MyClass）
+     * @param className   完整类名（如 com.example.MyClass）
      * @param classLoader 类加载器
      */
     public static void decompileByName(String className, ClassLoader classLoader) {

@@ -17,6 +17,7 @@ package com.zifang.util.ml.inheritance.chapter2;
  *
  * @author zifang
  */
+
 /**
  * Individual类。
  */
@@ -31,7 +32,7 @@ public class Individual {
      */
     /**
      * Individual方法。
-     *      * @param chromosome int[]类型参数
+     * * @param chromosome int[]类型参数
      */
     public Individual(int[] chromosome) {
         // Create individual chromosome
@@ -52,7 +53,7 @@ public class Individual {
      */
     /**
      * Individual方法。
-     *      * @param chromosomeLength int类型参数
+     * * @param chromosomeLength int类型参数
      */
     public Individual(int chromosomeLength) {
 
@@ -74,6 +75,7 @@ public class Individual {
      */
     /**
      * getChromosome方法。
+     *
      * @return int[]类型返回值
      */
     public int[] getChromosome() {
@@ -87,6 +89,7 @@ public class Individual {
      */
     /**
      * getChromosomeLength方法。
+     *
      * @return int类型返回值
      */
     public int getChromosomeLength() {
@@ -102,7 +105,8 @@ public class Individual {
      */
     /**
      * setGene方法。
-     *      * @param offset int类型参数
+     * * @param offset int类型参数
+     *
      * @param gene int类型参数
      */
     public void setGene(int offset, int gene) {
@@ -117,7 +121,8 @@ public class Individual {
      */
     /**
      * getGene方法。
-     *      * @param offset int类型参数
+     * * @param offset int类型参数
+     *
      * @return int类型返回值
      */
     public int getGene(int offset) {
@@ -129,12 +134,14 @@ public class Individual {
      *
      * @param fitness The individuals fitness
      */
+
     /**
-     * setFitness方法。
-     *      * @param fitness double类型参数
+     * getFitness方法。
+     *
+     * @return double类型返回值
      */
-    public void setFitness(double fitness) {
-        this.fitness = fitness;
+    public double getFitness() {
+        return this.fitness;
     }
 
     /**
@@ -142,12 +149,13 @@ public class Individual {
      *
      * @return The individual's fitness
      */
+
     /**
-     * getFitness方法。
-     * @return double类型返回值
+     * setFitness方法。
+     * * @param fitness double类型参数
      */
-    public double getFitness() {
-        return this.fitness;
+    public void setFitness(double fitness) {
+        this.fitness = fitness;
     }
 
 
@@ -156,8 +164,10 @@ public class Individual {
      *
      * @return string representation of the chromosome
      */
+
     /**
      * toString方法。
+     *
      * @return String类型返回值
      */
     public String toString() {

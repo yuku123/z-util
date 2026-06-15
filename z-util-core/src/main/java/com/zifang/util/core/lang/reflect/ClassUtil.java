@@ -5,7 +5,10 @@ import com.zifang.util.core.lang.validator.Validator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.net.*;
@@ -35,6 +38,15 @@ public class ClassUtil {
     public static String METHOD_GET_PREFIX = "get";
     public static String METHOD_IS_PREFIX = "is";
     public static String METHOD_SET_PREFIX = "set";
+    private static ReflectUtilSecurityManager SECURITY_MANAGER;
+
+    static {
+        try {
+            SECURITY_MANAGER = new ReflectUtilSecurityManager();
+        } catch (Exception ex) {
+            SECURITY_MANAGER = null;
+        }
+    }
 
     /**
      * 获取指定目录下所有的类名
@@ -53,7 +65,8 @@ public class ClassUtil {
 
     /**
      * getAccessibleFields方法。
-     *      * @param clazz Class?类型参数
+     * * @param clazz Class?类型参数
+     *
      * @return static Field[]类型返回值
      */
     public static Field[] getAccessibleFields(Class<?> clazz) {
@@ -62,7 +75,8 @@ public class ClassUtil {
 
     /**
      * getAccessibleFields方法。
-     *      * @param clazz Class?类型参数
+     * * @param clazz Class?类型参数
+     *
      * @param limit Class?类型参数
      * @return static Field[]类型返回值
      */
@@ -110,6 +124,8 @@ public class ClassUtil {
         return fields;
     }
 
+    // ---------------------------------------------------------------- supported methods
+
     private static void addFieldIfNotExist(List<Field> allFields, Field newField) {
         for (Field f : allFields) {
             if (compareSignatures(f, newField)) {
@@ -145,10 +161,10 @@ public class ClassUtil {
                 && !clazz.isPrimitive();//
     }
 
-    // ---------------------------------------------------------------- supported methods
     /**
      * getSupportedMethods方法。
-     *      * @param clazz Class类型参数
+     * * @param clazz Class类型参数
+     *
      * @return static Method[]类型返回值
      */
     public static Method[] getSupportedMethods(Class clazz) {
@@ -183,9 +199,12 @@ public class ClassUtil {
     }
 
 
+    // ---------------------------------------------------------------- compare
+
     /**
      * getSupportedFields方法。
-     *      * @param clazz Class类型参数
+     * * @param clazz Class类型参数
+     *
      * @return static Field[]类型返回值
      */
     public static Field[] getSupportedFields(Class clazz) {
@@ -194,7 +213,8 @@ public class ClassUtil {
 
     /**
      * getSupportedFields方法。
-     *      * @param clazz Class类型参数
+     * * @param clazz Class类型参数
+     *
      * @param limit Class类型参数
      * @return static Field[]类型返回值
      */
@@ -217,9 +237,6 @@ public class ClassUtil {
         }
         return supportedFields.toArray(new Field[0]);
     }
-
-
-    // ---------------------------------------------------------------- compare
 
     /**
      * Compares method declarations: signature and return types.
@@ -251,15 +268,21 @@ public class ClassUtil {
         return compareParameters(first.getParameterTypes(), second.getParameterTypes());
     }
 
+    // ---------------------------------------------------------------- force
+
     /**
      * compareSignatures方法。
-     *      * @param first Field类型参数
+     * * @param first Field类型参数
+     *
      * @param second Field类型参数
      * @return static boolean类型返回值
      */
     public static boolean compareSignatures(Field first, Field second) {
         return first.getName().equals(second.getName());
     }
+
+
+    // ---------------------------------------------------------------- generics
 
     /**
      * Compares classes, usually method or ctor parameters.
@@ -275,8 +298,6 @@ public class ClassUtil {
         }
         return true;
     }
-
-    // ---------------------------------------------------------------- force
 
     /**
      * Suppress access check against a reflection object. SecurityException is silently ignored.
@@ -296,9 +317,6 @@ public class ClassUtil {
             // ignore
         }
     }
-
-
-    // ---------------------------------------------------------------- generics
 
     /**
      * Returns single component type. Index is used when type consist of many
@@ -410,7 +428,6 @@ public class ClassUtil {
         return getComponentType(type.getGenericSuperclass(), index);
     }
 
-
     /**
      * Returns raw class for given <code>type</code>. Use this method with both
      * regular and generic types.
@@ -475,7 +492,6 @@ public class ClassUtil {
         return null;
     }
 
-
     /**
      * Resolves <code>TypeVariable</code> with given implementation class.
      */
@@ -531,6 +547,8 @@ public class ClassUtil {
         return null;
     }
 
+    // ---------------------------------------------------------------- annotations
+
     /**
      * Converts <code>Type</code> to a <code>String</code>. Supports successor interfaces:
      * <ul>
@@ -546,6 +564,8 @@ public class ClassUtil {
         typeToString(sb, type, new HashSet<Type>());
         return sb.toString();
     }
+
+    // ---------------------------------------------------------------- caller
 
     private static void typeToString(StringBuilder sb, Type type, Set<Type> visited) {
         if (type instanceof ParameterizedType) {
@@ -613,8 +633,6 @@ public class ClassUtil {
         }
     }
 
-    // ---------------------------------------------------------------- annotations
-
     /**
      * Reads annotation value. Returns <code>null</code> on error
      * (e.g. when value name not found).
@@ -625,29 +643,6 @@ public class ClassUtil {
             return method.invoke(annotation);
         } catch (Exception ignore) {
             return null;
-        }
-    }
-
-    // ---------------------------------------------------------------- caller
-
-    private static class ReflectUtilSecurityManager extends SecurityManager {
-    /**
-     * getCallerClass方法。
-     *      * @param callStackDepth int类型参数
-     * @return Class类型返回值
-     */
-        public Class getCallerClass(int callStackDepth) {
-            return getClassContext()[callStackDepth + 1];
-        }
-    }
-
-    private static ReflectUtilSecurityManager SECURITY_MANAGER;
-
-    static {
-        try {
-            SECURITY_MANAGER = new ReflectUtilSecurityManager();
-        } catch (Exception ex) {
-            SECURITY_MANAGER = null;
         }
     }
 
@@ -686,8 +681,6 @@ public class ClassUtil {
         }
     }
 
-    // ---------------------------------------------------------------- enum
-
     /**
      * Returns <code>enum</code> class or <code>null</code> if class is not an enum.
      */
@@ -706,8 +699,7 @@ public class ClassUtil {
         return null;
     }
 
-
-    // ---------------------------------------------------------------- misc
+    // ---------------------------------------------------------------- enum
 
     /**
      * Returns the class of the immediate subclass of the given parent class for
@@ -738,6 +730,9 @@ public class ClassUtil {
             childClass = parent;
         }
     }
+
+
+    // ---------------------------------------------------------------- misc
 
     /**
      * Returns the jar file from which the given class is loaded; or null
@@ -771,8 +766,6 @@ public class ClassUtil {
         }
     }
 
-    // ---------------------------------------------------------------- class names
-
     /**
      * Resolves class file name from class name by replacing dot's with '/' separator
      * and adding class extension at the end. If array, component type is returned.
@@ -783,6 +776,8 @@ public class ClassUtil {
         }
         return convertClassNameToFileName(clazz.getName());
     }
+
+    // ---------------------------------------------------------------- class names
 
     /**
      * Resolves class file name from class name by replacing dot's with '/' separator.
@@ -807,6 +802,28 @@ public class ClassUtil {
      */
     private static String getShortClassName(Class clazz, int shortUpTo) {
         return ""; // todo
+    }
+
+    /**
+     * getClassNameByFile方法。
+     * * @param filePath String类型参数
+     *
+     * @param childPackage boolean类型参数
+     * @return static List<String>类型返回值
+     */
+    public static List<String> getClassNameByFile(String filePath, boolean childPackage) {
+        List<String> myClassName = new ArrayList<>();
+        List<File> files = new ArrayList<>();
+//        List<File> files = FileUtil.listFile(filePath, childPackage);
+        for (File file : files) {
+            if (file.getName().endsWith(".class")) {
+                String childFilePath = file.getPath();
+                int index = filePath.replaceAll("\\\\", ".").length();
+                childFilePath = childFilePath.replaceAll("\\\\", ".").substring(index + 1, childFilePath.length());
+                myClassName.add(childFilePath);
+            }
+        }
+        return myClassName;
     }
 
     /**
@@ -862,32 +879,10 @@ public class ClassUtil {
 ////        return fileNames;
 ////    }
 
-
-    /**
-     * getClassNameByFile方法。
-     *      * @param filePath String类型参数
-     * @param childPackage boolean类型参数
-     * @return static List<String>类型返回值
-     */
-    public static List<String> getClassNameByFile(String filePath, boolean childPackage) {
-        List<String> myClassName = new ArrayList<>();
-        List<File> files = new ArrayList<>();
-//        List<File> files = FileUtil.listFile(filePath, childPackage);
-        for (File file : files) {
-            if (file.getName().endsWith(".class")) {
-                String childFilePath = file.getPath();
-                int index = filePath.replaceAll("\\\\", ".").length();
-                childFilePath = childFilePath.replaceAll("\\\\", ".").substring(index + 1, childFilePath.length());
-                myClassName.add(childFilePath);
-            }
-        }
-        return myClassName;
-    }
-
-
     /**
      * getClassNameByJar方法。
-     *      * @param jarPath String类型参数
+     * * @param jarPath String类型参数
+     *
      * @return static List<String>类型返回值
      */
     public static List<String> getClassNameByJar(String jarPath) {
@@ -906,6 +901,26 @@ public class ClassUtil {
             e.printStackTrace();
         }
         return myClassName;
+    }
+
+    /**
+     * getSuperClassChian方法。
+     * * @param className String类型参数
+     *
+     * @return static String[]类型返回值
+     */
+    public static String[] getSuperClassChian(String className) {
+        Class classz = loadClass(className);
+        List<String> list = new ArrayList<>();
+        Class superclass = classz.getSuperclass();
+        String superName = superclass.getName();
+        if (!"java.lang.Object".equals(superName)) {
+            list.add(superName);
+            list.addAll(Arrays.asList(getSuperClassChian(superName)));
+        } else {
+            list.add(superName);
+        }
+        return list.toArray(new String[list.size()]);
     }
 
 //
@@ -945,25 +960,6 @@ public class ClassUtil {
 //    }
 
     /**
-     * getSuperClassChian方法。
-     *      * @param className String类型参数
-     * @return static String[]类型返回值
-     */
-    public static String[] getSuperClassChian(String className) {
-        Class classz = loadClass(className);
-        List<String> list = new ArrayList<>();
-        Class superclass = classz.getSuperclass();
-        String superName = superclass.getName();
-        if (!"java.lang.Object".equals(superName)) {
-            list.add(superName);
-            list.addAll(Arrays.asList(getSuperClassChian(superName)));
-        } else {
-            list.add(superName);
-        }
-        return list.toArray(new String[list.size()]);
-    }
-
-    /**
      * 获取资源文件
      */
     public static File getFile(String resourceLocation) throws FileNotFoundException {
@@ -989,7 +985,8 @@ public class ClassUtil {
 
     /**
      * getFile方法。
-     *      * @param resourceUrl URL类型参数
+     * * @param resourceUrl URL类型参数
+     *
      * @return static File类型返回值
      */
     public static File getFile(URL resourceUrl) throws FileNotFoundException {
@@ -998,7 +995,8 @@ public class ClassUtil {
 
     /**
      * getFile方法。
-     *      * @param resourceUrl URL类型参数
+     * * @param resourceUrl URL类型参数
+     *
      * @param description String类型参数
      * @return static File类型返回值
      */
@@ -1017,7 +1015,8 @@ public class ClassUtil {
 
     /**
      * toURI方法。
-     *      * @param url URL类型参数
+     * * @param url URL类型参数
+     *
      * @return static URI类型返回值
      */
     public static URI toURI(URL url) throws URISyntaxException {
@@ -1026,10 +1025,23 @@ public class ClassUtil {
 
     /**
      * toURI方法。
-     *      * @param location String类型参数
+     * * @param location String类型参数
+     *
      * @return static URI类型返回值
      */
     public static URI toURI(String location) throws URISyntaxException {
         return new URI(location.replace(" ", "%20"));
+    }
+
+    private static class ReflectUtilSecurityManager extends SecurityManager {
+        /**
+         * getCallerClass方法。
+         * * @param callStackDepth int类型参数
+         *
+         * @return Class类型返回值
+         */
+        public Class getCallerClass(int callStackDepth) {
+            return getClassContext()[callStackDepth + 1];
+        }
     }
 }

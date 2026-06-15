@@ -78,7 +78,8 @@ public class NameThreadFactory {
 
     /**
      * setNameFormat方法。
-     *      * @param nameFormat String类型参数
+     * * @param nameFormat String类型参数
+     *
      * @return NameThreadFactory类型返回值
      */
     public NameThreadFactory setNameFormat(String nameFormat) {
@@ -89,7 +90,8 @@ public class NameThreadFactory {
 
     /**
      * setDaemon方法。
-     *      * @param daemon boolean类型参数
+     * * @param daemon boolean类型参数
+     *
      * @return NameThreadFactory类型返回值
      */
     public NameThreadFactory setDaemon(boolean daemon) {
@@ -99,7 +101,8 @@ public class NameThreadFactory {
 
     /**
      * setPriority方法。
-     *      * @param priority int类型参数
+     * * @param priority int类型参数
+     *
      * @return NameThreadFactory类型返回值
      */
     public NameThreadFactory setPriority(int priority) {
@@ -111,7 +114,8 @@ public class NameThreadFactory {
 
     /**
      * setUncaughtExceptionHandler方法。
-     *      * @param uncaughtExceptionHandler UncaughtExceptionHandler类型参数
+     * * @param uncaughtExceptionHandler UncaughtExceptionHandler类型参数
+     *
      * @return NameThreadFactory类型返回值
      */
     public NameThreadFactory setUncaughtExceptionHandler(
@@ -123,7 +127,8 @@ public class NameThreadFactory {
 
     /**
      * setThreadFactory方法。
-     *      * @param backingThreadFactory ThreadFactory类型参数
+     * * @param backingThreadFactory ThreadFactory类型参数
+     *
      * @return NameThreadFactory类型返回值
      */
     public NameThreadFactory setThreadFactory(ThreadFactory backingThreadFactory) {
@@ -133,6 +138,7 @@ public class NameThreadFactory {
 
     /**
      * build方法。
+     *
      * @return ThreadFactory类型返回值
      */
     public ThreadFactory build() {

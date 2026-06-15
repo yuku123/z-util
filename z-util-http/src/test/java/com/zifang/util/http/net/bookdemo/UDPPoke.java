@@ -19,10 +19,11 @@ public class UDPPoke {
 
     /**
      * UDPPoke方法。
-     *      * @param host InetAddress类型参数
-     * @param port int类型参数
+     * * @param host InetAddress类型参数
+     *
+     * @param port       int类型参数
      * @param bufferSize int类型参数
-     * @param timeout int类型参数
+     * @param timeout    int类型参数
      */
     public UDPPoke(InetAddress host, int port, int bufferSize, int timeout) {
         this.bufferSize = bufferSize;
@@ -37,8 +38,9 @@ public class UDPPoke {
 
     /**
      * UDPPoke方法。
-     *      * @param host InetAddress类型参数
-     * @param port int类型参数
+     * * @param host InetAddress类型参数
+     *
+     * @param port       int类型参数
      * @param bufferSize int类型参数
      */
     public UDPPoke(InetAddress host, int port, int bufferSize) {
@@ -47,7 +49,8 @@ public class UDPPoke {
 
     /**
      * UDPPoke方法。
-     *      * @param host InetAddress类型参数
+     * * @param host InetAddress类型参数
+     *
      * @param port int类型参数
      */
     public UDPPoke(InetAddress host, int port) {
@@ -55,31 +58,9 @@ public class UDPPoke {
     }
 
     /**
-     * poke方法。
-     * @return byte[]类型返回值
-     */
-    public byte[] poke() {
-        try (DatagramSocket socket = new DatagramSocket(0)) {
-            DatagramPacket outgoing = new DatagramPacket(new byte[1], 1, host, port);
-            socket.connect(host, port);
-            socket.setSoTimeout(timeout);
-
-            socket.send(outgoing);
-            DatagramPacket incoming = new DatagramPacket(new byte[bufferSize], bufferSize);
-            // next line blocks until the response is received
-            socket.receive(incoming);
-            int numBytes = incoming.getLength();
-            byte[] response = new byte[numBytes];
-            System.arraycopy(incoming.getData(), 0, response, 0, numBytes);
-            return response;
-        } catch (IOException ex) {
-            return null;
-        }
-    }
-
-    /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -101,5 +82,29 @@ public class UDPPoke {
         }
         String result = new String(response, StandardCharsets.US_ASCII);
         System.out.println(result);
+    }
+
+    /**
+     * poke方法。
+     *
+     * @return byte[]类型返回值
+     */
+    public byte[] poke() {
+        try (DatagramSocket socket = new DatagramSocket(0)) {
+            DatagramPacket outgoing = new DatagramPacket(new byte[1], 1, host, port);
+            socket.connect(host, port);
+            socket.setSoTimeout(timeout);
+
+            socket.send(outgoing);
+            DatagramPacket incoming = new DatagramPacket(new byte[bufferSize], bufferSize);
+            // next line blocks until the response is received
+            socket.receive(incoming);
+            int numBytes = incoming.getLength();
+            byte[] response = new byte[numBytes];
+            System.arraycopy(incoming.getData(), 0, response, 0, numBytes);
+            return response;
+        } catch (IOException ex) {
+            return null;
+        }
     }
 }

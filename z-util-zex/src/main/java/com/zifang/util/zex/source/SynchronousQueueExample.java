@@ -18,25 +18,45 @@ import java.util.concurrent.SynchronousQueue;
 public class SynchronousQueueExample {
 
     /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        BlockingQueue<String> q = new SynchronousQueue<>();
+
+        SynchronousQueueProducer producer = new SynchronousQueueProducer(q);
+        new Thread(producer).start();
+
+        SynchronousQueueConsumer consumer1 = new SynchronousQueueConsumer(q);
+        new Thread(consumer1).start();
+
+        SynchronousQueueConsumer consumer2 = new SynchronousQueueConsumer(q);
+        new Thread(consumer2).start();
+
+    }
+
+    /**
      * SynchronousQueue生产者线程。
      */
     static class SynchronousQueueProducer implements Runnable {
 
-        protected BlockingQueue<String> blockingQueue;
         final Random random = new Random();
+        protected BlockingQueue<String> blockingQueue;
 
-    /**
-     * SynchronousQueueProducer方法。
-     *      * @param queue BlockingQueueString类型参数
-     */
+        /**
+         * SynchronousQueueProducer方法。
+         * * @param queue BlockingQueueString类型参数
+         */
         public SynchronousQueueProducer(BlockingQueue<String> queue) {
             this.blockingQueue = queue;
         }
 
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             while (true) {
                 try {
@@ -59,18 +79,18 @@ public class SynchronousQueueExample {
 
         protected BlockingQueue<String> blockingQueue;
 
-    /**
-     * SynchronousQueueConsumer方法。
-     *      * @param queue BlockingQueueString类型参数
-     */
+        /**
+         * SynchronousQueueConsumer方法。
+         * * @param queue BlockingQueueString类型参数
+         */
         public SynchronousQueueConsumer(BlockingQueue<String> queue) {
             this.blockingQueue = queue;
         }
 
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             while (true) {
                 try {
@@ -83,24 +103,5 @@ public class SynchronousQueueExample {
                 }
             }
         }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        BlockingQueue<String>  q = new SynchronousQueue<>();
-
-        SynchronousQueueProducer producer = new SynchronousQueueProducer(q);
-        new Thread(producer).start();
-
-        SynchronousQueueConsumer consumer1 = new SynchronousQueueConsumer(q);
-        new Thread(consumer1).start();
-
-        SynchronousQueueConsumer consumer2 = new SynchronousQueueConsumer(q);
-        new Thread(consumer2).start();
-
     }
 }

@@ -12,6 +12,54 @@ import java.util.concurrent.TimeUnit;
  */
 public class AsyncRecursiveTaskDemo {
 
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        // 18．通过默认的构造器创建ForkJoinPool线程池。
+        ForkJoinPool pool = new ForkJoinPool();
+        // 19．创建3个FolderProcessor任务，并使用不同的文件夹路径来初始化这些任务。
+        FolderProcessor system = new FolderProcessor("C:\\Windows", "log");
+        FolderProcessor apps = new FolderProcessor("C:\\Program Files", "log");
+        FolderProcessor documents = new FolderProcessor("C:\\Documents And Settings", "log");
+        // 20．调用execute()方法执行线程池里的3个任务。
+        pool.execute(system);
+        pool.execute(apps);
+        pool.execute(documents);
+        // 21．在控制台上每隔1秒钟输出线程池的状态信息，直到这3个任务执行结束。
+        do {
+            System.out.printf("******************************************\n");
+            System.out.printf("Main: Parallelism: %d\n", pool.getParallelism());
+            System.out.printf("Main: Active Threads: %d\n", pool.getActiveThreadCount());
+            System.out.printf("Main: Task Count: %d\n", pool.getQueuedTaskCount());
+            System.out.printf("Main: Steal Count: %d\n", pool.getStealCount());
+            System.out.printf("******************************************\n");
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while ((!system.isDone()) || (!apps.isDone()) || (!documents.
+
+                isDone()));
+        // 22．调用shutdown()方法关闭ForkJoinPool线程池。
+        pool.shutdown();
+        // 23．在控制台输出每一个任务产生的结果的大小。
+        List<String> results;
+        results = system.join();
+        System.out.printf("System: %d files found.\n", results.size());
+        results = apps.join();
+        System.out.printf("Apps: %d files found.\n", results.size());
+        results = documents.join();
+        System.out.printf("Documents: %d files found.\n", results.size());
+    }
+
+    // 17．实现范例的主类，创建Main主类，并实现main()方法。
+
     // 1．创建名为FolderProcessor的类，并继承RecursiveTask类，RecursiveTask类的泛型参数为List<String>类型。
     static class FolderProcessor extends RecursiveTask<List<String>> {
         // 2．声明类的serialVersionUID属性。这个元素是必需的，因为RecursiveTask类的父类ForkJoinTask实现了Serializable接口。
@@ -22,11 +70,13 @@ public class AsyncRecursiveTaskDemo {
         private String extension;
 
         // 5．实现类的构造器，用来初始化这些属性。
-    /**
-     * FolderProcessor方法。
-     *      * @param path String类型参数
-     * @param extension String类型参数
-     */
+
+        /**
+         * FolderProcessor方法。
+         * * @param path String类型参数
+         *
+         * @param extension String类型参数
+         */
         public FolderProcessor(String path, String extension) {
             this.path = path;
             this.extension = extension;
@@ -34,10 +84,10 @@ public class AsyncRecursiveTaskDemo {
 
         // 6．实现compute()方法。既然指定了RecursiveTask类泛型参数为List<String>类型，那么，这个方法必须返回一个同样类型的对象。
         @Override
-    /**
-     * compute方法。
-     * @return List<String>类型返回值
-     */
+        /**
+         * compute方法。
+         * @return List<String>类型返回值
+         */
         protected List<String> compute() {
             // 7．声明一个名为list的String对象列表，用来存储文件夹中文件的名称。
             List<String> list = new ArrayList<>();
@@ -83,52 +133,6 @@ public class AsyncRecursiveTaskDemo {
         private boolean checkFile(String name) {
             return name.endsWith(extension);
         }
-    }
-
-    // 17．实现范例的主类，创建Main主类，并实现main()方法。
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        // 18．通过默认的构造器创建ForkJoinPool线程池。
-        ForkJoinPool pool = new ForkJoinPool();
-        // 19．创建3个FolderProcessor任务，并使用不同的文件夹路径来初始化这些任务。
-        FolderProcessor system = new FolderProcessor("C:\\Windows", "log");
-        FolderProcessor apps = new FolderProcessor("C:\\Program Files", "log");
-        FolderProcessor documents = new FolderProcessor("C:\\Documents And Settings", "log");
-        // 20．调用execute()方法执行线程池里的3个任务。
-        pool.execute(system);
-        pool.execute(apps);
-        pool.execute(documents);
-        // 21．在控制台上每隔1秒钟输出线程池的状态信息，直到这3个任务执行结束。
-        do {
-            System.out.printf("******************************************\n");
-            System.out.printf("Main: Parallelism: %d\n", pool.getParallelism());
-            System.out.printf("Main: Active Threads: %d\n", pool.getActiveThreadCount());
-            System.out.printf("Main: Task Count: %d\n", pool.getQueuedTaskCount());
-            System.out.printf("Main: Steal Count: %d\n", pool.getStealCount());
-            System.out.printf("******************************************\n");
-
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } while ((!system.isDone()) || (!apps.isDone()) || (!documents.
-
-                isDone()));
-        // 22．调用shutdown()方法关闭ForkJoinPool线程池。
-        pool.shutdown();
-        // 23．在控制台输出每一个任务产生的结果的大小。
-        List<String> results;
-        results = system.join();
-        System.out.printf("System: %d files found.\n", results.size());
-        results = apps.join();
-        System.out.printf("Apps: %d files found.\n", results.size());
-        results = documents.join();
-        System.out.printf("Documents: %d files found.\n", results.size());
     }
 }
 /**

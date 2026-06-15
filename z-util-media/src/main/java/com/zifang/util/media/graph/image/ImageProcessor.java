@@ -1,11 +1,9 @@
 package com.zifang.util.media.graph.image;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.*;
-import java.io.*;
+import java.io.File;
 
 /**
  * 图片处理核心实现类。
@@ -30,7 +28,7 @@ public final class ImageProcessor {
 
     /**
      * ImageProcessor方法。
-     *      * @param image BufferedImage类型参数
+     * * @param image BufferedImage类型参数
      */
     public ImageProcessor(BufferedImage image) {
         this.image = image;
@@ -39,6 +37,47 @@ public final class ImageProcessor {
     }
 
     // ==================== 基础变换 ====================
+
+    private static int clamp(int v) {
+        return v < 0 ? 0 : (v > 255 ? 255 : v);
+    }
+
+    private static float[] boxKernel(int radius) {
+        int size = radius * 2 + 1;
+        float[] data = new float[size * size];
+        float value = 1.0f / (size * size);
+        for (int i = 0; i < data.length; i++) {
+            data[i] = value;
+        }
+        return data;
+    }
+
+    /**
+     * 从文件加载。
+     */
+    public static ImageProcessor load(String path) throws java.io.IOException {
+        return new ImageProcessor(ImageReadWrite.read(path));
+    }
+
+    /**
+     * load方法。
+     * * @param file File类型参数
+     *
+     * @return static ImageProcessor类型返回值
+     */
+    public static ImageProcessor load(File file) throws java.io.IOException {
+        return new ImageProcessor(ImageReadWrite.read(file));
+    }
+
+    /**
+     * load方法。
+     * * @param data byte[]类型参数
+     *
+     * @return static ImageProcessor类型返回值
+     */
+    public static ImageProcessor load(byte[] data) throws java.io.IOException {
+        return new ImageProcessor(ImageReadWrite.read(data));
+    }
 
     /**
      * 调整尺寸。
@@ -61,6 +100,8 @@ public final class ImageProcessor {
         this.height = newHeight;
         return this;
     }
+
+    // ==================== 颜色变换（像素级） ====================
 
     /**
      * 按比例缩放。
@@ -130,7 +171,7 @@ public final class ImageProcessor {
         return this;
     }
 
-    // ==================== 颜色变换（像素级） ====================
+    // ==================== 卷积操作 ====================
 
     /**
      * 灰度化（逐像素实现）。
@@ -188,6 +229,8 @@ public final class ImageProcessor {
         return this;
     }
 
+    // ==================== 叠加 / 水印 ====================
+
     /**
      * 反色。
      */
@@ -228,8 +271,6 @@ public final class ImageProcessor {
         return this;
     }
 
-    // ==================== 卷积操作 ====================
-
     /**
      * 模糊（均值滤波）。
      *
@@ -242,14 +283,16 @@ public final class ImageProcessor {
         return this;
     }
 
+    // ==================== 拼接 ====================
+
     /**
      * 锐化。
      */
     public ImageProcessor sharpen() {
         float[] data = {
-            0, -1, 0,
-            -1, 5, -1,
-            0, -1, 0
+                0, -1, 0,
+                -1, 5, -1,
+                0, -1, 0
         };
         convolve(data, 3);
         return this;
@@ -260,15 +303,15 @@ public final class ImageProcessor {
      */
     public ImageProcessor edgeDetect() {
         float[] data = {
-            -1, -1, -1,
-            -1,  8, -1,
-            -1, -1, -1
+                -1, -1, -1,
+                -1, 8, -1,
+                -1, -1, -1
         };
         convolve(data, 3);
         return this;
     }
 
-    // ==================== 叠加 / 水印 ====================
+    // ==================== 获取结果 ====================
 
     /**
      * 在图片上叠加另一个图片（图层混合）。
@@ -290,12 +333,12 @@ public final class ImageProcessor {
     /**
      * 添加文字水印。
      *
-     * @param text     文字
-     * @param x        x 坐标
-     * @param y        y 坐标
-     * @param font     字体
-     * @param color    颜色
-     * @param alpha    透明度 0~1
+     * @param text  文字
+     * @param x     x 坐标
+     * @param y     y 坐标
+     * @param font  字体
+     * @param color 颜色
+     * @param alpha 透明度 0~1
      * @return this
      */
     public ImageProcessor watermarkText(String text, int x, int y, Font font, Color color, float alpha) {
@@ -325,8 +368,6 @@ public final class ImageProcessor {
         g.dispose();
         return this;
     }
-
-    // ==================== 拼接 ====================
 
     /**
      * 横向拼接另一张图片。
@@ -368,8 +409,6 @@ public final class ImageProcessor {
         return this;
     }
 
-    // ==================== 获取结果 ====================
-
     /**
      * 获取处理后的图片。
      */
@@ -383,6 +422,8 @@ public final class ImageProcessor {
     public int getWidth() {
         return width;
     }
+
+    // ==================== 内部工具 ====================
 
     /**
      * 获取高。
@@ -414,14 +455,15 @@ public final class ImageProcessor {
 
     /**
      * toBytes方法。
-     *      * @param format String类型参数
+     * * @param format String类型参数
+     *
      * @return byte[]类型返回值
      */
     public byte[] toBytes(String format) throws java.io.IOException {
         return ImageReadWrite.toBytes(image, format);
     }
 
-    // ==================== 内部工具 ====================
+    // ==================== 静态工厂 ====================
 
     private int[] getPixels() {
         return image.getRGB(0, 0, width, height, null, 0, width);
@@ -431,52 +473,11 @@ public final class ImageProcessor {
         image.setRGB(0, 0, width, height, pixels, 0, width);
     }
 
-    private static int clamp(int v) {
-        return v < 0 ? 0 : (v > 255 ? 255 : v);
-    }
-
     private void convolve(float[] kernel, int size) {
         Kernel conv = new Kernel(size, size, kernel);
         ConvolveOp op = new ConvolveOp(conv, ConvolveOp.EDGE_NO_OP, null);
         BufferedImage filtered = new BufferedImage(width, height, image.getType());
         op.filter(image, filtered);
         this.image = filtered;
-    }
-
-    private static float[] boxKernel(int radius) {
-        int size = radius * 2 + 1;
-        float[] data = new float[size * size];
-        float value = 1.0f / (size * size);
-        for (int i = 0; i < data.length; i++) {
-            data[i] = value;
-        }
-        return data;
-    }
-
-    // ==================== 静态工厂 ====================
-
-    /**
-     * 从文件加载。
-     */
-    public static ImageProcessor load(String path) throws java.io.IOException {
-        return new ImageProcessor(ImageReadWrite.read(path));
-    }
-
-    /**
-     * load方法。
-     *      * @param file File类型参数
-     * @return static ImageProcessor类型返回值
-     */
-    public static ImageProcessor load(File file) throws java.io.IOException {
-        return new ImageProcessor(ImageReadWrite.read(file));
-    }
-
-    /**
-     * load方法。
-     *      * @param data byte[]类型参数
-     * @return static ImageProcessor类型返回值
-     */
-    public static ImageProcessor load(byte[] data) throws java.io.IOException {
-        return new ImageProcessor(ImageReadWrite.read(data));
     }
 }

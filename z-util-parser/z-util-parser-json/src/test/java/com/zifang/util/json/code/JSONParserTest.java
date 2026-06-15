@@ -5,11 +5,13 @@ import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * JSONParser (tokenizer + recursive descent parser) 核心功能测试
  */
+
 /**
  * JSONParserTest类。
  */

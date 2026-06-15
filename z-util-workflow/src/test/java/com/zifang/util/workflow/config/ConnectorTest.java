@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 /**
  * Connector 连接类测试
  */
+
 /**
  * ConnectorTest类。
  */
@@ -212,14 +213,22 @@ public class ConnectorTest {
 
         Connector startConnector = new Connector();
         startConnector.setPre(null);
-        startConnector.setPost(new ArrayList<String>() {{ add("process"); }});
+        startConnector.setPost(new ArrayList<String>() {{
+            add("process");
+        }});
 
         Connector processConnector = new Connector();
-        processConnector.setPre(new ArrayList<String>() {{ add("start"); }});
-        processConnector.setPost(new ArrayList<String>() {{ add("end"); }});
+        processConnector.setPre(new ArrayList<String>() {{
+            add("start");
+        }});
+        processConnector.setPost(new ArrayList<String>() {{
+            add("end");
+        }});
 
         Connector endConnector = new Connector();
-        endConnector.setPre(new ArrayList<String>() {{ add("process"); }});
+        endConnector.setPre(new ArrayList<String>() {{
+            add("process");
+        }});
         endConnector.setPost(null);
 
         // 验证连接关系
@@ -240,18 +249,32 @@ public class ConnectorTest {
         //      -> node-c ->
 
         Connector nodeAConnector = new Connector();
-        nodeAConnector.setPost(new ArrayList<String>() {{ add("node-b"); add("node-c"); }});
+        nodeAConnector.setPost(new ArrayList<String>() {{
+            add("node-b");
+            add("node-c");
+        }});
 
         Connector nodeBConnector = new Connector();
-        nodeBConnector.setPre(new ArrayList<String>() {{ add("node-a"); }});
-        nodeBConnector.setPost(new ArrayList<String>() {{ add("node-d"); }});
+        nodeBConnector.setPre(new ArrayList<String>() {{
+            add("node-a");
+        }});
+        nodeBConnector.setPost(new ArrayList<String>() {{
+            add("node-d");
+        }});
 
         Connector nodeCConnector = new Connector();
-        nodeCConnector.setPre(new ArrayList<String>() {{ add("node-a"); }});
-        nodeCConnector.setPost(new ArrayList<String>() {{ add("node-d"); }});
+        nodeCConnector.setPre(new ArrayList<String>() {{
+            add("node-a");
+        }});
+        nodeCConnector.setPost(new ArrayList<String>() {{
+            add("node-d");
+        }});
 
         Connector nodeDConnector = new Connector();
-        nodeDConnector.setPre(new ArrayList<String>() {{ add("node-b"); add("node-c"); }});
+        nodeDConnector.setPre(new ArrayList<String>() {{
+            add("node-b");
+            add("node-c");
+        }});
 
         // 验证分支结构
         assertEquals(2, nodeAConnector.getPost().size());

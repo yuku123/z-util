@@ -22,7 +22,7 @@ public class BloomFilter {
 
     /**
      * @param expectedInsertions 期望插入元素数量
-     * @param falsePositiveRate 期望误判率（0.0 ~ 1.0），如 0.01 表示 1%
+     * @param falsePositiveRate  期望误判率（0.0 ~ 1.0），如 0.01 表示 1%
      */
     public BloomFilter(int expectedInsertions, double falsePositiveRate) {
         if (expectedInsertions <= 0) {
@@ -38,7 +38,26 @@ public class BloomFilter {
         this.bits = new BitSet(bitSize);
     }
 
-    /** 添加元素。 */
+    private static long fnv1a64(String s) {
+        long h = 0xcbf29ce484222325L;
+        for (int i = 0; i < s.length(); i++) {
+            h ^= s.charAt(i);
+            h *= 0x100000001b3L;
+        }
+        return h;
+    }
+
+    private static long murmur64(String s) {
+        long h = 0;
+        for (int i = 0; i < s.length(); i++) {
+            h = 31L * h + s.charAt(i);
+        }
+        return h;
+    }
+
+    /**
+     * 添加元素。
+     */
     public void add(Object o) {
         if (o == null) {
             throw new IllegalArgumentException("BloomFilter does not support null");
@@ -49,7 +68,9 @@ public class BloomFilter {
         }
     }
 
-    /** 元素是否"可能存在"。 */
+    /**
+     * 元素是否"可能存在"。
+     */
     public boolean mightContain(Object o) {
         if (o == null) {
             return false;
@@ -92,23 +113,6 @@ public class BloomFilter {
             h2 = (long) h * 0x9E3779B97F4A7C15L;
         }
         return new long[]{h1, h2};
-    }
-
-    private static long fnv1a64(String s) {
-        long h = 0xcbf29ce484222325L;
-        for (int i = 0; i < s.length(); i++) {
-            h ^= s.charAt(i);
-            h *= 0x100000001b3L;
-        }
-        return h;
-    }
-
-    private static long murmur64(String s) {
-        long h = 0;
-        for (int i = 0; i < s.length(); i++) {
-            h = 31L * h + s.charAt(i);
-        }
-        return h;
     }
 
     public int bitSize() {

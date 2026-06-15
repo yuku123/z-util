@@ -10,6 +10,19 @@ package com.zifang.util.zex.bust.chapter4.case4;
  * @version 1.0
  */
 class Human8 {
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        Human8 human = new Human8();
+        human.handle(1);
+        human.handle(1, 2);
+        human.handle(1, 2, 3);
+    }
+
     void handle(int d) {
         System.out.println("handle(int d)");
     }
@@ -20,17 +33,5 @@ class Human8 {
 
     void handle(int... d) {
         System.out.println("int... d");
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        Human8 human = new Human8();
-        human.handle(1);
-        human.handle(1, 2);
-        human.handle(1, 2, 3);
     }
 }

@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter9;
  * @author zifang
  * @version 1.0
  */
+
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
@@ -21,18 +22,10 @@ public class ElementTest {
     @Demo("字段注解")
     private String name;
 
-    @Demo("方法注解")
-    /**
-     * f方法。
-     *      * @param @Demo("参数a" Object类型参数
-     */
-    public void f(@Demo("参数a") String a, @Demo("参数b") String b) {
-
-    }
-
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -51,5 +44,14 @@ public class ElementTest {
         //判断注解Demo是否在该元素上
         boolean b = clazz.isAnnotationPresent(Demo.class);
         System.out.println("b:" + b);
+    }
+
+    @Demo("方法注解")
+    /**
+     * f方法。
+     *      * @param @Demo("参数a" Object类型参数
+     */
+    public void f(@Demo("参数a") String a, @Demo("参数b") String b) {
+
     }
 }

@@ -13,8 +13,9 @@ public class Example3 extends Thread {
 
     /**
      * Example3方法。
-     *      * @param key String类型参数
-     * @param key2 String类型参数
+     * * @param key String类型参数
+     *
+     * @param key2  String类型参数
      * @param value String类型参数
      */
     public Example3(String key, String key2, String value) {
@@ -32,7 +33,8 @@ public class Example3 extends Thread {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -55,24 +57,25 @@ public class Example3 extends Thread {
 }
 
 class TestDo2 {
+    private static TestDo2 _instance = new TestDo2();
+    private CopyOnWriteArrayList<String> keys = new CopyOnWriteArrayList<String>();
+
     private TestDo2() {
     }
 
-    private static TestDo2 _instance = new TestDo2();
-
     /**
      * getIntance方法。
+     *
      * @return static TestDo2类型返回值
      */
     public static TestDo2 getIntance() {
         return _instance;
     }
 
-    private CopyOnWriteArrayList<String> keys = new CopyOnWriteArrayList<String>();
-
     /**
      * doSame方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @param value String类型参数
      */
     public void doSame(String key, String value) {

@@ -40,7 +40,7 @@ public class CurlBuilderTest {
         requestLine.setRequestMethod(RequestMethod.GET);
         requestLine.setUrl("http://example.com/api");
         definition.setHttpRequestLine(requestLine);
-        
+
         String curl = CurlBuilder.build(definition);
         assertNotNull(curl);
         assertTrue(curl.contains("curl"));
@@ -53,21 +53,21 @@ public class CurlBuilderTest {
      */
     public void testBuildPostRequestWithHeadersAndBody() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
-        
+
         HttpRequestLine requestLine = new HttpRequestLine();
         requestLine.setRequestMethod(RequestMethod.POST);
         requestLine.setUrl("http://example.com/api");
         definition.setHttpRequestLine(requestLine);
-        
+
         HttpRequestHeader headers = new HttpRequestHeader();
         headers.put("Content-Type", "application/json");
         headers.put("Accept", "application/json");
         definition.setHttpRequestHeader(headers);
-        
+
         HttpRequestBody body = new HttpRequestBody();
         body.setBody("{\"key\":\"value\"}".getBytes());
         definition.setHttpRequestBody(body);
-        
+
         String curl = CurlBuilder.build(definition);
         assertNotNull(curl);
         assertTrue(curl.contains("-X"));
@@ -87,7 +87,7 @@ public class CurlBuilderTest {
         requestLine.setRequestMethod(RequestMethod.GET);
         requestLine.setUrl("http://example.com/api");
         definition.setHttpRequestLine(requestLine);
-        
+
         String curl = CurlBuilder.buildPretty(definition);
         assertNotNull(curl);
         assertTrue(curl.contains("curl"));
@@ -100,16 +100,16 @@ public class CurlBuilderTest {
      */
     public void testEscapeForShellWithSpecialCharacters() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
-        
+
         HttpRequestLine requestLine = new HttpRequestLine();
         requestLine.setRequestMethod(RequestMethod.POST);
         requestLine.setUrl("http://example.com/api");
         definition.setHttpRequestLine(requestLine);
-        
+
         HttpRequestBody body = new HttpRequestBody();
         body.setBody("test with spaces".getBytes());
         definition.setHttpRequestBody(body);
-        
+
         String curl = CurlBuilder.build(definition);
         assertNotNull(curl);
     }
@@ -120,7 +120,7 @@ public class CurlBuilderTest {
      */
     public void testBuildWithNullRequestLine() {
         HttpRequestDefinition definition = new HttpRequestDefinition();
-        
+
         String curl = CurlBuilder.build(definition);
         assertNotNull(curl);
         assertEquals("curl", curl.trim());
@@ -136,7 +136,7 @@ public class CurlBuilderTest {
         requestLine.setRequestMethod(RequestMethod.GET);
         requestLine.setUrl("http://example.com/api");
         definition.setHttpRequestLine(requestLine);
-        
+
         String curl = CurlBuilder.build(definition);
         assertNotNull(curl);
         assertTrue(curl.contains("curl"));
@@ -153,11 +153,11 @@ public class CurlBuilderTest {
         requestLine.setRequestMethod(RequestMethod.GET);
         requestLine.setUrl("http://example.com/api");
         definition.setHttpRequestLine(requestLine);
-        
+
         HttpRequestHeader headers = new HttpRequestHeader();
         headers.put("Content-Type", "application/json");
         definition.setHttpRequestHeader(headers);
-        
+
         String curl = CurlBuilder.build(definition);
         assertNotNull(curl);
         assertTrue(curl.contains("-H"));

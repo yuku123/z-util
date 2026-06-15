@@ -1,6 +1,7 @@
 package com.zifang.util.zex.bust.chapter1.case2;
 
 /* **/
+
 /**
  * 文档注释同样不关心中间是否有换行
  */
@@ -8,7 +9,8 @@ public class HelloWord {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

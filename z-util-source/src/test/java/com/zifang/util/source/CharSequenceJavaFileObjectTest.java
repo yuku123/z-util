@@ -4,7 +4,6 @@ import com.zifang.util.source.compiler.CharSequenceJavaFileObject;
 import org.junit.Test;
 
 import javax.tools.JavaFileObject;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import static org.junit.Assert.*;
@@ -12,6 +11,7 @@ import static org.junit.Assert.*;
 /**
  * CharSequenceJavaFileObject 测试
  */
+
 /**
  * CharSequenceJavaFileObjectTest类。
  */

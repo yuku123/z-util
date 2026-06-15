@@ -20,10 +20,11 @@ public class SimpleToken implements Token {
 
     /**
      * 完整构造函数
-     * @param type Token类型编码
-     * @param text Token文本值
-     * @param line 行号
-     * @param column 列号
+     *
+     * @param type      Token类型编码
+     * @param text      Token文本值
+     * @param line      行号
+     * @param column    列号
      * @param tokenName Token类型名称
      */
     public SimpleToken(int type, String text, int line, int column, String tokenName) {
@@ -45,6 +46,7 @@ public class SimpleToken implements Token {
 
     /**
      * 设置Token类型编码
+     *
      * @param type 类型编码
      */
     public void setType(int type) {
@@ -62,6 +64,7 @@ public class SimpleToken implements Token {
 
     /**
      * 设置Token文本值
+     *
      * @param text Token文本
      */
     public void setText(String text) {
@@ -79,6 +82,7 @@ public class SimpleToken implements Token {
 
     /**
      * 设置行号
+     *
      * @param line 行号（从1开始）
      */
     public void setLine(int line) {
@@ -96,6 +100,7 @@ public class SimpleToken implements Token {
 
     /**
      * 设置列号
+     *
      * @param column 列号（从1开始）
      */
     public void setColumn(int column) {
@@ -113,6 +118,7 @@ public class SimpleToken implements Token {
 
     /**
      * 设置Token类型名称
+     *
      * @param tokenName 类型名称
      */
     public void setTokenName(String tokenName) {

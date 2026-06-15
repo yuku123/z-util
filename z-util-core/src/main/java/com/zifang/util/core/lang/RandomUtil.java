@@ -8,11 +8,9 @@ import java.util.UUID;
  * 随机数工具类
  */
 public class RandomUtil {
-    private static final String ALL_CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
     public static final String LETTERCHAR = "abcdefghijkllmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String NUMBERCHAR = "0123456789";
-
+    private static final String ALL_CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LETTER_CHAR = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBER_CHAR = "0123456789";
 
@@ -151,6 +149,7 @@ public class RandomUtil {
 
     /**
      * uuid16方法。
+     *
      * @return static String类型返回值
      */
     public static String uuid16() {

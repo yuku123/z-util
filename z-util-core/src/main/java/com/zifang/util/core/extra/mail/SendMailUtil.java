@@ -180,6 +180,7 @@ public class SendMailUtil {
      */
     public interface SendCallback {
         void onSuccess(Mail mail);
+
         void onError(Mail mail, Exception e);
     }
 }

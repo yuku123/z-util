@@ -325,28 +325,30 @@ public class CrawlerPipelineTest {
         private boolean called = false;
 
         @Override
-    /**
-     * process方法。
-     *      * @param ctx PipelineContext类型参数
-     */
+        /**
+         * process方法。
+         *      * @param ctx PipelineContext类型参数
+         */
         public void process(PipelineContext ctx) {
             called = true;
             lastContext = ctx;
             ctx.put("processor_called", true);
         }
 
-    /**
-     * wasCalled方法。
-     * @return boolean类型返回值
-     */
+        /**
+         * wasCalled方法。
+         *
+         * @return boolean类型返回值
+         */
         public boolean wasCalled() {
             return called;
         }
 
-    /**
-     * getLastContext方法。
-     * @return PipelineContext类型返回值
-     */
+        /**
+         * getLastContext方法。
+         *
+         * @return PipelineContext类型返回值
+         */
         public PipelineContext getLastContext() {
             return lastContext;
         }
@@ -354,10 +356,10 @@ public class CrawlerPipelineTest {
 
     private static class FailingProcessor implements Processor {
         @Override
-    /**
-     * process方法。
-     *      * @param ctx PipelineContext类型参数
-     */
+        /**
+         * process方法。
+         *      * @param ctx PipelineContext类型参数
+         */
         public void process(PipelineContext ctx) {
             throw new RuntimeException("Intentional test failure");
         }

@@ -8,15 +8,13 @@ import java.util.List;
  */
 public class ThreadPool {
 
-    List<Runnable> taskList = new LinkedList<Runnable>();
-
-    private List<Worker> threadList = new LinkedList<Worker>();
-
     private static ThreadPool threadPool;
+    List<Runnable> taskList = new LinkedList<Runnable>();
+    private List<Worker> threadList = new LinkedList<Worker>();
 
     /**
      * ThreadPool方法。
-     *      * @param num int类型参数
+     * * @param num int类型参数
      */
     public ThreadPool(int num) {
         for (int i = 0; i < num; i++) {
@@ -47,7 +45,7 @@ public class ThreadPool {
 
     /**
      * execute方法。
-     *      * @param run Runnable类型参数
+     * * @param run Runnable类型参数
      */
     public void execute(Runnable run) {
 
@@ -59,6 +57,7 @@ public class ThreadPool {
 
     /**
      * takeTask方法。
+     *
      * @return Runnable类型返回值
      */
     public Runnable takeTask() {
@@ -82,9 +81,9 @@ public class ThreadPool {
         }
 
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             System.out.println(Thread.currentThread().getName() + "is initial");
 

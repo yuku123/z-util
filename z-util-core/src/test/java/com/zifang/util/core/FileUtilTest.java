@@ -5,9 +5,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * FileUtilTest类。
@@ -42,12 +39,12 @@ public class FileUtilTest {
             return;
         }
         for (File file : files) {
-            if(file.isDirectory()){
+            if (file.isDirectory()) {
                 doFolder(file.getAbsolutePath());
             } else {
-                if(file.getName().contains("(1)")){
+                if (file.getName().contains("(1)")) {
                     file.delete();
-                    System.out.println("delete:" +file.getAbsolutePath());
+                    System.out.println("delete:" + file.getAbsolutePath());
                 }
             }
         }

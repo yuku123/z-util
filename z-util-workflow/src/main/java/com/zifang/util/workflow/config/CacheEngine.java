@@ -29,7 +29,7 @@ public class CacheEngine {
     /**
      * 全参数构造函数
      *
-     * @param engineType        缓存引擎类型，如redis、memcached等
+     * @param engineType         缓存引擎类型，如redis、memcached等
      * @param cacheEngineService 缓存引擎服务标识，用于定位具体的缓存服务
      */
     public CacheEngine(String engineType, String cacheEngineService) {

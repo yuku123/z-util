@@ -8,8 +8,8 @@ import java.net.URI;
  * <p>
  * 用于将 Java 源码字符串封装为 JavaFileObject，供动态编译使用。
  *
- * @author zifang
  * @param <T> 内容类型
+ * @author zifang
  * @see SimpleJavaFileObject
  */
 public class StringJavaFileObject<T> extends SimpleJavaFileObject {
@@ -18,7 +18,8 @@ public class StringJavaFileObject<T> extends SimpleJavaFileObject {
 
     /**
      * StringJavaFileObject方法。
-     *      * @param className String类型参数
+     * * @param className String类型参数
+     *
      * @param content T类型参数
      */
     public StringJavaFileObject(String className, T content) {

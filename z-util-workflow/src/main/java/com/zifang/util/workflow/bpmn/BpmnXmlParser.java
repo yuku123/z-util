@@ -2,17 +2,15 @@ package com.zifang.util.workflow.bpmn;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * BPMN 2.0 XML格式解析器。
@@ -269,7 +267,7 @@ public class BpmnXmlParser {
      * Boundary events are child elements of the activity, not siblings.
      */
     private void parseBoundaryEvents(Element activityElement, BpmnDiagram.BpmnNode parentNode,
-                                    Element processElement, BpmnDiagram diagram) {
+                                     Element processElement, BpmnDiagram diagram) {
         NodeList boundaryEventList = activityElement.getElementsByTagNameNS(BPMN_NS, "boundaryEvent");
         if (boundaryEventList.getLength() == 0) {
             boundaryEventList = activityElement.getElementsByTagName("boundaryEvent");

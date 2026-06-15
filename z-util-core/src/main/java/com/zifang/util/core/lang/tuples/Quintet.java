@@ -8,7 +8,8 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
 
     /**
      * Quintet方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      * @param c C类型参数
      * @param d D类型参数
@@ -21,6 +22,7 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
 
     /**
      * getE方法。
+     *
      * @return E类型返回值
      */
     public E getE() {
@@ -29,7 +31,7 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
 
     /**
      * setE方法。
-     *      * @param e E类型参数
+     * * @param e E类型参数
      */
     public void setE(E e) {
         this.e = e;

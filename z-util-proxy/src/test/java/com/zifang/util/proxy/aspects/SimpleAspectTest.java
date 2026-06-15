@@ -4,7 +4,8 @@ import org.junit.Test;
 
 import java.lang.reflect.Method;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * SimpleAspectTest类。
@@ -18,9 +19,9 @@ public class SimpleAspectTest {
     public void testBeforeReturnsTrue() {
         SimpleAspect aspect = new SimpleAspect();
         Method method = null;
-        
+
         boolean result = aspect.before(new Object(), method, new Object[]{});
-        
+
         assertTrue(result);
     }
 
@@ -31,9 +32,9 @@ public class SimpleAspectTest {
     public void testAfterReturnsTrue() {
         SimpleAspect aspect = new SimpleAspect();
         Method method = null;
-        
+
         boolean result = aspect.after(new Object(), method, new Object[]{});
-        
+
         assertTrue(result);
     }
 
@@ -44,9 +45,9 @@ public class SimpleAspectTest {
     public void testAfterWithReturnValReturnsTrue() {
         SimpleAspect aspect = new SimpleAspect();
         Method method = null;
-        
+
         boolean result = aspect.after(new Object(), method, new Object[]{}, "return value");
-        
+
         assertTrue(result);
     }
 
@@ -57,9 +58,9 @@ public class SimpleAspectTest {
     public void testAfterExceptionReturnsTrue() {
         SimpleAspect aspect = new SimpleAspect();
         Method method = null;
-        
+
         boolean result = aspect.afterException(new Object(), method, new Object[]{}, new RuntimeException());
-        
+
         assertTrue(result);
     }
 

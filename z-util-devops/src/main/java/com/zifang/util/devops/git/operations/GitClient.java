@@ -1,13 +1,6 @@
 package com.zifang.util.devops.git.operations;
 
-import com.zifang.util.devops.git.operations.core.GitAuthor;
-import com.zifang.util.devops.git.operations.core.GitBranch;
-import com.zifang.util.devops.git.operations.core.GitCommit;
-import com.zifang.util.devops.git.operations.core.GitDiffEntry;
-import com.zifang.util.devops.git.operations.core.GitRemote;
-import com.zifang.util.devops.git.operations.core.GitRepository;
-import com.zifang.util.devops.git.operations.core.GitStatus;
-import com.zifang.util.devops.git.operations.core.GitTag;
+import com.zifang.util.devops.git.operations.core.*;
 import com.zifang.util.devops.git.operations.jgit.JGitExecutor;
 import com.zifang.util.devops.git.operations.shell.ShellExecutor;
 import org.eclipse.jgit.api.MergeResult;

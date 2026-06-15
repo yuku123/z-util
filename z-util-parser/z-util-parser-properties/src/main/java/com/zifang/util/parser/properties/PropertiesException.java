@@ -5,6 +5,7 @@ package com.zifang.util.parser.properties;
  *
  * @author zifang
  */
+
 /**
  * PropertiesException类。
  */
@@ -12,7 +13,7 @@ public class PropertiesException extends RuntimeException {
 
     /**
      * PropertiesException方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public PropertiesException(String message) {
         super(message);
@@ -20,7 +21,8 @@ public class PropertiesException extends RuntimeException {
 
     /**
      * PropertiesException方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
+     *
      * @param cause Throwable类型参数
      */
     public PropertiesException(String message, Throwable cause) {

@@ -1,14 +1,8 @@
 package com.zifang.util.core.schedule;
 
 import com.zifang.util.core.schedule.listener.ListenerManager;
-import com.zifang.util.core.schedule.listener.SchedulerListener;
+import org.quartz.*;
 import org.quartz.impl.matchers.GroupMatcher;
-import org.quartz.JobExecutionException;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.SchedulerMetaData;
-import org.quartz.TriggerKey;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -128,7 +122,7 @@ public class SchedulerManager {
      * <p>
      * 如果同名同组的任务已存在，会被替换。
      *
-     * @param job    任务描述
+     * @param job     任务描述
      * @param trigger 触发器
      * @return 下次触发时间（如果不再触发则返回 null）
      */
@@ -516,8 +510,8 @@ public class SchedulerManager {
     /**
      * 立即触发一次任务执行（忽略调度器状态，即使暂停也会执行）。
      *
-     * @param jobKey       任务键
-     * @param data         额外的 JobData（会合并到 JobDataMap）
+     * @param jobKey 任务键
+     * @param data   额外的 JobData（会合并到 JobDataMap）
      */
     public void triggerJob(JobKey jobKey, Map<String, ?> data) {
         try {
@@ -543,13 +537,13 @@ public class SchedulerManager {
     /**
      * 添加日历。
      *
-     * @param name        日历名称
-     * @param calendar    日历实例
-     * @param replace     是否替换已存在的同名日历
+     * @param name           日历名称
+     * @param calendar       日历实例
+     * @param replace        是否替换已存在的同名日历
      * @param updateTriggers 是否更新使用此日历的触发器
      */
     public void addCalendar(String name, ScheduleCalendar calendar,
-                           boolean replace, boolean updateTriggers) {
+                            boolean replace, boolean updateTriggers) {
         try {
             delegate.addCalendar(name, calendar.getDelegate(), replace, updateTriggers);
         } catch (SchedulerException e) {
@@ -670,31 +664,84 @@ public class SchedulerManager {
             this.delegate = delegate;
         }
 
-        @Override public org.quartz.TriggerKey getKey() { return delegate.getKey(); }
-        @Override public String getName() { return delegate.getKey().getName(); }
-        @Override public String getGroup() { return delegate.getKey().getGroup(); }
-        @Override public org.quartz.JobKey getJobKey() { return delegate.getJobKey(); }
-        @Override public String getDescription() { return delegate.getDescription(); }
-        @Override public Date getNextFireTime() { return delegate.getNextFireTime(); }
-        @Override public Date getPreviousFireTime() { return delegate.getPreviousFireTime(); }
-        @Override public int getPriority() { return delegate.getPriority(); }
-        @Override public Date getStartTime() { return delegate.getStartTime(); }
-        @Override public Date getEndTime() { return delegate.getEndTime(); }
-        @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
-        @Override public String getCalendarName() { return delegate.getCalendarName(); }
-        @Override public java.util.TimeZone getTimeZone() {
+        @Override
+        public org.quartz.TriggerKey getKey() {
+            return delegate.getKey();
+        }
+
+        @Override
+        public String getName() {
+            return delegate.getKey().getName();
+        }
+
+        @Override
+        public String getGroup() {
+            return delegate.getKey().getGroup();
+        }
+
+        @Override
+        public org.quartz.JobKey getJobKey() {
+            return delegate.getJobKey();
+        }
+
+        @Override
+        public String getDescription() {
+            return delegate.getDescription();
+        }
+
+        @Override
+        public Date getNextFireTime() {
+            return delegate.getNextFireTime();
+        }
+
+        @Override
+        public Date getPreviousFireTime() {
+            return delegate.getPreviousFireTime();
+        }
+
+        @Override
+        public int getPriority() {
+            return delegate.getPriority();
+        }
+
+        @Override
+        public Date getStartTime() {
+            return delegate.getStartTime();
+        }
+
+        @Override
+        public Date getEndTime() {
+            return delegate.getEndTime();
+        }
+
+        @Override
+        public MisfirePolicy getMisfirePolicy() {
+            return MisfirePolicy.SMART_POLICY;
+        }
+
+        @Override
+        public String getCalendarName() {
+            return delegate.getCalendarName();
+        }
+
+        @Override
+        public java.util.TimeZone getTimeZone() {
             if (delegate instanceof org.quartz.CronTrigger) {
                 return ((org.quartz.CronTrigger) delegate).getTimeZone();
             }
             return java.util.TimeZone.getDefault();
         }
-        @Override public org.quartz.Trigger getDelegate() { return delegate; }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        public org.quartz.Trigger getDelegate() {
+            return delegate;
+        }
+
+        @Override
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "GenericTrigger{key=" + getKey() + "}";
         }

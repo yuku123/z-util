@@ -14,83 +14,6 @@ import java.util.function.Supplier;
 public class MetricsRegistry {
 
     private static final MetricsRegistry INSTANCE = new MetricsRegistry();
-
-    /**
-     * getInstance方法。
-     * @return static MetricsRegistry类型返回值
-     */
-    public static MetricsRegistry getInstance() {
-        return INSTANCE;
-    }
-
-    /**
-     * 单个指标的元数据和采集器
-     */
-    public static class MetricEntry {
-        private final String name;
-        private final MetricsSnapshot.Category category;
-        private final Supplier<Object> provider;
-        private final String description;
-        private final String unit;
-
-    /**
-     * MetricEntry方法。
-     *      * @param name String类型参数
-     * @param category MetricsSnapshot.Category类型参数
-     * @param provider SupplierObject类型参数
-     * @param description String类型参数
-     * @param unit String类型参数
-     */
-        public MetricEntry(String name, MetricsSnapshot.Category category, Supplier<Object> provider,
-                          String description, String unit) {
-            this.name = name;
-            this.category = category;
-            this.provider = provider;
-            this.description = description;
-            this.unit = unit;
-        }
-
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-        public String getName() {
-            return name;
-        }
-
-    /**
-     * getCategory方法。
-     * @return MetricsSnapshot.Category类型返回值
-     */
-        public MetricsSnapshot.Category getCategory() {
-            return category;
-        }
-
-    /**
-     * getProvider方法。
-     * @return Supplier<Object>类型返回值
-     */
-        public Supplier<Object> getProvider() {
-            return provider;
-        }
-
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
-        public String getDescription() {
-            return description;
-        }
-
-    /**
-     * getUnit方法。
-     * @return String类型返回值
-     */
-        public String getUnit() {
-            return unit;
-        }
-    }
-
     private final Map<String, MetricEntry> entries = new ConcurrentHashMap<>();
     private volatile boolean enabled = false;
 
@@ -98,10 +21,19 @@ public class MetricsRegistry {
     }
 
     /**
+     * getInstance方法。
+     *
+     * @return static MetricsRegistry类型返回值
+     */
+    public static MetricsRegistry getInstance() {
+        return INSTANCE;
+    }
+
+    /**
      * 注册一个指标
      */
     public void register(String name, MetricsSnapshot.Category category, Supplier<Object> provider,
-                        String description, String unit) {
+                         String description, String unit) {
         entries.put(name, new MetricEntry(name, category, provider, description, unit));
     }
 
@@ -206,13 +138,6 @@ public class MetricsRegistry {
     }
 
     /**
-     * 启用/禁用监控
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /**
      * 是否启用
      */
     public boolean isEnabled() {
@@ -220,9 +145,90 @@ public class MetricsRegistry {
     }
 
     /**
+     * 启用/禁用监控
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    /**
      * 获取指标条目
      */
     public MetricEntry getEntry(String name) {
         return entries.get(name);
+    }
+
+    /**
+     * 单个指标的元数据和采集器
+     */
+    public static class MetricEntry {
+        private final String name;
+        private final MetricsSnapshot.Category category;
+        private final Supplier<Object> provider;
+        private final String description;
+        private final String unit;
+
+        /**
+         * MetricEntry方法。
+         * * @param name String类型参数
+         *
+         * @param category    MetricsSnapshot.Category类型参数
+         * @param provider    SupplierObject类型参数
+         * @param description String类型参数
+         * @param unit        String类型参数
+         */
+        public MetricEntry(String name, MetricsSnapshot.Category category, Supplier<Object> provider,
+                           String description, String unit) {
+            this.name = name;
+            this.category = category;
+            this.provider = provider;
+            this.description = description;
+            this.unit = unit;
+        }
+
+        /**
+         * getName方法。
+         *
+         * @return String类型返回值
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * getCategory方法。
+         *
+         * @return MetricsSnapshot.Category类型返回值
+         */
+        public MetricsSnapshot.Category getCategory() {
+            return category;
+        }
+
+        /**
+         * getProvider方法。
+         *
+         * @return Supplier<Object>类型返回值
+         */
+        public Supplier<Object> getProvider() {
+            return provider;
+        }
+
+        /**
+         * getDescription方法。
+         *
+         * @return String类型返回值
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * getUnit方法。
+         *
+         * @return String类型返回值
+         */
+        public String getUnit() {
+            return unit;
+        }
     }
 }

@@ -14,7 +14,7 @@ public interface CommandLineParser {
     /**
      * Parse the command-line arguments.
      *
-     * @param options the Options to parse
+     * @param options   the Options to parse
      * @param arguments the command-line arguments
      * @return the parsed CommandLine
      * @throws ParseException if parsing fails
@@ -24,8 +24,8 @@ public interface CommandLineParser {
     /**
      * Parse the command-line arguments with stop-at-non-option behavior.
      *
-     * @param options the Options to parse
-     * @param arguments the command-line arguments
+     * @param options         the Options to parse
+     * @param arguments       the command-line arguments
      * @param stopAtNonOption if true, stop parsing at first non-option argument
      * @return the parsed CommandLine
      * @throws ParseException if parsing fails
@@ -35,8 +35,8 @@ public interface CommandLineParser {
     /**
      * Parse the command-line arguments with default properties.
      *
-     * @param options the Options to parse
-     * @param arguments the command-line arguments
+     * @param options    the Options to parse
+     * @param arguments  the command-line arguments
      * @param properties default option values
      * @return the parsed CommandLine
      * @throws ParseException if parsing fails
@@ -46,9 +46,9 @@ public interface CommandLineParser {
     /**
      * Parse the command-line arguments with all options.
      *
-     * @param options the Options to parse
-     * @param arguments the command-line arguments
-     * @param properties default option values
+     * @param options         the Options to parse
+     * @param arguments       the command-line arguments
+     * @param properties      default option values
      * @param stopAtNonOption if true, stop parsing at first non-option argument
      * @return the parsed CommandLine
      * @throws ParseException if parsing fails

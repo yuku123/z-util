@@ -18,7 +18,7 @@ public class ConstantMethodHandleInfo extends AbstractConstantPool {
 
     /**
      * ConstantMethodHandleInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public ConstantMethodHandleInfo(byte tag) {
         super(tag);
@@ -26,7 +26,7 @@ public class ConstantMethodHandleInfo extends AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         this.referenceKind = U1.read(inputStream);
@@ -35,6 +35,7 @@ public class ConstantMethodHandleInfo extends AbstractConstantPool {
 
     /**
      * getReferenceKind方法。
+     *
      * @return U1类型返回值
      */
     public U1 getReferenceKind() {
@@ -43,6 +44,7 @@ public class ConstantMethodHandleInfo extends AbstractConstantPool {
 
     /**
      * getReferenceIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getReferenceIndex() {

@@ -5,6 +5,7 @@ package com.zifang.util.json.exception;
  *
  * @author zifang
  */
+
 /**
  * JsonTypeException类。
  */
@@ -17,7 +18,7 @@ public class JsonTypeException extends RuntimeException {
      */
     /**
      * JsonTypeException方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public JsonTypeException(String message) {
         super(message);

@@ -192,14 +192,6 @@ public class CommandRegistry<C extends CommandContext> {
     }
 
     /**
-     * 设置命令工厂
-     */
-    public CommandRegistry<C> setFactory(CommandFactory<C> factory) {
-        this.factory = factory;
-        return this;
-    }
-
-    /**
      * 创建命令执行器
      */
     public CommandExecutor<C> executor() {
@@ -214,6 +206,14 @@ public class CommandRegistry<C extends CommandContext> {
     }
 
     /**
+     * 设置命令工厂
+     */
+    public CommandRegistry<C> setFactory(CommandFactory<C> factory) {
+        this.factory = factory;
+        return this;
+    }
+
+    /**
      * 命令工厂接口
      */
     public interface CommandFactory<C extends CommandContext> {
@@ -225,11 +225,11 @@ public class CommandRegistry<C extends CommandContext> {
      */
     private static class DefaultCommandFactory<C extends CommandContext> implements CommandFactory<C> {
         @Override
-    /**
-     * create方法。
-     *      * @param name String类型参数
-     * @return Command<C>类型返回值
-     */
+        /**
+         * create方法。
+         *      * @param name String类型参数
+         * @return Command<C>类型返回值
+         */
         public Command<C> create(String name) {
             throw new IllegalStateException("Cannot create command '" + name + "' - no factory configured");
         }
@@ -242,40 +242,44 @@ public class CommandRegistry<C extends CommandContext> {
         private final K key;
         private final V value;
 
-    /**
-     * Pair方法。
-     *      * @param key K类型参数
-     * @param value V类型参数
-     */
+        /**
+         * Pair方法。
+         * * @param key K类型参数
+         *
+         * @param value V类型参数
+         */
         public Pair(K key, V value) {
             this.key = key;
             this.value = value;
         }
 
-    /**
-     * getKey方法。
-     * @return K类型返回值
-     */
+        /**
+         * of方法。
+         * * @param key K类型参数
+         *
+         * @param value V类型参数
+         * @return static <K, V> Pair<K, V>类型返回值
+         */
+        public static <K, V> Pair<K, V> of(K key, V value) {
+            return new Pair<>(key, value);
+        }
+
+        /**
+         * getKey方法。
+         *
+         * @return K类型返回值
+         */
         public K getKey() {
             return key;
         }
 
-    /**
-     * getValue方法。
-     * @return V类型返回值
-     */
+        /**
+         * getValue方法。
+         *
+         * @return V类型返回值
+         */
         public V getValue() {
             return value;
-        }
-
-    /**
-     * of方法。
-     *      * @param key K类型参数
-     * @param value V类型参数
-     * @return static <K, V> Pair<K, V>类型返回值
-     */
-        public static <K, V> Pair<K, V> of(K key, V value) {
-            return new Pair<>(key, value);
         }
     }
 }

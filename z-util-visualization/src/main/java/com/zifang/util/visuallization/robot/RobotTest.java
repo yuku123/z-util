@@ -15,10 +15,11 @@ import java.io.IOException;
 public class RobotTest {
     /**
      * 主方法
+     *
      * @param args 命令行参数
-     * @throws AWTException 如果创建Robot失败
+     * @throws AWTException         如果创建Robot失败
      * @throws InterruptedException 如果线程休眠被中断
-     * @throws IOException 如果图片保存失败
+     * @throws IOException          如果图片保存失败
      */
     public static void main(String[] args) throws AWTException, InterruptedException, IOException {
 
@@ -71,6 +72,7 @@ public class RobotTest {
 
     /**
      * 输入字符串（仅支持英文字符）
+     *
      * @param text 要输入的字符串
      */
     public void keyboardString(final String text) {

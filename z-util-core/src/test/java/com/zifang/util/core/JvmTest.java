@@ -44,9 +44,9 @@ public class JvmTest {
     static class StackOverflow {
         int stackLength = 1;
 
-    /**
-     * stackLeak方法。
-     */
+        /**
+         * stackLeak方法。
+         */
         public void stackLeak() {
             stackLength++;
             stackLeak();

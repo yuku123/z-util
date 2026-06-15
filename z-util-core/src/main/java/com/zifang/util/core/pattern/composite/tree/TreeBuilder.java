@@ -1,7 +1,6 @@
 package com.zifang.util.core.pattern.composite.tree;
 
 import java.util.*;
-import java.util.function.Function;
 
 /**
  * 树构建器
@@ -29,7 +28,8 @@ public class TreeBuilder {
 
     /**
      * create方法。
-     *      * @param rootName String类型参数
+     * * @param rootName String类型参数
+     *
      * @return static TreeBuilder类型返回值
      */
     public static TreeBuilder create(String rootName) {
@@ -38,7 +38,8 @@ public class TreeBuilder {
 
     /**
      * create方法。
-     *      * @param root ILeaf类型参数
+     * * @param root ILeaf类型参数
+     *
      * @return static TreeBuilder类型返回值
      */
     public static TreeBuilder create(ILeaf root) {
@@ -49,127 +50,9 @@ public class TreeBuilder {
     }
 
     /**
-     * add方法。
-     *      * @param name String类型参数
-     * @return TreeBuilder类型返回值
-     */
-    public TreeBuilder add(String name) {
-        ILeaf child = new LeafWrapper<>(name, name, name);
-        current.appendSubLeaf(child);
-        nodeMap.put(name, child);
-        return this;
-    }
-
-    /**
-     * add方法。
-     *      * @param leaf ILeaf类型参数
-     * @return TreeBuilder类型返回值
-     */
-    public TreeBuilder add(ILeaf leaf) {
-        current.appendSubLeaf(leaf);
-        nodeMap.put(leaf.getId(), leaf);
-        return this;
-    }
-
-    /**
-     * child方法。
-     *      * @param name String类型参数
-     * @return TreeBuilder类型返回值
-     */
-    public TreeBuilder child(String name) {
-        ILeaf child = new LeafWrapper<>(name, name, name);
-        current.appendSubLeaf(child);
-        nodeMap.put(name, child);
-        current = child;
-        return this;
-    }
-
-    /**
-     * up方法。
-     * @return TreeBuilder类型返回值
-     */
-    public TreeBuilder up() {
-        if (current.getParentLeaf() != null) {
-            current = current.getParentLeaf();
-        }
-        return this;
-    }
-
-    /**
-     * down方法。
-     *      * @param name String类型参数
-     * @return TreeBuilder类型返回值
-     */
-    public TreeBuilder down(String name) {
-        ILeaf child = findChildByName(name);
-        if (child == null) {
-            throw new IllegalArgumentException("Child not found: " + name);
-        }
-        current = child;
-        return this;
-    }
-
-    private ILeaf findChildByName(String name) {
-        for (ILeaf child : current.getSubLeaves()) {
-            if (Objects.equals(child.getName(), name)) {
-                return child;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * name方法。
-     *      * @param name String类型参数
-     * @return TreeBuilder类型返回值
-     */
-    public TreeBuilder name(String name) {
-        if (current instanceof LeafWrapper) {
-            ((LeafWrapper<?, ?, ?>) current).setName(name);
-        }
-        return this;
-    }
-
-    /**
-     * meta方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     * @return TreeBuilder类型返回值
-     */
-    public TreeBuilder meta(String key, Object value) {
-        if (current instanceof LeafWrapper) {
-            ((LeafWrapper<?, ?, ?>) current).setMeta(key, value);
-        }
-        return this;
-    }
-
-    /**
-     * current方法。
-     * @return ILeaf类型返回值
-     */
-    public ILeaf current() {
-        return current;
-    }
-
-    /**
-     * root方法。
-     * @return ILeaf类型返回值
-     */
-    public ILeaf root() {
-        return root;
-    }
-
-    /**
-     * build方法。
-     * @return Tree类型返回值
-     */
-    public Tree build() {
-        return new Tree(root);
-    }
-
-    /**
      * buildFromList方法。
-     *      * @param nodes List?类型参数
+     * * @param nodes List?类型参数
+     *
      * @return static Tree类型返回值
      */
     public static Tree buildFromList(List<? extends ILeaf> nodes) {
@@ -199,7 +82,8 @@ public class TreeBuilder {
 
     /**
      * buildFromHierarchy方法。
-     *      * @param items List?类型参数
+     * * @param items List?类型参数
+     *
      * @return static Tree类型返回值
      */
     public static Tree buildFromHierarchy(List<? extends HierarchyItem> items) {
@@ -239,10 +123,140 @@ public class TreeBuilder {
     }
 
     /**
+     * add方法。
+     * * @param name String类型参数
+     *
+     * @return TreeBuilder类型返回值
+     */
+    public TreeBuilder add(String name) {
+        ILeaf child = new LeafWrapper<>(name, name, name);
+        current.appendSubLeaf(child);
+        nodeMap.put(name, child);
+        return this;
+    }
+
+    /**
+     * add方法。
+     * * @param leaf ILeaf类型参数
+     *
+     * @return TreeBuilder类型返回值
+     */
+    public TreeBuilder add(ILeaf leaf) {
+        current.appendSubLeaf(leaf);
+        nodeMap.put(leaf.getId(), leaf);
+        return this;
+    }
+
+    /**
+     * child方法。
+     * * @param name String类型参数
+     *
+     * @return TreeBuilder类型返回值
+     */
+    public TreeBuilder child(String name) {
+        ILeaf child = new LeafWrapper<>(name, name, name);
+        current.appendSubLeaf(child);
+        nodeMap.put(name, child);
+        current = child;
+        return this;
+    }
+
+    /**
+     * up方法。
+     *
+     * @return TreeBuilder类型返回值
+     */
+    public TreeBuilder up() {
+        if (current.getParentLeaf() != null) {
+            current = current.getParentLeaf();
+        }
+        return this;
+    }
+
+    /**
+     * down方法。
+     * * @param name String类型参数
+     *
+     * @return TreeBuilder类型返回值
+     */
+    public TreeBuilder down(String name) {
+        ILeaf child = findChildByName(name);
+        if (child == null) {
+            throw new IllegalArgumentException("Child not found: " + name);
+        }
+        current = child;
+        return this;
+    }
+
+    private ILeaf findChildByName(String name) {
+        for (ILeaf child : current.getSubLeaves()) {
+            if (Objects.equals(child.getName(), name)) {
+                return child;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * name方法。
+     * * @param name String类型参数
+     *
+     * @return TreeBuilder类型返回值
+     */
+    public TreeBuilder name(String name) {
+        if (current instanceof LeafWrapper) {
+            ((LeafWrapper<?, ?, ?>) current).setName(name);
+        }
+        return this;
+    }
+
+    /**
+     * meta方法。
+     * * @param key String类型参数
+     *
+     * @param value Object类型参数
+     * @return TreeBuilder类型返回值
+     */
+    public TreeBuilder meta(String key, Object value) {
+        if (current instanceof LeafWrapper) {
+            ((LeafWrapper<?, ?, ?>) current).setMeta(key, value);
+        }
+        return this;
+    }
+
+    /**
+     * current方法。
+     *
+     * @return ILeaf类型返回值
+     */
+    public ILeaf current() {
+        return current;
+    }
+
+    /**
+     * root方法。
+     *
+     * @return ILeaf类型返回值
+     */
+    public ILeaf root() {
+        return root;
+    }
+
+    /**
+     * build方法。
+     *
+     * @return Tree类型返回值
+     */
+    public Tree build() {
+        return new Tree(root);
+    }
+
+    /**
      * 层级数据项接口
      */
     public interface HierarchyItem {
         String getId();
+
         String getParentId();
     }
 }

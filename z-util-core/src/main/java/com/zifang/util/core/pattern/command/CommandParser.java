@@ -21,7 +21,7 @@ public class CommandParser<C extends CommandContext> {
 
     /**
      * CommandParser方法。
-     *      * @param registry CommandRegistryC类型参数
+     * * @param registry CommandRegistryC类型参数
      */
     public CommandParser(CommandRegistry<C> registry) {
         this.registry = registry;
@@ -35,7 +35,7 @@ public class CommandParser<C extends CommandContext> {
      * 带参数: command1(p1=val1,p2=val2); command2
      * 带条件: command1?condition
      *
-     * @param script 命令脚本
+     * @param script  命令脚本
      * @param context 执行上下文
      */
     public void parseAndExecute(String script, C context) {
@@ -132,7 +132,7 @@ public class CommandParser<C extends CommandContext> {
 
         // 字符串
         if ((value.startsWith("\"") && value.endsWith("\"")) ||
-            (value.startsWith("'") && value.endsWith("'"))) {
+                (value.startsWith("'") && value.endsWith("'"))) {
             return value.substring(1, value.length() - 1);
         }
 
@@ -151,7 +151,8 @@ public class CommandParser<C extends CommandContext> {
             } else {
                 return Long.parseLong(value);
             }
-        } catch (NumberFormatException ignored) {}
+        } catch (NumberFormatException ignored) {
+        }
 
         // 列表格式 [a,b,c]
         if (value.startsWith("[") && value.endsWith("]")) {

@@ -25,8 +25,9 @@ public class StepResult {
 
     /**
      * 使用步骤名称和成功状态构造 StepResult。
+     *
      * @param stepName 步骤名称
-     * @param success 是否成功
+     * @param success  是否成功
      */
     public StepResult(String stepName, boolean success) {
         this.stepName = stepName;
@@ -34,7 +35,17 @@ public class StepResult {
     }
 
     /**
+     * 获取 Builder 实例。
+     *
+     * @return Builder 对象
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    /**
      * 获取步骤名称。
+     *
      * @return 步骤名称
      */
     public String getStepName() {
@@ -43,6 +54,7 @@ public class StepResult {
 
     /**
      * 设置步骤名称。
+     *
      * @param stepName 步骤名称
      */
     public void setStepName(String stepName) {
@@ -51,6 +63,7 @@ public class StepResult {
 
     /**
      * 获取是否成功。
+     *
      * @return 是否成功
      */
     public boolean isSuccess() {
@@ -59,6 +72,7 @@ public class StepResult {
 
     /**
      * 设置是否成功。
+     *
      * @param success 是否成功
      */
     public void setSuccess(boolean success) {
@@ -67,6 +81,7 @@ public class StepResult {
 
     /**
      * 获取输出结果。
+     *
      * @return 输出结果
      */
     public Object getOutput() {
@@ -75,6 +90,7 @@ public class StepResult {
 
     /**
      * 设置输出结果。
+     *
      * @param output 输出结果
      */
     public void setOutput(Object output) {
@@ -83,6 +99,7 @@ public class StepResult {
 
     /**
      * 获取错误信息。
+     *
      * @return 错误信息
      */
     public String getErrorMessage() {
@@ -91,6 +108,7 @@ public class StepResult {
 
     /**
      * 设置错误信息。
+     *
      * @param errorMessage 错误信息
      */
     public void setErrorMessage(String errorMessage) {
@@ -99,6 +117,7 @@ public class StepResult {
 
     /**
      * 获取执行耗时（毫秒）。
+     *
      * @return 执行耗时
      */
     public long getDurationMs() {
@@ -107,18 +126,11 @@ public class StepResult {
 
     /**
      * 设置执行耗时（毫秒）。
+     *
      * @param durationMs 执行耗时
      */
     public void setDurationMs(long durationMs) {
         this.durationMs = durationMs;
-    }
-
-    /**
-     * 获取 Builder 实例。
-     * @return Builder 对象
-     */
-    public static Builder builder() {
-        return new Builder();
     }
 
     public static class Builder {
@@ -128,60 +140,66 @@ public class StepResult {
         private String errorMessage;
         private long durationMs;
 
-    /**
-     * stepName方法。
-     *      * @param stepName String类型参数
-     * @return Builder类型返回值
-     */
+        /**
+         * stepName方法。
+         * * @param stepName String类型参数
+         *
+         * @return Builder类型返回值
+         */
         public Builder stepName(String stepName) {
             this.stepName = stepName;
             return this;
         }
 
-    /**
-     * success方法。
-     *      * @param success boolean类型参数
-     * @return Builder类型返回值
-     */
+        /**
+         * success方法。
+         * * @param success boolean类型参数
+         *
+         * @return Builder类型返回值
+         */
         public Builder success(boolean success) {
             this.success = success;
             return this;
         }
 
-    /**
-     * output方法。
-     *      * @param output Object类型参数
-     * @return Builder类型返回值
-     */
+        /**
+         * output方法。
+         * * @param output Object类型参数
+         *
+         * @return Builder类型返回值
+         */
         public Builder output(Object output) {
             this.output = output;
             return this;
         }
 
-    /**
-     * errorMessage方法。
-     *      * @param errorMessage String类型参数
-     * @return Builder类型返回值
-     */
+        /**
+         * errorMessage方法。
+         * * @param errorMessage String类型参数
+         *
+         * @return Builder类型返回值
+         */
         public Builder errorMessage(String errorMessage) {
             this.errorMessage = errorMessage;
             return this;
         }
 
-    /**
-     * durationMs方法。
-     *      * @param durationMs long类型参数
-     * @return Builder类型返回值
-     */
+        /**
+         * durationMs方法。
+         * * @param durationMs long类型参数
+         *
+         * @return Builder类型返回值
+         */
         public Builder durationMs(long durationMs) {
             this.durationMs = durationMs;
             return this;
         }
 
-    /**
-     * build方法。
-     * @return StepResult类型返回值
-     */
+        /**
+         * build方法。
+         *
+         * @return StepResult类型返回值
+         */
         public StepResult build() {
             StepResult result = new StepResult();
             result.setStepName(stepName);

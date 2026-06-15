@@ -1,8 +1,7 @@
 package com.zifang.util.ml.nn;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
-import com.zifang.util.numpy.Shape;
+import com.zifang.util.numpy.NdArray;
 
 import java.util.Random;
 
@@ -12,22 +11,23 @@ import java.util.Random;
  * During inference, scales output by (1 - p)
  */
 public class Dropout extends Module {
-    
+
     private final float p;
     private final Random random;
     private NdArray mask;
-    
+
     /**
      * Dropout方法。
-     *      * @param p float类型参数
+     * * @param p float类型参数
      */
     public Dropout(float p) {
         this(p, new Random());
     }
-    
+
     /**
      * Dropout方法。
-     *      * @param p float类型参数
+     * * @param p float类型参数
+     *
      * @param random Random类型参数
      */
     public Dropout(float p, Random random) {
@@ -37,7 +37,7 @@ public class Dropout extends Module {
         this.p = p;
         this.random = random;
     }
-    
+
     @Override
     /**
      * forward方法。
@@ -51,7 +51,7 @@ public class Dropout extends Module {
             Object maskData = mask.getData();
             Object inData = input.getData();
             int size = input.size();
-            
+
             for (int i = 0; i < size; i++) {
                 float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
                 if (random.nextFloat() < p) {
@@ -62,7 +62,7 @@ public class Dropout extends Module {
                     com.zifang.util.numpy.Array.set(maskData, i, val / (1 - p));
                 }
             }
-            
+
             return mask.copy();
         } else {
             // Inference mode: just return input scaled by (1-p)
@@ -71,7 +71,7 @@ public class Dropout extends Module {
             Object inData = input.getData();
             int size = input.size();
             float scale = 1 - p;
-            
+
             for (int i = 0; i < size; i++) {
                 float val = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
                 com.zifang.util.numpy.Array.set(outData, i, val * scale);
@@ -79,7 +79,7 @@ public class Dropout extends Module {
             return output;
         }
     }
-    
+
     @Override
     /**
      * backward方法。
@@ -95,7 +95,7 @@ public class Dropout extends Module {
             Object gOutData = gradOutput.getData();
             Object maskData = mask.getData();
             int size = gradOutput.size();
-            
+
             for (int i = 0; i < size; i++) {
                 float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
                 float m = ((Number) com.zifang.util.numpy.Array.get(maskData, i)).floatValue();
@@ -116,7 +116,7 @@ public class Dropout extends Module {
             Object gInData = gradInput.getData();
             Object gOutData = gradOutput.getData();
             int size = gradOutput.size();
-            
+
             for (int i = 0; i < size; i++) {
                 float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
                 com.zifang.util.numpy.Array.set(gInData, i, gOut * scale);
@@ -124,10 +124,13 @@ public class Dropout extends Module {
             return gradInput;
         }
     }
-    
+
     /**
      * getP方法。
+     *
      * @return float类型返回值
      */
-    public float getP() { return p; }
+    public float getP() {
+        return p;
+    }
 }

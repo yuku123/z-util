@@ -16,7 +16,7 @@ public class ConstantClassInfo extends AbstractConstantPool {
 
     /**
      * ConstantClassInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public ConstantClassInfo(byte tag) {
         super(tag);
@@ -24,7 +24,7 @@ public class ConstantClassInfo extends AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         this.stringIndex = U2.read(inputStream);
@@ -32,6 +32,7 @@ public class ConstantClassInfo extends AbstractConstantPool {
 
     /**
      * getStringIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getStringIndex() {

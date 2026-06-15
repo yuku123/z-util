@@ -5,6 +5,7 @@ package com.zifang.util.xml.model;
  *
  * @author zifang
  */
+
 /**
  * XText类。
  */
@@ -14,7 +15,7 @@ public class XText implements XNode {
 
     /**
      * XText方法。
-     *      * @param text String类型参数
+     * * @param text String类型参数
      */
     public XText(String text) {
         this.text = text;
@@ -22,6 +23,7 @@ public class XText implements XNode {
 
     /**
      * getText方法。
+     *
      * @return String类型返回值
      */
     public String getText() {
@@ -30,7 +32,7 @@ public class XText implements XNode {
 
     /**
      * setText方法。
-     *      * @param text String类型参数
+     * * @param text String类型参数
      */
     public void setText(String text) {
         this.text = text;

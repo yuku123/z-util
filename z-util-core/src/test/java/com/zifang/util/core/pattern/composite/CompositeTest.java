@@ -1,10 +1,6 @@
 package com.zifang.util.core.pattern.composite;
 
-import com.zifang.util.core.pattern.composite.tree.ILeaf;
-import com.zifang.util.core.pattern.composite.tree.LeafHelper;
-import com.zifang.util.core.pattern.composite.tree.LeafWrapper;
-import com.zifang.util.core.pattern.composite.tree.Tree;
-import com.zifang.util.core.pattern.composite.tree.TreeBuilder;
+import com.zifang.util.core.pattern.composite.tree.*;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -644,45 +640,60 @@ public class CompositeTest {
         List<TreeBuilder.HierarchyItem> items = new java.util.ArrayList<>();
         items.add(new TreeBuilder.HierarchyItem() {
             @Override
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
-            public String getId() { return "1"; }
+            /**
+             * getId方法。
+             * @return String类型返回值
+             */
+            public String getId() {
+                return "1";
+            }
+
             @Override
-    /**
-     * getParentId方法。
-     * @return String类型返回值
-     */
-            public String getParentId() { return null; }
+            /**
+             * getParentId方法。
+             * @return String类型返回值
+             */
+            public String getParentId() {
+                return null;
+            }
         });
         items.add(new TreeBuilder.HierarchyItem() {
             @Override
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
-            public String getId() { return "2"; }
+            /**
+             * getId方法。
+             * @return String类型返回值
+             */
+            public String getId() {
+                return "2";
+            }
+
             @Override
-    /**
-     * getParentId方法。
-     * @return String类型返回值
-     */
-            public String getParentId() { return "1"; }
+            /**
+             * getParentId方法。
+             * @return String类型返回值
+             */
+            public String getParentId() {
+                return "1";
+            }
         });
         items.add(new TreeBuilder.HierarchyItem() {
             @Override
-    /**
-     * getId方法。
-     * @return String类型返回值
-     */
-            public String getId() { return "3"; }
+            /**
+             * getId方法。
+             * @return String类型返回值
+             */
+            public String getId() {
+                return "3";
+            }
+
             @Override
-    /**
-     * getParentId方法。
-     * @return String类型返回值
-     */
-            public String getParentId() { return "1"; }
+            /**
+             * getParentId方法。
+             * @return String类型返回值
+             */
+            public String getParentId() {
+                return "1";
+            }
         });
 
         Tree tree = TreeBuilder.buildFromHierarchy(items);

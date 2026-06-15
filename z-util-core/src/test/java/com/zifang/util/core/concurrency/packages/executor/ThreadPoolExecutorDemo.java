@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  * 使用执行器框架（Executor Framework）的第一步是创建 ThreadPoolExecutor 对象。可以 ThreadPoolExecutor类提供的四个构造器或者使用Executors工厂类来创建 ThreadPoolExecutor 对象。一旦有了执行器，就可以将Runnable或Callable对象发送给它去执行了。
  * 在本节，我们将学习如何使用两种操作来实现一个范例，这个范列将模拟一个Web服务器来应对来自不同客户端的请求。
  */
+
 /**
  * ThreadPoolExecutorDemo类。
  */
@@ -23,20 +24,36 @@ public class ThreadPoolExecutorDemo {
         private String name;
 
         // 3．实现类的构造器，用来初始化这两个属性。
-    /**
-     * Task方法。
-     *      * @param name String类型参数
-     */
+
+        /**
+         * Task方法。
+         * * @param name String类型参数
+         */
         public Task(String name) {
             initDate = new Date();
             this.name = name;
         }
 
+        /**
+         * main方法。
+         * * @param args String[]类型参数
+         *
+         * @return static void类型返回值
+         */
+        public static void main(String[] args) {
+            Server server = new Server();
+            for (int i = 0; i < 100; i++) {
+                Task task = new Task("Task " + i);
+                server.executeTask(task);
+            }
+            server.endServer();
+        }
+
         // 4．实现 run() 方法。
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             /// 5．在控制台上输出 initDate 属性和实际时间，即任务的开始时间。
             System.out.printf("%s: Task %s: Created on: %s\n", Thread.currentThread().getName(), name, initDate);
@@ -61,19 +78,21 @@ public class ThreadPoolExecutorDemo {
             private ThreadPoolExecutor executor;
 
             // 10．实现类的构造器，通过 Executors 类来初始化 ThreadPoolExecutor 对象。
-    /**
-     * Server方法。
-     */
+
+            /**
+             * Server方法。
+             */
             public Server() {
                 executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
             }
 
             // 11．实现 executeTask() 方法。它接收一个 Task 对象作为参数，并将 Task
             // 对象发送给执行器。在控制台输出一条信息表示新的任务已经到达。
-    /**
-     * executeTask方法。
-     *      * @param task Task类型参数
-     */
+
+            /**
+             * executeTask方法。
+             * * @param task Task类型参数
+             */
             public void executeTask(Task task) {
 
                 System.out.printf("Server: A new task has arrived\n");
@@ -86,27 +105,13 @@ public class ThreadPoolExecutorDemo {
             }
 
             /// 14．实现 endServer() 方法。在这个方法里，调用执行器的 shutdown() 方法来结束它的执行。
-    /**
-     * endServer方法。
-     */
+            /**
+             * endServer方法。
+             */
             public void endServer() {
                 executor.shutdown();
             }
             /// 15．实现范例的主类，创建 Main 主类，并实现 main() 方法。
-        }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-        public static void main(String[] args) {
-            Server server = new Server();
-            for (int i = 0; i < 100; i++) {
-                Task task = new Task("Task " + i);
-                server.executeTask(task);
-            }
-            server.endServer();
         }
 
     }

@@ -8,27 +8,29 @@ package com.zifang.util.devops.git.operations.core;
  */
 public class GitDiffEntry {
 
-/**
- * ChangeType枚举。
- */
-    public enum ChangeType {
-        ADD, DELETE, MODIFY, RENAME, COPY
-    }
-
     private ChangeType changeType;
     private String oldPath;
     private String newPath;
-    /** 旧 blob SHA（可空） */
+    /**
+     * 旧 blob SHA（可空）
+     */
     private String oldSha;
-    /** 新 blob SHA（可空） */
+    /**
+     * 新 blob SHA（可空）
+     */
     private String newSha;
-    /** 是否为二进制 */
+    /**
+     * 是否为二进制
+     */
     private boolean binary;
-    /** 完整 diff 文本（旧+新），可选 */
+    /**
+     * 完整 diff 文本（旧+新），可选
+     */
     private String patch;
 
     /**
      * getChangeType方法。
+     *
      * @return ChangeType类型返回值
      */
     public ChangeType getChangeType() {
@@ -37,7 +39,7 @@ public class GitDiffEntry {
 
     /**
      * setChangeType方法。
-     *      * @param changeType ChangeType类型参数
+     * * @param changeType ChangeType类型参数
      */
     public void setChangeType(ChangeType changeType) {
         this.changeType = changeType;
@@ -45,6 +47,7 @@ public class GitDiffEntry {
 
     /**
      * getOldPath方法。
+     *
      * @return String类型返回值
      */
     public String getOldPath() {
@@ -53,7 +56,7 @@ public class GitDiffEntry {
 
     /**
      * setOldPath方法。
-     *      * @param oldPath String类型参数
+     * * @param oldPath String类型参数
      */
     public void setOldPath(String oldPath) {
         this.oldPath = oldPath;
@@ -61,6 +64,7 @@ public class GitDiffEntry {
 
     /**
      * getNewPath方法。
+     *
      * @return String类型返回值
      */
     public String getNewPath() {
@@ -69,7 +73,7 @@ public class GitDiffEntry {
 
     /**
      * setNewPath方法。
-     *      * @param newPath String类型参数
+     * * @param newPath String类型参数
      */
     public void setNewPath(String newPath) {
         this.newPath = newPath;
@@ -77,6 +81,7 @@ public class GitDiffEntry {
 
     /**
      * getOldSha方法。
+     *
      * @return String类型返回值
      */
     public String getOldSha() {
@@ -85,7 +90,7 @@ public class GitDiffEntry {
 
     /**
      * setOldSha方法。
-     *      * @param oldSha String类型参数
+     * * @param oldSha String类型参数
      */
     public void setOldSha(String oldSha) {
         this.oldSha = oldSha;
@@ -93,6 +98,7 @@ public class GitDiffEntry {
 
     /**
      * getNewSha方法。
+     *
      * @return String类型返回值
      */
     public String getNewSha() {
@@ -101,7 +107,7 @@ public class GitDiffEntry {
 
     /**
      * setNewSha方法。
-     *      * @param newSha String类型参数
+     * * @param newSha String类型参数
      */
     public void setNewSha(String newSha) {
         this.newSha = newSha;
@@ -109,6 +115,7 @@ public class GitDiffEntry {
 
     /**
      * isBinary方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isBinary() {
@@ -117,7 +124,7 @@ public class GitDiffEntry {
 
     /**
      * setBinary方法。
-     *      * @param binary boolean类型参数
+     * * @param binary boolean类型参数
      */
     public void setBinary(boolean binary) {
         this.binary = binary;
@@ -125,6 +132,7 @@ public class GitDiffEntry {
 
     /**
      * getPatch方法。
+     *
      * @return String类型返回值
      */
     public String getPatch() {
@@ -133,7 +141,7 @@ public class GitDiffEntry {
 
     /**
      * setPatch方法。
-     *      * @param patch String类型参数
+     * * @param patch String类型参数
      */
     public void setPatch(String patch) {
         this.patch = patch;
@@ -147,5 +155,12 @@ public class GitDiffEntry {
     public String toString() {
         return changeType + " " + (oldPath != null ? oldPath : "") +
                 (newPath != null && !newPath.equals(oldPath) ? " -> " + newPath : "");
+    }
+
+    /**
+     * ChangeType枚举。
+     */
+    public enum ChangeType {
+        ADD, DELETE, MODIFY, RENAME, COPY
     }
 }

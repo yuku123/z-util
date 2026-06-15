@@ -1,7 +1,6 @@
 package com.zifang.util.workflow.engine;
 
 import com.zifang.util.workflow.config.Connector;
-import com.zifang.util.workflow.config.WorkflowConfiguration;
 import com.zifang.util.workflow.config.WorkflowNode;
 import com.zifang.util.workflow.conponents.WorkFlowApplication;
 import com.zifang.util.workflow.conponents.WorkFlowApplicationContext;
@@ -16,13 +15,14 @@ import static org.junit.Assert.*;
 /**
  * WorkFlowApplication 类测试
  * 测试工作流应用入口类的各种功能
- * 
+ * <p>
  * 注意：由于 WorkFlowApplication.createWorkflowContext 依赖于完整的引擎初始化，
  * 而当前引擎实现（JavaEngine、SparkEngine）的 getRegisteredEngineService 返回 null，
  * 因此涉及完整上下文创建的测试会失败。这些测试需要实际的引擎服务实现支持。
- * 
+ * <p>
  * 这里我们重点测试静态字段访问和非依赖完整初始化的功能。
  */
+
 /**
  * WorkFlowApplicationTest类。
  */
@@ -112,7 +112,7 @@ public class WorkFlowApplicationTest {
         WorkFlowApplicationContext testContext = new WorkFlowApplicationContext();
         testContext.setWorkFlowApplicationContextId(1);
         WorkFlowApplication.workFlowContextMap.put(1, testContext);
-        
+
         assertEquals("Should be able to retrieve context from map", testContext, WorkFlowApplication.workFlowContextMap.get(1));
     }
 
@@ -124,7 +124,7 @@ public class WorkFlowApplicationTest {
         WorkFlowApplicationContext testContext = new WorkFlowApplicationContext();
         testContext.setWorkFlowApplicationContextId(1);
         WorkFlowApplication.workFlowContextMap.put(1, testContext);
-        
+
         WorkFlowApplication.workFlowContextMap.remove(1);
         assertNull("Should be able to remove context from map", WorkFlowApplication.workFlowContextMap.get(1));
     }
@@ -148,10 +148,10 @@ public class WorkFlowApplicationTest {
         context1.setWorkFlowApplicationContextId(1);
         WorkFlowApplicationContext context2 = new WorkFlowApplicationContext();
         context2.setWorkFlowApplicationContextId(2);
-        
+
         WorkFlowApplication.workFlowContextMap.put(1, context1);
         WorkFlowApplication.workFlowContextMap.put(2, context2);
-        
+
         assertEquals(2, WorkFlowApplication.workFlowContextMap.size());
         assertNotSame("Contexts should be different objects", context1, context2);
     }

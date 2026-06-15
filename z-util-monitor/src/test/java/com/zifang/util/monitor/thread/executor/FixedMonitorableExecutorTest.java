@@ -1,15 +1,16 @@
 package com.zifang.util.monitor.thread.executor;
 
-import com.zifang.util.monitor.thread.Monitorable;
 import com.zifang.util.monitor.thread.Status;
 import com.zifang.util.monitor.thread.StatusLevel;
 import com.zifang.util.monitor.thread.alarm.LogAlarmService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.junit.Assert.*;
 
 /**

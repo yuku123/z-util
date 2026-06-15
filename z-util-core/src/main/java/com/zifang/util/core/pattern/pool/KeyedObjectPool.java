@@ -1,7 +1,5 @@
 package com.zifang.util.core.pattern.pool;
 
-import java.util.NoSuchElementException;
-
 /**
  * 带键的对象池接口
  *

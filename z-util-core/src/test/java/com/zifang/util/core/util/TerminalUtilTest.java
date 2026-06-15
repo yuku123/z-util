@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * TerminalUtilTest类。
@@ -29,12 +31,13 @@ public class TerminalUtilTest {
      */
     public void test2_1() throws IOException {
         ExecutorService executor = Executors.newFixedThreadPool(10);
-         // String baseFolder = "I:\\书籍合集\\13000本";
+        // String baseFolder = "I:\\书籍合集\\13000本";
         String baseFolder = "I:\\书籍合集\\合集";
 
         doFolder(baseFolder, executor);
     }
-     @Test
+
+    @Test
     /**
      * test2_2方法。
      */
@@ -50,11 +53,11 @@ public class TerminalUtilTest {
 
         File[] files = new File(baseFolder).listFiles();
         if (files != null) {
-            for(File file : files){
-                if(file.isDirectory()){
-                     if(file.getName().contains(" ")){
-                         file.renameTo(new File(file.getParent() + "\\" + file.getName().replace(" ","_").replace("+","_")));
-                     }
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    if (file.getName().contains(" ")) {
+                        file.renameTo(new File(file.getParent() + "\\" + file.getName().replace(" ", "_").replace("+", "_")));
+                    }
                 }
             }
         }
@@ -83,15 +86,15 @@ public class TerminalUtilTest {
         if (files == null) {
             return;
         }
-        for(File file : files){
+        for (File file : files) {
 
-            if(file.isDirectory()){
+            if (file.isDirectory()) {
                 doFolder(file.getAbsolutePath(), executor);
             } else {
 
                 file = preHandle(file);
 
-                if(file.getName().endsWith(".epub") || file.getName().endsWith(".mobi") || file.getName().endsWith("azw3")){
+                if (file.getName().endsWith(".epub") || file.getName().endsWith(".mobi") || file.getName().endsWith("azw3")) {
                     transAndSafeDelete(file);
                 }
             }
@@ -100,9 +103,9 @@ public class TerminalUtilTest {
 
     private File preHandle(File file) {
 
-        if(file.isFile()){
-            if(file.getName().contains(" ") || file.getName().contains("+")){
-                file.renameTo(new File(file.getParent() + "\\" + file.getName().replace(" ","_").replace("+","_")));
+        if (file.isFile()) {
+            if (file.getName().contains(" ") || file.getName().contains("+")) {
+                file.renameTo(new File(file.getParent() + "\\" + file.getName().replace(" ", "_").replace("+", "_")));
             }
         }
 
@@ -111,7 +114,7 @@ public class TerminalUtilTest {
 
     private void transAndSafeDelete(File file) {
         String originName = file.getAbsolutePath();
-        String targetName = file.getAbsolutePath().substring(0, originName.lastIndexOf(".")) +".pdf";
+        String targetName = file.getAbsolutePath().substring(0, originName.lastIndexOf(".")) + ".pdf";
 
 
         String command = String.format("ebook-convert \"%s\" \"%s\"", originName, targetName);
@@ -119,7 +122,7 @@ public class TerminalUtilTest {
 
         // 开始前校验
         File targetFile = new File(targetName);
-        if(targetFile.exists() && targetFile.length() > 1000){
+        if (targetFile.exists() && targetFile.length() > 1000) {
             new File(originName).delete();
             return;
         }
@@ -143,7 +146,7 @@ public class TerminalUtilTest {
                 throw new RuntimeException(e);
             }
 
-            if(!pass){
+            if (!pass) {
                 throw new RuntimeException();
             }
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
@@ -157,12 +160,12 @@ public class TerminalUtilTest {
             e.printStackTrace();
             System.out.println("timeout: " + command);
             process.destroy();
-            return ;
+            return;
         }
 
         // 开始check
-        File file1  = new File(targetName);
-        if(file1.exists() && file1.length() > 1000){
+        File file1 = new File(targetName);
+        if (file1.exists() && file1.length() > 1000) {
             new File(originName).delete();
         }
     }

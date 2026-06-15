@@ -17,16 +17,17 @@ import java.util.stream.Collectors;
 public class ClassPrinter {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
         Class c = AbstractQueuedSynchronizer.class;
 
-        for(Method method : c.getDeclaredMethods()){
+        for (Method method : c.getDeclaredMethods()) {
             String str = "";
-            str = str + method.getReturnType().getName() +" " + method.getName();
-            str = str + "(" + String.join(", ",Arrays.stream(method.getParameterTypes()).map(e->e.getName()).collect(Collectors.toList()))+")";
+            str = str + method.getReturnType().getName() + " " + method.getName();
+            str = str + "(" + String.join(", ", Arrays.stream(method.getParameterTypes()).map(e -> e.getName()).collect(Collectors.toList())) + ")";
             System.out.println(str);
         }
     }

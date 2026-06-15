@@ -13,23 +13,6 @@ import org.slf4j.MarkerFactory;
  *   <li>marker: 这条日志的"分类"（业务 / 安全 / 性能 / 外部调用 / DB）</li>
  * </ul>
  *
- * <h3>log4j2.xml 里按 marker 路由</h3>
- * <pre>{@code
- *   <Routing name="MarkerRoute">
- *     <Routes pattern="$${marker:}>
- *       <Route key="BUSINESS">
- *         <File name="BusinessLog" fileName="logs/business.log"/>
- *       </Route>
- *       <Route key="SECURITY">
- *         <File name="SecurityLog" fileName="logs/security.log"/>
- *       </Route>
- *       <Route key="${marker:}>
- *         <File name="DefaultLog" fileName="logs/app.log"/>
- *       </Route>
- *     </Routes>
- *   </Routing>
- * }</pre>
- *
  * <h3>使用</h3>
  * <pre>{@code
  *   LOG.info(LogMarkers.BUSINESS, "order created: {}", orderId);

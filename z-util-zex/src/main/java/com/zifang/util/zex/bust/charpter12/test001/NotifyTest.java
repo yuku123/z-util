@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.charpter12.test001;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 /**
@@ -23,9 +24,9 @@ public class NotifyTest {
         Object lock = new Object();
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 System.out.println("线程A等待获取lock锁");
                 synchronized (lock) {
@@ -44,9 +45,9 @@ public class NotifyTest {
 
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 System.out.println("线程B等待获取lock锁");
                 synchronized (lock) {

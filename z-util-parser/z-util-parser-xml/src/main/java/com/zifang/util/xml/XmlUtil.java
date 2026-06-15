@@ -27,6 +27,7 @@ import java.util.List;
  *
  * @author zifang
  */
+
 /**
  * XmlUtil类。
  */
@@ -47,7 +48,8 @@ public class XmlUtil {
      */
     /**
      * parse方法。
-     *      * @param xml String类型参数
+     * * @param xml String类型参数
+     *
      * @return static XDocument类型返回值
      */
     public static XDocument parse(String xml) throws IOException {
@@ -66,7 +68,8 @@ public class XmlUtil {
      */
     /**
      * parseQuietly方法。
-     *      * @param xml String类型参数
+     * * @param xml String类型参数
+     *
      * @return static XDocument类型返回值
      */
     public static XDocument parseQuietly(String xml) {
@@ -84,7 +87,8 @@ public class XmlUtil {
      */
     /**
      * toXml方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @return static String类型返回值
      */
     public static String toXml(XDocument doc) {
@@ -96,7 +100,8 @@ public class XmlUtil {
      */
     /**
      * toXml方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @return static String类型返回值
      */
     public static String toXml(XElement element) {
@@ -108,7 +113,8 @@ public class XmlUtil {
      */
     /**
      * toCompactXml方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @return static String类型返回值
      */
     public static String toCompactXml(XDocument doc) {
@@ -120,7 +126,8 @@ public class XmlUtil {
      */
     /**
      * toCompactXml方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @return static String类型返回值
      */
     public static String toCompactXml(XElement element) {
@@ -132,7 +139,8 @@ public class XmlUtil {
      */
     /**
      * toXml方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @param indentSize int类型参数
      * @return static String类型返回值
      */
@@ -152,7 +160,8 @@ public class XmlUtil {
      */
     /**
      * xpath方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @param path String类型参数
      * @return static List<Object>类型返回值
      */
@@ -165,7 +174,8 @@ public class XmlUtil {
      */
     /**
      * xpath方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @param path String类型参数
      * @return static List<Object>类型返回值
      */
@@ -178,7 +188,8 @@ public class XmlUtil {
      */
     /**
      * xpathOne方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @param path String类型参数
      * @return static Object类型返回值
      */
@@ -191,7 +202,8 @@ public class XmlUtil {
      */
     /**
      * xpathOne方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @param path String类型参数
      * @return static Object类型返回值
      */
@@ -204,7 +216,8 @@ public class XmlUtil {
      */
     /**
      * getElement方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @param path String类型参数
      * @return static XElement类型返回值
      */
@@ -221,7 +234,8 @@ public class XmlUtil {
      */
     /**
      * getElement方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @param path String类型参数
      * @return static XElement类型返回值
      */
@@ -238,7 +252,8 @@ public class XmlUtil {
      */
     /**
      * getAttr方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @param path String类型参数
      * @return static String类型返回值
      */
@@ -255,7 +270,8 @@ public class XmlUtil {
      */
     /**
      * getAttr方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @param path String类型参数
      * @return static String类型返回值
      */
@@ -277,7 +293,8 @@ public class XmlUtil {
      */
     /**
      * element方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return static XElement类型返回值
      */
     public static XElement element(String name) {
@@ -289,7 +306,8 @@ public class XmlUtil {
      */
     /**
      * element方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param attrPairs String...类型参数
      * @return static XElement类型返回值
      */
@@ -306,7 +324,8 @@ public class XmlUtil {
      */
     /**
      * elementWithText方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param text String类型参数
      * @return static XElement类型返回值
      */
@@ -321,7 +340,8 @@ public class XmlUtil {
      */
     /**
      * element方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param children XNode...类型参数
      * @return static XElement类型返回值
      */
@@ -346,7 +366,8 @@ public class XmlUtil {
      */
     /**
      * document方法。
-     *      * @param root XElement类型参数
+     * * @param root XElement类型参数
+     *
      * @return static XDocument类型返回值
      */
     public static XDocument document(XElement root) {
@@ -358,7 +379,8 @@ public class XmlUtil {
      */
     /**
      * document方法。
-     *      * @param encoding String类型参数
+     * * @param encoding String类型参数
+     *
      * @param root XElement类型参数
      * @return static XDocument类型返回值
      */
@@ -374,8 +396,9 @@ public class XmlUtil {
      */
     /**
      * declaration方法。
-     *      * @param version String类型参数
-     * @param encoding String类型参数
+     * * @param version String类型参数
+     *
+     * @param encoding   String类型参数
      * @param standalone String类型参数
      * @return static XDeclaration类型返回值
      */
@@ -388,7 +411,8 @@ public class XmlUtil {
      */
     /**
      * attr方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param value String类型参数
      * @return static XAttribute类型返回值
      */
@@ -401,7 +425,8 @@ public class XmlUtil {
      */
     /**
      * text方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return static XText类型返回值
      */
     public static XText text(String content) {
@@ -413,7 +438,8 @@ public class XmlUtil {
      */
     /**
      * cdata方法。
-     *      * @param data String类型参数
+     * * @param data String类型参数
+     *
      * @return static XCData类型返回值
      */
     public static XCData cdata(String data) {
@@ -425,7 +451,8 @@ public class XmlUtil {
      */
     /**
      * comment方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return static XComment类型返回值
      */
     public static XComment comment(String content) {
@@ -439,7 +466,8 @@ public class XmlUtil {
      */
     /**
      * beautify方法。
-     *      * @param xml String类型参数
+     * * @param xml String类型参数
+     *
      * @return static String类型返回值
      */
     public static String beautify(String xml) throws IOException {
@@ -452,7 +480,8 @@ public class XmlUtil {
      */
     /**
      * compact方法。
-     *      * @param xml String类型参数
+     * * @param xml String类型参数
+     *
      * @return static String类型返回值
      */
     public static String compact(String xml) throws IOException {

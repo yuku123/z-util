@@ -40,6 +40,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * 数据一致性问题。CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的实时一致性。所以如果你希望写入的的数据，马上能读到，
  * 请不要使用CopyOnWrite容器。
  */
+
 /**
  * CopyOnWriteArrayListDemo类。
  */
@@ -47,7 +48,8 @@ public class CopyOnWriteArrayListDemo {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

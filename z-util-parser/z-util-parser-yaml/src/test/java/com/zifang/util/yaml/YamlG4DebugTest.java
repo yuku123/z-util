@@ -6,7 +6,8 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 /**
  * 调试 G4 文件加载的测试。
@@ -14,6 +15,7 @@ import static org.junit.Assert.*;
 /**
  * YamlG4DebugTest类。
  */
+
 /**
  * YamlG4DebugTest类。
  */

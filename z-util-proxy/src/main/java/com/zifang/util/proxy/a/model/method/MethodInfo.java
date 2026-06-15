@@ -19,11 +19,12 @@ public class MethodInfo {
 
     /**
      * MethodInfo方法。
-     *      * @param accessFlags U2类型参数
-     * @param nameIndex U2类型参数
+     * * @param accessFlags U2类型参数
+     *
+     * @param nameIndex       U2类型参数
      * @param descriptorIndex U2类型参数
      * @param attributesCount U2类型参数
-     * @param attributes ListAbstractAttribute类型参数
+     * @param attributes      ListAbstractAttribute类型参数
      */
     public MethodInfo(U2 accessFlags, U2 nameIndex, U2 descriptorIndex,
                       U2 attributesCount, List<AbstractAttribute> attributes) {
@@ -36,6 +37,7 @@ public class MethodInfo {
 
     /**
      * getAccessFlags方法。
+     *
      * @return U2类型返回值
      */
     public U2 getAccessFlags() {
@@ -44,6 +46,7 @@ public class MethodInfo {
 
     /**
      * getNameIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getNameIndex() {
@@ -52,6 +55,7 @@ public class MethodInfo {
 
     /**
      * getDescriptorIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getDescriptorIndex() {
@@ -60,6 +64,7 @@ public class MethodInfo {
 
     /**
      * getAttributesCount方法。
+     *
      * @return U2类型返回值
      */
     public U2 getAttributesCount() {
@@ -68,6 +73,7 @@ public class MethodInfo {
 
     /**
      * getAttributes方法。
+     *
      * @return List<AbstractAttribute>类型返回值
      */
     public List<AbstractAttribute> getAttributes() {

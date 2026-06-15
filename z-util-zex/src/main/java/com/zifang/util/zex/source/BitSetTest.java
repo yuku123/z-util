@@ -14,7 +14,8 @@ import java.util.BitSet;
 public class BitSetTest {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -24,7 +25,7 @@ public class BitSetTest {
         bitSet.set(0);
         bitSet.set(64);
 
-        BitSet  ass = bitSet.get(0,65);
+        BitSet ass = bitSet.get(0, 65);
 
         bitSet.nextSetBit(1);
 

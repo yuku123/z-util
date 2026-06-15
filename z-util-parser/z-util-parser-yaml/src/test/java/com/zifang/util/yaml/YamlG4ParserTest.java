@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * YamlG4ParserTest类。
  */
+
 /**
  * YamlG4ParserTest类。
  */

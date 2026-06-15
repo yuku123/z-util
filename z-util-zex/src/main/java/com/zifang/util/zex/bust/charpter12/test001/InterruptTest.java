@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.charpter12.test001;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 /**
@@ -41,9 +42,9 @@ public class InterruptTest {
     public void test1() throws InterruptedException {
         Thread thread = new Thread() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 while (!isInterrupted()) {
                     System.out.println("运行------");
@@ -68,9 +69,9 @@ public class InterruptTest {
     public void test2() throws InterruptedException {
         Thread thread = new Thread() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 try {
                     System.out.println("开始睡眠------");

@@ -3,9 +3,11 @@ package com.zifang.util.workflow.engine.runtime;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * GatewayEvaluator 表达式评估器测试。
@@ -16,6 +18,7 @@ import static org.junit.Assert.*;
  * - 括号分组: (expr)
  * - 三目运算符: condition ? trueVal : falseVal
  */
+
 /**
  * GatewayEvaluatorTest类。
  */

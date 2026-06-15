@@ -1,8 +1,11 @@
 package com.zifang.util.core.pattern.pool;
 
 import java.lang.ref.SoftReference;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -21,14 +24,13 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
 
     private final Queue<SoftReference<PooledObject<T>>> idleObjects;
     private final AtomicInteger numActive;
-    private volatile boolean closed;
-
     private final ReentrantLock lock = new ReentrantLock();
     private final Condition condition = lock.newCondition();
+    private volatile boolean closed;
 
     /**
      * SoftReferenceObjectPool方法。
-     *      * @param factory PooledObjectFactoryT类型参数
+     * * @param factory PooledObjectFactoryT类型参数
      */
     public SoftReferenceObjectPool(PooledObjectFactory<T> factory) {
         this(factory, new PoolConfig());
@@ -36,7 +38,8 @@ public class SoftReferenceObjectPool<T> implements ObjectPool<T> {
 
     /**
      * SoftReferenceObjectPool方法。
-     *      * @param factory PooledObjectFactoryT类型参数
+     * * @param factory PooledObjectFactoryT类型参数
+     *
      * @param config PoolConfig类型参数
      */
     public SoftReferenceObjectPool(PooledObjectFactory<T> factory, PoolConfig config) {

@@ -5,6 +5,7 @@ package com.zifang.util.xml.model;
  *
  * @author zifang
  */
+
 /**
  * XNode接口。
  */

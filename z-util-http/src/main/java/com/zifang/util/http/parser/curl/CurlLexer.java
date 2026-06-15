@@ -10,47 +10,6 @@ import java.util.List;
 public class CurlLexer {
 
     /**
-     * Token 类型
-     */
-    public enum TokenType {
-        COMMAND,        // curl 命令本身
-        OPTION_SHORT,   // 短选项，如 -X, -H
-        OPTION_LONG,    // 长选项，如 --data, --header
-        VALUE,          // 值（非选项参数）
-        EQUALS          // = 符号
-    }
-
-    /**
-     * Token
-     */
-    public static class Token {
-        public final TokenType type;
-        public final String value;
-        public final int position;
-
-    /**
-     * Token方法。
-     *      * @param type TokenType类型参数
-     * @param value String类型参数
-     * @param position int类型参数
-     */
-        public Token(TokenType type, String value, int position) {
-            this.type = type;
-            this.value = value;
-            this.position = position;
-        }
-
-        @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
-        public String toString() {
-            return String.format("Token(%s, '%s', %d)", type, value, position);
-        }
-    }
-
-    /**
      * 将 cURL 命令词法分析为 token 列表
      *
      * @param command cURL 命令文本
@@ -243,6 +202,48 @@ public class CurlLexer {
         }
 
         return classified;
+    }
+
+    /**
+     * Token 类型
+     */
+    public enum TokenType {
+        COMMAND,        // curl 命令本身
+        OPTION_SHORT,   // 短选项，如 -X, -H
+        OPTION_LONG,    // 长选项，如 --data, --header
+        VALUE,          // 值（非选项参数）
+        EQUALS          // = 符号
+    }
+
+    /**
+     * Token
+     */
+    public static class Token {
+        public final TokenType type;
+        public final String value;
+        public final int position;
+
+        /**
+         * Token方法。
+         * * @param type TokenType类型参数
+         *
+         * @param value    String类型参数
+         * @param position int类型参数
+         */
+        public Token(TokenType type, String value, int position) {
+            this.type = type;
+            this.value = value;
+            this.position = position;
+        }
+
+        @Override
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
+        public String toString() {
+            return String.format("Token(%s, '%s', %d)", type, value, position);
+        }
     }
 
 }

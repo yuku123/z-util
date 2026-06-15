@@ -54,7 +54,7 @@ public class BinaryGenotype extends Individual {
      * 设置指定位置的基因值
      *
      * @param index 基因索引
-     * @param gene 基因值（必须为0或1）
+     * @param gene  基因值（必须为0或1）
      */
     public void setGene(int index, Integer gene) {
         super.setGene(index, gene);

@@ -4,12 +4,14 @@ import com.zifang.util.pandas.DataFrame;
 import com.zifang.util.pandas.Series;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Interpolator 插值功能测试类
  * 测试线性插值、前向填充、后向填充等功能
  */
+
 /**
  * InterpolatorTest类。
  */

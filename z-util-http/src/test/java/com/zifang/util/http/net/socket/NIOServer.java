@@ -12,6 +12,7 @@ import java.util.Iterator;
 /**
  * NIO服务端
  */
+
 /**
  * NIOServer类。
  */
@@ -25,9 +26,22 @@ public class NIOServer {
      * @param port 绑定的端口号
      * @throws IOException
      */
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) throws IOException {
+        NIOServer server = new NIOServer();
+        server.initServer(8000);
+        server.listen();
+    }
+
     /**
      * initServer方法。
-     *      * @param port int类型参数
+     * * @param port int类型参数
      */
     public void initServer(int port) throws IOException {
         // 获得一个ServerSocket通道
@@ -42,6 +56,13 @@ public class NIOServer {
         // 当该事件到达时，selector.select()会返回，如果该事件没到达selector.select()会一直阻塞。
         serverChannel.register(selector, SelectionKey.OP_ACCEPT);
     }
+
+    /**
+     * 处理读取客户端发来的信息 的事件
+     *
+     * @param key
+     * @throws IOException
+     */
 
     /**
      * 采用轮询的方式监听selector上是否有需要处理的事件，如果有，则进行处理
@@ -88,14 +109,14 @@ public class NIOServer {
     }
 
     /**
-     * 处理读取客户端发来的信息 的事件
+     * 启动服务端测试
      *
-     * @param key
      * @throws IOException
      */
+
     /**
      * read方法。
-     *      * @param key SelectionKey类型参数
+     * * @param key SelectionKey类型参数
      */
     public void read(SelectionKey key) throws IOException {
         // 服务器可读取消息:得到事件发生的Socket通道
@@ -108,22 +129,6 @@ public class NIOServer {
         System.out.println("服务端收到信息：" + msg);
         ByteBuffer outBuffer = ByteBuffer.wrap(msg.getBytes());
         channel.write(outBuffer);// 将消息回送给客户端
-    }
-
-    /**
-     * 启动服务端测试
-     *
-     * @throws IOException
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) throws IOException {
-        NIOServer server = new NIOServer();
-        server.initServer(8000);
-        server.listen();
     }
 
 }

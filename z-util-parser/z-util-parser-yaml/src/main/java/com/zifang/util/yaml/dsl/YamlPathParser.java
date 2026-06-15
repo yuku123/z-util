@@ -17,6 +17,7 @@ import java.util.Map;
 /**
  * YamlPathParser类。
  */
+
 /**
  * YamlPathParser类。
  */
@@ -55,7 +56,8 @@ public class YamlPathParser {
      */
     /**
      * query方法。
-     *      * @param yaml String类型参数
+     * * @param yaml String类型参数
+     *
      * @param path String类型参数
      * @return List<Object>类型返回值
      */

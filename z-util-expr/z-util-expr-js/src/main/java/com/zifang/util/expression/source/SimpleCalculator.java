@@ -18,6 +18,36 @@ import com.zifang.util.expression.source.lexer.TokenType;
  */
 public class SimpleCalculator {
 
+    public static void main(String[] args) {
+        SimpleCalculator calculator = new SimpleCalculator();
+
+        //测试变量声明语句的解析
+        String script = "int a = b+3;";
+        System.out.println("解析变量声明语句: " + script);
+        SimpleLexer lexer = new SimpleLexer();
+        TokenReader tokens = lexer.tokenize(script);
+        try {
+            SimpleASTNode node = calculator.intDeclare(tokens);
+            calculator.dumpAST(node, "");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        //测试表达式
+        script = "2+3*5";
+        System.out.println("\n计算: " + script + "，看上去一切正常。");
+        calculator.evaluate(script);
+
+        //测试语法错误
+        script = "2+";
+        System.out.println("\n: " + script + "，应该有语法错误。");
+        calculator.evaluate(script);
+
+        script = "2+3+4";
+        System.out.println("\n计算: " + script + "，结合性出现错误。");
+        calculator.evaluate(script);
+    }
+
     /**
      * 执行脚本，并打印输出AST和求值过程。
      *
@@ -246,7 +276,6 @@ public class SimpleCalculator {
         return node;  //这个方法也做了AST的简化，就是不用构造一个primary节点，直接返回子节点。因为它只有一个子节点。
     }
 
-
     /**
      * 打印输出AST的树状结构
      *
@@ -258,35 +287,5 @@ public class SimpleCalculator {
         for (ASTNode child : node.getChildren()) {
             dumpAST(child, indent + "\t");
         }
-    }
-
-    public static void main(String[] args) {
-        SimpleCalculator calculator = new SimpleCalculator();
-
-        //测试变量声明语句的解析
-        String script = "int a = b+3;";
-        System.out.println("解析变量声明语句: " + script);
-        SimpleLexer lexer = new SimpleLexer();
-        TokenReader tokens = lexer.tokenize(script);
-        try {
-            SimpleASTNode node = calculator.intDeclare(tokens);
-            calculator.dumpAST(node, "");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        //测试表达式
-        script = "2+3*5";
-        System.out.println("\n计算: " + script + "，看上去一切正常。");
-        calculator.evaluate(script);
-
-        //测试语法错误
-        script = "2+";
-        System.out.println("\n: " + script + "，应该有语法错误。");
-        calculator.evaluate(script);
-
-        script = "2+3+4";
-        System.out.println("\n计算: " + script + "，结合性出现错误。");
-        calculator.evaluate(script);
     }
 }

@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter6;
  * @author zifang
  * @version 1.0
  */
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,9 +18,11 @@ import org.slf4j.LoggerFactory;
  */
 public class LogTest {
     private static final Logger log = LoggerFactory.getLogger(LogTest.class);
+
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

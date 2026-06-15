@@ -16,9 +16,13 @@ import java.lang.annotation.*;
 @Documented
 public @interface Component {
 
-    /** Bean 名称，默认为空字符串（使用类名首字母小写） */
+    /**
+     * Bean 名称，默认为空字符串（使用类名首字母小写）
+     */
     String value() default "";
 
-    /** 作用域，默认空表示使用 {@link javax.inject.Singleton} */
+    /**
+     * 作用域，默认空表示使用 {@link javax.inject.Singleton}
+     */
     String scope() default "";
 }

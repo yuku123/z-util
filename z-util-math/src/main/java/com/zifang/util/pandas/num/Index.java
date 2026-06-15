@@ -11,41 +11,6 @@ public class Index {
     private final int start;
     private final int step;
 
-    /**
-     * 创建默认的 RangeIndex
-     */
-    public static Index range(int size) {
-        return new Index(size);
-    }
-
-    /**
-     * range方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @return static Index类型返回值
-     */
-    public static Index range(int start, int stop) {
-        return new Index(start, stop, 1);
-    }
-
-    /**
-     * range方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @param step int类型参数
-     * @return static Index类型返回值
-     */
-    public static Index range(int start, int stop, int step) {
-        return new Index(start, stop, step);
-    }
-
-    /**
-     * 从字符串数组创建 Index
-     */
-    public static Index of(String... labels) {
-        return new Index(labels);
-    }
-
     // 私有构造函数
     private Index(int size) {
         this.isRangeIndex = true;
@@ -70,7 +35,7 @@ public class Index {
 
     /**
      * Index方法。
-     *      * @param labels String[]类型参数
+     * * @param labels String[]类型参数
      */
     public Index(String[] labels) {
         this.isRangeIndex = false;
@@ -79,9 +44,48 @@ public class Index {
         this.labels = labels.clone();
     }
 
+    /**
+     * 创建默认的 RangeIndex
+     */
+    public static Index range(int size) {
+        return new Index(size);
+    }
+
+    /**
+     * range方法。
+     * * @param start int类型参数
+     *
+     * @param stop int类型参数
+     * @return static Index类型返回值
+     */
+    public static Index range(int start, int stop) {
+        return new Index(start, stop, 1);
+    }
+
+    /**
+     * range方法。
+     * * @param start int类型参数
+     *
+     * @param stop int类型参数
+     * @param step int类型参数
+     * @return static Index类型返回值
+     */
+    public static Index range(int start, int stop, int step) {
+        return new Index(start, stop, step);
+    }
+
+    /**
+     * 从字符串数组创建 Index
+     */
+    public static Index of(String... labels) {
+        return new Index(labels);
+    }
+
     // 公共方法
+
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {
@@ -90,7 +94,8 @@ public class Index {
 
     /**
      * get方法。
-     *      * @param i int类型参数
+     * * @param i int类型参数
+     *
      * @return String类型返回值
      */
     public String get(int i) {
@@ -99,6 +104,7 @@ public class Index {
 
     /**
      * toArray方法。
+     *
      * @return String[]类型返回值
      */
     public String[] toArray() {
@@ -107,7 +113,8 @@ public class Index {
 
     /**
      * getLocation方法。
-     *      * @param label String类型参数
+     * * @param label String类型参数
+     *
      * @return int类型返回值
      */
     public int getLocation(String label) {
@@ -121,6 +128,7 @@ public class Index {
 
     /**
      * isRangeIndex方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isRangeIndex() {
@@ -129,7 +137,8 @@ public class Index {
 
     /**
      * slice方法。
-     *      * @param start int类型参数
+     * * @param start int类型参数
+     *
      * @param stop int类型参数
      * @return Index类型返回值
      */

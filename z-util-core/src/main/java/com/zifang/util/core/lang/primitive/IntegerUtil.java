@@ -10,7 +10,8 @@ public class IntegerUtil {
 
     /**
      * parseInteger方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @return static Integer类型返回值
      */
     public static Integer parseInteger(Object object) {
@@ -22,7 +23,8 @@ public class IntegerUtil {
 
     /**
      * parseIntegerOrDefault方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @param defaultValue int类型参数
      * @return static Integer类型返回值
      */
@@ -35,7 +37,8 @@ public class IntegerUtil {
 
     /**
      * saturatedCast方法。
-     *      * @param value long类型参数
+     * * @param value long类型参数
+     *
      * @return static int类型返回值
      */
     public static int saturatedCast(long value) {

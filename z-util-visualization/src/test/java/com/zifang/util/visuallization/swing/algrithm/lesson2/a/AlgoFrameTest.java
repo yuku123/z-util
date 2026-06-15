@@ -4,12 +4,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * AlgoFrame 单元测试
  * 测试算法可视化框架的构造和方法
  */
+
 /**
  * AlgoFrameTest类。
  */

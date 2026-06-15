@@ -8,7 +8,9 @@ import java.util.UUID;
 
 import static org.junit.Assert.*;
 
-/** 新增 ID 生成器测试。 */
+/**
+ * 新增 ID 生成器测试。
+ */
 public class NewIdGeneratorTest {
 
     // ===== SegmentIdGenerator =====
@@ -16,11 +18,11 @@ public class NewIdGeneratorTest {
     @Test
     public void testSegmentIdGenerator_inMemoryLoader() {
         // 内存 loader：每次返回 [base+1, base+step]
-        long[] counter = { 0L };
+        long[] counter = {0L};
         SegmentIdGenerator.SegmentLoader loader = (bizTag, step) -> {
             long base = counter[0];
             counter[0] += step;
-            return new long[]{ base + 1, base + step };
+            return new long[]{base + 1, base + step};
         };
         SegmentIdGenerator g = new SegmentIdGenerator("order", 5, loader);
         // 第一段：1..5
@@ -33,7 +35,7 @@ public class NewIdGeneratorTest {
     public void testSegmentIdGenerator_concurrency() throws Exception {
         SegmentIdGenerator.SegmentLoader loader = (bizTag, step) -> {
             long base = System.nanoTime() & 0xFFFFFFFL;
-            return new long[]{ base + 1, base + step };
+            return new long[]{base + 1, base + step};
         };
         SegmentIdGenerator g = new SegmentIdGenerator("conc", 100, loader);
         int n = 50;

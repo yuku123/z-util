@@ -28,45 +28,11 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class SegmentIdGenerator {
 
-    /** 号段加载器 SPI。 */
-    public interface SegmentLoader {
-        /**
-         * 加载 [start, end] 区间（含两端）。返回 start=0 表示无该业务。
-         * <p>
-         * 实现示例（MySQL）：
-         * <pre>{@code
-         *   try (Connection c = ds.getConnection()) {
-         *       c.setAutoCommit(false);
-         *       try (PreparedStatement upd = c.prepareStatement(
-         *               "UPDATE id_segment SET max_id = max_id + step WHERE biz_tag = ?")) {
-         *           upd.setString(1, bizTag);
-         *           upd.executeUpdate();
-         *       }
-         *       try (PreparedStatement sel = c.prepareStatement(
-         *               "SELECT max_id, step FROM id_segment WHERE biz_tag = ?")) {
-         *           sel.setString(1, bizTag);
-         *           try (ResultSet rs = sel.executeQuery()) {
-         *               if (rs.next()) {
-         *                   long maxId = rs.getLong(1);
-         *                   int step = rs.getInt(2);
-         *                   return new long[]{maxId - step, maxId};
-         *               }
-         *           }
-         *       }
-         *       c.commit();
-         *   }
-         *   return new long[]{0, 0};
-         * }</pre>
-         */
-        long[] loadSegment(String bizTag, int step);
-    }
-
     private final String bizTag;
     private final int step;
     private final SegmentLoader loader;
     private final AtomicLong current;
     private volatile long max;
-
     public SegmentIdGenerator(String bizTag, int step, SegmentLoader loader) {
         if (bizTag == null || bizTag.isEmpty()) throw new IllegalArgumentException("bizTag");
         if (step <= 0) throw new IllegalArgumentException("step must be > 0");
@@ -102,5 +68,40 @@ public class SegmentIdGenerator {
             c = current.incrementAndGet();
         }
         return c;
+    }
+
+    /**
+     * 号段加载器 SPI。
+     */
+    public interface SegmentLoader {
+        /**
+         * 加载 [start, end] 区间（含两端）。返回 start=0 表示无该业务。
+         * <p>
+         * 实现示例（MySQL）：
+         * <pre>{@code
+         *   try (Connection c = ds.getConnection()) {
+         *       c.setAutoCommit(false);
+         *       try (PreparedStatement upd = c.prepareStatement(
+         *               "UPDATE id_segment SET max_id = max_id + step WHERE biz_tag = ?")) {
+         *           upd.setString(1, bizTag);
+         *           upd.executeUpdate();
+         *       }
+         *       try (PreparedStatement sel = c.prepareStatement(
+         *               "SELECT max_id, step FROM id_segment WHERE biz_tag = ?")) {
+         *           sel.setString(1, bizTag);
+         *           try (ResultSet rs = sel.executeQuery()) {
+         *               if (rs.next()) {
+         *                   long maxId = rs.getLong(1);
+         *                   int step = rs.getInt(2);
+         *                   return new long[]{maxId - step, maxId};
+         *               }
+         *           }
+         *       }
+         *       c.commit();
+         *   }
+         *   return new long[]{0, 0};
+         * }</pre>
+         */
+        long[] loadSegment(String bizTag, int step);
     }
 }

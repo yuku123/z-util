@@ -24,7 +24,8 @@ public class XmlBeanUtil {
 
     /**
      * beanToXml方法。
-     *      * @param obj Object类型参数
+     * * @param obj Object类型参数
+     *
      * @param load Class?类型参数
      * @return static String类型返回值
      */
@@ -46,7 +47,8 @@ public class XmlBeanUtil {
 
     /**
      * xmlToBean方法。
-     *      * @param str String类型参数
+     * * @param str String类型参数
+     *
      * @param load ClassT类型参数
      * @return static <T> T类型返回值
      */

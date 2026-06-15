@@ -6,7 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
-/** 自研令牌桶 / 滑动窗口限流器测试。 */
+/**
+ * 自研令牌桶 / 滑动窗口限流器测试。
+ */
 public class RateLimiterTest {
 
     @Test
@@ -72,8 +74,16 @@ public class RateLimiterTest {
 
     @Test
     public void testTokenBucket_invalidArgs() {
-        try { new TokenBucketRateLimiter(0, 1); fail(); } catch (IllegalArgumentException e) { }
-        try { new TokenBucketRateLimiter(1, 0); fail(); } catch (IllegalArgumentException e) { }
+        try {
+            new TokenBucketRateLimiter(0, 1);
+            fail();
+        } catch (IllegalArgumentException e) {
+        }
+        try {
+            new TokenBucketRateLimiter(1, 0);
+            fail();
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     @Test

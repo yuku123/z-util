@@ -8,82 +8,15 @@ import java.util.concurrent.*;
  * FutureTask 类提供了一个名为 done() 的方法，允许在执行器中的任务执行结束之后，还可以执行一些代码。这个方法可以被用来执行一些后期处理操作，比如：产生报表，通过邮件发送结果或释放一些系统资源。当任务执行完成是受 FutureTask 类控制时，这个方法在内部被 FutureTask类调用。在任务结果设置后以及任务的状态已改变为 isDone之后，无论任务是否被取消或者正常结束，done()方法才被调用。
  * 默认情况下，done()方法的实现为空，即没有任何具体的代码实现。我们可以覆盖 FutureTask 类并实现done()方法来改变这种行为。在本节，我们将学习如何覆盖这个方法，并在任务结束后执行这些代码。
  */
+
 /**
  * DoneExecutorDemo类。
  */
 public class DoneExecutorDemo {
-    /// 1．创建名为ExecutableTask的类，并实现Callable接口，接口的泛型参数为String类型。
-    static class ExecutableTask implements Callable<String> {
-        /// 2．声明一个名为name的私有String属性，用来存储任务的名称，用 getName() 方法来返回这个属性值。
-        private String name;
-
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-        public String getName() {
-            return name;
-        }
-
-        // 3．实现类的构造器，并初始化任务的名称。
-    /**
-     * ExecutableTask方法。
-     *      * @param name String类型参数
-     */
-        public ExecutableTask(String name) {
-            this.name = name;
-        }
-
-        // 4．实现 call() 方法。将任务休眠一段随机时间，并返回带有任务名称的消息。
-        @Override
-    /**
-     * call方法。
-     * @return String类型返回值
-     */
-        public String call() throws Exception {
-            try {
-                long duration = (long) (Math.random() * 10);
-                System.out.printf("%s: Waiting %d seconds for results.\n", this.name, duration);
-                TimeUnit.SECONDS.sleep(duration);
-            } catch (InterruptedException e) {
-            }
-            return "Hello, world. I'm " + name;
-        }
-    }
-
-    // 5．实现一个名为ResultTask的类，并继承FutureTask类。FutureTask类的泛型参数为String类型。
-    static class ResultTask extends FutureTask<String> {
-        /// 6．声明一个名为name的私有String属性，用来存储任务的名称。
-        private String name;
-
-        // 7．实现类构造器。它接收一个Callable对象作为参数，调用父类构造器，并用接收到的任务属性来初始化name属性。
-    /**
-     * ResultTask方法。
-     *      * @param callable CallableString类型参数
-     */
-        public ResultTask(Callable<String> callable) {
-            super(callable);
-            this.name = ((ExecutableTask) callable).getName();
-        }
-
-        // 8．覆盖done()方法。检查isCancelled()方法的返回值，然后根据这个返回值在控制台输出不同的信息。
-        @Override
-    /**
-     * done方法。
-     */
-        protected void done() {
-            if (isCancelled()) {
-                System.out.printf("%s: Has been canceled\n", name);
-            } else {
-                System.out.printf("%s: Has finished\n", name);
-            }
-        }
-    }
-
-    // 9．实现范例的主类，创建Main主类，然后实现main()方法。
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -122,6 +55,79 @@ public class DoneExecutorDemo {
         // 16．调用shutdown()方法结束执行器。
         executor.shutdown();
 
+    }
+
+    /// 1．创建名为ExecutableTask的类，并实现Callable接口，接口的泛型参数为String类型。
+    static class ExecutableTask implements Callable<String> {
+        /// 2．声明一个名为name的私有String属性，用来存储任务的名称，用 getName() 方法来返回这个属性值。
+        private String name;
+
+        /**
+         * ExecutableTask方法。
+         * * @param name String类型参数
+         */
+        public ExecutableTask(String name) {
+            this.name = name;
+        }
+
+        // 3．实现类的构造器，并初始化任务的名称。
+
+        /**
+         * getName方法。
+         *
+         * @return String类型返回值
+         */
+        public String getName() {
+            return name;
+        }
+
+        // 4．实现 call() 方法。将任务休眠一段随机时间，并返回带有任务名称的消息。
+        @Override
+        /**
+         * call方法。
+         * @return String类型返回值
+         */
+        public String call() throws Exception {
+            try {
+                long duration = (long) (Math.random() * 10);
+                System.out.printf("%s: Waiting %d seconds for results.\n", this.name, duration);
+                TimeUnit.SECONDS.sleep(duration);
+            } catch (InterruptedException e) {
+            }
+            return "Hello, world. I'm " + name;
+        }
+    }
+
+    // 9．实现范例的主类，创建Main主类，然后实现main()方法。
+
+    // 5．实现一个名为ResultTask的类，并继承FutureTask类。FutureTask类的泛型参数为String类型。
+    static class ResultTask extends FutureTask<String> {
+        /// 6．声明一个名为name的私有String属性，用来存储任务的名称。
+        private String name;
+
+        // 7．实现类构造器。它接收一个Callable对象作为参数，调用父类构造器，并用接收到的任务属性来初始化name属性。
+
+        /**
+         * ResultTask方法。
+         * * @param callable CallableString类型参数
+         */
+        public ResultTask(Callable<String> callable) {
+            super(callable);
+            this.name = ((ExecutableTask) callable).getName();
+        }
+
+        // 8．覆盖done()方法。检查isCancelled()方法的返回值，然后根据这个返回值在控制台输出不同的信息。
+        @Override
+        /**
+         * done方法。
+         */
+        protected void done() {
+            if (isCancelled()) {
+                System.out.printf("%s: Has been canceled\n", name);
+            } else {
+                System.out.printf("%s: Has finished\n", name);
+            }
+        }
     }
 
 }

@@ -58,11 +58,10 @@ public class SnowflakeSequence implements Sequence {
     private final long nodeId;
     private final long epoch;
     private final AtomicLong sequence = new AtomicLong(0);
-    private volatile long lastTimestamp = -1L;
     private final Object lock = new Object();
-
     // ==================== 监控 ====================
     private final AtomicLong totalGenerated = new AtomicLong(0);
+    private volatile long lastTimestamp = -1L;
 
     /**
      * 使用默认 epoch（2024-01-01）和指定节点号创建生成器
@@ -182,13 +181,14 @@ public class SnowflakeSequence implements Sequence {
         long nid = (id >> NODE_ID_SHIFT) & MAX_NODE_ID;
         long seq = id & MAX_SEQ_PER_MS;
         String datetime = LocalDateTime.ofInstant(
-                Instant.ofEpochMilli(ts), ZoneId.systemDefault())
+                        Instant.ofEpochMilli(ts), ZoneId.systemDefault())
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
         return String.format("id=%d, datetime=%s, nodeId=%d, seq=%d", id, datetime, nid, seq);
     }
 
     /**
      * getNodeId方法。
+     *
      * @return long类型返回值
      */
     public long getNodeId() {
@@ -197,6 +197,7 @@ public class SnowflakeSequence implements Sequence {
 
     /**
      * getTotalGenerated方法。
+     *
      * @return long类型返回值
      */
     public long getTotalGenerated() {
@@ -205,7 +206,8 @@ public class SnowflakeSequence implements Sequence {
 
     /**
      * getTimestampOf方法。
-     *      * @param id long类型参数
+     * * @param id long类型参数
+     *
      * @return long类型返回值
      */
     public long getTimestampOf(long id) {
@@ -214,7 +216,8 @@ public class SnowflakeSequence implements Sequence {
 
     /**
      * getNodeIdOf方法。
-     *      * @param id long类型参数
+     * * @param id long类型参数
+     *
      * @return long类型返回值
      */
     public long getNodeIdOf(long id) {
@@ -223,7 +226,8 @@ public class SnowflakeSequence implements Sequence {
 
     /**
      * getSeqOf方法。
-     *      * @param id long类型参数
+     * * @param id long类型参数
+     *
      * @return long类型返回值
      */
     public long getSeqOf(long id) {

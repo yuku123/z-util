@@ -74,7 +74,8 @@ public class MemoryCacheTest {
 
     @Test
     public void testClear() {
-        cache.put("a", "1"); cache.put("b", "2");
+        cache.put("a", "1");
+        cache.put("b", "2");
         cache.invalidateAll();
         assertEquals(0, cache.size());
     }
@@ -140,7 +141,8 @@ public class MemoryCacheTest {
 
     @Test
     public void testGetAllPresent_skipsMiss() {
-        cache.put("a", "1"); cache.put("b", "2");
+        cache.put("a", "1");
+        cache.put("b", "2");
         Map<String, String> got = cache.getAllPresent(java.util.Arrays.asList("a", "absent", "b"));
         assertEquals(2, got.size());
         assertEquals("1", got.get("a"));
@@ -150,7 +152,8 @@ public class MemoryCacheTest {
     @Test
     public void testPutAll() {
         Map<String, String> data = new HashMap<>();
-        data.put("a", "1"); data.put("b", "2");
+        data.put("a", "1");
+        data.put("b", "2");
         cache.putAll(data);
         assertEquals("1", cache.get("a"));
         assertEquals("2", cache.get("b"));
@@ -175,7 +178,9 @@ public class MemoryCacheTest {
         AtomicInteger calls = new AtomicInteger();
         Cache<String, String> c = CacheBuilder.<String, String>newBuilder()
                 .name("listener")
-                .addListener(n -> { if (n.getCause() == RemovalListener.RemovalCause.EXPLICIT) calls.incrementAndGet(); })
+                .addListener(n -> {
+                    if (n.getCause() == RemovalListener.RemovalCause.EXPLICIT) calls.incrementAndGet();
+                })
                 .build();
         c.put("k", "v");
         c.remove("k");
@@ -189,7 +194,9 @@ public class MemoryCacheTest {
         Cache<Integer, String> c = CacheBuilder.<Integer, String>newBuilder()
                 .name("evict-listener")
                 .maximumSize(2)
-                .addListener(n -> { if (n.getCause() == RemovalListener.RemovalCause.SIZE_LIMIT) evictions.incrementAndGet(); })
+                .addListener(n -> {
+                    if (n.getCause() == RemovalListener.RemovalCause.SIZE_LIMIT) evictions.incrementAndGet();
+                })
                 .build();
         c.put(1, "a");
         c.put(2, "b");
@@ -204,7 +211,10 @@ public class MemoryCacheTest {
     @Test
     public void testGetWithLoader_miss() {
         AtomicInteger calls = new AtomicInteger();
-        String v = cache.get("k", k -> { calls.incrementAndGet(); return "loaded-" + k; });
+        String v = cache.get("k", k -> {
+            calls.incrementAndGet();
+            return "loaded-" + k;
+        });
         assertEquals("loaded-k", v);
         assertEquals(1, calls.get());
         // 第二次取，loader 不再被调
@@ -215,10 +225,16 @@ public class MemoryCacheTest {
     @Test
     public void testGetWithLoader_loaderReturnsNull_doesNotCache() {
         AtomicInteger calls = new AtomicInteger();
-        cache.get("k", k -> { calls.incrementAndGet(); return null; });
+        cache.get("k", k -> {
+            calls.incrementAndGet();
+            return null;
+        });
         assertEquals(1, calls.get());
         // 第二次再 miss，会再次调 loader
-        cache.get("k", k -> { calls.incrementAndGet(); return null; });
+        cache.get("k", k -> {
+            calls.incrementAndGet();
+            return null;
+        });
         assertEquals(2, calls.get());
     }
 
@@ -226,7 +242,8 @@ public class MemoryCacheTest {
 
     @Test
     public void testAsMap_isView() {
-        cache.put("a", "1"); cache.put("b", "2");
+        cache.put("a", "1");
+        cache.put("b", "2");
         Map<String, String> view = cache.asMap();
         assertEquals(2, view.size());
         assertEquals("1", view.get("a"));
@@ -239,7 +256,10 @@ public class MemoryCacheTest {
         AtomicInteger calls = new AtomicInteger();
         LoadingCache<String, String> lc = CacheBuilder.<String, String>newBuilder()
                 .name("loading")
-                .build(k -> { calls.incrementAndGet(); return "v-" + k; });
+                .build(k -> {
+                    calls.incrementAndGet();
+                    return "v-" + k;
+                });
         assertEquals("v-1", lc.get("1"));
         assertEquals("v-1", lc.get("1")); // 第二次不再调 loader
         assertEquals(1, calls.get());

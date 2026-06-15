@@ -10,13 +10,10 @@ package com.zifang.util.zex.bust.chapter4.case4;
  * @version 1.0
  */
 class Human5 {
-    void handle(Object a) {
-        System.out.println("#object:" + a);
-    }
-
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -39,5 +36,9 @@ class Human5 {
         human.handle(Long.valueOf(1L));
         human.handle(Float.valueOf(1.1F));
         human.handle(Double.valueOf(1.1D));
+    }
+
+    void handle(Object a) {
+        System.out.println("#object:" + a);
     }
 }

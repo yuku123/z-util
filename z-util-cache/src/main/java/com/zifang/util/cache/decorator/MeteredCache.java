@@ -1,7 +1,6 @@
 package com.zifang.util.cache.decorator;
 
 import com.zifang.util.cache.Cache;
-import com.zifang.util.cache.CacheStats;
 
 import java.util.concurrent.atomic.LongAdder;
 
@@ -32,7 +31,9 @@ public class MeteredCache<K, V> extends ForwardingCache<K, V> {
     }
 
     @Override
-    protected Cache<K, V> delegate() { return delegate; }
+    protected Cache<K, V> delegate() {
+        return delegate;
+    }
 
     @Override
     public V get(K key) {
@@ -89,20 +90,52 @@ public class MeteredCache<K, V> extends ForwardingCache<K, V> {
                 elapsed);
     }
 
-    /** 不可变快照。 */
+    /**
+     * 不可变快照。
+     */
     public static final class Meter {
         private final long hits, misses, puts, removes, evictions, elapsedNanos;
+
         Meter(long h, long m, long p, long r, long e, long en) {
-            this.hits = h; this.misses = m; this.puts = p;
-            this.removes = r; this.evictions = e; this.elapsedNanos = en;
+            this.hits = h;
+            this.misses = m;
+            this.puts = p;
+            this.removes = r;
+            this.evictions = e;
+            this.elapsedNanos = en;
         }
-        public long getCount() { return hits + misses; }
-        public long hitCount() { return hits; }
-        public long missCount() { return misses; }
-        public long putCount() { return puts; }
-        public long removeCount() { return removes; }
-        public long evictionCount() { return evictions; }
-        public double hitRate() { long t = getCount(); return t == 0 ? 0.0 : (double) hits / t; }
-        public long elapsedNanos() { return elapsedNanos; }
+
+        public long getCount() {
+            return hits + misses;
+        }
+
+        public long hitCount() {
+            return hits;
+        }
+
+        public long missCount() {
+            return misses;
+        }
+
+        public long putCount() {
+            return puts;
+        }
+
+        public long removeCount() {
+            return removes;
+        }
+
+        public long evictionCount() {
+            return evictions;
+        }
+
+        public double hitRate() {
+            long t = getCount();
+            return t == 0 ? 0.0 : (double) hits / t;
+        }
+
+        public long elapsedNanos() {
+            return elapsedNanos;
+        }
     }
 }

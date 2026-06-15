@@ -31,6 +31,7 @@ public abstract class YamlTypeBinding<T> {
      */
     /**
      * getType方法。
+     *
      * @return Type类型返回值
      */
     public Type getType() {

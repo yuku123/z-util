@@ -9,7 +9,8 @@ public class Octet<A, B, C, D, E, F, G, H> extends Septet<A, B, C, D, E, F, G> {
 
     /**
      * Octet方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      * @param c C类型参数
      * @param d D类型参数
@@ -25,6 +26,7 @@ public class Octet<A, B, C, D, E, F, G, H> extends Septet<A, B, C, D, E, F, G> {
 
     /**
      * getH方法。
+     *
      * @return H类型返回值
      */
     public H getH() {
@@ -33,7 +35,7 @@ public class Octet<A, B, C, D, E, F, G, H> extends Septet<A, B, C, D, E, F, G> {
 
     /**
      * setH方法。
-     *      * @param h H类型参数
+     * * @param h H类型参数
      */
     public void setH(H h) {
         this.h = h;

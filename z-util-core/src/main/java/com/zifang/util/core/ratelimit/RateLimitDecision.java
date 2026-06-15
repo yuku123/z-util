@@ -1,6 +1,8 @@
 package com.zifang.util.core.ratelimit;
 
-/** 限流结果。 */
+/**
+ * 限流结果。
+ */
 public final class RateLimitDecision {
 
     private final boolean allowed;
@@ -13,14 +15,23 @@ public final class RateLimitDecision {
         this.remaining = remaining;
     }
 
-    public boolean isAllowed() { return allowed; }
-    public long getRetryAfterNanos() { return retryAfterNanos; }
-    public long getRemaining() { return remaining; }
-
     public static RateLimitDecision allow(long remaining) {
         return new RateLimitDecision(true, 0L, remaining);
     }
+
     public static RateLimitDecision deny(long retryAfterNanos) {
         return new RateLimitDecision(false, retryAfterNanos, 0L);
+    }
+
+    public boolean isAllowed() {
+        return allowed;
+    }
+
+    public long getRetryAfterNanos() {
+        return retryAfterNanos;
+    }
+
+    public long getRemaining() {
+        return remaining;
     }
 }

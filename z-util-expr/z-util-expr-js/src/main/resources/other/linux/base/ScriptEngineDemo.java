@@ -113,10 +113,6 @@ public class ScriptEngineDemo {
         }
     }
 
-    interface JSLib {
-        int max_num(int a, int b);
-    }
-
     /**
      * 上面的invokeFunction，第一个参数调用的脚本函数名，后面跟的可变参数是对应的脚本函数参数。
      * <p>
@@ -179,7 +175,6 @@ public class ScriptEngineDemo {
         }
     }
 
-
     public static void main(String[] args) {
 //		 test1.groovy();
         // test2();
@@ -188,5 +183,10 @@ public class ScriptEngineDemo {
         // test41();
         test5();
 //		test6();
+    }
+
+
+    interface JSLib {
+        int max_num(int a, int b);
     }
 }

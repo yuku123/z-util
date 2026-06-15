@@ -20,20 +20,19 @@ import java.net.URI;
 public class CharSequenceJavaFileObject extends SimpleJavaFileObject {
 
     /**
+     * 源代码内容
+     */
+    private final CharSequence sourceCode;
+    /**
      * 用于存储编译后字节码的输出流
      */
     private ByteArrayOutputStream byteCode = new ByteArrayOutputStream();
 
     /**
-     * 源代码内容
-     */
-    private final CharSequence sourceCode;
-
-    /**
      * 使用类名和源代码构造文件对象（作为源代码存储）
      *
-     * @param className   类名
-     * @param sourceCode  源代码内容
+     * @param className  类名
+     * @param sourceCode 源代码内容
      */
     public CharSequenceJavaFileObject(String className, CharSequence sourceCode) {
         super(URI.create(className + Kind.SOURCE.extension), Kind.SOURCE);

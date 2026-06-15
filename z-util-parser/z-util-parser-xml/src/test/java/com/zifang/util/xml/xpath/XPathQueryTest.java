@@ -1,7 +1,8 @@
 package com.zifang.util.xml.xpath;
 
 import com.zifang.util.xml.XmlUtil;
-import com.zifang.util.xml.model.*;
+import com.zifang.util.xml.model.XDocument;
+import com.zifang.util.xml.model.XElement;
 import org.junit.Test;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * XPath 查询功能测试。
  */
+
 /**
  * XPathQueryTest类。
  */

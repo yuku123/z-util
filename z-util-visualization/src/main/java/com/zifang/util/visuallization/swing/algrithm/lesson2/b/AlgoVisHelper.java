@@ -11,9 +11,6 @@ import java.awt.geom.Rectangle2D;
  */
 public class AlgoVisHelper {
 
-    private AlgoVisHelper() {
-    }
-
     /**
      * 红色
      */
@@ -98,9 +95,12 @@ public class AlgoVisHelper {
      * 白色
      */
     public static final Color White = new Color(0xFFFFFF);
+    private AlgoVisHelper() {
+    }
 
     /**
      * 绘制空心圆
+     *
      * @param g 图形上下文
      * @param x 圆心X坐标
      * @param y 圆心Y坐标
@@ -114,6 +114,7 @@ public class AlgoVisHelper {
 
     /**
      * 绘制实心圆
+     *
      * @param g 图形上下文
      * @param x 圆心X坐标
      * @param y 圆心Y坐标
@@ -127,6 +128,7 @@ public class AlgoVisHelper {
 
     /**
      * 绘制空心矩形
+     *
      * @param g 图形上下文
      * @param x 左上角X坐标
      * @param y 左上角Y坐标
@@ -141,6 +143,7 @@ public class AlgoVisHelper {
 
     /**
      * 绘制实心矩形
+     *
      * @param g 图形上下文
      * @param x 左上角X坐标
      * @param y 左上角Y坐标
@@ -155,7 +158,8 @@ public class AlgoVisHelper {
 
     /**
      * 设置绘图颜色
-     * @param g 图形上下文
+     *
+     * @param g     图形上下文
      * @param color 颜色
      */
     public static void setColor(Graphics2D g, Color color) {
@@ -164,6 +168,7 @@ public class AlgoVisHelper {
 
     /**
      * 设置线条宽度
+     *
      * @param g 图形上下文
      * @param w 宽度
      */
@@ -174,6 +179,7 @@ public class AlgoVisHelper {
 
     /**
      * 暂停指定时间
+     *
      * @param t 暂停时间（毫秒）
      */
     public static void pause(int t) {
@@ -186,9 +192,10 @@ public class AlgoVisHelper {
 
     /**
      * 绘制图片
-     * @param g 图形上下文
-     * @param x X坐标
-     * @param y Y坐标
+     *
+     * @param g        图形上下文
+     * @param x        X坐标
+     * @param y        Y坐标
      * @param imageURL 图片路径
      */
     public static void putImage(Graphics2D g, int x, int y, String imageURL) {
@@ -201,8 +208,9 @@ public class AlgoVisHelper {
 
     /**
      * 绘制居中文字
-     * @param g 图形上下文
-     * @param text 文本内容
+     *
+     * @param g       图形上下文
+     * @param text    文本内容
      * @param centerx 中心X坐标
      * @param centery 中心Y坐标
      * @throws IllegalArgumentException 如果文本为null

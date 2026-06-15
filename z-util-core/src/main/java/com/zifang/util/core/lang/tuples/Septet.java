@@ -3,7 +3,6 @@ package com.zifang.util.core.lang.tuples;
 /**
  * 七元组，包含7个元素的不可变元组。
  *
- * @author zifang
  * @param <A> 第一个元素类型
  * @param <B> 第二个元素类型
  * @param <C> 第三个元素类型
@@ -11,6 +10,7 @@ package com.zifang.util.core.lang.tuples;
  * @param <E> 第五个元素类型
  * @param <F> 第六个元素类型
  * @param <G> 第七个元素类型
+ * @author zifang
  * @see Sextet
  */
 public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
@@ -18,7 +18,8 @@ public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
 
     /**
      * Septet方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      * @param c C类型参数
      * @param d D类型参数
@@ -33,6 +34,7 @@ public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
 
     /**
      * getG方法。
+     *
      * @return G类型返回值
      */
     public G getG() {
@@ -41,7 +43,7 @@ public class Septet<A, B, C, D, E, F, G> extends Sextet<A, B, C, D, E, F> {
 
     /**
      * setG方法。
-     *      * @param g G类型参数
+     * * @param g G类型参数
      */
     public void setG(G g) {
         this.g = g;

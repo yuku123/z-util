@@ -47,7 +47,7 @@ public final class RsaUtil {
     private static final int MAX_DECRYPT_BLOCK = 128;
 
 
-/**
+    /**
      * BASE64解密
      *
      * @param key
@@ -171,7 +171,9 @@ public final class RsaUtil {
         return decryptedData;
     }
 
-    /** */
+    /**
+     *
+     */
     public static byte[] decryptByPublicKey(byte[] encryptedData, String publicKey) throws Exception {
         byte[] keyBytes = decryptBASE64(publicKey);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);
@@ -200,7 +202,9 @@ public final class RsaUtil {
         return decryptedData;
     }
 
-    /** */
+    /**
+     *
+     */
     public static byte[] encryptByPublicKey(byte[] data, String publicKey) throws Exception {
         byte[] keyBytes = decryptBASE64(publicKey);
         X509EncodedKeySpec x509KeySpec = new X509EncodedKeySpec(keyBytes);

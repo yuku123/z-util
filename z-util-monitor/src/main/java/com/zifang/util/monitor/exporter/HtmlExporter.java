@@ -1,6 +1,6 @@
 package com.zifang.util.monitor.exporter;
 
-import com.zifang.util.core.lang.collection.*;
+import com.zifang.util.core.lang.collection.Lists;
 import com.zifang.util.monitor.MetricsRegistry;
 import com.zifang.util.monitor.MetricsSnapshot;
 
@@ -18,38 +18,38 @@ public class HtmlExporter {
 
     private static final String CSS =
             "<style>" +
-            "body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }" +
-            ".container { max-width: 1200px; margin: 0 auto; }" +
-            "h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }" +
-            "h2 { color: #555; margin-top: 30px; }" +
-            ".nav { margin: 20px 0; }" +
-            ".nav a { margin-right: 15px; color: #007bff; text-decoration: none; }" +
-            ".nav a:hover { text-decoration: underline; }" +
-            "table { width: 100%; border-collapse: collapse; background: #fff; margin: 15px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }" +
-            "th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }" +
-            "th { background: #007bff; color: #fff; font-weight: 500; }" +
-            "tr:hover { background: #f8f9fa; }" +
-            ".metric-name { font-weight: 500; color: #333; }" +
-            ".metric-value { font-family: 'Monaco', 'Menlo', monospace; }" +
-            ".metric-desc { color: #888; font-size: 0.9em; }" +
-            ".category-badge { display: inline-block; padding: 3px 8px; border-radius: 3px; font-size: 0.8em; }" +
-            ".badge-jvm { background: #e3f2fd; color: #1976d2; }" +
-            ".badge-thread { background: #f3e5f5; color: #7b1fa2; }" +
-            ".badge-os { background: #e8f5e9; color: #388e3c; }" +
-            ".badge-custom { background: #fff3e0; color: #f57c00; }" +
-            ".footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #888; font-size: 0.9em; }" +
-            ".refresh-hint { color: #666; font-size: 0.9em; }" +
-            ".summary { display: flex; gap: 20px; margin: 20px 0; }" +
-            ".summary-card { background: #fff; padding: 15px 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }" +
-            ".summary-card h3 { margin: 0 0 10px 0; color: #333; font-size: 0.9em; }" +
-            ".summary-card .value { font-size: 1.8em; font-weight: bold; color: #007bff; }" +
-            "</style>";
+                    "body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }" +
+                    ".container { max-width: 1200px; margin: 0 auto; }" +
+                    "h1 { color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px; }" +
+                    "h2 { color: #555; margin-top: 30px; }" +
+                    ".nav { margin: 20px 0; }" +
+                    ".nav a { margin-right: 15px; color: #007bff; text-decoration: none; }" +
+                    ".nav a:hover { text-decoration: underline; }" +
+                    "table { width: 100%; border-collapse: collapse; background: #fff; margin: 15px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }" +
+                    "th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }" +
+                    "th { background: #007bff; color: #fff; font-weight: 500; }" +
+                    "tr:hover { background: #f8f9fa; }" +
+                    ".metric-name { font-weight: 500; color: #333; }" +
+                    ".metric-value { font-family: 'Monaco', 'Menlo', monospace; }" +
+                    ".metric-desc { color: #888; font-size: 0.9em; }" +
+                    ".category-badge { display: inline-block; padding: 3px 8px; border-radius: 3px; font-size: 0.8em; }" +
+                    ".badge-jvm { background: #e3f2fd; color: #1976d2; }" +
+                    ".badge-thread { background: #f3e5f5; color: #7b1fa2; }" +
+                    ".badge-os { background: #e8f5e9; color: #388e3c; }" +
+                    ".badge-custom { background: #fff3e0; color: #f57c00; }" +
+                    ".footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #888; font-size: 0.9em; }" +
+                    ".refresh-hint { color: #666; font-size: 0.9em; }" +
+                    ".summary { display: flex; gap: 20px; margin: 20px 0; }" +
+                    ".summary-card { background: #fff; padding: 15px 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }" +
+                    ".summary-card h3 { margin: 0 0 10px 0; color: #333; font-size: 0.9em; }" +
+                    ".summary-card .value { font-size: 1.8em; font-weight: bold; color: #007bff; }" +
+                    "</style>";
 
     private final MetricsRegistry registry;
 
     /**
      * HtmlExporter方法。
-     *      * @param registry MetricsRegistry类型参数
+     * * @param registry MetricsRegistry类型参数
      */
     public HtmlExporter(MetricsRegistry registry) {
         this.registry = registry;
@@ -57,6 +57,7 @@ public class HtmlExporter {
 
     /**
      * export方法。
+     *
      * @return String类型返回值
      */
     public String export() {

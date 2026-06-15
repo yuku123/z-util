@@ -33,7 +33,7 @@ public class SimpleTrigger implements Trigger {
 
     /**
      * SimpleTrigger方法。
-     *      * @param delegate org.quartz.SimpleTrigger类型参数
+     * * @param delegate org.quartz.SimpleTrigger类型参数
      */
     public SimpleTrigger(org.quartz.SimpleTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
@@ -234,41 +234,45 @@ public class SimpleTrigger implements Trigger {
         private long intervalInMillis = 0;
         private int repeatCount = 0;
 
-    /**
-     * withIntervalInSeconds方法。
-     *      * @param seconds int类型参数
-     * @return SimpleBuilder类型返回值
-     */
+        /**
+         * withIntervalInSeconds方法。
+         * * @param seconds int类型参数
+         *
+         * @return SimpleBuilder类型返回值
+         */
         public SimpleBuilder withIntervalInSeconds(int seconds) {
             this.intervalInMillis = seconds * 1000L;
             return this;
         }
 
-    /**
-     * withIntervalInMinutes方法。
-     *      * @param minutes int类型参数
-     * @return SimpleBuilder类型返回值
-     */
+        /**
+         * withIntervalInMinutes方法。
+         * * @param minutes int类型参数
+         *
+         * @return SimpleBuilder类型返回值
+         */
         public SimpleBuilder withIntervalInMinutes(int minutes) {
             this.intervalInMillis = minutes * 60 * 1000L;
             return this;
         }
 
-    /**
-     * withIntervalInHours方法。
-     *      * @param hours int类型参数
-     * @return SimpleBuilder类型返回值
-     */
+        /**
+         * withIntervalInHours方法。
+         * * @param hours int类型参数
+         *
+         * @return SimpleBuilder类型返回值
+         */
         public SimpleBuilder withIntervalInHours(int hours) {
             this.intervalInMillis = hours * 3600 * 1000L;
             return this;
         }
 
-    /**
-     * withIntervalInMillis方法。
-     *      * @param millis long类型参数
-     * @return SimpleBuilder类型返回值
-     */
+        /**
+         * withIntervalInMillis方法。
+         * * @param millis long类型参数
+         *
+         * @return SimpleBuilder类型返回值
+         */
         public SimpleBuilder withIntervalInMillis(long millis) {
             this.intervalInMillis = millis;
             return this;
@@ -292,10 +296,10 @@ public class SimpleTrigger implements Trigger {
         }
 
         @Override
-    /**
-     * build方法。
-     * @return SimpleTrigger类型返回值
-     */
+        /**
+         * build方法。
+         * @return SimpleTrigger类型返回值
+         */
         public SimpleTrigger build() {
             SimpleScheduleBuilder sb = SimpleScheduleBuilder.simpleSchedule()
                     .withIntervalInMilliseconds(intervalInMillis)

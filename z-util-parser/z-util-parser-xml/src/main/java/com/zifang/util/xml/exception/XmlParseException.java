@@ -5,6 +5,7 @@ package com.zifang.util.xml.exception;
  *
  * @author zifang
  */
+
 /**
  * XmlParseException类。
  */
@@ -12,7 +13,7 @@ public class XmlParseException extends RuntimeException {
 
     /**
      * XmlParseException方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public XmlParseException(String message) {
         super(message);

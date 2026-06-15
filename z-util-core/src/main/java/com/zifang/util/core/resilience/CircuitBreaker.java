@@ -100,9 +100,13 @@ public class CircuitBreaker {
         }
     }
 
-    public State getState() { return state.get(); }
+    public State getState() {
+        return state.get();
+    }
 
-    public String name() { return getClass().getSimpleName() + "@" + System.identityHashCode(this); }
+    public String name() {
+        return getClass().getSimpleName() + "@" + System.identityHashCode(this);
+    }
 
-    public enum State { CLOSED, HALF_OPEN, OPEN }
+    public enum State {CLOSED, HALF_OPEN, OPEN}
 }

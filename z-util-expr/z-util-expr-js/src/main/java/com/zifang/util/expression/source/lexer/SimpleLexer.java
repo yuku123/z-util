@@ -11,6 +11,11 @@ import java.util.List;
  */
 public class SimpleLexer {
 
+    //下面几个变量是在解析过程中用到的临时变量,如果要优化的话，可以塞到方法里隐藏起来
+    private StringBuffer tokenText = null;   //临时保存token的文本
+    private List<Token> tokens = null;       //保存解析出来的Token
+    private SimpleToken token = null;        //当前正在解析的Token
+
     public static void main(String[] args) {
         SimpleLexer lexer = new SimpleLexer();
 
@@ -44,10 +49,18 @@ public class SimpleLexer {
         dump(tokenReader);
     }
 
-    //下面几个变量是在解析过程中用到的临时变量,如果要优化的话，可以塞到方法里隐藏起来
-    private StringBuffer tokenText = null;   //临时保存token的文本
-    private List<Token> tokens = null;       //保存解析出来的Token
-    private SimpleToken token = null;        //当前正在解析的Token
+    /**
+     * 打印所有的Token，用于调试和验证词法分析结果。
+     *
+     * @param tokenReader Token读取器
+     */
+    public static void dump(SimpleTokenReader tokenReader) {
+        System.out.println("text\ttype");
+        Token token = null;
+        while ((token = tokenReader.read()) != null) {
+            System.out.println(token.getText() + "\t\t" + token.getType());
+        }
+    }
 
     //是否是字母
     private boolean isAlpha(int ch) {
@@ -237,19 +250,6 @@ public class SimpleLexer {
         }
 
         return new SimpleTokenReader(tokens);
-    }
-
-    /**
-     * 打印所有的Token，用于调试和验证词法分析结果。
-     *
-     * @param tokenReader Token读取器
-     */
-    public static void dump(SimpleTokenReader tokenReader) {
-        System.out.println("text\ttype");
-        Token token = null;
-        while ((token = tokenReader.read()) != null) {
-            System.out.println(token.getText() + "\t\t" + token.getType());
-        }
     }
 
 }

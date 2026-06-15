@@ -69,7 +69,8 @@ public class DateFormatUtil {
 
     /**
      * parse方法。
-     *      * @param dateStr String类型参数
+     * * @param dateStr String类型参数
+     *
      * @param outPattern String类型参数
      * @return static Date类型返回值
      */

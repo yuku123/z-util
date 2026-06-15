@@ -15,19 +15,28 @@ import java.security.SecureRandom;
  */
 public class NanoId {
 
-    /** 默认字符集：URL-safe 64 字符。 */
+    /**
+     * 默认字符集：URL-safe 64 字符。
+     */
     public static final String DEFAULT_ALPHABET =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-";
 
-    /** 易混淆字符过滤（默认开启）。 */
+    /**
+     * 易混淆字符过滤（默认开启）。
+     */
     public static final String CONFUSING = "iIlL1oO0";
 
     private final int size;
     private final char[] alphabet;
     private final SecureRandom random = new SecureRandom();
 
-    public NanoId() { this(21); }
-    public NanoId(int size) { this(size, DEFAULT_ALPHABET); }
+    public NanoId() {
+        this(21);
+    }
+
+    public NanoId(int size) {
+        this(size, DEFAULT_ALPHABET);
+    }
 
     public NanoId(int size, String alphabet) {
         if (size <= 0) throw new IllegalArgumentException("size must be > 0");
@@ -50,5 +59,7 @@ public class NanoId {
         return new String(buf);
     }
 
-    public int size() { return size; }
+    public int size() {
+        return size;
+    }
 }

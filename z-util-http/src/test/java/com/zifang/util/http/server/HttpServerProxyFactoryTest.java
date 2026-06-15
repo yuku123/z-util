@@ -4,7 +4,8 @@ import com.zifang.util.http.base.define.GetMapping;
 import com.zifang.util.http.base.define.RestController;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * HttpServerProxyFactoryTest类。
@@ -41,10 +42,10 @@ public class HttpServerProxyFactoryTest {
 
     public static class TestApiImpl implements TestApi {
         @Override
-    /**
-     * test方法。
-     * @return String类型返回值
-     */
+        /**
+         * test方法。
+         * @return String类型返回值
+         */
         public String test() {
             return "test";
         }

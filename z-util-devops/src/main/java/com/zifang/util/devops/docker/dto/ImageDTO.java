@@ -26,6 +26,7 @@ public class ImageDTO {
 
     /**
      * getId方法。
+     *
      * @return String类型返回值
      */
     public String getId() {
@@ -34,7 +35,7 @@ public class ImageDTO {
 
     /**
      * setId方法。
-     *      * @param id String类型参数
+     * * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -42,6 +43,7 @@ public class ImageDTO {
 
     /**
      * getRepository方法。
+     *
      * @return String类型返回值
      */
     public String getRepository() {
@@ -50,7 +52,7 @@ public class ImageDTO {
 
     /**
      * setRepository方法。
-     *      * @param repository String类型参数
+     * * @param repository String类型参数
      */
     public void setRepository(String repository) {
         this.repository = repository;
@@ -58,6 +60,7 @@ public class ImageDTO {
 
     /**
      * getTag方法。
+     *
      * @return String类型返回值
      */
     public String getTag() {
@@ -66,7 +69,7 @@ public class ImageDTO {
 
     /**
      * setTag方法。
-     *      * @param tag String类型参数
+     * * @param tag String类型参数
      */
     public void setTag(String tag) {
         this.tag = tag;
@@ -74,6 +77,7 @@ public class ImageDTO {
 
     /**
      * getCreated方法。
+     *
      * @return String类型返回值
      */
     public String getCreated() {
@@ -82,7 +86,7 @@ public class ImageDTO {
 
     /**
      * setCreated方法。
-     *      * @param created String类型参数
+     * * @param created String类型参数
      */
     public void setCreated(String created) {
         this.created = created;
@@ -90,6 +94,7 @@ public class ImageDTO {
 
     /**
      * getSize方法。
+     *
      * @return String类型返回值
      */
     public String getSize() {
@@ -98,7 +103,7 @@ public class ImageDTO {
 
     /**
      * setSize方法。
-     *      * @param size String类型参数
+     * * @param size String类型参数
      */
     public void setSize(String size) {
         this.size = size;
@@ -106,6 +111,7 @@ public class ImageDTO {
 
     /**
      * getSizeBytes方法。
+     *
      * @return long类型返回值
      */
     public long getSizeBytes() {
@@ -114,7 +120,7 @@ public class ImageDTO {
 
     /**
      * setSizeBytes方法。
-     *      * @param sizeBytes long类型参数
+     * * @param sizeBytes long类型参数
      */
     public void setSizeBytes(long sizeBytes) {
         this.sizeBytes = sizeBytes;
@@ -122,6 +128,7 @@ public class ImageDTO {
 
     /**
      * getLabels方法。
+     *
      * @return Map<String, String>类型返回值
      */
     public Map<String, String> getLabels() {
@@ -130,7 +137,7 @@ public class ImageDTO {
 
     /**
      * setLabels方法。
-     *      * @param labels MapString,类型参数
+     * * @param labels MapString,类型参数
      */
     public void setLabels(Map<String, String> labels) {
         this.labels = labels;
@@ -138,6 +145,7 @@ public class ImageDTO {
 
     /**
      * getRepoTags方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getRepoTags() {
@@ -146,7 +154,7 @@ public class ImageDTO {
 
     /**
      * setRepoTags方法。
-     *      * @param repoTags ListString类型参数
+     * * @param repoTags ListString类型参数
      */
     public void setRepoTags(List<String> repoTags) {
         this.repoTags = repoTags;
@@ -154,6 +162,7 @@ public class ImageDTO {
 
     /**
      * getPorts方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getPorts() {
@@ -162,7 +171,7 @@ public class ImageDTO {
 
     /**
      * setPorts方法。
-     *      * @param ports ListString类型参数
+     * * @param ports ListString类型参数
      */
     public void setPorts(List<String> ports) {
         this.ports = ports;

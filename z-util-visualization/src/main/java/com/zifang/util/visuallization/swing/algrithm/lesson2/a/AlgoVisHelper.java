@@ -50,7 +50,7 @@ public class AlgoVisHelper {
     /**
      * 设置图形绘制颜色
      *
-     * @param g 图形上下文，用于设置颜色
+     * @param g     图形上下文，用于设置颜色
      * @param color 要设置的Color对象，包括预定义颜色如Color.RED等
      */
     public static void setColor(Graphics2D g, Color color) {

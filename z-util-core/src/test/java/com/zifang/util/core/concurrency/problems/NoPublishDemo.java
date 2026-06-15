@@ -7,6 +7,7 @@ package com.zifang.util.core.concurrency.problems;
  * @author zifang Lee (oldratlee at gmail dot com)
  * @see <a href="http://hllvm.group.iteye.com/group/topic/34932">请问R大 有没有什么工具可以查看正在运行的类的c/汇编代码</a>
  */
+
 /**
  * NoPublishDemo类。
  */
@@ -15,7 +16,8 @@ public class NoPublishDemo {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -38,9 +40,9 @@ public class NoPublishDemo {
 
     private class ConcurrencyCheckTask implements Runnable {
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             System.out.println("ConcurrencyCheckTask started!");
             // 如果主线中stop的值可见，则循环会退出。

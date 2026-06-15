@@ -111,7 +111,7 @@ public class SqlExecutor {
     /**
      * 创建表，默认包含一个id主键字段
      *
-     * @param tableName   表名，不能为空
+     * @param tableName    表名，不能为空
      * @param descriptions 表描述/备注
      * @throws RuntimeException 创建失败时抛出
      */
@@ -127,9 +127,9 @@ public class SqlExecutor {
     /**
      * 为表添加新字段
      *
-     * @param tableName    表名
-     * @param columnName   新字段名
-     * @param columnType   字段类型，如varchar(255)、int等
+     * @param tableName     表名
+     * @param columnName    新字段名
+     * @param columnType    字段类型，如varchar(255)、int等
      * @param columnComment 字段备注/注释
      * @throws RuntimeException 添加失败时抛出
      */
@@ -179,8 +179,8 @@ public class SqlExecutor {
     /**
      * 修改表名和表备注
      *
-     * @param tableName          原表名
-     * @param targetTableName    目标表名
+     * @param tableName           原表名
+     * @param targetTableName     目标表名
      * @param targetTableComments 目标表备注
      * @throws RuntimeException 修改失败时抛出
      */
@@ -201,7 +201,7 @@ public class SqlExecutor {
     /**
      * 删除表
      *
-     * @param tableName   表名
+     * @param tableName    表名
      * @param descriptions 表描述（目前未使用）
      * @throws RuntimeException 删除失败时抛出
      */

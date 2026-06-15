@@ -11,16 +11,17 @@ public class BlockingQueryCommunication {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
         final Business business = new Business();
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 for (int i = 0; i < 5; i++) {
                     business.sub(i);
@@ -48,10 +49,10 @@ public class BlockingQueryCommunication {
             }
         }
 
-    /**
-     * sub方法。
-     *      * @param i int类型参数
-     */
+        /**
+         * sub方法。
+         * * @param i int类型参数
+         */
         public void sub(int i) {
             try {
                 queue1.put(1);
@@ -68,10 +69,10 @@ public class BlockingQueryCommunication {
             }
         }
 
-    /**
-     * main方法。
-     *      * @param i int类型参数
-     */
+        /**
+         * main方法。
+         * * @param i int类型参数
+         */
         public void main(int i) {
             try {
                 queue2.put(1);

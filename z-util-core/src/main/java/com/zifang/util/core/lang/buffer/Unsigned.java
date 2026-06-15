@@ -56,10 +56,10 @@ public final class Unsigned {
      * <p>
      * 将byte值(带符号：-128~127)转换为无符号short值(0~255)
      *
-     * @param bb      源ByteBuffer，不能为null
+     * @param bb       源ByteBuffer，不能为null
      * @param position 读取位置（绝对位置）
      * @return 无符号byte值（0~255）
-     * @throws NullPointerException if bb is null
+     * @throws NullPointerException      if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
     public static short getUnsignedByte(ByteBuffer bb, int position) {
@@ -84,10 +84,10 @@ public final class Unsigned {
      * <p>
      * 将无符号值(0~255)截断为有符号byte值(-128~127)后写入
      *
-     * @param bb      目标ByteBuffer，不能为null
+     * @param bb       目标ByteBuffer，不能为null
      * @param position 写入位置（绝对位置）
-     * @param value   要写入的值（0~255）
-     * @throws NullPointerException if bb is null
+     * @param value    要写入的值（0~255）
+     * @throws NullPointerException      if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
     public static void putUnsignedByte(ByteBuffer bb, int position, int value) {
@@ -114,10 +114,10 @@ public final class Unsigned {
      * <p>
      * 将short值(带符号：-32768~32767)转换为无符号int值(0~65535)
      *
-     * @param bb      源ByteBuffer，不能为null
+     * @param bb       源ByteBuffer，不能为null
      * @param position 读取位置（绝对位置）
      * @return 无符号short值（0~65535）
-     * @throws NullPointerException if bb is null
+     * @throws NullPointerException      if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
     public static int getUnsignedShort(ByteBuffer bb, int position) {
@@ -142,10 +142,10 @@ public final class Unsigned {
      * <p>
      * 将无符号值(0~65535)截断为有符号short值(-32768~32767)后写入
      *
-     * @param bb      目标ByteBuffer，不能为null
+     * @param bb       目标ByteBuffer，不能为null
      * @param position 写入位置（绝对位置）
-     * @param value   要写入的值（0~65535）
-     * @throws NullPointerException if bb is null
+     * @param value    要写入的值（0~65535）
+     * @throws NullPointerException      if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
     public static void putUnsignedShort(ByteBuffer bb, int position, int value) {
@@ -172,10 +172,10 @@ public final class Unsigned {
      * <p>
      * 将int值(带符号：-2147483648~2147483647)转换为无符号long值(0~4294967295)
      *
-     * @param bb      源ByteBuffer，不能为null
+     * @param bb       源ByteBuffer，不能为null
      * @param position 读取位置（绝对位置）
      * @return 无符号int值（0~4294967295）
-     * @throws NullPointerException if bb is null
+     * @throws NullPointerException      if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
     public static long getUnsignedInt(ByteBuffer bb, int position) {
@@ -200,10 +200,10 @@ public final class Unsigned {
      * <p>
      * 将无符号值(0~4294967295)截断为有符号int值(-2147483648~2147483647)后写入
      *
-     * @param bb      目标ByteBuffer，不能为null
+     * @param bb       目标ByteBuffer，不能为null
      * @param position 写入位置（绝对位置）
-     * @param value   要写入的值（0~4294967295）
-     * @throws NullPointerException if bb is null
+     * @param value    要写入的值（0~4294967295）
+     * @throws NullPointerException      if bb is null
      * @throws IndexOutOfBoundsException if position is out of bounds
      */
     public static void putUnsignedInt(ByteBuffer bb, int position, long value) {

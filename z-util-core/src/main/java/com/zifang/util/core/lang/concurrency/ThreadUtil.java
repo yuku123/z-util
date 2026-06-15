@@ -68,6 +68,7 @@ public class ThreadUtil {
 
     /**
      * getLargeThreadCount方法。
+     *
      * @return static int类型返回值
      */
     public static int getLargeThreadCount() {
@@ -130,7 +131,8 @@ public class ThreadUtil {
 
     /**
      * newSingleExecutor方法。
-     *      * @param threadFactory ThreadFactory类型参数
+     * * @param threadFactory ThreadFactory类型参数
+     *
      * @return static Executor类型返回值
      */
     public static Executor newSingleExecutor(ThreadFactory threadFactory) {
@@ -241,10 +243,11 @@ public class ThreadUtil {
 
     /**
      * getExecutorService方法。
-     *      * @param threadNameFormat String类型参数
+     * * @param threadNameFormat String类型参数
+     *
      * @param workerNum int类型参数
-     * @param taskSize int类型参数
-     * @param handler RejectedExecutionHandler类型参数
+     * @param taskSize  int类型参数
+     * @param handler   RejectedExecutionHandler类型参数
      * @return static ExecutorService类型返回值
      */
     public static ExecutorService getExecutorService(String threadNameFormat, Integer workerNum,
@@ -255,10 +258,11 @@ public class ThreadUtil {
 
     /**
      * getLargeExecutorService方法。
-     *      * @param threadNameFormat String类型参数
+     * * @param threadNameFormat String类型参数
+     *
      * @param workerNum int类型参数
-     * @param taskSize int类型参数
-     * @param handler RejectedExecutionHandler类型参数
+     * @param taskSize  int类型参数
+     * @param handler   RejectedExecutionHandler类型参数
      * @return static ExecutorService类型返回值
      */
     public static ExecutorService getLargeExecutorService(String threadNameFormat, Integer workerNum,

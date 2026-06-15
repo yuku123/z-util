@@ -10,7 +10,8 @@ import static com.zifang.util.core.compile.Compiler.compile;
 public class CompilerTest {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -20,7 +21,7 @@ public class CompilerTest {
                 "        System.out.println(\"axx\");\n" +
                 "    }\n" +
                 "}";
-        Class c = compile("xxxx","A",s);
+        Class c = compile("xxxx", "A", s);
         System.out.println(c.getMethod("a").invoke(null));
     }
 }

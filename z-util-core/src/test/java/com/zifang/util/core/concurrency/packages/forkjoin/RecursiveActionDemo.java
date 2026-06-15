@@ -11,128 +11,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class RecursiveActionDemo {
 
-    // 1.创建一个名为Product的类，用来存储产品的名称和价格。
-    static class Product {
-        // 2.声明一个名为name的私有String属性，一个名为price的私有double属性。
-        private String name;
-        private double price;
-
-        // 3.实现两个属性各自的设值与取值方法。
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-        public String getName() {
-            return name;
-        }
-
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
-        public void setName(String name) {
-            this.name = name;
-        }
-
-    /**
-     * getPrice方法。
-     * @return double类型返回值
-     */
-        public double getPrice() {
-            return price;
-        }
-
-    /**
-     * setPrice方法。
-     *      * @param price double类型参数
-     */
-        public void setPrice(double price) {
-            this.price = price;
-        }
-    }
-
-    // 4．创建一个名为ProductListGenerator的类，用来生成一个随机产品列表。
-    static class ProductListGenerator {
-        // 5．实现generate()方法。接收一个表示列表大小的int参数，并返回一个生成产品的List<Product>列表。
-    /**
-     * generate方法。
-     *      * @param size int类型参数
-     * @return List<Product>类型返回值
-     */
-        public List<Product> generate(int size) {
-            // 6．创建返回产品列表的对象ret。
-            List<Product> ret = new ArrayList<Product>();
-            // 7．生成产品列表，给所有的产品分配相同的价格，比如可以检查程序是否运行良好的数字10。
-            for (int i = 0; i < size; i++) {
-                Product product = new Product();
-                product.setName("Product " + i);
-                product.setPrice(10);
-                ret.add(product);
-            }
-            return ret;
-        }
-    }
-
-    // 8．创建一个名为Task的类，并继承RecursiveAction类。
-    static class Task extends RecursiveAction {
-        // 9．声明这个类的serialVersionUID属性。这个元素是必需的，因为RecursiveAction的父类ForkJoinTask实现了Serializable接口。
-        private static final long serialVersionUID = 1L;
-        // 10．声明一个名为products私有的List<Product>属性。
-        private List<Product> products;
-        // 11．声明两个私有的int属性，分别命名为first和last。这两个属性将决定任务执行时对产品的分块。
-        private int first;
-
-        private int last;
-        // 12．声明一个名为increment的私有double属性，用来存储产品价格的增加额。
-        private double increment;
-
-        // 13．实现类的构造器，用来初始化类的这些属性。
-    /**
-     * Task方法。
-     *      * @param products ListProduct类型参数
-     * @param first int类型参数
-     * @param last int类型参数
-     * @param increment double类型参数
-     */
-        public Task(List<Product> products, int first, int last, double increment) {
-            this.products = products;
-            this.first = first;
-            this.last = last;
-            this.increment = increment;
-        }
-
-        // 14．实现compute()方法，实现任务的执行逻辑。
-        @Override
-    /**
-     * compute方法。
-     */
-        protected void compute() {
-            // 15．如果last和first属性值的差异小于10（一个任务只能更新少于10件产品的价格），则调用updatePrices()方法增加这些产品的价格。
-            if (last - first < 10) {
-                updatePrices();
-                // 16．如果last和first属性值的差异大于或等于10，就创建两个新的Task对象，一个处理前一半的产品，另一个处理后一半的产品，然后调用ForkJoinPool的invokeAll()方法来执行这两个新的任务。
-            } else {
-                int middle = (last + first) / 2;
-                System.out.printf("Task: Pending tasks:%s\n", getQueuedTaskCount());
-                Task t1 = new Task(products, first, middle + 1, increment);
-                Task t2 = new Task(products, middle + 1, last, increment);
-                invokeAll(t1, t2);
-            }
-        }
-
-        // 17．实现updatePrices()方法。这个方法用来更新在产品列表中处于first和last属性之间的产品。
-        private void updatePrices() {
-            for (int i = first; i < last; i++) {
-                Product product = products.get(i);
-                product.setPrice(product.getPrice() * (1 + increment));
-            }
-        }
-    }
-
-    // 18．实现范例的主类，创建Main主类，并实现main()方法。
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -167,6 +49,133 @@ public class RecursiveActionDemo {
             Product product = products.get(i);
             if (product.getPrice() != 12) {
                 System.out.printf("Product %s: %f\n", product.getName(), product.getPrice());
+            }
+        }
+    }
+
+    // 1.创建一个名为Product的类，用来存储产品的名称和价格。
+    static class Product {
+        // 2.声明一个名为name的私有String属性，一个名为price的私有double属性。
+        private String name;
+        private double price;
+
+        // 3.实现两个属性各自的设值与取值方法。
+
+        /**
+         * getName方法。
+         *
+         * @return String类型返回值
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * setName方法。
+         * * @param name String类型参数
+         */
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        /**
+         * getPrice方法。
+         *
+         * @return double类型返回值
+         */
+        public double getPrice() {
+            return price;
+        }
+
+        /**
+         * setPrice方法。
+         * * @param price double类型参数
+         */
+        public void setPrice(double price) {
+            this.price = price;
+        }
+    }
+
+    // 4．创建一个名为ProductListGenerator的类，用来生成一个随机产品列表。
+    static class ProductListGenerator {
+        // 5．实现generate()方法。接收一个表示列表大小的int参数，并返回一个生成产品的List<Product>列表。
+
+        /**
+         * generate方法。
+         * * @param size int类型参数
+         *
+         * @return List<Product>类型返回值
+         */
+        public List<Product> generate(int size) {
+            // 6．创建返回产品列表的对象ret。
+            List<Product> ret = new ArrayList<Product>();
+            // 7．生成产品列表，给所有的产品分配相同的价格，比如可以检查程序是否运行良好的数字10。
+            for (int i = 0; i < size; i++) {
+                Product product = new Product();
+                product.setName("Product " + i);
+                product.setPrice(10);
+                ret.add(product);
+            }
+            return ret;
+        }
+    }
+
+    // 18．实现范例的主类，创建Main主类，并实现main()方法。
+
+    // 8．创建一个名为Task的类，并继承RecursiveAction类。
+    static class Task extends RecursiveAction {
+        // 9．声明这个类的serialVersionUID属性。这个元素是必需的，因为RecursiveAction的父类ForkJoinTask实现了Serializable接口。
+        private static final long serialVersionUID = 1L;
+        // 10．声明一个名为products私有的List<Product>属性。
+        private List<Product> products;
+        // 11．声明两个私有的int属性，分别命名为first和last。这两个属性将决定任务执行时对产品的分块。
+        private int first;
+
+        private int last;
+        // 12．声明一个名为increment的私有double属性，用来存储产品价格的增加额。
+        private double increment;
+
+        // 13．实现类的构造器，用来初始化类的这些属性。
+
+        /**
+         * Task方法。
+         * * @param products ListProduct类型参数
+         *
+         * @param first     int类型参数
+         * @param last      int类型参数
+         * @param increment double类型参数
+         */
+        public Task(List<Product> products, int first, int last, double increment) {
+            this.products = products;
+            this.first = first;
+            this.last = last;
+            this.increment = increment;
+        }
+
+        // 14．实现compute()方法，实现任务的执行逻辑。
+        @Override
+        /**
+         * compute方法。
+         */
+        protected void compute() {
+            // 15．如果last和first属性值的差异小于10（一个任务只能更新少于10件产品的价格），则调用updatePrices()方法增加这些产品的价格。
+            if (last - first < 10) {
+                updatePrices();
+                // 16．如果last和first属性值的差异大于或等于10，就创建两个新的Task对象，一个处理前一半的产品，另一个处理后一半的产品，然后调用ForkJoinPool的invokeAll()方法来执行这两个新的任务。
+            } else {
+                int middle = (last + first) / 2;
+                System.out.printf("Task: Pending tasks:%s\n", getQueuedTaskCount());
+                Task t1 = new Task(products, first, middle + 1, increment);
+                Task t2 = new Task(products, middle + 1, last, increment);
+                invokeAll(t1, t2);
+            }
+        }
+
+        // 17．实现updatePrices()方法。这个方法用来更新在产品列表中处于first和last属性之间的产品。
+        private void updatePrices() {
+            for (int i = first; i < last; i++) {
+                Product product = products.get(i);
+                product.setPrice(product.getPrice() * (1 + increment));
             }
         }
     }

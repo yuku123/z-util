@@ -1,10 +1,6 @@
 package com.zifang.util.cache;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -207,7 +203,11 @@ public class MemoryCache<K, V> implements Cache<K, V> {
                     }
                     return set;
                 }
-                @Override public int size() { return entrySet().size(); }
+
+                @Override
+                public int size() {
+                    return entrySet().size();
+                }
             };
         }
     }
@@ -402,7 +402,9 @@ public class MemoryCache<K, V> implements Cache<K, V> {
         }
     }
 
-    /** 内部节点。value 可变，write/access 时间戳用于过期判定。 */
+    /**
+     * 内部节点。value 可变，write/access 时间戳用于过期判定。
+     */
     private static final class Node<K, V> {
         K key;                       // 冗余存 key（Expiry 需要按 key 计算）
         volatile V value;

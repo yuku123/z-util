@@ -40,6 +40,7 @@ public enum Isolation {
 
     /**
      * getLevel方法。
+     *
      * @return int类型返回值
      */
     public int getLevel() {

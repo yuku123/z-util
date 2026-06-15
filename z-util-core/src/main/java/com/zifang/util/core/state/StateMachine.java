@@ -1,13 +1,6 @@
 package com.zifang.util.core.state;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
@@ -125,6 +118,19 @@ public class StateMachine<S, E, C> {
         this.currentState = descendIntoInitial(this.initialState, null);
     }
 
+    private static String escape(String s) {
+        return s.replace("\"", "\\\"");
+    }
+
+    /**
+     * builder方法。
+     *
+     * @return static <S, E, C> StateMachineBuilder<S, E, C>类型返回值
+     */
+    public static <S, E, C> StateMachineBuilder<S, E, C> builder() {
+        return new StateMachineBuilder<>();
+    }
+
     /**
      * 复制一个独立实例（共享配置、独立状态）。等价于 {@code template.newInstance()}。
      */
@@ -196,7 +202,7 @@ public class StateMachine<S, E, C> {
         // composite 初始进入边（initial -> initialChild）
         for (Map.Entry<S, S> e : compositeInitialMap.entrySet()) {
             sb.append("  ").append(dotId(e.getKey())).append(" -> ")
-              .append(dotId(e.getValue())).append(" [label=\"(initial)\", style=dashed];\n");
+                    .append(dotId(e.getValue())).append(" [label=\"(initial)\", style=dashed];\n");
         }
 
         sb.append("}\n");
@@ -206,10 +212,6 @@ public class StateMachine<S, E, C> {
     private String dotId(S state) {
         // DOT 节点 ID 不能含空格或特殊字符
         return "\"" + state.toString().replace("\"", "\\\"") + "\"";
-    }
-
-    private static String escape(String s) {
-        return s.replace("\"", "\\\"");
     }
 
     private java.util.Set<S> allStates() {
@@ -242,18 +244,11 @@ public class StateMachine<S, E, C> {
         this.currentState = descendIntoInitial(this.initialState, null);
     }
 
-    /**
-     * builder方法。
-     * @return static <S, E, C> StateMachineBuilder<S, E, C>类型返回值
-     */
-    public static <S, E, C> StateMachineBuilder<S, E, C> builder() {
-        return new StateMachineBuilder<>();
-    }
-
     // ==================== 公共 API ====================
 
     /**
      * getCurrentState方法。
+     *
      * @return S类型返回值
      */
     public S getCurrentState() {
@@ -262,6 +257,7 @@ public class StateMachine<S, E, C> {
 
     /**
      * getInitialState方法。
+     *
      * @return S类型返回值
      */
     public S getInitialState() {
@@ -285,7 +281,7 @@ public class StateMachine<S, E, C> {
 
     /**
      * addListener方法。
-     *      * @param listener StateListenerS,类型参数
+     * * @param listener StateListenerS,类型参数
      */
     public void addListener(StateListener<S, E, C> listener) {
         if (listener != null) listeners.add(listener);
@@ -293,7 +289,7 @@ public class StateMachine<S, E, C> {
 
     /**
      * removeListener方法。
-     *      * @param listener StateListenerS,类型参数
+     * * @param listener StateListenerS,类型参数
      */
     public void removeListener(StateListener<S, E, C> listener) {
         listeners.remove(listener);
@@ -634,7 +630,10 @@ public class StateMachine<S, E, C> {
 
     private void notifyBegin(S from, S to, E event, C context) {
         for (StateListener<S, E, C> l : listeners) {
-            try { l.onTransitionBegin(from, to, event, context); } catch (RuntimeException ignored) {}
+            try {
+                l.onTransitionBegin(from, to, event, context);
+            } catch (RuntimeException ignored) {
+            }
         }
     }
 
@@ -643,25 +642,35 @@ public class StateMachine<S, E, C> {
             try {
                 l.onAction(from, to, event, context);
                 l.onTransitionEnd(from, to, event, context);
-            } catch (RuntimeException ignored) {}
+            } catch (RuntimeException ignored) {
+            }
         }
     }
 
     private void notifyRefused(S state, E event, C context, String reason) {
         for (StateListener<S, E, C> l : listeners) {
-            try { l.onTransitionRefused(state, event, context, reason); } catch (RuntimeException ignored) {}
+            try {
+                l.onTransitionRefused(state, event, context, reason);
+            } catch (RuntimeException ignored) {
+            }
         }
     }
 
     private void notifyError(S state, E event, C context, Throwable error) {
         for (StateListener<S, E, C> l : listeners) {
-            try { l.onError(state, event, context, error); } catch (RuntimeException ignored) {}
+            try {
+                l.onError(state, event, context, error);
+            } catch (RuntimeException ignored) {
+            }
         }
     }
 
     private void notifyComplete(S finalState, C context) {
         for (StateListener<S, E, C> l : listeners) {
-            try { l.onStateMachineComplete(finalState, context); } catch (RuntimeException ignored) {}
+            try {
+                l.onStateMachineComplete(finalState, context);
+            } catch (RuntimeException ignored) {
+            }
         }
     }
 
@@ -669,7 +678,6 @@ public class StateMachine<S, E, C> {
 
     public static class StateMachineBuilder<S, E, C> {
 
-        private S initialState;
         private final Map<S, Map<E, Transition<S, E, C>>> table = new HashMap<>();
         private final java.util.List<StateListener<S, E, C>> listeners = new java.util.ArrayList<>();
         // 层级结构相关字段（与 StateMachine 同步，在 build() 时拷贝过去）
@@ -684,16 +692,19 @@ public class StateMachine<S, E, C> {
         private final Map<S, HistoryType> historyTypes = new HashMap<>();
         // 终态集合
         private final Set<S> finalStates = new HashSet<>();
+        private S initialState;
         // 最近一次 composite 声明的 state（用于把后续 state(s).history() 关联到这个 composite）
         private S lastComposite = null;
 
-        private StateMachineBuilder() {}
+        private StateMachineBuilder() {
+        }
 
-    /**
-     * initial方法。
-     *      * @param state S类型参数
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
+        /**
+         * initial方法。
+         * * @param state S类型参数
+         *
+         * @return StateMachineBuilder<S, E, C>类型返回值
+         */
         public StateMachineBuilder<S, E, C> initial(S state) {
             this.initialState = state;
             return this;
@@ -706,11 +717,12 @@ public class StateMachine<S, E, C> {
             return new FromStateStep<>(this, state);
         }
 
-    /**
-     * listener方法。
-     *      * @param listener StateListenerS,类型参数
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
+        /**
+         * listener方法。
+         * * @param listener StateListenerS,类型参数
+         *
+         * @return StateMachineBuilder<S, E, C>类型返回值
+         */
         public StateMachineBuilder<S, E, C> listener(StateListener<S, E, C> listener) {
             if (listener != null) listeners.add(listener);
             return this;
@@ -732,7 +744,7 @@ public class StateMachine<S, E, C> {
          * 便捷方法：声明 state 为 composite，并指定初始子态与子状态机配置。
          */
         public StateMachineBuilder<S, E, C> composite(S state, S initialChild,
-                                                       java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
+                                                      java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
             SubMachineBuilder<S, E, C> sub = new SubMachineBuilder<>(this, state, initialChild);
             this.lastComposite = state;
             subConfig.accept(sub);
@@ -770,10 +782,10 @@ public class StateMachine<S, E, C> {
         }
 
         StateMachineBuilder<S, E, C> register(S from, E event, S to,
-                                             Predicate<C> guard,
-                                             BiConsumer<S, C> action) {
+                                              Predicate<C> guard,
+                                              BiConsumer<S, C> action) {
             table.computeIfAbsent(from, k -> new HashMap<>())
-                 .put(event, new Transition<>(from, event, to, guard, action));
+                    .put(event, new Transition<>(from, event, to, guard, action));
             return this;
         }
 
@@ -785,7 +797,7 @@ public class StateMachine<S, E, C> {
                                                       Predicate<C> guard,
                                                       BiConsumer<S, C> action) {
             table.computeIfAbsent(from, k -> new HashMap<>())
-                 .put(event, new Transition<>(from, event, from, guard, action, true));
+                    .put(event, new Transition<>(from, event, from, guard, action, true));
             return this;
         }
 
@@ -798,7 +810,7 @@ public class StateMachine<S, E, C> {
                                                     Predicate<C> guard,
                                                     BiConsumer<S, C> action) {
             table.computeIfAbsent(from, k -> new HashMap<>())
-                 .put(event, new Transition<S, E, C>(from, event, defaultTarget, branches, guard, action, false));
+                    .put(event, new Transition<S, E, C>(from, event, defaultTarget, branches, guard, action, false));
             return this;
         }
 
@@ -843,10 +855,11 @@ public class StateMachine<S, E, C> {
             this.finalStates.add(state);
         }
 
-    /**
-     * build方法。
-     * @return StateMachine<S, E, C>类型返回值
-     */
+        /**
+         * build方法。
+         *
+         * @return StateMachine<S, E, C>类型返回值
+         */
         public StateMachine<S, E, C> build() {
             if (initialState == null) {
                 throw new StateMachineException("Initial state is required");
@@ -904,11 +917,12 @@ public class StateMachine<S, E, C> {
             }
         }
 
-    /**
-     * on方法。
-     *      * @param event E类型参数
-     * @return OnEventStep<S, E, C>类型返回值
-     */
+        /**
+         * on方法。
+         * * @param event E类型参数
+         *
+         * @return OnEventStep<S, E, C>类型返回值
+         */
         public OnEventStep<S, E, C> on(E event) {
             return new OnEventStep<>(parent, from, event, inComposite);
         }
@@ -934,22 +948,24 @@ public class StateMachine<S, E, C> {
             this.inComposite = inComposite;
         }
 
-    /**
-     * guard方法。
-     *      * @param guard PredicateC类型参数
-     * @return OnEventStep<S, E, C>类型返回值
-     */
+        /**
+         * guard方法。
+         * * @param guard PredicateC类型参数
+         *
+         * @return OnEventStep<S, E, C>类型返回值
+         */
         public OnEventStep<S, E, C> guard(Predicate<C> guard) {
             Predicate<C> existing = this.guard;
             this.guard = existing == null ? guard : existing.and(guard);
             return this;
         }
 
-    /**
-     * action方法。
-     *      * @param action BiConsumerS,类型参数
-     * @return OnEventStep<S, E, C>类型返回值
-     */
+        /**
+         * action方法。
+         * * @param action BiConsumerS,类型参数
+         *
+         * @return OnEventStep<S, E, C>类型返回值
+         */
         public OnEventStep<S, E, C> action(BiConsumer<S, C> action) {
             this.action = action;
             return this;
@@ -1074,30 +1090,33 @@ public class StateMachine<S, E, C> {
             this.state = state;
         }
 
-    /**
-     * entry方法。
-     *      * @param action BiConsumerS,类型参数
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
+        /**
+         * entry方法。
+         * * @param action BiConsumerS,类型参数
+         *
+         * @return StateMachineBuilder<S, E, C>类型返回值
+         */
         public StateMachineBuilder<S, E, C> entry(BiConsumer<S, C> action) {
             parent.registerEntry(state, action);
             return parent;
         }
 
-    /**
-     * exit方法。
-     *      * @param action BiConsumerS,类型参数
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
+        /**
+         * exit方法。
+         * * @param action BiConsumerS,类型参数
+         *
+         * @return StateMachineBuilder<S, E, C>类型返回值
+         */
         public StateMachineBuilder<S, E, C> exit(BiConsumer<S, C> action) {
             parent.registerExit(state, action);
             return parent;
         }
 
-    /**
-     * history方法。
-     * @return StateMachineBuilder<S, E, C>类型返回值
-     */
+        /**
+         * history方法。
+         *
+         * @return StateMachineBuilder<S, E, C>类型返回值
+         */
         public StateMachineBuilder<S, E, C> history() {
             parent.registerHistory(state);
             return parent;
@@ -1130,7 +1149,7 @@ public class StateMachine<S, E, C> {
          * 把 state 声明为 composite，指定初始子态并通过 sub 配置子状态机。
          */
         public StateMachineBuilder<S, E, C> composite(S initialChild,
-                                                       java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
+                                                      java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
             SubMachineBuilder<S, E, C> sub = new SubMachineBuilder<>(parent, state, initialChild);
             subConfig.accept(sub);
             return parent;
@@ -1155,11 +1174,12 @@ public class StateMachine<S, E, C> {
             this.initialChild = initialChild;
         }
 
-    /**
-     * child方法。
-     *      * @param state S类型参数
-     * @return SubMachineBuilder<S, E, C>类型返回值
-     */
+        /**
+         * child方法。
+         * * @param state S类型参数
+         *
+         * @return SubMachineBuilder<S, E, C>类型返回值
+         */
         public SubMachineBuilder<S, E, C> child(S state) {
             root.registerParent(state, composite);
             return this;
@@ -1170,18 +1190,19 @@ public class StateMachine<S, E, C> {
          * 等价于 {@code root.composite(state, initialChild, sub -> ...)}。
          */
         public SubMachineBuilder<S, E, C> composite(S state, S initialChild,
-                                                     java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
+                                                    java.util.function.Consumer<SubMachineBuilder<S, E, C>> subConfig) {
             SubMachineBuilder<S, E, C> sub = new SubMachineBuilder<>(root, state, initialChild);
             subConfig.accept(sub);
             sub.end();
             return this;
         }
 
-    /**
-     * from方法。
-     *      * @param state S类型参数
-     * @return FromStateStep<S, E, C>类型返回值
-     */
+        /**
+         * from方法。
+         * * @param state S类型参数
+         *
+         * @return FromStateStep<S, E, C>类型返回值
+         */
         public FromStateStep<S, E, C> from(S state) {
             return new FromStateStep<>(root, state, composite);
         }

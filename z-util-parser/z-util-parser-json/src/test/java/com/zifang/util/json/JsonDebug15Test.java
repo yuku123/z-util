@@ -1,13 +1,22 @@
 package com.zifang.util.json;
 
-import com.zifang.util.dsl.g4.*;
+import com.zifang.util.dsl.g4.DynamicParser;
 import org.junit.Test;
-import java.util.*;
+
+import java.util.Map;
 
 /**
  * JsonDebug15Test类。
  */
 public class JsonDebug15Test {
+
+    private static String loadG4(String name) throws Exception {
+        java.io.InputStream is = JsonDebug15Test.class.getClassLoader().getResourceAsStream(name);
+        if (is == null) throw new Exception("Resource not found: " + name);
+        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+        is.close();
+        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+    }
 
     @Test
     /**
@@ -25,7 +34,7 @@ public class JsonDebug15Test {
         f.setAccessible(true);
         @SuppressWarnings("unchecked")
         Map<String, com.zifang.util.dsl.g4.model.G4Rule> rules =
-            (Map<String, com.zifang.util.dsl.g4.model.G4Rule>) f.get(parser);
+                (Map<String, com.zifang.util.dsl.g4.model.G4Rule>) f.get(parser);
         System.out.println("Rules count: " + rules.size());
         if (rules.isEmpty()) {
             System.out.println("WARNING: rules map is EMPTY!");
@@ -59,13 +68,5 @@ public class JsonDebug15Test {
         } catch (Exception e) {
             System.out.println("JSONParser EXCEPTION: " + e.getClass().getName() + " " + e.getMessage());
         }
-    }
-
-    private static String loadG4(String name) throws Exception {
-        java.io.InputStream is = JsonDebug15Test.class.getClassLoader().getResourceAsStream(name);
-        if (is == null) throw new Exception("Resource not found: " + name);
-        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
-        is.close();
-        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
     }
 }

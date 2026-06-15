@@ -15,7 +15,7 @@ public class ConstantIntegerInfo extends AbstractConstantPool {
 
     /**
      * ConstantIntegerInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public ConstantIntegerInfo(byte tag) {
         super(tag);
@@ -23,7 +23,7 @@ public class ConstantIntegerInfo extends AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         this.bytes = U4.read(inputStream);
@@ -31,6 +31,7 @@ public class ConstantIntegerInfo extends AbstractConstantPool {
 
     /**
      * getBytes方法。
+     *
      * @return U4类型返回值
      */
     public U4 getBytes() {
@@ -39,7 +40,7 @@ public class ConstantIntegerInfo extends AbstractConstantPool {
 
     /**
      * setBytes方法。
-     *      * @param bytes U4类型参数
+     * * @param bytes U4类型参数
      */
     public void setBytes(U4 bytes) {
         this.bytes = bytes;

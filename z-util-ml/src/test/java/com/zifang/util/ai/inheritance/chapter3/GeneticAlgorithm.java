@@ -14,11 +14,17 @@ package com.zifang.util.ml.inheritance.chapter3;
  *
  * @author zifang
  */
+
 /**
  * GeneticAlgorithm类。
  */
 public class GeneticAlgorithm {
 
+    /**
+     * A new property we've introduced is the size of the population used for
+     * tournament selection in crossover.
+     */
+    protected int tournamentSize;
     /**
      * See chapter2/GeneticAlgorithm for a description of these properties.
      */
@@ -28,17 +34,12 @@ public class GeneticAlgorithm {
     private int elitismCount;
 
     /**
-     * A new property we've introduced is the size of the population used for
-     * tournament selection in crossover.
-     */
-    protected int tournamentSize;
-
-    /**
      * GeneticAlgorithm方法。
-     *      * @param populationSize int类型参数
-     * @param mutationRate double类型参数
-     * @param crossoverRate double类型参数
-     * @param elitismCount int类型参数
+     * * @param populationSize int类型参数
+     *
+     * @param mutationRate   double类型参数
+     * @param crossoverRate  double类型参数
+     * @param elitismCount   int类型参数
      * @param tournamentSize int类型参数
      */
     public GeneticAlgorithm(int populationSize, double mutationRate, double crossoverRate, int elitismCount,
@@ -59,7 +60,8 @@ public class GeneticAlgorithm {
      */
     /**
      * initPopulation方法。
-     *      * @param chromosomeLength int类型参数
+     * * @param chromosomeLength int类型参数
+     *
      * @return Population类型返回值
      */
     public Population initPopulation(int chromosomeLength) {
@@ -80,7 +82,8 @@ public class GeneticAlgorithm {
      */
     /**
      * calcFitness方法。
-     *      * @param individual Individual类型参数
+     * * @param individual Individual类型参数
+     *
      * @param maze Maze类型参数
      * @return double类型返回值
      */
@@ -117,7 +120,8 @@ public class GeneticAlgorithm {
      */
     /**
      * evalPopulation方法。
-     *      * @param population Population类型参数
+     * * @param population Population类型参数
+     *
      * @param maze Maze类型参数
      */
     public void evalPopulation(Population population, Maze maze) {
@@ -145,7 +149,8 @@ public class GeneticAlgorithm {
      */
     /**
      * isTerminationConditionMet方法。
-     *      * @param generationsCount int类型参数
+     * * @param generationsCount int类型参数
+     *
      * @param maxGenerations int类型参数
      * @return boolean类型返回值
      */
@@ -164,7 +169,8 @@ public class GeneticAlgorithm {
      */
     /**
      * selectParent方法。
-     *      * @param population Population类型参数
+     * * @param population Population类型参数
+     *
      * @return Individual类型返回值
      */
     public Individual selectParent(Population population) {
@@ -192,7 +198,8 @@ public class GeneticAlgorithm {
      */
     /**
      * mutatePopulation方法。
-     *      * @param population Population类型参数
+     * * @param population Population类型参数
+     *
      * @return Population类型返回值
      */
     public Population mutatePopulation(Population population) {
@@ -254,7 +261,8 @@ public class GeneticAlgorithm {
      */
     /**
      * crossoverPopulation方法。
-     *      * @param population Population类型参数
+     * * @param population Population类型参数
+     *
      * @return Population类型返回值
      */
     public Population crossoverPopulation(Population population) {

@@ -5,12 +5,14 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * StringAccessor 字符串操作测试类
  * 测试字符串处理、正则表达式、文本提取等功能
  */
+
 /**
  * StringAccessorTest类。
  */

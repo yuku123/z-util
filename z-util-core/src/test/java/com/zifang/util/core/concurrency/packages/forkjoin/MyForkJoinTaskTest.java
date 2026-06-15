@@ -36,9 +36,9 @@ public class MyForkJoinTaskTest {
         final ForkJoinPool forkJoinPool = new ForkJoinPool();
         final MyForkJoinTask<String> task = new MyForkJoinTask<String>();
         new Thread(new Runnable() {
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 try {
                     Thread.sleep(1000);
@@ -89,9 +89,9 @@ public class MyForkJoinTaskTest {
         final ForkJoinPool forkJoinPool = new ForkJoinPool();
         final MyForkJoinTask<String> task = new MyForkJoinTask<String>();
         new Thread(new Runnable() {
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 try {
                     Thread.sleep(1000);

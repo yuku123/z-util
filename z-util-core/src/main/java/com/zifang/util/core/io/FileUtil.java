@@ -1,10 +1,6 @@
 package com.zifang.util.core.io;
 
-import com.zifang.util.core.io.file.FileContentUtil;
-import com.zifang.util.core.io.file.FileCopyUtil;
-import com.zifang.util.core.io.file.FileDirUtil;
-import com.zifang.util.core.io.file.FileHashUtil;
-import com.zifang.util.core.io.file.FilePathUtil;
+import com.zifang.util.core.io.file.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +14,11 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Files;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -1460,7 +1458,7 @@ public class FileUtil {
      * Copies file using FileChannel.
      *
      * @param resourcePath source
-     * @param targetPath  destination
+     * @param targetPath   destination
      * @return true if succeeded
      */
     public static boolean copy(String resourcePath, String targetPath) {
@@ -2010,7 +2008,7 @@ public class FileUtil {
      * @param file     file to process
      * @param encoding charset
      * @param result   collection for results
-     * @param mapper  line to result mapper
+     * @param mapper   line to result mapper
      * @param <E>      result type
      */
     public static <E> void processWithLine(File file, String encoding, Collection<E> result, Function<String, E> mapper) {

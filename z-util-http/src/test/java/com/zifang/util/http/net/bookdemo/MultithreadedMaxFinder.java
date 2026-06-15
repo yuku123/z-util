@@ -12,7 +12,8 @@ public class MultithreadedMaxFinder {
 
     /**
      * max方法。
-     *      * @param data int[]类型参数
+     * * @param data int[]类型参数
+     *
      * @return static int类型返回值
      */
     public static int max(int[] data) throws InterruptedException, ExecutionException {

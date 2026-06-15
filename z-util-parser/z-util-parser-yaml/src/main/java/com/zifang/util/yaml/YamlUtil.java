@@ -15,6 +15,7 @@ import java.util.Map;
 /**
  * YamlUtil类。
  */
+
 /**
  * YamlUtil类。
  */
@@ -40,7 +41,8 @@ public class YamlUtil {
      */
     /**
      * toYaml方法。
-     *      * @param t T类型参数
+     * * @param t T类型参数
+     *
      * @return static <T> String类型返回值
      */
     public static <T> String toYaml(T t) {
@@ -68,7 +70,8 @@ public class YamlUtil {
      */
     /**
      * toPrettyYaml方法。
-     *      * @param t T类型参数
+     * * @param t T类型参数
+     *
      * @return static <T> String类型返回值
      */
     public static <T> String toPrettyYaml(T t) {
@@ -97,7 +100,8 @@ public class YamlUtil {
      */
     /**
      * fromYaml方法。
-     *      * @param yamlStr String类型参数
+     * * @param yamlStr String类型参数
+     *
      * @param clazz ClassT类型参数
      * @return static <T> T类型返回值
      */
@@ -124,7 +128,8 @@ public class YamlUtil {
      */
     /**
      * fromYaml方法。
-     *      * @param yamlStr String类型参数
+     * * @param yamlStr String类型参数
+     *
      * @param typeRef TypeReferenceT类型参数
      * @return static <T> T类型返回值
      */
@@ -153,7 +158,8 @@ public class YamlUtil {
      */
     /**
      * parse方法。
-     *      * @param yamlStr String类型参数
+     * * @param yamlStr String类型参数
+     *
      * @return static Object类型返回值
      */
     public static Object parse(String yamlStr) {
@@ -185,7 +191,8 @@ public class YamlUtil {
      */
     /**
      * query方法。
-     *      * @param yaml String类型参数
+     * * @param yaml String类型参数
+     *
      * @param path String类型参数
      * @return static List<Object>类型返回值
      */

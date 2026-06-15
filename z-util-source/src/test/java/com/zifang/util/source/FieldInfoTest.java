@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 /**
  * FieldInfo 模型测试
  */
+
 /**
  * FieldInfoTest类。
  */
@@ -40,8 +41,8 @@ public class FieldInfoTest {
      */
     public void testFourParamConstructor() {
         FieldInfo fieldInfo = new FieldInfo(
-                "int", "age", 
-                new int[]{java.lang.reflect.Modifier.PRIVATE}, 
+                "int", "age",
+                new int[]{java.lang.reflect.Modifier.PRIVATE},
                 "18"
         );
         assertEquals("int", fieldInfo.getType());
@@ -127,8 +128,8 @@ public class FieldInfoTest {
      */
     public void testAnnotations() {
         FieldInfo fieldInfo = new FieldInfo("String", "name");
-        com.zifang.util.source.generator.info.AnnotationInfo annot = 
-            new com.zifang.util.source.generator.info.AnnotationInfo("Nullable");
+        com.zifang.util.source.generator.info.AnnotationInfo annot =
+                new com.zifang.util.source.generator.info.AnnotationInfo("Nullable");
 
         fieldInfo.getAnnotations().add(annot);
 

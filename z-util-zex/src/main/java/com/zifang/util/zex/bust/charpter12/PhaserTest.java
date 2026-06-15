@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.charpter12;
  * @author zifang
  * @version 1.0
  */
+
 import java.util.concurrent.Phaser;
 
 /**
@@ -18,19 +19,20 @@ public class PhaserTest {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
 
         Phaser phaser = new Phaser(2) {
             @Override
-    /**
-     * onAdvance方法。
-     *      * @param phase int类型参数
-     * @param registeredParties int类型参数
-     * @return boolean类型返回值
-     */
+            /**
+             * onAdvance方法。
+             *      * @param phase int类型参数
+             * @param registeredParties int类型参数
+             * @return boolean类型返回值
+             */
             protected boolean onAdvance(int phase, int registeredParties) {
                 System.out.println("=======phase: " + phase + " finished=============");
                 return super.onAdvance(phase, registeredParties);
@@ -38,7 +40,7 @@ public class PhaserTest {
         };
 
         for (int i = 0; i < 3; i++) {
-            new Thread(()->{
+            new Thread(() -> {
                 for (int j = 0; j < 4; j++) {
                     System.out.println(String.format("%s: phase: %d", Thread.currentThread().getName(), j));
                     phaser.arriveAndAwaitAdvance();

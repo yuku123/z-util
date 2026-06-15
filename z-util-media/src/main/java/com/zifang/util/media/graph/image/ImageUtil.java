@@ -3,7 +3,6 @@ package com.zifang.util.media.graph.image;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
@@ -26,7 +25,8 @@ import java.nio.file.Path;
  */
 public final class ImageUtil {
 
-    private ImageUtil() {}
+    private ImageUtil() {
+    }
 
     // ==================== 工厂方法 ====================
 

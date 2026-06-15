@@ -108,7 +108,8 @@ public class GsonUtilTest {
      */
     public void testJsonStrToObject_WithTypeReference() {
         String json = "[1,2,3]";
-        Type type = new TypeToken<List<Integer>>() {}.getType();
+        Type type = new TypeToken<List<Integer>>() {
+        }.getType();
         List<Integer> result = GsonUtil.jsonStrToObject(json, type);
         assertEquals(Arrays.asList(1, 2, 3), result);
     }
@@ -169,11 +170,13 @@ public class GsonUtilTest {
     private static class Parent {
         public String name;
         public int value;
-    /**
-     * Parent方法。
-     *      * @param name String类型参数
-     * @param value int类型参数
-     */
+
+        /**
+         * Parent方法。
+         * * @param name String类型参数
+         *
+         * @param value int类型参数
+         */
         public Parent(String name, int value) {
             this.name = name;
             this.value = value;
@@ -181,11 +184,12 @@ public class GsonUtilTest {
     }
 
     private static class Child extends Parent {
-    /**
-     * Child方法。
-     *      * @param name String类型参数
-     * @param value int类型参数
-     */
+        /**
+         * Child方法。
+         * * @param name String类型参数
+         *
+         * @param value int类型参数
+         */
         public Child(String name, int value) {
             super(name, value);
         }
@@ -194,11 +198,13 @@ public class GsonUtilTest {
     private static class TestBean {
         public String name;
         public int value;
-    /**
-     * TestBean方法。
-     *      * @param name String类型参数
-     * @param value int类型参数
-     */
+
+        /**
+         * TestBean方法。
+         * * @param name String类型参数
+         *
+         * @param value int类型参数
+         */
         public TestBean(String name, int value) {
             this.name = name;
             this.value = value;

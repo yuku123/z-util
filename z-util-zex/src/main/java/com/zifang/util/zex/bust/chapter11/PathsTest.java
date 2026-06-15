@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter11;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.nio.file.Paths;
@@ -21,7 +22,7 @@ public class PathsTest {
     /**
      * test001方法。
      */
-    public void test001(){
+    public void test001() {
         Paths.get("");
     }
 }

@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * 链执行模式测试
  */
+
 /**
  * ChainTest类。
  */
@@ -132,9 +133,18 @@ public class ChainTest {
     public void testSimpleChain() {
         AtomicInteger counter = new AtomicInteger(0);
         Chain<ChainContext<String, Object>> chain = Chain.<ChainContext<String, Object>>builder()
-                .add(ctx -> { counter.incrementAndGet(); return ProcessorResult.CONTINUE; })
-                .add(ctx -> { counter.incrementAndGet(); return ProcessorResult.CONTINUE; })
-                .add(ctx -> { counter.incrementAndGet(); return ProcessorResult.FINISHED; })
+                .add(ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
+                .add(ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
+                .add(ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.FINISHED;
+                })
                 .build();
 
         ChainContext<String, Object> context = ChainContext.create();
@@ -151,8 +161,14 @@ public class ChainTest {
     public void testSimpleChainContinue() {
         AtomicInteger counter = new AtomicInteger(0);
         Chain<ChainContext<String, Object>> chain = Chain.<ChainContext<String, Object>>builder()
-                .add(ctx -> { counter.incrementAndGet(); return ProcessorResult.CONTINUE; })
-                .add(ctx -> { counter.incrementAndGet(); return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
+                .add(ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
 
         ChainContext<String, Object> context = ChainContext.create();
@@ -169,8 +185,14 @@ public class ChainTest {
     public void testChainBuilderBasic() {
         AtomicInteger counter = new AtomicInteger(0);
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create("testChain")
-                .add(ctx -> { counter.incrementAndGet(); return ProcessorResult.CONTINUE; })
-                .add(ctx -> { counter.incrementAndGet(); return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
+                .add(ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
 
         ChainContext<String, Object> context = ChainContext.create();
@@ -188,8 +210,14 @@ public class ChainTest {
         AtomicBoolean conditionMet = new AtomicBoolean(false);
 
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create()
-                .addWhen(ctx -> conditionMet.get(), ctx -> { counter.incrementAndGet(); return ProcessorResult.CONTINUE; })
-                .add(ctx -> { counter.incrementAndGet(); return ProcessorResult.CONTINUE; })
+                .addWhen(ctx -> conditionMet.get(), ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
+                .add(ctx -> {
+                    counter.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
 
         ChainContext<String, Object> context = ChainContext.create();
@@ -245,8 +273,14 @@ public class ChainTest {
         BranchChain<ChainContext<String, Object>> branchChain = new BranchChain<>(
                 ctx -> Boolean.TRUE.equals(ctx.get("isAdmin"))
         );
-        branchChain.whenTrue(ctx -> { adminCounter.incrementAndGet(); return ProcessorResult.CONTINUE; });
-        branchChain.whenFalse(ctx -> { userCounter.incrementAndGet(); return ProcessorResult.CONTINUE; });
+        branchChain.whenTrue(ctx -> {
+            adminCounter.incrementAndGet();
+            return ProcessorResult.CONTINUE;
+        });
+        branchChain.whenFalse(ctx -> {
+            userCounter.incrementAndGet();
+            return ProcessorResult.CONTINUE;
+        });
 
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create()
                 .add(branchChain)
@@ -276,8 +310,14 @@ public class ChainTest {
         ChainExecutor<ChainContext<String, Object>> executor = new ChainExecutor<>();
 
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create()
-                .add(ctx -> { ctx.put("step1", "done"); return ProcessorResult.CONTINUE; })
-                .add(ctx -> { ctx.put("step2", "done"); return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    ctx.put("step1", "done");
+                    return ProcessorResult.CONTINUE;
+                })
+                .add(ctx -> {
+                    ctx.put("step2", "done");
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
 
         executor.register("testChain", chain);
@@ -301,23 +341,23 @@ public class ChainTest {
         ChainExecutor<ChainContext<String, Object>> executor = new ChainExecutor<>();
         executor.addListener(new ChainExecutor.ChainListenerAdapter<ChainContext<String, Object>>() {
             @Override
-    /**
-     * onBeforeExecution方法。
-     *      * @param chain ChainChainContextString,类型参数
-     * @param context ChainContextString,类型参数
-     */
+            /**
+             * onBeforeExecution方法。
+             *      * @param chain ChainChainContextString,类型参数
+             * @param context ChainContextString,类型参数
+             */
             public void onBeforeExecution(Chain<ChainContext<String, Object>> chain, ChainContext<String, Object> context) {
                 beforeCalled.set(true);
             }
 
             @Override
-    /**
-     * onAfterExecution方法。
-     *      * @param chain ChainChainContextString,类型参数
-     * @param context ChainContextString,类型参数
-     * @param result ProcessorResult类型参数
-     * @param duration long类型参数
-     */
+            /**
+             * onAfterExecution方法。
+             *      * @param chain ChainChainContextString,类型参数
+             * @param context ChainContextString,类型参数
+             * @param result ProcessorResult类型参数
+             * @param duration long类型参数
+             */
             public void onAfterExecution(Chain<ChainContext<String, Object>> chain,
                                          ChainContext<String, Object> context,
                                          ProcessorResult result, long duration) {
@@ -326,7 +366,9 @@ public class ChainTest {
         });
 
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create()
-                .add(ctx -> { return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
         executor.execute(chain, ChainContext.create());
 
@@ -347,7 +389,9 @@ public class ChainTest {
 
         String chainName = "testChain";
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create(chainName)
-                .add(ctx -> { return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
         executor.register(chainName, chain);
         executor.execute(chainName, ChainContext.create());
@@ -394,7 +438,10 @@ public class ChainTest {
         );
 
         Chain<ChainContext<String, Object>> chain = ChainBuilder.<ChainContext<String, Object>>create()
-                .add(ctx -> { process.incrementAndGet(); return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    process.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
                 .add(filter)
                 .build();
 
@@ -415,10 +462,16 @@ public class ChainTest {
         AtomicInteger counter2 = new AtomicInteger(0);
 
         Chain<ChainContext<String, Object>> chain1 = ChainBuilder.<ChainContext<String, Object>>create()
-                .add(ctx -> { counter1.incrementAndGet(); return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    counter1.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
         Chain<ChainContext<String, Object>> chain2 = ChainBuilder.<ChainContext<String, Object>>create()
-                .add(ctx -> { counter2.incrementAndGet(); return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    counter2.incrementAndGet();
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
 
         Chain<ChainContext<String, Object>> combined = chain1.append(chain2);
@@ -470,7 +523,9 @@ public class ChainTest {
         assertEquals(0, emptyChain.size());
 
         Chain<ChainContext<String, Object>> nonEmptyChain = ChainBuilder.<ChainContext<String, Object>>create()
-                .add(ctx -> { return ProcessorResult.CONTINUE; })
+                .add(ctx -> {
+                    return ProcessorResult.CONTINUE;
+                })
                 .build();
         assertFalse(nonEmptyChain.isEmpty());
         assertEquals(1, nonEmptyChain.size());
@@ -493,7 +548,10 @@ public class ChainTest {
         AtomicBoolean executed = new AtomicBoolean(false);
         NamedProcessor<ChainContext<String, Object>> named = new NamedProcessor<>(
                 "myProcessor",
-                ctx -> { executed.set(true); return ProcessorResult.CONTINUE; }
+                ctx -> {
+                    executed.set(true);
+                    return ProcessorResult.CONTINUE;
+                }
         );
 
         assertEquals("myProcessor", named.getName());

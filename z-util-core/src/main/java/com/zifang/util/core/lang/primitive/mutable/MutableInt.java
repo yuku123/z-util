@@ -22,7 +22,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * MutableInt方法。
-     *      * @param value final类型参数
+     * * @param value final类型参数
      */
     public MutableInt(final int value) {
         this.value = value;
@@ -30,7 +30,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * MutableInt方法。
-     *      * @param value final类型参数
+     * * @param value final类型参数
      */
     public MutableInt(final Number value) {
         this.value = value.intValue();
@@ -39,7 +39,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * MutableInt方法。
-     *      * @param value final类型参数
+     * * @param value final类型参数
      */
     public MutableInt(final String value) {
         this.value = Integer.parseInt(value);
@@ -84,6 +84,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * getAndIncrement方法。
+     *
      * @return int类型返回值
      */
     public int getAndIncrement() {
@@ -95,6 +96,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * incrementAndGet方法。
+     *
      * @return int类型返回值
      */
     public int incrementAndGet() {
@@ -113,6 +115,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * getAndDecrement方法。
+     *
      * @return int类型返回值
      */
     public int getAndDecrement() {
@@ -124,6 +127,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * decrementAndGet方法。
+     *
      * @return int类型返回值
      */
     public int decrementAndGet() {
@@ -133,7 +137,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * add方法。
-     *      * @param operand final类型参数
+     * * @param operand final类型参数
      */
     public void add(final int operand) {
         this.value += operand;
@@ -142,7 +146,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * add方法。
-     *      * @param operand final类型参数
+     * * @param operand final类型参数
      */
     public void add(final Number operand) {
         this.value += operand.intValue();
@@ -151,7 +155,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * subtract方法。
-     *      * @param operand final类型参数
+     * * @param operand final类型参数
      */
     public void subtract(final int operand) {
         this.value -= operand;
@@ -160,7 +164,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * subtract方法。
-     *      * @param operand final类型参数
+     * * @param operand final类型参数
      */
     public void subtract(final Number operand) {
         this.value -= operand.intValue();
@@ -169,7 +173,8 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * addAndGet方法。
-     *      * @param operand final类型参数
+     * * @param operand final类型参数
+     *
      * @return int类型返回值
      */
     public int addAndGet(final int operand) {
@@ -180,7 +185,8 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * addAndGet方法。
-     *      * @param operand final类型参数
+     * * @param operand final类型参数
+     *
      * @return int类型返回值
      */
     public int addAndGet(final Number operand) {
@@ -190,7 +196,8 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * getAndAdd方法。
-     *      * @param operand final类型参数
+     * * @param operand final类型参数
+     *
      * @return int类型返回值
      */
     public int getAndAdd(final int operand) {
@@ -201,7 +208,8 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * getAndAdd方法。
-     *      * @param operand final类型参数
+     * * @param operand final类型参数
+     *
      * @return int类型返回值
      */
     public int getAndAdd(final Number operand) {
@@ -249,6 +257,7 @@ public class MutableInt extends Number implements Comparable<MutableInt>, Mutabl
 
     /**
      * toInteger方法。
+     *
      * @return int类型返回值
      */
     public Integer toInteger() {

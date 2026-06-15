@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 /**
  * XmlParser 核心功能测试。
  */
+
 /**
  * XmlParserTest类。
  */

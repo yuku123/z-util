@@ -8,14 +8,14 @@ import java.util.concurrent.LinkedBlockingQueue;
  * poolT类。
  */
 public class poolT {
+    private static int num = 3;
     //可能频繁增删任务，链表队列效率较高
     private final BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>();
     private final HashSet<Work> workers = new HashSet<Work>();
-    private static int num = 3;
 
     /**
      * poolT方法。
-     *      * @param num int类型参数
+     * * @param num int类型参数
      */
     public poolT(int num) {
         poolT.num = num;
@@ -28,7 +28,7 @@ public class poolT {
 
     /**
      * addWork方法。
-     *      * @param r Runnable类型参数
+     * * @param r Runnable类型参数
      */
     public void addWork(Runnable r) {
         workQueue.add(r);
@@ -62,16 +62,16 @@ public class poolT {
         // 结束线程标志位
         private boolean hasRunning = true;
 
-    /**
-     * setDrop方法。
-     */
+        /**
+         * setDrop方法。
+         */
         public void setDrop() {
             this.hasRunning = false;
         }
 
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             try {
                 while (hasRunning || !workQueue.isEmpty()) {

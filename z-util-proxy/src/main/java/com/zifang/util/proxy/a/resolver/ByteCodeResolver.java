@@ -1,7 +1,6 @@
 package com.zifang.util.proxy.a.resolver;
 
 import com.zifang.util.proxy.a.model.ClassFile;
-import com.zifang.util.proxy.a.model.attribute.AttributeFactory;
 import com.zifang.util.proxy.a.model.constantpool.*;
 import com.zifang.util.proxy.a.model.field.FieldTable;
 import com.zifang.util.proxy.a.model.inter.InterfaceIndex;
@@ -45,7 +44,7 @@ public class ByteCodeResolver {
 
     /**
      * ByteCodeResolver方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public ByteCodeResolver(InputStream inputStream) {
         this.inputStream = inputStream;
@@ -74,6 +73,39 @@ public class ByteCodeResolver {
      */
     public static ClassFile parseFromStream(InputStream inputStream) {
         return new ByteCodeResolver(inputStream).parse();
+    }
+
+    /**
+     * 主方法，用于命令行测试
+     */
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("用法: java ByteCodeResolver <class文件路径>");
+            System.out.println("示例: java ByteCodeResolver /path/to/MyClass.class");
+            return;
+        }
+
+        String filePath = args[0];
+        try {
+            ClassFile classFile = parseFromFile(filePath);
+
+            System.out.println("========== 字节码解析结果 ==========");
+            System.out.println("魔数: " + String.format("0x%08X", classFile.magic.value));
+            System.out.println("版本: " + classFile.majorVersion.value + "." + classFile.minorVersion.value);
+            System.out.println("常量池大小: " + classFile.constantPoolSize.value);
+
+            // 打印常量池内容
+            System.out.println("\n--- 常量池内容 ---");
+            for (int i = 0; i < classFile.poolInfo.getPoolList().size(); i++) {
+                AbstractConstantPool pool = classFile.poolInfo.getPoolList().get(i);
+                System.out.println("[" + (i + 1) + "] " + pool.getClass().getSimpleName() + ": " + pool);
+            }
+
+            System.out.println("\n解析完成: " + filePath);
+        } catch (Exception e) {
+            System.err.println("解析失败: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -274,38 +306,5 @@ public class ByteCodeResolver {
      */
     public ClassFile getClassFile() {
         return classFile;
-    }
-
-    /**
-     * 主方法，用于命令行测试
-     */
-    public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("用法: java ByteCodeResolver <class文件路径>");
-            System.out.println("示例: java ByteCodeResolver /path/to/MyClass.class");
-            return;
-        }
-
-        String filePath = args[0];
-        try {
-            ClassFile classFile = parseFromFile(filePath);
-
-            System.out.println("========== 字节码解析结果 ==========");
-            System.out.println("魔数: " + String.format("0x%08X", classFile.magic.value));
-            System.out.println("版本: " + classFile.majorVersion.value + "." + classFile.minorVersion.value);
-            System.out.println("常量池大小: " + classFile.constantPoolSize.value);
-
-            // 打印常量池内容
-            System.out.println("\n--- 常量池内容 ---");
-            for (int i = 0; i < classFile.poolInfo.getPoolList().size(); i++) {
-                AbstractConstantPool pool = classFile.poolInfo.getPoolList().get(i);
-                System.out.println("[" + (i + 1) + "] " + pool.getClass().getSimpleName() + ": " + pool);
-            }
-
-            System.out.println("\n解析完成: " + filePath);
-        } catch (Exception e) {
-            System.err.println("解析失败: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 }

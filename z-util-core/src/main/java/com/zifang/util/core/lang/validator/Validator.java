@@ -95,6 +95,37 @@ public class Validator {
     }
 
     /**
+     * 验证对象非空，为空时抛出IllegalArgumentException
+     *
+     * @param object  待验证的对象
+     * @param message 异常消息
+     */
+    public static void notNull(Object object, String message) {
+        if (Conditions.IS_NULL.test(object)) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * 防御，为true成功
+     *
+     * @param statusCode 错误状态码
+     * @param isTrue     是否成功
+     * @param msg        错误消息
+     * @param param      入参
+     */
+    private static void defenseIfTrue(StatusCode statusCode, boolean isTrue, String msg, Object param) {
+        if (!isTrue) {
+            return;
+        }
+        if (StringUtil.isNotEmpty(msg)) {
+            throw new BusinessException(statusCode, msg);
+        } else {
+            throw new BusinessException(statusCode);
+        }
+    }
+
+    /**
      * 创建异常实例
      *
      * @param args 异常构造参数
@@ -135,38 +166,6 @@ public class Validator {
     public void notNull(Object obj, Object... args) {
         if (obj == null) {
             throw newException(args);
-        }
-    }
-
-    /**
-     * 验证对象非空，为空时抛出IllegalArgumentException
-     *
-     * @param object  待验证的对象
-     * @param message 异常消息
-     */
-    public static void notNull(Object object, String message) {
-        if (Conditions.IS_NULL.test(object)) {
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-
-    /**
-     * 防御，为true成功
-     *
-     * @param statusCode 错误状态码
-     * @param isTrue     是否成功
-     * @param msg        错误消息
-     * @param param      入参
-     */
-    private static void defenseIfTrue(StatusCode statusCode, boolean isTrue, String msg, Object param) {
-        if (!isTrue) {
-            return;
-        }
-        if (StringUtil.isNotEmpty(msg)) {
-            throw new BusinessException(statusCode, msg);
-        } else {
-            throw new BusinessException(statusCode);
         }
     }
 }

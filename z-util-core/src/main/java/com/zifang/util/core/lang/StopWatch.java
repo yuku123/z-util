@@ -61,7 +61,9 @@ public class StopWatch {
         currentTask = null;
     }
 
-    /** 统计自开始以来总耗时（包含未结束的 task）。 */
+    /**
+     * 统计自开始以来总耗时（包含未结束的 task）。
+     */
     public long getTotalTimeNanos() {
         if (running) {
             return System.nanoTime() - startTimeNanos + totalTimeNanos;
@@ -124,12 +126,12 @@ public class StopWatch {
             return timeNanos;
         }
 
-        public long getTimeMillis() {
-            return TimeUnit.NANOSECONDS.toMillis(timeNanos);
-        }
-
         void setTimeNanos(long nanos) {
             this.timeNanos = nanos;
+        }
+
+        public long getTimeMillis() {
+            return TimeUnit.NANOSECONDS.toMillis(timeNanos);
         }
     }
 }

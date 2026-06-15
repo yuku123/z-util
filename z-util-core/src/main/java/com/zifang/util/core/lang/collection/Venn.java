@@ -14,7 +14,8 @@ public class Venn<E> {
 
     /**
      * Venn方法。
-     *      * @param c1 CollectionE类型参数
+     * * @param c1 CollectionE类型参数
+     *
      * @param c2 CollectionE类型参数
      */
     public Venn(Collection<E> c1, Collection<E> c2) {
@@ -36,6 +37,7 @@ public class Venn<E> {
 
     /**
      * unionCount方法。
+     *
      * @return int类型返回值
      */
     public Integer unionCount() {

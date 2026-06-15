@@ -127,8 +127,15 @@ public class ParamsConvertor {
     private static String parseType(String str, int i) {
         char c = str.charAt(i);
         switch (c) {
-            case 'B': case 'C': case 'D': case 'F': case 'I':
-            case 'J': case 'S': case 'Z': case 'V':
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'F':
+            case 'I':
+            case 'J':
+            case 'S':
+            case 'Z':
+            case 'V':
                 return String.valueOf(c);
             case 'L':
                 int semicolon = str.indexOf(';', i);

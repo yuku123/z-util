@@ -61,30 +61,40 @@ public class Retry {
         throw new RuntimeException(lastError);
     }
 
-    /** 函数式接口，可抛出异常。 */
+    /**
+     * 函数式接口，可抛出异常。
+     */
     @FunctionalInterface
     public interface ThrowingSupplier<T> {
         T get() throws Exception;
     }
 
     public interface Backoff {
-        /** 返回第 attempt 次失败后应等待的毫秒数（attempt 从 1 开始）。 */
+        /**
+         * 返回第 attempt 次失败后应等待的毫秒数（attempt 从 1 开始）。
+         */
         long delayMillis(int attempt);
     }
 
-    /** 固定间隔。 */
+    /**
+     * 固定间隔。
+     */
     public static class FixedBackoff implements Backoff {
         private final long baseMillis;
+
         public FixedBackoff(long baseMillis) {
             this.baseMillis = baseMillis;
         }
+
         @Override
         public long delayMillis(int attempt) {
             return baseMillis;
         }
     }
 
-    /** 指数退避（可选 jitter）。 */
+    /**
+     * 指数退避（可选 jitter）。
+     */
     public static class ExponentialBackoff implements Backoff {
         private final long baseMillis;
         private final double multiplier;

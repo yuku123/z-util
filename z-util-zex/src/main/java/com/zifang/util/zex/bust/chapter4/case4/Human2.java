@@ -10,6 +10,25 @@ package com.zifang.util.zex.bust.chapter4.case4;
  * @version 1.0
  */
 class Human2 {
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        Human2 human = new Human2();
+        human.handle(true);
+        human.handle((short) 1);
+        human.handle((byte) 1);
+        human.handle('c');
+        human.handle((char) 99);
+        human.handle(1);
+        human.handle(1L);
+        human.handle(1.1F);
+        human.handle(1.1D);
+    }
+
     void handle(boolean a) {
         System.out.println("#boolean:" + a);
     }
@@ -72,23 +91,5 @@ class Human2 {
 
     void handle(Double a) {
         System.out.println("#Double:" + a);
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        Human2 human = new Human2();
-        human.handle(true);
-        human.handle((short) 1);
-        human.handle((byte) 1);
-        human.handle('c');
-        human.handle((char) 99);
-        human.handle(1);
-        human.handle(1L);
-        human.handle(1.1F);
-        human.handle(1.1D);
     }
 }

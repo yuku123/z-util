@@ -28,10 +28,11 @@ public class SingleFileHTTPServer {
 
     /**
      * SingleFileHTTPServer方法。
-     *      * @param data String类型参数
+     * * @param data String类型参数
+     *
      * @param encoding String类型参数
      * @param mimeType String类型参数
-     * @param port int类型参数
+     * @param port     int类型参数
      */
     public SingleFileHTTPServer(String data, String encoding, String mimeType, int port)
             throws UnsupportedEncodingException {
@@ -40,10 +41,11 @@ public class SingleFileHTTPServer {
 
     /**
      * SingleFileHTTPServer方法。
-     *      * @param data byte[]类型参数
+     * * @param data byte[]类型参数
+     *
      * @param encoding String类型参数
      * @param mimeType String类型参数
-     * @param port int类型参数
+     * @param port     int类型参数
      */
     public SingleFileHTTPServer(byte[] data, String encoding, String mimeType, int port) {
         this.content = data;
@@ -52,6 +54,43 @@ public class SingleFileHTTPServer {
         String header = "HTTP/1.0 200 OK\r\n" + "Server: OneFile 2.0\r\n" + "Content-length: " + this.content.length
                 + "\r\n" + "Content-type: " + mimeType + "; charset=" + encoding + "\r\n\r\n";
         this.header = header.getBytes(Charset.forName("US-ASCII"));
+    }
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+
+        // set the port to listen on
+        int port;
+        try {
+            port = Integer.parseInt(args[1]);
+            if (port < 1 || port > 65535)
+                port = 80;
+        } catch (RuntimeException ex) {
+            port = 80;
+        }
+
+        String encoding = "UTF-8";
+        if (args.length > 2)
+            encoding = args[2];
+
+        try {
+            Path path = Paths.get(args[0]);
+            byte[] data = Files.readAllBytes(path);
+
+            String contentType = URLConnection.getFileNameMap().getContentTypeFor(args[0]);
+            SingleFileHTTPServer server = new SingleFileHTTPServer(data, encoding, contentType, port);
+            server.start();
+
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Usage: java SingleFileHTTPServer filename port encoding");
+        } catch (IOException ex) {
+            log.severe(ex.getMessage());
+        }
     }
 
     /**
@@ -87,10 +126,10 @@ public class SingleFileHTTPServer {
         }
 
         @Override
-    /**
-     * call方法。
-     * @return Void类型返回值
-     */
+        /**
+         * call方法。
+         * @return Void类型返回值
+         */
         public Void call() throws IOException {
             try {
                 OutputStream out = new BufferedOutputStream(connection.getOutputStream());
@@ -115,42 +154,6 @@ public class SingleFileHTTPServer {
                 connection.close();
             }
             return null;
-        }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-
-        // set the port to listen on
-        int port;
-        try {
-            port = Integer.parseInt(args[1]);
-            if (port < 1 || port > 65535)
-                port = 80;
-        } catch (RuntimeException ex) {
-            port = 80;
-        }
-
-        String encoding = "UTF-8";
-        if (args.length > 2)
-            encoding = args[2];
-
-        try {
-            Path path = Paths.get(args[0]);
-            byte[] data = Files.readAllBytes(path);
-
-            String contentType = URLConnection.getFileNameMap().getContentTypeFor(args[0]);
-            SingleFileHTTPServer server = new SingleFileHTTPServer(data, encoding, contentType, port);
-            server.start();
-
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            System.out.println("Usage: java SingleFileHTTPServer filename port encoding");
-        } catch (IOException ex) {
-            log.severe(ex.getMessage());
         }
     }
 }

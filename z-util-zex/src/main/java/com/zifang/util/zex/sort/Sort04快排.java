@@ -13,9 +13,10 @@ public class Sort04快排 {
 
     /**
      * func方法。
-     *      * @param a int[]类型参数
+     * * @param a int[]类型参数
+     *
      * @param start int类型参数
-     * @param end int类型参数
+     * @param end   int类型参数
      * @return static void类型返回值
      */
     public static void func(int[] a, int start, int end) {
@@ -44,7 +45,8 @@ public class Sort04快排 {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

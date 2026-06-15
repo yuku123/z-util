@@ -15,17 +15,13 @@ import com.zifang.util.workflow.conponents.WorkFlowApplicationContext;
 public class newFeatureTest {
 
     /**
-     * 测试完整工作流执行功能。
-     * <p>
-     * 加载工作流配置文件，执行所有节点，验证整体流程是否正常。
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
      */
-    public void testAll() {
-
-        String filePath = "/Users/zifang/workplace/idea_workplace/components/util-workflow/src/test/resources/feature/workflow_all.json";
-
-        WorkFlowApplicationContext workFlowApplicationContext = new WorkFlowApplicationContext();
-        workFlowApplicationContext.initialByLocalFilePath(filePath);
-        workFlowApplicationContext.executeTask();
+    public static void main(String[] args) {
+        new newFeatureTest().testAll();
     }
 
 //    public void test1All(){
@@ -45,11 +41,16 @@ public class newFeatureTest {
 //    }
 
     /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
+     * 测试完整工作流执行功能。
+     * <p>
+     * 加载工作流配置文件，执行所有节点，验证整体流程是否正常。
      */
-    public static void main(String[] args) {
-        new newFeatureTest().testAll();
+    public void testAll() {
+
+        String filePath = "/Users/zifang/workplace/idea_workplace/components/util-workflow/src/test/resources/feature/workflow_all.json";
+
+        WorkFlowApplicationContext workFlowApplicationContext = new WorkFlowApplicationContext();
+        workFlowApplicationContext.initialByLocalFilePath(filePath);
+        workFlowApplicationContext.executeTask();
     }
 }

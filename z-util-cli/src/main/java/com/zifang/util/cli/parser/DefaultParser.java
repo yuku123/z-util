@@ -1,23 +1,12 @@
 package com.zifang.util.cli.parser;
 
-import com.zifang.util.cli.exception.AlreadySelectedException;
-import com.zifang.util.cli.exception.AmbiguousOptionException;
-import com.zifang.util.cli.exception.MissingArgumentException;
-import com.zifang.util.cli.exception.MissingOptionException;
-import com.zifang.util.cli.exception.ParseException;
-import com.zifang.util.cli.exception.UnrecognizedOptionException;
+import com.zifang.util.cli.exception.*;
 import com.zifang.util.cli.model.CommandLine;
 import com.zifang.util.cli.model.Option;
 import com.zifang.util.cli.model.OptionGroup;
 import com.zifang.util.cli.model.Options;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Default parser implementation for command-line arguments.
@@ -26,33 +15,55 @@ import java.util.Properties;
  */
 public class DefaultParser implements CommandLineParser {
 
-    /** Current Options */
-    private Options options;
-
-    /** The parsed CommandLine */
-    private CommandLine cmd;
-
-    /** List of required options */
-    private List<Option> requiredOptions;
-
-    /** Current option being processed */
-    private Option currentOption;
-
-    /** Whether to stop at non-option argument */
-    private boolean stopAtNonOption;
-
-    /** Token list during parsing */
-    private List<String> tokens = new ArrayList<>();
-
-    /** State: currently parsing option vs argument */
-    private boolean eatTheRest;
-
-    /** The current token index */
-    private int currentTokenIndex;
-
-    /** Start of current option token (e.g., "-" or "--") */
+    /**
+     * Start of current option token (e.g., "-" or "--")
+     */
     private static final String OPT_PREFIX = "-";
     private static final String LONG_OPT_PREFIX = "--";
+    /**
+     * Current Options
+     */
+    private Options options;
+    /**
+     * The parsed CommandLine
+     */
+    private CommandLine cmd;
+    /**
+     * List of required options
+     */
+    private List<Option> requiredOptions;
+    /**
+     * Current option being processed
+     */
+    private Option currentOption;
+    /**
+     * Whether to stop at non-option argument
+     */
+    private boolean stopAtNonOption;
+    /**
+     * Token list during parsing
+     */
+    private List<String> tokens = new ArrayList<>();
+    /**
+     * State: currently parsing option vs argument
+     */
+    private boolean eatTheRest;
+    /**
+     * The current token index
+     */
+    private int currentTokenIndex;
+
+    /**
+     * Find the index of '=' in the token (for --foo=value parsing).
+     */
+    static int indexOfEqual(final String token) {
+        for (int i = 0; i < token.length(); i++) {
+            if (token.charAt(i) == '=') {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     @Override
     /**
@@ -243,18 +254,6 @@ public class DefaultParser implements CommandLineParser {
         }
 
         return result.toArray(new String[0]);
-    }
-
-    /**
-     * Find the index of '=' in the token (for --foo=value parsing).
-     */
-    static int indexOfEqual(final String token) {
-        for (int i = 0; i < token.length(); i++) {
-            if (token.charAt(i) == '=') {
-                return i;
-            }
-        }
-        return -1;
     }
 
     private void processLongOption(final String token, final ListIterator<String> iterator) throws ParseException {

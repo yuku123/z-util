@@ -14,7 +14,7 @@
 //
 //import static com.github.javaparser.ast.Modifier.Keyword.PRIVATE;
 //
-///**
+/// **
 // * 正常类的 源码生产者
 // */
 //public class JavaObjectSourceGenerator implements IGenerator {

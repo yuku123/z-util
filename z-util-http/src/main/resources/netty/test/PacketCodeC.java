@@ -10,9 +10,8 @@ import static com.zifang.util.server.netty.im.ch9.Command.*;
 
 public class PacketCodeC {
 
-    private static final int MAGIC_NUMBER = 0x12345678;
     public static final PacketCodeC INSTANCE = new PacketCodeC();
-
+    private static final int MAGIC_NUMBER = 0x12345678;
     private final Map<Byte, Class<? extends Packet>> packetTypeMap;
     private final Map<Byte, Serializer> serializerMap;
 

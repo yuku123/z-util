@@ -15,13 +15,13 @@ import java.util.function.Predicate;
 public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     private final Predicate<C> condition;
+    private final String name;
     private Chain<C> trueChain;
     private Chain<C> falseChain;
-    private final String name;
 
     /**
      * BranchChain方法。
-     *      * @param condition PredicateC类型参数
+     * * @param condition PredicateC类型参数
      */
     public BranchChain(Predicate<C> condition) {
         this(condition, "BranchChain-" + System.currentTimeMillis());
@@ -29,7 +29,8 @@ public class BranchChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * BranchChain方法。
-     *      * @param condition PredicateC类型参数
+     * * @param condition PredicateC类型参数
+     *
      * @param name String类型参数
      */
     public BranchChain(Predicate<C> condition, String name) {

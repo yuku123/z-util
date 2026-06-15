@@ -24,7 +24,8 @@ public class HtmlParser {
 
     /**
      * 解析 HTML，返回匹配 CSS 选择器的第一个元素的文本内容。
-     * @param html HTML 字符串
+     *
+     * @param html        HTML 字符串
      * @param cssSelector CSS 选择器
      * @return 元素文本内容，未找到则返回 null
      */
@@ -36,7 +37,8 @@ public class HtmlParser {
 
     /**
      * 解析 HTML，返回匹配 CSS 选择器的所有元素的文本内容。
-     * @param html HTML 字符串
+     *
+     * @param html        HTML 字符串
      * @param cssSelector CSS 选择器
      * @return 文本内容列表
      */
@@ -52,9 +54,10 @@ public class HtmlParser {
 
     /**
      * 解析 HTML，返回匹配 CSS 选择器的第一个元素的指定属性值。
-     * @param html HTML 字符串
+     *
+     * @param html        HTML 字符串
      * @param cssSelector CSS 选择器
-     * @param attrName 属性名
+     * @param attrName    属性名
      * @return 属性值，未找到则返回 null
      */
     public static String parseAttr(String html, String cssSelector, String attrName) {
@@ -65,6 +68,7 @@ public class HtmlParser {
 
     /**
      * 解析 HTML 并返回 Jsoup Document 对象，用于高级操作。
+     *
      * @param html HTML 字符串
      * @return Jsoup Document 对象
      */

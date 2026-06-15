@@ -22,7 +22,8 @@ public class DeprecatedAttributes implements Serializable {
 
     /**
      * DeprecatedAttributes方法。
-     *      * @param since final类型参数
+     * * @param since final类型参数
+     *
      * @param description final类型参数
      */
     public DeprecatedAttributes(final String since, final String description) {
@@ -31,9 +32,10 @@ public class DeprecatedAttributes implements Serializable {
 
     /**
      * DeprecatedAttributes方法。
-     *      * @param since final类型参数
+     * * @param since final类型参数
+     *
      * @param description final类型参数
-     * @param forRemoval final类型参数
+     * @param forRemoval  final类型参数
      */
     public DeprecatedAttributes(final String since, final String description, final boolean forRemoval) {
         this.since = since;
@@ -43,6 +45,7 @@ public class DeprecatedAttributes implements Serializable {
 
     /**
      * getSince方法。
+     *
      * @return String类型返回值
      */
     public String getSince() {
@@ -51,6 +54,7 @@ public class DeprecatedAttributes implements Serializable {
 
     /**
      * getDescription方法。
+     *
      * @return String类型返回值
      */
     public String getDescription() {
@@ -59,6 +63,7 @@ public class DeprecatedAttributes implements Serializable {
 
     /**
      * isForRemoval方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isForRemoval() {
@@ -67,6 +72,7 @@ public class DeprecatedAttributes implements Serializable {
 
     /**
      * isDeprecated方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isDeprecated() {

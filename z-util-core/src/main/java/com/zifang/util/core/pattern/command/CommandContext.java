@@ -26,7 +26,7 @@ public class CommandContext implements Map<String, Object> {
 
     /**
      * CommandContext方法。
-     *      * @param initialData MapString,类型参数
+     * * @param initialData MapString,类型参数
      */
     public CommandContext(Map<String, Object> initialData) {
         this.data = new HashMap<>(initialData);

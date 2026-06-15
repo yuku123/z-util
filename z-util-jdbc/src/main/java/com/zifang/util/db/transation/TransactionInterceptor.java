@@ -35,7 +35,7 @@ public class TransactionInterceptor implements Aspect {
 
     /**
      * TransactionInterceptor方法。
-     *      * @param transactionManager TranslationManager类型参数
+     * * @param transactionManager TranslationManager类型参数
      */
     public TransactionInterceptor(TranslationManager transactionManager) {
         this.transactionManager = transactionManager;

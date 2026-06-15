@@ -49,11 +49,17 @@ public interface Layer {
      * 神经网络层类型枚举
      */
     enum LayerType {
-        /** 输入层 */
+        /**
+         * 输入层
+         */
         INPUT,
-        /** 隐藏层 */
+        /**
+         * 隐藏层
+         */
         HIDDEN,
-        /** 输出层 */
+        /**
+         * 输出层
+         */
         OUTPUT
     }
 }

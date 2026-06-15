@@ -10,7 +10,8 @@ public class User implements Cloneable {
 
     /**
      * User方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param age int类型参数
      */
     public User(String name, int age) {
@@ -21,6 +22,7 @@ public class User implements Cloneable {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -29,7 +31,7 @@ public class User implements Cloneable {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -37,6 +39,7 @@ public class User implements Cloneable {
 
     /**
      * getAge方法。
+     *
      * @return int类型返回值
      */
     public int getAge() {
@@ -45,7 +48,7 @@ public class User implements Cloneable {
 
     /**
      * setAge方法。
-     *      * @param age int类型参数
+     * * @param age int类型参数
      */
     public void setAge(int age) {
         this.age = age;

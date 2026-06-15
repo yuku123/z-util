@@ -13,6 +13,7 @@ import java.util.*;
 /**
  * YamlArray类。
  */
+
 /**
  * YamlArray类。
  */
@@ -364,6 +365,7 @@ public class YamlArray implements List<Object> {
      */
     /**
      * getNodeType方法。
+     *
      * @return YamlNodeType类型返回值
      */
     public YamlNodeType getNodeType() {
@@ -383,7 +385,8 @@ public class YamlArray implements List<Object> {
      */
     /**
      * getString方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return String类型返回值
      */
     public String getString(int index) {
@@ -404,7 +407,8 @@ public class YamlArray implements List<Object> {
      */
     /**
      * getInt方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return int类型返回值
      */
     public Integer getInt(int index) {
@@ -428,7 +432,8 @@ public class YamlArray implements List<Object> {
      */
     /**
      * getMap方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return YamlMap类型返回值
      */
     public YamlMap getMap(int index) {
@@ -449,7 +454,8 @@ public class YamlArray implements List<Object> {
      */
     /**
      * getArray方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return YamlArray类型返回值
      */
     public YamlArray getArray(int index) {

@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 /**
  * 邮件工具测试
  */
+
 /**
  * MailTest类。
  */

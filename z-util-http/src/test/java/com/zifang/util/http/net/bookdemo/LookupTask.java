@@ -12,7 +12,7 @@ public class LookupTask implements Callable<String> {
 
     /**
      * LookupTask方法。
-     *      * @param line String类型参数
+     * * @param line String类型参数
      */
     public LookupTask(String line) {
         this.line = line;

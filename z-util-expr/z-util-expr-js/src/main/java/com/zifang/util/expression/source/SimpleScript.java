@@ -24,8 +24,8 @@ import java.util.HashMap;
  * 你还可以使用一个参数 -v，让每次执行脚本的时候，都输出AST和整个计算过程。
  */
 public class SimpleScript {
-    private HashMap<String, Integer> variables = new HashMap<String, Integer>();
     private static boolean verbose = false;
+    private HashMap<String, Integer> variables = new HashMap<String, Integer>();
 
     /**
      * 实现一个简单的REPL

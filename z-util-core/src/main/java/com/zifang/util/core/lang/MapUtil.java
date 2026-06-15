@@ -17,7 +17,8 @@ public class MapUtil {
 
     /**
      * <<方法。
-     *      * @param 2 Integer.SIZE类型参数
+     * * @param 2 Integer.SIZE类型参数
+     *
      * @return static final int MAX_POWER_OF_TWO = 1类型返回值
      */
     public static final int MAX_POWER_OF_TWO = 1 << (Integer.SIZE - 2);

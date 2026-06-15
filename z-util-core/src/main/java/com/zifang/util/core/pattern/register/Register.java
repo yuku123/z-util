@@ -1,6 +1,9 @@
 package com.zifang.util.core.pattern.register;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -8,9 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * <p>
  * 提供键值对形式的注册功能。
  *
- * @author zifang
  * @param <K> 键类型
  * @param <V> 值类型
+ * @author zifang
  */
 public class Register<K, V> {
 

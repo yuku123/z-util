@@ -2,63 +2,28 @@ package com.zifang.util.devops.git.operations.jgit;
 
 import com.zifang.util.devops.git.operations.GitException;
 import com.zifang.util.devops.git.operations.GitResult;
-import com.zifang.util.devops.git.operations.core.GitAuthor;
-import com.zifang.util.devops.git.operations.core.GitBranch;
-import com.zifang.util.devops.git.operations.core.GitCommit;
-import com.zifang.util.devops.git.operations.core.GitRemote;
-import com.zifang.util.devops.git.operations.core.GitRepository;
-import com.zifang.util.devops.git.operations.core.GitStatus;
-import com.zifang.util.devops.git.operations.core.GitTag;
-import org.eclipse.jgit.api.CloneCommand;
-import org.eclipse.jgit.api.FetchCommand;
-import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.ListBranchCommand;
-import org.eclipse.jgit.api.LogCommand;
-import org.eclipse.jgit.api.MergeCommand;
-import org.eclipse.jgit.api.MergeResult;
-import org.eclipse.jgit.api.PullCommand;
-import org.eclipse.jgit.api.PullResult;
-import org.eclipse.jgit.api.PushCommand;
-import org.eclipse.jgit.api.RebaseCommand;
-import org.eclipse.jgit.api.RebaseResult;
-import org.eclipse.jgit.api.ResetCommand;
-import org.eclipse.jgit.api.Status;
-import org.eclipse.jgit.api.TagCommand;
+import com.zifang.util.devops.git.operations.core.*;
+import org.eclipse.jgit.api.*;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.diff.DiffEntry;
+import org.eclipse.jgit.diff.DiffFormatter;
+import org.eclipse.jgit.diff.RawTextComparator;
 import org.eclipse.jgit.dircache.DirCache;
 import org.eclipse.jgit.dircache.DirCacheIterator;
-import org.eclipse.jgit.lib.Constants;
-import org.eclipse.jgit.lib.ObjectId;
-import org.eclipse.jgit.lib.ObjectReader;
-import org.eclipse.jgit.lib.PersonIdent;
-import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.lib.StoredConfig;
+import org.eclipse.jgit.lib.*;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevObject;
 import org.eclipse.jgit.revwalk.RevTree;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.eclipse.jgit.transport.FetchResult;
-import org.eclipse.jgit.transport.PushResult;
-import org.eclipse.jgit.transport.RefSpec;
-import org.eclipse.jgit.transport.URIish;
-import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
+import org.eclipse.jgit.transport.*;
+import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 import org.eclipse.jgit.treewalk.FileTreeIterator;
-import org.eclipse.jgit.treewalk.AbstractTreeIterator;
 import org.eclipse.jgit.util.io.NullOutputStream;
-import org.eclipse.jgit.diff.DiffEntry;
-import org.eclipse.jgit.diff.DiffFormatter;
-import org.eclipse.jgit.diff.RawTextComparator;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * JGit 执行器（JGit 5.13.3 兼容版）
@@ -72,207 +37,6 @@ import java.util.Set;
 public class JGitExecutor {
 
     // ==================== 仓库生命周期 ====================
-
-    /**
-     * init方法。
-     *      * @param dir File类型参数
-     * @return GitResult<GitRepository>类型返回值
-     */
-    public GitResult<GitRepository> init(File dir) {
-        if (dir == null) {
-            return GitResult.fail("目录不能为空");
-        }
-        try {
-            if (!dir.exists() && !dir.mkdirs()) {
-                return GitResult.fail("无法创建目录: " + dir);
-            }
-            try (Git git = Git.init().setDirectory(dir).call()) {
-                File gitDir = git.getRepository().getDirectory();
-                return GitResult.success(new GitRepository(dir, gitDir));
-            }
-        } catch (Exception e) {
-            return GitResult.fail("初始化失败: " + e.getMessage());
-        }
-    }
-
-    /**
-     * open方法。
-     *      * @param repoDir File类型参数
-     * @return GitResult<GitRepository>类型返回值
-     */
-    public GitResult<GitRepository> open(File repoDir) {
-        if (repoDir == null || !repoDir.exists()) {
-            return GitResult.fail("目录不存在: " + repoDir);
-        }
-        try {
-            Repository repo = new org.eclipse.jgit.storage.file.FileRepositoryBuilder()
-                    .setMustExist(true)
-                    .findGitDir(repoDir)
-                    .build();
-            return GitResult.success(new GitRepository(repo.getWorkTree(), repo.getDirectory()));
-        } catch (IOException e) {
-            return GitResult.fail("打开仓库失败: " + e.getMessage());
-        }
-    }
-
-    /**
-     * clone方法。
-     *      * @param url String类型参数
-     * @param targetDir File类型参数
-     * @param username String类型参数
-     * @param password String类型参数
-     * @return GitResult<GitRepository>类型返回值
-     */
-    public GitResult<GitRepository> clone(String url, File targetDir, String username, String password) {
-        if (url == null || url.isEmpty()) {
-            return GitResult.fail("url 不能为空");
-        }
-        if (targetDir == null) {
-            return GitResult.fail("目标目录不能为空");
-        }
-        CloneCommand cmd = Git.cloneRepository()
-                .setURI(url)
-                .setDirectory(targetDir);
-        if (username != null && password != null) {
-            cmd.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
-        }
-        try (Git git = cmd.call()) {
-            Repository repo = git.getRepository();
-            return GitResult.success(new GitRepository(repo.getWorkTree(), repo.getDirectory()));
-        } catch (GitAPIException e) {
-            return GitResult.fail("克隆失败: " + e.getMessage());
-        }
-    }
-
-    // ==================== 工作区操作 ====================
-
-    /**
-     * add方法。
-     *      * @param repo GitRepository类型参数
-     * @param patterns String...类型参数
-     * @return GitResult<Void>类型返回值
-     */
-    public GitResult<Void> add(GitRepository repo, String... patterns) {
-        try (Git git = openGit(repo)) {
-            org.eclipse.jgit.api.AddCommand cmd = git.add();
-            if (patterns == null || patterns.length == 0) {
-                cmd.addFilepattern(".");
-            } else {
-                for (String p : patterns) {
-                    if (p != null && !p.isEmpty()) {
-                        cmd.addFilepattern(p);
-                    }
-                }
-            }
-            cmd.call();
-            return GitResult.success(null);
-        } catch (Exception e) {
-            return GitResult.fail("add 失败: " + e.getMessage());
-        }
-    }
-
-    /**
-     * rm方法。
-     *      * @param repo GitRepository类型参数
-     * @param cached boolean类型参数
-     * @param patterns String...类型参数
-     * @return GitResult<Void>类型返回值
-     */
-    public GitResult<Void> rm(GitRepository repo, boolean cached, String... patterns) {
-        try (Git git = openGit(repo)) {
-            org.eclipse.jgit.api.RmCommand cmd = git.rm();
-            if (cached) {
-                cmd.setCached(true);
-            }
-            for (String p : patterns) {
-                if (p != null && !p.isEmpty()) {
-                    cmd.addFilepattern(p);
-                }
-            }
-            cmd.call();
-            return GitResult.success(null);
-        } catch (Exception e) {
-            return GitResult.fail("rm 失败: " + e.getMessage());
-        }
-    }
-
-    /**
-     * status方法。
-     *      * @param repo GitRepository类型参数
-     * @return GitResult<GitStatus>类型返回值
-     */
-    public GitResult<GitStatus> status(GitRepository repo) {
-        try (Git git = openGit(repo)) {
-            Status s = git.status().call();
-            GitStatus out = new GitStatus();
-            out.setAdded(new ArrayList<>(s.getAdded()));
-            out.setChanged(new ArrayList<>(s.getChanged()));
-            out.setRemoved(new ArrayList<>(s.getRemoved()));
-            out.setUntracked(new ArrayList<>(s.getUntracked()));
-            out.setModified(new ArrayList<>(s.getModified()));
-            // JGit 5.13 没有 getDeleted()，用 getMissing() 表示"在工作区中消失的文件"
-            out.setDeleted(new ArrayList<>(s.getMissing()));
-            out.setMissing(new ArrayList<>(s.getMissing()));
-            out.setClean(s.isClean());
-            ObjectId head = git.getRepository().resolve(Constants.HEAD);
-            out.setHeadSha(head == null ? null : head.name());
-            String branch = git.getRepository().getBranch();
-            out.setBranch(branch);
-            // detached 判定：HEAD 是 SHA 而不是 ref
-            out.setDetached(branch != null && !branch.startsWith("refs/heads/"));
-            return GitResult.success(out);
-        } catch (Exception e) {
-            return GitResult.fail("status 失败: " + e.getMessage());
-        }
-    }
-
-    /**
-     * commit方法。
-     *      * @param repo GitRepository类型参数
-     * @param author GitAuthor类型参数
-     * @param message String类型参数
-     * @param all boolean类型参数
-     * @return GitResult<String>类型返回值
-     */
-    public GitResult<String> commit(GitRepository repo, GitAuthor author, String message, boolean all) {
-        try (Git git = openGit(repo)) {
-            org.eclipse.jgit.api.CommitCommand cmd = git.commit();
-            if (author != null) {
-                PersonIdent ident = author.getWhen() != null
-                        ? new PersonIdent(author.getName(), author.getEmail(), author.getWhen(), java.util.TimeZone.getDefault())
-                        : new PersonIdent(author.getName(), author.getEmail());
-                cmd.setAuthor(ident).setCommitter(ident);
-            }
-            if (all) {
-                cmd.setAll(true);
-            }
-            RevCommit rev = cmd.setMessage(message).call();
-            return GitResult.success(rev.getName());
-        } catch (Exception e) {
-            return GitResult.fail("commit 失败: " + e.getMessage());
-        }
-    }
-
-    /**
-     * reset方法。
-     *      * @param repo GitRepository类型参数
-     * @param ref String类型参数
-     * @param mode String类型参数
-     * @return GitResult<Void>类型返回值
-     */
-    public GitResult<Void> reset(GitRepository repo, String ref, String mode) {
-        try (Git git = openGit(repo)) {
-            ResetCommand cmd = git.reset();
-            if (ref != null) {
-                cmd.setRef(ref);
-            }
-            cmd.setMode(parseResetType(mode));
-            cmd.call();
-            return GitResult.success(null);
-        } catch (Exception e) {
-            return GitResult.fail("reset 失败: " + e.getMessage());
-        }
-    }
 
     private static ResetCommand.ResetType parseResetType(String mode) {
         if (mode == null) {
@@ -289,58 +53,6 @@ public class JGitExecutor {
                 return ResetCommand.ResetType.MERGE;
             default:
                 return ResetCommand.ResetType.MIXED;
-        }
-    }
-
-    // ==================== 日志 ====================
-
-    /**
-     * log方法。
-     *      * @param repo GitRepository类型参数
-     * @param maxCount int类型参数
-     * @return GitResult<List<GitCommit>>类型返回值
-     */
-    public GitResult<List<GitCommit>> log(GitRepository repo, int maxCount) {
-        try (Git git = openGit(repo)) {
-            // HEAD 不存在（空仓库）时，JGit log 会抛 NoHeadException。
-            // 这里视作"没有提交"，返回空 list。
-            ObjectId head = git.getRepository().resolve(Constants.HEAD);
-            if (head == null) {
-                return GitResult.success(new ArrayList<>());
-            }
-            LogCommand cmd = git.log();
-            if (maxCount > 0) {
-                cmd.setMaxCount(maxCount);
-            }
-            Iterable<RevCommit> commits = cmd.call();
-            List<GitCommit> out = new ArrayList<>();
-            for (RevCommit rc : commits) {
-                out.add(toGitCommit(rc));
-            }
-            return GitResult.success(out);
-        } catch (Exception e) {
-            return GitResult.fail("log 失败: " + e.getMessage());
-        }
-    }
-
-    /**
-     * show方法。
-     *      * @param repo GitRepository类型参数
-     * @param ref String类型参数
-     * @return GitResult<GitCommit>类型返回值
-     */
-    public GitResult<GitCommit> show(GitRepository repo, String ref) {
-        try (Git git = openGit(repo)) {
-            ObjectId oid = git.getRepository().resolve(ref);
-            if (oid == null) {
-                return GitResult.fail("找不到引用: " + ref);
-            }
-            try (RevWalk walk = new RevWalk(git.getRepository())) {
-                RevCommit rc = walk.parseCommit(oid);
-                return GitResult.success(toGitCommit(rc));
-            }
-        } catch (Exception e) {
-            return GitResult.fail("show 失败: " + e.getMessage());
         }
     }
 
@@ -368,88 +80,7 @@ public class JGitExecutor {
         return new GitAuthor(p.getName(), p.getEmailAddress(), p.getWhen());
     }
 
-    // ==================== Diff ====================
-    // JGit 5.13 的 diff API 跟新版本有差异；为了稳定，我们走 DirCache + FileTreeIterator
-    // 返回带 ChangeType / 路径 / sha 的 GitDiffEntry 列表，但不包含 patch 文本（要 patch 走 shell diff）。
-
-    /**
-     * diffWorkTree方法。
-     *      * @param repo GitRepository类型参数
-     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
-     */
-    public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffWorkTree(GitRepository repo) {
-        // 对应 `git diff`：工作区 vs 索引（不是 vs HEAD）
-        try (Git git = openGit(repo)) {
-            Repository r = git.getRepository();
-            DirCache dc = r.readDirCache();
-            AbstractTreeIterator oldIt = new DirCacheIterator(dc);
-            AbstractTreeIterator newIt = new FileTreeIterator(r);
-            return scanDiff(r, oldIt, newIt);
-        } catch (IOException e) {
-            throw new GitException("diff 失败: " + e.getMessage(), e);
-        }
-    }
-
-    /**
-     * diffIndex方法。
-     *      * @param repo GitRepository类型参数
-     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
-     */
-    public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffIndex(GitRepository repo) {
-        try (Git git = openGit(repo)) {
-            Repository r = git.getRepository();
-            ObjectId headCommit = r.resolve(Constants.HEAD);
-            if (headCommit == null) {
-                return new ArrayList<>();
-            }
-            ObjectId headTree;
-            try (RevWalk walk = new RevWalk(r)) {
-                headTree = walk.parseCommit(headCommit).getTree().getId();
-            }
-            CanonicalTreeParser oldIt = new CanonicalTreeParser();
-            try (ObjectReader reader = r.newObjectReader()) {
-                oldIt.reset(reader, headTree);
-            }
-            DirCache dc = r.readDirCache();
-            AbstractTreeIterator newIt = new DirCacheIterator(dc);
-            return scanDiff(r, oldIt, newIt);
-        } catch (IOException e) {
-            throw new GitException("diff 失败: " + e.getMessage(), e);
-        }
-    }
-
-    /**
-     * diffRefs方法。
-     *      * @param repo GitRepository类型参数
-     * @param oldRef String类型参数
-     * @param newRef String类型参数
-     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
-     */
-    public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffRefs(GitRepository repo, String oldRef, String newRef) {
-        try (Git git = openGit(repo)) {
-            Repository r = git.getRepository();
-            ObjectId oldCommit = r.resolve(oldRef);
-            ObjectId newCommit = r.resolve(newRef);
-            if (oldCommit == null || newCommit == null) {
-                throw new GitException("无法解析引用: oldRef=" + oldRef + " newRef=" + newRef);
-            }
-            ObjectId oldTree;
-            ObjectId newTree;
-            try (RevWalk walk = new RevWalk(r)) {
-                oldTree = walk.parseCommit(oldCommit).getTree().getId();
-                newTree = walk.parseCommit(newCommit).getTree().getId();
-            }
-            CanonicalTreeParser oldIt = new CanonicalTreeParser();
-            CanonicalTreeParser newIt = new CanonicalTreeParser();
-            try (ObjectReader reader = r.newObjectReader()) {
-                oldIt.reset(reader, oldTree);
-                newIt.reset(reader, newTree);
-            }
-            return scanDiff(r, oldIt, newIt);
-        } catch (IOException e) {
-            throw new GitException("diff 失败: " + e.getMessage(), e);
-        }
-    }
+    // ==================== 工作区操作 ====================
 
     private static List<com.zifang.util.devops.git.operations.core.GitDiffEntry> scanDiff(
             Repository r, AbstractTreeIterator oldIt, AbstractTreeIterator newIt) throws IOException {
@@ -489,11 +120,412 @@ public class JGitExecutor {
         }
     }
 
+    private static String extractShortName(String fullName) {
+        if (fullName.startsWith(Constants.R_HEADS)) {
+            return fullName.substring(Constants.R_HEADS.length());
+        }
+        if (fullName.startsWith(Constants.R_REMOTES)) {
+            return fullName.substring(Constants.R_REMOTES.length());
+        }
+        if (fullName.startsWith(Constants.R_TAGS)) {
+            return fullName.substring(Constants.R_TAGS.length());
+        }
+        return fullName;
+    }
+
+    private static Git openGit(GitRepository repo) {
+        try {
+            Repository r = new org.eclipse.jgit.storage.file.FileRepositoryBuilder()
+                    .setGitDir(repo.getGitDir())
+                    .setWorkTree(repo.getWorkDir())
+                    .build();
+            return new Git(r);
+        } catch (IOException e) {
+            throw new GitException("打开仓库失败: " + e.getMessage(), e);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private static List<String> asList(String... s) {
+        return s == null ? new ArrayList<>() : new ArrayList<>(Arrays.asList(s));
+    }
+
+    @SuppressWarnings("unused")
+    private static Set<String> asSet(String... s) {
+        Set<String> set = new LinkedHashSet<>();
+        if (s != null) {
+            set.addAll(Arrays.asList(s));
+        }
+        return set;
+    }
+
+    // ==================== 日志 ====================
+
+    @SuppressWarnings("unused")
+    private static void ensureNotInState(Repository repo, org.eclipse.jgit.lib.RepositoryState... forbidden) {
+        org.eclipse.jgit.lib.RepositoryState cur = repo.getRepositoryState();
+        Set<org.eclipse.jgit.lib.RepositoryState> set = new HashSet<>(Arrays.asList(forbidden));
+        if (set.contains(cur)) {
+            throw new GitException("仓库当前状态不允许该操作: " + cur);
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private static RevTree unused(ObjectId id) {
+        return null; // 占位以防编译器警告
+    }
+
+    /**
+     * init方法。
+     * * @param dir File类型参数
+     *
+     * @return GitResult<GitRepository>类型返回值
+     */
+    public GitResult<GitRepository> init(File dir) {
+        if (dir == null) {
+            return GitResult.fail("目录不能为空");
+        }
+        try {
+            if (!dir.exists() && !dir.mkdirs()) {
+                return GitResult.fail("无法创建目录: " + dir);
+            }
+            try (Git git = Git.init().setDirectory(dir).call()) {
+                File gitDir = git.getRepository().getDirectory();
+                return GitResult.success(new GitRepository(dir, gitDir));
+            }
+        } catch (Exception e) {
+            return GitResult.fail("初始化失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * open方法。
+     * * @param repoDir File类型参数
+     *
+     * @return GitResult<GitRepository>类型返回值
+     */
+    public GitResult<GitRepository> open(File repoDir) {
+        if (repoDir == null || !repoDir.exists()) {
+            return GitResult.fail("目录不存在: " + repoDir);
+        }
+        try {
+            Repository repo = new org.eclipse.jgit.storage.file.FileRepositoryBuilder()
+                    .setMustExist(true)
+                    .findGitDir(repoDir)
+                    .build();
+            return GitResult.success(new GitRepository(repo.getWorkTree(), repo.getDirectory()));
+        } catch (IOException e) {
+            return GitResult.fail("打开仓库失败: " + e.getMessage());
+        }
+    }
+
+    // ==================== Diff ====================
+    // JGit 5.13 的 diff API 跟新版本有差异；为了稳定，我们走 DirCache + FileTreeIterator
+    // 返回带 ChangeType / 路径 / sha 的 GitDiffEntry 列表，但不包含 patch 文本（要 patch 走 shell diff）。
+
+    /**
+     * clone方法。
+     * * @param url String类型参数
+     *
+     * @param targetDir File类型参数
+     * @param username  String类型参数
+     * @param password  String类型参数
+     * @return GitResult<GitRepository>类型返回值
+     */
+    public GitResult<GitRepository> clone(String url, File targetDir, String username, String password) {
+        if (url == null || url.isEmpty()) {
+            return GitResult.fail("url 不能为空");
+        }
+        if (targetDir == null) {
+            return GitResult.fail("目标目录不能为空");
+        }
+        CloneCommand cmd = Git.cloneRepository()
+                .setURI(url)
+                .setDirectory(targetDir);
+        if (username != null && password != null) {
+            cmd.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
+        }
+        try (Git git = cmd.call()) {
+            Repository repo = git.getRepository();
+            return GitResult.success(new GitRepository(repo.getWorkTree(), repo.getDirectory()));
+        } catch (GitAPIException e) {
+            return GitResult.fail("克隆失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * add方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @param patterns String...类型参数
+     * @return GitResult<Void>类型返回值
+     */
+    public GitResult<Void> add(GitRepository repo, String... patterns) {
+        try (Git git = openGit(repo)) {
+            org.eclipse.jgit.api.AddCommand cmd = git.add();
+            if (patterns == null || patterns.length == 0) {
+                cmd.addFilepattern(".");
+            } else {
+                for (String p : patterns) {
+                    if (p != null && !p.isEmpty()) {
+                        cmd.addFilepattern(p);
+                    }
+                }
+            }
+            cmd.call();
+            return GitResult.success(null);
+        } catch (Exception e) {
+            return GitResult.fail("add 失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * rm方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @param cached   boolean类型参数
+     * @param patterns String...类型参数
+     * @return GitResult<Void>类型返回值
+     */
+    public GitResult<Void> rm(GitRepository repo, boolean cached, String... patterns) {
+        try (Git git = openGit(repo)) {
+            org.eclipse.jgit.api.RmCommand cmd = git.rm();
+            if (cached) {
+                cmd.setCached(true);
+            }
+            for (String p : patterns) {
+                if (p != null && !p.isEmpty()) {
+                    cmd.addFilepattern(p);
+                }
+            }
+            cmd.call();
+            return GitResult.success(null);
+        } catch (Exception e) {
+            return GitResult.fail("rm 失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * status方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @return GitResult<GitStatus>类型返回值
+     */
+    public GitResult<GitStatus> status(GitRepository repo) {
+        try (Git git = openGit(repo)) {
+            Status s = git.status().call();
+            GitStatus out = new GitStatus();
+            out.setAdded(new ArrayList<>(s.getAdded()));
+            out.setChanged(new ArrayList<>(s.getChanged()));
+            out.setRemoved(new ArrayList<>(s.getRemoved()));
+            out.setUntracked(new ArrayList<>(s.getUntracked()));
+            out.setModified(new ArrayList<>(s.getModified()));
+            // JGit 5.13 没有 getDeleted()，用 getMissing() 表示"在工作区中消失的文件"
+            out.setDeleted(new ArrayList<>(s.getMissing()));
+            out.setMissing(new ArrayList<>(s.getMissing()));
+            out.setClean(s.isClean());
+            ObjectId head = git.getRepository().resolve(Constants.HEAD);
+            out.setHeadSha(head == null ? null : head.name());
+            String branch = git.getRepository().getBranch();
+            out.setBranch(branch);
+            // detached 判定：HEAD 是 SHA 而不是 ref
+            out.setDetached(branch != null && !branch.startsWith("refs/heads/"));
+            return GitResult.success(out);
+        } catch (Exception e) {
+            return GitResult.fail("status 失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * commit方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @param author  GitAuthor类型参数
+     * @param message String类型参数
+     * @param all     boolean类型参数
+     * @return GitResult<String>类型返回值
+     */
+    public GitResult<String> commit(GitRepository repo, GitAuthor author, String message, boolean all) {
+        try (Git git = openGit(repo)) {
+            org.eclipse.jgit.api.CommitCommand cmd = git.commit();
+            if (author != null) {
+                PersonIdent ident = author.getWhen() != null
+                        ? new PersonIdent(author.getName(), author.getEmail(), author.getWhen(), java.util.TimeZone.getDefault())
+                        : new PersonIdent(author.getName(), author.getEmail());
+                cmd.setAuthor(ident).setCommitter(ident);
+            }
+            if (all) {
+                cmd.setAll(true);
+            }
+            RevCommit rev = cmd.setMessage(message).call();
+            return GitResult.success(rev.getName());
+        } catch (Exception e) {
+            return GitResult.fail("commit 失败: " + e.getMessage());
+        }
+    }
+
     // ==================== 分支 ====================
 
     /**
+     * reset方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @param ref  String类型参数
+     * @param mode String类型参数
+     * @return GitResult<Void>类型返回值
+     */
+    public GitResult<Void> reset(GitRepository repo, String ref, String mode) {
+        try (Git git = openGit(repo)) {
+            ResetCommand cmd = git.reset();
+            if (ref != null) {
+                cmd.setRef(ref);
+            }
+            cmd.setMode(parseResetType(mode));
+            cmd.call();
+            return GitResult.success(null);
+        } catch (Exception e) {
+            return GitResult.fail("reset 失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * log方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @param maxCount int类型参数
+     * @return GitResult<List<GitCommit>>类型返回值
+     */
+    public GitResult<List<GitCommit>> log(GitRepository repo, int maxCount) {
+        try (Git git = openGit(repo)) {
+            // HEAD 不存在（空仓库）时，JGit log 会抛 NoHeadException。
+            // 这里视作"没有提交"，返回空 list。
+            ObjectId head = git.getRepository().resolve(Constants.HEAD);
+            if (head == null) {
+                return GitResult.success(new ArrayList<>());
+            }
+            LogCommand cmd = git.log();
+            if (maxCount > 0) {
+                cmd.setMaxCount(maxCount);
+            }
+            Iterable<RevCommit> commits = cmd.call();
+            List<GitCommit> out = new ArrayList<>();
+            for (RevCommit rc : commits) {
+                out.add(toGitCommit(rc));
+            }
+            return GitResult.success(out);
+        } catch (Exception e) {
+            return GitResult.fail("log 失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * show方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @param ref String类型参数
+     * @return GitResult<GitCommit>类型返回值
+     */
+    public GitResult<GitCommit> show(GitRepository repo, String ref) {
+        try (Git git = openGit(repo)) {
+            ObjectId oid = git.getRepository().resolve(ref);
+            if (oid == null) {
+                return GitResult.fail("找不到引用: " + ref);
+            }
+            try (RevWalk walk = new RevWalk(git.getRepository())) {
+                RevCommit rc = walk.parseCommit(oid);
+                return GitResult.success(toGitCommit(rc));
+            }
+        } catch (Exception e) {
+            return GitResult.fail("show 失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * diffWorkTree方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
+     */
+    public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffWorkTree(GitRepository repo) {
+        // 对应 `git diff`：工作区 vs 索引（不是 vs HEAD）
+        try (Git git = openGit(repo)) {
+            Repository r = git.getRepository();
+            DirCache dc = r.readDirCache();
+            AbstractTreeIterator oldIt = new DirCacheIterator(dc);
+            AbstractTreeIterator newIt = new FileTreeIterator(r);
+            return scanDiff(r, oldIt, newIt);
+        } catch (IOException e) {
+            throw new GitException("diff 失败: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * diffIndex方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
+     */
+    public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffIndex(GitRepository repo) {
+        try (Git git = openGit(repo)) {
+            Repository r = git.getRepository();
+            ObjectId headCommit = r.resolve(Constants.HEAD);
+            if (headCommit == null) {
+                return new ArrayList<>();
+            }
+            ObjectId headTree;
+            try (RevWalk walk = new RevWalk(r)) {
+                headTree = walk.parseCommit(headCommit).getTree().getId();
+            }
+            CanonicalTreeParser oldIt = new CanonicalTreeParser();
+            try (ObjectReader reader = r.newObjectReader()) {
+                oldIt.reset(reader, headTree);
+            }
+            DirCache dc = r.readDirCache();
+            AbstractTreeIterator newIt = new DirCacheIterator(dc);
+            return scanDiff(r, oldIt, newIt);
+        } catch (IOException e) {
+            throw new GitException("diff 失败: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * diffRefs方法。
+     * * @param repo GitRepository类型参数
+     *
+     * @param oldRef String类型参数
+     * @param newRef String类型参数
+     * @return List<com.zifang.util.devops.git.operations.core.GitDiffEntry>类型返回值
+     */
+    public List<com.zifang.util.devops.git.operations.core.GitDiffEntry> diffRefs(GitRepository repo, String oldRef, String newRef) {
+        try (Git git = openGit(repo)) {
+            Repository r = git.getRepository();
+            ObjectId oldCommit = r.resolve(oldRef);
+            ObjectId newCommit = r.resolve(newRef);
+            if (oldCommit == null || newCommit == null) {
+                throw new GitException("无法解析引用: oldRef=" + oldRef + " newRef=" + newRef);
+            }
+            ObjectId oldTree;
+            ObjectId newTree;
+            try (RevWalk walk = new RevWalk(r)) {
+                oldTree = walk.parseCommit(oldCommit).getTree().getId();
+                newTree = walk.parseCommit(newCommit).getTree().getId();
+            }
+            CanonicalTreeParser oldIt = new CanonicalTreeParser();
+            CanonicalTreeParser newIt = new CanonicalTreeParser();
+            try (ObjectReader reader = r.newObjectReader()) {
+                oldIt.reset(reader, oldTree);
+                newIt.reset(reader, newTree);
+            }
+            return scanDiff(r, oldIt, newIt);
+        } catch (IOException e) {
+            throw new GitException("diff 失败: " + e.getMessage(), e);
+        }
+    }
+
+    /**
      * branchList方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param type GitBranch.Type类型参数
      * @return GitResult<List<GitBranch>>类型返回值
      */
@@ -523,22 +555,12 @@ public class JGitExecutor {
         }
     }
 
-    private static String extractShortName(String fullName) {
-        if (fullName.startsWith(Constants.R_HEADS)) {
-            return fullName.substring(Constants.R_HEADS.length());
-        }
-        if (fullName.startsWith(Constants.R_REMOTES)) {
-            return fullName.substring(Constants.R_REMOTES.length());
-        }
-        if (fullName.startsWith(Constants.R_TAGS)) {
-            return fullName.substring(Constants.R_TAGS.length());
-        }
-        return fullName;
-    }
+    // ==================== 远程 ====================
 
     /**
      * branchCreate方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param name String类型参数
      * @return GitResult<Void>类型返回值
      */
@@ -553,8 +575,9 @@ public class JGitExecutor {
 
     /**
      * branchDelete方法。
-     *      * @param repo GitRepository类型参数
-     * @param name String类型参数
+     * * @param repo GitRepository类型参数
+     *
+     * @param name  String类型参数
      * @param force boolean类型参数
      * @return GitResult<Void>类型返回值
      */
@@ -569,7 +592,8 @@ public class JGitExecutor {
 
     /**
      * checkout方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param ref String类型参数
      * @return GitResult<Void>类型返回值
      */
@@ -582,9 +606,12 @@ public class JGitExecutor {
         }
     }
 
+    // ==================== 同步 ====================
+
     /**
      * checkoutNewBranch方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param name String类型参数
      * @return GitResult<Void>类型返回值
      */
@@ -599,7 +626,8 @@ public class JGitExecutor {
 
     /**
      * currentBranch方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @return GitResult<String>类型返回值
      */
     public GitResult<String> currentBranch(GitRepository repo) {
@@ -618,11 +646,10 @@ public class JGitExecutor {
         }
     }
 
-    // ==================== 远程 ====================
-
     /**
      * remoteList方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @return GitResult<List<GitRemote>>类型返回值
      */
     public GitResult<List<GitRemote>> remoteList(GitRepository repo) {
@@ -643,11 +670,14 @@ public class JGitExecutor {
         }
     }
 
+    // ==================== 合并 / 变基 ====================
+
     /**
      * remoteAdd方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param name String类型参数
-     * @param url String类型参数
+     * @param url  String类型参数
      * @return GitResult<Void>类型返回值
      */
     public GitResult<Void> remoteAdd(GitRepository repo, String name, String url) {
@@ -661,7 +691,8 @@ public class JGitExecutor {
 
     /**
      * remoteRemove方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param name String类型参数
      * @return GitResult<Void>类型返回值
      */
@@ -674,12 +705,13 @@ public class JGitExecutor {
         }
     }
 
-    // ==================== 同步 ====================
+    // ==================== Tag ====================
 
     /**
      * fetch方法。
-     *      * @param repo GitRepository类型参数
-     * @param remote String类型参数
+     * * @param repo GitRepository类型参数
+     *
+     * @param remote   String类型参数
      * @param username String类型参数
      * @param password String类型参数
      * @return GitResult<FetchResult>类型返回值
@@ -702,9 +734,10 @@ public class JGitExecutor {
 
     /**
      * pull方法。
-     *      * @param repo GitRepository类型参数
-     * @param remote String类型参数
-     * @param branch String类型参数
+     * * @param repo GitRepository类型参数
+     *
+     * @param remote   String类型参数
+     * @param branch   String类型参数
      * @param username String类型参数
      * @param password String类型参数
      * @return GitResult<PullResult>类型返回值
@@ -731,9 +764,10 @@ public class JGitExecutor {
 
     /**
      * push方法。
-     *      * @param repo GitRepository类型参数
-     * @param remote String类型参数
-     * @param refspec String类型参数
+     * * @param repo GitRepository类型参数
+     *
+     * @param remote   String类型参数
+     * @param refspec  String类型参数
      * @param username String类型参数
      * @param password String类型参数
      * @return GitResult<Iterable<PushResult>>类型返回值
@@ -758,11 +792,12 @@ public class JGitExecutor {
         }
     }
 
-    // ==================== 合并 / 变基 ====================
+    // ==================== 内部 ====================
 
     /**
      * merge方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param ref String类型参数
      * @return GitResult<MergeResult>类型返回值
      */
@@ -784,7 +819,8 @@ public class JGitExecutor {
 
     /**
      * rebase方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param upstream String类型参数
      * @return GitResult<RebaseResult>类型返回值
      */
@@ -801,11 +837,10 @@ public class JGitExecutor {
         }
     }
 
-    // ==================== Tag ====================
-
     /**
      * tagList方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @return GitResult<List<GitTag>>类型返回值
      */
     public GitResult<List<GitTag>> tagList(GitRepository repo) {
@@ -843,11 +878,12 @@ public class JGitExecutor {
 
     /**
      * tagCreate方法。
-     *      * @param repo GitRepository类型参数
-     * @param name String类型参数
-     * @param message String类型参数
+     * * @param repo GitRepository类型参数
+     *
+     * @param name      String类型参数
+     * @param message   String类型参数
      * @param annotated boolean类型参数
-     * @param ref String类型参数
+     * @param ref       String类型参数
      * @return GitResult<Void>类型返回值
      */
     public GitResult<Void> tagCreate(GitRepository repo, String name, String message, boolean annotated, String ref) {
@@ -876,7 +912,8 @@ public class JGitExecutor {
 
     /**
      * tagDelete方法。
-     *      * @param repo GitRepository类型参数
+     * * @param repo GitRepository类型参数
+     *
      * @param name String类型参数
      * @return GitResult<Void>类型返回值
      */
@@ -887,47 +924,5 @@ public class JGitExecutor {
         } catch (Exception e) {
             return GitResult.fail("tagDelete 失败: " + e.getMessage());
         }
-    }
-
-    // ==================== 内部 ====================
-
-    private static Git openGit(GitRepository repo) {
-        try {
-            Repository r = new org.eclipse.jgit.storage.file.FileRepositoryBuilder()
-                    .setGitDir(repo.getGitDir())
-                    .setWorkTree(repo.getWorkDir())
-                    .build();
-            return new Git(r);
-        } catch (IOException e) {
-            throw new GitException("打开仓库失败: " + e.getMessage(), e);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private static List<String> asList(String... s) {
-        return s == null ? new ArrayList<>() : new ArrayList<>(Arrays.asList(s));
-    }
-
-    @SuppressWarnings("unused")
-    private static Set<String> asSet(String... s) {
-        Set<String> set = new LinkedHashSet<>();
-        if (s != null) {
-            set.addAll(Arrays.asList(s));
-        }
-        return set;
-    }
-
-    @SuppressWarnings("unused")
-    private static void ensureNotInState(Repository repo, org.eclipse.jgit.lib.RepositoryState... forbidden) {
-        org.eclipse.jgit.lib.RepositoryState cur = repo.getRepositoryState();
-        Set<org.eclipse.jgit.lib.RepositoryState> set = new HashSet<>(Arrays.asList(forbidden));
-        if (set.contains(cur)) {
-            throw new GitException("仓库当前状态不允许该操作: " + cur);
-        }
-    }
-
-    @SuppressWarnings("unused")
-    private static RevTree unused(ObjectId id) {
-        return null; // 占位以防编译器警告
     }
 }

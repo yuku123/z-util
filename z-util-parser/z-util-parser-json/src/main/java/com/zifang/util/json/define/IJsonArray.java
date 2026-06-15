@@ -5,6 +5,7 @@ package com.zifang.util.json.define;
  *
  * @author zifang
  */
+
 /**
  * IJsonArray接口。
  */

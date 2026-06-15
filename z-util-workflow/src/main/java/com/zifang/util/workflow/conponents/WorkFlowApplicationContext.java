@@ -1,10 +1,10 @@
 package com.zifang.util.workflow.conponents;
 
+import com.zifang.util.core.io.FileUtil;
+import com.zifang.util.core.util.GsonUtil;
 import com.zifang.util.workflow.bpmn.BpmnDiagram;
 import com.zifang.util.workflow.bpmn.BpmnModelConverter;
 import com.zifang.util.workflow.bpmn.BpmnXmlParser;
-import com.zifang.util.core.io.FileUtil;
-import com.zifang.util.core.util.GsonUtil;
 import com.zifang.util.workflow.config.ExecutableWorkflowNode;
 import com.zifang.util.workflow.config.WorkflowConfiguration;
 import com.zifang.util.workflow.config.WorkflowNode;
@@ -42,16 +42,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class WorkFlowApplicationContext {
 
     private static final Logger log = LoggerFactory.getLogger(WorkFlowApplicationContext.class);
-
-    private volatile AtomicInteger nodeId = new AtomicInteger(0);
-
     /**
      * Random方法。
-     *      * @param System.currentTimeMillis( Object类型参数
+     * * @param System.currentTimeMillis( Object类型参数
+     *
      * @return static Random random = new类型返回值
      */
     public static Random random = new Random(System.currentTimeMillis());
-
+    private volatile AtomicInteger nodeId = new AtomicInteger(0);
     private Integer workFlowApplicationContextId;
 
     //执行引擎
@@ -86,7 +84,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * WorkFlowApplicationContext方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
      */
     public WorkFlowApplicationContext(String filePath) {
         this.filePath = filePath;
@@ -94,8 +92,10 @@ public class WorkFlowApplicationContext {
     }
 
     // -------- Getter and Setter --------
+
     /**
      * getNodeId方法。
+     *
      * @return AtomicInteger类型返回值
      */
     public AtomicInteger getNodeId() {
@@ -104,7 +104,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setNodeId方法。
-     *      * @param nodeId AtomicInteger类型参数
+     * * @param nodeId AtomicInteger类型参数
      */
     public void setNodeId(AtomicInteger nodeId) {
         this.nodeId = nodeId;
@@ -112,6 +112,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getWorkFlowApplicationContextId方法。
+     *
      * @return int类型返回值
      */
     public Integer getWorkFlowApplicationContextId() {
@@ -120,7 +121,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setWorkFlowApplicationContextId方法。
-     *      * @param workFlowApplicationContextId int类型参数
+     * * @param workFlowApplicationContextId int类型参数
      */
     public void setWorkFlowApplicationContextId(Integer workFlowApplicationContextId) {
         this.workFlowApplicationContextId = workFlowApplicationContextId;
@@ -128,6 +129,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getAbstractEngine方法。
+     *
      * @return AbstractEngine类型返回值
      */
     public AbstractEngine getAbstractEngine() {
@@ -136,7 +138,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setAbstractEngine方法。
-     *      * @param abstractEngine AbstractEngine类型参数
+     * * @param abstractEngine AbstractEngine类型参数
      */
     public void setAbstractEngine(AbstractEngine abstractEngine) {
         this.abstractEngine = abstractEngine;
@@ -144,6 +146,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getCacheEngineService方法。
+     *
      * @return CacheEngineService类型返回值
      */
     public CacheEngineService getCacheEngineService() {
@@ -152,7 +155,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setCacheEngineService方法。
-     *      * @param cacheEngineService CacheEngineService类型参数
+     * * @param cacheEngineService CacheEngineService类型参数
      */
     public void setCacheEngineService(CacheEngineService cacheEngineService) {
         this.cacheEngineService = cacheEngineService;
@@ -160,6 +163,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getWorkflowNodeMap方法。
+     *
      * @return Map<String, WorkflowNode>类型返回值
      */
     public Map<String, WorkflowNode> getWorkflowNodeMap() {
@@ -168,7 +172,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setWorkflowNodeMap方法。
-     *      * @param workflowNodeMap MapString,类型参数
+     * * @param workflowNodeMap MapString,类型参数
      */
     public void setWorkflowNodeMap(Map<String, WorkflowNode> workflowNodeMap) {
         this.workflowNodeMap = workflowNodeMap;
@@ -176,6 +180,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getExecutableWorkNodes方法。
+     *
      * @return List<ExecutableWorkflowNode>类型返回值
      */
     public List<ExecutableWorkflowNode> getExecutableWorkNodes() {
@@ -184,7 +189,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setExecutableWorkNodes方法。
-     *      * @param executableWorkNodes ListExecutableWorkflowNode类型参数
+     * * @param executableWorkNodes ListExecutableWorkflowNode类型参数
      */
     public void setExecutableWorkNodes(List<ExecutableWorkflowNode> executableWorkNodes) {
         this.executableWorkNodes = executableWorkNodes;
@@ -192,6 +197,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getExecutableWorkNodeIdMap方法。
+     *
      * @return Map<String, ExecutableWorkflowNode>类型返回值
      */
     public Map<String, ExecutableWorkflowNode> getExecutableWorkNodeIdMap() {
@@ -200,7 +206,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setExecutableWorkNodeIdMap方法。
-     *      * @param executableWorkNodeIdMap MapString,类型参数
+     * * @param executableWorkNodeIdMap MapString,类型参数
      */
     public void setExecutableWorkNodeIdMap(Map<String, ExecutableWorkflowNode> executableWorkNodeIdMap) {
         this.executableWorkNodeIdMap = executableWorkNodeIdMap;
@@ -208,6 +214,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getFilePath方法。
+     *
      * @return String类型返回值
      */
     public String getFilePath() {
@@ -216,7 +223,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setFilePath方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
      */
     public void setFilePath(String filePath) {
         this.filePath = filePath;
@@ -224,6 +231,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getTask方法。
+     *
      * @return Task类型返回值
      */
     public Task getTask() {
@@ -232,7 +240,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setTask方法。
-     *      * @param task Task类型参数
+     * * @param task Task类型参数
      */
     public void setTask(Task task) {
         this.task = task;
@@ -240,6 +248,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * getWorkflowConfiguration方法。
+     *
      * @return WorkflowConfiguration类型返回值
      */
     public WorkflowConfiguration getWorkflowConfiguration() {
@@ -248,7 +257,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * setWorkflowConfiguration方法。
-     *      * @param workflowConfiguration WorkflowConfiguration类型参数
+     * * @param workflowConfiguration WorkflowConfiguration类型参数
      */
     public void setWorkflowConfiguration(WorkflowConfiguration workflowConfiguration) {
         this.workflowConfiguration = workflowConfiguration;
@@ -296,9 +305,10 @@ public class WorkFlowApplicationContext {
     }
 
     // -------- Business Methods --------
+
     /**
      * initialByLocalFilePath方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
      */
     public void initialByLocalFilePath(String filePath) {
 
@@ -314,7 +324,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * initialByWorkflowConfigurationInstance方法。
-     *      * @param workflowConfiguration WorkflowConfiguration类型参数
+     * * @param workflowConfiguration WorkflowConfiguration类型参数
      */
     public void initialByWorkflowConfigurationInstance(WorkflowConfiguration workflowConfiguration) {
         this.workflowConfiguration = workflowConfiguration;
@@ -323,7 +333,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * initialByJsonStream方法。
-     *      * @param json String类型参数
+     * * @param json String类型参数
      */
     public void initialByJsonStream(String json) {
         workflowConfiguration = GsonUtil.jsonStrToObject(json, WorkflowConfiguration.class);
@@ -524,6 +534,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * produceNodeId方法。
+     *
      * @return String类型返回值
      */
     public String produceNodeId() {
@@ -541,7 +552,7 @@ public class WorkFlowApplicationContext {
 
     /**
      * replaceWorkflowNode方法。
-     *      * @param workflowNode WorkflowNode类型参数
+     * * @param workflowNode WorkflowNode类型参数
      */
     public void replaceWorkflowNode(WorkflowNode workflowNode) {
 

@@ -6,6 +6,7 @@ import com.zifang.util.workflow.conponents.WorkFlowApplicationContext;
 public class ExzampleTest {
 
     //@Test
+
     /**
      * workflow_read_write_local方法。
      */
@@ -17,6 +18,7 @@ public class ExzampleTest {
     }
 
     //@Test
+
     /**
      * workflow_read_write_mysql方法。
      */
@@ -27,6 +29,7 @@ public class ExzampleTest {
     }
 
     //@Test
+
     /**
      * workflow_read_write_hive方法。
      */
@@ -37,6 +40,7 @@ public class ExzampleTest {
     }
 
     //@Test
+
     /**
      * workflow_pivot方法。
      */
@@ -49,6 +53,7 @@ public class ExzampleTest {
     //真实的干活的
 
     //@Test
+
     /**
      * aa方法。
      */

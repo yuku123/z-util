@@ -2,12 +2,13 @@ package com.zifang.util.media.graph.qrcode.decoder;
 
 import com.zifang.util.media.graph.qrcode.encoder.BitMatrix;
 import org.junit.Test;
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * QRCodeDecoderTest类。

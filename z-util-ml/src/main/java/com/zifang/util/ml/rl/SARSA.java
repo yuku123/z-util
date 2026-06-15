@@ -1,48 +1,32 @@
 package com.zifang.util.ml.rl;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 /**
  * SARSA: On-policy TD control algorithm.
- * 
+ * <p>
  * Q(s,a) = Q(s,a) + α * (r + γ * Q(s',a') - Q(s,a))
  * where a' is the action actually taken in the next step.
- * 
+ * <p>
  * Uses epsilon-greedy action selection and a HashMap-based Q-table.
  */
 public class SARSA {
-    
+
     private double learningRate;
     private double gamma;
     private double epsilon;
     private int nEpisodes;
     private HashMap<String, Double> qTable;
-    
-    /**
-     * Interface for states in the RL environment.
-     */
-    public interface State {
-        Object getState();
-        List<ActionResult> getAvailableActions();
-    }
-    
-    /**
-     * Interface for action results containing next state, reward, and terminal info.
-     */
-    public interface ActionResult {
-        Object getAction();
-        State getNextState();
-        double getReward();
-        boolean isTerminal();
-    }
-    
+
     /**
      * Creates a new SARSA agent.
-     * 
+     *
      * @param learningRate Learning rate (α)
-     * @param gamma Discount factor (γ)
-     * @param epsilon Exploration rate for epsilon-greedy
-     * @param nEpisodes Number of episodes to train
+     * @param gamma        Discount factor (γ)
+     * @param epsilon      Exploration rate for epsilon-greedy
+     * @param nEpisodes    Number of episodes to train
      */
     public SARSA(double learningRate, double gamma, double epsilon, int nEpisodes) {
         this.learningRate = learningRate;
@@ -51,25 +35,25 @@ public class SARSA {
         this.nEpisodes = nEpisodes;
         this.qTable = new HashMap<>();
     }
-    
+
     /**
      * Generates a unique key for a state-action pair.
      */
     private String stateActionKey(State state, Object action) {
         return stateKey(state) + "|" + action.toString();
     }
-    
+
     /**
      * Generates a unique key for a state.
      */
     private String stateKey(State s) {
         return s.getState().toString();
     }
-    
+
     /**
      * Gets the Q-value for a state-action pair.
-     * 
-     * @param state The current state
+     *
+     * @param state  The current state
      * @param action The action taken
      * @return The Q-value Q(s,a)
      */
@@ -77,7 +61,7 @@ public class SARSA {
         String key = stateActionKey(state, action);
         return qTable.getOrDefault(key, 0.0);
     }
-    
+
     /**
      * Sets the Q-value for a state-action pair.
      */
@@ -85,10 +69,10 @@ public class SARSA {
         String key = stateActionKey(state, action);
         qTable.put(key, value);
     }
-    
+
     /**
      * Gets the best action for a state (argmax over actions).
-     * 
+     *
      * @param state The current state
      * @return The action with the highest Q-value
      */
@@ -97,10 +81,10 @@ public class SARSA {
         if (availableActions.isEmpty()) {
             throw new IllegalStateException("No available actions for state: " + stateKey(state));
         }
-        
+
         Object bestAction = null;
         double bestValue = Double.NEGATIVE_INFINITY;
-        
+
         for (ActionResult ar : availableActions) {
             Object action = ar.getAction();
             double qValue = getQValue(state, action);
@@ -109,13 +93,13 @@ public class SARSA {
                 bestAction = action;
             }
         }
-        
+
         return bestAction;
     }
-    
+
     /**
      * Selects an action using epsilon-greedy exploration.
-     * 
+     *
      * @param state The current state
      * @return The selected action
      */
@@ -130,20 +114,20 @@ public class SARSA {
             return getBestAction(state);
         }
     }
-    
+
     /**
      * Updates the Q-value using the TD update rule (standard Q-learning style).
-     * 
+     * <p>
      * Q(s,a) = Q(s,a) + α * (r + γ * max_a' Q(s',a') - Q(s,a))
-     * 
-     * @param state The current state
-     * @param action The action taken
-     * @param reward The reward received
+     *
+     * @param state     The current state
+     * @param action    The action taken
+     * @param reward    The reward received
      * @param nextState The resulting state
      */
     public void update(State state, Object action, double reward, State nextState) {
         double currentQ = getQValue(state, action);
-        
+
         double maxNextQ = 0.0;
         if (!nextState.getAvailableActions().isEmpty()) {
             maxNextQ = Double.NEGATIVE_INFINITY;
@@ -158,51 +142,51 @@ public class SARSA {
                 maxNextQ = 0.0;
             }
         }
-        
+
         // TD update
         double newQ = currentQ + learningRate * (reward + gamma * maxNextQ - currentQ);
         setQValue(state, action, newQ);
     }
-    
+
     /**
      * Updates the Q-value using the SARSA update rule with the action actually taken.
-     * 
+     * <p>
      * Q(s,a) = Q(s,a) + α * (r + γ * Q(s',a') - Q(s,a))
      * where a' is the action that was actually taken in state s'.
-     * 
+     *
      * @param actionTaken The action that was actually taken in the next state
-     * @param nextState The next state
+     * @param nextState   The next state
      */
     public void update(Object actionTaken, State nextState) {
         // This method is used when following the on-policy approach
         // where we use the actual next action for the update
     }
-    
+
     /**
      * Runs the SARSA algorithm for the specified number of episodes.
      * This is an on-policy algorithm that follows the epsilon-greedy policy
      * throughout the episode.
-     * 
+     *
      * @param startState The initial state for each episode
      */
     public void learn(State startState) {
         for (int episode = 0; episode < nEpisodes; episode++) {
             State currentState = startState;
-            
+
             // Select initial action using epsilon-greedy
             List<ActionResult> availableActions = currentState.getAvailableActions();
             if (availableActions.isEmpty()) {
                 continue;
             }
-            
+
             Object currentAction = selectAction(currentState);
-            
+
             while (!isTerminal(currentState)) {
                 availableActions = currentState.getAvailableActions();
                 if (availableActions.isEmpty()) {
                     break;
                 }
-                
+
                 // Find the ActionResult for the current action
                 ActionResult selectedResult = null;
                 for (ActionResult ar : availableActions) {
@@ -211,22 +195,22 @@ public class SARSA {
                         break;
                     }
                 }
-                
+
                 if (selectedResult == null) {
                     break;
                 }
-                
+
                 // Get next state and reward
                 State nextState = selectedResult.getNextState();
                 double reward = selectedResult.getReward();
                 boolean terminal = selectedResult.isTerminal();
-                
+
                 // Select next action using epsilon-greedy (on-policy)
                 Object nextAction = null;
                 if (!terminal && !nextState.getAvailableActions().isEmpty()) {
                     nextAction = selectAction(nextState);
                 }
-                
+
                 // SARSA update: use the actual next action
                 if (!terminal) {
                     double currentQ = getQValue(currentState, currentAction);
@@ -239,11 +223,11 @@ public class SARSA {
                     double newQ = currentQ + learningRate * (reward - currentQ);
                     setQValue(currentState, currentAction, newQ);
                 }
-                
+
                 // Move to next state and action
                 currentState = nextState;
                 currentAction = nextAction;
-                
+
                 // Handle terminal state
                 if (terminal) {
                     break;
@@ -251,7 +235,7 @@ public class SARSA {
             }
         }
     }
-    
+
     /**
      * Checks if a state is terminal (no available actions or marked as terminal).
      */
@@ -266,53 +250,75 @@ public class SARSA {
         }
         return false;
     }
-    
+
     /**
      * Gets the current Q-table (for inspection).
      */
     public HashMap<String, Double> getQTable() {
         return new HashMap<>(qTable);
     }
-    
+
     /**
      * Gets the learning rate.
      */
     public double getLearningRate() {
         return learningRate;
     }
-    
+
     /**
      * Sets the learning rate.
      */
     public void setLearningRate(double learningRate) {
         this.learningRate = learningRate;
     }
-    
+
     /**
      * Gets the discount factor.
      */
     public double getGamma() {
         return gamma;
     }
-    
+
     /**
      * Gets the epsilon exploration rate.
      */
     public double getEpsilon() {
         return epsilon;
     }
-    
+
     /**
      * Sets the epsilon exploration rate.
      */
     public void setEpsilon(double epsilon) {
         this.epsilon = epsilon;
     }
-    
+
     /**
      * Gets the number of episodes.
      */
     public int getnEpisodes() {
         return nEpisodes;
+    }
+
+    /**
+     * Interface for states in the RL environment.
+     */
+    public interface State {
+        Object getState();
+
+        List<ActionResult> getAvailableActions();
+    }
+
+    /**
+     * Interface for action results containing next state, reward, and terminal info.
+     */
+    public interface ActionResult {
+        Object getAction();
+
+        State getNextState();
+
+        double getReward();
+
+        boolean isTerminal();
     }
 }

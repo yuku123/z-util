@@ -13,6 +13,8 @@ import java.lang.annotation.*;
  */
 public @interface Length {
     int min() default 0;
+
     int max() default Integer.MAX_VALUE;
+
     String message() default "长度不在合法范围内";
 }

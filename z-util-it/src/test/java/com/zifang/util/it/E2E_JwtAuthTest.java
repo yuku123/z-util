@@ -2,9 +2,9 @@ package com.zifang.util.it;
 
 import com.zifang.util.cache.Cache;
 import com.zifang.util.cache.CacheBuilder;
-import com.zifang.util.jwt.Claims;
-import com.zifang.util.jwt.Jwt;
-import com.zifang.util.jwt.JwtException;
+import com.zifang.util.core.jwt.Claims;
+import com.zifang.util.core.jwt.Jwt;
+import com.zifang.util.core.jwt.JwtException;
 import org.junit.Test;
 
 import java.time.Duration;

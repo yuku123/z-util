@@ -97,7 +97,7 @@ public class CustomerCompileClassLoader extends ClassLoader {
      * 如club.throwable.compile.HelloService
      *
      * @param qualifiedClassName 全限定类名
-     * @param javaFileObject    Java文件对象
+     * @param javaFileObject     Java文件对象
      */
     void addJavaFileObject(String qualifiedClassName, JavaFileObject javaFileObject) {
         javaFileObjectMap.put(qualifiedClassName, javaFileObject);

@@ -40,6 +40,7 @@ public class Linalg {
 
     /**
      * 计算矩阵点积 (matrix multiplication)，类似于 numpy.dot()
+     *
      * @param a 第一个矩阵或向量
      * @param b 第二个矩阵或向量
      * @return 点积结果
@@ -77,6 +78,7 @@ public class Linalg {
 
     /**
      * 矩阵乘法，类似于 numpy.matmul()，与 dot 功能相同但更直观
+     *
      * @param a 第一个矩阵
      * @param b 第二个矩阵
      * @return 矩阵乘法结果
@@ -88,6 +90,7 @@ public class Linalg {
 
     /**
      * 计算向量内积，类似于 numpy.inner()
+     *
      * @param a 第一个向量（必须是一维）
      * @param b 第二个向量（必须是一维）
      * @return 内积结果
@@ -108,6 +111,7 @@ public class Linalg {
 
     /**
      * 计算向量外积，类似于 numpy.outer()
+     *
      * @param a 第一个向量（必须是一维）
      * @param b 第二个向量（必须是一维）
      * @return 外积结果矩阵
@@ -130,8 +134,9 @@ public class Linalg {
 
     /**
      * 计算张量点积，类似于 numpy.tensordot()
-     * @param a 第一个数组
-     * @param b 第二个数组
+     *
+     * @param a    第一个数组
+     * @param b    第二个数组
      * @param axes 指定参与运算的轴
      * @return 张量点积结果
      */
@@ -142,6 +147,7 @@ public class Linalg {
 
     /**
      * 计算克罗内克积，类似于 numpy.kron()
+     *
      * @param a 第一个矩阵（必须二维）
      * @param b 第二个矩阵（必须二维）
      * @return 克罗内克积结果
@@ -173,6 +179,7 @@ public class Linalg {
 
     /**
      * 奇异值分解 (SVD)，类似于 numpy.linalg.svd()
+     *
      * @param a 输入矩阵（必须二维）
      * @return SVDResult 包含 U、S、Vh 三个矩阵
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -207,37 +214,8 @@ public class Linalg {
     }
 
     /**
-     * SVD 分解结果类
-     */
-    public static class SVDResult {
-        /**
-         * 左奇异向量矩阵 U
-         */
-        public final Num U;
-        /**
-         * 奇异值向量 S
-         */
-        public final Num S;
-        /**
-         * 右奇异向量矩阵 Vh
-         */
-        public final Num Vh;
-
-        /**
-         * 构造 SVD 结果
-         * @param u 左奇异向量矩阵
-         * @param s 奇异值向量
-         * @param vh 右奇异向量矩阵
-         */
-        public SVDResult(Num u, Num s, Num vh) {
-            this.U = u;
-            this.S = s;
-            this.Vh = vh;
-        }
-    }
-
-    /**
      * QR 分解，类似于 numpy.linalg.qr()
+     *
      * @param a 输入矩阵（必须二维）
      * @return QRResult 包含 Q（正交矩阵）和 R（上三角矩阵）
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -267,31 +245,8 @@ public class Linalg {
     }
 
     /**
-     * QR 分解结果类
-     */
-    public static class QRResult {
-        /**
-         * 正交矩阵 Q
-         */
-        public final Num Q;
-        /**
-         * 上三角矩阵 R
-         */
-        public final Num R;
-
-        /**
-         * 构造 QR 结果
-         * @param q 正交矩阵
-         * @param r 上三角矩阵
-         */
-        public QRResult(Num q, Num r) {
-            this.Q = q;
-            this.R = r;
-        }
-    }
-
-    /**
      * Cholesky 分解，类似于 numpy.linalg.cholesky()
+     *
      * @param a 输入矩阵（必须二维且对称正定）
      * @return 下三角矩阵 L，满足 A = L * L^T
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -314,10 +269,9 @@ public class Linalg {
         return new Num(l);
     }
 
-    // ==================== 矩阵属性 ====================
-
     /**
      * 计算矩阵行列式，类似于 numpy.linalg.det()
+     *
      * @param a 输入矩阵（必须二维）
      * @return 行列式值
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -345,6 +299,7 @@ public class Linalg {
 
     /**
      * 计算矩阵秩，类似于 numpy.linalg.matrix_rank()
+     *
      * @param a 输入矩阵（必须二维）
      * @return 矩阵秩
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -357,8 +312,11 @@ public class Linalg {
         return Math.min(matrix.length, matrix[0].length);
     }
 
+    // ==================== 矩阵属性 ====================
+
     /**
      * 计算矩阵迹（对角线元素之和），类似于 numpy.trace()
+     *
      * @param a 输入矩阵（必须二维）
      * @return 矩阵迹
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -376,10 +334,9 @@ public class Linalg {
         return sum;
     }
 
-    // ==================== 矩阵求逆和解方程 ====================
-
     /**
      * 计算矩阵逆，类似于 numpy.linalg.inv()
+     *
      * @param a 输入矩阵（必须二维且方阵）
      * @return 逆矩阵
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -413,6 +370,7 @@ public class Linalg {
 
     /**
      * 计算摩尔-彭罗斯伪逆，类似于 numpy.linalg.pinv()
+     *
      * @param a 输入矩阵
      * @return 伪逆矩阵
      */
@@ -421,8 +379,11 @@ public class Linalg {
         return inv(a);
     }
 
+    // ==================== 矩阵求逆和解方程 ====================
+
     /**
      * 解线性方程组 Ax = b，类似于 numpy.linalg.solve()
+     *
      * @param a 系数矩阵 A
      * @param b 常数向量 b
      * @return 解向量 x
@@ -434,6 +395,7 @@ public class Linalg {
 
     /**
      * 计算最小二乘解，类似于 numpy.linalg.lstsq()
+     *
      * @param a 系数矩阵 A
      * @param b 常数向量 b
      * @return 最小二乘解向量
@@ -443,10 +405,9 @@ public class Linalg {
         return solve(a, b);
     }
 
-    // ==================== 范数 ====================
-
     /**
      * 计算向量或矩阵的 2-范数，类似于 numpy.linalg.norm()
+     *
      * @param x 输入向量或矩阵
      * @return 2-范数（欧几里得范数）
      */
@@ -456,7 +417,8 @@ public class Linalg {
 
     /**
      * 计算向量或矩阵的范数，类似于 numpy.linalg.norm()
-     * @param x 输入向量或矩阵
+     *
+     * @param x   输入向量或矩阵
      * @param ord 范数类型（1, 2, Integer.MAX_VALUE）
      * @return 指定类型的范数
      */
@@ -480,9 +442,12 @@ public class Linalg {
         return norm(x, 2);
     }
 
+    // ==================== 范数 ====================
+
     /**
      * 计算向量或矩阵的范数（字符串形式），类似于 numpy.linalg.norm()
-     * @param x 输入向量或矩阵
+     *
+     * @param x   输入向量或矩阵
      * @param ord 范数类型字符串（如 "fro" 表示 Frobenius 范数）
      * @return 指定类型的范数
      */
@@ -493,10 +458,9 @@ public class Linalg {
         return norm(x, Integer.parseInt(ord));
     }
 
-    // ==================== 特征值 ====================
-
     /**
      * 计算特征值和特征向量，类似于 numpy.linalg.eig()
+     *
      * @param a 输入矩阵（必须二维）
      * @return EigenResult 包含特征值 w 和特征向量 v
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -521,6 +485,7 @@ public class Linalg {
 
     /**
      * 仅计算特征值，类似于 numpy.linalg.eigvals()
+     *
      * @param a 输入矩阵（必须二维）
      * @return 特征值向量
      * @throws IllegalArgumentException 当输入不是二维数组时抛出
@@ -528,6 +493,79 @@ public class Linalg {
     public static Num eigvals(Num a) {
         return eig(a).w;
     }
+
+    // ==================== 特征值 ====================
+
+    private static Num apply2(Num x, Num y, java.util.function.DoubleBinaryOperator op) {
+        if (x.data() instanceof double[] && y.data() instanceof double[]) {
+            double[] a = (double[]) x.data();
+            double[] b = (double[]) y.data();
+            double[] result = new double[a.length];
+            for (int i = 0; i < a.length; i++) {
+                result[i] = op.applyAsDouble(a[i], b[i]);
+            }
+            return new Num(result);
+        }
+        throw new UnsupportedOperationException("Two-argument operations for this shape not yet implemented");
+    }
+
+    /**
+     * SVD 分解结果类
+     */
+    public static class SVDResult {
+        /**
+         * 左奇异向量矩阵 U
+         */
+        public final Num U;
+        /**
+         * 奇异值向量 S
+         */
+        public final Num S;
+        /**
+         * 右奇异向量矩阵 Vh
+         */
+        public final Num Vh;
+
+        /**
+         * 构造 SVD 结果
+         *
+         * @param u  左奇异向量矩阵
+         * @param s  奇异值向量
+         * @param vh 右奇异向量矩阵
+         */
+        public SVDResult(Num u, Num s, Num vh) {
+            this.U = u;
+            this.S = s;
+            this.Vh = vh;
+        }
+    }
+
+    /**
+     * QR 分解结果类
+     */
+    public static class QRResult {
+        /**
+         * 正交矩阵 Q
+         */
+        public final Num Q;
+        /**
+         * 上三角矩阵 R
+         */
+        public final Num R;
+
+        /**
+         * 构造 QR 结果
+         *
+         * @param q 正交矩阵
+         * @param r 上三角矩阵
+         */
+        public QRResult(Num q, Num r) {
+            this.Q = q;
+            this.R = r;
+        }
+    }
+
+    // ==================== 辅助方法 ====================
 
     /**
      * 特征值分解结果类
@@ -544,6 +582,7 @@ public class Linalg {
 
         /**
          * 构造特征值分解结果
+         *
          * @param w 特征值向量
          * @param v 特征向量矩阵
          */
@@ -551,20 +590,5 @@ public class Linalg {
             this.w = w;
             this.v = v;
         }
-    }
-
-    // ==================== 辅助方法 ====================
-
-    private static Num apply2(Num x, Num y, java.util.function.DoubleBinaryOperator op) {
-        if (x.data() instanceof double[] && y.data() instanceof double[]) {
-            double[] a = (double[]) x.data();
-            double[] b = (double[]) y.data();
-            double[] result = new double[a.length];
-            for (int i = 0; i < a.length; i++) {
-                result[i] = op.applyAsDouble(a[i], b[i]);
-            }
-            return new Num(result);
-        }
-        throw new UnsupportedOperationException("Two-argument operations for this shape not yet implemented");
     }
 }

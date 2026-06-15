@@ -2,7 +2,6 @@ package com.zifang.util.crawler.pipeline;
 
 import com.zifang.util.crawler.http.CrawlerHttpClient;
 import com.zifang.util.crawler.parse.HtmlParser;
-import com.zifang.util.crawler.parse.JsonExtractor;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -32,6 +31,7 @@ public class CrawlerPipeline {
 
     /**
      * 构造 CrawlerPipeline，使用指定的 HTTP 客户端。
+     *
      * @param httpClient HTTP 客户端
      */
     public CrawlerPipeline(CrawlerHttpClient httpClient) {
@@ -40,6 +40,7 @@ public class CrawlerPipeline {
 
     /**
      * 添加处理器到管道。
+     *
      * @param p 处理器实例
      */
     public void addProcessor(Processor p) {
@@ -113,104 +114,26 @@ public class CrawlerPipeline {
         private String contentType;
         private java.util.Map<String, String> headers;
 
-    /**
-     * getUrl方法。
-     * @return String类型返回值
-     */
-        public String getUrl() {
-            return url;
-        }
-
-    /**
-     * setUrl方法。
-     *      * @param url String类型参数
-     */
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-    /**
-     * getMethod方法。
-     * @return String类型返回值
-     */
-        public String getMethod() {
-            return method;
-        }
-
-    /**
-     * setMethod方法。
-     *      * @param method String类型参数
-     */
-        public void setMethod(String method) {
-            this.method = method;
-        }
-
-    /**
-     * getBody方法。
-     * @return String类型返回值
-     */
-        public String getBody() {
-            return body;
-        }
-
-    /**
-     * setBody方法。
-     *      * @param body String类型参数
-     */
-        public void setBody(String body) {
-            this.body = body;
-        }
-
-    /**
-     * getContentType方法。
-     * @return String类型返回值
-     */
-        public String getContentType() {
-            return contentType;
-        }
-
-    /**
-     * setContentType方法。
-     *      * @param contentType String类型参数
-     */
-        public void setContentType(String contentType) {
-            this.contentType = contentType;
-        }
-
-    /**
-     * getHeaders方法。
-     * @return java.util.Map<String, String>类型返回值
-     */
-        public java.util.Map<String, String> getHeaders() {
-            return headers;
-        }
-
-    /**
-     * setHeaders方法。
-     *      * @param headers java.util.MapString,类型参数
-     */
-        public void setHeaders(java.util.Map<String, String> headers) {
-            this.headers = headers;
-        }
-
-    /**
-     * get方法。
-     *      * @param url String类型参数
-     * @return static Request类型返回值
-     */
+        /**
+         * get方法。
+         * * @param url String类型参数
+         *
+         * @return static Request类型返回值
+         */
         public static Request get(String url) {
             Request req = new Request();
             req.setUrl(url);
             return req;
         }
 
-    /**
-     * post方法。
-     *      * @param url String类型参数
-     * @param body String类型参数
-     * @param contentType String类型参数
-     * @return static Request类型返回值
-     */
+        /**
+         * post方法。
+         * * @param url String类型参数
+         *
+         * @param body        String类型参数
+         * @param contentType String类型参数
+         * @return static Request类型返回值
+         */
         public static Request post(String url, String body, String contentType) {
             Request req = new Request();
             req.setUrl(url);
@@ -218,6 +141,91 @@ public class CrawlerPipeline {
             req.setBody(body);
             req.setContentType(contentType);
             return req;
+        }
+
+        /**
+         * getUrl方法。
+         *
+         * @return String类型返回值
+         */
+        public String getUrl() {
+            return url;
+        }
+
+        /**
+         * setUrl方法。
+         * * @param url String类型参数
+         */
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        /**
+         * getMethod方法。
+         *
+         * @return String类型返回值
+         */
+        public String getMethod() {
+            return method;
+        }
+
+        /**
+         * setMethod方法。
+         * * @param method String类型参数
+         */
+        public void setMethod(String method) {
+            this.method = method;
+        }
+
+        /**
+         * getBody方法。
+         *
+         * @return String类型返回值
+         */
+        public String getBody() {
+            return body;
+        }
+
+        /**
+         * setBody方法。
+         * * @param body String类型参数
+         */
+        public void setBody(String body) {
+            this.body = body;
+        }
+
+        /**
+         * getContentType方法。
+         *
+         * @return String类型返回值
+         */
+        public String getContentType() {
+            return contentType;
+        }
+
+        /**
+         * setContentType方法。
+         * * @param contentType String类型参数
+         */
+        public void setContentType(String contentType) {
+            this.contentType = contentType;
+        }
+
+        /**
+         * getHeaders方法。
+         *
+         * @return java.util.Map<String, String>类型返回值
+         */
+        public java.util.Map<String, String> getHeaders() {
+            return headers;
+        }
+
+        /**
+         * setHeaders方法。
+         * * @param headers java.util.MapString,类型参数
+         */
+        public void setHeaders(java.util.Map<String, String> headers) {
+            this.headers = headers;
         }
     }
 }

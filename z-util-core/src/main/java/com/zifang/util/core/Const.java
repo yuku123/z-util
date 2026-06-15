@@ -7,11 +7,79 @@ import java.util.List;
  */
 public class Const {
 
+    /**
+     * 空字符串
+     */
+    public static final String STR_EMPTY = "";
+    /**
+     * 未登陆
+     */
+    public final static String SYS_NOLOGIN = "Nologin";
+    /**
+     * 成功
+     */
+    public final static String SYS_SUCCESS = "Success";
+    /**
+     * 失败
+     */
+    public final static String SYS_ERROR = "Error";
+    /**
+     * 异常
+     */
+    public final static String SYS_EXCEPTION = "Exception";
+    /**
+     * 无记录
+     */
+    public final static String SYS_NORECORD = "NoRecord";
+    /**
+     * 业务访问
+     */
+    public final static String BUSINESS_ACCESS = "ACCESS";
+    /**
+     * 业务插入
+     */
+    public final static String BUSINESS_INSERT = "INSERT";
+    /**
+     * 业务更新
+     */
+    public final static String BUSINESS_UPDATE = "UPDATE";
+    /**
+     * 业务删除
+     */
+    public final static String BUSINESS_DELETE = "DELETE";
+    /**
+     * 业务文件上传
+     */
+    public final static String BUSINESS_UPLOAD = "UPLOAD";
+    public static final String HEX_CHAR_STR = "0123456789ABCDEF";
+    byte BYTE_FALSE = (byte) 0;
+    byte BYTE_TRUE = (byte) 1;
+    byte FALSE = 0;
+    byte TRUE = 1;
+    /**
+     * script template suffix
+     * 脚本模板后缀
+     */
+    String SCRIPT_TEMPLATE_SUFFIX = ".template";
+    /**
+     * calculate method name
+     * 校验脚本方法名
+     */
+    String CALCULATE_METHOD_NAME = "calculate";
+    String FUNCTION_PARAM = "$0";
+    String SIMPLE_FUNCTION_PARAM = "$";
+    String INVOCABLE_KEY_FORMAT = "%s:%s:%s";
+    String ZERO = "0";
+    String ONE = "1";
+    String EMPTY = "";
+    String[] EMPTY_ARRAY = new String[0];
+    String DEFAULT = "default";
+    String LINE_BREAK = "\n";
     interface EnumCollectors<T> {
         List<T> getList();
     }
 
-    public static class Symbol{
+    public static class Symbol {
         public static String AND = "&";
         public static String EQUALS = "=";
         public static String SPOT = ".";
@@ -42,11 +110,12 @@ public class Const {
         public static String CURLY_BRACE = "{}";
         public static String AT = "@";
         public static String DOLLAR = "$";
-    /**
-     * "方法。
-     *      * @param " ";类型参数
-     * @return static String LEFT_BRACKET =类型返回值
-     */
+        /**
+         * "方法。
+         * * @param " ";类型参数
+         *
+         * @return static String LEFT_BRACKET =类型返回值
+         */
         public static String LEFT_BRACKET = "(";
         public static String RIGHT_BRACKET = ")";
     }
@@ -65,37 +134,41 @@ public class Const {
         OperateSystem UnKnown = new OperateSystem("UnKnown", "unKnown");
         OperateSystem LOCAL_OPERATE_SYSTEM = getOperateSystem(System.getProperty("os.name"));
 
-    /**
-     * OperateSystem方法。
-     *      * @param system String类型参数
-     * @param lowerSystem String类型参数
-     */
+        /**
+         * OperateSystem方法。
+         * * @param system String类型参数
+         *
+         * @param lowerSystem String类型参数
+         */
         public OperateSystem(String system, String lowerSystem) {
             this.system = system;
             this.lowerSystem = lowerSystem;
         }
 
-    /**
-     * getSystem方法。
-     * @return String类型返回值
-     */
+        /**
+         * getSystem方法。
+         *
+         * @return String类型返回值
+         */
         public String getSystem() {
             return system;
         }
 
-    /**
-     * getLowerSystem方法。
-     * @return String类型返回值
-     */
+        /**
+         * getLowerSystem方法。
+         *
+         * @return String类型返回值
+         */
         public String getLowerSystem() {
             return lowerSystem;
         }
 
-    /**
-     * getOperateSystem方法。
-     *      * @param info String类型参数
-     * @return OperateSystem类型返回值
-     */
+        /**
+         * getOperateSystem方法。
+         * * @param info String类型参数
+         *
+         * @return OperateSystem类型返回值
+         */
         public OperateSystem getOperateSystem(String info) {
             return getList().stream()
                     .filter(system -> info.toLowerCase().contains(system.getLowerSystem()))
@@ -104,20 +177,20 @@ public class Const {
         }
 
         @Override
-    /**
-     * getList方法。
-     * @return List<OperateSystem>类型返回值
-     */
+        /**
+         * getList方法。
+         * @return List<OperateSystem>类型返回值
+         */
         public List<OperateSystem> getList() {
             return null;
         }
 
         @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * equals方法。
+         *      * @param o Object类型参数
+         * @return boolean类型返回值
+         */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -127,76 +200,68 @@ public class Const {
         }
 
         @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
+        /**
+         * hashCode方法。
+         * @return int类型返回值
+         */
         public int hashCode() {
             return java.util.Objects.hash(system, lowerSystem);
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "OperateSystem{system=" + system + ", lowerSystem=" + lowerSystem + "}";
         }
     }
 
-/**
- * TimeFormat类。
- */
-    public class TimeFormat{
-        public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-        public static final String DATE_FORMAT = "yyyy-MM-dd";
-        public static final String TIME_FORMAT = "HH:mm:ss";
-    }
-
-    byte BYTE_FALSE = (byte) 0;
-    byte BYTE_TRUE = (byte) 1;
-    byte FALSE = 0;
-    byte TRUE = 1;
-
-    public static class Statics{
-        /** Unicode 基本汉字编码范围0x4e00~0x9fa5 共 20902个 */
+    public static class Statics {
+        /**
+         * Unicode 基本汉字编码范围0x4e00~0x9fa5 共 20902个
+         */
         int CHINESE_CHARACTER_LENGTH = 20902;
-        /** 汉字起始值 */
+        /**
+         * 汉字起始值
+         */
         int CHINESE_CHARACTER_START = 0x4e00;
 
-    /**
-     * getChineseCharacterLength方法。
-     * @return int类型返回值
-     */
+        /**
+         * getChineseCharacterLength方法。
+         *
+         * @return int类型返回值
+         */
         public int getChineseCharacterLength() {
             return CHINESE_CHARACTER_LENGTH;
         }
 
-    /**
-     * getChineseCharacterStart方法。
-     * @return int类型返回值
-     */
+        /**
+         * getChineseCharacterStart方法。
+         *
+         * @return int类型返回值
+         */
         public int getChineseCharacterStart() {
             return CHINESE_CHARACTER_START;
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "Statics{CHINESE_CHARACTER_LENGTH=" + CHINESE_CHARACTER_LENGTH +
                     ", CHINESE_CHARACTER_START=" + CHINESE_CHARACTER_START + "}";
         }
 
         @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * equals方法。
+         *      * @param o Object类型参数
+         * @return boolean类型返回值
+         */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -206,16 +271,16 @@ public class Const {
         }
 
         @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
+        /**
+         * hashCode方法。
+         * @return int类型返回值
+         */
         public int hashCode() {
             return java.util.Objects.hash(CHINESE_CHARACTER_LENGTH, CHINESE_CHARACTER_START);
         }
     }
 
-    public static class Charset{
+    public static class Charset {
         public static final String US_ASCII = "US-ASCII";
         public static final String ISO_8859_1 = "ISO-8859-1";
         public static final String UTF_8 = "UTF-8";
@@ -225,17 +290,17 @@ public class Const {
         public static final String GBK = "GBK";
         public static final String GB2312 = "GB2312";
 
-    /**
-     * Charset方法。
-     */
+        /**
+         * Charset方法。
+         */
         public Charset() {
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "Charset{US_ASCII=" + US_ASCII + ", ISO_8859_1=" + ISO_8859_1 +
                     ", UTF_8=" + UTF_8 + ", UTF_16BE=" + UTF_16BE + ", UTF_16LE=" + UTF_16LE +
@@ -243,11 +308,11 @@ public class Const {
         }
 
         @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * equals方法。
+         *      * @param o Object类型参数
+         * @return boolean类型返回值
+         */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -256,16 +321,16 @@ public class Const {
         }
 
         @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
+        /**
+         * hashCode方法。
+         * @return int类型返回值
+         */
         public int hashCode() {
             return 0;
         }
     }
 
-    public static class JvmProperties{
+    public static class JvmProperties {
         public static final String JVM_VERSION = "java.version";
         public static final String JVM_ENCODING = "file.encoding";
         public static final String JVM_TEMPDIR = "java.io.tmpdir";
@@ -321,17 +386,17 @@ public class Const {
          */
         public static final String SYS_LINE_SEPARATOR = "line.separator";
 
-    /**
-     * JvmProperties方法。
-     */
+        /**
+         * JvmProperties方法。
+         */
         public JvmProperties() {
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "JvmProperties{JVM_VERSION=" + JVM_VERSION + ", JVM_ENCODING=" + JVM_ENCODING +
                     ", JVM_TEMPDIR=" + JVM_TEMPDIR + ", HTTP_PROXY_HOST=" + HTTP_PROXY_HOST +
@@ -343,11 +408,11 @@ public class Const {
         }
 
         @Override
-    /**
-     * equals方法。
-     *      * @param o Object类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * equals方法。
+         *      * @param o Object类型参数
+         * @return boolean类型返回值
+         */
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
@@ -356,85 +421,21 @@ public class Const {
         }
 
         @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
+        /**
+         * hashCode方法。
+         * @return int类型返回值
+         */
         public int hashCode() {
             return 0;
         }
     }
 
     /**
-     * script template suffix
-     * 脚本模板后缀
+     * TimeFormat类。
      */
-    String SCRIPT_TEMPLATE_SUFFIX = ".template";
-
-    /**
-     * calculate method name
-     * 校验脚本方法名
-     */
-    String CALCULATE_METHOD_NAME = "calculate";
-    String FUNCTION_PARAM = "$0";
-    String SIMPLE_FUNCTION_PARAM = "$";
-    String INVOCABLE_KEY_FORMAT = "%s:%s:%s";
-
-
-    String ZERO = "0";
-    String ONE = "1";
-    String EMPTY = "";
-    String[] EMPTY_ARRAY = new String[0];
-    String DEFAULT = "default";
-    String LINE_BREAK = "\n";
-
-    /**
-     * 空字符串
-     */
-    public static final String STR_EMPTY = "";
-
-    /**
-     * 未登陆
-     */
-    public final static String SYS_NOLOGIN = "Nologin";
-    /**
-     * 成功
-     */
-    public final static String SYS_SUCCESS = "Success";
-    /**
-     * 失败
-     */
-    public final static String SYS_ERROR = "Error";
-    /**
-     * 异常
-     */
-    public final static String SYS_EXCEPTION = "Exception";
-    /**
-     * 无记录
-     */
-    public final static String SYS_NORECORD = "NoRecord";
-    /**
-     * 业务访问
-     */
-    public final static String BUSINESS_ACCESS = "ACCESS";
-    /**
-     * 业务插入
-     */
-    public final static String BUSINESS_INSERT = "INSERT";
-
-    /**
-     * 业务更新
-     */
-    public final static String BUSINESS_UPDATE = "UPDATE";
-    /**
-     * 业务删除
-     */
-    public final static String BUSINESS_DELETE = "DELETE";
-    /**
-     * 业务文件上传
-     */
-    public final static String BUSINESS_UPLOAD = "UPLOAD";
-
-
-    public static final String HEX_CHAR_STR = "0123456789ABCDEF";
+    public class TimeFormat {
+        public static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+        public static final String DATE_FORMAT = "yyyy-MM-dd";
+        public static final String TIME_FORMAT = "HH:mm:ss";
+    }
 }

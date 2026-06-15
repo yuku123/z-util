@@ -54,6 +54,21 @@ public class AlgoVisualizer {
     }
 
     /**
+     * 主方法，程序入口
+     * 创建宽度800、高度800的可视化窗口，包含10个随机运动的圆形
+     *
+     * @param args 命令行参数（未使用）
+     */
+    public static void main(String[] args) {
+
+        int sceneWidth = 800;
+        int sceneHeight = 800;
+        int N = 10;
+
+        AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight, N);
+    }
+
+    /**
      * 动画循环
      * 持续更新圆形位置并渲染画面
      */
@@ -82,10 +97,10 @@ public class AlgoVisualizer {
          * @param event 键盘事件对象
          */
         @Override
-    /**
-     * keyReleased方法。
-     *      * @param event KeyEvent类型参数
-     */
+        /**
+         * keyReleased方法。
+         *      * @param event KeyEvent类型参数
+         */
         public void keyReleased(KeyEvent event) {
             if (event.getKeyChar() == ' ')
                 isAnimated = !isAnimated;
@@ -105,10 +120,10 @@ public class AlgoVisualizer {
          * @param event 鼠标事件对象，包含点击位置信息
          */
         @Override
-    /**
-     * mouseReleased方法。
-     *      * @param event MouseEvent类型参数
-     */
+        /**
+         * mouseReleased方法。
+         *      * @param event MouseEvent类型参数
+         */
         public void mouseReleased(MouseEvent event) {
 
             event.translatePoint(
@@ -121,20 +136,5 @@ public class AlgoVisualizer {
                 if (circle.contain(event.getPoint()))
                     circle.isFilled = !circle.isFilled;
         }
-    }
-
-    /**
-     * 主方法，程序入口
-     * 创建宽度800、高度800的可视化窗口，包含10个随机运动的圆形
-     *
-     * @param args 命令行参数（未使用）
-     */
-    public static void main(String[] args) {
-
-        int sceneWidth = 800;
-        int sceneHeight = 800;
-        int N = 10;
-
-        AlgoVisualizer visualizer = new AlgoVisualizer(sceneWidth, sceneHeight, N);
     }
 }

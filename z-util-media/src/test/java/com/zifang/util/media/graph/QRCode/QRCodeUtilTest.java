@@ -1,8 +1,11 @@
 package com.zifang.util.media.graph.qrcode;
 
 import org.junit.Test;
+
 import java.io.ByteArrayOutputStream;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * QRCodeUtilTest类。

@@ -6,9 +6,9 @@ import java.util.Arrays;
  * N-dimensional array implementation
  */
 public class NdArray {
-    private Object data;
     private final DType dtype;
     private final Shape shape;
+    private Object data;
 
     private NdArray(Object data, DType dtype, Shape shape) {
         this.data = data;
@@ -18,7 +18,8 @@ public class NdArray {
 
     /**
      * create方法。
-     *      * @param data Object类型参数
+     * * @param data Object类型参数
+     *
      * @param dtype DType类型参数
      * @param shape Shape类型参数
      * @return static NdArray类型返回值
@@ -29,7 +30,8 @@ public class NdArray {
 
     /**
      * zeros方法。
-     *      * @param shape Shape类型参数
+     * * @param shape Shape类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -41,7 +43,8 @@ public class NdArray {
 
     /**
      * ones方法。
-     *      * @param shape Shape类型参数
+     * * @param shape Shape类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -53,9 +56,10 @@ public class NdArray {
 
     /**
      * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @param step int类型参数
+     * * @param start int类型参数
+     *
+     * @param stop  int类型参数
+     * @param step  int类型参数
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -70,8 +74,9 @@ public class NdArray {
 
     /**
      * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
+     * * @param start int类型参数
+     *
+     * @param stop  int类型参数
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -81,7 +86,8 @@ public class NdArray {
 
     /**
      * arange方法。
-     *      * @param stop int类型参数
+     * * @param stop int类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -91,7 +97,8 @@ public class NdArray {
 
     /**
      * array方法。
-     *      * @param data Object类型参数
+     * * @param data Object类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -133,6 +140,7 @@ public class NdArray {
 
     /**
      * getData方法。
+     *
      * @return Object类型返回值
      */
     public Object getData() {
@@ -141,6 +149,7 @@ public class NdArray {
 
     /**
      * getDtype方法。
+     *
      * @return DType类型返回值
      */
     public DType getDtype() {
@@ -149,6 +158,7 @@ public class NdArray {
 
     /**
      * getShape方法。
+     *
      * @return Shape类型返回值
      */
     public Shape getShape() {
@@ -157,6 +167,7 @@ public class NdArray {
 
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {
@@ -165,6 +176,7 @@ public class NdArray {
 
     /**
      * ndim方法。
+     *
      * @return int类型返回值
      */
     public int ndim() {
@@ -173,7 +185,8 @@ public class NdArray {
 
     /**
      * get方法。
-     *      * @param indices int...类型参数
+     * * @param indices int...类型参数
+     *
      * @return Object类型返回值
      */
     public Object get(int... indices) {
@@ -186,7 +199,8 @@ public class NdArray {
 
     /**
      * set方法。
-     *      * @param value Object类型参数
+     * * @param value Object类型参数
+     *
      * @param indices int...类型参数
      */
     public void set(Object value, int... indices) {
@@ -209,7 +223,8 @@ public class NdArray {
 
     /**
      * reshape方法。
-     *      * @param newShape int...类型参数
+     * * @param newShape int...类型参数
+     *
      * @return NdArray类型返回值
      */
     public NdArray reshape(int... newShape) {
@@ -226,6 +241,7 @@ public class NdArray {
 
     /**
      * transpose方法。
+     *
      * @return NdArray类型返回值
      */
     public NdArray transpose() {
@@ -242,7 +258,8 @@ public class NdArray {
 
     /**
      * transpose方法。
-     *      * @param axes int...类型参数
+     * * @param axes int...类型参数
+     *
      * @return NdArray类型返回值
      */
     public NdArray transpose(int... axes) {
@@ -259,7 +276,8 @@ public class NdArray {
 
     /**
      * slice方法。
-     *      * @param slices Slice...类型参数
+     * * @param slices Slice...类型参数
+     *
      * @return NdArray类型返回值
      */
     public NdArray slice(Slice... slices) {
@@ -310,6 +328,7 @@ public class NdArray {
 
     /**
      * copy方法。
+     *
      * @return NdArray类型返回值
      */
     public NdArray copy() {
@@ -319,7 +338,8 @@ public class NdArray {
 
     /**
      * fill方法。
-     *      * @param value Object类型参数
+     * * @param value Object类型参数
+     *
      * @return NdArray类型返回值
      */
     public NdArray fill(Object value) {

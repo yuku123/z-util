@@ -4,9 +4,6 @@ import com.zifang.util.pandas.DataFrame;
 import com.zifang.util.pandas.Series;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -26,10 +23,12 @@ public class CSVWriter {
     /**
      * CSVWriter方法。
      */
-    public CSVWriter() {}
+    public CSVWriter() {
+    }
 
     /**
      * builder方法。
+     *
      * @return static CSVWriter类型返回值
      */
     public static CSVWriter builder() {
@@ -37,8 +36,32 @@ public class CSVWriter {
     }
 
     /**
+     * 将 DataFrame 写入 CSV 字符串
+     */
+    public static String toCSVString(DataFrame df) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            CSVWriter writer = new CSVWriter();
+            writer.write(df, new OutputStream() {
+                @Override
+                /**
+                 * write方法。
+                 *      * @param b int类型参数
+                 */
+                public void write(int b) {
+                    sb.append((char) b);
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException("Error converting DataFrame to CSV", e);
+        }
+        return sb.toString();
+    }
+
+    /**
      * delimiter方法。
-     *      * @param delimiter char类型参数
+     * * @param delimiter char类型参数
+     *
      * @return CSVWriter类型返回值
      */
     public CSVWriter delimiter(char delimiter) {
@@ -48,7 +71,8 @@ public class CSVWriter {
 
     /**
      * quoteChar方法。
-     *      * @param quoteChar char类型参数
+     * * @param quoteChar char类型参数
+     *
      * @return CSVWriter类型返回值
      */
     public CSVWriter quoteChar(char quoteChar) {
@@ -58,7 +82,8 @@ public class CSVWriter {
 
     /**
      * includeHeader方法。
-     *      * @param includeHeader boolean类型参数
+     * * @param includeHeader boolean类型参数
+     *
      * @return CSVWriter类型返回值
      */
     public CSVWriter includeHeader(boolean includeHeader) {
@@ -68,7 +93,8 @@ public class CSVWriter {
 
     /**
      * includeIndex方法。
-     *      * @param includeIndex boolean类型参数
+     * * @param includeIndex boolean类型参数
+     *
      * @return CSVWriter类型返回值
      */
     public CSVWriter includeIndex(boolean includeIndex) {
@@ -78,7 +104,8 @@ public class CSVWriter {
 
     /**
      * encoding方法。
-     *      * @param encoding String类型参数
+     * * @param encoding String类型参数
+     *
      * @return CSVWriter类型返回值
      */
     public CSVWriter encoding(String encoding) {
@@ -88,7 +115,8 @@ public class CSVWriter {
 
     /**
      * lineEnding方法。
-     *      * @param lineEnding String类型参数
+     * * @param lineEnding String类型参数
+     *
      * @return CSVWriter类型返回值
      */
     public CSVWriter lineEnding(String lineEnding) {
@@ -98,7 +126,8 @@ public class CSVWriter {
 
     /**
      * quoteAll方法。
-     *      * @param quoteAll boolean类型参数
+     * * @param quoteAll boolean类型参数
+     *
      * @return CSVWriter类型返回值
      */
     public CSVWriter quoteAll(boolean quoteAll) {
@@ -108,7 +137,8 @@ public class CSVWriter {
 
     /**
      * escapeSpecialChars方法。
-     *      * @param escapeSpecialChars boolean类型参数
+     * * @param escapeSpecialChars boolean类型参数
+     *
      * @return CSVWriter类型返回值
      */
     public CSVWriter escapeSpecialChars(boolean escapeSpecialChars) {
@@ -264,28 +294,5 @@ public class CSVWriter {
         }
 
         return field;
-    }
-
-    /**
-     * 将 DataFrame 写入 CSV 字符串
-     */
-    public static String toCSVString(DataFrame df) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            CSVWriter writer = new CSVWriter();
-            writer.write(df, new OutputStream() {
-                @Override
-    /**
-     * write方法。
-     *      * @param b int类型参数
-     */
-                public void write(int b) {
-                    sb.append((char) b);
-                }
-            });
-        } catch (IOException e) {
-            throw new RuntimeException("Error converting DataFrame to CSV", e);
-        }
-        return sb.toString();
     }
 }

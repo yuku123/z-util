@@ -18,7 +18,9 @@ public class LifecycleManager {
         this.instantiator = instantiator;
     }
 
-    /** 收集所有已初始化单例，按注册顺序（不含配置类本身） */
+    /**
+     * 收集所有已初始化单例，按注册顺序（不含配置类本身）
+     */
     public List<Object> getInitializedSingletons(List<BeanDefinition> all) {
         List<Object> singletons = new ArrayList<>();
         for (BeanDefinition bd : all) {
@@ -29,7 +31,9 @@ public class LifecycleManager {
         return singletons;
     }
 
-    /** 触发所有 PreDestroy（倒序） */
+    /**
+     * 触发所有 PreDestroy（倒序）
+     */
     public void destroySingletons(List<Object> singletons) {
         // 逆序销毁，与 Spring beanFactory.destroySingleton() 行为一致
         for (int i = singletons.size() - 1; i >= 0; i--) {

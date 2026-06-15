@@ -36,8 +36,8 @@ public class StringSimilarity {
     /**
      * 计算两个字符串的相似度（基于 Levenshtein 编辑距离）
      *
-     * @param strA   字符串A
-     * @param strB   字符串B
+     * @param strA 字符串A
+     * @param strB 字符串B
      * @return 相似度比例 [0, 1]，1 表示完全相同
      */
     public static double levenshteinSimilarity(String strA, String strB) {

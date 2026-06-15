@@ -15,5 +15,6 @@ public class StrongReferenceDemo {
      *
      * @param args 命令行参数
      */
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+    }
 }

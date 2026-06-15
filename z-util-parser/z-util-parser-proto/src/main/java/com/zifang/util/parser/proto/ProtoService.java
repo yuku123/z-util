@@ -9,6 +9,7 @@ import java.util.Objects;
  *
  * @author zifang
  */
+
 /**
  * ProtoService类。
  */
@@ -19,7 +20,7 @@ public class ProtoService {
 
     /**
      * ProtoService方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public ProtoService(String name) {
         this.name = name;
@@ -28,6 +29,7 @@ public class ProtoService {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -36,6 +38,7 @@ public class ProtoService {
 
     /**
      * getRpcs方法。
+     *
      * @return List<ProtoRpc>类型返回值
      */
     public List<ProtoRpc> getRpcs() {
@@ -44,7 +47,7 @@ public class ProtoService {
 
     /**
      * addRpc方法。
-     *      * @param rpc ProtoRpc类型参数
+     * * @param rpc ProtoRpc类型参数
      */
     public void addRpc(ProtoRpc rpc) {
         rpcs.add(rpc);

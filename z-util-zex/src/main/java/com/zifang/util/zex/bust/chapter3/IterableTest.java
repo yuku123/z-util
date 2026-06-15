@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter3;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -24,10 +25,10 @@ public class IterableTest {
     /**
      * test001方法。
      */
-    public void test001(){
-        Collection<String> c = Arrays.asList("1","2","3");
-        Iterator<String> iterator =  c.iterator();
-        while (iterator.hasNext()){
+    public void test001() {
+        Collection<String> c = Arrays.asList("1", "2", "3");
+        Iterator<String> iterator = c.iterator();
+        while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
     }
@@ -36,9 +37,9 @@ public class IterableTest {
     /**
      * test002方法。
      */
-    public void test002(){
-        Collection<String> c = Arrays.asList("1","2","3");
-        for(String s : c){
+    public void test002() {
+        Collection<String> c = Arrays.asList("1", "2", "3");
+        for (String s : c) {
             System.out.println(s);
         }
     }

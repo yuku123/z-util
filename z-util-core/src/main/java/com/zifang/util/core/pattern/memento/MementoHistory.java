@@ -28,7 +28,7 @@ public class MementoHistory<T> {
 
     /**
      * MementoHistory方法。
-     *      * @param originator OriginatorT类型参数
+     * * @param originator OriginatorT类型参数
      */
     public MementoHistory(Originator<T> originator) {
         this.originator = originator;
@@ -37,7 +37,8 @@ public class MementoHistory<T> {
 
     /**
      * MementoHistory方法。
-     *      * @param originator OriginatorT类型参数
+     * * @param originator OriginatorT类型参数
+     *
      * @param maxHistorySize int类型参数
      */
     public MementoHistory(Originator<T> originator, int maxHistorySize) {
@@ -221,7 +222,8 @@ public class MementoHistory<T> {
         for (HistoryListener<T> listener : listeners) {
             try {
                 listener.onEvent(event, fromState, toState);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
     }
 

@@ -16,16 +16,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.Assert.*;
 
 /**
  * HttpExecutor 单元测试
- *
+ * <p>
  * 覆盖：
  * 1. executeByMethodUrl  - 4 种 HTTP 方法（GET/POST/PUT/DELETE）
  * 2. execute(definition)  - 直接拿 HttpRequestDefinition 跑
@@ -34,14 +31,14 @@ import static org.junit.Assert.*;
  * 5. sendAsync            - 异步执行
  * 6. HttpExecutionResult  - 结果 POJO 字段完整性
  * 7. 错误处理             - 5xx / 异常 URL
- *
+ * <p>
  * 不依赖任何外部网络 — 用 com.sun.net.httpserver.HttpServer 起本地端口。
  */
 public class HttpExecutorTest {
 
+    private static final HttpExecutor executor = HttpExecutor.getDefault();
     private static HttpServer server;
     private static int port;
-    private static final HttpExecutor executor = HttpExecutor.getDefault();
 
     @BeforeClass
     public static void startServer() throws Exception {
@@ -83,7 +80,10 @@ public class HttpExecutorTest {
 
         // /slow — 用于异步测试
         server.createContext("/slow", ex -> {
-            try { Thread.sleep(50); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ignored) {
+            }
             byte[] resp = "{\"slow\":\"done\"}".getBytes(StandardCharsets.UTF_8);
             ex.sendResponseHeaders(200, resp.length);
             ex.getResponseBody().write(resp);
@@ -107,7 +107,10 @@ public class HttpExecutorTest {
             os.flush();
             os.write("data: hello-2\n\n".getBytes(StandardCharsets.UTF_8));
             os.flush();
-            try { Thread.sleep(50); } catch (InterruptedException ignored) {}
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ignored) {
+            }
             ex.close();
         });
 
@@ -120,7 +123,9 @@ public class HttpExecutorTest {
         if (server != null) server.stop(0);
     }
 
-    private String base() { return "http://127.0.0.1:" + port; }
+    private String base() {
+        return "http://127.0.0.1:" + port;
+    }
 
     // ===================== 1. executeByMethodUrl =====================
 

@@ -30,7 +30,7 @@ public abstract class AbstractConstantPool {
 
     /**
      * AbstractConstantPool方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public AbstractConstantPool(byte tag) {
         this.tag = tag;
@@ -38,13 +38,15 @@ public abstract class AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
+     *
      * @return abstract void类型返回值
      */
     public abstract void read(InputStream inputStream);
 
     /**
      * getTag方法。
+     *
      * @return byte类型返回值
      */
     public byte getTag() {
@@ -53,7 +55,7 @@ public abstract class AbstractConstantPool {
 
     /**
      * setTag方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public void setTag(byte tag) {
         this.tag = tag;

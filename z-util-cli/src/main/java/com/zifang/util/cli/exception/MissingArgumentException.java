@@ -12,7 +12,7 @@ public class MissingArgumentException extends ParseException {
 
     /**
      * MissingArgumentException方法。
-     *      * @param option final类型参数
+     * * @param option final类型参数
      */
     public MissingArgumentException(final Option option) {
         super("Missing argument for option: " + (option != null ? option.getKey() : "null"));
@@ -21,7 +21,7 @@ public class MissingArgumentException extends ParseException {
 
     /**
      * MissingArgumentException方法。
-     *      * @param message final类型参数
+     * * @param message final类型参数
      */
     public MissingArgumentException(final String message) {
         super(message);
@@ -30,6 +30,7 @@ public class MissingArgumentException extends ParseException {
 
     /**
      * getOption方法。
+     *
      * @return Option类型返回值
      */
     public Option getOption() {

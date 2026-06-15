@@ -1,6 +1,8 @@
 package com.zifang.util.visuallization;
 
-import com.zifang.util.visuallization.swing.manager.tree.*;
+import com.zifang.util.visuallization.swing.manager.tree.RegisterTreeNode;
+import com.zifang.util.visuallization.swing.manager.tree.RegisterTreeNodeHelper;
+import com.zifang.util.visuallization.swing.manager.tree.TreeNode;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -114,7 +116,7 @@ class TreeTest {
     void testRegisterTreeNodeChaining() {
         RegisterTreeNode register = new RegisterTreeNode();
         register.register(new TreeNode("1", "Node1", null))
-               .register(new TreeNode("2", "Node2", "1"));
+                .register(new TreeNode("2", "Node2", "1"));
         assertEquals(2, register.getTreeNodes().size());
     }
 
@@ -154,9 +156,9 @@ class TreeTest {
     void testRegisterTreeNodeHelperSolve() {
         RegisterTreeNode register = new RegisterTreeNode();
         register.register(new TreeNode("root", "Root", null))
-               .register(new TreeNode("1", "Child1", "root"))
-               .register(new TreeNode("2", "Child2", "root"));
-        
+                .register(new TreeNode("1", "Child1", "root"))
+                .register(new TreeNode("2", "Child2", "root"));
+
         javax.swing.tree.DefaultMutableTreeNode result = RegisterTreeNodeHelper.solve(register);
         assertNotNull(result);
         assertEquals(2, result.getChildCount());
@@ -166,9 +168,9 @@ class TreeTest {
     void testRegisterTreeNodeHelperSolveWithGrandchildren() {
         RegisterTreeNode register = new RegisterTreeNode();
         register.register(new TreeNode("root", "Root", null))
-               .register(new TreeNode("1", "Child1", "root"))
-               .register(new TreeNode("1-1", "Grandchild1", "1"));
-        
+                .register(new TreeNode("1", "Child1", "root"))
+                .register(new TreeNode("1-1", "Grandchild1", "1"));
+
         javax.swing.tree.DefaultMutableTreeNode result = RegisterTreeNodeHelper.solve(register);
         assertNotNull(result);
         assertEquals(1, result.getChildCount());
@@ -180,8 +182,8 @@ class TreeTest {
     void testRegisterTreeNodeHelperSolveMultipleRoots() {
         RegisterTreeNode register = new RegisterTreeNode();
         register.register(new TreeNode("1", "Root1", null))
-               .register(new TreeNode("2", "Root2", null));
-        
+                .register(new TreeNode("2", "Root2", null));
+
         assertThrows(RuntimeException.class, () -> RegisterTreeNodeHelper.solve(register));
     }
 
@@ -190,8 +192,8 @@ class TreeTest {
         // Orphan nodes are ignored in solve, not thrown as exception
         RegisterTreeNode register = new RegisterTreeNode();
         register.register(new TreeNode("root", "Root", null))
-               .register(new TreeNode("1", "Orphan", "nonexistent"));
-        
+                .register(new TreeNode("1", "Orphan", "nonexistent"));
+
         javax.swing.tree.DefaultMutableTreeNode result = RegisterTreeNodeHelper.solve(register);
         assertNotNull(result);
         // Root node exists, orphan is simply ignored (0 children since "nonexistent" parent doesn't exist)

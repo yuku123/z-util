@@ -3,11 +3,12 @@ package com.zifang.util.source;
 import com.zifang.util.source.generator.info.MethodParameterPair;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * MethodParameterPair 模型测试
  */
+
 /**
  * MethodParameterPairTest类。
  */

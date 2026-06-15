@@ -3,7 +3,6 @@ package com.zifang.util.devops.git.github.user;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedIterator;
-import org.kohsuke.github.PagedIterable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class UserApiWrapper {
 
     /**
      * UserApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
      */
     public UserApiWrapper(GitHub github) {
         this.github = github;

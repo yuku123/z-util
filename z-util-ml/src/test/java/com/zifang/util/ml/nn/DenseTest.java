@@ -1,12 +1,13 @@
 package com.zifang.util.ml.nn;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.Shape;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for Dense (fully connected) layer.
@@ -26,7 +27,7 @@ class DenseTest {
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, (float)(rand.nextDouble() * 2 - 1));
+            com.zifang.util.numpy.Array.set(data, i, (float) (rand.nextDouble() * 2 - 1));
         }
 
         // Forward pass
@@ -70,7 +71,7 @@ class DenseTest {
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, (float)(rand.nextDouble() * 2 - 1));
+            com.zifang.util.numpy.Array.set(data, i, (float) (rand.nextDouble() * 2 - 1));
         }
 
         // Forward pass
@@ -93,7 +94,7 @@ class DenseTest {
         Random rand = new Random(42);
         Object data = input.getData();
         for (int i = 0; i < input.size(); i++) {
-            com.zifang.util.numpy.Array.set(data, i, (float)(rand.nextDouble() * 2 - 1));
+            com.zifang.util.numpy.Array.set(data, i, (float) (rand.nextDouble() * 2 - 1));
         }
 
         // Forward pass

@@ -206,7 +206,7 @@ public class DurationUtil {
     /**
      * Duration乘法运算
      *
-     * @param duration    原Duration，不能为null
+     * @param duration     原Duration，不能为null
      * @param multiplicand 乘数
      * @return 乘积后的新Duration对象
      * @throws NullPointerException if duration is null
@@ -222,7 +222,7 @@ public class DurationUtil {
      * @param divisor  除数，不能为0
      * @return 除后的新Duration对象
      * @throws NullPointerException if duration is null
-     * @throws ArithmeticException   if divisor is zero
+     * @throws ArithmeticException  if divisor is zero
      */
     public static Duration dividedBy(Duration duration, long divisor) {
         return duration.dividedBy(divisor);
@@ -564,7 +564,7 @@ public class DurationUtil {
     /**
      * Period乘法运算
      *
-     * @param period      原Period，不能为null
+     * @param period       原Period，不能为null
      * @param multiplicand 乘数
      * @return 乘积后的新Period对象
      * @throws NullPointerException if period is null

@@ -15,6 +15,39 @@ public class ThreadLocalTest {
     private static ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
     /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+
+        ThreadLocalTest test = new ThreadLocalTest();
+
+        new Thread(new Runnable() {
+            @Override
+            /**
+             * run方法。
+             */
+            public void run() {
+                test.setThreadLocal("1");
+                test.getThreadLocal();
+            }
+        }, "t1").start();
+
+        new Thread(new Runnable() {
+            @Override
+            /**
+             * run方法。
+             */
+            public void run() {
+                test.setThreadLocal("2");
+                test.getThreadLocal();
+            }
+        }, "t2").start();
+    }
+
+    /**
      * 设置ThreadLocal的值。
      *
      * @param value 要设置的值
@@ -28,37 +61,5 @@ public class ThreadLocalTest {
      */
     public void getThreadLocal() {
         System.out.println(threadLocal.get());
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-
-        ThreadLocalTest test = new ThreadLocalTest();
-
-        new Thread(new Runnable() {
-            @Override
-    /**
-     * run方法。
-     */
-            public void run() {
-                test.setThreadLocal("1");
-                test.getThreadLocal();
-            }
-        },"t1").start();
-
-        new Thread(new Runnable() {
-            @Override
-    /**
-     * run方法。
-     */
-            public void run() {
-                test.setThreadLocal("2");
-                test.getThreadLocal();
-            }
-        },"t2").start();
     }
 }

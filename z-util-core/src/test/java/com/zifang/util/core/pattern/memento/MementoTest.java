@@ -347,7 +347,7 @@ public class MementoTest {
      */
     public void testOriginatorWithValidator() {
         Originator<String> originator = new Originator<>(
-            state -> state != null && !state.isEmpty()
+                state -> state != null && !state.isEmpty()
         );
 
         assertTrue(originator.setState("valid"));
@@ -363,8 +363,8 @@ public class MementoTest {
     public void testOriginatorWithCopier() {
         StringBuffer original = new StringBuffer("original");
         Originator<StringBuffer> originator = new Originator<>(
-            null,
-            sb -> new StringBuffer(sb.toString())
+                null,
+                sb -> new StringBuffer(sb.toString())
         );
         originator.setState(original);
 
@@ -469,10 +469,10 @@ public class MementoTest {
      */
     public void testMementoImplBuilder() {
         MementoImpl<String> memento = MementoImpl.<String>builder()
-            .state("state1")
-            .label("label1")
-            .description("desc1")
-            .build();
+                .state("state1")
+                .label("label1")
+                .description("desc1")
+                .build();
 
         assertEquals("state1", memento.getState());
         assertEquals("label1", memento.getLabel());
@@ -661,7 +661,7 @@ public class MementoTest {
         history.execute("state4");
 
         List<MementoContext.SnapshotMeta> filtered = history.filterHistory(
-            meta -> meta.getIndex() < 2
+                meta -> meta.getIndex() < 2
         );
 
         assertEquals(2, filtered.size());

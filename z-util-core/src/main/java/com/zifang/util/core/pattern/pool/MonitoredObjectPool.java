@@ -20,8 +20,9 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
 
     /**
      * MonitoredObjectPool方法。
-     *      * @param pool ObjectPoolT类型参数
-     * @param config PoolConfig类型参数
+     * * @param pool ObjectPoolT类型参数
+     *
+     * @param config   PoolConfig类型参数
      * @param listener PoolListenerT类型参数
      */
     public MonitoredObjectPool(ObjectPool<T> pool, PoolConfig config, PoolListener<T> listener) {
@@ -31,8 +32,9 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
 
     /**
      * MonitoredObjectPool方法。
-     *      * @param factory PooledObjectFactoryT类型参数
-     * @param config PoolConfig类型参数
+     * * @param factory PooledObjectFactoryT类型参数
+     *
+     * @param config   PoolConfig类型参数
      * @param listener PoolListenerT类型参数
      */
     public MonitoredObjectPool(PooledObjectFactory<T> factory, PoolConfig config, PoolListener<T> listener) {
@@ -42,6 +44,7 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
 
     /**
      * getMonitor方法。
+     *
      * @return PoolMonitor<T>类型返回值
      */
     public PoolMonitor<T> getMonitor() {
@@ -50,6 +53,7 @@ public class MonitoredObjectPool<T> implements ObjectPool<T> {
 
     /**
      * getStats方法。
+     *
      * @return PoolStats类型返回值
      */
     public PoolStats getStats() {

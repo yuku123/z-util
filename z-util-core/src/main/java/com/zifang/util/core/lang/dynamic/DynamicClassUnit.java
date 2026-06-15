@@ -19,6 +19,7 @@ public class DynamicClassUnit {
 
     /**
      * getMain方法。
+     *
      * @return DynamicClass类型返回值
      */
     public DynamicClass getMain() {
@@ -27,7 +28,7 @@ public class DynamicClassUnit {
 
     /**
      * setMain方法。
-     *      * @param main DynamicClass类型参数
+     * * @param main DynamicClass类型参数
      */
     public void setMain(DynamicClass main) {
         this.main = main;
@@ -35,6 +36,7 @@ public class DynamicClassUnit {
 
     /**
      * getSub方法。
+     *
      * @return List<DynamicClassUnit>类型返回值
      */
     public List<DynamicClassUnit> getSub() {
@@ -43,7 +45,7 @@ public class DynamicClassUnit {
 
     /**
      * setSub方法。
-     *      * @param sub ListDynamicClassUnit类型参数
+     * * @param sub ListDynamicClassUnit类型参数
      */
     public void setSub(List<DynamicClassUnit> sub) {
         this.sub = sub;
@@ -51,12 +53,13 @@ public class DynamicClassUnit {
 
     /**
      * collect方法。
+     *
      * @return List<DynamicClass>类型返回值
      */
     public List<DynamicClass> collect() {
         List<DynamicClass> dynamicClasses = new ArrayList<>();
         dynamicClasses.add(main);
-        for(DynamicClassUnit dynamicClassUnit : sub){
+        for (DynamicClassUnit dynamicClassUnit : sub) {
             dynamicClasses.addAll(dynamicClassUnit.collect());
         }
         return dynamicClasses;

@@ -17,10 +17,10 @@ public class Reshaper {
      * 数据透视 - 类似于 Excel 的数据透视表
      * 将长格式数据转换为宽格式
      *
-     * @param df 输入数据框
-     * @param index 作为行索引的列名
+     * @param df      输入数据框
+     * @param index   作为行索引的列名
      * @param columns 作为列名的列名
-     * @param values 作为值的列名
+     * @param values  作为值的列名
      * @return 透视后的数据框
      */
     public static DataFrame pivot(DataFrame df, String index, String columns, String values) {
@@ -91,15 +91,15 @@ public class Reshaper {
      * 数据融合 - 将宽格式数据转换为长格式
      * 是 pivot 的逆操作
      *
-     * @param df 输入数据框
-     * @param idVars 作为标识变量的列名列表
+     * @param df        输入数据框
+     * @param idVars    作为标识变量的列名列表
      * @param valueVars 需要融合的列名列表
-     * @param varName 变量列的新名称
+     * @param varName   变量列的新名称
      * @param valueName 值列的新名称
      * @return 融合后的数据框
      */
     public static DataFrame melt(DataFrame df, List<String> idVars, List<String> valueVars,
-                                  String varName, String valueName) {
+                                 String varName, String valueName) {
         List<Map<String, Object>> records = new ArrayList<>();
 
         for (int i = 0; i < df.nRows(); i++) {
@@ -219,11 +219,11 @@ public class Reshaper {
     /**
      * 交叉表 - 创建列联表
      *
-     * @param df 输入数据框
-     * @param rowVar 行变量列名
-     * @param colVar 列变量列名
-     * @param values 值列名（可选，如果不提供则计数）
- * @param aggFunc 聚合函数（可选，如果 values 提供则需要）
+     * @param df      输入数据框
+     * @param rowVar  行变量列名
+     * @param colVar  列变量列名
+     * @param values  值列名（可选，如果不提供则计数）
+     * @param aggFunc 聚合函数（可选，如果 values 提供则需要）
      * @return 交叉表 DataFrame
      */
     public static DataFrame crosstab(DataFrame df, String rowVar, String colVar) {
@@ -333,7 +333,7 @@ public class Reshaper {
      * 简化版 pivot 表 - 直接指定数据
      */
     public static DataFrame pivotTable(DataFrame df, List<String> index, List<String> columns,
-                                        String values, String aggFunc) {
+                                       String values, String aggFunc) {
         // 这是一个简化实现，实际应该根据 aggFunc 进行聚合
         // 这里假设 index 和 columns 各只有一列
         if (index.size() == 1 && columns.size() == 1) {

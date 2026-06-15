@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
 /**
  * TOML 解析器测试
  */
+
 /**
  * TomlParserTest类。
  */
@@ -67,7 +67,7 @@ public class TomlParserTest {
      */
     public void testBasicBoolean() {
         String toml = "enabled = true\n" +
-                      "disabled = false\n";
+                "disabled = false\n";
         TomlDocument doc = parser.parse(toml);
 
         assertEquals(true, doc.getTables().get("").get("enabled"));
@@ -80,8 +80,8 @@ public class TomlParserTest {
      */
     public void testNegativeNumbers() {
         String toml = "negative = -10\n" +
-                      "positive = +10\n" +
-                      "float_negative = -3.14\n";
+                "positive = +10\n" +
+                "float_negative = -3.14\n";
         TomlDocument doc = parser.parse(toml);
 
         assertEquals(-10L, doc.getTables().get("").get("negative"));
@@ -119,8 +119,8 @@ public class TomlParserTest {
      */
     public void testBasicTable() {
         String toml = "[server]\n" +
-                      "host = \"localhost\"\n" +
-                      "port = 8080\n";
+                "host = \"localhost\"\n" +
+                "port = 8080\n";
         TomlDocument doc = parser.parse(toml);
 
         TomlDocument.TomlTable server = doc.getTable("server");
@@ -135,7 +135,7 @@ public class TomlParserTest {
      */
     public void testNestedTable() {
         String toml = "[parent.child]\n" +
-                      "value = 123\n";
+                "value = 123\n";
         TomlDocument doc = parser.parse(toml);
 
         TomlDocument.TomlTable child = doc.getTable("parent.child");
@@ -149,7 +149,7 @@ public class TomlParserTest {
      */
     public void testDeepNestedTable() {
         String toml = "[a.b.c.d]\n" +
-                      "value = 456\n";
+                "value = 456\n";
         TomlDocument doc = parser.parse(toml);
 
         TomlDocument.TomlTable deep = doc.getTable("a.b.c.d");
@@ -163,10 +163,10 @@ public class TomlParserTest {
      */
     public void testMultipleTables() {
         String toml = "[database]\n" +
-                      "name = \"mydb\"\n" +
-                      "\n" +
-                      "[server]\n" +
-                      "host = \"localhost\"\n";
+                "name = \"mydb\"\n" +
+                "\n" +
+                "[server]\n" +
+                "host = \"localhost\"\n";
         TomlDocument doc = parser.parse(toml);
 
         assertNotNull(doc.getTable("database"));
@@ -181,9 +181,9 @@ public class TomlParserTest {
      */
     public void testTableWithMultipleKeys() {
         String toml = "[config]\n" +
-                      "key1 = \"value1\"\n" +
-                      "key2 = \"value2\"\n" +
-                      "key3 = 123\n";
+                "key1 = \"value1\"\n" +
+                "key2 = \"value2\"\n" +
+                "key3 = 123\n";
         TomlDocument doc = parser.parse(toml);
 
         TomlDocument.TomlTable config = doc.getTable("config");
@@ -316,10 +316,10 @@ public class TomlParserTest {
      */
     public void testArrayOfTables() {
         String toml = "[[products]]\n" +
-                      "name = \"widget\"\n" +
-                      "\n" +
-                      "[[products]]\n" +
-                      "name = \"gadget\"\n";
+                "name = \"widget\"\n" +
+                "\n" +
+                "[[products]]\n" +
+                "name = \"gadget\"\n";
         TomlDocument doc = parser.parse(toml);
 
         List<TomlDocument.TomlTable> products = doc.getArrayOfTables();
@@ -334,12 +334,12 @@ public class TomlParserTest {
      */
     public void testArrayOfTablesWithNestedTable() {
         String toml = "[[servers]]\n" +
-                      "[servers.other]\n" +
-                      "ip = \"192.168.1.1\"\n" +
-                      "\n" +
-                      "[[servers]]\n" +
-                      "[servers.other]\n" +
-                      "ip = \"192.168.1.2\"\n";
+                "[servers.other]\n" +
+                "ip = \"192.168.1.1\"\n" +
+                "\n" +
+                "[[servers]]\n" +
+                "[servers.other]\n" +
+                "ip = \"192.168.1.2\"\n";
         TomlDocument doc = parser.parse(toml);
 
         List<TomlDocument.TomlTable> servers = doc.getArrayOfTables();
@@ -352,11 +352,11 @@ public class TomlParserTest {
      */
     public void testNestedArrayOfTables() {
         String toml = "[[fruit]]\n" +
-                      "name = \"apple\"\n" +
-                      "\n" +
-                      "  [[fruit.physical]]\n" +
-                      "  color = \"red\"\n" +
-                      "  shape = \"round\"\n";
+                "name = \"apple\"\n" +
+                "\n" +
+                "  [[fruit.physical]]\n" +
+                "  color = \"red\"\n" +
+                "  shape = \"round\"\n";
         TomlDocument doc = parser.parse(toml);
 
         // fruit is in arrayOfTables since it's defined via [[fruit]]
@@ -364,7 +364,7 @@ public class TomlParserTest {
         TomlDocument.TomlTable fruit = doc.getArrayOfTables().get(0);
         assertNotNull(fruit);
         assertEquals("apple", fruit.get("name"));
-        
+
         // fruit.physical should be a sub-table-array of fruit
         assertEquals(1, fruit.getSubTableArrays().size());
         TomlDocument.TomlTable physical = fruit.getSubTableArrays().get(0);
@@ -380,7 +380,7 @@ public class TomlParserTest {
      */
     public void testCommentLine() {
         String toml = "# 这是一个注释\n" +
-                      "name = \"test\"\n";
+                "name = \"test\"\n";
         TomlDocument doc = parser.parse(toml);
 
         assertEquals("test", doc.getTables().get("").get("name"));
@@ -392,7 +392,7 @@ public class TomlParserTest {
      */
     public void testCommentAfterKeyValue() {
         String toml = "name = \"test\" # 这是注释\n" +
-                      "value = 123\n";
+                "value = 123\n";
         TomlDocument doc = parser.parse(toml);
 
         assertEquals("test", doc.getTables().get("").get("name"));
@@ -405,10 +405,10 @@ public class TomlParserTest {
      */
     public void testMultipleCommentLines() {
         String toml = "# 注释1\n" +
-                      "# 注释2\n" +
-                      "[server]\n" +
-                      "# server注释\n" +
-                      "host = \"localhost\"\n";
+                "# 注释2\n" +
+                "[server]\n" +
+                "# server注释\n" +
+                "host = \"localhost\"\n";
         TomlDocument doc = parser.parse(toml);
 
         assertNotNull(doc.getTable("server"));
@@ -435,7 +435,7 @@ public class TomlParserTest {
      */
     public void testRoundTripBasic() {
         String toml = "name = \"test\"\n" +
-                      "value = 42\n";
+                "value = 42\n";
         TomlDocument doc = parser.parse(toml);
         String stored = parser.store(doc);
         TomlDocument parsedAgain = parser.parse(stored);
@@ -450,8 +450,8 @@ public class TomlParserTest {
      */
     public void testRoundTripWithTable() {
         String toml = "[server]\n" +
-                      "host = \"localhost\"\n" +
-                      "port = 8080\n";
+                "host = \"localhost\"\n" +
+                "port = 8080\n";
         TomlDocument doc = parser.parse(toml);
         String stored = parser.store(doc);
         TomlDocument parsedAgain = parser.parse(stored);
@@ -497,27 +497,27 @@ public class TomlParserTest {
      */
     public void testRoundTripComplex() {
         String toml = "# 配置文件示例\n" +
-                      "title = \"TOML Example\"\n" +
-                      "\n" +
-                      "[owner]\n" +
-                      "name = \"John Doe\"\n" +
-                      "enabled = true\n" +
-                      "\n" +
-                      "[database]\n" +
-                      "server = \"192.168.1.1\"\n" +
-                      "ports = [8001, 8002, 8003]\n" +
-                      "connection_max = 5000\n" +
-                      "enabled = true\n" +
-                      "\n" +
-                      "[servers]\n" +
-                      "\n" +
-                      "  [servers.alpha]\n" +
-                      "  ip = \"10.0.0.1\"\n" +
-                      "  dc = \"eqdc10\"\n" +
-                      "\n" +
-                      "  [servers.beta]\n" +
-                      "  ip = \"10.0.0.2\"\n" +
-                      "  dc = \"eqdc10\"\n";
+                "title = \"TOML Example\"\n" +
+                "\n" +
+                "[owner]\n" +
+                "name = \"John Doe\"\n" +
+                "enabled = true\n" +
+                "\n" +
+                "[database]\n" +
+                "server = \"192.168.1.1\"\n" +
+                "ports = [8001, 8002, 8003]\n" +
+                "connection_max = 5000\n" +
+                "enabled = true\n" +
+                "\n" +
+                "[servers]\n" +
+                "\n" +
+                "  [servers.alpha]\n" +
+                "  ip = \"10.0.0.1\"\n" +
+                "  dc = \"eqdc10\"\n" +
+                "\n" +
+                "  [servers.beta]\n" +
+                "  ip = \"10.0.0.2\"\n" +
+                "  dc = \"eqdc10\"\n";
         TomlDocument doc = parser.parse(toml);
         String stored = parser.store(doc);
         TomlDocument parsedAgain = parser.parse(stored);
@@ -570,9 +570,9 @@ public class TomlParserTest {
      */
     public void testMultiLineString() {
         String toml = "text = \"\"\"\n" +
-                      "Line 1\n" +
-                      "Line 2\n" +
-                      "\"\"\"\n";
+                "Line 1\n" +
+                "Line 2\n" +
+                "\"\"\"\n";
         TomlDocument doc = parser.parse(toml);
 
         assertTrue(doc.getTables().get("").get("text").toString().contains("Line 1"));
@@ -602,8 +602,8 @@ public class TomlParserTest {
      */
     public void testZeroValues() {
         String toml = "zero_int = 0\n" +
-                      "zero_float = 0.0\n" +
-                      "empty_string = \"\"\n";
+                "zero_float = 0.0\n" +
+                "empty_string = \"\"\n";
         TomlDocument doc = parser.parse(toml);
 
         assertEquals(0L, doc.getTables().get("").get("zero_int"));

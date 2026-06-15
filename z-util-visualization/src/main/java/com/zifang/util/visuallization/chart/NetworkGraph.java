@@ -1,6 +1,5 @@
 package com.zifang.util.visuallization.chart;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +10,17 @@ import java.util.List;
  */
 public class NetworkGraph extends ChartFrame {
 
+    private static final int PADDING = 60;
     private final List<LayerData> layers;
     private int nodeRadius = 20;
     private int layerSpacing = 80;
     private int nodeSpacing = 50;
 
-    private static final int PADDING = 60;
-
     /**
      * 创建网络拓扑图
-     * @param title 图表标题
-     * @param width 图表宽度
+     *
+     * @param title  图表标题
+     * @param width  图表宽度
      * @param height 图表高度
      */
     public NetworkGraph(String title, int width, int height) {
@@ -31,6 +30,7 @@ public class NetworkGraph extends ChartFrame {
 
     /**
      * 创建网络拓扑图（使用默认尺寸800x600）
+     *
      * @param title 图表标题
      */
     public NetworkGraph(String title) {
@@ -39,6 +39,7 @@ public class NetworkGraph extends ChartFrame {
 
     /**
      * 添加一层神经元
+     *
      * @param layerIndex 层索引（从0开始）
      * @param nodeCount  该层神经元数量
      * @param layerName  层名称（如"Input", "Hidden", "Output"）
@@ -53,8 +54,9 @@ public class NetworkGraph extends ChartFrame {
 
     /**
      * 添加一层神经元（自动追加到末尾）
-     * @param nodeCount  该层神经元数量
-     * @param layerName  层名称
+     *
+     * @param nodeCount 该层神经元数量
+     * @param layerName 层名称
      */
     public void addLayer(int nodeCount, String layerName) {
         layers.add(new LayerData());
@@ -72,6 +74,7 @@ public class NetworkGraph extends ChartFrame {
 
     /**
      * 设置节点半径
+     *
      * @param radius 节点半径（像素）
      */
     public void setNodeRadius(int radius) {
@@ -80,7 +83,8 @@ public class NetworkGraph extends ChartFrame {
 
     /**
      * 设置某层的激活值（用于热力图显示）
-     * @param layerIndex 层索引
+     *
+     * @param layerIndex  层索引
      * @param activations 激活值列表，值范围建议为0-1
      */
     public void setLayerActivations(int layerIndex, List<Double> activations) {
@@ -102,6 +106,7 @@ public class NetworkGraph extends ChartFrame {
 
     /**
      * 创建网络图画布
+     *
      * @return 网络图画布实例
      */
     @Override
@@ -125,10 +130,10 @@ public class NetworkGraph extends ChartFrame {
     private class NetworkCanvas extends ChartCanvas {
 
         @Override
-    /**
-     * paintComponent方法。
-     *      * @param g Graphics类型参数
-     */
+        /**
+         * paintComponent方法。
+         *      * @param g Graphics类型参数
+         */
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;

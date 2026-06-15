@@ -20,7 +20,8 @@ public class CreatePdfTest {
 
     /**
      * transform方法。
-     *      * @param output String类型参数
+     * * @param output String类型参数
+     *
      * @param imageFolder String类型参数
      * @return static void类型返回值
      */
@@ -31,9 +32,9 @@ public class CreatePdfTest {
         fileList = fileList.stream().filter(e -> !e.getName().startsWith("."))
                 .filter(e -> !e.getName().equals("Thumbs.db") && !e.getName().endsWith(".txt") && !e.getName().toLowerCase().endsWith(".url")
                         && !e.getName().endsWith(".html"))
-                .filter(e->!e.getName().contains("脸肿汉化组"))
-                .filter(e->!e.getName().contains(".doc") && !e.getName().contains(".ion")&& !e.getName().contains(".tmp")&& !e.getName().contains(".ico"))
-                .filter(e->!e.getName().contains(".doc") && !e.getName().contains(".ion")&& !e.getName().contains(".tmp")&& !e.getName().contains(".ico"))
+                .filter(e -> !e.getName().contains("脸肿汉化组"))
+                .filter(e -> !e.getName().contains(".doc") && !e.getName().contains(".ion") && !e.getName().contains(".tmp") && !e.getName().contains(".ico"))
+                .filter(e -> !e.getName().contains(".doc") && !e.getName().contains(".ion") && !e.getName().contains(".tmp") && !e.getName().contains(".ico"))
 
                 .collect(Collectors.toList());
         fileList.sort(Comparator.naturalOrder());
@@ -43,7 +44,7 @@ public class CreatePdfTest {
             PDImageXObject pdImage = null;
             try {
                 pdImage = PDImageXObject.createFromFile(image.getAbsolutePath(), document);
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(image.getAbsolutePath());
 //                continue;
                 throw e;
@@ -72,7 +73,8 @@ public class CreatePdfTest {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws IOException {

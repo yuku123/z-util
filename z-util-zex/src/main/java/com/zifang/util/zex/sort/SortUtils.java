@@ -23,6 +23,16 @@ public class SortUtils {
 
 
     /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        new SortUtils().directInsertSort(new int[]{2, 1, 4, 3, 9, 5});
+    }
+
+    /**
      * 直接选择排序。
      * <p>
      * 直接选择排序是一种不稳定的排序算法。
@@ -54,7 +64,6 @@ public class SortUtils {
             }
         }
     }
-
 
     /**
      * 二分插入排序。
@@ -102,6 +111,7 @@ public class SortUtils {
         }
     }
 
+    // 选择
 
     /**
      * 冒泡排序。
@@ -122,7 +132,6 @@ public class SortUtils {
         System.out.println(Arrays.toString(a));
     }
 
-    // 选择
     /**
      * sort2方法。
      */
@@ -211,14 +220,5 @@ public class SortUtils {
 
             step /= 2;
         }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        new SortUtils().directInsertSort(new int[]{2, 1, 4, 3, 9, 5});
     }
 }

@@ -102,6 +102,11 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
 
     // ===== Cache 接口实现 =====
 
+    private static int nextPowerOf2(int n) {
+        if (n < 2) return 2;
+        return Integer.highestOneBit(n - 1) << 1;
+    }
+
     @Override
     public V get(K key) {
         return getOrLoad(key, null);
@@ -273,6 +278,8 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
         return name;
     }
 
+    // ===== 内部 =====
+
     @Override
     public void shutdown() {
         if (shutdown) return;
@@ -280,9 +287,9 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
         if (scheduler != null) scheduler.shutdownNow();
     }
 
-    // ===== 内部 =====
-
-    /** 弹一个 entry：先看 Window 是否超额；超额则按 W-TinyLFU 准入策略决出"输家"。 */
+    /**
+     * 弹一个 entry：先看 Window 是否超额；超额则按 W-TinyLFU 准入策略决出"输家"。
+     */
     private void evict() {
         if (approximateSize.get() <= maximumSize) return;
 
@@ -390,7 +397,10 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
         RemovalListener.RemovalNotification<K, V> n =
                 new RemovalListener.RemovalNotification<>(key, value, cause);
         for (RemovalListener<K, V> l : listeners) {
-            try { l.onRemoval(n); } catch (RuntimeException ignored) { }
+            try {
+                l.onRemoval(n);
+            } catch (RuntimeException ignored) {
+            }
         }
     }
 
@@ -413,16 +423,12 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
                     }
                 }
             }
-        } catch (RuntimeException ignored) { }
+        } catch (RuntimeException ignored) {
+        }
     }
 
     private void checkNotShutdown() {
         if (shutdown) throw new IllegalStateException("cache shut down: " + name);
-    }
-
-    private static int nextPowerOf2(int n) {
-        if (n < 2) return 2;
-        return Integer.highestOneBit(n - 1) << 1;
     }
 
     // ===== 内部类 =====

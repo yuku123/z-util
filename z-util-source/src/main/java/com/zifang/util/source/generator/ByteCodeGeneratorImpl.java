@@ -20,7 +20,8 @@ public class ByteCodeGeneratorImpl implements ByteCodeGenerator {
 
     /**
      * generate方法。
-     *      * @param classInfo ClassInfo类型参数
+     * * @param classInfo ClassInfo类型参数
+     *
      * @return byte[]类型返回值
      */
     public byte[] generate(ClassInfo classInfo) {

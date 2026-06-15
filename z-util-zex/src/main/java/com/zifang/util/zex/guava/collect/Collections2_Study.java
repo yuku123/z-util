@@ -42,11 +42,11 @@ public class Collections2_Study {
     Predicate<UserBo> predicateName = new Predicate<UserBo>() {
 
         @Override
-    /**
-     * apply方法。
-     *      * @param input UserBo类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * apply方法。
+         *      * @param input UserBo类型参数
+         * @return boolean类型返回值
+         */
         public boolean apply(UserBo input) {
             return null != input && input.getName().contains("A");
         }
@@ -58,11 +58,11 @@ public class Collections2_Study {
     Predicate<UserBo> predicateAge = new Predicate<UserBo>() {
 
         @Override
-    /**
-     * apply方法。
-     *      * @param input UserBo类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * apply方法。
+         *      * @param input UserBo类型参数
+         * @return boolean类型返回值
+         */
         public boolean apply(UserBo input) {
             return null != input && input.getAge() > 16;
         }
@@ -107,12 +107,12 @@ public class Collections2_Study {
         System.out.println(GsonUtil.objectToJsonStr(listOrderd)); // a>ab>abc
         Comparator<String> compare = new Comparator<String>() {
             @Override
-    /**
-     * compare方法。
-     *      * @param s1 String类型参数
-     * @param s2 String类型参数
-     * @return int类型返回值
-     */
+            /**
+             * compare方法。
+             *      * @param s1 String类型参数
+             * @param s2 String类型参数
+             * @return int类型返回值
+             */
             public int compare(String s1, String s2) {
                 return s2.compareTo(s1);
             }
@@ -135,11 +135,11 @@ public class Collections2_Study {
         Function<UserBo, String> function = new Function<UserBo, String>() {
 
             @Override
-    /**
-     * apply方法。
-     *      * @param input UserBo类型参数
-     * @return String类型返回值
-     */
+            /**
+             * apply方法。
+             *      * @param input UserBo类型参数
+             * @return String类型返回值
+             */
             public String apply(UserBo input) {
                 if (null != input) {
                     return input.getName().replace("name", "");

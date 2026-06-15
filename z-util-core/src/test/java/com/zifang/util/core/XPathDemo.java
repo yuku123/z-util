@@ -21,7 +21,8 @@ public class XPathDemo {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws Exception {
@@ -45,8 +46,10 @@ public class XPathDemo {
     }
 
     // 初始化Document、XPath对象
+
     /**
      * init方法。
+     *
      * @return static void类型返回值
      */
     public static void init() throws Exception {
@@ -63,8 +66,10 @@ public class XPathDemo {
 
     // 获取根元素
     // 表达式可以更换为/*,/rss
+
     /**
      * getRootEle方法。
+     *
      * @return static void类型返回值
      */
     public static void getRootEle() throws XPathExpressionException {
@@ -74,8 +79,10 @@ public class XPathDemo {
     }
 
     // 获取子元素并打印
+
     /**
      * getChildEles方法。
+     *
      * @return static void类型返回值
      */
     public static void getChildEles() throws XPathExpressionException {
@@ -89,8 +96,10 @@ public class XPathDemo {
 
     // 获取部分元素
     // 只获取元素名称为title的元素
+
     /**
      * getPartEles方法。
+     *
      * @return static void类型返回值
      */
     public static void getPartEles() throws XPathExpressionException {
@@ -104,8 +113,10 @@ public class XPathDemo {
     }
 
     // 获取包含子节点的元素
+
     /**
      * haveChildsEles方法。
+     *
      * @return static void类型返回值
      */
     public static void haveChildsEles() throws XPathExpressionException {
@@ -118,8 +129,10 @@ public class XPathDemo {
     }
 
     // 获取指定层级的元素
+
     /**
      * getLevelEles方法。
+     *
      * @return static void类型返回值
      */
     public static void getLevelEles() throws XPathExpressionException {
@@ -134,8 +147,10 @@ public class XPathDemo {
 
     // 获取指定属性的元素
     // 获取所有大于指定价格的书箱
+
     /**
      * getAttrEles方法。
+     *
      * @return static void类型返回值
      */
     public static void getAttrEles() throws XPathExpressionException {

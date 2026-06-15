@@ -1,7 +1,7 @@
 package com.zifang.util.ml.tree;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 
 import java.util.Random;
 
@@ -20,10 +20,11 @@ public class RandomForest {
 
     /**
      * RandomForest方法。
-     *      * @param nEstimators int类型参数
-     * @param maxDepth int类型参数
+     * * @param nEstimators int类型参数
+     *
+     * @param maxDepth        int类型参数
      * @param minSamplesSplit int类型参数
-     * @param maxFeatures int类型参数
+     * @param maxFeatures     int类型参数
      */
     public RandomForest(int nEstimators, int maxDepth, int minSamplesSplit, int maxFeatures) {
         this.nEstimators = nEstimators;
@@ -36,7 +37,8 @@ public class RandomForest {
 
     /**
      * fit方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @param y int[]类型参数
      */
     public void fit(NdArray X, int[] y) {
@@ -80,7 +82,8 @@ public class RandomForest {
 
     /**
      * predict方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @return int[]类型返回值
      */
     public int[] predict(NdArray X) {
@@ -116,7 +119,8 @@ public class RandomForest {
 
     /**
      * predictProba方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @return NdArray类型返回值
      */
     public NdArray predictProba(NdArray X) {

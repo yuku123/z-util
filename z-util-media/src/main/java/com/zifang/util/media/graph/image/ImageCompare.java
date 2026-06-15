@@ -11,7 +11,8 @@ import java.io.IOException;
  */
 public final class ImageCompare {
 
-    private ImageCompare() {}
+    private ImageCompare() {
+    }
 
     /**
      * 比较两张图片的相似度。

@@ -1,7 +1,6 @@
 package com.zifang.util.core.pattern.pool;
 
 import com.zifang.util.core.pattern.pool.monitor.PoolListener;
-import com.zifang.util.core.pattern.pool.monitor.PoolMonitor;
 import com.zifang.util.core.pattern.pool.monitor.PoolStats;
 import org.junit.After;
 import org.junit.Test;
@@ -13,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * 对象池监控测试
  */
+
 /**
  * PoolMonitorTest类。
  */
@@ -37,67 +37,68 @@ public class PoolMonitorTest {
     public void testMonitorStats() throws Exception {
         PoolListener<StringBuffer> listener = new PoolListener<StringBuffer>() {
             @Override
-    /**
-     * onBorrow方法。
-     *      * @param object StringBuffer类型参数
-     * @param waitTime long类型参数
-     */
+            /**
+             * onBorrow方法。
+             *      * @param object StringBuffer类型参数
+             * @param waitTime long类型参数
+             */
             public void onBorrow(StringBuffer object, long waitTime) {
             }
 
             @Override
-    /**
-     * onReturn方法。
-     *      * @param object StringBuffer类型参数
-     * @param waitTime long类型参数
-     */
+            /**
+             * onReturn方法。
+             *      * @param object StringBuffer类型参数
+             * @param waitTime long类型参数
+             */
             public void onReturn(StringBuffer object, long waitTime) {
             }
 
             @Override
-    /**
-     * onCreate方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onCreate方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onCreate(StringBuffer object) {
             }
 
             @Override
-    /**
-     * onDestroy方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onDestroy方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onDestroy(StringBuffer object) {
             }
 
             @Override
-    /**
-     * onValidate方法。
-     *      * @param object StringBuffer类型参数
-     * @param valid boolean类型参数
-     */
+            /**
+             * onValidate方法。
+             *      * @param object StringBuffer类型参数
+             * @param valid boolean类型参数
+             */
             public void onValidate(StringBuffer object, boolean valid) {
             }
 
             @Override
-    /**
-     * onClose方法。
-     */
+            /**
+             * onClose方法。
+             */
             public void onClose() {
             }
 
             @Override
-    /**
-     * onEvict方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onEvict方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onEvict(StringBuffer object) {
             }
         };
 
         pool = PoolUtils.createMonitoredPool(
                 StringBuffer::new,
-                sb -> {},
+                sb -> {
+                },
                 listener
         );
 
@@ -122,69 +123,70 @@ public class PoolMonitorTest {
 
         PoolListener<StringBuffer> listener = new PoolListener<StringBuffer>() {
             @Override
-    /**
-     * onBorrow方法。
-     *      * @param object StringBuffer类型参数
-     * @param waitTime long类型参数
-     */
+            /**
+             * onBorrow方法。
+             *      * @param object StringBuffer类型参数
+             * @param waitTime long类型参数
+             */
             public void onBorrow(StringBuffer object, long waitTime) {
                 borrowCount.incrementAndGet();
             }
 
             @Override
-    /**
-     * onReturn方法。
-     *      * @param object StringBuffer类型参数
-     * @param waitTime long类型参数
-     */
+            /**
+             * onReturn方法。
+             *      * @param object StringBuffer类型参数
+             * @param waitTime long类型参数
+             */
             public void onReturn(StringBuffer object, long waitTime) {
                 returnCount.incrementAndGet();
             }
 
             @Override
-    /**
-     * onCreate方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onCreate方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onCreate(StringBuffer object) {
             }
 
             @Override
-    /**
-     * onDestroy方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onDestroy方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onDestroy(StringBuffer object) {
             }
 
             @Override
-    /**
-     * onValidate方法。
-     *      * @param object StringBuffer类型参数
-     * @param valid boolean类型参数
-     */
+            /**
+             * onValidate方法。
+             *      * @param object StringBuffer类型参数
+             * @param valid boolean类型参数
+             */
             public void onValidate(StringBuffer object, boolean valid) {
             }
 
             @Override
-    /**
-     * onClose方法。
-     */
+            /**
+             * onClose方法。
+             */
             public void onClose() {
             }
 
             @Override
-    /**
-     * onEvict方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onEvict方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onEvict(StringBuffer object) {
             }
         };
 
         pool = PoolUtils.createMonitoredPool(
                 StringBuffer::new,
-                sb -> {},
+                sb -> {
+                },
                 listener
         );
 
@@ -207,68 +209,69 @@ public class PoolMonitorTest {
 
         PoolListener<StringBuffer> listener = new PoolListener<StringBuffer>() {
             @Override
-    /**
-     * onBorrow方法。
-     *      * @param object StringBuffer类型参数
-     * @param waitTime long类型参数
-     */
+            /**
+             * onBorrow方法。
+             *      * @param object StringBuffer类型参数
+             * @param waitTime long类型参数
+             */
             public void onBorrow(StringBuffer object, long waitTime) {
                 count.incrementAndGet();
             }
 
             @Override
-    /**
-     * onReturn方法。
-     *      * @param object StringBuffer类型参数
-     * @param waitTime long类型参数
-     */
+            /**
+             * onReturn方法。
+             *      * @param object StringBuffer类型参数
+             * @param waitTime long类型参数
+             */
             public void onReturn(StringBuffer object, long waitTime) {
             }
 
             @Override
-    /**
-     * onCreate方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onCreate方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onCreate(StringBuffer object) {
             }
 
             @Override
-    /**
-     * onDestroy方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onDestroy方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onDestroy(StringBuffer object) {
             }
 
             @Override
-    /**
-     * onValidate方法。
-     *      * @param object StringBuffer类型参数
-     * @param valid boolean类型参数
-     */
+            /**
+             * onValidate方法。
+             *      * @param object StringBuffer类型参数
+             * @param valid boolean类型参数
+             */
             public void onValidate(StringBuffer object, boolean valid) {
             }
 
             @Override
-    /**
-     * onClose方法。
-     */
+            /**
+             * onClose方法。
+             */
             public void onClose() {
             }
 
             @Override
-    /**
-     * onEvict方法。
-     *      * @param object StringBuffer类型参数
-     */
+            /**
+             * onEvict方法。
+             *      * @param object StringBuffer类型参数
+             */
             public void onEvict(StringBuffer object) {
             }
         };
 
         pool = PoolUtils.createMonitoredPool(
                 StringBuffer::new,
-                sb -> {},
+                sb -> {
+                },
                 listener
         );
 
@@ -292,7 +295,8 @@ public class PoolMonitorTest {
 
         pool = PoolUtils.createMonitoredPool(
                 StringBuffer::new,
-                sb -> {}
+                sb -> {
+                }
         );
 
         pool.getMonitor().addStatsConsumer(stats -> {
@@ -312,7 +316,8 @@ public class PoolMonitorTest {
     public void testMonitorReset() throws Exception {
         pool = PoolUtils.createMonitoredPool(
                 StringBuffer::new,
-                sb -> {}
+                sb -> {
+                }
         );
 
         StringBuffer sb1 = pool.borrowObject();

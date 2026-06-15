@@ -24,7 +24,8 @@ public class StateMachineSnapshot<S> {
 
     /**
      * StateMachineSnapshot方法。
-     *      * @param currentState S类型参数
+     * * @param currentState S类型参数
+     *
      * @param lastActiveSubstate MapS,类型参数
      */
     public StateMachineSnapshot(S currentState, Map<S, S> lastActiveSubstate) {
@@ -36,6 +37,7 @@ public class StateMachineSnapshot<S> {
 
     /**
      * getCurrentState方法。
+     *
      * @return S类型返回值
      */
     public S getCurrentState() {
@@ -44,6 +46,7 @@ public class StateMachineSnapshot<S> {
 
     /**
      * getLastActiveSubstate方法。
+     *
      * @return Map<S, S>类型返回值
      */
     public Map<S, S> getLastActiveSubstate() {

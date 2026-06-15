@@ -33,39 +33,52 @@ public final class TraceContextHolder {
 
     private static final ThreadLocal<TraceContext> CURRENT = new ThreadLocal<>();
 
-    private TraceContextHolder() {}
+    private TraceContextHolder() {
+    }
 
-    /** 当前线程的 trace 上下文（可能为 null）。 */
+    /**
+     * 当前线程的 trace 上下文（可能为 null）。
+     */
     public static TraceContext current() {
         return CURRENT.get();
     }
 
-    /** 当前 traceId（无上下文时返回 "no-trace"）。 */
+    /**
+     * 当前 traceId（无上下文时返回 "no-trace"）。
+     */
     public static String currentTraceId() {
         TraceContext c = CURRENT.get();
         return c == null ? "no-trace" : c.traceId();
     }
 
-    /** 当前 spanId（无上下文时返回 "no-span"）。 */
+    /**
+     * 当前 spanId（无上下文时返回 "no-span"）。
+     */
     public static String currentSpanId() {
         TraceContext c = CURRENT.get();
         return c == null ? "no-span" : c.spanId();
     }
 
-    /** 启动新 trace，并设为当前上下文。返回新创建的上下文。 */
+    /**
+     * 启动新 trace，并设为当前上下文。返回新创建的上下文。
+     */
     public static TraceContext startNew() {
         TraceContext ctx = new TraceContext(TraceIds.newTraceId(), TraceIds.newSpanId(), null);
         bind(ctx);
         return ctx;
     }
 
-    /** 设置已有上下文（如从 HTTP 头解析得到）。 */
+    /**
+     * 设置已有上下文（如从 HTTP 头解析得到）。
+     */
     public static TraceContext startWith(TraceContext ctx) {
         bind(ctx);
         return ctx;
     }
 
-    /** 创建子 span，traceId 不变，parentSpanId = 当前 spanId。 */
+    /**
+     * 创建子 span，traceId 不变，parentSpanId = 当前 spanId。
+     */
     public static TraceContext startChild() {
         TraceContext parent = CURRENT.get();
         String parentId = parent == null ? null : parent.spanId();
@@ -76,7 +89,9 @@ public final class TraceContextHolder {
         return child;
     }
 
-    /** 清除当前上下文（关闭 trace）。 */
+    /**
+     * 清除当前上下文（关闭 trace）。
+     */
     public static void stop() {
         CURRENT.remove();
         MDC.remove(MDC_TRACE_ID);
@@ -84,7 +99,9 @@ public final class TraceContextHolder {
         MDC.remove(MDC_PARENT_SPAN_ID);
     }
 
-    /** 在子上下文里执行任务。 */
+    /**
+     * 在子上下文里执行任务。
+     */
     public static <T> T withChild(Callable<T> task) throws Exception {
         TraceContext previous = CURRENT.get();
         startChild();
@@ -98,7 +115,10 @@ public final class TraceContextHolder {
 
     public static void withChild(Runnable task) {
         try {
-            withChild(() -> { task.run(); return null; });
+            withChild(() -> {
+                task.run();
+                return null;
+            });
         } catch (RuntimeException e) {
             throw e;
         } catch (Exception e) {

@@ -1,8 +1,5 @@
 package com.zifang.util.monitor;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * 指标快照数据模型
  * 用于存储单个时间点的指标数据
@@ -18,7 +15,8 @@ public class MetricsSnapshot {
 
     /**
      * MetricsSnapshot方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param value Object类型参数
      */
     public MetricsSnapshot(String name, Object value) {
@@ -27,10 +25,11 @@ public class MetricsSnapshot {
 
     /**
      * MetricsSnapshot方法。
-     *      * @param name String类型参数
-     * @param value Object类型参数
+     * * @param name String类型参数
+     *
+     * @param value       Object类型参数
      * @param description String类型参数
-     * @param unit String类型参数
+     * @param unit        String类型参数
      */
     public MetricsSnapshot(String name, Object value, String description, String unit) {
         this(name, value, description, unit, null);
@@ -38,11 +37,12 @@ public class MetricsSnapshot {
 
     /**
      * MetricsSnapshot方法。
-     *      * @param name String类型参数
-     * @param value Object类型参数
+     * * @param name String类型参数
+     *
+     * @param value       Object类型参数
      * @param description String类型参数
-     * @param unit String类型参数
-     * @param category Category类型参数
+     * @param unit        String类型参数
+     * @param category    Category类型参数
      */
     public MetricsSnapshot(String name, Object value, String description, String unit, Category category) {
         this.timestamp = System.currentTimeMillis();
@@ -55,6 +55,7 @@ public class MetricsSnapshot {
 
     /**
      * getTimestamp方法。
+     *
      * @return long类型返回值
      */
     public long getTimestamp() {
@@ -63,6 +64,7 @@ public class MetricsSnapshot {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -71,6 +73,7 @@ public class MetricsSnapshot {
 
     /**
      * getValue方法。
+     *
      * @return Object类型返回值
      */
     public Object getValue() {
@@ -79,6 +82,7 @@ public class MetricsSnapshot {
 
     /**
      * getDescription方法。
+     *
      * @return String类型返回值
      */
     public String getDescription() {
@@ -87,6 +91,7 @@ public class MetricsSnapshot {
 
     /**
      * getUnit方法。
+     *
      * @return String类型返回值
      */
     public String getUnit() {
@@ -95,6 +100,7 @@ public class MetricsSnapshot {
 
     /**
      * getCategory方法。
+     *
      * @return MetricsSnapshot.Category类型返回值
      */
     public MetricsSnapshot.Category getCategory() {
@@ -116,10 +122,11 @@ public class MetricsSnapshot {
             this.label = label;
         }
 
-    /**
-     * getLabel方法。
-     * @return String类型返回值
-     */
+        /**
+         * getLabel方法。
+         *
+         * @return String类型返回值
+         */
         public String getLabel() {
             return label;
         }

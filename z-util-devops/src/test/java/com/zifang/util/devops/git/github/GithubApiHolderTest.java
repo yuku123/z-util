@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * GithubApiHolder 单例持有者测试
  */
+
 /**
  * GithubApiHolderTest类。
  */

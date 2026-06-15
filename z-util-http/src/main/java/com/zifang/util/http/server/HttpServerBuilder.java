@@ -12,7 +12,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
@@ -24,24 +27,12 @@ import java.util.regex.Pattern;
  */
 public class HttpServerBuilder {
 
-    private int port = 8080;
     private final List<Object> controllers = new ArrayList<>();
-    private HttpServer httpServer;
     private final Map<String, RouteHandler> routeHandlers = new ConcurrentHashMap<>();
     private final List<RouteHandler> allHandlers = new ArrayList<>();
     private final List<Runnable> postStartCallbacks = new ArrayList<>();
-
-    public HttpServer getHttpServer() { return httpServer; }
-    List<RouteHandler> getRouteHandlers() { return allHandlers; }
-
-    /**
-     * 注册完成后回调（用于直接操作底层 HttpServer 实现 SSE 等高级特性）。
-     * 在所有路由注册完毕、HttpServer 创建之后调用。
-     */
-    public HttpServerBuilder afterRegister(Runnable callback) {
-        postStartCallbacks.add(callback);
-        return this;
-    }
+    private int port = 8080;
+    private HttpServer httpServer;
 
     /**
      * 绑定端口
@@ -53,6 +44,23 @@ public class HttpServerBuilder {
         HttpServerBuilder builder = new HttpServerBuilder();
         builder.port = port;
         return builder;
+    }
+
+    public HttpServer getHttpServer() {
+        return httpServer;
+    }
+
+    List<RouteHandler> getRouteHandlers() {
+        return allHandlers;
+    }
+
+    /**
+     * 注册完成后回调（用于直接操作底层 HttpServer 实现 SSE 等高级特性）。
+     * 在所有路由注册完毕、HttpServer 创建之后调用。
+     */
+    public HttpServerBuilder afterRegister(Runnable callback) {
+        postStartCallbacks.add(callback);
+        return this;
     }
 
     /**
@@ -232,40 +240,6 @@ public class HttpServerBuilder {
     }
 
     /**
-     * 根请求处理器
-     */
-    private class RootHandler implements HttpHandler {
-        @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
-        public void handle(HttpExchange exchange) throws IOException {
-            String requestMethod = exchange.getRequestMethod();
-            String requestPath = exchange.getRequestURI().getPath();
-            String queryString = exchange.getRequestURI().getQuery();
-
-            // 构建路由键
-            String routeKey = requestMethod + ":" + requestPath;
-
-            // 查找处理器
-            RouteHandler handler = routeHandlers.get(routeKey);
-
-            // 如果没有精确匹配，尝试路径参数匹配
-            if (handler == null) {
-                handler = findHandlerWithPathParams(requestMethod, requestPath);
-            }
-
-            if (handler != null) {
-                handleRequest(exchange, handler, queryString);
-            } else {
-                // 404 Not Found
-                sendResponse(exchange, 404, "Not Found");
-            }
-        }
-    }
-
-    /**
      * 查找带路径参数的处理器
      *
      * @param httpMethod HTTP方法
@@ -332,7 +306,7 @@ public class HttpServerBuilder {
     /**
      * 提取路径参数
      *
-     * @param handler    路由处理器
+     * @param handler     路由处理器
      * @param requestPath 请求路径
      * @return 路径参数映射
      */
@@ -407,10 +381,10 @@ public class HttpServerBuilder {
     /**
      * 准备方法参数
      *
-     * @param method       方法
-     * @param pathParams   路径参数
-     * @param queryParams  查询参数
-     * @param requestBody  请求体
+     * @param method      方法
+     * @param pathParams  路径参数
+     * @param queryParams 查询参数
+     * @param requestBody 请求体
      * @return 参数数组
      */
     private Object[] prepareMethodArguments(Method method,
@@ -464,7 +438,7 @@ public class HttpServerBuilder {
     /**
      * 转换值为目标类型
      *
-     * @param value     字符串值
+     * @param value      字符串值
      * @param targetType 目标类型
      * @return 转换后的值
      */
@@ -522,6 +496,40 @@ public class HttpServerBuilder {
             this.method = method;
             this.pattern = pattern;
             this.path = path;
+        }
+    }
+
+    /**
+     * 根请求处理器
+     */
+    private class RootHandler implements HttpHandler {
+        @Override
+        /**
+         * handle方法。
+         *      * @param exchange HttpExchange类型参数
+         */
+        public void handle(HttpExchange exchange) throws IOException {
+            String requestMethod = exchange.getRequestMethod();
+            String requestPath = exchange.getRequestURI().getPath();
+            String queryString = exchange.getRequestURI().getQuery();
+
+            // 构建路由键
+            String routeKey = requestMethod + ":" + requestPath;
+
+            // 查找处理器
+            RouteHandler handler = routeHandlers.get(routeKey);
+
+            // 如果没有精确匹配，尝试路径参数匹配
+            if (handler == null) {
+                handler = findHandlerWithPathParams(requestMethod, requestPath);
+            }
+
+            if (handler != null) {
+                handleRequest(exchange, handler, queryString);
+            } else {
+                // 404 Not Found
+                sendResponse(exchange, 404, "Not Found");
+            }
         }
     }
 }

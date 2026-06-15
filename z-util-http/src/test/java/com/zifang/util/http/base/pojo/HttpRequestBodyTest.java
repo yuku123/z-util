@@ -26,7 +26,7 @@ public class HttpRequestBodyTest {
         HttpRequestBody httpRequestBody = new HttpRequestBody();
         byte[] body = "test content".getBytes();
         httpRequestBody.setBody(body);
-        
+
         assertArrayEquals(body, httpRequestBody.getBody());
     }
 
@@ -38,7 +38,7 @@ public class HttpRequestBodyTest {
         HttpRequestBody httpRequestBody = new HttpRequestBody();
         byte[] body = "test".getBytes();
         httpRequestBody.setBody(body);
-        
+
         String str = httpRequestBody.toString();
         assertTrue(str.contains("byte[4]"));
     }
@@ -60,10 +60,10 @@ public class HttpRequestBodyTest {
     public void testEqualsWithSameBody() {
         HttpRequestBody body1 = new HttpRequestBody();
         body1.setBody("test".getBytes());
-        
+
         HttpRequestBody body2 = new HttpRequestBody();
         body2.setBody("test".getBytes());
-        
+
         assertEquals(body1, body2);
     }
 
@@ -74,10 +74,10 @@ public class HttpRequestBodyTest {
     public void testEqualsWithDifferentBody() {
         HttpRequestBody body1 = new HttpRequestBody();
         body1.setBody("test1".getBytes());
-        
+
         HttpRequestBody body2 = new HttpRequestBody();
         body2.setBody("test2".getBytes());
-        
+
         assertNotEquals(body1, body2);
     }
 
@@ -88,7 +88,7 @@ public class HttpRequestBodyTest {
     public void testEqualsWithNullBodies() {
         HttpRequestBody body1 = new HttpRequestBody();
         HttpRequestBody body2 = new HttpRequestBody();
-        
+
         assertEquals(body1, body2);
     }
 
@@ -99,9 +99,9 @@ public class HttpRequestBodyTest {
     public void testEqualsWithOneNullBody() {
         HttpRequestBody body1 = new HttpRequestBody();
         body1.setBody("test".getBytes());
-        
+
         HttpRequestBody body2 = new HttpRequestBody();
-        
+
         assertNotEquals(body1, body2);
     }
 
@@ -112,10 +112,10 @@ public class HttpRequestBodyTest {
     public void testHashCode() {
         HttpRequestBody body1 = new HttpRequestBody();
         body1.setBody("test".getBytes());
-        
+
         HttpRequestBody body2 = new HttpRequestBody();
         body2.setBody("test".getBytes());
-        
+
         assertEquals(body1.hashCode(), body2.hashCode());
     }
 

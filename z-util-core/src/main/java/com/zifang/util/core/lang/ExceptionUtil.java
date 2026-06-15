@@ -31,7 +31,8 @@ public class ExceptionUtil {
 
     /**
      * getOriginException方法。
-     *      * @param runtimeException RuntimeException类型参数
+     * * @param runtimeException RuntimeException类型参数
+     *
      * @return static Throwable类型返回值
      */
     public static Throwable getOriginException(RuntimeException runtimeException) {
@@ -47,7 +48,8 @@ public class ExceptionUtil {
 
     /**
      * toString方法。
-     *      * @param e Throwable类型参数
+     * * @param e Throwable类型参数
+     *
      * @return static String类型返回值
      */
     public static String toString(Throwable e) {
@@ -58,7 +60,8 @@ public class ExceptionUtil {
 
     /**
      * toString方法。
-     *      * @param e Throwable类型参数
+     * * @param e Throwable类型参数
+     *
      * @param retainLength int类型参数
      * @return static String类型返回值
      */
@@ -73,7 +76,8 @@ public class ExceptionUtil {
 
     /**
      * doWithCatch方法。
-     *      * @param callback ExceptionCallbackReturnT类型参数
+     * * @param callback ExceptionCallbackReturnT类型参数
+     *
      * @param wrapperException ClassE类型参数
      * @return static <T, E extends RuntimeException> T类型返回值
      */
@@ -94,7 +98,8 @@ public class ExceptionUtil {
 
     /**
      * doWithCatchReturn方法。
-     *      * @param callback ExceptionCallbackReturnT类型参数
+     * * @param callback ExceptionCallbackReturnT类型参数
+     *
      * @return static <T> T类型返回值
      */
     public static <T> T doWithCatchReturn(ExceptionCallbackReturn<T> callback) {
@@ -107,7 +112,8 @@ public class ExceptionUtil {
 
     /**
      * doWithCatch方法。
-     *      * @param callback ExceptionCallback类型参数
+     * * @param callback ExceptionCallback类型参数
+     *
      * @return static void类型返回值
      */
     public static void doWithCatch(ExceptionCallback callback) {
@@ -120,7 +126,8 @@ public class ExceptionUtil {
 
     /**
      * doWithIgnore方法。
-     *      * @param callback ExceptionCallback类型参数
+     * * @param callback ExceptionCallback类型参数
+     *
      * @return static void类型返回值
      */
     public static void doWithIgnore(ExceptionCallback callback) {
@@ -132,7 +139,8 @@ public class ExceptionUtil {
 
     /**
      * assertTrue方法。
-     *      * @param condition boolean类型参数
+     * * @param condition boolean类型参数
+     *
      * @param message String类型参数
      * @return static void类型返回值
      */

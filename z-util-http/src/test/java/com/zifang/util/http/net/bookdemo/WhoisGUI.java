@@ -22,7 +22,7 @@ public class WhoisGUI extends JFrame {
 
     /**
      * WhoisGUI方法。
-     *      * @param whois Whois类型参数
+     * * @param whois Whois类型参数
      */
     public WhoisGUI(Whois whois) {
         super("Whois");
@@ -63,6 +63,25 @@ public class WhoisGUI extends JFrame {
         ActionListener al = new LookupNames();
         findButton.addActionListener(al);
         searchString.addActionListener(al);
+    }
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        try {
+            Whois server = new Whois();
+            WhoisGUI a = new WhoisGUI(server);
+            a.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            a.pack();
+            EventQueue.invokeLater(new FrameShower(a));
+        } catch (UnknownHostException ex) {
+            JOptionPane.showMessageDialog(null, "Could not locate default host " + Whois.DEFAULT_HOST, "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private JPanel initRecordType() {
@@ -128,10 +147,10 @@ public class WhoisGUI extends JFrame {
         p.add(chosenServer);
         chosenServer.addActionListener(new ActionListener() {
             @Override
-    /**
-     * actionPerformed方法。
-     *      * @param event ActionEvent类型参数
-     */
+            /**
+             * actionPerformed方法。
+             *      * @param event ActionEvent类型参数
+             */
             public void actionPerformed(ActionEvent event) {
                 try {
                     server = new Whois(chosenServer.getText());
@@ -144,13 +163,30 @@ public class WhoisGUI extends JFrame {
         return p;
     }
 
+    private static class FrameShower implements Runnable {
+
+        private final Frame frame;
+
+        FrameShower(Frame frame) {
+            this.frame = frame;
+        }
+
+        @Override
+        /**
+         * run方法。
+         */
+        public void run() {
+            frame.setVisible(true);
+        }
+    }
+
     private class LookupNames implements ActionListener {
 
         @Override
-    /**
-     * actionPerformed方法。
-     *      * @param event ActionEvent类型参数
-     */
+        /**
+         * actionPerformed方法。
+         *      * @param event ActionEvent类型参数
+         */
         public void actionPerformed(ActionEvent event) {
             names.setText("");
             SwingWorker<String, Object> worker = new Lookup();
@@ -161,10 +197,10 @@ public class WhoisGUI extends JFrame {
     private class Lookup extends SwingWorker<String, Object> {
 
         @Override
-    /**
-     * doInBackground方法。
-     * @return String类型返回值
-     */
+        /**
+         * doInBackground方法。
+         * @return String类型返回值
+         */
         protected String doInBackground() throws Exception {
             Whois.SearchIn group = Whois.SearchIn.ALL;
             Whois.SearchFor category = Whois.SearchFor.ANY;
@@ -203,9 +239,9 @@ public class WhoisGUI extends JFrame {
         }
 
         @Override
-    /**
-     * done方法。
-     */
+        /**
+         * done方法。
+         */
         protected void done() {
             try {
                 names.setText(get());
@@ -213,41 +249,6 @@ public class WhoisGUI extends JFrame {
                 JOptionPane.showMessageDialog(WhoisGUI.this, ex.getMessage(), "Lookup Failed",
                         JOptionPane.ERROR_MESSAGE);
             }
-        }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        try {
-            Whois server = new Whois();
-            WhoisGUI a = new WhoisGUI(server);
-            a.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            a.pack();
-            EventQueue.invokeLater(new FrameShower(a));
-        } catch (UnknownHostException ex) {
-            JOptionPane.showMessageDialog(null, "Could not locate default host " + Whois.DEFAULT_HOST, "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private static class FrameShower implements Runnable {
-
-        private final Frame frame;
-
-        FrameShower(Frame frame) {
-            this.frame = frame;
-        }
-
-        @Override
-    /**
-     * run方法。
-     */
-        public void run() {
-            frame.setVisible(true);
         }
     }
 }

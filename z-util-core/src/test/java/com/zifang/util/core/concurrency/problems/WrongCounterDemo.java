@@ -3,6 +3,7 @@ package com.zifang.util.core.concurrency.problems;
 /**
  * @author zifang Lee (oldratlee at gmail dot com)
  */
+
 /**
  * WrongCounterDemo类。
  */
@@ -13,7 +14,8 @@ public class WrongCounterDemo {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws Exception {
@@ -44,9 +46,9 @@ public class WrongCounterDemo {
 
     private class ConcurrencyCheckTask implements Runnable {
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             for (int i = 0; i < INC_COUNT; ++i) {
                 ++counter;

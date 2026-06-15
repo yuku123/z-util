@@ -4,12 +4,15 @@ import com.zifang.util.expr.sql.annotation.SqlFunction;
 import com.zifang.util.expr.sql.function.SqlFunctions;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * SQL 函数注册表。
  * 扫描内置函数 + 用户自定义类，统一的函数查找入口。
- *
+ * <p>
  * 用法：
  * <pre>
  * SqlFunctionRegistry reg = SqlFunctionRegistry.get();
@@ -21,7 +24,9 @@ public final class SqlFunctionRegistry {
 
     private static final SqlFunctionRegistry INSTANCE = new SqlFunctionRegistry();
 
-    /** 函数名 → 函数定义（不区分大小写） */
+    /**
+     * 函数名 → 函数定义（不区分大小写）
+     */
     private final Map<String, SqlFunctionDef> functions = new HashMap<>();
 
     private SqlFunctionRegistry() {
@@ -65,8 +70,9 @@ public final class SqlFunctionRegistry {
 
     /**
      * 注册用户自定义函数（通过 SqlUdf 接口实现）。
+     *
      * @param name 函数名
-     * @param udf 函数实现
+     * @param udf  函数实现
      */
     public SqlFunctionRegistry register(String name, SqlUdf udf) {
         functions.put(name.toUpperCase(), new SqlUdfDef(name, udf));
@@ -75,6 +81,7 @@ public final class SqlFunctionRegistry {
 
     /**
      * 查找函数。
+     *
      * @return null if not found
      */
     public SqlFunctionDef find(String name) {
@@ -89,7 +96,9 @@ public final class SqlFunctionRegistry {
         return functions.values();
     }
 
-    /** 返回所有已注册函数名 */
+    /**
+     * 返回所有已注册函数名
+     */
     public Set<String> names() {
         return functions.keySet();
     }
@@ -105,7 +114,17 @@ public final class SqlFunctionRegistry {
     // 内置函数封装（用于 register(name, udf) 场景）
     // -------------------------------------------------------------------------
 
-    /** 包装 SqlUdf 为 SqlFunctionDef */
+    /**
+     * 用户自定义 UDF 接口。
+     * 用于 register(name, udf) 方式注册。
+     */
+    public interface SqlUdf {
+        Object exec(Map<String, Object> row, Object... args);
+    }
+
+    /**
+     * 包装 SqlUdf 为 SqlFunctionDef
+     */
     private static class SqlUdfDef extends SqlFunctionDef {
         private final SqlUdf udf;
 
@@ -118,13 +137,5 @@ public final class SqlFunctionRegistry {
         public Object exec(Map<String, Object> row, Object... args) {
             return udf.exec(row, args);
         }
-    }
-
-    /**
-     * 用户自定义 UDF 接口。
-     * 用于 register(name, udf) 方式注册。
-     */
-    public interface SqlUdf {
-        Object exec(Map<String, Object> row, Object... args);
     }
 }

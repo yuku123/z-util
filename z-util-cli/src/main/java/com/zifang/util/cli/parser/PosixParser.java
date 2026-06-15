@@ -29,7 +29,8 @@ public class PosixParser extends Parser {
     /**
      * PosixParser方法。
      */
-    public PosixParser() {}
+    public PosixParser() {
+    }
 
     @Override
     /**

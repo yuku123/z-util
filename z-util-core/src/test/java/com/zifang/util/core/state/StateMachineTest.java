@@ -14,15 +14,13 @@ import static org.junit.Assert.*;
  * StateMachine 单元测试。
  * 覆盖：flat 流、层级 composite、entry/exit 动作、guard、history、监听器、并发安全。
  */
+
 /**
  * StateMachineTest类。
  */
 public class StateMachineTest {
 
     // ==================== 基础 flat 流 ====================
-
-    enum S { A, B, C, D }
-    enum E { GO_B, GO_C, GO_D, RESET, TICK }
 
     @Test
     /**
@@ -84,8 +82,6 @@ public class StateMachineTest {
         assertEquals(S.A, sm.getCurrentState());
     }
 
-    // ==================== 守卫 ====================
-
     @Test(expected = StateMachineException.class)
     /**
      * testGuard_rejected_throws方法。
@@ -111,6 +107,8 @@ public class StateMachineTest {
         assertEquals(S.B, sm.getCurrentState());
     }
 
+    // ==================== 守卫 ====================
+
     @Test
     /**
      * testGuard_combined_AND_semantics方法。
@@ -128,8 +126,6 @@ public class StateMachineTest {
         }
     }
 
-    // ==================== Listener ====================
-
     @Test
     /**
      * testListener_endCalled方法。
@@ -140,7 +136,8 @@ public class StateMachineTest {
                 .initial(S.A)
                 .from(S.A).on(E.GO_B).to(S.B)
                 .listener(new StateListener<S, E, Object>() {
-                    @Override public void onTransitionEnd(S from, S to, E event, Object ctx) {
+                    @Override
+                    public void onTransitionEnd(S from, S to, E event, Object ctx) {
                         endCount.incrementAndGet();
                     }
                 })
@@ -159,16 +156,20 @@ public class StateMachineTest {
                 .initial(S.A)
                 .from(S.A).on(E.GO_B).guard(ctx -> false).to(S.B)
                 .listener(new StateListener<S, E, Object>() {
-                    @Override public void onTransitionRefused(S s, E e, Object c, String r) {
+                    @Override
+                    public void onTransitionRefused(S s, E e, Object c, String r) {
                         events.add("refused");
                     }
                 })
                 .build();
-        try { sm.fire(E.GO_B, null); } catch (StateMachineException ignored) {}
+        try {
+            sm.fire(E.GO_B, null);
+        } catch (StateMachineException ignored) {
+        }
         assertEquals(Arrays.asList("refused"), events);
     }
 
-    // ==================== Action 抛错处理 ====================
+    // ==================== Listener ====================
 
     @Test
     /**
@@ -178,8 +179,10 @@ public class StateMachineTest {
         StateMachine<S, E, Object> sm = StateMachine.<S, E, Object>builder()
                 .initial(S.A)
                 .from(S.A).on(E.GO_B)
-                    .action((from, ctx) -> { throw new RuntimeException("boom"); })
-                    .to(S.B)
+                .action((from, ctx) -> {
+                    throw new RuntimeException("boom");
+                })
+                .to(S.B)
                 .build();
         try {
             sm.fire(E.GO_B, null);
@@ -191,15 +194,6 @@ public class StateMachineTest {
         // 状态未切换
         assertEquals(S.A, sm.getCurrentState());
     }
-
-    // ==================== 层级状态：composite + 子态 ====================
-
-    enum OrderState {
-        CREATED, PAID,                 // 顶层：PAID 是 composite
-        PENDING_INVOICE, INVOICED, H, // PAID 的子态：H 是 history 状态
-        SHIPPED, DONE, CANCELLED       // 顶层叶子
-    }
-    enum OrderEvent { PAY, ISSUE_INVOICE, CONFIRM, SHIP, COMPLETE, CANCEL, REENTER }
 
     @Test
     /**
@@ -221,6 +215,8 @@ public class StateMachineTest {
         assertFalse(sm.isComposite(OrderState.PENDING_INVOICE));
     }
 
+    // ==================== Action 抛错处理 ====================
+
     @Test
     /**
      * testHierarchical_localTransition方法。
@@ -239,6 +235,8 @@ public class StateMachineTest {
         // local transition：PENDING_INVOICE -> INVOICED
         assertEquals(OrderState.INVOICED, sm.getCurrentState());
     }
+
+    // ==================== 层级状态：composite + 子态 ====================
 
     @Test
     /**
@@ -287,8 +285,6 @@ public class StateMachineTest {
         assertEquals(OrderState.CANCELLED, sm.getCurrentState());
     }
 
-    // ==================== Entry / Exit 动作 ====================
-
     @Test
     /**
      * testEntryExitActions_calledOnTransition方法。
@@ -323,20 +319,18 @@ public class StateMachineTest {
                         .from(OrderState.PENDING_INVOICE).on(OrderEvent.ISSUE_INVOICE).to(OrderState.INVOICED)
                 )
                 .from(OrderState.INVOICED).on(OrderEvent.CONFIRM)
-                    .action((from, ctx) -> {
-                        // from 应该是 LCA，在 INVOICED 跟 SHIPPED 之间 LCA = null（顶层）
-                        lcaActionCalls.incrementAndGet();
-                        assertNull(from); // 跨顶层无 LCA
-                    })
-                    .to(OrderState.SHIPPED)
+                .action((from, ctx) -> {
+                    // from 应该是 LCA，在 INVOICED 跟 SHIPPED 之间 LCA = null（顶层）
+                    lcaActionCalls.incrementAndGet();
+                    assertNull(from); // 跨顶层无 LCA
+                })
+                .to(OrderState.SHIPPED)
                 .build();
         sm.fire(OrderEvent.PAY, null);
         sm.fire(OrderEvent.ISSUE_INVOICE, null);
         sm.fire(OrderEvent.CONFIRM, null);
         assertEquals(1, lcaActionCalls.get());
     }
-
-    // ==================== accept / hasTransition ====================
 
     @Test
     /**
@@ -362,6 +356,8 @@ public class StateMachineTest {
         assertNull(sm.accept(E.GO_B, null));
     }
 
+    // ==================== Entry / Exit 动作 ====================
+
     @Test
     /**
      * testHasTransition_walksParentChain方法。
@@ -376,8 +372,6 @@ public class StateMachineTest {
         assertTrue(sm.hasTransition(S.B, E.GO_C));
         assertFalse(sm.hasTransition(S.A, E.GO_C));
     }
-
-    // ==================== History（H）状态 ====================
 
     @Test
     /**
@@ -408,6 +402,8 @@ public class StateMachineTest {
         assertEquals(OrderState.INVOICED, sm.getCurrentState());
     }
 
+    // ==================== accept / hasTransition ====================
+
     @Test
     /**
      * testHistory_isHistoryFlagSet方法。
@@ -421,9 +417,6 @@ public class StateMachineTest {
         assertTrue(sm.isHistory(OrderState.H));
         assertFalse(sm.isHistory(OrderState.CREATED));
     }
-
-    enum Sub { OUT, H, MID, A, B }
-    enum Evt2 { A_TO_B, B_TO_A, GO_HISTORY }
 
     @Test
     /**
@@ -483,7 +476,7 @@ public class StateMachineTest {
         assertEquals(Sub.B, sm.getCurrentState());
     }
 
-    // ==================== Final / End State ====================
+    // ==================== History（H）状态 ====================
 
     @Test
     /**
@@ -544,11 +537,11 @@ public class StateMachineTest {
                 .state(Sub.H).end()
                 .listener(new StateListener<Sub, Evt2, Object>() {
                     @Override
-    /**
-     * onStateMachineComplete方法。
-     *      * @param finalState Sub类型参数
-     * @param context Object类型参数
-     */
+                    /**
+                     * onStateMachineComplete方法。
+                     *      * @param finalState Sub类型参数
+                     * @param context Object类型参数
+                     */
                     public void onStateMachineComplete(Sub finalState, Object context) {
                         completedAt.set(finalState);
                     }
@@ -560,8 +553,6 @@ public class StateMachineTest {
         assertTrue(sm.isCompleted());
         assertEquals(Sub.H, completedAt.get());
     }
-
-    // ==================== StateMachineFactory ====================
 
     @Test
     /**
@@ -617,8 +608,6 @@ public class StateMachineTest {
         assertEquals(Sub.A, inst2.getCurrentState()); // inst2 恢复到 A
     }
 
-    // ==================== Choice State ====================
-
     @Test
     /**
      * testChoice_picksFirstMatchingGuard方法。
@@ -630,13 +619,15 @@ public class StateMachineTest {
                 .initial(OrderState.CREATED)
                 .from(OrderState.CREATED).on(OrderEvent.PAY).choice()
                 .when(ctx -> ctx > 1000, OrderState.PAID)
-                .when(ctx -> ctx > 0,    OrderState.CANCELLED)
+                .when(ctx -> ctx > 0, OrderState.CANCELLED)
                 .otherwise(OrderState.SHIPPED)
                 .end()
                 .build();
         sm.fire(OrderEvent.PAY, 500);
         assertEquals(OrderState.CANCELLED, sm.getCurrentState());
     }
+
+    // ==================== Final / End State ====================
 
     @Test
     /**
@@ -691,7 +682,7 @@ public class StateMachineTest {
                 .build();
     }
 
-    // ==================== Persistence SPI ====================
+    // ==================== StateMachineFactory ====================
 
     @Test
     /**
@@ -735,20 +726,21 @@ public class StateMachineTest {
         StateMachinePersister<OrderState, OrderEvent, Object, String> persister =
                 new StateMachinePersister<OrderState, OrderEvent, Object, String>() {
                     @Override
-    /**
-     * persist方法。
-     *      * @param sm StateMachineOrderState,类型参数
-     * @param key String类型参数
-     */
+                    /**
+                     * persist方法。
+                     *      * @param sm StateMachineOrderState,类型参数
+                     * @param key String类型参数
+                     */
                     public void persist(StateMachine<OrderState, OrderEvent, Object> sm, String key) {
                         store.put(key, sm.getSnapshot());
                     }
+
                     @Override
-    /**
-     * restore方法。
-     *      * @param sm StateMachineOrderState,类型参数
-     * @param key String类型参数
-     */
+                    /**
+                     * restore方法。
+                     *      * @param sm StateMachineOrderState,类型参数
+                     * @param key String类型参数
+                     */
                     public void restore(StateMachine<OrderState, OrderEvent, Object> sm, String key) {
                         StateMachineSnapshot<OrderState> snap = store.get(key);
                         if (snap != null) sm.restoreFromSnapshot(snap);
@@ -768,7 +760,7 @@ public class StateMachineTest {
         assertEquals(OrderState.PAID, req2.getCurrentState());    // 恢复成功
     }
 
-    // ==================== DOT Export ====================
+    // ==================== Choice State ====================
 
     @Test
     /**
@@ -825,11 +817,6 @@ public class StateMachineTest {
         assertTrue(dot.contains("TICK (internal)"));
     }
 
-    // ==================== Parallel State Group (fan-out) ====================
-
-    enum UnifiedState { PAY_INIT, PAY_DONE, SHIP_INIT, SHIP_DONE, OTHER_INIT, OTHER_DONE }
-    enum CommonEvent { PAY, SHIP, OTHER }
-
     @Test
     /**
      * testParallelGroup_fireBothRegions方法。
@@ -861,6 +848,8 @@ public class StateMachineTest {
         assertTrue(group.isAllCompleted());
     }
 
+    // ==================== Persistence SPI ====================
+
     @Test
     /**
      * testParallelGroup_getCurrentStates方法。
@@ -883,8 +872,6 @@ public class StateMachineTest {
         assertEquals(UnifiedState.SHIP_INIT, states.get(1));
     }
 
-    // ==================== Internal Transition ====================
-
     @Test
     /**
      * testInternal_doesNotInvokeExitOrEntry方法。
@@ -905,6 +892,8 @@ public class StateMachineTest {
         assertEquals(Arrays.asList("tick action", "tick action"), log);
     }
 
+    // ==================== DOT Export ====================
+
     @Test
     /**
      * testInternal_keepsLastActiveSubstate方法。
@@ -921,8 +910,6 @@ public class StateMachineTest {
         // 即使 internal 触发过，G 仍然能正常转移到 B
         assertEquals(S.B, sm.getCurrentState());
     }
-
-    // ==================== 并发安全 ====================
 
     @Test
     /**
@@ -954,4 +941,30 @@ public class StateMachineTest {
         S finalState = sm.getCurrentState();
         assertNotNull(finalState);
     }
+
+    enum S {A, B, C, D}
+
+    // ==================== Parallel State Group (fan-out) ====================
+
+    enum E {GO_B, GO_C, GO_D, RESET, TICK}
+
+    enum OrderState {
+        CREATED, PAID,                 // 顶层：PAID 是 composite
+        PENDING_INVOICE, INVOICED, H, // PAID 的子态：H 是 history 状态
+        SHIPPED, DONE, CANCELLED       // 顶层叶子
+    }
+
+    enum OrderEvent {PAY, ISSUE_INVOICE, CONFIRM, SHIP, COMPLETE, CANCEL, REENTER}
+
+    enum Sub {OUT, H, MID, A, B}
+
+    // ==================== Internal Transition ====================
+
+    enum Evt2 {A_TO_B, B_TO_A, GO_HISTORY}
+
+    enum UnifiedState {PAY_INIT, PAY_DONE, SHIP_INIT, SHIP_DONE, OTHER_INIT, OTHER_DONE}
+
+    // ==================== 并发安全 ====================
+
+    enum CommonEvent {PAY, SHIP, OTHER}
 }

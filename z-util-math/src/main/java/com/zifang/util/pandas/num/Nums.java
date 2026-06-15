@@ -15,6 +15,7 @@ public class Nums {
 
     /**
      * 从数组对象创建 Num 实例
+     *
      * @param array 数组对象，支持 double[]、int[] 等
      * @return Num 实例
      */
@@ -24,6 +25,7 @@ public class Nums {
 
     /**
      * 从 List 创建 Num 实例
+     *
      * @param list 列表对象
      * @return Num 实例
      */
@@ -33,6 +35,7 @@ public class Nums {
 
     /**
      * 使用维度创建空数组
+     *
      * @param shape 数组形状
      * @param dType 数据类型
      * @return 空 Num 实例
@@ -43,8 +46,9 @@ public class Nums {
 
     /**
      * 使用维度、对象数组和数据类型创建数组
+     *
      * @param shape 数组形状
-     * @param objs 对象数组
+     * @param objs  对象数组
      * @param dType 数据类型
      * @return Num 实例
      */
@@ -54,7 +58,8 @@ public class Nums {
 
     /**
      * 使用对象序列填充 Num
-     * @param num 目标 Num 实例
+     *
+     * @param num  目标 Num 实例
      * @param objs 用于填充的对象数组
      * @return 填充后的 Num 实例
      */
@@ -72,6 +77,7 @@ public class Nums {
      *   <li>aRange(5, 15) 返回 5 ~ 14</li>
      *   <li>aRange(5.0, 12.0, 2) 返回 5.0~12.0，步长为2</li>
      * </ul>
+     *
      * @param i 可以是单个数字(结束值)或多个参数(开始, 结束, 步长)
      * @return 均匀间隔的数值数组
      */

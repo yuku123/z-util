@@ -14,7 +14,8 @@ public class SubPanelRegister {
 
     /**
      * 注册一个子面板
-     * @param id 面板唯一标识
+     *
+     * @param id     面板唯一标识
      * @param jPanel 面板实例
      * @return 当前注册器实例，支持链式调用
      * @throws RuntimeException 如果ID已存在

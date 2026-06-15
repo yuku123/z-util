@@ -1,7 +1,7 @@
 package com.zifang.util.ml.tree;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 
 import java.util.Random;
 
@@ -20,53 +20,9 @@ public class AdaBoost {
     private Random random;
 
     /**
-     * Decision stump (depth-1 tree) for AdaBoost
-     */
-    public static class DecisionStump {
-        public int featureIndex;
-        public double threshold;
-        public int[] predictions;
-        public int nClasses;
-
-    /**
-     * DecisionStump方法。
-     *      * @param nClasses int类型参数
-     */
-        public DecisionStump(int nClasses) {
-            this.nClasses = nClasses;
-            this.predictions = new int[2];  // Prediction for left and right
-        }
-
-    /**
-     * predict方法。
-     *      * @param x double[]类型参数
-     * @return int类型返回值
-     */
-        public int predict(double[] x) {
-            if (x[featureIndex] <= threshold) {
-                return predictions[0];
-            } else {
-                return predictions[1];
-            }
-        }
-
-    /**
-     * predictIndex方法。
-     *      * @param x double[]类型参数
-     * @return int类型返回值
-     */
-        public int predictIndex(double[] x) {
-            if (x[featureIndex] <= threshold) {
-                return 0;
-            } else {
-                return 1;
-            }
-        }
-    }
-
-    /**
      * AdaBoost方法。
-     *      * @param nEstimators int类型参数
+     * * @param nEstimators int类型参数
+     *
      * @param learningRate double类型参数
      */
     public AdaBoost(int nEstimators, double learningRate) {
@@ -77,7 +33,8 @@ public class AdaBoost {
 
     /**
      * fit方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @param y int[]类型参数
      */
     public void fit(NdArray X, int[] y) {
@@ -134,7 +91,8 @@ public class AdaBoost {
 
     /**
      * predict方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @return int[]类型返回值
      */
     public int[] predict(NdArray X) {
@@ -150,7 +108,8 @@ public class AdaBoost {
 
     /**
      * predictProba方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @return NdArray类型返回值
      */
     public NdArray predictProba(NdArray X) {
@@ -323,5 +282,52 @@ public class AdaBoost {
             }
         }
         return NdArray.array(flat, DType.FLOAT64).reshape(rows, cols);
+    }
+
+    /**
+     * Decision stump (depth-1 tree) for AdaBoost
+     */
+    public static class DecisionStump {
+        public int featureIndex;
+        public double threshold;
+        public int[] predictions;
+        public int nClasses;
+
+        /**
+         * DecisionStump方法。
+         * * @param nClasses int类型参数
+         */
+        public DecisionStump(int nClasses) {
+            this.nClasses = nClasses;
+            this.predictions = new int[2];  // Prediction for left and right
+        }
+
+        /**
+         * predict方法。
+         * * @param x double[]类型参数
+         *
+         * @return int类型返回值
+         */
+        public int predict(double[] x) {
+            if (x[featureIndex] <= threshold) {
+                return predictions[0];
+            } else {
+                return predictions[1];
+            }
+        }
+
+        /**
+         * predictIndex方法。
+         * * @param x double[]类型参数
+         *
+         * @return int类型返回值
+         */
+        public int predictIndex(double[] x) {
+            if (x[featureIndex] <= threshold) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
     }
 }

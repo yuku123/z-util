@@ -14,6 +14,7 @@ public class GitRemote {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -22,7 +23,7 @@ public class GitRemote {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -30,6 +31,7 @@ public class GitRemote {
 
     /**
      * getFetchUrl方法。
+     *
      * @return String类型返回值
      */
     public String getFetchUrl() {
@@ -38,7 +40,7 @@ public class GitRemote {
 
     /**
      * setFetchUrl方法。
-     *      * @param fetchUrl String类型参数
+     * * @param fetchUrl String类型参数
      */
     public void setFetchUrl(String fetchUrl) {
         this.fetchUrl = fetchUrl;
@@ -46,6 +48,7 @@ public class GitRemote {
 
     /**
      * getPushUrl方法。
+     *
      * @return String类型返回值
      */
     public String getPushUrl() {
@@ -54,7 +57,7 @@ public class GitRemote {
 
     /**
      * setPushUrl方法。
-     *      * @param pushUrl String类型参数
+     * * @param pushUrl String类型参数
      */
     public void setPushUrl(String pushUrl) {
         this.pushUrl = pushUrl;

@@ -1,8 +1,6 @@
 package com.zifang.util.core.pattern.pool;
 
 import com.zifang.util.core.pattern.pool.monitor.PoolListener;
-import com.zifang.util.core.pattern.pool.monitor.PoolMonitor;
-import com.zifang.util.core.pattern.pool.monitor.PoolStats;
 
 import java.util.function.Supplier;
 
@@ -23,27 +21,28 @@ public class PoolUtils {
 
     /**
      * createSimplePool方法。
-     *      * @param creator SupplierT类型参数
+     * * @param creator SupplierT类型参数
+     *
      * @param destroyer java.util.function.ConsumerT类型参数
-     * @param config PoolConfig类型参数
+     * @param config    PoolConfig类型参数
      * @return static <T> ObjectPool<T>类型返回值
      */
     public static <T> ObjectPool<T> createSimplePool(Supplier<T> creator, java.util.function.Consumer<T> destroyer, PoolConfig config) {
         PooledObjectFactory<T> factory = new PooledObjectFactory<T>() {
             @Override
-    /**
-     * makeObject方法。
-     * @return PooledObject<T>类型返回值
-     */
+            /**
+             * makeObject方法。
+             * @return PooledObject<T>类型返回值
+             */
             public PooledObject<T> makeObject() {
                 return new PooledObject<>(creator.get());
             }
 
             @Override
-    /**
-     * destroyObject方法。
-     *      * @param p PooledObjectT类型参数
-     */
+            /**
+             * destroyObject方法。
+             *      * @param p PooledObjectT类型参数
+             */
             public void destroyObject(PooledObject<T> p) {
                 if (p != null && p.getObject() != null) {
                     destroyer.accept(p.getObject());
@@ -51,28 +50,28 @@ public class PoolUtils {
             }
 
             @Override
-    /**
-     * validateObject方法。
-     *      * @param p PooledObjectT类型参数
-     * @return boolean类型返回值
-     */
+            /**
+             * validateObject方法。
+             *      * @param p PooledObjectT类型参数
+             * @return boolean类型返回值
+             */
             public boolean validateObject(PooledObject<T> p) {
                 return p.getObject() != null;
             }
 
             @Override
-    /**
-     * activateObject方法。
-     *      * @param p PooledObjectT类型参数
-     */
+            /**
+             * activateObject方法。
+             *      * @param p PooledObjectT类型参数
+             */
             public void activateObject(PooledObject<T> p) {
             }
 
             @Override
-    /**
-     * passivateObject方法。
-     *      * @param p PooledObjectT类型参数
-     */
+            /**
+             * passivateObject方法。
+             *      * @param p PooledObjectT类型参数
+             */
             public void passivateObject(PooledObject<T> p) {
             }
         };
@@ -122,19 +121,19 @@ public class PoolUtils {
             PoolListener<T> listener) {
         PooledObjectFactory<T> factory = new PooledObjectFactory<T>() {
             @Override
-    /**
-     * makeObject方法。
-     * @return PooledObject<T>类型返回值
-     */
+            /**
+             * makeObject方法。
+             * @return PooledObject<T>类型返回值
+             */
             public PooledObject<T> makeObject() {
                 return new PooledObject<>(creator.get());
             }
 
             @Override
-    /**
-     * destroyObject方法。
-     *      * @param p PooledObjectT类型参数
-     */
+            /**
+             * destroyObject方法。
+             *      * @param p PooledObjectT类型参数
+             */
             public void destroyObject(PooledObject<T> p) {
                 if (p != null && p.getObject() != null) {
                     destroyer.accept(p.getObject());
@@ -142,28 +141,28 @@ public class PoolUtils {
             }
 
             @Override
-    /**
-     * validateObject方法。
-     *      * @param p PooledObjectT类型参数
-     * @return boolean类型返回值
-     */
+            /**
+             * validateObject方法。
+             *      * @param p PooledObjectT类型参数
+             * @return boolean类型返回值
+             */
             public boolean validateObject(PooledObject<T> p) {
                 return p.getObject() != null;
             }
 
             @Override
-    /**
-     * activateObject方法。
-     *      * @param p PooledObjectT类型参数
-     */
+            /**
+             * activateObject方法。
+             *      * @param p PooledObjectT类型参数
+             */
             public void activateObject(PooledObject<T> p) {
             }
 
             @Override
-    /**
-     * passivateObject方法。
-     *      * @param p PooledObjectT类型参数
-     */
+            /**
+             * passivateObject方法。
+             *      * @param p PooledObjectT类型参数
+             */
             public void passivateObject(PooledObject<T> p) {
             }
         };

@@ -1,9 +1,12 @@
 package com.zifang.util.core.schedule;
 
-import java.time.LocalDate;
-import java.util.*;
 import org.quartz.Calendar;
 import org.quartz.impl.calendar.*;
+
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Quartz {@link Calendar} 的封装类，支持日期排除规则。
@@ -159,6 +162,13 @@ public class ScheduleCalendar {
 
     // ==================== 操作方法 ====================
 
+    private static int toQuartzDayOfWeek(int javaUtilDay) {
+        // java.util.Calendar: SUNDAY=1, MONDAY=2, ...
+        // Quartz/CronExpression: SUNDAY=1, MONDAY=2, ...
+        // 两者相同，但月度日历是 0-based
+        return javaUtilDay;
+    }
+
     /**
      * 添加另一个日历，形成链式过滤。
      * <p>
@@ -174,6 +184,8 @@ public class ScheduleCalendar {
         return new ScheduleCalendar(toChain);
     }
 
+    // ==================== 工具方法 ====================
+
     /**
      * 获取底层 Quartz Calendar 对象。
      * <p>
@@ -181,14 +193,5 @@ public class ScheduleCalendar {
      */
     public org.quartz.Calendar getDelegate() {
         return delegate;
-    }
-
-    // ==================== 工具方法 ====================
-
-    private static int toQuartzDayOfWeek(int javaUtilDay) {
-        // java.util.Calendar: SUNDAY=1, MONDAY=2, ...
-        // Quartz/CronExpression: SUNDAY=1, MONDAY=2, ...
-        // 两者相同，但月度日历是 0-based
-        return javaUtilDay;
     }
 }

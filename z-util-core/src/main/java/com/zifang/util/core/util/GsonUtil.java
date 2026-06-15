@@ -1,6 +1,5 @@
 package com.zifang.util.core.util;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -14,7 +13,7 @@ import java.util.Map;
  */
 public class GsonUtil {
 
-//    private static Gson gson = new Gson();
+    //    private static Gson gson = new Gson();
     // 后端返回的日期格式（需与后端一致）
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
@@ -37,7 +36,8 @@ public class GsonUtil {
 
     /**
      * objectToJsonStr方法。
-     *      * @param object T类型参数
+     * * @param object T类型参数
+     *
      * @return static <T> String类型返回值
      */
     public static <T> String objectToJsonStr(T object) {
@@ -46,7 +46,8 @@ public class GsonUtil {
 
     /**
      * jsonStrToObject方法。
-     *      * @param jsonStr String类型参数
+     * * @param jsonStr String类型参数
+     *
      * @param classOfT ClassT类型参数
      * @return static <T> T类型返回值
      */
@@ -56,7 +57,8 @@ public class GsonUtil {
 
     /**
      * jsonStrToObject方法。
-     *      * @param jsonStr String类型参数
+     * * @param jsonStr String类型参数
+     *
      * @param typeReference Type类型参数
      * @return static <T> T类型返回值
      */
@@ -67,7 +69,8 @@ public class GsonUtil {
 
     /**
      * changeToSubClass方法。
-     *      * @param o Object类型参数
+     * * @param o Object类型参数
+     *
      * @param t ClassT类型参数
      * @return static <T> T类型返回值
      */
@@ -77,7 +80,8 @@ public class GsonUtil {
 
     /**
      * toMap方法。
-     *      * @param o Object类型参数
+     * * @param o Object类型参数
+     *
      * @return static Map<String, Object>类型返回值
      */
     public static Map<String, Object> toMap(Object o) {

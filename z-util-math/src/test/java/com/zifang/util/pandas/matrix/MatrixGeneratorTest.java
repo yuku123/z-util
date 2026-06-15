@@ -3,11 +3,13 @@ package com.zifang.util.pandas.matrix;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * MatrixGenerator 矩阵生成器测试
  */
+
 /**
  * MatrixGeneratorTest类。
  */
@@ -139,9 +141,9 @@ public class MatrixGeneratorTest {
         Matrix matrix = new Matrix();
 
         double[][] data = {
-            {1.0, 2.0, 3.0},
-            {2.0, 4.0, 5.0},
-            {3.0, 5.0, 6.0}
+                {1.0, 2.0, 3.0},
+                {2.0, 4.0, 5.0},
+                {3.0, 5.0, 6.0}
         };
 
         for (int i = 0; i < data.length; i++) {

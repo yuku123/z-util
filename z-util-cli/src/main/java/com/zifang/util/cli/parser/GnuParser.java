@@ -1,6 +1,5 @@
 package com.zifang.util.cli.parser;
 
-import com.zifang.util.cli.model.Option;
 import com.zifang.util.cli.model.Options;
 
 import java.util.ArrayList;
@@ -22,7 +21,8 @@ public class GnuParser extends Parser {
     /**
      * GnuParser方法。
      */
-    public GnuParser() {}
+    public GnuParser() {
+    }
 
     @Override
     /**

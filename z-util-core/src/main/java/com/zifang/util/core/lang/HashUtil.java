@@ -6,6 +6,17 @@ package com.zifang.util.core.lang;
 public class HashUtil {
 
     /**
+     * MASK值，随便找一个值，最好是质数
+     */
+    static int M_MASK = 0x8765fed1;
+    // 32位FNV算法
+    static int M_SHIFT = 0;
+
+    // 替代：  
+    // 使用：hash = (hash ^ (hash>>10) ^ (hash>>20)) & mask;  
+    // 替代：hash %= prime;  
+
+    /**
      * 加法hash
      *
      * @param key   字符串
@@ -35,15 +46,6 @@ public class HashUtil {
         return (hash % prime);
     }
 
-    // 替代：  
-    // 使用：hash = (hash ^ (hash>>10) ^ (hash>>20)) & mask;  
-    // 替代：hash %= prime;  
-    /**
-     * MASK值，随便找一个值，最好是质数
-     */
-    static int M_MASK = 0x8765fed1;
-    
-
     /**
      * 一次一个hash
      *
@@ -60,11 +62,22 @@ public class HashUtil {
         hash += (hash << 3);
         hash ^= (hash >> 11);
         hash += (hash << 15);
-        //   return (hash & M_MASK);  
+        //   return (hash & M_MASK);
         return hash;
     }
 
-    
+    //  
+    /**///// Pearson's Hash  
+    // char pearson(char[]key, ub4 len, char tab[256])  
+    // {  
+    //   char hash;  
+    //   ub4 i;  
+    //   for (hash=len, i=0; i<len; ++i)  
+    //     hash=tab[hash^key[i]];  
+    //   return (hash);  
+    // }  
+
+    /**/
 
     /**
      * Bernstein's hash
@@ -81,25 +94,14 @@ public class HashUtil {
         return hash;
     }
 
-    //  
-    /**///// Pearson's Hash  
-    // char pearson(char[]key, ub4 len, char tab[256])  
-    // {  
-    //   char hash;  
-    //   ub4 i;  
-    //   for (hash=len, i=0; i<len; ++i)  
-    //     hash=tab[hash^key[i]];  
-    //   return (hash);  
-    // }  
-
-    /**///// CRC Hashing，计算crc,具体代码见其他  
-    // ub4 crc(char *key, ub4 len, ub4 mask, ub4 tab[256])  
-    // {  
-    //   ub4 hash, i;  
-    //   for (hash=len, i=0; i<len; ++i)  
-    //     hash = (hash >> 8) ^ tab[(hash & 0xff) ^ key[i]];  
-    //   return (hash & mask);  
-    // }  
+    /// / CRC Hashing，计算crc,具体代码见其他
+    // ub4 crc(char *key, ub4 len, ub4 mask, ub4 tab[256])
+    // {
+    //   ub4 hash, i;
+    //   for (hash=len, i=0; i<len; ++i)
+    //     hash = (hash >> 8) ^ tab[(hash & 0xff) ^ key[i]];
+    //   return (hash & mask);
+    // }
 
     /**/
     public static int universal(char[] key, int mask, int[] tab) {
@@ -134,6 +136,9 @@ public class HashUtil {
         return (hash & mask);
     }
 
+    // LOOKUP3  
+    // 见Bob Jenkins(3).c文件  
+
     /**/
     public static int zobrist(char[] key, int mask, int[][] tab) {
         int hash, i;
@@ -142,13 +147,6 @@ public class HashUtil {
         }
         return (hash & mask);
     }
-
-    // LOOKUP3  
-    // 见Bob Jenkins(3).c文件  
-
-    // 32位FNV算法  
-    static int M_SHIFT = 0;
-    
 
     /**
      * 32位的FNV算法
@@ -166,7 +164,7 @@ public class HashUtil {
         }
         return (hash ^ (hash >> M_SHIFT)) & M_MASK;
     }
-    
+
 
     /**
      * 改进的32位FNV算法1
@@ -187,7 +185,7 @@ public class HashUtil {
         hash += hash << 5;
         return hash;
     }
-    
+
 
     /**
      * 改进的32位FNV算法1
@@ -209,7 +207,6 @@ public class HashUtil {
         return hash;
     }
 
-    
 
     /**
      * Thomas Wang的算法，整数hash
@@ -223,7 +220,7 @@ public class HashUtil {
         key ^= (key >>> 16);
         return key;
     }
-    
+
 
     /**
      * RS算法hash
@@ -242,6 +239,7 @@ public class HashUtil {
 
         return (hash & 0x7FFFFFFF);
     }
+
     /**//* End Of RS Hash Function */
     public static int JSHash(String str) {
         int hash = 1315423911;
@@ -252,6 +250,7 @@ public class HashUtil {
 
         return (hash & 0x7FFFFFFF);
     }
+
     /**//* End Of JS Hash Function */
     public static int PJWHash(String str) {
         int BitsInUnsignedInt = 32;
@@ -271,6 +270,7 @@ public class HashUtil {
 
         return (hash & 0x7FFFFFFF);
     }
+
     /**//* End Of P. J. Weinberger Hash Function */
     public static int ELFHash(String str) {
         int hash = 0;
@@ -286,6 +286,7 @@ public class HashUtil {
 
         return (hash & 0x7FFFFFFF);
     }
+
     /**//* End Of ELF Hash Function */
     public static int BKDRHash(String str) {
         int seed = 131; // 31 131 1313 13131 131313 etc..  
@@ -297,6 +298,7 @@ public class HashUtil {
 
         return (hash & 0x7FFFFFFF);
     }
+
     /**//* End Of BKDR Hash Function */
     public static int SDBMHash(String str) {
         int hash = 0;
@@ -307,6 +309,7 @@ public class HashUtil {
 
         return (hash & 0x7FFFFFFF);
     }
+
     /**//* End Of SDBM Hash Function */
     public static int DJBHash(String str) {
         int hash = 5381;
@@ -317,6 +320,7 @@ public class HashUtil {
 
         return (hash & 0x7FFFFFFF);
     }
+
     /**//* End Of DJB Hash Function */
     public static int DEKHash(String str) {
         int hash = str.length();
@@ -327,6 +331,7 @@ public class HashUtil {
 
         return (hash & 0x7FFFFFFF);
     }
+
     /**//* End Of DEK Hash Function */
     public static int APHash(String str) {
         int hash = 0;
@@ -339,6 +344,7 @@ public class HashUtil {
         //       return (hash & 0x7FFFFFFF);  
         return hash;
     }
+
     /**//* End Of AP Hash Function */
     public static int java(String str) {
         int h = 0;

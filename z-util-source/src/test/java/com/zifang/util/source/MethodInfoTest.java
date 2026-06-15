@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * MethodInfo 模型测试
  */
+
 /**
  * MethodInfoTest类。
  */
@@ -177,8 +178,8 @@ public class MethodInfoTest {
      */
     public void testAnnotations() {
         MethodInfo methodInfo = new MethodInfo();
-        com.zifang.util.source.generator.info.AnnotationInfo annot = 
-            new com.zifang.util.source.generator.info.AnnotationInfo("Override");
+        com.zifang.util.source.generator.info.AnnotationInfo annot =
+                new com.zifang.util.source.generator.info.AnnotationInfo("Override");
         methodInfo.getAnnotations().add(annot);
 
         assertEquals(1, methodInfo.getAnnotations().size());

@@ -13,27 +13,37 @@ public class Counter {
 
     private final AtomicLong count = new AtomicLong();
 
-    /** 当前计数。 */
+    /**
+     * 当前计数。
+     */
     public long get() {
         return count.get();
     }
 
-    /** 加 1。 */
+    /**
+     * 加 1。
+     */
     public long increment() {
         return increment(1L);
     }
 
-    /** 加 n（n 可以为负，表示减少）。 */
+    /**
+     * 加 n（n 可以为负，表示减少）。
+     */
     public long increment(long n) {
         return count.addAndGet(n);
     }
 
-    /** 减 1。 */
+    /**
+     * 减 1。
+     */
     public long decrement() {
         return increment(-1L);
     }
 
-    /** 重置为 0，返回旧值。 */
+    /**
+     * 重置为 0，返回旧值。
+     */
     public long reset() {
         return count.getAndSet(0L);
     }

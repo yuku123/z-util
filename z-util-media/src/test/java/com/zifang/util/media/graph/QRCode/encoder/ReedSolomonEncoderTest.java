@@ -1,6 +1,7 @@
 package com.zifang.util.media.graph.qrcode.encoder;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -130,7 +131,7 @@ public class ReedSolomonEncoderTest {
      */
     public void testEncodeThenDecode() {
         ReedSolomonEncoder encoder = new ReedSolomonEncoder();
-        byte[] original = new byte[]{(byte)0xAB, (byte)0xCD, (byte)0xEF, (byte)0x01, (byte)0x23, (byte)0x45};
+        byte[] original = new byte[]{(byte) 0xAB, (byte) 0xCD, (byte) 0xEF, (byte) 0x01, (byte) 0x23, (byte) 0x45};
         int eccLength = 10;
 
         byte[] ecc = encoder.encode(original, eccLength);

@@ -94,7 +94,7 @@ public final class LogContext {
         }
     }
 
-    // ===== 作用域：with（try-with-resources 风格的 MDC 块） =====
+    // ===== 作用域：with（try-finally 风格的 MDC 块） =====
 
     /**
      * 在指定 MDC 上下文里执行任务，结束后恢复原状（异常也保证）。

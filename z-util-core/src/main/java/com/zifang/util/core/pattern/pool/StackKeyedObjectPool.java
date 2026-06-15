@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Supplier;
 
 /**
  * 基于栈的带键对象池实现
@@ -29,7 +28,7 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
 
     /**
      * StackKeyedObjectPool方法。
-     *      * @param factory PooledObjectFactoryV类型参数
+     * * @param factory PooledObjectFactoryV类型参数
      */
     public StackKeyedObjectPool(PooledObjectFactory<V> factory) {
         this(factory, new PoolConfig());
@@ -37,7 +36,8 @@ public class StackKeyedObjectPool<K, V> implements KeyedObjectPool<K, V> {
 
     /**
      * StackKeyedObjectPool方法。
-     *      * @param factory PooledObjectFactoryV类型参数
+     * * @param factory PooledObjectFactoryV类型参数
+     *
      * @param defaultConfig PoolConfig类型参数
      */
     public StackKeyedObjectPool(PooledObjectFactory<V> factory, PoolConfig defaultConfig) {

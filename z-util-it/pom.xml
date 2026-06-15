@@ -28,31 +28,7 @@
         </dependency>
         <dependency>
             <groupId>com.zifang</groupId>
-            <artifactId>z-util-trace</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zifang</groupId>
-            <artifactId>z-util-ratelimit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zifang</groupId>
-            <artifactId>z-util-resilience</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zifang</groupId>
-            <artifactId>z-util-bean</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zifang</groupId>
-            <artifactId>z-util-jwt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zifang</groupId>
             <artifactId>z-util-distribute</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zifang</groupId>
-            <artifactId>z-util-lock</artifactId>
         </dependency>
         <dependency>
             <groupId>com.zifang</groupId>

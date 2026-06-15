@@ -3,9 +3,7 @@ package com.zifang.util.pandas.io;
 import com.zifang.util.pandas.DataFrame;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.Map;
 
 /**
  * CSV 读取器 - 支持从 CSV 文件读取数据
@@ -23,10 +21,12 @@ public class CSVReader {
     /**
      * CSVReader方法。
      */
-    public CSVReader() {}
+    public CSVReader() {
+    }
 
     /**
      * builder方法。
+     *
      * @return static CSVReader类型返回值
      */
     public static CSVReader builder() {
@@ -35,7 +35,8 @@ public class CSVReader {
 
     /**
      * delimiter方法。
-     *      * @param delimiter char类型参数
+     * * @param delimiter char类型参数
+     *
      * @return CSVReader类型返回值
      */
     public CSVReader delimiter(char delimiter) {
@@ -45,7 +46,8 @@ public class CSVReader {
 
     /**
      * quoteChar方法。
-     *      * @param quoteChar char类型参数
+     * * @param quoteChar char类型参数
+     *
      * @return CSVReader类型返回值
      */
     public CSVReader quoteChar(char quoteChar) {
@@ -55,7 +57,8 @@ public class CSVReader {
 
     /**
      * hasHeader方法。
-     *      * @param hasHeader boolean类型参数
+     * * @param hasHeader boolean类型参数
+     *
      * @return CSVReader类型返回值
      */
     public CSVReader hasHeader(boolean hasHeader) {
@@ -65,7 +68,8 @@ public class CSVReader {
 
     /**
      * encoding方法。
-     *      * @param encoding String类型参数
+     * * @param encoding String类型参数
+     *
      * @return CSVReader类型返回值
      */
     public CSVReader encoding(String encoding) {
@@ -75,7 +79,8 @@ public class CSVReader {
 
     /**
      * skipRows方法。
-     *      * @param skipRows int类型参数
+     * * @param skipRows int类型参数
+     *
      * @return CSVReader类型返回值
      */
     public CSVReader skipRows(int skipRows) {
@@ -85,7 +90,8 @@ public class CSVReader {
 
     /**
      * maxRows方法。
-     *      * @param maxRows int类型参数
+     * * @param maxRows int类型参数
+     *
      * @return CSVReader类型返回值
      */
     public CSVReader maxRows(int maxRows) {

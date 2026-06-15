@@ -6,11 +6,13 @@ import org.junit.Test;
 
 import java.io.InputStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * SrcCreator 反编译测试
  */
+
 /**
  * SrcCreatorTest类。
  */

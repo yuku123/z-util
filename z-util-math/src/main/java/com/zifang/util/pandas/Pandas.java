@@ -3,9 +3,11 @@ package com.zifang.util.pandas;
 import com.zifang.util.pandas.io.CSVReader;
 import com.zifang.util.pandas.io.CSVWriter;
 import com.zifang.util.pandas.matrix.Linalg;
-import com.zifang.util.pandas.num.*;
+import com.zifang.util.pandas.num.Maths;
+import com.zifang.util.pandas.num.Num;
+import com.zifang.util.pandas.num.NumRandom;
+import com.zifang.util.pandas.num.Nums;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +20,19 @@ public class Pandas {
 
     // ==================== DataFrame 创建 ====================
 
+    public static final double PI = Math.PI;
+    public static final double E = Math.E;
+    public static final double INF = Double.POSITIVE_INFINITY;
+    public static final double NINF = Double.NEGATIVE_INFINITY;
+
+    // ==================== Series 创建 ====================
+    public static final double NAN = Double.NaN;
+    public static final double EPSILON = 2.220446049250313e-16;
+
     /**
      * DataFrame方法。
-     *      * @param data MapString,类型参数
+     * * @param data MapString,类型参数
+     *
      * @return static DataFrame类型返回值
      */
     public static DataFrame DataFrame(Map<String, double[]> data) {
@@ -29,7 +41,8 @@ public class Pandas {
 
     /**
      * DataFrame方法。
-     *      * @param data MapString,类型参数
+     * * @param data MapString,类型参数
+     *
      * @param index String[]类型参数
      * @return static DataFrame类型返回值
      */
@@ -37,9 +50,12 @@ public class Pandas {
         return new DataFrame(data, index);
     }
 
+    // ==================== Num 数组创建 ====================
+
     /**
      * DataFrame方法。
-     *      * @param records ListMapString,类型参数
+     * * @param records ListMapString,类型参数
+     *
      * @return static DataFrame类型返回值
      */
     public static DataFrame DataFrame(List<Map<String, Object>> records) {
@@ -48,7 +64,8 @@ public class Pandas {
 
     /**
      * DataFrame方法。
-     *      * @param data Object[][]类型参数
+     * * @param data Object[][]类型参数
+     *
      * @param columns String[]类型参数
      * @return static DataFrame类型返回值
      */
@@ -65,11 +82,10 @@ public class Pandas {
         return new DataFrame(map);
     }
 
-    // ==================== Series 创建 ====================
-
     /**
      * Series方法。
-     *      * @param data double[]类型参数
+     * * @param data double[]类型参数
+     *
      * @return static Series类型返回值
      */
     public static Series Series(double[] data) {
@@ -78,7 +94,8 @@ public class Pandas {
 
     /**
      * Series方法。
-     *      * @param data double[]类型参数
+     * * @param data double[]类型参数
+     *
      * @param index String[]类型参数
      * @return static Series类型返回值
      */
@@ -88,7 +105,8 @@ public class Pandas {
 
     /**
      * Series方法。
-     *      * @param data MapString,类型参数
+     * * @param data MapString,类型参数
+     *
      * @return static Series类型返回值
      */
     public static Series Series(Map<String, Double> data) {
@@ -97,7 +115,8 @@ public class Pandas {
 
     /**
      * Series方法。
-     *      * @param data double[]类型参数
+     * * @param data double[]类型参数
+     *
      * @param name String类型参数
      * @return static Series类型返回值
      */
@@ -105,11 +124,10 @@ public class Pandas {
         return new Series(data, name);
     }
 
-    // ==================== Num 数组创建 ====================
-
     /**
      * array方法。
-     *      * @param data double[]类型参数
+     * * @param data double[]类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num array(double[] data) {
@@ -118,7 +136,8 @@ public class Pandas {
 
     /**
      * array方法。
-     *      * @param data double[][]类型参数
+     * * @param data double[][]类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num array(double[][] data) {
@@ -127,7 +146,8 @@ public class Pandas {
 
     /**
      * array方法。
-     *      * @param data int[]类型参数
+     * * @param data int[]类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num array(int[] data) {
@@ -140,7 +160,8 @@ public class Pandas {
 
     /**
      * zeros方法。
-     *      * @param shape int...类型参数
+     * * @param shape int...类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num zeros(int... shape) {
@@ -149,16 +170,20 @@ public class Pandas {
 
     /**
      * ones方法。
-     *      * @param shape int...类型参数
+     * * @param shape int...类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num ones(int... shape) {
         return Num.ones(shape);
     }
 
+    // ==================== 随机数 ====================
+
     /**
      * eye方法。
-     *      * @param n int类型参数
+     * * @param n int类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num eye(int n) {
@@ -171,7 +196,8 @@ public class Pandas {
 
     /**
      * full方法。
-     *      * @param shape int[]类型参数
+     * * @param shape int[]类型参数
+     *
      * @param value double类型参数
      * @return static Num类型返回值
      */
@@ -181,7 +207,8 @@ public class Pandas {
 
     /**
      * arange方法。
-     *      * @param start double类型参数
+     * * @param start double类型参数
+     *
      * @param stop double类型参数
      * @param step double类型参数
      * @return static Num类型返回值
@@ -192,7 +219,8 @@ public class Pandas {
 
     /**
      * arange方法。
-     *      * @param stop double类型参数
+     * * @param stop double类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num arange(double stop) {
@@ -201,20 +229,24 @@ public class Pandas {
 
     /**
      * linspace方法。
-     *      * @param start double类型参数
+     * * @param start double类型参数
+     *
      * @param stop double类型参数
-     * @param num int类型参数
+     * @param num  int类型参数
      * @return static Num类型返回值
      */
     public static Num linspace(double start, double stop, int num) {
         return Num.linspace(start, stop, num);
     }
 
+    // ==================== 文件 I/O ====================
+
     /**
      * linspace方法。
-     *      * @param start double类型参数
-     * @param stop double类型参数
-     * @param num int类型参数
+     * * @param start double类型参数
+     *
+     * @param stop     double类型参数
+     * @param num      int类型参数
      * @param endpoint boolean类型参数
      * @return static Num类型返回值
      */
@@ -222,10 +254,9 @@ public class Pandas {
         return Num.linspace(start, stop, num, endpoint);
     }
 
-    // ==================== 随机数 ====================
-
     /**
      * random方法。
+     *
      * @return static NumRandom类型返回值
      */
     public static NumRandom random() {
@@ -234,7 +265,8 @@ public class Pandas {
 
     /**
      * rand方法。
-     *      * @param shape int...类型参数
+     * * @param shape int...类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num rand(int... shape) {
@@ -243,7 +275,8 @@ public class Pandas {
 
     /**
      * randn方法。
-     *      * @param shape int...类型参数
+     * * @param shape int...类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num randn(int... shape) {
@@ -252,8 +285,9 @@ public class Pandas {
 
     /**
      * randint方法。
-     *      * @param low int类型参数
-     * @param high int类型参数
+     * * @param low int类型参数
+     *
+     * @param high  int类型参数
      * @param shape int...类型参数
      * @return static Num类型返回值
      */
@@ -263,18 +297,18 @@ public class Pandas {
 
     /**
      * seed方法。
-     *      * @param seed long类型参数
+     * * @param seed long类型参数
+     *
      * @return static void类型返回值
      */
     public static void seed(long seed) {
         Nums.random.seed(seed);
     }
 
-    // ==================== 文件 I/O ====================
-
     /**
      * read_csv方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
+     *
      * @return static DataFrame类型返回值
      */
     public static DataFrame read_csv(String filePath) throws IOException {
@@ -283,7 +317,8 @@ public class Pandas {
 
     /**
      * read_csv方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
+     *
      * @param delimiter char类型参数
      * @return static DataFrame类型返回值
      */
@@ -293,7 +328,8 @@ public class Pandas {
 
     /**
      * read_csv方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
+     *
      * @param hasHeader boolean类型参数
      * @return static DataFrame类型返回值
      */
@@ -303,7 +339,8 @@ public class Pandas {
 
     /**
      * read_csv方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
+     *
      * @param encoding String类型参数
      * @return static DataFrame类型返回值
      */
@@ -313,7 +350,8 @@ public class Pandas {
 
     /**
      * read_csv方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
+     *
      * @param skipRows int类型参数
      * @return static DataFrame类型返回值
      */
@@ -323,18 +361,22 @@ public class Pandas {
 
     /**
      * read_csv方法。
-     *      * @param filePath String类型参数
+     * * @param filePath String类型参数
+     *
      * @param skipRows int类型参数
-     * @param maxRows int类型参数
+     * @param maxRows  int类型参数
      * @return static DataFrame类型返回值
      */
     public static DataFrame read_csv(String filePath, int skipRows, int maxRows) throws IOException {
         return CSVReader.builder().skipRows(skipRows).maxRows(maxRows).read(filePath);
     }
 
+    // ==================== 数学运算 ====================
+
     /**
      * to_csv方法。
-     *      * @param df DataFrame类型参数
+     * * @param df DataFrame类型参数
+     *
      * @param filePath String类型参数
      * @return static void类型返回值
      */
@@ -344,8 +386,9 @@ public class Pandas {
 
     /**
      * to_csv方法。
-     *      * @param df DataFrame类型参数
-     * @param filePath String类型参数
+     * * @param df DataFrame类型参数
+     *
+     * @param filePath  String类型参数
      * @param delimiter char类型参数
      * @return static void类型返回值
      */
@@ -355,8 +398,9 @@ public class Pandas {
 
     /**
      * to_csv方法。
-     *      * @param df DataFrame类型参数
-     * @param filePath String类型参数
+     * * @param df DataFrame类型参数
+     *
+     * @param filePath      String类型参数
      * @param includeHeader boolean类型参数
      * @return static void类型返回值
      */
@@ -366,22 +410,24 @@ public class Pandas {
 
     /**
      * to_csv方法。
-     *      * @param df DataFrame类型参数
-     * @param filePath String类型参数
+     * * @param df DataFrame类型参数
+     *
+     * @param filePath      String类型参数
      * @param includeHeader boolean类型参数
-     * @param includeIndex boolean类型参数
+     * @param includeIndex  boolean类型参数
      * @return static void类型返回值
      */
     public static void to_csv(DataFrame df, String filePath, boolean includeHeader, boolean includeIndex) throws IOException {
         CSVWriter.builder()
-            .includeHeader(includeHeader)
-            .includeIndex(includeIndex)
-            .write(df, filePath);
+                .includeHeader(includeHeader)
+                .includeIndex(includeIndex)
+                .write(df, filePath);
     }
 
     /**
      * to_csv方法。
-     *      * @param df DataFrame类型参数
+     * * @param df DataFrame类型参数
+     *
      * @param filePath String类型参数
      * @param encoding String类型参数
      * @return static void类型返回值
@@ -392,18 +438,18 @@ public class Pandas {
 
     /**
      * to_csv_string方法。
-     *      * @param df DataFrame类型参数
+     * * @param df DataFrame类型参数
+     *
      * @return static String类型返回值
      */
     public static String to_csv_string(DataFrame df) {
         return CSVWriter.toCSVString(df);
     }
 
-    // ==================== 数学运算 ====================
-
     /**
      * sin方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num sin(Num x) {
@@ -412,7 +458,8 @@ public class Pandas {
 
     /**
      * cos方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num cos(Num x) {
@@ -421,16 +468,20 @@ public class Pandas {
 
     /**
      * tan方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num tan(Num x) {
         return Maths.tan(x);
     }
 
+    // ==================== 线性代数 ====================
+
     /**
      * exp方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num exp(Num x) {
@@ -439,7 +490,8 @@ public class Pandas {
 
     /**
      * log方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num log(Num x) {
@@ -448,7 +500,8 @@ public class Pandas {
 
     /**
      * log10方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num log10(Num x) {
@@ -457,7 +510,8 @@ public class Pandas {
 
     /**
      * sqrt方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num sqrt(Num x) {
@@ -466,7 +520,8 @@ public class Pandas {
 
     /**
      * abs方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num abs(Num x) {
@@ -475,7 +530,8 @@ public class Pandas {
 
     /**
      * pow方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @param y double类型参数
      * @return static Num类型返回值
      */
@@ -483,11 +539,10 @@ public class Pandas {
         return Maths.pow(x, y);
     }
 
-    // ==================== 线性代数 ====================
-
     /**
      * dot方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @param b Num类型参数
      * @return static Num类型返回值
      */
@@ -497,7 +552,8 @@ public class Pandas {
 
     /**
      * matmul方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @param b Num类型参数
      * @return static Num类型返回值
      */
@@ -507,7 +563,8 @@ public class Pandas {
 
     /**
      * inv方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num inv(Num a) {
@@ -516,7 +573,8 @@ public class Pandas {
 
     /**
      * pinv方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @return static Num类型返回值
      */
     public static Num pinv(Num a) {
@@ -525,7 +583,8 @@ public class Pandas {
 
     /**
      * det方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @return static double类型返回值
      */
     public static double det(Num a) {
@@ -534,7 +593,8 @@ public class Pandas {
 
     /**
      * eig方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @return static Linalg.EigenResult类型返回值
      */
     public static Linalg.EigenResult eig(Num a) {
@@ -543,16 +603,20 @@ public class Pandas {
 
     /**
      * svd方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @return static Linalg.SVDResult类型返回值
      */
     public static Linalg.SVDResult svd(Num a) {
         return Linalg.svd(a);
     }
 
+    // ==================== 数据转换操作 ====================
+
     /**
      * qr方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @return static Linalg.QRResult类型返回值
      */
     public static Linalg.QRResult qr(Num a) {
@@ -561,7 +625,8 @@ public class Pandas {
 
     /**
      * solve方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @param b Num类型参数
      * @return static Num类型返回值
      */
@@ -571,7 +636,8 @@ public class Pandas {
 
     /**
      * trace方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @return static double类型返回值
      */
     public static double trace(Num a) {
@@ -580,7 +646,8 @@ public class Pandas {
 
     /**
      * norm方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @return static double类型返回值
      */
     public static double norm(Num x) {
@@ -589,7 +656,8 @@ public class Pandas {
 
     /**
      * norm方法。
-     *      * @param x Num类型参数
+     * * @param x Num类型参数
+     *
      * @param ord int类型参数
      * @return static double类型返回值
      */
@@ -599,15 +667,13 @@ public class Pandas {
 
     /**
      * matrix_rank方法。
-     *      * @param a Num类型参数
+     * * @param a Num类型参数
+     *
      * @return static int类型返回值
      */
     public static int matrix_rank(Num a) {
         return Linalg.matrix_rank(a);
     }
-
-    // ==================== 数据转换操作 ====================
-
 
     /**
      * 带聚合函数的数据透视表
@@ -621,9 +687,11 @@ public class Pandas {
      * pivot 的逆操作
      */
     public static DataFrame melt(DataFrame df, List<String> idVars, List<String> valueVars,
-                                  String varName, String valueName) {
+                                 String varName, String valueName) {
         return com.zifang.util.pandas.transform.Reshaper.melt(df, idVars, valueVars, varName, valueName);
     }
+
+    // ==================== 插值操作 ====================
 
     /**
      * 简化版 melt - 使用默认列名
@@ -656,6 +724,8 @@ public class Pandas {
         return com.zifang.util.pandas.transform.Reshaper.crosstab(df, rowVar, colVar);
     }
 
+    // ==================== 统计分析和相关性 ====================
+
     /**
      * 转置 DataFrame
      * 行列互换
@@ -671,14 +741,14 @@ public class Pandas {
         return transpose(df);
     }
 
-    // ==================== 插值操作 ====================
-
     /**
      * 对 Series 进行线性插值
      */
     public static Series interpolate(Series series) {
         return com.zifang.util.pandas.interpolate.Interpolator.linear(series);
     }
+
+    // ==================== 数据离散化和分箱 ====================
 
     /**
      * 对 Series 进行指定方法的插值
@@ -704,6 +774,8 @@ public class Pandas {
         return df.interpolate("linear");
     }
 
+    // ==================== 数据转换快捷方法 ====================
+
     /**
      * 对 DataFrame 进行指定方法的插值
      */
@@ -711,7 +783,7 @@ public class Pandas {
         return df.interpolate(method);
     }
 
-    // ==================== 统计分析和相关性 ====================
+    // ==================== 常量 ====================
 
     /**
      * 计算 DataFrame 的相关系数矩阵
@@ -725,8 +797,8 @@ public class Pandas {
      */
     public static double corr(Series x, Series y) {
         return com.zifang.util.pandas.stats.Correlation.corr(
-            new DataFrame(java.util.Collections.singletonMap("x", x.toArray()))
-                .addColumn("y", y.toArray())
+                new DataFrame(java.util.Collections.singletonMap("x", x.toArray()))
+                        .addColumn("y", y.toArray())
         ).get("y").toArray()[0];
     }
 
@@ -736,8 +808,6 @@ public class Pandas {
     public static DataFrame cov(DataFrame df) {
         return com.zifang.util.pandas.stats.Correlation.cov(df);
     }
-
-    // ==================== 数据离散化和分箱 ====================
 
     /**
      * 等宽分箱 (cut)
@@ -755,21 +825,10 @@ public class Pandas {
         return com.zifang.util.pandas.discretize.Discretizer.qcut(series, q);
     }
 
-    // ==================== 数据转换快捷方法 ====================
-
     /**
      * 数据透视表的快捷方法
      */
     public static DataFrame pivot(DataFrame df, String index, String columns, String values) {
         return com.zifang.util.pandas.transform.Reshaper.pivot(df, index, columns, values);
     }
-
-    // ==================== 常量 ====================
-
-    public static final double PI = Math.PI;
-    public static final double E = Math.E;
-    public static final double INF = Double.POSITIVE_INFINITY;
-    public static final double NINF = Double.NEGATIVE_INFINITY;
-    public static final double NAN = Double.NaN;
-    public static final double EPSILON = 2.220446049250313e-16;
 }

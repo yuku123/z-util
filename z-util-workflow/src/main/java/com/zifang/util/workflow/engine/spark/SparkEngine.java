@@ -22,6 +22,15 @@ public class SparkEngine extends AbstractSparkEngine {
     };
 
     /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+    }
+
+    /**
      * 获取已注册的引擎服务映射表。
      *
      * @return 服务单元名称到服务类类型的映射
@@ -55,7 +64,7 @@ public class SparkEngine extends AbstractSparkEngine {
     /**
      * 注册引擎服务。
      *
-     * @param name         服务单元名称
+     * @param name          服务单元名称
      * @param engineService 服务类类型
      */
     @Override
@@ -77,13 +86,5 @@ public class SparkEngine extends AbstractSparkEngine {
      * doInitial方法。
      */
     public void doInitial() {
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
     }
 }

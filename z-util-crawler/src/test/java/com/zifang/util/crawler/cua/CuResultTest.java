@@ -57,7 +57,7 @@ public class CuResultTest {
      */
     public void testSettersAndGetters() {
         CuResult result = new CuResult();
-        
+
         result.setSuccess(true);
         assertTrue(result.isSuccess());
 
@@ -81,9 +81,9 @@ public class CuResultTest {
         CuResult result = new CuResult();
         StepResult step1 = StepResult.builder().stepName("step1").success(true).build();
         StepResult step2 = StepResult.builder().stepName("step2").success(false).build();
-        
+
         result.setStepResults(Arrays.asList(step1, step2));
-        
+
         assertEquals(2, result.getStepResults().size());
         assertEquals("step1", result.getStepResults().get(0).getStepName());
         assertEquals("step2", result.getStepResults().get(1).getStepName());

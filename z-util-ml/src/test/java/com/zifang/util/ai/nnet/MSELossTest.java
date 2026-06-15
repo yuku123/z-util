@@ -2,11 +2,12 @@ package com.zifang.util.ml.nnet;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * MSELoss 类测试
  */
+
 /**
  * MSELossTest类。
  */
@@ -104,7 +105,7 @@ public class MSELossTest {
         double loss = mseLoss.compute(predictions, targets);
 
         // Errors = -1, -2, -3, squared = 1, 4, 9, mean = 14/3
-        assertEquals(14.0/3.0, loss, 0.0001);
+        assertEquals(14.0 / 3.0, loss, 0.0001);
     }
 
     @Test
@@ -120,7 +121,7 @@ public class MSELossTest {
         double loss = mseLoss.compute(predictions, targets);
 
         // Errors = 1, 2, 3, squared = 1, 4, 9, mean = 14/3
-        assertEquals(14.0/3.0, loss, 0.0001);
+        assertEquals(14.0 / 3.0, loss, 0.0001);
     }
 
     @Test
@@ -155,9 +156,9 @@ public class MSELossTest {
 
         assertEquals(3, gradient.length);
         // gradient[i] = 2 * (pred[i] - target[i]) / n = 2 * (-1) / 3 = -2/3
-        assertEquals(-2.0/3.0, gradient[0], 0.0001);
-        assertEquals(-2.0/3.0, gradient[1], 0.0001);
-        assertEquals(-2.0/3.0, gradient[2], 0.0001);
+        assertEquals(-2.0 / 3.0, gradient[0], 0.0001);
+        assertEquals(-2.0 / 3.0, gradient[1], 0.0001);
+        assertEquals(-2.0 / 3.0, gradient[2], 0.0001);
     }
 
     @Test

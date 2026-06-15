@@ -1,8 +1,7 @@
 package com.zifang.util.ml.nn.activations;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
-import com.zifang.util.numpy.Shape;
+import com.zifang.util.numpy.NdArray;
 
 /**
  * Tanh (Hyperbolic Tangent) activation function
@@ -10,9 +9,9 @@ import com.zifang.util.numpy.Shape;
  * f'(x) = 1 - tanh^2(x)
  */
 public class Tanh extends com.zifang.util.ml.nn.Module {
-    
+
     private NdArray savedOutput;  // Store tanh(x) for backward pass
-    
+
     @Override
     /**
      * forward方法。
@@ -24,17 +23,17 @@ public class Tanh extends com.zifang.util.ml.nn.Module {
         Object inData = input.getData();
         Object outData = output.getData();
         int size = input.size();
-        
+
         for (int i = 0; i < size; i++) {
             float x = ((Number) com.zifang.util.numpy.Array.get(inData, i)).floatValue();
             float result = (float) Math.tanh(x);
             com.zifang.util.numpy.Array.set(outData, i, result);
         }
-        
+
         savedOutput = output.copy();
         return output;
     }
-    
+
     @Override
     /**
      * backward方法。
@@ -47,17 +46,17 @@ public class Tanh extends com.zifang.util.ml.nn.Module {
         Object gOutData = gradOutput.getData();
         Object tanhData = savedOutput.getData();
         int size = gradOutput.size();
-        
+
         for (int i = 0; i < size; i++) {
             float tanhVal = ((Number) com.zifang.util.numpy.Array.get(tanhData, i)).floatValue();
             float gOut = ((Number) com.zifang.util.numpy.Array.get(gOutData, i)).floatValue();
-            
+
             // d/dx tanh(x) = 1 - tanh^2(x)
             float dx = 1.0f - tanhVal * tanhVal;
-            
+
             com.zifang.util.numpy.Array.set(gInData, i, gOut * dx);
         }
-        
+
         return gradInput;
     }
 }

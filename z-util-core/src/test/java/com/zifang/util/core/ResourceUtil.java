@@ -6,7 +6,8 @@ package com.zifang.util.core;
 public class ResourceUtil {
     /**
      * getFileFromResource方法。
-     *      * @param path String类型参数
+     * * @param path String类型参数
+     *
      * @return static String类型返回值
      */
     public static String getFileFromResource(String path) {
@@ -15,7 +16,8 @@ public class ResourceUtil {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -31,6 +33,7 @@ public class ResourceUtil {
      */
     /**
      * test1方法。
+     *
      * @return static void类型返回值
      */
     public static void test1() {
@@ -51,6 +54,7 @@ public class ResourceUtil {
      */
     /**
      * test2方法。
+     *
      * @return static void类型返回值
      */
     public static void test2() {
@@ -64,6 +68,7 @@ public class ResourceUtil {
      */
     /**
      * test3方法。
+     *
      * @return static void类型返回值
      */
     public static void test3() {
@@ -75,6 +80,7 @@ public class ResourceUtil {
      */
     /**
      * test4方法。
+     *
      * @return static void类型返回值
      */
     public static void test4() {

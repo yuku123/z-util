@@ -23,6 +23,7 @@ public class VolumeDTO {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -31,7 +32,7 @@ public class VolumeDTO {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -39,6 +40,7 @@ public class VolumeDTO {
 
     /**
      * getDriver方法。
+     *
      * @return String类型返回值
      */
     public String getDriver() {
@@ -47,7 +49,7 @@ public class VolumeDTO {
 
     /**
      * setDriver方法。
-     *      * @param driver String类型参数
+     * * @param driver String类型参数
      */
     public void setDriver(String driver) {
         this.driver = driver;
@@ -55,6 +57,7 @@ public class VolumeDTO {
 
     /**
      * getMountpoint方法。
+     *
      * @return String类型返回值
      */
     public String getMountpoint() {
@@ -63,7 +66,7 @@ public class VolumeDTO {
 
     /**
      * setMountpoint方法。
-     *      * @param mountpoint String类型参数
+     * * @param mountpoint String类型参数
      */
     public void setMountpoint(String mountpoint) {
         this.mountpoint = mountpoint;
@@ -71,6 +74,7 @@ public class VolumeDTO {
 
     /**
      * getScope方法。
+     *
      * @return String类型返回值
      */
     public String getScope() {
@@ -79,7 +83,7 @@ public class VolumeDTO {
 
     /**
      * setScope方法。
-     *      * @param scope String类型参数
+     * * @param scope String类型参数
      */
     public void setScope(String scope) {
         this.scope = scope;
@@ -87,6 +91,7 @@ public class VolumeDTO {
 
     /**
      * getLabels方法。
+     *
      * @return Map<String, String>类型返回值
      */
     public Map<String, String> getLabels() {
@@ -95,7 +100,7 @@ public class VolumeDTO {
 
     /**
      * setLabels方法。
-     *      * @param labels MapString,类型参数
+     * * @param labels MapString,类型参数
      */
     public void setLabels(Map<String, String> labels) {
         this.labels = labels;
@@ -103,6 +108,7 @@ public class VolumeDTO {
 
     /**
      * getCreated方法。
+     *
      * @return String类型返回值
      */
     public String getCreated() {
@@ -111,7 +117,7 @@ public class VolumeDTO {
 
     /**
      * setCreated方法。
-     *      * @param created String类型参数
+     * * @param created String类型参数
      */
     public void setCreated(String created) {
         this.created = created;
@@ -119,6 +125,7 @@ public class VolumeDTO {
 
     /**
      * isReadonly方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isReadonly() {
@@ -127,7 +134,7 @@ public class VolumeDTO {
 
     /**
      * setReadonly方法。
-     *      * @param readonly boolean类型参数
+     * * @param readonly boolean类型参数
      */
     public void setReadonly(boolean readonly) {
         this.readonly = readonly;

@@ -1,18 +1,19 @@
 package com.zifang.util.pandas.stats;
 
 import com.zifang.util.pandas.DataFrame;
-import com.zifang.util.pandas.Series;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Correlation 相关性分析测试类
  * 测试相关系数计算和协方差矩阵功能
  */
+
 /**
  * CorrelationTest类。
  */

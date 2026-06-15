@@ -25,6 +25,7 @@ public class Asset {
 
     /**
      * getId方法。
+     *
      * @return String类型返回值
      */
     public String getId() {
@@ -33,7 +34,7 @@ public class Asset {
 
     /**
      * setId方法。
-     *      * @param id String类型参数
+     * * @param id String类型参数
      */
     public void setId(String id) {
         this.id = id;
@@ -41,6 +42,7 @@ public class Asset {
 
     /**
      * getRepository方法。
+     *
      * @return String类型返回值
      */
     public String getRepository() {
@@ -49,7 +51,7 @@ public class Asset {
 
     /**
      * setRepository方法。
-     *      * @param repository String类型参数
+     * * @param repository String类型参数
      */
     public void setRepository(String repository) {
         this.repository = repository;
@@ -57,6 +59,7 @@ public class Asset {
 
     /**
      * getPath方法。
+     *
      * @return String类型返回值
      */
     public String getPath() {
@@ -65,7 +68,7 @@ public class Asset {
 
     /**
      * setPath方法。
-     *      * @param path String类型参数
+     * * @param path String类型参数
      */
     public void setPath(String path) {
         this.path = path;
@@ -73,6 +76,7 @@ public class Asset {
 
     /**
      * getDownloadUrl方法。
+     *
      * @return String类型返回值
      */
     public String getDownloadUrl() {
@@ -81,7 +85,7 @@ public class Asset {
 
     /**
      * setDownloadUrl方法。
-     *      * @param downloadUrl String类型参数
+     * * @param downloadUrl String类型参数
      */
     public void setDownloadUrl(String downloadUrl) {
         this.downloadUrl = downloadUrl;
@@ -89,6 +93,7 @@ public class Asset {
 
     /**
      * getChecksum方法。
+     *
      * @return Checksum类型返回值
      */
     public Checksum getChecksum() {
@@ -97,7 +102,7 @@ public class Asset {
 
     /**
      * setChecksum方法。
-     *      * @param checksum Checksum类型参数
+     * * @param checksum Checksum类型参数
      */
     public void setChecksum(Checksum checksum) {
         this.checksum = checksum;
@@ -105,6 +110,7 @@ public class Asset {
 
     /**
      * getFormat方法。
+     *
      * @return String类型返回值
      */
     public String getFormat() {
@@ -113,7 +119,7 @@ public class Asset {
 
     /**
      * setFormat方法。
-     *      * @param format String类型参数
+     * * @param format String类型参数
      */
     public void setFormat(String format) {
         this.format = format;

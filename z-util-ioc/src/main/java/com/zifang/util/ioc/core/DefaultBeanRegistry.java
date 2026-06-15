@@ -2,7 +2,9 @@ package com.zifang.util.ioc.core;
 
 import com.zifang.util.ioc.metadata.BeanDefinition;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

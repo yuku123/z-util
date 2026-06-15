@@ -1,6 +1,7 @@
 package com.zifang.util.http.base.define;
 
-import java.lang.annotation.*;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * DELETE请求映射注解

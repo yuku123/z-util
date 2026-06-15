@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * NumberUtilTest类。

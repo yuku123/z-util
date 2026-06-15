@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * 基本的增删改查接口，定义常用的数据访问操作
  *
- * @param <T> 实体类型
+ * @param <T>  实体类型
  * @param <ID> 主键类型
  */
 public interface CrudRepository<T, ID> extends Repository<T, ID> {
@@ -14,7 +14,7 @@ public interface CrudRepository<T, ID> extends Repository<T, ID> {
      * 保存或更新实体
      *
      * @param entity 要保存的实体
-     * @param <S> 实体类型
+     * @param <S>    实体类型
      * @return 保存后的实体
      */
     <S extends T> S save(S entity);
@@ -23,7 +23,7 @@ public interface CrudRepository<T, ID> extends Repository<T, ID> {
      * 批量保存或更新实体
      *
      * @param entities 要保存的实体集合
-     * @param <S> 实体类型
+     * @param <S>      实体类型
      * @return 保存后的实体集合
      */
     <S extends T> Iterable<S> saveAll(Iterable<S> entities);

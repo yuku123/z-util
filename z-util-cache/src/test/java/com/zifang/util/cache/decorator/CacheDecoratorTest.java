@@ -6,7 +6,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/** cache 装饰器测试。 */
+/**
+ * cache 装饰器测试。
+ */
 public class CacheDecoratorTest {
 
     private Cache<String, String> base() {

@@ -6,11 +6,13 @@ import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * BeautifyJsonUtils 美化输出测试
  */
+
 /**
  * BeautifyJsonUtilsTest类。
  */

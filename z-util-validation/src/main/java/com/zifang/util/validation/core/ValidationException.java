@@ -9,7 +9,7 @@ public class ValidationException extends RuntimeException {
 
     /**
      * ValidationException方法。
-     *      * @param result ValidateResult类型参数
+     * * @param result ValidateResult类型参数
      */
     public ValidationException(ValidateResult result) {
         super("Validation failed: " + result.getErrors());
@@ -18,6 +18,7 @@ public class ValidationException extends RuntimeException {
 
     /**
      * getResult方法。
+     *
      * @return ValidateResult类型返回值
      */
     public ValidateResult getResult() {

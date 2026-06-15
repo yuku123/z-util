@@ -1,16 +1,24 @@
 package com.zifang.util.json;
 
-import com.zifang.util.dsl.g4.*;
-import com.zifang.util.dsl.g4.model.*;
-import com.zifang.util.dsl.core.*;
-import com.zifang.util.dsl.token.*;
+import com.zifang.util.dsl.core.ASTNode;
+import com.zifang.util.dsl.core.TokenReader;
+import com.zifang.util.dsl.g4.DynamicLexer;
+import com.zifang.util.dsl.g4.DynamicParser;
+import com.zifang.util.dsl.token.Token;
 import org.junit.Test;
-import java.util.*;
 
 /**
  * JsonDebug16Test类。
  */
 public class JsonDebug16Test {
+
+    private static String loadG4(String name) throws Exception {
+        java.io.InputStream is = JsonDebug16Test.class.getClassLoader().getResourceAsStream(name);
+        if (is == null) throw new Exception("Resource not found: " + name);
+        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+        is.close();
+        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+    }
 
     @Test
     /**
@@ -131,13 +139,5 @@ public class JsonDebug16Test {
         for (ASTNode child : node.getChildren()) {
             printTree(child, indent + "  ");
         }
-    }
-
-    private static String loadG4(String name) throws Exception {
-        java.io.InputStream is = JsonDebug16Test.class.getClassLoader().getResourceAsStream(name);
-        if (is == null) throw new Exception("Resource not found: " + name);
-        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
-        is.close();
-        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
     }
 }

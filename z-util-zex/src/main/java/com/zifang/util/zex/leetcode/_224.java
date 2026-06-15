@@ -9,6 +9,7 @@ package com.zifang.util.zex.leetcode;
  * @author zifang
  * @version 1.0
  */
+
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -17,8 +18,19 @@ import java.util.LinkedList;
  */
 public class _224 {
     /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        new _224().calculate("(1+(4+5+2)-3)+(6+8)");
+    }
+
+    /**
      * calculate方法。
-     *      * @param s String类型参数
+     * * @param s String类型参数
+     *
      * @return int类型返回值
      */
     public int calculate(String s) {
@@ -54,14 +66,5 @@ public class _224 {
             }
         }
         return ret;
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        new _224().calculate("(1+(4+5+2)-3)+(6+8)");
     }
 }

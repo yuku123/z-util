@@ -21,17 +21,6 @@ public class ClassParserFactory implements IFactory<Class<?>, ClassParser> {
      */
     private static final Map<Class<?>, LeafWrapper<Long, Long, ClassParserInfoWrapper>> classInheritableNode = new ConcurrentHashMap<>();
 
-
-    @Override
-    /**
-     * getInstance方法。
-     *      * @param clazz Class?类型参数
-     * @return ClassParser类型返回值
-     */
-    public ClassParser getInstance(Class<?> clazz) {
-        return getInstance(clazz, false);
-    }
-
     /**
      * @param forceRefreshCache 是否需要强制刷新缓存
      */
@@ -46,6 +35,16 @@ public class ClassParserFactory implements IFactory<Class<?>, ClassParser> {
             }
         }
         return classParserCache.get(clazz);
+    }
+
+    @Override
+    /**
+     * getInstance方法。
+     *      * @param clazz Class?类型参数
+     * @return ClassParser类型返回值
+     */
+    public ClassParser getInstance(Class<?> clazz) {
+        return getInstance(clazz, false);
     }
 
 }

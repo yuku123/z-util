@@ -7,8 +7,6 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -42,7 +40,7 @@ public final class FileContentUtil {
      *
      * @param file the file to read
      * @return the entire file contents as a string
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
     public static String readString(File file) throws IOException {
@@ -52,10 +50,10 @@ public final class FileContentUtil {
     /**
      * Reads the entire contents of a file as a string using the specified charset.
      *
-     * @param file the file to read
+     * @param file    the file to read
      * @param charset the charset to use for decoding
      * @return the entire file contents as a string
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null or charset is null
      */
     public static String readString(File file, Charset charset) throws IOException {
@@ -93,7 +91,7 @@ public final class FileContentUtil {
      *
      * @param filePath the path to the file to read
      * @return the entire file contents as a string
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if filePath is null or empty
      */
     public static String readString(String filePath) throws IOException {
@@ -110,7 +108,7 @@ public final class FileContentUtil {
      *
      * @param file the file to read
      * @return a list of all lines in the file, with line separators removed
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
     public static List<String> readLines(File file) throws IOException {
@@ -120,10 +118,10 @@ public final class FileContentUtil {
     /**
      * Reads all lines from a file using the specified encoding.
      *
-     * @param file the file to read
+     * @param file     the file to read
      * @param encoding the encoding to use
      * @return a list of all lines in the file, with line separators removed
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null or encoding is null/empty
      */
     public static List<String> readLines(File file, String encoding) throws IOException {
@@ -152,7 +150,7 @@ public final class FileContentUtil {
      *
      * @param file the file to read
      * @return the entire file contents as a byte array
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
     public static byte[] readBytes(File file) throws IOException {
@@ -187,9 +185,9 @@ public final class FileContentUtil {
     /**
      * Writes a string to a file using UTF-8 charset, overwriting any existing content.
      *
-     * @param file the file to write
+     * @param file    the file to write
      * @param content the content to write
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
     public static void writeString(File file, String content) throws IOException {
@@ -199,10 +197,10 @@ public final class FileContentUtil {
     /**
      * Writes a string to a file using the specified charset, overwriting any existing content.
      *
-     * @param file the file to write
+     * @param file    the file to write
      * @param content the content to write
      * @param charset the charset to use for encoding
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null or charset is null
      */
     public static void writeString(File file, String content, Charset charset) throws IOException {
@@ -231,9 +229,9 @@ public final class FileContentUtil {
      * Writes a list of lines to a file using UTF-8 charset, overwriting any existing content.
      * Each line is written with the platform's line separator.
      *
-     * @param file the file to write
+     * @param file  the file to write
      * @param lines the lines to write
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
     public static void writeLines(File file, List<String> lines) throws IOException {
@@ -243,11 +241,11 @@ public final class FileContentUtil {
     /**
      * Writes a list of lines to a file with the specified charset.
      *
-     * @param file the file to write
-     * @param lines the lines to write
+     * @param file    the file to write
+     * @param lines   the lines to write
      * @param charset the charset to use for encoding
-     * @param append whether to append to the file instead of overwriting
-     * @throws IOException if an I/O error occurs
+     * @param append  whether to append to the file instead of overwriting
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null or charset is null
      */
     private static void writeLines(File file, List<String> lines, Charset charset, boolean append) throws IOException {
@@ -282,9 +280,9 @@ public final class FileContentUtil {
     /**
      * Appends a string to a file using UTF-8 charset.
      *
-     * @param file the file to append to
+     * @param file    the file to append to
      * @param content the content to append
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
     public static void appendString(File file, String content) throws IOException {
@@ -309,7 +307,7 @@ public final class FileContentUtil {
      *
      * @param file the file to append to
      * @param line the line to append
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
     public static void appendLine(File file, String line) throws IOException {
@@ -346,7 +344,7 @@ public final class FileContentUtil {
      *
      * @param file the file to count lines in
      * @return the number of lines in the file
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if file is null
      */
     public static long countLines(File file) throws IOException {
@@ -378,7 +376,7 @@ public final class FileContentUtil {
      *
      * @param in the input stream to read from
      * @return all bytes read from the stream
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if input stream is null
      */
     public static byte[] readFully(InputStream in) throws IOException {
@@ -402,7 +400,7 @@ public final class FileContentUtil {
      *
      * @param reader the reader to read from
      * @return all characters read from the reader
-     * @throws IOException if an I/O error occurs
+     * @throws IOException              if an I/O error occurs
      * @throws IllegalArgumentException if reader is null
      */
     public static String readFully(Reader reader) throws IOException {

@@ -9,7 +9,8 @@ public class AccessFlagConvertor {
 
     /**
      * classAccessFlagConvertor方法。
-     *      * @param hexString String类型参数
+     * * @param hexString String类型参数
+     *
      * @return static String类型返回值
      */
     public static String classAccessFlagConvertor(String hexString) {
@@ -60,7 +61,8 @@ public class AccessFlagConvertor {
 
     /**
      * methodAccessFlagConvertor方法。
-     *      * @param hexString String类型参数
+     * * @param hexString String类型参数
+     *
      * @return static String类型返回值
      */
     public static String methodAccessFlagConvertor(String hexString) { // 0x0001

@@ -21,7 +21,7 @@ public class StringAccessor {
 
     /**
      * StringAccessor方法。
-     *      * @param series Series类型参数
+     * * @param series Series类型参数
      */
     public StringAccessor(Series series) {
         this.series = series;
@@ -246,7 +246,8 @@ public class StringAccessor {
 
     /**
      * cat方法。
-     *      * @param other Series类型参数
+     * * @param other Series类型参数
+     *
      * @return Series类型返回值
      */
     public Series cat(Series other) {

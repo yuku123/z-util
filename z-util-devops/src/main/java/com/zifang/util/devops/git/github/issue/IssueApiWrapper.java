@@ -1,14 +1,6 @@
 package com.zifang.util.devops.git.github.issue;
 
-import org.kohsuke.github.GHIssue;
-import org.kohsuke.github.GHIssueComment;
-import org.kohsuke.github.GHIssueState;
-import org.kohsuke.github.GHIssueBuilder;
-import org.kohsuke.github.GHLabel;
-import org.kohsuke.github.GHUser;
-import org.kohsuke.github.GitHub;
-import org.kohsuke.github.PagedIterable;
-import org.kohsuke.github.PagedIterator;
+import org.kohsuke.github.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +24,7 @@ public class IssueApiWrapper {
 
     /**
      * IssueApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
      */
     public IssueApiWrapper(GitHub github) {
         this.github = github;
@@ -40,9 +32,10 @@ public class IssueApiWrapper {
 
     /**
      * IssueApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
+     *
      * @param owner String类型参数
-     * @param repo String类型参数
+     * @param repo  String类型参数
      */
     public IssueApiWrapper(GitHub github, String owner, String repo) {
         this.github = github;
@@ -52,7 +45,8 @@ public class IssueApiWrapper {
 
     /**
      * withRepo方法。
-     *      * @param owner String类型参数
+     * * @param owner String类型参数
+     *
      * @param repo String类型参数
      * @return IssueApiWrapper类型返回值
      */

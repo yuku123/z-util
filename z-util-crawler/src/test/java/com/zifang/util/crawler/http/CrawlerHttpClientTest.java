@@ -4,10 +4,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,12 +24,13 @@ import static org.junit.Assert.*;
  */
 public class CrawlerHttpClientTest {
 
+    private final CountDownLatch serverReady = new CountDownLatch(1);
+    // Per-test response state (set by enqueue(), read by handleSocket())
+    private final AtomicReference<TestResponse> nextResponse = new AtomicReference<>();
     private Thread serverThread;
     private int serverPort;
     private volatile boolean serverStop = false;
-    private final CountDownLatch serverReady = new CountDownLatch(1);
     private volatile IOException serverError;
-
     private CrawlerHttpClient httpClient;
     private String baseUrl;
 
@@ -76,22 +79,8 @@ public class CrawlerHttpClientTest {
         }
     }
 
-    // Per-test response state (set by enqueue(), read by handleSocket())
-    private final AtomicReference<TestResponse> nextResponse = new AtomicReference<>();
-
     private void enqueue(int code, String body, String contentType) {
         nextResponse.set(new TestResponse(code, body, contentType));
-    }
-
-    private static class TestResponse {
-        final int code;
-        final String body;
-        final String contentType;
-        TestResponse(int code, String body, String contentType) {
-            this.code = code;
-            this.body = body;
-            this.contentType = contentType;
-        }
     }
 
     private void handleSocket(Socket socket) {
@@ -131,7 +120,10 @@ public class CrawlerHttpClientTest {
             out.flush();
             socket.close();
         } catch (Exception e) {
-            try { socket.close(); } catch (Exception ignored) {}
+            try {
+                socket.close();
+            } catch (Exception ignored) {
+            }
         }
     }
 
@@ -154,8 +146,6 @@ public class CrawlerHttpClientTest {
         return sb.length() > 0 ? sb.toString() : null;
     }
 
-    // --- HttpResponse inner class tests ---
-
     @Test
     /**
      * testHttpResponse_GetCode方法。
@@ -164,6 +154,8 @@ public class CrawlerHttpClientTest {
         CrawlerHttpClient.HttpResponse response = new CrawlerHttpClient.HttpResponse(200, "body", new HashMap<>());
         assertEquals(200, response.getCode());
     }
+
+    // --- HttpResponse inner class tests ---
 
     @Test
     /**
@@ -203,8 +195,6 @@ public class CrawlerHttpClientTest {
         assertNotNull(response.getHeaders());
     }
 
-    // --- GET request tests ---
-
     @Test
     /**
      * testGet_WithSuccessfulResponse方法。
@@ -215,6 +205,8 @@ public class CrawlerHttpClientTest {
         assertEquals(200, response.getCode());
         assertEquals("Hello World", response.getBody());
     }
+
+    // --- GET request tests ---
 
     @Test
     /**
@@ -250,8 +242,6 @@ public class CrawlerHttpClientTest {
         assertNotNull(response.getHeaders());
     }
 
-    // --- POST request tests ---
-
     @Test
     /**
      * testPost_WithSuccessfulResponse方法。
@@ -262,6 +252,8 @@ public class CrawlerHttpClientTest {
         assertEquals(201, response.getCode());
         assertEquals("Created", response.getBody());
     }
+
+    // --- POST request tests ---
 
     @Test
     /**
@@ -285,8 +277,6 @@ public class CrawlerHttpClientTest {
         assertEquals(204, response.getCode());
     }
 
-    // --- Download tests ---
-
     @Test
     /**
      * testDownload_Success方法。
@@ -300,6 +290,8 @@ public class CrawlerHttpClientTest {
         String content = new String(java.nio.file.Files.readAllBytes(tempFile.toPath()));
         assertEquals("file content here", content);
     }
+
+    // --- Download tests ---
 
     @Test(expected = IOException.class)
     /**
@@ -323,8 +315,6 @@ public class CrawlerHttpClientTest {
         httpClient.download(baseUrl, tempFile.getAbsolutePath());
     }
 
-    // --- setProxy test ---
-
     @Test
     /**
      * testSetProxy_DoesNotThrow方法。
@@ -333,7 +323,7 @@ public class CrawlerHttpClientTest {
         httpClient.setProxy("127.0.0.1", 8080);
     }
 
-    // --- Multiple requests test ---
+    // --- setProxy test ---
 
     @Test
     /**
@@ -349,5 +339,19 @@ public class CrawlerHttpClientTest {
         assertEquals("Response 1", r1.getBody());
         assertEquals("Response 2", r2.getBody());
         assertEquals("Response 3", r3.getBody());
+    }
+
+    // --- Multiple requests test ---
+
+    private static class TestResponse {
+        final int code;
+        final String body;
+        final String contentType;
+
+        TestResponse(int code, String body, String contentType) {
+            this.code = code;
+            this.body = body;
+            this.contentType = contentType;
+        }
     }
 }

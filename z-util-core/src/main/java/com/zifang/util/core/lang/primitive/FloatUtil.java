@@ -10,7 +10,8 @@ public class FloatUtil {
 
     /**
      * parseFloat方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @return static Float类型返回值
      */
     public static Float parseFloat(Object object) {
@@ -22,7 +23,8 @@ public class FloatUtil {
 
     /**
      * parseFloatOrDefault方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @param defaultValue float类型参数
      * @return static Float类型返回值
      */

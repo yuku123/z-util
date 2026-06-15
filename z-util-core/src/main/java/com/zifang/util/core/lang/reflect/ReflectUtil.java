@@ -852,7 +852,7 @@ public class ReflectUtil {
     /**
      * 获取指定类中与目标接口类型一致的泛型Type信息
      *
-     * @param base          基础类
+     * @param base           基础类
      * @param interfaceClazz 要匹配的接口类型
      * @return 泛型Type信息，若未找到返回null
      */

@@ -2,12 +2,12 @@ package com.zifang.util.ml.linear;
 
 import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * SVMTest类。
@@ -24,18 +24,6 @@ public class SVMTest {
             }
         }
         return NdArray.array(flat, DType.FLOAT32).reshape(rows, cols);
-    }
-
-    /**
-     * Generate linearly separable data AND labels together (two classes separated by x > 0).
-     */
-    private static class DataWithLabels {
-        NdArray X;
-        int[] y;
-        DataWithLabels(NdArray X, int[] y) {
-            this.X = X;
-            this.y = y;
-        }
     }
 
     private DataWithLabels generateLinearlySeparableDataWithLabels(int nSamples, Random rnd) {
@@ -146,6 +134,19 @@ public class SVMTest {
 
         for (int pred : predictions) {
             assertTrue(pred == 1 || pred == -1, "Predictions should be +1 or -1");
+        }
+    }
+
+    /**
+     * Generate linearly separable data AND labels together (two classes separated by x > 0).
+     */
+    private static class DataWithLabels {
+        NdArray X;
+        int[] y;
+
+        DataWithLabels(NdArray X, int[] y) {
+            this.X = X;
+            this.y = y;
         }
     }
 }

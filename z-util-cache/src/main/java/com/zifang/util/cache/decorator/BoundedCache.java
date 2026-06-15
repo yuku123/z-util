@@ -3,7 +3,6 @@ package com.zifang.util.cache.decorator;
 import com.zifang.util.cache.Cache;
 
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.Function;
 
 /**
  * 容量上界装饰器：在 {@link Cache} 之上额外加一层"软上限"（不会触发 delegate 的 evict 策略）。
@@ -26,7 +25,9 @@ public class BoundedCache<K, V> extends ForwardingCache<K, V> {
     }
 
     @Override
-    protected Cache<K, V> delegate() { return delegate; }
+    protected Cache<K, V> delegate() {
+        return delegate;
+    }
 
     @Override
     public void put(K key, V value) {
@@ -37,7 +38,9 @@ public class BoundedCache<K, V> extends ForwardingCache<K, V> {
         currentSize.set(delegate.size());
     }
 
-    /** 满了不丢，返回 false。 */
+    /**
+     * 满了不丢，返回 false。
+     */
     public boolean tryPut(K key, V value) {
         if (currentSize.get() >= maxSize && !delegate.contains(key)) {
             return false;
@@ -60,6 +63,11 @@ public class BoundedCache<K, V> extends ForwardingCache<K, V> {
         currentSize.set(0);
     }
 
-    public long maxSize() { return maxSize; }
-    public long currentSize() { return currentSize.get(); }
+    public long maxSize() {
+        return maxSize;
+    }
+
+    public long currentSize() {
+        return currentSize.get();
+    }
 }

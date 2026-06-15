@@ -62,6 +62,7 @@ class Person {
 
     /**
      * getBaseByteType方法。
+     *
      * @return byte类型返回值
      */
     public byte getBaseByteType() {
@@ -70,7 +71,7 @@ class Person {
 
     /**
      * setBaseByteType方法。
-     *      * @param baseByteType byte类型参数
+     * * @param baseByteType byte类型参数
      */
     public void setBaseByteType(byte baseByteType) {
         this.baseByteType = baseByteType;
@@ -78,6 +79,7 @@ class Person {
 
     /**
      * getBaseCharType方法。
+     *
      * @return char类型返回值
      */
     public char getBaseCharType() {
@@ -86,7 +88,7 @@ class Person {
 
     /**
      * setBaseCharType方法。
-     *      * @param baseCharType char类型参数
+     * * @param baseCharType char类型参数
      */
     public void setBaseCharType(char baseCharType) {
         this.baseCharType = baseCharType;
@@ -94,6 +96,7 @@ class Person {
 
     /**
      * getBaseIntType方法。
+     *
      * @return int类型返回值
      */
     public int getBaseIntType() {
@@ -102,7 +105,7 @@ class Person {
 
     /**
      * setBaseIntType方法。
-     *      * @param baseIntType int类型参数
+     * * @param baseIntType int类型参数
      */
     public void setBaseIntType(int baseIntType) {
         this.baseIntType = baseIntType;
@@ -110,6 +113,7 @@ class Person {
 
     /**
      * getBaseLongType方法。
+     *
      * @return long类型返回值
      */
     public long getBaseLongType() {
@@ -118,7 +122,7 @@ class Person {
 
     /**
      * setBaseLongType方法。
-     *      * @param baseLongType long类型参数
+     * * @param baseLongType long类型参数
      */
     public void setBaseLongType(long baseLongType) {
         this.baseLongType = baseLongType;
@@ -126,6 +130,7 @@ class Person {
 
     /**
      * getBaseFloatType方法。
+     *
      * @return float类型返回值
      */
     public float getBaseFloatType() {
@@ -134,7 +139,7 @@ class Person {
 
     /**
      * setBaseFloatType方法。
-     *      * @param baseFloatType float类型参数
+     * * @param baseFloatType float类型参数
      */
     public void setBaseFloatType(float baseFloatType) {
         this.baseFloatType = baseFloatType;
@@ -142,6 +147,7 @@ class Person {
 
     /**
      * getBaseDoubleType方法。
+     *
      * @return double类型返回值
      */
     public double getBaseDoubleType() {
@@ -150,7 +156,7 @@ class Person {
 
     /**
      * setBaseDoubleType方法。
-     *      * @param baseDoubleType double类型参数
+     * * @param baseDoubleType double类型参数
      */
     public void setBaseDoubleType(double baseDoubleType) {
         this.baseDoubleType = baseDoubleType;
@@ -158,6 +164,7 @@ class Person {
 
     /**
      * getByteWapperType方法。
+     *
      * @return byte类型返回值
      */
     public Byte getByteWapperType() {
@@ -166,7 +173,7 @@ class Person {
 
     /**
      * setByteWapperType方法。
-     *      * @param byteWapperType byte类型参数
+     * * @param byteWapperType byte类型参数
      */
     public void setByteWapperType(Byte byteWapperType) {
         this.byteWapperType = byteWapperType;
@@ -174,6 +181,7 @@ class Person {
 
     /**
      * getCharWapperType方法。
+     *
      * @return Character类型返回值
      */
     public Character getCharWapperType() {
@@ -182,7 +190,7 @@ class Person {
 
     /**
      * setCharWapperType方法。
-     *      * @param charWapperType Character类型参数
+     * * @param charWapperType Character类型参数
      */
     public void setCharWapperType(Character charWapperType) {
         this.charWapperType = charWapperType;
@@ -190,6 +198,7 @@ class Person {
 
     /**
      * getIntWapperType方法。
+     *
      * @return int类型返回值
      */
     public Integer getIntWapperType() {
@@ -198,7 +207,7 @@ class Person {
 
     /**
      * setIntWapperType方法。
-     *      * @param intWapperType int类型参数
+     * * @param intWapperType int类型参数
      */
     public void setIntWapperType(Integer intWapperType) {
         this.intWapperType = intWapperType;
@@ -206,6 +215,7 @@ class Person {
 
     /**
      * getLongWapperType方法。
+     *
      * @return long类型返回值
      */
     public Long getLongWapperType() {
@@ -214,7 +224,7 @@ class Person {
 
     /**
      * setLongWapperType方法。
-     *      * @param longWapperType long类型参数
+     * * @param longWapperType long类型参数
      */
     public void setLongWapperType(Long longWapperType) {
         this.longWapperType = longWapperType;
@@ -222,6 +232,7 @@ class Person {
 
     /**
      * getFloatWapperType方法。
+     *
      * @return float类型返回值
      */
     public Float getFloatWapperType() {
@@ -230,7 +241,7 @@ class Person {
 
     /**
      * setFloatWapperType方法。
-     *      * @param floatWapperType float类型参数
+     * * @param floatWapperType float类型参数
      */
     public void setFloatWapperType(Float floatWapperType) {
         this.floatWapperType = floatWapperType;
@@ -238,6 +249,7 @@ class Person {
 
     /**
      * getDoubleWapperType方法。
+     *
      * @return double类型返回值
      */
     public Double getDoubleWapperType() {
@@ -246,7 +258,7 @@ class Person {
 
     /**
      * setDoubleWapperType方法。
-     *      * @param doubleWapperType double类型参数
+     * * @param doubleWapperType double类型参数
      */
     public void setDoubleWapperType(Double doubleWapperType) {
         this.doubleWapperType = doubleWapperType;
@@ -254,6 +266,7 @@ class Person {
 
     /**
      * getStringType方法。
+     *
      * @return String类型返回值
      */
     public String getStringType() {
@@ -262,7 +275,7 @@ class Person {
 
     /**
      * setStringType方法。
-     *      * @param stringType String类型参数
+     * * @param stringType String类型参数
      */
     public void setStringType(String stringType) {
         this.stringType = stringType;
@@ -278,7 +291,7 @@ class IsBeanTest2 {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -290,6 +303,7 @@ class IsBeanTest3 {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -302,6 +316,7 @@ class IsBeanTest4 {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -310,7 +325,7 @@ class IsBeanTest4 {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;

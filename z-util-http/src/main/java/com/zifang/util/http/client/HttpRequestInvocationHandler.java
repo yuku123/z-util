@@ -1,9 +1,9 @@
 package com.zifang.util.http.client;
 
+import com.zifang.util.core.util.GsonUtil;
 import com.zifang.util.http.base.define.RestController;
 import com.zifang.util.http.base.helper.HttpDefinitionSolver;
 import com.zifang.util.http.base.pojo.HttpRequestDefinition;
-import com.zifang.util.core.util.GsonUtil;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -22,14 +22,13 @@ import java.util.Map;
 public class HttpRequestInvocationHandler implements InvocationHandler {
 
     /**
-     * 调用过程中需要的上下文参数，用于在请求过程中传递额外数据。
-     */
-    private Map<String, Object> contextParams;
-
-    /**
      * 代理的目标接口类，即被代理的HTTP请求接口。
      */
     private final Class<?> target;
+    /**
+     * 调用过程中需要的上下文参数，用于在请求过程中传递额外数据。
+     */
+    private Map<String, Object> contextParams;
 
     /**
      * 构造一个HTTP请求调用处理器。
@@ -68,7 +67,7 @@ public class HttpRequestInvocationHandler implements InvocationHandler {
      * @param args   方法参数数组
      * @return HTTP响应反序列化后的对象
      * @throws RuntimeException 如果目标接口没有 {@link RestController} 注解
-     * @throws Throwable                                如果HTTP请求或反序列化过程中发生错误
+     * @throws Throwable        如果HTTP请求或反序列化过程中发生错误
      */
     @Override
     /**

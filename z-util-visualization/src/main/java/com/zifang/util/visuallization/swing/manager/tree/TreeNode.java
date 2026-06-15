@@ -17,8 +17,9 @@ public class TreeNode {
 
     /**
      * 创建树节点
-     * @param id 节点唯一标识
-     * @param name 节点显示名称
+     *
+     * @param id       节点唯一标识
+     * @param name     节点显示名称
      * @param parentId 父节点ID（null表示根节点）
      */
     public TreeNode(String id, String name, String parentId) {
@@ -29,6 +30,7 @@ public class TreeNode {
 
     /**
      * 获取节点ID
+     *
      * @return 节点ID
      */
     public String getId() {
@@ -37,6 +39,7 @@ public class TreeNode {
 
     /**
      * 设置节点ID
+     *
      * @param id 节点ID
      */
     public void setId(String id) {
@@ -45,6 +48,7 @@ public class TreeNode {
 
     /**
      * 获取节点名称
+     *
      * @return 节点名称
      */
     public String getName() {
@@ -53,6 +57,7 @@ public class TreeNode {
 
     /**
      * 设置节点名称
+     *
      * @param name 节点名称
      */
     public void setName(String name) {
@@ -61,6 +66,7 @@ public class TreeNode {
 
     /**
      * 获取父节点ID
+     *
      * @return 父节点ID，null表示根节点
      */
     public String getParentId() {
@@ -69,6 +75,7 @@ public class TreeNode {
 
     /**
      * 设置父节点ID
+     *
      * @param parentId 父节点ID
      */
     public void setParentId(String parentId) {
@@ -107,8 +114,8 @@ public class TreeNode {
         if (o == null || getClass() != o.getClass()) return false;
         TreeNode treeNode = (TreeNode) o;
         return java.util.Objects.equals(id, treeNode.id) &&
-               java.util.Objects.equals(name, treeNode.name) &&
-               java.util.Objects.equals(parentId, treeNode.parentId);
+                java.util.Objects.equals(name, treeNode.name) &&
+                java.util.Objects.equals(parentId, treeNode.parentId);
     }
 
     /**

@@ -22,6 +22,7 @@ import java.util.*;
  *
  * @author zifang
  */
+
 /**
  * JsonUtil类。
  */
@@ -36,7 +37,8 @@ public class JsonUtil {
      */
     /**
      * parseObject方法。
-     *      * @param json String类型参数
+     * * @param json String类型参数
+     *
      * @return static JsonObject类型返回值
      */
     public static JsonObject parseObject(String json) {
@@ -51,7 +53,8 @@ public class JsonUtil {
      */
     /**
      * parseArray方法。
-     *      * @param json String类型参数
+     * * @param json String类型参数
+     *
      * @return static JsonArray类型返回值
      */
     public static JsonArray parseArray(String json) {
@@ -68,7 +71,8 @@ public class JsonUtil {
      */
     /**
      * toJson方法。
-     *      * @param t T类型参数
+     * * @param t T类型参数
+     *
      * @return static <T> String类型返回值
      */
     public static <T> String toJson(T t) {
@@ -88,7 +92,8 @@ public class JsonUtil {
      */
     /**
      * toJsonPretty方法。
-     *      * @param t T类型参数
+     * * @param t T类型参数
+     *
      * @return static <T> String类型返回值
      */
     public static <T> String toJsonPretty(T t) {
@@ -150,7 +155,8 @@ public class JsonUtil {
      */
     /**
      * fromJson方法。
-     *      * @param jsonStr String类型参数
+     * * @param jsonStr String类型参数
+     *
      * @param clazz ClassT类型参数
      * @return static <T> T类型返回值
      */
@@ -344,14 +350,30 @@ public class JsonUtil {
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
             switch (ch) {
-                case '"':  sb.append("\\\""); break;
-                case '\\': sb.append("\\\\"); break;
-                case '\n': sb.append("\\n");  break;
-                case '\r': sb.append("\\r");  break;
-                case '\t': sb.append("\\t");  break;
-                case '\b': sb.append("\\b");  break;
-                case '\f': sb.append("\\f");  break;
-                default:   sb.append(ch);     break;
+                case '"':
+                    sb.append("\\\"");
+                    break;
+                case '\\':
+                    sb.append("\\\\");
+                    break;
+                case '\n':
+                    sb.append("\\n");
+                    break;
+                case '\r':
+                    sb.append("\\r");
+                    break;
+                case '\t':
+                    sb.append("\\t");
+                    break;
+                case '\b':
+                    sb.append("\\b");
+                    break;
+                case '\f':
+                    sb.append("\\f");
+                    break;
+                default:
+                    sb.append(ch);
+                    break;
             }
         }
         return sb.toString();
@@ -360,19 +382,31 @@ public class JsonUtil {
     private static int toInteger(Object v) {
         if (v == null) return 0;
         if (v instanceof Number) return ((Number) v).intValue();
-        try { return Integer.parseInt(String.valueOf(v)); } catch (NumberFormatException e) { return 0; }
+        try {
+            return Integer.parseInt(String.valueOf(v));
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     private static long toLong(Object v) {
         if (v == null) return 0L;
         if (v instanceof Number) return ((Number) v).longValue();
-        try { return Long.parseLong(String.valueOf(v)); } catch (NumberFormatException e) { return 0L; }
+        try {
+            return Long.parseLong(String.valueOf(v));
+        } catch (NumberFormatException e) {
+            return 0L;
+        }
     }
 
     private static double toDouble(Object v) {
         if (v == null) return 0.0;
         if (v instanceof Number) return ((Number) v).doubleValue();
-        try { return Double.parseDouble(String.valueOf(v)); } catch (NumberFormatException e) { return 0.0; }
+        try {
+            return Double.parseDouble(String.valueOf(v));
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
     }
 
     private static boolean toBoolean(Object v) {

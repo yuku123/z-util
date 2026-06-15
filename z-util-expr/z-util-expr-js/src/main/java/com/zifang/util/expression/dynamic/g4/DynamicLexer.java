@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 /**
  * 动态词法分析器
  * 根据.g4文件动态生成词法分析器
- * 
+ * <p>
  * 支持的G4词法规则格式:
  * - 单引号包围的字面量: 'abc' 表示精确匹配 "abc"
  * - 字符类: [a-z] [^abc] - 字符类以[开头，支持^取反
@@ -26,28 +26,24 @@ import java.util.regex.Pattern;
  */
 public class DynamicLexer implements Lexer {
 
+    private static final String ANY_CHAR_PLACEHOLDER = "\u0001ANYCHAR\u0001";
     private String input;
     private char[] chars;
     private int pos;
     private int line;
     private int column;
-    
     private List<TokenDefinition> tokenDefinitions;
     private Map<String, Pattern> compiledPatterns;
-    
     // Token类型映射
     private Map<String, Integer> tokenTypeMap;
     private int nextTypeId;
-    
     // Fragment规则（不直接产生Token）
     private Map<String, String> fragmentRules;
-
     // HIDDEN channel的token名称集合
     private Set<String> hiddenTokenNames;
-
     // 解析结果
     private List<Token> tokens;
-    
+
     public DynamicLexer() {
         this.tokenDefinitions = new ArrayList<>();
         this.compiledPatterns = new LinkedHashMap<>();
@@ -56,35 +52,35 @@ public class DynamicLexer implements Lexer {
         this.hiddenTokenNames = new HashSet<>();
         this.nextTypeId = 1;
     }
-    
+
     /**
      * 加载G4文件并初始化
      */
     public void loadG4(String g4Content) {
         // 解析G4文件
         List<G4Rule> rules = G4FileParser.extractRules(g4Content);
-        
+
         // 先收集所有fragment规则
         for (G4Rule rule : rules) {
             if (rule.isFragment()) {
                 fragmentRules.put(rule.getName(), rule.getBody());
             }
         }
-        
+
         // 处理规则
         for (G4Rule rule : rules) {
             if (rule.isFragment()) {
                 // Fragment规则不产生Token
                 continue;
             }
-            
+
             // 转换G4规则为正则表达式
             String pattern = convertToRegex(rule.getBody());
 
             TokenDefinition def = new TokenDefinition(
-                rule.getName(),
-                pattern,
-                tokenDefinitions.size()
+                    rule.getName(),
+                    pattern,
+                    tokenDefinitions.size()
             );
             def.setFragment(false);
             def.setHidden(rule.isHidden());
@@ -92,18 +88,18 @@ public class DynamicLexer implements Lexer {
                 hiddenTokenNames.add(rule.getName());
             }
             tokenDefinitions.add(def);
-            
+
             // 编译正则表达式
             try {
                 compiledPatterns.put(rule.getName(), Pattern.compile(pattern));
             } catch (Exception e) {
                 throw new RuntimeException("Failed to compile pattern for rule: " + rule.getName() + ", pattern: " + pattern, e);
             }
-            
+
             tokenTypeMap.put(rule.getName(), nextTypeId++);
         }
     }
-    
+
     /**
      * 从文件加载G4
      */
@@ -115,6 +111,7 @@ public class DynamicLexer implements Lexer {
             throw new RuntimeException("Failed to load G4 file: " + filePath, e);
         }
     }
+
     /**
      * 将G4规则体转换为Java正则表达式
      */
@@ -129,8 +126,6 @@ public class DynamicLexer implements Lexer {
         char NULL = '\0';
         return result.replace(ANY_CHAR_PLACEHOLDER, "[^" + NULL + "]");
     }
-
-    private static final String ANY_CHAR_PLACEHOLDER = "\u0001ANYCHAR\u0001";
 
     /**
      * 替换 . 为占位符，但跳过字符类 [...] 内的 .（那里是字面量）
@@ -159,30 +154,21 @@ public class DynamicLexer implements Lexer {
         }
         return sb.toString();
     }
-    
-    /**
-     * 表达式转换结果
-     */
-    private static class ConvertResult {
-        String result;
-        int pos;
-        ConvertResult(String r, int p) { result = r; pos = p; }
-    }
-    
+
     /**
      * 递归解析G4表达式
      */
     private ConvertResult convertExpr(String s) {
         return convertExpr(s, 0);
     }
-    
+
     private ConvertResult convertExpr(String s, int start) {
         StringBuilder result = new StringBuilder();
         int i = start;
-        
+
         while (i < s.length()) {
             char ch = s.charAt(i);
-            
+
             if (ch == '\'') {
                 // 字面量
                 int end = findMatchingQuote(s, i + 1, s.length());
@@ -207,7 +193,7 @@ public class DynamicLexer implements Lexer {
                     suffixEnd++;
                 }
                 String suffix = s.substring(end + 1, suffixEnd);
-                
+
                 result.append("(?:");
                 result.append(convertExpr(inner, 0).result);
                 result.append(")");
@@ -256,10 +242,10 @@ public class DynamicLexer implements Lexer {
                 i++;
             }
         }
-        
+
         return new ConvertResult(result.toString(), i);
     }
-    
+
     /**
      * 转换G4字符类为Java正则
      * 处理: [abc], [a-z], [^abc], [\t\r\n] 等
@@ -267,21 +253,21 @@ public class DynamicLexer implements Lexer {
     private String convertCharClass(String charClass) {
         // charClass is like [abc] or [^abc]
         if (charClass.length() < 2) return charClass;
-        
+
         boolean negated = false;
         String inner;
-        
+
         if (charClass.charAt(1) == '^') {
             negated = true;
             inner = charClass.substring(2, charClass.length() - 1);
         } else {
             inner = charClass.substring(1, charClass.length() - 1);
         }
-        
+
         String escaped = escapeCharClass(inner);
         return negated ? "[^" + escaped + "]" : "[" + escaped + "]";
     }
-    
+
     /**
      * 转义字符类内容 (用于Java正则的字符类[]内)
      * G4字符类中需要转义的字符: ] \ ^ - (在某些位置)
@@ -294,24 +280,46 @@ public class DynamicLexer implements Lexer {
                 // G4转义序列 -> 转为真实字符
                 // Java regex在字符类[]中: \t=tab, \r=CR, \n=LF, \\=backslash
                 char next = inner.charAt(i + 1);
-                if (next == 't') { sb.append('\t'); i++; }
-                else if (next == 'r') { sb.append('\r'); i++; }
-                else if (next == 'n') { sb.append('\n'); i++; }
-                else if (next == '\\') { sb.append("\\\\"); i++; }
-                else if (next == '"') { sb.append('"'); i++; }
-                else if (next == '\'') { sb.append('\''); i++; }
-                else if (next == '[') { sb.append('['); i++; }
-                else if (next == ']') { sb.append(']'); i++; }
-                else if (next == '^') { sb.append('^'); i++; }
-                else if (next == '-') { sb.append('-'); i++; }
-                else { sb.append(ch); }
+                if (next == 't') {
+                    sb.append('\t');
+                    i++;
+                } else if (next == 'r') {
+                    sb.append('\r');
+                    i++;
+                } else if (next == 'n') {
+                    sb.append('\n');
+                    i++;
+                } else if (next == '\\') {
+                    sb.append("\\\\");
+                    i++;
+                } else if (next == '"') {
+                    sb.append('"');
+                    i++;
+                } else if (next == '\'') {
+                    sb.append('\'');
+                    i++;
+                } else if (next == '[') {
+                    sb.append('[');
+                    i++;
+                } else if (next == ']') {
+                    sb.append(']');
+                    i++;
+                } else if (next == '^') {
+                    sb.append('^');
+                    i++;
+                } else if (next == '-') {
+                    sb.append('-');
+                    i++;
+                } else {
+                    sb.append(ch);
+                }
             } else {
                 sb.append(ch);
             }
         }
         return sb.toString();
     }
-    
+
     private int findMatchingQuote(String s, int start, int maxPos) {
         for (int i = start; i < maxPos; i++) {
             if (s.charAt(i) == '\\' && i + 1 < s.length()) {
@@ -326,9 +334,15 @@ public class DynamicLexer implements Lexer {
     private int findMatchingBracket(String s, int start) {
         int depth = 0;
         for (int i = start; i < s.length(); i++) {
-            if (s.charAt(i) == '\\' && i + 1 < s.length()) { i++; continue; }
+            if (s.charAt(i) == '\\' && i + 1 < s.length()) {
+                i++;
+                continue;
+            }
             if (s.charAt(i) == '[') depth++;
-            else if (s.charAt(i) == ']') { if (depth == 1) return i; if (depth > 0) depth--; }
+            else if (s.charAt(i) == ']') {
+                if (depth == 1) return i;
+                if (depth > 0) depth--;
+            }
         }
         return -1;
     }
@@ -336,9 +350,20 @@ public class DynamicLexer implements Lexer {
     private int findMatchingParen(String s, int start) {
         int depth = 0;
         for (int i = start; i < s.length(); i++) {
-            if (s.charAt(i) == '\\' && i + 1 < s.length()) { i++; continue; }
-            if (s.charAt(i) == '\'') { int end = findMatchingQuote(s, i + 1, s.length()); if (end != -1) i = end; continue; }
-            if (s.charAt(i) == '[') { int end = findMatchingBracket(s, i); if (end != -1) i = end; continue; }
+            if (s.charAt(i) == '\\' && i + 1 < s.length()) {
+                i++;
+                continue;
+            }
+            if (s.charAt(i) == '\'') {
+                int end = findMatchingQuote(s, i + 1, s.length());
+                if (end != -1) i = end;
+                continue;
+            }
+            if (s.charAt(i) == '[') {
+                int end = findMatchingBracket(s, i);
+                if (end != -1) i = end;
+                continue;
+            }
             if (s.charAt(i) == '(') depth++;
             else if (s.charAt(i) == ')') {
                 if (depth == 0) return i;  // unmatched ), error
@@ -373,13 +398,27 @@ public class DynamicLexer implements Lexer {
             char ch = s.charAt(i);
             if (ch == '\\' && i + 1 < s.length()) {
                 char next = s.charAt(i + 1);
-                if (next == 't') { sb.append('\t'); i++; }
-                else if (next == 'r') { sb.append('\r'); i++; }
-                else if (next == 'n') { sb.append('\n'); i++; }
-                else if (next == '\\') { sb.append('\\'); i++; }
-                else if (next == '"') { sb.append('"'); i++; }
-                else if (next == '\'') { sb.append('\''); i++; }
-                else { sb.append(ch); }
+                if (next == 't') {
+                    sb.append('\t');
+                    i++;
+                } else if (next == 'r') {
+                    sb.append('\r');
+                    i++;
+                } else if (next == 'n') {
+                    sb.append('\n');
+                    i++;
+                } else if (next == '\\') {
+                    sb.append('\\');
+                    i++;
+                } else if (next == '"') {
+                    sb.append('"');
+                    i++;
+                } else if (next == '\'') {
+                    sb.append('\'');
+                    i++;
+                } else {
+                    sb.append(ch);
+                }
             } else {
                 sb.append(ch);
             }
@@ -411,14 +450,14 @@ public class DynamicLexer implements Lexer {
         pos = 0;
         line = 1;
         column = 1;
-        
+
         while (pos < chars.length) {
             Token token = nextToken();
             if (token != null) {
                 tokens.add(token);
             }
         }
-        
+
         return tokens;
     }
 
@@ -436,22 +475,22 @@ public class DynamicLexer implements Lexer {
             }
             pos++;
         }
-        
+
         if (pos >= chars.length) {
             return null;
         }
-        
+
         // 尝试所有Token定义，找最长匹配
         String bestMatch = null;
         String bestTokenType = null;
         int bestEndPos = pos;
         int bestLine = line;
         int bestColumn = column;
-        
+
         for (Map.Entry<String, Pattern> entry : compiledPatterns.entrySet()) {
             String tokenType = entry.getKey();
             Pattern pattern = entry.getValue();
-            
+
             // 从当前位置匹配
             Matcher matcher = pattern.matcher(input.substring(pos));
             if (matcher.lookingAt()) {
@@ -464,7 +503,7 @@ public class DynamicLexer implements Lexer {
                 }
             }
         }
-        
+
         if (bestMatch != null) {
             // 创建Token
             SimpleToken token = new SimpleToken();
@@ -492,9 +531,9 @@ public class DynamicLexer implements Lexer {
 
             return token;
         }
-        
+
         // 无法识别，报告错误
-        throw new RuntimeException("Unexpected character: '" + chars[pos] + "' (code=" + (int)chars[pos] + ") at line " + line + ", column " + column);
+        throw new RuntimeException("Unexpected character: '" + chars[pos] + "' (code=" + (int) chars[pos] + ") at line " + line + ", column " + column);
     }
 
     private boolean isWhitespace(char ch) {
@@ -510,17 +549,30 @@ public class DynamicLexer implements Lexer {
     }
 
     /**
+     * 表达式转换结果
+     */
+    private static class ConvertResult {
+        String result;
+        int pos;
+
+        ConvertResult(String r, int p) {
+            result = r;
+            pos = p;
+        }
+    }
+
+    /**
      * 简单的Token读取器实现
      */
     private static class SimpleTokenReader implements TokenReader {
         private final List<Token> tokens;
         private int index;
-        
+
         public SimpleTokenReader(List<Token> tokens) {
             this.tokens = tokens;
             this.index = 0;
         }
-        
+
         @Override
         public Token read() {
             if (index < tokens.size()) {
@@ -528,7 +580,7 @@ public class DynamicLexer implements Lexer {
             }
             return null;
         }
-        
+
         @Override
         public Token peek() {
             if (index < tokens.size()) {
@@ -536,14 +588,14 @@ public class DynamicLexer implements Lexer {
             }
             return null;
         }
-        
+
         @Override
         public void advance() {
             if (index < tokens.size()) {
                 index++;
             }
         }
-        
+
         @Override
         public Token get(int offset) {
             int idx = index + offset;
@@ -552,17 +604,17 @@ public class DynamicLexer implements Lexer {
             }
             return null;
         }
-        
+
         @Override
         public boolean hasNext() {
             return index < tokens.size();
         }
-        
+
         @Override
         public void reset() {
             index = 0;
         }
-        
+
         @Override
         public void close() {
             // nothing to close

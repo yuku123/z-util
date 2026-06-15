@@ -2,12 +2,12 @@ package com.zifang.util.ml.linear;
 
 import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * LinearRegressionTest类。
@@ -34,26 +34,26 @@ public class LinearRegressionTest {
         int nSamples = 100;
         double trueSlope = 2.0;
         double trueIntercept = 1.0;
-        
+
         double[][] Xdata = new double[nSamples][1];
         double[] y = new double[nSamples];
-        
+
         for (int i = 0; i < nSamples; i++) {
             double x = random.nextDouble() * 10;
             double noise = random.nextGaussian() * 0.5;
             Xdata[i][0] = x;
             y[i] = trueSlope * x + trueIntercept + noise;
         }
-        
+
         NdArray X = createNdArray(Xdata, nSamples, 1);
-        
+
         LinearRegression lr = new LinearRegression(0.0);
         lr.fit(X, y);
-        
+
         NdArray predictions = lr.predict(X);
-        
+
         assertEquals(nSamples, predictions.getShape().get(0));
-        
+
         // Check predictions are reasonable (should be close to actual y values)
         double totalError = 0;
         for (int i = 0; i < nSamples; i++) {
@@ -70,10 +70,10 @@ public class LinearRegressionTest {
      */
     public void testLinearRegressionRidge() {
         int nSamples = 50;
-        
+
         double[][] Xdata = new double[nSamples][2];
         double[] y = new double[nSamples];
-        
+
         for (int i = 0; i < nSamples; i++) {
             double x1 = random.nextDouble() * 10;
             double x2 = random.nextDouble() * 10;
@@ -81,23 +81,23 @@ public class LinearRegressionTest {
             Xdata[i][1] = x2;
             y[i] = 2 * x1 + 3 * x2 + 1;
         }
-        
+
         NdArray X = createNdArray(Xdata, nSamples, 2);
-        
+
         // With regularization
         LinearRegression lrReg = new LinearRegression(1.0);
         lrReg.fit(X, y);
-        
+
         // Without regularization
         LinearRegression lrNoReg = new LinearRegression(0.0);
         lrNoReg.fit(X, y);
-        
+
         NdArray predReg = lrReg.predict(X);
         NdArray predNoReg = lrNoReg.predict(X);
-        
+
         assertEquals(nSamples, predReg.getShape().get(0));
         assertEquals(nSamples, predNoReg.getShape().get(0));
-        
+
         // Both should give reasonable predictions
         for (int i = 0; i < nSamples; i++) {
             double pReg = ((Number) predReg.get(i)).doubleValue();
@@ -114,32 +114,32 @@ public class LinearRegressionTest {
     public void testLinearRegressionMultiTarget() {
         int nSamples = 40;
         int nTargets = 3;
-        
+
         double[][] Xdata = new double[nSamples][2];
         double[][] ydata = new double[nSamples][nTargets];
-        
+
         for (int i = 0; i < nSamples; i++) {
             double x1 = random.nextDouble() * 5;
             double x2 = random.nextDouble() * 5;
             Xdata[i][0] = x1;
             Xdata[i][1] = x2;
-            
+
             ydata[i][0] = 2 * x1 + 1;
             ydata[i][1] = 3 * x2 + 2;
             ydata[i][2] = x1 + x2 + 3;
         }
-        
+
         NdArray X = createNdArray(Xdata, nSamples, 2);
         NdArray y = createNdArray(ydata, nSamples, nTargets);
-        
+
         LinearRegression lr = new LinearRegression(0.0);
         lr.fit(X, y);
-        
+
         NdArray predictions = lr.predict(X);
-        
+
         assertEquals(nSamples, predictions.getShape().get(0));
         assertEquals(nTargets, predictions.getShape().get(1));
-        
+
         // Verify predictions are reasonable
         for (int i = 0; i < nSamples; i++) {
             for (int t = 0; t < nTargets; t++) {

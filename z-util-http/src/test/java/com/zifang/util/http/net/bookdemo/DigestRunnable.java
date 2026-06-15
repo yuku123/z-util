@@ -16,10 +16,24 @@ public class DigestRunnable implements Runnable {
 
     /**
      * DigestRunnable方法。
-     *      * @param filename String类型参数
+     * * @param filename String类型参数
      */
     public DigestRunnable(String filename) {
         this.filename = filename;
+    }
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        for (String filename : args) {
+            DigestRunnable dr = new DigestRunnable(filename);
+            Thread t = new Thread(dr);
+            t.start();
+        }
     }
 
     @Override
@@ -44,19 +58,6 @@ public class DigestRunnable implements Runnable {
             System.err.println(ex);
         } catch (NoSuchAlgorithmException ex) {
             System.err.println(ex);
-        }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        for (String filename : args) {
-            DigestRunnable dr = new DigestRunnable(filename);
-            Thread t = new Thread(dr);
-            t.start();
         }
     }
 }

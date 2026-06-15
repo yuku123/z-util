@@ -7,6 +7,7 @@ import java.util.Objects;
  *
  * @author zifang
  */
+
 /**
  * ProtoRpc类。
  */
@@ -18,8 +19,9 @@ public class ProtoRpc {
 
     /**
      * ProtoRpc方法。
-     *      * @param name String类型参数
-     * @param inputType String类型参数
+     * * @param name String类型参数
+     *
+     * @param inputType  String类型参数
      * @param outputType String类型参数
      */
     public ProtoRpc(String name, String inputType, String outputType) {
@@ -30,6 +32,7 @@ public class ProtoRpc {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -38,6 +41,7 @@ public class ProtoRpc {
 
     /**
      * getInputType方法。
+     *
      * @return String类型返回值
      */
     public String getInputType() {
@@ -46,6 +50,7 @@ public class ProtoRpc {
 
     /**
      * getOutputType方法。
+     *
      * @return String类型返回值
      */
     public String getOutputType() {

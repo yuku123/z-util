@@ -174,7 +174,7 @@ public class PoolStatsImpl implements PoolStats {
 
     /**
      * recordBorrow方法。
-     *      * @param waitTime long类型参数
+     * * @param waitTime long类型参数
      */
     public void recordBorrow(long waitTime) {
         borrowCount.incrementAndGet();
@@ -185,7 +185,7 @@ public class PoolStatsImpl implements PoolStats {
 
     /**
      * recordReturn方法。
-     *      * @param waitTime long类型参数
+     * * @param waitTime long类型参数
      */
     public void recordReturn(long waitTime) {
         returnCount.incrementAndGet();

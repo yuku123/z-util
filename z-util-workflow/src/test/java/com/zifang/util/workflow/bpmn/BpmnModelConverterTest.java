@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
  * BpmnModelConverter 完整转换管道测试。
  * 测试从 BPMN XML → BpmnDiagram → WorkflowConfiguration 的完整转换链路。
  */
+
 /**
  * BpmnModelConverterTest类。
  */
@@ -187,8 +188,8 @@ public class BpmnModelConverterTest {
         List<WorkflowNode> nodes = config.getWorkflowNodeList();
         // 应该有5个节点: Start, GW_Split, Task_A, Task_B, GW_Join, End = 6个
         // 但因为并行网关会单独计算，所以这里可能是 6
-        assertTrue("Expected 5 or 6 nodes but got " + nodes.size(), 
-                   nodes.size() == 5 || nodes.size() == 6);
+        assertTrue("Expected 5 or 6 nodes but got " + nodes.size(),
+                nodes.size() == 5 || nodes.size() == 6);
 
         // 验证并行分支网关
         WorkflowNode splitGateway = findNode(nodes, "GW_Split");

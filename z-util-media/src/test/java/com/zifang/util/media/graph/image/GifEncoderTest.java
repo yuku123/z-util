@@ -1,7 +1,8 @@
 package com.zifang.util.media.graph.image;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * GifEncoderTest类。

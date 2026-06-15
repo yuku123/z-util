@@ -7,6 +7,7 @@ public class ControlRequestPacket extends Packet {
     private String userId;
 
     private String username;
+    private String password;
 
     public String getUserTo() {
         return userTo;
@@ -15,8 +16,6 @@ public class ControlRequestPacket extends Packet {
     public void setUserTo(String userTo) {
         this.userTo = userTo;
     }
-
-    private String password;
 
     public String getUserId() {
         return userId;

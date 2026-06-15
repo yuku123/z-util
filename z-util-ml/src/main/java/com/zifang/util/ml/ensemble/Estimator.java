@@ -9,6 +9,7 @@ import com.zifang.util.numpy.NdArray;
 public interface Estimator {
     /**
      * Fit the estimator on training data.
+     *
      * @param X Training features
      * @param y Training labels (can be int[] for classification or double[] for regression)
      */
@@ -16,6 +17,7 @@ public interface Estimator {
 
     /**
      * Predict using the fitted estimator.
+     *
      * @param X Features to predict
      * @return Predictions (int[] for classification, double[] for regression)
      */
@@ -23,6 +25,7 @@ public interface Estimator {
 
     /**
      * Predict class probabilities.
+     *
      * @param X Features to predict
      * @return Probability array of shape (n_samples, n_classes)
      */

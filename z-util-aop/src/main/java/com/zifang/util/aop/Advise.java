@@ -26,7 +26,9 @@ public interface Advise<T> {
      */
     Object around(T target, Method method, Object[] args, Chain chain) throws Throwable;
 
-    /** 责任链。 */
+    /**
+     * 责任链。
+     */
     interface Chain {
         Object proceed() throws Throwable;
     }

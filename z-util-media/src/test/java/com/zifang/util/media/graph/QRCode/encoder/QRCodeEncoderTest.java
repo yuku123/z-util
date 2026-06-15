@@ -1,6 +1,7 @@
 package com.zifang.util.media.graph.qrcode.encoder;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**

@@ -29,24 +29,9 @@ public class GithubConfig {
     }
 
     /**
-     * getToken方法。
-     * @return String类型返回值
-     */
-    public String getToken() {
-        return token;
-    }
-
-    /**
-     * getApiUrl方法。
-     * @return String类型返回值
-     */
-    public String getApiUrl() {
-        return apiUrl;
-    }
-
-    /**
      * of方法。
-     *      * @param token String类型参数
+     * * @param token String类型参数
+     *
      * @return static GithubConfig类型返回值
      */
     public static GithubConfig of(String token) {
@@ -76,5 +61,23 @@ public class GithubConfig {
             throw new IllegalStateException("GITHUB_TOKEN environment variable is not set");
         }
         return of(token);
+    }
+
+    /**
+     * getToken方法。
+     *
+     * @return String类型返回值
+     */
+    public String getToken() {
+        return token;
+    }
+
+    /**
+     * getApiUrl方法。
+     *
+     * @return String类型返回值
+     */
+    public String getApiUrl() {
+        return apiUrl;
     }
 }

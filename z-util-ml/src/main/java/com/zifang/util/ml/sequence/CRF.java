@@ -1,63 +1,60 @@
 package com.zifang.util.ml.sequence;
 
-import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 
-import java.util.Arrays;
 import java.util.function.BiFunction;
 
 /**
  * Linear-chain Conditional Random Field (CRF) for sequence labeling.
- * 
+ * <p>
  * Uses feature-based potentials:
  * - State potential: score(y_i -> s) for each tag s at position i
  * - Transition potential: score(y_{i-1}=s', y_i=s) for transition s'->s
- * 
+ * <p>
  * Training uses gradient descent on conditional log-likelihood.
  * Inference uses Viterbi algorithm for best tag sequence.
  */
 public class CRF {
-    
+
     private int nTags;
     private int nFeatures;
     private double learningRate;
     private double lambda;
-    
+
     // Tag weights: [nTags][nFeatures]
     private double[][] tagWeights;
-    
+
     // Transition weights: [nTags][nTags]
     // transitionWeights[s'][s] = score of transitioning from tag s' to tag s
     private double[][] transitionWeights;
-    
+
     // Feature extractor: (feature vector at position, position) -> double[]
     // For sequence labeling, features are typically extracted based on 
     // observation at position i and surrounding context
     private BiFunction<double[], Integer, double[]> featureExtractor;
-    
+
     /**
      * Create a new Linear-chain CRF.
-     * 
-     * @param nTags Number of possible tags/labels
-     * @param nFeatures Dimension of feature vectors
+     *
+     * @param nTags        Number of possible tags/labels
+     * @param nFeatures    Dimension of feature vectors
      * @param learningRate Learning rate for SGD
-     * @param lambda L2 regularization parameter
+     * @param lambda       L2 regularization parameter
      */
     public CRF(int nTags, int nFeatures, double learningRate, double lambda) {
         this.nTags = nTags;
         this.nFeatures = nFeatures;
         this.learningRate = learningRate;
         this.lambda = lambda;
-        
+
         // Initialize weights with small random values
         this.tagWeights = new double[nTags][nFeatures];
         this.transitionWeights = new double[nTags][nTags];
-        
+
         // Xavier-like initialization
         double tagWeightScale = Math.sqrt(2.0 / (nFeatures + nTags));
         double transWeightScale = Math.sqrt(2.0 / (nTags + nTags));
-        
+
         java.util.Random random = new java.util.Random(42);
         for (int i = 0; i < nTags; i++) {
             for (int j = 0; j < nFeatures; j++) {
@@ -68,19 +65,19 @@ public class CRF {
             }
         }
     }
-    
+
     /**
      * Set the feature extractor function.
-     * 
+     *
      * @param extractor Function that takes (featureVector, position) and returns feature array
      */
     public void setFeatureExtractor(BiFunction<double[], Integer, double[]> extractor) {
         this.featureExtractor = extractor;
     }
-    
+
     /**
      * Compute the feature vector for a position using the feature extractor.
-     * 
+     *
      * @param features Full feature matrix [sequenceLength, featureDim]
      * @param position Position in the sequence
      * @return Feature vector at the position
@@ -92,7 +89,7 @@ public class CRF {
         }
         return extractRawFeature(features, position);
     }
-    
+
     /**
      * Extract raw features from NdArray at a position.
      */
@@ -105,18 +102,18 @@ public class CRF {
         }
         return result;
     }
-    
+
     /**
      * Compute the unnormalized score for a tag sequence.
-     * 
+     *
      * @param features Feature matrix [sequenceLength, nFeatures]
-     * @param tags Tag sequence
+     * @param tags     Tag sequence
      * @return Unnormalized score
      */
     private double computeUnnormalizedScore(NdArray features, int[] tags) {
         int T = tags.length;
         double score = 0.0;
-        
+
         // State scores
         for (int t = 0; t < T; t++) {
             int tag = tags[t];
@@ -125,30 +122,30 @@ public class CRF {
                 score += tagWeights[tag][k] * feat[k];
             }
         }
-        
+
         // Transition scores
         for (int t = 1; t < T; t++) {
             int prevTag = tags[t - 1];
             int currTag = tags[t];
             score += transitionWeights[prevTag][currTag];
         }
-        
+
         return score;
     }
-    
+
     /**
      * Forward algorithm to compute partition function Z(x).
      * Uses dynamic programming to compute sum of all possible tag sequences.
-     * 
+     *
      * @param features Feature matrix [sequenceLength, nFeatures]
      * @return Partition function value
      */
     private double computePartitionFunction(NdArray features) {
         int T = features.getShape().get(0);
-        
+
         // alpha[t][s] = log sum of scores of all paths ending in tag s at position t
         double[][] alpha = new double[T][nTags];
-        
+
         // Initialize at t=0
         double[] feat0 = getFeatureVector(features, 0);
         for (int s = 0; s < nTags; s++) {
@@ -158,7 +155,7 @@ public class CRF {
             }
             alpha[0][s] = score;
         }
-        
+
         // Forward pass
         for (int t = 1; t < T; t++) {
             double[] feat = getFeatureVector(features, t);
@@ -178,7 +175,7 @@ public class CRF {
                 alpha[t][currTag] = maxScore + stateScore;
             }
         }
-        
+
         // Log-sum-exp at final position
         double maxFinal = Double.NEGATIVE_INFINITY;
         for (int s = 0; s < nTags; s++) {
@@ -186,20 +183,20 @@ public class CRF {
                 maxFinal = alpha[T - 1][s];
             }
         }
-        
+
         double sum = 0;
         for (int s = 0; s < nTags; s++) {
             sum += Math.exp(alpha[T - 1][s] - maxFinal);
         }
-        
+
         return maxFinal + Math.log(sum);
     }
-    
+
     /**
      * Compute the conditional log-likelihood (pseudo-log-likelihood).
-     * 
+     *
      * @param features Feature matrix [sequenceLength, nFeatures]
-     * @param labels True tag sequence
+     * @param labels   True tag sequence
      * @return Negative log-likelihood
      */
     public double score(NdArray features, int[] labels) {
@@ -208,24 +205,24 @@ public class CRF {
         double partition = computePartitionFunction(features);
         return unnormScore - partition;
     }
-    
+
     /**
      * Compute gradient of the conditional log-likelihood.
-     * 
+     *
      * @param features Feature matrix [sequenceLength, nFeatures]
-     * @param labels True tag sequence
+     * @param labels   True tag sequence
      * @return Tuple of (tagGradient, transitionGradient)
      */
     private Gradient computeGradient(NdArray features, int[] labels) {
         int T = labels.length;
-        
+
         double[][] tagGradient = new double[nTags][nFeatures];
         double[][] transitionGradient = new double[nTags][nTags];
-        
+
         // Expected counts (under current model)
         double[][] expectedTagCounts = new double[nTags][nFeatures];
         double[][] expectedTransCounts = new double[nTags][nTags];
-        
+
         // Forward pass
         double[][] alpha = new double[T][nTags];
         double[] feat0 = getFeatureVector(features, 0);
@@ -236,7 +233,7 @@ public class CRF {
             }
             alpha[0][s] = score;
         }
-        
+
         for (int t = 1; t < T; t++) {
             double[] feat = getFeatureVector(features, t);
             for (int currTag = 0; currTag < nTags; currTag++) {
@@ -254,13 +251,13 @@ public class CRF {
                 alpha[t][currTag] = maxScore + stateScore;
             }
         }
-        
+
         // Backward pass
         double[][] beta = new double[T][nTags];
         for (int s = 0; s < nTags; s++) {
             beta[T - 1][s] = 0;
         }
-        
+
         for (int t = T - 2; t >= 0; t--) {
             double[] feat = getFeatureVector(features, t + 1);
             for (int prevTag = 0; prevTag < nTags; prevTag++) {
@@ -278,7 +275,7 @@ public class CRF {
                 beta[t][prevTag] = maxScore;
             }
         }
-        
+
         // Compute expected counts
         // For each position, compute probability of being in each tag
         for (int t = 0; t < T; t++) {
@@ -290,14 +287,14 @@ public class CRF {
                     maxAlphaBeta = val;
                 }
             }
-            
+
             double sum = 0;
             for (int s = 0; s < nTags; s++) {
                 double val = alpha[t][s] + beta[t][s] - maxAlphaBeta;
                 sum += Math.exp(val);
             }
             double logZ = maxAlphaBeta + Math.log(sum + 1e-300);
-            
+
             for (int s = 0; s < nTags; s++) {
                 double prob = Math.exp(alpha[t][s] + beta[t][s] - logZ);
                 for (int k = 0; k < nFeatures; k++) {
@@ -305,7 +302,7 @@ public class CRF {
                 }
             }
         }
-        
+
         // Expected transition counts
         for (int t = 0; t < T - 1; t++) {
             double[] feat = getFeatureVector(features, t + 1);
@@ -322,7 +319,7 @@ public class CRF {
                     }
                 }
             }
-            
+
             double sum = 0;
             for (int prevTag = 0; prevTag < nTags; prevTag++) {
                 for (int currTag = 0; currTag < nTags; currTag++) {
@@ -335,7 +332,7 @@ public class CRF {
                 }
             }
             double logZ = maxAlphaBeta + Math.log(sum + 1e-300);
-            
+
             for (int prevTag = 0; prevTag < nTags; prevTag++) {
                 for (int currTag = 0; currTag < nTags; currTag++) {
                     double val = alpha[t][prevTag] + transitionWeights[prevTag][currTag];
@@ -348,11 +345,11 @@ public class CRF {
                 }
             }
         }
-        
+
         // Observed counts (from true labels)
         // For gradient: we want to maximize log P(y|x)
         // gradient = observed_features - expected_features (for each tag)
-        
+
         // Observed tag features
         for (int t = 0; t < T; t++) {
             int tag = labels[t];
@@ -361,14 +358,14 @@ public class CRF {
                 tagGradient[tag][k] += feat[k];
             }
         }
-        
+
         // Observed transitions
         for (int t = 0; t < T - 1; t++) {
             int prevTag = labels[t];
             int currTag = labels[t + 1];
             transitionGradient[prevTag][currTag] += 1.0;
         }
-        
+
         // Subtract expected counts
         for (int s = 0; s < nTags; s++) {
             for (int k = 0; k < nFeatures; k++) {
@@ -378,39 +375,26 @@ public class CRF {
                 transitionGradient[s][s2] -= expectedTransCounts[s][s2];
             }
         }
-        
+
         return new Gradient(tagGradient, transitionGradient);
     }
-    
-    /**
-     * Gradient container.
-     */
-    private static class Gradient {
-        double[][] tagGradient;
-        double[][] transitionGradient;
-        
-        Gradient(double[][] tagGradient, double[][] transitionGradient) {
-            this.tagGradient = tagGradient;
-            this.transitionGradient = transitionGradient;
-        }
-    }
-    
+
     /**
      * Fit the CRF model using SGD (Stochastic Gradient Descent).
-     * 
-     * @param features Feature matrix of shape [sequenceLength, nFeatures]
-     * @param labels Tag sequence of length sequenceLength
+     *
+     * @param features    Feature matrix of shape [sequenceLength, nFeatures]
+     * @param labels      Tag sequence of length sequenceLength
      * @param nIterations Number of training iterations
      */
     public void fit(NdArray features, int[] labels, int nIterations) {
         if (features.getShape().get(0) != labels.length) {
             throw new IllegalArgumentException("Feature sequence length must match labels length");
         }
-        
+
         for (int iter = 0; iter < nIterations; iter++) {
             // Compute gradient
             Gradient grad = computeGradient(features, labels);
-            
+
             // Update tag weights with L2 regularization and gradient descent
             for (int s = 0; s < nTags; s++) {
                 for (int k = 0; k < nFeatures; k++) {
@@ -419,14 +403,14 @@ public class CRF {
                     tagWeights[s][k] += learningRate * (grad.tagGradient[s][k] - lambda * tagWeights[s][k]);
                 }
             }
-            
+
             // Update transition weights
             for (int s = 0; s < nTags; s++) {
                 for (int s2 = 0; s2 < nTags; s2++) {
                     transitionWeights[s][s2] += learningRate * (grad.transitionGradient[s][s2] - lambda * transitionWeights[s][s2]);
                 }
             }
-            
+
             // Print progress occasionally
             if ((iter + 1) % 100 == 0 || iter == 0) {
                 double ll = score(features, labels);
@@ -434,20 +418,20 @@ public class CRF {
             }
         }
     }
-    
+
     /**
      * Predict the best tag sequence using Viterbi decoding.
-     * 
+     *
      * @param features Feature matrix [sequenceLength, nFeatures]
      * @return Best tag sequence
      */
     public int[] predict(NdArray features) {
         int T = features.getShape().get(0);
-        
+
         // Viterbi algorithm
         double[][] delta = new double[T][nTags];
         int[][] psi = new int[T][nTags];
-        
+
         // Initialize
         double[] feat0 = getFeatureVector(features, 0);
         for (int s = 0; s < nTags; s++) {
@@ -458,14 +442,14 @@ public class CRF {
             delta[0][s] = score;
             psi[0][s] = 0;
         }
-        
+
         // Recursion
         for (int t = 1; t < T; t++) {
             double[] feat = getFeatureVector(features, t);
             for (int currTag = 0; currTag < nTags; currTag++) {
                 double maxProb = Double.NEGATIVE_INFINITY;
                 int maxPrevTag = 0;
-                
+
                 for (int prevTag = 0; prevTag < nTags; prevTag++) {
                     double prob = delta[t - 1][prevTag] + transitionWeights[prevTag][currTag];
                     if (prob > maxProb) {
@@ -473,17 +457,17 @@ public class CRF {
                         maxPrevTag = prevTag;
                     }
                 }
-                
+
                 double stateScore = 0;
                 for (int k = 0; k < nFeatures; k++) {
                     stateScore += tagWeights[currTag][k] * feat[k];
                 }
-                
+
                 delta[t][currTag] = maxProb + stateScore;
                 psi[t][currTag] = maxPrevTag;
             }
         }
-        
+
         // Backtrack
         int[] bestPath = new int[T];
         double maxFinal = Double.NEGATIVE_INFINITY;
@@ -495,17 +479,17 @@ public class CRF {
             }
         }
         bestPath[T - 1] = maxFinalTag;
-        
+
         for (int t = T - 2; t >= 0; t--) {
             bestPath[t] = psi[t + 1][bestPath[t + 1]];
         }
-        
+
         return bestPath;
     }
-    
+
     /**
      * Get tag weights.
-     * 
+     *
      * @return Copy of tag weights
      */
     public double[][] getTagWeights() {
@@ -515,10 +499,10 @@ public class CRF {
         }
         return copy;
     }
-    
+
     /**
      * Get transition weights.
-     * 
+     *
      * @return Copy of transition weights
      */
     public double[][] getTransitionWeights() {
@@ -528,22 +512,35 @@ public class CRF {
         }
         return copy;
     }
-    
+
     /**
      * Get number of tags.
-     * 
+     *
      * @return Number of tags
      */
     public int getNTags() {
         return nTags;
     }
-    
+
     /**
      * Get feature dimension.
-     * 
+     *
      * @return Number of features
      */
     public int getNFeatures() {
         return nFeatures;
+    }
+
+    /**
+     * Gradient container.
+     */
+    private static class Gradient {
+        double[][] tagGradient;
+        double[][] transitionGradient;
+
+        Gradient(double[][] tagGradient, double[][] transitionGradient) {
+            this.tagGradient = tagGradient;
+            this.transitionGradient = transitionGradient;
+        }
     }
 }

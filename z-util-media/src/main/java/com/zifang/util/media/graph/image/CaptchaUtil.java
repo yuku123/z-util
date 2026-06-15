@@ -5,7 +5,10 @@ import com.zifang.util.media.graph.image.GIF.GifEncoder;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.Random;
 
@@ -15,10 +18,11 @@ import java.util.Random;
  */
 public final class CaptchaUtil {
 
-    private static Font DEFAULT_FONT = new Font("Verdana", Font.ITALIC | Font.BOLD, 28);
     private static final Random RANDOM = new Random();
+    private static Font DEFAULT_FONT = new Font("Verdana", Font.ITALIC | Font.BOLD, 28);
 
-    private CaptchaUtil() {}
+    private CaptchaUtil() {
+    }
 
     /**
      * 设置验证码字体。
@@ -95,9 +99,9 @@ public final class CaptchaUtil {
     /**
      * 生成 GIF 动态验证码（字符逐帧显现）。
      *
-     * @param randomStr 验证码字符
-     * @param width     宽度
-     * @param height    高度
+     * @param randomStr  验证码字符
+     * @param width      宽度
+     * @param height     高度
      * @param frameDelay 每帧延迟（毫秒）
      * @return GIF 图片
      */
@@ -183,8 +187,8 @@ public final class CaptchaUtil {
     /**
      * 生成 GIF 单帧。
      *
-     * @param chars      全部字符
-     * @param fontColors 每字符颜色
+     * @param chars        全部字符
+     * @param fontColors   每字符颜色
      * @param visibleCount 当前帧可见字符数量
      */
     private static BufferedImage createGifFrame(char[] chars, Color[] fontColors,

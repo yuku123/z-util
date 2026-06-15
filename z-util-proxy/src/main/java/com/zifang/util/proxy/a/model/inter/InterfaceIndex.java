@@ -14,6 +14,7 @@ public class InterfaceIndex {
     public U2 length;
     /**
      * ArrayList<>方法。
+     *
      * @return List<Interface> list = new类型返回值
      */
     public List<Interface> list = new ArrayList<>();
@@ -26,7 +27,7 @@ public class InterfaceIndex {
 
     /**
      * addIndex方法。
-     *      * @param index U2类型参数
+     * * @param index U2类型参数
      */
     public void addIndex(U2 index) {
         this.list.add(new Interface(index));

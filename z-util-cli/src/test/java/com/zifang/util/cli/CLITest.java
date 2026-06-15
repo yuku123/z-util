@@ -1,14 +1,13 @@
 package com.zifang.util.cli;
 
+import com.zifang.util.cli.exception.ParseException;
+import com.zifang.util.cli.help.HelpFormatter;
 import com.zifang.util.cli.model.CommandLine;
 import com.zifang.util.cli.model.Option;
 import com.zifang.util.cli.model.OptionGroup;
 import com.zifang.util.cli.model.Options;
 import com.zifang.util.cli.parser.CommandLineParser;
 import com.zifang.util.cli.parser.DefaultParser;
-import com.zifang.util.cli.exception.ParseException;
-import com.zifang.util.cli.help.HelpFormatter;
-
 import org.junit.Test;
 
 import java.io.PrintWriter;

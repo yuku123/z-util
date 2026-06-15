@@ -1,7 +1,8 @@
 package com.zifang.util.xml.util;
 
-import com.zifang.util.xml.exception.XmlParseException;
-import com.zifang.util.xml.model.*;
+import com.zifang.util.xml.model.XDocument;
+import com.zifang.util.xml.model.XElement;
+import com.zifang.util.xml.model.XNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.regex.Pattern;
  *
  * @author zifang
  */
+
 /**
  * XPathQuery类。
  */
@@ -35,7 +37,8 @@ public class XPathQuery {
      */
     /**
      * query方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @param path String类型参数
      * @return List<Object>类型返回值
      */
@@ -51,7 +54,8 @@ public class XPathQuery {
      */
     /**
      * query方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @param path String类型参数
      * @return List<Object>类型返回值
      */
@@ -64,7 +68,8 @@ public class XPathQuery {
      */
     /**
      * queryOne方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @param path String类型参数
      * @return Object类型返回值
      */
@@ -75,7 +80,8 @@ public class XPathQuery {
 
     /**
      * queryOne方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @param path String类型参数
      * @return Object类型返回值
      */

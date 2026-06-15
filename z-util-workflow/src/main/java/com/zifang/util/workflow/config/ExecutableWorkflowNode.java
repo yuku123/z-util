@@ -67,9 +67,10 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * @param workflowNode 工作流节点配置对象，从中复制节点相关属性
      */
     //初始化，将节点信息同步到可执行node内部
+
     /**
      * ExecutableWorkflowNode方法。
-     *      * @param workflowNode WorkflowNode类型参数
+     * * @param workflowNode WorkflowNode类型参数
      */
     public ExecutableWorkflowNode(WorkflowNode workflowNode) {
         super.setNodeId(workflowNode.getNodeId());
@@ -273,6 +274,7 @@ public class ExecutableWorkflowNode extends WorkflowNode implements NodeLifeCycl
      * 默认为同步执行操作，内部调用阻塞执行方法
      */
     //开始执行
+
     /**
      * exec方法。
      */

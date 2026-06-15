@@ -74,7 +74,8 @@ public class ExpandObject implements Serializable {
 
     /**
      * getString方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return String类型返回值
      */
     public String getString(String key) {
@@ -83,7 +84,8 @@ public class ExpandObject implements Serializable {
 
     /**
      * getLong方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return long类型返回值
      */
     public Long getLong(String key) {
@@ -93,7 +95,8 @@ public class ExpandObject implements Serializable {
 
     /**
      * getInteger方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return int类型返回值
      */
     public Integer getInteger(String key) {
@@ -103,7 +106,8 @@ public class ExpandObject implements Serializable {
 
     /**
      * getShort方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return short类型返回值
      */
     public Short getShort(String key) {
@@ -113,7 +117,8 @@ public class ExpandObject implements Serializable {
 
     /**
      * getByte方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return byte类型返回值
      */
     public Byte getByte(String key) {
@@ -123,7 +128,8 @@ public class ExpandObject implements Serializable {
 
     /**
      * getDouble方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return double类型返回值
      */
     public Double getDouble(String key) {
@@ -133,7 +139,8 @@ public class ExpandObject implements Serializable {
 
     /**
      * getFloat方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return float类型返回值
      */
     public Float getFloat(String key) {
@@ -143,7 +150,8 @@ public class ExpandObject implements Serializable {
 
     /**
      * getObject方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return <T> T类型返回值
      */
     public <T> T getObject(String key) {

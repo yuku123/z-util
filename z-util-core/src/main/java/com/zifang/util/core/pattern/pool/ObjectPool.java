@@ -14,7 +14,7 @@ public interface ObjectPool<T> {
      *
      * @return 池化对象
      * @throws NoSuchElementException 如果池 exhausted 且 blocking 模式下超时
-     * @throws IllegalStateException 如果池 closed
+     * @throws IllegalStateException  如果池 closed
      */
     T borrowObject() throws Exception;
 

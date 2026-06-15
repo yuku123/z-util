@@ -20,7 +20,8 @@ public class Exceptions extends AbstractAttribute {
 
     /**
      * Exceptions方法。
-     *      * @param attributeNameIndex U2类型参数
+     * * @param attributeNameIndex U2类型参数
+     *
      * @param attributeLength U4类型参数
      */
     public Exceptions(U2 attributeNameIndex, U4 attributeLength) {
@@ -38,6 +39,7 @@ public class Exceptions extends AbstractAttribute {
 
     /**
      * getNumberOfExceptions方法。
+     *
      * @return U2类型返回值
      */
     public U2 getNumberOfExceptions() {
@@ -46,7 +48,7 @@ public class Exceptions extends AbstractAttribute {
 
     /**
      * setNumberOfExceptions方法。
-     *      * @param numberOfExceptions U2类型参数
+     * * @param numberOfExceptions U2类型参数
      */
     public void setNumberOfExceptions(U2 numberOfExceptions) {
         this.numberOfExceptions = numberOfExceptions;
@@ -54,6 +56,7 @@ public class Exceptions extends AbstractAttribute {
 
     /**
      * getExceptionIndexTable方法。
+     *
      * @return List<U2>类型返回值
      */
     public List<U2> getExceptionIndexTable() {
@@ -62,7 +65,7 @@ public class Exceptions extends AbstractAttribute {
 
     /**
      * setExceptionIndexTable方法。
-     *      * @param exceptionIndexTable ListU2类型参数
+     * * @param exceptionIndexTable ListU2类型参数
      */
     public void setExceptionIndexTable(List<U2> exceptionIndexTable) {
         this.exceptionIndexTable = exceptionIndexTable;

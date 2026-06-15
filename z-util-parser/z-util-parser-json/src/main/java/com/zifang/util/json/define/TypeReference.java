@@ -15,6 +15,7 @@ import java.lang.reflect.Type;
  * @param <T> 泛型类型
  * @author zifang
  */
+
 /**
  * TypeReference类。
  */
@@ -47,6 +48,7 @@ public class TypeReference<T> {
      */
     /**
      * getType方法。
+     *
      * @return Type类型返回值
      */
     public Type getType() {

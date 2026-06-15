@@ -1,7 +1,5 @@
 package com.zifang.util.core.pattern.command;
 
-import java.util.function.Consumer;
-
 /**
  * 命令接口
  *

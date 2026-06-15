@@ -9,6 +9,7 @@ package com.zifang.util.zex.bytecode.ctclass;
  * @author zifang
  * @version 1.0
  */
+
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
@@ -22,7 +23,8 @@ public class CtClassTest {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws MalformedURLException, NotFoundException {

@@ -16,10 +16,13 @@ public class Singleton1_3 {
     public int f1 = 1; // 触发部分初始化问题
 
     public int f2 = 2;
-    private Singleton1_3() {}
+
+    private Singleton1_3() {
+    }
 
     /**
      * getInstance方法。
+     *
      * @return static Singleton1_3类型返回值
      */
     public static Singleton1_3 getInstance() {

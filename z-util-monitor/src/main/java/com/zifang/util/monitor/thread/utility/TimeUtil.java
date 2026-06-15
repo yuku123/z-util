@@ -8,40 +8,35 @@ package com.zifang.util.monitor.thread.utility;
 public final class TimeUtil {
 
     /**
-     * 私有构造函数，不允许实例化此类。
-     */
-    private TimeUtil() {
-    }
-
-    /**
      * 一天内的小时数。
      */
     public static final int DAY_HOURS = 24;
-
     /**
      * 一个小时之中的分钟数。
      */
     public static final int HOUR_MINUTES = 60;
-
     /**
      * 一分钟的秒数。
      */
     public static final int MINUTES_SECONDS = 60;
-
     /**
      * 一秒的毫秒数。
      */
     public static final int SECOND_MILLISECONDS = 1000;
-
     /**
      * 一天总毫秒数
      */
     public static final long DAY_MILLISECONDS = DAY_HOURS * HOUR_MINUTES * MINUTES_SECONDS * SECOND_MILLISECONDS;
-
     /**
      * 一天总秒数
      */
     public static final int DAY_SECONDS = DAY_HOURS * HOUR_MINUTES * MINUTES_SECONDS;
+
+    /**
+     * 私有构造函数，不允许实例化此类。
+     */
+    private TimeUtil() {
+    }
 
     /**
      * 获取当前时间戳。
@@ -97,9 +92,9 @@ public final class TimeUtil {
         return hour * HOUR_MINUTES * MINUTES_SECONDS * SECOND_MILLISECONDS;
     }
 
-/**
- * Hourage枚举。
- */
+    /**
+     * Hourage枚举。
+     */
     public enum Hourage {
 
         /**

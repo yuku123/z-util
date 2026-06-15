@@ -1,13 +1,13 @@
 package com.zifang.util.devops.git.github;
 
+import com.zifang.util.devops.git.github.action.ActionApiWrapper;
 import com.zifang.util.devops.git.github.holder.GithubApiHolder;
-import com.zifang.util.devops.git.github.repo.RepositoryApiWrapper;
 import com.zifang.util.devops.git.github.issue.IssueApiWrapper;
+import com.zifang.util.devops.git.github.org.OrganizationApiWrapper;
 import com.zifang.util.devops.git.github.pr.PullRequestApiWrapper;
 import com.zifang.util.devops.git.github.release.ReleaseApiWrapper;
-import com.zifang.util.devops.git.github.action.ActionApiWrapper;
+import com.zifang.util.devops.git.github.repo.RepositoryApiWrapper;
 import com.zifang.util.devops.git.github.user.UserApiWrapper;
-import com.zifang.util.devops.git.github.org.OrganizationApiWrapper;
 import org.kohsuke.github.GitHub;
 
 /**

@@ -2,11 +2,12 @@ package com.zifang.util.office.excel;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * ExcelUtils工具类的单元测试
  */
+
 /**
  * ExcelUtilsTest类。
  */

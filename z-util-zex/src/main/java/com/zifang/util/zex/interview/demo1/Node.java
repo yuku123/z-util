@@ -16,9 +16,10 @@ public class Node {
 
     /**
      * Node方法。
-     *      * @param id int类型参数
+     * * @param id int类型参数
+     *
      * @param parentId int类型参数
-     * @param name String类型参数
+     * @param name     String类型参数
      */
     public Node(int id, int parentId, String name) {
         this.id = id;
@@ -28,6 +29,7 @@ public class Node {
 
     /**
      * getId方法。
+     *
      * @return int类型返回值
      */
     public int getId() {
@@ -36,7 +38,7 @@ public class Node {
 
     /**
      * setId方法。
-     *      * @param id int类型参数
+     * * @param id int类型参数
      */
     public void setId(int id) {
         this.id = id;
@@ -44,6 +46,7 @@ public class Node {
 
     /**
      * getParentId方法。
+     *
      * @return int类型返回值
      */
     public int getParentId() {
@@ -52,7 +55,7 @@ public class Node {
 
     /**
      * setParentId方法。
-     *      * @param parentId int类型参数
+     * * @param parentId int类型参数
      */
     public void setParentId(int parentId) {
         this.parentId = parentId;
@@ -60,6 +63,7 @@ public class Node {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -68,7 +72,7 @@ public class Node {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;

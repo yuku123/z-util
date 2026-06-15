@@ -25,7 +25,7 @@ public class HttpRequestHeaderTest {
     public void testPutAndGet() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Content-Type", "application/json");
-        
+
         assertEquals("application/json", header.get("Content-Type"));
     }
 
@@ -36,7 +36,7 @@ public class HttpRequestHeaderTest {
     public void testContainsKey() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
-        
+
         assertTrue(header.containsKey("Accept"));
         assertFalse(header.containsKey("X-Custom-Header"));
     }
@@ -49,7 +49,7 @@ public class HttpRequestHeaderTest {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
         header.remove("Accept");
-        
+
         assertFalse(header.containsKey("Accept"));
     }
 
@@ -62,7 +62,7 @@ public class HttpRequestHeaderTest {
         header.put("Accept", "text/html");
         header.put("Content-Type", "application/json");
         header.clear();
-        
+
         assertTrue(header.isEmpty());
     }
 
@@ -74,7 +74,7 @@ public class HttpRequestHeaderTest {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
         header.put("Content-Type", "application/json");
-        
+
         assertEquals(2, header.size());
     }
 
@@ -86,7 +86,7 @@ public class HttpRequestHeaderTest {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
         header.put("Content-Type", "application/json");
-        
+
         assertEquals(2, header.keySet().size());
         assertTrue(header.keySet().contains("Accept"));
         assertTrue(header.keySet().contains("Content-Type"));
@@ -100,7 +100,7 @@ public class HttpRequestHeaderTest {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
         header.put("Content-Type", "application/json");
-        
+
         assertEquals(2, header.values().size());
         assertTrue(header.values().contains("text/html"));
         assertTrue(header.values().contains("application/json"));
@@ -113,7 +113,7 @@ public class HttpRequestHeaderTest {
     public void testEntrySet() {
         HttpRequestHeader header = new HttpRequestHeader();
         header.put("Accept", "text/html");
-        
+
         assertEquals(1, header.entrySet().size());
     }
 
@@ -124,10 +124,10 @@ public class HttpRequestHeaderTest {
     public void testPutAll() {
         HttpRequestHeader header1 = new HttpRequestHeader();
         header1.put("Accept", "text/html");
-        
+
         HttpRequestHeader header2 = new HttpRequestHeader();
         header2.putAll(header1);
-        
+
         assertEquals("text/html", header2.get("Accept"));
     }
 }

@@ -1,8 +1,6 @@
 package com.zifang.util.ml.data;
 
-import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 import com.zifang.util.numpy.Slice;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class TensorDataset implements Dataset {
      * Create a TensorDataset from features and labels.
      *
      * @param features Features tensor of shape (n_samples, ...)
-     * @param labels  Labels tensor of shape (n_samples, ...)
+     * @param labels   Labels tensor of shape (n_samples, ...)
      */
     public TensorDataset(NdArray features, NdArray labels) {
         this.samples = new ArrayList<>();

@@ -9,25 +9,28 @@ package com.zifang.util.zex.bust.chapter11;
  * @author zifang
  * @version 1.0
  */
-import java.io.File;
-import java.io.IOException;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.JFrame;
 
 import org.junit.Test;
+
+import javax.sound.sampled.*;
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * TestInputStream类。
  */
 public class TestInputStream extends JFrame {
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        new TestInputStream().clipTest();
+    }
 
     @Test
     /**
@@ -103,14 +106,5 @@ public class TestInputStream extends JFrame {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        new TestInputStream().clipTest();
     }
 }

@@ -15,7 +15,7 @@ public class ConstantDoubleInfo extends AbstractConstantPool {
 
     /**
      * ConstantDoubleInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public ConstantDoubleInfo(byte tag) {
         super(tag);
@@ -23,7 +23,7 @@ public class ConstantDoubleInfo extends AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         this.bytes = U8.read(inputStream);
@@ -31,6 +31,7 @@ public class ConstantDoubleInfo extends AbstractConstantPool {
 
     /**
      * getBytes方法。
+     *
      * @return U8类型返回值
      */
     public U8 getBytes() {

@@ -51,7 +51,7 @@ public class Individual {
      * 设置指定位置的基因
      *
      * @param index 基因索引
-     * @param gene 基因值
+     * @param gene  基因值
      */
     public void setGene(int index, Object gene) {
         chromosome[index] = gene;

@@ -35,7 +35,7 @@ public class CronTrigger implements Trigger {
 
     /**
      * CronTrigger方法。
-     *      * @param delegate org.quartz.CronTrigger类型参数
+     * * @param delegate org.quartz.CronTrigger类型参数
      */
     public CronTrigger(org.quartz.CronTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
@@ -240,21 +240,21 @@ public class CronTrigger implements Trigger {
          * 设置时区。
          */
         @Override
-    /**
-     * inTimeZone方法。
-     *      * @param timeZone TimeZone类型参数
-     * @return CronBuilder类型返回值
-     */
+        /**
+         * inTimeZone方法。
+         *      * @param timeZone TimeZone类型参数
+         * @return CronBuilder类型返回值
+         */
         public CronBuilder inTimeZone(TimeZone timeZone) {
             super.inTimeZone(timeZone);
             return this;
         }
 
         @Override
-    /**
-     * build方法。
-     * @return CronTrigger类型返回值
-     */
+        /**
+         * build方法。
+         * @return CronTrigger类型返回值
+         */
         public CronTrigger build() {
             if (cronExpression == null && cronExpressionObject == null) {
                 throw new IllegalStateException(

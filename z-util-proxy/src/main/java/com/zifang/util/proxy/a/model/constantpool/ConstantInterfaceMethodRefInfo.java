@@ -17,7 +17,7 @@ public class ConstantInterfaceMethodRefInfo extends AbstractConstantPool {
 
     /**
      * ConstantInterfaceMethodRefInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public ConstantInterfaceMethodRefInfo(byte tag) {
         super(tag);
@@ -25,7 +25,7 @@ public class ConstantInterfaceMethodRefInfo extends AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         this.classIndex = U2.read(inputStream);
@@ -35,6 +35,7 @@ public class ConstantInterfaceMethodRefInfo extends AbstractConstantPool {
 
     /**
      * getClassIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getClassIndex() {
@@ -43,6 +44,7 @@ public class ConstantInterfaceMethodRefInfo extends AbstractConstantPool {
 
     /**
      * getNameIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getNameIndex() {

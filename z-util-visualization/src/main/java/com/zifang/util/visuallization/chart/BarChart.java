@@ -1,6 +1,5 @@
 package com.zifang.util.visuallization.chart;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,20 +10,20 @@ import java.util.List;
  */
 public class BarChart extends ChartFrame {
 
+    private static final int PADDING = 60;
+    private static final int RIGHT_PADDING = 20;
+    private static final int TOP_PADDING = 40;
+    private static final int BOTTOM_PADDING = 60;
     private final List<ChartSeries> seriesList;
     private String xAxisLabel = "";
     private String yAxisLabel = "Value";
     private double yMax = 1;
 
-    private static final int PADDING = 60;
-    private static final int RIGHT_PADDING = 20;
-    private static final int TOP_PADDING = 40;
-    private static final int BOTTOM_PADDING = 60;
-
     /**
      * 创建条形图
-     * @param title 图表标题
-     * @param width 图表宽度
+     *
+     * @param title  图表标题
+     * @param width  图表宽度
      * @param height 图表高度
      */
     public BarChart(String title, int width, int height) {
@@ -34,6 +33,7 @@ public class BarChart extends ChartFrame {
 
     /**
      * 创建条形图（使用默认尺寸800x600）
+     *
      * @param title 图表标题
      */
     public BarChart(String title) {
@@ -42,6 +42,7 @@ public class BarChart extends ChartFrame {
 
     /**
      * 添加数据系列
+     *
      * @param series 数据系列对象
      */
     public void addSeries(ChartSeries series) {
@@ -51,6 +52,7 @@ public class BarChart extends ChartFrame {
 
     /**
      * 添加数据系列
+     *
      * @param name 系列名称
      * @param data 数据列表
      */
@@ -60,8 +62,9 @@ public class BarChart extends ChartFrame {
 
     /**
      * 向指定系列添加单个数据点
+     *
      * @param seriesName 系列名称（不存在则创建新系列）
-     * @param value 数据值
+     * @param value      数据值
      */
     public void addData(String seriesName, double value) {
         ChartSeries series = findSeries(seriesName);
@@ -85,6 +88,7 @@ public class BarChart extends ChartFrame {
 
     /**
      * 设置坐标轴标签
+     *
      * @param xAxisLabel X轴标签
      * @param yAxisLabel Y轴标签
      */
@@ -95,6 +99,7 @@ public class BarChart extends ChartFrame {
 
     /**
      * 创建条形图画布
+     *
      * @return 条形图画布实例
      */
     @Override
@@ -131,6 +136,7 @@ public class BarChart extends ChartFrame {
 
     /**
      * 查找指定名称的数据系列
+     *
      * @param name 系列名称
      * @return 找到的系列，不存在则返回null
      */
@@ -146,10 +152,10 @@ public class BarChart extends ChartFrame {
     private class BarChartCanvas extends ChartCanvas {
 
         @Override
-    /**
-     * paintComponent方法。
-     *      * @param g Graphics类型参数
-     */
+        /**
+         * paintComponent方法。
+         *      * @param g Graphics类型参数
+         */
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;

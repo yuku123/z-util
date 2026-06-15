@@ -2,7 +2,6 @@ package com.zifang.util.xml.util;
 
 import com.zifang.util.xml.model.*;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,6 +9,7 @@ import java.util.List;
  *
  * @author zifang
  */
+
 /**
  * XmlFormatter类。
  */
@@ -27,15 +27,109 @@ public class XmlFormatter {
 
     /**
      * XmlFormatter方法。
-     *      * @param indentSize int类型参数
+     * * @param indentSize int类型参数
      */
     public XmlFormatter(int indentSize) {
         this.indentSize = indentSize;
     }
 
     /**
+     * escapeXmlText方法。
+     * * @param text String类型参数
+     *
+     * @return static String类型返回值
+     */
+    public static String escapeXmlText(String text) {
+        if (text == null) {
+            return null;
+        }
+        // Must escape & FIRST to avoid double-escaping &amp; etc.
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == '&') {
+                sb.append("&amp;");
+            } else if (c == '<') {
+                sb.append("&lt;");
+            } else if (c == '>') {
+                sb.append("&gt;");
+            } else if (c == '"') {
+                sb.append("&quot;");
+            } else if (c == '\'') {
+                sb.append("&apos;");
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * escapeXmlAttr方法。
+     * * @param value String类型参数
+     *
+     * @return static String类型返回值
+     */
+    public static String escapeXmlAttr(String value) {
+        if (value == null) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            if (c == '&') {
+                sb.append("&amp;");
+            } else if (c == '<') {
+                sb.append("&lt;");
+            } else if (c == '>') {
+                sb.append("&gt;");
+            } else if (c == '"') {
+                sb.append("&quot;");
+            } else if (c == '\'') {
+                sb.append("&apos;");
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 将 XDocument 序列化为格式化的 XML 字符串。
+     */
+
+    /**
+     * wrapCData方法。
+     * * @param data String类型参数
+     *
+     * @return static String类型返回值
+     */
+    public static String wrapCData(String data) {
+        if (data == null) {
+            return null;
+        }
+        // 如果包含 ]]>，分段处理
+        if (data.contains("]]>")) {
+            StringBuilder sb = new StringBuilder();
+            String[] parts = data.split("]]>");
+            for (int i = 0; i < parts.length; i++) {
+                if (i > 0) {
+                    sb.append("]]><![CDATA[>");
+                }
+                sb.append(parts[i]);
+            }
+            return sb.toString();
+        }
+        return data;
+    }
+
+    /**
+     * 将 XElement 序列化为格式化的 XML 字符串（不带 declaration）。
+     */
+
+    /**
      * setIndentSize方法。
-     *      * @param indentSize int类型参数
+     * * @param indentSize int类型参数
      */
     public void setIndentSize(int indentSize) {
         this.indentSize = indentSize;
@@ -43,18 +137,16 @@ public class XmlFormatter {
 
     /**
      * setPreserveWhitespace方法。
-     *      * @param preserveWhitespace boolean类型参数
+     * * @param preserveWhitespace boolean类型参数
      */
     public void setPreserveWhitespace(boolean preserveWhitespace) {
         this.preserveWhitespace = preserveWhitespace;
     }
 
     /**
-     * 将 XDocument 序列化为格式化的 XML 字符串。
-     */
-    /**
      * format方法。
-     *      * @param doc XDocument类型参数
+     * * @param doc XDocument类型参数
+     *
      * @return String类型返回值
      */
     public String format(XDocument doc) {
@@ -64,11 +156,9 @@ public class XmlFormatter {
     }
 
     /**
-     * 将 XElement 序列化为格式化的 XML 字符串（不带 declaration）。
-     */
-    /**
      * format方法。
-     *      * @param element XElement类型参数
+     * * @param element XElement类型参数
+     *
      * @return String类型返回值
      */
     public String format(XElement element) {
@@ -183,6 +273,10 @@ public class XmlFormatter {
         return true;
     }
 
+    /**
+     * 对 XML 元素内容进行转义。
+     */
+
     private void writeNode(XNode node, StringBuilder sb, int depth) {
         if (node instanceof XElement) {
             writeElement((XElement) node, sb, depth);
@@ -231,6 +325,10 @@ public class XmlFormatter {
         }
     }
 
+    /**
+     * 对 XML 属性值进行转义。
+     */
+
     private void writeAttributes(XElement element, StringBuilder sb) {
         for (java.util.Map.Entry<String, String> attr : element.getAttributes().entrySet()) {
             sb.append(' ');
@@ -243,101 +341,13 @@ public class XmlFormatter {
         }
     }
 
+    /**
+     * 对 CDATA 内容进行安全封装（检测是否含有 ]]>）。
+     */
+
     private void indent(StringBuilder sb, int depth) {
         for (int i = 0; i < depth * indentSize; i++) {
             sb.append(' ');
         }
-    }
-
-    /**
-     * 对 XML 元素内容进行转义。
-     */
-    /**
-     * escapeXmlText方法。
-     *      * @param text String类型参数
-     * @return static String类型返回值
-     */
-    public static String escapeXmlText(String text) {
-        if (text == null) {
-            return null;
-        }
-        // Must escape & FIRST to avoid double-escaping &amp; etc.
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c == '&') {
-                sb.append("&amp;");
-            } else if (c == '<') {
-                sb.append("&lt;");
-            } else if (c == '>') {
-                sb.append("&gt;");
-            } else if (c == '"') {
-                sb.append("&quot;");
-            } else if (c == '\'') {
-                sb.append("&apos;");
-            } else {
-                sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 对 XML 属性值进行转义。
-     */
-    /**
-     * escapeXmlAttr方法。
-     *      * @param value String类型参数
-     * @return static String类型返回值
-     */
-    public static String escapeXmlAttr(String value) {
-        if (value == null) {
-            return null;
-        }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < value.length(); i++) {
-            char c = value.charAt(i);
-            if (c == '&') {
-                sb.append("&amp;");
-            } else if (c == '<') {
-                sb.append("&lt;");
-            } else if (c == '>') {
-                sb.append("&gt;");
-            } else if (c == '"') {
-                sb.append("&quot;");
-            } else if (c == '\'') {
-                sb.append("&apos;");
-            } else {
-                sb.append(c);
-            }
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 对 CDATA 内容进行安全封装（检测是否含有 ]]>）。
-     */
-    /**
-     * wrapCData方法。
-     *      * @param data String类型参数
-     * @return static String类型返回值
-     */
-    public static String wrapCData(String data) {
-        if (data == null) {
-            return null;
-        }
-        // 如果包含 ]]>，分段处理
-        if (data.contains("]]>")) {
-            StringBuilder sb = new StringBuilder();
-            String[] parts = data.split("]]>");
-            for (int i = 0; i < parts.length; i++) {
-                if (i > 0) {
-                    sb.append("]]><![CDATA[>");
-                }
-                sb.append(parts[i]);
-            }
-            return sb.toString();
-        }
-        return data;
     }
 }

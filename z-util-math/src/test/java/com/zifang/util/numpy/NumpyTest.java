@@ -2,11 +2,13 @@ package com.zifang.util.numpy;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Numpy 类测试
  */
+
 /**
  * NumpyTest类。
  */

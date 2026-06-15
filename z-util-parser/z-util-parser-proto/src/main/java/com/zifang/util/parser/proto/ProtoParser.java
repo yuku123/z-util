@@ -22,6 +22,7 @@ import java.util.List;
  *
  * @author zifang
  */
+
 /**
  * ProtoParser类。
  */
@@ -29,312 +30,29 @@ public class ProtoParser {
 
     // ==================== Token types ====================
 
-    private enum TokenType {
-        SYNTAX, PACKAGE, IMPORT,
-        MESSAGE, ENUM, SERVICE, RPC,
-        REPEATED, RETURNS,
-        IDENTIFIER, STRING,
-        LBRACE, RBRACE, LPAREN, RPAREN,
-        SEMICOLON, EQ, LT, GT,
-        NUMBER,
-        COMMENT, WHITESPACE,
-        EOF
-    }
+    private List<Token> tokens;
 
     // ==================== Token ====================
-
-    private static class Token {
-        final TokenType type;
-        final String value;
-        final int line;
-        final int column;
-
-        Token(TokenType type, String value, int line, int column) {
-            this.type = type;
-            this.value = value;
-            this.line = line;
-            this.column = column;
-        }
-
-        @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
-        public String toString() {
-            return "Token{" + type + ", '" + value + "', " + line + ":" + column + "}";
-        }
-    }
+    private int pos = 0;
 
     // ==================== Lexer ====================
 
-    private static class Lexer {
-        private final Reader reader;
-        private int pos = 0;
-        private int line = 1;
-        private int column = 1;
-        private int charBuffer = -1;
-        private final List<Token> tokens = new ArrayList<>();
-
-        Lexer(Reader reader) {
-            this.reader = reader;
-        }
-
-        private int read() throws IOException {
-            if (charBuffer != -1) {
-                int c = charBuffer;
-                charBuffer = -1;
-                return c;
-            }
-            int c = reader.read();
-            if (c == '\n') {
-                line++;
-                column = 1;
-            } else if (c != -1) {
-                column++;
-            }
-            pos++;
-            return c;
-        }
-
-        private void unread(int c) {
-            charBuffer = c;
-            pos--;
-            if (c == '\n') {
-                line--;
-            } else {
-                column--;
-            }
-        }
-
-        private boolean isAlpha(int c) {
-            return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
-        }
-
-        private boolean isDigit(int c) {
-            return c >= '0' && c <= '9';
-        }
-
-        private boolean isWhitespace(int c) {
-            return c == ' ' || c == '\t' || c == '\n' || c == '\r';
-        }
-
-        private void nextToken() throws IOException {
-            int c = read();
-
-            if (c == -1) {
-                tokens.add(new Token(TokenType.EOF, "", line, column));
-                return;
-            }
-
-            // Whitespace
-            if (isWhitespace(c)) {
-                StringBuilder sb = new StringBuilder();
-                sb.append((char) c);
-                while (true) {
-                    c = read();
-                    if (c == -1 || !isWhitespace(c)) {
-                        if (c != -1) unread(c);
-                        break;
-                    }
-                    sb.append((char) c);
-                }
-                tokens.add(new Token(TokenType.WHITESPACE, sb.toString(), line, column));
-                return;
-            }
-
-            // Single-line comment
-            if (c == '/' ) {
-                int next = read();
-                if (next == '/') {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("//");
-                    while (true) {
-                        c = read();
-                        if (c == -1 || c == '\n') {
-                            if (c != -1) unread(c);
-                            break;
-                        }
-                        sb.append((char) c);
-                    }
-                    tokens.add(new Token(TokenType.COMMENT, sb.toString(), line, column));
-                    return;
-                } else if (next == '*') {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("/*");
-                    while (true) {
-                        c = read();
-                        if (c == -1) {
-                            break;
-                        }
-                        sb.append((char) c);
-                        if (c == '*') {
-                            int nextChar = read();
-                            if (nextChar == '/') {
-                                sb.append('/');
-                                break;
-                            } else {
-                                unread(nextChar);
-                            }
-                        }
-                    }
-                    tokens.add(new Token(TokenType.COMMENT, sb.toString(), line, column));
-                    return;
-                } else {
-                    unread(next);
-                    tokens.add(new Token(TokenType.SEMICOLON, "/", line, column));
-                    return;
-                }
-            }
-
-            // String
-            if (c == '"') {
-                StringBuilder sb = new StringBuilder();
-                while (true) {
-                    c = read();
-                    if (c == -1) {
-                        throw new ProtoException("Unterminated string at line " + line);
-                    }
-                    if (c == '"') {
-                        break;
-                    }
-                    if (c == '\\') {
-                        int next = read();
-                        if (next == -1) {
-                            throw new ProtoException("Unterminated string escape at line " + line);
-                        }
-                        switch (next) {
-                            case 'n': sb.append('\n'); break;
-                            case 't': sb.append('\t'); break;
-                            case 'r': sb.append('\r'); break;
-                            case '\\': sb.append('\\'); break;
-                            case '"': sb.append('"'); break;
-                            default: sb.append((char) next); break;
-                        }
-                    } else {
-                        sb.append((char) c);
-                    }
-                }
-                tokens.add(new Token(TokenType.STRING, sb.toString(), line, column));
-                return;
-            }
-
-            // Braces and parens
-            if (c == '{') {
-                tokens.add(new Token(TokenType.LBRACE, "{", line, column));
-                return;
-            }
-            if (c == '}') {
-                tokens.add(new Token(TokenType.RBRACE, "}", line, column));
-                return;
-            }
-            if (c == '(') {
-                tokens.add(new Token(TokenType.LPAREN, "(", line, column));
-                return;
-            }
-            if (c == ')') {
-                tokens.add(new Token(TokenType.RPAREN, ")", line, column));
-                return;
-            }
-            if (c == ';') {
-                tokens.add(new Token(TokenType.SEMICOLON, ";", line, column));
-                return;
-            }
-            if (c == '=') {
-                tokens.add(new Token(TokenType.EQ, "=", line, column));
-                return;
-            }
-
-            // Number
-            if (isDigit(c) || (c == '-' && peekNextDigit())) {
-                StringBuilder sb = new StringBuilder();
-                if (c == '-') {
-                    sb.append('-');
-                    c = read();
-                }
-                while (isDigit(c)) {
-                    sb.append((char) c);
-                    c = read();
-                }
-                unread(c);
-                tokens.add(new Token(TokenType.NUMBER, sb.toString(), line, column));
-                return;
-            }
-
-            // Identifier or keyword
-            if (isAlpha(c)) {
-                StringBuilder sb = new StringBuilder();
-                sb.append((char) c);
-                while (true) {
-                    c = read();
-                    if (c == -1 || !isAlpha(c) && !isDigit(c)) {
-                        if (c != -1) unread(c);
-                        break;
-                    }
-                    sb.append((char) c);
-                }
-                String ident = sb.toString();
-                switch (ident) {
-                    case "syntax": tokens.add(new Token(TokenType.SYNTAX, ident, line, column)); break;
-                    case "package": tokens.add(new Token(TokenType.PACKAGE, ident, line, column)); break;
-                    case "import": tokens.add(new Token(TokenType.IMPORT, ident, line, column)); break;
-                    case "message": tokens.add(new Token(TokenType.MESSAGE, ident, line, column)); break;
-                    case "enum": tokens.add(new Token(TokenType.ENUM, ident, line, column)); break;
-                    case "service": tokens.add(new Token(TokenType.SERVICE, ident, line, column)); break;
-                    case "rpc": tokens.add(new Token(TokenType.RPC, ident, line, column)); break;
-                    case "repeated": tokens.add(new Token(TokenType.REPEATED, ident, line, column)); break;
-                    case "returns": tokens.add(new Token(TokenType.RETURNS, ident, line, column)); break;
-                    default: tokens.add(new Token(TokenType.IDENTIFIER, ident, line, column)); break;
-                }
-                return;
-            }
-
-            // Skip unknown characters
-            // (should not happen in valid proto)
-        }
-
-        private boolean peekNextDigit() throws IOException {
-            int c = read();
-            unread(c);
-            return isDigit(c);
-        }
-
-        List<Token> tokenize() throws IOException {
-            while (true) {
-                nextToken();
-                Token last = tokens.get(tokens.size() - 1);
-                if (last.type == TokenType.EOF) {
-                    break;
-                }
-            }
-            // Remove whitespace and comment tokens
-            List<Token> meaningful = new ArrayList<>();
-            for (Token t : tokens) {
-                if (t.type != TokenType.WHITESPACE && t.type != TokenType.COMMENT) {
-                    meaningful.add(t);
-                }
-            }
-            return meaningful;
-        }
-    }
-
-    // ==================== Parser ====================
-
-    private List<Token> tokens;
-    private int pos = 0;
-
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return ProtoDocument类型返回值
      */
     public ProtoDocument parse(String content) {
         return parse(new CharSequenceReader(content));
     }
 
+    // ==================== Parser ====================
+
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return ProtoDocument类型返回值
      */
     public ProtoDocument parse(Reader reader) {
@@ -560,10 +278,10 @@ public class ProtoParser {
         return new ProtoRpc(name.value, inputType.value, outputType.value);
     }
 
-    // Round-trip: convert ProtoDocument back to proto string
     /**
      * toProto方法。
-     *      * @param doc ProtoDocument类型参数
+     * * @param doc ProtoDocument类型参数
+     *
      * @return String类型返回值
      */
     public String toProto(ProtoDocument doc) {
@@ -634,6 +352,325 @@ public class ProtoParser {
         return sb.toString();
     }
 
+    // Round-trip: convert ProtoDocument back to proto string
+
+    private enum TokenType {
+        SYNTAX, PACKAGE, IMPORT,
+        MESSAGE, ENUM, SERVICE, RPC,
+        REPEATED, RETURNS,
+        IDENTIFIER, STRING,
+        LBRACE, RBRACE, LPAREN, RPAREN,
+        SEMICOLON, EQ, LT, GT,
+        NUMBER,
+        COMMENT, WHITESPACE,
+        EOF
+    }
+
+    private static class Token {
+        final TokenType type;
+        final String value;
+        final int line;
+        final int column;
+
+        Token(TokenType type, String value, int line, int column) {
+            this.type = type;
+            this.value = value;
+            this.line = line;
+            this.column = column;
+        }
+
+        @Override
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
+        public String toString() {
+            return "Token{" + type + ", '" + value + "', " + line + ":" + column + "}";
+        }
+    }
+
+    private static class Lexer {
+        private final Reader reader;
+        private final List<Token> tokens = new ArrayList<>();
+        private int pos = 0;
+        private int line = 1;
+        private int column = 1;
+        private int charBuffer = -1;
+
+        Lexer(Reader reader) {
+            this.reader = reader;
+        }
+
+        private int read() throws IOException {
+            if (charBuffer != -1) {
+                int c = charBuffer;
+                charBuffer = -1;
+                return c;
+            }
+            int c = reader.read();
+            if (c == '\n') {
+                line++;
+                column = 1;
+            } else if (c != -1) {
+                column++;
+            }
+            pos++;
+            return c;
+        }
+
+        private void unread(int c) {
+            charBuffer = c;
+            pos--;
+            if (c == '\n') {
+                line--;
+            } else {
+                column--;
+            }
+        }
+
+        private boolean isAlpha(int c) {
+            return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
+        }
+
+        private boolean isDigit(int c) {
+            return c >= '0' && c <= '9';
+        }
+
+        private boolean isWhitespace(int c) {
+            return c == ' ' || c == '\t' || c == '\n' || c == '\r';
+        }
+
+        private void nextToken() throws IOException {
+            int c = read();
+
+            if (c == -1) {
+                tokens.add(new Token(TokenType.EOF, "", line, column));
+                return;
+            }
+
+            // Whitespace
+            if (isWhitespace(c)) {
+                StringBuilder sb = new StringBuilder();
+                sb.append((char) c);
+                while (true) {
+                    c = read();
+                    if (c == -1 || !isWhitespace(c)) {
+                        if (c != -1) unread(c);
+                        break;
+                    }
+                    sb.append((char) c);
+                }
+                tokens.add(new Token(TokenType.WHITESPACE, sb.toString(), line, column));
+                return;
+            }
+
+            // Single-line comment
+            if (c == '/') {
+                int next = read();
+                if (next == '/') {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("//");
+                    while (true) {
+                        c = read();
+                        if (c == -1 || c == '\n') {
+                            if (c != -1) unread(c);
+                            break;
+                        }
+                        sb.append((char) c);
+                    }
+                    tokens.add(new Token(TokenType.COMMENT, sb.toString(), line, column));
+                    return;
+                } else if (next == '*') {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("/*");
+                    while (true) {
+                        c = read();
+                        if (c == -1) {
+                            break;
+                        }
+                        sb.append((char) c);
+                        if (c == '*') {
+                            int nextChar = read();
+                            if (nextChar == '/') {
+                                sb.append('/');
+                                break;
+                            } else {
+                                unread(nextChar);
+                            }
+                        }
+                    }
+                    tokens.add(new Token(TokenType.COMMENT, sb.toString(), line, column));
+                    return;
+                } else {
+                    unread(next);
+                    tokens.add(new Token(TokenType.SEMICOLON, "/", line, column));
+                    return;
+                }
+            }
+
+            // String
+            if (c == '"') {
+                StringBuilder sb = new StringBuilder();
+                while (true) {
+                    c = read();
+                    if (c == -1) {
+                        throw new ProtoException("Unterminated string at line " + line);
+                    }
+                    if (c == '"') {
+                        break;
+                    }
+                    if (c == '\\') {
+                        int next = read();
+                        if (next == -1) {
+                            throw new ProtoException("Unterminated string escape at line " + line);
+                        }
+                        switch (next) {
+                            case 'n':
+                                sb.append('\n');
+                                break;
+                            case 't':
+                                sb.append('\t');
+                                break;
+                            case 'r':
+                                sb.append('\r');
+                                break;
+                            case '\\':
+                                sb.append('\\');
+                                break;
+                            case '"':
+                                sb.append('"');
+                                break;
+                            default:
+                                sb.append((char) next);
+                                break;
+                        }
+                    } else {
+                        sb.append((char) c);
+                    }
+                }
+                tokens.add(new Token(TokenType.STRING, sb.toString(), line, column));
+                return;
+            }
+
+            // Braces and parens
+            if (c == '{') {
+                tokens.add(new Token(TokenType.LBRACE, "{", line, column));
+                return;
+            }
+            if (c == '}') {
+                tokens.add(new Token(TokenType.RBRACE, "}", line, column));
+                return;
+            }
+            if (c == '(') {
+                tokens.add(new Token(TokenType.LPAREN, "(", line, column));
+                return;
+            }
+            if (c == ')') {
+                tokens.add(new Token(TokenType.RPAREN, ")", line, column));
+                return;
+            }
+            if (c == ';') {
+                tokens.add(new Token(TokenType.SEMICOLON, ";", line, column));
+                return;
+            }
+            if (c == '=') {
+                tokens.add(new Token(TokenType.EQ, "=", line, column));
+                return;
+            }
+
+            // Number
+            if (isDigit(c) || (c == '-' && peekNextDigit())) {
+                StringBuilder sb = new StringBuilder();
+                if (c == '-') {
+                    sb.append('-');
+                    c = read();
+                }
+                while (isDigit(c)) {
+                    sb.append((char) c);
+                    c = read();
+                }
+                unread(c);
+                tokens.add(new Token(TokenType.NUMBER, sb.toString(), line, column));
+                return;
+            }
+
+            // Identifier or keyword
+            if (isAlpha(c)) {
+                StringBuilder sb = new StringBuilder();
+                sb.append((char) c);
+                while (true) {
+                    c = read();
+                    if (c == -1 || !isAlpha(c) && !isDigit(c)) {
+                        if (c != -1) unread(c);
+                        break;
+                    }
+                    sb.append((char) c);
+                }
+                String ident = sb.toString();
+                switch (ident) {
+                    case "syntax":
+                        tokens.add(new Token(TokenType.SYNTAX, ident, line, column));
+                        break;
+                    case "package":
+                        tokens.add(new Token(TokenType.PACKAGE, ident, line, column));
+                        break;
+                    case "import":
+                        tokens.add(new Token(TokenType.IMPORT, ident, line, column));
+                        break;
+                    case "message":
+                        tokens.add(new Token(TokenType.MESSAGE, ident, line, column));
+                        break;
+                    case "enum":
+                        tokens.add(new Token(TokenType.ENUM, ident, line, column));
+                        break;
+                    case "service":
+                        tokens.add(new Token(TokenType.SERVICE, ident, line, column));
+                        break;
+                    case "rpc":
+                        tokens.add(new Token(TokenType.RPC, ident, line, column));
+                        break;
+                    case "repeated":
+                        tokens.add(new Token(TokenType.REPEATED, ident, line, column));
+                        break;
+                    case "returns":
+                        tokens.add(new Token(TokenType.RETURNS, ident, line, column));
+                        break;
+                    default:
+                        tokens.add(new Token(TokenType.IDENTIFIER, ident, line, column));
+                        break;
+                }
+                return;
+            }
+
+            // Skip unknown characters
+            // (should not happen in valid proto)
+        }
+
+        private boolean peekNextDigit() throws IOException {
+            int c = read();
+            unread(c);
+            return isDigit(c);
+        }
+
+        List<Token> tokenize() throws IOException {
+            while (true) {
+                nextToken();
+                Token last = tokens.get(tokens.size() - 1);
+                if (last.type == TokenType.EOF) {
+                    break;
+                }
+            }
+            // Remove whitespace and comment tokens
+            List<Token> meaningful = new ArrayList<>();
+            for (Token t : tokens) {
+                if (t.type != TokenType.WHITESPACE && t.type != TokenType.COMMENT) {
+                    meaningful.add(t);
+                }
+            }
+            return meaningful;
+        }
+    }
+
     /**
      * 用于将 CharSequence 转换为 Reader 的内部类。
      */
@@ -646,13 +683,13 @@ public class ProtoParser {
         }
 
         @Override
-    /**
-     * read方法。
-     *      * @param cbuf char[]类型参数
-     * @param off int类型参数
-     * @param len int类型参数
-     * @return int类型返回值
-     */
+        /**
+         * read方法。
+         *      * @param cbuf char[]类型参数
+         * @param off int类型参数
+         * @param len int类型参数
+         * @return int类型返回值
+         */
         public int read(char[] cbuf, int off, int len) throws IOException {
             if (position >= charSequence.length()) {
                 return -1;
@@ -668,9 +705,9 @@ public class ProtoParser {
         }
 
         @Override
-    /**
-     * close方法。
-     */
+        /**
+         * close方法。
+         */
         public void close() throws IOException {
         }
     }

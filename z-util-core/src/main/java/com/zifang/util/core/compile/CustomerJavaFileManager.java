@@ -21,21 +21,25 @@ import java.util.Map;
  */
 public abstract class CustomerJavaFileManager extends ForwardingJavaFileManager {
 
+    private Map<String, BytesJavaFileObject> fileObjectHashMap = new HashMap<>();
+
+    /**
+     * CustomerJavaFileManager方法。
+     * * @param fileManager JavaFileManager类型参数
+     */
+    protected CustomerJavaFileManager(JavaFileManager fileManager) {
+        super(fileManager);
+    }
+
     /**
      * getFileObjectHashMap方法。
+     *
      * @return Map<String, BytesJavaFileObject>类型返回值
      */
     public Map<String, BytesJavaFileObject> getFileObjectHashMap() {
         return fileObjectHashMap;
     }
-    private Map<String, BytesJavaFileObject> fileObjectHashMap = new HashMap<>();
-    /**
-     * CustomerJavaFileManager方法。
-     *      * @param fileManager JavaFileManager类型参数
-     */
-    protected CustomerJavaFileManager(JavaFileManager fileManager) {
-        super(fileManager);
-    }
+
     @Override
     /**
      * getJavaFileForOutput方法。

@@ -12,16 +12,6 @@ public abstract class ProxyFactory implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 创建代理
-     *
-     * @param <T>    代理对象类型
-     * @param target 被代理对象
-     * @param aspect 切面实现
-     * @return 代理对象
-     */
-    public abstract <T> T proxy(T target, Aspect aspect);
-
-    /**
      * 根据用户引入Cglib与否自动创建代理对象
      *
      * @param <T>         切面对象类型
@@ -63,4 +53,14 @@ public abstract class ProxyFactory implements Serializable {
         }
         return new JdkProxyFactory();
     }
+
+    /**
+     * 创建代理
+     *
+     * @param <T>    代理对象类型
+     * @param target 被代理对象
+     * @param aspect 切面实现
+     * @return 代理对象
+     */
+    public abstract <T> T proxy(T target, Aspect aspect);
 }

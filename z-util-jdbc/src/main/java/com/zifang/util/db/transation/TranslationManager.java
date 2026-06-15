@@ -111,19 +111,20 @@ public class TranslationManager {
      */
     public static class TransactionException extends RuntimeException {
 
-    /**
-     * TransactionException方法。
-     *      * @param message String类型参数
-     */
+        /**
+         * TransactionException方法。
+         * * @param message String类型参数
+         */
         public TransactionException(String message) {
             super(message);
         }
 
-    /**
-     * TransactionException方法。
-     *      * @param message String类型参数
-     * @param cause Throwable类型参数
-     */
+        /**
+         * TransactionException方法。
+         * * @param message String类型参数
+         *
+         * @param cause Throwable类型参数
+         */
         public TransactionException(String message, Throwable cause) {
             super(message, cause);
         }

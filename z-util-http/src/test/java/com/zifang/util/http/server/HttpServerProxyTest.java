@@ -3,7 +3,8 @@ package com.zifang.util.http.server;
 import com.zifang.util.http.base.define.RestController;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * HttpServerProxyTest类。

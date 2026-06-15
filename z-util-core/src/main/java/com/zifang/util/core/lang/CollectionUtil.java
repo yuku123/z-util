@@ -20,7 +20,8 @@ public class CollectionUtil {
 
     /**
      * isEmpty方法。
-     *      * @param collection CollectionT类型参数
+     * * @param collection CollectionT类型参数
+     *
      * @return static <T> boolean类型返回值
      */
     public static <T> boolean isEmpty(Collection<T> collection) {
@@ -29,7 +30,8 @@ public class CollectionUtil {
 
     /**
      * isNotEmpty方法。
-     *      * @param collection CollectionT类型参数
+     * * @param collection CollectionT类型参数
+     *
      * @return static <T> boolean类型返回值
      */
     public static <T> boolean isNotEmpty(Collection<T> collection) {
@@ -38,7 +40,8 @@ public class CollectionUtil {
 
     /**
      * newHashSet方法。
-     *      * @param expectedSize int类型参数
+     * * @param expectedSize int类型参数
+     *
      * @return static <E> HashSet<E>类型返回值
      */
     public static <E> HashSet<E> newHashSet(int expectedSize) {
@@ -47,6 +50,7 @@ public class CollectionUtil {
 
     /**
      * newHashSet方法。
+     *
      * @return static <E> HashSet<E>类型返回值
      */
     public static <E> HashSet<E> newHashSet() {
@@ -55,7 +59,8 @@ public class CollectionUtil {
 
     /**
      * containsInstance方法。
-     *      * @param collection CollectionT类型参数
+     * * @param collection CollectionT类型参数
+     *
      * @param element Object类型参数
      * @return static <T> boolean类型返回值
      */
@@ -108,7 +113,8 @@ public class CollectionUtil {
 
     /**
      * containsAny方法。
-     *      * @param source CollectionT类型参数
+     * * @param source CollectionT类型参数
+     *
      * @param candidates CollectionT类型参数
      * @return static <T> boolean类型返回值
      */
@@ -118,7 +124,8 @@ public class CollectionUtil {
 
     /**
      * random方法。
-     *      * @param list ListT类型参数
+     * * @param list ListT类型参数
+     *
      * @return static <T> T类型返回值
      */
     public static <T> T random(List<T> list) {
@@ -131,7 +138,8 @@ public class CollectionUtil {
 
     /**
      * newArrayList方法。
-     *      * @param elements E...类型参数
+     * * @param elements E...类型参数
+     *
      * @return static <E> ArrayList<E>类型返回值
      */
     public static <E> ArrayList<E> newArrayList(E... elements) {
@@ -146,7 +154,8 @@ public class CollectionUtil {
 
     /**
      * newListArray方法。
-     *      * @param elements E[]类型参数
+     * * @param elements E[]类型参数
+     *
      * @return static <E> ArrayList<E>类型返回值
      */
     public static <E> ArrayList<E> newListArray(E[] elements) {
@@ -158,7 +167,8 @@ public class CollectionUtil {
 
     /**
      * suitableCapacity方法。
-     *      * @param arraySize int类型参数
+     * * @param arraySize int类型参数
+     *
      * @return static int类型返回值
      */
     public static int suitableCapacity(int arraySize) {
@@ -168,7 +178,8 @@ public class CollectionUtil {
 
     /**
      * findFirstMatch方法。
-     *      * @param source CollectionSOURCE类型参数
+     * * @param source CollectionSOURCE类型参数
+     *
      * @param candidates CollectionE类型参数
      * @return static <SOURCE, E> E类型返回值
      */
@@ -187,7 +198,8 @@ public class CollectionUtil {
 
     /**
      * findValueOfType方法。
-     *      * @param collection CollectionT类型参数
+     * * @param collection CollectionT类型参数
+     *
      * @param type ClassT类型参数
      * @return static <T> T类型返回值
      */
@@ -211,7 +223,8 @@ public class CollectionUtil {
 
     /**
      * hasUniqueObject方法。
-     *      * @param collection CollectionT类型参数
+     * * @param collection CollectionT类型参数
+     *
      * @return static <T> boolean类型返回值
      */
     public static <T> boolean hasUniqueObject(Collection<T> collection) {
@@ -233,7 +246,8 @@ public class CollectionUtil {
 
     /**
      * findCommonElementType方法。
-     *      * @param collection CollectionT类型参数
+     * * @param collection CollectionT类型参数
+     *
      * @return static <T> Class<?>类型返回值
      */
     public static <T> Class<?> findCommonElementType(Collection<T> collection) {
@@ -256,7 +270,8 @@ public class CollectionUtil {
 
     /**
      * firstElement方法。
-     *      * @param set SetT类型参数
+     * * @param set SetT类型参数
+     *
      * @return static <T> T类型返回值
      */
     public static <T> T firstElement(Set<T> set) {
@@ -278,7 +293,8 @@ public class CollectionUtil {
 
     /**
      * firstElement方法。
-     *      * @param list ListT类型参数
+     * * @param list ListT类型参数
+     *
      * @return static <T> T类型返回值
      */
     public static <T> T firstElement(List<T> list) {
@@ -291,7 +307,8 @@ public class CollectionUtil {
 
     /**
      * lastElement方法。
-     *      * @param set SetT类型参数
+     * * @param set SetT类型参数
+     *
      * @return static <T> T类型返回值
      */
     public static <T> T lastElement(Set<T> set) {
@@ -314,7 +331,8 @@ public class CollectionUtil {
 
     /**
      * lastElement方法。
-     *      * @param list ListT类型参数
+     * * @param list ListT类型参数
+     *
      * @return static <T> T类型返回值
      */
     public static <T> T lastElement(List<T> list) {
@@ -326,7 +344,8 @@ public class CollectionUtil {
 
     /**
      * toArray方法。
-     *      * @param enumeration EnumerationE类型参数
+     * * @param enumeration EnumerationE类型参数
+     *
      * @param array A[]类型参数
      * @return static <A, E extends A> A[]类型返回值
      */
@@ -340,7 +359,8 @@ public class CollectionUtil {
 
     /**
      * toIterator方法。
-     *      * @param enumeration EnumerationE类型参数
+     * * @param enumeration EnumerationE类型参数
+     *
      * @return static <E> Iterator<E>类型返回值
      */
     public static <E> Iterator<E> toIterator(Enumeration<E> enumeration) {
@@ -348,59 +368,10 @@ public class CollectionUtil {
                 : Collections.emptyIterator());
     }
 
-    @FunctionalInterface
-/**
- * HashCallback接口。
- */
-    public interface HashCallback<T> {
-
-        int computeHashCode(Collection<T> collection);
-
-    }
-
-    private static class EnumerationIterator<E> implements Iterator<E> {
-
-        private final Enumeration<E> enumeration;
-
-    /**
-     * EnumerationIterator方法。
-     *      * @param enumeration EnumerationE类型参数
-     */
-        public EnumerationIterator(Enumeration<E> enumeration) {
-            this.enumeration = enumeration;
-        }
-
-        @Override
-    /**
-     * hasNext方法。
-     * @return boolean类型返回值
-     */
-        public boolean hasNext() {
-            return this.enumeration.hasMoreElements();
-        }
-
-        @Override
-    /**
-     * next方法。
-     * @return E类型返回值
-     */
-        public E next() {
-            return this.enumeration.nextElement();
-        }
-
-        @Override
-    /**
-     * remove方法。
-     */
-        public void remove() throws UnsupportedOperationException {
-            throw new UnsupportedOperationException("Not supported");
-        }
-    }
-
-
     /**
      * mergePropertiesIntoMap方法。
-     *      * @param props Properties类型参数
+     * * @param props Properties类型参数
+     *
      * @param map MapK,类型参数
      * @return static <K, V> void类型返回值
      */
@@ -420,7 +391,8 @@ public class CollectionUtil {
 
     /**
      * newHashMap方法。
-     *      * @param expectedSize int类型参数
+     * * @param expectedSize int类型参数
+     *
      * @return static <K, V> HashMap<K, V>类型返回值
      */
     public static <K, V> HashMap<K, V> newHashMap(int expectedSize) {
@@ -429,7 +401,8 @@ public class CollectionUtil {
 
     /**
      * capacity方法。
-     *      * @param expectedSize int类型参数
+     * * @param expectedSize int类型参数
+     *
      * @return static int类型返回值
      */
     protected static int capacity(int expectedSize) {
@@ -455,7 +428,8 @@ public class CollectionUtil {
 
     /**
      * isEmpty方法。
-     *      * @param map MapK,类型参数
+     * * @param map MapK,类型参数
+     *
      * @return static <K, V> boolean类型返回值
      */
     public static <K, V> boolean isEmpty(Map<K, V> map) {
@@ -464,7 +438,8 @@ public class CollectionUtil {
 
     /**
      * isNotEmpty方法。
-     *      * @param map MapK,类型参数
+     * * @param map MapK,类型参数
+     *
      * @return static <K, V> boolean类型返回值
      */
     public static <K, V> boolean isNotEmpty(Map<K, V> map) {
@@ -473,7 +448,8 @@ public class CollectionUtil {
 
     /**
      * parseValue方法。
-     *      * @param map MapK,类型参数
+     * * @param map MapK,类型参数
+     *
      * @param key K类型参数
      * @return static <K, V> V类型返回值
      */
@@ -486,7 +462,8 @@ public class CollectionUtil {
 
     /**
      * parseStringValue方法。
-     *      * @param map MapK,类型参数
+     * * @param map MapK,类型参数
+     *
      * @param key K类型参数
      * @return static <K, V> String类型返回值
      */
@@ -499,7 +476,8 @@ public class CollectionUtil {
 
     /**
      * parseByteValue方法。
-     *      * @param map MapK,类型参数
+     * * @param map MapK,类型参数
+     *
      * @param key K类型参数
      * @return static <K, V> Byte类型返回值
      */
@@ -512,7 +490,8 @@ public class CollectionUtil {
 
     /**
      * parseShortValue方法。
-     *      * @param map MapK,类型参数
+     * * @param map MapK,类型参数
+     *
      * @param key K类型参数
      * @return static <K, V> Short类型返回值
      */
@@ -525,7 +504,8 @@ public class CollectionUtil {
 
     /**
      * parseIntegerValue方法。
-     *      * @param map MapK,类型参数
+     * * @param map MapK,类型参数
+     *
      * @param key K类型参数
      * @return static <K, V> Integer类型返回值
      */
@@ -536,10 +516,10 @@ public class CollectionUtil {
         return IntegerUtil.parseInteger(map.get(key));
     }
 
-
     /**
      * parseLongValue方法。
-     *      * @param map MapK,类型参数
+     * * @param map MapK,类型参数
+     *
      * @param key K类型参数
      * @return static <K, V> Long类型返回值
      */
@@ -552,8 +532,9 @@ public class CollectionUtil {
 
     /**
      * parseValueOrDefault方法。
-     *      * @param map MapK,类型参数
-     * @param key K类型参数
+     * * @param map MapK,类型参数
+     *
+     * @param key          K类型参数
      * @param defaultValue V类型参数
      * @return static <K, V> V类型返回值
      */
@@ -562,6 +543,56 @@ public class CollectionUtil {
             return defaultValue;
         }
         return map.get(key);
+    }
+
+
+    @FunctionalInterface
+/**
+ * HashCallback接口。
+ */
+    public interface HashCallback<T> {
+
+        int computeHashCode(Collection<T> collection);
+
+    }
+
+    private static class EnumerationIterator<E> implements Iterator<E> {
+
+        private final Enumeration<E> enumeration;
+
+        /**
+         * EnumerationIterator方法。
+         * * @param enumeration EnumerationE类型参数
+         */
+        public EnumerationIterator(Enumeration<E> enumeration) {
+            this.enumeration = enumeration;
+        }
+
+        @Override
+        /**
+         * hasNext方法。
+         * @return boolean类型返回值
+         */
+        public boolean hasNext() {
+            return this.enumeration.hasMoreElements();
+        }
+
+        @Override
+        /**
+         * next方法。
+         * @return E类型返回值
+         */
+        public E next() {
+            return this.enumeration.nextElement();
+        }
+
+        @Override
+        /**
+         * remove方法。
+         */
+        public void remove() throws UnsupportedOperationException {
+            throw new UnsupportedOperationException("Not supported");
+        }
     }
 
 }

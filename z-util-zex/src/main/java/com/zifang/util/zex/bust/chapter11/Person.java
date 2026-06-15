@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter11;
  * @author zifang
  * @version 1.0
  */
+
 import java.io.Serializable;
 
 /**
@@ -22,13 +23,15 @@ public class Person implements Serializable {
     /**
      * Person方法。
      */
-    public Person() {}
+    public Person() {
+    }
 
     /**
      * Person方法。
-     *      * @param id int类型参数
+     * * @param id int类型参数
+     *
      * @param name String类型参数
-     * @param age int类型参数
+     * @param age  int类型参数
      */
     public Person(int id, String name, int age) {
         this.id = id;
@@ -38,6 +41,7 @@ public class Person implements Serializable {
 
     /**
      * getId方法。
+     *
      * @return int类型返回值
      */
     public int getId() {
@@ -46,7 +50,7 @@ public class Person implements Serializable {
 
     /**
      * setId方法。
-     *      * @param id int类型参数
+     * * @param id int类型参数
      */
     public void setId(int id) {
         this.id = id;
@@ -54,6 +58,7 @@ public class Person implements Serializable {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -62,7 +67,7 @@ public class Person implements Serializable {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -70,6 +75,7 @@ public class Person implements Serializable {
 
     /**
      * getAge方法。
+     *
      * @return int类型返回值
      */
     public int getAge() {
@@ -78,7 +84,7 @@ public class Person implements Serializable {
 
     /**
      * setAge方法。
-     *      * @param age int类型参数
+     * * @param age int类型参数
      */
     public void setAge(int age) {
         this.age = age;

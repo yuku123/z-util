@@ -1,10 +1,14 @@
 package com.zifang.util.parser.toml;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * TOML 文档数据模型
  */
+
 /**
  * TomlDocument类。
  */
@@ -26,6 +30,7 @@ public class TomlDocument {
      */
     /**
      * getTables方法。
+     *
      * @return Map<String, TomlTable>类型返回值
      */
     public Map<String, TomlTable> getTables() {
@@ -37,6 +42,7 @@ public class TomlDocument {
      */
     /**
      * getArrayOfTables方法。
+     *
      * @return List<TomlTable>类型返回值
      */
     public List<TomlTable> getArrayOfTables() {
@@ -48,7 +54,8 @@ public class TomlDocument {
      */
     /**
      * addTable方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param table TomlTable类型参数
      */
     public void addTable(String name, TomlTable table) {
@@ -60,7 +67,7 @@ public class TomlDocument {
      */
     /**
      * addArrayOfTables方法。
-     *      * @param table TomlTable类型参数
+     * * @param table TomlTable类型参数
      */
     public void addArrayOfTables(TomlTable table) {
         arrayOfTables.add(table);
@@ -71,7 +78,8 @@ public class TomlDocument {
      */
     /**
      * getTable方法。
-     *      * @param path String类型参数
+     * * @param path String类型参数
+     *
      * @return TomlTable类型返回值
      */
     public TomlTable getTable(String path) {
@@ -92,6 +100,7 @@ public class TomlDocument {
      */
     /**
      * getRootTable方法。
+     *
      * @return TomlTable类型返回值
      */
     public TomlTable getRootTable() {
@@ -128,17 +137,17 @@ public class TomlDocument {
         private List<TomlTable> subTableArrays;
         private TomlTable parent;
 
-    /**
-     * TomlTable方法。
-     */
+        /**
+         * TomlTable方法。
+         */
         public TomlTable() {
             this(null);
         }
 
-    /**
-     * TomlTable方法。
-     *      * @param name String类型参数
-     */
+        /**
+         * TomlTable方法。
+         * * @param name String类型参数
+         */
         public TomlTable(String name) {
             this.name = name;
             this.values = new LinkedHashMap<>();
@@ -146,87 +155,96 @@ public class TomlDocument {
             this.subTableArrays = new ArrayList<>();
         }
 
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
+        /**
+         * getName方法。
+         *
+         * @return String类型返回值
+         */
         public String getName() {
             return name;
         }
 
-    /**
-     * getValues方法。
-     * @return Map<String, Object>类型返回值
-     */
+        /**
+         * getValues方法。
+         *
+         * @return Map<String, Object>类型返回值
+         */
         public Map<String, Object> getValues() {
             return values;
         }
 
-    /**
-     * getSubTables方法。
-     * @return Map<String, TomlTable>类型返回值
-     */
+        /**
+         * getSubTables方法。
+         *
+         * @return Map<String, TomlTable>类型返回值
+         */
         public Map<String, TomlTable> getSubTables() {
             return subTables;
         }
 
-    /**
-     * getSubTableArrays方法。
-     * @return List<TomlTable>类型返回值
-     */
+        /**
+         * getSubTableArrays方法。
+         *
+         * @return List<TomlTable>类型返回值
+         */
         public List<TomlTable> getSubTableArrays() {
             return subTableArrays;
         }
 
-    /**
-     * getParent方法。
-     * @return TomlTable类型返回值
-     */
+        /**
+         * getParent方法。
+         *
+         * @return TomlTable类型返回值
+         */
         public TomlTable getParent() {
             return parent;
         }
 
-    /**
-     * setParent方法。
-     *      * @param parent TomlTable类型参数
-     */
+        /**
+         * setParent方法。
+         * * @param parent TomlTable类型参数
+         */
         public void setParent(TomlTable parent) {
             this.parent = parent;
         }
 
-    /**
-     * put方法。
-     *      * @param key String类型参数
-     * @param value Object类型参数
-     */
+        /**
+         * put方法。
+         * * @param key String类型参数
+         *
+         * @param value Object类型参数
+         */
         public void put(String key, Object value) {
             values.put(key, value);
         }
 
-    /**
-     * get方法。
-     *      * @param key String类型参数
-     * @return Object类型返回值
-     */
+        /**
+         * get方法。
+         * * @param key String类型参数
+         *
+         * @return Object类型返回值
+         */
         public Object get(String key) {
             return values.get(key);
         }
 
-    /**
-     * getString方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
+        /**
+         * getString方法。
+         * * @param key String类型参数
+         *
+         * @return String类型返回值
+         */
         public String getString(String key) {
             Object value = values.get(key);
             return value != null ? value.toString() : null;
         }
 
-    /**
-     * getInteger方法。
-     *      * @param key String类型参数
-     * @return int类型返回值
-     */
+        /**
+         * getInteger方法。
+         * * @param key String类型参数
+         *
+         * @return int类型返回值
+         */
         public Integer getInteger(String key) {
             Object value = values.get(key);
             if (value instanceof Number) {
@@ -235,11 +253,12 @@ public class TomlDocument {
             return null;
         }
 
-    /**
-     * getLong方法。
-     *      * @param key String类型参数
-     * @return long类型返回值
-     */
+        /**
+         * getLong方法。
+         * * @param key String类型参数
+         *
+         * @return long类型返回值
+         */
         public Long getLong(String key) {
             Object value = values.get(key);
             if (value instanceof Number) {
@@ -248,11 +267,12 @@ public class TomlDocument {
             return null;
         }
 
-    /**
-     * getDouble方法。
-     *      * @param key String类型参数
-     * @return double类型返回值
-     */
+        /**
+         * getDouble方法。
+         * * @param key String类型参数
+         *
+         * @return double类型返回值
+         */
         public Double getDouble(String key) {
             Object value = values.get(key);
             if (value instanceof Number) {
@@ -261,11 +281,12 @@ public class TomlDocument {
             return null;
         }
 
-    /**
-     * getBoolean方法。
-     *      * @param key String类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * getBoolean方法。
+         * * @param key String类型参数
+         *
+         * @return boolean类型返回值
+         */
         public Boolean getBoolean(String key) {
             Object value = values.get(key);
             if (value instanceof Boolean) {
@@ -279,11 +300,12 @@ public class TomlDocument {
             return null;
         }
 
-    /**
-     * getList方法。
-     *      * @param key String类型参数
-     * @return List<?>类型返回值
-     */
+        /**
+         * getList方法。
+         * * @param key String类型参数
+         *
+         * @return List<?>类型返回值
+         */
         public List<?> getList(String key) {
             Object value = values.get(key);
             if (value instanceof List) {
@@ -292,29 +314,31 @@ public class TomlDocument {
             return null;
         }
 
-    /**
-     * getSubTable方法。
-     *      * @param name String类型参数
-     * @return TomlTable类型返回值
-     */
+        /**
+         * getSubTable方法。
+         * * @param name String类型参数
+         *
+         * @return TomlTable类型返回值
+         */
         public TomlTable getSubTable(String name) {
             return subTables.get(name);
         }
 
-    /**
-     * addSubTable方法。
-     *      * @param name String类型参数
-     * @param table TomlTable类型参数
-     */
+        /**
+         * addSubTable方法。
+         * * @param name String类型参数
+         *
+         * @param table TomlTable类型参数
+         */
         public void addSubTable(String name, TomlTable table) {
             table.setParent(this);
             subTables.put(name, table);
         }
 
-    /**
-     * addSubTableArray方法。
-     *      * @param table TomlTable类型参数
-     */
+        /**
+         * addSubTableArray方法。
+         * * @param table TomlTable类型参数
+         */
         public void addSubTableArray(TomlTable table) {
             table.setParent(this);
             subTableArrays.add(table);
@@ -323,10 +347,11 @@ public class TomlDocument {
         /**
          * 获取完整路径
          */
-    /**
-     * getPath方法。
-     * @return String类型返回值
-     */
+        /**
+         * getPath方法。
+         *
+         * @return String类型返回值
+         */
         public String getPath() {
             if (parent == null || parent.name == null || parent.name.isEmpty()) {
                 return name != null ? name : "";
@@ -335,10 +360,10 @@ public class TomlDocument {
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             StringBuilder sb = new StringBuilder();
             for (Map.Entry<String, Object> entry : values.entrySet()) {

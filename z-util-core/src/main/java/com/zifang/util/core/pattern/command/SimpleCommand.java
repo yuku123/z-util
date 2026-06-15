@@ -1,7 +1,6 @@
 package com.zifang.util.core.pattern.command;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -20,7 +19,8 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
 
     /**
      * SimpleCommand方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param action ConsumerC类型参数
      */
     public SimpleCommand(String name, Consumer<C> action) {
@@ -29,9 +29,10 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
 
     /**
      * SimpleCommand方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param description String类型参数
-     * @param action ConsumerC类型参数
+     * @param action      ConsumerC类型参数
      */
     public SimpleCommand(String name, String description, Consumer<C> action) {
         this(name, description, ctx -> true, action, null);
@@ -39,8 +40,9 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
 
     /**
      * SimpleCommand方法。
-     *      * @param name String类型参数
-     * @param action ConsumerC类型参数
+     * * @param name String类型参数
+     *
+     * @param action     ConsumerC类型参数
      * @param undoAction ConsumerC类型参数
      */
     public SimpleCommand(String name, Consumer<C> action, Consumer<C> undoAction) {
@@ -49,10 +51,11 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
 
     /**
      * SimpleCommand方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param description String类型参数
-     * @param action ConsumerC类型参数
-     * @param undoAction ConsumerC类型参数
+     * @param action      ConsumerC类型参数
+     * @param undoAction  ConsumerC类型参数
      */
     public SimpleCommand(String name, String description, Consumer<C> action, Consumer<C> undoAction) {
         this.name = name;
@@ -64,11 +67,12 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
 
     /**
      * SimpleCommand方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param description String类型参数
-     * @param canExecute PredicateC类型参数
-     * @param action ConsumerC类型参数
-     * @param undoAction ConsumerC类型参数
+     * @param canExecute  PredicateC类型参数
+     * @param action      ConsumerC类型参数
+     * @param undoAction  ConsumerC类型参数
      */
     public SimpleCommand(String name, String description, Predicate<C> canExecute, Consumer<C> action, Consumer<C> undoAction) {
         this.name = name;
@@ -76,6 +80,27 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
         this.canExecute = canExecute;
         this.action = action;
         this.undoAction = undoAction;
+    }
+
+    /**
+     * 创建命令
+     */
+    public static <C extends CommandContext> SimpleCommand<C> of(String name, Consumer<C> action) {
+        return new SimpleCommand<>(name, action);
+    }
+
+    /**
+     * 创建带撤销的命令
+     */
+    public static <C extends CommandContext> SimpleCommand<C> of(String name, Consumer<C> action, Consumer<C> undoAction) {
+        return new SimpleCommand<>(name, action, undoAction);
+    }
+
+    /**
+     * 创建命名命令
+     */
+    public static <C extends CommandContext> SimpleCommand<C> named(String name, String description, Consumer<C> action) {
+        return new SimpleCommand<>(name, description, action);
     }
 
     @Override
@@ -128,26 +153,5 @@ public class SimpleCommand<C extends CommandContext> implements Command<C> {
         } else {
             throw new UnsupportedOperationException("Undo not configured");
         }
-    }
-
-    /**
-     * 创建命令
-     */
-    public static <C extends CommandContext> SimpleCommand<C> of(String name, Consumer<C> action) {
-        return new SimpleCommand<>(name, action);
-    }
-
-    /**
-     * 创建带撤销的命令
-     */
-    public static <C extends CommandContext> SimpleCommand<C> of(String name, Consumer<C> action, Consumer<C> undoAction) {
-        return new SimpleCommand<>(name, action, undoAction);
-    }
-
-    /**
-     * 创建命名命令
-     */
-    public static <C extends CommandContext> SimpleCommand<C> named(String name, String description, Consumer<C> action) {
-        return new SimpleCommand<>(name, description, action);
     }
 }

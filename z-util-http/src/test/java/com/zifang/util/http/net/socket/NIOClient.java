@@ -11,6 +11,7 @@ import java.util.Iterator;
 /**
  * NIO客户端
  */
+
 /**
  * NIOClient类。
  */
@@ -25,9 +26,23 @@ public class NIOClient {
      * @param port 连接的服务器的端口号
      * @throws IOException
      */
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) throws IOException {
+        NIOClient client = new NIOClient();
+        client.initClient("localhost", 8000);
+        client.listen();
+    }
+
     /**
      * initClient方法。
-     *      * @param ip String类型参数
+     * * @param ip String类型参数
+     *
      * @param port int类型参数
      */
     public void initClient(String ip, int port) throws IOException {
@@ -44,6 +59,13 @@ public class NIOClient {
         // 将通道管理器和该通道绑定，并为该通道注册SelectionKey.OP_CONNECT事件。
         channel.register(selector, SelectionKey.OP_CONNECT);
     }
+
+    /**
+     * 处理读取服务端发来的信息 的事件
+     *
+     * @param key
+     * @throws IOException
+     */
 
     /**
      * 采用轮询的方式监听selector上是否有需要处理的事件，如果有，则进行处理
@@ -91,14 +113,14 @@ public class NIOClient {
     }
 
     /**
-     * 处理读取服务端发来的信息 的事件
+     * 启动客户端测试
      *
-     * @param key
      * @throws IOException
      */
+
     /**
      * read方法。
-     *      * @param key SelectionKey类型参数
+     * * @param key SelectionKey类型参数
      */
     public void read(SelectionKey key) throws IOException {
         // 服务器可读取消息:得到事件发生的Socket通道
@@ -111,22 +133,6 @@ public class NIOClient {
         System.out.println("客务端收到信息：" + msg);
         ByteBuffer outBuffer = ByteBuffer.wrap(msg.getBytes());
         channel.write(outBuffer);// 将消息回送给客户端
-    }
-
-    /**
-     * 启动客户端测试
-     *
-     * @throws IOException
-     */
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) throws IOException {
-        NIOClient client = new NIOClient();
-        client.initClient("localhost", 8000);
-        client.listen();
     }
 
 }

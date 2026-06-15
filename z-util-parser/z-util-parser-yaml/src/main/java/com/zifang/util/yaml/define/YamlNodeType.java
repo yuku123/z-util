@@ -8,18 +8,29 @@ package com.zifang.util.yaml.define;
 /**
  * YamlNodeType枚举。
  */
+
 /**
  * YamlNodeType枚举。
  */
 public enum YamlNodeType {
-    /** 空节点（null 或空） */
+    /**
+     * 空节点（null 或空）
+     */
     NULL,
-    /** 标量节点（字符串、数字、布尔等） */
+    /**
+     * 标量节点（字符串、数字、布尔等）
+     */
     SCALAR,
-    /** 映射节点（键值对集合） */
+    /**
+     * 映射节点（键值对集合）
+     */
     MAP,
-    /** 序列节点（列表） */
+    /**
+     * 序列节点（列表）
+     */
     SEQUENCE,
-    /** 锚点引用节点 */
+    /**
+     * 锚点引用节点
+     */
     ALIAS
 }

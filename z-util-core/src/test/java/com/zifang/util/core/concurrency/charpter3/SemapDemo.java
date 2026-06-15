@@ -11,7 +11,8 @@ public class SemapDemo implements Runnable {
 
     /**
      * Semaphore方法。
-     *      * @param 5 Object类型参数
+     * * @param 5 Object类型参数
+     *
      * @return Semaphore semaphore = new类型返回值
      */
     public Semaphore semaphore = new Semaphore(5);//允许5个线程对这个参数进行同事的访问
@@ -20,6 +21,21 @@ public class SemapDemo implements Runnable {
      * SemapDemo方法。
      */
     public SemapDemo() {
+    }
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        ExecutorService exec = Executors.newFixedThreadPool(5);
+        SemapDemo semapDemo = new SemapDemo();
+        for (int i = 0; i < 20; i++) {
+            exec.submit(semapDemo);
+        }
+
     }
 
     @Override
@@ -38,20 +54,6 @@ public class SemapDemo implements Runnable {
         } finally {
             // TODO: handle finally clause
         }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        ExecutorService exec = Executors.newFixedThreadPool(5);
-        SemapDemo semapDemo = new SemapDemo();
-        for (int i = 0; i < 20; i++) {
-            exec.submit(semapDemo);
-        }
-
     }
 
 }

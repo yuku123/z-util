@@ -58,6 +58,7 @@ public class Transition<S, E, C> {
 
     /**
      * getFrom方法。
+     *
      * @return S类型返回值
      */
     public S getFrom() {
@@ -66,6 +67,7 @@ public class Transition<S, E, C> {
 
     /**
      * getEvent方法。
+     *
      * @return E类型返回值
      */
     public E getEvent() {
@@ -74,6 +76,7 @@ public class Transition<S, E, C> {
 
     /**
      * getTo方法。
+     *
      * @return S类型返回值
      */
     public S getTo() {
@@ -82,6 +85,7 @@ public class Transition<S, E, C> {
 
     /**
      * isInternal方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isInternal() {
@@ -90,6 +94,7 @@ public class Transition<S, E, C> {
 
     /**
      * hasBranches方法。
+     *
      * @return boolean类型返回值
      */
     public boolean hasBranches() {
@@ -98,6 +103,7 @@ public class Transition<S, E, C> {
 
     /**
      * getBranches方法。
+     *
      * @return List<Branch<S, C>>类型返回值
      */
     public List<Branch<S, C>> getBranches() {
@@ -143,11 +149,12 @@ public class Transition<S, E, C> {
         public final Predicate<C> guard;
         public final S target;
 
-    /**
-     * Branch方法。
-     *      * @param guard PredicateC类型参数
-     * @param target S类型参数
-     */
+        /**
+         * Branch方法。
+         * * @param guard PredicateC类型参数
+         *
+         * @param target S类型参数
+         */
         public Branch(Predicate<C> guard, S target) {
             this.guard = guard;
             this.target = Objects.requireNonNull(target, "target");

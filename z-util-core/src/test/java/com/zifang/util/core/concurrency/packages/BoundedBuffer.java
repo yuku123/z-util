@@ -17,7 +17,7 @@ public class BoundedBuffer {
 
     /**
      * put方法。
-     *      * @param x Object类型参数
+     * * @param x Object类型参数
      */
     public void put(Object x) throws InterruptedException {
         lock.lock();
@@ -36,6 +36,7 @@ public class BoundedBuffer {
 
     /**
      * take方法。
+     *
      * @return Object类型返回值
      */
     public Object take() throws InterruptedException {

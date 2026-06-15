@@ -20,9 +20,9 @@ public class FieldTable {
     /**
      * 构造函数
      *
-     * @param stream      输入流
-     * @param poolList    常量池列表
-     * @param fieldCount  字段数量
+     * @param stream     输入流
+     * @param poolList   常量池列表
+     * @param fieldCount 字段数量
      */
     public FieldTable(InputStream stream, List<AbstractConstantPool> poolList, int fieldCount) {
         for (int i = 0; i < fieldCount; i++) {

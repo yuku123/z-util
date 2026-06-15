@@ -1,7 +1,7 @@
 package com.zifang.util.ml.tree;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 
 import java.util.Random;
 
@@ -19,35 +19,11 @@ public class DecisionTree {
     private Random random;
 
     /**
-     * Inner class representing a node in the decision tree
-     */
-    public static class TreeNode {
-        public boolean isLeaf;
-        public int predictedClass;
-        public TreeNode left;
-        public TreeNode right;
-        public int featureIndex;
-        public double threshold;
-        public double[] classDistribution;
-
-    /**
-     * TreeNode方法。
-     */
-        public TreeNode() {
-            this.isLeaf = false;
-            this.left = null;
-            this.right = null;
-            this.featureIndex = -1;
-            this.threshold = 0.0;
-            this.classDistribution = null;
-        }
-    }
-
-    /**
      * DecisionTree方法。
-     *      * @param maxDepth int类型参数
+     * * @param maxDepth int类型参数
+     *
      * @param minSamplesSplit int类型参数
-     * @param minSamplesLeaf int类型参数
+     * @param minSamplesLeaf  int类型参数
      */
     public DecisionTree(int maxDepth, int minSamplesSplit, int minSamplesLeaf) {
         this.maxDepth = maxDepth;
@@ -58,7 +34,8 @@ public class DecisionTree {
 
     /**
      * fit方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @param y int[]类型参数
      */
     public void fit(NdArray X, int[] y) {
@@ -69,7 +46,8 @@ public class DecisionTree {
 
     /**
      * predict方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @return int[]类型返回值
      */
     public int[] predict(NdArray X) {
@@ -83,7 +61,8 @@ public class DecisionTree {
 
     /**
      * predictProba方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @return NdArray类型返回值
      */
     public NdArray predictProba(NdArray X) {
@@ -336,6 +315,7 @@ public class DecisionTree {
 
     /**
      * getRoot方法。
+     *
      * @return TreeNode类型返回值
      */
     public TreeNode getRoot() {
@@ -344,9 +324,35 @@ public class DecisionTree {
 
     /**
      * getNClasses方法。
+     *
      * @return int类型返回值
      */
     public int getNClasses() {
         return nClasses;
+    }
+
+    /**
+     * Inner class representing a node in the decision tree
+     */
+    public static class TreeNode {
+        public boolean isLeaf;
+        public int predictedClass;
+        public TreeNode left;
+        public TreeNode right;
+        public int featureIndex;
+        public double threshold;
+        public double[] classDistribution;
+
+        /**
+         * TreeNode方法。
+         */
+        public TreeNode() {
+            this.isLeaf = false;
+            this.left = null;
+            this.right = null;
+            this.featureIndex = -1;
+            this.threshold = 0.0;
+            this.classDistribution = null;
+        }
     }
 }

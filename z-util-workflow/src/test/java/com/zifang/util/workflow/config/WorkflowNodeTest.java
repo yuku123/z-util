@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * WorkflowNode 类测试
  */
+
 /**
  * WorkflowNodeTest类。
  */

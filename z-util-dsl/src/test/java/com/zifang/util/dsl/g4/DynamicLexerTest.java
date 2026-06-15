@@ -1,6 +1,5 @@
 package com.zifang.util.dsl.g4;
 
-import com.zifang.util.dsl.token.SimpleToken;
 import com.zifang.util.dsl.token.Token;
 import org.junit.jupiter.api.Test;
 

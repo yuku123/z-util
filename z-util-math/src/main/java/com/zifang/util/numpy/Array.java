@@ -7,27 +7,38 @@ public final class Array {
 
     /**
      * createZeroArray方法。
-     *      * @param dtype DType类型参数
+     * * @param dtype DType类型参数
+     *
      * @param size int类型参数
      * @return static Object类型返回值
      */
     public static Object createZeroArray(DType dtype, int size) {
         switch (dtype) {
-            case INT8: return new byte[size];
-            case INT16: return new short[size];
-            case INT32: return new int[size];
-            case INT64: return new long[size];
-            case FLOAT32: return new float[size];
-            case FLOAT64: return new double[size];
-            case BOOL: return new boolean[size];
-            case STRING: return new String[size];
-            default: return new Object[size];
+            case INT8:
+                return new byte[size];
+            case INT16:
+                return new short[size];
+            case INT32:
+                return new int[size];
+            case INT64:
+                return new long[size];
+            case FLOAT32:
+                return new float[size];
+            case FLOAT64:
+                return new double[size];
+            case BOOL:
+                return new boolean[size];
+            case STRING:
+                return new String[size];
+            default:
+                return new Object[size];
         }
     }
 
     /**
      * createOneArray方法。
-     *      * @param dtype DType类型参数
+     * * @param dtype DType类型参数
+     *
      * @param size int类型参数
      * @return static Object类型返回值
      */
@@ -74,11 +85,12 @@ public final class Array {
 
     /**
      * arange方法。
-     *      * @param dtype DType类型参数
+     * * @param dtype DType类型参数
+     *
      * @param start int类型参数
-     * @param stop int类型参数
-     * @param step int类型参数
-     * @param size int类型参数
+     * @param stop  int类型参数
+     * @param step  int类型参数
+     * @param size  int类型参数
      * @return static Object类型返回值
      */
     public static Object arange(DType dtype, int start, int stop, int step, int size) {
@@ -116,7 +128,8 @@ public final class Array {
 
     /**
      * get方法。
-     *      * @param array Object类型参数
+     * * @param array Object类型参数
+     *
      * @param index int类型参数
      * @return static Object类型返回值
      */
@@ -135,7 +148,8 @@ public final class Array {
 
     /**
      * set方法。
-     *      * @param array Object类型参数
+     * * @param array Object类型参数
+     *
      * @param index int类型参数
      * @param value Object类型参数
      * @return static void类型返回值
@@ -166,8 +180,9 @@ public final class Array {
 
     /**
      * copy方法。
-     *      * @param src Object类型参数
-     * @param size int类型参数
+     * * @param src Object类型参数
+     *
+     * @param size  int类型参数
      * @param dtype DType类型参数
      * @return static Object类型返回值
      */
@@ -204,9 +219,10 @@ public final class Array {
 
     /**
      * copy方法。
-     *      * @param src Object类型参数
+     * * @param src Object类型参数
+     *
      * @param srcIdx int类型参数
-     * @param dst Object类型参数
+     * @param dst    Object类型参数
      * @param dstIdx int类型参数
      * @return static void类型返回值
      */
@@ -217,9 +233,10 @@ public final class Array {
 
     /**
      * fill方法。
-     *      * @param array Object类型参数
+     * * @param array Object类型参数
+     *
      * @param value Object类型参数
-     * @param size int类型参数
+     * @param size  int类型参数
      * @return static void类型返回值
      */
     public static void fill(Object array, Object value, int size) {
@@ -286,9 +303,10 @@ public final class Array {
 
     /**
      * transpose方法。
-     *      * @param data Object类型参数
+     * * @param data Object类型参数
+     *
      * @param shape int[]类型参数
-     * @param axes int...类型参数
+     * @param axes  int...类型参数
      * @return static Object类型返回值
      */
     public static Object transpose(Object data, int[] shape, int... axes) {

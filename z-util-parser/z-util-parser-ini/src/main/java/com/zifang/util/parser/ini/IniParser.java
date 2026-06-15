@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 /**
  * INI 文件解析器
  */
+
 /**
  * IniParser类。
  */
@@ -25,7 +26,8 @@ public class IniParser {
      */
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return IniFile类型返回值
      */
     public IniFile parse(String content) {
@@ -37,7 +39,8 @@ public class IniParser {
      */
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return IniFile类型返回值
      */
     public IniFile parse(Reader reader) {
@@ -169,7 +172,8 @@ public class IniParser {
      */
     /**
      * store方法。
-     *      * @param iniFile IniFile类型参数
+     * * @param iniFile IniFile类型参数
+     *
      * @return String类型返回值
      */
     public String store(IniFile iniFile) {

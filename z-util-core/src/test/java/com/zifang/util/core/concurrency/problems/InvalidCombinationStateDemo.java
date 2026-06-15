@@ -5,13 +5,15 @@ import java.util.Random;
 /**
  * @author zifang Lee (oldratlee at gmail dot com)
  */
+
 /**
  * InvalidCombinationStateDemo类。
  */
 public class InvalidCombinationStateDemo {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -33,9 +35,9 @@ public class InvalidCombinationStateDemo {
         volatile int state2;
 
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             int c = 0;
             for (long i = 0; ; i++) {

@@ -2,13 +2,12 @@ package com.zifang.util.ml.nnet;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.*;
 
 /**
  * NeuralNetwork 类测试
  */
+
 /**
  * NeuralNetworkTest类。
  */
@@ -77,8 +76,8 @@ public class NeuralNetworkTest {
     public void testAddLayerMethodChaining() {
         NeuralNetwork nn = new NeuralNetwork();
         nn.addLayer(new HiddenLayerImpl(2, 3, new SigmoidActivation()))
-          .addLayer(new HiddenLayerImpl(3, 1, new SigmoidActivation()))
-          .learningRate(0.1);
+                .addLayer(new HiddenLayerImpl(3, 1, new SigmoidActivation()))
+                .learningRate(0.1);
 
         assertEquals(2, nn.getLayers().size());
         assertEquals(0.1, nn.getLearningRate(), 0.0001);
@@ -105,48 +104,48 @@ public class NeuralNetworkTest {
         NeuralNetwork nn = new NeuralNetwork();
         nn.addLayer(new Layer() {
             @Override
-    /**
-     * forward方法。
-     *      * @param inputs double[]类型参数
-     * @return double[]类型返回值
-     */
+            /**
+             * forward方法。
+             *      * @param inputs double[]类型参数
+             * @return double[]类型返回值
+             */
             public double[] forward(double[] inputs) {
                 return inputs;
             }
 
             @Override
-    /**
-     * backward方法。
-     *      * @param gradients double[]类型参数
-     * @return double[]类型返回值
-     */
+            /**
+             * backward方法。
+             *      * @param gradients double[]类型参数
+             * @return double[]类型返回值
+             */
             public double[] backward(double[] gradients) {
                 return gradients;
             }
 
             @Override
-    /**
-     * getOutput方法。
-     * @return double[]类型返回值
-     */
+            /**
+             * getOutput方法。
+             * @return double[]类型返回值
+             */
             public double[] getOutput() {
                 return new double[0];
             }
 
             @Override
-    /**
-     * getLayerType方法。
-     * @return Layer.LayerType类型返回值
-     */
+            /**
+             * getLayerType方法。
+             * @return Layer.LayerType类型返回值
+             */
             public Layer.LayerType getLayerType() {
                 return Layer.LayerType.HIDDEN;
             }
 
             @Override
-    /**
-     * getNeuronCount方法。
-     * @return int类型返回值
-     */
+            /**
+             * getNeuronCount方法。
+             * @return int类型返回值
+             */
             public int getNeuronCount() {
                 return 2;
             }

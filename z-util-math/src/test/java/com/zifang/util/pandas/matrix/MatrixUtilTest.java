@@ -2,11 +2,12 @@ package com.zifang.util.pandas.matrix;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * MatrixUtil 工具类测试
  */
+
 /**
  * MatrixUtilTest类。
  */

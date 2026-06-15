@@ -1,11 +1,6 @@
 package com.zifang.util.core.pattern.chain;
 
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.BiPredicate;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * 链执行上下文
@@ -33,7 +28,7 @@ public class ChainContext<K, V> implements Map<K, V> {
 
     /**
      * ChainContext方法。
-     *      * @param initialData MapK,类型参数
+     * * @param initialData MapK,类型参数
      */
     public ChainContext(Map<K, V> initialData) {
         this.data = new HashMap<>(initialData);
@@ -50,7 +45,8 @@ public class ChainContext<K, V> implements Map<K, V> {
 
     /**
      * create方法。
-     *      * @param initialData MapK,类型参数
+     * * @param initialData MapK,类型参数
+     *
      * @return static <K, V> ChainContext<K, V>类型返回值
      */
     public static <K, V> ChainContext<K, V> create(Map<K, V> initialData) {

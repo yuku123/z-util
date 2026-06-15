@@ -6,6 +6,10 @@ package com.zifang.util.core.io;
 public class FastByteBuffer {
 
     /**
+     * 一个缓冲区的最小字节数
+     */
+    private final int minChunkLen;
+    /**
      * 缓冲集
      */
     private byte[][] buffers = new byte[16][];
@@ -31,11 +35,6 @@ public class FastByteBuffer {
     private int size;
 
     /**
-     * 一个缓冲区的最小字节数
-     */
-    private final int minChunkLen;
-
-    /**
      * FastByteBuffer方法。
      */
     public FastByteBuffer() {
@@ -44,7 +43,7 @@ public class FastByteBuffer {
 
     /**
      * FastByteBuffer方法。
-     *      * @param size int类型参数
+     * * @param size int类型参数
      */
     public FastByteBuffer(int size) {
         this.minChunkLen = Math.abs(size);
@@ -165,6 +164,7 @@ public class FastByteBuffer {
 
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {
@@ -173,6 +173,7 @@ public class FastByteBuffer {
 
     /**
      * isEmpty方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isEmpty() {
@@ -190,6 +191,7 @@ public class FastByteBuffer {
 
     /**
      * offset方法。
+     *
      * @return int类型返回值
      */
     public int offset() {

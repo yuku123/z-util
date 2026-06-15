@@ -11,8 +11,8 @@ import java.util.Random;
 public class Population {
 
     private final List<Individual> individuals;
-    private double totalFitness = -1;
     private final Random random;
+    private double totalFitness = -1;
 
     /**
      * 构造一个空的种群
@@ -54,7 +54,7 @@ public class Population {
     /**
      * 设置指定索引位置的个体
      *
-     * @param index 索引位置
+     * @param index      索引位置
      * @param individual 要设置的个体
      * @return 被替换的旧个体
      */

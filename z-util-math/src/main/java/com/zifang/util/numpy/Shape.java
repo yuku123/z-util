@@ -10,7 +10,7 @@ public class Shape {
 
     /**
      * Shape方法。
-     *      * @param dimensions int...类型参数
+     * * @param dimensions int...类型参数
      */
     public Shape(int... dimensions) {
         if (dimensions == null || dimensions.length == 0) {
@@ -22,7 +22,7 @@ public class Shape {
 
     /**
      * Shape方法。
-     *      * @param dimensions long...类型参数
+     * * @param dimensions long...类型参数
      */
     public Shape(long... dimensions) {
         if (dimensions == null || dimensions.length == 0) {
@@ -37,6 +37,7 @@ public class Shape {
 
     /**
      * getDimensions方法。
+     *
      * @return int[]类型返回值
      */
     public int[] getDimensions() {
@@ -45,6 +46,7 @@ public class Shape {
 
     /**
      * ndim方法。
+     *
      * @return int类型返回值
      */
     public int ndim() {
@@ -53,6 +55,7 @@ public class Shape {
 
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {
@@ -65,7 +68,8 @@ public class Shape {
 
     /**
      * get方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return int类型返回值
      */
     public int get(int index) {
@@ -77,7 +81,8 @@ public class Shape {
 
     /**
      * reshape方法。
-     *      * @param newShape int...类型参数
+     * * @param newShape int...类型参数
+     *
      * @return Shape类型返回值
      */
     public Shape reshape(int... newShape) {
@@ -86,6 +91,7 @@ public class Shape {
 
     /**
      * transpose方法。
+     *
      * @return Shape类型返回值
      */
     public Shape transpose() {
@@ -98,6 +104,7 @@ public class Shape {
 
     /**
      * isScalar方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isScalar() {
@@ -106,6 +113,7 @@ public class Shape {
 
     /**
      * isVector方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isVector() {
@@ -114,6 +122,7 @@ public class Shape {
 
     /**
      * isMatrix方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isMatrix() {

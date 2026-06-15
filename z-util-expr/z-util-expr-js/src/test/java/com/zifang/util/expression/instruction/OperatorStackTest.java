@@ -2,7 +2,7 @@ package com.zifang.util.expression.instruction;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * OperatorStack 操作数栈完整测试

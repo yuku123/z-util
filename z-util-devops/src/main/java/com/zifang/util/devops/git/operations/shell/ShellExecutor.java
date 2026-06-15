@@ -24,9 +24,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class ShellExecutor {
 
-    /** 默认超时：5 分钟 */
+    /**
+     * 默认超时：5 分钟
+     */
     public static final long DEFAULT_TIMEOUT_SECONDS = 300L;
-    /** git 可执行文件名 */
+    /**
+     * git 可执行文件名
+     */
     public static final String GIT_CMD = "git";
 
     private final String gitBinary;
@@ -41,7 +45,7 @@ public class ShellExecutor {
 
     /**
      * ShellExecutor方法。
-     *      * @param gitBinary String类型参数
+     * * @param gitBinary String类型参数
      */
     public ShellExecutor(String gitBinary) {
         this(gitBinary, DEFAULT_TIMEOUT_SECONDS);
@@ -49,7 +53,8 @@ public class ShellExecutor {
 
     /**
      * ShellExecutor方法。
-     *      * @param gitBinary String类型参数
+     * * @param gitBinary String类型参数
+     *
      * @param timeoutSeconds long类型参数
      */
     public ShellExecutor(String gitBinary, long timeoutSeconds) {
@@ -81,9 +86,9 @@ public class ShellExecutor {
     /**
      * 在指定工作目录、带环境变量执行 git 命令
      *
-     * @param workDir   工作目录
-     * @param envExtra  额外环境变量（可空）
-     * @param args      git 子命令及参数
+     * @param workDir  工作目录
+     * @param envExtra 额外环境变量（可空）
+     * @param args     git 子命令及参数
      * @return 执行结果
      */
     public GitResult<String> exec(File workDir, Map<String, String> envExtra, String... args) {
@@ -181,9 +186,9 @@ public class ShellExecutor {
         }
 
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
                 String line;

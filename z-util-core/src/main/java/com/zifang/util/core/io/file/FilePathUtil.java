@@ -3,7 +3,6 @@ package com.zifang.util.core.io.file;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -425,8 +424,8 @@ public final class FilePathUtil {
      * </ul>
      * </p>
      *
-     * @param fullPath  the full file path
-     * @param basePath  the base directory path
+     * @param fullPath the full file path
+     * @param basePath the base directory path
      * @return the relative path from base to file, or the full path if no common prefix
      * @throws IllegalArgumentException if fullPath or basePath is null
      */

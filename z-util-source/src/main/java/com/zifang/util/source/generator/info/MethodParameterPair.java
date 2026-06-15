@@ -24,6 +24,7 @@ public class MethodParameterPair {
 
     /**
      * getParamType方法。
+     *
      * @return String类型返回值
      */
     public String getParamType() {
@@ -32,7 +33,7 @@ public class MethodParameterPair {
 
     /**
      * setParamType方法。
-     *      * @param paramType String类型参数
+     * * @param paramType String类型参数
      */
     public void setParamType(String paramType) {
         this.paramType = paramType;
@@ -40,6 +41,7 @@ public class MethodParameterPair {
 
     /**
      * getParamName方法。
+     *
      * @return String类型返回值
      */
     public String getParamName() {
@@ -48,7 +50,7 @@ public class MethodParameterPair {
 
     /**
      * setParamName方法。
-     *      * @param paramName String类型参数
+     * * @param paramName String类型参数
      */
     public void setParamName(String paramName) {
         this.paramName = paramName;

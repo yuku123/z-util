@@ -38,6 +38,20 @@ public class AlgoVisualizer {
     }
 
     /**
+     * 主方法，程序入口
+     * 创建一个宽度1000、高度800的可视化窗口
+     *
+     * @param args 命令行参数（未使用）
+     */
+    public static void main(String[] args) {
+
+        int sceneWidth = 1000;
+        int sceneHeight = 800;
+
+        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight);
+    }
+
+    /**
      * 运行动画循环
      * 持续执行财富随机分配实验，并在窗口中实时显示结果
      */
@@ -56,19 +70,5 @@ public class AlgoVisualizer {
                 }
             }
         }
-    }
-
-    /**
-     * 主方法，程序入口
-     * 创建一个宽度1000、高度800的可视化窗口
-     *
-     * @param args 命令行参数（未使用）
-     */
-    public static void main(String[] args) {
-
-        int sceneWidth = 1000;
-        int sceneHeight = 800;
-
-        AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight);
     }
 }

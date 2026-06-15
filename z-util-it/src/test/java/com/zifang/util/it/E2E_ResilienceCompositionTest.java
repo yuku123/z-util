@@ -1,12 +1,12 @@
 package com.zifang.util.it;
 
-import com.zifang.util.resilience.Bulkhead;
-import com.zifang.util.resilience.CircuitBreaker;
-import com.zifang.util.resilience.ResilienceException;
-import com.zifang.util.resilience.Retry;
-import com.zifang.util.resilience.TimeLimiter;
-import com.zifang.util.ratelimit.RateLimiter;
-import com.zifang.util.ratelimit.TokenBucketRateLimiter;
+import com.zifang.util.core.resilience.Bulkhead;
+import com.zifang.util.core.resilience.CircuitBreaker;
+import com.zifang.util.core.resilience.ResilienceException;
+import com.zifang.util.core.resilience.Retry;
+import com.zifang.util.core.resilience.TimeLimiter;
+import com.zifang.util.core.ratelimit.RateLimiter;
+import com.zifang.util.core.ratelimit.TokenBucketRateLimiter;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;

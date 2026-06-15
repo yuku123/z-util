@@ -1,8 +1,8 @@
 package com.zifang.util.crawler.browser;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.util.Set;
@@ -23,6 +23,7 @@ public class BrowserClient {
 
     /**
      * 构造浏览器客户端，使用默认超时时间（10秒）。
+     *
      * @param driver WebDriver 实例
      */
     public BrowserClient(WebDriver driver) {
@@ -32,7 +33,8 @@ public class BrowserClient {
 
     /**
      * 构造浏览器客户端，使用指定超时时间。
-     * @param driver WebDriver 实例
+     *
+     * @param driver         WebDriver 实例
      * @param timeoutSeconds 超时时间（秒）
      */
     public BrowserClient(WebDriver driver, int timeoutSeconds) {
@@ -42,6 +44,7 @@ public class BrowserClient {
 
     /**
      * 导航到指定 URL。
+     *
      * @param url 目标 URL
      */
     public void get(String url) {
@@ -50,6 +53,7 @@ public class BrowserClient {
 
     /**
      * 点击由 CSS 选择器指定的元素。
+     *
      * @param cssSelector CSS 选择器
      */
     public void click(String cssSelector) {
@@ -60,6 +64,7 @@ public class BrowserClient {
 
     /**
      * 清空由 CSS 选择器指定的输入框内容。
+     *
      * @param cssSelector CSS 选择器
      */
     public void clear(String cssSelector) {
@@ -69,8 +74,9 @@ public class BrowserClient {
 
     /**
      * 向由 CSS 选择器指定的元素输入文本。
+     *
      * @param cssSelector CSS 选择器
-     * @param text 输入文本
+     * @param text        输入文本
      */
     public void input(String cssSelector, String text) {
         WebElement element = driver.findElement(By.cssSelector(cssSelector));
@@ -79,6 +85,7 @@ public class BrowserClient {
 
     /**
      * 获取元素的文本内容。
+     *
      * @param cssSelector CSS 选择器
      * @return 元素文本内容
      */
@@ -89,8 +96,9 @@ public class BrowserClient {
 
     /**
      * 获取元素的属性值。
+     *
      * @param cssSelector CSS 选择器
-     * @param attribute 属性名
+     * @param attribute   属性名
      * @return 属性值
      */
     public String getAttr(String cssSelector, String attribute) {
@@ -100,6 +108,7 @@ public class BrowserClient {
 
     /**
      * 等待指定时间。
+     *
      * @param milliseconds 等待时间（毫秒）
      */
     public void waitFor(long milliseconds) {
@@ -112,8 +121,9 @@ public class BrowserClient {
 
     /**
      * 等待元素出现在 DOM 中。
+     *
      * @param cssSelector CSS 选择器
-     * @param timeoutSec 超时时间（秒）
+     * @param timeoutSec  超时时间（秒）
      * @return 是否在超时前找到元素
      */
     public boolean waitForElement(String cssSelector, int timeoutSec) {
@@ -128,8 +138,9 @@ public class BrowserClient {
 
     /**
      * 等待元素可见。
+     *
      * @param cssSelector CSS 选择器
-     * @param timeoutSec 超时时间（秒）
+     * @param timeoutSec  超时时间（秒）
      * @return 是否在超时前元素可见
      */
     public boolean waitForElementVisible(String cssSelector, int timeoutSec) {
@@ -144,6 +155,7 @@ public class BrowserClient {
 
     /**
      * 截取当前窗口截图并保存到文件。
+     *
      * @param path 保存路径，为 null 时只返回截图文件
      * @return 截图文件
      */
@@ -159,6 +171,7 @@ public class BrowserClient {
 
     /**
      * 截取整页截图并保存到文件。
+     *
      * @param path 保存路径，为 null 时只返回截图文件
      * @return 截图文件
      */
@@ -174,6 +187,7 @@ public class BrowserClient {
 
     /**
      * 切换到指定窗口，可以通过标题、句柄或索引匹配。
+     *
      * @param target 目标窗口标题、句柄或索引
      */
     public void switchToWindow(String target) {
@@ -188,6 +202,7 @@ public class BrowserClient {
 
     /**
      * 切换到指定 frame，可以通过名称、ID 或索引匹配。
+     *
      * @param frameIdentifier frame 名称、ID 或索引
      */
     public void switchToFrame(String frameIdentifier) {
@@ -208,6 +223,7 @@ public class BrowserClient {
 
     /**
      * 获取当前页面源代码。
+     *
      * @return 页面源代码
      */
     public String getPageSource() {
@@ -216,6 +232,7 @@ public class BrowserClient {
 
     /**
      * 获取当前 URL。
+     *
      * @return 当前 URL
      */
     public String getCurrentUrl() {
@@ -224,6 +241,7 @@ public class BrowserClient {
 
     /**
      * 获取页面标题。
+     *
      * @return 页面标题
      */
     public String getTitle() {
@@ -232,8 +250,9 @@ public class BrowserClient {
 
     /**
      * 执行 JavaScript 脚本。
+     *
      * @param script JavaScript 脚本
-     * @param args 脚本参数
+     * @param args   脚本参数
      * @return 脚本执行结果
      */
     public Object executeScript(String script, Object... args) {
@@ -243,6 +262,7 @@ public class BrowserClient {
 
     /**
      * 获取底层 WebDriver 实例。
+     *
      * @return WebDriver 实例
      */
     public WebDriver getDriver() {

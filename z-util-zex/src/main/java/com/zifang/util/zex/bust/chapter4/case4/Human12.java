@@ -10,16 +10,18 @@ package com.zifang.util.zex.bust.chapter4.case4;
  * @version 1.0
  */
 class Human12 {
+    private static Human12Field1 human12Field1 = new Human12Field1();
+
     static {
         System.out.println("Human12.static{}");
     }
 
+    private Human12Field2 human12Field2 = new Human12Field2();
+    private String age;
+
     {
         System.out.println("Human12.{}");
     }
-
-    private static Human12Field1 human12Field1 = new Human12Field1();
-    private Human12Field2 human12Field2 = new Human12Field2();
 
     /**
      * Human12方法。
@@ -27,8 +29,6 @@ class Human12 {
     public Human12() {
         System.out.println("Human12.()");
     }
-
-    private String age;
 
     /**
      * eat方法。
@@ -45,16 +45,17 @@ class Human12 {
 
 class Coder2 extends Human12 {
 
+    private static Coder2Field1 coder2Field1 = new Coder2Field1();
+
     static {
         System.out.println("Coder2.static{}");
     }
 
+    private Coder2Field2 coder2Field2 = new Coder2Field2();
+
     {
         System.out.println("Coder2.{}");
     }
-
-    private static Coder2Field1 coder2Field1 = new Coder2Field1();
-    private Coder2Field2 coder2Field2 = new Coder2Field2();
 
 
     /**
@@ -65,21 +66,22 @@ class Coder2 extends Human12 {
     }
 
     /**
-     * wirteCode方法。
-     */
-    public void wirteCode() {
-        System.out.println("愉快地写代码");
-    }
-
-    /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
         Coder2 coder = new Coder2();
         coder.eat();// human的行为
         coder.wirteCode();// 张三的行为
+    }
+
+    /**
+     * wirteCode方法。
+     */
+    public void wirteCode() {
+        System.out.println("愉快地写代码");
     }
 }
 

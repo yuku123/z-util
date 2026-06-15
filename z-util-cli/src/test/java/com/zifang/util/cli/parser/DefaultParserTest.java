@@ -1,16 +1,10 @@
 package com.zifang.util.cli.parser;
 
-import com.zifang.util.cli.exception.AlreadySelectedException;
-import com.zifang.util.cli.exception.AmbiguousOptionException;
-import com.zifang.util.cli.exception.MissingArgumentException;
-import com.zifang.util.cli.exception.MissingOptionException;
-import com.zifang.util.cli.exception.ParseException;
-import com.zifang.util.cli.exception.UnrecognizedOptionException;
+import com.zifang.util.cli.exception.*;
 import com.zifang.util.cli.model.CommandLine;
 import com.zifang.util.cli.model.Option;
 import com.zifang.util.cli.model.OptionGroup;
 import com.zifang.util.cli.model.Options;
-
 import org.junit.Test;
 
 import java.util.Properties;
@@ -21,6 +15,7 @@ import static org.junit.Assert.*;
  * Unit tests for DefaultParser.
  * Tests parsing of short options, long options, option groups, required options, and argument values.
  */
+
 /**
  * DefaultParserTest类。
  */

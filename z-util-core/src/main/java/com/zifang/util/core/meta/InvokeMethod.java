@@ -26,9 +26,10 @@ public class InvokeMethod {
 
     /**
      * InvokeMethod方法。
-     *      * @param target Object类型参数
+     * * @param target Object类型参数
+     *
      * @param methodHandle MethodHandle类型参数
-     * @param method Method类型参数
+     * @param method       Method类型参数
      */
     public InvokeMethod(Object target, MethodHandle methodHandle, Method method) {
         this.target = target;
@@ -38,6 +39,7 @@ public class InvokeMethod {
 
     /**
      * getTarget方法。
+     *
      * @return Object类型返回值
      */
     public Object getTarget() {
@@ -46,7 +48,7 @@ public class InvokeMethod {
 
     /**
      * setTarget方法。
-     *      * @param target Object类型参数
+     * * @param target Object类型参数
      */
     public void setTarget(Object target) {
         this.target = target;
@@ -54,6 +56,7 @@ public class InvokeMethod {
 
     /**
      * getMethodHandle方法。
+     *
      * @return MethodHandle类型返回值
      */
     public MethodHandle getMethodHandle() {
@@ -62,7 +65,7 @@ public class InvokeMethod {
 
     /**
      * setMethodHandle方法。
-     *      * @param methodHandle MethodHandle类型参数
+     * * @param methodHandle MethodHandle类型参数
      */
     public void setMethodHandle(MethodHandle methodHandle) {
         this.methodHandle = methodHandle;
@@ -70,6 +73,7 @@ public class InvokeMethod {
 
     /**
      * getMethod方法。
+     *
      * @return Method类型返回值
      */
     public Method getMethod() {
@@ -78,7 +82,7 @@ public class InvokeMethod {
 
     /**
      * setMethod方法。
-     *      * @param method Method类型参数
+     * * @param method Method类型参数
      */
     public void setMethod(Method method) {
         this.method = method;

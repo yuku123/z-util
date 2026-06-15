@@ -10,15 +10,7 @@ import com.zifang.util.numpy.Shape;
  * Binary classification only (labels {+1, -1}).
  */
 public class SVM {
-    
-/**
- * KernelType枚举。
- */
-    public enum KernelType {
-        LINEAR,
-        RBF
-    }
-    
+
     private double learningRate;
     private int nIterations;
     private double lambda;
@@ -28,14 +20,13 @@ public class SVM {
     private double[][] supportVectors;
     private int[] supportVectorLabels;
     private double gamma;
-    
     /**
      * Create a new SVM classifier.
-     * 
+     *
      * @param learningRate Learning rate for gradient descent
-     * @param nIterations Number of iterations
-     * @param lambda L2 regularization parameter (controls margin softness)
-     * @param kernelType Type of kernel (LINEAR or RBF)
+     * @param nIterations  Number of iterations
+     * @param lambda       L2 regularization parameter (controls margin softness)
+     * @param kernelType   Type of kernel (LINEAR or RBF)
      */
     public SVM(double learningRate, int nIterations, double lambda, KernelType kernelType) {
         this.learningRate = learningRate;
@@ -44,14 +35,14 @@ public class SVM {
         this.kernelType = kernelType;
         this.gamma = 0.1; // default gamma for RBF
     }
-    
+
     /**
      * Set gamma parameter for RBF kernel.
      */
     public void setGamma(double gamma) {
         this.gamma = gamma;
     }
-    
+
     /**
      * Linear kernel: K(x, x') = x · x'
      */
@@ -62,7 +53,7 @@ public class SVM {
         }
         return sum;
     }
-    
+
     /**
      * RBF (Gaussian) kernel: K(x, x') = exp(-γ * ||x - x'||²)
      */
@@ -74,7 +65,7 @@ public class SVM {
         }
         return Math.exp(-gamma * sum);
     }
-    
+
     /**
      * Compute kernel matrix row for a sample against all support vectors.
      */
@@ -85,7 +76,7 @@ public class SVM {
             return rbfKernel(x, supportVectors[idx]);
         }
     }
-    
+
     /**
      * Add bias term to feature matrix.
      */
@@ -95,7 +86,7 @@ public class SVM {
         double[] ones = new double[n];
         for (int i = 0; i < n; i++) ones[i] = 1.0;
         NdArray biasCol = NdArray.create(ones, DType.FLOAT64, new Shape(n, 1));
-        
+
         double[] result = new double[n * (d + 1)];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < d; j++) {
@@ -106,7 +97,7 @@ public class SVM {
         }
         return NdArray.create(result, DType.FLOAT64, new Shape(n, d + 1));
     }
-    
+
     /**
      * Convert NdArray row to double[].
      */
@@ -119,40 +110,40 @@ public class SVM {
         }
         return result;
     }
-    
+
     /**
      * Fit the SVM model using gradient descent on the primal form.
-     * 
+     *
      * @param X Feature matrix of shape [n_samples, n_features]
      * @param y Target labels (+1 or -1)
      */
     public void fit(NdArray X, int[] y) {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
-        
+
         // Add bias term
         NdArray Xb = addBias(X);
         int d1 = d + 1;
-        
+
         // Initialize weights
         this.weights = new double[d1];
-        
+
         // Gradient descent on primal SVM
         for (int iter = 0; iter < nIterations; iter++) {
             double[] grad = new double[d1];
             double totalLoss = 0;
-            
+
             for (int i = 0; i < n; i++) {
                 double[] xi = rowToDoubleArray(Xb, i);
                 double yi = y[i];
-                
+
                 // Compute margin
                 double margin = 0;
                 for (int j = 0; j < d1; j++) {
                     margin += weights[j] * xi[j];
                 }
                 margin *= yi;
-                
+
                 // Hinge loss derivative
                 if (margin < 1) {
                     totalLoss += 1 - margin;
@@ -161,23 +152,23 @@ public class SVM {
                     }
                 }
             }
-            
+
             // Add L2 regularization gradient
             for (int j = 0; j < d1; j++) {
                 grad[j] += lambda * weights[j];
             }
-            
+
             // Scale gradient by n
             for (int j = 0; j < d1; j++) {
                 grad[j] /= n;
             }
-            
+
             // Update weights
             for (int j = 0; j < d1; j++) {
                 weights[j] -= learningRate * grad[j];
             }
         }
-        
+
         // Store support vectors for kernel predictions
         int svCount = 0;
         for (int i = 0; i < n; i++) {
@@ -192,7 +183,7 @@ public class SVM {
                 svCount++;
             }
         }
-        
+
         supportVectors = new double[svCount][];
         supportVectorLabels = new int[svCount];
         int svIdx = 0;
@@ -210,7 +201,7 @@ public class SVM {
                 svIdx++;
             }
         }
-        
+
         // Compute bias from support vectors
         bias = 0;
         int biasCount = 0;
@@ -227,17 +218,17 @@ public class SVM {
         }
         if (biasCount > 0) bias /= biasCount;
     }
-    
+
     /**
      * Predict class labels for samples.
-     * 
+     *
      * @param X Feature matrix of shape [n_samples, n_features]
      * @return Array of predicted class labels (+1 or -1)
      */
     public int[] predict(NdArray X) {
         int n = X.getShape().get(0);
         int[] predictions = new int[n];
-        
+
         for (int i = 0; i < n; i++) {
             double[] xi = rowToDoubleArray(X, i);
             double decision = 0;
@@ -248,5 +239,13 @@ public class SVM {
             predictions[i] = decision >= 0 ? 1 : -1;
         }
         return predictions;
+    }
+
+    /**
+     * KernelType枚举。
+     */
+    public enum KernelType {
+        LINEAR,
+        RBF
     }
 }

@@ -108,7 +108,7 @@ public class GitResult<T> {
 
     /**
      * setSuccess方法。
-     *      * @param success boolean类型参数
+     * * @param success boolean类型参数
      */
     public void setSuccess(boolean success) {
         this.success = success;
@@ -116,6 +116,7 @@ public class GitResult<T> {
 
     /**
      * getExitCode方法。
+     *
      * @return int类型返回值
      */
     public int getExitCode() {
@@ -124,7 +125,7 @@ public class GitResult<T> {
 
     /**
      * setExitCode方法。
-     *      * @param exitCode int类型参数
+     * * @param exitCode int类型参数
      */
     public void setExitCode(int exitCode) {
         this.exitCode = exitCode;
@@ -132,6 +133,7 @@ public class GitResult<T> {
 
     /**
      * getStdout方法。
+     *
      * @return String类型返回值
      */
     public String getStdout() {
@@ -140,7 +142,7 @@ public class GitResult<T> {
 
     /**
      * setStdout方法。
-     *      * @param stdout String类型参数
+     * * @param stdout String类型参数
      */
     public void setStdout(String stdout) {
         this.stdout = stdout;
@@ -148,6 +150,7 @@ public class GitResult<T> {
 
     /**
      * getStderr方法。
+     *
      * @return String类型返回值
      */
     public String getStderr() {
@@ -156,7 +159,7 @@ public class GitResult<T> {
 
     /**
      * setStderr方法。
-     *      * @param stderr String类型参数
+     * * @param stderr String类型参数
      */
     public void setStderr(String stderr) {
         this.stderr = stderr;
@@ -164,6 +167,7 @@ public class GitResult<T> {
 
     /**
      * getData方法。
+     *
      * @return T类型返回值
      */
     public T getData() {
@@ -172,7 +176,7 @@ public class GitResult<T> {
 
     /**
      * setData方法。
-     *      * @param data T类型参数
+     * * @param data T类型参数
      */
     public void setData(T data) {
         this.data = data;
@@ -180,6 +184,7 @@ public class GitResult<T> {
 
     /**
      * getMessage方法。
+     *
      * @return String类型返回值
      */
     public String getMessage() {
@@ -188,7 +193,7 @@ public class GitResult<T> {
 
     /**
      * setMessage方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public void setMessage(String message) {
         this.message = message;

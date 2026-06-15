@@ -3,6 +3,7 @@ package com.zifang.util.ml.inheritance.chapter5;
 /**
  * A simple "group-of-students" abstraction. Defines the modules that the group is enrolled in.
  */
+
 /**
  * Group类。
  */
@@ -20,7 +21,8 @@ public class Group {
      */
     /**
      * Group方法。
-     *      * @param groupId int类型参数
+     * * @param groupId int类型参数
+     *
      * @param groupSize int类型参数
      * @param moduleIds int[]类型参数
      */
@@ -37,6 +39,7 @@ public class Group {
      */
     /**
      * getGroupId方法。
+     *
      * @return int类型返回值
      */
     public int getGroupId() {
@@ -50,6 +53,7 @@ public class Group {
      */
     /**
      * getGroupSize方法。
+     *
      * @return int类型返回值
      */
     public int getGroupSize() {
@@ -63,6 +67,7 @@ public class Group {
      */
     /**
      * getModuleIds方法。
+     *
      * @return int[]类型返回值
      */
     public int[] getModuleIds() {

@@ -30,20 +30,23 @@ public class WorkFlowApplication {
 
     /**
      * HashMap<>方法。
+     *
      * @return static Map<Integer, WorkFlowApplicationContext> workFlowContextMap = new类型返回值
      */
     public static Map<Integer, WorkFlowApplicationContext> workFlowContextMap = new HashMap<>();
 
     /**
      * Executors.newFixedThreadPool方法。
-     *      * @param 100 Object类型参数
+     * * @param 100 Object类型参数
+     *
      * @return static ExecutorService threadPool =类型返回值
      */
     public static ExecutorService threadPool = Executors.newFixedThreadPool(100);
 
     /**
      * AtomicInteger方法。
-     *      * @param 0 Object类型参数
+     * * @param 0 Object类型参数
+     *
      * @return static AtomicInteger workflowContextId = new类型返回值
      */
     public static AtomicInteger workflowContextId = new AtomicInteger(0);
@@ -105,7 +108,8 @@ public class WorkFlowApplication {
 
     /**
      * removeWorkflownNode方法。
-     *      * @param workFlowApplicationContextId int类型参数
+     * * @param workFlowApplicationContextId int类型参数
+     *
      * @param nodeId String类型参数
      * @return synchronized Boolean类型返回值
      */

@@ -4,7 +4,8 @@ import com.zifang.util.expression.source.ast.ASTNode;
 import com.zifang.util.expression.source.ast.ASTNodeType;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * SimpleParser 语法解析器完整测试

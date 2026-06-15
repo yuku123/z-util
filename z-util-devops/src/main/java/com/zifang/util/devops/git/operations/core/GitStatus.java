@@ -13,26 +13,39 @@ import java.util.List;
  */
 public class GitStatus {
 
-    /** 当前分支名（detached HEAD 时为 null） */
+    /**
+     * 当前分支名（detached HEAD 时为 null）
+     */
     private String branch;
-    /** 是否处于 detached HEAD 状态 */
+    /**
+     * 是否处于 detached HEAD 状态
+     */
     private boolean detached;
-    /** 当前 HEAD 的 SHA（detached 时也有值） */
+    /**
+     * 当前 HEAD 的 SHA（detached 时也有值）
+     */
     private String headSha;
-    /** 工作区是否完全干净 */
+    /**
+     * 工作区是否完全干净
+     */
     private boolean clean;
-    /** 已暂存（staged）的文件路径，相对工作区 */
+    /**
+     * 已暂存（staged）的文件路径，相对工作区
+     */
     private List<String> added = new ArrayList<>();
     private List<String> changed = new ArrayList<>();
     private List<String> removed = new ArrayList<>();
     private List<String> untracked = new ArrayList<>();
-    /** 未暂存（modified） */
+    /**
+     * 未暂存（modified）
+     */
     private List<String> modified = new ArrayList<>();
     private List<String> deleted = new ArrayList<>();
     private List<String> missing = new ArrayList<>();
 
     /**
      * getBranch方法。
+     *
      * @return String类型返回值
      */
     public String getBranch() {
@@ -41,7 +54,7 @@ public class GitStatus {
 
     /**
      * setBranch方法。
-     *      * @param branch String类型参数
+     * * @param branch String类型参数
      */
     public void setBranch(String branch) {
         this.branch = branch;
@@ -49,6 +62,7 @@ public class GitStatus {
 
     /**
      * isDetached方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isDetached() {
@@ -57,7 +71,7 @@ public class GitStatus {
 
     /**
      * setDetached方法。
-     *      * @param detached boolean类型参数
+     * * @param detached boolean类型参数
      */
     public void setDetached(boolean detached) {
         this.detached = detached;
@@ -65,6 +79,7 @@ public class GitStatus {
 
     /**
      * getHeadSha方法。
+     *
      * @return String类型返回值
      */
     public String getHeadSha() {
@@ -73,7 +88,7 @@ public class GitStatus {
 
     /**
      * setHeadSha方法。
-     *      * @param headSha String类型参数
+     * * @param headSha String类型参数
      */
     public void setHeadSha(String headSha) {
         this.headSha = headSha;
@@ -81,6 +96,7 @@ public class GitStatus {
 
     /**
      * isClean方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isClean() {
@@ -89,7 +105,7 @@ public class GitStatus {
 
     /**
      * setClean方法。
-     *      * @param clean boolean类型参数
+     * * @param clean boolean类型参数
      */
     public void setClean(boolean clean) {
         this.clean = clean;
@@ -97,6 +113,7 @@ public class GitStatus {
 
     /**
      * getAdded方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getAdded() {
@@ -105,7 +122,7 @@ public class GitStatus {
 
     /**
      * setAdded方法。
-     *      * @param added ListString类型参数
+     * * @param added ListString类型参数
      */
     public void setAdded(List<String> added) {
         this.added = added;
@@ -113,6 +130,7 @@ public class GitStatus {
 
     /**
      * getChanged方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getChanged() {
@@ -121,7 +139,7 @@ public class GitStatus {
 
     /**
      * setChanged方法。
-     *      * @param changed ListString类型参数
+     * * @param changed ListString类型参数
      */
     public void setChanged(List<String> changed) {
         this.changed = changed;
@@ -129,6 +147,7 @@ public class GitStatus {
 
     /**
      * getRemoved方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getRemoved() {
@@ -137,7 +156,7 @@ public class GitStatus {
 
     /**
      * setRemoved方法。
-     *      * @param removed ListString类型参数
+     * * @param removed ListString类型参数
      */
     public void setRemoved(List<String> removed) {
         this.removed = removed;
@@ -145,6 +164,7 @@ public class GitStatus {
 
     /**
      * getUntracked方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getUntracked() {
@@ -153,7 +173,7 @@ public class GitStatus {
 
     /**
      * setUntracked方法。
-     *      * @param untracked ListString类型参数
+     * * @param untracked ListString类型参数
      */
     public void setUntracked(List<String> untracked) {
         this.untracked = untracked;
@@ -161,6 +181,7 @@ public class GitStatus {
 
     /**
      * getModified方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getModified() {
@@ -169,7 +190,7 @@ public class GitStatus {
 
     /**
      * setModified方法。
-     *      * @param modified ListString类型参数
+     * * @param modified ListString类型参数
      */
     public void setModified(List<String> modified) {
         this.modified = modified;
@@ -177,6 +198,7 @@ public class GitStatus {
 
     /**
      * getDeleted方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getDeleted() {
@@ -185,7 +207,7 @@ public class GitStatus {
 
     /**
      * setDeleted方法。
-     *      * @param deleted ListString类型参数
+     * * @param deleted ListString类型参数
      */
     public void setDeleted(List<String> deleted) {
         this.deleted = deleted;
@@ -193,6 +215,7 @@ public class GitStatus {
 
     /**
      * getMissing方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getMissing() {
@@ -201,7 +224,7 @@ public class GitStatus {
 
     /**
      * setMissing方法。
-     *      * @param missing ListString类型参数
+     * * @param missing ListString类型参数
      */
     public void setMissing(List<String> missing) {
         this.missing = missing;

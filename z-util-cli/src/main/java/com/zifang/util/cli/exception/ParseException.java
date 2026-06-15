@@ -9,7 +9,7 @@ public class ParseException extends Exception {
 
     /**
      * ParseException方法。
-     *      * @param message final类型参数
+     * * @param message final类型参数
      */
     public ParseException(final String message) {
         super(message);
@@ -17,7 +17,8 @@ public class ParseException extends Exception {
 
     /**
      * ParseException方法。
-     *      * @param message final类型参数
+     * * @param message final类型参数
+     *
      * @param cause final类型参数
      */
     public ParseException(final String message, final Throwable cause) {

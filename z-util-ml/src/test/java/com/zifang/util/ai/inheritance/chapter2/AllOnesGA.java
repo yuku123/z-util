@@ -15,6 +15,7 @@ package com.zifang.util.ml.inheritance.chapter2;
  *
  * @author zifang
  */
+
 /**
  * AllOnesGA类。
  */
@@ -22,7 +23,8 @@ public class AllOnesGA {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

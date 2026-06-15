@@ -9,11 +9,12 @@ package com.zifang.util.zex.bust.chapter10;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.lang.reflect.Method;
 
-class LoadClass{
+class LoadClass {
 
 }
 
@@ -27,7 +28,7 @@ public class LoadClassTest {
     /**
      * test001方法。
      */
-    public void test001() throws ClassNotFoundException{
+    public void test001() throws ClassNotFoundException {
         // 直接引用类
         Class<?> c1 = LoadClass.class;
         // 只用forName加载类
@@ -37,10 +38,10 @@ public class LoadClassTest {
         // 使用类加载器进行加载
         Class<?> c4 = Thread.currentThread().getContextClassLoader().loadClass("com.zifang.util.zex.bust.chapter10.LoadClass");
 
-        System.out.println("c1:"+c1.getName());
-        System.out.println("c2:"+c2.getName());
-        System.out.println("c3:"+c3.getName());
-        System.out.println("c4:"+c2.getName());
+        System.out.println("c1:" + c1.getName());
+        System.out.println("c2:" + c2.getName());
+        System.out.println("c3:" + c3.getName());
+        System.out.println("c4:" + c2.getName());
 
     }
 
@@ -60,7 +61,7 @@ public class LoadClassTest {
      */
     public void test003() throws ClassNotFoundException {
         Class<?> c1 = int.class;
-        for(Method method : c1.getClass().getMethods()){
+        for (Method method : c1.getClass().getMethods()) {
             System.out.println(method.getReturnType().getName() + " " + method.getName() + "(" + ");");
         }
         System.out.println();

@@ -31,7 +31,7 @@ public class Individual {
      */
     /**
      * Individual方法。
-     *      * @param timetable Timetable类型参数
+     * * @param timetable Timetable类型参数
      */
     public Individual(Timetable timetable) {
         int numClasses = timetable.getNumClasses();
@@ -90,7 +90,7 @@ public class Individual {
      */
     /**
      * Individual方法。
-     *      * @param chromosomeLength int类型参数
+     * * @param chromosomeLength int类型参数
      */
     public Individual(int chromosomeLength) {
         // Create random individual
@@ -124,7 +124,7 @@ public class Individual {
      */
     /**
      * Individual方法。
-     *      * @param chromosome int[]类型参数
+     * * @param chromosome int[]类型参数
      */
     public Individual(int[] chromosome) {
         // Create individual chromosome
@@ -138,6 +138,7 @@ public class Individual {
      */
     /**
      * getChromosome方法。
+     *
      * @return int[]类型返回值
      */
     public int[] getChromosome() {
@@ -151,6 +152,7 @@ public class Individual {
      */
     /**
      * getChromosomeLength方法。
+     *
      * @return int类型返回值
      */
     public int getChromosomeLength() {
@@ -165,7 +167,8 @@ public class Individual {
      */
     /**
      * setGene方法。
-     *      * @param offset int类型参数
+     * * @param offset int类型参数
+     *
      * @param gene int类型参数
      */
     public void setGene(int offset, int gene) {
@@ -180,7 +183,8 @@ public class Individual {
      */
     /**
      * getGene方法。
-     *      * @param offset int类型参数
+     * * @param offset int类型参数
+     *
      * @return int类型返回值
      */
     public int getGene(int offset) {
@@ -192,21 +196,10 @@ public class Individual {
      *
      * @param fitness The individuals fitness
      */
-    /**
-     * setFitness方法。
-     *      * @param fitness double类型参数
-     */
-    public void setFitness(double fitness) {
-        this.fitness = fitness;
-    }
 
     /**
-     * Gets individual's fitness
-     *
-     * @return The individual's fitness
-     */
-    /**
      * getFitness方法。
+     *
      * @return double类型返回值
      */
     public double getFitness() {
@@ -214,7 +207,22 @@ public class Individual {
     }
 
     /**
+     * Gets individual's fitness
+     *
+     * @return The individual's fitness
+     */
+
+    /**
+     * setFitness方法。
+     * * @param fitness double类型参数
+     */
+    public void setFitness(double fitness) {
+        this.fitness = fitness;
+    }
+
+    /**
      * toString方法。
+     *
      * @return String类型返回值
      */
     public String toString() {
@@ -237,7 +245,8 @@ public class Individual {
      */
     /**
      * containsGene方法。
-     *      * @param gene int类型参数
+     * * @param gene int类型参数
+     *
      * @return boolean类型返回值
      */
     public boolean containsGene(int gene) {

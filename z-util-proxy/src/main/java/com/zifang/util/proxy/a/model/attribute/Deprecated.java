@@ -16,7 +16,8 @@ public class Deprecated extends AbstractAttribute {
 
     /**
      * Deprecated方法。
-     *      * @param attributeNameIndex U2类型参数
+     * * @param attributeNameIndex U2类型参数
+     *
      * @param attributeLength U4类型参数
      */
     public Deprecated(U2 attributeNameIndex, U4 attributeLength) {

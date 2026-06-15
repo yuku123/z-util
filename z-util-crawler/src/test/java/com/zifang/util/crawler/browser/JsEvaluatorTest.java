@@ -18,7 +18,7 @@ public class JsEvaluatorTest {
         // Since we cannot easily mock in this environment, we do a basic
         // construction test using the ChromeDriver (which implements JavascriptExecutor)
         // This test verifies the class can be instantiated with a valid driver
-        
+
         // Skip actual test if ChromeDriver is not available
         try {
             WebDriver driver = new ChromeDriver();

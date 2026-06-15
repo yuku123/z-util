@@ -11,21 +11,21 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 /**
- * ${comment!"无注释"}
- */
+* ${comment!"无注释"}
+*/
 @TableName("${tableName}")
 @Data
 public class ${entityName} implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 <#list columns as column >
 
     /**
-     *${column.comment!"无注释"}
-     */
-<#if column.primaryKey?? && column.primaryKey>
-    @TableId(type = IdType.AUTO)
-</#if>
+    *${column.comment!"无注释"}
+    */
+    <#if column.primaryKey?? && column.primaryKey>
+        @TableId(type = IdType.AUTO)
+    </#if>
     private ${column.javaType} ${column.javaFieldName};
 </#list>
 }

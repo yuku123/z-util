@@ -1,17 +1,24 @@
 package com.zifang.util.json;
 
-import com.zifang.util.dsl.g4.*;
-import com.zifang.util.dsl.g4.model.*;
-import com.zifang.util.dsl.ast.*;
-import com.zifang.util.dsl.core.*;
-import com.zifang.util.dsl.token.*;
+import com.zifang.util.dsl.ast.SimpleASTNode;
+import com.zifang.util.dsl.core.ASTNode;
+import com.zifang.util.dsl.g4.DynamicParser;
 import org.junit.Test;
-import java.util.*;
+
+import java.util.List;
 
 /**
  * JsonDebug23Test类。
  */
 public class JsonDebug23Test {
+
+    private static String loadG4(String name) throws Exception {
+        java.io.InputStream is = JsonDebug23Test.class.getClassLoader().getResourceAsStream(name);
+        if (is == null) throw new Exception("Resource not found: " + name);
+        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+        is.close();
+        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+    }
 
     @Test
     /**
@@ -43,13 +50,5 @@ public class JsonDebug23Test {
         } catch (Exception e) {
             System.out.println("seqMeth.invoke EXCEPTION: " + (e.getCause() != null ? e.getCause().getMessage() : e.getMessage()));
         }
-    }
-
-    private static String loadG4(String name) throws Exception {
-        java.io.InputStream is = JsonDebug23Test.class.getClassLoader().getResourceAsStream(name);
-        if (is == null) throw new Exception("Resource not found: " + name);
-        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
-        is.close();
-        return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
     }
 }

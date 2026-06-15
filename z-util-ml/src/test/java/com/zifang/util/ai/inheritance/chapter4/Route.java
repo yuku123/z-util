@@ -24,7 +24,8 @@ public class Route {
      */
     /**
      * Route方法。
-     *      * @param individual Individual类型参数
+     * * @param individual Individual类型参数
+     *
      * @param cities City[]类型参数
      */
     public Route(Individual individual, City[] cities) {
@@ -44,6 +45,7 @@ public class Route {
      */
     /**
      * getDistance方法。
+     *
      * @return double类型返回值
      */
     public double getDistance() {

@@ -10,6 +10,7 @@ import java.util.List;
  *
  * @author zifang
  */
+
 /**
  * XDocument类。
  */
@@ -29,7 +30,7 @@ public class XDocument implements XNode {
 
     /**
      * XDocument方法。
-     *      * @param root XElement类型参数
+     * * @param root XElement类型参数
      */
     public XDocument(XElement root) {
         this.root = root;
@@ -37,6 +38,7 @@ public class XDocument implements XNode {
 
     /**
      * getDeclaration方法。
+     *
      * @return XDeclaration类型返回值
      */
     public XDeclaration getDeclaration() {
@@ -45,7 +47,7 @@ public class XDocument implements XNode {
 
     /**
      * setDeclaration方法。
-     *      * @param declaration XDeclaration类型参数
+     * * @param declaration XDeclaration类型参数
      */
     public void setDeclaration(XDeclaration declaration) {
         this.declaration = declaration;
@@ -53,6 +55,7 @@ public class XDocument implements XNode {
 
     /**
      * getRoot方法。
+     *
      * @return XElement类型返回值
      */
     public XElement getRoot() {
@@ -61,7 +64,7 @@ public class XDocument implements XNode {
 
     /**
      * setRoot方法。
-     *      * @param root XElement类型参数
+     * * @param root XElement类型参数
      */
     public void setRoot(XElement root) {
         this.root = root;
@@ -72,6 +75,7 @@ public class XDocument implements XNode {
      */
     /**
      * getPrependNodes方法。
+     *
      * @return List<XNode>类型返回值
      */
     public List<XNode> getPrependNodes() {
@@ -80,7 +84,7 @@ public class XDocument implements XNode {
 
     /**
      * addPrependNode方法。
-     *      * @param node XNode类型参数
+     * * @param node XNode类型参数
      */
     public void addPrependNode(XNode node) {
         prependNodes.add(node);
@@ -88,6 +92,7 @@ public class XDocument implements XNode {
 
     /**
      * getRootElementName方法。
+     *
      * @return String类型返回值
      */
     public String getRootElementName() {

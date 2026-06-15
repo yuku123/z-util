@@ -20,7 +20,8 @@ public class ByteCodeParserImpl implements ByteCodeParser {
 
     /**
      * parse方法。
-     *      * @param bytecode byte[]类型参数
+     * * @param bytecode byte[]类型参数
+     *
      * @return ClassInfo类型返回值
      */
     public ClassInfo parse(byte[] bytecode) {
@@ -33,7 +34,8 @@ public class ByteCodeParserImpl implements ByteCodeParser {
 
     /**
      * parse方法。
-     *      * @param clazz Class?类型参数
+     * * @param clazz Class?类型参数
+     *
      * @return ClassInfo类型返回值
      */
     public ClassInfo parse(Class<?> clazz) {

@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.ex;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.io.*;
@@ -47,6 +48,7 @@ class User implements Serializable {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -55,7 +57,7 @@ class User implements Serializable {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;
@@ -63,6 +65,7 @@ class User implements Serializable {
 
     /**
      * getAge方法。
+     *
      * @return int类型返回值
      */
     public int getAge() {
@@ -71,7 +74,7 @@ class User implements Serializable {
 
     /**
      * setAge方法。
-     *      * @param age int类型参数
+     * * @param age int类型参数
      */
     public void setAge(int age) {
         this.age = age;

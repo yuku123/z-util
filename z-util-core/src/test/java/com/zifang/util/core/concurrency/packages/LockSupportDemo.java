@@ -10,6 +10,7 @@ import java.util.concurrent.locks.LockSupport;
  * Thread.resume所可能引发的死锁”问题。 因为park() 和 unpark()有许可的存在；调用 park() 的线程和另一个试图将其
  * unpark() 的线程之间的竞争将保持活性。
  */
+
 /**
  * LockSupportDemo类。
  */
@@ -25,7 +26,8 @@ public class LockSupportDemo {
      */
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -46,17 +48,17 @@ public class LockSupportDemo {
 
     static class ThreadA extends Thread {
 
-    /**
-     * ThreadA方法。
-     *      * @param name String类型参数
-     */
+        /**
+         * ThreadA方法。
+         * * @param name String类型参数
+         */
         public ThreadA(String name) {
             super(name);
         }
 
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             System.out.println(Thread.currentThread().getName() + " wakup others");
             // 唤醒“主线程”

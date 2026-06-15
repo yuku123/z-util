@@ -11,8 +11,8 @@ import java.util.function.Supplier;
  * 设计目的：
  * <ul>
  *   <li>统一项目内"取 Logger"的方式，避免每处都写 {@code LoggerFactory.getLogger(Xxx.class)}</li>
- *   <li>提供"惰性求值"日志（{@link #lazy})，避免在日志级别关闭时仍拼接大字符串</li>
- *   <li>在 debug/trace 关闭时短路（{@link #trace}/{@link #debug} 各自有 Supplier 重载）</li>
+ *   <li>提供"惰性求值"日志（{@link #debug(Logger, Supplier)})，避免在日志级别关闭时仍拼接大字符串</li>
+ *   <li>在 debug/trace 关闭时短路（{@link #trace} 各种重载）</li>
  * </ul>
  *
  * <h3>使用</h3>
@@ -27,7 +27,7 @@ import java.util.function.Supplier;
  * }</pre>
  *
  * <h3>为什么不用 Lombok @Slf4j</h3>
- * 因为本项目要尽量少编译期依赖；且保留 {@link #lazy} 这类工具方法。
+ * 因为本项目要尽量少编译期依赖；且保留 {@link #debug(Logger, Supplier)} 这类工具方法。
  */
 public final class Logs {
 
@@ -112,21 +112,5 @@ public final class Logs {
      */
     public static void error(Logger log, Throwable t) {
         log.error(t.getMessage(), t);
-    }
-
-    /**
-     * 惰性字符串：避免在关闭的日志级别上仍计算开销大的 toString。
-     * <p>
-     * 等价于：
-     * <pre>{@code
-     *   if (log.isDebugEnabled()) log.debug(() -> "msg " + expensive());
-     * }</pre>
-     * 但 SLF4J 1.7 的 Logger 没有 Supplier 重载（2.0 才有），本工具做兜底。
-     */
-    public static void lazy(Logger log, java.util.function.BooleanSupplier enabled, Supplier<String> msg) {
-        if (enabled.getAsBoolean() && msg != null) {
-            String s = msg.get();
-            if (s != null) log.debug(s);
-        }
     }
 }

@@ -1,10 +1,8 @@
 package com.zifang.util.cache;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * {@link LoadingCache} 的内存实现。

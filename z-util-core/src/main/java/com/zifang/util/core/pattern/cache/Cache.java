@@ -44,9 +44,9 @@ public class Cache {
         if (expire > 0) {
             Future future = executor.schedule(new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
+                /**
+                 * run方法。
+                 */
                 public void run() {
                     //过期后清除该键值对
                     synchronized (Cache.class) {
@@ -122,11 +122,12 @@ public class Cache {
         //定时器Future
         private Future future;
 
-    /**
-     * Entity方法。
-     *      * @param value Object类型参数
-     * @param future Future类型参数
-     */
+        /**
+         * Entity方法。
+         * * @param value Object类型参数
+         *
+         * @param future Future类型参数
+         */
         public Entity(Object value, Future future) {
             this.value = value;
             this.future = future;

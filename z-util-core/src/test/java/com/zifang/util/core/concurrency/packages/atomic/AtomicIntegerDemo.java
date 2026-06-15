@@ -11,9 +11,11 @@ public class AtomicIntegerDemo {
     private static AtomicInteger ai = new AtomicInteger();
 
     //打印出AtomicInteger的valueOffset偏移量 为12
+
     /**
      * showValueOffset方法。
-     *      * @param atomicInteger AtomicInteger类型参数
+     * * @param atomicInteger AtomicInteger类型参数
+     *
      * @return static void类型返回值
      */
     public static void showValueOffset(AtomicInteger atomicInteger) throws NoSuchFieldException, IllegalAccessException {
@@ -24,6 +26,7 @@ public class AtomicIntegerDemo {
 
     /**
      * test1方法。
+     *
      * @return static void类型返回值
      */
     public static void test1() {
@@ -38,7 +41,8 @@ public class AtomicIntegerDemo {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {

@@ -45,23 +45,15 @@ public class TransactionTemplate {
 
     /**
      * TransactionTemplate方法。
-     *      * @param transactionManager TranslationManager类型参数
+     * * @param transactionManager TranslationManager类型参数
      */
     public TransactionTemplate(TranslationManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 
     /**
-     * setTransactionManager方法。
-     *      * @param transactionManager TranslationManager类型参数
-     */
-    public void setTransactionManager(TranslationManager transactionManager) {
-        this.transactionManager = transactionManager;
-    }
-
-    /**
      * setPropagation方法。
-     *      * @param propagation Propagation类型参数
+     * * @param propagation Propagation类型参数
      */
     public void setPropagation(Propagation propagation) {
         this.propagation = propagation;
@@ -69,7 +61,7 @@ public class TransactionTemplate {
 
     /**
      * setIsolation方法。
-     *      * @param isolation Isolation类型参数
+     * * @param isolation Isolation类型参数
      */
     public void setIsolation(Isolation isolation) {
         this.isolation = isolation;
@@ -77,7 +69,7 @@ public class TransactionTemplate {
 
     /**
      * setReadOnly方法。
-     *      * @param readOnly boolean类型参数
+     * * @param readOnly boolean类型参数
      */
     public void setReadOnly(boolean readOnly) {
         this.readOnly = readOnly;
@@ -100,7 +92,7 @@ public class TransactionTemplate {
      * 执行事务，有返回值
      *
      * @param action 业务逻辑
-     * @param <T>   返回值类型
+     * @param <T>    返回值类型
      * @return 业务逻辑的返回值
      * @throws TransactionException 事务执行失败时抛出
      */
@@ -131,6 +123,14 @@ public class TransactionTemplate {
             throw new TranslationManager.TransactionException("TransactionManager 未设置");
         }
         return transactionManager;
+    }
+
+    /**
+     * setTransactionManager方法。
+     * * @param transactionManager TranslationManager类型参数
+     */
+    public void setTransactionManager(TranslationManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 
     // ==================== 回调接口 ====================

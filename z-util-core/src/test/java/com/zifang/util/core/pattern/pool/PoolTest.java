@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * 对象池测试
  */
+
 /**
  * PoolTest类。
  */
@@ -34,46 +35,46 @@ public class PoolTest {
     public void testSimplePool() throws Exception {
         PooledObjectFactory<StringBuffer> factory = new PooledObjectFactory<StringBuffer>() {
             @Override
-    /**
-     * makeObject方法。
-     * @return PooledObject<StringBuffer>类型返回值
-     */
+            /**
+             * makeObject方法。
+             * @return PooledObject<StringBuffer>类型返回值
+             */
             public PooledObject<StringBuffer> makeObject() {
                 return new PooledObject<>(new StringBuffer());
             }
 
             @Override
-    /**
-     * destroyObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * destroyObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void destroyObject(PooledObject<StringBuffer> p) {
             }
 
             @Override
-    /**
-     * validateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     * @return boolean类型返回值
-     */
+            /**
+             * validateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             * @return boolean类型返回值
+             */
             public boolean validateObject(PooledObject<StringBuffer> p) {
                 return p.getObject() != null;
             }
 
             @Override
-    /**
-     * activateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * activateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void activateObject(PooledObject<StringBuffer> p) {
                 p.getObject().setLength(0);
             }
 
             @Override
-    /**
-     * passivateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * passivateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void passivateObject(PooledObject<StringBuffer> p) {
             }
         };
@@ -197,46 +198,46 @@ public class PoolTest {
 
         PooledObjectFactory<StringBuffer> factory = new PooledObjectFactory<StringBuffer>() {
             @Override
-    /**
-     * makeObject方法。
-     * @return PooledObject<StringBuffer>类型返回值
-     */
+            /**
+             * makeObject方法。
+             * @return PooledObject<StringBuffer>类型返回值
+             */
             public PooledObject<StringBuffer> makeObject() {
                 return new PooledObject<>(new StringBuffer("test"));
             }
 
             @Override
-    /**
-     * destroyObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * destroyObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void destroyObject(PooledObject<StringBuffer> p) {
             }
 
             @Override
-    /**
-     * validateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     * @return boolean类型返回值
-     */
+            /**
+             * validateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             * @return boolean类型返回值
+             */
             public boolean validateObject(PooledObject<StringBuffer> p) {
                 validateCount.incrementAndGet();
                 return p.getObject() != null && p.getObject().length() > 0;
             }
 
             @Override
-    /**
-     * activateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * activateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void activateObject(PooledObject<StringBuffer> p) {
             }
 
             @Override
-    /**
-     * passivateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * passivateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void passivateObject(PooledObject<StringBuffer> p) {
             }
         };
@@ -348,7 +349,8 @@ public class PoolTest {
     public void testPoolWithExecute() throws Exception {
         ObjectPool<int[]> pool = PoolUtils.createSimplePool(
                 () -> new int[10],
-                arr -> {}
+                arr -> {
+                }
         );
 
         int result = PoolUtils.executeWithPool(pool, arr -> {
@@ -366,46 +368,46 @@ public class PoolTest {
     private PooledObjectFactory<StringBuffer> createFactory() {
         return new PooledObjectFactory<StringBuffer>() {
             @Override
-    /**
-     * makeObject方法。
-     * @return PooledObject<StringBuffer>类型返回值
-     */
+            /**
+             * makeObject方法。
+             * @return PooledObject<StringBuffer>类型返回值
+             */
             public PooledObject<StringBuffer> makeObject() {
                 return new PooledObject<>(new StringBuffer());
             }
 
             @Override
-    /**
-     * destroyObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * destroyObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void destroyObject(PooledObject<StringBuffer> p) {
             }
 
             @Override
-    /**
-     * validateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     * @return boolean类型返回值
-     */
+            /**
+             * validateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             * @return boolean类型返回值
+             */
             public boolean validateObject(PooledObject<StringBuffer> p) {
                 return true;
             }
 
             @Override
-    /**
-     * activateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * activateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void activateObject(PooledObject<StringBuffer> p) {
                 p.getObject().setLength(0);
             }
 
             @Override
-    /**
-     * passivateObject方法。
-     *      * @param p PooledObjectStringBuffer类型参数
-     */
+            /**
+             * passivateObject方法。
+             *      * @param p PooledObjectStringBuffer类型参数
+             */
             public void passivateObject(PooledObject<StringBuffer> p) {
             }
         };

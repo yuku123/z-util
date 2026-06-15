@@ -12,7 +12,7 @@ public class Interface {
 
     /**
      * Interface方法。
-     *      * @param index U2类型参数
+     * * @param index U2类型参数
      */
     public Interface(U2 index) {
         this.index = index;

@@ -5,6 +5,7 @@ package com.zifang.util.xml.model;
  *
  * @author zifang
  */
+
 /**
  * XComment类。
  */
@@ -14,7 +15,7 @@ public class XComment implements XNode {
 
     /**
      * XComment方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
      */
     public XComment(String content) {
         this.content = content;
@@ -22,6 +23,7 @@ public class XComment implements XNode {
 
     /**
      * getContent方法。
+     *
      * @return String类型返回值
      */
     public String getContent() {

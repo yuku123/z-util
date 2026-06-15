@@ -11,6 +11,7 @@ import java.util.Map;
  *
  * @author zifang
  */
+
 /**
  * BeautifyJsonUtils类。
  */
@@ -30,7 +31,8 @@ public class BeautifyJsonUtils {
      */
     /**
      * beautify方法。
-     *      * @param jsonObject JsonObject类型参数
+     * * @param jsonObject JsonObject类型参数
+     *
      * @return static String类型返回值
      */
     public static String beautify(JsonObject jsonObject) {
@@ -90,7 +92,8 @@ public class BeautifyJsonUtils {
      */
     /**
      * beautify方法。
-     *      * @param jsonArray JsonArray类型参数
+     * * @param jsonArray JsonArray类型参数
+     *
      * @return static String类型返回值
      */
     public static String beautify(JsonArray jsonArray) {

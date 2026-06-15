@@ -19,7 +19,8 @@ public class GithubApiHolder {
 
     /**
      * GithubApiHolder方法。
-     *      * @param null Object类型参数
+     * * @param null Object类型参数
+     *
      * @return static GithubApiHolder INSTANCE = new类型返回值
      */
     public static GithubApiHolder INSTANCE = new GithubApiHolder(null);
@@ -34,6 +35,35 @@ public class GithubApiHolder {
 
     private GithubApiHolder() {
         this(GithubConfig.fromEnv());
+    }
+
+    /**
+     * 获取 GithubApiHolder 单例实例
+     *
+     * @return GithubApiHolder 实例
+     */
+    public static GithubApiHolder getInstance() {
+        return INSTANCE;
+    }
+
+    /**
+     * 初始化 GithubApiHolder（仅可调用一次）
+     *
+     * @param config GitHub 配置
+     * @throws IllegalStateException 当已经初始化过再次调用时抛出
+     */
+    public static void init(GithubConfig config) {
+        if (INSTANCE.config != null) {
+            throw new IllegalStateException("GithubApiHolder has already been initialized");
+        }
+        INSTANCE = new GithubApiHolder(config);
+    }
+
+    /**
+     * 重置 GithubApiHolder 到未初始化状态
+     */
+    public static void reset() {
+        INSTANCE = new GithubApiHolder(null);
     }
 
     private GitHub build(GithubConfig config) {
@@ -65,34 +95,5 @@ public class GithubApiHolder {
      */
     public GithubConfig getConfig() {
         return config;
-    }
-
-    /**
-     * 获取 GithubApiHolder 单例实例
-     *
-     * @return GithubApiHolder 实例
-     */
-    public static GithubApiHolder getInstance() {
-        return INSTANCE;
-    }
-
-    /**
-     * 初始化 GithubApiHolder（仅可调用一次）
-     *
-     * @param config GitHub 配置
-     * @throws IllegalStateException 当已经初始化过再次调用时抛出
-     */
-    public static void init(GithubConfig config) {
-        if (INSTANCE.config != null) {
-            throw new IllegalStateException("GithubApiHolder has already been initialized");
-        }
-        INSTANCE = new GithubApiHolder(config);
-    }
-
-    /**
-     * 重置 GithubApiHolder 到未初始化状态
-     */
-    public static void reset() {
-        INSTANCE = new GithubApiHolder(null);
     }
 }

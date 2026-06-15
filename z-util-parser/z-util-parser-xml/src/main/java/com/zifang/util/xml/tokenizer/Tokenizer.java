@@ -7,6 +7,7 @@ import java.io.IOException;
 /**
  * XML 分词器，将 XML 字符串分解为 Token 序列。
  */
+
 /**
  * Tokenizer类。
  */
@@ -17,7 +18,8 @@ public class Tokenizer {
 
     /**
      * tokenize方法。
-     *      * @param cr CharReader类型参数
+     * * @param cr CharReader类型参数
+     *
      * @return TokenList类型返回值
      */
     public TokenList tokenize(CharReader cr) throws IOException {
@@ -319,11 +321,16 @@ public class Tokenizer {
         if (ch == (char) -1) throw new XmlParseException("Unclosed entity");
         String e = sb.toString();
         switch (e) {
-            case "amp": return "&";
-            case "lt": return "<";
-            case "gt": return ">";
-            case "quot": return "\"";
-            case "apos": return "'";
+            case "amp":
+                return "&";
+            case "lt":
+                return "<";
+            case "gt":
+                return ">";
+            case "quot":
+                return "\"";
+            case "apos":
+                return "'";
             default:
                 if (e.startsWith("#x") || e.startsWith("#X")) {
                     return new String(Character.toChars(Integer.parseInt(e.substring(2), 16)));

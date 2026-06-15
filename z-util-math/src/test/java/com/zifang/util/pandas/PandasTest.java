@@ -1,19 +1,20 @@
 package com.zifang.util.pandas;
 
 import com.zifang.util.pandas.matrix.Linalg;
-import com.zifang.util.pandas.num.*;
+import com.zifang.util.pandas.num.Num;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
 /**
  * Pandas 工具类测试
  */
+
 /**
  * PandasTest类。
  */

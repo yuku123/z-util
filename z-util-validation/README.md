@@ -10,6 +10,7 @@
 - **ValidationException** — 验证异常
 
 内置校验器：
+
 - **NotNullValidator** — 非空校验
 - **PatternValidator** — 正则校验
 - 长度、范围、邮箱、手机号等

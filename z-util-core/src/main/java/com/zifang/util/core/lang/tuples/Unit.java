@@ -17,7 +17,7 @@ public class Unit<A> {
 
     /**
      * Unit方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
      */
     public Unit(A a) {
         this.a = a;
@@ -25,6 +25,7 @@ public class Unit<A> {
 
     /**
      * getA方法。
+     *
      * @return A类型返回值
      */
     public A getA() {
@@ -33,7 +34,7 @@ public class Unit<A> {
 
     /**
      * setA方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
      */
     public void setA(A a) {
         this.a = a;
@@ -41,6 +42,7 @@ public class Unit<A> {
 
     /**
      * toMap方法。
+     *
      * @return Map<String, Object>类型返回值
      */
     public Map<String, Object> toMap() {

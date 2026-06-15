@@ -15,82 +15,16 @@ import java.util.concurrent.ConcurrentSkipListMap;
  * 当你往map中插入数据时，它使用key来排序它们，所以，所有元素将是有序的。除了返回具体的元素，这个类也提供了获取map的子map的方法。
  * 在这个指南中，你将学习如何使用ConcurrentSkipListMap类来实现一个通讯录的map。
  */
+
 /**
  * ConcurrentSkipListMapDemo类。
  */
 public class ConcurrentSkipListMapDemo {
 
-    // 1.创建一个Contact类。
-    static class Contact {
-        // 2.声明两个私有的、String类型的属性name和phone。
-        private String name;
-        private String phone;
-
-        // 3.实现这个类的构造器，并初始化它的属性。
-    /**
-     * Contact方法。
-     *      * @param name String类型参数
-     * @param phone String类型参数
-     */
-        public Contact(String name, String phone) {
-            this.name = name;
-            this.phone = phone;
-        }
-
-        // 4.实现返回name和phone属性值的方法。
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-        public String getName() {
-            return name;
-        }
-
-    /**
-     * getPhone方法。
-     * @return String类型返回值
-     */
-        public String getPhone() {
-            return phone;
-        }
-    }
-
-    // 5.创建一个Task类，并指定它实现Runnable接口。
-    static class Task implements Runnable {
-        // 6.声明一个私有的、参数化为String类和Contact类的ConcurrentSkipListMap类型的属性map。
-        private ConcurrentSkipListMap<String, Contact> map;
-        // 7.声明一个私有的、String类型的属性id，用来存储当前任务的ID。
-        private String id;
-
-        // 8.实现这个类的构造器，用来存储它的属性。
-
-    /**
-     * Task方法。
-     *      * @param map ConcurrentSkipListMapString,类型参数
-     * @param id String类型参数
-     */
-        public Task(ConcurrentSkipListMap<String, Contact> map, String id) {
-            this.id = id;
-            this.map = map;
-        }
-
-        // 9.实现run()方法。使用任务的ID和创建Contact对象的增长数，在map中存储1000个不同的通讯录。使用put()方法添加通讯录到map中。
-        @Override
-    /**
-     * run方法。
-     */
-        public void run() {
-            for (int i = 0; i < 1000; i++) {
-                Contact contact = new Contact(id, String.valueOf(i + 1000));
-                map.put(id + contact.getPhone(), contact);
-            }
-        }
-    }
-
-    // 10.通过创建Main类，并添加main()方法来实现这个例子的主类。
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -137,6 +71,81 @@ public class ConcurrentSkipListMapDemo {
                 System.out.printf("%s: %s\n", contact.getName(), contact.getPhone());
             }
         } while (element != null);
+    }
+
+    // 1.创建一个Contact类。
+    static class Contact {
+        // 2.声明两个私有的、String类型的属性name和phone。
+        private String name;
+        private String phone;
+
+        // 3.实现这个类的构造器，并初始化它的属性。
+
+        /**
+         * Contact方法。
+         * * @param name String类型参数
+         *
+         * @param phone String类型参数
+         */
+        public Contact(String name, String phone) {
+            this.name = name;
+            this.phone = phone;
+        }
+
+        // 4.实现返回name和phone属性值的方法。
+
+        /**
+         * getName方法。
+         *
+         * @return String类型返回值
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * getPhone方法。
+         *
+         * @return String类型返回值
+         */
+        public String getPhone() {
+            return phone;
+        }
+    }
+
+    // 10.通过创建Main类，并添加main()方法来实现这个例子的主类。
+
+    // 5.创建一个Task类，并指定它实现Runnable接口。
+    static class Task implements Runnable {
+        // 6.声明一个私有的、参数化为String类和Contact类的ConcurrentSkipListMap类型的属性map。
+        private ConcurrentSkipListMap<String, Contact> map;
+        // 7.声明一个私有的、String类型的属性id，用来存储当前任务的ID。
+        private String id;
+
+        // 8.实现这个类的构造器，用来存储它的属性。
+
+        /**
+         * Task方法。
+         * * @param map ConcurrentSkipListMapString,类型参数
+         *
+         * @param id String类型参数
+         */
+        public Task(ConcurrentSkipListMap<String, Contact> map, String id) {
+            this.id = id;
+            this.map = map;
+        }
+
+        // 9.实现run()方法。使用任务的ID和创建Contact对象的增长数，在map中存储1000个不同的通讯录。使用put()方法添加通讯录到map中。
+        @Override
+        /**
+         * run方法。
+         */
+        public void run() {
+            for (int i = 0; i < 1000; i++) {
+                Contact contact = new Contact(id, String.valueOf(i + 1000));
+                map.put(id + contact.getPhone(), contact);
+            }
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 package com.zifang.util.ml.tree;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 
 import java.util.Random;
 
@@ -25,6 +25,269 @@ public class XGBoost {
     private Random random;
 
     /**
+     * XGBoost方法。
+     * * @param nEstimators int类型参数
+     *
+     * @param learningRate    double类型参数
+     * @param maxDepth        int类型参数
+     * @param minChildWeight  int类型参数
+     * @param subsample       double类型参数
+     * @param colsampleBytree double类型参数
+     * @param lambda          double类型参数
+     * @param alpha           double类型参数
+     */
+    public XGBoost(int nEstimators, double learningRate, int maxDepth, int minChildWeight,
+                   double subsample, double colsampleBytree, double lambda, double alpha) {
+        this.nEstimators = nEstimators;
+        this.learningRate = learningRate;
+        this.maxDepth = maxDepth;
+        this.minChildWeight = minChildWeight;
+        this.subsample = subsample;
+        this.colsampleBytree = colsampleBytree;
+        this.lambda = lambda;
+        this.alpha = alpha;
+        this.random = new Random();
+    }
+
+    /**
+     * fit方法。
+     * * @param X NdArray类型参数
+     *
+     * @param y int[]类型参数
+     */
+    public void fit(NdArray X, int[] y) {
+        int nSamples = X.getShape().get(0);
+        this.nFeatures = X.getShape().get(1);
+
+        // Find number of classes
+        this.nClasses = findMaxValue(y) + 1;
+
+        double[][] Xdata = toDouble2D(X);
+
+        // Convert labels to one-hot encoding for multi-class
+        double[][] yOneHot = new double[nSamples][nClasses];
+        for (int i = 0; i < nSamples; i++) {
+            yOneHot[i][y[i]] = 1.0;
+        }
+
+        this.trees = new RegressionTree[nEstimators * nClasses];
+        this.weights = new double[nClasses];
+
+        // Initialize predictions to zero
+        double[][] f = new double[nSamples][nClasses];
+        for (int c = 0; c < nClasses; c++) {
+            weights[c] = 0.0;
+        }
+
+        // Train each class as binary classification problem
+        for (int c = 0; c < nClasses; c++) {
+            double[] yBinary = new double[nSamples];
+            for (int i = 0; i < nSamples; i++) {
+                yBinary[i] = yOneHot[i][c];
+            }
+
+            for (int iter = 0; iter < nEstimators; iter++) {
+                // Compute gradients (pseudo-residuals)
+                double[] gradients = new double[nSamples];
+                double[] hessians = new double[nSamples];
+
+                for (int i = 0; i < nSamples; i++) {
+                    double pred = sigmoid(f[i][c]);
+                    double label = yBinary[i];
+                    gradients[i] = pred - label;  // First derivative
+                    hessians[i] = pred * (1 - pred) + lambda;  // Second derivative with L2 reg
+                }
+
+                // Subsample data
+                int sampleSize = (int) (nSamples * subsample);
+                int[] sampleIndices = subsampleIndices(nSamples, sampleSize);
+
+                double[][] XSample = new double[sampleSize][nFeatures];
+                double[] ySample = new double[sampleSize];
+                double[] gradSample = new double[sampleSize];
+                double[] hessSample = new double[sampleSize];
+
+                for (int i = 0; i < sampleSize; i++) {
+                    XSample[i] = Xdata[sampleIndices[i]];
+                    ySample[i] = yBinary[sampleIndices[i]];
+                    gradSample[i] = gradients[sampleIndices[i]];
+                    hessSample[i] = hessians[sampleIndices[i]];
+                }
+
+                // Select random features
+                int nSelectedFeatures = Math.max(1, (int) (nFeatures * colsampleBytree));
+                int[] featureIndices = selectRandomFeatures(nFeatures, nSelectedFeatures);
+
+                // Fit regression tree on scaled gradients
+                double[] scaledGradients = new double[sampleSize];
+                for (int i = 0; i < sampleSize; i++) {
+                    scaledGradients[i] = gradSample[i] / (hessSample[i] + 1e-6);
+                }
+
+                RegressionTree tree = new RegressionTree(maxDepth, minChildWeight, nFeatures);
+                tree.fit(XSample, scaledGradients, featureIndices);
+
+                // Update predictions
+                double[] treePredictions = tree.predict(Xdata);
+                for (int i = 0; i < nSamples; i++) {
+                    f[i][c] += learningRate * treePredictions[i];
+                }
+
+                trees[c * nEstimators + iter] = tree;
+            }
+        }
+    }
+
+    /**
+     * predict方法。
+     * * @param X NdArray类型参数
+     *
+     * @return NdArray类型返回值
+     */
+    public NdArray predict(NdArray X) {
+        int nSamples = X.getShape().get(0);
+        double[][] Xdata = toDouble2D(X);
+
+        double[][] logits = new double[nSamples][nClasses];
+
+        for (int c = 0; c < nClasses; c++) {
+            for (int iter = 0; iter < nEstimators; iter++) {
+                RegressionTree tree = trees[c * nEstimators + iter];
+                if (tree != null) {
+                    double[] predictions = tree.predict(Xdata);
+                    for (int i = 0; i < nSamples; i++) {
+                        logits[i][c] += learningRate * predictions[i];
+                    }
+                }
+            }
+        }
+
+        // Return raw logits as NdArray
+        return createNdArray(logits, nSamples, nClasses);
+    }
+
+    /**
+     * predictClass方法。
+     * * @param X NdArray类型参数
+     *
+     * @return int[]类型返回值
+     */
+    public int[] predictClass(NdArray X) {
+        int nSamples = X.getShape().get(0);
+        NdArray logits = predict(X);
+        double[][] logitsData = toDouble2D(logits);
+
+        int[] predictions = new int[nSamples];
+        for (int i = 0; i < nSamples; i++) {
+            int bestClass = 0;
+            double maxLogit = logitsData[i][0];
+            for (int c = 1; c < nClasses; c++) {
+                if (logitsData[i][c] > maxLogit) {
+                    maxLogit = logitsData[i][c];
+                    bestClass = c;
+                }
+            }
+            predictions[i] = bestClass;
+        }
+        return predictions;
+    }
+
+    private double sigmoid(double x) {
+        return 1.0 / (1.0 + Math.exp(-Math.max(-500, Math.min(500, x))));
+    }
+
+    private int[] subsampleIndices(int n, int size) {
+        int[] indices = new int[size];
+        for (int i = 0; i < size; i++) {
+            indices[i] = random.nextInt(n);
+        }
+        return indices;
+    }
+
+    private int[] selectRandomFeatures(int nFeatures, int nSelect) {
+        int[] indices = new int[nFeatures];
+        for (int i = 0; i < nFeatures; i++) {
+            indices[i] = i;
+        }
+        // Fisher-Yates shuffle
+        for (int i = nFeatures - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            int temp = indices[i];
+            indices[i] = indices[j];
+            indices[j] = temp;
+        }
+        int[] result = new int[nSelect];
+        for (int i = 0; i < nSelect; i++) {
+            result[i] = indices[i];
+        }
+        return result;
+    }
+
+    private int findMaxValue(int[] arr) {
+        int max = arr[0];
+        for (int val : arr) {
+            if (val > max) max = val;
+        }
+        return max;
+    }
+
+    private double[][] toDouble2D(NdArray arr) {
+        Object data = arr.getData();
+        int nRows = arr.getShape().get(0);
+        int nCols = arr.getShape().get(1);
+
+        double[][] result = new double[nRows][nCols];
+
+        if (data instanceof double[][]) {
+            double[][] d2 = (double[][]) data;
+            for (int i = 0; i < nRows; i++) {
+                for (int j = 0; j < nCols; j++) {
+                    result[i][j] = d2[i][j];
+                }
+            }
+        } else if (data instanceof double[]) {
+            double[] d1 = (double[]) data;
+            for (int i = 0; i < nRows; i++) {
+                for (int j = 0; j < nCols; j++) {
+                    result[i][j] = d1[i * nCols + j];
+                }
+            }
+        } else if (data instanceof float[][]) {
+            float[][] f2 = (float[][]) data;
+            for (int i = 0; i < nRows; i++) {
+                for (int j = 0; j < nCols; j++) {
+                    result[i][j] = f2[i][j];
+                }
+            }
+        } else if (data instanceof float[]) {
+            float[] f1 = (float[]) data;
+            for (int i = 0; i < nRows; i++) {
+                for (int j = 0; j < nCols; j++) {
+                    result[i][j] = f1[i * nCols + j];
+                }
+            }
+        } else {
+            for (int i = 0; i < nRows; i++) {
+                for (int j = 0; j < nCols; j++) {
+                    result[i][j] = ((Number) arr.get(i, j)).doubleValue();
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private NdArray createNdArray(double[][] data, int rows, int cols) {
+        double[] flat = new double[rows * cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                flat[i * cols + j] = data[i][j];
+            }
+        }
+        return NdArray.array(flat, DType.FLOAT64).reshape(rows, cols);
+    }
+
+    /**
      * Regression tree for XGBoost base learner
      */
     public static class RegressionTree {
@@ -34,33 +297,13 @@ public class XGBoost {
         private TreeNode root;
         private Random random;
 
-        public static class TreeNode {
-            public boolean isLeaf;
-            public double value;
-            public TreeNode left;
-            public TreeNode right;
-            public int featureIndex;
-            public double threshold;
-
-    /**
-     * TreeNode方法。
-     */
-            public TreeNode() {
-                this.isLeaf = false;
-                this.value = 0.0;
-                this.left = null;
-                this.right = null;
-                this.featureIndex = -1;
-                this.threshold = 0.0;
-            }
-        }
-
-    /**
-     * RegressionTree方法。
-     *      * @param maxDepth int类型参数
-     * @param minChildWeight int类型参数
-     * @param nFeatures int类型参数
-     */
+        /**
+         * RegressionTree方法。
+         * * @param maxDepth int类型参数
+         *
+         * @param minChildWeight int类型参数
+         * @param nFeatures      int类型参数
+         */
         public RegressionTree(int maxDepth, int minChildWeight, int nFeatures) {
             this.maxDepth = maxDepth;
             this.minChildWeight = minChildWeight;
@@ -68,21 +311,23 @@ public class XGBoost {
             this.random = new Random();
         }
 
-    /**
-     * fit方法。
-     *      * @param X double[][]类型参数
-     * @param y double[]类型参数
-     * @param featureIndices int[]类型参数
-     */
+        /**
+         * fit方法。
+         * * @param X double[][]类型参数
+         *
+         * @param y              double[]类型参数
+         * @param featureIndices int[]类型参数
+         */
         public void fit(double[][] X, double[] y, int[] featureIndices) {
             this.root = buildTree(X, y, featureIndices, 0);
         }
 
-    /**
-     * predict方法。
-     *      * @param X double[][]类型参数
-     * @return double[]类型返回值
-     */
+        /**
+         * predict方法。
+         * * @param X double[][]类型参数
+         *
+         * @return double[]类型返回值
+         */
         public double[] predict(double[][] X) {
             double[] predictions = new double[X.length];
             for (int i = 0; i < X.length; i++) {
@@ -228,264 +473,26 @@ public class XGBoost {
             }
             return sumSq / count;
         }
-    }
 
-    /**
-     * XGBoost方法。
-     *      * @param nEstimators int类型参数
-     * @param learningRate double类型参数
-     * @param maxDepth int类型参数
-     * @param minChildWeight int类型参数
-     * @param subsample double类型参数
-     * @param colsampleBytree double类型参数
-     * @param lambda double类型参数
-     * @param alpha double类型参数
-     */
-    public XGBoost(int nEstimators, double learningRate, int maxDepth, int minChildWeight,
-                   double subsample, double colsampleBytree, double lambda, double alpha) {
-        this.nEstimators = nEstimators;
-        this.learningRate = learningRate;
-        this.maxDepth = maxDepth;
-        this.minChildWeight = minChildWeight;
-        this.subsample = subsample;
-        this.colsampleBytree = colsampleBytree;
-        this.lambda = lambda;
-        this.alpha = alpha;
-        this.random = new Random();
-    }
+        public static class TreeNode {
+            public boolean isLeaf;
+            public double value;
+            public TreeNode left;
+            public TreeNode right;
+            public int featureIndex;
+            public double threshold;
 
-    /**
-     * fit方法。
-     *      * @param X NdArray类型参数
-     * @param y int[]类型参数
-     */
-    public void fit(NdArray X, int[] y) {
-        int nSamples = X.getShape().get(0);
-        this.nFeatures = X.getShape().get(1);
-
-        // Find number of classes
-        this.nClasses = findMaxValue(y) + 1;
-
-        double[][] Xdata = toDouble2D(X);
-
-        // Convert labels to one-hot encoding for multi-class
-        double[][] yOneHot = new double[nSamples][nClasses];
-        for (int i = 0; i < nSamples; i++) {
-            yOneHot[i][y[i]] = 1.0;
-        }
-
-        this.trees = new RegressionTree[nEstimators * nClasses];
-        this.weights = new double[nClasses];
-
-        // Initialize predictions to zero
-        double[][] f = new double[nSamples][nClasses];
-        for (int c = 0; c < nClasses; c++) {
-            weights[c] = 0.0;
-        }
-
-        // Train each class as binary classification problem
-        for (int c = 0; c < nClasses; c++) {
-            double[] yBinary = new double[nSamples];
-            for (int i = 0; i < nSamples; i++) {
-                yBinary[i] = yOneHot[i][c];
-            }
-
-            for (int iter = 0; iter < nEstimators; iter++) {
-                // Compute gradients (pseudo-residuals)
-                double[] gradients = new double[nSamples];
-                double[] hessians = new double[nSamples];
-
-                for (int i = 0; i < nSamples; i++) {
-                    double pred = sigmoid(f[i][c]);
-                    double label = yBinary[i];
-                    gradients[i] = pred - label;  // First derivative
-                    hessians[i] = pred * (1 - pred) + lambda;  // Second derivative with L2 reg
-                }
-
-                // Subsample data
-                int sampleSize = (int) (nSamples * subsample);
-                int[] sampleIndices = subsampleIndices(nSamples, sampleSize);
-
-                double[][] XSample = new double[sampleSize][nFeatures];
-                double[] ySample = new double[sampleSize];
-                double[] gradSample = new double[sampleSize];
-                double[] hessSample = new double[sampleSize];
-
-                for (int i = 0; i < sampleSize; i++) {
-                    XSample[i] = Xdata[sampleIndices[i]];
-                    ySample[i] = yBinary[sampleIndices[i]];
-                    gradSample[i] = gradients[sampleIndices[i]];
-                    hessSample[i] = hessians[sampleIndices[i]];
-                }
-
-                // Select random features
-                int nSelectedFeatures = Math.max(1, (int) (nFeatures * colsampleBytree));
-                int[] featureIndices = selectRandomFeatures(nFeatures, nSelectedFeatures);
-
-                // Fit regression tree on scaled gradients
-                double[] scaledGradients = new double[sampleSize];
-                for (int i = 0; i < sampleSize; i++) {
-                    scaledGradients[i] = gradSample[i] / (hessSample[i] + 1e-6);
-                }
-
-                RegressionTree tree = new RegressionTree(maxDepth, minChildWeight, nFeatures);
-                tree.fit(XSample, scaledGradients, featureIndices);
-
-                // Update predictions
-                double[] treePredictions = tree.predict(Xdata);
-                for (int i = 0; i < nSamples; i++) {
-                    f[i][c] += learningRate * treePredictions[i];
-                }
-
-                trees[c * nEstimators + iter] = tree;
+            /**
+             * TreeNode方法。
+             */
+            public TreeNode() {
+                this.isLeaf = false;
+                this.value = 0.0;
+                this.left = null;
+                this.right = null;
+                this.featureIndex = -1;
+                this.threshold = 0.0;
             }
         }
-    }
-
-    /**
-     * predict方法。
-     *      * @param X NdArray类型参数
-     * @return NdArray类型返回值
-     */
-    public NdArray predict(NdArray X) {
-        int nSamples = X.getShape().get(0);
-        double[][] Xdata = toDouble2D(X);
-
-        double[][] logits = new double[nSamples][nClasses];
-
-        for (int c = 0; c < nClasses; c++) {
-            for (int iter = 0; iter < nEstimators; iter++) {
-                RegressionTree tree = trees[c * nEstimators + iter];
-                if (tree != null) {
-                    double[] predictions = tree.predict(Xdata);
-                    for (int i = 0; i < nSamples; i++) {
-                        logits[i][c] += learningRate * predictions[i];
-                    }
-                }
-            }
-        }
-
-        // Return raw logits as NdArray
-        return createNdArray(logits, nSamples, nClasses);
-    }
-
-    /**
-     * predictClass方法。
-     *      * @param X NdArray类型参数
-     * @return int[]类型返回值
-     */
-    public int[] predictClass(NdArray X) {
-        int nSamples = X.getShape().get(0);
-        NdArray logits = predict(X);
-        double[][] logitsData = toDouble2D(logits);
-
-        int[] predictions = new int[nSamples];
-        for (int i = 0; i < nSamples; i++) {
-            int bestClass = 0;
-            double maxLogit = logitsData[i][0];
-            for (int c = 1; c < nClasses; c++) {
-                if (logitsData[i][c] > maxLogit) {
-                    maxLogit = logitsData[i][c];
-                    bestClass = c;
-                }
-            }
-            predictions[i] = bestClass;
-        }
-        return predictions;
-    }
-
-    private double sigmoid(double x) {
-        return 1.0 / (1.0 + Math.exp(-Math.max(-500, Math.min(500, x))));
-    }
-
-    private int[] subsampleIndices(int n, int size) {
-        int[] indices = new int[size];
-        for (int i = 0; i < size; i++) {
-            indices[i] = random.nextInt(n);
-        }
-        return indices;
-    }
-
-    private int[] selectRandomFeatures(int nFeatures, int nSelect) {
-        int[] indices = new int[nFeatures];
-        for (int i = 0; i < nFeatures; i++) {
-            indices[i] = i;
-        }
-        // Fisher-Yates shuffle
-        for (int i = nFeatures - 1; i > 0; i--) {
-            int j = random.nextInt(i + 1);
-            int temp = indices[i];
-            indices[i] = indices[j];
-            indices[j] = temp;
-        }
-        int[] result = new int[nSelect];
-        for (int i = 0; i < nSelect; i++) {
-            result[i] = indices[i];
-        }
-        return result;
-    }
-
-    private int findMaxValue(int[] arr) {
-        int max = arr[0];
-        for (int val : arr) {
-            if (val > max) max = val;
-        }
-        return max;
-    }
-
-    private double[][] toDouble2D(NdArray arr) {
-        Object data = arr.getData();
-        int nRows = arr.getShape().get(0);
-        int nCols = arr.getShape().get(1);
-
-        double[][] result = new double[nRows][nCols];
-
-        if (data instanceof double[][]) {
-            double[][] d2 = (double[][]) data;
-            for (int i = 0; i < nRows; i++) {
-                for (int j = 0; j < nCols; j++) {
-                    result[i][j] = d2[i][j];
-                }
-            }
-        } else if (data instanceof double[]) {
-            double[] d1 = (double[]) data;
-            for (int i = 0; i < nRows; i++) {
-                for (int j = 0; j < nCols; j++) {
-                    result[i][j] = d1[i * nCols + j];
-                }
-            }
-        } else if (data instanceof float[][]) {
-            float[][] f2 = (float[][]) data;
-            for (int i = 0; i < nRows; i++) {
-                for (int j = 0; j < nCols; j++) {
-                    result[i][j] = f2[i][j];
-                }
-            }
-        } else if (data instanceof float[]) {
-            float[] f1 = (float[]) data;
-            for (int i = 0; i < nRows; i++) {
-                for (int j = 0; j < nCols; j++) {
-                    result[i][j] = f1[i * nCols + j];
-                }
-            }
-        } else {
-            for (int i = 0; i < nRows; i++) {
-                for (int j = 0; j < nCols; j++) {
-                    result[i][j] = ((Number) arr.get(i, j)).doubleValue();
-                }
-            }
-        }
-
-        return result;
-    }
-
-    private NdArray createNdArray(double[][] data, int rows, int cols) {
-        double[] flat = new double[rows * cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                flat[i * cols + j] = data[i][j];
-            }
-        }
-        return NdArray.array(flat, DType.FLOAT64).reshape(rows, cols);
     }
 }

@@ -15,6 +15,7 @@ import java.util.List;
  * @author zifang
  * @see JsonObject
  */
+
 /**
  * JsonArray类。
  */
@@ -29,7 +30,7 @@ public class JsonArray implements Iterable {
      */
     /**
      * add方法。
-     *      * @param obj Object类型参数
+     * * @param obj Object类型参数
      */
     public void add(Object obj) {
         list.add(obj);
@@ -43,7 +44,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * get方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return Object类型返回值
      */
     public Object get(int index) {
@@ -57,6 +59,7 @@ public class JsonArray implements Iterable {
      */
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {
@@ -72,7 +75,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * getJsonObject方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return JsonObject类型返回值
      */
     public JsonObject getJsonObject(int index) {
@@ -93,7 +97,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * getJsonArray方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return JsonArray类型返回值
      */
     public JsonArray getJsonArray(int index) {
@@ -112,6 +117,7 @@ public class JsonArray implements Iterable {
      */
     /**
      * isEmpty方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isEmpty() {
@@ -126,7 +132,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * remove方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return Object类型返回值
      */
     public Object remove(int index) {
@@ -141,7 +148,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * contains方法。
-     *      * @param obj Object类型参数
+     * * @param obj Object类型参数
+     *
      * @return boolean类型返回值
      */
     public boolean contains(Object obj) {
@@ -156,7 +164,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * getString方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return String类型返回值
      */
     public String getString(int index) {
@@ -172,7 +181,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * getInt方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return int类型返回值
      */
     public Integer getInt(int index) {
@@ -189,7 +199,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * getLong方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return long类型返回值
      */
     public Long getLong(int index) {
@@ -206,7 +217,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * getDouble方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return double类型返回值
      */
     public Double getDouble(int index) {
@@ -223,7 +235,8 @@ public class JsonArray implements Iterable {
      */
     /**
      * getBoolean方法。
-     *      * @param index int类型参数
+     * * @param index int类型参数
+     *
      * @return boolean类型返回值
      */
     public Boolean getBoolean(int index) {
@@ -248,6 +261,7 @@ public class JsonArray implements Iterable {
      */
     /**
      * iterator方法。
+     *
      * @return Iterator类型返回值
      */
     public Iterator iterator() {

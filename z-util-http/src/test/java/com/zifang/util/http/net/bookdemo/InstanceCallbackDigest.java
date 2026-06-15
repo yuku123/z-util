@@ -16,7 +16,8 @@ public class InstanceCallbackDigest implements Runnable {
 
     /**
      * InstanceCallbackDigest方法。
-     *      * @param filename String类型参数
+     * * @param filename String类型参数
+     *
      * @param callback InstanceCallbackDigestUserInterface类型参数
      */
     public InstanceCallbackDigest(String filename, InstanceCallbackDigestUserInterface callback) {

@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.chapter6;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.util.ArrayDeque;
@@ -22,7 +23,7 @@ public class ArrayDequeTest {
     /**
      * test001方法。
      */
-    public void test001(){
+    public void test001() {
         ArrayDeque<String> strings = new ArrayDeque<>();
 //        strings.remove("")
 

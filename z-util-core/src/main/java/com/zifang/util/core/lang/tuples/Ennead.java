@@ -8,7 +8,8 @@ public class Ennead<A, B, C, D, E, F, G, H, I> extends Octet<A, B, C, D, E, F, G
 
     /**
      * Ennead方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      * @param c C类型参数
      * @param d D类型参数
@@ -25,6 +26,7 @@ public class Ennead<A, B, C, D, E, F, G, H, I> extends Octet<A, B, C, D, E, F, G
 
     /**
      * getI方法。
+     *
      * @return I类型返回值
      */
     public I getI() {
@@ -33,7 +35,7 @@ public class Ennead<A, B, C, D, E, F, G, H, I> extends Octet<A, B, C, D, E, F, G
 
     /**
      * setI方法。
-     *      * @param i I类型参数
+     * * @param i I类型参数
      */
     public void setI(I i) {
         this.i = i;

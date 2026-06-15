@@ -1,11 +1,12 @@
 package com.zifang.util.core.schedule;
 
 import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
 import org.quartz.impl.JobDetailImpl;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * 任务描述（JobDetail）的封装类。

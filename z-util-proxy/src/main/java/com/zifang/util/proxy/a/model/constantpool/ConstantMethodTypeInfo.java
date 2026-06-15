@@ -17,7 +17,7 @@ public class ConstantMethodTypeInfo extends AbstractConstantPool {
 
     /**
      * ConstantMethodTypeInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public ConstantMethodTypeInfo(byte tag) {
         super(tag);
@@ -25,7 +25,7 @@ public class ConstantMethodTypeInfo extends AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         this.descriptorIndex = U2.read(inputStream);
@@ -33,6 +33,7 @@ public class ConstantMethodTypeInfo extends AbstractConstantPool {
 
     /**
      * getDescriptorIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getDescriptorIndex() {

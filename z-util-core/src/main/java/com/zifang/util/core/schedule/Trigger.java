@@ -1,6 +1,5 @@
 package com.zifang.util.core.schedule;
 
-import org.quartz.Scheduler;
 import org.quartz.TriggerKey;
 
 import java.time.LocalDateTime;
@@ -151,10 +150,10 @@ public interface Trigger {
         protected org.quartz.JobKey jobKey;
 
         @SuppressWarnings("unchecked")
-    /**
-     * self方法。
-     * @return B类型返回值
-     */
+        /**
+         * self方法。
+         * @return B类型返回值
+         */
         protected B self() {
             return (B) this;
         }

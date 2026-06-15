@@ -1,6 +1,5 @@
 package com.zifang.util.http.server;
 
-import com.zifang.util.http.client.HttpRequestInvocationHandler;
 import com.zifang.util.proxy.ProxyUtil;
 
 /**

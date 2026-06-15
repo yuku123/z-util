@@ -20,7 +20,8 @@ public class EWM {
 
     /**
      * EWM方法。
-     *      * @param series Series类型参数
+     * * @param series Series类型参数
+     *
      * @param alpha double类型参数
      */
     public EWM(Series series, double alpha) {
@@ -29,13 +30,14 @@ public class EWM {
 
     /**
      * EWM方法。
-     *      * @param series Series类型参数
-     * @param alpha double类型参数
-     * @param com double类型参数
-     * @param span double类型参数
-     * @param halflife double类型参数
-     * @param adjust boolean类型参数
-     * @param ignoreNaN boolean类型参数
+     * * @param series Series类型参数
+     *
+     * @param alpha      double类型参数
+     * @param com        double类型参数
+     * @param span       double类型参数
+     * @param halflife   double类型参数
+     * @param adjust     boolean类型参数
+     * @param ignoreNaN  boolean类型参数
      * @param minPeriods int类型参数
      */
     public EWM(Series series, double alpha, double com, double span, double halflife,

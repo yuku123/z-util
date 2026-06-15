@@ -1,11 +1,10 @@
 package com.zifang.util.media.graph.image;
 
 import org.junit.Test;
+
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
 import static org.junit.Assert.*;
 
 /**

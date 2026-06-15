@@ -9,6 +9,7 @@ import java.net.URI;
  * @author zifang Horstmann
  * @version 1.00 2007-11-02
  */
+
 /**
  * StringBuilderJavaSource类。
  */
@@ -22,7 +23,7 @@ public class StringBuilderJavaSource extends SimpleJavaFileObject {
      */
     /**
      * StringBuilderJavaSource方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public StringBuilderJavaSource(String name) {
         super(URI.create("string:///" + name.replace('.', '/') + Kind.SOURCE.extension),
@@ -32,7 +33,8 @@ public class StringBuilderJavaSource extends SimpleJavaFileObject {
 
     /**
      * getCharContent方法。
-     *      * @param ignoreEncodingErrors boolean类型参数
+     * * @param ignoreEncodingErrors boolean类型参数
+     *
      * @return CharSequence类型返回值
      */
     public CharSequence getCharContent(boolean ignoreEncodingErrors) {
@@ -41,7 +43,7 @@ public class StringBuilderJavaSource extends SimpleJavaFileObject {
 
     /**
      * append方法。
-     *      * @param str String类型参数
+     * * @param str String类型参数
      */
     public void append(String str) {
         code.append(str);

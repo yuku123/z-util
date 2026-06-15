@@ -3,6 +3,7 @@ package com.zifang.util.ml.inheritance.chapter5;
 /**
  * Simple Room abstraction -- used to store the room capacity and compare against the student Group's size.
  */
+
 /**
  * Room类。
  */
@@ -20,9 +21,10 @@ public class Room {
      */
     /**
      * Room方法。
-     *      * @param roomId int类型参数
+     * * @param roomId int类型参数
+     *
      * @param roomNumber String类型参数
-     * @param capacity int类型参数
+     * @param capacity   int类型参数
      */
     public Room(int roomId, String roomNumber, int capacity) {
         this.roomId = roomId;
@@ -37,6 +39,7 @@ public class Room {
      */
     /**
      * getRoomId方法。
+     *
      * @return int类型返回值
      */
     public int getRoomId() {
@@ -50,6 +53,7 @@ public class Room {
      */
     /**
      * getRoomNumber方法。
+     *
      * @return String类型返回值
      */
     public String getRoomNumber() {
@@ -63,6 +67,7 @@ public class Room {
      */
     /**
      * getRoomCapacity方法。
+     *
      * @return int类型返回值
      */
     public int getRoomCapacity() {

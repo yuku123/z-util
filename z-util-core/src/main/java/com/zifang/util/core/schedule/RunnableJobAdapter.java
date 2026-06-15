@@ -42,7 +42,7 @@ public class RunnableJobAdapter implements org.quartz.Job, Job {
         if (rawClassName == null) {
             throw new JobExecutionException(
                     "Neither RunnableJob nor Job class found in JobDataMap. " +
-                    "Use JobBuilder.newJob(YourJob.class) or JobBuilder.newJob(runnable).");
+                            "Use JobBuilder.newJob(YourJob.class) or JobBuilder.newJob(runnable).");
         }
 
         Class<?> clazz;

@@ -34,8 +34,8 @@ public class SourceJavaFileObject extends SimpleJavaFileObject {
     /**
      * 使用类名和源代码构造文件对象
      *
-     * @param className   类名
-     * @param sourceCode  源代码内容
+     * @param className  类名
+     * @param sourceCode 源代码内容
      */
     public SourceJavaFileObject(String className, String sourceCode) {
         super(fromClassName(className + Kind.SOURCE.extension), Kind.SOURCE);

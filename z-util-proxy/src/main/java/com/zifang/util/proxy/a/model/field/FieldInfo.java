@@ -19,13 +19,14 @@ public class FieldInfo {
 
     /**
      * FieldInfo方法。
-     *      * @param accessFlags U2类型参数
-     * @param nameIndex U2类型参数
+     * * @param accessFlags U2类型参数
+     *
+     * @param nameIndex       U2类型参数
      * @param descriptorIndex U2类型参数
      * @param attributesCount U2类型参数
-     * @param attributes ListAbstractAttribute类型参数
+     * @param attributes      ListAbstractAttribute类型参数
      */
-    public FieldInfo(U2 accessFlags, U2 nameIndex, U2 descriptorIndex, 
+    public FieldInfo(U2 accessFlags, U2 nameIndex, U2 descriptorIndex,
                      U2 attributesCount, List<AbstractAttribute> attributes) {
         this.accessFlags = accessFlags;
         this.nameIndex = nameIndex;
@@ -36,6 +37,7 @@ public class FieldInfo {
 
     /**
      * getAccessFlags方法。
+     *
      * @return U2类型返回值
      */
     public U2 getAccessFlags() {
@@ -44,6 +46,7 @@ public class FieldInfo {
 
     /**
      * getNameIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getNameIndex() {
@@ -52,6 +55,7 @@ public class FieldInfo {
 
     /**
      * getDescriptorIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getDescriptorIndex() {
@@ -60,6 +64,7 @@ public class FieldInfo {
 
     /**
      * getAttributesCount方法。
+     *
      * @return U2类型返回值
      */
     public U2 getAttributesCount() {
@@ -68,6 +73,7 @@ public class FieldInfo {
 
     /**
      * getAttributes方法。
+     *
      * @return List<AbstractAttribute>类型返回值
      */
     public List<AbstractAttribute> getAttributes() {

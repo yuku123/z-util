@@ -17,7 +17,7 @@ public class JsonExporter {
 
     /**
      * JsonExporter方法。
-     *      * @param registry MetricsRegistry类型参数
+     * * @param registry MetricsRegistry类型参数
      */
     public JsonExporter(MetricsRegistry registry) {
         this.registry = registry;
@@ -25,6 +25,7 @@ public class JsonExporter {
 
     /**
      * export方法。
+     *
      * @return String类型返回值
      */
     public String export() {

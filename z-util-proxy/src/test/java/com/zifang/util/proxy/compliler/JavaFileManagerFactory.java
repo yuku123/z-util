@@ -12,7 +12,8 @@ public class JavaFileManagerFactory {
 
     /**
      * getJavaFileManager方法。
-     *      * @param standardManager StandardJavaFileManager类型参数
+     * * @param standardManager StandardJavaFileManager类型参数
+     *
      * @return static CFJavaFileManager类型返回值
      */
     public static CFJavaFileManager getJavaFileManager(StandardJavaFileManager standardManager) {

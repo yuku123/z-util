@@ -12,7 +12,7 @@ public class LogFile {
 
     /**
      * LogFile方法。
-     *      * @param f File类型参数
+     * * @param f File类型参数
      */
     public LogFile(File f) throws IOException {
         FileWriter fw = new FileWriter(f);
@@ -21,7 +21,7 @@ public class LogFile {
 
     /**
      * writeEntry方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public void writeEntry(String message) throws IOException {
         Date d = new Date();

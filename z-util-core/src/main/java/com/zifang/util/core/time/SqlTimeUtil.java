@@ -1,7 +1,5 @@
 package com.zifang.util.core.time;
 
-import com.zifang.util.core.time.converter.TimeConverter;
-
 import java.sql.Time;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -25,25 +23,29 @@ public class SqlTimeUtil {
 
     /**
      * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_DEFAULT Object类型参数
+     * * @param PATTERN_DEFAULT Object类型参数
+     *
      * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
      */
     public static final DateTimeFormatter FMT_DEFAULT = DateTimeFormatter.ofPattern(PATTERN_DEFAULT);
     /**
      * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_SHORT Object类型参数
+     * * @param PATTERN_SHORT Object类型参数
+     *
      * @return static final DateTimeFormatter FMT_SHORT =类型返回值
      */
     public static final DateTimeFormatter FMT_SHORT = DateTimeFormatter.ofPattern(PATTERN_SHORT);
     /**
      * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_COMPACT Object类型参数
+     * * @param PATTERN_COMPACT Object类型参数
+     *
      * @return static final DateTimeFormatter FMT_COMPACT =类型返回值
      */
     public static final DateTimeFormatter FMT_COMPACT = DateTimeFormatter.ofPattern(PATTERN_COMPACT);
     /**
      * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_CHINESE Object类型参数
+     * * @param PATTERN_CHINESE Object类型参数
+     *
      * @return static final DateTimeFormatter FMT_CHINESE =类型返回值
      */
     public static final DateTimeFormatter FMT_CHINESE = DateTimeFormatter.ofPattern(PATTERN_CHINESE);
@@ -52,7 +54,8 @@ public class SqlTimeUtil {
 
     /**
      * format方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static String类型返回值
      */
     public static String format(Time time) {
@@ -61,7 +64,8 @@ public class SqlTimeUtil {
 
     /**
      * format方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @param pattern String类型参数
      * @return static String类型返回值
      */
@@ -72,7 +76,8 @@ public class SqlTimeUtil {
 
     /**
      * format方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @param formatter DateTimeFormatter类型参数
      * @return static String类型返回值
      */
@@ -85,7 +90,8 @@ public class SqlTimeUtil {
 
     /**
      * parse方法。
-     *      * @param timeStr String类型参数
+     * * @param timeStr String类型参数
+     *
      * @return static Time类型返回值
      */
     public static Time parse(String timeStr) {
@@ -94,7 +100,8 @@ public class SqlTimeUtil {
 
     /**
      * parse方法。
-     *      * @param timeStr String类型参数
+     * * @param timeStr String类型参数
+     *
      * @param pattern String类型参数
      * @return static Time类型返回值
      */
@@ -111,6 +118,7 @@ public class SqlTimeUtil {
 
     /**
      * now方法。
+     *
      * @return static Time类型返回值
      */
     public static Time now() {
@@ -121,7 +129,8 @@ public class SqlTimeUtil {
 
     /**
      * plusHours方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @param hours long类型参数
      * @return static Time类型返回值
      */
@@ -133,7 +142,8 @@ public class SqlTimeUtil {
 
     /**
      * minusHours方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @param hours long类型参数
      * @return static Time类型返回值
      */
@@ -145,7 +155,8 @@ public class SqlTimeUtil {
 
     /**
      * plusMinutes方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @param minutes long类型参数
      * @return static Time类型返回值
      */
@@ -157,7 +168,8 @@ public class SqlTimeUtil {
 
     /**
      * minusMinutes方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @param minutes long类型参数
      * @return static Time类型返回值
      */
@@ -169,7 +181,8 @@ public class SqlTimeUtil {
 
     /**
      * plusSeconds方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @param seconds long类型参数
      * @return static Time类型返回值
      */
@@ -181,7 +194,8 @@ public class SqlTimeUtil {
 
     /**
      * minusSeconds方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @param seconds long类型参数
      * @return static Time类型返回值
      */
@@ -195,7 +209,8 @@ public class SqlTimeUtil {
 
     /**
      * isBefore方法。
-     *      * @param time1 Time类型参数
+     * * @param time1 Time类型参数
+     *
      * @param time2 Time类型参数
      * @return static boolean类型返回值
      */
@@ -205,7 +220,8 @@ public class SqlTimeUtil {
 
     /**
      * isAfter方法。
-     *      * @param time1 Time类型参数
+     * * @param time1 Time类型参数
+     *
      * @param time2 Time类型参数
      * @return static boolean类型返回值
      */
@@ -217,7 +233,8 @@ public class SqlTimeUtil {
 
     /**
      * millisBetween方法。
-     *      * @param start Time类型参数
+     * * @param start Time类型参数
+     *
      * @param end Time类型参数
      * @return static long类型返回值
      */
@@ -227,7 +244,8 @@ public class SqlTimeUtil {
 
     /**
      * secondsBetween方法。
-     *      * @param start Time类型参数
+     * * @param start Time类型参数
+     *
      * @param end Time类型参数
      * @return static long类型返回值
      */
@@ -237,7 +255,8 @@ public class SqlTimeUtil {
 
     /**
      * minutesBetween方法。
-     *      * @param start Time类型参数
+     * * @param start Time类型参数
+     *
      * @param end Time类型参数
      * @return static long类型返回值
      */
@@ -247,7 +266,8 @@ public class SqlTimeUtil {
 
     /**
      * hoursBetween方法。
-     *      * @param start Time类型参数
+     * * @param start Time类型参数
+     *
      * @param end Time类型参数
      * @return static long类型返回值
      */
@@ -259,7 +279,8 @@ public class SqlTimeUtil {
 
     /**
      * getHour方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static int类型返回值
      */
     public static int getHour(Time time) {
@@ -268,7 +289,8 @@ public class SqlTimeUtil {
 
     /**
      * getMinute方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static int类型返回值
      */
     public static int getMinute(Time time) {
@@ -277,7 +299,8 @@ public class SqlTimeUtil {
 
     /**
      * getSecond方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static int类型返回值
      */
     public static int getSecond(Time time) {
@@ -288,7 +311,8 @@ public class SqlTimeUtil {
 
     /**
      * toDate方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static Date类型返回值
      */
     public static Date toDate(Time time) {
@@ -298,7 +322,8 @@ public class SqlTimeUtil {
 
     /**
      * toLocalTime方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static LocalTime类型返回值
      */
     public static LocalTime toLocalTime(Time time) {
@@ -308,7 +333,8 @@ public class SqlTimeUtil {
 
     /**
      * toLocalDate方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static LocalDate类型返回值
      */
     public static LocalDate toLocalDate(Time time) {
@@ -318,7 +344,8 @@ public class SqlTimeUtil {
 
     /**
      * toLocalDateTime方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static LocalDateTime类型返回值
      */
     public static LocalDateTime toLocalDateTime(Time time) {
@@ -328,7 +355,8 @@ public class SqlTimeUtil {
 
     /**
      * toInstant方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static Instant类型返回值
      */
     public static Instant toInstant(Time time) {
@@ -338,7 +366,8 @@ public class SqlTimeUtil {
 
     /**
      * toEpochMilli方法。
-     *      * @param time Time类型参数
+     * * @param time Time类型参数
+     *
      * @return static long类型返回值
      */
     public static long toEpochMilli(Time time) {
@@ -350,7 +379,8 @@ public class SqlTimeUtil {
 
     /**
      * fromDate方法。
-     *      * @param date Date类型参数
+     * * @param date Date类型参数
+     *
      * @return static Time类型返回值
      */
     public static Time fromDate(Date date) {
@@ -360,7 +390,8 @@ public class SqlTimeUtil {
 
     /**
      * fromLocalTime方法。
-     *      * @param localTime LocalTime类型参数
+     * * @param localTime LocalTime类型参数
+     *
      * @return static Time类型返回值
      */
     public static Time fromLocalTime(LocalTime localTime) {
@@ -370,7 +401,8 @@ public class SqlTimeUtil {
 
     /**
      * fromLocalDateTime方法。
-     *      * @param localDateTime LocalDateTime类型参数
+     * * @param localDateTime LocalDateTime类型参数
+     *
      * @return static Time类型返回值
      */
     public static Time fromLocalDateTime(LocalDateTime localDateTime) {
@@ -380,7 +412,8 @@ public class SqlTimeUtil {
 
     /**
      * fromInstant方法。
-     *      * @param instant Instant类型参数
+     * * @param instant Instant类型参数
+     *
      * @return static Time类型返回值
      */
     public static Time fromInstant(Instant instant) {
@@ -390,7 +423,8 @@ public class SqlTimeUtil {
 
     /**
      * fromEpochMilli方法。
-     *      * @param epochMilli long类型参数
+     * * @param epochMilli long类型参数
+     *
      * @return static Time类型返回值
      */
     public static Time fromEpochMilli(long epochMilli) {

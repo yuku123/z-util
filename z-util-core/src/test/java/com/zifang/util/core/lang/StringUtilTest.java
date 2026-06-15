@@ -1,9 +1,9 @@
 package com.zifang.util.core.lang;
 
-import com.zifang.util.core.Const;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * StringUtilTest类。
@@ -475,9 +475,9 @@ public class StringUtilTest {
      * rightPad方法。
      */
     public void rightPad() {
-        assert StringUtil.rightPad("2","0",2).equals("20");
-        assert StringUtil.rightPad("12","0",2).equals("12");
-        assert StringUtil.rightPad("012","0",2).equals("012");
+        assert StringUtil.rightPad("2", "0", 2).equals("20");
+        assert StringUtil.rightPad("12", "0", 2).equals("12");
+        assert StringUtil.rightPad("012", "0", 2).equals("012");
     }
 
     @Test
@@ -485,9 +485,9 @@ public class StringUtilTest {
      * leftPad方法。
      */
     public void leftPad() {
-        assert StringUtil.leftPad("2",2,"0").equals("02");
-        assert StringUtil.leftPad("12",2,"0").equals("12");
-        assert StringUtil.leftPad("012",2,"0").equals("012");
+        assert StringUtil.leftPad("2", 2, "0").equals("02");
+        assert StringUtil.leftPad("12", 2, "0").equals("12");
+        assert StringUtil.leftPad("012", 2, "0").equals("012");
     }
 
     @Test
@@ -495,8 +495,8 @@ public class StringUtilTest {
      * repeat方法。
      */
     public void repeat() {
-        assert StringUtil.repeat("2",2).equals("22");
-        assert StringUtil.repeat("-2",2).equals("-2-2");
+        assert StringUtil.repeat("2", 2).equals("22");
+        assert StringUtil.repeat("-2", 2).equals("-2-2");
     }
 
     @Test
@@ -520,15 +520,16 @@ public class StringUtilTest {
      */
     public void testToString() {
     }
+
     @Test
     /**
      * replaceTest方法。
      */
-    public void replaceTest(){
+    public void replaceTest() {
 
         assert "%s".equals(StringUtil.replace("{}",
                 "\\{\\}",
-                "%s",false));
+                "%s", false));
 
     }
 

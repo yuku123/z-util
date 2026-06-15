@@ -37,7 +37,7 @@ public class Streams {
      * 将 Iterator 转换为 Stream（并行流）
      *
      * @param iterator 迭代器
-     * @param <T>       元素类型
+     * @param <T>      元素类型
      * @return 对应元素的并行 Stream
      */
     public static <T> Stream<T> parallelStreamOf(Iterator<T> iterator) {

@@ -23,7 +23,7 @@ public class MemoryCache extends ResponseCache {
 
     /**
      * MemoryCache方法。
-     *      * @param maxEntries int类型参数
+     * * @param maxEntries int类型参数
      */
     public MemoryCache(int maxEntries) {
         this.maxEntries = maxEntries;

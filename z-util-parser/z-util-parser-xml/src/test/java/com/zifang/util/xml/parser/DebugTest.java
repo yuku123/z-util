@@ -1,8 +1,7 @@
-
 package com.zifang.util.xml.parser;
 
 import com.zifang.util.xml.XmlUtil;
-import com.zifang.util.xml.model.*;
+import com.zifang.util.xml.model.XDocument;
 import org.junit.Test;
 
 /**

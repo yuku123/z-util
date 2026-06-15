@@ -14,7 +14,7 @@ public class U2 {
 
     /**
      * U2方法。
-     *      * @param value short类型参数
+     * * @param value short类型参数
      */
     public U2(short value) {
         this.value = value;
@@ -22,7 +22,8 @@ public class U2 {
 
     /**
      * read方法。
-     *      * @param stream InputStream类型参数
+     * * @param stream InputStream类型参数
+     *
      * @return static U2类型返回值
      */
     public static U2 read(InputStream stream) {
@@ -44,6 +45,7 @@ public class U2 {
 
     /**
      * getValue方法。
+     *
      * @return short类型返回值
      */
     public short getValue() {

@@ -34,10 +34,10 @@ public class CacheStudy {
     RemovalListener<String, String> listener = new RemovalListener<String, String>() {
 
         @Override
-    /**
-     * onRemoval方法。
-     *      * @param notification RemovalNotificationString,类型参数
-     */
+        /**
+         * onRemoval方法。
+         *      * @param notification RemovalNotificationString,类型参数
+         */
         public void onRemoval(RemovalNotification<String, String> notification) {
             System.out.println("RemovalListener:" + notification.getKey() + "," + notification.getValue() + "," + notification.getCause());
         }
@@ -48,11 +48,11 @@ public class CacheStudy {
      */
     LoadingCache<String, String> cacheBuilder = CacheBuilder.newBuilder().removalListener(listener).build(new CacheLoader<String, String>() {
         @Override
-    /**
-     * load方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
+        /**
+         * load方法。
+         *      * @param key String类型参数
+         * @return String类型返回值
+         */
         public String load(String key) throws Exception {
             return initValue(key);
         }
@@ -75,22 +75,22 @@ public class CacheStudy {
     LoadingCache<String, String> cacheWeight = CacheBuilder.newBuilder().maximumWeight(20).weigher(new Weigher<String, String>() {
 
         @Override
-    /**
-     * weigh方法。
-     *      * @param key String类型参数
-     * @param value String类型参数
-     * @return int类型返回值
-     */
+        /**
+         * weigh方法。
+         *      * @param key String类型参数
+         * @param value String类型参数
+         * @return int类型返回值
+         */
         public int weigh(String key, String value) {
             return key.length();
         }
     }).build(new CacheLoader<String, String>() {
         @Override
-    /**
-     * load方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
+        /**
+         * load方法。
+         *      * @param key String类型参数
+         * @return String类型返回值
+         */
         public String load(String key) {
             return initValue(key);
         }
@@ -101,11 +101,11 @@ public class CacheStudy {
      */
     LoadingCache<String, String> cacheTime = CacheBuilder.newBuilder().expireAfterAccess(10, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
         @Override
-    /**
-     * load方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
+        /**
+         * load方法。
+         *      * @param key String类型参数
+         * @return String类型返回值
+         */
         public String load(String key) {
             return initValue(key);
         }
@@ -116,11 +116,11 @@ public class CacheStudy {
      */
     LoadingCache<String, String> cacheWriteTime = CacheBuilder.newBuilder().expireAfterWrite(10, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
         @Override
-    /**
-     * load方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
+        /**
+         * load方法。
+         *      * @param key String类型参数
+         * @return String类型返回值
+         */
         public String load(String key) {
             return initValue(key);
         }
@@ -130,6 +130,105 @@ public class CacheStudy {
      * callable方式实现实例.
      */
     Cache<String, String> cache = CacheBuilder.newBuilder().maximumSize(5).build();
+    /**
+     * 缓存刷新-同步.
+     */
+    LoadingCache<String, String> cacheSyncRefresh = CacheBuilder.newBuilder().refreshAfterWrite(5, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
+
+        @Override
+        /**
+         * load方法。
+         *      * @param key String类型参数
+         * @return String类型返回值
+         */
+        public String load(String key) throws Exception {
+            return "hello " + key + (int) (Math.random() * 10);
+        }
+    });
+    /**
+     * 缓存统计.
+     */
+    LoadingCache<String, String> cacheStats = CacheBuilder.newBuilder().recordStats().build(new CacheLoader<String, String>() {
+
+        @Override
+        /**
+         * load方法。
+         *      * @param key String类型参数
+         * @return String类型返回值
+         */
+        public String load(String key) throws Exception {
+            return initValue(key);
+        }
+    });
+    private Executor executor = Executors.newFixedThreadPool(3);
+    /**
+     * 异步 移除监听器.
+     */
+    LoadingCache<String, String> cahceAsyLis = CacheBuilder.newBuilder().removalListener(RemovalListeners.asynchronous(listener, executor)).build(new CacheLoader<String, String>() {
+
+        @Override
+        /**
+         * load方法。
+         *      * @param key String类型参数
+         * @return String类型返回值
+         */
+        public String load(String key) throws Exception {
+            return initValue(key);
+        }
+    });
+    /**
+     * 缓存刷新-异步
+     * <p>
+     * （重写reload自定义刷新方法,允许开发者在计算新值时使用旧的值）.
+     * <p>
+     * refreshAfterWrite自动定时刷新。缓存项只有在被检索时才会真正刷新（如果CacheLoader.refresh实现为异步，那么检索不会被刷新拖慢）。
+     * <p>
+     * 如果你在缓存上同时声明expireAfterWrite和refreshAfterWrite，缓存并不会因为刷新盲目地定时重置，如果缓存项没有被检索，那刷新就不会真的发生，缓存项在过期时间后也变得可以回收。
+     */
+    LoadingCache<String, String> cacheRefresh = CacheBuilder.newBuilder().refreshAfterWrite(5, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
+
+        @Override
+        /**
+         * load方法。
+         *      * @param key String类型参数
+         * @return String类型返回值
+         */
+        public String load(String key) throws Exception {
+            return "hello " + key + (int) (Math.random() * 10);
+        }
+
+        /**
+         * reload方法。
+         *      * @param key final类型参数
+         * @param oldValue String类型参数
+         * @return ListenableFuture<String>类型返回值
+         */
+        public ListenableFuture<String> reload(final String key, String oldValue) throws Exception {
+            if (neverNeedRefresh(key)) { // 该key【不需要】刷新
+                return Futures.immediateFuture(oldValue); // oldValue为null则返回new ImmediateSuccessfulFuture<Object>(null)，否则返回原值
+            } else { // asynchronous
+                ListenableFutureTask<String> task = ListenableFutureTask.create(new Callable<String>() {
+                    @Override
+                    /**
+                     * call方法。
+                     * @return String类型返回值
+                     */
+                    public String call() throws Exception {
+                        return "hello new " + key;
+                    }
+                });
+                executor.execute(task); // 推荐 异步刷新
+                return task;
+            }
+        }
+
+        /**
+         * 该key是否需要刷新.
+         */
+        private boolean neverNeedRefresh(String key) {
+            return false;
+        }
+    });
 
     @Test
     /**
@@ -163,10 +262,10 @@ public class CacheStudy {
      */
     public void callableTest() throws ExecutionException {
         String valcal = cache.get("zxiaofan", new Callable<String>() {
-    /**
-     * call方法。
-     * @return String类型返回值
-     */
+            /**
+             * call方法。
+             * @return String类型返回值
+             */
             public String call() {
                 return "hello " + "zxiaofan";
             }
@@ -177,10 +276,10 @@ public class CacheStudy {
         System.out.println(cache.get("cal", new Callable<String>() {
 
             @Override
-    /**
-     * call方法。
-     * @return String类型返回值
-     */
+            /**
+             * call方法。
+             * @return String类型返回值
+             */
             public String call() throws Exception {
                 return "github_new";
             }
@@ -249,24 +348,6 @@ public class CacheStudy {
         System.out.println(cacheBuilder.asMap().toString());
     }
 
-    private Executor executor = Executors.newFixedThreadPool(3);
-
-    /**
-     * 异步 移除监听器.
-     */
-    LoadingCache<String, String> cahceAsyLis = CacheBuilder.newBuilder().removalListener(RemovalListeners.asynchronous(listener, executor)).build(new CacheLoader<String, String>() {
-
-        @Override
-    /**
-     * load方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
-        public String load(String key) throws Exception {
-            return initValue(key);
-        }
-    });
-
     /**
      * 移除监听器.
      * <p>
@@ -318,9 +399,9 @@ public class CacheStudy {
         ScheduledExecutorService schedu = Executors.newScheduledThreadPool(1);
         schedu.scheduleAtFixedRate(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 cacheWriteTime.cleanUp(); //
             }
@@ -330,76 +411,6 @@ public class CacheStudy {
         System.out.println(cacheWriteTime.getIfPresent("k1")); // null
         System.out.println(cacheWriteTime.getIfPresent("k3")); // null
     }
-
-    /**
-     * 缓存刷新-异步
-     * <p>
-     * （重写reload自定义刷新方法,允许开发者在计算新值时使用旧的值）.
-     * <p>
-     * refreshAfterWrite自动定时刷新。缓存项只有在被检索时才会真正刷新（如果CacheLoader.refresh实现为异步，那么检索不会被刷新拖慢）。
-     * <p>
-     * 如果你在缓存上同时声明expireAfterWrite和refreshAfterWrite，缓存并不会因为刷新盲目地定时重置，如果缓存项没有被检索，那刷新就不会真的发生，缓存项在过期时间后也变得可以回收。
-     */
-    LoadingCache<String, String> cacheRefresh = CacheBuilder.newBuilder().refreshAfterWrite(5, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
-
-        @Override
-    /**
-     * load方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
-        public String load(String key) throws Exception {
-            return "hello " + key + (int) (Math.random() * 10);
-        }
-
-    /**
-     * reload方法。
-     *      * @param key final类型参数
-     * @param oldValue String类型参数
-     * @return ListenableFuture<String>类型返回值
-     */
-        public ListenableFuture<String> reload(final String key, String oldValue) throws Exception {
-            if (neverNeedRefresh(key)) { // 该key【不需要】刷新
-                return Futures.immediateFuture(oldValue); // oldValue为null则返回new ImmediateSuccessfulFuture<Object>(null)，否则返回原值
-            } else { // asynchronous
-                ListenableFutureTask<String> task = ListenableFutureTask.create(new Callable<String>() {
-                    @Override
-    /**
-     * call方法。
-     * @return String类型返回值
-     */
-                    public String call() throws Exception {
-                        return "hello new " + key;
-                    }
-                });
-                executor.execute(task); // 推荐 异步刷新
-                return task;
-            }
-        }
-
-        /**
-         * 该key是否需要刷新.
-         */
-        private boolean neverNeedRefresh(String key) {
-            return false;
-        }
-    });
-
-    /**
-     * 缓存刷新-同步.
-     */
-    LoadingCache<String, String> cacheSyncRefresh = CacheBuilder.newBuilder().refreshAfterWrite(5, TimeUnit.SECONDS).build(new CacheLoader<String, String>() {
-
-        @Override
-    /**
-     * load方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
-        public String load(String key) throws Exception {
-            return "hello " + key + (int) (Math.random() * 10);
-        }
-    });
 
     /**
      * 刷新：加载新值，可异步，刷新时get仍可返回旧值（和回收操作缓存不同，回收操作必须等待新值加载完成）.
@@ -447,22 +458,6 @@ public class CacheStudy {
             System.out.println("只要timeOut，get即refresh：" + i + ":" + cacheSyncRefresh.getIfPresent("k" + i)); // 已get过的key将返回新value
         }
     }
-
-    /**
-     * 缓存统计.
-     */
-    LoadingCache<String, String> cacheStats = CacheBuilder.newBuilder().recordStats().build(new CacheLoader<String, String>() {
-
-        @Override
-    /**
-     * load方法。
-     *      * @param key String类型参数
-     * @return String类型返回值
-     */
-        public String load(String key) throws Exception {
-            return initValue(key);
-        }
-    });
 
     /**
      * 统计。Cache.stats()方法会返回CacheStats对象以提供统计信息。

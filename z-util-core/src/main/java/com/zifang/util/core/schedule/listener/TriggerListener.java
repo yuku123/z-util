@@ -23,8 +23,8 @@ public interface TriggerListener {
     /**
      * 触发器被触发（即将执行关联的任务）。
      *
-     * @param trigger  触发器信息（wrapper）
-     * @param context  任务执行上下文
+     * @param trigger 触发器信息（wrapper）
+     * @param context 任务执行上下文
      */
     default void triggerFired(Trigger trigger, JobExecutionContextWrapper context) {
     }
@@ -53,11 +53,11 @@ public interface TriggerListener {
     /**
      * 触发器触发完成。
      *
-     * @param trigger       触发器信息
-     * @param context       任务执行上下文
-     * @param instruction   触发器指令码，表示后续动作
+     * @param trigger     触发器信息
+     * @param context     任务执行上下文
+     * @param instruction 触发器指令码，表示后续动作
      */
     default void triggerComplete(Trigger trigger, JobExecutionContextWrapper context,
-                                CompletedExecutionInstruction instruction) {
+                                 CompletedExecutionInstruction instruction) {
     }
 }

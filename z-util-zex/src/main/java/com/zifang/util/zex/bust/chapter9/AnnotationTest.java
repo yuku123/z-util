@@ -9,10 +9,8 @@ package com.zifang.util.zex.bust.chapter9;
  * @author zifang
  * @version 1.0
  */
+
 import java.lang.annotation.*;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 
 
 @Target({ElementType.TYPE,

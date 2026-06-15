@@ -1,7 +1,8 @@
 package com.zifang.util.core.resilience;
 
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 舱壁（Bulkhead，自研，对标 Resilience4j Bulkhead / semaphore-based isolation）。
@@ -40,7 +41,9 @@ public class Bulkhead {
         }
     }
 
-    /** 等待型 acquire（用于定时任务等可以阻塞的场景）。 */
+    /**
+     * 等待型 acquire（用于定时任务等可以阻塞的场景）。
+     */
     public <T> T callBlocking(Callable<T> task, long waitMs) throws InterruptedException {
         if (!semaphore.tryAcquire(waitMs, TimeUnit.MILLISECONDS)) {
             throw new ResilienceException("bulkhead timeout, maxConcurrent=" + maxConcurrent);
@@ -56,6 +59,11 @@ public class Bulkhead {
         }
     }
 
-    public int availablePermits() { return semaphore.availablePermits(); }
-    public int maxConcurrent() { return maxConcurrent; }
+    public int availablePermits() {
+        return semaphore.availablePermits();
+    }
+
+    public int maxConcurrent() {
+        return maxConcurrent;
+    }
 }

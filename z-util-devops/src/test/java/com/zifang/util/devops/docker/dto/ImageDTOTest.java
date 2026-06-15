@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * ImageDTO 类测试
  */
+
 /**
  * ImageDTOTest类。
  */

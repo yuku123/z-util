@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * 备忘录上下文（CareTaker）- 增强版
@@ -26,9 +25,9 @@ import java.util.function.Consumer;
 public class MementoContext<T> {
 
     private final List<Snapshot<T>> snapshots = new ArrayList<>();
-    private int pointer = -1;
     private final int maxSize;
     private final List<MementoListener<T>> listeners = new ArrayList<>();
+    private int pointer = -1;
     private String currentBranch = "main";
 
     /**
@@ -40,7 +39,7 @@ public class MementoContext<T> {
 
     /**
      * MementoContext方法。
-     *      * @param maxSize int类型参数
+     * * @param maxSize int类型参数
      */
     public MementoContext(int maxSize) {
         this.maxSize = maxSize > 0 ? maxSize : 100;
@@ -328,6 +327,17 @@ public class MementoContext<T> {
     }
 
     /**
+     * 备忘录监听器
+     */
+    @FunctionalInterface
+/**
+ * MementoListener接口。
+ */
+    public interface MementoListener<T> {
+        void onEvent(EventType event, Snapshot<T> snapshot, int pointer);
+    }
+
+    /**
      * 快照元数据（不包含状态）
      */
     public static class SnapshotMeta {
@@ -338,15 +348,16 @@ public class MementoContext<T> {
         private final long timestamp;
         private final boolean isCurrent;
 
-    /**
-     * SnapshotMeta方法。
-     *      * @param index int类型参数
-     * @param label String类型参数
-     * @param description String类型参数
-     * @param branch String类型参数
-     * @param timestamp long类型参数
-     * @param isCurrent boolean类型参数
-     */
+        /**
+         * SnapshotMeta方法。
+         * * @param index int类型参数
+         *
+         * @param label       String类型参数
+         * @param description String类型参数
+         * @param branch      String类型参数
+         * @param timestamp   long类型参数
+         * @param isCurrent   boolean类型参数
+         */
         public SnapshotMeta(int index, String label, String description, String branch, long timestamp, boolean isCurrent) {
             this.index = index;
             this.label = label;
@@ -356,36 +367,59 @@ public class MementoContext<T> {
             this.isCurrent = isCurrent;
         }
 
-    /**
-     * getIndex方法。
-     * @return int类型返回值
-     */
-        public int getIndex() { return index; }
-    /**
-     * getLabel方法。
-     * @return String类型返回值
-     */
-        public String getLabel() { return label; }
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
-        public String getDescription() { return description; }
-    /**
-     * getBranch方法。
-     * @return String类型返回值
-     */
-        public String getBranch() { return branch; }
-    /**
-     * getTimestamp方法。
-     * @return long类型返回值
-     */
-        public long getTimestamp() { return timestamp; }
-    /**
-     * isCurrent方法。
-     * @return boolean类型返回值
-     */
-        public boolean isCurrent() { return isCurrent; }
+        /**
+         * getIndex方法。
+         *
+         * @return int类型返回值
+         */
+        public int getIndex() {
+            return index;
+        }
+
+        /**
+         * getLabel方法。
+         *
+         * @return String类型返回值
+         */
+        public String getLabel() {
+            return label;
+        }
+
+        /**
+         * getDescription方法。
+         *
+         * @return String类型返回值
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * getBranch方法。
+         *
+         * @return String类型返回值
+         */
+        public String getBranch() {
+            return branch;
+        }
+
+        /**
+         * getTimestamp方法。
+         *
+         * @return long类型返回值
+         */
+        public long getTimestamp() {
+            return timestamp;
+        }
+
+        /**
+         * isCurrent方法。
+         *
+         * @return boolean类型返回值
+         */
+        public boolean isCurrent() {
+            return isCurrent;
+        }
     }
 
     /**
@@ -406,41 +440,49 @@ public class MementoContext<T> {
             this.timestamp = System.currentTimeMillis();
         }
 
-    /**
-     * getState方法。
-     * @return T类型返回值
-     */
-        public T getState() { return state; }
-    /**
-     * getLabel方法。
-     * @return String类型返回值
-     */
-        public String getLabel() { return label; }
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
-        public String getDescription() { return description; }
-    /**
-     * getBranch方法。
-     * @return String类型返回值
-     */
-        public String getBranch() { return branch; }
-    /**
-     * getTimestamp方法。
-     * @return long类型返回值
-     */
-        public long getTimestamp() { return timestamp; }
-    }
+        /**
+         * getState方法。
+         *
+         * @return T类型返回值
+         */
+        public T getState() {
+            return state;
+        }
 
-    /**
-     * 备忘录监听器
-     */
-    @FunctionalInterface
-/**
- * MementoListener接口。
- */
-    public interface MementoListener<T> {
-        void onEvent(EventType event, Snapshot<T> snapshot, int pointer);
+        /**
+         * getLabel方法。
+         *
+         * @return String类型返回值
+         */
+        public String getLabel() {
+            return label;
+        }
+
+        /**
+         * getDescription方法。
+         *
+         * @return String类型返回值
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * getBranch方法。
+         *
+         * @return String类型返回值
+         */
+        public String getBranch() {
+            return branch;
+        }
+
+        /**
+         * getTimestamp方法。
+         *
+         * @return long类型返回值
+         */
+        public long getTimestamp() {
+            return timestamp;
+        }
     }
 }

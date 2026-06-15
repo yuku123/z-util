@@ -1,7 +1,6 @@
 package com.zifang.util.distributes.sequence;
 
 import java.security.SecureRandom;
-import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -24,19 +23,26 @@ public class UuidV7 {
 
     private static final SecureRandom RANDOM = new SecureRandom();
 
-    private UuidV7() {}
+    private UuidV7() {
+    }
 
-    /** 生成 UUIDv7 字符串（36 字符，含 4 个 -）。 */
+    /**
+     * 生成 UUIDv7 字符串（36 字符，含 4 个 -）。
+     */
     public static String next() {
         return format(toBytes(nextMillis(), nextRandom12(), nextRandom62()));
     }
 
-    /** 给定时间戳生成（用于测试 / 写时定）。 */
+    /**
+     * 给定时间戳生成（用于测试 / 写时定）。
+     */
     public static String fromMillis(long epochMillis) {
         return format(toBytes(epochMillis, nextRandom12(), nextRandom62()));
     }
 
-    /** UUID 对象形式。 */
+    /**
+     * UUID 对象形式。
+     */
     public static UUID toUuid(String v7) {
         return UUID.fromString(v7);
     }
@@ -84,10 +90,14 @@ public class UuidV7 {
     private static String format(byte[] b) {
         // 8-4-4-4-12
         StringBuilder sb = new StringBuilder(36);
-        appendHex(sb, b, 0, 4); sb.append('-');
-        appendHex(sb, b, 4, 2); sb.append('-');
-        appendHex(sb, b, 6, 2); sb.append('-');
-        appendHex(sb, b, 8, 2); sb.append('-');
+        appendHex(sb, b, 0, 4);
+        sb.append('-');
+        appendHex(sb, b, 4, 2);
+        sb.append('-');
+        appendHex(sb, b, 6, 2);
+        sb.append('-');
+        appendHex(sb, b, 8, 2);
+        sb.append('-');
         appendHex(sb, b, 10, 6);
         return sb.toString();
     }

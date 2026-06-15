@@ -1,11 +1,6 @@
 package com.zifang.util.workflow.bpmn;
 
-import com.zifang.util.workflow.config.CacheEngine;
-import com.zifang.util.workflow.config.Configurations;
-import com.zifang.util.workflow.config.Connector;
-import com.zifang.util.workflow.config.Engine;
-import com.zifang.util.workflow.config.WorkflowConfiguration;
-import com.zifang.util.workflow.config.WorkflowNode;
+import com.zifang.util.workflow.config.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -300,9 +295,9 @@ public class BpmnModelConverter {
      * For exclusive gateways, the condition expression on the sequence flow
      * is set as the invokeParameter on the TARGET node (the next node after the gateway).
      * This is because the WorkflowRuntimeEngine evaluates conditions from post-nodes.
-     *
+     * <p>
      * For parallel gateways, all post-nodes are activated unconditionally.
-     *
+     * <p>
      * For inclusive gateways, all conditions are evaluated and all matching paths are taken.
      */
     private void wireConnections(List<WorkflowNode> workflowNodes, BpmnDiagram diagram) {

@@ -46,6 +46,11 @@ public interface NodeLifeCycle {
     String getStatus();
 
     /**
+     * 赋值
+     */
+    void setStatus(String status);
+
+    /**
      * 前处理
      */
     void preExecute();
@@ -59,11 +64,6 @@ public interface NodeLifeCycle {
      * 初始化
      */
     void init();
-
-    /**
-     * 赋值
-     */
-    void setStatus(String status);
 
     /**
      * 将这个节点重置为可执行状态

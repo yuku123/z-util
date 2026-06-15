@@ -14,6 +14,7 @@ import java.util.List;
 public class FileClass {
 
     //	private List<Map<Integer, List<Map<String, String>>>> niubi;
+
     /**
      * FileClass方法。
      */
@@ -23,20 +24,18 @@ public class FileClass {
 
     /**
      * FileClass方法。
-     *      * @param obj JFrame类型参数
+     * * @param obj JFrame类型参数
+     *
      * @param jFrame JFrame类型参数
      */
     public FileClass(JFrame obj, JFrame jFrame) {
 
     }
 
-    private void hello() {
-
-    }
-
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -70,6 +69,10 @@ public class FileClass {
         // 调用静态方法
         System.out.println("asdfasdf");
 //		new String(StringUtils.chomp("adsfasdfasdf"));
+    }
+
+    private void hello() {
+
     }
 
 }

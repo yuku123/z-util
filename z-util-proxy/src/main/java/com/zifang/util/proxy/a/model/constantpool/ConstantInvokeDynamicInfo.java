@@ -17,7 +17,7 @@ public class ConstantInvokeDynamicInfo extends AbstractConstantPool {
 
     /**
      * ConstantInvokeDynamicInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public ConstantInvokeDynamicInfo(byte tag) {
         super(tag);
@@ -35,6 +35,7 @@ public class ConstantInvokeDynamicInfo extends AbstractConstantPool {
 
     /**
      * getBootstrapMethodAttrIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getBootstrapMethodAttrIndex() {
@@ -43,6 +44,7 @@ public class ConstantInvokeDynamicInfo extends AbstractConstantPool {
 
     /**
      * getNameIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getNameIndex() {

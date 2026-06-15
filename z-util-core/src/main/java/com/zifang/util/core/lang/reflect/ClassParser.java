@@ -24,16 +24,14 @@ public class ClassParser {
      * 当前针对的解析的类
      */
     private final Class<?> clazz;
-
-    /**
-     * 解析过程使用的参变量
-     */
-    private Long leafIndex;
-
     /**
      * 解析class类
      */
     private final LeafWrapper<Long, Long, ClassParserInfoWrapper> leafWrapper;
+    /**
+     * 解析过程使用的参变量
+     */
+    private Long leafIndex;
 
     /**
      * @param clazz 需要解析的类

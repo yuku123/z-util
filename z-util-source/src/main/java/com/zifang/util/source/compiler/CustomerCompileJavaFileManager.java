@@ -35,7 +35,7 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
     /**
      * 构造自定义编译文件管理器
      *
-     * @param fileManager  标准文件管理器
+     * @param fileManager 标准文件管理器
      * @param classLoader 自定义类加载器
      */
     public CustomerCompileJavaFileManager(JavaFileManager fileManager, CustomerCompileClassLoader classLoader) {
@@ -66,7 +66,7 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
      * 编译器调用此方法获取用于存储编译结果的JavaFileObject。
      * 这里替换为CharSequenceJavaFileObject实现，以便在内存中存储字节码。
      *
-     * @param location 文件位置
+     * @param location  文件位置
      * @param className 类名
      * @param kind      文件类型
      * @param sibling   兄弟文件对象
@@ -180,9 +180,9 @@ public class CustomerCompileJavaFileManager extends ForwardingJavaFileManager<Ja
     /**
      * 添加Java文件对象到缓存
      *
-     * @param location      位置
-     * @param packageName   包名
-     * @param relativeName  相对名称
+     * @param location       位置
+     * @param packageName    包名
+     * @param relativeName   相对名称
      * @param javaFileObject Java文件对象
      */
     public void addJavaFileObject(Location location, String packageName, String relativeName, JavaFileObject javaFileObject) {

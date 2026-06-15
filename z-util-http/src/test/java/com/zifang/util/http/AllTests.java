@@ -10,11 +10,11 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    // Parser 测试
-    CurlParserTest.class,
+        // Parser 测试
+        CurlParserTest.class,
 
-    // Server 测试
-    HttpServerProxyTest.class
+        // Server 测试
+        HttpServerProxyTest.class
 })
 /**
  * AllTests类。

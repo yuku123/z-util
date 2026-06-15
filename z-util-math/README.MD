@@ -330,25 +330,25 @@ util-math
 
 ## 功能对比表
 
-| 功能 | numpy/pandas | util-math |
-|------|-------------|-----------|
-| 多维数组 | ndarray | Num |
-| 一维带标签数组 | Series | Series |
-| 二维表格 | DataFrame | DataFrame |
-| 数组创建 | zeros, ones, arange, linspace | Num.zeros(), Num.ones(), Num.arange(), Num.linspace() |
-| 数组操作 | reshape, transpose, flatten | Num.reshape(), Num.transpose(), Num.flatten() |
-| 算术运算 | +, -, *, /, @ | Num.add(), Num.subtract(), Num.multiply(), Num.divide(), Num.dot() |
-| 统计方法 | sum, mean, max, min, std, var | Num.sum(), Num.mean(), Num.max(), Num.min(), Num.std(), Num.var() |
-| 数学函数 | sin, cos, exp, log, sqrt | Maths.sin(), Maths.cos(), Maths.exp(), Maths.log(), Maths.sqrt() |
-| 矩阵乘法 | dot, matmul | Linalg.dot(), Linalg.matmul() |
-| 矩阵分解 | svd, qr, cholesky | Linalg.svd(), Linalg.qr(), Linalg.cholesky() |
-| 矩阵求逆 | inv | Linalg.inv() |
-| 解方程 | solve | Linalg.solve() |
-| 数据选择 | loc, iloc | Series.loc(), Series.iloc() |
-| 数据过滤 | filter, where | Series.filter(), Series.where() |
-| 数据清洗 | fillna, dropna | Series.fillna(), Series.dropna() |
-| 分组聚合 | groupby | DataFrame.groupby() |
-| 连接合并 | merge, join | DataFrame.merge(), DataFrame.join() |
+| 功能      | numpy/pandas                  | util-math                                                          |
+|---------|-------------------------------|--------------------------------------------------------------------|
+| 多维数组    | ndarray                       | Num                                                                |
+| 一维带标签数组 | Series                        | Series                                                             |
+| 二维表格    | DataFrame                     | DataFrame                                                          |
+| 数组创建    | zeros, ones, arange, linspace | Num.zeros(), Num.ones(), Num.arange(), Num.linspace()              |
+| 数组操作    | reshape, transpose, flatten   | Num.reshape(), Num.transpose(), Num.flatten()                      |
+| 算术运算    | +, -, *, /, @                 | Num.add(), Num.subtract(), Num.multiply(), Num.divide(), Num.dot() |
+| 统计方法    | sum, mean, max, min, std, var | Num.sum(), Num.mean(), Num.max(), Num.min(), Num.std(), Num.var()  |
+| 数学函数    | sin, cos, exp, log, sqrt      | Maths.sin(), Maths.cos(), Maths.exp(), Maths.log(), Maths.sqrt()   |
+| 矩阵乘法    | dot, matmul                   | Linalg.dot(), Linalg.matmul()                                      |
+| 矩阵分解    | svd, qr, cholesky             | Linalg.svd(), Linalg.qr(), Linalg.cholesky()                       |
+| 矩阵求逆    | inv                           | Linalg.inv()                                                       |
+| 解方程     | solve                         | Linalg.solve()                                                     |
+| 数据选择    | loc, iloc                     | Series.loc(), Series.iloc()                                        |
+| 数据过滤    | filter, where                 | Series.filter(), Series.where()                                    |
+| 数据清洗    | fillna, dropna                | Series.fillna(), Series.dropna()                                   |
+| 分组聚合    | groupby                       | DataFrame.groupby()                                                |
+| 连接合并    | merge, join                   | DataFrame.merge(), DataFrame.join()                                |
 
 ## 许可证
 

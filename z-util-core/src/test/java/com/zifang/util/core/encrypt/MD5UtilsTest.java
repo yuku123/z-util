@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
  *
  * @author zifang
  */
+
 /**
  * MD5UtilsTest类。
  */

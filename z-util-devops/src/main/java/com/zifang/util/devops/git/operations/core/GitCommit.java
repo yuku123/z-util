@@ -10,23 +10,38 @@ import java.util.List;
  */
 public class GitCommit {
 
-    /** 完整 SHA-1 */
+    /**
+     * 完整 SHA-1
+     */
     private String sha;
-    /** 短 SHA（前 7-12 位） */
+    /**
+     * 短 SHA（前 7-12 位）
+     */
     private String shortSha;
-    /** 提交信息（完整，多行可能） */
+    /**
+     * 提交信息（完整，多行可能）
+     */
     private String message;
-    /** 提交信息首行（subject） */
+    /**
+     * 提交信息首行（subject）
+     */
     private String shortMessage;
-    /** 作者 */
+    /**
+     * 作者
+     */
     private GitAuthor author;
-    /** 提交者 */
+    /**
+     * 提交者
+     */
     private GitAuthor committer;
-    /** 父提交 SHA 列表（merge commit 通常有 2 个） */
+    /**
+     * 父提交 SHA 列表（merge commit 通常有 2 个）
+     */
     private List<String> parentShas;
 
     /**
      * getSha方法。
+     *
      * @return String类型返回值
      */
     public String getSha() {
@@ -35,7 +50,7 @@ public class GitCommit {
 
     /**
      * setSha方法。
-     *      * @param sha String类型参数
+     * * @param sha String类型参数
      */
     public void setSha(String sha) {
         this.sha = sha;
@@ -43,6 +58,7 @@ public class GitCommit {
 
     /**
      * getShortSha方法。
+     *
      * @return String类型返回值
      */
     public String getShortSha() {
@@ -51,7 +67,7 @@ public class GitCommit {
 
     /**
      * setShortSha方法。
-     *      * @param shortSha String类型参数
+     * * @param shortSha String类型参数
      */
     public void setShortSha(String shortSha) {
         this.shortSha = shortSha;
@@ -59,6 +75,7 @@ public class GitCommit {
 
     /**
      * getMessage方法。
+     *
      * @return String类型返回值
      */
     public String getMessage() {
@@ -67,7 +84,7 @@ public class GitCommit {
 
     /**
      * setMessage方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public void setMessage(String message) {
         this.message = message;
@@ -75,6 +92,7 @@ public class GitCommit {
 
     /**
      * getShortMessage方法。
+     *
      * @return String类型返回值
      */
     public String getShortMessage() {
@@ -83,7 +101,7 @@ public class GitCommit {
 
     /**
      * setShortMessage方法。
-     *      * @param shortMessage String类型参数
+     * * @param shortMessage String类型参数
      */
     public void setShortMessage(String shortMessage) {
         this.shortMessage = shortMessage;
@@ -91,6 +109,7 @@ public class GitCommit {
 
     /**
      * getAuthor方法。
+     *
      * @return GitAuthor类型返回值
      */
     public GitAuthor getAuthor() {
@@ -99,7 +118,7 @@ public class GitCommit {
 
     /**
      * setAuthor方法。
-     *      * @param author GitAuthor类型参数
+     * * @param author GitAuthor类型参数
      */
     public void setAuthor(GitAuthor author) {
         this.author = author;
@@ -107,6 +126,7 @@ public class GitCommit {
 
     /**
      * getCommitter方法。
+     *
      * @return GitAuthor类型返回值
      */
     public GitAuthor getCommitter() {
@@ -115,7 +135,7 @@ public class GitCommit {
 
     /**
      * setCommitter方法。
-     *      * @param committer GitAuthor类型参数
+     * * @param committer GitAuthor类型参数
      */
     public void setCommitter(GitAuthor committer) {
         this.committer = committer;
@@ -123,6 +143,7 @@ public class GitCommit {
 
     /**
      * getParentShas方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getParentShas() {
@@ -131,7 +152,7 @@ public class GitCommit {
 
     /**
      * setParentShas方法。
-     *      * @param parentShas ListString类型参数
+     * * @param parentShas ListString类型参数
      */
     public void setParentShas(List<String> parentShas) {
         this.parentShas = parentShas;

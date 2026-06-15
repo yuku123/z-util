@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 
 /**
  * MD5 消息摘要工具类
@@ -30,13 +29,19 @@ import java.util.Arrays;
  */
 public class MD5Utils {
 
-    /** MD5 算法名称 */
+    /**
+     * MD5 算法名称
+     */
     private static final String ALGORITHM_MD5 = "MD5";
 
-    /** MD5 摘要的十六进制字符串长度 */
+    /**
+     * MD5 摘要的十六进制字符串长度
+     */
     private static final int MD5_HEX_LENGTH = 32;
 
-    /** 默认盐值字节长度 */
+    /**
+     * 默认盐值字节长度
+     */
     private static final int DEFAULT_SALT_LENGTH = 16;
 
     private MD5Utils() {
@@ -94,7 +99,7 @@ public class MD5Utils {
      * 使用指定盐值对字节数组进行 MD5 加密
      *
      * @param inputByteArray 待加密的字节数组
-     * @param salt          盐值字节数组
+     * @param salt           盐值字节数组
      * @return MD5 十六进制小写字符串，若加密失败返回 null
      */
     public static String encryptWithSalt(byte[] inputByteArray, byte[] salt) {

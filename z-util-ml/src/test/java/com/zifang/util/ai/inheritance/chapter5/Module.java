@@ -3,6 +3,7 @@ package com.zifang.util.ml.inheritance.chapter5;
 /**
  * Simple course module abstraction, which defines the Professors teaching the module.
  */
+
 /**
  * Module类。
  */
@@ -22,9 +23,10 @@ public class Module {
      */
     /**
      * Module方法。
-     *      * @param moduleId int类型参数
-     * @param moduleCode String类型参数
-     * @param module String类型参数
+     * * @param moduleId int类型参数
+     *
+     * @param moduleCode   String类型参数
+     * @param module       String类型参数
      * @param professorIds int[]类型参数
      */
     public Module(int moduleId, String moduleCode, String module, int[] professorIds) {
@@ -41,6 +43,7 @@ public class Module {
      */
     /**
      * getModuleId方法。
+     *
      * @return int类型返回值
      */
     public int getModuleId() {
@@ -54,6 +57,7 @@ public class Module {
      */
     /**
      * getModuleCode方法。
+     *
      * @return String类型返回值
      */
     public String getModuleCode() {
@@ -67,6 +71,7 @@ public class Module {
      */
     /**
      * getModuleName方法。
+     *
      * @return String类型返回值
      */
     public String getModuleName() {
@@ -80,6 +85,7 @@ public class Module {
      */
     /**
      * getRandomProfessorId方法。
+     *
      * @return int类型返回值
      */
     public int getRandomProfessorId() {

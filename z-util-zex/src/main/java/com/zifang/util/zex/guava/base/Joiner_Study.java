@@ -40,19 +40,13 @@ import java.util.Map.Entry;
  * @version 1.0
  */
 public class Joiner_Study {
-    String str1 = "a ";
-
-    String str2 = "";
-
-    String str_null = null;
-
-    String str4 = "d";
-
-    String[] arr = new String[]{"a", null, "c"};
-
     static final Joiner joiner = Joiner.on(";").skipNulls(); // 以;分隔，忽略null
-
     static final MapJoiner mapJoin = Joiner.on(";").withKeyValueSeparator("-->"); // key-value分隔符
+    String str1 = "a ";
+    String str2 = "";
+    String str_null = null;
+    String str4 = "d";
+    String[] arr = new String[]{"a", null, "c"};
 
     @Test
     /**

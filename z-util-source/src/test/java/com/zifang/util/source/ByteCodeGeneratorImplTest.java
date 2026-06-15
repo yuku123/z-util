@@ -4,11 +4,10 @@ import com.zifang.util.source.generator.ByteCodeGeneratorImpl;
 import com.zifang.util.source.generator.info.ClassInfo;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * ByteCodeGeneratorImpl 测试
  */
+
 /**
  * ByteCodeGeneratorImplTest类。
  */

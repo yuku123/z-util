@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -74,7 +73,7 @@ public class TimestampUtil {
      * 将Timestamp格式化为指定格式的字符串
      *
      * @param timestamp 要格式化的时间戳，不能为null
-     * @param pattern  时间格式模式，如 "yyyy-MM-dd HH:mm:ss"
+     * @param pattern   时间格式模式，如 "yyyy-MM-dd HH:mm:ss"
      * @return 格式化后的时间字符串
      * @throws NullPointerException if timestamp is null
      */
@@ -175,7 +174,7 @@ public class TimestampUtil {
      * 为Timestamp增加指定的毫秒数
      *
      * @param timestamp 原时间戳，不能为null
-     * @param millis   要增加的毫秒数，可以为负数
+     * @param millis    要增加的毫秒数，可以为负数
      * @return 增加后的新Timestamp对象
      * @throws NullPointerException if timestamp is null
      */

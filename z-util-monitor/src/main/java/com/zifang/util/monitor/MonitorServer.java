@@ -37,10 +37,9 @@ import java.util.concurrent.Executors;
 public class MonitorServer {
 
     public static final int DEFAULT_PORT = 8849;
-
-    private HttpServer httpServer;
     private final int port;
     private final MetricsCollector collector;
+    private HttpServer httpServer;
     private volatile boolean started = false;
 
     private MonitorServer(int port) {
@@ -53,6 +52,15 @@ public class MonitorServer {
      */
     public static Builder builder() {
         return new Builder();
+    }
+
+    private static void sendResponse(HttpExchange exchange, String contentType, String response) throws IOException {
+        exchange.getResponseHeaders().set("Content-Type", contentType);
+        byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
+        exchange.sendResponseHeaders(200, bytes.length);
+        try (OutputStream os = exchange.getResponseBody()) {
+            os.write(bytes);
+        }
     }
 
     /**
@@ -109,6 +117,7 @@ public class MonitorServer {
 
     /**
      * getPort方法。
+     *
      * @return int类型返回值
      */
     public int getPort() {
@@ -117,6 +126,7 @@ public class MonitorServer {
 
     /**
      * getCollector方法。
+     *
      * @return MetricsCollector类型返回值
      */
     public MetricsCollector getCollector() {
@@ -125,21 +135,23 @@ public class MonitorServer {
 
     /**
      * getRegistry方法。
+     *
      * @return MetricsRegistry类型返回值
      */
     public MetricsRegistry getRegistry() {
         return collector.getRegistry();
     }
 
+    // ========== 注册方法 ==========
+
     /**
      * isStarted方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isStarted() {
         return started;
     }
-
-    // ========== 注册方法 ==========
 
     /**
      * 注册自定义指标
@@ -157,6 +169,8 @@ public class MonitorServer {
         return this;
     }
 
+    // ========== HTTP Handlers ==========
+
     /**
      * 注册自定义指标（带描述和单位）
      */
@@ -164,8 +178,6 @@ public class MonitorServer {
         collector.getRegistry().register(name, MetricsSnapshot.Category.CUSTOM, provider, description, unit);
         return this;
     }
-
-    // ========== HTTP Handlers ==========
 
     static class IndexHandler implements HttpHandler {
         private final MonitorServer server;
@@ -175,10 +187,10 @@ public class MonitorServer {
         }
 
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
+        /**
+         * handle方法。
+         *      * @param exchange HttpExchange类型参数
+         */
         public void handle(HttpExchange exchange) throws IOException {
             String response = new HtmlExporter(server.getRegistry()).export();
             sendResponse(exchange, "text/html; charset=utf-8", response);
@@ -193,10 +205,10 @@ public class MonitorServer {
         }
 
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
+        /**
+         * handle方法。
+         *      * @param exchange HttpExchange类型参数
+         */
         public void handle(HttpExchange exchange) throws IOException {
             String response = new JsonExporter(server.getRegistry()).export();
             sendResponse(exchange, "application/json; charset=utf-8", response);
@@ -211,10 +223,10 @@ public class MonitorServer {
         }
 
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
+        /**
+         * handle方法。
+         *      * @param exchange HttpExchange类型参数
+         */
         public void handle(HttpExchange exchange) throws IOException {
             String status = server.getRegistry().isEnabled() ? "UP" : "DOWN";
             String response = "{\"status\":\"" + status + "\",\"timestamp\":" + System.currentTimeMillis() + "}";
@@ -230,23 +242,14 @@ public class MonitorServer {
         }
 
         @Override
-    /**
-     * handle方法。
-     *      * @param exchange HttpExchange类型参数
-     */
+        /**
+         * handle方法。
+         *      * @param exchange HttpExchange类型参数
+         */
         public void handle(HttpExchange exchange) throws IOException {
             // 重定向到 /json
             exchange.getResponseHeaders().set("Location", "/json");
             exchange.sendResponseHeaders(302, -1);
-        }
-    }
-
-    private static void sendResponse(HttpExchange exchange, String contentType, String response) throws IOException {
-        exchange.getResponseHeaders().set("Content-Type", contentType);
-        byte[] bytes = response.getBytes(StandardCharsets.UTF_8);
-        exchange.sendResponseHeaders(200, bytes.length);
-        try (OutputStream os = exchange.getResponseBody()) {
-            os.write(bytes);
         }
     }
 
@@ -256,11 +259,12 @@ public class MonitorServer {
         private int port = DEFAULT_PORT;
         private boolean registerDefaultMonitor = false;
 
-    /**
-     * port方法。
-     *      * @param port int类型参数
-     * @return Builder类型返回值
-     */
+        /**
+         * port方法。
+         * * @param port int类型参数
+         *
+         * @return Builder类型返回值
+         */
         public Builder port(int port) {
             this.port = port;
             return this;
@@ -274,10 +278,11 @@ public class MonitorServer {
             return this;
         }
 
-    /**
-     * build方法。
-     * @return MonitorServer类型返回值
-     */
+        /**
+         * build方法。
+         *
+         * @return MonitorServer类型返回值
+         */
         public MonitorServer build() {
             MonitorServer server = new MonitorServer(port);
             if (registerDefaultMonitor) {

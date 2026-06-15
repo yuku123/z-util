@@ -5,6 +5,7 @@ package com.zifang.util.xml.tokenizer;
  *
  * @author zifang
  */
+
 /**
  * TokenType枚举。
  */
@@ -62,6 +63,7 @@ public enum TokenType {
 
     /**
      * getTokenCode方法。
+     *
      * @return int类型返回值
      */
     public int getTokenCode() {

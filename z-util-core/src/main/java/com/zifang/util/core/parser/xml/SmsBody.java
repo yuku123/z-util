@@ -27,6 +27,7 @@ public class SmsBody {
 
     /**
      * getContent方法。
+     *
      * @return String类型返回值
      */
     public String getContent() {
@@ -44,6 +45,7 @@ public class SmsBody {
 
     /**
      * getSourceAddr方法。
+     *
      * @return String类型返回值
      */
     public String getSourceAddr() {
@@ -61,6 +63,7 @@ public class SmsBody {
 
     /**
      * getDestAddr方法。
+     *
      * @return String类型返回值
      */
     public String getDestAddr() {

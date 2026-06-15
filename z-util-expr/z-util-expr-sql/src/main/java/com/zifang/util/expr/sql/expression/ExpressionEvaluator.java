@@ -6,14 +6,14 @@ import com.zifang.util.expr.sql.SqlFunctionRegistry;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 
 /**
  * SQL 表达式求值器。
  * 采用两阶段架构：
  * 1. 解析阶段（parse）→ 返回 AST（延迟求值节点）
  * 2. 求值阶段（eval）→ 对 AST 做行级求值
- *
+ * <p>
  * 这样 column ref 在解析时保留为 AST 节点，在求值时才从 row 中取值。
  */
 public class ExpressionEvaluator {
@@ -22,6 +22,102 @@ public class ExpressionEvaluator {
 
     public ExpressionEvaluator() {
         this.registry = SqlFunctionRegistry.get();
+    }
+
+    private static Object doArith(Object a, String op, Object b) {
+        if (a == null || b == null) return null;
+        double av = toDoubleStatic(a), bv = toDoubleStatic(b);
+        switch (op) {
+            case "+":
+                return av + bv;
+            case "-":
+                return av - bv;
+            case "*":
+                return av * bv;
+            case "/":
+                return bv == 0 ? null : av / bv;
+            case "%":
+                return bv == 0 ? null : av % bv;
+        }
+        return null;
+    }
+
+    private static Object staticDoArith(Object a, String op, Object b) {
+        return doArith(a, op, b);
+    }
+
+    // -------------------------------------------------------------------------
+    // 公开 API
+    // -------------------------------------------------------------------------
+
+    private static Object doCompare(Object a, String op, Object b) {
+        if (a == null && b == null) return "=".equals(op) || "==".equals(op) ? Boolean.TRUE : Boolean.FALSE;
+        if (a == null || b == null) return "!=".equals(op) || "<>".equals(op) ? Boolean.TRUE : Boolean.FALSE;
+        if ("=".equals(op) || "==".equals(op)) return Objects.equals(a, b) ? Boolean.TRUE : Boolean.FALSE;
+        if ("<>".equals(op) || "!=".equals(op)) return !Objects.equals(a, b) ? Boolean.TRUE : Boolean.FALSE;
+        try {
+            double av = toDoubleStatic(a), bv = toDoubleStatic(b);
+            switch (op) {
+                case "<":
+                    return av < bv ? Boolean.TRUE : Boolean.FALSE;
+                case ">":
+                    return av > bv ? Boolean.TRUE : Boolean.FALSE;
+                case "<=":
+                    return av <= bv ? Boolean.TRUE : Boolean.FALSE;
+                case ">=":
+                    return av >= bv ? Boolean.TRUE : Boolean.FALSE;
+                case "LIKE":
+                    return matchLikeStatic(a.toString(), b.toString()) ? Boolean.TRUE : Boolean.FALSE;
+            }
+        } catch (NumberFormatException e) {
+            int cmp = a.toString().compareTo(b.toString());
+            switch (op) {
+                case "<":
+                    return cmp < 0 ? Boolean.TRUE : Boolean.FALSE;
+                case ">":
+                    return cmp > 0 ? Boolean.TRUE : Boolean.FALSE;
+                case "<=":
+                    return cmp <= 0 ? Boolean.TRUE : Boolean.FALSE;
+                case ">=":
+                    return cmp >= 0 ? Boolean.TRUE : Boolean.FALSE;
+            }
+        }
+        return Boolean.FALSE;
+    }
+
+    private static Object staticDoCompare(Object a, String op, Object b) {
+        return doCompare(a, op, b);
+    }
+
+    private static boolean matchLikeStatic(String text, String pattern) {
+        String regex = pattern.replace(".", "\\.").replace("%", ".*").replace("_", ".");
+        return Pattern.matches(regex, text);
+    }
+
+    // -------------------------------------------------------------------------
+    // 解析阶段
+    // -------------------------------------------------------------------------
+
+    private static boolean toBoolStatic(Object v) {
+        if (v == null) return false;
+        if (v instanceof Boolean) return (Boolean) v;
+        if (v instanceof Number) return ((Number) v).doubleValue() != 0;
+        String s = v.toString().toLowerCase();
+        return "true".equals(s) || "1".equals(s) || "t".equals(s);
+    }
+
+    // -------------------------------------------------------------------------
+    // AST 节点层次
+    // -------------------------------------------------------------------------
+
+    private static double toDoubleStatic(Object v) {
+        if (v == null) return 0;
+        if (v instanceof Number) return ((Number) v).doubleValue();
+        try {
+            return Double.parseDouble(v.toString());
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     public ExpressionEvaluator register(String name, SqlFunctionRegistry.SqlUdf udf) {
@@ -33,10 +129,6 @@ public class ExpressionEvaluator {
         registry.registerBuiltin();
         return this;
     }
-
-    // -------------------------------------------------------------------------
-    // 公开 API
-    // -------------------------------------------------------------------------
 
     /**
      * 常量折叠：优化表达式中的常量部分。
@@ -67,10 +159,6 @@ public class ExpressionEvaluator {
         return cols;
     }
 
-    // -------------------------------------------------------------------------
-    // 解析阶段
-    // -------------------------------------------------------------------------
-
     private Node parse(String expr) {
         try {
             Tokenizer t = new Tokenizer(expr.trim());
@@ -82,129 +170,6 @@ public class ExpressionEvaluator {
             throw new SqlException("Failed to parse expression: " + expr, e);
         }
     }
-
-    // -------------------------------------------------------------------------
-    // AST 节点层次
-    // -------------------------------------------------------------------------
-
-    abstract static class Node {
-        abstract Object eval(Map<String, Object> row);
-    }
-
-    static class ConstNode extends Node {
-        final Object value;
-        ConstNode(Object v) { this.value = v; }
-        Object eval(Map<String, Object> row) { return value; }
-        @Override public String toString() { return "Const(" + value + ")"; }
-    }
-
-    /** 列引用 */
-    static class ColNode extends Node {
-        final String name;
-        ColNode(String n) { this.name = n; }
-        Object eval(Map<String, Object> row) {
-            if (row.containsKey(name)) return row.get(name);
-            if (row.containsKey(name.toLowerCase())) return row.get(name.toLowerCase());
-            if (row.containsKey(name.toUpperCase())) return row.get(name.toUpperCase());
-            return null;
-        }
-        @Override public String toString() { return "Col(" + name + ")"; }
-    }
-
-    /** 函数调用 */
-    static class FuncNode extends Node {
-        final String name;
-        final Node[] args;
-        FuncNode(String n, Node[] a) { this.name = n; this.args = a; }
-        Object eval(Map<String, Object> row) {
-            SqlFunctionDef def = SqlFunctionRegistry.get().find(name);
-            if (def == null) throw new SqlException("Unknown function: " + name);
-            Object[] resolvedArgs = new Object[args.length];
-            for (int i = 0; i < args.length; i++) resolvedArgs[i] = args[i].eval(row);
-            return def.exec(row, resolvedArgs);
-        }
-        @Override public String toString() { return name + "(" + Arrays.toString(args) + ")"; }
-    }
-
-    /** 字符串字面量 */
-    static class StrNode extends Node {
-        final String value;
-        StrNode(String v) { this.value = v; }
-        Object eval(Map<String, Object> row) { return value; }
-        @Override public String toString() { return "Str('" + value + "')"; }
-    }
-
-    /** 比较运算 */
-    static class CompareNode extends Node {
-        final Node left, right;
-        final String op; // = <> != < > <= >= LIKE
-        CompareNode(Node l, String o, Node r) { this.left = l; this.op = o; this.right = r; }
-        Object eval(Map<String, Object> row) {
-            Object a = left.eval(row), b = right.eval(row);
-            return staticDoCompare(a, op, b);
-        }
-        @Override public String toString() { return left + " " + op + " " + right; }
-    }
-
-    /** 算术运算 */
-    static class ArithNode extends Node {
-        final Node left, right;
-        final String op; // + - * / %
-        ArithNode(Node l, String o, Node r) { this.left = l; this.op = o; this.right = r; }
-        Object eval(Map<String, Object> row) {
-            Object a = left.eval(row), b = right.eval(row);
-            if (a == null || b == null) return null;
-            return staticDoArith(a, op, b);
-        }
-        @Override public String toString() { return left + " " + op + " " + right; }
-    }
-
-    /** 逻辑 AND */
-    static class AndNode extends Node {
-        final Node left, right;
-        AndNode(Node l, Node r) { this.left = l; this.right = r; }
-        Object eval(Map<String, Object> row) {
-            return toBoolStatic(left.eval(row)) && toBoolStatic(right.eval(row)) ? Boolean.TRUE : Boolean.FALSE;
-        }
-        @Override public String toString() { return left + " AND " + right; }
-    }
-
-    /** 逻辑 OR */
-    static class OrNode extends Node {
-        final Node left, right;
-        OrNode(Node l, Node r) { this.left = l; this.right = r; }
-        Object eval(Map<String, Object> row) {
-            return toBoolStatic(left.eval(row)) || toBoolStatic(right.eval(row)) ? Boolean.TRUE : Boolean.FALSE;
-        }
-        @Override public String toString() { return left + " OR " + right; }
-    }
-
-    /** 逻辑 NOT */
-    static class NotNode extends Node {
-        final Node child;
-        NotNode(Node c) { this.child = c; }
-        Object eval(Map<String, Object> row) {
-            return !toBoolStatic(child.eval(row)) ? Boolean.TRUE : Boolean.FALSE;
-        }
-        @Override public String toString() { return "NOT " + child; }
-    }
-
-    /** 一元负号 */
-    static class NegNode extends Node {
-        final Node child;
-        NegNode(Node c) { this.child = c; }
-        Object eval(Map<String, Object> row) {
-            Object v = child.eval(row);
-            if (v == null) return null;
-            if (v instanceof Number) return -((Number) v).doubleValue();
-            return null;
-        }
-        @Override public String toString() { return "-" + child; }
-    }
-
-    // -------------------------------------------------------------------------
-    // 辅助方法
-    // -------------------------------------------------------------------------
 
     private boolean containsColumnRef(Node n) {
         if (n == null) return false;
@@ -223,8 +188,14 @@ public class ExpressionEvaluator {
             ArithNode a = (ArithNode) n;
             return containsColumnRef(a.left) || containsColumnRef(a.right);
         }
-        if (n instanceof AndNode) { AndNode a = (AndNode) n; return containsColumnRef(a.left) || containsColumnRef(a.right); }
-        if (n instanceof OrNode) { OrNode o = (OrNode) n; return containsColumnRef(o.left) || containsColumnRef(o.right); }
+        if (n instanceof AndNode) {
+            AndNode a = (AndNode) n;
+            return containsColumnRef(a.left) || containsColumnRef(a.right);
+        }
+        if (n instanceof OrNode) {
+            OrNode o = (OrNode) n;
+            return containsColumnRef(o.left) || containsColumnRef(o.right);
+        }
         if (n instanceof NotNode) return containsColumnRef(((NotNode) n).child);
         if (n instanceof NegNode) return containsColumnRef(((NegNode) n).child);
         return false;
@@ -235,12 +206,22 @@ public class ExpressionEvaluator {
         if (n instanceof ColNode) cols.add(((ColNode) n).name);
         else if (n instanceof FuncNode) for (Node arg : ((FuncNode) n).args) collectColumns(arg, cols);
         else if (n instanceof CompareNode) {
-            CompareNode c = (CompareNode) n; collectColumns(c.left, cols); collectColumns(c.right, cols);
+            CompareNode c = (CompareNode) n;
+            collectColumns(c.left, cols);
+            collectColumns(c.right, cols);
         } else if (n instanceof ArithNode) {
-            ArithNode a = (ArithNode) n; collectColumns(a.left, cols); collectColumns(a.right, cols);
-        } else if (n instanceof AndNode) { AndNode a = (AndNode) n; collectColumns(a.left, cols); collectColumns(a.right, cols); }
-        else if (n instanceof OrNode) { OrNode o = (OrNode) n; collectColumns(o.left, cols); collectColumns(o.right, cols); }
-        else if (n instanceof NotNode) collectColumns(((NotNode) n).child, cols);
+            ArithNode a = (ArithNode) n;
+            collectColumns(a.left, cols);
+            collectColumns(a.right, cols);
+        } else if (n instanceof AndNode) {
+            AndNode a = (AndNode) n;
+            collectColumns(a.left, cols);
+            collectColumns(a.right, cols);
+        } else if (n instanceof OrNode) {
+            OrNode o = (OrNode) n;
+            collectColumns(o.left, cols);
+            collectColumns(o.right, cols);
+        } else if (n instanceof NotNode) collectColumns(((NotNode) n).child, cols);
         else if (n instanceof NegNode) collectColumns(((NegNode) n).child, cols);
     }
 
@@ -248,88 +229,267 @@ public class ExpressionEvaluator {
         return n == null ? null : n.eval(row);
     }
 
-    private static Object doArith(Object a, String op, Object b) {
-        if (a == null || b == null) return null;
-        double av = toDoubleStatic(a), bv = toDoubleStatic(b);
-        switch (op) {
-            case "+": return av + bv;
-            case "-": return av - bv;
-            case "*": return av * bv;
-            case "/": return bv == 0 ? null : av / bv;
-            case "%": return bv == 0 ? null : av % bv;
+    enum TokenType {COL, NUM, STR, BOOL, NULL_LIT, OP, LPAREN, RPAREN, COMMA, FUNC, EOF}
+
+    // -------------------------------------------------------------------------
+    // 辅助方法
+    // -------------------------------------------------------------------------
+
+    abstract static class Node {
+        abstract Object eval(Map<String, Object> row);
+    }
+
+    static class ConstNode extends Node {
+        final Object value;
+
+        ConstNode(Object v) {
+            this.value = v;
         }
-        return null;
-    }
 
-    private static Object staticDoArith(Object a, String op, Object b) { return doArith(a, op, b); }
-
-    private static Object doCompare(Object a, String op, Object b) {
-        if (a == null && b == null) return "=".equals(op) || "==".equals(op) ? Boolean.TRUE : Boolean.FALSE;
-        if (a == null || b == null) return "!=".equals(op) || "<>".equals(op) ? Boolean.TRUE : Boolean.FALSE;
-        if ("=".equals(op) || "==".equals(op)) return Objects.equals(a, b) ? Boolean.TRUE : Boolean.FALSE;
-        if ("<>".equals(op) || "!=".equals(op)) return !Objects.equals(a, b) ? Boolean.TRUE : Boolean.FALSE;
-        try {
-            double av = toDoubleStatic(a), bv = toDoubleStatic(b);
-            switch (op) {
-                case "<":  return av < bv ? Boolean.TRUE : Boolean.FALSE;
-                case ">":  return av > bv ? Boolean.TRUE : Boolean.FALSE;
-                case "<=": return av <= bv ? Boolean.TRUE : Boolean.FALSE;
-                case ">=": return av >= bv ? Boolean.TRUE : Boolean.FALSE;
-                case "LIKE": return matchLikeStatic(a.toString(), b.toString()) ? Boolean.TRUE : Boolean.FALSE;
-            }
-        } catch (NumberFormatException e) {
-            int cmp = a.toString().compareTo(b.toString());
-            switch (op) {
-                case "<":  return cmp < 0 ? Boolean.TRUE : Boolean.FALSE;
-                case ">":  return cmp > 0 ? Boolean.TRUE : Boolean.FALSE;
-                case "<=": return cmp <= 0 ? Boolean.TRUE : Boolean.FALSE;
-                case ">=": return cmp >= 0 ? Boolean.TRUE : Boolean.FALSE;
-            }
+        Object eval(Map<String, Object> row) {
+            return value;
         }
-        return Boolean.FALSE;
+
+        @Override
+        public String toString() {
+            return "Const(" + value + ")";
+        }
     }
 
-    private static Object staticDoCompare(Object a, String op, Object b) { return doCompare(a, op, b); }
+    /**
+     * 列引用
+     */
+    static class ColNode extends Node {
+        final String name;
 
-    private static boolean matchLikeStatic(String text, String pattern) {
-        String regex = pattern.replace(".", "\\.").replace("%", ".*").replace("_", ".");
-        return Pattern.matches(regex, text);
+        ColNode(String n) {
+            this.name = n;
+        }
+
+        Object eval(Map<String, Object> row) {
+            if (row.containsKey(name)) return row.get(name);
+            if (row.containsKey(name.toLowerCase())) return row.get(name.toLowerCase());
+            if (row.containsKey(name.toUpperCase())) return row.get(name.toUpperCase());
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return "Col(" + name + ")";
+        }
     }
 
-    private static boolean toBoolStatic(Object v) {
-        if (v == null) return false;
-        if (v instanceof Boolean) return (Boolean) v;
-        if (v instanceof Number) return ((Number) v).doubleValue() != 0;
-        String s = v.toString().toLowerCase();
-        return "true".equals(s) || "1".equals(s) || "t".equals(s);
+    /**
+     * 函数调用
+     */
+    static class FuncNode extends Node {
+        final String name;
+        final Node[] args;
+
+        FuncNode(String n, Node[] a) {
+            this.name = n;
+            this.args = a;
+        }
+
+        Object eval(Map<String, Object> row) {
+            SqlFunctionDef def = SqlFunctionRegistry.get().find(name);
+            if (def == null) throw new SqlException("Unknown function: " + name);
+            Object[] resolvedArgs = new Object[args.length];
+            for (int i = 0; i < args.length; i++) resolvedArgs[i] = args[i].eval(row);
+            return def.exec(row, resolvedArgs);
+        }
+
+        @Override
+        public String toString() {
+            return name + "(" + Arrays.toString(args) + ")";
+        }
     }
 
-    private static double toDoubleStatic(Object v) {
-        if (v == null) return 0;
-        if (v instanceof Number) return ((Number) v).doubleValue();
-        try { return Double.parseDouble(v.toString()); } catch (Exception e) { return 0; }
+    /**
+     * 字符串字面量
+     */
+    static class StrNode extends Node {
+        final String value;
+
+        StrNode(String v) {
+            this.value = v;
+        }
+
+        Object eval(Map<String, Object> row) {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return "Str('" + value + "')";
+        }
+    }
+
+    /**
+     * 比较运算
+     */
+    static class CompareNode extends Node {
+        final Node left, right;
+        final String op; // = <> != < > <= >= LIKE
+
+        CompareNode(Node l, String o, Node r) {
+            this.left = l;
+            this.op = o;
+            this.right = r;
+        }
+
+        Object eval(Map<String, Object> row) {
+            Object a = left.eval(row), b = right.eval(row);
+            return staticDoCompare(a, op, b);
+        }
+
+        @Override
+        public String toString() {
+            return left + " " + op + " " + right;
+        }
+    }
+
+    /**
+     * 算术运算
+     */
+    static class ArithNode extends Node {
+        final Node left, right;
+        final String op; // + - * / %
+
+        ArithNode(Node l, String o, Node r) {
+            this.left = l;
+            this.op = o;
+            this.right = r;
+        }
+
+        Object eval(Map<String, Object> row) {
+            Object a = left.eval(row), b = right.eval(row);
+            if (a == null || b == null) return null;
+            return staticDoArith(a, op, b);
+        }
+
+        @Override
+        public String toString() {
+            return left + " " + op + " " + right;
+        }
+    }
+
+    /**
+     * 逻辑 AND
+     */
+    static class AndNode extends Node {
+        final Node left, right;
+
+        AndNode(Node l, Node r) {
+            this.left = l;
+            this.right = r;
+        }
+
+        Object eval(Map<String, Object> row) {
+            return toBoolStatic(left.eval(row)) && toBoolStatic(right.eval(row)) ? Boolean.TRUE : Boolean.FALSE;
+        }
+
+        @Override
+        public String toString() {
+            return left + " AND " + right;
+        }
+    }
+
+    /**
+     * 逻辑 OR
+     */
+    static class OrNode extends Node {
+        final Node left, right;
+
+        OrNode(Node l, Node r) {
+            this.left = l;
+            this.right = r;
+        }
+
+        Object eval(Map<String, Object> row) {
+            return toBoolStatic(left.eval(row)) || toBoolStatic(right.eval(row)) ? Boolean.TRUE : Boolean.FALSE;
+        }
+
+        @Override
+        public String toString() {
+            return left + " OR " + right;
+        }
+    }
+
+    /**
+     * 逻辑 NOT
+     */
+    static class NotNode extends Node {
+        final Node child;
+
+        NotNode(Node c) {
+            this.child = c;
+        }
+
+        Object eval(Map<String, Object> row) {
+            return !toBoolStatic(child.eval(row)) ? Boolean.TRUE : Boolean.FALSE;
+        }
+
+        @Override
+        public String toString() {
+            return "NOT " + child;
+        }
     }
 
     // -------------------------------------------------------------------------
     // Tokenizer
     // -------------------------------------------------------------------------
 
-    enum TokenType { COL, NUM, STR, BOOL, NULL_LIT, OP, LPAREN, RPAREN, COMMA, FUNC, EOF }
+    /**
+     * 一元负号
+     */
+    static class NegNode extends Node {
+        final Node child;
+
+        NegNode(Node c) {
+            this.child = c;
+        }
+
+        Object eval(Map<String, Object> row) {
+            Object v = child.eval(row);
+            if (v == null) return null;
+            if (v instanceof Number) return -((Number) v).doubleValue();
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return "-" + child;
+        }
+    }
 
     static class Token {
         final TokenType type;
         final String value;
         final int precedence;
-        Token(TokenType t, String v) { this(t, v, 0); }
-        Token(TokenType t, String v, int p) { this.type = t; this.value = v; this.precedence = p; }
-        static Token eof() { return new Token(TokenType.EOF, ""); }
+
+        Token(TokenType t, String v) {
+            this(t, v, 0);
+        }
+
+        Token(TokenType t, String v, int p) {
+            this.type = t;
+            this.value = v;
+            this.precedence = p;
+        }
+
+        static Token eof() {
+            return new Token(TokenType.EOF, "");
+        }
     }
 
     private class Tokenizer {
         private final String s;
         private int pos = 0;
 
-        Tokenizer(String s) { this.s = s; }
+        Tokenizer(String s) {
+            this.s = s;
+        }
 
         Token next() {
             if (pos >= s.length()) return Token.eof();
@@ -337,9 +497,18 @@ public class ExpressionEvaluator {
             if (pos >= s.length()) return Token.eof();
             char c = s.charAt(pos);
             if (c == '\'' || c == '"') return readString(c);
-            if (c == '(') { pos++; return new Token(TokenType.LPAREN, "("); }
-            if (c == ')') { pos++; return new Token(TokenType.RPAREN, ")"); }
-            if (c == ',') { pos++; return new Token(TokenType.COMMA, ","); }
+            if (c == '(') {
+                pos++;
+                return new Token(TokenType.LPAREN, "(");
+            }
+            if (c == ')') {
+                pos++;
+                return new Token(TokenType.RPAREN, ")");
+            }
+            if (c == ',') {
+                pos++;
+                return new Token(TokenType.COMMA, ",");
+            }
             if (Character.isDigit(c) || (c == '.' && pos + 1 < s.length() && Character.isDigit(s.charAt(pos + 1)))) {
                 return readNumber();
             }
@@ -353,7 +522,9 @@ public class ExpressionEvaluator {
             return list.toArray(new Token[0]);
         }
 
-        private void skipWs() { while (pos < s.length() && Character.isWhitespace(s.charAt(pos))) pos++; }
+        private void skipWs() {
+            while (pos < s.length() && Character.isWhitespace(s.charAt(pos))) pos++;
+        }
 
         private Token readString(char quote) {
             int start = ++pos;
@@ -368,7 +539,8 @@ public class ExpressionEvaluator {
 
         private Token readNumber() {
             int start = pos;
-            while (pos < s.length() && (Character.isDigit(s.charAt(pos)) || s.charAt(pos) == '.' || s.charAt(pos) == 'e' || s.charAt(pos) == 'E' || s.charAt(pos) == '+' || s.charAt(pos) == '-')) pos++;
+            while (pos < s.length() && (Character.isDigit(s.charAt(pos)) || s.charAt(pos) == '.' || s.charAt(pos) == 'e' || s.charAt(pos) == 'E' || s.charAt(pos) == '+' || s.charAt(pos) == '-'))
+                pos++;
             return new Token(TokenType.NUM, s.substring(start, pos));
         }
 
@@ -389,7 +561,8 @@ public class ExpressionEvaluator {
                 return new Token(TokenType.OP, String.valueOf(c), prec);
             }
             int start = pos;
-            while (pos < s.length() && (Character.isLetterOrDigit(s.charAt(pos)) || s.charAt(pos) == '_' || s.charAt(pos) == '.')) pos++;
+            while (pos < s.length() && (Character.isLetterOrDigit(s.charAt(pos)) || s.charAt(pos) == '_' || s.charAt(pos) == '.'))
+                pos++;
             String word = s.substring(start, pos).toUpperCase();
             if (word.equals("NULL")) return new Token(TokenType.NULL_LIT, "NULL");
             if (word.equals("TRUE")) return new Token(TokenType.BOOL, "TRUE");
@@ -416,31 +589,45 @@ public class ExpressionEvaluator {
         private final Token[] tokens;
         private int pos = 0;
 
-        Parser(Token[] tokens) { this.tokens = tokens; }
+        Parser(Token[] tokens) {
+            this.tokens = tokens;
+        }
 
-        Node parseExpr() { return parseLogicalOr(); }
+        Node parseExpr() {
+            return parseLogicalOr();
+        }
 
         private Node parseLogicalOr() {
             Node left = parseLogicalAnd();
-            while (matchOp("OR")) { pos++; left = new OrNode(left, parseLogicalAnd()); }
+            while (matchOp("OR")) {
+                pos++;
+                left = new OrNode(left, parseLogicalAnd());
+            }
             return left;
         }
 
         private Node parseLogicalAnd() {
             Node left = parseNot();
-            while (matchOp("AND")) { pos++; left = new AndNode(left, parseNot()); }
+            while (matchOp("AND")) {
+                pos++;
+                left = new AndNode(left, parseNot());
+            }
             return left;
         }
 
         private Node parseNot() {
-            if (matchOp("NOT")) { pos++; return new NotNode(parseComparison()); }
+            if (matchOp("NOT")) {
+                pos++;
+                return new NotNode(parseComparison());
+            }
             return parseComparison();
         }
 
         private Node parseComparison() {
             Node left = parseAddSub();
             while (pos < tokens.length && tokens[pos].type == TokenType.OP && tokens[pos].precedence >= 7) {
-                String op = tokens[pos].value; pos++;
+                String op = tokens[pos].value;
+                pos++;
                 Node right = parseAddSub();
                 left = new CompareNode(left, op, right);
             }
@@ -450,7 +637,8 @@ public class ExpressionEvaluator {
         private Node parseAddSub() {
             Node left = parseMulDiv();
             while (pos < tokens.length && tokens[pos].type == TokenType.OP && (tokens[pos].value.equals("+") || tokens[pos].value.equals("-"))) {
-                String op = tokens[pos].value; pos++;
+                String op = tokens[pos].value;
+                pos++;
                 Node right = parseMulDiv();
                 left = new ArithNode(left, op, right);
             }
@@ -460,7 +648,8 @@ public class ExpressionEvaluator {
         private Node parseMulDiv() {
             Node left = parseUnary();
             while (pos < tokens.length && tokens[pos].type == TokenType.OP && (tokens[pos].value.equals("*") || tokens[pos].value.equals("/") || tokens[pos].value.equals("%"))) {
-                String op = tokens[pos].value; pos++;
+                String op = tokens[pos].value;
+                pos++;
                 Node right = parseUnary();
                 left = new ArithNode(left, op, right);
             }
@@ -469,10 +658,12 @@ public class ExpressionEvaluator {
 
         private Node parseUnary() {
             if (pos < tokens.length && tokens[pos].type == TokenType.OP && tokens[pos].value.equals("-")) {
-                pos++; return new NegNode(parseAtom());
+                pos++;
+                return new NegNode(parseAtom());
             }
             if (pos < tokens.length && tokens[pos].type == TokenType.OP && tokens[pos].value.equals("+")) {
-                pos++; return parseAtom();
+                pos++;
+                return parseAtom();
             }
             return parseAtom();
         }
@@ -491,17 +682,23 @@ public class ExpressionEvaluator {
                     } catch (NumberFormatException e) {
                         return new ConstNode(new BigDecimal(tok.value));
                     }
-                case STR:    return new StrNode(tok.value);
-                case BOOL:   return new ConstNode(Boolean.parseBoolean(tok.value));
-                case NULL_LIT: return new ConstNode(null);
-                case FUNC:   return parseFuncall(tok.value);
+                case STR:
+                    return new StrNode(tok.value);
+                case BOOL:
+                    return new ConstNode(Boolean.parseBoolean(tok.value));
+                case NULL_LIT:
+                    return new ConstNode(null);
+                case FUNC:
+                    return parseFuncall(tok.value);
                 case LPAREN: {
                     Node result = parseExpr();
                     if (pos < tokens.length && tokens[pos].type == TokenType.RPAREN) pos++;
                     return result;
                 }
-                case COL:    return new ColNode(tok.value);
-                default:     return new ConstNode(tok.value);
+                case COL:
+                    return new ColNode(tok.value);
+                default:
+                    return new ConstNode(tok.value);
             }
         }
 
@@ -526,7 +723,8 @@ public class ExpressionEvaluator {
                     return new FuncNode(name.toUpperCase(), args.toArray(new Node[0]));
                 }
                 while (pos < tokens.length && tokens[pos].type == TokenType.COMMA) {
-                    pos++; args.add(parseExpr());
+                    pos++;
+                    args.add(parseExpr());
                 }
             }
             if (pos < tokens.length && tokens[pos].type == TokenType.RPAREN) pos++;

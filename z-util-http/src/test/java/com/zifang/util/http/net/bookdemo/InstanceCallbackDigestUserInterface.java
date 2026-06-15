@@ -12,10 +12,24 @@ public class InstanceCallbackDigestUserInterface {
 
     /**
      * InstanceCallbackDigestUserInterface方法。
-     *      * @param filename String类型参数
+     * * @param filename String类型参数
      */
     public InstanceCallbackDigestUserInterface(String filename) {
         this.filename = filename;
+    }
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        for (String filename : args) {
+            // Calculate the digest
+            InstanceCallbackDigestUserInterface d = new InstanceCallbackDigestUserInterface(filename);
+            d.calculateDigest();
+        }
     }
 
     /**
@@ -45,18 +59,5 @@ public class InstanceCallbackDigestUserInterface {
             result += "digest not available";
         }
         return result;
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        for (String filename : args) {
-            // Calculate the digest
-            InstanceCallbackDigestUserInterface d = new InstanceCallbackDigestUserInterface(filename);
-            d.calculateDigest();
-        }
     }
 }

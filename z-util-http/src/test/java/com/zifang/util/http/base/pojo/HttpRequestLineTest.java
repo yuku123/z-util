@@ -28,7 +28,7 @@ public class HttpRequestLineTest {
         HttpRequestLine httpRequestLine = new HttpRequestLine();
         httpRequestLine.setRequestMethod(RequestMethod.GET);
         httpRequestLine.setUrl("http://example.com/api");
-        
+
         assertEquals(RequestMethod.GET, httpRequestLine.getRequestMethod());
         assertEquals("http://example.com/api", httpRequestLine.getUrl());
     }
@@ -41,7 +41,7 @@ public class HttpRequestLineTest {
         HttpRequestLine httpRequestLine = new HttpRequestLine();
         httpRequestLine.setRequestMethod(RequestMethod.POST);
         httpRequestLine.setUrl("http://example.com/api");
-        
+
         String str = httpRequestLine.toString();
         assertTrue(str.contains("POST"));
         assertTrue(str.contains("http://example.com/api"));
@@ -55,11 +55,11 @@ public class HttpRequestLineTest {
         HttpRequestLine line1 = new HttpRequestLine();
         line1.setRequestMethod(RequestMethod.GET);
         line1.setUrl("http://example.com");
-        
+
         HttpRequestLine line2 = new HttpRequestLine();
         line2.setRequestMethod(RequestMethod.GET);
         line2.setUrl("http://example.com");
-        
+
         assertEquals(line1, line2);
     }
 
@@ -71,11 +71,11 @@ public class HttpRequestLineTest {
         HttpRequestLine line1 = new HttpRequestLine();
         line1.setRequestMethod(RequestMethod.GET);
         line1.setUrl("http://example.com");
-        
+
         HttpRequestLine line2 = new HttpRequestLine();
         line2.setRequestMethod(RequestMethod.POST);
         line2.setUrl("http://example.com");
-        
+
         assertNotEquals(line1, line2);
     }
 
@@ -87,11 +87,11 @@ public class HttpRequestLineTest {
         HttpRequestLine line1 = new HttpRequestLine();
         line1.setRequestMethod(RequestMethod.GET);
         line1.setUrl("http://example.com");
-        
+
         HttpRequestLine line2 = new HttpRequestLine();
         line2.setRequestMethod(RequestMethod.GET);
         line2.setUrl("http://example.com");
-        
+
         assertEquals(line1.hashCode(), line2.hashCode());
     }
 }

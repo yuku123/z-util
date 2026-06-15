@@ -1,7 +1,5 @@
 package com.zifang.util.core.pattern.pool.monitor;
 
-import com.zifang.util.core.pattern.pool.PooledObject;
-
 /**
  * 池监控信息接口
  */

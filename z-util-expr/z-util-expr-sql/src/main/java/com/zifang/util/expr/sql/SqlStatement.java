@@ -8,30 +8,6 @@ import java.util.List;
  */
 public class SqlStatement {
 
-    /**
-     * SQL 类型
-     */
-    public enum Type {
-        SELECT,
-        INSERT,
-        UPDATE,
-        DELETE,
-        CREATE,
-        DROP,
-        UNKNOWN
-    }
-
-    /**
-     * JOIN 类型
-     */
-    public enum JoinType {
-        INNER,
-        LEFT,
-        RIGHT,
-        FULL,
-        CROSS
-    }
-
     private Type type;
     private String tableName;
     private String tableAlias;
@@ -40,7 +16,6 @@ public class SqlStatement {
     private List<String> placeholders;
     private List<NamedPlaceholder> namedPlaceholders;
     private String rawSql;
-
     // SELECT 扩展
     private boolean distinct;
     private List<OrderByClause> orderBy;
@@ -49,10 +24,8 @@ public class SqlStatement {
     private List<JoinClause> joins;
     private List<String> groupBy;
     private List<String> aliases;  // 列别名列表
-
     // INSERT 扩展
     private List<List<String>> multiValues;  // 多行插入
-
     public SqlStatement() {
         this.columns = new ArrayList<>();
         this.whereConditions = new ArrayList<>();
@@ -216,6 +189,42 @@ public class SqlStatement {
         return new ArrayList<>(columns);
     }
 
+    @Override
+    public String toString() {
+        return "SqlStatement{" +
+                "type=" + type +
+                ", tableName='" + tableName + '\'' +
+                ", columns=" + columns +
+                ", whereConditions=" + whereConditions +
+                ", placeholders=" + placeholders +
+                ", namedPlaceholders=" + namedPlaceholders +
+                '}';
+    }
+
+    /**
+     * SQL 类型
+     */
+    public enum Type {
+        SELECT,
+        INSERT,
+        UPDATE,
+        DELETE,
+        CREATE,
+        DROP,
+        UNKNOWN
+    }
+
+    /**
+     * JOIN 类型
+     */
+    public enum JoinType {
+        INNER,
+        LEFT,
+        RIGHT,
+        FULL,
+        CROSS
+    }
+
     /**
      * WHERE 条件
      */
@@ -224,12 +233,6 @@ public class SqlStatement {
         private String operator;
         private String value;
         private LogicalOperator logicalOperator;
-
-        public enum LogicalOperator {
-            NONE,
-            AND,
-            OR
-        }
 
         public WhereCondition() {
             this.logicalOperator = LogicalOperator.NONE;
@@ -282,6 +285,12 @@ public class SqlStatement {
             }
             sb.append(column).append(" ").append(operator).append(" ").append(value);
             return sb.toString();
+        }
+
+        public enum LogicalOperator {
+            NONE,
+            AND,
+            OR
         }
     }
 
@@ -393,17 +402,5 @@ public class SqlStatement {
             return joinType + " JOIN " + tableName + (alias != null ? " " + alias : "") +
                     (onCondition != null ? " ON " + onCondition : "");
         }
-    }
-
-    @Override
-    public String toString() {
-        return "SqlStatement{" +
-                "type=" + type +
-                ", tableName='" + tableName + '\'' +
-                ", columns=" + columns +
-                ", whereConditions=" + whereConditions +
-                ", placeholders=" + placeholders +
-                ", namedPlaceholders=" + namedPlaceholders +
-                '}';
     }
 }

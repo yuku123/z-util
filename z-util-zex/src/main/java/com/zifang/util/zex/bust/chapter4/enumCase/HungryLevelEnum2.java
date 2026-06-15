@@ -22,6 +22,7 @@ public enum HungryLevelEnum2 {
 
     /**
      * getDescription方法。
+     *
      * @return String类型返回值
      */
     public String getDescription() {
@@ -30,7 +31,7 @@ public enum HungryLevelEnum2 {
 
     /**
      * setDescription方法。
-     *      * @param description String类型参数
+     * * @param description String类型参数
      */
     public void setDescription(String description) {
         this.description = description;

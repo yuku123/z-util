@@ -37,26 +37,23 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class DbDistributedLock implements DistributedLock {
 
-    /** SQL 方言接口（释放时不同方言的占位符可能不同）。 */
-    public interface Dialect {
-        /** 释放 SQL：参数 lock_key, token。 */
-        String releaseSql();
-    }
-
-    /** MySQL / H2 / PostgreSQL 通用实现（DELETE WHERE 跨库兼容）。 */
+    /**
+     * MySQL / H2 / PostgreSQL 通用实现（DELETE WHERE 跨库兼容）。
+     */
     public static final Dialect STANDARD = new Dialect() {
-        @Override public String releaseSql() {
+        @Override
+        public String releaseSql() {
             return "DELETE FROM distributed_lock WHERE lock_key = ? AND token = ?";
         }
     };
-
     private final DataSource ds;
     private final String key;
     private final long expireMillis;
     private final Dialect dialect;
-    /** 当前进程持有的 token（用于 release 时校验） */
+    /**
+     * 当前进程持有的 token（用于 release 时校验）
+     */
     private final ConcurrentMap<String, String> tokens = new ConcurrentHashMap<>();
-
     public DbDistributedLock(DataSource ds, String lockKey, long expireMs) {
         this(ds, lockKey, expireMs, STANDARD);
     }
@@ -87,7 +84,12 @@ public class DbDistributedLock implements DistributedLock {
             }
             if (deadline == 0L) return null;
             if (System.nanoTime() >= deadline) return null;
-            try { Thread.sleep(50); } catch (InterruptedException e) { Thread.currentThread().interrupt(); return null; }
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return null;
+            }
         }
     }
 
@@ -169,5 +171,15 @@ public class DbDistributedLock implements DistributedLock {
         } catch (SQLException e) {
             return false;
         }
+    }
+
+    /**
+     * SQL 方言接口（释放时不同方言的占位符可能不同）。
+     */
+    public interface Dialect {
+        /**
+         * 释放 SQL：参数 lock_key, token。
+         */
+        String releaseSql();
     }
 }

@@ -2,11 +2,12 @@ package com.zifang.util.office.pdf;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * PdfOperator PDF操作类的单元测试
  */
+
 /**
  * PdfOperatorTest类。
  */

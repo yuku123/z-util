@@ -9,25 +9,35 @@ package com.zifang.util.zex.bust.chapter2;
  * @author zifang
  * @version 1.0
  */
-import org.junit.Test;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import org.junit.Test;
 
 /**
  * StringTest类。
  */
 public class StringTest {
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        String str = "123";
+        Integer sum = 0;
+        for (char c : str.toCharArray()) {
+            int n = c - '0';
+            sum = sum * 10 + n;
+        }
+        System.out.println(sum);
+
+    }
+
     @Test
     /**
      * test001方法。
      */
-    public void test001(){
+    public void test001() {
         String a = "123";
         System.out.println(a);
     }
@@ -36,7 +46,7 @@ public class StringTest {
     /**
      * test002方法。
      */
-    public void test002(){
+    public void test002() {
         String a = new String("123");
         System.out.println(a);
     }
@@ -45,7 +55,7 @@ public class StringTest {
     /**
      * test003方法。
      */
-    public void test003(){
+    public void test003() {
         String a = new String("12😄4");
 
         // 打印5
@@ -54,11 +64,12 @@ public class StringTest {
         System.out.println(a.codePoints().count());
 
     }
+
     @Test
     /**
      * test004方法。
      */
-    public void test004(){
+    public void test004() {
 
         String a = new String("12😄4");
         a.indexOf("\uD83D\uDE04");
@@ -73,7 +84,7 @@ public class StringTest {
     /**
      * test005方法。
      */
-    public void test005(){
+    public void test005() {
 
         String a = new String("abcd😄e");
         assert a.indexOf('a') == 0;
@@ -88,7 +99,7 @@ public class StringTest {
     /**
      * test006方法。
      */
-    public void test006(){
+    public void test006() {
         System.out.println();
         "aa".toLowerCase();
     }
@@ -97,20 +108,20 @@ public class StringTest {
     /**
      * test007方法。
      */
-    public void test007(){
+    public void test007() {
         String str = String.format("Hi,%s", "早安");
         System.out.println(str);
-        str = String.format("Hi,%s:%s.%s", "大哥","二弟","三弟");
+        str = String.format("Hi,%s:%s.%s", "大哥", "二弟", "三弟");
         System.out.println(str);
         System.out.printf("字母a的大写是：%c %n", 'A');
-        System.out.printf("3>7的结果是：%b %n", 3>7);
-        System.out.printf("100的一半是：%d %n", 100/2);
+        System.out.printf("3>7的结果是：%b %n", 3 > 7);
+        System.out.printf("100的一半是：%d %n", 100 / 2);
         System.out.printf("100的16进制数是：%x %n", 100);
         System.out.printf("100的8进制数是：%o %n", 100);
-        System.out.printf("50元的书打8.5折扣是：%f 元%n", 50*0.85);
-        System.out.printf("上面价格的16进制数是：%a %n", 50*0.85);
-        System.out.printf("上面价格的指数表示：%e %n", 50*0.85);
-        System.out.printf("上面价格的指数和浮点数结果的长度较短的是：%g %n", 50*0.85);
+        System.out.printf("50元的书打8.5折扣是：%f 元%n", 50 * 0.85);
+        System.out.printf("上面价格的16进制数是：%a %n", 50 * 0.85);
+        System.out.printf("上面价格的指数表示：%e %n", 50 * 0.85);
+        System.out.printf("上面价格的指数和浮点数结果的长度较短的是：%g %n", 50 * 0.85);
         System.out.printf("上面的折扣是%d%% %n", 85);
         System.out.printf("字母A的散列码是：%h %n", 'A');
     }
@@ -119,7 +130,7 @@ public class StringTest {
     /**
      * test009方法。
      */
-    public void test009(){
+    public void test009() {
         String s0 = "1";
         String s1 = new String("1");
 
@@ -133,7 +144,6 @@ public class StringTest {
         String ss0 = new String("1");
 
 
-
         System.out.println();
     }
 
@@ -141,7 +151,7 @@ public class StringTest {
     /**
      * test010方法。
      */
-    public void test010(){
+    public void test010() {
         String s0 = "1" + "2";
         String s1 = "1" + new String("2");
         String s2 = new String("1") + new String("2");
@@ -150,16 +160,6 @@ public class StringTest {
         System.out.println("12" == s0);
         System.out.println("12" == s1);
         System.out.println("12" == s2);
-    }
-
-    @Test
-    /**
-     * test011方法。
-     */
-    public void test011(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("123456");
-        stringBuilder.setLength(7);
     }
 
 //    public static void main(String[] args) {
@@ -181,20 +181,13 @@ public class StringTest {
 //        }
 //    }
 
-
+    @Test
     /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
+     * test011方法。
      */
-    public static void main(String[] args) {
-        String str = "123";
-        Integer sum = 0;
-        for(char c : str.toCharArray()){
-            int n = c-'0';
-            sum = sum * 10 + n;
-        }
-        System.out.println(sum);
-
+    public void test011() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("123456");
+        stringBuilder.setLength(7);
     }
 }

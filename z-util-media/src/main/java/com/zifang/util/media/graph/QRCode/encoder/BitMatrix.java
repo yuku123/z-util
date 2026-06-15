@@ -11,7 +11,8 @@ public class BitMatrix {
 
     /**
      * BitMatrix方法。
-     *      * @param width int类型参数
+     * * @param width int类型参数
+     *
      * @param height int类型参数
      */
     public BitMatrix(int width, int height) {
@@ -25,7 +26,8 @@ public class BitMatrix {
 
     /**
      * get方法。
-     *      * @param x int类型参数
+     * * @param x int类型参数
+     *
      * @param y int类型参数
      * @return boolean类型返回值
      */
@@ -38,7 +40,8 @@ public class BitMatrix {
 
     /**
      * set方法。
-     *      * @param x int类型参数
+     * * @param x int类型参数
+     *
      * @param y int类型参数
      */
     public void set(int x, int y) {
@@ -60,7 +63,8 @@ public class BitMatrix {
 
     /**
      * unset方法。
-     *      * @param x int类型参数
+     * * @param x int类型参数
+     *
      * @param y int类型参数
      */
     public void unset(int x, int y) {
@@ -72,7 +76,8 @@ public class BitMatrix {
 
     /**
      * flip方法。
-     *      * @param x int类型参数
+     * * @param x int类型参数
+     *
      * @param y int类型参数
      */
     public void flip(int x, int y) {
@@ -93,6 +98,7 @@ public class BitMatrix {
 
     /**
      * getWidth方法。
+     *
      * @return int类型返回值
      */
     public int getWidth() {
@@ -101,6 +107,7 @@ public class BitMatrix {
 
     /**
      * getHeight方法。
+     *
      * @return int类型返回值
      */
     public int getHeight() {
@@ -109,6 +116,7 @@ public class BitMatrix {
 
     /**
      * Finds the top-left on bit in the matrix.
+     *
      * @return int[] array of [x, y] or null if no bits are set
      */
     public int[] getTopLeftOnBit() {
@@ -124,6 +132,7 @@ public class BitMatrix {
 
     /**
      * Finds the bottom-right on bit in the matrix.
+     *
      * @return int[] array of [x, y] or null if no bits are set
      */
     public int[] getBottomRightOnBit() {

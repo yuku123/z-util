@@ -27,9 +27,10 @@ public class Code extends AbstractAttribute {
 
     /**
      * Code方法。
-     *      * @param attributeNameIndex U2类型参数
+     * * @param attributeNameIndex U2类型参数
+     *
      * @param attributeLength U4类型参数
-     * @param poolList ListAbstractConstantPool类型参数
+     * @param poolList        ListAbstractConstantPool类型参数
      */
     public Code(U2 attributeNameIndex, U4 attributeLength, List<AbstractConstantPool> poolList) {
         super(attributeNameIndex, attributeLength);
@@ -74,63 +75,8 @@ public class Code extends AbstractAttribute {
     }
 
     /**
-     * 异常表项
-     */
-    public class ExceptionInfo {
-        private U2 startPc;
-        private U2 endPc;
-        private U2 handlerPc;
-        private U2 catchPc;
-
-    /**
-     * ExceptionInfo方法。
-     *      * @param startPc U2类型参数
-     * @param endPc U2类型参数
-     * @param handlerPc U2类型参数
-     * @param catchPc U2类型参数
-     */
-        public ExceptionInfo(U2 startPc, U2 endPc, U2 handlerPc, U2 catchPc) {
-            this.startPc = startPc;
-            this.endPc = endPc;
-            this.handlerPc = handlerPc;
-            this.catchPc = catchPc;
-        }
-
-    /**
-     * getStartPc方法。
-     * @return U2类型返回值
-     */
-        public U2 getStartPc() {
-            return startPc;
-        }
-
-    /**
-     * getEndPc方法。
-     * @return U2类型返回值
-     */
-        public U2 getEndPc() {
-            return endPc;
-        }
-
-    /**
-     * getHandlerPc方法。
-     * @return U2类型返回值
-     */
-        public U2 getHandlerPc() {
-            return handlerPc;
-        }
-
-    /**
-     * getCatchPc方法。
-     * @return U2类型返回值
-     */
-        public U2 getCatchPc() {
-            return catchPc;
-        }
-    }
-
-    /**
      * getMaxStack方法。
+     *
      * @return U2类型返回值
      */
     public U2 getMaxStack() {
@@ -139,6 +85,7 @@ public class Code extends AbstractAttribute {
 
     /**
      * getMaxLocals方法。
+     *
      * @return U2类型返回值
      */
     public U2 getMaxLocals() {
@@ -147,6 +94,7 @@ public class Code extends AbstractAttribute {
 
     /**
      * getCodeLength方法。
+     *
      * @return U4类型返回值
      */
     public U4 getCodeLength() {
@@ -155,6 +103,7 @@ public class Code extends AbstractAttribute {
 
     /**
      * getCode方法。
+     *
      * @return List<U1>类型返回值
      */
     public List<U1> getCode() {
@@ -163,6 +112,7 @@ public class Code extends AbstractAttribute {
 
     /**
      * getExceptionTableLength方法。
+     *
      * @return U2类型返回值
      */
     public U2 getExceptionTableLength() {
@@ -171,6 +121,7 @@ public class Code extends AbstractAttribute {
 
     /**
      * getExceptionTable方法。
+     *
      * @return List<ExceptionInfo>类型返回值
      */
     public List<ExceptionInfo> getExceptionTable() {
@@ -179,6 +130,7 @@ public class Code extends AbstractAttribute {
 
     /**
      * getAttributesCount方法。
+     *
      * @return U2类型返回值
      */
     public U2 getAttributesCount() {
@@ -187,9 +139,71 @@ public class Code extends AbstractAttribute {
 
     /**
      * getAttributes方法。
+     *
      * @return List<AbstractAttribute>类型返回值
      */
     public List<AbstractAttribute> getAttributes() {
         return attributes;
+    }
+
+    /**
+     * 异常表项
+     */
+    public class ExceptionInfo {
+        private U2 startPc;
+        private U2 endPc;
+        private U2 handlerPc;
+        private U2 catchPc;
+
+        /**
+         * ExceptionInfo方法。
+         * * @param startPc U2类型参数
+         *
+         * @param endPc     U2类型参数
+         * @param handlerPc U2类型参数
+         * @param catchPc   U2类型参数
+         */
+        public ExceptionInfo(U2 startPc, U2 endPc, U2 handlerPc, U2 catchPc) {
+            this.startPc = startPc;
+            this.endPc = endPc;
+            this.handlerPc = handlerPc;
+            this.catchPc = catchPc;
+        }
+
+        /**
+         * getStartPc方法。
+         *
+         * @return U2类型返回值
+         */
+        public U2 getStartPc() {
+            return startPc;
+        }
+
+        /**
+         * getEndPc方法。
+         *
+         * @return U2类型返回值
+         */
+        public U2 getEndPc() {
+            return endPc;
+        }
+
+        /**
+         * getHandlerPc方法。
+         *
+         * @return U2类型返回值
+         */
+        public U2 getHandlerPc() {
+            return handlerPc;
+        }
+
+        /**
+         * getCatchPc方法。
+         *
+         * @return U2类型返回值
+         */
+        public U2 getCatchPc() {
+            return catchPc;
+        }
     }
 }

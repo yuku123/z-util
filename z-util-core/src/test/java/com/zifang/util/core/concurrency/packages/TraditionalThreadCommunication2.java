@@ -8,7 +8,8 @@ public class TraditionalThreadCommunication2 {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -22,9 +23,9 @@ public class TraditionalThreadCommunication2 {
      */
     public void test() {
         new Thread() {
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 for (int i = 0; i < 5; i++) {
                     while (!shouldSub) {
@@ -49,9 +50,9 @@ public class TraditionalThreadCommunication2 {
      */
     public void test2() {
         new Thread() {
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 for (int i = 0; i < 5; i++) {
                     while (shouldSub) {

@@ -3,6 +3,7 @@ package com.zifang.util.server.netty.test;
 public class Session {
     // 用户唯一性标识
     private String userId;
+    private String userName;
 
     public Session(String userId, String userName) {
         this.userId = userId;
@@ -24,6 +25,4 @@ public class Session {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    private String userName;
 }

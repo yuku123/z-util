@@ -27,6 +27,19 @@ class Son4 extends Father4 {
     private int money = 50;
 
     /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        Son4 son = new Son4();
+        son.fishing();
+        son.writeCode();
+        son.getMoney();
+    }
+
+    /**
      * writeCode方法。
      */
     public void writeCode() {
@@ -38,19 +51,6 @@ class Son4 extends Father4 {
      */
     public void getMoney() {
         System.out.println(super.money);
-    }
-
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        Son4 son = new Son4();
-        son.fishing();
-        son.writeCode();
-        son.getMoney();
     }
 }
 

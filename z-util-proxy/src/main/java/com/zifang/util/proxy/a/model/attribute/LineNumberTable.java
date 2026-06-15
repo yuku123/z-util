@@ -19,7 +19,8 @@ public class LineNumberTable extends AbstractAttribute {
 
     /**
      * LineNumberTable方法。
-     *      * @param attributeNameIndex U2类型参数
+     * * @param attributeNameIndex U2类型参数
+     *
      * @param attributeLength U4类型参数
      */
     public LineNumberTable(U2 attributeNameIndex, U4 attributeLength) {
@@ -41,59 +42,9 @@ public class LineNumberTable extends AbstractAttribute {
         }
     }
 
-
-/**
- * LineNumberInfo类。
- */
-    public class LineNumberInfo {
-        private U2 startPc;//字节码行号
-        private U2 lineNumber;//java源码行号
-
-    /**
-     * LineNumberInfo方法。
-     *      * @param startPc U2类型参数
-     * @param lineNumber U2类型参数
-     */
-        public LineNumberInfo(U2 startPc, U2 lineNumber) {
-            this.startPc = startPc;
-            this.lineNumber = lineNumber;
-        }
-
-    /**
-     * getStartPc方法。
-     * @return U2类型返回值
-     */
-        public U2 getStartPc() {
-            return startPc;
-        }
-
-    /**
-     * setStartPc方法。
-     *      * @param startPc U2类型参数
-     */
-        public void setStartPc(U2 startPc) {
-            this.startPc = startPc;
-        }
-
-    /**
-     * getLineNumber方法。
-     * @return U2类型返回值
-     */
-        public U2 getLineNumber() {
-            return lineNumber;
-        }
-
-    /**
-     * setLineNumber方法。
-     *      * @param lineNumber U2类型参数
-     */
-        public void setLineNumber(U2 lineNumber) {
-            this.lineNumber = lineNumber;
-        }
-    }
-
     /**
      * getLineNumTableLength方法。
+     *
      * @return U2类型返回值
      */
     public U2 getLineNumTableLength() {
@@ -102,9 +53,63 @@ public class LineNumberTable extends AbstractAttribute {
 
     /**
      * getLineNumberTable方法。
+     *
      * @return List<LineNumberInfo>类型返回值
      */
     public List<LineNumberInfo> getLineNumberTable() {
         return lineNumberTable;
+    }
+
+    /**
+     * LineNumberInfo类。
+     */
+    public class LineNumberInfo {
+        private U2 startPc;//字节码行号
+        private U2 lineNumber;//java源码行号
+
+        /**
+         * LineNumberInfo方法。
+         * * @param startPc U2类型参数
+         *
+         * @param lineNumber U2类型参数
+         */
+        public LineNumberInfo(U2 startPc, U2 lineNumber) {
+            this.startPc = startPc;
+            this.lineNumber = lineNumber;
+        }
+
+        /**
+         * getStartPc方法。
+         *
+         * @return U2类型返回值
+         */
+        public U2 getStartPc() {
+            return startPc;
+        }
+
+        /**
+         * setStartPc方法。
+         * * @param startPc U2类型参数
+         */
+        public void setStartPc(U2 startPc) {
+            this.startPc = startPc;
+        }
+
+        /**
+         * getLineNumber方法。
+         *
+         * @return U2类型返回值
+         */
+        public U2 getLineNumber() {
+            return lineNumber;
+        }
+
+        /**
+         * setLineNumber方法。
+         * * @param lineNumber U2类型参数
+         */
+        public void setLineNumber(U2 lineNumber) {
+            this.lineNumber = lineNumber;
+        }
     }
 }

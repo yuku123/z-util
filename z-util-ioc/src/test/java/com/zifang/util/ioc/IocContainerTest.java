@@ -2,7 +2,9 @@ package com.zifang.util.ioc;
 
 import com.zifang.util.ioc.context.ClassPathApplicationContext;
 import com.zifang.util.ioc.exception.NoSuchBeanException;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 

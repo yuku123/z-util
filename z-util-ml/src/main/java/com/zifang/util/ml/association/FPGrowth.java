@@ -187,16 +187,16 @@ public class FPGrowth {
                 // Calculate lift = confidence / support(consequent)
                 Integer consequentSupportInt = frequentItemsetSupports.get(consequent);
                 double consequentSupport = consequentSupportInt != null
-                    ? (double) consequentSupportInt / totalTransactions
-                    : 0.0;
+                        ? (double) consequentSupportInt / totalTransactions
+                        : 0.0;
                 double lift = consequentSupport > 0 ? confidence / consequentSupport : 0.0;
 
                 AssociationRule rule = new AssociationRule(
-                    antecedent,
-                    consequent,
-                    support,
-                    confidence,
-                    lift
+                        antecedent,
+                        consequent,
+                        support,
+                        confidence,
+                        lift
                 );
                 rules.add(rule);
             }
@@ -388,7 +388,7 @@ public class FPGrowth {
             if (!conditionalPatternBase.isEmpty()) {
                 // Build conditional tree
                 FPTreeNode condTree = buildConditionalTree(conditionalPatternBase, frequentItems,
-                    new HashMap<>(frequentItems));
+                        new HashMap<>(frequentItems));
 
                 if (condTree != null && !condTree.children.isEmpty()) {
                     List<List<Integer>> subPatterns = mineFPTree(condTree, headerTable, frequentItems);
@@ -457,12 +457,13 @@ public class FPGrowth {
         List<FPTreeNode> children;
         FPTreeNode nodeLink; // Link to next node with same item
 
-    /**
-     * FPTreeNode方法。
-     *      * @param item int类型参数
-     * @param count int类型参数
-     * @param parent FPTreeNode类型参数
-     */
+        /**
+         * FPTreeNode方法。
+         * * @param item int类型参数
+         *
+         * @param count  int类型参数
+         * @param parent FPTreeNode类型参数
+         */
         public FPTreeNode(int item, int count, FPTreeNode parent) {
             this.item = item;
             this.count = count;
@@ -479,37 +480,40 @@ public class FPGrowth {
         private final Set<Integer> itemset;
         private final int support;
 
-    /**
-     * FrequentPattern方法。
-     *      * @param itemset SetInteger类型参数
-     * @param support int类型参数
-     */
+        /**
+         * FrequentPattern方法。
+         * * @param itemset SetInteger类型参数
+         *
+         * @param support int类型参数
+         */
         public FrequentPattern(Set<Integer> itemset, int support) {
             this.itemset = new HashSet<>(itemset);
             this.support = support;
         }
 
-    /**
-     * getItemset方法。
-     * @return Set<Integer>类型返回值
-     */
+        /**
+         * getItemset方法。
+         *
+         * @return Set<Integer>类型返回值
+         */
         public Set<Integer> getItemset() {
             return new HashSet<>(itemset);
         }
 
-    /**
-     * getSupport方法。
-     * @return int类型返回值
-     */
+        /**
+         * getSupport方法。
+         *
+         * @return int类型返回值
+         */
         public int getSupport() {
             return support;
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "FrequentPattern{itemset=" + itemset + ", support=" + support + '}';
         }
@@ -525,14 +529,15 @@ public class FPGrowth {
         private final double confidence;
         private final double lift;
 
-    /**
-     * AssociationRule方法。
-     *      * @param antecedent SetInteger类型参数
-     * @param consequent SetInteger类型参数
-     * @param support double类型参数
-     * @param confidence double类型参数
-     * @param lift double类型参数
-     */
+        /**
+         * AssociationRule方法。
+         * * @param antecedent SetInteger类型参数
+         *
+         * @param consequent SetInteger类型参数
+         * @param support    double类型参数
+         * @param confidence double类型参数
+         * @param lift       double类型参数
+         */
         public AssociationRule(Set<Integer> antecedent, Set<Integer> consequent,
                                double support, double confidence, double lift) {
             this.antecedent = new HashSet<>(antecedent);
@@ -542,51 +547,56 @@ public class FPGrowth {
             this.lift = lift;
         }
 
-    /**
-     * getAntecedent方法。
-     * @return Set<Integer>类型返回值
-     */
+        /**
+         * getAntecedent方法。
+         *
+         * @return Set<Integer>类型返回值
+         */
         public Set<Integer> getAntecedent() {
             return new HashSet<>(antecedent);
         }
 
-    /**
-     * getConsequent方法。
-     * @return Set<Integer>类型返回值
-     */
+        /**
+         * getConsequent方法。
+         *
+         * @return Set<Integer>类型返回值
+         */
         public Set<Integer> getConsequent() {
             return new HashSet<>(consequent);
         }
 
-    /**
-     * getSupport方法。
-     * @return double类型返回值
-     */
+        /**
+         * getSupport方法。
+         *
+         * @return double类型返回值
+         */
         public double getSupport() {
             return support;
         }
 
-    /**
-     * getConfidence方法。
-     * @return double类型返回值
-     */
+        /**
+         * getConfidence方法。
+         *
+         * @return double类型返回值
+         */
         public double getConfidence() {
             return confidence;
         }
 
-    /**
-     * getLift方法。
-     * @return double类型返回值
-     */
+        /**
+         * getLift方法。
+         *
+         * @return double类型返回值
+         */
         public double getLift() {
             return lift;
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "AssociationRule{" +
                     "antecedent=" + antecedent +

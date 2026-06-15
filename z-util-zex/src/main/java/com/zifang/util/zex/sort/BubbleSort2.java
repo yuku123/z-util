@@ -15,7 +15,7 @@ package com.zifang.util.zex.sort;
 public class BubbleSort2 {
     /**
      * sort方法。
-     *      * @param arr int[]类型参数
+     * * @param arr int[]类型参数
      */
     public void sort(int[] arr) {
         int i, j, tmp, len = arr.length;

@@ -41,9 +41,9 @@ public class ZipUtil {
      * 例如：zipFile("/home/user/docs", "/home/user/archives") 会生成 "/home/user/archives/docs.zip"
      *
      * @param resourcePath 源文件或文件夹路径（不能为空）
-     * @param targetPath  目标文件夹路径（如果不存在会自动创建）
+     * @param targetPath   目标文件夹路径（如果不存在会自动创建）
      * @throws IllegalArgumentException 如果 resourcePath 或 targetPath 为空
-     * @throws UncheckedIOException    如果压缩过程中发生 IO 错误
+     * @throws UncheckedIOException     如果压缩过程中发生 IO 错误
      */
     public static void zipFile(String resourcePath, String targetPath) {
         File resourcesFile = new File(resourcePath);

@@ -4,27 +4,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a multi-module Java utilities library (version 1.0.2-SNAPSHOT) organized as a Maven project. It contains various utility modules for common programming tasks including expression evaluation, workflow management, AI integrations, crawling, and more.
+This is a multi-module Java utilities library (version 1.0.2-SNAPSHOT) organized as a Maven project. It contains various
+utility modules for common programming tasks including expression evaluation, workflow management, AI integrations,
+crawling, and more.
 
 ## Build Commands
 
 ### Full Build
+
 ```bash
 mvn clean install
 ```
 
 ### Build Without Tests
+
 ```bash
 mvn clean install -DskipTests=true
 ```
 
 ### Build Single Module
+
 ```bash
 cd <module-name>
 mvn clean install
 ```
 
 ### Run Tests
+
 ```bash
 # All tests
 mvn test
@@ -40,16 +46,16 @@ mvn test -Dtest=TestClassName#testMethod
 
 ### Module Categories
 
-| Category | Modules |
-|----------|---------|
-| Core | `util-core` - Base utilities and common classes |
-| Data | `util-jdbc`, `util-expression` - Data processing |
-| Web | `util-http`, `util-crawler`, `util-proxy` - Web utilities |
-| Compute | `util-math`, `util-ai`, `util-llm` - Computation and AI |
-| Media | `util-media`, `util-office`, `util-visualization` - Media processing |
-| System | `util-monitor`, `util-devops`, `util-distribute`, `util-source` - System tools |
-| Workflow | `util-workflow`, `util-ch` - Workflow and rules |
-| Misc | `util-extra`, `util-zex` - Additional utilities |
+| Category | Modules                                                                        |
+|----------|--------------------------------------------------------------------------------|
+| Core     | `util-core` - Base utilities and common classes                                |
+| Data     | `util-jdbc`, `util-expression` - Data processing                               |
+| Web      | `util-http`, `util-crawler`, `util-proxy` - Web utilities                      |
+| Compute  | `util-math`, `util-ai`, `util-llm` - Computation and AI                        |
+| Media    | `util-media`, `util-office`, `util-visualization` - Media processing           |
+| System   | `util-monitor`, `util-devops`, `util-distribute`, `util-source` - System tools |
+| Workflow | `util-workflow`, `util-ch` - Workflow and rules                                |
+| Misc     | `util-extra`, `util-zex` - Additional utilities                                |
 
 ### Module Dependencies
 
@@ -61,18 +67,23 @@ mvn test -Dtest=TestClassName#testMethod
 ## Key Architecture Patterns
 
 ### Expression Evaluation
+
 The `util-expression` module implements a custom expression parser and evaluator. Key classes:
+
 - Expression parser with tokenization
 - AST (Abstract Syntax Tree) evaluation
 - Variable binding and function support
 
 ### Workflow Engine
+
 The `util-workflow` module provides a node-based workflow system:
+
 - Nodes represent processing steps
 - Connectors define flow between nodes
 - Context carries data through the workflow
 
 ### Utility Conventions
+
 - Static utility classes use `*Util` or `*Utils` naming
 - Classes in `util-core` provide base functionality
 - Lombok is used for reducing boilerplate
@@ -92,9 +103,11 @@ mvn test -Dtest=ClassNameTest
 
 ## Version Management
 
-The project uses Maven flatten plugin for version management. The version is defined in the parent POM as `1.0.2-SNAPSHOT`.
+The project uses Maven flatten plugin for version management. The version is defined in the parent POM as
+`1.0.2-SNAPSHOT`.
 
 To update versions across all modules:
+
 ```bash
 mvn versions:set -DnewVersion=1.0.3-SNAPSHOT
 ```

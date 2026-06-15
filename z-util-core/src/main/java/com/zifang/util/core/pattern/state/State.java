@@ -17,7 +17,8 @@ public class State {
 
     /**
      * State方法。
-     *      * @param code String类型参数
+     * * @param code String类型参数
+     *
      * @param name String类型参数
      */
     public State(String code, String name) {
@@ -27,6 +28,7 @@ public class State {
 
     /**
      * getCode方法。
+     *
      * @return String类型返回值
      */
     public String getCode() {
@@ -35,7 +37,7 @@ public class State {
 
     /**
      * setCode方法。
-     *      * @param code String类型参数
+     * * @param code String类型参数
      */
     public void setCode(String code) {
         this.code = code;
@@ -43,6 +45,7 @@ public class State {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -51,7 +54,7 @@ public class State {
 
     /**
      * setName方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void setName(String name) {
         this.name = name;

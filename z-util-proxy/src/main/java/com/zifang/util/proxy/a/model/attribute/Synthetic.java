@@ -15,7 +15,8 @@ public class Synthetic extends AbstractAttribute {
 
     /**
      * Synthetic方法。
-     *      * @param attributeNameIndex U2类型参数
+     * * @param attributeNameIndex U2类型参数
+     *
      * @param attributeLength U4类型参数
      */
     public Synthetic(U2 attributeNameIndex, U4 attributeLength) {

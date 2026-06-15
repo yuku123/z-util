@@ -1,12 +1,8 @@
 package com.zifang.util.json;
 
-import com.zifang.util.dsl.g4.*;
-import com.zifang.util.dsl.g4.model.*;
-import com.zifang.util.dsl.ast.*;
-import com.zifang.util.dsl.core.*;
-import com.zifang.util.dsl.token.*;
+import com.zifang.util.dsl.ast.SimpleASTNode;
+import com.zifang.util.dsl.core.ASTNode;
 import org.junit.Test;
-import java.util.*;
 
 /**
  * JsonDebug18Test类。

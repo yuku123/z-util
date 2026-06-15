@@ -4,11 +4,13 @@ import org.junit.Test;
 
 import java.lang.reflect.Modifier;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * ModifierAdapter 测试
  */
+
 /**
  * ModifierAdapterTest类。
  */
@@ -21,7 +23,7 @@ public class ModifierAdapterTest {
     public void testGetKeyWordPublic() {
         // 测试 PUBLIC 修饰符转换
         assertNotNull(
-            com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.PUBLIC)
+                com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.PUBLIC)
         );
     }
 
@@ -32,7 +34,7 @@ public class ModifierAdapterTest {
     public void testGetKeyWordPrivate() {
         // 测试 PRIVATE 修饰符转换
         assertNotNull(
-            com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.PRIVATE)
+                com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.PRIVATE)
         );
     }
 
@@ -43,7 +45,7 @@ public class ModifierAdapterTest {
     public void testGetKeyWordStatic() {
         // 测试 STATIC 修饰符转换
         assertNotNull(
-            com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.STATIC)
+                com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.STATIC)
         );
     }
 
@@ -54,16 +56,16 @@ public class ModifierAdapterTest {
     public void testKeywordValues() {
         // 验证返回的 Keyword 枚举值正确
         assertEquals(
-            com.github.javaparser.ast.Modifier.Keyword.PUBLIC,
-            com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.PUBLIC)
+                com.github.javaparser.ast.Modifier.Keyword.PUBLIC,
+                com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.PUBLIC)
         );
         assertEquals(
-            com.github.javaparser.ast.Modifier.Keyword.PRIVATE,
-            com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.PRIVATE)
+                com.github.javaparser.ast.Modifier.Keyword.PRIVATE,
+                com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.PRIVATE)
         );
         assertEquals(
-            com.github.javaparser.ast.Modifier.Keyword.STATIC,
-            com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.STATIC)
+                com.github.javaparser.ast.Modifier.Keyword.STATIC,
+                com.zifang.util.source.generator.info.ModifierAdapter.getKeyWord(Modifier.STATIC)
         );
     }
 }

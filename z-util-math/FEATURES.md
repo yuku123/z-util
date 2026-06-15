@@ -5,12 +5,14 @@
 ## 核心数据结构
 
 ### 1. Num 类 - 多维数组
+
 - 对标 numpy.ndarray
 - 支持多维数组创建和操作
 - 提供数组切片、索引、变形等操作
 - 支持广播机制
 
 ### 2. Series 类 - 一维标记数组
+
 - 对标 pandas.Series
 - 带标签的一维数组
 - 支持多种数据选择方式（位置、标签、布尔索引）
@@ -19,6 +21,7 @@
 - **字符串操作**：str() 访问器
 
 ### 3. DataFrame 类 - 二维表格数据
+
 - 对标 pandas.DataFrame
 - 二维表格数据结构
 - 列操作（添加、删除、重命名）
@@ -33,34 +36,44 @@
 提供类似于 pandas 的数据重塑功能：
 
 ### 1. pivot - 数据透视表
+
 ```java
 DataFrame pivotTable = Reshaper.pivot(df, index, columns, values);
 ```
+
 将长格式数据转换为宽格式，类似于 Excel 的数据透视表。
 
 ### 2. melt - 数据融合
+
 ```java
 DataFrame melted = Reshaper.melt(df, idVars, valueVars, varName, valueName);
 ```
+
 将宽格式数据转换为长格式，是 pivot 的逆操作。
 
 ### 3. stack/unstack - 堆叠/取消堆叠
+
 ```java
 Series stacked = Reshaper.stack(df);
 DataFrame unstacked = Reshaper.unstack(series);
 ```
+
 在行列之间转换数据维度。
 
 ### 4. crosstab - 交叉表
+
 ```java
 DataFrame crosstab = Reshaper.crosstab(df, rowVar, colVar);
 ```
+
 创建两个分类变量的列联表。
 
 ### 5. transpose - 转置
+
 ```java
 DataFrame transposed = Reshaper.transpose(df);
 ```
+
 行列互换操作。
 
 ## 字符串操作 (StringAccessor)
@@ -68,25 +81,30 @@ DataFrame transposed = Reshaper.transpose(df);
 通过 `Series.str()` 访问器提供丰富的字符串处理功能：
 
 ### 大小写转换
+
 - `lower()` - 转换为小写
 - `upper()` - 转换为大写
 
 ### 空白处理
+
 - `strip()` - 去除首尾空白
 - `lstrip()` - 去除左侧空白
 - `rstrip()` - 去除右侧空白
 
 ### 查找和替换
+
 - `contains(subStr)` - 检查是否包含子串
 - `replace(oldStr, newStr)` - 字符串替换
 - `replaceRegex(pattern, replacement)` - 正则表达式替换
 
 ### 分割和提取
+
 - `split(delimiter, index)` - 字符串分割
 - `slice(start, end)` - 字符串切片
 - `extract(pattern, group)` - 正则表达式提取
 
 ### 其他操作
+
 - `length()` - 字符串长度
 - `match(pattern)` - 正则表达式匹配
 - `cat(other)` - 字符串连接
@@ -97,17 +115,21 @@ DataFrame transposed = Reshaper.transpose(df);
 提供时间序列分析常用的窗口计算功能：
 
 ### Rolling - 滚动窗口
+
 ```java
 Series result = series.rolling(5).mean();  // 5期移动平均
 ```
+
 支持的方法：mean, sum, max, min, std, var, count
 
 ### Expanding - 扩展窗口
+
 ```java
 Series result = series.expanding().mean();  // 扩展平均
 ```
 
 ### EWM - 指数加权移动
+
 ```java
 Series result = series.ewm(0.5).mean();     // 使用 alpha
 Series result = series.ewmSpan(10).mean();  // 使用 span
@@ -118,24 +140,29 @@ Series result = series.ewmSpan(10).mean();  // 使用 span
 提供全面的数学计算功能：
 
 ### 三角函数
+
 - sin, cos, tan
 - arcsin, arccos, arctan
 - sinh, cosh, tanh
 
 ### 指数和对数
+
 - exp, expm1
 - log, log10, log1p
 - log2
 
 ### 幂和根
+
 - pow, sqrt, cbrt
 - hypot
 
 ### 舍入函数
+
 - round, floor, ceil, trunc
 - abs
 
 ### 统计函数
+
 - min, max
 - sum, prod
 - mean, std, var
@@ -145,17 +172,20 @@ Series result = series.ewmSpan(10).mean();  // 使用 span
 提供矩阵运算功能：
 
 ### 矩阵乘法
+
 - dot - 向量点积
 - matmul - 矩阵乘法
 - inner, outer - 内积和外积
 
 ### 矩阵分解
+
 - svd - 奇异值分解
 - qr - QR 分解
 - eig - 特征值分解
 - cholesky - Cholesky 分解
 
 ### 矩阵操作
+
 - inv - 矩阵求逆
 - pinv - 伪逆
 - det - 行列式
@@ -166,15 +196,18 @@ Series result = series.ewmSpan(10).mean();  // 使用 span
 提供各种分布的随机数生成：
 
 ### 基本随机数
+
 - rand - 均匀分布 [0, 1)
 - randn - 标准正态分布
 
 ### 特定分布
+
 - uniform - 均匀分布 [low, high)
 - normal - 正态分布
 - randint - 随机整数
 
 ### 采样和排列
+
 - choice - 随机采样
 - shuffle - 随机打乱
 - permutation - 随机排列
@@ -185,10 +218,12 @@ Series result = series.ewmSpan(10).mean();  // 使用 span
 提供 CSV 文件读写功能：
 
 ### 读取 CSV
+
 - `Pandas.read_csv(filePath)` - 读取 CSV 文件
 - 支持自定义分隔符、编码、是否包含表头等
 
 ### 写入 CSV
+
 - `Pandas.to_csv(df, filePath)` - 写入 CSV 文件
 - 支持自定义分隔符、是否包含表头和索引等
 

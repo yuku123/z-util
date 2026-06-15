@@ -33,8 +33,8 @@ public class WorkflowConfiguration {
     /**
      * 全参数构造函数，初始化流程配置
      *
-     * @param configurations    全局配置信息，包含执行引擎、缓存引擎等配置
-     * @param workflowNodeList  工作流节点列表，包含所有业务流程节点定义
+     * @param configurations   全局配置信息，包含执行引擎、缓存引擎等配置
+     * @param workflowNodeList 工作流节点列表，包含所有业务流程节点定义
      */
     public WorkflowConfiguration(Configurations configurations, List<WorkflowNode> workflowNodeList) {
         this.configurations = configurations;
@@ -96,7 +96,8 @@ public class WorkflowConfiguration {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WorkflowConfiguration that = (WorkflowConfiguration) o;
-        if (configurations != null ? !configurations.equals(that.configurations) : that.configurations != null) return false;
+        if (configurations != null ? !configurations.equals(that.configurations) : that.configurations != null)
+            return false;
         return workflowNodeList != null ? workflowNodeList.equals(that.workflowNodeList) : that.workflowNodeList == null;
     }
 

@@ -39,59 +39,12 @@ public class SystemClock {
     }
 
     /**
-     * 内部单例持有类
-     */
-    private static class InstanceHolder {
-    /**
-     * SystemClock方法。
-     *      * @param 1 Object类型参数
-     * @return static final SystemClock INSTANCE = new类型返回值
-     */
-        public static final SystemClock INSTANCE = new SystemClock(1);
-    }
-
-    /**
      * 获取单例实例
      *
      * @return SystemClock单例实例
      */
     private static SystemClock instance() {
         return InstanceHolder.INSTANCE;
-    }
-
-    /**
-     * 启动定时任务定期更新时钟
-     */
-    private void scheduleClockUpdating() {
-        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
-    /**
-     * newThread方法。
-     *      * @param runnable Runnable类型参数
-     * @return Thread类型返回值
-     */
-            public Thread newThread(Runnable runnable) {
-                Thread thread = new Thread(runnable, "System Clock");
-                thread.setDaemon(true);
-                return thread;
-            }
-        });
-        scheduler.scheduleAtFixedRate(new Runnable() {
-    /**
-     * run方法。
-     */
-            public void run() {
-                now.set(System.currentTimeMillis());
-            }
-        }, period, period, TimeUnit.MILLISECONDS);
-    }
-
-    /**
-     * 获取当前时间毫秒数（从缓存中获取）
-     *
-     * @return 当前时间戳（毫秒）
-     */
-    private long currentTimeMillis() {
-        return now.get();
     }
 
     /**
@@ -112,6 +65,54 @@ public class SystemClock {
      */
     public static String nowDate() {
         return new Timestamp(instance().currentTimeMillis()).toString();
+    }
+
+    /**
+     * 启动定时任务定期更新时钟
+     */
+    private void scheduleClockUpdating() {
+        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(new ThreadFactory() {
+            /**
+             * newThread方法。
+             *      * @param runnable Runnable类型参数
+             * @return Thread类型返回值
+             */
+            public Thread newThread(Runnable runnable) {
+                Thread thread = new Thread(runnable, "System Clock");
+                thread.setDaemon(true);
+                return thread;
+            }
+        });
+        scheduler.scheduleAtFixedRate(new Runnable() {
+            /**
+             * run方法。
+             */
+            public void run() {
+                now.set(System.currentTimeMillis());
+            }
+        }, period, period, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * 获取当前时间毫秒数（从缓存中获取）
+     *
+     * @return 当前时间戳（毫秒）
+     */
+    private long currentTimeMillis() {
+        return now.get();
+    }
+
+    /**
+     * 内部单例持有类
+     */
+    private static class InstanceHolder {
+        /**
+         * SystemClock方法。
+         * * @param 1 Object类型参数
+         *
+         * @return static final SystemClock INSTANCE = new类型返回值
+         */
+        public static final SystemClock INSTANCE = new SystemClock(1);
     }
 
 }

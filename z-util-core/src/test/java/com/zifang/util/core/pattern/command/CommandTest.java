@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
 /**
  * 命令模式测试
  */
+
 /**
  * CommandTest类。
  */
@@ -139,8 +140,10 @@ public class CommandTest {
     public void testCommandRegistry() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
-        Command<CommandContext> cmd1 = SimpleCommand.of("cmd1", ctx -> {});
-        Command<CommandContext> cmd2 = SimpleCommand.of("cmd2", ctx -> {});
+        Command<CommandContext> cmd1 = SimpleCommand.of("cmd1", ctx -> {
+        });
+        Command<CommandContext> cmd2 = SimpleCommand.of("cmd2", ctx -> {
+        });
 
         registry.register("command1", cmd1);
         registry.register("command2", "categoryA", cmd2);
@@ -160,9 +163,12 @@ public class CommandTest {
     public void testCommandRegistryByCategory() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
-        registry.register("cmd1", "groupA", SimpleCommand.of("cmd1", ctx -> {}));
-        registry.register("cmd2", "groupA", SimpleCommand.of("cmd2", ctx -> {}));
-        registry.register("cmd3", "groupB", SimpleCommand.of("cmd3", ctx -> {}));
+        registry.register("cmd1", "groupA", SimpleCommand.of("cmd1", ctx -> {
+        }));
+        registry.register("cmd2", "groupA", SimpleCommand.of("cmd2", ctx -> {
+        }));
+        registry.register("cmd3", "groupB", SimpleCommand.of("cmd3", ctx -> {
+        }));
 
         Map<String, Command<CommandContext>> groupA = registry.getCommandsByCategory("groupA");
         assertEquals(2, groupA.size());
@@ -200,28 +206,29 @@ public class CommandTest {
         AtomicBoolean afterCalled = new AtomicBoolean(false);
 
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
-        registry.register("test", SimpleCommand.of("test", ctx -> {}));
+        registry.register("test", SimpleCommand.of("test", ctx -> {
+        }));
 
         CommandExecutor<CommandContext> executor = registry.executor();
         executor.addListener(new CommandExecutor.CommandListener<CommandContext>() {
             @Override
-    /**
-     * onBeforeExecute方法。
-     *      * @param command CommandCommandContext类型参数
-     * @param context CommandContext类型参数
-     */
+            /**
+             * onBeforeExecute方法。
+             *      * @param command CommandCommandContext类型参数
+             * @param context CommandContext类型参数
+             */
             public void onBeforeExecute(Command<CommandContext> command, CommandContext context) {
                 beforeCalled.set(true);
             }
 
             @Override
-    /**
-     * onAfterExecute方法。
-     *      * @param command CommandCommandContext类型参数
-     * @param context CommandContext类型参数
-     * @param duration long类型参数
-     * @param error Exception类型参数
-     */
+            /**
+             * onAfterExecute方法。
+             *      * @param command CommandCommandContext类型参数
+             * @param context CommandContext类型参数
+             * @param duration long类型参数
+             * @param error Exception类型参数
+             */
             public void onAfterExecute(Command<CommandContext> command, CommandContext context, long duration, Exception error) {
                 afterCalled.set(true);
             }
@@ -263,9 +270,9 @@ public class CommandTest {
 
         // Commands that properly support undo
         Command<CommandContext> cmd1 = new SimpleCommand<>("set10",
-            ctx -> value.set(10), ctx -> value.set(0));
+                ctx -> value.set(10), ctx -> value.set(0));
         Command<CommandContext> cmd2 = new SimpleCommand<>("set20",
-            ctx -> value.set(20), ctx -> value.set(0));
+                ctx -> value.set(20), ctx -> value.set(0));
 
         CommandMacro<CommandContext> macro = CommandMacro.of("batch");
         macro.add(cmd1);
@@ -369,8 +376,10 @@ public class CommandTest {
     public void testCommandRegistryRemove() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
 
-        registry.register("cmd1", SimpleCommand.of("cmd1", ctx -> {}));
-        registry.register("cmd2", SimpleCommand.of("cmd2", ctx -> {}));
+        registry.register("cmd1", SimpleCommand.of("cmd1", ctx -> {
+        }));
+        registry.register("cmd2", SimpleCommand.of("cmd2", ctx -> {
+        }));
 
         assertEquals(2, registry.size());
 
@@ -386,7 +395,8 @@ public class CommandTest {
      */
     public void testCommandRegistryNullName() {
         CommandRegistry<CommandContext> registry = new CommandRegistry<>();
-        registry.register(null, SimpleCommand.of("test", ctx -> {}));
+        registry.register(null, SimpleCommand.of("test", ctx -> {
+        }));
     }
 
     @Test(expected = IllegalArgumentException.class)

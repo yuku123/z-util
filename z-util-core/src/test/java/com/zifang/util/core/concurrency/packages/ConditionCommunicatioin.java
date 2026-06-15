@@ -10,6 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 应该总是在一个循环中被等待，并测试正被等待的状态声明。某个实现可以随意移除可能的虚假唤醒，但建议应用程序程序员总是假定这些虚假唤醒的可能发生，
  * 隐藏总是一个循环中等待。
  */
+
 /**
  * ConditionCommunicatioin类。
  */
@@ -17,16 +18,17 @@ public class ConditionCommunicatioin {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
         final Business business = new Business();
         new Thread(new Runnable() {
             @Override
-    /**
-     * run方法。
-     */
+            /**
+             * run方法。
+             */
             public void run() {
                 for (int i = 0; i < 5; i++) {
                     business.sub(i);
@@ -45,10 +47,10 @@ public class ConditionCommunicatioin {
         Condition condition = lock.newCondition();
         boolean shouldSub = true;
 
-    /**
-     * sub方法。
-     *      * @param i int类型参数
-     */
+        /**
+         * sub方法。
+         * * @param i int类型参数
+         */
         public void sub(int i) {
             lock.lock();
             try {
@@ -69,10 +71,10 @@ public class ConditionCommunicatioin {
             }
         }
 
-    /**
-     * main方法。
-     *      * @param i int类型参数
-     */
+        /**
+         * main方法。
+         * * @param i int类型参数
+         */
         public void main(int i) {
             try {
                 lock.lock();

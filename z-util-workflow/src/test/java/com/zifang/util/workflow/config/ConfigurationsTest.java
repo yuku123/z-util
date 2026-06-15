@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * Configurations 类测试
  */
+
 /**
  * ConfigurationsTest类。
  */

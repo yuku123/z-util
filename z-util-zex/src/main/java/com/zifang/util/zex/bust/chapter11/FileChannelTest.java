@@ -9,12 +9,15 @@ package com.zifang.util.zex.bust.chapter11;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.Arrays;
 
 /**
  * FileChannelTest类。
@@ -22,7 +25,8 @@ import java.util.Arrays;
 public class FileChannelTest {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws IOException, InterruptedException {
@@ -114,14 +118,14 @@ public class FileChannelTest {
             ByteBuffer buffer1 = ByteBuffer.allocate(3);
             buffer1.position(1);
             fileChannel.read(buffer1);
-            System.out.println("buffer1读取结果"+new String(buffer1.array()));
+            System.out.println("buffer1读取结果" + new String(buffer1.array()));
 
 
             // 定位到开始
             fileChannel.position(0);
             ByteBuffer buffer2 = ByteBuffer.allocate(3);
-            fileChannel.read(buffer2,1);
-            System.out.println("buffer2读取结果"+new String(buffer2.array()));
+            fileChannel.read(buffer2, 1);
+            System.out.println("buffer2读取结果" + new String(buffer2.array()));
 
             // 定位到开始
             fileChannel.position(0);
@@ -130,8 +134,8 @@ public class FileChannelTest {
             b3.position(1);
             ByteBuffer b4 = ByteBuffer.allocate(3);
             b4.position(1);
-            fileChannel.read(new ByteBuffer[]{b3,b4});
-            System.out.println("b3,b4读取结果:"+new String(b3.array()) + new String(b4.array()));
+            fileChannel.read(new ByteBuffer[]{b3, b4});
+            System.out.println("b3,b4读取结果:" + new String(b3.array()) + new String(b4.array()));
 
 
         } catch (IOException e) {
@@ -173,7 +177,7 @@ public class FileChannelTest {
         FileChannel fileChannel3 = file3.getChannel();
 
         long readLength = fileChannel2.transferFrom(fileChannel1, 0, 4);
-        long writeLength = fileChannel2.transferTo(1, 2,fileChannel3);
+        long writeLength = fileChannel2.transferTo(1, 2, fileChannel3);
 
         fileChannel1.close();
         fileChannel2.close();

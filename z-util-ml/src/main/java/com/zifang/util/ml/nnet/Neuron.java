@@ -7,12 +7,11 @@ import java.util.Random;
  */
 public class Neuron {
 
+    private static final Random RANDOM = new Random();
     private final double[] weights;
     private final double bias;
     private double output;
     private double delta;
-
-    private static final Random RANDOM = new Random();
 
     /**
      * 创建神经元
@@ -36,8 +35,8 @@ public class Neuron {
     /**
      * 计算神经元输出
      *
-     * @param inputs              输入数据
-     * @param activationFunction  激活函数
+     * @param inputs             输入数据
+     * @param activationFunction 激活函数
      * @return 神经元输出值
      */
     public double calculateOutput(double[] inputs, ActivationFunction activationFunction) {

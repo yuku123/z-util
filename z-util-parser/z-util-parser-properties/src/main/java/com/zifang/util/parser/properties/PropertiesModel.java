@@ -7,6 +7,7 @@ import java.util.*;
  *
  * @author zifang
  */
+
 /**
  * PropertiesModel类。
  */
@@ -24,7 +25,8 @@ public class PropertiesModel {
      */
     /**
      * setProperty方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @param value String类型参数
      */
     public void setProperty(String key, String value) {
@@ -42,7 +44,8 @@ public class PropertiesModel {
      */
     /**
      * getProperty方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return String类型返回值
      */
     public String getProperty(String key) {
@@ -56,6 +59,7 @@ public class PropertiesModel {
      */
     /**
      * getOrderedKeys方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getOrderedKeys() {
@@ -69,6 +73,7 @@ public class PropertiesModel {
      */
     /**
      * getProperties方法。
+     *
      * @return Map<String, String>类型返回值
      */
     public Map<String, String> getProperties() {
@@ -83,7 +88,8 @@ public class PropertiesModel {
      */
     /**
      * setComment方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @param comment String类型参数
      */
     public void setComment(String key, String comment) {
@@ -98,7 +104,8 @@ public class PropertiesModel {
      */
     /**
      * getComment方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return String类型返回值
      */
     public String getComment(String key) {
@@ -113,7 +120,8 @@ public class PropertiesModel {
      */
     /**
      * containsKey方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return boolean类型返回值
      */
     public boolean containsKey(String key) {
@@ -129,7 +137,8 @@ public class PropertiesModel {
      */
     /**
      * getPropertyOrDefault方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @param defaultValue String类型参数
      * @return String类型返回值
      */
@@ -145,7 +154,8 @@ public class PropertiesModel {
      */
     /**
      * removeProperty方法。
-     *      * @param key String类型参数
+     * * @param key String类型参数
+     *
      * @return String类型返回值
      */
     public String removeProperty(String key) {
@@ -160,6 +170,7 @@ public class PropertiesModel {
      */
     /**
      * getAllKeys方法。
+     *
      * @return List<String>类型返回值
      */
     public List<String> getAllKeys() {
@@ -173,6 +184,7 @@ public class PropertiesModel {
      */
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {

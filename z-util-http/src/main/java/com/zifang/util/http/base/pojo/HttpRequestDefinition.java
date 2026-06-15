@@ -22,6 +22,7 @@ public class HttpRequestDefinition {
 
     /**
      * getHttpRequestLine方法。
+     *
      * @return HttpRequestLine类型返回值
      */
     public HttpRequestLine getHttpRequestLine() {
@@ -30,7 +31,7 @@ public class HttpRequestDefinition {
 
     /**
      * setHttpRequestLine方法。
-     *      * @param httpRequestLine HttpRequestLine类型参数
+     * * @param httpRequestLine HttpRequestLine类型参数
      */
     public void setHttpRequestLine(HttpRequestLine httpRequestLine) {
         this.httpRequestLine = httpRequestLine;
@@ -38,6 +39,7 @@ public class HttpRequestDefinition {
 
     /**
      * getHttpRequestHeader方法。
+     *
      * @return HttpRequestHeader类型返回值
      */
     public HttpRequestHeader getHttpRequestHeader() {
@@ -46,7 +48,7 @@ public class HttpRequestDefinition {
 
     /**
      * setHttpRequestHeader方法。
-     *      * @param httpRequestHeader HttpRequestHeader类型参数
+     * * @param httpRequestHeader HttpRequestHeader类型参数
      */
     public void setHttpRequestHeader(HttpRequestHeader httpRequestHeader) {
         this.httpRequestHeader = httpRequestHeader;
@@ -54,6 +56,7 @@ public class HttpRequestDefinition {
 
     /**
      * getHttpRequestBody方法。
+     *
      * @return HttpRequestBody类型返回值
      */
     public HttpRequestBody getHttpRequestBody() {
@@ -62,7 +65,7 @@ public class HttpRequestDefinition {
 
     /**
      * setHttpRequestBody方法。
-     *      * @param httpRequestBody HttpRequestBody类型参数
+     * * @param httpRequestBody HttpRequestBody类型参数
      */
     public void setHttpRequestBody(HttpRequestBody httpRequestBody) {
         this.httpRequestBody = httpRequestBody;

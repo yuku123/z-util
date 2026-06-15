@@ -17,6 +17,10 @@ public class BigDecimalUtil {
      * 默认四舍五入规则为：向上舍入
      */
     private static final int DEFAULT_ROUND = BigDecimal.ROUND_HALF_UP;
+    /**
+     * 默认除法运算精度
+     */
+    private static final int DEF_DIV_SCALE = 10;
 
     /**
      * 加法运算
@@ -132,7 +136,6 @@ public class BigDecimalUtil {
         return resultValue;
     }
 
-
     /**
      * 将object转换为Bigdecimal,若object为空，则返回resultValue
      *
@@ -174,11 +177,6 @@ public class BigDecimalUtil {
         }
         return null;
     }
-
-    /**
-     * 默认除法运算精度
-     */
-    private static final int DEF_DIV_SCALE = 10;
 
     /**
      * 提供精确的加法运算

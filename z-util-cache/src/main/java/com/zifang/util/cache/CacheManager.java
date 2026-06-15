@@ -27,7 +27,8 @@ public class CacheManager {
     private static volatile CacheManager instance;
     private final Map<String, Cache<?, ?>> caches = new ConcurrentHashMap<>();
 
-    private CacheManager() {}
+    private CacheManager() {
+    }
 
     public static CacheManager getInstance() {
         if (instance == null) {
@@ -94,13 +95,16 @@ public class CacheManager {
         return c;
     }
 
-    /** 清空所有缓存（每个缓存自身的清空 + 关闭）。 */
+    /**
+     * 清空所有缓存（每个缓存自身的清空 + 关闭）。
+     */
     public void clearAll() {
         for (Cache<?, ?> c : caches.values()) {
             try {
                 c.invalidateAll();
                 c.shutdown();
-            } catch (RuntimeException ignored) {}
+            } catch (RuntimeException ignored) {
+            }
         }
         caches.clear();
     }

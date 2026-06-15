@@ -6,6 +6,7 @@ package com.zifang.util.yaml.facade;
 /**
  * YamlFacade接口。
  */
+
 /**
  * YamlFacade接口。
  */

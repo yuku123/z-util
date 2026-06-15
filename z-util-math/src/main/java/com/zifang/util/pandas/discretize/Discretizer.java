@@ -16,7 +16,7 @@ public class Discretizer {
      * 将数据分成等宽的区间
      *
      * @param series 输入数据
-     * @param bins 分箱数量
+     * @param bins   分箱数量
      * @return 分箱后的标签 Series
      */
     public static Series cut(Series series, int bins) {
@@ -64,7 +64,7 @@ public class Discretizer {
      * 将数据分成每个箱子中样本数量相等的区间
      *
      * @param series 输入数据
-     * @param q 分位数数量
+     * @param q      分位数数量
      * @return 分箱后的标签 Series
      */
     public static Series qcut(Series series, int q) {

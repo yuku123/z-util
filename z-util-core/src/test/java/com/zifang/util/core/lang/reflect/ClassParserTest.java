@@ -5,7 +5,21 @@ import org.junit.Test;
 
 import java.lang.reflect.Type;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+interface IA1 {
+}
+
+
+interface IA2 extends IA21 {
+}
+
+interface IA21 {
+}
+
+interface D extends IConverter<Integer, Long> {
+}
 
 /**
  * ClassParserTest类。
@@ -65,11 +79,10 @@ public class ClassParserTest {
     }
 }
 
-
 class A extends AbstractA implements IA1, IA2, IConverter<Integer, Long> {
-    private String a1;
-    protected String a2;
     public String a3;
+    protected String a2;
+    private String a1;
 
     /**
      * t1方法。
@@ -99,15 +112,6 @@ class A extends AbstractA implements IA1, IA2, IConverter<Integer, Long> {
     public Long to(Integer integer, Long aLong) {
         return null;
     }
-}
-
-interface IA1 {
-}
-
-interface IA2 extends IA21 {
-}
-
-interface IA21 {
 }
 
 abstract class AbstractA extends B {
@@ -140,7 +144,4 @@ class C implements D {
     public Long to(Integer integer, Long aLong) {
         return null;
     }
-}
-
-interface D extends IConverter<Integer, Long> {
 }

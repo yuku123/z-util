@@ -1,7 +1,6 @@
 package com.zifang.util.ioc.metadata;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.util.Objects;
 
 /**
@@ -30,17 +29,49 @@ public class BeanDefinition {
         this.factoryMethod = factoryMethod;
     }
 
-    public String getName() { return name; }
-    public Class<?> getBeanClass() { return beanClass; }
-    public Scope getScope() { return scope; }
-    public boolean isSingleton() { return scope == Scope.SINGLETON; }
-    public boolean isPrototype() { return scope == Scope.PROTOTYPE; }
-    public boolean isConfiguration() { return isConfiguration; }
-    public Method getFactoryMethod() { return factoryMethod; }
-    public Object getInstance() { return instance; }
-    public void setInstance(Object instance) { this.instance = instance; }
-    public long getCreationTime() { return creationTime; }
-    public void setCreationTime(long creationTime) { this.creationTime = creationTime; }
+    public String getName() {
+        return name;
+    }
+
+    public Class<?> getBeanClass() {
+        return beanClass;
+    }
+
+    public Scope getScope() {
+        return scope;
+    }
+
+    public boolean isSingleton() {
+        return scope == Scope.SINGLETON;
+    }
+
+    public boolean isPrototype() {
+        return scope == Scope.PROTOTYPE;
+    }
+
+    public boolean isConfiguration() {
+        return isConfiguration;
+    }
+
+    public Method getFactoryMethod() {
+        return factoryMethod;
+    }
+
+    public Object getInstance() {
+        return instance;
+    }
+
+    public void setInstance(Object instance) {
+        this.instance = instance;
+    }
+
+    public long getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(long creationTime) {
+        this.creationTime = creationTime;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,7 +82,9 @@ public class BeanDefinition {
     }
 
     @Override
-    public int hashCode() { return Objects.hash(name, beanClass); }
+    public int hashCode() {
+        return Objects.hash(name, beanClass);
+    }
 
     @Override
     public String toString() {

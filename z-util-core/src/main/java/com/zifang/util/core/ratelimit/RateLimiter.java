@@ -1,6 +1,8 @@
 package com.zifang.util.core.ratelimit;
 
-/** 限流器接口。 */
+/**
+ * 限流器接口。
+ */
 public interface RateLimiter {
 
     /**

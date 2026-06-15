@@ -14,7 +14,8 @@ public class BusinessException extends BaseException {
 
     /**
      * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
+     * * @param statusCode StatusCode类型参数
+     *
      * @param e Throwable类型参数
      */
     public BusinessException(StatusCode statusCode, Throwable e) {
@@ -23,7 +24,7 @@ public class BusinessException extends BaseException {
 
     /**
      * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
+     * * @param statusCode StatusCode类型参数
      */
     public BusinessException(StatusCode statusCode) {
         super(statusCode);
@@ -31,7 +32,8 @@ public class BusinessException extends BaseException {
 
     /**
      * BusinessException方法。
-     *      * @param statusCode StatusCode类型参数
+     * * @param statusCode StatusCode类型参数
+     *
      * @param params Object...类型参数
      */
     public BusinessException(StatusCode statusCode, Object... params) {

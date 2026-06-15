@@ -29,6 +29,7 @@ import java.util.Set;
  */
 public class CacheBuilder<K, V> {
 
+    private final Set<RemovalListener<K, V>> listeners = new HashSet<>();
     private String name = "cache-" + System.nanoTime();
     private long maximumSize = -1L;            // -1 表示无界
     private long expireAfterWriteNanos = -1L;  // -1 表示不过期
@@ -39,9 +40,9 @@ public class CacheBuilder<K, V> {
     private boolean nullValueProtection = false;
     private Expiry<K, V> expiry = null;          // 自定义过期
     private Algorithm algorithm = Algorithm.LRU; // 淘汰算法（默认 LRU）
-    private final Set<RemovalListener<K, V>> listeners = new HashSet<>();
 
-    private CacheBuilder() {}
+    private CacheBuilder() {
+    }
 
     public static <K, V> CacheBuilder<K, V> newBuilder() {
         return new CacheBuilder<>();
@@ -137,9 +138,6 @@ public class CacheBuilder<K, V> {
         return this;
     }
 
-    /** 缓存淘汰算法枚举。 */
-    public enum Algorithm { LRU, WTINYLFU }
-
     /**
      * 构建一个普通 {@link Cache}。
      */
@@ -159,16 +157,50 @@ public class CacheBuilder<K, V> {
         return new LoadingMemoryCache<>(this, loader);
     }
 
+    String getName() {
+        return name;
+    }
+
     // ==================== 包内可见的访问器（供 MemoryCache 使用） ====================
 
-    String getName() { return name; }
-    long getMaximumSize() { return maximumSize; }
-    long getExpireAfterWriteNanos() { return expireAfterWriteNanos; }
-    long getExpireAfterAccessNanos() { return expireAfterAccessNanos; }
-    long getRefreshAfterWriteNanos() { return refreshAfterWriteNanos; }
-    long getInitialCapacity() { return initialCapacity; }
-    boolean isRecordStats() { return recordStats; }
-    boolean isNullValueProtection() { return nullValueProtection; }
-    Expiry<K, V> getExpiry() { return expiry; }
-    Set<RemovalListener<K, V>> getListeners() { return listeners; }
+    long getMaximumSize() {
+        return maximumSize;
+    }
+
+    long getExpireAfterWriteNanos() {
+        return expireAfterWriteNanos;
+    }
+
+    long getExpireAfterAccessNanos() {
+        return expireAfterAccessNanos;
+    }
+
+    long getRefreshAfterWriteNanos() {
+        return refreshAfterWriteNanos;
+    }
+
+    long getInitialCapacity() {
+        return initialCapacity;
+    }
+
+    boolean isRecordStats() {
+        return recordStats;
+    }
+
+    boolean isNullValueProtection() {
+        return nullValueProtection;
+    }
+
+    Expiry<K, V> getExpiry() {
+        return expiry;
+    }
+
+    Set<RemovalListener<K, V>> getListeners() {
+        return listeners;
+    }
+
+    /**
+     * 缓存淘汰算法枚举。
+     */
+    public enum Algorithm {LRU, WTINYLFU}
 }

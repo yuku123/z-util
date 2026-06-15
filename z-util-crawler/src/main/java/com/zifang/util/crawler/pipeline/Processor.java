@@ -13,7 +13,7 @@ public interface Processor {
 
     /**
      * Process the given context.
-     * 
+     *
      * @param ctx the pipeline context to process
      */
     void process(PipelineContext ctx);

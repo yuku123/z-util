@@ -10,7 +10,8 @@ public class ShortUtil {
 
     /**
      * parseShort方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @return static Short类型返回值
      */
     public static Short parseShort(Object object) {
@@ -22,7 +23,8 @@ public class ShortUtil {
 
     /**
      * parseShortOrDefault方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @param defaultValue short类型参数
      * @return static Short类型返回值
      */

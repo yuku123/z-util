@@ -14,31 +14,32 @@ import java.util.Map;
 
 public abstract class CFJavaFileManager extends ForwardingJavaFileManager {
     private static final Logger log = LoggerFactory.getLogger(CFJavaFileManager.class);
-
-    /**
-     * getFileObjectHashMap方法。
-     * @return Map<String, BytesJavaFileObject>类型返回值
-     */
-    public Map<String, BytesJavaFileObject> getFileObjectHashMap() {
-        return fileObjectHashMap;
-    }
-
     /**
      * 保存编译后Class文件的对象
      */
     private Map<String, BytesJavaFileObject> fileObjectHashMap = new HashMap<>();
 
     /**
+     * CFJavaFileManager方法。
+     * * @param fileManager JavaFileManager类型参数
+     */
+    protected CFJavaFileManager(JavaFileManager fileManager) {
+        super(fileManager);
+    }
+
+    /**
      * Creates a new instance of ForwardingJavaFileManager.
      *
      * @param fileManager delegate to this file manager
      */
+
     /**
-     * CFJavaFileManager方法。
-     *      * @param fileManager JavaFileManager类型参数
+     * getFileObjectHashMap方法。
+     *
+     * @return Map<String, BytesJavaFileObject>类型返回值
      */
-    protected CFJavaFileManager(JavaFileManager fileManager) {
-        super(fileManager);
+    public Map<String, BytesJavaFileObject> getFileObjectHashMap() {
+        return fileObjectHashMap;
     }
 
     /**

@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -98,7 +96,7 @@ public final class FileHashUtil {
      *
      * @param file the file to compute the MD5 hash for
      * @return the MD5 hash as a 32-character hexadecimal string
-     * @throws IOException          if the file cannot be read
+     * @throws IOException              if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
     public static String md5(File file) throws IOException, NoSuchAlgorithmException {
@@ -114,7 +112,7 @@ public final class FileHashUtil {
      *
      * @param file the file to compute the SHA-1 hash for
      * @return the SHA-1 hash as a 40-character hexadecimal string
-     * @throws IOException          if the file cannot be read
+     * @throws IOException              if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
     public static String sha1(File file) throws IOException, NoSuchAlgorithmException {
@@ -130,7 +128,7 @@ public final class FileHashUtil {
      *
      * @param file the file to compute the SHA-256 hash for
      * @return the SHA-256 hash as a 64-character hexadecimal string
-     * @throws IOException          if the file cannot be read
+     * @throws IOException              if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
     public static String sha256(File file) throws IOException, NoSuchAlgorithmException {
@@ -159,9 +157,9 @@ public final class FileHashUtil {
      * @param file      the file to compute the hash for
      * @param algorithm the hash algorithm to use (e.g., "MD5", "SHA-256")
      * @return the hash as a lowercase hexadecimal string
-     * @throws IOException               if the file cannot be read
-     * @throws IllegalArgumentException  if the file is null or algorithm is null/empty
-     * @throws NoSuchAlgorithmException  if the specified algorithm is not available
+     * @throws IOException              if the file cannot be read
+     * @throws IllegalArgumentException if the file is null or algorithm is null/empty
+     * @throws NoSuchAlgorithmException if the specified algorithm is not available
      */
     public static String hash(File file, String algorithm) throws IOException, NoSuchAlgorithmException {
         if (file == null) {
@@ -227,7 +225,7 @@ public final class FileHashUtil {
      *
      * @param file the file to detect the type of
      * @return the file type identifier (e.g., "jpg", "png", "pdf") or null if unknown
-     * @throws IOException          if the file cannot be read
+     * @throws IOException              if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
     public static String fileType(File file) throws IOException {
@@ -296,7 +294,7 @@ public final class FileHashUtil {
      *
      * @param file the file to check
      * @return true if the file is a valid image, false otherwise
-     * @throws IOException          if the file cannot be read
+     * @throws IOException              if the file cannot be read
      * @throws IllegalArgumentException if the file is null
      */
     public static boolean isImage(File file) throws IOException {
@@ -340,7 +338,7 @@ public final class FileHashUtil {
      */
     private static boolean isImageType(String type) {
         return "jpg".equals(type) || "png".equals(type) ||
-               "gif".equals(type) || "tif".equals(type) || "bmp".equals(type);
+                "gif".equals(type) || "tif".equals(type) || "bmp".equals(type);
     }
 
     /**

@@ -17,9 +17,9 @@ public class IntegerTest {
     /**
      * test001方法。
      */
-    public void test001(){
+    public void test001() {
         System.out.println();
-        Integer.parseInt("-2147483649",10);
+        Integer.parseInt("-2147483649", 10);
     }
 
 
@@ -27,7 +27,7 @@ public class IntegerTest {
     /**
      * test002方法。
      */
-    public void test002(){
+    public void test002() {
         System.out.println();
         Integer.toHexString(17);
     }
@@ -36,7 +36,7 @@ public class IntegerTest {
     /**
      * test003方法。
      */
-    public  void test003(){
+    public void test003() {
         System.out.println();
         Integer.toString(65536);
 
@@ -46,7 +46,7 @@ public class IntegerTest {
     /**
      * test004方法。
      */
-    public void test004(){
+    public void test004() {
         System.out.println();
     }
 
@@ -54,12 +54,11 @@ public class IntegerTest {
     /**
      * ssss方法。
      */
-    public void ssss(){
-        for(Method method: Integer.class.getDeclaredMethods()){
-            System.out.println(method.getName() + "("+ method.getParameterTypes()+")");
+    public void ssss() {
+        for (Method method : Integer.class.getDeclaredMethods()) {
+            System.out.println(method.getName() + "(" + method.getParameterTypes() + ")");
         }
     }
-
 
 
 }

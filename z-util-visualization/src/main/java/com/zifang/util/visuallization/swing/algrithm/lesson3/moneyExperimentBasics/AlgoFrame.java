@@ -9,13 +9,15 @@ import java.awt.*;
  */
 public class AlgoFrame extends JFrame {
 
+    int[] money;
     private int canvasWidth;
     private int canvasHeight;
 
     /**
      * 创建可视化框架
-     * @param title 窗口标题
-     * @param canvasWidth 画布宽度
+     *
+     * @param title        窗口标题
+     * @param canvasWidth  画布宽度
      * @param canvasHeight 画布高度
      */
     public AlgoFrame(String title, int canvasWidth, int canvasHeight) {
@@ -37,6 +39,7 @@ public class AlgoFrame extends JFrame {
 
     /**
      * 创建可视化框架（默认尺寸1024x768）
+     *
      * @param title 窗口标题
      */
     public AlgoFrame(String title) {
@@ -46,6 +49,7 @@ public class AlgoFrame extends JFrame {
 
     /**
      * 获取画布宽度
+     *
      * @return 画布宽度
      */
     public int getCanvasWidth() {
@@ -54,16 +58,16 @@ public class AlgoFrame extends JFrame {
 
     /**
      * 获取画布高度
+     *
      * @return 画布高度
      */
     public int getCanvasHeight() {
         return canvasHeight;
     }
 
-    int[] money;
-
     /**
      * 渲染财富数据
+     *
      * @param money 财富数组
      */
     public void render(int[] money) {
@@ -78,19 +82,19 @@ public class AlgoFrame extends JFrame {
      */
     private class AlgoCanvas extends JPanel {
 
-    /**
-     * AlgoCanvas方法。
-     */
+        /**
+         * AlgoCanvas方法。
+         */
         public AlgoCanvas() {
             // 双缓存
             super(true);
         }
 
         @Override
-    /**
-     * paintComponent方法。
-     *      * @param g Graphics类型参数
-     */
+        /**
+         * paintComponent方法。
+         *      * @param g Graphics类型参数
+         */
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
@@ -114,10 +118,10 @@ public class AlgoFrame extends JFrame {
         }
 
         @Override
-    /**
-     * getPreferredSize方法。
-     * @return Dimension类型返回值
-     */
+        /**
+         * getPreferredSize方法。
+         * @return Dimension类型返回值
+         */
         public Dimension getPreferredSize() {
             return new Dimension(canvasWidth, canvasHeight);
         }

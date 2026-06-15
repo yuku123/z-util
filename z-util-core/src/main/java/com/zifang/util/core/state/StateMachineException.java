@@ -11,7 +11,7 @@ public class StateMachineException extends RuntimeException {
 
     /**
      * StateMachineException方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public StateMachineException(String message) {
         super(message);
@@ -19,7 +19,8 @@ public class StateMachineException extends RuntimeException {
 
     /**
      * StateMachineException方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
+     *
      * @param cause Throwable类型参数
      */
     public StateMachineException(String message, Throwable cause) {

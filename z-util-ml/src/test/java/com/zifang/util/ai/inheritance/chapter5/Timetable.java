@@ -1,5 +1,6 @@
 package com.zifang.util.ml.inheritance.chapter5;
 
+import java.lang.Class;
 import java.util.HashMap;
 
 /**
@@ -23,6 +24,7 @@ import java.util.HashMap;
  * created by createClasses, and figures out how many hard constraints have been
  * violated.
  */
+
 /**
  * Timetable类。
  */
@@ -64,7 +66,7 @@ public class Timetable {
      */
     /**
      * Timetable方法。
-     *      * @param cloneable Timetable类型参数
+     * * @param cloneable Timetable类型参数
      */
     public Timetable(Timetable cloneable) {
         this.rooms = cloneable.getRooms();
@@ -99,7 +101,8 @@ public class Timetable {
      */
     /**
      * addRoom方法。
-     *      * @param roomId int类型参数
+     * * @param roomId int类型参数
+     *
      * @param roomName String类型参数
      * @param capacity int类型参数
      */
@@ -115,7 +118,8 @@ public class Timetable {
      */
     /**
      * addProfessor方法。
-     *      * @param professorId int类型参数
+     * * @param professorId int类型参数
+     *
      * @param professorName String类型参数
      */
     public void addProfessor(int professorId, String professorName) {
@@ -132,9 +136,10 @@ public class Timetable {
      */
     /**
      * addModule方法。
-     *      * @param moduleId int类型参数
-     * @param moduleCode String类型参数
-     * @param module String类型参数
+     * * @param moduleId int类型参数
+     *
+     * @param moduleCode   String类型参数
+     * @param module       String类型参数
      * @param professorIds int[]类型参数
      */
     public void addModule(int moduleId, String moduleCode, String module, int[] professorIds) {
@@ -150,7 +155,8 @@ public class Timetable {
      */
     /**
      * addGroup方法。
-     *      * @param groupId int类型参数
+     * * @param groupId int类型参数
+     *
      * @param groupSize int类型参数
      * @param moduleIds int[]类型参数
      */
@@ -167,7 +173,8 @@ public class Timetable {
      */
     /**
      * addTimeslot方法。
-     *      * @param timeslotId int类型参数
+     * * @param timeslotId int类型参数
+     *
      * @param timeslot String类型参数
      */
     public void addTimeslot(int timeslotId, String timeslot) {
@@ -190,7 +197,7 @@ public class Timetable {
      */
     /**
      * createClasses方法。
-     *      * @param individual Individual类型参数
+     * * @param individual Individual类型参数
      */
     public void createClasses(Individual individual) {
         // Init classes
@@ -233,7 +240,8 @@ public class Timetable {
      */
     /**
      * getRoom方法。
-     *      * @param roomId int类型参数
+     * * @param roomId int类型参数
+     *
      * @return Room类型返回值
      */
     public Room getRoom(int roomId) {
@@ -245,6 +253,7 @@ public class Timetable {
 
     /**
      * getRooms方法。
+     *
      * @return HashMap<Integer, Room>类型返回值
      */
     public HashMap<Integer, Room> getRooms() {
@@ -258,6 +267,7 @@ public class Timetable {
      */
     /**
      * getRandomRoom方法。
+     *
      * @return Room类型返回值
      */
     public Room getRandomRoom() {
@@ -274,7 +284,8 @@ public class Timetable {
      */
     /**
      * getProfessor方法。
-     *      * @param professorId int类型参数
+     * * @param professorId int类型参数
+     *
      * @return Professor类型返回值
      */
     public Professor getProfessor(int professorId) {
@@ -289,7 +300,8 @@ public class Timetable {
      */
     /**
      * getModule方法。
-     *      * @param moduleId int类型参数
+     * * @param moduleId int类型参数
+     *
      * @return Module类型返回值
      */
     public Module getModule(int moduleId) {
@@ -304,7 +316,8 @@ public class Timetable {
      */
     /**
      * getGroupModules方法。
-     *      * @param groupId int类型参数
+     * * @param groupId int类型参数
+     *
      * @return int[]类型返回值
      */
     public int[] getGroupModules(int groupId) {
@@ -320,7 +333,8 @@ public class Timetable {
      */
     /**
      * getGroup方法。
-     *      * @param groupId int类型参数
+     * * @param groupId int类型参数
+     *
      * @return Group类型返回值
      */
     public Group getGroup(int groupId) {
@@ -334,6 +348,7 @@ public class Timetable {
      */
     /**
      * getGroupsAsArray方法。
+     *
      * @return Group[]类型返回值
      */
     public Group[] getGroupsAsArray() {
@@ -348,7 +363,8 @@ public class Timetable {
      */
     /**
      * getTimeslot方法。
-     *      * @param timeslotId int类型参数
+     * * @param timeslotId int类型参数
+     *
      * @return Timeslot类型返回值
      */
     public Timeslot getTimeslot(int timeslotId) {
@@ -362,6 +378,7 @@ public class Timetable {
      */
     /**
      * getRandomTimeslot方法。
+     *
      * @return Timeslot类型返回值
      */
     public Timeslot getRandomTimeslot() {
@@ -377,6 +394,7 @@ public class Timetable {
      */
     /**
      * getClasses方法。
+     *
      * @return Class[]类型返回值
      */
     public Class[] getClasses() {
@@ -390,6 +408,7 @@ public class Timetable {
      */
     /**
      * getNumClasses方法。
+     *
      * @return int类型返回值
      */
     public int getNumClasses() {
@@ -431,6 +450,7 @@ public class Timetable {
      */
     /**
      * calcClashes方法。
+     *
      * @return int类型返回值
      */
     public int calcClashes() {

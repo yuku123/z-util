@@ -1,11 +1,11 @@
 package com.zifang.util.ml.clustering;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 
 /**
  * K-Means clustering algorithm using Lloyd's method.
- * 
+ * <p>
  * Algorithm:
  * 1. Initialize centroids (random from data, k-means++ preferred)
  * 2. Assign each point to nearest centroid (Euclidean distance)
@@ -18,41 +18,42 @@ public class KMeans {
     private double tolerance;
     private NdArray centroids;
     private int[] labels;
-    
+
     /**
      * KMeans方法。
-     *      * @param k int类型参数
+     * * @param k int类型参数
+     *
      * @param maxIterations int类型参数
-     * @param tolerance double类型参数
+     * @param tolerance     double类型参数
      */
     public KMeans(int k, int maxIterations, double tolerance) {
         this.k = k;
         this.maxIterations = maxIterations;
         this.tolerance = tolerance;
     }
-    
+
     /**
      * fit方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
      */
     public void fit(NdArray X) {
         int nSamples = X.getShape().get(0);
         int nFeatures = X.getShape().get(1);
         double[][] Xdata = toDouble2D(X);
-        
+
         // Initialize centroids using k-means++ method
         this.centroids = initializeCentroids(Xdata, nSamples, nFeatures);
         double[][] centroidsData = toDouble2D(centroids);
-        
+
         this.labels = new int[nSamples];
-        
+
         for (int iteration = 0; iteration < maxIterations; iteration++) {
             // Assign each point to nearest centroid
             int[] newLabels = new int[nSamples];
             for (int i = 0; i < nSamples; i++) {
                 newLabels[i] = findNearestCentroid(Xdata[i], centroidsData);
             }
-            
+
             // Check for convergence
             boolean converged = true;
             for (int i = 0; i < nSamples; i++) {
@@ -62,15 +63,15 @@ public class KMeans {
                 }
             }
             this.labels = newLabels;
-            
+
             if (converged) {
                 break;
             }
-            
+
             // Update centroids
             double[][] newCentroids = new double[k][nFeatures];
             int[] counts = new int[k];
-            
+
             for (int i = 0; i < nSamples; i++) {
                 int cluster = labels[i];
                 for (int j = 0; j < nFeatures; j++) {
@@ -78,7 +79,7 @@ public class KMeans {
                 }
                 counts[cluster]++;
             }
-            
+
             // Compute mean and check convergence
             double maxChange = 0.0;
             for (int c = 0; c < k; c++) {
@@ -94,7 +95,7 @@ public class KMeans {
                     }
                 }
             }
-            
+
             // Calculate max centroid change for convergence check
             for (int c = 0; c < k; c++) {
                 double change = euclideanDistance(centroidsData[c], newCentroids[c]);
@@ -102,22 +103,23 @@ public class KMeans {
                     maxChange = change;
                 }
             }
-            
+
             centroidsData = newCentroids;
-            
+
             if (maxChange < tolerance) {
                 break;
             }
         }
-        
+
         // Store final centroids
         this.centroids = NdArray.array(flatten2D(centroidsData), DType.FLOAT64);
         this.centroids = this.centroids.reshape(k, nFeatures);
     }
-    
+
     /**
      * predict方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @return int[]类型返回值
      */
     public int[] predict(NdArray X) {
@@ -125,47 +127,48 @@ public class KMeans {
         double[][] centroidsData = toDouble2D(this.centroids);
         int nSamples = Xdata.length;
         int[] predictions = new int[nSamples];
-        
+
         for (int i = 0; i < nSamples; i++) {
             predictions[i] = findNearestCentroid(Xdata[i], centroidsData);
         }
-        
+
         return predictions;
     }
-    
+
     /**
      * fitPredict方法。
-     *      * @param X NdArray类型参数
+     * * @param X NdArray类型参数
+     *
      * @return int[]类型返回值
      */
     public int[] fitPredict(NdArray X) {
         fit(X);
         return labels;
     }
-    
+
     /**
      * Initialize centroids using k-means++ method for better initial placement.
      */
     private NdArray initializeCentroids(double[][] X, int nSamples, int nFeatures) {
         double[][] centroids = new double[k][nFeatures];
-        
+
         // Choose first centroid randomly
         int firstIdx = (int) (Math.random() * nSamples);
         for (int j = 0; j < nFeatures; j++) {
             centroids[0][j] = X[firstIdx][j];
         }
-        
+
         // Choose remaining centroids with probability proportional to distance squared
         double[] distances = new double[nSamples];
         double totalDistance;
-        
+
         for (int c = 1; c < k; c++) {
             totalDistance = 0.0;
             for (int i = 0; i < nSamples; i++) {
                 distances[i] = findMinDistanceSquared(X[i], centroids, c);
                 totalDistance += distances[i];
             }
-            
+
             // Choose next centroid with probability proportional to distance squared
             double threshold = Math.random() * totalDistance;
             double cumulative = 0.0;
@@ -179,10 +182,10 @@ public class KMeans {
                 }
             }
         }
-        
+
         return NdArray.array(flatten2D(centroids), DType.FLOAT64).reshape(k, nFeatures);
     }
-    
+
     /**
      * Find the minimum squared distance from a point to existing centroids.
      */
@@ -196,14 +199,14 @@ public class KMeans {
         }
         return minDist;
     }
-    
+
     /**
      * Find index of nearest centroid for a given point.
      */
     private int findNearestCentroid(double[] point, double[][] centroids) {
         int nearest = 0;
         double minDist = euclideanDistance(point, centroids[0]);
-        
+
         for (int c = 1; c < centroids.length; c++) {
             double dist = euclideanDistance(point, centroids[c]);
             if (dist < minDist) {
@@ -211,17 +214,17 @@ public class KMeans {
                 nearest = c;
             }
         }
-        
+
         return nearest;
     }
-    
+
     /**
      * Compute Euclidean distance between two points.
      */
     private double euclideanDistance(double[] a, double[] b) {
         return Math.sqrt(euclideanDistanceSquared(a, b));
     }
-    
+
     /**
      * Compute squared Euclidean distance between two points.
      */
@@ -233,7 +236,7 @@ public class KMeans {
         }
         return sum;
     }
-    
+
     /**
      * Convert NdArray to 2D double array.
      */
@@ -241,9 +244,9 @@ public class KMeans {
         Object data = arr.getData();
         int nRows = arr.getShape().get(0);
         int nCols = arr.getShape().get(1);
-        
+
         double[][] result = new double[nRows][nCols];
-        
+
         if (data instanceof double[][]) {
             double[][] d2 = (double[][]) data;
             for (int i = 0; i < nRows; i++) {
@@ -280,10 +283,10 @@ public class KMeans {
                 }
             }
         }
-        
+
         return result;
     }
-    
+
     /**
      * Flatten 2D double array to 1D for NdArray creation.
      */

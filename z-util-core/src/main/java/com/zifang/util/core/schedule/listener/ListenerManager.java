@@ -4,7 +4,9 @@ import com.zifang.util.core.schedule.JobDetail;
 import com.zifang.util.core.schedule.JobExecutionContextWrapper;
 import com.zifang.util.core.schedule.MisfirePolicy;
 import com.zifang.util.core.schedule.SchedulerRuntimeException;
-import org.quartz.*;
+import org.quartz.JobKey;
+import org.quartz.SchedulerException;
+import org.quartz.TriggerKey;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,7 +44,7 @@ public class ListenerManager {
 
     /**
      * ListenerManager方法。
-     *      * @param quartzScheduler org.quartz.Scheduler类型参数
+     * * @param quartzScheduler org.quartz.Scheduler类型参数
      */
     public ListenerManager(org.quartz.Scheduler quartzScheduler) {
         this.quartzScheduler = Objects.requireNonNull(quartzScheduler);
@@ -247,38 +249,38 @@ public class ListenerManager {
         }
 
         @Override
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
+        /**
+         * getName方法。
+         * @return String类型返回值
+         */
         public String getName() {
             return delegate.getName();
         }
 
         @Override
-    /**
-     * jobToBeExecuted方法。
-     *      * @param context org.quartz.JobExecutionContext类型参数
-     */
+        /**
+         * jobToBeExecuted方法。
+         *      * @param context org.quartz.JobExecutionContext类型参数
+         */
         public void jobToBeExecuted(org.quartz.JobExecutionContext context) {
             delegate.jobToBeExecuted(new JobExecutionContextWrapper(context));
         }
 
         @Override
-    /**
-     * jobExecutionVetoed方法。
-     *      * @param context org.quartz.JobExecutionContext类型参数
-     */
+        /**
+         * jobExecutionVetoed方法。
+         *      * @param context org.quartz.JobExecutionContext类型参数
+         */
         public void jobExecutionVetoed(org.quartz.JobExecutionContext context) {
             delegate.jobExecutionVetoed(new JobExecutionContextWrapper(context));
         }
 
         @Override
-    /**
-     * jobWasExecuted方法。
-     *      * @param context org.quartz.JobExecutionContext类型参数
-     * @param exception org.quartz.JobExecutionException类型参数
-     */
+        /**
+         * jobWasExecuted方法。
+         *      * @param context org.quartz.JobExecutionContext类型参数
+         * @param exception org.quartz.JobExecutionException类型参数
+         */
         public void jobWasExecuted(org.quartz.JobExecutionContext context,
                                    org.quartz.JobExecutionException exception) {
             delegate.jobWasExecuted(new JobExecutionContextWrapper(context), exception);
@@ -293,20 +295,20 @@ public class ListenerManager {
         }
 
         @Override
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
+        /**
+         * getName方法。
+         * @return String类型返回值
+         */
         public String getName() {
             return delegate.getName();
         }
 
         @Override
-    /**
-     * triggerFired方法。
-     *      * @param trigger org.quartz.Trigger类型参数
-     * @param context org.quartz.JobExecutionContext类型参数
-     */
+        /**
+         * triggerFired方法。
+         *      * @param trigger org.quartz.Trigger类型参数
+         * @param context org.quartz.JobExecutionContext类型参数
+         */
         public void triggerFired(org.quartz.Trigger trigger,
                                  org.quartz.JobExecutionContext context) {
             delegate.triggerFired(
@@ -315,12 +317,12 @@ public class ListenerManager {
         }
 
         @Override
-    /**
-     * vetoJobExecution方法。
-     *      * @param trigger org.quartz.Trigger类型参数
-     * @param context org.quartz.JobExecutionContext类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * vetoJobExecution方法。
+         *      * @param trigger org.quartz.Trigger类型参数
+         * @param context org.quartz.JobExecutionContext类型参数
+         * @return boolean类型返回值
+         */
         public boolean vetoJobExecution(org.quartz.Trigger trigger,
                                         org.quartz.JobExecutionContext context) {
             return delegate.vetoJobExecution(
@@ -329,21 +331,21 @@ public class ListenerManager {
         }
 
         @Override
-    /**
-     * triggerMisfired方法。
-     *      * @param trigger org.quartz.Trigger类型参数
-     */
+        /**
+         * triggerMisfired方法。
+         *      * @param trigger org.quartz.Trigger类型参数
+         */
         public void triggerMisfired(org.quartz.Trigger trigger) {
             delegate.triggerMisfired(toWrapper(trigger));
         }
 
         @Override
-    /**
-     * triggerComplete方法。
-     *      * @param trigger org.quartz.Trigger类型参数
-     * @param context org.quartz.JobExecutionContext类型参数
-     * @param instruction org.quartz.Trigger.CompletedExecutionInstruction类型参数
-     */
+        /**
+         * triggerComplete方法。
+         *      * @param trigger org.quartz.Trigger类型参数
+         * @param context org.quartz.JobExecutionContext类型参数
+         * @param instruction org.quartz.Trigger.CompletedExecutionInstruction类型参数
+         */
         public void triggerComplete(org.quartz.Trigger trigger,
                                     org.quartz.JobExecutionContext context,
                                     org.quartz.Trigger.CompletedExecutionInstruction instruction) {
@@ -370,21 +372,80 @@ public class ListenerManager {
             } else {
                 // 通用包装
                 return new com.zifang.util.core.schedule.Trigger() {
-                    @Override public org.quartz.TriggerKey getKey() { return t.getKey(); }
-                    @Override public String getName() { return t.getKey().getName(); }
-                    @Override public String getGroup() { return t.getKey().getGroup(); }
-                    @Override public org.quartz.JobKey getJobKey() { return t.getJobKey(); }
-                    @Override public String getDescription() { return t.getDescription(); }
-                    @Override public Date getNextFireTime() { return t.getNextFireTime(); }
-                    @Override public Date getPreviousFireTime() { return t.getPreviousFireTime(); }
-                    @Override public int getPriority() { return t.getPriority(); }
-                    @Override public Date getStartTime() { return t.getStartTime(); }
-                    @Override public Date getEndTime() { return t.getEndTime(); }
-                    @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
-                    @Override public String getCalendarName() { return t.getCalendarName(); }
-                    @Override public java.util.TimeZone getTimeZone() { return java.util.TimeZone.getDefault(); }
-                    @Override public org.quartz.Trigger getDelegate() { return t; }
-                    @Override public String toString() { return t.toString(); }
+                    @Override
+                    public org.quartz.TriggerKey getKey() {
+                        return t.getKey();
+                    }
+
+                    @Override
+                    public String getName() {
+                        return t.getKey().getName();
+                    }
+
+                    @Override
+                    public String getGroup() {
+                        return t.getKey().getGroup();
+                    }
+
+                    @Override
+                    public org.quartz.JobKey getJobKey() {
+                        return t.getJobKey();
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return t.getDescription();
+                    }
+
+                    @Override
+                    public Date getNextFireTime() {
+                        return t.getNextFireTime();
+                    }
+
+                    @Override
+                    public Date getPreviousFireTime() {
+                        return t.getPreviousFireTime();
+                    }
+
+                    @Override
+                    public int getPriority() {
+                        return t.getPriority();
+                    }
+
+                    @Override
+                    public Date getStartTime() {
+                        return t.getStartTime();
+                    }
+
+                    @Override
+                    public Date getEndTime() {
+                        return t.getEndTime();
+                    }
+
+                    @Override
+                    public MisfirePolicy getMisfirePolicy() {
+                        return MisfirePolicy.SMART_POLICY;
+                    }
+
+                    @Override
+                    public String getCalendarName() {
+                        return t.getCalendarName();
+                    }
+
+                    @Override
+                    public java.util.TimeZone getTimeZone() {
+                        return java.util.TimeZone.getDefault();
+                    }
+
+                    @Override
+                    public org.quartz.Trigger getDelegate() {
+                        return t;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return t.toString();
+                    }
                 };
             }
         }
@@ -398,176 +459,176 @@ public class ListenerManager {
         }
 
         @Override
-    /**
-     * jobAdded方法。
-     *      * @param jobDetail org.quartz.JobDetail类型参数
-     */
+        /**
+         * jobAdded方法。
+         *      * @param jobDetail org.quartz.JobDetail类型参数
+         */
         public void jobAdded(org.quartz.JobDetail jobDetail) {
             delegate.jobAdded(new JobDetail(jobDetail));
         }
 
         @Override
-    /**
-     * jobDeleted方法。
-     *      * @param jobKey org.quartz.JobKey类型参数
-     */
+        /**
+         * jobDeleted方法。
+         *      * @param jobKey org.quartz.JobKey类型参数
+         */
         public void jobDeleted(org.quartz.JobKey jobKey) {
             delegate.jobDeleted(jobKey);
         }
 
         @Override
-    /**
-     * jobScheduled方法。
-     *      * @param trigger org.quartz.Trigger类型参数
-     */
+        /**
+         * jobScheduled方法。
+         *      * @param trigger org.quartz.Trigger类型参数
+         */
         public void jobScheduled(org.quartz.Trigger trigger) {
             delegate.jobScheduled(toWrapper(trigger));
         }
 
         @Override
-    /**
-     * jobUnscheduled方法。
-     *      * @param triggerKey org.quartz.TriggerKey类型参数
-     */
+        /**
+         * jobUnscheduled方法。
+         *      * @param triggerKey org.quartz.TriggerKey类型参数
+         */
         public void jobUnscheduled(org.quartz.TriggerKey triggerKey) {
             delegate.jobUnscheduled(triggerKey);
         }
 
         @Override
-    /**
-     * triggerPaused方法。
-     *      * @param triggerKey org.quartz.TriggerKey类型参数
-     */
+        /**
+         * triggerPaused方法。
+         *      * @param triggerKey org.quartz.TriggerKey类型参数
+         */
         public void triggerPaused(org.quartz.TriggerKey triggerKey) {
             delegate.triggerPaused(triggerKey);
         }
 
         @Override
-    /**
-     * triggersPaused方法。
-     *      * @param triggerGroup String类型参数
-     */
+        /**
+         * triggersPaused方法。
+         *      * @param triggerGroup String类型参数
+         */
         public void triggersPaused(String triggerGroup) {
             delegate.triggersPaused(triggerGroup);
         }
 
         @Override
-    /**
-     * triggerResumed方法。
-     *      * @param triggerKey org.quartz.TriggerKey类型参数
-     */
+        /**
+         * triggerResumed方法。
+         *      * @param triggerKey org.quartz.TriggerKey类型参数
+         */
         public void triggerResumed(org.quartz.TriggerKey triggerKey) {
             delegate.triggerResumed(triggerKey);
         }
 
         @Override
-    /**
-     * triggersResumed方法。
-     *      * @param triggerGroup String类型参数
-     */
+        /**
+         * triggersResumed方法。
+         *      * @param triggerGroup String类型参数
+         */
         public void triggersResumed(String triggerGroup) {
             delegate.triggersResumed(triggerGroup);
         }
 
         @Override
-    /**
-     * jobPaused方法。
-     *      * @param jobKey org.quartz.JobKey类型参数
-     */
+        /**
+         * jobPaused方法。
+         *      * @param jobKey org.quartz.JobKey类型参数
+         */
         public void jobPaused(org.quartz.JobKey jobKey) {
             delegate.jobPaused(jobKey);
         }
 
         @Override
-    /**
-     * jobsPaused方法。
-     *      * @param jobGroup String类型参数
-     */
+        /**
+         * jobsPaused方法。
+         *      * @param jobGroup String类型参数
+         */
         public void jobsPaused(String jobGroup) {
             delegate.jobsPaused(jobGroup);
         }
 
         @Override
-    /**
-     * jobResumed方法。
-     *      * @param jobKey org.quartz.JobKey类型参数
-     */
+        /**
+         * jobResumed方法。
+         *      * @param jobKey org.quartz.JobKey类型参数
+         */
         public void jobResumed(org.quartz.JobKey jobKey) {
             delegate.jobResumed(jobKey);
         }
 
         @Override
-    /**
-     * jobsResumed方法。
-     *      * @param jobGroup String类型参数
-     */
+        /**
+         * jobsResumed方法。
+         *      * @param jobGroup String类型参数
+         */
         public void jobsResumed(String jobGroup) {
             delegate.jobsResumed(jobGroup);
         }
 
         @Override
-    /**
-     * schedulerError方法。
-     *      * @param msg String类型参数
-     * @param cause org.quartz.SchedulerException类型参数
-     */
+        /**
+         * schedulerError方法。
+         *      * @param msg String类型参数
+         * @param cause org.quartz.SchedulerException类型参数
+         */
         public void schedulerError(String msg, org.quartz.SchedulerException cause) {
             delegate.schedulerError(msg, cause);
         }
 
         @Override
-    /**
-     * schedulerShutdown方法。
-     */
+        /**
+         * schedulerShutdown方法。
+         */
         public void schedulerShutdown() {
             delegate.schedulerShutdown();
         }
 
         @Override
-    /**
-     * triggerFinalized方法。
-     *      * @param trigger org.quartz.Trigger类型参数
-     */
+        /**
+         * triggerFinalized方法。
+         *      * @param trigger org.quartz.Trigger类型参数
+         */
         public void triggerFinalized(org.quartz.Trigger trigger) {
             delegate.triggerFinalized(toWrapper(trigger));
         }
 
         @Override
-    /**
-     * schedulingDataCleared方法。
-     */
+        /**
+         * schedulingDataCleared方法。
+         */
         public void schedulingDataCleared() {
             delegate.schedulingDataCleared();
         }
 
         @Override
-    /**
-     * schedulerStarting方法。
-     */
+        /**
+         * schedulerStarting方法。
+         */
         public void schedulerStarting() {
             delegate.schedulerStarting();
         }
 
         @Override
-    /**
-     * schedulerStarted方法。
-     */
+        /**
+         * schedulerStarted方法。
+         */
         public void schedulerStarted() {
             delegate.schedulerStarted();
         }
 
         @Override
-    /**
-     * schedulerInStandbyMode方法。
-     */
+        /**
+         * schedulerInStandbyMode方法。
+         */
         public void schedulerInStandbyMode() {
             delegate.schedulerInStandbyMode();
         }
 
         @Override
-    /**
-     * schedulerShuttingdown方法。
-     */
+        /**
+         * schedulerShuttingdown方法。
+         */
         public void schedulerShuttingdown() {
             delegate.schedulerShuttingdown();
         }
@@ -587,21 +648,80 @@ public class ListenerManager {
                         (org.quartz.DailyTimeIntervalTrigger) t);
             } else {
                 return new com.zifang.util.core.schedule.Trigger() {
-                    @Override public org.quartz.TriggerKey getKey() { return t.getKey(); }
-                    @Override public String getName() { return t.getKey().getName(); }
-                    @Override public String getGroup() { return t.getKey().getGroup(); }
-                    @Override public org.quartz.JobKey getJobKey() { return t.getJobKey(); }
-                    @Override public String getDescription() { return t.getDescription(); }
-                    @Override public Date getNextFireTime() { return t.getNextFireTime(); }
-                    @Override public Date getPreviousFireTime() { return t.getPreviousFireTime(); }
-                    @Override public int getPriority() { return t.getPriority(); }
-                    @Override public Date getStartTime() { return t.getStartTime(); }
-                    @Override public Date getEndTime() { return t.getEndTime(); }
-                    @Override public MisfirePolicy getMisfirePolicy() { return MisfirePolicy.SMART_POLICY; }
-                    @Override public String getCalendarName() { return t.getCalendarName(); }
-                    @Override public java.util.TimeZone getTimeZone() { return java.util.TimeZone.getDefault(); }
-                    @Override public org.quartz.Trigger getDelegate() { return t; }
-                    @Override public String toString() { return t.toString(); }
+                    @Override
+                    public org.quartz.TriggerKey getKey() {
+                        return t.getKey();
+                    }
+
+                    @Override
+                    public String getName() {
+                        return t.getKey().getName();
+                    }
+
+                    @Override
+                    public String getGroup() {
+                        return t.getKey().getGroup();
+                    }
+
+                    @Override
+                    public org.quartz.JobKey getJobKey() {
+                        return t.getJobKey();
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return t.getDescription();
+                    }
+
+                    @Override
+                    public Date getNextFireTime() {
+                        return t.getNextFireTime();
+                    }
+
+                    @Override
+                    public Date getPreviousFireTime() {
+                        return t.getPreviousFireTime();
+                    }
+
+                    @Override
+                    public int getPriority() {
+                        return t.getPriority();
+                    }
+
+                    @Override
+                    public Date getStartTime() {
+                        return t.getStartTime();
+                    }
+
+                    @Override
+                    public Date getEndTime() {
+                        return t.getEndTime();
+                    }
+
+                    @Override
+                    public MisfirePolicy getMisfirePolicy() {
+                        return MisfirePolicy.SMART_POLICY;
+                    }
+
+                    @Override
+                    public String getCalendarName() {
+                        return t.getCalendarName();
+                    }
+
+                    @Override
+                    public java.util.TimeZone getTimeZone() {
+                        return java.util.TimeZone.getDefault();
+                    }
+
+                    @Override
+                    public org.quartz.Trigger getDelegate() {
+                        return t;
+                    }
+
+                    @Override
+                    public String toString() {
+                        return t.toString();
+                    }
                 };
             }
         }

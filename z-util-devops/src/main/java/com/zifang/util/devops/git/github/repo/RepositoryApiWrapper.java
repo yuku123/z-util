@@ -4,8 +4,6 @@ import org.kohsuke.github.GHBranch;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GHRepositorySearchBuilder;
 import org.kohsuke.github.GitHub;
-import org.kohsuke.github.PagedIterable;
-import org.kohsuke.github.PagedIterator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ public class RepositoryApiWrapper {
 
     /**
      * RepositoryApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
      */
     public RepositoryApiWrapper(GitHub github) {
         this.github = github;
@@ -37,9 +35,10 @@ public class RepositoryApiWrapper {
 
     /**
      * RepositoryApiWrapper方法。
-     *      * @param github GitHub类型参数
+     * * @param github GitHub类型参数
+     *
      * @param owner String类型参数
-     * @param repo String类型参数
+     * @param repo  String类型参数
      */
     public RepositoryApiWrapper(GitHub github, String owner, String repo) {
         this.github = github;
@@ -49,7 +48,8 @@ public class RepositoryApiWrapper {
 
     /**
      * withRepo方法。
-     *      * @param owner String类型参数
+     * * @param owner String类型参数
+     *
      * @param repo String类型参数
      * @return RepositoryApiWrapper类型返回值
      */
@@ -99,6 +99,7 @@ public class RepositoryApiWrapper {
 
     /**
      * get方法。
+     *
      * @return GHRepository类型返回值
      */
     public GHRepository get() throws IOException {
@@ -130,6 +131,7 @@ public class RepositoryApiWrapper {
 
     /**
      * getDescription方法。
+     *
      * @return String类型返回值
      */
     public String getDescription() throws IOException {
@@ -138,6 +140,7 @@ public class RepositoryApiWrapper {
 
     /**
      * getDefaultBranch方法。
+     *
      * @return String类型返回值
      */
     public String getDefaultBranch() throws IOException {
@@ -146,6 +149,7 @@ public class RepositoryApiWrapper {
 
     /**
      * getLanguage方法。
+     *
      * @return String类型返回值
      */
     public String getLanguage() throws IOException {
@@ -154,6 +158,7 @@ public class RepositoryApiWrapper {
 
     /**
      * getStargazersCount方法。
+     *
      * @return int类型返回值
      */
     public int getStargazersCount() throws IOException {
@@ -162,6 +167,7 @@ public class RepositoryApiWrapper {
 
     /**
      * getForksCount方法。
+     *
      * @return int类型返回值
      */
     public int getForksCount() throws IOException {
@@ -283,47 +289,6 @@ public class RepositoryApiWrapper {
         private boolean isPrivate;
         private String htmlUrl;
 
-    /**
-     * getFullName方法。
-     * @return String类型返回值
-     */
-        public String getFullName() { return fullName; }
-    /**
-     * getDescription方法。
-     * @return String类型返回值
-     */
-        public String getDescription() { return description; }
-    /**
-     * getDefaultBranch方法。
-     * @return String类型返回值
-     */
-        public String getDefaultBranch() { return defaultBranch; }
-    /**
-     * getLanguage方法。
-     * @return String类型返回值
-     */
-        public String getLanguage() { return language; }
-    /**
-     * getStargazersCount方法。
-     * @return int类型返回值
-     */
-        public int getStargazersCount() { return stargazersCount; }
-    /**
-     * getForksCount方法。
-     * @return int类型返回值
-     */
-        public int getForksCount() { return forksCount; }
-    /**
-     * isPrivate方法。
-     * @return boolean类型返回值
-     */
-        public boolean isPrivate() { return isPrivate; }
-    /**
-     * getHtmlUrl方法。
-     * @return String类型返回值
-     */
-        public String getHtmlUrl() { return htmlUrl; }
-
         /**
          * 从 GHRepository 对象构建 RepositoryInfo
          *
@@ -341,6 +306,78 @@ public class RepositoryApiWrapper {
             info.isPrivate = r.isPrivate();
             info.htmlUrl = r.getHtmlUrl().toString();
             return info;
+        }
+
+        /**
+         * getFullName方法。
+         *
+         * @return String类型返回值
+         */
+        public String getFullName() {
+            return fullName;
+        }
+
+        /**
+         * getDescription方法。
+         *
+         * @return String类型返回值
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * getDefaultBranch方法。
+         *
+         * @return String类型返回值
+         */
+        public String getDefaultBranch() {
+            return defaultBranch;
+        }
+
+        /**
+         * getLanguage方法。
+         *
+         * @return String类型返回值
+         */
+        public String getLanguage() {
+            return language;
+        }
+
+        /**
+         * getStargazersCount方法。
+         *
+         * @return int类型返回值
+         */
+        public int getStargazersCount() {
+            return stargazersCount;
+        }
+
+        /**
+         * getForksCount方法。
+         *
+         * @return int类型返回值
+         */
+        public int getForksCount() {
+            return forksCount;
+        }
+
+        /**
+         * isPrivate方法。
+         *
+         * @return boolean类型返回值
+         */
+        public boolean isPrivate() {
+            return isPrivate;
+        }
+
+        /**
+         * getHtmlUrl方法。
+         *
+         * @return String类型返回值
+         */
+        public String getHtmlUrl() {
+            return htmlUrl;
         }
     }
 }

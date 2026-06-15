@@ -72,13 +72,9 @@ public class JvmProperties {
     private final String userTimezone;
     private final String visualvmId;
 
-    /** 从 System.getProperties() 初始化一份快照。供 {@link JvmPropertiesUtil} 调用。 */
-    public void init() {
-        // Init is a no-op because the constructor already pulls all values.
-        // Method kept for API backward compatibility with JvmPropertiesUtil.
-    }
-
-    /** 构造时自动从 System.getProperties() 读取。 */
+    /**
+     * 构造时自动从 System.getProperties() 读取。
+     */
     public JvmProperties() {
         Properties p = System.getProperties();
         this.awtToolkit = p.getProperty("awt.toolkit");
@@ -138,59 +134,231 @@ public class JvmProperties {
         this.visualvmId = p.getProperty("visualvm.id");
     }
 
-    public String getAwtToolkit() { return awtToolkit; }
-    public String getFileEncoding() { return fileEncoding; }
-    public String getFileEncodingPkg() { return fileEncodingPkg; }
-    public String getFileSeparator() { return fileSeparator; }
-    public String getGopherProxySet() { return gopherProxySet; }
-    public String getIdeaTestCyclicBufferSize() { return ideaTestCyclicBufferSize; }
-    public String getJavaAwtGraphicsenv() { return javaAwtGraphicsenv; }
-    public String getJavaAwtPrinterjob() { return javaAwtPrinterjob; }
-    public String getJavaClassPath() { return javaClassPath; }
-    public String getJavaClassVersion() { return javaClassVersion; }
-    public String getJavaEndorsedDirs() { return javaEndorsedDirs; }
-    public String getJavaExtDirs() { return javaExtDirs; }
-    public String getJavaHome() { return javaHome; }
-    public String getJavaIoTmpdir() { return javaIoTmpdir; }
-    public String getJavaLibraryPath() { return javaLibraryPath; }
-    public String getJavaRuntimeName() { return javaRuntimeName; }
-    public String getJavaRuntimeVersion() { return javaRuntimeVersion; }
-    public String getJavaSpecificationName() { return javaSpecificationName; }
-    public String getJavaSpecificationVendor() { return javaSpecificationVendor; }
-    public String getJavaSpecificationVersion() { return javaSpecificationVersion; }
-    public String getJavaVendor() { return javaVendor; }
-    public String getJavaVendorUrl() { return javaVendorUrl; }
-    public String getJavaVendorUrlBug() { return javaVendorUrlBug; }
-    public String getJavaVersion() { return javaVersion; }
-    public String getJavaVmInfo() { return javaVmInfo; }
-    public String getJavaVmName() { return javaVmName; }
-    public String getJavaVmSpecificationName() { return javaVmSpecificationName; }
-    public String getJavaVmSpecificationVendor() { return javaVmSpecificationVendor; }
-    public String getJavaVmSpecificationVersion() { return javaVmSpecificationVersion; }
-    public String getJavaVmVendor() { return javaVmVendor; }
-    public String getJavaVmVersion() { return javaVmVersion; }
-    public String getLineSeparator() { return lineSeparator; }
-    public String getOsArch() { return osArch; }
-    public String getOsName() { return osName; }
-    public String getOsVersion() { return osVersion; }
-    public String getPathSeparator() { return pathSeparator; }
-    public String getSunArchDataModel() { return sunArchDataModel; }
-    public String getSunBootClassPath() { return sunBootClassPath; }
-    public String getSunBootLibraryPath() { return sunBootLibraryPath; }
-    public String getSunCpuEndian() { return sunCpuEndian; }
-    public String getSunCpuIsalist() { return sunCpuIsalist; }
-    public String getSunIoUnicodeEncoding() { return sunIoUnicodeEncoding; }
-    public String getSunJavaCommand() { return sunJavaCommand; }
-    public String getSunJavaLauncher() { return sunJavaLauncher; }
-    public String getSunJnuEncoding() { return sunJnuEncoding; }
-    public String getSunManagementCompiler() { return sunManagementCompiler; }
-    public String getSunOsPatchLevel() { return sunOsPatchLevel; }
-    public String getUserCountry() { return userCountry; }
-    public String getUserCountryFormat() { return userCountryFormat; }
-    public String getUserDir() { return userDir; }
-    public String getUserHome() { return userHome; }
-    public String getUserLanguage() { return userLanguage; }
-    public String getUserName() { return userName; }
-    public String getUserTimezone() { return userTimezone; }
-    public String getVisualvmId() { return visualvmId; }
+    /**
+     * 从 System.getProperties() 初始化一份快照。供 {@link JvmPropertiesUtil} 调用。
+     */
+    public void init() {
+        // Init is a no-op because the constructor already pulls all values.
+        // Method kept for API backward compatibility with JvmPropertiesUtil.
+    }
+
+    public String getAwtToolkit() {
+        return awtToolkit;
+    }
+
+    public String getFileEncoding() {
+        return fileEncoding;
+    }
+
+    public String getFileEncodingPkg() {
+        return fileEncodingPkg;
+    }
+
+    public String getFileSeparator() {
+        return fileSeparator;
+    }
+
+    public String getGopherProxySet() {
+        return gopherProxySet;
+    }
+
+    public String getIdeaTestCyclicBufferSize() {
+        return ideaTestCyclicBufferSize;
+    }
+
+    public String getJavaAwtGraphicsenv() {
+        return javaAwtGraphicsenv;
+    }
+
+    public String getJavaAwtPrinterjob() {
+        return javaAwtPrinterjob;
+    }
+
+    public String getJavaClassPath() {
+        return javaClassPath;
+    }
+
+    public String getJavaClassVersion() {
+        return javaClassVersion;
+    }
+
+    public String getJavaEndorsedDirs() {
+        return javaEndorsedDirs;
+    }
+
+    public String getJavaExtDirs() {
+        return javaExtDirs;
+    }
+
+    public String getJavaHome() {
+        return javaHome;
+    }
+
+    public String getJavaIoTmpdir() {
+        return javaIoTmpdir;
+    }
+
+    public String getJavaLibraryPath() {
+        return javaLibraryPath;
+    }
+
+    public String getJavaRuntimeName() {
+        return javaRuntimeName;
+    }
+
+    public String getJavaRuntimeVersion() {
+        return javaRuntimeVersion;
+    }
+
+    public String getJavaSpecificationName() {
+        return javaSpecificationName;
+    }
+
+    public String getJavaSpecificationVendor() {
+        return javaSpecificationVendor;
+    }
+
+    public String getJavaSpecificationVersion() {
+        return javaSpecificationVersion;
+    }
+
+    public String getJavaVendor() {
+        return javaVendor;
+    }
+
+    public String getJavaVendorUrl() {
+        return javaVendorUrl;
+    }
+
+    public String getJavaVendorUrlBug() {
+        return javaVendorUrlBug;
+    }
+
+    public String getJavaVersion() {
+        return javaVersion;
+    }
+
+    public String getJavaVmInfo() {
+        return javaVmInfo;
+    }
+
+    public String getJavaVmName() {
+        return javaVmName;
+    }
+
+    public String getJavaVmSpecificationName() {
+        return javaVmSpecificationName;
+    }
+
+    public String getJavaVmSpecificationVendor() {
+        return javaVmSpecificationVendor;
+    }
+
+    public String getJavaVmSpecificationVersion() {
+        return javaVmSpecificationVersion;
+    }
+
+    public String getJavaVmVendor() {
+        return javaVmVendor;
+    }
+
+    public String getJavaVmVersion() {
+        return javaVmVersion;
+    }
+
+    public String getLineSeparator() {
+        return lineSeparator;
+    }
+
+    public String getOsArch() {
+        return osArch;
+    }
+
+    public String getOsName() {
+        return osName;
+    }
+
+    public String getOsVersion() {
+        return osVersion;
+    }
+
+    public String getPathSeparator() {
+        return pathSeparator;
+    }
+
+    public String getSunArchDataModel() {
+        return sunArchDataModel;
+    }
+
+    public String getSunBootClassPath() {
+        return sunBootClassPath;
+    }
+
+    public String getSunBootLibraryPath() {
+        return sunBootLibraryPath;
+    }
+
+    public String getSunCpuEndian() {
+        return sunCpuEndian;
+    }
+
+    public String getSunCpuIsalist() {
+        return sunCpuIsalist;
+    }
+
+    public String getSunIoUnicodeEncoding() {
+        return sunIoUnicodeEncoding;
+    }
+
+    public String getSunJavaCommand() {
+        return sunJavaCommand;
+    }
+
+    public String getSunJavaLauncher() {
+        return sunJavaLauncher;
+    }
+
+    public String getSunJnuEncoding() {
+        return sunJnuEncoding;
+    }
+
+    public String getSunManagementCompiler() {
+        return sunManagementCompiler;
+    }
+
+    public String getSunOsPatchLevel() {
+        return sunOsPatchLevel;
+    }
+
+    public String getUserCountry() {
+        return userCountry;
+    }
+
+    public String getUserCountryFormat() {
+        return userCountryFormat;
+    }
+
+    public String getUserDir() {
+        return userDir;
+    }
+
+    public String getUserHome() {
+        return userHome;
+    }
+
+    public String getUserLanguage() {
+        return userLanguage;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserTimezone() {
+        return userTimezone;
+    }
+
+    public String getVisualvmId() {
+        return visualvmId;
+    }
 }

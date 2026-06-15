@@ -40,6 +40,7 @@ public class CrawlerHttpClient {
 
     /**
      * 设置 HTTP 代理。
+     *
      * @param host 代理主机
      * @param port 代理端口
      */
@@ -50,7 +51,8 @@ public class CrawlerHttpClient {
 
     /**
      * 发送 GET 请求。
-     * @param url 请求 URL
+     *
+     * @param url     请求 URL
      * @param headers 请求头
      * @return HTTP 响应
      * @throws IOException 如果请求失败
@@ -70,8 +72,9 @@ public class CrawlerHttpClient {
 
     /**
      * 发送 POST 请求。
-     * @param url 请求 URL
-     * @param body 请求体
+     *
+     * @param url     请求 URL
+     * @param body    请求体
      * @param headers 请求头
      * @return HTTP 响应
      * @throws IOException 如果请求失败
@@ -93,7 +96,8 @@ public class CrawlerHttpClient {
 
     /**
      * 从 URL 下载文件。
-     * @param url 请求 URL
+     *
+     * @param url      请求 URL
      * @param savePath 保存路径
      * @throws IOException 如果下载失败
      */
@@ -154,8 +158,9 @@ public class CrawlerHttpClient {
 
         /**
          * 构造 HTTP 响应。
-         * @param code 状态码
-         * @param body 响应体
+         *
+         * @param code    状态码
+         * @param body    响应体
          * @param headers 响应头
          */
         public HttpResponse(int code, String body, Map<String, String> headers) {
@@ -166,6 +171,7 @@ public class CrawlerHttpClient {
 
         /**
          * 获取状态码。
+         *
          * @return HTTP 状态码
          */
         public int getCode() {
@@ -174,6 +180,7 @@ public class CrawlerHttpClient {
 
         /**
          * 获取响应体。
+         *
          * @return 响应体字符串
          */
         public String getBody() {
@@ -182,6 +189,7 @@ public class CrawlerHttpClient {
 
         /**
          * 获取响应头。
+         *
          * @return 响应头映射
          */
         public Map<String, String> getHeaders() {
@@ -196,11 +204,11 @@ public class CrawlerHttpClient {
         private final Map<String, Map<String, Cookie>> cookieStore = new HashMap<>();
 
         @Override
-    /**
-     * saveFromResponse方法。
-     *      * @param url HttpUrl类型参数
-     * @param cookies java.util.ListCookie类型参数
-     */
+        /**
+         * saveFromResponse方法。
+         *      * @param url HttpUrl类型参数
+         * @param cookies java.util.ListCookie类型参数
+         */
         public void saveFromResponse(HttpUrl url, java.util.List<Cookie> cookies) {
             cookieStore.put(url.host(), new HashMap<>());
             for (Cookie cookie : cookies) {
@@ -209,11 +217,11 @@ public class CrawlerHttpClient {
         }
 
         @Override
-    /**
-     * loadForRequest方法。
-     *      * @param url HttpUrl类型参数
-     * @return java.util.List<Cookie>类型返回值
-     */
+        /**
+         * loadForRequest方法。
+         *      * @param url HttpUrl类型参数
+         * @return java.util.List<Cookie>类型返回值
+         */
         public java.util.List<Cookie> loadForRequest(HttpUrl url) {
             Map<String, Cookie> hostCookies = cookieStore.get(url.host());
             if (hostCookies == null) {

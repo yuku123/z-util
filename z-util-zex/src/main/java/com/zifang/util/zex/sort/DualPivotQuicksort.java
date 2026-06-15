@@ -13,30 +13,27 @@ public class DualPivotQuicksort {
 
 
     /**
-     * 保护这个类不被实例化
-     */
-    private DualPivotQuicksort() {
-    }
-
-    /**
      * 待合并的序列的最大数量
      */
     private static final int MAX_RUN_COUNT = 67;
-
     /**
      * 待合并的序列的最大长度
      */
     private static final int MAX_RUN_LENGTH = 33;
-
     /**
      * 如果参与排序的数组长度小于这个值，优先使用快速排序而不是归并排序
      */
     private static final int QUICKSORT_THRESHOLD = 286;
-
     /**
      * 如果参与排序的数组长度小于这个值，有限考虑插入排序，而不是快速排序
      */
     private static final int INSERTION_SORT_THRESHOLD = 47;
+
+    /**
+     * 保护这个类不被实例化
+     */
+    private DualPivotQuicksort() {
+    }
 
     /**
      * 给指定数组排序

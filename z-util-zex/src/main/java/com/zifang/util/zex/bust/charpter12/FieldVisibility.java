@@ -14,22 +14,10 @@ public class FieldVisibility {
     int a = 1;
     int b = 2;
 
-    //给a 赋值, 并把值给b
-    private void change() {
-        a = 3;
-        b = a;
-    }
-
-    /**
-     * 打印出a b
-     */
-    private void print() {
-        System.out.println("b=" + b + ";a=" + a);
-    }
-
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -56,5 +44,18 @@ public class FieldVisibility {
                 test.print();
             }).start();
         }
+    }
+
+    //给a 赋值, 并把值给b
+    private void change() {
+        a = 3;
+        b = a;
+    }
+
+    /**
+     * 打印出a b
+     */
+    private void print() {
+        System.out.println("b=" + b + ";a=" + a);
     }
 }

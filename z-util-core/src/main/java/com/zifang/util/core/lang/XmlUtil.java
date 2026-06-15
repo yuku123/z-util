@@ -37,7 +37,8 @@ public class XmlUtil {
 
     /**
      * xmlToMap方法。
-     *      * @param xmlStr String类型参数
+     * * @param xmlStr String类型参数
+     *
      * @return static Map<String, Object>类型返回值
      */
     public static Map<String, Object> xmlToMap(String xmlStr) {
@@ -46,7 +47,8 @@ public class XmlUtil {
 
     /**
      * mapToXml方法。
-     *      * @param data Map?,类型参数
+     * * @param data Map?,类型参数
+     *
      * @param rootName String类型参数
      * @return static Document类型返回值
      */
@@ -56,8 +58,9 @@ public class XmlUtil {
 
     /**
      * mapToXml方法。
-     *      * @param data Map?,类型参数
-     * @param rootName String类型参数
+     * * @param data Map?,类型参数
+     *
+     * @param rootName  String类型参数
      * @param namespace String类型参数
      * @return static Document类型返回值
      */
@@ -71,8 +74,9 @@ public class XmlUtil {
 
     /**
      * appendChild方法。
-     *      * @param node Node类型参数
-     * @param tagName String类型参数
+     * * @param node Node类型参数
+     *
+     * @param tagName   String类型参数
      * @param namespace String类型参数
      * @return static Element类型返回值
      */
@@ -86,7 +90,8 @@ public class XmlUtil {
 
     /**
      * getOwnerDocument方法。
-     *      * @param node Node类型参数
+     * * @param node Node类型参数
+     *
      * @return static Document类型返回值
      */
     public static Document getOwnerDocument(Node node) {
@@ -142,7 +147,8 @@ public class XmlUtil {
 
     /**
      * appendChild方法。
-     *      * @param node Node类型参数
+     * * @param node Node类型参数
+     *
      * @param tagName String类型参数
      * @return static Element类型返回值
      */
@@ -152,7 +158,8 @@ public class XmlUtil {
 
     /**
      * xmlToMap方法。
-     *      * @param xmlStr String类型参数
+     * * @param xmlStr String类型参数
+     *
      * @param result MapString,类型参数
      * @return static Map<String, Object>类型返回值
      */
@@ -166,7 +173,8 @@ public class XmlUtil {
 
     /**
      * xmlToMap方法。
-     *      * @param node Node类型参数
+     * * @param node Node类型参数
+     *
      * @param result MapString,类型参数
      * @return static Map<String, Object>类型返回值
      */
@@ -216,7 +224,8 @@ public class XmlUtil {
 
     /**
      * xmlToMap方法。
-     *      * @param node Node类型参数
+     * * @param node Node类型参数
+     *
      * @return static Map<String, Object>类型返回值
      */
     public static Map<String, Object> xmlToMap(Node node) {
@@ -240,7 +249,8 @@ public class XmlUtil {
 
     /**
      * readXml方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return static Document类型返回值
      */
     public static Document readXml(Reader reader) {
@@ -249,7 +259,8 @@ public class XmlUtil {
 
     /**
      * readXml方法。
-     *      * @param source InputSource类型参数
+     * * @param source InputSource类型参数
+     *
      * @return static Document类型返回值
      */
     public static Document readXml(InputSource source) {
@@ -263,6 +274,7 @@ public class XmlUtil {
 
     /**
      * createDocumentBuilder方法。
+     *
      * @return static DocumentBuilder类型返回值
      */
     public static DocumentBuilder createDocumentBuilder() {
@@ -277,6 +289,7 @@ public class XmlUtil {
 
     /**
      * createDocumentBuilderFactory方法。
+     *
      * @return static DocumentBuilderFactory类型返回值
      */
     public static DocumentBuilderFactory createDocumentBuilderFactory() {
@@ -344,7 +357,8 @@ public class XmlUtil {
 
     /**
      * getRootElement方法。
-     *      * @param doc Document类型参数
+     * * @param doc Document类型参数
+     *
      * @return static Element类型返回值
      */
     public static Element getRootElement(Document doc) {
@@ -353,7 +367,8 @@ public class XmlUtil {
 
     /**
      * isElement方法。
-     *      * @param node Node类型参数
+     * * @param node Node类型参数
+     *
      * @return static boolean类型返回值
      */
     public static boolean isElement(Node node) {
@@ -362,6 +377,7 @@ public class XmlUtil {
 
     /**
      * createXml方法。
+     *
      * @return static Document类型返回值
      */
     public static Document createXml() {

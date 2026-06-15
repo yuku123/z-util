@@ -157,6 +157,7 @@ public class FieldInfo {
 
     /**
      * getAnnotations方法。
+     *
      * @return List<AnnotationInfo>类型返回值
      */
     public List<AnnotationInfo> getAnnotations() {
@@ -165,7 +166,7 @@ public class FieldInfo {
 
     /**
      * setAnnotations方法。
-     *      * @param annotations ListAnnotationInfo类型参数
+     * * @param annotations ListAnnotationInfo类型参数
      */
     public void setAnnotations(List<AnnotationInfo> annotations) {
         this.annotations = annotations;

@@ -18,6 +18,7 @@ public class JsEvaluator {
 
     /**
      * 构造 JsEvaluator。
+     *
      * @param driver WebDriver 实例
      */
     public JsEvaluator(WebDriver driver) {
@@ -26,6 +27,7 @@ public class JsEvaluator {
 
     /**
      * 执行同步 JavaScript。
+     *
      * @param script JavaScript 脚本
      * @return 脚本执行结果
      */
@@ -35,8 +37,9 @@ public class JsEvaluator {
 
     /**
      * 执行同步 JavaScript（带参数）。
+     *
      * @param script JavaScript 脚本
-     * @param args 脚本参数
+     * @param args   脚本参数
      * @return 脚本执行结果
      */
     public Object evaluate(String script, Object... args) {
@@ -45,6 +48,7 @@ public class JsEvaluator {
 
     /**
      * 执行异步 JavaScript。
+     *
      * @param script JavaScript 脚本
      * @return 脚本执行结果
      */
@@ -54,8 +58,9 @@ public class JsEvaluator {
 
     /**
      * 执行异步 JavaScript（带参数）。
+     *
      * @param script JavaScript 脚本
-     * @param args 脚本参数
+     * @param args   脚本参数
      * @return 脚本执行结果
      */
     public Object evaluateAsync(String script, Object... args) {

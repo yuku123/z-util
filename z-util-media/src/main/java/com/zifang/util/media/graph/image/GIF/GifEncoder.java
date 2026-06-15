@@ -37,7 +37,8 @@ public class GifEncoder {
     protected int repeat = -1; // no repeat
     /**
      * delay方法。
-     *      * @param hundredths Object类型参数
+     * * @param hundredths Object类型参数
+     *
      * @return int delay = 0; // frame类型返回值
      */
     protected int delay = 0; // frame delay (hundredths)
@@ -51,13 +52,15 @@ public class GifEncoder {
     protected boolean[] usedEntry = new boolean[256]; // active palette entries
     /**
      * size方法。
-     *      * @param bits-1 Object类型参数
+     * * @param bits-1 Object类型参数
+     *
      * @return int palSize = 7; // color table类型返回值
      */
     protected int palSize = 7; // color table size (bits-1)
     /**
      * code方法。
-     *      * @param default -1类型参数
+     * * @param default -1类型参数
+     *
      * @return int dispose = -1; // disposal类型返回值
      */
     protected int dispose = -1; // disposal code (-1 = use default)
@@ -164,8 +167,10 @@ public class GifEncoder {
     }
 
     //added by alvaro
+
     /**
      * outFlush方法。
+     *
      * @return boolean类型返回值
      */
     public boolean outFlush() {
@@ -182,6 +187,7 @@ public class GifEncoder {
 
     /**
      * getFrameByteArray方法。
+     *
      * @return byte[]类型返回值
      */
     public byte[] getFrameByteArray() {

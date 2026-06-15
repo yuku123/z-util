@@ -5,8 +5,8 @@ package com.zifang.util.core.meta;
  * <p>
  * 用于 API 响应数据的统一封装，提供 Builder 模式构建响应对象。
  *
- * @author zifang
  * @param <T> 数据类型
+ * @author zifang
  * @see BaseResponse
  */
 public class GenericResponse<T> extends BaseResponse {
@@ -21,7 +21,8 @@ public class GenericResponse<T> extends BaseResponse {
 
     /**
      * GenericResponse方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
+     *
      * @param code ResultCode类型参数
      * @param data T类型参数
      */
@@ -31,7 +32,17 @@ public class GenericResponse<T> extends BaseResponse {
     }
 
     /**
+     * builder方法。
+     *
+     * @return static <T> GenericResponse<T>类型返回值
+     */
+    public static <T> GenericResponse<T> builder() {
+        return new Builder<T>().build();
+    }
+
+    /**
      * getData方法。
+     *
      * @return T类型返回值
      */
     public T getData() {
@@ -40,7 +51,7 @@ public class GenericResponse<T> extends BaseResponse {
 
     /**
      * setData方法。
-     *      * @param data T类型参数
+     * * @param data T类型参数
      */
     public void setData(T data) {
         this.data = data;
@@ -83,50 +94,46 @@ public class GenericResponse<T> extends BaseResponse {
         private ResultCode code = ResultCode.SUCCESS;
         private T data;
 
-    /**
-     * message方法。
-     *      * @param message String类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * message方法。
+         * * @param message String类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> message(String message) {
             this.message = message;
             return this;
         }
 
-    /**
-     * code方法。
-     *      * @param code ResultCode类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * code方法。
+         * * @param code ResultCode类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> code(ResultCode code) {
             this.code = code;
             return this;
         }
 
-    /**
-     * data方法。
-     *      * @param data T类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * data方法。
+         * * @param data T类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> data(T data) {
             this.data = data;
             return this;
         }
 
-    /**
-     * build方法。
-     * @return GenericResponse<T>类型返回值
-     */
+        /**
+         * build方法。
+         *
+         * @return GenericResponse<T>类型返回值
+         */
         public GenericResponse<T> build() {
             return new GenericResponse<>(message, code, data);
         }
-    }
-
-    /**
-     * builder方法。
-     * @return static <T> GenericResponse<T>类型返回值
-     */
-    public static <T> GenericResponse<T> builder() {
-        return new Builder<T>().build();
     }
 }

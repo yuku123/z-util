@@ -18,7 +18,7 @@ public final class FinderPatternFinder {
 
     /**
      * FinderPatternFinder方法。
-     *      * @param matrix BitMatrix类型参数
+     * * @param matrix BitMatrix类型参数
      */
     public FinderPatternFinder(BitMatrix matrix) {
         this.matrix = matrix;
@@ -27,33 +27,38 @@ public final class FinderPatternFinder {
     }
 
     /**
-     * Represents a found finder pattern center.
+     * Estimates the version of the QR code from the distance between finder patterns.
+     *
+     * @param patterns the three finder patterns
+     * @return estimated version (1-40)
      */
-    public static final class FinderPattern {
-        public final float x;
-        public final float y;
-        public final float moduleSize;
-
-    /**
-     * FinderPattern方法。
-     *      * @param x float类型参数
-     * @param y float类型参数
-     * @param moduleSize float类型参数
-     */
-        public FinderPattern(float x, float y, float moduleSize) {
-            this.x = x;
-            this.y = y;
-            this.moduleSize = moduleSize;
+    public static int estimateVersion(FinderPattern[] patterns) {
+        if (patterns == null || patterns.length < 3) {
+            return 1;
         }
 
-        @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
-        public String toString() {
-            return "FinderPattern{x=" + x + ", y=" + y + ", moduleSize=" + moduleSize + "}";
-        }
+        // Calculate distances
+        float d01 = distance(patterns[0], patterns[1]);
+        float d02 = distance(patterns[0], patterns[2]);
+        float d12 = distance(patterns[1], patterns[2]);
+
+        // Determine module size from the average
+        float avgModuleSize = (patterns[0].moduleSize + patterns[1].moduleSize + patterns[2].moduleSize) / 3.0f;
+
+        // Calculate version from the largest dimension
+        float maxDist = Math.max(Math.max(d01, d02), d12);
+
+        // Version = (maxDist / moduleSize - 14) / 4 + 1 approximately
+        // Each version adds 4 modules to each side
+        int version = (int) Math.round((maxDist / avgModuleSize - 14) / 4 + 1);
+        version = Math.max(1, Math.min(40, version));
+        return version;
+    }
+
+    private static float distance(FinderPattern a, FinderPattern b) {
+        float dx = a.x - b.x;
+        float dy = a.y - b.y;
+        return (float) Math.sqrt(dx * dx + dy * dy);
     }
 
     /**
@@ -191,37 +196,33 @@ public final class FinderPatternFinder {
     }
 
     /**
-     * Estimates the version of the QR code from the distance between finder patterns.
-     *
-     * @param patterns the three finder patterns
-     * @return estimated version (1-40)
+     * Represents a found finder pattern center.
      */
-    public static int estimateVersion(FinderPattern[] patterns) {
-        if (patterns == null || patterns.length < 3) {
-            return 1;
+    public static final class FinderPattern {
+        public final float x;
+        public final float y;
+        public final float moduleSize;
+
+        /**
+         * FinderPattern方法。
+         * * @param x float类型参数
+         *
+         * @param y          float类型参数
+         * @param moduleSize float类型参数
+         */
+        public FinderPattern(float x, float y, float moduleSize) {
+            this.x = x;
+            this.y = y;
+            this.moduleSize = moduleSize;
         }
 
-        // Calculate distances
-        float d01 = distance(patterns[0], patterns[1]);
-        float d02 = distance(patterns[0], patterns[2]);
-        float d12 = distance(patterns[1], patterns[2]);
-
-        // Determine module size from the average
-        float avgModuleSize = (patterns[0].moduleSize + patterns[1].moduleSize + patterns[2].moduleSize) / 3.0f;
-
-        // Calculate version from the largest dimension
-        float maxDist = Math.max(Math.max(d01, d02), d12);
-
-        // Version = (maxDist / moduleSize - 14) / 4 + 1 approximately
-        // Each version adds 4 modules to each side
-        int version = (int) Math.round((maxDist / avgModuleSize - 14) / 4 + 1);
-        version = Math.max(1, Math.min(40, version));
-        return version;
-    }
-
-    private static float distance(FinderPattern a, FinderPattern b) {
-        float dx = a.x - b.x;
-        float dy = a.y - b.y;
-        return (float) Math.sqrt(dx * dx + dy * dy);
+        @Override
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
+        public String toString() {
+            return "FinderPattern{x=" + x + ", y=" + y + ", moduleSize=" + moduleSize + "}";
+        }
     }
 }

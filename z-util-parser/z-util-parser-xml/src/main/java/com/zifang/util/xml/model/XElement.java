@@ -1,7 +1,5 @@
 package com.zifang.util.xml.model;
 
-import com.zifang.util.xml.exception.XmlTypeException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +17,7 @@ import java.util.Map;
  *
  * @author zifang
  */
+
 /**
  * XElement类。
  */
@@ -38,7 +37,7 @@ public class XElement implements XNode {
 
     /**
      * XElement方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public XElement(String name) {
         this.name = name;
@@ -46,7 +45,8 @@ public class XElement implements XNode {
 
     /**
      * XElement方法。
-     *      * @param prefix String类型参数
+     * * @param prefix String类型参数
+     *
      * @param name String类型参数
      */
     public XElement(String prefix, String name) {
@@ -56,6 +56,7 @@ public class XElement implements XNode {
 
     /**
      * getName方法。
+     *
      * @return String类型返回值
      */
     public String getName() {
@@ -64,6 +65,7 @@ public class XElement implements XNode {
 
     /**
      * getPrefix方法。
+     *
      * @return String类型返回值
      */
     public String getPrefix() {
@@ -72,6 +74,7 @@ public class XElement implements XNode {
 
     /**
      * getQualifiedName方法。
+     *
      * @return String类型返回值
      */
     public String getQualifiedName() {
@@ -80,6 +83,7 @@ public class XElement implements XNode {
 
     /**
      * getNamespace方法。
+     *
      * @return String类型返回值
      */
     public String getNamespace() {
@@ -88,7 +92,7 @@ public class XElement implements XNode {
 
     /**
      * setNamespace方法。
-     *      * @param namespace String类型参数
+     * * @param namespace String类型参数
      */
     public void setNamespace(String namespace) {
         this.namespace = namespace;
@@ -98,7 +102,8 @@ public class XElement implements XNode {
 
     /**
      * setAttribute方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param value String类型参数
      */
     public void setAttribute(String name, String value) {
@@ -107,8 +112,9 @@ public class XElement implements XNode {
 
     /**
      * setAttribute方法。
-     *      * @param prefix String类型参数
-     * @param name String类型参数
+     * * @param prefix String类型参数
+     *
+     * @param name  String类型参数
      * @param value String类型参数
      */
     public void setAttribute(String prefix, String name, String value) {
@@ -118,7 +124,8 @@ public class XElement implements XNode {
 
     /**
      * getAttribute方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return String类型返回值
      */
     public String getAttribute(String name) {
@@ -127,7 +134,8 @@ public class XElement implements XNode {
 
     /**
      * hasAttribute方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return boolean类型返回值
      */
     public boolean hasAttribute(String name) {
@@ -136,7 +144,7 @@ public class XElement implements XNode {
 
     /**
      * removeAttribute方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public void removeAttribute(String name) {
         attributes.remove(name);
@@ -144,6 +152,7 @@ public class XElement implements XNode {
 
     /**
      * getAttributes方法。
+     *
      * @return Map<String, String>类型返回值
      */
     public Map<String, String> getAttributes() {
@@ -154,7 +163,7 @@ public class XElement implements XNode {
 
     /**
      * addChild方法。
-     *      * @param child XNode类型参数
+     * * @param child XNode类型参数
      */
     public void addChild(XNode child) {
         children.add(child);
@@ -165,6 +174,7 @@ public class XElement implements XNode {
 
     /**
      * getChildren方法。
+     *
      * @return List<XNode>类型返回值
      */
     public List<XNode> getChildren() {
@@ -173,7 +183,7 @@ public class XElement implements XNode {
 
     /**
      * setChildren方法。
-     *      * @param children ListXNode类型参数
+     * * @param children ListXNode类型参数
      */
     public void setChildren(List<XNode> children) {
         this.children = children;
@@ -186,7 +196,7 @@ public class XElement implements XNode {
 
     /**
      * removeChild方法。
-     *      * @param child XNode类型参数
+     * * @param child XNode类型参数
      */
     public void removeChild(XNode child) {
         children.remove(child);
@@ -194,6 +204,7 @@ public class XElement implements XNode {
 
     /**
      * getParent方法。
+     *
      * @return XElement类型返回值
      */
     public XElement getParent() {
@@ -202,7 +213,7 @@ public class XElement implements XNode {
 
     /**
      * setParent方法。
-     *      * @param parent XElement类型参数
+     * * @param parent XElement类型参数
      */
     public void setParent(XElement parent) {
         this.parent = parent;
@@ -215,6 +226,7 @@ public class XElement implements XNode {
      */
     /**
      * getChildElements方法。
+     *
      * @return List<XElement>类型返回值
      */
     public List<XElement> getChildElements() {
@@ -232,7 +244,8 @@ public class XElement implements XNode {
      */
     /**
      * getChildElements方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return List<XElement>类型返回值
      */
     public List<XElement> getChildElements(String name) {
@@ -253,7 +266,8 @@ public class XElement implements XNode {
      */
     /**
      * getChildElement方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return XElement类型返回值
      */
     public XElement getChildElement(String name) {
@@ -266,7 +280,8 @@ public class XElement implements XNode {
      */
     /**
      * getDescendantElements方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return List<XElement>类型返回值
      */
     public List<XElement> getDescendantElements(String name) {
@@ -292,7 +307,8 @@ public class XElement implements XNode {
      */
     /**
      * getDescendantElement方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return XElement类型返回值
      */
     public XElement getDescendantElement(String name) {
@@ -316,6 +332,7 @@ public class XElement implements XNode {
      */
     /**
      * getText方法。
+     *
      * @return String类型返回值
      */
     public String getText() {
@@ -335,20 +352,10 @@ public class XElement implements XNode {
     /**
      * 获取所有文本子节点拼接后的字符串，trim 后返回。
      */
-    /**
-     * getTextTrim方法。
-     * @return String类型返回值
-     */
-    public String getTextTrim() {
-        return getText().trim();
-    }
 
     /**
-     * 设置文本内容（替换所有子节点为单个文本节点）。
-     */
-    /**
      * setText方法。
-     *      * @param text String类型参数
+     * * @param text String类型参数
      */
     public void setText(String text) {
         children.clear();
@@ -356,10 +363,25 @@ public class XElement implements XNode {
     }
 
     /**
+     * 设置文本内容（替换所有子节点为单个文本节点）。
+     */
+
+    /**
+     * getTextTrim方法。
+     *
+     * @return String类型返回值
+     */
+    public String getTextTrim() {
+        return getText().trim();
+    }
+
+    /**
      * 获取纯文本子节点列表。
      */
+
     /**
      * getTextNodes方法。
+     *
      * @return List<XText>类型返回值
      */
     public List<XText> getTextNodes() {
@@ -377,6 +399,7 @@ public class XElement implements XNode {
      */
     /**
      * getCDataNodes方法。
+     *
      * @return List<XCData>类型返回值
      */
     public List<XCData> getCDataNodes() {
@@ -393,6 +416,7 @@ public class XElement implements XNode {
 
     /**
      * deepClone方法。
+     *
      * @return XElement类型返回值
      */
     public XElement deepClone() {

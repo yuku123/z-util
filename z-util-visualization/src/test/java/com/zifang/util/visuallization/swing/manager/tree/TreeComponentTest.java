@@ -2,14 +2,14 @@ package com.zifang.util.visuallization.swing.manager.tree;
 
 import org.junit.Test;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * TreeComponent 单元测试
  * 测试树形组件类的继承行为
  */
+
 /**
  * TreeComponentTest类。
  */

@@ -10,7 +10,7 @@ public interface PoolListener<T> {
     /**
      * 对象被借出时调用
      *
-     * @param object 被借出的对象
+     * @param object   被借出的对象
      * @param waitTime 等待时间(毫秒)
      */
     void onBorrow(T object, long waitTime);
@@ -18,7 +18,7 @@ public interface PoolListener<T> {
     /**
      * 对象被归还时调用
      *
-     * @param object 被归还的对象
+     * @param object   被归还的对象
      * @param waitTime 归还处理时间(毫秒)
      */
     void onReturn(T object, long waitTime);
@@ -41,7 +41,7 @@ public interface PoolListener<T> {
      * 对象验证时调用
      *
      * @param object 被验证的对象
-     * @param valid 验证结果
+     * @param valid  验证结果
      */
     void onValidate(T object, boolean valid);
 

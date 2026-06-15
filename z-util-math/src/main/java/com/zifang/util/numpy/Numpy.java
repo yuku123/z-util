@@ -11,7 +11,8 @@ public final class Numpy {
 
     /**
      * array方法。
-     *      * @param data Object类型参数
+     * * @param data Object类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -21,7 +22,8 @@ public final class Numpy {
 
     /**
      * array方法。
-     *      * @param data Object类型参数
+     * * @param data Object类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray array(Object data) {
@@ -31,7 +33,8 @@ public final class Numpy {
 
     /**
      * zeros方法。
-     *      * @param shape Shape类型参数
+     * * @param shape Shape类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -41,7 +44,8 @@ public final class Numpy {
 
     /**
      * zeros方法。
-     *      * @param shape int...类型参数
+     * * @param shape int...类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray zeros(int... shape) {
@@ -50,7 +54,8 @@ public final class Numpy {
 
     /**
      * zeros方法。
-     *      * @param dtype DType类型参数
+     * * @param dtype DType类型参数
+     *
      * @param shape int...类型参数
      * @return static NdArray类型返回值
      */
@@ -60,7 +65,8 @@ public final class Numpy {
 
     /**
      * ones方法。
-     *      * @param shape Shape类型参数
+     * * @param shape Shape类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -70,7 +76,8 @@ public final class Numpy {
 
     /**
      * ones方法。
-     *      * @param shape int...类型参数
+     * * @param shape int...类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray ones(int... shape) {
@@ -79,7 +86,8 @@ public final class Numpy {
 
     /**
      * ones方法。
-     *      * @param dtype DType类型参数
+     * * @param dtype DType类型参数
+     *
      * @param shape int...类型参数
      * @return static NdArray类型返回值
      */
@@ -89,9 +97,10 @@ public final class Numpy {
 
     /**
      * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
-     * @param step int类型参数
+     * * @param start int类型参数
+     *
+     * @param stop  int类型参数
+     * @param step  int类型参数
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -101,8 +110,9 @@ public final class Numpy {
 
     /**
      * arange方法。
-     *      * @param start int类型参数
-     * @param stop int类型参数
+     * * @param start int类型参数
+     *
+     * @param stop  int类型参数
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -112,7 +122,8 @@ public final class Numpy {
 
     /**
      * arange方法。
-     *      * @param stop int类型参数
+     * * @param stop int类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -122,7 +133,8 @@ public final class Numpy {
 
     /**
      * arange方法。
-     *      * @param start int类型参数
+     * * @param start int类型参数
+     *
      * @param stop int类型参数
      * @return static NdArray类型返回值
      */
@@ -132,7 +144,8 @@ public final class Numpy {
 
     /**
      * arange方法。
-     *      * @param stop int类型参数
+     * * @param stop int类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray arange(int stop) {
@@ -141,7 +154,8 @@ public final class Numpy {
 
     /**
      * empty方法。
-     *      * @param shape Shape类型参数
+     * * @param shape Shape类型参数
+     *
      * @param dtype DType类型参数
      * @return static NdArray类型返回值
      */
@@ -151,7 +165,8 @@ public final class Numpy {
 
     /**
      * empty方法。
-     *      * @param shape int...类型参数
+     * * @param shape int...类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray empty(int... shape) {
@@ -160,7 +175,8 @@ public final class Numpy {
 
     /**
      * empty方法。
-     *      * @param dtype DType类型参数
+     * * @param dtype DType类型参数
+     *
      * @param shape int...类型参数
      * @return static NdArray类型返回值
      */
@@ -170,7 +186,8 @@ public final class Numpy {
 
     /**
      * reshape方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @param newShape int...类型参数
      * @return static NdArray类型返回值
      */
@@ -180,7 +197,8 @@ public final class Numpy {
 
     /**
      * transpose方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray transpose(NdArray arr) {
@@ -189,7 +207,8 @@ public final class Numpy {
 
     /**
      * transpose方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @param axes int...类型参数
      * @return static NdArray类型返回值
      */
@@ -199,7 +218,8 @@ public final class Numpy {
 
     /**
      * copy方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray copy(NdArray arr) {
@@ -208,7 +228,8 @@ public final class Numpy {
 
     /**
      * fill方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @param value Object类型参数
      * @return static NdArray类型返回值
      */
@@ -218,7 +239,8 @@ public final class Numpy {
 
     /**
      * shape方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @return static Shape类型返回值
      */
     public static Shape shape(NdArray arr) {
@@ -227,7 +249,8 @@ public final class Numpy {
 
     /**
      * dtype方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @return static DType类型返回值
      */
     public static DType dtype(NdArray arr) {
@@ -236,7 +259,8 @@ public final class Numpy {
 
     /**
      * size方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @return static int类型返回值
      */
     public static int size(NdArray arr) {
@@ -245,7 +269,8 @@ public final class Numpy {
 
     /**
      * ndim方法。
-     *      * @param arr NdArray类型参数
+     * * @param arr NdArray类型参数
+     *
      * @return static int类型返回值
      */
     public static int ndim(NdArray arr) {
@@ -254,7 +279,8 @@ public final class Numpy {
 
     /**
      * sum方法。
-     *      * @param a NdArray类型参数
+     * * @param a NdArray类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray sum(NdArray a) {
@@ -272,7 +298,8 @@ public final class Numpy {
 
     /**
      * mean方法。
-     *      * @param a NdArray类型参数
+     * * @param a NdArray类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray mean(NdArray a) {
@@ -288,7 +315,8 @@ public final class Numpy {
 
     /**
      * max方法。
-     *      * @param a NdArray类型参数
+     * * @param a NdArray类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray max(NdArray a) {
@@ -309,7 +337,8 @@ public final class Numpy {
 
     /**
      * min方法。
-     *      * @param a NdArray类型参数
+     * * @param a NdArray类型参数
+     *
      * @return static NdArray类型返回值
      */
     public static NdArray min(NdArray a) {

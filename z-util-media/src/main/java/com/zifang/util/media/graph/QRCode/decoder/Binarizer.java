@@ -10,7 +10,8 @@ import java.awt.image.BufferedImage;
  */
 public final class Binarizer {
 
-    private Binarizer() {}
+    private Binarizer() {
+    }
 
     /**
      * Converts an image to a binary matrix using a threshold.

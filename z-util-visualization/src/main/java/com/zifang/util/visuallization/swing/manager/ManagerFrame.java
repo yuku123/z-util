@@ -26,6 +26,16 @@ public class ManagerFrame extends JFrame {
 
     private JTree treePointed;
 
+    /**
+     * 启动管理界面
+     *
+     * @param args 命令行参数
+     */
+    public static void main(String[] args) {
+        ManagerFrame managerFrame = new ManagerFrame();
+        managerFrame.init();//当前管理系统的全量初始化
+    }
+
     private void init() {
         initComponents();//初始化组件
         initListener();// 初始化监听器
@@ -45,10 +55,10 @@ public class ManagerFrame extends JFrame {
         treePointed.addTreeSelectionListener(new TreeSelectionListener() {
 
             @Override
-    /**
-     * valueChanged方法。
-     *      * @param e TreeSelectionEvent类型参数
-     */
+            /**
+             * valueChanged方法。
+             *      * @param e TreeSelectionEvent类型参数
+             */
             public void valueChanged(TreeSelectionEvent e) {
 
                 if (!treePointed.isSelectionEmpty()) {//判断节点是否被选中，被选中为0，没被选中为1
@@ -145,14 +155,5 @@ public class ManagerFrame extends JFrame {
         mainSplitPane.setDividerSize(2);//设置分割线的宽度
         //jSplitPane.setDividerLocation(100);//设置分割线位于中央
         mainSplitPane.setDividerLocation(200);//设定分割线的距离左边的位置
-    }
-
-    /**
-     * 启动管理界面
-     * @param args 命令行参数
-     */
-    public static void main(String[] args) {
-        ManagerFrame managerFrame = new ManagerFrame();
-        managerFrame.init();//当前管理系统的全量初始化
     }
 }

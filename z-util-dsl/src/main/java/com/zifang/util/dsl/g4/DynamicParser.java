@@ -1,11 +1,11 @@
 package com.zifang.util.dsl.g4;
 
+import com.zifang.util.dsl.ast.SimpleASTNode;
 import com.zifang.util.dsl.core.ASTFactory;
 import com.zifang.util.dsl.core.ASTNode;
 import com.zifang.util.dsl.core.Parser;
 import com.zifang.util.dsl.core.TokenReader;
 import com.zifang.util.dsl.g4.model.G4Rule;
-import com.zifang.util.dsl.ast.SimpleASTNode;
 import com.zifang.util.dsl.token.Token;
 
 import java.util.*;
@@ -16,14 +16,13 @@ import java.util.*;
  */
 public class DynamicParser implements Parser {
 
+    // 预定义的Token类型（来自G4Lexer）
+    private static final Set<String> TERMINALS = new HashSet<>(Arrays.asList(
+            "Id", "StringLiteral", "Int", "Decimal"
+    ));
     private TokenReader tokenReader;
     private Map<String, G4Rule> parserRules;
     private ASTFactory astFactory;
-
-    // 预定义的Token类型（来自G4Lexer）
-    private static final Set<String> TERMINALS = new HashSet<>(Arrays.asList(
-        "Id", "StringLiteral", "Int", "Decimal"
-    ));
 
     /**
      * DynamicParser方法。
@@ -508,6 +507,7 @@ public class DynamicParser implements Parser {
      */
     private static class ParseResult {
         ASTNode node;
+
         ParseResult(ASTNode node) {
             this.node = node;
         }

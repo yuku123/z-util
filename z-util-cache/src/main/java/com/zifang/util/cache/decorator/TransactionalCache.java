@@ -32,14 +32,18 @@ public class TransactionalCache<K, V> extends ForwardingCache<K, V> {
     }
 
     @Override
-    protected Cache<K, V> delegate() { return delegate; }
+    protected Cache<K, V> delegate() {
+        return delegate;
+    }
 
     public Transaction beginTransaction() {
         txLock.lock();
         return new Transaction();
     }
 
-    /** 事务：所有 put/remove 都在一个锁段里完成。 */
+    /**
+     * 事务：所有 put/remove 都在一个锁段里完成。
+     */
     public class Transaction implements AutoCloseable {
         private final Set<K> pendingRemovals = new HashSet<>();
         private final java.util.LinkedHashMap<K, V> pendingPuts = new java.util.LinkedHashMap<>();

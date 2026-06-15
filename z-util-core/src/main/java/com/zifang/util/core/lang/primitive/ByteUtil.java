@@ -182,7 +182,8 @@ public class ByteUtil {
 
     /**
      * rightPaddingZero方法。
-     *      * @param data byte[]类型参数
+     * * @param data byte[]类型参数
+     *
      * @param length int类型参数
      * @return static byte[]类型返回值
      */
@@ -202,7 +203,8 @@ public class ByteUtil {
 
     /**
      * bytesToHexString方法。
-     *      * @param src byte[]类型参数
+     * * @param src byte[]类型参数
+     *
      * @return static String类型返回值
      */
     public static String bytesToHexString(byte[] src) {
@@ -224,7 +226,8 @@ public class ByteUtil {
 
     /**
      * hexStringToBytes方法。
-     *      * @param hexString String类型参数
+     * * @param hexString String类型参数
+     *
      * @return static byte[]类型返回值
      */
     public static byte[] hexStringToBytes(String hexString) {
@@ -248,7 +251,8 @@ public class ByteUtil {
 
     /**
      * parseByte方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @return static Byte类型返回值
      */
     public static Byte parseByte(Object object) {
@@ -260,7 +264,8 @@ public class ByteUtil {
 
     /**
      * parseByteOrDefault方法。
-     *      * @param object Object类型参数
+     * * @param object Object类型参数
+     *
      * @param defaultValue byte类型参数
      * @return static Byte类型返回值
      */

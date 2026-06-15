@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * NetworkDTO 类测试
  */
+
 /**
  * NetworkDTOTest类。
  */

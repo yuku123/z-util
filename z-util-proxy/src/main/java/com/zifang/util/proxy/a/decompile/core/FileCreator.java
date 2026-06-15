@@ -13,7 +13,7 @@ public class FileCreator {
      * 源码写入到指定后缀的源文件中（使用当前目录）
      *
      * @param name 源文件名称（不含扩展名）
-     * @param src 源代码
+     * @param src  源代码
      */
     public static void createFile(String name, String src) {
         createFile(name, src, null);
@@ -22,23 +22,23 @@ public class FileCreator {
     /**
      * 源码写入到指定目录的源文件中
      *
-     * @param name 源文件名称（不含扩展名）
-     * @param src 源代码
+     * @param name      源文件名称（不含扩展名）
+     * @param src       源代码
      * @param outputDir 输出目录，为 null 时使用当前目录
      */
     public static void createFile(String name, String src, String outputDir) {
         // 确定输出目录
-        String dirPath = (outputDir != null && !outputDir.isEmpty()) 
-                ? outputDir 
+        String dirPath = (outputDir != null && !outputDir.isEmpty())
+                ? outputDir
                 : System.getProperty("user.dir");
-        
+
         File dir = new File(dirPath);
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        
+
         File file = new File(dir, name + ".java");
-        
+
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new FileWriter(file));

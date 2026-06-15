@@ -26,8 +26,9 @@ public class JsonExtractor {
     /**
      * 使用点号路径从 JSON 中提取单个值。
      * 路径示例："data.name"、"items[0].title"、"items[0]"
+     *
      * @param jsonString JSON 字符串
-     * @param jsonPath 点号路径
+     * @param jsonPath   点号路径
      * @return 提取的值，未找到或解析失败返回 null
      */
     public static String extract(String jsonString, String jsonPath) {
@@ -41,8 +42,9 @@ public class JsonExtractor {
 
     /**
      * 从 JSON 中提取指定路径处的所有值。
+     *
      * @param jsonString JSON 字符串
-     * @param jsonPath 点号路径
+     * @param jsonPath   点号路径
      * @return 提取的值列表
      */
     public static List<String> extractAll(String jsonString, String jsonPath) {

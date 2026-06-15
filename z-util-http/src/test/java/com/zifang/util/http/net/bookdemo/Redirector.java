@@ -21,12 +21,45 @@ public class Redirector {
 
     /**
      * Redirector方法。
-     *      * @param newSite String类型参数
+     * * @param newSite String类型参数
+     *
      * @param port int类型参数
      */
     public Redirector(String newSite, int port) {
         this.port = port;
         this.newSite = newSite;
+    }
+
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+
+        int thePort;
+        String theSite;
+
+        try {
+            theSite = args[0];
+            // trim trailing slash
+            if (theSite.endsWith("/")) {
+                theSite = theSite.substring(0, theSite.length() - 1);
+            }
+        } catch (RuntimeException ex) {
+            System.out.println("Usage: java Redirector http://www.newsite.com/ port");
+            return;
+        }
+
+        try {
+            thePort = Integer.parseInt(args[1]);
+        } catch (RuntimeException ex) {
+            thePort = 80;
+        }
+
+        Redirector redirector = new Redirector(theSite, thePort);
+        redirector.start();
     }
 
     /**
@@ -62,9 +95,9 @@ public class Redirector {
             this.connection = s;
         }
 
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             try {
                 Writer out = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream(), StandardCharsets.US_ASCII));
@@ -111,36 +144,5 @@ public class Redirector {
                 }
             }
         }
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-
-        int thePort;
-        String theSite;
-
-        try {
-            theSite = args[0];
-            // trim trailing slash
-            if (theSite.endsWith("/")) {
-                theSite = theSite.substring(0, theSite.length() - 1);
-            }
-        } catch (RuntimeException ex) {
-            System.out.println("Usage: java Redirector http://www.newsite.com/ port");
-            return;
-        }
-
-        try {
-            thePort = Integer.parseInt(args[1]);
-        } catch (RuntimeException ex) {
-            thePort = 80;
-        }
-
-        Redirector redirector = new Redirector(theSite, thePort);
-        redirector.start();
     }
 }

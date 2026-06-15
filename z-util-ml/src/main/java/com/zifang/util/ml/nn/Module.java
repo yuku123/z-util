@@ -1,7 +1,7 @@
 package com.zifang.util.ml.nn;
 
-import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.DType;
+import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.Shape;
 
 import java.util.ArrayList;
@@ -12,61 +12,63 @@ import java.util.List;
  * Provides forward/backward propagation and parameter management.
  */
 public abstract class Module {
-    
+
     protected boolean training = true;
     /**
      * ArrayList<>方法。
+     *
      * @return List<NdArray> parameters = new类型返回值
      */
     protected List<NdArray> parameters = new ArrayList<>();
-    
+
     /**
      * Forward pass - computes output from input
      */
     public abstract NdArray forward(NdArray input);
-    
+
     /**
      * Backward pass - computes gradient with respect to input
+     *
      * @param gradOutput Gradient from upstream (dL/doutput)
      * @return Gradient with respect to input (dL/dinput)
      */
     public abstract NdArray backward(NdArray gradOutput);
-    
+
     /**
      * Sets the module to training mode
      */
     public void train() {
         this.training = true;
     }
-    
+
     /**
      * Sets the module to evaluation mode
      */
     public void eval() {
         this.training = false;
     }
-    
+
     /**
      * Returns whether the module is in training mode
      */
     public boolean isTraining() {
         return training;
     }
-    
+
     /**
      * Returns all parameters of this module
      */
     public List<NdArray> parameters() {
         return parameters;
     }
-    
+
     /**
      * Registers a parameter tensor
      */
     protected void registerParameter(String name, NdArray param) {
         parameters.add(param);
     }
-    
+
     /**
      * Creates a zero-initialized parameter tensor with given shape
      */
@@ -75,7 +77,7 @@ public abstract class Module {
         parameters.add(param);
         return param;
     }
-    
+
     /**
      * Applies Xavier/Glorot uniform initialization
      */
@@ -89,7 +91,7 @@ public abstract class Module {
         }
         return tensor;
     }
-    
+
     /**
      * Applies Xavier/Glorot normal initialization
      */
@@ -106,7 +108,7 @@ public abstract class Module {
         }
         return tensor;
     }
-    
+
     /**
      * Applies Kaiming/He normal initialization
      */
@@ -122,7 +124,7 @@ public abstract class Module {
         }
         return tensor;
     }
-    
+
     /**
      * Resets all parameters to zero
      */

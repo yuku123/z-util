@@ -1,7 +1,7 @@
 package com.zifang.util.core.pattern.command;
 
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 命令执行器
@@ -19,7 +19,7 @@ public class CommandExecutor<C extends CommandContext> {
 
     /**
      * CommandExecutor方法。
-     *      * @param registry CommandRegistryC类型参数
+     * * @param registry CommandRegistryC类型参数
      */
     public CommandExecutor(CommandRegistry<C> registry) {
         this.registry = registry;
@@ -106,7 +106,8 @@ public class CommandExecutor<C extends CommandContext> {
         for (CommandListener<C> listener : listeners) {
             try {
                 listener.onBeforeExecute(command, context);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
     }
 
@@ -114,7 +115,8 @@ public class CommandExecutor<C extends CommandContext> {
         for (CommandListener<C> listener : listeners) {
             try {
                 listener.onAfterExecute(command, context, duration, error);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
     }
 
@@ -122,7 +124,8 @@ public class CommandExecutor<C extends CommandContext> {
         for (CommandListener<C> listener : listeners) {
             try {
                 listener.onError(command, context, error, duration);
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
     }
 
@@ -137,9 +140,14 @@ public class CommandExecutor<C extends CommandContext> {
      * 命令监听器接口
      */
     public interface CommandListener<C extends CommandContext> {
-        default void onBeforeExecute(Command<C> command, C context) {}
-        default void onAfterExecute(Command<C> command, C context, long duration, Exception error) {}
-        default void onError(Command<C> command, C context, Exception error, long duration) {}
+        default void onBeforeExecute(Command<C> command, C context) {
+        }
+
+        default void onAfterExecute(Command<C> command, C context, long duration, Exception error) {
+        }
+
+        default void onError(Command<C> command, C context, Exception error, long duration) {
+        }
     }
 
     /**
@@ -148,39 +156,39 @@ public class CommandExecutor<C extends CommandContext> {
     public static class LoggingListener<C extends CommandContext> implements CommandListener<C> {
         private final java.util.logging.Logger logger;
 
-    /**
-     * LoggingListener方法。
-     */
+        /**
+         * LoggingListener方法。
+         */
         public LoggingListener() {
             this.logger = java.util.logging.Logger.getLogger(CommandExecutor.class.getName());
         }
 
-    /**
-     * LoggingListener方法。
-     *      * @param logger java.util.logging.Logger类型参数
-     */
+        /**
+         * LoggingListener方法。
+         * * @param logger java.util.logging.Logger类型参数
+         */
         public LoggingListener(java.util.logging.Logger logger) {
             this.logger = logger;
         }
 
         @Override
-    /**
-     * onBeforeExecute方法。
-     *      * @param command CommandC类型参数
-     * @param context C类型参数
-     */
+        /**
+         * onBeforeExecute方法。
+         *      * @param command CommandC类型参数
+         * @param context C类型参数
+         */
         public void onBeforeExecute(Command<C> command, C context) {
             logger.info("Executing command: " + command.getName());
         }
 
         @Override
-    /**
-     * onAfterExecute方法。
-     *      * @param command CommandC类型参数
-     * @param context C类型参数
-     * @param duration long类型参数
-     * @param error Exception类型参数
-     */
+        /**
+         * onAfterExecute方法。
+         *      * @param command CommandC类型参数
+         * @param context C类型参数
+         * @param duration long类型参数
+         * @param error Exception类型参数
+         */
         public void onAfterExecute(Command<C> command, C context, long duration, Exception error) {
             if (error != null) {
                 logger.warning("Command '" + command.getName() + "' failed after " + duration + "ms: " + error.getMessage());
@@ -190,13 +198,13 @@ public class CommandExecutor<C extends CommandContext> {
         }
 
         @Override
-    /**
-     * onError方法。
-     *      * @param command CommandC类型参数
-     * @param context C类型参数
-     * @param error Exception类型参数
-     * @param duration long类型参数
-     */
+        /**
+         * onError方法。
+         *      * @param command CommandC类型参数
+         * @param context C类型参数
+         * @param error Exception类型参数
+         * @param duration long类型参数
+         */
         public void onError(Command<C> command, C context, Exception error, long duration) {
             logger.severe("Command '" + command.getName() + "' error after " + duration + "ms: " + error.getMessage());
         }

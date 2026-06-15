@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 /**
  * BpmnSequenceFlow 类测试
  */
+
 /**
  * BpmnSequenceFlowTest类。
  */
@@ -49,7 +50,7 @@ public class BpmnSequenceFlowTest {
      */
     public void testSixParamConstructor() {
         BpmnSequenceFlow flow = new BpmnSequenceFlow(
-                "flow-001", "node-start", "node-end", 
+                "flow-001", "node-start", "node-end",
                 "Approve Flow", "${approved == true}", true);
 
         assertEquals("flow-001", flow.getId());

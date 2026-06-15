@@ -29,6 +29,7 @@ public class CglibInterceptor implements MethodInterceptor, Serializable {
 
     /**
      * getTarget方法。
+     *
      * @return Object类型返回值
      */
     public Object getTarget() {

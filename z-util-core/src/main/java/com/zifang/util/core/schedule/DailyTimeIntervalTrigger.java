@@ -31,7 +31,7 @@ public class DailyTimeIntervalTrigger implements Trigger {
 
     /**
      * DailyTimeIntervalTrigger方法。
-     *      * @param delegate org.quartz.DailyTimeIntervalTrigger类型参数
+     * * @param delegate org.quartz.DailyTimeIntervalTrigger类型参数
      */
     public DailyTimeIntervalTrigger(org.quartz.DailyTimeIntervalTrigger delegate) {
         this.delegate = Objects.requireNonNull(delegate);
@@ -327,7 +327,7 @@ public class DailyTimeIntervalTrigger implements Trigger {
          * 设置按指定单位重复间隔。
          */
         public DailyBuilder withInterval(int interval,
-                                          org.quartz.DateBuilder.IntervalUnit unit) {
+                                         org.quartz.DateBuilder.IntervalUnit unit) {
             this.repeatInterval = interval;
             this.repeatIntervalUnit = unit;
             return this;
@@ -339,11 +339,11 @@ public class DailyTimeIntervalTrigger implements Trigger {
          * @param days java.util.Calendar 常量，如 Calendar.MONDAY, Calendar.TUESDAY 等
          */
         @SafeVarargs
-    /**
-     * onDaysOfTheWeek方法。
-     *      * @param days Integer...类型参数
-     * @return final DailyBuilder类型返回值
-     */
+        /**
+         * onDaysOfTheWeek方法。
+         *      * @param days Integer...类型参数
+         * @return final DailyBuilder类型返回值
+         */
         public final DailyBuilder onDaysOfTheWeek(Integer... days) {
             this.daysOfWeek = new java.util.HashSet<>(java.util.Arrays.asList(days));
             return this;
@@ -374,10 +374,10 @@ public class DailyTimeIntervalTrigger implements Trigger {
         }
 
         @Override
-    /**
-     * build方法。
-     * @return DailyTimeIntervalTrigger类型返回值
-     */
+        /**
+         * build方法。
+         * @return DailyTimeIntervalTrigger类型返回值
+         */
         public DailyTimeIntervalTrigger build() {
             DailyTimeIntervalScheduleBuilder sb =
                     DailyTimeIntervalScheduleBuilder.dailyTimeIntervalSchedule()

@@ -7,7 +7,6 @@ import com.zifang.util.http.base.pojo.HttpRequestHeader;
 import com.zifang.util.http.base.pojo.HttpRequestLine;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 
 /**
  * cURL 命令构建器
@@ -119,10 +118,10 @@ public class CurlBuilder {
 
         // 如果包含特殊字符，使用单引号包裹
         if (input.contains(" ") || input.contains("'") || input.contains("$") ||
-            input.contains("&") || input.contains("|") || input.contains(";") ||
-            input.contains("(") || input.contains(")") || input.contains("<") ||
-            input.contains(">") || input.contains("`") || input.contains("\\") ||
-            input.contains("\"") || input.contains("\n") || input.contains("\t")) {
+                input.contains("&") || input.contains("|") || input.contains(";") ||
+                input.contains("(") || input.contains(")") || input.contains("<") ||
+                input.contains(">") || input.contains("`") || input.contains("\\") ||
+                input.contains("\"") || input.contains("\n") || input.contains("\t")) {
 
             // 将单引号替换为 '\''
             String escaped = input.replace("'", "'\\''");

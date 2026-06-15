@@ -31,6 +31,7 @@ public class SimpleCacheRequest extends CacheRequest {
 
     /**
      * getData方法。
+     *
      * @return byte[]类型返回值
      */
     public byte[] getData() {

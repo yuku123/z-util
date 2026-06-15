@@ -15,57 +15,6 @@ import java.lang.ref.SoftReference;
 public class SoftReferenceDemo {
 
     /**
-     * 测试用内部类。
-     */
-    static class Bean {
-        private String name;
-        private int age;
-
-    /**
-     * Bean方法。
-     *      * @param name String类型参数
-     * @param age int类型参数
-     */
-        public Bean(String name, int age) {
-            this.name = name;
-            this.age = age;
-        }
-
-    /**
-     * getName方法。
-     * @return String类型返回值
-     */
-        public String getName() {
-            return name;
-        }
-
-    /**
-     * setName方法。
-     *      * @param name String类型参数
-     */
-        public void setName(String name) {
-            this.name = name;
-        }
-
-    /**
-     * getAge方法。
-     * @return int类型返回值
-     */
-        public int getAge() {
-            return age;
-        }
-
-    /**
-     * setAge方法。
-     *      * @param age int类型参数
-     */
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-    }
-
-    /**
      * 测试软引用的基本用法。
      */
     public static void test1() {
@@ -100,6 +49,60 @@ public class SoftReferenceDemo {
     public static void main(String[] args) {
         test1();
         test2();
+    }
+
+    /**
+     * 测试用内部类。
+     */
+    static class Bean {
+        private String name;
+        private int age;
+
+        /**
+         * Bean方法。
+         * * @param name String类型参数
+         *
+         * @param age int类型参数
+         */
+        public Bean(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        /**
+         * getName方法。
+         *
+         * @return String类型返回值
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * setName方法。
+         * * @param name String类型参数
+         */
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        /**
+         * getAge方法。
+         *
+         * @return int类型返回值
+         */
+        public int getAge() {
+            return age;
+        }
+
+        /**
+         * setAge方法。
+         * * @param age int类型参数
+         */
+        public void setAge(int age) {
+            this.age = age;
+        }
+
     }
 
 }

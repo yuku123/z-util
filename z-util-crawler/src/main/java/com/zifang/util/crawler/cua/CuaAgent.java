@@ -34,6 +34,7 @@ public class CuaAgent {
 
     /**
      * 使用指定的 BrowserClient 构造 CuaAgent。
+     *
      * @param browserClient 浏览器客户端实例
      */
     public CuaAgent(BrowserClient browserClient) {
@@ -74,6 +75,7 @@ public class CuaAgent {
 
     /**
      * 获取操作注册表。
+     *
      * @return 操作注册表实例
      */
     public OperationRegistry getRegistry() {
@@ -82,6 +84,7 @@ public class CuaAgent {
 
     /**
      * 获取浏览器客户端。
+     *
      * @return 浏览器客户端实例
      */
     public BrowserClient getBrowserClient() {

@@ -28,7 +28,7 @@ public class G4RuleTest {
      */
     public void testFullConstructor() {
         G4Rule rule = new G4Rule("ID", G4Rule.RuleType.LEXER, "[a-z]+", true);
-        
+
         assertEquals("ID", rule.getName());
         assertEquals(G4Rule.RuleType.LEXER, rule.getType());
         assertEquals("[a-z]+", rule.getBody());
@@ -42,7 +42,7 @@ public class G4RuleTest {
      */
     public void testThreeParamConstructor() {
         G4Rule rule = new G4Rule("expr", G4Rule.RuleType.PARSER, "term '+' term");
-        
+
         assertEquals("expr", rule.getName());
         assertEquals(G4Rule.RuleType.PARSER, rule.getType());
         assertEquals("term '+' term", rule.getBody());
@@ -86,10 +86,10 @@ public class G4RuleTest {
     public void testSetFragment() {
         G4Rule rule = new G4Rule();
         assertFalse(rule.isFragment());
-        
+
         rule.setFragment(true);
         assertTrue(rule.isFragment());
-        
+
         rule.setFragment(false);
         assertFalse(rule.isFragment());
     }
@@ -101,10 +101,10 @@ public class G4RuleTest {
     public void testSetHidden() {
         G4Rule rule = new G4Rule();
         assertFalse(rule.isHidden());
-        
+
         rule.setHidden(true);
         assertTrue(rule.isHidden());
-        
+
         rule.setHidden(false);
         assertFalse(rule.isHidden());
     }
@@ -171,7 +171,7 @@ public class G4RuleTest {
     public void testToString() {
         G4Rule rule = new G4Rule("ID", G4Rule.RuleType.LEXER, "[a-z]+", false);
         String str = rule.toString();
-        
+
         assertTrue(str.contains("ID"));
         assertTrue(str.contains("LEXER"));
         assertTrue(str.contains("[a-z]+"));
@@ -185,7 +185,7 @@ public class G4RuleTest {
         G4Rule rule = new G4Rule("LETTER", G4Rule.RuleType.LEXER, "[a-z]", true);
         rule.setHidden(true);
         String str = rule.toString();
-        
+
         assertTrue(str.contains("LETTER"));
         assertTrue(str.contains("isFragment=true"));
     }

@@ -8,9 +8,13 @@ import java.awt.image.BufferedImage;
  */
 public final class MatrixToImageConfig {
 
-    /** 黑色，像素点上使用的颜色 */
+    /**
+     * 黑色，像素点上使用的颜色
+     */
     public static final int BLACK = 0xFF000000;
-    /** 白色，像素点外使用的颜色 */
+    /**
+     * 白色，像素点外使用的颜色
+     */
     public static final int WHITE = 0xFFFFFFFF;
 
     private final int onColor;

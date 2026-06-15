@@ -73,8 +73,9 @@ public class Pageable<T> implements IPageable<T> {
 
     /**
      * Pageable方法。
-     *      * @param current long类型参数
-     * @param size long类型参数
+     * * @param current long类型参数
+     *
+     * @param size  long类型参数
      * @param total long类型参数
      */
     public Pageable(long current, long size, long total) {
@@ -87,6 +88,7 @@ public class Pageable<T> implements IPageable<T> {
 
     /**
      * getOrders方法。
+     *
      * @return List<SortField>类型返回值
      */
     public List<SortField> getOrders() {
@@ -95,7 +97,7 @@ public class Pageable<T> implements IPageable<T> {
 
     /**
      * setOrders方法。
-     *      * @param orders ListSortField类型参数
+     * * @param orders ListSortField类型参数
      */
     public void setOrders(List<SortField> orders) {
         this.orders = orders;

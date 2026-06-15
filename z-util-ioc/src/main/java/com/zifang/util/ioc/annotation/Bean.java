@@ -13,6 +13,8 @@ import java.lang.annotation.*;
 @Documented
 public @interface Bean {
 
-    /** Bean 名称，默认为方法名 */
+    /**
+     * Bean 名称，默认为方法名
+     */
     String value() default "";
 }

@@ -19,7 +19,9 @@ public class TokenBucketRateLimiter implements RateLimiter {
     private final long intervalNanos;     // 1 个令牌的间隔
     private final AtomicLong storedPermits = new AtomicLong(0);
     private final AtomicLong nextFreeNanos = new AtomicLong(0);
-    /** 全局时钟（无锁），用于跨线程同步。 */
+    /**
+     * 全局时钟（无锁），用于跨线程同步。
+     */
     private final AtomicLong nowNanos = new AtomicLong(System.nanoTime());
 
     public TokenBucketRateLimiter(long permitsPerSecond, long burstCapacity) {

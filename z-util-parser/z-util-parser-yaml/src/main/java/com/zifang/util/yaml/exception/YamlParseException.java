@@ -8,6 +8,7 @@ package com.zifang.util.yaml.exception;
 /**
  * YamlParseException类。
  */
+
 /**
  * YamlParseException类。
  */
@@ -22,7 +23,7 @@ public class YamlParseException extends RuntimeException {
      */
     /**
      * YamlParseException方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
      */
     public YamlParseException(String message) {
         super(message);
@@ -37,7 +38,8 @@ public class YamlParseException extends RuntimeException {
      */
     /**
      * YamlParseException方法。
-     *      * @param message String类型参数
+     * * @param message String类型参数
+     *
      * @param cause Throwable类型参数
      */
     public YamlParseException(String message, Throwable cause) {
@@ -54,8 +56,9 @@ public class YamlParseException extends RuntimeException {
      */
     /**
      * YamlParseException方法。
-     *      * @param message String类型参数
-     * @param line int类型参数
+     * * @param message String类型参数
+     *
+     * @param line   int类型参数
      * @param column int类型参数
      */
     public YamlParseException(String message, int line, int column) {
@@ -73,10 +76,11 @@ public class YamlParseException extends RuntimeException {
      */
     /**
      * YamlParseException方法。
-     *      * @param message String类型参数
-     * @param line int类型参数
+     * * @param message String类型参数
+     *
+     * @param line   int类型参数
      * @param column int类型参数
-     * @param cause Throwable类型参数
+     * @param cause  Throwable类型参数
      */
     public YamlParseException(String message, int line, int column, Throwable cause) {
         super(message + " (line " + line + ", column " + column + ")", cause);
@@ -90,6 +94,7 @@ public class YamlParseException extends RuntimeException {
      */
     /**
      * getLine方法。
+     *
      * @return int类型返回值
      */
     public int getLine() {
@@ -102,6 +107,7 @@ public class YamlParseException extends RuntimeException {
      */
     /**
      * getColumn方法。
+     *
      * @return int类型返回值
      */
     public int getColumn() {

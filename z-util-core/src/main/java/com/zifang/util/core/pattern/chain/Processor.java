@@ -1,7 +1,6 @@
 package com.zifang.util.core.pattern.chain;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -17,14 +16,6 @@ import java.util.function.Predicate;
  * Processor接口。
  */
 public interface Processor<C extends ChainContext<?, ?>> {
-
-    /**
-     * 执行处理
-     *
-     * @param context 上下文
-     * @return 处理结果
-     */
-    ProcessorResult process(C context);
 
     /**
      * 创建一个简单处理器，只执行给定动作（返回CONTINUE）
@@ -59,6 +50,14 @@ public interface Processor<C extends ChainContext<?, ?>> {
             return ProcessorResult.SKIP;
         };
     }
+
+    /**
+     * 执行处理
+     *
+     * @param context 上下文
+     * @return 处理结果
+     */
+    ProcessorResult process(C context);
 
     /**
      * 组合两个处理器，按顺序执行

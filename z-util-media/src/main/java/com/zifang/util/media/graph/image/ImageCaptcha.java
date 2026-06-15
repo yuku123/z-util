@@ -34,6 +34,7 @@ public final class ImageCaptcha {
 
     /**
      * create方法。
+     *
      * @return static ImageCaptcha类型返回值
      */
     public static ImageCaptcha create() {
@@ -42,7 +43,8 @@ public final class ImageCaptcha {
 
     /**
      * width方法。
-     *      * @param width int类型参数
+     * * @param width int类型参数
+     *
      * @return ImageCaptcha类型返回值
      */
     public ImageCaptcha width(int width) {
@@ -52,7 +54,8 @@ public final class ImageCaptcha {
 
     /**
      * height方法。
-     *      * @param height int类型参数
+     * * @param height int类型参数
+     *
      * @return ImageCaptcha类型返回值
      */
     public ImageCaptcha height(int height) {
@@ -62,7 +65,8 @@ public final class ImageCaptcha {
 
     /**
      * length方法。
-     *      * @param length int类型参数
+     * * @param length int类型参数
+     *
      * @return ImageCaptcha类型返回值
      */
     public ImageCaptcha length(int length) {
@@ -72,7 +76,8 @@ public final class ImageCaptcha {
 
     /**
      * chars方法。
-     *      * @param chars String类型参数
+     * * @param chars String类型参数
+     *
      * @return ImageCaptcha类型返回值
      */
     public ImageCaptcha chars(String chars) {
@@ -164,11 +169,12 @@ public final class ImageCaptcha {
         public final String code;
         public final String base64;
 
-    /**
-     * CaptchaResult方法。
-     *      * @param code String类型参数
-     * @param base64 String类型参数
-     */
+        /**
+         * CaptchaResult方法。
+         * * @param code String类型参数
+         *
+         * @param base64 String类型参数
+         */
         public CaptchaResult(String code, String base64) {
             this.code = code;
             this.base64 = base64;

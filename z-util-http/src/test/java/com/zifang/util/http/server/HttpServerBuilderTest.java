@@ -4,7 +4,6 @@ import com.zifang.util.http.base.define.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 @Ignore
@@ -13,142 +12,11 @@ import javax.script.ScriptException;
  */
 public class HttpServerBuilderTest {
 
-    /**
-     * 用户服务实现
-     */
-    @RestController("/user1")
-    public static class UserController1  {
-
-        @GetMapping("/users")
-    /**
-     * listUsers方法。
-     * @return String类型返回值
-     */
-        public String listUsers() {
-            return "Listing all users";
-        }
-
-        @GetMapping("/users/{id}")
-    /**
-     * getUser方法。
-     *      * @param @PathVariable("id" Object类型参数
-     * @return String类型返回值
-     */
-        public String getUser(@PathVariable("id") Long id) {
-            return "User: " + id;
-        }
-
-        @PostMapping(values = "/users")
-    /**
-     * createUser方法。
-     *      * @param body String类型参数
-     * @return String类型返回值
-     */
-        public String createUser(String body) {
-            return "Created user with body: " + body;
-        }
-
-        @PutMapping("/users/{id}")
-    /**
-     * updateUser方法。
-     *      * @param @PathVariable("id" Object类型参数
-     * @return String类型返回值
-     */
-        public String updateUser(@PathVariable("id")Long id, @RequestBody String body) {
-            return "Updated user " + id + " with body: " + body;
-        }
-
-        @DeleteMapping("/users/{id}")
-    /**
-     * deleteUser方法。
-     *      * @param @PathVariable("id" Object类型参数
-     * @return String类型返回值
-     */
-        public String deleteUser(@PathVariable("id") Long id) {
-            return "Deleted user: " + id;
-        }
-
-        @GetMapping("/users/search")
-    /**
-     * searchUsers方法。
-     *      * @param @RequestParam("keyword" Object类型参数
-     * @return String类型返回值
-     */
-        public String searchUsers(@RequestParam("keyword") String keyword, @RequestParam("page") int page) {
-            return "Searching users with keyword: " + keyword + ", page: " + page;
-        }
-    }
-
-    @RestController("/user2")
-    public static class UserController2  {
-
-        @GetMapping("/users")
-    /**
-     * listUsers方法。
-     * @return String类型返回值
-     */
-        public String listUsers() {
-            return "Listing all users";
-        }
-
-        @GetMapping("/users/{id}")
-    /**
-     * getUser方法。
-     *      * @param @PathVariable("id" Object类型参数
-     * @return String类型返回值
-     */
-        public String getUser(@PathVariable("id") Long id) {
-            return "User: " + id;
-        }
-
-        @PostMapping(values = "/users")
-    /**
-     * createUser方法。
-     *      * @param body String类型参数
-     * @return String类型返回值
-     */
-        public String createUser(String body) {
-            return "Created user with body: " + body;
-        }
-
-        @PutMapping("/users/{id}")
-    /**
-     * updateUser方法。
-     *      * @param @PathVariable("id" Object类型参数
-     * @return String类型返回值
-     */
-        public String updateUser(@PathVariable("id")Long id, @RequestBody String body) {
-            return "Updated user " + id + " with body: " + body;
-        }
-
-        @DeleteMapping("/users/{id}")
-    /**
-     * deleteUser方法。
-     *      * @param @PathVariable("id" Object类型参数
-     * @return String类型返回值
-     */
-        public String deleteUser(@PathVariable("id") Long id) {
-            return "Deleted user: " + id;
-        }
-
-        @GetMapping("/users/search")
-    /**
-     * searchUsers方法。
-     *      * @param @RequestParam("keyword" Object类型参数
-     * @return String类型返回值
-     */
-        public String searchUsers(@RequestParam("keyword") String keyword, @RequestParam("page") int page) {
-            return "Searching users with keyword: " + keyword + ", page: " + page;
-        }
-    }
-
-
     @Test
     /**
      * testHttpServerBuilder方法。
      */
     public void testHttpServerBuilder() throws ScriptException, InterruptedException {
-
 
 
         HttpServerBuilder httpServerBuilder = HttpServerBuilder
@@ -171,6 +39,135 @@ public class HttpServerBuilderTest {
         // 停止服务器
         httpServerBuilder.stop();
 
+    }
+
+    /**
+     * 用户服务实现
+     */
+    @RestController("/user1")
+    public static class UserController1 {
+
+        @GetMapping("/users")
+        /**
+         * listUsers方法。
+         * @return String类型返回值
+         */
+        public String listUsers() {
+            return "Listing all users";
+        }
+
+        @GetMapping("/users/{id}")
+        /**
+         * getUser方法。
+         *      * @param @PathVariable("id" Object类型参数
+         * @return String类型返回值
+         */
+        public String getUser(@PathVariable("id") Long id) {
+            return "User: " + id;
+        }
+
+        @PostMapping(values = "/users")
+        /**
+         * createUser方法。
+         *      * @param body String类型参数
+         * @return String类型返回值
+         */
+        public String createUser(String body) {
+            return "Created user with body: " + body;
+        }
+
+        @PutMapping("/users/{id}")
+        /**
+         * updateUser方法。
+         *      * @param @PathVariable("id" Object类型参数
+         * @return String类型返回值
+         */
+        public String updateUser(@PathVariable("id") Long id, @RequestBody String body) {
+            return "Updated user " + id + " with body: " + body;
+        }
+
+        @DeleteMapping("/users/{id}")
+        /**
+         * deleteUser方法。
+         *      * @param @PathVariable("id" Object类型参数
+         * @return String类型返回值
+         */
+        public String deleteUser(@PathVariable("id") Long id) {
+            return "Deleted user: " + id;
+        }
+
+        @GetMapping("/users/search")
+        /**
+         * searchUsers方法。
+         *      * @param @RequestParam("keyword" Object类型参数
+         * @return String类型返回值
+         */
+        public String searchUsers(@RequestParam("keyword") String keyword, @RequestParam("page") int page) {
+            return "Searching users with keyword: " + keyword + ", page: " + page;
+        }
+    }
+
+    @RestController("/user2")
+    public static class UserController2 {
+
+        @GetMapping("/users")
+        /**
+         * listUsers方法。
+         * @return String类型返回值
+         */
+        public String listUsers() {
+            return "Listing all users";
+        }
+
+        @GetMapping("/users/{id}")
+        /**
+         * getUser方法。
+         *      * @param @PathVariable("id" Object类型参数
+         * @return String类型返回值
+         */
+        public String getUser(@PathVariable("id") Long id) {
+            return "User: " + id;
+        }
+
+        @PostMapping(values = "/users")
+        /**
+         * createUser方法。
+         *      * @param body String类型参数
+         * @return String类型返回值
+         */
+        public String createUser(String body) {
+            return "Created user with body: " + body;
+        }
+
+        @PutMapping("/users/{id}")
+        /**
+         * updateUser方法。
+         *      * @param @PathVariable("id" Object类型参数
+         * @return String类型返回值
+         */
+        public String updateUser(@PathVariable("id") Long id, @RequestBody String body) {
+            return "Updated user " + id + " with body: " + body;
+        }
+
+        @DeleteMapping("/users/{id}")
+        /**
+         * deleteUser方法。
+         *      * @param @PathVariable("id" Object类型参数
+         * @return String类型返回值
+         */
+        public String deleteUser(@PathVariable("id") Long id) {
+            return "Deleted user: " + id;
+        }
+
+        @GetMapping("/users/search")
+        /**
+         * searchUsers方法。
+         *      * @param @RequestParam("keyword" Object类型参数
+         * @return String类型返回值
+         */
+        public String searchUsers(@RequestParam("keyword") String keyword, @RequestParam("page") int page) {
+            return "Searching users with keyword: " + keyword + ", page: " + page;
+        }
     }
 
 

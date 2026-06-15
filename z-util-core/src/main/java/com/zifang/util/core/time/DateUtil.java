@@ -7,7 +7,10 @@ import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Date工具类（统一版本）
@@ -47,25 +50,29 @@ public class DateUtil {
 
     /**
      * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_DEFAULT Object类型参数
+     * * @param PATTERN_DEFAULT Object类型参数
+     *
      * @return static final DateTimeFormatter FMT_DEFAULT =类型返回值
      */
     public static final DateTimeFormatter FMT_DEFAULT = DateTimeFormatter.ofPattern(PATTERN_DEFAULT);
     /**
      * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_DATE Object类型参数
+     * * @param PATTERN_DATE Object类型参数
+     *
      * @return static final DateTimeFormatter FMT_DATE =类型返回值
      */
     public static final DateTimeFormatter FMT_DATE = DateTimeFormatter.ofPattern(PATTERN_DATE);
     /**
      * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_TIME Object类型参数
+     * * @param PATTERN_TIME Object类型参数
+     *
      * @return static final DateTimeFormatter FMT_TIME =类型返回值
      */
     public static final DateTimeFormatter FMT_TIME = DateTimeFormatter.ofPattern(PATTERN_TIME);
     /**
      * DateTimeFormatter.ofPattern方法。
-     *      * @param PATTERN_DATETIME_MS Object类型参数
+     * * @param PATTERN_DATETIME_MS Object类型参数
+     *
      * @return static final DateTimeFormatter FMT_DATETIME_MS =类型返回值
      */
     public static final DateTimeFormatter FMT_DATETIME_MS = DateTimeFormatter.ofPattern(PATTERN_DATETIME_MS);

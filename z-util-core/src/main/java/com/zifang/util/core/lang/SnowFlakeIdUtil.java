@@ -13,6 +13,7 @@ public class SnowFlakeIdUtil {
 
     /**
      * nextId方法。
+     *
      * @return static long类型返回值
      */
     public static long nextId() {
@@ -21,6 +22,7 @@ public class SnowFlakeIdUtil {
 
     /**
      * nextIdByCacheWhenClockMoved方法。
+     *
      * @return static long类型返回值
      */
     public static long nextIdByCacheWhenClockMoved() {
@@ -29,6 +31,7 @@ public class SnowFlakeIdUtil {
 
     /**
      * stringNextId方法。
+     *
      * @return static String类型返回值
      */
     public static String stringNextId() {
@@ -37,6 +40,7 @@ public class SnowFlakeIdUtil {
 
     /**
      * stringNextIdByCacheWhenClockMoved方法。
+     *
      * @return static String类型返回值
      */
     public static String stringNextIdByCacheWhenClockMoved() {

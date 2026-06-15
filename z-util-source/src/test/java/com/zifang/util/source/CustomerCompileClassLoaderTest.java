@@ -5,11 +5,13 @@ import org.junit.Test;
 
 import java.io.InputStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * CustomerCompileClassLoader 测试
  */
+
 /**
  * CustomerCompileClassLoaderTest类。
  */

@@ -157,16 +157,16 @@ public class Apriori {
                     // Calculate lift = confidence / support(consequent)
                     Integer consequentSupportInt = frequentItemsets.get(consequent);
                     double consequentSupport = consequentSupportInt != null
-                        ? (double) consequentSupportInt / n
-                        : 0.0;
+                            ? (double) consequentSupportInt / n
+                            : 0.0;
                     double lift = consequentSupport > 0 ? confidence / consequentSupport : 0.0;
 
                     AssociationRule rule = new AssociationRule(
-                        antecedent,
-                        consequent,
-                        support,
-                        confidence,
-                        lift
+                            antecedent,
+                            consequent,
+                            support,
+                            confidence,
+                            lift
                     );
                     rules.add(rule);
                 }
@@ -280,14 +280,15 @@ public class Apriori {
         private final double confidence;
         private final double lift;
 
-    /**
-     * AssociationRule方法。
-     *      * @param antecedent SetInteger类型参数
-     * @param consequent SetInteger类型参数
-     * @param support double类型参数
-     * @param confidence double类型参数
-     * @param lift double类型参数
-     */
+        /**
+         * AssociationRule方法。
+         * * @param antecedent SetInteger类型参数
+         *
+         * @param consequent SetInteger类型参数
+         * @param support    double类型参数
+         * @param confidence double类型参数
+         * @param lift       double类型参数
+         */
         public AssociationRule(Set<Integer> antecedent, Set<Integer> consequent,
                                double support, double confidence, double lift) {
             this.antecedent = new HashSet<>(antecedent);
@@ -297,51 +298,56 @@ public class Apriori {
             this.lift = lift;
         }
 
-    /**
-     * getAntecedent方法。
-     * @return Set<Integer>类型返回值
-     */
+        /**
+         * getAntecedent方法。
+         *
+         * @return Set<Integer>类型返回值
+         */
         public Set<Integer> getAntecedent() {
             return new HashSet<>(antecedent);
         }
 
-    /**
-     * getConsequent方法。
-     * @return Set<Integer>类型返回值
-     */
+        /**
+         * getConsequent方法。
+         *
+         * @return Set<Integer>类型返回值
+         */
         public Set<Integer> getConsequent() {
             return new HashSet<>(consequent);
         }
 
-    /**
-     * getSupport方法。
-     * @return double类型返回值
-     */
+        /**
+         * getSupport方法。
+         *
+         * @return double类型返回值
+         */
         public double getSupport() {
             return support;
         }
 
-    /**
-     * getConfidence方法。
-     * @return double类型返回值
-     */
+        /**
+         * getConfidence方法。
+         *
+         * @return double类型返回值
+         */
         public double getConfidence() {
             return confidence;
         }
 
-    /**
-     * getLift方法。
-     * @return double类型返回值
-     */
+        /**
+         * getLift方法。
+         *
+         * @return double类型返回值
+         */
         public double getLift() {
             return lift;
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "AssociationRule{" +
                     "antecedent=" + antecedent +

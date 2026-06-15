@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
  * 犹如倒计时计数器，调用CountDownLatch对象的countDown方法就将计数器减1，
  * 当计数器到达0时，则所有等待者或单个等待者开始执行。
  */
+
 /**
  * CountDownLatchTest类。
  */
@@ -16,7 +17,8 @@ public class CountDownLatchTest {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -27,9 +29,9 @@ public class CountDownLatchTest {
         for (int i = 0; i < 3; i++) {
             Runnable runnable = new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
+                /**
+                 * run方法。
+                 */
                 public void run() {
                     try {
                         System.out.println("线程" + Thread.currentThread().getName()

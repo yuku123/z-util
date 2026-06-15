@@ -32,7 +32,7 @@ public interface MutationOperator {
     /**
      * 对个体进行变异操作
      *
-     * @param individual 要变异的个体
+     * @param individual   要变异的个体
      * @param mutationRate 变异概率，通常在0.01到0.1之间
      */
     void mutate(Individual individual, double mutationRate);

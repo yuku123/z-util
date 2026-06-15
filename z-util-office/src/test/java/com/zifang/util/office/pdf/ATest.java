@@ -15,18 +15,18 @@ public class ATest {
     /**
      * test方法。
      */
-    public void test(){
-        String baseFolder ="/Volumes/Elements SE/out/test";
+    public void test() {
+        String baseFolder = "/Volumes/Elements SE/out/test";
         String targetFolder = "/Volumes/Elements SE/out/test_output";
 
         List<String> existedFiles = new ArrayList<>();
-        for(File file : new File(targetFolder).listFiles()){
-            existedFiles.add(file.getName().replace(".epub.epub.pdf",""));
+        for (File file : new File(targetFolder).listFiles()) {
+            existedFiles.add(file.getName().replace(".epub.epub.pdf", ""));
         }
 
-        for(File file : new File(baseFolder).listFiles()){
-            String fileName = file.getName().replace(".epub","");
-            if(existedFiles.contains(fileName)){
+        for (File file : new File(baseFolder).listFiles()) {
+            String fileName = file.getName().replace(".epub", "");
+            if (existedFiles.contains(fileName)) {
                 //System.out.println(file.getName());
                 file.delete();
             }
@@ -38,35 +38,19 @@ public class ATest {
     /**
      * test2方法。
      */
-    public void test2(){
-        String baseFolder ="/Volumes/Elements SE/out/mock2/test";
+    public void test2() {
+        String baseFolder = "/Volumes/Elements SE/out/mock2/test";
         String targetFolder = "/Volumes/Elements SE/out/mock2/test_output";
 
         List<String> existedFiles = new ArrayList<>();
-        for(File file : new File(targetFolder).listFiles()){
-            existedFiles.add(file.getName().replace(".azw3.azw3.pdf",""));
+        for (File file : new File(targetFolder).listFiles()) {
+            existedFiles.add(file.getName().replace(".azw3.azw3.pdf", ""));
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        for(File file : new File(baseFolder).listFiles()){
-            String fileName = file.getName().replace(".azw3","");
-            if(existedFiles.contains(fileName)){
+        for (File file : new File(baseFolder).listFiles()) {
+            String fileName = file.getName().replace(".azw3", "");
+            if (existedFiles.contains(fileName)) {
                 //System.out.println(file.getName());
                 file.delete();
             }

@@ -72,7 +72,7 @@ public class DatabaseSequence implements Sequence {
      * 创建数据库序列生成器（批量大小=1）
      *
      * @param dataSource 数据源
-     * @param name      序列名称（唯一标识）
+     * @param name       序列名称（唯一标识）
      */
     public DatabaseSequence(DataSource dataSource, String name) {
         this(dataSource, name, 1);
@@ -82,8 +82,8 @@ public class DatabaseSequence implements Sequence {
      * 创建数据库序列生成器
      *
      * @param dataSource 数据源
-     * @param name      序列名称
-     * @param batchSize 批量获取大小（每次从数据库申请的号段大小，推荐 100~1000）
+     * @param name       序列名称
+     * @param batchSize  批量获取大小（每次从数据库申请的号段大小，推荐 100~1000）
      */
     public DatabaseSequence(DataSource dataSource, String name, int batchSize) {
         if (dataSource == null) {

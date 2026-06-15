@@ -4,18 +4,18 @@ package com.zifang.util.numpy;
  * Represents a slice operation for NdArray indexing
  */
 public class Slice {
-    private final int start;
-    private final int stop;
-    private final int step;
-
     /**
      * Slice方法。
-     *      * @param null Object类型参数
+     * * @param null Object类型参数
+     *
      * @param null Object类型参数
      * @param null Object类型参数
      * @return static final Slice ELLIPSIS = new类型返回值
      */
     public static final Slice ELLIPSIS = new Slice(null, null, null);
+    private final int start;
+    private final int stop;
+    private final int step;
 
     private Slice(Integer start, Integer stop, Integer step) {
         this.start = start != null ? start : 0;
@@ -25,7 +25,8 @@ public class Slice {
 
     /**
      * slice方法。
-     *      * @param start int类型参数
+     * * @param start int类型参数
+     *
      * @param stop int类型参数
      * @return static Slice类型返回值
      */
@@ -35,7 +36,8 @@ public class Slice {
 
     /**
      * slice方法。
-     *      * @param start int类型参数
+     * * @param start int类型参数
+     *
      * @param stop int类型参数
      * @param step int类型参数
      * @return static Slice类型返回值
@@ -46,7 +48,8 @@ public class Slice {
 
     /**
      * fromStart方法。
-     *      * @param start int类型参数
+     * * @param start int类型参数
+     *
      * @return static Slice类型返回值
      */
     public static Slice fromStart(int start) {
@@ -55,7 +58,8 @@ public class Slice {
 
     /**
      * toStop方法。
-     *      * @param stop int类型参数
+     * * @param stop int类型参数
+     *
      * @return static Slice类型返回值
      */
     public static Slice toStop(int stop) {
@@ -64,6 +68,7 @@ public class Slice {
 
     /**
      * all方法。
+     *
      * @return static Slice类型返回值
      */
     public static Slice all() {
@@ -72,6 +77,7 @@ public class Slice {
 
     /**
      * getStart方法。
+     *
      * @return int类型返回值
      */
     public Integer getStart() {
@@ -80,6 +86,7 @@ public class Slice {
 
     /**
      * getStop方法。
+     *
      * @return int类型返回值
      */
     public Integer getStop() {
@@ -88,6 +95,7 @@ public class Slice {
 
     /**
      * getStep方法。
+     *
      * @return int类型返回值
      */
     public Integer getStep() {
@@ -100,7 +108,7 @@ public class Slice {
     public int[] resolve(int dimensionSize) {
         int actualStart = start < 0 ? Math.max(0, dimensionSize + start) : Math.min(start, dimensionSize);
         int actualStop = stop < 0 ? Math.max(0, dimensionSize + stop) : Math.min(stop, dimensionSize);
-        
+
         if (actualStop <= actualStart && step > 0) {
             return new int[0];
         }
@@ -118,7 +126,8 @@ public class Slice {
 
     /**
      * length方法。
-     *      * @param dimensionSize int类型参数
+     * * @param dimensionSize int类型参数
+     *
      * @return int类型返回值
      */
     public int length(int dimensionSize) {

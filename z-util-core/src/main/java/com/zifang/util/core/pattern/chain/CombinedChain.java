@@ -1,6 +1,8 @@
 package com.zifang.util.core.pattern.chain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 组合链实现
@@ -19,7 +21,8 @@ public class CombinedChain<C extends ChainContext<?, ?>> implements Chain<C> {
 
     /**
      * CombinedChain方法。
-     *      * @param first ChainC类型参数
+     * * @param first ChainC类型参数
+     *
      * @param second ChainC类型参数
      */
     public CombinedChain(Chain<C> first, Chain<C> second) {

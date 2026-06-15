@@ -12,7 +12,8 @@ package com.zifang.util.zex.bust.chapter6;
 public class EnumSetTest {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -22,8 +23,8 @@ public class EnumSetTest {
         int from = 1;
         int to = 3;
 
-        System.out.println(Long.toBinaryString(-1L >>>  (from - to - 1)));
-        System.out.println(Long.toBinaryString((-1L >>>  (from - to - 1) << from)));
+        System.out.println(Long.toBinaryString(-1L >>> (from - to - 1)));
+        System.out.println(Long.toBinaryString((-1L >>> (from - to - 1) << from)));
 
 
     }

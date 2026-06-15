@@ -53,8 +53,12 @@ public class InMemoryFeatureStore implements FeatureStore {
     }
 
     private static final class FeatureState {
-        volatile boolean enabled;
         final Map<String, String> attributes;
-        FeatureState(boolean e, Map<String, String> a) { this.enabled = e; this.attributes = a; }
+        volatile boolean enabled;
+
+        FeatureState(boolean e, Map<String, String> a) {
+            this.enabled = e;
+            this.attributes = a;
+        }
     }
 }

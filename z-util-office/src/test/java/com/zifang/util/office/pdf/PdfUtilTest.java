@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * PdfUtil的单元测试
  */
+
 /**
  * PdfUtilTest类。
  */
@@ -24,7 +25,7 @@ public class PdfUtilTest {
     public void testFillImagesWithEmptyList() {
         // Test with empty list
         File tempFile = new File(System.getProperty("java.io.tmpdir"), "empty_test_" + System.currentTimeMillis() + ".pdf");
-        
+
         try {
             List<File> result = PdfUtil.fillImages(tempFile.getAbsolutePath(), Collections.emptyList(), false);
             assertTrue("Empty list should return empty result", result.isEmpty());
@@ -44,11 +45,11 @@ public class PdfUtilTest {
         // Test with non-existent file - should handle gracefully
         File tempFile = new File(System.getProperty("java.io.tmpdir"), "nonexistent_test_" + System.currentTimeMillis() + ".pdf");
         File nonExistentImage = new File("/nonexistent/path/image.png");
-        
+
         try {
             List<File> errors = PdfUtil.fillImages(tempFile.getAbsolutePath(), Arrays.asList(nonExistentImage), true);
             List<File> success = PdfUtil.fillImages(tempFile.getAbsolutePath(), Arrays.asList(nonExistentImage), false);
-            
+
             assertFalse("Error list should not be empty for non-existent file", errors.isEmpty());
             assertTrue("Success list should be empty for non-existent file", success.isEmpty());
         } finally {

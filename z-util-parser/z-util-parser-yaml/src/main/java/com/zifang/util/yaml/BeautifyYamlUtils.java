@@ -11,6 +11,7 @@ import com.zifang.util.yaml.model.YamlMap;
 /**
  * BeautifyYamlUtils类。
  */
+
 /**
  * BeautifyYamlUtils类。
  */
@@ -33,7 +34,8 @@ public class BeautifyYamlUtils {
      */
     /**
      * beautify方法。
-     *      * @param yamlStr String类型参数
+     * * @param yamlStr String类型参数
+     *
      * @return static String类型返回值
      */
     public static String beautify(String yamlStr) {
@@ -57,7 +59,8 @@ public class BeautifyYamlUtils {
      */
     /**
      * minify方法。
-     *      * @param yamlStr String类型参数
+     * * @param yamlStr String类型参数
+     *
      * @return static String类型返回值
      */
     public static String minify(String yamlStr) {
@@ -83,7 +86,8 @@ public class BeautifyYamlUtils {
      */
     /**
      * sortKeys方法。
-     *      * @param yamlStr String类型参数
+     * * @param yamlStr String类型参数
+     *
      * @return static String类型返回值
      */
     public static String sortKeys(String yamlStr) {

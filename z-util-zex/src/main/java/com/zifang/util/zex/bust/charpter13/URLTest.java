@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.charpter13;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.io.IOException;
@@ -20,6 +21,39 @@ import java.net.*;
  * URLTest类。
  */
 public class URLTest {
+
+    /**
+     * printMessageFromInputStream方法。
+     * * @param inputStream InputStream类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void printMessageFromInputStream(InputStream inputStream) throws IOException {
+        byte[] bytes = new byte[1024];
+        int len;
+        while ((len = inputStream.read(bytes)) != -1) {
+            System.out.print(new String(bytes, 0, len, "UTF-8"));
+        }
+    }
+
+    /**
+     * writeOutStream方法。
+     * * @param outputStream OutputStream类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void writeOutStream(OutputStream outputStream) throws IOException {
+
+        String content = "HTTP/1.1 200 OK\r\n" +
+                "content-Type: application/json\r\n" +
+                "Server: Apache\r\n" +
+                "\r\n" +
+                "{\"a\":\"吃饭\"}";
+        int i = 0;
+        outputStream.write(content.getBytes());
+        outputStream.flush();
+        outputStream.close();
+    }
 
     @Test
     /**
@@ -56,7 +90,6 @@ public class URLTest {
         System.out.println(new String(b));
     }
 
-
     @Test
     /**
      * client方法。
@@ -71,9 +104,9 @@ public class URLTest {
 
             new Thread(new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
+                /**
+                 * run方法。
+                 */
                 public void run() {
                     try {
                         printMessageFromInputStream(inputStream);
@@ -84,9 +117,9 @@ public class URLTest {
             }).start();
             new Thread(new Runnable() {
                 @Override
-    /**
-     * run方法。
-     */
+                /**
+                 * run方法。
+                 */
                 public void run() {
                     try {
                         writeOutStream(outputStream);
@@ -96,37 +129,6 @@ public class URLTest {
                 }
             }).start();
         }
-    }
-
-    /**
-     * printMessageFromInputStream方法。
-     *      * @param inputStream InputStream类型参数
-     * @return static void类型返回值
-     */
-    public static void printMessageFromInputStream(InputStream inputStream) throws IOException {
-        byte[] bytes = new byte[1024];
-        int len;
-        while ((len = inputStream.read(bytes)) != -1) {
-            System.out.print(new String(bytes, 0, len, "UTF-8"));
-        }
-    }
-
-    /**
-     * writeOutStream方法。
-     *      * @param outputStream OutputStream类型参数
-     * @return static void类型返回值
-     */
-    public static void writeOutStream(OutputStream outputStream) throws IOException {
-
-        String content = "HTTP/1.1 200 OK\r\n" +
-                "content-Type: application/json\r\n" +
-                "Server: Apache\r\n" +
-                "\r\n" +
-                "{\"a\":\"吃饭\"}";
-        int i = 0;
-        outputStream.write(content.getBytes());
-        outputStream.flush();
-        outputStream.close();
     }
 
     @Test

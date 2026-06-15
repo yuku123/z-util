@@ -22,7 +22,8 @@ public class CreatePdfTest2 {
 
     /**
      * transform方法。
-     *      * @param output String类型参数
+     * * @param output String类型参数
+     *
      * @param imageFolder String类型参数
      * @return static void类型返回值
      */
@@ -33,9 +34,9 @@ public class CreatePdfTest2 {
         fileList = fileList.stream().filter(e -> !e.getName().startsWith("."))
                 .filter(e -> !e.getName().equals("Thumbs.db") && !e.getName().endsWith(".txt") && !e.getName().toLowerCase().endsWith(".url")
                         && !e.getName().endsWith(".html"))
-                .filter(e->!e.getName().contains("脸肿汉化组"))
-                .filter(e->!e.getName().contains(".doc") && !e.getName().contains(".ion")&& !e.getName().contains(".tmp")&& !e.getName().contains(".ico"))
-                .filter(e->!e.getName().contains(".doc") && !e.getName().contains(".ion")&& !e.getName().contains(".tmp")&& !e.getName().contains(".ico"))
+                .filter(e -> !e.getName().contains("脸肿汉化组"))
+                .filter(e -> !e.getName().contains(".doc") && !e.getName().contains(".ion") && !e.getName().contains(".tmp") && !e.getName().contains(".ico"))
+                .filter(e -> !e.getName().contains(".doc") && !e.getName().contains(".ion") && !e.getName().contains(".tmp") && !e.getName().contains(".ico"))
 
                 .collect(Collectors.toList());
         fileList.sort(Comparator.naturalOrder());
@@ -45,7 +46,7 @@ public class CreatePdfTest2 {
             PDImageXObject pdImage = null;
             try {
                 pdImage = PDImageXObject.createFromFile(image.getAbsolutePath(), document);
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(image.getAbsolutePath());
 //                continue;
                 throw e;
@@ -72,78 +73,10 @@ public class CreatePdfTest2 {
 
     }
 
-    @Test
-    /**
-     * test0方法。
-     */
-    public void test0(){
-
-        String baseFolder = "/Volumes/element/エロ/20200301";
-
-        doAnalysisFolder(baseFolder);
-    }
-
-    private void doAnalysisFolder(String baseFolder) {
-        File file = new File(baseFolder);
-        List<File> subFiles = Arrays.asList(Objects.requireNonNull(file.listFiles()));
-
-        subFiles = subFiles.stream().filter(e->!e.isHidden()).collect(Collectors.toList());
-        subFiles.sort(Comparator.naturalOrder());
-
-        List<File> folders = subFiles.stream().filter(File::isDirectory).collect(Collectors.toList());
-        List<File> files = subFiles.stream().filter(File::isFile).collect(Collectors.toList());
-
-        if(files.size() > 0){
-            // 处理文件
-            // 压缩当前文件夹下的image到一个pdf
-            String pdfTargetFilePath = file.getParent() + "/" + file.getName() + ".pdf";
-            List<File> successFile = PdfUtil.fillImages(
-                    pdfTargetFilePath,
-                    files,
-                    false
-            );
-
-            if(successFile.size() == 0){
-                if(new File(pdfTargetFilePath).length() < 1000){
-                     new File(pdfTargetFilePath).delete();
-                }
-            } else {
-                successFile.stream().forEach(e->{
-                    System.out.println("        compact file : " + e.getAbsolutePath());
-                });
-                successFile.stream().forEach(e->{
-                    System.out.println("            start deleting-file : " + e.getAbsolutePath());
-                    // e.delete();
-                    System.out.println("            after deleting-file : " + e.getAbsolutePath());
-                });
-            }
-        }
-
-        // 处理文件夹
-        for(File subFolder : folders){
-            // 如果没有文件则删除
-            if(Arrays.stream(subFolder.listFiles()).filter(e->!e.isHidden()).collect(Collectors.toList()).size() == 0){
-                subFolder.delete();
-                continue;
-            }
-
-            System.out.println("start analysis folder: " + subFolder);
-            doAnalysisFolder(subFolder.getAbsolutePath());
-
-            // 如果没有文件则删除
-            if(Arrays.stream(subFolder.listFiles()).filter(e->!e.isHidden()).collect(Collectors.toList()).size() == 0){
-                subFolder.delete();
-                continue;
-            }
-
-            System.out.println("end   analysis folder: " + subFolder);
-
-        }
-    }
-
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws IOException {
@@ -168,5 +101,74 @@ public class CreatePdfTest2 {
             file.delete();
         }
         new File(folder).delete();
+    }
+
+    @Test
+    /**
+     * test0方法。
+     */
+    public void test0() {
+
+        String baseFolder = "/Volumes/element/エロ/20200301";
+
+        doAnalysisFolder(baseFolder);
+    }
+
+    private void doAnalysisFolder(String baseFolder) {
+        File file = new File(baseFolder);
+        List<File> subFiles = Arrays.asList(Objects.requireNonNull(file.listFiles()));
+
+        subFiles = subFiles.stream().filter(e -> !e.isHidden()).collect(Collectors.toList());
+        subFiles.sort(Comparator.naturalOrder());
+
+        List<File> folders = subFiles.stream().filter(File::isDirectory).collect(Collectors.toList());
+        List<File> files = subFiles.stream().filter(File::isFile).collect(Collectors.toList());
+
+        if (files.size() > 0) {
+            // 处理文件
+            // 压缩当前文件夹下的image到一个pdf
+            String pdfTargetFilePath = file.getParent() + "/" + file.getName() + ".pdf";
+            List<File> successFile = PdfUtil.fillImages(
+                    pdfTargetFilePath,
+                    files,
+                    false
+            );
+
+            if (successFile.size() == 0) {
+                if (new File(pdfTargetFilePath).length() < 1000) {
+                    new File(pdfTargetFilePath).delete();
+                }
+            } else {
+                successFile.stream().forEach(e -> {
+                    System.out.println("        compact file : " + e.getAbsolutePath());
+                });
+                successFile.stream().forEach(e -> {
+                    System.out.println("            start deleting-file : " + e.getAbsolutePath());
+                    // e.delete();
+                    System.out.println("            after deleting-file : " + e.getAbsolutePath());
+                });
+            }
+        }
+
+        // 处理文件夹
+        for (File subFolder : folders) {
+            // 如果没有文件则删除
+            if (Arrays.stream(subFolder.listFiles()).filter(e -> !e.isHidden()).collect(Collectors.toList()).size() == 0) {
+                subFolder.delete();
+                continue;
+            }
+
+            System.out.println("start analysis folder: " + subFolder);
+            doAnalysisFolder(subFolder.getAbsolutePath());
+
+            // 如果没有文件则删除
+            if (Arrays.stream(subFolder.listFiles()).filter(e -> !e.isHidden()).collect(Collectors.toList()).size() == 0) {
+                subFolder.delete();
+                continue;
+            }
+
+            System.out.println("end   analysis folder: " + subFolder);
+
+        }
     }
 }

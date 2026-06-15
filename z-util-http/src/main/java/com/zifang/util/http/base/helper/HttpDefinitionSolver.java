@@ -7,10 +7,11 @@ import com.zifang.util.http.base.pojo.HttpRequestBody;
 import com.zifang.util.http.base.pojo.HttpRequestDefinition;
 import com.zifang.util.http.base.pojo.HttpRequestHeader;
 import com.zifang.util.http.base.pojo.HttpRequestLine;
+
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -33,7 +34,7 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
 
     private Class<?> target;
 
-    private Map<String,Object> contextParams;
+    private Map<String, Object> contextParams;
 
     private List<ParameterValuePair> parameterValuePairList = new ArrayList<>();
 
@@ -42,6 +43,7 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
 
     /**
      * getHttpRequestDefinition方法。
+     *
      * @return HttpRequestDefinition类型返回值
      */
     public HttpRequestDefinition getHttpRequestDefinition() {
@@ -50,13 +52,14 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
 
     /**
      * set方法。
-     *      * @param target Class?类型参数
-     * @param proxy Object类型参数
-     * @param method Method类型参数
-     * @param args Object[]类型参数
+     * * @param target Class?类型参数
+     *
+     * @param proxy         Object类型参数
+     * @param method        Method类型参数
+     * @param args          Object[]类型参数
      * @param contextParams MapString,Object类型参数
      */
-    public void set(Class<?> target, Object proxy, Method method, Object[] args, Map<String,Object> contextParams) {
+    public void set(Class<?> target, Object proxy, Method method, Object[] args, Map<String, Object> contextParams) {
         this.target = target;
         this.proxy = proxy;
         this.method = method;
@@ -103,17 +106,17 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
 
     private void handleHttpRequestHeader() {
 
-        HttpRequestHeader headers =  new HttpRequestHeader();
+        HttpRequestHeader headers = new HttpRequestHeader();
 
         // 先处理对象类上的注解
         RequestHeaders requestHeadersFromObject = AnnotationUtil.getAnnotation(target, RequestHeaders.class);
-        if(requestHeadersFromObject != null){
+        if (requestHeadersFromObject != null) {
 
         }
 
         // 再处理方法上的注解
         RequestHeaders requestHeadersFromMethod = AnnotationUtil.getAnnotation(method, RequestHeaders.class);
-        if(requestHeadersFromMethod != null){
+        if (requestHeadersFromMethod != null) {
 
         }
 
@@ -184,7 +187,7 @@ public class HttpDefinitionSolver implements IDefinitionSolver {
             // 替换 {varName} 为实际值
             for (Map.Entry<String, Object> entry : pathVarMap.entrySet()) {
                 processedPath = processedPath.replace("{" + entry.getKey() + "}",
-                    String.valueOf(entry.getValue()));
+                        String.valueOf(entry.getValue()));
             }
         }
 

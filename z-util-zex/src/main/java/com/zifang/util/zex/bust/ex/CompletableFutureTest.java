@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.ex;
  * @author zifang
  * @version 1.0
  */
+
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -17,20 +18,21 @@ import java.util.concurrent.CompletableFuture;
 public class CompletableFutureTest {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
         //任务1：洗水壶->烧开水
         CompletableFuture<Void> f1 =
-                CompletableFuture.runAsync(()->{
+                CompletableFuture.runAsync(() -> {
                     System.out.println("T1:洗水壶...");
 
                     System.out.println("T1:烧开水...");
                 });
 //任务2：洗茶壶->洗茶杯->拿茶叶
         CompletableFuture<String> f2 =
-                CompletableFuture.supplyAsync(()->{
+                CompletableFuture.supplyAsync(() -> {
                     System.out.println("T2:洗茶壶...");
 
                     System.out.println("T2:洗茶杯...");
@@ -40,7 +42,7 @@ public class CompletableFutureTest {
                 });
 //任务3：任务1和任务2完成后执行：泡茶
         CompletableFuture<String> f3 =
-                f1.thenCombine(f2, (__________________________, tf)->{
+                f1.thenCombine(f2, (__________________________, tf) -> {
                     System.out.println("T1:拿到茶叶:" + tf);
                     System.out.println("T1:泡茶...");
                     return "上茶:" + tf;

@@ -17,7 +17,7 @@ public class FieldRefInfo extends AbstractConstantPool {
 
     /**
      * FieldRefInfo方法。
-     *      * @param tag byte类型参数
+     * * @param tag byte类型参数
      */
     public FieldRefInfo(byte tag) {
         super(tag);
@@ -25,7 +25,7 @@ public class FieldRefInfo extends AbstractConstantPool {
 
     /**
      * read方法。
-     *      * @param inputStream InputStream类型参数
+     * * @param inputStream InputStream类型参数
      */
     public void read(InputStream inputStream) {
         this.classIndex = U2.read(inputStream);
@@ -34,6 +34,7 @@ public class FieldRefInfo extends AbstractConstantPool {
 
     /**
      * getClassIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getClassIndex() {
@@ -42,7 +43,7 @@ public class FieldRefInfo extends AbstractConstantPool {
 
     /**
      * setClassIndex方法。
-     *      * @param classIndex U2类型参数
+     * * @param classIndex U2类型参数
      */
     public void setClassIndex(U2 classIndex) {
         this.classIndex = classIndex;
@@ -50,6 +51,7 @@ public class FieldRefInfo extends AbstractConstantPool {
 
     /**
      * getNameIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getNameIndex() {
@@ -58,7 +60,7 @@ public class FieldRefInfo extends AbstractConstantPool {
 
     /**
      * setNameIndex方法。
-     *      * @param nameIndex U2类型参数
+     * * @param nameIndex U2类型参数
      */
     public void setNameIndex(U2 nameIndex) {
         this.nameIndex = nameIndex;

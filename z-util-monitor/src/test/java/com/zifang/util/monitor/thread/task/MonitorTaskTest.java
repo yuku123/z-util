@@ -4,9 +4,11 @@ import com.zifang.util.monitor.thread.Monitorable;
 import com.zifang.util.monitor.thread.Status;
 import com.zifang.util.monitor.thread.StatusLevel;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * MonitorTaskTest类。
@@ -55,10 +57,10 @@ public class MonitorTaskTest {
         }
 
         @Override
-    /**
-     * status方法。
-     * @return Status类型返回值
-     */
+        /**
+         * status方法。
+         * @return Status类型返回值
+         */
         public Status status() {
             Status status = new Status();
             status.setLevel(StatusLevel.OK);
@@ -67,18 +69,18 @@ public class MonitorTaskTest {
         }
 
         @Override
-    /**
-     * componentName方法。
-     * @return String类型返回值
-     */
+        /**
+         * componentName方法。
+         * @return String类型返回值
+         */
         public String componentName() {
             return name;
         }
 
         @Override
-    /**
-     * alarm方法。
-     */
+        /**
+         * alarm方法。
+         */
         public void alarm() {
             // do nothing
         }

@@ -25,7 +25,7 @@ public class UnknownException extends RuntimeException {
      * 使用指定错误信息和原始异常创建未知异常。
      *
      * @param message 错误信息
-     * @param cause    原始异常，通常是导致当前异常的根本原因
+     * @param cause   原始异常，通常是导致当前异常的根本原因
      */
     public UnknownException(String message, Throwable cause) {
         super(message, cause);

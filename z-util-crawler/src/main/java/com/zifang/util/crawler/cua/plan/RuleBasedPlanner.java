@@ -9,7 +9,6 @@ import com.zifang.util.crawler.pipeline.PipelineContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -28,43 +27,8 @@ public class RuleBasedPlanner {
     private final List<Rule> rules;
 
     /**
-     * 规则内部类，将正则表达式模式映射到步骤序列。
-     */
-    public static class Rule {
-        private final Pattern pattern;
-        private final List<String> stepSequence;
-
-        /**
-         * 构造规则。
-         * @param regex 正则表达式模式（不区分大小写）
-         * @param stepSequence 步骤关键字序列
-         */
-        public Rule(String regex, List<String> stepSequence) {
-            this.pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-            this.stepSequence = stepSequence;
-        }
-
-        /**
-         * 判断任务描述是否匹配此规则。
-         * @param taskDescription 任务描述
-         * @return 是否匹配
-         */
-        public boolean matches(String taskDescription) {
-            return pattern.matcher(taskDescription).find();
-        }
-
-        /**
-         * 获取步骤序列。
-         * @return 步骤关键字列表
-         */
-        public List<String> getStepSequence() {
-            return stepSequence;
-        }
-    }
-
-    /**
      * RuleBasedPlanner方法。
-     *      * @param registry OperationRegistry类型参数
+     * * @param registry OperationRegistry类型参数
      */
     public RuleBasedPlanner(OperationRegistry registry) {
         this.registry = registry;
@@ -74,7 +38,8 @@ public class RuleBasedPlanner {
 
     /**
      * 添加自定义规则。
-     * @param regex 正则表达式模式
+     *
+     * @param regex        正则表达式模式
      * @param stepSequence 步骤序列
      */
     public void addRule(String regex, List<String> stepSequence) {
@@ -152,5 +117,43 @@ public class RuleBasedPlanner {
         addRule("switch.*window", Arrays.asList("switch"));
         addRule("switch.*tab", Arrays.asList("switch"));
         addRule("switch.*frame", Arrays.asList("switch"));
+    }
+
+    /**
+     * 规则内部类，将正则表达式模式映射到步骤序列。
+     */
+    public static class Rule {
+        private final Pattern pattern;
+        private final List<String> stepSequence;
+
+        /**
+         * 构造规则。
+         *
+         * @param regex        正则表达式模式（不区分大小写）
+         * @param stepSequence 步骤关键字序列
+         */
+        public Rule(String regex, List<String> stepSequence) {
+            this.pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+            this.stepSequence = stepSequence;
+        }
+
+        /**
+         * 判断任务描述是否匹配此规则。
+         *
+         * @param taskDescription 任务描述
+         * @return 是否匹配
+         */
+        public boolean matches(String taskDescription) {
+            return pattern.matcher(taskDescription).find();
+        }
+
+        /**
+         * 获取步骤序列。
+         *
+         * @return 步骤关键字列表
+         */
+        public List<String> getStepSequence() {
+            return stepSequence;
+        }
     }
 }

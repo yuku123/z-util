@@ -8,6 +8,7 @@ import java.util.Random;
  * @author zifang Lee (oldratlee at gmail dot com)
  * @see <a href="http://coolshell.cn/articles/9606.html">Java HashMap的死循环</a>@<a href="http://weibo.com/haoel">左耳朵耗子</a>
  */
+
 /**
  * HashMapHangDemo类。
  */
@@ -16,7 +17,8 @@ public class HashMapHangDemo {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -50,9 +52,9 @@ public class HashMapHangDemo {
         Random random = new Random();
 
         @Override
-    /**
-     * run方法。
-     */
+        /**
+         * run方法。
+         */
         public void run() {
             System.out.println("Add loop started in task!");
             while (true) {

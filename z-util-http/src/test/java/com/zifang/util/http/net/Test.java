@@ -10,7 +10,8 @@ import java.util.Arrays;
 public class Test {
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws UnknownHostException {
@@ -25,7 +26,8 @@ public class Test {
 
     /**
      * showIntAddress方法。
-     *      * @param inetAddress InetAddress类型参数
+     * * @param inetAddress InetAddress类型参数
+     *
      * @return static void类型返回值
      */
     public static void showIntAddress(InetAddress inetAddress) {

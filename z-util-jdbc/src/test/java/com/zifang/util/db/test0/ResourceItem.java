@@ -19,6 +19,7 @@ public class ResourceItem {
 
     /**
      * getId方法。
+     *
      * @return long类型返回值
      */
     public Long getId() {
@@ -27,7 +28,7 @@ public class ResourceItem {
 
     /**
      * setId方法。
-     *      * @param id long类型参数
+     * * @param id long类型参数
      */
     public void setId(Long id) {
         this.id = id;
@@ -35,6 +36,7 @@ public class ResourceItem {
 
     /**
      * getCmsId方法。
+     *
      * @return String类型返回值
      */
     public String getCmsId() {
@@ -43,7 +45,7 @@ public class ResourceItem {
 
     /**
      * setCmsId方法。
-     *      * @param cmsId String类型参数
+     * * @param cmsId String类型参数
      */
     public void setCmsId(String cmsId) {
         this.cmsId = cmsId;
@@ -51,6 +53,7 @@ public class ResourceItem {
 
     /**
      * getType方法。
+     *
      * @return String类型返回值
      */
     public String getType() {
@@ -59,7 +62,7 @@ public class ResourceItem {
 
     /**
      * setType方法。
-     *      * @param type String类型参数
+     * * @param type String类型参数
      */
     public void setType(String type) {
         this.type = type;
@@ -67,6 +70,7 @@ public class ResourceItem {
 
     /**
      * getOwnerId方法。
+     *
      * @return int类型返回值
      */
     public int getOwnerId() {
@@ -75,7 +79,7 @@ public class ResourceItem {
 
     /**
      * setOwnerId方法。
-     *      * @param ownerId int类型参数
+     * * @param ownerId int类型参数
      */
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
@@ -83,6 +87,7 @@ public class ResourceItem {
 
     /**
      * getShared方法。
+     *
      * @return boolean类型返回值
      */
     public Boolean getShared() {
@@ -91,7 +96,7 @@ public class ResourceItem {
 
     /**
      * setShared方法。
-     *      * @param shared boolean类型参数
+     * * @param shared boolean类型参数
      */
     public void setShared(Boolean shared) {
         this.shared = shared;
@@ -99,6 +104,7 @@ public class ResourceItem {
 
     /**
      * getCreateTime方法。
+     *
      * @return Timestamp类型返回值
      */
     public Timestamp getCreateTime() {
@@ -107,7 +113,7 @@ public class ResourceItem {
 
     /**
      * setCreateTime方法。
-     *      * @param createTime Timestamp类型参数
+     * * @param createTime Timestamp类型参数
      */
     public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
@@ -115,6 +121,7 @@ public class ResourceItem {
 
     /**
      * getUpdateTime方法。
+     *
      * @return Timestamp类型返回值
      */
     public Timestamp getUpdateTime() {
@@ -123,7 +130,7 @@ public class ResourceItem {
 
     /**
      * setUpdateTime方法。
-     *      * @param updateTime Timestamp类型参数
+     * * @param updateTime Timestamp类型参数
      */
     public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;

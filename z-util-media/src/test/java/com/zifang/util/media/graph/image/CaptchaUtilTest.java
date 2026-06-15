@@ -1,8 +1,10 @@
 package com.zifang.util.media.graph.image;
 
 import org.junit.Test;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
 import static org.junit.Assert.*;
 
 /**

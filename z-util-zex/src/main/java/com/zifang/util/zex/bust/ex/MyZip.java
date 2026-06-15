@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.ex;
  * @author zifang
  * @version 1.0
  */
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,6 +20,23 @@ import java.util.zip.ZipOutputStream;
  * MyZip类。
  */
 public class MyZip { // 创建类
+    /**
+     * main方法。
+     * * @param temp String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] temp) { // 主方法
+        MyZip book = new MyZip(); // 创建本例对象
+        try {
+            // 调用方法，参数为压缩后文件与要压缩文件
+            book.zip("hello.zip", new File("src"));
+            System.out.println("压缩完成"); // 输出信息
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private void zip(String zipFileName, File inputFile) throws Exception {
         ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName)); // 创建ZipOutputStream类对象
         zip(out, inputFile, ""); // 调用方法
@@ -44,22 +62,6 @@ public class MyZip { // 创建类
                 out.write(b); // 将字节写入当前ZIP条目
             }
             in.close(); // 关闭流
-        }
-    }
-
-    /**
-     * main方法。
-     *      * @param temp String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] temp) { // 主方法
-        MyZip book = new MyZip(); // 创建本例对象
-        try {
-            // 调用方法，参数为压缩后文件与要压缩文件
-            book.zip("hello.zip", new File("src"));
-            System.out.println("压缩完成"); // 输出信息
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 }

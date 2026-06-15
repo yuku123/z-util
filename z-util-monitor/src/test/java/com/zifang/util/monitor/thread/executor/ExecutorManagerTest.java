@@ -1,14 +1,10 @@
 package com.zifang.util.monitor.thread.executor;
 
-import com.zifang.util.monitor.thread.Monitorable;
-import com.zifang.util.monitor.thread.MonitorManager;
 import org.junit.Test;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+
 import static org.junit.Assert.*;
 
 /**

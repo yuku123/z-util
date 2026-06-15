@@ -19,7 +19,8 @@ public class NoPrintBusinessException extends BaseException {
 
     /**
      * NoPrintBusinessException方法。
-     *      * @param statusCode StatusCode类型参数
+     * * @param statusCode StatusCode类型参数
+     *
      * @param e Throwable类型参数
      */
     public NoPrintBusinessException(StatusCode statusCode, Throwable e) {
@@ -28,7 +29,7 @@ public class NoPrintBusinessException extends BaseException {
 
     /**
      * NoPrintBusinessException方法。
-     *      * @param statusCode StatusCode类型参数
+     * * @param statusCode StatusCode类型参数
      */
     public NoPrintBusinessException(StatusCode statusCode) {
         super(statusCode);
@@ -36,7 +37,8 @@ public class NoPrintBusinessException extends BaseException {
 
     /**
      * NoPrintBusinessException方法。
-     *      * @param statusCode StatusCode类型参数
+     * * @param statusCode StatusCode类型参数
+     *
      * @param params Object...类型参数
      */
     public NoPrintBusinessException(StatusCode statusCode, Object... params) {

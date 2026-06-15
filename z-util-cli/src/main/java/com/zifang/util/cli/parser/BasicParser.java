@@ -16,7 +16,8 @@ public class BasicParser extends Parser {
     /**
      * BasicParser方法。
      */
-    public BasicParser() {}
+    public BasicParser() {
+    }
 
     @Override
     /**

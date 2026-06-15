@@ -5,6 +5,7 @@ package com.zifang.util.ml.inheritance.chapter5;
  *
  * @author zifang
  */
+
 /**
  * Timeslot类。
  */
@@ -20,7 +21,8 @@ public class Timeslot {
      */
     /**
      * Timeslot方法。
-     *      * @param timeslotId int类型参数
+     * * @param timeslotId int类型参数
+     *
      * @param timeslot String类型参数
      */
     public Timeslot(int timeslotId, String timeslot) {
@@ -35,6 +37,7 @@ public class Timeslot {
      */
     /**
      * getTimeslotId方法。
+     *
      * @return int类型返回值
      */
     public int getTimeslotId() {
@@ -48,6 +51,7 @@ public class Timeslot {
      */
     /**
      * getTimeslot方法。
+     *
      * @return String类型返回值
      */
     public String getTimeslot() {

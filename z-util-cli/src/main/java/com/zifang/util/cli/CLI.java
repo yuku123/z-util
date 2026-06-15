@@ -8,8 +8,6 @@ import com.zifang.util.cli.model.Options;
 import com.zifang.util.cli.parser.CommandLineParser;
 import com.zifang.util.cli.parser.DefaultParser;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Properties;
 
 /**
@@ -33,7 +31,8 @@ import java.util.Properties;
  */
 public final class CLI {
 
-    private CLI() {}
+    private CLI() {
+    }
 
     /**
      * Create a new Options builder.
@@ -84,36 +83,38 @@ public final class CLI {
     public static class OptionsBuilder {
         private final Options options;
 
-    /**
-     * OptionsBuilder方法。
-     */
+        /**
+         * OptionsBuilder方法。
+         */
         public OptionsBuilder() {
             this.options = new Options();
         }
 
-    /**
-     * OptionsBuilder方法。
-     *      * @param options final类型参数
-     */
+        /**
+         * OptionsBuilder方法。
+         * * @param options final类型参数
+         */
         public OptionsBuilder(final Options options) {
             this.options = options;
         }
 
-    /**
-     * withOption方法。
-     *      * @param option final类型参数
-     * @return OptionsBuilder类型返回值
-     */
+        /**
+         * withOption方法。
+         * * @param option final类型参数
+         *
+         * @return OptionsBuilder类型返回值
+         */
         public OptionsBuilder withOption(final Option option) {
             options.addOption(option);
             return this;
         }
 
-    /**
-     * withRequiredOption方法。
-     *      * @param option final类型参数
-     * @return OptionsBuilder类型返回值
-     */
+        /**
+         * withRequiredOption方法。
+         * * @param option final类型参数
+         *
+         * @return OptionsBuilder类型返回值
+         */
         public OptionsBuilder withRequiredOption(final Option option) {
             Option required = Option.builder()
                     .opt(option.getOpt())
@@ -127,45 +128,49 @@ public final class CLI {
             return this;
         }
 
-    /**
-     * withOptionGroup方法。
-     *      * @param group final类型参数
-     * @return OptionsBuilder类型返回值
-     */
+        /**
+         * withOptionGroup方法。
+         * * @param group final类型参数
+         *
+         * @return OptionsBuilder类型返回值
+         */
         public OptionsBuilder withOptionGroup(final OptionGroup group) {
             options.addOptionGroup(group);
             return this;
         }
 
-    /**
-     * withOption方法。
-     *      * @param opt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     * @return OptionsBuilder类型返回值
-     */
+        /**
+         * withOption方法。
+         * * @param opt final类型参数
+         *
+         * @param hasArg      final类型参数
+         * @param description final类型参数
+         * @return OptionsBuilder类型返回值
+         */
         public OptionsBuilder withOption(final String opt, final boolean hasArg, final String description) {
             options.addOption(opt, hasArg, description);
             return this;
         }
 
-    /**
-     * withOption方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
-     * @param description final类型参数
-     * @return OptionsBuilder类型返回值
-     */
+        /**
+         * withOption方法。
+         * * @param opt final类型参数
+         *
+         * @param longOpt     final类型参数
+         * @param hasArg      final类型参数
+         * @param description final类型参数
+         * @return OptionsBuilder类型返回值
+         */
         public OptionsBuilder withOption(final String opt, final String longOpt, final boolean hasArg, final String description) {
             options.addOption(opt, longOpt, hasArg, description);
             return this;
         }
 
-    /**
-     * build方法。
-     * @return Options类型返回值
-     */
+        /**
+         * build方法。
+         *
+         * @return Options类型返回值
+         */
         public Options build() {
             return options;
         }

@@ -6,9 +6,9 @@ package com.zifang.util.proxy.a.model.file;
  * 用于测试ClassFile解析功能。
  */
 public class TestClassParse1 {
+    public static final int m = 3333;
     public static int i = 0;
     public int n = 1;
-    public static final int m = 3333;
 
     /**
      * method方法。

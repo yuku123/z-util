@@ -1,8 +1,8 @@
 package com.zifang.util.ioc.inject;
 
+import com.zifang.util.ioc.annotation.Bean;
 import com.zifang.util.ioc.annotation.Component;
 import com.zifang.util.ioc.annotation.Configuration;
-import com.zifang.util.ioc.annotation.Bean;
 import com.zifang.util.ioc.core.BeanRegistry;
 import com.zifang.util.ioc.exception.BeanCreationException;
 import com.zifang.util.ioc.metadata.BeanDefinition;
@@ -61,18 +61,24 @@ public class Instantiator {
         }
     }
 
-    /** 注入实例字段（供 resolveInstance 后调用） */
+    /**
+     * 注入实例字段（供 resolveInstance 后调用）
+     */
     public void injectFields(Object instance, InjectorContext context) {
         FieldInjector injector = new FieldInjector(context);
         injector.inject(instance);
     }
 
-    /** 处理 @PostConstruct 回调（JSR 250 标准） */
+    /**
+     * 处理 @PostConstruct 回调（JSR 250 标准）
+     */
     public void invokePostConstruct(Object instance) {
         invokeLifecycleCallback(instance, PostConstruct.class);
     }
 
-    /** 处理 @PreDestroy 回调（JSR 250 标准） */
+    /**
+     * 处理 @PreDestroy 回调（JSR 250 标准）
+     */
     public void invokePreDestroy(Object instance) {
         invokeLifecycleCallback(instance, PreDestroy.class);
     }

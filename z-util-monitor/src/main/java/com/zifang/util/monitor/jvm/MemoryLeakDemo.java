@@ -29,6 +29,7 @@ public class MemoryLeakDemo {
 
     /**
      * test1方法。
+     *
      * @return static void类型返回值
      */
     public static void test1() {
@@ -85,54 +86,57 @@ public class MemoryLeakDemo {
         private String userName;
         private int age;
 
-    /**
-     * Person方法。
-     *      * @param userName String类型参数
-     * @param age int类型参数
-     */
+        /**
+         * Person方法。
+         * * @param userName String类型参数
+         *
+         * @param age int类型参数
+         */
         public Person(String userName, int age) {
             super();
             this.userName = userName;
             this.age = age;
         }
 
-    /**
-     * getUserName方法。
-     * @return String类型返回值
-     */
+        /**
+         * getUserName方法。
+         *
+         * @return String类型返回值
+         */
         public String getUserName() {
             return userName;
         }
 
-    /**
-     * setUserName方法。
-     *      * @param userName String类型参数
-     */
+        /**
+         * setUserName方法。
+         * * @param userName String类型参数
+         */
         public void setUserName(String userName) {
             this.userName = userName;
         }
 
-    /**
-     * getAge方法。
-     * @return int类型返回值
-     */
+        /**
+         * getAge方法。
+         *
+         * @return int类型返回值
+         */
         public int getAge() {
             return age;
         }
 
-    /**
-     * setAge方法。
-     *      * @param age int类型参数
-     */
+        /**
+         * setAge方法。
+         * * @param age int类型参数
+         */
         public void setAge(int age) {
             this.age = age;
         }
 
         @Override
-    /**
-     * hashCode方法。
-     * @return int类型返回值
-     */
+        /**
+         * hashCode方法。
+         * @return int类型返回值
+         */
         public int hashCode() {
             final int prime = 31;
             int result = 1;
@@ -142,11 +146,11 @@ public class MemoryLeakDemo {
         }
 
         @Override
-    /**
-     * equals方法。
-     *      * @param obj Object类型参数
-     * @return boolean类型返回值
-     */
+        /**
+         * equals方法。
+         *      * @param obj Object类型参数
+         * @return boolean类型返回值
+         */
         public boolean equals(Object obj) {
             if (this == obj)
                 return true;
@@ -163,10 +167,10 @@ public class MemoryLeakDemo {
         }
 
         @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
+        /**
+         * toString方法。
+         * @return String类型返回值
+         */
         public String toString() {
             return "User [userName=" + userName + ", age=" + age + "]";
         }

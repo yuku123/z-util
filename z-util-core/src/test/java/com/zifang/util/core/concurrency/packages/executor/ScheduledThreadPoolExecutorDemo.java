@@ -12,40 +12,16 @@ import java.util.concurrent.TimeUnit;
  * 执行器框架（Executor Framework）提供了 ThreadPoolExecutor 类并采用线程池来执行 Callable 和 Runnable 类型的任务，采用线程池可以避免所有线程的创建操作而提高应用程序的性能。当发送一个任务给执行器时，根据执行器的相应配置，任务将尽可能快地被执行。但是，如果并不想让任务马上被执行，而是想让任务在过一段时间后才被执行，或者任务能够被周期性地执行。为了达到这个目的，执行器框架提供了ScheduledThreadPoolExecutor 类。
  * 在本节，我们将学习如何创建 ScheduledThreadPoolExecutor 执行器，以及如何使用它在经过一个给定的时间后开始执行任务。
  */
+
 /**
  * ScheduledThreadPoolExecutorDemo类。
  */
 public class ScheduledThreadPoolExecutorDemo {
 
-    // 1．创建一个名为Task的类，并实现Callable接口，接口的泛型参数为String类型。
-    static class Task implements Callable<String> {
-        /// 2．声明一个名为name的私有String属性，用来存储任务的名称。
-        private String name;
-
-        // 3．实现类的构造器，并初始化 name 属性。
-    /**
-     * Task方法。
-     *      * @param name String类型参数
-     */
-        public Task(String name) {
-            this.name = name;
-        }
-
-        // 4．实现call()方法。在控制台输出实际的时间，并返回一个文本信息，比如“Hello，world”。
-    /**
-     * call方法。
-     * @return String类型返回值
-     */
-        public String call() throws Exception {
-            System.out.printf("%s: Starting at : %s\n", name, new Date());
-            return "Hello, world";
-        }
-    }
-
-    // 5．实现范例的主类，创建 Main 主类，并实现 main() 方法。
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -69,6 +45,36 @@ public class ScheduledThreadPoolExecutorDemo {
         }
         // 10．在控制台输出信息表示程序执行结束的时间。
         System.out.printf("Main: Ends at: %s\n", new Date());
+    }
+
+    // 5．实现范例的主类，创建 Main 主类，并实现 main() 方法。
+
+    // 1．创建一个名为Task的类，并实现Callable接口，接口的泛型参数为String类型。
+    static class Task implements Callable<String> {
+        /// 2．声明一个名为name的私有String属性，用来存储任务的名称。
+        private String name;
+
+        // 3．实现类的构造器，并初始化 name 属性。
+
+        /**
+         * Task方法。
+         * * @param name String类型参数
+         */
+        public Task(String name) {
+            this.name = name;
+        }
+
+        // 4．实现call()方法。在控制台输出实际的时间，并返回一个文本信息，比如“Hello，world”。
+
+        /**
+         * call方法。
+         *
+         * @return String类型返回值
+         */
+        public String call() throws Exception {
+            System.out.printf("%s: Starting at : %s\n", name, new Date());
+            return "Hello, world";
+        }
     }
 }
 

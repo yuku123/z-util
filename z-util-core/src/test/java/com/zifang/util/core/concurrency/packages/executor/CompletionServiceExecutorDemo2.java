@@ -9,133 +9,16 @@ import java.util.concurrent.*;
  * CompletionService类有一个方法用来发送任务给执行器，还有一个方法为下一个已经执行结束的任务获取Future对象。从内部实现机制来看，CompletionService类使用 Executor对象来执行任务。这个行为的优势是可以共享CompletionService对象，并发送任务到执行器，然后其他的对象可以处理任务的结果。第二个方法有一个不足之处，它只能为已经执行结束的任务获取Future对象，因此，这些Future对象只能被用来获取任务的结果。
  * 在本节，我们将学习如何使用CompletionService类，在执行器中来分离任务的启动与结果的处理。
  */
+
 /**
  * CompletionServiceExecutorDemo2类。
  */
 public class CompletionServiceExecutorDemo2 {
 
-    // 1．创建名为 ReportGenerator 的类，并实现 Callable 接口，接口的泛型参数为 String 类型。
-    static class ReportGenerator implements Callable<String> {
-        /// 2．声明两个私有的String属性，分别命名为sender和title，将用来表示报告的数据。
-        private String sender;
-        private String title;
-
-        // 3．实现类的构造器，用来初始化这两个属性。
-    /**
-     * ReportGenerator方法。
-     *      * @param sender String类型参数
-     * @param title String类型参数
-     */
-        public ReportGenerator(String sender, String title) {
-            this.sender = sender;
-            this.title = title;
-        }
-
-        // 4．实现call()方法。让线程休眠一段随机时间。
-        @Override
-
-    /**
-     * call方法。
-     * @return String类型返回值
-     */
-        public String call() throws Exception {
-            try {
-                long duration = (long) (Math.random() * 10);
-                System.out.printf("%s_%s: ReportGenerator: Generating a report during %d seconds\n", this.sender, this.title, duration);
-                TimeUnit.SECONDS.sleep(duration);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            // 5．生成包含了sender和title属性的字符串并返回该字符串。
-            String ret = sender + ": " + title;
-            return ret;
-        }
-    }
-
-    // 6．创建一个名为ReportRequest的类，实现Runnable接口。这个类将模拟请求获取报告。
-    static class ReportRequest implements Runnable {
-        /// 7．声明一个名为name的私有String属性，用来存储ReportRequest的名称。
-        private String name;
-        // 8．声明一个名为 service 的私有 CompletionService 属性，这个 CompletionService
-        // 接口是泛型接口。在这个示例中，我们采用 String 类作为泛型参数。
-        private CompletionService<String> service;
-
-        // 9．实现类的构造器，并初始化这两个属性。
-    /**
-     * ReportRequest方法。
-     *      * @param name String类型参数
-     * @param service CompletionServiceString类型参数
-     */
-        public ReportRequest(String name, CompletionService<String> service) {
-            this.name = name;
-            this.service = service;
-        }
-
-        // 10．实现run()方法。创建ReportGenerator对象，然后调用CompletionService对象的submit()方法将ReportGenerator对象发送给CompletionService对象。
-        @Override
-    /**
-     * run方法。
-     */
-        public void run() {
-            ReportGenerator reportGenerator = new ReportGenerator(name, "Report");
-            service.submit(reportGenerator);
-        }
-    }
-
-    // 11．创建名为ReportProcessor的类，并实现Runnable接口。这个类将获取到 ReportGenerator任务的结果。
-    static class ReportProcessor implements Runnable {
-        /// 12．声明一个名为 service
-        /// 的私有CompletionService属性。由于CompletionService接口是一个泛型接口，在这个示例中，我们采用String类作为泛型参数。
-        private CompletionService<String> service;
-        // 13．声明一个名为end的私有boolean属性。
-        private boolean end;
-
-        // 14．实现类的构造器，并初始化这两个属性。
-    /**
-     * ReportProcessor方法。
-     *      * @param service CompletionServiceString类型参数
-     */
-        public ReportProcessor(CompletionService<String> service) {
-            this.service = service;
-            end = false;
-        }
-
-        // 15．实现run()方法。如果end属性值为false，则调用CompletionService接口的poll()
-        // 方法，来获取下一个已经完成任务的Future对象；当然，这个任务是采用 CompletionService来完成的。
-        @Override
-    /**
-     * run方法。
-     */
-        public void run() {
-            while (!end) {
-                try {
-                    Future<String> result = service.poll(20, TimeUnit.SECONDS);
-                    // 16．通过调用Future对象的get()方法来获取任务的结果，并在控制台输出这些结果。
-                    if (result != null) {
-                        String report = result.get();
-                        System.out.printf("ReportReceiver: Report Received: %s\n", report);
-                    }
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
-            System.out.printf("ReportSender: End\n");
-        }
-
-        // 17．实现setEnd()设置方法，修改end的属性值。
-    /**
-     * setEnd方法。
-     *      * @param end boolean类型参数
-     */
-        public void setEnd(boolean end) {
-            this.end = end;
-        }
-    }
-    // 18．实现范例的主类，创建 Main 主类，并实现 main() 方法。
-
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -175,6 +58,131 @@ public class CompletionServiceExecutorDemo2 {
         // 26．调用 setEnd() 方法，设置 end 属性为 true，来结束 ReportSender 的执行。
         processor.setEnd(true);
         System.out.println("Main: Ends");
+    }
+
+    // 1．创建名为 ReportGenerator 的类，并实现 Callable 接口，接口的泛型参数为 String 类型。
+    static class ReportGenerator implements Callable<String> {
+        /// 2．声明两个私有的String属性，分别命名为sender和title，将用来表示报告的数据。
+        private String sender;
+        private String title;
+
+        // 3．实现类的构造器，用来初始化这两个属性。
+
+        /**
+         * ReportGenerator方法。
+         * * @param sender String类型参数
+         *
+         * @param title String类型参数
+         */
+        public ReportGenerator(String sender, String title) {
+            this.sender = sender;
+            this.title = title;
+        }
+
+        // 4．实现call()方法。让线程休眠一段随机时间。
+        @Override
+
+        /**
+         * call方法。
+         * @return String类型返回值
+         */
+        public String call() throws Exception {
+            try {
+                long duration = (long) (Math.random() * 10);
+                System.out.printf("%s_%s: ReportGenerator: Generating a report during %d seconds\n", this.sender, this.title, duration);
+                TimeUnit.SECONDS.sleep(duration);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            // 5．生成包含了sender和title属性的字符串并返回该字符串。
+            String ret = sender + ": " + title;
+            return ret;
+        }
+    }
+
+    // 6．创建一个名为ReportRequest的类，实现Runnable接口。这个类将模拟请求获取报告。
+    static class ReportRequest implements Runnable {
+        /// 7．声明一个名为name的私有String属性，用来存储ReportRequest的名称。
+        private String name;
+        // 8．声明一个名为 service 的私有 CompletionService 属性，这个 CompletionService
+        // 接口是泛型接口。在这个示例中，我们采用 String 类作为泛型参数。
+        private CompletionService<String> service;
+
+        // 9．实现类的构造器，并初始化这两个属性。
+
+        /**
+         * ReportRequest方法。
+         * * @param name String类型参数
+         *
+         * @param service CompletionServiceString类型参数
+         */
+        public ReportRequest(String name, CompletionService<String> service) {
+            this.name = name;
+            this.service = service;
+        }
+
+        // 10．实现run()方法。创建ReportGenerator对象，然后调用CompletionService对象的submit()方法将ReportGenerator对象发送给CompletionService对象。
+        @Override
+        /**
+         * run方法。
+         */
+        public void run() {
+            ReportGenerator reportGenerator = new ReportGenerator(name, "Report");
+            service.submit(reportGenerator);
+        }
+    }
+    // 18．实现范例的主类，创建 Main 主类，并实现 main() 方法。
+
+    // 11．创建名为ReportProcessor的类，并实现Runnable接口。这个类将获取到 ReportGenerator任务的结果。
+    static class ReportProcessor implements Runnable {
+        /// 12．声明一个名为 service
+        /// 的私有CompletionService属性。由于CompletionService接口是一个泛型接口，在这个示例中，我们采用String类作为泛型参数。
+        private CompletionService<String> service;
+        // 13．声明一个名为end的私有boolean属性。
+        private boolean end;
+
+        // 14．实现类的构造器，并初始化这两个属性。
+
+        /**
+         * ReportProcessor方法。
+         * * @param service CompletionServiceString类型参数
+         */
+        public ReportProcessor(CompletionService<String> service) {
+            this.service = service;
+            end = false;
+        }
+
+        // 15．实现run()方法。如果end属性值为false，则调用CompletionService接口的poll()
+        // 方法，来获取下一个已经完成任务的Future对象；当然，这个任务是采用 CompletionService来完成的。
+        @Override
+        /**
+         * run方法。
+         */
+        public void run() {
+            while (!end) {
+                try {
+                    Future<String> result = service.poll(20, TimeUnit.SECONDS);
+                    // 16．通过调用Future对象的get()方法来获取任务的结果，并在控制台输出这些结果。
+                    if (result != null) {
+                        String report = result.get();
+                        System.out.printf("ReportReceiver: Report Received: %s\n", report);
+                    }
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.printf("ReportSender: End\n");
+        }
+
+        // 17．实现setEnd()设置方法，修改end的属性值。
+
+        /**
+         * setEnd方法。
+         * * @param end boolean类型参数
+         */
+        public void setEnd(boolean end) {
+            this.end = end;
+        }
     }
 }
 

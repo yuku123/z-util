@@ -13,6 +13,7 @@ import java.util.Random;
  *
  * @author zifang
  */
+
 /**
  * Population类。
  */
@@ -27,7 +28,7 @@ public class Population {
      */
     /**
      * Population方法。
-     *      * @param populationSize int类型参数
+     * * @param populationSize int类型参数
      */
     public Population(int populationSize) {
         // Initial population
@@ -42,7 +43,8 @@ public class Population {
      */
     /**
      * Population方法。
-     *      * @param populationSize int类型参数
+     * * @param populationSize int类型参数
+     *
      * @param chromosomeLength int类型参数
      */
     public Population(int populationSize, int chromosomeLength) {
@@ -66,6 +68,7 @@ public class Population {
      */
     /**
      * getIndividuals方法。
+     *
      * @return Individual[]类型返回值
      */
     public Individual[] getIndividuals() {
@@ -87,19 +90,20 @@ public class Population {
      */
     /**
      * getFittest方法。
-     *      * @param offset int类型参数
+     * * @param offset int类型参数
+     *
      * @return Individual类型返回值
      */
     public Individual getFittest(int offset) {
         // Order population by fitness
         Arrays.sort(this.population, new Comparator<Individual>() {
             @Override
-    /**
-     * compare方法。
-     *      * @param o1 Individual类型参数
-     * @param o2 Individual类型参数
-     * @return int类型返回值
-     */
+            /**
+             * compare方法。
+             *      * @param o1 Individual类型参数
+             * @param o2 Individual类型参数
+             * @return int类型返回值
+             */
             public int compare(Individual o1, Individual o2) {
                 if (o1.getFitness() > o2.getFitness()) {
                     return -1;
@@ -119,21 +123,10 @@ public class Population {
      *
      * @param fitness The population's total fitness
      */
-    /**
-     * setPopulationFitness方法。
-     *      * @param fitness double类型参数
-     */
-    public void setPopulationFitness(double fitness) {
-        this.populationFitness = fitness;
-    }
 
     /**
-     * Get population's group fitness
-     *
-     * @return populationFitness The population's total fitness
-     */
-    /**
      * getPopulationFitness方法。
+     *
      * @return double类型返回值
      */
     public double getPopulationFitness() {
@@ -141,12 +134,28 @@ public class Population {
     }
 
     /**
+     * Get population's group fitness
+     *
+     * @return populationFitness The population's total fitness
+     */
+
+    /**
+     * setPopulationFitness方法。
+     * * @param fitness double类型参数
+     */
+    public void setPopulationFitness(double fitness) {
+        this.populationFitness = fitness;
+    }
+
+    /**
      * Get population's size
      *
      * @return size The population's size
      */
+
     /**
      * size方法。
+     *
      * @return int类型返回值
      */
     public int size() {
@@ -162,7 +171,8 @@ public class Population {
      */
     /**
      * setIndividual方法。
-     *      * @param offset int类型参数
+     * * @param offset int类型参数
+     *
      * @param individual Individual类型参数
      * @return Individual类型返回值
      */
@@ -178,7 +188,8 @@ public class Population {
      */
     /**
      * getIndividual方法。
-     *      * @param offset int类型参数
+     * * @param offset int类型参数
+     *
      * @return Individual类型返回值
      */
     public Individual getIndividual(int offset) {

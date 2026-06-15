@@ -12,7 +12,7 @@ public class BinaryMutation implements MutationOperator {
     /**
      * 对二进制基因型个体进行翻转变异
      *
-     * @param individual 要变异的个体，必须是BinaryGenotype类型
+     * @param individual   要变异的个体，必须是BinaryGenotype类型
      * @param mutationRate 变异率，范围[0, 1]
      */
     @Override

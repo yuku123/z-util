@@ -9,6 +9,7 @@ package com.zifang.util.zex.bust.charpter13;
  * @author zifang
  * @version 1.0
  */
+
 import org.junit.Test;
 
 import java.io.IOException;
@@ -21,6 +22,20 @@ import java.net.Socket;
  * SocketTest001类。
  */
 public class SocketTest001 {
+
+    /**
+     * printMessageFromInputStream方法。
+     * * @param inputStream InputStream类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void printMessageFromInputStream(InputStream inputStream) throws IOException {
+        byte[] bytes = new byte[1024];
+        int len;
+        while ((len = inputStream.read(bytes)) != -1) {
+            System.out.print(new String(bytes, 0, len, "UTF-8"));
+        }
+    }
 
     @Test
     /**
@@ -65,19 +80,6 @@ public class SocketTest001 {
         socket.close();
         // 关闭监听
         server.close();
-    }
-
-    /**
-     * printMessageFromInputStream方法。
-     *      * @param inputStream InputStream类型参数
-     * @return static void类型返回值
-     */
-    public static void printMessageFromInputStream(InputStream inputStream) throws IOException {
-        byte[] bytes = new byte[1024];
-        int len;
-        while ((len = inputStream.read(bytes)) != -1) {
-            System.out.print(new String(bytes, 0, len, "UTF-8"));
-        }
     }
 
 

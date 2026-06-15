@@ -55,9 +55,9 @@ public class Sets {
     /**
      * 计算两个集合的交集
      *
-     * @param <T>   集合元素类型
-     * @param set1  第一个集合
-     * @param set2  第二个集合
+     * @param <T>  集合元素类型
+     * @param set1 第一个集合
+     * @param set2 第二个集合
      * @return 交集集合
      */
     public static <T> Set<T> intersection(Set<T> set1, Set<T> set2) {
@@ -72,9 +72,9 @@ public class Sets {
     /**
      * 计算两个集合的差集
      *
-     * @param <T>   集合元素类型
-     * @param set1  第一个集合
-     * @param set2  第二个集合
+     * @param <T>  集合元素类型
+     * @param set1 第一个集合
+     * @param set2 第二个集合
      * @return 差集集合
      */
     public static <T> Set<T> difference(Set<T> set1, Set<T> set2) {
@@ -91,9 +91,9 @@ public class Sets {
     /**
      * 计算两个集合的并集
      *
-     * @param <T>   集合元素类型
-     * @param set1  第一个集合
-     * @param set2  第二个集合
+     * @param <T>  集合元素类型
+     * @param set1 第一个集合
+     * @param set2 第二个集合
      * @return 并集集合
      */
     public static <T> Set<T> union(Set<T> set1, Set<T> set2) {

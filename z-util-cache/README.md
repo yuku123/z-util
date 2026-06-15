@@ -5,9 +5,9 @@
 ## Features
 
 - **MemoryCache** — 纯内存 KV 缓存，线程安全
-  - 支持 TTL（过期时间）
-  - 支持 LRU 淘汰策略（最大容量限制）
-  - 支持统计：hit/miss/evict
+    - 支持 TTL（过期时间）
+    - 支持 LRU 淘汰策略（最大容量限制）
+    - 支持统计：hit/miss/evict
 - **CacheManager** — 多级缓存管理，支持缓存命名空间
 - **CacheFactory** — 工厂模式创建缓存实例
 

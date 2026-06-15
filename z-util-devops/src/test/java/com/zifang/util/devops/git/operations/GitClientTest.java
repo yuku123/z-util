@@ -1,11 +1,6 @@
 package com.zifang.util.devops.git.operations;
 
-import com.zifang.util.devops.git.operations.core.GitAuthor;
-import com.zifang.util.devops.git.operations.core.GitBranch;
-import com.zifang.util.devops.git.operations.core.GitCommit;
-import com.zifang.util.devops.git.operations.core.GitRepository;
-import com.zifang.util.devops.git.operations.core.GitStatus;
-import com.zifang.util.devops.git.operations.core.GitTag;
+import com.zifang.util.devops.git.operations.core.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +16,7 @@ import static org.junit.Assert.*;
  * <p>
  * 使用 JUnit 4。每个测试在临时目录里 init 一个新仓库，互不干扰。
  */
+
 /**
  * GitClientTest类。
  */
@@ -28,6 +24,35 @@ public class GitClientTest {
 
     private File workDir;
     private GitRepository repo;
+
+    private static File createTempDir(String prefix) throws Exception {
+        File dir = File.createTempFile(prefix, "");
+        if (!dir.delete() || !dir.mkdirs()) {
+            throw new IllegalStateException("无法创建临时目录: " + dir);
+        }
+        return dir;
+    }
+
+    private static void writeFile(File f, String content) throws Exception {
+        try (FileWriter w = new FileWriter(f)) {
+            w.write(content);
+        }
+    }
+
+    private static void deleteRecursive(File f) {
+        if (f == null || !f.exists()) {
+            return;
+        }
+        if (f.isDirectory()) {
+            File[] children = f.listFiles();
+            if (children != null) {
+                for (File c : children) {
+                    deleteRecursive(c);
+                }
+            }
+        }
+        f.delete();
+    }
 
     @Before
     /**
@@ -279,6 +304,8 @@ public class GitClientTest {
         assertTrue(r.getMessage().contains("message"));
     }
 
+    // ==================== 工具方法 ====================
+
     @Test
     /**
      * testOpenNonExistent方法。
@@ -312,41 +339,10 @@ public class GitClientTest {
         assertTrue(new File(workDir, "untracked.txt").exists());
     }
 
-    // ==================== 工具方法 ====================
-
     private void commitFile(String name, String content, String message) throws Exception {
         writeFile(new File(workDir, name), content);
         GitClient.add(repo, name);
         GitResult<String> r = GitClient.commit(repo, new GitAuthor("tester", "tester@example.com"), message);
         assertTrue("commit 失败: " + r.getMessage() + " | " + r.getStderr(), r.isSuccess());
-    }
-
-    private static File createTempDir(String prefix) throws Exception {
-        File dir = File.createTempFile(prefix, "");
-        if (!dir.delete() || !dir.mkdirs()) {
-            throw new IllegalStateException("无法创建临时目录: " + dir);
-        }
-        return dir;
-    }
-
-    private static void writeFile(File f, String content) throws Exception {
-        try (FileWriter w = new FileWriter(f)) {
-            w.write(content);
-        }
-    }
-
-    private static void deleteRecursive(File f) {
-        if (f == null || !f.exists()) {
-            return;
-        }
-        if (f.isDirectory()) {
-            File[] children = f.listFiles();
-            if (children != null) {
-                for (File c : children) {
-                    deleteRecursive(c);
-                }
-            }
-        }
-        f.delete();
     }
 }

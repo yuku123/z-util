@@ -1,7 +1,5 @@
 package com.zifang.util.core.pattern.chain;
 
-import java.util.*;
-
 /**
  * 命名链实现
  *
@@ -12,7 +10,7 @@ public class NamedChain<C extends ChainContext<?, ?>> extends SimpleChain<C> {
 
     /**
      * NamedChain方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
      */
     public NamedChain(String name) {
         super(name);
@@ -20,7 +18,8 @@ public class NamedChain<C extends ChainContext<?, ?>> extends SimpleChain<C> {
 
     /**
      * NamedChain方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param processor ProcessorC类型参数
      */
     public NamedChain(String name, Processor<C> processor) {

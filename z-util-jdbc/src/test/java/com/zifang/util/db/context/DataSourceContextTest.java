@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 /**
  * DataSourceContext 类测试
  */
+
 /**
  * DataSourceContextTest类。
  */
@@ -60,10 +61,10 @@ public class DataSourceContextTest {
         DataSourceContext context = new DataSourceContext();
         DatasourceFactory factory = new DatasourceFactory() {
             @Override
-    /**
-     * getDatasource方法。
-     * @return DataSource类型返回值
-     */
+            /**
+             * getDatasource方法。
+             * @return DataSource类型返回值
+             */
             public DataSource getDatasource() {
                 return null;
             }
@@ -157,10 +158,10 @@ public class DataSourceContextTest {
     public void testFullConfiguration() {
         DatasourceFactory factory = new DatasourceFactory() {
             @Override
-    /**
-     * getDatasource方法。
-     * @return DataSource类型返回值
-     */
+            /**
+             * getDatasource方法。
+             * @return DataSource类型返回值
+             */
             public DataSource getDatasource() {
                 return null;
             }

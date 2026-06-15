@@ -9,13 +9,14 @@ import com.zifang.util.devops.git.github.repo.RepositoryApiWrapper;
 import com.zifang.util.devops.git.github.user.UserApiWrapper;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * GithubApiWrapper 静态工厂方法测试
  * <p>
  * 这些方法只是构造 wrapper 实例，不涉及网络调用。
  */
+
 /**
  * GithubApiWrapperTest类。
  */

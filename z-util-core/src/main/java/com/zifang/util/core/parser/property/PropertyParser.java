@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Properties;
 
 /**
  * 属性文件解析器。
@@ -74,9 +74,9 @@ public class PropertyParser {
     /**
      * 将属性保存到文件。
      *
-     * @param props   属性映射
-     * @param file    目标文件
-     * @param header  文件头注释（可为 null）
+     * @param props  属性映射
+     * @param file   目标文件
+     * @param header 文件头注释（可为 null）
      * @throws IOException 写入异常
      */
     public static void store(Properties props, File file, String header) throws IOException {

@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * INI 文件数据模型
  */
+
 /**
  * IniFile类。
  */
@@ -22,6 +23,7 @@ public class IniFile {
 
     /**
      * getSections方法。
+     *
      * @return List<IniSection>类型返回值
      */
     public List<IniSection> getSections() {
@@ -30,7 +32,7 @@ public class IniFile {
 
     /**
      * setSections方法。
-     *      * @param sections ListIniSection类型参数
+     * * @param sections ListIniSection类型参数
      */
     public void setSections(List<IniSection> sections) {
         this.sections = sections;
@@ -38,7 +40,7 @@ public class IniFile {
 
     /**
      * addSection方法。
-     *      * @param section IniSection类型参数
+     * * @param section IniSection类型参数
      */
     public void addSection(IniSection section) {
         sections.add(section);
@@ -49,7 +51,8 @@ public class IniFile {
      */
     /**
      * getSection方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return IniSection类型返回值
      */
     public IniSection getSection(String name) {
@@ -66,6 +69,7 @@ public class IniFile {
      */
     /**
      * getGlobalSection方法。
+     *
      * @return IniSection类型返回值
      */
     public IniSection getGlobalSection() {

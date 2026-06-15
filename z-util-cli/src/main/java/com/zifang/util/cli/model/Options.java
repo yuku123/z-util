@@ -1,13 +1,7 @@
 package com.zifang.util.cli.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Main container for all command-line options.
@@ -25,11 +19,13 @@ public class Options implements Serializable {
     /**
      * Options方法。
      */
-    public Options() {}
+    public Options() {
+    }
 
     /**
      * addOption方法。
-     *      * @param option final类型参数
+     * * @param option final类型参数
+     *
      * @return Options类型返回值
      */
     public Options addOption(final Option option) {
@@ -48,8 +44,9 @@ public class Options implements Serializable {
 
     /**
      * addOption方法。
-     *      * @param opt final类型参数
-     * @param hasArg final类型参数
+     * * @param opt final类型参数
+     *
+     * @param hasArg      final类型参数
      * @param description final类型参数
      * @return Options类型返回值
      */
@@ -59,9 +56,10 @@ public class Options implements Serializable {
 
     /**
      * addOption方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
+     * * @param opt final类型参数
+     *
+     * @param longOpt     final类型参数
+     * @param hasArg      final类型参数
      * @param description final类型参数
      * @return Options类型返回值
      */
@@ -71,9 +69,10 @@ public class Options implements Serializable {
 
     /**
      * addRequiredOption方法。
-     *      * @param opt final类型参数
-     * @param longOpt final类型参数
-     * @param hasArg final类型参数
+     * * @param opt final类型参数
+     *
+     * @param longOpt     final类型参数
+     * @param hasArg      final类型参数
      * @param description final类型参数
      * @return Options类型返回值
      */
@@ -90,7 +89,8 @@ public class Options implements Serializable {
 
     /**
      * addOptionGroup方法。
-     *      * @param group final类型参数
+     * * @param group final类型参数
+     *
      * @return Options类型返回值
      */
     public Options addOptionGroup(final OptionGroup group) {
@@ -107,7 +107,8 @@ public class Options implements Serializable {
 
     /**
      * getOption方法。
-     *      * @param opt final类型参数
+     * * @param opt final类型参数
+     *
      * @return Option类型返回值
      */
     public Option getOption(final String opt) {
@@ -120,7 +121,8 @@ public class Options implements Serializable {
 
     /**
      * hasOption方法。
-     *      * @param opt final类型参数
+     * * @param opt final类型参数
+     *
      * @return boolean类型返回值
      */
     public boolean hasOption(final String opt) {
@@ -129,7 +131,8 @@ public class Options implements Serializable {
 
     /**
      * hasShortOption方法。
-     *      * @param opt final类型参数
+     * * @param opt final类型参数
+     *
      * @return boolean类型返回值
      */
     public boolean hasShortOption(final String opt) {
@@ -138,7 +141,8 @@ public class Options implements Serializable {
 
     /**
      * hasLongOption方法。
-     *      * @param opt final类型参数
+     * * @param opt final类型参数
+     *
      * @return boolean类型返回值
      */
     public boolean hasLongOption(final String opt) {
@@ -147,7 +151,8 @@ public class Options implements Serializable {
 
     /**
      * getOptionGroup方法。
-     *      * @param option final类型参数
+     * * @param option final类型参数
+     *
      * @return OptionGroup类型返回值
      */
     public OptionGroup getOptionGroup(final Option option) {
@@ -156,6 +161,7 @@ public class Options implements Serializable {
 
     /**
      * getOptions方法。
+     *
      * @return Collection<Option>类型返回值
      */
     public Collection<Option> getOptions() {
@@ -165,6 +171,7 @@ public class Options implements Serializable {
 
     /**
      * getOptionGroups方法。
+     *
      * @return List<OptionGroup>类型返回值
      */
     public List<OptionGroup> getOptionGroups() {
@@ -173,6 +180,7 @@ public class Options implements Serializable {
 
     /**
      * getRequiredOptions方法。
+     *
      * @return List<Option>类型返回值
      */
     public List<Option> getRequiredOptions() {
@@ -181,6 +189,7 @@ public class Options implements Serializable {
 
     /**
      * getOptionsSortedByKey方法。
+     *
      * @return List<Option>类型返回值
      */
     public List<Option> getOptionsSortedByKey() {
@@ -191,7 +200,8 @@ public class Options implements Serializable {
 
     /**
      * getMatchingOptions方法。
-     *      * @param opt final类型参数
+     * * @param opt final类型参数
+     *
      * @return List<String>类型返回值
      */
     public List<String> getMatchingOptions(final String opt) {
@@ -207,6 +217,7 @@ public class Options implements Serializable {
 
     /**
      * helpOptions方法。
+     *
      * @return List<Option>类型返回值
      */
     public List<Option> helpOptions() {

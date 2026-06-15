@@ -5,11 +5,13 @@ import org.junit.Test;
 
 import javax.tools.JavaFileObject;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * SourceJavaFileObject 测试
  */
+
 /**
  * SourceJavaFileObjectTest类。
  */

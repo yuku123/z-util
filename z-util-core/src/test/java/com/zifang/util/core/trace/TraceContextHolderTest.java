@@ -6,7 +6,9 @@ import org.slf4j.MDC;
 
 import static org.junit.Assert.*;
 
-/** 自研 trace 测试。 */
+/**
+ * 自研 trace 测试。
+ */
 public class TraceContextHolderTest {
 
     @After

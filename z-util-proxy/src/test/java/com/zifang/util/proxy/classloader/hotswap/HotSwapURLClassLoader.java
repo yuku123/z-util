@@ -13,6 +13,7 @@ import java.util.Map;
  *
  * @author zifang
  */
+
 /**
  * HotSwapURLClassLoader类。
  */
@@ -20,6 +21,7 @@ public class HotSwapURLClassLoader extends URLClassLoader {
     // 缓存加载class文件的最后最新修改时间
     /**
      * Long>方法。
+     *
      * @return static Map<String, Long> cacheLastModifyTimeMap = new HashMap<String,类型返回值
      */
     public static Map<String, Long> cacheLastModifyTimeMap = new HashMap<String, Long>();
@@ -40,6 +42,7 @@ public class HotSwapURLClassLoader extends URLClassLoader {
 
     /**
      * getClassLoader方法。
+     *
      * @return static HotSwapURLClassLoader类型返回值
      */
     public static HotSwapURLClassLoader getClassLoader() {
@@ -105,7 +108,8 @@ public class HotSwapURLClassLoader extends URLClassLoader {
 
     /**
      * load方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return Class类型返回值
      */
     public Class load(String name) throws Exception {
@@ -122,7 +126,8 @@ public class HotSwapURLClassLoader extends URLClassLoader {
      */
     /**
      * customLoad方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param cl ClassLoader类型参数
      * @return Class类型返回值
      */
@@ -140,9 +145,10 @@ public class HotSwapURLClassLoader extends URLClassLoader {
      */
     /**
      * customLoad方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @param resolve boolean类型参数
-     * @param cl ClassLoader类型参数
+     * @param cl      ClassLoader类型参数
      * @return Class类型返回值
      */
     public Class customLoad(String name, boolean resolve, ClassLoader cl) throws ClassNotFoundException {
@@ -158,7 +164,8 @@ public class HotSwapURLClassLoader extends URLClassLoader {
 
     /**
      * loadClass方法。
-     *      * @param name String类型参数
+     * * @param name String类型参数
+     *
      * @return Class<?>类型返回值
      */
     public Class<?> loadClass(String name) throws ClassNotFoundException {

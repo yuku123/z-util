@@ -14,8 +14,10 @@ import org.apache.commons.lang3.ArchUtils;
 public class TestArch {
 
     //ArchUtils 系统的信息导出
+
     /**
      * archUtils方法。
+     *
      * @return static void类型返回值
      */
     public static void archUtils() {
@@ -193,27 +195,27 @@ public class TestArch {
      *
      * 三、BooleanUtils
      * 布尔工具类
-     *
+     * <p>
      * and(boolean... array) 逻辑与
-     *
+     * <p>
      * BooleanUtils.and(true, true)         = true
      * BooleanUtils.and(false, false)       = false
      * BooleanUtils.and(true, false)        = false
      * BooleanUtils.and(true, true, false)  = false
      * BooleanUtils.and(true, true, true)   = true
      * compare(boolean x, boolean y) 比较两个布尔值并返回int类型 如果x == y返回0， !x && y 返回小于 0 ，x && !y 返回大于0
-     *
+     * <p>
      * isFalse(Boolean bool) 是否是假并返回boolean
-     *
+     * <p>
      * isTrue(Boolean bool) 是否是真并返回boolean
-     *
+     * <p>
      * negate(Boolean bool) 逻辑非
-     *
+     * <p>
      * BooleanUtils.negate(Boolean.TRUE)  = Boolean.FALSE;
      * BooleanUtils.negate(Boolean.FALSE) = Boolean.TRUE;
      * BooleanUtils.negate(null)          = null;
      * or(boolean... array) 逻辑或
-     *
+     * <p>
      * BooleanUtils.or(true, true)          = true
      * BooleanUtils.or(false, false)        = false
      * BooleanUtils.or(true, false)         = true
@@ -221,17 +223,17 @@ public class TestArch {
      * BooleanUtils.or(true, true, true)    = true
      * BooleanUtils.or(false, false, false) = false
      * toBoolean(Boolean bool) 将对象类型转换为基本数据类型并返回
-     *
+     * <p>
      * BooleanUtils.toBoolean(Boolean.TRUE)  = true
      * BooleanUtils.toBoolean(Boolean.FALSE) = false
      * BooleanUtils.toBoolean(null)          = false
      * toBoolean(int value) 将int类型转换为boolean类型并返回
-     *
+     * <p>
      * BooleanUtils.toBoolean(0) = false
      * BooleanUtils.toBoolean(1) = true
      * BooleanUtils.toBoolean(2) = true
      * toBoolean(String str) 将string类型转换为boolean类型并返回
-     *
+     * <p>
      * BooleanUtils.toBoolean(null)    = false
      * BooleanUtils.toBoolean("true")  = true
      * BooleanUtils.toBoolean("TRUE")  = true
@@ -245,83 +247,84 @@ public class TestArch {
      * BooleanUtils.toBooleanObject("t") = true
      * BooleanUtils.toBooleanObject("f") = false
      * toInteger(boolean bool) 将boolean类型数据转换为int类型并返回
-     *
+     * <p>
      * BooleanUtils.toInteger(true)  = 1
      * BooleanUtils.toInteger(false) = 0
      * toStringOnOff(boolean bool) 将boolean类型数据转换为String类型'on' or 'off'并返回
-     *
+     * <p>
      * BooleanUtils.toStringOnOff(true)   = "on"
      * BooleanUtils.toStringOnOff(false)  = "off"
      * toStringTrueFalse(Boolean bool) 将boolean类型数据转换为String类型''true' or 'false'并返回
-     *
+     * <p>
      * BooleanUtils.toStringTrueFalse(true)   = "true"
      * BooleanUtils.toStringTrueFalse(false)  = "false"
      * toStringYesNo(boolean bool) 将boolean类型数据转换为String类型'yes' or 'no'并返回
-     *
+     * <p>
      * BooleanUtils.toStringYesNo(true)   = "yes"
      * BooleanUtils.toStringYesNo(false)  = "no"
      * xor(boolean... array) 异或
-     *
+     * <p>
      * BooleanUtils.xor(true, true)   = false
      * BooleanUtils.xor(false, false) = false
      * BooleanUtils.xor(true, false)  = true
      * 四、ClassPathUtils
      * class路径工具
-     *
+     * <p>
      * toFullyQualifiedName(Class<?> context, String resourceName) 返回一个由class包名+resourceName拼接的字符串
-     *
+     * <p>
      * ClassPathUtils.toFullyQualifiedName(StringUtils.class, "StringUtils.properties") = "org.apache.commons.lang3.StringUtils.properties"
      * toFullyQualifiedName(Package context, String resourceName) 返回一个由class包名+resourceName拼接的字符串
-     *
+     * <p>
      * ClassPathUtils.toFullyQualifiedName(StringUtils.class.getPackage(), "StringUtils.properties") = "org.apache.commons.lang3.StringUtils.properties"
      * toFullyQualifiedPath(Class<?> context, String resourceName) 返回一个由class包名+resourceName拼接的字符串
-     *
+     * <p>
      * ClassPathUtils.toFullyQualifiedPath(StringUtils.class, "StringUtils.properties") = "org/apache/commons/lang3/StringUtils.properties"
      * toFullyQualifiedPath(Package context, String resourceName) 返回一个由class包名+resourceName拼接的字符串
-     *
+     * <p>
      * ClassPathUtils.toFullyQualifiedPath(StringUtils.class, "StringUtils.properties") = "org/apache/commons/lang3/StringUtils.properties"
      * 五、EnumUtils
      * 枚举工具类
-     *
+     * <p>
      * getEnum(Class<E> enumClass, String enumName) 通过类返回一个枚举，可能返回空
-     *
+     * <p>
      * getEnumList(Class<E> enumClass) 通过类返回一个枚举集合
-     *
+     * <p>
      * getEnumMap(Class<E> enumClass) 通过类返回一个枚举map
-     *
+     * <p>
      * isValidEnum(Class<E> enumClass, String enumName) 验证enumName是否在枚举中，返回true false
-     *
+     * <p>
      * demo
-     *
+     * <p>
      * 枚举类
      * public enum EnumDemo {
-     *     AA("1"), BB("2");
-     *     private String value;
-     *
-     *     EnumDemo(String value) {
-     *         this.value = value;
-     *     }
-     *
-     *     public String getValue() {
-     *         return value;
-     *     }
+     * AA("1"), BB("2");
+     * private String value;
+     * <p>
+     * EnumDemo(String value) {
+     * this.value = value;
      * }
-     *
+     * <p>
+     * public String getValue() {
+     * return value;
+     * }
+     * }
+     * <p>
      * 测试
      * EnumDemo enumDemo = EnumUtils.getEnum(EnumDemo.class, "");
      * System.out.println(enumDemo);
      * System.out.println("-----");
-     *
+     * <p>
      * List<EnumDemo> list = EnumUtils.getEnumList(EnumDemo.class);
      * for (EnumDemo a : list) {
-     *     System.out.println(a + ":" + a.getValue());
+     * System.out.println(a + ":" + a.getValue());
      * }
      * System.out.println("-----");
-     *
+     * <p>
      * Map<String, EnumDemo> enumMap = EnumUtils.
      *
      *
-     * */
+     *
+     */
     public static void main(String[] args) {
         archUtils();
     }

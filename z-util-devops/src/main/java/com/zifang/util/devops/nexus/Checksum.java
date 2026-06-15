@@ -17,6 +17,7 @@ public class Checksum {
 
     /**
      * getSha1方法。
+     *
      * @return String类型返回值
      */
     public String getSha1() {
@@ -25,7 +26,7 @@ public class Checksum {
 
     /**
      * setSha1方法。
-     *      * @param sha1 String类型参数
+     * * @param sha1 String类型参数
      */
     public void setSha1(String sha1) {
         this.sha1 = sha1;
@@ -33,6 +34,7 @@ public class Checksum {
 
     /**
      * getMd5方法。
+     *
      * @return String类型返回值
      */
     public String getMd5() {
@@ -41,7 +43,7 @@ public class Checksum {
 
     /**
      * setMd5方法。
-     *      * @param md5 String类型参数
+     * * @param md5 String类型参数
      */
     public void setMd5(String md5) {
         this.md5 = md5;

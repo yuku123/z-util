@@ -30,60 +30,13 @@ public class PageRequest extends BaseRequest {
     }
 
     /**
-     * getCurrent方法。
-     * @return long类型返回值
-     */
-    public Long getCurrent() {
-        return current;
-    }
-
-    /**
-     * setCurrent方法。
-     *      * @param current long类型参数
-     */
-    public void setCurrent(Long current) {
-        this.current = current;
-    }
-
-    /**
-     * getSize方法。
-     * @return long类型返回值
-     */
-    public Long getSize() {
-        return size;
-    }
-
-    /**
-     * setSize方法。
-     *      * @param size long类型参数
-     */
-    public void setSize(Long size) {
-        this.size = size;
-    }
-
-    /**
-     * getOrders方法。
-     * @return List<SortField>类型返回值
-     */
-    public List<SortField> getOrders() {
-        return orders;
-    }
-
-    /**
-     * setOrders方法。
-     *      * @param orders ListSortField类型参数
-     */
-    public void setOrders(List<SortField> orders) {
-        this.orders = orders;
-    }
-
-    /**
      * of方法。
-     *      * @param current long类型参数
+     * * @param current long类型参数
+     *
      * @param size long类型参数
      * @return static PageRequest类型返回值
      */
-    public static PageRequest of(Long current, Long size){
+    public static PageRequest of(Long current, Long size) {
         PageRequest pageRequest = new PageRequest();
         pageRequest.setCurrent(current);
         pageRequest.setSize(size);
@@ -92,15 +45,67 @@ public class PageRequest extends BaseRequest {
 
     /**
      * of方法。
-     *      * @param current long类型参数
-     * @param size long类型参数
+     * * @param current long类型参数
+     *
+     * @param size   long类型参数
      * @param orders ListSortField类型参数
      * @return static PageRequest类型返回值
      */
-    public static PageRequest of(Long current, Long size, List<SortField> orders){
+    public static PageRequest of(Long current, Long size, List<SortField> orders) {
         PageRequest pageRequest = of(current, size);
         pageRequest.setOrders(orders);
         return pageRequest;
+    }
+
+    /**
+     * getCurrent方法。
+     *
+     * @return long类型返回值
+     */
+    public Long getCurrent() {
+        return current;
+    }
+
+    /**
+     * setCurrent方法。
+     * * @param current long类型参数
+     */
+    public void setCurrent(Long current) {
+        this.current = current;
+    }
+
+    /**
+     * getSize方法。
+     *
+     * @return long类型返回值
+     */
+    public Long getSize() {
+        return size;
+    }
+
+    /**
+     * setSize方法。
+     * * @param size long类型参数
+     */
+    public void setSize(Long size) {
+        this.size = size;
+    }
+
+    /**
+     * getOrders方法。
+     *
+     * @return List<SortField>类型返回值
+     */
+    public List<SortField> getOrders() {
+        return orders;
+    }
+
+    /**
+     * setOrders方法。
+     * * @param orders ListSortField类型参数
+     */
+    public void setOrders(List<SortField> orders) {
+        this.orders = orders;
     }
 
     /**

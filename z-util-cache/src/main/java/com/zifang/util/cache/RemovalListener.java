@@ -17,6 +17,36 @@ public interface RemovalListener<K, V> {
     void onRemoval(RemovalNotification<K, V> notification);
 
     /**
+     * 移除原因。
+     */
+    enum RemovalCause {
+        /**
+         * 显式调用 {@link Cache#remove(Object)}
+         */
+        EXPLICIT,
+        /**
+         * 被新值覆盖
+         */
+        REPLACED,
+        /**
+         * 容量超限被淘汰
+         */
+        SIZE_LIMIT,
+        /**
+         * 写入后存活时间过期
+         */
+        EXPIRED,
+        /**
+         * 最后一次访问后空闲时间过期
+         */
+        ACCESS_EXPIRED,
+        /**
+         * 缓存被整体清空
+         */
+        COLLECTED
+    }
+
+    /**
      * 移除事件详情。
      */
     final class RemovalNotification<K, V> {
@@ -30,26 +60,16 @@ public interface RemovalListener<K, V> {
             this.cause = cause;
         }
 
-        public K getKey() { return key; }
-        public V getValue() { return value; }
-        public RemovalCause getCause() { return cause; }
-    }
+        public K getKey() {
+            return key;
+        }
 
-    /**
-     * 移除原因。
-     */
-    enum RemovalCause {
-        /** 显式调用 {@link Cache#remove(Object)} */
-        EXPLICIT,
-        /** 被新值覆盖 */
-        REPLACED,
-        /** 容量超限被淘汰 */
-        SIZE_LIMIT,
-        /** 写入后存活时间过期 */
-        EXPIRED,
-        /** 最后一次访问后空闲时间过期 */
-        ACCESS_EXPIRED,
-        /** 缓存被整体清空 */
-        COLLECTED
+        public V getValue() {
+            return value;
+        }
+
+        public RemovalCause getCause() {
+            return cause;
+        }
     }
 }

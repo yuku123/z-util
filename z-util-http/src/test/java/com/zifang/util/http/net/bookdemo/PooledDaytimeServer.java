@@ -19,7 +19,8 @@ public class PooledDaytimeServer {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {
@@ -49,10 +50,10 @@ public class PooledDaytimeServer {
         }
 
         @Override
-    /**
-     * call方法。
-     * @return Void类型返回值
-     */
+        /**
+         * call方法。
+         * @return Void类型返回值
+         */
         public Void call() {
             try {
                 Writer out = new OutputStreamWriter(connection.getOutputStream());

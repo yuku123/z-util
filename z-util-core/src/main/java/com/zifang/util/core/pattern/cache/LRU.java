@@ -19,7 +19,7 @@ public class LRU<K, V> extends LinkedHashMap<K, V> {
     /**
      * 构造一个LRU缓存
      *
-     * @param capacity  缓存容量，必须大于0
+     * @param capacity   缓存容量，必须大于0
      * @param loadFactor 负载因子，用于确定扩容时机
      */
     public LRU(int capacity, float loadFactor) {

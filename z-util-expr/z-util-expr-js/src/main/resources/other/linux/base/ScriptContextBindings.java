@@ -6,6 +6,16 @@ import javax.script.*;
  * 绑定上下文
  */
 public class ScriptContextBindings {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) throws ScriptException {
+        ScriptContextBindings scb = new ScriptContextBindings();
+        scb.scriptContextBindings();
+        scb.useScriptContextValues();
+        scb.attributeInBindings();
+    }
+
     public ScriptEngine getJavaScriptEngine() {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("other/js");
@@ -37,15 +47,5 @@ public class ScriptContextBindings {
         ScriptContext context = engine.getContext();
         context.setAttribute("name", "Alex", ScriptContext.GLOBAL_SCOPE);
         engine.eval("print(name);");
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws ScriptException {
-        ScriptContextBindings scb = new ScriptContextBindings();
-        scb.scriptContextBindings();
-        scb.useScriptContextValues();
-        scb.attributeInBindings();
     }
 }

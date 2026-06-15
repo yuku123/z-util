@@ -8,7 +8,8 @@ public class Decade<A, B, C, D, E, F, G, H, I, J> extends Ennead<A, B, C, D, E, 
 
     /**
      * Decade方法。
-     *      * @param a A类型参数
+     * * @param a A类型参数
+     *
      * @param b B类型参数
      * @param c C类型参数
      * @param d D类型参数
@@ -26,6 +27,7 @@ public class Decade<A, B, C, D, E, F, G, H, I, J> extends Ennead<A, B, C, D, E, 
 
     /**
      * getJ方法。
+     *
      * @return J类型返回值
      */
     public J getJ() {
@@ -34,7 +36,7 @@ public class Decade<A, B, C, D, E, F, G, H, I, J> extends Ennead<A, B, C, D, E, 
 
     /**
      * setJ方法。
-     *      * @param j J类型参数
+     * * @param j J类型参数
      */
     public void setJ(J j) {
         this.j = j;

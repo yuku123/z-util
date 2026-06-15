@@ -19,11 +19,12 @@ public class OptionGroup implements Serializable {
     /**
      * OptionGroup方法。
      */
-    public OptionGroup() {}
+    public OptionGroup() {
+    }
 
     /**
      * OptionGroup方法。
-     *      * @param description final类型参数
+     * * @param description final类型参数
      */
     public OptionGroup(final String description) {
         this.description = description;
@@ -31,7 +32,8 @@ public class OptionGroup implements Serializable {
 
     /**
      * addOption方法。
-     *      * @param option final类型参数
+     * * @param option final类型参数
+     *
      * @return OptionGroup类型返回值
      */
     public OptionGroup addOption(final Option option) {
@@ -41,6 +43,7 @@ public class OptionGroup implements Serializable {
 
     /**
      * getOptions方法。
+     *
      * @return List<Option>类型返回值
      */
     public List<Option> getOptions() {
@@ -49,6 +52,7 @@ public class OptionGroup implements Serializable {
 
     /**
      * getDescription方法。
+     *
      * @return String类型返回值
      */
     public String getDescription() {
@@ -57,7 +61,7 @@ public class OptionGroup implements Serializable {
 
     /**
      * setDescription方法。
-     *      * @param description final类型参数
+     * * @param description final类型参数
      */
     public void setDescription(final String description) {
         this.description = description;
@@ -65,6 +69,7 @@ public class OptionGroup implements Serializable {
 
     /**
      * isRequired方法。
+     *
      * @return boolean类型返回值
      */
     public boolean isRequired() {
@@ -73,7 +78,7 @@ public class OptionGroup implements Serializable {
 
     /**
      * setRequired方法。
-     *      * @param required final类型参数
+     * * @param required final类型参数
      */
     public void setRequired(final boolean required) {
         this.required = required;
@@ -81,6 +86,7 @@ public class OptionGroup implements Serializable {
 
     /**
      * getSelected方法。
+     *
      * @return Option类型返回值
      */
     public Option getSelected() {
@@ -89,7 +95,7 @@ public class OptionGroup implements Serializable {
 
     /**
      * setSelected方法。
-     *      * @param option final类型参数
+     * * @param option final类型参数
      */
     public void setSelected(final Option option) {
         this.selected = option;
@@ -97,6 +103,7 @@ public class OptionGroup implements Serializable {
 
     /**
      * toString方法。
+     *
      * @return String类型返回值
      */
     public String toString() {

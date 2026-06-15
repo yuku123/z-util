@@ -14,7 +14,7 @@ public class U1 {
 
     /**
      * U1方法。
-     *      * @param value byte类型参数
+     * * @param value byte类型参数
      */
     public U1(byte value) {
         this.value = value;
@@ -22,7 +22,8 @@ public class U1 {
 
     /**
      * read方法。
-     *      * @param stream InputStream类型参数
+     * * @param stream InputStream类型参数
+     *
      * @return static U1类型返回值
      */
     public static U1 read(InputStream stream) {
@@ -38,6 +39,7 @@ public class U1 {
 
     /**
      * getValue方法。
+     *
      * @return byte类型返回值
      */
     public byte getValue() {

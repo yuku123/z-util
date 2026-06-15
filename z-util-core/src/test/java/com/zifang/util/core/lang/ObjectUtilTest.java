@@ -136,34 +136,36 @@ public class ObjectUtilTest {
         private String value;
         private int count;
 
-    /**
-     * getValue方法。
-     * @return String类型返回值
-     */
+        /**
+         * getValue方法。
+         *
+         * @return String类型返回值
+         */
         public String getValue() {
             return value;
         }
 
-    /**
-     * setValue方法。
-     *      * @param value String类型参数
-     */
+        /**
+         * setValue方法。
+         * * @param value String类型参数
+         */
         public void setValue(String value) {
             this.value = value;
         }
 
-    /**
-     * getCount方法。
-     * @return int类型返回值
-     */
+        /**
+         * getCount方法。
+         *
+         * @return int类型返回值
+         */
         public int getCount() {
             return count;
         }
 
-    /**
-     * setCount方法。
-     *      * @param count int类型参数
-     */
+        /**
+         * setCount方法。
+         * * @param count int类型参数
+         */
         public void setCount(int count) {
             this.count = count;
         }

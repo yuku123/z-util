@@ -1,6 +1,5 @@
 package com.zifang.util.core.compile;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,17 +13,18 @@ public class Compiler {
 
     /**
      * compile方法。
-     *      * @param packageName String类型参数
+     * * @param packageName String类型参数
+     *
      * @param simpleName String类型参数
-     * @param script String类型参数
+     * @param script     String类型参数
      * @return static Class<?>类型返回值
      */
-    public static Class<?> compile(String packageName , String simpleName , String script) {
+    public static Class<?> compile(String packageName, String simpleName, String script) {
         Class<?> clazz = null;
 
         try {
             Map<String, BytesJavaFileObject> map = CustomerJavaCompiler.compile(simpleName, script);
-            String className = packageName + "." +simpleName;
+            String className = packageName + "." + simpleName;
 
             BytesJavaFileObject bytesJavaFileObject = map.get(className);
             if (bytesJavaFileObject == null) {
@@ -40,7 +40,8 @@ public class Compiler {
 
     /**
      * compile方法。
-     *      * @param scripts ListStringJavaFileObject类型参数
+     * * @param scripts ListStringJavaFileObject类型参数
+     *
      * @param getClass String类型参数
      * @return static Class<?>类型返回值
      */
@@ -50,14 +51,14 @@ public class Compiler {
         try {
             Map<String, BytesJavaFileObject> map = CustomerJavaCompiler.compile(scripts);
 
-            for(Map.Entry<String,BytesJavaFileObject> entry : map.entrySet()){
+            for (Map.Entry<String, BytesJavaFileObject> entry : map.entrySet()) {
 
                 BytesJavaFileObject bytesJavaFileObject = map.get(entry.getKey());
                 if (bytesJavaFileObject == null) {
                     throw new RuntimeException(String.format("cannot found class:%s", entry.getKey()));
                 }
 
-                if(entry.getKey().equals(getClass)){
+                if (entry.getKey().equals(getClass)) {
                     returnClass = defineClassLoader.defineClass(entry.getKey(), bytesJavaFileObject.getBytes());
                 } else {
                     // 主动拉到jvm
@@ -73,11 +74,12 @@ public class Compiler {
 
     /**
      * compile方法。
-     *      * @param scriptCodeMap MapString,String类型参数
+     * * @param scriptCodeMap MapString,String类型参数
+     *
      * @param getClass String类型参数
      * @return static Class<?>类型返回值
      */
-    public static Class<?> compile(Map<String,String> scriptCodeMap, String getClass) {
+    public static Class<?> compile(Map<String, String> scriptCodeMap, String getClass) {
         List<StringJavaFileObject> scripts = new ArrayList<>();
         scriptCodeMap.forEach((key, value) -> scripts.add(new StringJavaFileObject(key, value)));
         return compile(scripts, getClass);

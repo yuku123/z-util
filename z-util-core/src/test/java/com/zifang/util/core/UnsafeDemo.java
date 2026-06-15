@@ -17,15 +17,14 @@ import java.lang.reflect.Field;
  * 当一个线程正在等待某个操作时，JVM调用Unsafe的park()方法来阻塞此线程
  * 当阻塞中的线程需要再次运行时，JVM调用Unsafe的unpark()方法来唤醒此线程
  */
+
 /**
  * UnsafeDemo类。
  */
 public class UnsafeDemo {
 
-    private volatile int count = 0;
-
     private static long offset;
-
+    private volatile int count = 0;
 
     @Test
     //只会分配内存给这个类，而不会去调用构造方法，因此打印出来age为1
@@ -67,7 +66,7 @@ public class UnsafeDemo {
 
     /**
      * increment方法。
-     *      * @param unsafe Unsafe类型参数
+     * * @param unsafe Unsafe类型参数
      */
     public void increment(Unsafe unsafe) {
         int before = count;
@@ -80,17 +79,18 @@ public class UnsafeDemo {
     public static class User {
         int age;
 
-    /**
-     * User方法。
-     */
+        /**
+         * User方法。
+         */
         public User() {
             this.age = 10;
         }
 
-    /**
-     * getAge方法。
-     * @return int类型返回值
-     */
+        /**
+         * getAge方法。
+         *
+         * @return int类型返回值
+         */
         public int getAge() {
             return age;
         }

@@ -64,14 +64,6 @@ public class BiMap_Study {
         System.out.println(nameId.values()); // values返回Set<T>而不是Collection
     }
 
-    private enum keys {
-        K1, K2, K3
-    }
-
-    private enum values {
-        V1, V2, V3
-    }
-
     @Test
     /**
      * otherImpl方法。
@@ -92,6 +84,14 @@ public class BiMap_Study {
         map.put("a", 1);
         map.put("b", 2);
         map.put("c", 3);
+    }
+
+    private enum keys {
+        K1, K2, K3
+    }
+
+    private enum values {
+        V1, V2, V3
     }
 
 }

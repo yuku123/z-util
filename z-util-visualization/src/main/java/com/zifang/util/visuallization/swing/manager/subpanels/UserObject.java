@@ -20,6 +20,7 @@ public class UserObject {
 
     /**
      * 获取用户ID
+     *
      * @return 用户ID
      */
     public Integer getId() {
@@ -28,6 +29,7 @@ public class UserObject {
 
     /**
      * 设置用户ID
+     *
      * @param id 用户ID
      */
     public void setId(Integer id) {
@@ -36,6 +38,7 @@ public class UserObject {
 
     /**
      * 获取显示名称
+     *
      * @return 显示名称
      */
     public String getDisplayName() {
@@ -44,6 +47,7 @@ public class UserObject {
 
     /**
      * 设置显示名称
+     *
      * @param displayName 显示名称
      */
     public void setDisplayName(String displayName) {
@@ -52,6 +56,7 @@ public class UserObject {
 
     /**
      * 返回显示名称（用于树形节点显示）
+     *
      * @return 显示名称
      */
     @Override
@@ -81,7 +86,7 @@ public class UserObject {
         if (o == null || getClass() != o.getClass()) return false;
         UserObject that = (UserObject) o;
         return Objects.equals(id, that.id) &&
-               Objects.equals(displayName, that.displayName);
+                Objects.equals(displayName, that.displayName);
     }
 
     /**

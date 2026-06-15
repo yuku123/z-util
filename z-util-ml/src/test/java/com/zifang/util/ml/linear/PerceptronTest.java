@@ -2,12 +2,12 @@ package com.zifang.util.ml.linear;
 
 import com.zifang.util.numpy.DType;
 import com.zifang.util.numpy.NdArray;
-import com.zifang.util.numpy.Shape;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * PerceptronTest类。
@@ -24,18 +24,6 @@ public class PerceptronTest {
             }
         }
         return NdArray.array(flat, DType.FLOAT32).reshape(rows, cols);
-    }
-
-    /**
-     * Generate linearly separable data AND labels together (two classes separated by x > 0).
-     */
-    private static class DataWithLabels {
-        NdArray X;
-        int[] y;
-        DataWithLabels(NdArray X, int[] y) {
-            this.X = X;
-            this.y = y;
-        }
     }
 
     private DataWithLabels generateLinearlySeparableDataWithLabels(int nSamples, Random rnd) {
@@ -119,5 +107,18 @@ public class PerceptronTest {
 
         assertTrue(score >= 0.0 && score <= 1.0, "Score should be between 0 and 1, got: " + score);
         assertTrue(score > 0.5, "Score should be better than random for linearly separable data");
+    }
+
+    /**
+     * Generate linearly separable data AND labels together (two classes separated by x > 0).
+     */
+    private static class DataWithLabels {
+        NdArray X;
+        int[] y;
+
+        DataWithLabels(NdArray X, int[] y) {
+            this.X = X;
+            this.y = y;
+        }
     }
 }

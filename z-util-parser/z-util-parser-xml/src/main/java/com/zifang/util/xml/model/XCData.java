@@ -5,6 +5,7 @@ package com.zifang.util.xml.model;
  *
  * @author zifang
  */
+
 /**
  * XCData类。
  */
@@ -14,7 +15,7 @@ public class XCData implements XNode {
 
     /**
      * XCData方法。
-     *      * @param data String类型参数
+     * * @param data String类型参数
      */
     public XCData(String data) {
         this.data = data;
@@ -22,6 +23,7 @@ public class XCData implements XNode {
 
     /**
      * getData方法。
+     *
      * @return String类型返回值
      */
     public String getData() {

@@ -3,11 +3,10 @@ package com.zifang.util.source;
 import com.zifang.util.source.parser.ByteCodeParserImpl;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * ByteCodeParserImpl 测试
  */
+
 /**
  * ByteCodeParserImplTest类。
  */

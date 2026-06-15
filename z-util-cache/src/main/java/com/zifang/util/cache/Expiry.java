@@ -13,6 +13,27 @@ import java.time.Duration;
 public interface Expiry<K, V> {
 
     /**
+     * 永不过期的便利实现。
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    Expiry NEVER = new Expiry() {
+        @Override
+        public Duration expireAfterCreate(Object k, Object v) {
+            return Duration.ofNanos(Long.MAX_VALUE);
+        }
+
+        @Override
+        public Duration expireAfterUpdate(Object k, Object v, long t) {
+            return Duration.ofNanos(Long.MAX_VALUE);
+        }
+
+        @Override
+        public Duration expireAfterRead(Object k, Object v, long t) {
+            return Duration.ofNanos(Long.MAX_VALUE);
+        }
+    };
+
+    /**
      * 条目创建后多久过期。返回 {@link Duration#ZERO} 或负值表示永不过期。
      */
     Duration expireAfterCreate(K key, V value);
@@ -26,12 +47,4 @@ public interface Expiry<K, V> {
      * 条目最近一次读后多久过期。
      */
     Duration expireAfterRead(K key, V value, long currentTimeNanos);
-
-    /** 永不过期的便利实现。 */
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    Expiry NEVER = new Expiry() {
-        @Override public Duration expireAfterCreate(Object k, Object v) { return Duration.ofNanos(Long.MAX_VALUE); }
-        @Override public Duration expireAfterUpdate(Object k, Object v, long t) { return Duration.ofNanos(Long.MAX_VALUE); }
-        @Override public Duration expireAfterRead(Object k, Object v, long t) { return Duration.ofNanos(Long.MAX_VALUE); }
-    };
 }

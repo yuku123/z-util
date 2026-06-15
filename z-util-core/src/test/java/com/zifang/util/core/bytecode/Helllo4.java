@@ -11,7 +11,8 @@ public class Helllo4 {
 
     /**
      * foo方法。
-     *      * @param i int类型参数
+     * * @param i int类型参数
+     *
      * @param j int类型参数
      * @return static int类型返回值
      */
@@ -22,7 +23,8 @@ public class Helllo4 {
 
     /**
      * testException方法。
-     *      * @param a String类型参数
+     * * @param a String类型参数
+     *
      * @param b int类型参数
      * @return static void类型返回值
      */
@@ -38,7 +40,8 @@ public class Helllo4 {
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) {

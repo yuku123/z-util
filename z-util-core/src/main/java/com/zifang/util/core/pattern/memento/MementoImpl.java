@@ -22,6 +22,7 @@ public class MementoImpl<T> implements Memento<T> {
 
     /**
      * builder方法。
+     *
      * @return static <T> Builder<T>类型返回值
      */
     public static <T> Builder<T> builder() {
@@ -30,7 +31,8 @@ public class MementoImpl<T> implements Memento<T> {
 
     /**
      * of方法。
-     *      * @param state T类型参数
+     * * @param state T类型参数
+     *
      * @return static <T> MementoImpl<T>类型返回值
      */
     public static <T> MementoImpl<T> of(T state) {
@@ -39,7 +41,8 @@ public class MementoImpl<T> implements Memento<T> {
 
     /**
      * of方法。
-     *      * @param state T类型参数
+     * * @param state T类型参数
+     *
      * @param label String类型参数
      * @return static <T> MementoImpl<T>类型返回值
      */
@@ -89,52 +92,58 @@ public class MementoImpl<T> implements Memento<T> {
         private String label;
         private String description;
 
-        private Builder() {}
+        private Builder() {
+        }
 
-    /**
-     * state方法。
-     *      * @param state T类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * state方法。
+         * * @param state T类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> state(T state) {
             this.state = state;
             return this;
         }
 
-    /**
-     * timestamp方法。
-     *      * @param timestamp long类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * timestamp方法。
+         * * @param timestamp long类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> timestamp(long timestamp) {
             this.timestamp = timestamp;
             return this;
         }
 
-    /**
-     * label方法。
-     *      * @param label String类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * label方法。
+         * * @param label String类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> label(String label) {
             this.label = label;
             return this;
         }
 
-    /**
-     * description方法。
-     *      * @param description String类型参数
-     * @return Builder<T>类型返回值
-     */
+        /**
+         * description方法。
+         * * @param description String类型参数
+         *
+         * @return Builder<T>类型返回值
+         */
         public Builder<T> description(String description) {
             this.description = description;
             return this;
         }
 
-    /**
-     * build方法。
-     * @return MementoImpl<T>类型返回值
-     */
+        /**
+         * build方法。
+         *
+         * @return MementoImpl<T>类型返回值
+         */
         public MementoImpl<T> build() {
             return new MementoImpl<>(this);
         }

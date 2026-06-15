@@ -12,6 +12,16 @@ public class HelloWord1 {
 
 
     /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        System.out.println("hello word");
+    }
+
+    /**
      * 一个简单的方法
      *
      * @param a 参数a
@@ -20,14 +30,5 @@ public class HelloWord1 {
      */
     public Object f(String a, String b) {
         return null;
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        System.out.println("hello word");
     }
 }

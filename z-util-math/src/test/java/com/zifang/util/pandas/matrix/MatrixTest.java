@@ -4,11 +4,13 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Matrix 类测试
  */
+
 /**
  * MatrixTest类。
  */
@@ -197,7 +199,7 @@ public class MatrixTest {
         // 创建 4x5 矩阵
         for (int i = 0; i < 4; i++) {
             matrix.set((double) i * 5 + 1, (double) i * 5 + 2, (double) i * 5 + 3,
-                       (double) i * 5 + 4, (double) i * 5 + 5);
+                    (double) i * 5 + 4, (double) i * 5 + 5);
         }
         assertNotNull(matrix);
     }

@@ -7,7 +7,9 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-/** 自研特性开关测试。 */
+/**
+ * 自研特性开关测试。
+ */
 public class FeatureManagerTest {
 
     @Test

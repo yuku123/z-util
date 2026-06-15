@@ -2,8 +2,9 @@ package com.zifang.util.yaml;
 
 import com.zifang.util.yaml.model.YamlArray;
 import com.zifang.util.yaml.model.YamlMap;
-import java.util.*;
-import java.util.regex.*;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 简单 YAML 解析器（Java 8 兼容）。

@@ -11,10 +11,7 @@ import java.lang.reflect.Field;
  */
 public class TestSolveAtomic {
 
-    public long count = 0;
-
     private static long valueOffset;
-
     private static Unsafe unsafe;
 
     static {
@@ -28,19 +25,12 @@ public class TestSolveAtomic {
         }
     }
 
-    private void add10K() {
-        int idx = 0;
-        while (idx++ < 10000) {
-            while (!unsafe.compareAndSwapLong(this, valueOffset, count, count + 1)) {
-                continue;
-            }
-            //count += 1;
-        }
-    }
+    public long count = 0;
 
     /**
      * main方法。
-     *      * @param args String[]类型参数
+     * * @param args String[]类型参数
+     *
      * @return static void类型返回值
      */
     public static void main(String[] args) throws InterruptedException {
@@ -58,5 +48,15 @@ public class TestSolveAtomic {
         th1.join();
         th2.join();
         System.out.println(test.count);
+    }
+
+    private void add10K() {
+        int idx = 0;
+        while (idx++ < 10000) {
+            while (!unsafe.compareAndSwapLong(this, valueOffset, count, count + 1)) {
+                continue;
+            }
+            //count += 1;
+        }
     }
 }

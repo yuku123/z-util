@@ -18,6 +18,18 @@ public class UDPEchoServer extends UDPServer {
         super(DEFAULT_PORT);
     }
 
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        UDPServer server = new UDPEchoServer();
+        Thread t = new Thread(server);
+        t.start();
+    }
+
     @Override
     /**
      * respond方法。
@@ -28,16 +40,5 @@ public class UDPEchoServer extends UDPServer {
         DatagramPacket outgoing = new DatagramPacket(packet.getData(), packet.getLength(), packet.getAddress(),
                 packet.getPort());
         socket.send(outgoing);
-    }
-
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        UDPServer server = new UDPEchoServer();
-        Thread t = new Thread(server);
-        t.start();
     }
 }

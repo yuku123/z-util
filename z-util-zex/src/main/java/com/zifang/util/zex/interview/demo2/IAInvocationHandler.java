@@ -18,7 +18,8 @@ public class IAInvocationHandler implements InvocationHandler {
 
     /**
      * IAInvocationHandler方法。
-     *      * @param iaImplement IAImplement类型参数
+     * * @param iaImplement IAImplement类型参数
+     *
      * @param s String类型参数
      */
     public IAInvocationHandler(IAImplement iaImplement, String s) {

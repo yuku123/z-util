@@ -17,7 +17,8 @@ public class SourceFile extends AbstractAttribute {
 
     /**
      * SourceFile方法。
-     *      * @param attributeNameIndex U2类型参数
+     * * @param attributeNameIndex U2类型参数
+     *
      * @param attributeLength U4类型参数
      */
     public SourceFile(U2 attributeNameIndex, U4 attributeLength) {
@@ -35,6 +36,7 @@ public class SourceFile extends AbstractAttribute {
 
     /**
      * getSourceFileIndex方法。
+     *
      * @return U2类型返回值
      */
     public U2 getSourceFileIndex() {
@@ -43,7 +45,7 @@ public class SourceFile extends AbstractAttribute {
 
     /**
      * setSourceFileIndex方法。
-     *      * @param sourceFileIndex U2类型参数
+     * * @param sourceFileIndex U2类型参数
      */
     public void setSourceFileIndex(U2 sourceFileIndex) {
         this.sourceFileIndex = sourceFileIndex;

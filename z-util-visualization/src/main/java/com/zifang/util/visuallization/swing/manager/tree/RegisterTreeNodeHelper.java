@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class RegisterTreeNodeHelper {
     /**
      * 将注册的节点转换为DefaultMutableTreeNode
+     *
      * @param registerTreeNode 节点注册器
      * @return Swing树形结构的根节点
      * @throws RuntimeException 如果有多个根节点或存在游离节点
@@ -45,9 +46,9 @@ public class RegisterTreeNodeHelper {
     /**
      * 递归构建子树结构
      *
-     * @param root 当前根节点
+     * @param root                       当前根节点
      * @param rootDefaultMutableTreeNode Swing树中的当前节点
-     * @param registerTreeNode 所有注册的节点列表
+     * @param registerTreeNode           所有注册的节点列表
      */
     private static void solveRoot(TreeNode root, DefaultMutableTreeNode rootDefaultMutableTreeNode, List<TreeNode> registerTreeNode) {
         // 得到这个集合的下等级别的数据

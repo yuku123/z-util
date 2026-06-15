@@ -10,7 +10,7 @@
 //import java.util.Map;
 //import java.util.Properties;
 //
-///**
+/// **
 // * 资源处理器（占位实现）。
 // * <p>
 // * 该处理器是占位实现，具体逻辑待扩展。

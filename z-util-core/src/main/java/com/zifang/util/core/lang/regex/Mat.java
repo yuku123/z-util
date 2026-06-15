@@ -27,7 +27,7 @@ public class Mat {
     /**
      * 判断字符串是否匹配指定正则。
      *
-     * @param input  待检测字符串
+     * @param input 待检测字符串
      * @param regex 正则表达式
      * @return 是否匹配
      */
@@ -41,7 +41,7 @@ public class Mat {
     /**
      * 判断字符串是否匹配指定模式。
      *
-     * @param input  待检测字符串
+     * @param input   待检测字符串
      * @param pattern 正则模式
      * @return 是否匹配
      */
@@ -122,8 +122,8 @@ public class Mat {
     /**
      * 替换所有匹配的子串。
      *
-     * @param input      原字符串
-     * @param regex      正则表达式
+     * @param input       原字符串
+     * @param regex       正则表达式
      * @param replacement 替换内容
      * @return 替换后的字符串
      */

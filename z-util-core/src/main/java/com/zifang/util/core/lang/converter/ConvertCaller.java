@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 /**
  * 执行转换的句柄包装
  */
-public class ConvertCaller<F, T> implements IConverter<F,T>{
+public class ConvertCaller<F, T> implements IConverter<F, T> {
 
     private Method method;
     private Object caller;
@@ -18,6 +18,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * getMethod方法。
+     *
      * @return Method类型返回值
      */
     public Method getMethod() {
@@ -26,7 +27,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * setMethod方法。
-     *      * @param method Method类型参数
+     * * @param method Method类型参数
      */
     public void setMethod(Method method) {
         this.method = method;
@@ -34,6 +35,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * getCaller方法。
+     *
      * @return Object类型返回值
      */
     public Object getCaller() {
@@ -42,7 +44,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * setCaller方法。
-     *      * @param caller Object类型参数
+     * * @param caller Object类型参数
      */
     public void setCaller(Object caller) {
         this.caller = caller;
@@ -50,6 +52,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * getFrom方法。
+     *
      * @return Class<?>类型返回值
      */
     public Class<?> getFrom() {
@@ -58,7 +61,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * setFrom方法。
-     *      * @param from Class?类型参数
+     * * @param from Class?类型参数
      */
     public void setFrom(Class<?> from) {
         this.from = from;
@@ -66,6 +69,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * getTarget方法。
+     *
      * @return Class<?>类型返回值
      */
     public Class<?> getTarget() {
@@ -74,7 +78,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * setTarget方法。
-     *      * @param target Class?类型参数
+     * * @param target Class?类型参数
      */
     public void setTarget(Class<?> target) {
         this.target = target;
@@ -82,13 +86,14 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * to方法。
-     *      * @param o F类型参数
+     * * @param o F类型参数
+     *
      * @return T类型返回值
      */
     public T to(F o) {
         Object defaultValue = null;
         try {
-            if(PrimitiveUtil.isGeneralType(target)){
+            if (PrimitiveUtil.isGeneralType(target)) {
                 defaultValue = target.newInstance();
             } else {
                 defaultValue = PrimitiveUtil.defaultValue(target);
@@ -105,7 +110,8 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * to方法。
-     *      * @param o Object类型参数
+     * * @param o Object类型参数
+     *
      * @param defaultValue Object类型参数
      * @return T类型返回值
      */
@@ -123,6 +129,7 @@ public class ConvertCaller<F, T> implements IConverter<F,T>{
 
     /**
      * copy方法。
+     *
      * @return ConvertCaller<F, T>类型返回值
      */
     public ConvertCaller<F, T> copy() {

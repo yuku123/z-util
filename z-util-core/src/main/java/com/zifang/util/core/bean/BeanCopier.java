@@ -1,7 +1,6 @@
 package com.zifang.util.core.bean;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,9 +22,12 @@ public final class BeanCopier {
 
     private static final ConcurrentMap<Class<?>, Map<String, Field>> FIELD_CACHE = new ConcurrentHashMap<>();
 
-    private BeanCopier() {}
+    private BeanCopier() {
+    }
 
-    /** 把 src 对象的同名字段值拷贝到 target。target 必须有无参构造（如果 target == null）。 */
+    /**
+     * 把 src 对象的同名字段值拷贝到 target。target 必须有无参构造（如果 target == null）。
+     */
     public static <T> T copy(Object src, Class<T> targetClass) {
         if (src == null) return null;
         try {
@@ -37,7 +39,9 @@ public final class BeanCopier {
         }
     }
 
-    /** 把 src 同名字段值拷到 target 实例。 */
+    /**
+     * 把 src 同名字段值拷到 target 实例。
+     */
     public static void copyInto(Object src, Object target) {
         if (src == null || target == null) return;
         Map<String, Field> srcFields = fieldsOf(src.getClass());
@@ -57,7 +61,9 @@ public final class BeanCopier {
         }
     }
 
-    /** Map → Bean（key 匹配字段名）。 */
+    /**
+     * Map → Bean（key 匹配字段名）。
+     */
     public static <T> T fromMap(Map<String, ?> map, Class<T> targetClass) {
         if (map == null) return null;
         try {
@@ -76,7 +82,9 @@ public final class BeanCopier {
         }
     }
 
-    /** Bean → Map。 */
+    /**
+     * Bean → Map。
+     */
     public static Map<String, Object> toMap(Object src) {
         if (src == null) return new HashMap<>();
         Map<String, Object> result = new HashMap<>();

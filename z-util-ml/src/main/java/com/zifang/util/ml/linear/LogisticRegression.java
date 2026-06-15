@@ -1,7 +1,6 @@
 package com.zifang.util.ml.linear;
 
 import com.zifang.util.numpy.DType;
-import com.zifang.util.numpy.Linalg;
 import com.zifang.util.numpy.NdArray;
 import com.zifang.util.numpy.Shape;
 
@@ -10,26 +9,26 @@ import com.zifang.util.numpy.Shape;
  * Uses gradient descent optimization.
  */
 public class LogisticRegression {
-    
+
     private double learningRate;
     private int nIterations;
     private double lambda;
     private double[] weights;
     private double bias;
-    
+
     /**
      * Create a new Logistic Regression classifier.
-     * 
+     *
      * @param learningRate Learning rate for gradient descent
-     * @param nIterations Number of iterations for gradient descent
-     * @param lambda L2 regularization parameter
+     * @param nIterations  Number of iterations for gradient descent
+     * @param lambda       L2 regularization parameter
      */
     public LogisticRegression(double learningRate, int nIterations, double lambda) {
         this.learningRate = learningRate;
         this.nIterations = nIterations;
         this.lambda = lambda;
     }
-    
+
     /**
      * Sigmoid function: σ(z) = 1 / (1 + exp(-z))
      */
@@ -38,7 +37,7 @@ public class LogisticRegression {
         if (z < -20) return 0.000001;
         return 1.0 / (1.0 + Math.exp(-z));
     }
-    
+
     /**
      * Add bias term to feature matrix (column of ones).
      */
@@ -55,7 +54,7 @@ public class LogisticRegression {
         }
         return NdArray.create(result, DType.FLOAT64, new Shape(n, d + 1));
     }
-    
+
     /**
      * Convert NdArray to double[][].
      */
@@ -71,25 +70,25 @@ public class LogisticRegression {
         }
         return result;
     }
-    
+
     /**
      * Fit the model to training data.
-     * 
+     *
      * @param X Feature matrix of shape [n_samples, n_features]
      * @param y Target labels (binary: 0 or 1)
      */
     public void fit(NdArray X, int[] y) {
         int n = X.getShape().get(0);
         int d = X.getShape().get(1);
-        
+
         // Add bias term
         NdArray Xb = addBias(X);
         int d1 = d + 1;
-        
+
         // Initialize weights
         this.weights = new double[d1];
         this.bias = 0.0;
-        
+
         // Gradient descent
         for (int iter = 0; iter < nIterations; iter++) {
             // Compute predictions
@@ -126,10 +125,10 @@ public class LogisticRegression {
             }
         }
     }
-    
+
     /**
      * Predict class labels for samples.
-     * 
+     *
      * @param X Feature matrix of shape [n_samples, n_features]
      * @return Array of predicted class labels (0 or 1)
      */
@@ -150,10 +149,10 @@ public class LogisticRegression {
         }
         return predictions;
     }
-    
+
     /**
      * Predict class probabilities for samples.
-     * 
+     *
      * @param X Feature matrix of shape [n_samples, n_features]
      * @return NdArray of shape [n_samples, 2] with probabilities for each class
      */

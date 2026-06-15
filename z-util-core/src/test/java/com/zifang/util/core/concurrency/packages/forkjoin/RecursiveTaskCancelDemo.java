@@ -13,13 +13,42 @@ import java.util.concurrent.TimeUnit;
  */
 public class RecursiveTaskCancelDemo {
 
+    /**
+     * main方法。
+     * * @param args String[]类型参数
+     *
+     * @return static void类型返回值
+     */
+    public static void main(String[] args) {
+        // 28．用ArrayGenerator类创建一个容量为1,000的数字数组。
+        ArrayGenerator generator = new ArrayGenerator();
+        int[] array = generator.generateArray(1000);
+        // 29．创建一个TaskManager对象。
+        TaskManager manager = new TaskManager();
+        // 30．通过默认的构造器创建一个ForkJoinPool对象。
+        ForkJoinPool pool = new ForkJoinPool();
+        // 31．创建一个Task对象用来处理第28步生成的数组。
+        SearchNumberTask task = new SearchNumberTask(array, 0, 1000, 5, manager);
+        // 32．调用execute()方法采用异步方式执行线程池中的任务。
+        pool.execute(task);
+        // 33．调用shutdown()方法关闭线程池。
+        pool.shutdown();
+        // 34．调用ForkJoinPool类的awaitTermination()方法等待任务执行结束。
+        try {
+            pool.awaitTermination(1, TimeUnit.DAYS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     // 1．创建一个名为ArrayGenerator的类。这个类将生成一个指定大小的随机整数数组。实现generateArray()方法，它将生成数字数组，接收一个int参数表示数组的大小。
     static class ArrayGenerator {
-    /**
-     * generateArray方法。
-     *      * @param size int类型参数
-     * @return int[]类型返回值
-     */
+        /**
+         * generateArray方法。
+         * * @param size int类型参数
+         *
+         * @return int[]类型返回值
+         */
         public int[] generateArray(int size) {
             int[] array = new int[size];
             Random random = new Random();
@@ -36,27 +65,30 @@ public class RecursiveTaskCancelDemo {
         private List<ForkJoinTask<Integer>> tasks;
 
         // 4．实现类的构造器，用来初始化任务列表。
-    /**
-     * TaskManager方法。
-     */
+
+        /**
+         * TaskManager方法。
+         */
         public TaskManager() {
             tasks = new ArrayList<>();
         }
 
         // 5．实现addTask()方法。增加一个ForkJoinTask对象到任务列表中。
-    /**
-     * addTask方法。
-     *      * @param task ForkJoinTaskInteger类型参数
-     */
+
+        /**
+         * addTask方法。
+         * * @param task ForkJoinTaskInteger类型参数
+         */
         public void addTask(ForkJoinTask<Integer> task) {
             tasks.add(task);
         }
 
         // 6．实现cancelTasks()方法。遍历存储在列表中的所有ForkJoinTask对象，然后调用cancel()方法取消之。cancelTasks()方法接收一个要取消剩余任务的ForkJoinTask对象作为参数，然后取消所有的任务。
-    /**
-     * cancelTasks方法。
-     *      * @param cancelTask ForkJoinTaskInteger类型参数
-     */
+
+        /**
+         * cancelTasks方法。
+         * * @param cancelTask ForkJoinTaskInteger类型参数
+         */
         public void cancelTasks(ForkJoinTask<Integer> cancelTask) {
             for (ForkJoinTask<Integer> task : tasks) {
                 if (task != cancelTask) {
@@ -67,8 +99,12 @@ public class RecursiveTaskCancelDemo {
         }
     }
 
+    // 27．实现范例的主类，创建Main主类，并实现main()方法。
+
     // 7．实现SearchNumberTask类，并继承RecursiveTask类，RecursiveTask类的泛型参数为Integer类型。这个类将寻找在整数数组元素块中的一个数字。
     static class SearchNumberTask extends RecursiveTask<Integer> {
+        // 12．声明一个int常量，并初始化其值为-1。当任务找不到数字时将返回这个常量。
+        private final static int NOT_FOUND = -1;
         // 8．声明一个名为array的私有int数组。
         private int[] numbers;
         // 9．声明两个分别名为start和end的私有int属性。这两个属性将决定任务所要处理的数组的元素。
@@ -77,18 +113,18 @@ public class RecursiveTaskCancelDemo {
         private int number;
         // 11．声明一个名为manager的私有TaskManager属性。利用这个对象来取消所有的任务。
         private TaskManager manager;
-        // 12．声明一个int常量，并初始化其值为-1。当任务找不到数字时将返回这个常量。
-        private final static int NOT_FOUND = -1;
 
         // 13．实现类的构造器，用来初始化它的属性。
-    /**
-     * SearchNumberTask方法。
-     *      * @param numbers int[]类型参数
-     * @param start int类型参数
-     * @param end int类型参数
-     * @param number int类型参数
-     * @param manager TaskManager类型参数
-     */
+
+        /**
+         * SearchNumberTask方法。
+         * * @param numbers int[]类型参数
+         *
+         * @param start   int类型参数
+         * @param end     int类型参数
+         * @param number  int类型参数
+         * @param manager TaskManager类型参数
+         */
         public SearchNumberTask(int[] numbers, int start, int end, int number, TaskManager manager) {
             this.numbers = numbers;
             this.start = start;
@@ -99,10 +135,10 @@ public class RecursiveTaskCancelDemo {
 
         // 14．实现compute()方法。在控制台输出信息表示任务开始，并输出start和end的属性值。
         @Override
-    /**
-     * compute方法。
-     * @return int类型返回值
-     */
+        /**
+         * compute方法。
+         * @return int类型返回值
+         */
         protected Integer compute() {
             System.out.println("Task: " + start + ":" + end);
             // 15．如果start和end属性值的差异大于10（任务必须处理大于10个元素的数组），那么，就调用launchTasks()方法将这个任务拆分为两个子任务。
@@ -162,39 +198,12 @@ public class RecursiveTaskCancelDemo {
         }
 
         // 26．实现writeCancelMessage()方法，在控制台输入信息表示任务已经取消了。
-    /**
-     * writeCancelMessage方法。
-     */
+
+        /**
+         * writeCancelMessage方法。
+         */
         public void writeCancelMessage() {
             System.out.printf("Task: Cancelled task from %d to %d", start, end);
-        }
-    }
-
-    // 27．实现范例的主类，创建Main主类，并实现main()方法。
-    /**
-     * main方法。
-     *      * @param args String[]类型参数
-     * @return static void类型返回值
-     */
-    public static void main(String[] args) {
-        // 28．用ArrayGenerator类创建一个容量为1,000的数字数组。
-        ArrayGenerator generator = new ArrayGenerator();
-        int[] array = generator.generateArray(1000);
-        // 29．创建一个TaskManager对象。
-        TaskManager manager = new TaskManager();
-        // 30．通过默认的构造器创建一个ForkJoinPool对象。
-        ForkJoinPool pool = new ForkJoinPool();
-        // 31．创建一个Task对象用来处理第28步生成的数组。
-        SearchNumberTask task = new SearchNumberTask(array, 0, 1000, 5, manager);
-        // 32．调用execute()方法采用异步方式执行线程池中的任务。
-        pool.execute(task);
-        // 33．调用shutdown()方法关闭线程池。
-        pool.shutdown();
-        // 34．调用ForkJoinPool类的awaitTermination()方法等待任务执行结束。
-        try {
-            pool.awaitTermination(1, TimeUnit.DAYS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }
