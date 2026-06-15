@@ -4,9 +4,14 @@ import com.zifang.util.ioc.core.BeanRegistry;
 import com.zifang.util.ioc.metadata.BeanDefinition;
 
 /**
- * 依赖解析上下文，负责根据类型从容器中获取 Bean 实例。
- * 每次解析都可能触发 Bean 的创建（延迟初始化）。
+ * 兼容旧 API 的依赖解析上下文。
+ *
+ * <p>新代码请使用 {@link com.zifang.util.ioc.Injector#getInstance(Class)}，
+ * 该类保留仅为兼容旧测试。
+ *
+ * @deprecated 使用 {@link com.zifang.util.ioc.Injector} 替代
  */
+@Deprecated
 public class InjectorContext {
 
     private final BeanRegistry registry;
@@ -19,19 +24,13 @@ public class InjectorContext {
 
     /**
      * 根据类型解析（优先按类型精确匹配，fallback 到接口/父类匹配）。
-     *
-     * @param type 所需类型
-     * @param <T>  类型参数
-     * @return Bean 实例，若找不到返回 null
      */
     @SuppressWarnings("unchecked")
     public <T> T resolve(Class<T> type) {
-        // 精确类型查找
         BeanDefinition bd = registry.get(type);
         if (bd != null) {
             return (T) resolveInstance(bd);
         }
-        // 接口/父类匹配
         for (BeanDefinition existing : registry.getAll()) {
             if (type.isAssignableFrom(existing.getBeanClass())) {
                 return (T) resolveInstance(existing);
@@ -53,7 +52,6 @@ public class InjectorContext {
             }
             return bd.getInstance();
         } else {
-            // prototype：每次创建新实例
             return instantiator.instantiate(bd, this);
         }
     }

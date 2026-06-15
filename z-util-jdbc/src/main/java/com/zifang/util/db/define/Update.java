@@ -1,26 +1,28 @@
 package com.zifang.util.db.define;
 
+import java.lang.annotation.*;
+
 /**
- * 更新操作注解
- * <p>
- * 用于标识需要进行数据库更新操作的方法，通常与MyBatis等ORM框架配合使用。
- * 标记在Mapper接口的方法上，表示该方法执行更新（修改）数据库操作。
+ * 更新操作注解。
  *
- * <p>使用示例：
- * <pre>
- * public interface UserMapper {
- *     &#64;Update("UPDATE user SET name = #{name}, age = #{age} WHERE id = #{id}")
- *     int updateUser(User user);
- * }
- * </pre>
+ * <h3>使用</h3>
+ * <pre>{@code
+ *   public interface UserMapper {
+ *       &#64;Update("UPDATE user SET name = #{name}, age = #{age} WHERE id = #{id}")
+ *       int updateUser(&#64;Param("name") String name, &#64;Param("age") int age, &#64;Param("id") long id);
+ *   }
+ * }</pre>
  *
- * <p>该注解可以与&#64;Param注解配合使用，为方法参数指定名称，
- * 以便在SQL语句中通过#{paramName}方式引用。
- *
+ * @see Select
  * @see Insert
  * @see Delete
- * @see Select
  * @see Param
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Documented
 public @interface Update {
+
+    /** SQL 语句，支持 #{paramName} 绑定。 */
+    String value();
 }

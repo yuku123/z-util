@@ -1,8 +1,8 @@
 package com.zifang.util.expression.dynamic;
 
-import com.zifang.util.expression.dynamic.core.ASTNode;
-import com.zifang.util.expression.dynamic.g4.DynamicLexer;
-import com.zifang.util.expression.dynamic.token.Token;
+import com.zifang.util.dsl.core.ASTNode;
+import com.zifang.util.dsl.g4.DynamicLexer;
+import com.zifang.util.dsl.token.Token;
 import org.junit.Test;
 
 import java.nio.file.Files;
@@ -19,7 +19,7 @@ public class DynamicG4Test {
      */
     @Test
     public void testParseG4File() throws Exception {
-        String g4Path = "src/main/java/com/zifang/util/expression/dynamic/g4/JSParser.g4";
+        String g4Path = "src/main/resources/g4/JSParser.g4";
         String content = new String(Files.readAllBytes(Paths.get(g4Path)));
 
         System.out.println("=== G4文件内容预览 ===");
@@ -111,7 +111,7 @@ public class DynamicG4Test {
      * 提取G4文件中的lexer部分
      */
     private String loadG4Lexer() throws Exception {
-        String g4Path = "src/main/java/com/zifang/util/expression/dynamic/g4/JSParser.g4";
+        String g4Path = "src/main/resources/g4/JSParser.g4";
         String content = new String(Files.readAllBytes(Paths.get(g4Path)));
 
         // 提取lexer grammar部分

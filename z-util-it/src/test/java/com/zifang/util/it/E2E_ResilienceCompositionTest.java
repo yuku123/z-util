@@ -95,7 +95,7 @@ public class E2E_ResilienceCompositionTest {
 
         int before = svc.totalCalls();
         try { cb.call(() -> svc.call("x")); fail("expected open"); }
-        catch (com.zifang.util.resilience.CircuitOpenException expected) { /* ok */ }
+        catch (com.zifang.util.core.resilience.CircuitOpenException expected) { /* ok */ }
         assertEquals("circuit should short-circuit, no new remote calls",
                 before, svc.totalCalls());
     }

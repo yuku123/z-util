@@ -59,13 +59,6 @@
         <module>z-util-cache</module>
         <module>z-util-ioc</module>
         <module>z-util-aop</module>
-        <module>z-util-jwt</module>
-        <module>z-util-ratelimit</module>
-        <module>z-util-lock</module>
-        <module>z-util-trace</module>
-        <module>z-util-resilience</module>
-        <module>z-util-feature</module>
-        <module>z-util-bean</module>
         <module>z-util-it</module>
 
         <module>z-util-all</module>
@@ -96,41 +89,6 @@
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-aop</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-jwt</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-ratelimit</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-lock</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-trace</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-resilience</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-feature</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-bean</artifactId>
                 <version>${util.version}</version>
             </dependency>
             <dependency>
@@ -460,6 +418,14 @@
                 <artifactId>activation</artifactId>
                 <version>1.1.1</version>
             </dependency>
+
+            <!-- Lombok：通过注解生成 logger / getter / setter / builder 等样板代码 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.42</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -473,6 +439,14 @@
                     <source>${compile.version}</source>
                     <target>${compile.version}</target>
                     <encoding>utf-8</encoding>
+                    <!-- Lombok annotation processor：让 @Slf4j / @Data / @Builder 等生效 -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.42</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 

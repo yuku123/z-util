@@ -13,6 +13,11 @@
     <description>Proto3 .proto 文件解析器，支持 message、enum、service、RPC 等语法</description>
     <dependencies>
         <dependency>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-dsl</artifactId>
+            <version>${util.version}</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>

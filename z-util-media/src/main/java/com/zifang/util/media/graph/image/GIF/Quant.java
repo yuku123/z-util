@@ -53,6 +53,8 @@ public class Quant {
 
     /* defs for freq and bias */
     protected static final int intbiasshift = 16; /* bias for fractions */
+    protected static final int betashift = 10;
+    protected static final int gammashift = 10; /* gamma = 1024 */
     /**
      * =方法。
      * * @param intbiasshift 1类型参数
@@ -69,7 +71,6 @@ public class Quant {
     protected static final int beta = (intbias >> betashift); /* beta = 1/1024 */
     protected static final int betagamma =
             (intbias << (gammashift - betashift));
-    protected static final int gammashift = 10; /* gamma = 1024 */
     /**
      * =方法。
      * * @param gammashift 1类型参数
@@ -77,7 +78,6 @@ public class Quant {
      * @return static final int gamma类型返回值
      */
     protected static final int gamma = (1 << gammashift);
-    protected static final int betashift = 10;
 
     /* defs for decreasing radius factor */
     /**

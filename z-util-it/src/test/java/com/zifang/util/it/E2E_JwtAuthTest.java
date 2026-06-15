@@ -140,7 +140,7 @@ public class E2E_JwtAuthTest {
         String access = auth.login("bob", "user").get("access");
         String[] parts = access.split("\\.");
         String tampered = parts[0] + "." +
-                com.zifang.util.jwt.Base64Url.encode("{\"sub\":\"bob\",\"role\":\"admin\",\"exp\":9999999999}".getBytes()) +
+                com.zifang.util.core.jwt.Base64Url.encode("{\"sub\":\"bob\",\"role\":\"admin\",\"exp\":9999999999}".getBytes()) +
                 "." + parts[2];
         try {
             auth.verify(tampered);

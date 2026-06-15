@@ -90,12 +90,13 @@
             <version>1.4.7</version>
         </dependency>
 
-        <!-- LogContext / LoggableAdvise 依赖（trace + aop 内部模块） -->
+        <!-- Lombok：注解处理器，仅编译期需要，不打包到运行时 -->
         <dependency>
-            <groupId>com.zifang</groupId>
-            <artifactId>z-util-trace</artifactId>
-            <version>${util.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
+
+        <!-- LogContext / LoggableAdvise 依赖（trace + aop 内部模块） -->
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-aop</artifactId>

@@ -1,6 +1,6 @@
 package com.zifang.util.db.context;
 
-import com.zifang.util.db.transation.TranslationManager;
+import com.zifang.util.db.transaction.TransactionManager;
 
 /**
  * 数据源上下文配置类，用于配置数据源工厂、扫描包和事务管理器
@@ -11,7 +11,7 @@ public class DataSourceContext {
 
     private String scanPackageName;
 
-    private TranslationManager transactionManager;
+    private TransactionManager transactionManager;
 
     /**
      * 设置数据源工厂
@@ -41,7 +41,7 @@ public class DataSourceContext {
      * @param transationManager 事务管理器实例
      * @return 当前实例，支持链式调用
      */
-    public DataSourceContext transationManager(TranslationManager transationManager) {
+    public DataSourceContext transationManager(TransactionManager transationManager) {
         this.transactionManager = transationManager;
         return this;
     }
@@ -87,7 +87,7 @@ public class DataSourceContext {
      *
      * @return 事务管理器
      */
-    public TranslationManager getTransactionManager() {
+    public TransactionManager getTransactionManager() {
         return transactionManager;
     }
 
@@ -96,7 +96,7 @@ public class DataSourceContext {
      *
      * @param transactionManager 事务管理器
      */
-    public void setTransactionManager(TranslationManager transactionManager) {
+    public void setTransactionManager(TransactionManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 

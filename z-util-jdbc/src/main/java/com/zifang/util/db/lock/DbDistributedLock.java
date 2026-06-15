@@ -1,6 +1,6 @@
 package com.zifang.util.db.lock;
 
-import com.zifang.util.lock.DistributedLock;
+import com.zifang.util.core.lock.DistributedLock;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

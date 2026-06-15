@@ -1,7 +1,7 @@
 package com.zifang.util.expression.dynamic;
 
-import com.zifang.util.expression.dynamic.g4.DynamicLexer;
-import com.zifang.util.expression.dynamic.token.Token;
+import com.zifang.util.dsl.g4.DynamicLexer;
+import com.zifang.util.dsl.token.Token;
 import org.junit.Test;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public class AllRulesValidationTest {
 
     private DynamicLexer createLexer() throws Exception {
-        String g4Path = "src/main/java/com/zifang/util/expression/dynamic/g4/JSParser.g4";
+        String g4Path = "src/main/resources/g4/JSParser.g4";
         String content = new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(g4Path)));
         int lexerStart = content.indexOf("lexer grammar");
         int parserStart = content.indexOf("parser grammar");

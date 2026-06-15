@@ -1,54 +1,43 @@
 package com.zifang.util.ioc.context;
 
+import com.zifang.util.ioc.Injector;
+import com.zifang.util.ioc.Module;
 import com.zifang.util.ioc.annotation.Bean;
 import com.zifang.util.ioc.annotation.Component;
 import com.zifang.util.ioc.annotation.Configuration;
-import com.zifang.util.ioc.core.BeanRegistry;
-import com.zifang.util.ioc.core.DefaultBeanRegistry;
+import com.zifang.util.ioc.binder.AbstractModule;
+import com.zifang.util.ioc.core.DefaultInjector;
 import com.zifang.util.ioc.exception.NoSuchBeanException;
-import com.zifang.util.ioc.inject.InjectorContext;
-import com.zifang.util.ioc.inject.Instantiator;
-import com.zifang.util.ioc.lifecycle.LifecycleManager;
 import com.zifang.util.ioc.metadata.BeanDefinition;
 import com.zifang.util.ioc.metadata.Scope;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * IOC 容器上下文。
- * 支持：
- * <ul>
- *   <li>扫描指定包下的所有 {@link Component} 类并注册</li>
- *   <li>注册配置类并扫描其中的 {@link Bean} 方法</li>
- *   <li>延迟创建 + singleton 缓存 + prototype 新建</li>
- *   <li>字段注入（{@link Inject}）+ {@link PostConstruct} + {@link PreDestroy}</li>
- * </ul>
+ * IOC 容器上下文（向后兼容入口）。
  *
- * <p>使用标准 JSR 330 / JSR 250 注解：
- * <ul>
- *   <li>{@link Named} / {@link Component} → Bean 名称</li>
- *   <li>{@link Singleton} → singleton 作用域</li>
- *   <li>{@link Inject} → 依赖注入</li>
- *   <li>{@link PostConstruct} / {@link PreDestroy} → 生命周期</li>
- * </ul>
+ * <p>内部委托给新的 {@link DefaultInjector}。
+ * 新代码建议直接使用 {@link Injector#createInjector(Module...)}。
+ *
+ * <h3>使用模式：</h3>
+ * <pre>{@code
+ * ClassPathApplicationContext ctx = new ClassPathApplicationContext("com.example");
+ * ctx.registerBeanClass(MyService.class);
+ * ctx.init();
+ * MyService svc = ctx.getBean(MyService.class);
+ * ctx.close();
+ * }</pre>
  */
 public class ClassPathApplicationContext {
 
     private final String basePackage;
-    private final BeanRegistry registry = new DefaultBeanRegistry();
-    private final Instantiator instantiator = new Instantiator(registry);
-    private final LifecycleManager lifecycleManager = new LifecycleManager(instantiator);
-
-    private InjectorContext injectorContext;
+    private final List<Class<?>> pendingRegistrations = new ArrayList<>();
+    private DefaultInjector injector;
     private volatile boolean initialized = false;
 
     public ClassPathApplicationContext(String basePackage) {
@@ -56,69 +45,46 @@ public class ClassPathApplicationContext {
     }
 
     /**
-     * 触发容器初始化：扫描注册 → 实例化所有 singleton → 字段注入 → PostConstruct
+     * 手动注册一个类（延迟到 {@link #init()} 时生效）。
+     */
+    public ClassPathApplicationContext registerBeanClass(Class<?> clazz) {
+        pendingRegistrations.add(clazz);
+        return this;
+    }
+
+    /**
+     * 触发容器初始化。
      */
     public void init() {
         if (initialized) return;
-        injectorContext = new InjectorContext(registry, instantiator);
-        scanAndRegister(basePackage);
-        instantiateSingletons();
+        final ClassPathApplicationContext self = this;
+        Module registrationModule = new AbstractModule() {
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            @Override
+            protected void configure() {
+                for (Class<?> clazz : pendingRegistrations) {
+                    String name = self.resolveBeanName(clazz);
+                    Scope scope = self.detectScope(clazz);
+                    boolean isConfig = clazz.isAnnotationPresent(Configuration.class);
+                    if (isConfig) {
+                        bind(clazz).to((Class) clazz).in(scope);
+                    } else {
+                        bind(clazz).to((Class) clazz).in(scope);
+                    }
+                }
+            }
+        };
+        injector = new DefaultInjector(registrationModule);
         initialized = true;
     }
 
     /**
-     * 扫描包，注册所有 @Component 类和 @Configuration 类
-     */
-    private void scanAndRegister(String pkg) {
-        // 简化实现：依赖手动 registerBeanClass
-        // 完整包扫描需要 ASM/BCEL，可后续引入 z-util-source 或 reflections
-    }
-
-    /**
-     * 手动注册一个类。
-     * 检测标准注解：
-     * <ul>
-     *   <li>{@link Named} → Bean 名称</li>
-     *   <li>{@link Component} → 自定义简称注解</li>
-     *   <li>{@link Singleton} → singleton 作用域</li>
-     *   <li>{@link Configuration} → 配置类（扫描 @Bean 方法）</li>
-     * </ul>
-     */
-    public ClassPathApplicationContext registerBeanClass(Class<?> clazz) {
-        String name = resolveBeanName(clazz);
-        Scope scope = detectScope(clazz);
-        boolean isConfig = clazz.isAnnotationPresent(Configuration.class);
-        BeanDefinition bd = new BeanDefinition(name, clazz, scope, isConfig, null);
-        registry.register(bd);
-
-        // 若是 @Configuration，扫描 @Bean 方法
-        if (isConfig) {
-            registerConfigBeanMethods(clazz);
-        }
-        return this;
-    }
-
-    private void registerConfigBeanMethods(Class<?> configClass) {
-        for (Method m : configClass.getDeclaredMethods()) {
-            if (m.isAnnotationPresent(Bean.class) && !Modifier.isStatic(m.getModifiers())) {
-                String beanName = resolveBeanMethodName(m);
-                Class<?> returnType = m.getReturnType();
-                BeanDefinition bd = new BeanDefinition(beanName, returnType, Scope.DEFAULT, false, m);
-                // 注册配置类本身（若尚未注册）
-                BeanDefinition configBd = registry.get(configClass);
-                if (configBd == null) {
-                    registry.register(new BeanDefinition(resolveBeanName(configClass), configClass, Scope.DEFAULT, true, null));
-                }
-                registry.register(bd);
-            }
-        }
-    }
-
-    /**
      * 解析 Bean 名称，优先级：
-     * 1. {@link Named#value()}（JSR 330 标准）
-     * 2. {@link Component#value()}（自定义简称注解）
-     * 3. 类名首字母小写
+     * <ol>
+     *   <li>{@link Named#value()}</li>
+     *   <li>{@link Component#value()}</li>
+     *   <li>类名首字母小写</li>
+     * </ol>
      */
     String resolveBeanName(Class<?> clazz) {
         Named named = clazz.getAnnotation(Named.class);
@@ -145,10 +111,7 @@ public class ClassPathApplicationContext {
     }
 
     /**
-     * 检测作用域，优先级：
-     * 1. {@link Singleton} 存在 → singleton
-     * 2. {@link Component#scope()} = "prototype" → prototype
-     * 3. 默认 → singleton
+     * 检测作用域。
      */
     Scope detectScope(Class<?> clazz) {
         if (clazz.isAnnotationPresent(Singleton.class)) {
@@ -167,56 +130,54 @@ public class ClassPathApplicationContext {
     }
 
     /**
-     * 实例化所有 singleton 并注入
+     * 获取 Bean 实例（按类型）。
      */
-    private void instantiateSingletons() {
-        for (BeanDefinition bd : registry.getAll()) {
-            if (bd.isSingleton() && bd.getInstance() == null) {
-                Object instance = instantiator.instantiate(bd, injectorContext);
-                instantiator.injectFields(instance, injectorContext);
-                instantiator.invokePostConstruct(instance);
-                bd.setInstance(instance);
-                bd.setCreationTime(System.currentTimeMillis());
-            }
-        }
+    public <T> T getBean(Class<T> type) {
+        checkInit();
+        return injector.getInstance(type);
     }
 
     /**
-     * 获取 Bean 实例
+     * 获取 Bean 实例（按名称）。
      */
     @SuppressWarnings("unchecked")
-    public <T> T getBean(Class<T> type) {
-        checkInit();
-        BeanDefinition bd = registry.get(type);
-        if (bd == null) {
-            throw new NoSuchBeanException("No bean of type: " + type.getName());
-        }
-        return (T) injectorContext.resolve(type);
-    }
-
     public <T> T getBean(String name) {
         checkInit();
-        BeanDefinition bd = registry.get(name);
-        if (bd == null) {
-            throw new NoSuchBeanException("No bean named: " + name);
+        for (BeanDefinition bd : injector.getAllBeanDefinitions()) {
+            if (name.equals(bd.getName())) {
+                return (T) injector.getInstance(bd.getBeanClass(), bd.getKey().getQualifier());
+            }
+            if (name.equals(toLowerFirst(bd.getBeanClass().getSimpleName()))) {
+                return (T) injector.getInstance(bd.getBeanClass());
+            }
         }
-        return (T) injectorContext.resolve(bd.getBeanClass());
+        throw new NoSuchBeanException("No bean named: " + name);
     }
 
     public boolean containsBean(String name) {
-        return registry.contains(name);
+        if (!initialized) return false;
+        for (BeanDefinition bd : injector.getAllBeanDefinitions()) {
+            if (name.equals(bd.getName())) {
+                return true;
+            }
+            if (name.equals(toLowerFirst(bd.getBeanClass().getSimpleName()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Collection<BeanDefinition> getAllBeanDefinitions() {
-        return registry.getAll();
+        return initialized ? injector.getAllBeanDefinitions() : java.util.Collections.emptyList();
     }
 
     /**
-     * 关闭容器：调用所有 PreDestroy（逆序）
+     * 关闭容器：调用所有 PreDestroy（逆序）。
      */
     public void close() {
-        List<Object> singletons = lifecycleManager.getInitializedSingletons(new ArrayList<>(registry.getAll()));
-        lifecycleManager.destroySingletons(singletons);
+        if (injector != null) {
+            injector.close();
+        }
         initialized = false;
     }
 

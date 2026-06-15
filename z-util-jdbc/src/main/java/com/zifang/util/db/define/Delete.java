@@ -1,26 +1,28 @@
 package com.zifang.util.db.define;
 
+import java.lang.annotation.*;
+
 /**
- * 删除操作注解
- * <p>
- * 用于标识需要进行数据库删除操作的方法，通常与MyBatis等ORM框架配合使用。
- * 标记在Mapper接口的方法上，表示该方法执行删除数据库操作。
+ * 删除操作注解。
  *
- * <p>使用示例：
- * <pre>
- * public interface UserMapper {
- *     &#64;Delete("DELETE FROM user WHERE id = #{id}")
- *     int deleteUserById(long id);
- * }
- * </pre>
+ * <h3>使用</h3>
+ * <pre>{@code
+ *   public interface UserMapper {
+ *       &#64;Delete("DELETE FROM user WHERE id = #{id}")
+ *       int deleteUserById(&#64;Param("id") long id);
+ *   }
+ * }</pre>
  *
- * <p>该注解可以与&#64;Param注解配合使用，为方法参数指定名称，
- * 以便在SQL语句中通过#{paramName}方式引用。
- *
+ * @see Select
  * @see Insert
  * @see Update
- * @see Select
  * @see Param
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Documented
 public @interface Delete {
+
+    /** SQL 语句，支持 #{paramName} 绑定。 */
+    String value();
 }
