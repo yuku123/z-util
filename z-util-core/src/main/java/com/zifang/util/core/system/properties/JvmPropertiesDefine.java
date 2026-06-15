@@ -1,5 +1,8 @@
 package com.zifang.util.core.system.properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,6 +11,8 @@ import java.util.Map;
  * @author zifang
  */
 public class JvmPropertiesDefine {
+
+    private static final Logger log = LoggerFactory.getLogger(JvmPropertiesDefine.class);
 
     /**
      * LinkedHashMap<>方法。
@@ -80,7 +85,7 @@ public class JvmPropertiesDefine {
             try {
                 defineMap.put(field.getName(), (String) field.get(null));
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                log.warn("Failed to read property key '{}'", field.getName(), e);
             }
         }
     }

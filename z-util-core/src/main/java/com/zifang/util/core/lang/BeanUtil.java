@@ -1,6 +1,8 @@
 package com.zifang.util.core.lang;
 
 import com.zifang.util.core.lang.reflect.ClassUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -16,6 +18,8 @@ import java.util.Map;
  * @author zifang
  */
 public class BeanUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(BeanUtil.class);
 
     /**
      * 检测传入的Object是否为标准的Bean
@@ -66,7 +70,7 @@ public class BeanUtil {
                 try {
                     method.invoke(t, map.get(name));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.warn("mapToBean failed for property '{}' on {}", name, clazz, e);
                 }
             }
         }
@@ -103,7 +107,7 @@ public class BeanUtil {
                 propertyDescriptor.getWriteMethod().invoke(obj, value);
             }
         } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            log.warn("setProperty failed for property '{}' on {}", name, obj == null ? null : obj.getClass(), e);
         }
     }
 
@@ -122,7 +126,7 @@ public class BeanUtil {
                 return propertyDescriptor.getReadMethod().invoke(obj);
             }
         } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+            log.warn("getProperty failed for property '{}' on {}", name, obj == null ? null : obj.getClass(), e);
         }
         return null;
     }

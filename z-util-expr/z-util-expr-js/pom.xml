@@ -48,6 +48,10 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <!-- 排除 resources 下的演示代码（SpEL 等教程示例），不打包到生产 JAR -->
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
             </resource>
             <resource>
                 <directory>src/main/java</directory>

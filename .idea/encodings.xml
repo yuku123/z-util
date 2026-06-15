@@ -167,6 +167,8 @@
     <file url="file://$PROJECT_DIR$/z-util-http/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-ioc/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-ioc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/z-util-it/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/z-util-it/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-jdbc/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-jdbc/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/z-util-json/src/main/java" charset="UTF-8" />

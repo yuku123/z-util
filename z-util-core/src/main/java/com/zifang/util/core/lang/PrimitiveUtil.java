@@ -113,9 +113,9 @@ public class PrimitiveUtil {
         }
 
         if (!isPrimitiveWrapper(clazz)) {
-            String error = "the input class" + clazz.getName() + " is not wrapperType";
+            String error = "the input class " + clazz.getName() + " is not wrapperType";
             log.error(error);
-            throw new RuntimeException(error);
+            throw new IllegalArgumentException(error);
         }
 
         return primitiveTypeList.get(primitiveWrapperTypeList.indexOf(clazz));

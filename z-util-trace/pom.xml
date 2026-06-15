@@ -19,9 +19,12 @@
             <artifactId>z-util-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-aop</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.36</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

@@ -22,22 +22,15 @@
         <module name="z-util-expr-js" />
         <module name="z-util-parser-proto" />
         <module name="z-util-aop" />
-        <module name="z-util-jwt" />
-        <module name="z-util-lock" />
         <module name="z-util-dsl" />
         <module name="z-util-ioc" />
-        <module name="z-util-bean" />
-        <module name="z-util-feature" />
         <module name="z-util-core" />
-        <module name="z-util-trace" />
         <module name="z-util-ml" />
         <module name="z-util-source" />
-        <module name="z-util-resilience" />
         <module name="z-util-media" />
         <module name="z-util-ch" />
         <module name="z-util-office" />
         <module name="z-util-zex" />
-        <module name="z-util-ratelimit" />
         <module name="z-util-cli" />
         <module name="z-util-parser-toml" />
         <module name="z-util-expr-sql" />
@@ -155,10 +148,17 @@
       <module name="z-task-service" target="1.8" />
       <module name="z-task-starter" target="1.8" />
       <module name="z-util-ai" target="1.8" />
+      <module name="z-util-bean" target="1.8" />
       <module name="z-util-expression" target="1.8" />
       <module name="z-util-extra" target="1.8" />
+      <module name="z-util-feature" target="1.8" />
       <module name="z-util-json" target="1.8" />
+      <module name="z-util-jwt" target="1.8" />
+      <module name="z-util-lock" target="1.8" />
+      <module name="z-util-ratelimit" target="1.8" />
+      <module name="z-util-resilience" target="1.8" />
       <module name="z-util-sql" target="1.8" />
+      <module name="z-util-trace" target="1.8" />
       <module name="z-util-xml" target="1.8" />
       <module name="z-util-yaml" target="1.8" />
       <module name="z-wf" target="1.8" />

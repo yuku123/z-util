@@ -59,14 +59,7 @@
         <module>z-util-cache</module>
         <module>z-util-ioc</module>
         <module>z-util-aop</module>
-        <module>z-util-jwt</module>
-        <module>z-util-ratelimit</module>
-        <module>z-util-lock</module>
-        <module>z-util-trace</module>
-        <module>z-util-resilience</module>
-        <module>z-util-feature</module>
-        <module>z-util-bean</module>
-        <module>z-util-e2e</module>
+        <module>z-util-it</module>
 
         <module>z-util-all</module>
     </modules>
@@ -83,12 +76,7 @@
                 <artifactId>z-util-monitor</artifactId>
                 <version>${util.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-lock</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
+<dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-distribute</artifactId>
                 <version>${util.version}</version>
@@ -103,37 +91,7 @@
                 <artifactId>z-util-aop</artifactId>
                 <version>${util.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-trace</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-ratelimit</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-resilience</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-feature</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-bean</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-jwt</artifactId>
-                <version>${util.version}</version>
-            </dependency>
-            <dependency>
+<dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-jdbc</artifactId>
                 <version>${util.version}</version>
@@ -177,7 +135,13 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j-impl</artifactId>
-                <version>2.23.1</version>
+                <version>2.25.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.36</version>
             </dependency>
 
             <dependency>
