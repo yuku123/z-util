@@ -245,7 +245,7 @@ public final class FilePathUtil {
      * <p>
      * Examples:
      * <ul>
-     *   <li>{@code toUNIXPath("C:\\Users\\u005Cuser\\file.txt")} returns {@code "C:/Users/user/file.txt"}</li>
+     *   <li>{@code toUNIXPath("C:\\Users\\user\\file.txt")} returns {@code "C:/Users/user/file.txt"}</li>
      *   <li>{@code toUNIXPath("/home/user/file.txt")} returns {@code "/home/user/file.txt"}</li>
      * </ul>
      * </p>

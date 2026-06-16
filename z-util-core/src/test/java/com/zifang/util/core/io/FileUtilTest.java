@@ -59,7 +59,7 @@ public class FileUtilTest {
      */
     public void testGetFileName() {
         assertEquals("file.txt", FileUtil.getFileName("/home/user/file.txt"));
-        assertEquals("file.txt", FileUtil.getFileName("C:\\Users\\u005Cuser\\file.txt"));
+        assertEquals("file.txt", FileUtil.getFileName("C:\\Users\\user\\file.txt"));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class FileUtilTest {
      * testToUNIXpath方法。
      */
     public void testToUNIXpath() {
-        assertEquals("C:/Users/user/file.txt", FileUtil.toUNIXpath("C:\\Users\\u005Cuser\\file.txt"));
+        assertEquals("C:/Users/user/file.txt", FileUtil.toUNIXpath("C:\\Users\\user\\file.txt"));
     }
 
     // ==================== getTypePart / getNamePart / trimType ====================

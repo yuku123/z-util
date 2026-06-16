@@ -1451,7 +1451,7 @@ public class StringUtil {
         } else if (ch < 0x1000) {
             return "\\u005Cu0" + Integer.toHexString(ch);
         }
-        return "\\u005Cu" + Integer.toHexString(ch);
+        return "\\u" + Integer.toHexString(ch);
     }
 
     /**
@@ -1486,7 +1486,7 @@ public class StringUtil {
     public static String string2Unicode(String string) {
         StringBuilder uni = new StringBuilder();
         for (int i = 0; i < string.length(); i++) {
-            String temp = "\\u005Cu" + Integer.toHexString(string.charAt(i));
+            String temp = "\\u" + Integer.toHexString(string.charAt(i));
             uni.append(temp);
         }
         return uni.toString();

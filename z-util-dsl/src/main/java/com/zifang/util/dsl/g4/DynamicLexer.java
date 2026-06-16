@@ -500,9 +500,10 @@ public class DynamicLexer implements Lexer {
      * 获取下一个Token
      */
     private Token nextToken() {
-        // 跳过空白字符
+        // 跳过空白字符（不包括换行符 LF，换行符留给词法规则匹配）
         while (pos < chars.length && isWhitespace(chars[pos])) {
             if (chars[pos] == '\n') {
+                // 永远不会进来：isWhitespace 不再匹配 \n
                 line++;
                 column = 1;
             } else {
@@ -582,7 +583,9 @@ public class DynamicLexer implements Lexer {
     }
 
     private boolean isWhitespace(char ch) {
-        return ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n';
+        // 只跳过空格、Tab 和回车符（CR），不跳过换行符（LF）。
+        // 换行符是 G4 语法中常见的 token（如 NL、NEWLINE），必须留给词法规则去匹配。
+        return ch == ' ' || ch == '\t' || ch == '\r';
     }
 
     @Override

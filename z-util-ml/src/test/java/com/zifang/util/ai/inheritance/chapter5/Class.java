@@ -1,4 +1,4 @@
-package com.zifang.util.ml.inheritance.chapter5;
+package com.zifang.util.ai.inheritance.chapter5;
 
 /**
  * A simple class abstraction -- basically a container for class, group, module, professor, timeslot, and room IDs

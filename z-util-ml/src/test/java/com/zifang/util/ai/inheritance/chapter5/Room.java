@@ -1,4 +1,4 @@
-package com.zifang.util.ml.inheritance.chapter5;
+package com.zifang.util.ai.inheritance.chapter5;
 
 /**
  * Simple Room abstraction -- used to store the room capacity and compare against the student Group's size.

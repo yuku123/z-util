@@ -1,24 +1,22 @@
 package com.zifang.util.parser.ini;
 
-import com.zifang.util.dsl.core.ASTNode;
-import com.zifang.util.dsl.core.TokenReader;
 import com.zifang.util.dsl.g4.DynamicLexer;
-import com.zifang.util.dsl.g4.DynamicParser;
+import com.zifang.util.dsl.token.Token;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * 基于 G4 DSL 的 INI 解析器。
  * <p>
- * 使用 DynamicLexer + DynamicParser 加载 IniLexer.g4 + IniParser.g4，
- * 无任何第三方依赖。
+ * 使用 DynamicLexer 加载 IniLexer.g4 做词法分析，
+ * 词法层完全由 G4 grammar 动态驱动，token 流由 Java 代码组装为 IniFile。
  * <p>
- * 支持：section、key=value、注释（; 或 #）、空行。
- * 注：续行（行尾 \）和 inline 注释（值中间的 ; 或 #）由本类在 AST 转换时处理。
+ * 优势：语法扩展只需修改 IniLexer.g4，无需改动 Java 代码。
  */
 /**
  * IniG4Parser类。
@@ -26,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 public class IniG4Parser {
 
     private static final String LEXER_G4 = "IniLexer.g4";
-    private static final String PARSER_G4 = "IniParser.g4";
 
     /**
      * 解析 INI 字符串。
@@ -63,24 +60,17 @@ public class IniG4Parser {
     }
 
     private IniFile parseString(String content) {
+        IniFile iniFile = new IniFile();
         if (content == null || content.isEmpty()) {
-            return new IniFile();
+            return iniFile;
         }
         try {
             String lexerG4 = loadG4(LEXER_G4);
-            String parserG4 = loadG4(PARSER_G4);
-
             DynamicLexer lexer = new DynamicLexer();
             lexer.loadG4(lexerG4);
             lexer.setInput(content);
-            TokenReader tokenReader = lexer.getTokenReader();
-
-            DynamicParser parser = new DynamicParser();
-            parser.loadG4(parserG4);
-            parser.setTokenReader(tokenReader);
-            ASTNode ast = parser.parse("file");
-
-            return astToIniFile(ast);
+            List<Token> tokens = lexer.tokenize();
+            return tokensToIniFile(tokens);
         } catch (IniException e) {
             throw e;
         } catch (Exception e) {
@@ -104,24 +94,24 @@ public class IniG4Parser {
         }
     }
 
-    // ==================== AST → IniFile ====================
+    // ==================== Token 流 → IniFile ====================
 
-    private IniFile astToIniFile(ASTNode node) {
+    private IniFile tokensToIniFile(List<Token> tokens) {
         IniFile iniFile = new IniFile();
         IniSection currentSection = null;
 
-        for (ASTNode line : node.getChildren()) {
-            if (!"LINE".equals(line.getType())) continue;
-            String text = line.getText();
+        for (Token tok : tokens) {
+            String name = tok.getTokenName();
+            String text = tok.getText();
+            if (!"LINE".equals(name)) continue;
             if (text == null) continue;
             String trimmed = text.trim();
             if (trimmed.isEmpty()) continue;
-            // 注释（理论上 COMMENT 已被 lexer 隐藏，但保险起见）
             if (trimmed.startsWith(";") || trimmed.startsWith("#")) continue;
             // section: [name]
             if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
-                String name = trimmed.substring(1, trimmed.length() - 1).trim();
-                currentSection = new IniSection(name);
+                String sectionName = trimmed.substring(1, trimmed.length() - 1).trim();
+                currentSection = new IniSection(sectionName);
                 iniFile.addSection(currentSection);
                 continue;
             }
@@ -142,7 +132,6 @@ public class IniG4Parser {
     }
 
     private int findUnquotedEquals(String s) {
-        // 找到第一个不在引号内的 =
         boolean inDq = false, inSq = false;
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);

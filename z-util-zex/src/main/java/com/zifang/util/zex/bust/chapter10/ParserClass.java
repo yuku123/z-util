@@ -172,20 +172,19 @@ public class ParserClass {
         System.out.printf("%s 类是否继承自 %s: %s%n", Son.class.getName(), Father.class.getName(), Son.class.isAssignableFrom(Father.class));
 
         System.out.println("\n");
+        // 匿名类（new Runnable() {...}）与局部类（class LocalClass {}）的区别
         System.out.printf("%s 类实例是是匿名类 : %s%n", ParserClass.class.getName(), new ParserClass().getClass().isAnonymousClass());
-        System.out.printf("%s 类实例是是匿名类 : %s%n", Son.class.getName(), new         class LocalClass {
+        System.out.printf("%s 类实例是是匿名类 : %s%n", Son.class.getName(), new Runnable() {
+            @Override
+            public void run() {
+                System.out.println();
+            }
         }.getClass().isAnonymousClass());
 
 
         System.out.println("\n");
-Runnable() {
-            @Override
-            /**
-             * run方法。
-             */
-            public void run() {
-                System.out.println();
-            }
+        // 局部类：在方法内部定义的命名类
+        class LocalClass {
         }
         System.out.printf("%s 类是否为局部类 : %s%n", LocalClass.class.getName(), LocalClass.class.isLocalClass());
         System.out.printf("%s 类是否为局部类 : %s%n", FieldLocalClass.class.getName(), FieldLocalClass.class.isLocalClass());

@@ -1,4 +1,4 @@
-package com.zifang.util.ml.inheritance.chapter5;
+package com.zifang.util.ai.inheritance.chapter5;
 
 /**
  * Simple course module abstraction, which defines the Professors teaching the module.

@@ -1,4 +1,4 @@
-package com.zifang.util.ml.inheritance.chapter5;
+package com.zifang.util.ai.inheritance.chapter5;
 
 /**
  * Simple timeslot abstraction -- just represents a timeslot (like "Wed 9:00am-11:00am").

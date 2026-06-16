@@ -1,32 +1,29 @@
 package com.zifang.util.parser.properties;
 
-import com.zifang.util.dsl.core.ASTNode;
-import com.zifang.util.dsl.core.TokenReader;
 import com.zifang.util.dsl.g4.DynamicLexer;
-import com.zifang.util.dsl.g4.DynamicParser;
+import com.zifang.util.dsl.token.Token;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * 基于 G4 DSL 的 Properties 解析器。
  * <p>
- * 使用 DynamicLexer + DynamicParser 加载 PropertiesLexer.g4 + PropertiesParser.g4，
- * 无任何第三方依赖。
+ * 使用 DynamicLexer 加载 PropertiesLexer.g4 做词法分析，
+ * 词法层完全由 G4 grammar 动态驱动，token 流由 Java 代码组装为 PropertiesModel。
  * <p>
- * 支持：key=value、key:value、注释（# 或 !）、空行。
- * 转义序列（\\t \\n \\r \\" \\\\ \\u005CuXXXX）和续行（行尾 \\）由本类在 AST 转换时处理。
+ * 优势：语法扩展只需修改 PropertiesLexer.g4，无需改动 Java 代码。
  */
 /**
  * PropertiesG4Parser类。
  */
 public class PropertiesG4Parser {
 
-    private static final String LEXER_G4 = "PropertiesLexer.g4";
-    private static final String PARSER_G4 = "PropertiesParser.g4";
+    public static final String LEXER_G4 = "PropertiesLexer.g4";
 
     /**
      * 解析 Properties 字符串。
@@ -69,19 +66,11 @@ public class PropertiesG4Parser {
         }
         try {
             String lexerG4 = loadG4(LEXER_G4);
-            String parserG4 = loadG4(PARSER_G4);
-
             DynamicLexer lexer = new DynamicLexer();
             lexer.loadG4(lexerG4);
             lexer.setInput(content);
-            TokenReader tokenReader = lexer.getTokenReader();
-
-            DynamicParser parser = new DynamicParser();
-            parser.loadG4(parserG4);
-            parser.setTokenReader(tokenReader);
-            ASTNode ast = parser.parse("file");
-
-            return astToModel(ast, model);
+            List<Token> tokens = lexer.tokenize();
+            return tokensToModel(tokens, model);
         } catch (PropertiesException e) {
             throw e;
         } catch (Exception e) {
@@ -105,28 +94,30 @@ public class PropertiesG4Parser {
         }
     }
 
-    // ==================== AST → PropertiesModel ====================
+    // ==================== Token 流 → PropertiesModel ====================
 
-    private PropertiesModel astToModel(ASTNode node, PropertiesModel model) {
-        if (node == null) return model;
-        for (ASTNode entry : node.getChildren()) {
-            if (!"entry".equals(entry.getType())) continue;
-            String key = null;
-            String value = "";
-            for (ASTNode sub : entry.getChildren()) {
-                String st = sub.getType();
-                if ("KEY".equals(st)) {
-                    key = sub.getText();
-                } else if ("VALUE".equals(st)) {
-                    value = sub.getText() == null ? "" : sub.getText();
+    private PropertiesModel tokensToModel(List<Token> tokens, PropertiesModel model) {
+        String pendingKey = null;
+        boolean afterSeparator = false;
+        for (Token tok : tokens) {
+            String name = tok.getTokenName();
+            String text = tok.getText();
+            if ("IDENTIFIER".equals(name)) {
+                if (afterSeparator && pendingKey != null) {
+                    // value
+                    model.setProperty(pendingKey.trim(), decodeEscapeSequence(text == null ? "" : text));
+                    pendingKey = null;
+                    afterSeparator = false;
+                } else {
+                    // key
+                    pendingKey = text == null ? "" : text;
+                }
+            } else if ("SEPARATOR".equals(name)) {
+                if (pendingKey != null) {
+                    afterSeparator = true;
                 }
             }
-            if (key == null || key.isEmpty()) continue;
-            // 去除 key 尾部空白
-            key = key.trim();
-            // 解码 value 中的转义序列
-            value = decodeEscapeSequence(value);
-            model.setProperty(key, value);
+            // WS / NL / COMMENT 忽略
         }
         return model;
     }

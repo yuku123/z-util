@@ -160,9 +160,14 @@ public class DynamicLexerTest {
         List<Token> tokens = lexer.tokenize();
 
         assertNotNull(tokens);
-        assertEquals(2, tokens.size());
+        // 修复：换行符不再被 isWhitespace 跳过，会作为 NEWLINE token 发射
+        assertEquals(3, tokens.size());
+        assertEquals("ID", tokens.get(0).getTokenName());
         assertEquals(1, tokens.get(0).getLine());
-        assertEquals(2, tokens.get(1).getLine());
+        assertEquals("NEWLINE", tokens.get(1).getTokenName());
+        assertEquals(1, tokens.get(1).getLine());
+        assertEquals("ID", tokens.get(2).getTokenName());
+        assertEquals(2, tokens.get(2).getLine());
     }
 
     @Test

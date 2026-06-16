@@ -111,7 +111,7 @@ public class Hex {
             intAsc = (int) c;
             strHex = Integer.toHexString(intAsc);
             if (intAsc > 128) {
-                str.append("\\u005Cu" + strHex);
+                str.append("\\u" + strHex);
             } else {
                 // 低位在前面补00
                 str.append("\\u005Cu00" + strHex);

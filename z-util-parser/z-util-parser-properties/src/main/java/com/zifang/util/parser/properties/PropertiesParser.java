@@ -477,7 +477,7 @@ public class PropertiesParser extends java.util.Properties {
                     break;
                 default:
                     if (c < 0x20 || c > 0x7e) {
-                        sb.append("\\u005Cu");
+                        sb.append("\\u");
                         String hex = Integer.toHexString(c);
                         while (hex.length() < 4) {
                             hex = "0" + hex;

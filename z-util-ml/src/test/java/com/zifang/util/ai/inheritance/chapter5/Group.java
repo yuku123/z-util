@@ -1,4 +1,4 @@
-package com.zifang.util.ml.inheritance.chapter5;
+package com.zifang.util.ai.inheritance.chapter5;
 
 /**
  * A simple "group-of-students" abstraction. Defines the modules that the group is enrolled in.
