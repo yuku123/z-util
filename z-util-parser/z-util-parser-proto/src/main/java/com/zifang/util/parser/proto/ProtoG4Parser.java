@@ -214,10 +214,9 @@ public class ProtoG4Parser {
     }
 
     private int parseField(List<Token> tokens, int i, ProtoMessage message) {
-        // (REPEATED | OPTIONAL | REQUIRED)? type IDENTIFIER EQUALS INT_LITERAL SEMI
+        // 简化版：从当前位置向后扫，收集 type，找到 IDENTIFIER EQUALS INT_LITERAL SEMI 模式
         int j = i;
         boolean repeated = false;
-        // skip modifier
         if (j < tokens.size()) {
             String tn = tokens.get(j).getTokenName();
             if ("REPEATED".equals(tn) || "OPTIONAL".equals(tn) || "REQUIRED".equals(tn)) {
@@ -225,36 +224,38 @@ public class ProtoG4Parser {
                 j++;
             }
         }
-        // type: scalarType keyword or IDENTIFIER (DOT IDENTIFIER)*
+        // 扫到 EQUALS 为止，前面是 type
         StringBuilder typeBuilder = new StringBuilder();
         while (j < tokens.size()) {
             String tn = tokens.get(j).getTokenName();
+            if ("EQUALS".equals(tn)) break;
+            String text = tokens.get(j).getText();
             if ("DOT".equals(tn)) {
-                typeBuilder.append('.');
-                j++;
-            } else if ("IDENTIFIER".equals(tn)) {
-                if (typeBuilder.length() > 0 && typeBuilder.charAt(typeBuilder.length() - 1) != '.') {
+                if (typeBuilder.length() > 0) typeBuilder.append('.');
+            } else {
+                if (typeBuilder.length() > 0 && !typeBuilder.toString().endsWith(".")) {
                     typeBuilder.append('.');
                 }
-                typeBuilder.append(tokens.get(j).getText());
-                j++;
-            } else if ("EQUALS".equals(tn)) {
-                break;
-            } else {
-                // 其他 keyword（int32, string 等）
-                if (typeBuilder.length() > 0) typeBuilder.append('.');
-                typeBuilder.append(tn);
-                j++;
+                typeBuilder.append(text);
             }
+            j++;
         }
-        // IDENTIFIER (name) EQUALS INT_LITERAL SEMI
-        if (j + 3 < tokens.size() && "IDENTIFIER".equals(tokens.get(j).getTokenName())) {
-            String name = tokens.get(j).getText();
+        // j 指向 EQUALS
+        if (j + 3 < tokens.size()
+                && "IDENTIFIER".equals(tokens.get(j + 1).getTokenName())
+                && "INT_LITERAL".equals(tokens.get(j + 2).getTokenName())) {
+            // 但上面的 type 已经把 field name 也吸进去了！需要回退
+            // 简单处理：如果 typeBuilder 以 IDENTIFIER 结尾，那最后一段就是 field name
+            // 找到最后一个点之后的段作为 field name
+            String typeStr = typeBuilder.toString();
+            int lastDot = typeStr.lastIndexOf('.');
+            String actualType = lastDot >= 0 ? typeStr.substring(0, lastDot) : "";
+            String fieldName = lastDot >= 0 ? typeStr.substring(lastDot + 1) : typeStr;
             int tag = Integer.parseInt(tokens.get(j + 2).getText());
-            message.addField(new ProtoField(typeBuilder.toString(), name, tag, repeated));
-            return j + 5; // skip IDENTIFIER EQUALS INT_LITERAL SEMI
+            message.addField(new ProtoField(actualType, fieldName, tag, repeated));
+            return j + 4; // skip EQUALS IDENTIFIER INT_LITERAL SEMI
         }
-        return j;
+        return j + 1;
     }
 
     private int parseService(List<Token> tokens, int i, ProtoDocument doc) {
@@ -274,8 +275,6 @@ public class ProtoG4Parser {
     }
 
     private int parseRpc(List<Token> tokens, int i, ProtoService service) {
-        // RPC IDENTIFIER LPAREN (STREAM)? IDENTIFIER RPAREN RETURNS LPAREN (STREAM)? IDENTIFIER RPAREN SEMI|LBRACE
-        // 简化：取前 3 个 IDENTIFIER 作为 name, inputType, outputType
         java.util.List<String> idents = new java.util.ArrayList<>();
         int j = i + 1; // skip RPC
         while (j < tokens.size() && idents.size() < 3) {
