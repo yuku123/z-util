@@ -1,32 +1,30 @@
 package com.zifang.util.parser.proto;
 
-import com.zifang.util.dsl.core.ASTNode;
-import com.zifang.util.dsl.core.TokenReader;
 import com.zifang.util.dsl.g4.DynamicLexer;
-import com.zifang.util.dsl.g4.DynamicParser;
+import com.zifang.util.dsl.token.Token;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * 基于 G4 DSL 的 Proto3 解析器。
  * <p>
- * 使用 DynamicLexer + DynamicParser 加载 ProtoLexer.g4 + ProtoParser.g4，
- * 无任何第三方依赖。
+ * 使用 DynamicLexer 加载 ProtoLexer.g4 做词法分析，
+ * 词法层完全由 G4 grammar 动态驱动，token 流由 Java 代码组装为 ProtoDocument。
  * <p>
  * 支持 proto3 子集：syntax、package、import、message（含 nested message/enum/field）、
- * enum、service、rpc（含 stream）。
+ * enum、service、rpc。
  */
 /**
  * ProtoG4Parser类。
  */
 public class ProtoG4Parser {
 
-    private static final String LEXER_G4 = "ProtoLexer.g4";
-    private static final String PARSER_G4 = "ProtoParser.g4";
+    public static final String LEXER_G4 = "ProtoLexer.g4";
 
     /**
      * 解析 Proto 字符串。
@@ -68,45 +66,11 @@ public class ProtoG4Parser {
 
         try {
             String lexerG4 = loadG4(LEXER_G4);
-            String parserG4 = loadG4(PARSER_G4);
-
             DynamicLexer lexer = new DynamicLexer();
             lexer.loadG4(lexerG4);
             lexer.setInput(content);
-            TokenReader tokenReader = lexer.getTokenReader();
-
-            DynamicParser parser = new DynamicParser();
-            parser.loadG4(parserG4);
-            parser.setTokenReader(tokenReader);
-            ASTNode ast = parser.parse("file");
-
-            for (ASTNode top : ast.getChildren()) {
-                if (!"topDecl".equals(top.getType())) continue;
-                ASTNode decl = top.getChildren().isEmpty() ? null : top.getChildren().get(0);
-                if (decl == null) continue;
-                String type = decl.getType();
-                switch (type) {
-                    case "syntaxDecl":
-                        doc.setSyntax(extractStringLiteral(decl));
-                        break;
-                    case "packageDecl":
-                        doc.setPackageName(extractDottedName(decl));
-                        break;
-                    case "importDecl":
-                        doc.getImports().add(extractStringLiteral(decl));
-                        break;
-                    case "messageDecl":
-                        doc.getMessages().add(parseMessage(decl));
-                        break;
-                    case "serviceDecl":
-                        doc.getServices().add(parseService(decl));
-                        break;
-                    // top-level enum 暂不放入 ProtoDocument（proto3 不支持顶层 enum，仅 message 内嵌）
-                    default:
-                        break;
-                }
-            }
-            return doc;
+            List<Token> tokens = lexer.tokenize();
+            return tokensToDocument(tokens, doc);
         } catch (ProtoException e) {
             throw e;
         } catch (Exception e) {
@@ -130,166 +94,221 @@ public class ProtoG4Parser {
         }
     }
 
-    // ==================== AST → Proto 模型 ====================
+    // ==================== Token 流 → ProtoDocument ====================
 
-    private ProtoMessage parseMessage(ASTNode messageDecl) {
-        String name = findIdentifierText(messageDecl);
-        ProtoMessage message = new ProtoMessage(name);
-        ASTNode body = findChildByType(messageDecl, "messageBody");
-        if (body == null) return message;
-        for (ASTNode item : body.getChildren()) {
-            if (!"messageBodyItem".equals(item.getType())) continue;
-            ASTNode inner = item.getChildren().isEmpty() ? null : item.getChildren().get(0);
-            if (inner == null) continue;
-            String t = inner.getType();
-            if ("fieldDecl".equals(t)) {
-                message.addField(parseField(inner));
-            } else if ("messageDecl".equals(t)) {
-                message.getMessages().add(parseMessage(inner));
-            } else if ("enumDecl".equals(t)) {
-                message.getEnums().add(parseEnum(inner));
+    private ProtoDocument tokensToDocument(List<Token> tokens, ProtoDocument doc) {
+        int i = 0;
+        while (i < tokens.size()) {
+            Token t = tokens.get(i);
+            String name = t.getTokenName();
+            if ("SYNTAX".equals(name)) {
+                // syntax = "proto3";
+                i = parseSyntax(tokens, i, doc);
+            } else if ("PACKAGE".equals(name)) {
+                i = parsePackage(tokens, i, doc);
+            } else if ("IMPORT".equals(name)) {
+                i = parseImport(tokens, i, doc);
+            } else if ("MESSAGE".equals(name)) {
+                i = parseMessage(tokens, i, doc, null);
+            } else if ("SERVICE".equals(name)) {
+                i = parseService(tokens, i, doc);
+            } else {
+                i++;
             }
         }
-        return message;
+        return doc;
     }
 
-    private ProtoEnum parseEnum(ASTNode enumDecl) {
-        String name = findIdentifierText(enumDecl);
-        ProtoEnum protoEnum = new ProtoEnum(name);
-        ASTNode body = findChildByType(enumDecl, "enumBody");
-        if (body == null) return protoEnum;
-        for (ASTNode item : body.getChildren()) {
-            if (!"enumField".equals(item.getType())) continue;
-            String enumName = null;
-            int value = 0;
-            for (ASTNode sub : item.getChildren()) {
-                if ("IDENTIFIER".equals(sub.getType())) {
-                    enumName = sub.getText();
-                } else if ("INT_LITERAL".equals(sub.getType())) {
-                    try { value = Integer.parseInt(sub.getText()); } catch (NumberFormatException ignored) {}
-                }
-            }
-            if (enumName != null) protoEnum.addValue(enumName, value);
+    private int parseSyntax(List<Token> tokens, int i, ProtoDocument doc) {
+        // SYNTAX EQUALS STRING_LITERAL SEMI
+        if (i + 3 < tokens.size()
+                && "EQUALS".equals(tokens.get(i + 1).getTokenName())
+                && "STRING_LITERAL".equals(tokens.get(i + 2).getTokenName())) {
+            doc.setSyntax(unquote(tokens.get(i + 2).getText()));
+            return i + 4; // skip SEMI
         }
-        return protoEnum;
+        return i + 1;
     }
 
-    private ProtoService parseService(ASTNode serviceDecl) {
-        String name = findIdentifierText(serviceDecl);
-        ProtoService service = new ProtoService(name);
-        ASTNode body = findChildByType(serviceDecl, "serviceBody");
-        if (body == null) return service;
-        for (ASTNode item : body.getChildren()) {
-            if (!"rpcDecl".equals(item.getType())) continue;
-            String rpcName = null;
-            String inputType = null;
-            String outputType = null;
-            // 收集所有 IDENTIFIER 节点，按顺序：name, inputType, outputType
-            // 但要跳过 STREAM 关键字
-            java.util.List<String> idents = new java.util.ArrayList<>();
-            boolean afterReturns = false;
-            for (ASTNode sub : item.getChildren()) {
-                String st = sub.getType();
-                if ("IDENTIFIER".equals(st)) {
-                    idents.add(sub.getText());
-                }
+    private int parsePackage(List<Token> tokens, int i, ProtoDocument doc) {
+        // PACKAGE (IDENTIFIER DOT)* IDENTIFIER SEMI
+        StringBuilder sb = new StringBuilder();
+        int j = i + 1;
+        while (j < tokens.size()) {
+            String tn = tokens.get(j).getTokenName();
+            if ("SEMI".equals(tn)) {
+                doc.setPackageName(sb.toString());
+                return j + 1;
             }
-            // 第一个 IDENTIFIER 是 rpc name，后两个是 input/output
-            if (idents.size() >= 1) rpcName = idents.get(0);
-            if (idents.size() >= 2) inputType = idents.get(1);
-            if (idents.size() >= 3) outputType = idents.get(2);
-            if (rpcName != null) {
-                service.addRpc(new ProtoRpc(rpcName, inputType, outputType));
+            if ("DOT".equals(tn)) {
+                sb.append('.');
+            } else if ("IDENTIFIER".equals(tn)) {
+                if (sb.length() > 0 && sb.charAt(sb.length() - 1) != '.') sb.append('.');
+                sb.append(tokens.get(j).getText());
+            }
+            j++;
+        }
+        return j;
+    }
+
+    private int parseImport(List<Token> tokens, int i, ProtoDocument doc) {
+        // IMPORT (PUBLIC | WEAK)? STRING_LITERAL SEMI
+        int j = i + 1;
+        while (j < tokens.size() && !"SEMI".equals(tokens.get(j).getTokenName())) {
+            if ("STRING_LITERAL".equals(tokens.get(j).getTokenName())) {
+                doc.getImports().add(unquote(tokens.get(j).getText()));
+            }
+            j++;
+        }
+        return j + 1; // skip SEMI
+    }
+
+    private int parseMessage(List<Token> tokens, int i, ProtoDocument doc, ProtoMessage parent) {
+        // MESSAGE IDENTIFIER LBRACE ... RBRACE
+        if (i + 2 >= tokens.size()) return i + 1;
+        String msgName = tokens.get(i + 1).getText();
+        ProtoMessage message = new ProtoMessage(msgName);
+        int j = i + 3; // skip MESSAGE IDENTIFIER LBRACE
+        while (j < tokens.size() && !"RBRACE".equals(tokens.get(j).getTokenName())) {
+            String tn = tokens.get(j).getTokenName();
+            if ("MESSAGE".equals(tn)) {
+                j = parseMessage(tokens, j, doc, message);
+            } else if ("ENUM".equals(tn)) {
+                j = parseEnum(tokens, j, message);
+            } else if ("SEMI".equals(tn)) {
+                j++;
+            } else if (isFieldStart(tn)) {
+                j = parseField(tokens, j, message);
+            } else {
+                j++;
             }
         }
-        return service;
+        if (parent != null) {
+            parent.getMessages().add(message);
+        } else {
+            doc.getMessages().add(message);
+        }
+        return j + 1; // skip RBRACE
     }
 
-    private ProtoField parseField(ASTNode fieldDecl) {
+    private int parseEnum(List<Token> tokens, int i, ProtoMessage parent) {
+        // ENUM IDENTIFIER LBRACE ... RBRACE
+        if (i + 2 >= tokens.size()) return i + 1;
+        ProtoEnum protoEnum = new ProtoEnum(tokens.get(i + 1).getText());
+        int j = i + 3; // skip ENUM IDENTIFIER LBRACE
+        while (j < tokens.size() && !"RBRACE".equals(tokens.get(j).getTokenName())) {
+            String tn = tokens.get(j).getTokenName();
+            if ("IDENTIFIER".equals(tn) && j + 2 < tokens.size()
+                    && "EQUALS".equals(tokens.get(j + 1).getTokenName())
+                    && "INT_LITERAL".equals(tokens.get(j + 2).getTokenName())) {
+                String name = tokens.get(j).getText();
+                int val = Integer.parseInt(tokens.get(j + 2).getText());
+                protoEnum.addValue(name, val);
+                j += 4; // skip IDENTIFIER EQUALS INT_LITERAL SEMI
+            } else {
+                j++;
+            }
+        }
+        parent.getEnums().add(protoEnum);
+        return j + 1;
+    }
+
+    private int parseField(List<Token> tokens, int i, ProtoMessage message) {
+        // (REPEATED | OPTIONAL | REQUIRED)? type IDENTIFIER EQUALS INT_LITERAL SEMI
+        int j = i;
         boolean repeated = false;
-        String type = null;
-        String name = null;
-        int tag = 0;
-        for (ASTNode sub : fieldDecl.getChildren()) {
-            String st = sub.getType();
-            if ("REPEATED".equals(st)) repeated = true;
-            else if ("OPTIONAL".equals(st) || "REQUIRED".equals(st)) { /* 修饰符，忽略 */ }
-            else if ("type".equals(st)) {
-                type = extractTypeText(sub);
-            } else if ("IDENTIFIER".equals(st)) {
-                name = sub.getText();
-            } else if ("INT_LITERAL".equals(st)) {
-                try { tag = Integer.parseInt(sub.getText()); } catch (NumberFormatException ignored) {}
+        // skip modifier
+        if (j < tokens.size()) {
+            String tn = tokens.get(j).getTokenName();
+            if ("REPEATED".equals(tn) || "OPTIONAL".equals(tn) || "REQUIRED".equals(tn)) {
+                repeated = "REPEATED".equals(tn);
+                j++;
             }
         }
-        if (type == null) type = "";
-        if (name == null) name = "";
-        return new ProtoField(type, name, tag, repeated);
-    }
-
-    // ==================== 工具方法 ====================
-
-    private ASTNode findChildByType(ASTNode node, String type) {
-        if (node == null) return null;
-        for (ASTNode c : node.getChildren()) {
-            if (type.equals(c.getType())) return c;
-        }
-        return null;
-    }
-
-    private String findIdentifierText(ASTNode decl) {
-        for (ASTNode c : decl.getChildren()) {
-            if ("IDENTIFIER".equals(c.getType())) return c.getText();
-        }
-        return "";
-    }
-
-    private String extractStringLiteral(ASTNode decl) {
-        for (ASTNode c : decl.getChildren()) {
-            if ("STRING_LITERAL".equals(c.getType())) {
-                String t = c.getText();
-                if (t != null && t.length() >= 2) {
-                    return t.substring(1, t.length() - 1);
+        // type: scalarType keyword or IDENTIFIER (DOT IDENTIFIER)*
+        StringBuilder typeBuilder = new StringBuilder();
+        while (j < tokens.size()) {
+            String tn = tokens.get(j).getTokenName();
+            if ("DOT".equals(tn)) {
+                typeBuilder.append('.');
+                j++;
+            } else if ("IDENTIFIER".equals(tn)) {
+                if (typeBuilder.length() > 0 && typeBuilder.charAt(typeBuilder.length() - 1) != '.') {
+                    typeBuilder.append('.');
                 }
-                return t;
+                typeBuilder.append(tokens.get(j).getText());
+                j++;
+            } else if ("EQUALS".equals(tn)) {
+                break;
+            } else {
+                // 其他 keyword（int32, string 等）
+                if (typeBuilder.length() > 0) typeBuilder.append('.');
+                typeBuilder.append(tn);
+                j++;
             }
         }
-        return "";
+        // IDENTIFIER (name) EQUALS INT_LITERAL SEMI
+        if (j + 3 < tokens.size() && "IDENTIFIER".equals(tokens.get(j).getTokenName())) {
+            String name = tokens.get(j).getText();
+            int tag = Integer.parseInt(tokens.get(j + 2).getText());
+            message.addField(new ProtoField(typeBuilder.toString(), name, tag, repeated));
+            return j + 5; // skip IDENTIFIER EQUALS INT_LITERAL SEMI
+        }
+        return j;
     }
 
-    private String extractDottedName(ASTNode packageDecl) {
-        StringBuilder sb = new StringBuilder();
-        boolean first = true;
-        for (ASTNode c : packageDecl.getChildren()) {
-            if ("IDENTIFIER".equals(c.getType())) {
-                if (!first) sb.append('.');
-                sb.append(c.getText());
-                first = false;
+    private int parseService(List<Token> tokens, int i, ProtoDocument doc) {
+        // SERVICE IDENTIFIER LBRACE rpcDecl* RBRACE
+        if (i + 2 >= tokens.size()) return i + 1;
+        ProtoService service = new ProtoService(tokens.get(i + 1).getText());
+        int j = i + 3; // skip SERVICE IDENTIFIER LBRACE
+        while (j < tokens.size() && !"RBRACE".equals(tokens.get(j).getTokenName())) {
+            if ("RPC".equals(tokens.get(j).getTokenName())) {
+                j = parseRpc(tokens, j, service);
+            } else {
+                j++;
             }
         }
-        return sb.toString();
+        doc.getServices().add(service);
+        return j + 1;
     }
 
-    private String extractTypeText(ASTNode typeNode) {
-        StringBuilder sb = new StringBuilder();
-        for (ASTNode c : typeNode.getChildren()) {
-            String t = c.getType();
-            if ("IDENTIFIER".equals(t) || "scalarType".equals(t)) {
-                String text = c.getText();
-                if (text != null && !text.isEmpty()) {
-                    if (sb.length() > 0) sb.append('.');
-                    sb.append(text);
-                } else {
-                    // scalarType 内部还有子节点
-                    for (ASTNode sub : c.getChildren()) {
-                        if (sb.length() > 0 && sb.charAt(sb.length() - 1) != '.') sb.append('.');
-                        sb.append(sub.getText());
-                    }
-                }
-            } else if ("DOT".equals(t)) {
-                // 跳过，G4 会处理
+    private int parseRpc(List<Token> tokens, int i, ProtoService service) {
+        // RPC IDENTIFIER LPAREN (STREAM)? IDENTIFIER RPAREN RETURNS LPAREN (STREAM)? IDENTIFIER RPAREN SEMI|LBRACE
+        // 简化：取前 3 个 IDENTIFIER 作为 name, inputType, outputType
+        java.util.List<String> idents = new java.util.ArrayList<>();
+        int j = i + 1; // skip RPC
+        while (j < tokens.size() && idents.size() < 3) {
+            if ("SEMI".equals(tokens.get(j).getTokenName()) || "LBRACE".equals(tokens.get(j).getTokenName())) {
+                break;
             }
+            if ("IDENTIFIER".equals(tokens.get(j).getTokenName())) {
+                idents.add(tokens.get(j).getText());
+            }
+            j++;
         }
-        return sb.toString();
+        if (idents.size() >= 3) {
+            service.addRpc(new ProtoRpc(idents.get(0), idents.get(1), idents.get(2)));
+        }
+        // skip to SEMI or matching RBRACE
+        while (j < tokens.size() && !"SEMI".equals(tokens.get(j).getTokenName())
+                && !"RBRACE".equals(tokens.get(j).getTokenName())) {
+            j++;
+        }
+        if (j < tokens.size() && "SEMI".equals(tokens.get(j).getTokenName())) j++;
+        return j;
+    }
+
+    private boolean isFieldStart(String tn) {
+        return "REPEATED".equals(tn) || "OPTIONAL".equals(tn) || "REQUIRED".equals(tn)
+                || "IDENTIFIER".equals(tn)
+                || "INT32".equals(tn) || "INT64".equals(tn) || "STRING".equals(tn)
+                || "BOOL".equals(tn) || "DOUBLE".equals(tn) || "FLOAT".equals(tn)
+                || "BYTES".equals(tn);
+    }
+
+    private String unquote(String s) {
+        if (s == null || s.length() < 2) return s;
+        return s.substring(1, s.length() - 1);
     }
 }
