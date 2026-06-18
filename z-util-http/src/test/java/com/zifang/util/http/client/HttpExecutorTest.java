@@ -11,6 +11,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -55,7 +56,14 @@ public class HttpExecutorTest {
 
         // POST /echo  (回写 body)
         server.createContext("/echo", ex -> {
-            byte[] body = ex.getRequestBody().readAllBytes();
+            java.io.InputStream in = ex.getRequestBody();
+            ByteArrayOutputStream buf = new ByteArrayOutputStream();
+            byte[] chunk = new byte[4096];
+            int n;
+            while ((n = in.read(chunk)) != -1) {
+                buf.write(chunk, 0, n);
+            }
+            byte[] body = buf.toByteArray();
             ex.getResponseHeaders().add("Content-Type", "application/json");
             ex.sendResponseHeaders(200, body.length == 0 ? 0 : body.length);
             if (body.length > 0) ex.getResponseBody().write(body);
@@ -142,9 +150,11 @@ public class HttpExecutorTest {
     @Test
     public void test_executeByMethodUrl_POST_json() {
         String body = "{\"name\":\"alice\"}";
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
         HttpExecutionResult r = executor.executeByMethodUrl(
                 "POST", base() + "/echo",
-                Map.of("Content-Type", "application/json"),
+                headers,
                 body);
         assertTrue("should succeed", r.isSuccess());
         assertEquals(200, r.getStatus());
@@ -170,9 +180,12 @@ public class HttpExecutorTest {
 
     @Test
     public void test_executeByMethodUrl_withHeaders() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("X-Custom-Header", "test-123");
+        headers.put("Accept", "application/json");
         HttpExecutionResult r = executor.executeByMethodUrl(
                 "GET", base() + "/hello",
-                Map.of("X-Custom-Header", "test-123", "Accept", "application/json"),
+                headers,
                 null);
         assertTrue(r.isSuccess());
         assertEquals(200, r.getStatus());
@@ -289,7 +302,9 @@ public class HttpExecutorTest {
 
     @Test
     public void test_result_factory_ok() {
-        HttpExecutionResult r = HttpExecutionResult.ok(200, Map.of("X", "y"), "body", 123L);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("X", "y");
+        HttpExecutionResult r = HttpExecutionResult.ok(200, headers, "body", 123L);
         assertTrue(r.isSuccess());
         assertEquals(200, r.getStatus());
         assertEquals("body", r.getBody());
