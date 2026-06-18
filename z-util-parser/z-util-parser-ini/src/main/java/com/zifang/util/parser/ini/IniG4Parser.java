@@ -3,6 +3,7 @@ package com.zifang.util.parser.ini;
 import com.zifang.util.dsl.g4.DynamicLexer;
 import com.zifang.util.dsl.token.Token;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -81,12 +82,15 @@ public class IniG4Parser {
     // ==================== G4 加载 ====================
 
     private String loadG4(String name) {
-        try {
-            InputStream is = getClass().getClassLoader().getResourceAsStream(name);
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream(name)) {
             if (is == null) throw new IniException("G4文件未找到: " + name);
-            byte[] bytes = is.readAllBytes();
-            is.close();
-            return new String(bytes, StandardCharsets.UTF_8);
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            byte[] chunk = new byte[4096];
+            int n;
+            while ((n = is.read(chunk)) != -1) {
+                buffer.write(chunk, 0, n);
+            }
+            return new String(buffer.toByteArray(), StandardCharsets.UTF_8);
         } catch (IniException e) {
             throw e;
         } catch (Exception e) {
