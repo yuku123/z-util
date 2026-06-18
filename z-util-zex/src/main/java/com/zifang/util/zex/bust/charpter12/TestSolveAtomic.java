@@ -9,7 +9,6 @@ import java.lang.reflect.Field;
  *
  * @author zifang
  */
-@SuppressWarnings({"restricted", "removal"})
 public class TestSolveAtomic {
 
     private static long valueOffset;
