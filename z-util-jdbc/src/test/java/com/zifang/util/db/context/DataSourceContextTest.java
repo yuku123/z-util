@@ -46,7 +46,7 @@ public class DataSourceContextTest {
     public void testChainMethods() {
         DataSourceContext context = new DataSourceContext()
                 .scanPackage("com.example.repository")
-                .transationManager(new TransactionManager());
+                .transationManager(new TransactionManager(mockDataSource()));
 
         assertEquals("com.example.repository", context.getScanPackageName());
         assertNotNull(context.getTransactionManager());
@@ -91,7 +91,7 @@ public class DataSourceContextTest {
      */
     public void testTransactionManager() {
         DataSourceContext context = new DataSourceContext();
-        TransactionManager tm = new TransactionManager();
+        TransactionManager tm = new TransactionManager(mockDataSource());
 
         context.setTransactionManager(tm);
         assertNotNull(context.getTransactionManager());
@@ -176,7 +176,7 @@ public class DataSourceContextTest {
                 return null;
             }
         };
-        TransactionManager tm = new TransactionManager();
+        TransactionManager tm = new TransactionManager(mockDataSource());
 
         DataSourceContext ctx = new DataSourceContext()
                 .scanPackage("com.example")
