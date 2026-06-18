@@ -4,7 +4,6 @@ import com.zifang.util.http.client.HttpExecutionResult;
 import com.zifang.util.http.client.HttpExecutor;
 
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
@@ -104,6 +103,18 @@ public class HttpClientUtils {
 
     // ===================== 内部工具 =====================
 
+    /**
+     * URL 编码（UTF-8）。Java 8 的 URLEncoder.encode(String, String) 声明了
+     * checked UnsupportedEncodingException，UTF-8 始终支持，所以包成 unchecked。
+     */
+    private static String urlEncode(String s) {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        } catch (java.io.UnsupportedEncodingException e) {
+            throw new IllegalStateException("UTF-8 不可用", e);
+        }
+    }
+
     private static String appendQueryString(String url, Map<String, String> params) {
         if (params == null || params.isEmpty()) return url;
         StringBuilder sb = new StringBuilder(url);
@@ -111,9 +122,9 @@ public class HttpClientUtils {
         boolean first = true;
         for (Map.Entry<String, String> e : params.entrySet()) {
             if (!first) sb.append("&");
-            sb.append(URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8));
+            sb.append(urlEncode(e.getKey()));
             sb.append("=");
-            sb.append(URLEncoder.encode(e.getValue() == null ? "" : e.getValue(), StandardCharsets.UTF_8));
+            sb.append(urlEncode(e.getValue() == null ? "" : e.getValue()));
             first = false;
         }
         return sb.toString();
@@ -125,9 +136,9 @@ public class HttpClientUtils {
         boolean first = true;
         for (Map.Entry<String, String> e : params.entrySet()) {
             if (!first) sb.append("&");
-            sb.append(URLEncoder.encode(e.getKey(), StandardCharsets.UTF_8));
+            sb.append(urlEncode(e.getKey()));
             sb.append("=");
-            sb.append(URLEncoder.encode(e.getValue() == null ? "" : e.getValue(), StandardCharsets.UTF_8));
+            sb.append(urlEncode(e.getValue() == null ? "" : e.getValue()));
             first = false;
         }
         return sb.toString();
