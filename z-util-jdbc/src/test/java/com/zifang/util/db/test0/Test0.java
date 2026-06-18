@@ -4,7 +4,7 @@ import com.zifang.util.core.util.GsonUtil;
 import com.zifang.util.db.context.DataSourceContext;
 import com.zifang.util.db.context.DatasourceContextManager;
 import com.zifang.util.db.respository.RepositoryProxy;
-import com.zifang.util.db.transation.TranslationManager;
+import com.zifang.util.db.transaction.TransactionManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class Test0 {
         // 数据库上下文
         DataSourceContext dataSourceContext = new DataSourceContext()
                 .scanPackage("com.zifang.util.db")
-                .transationManager(new TranslationManager())
+                .transationManager(new TransactionManager())
                 .dataSourceFactory(new MysqlDatasourceFactory());
 
         // 注册数据库信息

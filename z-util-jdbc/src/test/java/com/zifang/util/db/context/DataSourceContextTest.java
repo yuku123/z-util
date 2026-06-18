@@ -1,6 +1,6 @@
 package com.zifang.util.db.context;
 
-import com.zifang.util.db.transation.TranslationManager;
+import com.zifang.util.db.transaction.TransactionManager;
 import org.junit.Test;
 
 import javax.sql.DataSource;
@@ -36,7 +36,7 @@ public class DataSourceContextTest {
     public void testChainMethods() {
         DataSourceContext context = new DataSourceContext()
                 .scanPackage("com.example.repository")
-                .transationManager(new TranslationManager());
+                .transationManager(new TransactionManager());
 
         assertEquals("com.example.repository", context.getScanPackageName());
         assertNotNull(context.getTransactionManager());
