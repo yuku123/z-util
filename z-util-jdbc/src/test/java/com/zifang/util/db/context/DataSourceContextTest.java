@@ -81,7 +81,7 @@ public class DataSourceContextTest {
      */
     public void testTransactionManager() {
         DataSourceContext context = new DataSourceContext();
-        TranslationManager tm = new TranslationManager();
+        TransactionManager tm = new TransactionManager();
 
         context.setTransactionManager(tm);
         assertNotNull(context.getTransactionManager());
@@ -166,7 +166,7 @@ public class DataSourceContextTest {
                 return null;
             }
         };
-        TranslationManager tm = new TranslationManager();
+        TransactionManager tm = new TransactionManager();
 
         DataSourceContext ctx = new DataSourceContext()
                 .scanPackage("com.example")
