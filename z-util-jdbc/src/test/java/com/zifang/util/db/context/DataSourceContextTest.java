@@ -17,6 +17,16 @@ import static org.junit.Assert.*;
  */
 public class DataSourceContextTest {
 
+    /**
+     * 创建一个不真正连库的 DataSource 桩对象，供仅测试 DataSourceContext 装配使用。
+     */
+    private static DataSource mockDataSource() {
+        return (DataSource) Proxy.newProxyInstance(
+                DataSource.class.getClassLoader(),
+                new Class<?>[]{DataSource.class},
+                (proxy, method, args) -> null);
+    }
+
     @Test
     /**
      * testDefaultConstructor方法。
