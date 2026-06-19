@@ -547,7 +547,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-expression</artifactId>
-                <version>5.3.39</version>
+                <version>7.0.8</version>
             </dependency>
 
             <!-- JUnit Jupiter (5.10.2 是 Java 8 末班车) -->
