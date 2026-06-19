@@ -5,11 +5,7 @@ import com.zifang.util.ioc.metadata.BeanDefinition;
 import com.zifang.util.ioc.metadata.BindingKey;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

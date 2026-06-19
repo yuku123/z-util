@@ -10,9 +10,9 @@ import com.zifang.util.numpy.Shape;
  */
 public class LogisticRegression {
 
-    private double learningRate;
-    private int nIterations;
-    private double lambda;
+    private final double learningRate;
+    private final int nIterations;
+    private final double lambda;
     private double[] weights;
     private double bias;
 
@@ -169,7 +169,7 @@ public class LogisticRegression {
             }
             z += weights[weights.length - 1];  // bias is stored in weights[d]
             double p = sigmoid(z);
-            proba[i * 2 + 0] = 1.0 - p;
+            proba[i * 2] = 1.0 - p;
             proba[i * 2 + 1] = p;
         }
 

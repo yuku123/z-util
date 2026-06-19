@@ -14,6 +14,57 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ConstructorInjectionTest {
 
+    @Test
+    void constructorInjection() {
+        Injector injector = Injector.createInjector(new CarModule());
+        Car car = injector.getInstance(Car.class);
+        assertNotNull(car);
+        assertEquals("Car with V8", car.describe());
+    }
+
+    @Test
+    void constructorInjectionWithQualifiedParameter() {
+        Injector injector = Injector.createInjector(new MultiArgModule());
+        MultiArgService svc = injector.getInstance(MultiArgService.class);
+        assertEquals("V8/MyApp", svc.describe());
+    }
+
+    @Test
+    void noArgClassCanBeInjected() {
+        Injector injector = Injector.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(NoArgService.class);
+            }
+        });
+        NoArgService svc = injector.getInstance(NoArgService.class);
+        assertEquals("noarg", svc.value());
+    }
+
+    @Test
+    void fallbackToPublicNoArgConstructor() {
+        Injector injector = Injector.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(DefaultCtor.class);
+            }
+        });
+        DefaultCtor svc = injector.getInstance(DefaultCtor.class);
+        assertEquals("default-ctor", svc.value);
+    }
+
+    @Test
+    void constructorWithoutUsableCtorFails() {
+        Injector injector = Injector.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(RequiresCtorArg.class);
+            }
+        });
+        // java.io.File 没有无参构造器，但被 @Inject 的字段需要一个无法解析的依赖
+        assertThrows(RuntimeException.class, () -> injector.getInstance(RequiresCtorArg.class));
+    }
+
     public interface Engine {
         String type();
     }
@@ -46,14 +97,6 @@ class ConstructorInjectionTest {
         }
     }
 
-    @Test
-    void constructorInjection() {
-        Injector injector = Injector.createInjector(new CarModule());
-        Car car = injector.getInstance(Car.class);
-        assertNotNull(car);
-        assertEquals("Car with V8", car.describe());
-    }
-
     public static class MultiArgService {
         private final Engine engine;
         private final String name;
@@ -78,30 +121,11 @@ class ConstructorInjectionTest {
         }
     }
 
-    @Test
-    void constructorInjectionWithQualifiedParameter() {
-        Injector injector = Injector.createInjector(new MultiArgModule());
-        MultiArgService svc = injector.getInstance(MultiArgService.class);
-        assertEquals("V8/MyApp", svc.describe());
-    }
-
     @Singleton
     public static class NoArgService {
         public String value() {
             return "noarg";
         }
-    }
-
-    @Test
-    void noArgClassCanBeInjected() {
-        Injector injector = Injector.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(NoArgService.class);
-            }
-        });
-        NoArgService svc = injector.getInstance(NoArgService.class);
-        assertEquals("noarg", svc.value());
     }
 
     public static class DefaultCtor {
@@ -121,32 +145,8 @@ class ConstructorInjectionTest {
         }
     }
 
-    @Test
-    void fallbackToPublicNoArgConstructor() {
-        Injector injector = Injector.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(DefaultCtor.class);
-            }
-        });
-        DefaultCtor svc = injector.getInstance(DefaultCtor.class);
-        assertEquals("default-ctor", svc.value);
-    }
-
     public static class RequiresCtorArg {
         public RequiresCtorArg(java.io.File v) {
         }
-    }
-
-    @Test
-    void constructorWithoutUsableCtorFails() {
-        Injector injector = Injector.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(RequiresCtorArg.class);
-            }
-        });
-        // java.io.File 没有无参构造器，但被 @Inject 的字段需要一个无法解析的依赖
-        assertThrows(RuntimeException.class, () -> injector.getInstance(RequiresCtorArg.class));
     }
 }

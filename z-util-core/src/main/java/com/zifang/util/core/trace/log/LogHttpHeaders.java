@@ -20,29 +20,46 @@ package com.zifang.util.core.trace.log;
  */
 public final class LogHttpHeaders {
 
-    /** W3C 标准：trace 上下文传播。 */
+    /**
+     * W3C 标准：trace 上下文传播。
+     */
     public static final String TRACEPARENT = "traceparent";
 
-    /** W3C 标准：trace 状态（厂商扩展）。 */
+    /**
+     * W3C 标准：trace 状态（厂商扩展）。
+     */
     public static final String TRACESTATE = "tracestate";
 
-    /** 通用请求 ID（由网关或第一跳生成）。 */
+    /**
+     * 通用请求 ID（由网关或第一跳生成）。
+     */
     public static final String X_REQUEST_ID = "X-Request-Id";
 
-    /** 用户 ID（透传，慎用）。 */
+    /**
+     * 用户 ID（透传，慎用）。
+     */
     public static final String X_USER_ID = "X-User-Id";
 
-    /** Zipkin B3：traceId（兼容老系统）。 */
+    /**
+     * Zipkin B3：traceId（兼容老系统）。
+     */
     public static final String X_B3_TRACE_ID = "X-B3-TraceId";
 
-    /** Zipkin B3：spanId。 */
+    /**
+     * Zipkin B3：spanId。
+     */
     public static final String X_B3_SPAN_ID = "X-B3-SpanId";
 
-    /** Zipkin B3：parentSpanId。 */
+    /**
+     * Zipkin B3：parentSpanId。
+     */
     public static final String X_B3_PARENT_SPAN_ID = "X-B3-ParentSpanId";
 
-    /** Zipkin B3：采样标志。 */
+    /**
+     * Zipkin B3：采样标志。
+     */
     public static final String X_B3_SAMPLED = "X-B3-Sampled";
 
-    private LogHttpHeaders() {}
+    private LogHttpHeaders() {
+    }
 }

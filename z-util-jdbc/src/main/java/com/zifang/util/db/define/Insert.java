@@ -30,9 +30,13 @@ import java.lang.annotation.*;
 @Documented
 public @interface Insert {
 
-    /** SQL 语句，支持 #{paramName} 绑定。 */
+    /**
+     * SQL 语句，支持 #{paramName} 绑定。
+     */
     String value();
 
-    /** 是否回填自增主键到入参对象（需要入参是 POJO）。默认 false。 */
+    /**
+     * 是否回填自增主键到入参对象（需要入参是 POJO）。默认 false。
+     */
     boolean returnGeneratedKeys() default false;
 }

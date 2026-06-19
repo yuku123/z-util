@@ -3,11 +3,7 @@ package com.zifang.util.parser.ini;
 import com.zifang.util.dsl.g4.DynamicLexer;
 import com.zifang.util.dsl.token.Token;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -19,6 +15,7 @@ import java.util.List;
  * <p>
  * 优势：语法扩展只需修改 IniLexer.g4，无需改动 Java 代码。
  */
+
 /**
  * IniG4Parser类。
  */
@@ -31,7 +28,8 @@ public class IniG4Parser {
      */
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return IniFile类型返回值
      */
     public IniFile parse(String content) {
@@ -43,7 +41,8 @@ public class IniG4Parser {
      */
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return IniFile类型返回值
      */
     public IniFile parse(Reader reader) {

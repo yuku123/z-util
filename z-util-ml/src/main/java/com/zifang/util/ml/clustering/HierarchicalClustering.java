@@ -25,6 +25,7 @@ public class HierarchicalClustering {
     private double[][] Xdata;
     private int nSamples;
     private int nFeatures;
+
     /**
      * HierarchicalClustering方法。
      * * @param nClusters int类型参数

@@ -22,6 +22,7 @@ import java.util.List;
  * 注：本解析器固定使用逗号作为分隔符。如需自定义分隔符，
  * 请使用 {@link CsvParser}（手写状态机版本）。
  */
+
 /**
  * CsvG4Parser类。
  */
@@ -34,7 +35,8 @@ public class CsvG4Parser {
      */
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return List<String[]>类型返回值
      */
     public List<String[]> parse(String content) {
@@ -63,7 +65,8 @@ public class CsvG4Parser {
      */
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return List<String[]>类型返回值
      */
     public List<String[]> parse(Reader reader) {

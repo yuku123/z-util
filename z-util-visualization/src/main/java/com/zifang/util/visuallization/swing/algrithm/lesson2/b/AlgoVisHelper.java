@@ -95,6 +95,7 @@ public class AlgoVisHelper {
      * 白色
      */
     public static final Color White = new Color(0xFFFFFF);
+
     private AlgoVisHelper() {
     }
 

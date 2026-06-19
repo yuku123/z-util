@@ -109,9 +109,9 @@
 //        classInfo.setSimpleClassName(name.getIdentifier());
 //    }
 //
-////    private void handleIsInterface(boolean anInterface) {
-////        classInfo.setIsInterface(anInterface);
-////    }
+/// /    private void handleIsInterface(boolean anInterface) {
+/// /        classInfo.setIsInterface(anInterface);
+/// /    }
 //
 //    private void handleImports(NodeList<ImportDeclaration> imports) {
 //        List<String> importsToBeSet = new ArrayList<>();

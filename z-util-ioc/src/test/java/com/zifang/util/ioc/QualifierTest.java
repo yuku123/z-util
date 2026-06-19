@@ -11,12 +11,31 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Qualifier 多绑定测试，对标 Guice 的 {@code @Named} / 自定义 {@code @Qualifier}。
  */
 class QualifierTest {
+
+    @Test
+    void qualifierPicksCorrectBinding() {
+        Injector injector = Injector.createInjector(new PaymentModule());
+        PaymentRouter router = injector.getInstance(PaymentRouter.class);
+        assertNotNull(router.defaultService);
+        assertEquals("alipay", router.defaultService.name());
+        assertEquals("alipay", router.alipay.name());
+        assertEquals("wechat", router.primary.name());
+    }
+
+    @Test
+    void namedAnnotationSelectsCorrectBinding() {
+        Injector injector = Injector.createInjector(new NamedClassModule());
+        EngineConsumer consumer = injector.getInstance(EngineConsumer.class);
+        assertEquals("default-engine", consumer.defaultEngine.type());
+        assertEquals("fast-engine", consumer.fastEngine.type());
+    }
 
     @javax.inject.Qualifier
     @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE})
@@ -26,6 +45,10 @@ class QualifierTest {
 
     public interface PaymentService {
         String name();
+    }
+
+    public interface Engine {
+        String type();
     }
 
     public static class AlipayService implements PaymentService {
@@ -65,20 +88,6 @@ class QualifierTest {
         }
     }
 
-    @Test
-    void qualifierPicksCorrectBinding() {
-        Injector injector = Injector.createInjector(new PaymentModule());
-        PaymentRouter router = injector.getInstance(PaymentRouter.class);
-        assertNotNull(router.defaultService);
-        assertEquals("alipay", router.defaultService.name());
-        assertEquals("alipay", router.alipay.name());
-        assertEquals("wechat", router.primary.name());
-    }
-
-    public interface Engine {
-        String type();
-    }
-
     @Singleton
     public static class EngineImpl implements Engine {
         @Override
@@ -112,13 +121,5 @@ class QualifierTest {
             bind(Engine.class, Named.class).to(FastEngine.class);
             bind(EngineConsumer.class);
         }
-    }
-
-    @Test
-    void namedAnnotationSelectsCorrectBinding() {
-        Injector injector = Injector.createInjector(new NamedClassModule());
-        EngineConsumer consumer = injector.getInstance(EngineConsumer.class);
-        assertEquals("default-engine", consumer.defaultEngine.type());
-        assertEquals("fast-engine", consumer.fastEngine.type());
     }
 }

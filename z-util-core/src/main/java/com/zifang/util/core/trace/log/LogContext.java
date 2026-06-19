@@ -40,10 +40,13 @@ import java.util.concurrent.Callable;
  */
 public final class LogContext {
 
-    /** 没有 trace 上下文时，traceId 字段填这个值。 */
+    /**
+     * 没有 trace 上下文时，traceId 字段填这个值。
+     */
     public static final String NO_TRACE = "no-trace";
 
-    private LogContext() {}
+    private LogContext() {
+    }
 
     // ===== 单字段操作 =====
 
@@ -127,13 +130,17 @@ public final class LogContext {
 
     // ===== trace 上下文便捷访问 =====
 
-    /** 当前 traceId（无上下文时返回 {@link #NO_TRACE}）。 */
+    /**
+     * 当前 traceId（无上下文时返回 {@link #NO_TRACE}）。
+     */
     public static String currentTraceId() {
         TraceContext c = TraceContextHolder.current();
         return c == null ? NO_TRACE : c.traceId();
     }
 
-    /** 当前 spanId（无上下文时返回 {@code "no-span"}）。 */
+    /**
+     * 当前 spanId（无上下文时返回 {@code "no-span"}）。
+     */
     public static String currentSpanId() {
         TraceContext c = TraceContextHolder.current();
         return c == null ? "no-span" : c.spanId();

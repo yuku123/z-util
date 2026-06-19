@@ -25,7 +25,8 @@ import java.util.function.Supplier;
  */
 public final class Assert {
 
-    private Assert() {}
+    private Assert() {
+    }
 
     // ===== 通用断言 =====
 

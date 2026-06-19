@@ -3,14 +3,10 @@ package com.zifang.util.it.selftest;
 import com.zifang.util.aop.Advise;
 import com.zifang.util.aop.Intercept;
 import com.zifang.util.aop.ProxyFactory;
-import com.zifang.util.core.bean.BeanCopier;
 import com.zifang.util.cache.Cache;
 import com.zifang.util.cache.CacheBuilder;
 import com.zifang.util.cache.decorator.MeteredCache;
-import com.zifang.util.db.lock.DbDistributedLock;
-import com.zifang.util.distributes.sequence.NanoId;
-import com.zifang.util.distributes.sequence.SegmentIdGenerator;
-import com.zifang.util.distributes.sequence.UuidV7;
+import com.zifang.util.core.bean.BeanCopier;
 import com.zifang.util.core.jwt.Claims;
 import com.zifang.util.core.jwt.Jwt;
 import com.zifang.util.core.jwt.JwtException;
@@ -22,6 +18,10 @@ import com.zifang.util.core.resilience.CircuitBreaker;
 import com.zifang.util.core.resilience.Retry;
 import com.zifang.util.core.resilience.TimeLimiter;
 import com.zifang.util.core.trace.TraceContextHolder;
+import com.zifang.util.db.lock.DbDistributedLock;
+import com.zifang.util.distributes.sequence.NanoId;
+import com.zifang.util.distributes.sequence.SegmentIdGenerator;
+import com.zifang.util.distributes.sequence.UuidV7;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.Test;
 
@@ -33,9 +33,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.LongAdder;
@@ -103,16 +101,178 @@ public class SelfCheckTest {
     // 业务模型
     // ====================================================================
 
-    public static class User { public String id; public String name; public String role; }
-    public static class OrderDto { public Long id; public String orderNo; public String userId; public String productId; public Integer amount; public String idempotencyKey; }
-    public static class UserVo { public String id; public String name; public String role; public String sessionToken; }
-    public static class ApiResponse<T> { public int code; public String message; public T data; public String traceId; }
+    @Test
+    public void testFullStack_endToEnd() throws Exception {
+        // 1) 装服务
+        UserService userService = new UserService();
+        OrderService orderService = new OrderService(DS);
+        OrderController controller = ProxyFactory.wrap(new OrderControllerImpl(userService, orderService));
+        // 演示 BeanCopier：把 User → UserVo
+        // (实际在下单后展示)
+
+        // 2) 登录
+        String token = userService.login("alice", "p@ss");
+        assertNotNull(token);
+        assertTrue("token has 3 parts", token.split("\\.").length == 3);
+
+        // 3) 下单
+        LogAdvise.LOGS.clear();
+        // 把 userId 提取出来用于后面断言
+        User loggedIn = userService.verify(token);
+        String aliceId = loggedIn.id;
+        for (int i = 0; i < 5; i++) {
+            ApiResponse<OrderDto> r = controller.create(token, "P" + (i % 2), 1);
+            assertEquals(0, r.code);
+            assertEquals(aliceId, r.data.userId);
+            assertNotNull("orderNo should be set", r.data.orderNo);
+            assertTrue("orderNo starts with O", r.data.orderNo.startsWith("O"));
+            assertNotNull("traceId from response", r.traceId);
+        }
+
+        // 4) 列表
+        ApiResponse<List<OrderDto>> list = controller.list(token);
+        assertEquals(5, list.data.size());
+        for (OrderDto o : list.data) {
+            assertEquals(aliceId, o.userId);
+        }
+
+        // 5) traceId 注入：每个切面调用都有独立 traceId，日志能串联
+        // 5 create + 1 list = 6 logs
+        assertEquals(6, LogAdvise.LOGS.size());
+        for (String log : LogAdvise.LOGS) {
+            assertTrue("log has traceId: " + log, log.contains("trace="));
+        }
+
+        // 6) 注销
+        userService.logout(token);
+        // 注销后 verify 应该失败
+        try {
+            controller.create(token, "P0", 1);
+            fail("revoked token should be rejected");
+        } catch (Exception e) {
+            assertTrue("rejection reason: " + e.getMessage(),
+                    e.getMessage().contains("revoked") || e.getCause() != null);
+        }
+
+        // 7) MeteredCache 统计
+        MeteredCache<String, User> metered = (MeteredCache<String, User>) userService.sessionCache();
+        // 注意：put/get 都计数；get hit 应远 > 0
+        assertTrue("hit count should be > 0, got " + metered.meter().hitCount(),
+                metered.meter().hitCount() > 0);
+
+        // 8) BeanCopier：User → UserVo
+        User u = new User();
+        u.id = "U123";
+        u.name = "bob";
+        u.role = "admin";
+        UserVo vo = BeanCopier.copy(u, UserVo.class);
+        assertEquals("U123", vo.id);
+        assertEquals("bob", vo.name);
+        assertEquals("admin", vo.role);
+        assertNull("sessionToken not in source", vo.sessionToken);
+
+        // 9) 重试 + 限流 + 舱壁：演示配置 OK
+        Retry retry = Retry.builder().maxAttempts(3).initialDelay(5, java.util.concurrent.TimeUnit.MILLISECONDS)
+                .retryOn(RuntimeException.class).build();
+        AtomicInteger calls = new AtomicInteger();
+        String r = retry.call(() -> {
+            if (calls.incrementAndGet() < 2) throw new RuntimeException("flaky");
+            return "ok";
+        });
+        assertEquals("ok", r);
+        assertEquals(2, calls.get());
+
+        // 10) TimeLimiter
+        TimeLimiter tl = new TimeLimiter(2, 1000);
+        assertEquals((Object) "fast", tl.call(() -> "fast", 50));
+        tl.shutdown();
+
+        // 11) Bulkhead
+        Bulkhead bh = new Bulkhead(2);
+        assertEquals((Object) Integer.valueOf(1), bh.call(() -> 1));
+        assertEquals(2, bh.availablePermits());
+
+        // 12) FileLock（单机，验证 FileLock 也工作）
+        FileDistributedLock fileLock = new FileDistributedLock(
+                java.nio.file.Files.createTempFile("selfcheck-", ".lock").toString());
+        String ftoken = fileLock.tryLock();
+        assertNotNull(ftoken);
+        fileLock.unlock(ftoken);
+    }
+
+    @Test
+    public void testConcurrentOrders_unique() throws Exception {
+        UserService u = new UserService();
+        OrderService o = new OrderService(DS);
+        u.login("carol", "p");
+        // 多个线程同 (user, product) → DB 应有 5 行（互锁 5 次 200ms 内串行完成）
+        Thread[] ts = new Thread[5];
+        for (int i = 0; i < ts.length; i++) {
+            ts[i] = new Thread(() -> {
+                try {
+                    o.create("carol", "P-A", 1);
+                } catch (Exception ignored) {
+                }
+            });
+        }
+        for (Thread t : ts) t.start();
+        for (Thread t : ts) t.join();
+        // 5 线程都应在 200ms × 5 = 1s 内串行完成
+        try (Connection c = DS.getConnection();
+             Statement s = c.createStatement();
+             ResultSet rs = s.executeQuery("SELECT COUNT(*) FROM t_order WHERE user_id='carol' AND product_id='P-A'")) {
+            assertTrue(rs.next());
+            int n = rs.getInt(1);
+            assertTrue("expected 5 orders, got " + n, n == 5);
+        }
+    }
+
+    public interface OrderController {
+        ApiResponse<OrderDto> create(String token, String productId, int amount) throws Exception;
+
+        ApiResponse<List<OrderDto>> list(String token) throws Exception;
+    }
+
+    public static class User {
+        public String id;
+        public String name;
+        public String role;
+    }
 
     // ====================================================================
     // 业务服务（纯 z-util 实现）
     // ====================================================================
 
-    /** 用户服务：JWT 鉴权 + 限流 + 缓存。 */
+    public static class OrderDto {
+        public Long id;
+        public String orderNo;
+        public String userId;
+        public String productId;
+        public Integer amount;
+        public String idempotencyKey;
+    }
+
+    public static class UserVo {
+        public String id;
+        public String name;
+        public String role;
+        public String sessionToken;
+    }
+
+    public static class ApiResponse<T> {
+        public int code;
+        public String message;
+        public T data;
+        public String traceId;
+    }
+
+    // ====================================================================
+    // 切面：traceId 自动注入 + 业务日志
+    // ====================================================================
+
+    /**
+     * 用户服务：JWT 鉴权 + 限流 + 缓存。
+     */
     public static class UserService {
         private final String JWT_SECRET = "z-util-selftest-secret";
         private final Cache<String, User> sessionCache = new MeteredCache<>(
@@ -178,10 +338,14 @@ public class SelfCheckTest {
             if (c.jti() != null) blacklist.put(c.jti(), "revoked");
         }
 
-        public Cache<String, User> sessionCache() { return sessionCache; }
+        public Cache<String, User> sessionCache() {
+            return sessionCache;
+        }
     }
 
-    /** 订单服务：DB 锁 + 号段 + UUIDv7 + NanoId + BeanCopier。 */
+    /**
+     * 订单服务：DB 锁 + 号段 + UUIDv7 + NanoId + BeanCopier。
+     */
     public static class OrderService {
         private final DataSource ds;
         private final SegmentIdGenerator idGen;
@@ -244,37 +408,41 @@ public class SelfCheckTest {
         }
     }
 
-    /** 号段加载器（实际连 MySQL）。 */
+    /**
+     * 号段加载器（实际连 MySQL）。
+     */
     static class DbSegmentLoader implements SegmentIdGenerator.SegmentLoader {
         private final DataSource ds;
-        DbSegmentLoader(DataSource ds) { this.ds = ds; }
+
+        DbSegmentLoader(DataSource ds) {
+            this.ds = ds;
+        }
+
         @Override
         public long[] loadSegment(String bizTag, int step) {
             try (Connection c = ds.getConnection()) {
                 c.setAutoCommit(false);
                 try (PreparedStatement upd = c.prepareStatement("UPDATE id_segment SET max_id = max_id + ? WHERE biz_tag = ?")) {
-                    upd.setInt(1, step); upd.setString(2, bizTag); upd.executeUpdate();
+                    upd.setInt(1, step);
+                    upd.setString(2, bizTag);
+                    upd.executeUpdate();
                 }
                 long[] seg = new long[2];
                 try (PreparedStatement sel = c.prepareStatement("SELECT max_id FROM id_segment WHERE biz_tag = ?")) {
                     sel.setString(1, bizTag);
                     try (ResultSet rs = sel.executeQuery()) {
-                        if (rs.next()) { seg[1] = rs.getLong(1); seg[0] = seg[1] - step + 1; }
+                        if (rs.next()) {
+                            seg[1] = rs.getLong(1);
+                            seg[0] = seg[1] - step + 1;
+                        }
                     }
                 }
                 c.commit();
                 return seg;
-            } catch (Exception e) { throw new RuntimeException(e); }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
-    }
-
-    // ====================================================================
-    // 切面：traceId 自动注入 + 业务日志
-    // ====================================================================
-
-    public interface OrderController {
-        ApiResponse<OrderDto> create(String token, String productId, int amount) throws Exception;
-        ApiResponse<List<OrderDto>> list(String token) throws Exception;
     }
 
     public static class OrderControllerImpl implements OrderController {
@@ -288,7 +456,7 @@ public class SelfCheckTest {
         }
 
         @Override
-        @Intercept({ LogAdvise.class, AuthAdvise.class })
+        @Intercept({LogAdvise.class, AuthAdvise.class})
         public ApiResponse<OrderDto> create(String token, String productId, int amount) throws Exception {
             // Auth 切面已 verify；这里直接拿 user
             User u = userService.verify(token);
@@ -298,7 +466,7 @@ public class SelfCheckTest {
         }
 
         @Override
-        @Intercept({ LogAdvise.class, AuthAdvise.class })
+        @Intercept({LogAdvise.class, AuthAdvise.class})
         public ApiResponse<List<OrderDto>> list(String token) throws Exception {
             User u = userService.verify(token);
             return ok(filterBy(cache, u.id));
@@ -312,11 +480,17 @@ public class SelfCheckTest {
 
         private <T> ApiResponse<T> ok(T data) {
             ApiResponse<T> r = new ApiResponse<>();
-            r.code = 0; r.message = "ok"; r.data = data;
+            r.code = 0;
+            r.message = "ok";
+            r.data = data;
             r.traceId = TraceContextHolder.currentTraceId();
             return r;
         }
     }
+
+    // ====================================================================
+    // 端到端流程：登录 → 下单 → 列表 → 注销 → 限流 → BeanCopier
+    // ====================================================================
 
     public static class LogAdvise implements Advise<OrderController> {
         static final LongAdder CALLS = new LongAdder();
@@ -346,131 +520,6 @@ public class SelfCheckTest {
             // 不在这里真正 verify（OrderController.create 内部 verify）
             // 这里只演示切面可被串联：可以加更多校验
             return chain.proceed();
-        }
-    }
-
-    // ====================================================================
-    // 端到端流程：登录 → 下单 → 列表 → 注销 → 限流 → BeanCopier
-    // ====================================================================
-
-    @Test
-    public void testFullStack_endToEnd() throws Exception {
-        // 1) 装服务
-        UserService userService = new UserService();
-        OrderService orderService = new OrderService(DS);
-        OrderController controller = ProxyFactory.wrap(new OrderControllerImpl(userService, orderService));
-        // 演示 BeanCopier：把 User → UserVo
-        // (实际在下单后展示)
-
-        // 2) 登录
-        String token = userService.login("alice", "p@ss");
-        assertNotNull(token);
-        assertTrue("token has 3 parts", token.split("\\.").length == 3);
-
-        // 3) 下单
-        LogAdvise.LOGS.clear();
-        // 把 userId 提取出来用于后面断言
-        User loggedIn = userService.verify(token);
-        String aliceId = loggedIn.id;
-        for (int i = 0; i < 5; i++) {
-            ApiResponse<OrderDto> r = controller.create(token, "P" + (i % 2), 1);
-            assertEquals(0, r.code);
-            assertEquals(aliceId, r.data.userId);
-            assertNotNull("orderNo should be set", r.data.orderNo);
-            assertTrue("orderNo starts with O", r.data.orderNo.startsWith("O"));
-            assertNotNull("traceId from response", r.traceId);
-        }
-
-        // 4) 列表
-        ApiResponse<List<OrderDto>> list = controller.list(token);
-        assertEquals(5, list.data.size());
-        for (OrderDto o : list.data) {
-            assertEquals(aliceId, o.userId);
-        }
-
-        // 5) traceId 注入：每个切面调用都有独立 traceId，日志能串联
-        // 5 create + 1 list = 6 logs
-        assertEquals(6, LogAdvise.LOGS.size());
-        for (String log : LogAdvise.LOGS) {
-            assertTrue("log has traceId: " + log, log.contains("trace="));
-        }
-
-        // 6) 注销
-        userService.logout(token);
-        // 注销后 verify 应该失败
-        try {
-            controller.create(token, "P0", 1);
-            fail("revoked token should be rejected");
-        } catch (Exception e) {
-            assertTrue("rejection reason: " + e.getMessage(),
-                    e.getMessage().contains("revoked") || e.getCause() != null);
-        }
-
-        // 7) MeteredCache 统计
-        MeteredCache<String, User> metered = (MeteredCache<String, User>) userService.sessionCache();
-        // 注意：put/get 都计数；get hit 应远 > 0
-        assertTrue("hit count should be > 0, got " + metered.meter().hitCount(),
-                metered.meter().hitCount() > 0);
-
-        // 8) BeanCopier：User → UserVo
-        User u = new User();
-        u.id = "U123"; u.name = "bob"; u.role = "admin";
-        UserVo vo = BeanCopier.copy(u, UserVo.class);
-        assertEquals("U123", vo.id);
-        assertEquals("bob", vo.name);
-        assertEquals("admin", vo.role);
-        assertNull("sessionToken not in source", vo.sessionToken);
-
-        // 9) 重试 + 限流 + 舱壁：演示配置 OK
-        Retry retry = Retry.builder().maxAttempts(3).initialDelay(5, java.util.concurrent.TimeUnit.MILLISECONDS)
-                .retryOn(RuntimeException.class).build();
-        AtomicInteger calls = new AtomicInteger();
-        String r = retry.call(() -> {
-            if (calls.incrementAndGet() < 2) throw new RuntimeException("flaky");
-            return "ok";
-        });
-        assertEquals("ok", r);
-        assertEquals(2, calls.get());
-
-        // 10) TimeLimiter
-        TimeLimiter tl = new TimeLimiter(2, 1000);
-        assertEquals((Object) "fast", tl.call(() -> "fast", 50));
-        tl.shutdown();
-
-        // 11) Bulkhead
-        Bulkhead bh = new Bulkhead(2);
-        assertEquals((Object) Integer.valueOf(1), bh.call(() -> 1));
-        assertEquals(2, bh.availablePermits());
-
-        // 12) FileLock（单机，验证 FileLock 也工作）
-        FileDistributedLock fileLock = new FileDistributedLock(
-                java.nio.file.Files.createTempFile("selfcheck-", ".lock").toString());
-        String ftoken = fileLock.tryLock();
-        assertNotNull(ftoken);
-        fileLock.unlock(ftoken);
-    }
-
-    @Test
-    public void testConcurrentOrders_unique() throws Exception {
-        UserService u = new UserService();
-        OrderService o = new OrderService(DS);
-        u.login("carol", "p");
-        // 多个线程同 (user, product) → DB 应有 5 行（互锁 5 次 200ms 内串行完成）
-        Thread[] ts = new Thread[5];
-        for (int i = 0; i < ts.length; i++) {
-            ts[i] = new Thread(() -> {
-                try { o.create("carol", "P-A", 1); } catch (Exception ignored) {}
-            });
-        }
-        for (Thread t : ts) t.start();
-        for (Thread t : ts) t.join();
-        // 5 线程都应在 200ms × 5 = 1s 内串行完成
-        try (Connection c = DS.getConnection();
-             Statement s = c.createStatement();
-             ResultSet rs = s.executeQuery("SELECT COUNT(*) FROM t_order WHERE user_id='carol' AND product_id='P-A'")) {
-            assertTrue(rs.next());
-            int n = rs.getInt(1);
-            assertTrue("expected 5 orders, got " + n, n == 5);
         }
     }
 }

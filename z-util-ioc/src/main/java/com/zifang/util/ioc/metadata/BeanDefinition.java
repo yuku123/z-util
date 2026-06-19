@@ -1,6 +1,5 @@
 package com.zifang.util.ioc.metadata;
 
-import javax.inject.Provider;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
@@ -19,29 +18,17 @@ import java.util.Objects;
  */
 public class BeanDefinition {
 
-    /** 绑定类型枚举 */
-    public enum BindingType {
-        COMPONENT,
-        FACTORY_METHOD,
-        INSTANCE,
-        PROVIDER,
-        LINKED,
-        JIT
-    }
-
     private final BindingKey<?> key;
     private final Class<?> beanClass;
-    private Scope scope;
     private final BindingType bindingType;
     private final Method factoryMethod;
     private final Class<?> configClass;       // FACTORY_METHOD 时配置类的类
     private final javax.inject.Provider<?> provider; // PROVIDER 绑定时携带
-    private boolean eager;
     private final boolean isConfiguration;
-
+    private Scope scope;
+    private boolean eager;
     private Object instance;
     private long creationTime;
-
     /**
      * 兼容旧 API 的构造器（按名称构造）。
      */
@@ -111,6 +98,23 @@ public class BeanDefinition {
                 false, null, null, null, false);
     }
 
+    /**
+     * 克隆一个 BD，替换 scope 与 eager 字段。
+     */
+    public static BeanDefinition cloneWithScope(BeanDefinition source, Scope newScope, boolean newEager) {
+        BeanDefinition clone = new BeanDefinition(
+                source.key, source.beanClass, newScope, source.bindingType,
+                source.isConfiguration, source.factoryMethod, source.configClass,
+                source.provider, newEager);
+        if (source.instance != null) {
+            clone.setInstance(source.instance);
+        }
+        if (source.creationTime != 0L) {
+            clone.setCreationTime(source.creationTime);
+        }
+        return clone;
+    }
+
     public BindingKey<?> getKey() {
         return key;
     }
@@ -132,23 +136,6 @@ public class BeanDefinition {
      */
     public void setScope(Scope scope) {
         this.scope = scope != null ? scope : Scope.DEFAULT;
-    }
-
-    /**
-     * 克隆一个 BD，替换 scope 与 eager 字段。
-     */
-    public static BeanDefinition cloneWithScope(BeanDefinition source, Scope newScope, boolean newEager) {
-        BeanDefinition clone = new BeanDefinition(
-                source.key, source.beanClass, newScope, source.bindingType,
-                source.isConfiguration, source.factoryMethod, source.configClass,
-                source.provider, newEager);
-        if (source.instance != null) {
-            clone.setInstance(source.instance);
-        }
-        if (source.creationTime != 0L) {
-            clone.setCreationTime(source.creationTime);
-        }
-        return clone;
     }
 
     public boolean isSingleton() {
@@ -216,5 +203,17 @@ public class BeanDefinition {
     @Override
     public String toString() {
         return "BeanDefinition{" + "key=" + key + ", scope=" + scope + ", type=" + bindingType + '}';
+    }
+
+    /**
+     * 绑定类型枚举
+     */
+    public enum BindingType {
+        COMPONENT,
+        FACTORY_METHOD,
+        INSTANCE,
+        PROVIDER,
+        LINKED,
+        JIT
     }
 }

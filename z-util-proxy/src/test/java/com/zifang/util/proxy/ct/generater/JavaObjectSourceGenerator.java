@@ -85,17 +85,17 @@
 //        // handleImport();
 //    }
 //
-////    private void handleImport() {
-////        // 接口进来之后会增加Import
-////        for(ClassInfo interfaceInfo : classInfo.getInterfaces()){
-////            String importedClassName = interfaceInfo.getPackageName()+"."+interfaceInfo.getSimpleClassName();
-////            this.classInfo.getImports().add(importedClassName);
-////        }
-////
-////        for(String im : classInfo.getImports()){
-////            compilationUnit.addImport(im);
-////        }
-////    }
+/// /    private void handleImport() {
+/// /        // 接口进来之后会增加Import
+/// /        for(ClassInfo interfaceInfo : classInfo.getInterfaces()){
+/// /            String importedClassName = interfaceInfo.getPackageName()+"."+interfaceInfo.getSimpleClassName();
+/// /            this.classInfo.getImports().add(importedClassName);
+/// /        }
+/// /
+/// /        for(String im : classInfo.getImports()){
+/// /            compilationUnit.addImport(im);
+/// /        }
+/// /    }
 //}
 //
 //

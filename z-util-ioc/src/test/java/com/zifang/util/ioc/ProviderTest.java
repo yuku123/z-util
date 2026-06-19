@@ -6,19 +6,73 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Qualifier;
-import javax.inject.Singleton;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * Provider 注入测试，对标 Guice 的 {@code Provider<T>}。
  */
 class ProviderTest {
+
+    @Test
+    void providerIsLazy() {
+        AtomicInteger instances = new AtomicInteger();
+        Injector injector = Injector.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(IService.class).to(ServiceImpl.class);
+                bind(LazyService.class);
+            }
+        });
+        LazyService lazy = injector.getInstance(LazyService.class);
+        // Provider not yet called
+        assertNotNull(lazy.provider);
+        IService svc = lazy.getOrCreate();
+        assertEquals("service", svc.name());
+    }
+
+    @Test
+    void providerWithQualifier() {
+        Injector injector = Injector.createInjector(new QualifiedModule());
+        QualifiedProviderHolder holder = injector.getInstance(QualifiedProviderHolder.class);
+        assertEquals("service", holder.defaultProvider.get().name());
+        assertEquals("backup", holder.backupProvider.get().name());
+    }
+
+    @Test
+    void injectorGetProviderReturnsProvider() {
+        Injector injector = Injector.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(IService.class).to(ServiceImpl.class);
+            }
+        });
+        Provider<IService> p = injector.getProvider(IService.class);
+        assertNotNull(p);
+        assertEquals("service", p.get().name());
+    }
+
+    @Test
+    void providerCanBeCalledMultipleTimes() {
+        StatefulProvider.CALLS.set(0);
+        Injector injector = Injector.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(String.class).toProvider(StatefulProvider.class);
+                bind(UsesStatefulProvider.class);
+            }
+        });
+        UsesStatefulProvider holder = injector.getInstance(UsesStatefulProvider.class);
+        assertEquals("value-1", holder.provider.get());
+        assertEquals("value-2", holder.provider.get());
+        assertEquals("value-3", holder.provider.get());
+    }
 
     @Qualifier
     @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE})
@@ -62,23 +116,6 @@ class ProviderTest {
         }
     }
 
-    @Test
-    void providerIsLazy() {
-        AtomicInteger instances = new AtomicInteger();
-        Injector injector = Injector.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(IService.class).to(ServiceImpl.class);
-                bind(LazyService.class);
-            }
-        });
-        LazyService lazy = injector.getInstance(LazyService.class);
-        // Provider not yet called
-        assertNotNull(lazy.provider);
-        IService svc = lazy.getOrCreate();
-        assertEquals("service", svc.name());
-    }
-
     public static class QualifiedProviderHolder {
         public final Provider<IService> defaultProvider;
         public final Provider<IService> backupProvider;
@@ -108,27 +145,6 @@ class ProviderTest {
         }
     }
 
-    @Test
-    void providerWithQualifier() {
-        Injector injector = Injector.createInjector(new QualifiedModule());
-        QualifiedProviderHolder holder = injector.getInstance(QualifiedProviderHolder.class);
-        assertEquals("service", holder.defaultProvider.get().name());
-        assertEquals("backup", holder.backupProvider.get().name());
-    }
-
-    @Test
-    void injectorGetProviderReturnsProvider() {
-        Injector injector = Injector.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(IService.class).to(ServiceImpl.class);
-            }
-        });
-        Provider<IService> p = injector.getProvider(IService.class);
-        assertNotNull(p);
-        assertEquals("service", p.get().name());
-    }
-
     public static class StatefulProvider implements Provider<String> {
         public static final AtomicInteger CALLS = new AtomicInteger();
 
@@ -141,21 +157,5 @@ class ProviderTest {
     public static class UsesStatefulProvider {
         @Inject
         public Provider<String> provider;
-    }
-
-    @Test
-    void providerCanBeCalledMultipleTimes() {
-        StatefulProvider.CALLS.set(0);
-        Injector injector = Injector.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(String.class).toProvider(StatefulProvider.class);
-                bind(UsesStatefulProvider.class);
-            }
-        });
-        UsesStatefulProvider holder = injector.getInstance(UsesStatefulProvider.class);
-        assertEquals("value-1", holder.provider.get());
-        assertEquals("value-2", holder.provider.get());
-        assertEquals("value-3", holder.provider.get());
     }
 }

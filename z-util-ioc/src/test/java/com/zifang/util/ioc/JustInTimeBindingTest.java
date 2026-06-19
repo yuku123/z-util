@@ -15,25 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class JustInTimeBindingTest {
 
-    @Singleton
-    public static class NoBindNeeded {
-        public String value = "jit-created";
-    }
-
-    public static class NotSingleton {
-        public String value = "jit-prototype";
-    }
-
-    public static class UsesJit {
-        @Inject
-        public NoBindNeeded autoInjected;
-    }
-
-    public static class UsesPrototypeJit {
-        @Inject
-        public NotSingleton autoInjected;
-    }
-
     @Test
     void jitBindingResolvesConcreteClass() {
         Injector injector = Injector.createInjector(new AbstractModule() {
@@ -73,9 +54,6 @@ class JustInTimeBindingTest {
         assertSame(a, b);
     }
 
-    public interface OnlyInterface {
-    }
-
     @Test
     void jitCannotResolveInterface() {
         Injector injector = Injector.createInjector(new AbstractModule() {
@@ -86,10 +64,6 @@ class JustInTimeBindingTest {
         assertThrows(RuntimeException.class, () -> injector.getInstance(OnlyInterface.class));
     }
 
-    public abstract static class AbstractClass {
-        public abstract String name();
-    }
-
     @Test
     void jitCannotResolveAbstractClass() {
         Injector injector = Injector.createInjector(new AbstractModule() {
@@ -98,5 +72,31 @@ class JustInTimeBindingTest {
             }
         });
         assertThrows(RuntimeException.class, () -> injector.getInstance(AbstractClass.class));
+    }
+
+    public interface OnlyInterface {
+    }
+
+    @Singleton
+    public static class NoBindNeeded {
+        public String value = "jit-created";
+    }
+
+    public static class NotSingleton {
+        public String value = "jit-prototype";
+    }
+
+    public static class UsesJit {
+        @Inject
+        public NoBindNeeded autoInjected;
+    }
+
+    public static class UsesPrototypeJit {
+        @Inject
+        public NotSingleton autoInjected;
+    }
+
+    public abstract static class AbstractClass {
+        public abstract String name();
     }
 }

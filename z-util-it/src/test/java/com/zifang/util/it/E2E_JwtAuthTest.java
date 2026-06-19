@@ -29,6 +29,73 @@ import static org.junit.Assert.*;
  */
 public class E2E_JwtAuthTest {
 
+    @Test
+    public void testFullJwtLifecycle() {
+        AuthService auth = new AuthService();
+        Map<String, String> tokens = auth.login("alice", "admin");
+        String access = tokens.get("access");
+        String refresh = tokens.get("refresh");
+
+        // 1) 验证
+        Claims claims = auth.verify(access);
+        assertEquals("alice", claims.sub());
+        assertEquals("admin", claims.get("role"));
+
+        // 2) 刷新
+        String newAccess = auth.refresh(refresh);
+        assertNotEquals(access, newAccess);
+        Claims c2 = auth.verify(newAccess);
+        assertEquals("alice", c2.sub());
+
+        // 3) 注销
+        auth.logout(access);
+        // 注销后验证应失败（jti 在黑名单）
+        try {
+            auth.verify(access);
+            fail("revoked token should be rejected");
+        } catch (JwtException expected) { /* ok */ }
+        // 但新 access（不同 jti）仍能用
+        assertEquals("alice", auth.verify(newAccess).sub());
+    }
+
+    @Test
+    public void testTokenTampering_fails() {
+        AuthService auth = new AuthService();
+        String access = auth.login("bob", "user").get("access");
+        String[] parts = access.split("\\.");
+        String tampered = parts[0] + "." +
+                com.zifang.util.core.jwt.Base64Url.encode("{\"sub\":\"bob\",\"role\":\"admin\",\"exp\":9999999999}".getBytes()) +
+                "." + parts[2];
+        try {
+            auth.verify(tampered);
+            fail("signature should not match tampered payload");
+        } catch (JwtException expected) { /* ok */ }
+    }
+
+    @Test
+    public void testExpiredToken_fails() {
+        String expired = Jwt.builder()
+                .algorithm(Jwt.HS256)
+                .secret(AuthService.SECRET)
+                .claims(new Claims().sub("x").expireIn(-100))
+                .build();
+        try {
+            Jwt.parser().algorithm(Jwt.HS256).secret(AuthService.SECRET).parse(expired);
+            fail();
+        } catch (JwtException expected) { /* ok */ }
+    }
+
+    @Test
+    public void testRefreshRejectsAccessToken() {
+        AuthService auth = new AuthService();
+        String access = auth.login("carol", "user").get("access");
+        // 用 access token 去 refresh → 应失败
+        try {
+            auth.refresh(access);
+            fail();
+        } catch (JwtException expected) { /* ok */ }
+    }
+
     public static class AuthService {
         public static final String SECRET = "z-util-jwt-secret-256bit-test";
         private final Cache<String, String> blacklist;
@@ -103,72 +170,5 @@ public class E2E_JwtAuthTest {
                             .expireIn(3600))
                     .build();
         }
-    }
-
-    @Test
-    public void testFullJwtLifecycle() {
-        AuthService auth = new AuthService();
-        Map<String, String> tokens = auth.login("alice", "admin");
-        String access = tokens.get("access");
-        String refresh = tokens.get("refresh");
-
-        // 1) 验证
-        Claims claims = auth.verify(access);
-        assertEquals("alice", claims.sub());
-        assertEquals("admin", claims.get("role"));
-
-        // 2) 刷新
-        String newAccess = auth.refresh(refresh);
-        assertNotEquals(access, newAccess);
-        Claims c2 = auth.verify(newAccess);
-        assertEquals("alice", c2.sub());
-
-        // 3) 注销
-        auth.logout(access);
-        // 注销后验证应失败（jti 在黑名单）
-        try {
-            auth.verify(access);
-            fail("revoked token should be rejected");
-        } catch (JwtException expected) { /* ok */ }
-        // 但新 access（不同 jti）仍能用
-        assertEquals("alice", auth.verify(newAccess).sub());
-    }
-
-    @Test
-    public void testTokenTampering_fails() {
-        AuthService auth = new AuthService();
-        String access = auth.login("bob", "user").get("access");
-        String[] parts = access.split("\\.");
-        String tampered = parts[0] + "." +
-                com.zifang.util.core.jwt.Base64Url.encode("{\"sub\":\"bob\",\"role\":\"admin\",\"exp\":9999999999}".getBytes()) +
-                "." + parts[2];
-        try {
-            auth.verify(tampered);
-            fail("signature should not match tampered payload");
-        } catch (JwtException expected) { /* ok */ }
-    }
-
-    @Test
-    public void testExpiredToken_fails() {
-        String expired = Jwt.builder()
-                .algorithm(Jwt.HS256)
-                .secret(AuthService.SECRET)
-                .claims(new Claims().sub("x").expireIn(-100))
-                .build();
-        try {
-            Jwt.parser().algorithm(Jwt.HS256).secret(AuthService.SECRET).parse(expired);
-            fail();
-        } catch (JwtException expected) { /* ok */ }
-    }
-
-    @Test
-    public void testRefreshRejectsAccessToken() {
-        AuthService auth = new AuthService();
-        String access = auth.login("carol", "user").get("access");
-        // 用 access token 去 refresh → 应失败
-        try {
-            auth.refresh(access);
-            fail();
-        } catch (JwtException expected) { /* ok */ }
     }
 }

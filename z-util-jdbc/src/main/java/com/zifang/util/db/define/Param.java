@@ -27,6 +27,8 @@ import java.lang.annotation.*;
 @Target(ElementType.PARAMETER)
 @Documented
 public @interface Param {
-    /** 参数名称，SQL 中通过 #{value} 引用。 */
+    /**
+     * 参数名称，SQL 中通过 #{value} 引用。
+     */
     String value();
 }

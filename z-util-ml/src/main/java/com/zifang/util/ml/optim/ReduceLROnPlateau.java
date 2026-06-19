@@ -32,6 +32,7 @@ public class ReduceLROnPlateau implements LrScheduler {
     private boolean inCooldown;
     private int cooldownCounter;
     private int patienceCounter;
+
     /**
      * ReduceLROnPlateau方法。
      * * @param optimizer Optimizer类型参数

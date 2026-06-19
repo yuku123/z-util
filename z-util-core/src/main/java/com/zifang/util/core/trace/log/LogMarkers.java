@@ -21,26 +21,41 @@ import org.slf4j.MarkerFactory;
  */
 public final class LogMarkers {
 
-    /** 业务事件：订单创建、状态变更、流程节点等。 */
+    /**
+     * 业务事件：订单创建、状态变更、流程节点等。
+     */
     public static final Marker BUSINESS = MarkerFactory.getMarker("BUSINESS");
 
-    /** 安全事件：登录失败、权限拒绝、token 校验失败、登出等。 */
+    /**
+     * 安全事件：登录失败、权限拒绝、token 校验失败、登出等。
+     */
     public static final Marker SECURITY = MarkerFactory.getMarker("SECURITY");
 
-    /** 性能事件：慢查询、慢调用、超时阈值告警。 */
+    /**
+     * 性能事件：慢查询、慢调用、超时阈值告警。
+     */
     public static final Marker PERFORMANCE = MarkerFactory.getMarker("PERFORMANCE");
 
-    /** 外部调用：HTTP/RPC/DB 等出站请求。 */
+    /**
+     * 外部调用：HTTP/RPC/DB 等出站请求。
+     */
     public static final Marker EXTERNAL = MarkerFactory.getMarker("EXTERNAL");
 
-    /** 内部数据库调用。 */
+    /**
+     * 内部数据库调用。
+     */
     public static final Marker DB = MarkerFactory.getMarker("DB");
 
-    /** 缓存读写。 */
+    /**
+     * 缓存读写。
+     */
     public static final Marker CACHE = MarkerFactory.getMarker("CACHE");
 
-    /** 启动/关闭/重载等生命周期事件。 */
+    /**
+     * 启动/关闭/重载等生命周期事件。
+     */
     public static final Marker LIFECYCLE = MarkerFactory.getMarker("LIFECYCLE");
 
-    private LogMarkers() {}
+    private LogMarkers() {
+    }
 }

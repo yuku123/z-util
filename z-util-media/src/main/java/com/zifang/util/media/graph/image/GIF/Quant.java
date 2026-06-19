@@ -138,8 +138,8 @@ public class Quant {
     protected static final int alpharadbias = (1 << alpharadbshift);
     protected int alphadec; /* biased by 10 bits */
 
-	/* Types and Global Variables
-	-------------------------- */
+    /* Types and Global Variables
+    -------------------------- */
     protected byte[] thepicture; /* the input image itself */
     protected int lengthcount; /* lengthcount = H*W*3 */
 

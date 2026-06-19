@@ -20,6 +20,7 @@ public class SVM {
     private double[][] supportVectors;
     private int[] supportVectorLabels;
     private double gamma;
+
     /**
      * Create a new SVM classifier.
      *

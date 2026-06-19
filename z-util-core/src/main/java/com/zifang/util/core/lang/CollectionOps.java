@@ -17,14 +17,15 @@ import java.util.function.Predicate;
 @Slf4j
 public final class CollectionOps {
 
-    private CollectionOps() {}
+    private CollectionOps() {
+    }
 
     /**
      * 把集合切成指定大小的批量（用于批量入库、批量发送等场景）。
      *
-     * @param source   源集合
+     * @param source    源集合
      * @param batchSize 每批大小（必须 &gt; 0）
-     * @param <T>      元素类型
+     * @param <T>       元素类型
      * @return 切分后的批量列表（按源集合顺序）
      */
     public static <T> List<List<T>> partition(Collection<T> source, int batchSize) {
@@ -49,7 +50,9 @@ public final class CollectionOps {
         return result;
     }
 
-    /** 找到第一个匹配的元素，未找到返回 null。 */
+    /**
+     * 找到第一个匹配的元素，未找到返回 null。
+     */
     public static <T> T findFirst(Collection<T> source, Predicate<T> predicate) {
         if (source == null || predicate == null) return null;
         for (T item : source) {
@@ -58,7 +61,9 @@ public final class CollectionOps {
         return null;
     }
 
-    /** 返回与 predicate 匹配的元素数量。 */
+    /**
+     * 返回与 predicate 匹配的元素数量。
+     */
     public static <T> long count(Collection<T> source, Predicate<T> predicate) {
         if (source == null || predicate == null) return 0L;
         long n = 0;
@@ -68,7 +73,9 @@ public final class CollectionOps {
         return n;
     }
 
-    /** 两个集合是否有任一共同元素（null 安全）。 */
+    /**
+     * 两个集合是否有任一共同元素（null 安全）。
+     */
     public static <T> boolean hasIntersection(Collection<T> a, Collection<T> b) {
         if (a == null || b == null || a.isEmpty() || b.isEmpty()) return false;
         Collection<T> smaller = a.size() <= b.size() ? a : b;
@@ -79,7 +86,9 @@ public final class CollectionOps {
         return false;
     }
 
-    /** 首个非 null 元素。 */
+    /**
+     * 首个非 null 元素。
+     */
     @SafeVarargs
     public static <T> T firstNonNull(T... items) {
         if (items == null) return null;
@@ -89,7 +98,9 @@ public final class CollectionOps {
         return null;
     }
 
-    /** 是否所有元素都不为 null。 */
+    /**
+     * 是否所有元素都不为 null。
+     */
     public static boolean noNulls(Collection<?> source) {
         if (source == null || source.isEmpty()) return true;
         for (Object o : source) {
@@ -98,14 +109,18 @@ public final class CollectionOps {
         return true;
     }
 
-    /** 便捷 logging wrapper：debug 打印集合大小（避免大集合 toString 拖慢日志）。 */
+    /**
+     * 便捷 logging wrapper：debug 打印集合大小（避免大集合 toString 拖慢日志）。
+     */
     public static void debugSize(String label, Collection<?> source) {
         if (log.isDebugEnabled()) {
             log.debug("{} size={}", label, source == null ? 0 : source.size());
         }
     }
 
-    /** 两个集合的内容是否完全一致（顺序无关）。 */
+    /**
+     * 两个集合的内容是否完全一致（顺序无关）。
+     */
     public static <T> boolean sameElements(Collection<T> a, Collection<T> b) {
         if (a == null || b == null) return a == b;
         if (a.size() != b.size()) return false;
@@ -117,13 +132,17 @@ public final class CollectionOps {
         return true;
     }
 
-    /** 安全获取元素（index 越界返回 null）。 */
+    /**
+     * 安全获取元素（index 越界返回 null）。
+     */
     public static <T> T get(List<T> list, int index) {
         if (list == null || index < 0 || index >= list.size()) return null;
         return list.get(index);
     }
 
-    /** null-safe 比较：两个集合用 Objects.equals 比较。 */
+    /**
+     * null-safe 比较：两个集合用 Objects.equals 比较。
+     */
     public static boolean equalsIgnoreOrder(Collection<?> a, Collection<?> b) {
         if (a == b) return true;
         if (a == null || b == null) return false;

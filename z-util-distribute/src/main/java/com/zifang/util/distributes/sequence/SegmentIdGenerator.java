@@ -33,6 +33,7 @@ public class SegmentIdGenerator {
     private final SegmentLoader loader;
     private final AtomicLong current;
     private volatile long max;
+
     public SegmentIdGenerator(String bizTag, int step, SegmentLoader loader) {
         if (bizTag == null || bizTag.isEmpty()) throw new IllegalArgumentException("bizTag");
         if (step <= 0) throw new IllegalArgumentException("step must be > 0");

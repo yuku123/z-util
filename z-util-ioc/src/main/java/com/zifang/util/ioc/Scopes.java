@@ -9,15 +9,19 @@ import com.zifang.util.ioc.metadata.Scope;
  */
 public final class Scopes {
 
+    /**
+     * 单例作用域
+     */
+    public static final Scope SINGLETON = Scope.SINGLETON;
+    /**
+     * 原型作用域（每次新建）
+     */
+    public static final Scope PROTOTYPE = Scope.PROTOTYPE;
+    /**
+     * 默认作用域（= SINGLETON）
+     */
+    public static final Scope DEFAULT = Scope.DEFAULT;
+
     private Scopes() {
     }
-
-    /** 单例作用域 */
-    public static final Scope SINGLETON = Scope.SINGLETON;
-
-    /** 原型作用域（每次新建） */
-    public static final Scope PROTOTYPE = Scope.PROTOTYPE;
-
-    /** 默认作用域（= SINGLETON） */
-    public static final Scope DEFAULT = Scope.DEFAULT;
 }

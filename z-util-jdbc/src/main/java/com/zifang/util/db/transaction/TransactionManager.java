@@ -51,10 +51,14 @@ public class TransactionManager {
 
     private static final Logger log = LoggerFactory.getLogger(TransactionManager.class);
 
-    /** 每个线程的连接栈。 */
+    /**
+     * 每个线程的连接栈。
+     */
     private static final ThreadLocal<Deque<ConnectionHolder>> STACK = ThreadLocal.withInitial(ArrayDeque::new);
 
-    /** 失败标记：rollback-only 传播到最外层 commit 时使用。 */
+    /**
+     * 失败标记：rollback-only 传播到最外层 commit 时使用。
+     */
     private static final ThreadLocal<Boolean> ROLLBACK_ONLY = ThreadLocal.withInitial(() -> Boolean.FALSE);
 
     private final DataSource dataSource;
@@ -64,7 +68,28 @@ public class TransactionManager {
         this.dataSource = dataSource;
     }
 
-    public DataSource getDataSource() { return dataSource; }
+    private static int toJdbc(Isolation i) {
+        switch (i) {
+            case READ_UNCOMMITTED:
+                return Connection.TRANSACTION_READ_UNCOMMITTED;
+            case READ_COMMITTED:
+                return Connection.TRANSACTION_READ_COMMITTED;
+            case REPEATABLE_READ:
+                return Connection.TRANSACTION_REPEATABLE_READ;
+            case SERIALIZABLE:
+                return Connection.TRANSACTION_SERIALIZABLE;
+            default:
+                return -1; // 用 DB 默认
+        }
+    }
+
+    private static int stackDepth(Deque<?> s) {
+        return s.size();
+    }
+
+    public DataSource getDataSource() {
+        return dataSource;
+    }
 
     /**
      * 开启事务（简化版：默认 REQUIRED 传播 + 默认隔离 + 读写）。
@@ -242,17 +267,15 @@ public class TransactionManager {
         }
     }
 
-    private static int toJdbc(Isolation i) {
-        switch (i) {
-            case READ_UNCOMMITTED: return Connection.TRANSACTION_READ_UNCOMMITTED;
-            case READ_COMMITTED:   return Connection.TRANSACTION_READ_COMMITTED;
-            case REPEATABLE_READ:  return Connection.TRANSACTION_REPEATABLE_READ;
-            case SERIALIZABLE:     return Connection.TRANSACTION_SERIALIZABLE;
-            default:               return -1; // 用 DB 默认
-        }
+    /**
+     * 当前线程所有活动连接的描述（调试用）。
+     */
+    public Map<String, Object> describe() {
+        Map<String, Object> m = new HashMap<>();
+        m.put("depth", getDepth());
+        m.put("rollbackOnly", isRollbackOnly());
+        return m;
     }
-
-    private static int stackDepth(Deque<?> s) { return s.size(); }
 
     /**
      * 每个事务持有一个连接 + 可选 savepoint + 可选挂起的外层 holder。
@@ -262,7 +285,9 @@ public class TransactionManager {
         java.sql.Savepoint savepoint;
         ConnectionHolder suspendedOuter;
 
-        ConnectionHolder(Connection conn) { this.conn = conn; }
+        ConnectionHolder(Connection conn) {
+            this.conn = conn;
+        }
 
         void createSavepointIfAbsent() {
             try {
@@ -288,20 +313,18 @@ public class TransactionManager {
         void resume() { /* 占位：恢复 outer 的 active 状态 */ }
     }
 
+    // ===== 给模板/拦截器用的状态查询 =====
+
     /**
      * 事务异常。
      */
     public static class TransactionException extends RuntimeException {
-        public TransactionException(String message) { super(message); }
-        public TransactionException(String message, Throwable cause) { super(message, cause); }
-    }
+        public TransactionException(String message) {
+            super(message);
+        }
 
-    // ===== 给模板/拦截器用的状态查询 =====
-    /** 当前线程所有活动连接的描述（调试用）。 */
-    public Map<String, Object> describe() {
-        Map<String, Object> m = new HashMap<>();
-        m.put("depth", getDepth());
-        m.put("rollbackOnly", isRollbackOnly());
-        return m;
+        public TransactionException(String message, Throwable cause) {
+            super(message, cause);
+        }
     }
 }

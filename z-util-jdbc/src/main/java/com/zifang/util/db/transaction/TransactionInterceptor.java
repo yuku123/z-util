@@ -1,7 +1,5 @@
 package com.zifang.util.db.transaction;
 
-import com.zifang.util.db.define.Isolation;
-import com.zifang.util.db.define.Propagation;
 import com.zifang.util.db.define.Transactional;
 import com.zifang.util.proxy.aspects.Aspect;
 import org.slf4j.Logger;
@@ -126,7 +124,8 @@ public class TransactionInterceptor implements Aspect {
                 if (rollbackForName.equals(exName)) return true;
                 try {
                     if (Class.forName(rollbackForName).isAssignableFrom(exClass)) return true;
-                } catch (ClassNotFoundException ignored) {}
+                } catch (ClassNotFoundException ignored) {
+                }
             }
             return false;
         }
