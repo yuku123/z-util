@@ -150,26 +150,26 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.13.1</version>
+                <version>4.13.2</version>
                 <scope>compile</scope>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.10.2</version>
+                <version>6.1.0</version>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.10.2</version>
+                <version>6.1.0</version>
             </dependency>
 
             <dependency>
                 <groupId>org.powermock</groupId>
                 <artifactId>powermock-module-junit4</artifactId>
-                <version>1.6.5</version>
+                <version>2.0.9</version>
             </dependency>
             <dependency>
                 <groupId>com.diffblue</groupId>
@@ -500,7 +500,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>3.141.59</version>
+                <version>4.45.0</version>
             </dependency>
 
             <!-- WebDriverManager (3.x 末班车，支持 Java 8 + selenium 3.x) -->
@@ -521,7 +521,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.11.0</version>
+                <version>5.23.0</version>
             </dependency>
 
             <!-- thumbnailator (0.4.20 修复 CVE-2024-46504) -->
@@ -554,7 +554,7 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
-                <version>5.10.2</version>
+                <version>6.1.0</version>
             </dependency>
 
             <!-- github-api (升级到 1.321) -->
