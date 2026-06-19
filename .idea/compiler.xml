@@ -30,6 +30,7 @@
         <module name="z-util-expr-js" />
         <module name="z-util-parser-proto" />
         <module name="z-util-aop" />
+        <module name="z-util-it" />
         <module name="z-util-dsl" />
         <module name="z-util-ioc" />
         <module name="z-util-core" />
@@ -43,7 +44,6 @@
         <module name="z-util-parser-toml" />
         <module name="z-util-expr-sql" />
         <module name="z-util-parser-ini" />
-        <module name="z-util-e2e" />
         <module name="z-util-parser-xml" />
         <module name="z-util-devops" />
         <module name="z-util-http" />
