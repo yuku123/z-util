@@ -96,14 +96,11 @@
                 <artifactId>z-util-jdbc</artifactId>
                 <version>${util.version}</version>
             </dependency>
-
-
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-xml</artifactId>
                 <version>${util.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-math</artifactId>
@@ -127,7 +124,6 @@
                 <artifactId>z-util-all</artifactId>
                 <version>${util.version}</version>
             </dependency>
-
 
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
