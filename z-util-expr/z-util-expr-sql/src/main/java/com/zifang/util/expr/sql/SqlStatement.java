@@ -26,6 +26,7 @@ public class SqlStatement {
     private List<String> aliases;  // 列别名列表
     // INSERT 扩展
     private List<List<String>> multiValues;  // 多行插入
+
     public SqlStatement() {
         this.columns = new ArrayList<>();
         this.whereConditions = new ArrayList<>();

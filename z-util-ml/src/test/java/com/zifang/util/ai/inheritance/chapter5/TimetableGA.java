@@ -27,8 +27,6 @@ package com.zifang.util.ai.inheritance.chapter5;
  * @author zifang
  */
 
-import java.util.Random;
-
 /**
  * TimetableGA类。
  */

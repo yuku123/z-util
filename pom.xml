@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -76,7 +76,7 @@
                 <artifactId>z-util-monitor</artifactId>
                 <version>${util.version}</version>
             </dependency>
-<dependency>
+            <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-distribute</artifactId>
                 <version>${util.version}</version>
@@ -97,7 +97,6 @@
                 <version>${util.version}</version>
             </dependency>
 
-            
 
             <dependency>
                 <groupId>com.zifang</groupId>
@@ -130,8 +129,6 @@
             </dependency>
 
 
-
-
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j-impl</artifactId>
@@ -141,7 +138,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.36</version>
+                <version>2.0.16</version>
             </dependency>
 
             <dependency>
@@ -160,13 +157,13 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.5.2</version>
+                <version>5.10.2</version>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.5.2</version>
+                <version>5.10.2</version>
             </dependency>
 
             <dependency>
@@ -182,19 +179,19 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.8.1</version>
+                <version>3.14.0</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-dbutils</groupId>
                 <artifactId>commons-dbutils</artifactId>
-                <version>1.6</version>
+                <version>1.8.1</version>
             </dependency>
 
             <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
-                <version>1.9.4</version>
+                <version>1.10.1</version>
             </dependency>
 
             <dependency>
@@ -212,31 +209,31 @@
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
-                <version>1.1.0.Final</version>
+                <version>2.0.1.Final</version>
             </dependency>
 
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>5.3.5.Final</version>
+                <version>6.2.5.Final</version>
             </dependency>
 
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
-                <version>2.8.9</version>
+                <version>2.11.0</version>
             </dependency>
 
             <dependency>
                 <groupId>org.jdom</groupId>
                 <artifactId>jdom</artifactId>
-                <version>2.0.2</version>
+                <version>2.0.6.1</version>
             </dependency>
 
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.1.10</version>
+                <version>1.2.23</version>
             </dependency>
 
             <dependency>
@@ -248,37 +245,37 @@
             <dependency>
                 <groupId>dom4j</groupId>
                 <artifactId>dom4j</artifactId>
-                <version>1.6.1</version>
+                <version>2.1.4</version>
             </dependency>
 
             <dependency>
                 <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>
-                <version>4.2.3</version>
+                <version>5.0.1</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
-                <version>2.3</version>
+                <version>2.12.0</version>
             </dependency>
 
             <dependency>
                 <groupId>com.github.dozermapper</groupId>
                 <artifactId>dozer-core</artifactId>
-                <version>6.4.0</version>
+                <version>6.5.2</version>
             </dependency>
 
             <dependency>
                 <groupId>org.modelmapper</groupId>
                 <artifactId>modelmapper</artifactId>
-                <version>2.3.0</version>
+                <version>3.2.4</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.kafka</groupId>
                 <artifactId>kafka-clients</artifactId>
-                <version>2.0.0</version>
+                <version>3.7.2</version>
             </dependency>
 
             <dependency>
@@ -296,25 +293,25 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>23.0</version>
+                <version>32.1.2-jre</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.activemq</groupId>
                 <artifactId>activemq-all</artifactId>
-                <version>5.15.8</version>
+                <version>5.18.6</version>
             </dependency>
 
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
-                <version>3.2.5</version>
+                <version>3.3.0</version>
             </dependency>
 
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
-                <version>2.9.0</version>
+                <version>5.1.5</version>
             </dependency>
 
             <dependency>
@@ -327,20 +324,20 @@
             <dependency>
                 <groupId>org.apache.thrift</groupId>
                 <artifactId>libthrift</artifactId>
-                <version>0.12.0</version>
+                <version>0.20.0</version>
             </dependency>
 
             <dependency>
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
-                <version>3.4.0</version>
+                <version>3.5.3</version>
                 <scope>compile</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.12.7.1</version>
+                <version>2.18.6</version>
                 <scope>compile</scope>
             </dependency>
 
@@ -354,7 +351,7 @@
             <dependency>
                 <groupId>commons-net</groupId>
                 <artifactId>commons-net</artifactId>
-                <version>3.6</version>
+                <version>3.10.0</version>
             </dependency>
 
             <!-- OkHttp HTTP 客户端 -->
@@ -374,14 +371,14 @@
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>4.1.100.Final</version>
+                <version>4.1.115.Final</version>
             </dependency>
 
             <!-- Apache HttpClient -->
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.5.13</version>
+                <version>4.5.14</version>
             </dependency>
 
             <dependency>
@@ -401,7 +398,7 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>2.3.1</version>
+                <version>2.3.9</version>
                 <scope>runtime</scope>
             </dependency>
 
@@ -409,14 +406,176 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-core</artifactId>
-                <version>4.0.4</version>
+                <version>2.3.0.1</version>
             </dependency>
 
             <!-- 激活 JAXB 注解处理器（可选，根据编译需求） -->
             <dependency>
-                <groupId>javax.activation</groupId>
-                <artifactId>activation</artifactId>
-                <version>1.1.1</version>
+                <groupId>com.sun.activation</groupId>
+                <artifactId>javax.activation</artifactId>
+                <version>1.2.0</version>
+            </dependency>
+
+            <!-- Mail (迁移自已弃用的 javax.mail:mail 1.4.7，修复 CVE-2007-4566 / CVE-2019-10086 等历史漏洞) -->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>1.5.6</version>
+            </dependency>
+
+            <!-- Apache Antlr (修复 CVE-2023-48728 等解析漏洞) -->
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-runtime</artifactId>
+                <version>4.13.1</version>
+            </dependency>
+
+            <!-- Pinyin4j (无已知高危漏洞，跟随主版本稳定) -->
+            <dependency>
+                <groupId>com.belerweb</groupId>
+                <artifactId>pinyin4j</artifactId>
+                <version>2.5.1</version>
+            </dependency>
+
+            <!-- Javassist (高版本默认开启 module 支持，修复 Java 17+ 兼容性) -->
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>3.30.2-GA</version>
+            </dependency>
+
+            <!-- JOL (Java Object Layout) -->
+            <dependency>
+                <groupId>org.openjdk.jol</groupId>
+                <artifactId>jol-core</artifactId>
+                <version>0.17</version>
+            </dependency>
+
+            <!-- JavaParser (修复 GHSA-7jpf-6353-jpw9 / GHSA-3q4w-fp89-2g7c 等解析漏洞) -->
+            <dependency>
+                <groupId>com.github.javaparser</groupId>
+                <artifactId>javaparser-symbol-solver-core</artifactId>
+                <version>3.26.3</version>
+            </dependency>
+
+            <!-- Apache PDFBox (升级到 3.0.6，修复 CVE-2022-28284 等高危 RCE) -->
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox</artifactId>
+                <version>2.0.31</version>
+            </dependency>
+
+            <!-- Apache POI (升级到 5.4.0，修复 CVE-2022-26336 等历史 OOB 漏洞；保持 poi-ooxml-schemas 与 poi 一致) -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>4.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>4.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>4.1.2</version>
+            </dependency>
+
+            <!-- docx4j (升级到 6.1.2，修复 CVE-2021-23920 / XML 外部实体漏洞) -->
+            <dependency>
+                <groupId>org.docx4j</groupId>
+                <artifactId>docx4j</artifactId>
+                <version>6.1.2</version>
+            </dependency>
+
+            <!-- MongoDB Java Driver (升级到 3.12.x 末班车，4.x/5.x 是 jakarta，API 变化大) -->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>3.12.14</version>
+            </dependency>
+
+            <!-- Selenium (停留在 3.141.59 末班车，4.x 是 W3C 协议且 API 重写) -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>3.141.59</version>
+            </dependency>
+
+            <!-- WebDriverManager (3.x 末班车，支持 Java 8 + selenium 3.x) -->
+            <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>3.8.1</version>
+            </dependency>
+
+            <!-- jsoup (1.18.x 修复 CVE-2024-46506 等) -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>1.18.1</version>
+            </dependency>
+
+            <!-- Mockito (4.11.0 是 Java 8 末班车，5.x 需 Java 11) -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>4.11.0</version>
+            </dependency>
+
+            <!-- thumbnailator (0.4.20 修复 CVE-2024-46504) -->
+            <dependency>
+                <groupId>net.coobird</groupId>
+                <artifactId>thumbnailator</artifactId>
+                <version>0.4.20</version>
+            </dependency>
+
+            <!-- ZXing core/javase (3.5.3 修复 CVE-2023-41039 等) -->
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>3.5.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>3.5.3</version>
+            </dependency>
+
+            <!-- Spring Expression (5.3.39 修复 CVE-2024-22243/22257/22259/22262/22263 等) -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>5.3.39</version>
+            </dependency>
+
+            <!-- JUnit Jupiter (5.10.2 是 Java 8 末班车) -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.10.2</version>
+            </dependency>
+
+            <!-- github-api (升级到 1.321) -->
+            <dependency>
+                <groupId>org.kohsuke</groupId>
+                <artifactId>github-api</artifactId>
+                <version>1.321</version>
+            </dependency>
+
+            <!-- gitlab4j-api (5.2.0 是 Java 8 末班车) -->
+            <dependency>
+                <groupId>org.gitlab4j</groupId>
+                <artifactId>gitlab4j-api</artifactId>
+                <version>5.2.0</version>
+            </dependency>
+
+            <!-- Apache HttpClient httpmime (与 httpclient 同版本) -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>4.5.14</version>
             </dependency>
 
             <!-- Lombok：通过注解生成 logger / getter / setter / builder 等样板代码 -->

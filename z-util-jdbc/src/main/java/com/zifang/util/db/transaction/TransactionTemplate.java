@@ -34,16 +34,24 @@ public class TransactionTemplate {
     private Isolation isolation = Isolation.DEFAULT;
     private boolean readOnly = false;
 
-    public TransactionTemplate() {}
+    public TransactionTemplate() {
+    }
 
     public TransactionTemplate(TransactionManager transactionManager) {
         this.transactionManager = transactionManager;
     }
 
-    public void setPropagation(Propagation propagation) { this.propagation = propagation; }
-    public void setIsolation(Isolation isolation) { this.isolation = isolation; }
-    public void setReadOnly(boolean readOnly) { this.readOnly = readOnly; }
-    public void setTransactionManager(TransactionManager tm) { this.transactionManager = tm; }
+    public void setPropagation(Propagation propagation) {
+        this.propagation = propagation;
+    }
+
+    public void setIsolation(Isolation isolation) {
+        this.isolation = isolation;
+    }
+
+    public void setReadOnly(boolean readOnly) {
+        this.readOnly = readOnly;
+    }
 
     /**
      * 执行事务，无返回值。
@@ -95,9 +103,17 @@ public class TransactionTemplate {
         return transactionManager;
     }
 
-    @FunctionalInterface
-    public interface TransactionAction { void execute(); }
+    public void setTransactionManager(TransactionManager tm) {
+        this.transactionManager = tm;
+    }
 
     @FunctionalInterface
-    public interface TransactionFunction<T> { T execute(); }
+    public interface TransactionAction {
+        void execute();
+    }
+
+    @FunctionalInterface
+    public interface TransactionFunction<T> {
+        T execute();
+    }
 }

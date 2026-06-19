@@ -163,7 +163,10 @@ public class LogUtilsTest {
         Advise<FakeTarget> advise = new LoggableAdvise<>();
         Object result = advise.around(new FakeTarget(), FakeTarget.class.getMethod("greet", String.class),
                 new Object[]{"alice"},
-                () -> { captured.set("chain-called"); return "hi-alice"; });
+                () -> {
+                    captured.set("chain-called");
+                    return "hi-alice";
+                });
         assertEquals("hi-alice", result);
         assertEquals("chain-called", captured.get());
     }
@@ -174,7 +177,9 @@ public class LogUtilsTest {
         try {
             advise.around(new FakeTarget(), FakeTarget.class.getMethod("boom"),
                     new Object[0],
-                    () -> { throw new IllegalStateException("expected"); });
+                    () -> {
+                        throw new IllegalStateException("expected");
+                    });
             fail("expected exception");
         } catch (IllegalStateException e) {
             assertEquals("expected", e.getMessage());
@@ -184,6 +189,14 @@ public class LogUtilsTest {
     }
 
     // ===== @Loggable + ProxyFactory 端到端 =====
+
+    @Test
+    public void loggable_worksThroughProxyFactory() {
+        Service svc = (Service) ProxyFactory.wrap(new ServiceImpl());
+        // 不抛异常即视为成功（实际日志走 slf4j 绑定，没有 binding 时静默）
+        String r = svc.create("alice", 100);
+        assertEquals("created-for-alice-100", r);
+    }
 
     public interface Service {
         String create(String user, int amount);
@@ -198,18 +211,15 @@ public class LogUtilsTest {
         }
     }
 
-    @Test
-    public void loggable_worksThroughProxyFactory() {
-        Service svc = (Service) ProxyFactory.wrap(new ServiceImpl());
-        // 不抛异常即视为成功（实际日志走 slf4j 绑定，没有 binding 时静默）
-        String r = svc.create("alice", 100);
-        assertEquals("created-for-alice-100", r);
-    }
-
     // ===== helper class =====
 
     public static class FakeTarget {
-        public String greet(String name) { return "hi-" + name; }
-        public void boom() { throw new IllegalStateException("expected"); }
+        public String greet(String name) {
+            return "hi-" + name;
+        }
+
+        public void boom() {
+            throw new IllegalStateException("expected");
+        }
     }
 }

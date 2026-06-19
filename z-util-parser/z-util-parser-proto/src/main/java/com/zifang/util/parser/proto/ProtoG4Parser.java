@@ -3,11 +3,7 @@ package com.zifang.util.parser.proto;
 import com.zifang.util.dsl.g4.DynamicLexer;
 import com.zifang.util.dsl.token.Token;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -20,6 +16,7 @@ import java.util.List;
  * 支持 proto3 子集：syntax、package、import、message（含 nested message/enum/field）、
  * enum、service、rpc。
  */
+
 /**
  * ProtoG4Parser类。
  */
@@ -32,7 +29,8 @@ public class ProtoG4Parser {
      */
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return ProtoDocument类型返回值
      */
     public ProtoDocument parse(String content) {
@@ -44,7 +42,8 @@ public class ProtoG4Parser {
      */
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return ProtoDocument类型返回值
      */
     public ProtoDocument parse(Reader reader) {

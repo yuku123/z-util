@@ -22,6 +22,7 @@ public class Robot {
     private int sensorVal;
     private Maze maze;
     private ArrayList<int[]> route;
+
     /**
      * Robot方法。
      * * @param sensorActions int[]类型参数

@@ -46,11 +46,20 @@ public class AopProxyPostProcessor {
         }
     }
 
+    private static Class<?>[] collectInterfaces(Class<?> klass) {
+        java.util.LinkedHashSet<Class<?>> set = new java.util.LinkedHashSet<>();
+        while (klass != null) {
+            for (Class<?> i : klass.getInterfaces()) set.add(i);
+            klass = klass.getSuperclass();
+        }
+        return set.toArray(new Class<?>[0]);
+    }
+
     /**
      * 若 BeanDefinition 指向的实例匹配任何拦截规则，包装为代理；
      * 否则返回原实例。
      *
-     * @param bd   Bean 定义
+     * @param bd          Bean 定义
      * @param rawInstance 刚创建出的原始实例
      * @return 可能被包装的实例
      */
@@ -106,15 +115,6 @@ public class AopProxyPostProcessor {
                 target.getClass().getClassLoader(),
                 interfaces,
                 handler);
-    }
-
-    private static Class<?>[] collectInterfaces(Class<?> klass) {
-        java.util.LinkedHashSet<Class<?>> set = new java.util.LinkedHashSet<>();
-        while (klass != null) {
-            for (Class<?> i : klass.getInterfaces()) set.add(i);
-            klass = klass.getSuperclass();
-        }
-        return set.toArray(new Class<?>[0]);
     }
 
     /**

@@ -18,28 +18,24 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.12.0</version>
         </dependency>
 
         <!-- OkHttp SSE (Server-Sent Events) -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp-sse</artifactId>
-            <version>4.12.0</version>
         </dependency>
 
         <!-- Apache HttpClient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5.13</version>
         </dependency>
 
         <!-- Apache HttpComponents MIME (用于 multipart 上传) -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>4.5.13</version>
             <scope>test</scope>
         </dependency>
 
@@ -53,7 +49,6 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.1.100.Final</version>
         </dependency>
 
         <!-- JSON 处理 -->

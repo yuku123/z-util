@@ -31,6 +31,7 @@ public final class Jwt {
      */
     public static final SigningAlgorithm HS256 = HmacSha256.INSTANCE;
     public static final SigningAlgorithm HS512 = HmacSha512.INSTANCE;
+
     private Jwt() {
     }
 

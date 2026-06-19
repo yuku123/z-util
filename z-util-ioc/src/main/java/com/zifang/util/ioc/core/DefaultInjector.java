@@ -3,18 +3,12 @@ package com.zifang.util.ioc.core;
 import com.zifang.util.ioc.Injector;
 import com.zifang.util.ioc.Module;
 import com.zifang.util.ioc.aop.AopProxyPostProcessor;
-import com.zifang.util.ioc.aop.InterceptorBinding;
 import com.zifang.util.ioc.binder.DefaultBinder;
-import com.zifang.util.ioc.exception.BeanCreationException;
-import com.zifang.util.ioc.exception.BindingException;
-import com.zifang.util.ioc.exception.CircularDependencyException;
-import com.zifang.util.ioc.exception.NoSuchBeanException;
-import com.zifang.util.ioc.exception.ProvisionException;
+import com.zifang.util.ioc.exception.*;
 import com.zifang.util.ioc.inject.ConstructorInjector;
 import com.zifang.util.ioc.inject.FieldInjector;
 import com.zifang.util.ioc.lifecycle.LifecycleManager;
 import com.zifang.util.ioc.metadata.BeanDefinition;
-import com.zifang.util.ioc.metadata.BindingKey;
 import com.zifang.util.ioc.metadata.Scope;
 import com.zifang.util.ioc.provider.InternalProvider;
 import org.slf4j.Logger;
@@ -58,13 +52,19 @@ public class DefaultInjector implements Injector {
     private final FieldInjector fieldInjector;
     private final LifecycleManager lifecycleManager;
 
-    /** 用于循环依赖检测的线程局部创建栈 */
+    /**
+     * 用于循环依赖检测的线程局部创建栈
+     */
     private final ThreadLocal<List<String>> creationStack = ThreadLocal.withInitial(ArrayList::new);
 
-    /** eager singleton 在创建阶段立即实例化 */
+    /**
+     * eager singleton 在创建阶段立即实例化
+     */
     private final Map<BeanDefinition, Object> eagerSingletons = new ConcurrentHashMap<>();
 
-    /** 子 Injector 链：用于 createChildInjector() */
+    /**
+     * 子 Injector 链：用于 createChildInjector()
+     */
     private final DefaultInjector parent;
 
     public DefaultInjector(Module... modules) {

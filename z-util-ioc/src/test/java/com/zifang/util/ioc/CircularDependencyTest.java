@@ -1,11 +1,9 @@
 package com.zifang.util.ioc;
 
 import com.zifang.util.ioc.binder.AbstractModule;
-import com.zifang.util.ioc.exception.CircularDependencyException;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +11,32 @@ import static org.junit.jupiter.api.Assertions.*;
  * 循环依赖检测测试，对标 Guice 的 {@code ProvisionException}。
  */
 class CircularDependencyTest {
+
+    @Test
+    void circularFieldInjectionDetected() {
+        Injector injector = Injector.createInjector(new CircleModule());
+        assertThrows(RuntimeException.class, () -> injector.getInstance(A.class));
+    }
+
+    @Test
+    void longChainCircularDependencyDetected() {
+        Injector injector = Injector.createInjector(new LongChainModule());
+        assertThrows(RuntimeException.class, () -> injector.getInstance(C.class));
+    }
+
+    @Test
+    void selfReferenceDetected() {
+        Injector injector = Injector.createInjector(new SelfRefModule());
+        assertThrows(RuntimeException.class, () -> injector.getInstance(SelfRef.class));
+    }
+
+    @Test
+    void nonCircularDoesNotThrow() {
+        Injector injector = Injector.createInjector(new OkModule());
+        OkA a = injector.getInstance(OkA.class);
+        assertNotNull(a);
+        assertEquals("ok", a.b.name);
+    }
 
     public static class A {
         @Inject
@@ -30,12 +54,6 @@ class CircularDependencyTest {
             bind(A.class);
             bind(B.class);
         }
-    }
-
-    @Test
-    void circularFieldInjectionDetected() {
-        Injector injector = Injector.createInjector(new CircleModule());
-        assertThrows(RuntimeException.class, () -> injector.getInstance(A.class));
     }
 
     public static class C {
@@ -62,12 +80,6 @@ class CircularDependencyTest {
         }
     }
 
-    @Test
-    void longChainCircularDependencyDetected() {
-        Injector injector = Injector.createInjector(new LongChainModule());
-        assertThrows(RuntimeException.class, () -> injector.getInstance(C.class));
-    }
-
     public static class SelfRef {
         @Inject
         public SelfRef self;
@@ -78,12 +90,6 @@ class CircularDependencyTest {
         protected void configure() {
             bind(SelfRef.class);
         }
-    }
-
-    @Test
-    void selfReferenceDetected() {
-        Injector injector = Injector.createInjector(new SelfRefModule());
-        assertThrows(RuntimeException.class, () -> injector.getInstance(SelfRef.class));
     }
 
     public static class OkA {
@@ -101,13 +107,5 @@ class CircularDependencyTest {
             bind(OkA.class);
             bind(OkB.class);
         }
-    }
-
-    @Test
-    void nonCircularDoesNotThrow() {
-        Injector injector = Injector.createInjector(new OkModule());
-        OkA a = injector.getInstance(OkA.class);
-        assertNotNull(a);
-        assertEquals("ok", a.b.name);
     }
 }

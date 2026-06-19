@@ -1,7 +1,5 @@
 package com.zifang.util.ioc.aop;
 
-import com.zifang.util.aop.Advise;
-
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
@@ -18,8 +16,6 @@ import java.util.Objects;
  */
 @FunctionalInterface
 public interface ClassMatcher {
-
-    boolean matches(Class<?> clazz);
 
     static ClassMatcher any() {
         return clazz -> true;
@@ -40,6 +36,8 @@ public interface ClassMatcher {
         Objects.requireNonNull(annotation, "annotation");
         return clazz -> clazz.isAnnotationPresent(annotation);
     }
+
+    boolean matches(Class<?> clazz);
 
     /**
      * 复合：与（AND）。

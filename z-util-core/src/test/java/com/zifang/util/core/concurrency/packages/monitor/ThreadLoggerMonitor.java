@@ -145,7 +145,7 @@ package com.zifang.util.core.concurrency.packages.monitor;//package com.zifang.u
 //}
 //
 //
-///**
+/// **
 //它是如何工作的…
 //	在这个指南里，你已经使用 Java logging API 提供的log类 在并发应用中写日志信息。首先，你实现了 MyFormatter 类来给日志信息一个格式。这个类扩展 Formatter 类，声明了抽象方法 format()。此方法接收 LogRecord 对象的全部日志消息信息，并返回一条格式化的日志信息。在你的类里使用了 LogRecord类的以下这些方法来获取日志信息：
 //		1.getLevel(): 返回的信息的级别。

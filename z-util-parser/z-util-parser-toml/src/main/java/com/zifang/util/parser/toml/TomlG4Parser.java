@@ -5,11 +5,7 @@ import com.zifang.util.dsl.core.TokenReader;
 import com.zifang.util.dsl.g4.DynamicLexer;
 import com.zifang.util.dsl.g4.DynamicParser;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +19,7 @@ import java.util.List;
  * 支持 TOML v1.0.0 子集：key=value、sections [a.b]、array of tables [[a]]、
  * 字符串（双引号/单引号）、数字、布尔、null、数组。
  */
+
 /**
  * TomlG4Parser类。
  */
@@ -36,7 +33,8 @@ public class TomlG4Parser {
      */
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return TomlDocument类型返回值
      */
     public TomlDocument parse(String content) {
@@ -48,7 +46,8 @@ public class TomlG4Parser {
      */
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return TomlDocument类型返回值
      */
     public TomlDocument parse(Reader reader) {
@@ -226,12 +225,30 @@ public class TomlG4Parser {
             if (c == '\\' && i + 1 < len) {
                 char n = s.charAt(i + 1);
                 switch (n) {
-                    case 'n': sb.append('\n'); i += 2; break;
-                    case 't': sb.append('\t'); i += 2; break;
-                    case 'r': sb.append('\r'); i += 2; break;
-                    case '"': sb.append('"'); i += 2; break;
-                    case '\\': sb.append('\\'); i += 2; break;
-                    default: sb.append(c).append(n); i += 2; break;
+                    case 'n':
+                        sb.append('\n');
+                        i += 2;
+                        break;
+                    case 't':
+                        sb.append('\t');
+                        i += 2;
+                        break;
+                    case 'r':
+                        sb.append('\r');
+                        i += 2;
+                        break;
+                    case '"':
+                        sb.append('"');
+                        i += 2;
+                        break;
+                    case '\\':
+                        sb.append('\\');
+                        i += 2;
+                        break;
+                    default:
+                        sb.append(c).append(n);
+                        i += 2;
+                        break;
                 }
             } else {
                 sb.append(c);

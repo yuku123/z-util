@@ -3,11 +3,7 @@ package com.zifang.util.parser.properties;
 import com.zifang.util.dsl.g4.DynamicLexer;
 import com.zifang.util.dsl.token.Token;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -19,6 +15,7 @@ import java.util.List;
  * <p>
  * 优势：语法扩展只需修改 PropertiesLexer.g4，无需改动 Java 代码。
  */
+
 /**
  * PropertiesG4Parser类。
  */
@@ -31,7 +28,8 @@ public class PropertiesG4Parser {
      */
     /**
      * parse方法。
-     *      * @param content String类型参数
+     * * @param content String类型参数
+     *
      * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(String content) {
@@ -43,7 +41,8 @@ public class PropertiesG4Parser {
      */
     /**
      * parse方法。
-     *      * @param reader Reader类型参数
+     * * @param reader Reader类型参数
+     *
      * @return PropertiesModel类型返回值
      */
     public PropertiesModel parse(Reader reader) {
@@ -136,11 +135,26 @@ public class PropertiesG4Parser {
             if (c == '\\' && i + 1 < len) {
                 char next = str.charAt(i + 1);
                 switch (next) {
-                    case 't': sb.append('\t'); i += 2; break;
-                    case 'n': sb.append('\n'); i += 2; break;
-                    case 'r': sb.append('\r'); i += 2; break;
-                    case '"': sb.append('"'); i += 2; break;
-                    case '\\': sb.append('\\'); i += 2; break;
+                    case 't':
+                        sb.append('\t');
+                        i += 2;
+                        break;
+                    case 'n':
+                        sb.append('\n');
+                        i += 2;
+                        break;
+                    case 'r':
+                        sb.append('\r');
+                        i += 2;
+                        break;
+                    case '"':
+                        sb.append('"');
+                        i += 2;
+                        break;
+                    case '\\':
+                        sb.append('\\');
+                        i += 2;
+                        break;
                     case 'u':
                         if (i + 5 < len) {
                             try {

@@ -45,40 +45,6 @@ import static org.junit.Assert.*;
  */
 public class E2E_WebLogAspectReplacementTest {
 
-    public interface UserController {
-        String login(String username, String password);
-    }
-
-    public static class UserControllerImpl implements UserController {
-        @Override
-        @Intercept(WebLogAdvise.class)
-        public String login(String username, String password) {
-            try { Thread.sleep(50); } catch (InterruptedException e) { /* */ }
-            return "session-" + username + "-" + UUID.randomUUID().toString().substring(0, 8);
-        }
-    }
-
-    /** 自研 advice：等价于原 aspectj @Around。 */
-    public static class WebLogAdvise implements Advise<UserController> {
-        static final List<String> LOG = new ArrayList<>();
-
-        @Override
-        public Object around(UserController target, Method method, Object[] args, Advise.Chain chain) throws Throwable {
-            TraceContextHolder.startNew();
-            long t0 = System.nanoTime();
-            String signature = method.getDeclaringClass().getSimpleName() + "." + method.getName();
-            try {
-                Object r = chain.proceed();
-                long elapsed = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - t0);
-                LOG.add(String.format("%s ms=%d trace=%s",
-                        signature, elapsed, TraceContextHolder.currentTraceId()));
-                return r;
-            } finally {
-                TraceContextHolder.stop();
-            }
-        }
-    }
-
     @Test
     public void testWebLogAspect_withTraceAndMeter() {
         WebLogAdvise.LOG.clear();
@@ -107,5 +73,43 @@ public class E2E_WebLogAspectReplacementTest {
         assertEquals(1, metered.meter().putCount());
         assertEquals(1, metered.meter().hitCount());
         assertEquals(0, metered.meter().missCount());
+    }
+
+    public interface UserController {
+        String login(String username, String password);
+    }
+
+    public static class UserControllerImpl implements UserController {
+        @Override
+        @Intercept(WebLogAdvise.class)
+        public String login(String username, String password) {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) { /* */ }
+            return "session-" + username + "-" + UUID.randomUUID().toString().substring(0, 8);
+        }
+    }
+
+    /**
+     * 自研 advice：等价于原 aspectj @Around。
+     */
+    public static class WebLogAdvise implements Advise<UserController> {
+        static final List<String> LOG = new ArrayList<>();
+
+        @Override
+        public Object around(UserController target, Method method, Object[] args, Advise.Chain chain) throws Throwable {
+            TraceContextHolder.startNew();
+            long t0 = System.nanoTime();
+            String signature = method.getDeclaringClass().getSimpleName() + "." + method.getName();
+            try {
+                Object r = chain.proceed();
+                long elapsed = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - t0);
+                LOG.add(String.format("%s ms=%d trace=%s",
+                        signature, elapsed, TraceContextHolder.currentTraceId()));
+                return r;
+            } finally {
+                TraceContextHolder.stop();
+            }
+        }
     }
 }

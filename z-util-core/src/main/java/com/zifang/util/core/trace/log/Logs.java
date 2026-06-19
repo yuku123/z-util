@@ -31,14 +31,19 @@ import java.util.function.Supplier;
  */
 public final class Logs {
 
-    private Logs() {}
+    private Logs() {
+    }
 
-    /** 按 Class 取 Logger。 */
+    /**
+     * 按 Class 取 Logger。
+     */
     public static Logger of(Class<?> clazz) {
         return LoggerFactory.getLogger(clazz);
     }
 
-    /** 按名字取 Logger。 */
+    /**
+     * 按名字取 Logger。
+     */
     public static Logger of(String name) {
         return LoggerFactory.getLogger(name);
     }

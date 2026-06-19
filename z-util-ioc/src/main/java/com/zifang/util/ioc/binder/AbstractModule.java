@@ -1,7 +1,6 @@
 package com.zifang.util.ioc.binder;
 
 import com.zifang.util.ioc.Module;
-import com.zifang.util.ioc.metadata.BeanDefinition;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -24,8 +23,8 @@ import java.util.List;
  */
 public abstract class AbstractModule implements Module {
 
-    private DefaultBinder binder;
     private final List<DefaultBinder.BindingBuilderImpl<?>> openBuilders = new ArrayList<>();
+    private DefaultBinder binder;
 
     @Override
     public final void configure(Binder binder) {

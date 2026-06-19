@@ -11,6 +11,7 @@ public class G4Rule {
     private String body;        // 原始规则体
     private boolean isFragment;
     private boolean hidden;     // 是否为HIDDEN channel
+
     /**
      * 默认构造函数
      */

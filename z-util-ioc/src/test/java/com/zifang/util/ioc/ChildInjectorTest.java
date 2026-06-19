@@ -13,6 +13,50 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class ChildInjectorTest {
 
+    @Test
+    void childInheritsParentBindings() {
+        Injector parent = Injector.createInjector(new ParentModule());
+        Injector child = parent.createChildInjector(new ChildOverrideModule());
+
+        // parent still uses default
+        assertEquals("default", parent.getInstance(Holder.class).svc.name());
+        // child overrides
+        assertEquals("override", child.getInstance(Holder.class).svc.name());
+    }
+
+    @Test
+    void childCanAddNewBindings() {
+        Injector parent = Injector.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(Holder.class);
+            }
+        });
+        Injector child = parent.createChildInjector(new ChildNewModule());
+        // child uses child-only
+        assertEquals("child-only", child.getInstance(Holder.class).svc.name());
+        // parent does not have IService binding
+        assertThrows(RuntimeException.class, () -> parent.getInstance(Holder.class));
+    }
+
+    @Test
+    void parentAndChildHaveSeparateSingletons() {
+        Counter.CTORS = 0;
+        Injector parent = Injector.createInjector(new AbstractModule() {
+            @Override
+            protected void configure() {
+                bind(Counter.class);
+            }
+        });
+        Injector child = parent.createChildInjector();
+        Counter p = parent.getInstance(Counter.class);
+        Counter c = child.getInstance(Counter.class);
+        assertNotNull(p);
+        assertNotNull(c);
+        assertNotSame(p, c);
+        assertEquals(2, Counter.CTORS);
+    }
+
     public interface IService {
         String name();
     }
@@ -65,55 +109,12 @@ class ChildInjectorTest {
         }
     }
 
-    @Test
-    void childInheritsParentBindings() {
-        Injector parent = Injector.createInjector(new ParentModule());
-        Injector child = parent.createChildInjector(new ChildOverrideModule());
-
-        // parent still uses default
-        assertEquals("default", parent.getInstance(Holder.class).svc.name());
-        // child overrides
-        assertEquals("override", child.getInstance(Holder.class).svc.name());
-    }
-
-    @Test
-    void childCanAddNewBindings() {
-        Injector parent = Injector.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(Holder.class);
-            }
-        });
-        Injector child = parent.createChildInjector(new ChildNewModule());
-        // child uses child-only
-        assertEquals("child-only", child.getInstance(Holder.class).svc.name());
-        // parent does not have IService binding
-        assertThrows(RuntimeException.class, () -> parent.getInstance(Holder.class));
-    }
-
     @Singleton
     public static class Counter {
         public static int CTORS = 0;
+
         public Counter() {
             CTORS++;
         }
-    }
-
-    @Test
-    void parentAndChildHaveSeparateSingletons() {
-        Counter.CTORS = 0;
-        Injector parent = Injector.createInjector(new AbstractModule() {
-            @Override
-            protected void configure() {
-                bind(Counter.class);
-            }
-        });
-        Injector child = parent.createChildInjector();
-        Counter p = parent.getInstance(Counter.class);
-        Counter c = child.getInstance(Counter.class);
-        assertNotNull(p);
-        assertNotNull(c);
-        assertNotSame(p, c);
-        assertEquals(2, Counter.CTORS);
     }
 }

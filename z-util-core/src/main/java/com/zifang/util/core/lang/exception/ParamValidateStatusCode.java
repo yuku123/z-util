@@ -12,6 +12,7 @@ public enum ParamValidateStatusCode implements StatusCode {
 
     private final int code;
     private final String message;
+
     ParamValidateStatusCode(int code, String message) {
         this.code = code;
         this.message = message;

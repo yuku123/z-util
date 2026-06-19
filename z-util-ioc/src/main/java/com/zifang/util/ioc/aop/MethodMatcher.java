@@ -18,8 +18,6 @@ import java.util.Objects;
 @FunctionalInterface
 public interface MethodMatcher {
 
-    boolean matches(Method method);
-
     static MethodMatcher any() {
         return method -> true;
     }
@@ -38,6 +36,8 @@ public interface MethodMatcher {
         Objects.requireNonNull(prefix, "prefix");
         return method -> method.getName().startsWith(prefix);
     }
+
+    boolean matches(Method method);
 
     default MethodMatcher and(MethodMatcher other) {
         return method -> this.matches(method) && other.matches(method);

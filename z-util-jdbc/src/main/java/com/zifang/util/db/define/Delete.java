@@ -23,6 +23,8 @@ import java.lang.annotation.*;
 @Documented
 public @interface Delete {
 
-    /** SQL 语句，支持 #{paramName} 绑定。 */
+    /**
+     * SQL 语句，支持 #{paramName} 绑定。
+     */
     String value();
 }

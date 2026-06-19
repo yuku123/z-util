@@ -23,10 +23,10 @@ public class ProtoG4ParserTest {
     @Test
     public void testMessageWithFields() {
         ProtoDocument doc = parser.parse(
-            "message User {\n" +
-            "  int32 id = 1;\n" +
-            "  string name = 2;\n" +
-            "}"
+                "message User {\n" +
+                        "  int32 id = 1;\n" +
+                        "  string name = 2;\n" +
+                        "}"
         );
         assertEquals(1, doc.getMessages().size());
         assertEquals("User", doc.getMessages().get(0).getName());
@@ -36,9 +36,9 @@ public class ProtoG4ParserTest {
     @Test
     public void testService() {
         ProtoDocument doc = parser.parse(
-            "service S {\n" +
-            "  rpc Get(Request) returns (Response);\n" +
-            "}"
+                "service S {\n" +
+                        "  rpc Get(Request) returns (Response);\n" +
+                        "}"
         );
         assertEquals(1, doc.getServices().size());
         assertEquals("S", doc.getServices().get(0).getName());

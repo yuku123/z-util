@@ -4,9 +4,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * CsvG4Parser 烟雾测试：验证 G4 DSL 路径能正确产出 List<String[]>。

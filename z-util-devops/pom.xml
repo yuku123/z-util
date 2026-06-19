@@ -19,13 +19,13 @@
         <dependency>
             <groupId>org.kohsuke</groupId>
             <artifactId>github-api</artifactId>
-            <version>1.135</version>
+            <version>1.321</version>
         </dependency>
 
         <dependency>
             <groupId>org.gitlab4j</groupId>
             <artifactId>gitlab4j-api</artifactId>
-            <version>4.14.30</version>
+            <version>5.2.0</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
@@ -33,6 +33,18 @@
             <groupId>com.mashape.unirest</groupId>
             <artifactId>unirest-java</artifactId>
             <version>1.4.9</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 显式引入安全的 httpclient，覆盖 unirest-java 1.4.9 内置的 4.5.4（CVE-2020-13956） -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
         </dependency>
 
         <!-- JGit: 纯 Java 实现的 git 操作库 -->

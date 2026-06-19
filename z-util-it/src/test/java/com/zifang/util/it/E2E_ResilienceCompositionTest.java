@@ -1,12 +1,8 @@
 package com.zifang.util.it;
 
-import com.zifang.util.core.resilience.Bulkhead;
-import com.zifang.util.core.resilience.CircuitBreaker;
-import com.zifang.util.core.resilience.ResilienceException;
-import com.zifang.util.core.resilience.Retry;
-import com.zifang.util.core.resilience.TimeLimiter;
 import com.zifang.util.core.ratelimit.RateLimiter;
 import com.zifang.util.core.ratelimit.TokenBucketRateLimiter;
+import com.zifang.util.core.resilience.*;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -20,29 +16,6 @@ import static org.junit.Assert.*;
  * 模拟外部 RPC 调用：每个保护层独立可关，组合抗雪崩。
  */
 public class E2E_ResilienceCompositionTest {
-
-    /** 模拟外部服务：可控时延、偶发失败。 */
-    public static class FlakyRemoteService {
-        private final AtomicInteger calls = new AtomicInteger();
-        private final long latencyMs;
-        private final double failureRate;
-
-        public FlakyRemoteService(long latencyMs, double failureRate) {
-            this.latencyMs = latencyMs;
-            this.failureRate = failureRate;
-        }
-
-        public String call(String req) throws InterruptedException {
-            int n = calls.incrementAndGet();
-            Thread.sleep(latencyMs);
-            if (Math.random() < failureRate) {
-                throw new RuntimeException("simulated failure #" + n);
-            }
-            return "ok:" + req;
-        }
-
-        public int totalCalls() { return calls.get(); }
-    }
 
     @Test
     public void testRateLimiter_throttlesExcess() {
@@ -68,7 +41,10 @@ public class E2E_ResilienceCompositionTest {
                     bulkhead.call(() -> {
                         int c = inside.incrementAndGet();
                         maxInside.updateAndGet(prev -> Math.max(prev, c));
-                        try { Thread.sleep(100); } catch (InterruptedException e) {}
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                        }
                         inside.decrementAndGet();
                         return "ok";
                     });
@@ -89,13 +65,19 @@ public class E2E_ResilienceCompositionTest {
         CircuitBreaker cb = new CircuitBreaker(2, 1, 100);
 
         for (int i = 0; i < 2; i++) {
-            try { cb.call(() -> svc.call("x")); fail(); } catch (Exception ignored) {}
+            try {
+                cb.call(() -> svc.call("x"));
+                fail();
+            } catch (Exception ignored) {
+            }
         }
         assertEquals(CircuitBreaker.State.OPEN, cb.getState());
 
         int before = svc.totalCalls();
-        try { cb.call(() -> svc.call("x")); fail("expected open"); }
-        catch (com.zifang.util.core.resilience.CircuitOpenException expected) { /* ok */ }
+        try {
+            cb.call(() -> svc.call("x"));
+            fail("expected open");
+        } catch (com.zifang.util.core.resilience.CircuitOpenException expected) { /* ok */ }
         assertEquals("circuit should short-circuit, no new remote calls",
                 before, svc.totalCalls());
     }
@@ -104,7 +86,10 @@ public class E2E_ResilienceCompositionTest {
     public void testTimeLimiter_interruptsLongCall() {
         TimeLimiter tl = new TimeLimiter(2, 1000);
         try {
-            tl.call(() -> { Thread.sleep(5000); return "late"; }, 100);
+            tl.call(() -> {
+                Thread.sleep(5000);
+                return "late";
+            }, 100);
             fail("expected timeout");
         } catch (ResilienceException e) {
             assertTrue("message should mention timeout, got: " + e.getMessage(),
@@ -116,6 +101,7 @@ public class E2E_ResilienceCompositionTest {
     public void testRetry_succeedsOn2ndAttempt() {
         FlakyRemoteService svc = new FlakyRemoteService(0, 0.0) {
             private final AtomicInteger callCount = new AtomicInteger();
+
             @Override
             public String call(String req) throws InterruptedException {
                 int n = callCount.incrementAndGet();
@@ -143,7 +129,10 @@ public class E2E_ResilienceCompositionTest {
         AtomicInteger throttled = new AtomicInteger();
 
         for (int i = 0; i < 50; i++) {
-            if (!rl.tryAcquire().isAllowed()) { throttled.incrementAndGet(); continue; }
+            if (!rl.tryAcquire().isAllowed()) {
+                throttled.incrementAndGet();
+                continue;
+            }
             try {
                 String r = cb.call(() -> bh.call(() -> svc.call("x")));
                 success.incrementAndGet();
@@ -153,5 +142,32 @@ public class E2E_ResilienceCompositionTest {
         }
         assertTrue("should have some throttled, got " + throttled.get(), throttled.get() > 0);
         assertTrue("should have some success, got " + success.get(), success.get() > 0);
+    }
+
+    /**
+     * 模拟外部服务：可控时延、偶发失败。
+     */
+    public static class FlakyRemoteService {
+        private final AtomicInteger calls = new AtomicInteger();
+        private final long latencyMs;
+        private final double failureRate;
+
+        public FlakyRemoteService(long latencyMs, double failureRate) {
+            this.latencyMs = latencyMs;
+            this.failureRate = failureRate;
+        }
+
+        public String call(String req) throws InterruptedException {
+            int n = calls.incrementAndGet();
+            Thread.sleep(latencyMs);
+            if (Math.random() < failureRate) {
+                throw new RuntimeException("simulated failure #" + n);
+            }
+            return "ok:" + req;
+        }
+
+        public int totalCalls() {
+            return calls.get();
+        }
     }
 }

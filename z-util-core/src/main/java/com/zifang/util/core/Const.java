@@ -75,6 +75,7 @@ public class Const {
     String[] EMPTY_ARRAY = new String[0];
     String DEFAULT = "default";
     String LINE_BREAK = "\n";
+
     interface EnumCollectors<T> {
         List<T> getList();
     }

@@ -26,6 +26,16 @@ public class InterceptorBinding {
         this(classMatcher, MethodMatcher.any(), advises);
     }
 
+    @SafeVarargs
+    public static InterceptorBinding of(ClassMatcher cm, Class<? extends Advise>... advises) {
+        return new InterceptorBinding(cm, Arrays.asList(advises));
+    }
+
+    @SafeVarargs
+    public static InterceptorBinding of(ClassMatcher cm, MethodMatcher mm, Class<? extends Advise>... advises) {
+        return new InterceptorBinding(cm, mm, Arrays.asList(advises));
+    }
+
     public ClassMatcher getClassMatcher() {
         return classMatcher;
     }
@@ -44,15 +54,5 @@ public class InterceptorBinding {
 
     public boolean matchesMethod(java.lang.reflect.Method method) {
         return methodMatcher == null || methodMatcher.matches(method);
-    }
-
-    @SafeVarargs
-    public static InterceptorBinding of(ClassMatcher cm, Class<? extends Advise>... advises) {
-        return new InterceptorBinding(cm, Arrays.asList(advises));
-    }
-
-    @SafeVarargs
-    public static InterceptorBinding of(ClassMatcher cm, MethodMatcher mm, Class<? extends Advise>... advises) {
-        return new InterceptorBinding(cm, mm, Arrays.asList(advises));
     }
 }
