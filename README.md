@@ -64,6 +64,7 @@
 - **JDK 8 兼容**：默认 `<source>1.8</source>`，不绑定任何特定的 Spring/SpringBoot 版本，可直接在传统 Java 工程中使用。
 - **统一版本管理**：所有子模块通过 `${util.version}` 与父 POM 保持一致，升级一行即可。
 - **丰富的内部工具类**：覆盖 Guava / commons-lang3 / commons-collections 的常用集合与字符串能力。
+- **依赖精简原则**：同名依赖统一取最高版本；能用自研工具（`StringUtil` / `BeanUtil` / `Base64Utils` / `FileUtil` / `XmlUtil` …）替代的，不引入第三方。
 - **可作为学习样例**：从 DSL/表达式解析、字节码、AOP、IoC，到 NumPy/Pandas 风格的数据结构，再到 ML/RL 算法实现，均提供可读的源码。
 - **CI/CD 内建**：内置 GitHub Actions 发布到 GitHub Packages，源码包自动附加。
 
@@ -928,6 +929,46 @@ z-util-ml / z-util-math / z-util-workflow / z-util-http / z-util-crawler
 
 - 日志门面统一使用 SLF4J 1.7.36，运行期推荐 Log4j2 2.25.4（参考 `z-util-core` 的 `log4j2.xml`）。
 - 取 logger 的标准写法：`private static final Logger log = LoggerFactory.getLogger(Xxx.class);`，也可以直接使用 `com.zifang.util.core.trace.log.Logs` 的工具方法。
+### 5. 第三方依赖原则
+
+项目对第三方依赖的态度是 **「能不引就不引，能自己写就自己写」**：
+
+1. **同名依赖统一取最高版本** — 父 POM 的 `dependencyManagement` 是唯一来源，子模块不写 `<version>` 即可复用。
+2. **能用自研实现的就不引三方**，对照表如下：
+
+   | 领域 | 我们自己的实现 | 可以替代的第三方 |
+   |---|---|---|
+   | 字符串 / 判空 / 断言 | `com.zifang.util.core.lang.StringUtil` / `Assert` | commons-lang3 |
+   | 集合 / Venn / Tuple | `CollectionUtil` / `Venn` / `Tuples` | commons-collections、Guava Collections |
+   | 文件 / IO | `FileUtil` / `ZipUtil` / `JarUtil` | commons-io |
+   | Base64 / MD5 / RSA / DES | `core.security.*` | commons-codec |
+   | Bean 拷贝 / 反射 | `BeanUtil` / `ReflectUtil` | commons-beanutils |
+   | XML 读写 | `XmlUtil` | dom4j、jdom |
+   | 对象池 | `ObjectPool` | commons-pool2 |
+   | JWT | `core.security.jwt.*` | nimbus-jose-jwt、jjwt |
+
+3. **保留的第三方依赖只用于「自研成本过高」的场景**：Netty、OkHttp、ANTLR、JAXB、POI、PDFBox、Selenium、JGit、Github-API 等。
+
+### 6. 当前依赖管理范围
+
+父 POM `dependencyManagement` 收录 **~50 个** 第三方依赖（去除 lombok / pinyin4j 重复 / 未使用条目后），覆盖：
+
+- **基础设施**：SLF4J 1.7.36、Log4j2 2.25.4（`log4j-slf4j-impl` + `log4j-1.2-api`）
+- **测试**：JUnit 4.13.1、JUnit Jupiter 5.10.2、Mockito 4.11.0
+- **DI / 校验**：javax.inject 1、javax.annotation-api 1.3.2、validation-api 2.0.1、hibernate-validator 6.2.5
+- **工具**：Guava 32.1.2、commons-lang3 3.14、commons-dbutils 1.8、commons-pool2 2.12、disruptor 3.2
+- **数据库**：druid 1.2.23、mongo-java-driver 3.12.14、c3p0 0.9.1.2（JDBC 子模块用）
+- **HTTP / 网络**：OkHttp 4.12、httpclient 4.4、httpmime 4.5、netty-all 4.1.66、guice 5.0.1
+- **序列化**：fastjson 1.2.83、gson 2.11、jackson-{core,databind} 2.18.6
+- **文档 / 渲染**：POI 4.1.2、PDFBox 2.0.31、Docx4j 6.1.2、JAXB 2.3.1
+- **解析**：ANTLR 4.13.1
+- **脚本引擎**：spring-expression 5.3.39
+- **媒体**：zxing 3.5.3、thumbnailator 0.4.20
+- **运维**：github-api 1.321、gitlab4j-api 5.2.0、JGit 5.13.4、httpmime
+- **爬虫**：selenium-java 3.141.59、webdrivermanager 3.8.1、jsoup 1.18.1
+- **字节码**：javassist 3.30.2、jol-core 0.17、javaparser-symbol-solver-core 3.26.3、asm 9.7
+
+> 所有模块的依赖声明都通过父 POM 的 `<dependencyManagement>` 统一管理；子模块不写 `<version>` 即可锁定版本。
 
 ---
 
