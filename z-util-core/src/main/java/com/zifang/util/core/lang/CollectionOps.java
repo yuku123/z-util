@@ -1,6 +1,7 @@
 package com.zifang.util.core.lang;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,13 +10,12 @@ import java.util.function.Predicate;
 
 /**
  * 集合工具（CollectionUtil）的扩展，提供分批处理、findFirst 等常用但 CollectionUtil 尚未覆盖的操作。
- * <p>
- * 选用 {@code @Slf4j} 注解（对标 Lombok 最佳实践）：消除 {@code private static final Logger log} 样板代码。
  *
  * @author zifang
  */
-@Slf4j
 public final class CollectionOps {
+
+    private static final Logger log = LoggerFactory.getLogger(CollectionOps.class);
 
     private CollectionOps() {
     }

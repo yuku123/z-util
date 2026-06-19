@@ -574,13 +574,6 @@
                 <version>4.5.14</version>
             </dependency>
 
-            <!-- Lombok：通过注解生成 logger / getter / setter / builder 等样板代码 -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.18.42</version>
-                <scope>provided</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -594,14 +587,6 @@
                     <source>${compile.version}</source>
                     <target>${compile.version}</target>
                     <encoding>utf-8</encoding>
-                    <!-- Lombok annotation processor：让 @Slf4j / @Data / @Builder 等生效 -->
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>1.18.42</version>
-                        </path>
-                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 

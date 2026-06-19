@@ -8,13 +8,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.math.BigDecimal;
-import lombok.Data;
 
 /**
 * ${comment!"无注释"}
 */
 @TableName("${tableName}")
-@Data
 public class ${entityName} implements Serializable {
 
 private static final long serialVersionUID = 1L;
