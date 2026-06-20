@@ -128,7 +128,7 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j-impl</artifactId>
-                <version>2.26.0</version>
+                <version>2.25.4</version>
             </dependency>
 
             <dependency>
@@ -140,7 +140,7 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-1.2-api</artifactId>
-                <version>2.26.0</version>
+                <version>2.25.4</version>
             </dependency>
 
             <dependency>
@@ -153,13 +153,13 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>6.1.0</version>
+                <version>5.11.4</version>
             </dependency>
 
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
-                <version>6.1.0</version>
+                <version>5.11.4</version>
             </dependency>
 
             <dependency>
@@ -171,7 +171,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.20.0</version>
+                <version>3.18.0</version>
             </dependency>
 
             <dependency>
@@ -225,7 +225,7 @@
             <dependency>
                 <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>
-                <version>7.0.0</version>
+                <version>5.0.1</version>
             </dependency>
 
             <dependency>
@@ -263,14 +263,14 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.22.0</version>
+                <version>2.18.2</version>
                 <scope>compile</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
-                <version>2.22.0</version>
+                <version>2.18.2</version>
                 <scope>compile</scope>
             </dependency>
 
@@ -320,7 +320,7 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-core</artifactId>
-                <version>4.0.9</version>
+                <version>2.3.0.1</version>
             </dependency>
 
             <!-- 激活 JAXB 注解处理器（可选，根据编译需求） -->
@@ -407,7 +407,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>4.45.0</version>
+                <version>3.141.59</version>
             </dependency>
 
             <!-- WebDriverManager (3.x 末班车，支持 Java 8 + selenium 3.x) -->
@@ -428,7 +428,7 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>5.23.0</version>
+                <version>4.11.0</version>
             </dependency>
 
             <!-- thumbnailator (0.4.20 修复 CVE-2024-46504) -->
