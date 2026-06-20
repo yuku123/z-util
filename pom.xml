@@ -16,14 +16,6 @@
         <compile.version>8</compile.version>
         <junit.version>4.12</junit.version>
     </properties>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/yuku123/z-maven-repo</url>
-        </repository>
-    </distributionManagement>
-
     <!-- GitHub Packages 仓库认证（使用环境变量 MAVEN_GITHUB_TOKEN / GITHUB_TOKEN） -->
     <repositories>
         <repository>
@@ -66,6 +58,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.zifang</groupId>
+                <artifactId>z-util-all</artifactId>
+                <version>${util.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-core</artifactId>
