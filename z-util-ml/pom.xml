@@ -5,19 +5,19 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-ml</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
 
     <dependencies>
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-math</artifactId>
-            <version>${util.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

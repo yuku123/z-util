@@ -7,10 +7,10 @@
     <groupId>com.zifang</groupId>
     <artifactId>z-util</artifactId>
     <packaging>pom</packaging>
-    <version>${util.version}</version>
+    <version>${revision}</version>
 
     <properties>
-        <util.version>1.0.2-SNAPSHOT</util.version>
+        <revision>1.0.2-SNAPSHOT</revision>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
         <compile.version>8</compile.version>
@@ -69,65 +69,65 @@
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-all</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-core</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-monitor</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-distribute</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-cache</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-aop</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-jdbc</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-xml</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-math</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-expression</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-proxy</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-all</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
@@ -525,14 +525,7 @@
                 <version>1.7.3</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
-                    <!-- flatten（默认）不仅会替换 ${revision}/${sha1}/${changelist}/${timestamp}，
-                         还会把所有属性（含 ${util.version}）求值为字面量。
-                         之前用 resolveCiFriendliesOnly 会留下 ${util.version} 字面量，
-                         下游（z-opc）读这个 POM 时报
-                         "Non-resolvable parent POM for com.zifang:z-util-all:${util.version}"。
-                         见 flatten-maven-plugin 文档：
-                         https://www.mojohaus.org/flatten-maven-plugin/flatten-mojo.html#flattenMode -->
-                    <flattenMode>flatten</flattenMode>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
                 </configuration>
                 <executions>
                     <execution>

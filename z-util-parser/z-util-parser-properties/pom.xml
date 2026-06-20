@@ -5,19 +5,19 @@
     <parent>
         <artifactId>z-util-parser</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>z-util-parser-properties</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
     <description>Java Properties 文件解析器，支持标准 JDK Properties 格式</description>
 
     <dependencies>
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-dsl</artifactId>
-            <version>${util.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

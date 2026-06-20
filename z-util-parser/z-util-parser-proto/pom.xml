@@ -5,7 +5,7 @@
     <parent>
         <artifactId>z-util-parser</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -15,7 +15,7 @@
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-dsl</artifactId>
-            <version>${util.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

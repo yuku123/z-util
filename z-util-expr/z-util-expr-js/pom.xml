@@ -5,13 +5,13 @@
     <parent>
         <artifactId>z-util-expr</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-expr-js</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
 
     <properties>
         <file.encoding>UTF-8</file.encoding>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-dsl</artifactId>
-            <version>${util.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->

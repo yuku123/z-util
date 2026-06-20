@@ -5,12 +5,12 @@
     <parent>
         <artifactId>z-util-expr</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>z-util-expr-lua</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
     <description>Lua 脚本执行器，基于纯 Java Luaj 实现</description>
 
     <dependencies>

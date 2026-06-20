@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.zifang</groupId>
         <artifactId>z-util</artifactId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -24,117 +24,117 @@
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-core</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-monitor</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-parser-json</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-math</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-proxy</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-office</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-media</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-expr-js</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-crawler</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-workflow</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-visualization</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-jdbc</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-zex</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-http</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-ml</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-devops</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-source</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-distribute</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-ch</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-parser-xml</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-dsl</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-cli</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
                 <artifactId>z-util-all</artifactId>
-                <version>${util.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

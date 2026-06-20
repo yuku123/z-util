@@ -5,13 +5,13 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-ioc</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
     <name>z-util-ioc</name>
     <description>轻量级 IOC 容器，对标 Guice / Spring IOC，无第三方 IOC 依赖</description>
 

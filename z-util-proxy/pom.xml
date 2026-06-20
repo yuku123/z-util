@@ -6,12 +6,12 @@
     <parent>
         <groupId>com.zifang</groupId>
         <artifactId>z-util</artifactId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>z-util-proxy</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

@@ -5,14 +5,14 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-expr</artifactId>
     <packaging>pom</packaging>
-    <version>${util.version}</version>
+    <version>${revision}</version>
     <name>z-util-expr</name>
     <description>脚本表达式执行分支：JS、SQL、Groovy、Lua、EL</description>
 

@@ -5,24 +5,24 @@
     <parent>
         <artifactId>z-util-parser</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-parser-yaml</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
 
     <dependencies>
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-core</artifactId>
-            <version>${util.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-dsl</artifactId>
-            <version>${util.version}</version>
+            <version>${revision}</version>
         </dependency>
         <!-- SnakeYAML: 旧版 facade 后端，保留但不作为核心解析器 -->
         <dependency>

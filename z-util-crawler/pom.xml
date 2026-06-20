@@ -5,13 +5,13 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-crawler</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
 
     <dependencies>
         <!--

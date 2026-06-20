@@ -5,13 +5,13 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-http</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
 
     <dependencies>
         <!-- OkHttp HTTP 客户端 -->
@@ -67,7 +67,7 @@
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-parser-json</artifactId>
-            <version>${util.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- 测试框架 -->

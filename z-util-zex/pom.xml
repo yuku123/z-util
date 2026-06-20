@@ -6,13 +6,13 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-zex</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
 
     <dependencies>
         <!--
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-http</artifactId>
-            <version>${util.version}</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- Disruptor（z-util-zex.disrupt 实战示例） -->

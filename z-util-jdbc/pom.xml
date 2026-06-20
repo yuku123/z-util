@@ -5,13 +5,13 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>com.zifang</groupId>
-        <version>${util.version}</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-jdbc</artifactId>
-    <version>${util.version}</version>
+    <version>${revision}</version>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
         <dependency>
