@@ -525,7 +525,14 @@
                 <version>1.7.3</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    <!-- flatten（默认）不仅会替换 ${revision}/${sha1}/${changelist}/${timestamp}，
+                         还会把所有属性（含 ${util.version}）求值为字面量。
+                         之前用 resolveCiFriendliesOnly 会留下 ${util.version} 字面量，
+                         下游（z-opc）读这个 POM 时报
+                         "Non-resolvable parent POM for com.zifang:z-util-all:${util.version}"。
+                         见 flatten-maven-plugin 文档：
+                         https://www.mojohaus.org/flatten-maven-plugin/flatten-mojo.html#flattenMode -->
+                    <flattenMode>flatten</flattenMode>
                 </configuration>
                 <executions>
                     <execution>
