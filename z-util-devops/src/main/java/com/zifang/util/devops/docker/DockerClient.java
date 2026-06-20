@@ -8,7 +8,7 @@ import com.zifang.util.devops.docker.dto.ContainerDTO;
 import com.zifang.util.devops.docker.dto.ImageDTO;
 import com.zifang.util.devops.docker.dto.NetworkDTO;
 import com.zifang.util.devops.docker.dto.VolumeDTO;
-import org.apache.commons.lang3.StringUtils;
+import com.zifang.util.core.lang.StringUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -118,11 +118,11 @@ public class DockerClient {
         String[] cmd = dockerCmd("ps", "-a", "--format", "{{json .}}");
         String output = execToString(cmd);
         List<ContainerDTO> list = new ArrayList<>();
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return list;
         }
         for (String line : output.split("\n")) {
-            if (StringUtils.isBlank(line)) {
+            if (StringUtil.isBlank(line)) {
                 continue;
             }
             ContainerDTO dto = gson.fromJson(line, ContainerDTO.class);
@@ -240,7 +240,7 @@ public class DockerClient {
      */
     public ContainerDTO inspectContainer(String containerIdOrName) {
         String output = execToString(dockerCmd("inspect", containerIdOrName));
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return null;
         }
         JsonArray array = gson.fromJson(output, JsonArray.class);
@@ -320,7 +320,7 @@ public class DockerClient {
         String output = execToString(dockerCmd("diff", containerIdOrName));
         List<String> diffs = new ArrayList<>();
         for (String line : output.split("\n")) {
-            if (StringUtils.isNotBlank(line)) {
+            if (StringUtil.isNotBlank(line)) {
                 diffs.add(line);
             }
         }
@@ -333,7 +333,7 @@ public class DockerClient {
     public DockerClient.StatsDTO getContainerStats(String containerIdOrName) {
         StatsDTO stats = new StatsDTO();
         String output = execToString(dockerCmd("stats", "--no-stream", "--format", "{{json .}}", containerIdOrName));
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return stats;
         }
         JsonObject obj = gson.fromJson(output, JsonObject.class);
@@ -380,11 +380,11 @@ public class DockerClient {
     public List<ImageDTO> listImages() {
         String output = execToString(dockerCmd("images", "--format", "{{json .}}"));
         List<ImageDTO> list = new ArrayList<>();
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return list;
         }
         for (String line : output.split("\n")) {
-            if (StringUtils.isBlank(line)) {
+            if (StringUtil.isBlank(line)) {
                 continue;
             }
             ImageDTO dto = gson.fromJson(line, ImageDTO.class);
@@ -439,7 +439,7 @@ public class DockerClient {
      */
     public ImageDTO inspectImage(String imageIdOrName) {
         String output = execToString(dockerCmd("image", "inspect", imageIdOrName));
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return null;
         }
         JsonArray array = gson.fromJson(output, JsonArray.class);
@@ -511,11 +511,11 @@ public class DockerClient {
     public List<NetworkDTO> listNetworks() {
         String output = execToString(dockerCmd("network", "ls", "--format", "{{json .}}"));
         List<NetworkDTO> list = new ArrayList<>();
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return list;
         }
         for (String line : output.split("\n")) {
-            if (StringUtils.isBlank(line)) {
+            if (StringUtil.isBlank(line)) {
                 continue;
             }
             JsonObject obj = gson.fromJson(line, JsonObject.class);
@@ -538,7 +538,7 @@ public class DockerClient {
      */
     public String createNetwork(String name, String driver, String subnet) {
         List<String> cmdList = new ArrayList<>(Arrays.asList("docker", "-H", dockerHost, "network", "create", "--driver", driver));
-        if (StringUtils.isNotBlank(subnet)) {
+        if (StringUtil.isNotBlank(subnet)) {
             cmdList.add("--subnet");
             cmdList.add(subnet);
         }
@@ -579,7 +579,7 @@ public class DockerClient {
      */
     public NetworkDTO inspectNetwork(String networkIdOrName) {
         String output = execToString(dockerCmd("network", "inspect", networkIdOrName));
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return null;
         }
         JsonArray array = gson.fromJson(output, JsonArray.class);
@@ -614,11 +614,11 @@ public class DockerClient {
     public List<VolumeDTO> listVolumes() {
         String output = execToString(dockerCmd("volume", "ls", "--format", "{{json .}}"));
         List<VolumeDTO> list = new ArrayList<>();
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return list;
         }
         for (String line : output.split("\n")) {
-            if (StringUtils.isBlank(line)) {
+            if (StringUtil.isBlank(line)) {
                 continue;
             }
             JsonObject obj = gson.fromJson(line, JsonObject.class);
@@ -660,7 +660,7 @@ public class DockerClient {
      */
     public VolumeDTO inspectVolume(String volumeName) {
         String output = execToString(dockerCmd("volume", "inspect", volumeName));
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return null;
         }
         JsonArray array = gson.fromJson(output, JsonArray.class);
@@ -691,7 +691,7 @@ public class DockerClient {
      */
     public String getVersion() {
         String output = execToString(dockerCmd("version", "--format", "{{json .}}"));
-        if (StringUtils.isBlank(output)) {
+        if (StringUtil.isBlank(output)) {
             return null;
         }
         JsonObject obj = gson.fromJson(output, JsonObject.class);
@@ -733,7 +733,7 @@ public class DockerClient {
      */
     public void composeUp(String composeFile, String projectName) {
         List<String> cmd = new ArrayList<>(Arrays.asList("docker", "-H", dockerHost, "compose", "-f", composeFile));
-        if (StringUtils.isNotBlank(projectName)) {
+        if (StringUtil.isNotBlank(projectName)) {
             cmd.add("-p");
             cmd.add(projectName);
         }
@@ -747,7 +747,7 @@ public class DockerClient {
      */
     public void composeDown(String composeFile, String projectName) {
         List<String> cmd = new ArrayList<>(Arrays.asList("docker", "-H", dockerHost, "compose", "-f", composeFile));
-        if (StringUtils.isNotBlank(projectName)) {
+        if (StringUtil.isNotBlank(projectName)) {
             cmd.add("-p");
             cmd.add(projectName);
         }
@@ -760,7 +760,7 @@ public class DockerClient {
      */
     public String composePs(String composeFile, String projectName) {
         List<String> cmd = new ArrayList<>(Arrays.asList("docker", "-H", dockerHost, "compose", "-f", composeFile));
-        if (StringUtils.isNotBlank(projectName)) {
+        if (StringUtil.isNotBlank(projectName)) {
             cmd.add("-p");
             cmd.add(projectName);
         }

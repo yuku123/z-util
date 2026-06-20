@@ -1,6 +1,6 @@
 package com.zifang.util.devops.git.github.config;
 
-import org.apache.commons.lang3.StringUtils;
+import com.zifang.util.core.lang.StringUtil;
 
 /**
  * GitHub API 配置
@@ -57,7 +57,7 @@ public class GithubConfig {
      */
     public static GithubConfig fromEnv() {
         String token = System.getenv("GITHUB_TOKEN");
-        if (token == null || StringUtils.isBlank(token)) {
+        if (token == null || StringUtil.isBlank(token)) {
             throw new IllegalStateException("GITHUB_TOKEN environment variable is not set");
         }
         return of(token);

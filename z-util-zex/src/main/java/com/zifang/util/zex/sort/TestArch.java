@@ -1,6 +1,6 @@
 package com.zifang.util.zex.sort;
 
-import org.apache.commons.lang3.ArchUtils;
+import com.zifang.util.core.sys.ArchUtils;
 
 /**
  * 排序架构测试类。

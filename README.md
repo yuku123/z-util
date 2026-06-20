@@ -63,7 +63,7 @@
 - **多模块按需引入**：覆盖表达式、工作流、AI/ML、爬虫、HTTP、Netty、数学计算、字节码、分布式 ID、缓存、AOP、IoC、校验、监控、运维、可视化等场景。
 - **JDK 8 兼容**：默认 `<source>1.8</source>`，不绑定任何特定的 Spring/SpringBoot 版本，可直接在传统 Java 工程中使用。
 - **统一版本管理**：所有子模块通过 `${util.version}` 与父 POM 保持一致，升级一行即可。
-- **丰富的内部工具类**：覆盖 Guava / commons-lang3 / commons-collections 的常用集合与字符串能力。
+- **丰富的内部工具类**：覆盖 Guava / commons-collections 的常用集合与字符串能力。
 - **依赖精简原则**：同名依赖统一取最高版本；能用自研工具（`StringUtil` / `BeanUtil` / `Base64Utils` / `FileUtil` / `XmlUtil` …）替代的，不引入第三方。
 - **可作为学习样例**：从 DSL/表达式解析、字节码、AOP、IoC，到 NumPy/Pandas 风格的数据结构，再到 ML/RL 算法实现，均提供可读的源码。
 - **CI/CD 内建**：内置 GitHub Actions 发布到 GitHub Packages，源码包自动附加。
@@ -938,7 +938,8 @@ z-util-ml / z-util-math / z-util-workflow / z-util-http / z-util-crawler
 
    | 领域 | 我们自己的实现 | 可以替代的第三方 |
    |---|---|---|
-   | 字符串 / 判空 / 断言 | `com.zifang.util.core.lang.StringUtil` / `Assert` | commons-lang3 |
+   | 字符串 / 判空 / 断言 / `isBlank` / `isNotBlank` | `com.zifang.util.core.lang.StringUtil` / `Assert` | commons-lang3（**已自研替代**） |
+   | CPU 架构探测 `ArchUtils.getProcessor()` | `com.zifang.util.core.sys.ArchUtils` / `Processor` / `Arch` | commons-lang3（**已自研替代**） |
    | 集合 / Venn / Tuple | `CollectionUtil` / `Venn` / `Tuples` | commons-collections、Guava Collections |
    | 文件 / IO | `FileUtil` / `ZipUtil` / `JarUtil` | commons-io |
    | Base64 / MD5 / RSA / DES | `core.security.*` | commons-codec |
@@ -948,6 +949,7 @@ z-util-ml / z-util-math / z-util-workflow / z-util-http / z-util-crawler
    | JWT | `core.security.jwt.*` | nimbus-jose-jwt、jjwt |
 
 3. **保留的第三方依赖只用于「自研成本过高」的场景**：Netty、OkHttp、ANTLR、JAXB、POI、PDFBox、Selenium、JGit、Github-API 等。
+   > 注：commons-lang3 的 jar 仍会作为部分三方库（github-api / webdrivermanager / unirest-java）的传递依赖出现在运行时 classpath 中，但我们的源码已经不再直接依赖它。
 
 ### 6. 当前依赖管理范围
 
@@ -956,7 +958,7 @@ z-util-ml / z-util-math / z-util-workflow / z-util-http / z-util-crawler
 - **基础设施**：SLF4J 1.7.36、Log4j2 2.25.4（`log4j-slf4j-impl` + `log4j-1.2-api`）
 - **测试**：JUnit 4.13.1、JUnit Jupiter 5.10.2、Mockito 4.11.0
 - **DI / 校验**：javax.inject 1、javax.annotation-api 1.3.2、validation-api 2.0.1、hibernate-validator 6.2.5
-- **工具**：Guava 32.1.2、commons-lang3 3.14、commons-dbutils 1.8、commons-pool2 2.12、disruptor 3.2
+- **工具**：Guava 32.1.2、commons-dbutils 1.8、commons-pool2 2.12、disruptor 3.2
 - **数据库**：druid 1.2.23、mongo-java-driver 3.12.14、c3p0 0.9.1.2（JDBC 子模块用）
 - **HTTP / 网络**：OkHttp 4.12、httpclient 4.4、httpmime 4.5、netty-all 4.1.66、guice 5.0.1
 - **序列化**：fastjson 1.2.83、gson 2.11、jackson-{core,databind} 2.18.6
