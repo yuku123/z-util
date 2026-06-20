@@ -5,13 +5,6 @@ package com.zifang.util.zex.leetcode;
  * <p>
  * 此类包含LeetCode题目的解决方案。
  * 练习算法和数据结构知识。
- *
- * @author zifang
- * @version 1.0
- */
-
-/**
- * _392类。
  */
 public class _392 {
     /**
