@@ -14,16 +14,15 @@
     <version>${util.version}</version>
 
     <dependencies>
+        <!--
+            Selenium: BrowserClient.java 用的还是 3.x 的 int/long 超时 API。
+            4.x 起 WebDriver.manage().timeouts() 全改为 java.time.Duration，
+            与现有源码不兼容，因此锁 3.141.59。
+        -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.45.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.squareup.okio</groupId>
-                    <artifactId>okio</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>3.141.59</version>
         </dependency>
 
         <dependency>
