@@ -461,7 +461,7 @@
             <dependency>
                 <groupId>org.kohsuke</groupId>
                 <artifactId>github-api</artifactId>
-                <version>1.321</version>
+                <version>1.330</version>
             </dependency>
 
             <!-- gitlab4j-api (5.2.0 是 Java 8 末班车) -->
