@@ -29,6 +29,7 @@ public class BeanDefinition {
     private boolean eager;
     private Object instance;
     private long creationTime;
+
     /**
      * 兼容旧 API 的构造器（按名称构造）。
      */

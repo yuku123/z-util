@@ -184,7 +184,7 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
 
     @Override
     public V get(K key, Function<? super K, ? extends V> loader) {
-        return getOrLoad(key, loader == null ? null : k -> loader.apply(k));
+        return getOrLoad(key, loader == null ? null : loader::apply);
     }
 
     @Override
@@ -300,7 +300,7 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
             K candKey = candidate.getKey();
 
             // Main 队首
-            Map.Entry<K, V> victim = main.size() > 0 ? main.peekFirst() : null;
+            Map.Entry<K, V> victim = !main.isEmpty() ? main.peekFirst() : null;
             if (victim == null) {
                 // Main 是空的 → candidate 直接进 Main（建缓存的瞬时）
                 main.put(candKey, candidate.getValue());
@@ -405,7 +405,11 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
     }
 
     private void cleanupExpired() {
-        if (shutdown) return;
+
+        if (shutdown) {
+            return;
+        }
+
         try {
             long now = System.nanoTime();
             synchronized (this) {
@@ -424,6 +428,7 @@ public class WTinyLfuCache<K, V> implements Cache<K, V> {
                 }
             }
         } catch (RuntimeException ignored) {
+
         }
     }
 

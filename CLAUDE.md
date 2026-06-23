@@ -86,7 +86,8 @@ The `util-workflow` module provides a node-based workflow system:
 
 - Static utility classes use `*Util` or `*Utils` naming
 - Classes in `util-core` provide base functionality
-- The project does not depend on Lombok; all boilerplate is hand-written (getters/setters/loggers are declared explicitly)
+- The project does not depend on Lombok; all boilerplate is hand-written (getters/setters/loggers are declared
+  explicitly)
 
 ## Testing
 
