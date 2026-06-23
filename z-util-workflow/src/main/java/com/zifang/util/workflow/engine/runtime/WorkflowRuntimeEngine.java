@@ -1,7 +1,5 @@
 package com.zifang.util.workflow.engine.runtime;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zifang.util.workflow.config.Connector;
 import com.zifang.util.workflow.config.ExecutableWorkflowNode;
 import com.zifang.util.workflow.config.WorkflowConfiguration;
@@ -11,8 +9,8 @@ import com.zifang.util.workflow.engine.interfaces.AbstractEngineService;
 import com.zifang.util.workflow.engine.interfaces.EngineFactory;
 import com.zifang.util.workflow.persistence.WorkflowPersistencePlugin;
 import com.zifang.util.workflow.persistence.WorkflowSnapshot;
+import com.zifang.util.json.JsonUtil;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +42,6 @@ public class WorkflowRuntimeEngine {
     private AtomicInteger nodeIdGenerator;
     private AbstractEngine abstractEngine;
     private WorkflowPersistencePlugin persistencePlugin;
-    private ObjectMapper objectMapper;
 
     /**
      * 构造函数，初始化运行时引擎。
@@ -54,7 +51,6 @@ public class WorkflowRuntimeEngine {
         this.variables = new HashMap<>();
         this.currentResult = new ExecutionResult();
         this.nodeIdGenerator = new AtomicInteger(0);
-        this.objectMapper = new ObjectMapper();
     }
 
     /**
@@ -463,8 +459,8 @@ public class WorkflowRuntimeEngine {
         // Reconstruct configuration from JSON
         if (snapshot.getWorkflowConfigurationJson() != null) {
             try {
-                this.configuration = objectMapper.readValue(snapshot.getWorkflowConfigurationJson(), WorkflowConfiguration.class);
-            } catch (IOException e) {
+                this.configuration = JsonUtil.fromJson(snapshot.getWorkflowConfigurationJson(), WorkflowConfiguration.class);
+            } catch (Exception e) {
                 throw new RuntimeException("Failed to deserialize workflow configuration for process: " + processId, e);
             }
         }
@@ -538,8 +534,8 @@ public class WorkflowRuntimeEngine {
         // Serialize configuration to JSON
         if (configuration != null) {
             try {
-                snapshot.setWorkflowConfigurationJson(objectMapper.writeValueAsString(configuration));
-            } catch (JsonProcessingException e) {
+                snapshot.setWorkflowConfigurationJson(JsonUtil.toJson(configuration));
+            } catch (Exception e) {
                 throw new RuntimeException("Failed to serialize workflow configuration for process: " + processId, e);
             }
         }

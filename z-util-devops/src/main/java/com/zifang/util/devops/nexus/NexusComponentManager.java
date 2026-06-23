@@ -1,9 +1,9 @@
 package com.zifang.util.devops.nexus;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
+import com.zifang.util.json.JsonUtil;
+import com.zifang.util.json.define.TypeReference;
+import com.zifang.util.json.model.JsonArray;
+import com.zifang.util.json.model.JsonObject;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -78,12 +78,12 @@ public class NexusComponentManager {
             return;
         }
         if (response.getStatus() == 200) {
-            JsonObject jsonObject = JsonParser.parseString(response.getBody()).getAsJsonObject();
-            List<Component> temp = new Gson().fromJson(jsonObject.getAsJsonArray("items"), new TypeToken<List<Component>>() {
-            }.getType());
+            JsonObject jsonObject = JsonUtil.parseObject(response.getBody());
+            JsonArray itemsArray = jsonObject.getJsonArray("items");
+            List<Component> temp = JsonUtil.fromJson(itemsArray.toString(), new TypeReference<List<Component>>() {});
             list.addAll(temp);
-            if (!jsonObject.get("continuationToken").isJsonNull()) {
-                token = jsonObject.get("continuationToken").getAsString();
+            if (jsonObject.get("continuationToken") != null) {
+                token = String.valueOf(jsonObject.get("continuationToken"));
                 //search(repository, groupId, artifactId, list, token);
             }
         } else {

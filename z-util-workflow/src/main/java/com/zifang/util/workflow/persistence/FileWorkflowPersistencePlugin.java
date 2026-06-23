@@ -1,9 +1,9 @@
 package com.zifang.util.workflow.persistence;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
+import com.zifang.util.json.JsonUtil;
 import java.io.File;
+import java.nio.file.Files;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,6 @@ public class FileWorkflowPersistencePlugin implements WorkflowPersistencePlugin 
     private static final String DEFAULT_DIR = System.getProperty("user.home") + File.separator + ".z-workflow";
 
     private final File storageDir;
-    private final ObjectMapper objectMapper;
 
     /**
      * Constructor using default directory (~/.z-workflow/).
@@ -34,8 +33,6 @@ public class FileWorkflowPersistencePlugin implements WorkflowPersistencePlugin 
      */
     public FileWorkflowPersistencePlugin(String directoryPath) {
         this.storageDir = new File(directoryPath);
-        this.objectMapper = new ObjectMapper();
-        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         ensureDirectoryExists();
     }
 
@@ -57,7 +54,7 @@ public class FileWorkflowPersistencePlugin implements WorkflowPersistencePlugin 
         try {
             File file = getSnapshotFile(snapshot.getProcessId());
             snapshot.setLastUpdatedTime(System.currentTimeMillis());
-            objectMapper.writeValue(file, snapshot);
+            Files.writeString(file.toPath(), JsonUtil.toJson(snapshot));
         } catch (IOException e) {
             throw new RuntimeException("Failed to save workflow snapshot for process: " + snapshot.getProcessId(), e);
         }
@@ -70,7 +67,7 @@ public class FileWorkflowPersistencePlugin implements WorkflowPersistencePlugin 
             return null;
         }
         try {
-            return objectMapper.readValue(file, WorkflowSnapshot.class);
+            return JsonUtil.fromJson(new String(java.nio.file.Files.readAllBytes(file.toPath())), WorkflowSnapshot.class);
         } catch (IOException e) {
             throw new RuntimeException("Failed to load workflow snapshot for process: " + processId, e);
         }

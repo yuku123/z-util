@@ -1,10 +1,9 @@
 package com.zifang.util.devops.docker;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.zifang.util.core.lang.StringUtil;
+import com.zifang.util.json.JsonUtil;
+import com.zifang.util.json.model.JsonArray;
+import com.zifang.util.json.model.JsonObject;
 import com.zifang.util.devops.docker.dto.ContainerDTO;
 import com.zifang.util.devops.docker.dto.ImageDTO;
 import com.zifang.util.devops.docker.dto.NetworkDTO;
@@ -28,7 +27,6 @@ import java.util.List;
 public class DockerClient {
 
     private final String dockerHost;
-    private final Gson gson = new Gson();
 
     /**
      * 使用默认 docker socket
@@ -125,7 +123,7 @@ public class DockerClient {
             if (StringUtil.isBlank(line)) {
                 continue;
             }
-            ContainerDTO dto = gson.fromJson(line, ContainerDTO.class);
+            ContainerDTO dto = JsonUtil.fromJson(line, ContainerDTO.class);
             list.add(dto);
         }
         if (!all) {
@@ -243,21 +241,21 @@ public class DockerClient {
         if (StringUtil.isBlank(output)) {
             return null;
         }
-        JsonArray array = gson.fromJson(output, JsonArray.class);
+        JsonArray array = JsonUtil.parseArray(output);
         if (array.size() == 0) {
             return null;
         }
-        JsonObject obj = array.get(0).getAsJsonObject();
+        JsonObject obj = array.getJsonObject(0);
         ContainerDTO dto = new ContainerDTO();
         dto.setId(getJsonString(obj, "Id"));
         dto.setName(getJsonString(obj, "Name"));
         dto.setImage(getJsonString(obj, "Config", "Image"));
-        JsonObject stateObj = obj.has("State") ? obj.getAsJsonObject("State") : null;
+        JsonObject stateObj = obj.containsKey("State") ? obj.getJsonObject("State") : null;
         if (stateObj != null) {
             dto.setState(getJsonString(stateObj, "Status"));
             dto.setStatus(getJsonString(stateObj, "Status"));
         }
-        JsonObject configObj = obj.has("Config") ? obj.getAsJsonObject("Config") : null;
+        JsonObject configObj = obj.containsKey("Config") ? obj.getJsonObject("Config") : null;
         if (configObj != null) {
             dto.setCommand(getJsonString(configObj, "Cmd"));
         }
@@ -336,7 +334,7 @@ public class DockerClient {
         if (StringUtil.isBlank(output)) {
             return stats;
         }
-        JsonObject obj = gson.fromJson(output, JsonObject.class);
+        JsonObject obj = JsonUtil.parseObject(output);
         String cpuStr = getJsonString(obj, "CPUPerc");
         String memStr = getJsonString(obj, "MemPerc");
         String netStr = getJsonString(obj, "NetIO");
@@ -387,7 +385,7 @@ public class DockerClient {
             if (StringUtil.isBlank(line)) {
                 continue;
             }
-            ImageDTO dto = gson.fromJson(line, ImageDTO.class);
+            ImageDTO dto = JsonUtil.fromJson(line, ImageDTO.class);
             list.add(dto);
         }
         return list;
@@ -442,20 +440,20 @@ public class DockerClient {
         if (StringUtil.isBlank(output)) {
             return null;
         }
-        JsonArray array = gson.fromJson(output, JsonArray.class);
+        JsonArray array = JsonUtil.parseArray(output);
         if (array.size() == 0) {
             return null;
         }
-        JsonObject obj = array.get(0).getAsJsonObject();
+        JsonObject obj = array.getJsonObject(0);
         ImageDTO dto = new ImageDTO();
         dto.setId(getJsonString(obj, "Id"));
         dto.setCreated(getJsonString(obj, "Created"));
         dto.setSize(getJsonString(obj, "Size"));
-        if (obj.has("RepoTags")) {
-            JsonArray tags = obj.getAsJsonArray("RepoTags");
+        if (obj.containsKey("RepoTags")) {
+            JsonArray tags = obj.getJsonArray("RepoTags");
             List<String> repoTags = new ArrayList<>();
-            for (JsonElement e : tags) {
-                repoTags.add(e.getAsString());
+            for (Object e : tags) {
+                repoTags.add(e == null ? null : String.valueOf(e));
             }
             dto.setRepoTags(repoTags);
         }
@@ -518,7 +516,7 @@ public class DockerClient {
             if (StringUtil.isBlank(line)) {
                 continue;
             }
-            JsonObject obj = gson.fromJson(line, JsonObject.class);
+            JsonObject obj = JsonUtil.parseObject(line);
             NetworkDTO dto = new NetworkDTO();
             dto.setId(getJsonString(obj, "ID"));
             dto.setName(getJsonString(obj, "Name"));
@@ -582,22 +580,22 @@ public class DockerClient {
         if (StringUtil.isBlank(output)) {
             return null;
         }
-        JsonArray array = gson.fromJson(output, JsonArray.class);
+        JsonArray array = JsonUtil.parseArray(output);
         if (array.size() == 0) {
             return null;
         }
-        JsonObject obj = array.get(0).getAsJsonObject();
+        JsonObject obj = array.getJsonObject(0);
         NetworkDTO dto = new NetworkDTO();
         dto.setId(getJsonString(obj, "Id"));
         dto.setName(getJsonString(obj, "Name"));
         dto.setDriver(getJsonString(obj, "Driver"));
         dto.setScope(getJsonString(obj, "Scope"));
-        if (obj.has("IPAM")) {
-            JsonObject ipam = obj.getAsJsonObject("IPAM");
-            if (ipam.has("Config")) {
-                JsonArray configs = ipam.getAsJsonArray("Config");
+        if (obj.containsKey("IPAM")) {
+            JsonObject ipam = obj.getJsonObject("IPAM");
+            if (ipam.containsKey("Config")) {
+                JsonArray configs = ipam.getJsonArray("Config");
                 if (configs.size() > 0) {
-                    JsonObject config = configs.get(0).getAsJsonObject();
+                    JsonObject config = configs.getJsonObject(0);
                     dto.setSubnet(getJsonString(config, "Subnet"));
                     dto.setGateway(getJsonString(config, "Gateway"));
                 }
@@ -621,7 +619,7 @@ public class DockerClient {
             if (StringUtil.isBlank(line)) {
                 continue;
             }
-            JsonObject obj = gson.fromJson(line, JsonObject.class);
+            JsonObject obj = JsonUtil.parseObject(line);
             VolumeDTO dto = new VolumeDTO();
             dto.setName(getJsonString(obj, "Name"));
             dto.setDriver(getJsonString(obj, "Driver"));
@@ -663,11 +661,11 @@ public class DockerClient {
         if (StringUtil.isBlank(output)) {
             return null;
         }
-        JsonArray array = gson.fromJson(output, JsonArray.class);
+        JsonArray array = JsonUtil.parseArray(output);
         if (array.size() == 0) {
             return null;
         }
-        JsonObject obj = array.get(0).getAsJsonObject();
+        JsonObject obj = array.getJsonObject(0);
         VolumeDTO dto = new VolumeDTO();
         dto.setName(getJsonString(obj, "Name"));
         dto.setDriver(getJsonString(obj, "Driver"));
@@ -694,7 +692,7 @@ public class DockerClient {
         if (StringUtil.isBlank(output)) {
             return null;
         }
-        JsonObject obj = gson.fromJson(output, JsonObject.class);
+        JsonObject obj = JsonUtil.parseObject(output);
         return getJsonString(obj, "Server", "Version");
     }
 
@@ -773,16 +771,16 @@ public class DockerClient {
     private String getJsonString(JsonObject obj, String... keys) {
         JsonObject current = obj;
         for (int i = 0; i < keys.length - 1; i++) {
-            if (!current.has(keys[i]) || current.get(keys[i]).isJsonNull()) {
+            if (!current.containsKey(keys[i]) || current.get(keys[i]) == null) {
                 return null;
             }
-            current = current.getAsJsonObject(keys[i]);
+            current = current.getJsonObject(keys[i]);
         }
         String lastKey = keys[keys.length - 1];
-        if (!current.has(lastKey) || current.get(lastKey).isJsonNull()) {
+        if (!current.containsKey(lastKey) || current.get(lastKey) == null) {
             return null;
         }
-        return current.get(lastKey).getAsString();
+        Object v = current.get(lastKey); return v == null ? null : String.valueOf(v);
     }
 
     private double parsePercent(String str) {

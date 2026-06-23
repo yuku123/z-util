@@ -62,8 +62,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-parser-json</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>

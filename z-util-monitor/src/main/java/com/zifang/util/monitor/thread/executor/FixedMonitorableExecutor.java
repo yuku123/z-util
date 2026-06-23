@@ -1,6 +1,6 @@
 package com.zifang.util.monitor.thread.executor;
 
-import com.alibaba.fastjson.JSONObject;
+import com.zifang.util.json.model.JsonObject;
 import com.zifang.util.monitor.thread.Status;
 import com.zifang.util.monitor.thread.StatusLevel;
 import com.zifang.util.monitor.thread.ThreadPoolStatus;
@@ -166,7 +166,7 @@ public class FixedMonitorableExecutor extends ThreadPoolExecutor implements Moni
         if (this.threadPoolConfigUnit.getAlarmPolicy().needAlarm(status)) {
             status.setLevel(StatusLevel.ERROR);
         }
-        JSONObject jsonObject = new JSONObject();
+        JsonObject jsonObject = new JsonObject();
         jsonObject.put("startupTime", DateUtils.getDateTimeString(
                 status.getStartTime(), DateUtils.DEFAULT_DATE_TIME_FORMAT));
         jsonObject.put("lastStartJobTime", DateUtils.getDateTimeString(
