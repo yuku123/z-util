@@ -2,9 +2,11 @@ package com.zifang.util.workflow.persistence;
 
 
 import com.zifang.util.json.JsonUtil;
+
 import java.io.File;
-import java.nio.file.Files;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class FileWorkflowPersistencePlugin implements WorkflowPersistencePlugin 
         try {
             File file = getSnapshotFile(snapshot.getProcessId());
             snapshot.setLastUpdatedTime(System.currentTimeMillis());
-            Files.writeString(file.toPath(), JsonUtil.toJson(snapshot));
+            Files.write(file.toPath(), JsonUtil.toJson(snapshot).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException("Failed to save workflow snapshot for process: " + snapshot.getProcessId(), e);
         }

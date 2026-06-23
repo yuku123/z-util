@@ -5,6 +5,7 @@ import com.zifang.util.workflow.config.WorkflowConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -50,7 +51,7 @@ public class WorkflowConfigurationSerializer {
         try {
             Path path = Paths.get(file.toURI());
             Files.createDirectories(path.getParent());
-            Files.writeString(path, JsonUtil.toJson(config));
+            Files.write(path, JsonUtil.toJson(config).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException("Failed to write WorkflowConfiguration to file: " + file.getAbsolutePath(), e);
         }
@@ -64,7 +65,7 @@ public class WorkflowConfigurationSerializer {
      */
     public WorkflowConfiguration fromJsonFile(File file) {
         try {
-            return JsonUtil.fromJson(Files.readString(file.toPath()), WorkflowConfiguration.class);
+            return JsonUtil.fromJson(new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8), WorkflowConfiguration.class);
         } catch (IOException e) {
             throw new RuntimeException("Failed to read WorkflowConfiguration from file: " + file.getAbsolutePath(), e);
         }
