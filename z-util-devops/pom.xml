@@ -15,7 +15,7 @@
 
     <dependencies>
 
-        <!-- z-util-core 提供 StringUtil / ArchUtils 等基础工具，替换 commons-lang3 -->
+        <!-- z-util-core 提供 StringUtil / ArchUtils 等基础工具 -->
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-core</artifactId>
