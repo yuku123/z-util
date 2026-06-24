@@ -4,10 +4,12 @@ import com.zifang.util.json.JsonUtil;
 import com.zifang.util.json.define.TypeReference;
 import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import okhttp3.Credentials;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,6 +44,20 @@ public class NexusComponentManager {
     private int successDeleteTotal;
 
     /**
+     * 复用的 OkHttp 客户端，OkHttp 推荐全局共用同一实例（内部已做连接池与线程池管理）。
+     */
+    private static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
+
+    /**
+     * 构造带 Basic Auth 头的 Request.Builder。
+     */
+    private static Request.Builder authRequest(String url) {
+        return new Request.Builder()
+                .url(url)
+                .header("Authorization", Credentials.basic(NEXUS_USERNAME, NEXUS_PASSWORD));
+    }
+
+    /**
      * 搜索组件
      *
      * @param repository 仓库名称
@@ -67,27 +83,24 @@ public class NexusComponentManager {
         if (token != null) {
             url += "&continuationToken=" + token;
         }
-        HttpResponse<String> response = null;
-        try {
-            response = Unirest.get(url).basicAuth(NEXUS_USERNAME, NEXUS_PASSWORD).asString();
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-        if (response == null) {
-            System.out.println("组件搜索出错，HTTP 响应为空");
-            return;
-        }
-        if (response.getStatus() == 200) {
-            JsonObject jsonObject = JsonUtil.parseObject(response.getBody());
-            JsonArray itemsArray = jsonObject.getJsonArray("items");
-            List<Component> temp = JsonUtil.fromJson(itemsArray.toString(), new TypeReference<List<Component>>() {});
-            list.addAll(temp);
-            if (jsonObject.get("continuationToken") != null) {
-                token = String.valueOf(jsonObject.get("continuationToken"));
-                //search(repository, groupId, artifactId, list, token);
+        try (Response response = HTTP_CLIENT.newCall(authRequest(url).get().build()).execute()) {
+            int status = response.code();
+            String body = response.body() != null ? response.body().string() : "";
+            if (status == 200) {
+                JsonObject jsonObject = JsonUtil.parseObject(body);
+                JsonArray itemsArray = jsonObject.getJsonArray("items");
+                List<Component> temp = JsonUtil.fromJson(itemsArray.toString(), new TypeReference<List<Component>>() {});
+                list.addAll(temp);
+                if (jsonObject.get("continuationToken") != null) {
+                    token = String.valueOf(jsonObject.get("continuationToken"));
+                    //search(repository, groupId, artifactId, list, token);
+                }
+            } else {
+                System.out.println(String.format("组件搜索出错，http响应代码：%d，错误信息：%s", status, response.message()));
             }
-        } else {
-            System.out.println(String.format("组件搜索出错，http响应代码：%d，错误信息：%s", response.getStatus(), response.getStatusText()));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("组件搜索出错，IO 异常：" + e.getMessage());
         }
     }
 
@@ -98,21 +111,18 @@ public class NexusComponentManager {
      */
     public void delete(Component component) {
         String url = String.format("%s/service/rest/v1/components/%s", NEXUS_URL, component.getId());
-        HttpResponse response = null;
-        try {
-            response = Unirest.delete(url).basicAuth(NEXUS_USERNAME, NEXUS_PASSWORD).asBinary();
-        } catch (UnirestException e) {
+        try (Response response = HTTP_CLIENT.newCall(authRequest(url).delete().build()).execute()) {
+            int status = response.code();
+            if (status == 204) {
+                successDeleteTotal++;
+            } else {
+                System.out.println(String.format("组件【%s-%s-%s】删除失败，http响应代码：%d",
+                        component.getRepository(), component.getGroup(), component.getName(), component.getVersion(), status));
+            }
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        if (response == null) {
-            System.out.println(String.format("组件【%s-%s-%s】删除失败，HTTP 响应为空", component.getRepository(), component.getGroup(), component.getName(), component.getVersion()));
-            return;
-        }
-        int status = response.getStatus();
-        if (status == 204) {
-            successDeleteTotal++;
-        } else {
-            System.out.println(String.format("组件【%s-%s-%s】删除失败，http响应代码：%d", component.getRepository(), component.getGroup(), component.getName(), component.getVersion(), status));
+            System.out.println(String.format("组件【%s-%s-%s】删除失败，IO 异常：%s",
+                    component.getRepository(), component.getGroup(), component.getName(), component.getVersion(), e.getMessage()));
         }
     }
 

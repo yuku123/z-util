@@ -1,221 +1,115 @@
 package com.zifang.util.core.schedule;
 
-import org.quartz.JobKey;
-import org.quartz.impl.JobDetailImpl;
-
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 /**
- * 任务描述（JobDetail）的封装类。
- * <p>
- * 持有任务的完整描述信息：任务标识、任务类、JobDataMap、并发控制等。
- * 通过 {@link JobBuilder} 构建。
- *
- * @see JobBuilder
- * @see SchedulerManager#scheduleJob(JobDetail, Trigger)
+ * 任务定义（不可变）。对标 {@code org.quartz.JobDetail}。
  */
-public class JobDetail {
+public final class JobDetail {
 
-    private final org.quartz.JobDetail delegate;
+    private final JobKey key;
+    private final Class<? extends Job> jobClass;
+    private final JobDataMap jobDataMap;
+    private final String description;
+    private final boolean durable;
+    private final boolean concurrent;
 
-    /**
-     * 内部构造器，从 Quartz JobDetail 构建。
-     */
-    public JobDetail(org.quartz.JobDetail delegate) {
-        this.delegate = Objects.requireNonNull(delegate, "delegate must not be null");
+    private JobDetail(Builder b) {
+        this.key = Objects.requireNonNull(b.key, "job key must not be null");
+        this.jobClass = Objects.requireNonNull(b.jobClass, "jobClass must not be null");
+        this.jobDataMap = new JobDataMap(b.jobDataMap);
+        this.description = b.description;
+        this.durable = b.durable;
+        this.concurrent = b.concurrent;
     }
 
-    /**
-     * 创建 JobDetail 实例。
-     *
-     * @return 新的 JobDetail 实例
-     * @deprecated use {@link JobBuilder#newJob(Class)}
-     */
-    @Deprecated
-    /**
-     * create方法。
-     * @return static JobDetail类型返回值
-     */
-    public static JobDetail create() {
-        return new JobDetail(new JobDetailImpl());
-    }
-
-    // ==================== 基本属性 ====================
-
-    /**
-     * 获取任务名称。
-     */
-    public String getName() {
-        return delegate.getKey().getName();
-    }
-
-    /**
-     * 获取任务所属分组。
-     */
-    public String getGroup() {
-        return delegate.getKey().getGroup();
-    }
-
-    /**
-     * 获取任务键。
-     */
     public JobKey getKey() {
-        return delegate.getKey();
+        return key;
     }
 
-    /**
-     * 获取任务类。
-     */
-    @SuppressWarnings("unchecked")
-    /**
-     * getJobClass方法。
-     * @return Class<? extends org.quartz.Job>类型返回值
-     */
-    public Class<? extends org.quartz.Job> getJobClass() {
-        return delegate.getJobClass();
+    public Class<? extends Job> getJobClass() {
+        return jobClass;
     }
 
-    /**
-     * 获取任务描述。
-     */
+    public JobDataMap getJobDataMap() {
+        return new JobDataMap(jobDataMap);
+    }
+
     public String getDescription() {
-        return delegate.getDescription();
+        return description;
     }
 
-    /**
-     * 获取 JobDataMap（任务级别数据）。
-     * <p>
-     * 可以用来在任务执行时传递参数。
-     *
-     * @return 可修改的 JobDataMap
-     */
-    public Map<String, Object> getJobDataMap() {
-        Map<String, Object> result = new HashMap<>();
-        delegate.getJobDataMap().forEach(result::put);
-        return Collections.unmodifiableMap(result);
-    }
-
-    /**
-     * 获取可写的 JobDataMap 视图。
-     */
-    public org.quartz.JobDataMap getRawJobDataMap() {
-        return delegate.getJobDataMap();
-    }
-
-    // ==================== 状态属性 ====================
-
-    /**
-     * 是否持久化。
-     * 默认 true。
-     */
     public boolean isDurable() {
-        return delegate.isDurable();
+        return durable;
     }
 
-    /**
-     * 是否不允许并发执行。
-     *
-     * @see StatefulJob
-     */
-    public boolean isConcurrentExectionDisallowed() {
-        return delegate.isConcurrentExectionDisallowed();
+    public boolean isConcurrentExecutionDisallowed() {
+        return !concurrent;
     }
 
-    /**
-     * 是否在完成执行后持久化 JobDataMap。
-     *
-     * @see StatefulJob
-     */
-    public boolean isPersistJobDataAfterExecution() {
-        return delegate.isPersistJobDataAfterExecution();
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
-    /**
-     * 是否请求恢复。
-     * 在 Scheduler 重新启动后，标记为请求恢复的任务会被重新执行。
-     */
-    public boolean requestsRecovery() {
-        return delegate.requestsRecovery();
-    }
+    public static final class Builder {
+        private JobKey key;
+        private Class<? extends Job> jobClass;
+        private Map<String, Object> jobDataMap = new HashMap<>();
+        private String description;
+        private boolean durable;
+        private boolean concurrent = true;
 
-    // ==================== 操作 ====================
-
-    /**
-     * 获取底层 Quartz {@link JobDetail} 对象。
-     * <p>
-     * 谨慎使用，仅在需要直接操作 Quartz API 时调用。
-     */
-    public org.quartz.JobDetail getDelegate() {
-        return delegate;
-    }
-
-    @Override
-    /**
-     * toString方法。
-     * @return String类型返回值
-     */
-    public String toString() {
-        return "JobDetail{" +
-                "key=" + getKey() +
-                ", description=" + getDescription() +
-                ", durable=" + isDurable() +
-                '}';
-    }
-
-    // ==================== 内部 Builder 支持 ====================
-
-    /**
-     * 内部 Builder，委托给 quartz.JobDetailImpl。
-     */
-    static class Builder {
-        private final JobDetailImpl delegate = new JobDetailImpl();
-
-        Builder withIdentity(String name, String group) {
-            delegate.setName(name);
-            delegate.setGroup(group);
+        public Builder withIdentity(JobKey key) {
+            this.key = key;
             return this;
         }
 
-        Builder withIdentity(String name) {
-            delegate.setName(name);
+        public Builder withIdentity(String name, String group) {
+            this.key = JobKey.jobKey(name, group);
             return this;
         }
 
-        Builder ofClass(Class<? extends org.quartz.Job> jobClass) {
-            delegate.setJobClass(jobClass);
+        public Builder withIdentity(String name) {
+            this.key = JobKey.jobKey(name);
             return this;
         }
 
-        Builder withDescription(String description) {
-            delegate.setDescription(description);
+        public Builder ofType(Class<? extends Job> jobClass) {
+            this.jobClass = jobClass;
             return this;
         }
 
-        Builder usingJobData(String key, Object value) {
-            delegate.getJobDataMap().put(key, value);
+        public Builder usingJobData(String key, Object value) {
+            this.jobDataMap.put(key, value);
             return this;
         }
 
-        Builder usingJobData(Map<String, ?> data) {
-            data.forEach(delegate.getJobDataMap()::put);
+        public Builder usingJobData(Map<String, ?> data) {
+            if (data != null) {
+                this.jobDataMap.putAll(data);
+            }
             return this;
         }
 
-        Builder durable(boolean durable) {
-            delegate.setDurability(durable);
+        public Builder withDescription(String description) {
+            this.description = description;
             return this;
         }
 
-        Builder requestRecovery(boolean requestRecovery) {
-            delegate.setRequestsRecovery(requestRecovery);
+        public Builder storeDurably() {
+            this.durable = true;
             return this;
         }
 
-        org.quartz.JobDetail build() {
-            return delegate;
+        public Builder nonConcurrent() {
+            this.concurrent = false;
+            return this;
+        }
+
+        public JobDetail build() {
+            return new JobDetail(this);
         }
     }
 }

@@ -1,133 +1,64 @@
 package com.zifang.util.core.schedule.listener;
 
-import org.quartz.impl.matchers.GroupMatcher;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.zifang.util.core.schedule.JobKey;
+import com.zifang.util.core.schedule.TriggerKey;
 
 /**
- * Listener matching rule utility class.
- * <p>
- * Controls which jobs/triggers the JobListener and TriggerListener apply to.
- * <p>
- * Example:
- * <pre>
- * // Listen only to jobs in group1 and group2
- * matcher = Matcher.jobGroupEqualsTo("group1", "group2");
- *
- * // Listen to jobs whose name starts with "report-"
- * matcher = Matcher.jobNameStartsWith("report-");
- *
- * // Add global listener
- * listenerManager.addJobListener(myListener, Matcher.anyJobs());
- * </pre>
- *
- * @see ListenerManager#addJobListener(JobListener, Matcher)
- * @see ListenerManager#addTriggerListener(TriggerListener, Matcher)
+ * 自研 Listener 匹配规则。简化版。
  */
 public class Matcher {
 
-    private Matcher() {
-        // Utility class, no instantiation
+    private final boolean matchAll;
+    private final java.util.Set<String> jobGroups;
+    private final java.util.Set<String> triggerGroups;
+    private final java.util.Set<String> jobNamePrefixes;
+
+    private Matcher(boolean matchAll, java.util.Set<String> jobGroups,
+                    java.util.Set<String> triggerGroups,
+                    java.util.Set<String> jobNamePrefixes) {
+        this.matchAll = matchAll;
+        this.jobGroups = jobGroups;
+        this.triggerGroups = triggerGroups;
+        this.jobNamePrefixes = jobNamePrefixes;
     }
 
-    // ==================== Job Matchers ====================
+    public static Matcher anyJobs() { return new Matcher(true, null, null, null); }
 
-    /**
-     * Match all jobs.
-     */
-    public static Matcher anyJobs() {
-        return new GroupMatcherWrapper(
-                GroupMatcher.anyJobGroup(),
-                GroupMatcher.anyTriggerGroup()
-        );
-    }
-
-    /**
-     * Match all jobs in the specified groups.
-     */
     public static Matcher jobGroupEqualsTo(String... groups) {
-        if (groups == null || groups.length == 0) {
-            return anyJobs();
-        }
-        Set<GroupMatcher<org.quartz.JobKey>> jobMatchers = new HashSet<>();
-        for (String group : groups) {
-            jobMatchers.add(GroupMatcher.jobGroupEquals(group));
-        }
-        return new GroupMatcherWrapper(
-                GroupMatcher.anyJobGroup(),
-                GroupMatcher.anyTriggerGroup()
-        );
+        java.util.Set<String> set = new java.util.HashSet<>();
+        if (groups != null) for (String g : groups) set.add(g);
+        return new Matcher(false, set, null, null);
     }
 
-    /**
-     * Match jobs with the specified name in the default group.
-     */
-    public static Matcher jobNameEqualsTo(String name) {
-        return new GroupMatcherWrapper(
-                GroupMatcher.jobGroupEquals(org.quartz.JobKey.DEFAULT_GROUP),
-                GroupMatcher.anyTriggerGroup()
-        );
-    }
-
-    /**
-     * Match jobs whose name starts with the specified prefix in the default group.
-     */
     public static Matcher jobNameStartsWith(String prefix) {
-        return new GroupMatcherWrapper(
-                GroupMatcher.jobGroupEquals(org.quartz.JobKey.DEFAULT_GROUP),
-                GroupMatcher.anyTriggerGroup()
-        );
+        java.util.Set<String> set = new java.util.HashSet<>();
+        if (prefix != null) set.add(prefix);
+        return new Matcher(false, null, null, set);
     }
 
-    // ==================== Trigger Matchers ====================
+    public static Matcher anyTriggers() { return new Matcher(true, null, null, null); }
 
-    /**
-     * Match all triggers.
-     */
-    public static Matcher anyTriggers() {
-        return new GroupMatcherWrapper(
-                GroupMatcher.anyJobGroup(),
-                GroupMatcher.anyTriggerGroup()
-        );
-    }
-
-    /**
-     * Match all triggers in the specified groups.
-     */
     public static Matcher triggerGroupEqualsTo(String... groups) {
-        if (groups == null || groups.length == 0) {
-            return anyTriggers();
-        }
-        return new GroupMatcherWrapper(
-                GroupMatcher.anyJobGroup(),
-                GroupMatcher.anyTriggerGroup()
-        );
+        java.util.Set<String> set = new java.util.HashSet<>();
+        if (groups != null) for (String g : groups) set.add(g);
+        return new Matcher(false, null, set, null);
     }
 
-    // ==================== Internal Implementation ====================
-
-    /**
-     * Internal wrapper class for converting custom Matcher to Quartz's GroupMatcher.
-     */
-    public static class GroupMatcherWrapper extends Matcher {
-
-        private final org.quartz.impl.matchers.GroupMatcher<org.quartz.JobKey> jobMatcher;
-        private final org.quartz.impl.matchers.GroupMatcher<org.quartz.TriggerKey> triggerMatcher;
-
-        GroupMatcherWrapper(
-                org.quartz.impl.matchers.GroupMatcher<org.quartz.JobKey> jobMatcher,
-                org.quartz.impl.matchers.GroupMatcher<org.quartz.TriggerKey> triggerMatcher) {
-            this.jobMatcher = jobMatcher;
-            this.triggerMatcher = triggerMatcher;
+    public boolean matchesJob(JobKey jobKey) {
+        if (matchAll) return true;
+        if (jobGroups != null && !jobGroups.isEmpty()) return jobGroups.contains(jobKey.getGroup());
+        if (jobNamePrefixes != null && !jobNamePrefixes.isEmpty()) {
+            for (String prefix : jobNamePrefixes) {
+                if (jobKey.getName().startsWith(prefix)) return true;
+            }
+            return false;
         }
+        return false;
+    }
 
-        org.quartz.impl.matchers.GroupMatcher<org.quartz.JobKey> toQuartzJobMatcher() {
-            return jobMatcher;
-        }
-
-        org.quartz.impl.matchers.GroupMatcher<org.quartz.TriggerKey> toQuartzTriggerMatcher() {
-            return triggerMatcher;
-        }
+    public boolean matchesTrigger(TriggerKey triggerKey) {
+        if (matchAll) return true;
+        if (triggerGroups != null && !triggerGroups.isEmpty()) return triggerGroups.contains(triggerKey.getGroup());
+        return false;
     }
 }

@@ -180,12 +180,6 @@
             </dependency>
 
             <dependency>
-                <groupId>commons-dbutils</groupId>
-                <artifactId>commons-dbutils</artifactId>
-                <version>1.8.1</version>
-            </dependency>
-
-            <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
                 <version>1.3.2</version>
@@ -198,21 +192,9 @@
             </dependency>
 
             <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>6.2.5.Final</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>2.14.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>1.2.23</version>
             </dependency>
 
             <dependency>
@@ -222,9 +204,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.google.inject</groupId>
-                <artifactId>guice</artifactId>
-                <version>5.0.1</version>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.2.23</version>
             </dependency>
 
             <dependency>
@@ -250,13 +232,6 @@
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
                 <scope>provided</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.google.zxing</groupId>
-                <artifactId>core</artifactId>
-                <version>3.5.3</version>
-                <scope>compile</scope>
             </dependency>
 
             <dependency>
@@ -421,27 +396,6 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>1.18.1</version>
-            </dependency>
-
-            <!-- Mockito (4.11.0 是 Java 8 末班车，5.x 需 Java 11) -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>4.11.0</version>
-            </dependency>
-
-            <!-- thumbnailator (0.4.20 修复 CVE-2024-46504) -->
-            <dependency>
-                <groupId>net.coobird</groupId>
-                <artifactId>thumbnailator</artifactId>
-                <version>0.4.20</version>
-            </dependency>
-
-            <!-- ZXing core/javase (3.5.3 修复 CVE-2023-41039 等) -->
-            <dependency>
-                <groupId>com.google.zxing</groupId>
-                <artifactId>javase</artifactId>
-                <version>3.5.3</version>
             </dependency>
 
             <!-- Spring Expression (5.3.39 修复 CVE-2024-22243/22257/22259/22262/22263 等) -->

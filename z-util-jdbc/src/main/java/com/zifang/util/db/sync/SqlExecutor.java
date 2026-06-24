@@ -4,14 +4,12 @@ import com.zifang.util.core.lang.exception.BusinessException;
 import com.zifang.util.core.meta.BaseStatusCode;
 import com.zifang.util.db.meta.DataSourceTableColumnDTO;
 import com.zifang.util.db.meta.DataSourceTableDTO;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.MapListHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -289,20 +287,21 @@ public class SqlExecutor {
      */
     public List<Map<String, Object>> selectList(DataSource dataSource, String sql) {
         Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
-            QueryRunner qr = new QueryRunner();
-            List<Map<String, Object>> l = qr.query(connection, sql, new MapListHandler());
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            List<Map<String, Object>> l = ResultSetMapper.toMapList(rs);
             return l == null ? new ArrayList<>() : l;
         } catch (SQLException e) {
             log.error(String.format("数据库查询异常：执行的sql:%S,错误信息 %S", sql, e.getMessage()));
             throw new BusinessException(BaseStatusCode.FAIL, "数据库查询异常，请通知值班人员");
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            close(rs);
+            close(ps);
+            close(connection);
         }
     }
 
@@ -315,18 +314,20 @@ public class SqlExecutor {
      */
     public Integer count(DataSource dataSource, String sqlCnt) {
         Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
-            QueryRunner qr = new QueryRunner();
-            return Integer.valueOf(String.valueOf(qr.query(connection, sqlCnt, new ScalarHandler())));
+            ps = connection.prepareStatement(sqlCnt);
+            rs = ps.executeQuery();
+            Object scalar = ResultSetMapper.toScalar(rs);
+            return scalar == null ? null : Integer.valueOf(String.valueOf(scalar));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            close(rs);
+            close(ps);
+            close(connection);
         }
         return null;
     }
@@ -345,6 +346,20 @@ public class SqlExecutor {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    /**
+     * 静默关闭 JDBC 资源，封装到处可见的 try/catch 样板。
+     */
+    private static void close(AutoCloseable c) {
+        if (c == null) {
+            return;
+        }
+        try {
+            c.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

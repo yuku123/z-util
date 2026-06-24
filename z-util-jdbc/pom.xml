@@ -13,12 +13,6 @@
     <artifactId>z-util-jdbc</artifactId>
     <version>${revision}</version>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
-        <dependency>
-            <groupId>c3p0</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.1.2</version>
-        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -31,11 +25,6 @@
             <version>3.12.14</version>
         </dependency>
 
-        <dependency>
-            <groupId>commons-dbutils</groupId>
-            <artifactId>commons-dbutils</artifactId>
-            <version>1.8.1</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
