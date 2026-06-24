@@ -395,7 +395,7 @@
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>1.18.1</version>
+                <version>1.22.2</version>
             </dependency>
 
             <!-- Spring Expression (5.3.39 修复 CVE-2024-22243/22257/22259/22262/22263 等) -->
