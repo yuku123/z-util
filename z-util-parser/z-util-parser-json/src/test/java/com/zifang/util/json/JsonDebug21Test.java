@@ -14,7 +14,7 @@ public class JsonDebug21Test {
     private static String loadG4(String name) throws Exception {
         java.io.InputStream is = JsonDebug21Test.class.getClassLoader().getResourceAsStream(name);
         if (is == null) throw new Exception("Resource not found: " + name);
-        byte[] bytes = com.zifang.util.core.io.FileUtil.readAllBytes(is);
+        byte[] bytes = readAllBytes(is);
         is.close();
         return new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
     }

@@ -1,6 +1,6 @@
 package com.zifang.util.devops.docker;
 
-import com.google.gson.JsonObject;
+import com.zifang.util.json.model.JsonObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -123,8 +123,8 @@ public class DockerClientUtilTest {
      */
     public void testGetJsonStringSimple() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("name", "nginx");
-        obj.addProperty("state", "running");
+        obj.put("name", "nginx");
+        obj.put("state", "running");
 
         assertEquals("nginx", getJsonString(obj, "name"));
         assertEquals("running", getJsonString(obj, "state"));
@@ -136,10 +136,10 @@ public class DockerClientUtilTest {
      */
     public void testGetJsonStringNested() {
         JsonObject inner = new JsonObject();
-        inner.addProperty("Image", "nginx:latest");
+        inner.put("Image", "nginx:latest");
 
         JsonObject outer = new JsonObject();
-        outer.add("Config", inner);
+        outer.put("Config", inner);
 
         assertEquals("nginx:latest", getJsonString(outer, "Config", "Image"));
     }
@@ -150,7 +150,7 @@ public class DockerClientUtilTest {
      */
     public void testGetJsonStringMissingKey() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("name", "nginx");
+        obj.put("name", "nginx");
 
         assertNull(getJsonString(obj, "missing"));
     }
@@ -161,7 +161,7 @@ public class DockerClientUtilTest {
      */
     public void testGetJsonStringNullValue() {
         JsonObject obj = new JsonObject();
-        obj.addProperty("name", (String) null);
+        obj.put("name", null);
 
         assertNull(getJsonString(obj, "name"));
     }

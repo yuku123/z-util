@@ -1,12 +1,12 @@
 package com.zifang.util.http.client;
 
-import com.alibaba.fastjson.JSON;
-import com.sun.net.httpserver.HttpServer;
 import com.zifang.util.http.base.define.RequestMethod;
 import com.zifang.util.http.base.pojo.HttpRequestBody;
 import com.zifang.util.http.base.pojo.HttpRequestDefinition;
 import com.zifang.util.http.base.pojo.HttpRequestHeader;
 import com.zifang.util.http.base.pojo.HttpRequestLine;
+import com.zifang.util.json.JsonUtil;
+import com.sun.net.httpserver.HttpServer;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -262,7 +262,7 @@ public class HttpExecutorTest {
         line.put("url", base() + "/hello");
         def.put("httpRequestLine", line);
 
-        HttpExecutionResult r = executor.executeByDefinitionJson(JSON.toJSONString(def));
+        HttpExecutionResult r = executor.executeByDefinitionJson(JsonUtil.toJson(def));
         assertTrue(r.isSuccess());
         assertEquals(200, r.getStatus());
     }

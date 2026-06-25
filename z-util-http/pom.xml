@@ -47,8 +47,9 @@
 
         <!-- JSON 处理 -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-parser-json</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <!-- JAXB API (Java 8+ 需要单独引入) -->

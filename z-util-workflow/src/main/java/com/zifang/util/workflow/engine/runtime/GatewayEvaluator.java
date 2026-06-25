@@ -1,16 +1,16 @@
 package com.zifang.util.workflow.engine.runtime;
 
-import org.springframework.expression.EvaluationContext;
-import org.springframework.expression.Expression;
-import org.springframework.expression.ExpressionParser;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
+import com.zifang.util.expr.el.ElEvaluator;
+import com.zifang.util.expr.el.ElException;
 
 import java.util.Map;
 
 /**
  * 网关条件评估器。
- * 基于 Spring Expression Language (SpEL) 实现，支持完整的表达式语法：
+ * <p>
+ * 自研实现：基于 z-util-expr-el 的 EL 引擎（不再依赖 Spring SpEL）。
+ * <p>
+ * 支持的语法：
  * <ul>
  *   <li>比较运算符: ==, !=, &lt;, &gt;, &lt;=, &gt;=</li>
  *   <li>逻辑运算符: &amp;&amp;, ||, !</li>
@@ -26,20 +26,17 @@ import java.util.Map;
  *   <li>${amount > 1000 && amount <= 5000}</li>
  *   <li>${status == 'approved'}</li>
  *   <li>${!isDisabled}</li>
+ *   <li>${email.contains('@')}</li>
  * </ul>
  *
- * @see WorkflowRuntimeEngine
+ * <p>实现策略：
+ * <ol>
+ *   <li>把 ${...} 包装去掉</li>
+ *   <li>把表达式中"非方法调用、非字符串字面量"的标识符前加 #（SpEL 风格）</li>
+ *   <li>复用自研 EL 解析器评估，返回布尔结果</li>
+ * </ol>
  */
 public class GatewayEvaluator {
-
-    private final ExpressionParser expressionParser;
-
-    /**
-     * GatewayEvaluator方法。
-     */
-    public GatewayEvaluator() {
-        this.expressionParser = new SpelExpressionParser();
-    }
 
     /**
      * Evaluate a gateway condition expression against variables.
@@ -54,54 +51,37 @@ public class GatewayEvaluator {
             return true;
         }
 
-        String spelExpression = toSpEL(expression);
+        String innerExpression = stripBraces(expression.trim());
+        String spelExpression = prefixVariables(innerExpression);
 
-        EvaluationContext context = createContext(variables);
-
+        ElEvaluator evaluator = new ElEvaluator();
+        if (variables != null) {
+            evaluator.setVariables(variables);
+        }
         try {
-            Expression exp = expressionParser.parseExpression(spelExpression);
-            Object result = exp.getValue(context);
-
-            if (result instanceof Boolean) {
-                return (Boolean) result;
-            }
-            if (result == null) {
-                return false;
-            }
-            return Boolean.parseBoolean(result.toString());
-        } catch (Exception e) {
+            Object result = evaluator.eval(spelExpression);
+            return toBoolean(result);
+        } catch (ElException e) {
             throw new IllegalArgumentException("Failed to evaluate expression: " + expression, e);
         }
     }
 
     /**
-     * 将 ${...} 格式转换为 SpEL 表达式。
-     * <p>
-     * 例如: ${level >= 1} -> #level >= 1
-     * <p>
-     * SpEL 中 # 前缀用于引用 setVariable() 设置的变量。
+     * 去除 ${...} 包装。
      */
-    private String toSpEL(String expression) {
-        String trimmed = expression.trim();
-        String inner;
-        if (trimmed.startsWith("${") && trimmed.endsWith("}")) {
-            inner = trimmed.substring(2, trimmed.length() - 1).trim();
-        } else {
-            inner = trimmed;
+    private String stripBraces(String expression) {
+        if (expression.startsWith("${") && expression.endsWith("}")) {
+            return expression.substring(2, expression.length() - 1).trim();
         }
-
-        // 将变量名转换为 SpEL 的 #variableName 格式
-        // 例如: "level >= 1" -> "#level >= 1"
-        // 例如: "amount > 1000 && amount <= 5000" -> "#amount > 1000 && #amount <= 5000"
-        return replaceVariablesWithHashPrefix(inner);
+        return expression;
     }
 
     /**
-     * 为表达式中的变量名添加 # 前缀。
-     * 使用简单的标识符检测来避免替换字符串字面量中的内容，
-     * 以及方法调用中的方法名（identifier 后紧跟 '('）。
+     * 把表达式中"非方法调用、非字符串字面量"的标识符前加 # 前缀。
+     * <p>
+     * 跳过字符串字面量（单/双引号包裹）和方法调用（identifier 后紧跟 '('）。
      */
-    private String replaceVariablesWithHashPrefix(String expression) {
+    private String prefixVariables(String expression) {
         StringBuilder result = new StringBuilder();
         int i = 0;
         int len = expression.length();
@@ -109,7 +89,6 @@ public class GatewayEvaluator {
         while (i < len) {
             char ch = expression.charAt(i);
 
-            // 检测字符串字面量（单引号或双引号），跳过其内容
             if (ch == '\'' || ch == '"') {
                 char quote = ch;
                 result.append(ch);
@@ -126,11 +105,10 @@ public class GatewayEvaluator {
                 continue;
             }
 
-            // 检测标识符开始（字母或下划线）
-            if (Character.isLetter(ch) || ch == '_') {
+            if (Character.isLetter(ch) || ch == '_' || ch == '$') {
                 StringBuilder identifier = new StringBuilder();
                 int start = i;
-                while (i < len && (Character.isLetterOrDigit(expression.charAt(i)) || expression.charAt(i) == '_')) {
+                while (i < len && (Character.isLetterOrDigit(expression.charAt(i)) || expression.charAt(i) == '_' || expression.charAt(i) == '$')) {
                     identifier.append(expression.charAt(i));
                     i++;
                 }
@@ -142,8 +120,7 @@ public class GatewayEvaluator {
                     continue;
                 }
 
-                // SpEL 关键字不需要加 #
-                if (isSpelKeyword(ident)) {
+                if (isElKeyword(ident)) {
                     result.append(ident);
                 } else {
                     result.append('#').append(ident);
@@ -151,7 +128,6 @@ public class GatewayEvaluator {
                 continue;
             }
 
-            // 其他字符（操作符、括号、空格等）
             result.append(ch);
             i++;
         }
@@ -159,21 +135,19 @@ public class GatewayEvaluator {
         return result.toString();
     }
 
-    private boolean isSpelKeyword(String word) {
-        return word.equals("true") || word.equals("false") || word.equals("null") || word.equals("and")
-                || word.equals("or") || word.equals("not") || word.equals("div") || word.equals("mod");
+    private boolean isElKeyword(String word) {
+        return word.equals("true") || word.equals("false") || word.equals("null")
+                || word.equals("and") || word.equals("or") || word.equals("not")
+                || word.equals("div") || word.equals("mod")
+                || word.equals("instanceof") || word.equals("matches")
+                || word.equals("between");
     }
 
-    /**
-     * 创建 SpEL 评估上下文，将 Map 中的变量注入到上下文中。
-     */
-    private EvaluationContext createContext(Map<String, Object> variables) {
-        StandardEvaluationContext context = new StandardEvaluationContext();
-        if (variables != null) {
-            for (Map.Entry<String, Object> entry : variables.entrySet()) {
-                context.setVariable(entry.getKey(), entry.getValue());
-            }
-        }
-        return context;
+    private boolean toBoolean(Object result) {
+        if (result instanceof Boolean) return (Boolean) result;
+        if (result == null) return false;
+        if (result instanceof Number) return ((Number) result).doubleValue() != 0.0;
+        if (result instanceof String) return !((String) result).isEmpty();
+        return Boolean.parseBoolean(result.toString());
     }
 }

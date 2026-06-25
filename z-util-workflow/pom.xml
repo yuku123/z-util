@@ -32,6 +32,12 @@
 
         <dependency>
             <groupId>com.zifang</groupId>
+            <artifactId>z-util-expr-el</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zifang</groupId>
             <artifactId>z-util-parser-json</artifactId>
             <version>${revision}</version>
         </dependency>

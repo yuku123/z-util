@@ -1,90 +1,41 @@
 package com.zifang.util.core.util;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.zifang.util.json.JsonUtil;
+import com.zifang.util.json.define.TypeReference;
+import com.zifang.util.json.model.JsonObject;
 
 import java.lang.reflect.Type;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
+ * @deprecated 请直接使用 {@link JsonUtil}（z-util-parser-json 提供）。
+ * <p>
+ * 本类保留仅为兼容旧代码，内部完全委托给自研的 z-util-parser-json。
+ *
  * @author zifang
  */
+@Deprecated
 public class GsonUtil {
 
-    //    private static Gson gson = new Gson();
-    // 后端返回的日期格式（需与后端一致）
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-    // 初始化Gson，注册LocalDateTime适配器
-    private static final Gson gson = new GsonBuilder()
-            // 序列化：LocalDateTime → 字符串
-            .registerTypeAdapter(LocalDateTime.class, (com.google.gson.JsonSerializer<LocalDateTime>) (src, typeOfSrc, context) -> {
-                return new com.google.gson.JsonPrimitive(src.format(DATE_TIME_FORMATTER));
-            })
-            // 反序列化：字符串 → LocalDateTime
-            .registerTypeAdapter(LocalDateTime.class, (com.google.gson.JsonDeserializer<LocalDateTime>) (json, typeOfT, context) -> {
-                if (json.getAsString().isEmpty()) {
-                    return null;
-                }
-                return LocalDateTime.parse(json.getAsString(), DATE_TIME_FORMATTER);
-            })
-            .setDateFormat("yyyy-MM-dd HH:mm:ss") // 兼容Date类型
-            .create();
-
-
-    /**
-     * objectToJsonStr方法。
-     * * @param object T类型参数
-     *
-     * @return static <T> String类型返回值
-     */
     public static <T> String objectToJsonStr(T object) {
-        return gson.toJson(object);
+        return JsonUtil.toJson(object);
     }
 
-    /**
-     * jsonStrToObject方法。
-     * * @param jsonStr String类型参数
-     *
-     * @param classOfT ClassT类型参数
-     * @return static <T> T类型返回值
-     */
     public static <T> T jsonStrToObject(String jsonStr, Class<T> classOfT) {
-        return gson.fromJson(jsonStr, classOfT);
+        return JsonUtil.fromJson(jsonStr, classOfT);
     }
 
-    /**
-     * jsonStrToObject方法。
-     * * @param jsonStr String类型参数
-     *
-     * @param typeReference Type类型参数
-     * @return static <T> T类型返回值
-     */
     public static <T> T jsonStrToObject(String jsonStr, Type typeReference) {
-        return gson.fromJson(jsonStr, typeReference);
+        return JsonUtil.fromJson(jsonStr, new TypeReference<T>(typeReference) {});
     }
 
-
-    /**
-     * changeToSubClass方法。
-     * * @param o Object类型参数
-     *
-     * @param t ClassT类型参数
-     * @return static <T> T类型返回值
-     */
     public static <T> T changeToSubClass(Object o, Class<T> t) {
         return jsonStrToObject(objectToJsonStr(o), t);
     }
 
-    /**
-     * toMap方法。
-     * * @param o Object类型参数
-     *
-     * @return static Map<String, Object>类型返回值
-     */
+    @SuppressWarnings("unchecked")
     public static Map<String, Object> toMap(Object o) {
-        return (Map<String, Object>) jsonStrToObject(GsonUtil.objectToJsonStr(o), Map.class);
+        JsonObject obj = JsonUtil.parseObject(objectToJsonStr(o));
+        return (Map<String, Object>) obj;
     }
 }

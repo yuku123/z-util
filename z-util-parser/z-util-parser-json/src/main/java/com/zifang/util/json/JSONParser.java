@@ -1,6 +1,5 @@
 package com.zifang.util.json;
 
-import com.zifang.util.core.io.FileUtil;
 import com.zifang.util.dsl.core.ASTNode;
 import com.zifang.util.dsl.core.TokenReader;
 import com.zifang.util.dsl.g4.DynamicLexer;
@@ -9,6 +8,8 @@ import com.zifang.util.json.exception.JsonParseException;
 import com.zifang.util.json.model.JsonArray;
 import com.zifang.util.json.model.JsonObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -124,7 +125,7 @@ public class JSONParser {
         try {
             InputStream is = getClass().getClassLoader().getResourceAsStream(name);
             if (is == null) throw new JsonParseException("G4文件未找到: " + name);
-            byte[] bytes = FileUtil.readAllBytes(is);
+            byte[] bytes = readAllBytes(is);
             is.close();
             return new String(bytes, StandardCharsets.UTF_8);
         } catch (JsonParseException e) {
@@ -132,6 +133,15 @@ public class JSONParser {
         } catch (Exception e) {
             throw new JsonParseException("读取G4文件失败: " + name + ", " + e.getMessage());
         }
+    }
+
+    /** 等价于 FileUtil.readAllBytes，但避免反向依赖 z-util-core。 */
+    private static byte[] readAllBytes(InputStream is) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        byte[] buf = new byte[4096];
+        int len;
+        while ((len = is.read(buf)) != -1) baos.write(buf, 0, len);
+        return baos.toByteArray();
     }
 
     // ==================== AST → Java 对象 ====================
