@@ -45,6 +45,16 @@ public class JsonUtil {
      */
     private static final Map<Class<?>, List<FieldMeta>> deserializeMetaCache = new ConcurrentHashMap<>();
 
+    /**
+     * 序列化时检测循环引用的 visited 集合（FEATURE008 P1 修复 2026-06-25）。
+     * <p>用 {@link IdentityHashMap} 而非普通 Set，避免 POJO 自身 {@code equals/hashCode} 干扰；
+     * 用 {@link ThreadLocal} 隔离并发调用，并在 {@link #toJson} 顶层清空。</p>
+     * <p>命中循环引用时该字段序列化为 {@code "null"}，避免 {@link StackOverflowError}。
+     * 该行为与 FastJSON 默认行为一致，比 Jackson 的"直接抛异常"更友好（不破坏业务流）。</p>
+     */
+    private static final ThreadLocal<Set<Object>> SERIALIZE_VISITED =
+            ThreadLocal.withInitial(() -> Collections.newSetFromMap(new IdentityHashMap<>()));
+
     private static class FieldMeta {
         final Field field;
         final String jsonName;           // 序列化后的 JSON 属性名
@@ -88,14 +98,28 @@ public class JsonUtil {
 
     public static <T> String toJson(T t) {
         if (t == null) return "null";
-        if (t instanceof JsonObject || t instanceof JsonArray) return t.toString();
-        if (t instanceof String) return "\"" + escapeString((String) t) + "\"";
-        if (t instanceof Number || t instanceof Boolean) return String.valueOf(t);
-        if (t instanceof Date) return String.valueOf(((Date) t).getTime());
-        if (t instanceof Collection) return solveList((Collection<?>) t);
-        if (t instanceof Map) return solveMap((Map<?, ?>) t);
-        if (t.getClass().isArray()) return solveArray(t);
-        return solvePojo(t);
+        // 仅在顶层调用时清空 visited；嵌套调用要保留祖先栈以正确检测循环引用。
+        // (FEATURE008 P1 修复 2026-06-25 v2：原版每次都 clear() 会让 solvePojo 内部 toJson(value) 把栈清空，
+        //  失去循环引用检测能力，StackOverflow 仍然会发生)
+        Set<Object> visited = SERIALIZE_VISITED.get();
+        boolean isTopCall = visited.isEmpty();
+        if (isTopCall) {
+            visited.clear();  // 防御性清空：上层调用者可能没在 finally 里清
+        }
+        try {
+            if (t instanceof JsonObject || t instanceof JsonArray) return t.toString();
+            if (t instanceof String) return "\"" + escapeString((String) t) + "\"";
+            if (t instanceof Number || t instanceof Boolean) return String.valueOf(t);
+            if (t instanceof Date) return String.valueOf(((Date) t).getTime());
+            if (t instanceof Collection) return solveList((Collection<?>) t);
+            if (t instanceof Map) return solveMap((Map<?, ?>) t);
+            if (t.getClass().isArray()) return solveArray(t);
+            return solvePojo(t);
+        } finally {
+            if (isTopCall) {
+                visited.clear();  // 顶层结束清理，避免 ThreadLocal 内存泄漏 / 下次调用误判
+            }
+        }
     }
 
     public static <T> String toJsonPretty(T t) {
@@ -155,6 +179,12 @@ public class JsonUtil {
     }
 
     private static String solvePojo(Object obj) {
+        // 循环引用检测：当前 obj 已在祖先栈中，序列化为 null 避免 StackOverflow
+        Set<Object> visited = SERIALIZE_VISITED.get();
+        if (!visited.add(obj)) {
+            return "null";
+        }
+        try {
         List<FieldMeta> metas = getSerializeMetas(obj.getClass());
         StringBuilder sb = new StringBuilder("{");
         int i = 0;
@@ -180,6 +210,10 @@ public class JsonUtil {
         }
         sb.append("}");
         return sb.toString();
+        } finally {
+            // 退出该 POJO 的递归层级，从 visited 中移除（让兄弟节点/复用节点能正常序列化）
+            visited.remove(obj);
+        }
     }
 
     private static String serializeWithSerializer(Object value, ValueSerializer serializer, String format) {
@@ -279,17 +313,35 @@ public class JsonUtil {
 
     private static <T> T deserializePojo(JsonObject obj, Class<T> clazz) {
         try {
+            // 枚举类型特殊处理：用 "name" 字段 + Enum.valueOf（FEATURE008 P1 修复 v4 2026-06-25）
+            // 修复原因：枚举没有无参构造器，clazz.getDeclaredConstructor() 会抛 NoSuchMethodException
+            // 同时枚举序列化时输出 {"name":"GET","ordinal":0,"hash":0}，反序列化应提取 name
+            if (clazz.isEnum()) {
+                Object nameVal = obj.get("name");
+                if (nameVal == null) {
+                    // 兼容旧的"枚举值字符串"格式（直接传 "GET"）：JsonObject 不暴露 values()，
+                    // 这里保持严格模式，要求 JSON 中必须含 "name" 字段。
+                    throw new RuntimeException("Enum name not found in JSON: " + obj);
+                }
+                @SuppressWarnings({"unchecked", "rawtypes"})
+                T enumValue = (T) Enum.valueOf((Class<Enum>) clazz.asSubclass(Enum.class), nameVal.toString());
+                return enumValue;
+            }
+
             T instance = clazz.getDeclaredConstructor().newInstance();
             List<FieldMeta> metas = getDeserializeMetas(clazz);
             for (FieldMeta meta : metas) {
                 // 优先用注解 name 查找字段（支持别名）
                 Object rawValue = obj.get(meta.jsonName);
                 if (rawValue == null) continue;
+                // 关键：用 field.getGenericType() 而非 getType() — 这样 List<InputParam> 能保留泛型
+                // (FEATURE008 P1 修复 v5 2026-06-25)
+                java.lang.reflect.Type targetType = meta.field.getGenericType();
                 Object converted;
                 if (meta.deserializer != null) {
                     converted = deserializeWithDeserializer(rawValue, meta.deserializer, meta.dateFormat, meta.field.getType());
                 } else {
-                    converted = convertValue(rawValue, meta.field.getType());
+                    converted = convertValue(rawValue, targetType);
                 }
                 meta.field.setAccessible(true);
                 meta.field.set(instance, converted);
@@ -384,7 +436,16 @@ public class JsonUtil {
         List<Field> fields = new ArrayList<>();
         Class<?> current = clazz;
         while (current != null && current != Object.class) {
-            fields.addAll(Arrays.asList(current.getDeclaredFields()));
+            for (Field f : current.getDeclaredFields()) {
+                // 跳过 static 字段（FEATURE008 P1 修复 v3 2026-06-25）：
+                //   - 枚举类的 $VALUES / $ENTRIES 静态数组会触发指数级膨胀
+                //     （def.toJson() 从 200 字节爆到 197 MB）
+                //   - 普通类的 static 字段也不属于"实例状态"，不应序列化
+                // 同时跳过 synthetic 字段（compiler 生成的 this$0 / 桥接方法等）
+                if (Modifier.isStatic(f.getModifiers())) continue;
+                if (f.isSynthetic()) continue;
+                fields.add(f);
+            }
             current = current.getSuperclass();
         }
         return fields;
