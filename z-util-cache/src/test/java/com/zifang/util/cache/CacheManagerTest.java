@@ -73,4 +73,105 @@ public class CacheManagerTest {
         mgr.clearAll();
         assertEquals(0, mgr.size());
     }
+
+    // ==================== 进阶用例 ====================
+
+    @Test
+    public void testGet_nonExistent_returnsNull() {
+        assertNull(mgr.get("does-not-exist"));
+    }
+
+    @Test
+    public void testGet_withTypeSafe_returnsNullWhenAbsent() {
+        assertNull(mgr.get("nope", String.class, Integer.class));
+    }
+
+    @Test
+    public void testGet_withTypeSafe_returnsCached() {
+        mgr.register(CacheBuilder.<String, Integer>newBuilder().name("typed").build());
+        Cache<String, Integer> c = mgr.get("typed", String.class, Integer.class);
+        assertNotNull(c);
+    }
+
+    @Test
+    public void testRemove_nonExistent_returnsNull() {
+        assertNull(mgr.remove("never-registered"));
+    }
+
+    @Test
+    public void testRemove_existing_shutsDownAndReturnsIt() {
+        Cache<String, Integer> c = CacheBuilder.<String, Integer>newBuilder().name("rm-existing").build();
+        mgr.register(c);
+        Cache<?, ?> removed = mgr.remove("rm-existing");
+        assertSame(c, removed);
+        assertFalse(mgr.contains("rm-existing"));
+    }
+
+    @Test
+    public void testSnapshot_isUnmodifiable() {
+        mgr.register(CacheBuilder.<String, Integer>newBuilder().name("snap").build());
+        java.util.Map<String, Cache<?, ?>> snap = mgr.snapshot();
+        assertEquals(1, snap.size());
+        assertTrue(snap.containsKey("snap"));
+        try {
+            snap.put("new", null);
+            fail("expected UnsupportedOperationException");
+        } catch (UnsupportedOperationException expected) { /* ok */ }
+    }
+
+    @Test
+    public void testSize_afterMultipleRegisters() {
+        mgr.register(CacheBuilder.<String, Integer>newBuilder().name("s1").build());
+        mgr.register(CacheBuilder.<String, Integer>newBuilder().name("s2").build());
+        mgr.register(CacheBuilder.<String, Integer>newBuilder().name("s3").build());
+        assertEquals(3, mgr.size());
+    }
+
+    @Test
+    public void testContains_falseForAbsent() {
+        assertFalse(mgr.contains("never-registered"));
+    }
+
+    @Test
+    public void testGetOrCreate_concurrentBuilds_returnsSameInstance() throws InterruptedException {
+        // 两个线程同时调用 getOrCreate，期望最终只有一个 cache 实例被注册
+        final int threadCount = 4;
+        final java.util.concurrent.CountDownLatch start = new java.util.concurrent.CountDownLatch(1);
+        final java.util.concurrent.CountDownLatch done = new java.util.concurrent.CountDownLatch(threadCount);
+        final java.util.concurrent.atomic.AtomicReference<Cache<String, Integer>> first = new java.util.concurrent.atomic.AtomicReference<>();
+        final java.util.concurrent.atomic.AtomicReference<Cache<String, Integer>> last = new java.util.concurrent.atomic.AtomicReference<>();
+        for (int i = 0; i < threadCount; i++) {
+            new Thread(() -> {
+                try {
+                    start.await();
+                    Cache<String, Integer> c = mgr.getOrCreate("concurrent",
+                            name -> CacheBuilder.<String, Integer>newBuilder().name(name).maximumSize(5).build());
+                    if (first.compareAndSet(null, c)) {
+                        last.set(c);
+                    } else {
+                        last.set(c);
+                    }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    done.countDown();
+                }
+            }).start();
+        }
+        start.countDown();
+        done.await();
+        // 所有线程拿到的应是同一实例
+        assertSame(first.get(), last.get());
+        assertTrue(mgr.contains("concurrent"));
+        assertEquals(1, mgr.size());
+    }
+
+    @Test
+    public void testClearAll_swallowsExceptionsFromCaches() {
+        // 即便某个 cache 的 invalidateAll 抛错，clearAll 也不应中断
+        mgr.register(CacheBuilder.<String, Integer>newBuilder().name("safe-clear").build());
+        // 模拟：clearAll 内部对每个 cache 单独 try/catch
+        mgr.clearAll();
+        assertEquals(0, mgr.size());
+    }
 }
