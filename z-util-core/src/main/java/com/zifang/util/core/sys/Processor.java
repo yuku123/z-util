@@ -24,22 +24,6 @@ public final class Processor {
         return INSTANCE;
     }
 
-    public Arch getArch() {
-        return arch;
-    }
-
-    public Arch getType() {
-        return arch;
-    }
-
-    public boolean isX86() {
-        return arch.isX86();
-    }
-
-    public boolean isPPC() {
-        return arch.isPPC();
-    }
-
     private static Arch detectArch() {
         String osArch = System.getProperty("os.arch", "");
         if (osArch == null || osArch.isEmpty()) {
@@ -90,5 +74,21 @@ public final class Processor {
             }
         }
         return false;
+    }
+
+    public Arch getArch() {
+        return arch;
+    }
+
+    public Arch getType() {
+        return arch;
+    }
+
+    public boolean isX86() {
+        return arch.isX86();
+    }
+
+    public boolean isPPC() {
+        return arch.isPPC();
     }
 }
