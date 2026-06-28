@@ -15,7 +15,7 @@
 
     <dependencies>
 
-        <!-- z-util-core 提供 StringUtil / ArchUtils 等基础工具，替换 commons-lang3 -->
+        <!-- z-util-core 提供 StringUtil / ArchUtils 等基础工具 -->
         <dependency>
             <groupId>com.zifang</groupId>
             <artifactId>z-util-core</artifactId>
@@ -35,23 +35,10 @@
             <version>5.2.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.mashape.unirest/unirest-java -->
+        <!-- OkHttp：用于替换 unirest-java（unirest 1.4.9 内置 httpclient 4.5.4 有 CVE-2020-13956） -->
         <dependency>
-            <groupId>com.mashape.unirest</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>1.4.9</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.httpcomponents</groupId>
-                    <artifactId>httpclient</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- 显式引入安全的 httpclient，覆盖 unirest-java 1.4.9 内置的 4.5.4（CVE-2020-13956） -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
         </dependency>
 
         <!-- JGit: 纯 Java 实现的 git 操作库 -->
@@ -62,8 +49,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-parser-json</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
