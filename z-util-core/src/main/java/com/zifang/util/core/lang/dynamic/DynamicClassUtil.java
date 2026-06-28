@@ -1,8 +1,6 @@
 package com.zifang.util.core.lang.dynamic;
 
 
-import com.zifang.util.core.util.GsonUtil;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -210,7 +208,126 @@ public class DynamicClassUtil {
      * @return static List<String>类型返回值
      */
     public static List<String> generateClassSource(String json) {
-        return generateClassSource(GsonUtil.toMap(json));
+        return generateClassSource(parseJsonObject(json));
+    }
+
+    /**
+     * 内嵌极简 JSON 解析器（仅 object / string / number / true / false / null），
+     * 避免 z-util-core 反向依赖 z-util-parser-json。
+     * 如需复杂 JSON，请使用 z-util-parser-json 的 JsonUtil。
+     */
+    @SuppressWarnings("unchecked")
+    private static Map<String, Object> parseJsonObject(String json) {
+        SimpleJsonParser p = new SimpleJsonParser(json);
+        p.skipWs();
+        Object v = p.parseValue();
+        p.skipWs();
+        if (v instanceof Map) return (Map<String, Object>) v;
+        return new LinkedHashMap<>();
+    }
+
+    /** 极简 JSON 解析器，仅支持 DynamicClassUtil 所需子集。 */
+    private static final class SimpleJsonParser {
+        private final String src;
+        private int pos;
+
+        SimpleJsonParser(String src) { this.src = src; }
+
+        void skipWs() {
+            while (pos < src.length() && Character.isWhitespace(src.charAt(pos))) pos++;
+        }
+
+        Object parseValue() {
+            skipWs();
+            if (pos >= src.length()) return null;
+            char c = src.charAt(pos);
+            if (c == '{') return parseObject();
+            if (c == '[') return parseArray();
+            if (c == '"') return parseString();
+            if (c == 't' || c == 'f') return parseBoolean();
+            if (c == 'n') return parseNull();
+            return parseNumber();
+        }
+
+        private Map<String, Object> parseObject() {
+            Map<String, Object> map = new LinkedHashMap<>();
+            pos++;
+            skipWs();
+            if (pos < src.length() && src.charAt(pos) == '}') { pos++; return map; }
+            while (true) {
+                skipWs();
+                if (src.charAt(pos) != '"') return map;
+                String key = parseString();
+                skipWs();
+                if (src.charAt(pos) != ':') return map;
+                pos++;
+                map.put(key, parseValue());
+                skipWs();
+                if (pos < src.length() && src.charAt(pos) == ',') { pos++; continue; }
+                if (pos < src.length() && src.charAt(pos) == '}') { pos++; return map; }
+                return map;
+            }
+        }
+
+        private List<Object> parseArray() {
+            List<Object> list = new ArrayList<>();
+            pos++;
+            skipWs();
+            if (pos < src.length() && src.charAt(pos) == ']') { pos++; return list; }
+            while (true) {
+                list.add(parseValue());
+                skipWs();
+                if (pos < src.length() && src.charAt(pos) == ',') { pos++; continue; }
+                if (pos < src.length() && src.charAt(pos) == ']') { pos++; return list; }
+                return list;
+            }
+        }
+
+        private String parseString() {
+            pos++;
+            StringBuilder sb = new StringBuilder();
+            while (pos < src.length() && src.charAt(pos) != '"') {
+                char c = src.charAt(pos);
+                if (c == '\\' && pos + 1 < src.length()) {
+                    char next = src.charAt(pos + 1);
+                    switch (next) {
+                        case 'n': sb.append('\n'); break;
+                        case 't': sb.append('\t'); break;
+                        case 'r': sb.append('\r'); break;
+                        case '\\': sb.append('\\'); break;
+                        case '"': sb.append('"'); break;
+                        default: sb.append(next);
+                    }
+                    pos += 2;
+                } else {
+                    sb.append(c);
+                    pos++;
+                }
+            }
+            if (pos < src.length()) pos++;
+            return sb.toString();
+        }
+
+        private Boolean parseBoolean() {
+            if (src.startsWith("true", pos)) { pos += 4; return Boolean.TRUE; }
+            if (src.startsWith("false", pos)) { pos += 5; return Boolean.FALSE; }
+            return null;
+        }
+
+        private Object parseNull() {
+            if (src.startsWith("null", pos)) { pos += 4; return null; }
+            return null;
+        }
+
+        private Object parseNumber() {
+            int start = pos;
+            if (pos < src.length() && (src.charAt(pos) == '-' || src.charAt(pos) == '+')) pos++;
+            while (pos < src.length() && "0123456789.eE+-".indexOf(src.charAt(pos)) >= 0) pos++;
+            String num = src.substring(start, pos);
+            if (num.isEmpty()) return null;
+            if (num.contains(".") || num.contains("e") || num.contains("E")) return Double.valueOf(num);
+            try { return Long.valueOf(num); } catch (NumberFormatException e) { return Double.valueOf(num); }
+        }
     }
 
     /**

@@ -1,11 +1,10 @@
 package com.zifang.util.core.compile;
 
 
-import com.google.common.collect.Maps;
-
 import javax.tools.*;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -103,7 +102,7 @@ public class CustomerJavaCompiler {
 //            LoggerUtil.error("编译失败. \noutWriter:{} \ndiagnostics info:{}", outWriter.toString(), error.toString());
         }
 
-        return Maps.newHashMapWithExpectedSize(0);
+        return new HashMap<>(0);
     }
 
 
@@ -155,7 +154,7 @@ public class CustomerJavaCompiler {
 //            LoggerUtil.error("编译失败. \noutWriter:{} \ndiagnostics info:{}", outWriter.toString(), error.toString());
         }
 
-        return Maps.newHashMapWithExpectedSize(0);
+        return new HashMap<>(0);
     }
 
 

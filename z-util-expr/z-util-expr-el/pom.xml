@@ -14,12 +14,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-            <!-- 版本由根 pom 的 dependencyManagement 统一管理（5.3.39，Java 8 兼容）。子模块不要再写 <version>，否则会覆盖 BOM 拉一个 Java 17 的 7.x，编译会报 class file has wrong version 61.0, should be 52.0。 -->
-        </dependency>
-
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>

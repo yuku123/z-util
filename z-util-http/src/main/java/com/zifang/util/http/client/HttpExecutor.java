@@ -145,7 +145,7 @@ public class HttpExecutor {
      */
     public HttpExecutionResult executeByDefinitionJson(String json) {
         try {
-            HttpRequestDefinition def = com.alibaba.fastjson.JSON.parseObject(json, HttpRequestDefinition.class);
+            HttpRequestDefinition def = com.zifang.util.json.JsonUtil.fromJson(json, HttpRequestDefinition.class);
             if (def == null) {
                 return HttpExecutionResult.fail("Definition JSON parse to null", "PARSE_ERROR");
             }
@@ -232,7 +232,8 @@ public class HttpExecutor {
             if (def.getHttpRequestBody() != null && def.getHttpRequestBody().getBody() != null) {
                 String text = new String(def.getHttpRequestBody().getBody(), StandardCharsets.UTF_8);
                 if (text.startsWith("{") && text.endsWith("}")) {
-                    Map<String, Object> map = com.alibaba.fastjson.JSON.parseObject(text, Map.class);
+                    @SuppressWarnings("unchecked")
+                    Map<String, Object> map = (Map<String, Object>) (Map) com.zifang.util.json.JsonUtil.parseObject(text);
                     if (map != null) for (Map.Entry<String, Object> e : map.entrySet()) {
                         mb.addFormDataPart(e.getKey(), e.getValue() == null ? "" : String.valueOf(e.getValue()));
                     }

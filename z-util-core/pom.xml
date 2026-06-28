@@ -15,14 +15,9 @@
 
     <dependencies>
         <!--
-            定时调度器：固定 2.3.x 末班车版本。
-            2.4+ 需要 JDK 11，而项目 compile.version=8；2.3.2 是 2.3 分支最后一个版本（class file 51.0，Java 7+ 兼容）。
+            自研调度器（基于 ScheduledThreadPoolExecutor + 自研 Cron 解析器），
+            不再需要 quartz。
         -->
-        <dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>2.3.2</version>
-        </dependency>
 
 
         <dependency>
@@ -46,11 +41,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
@@ -69,8 +59,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-parser-json</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
