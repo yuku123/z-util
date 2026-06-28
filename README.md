@@ -79,11 +79,7 @@ z-util/
 ├── pom.xml                 # 父 POM（统一版本、依赖、插件）
 ├── README.md               # 本文件
 ├── CLAUDE.md               # 给 AI 助手的协作约定
-├── note.md                 # 项目笔记
 ├── build.sh / push.sh      # 本地构建/发布脚本
-├── fix_pkg.py              # 包名修正脚本
-├── fix_unicode_escapes.py  # Unicode 转义修正脚本
-├── add_javadoc.py          # Javadoc 补充脚本
 ├── .github/workflows/      # GitHub Actions 发布流水线
 ├── z-util-core/            # 基础工具（集合/字符串/JWT/IO/并发/网络...）
 ├── z-util-cache/           # 缓存
@@ -286,14 +282,11 @@ mvn versions:set -DnewVersion=1.0.3-SNAPSHOT
 
 ### 辅助脚本
 
-仓库根目录还提供了几个本地脚本：
+仓库根目录提供了以下本地脚本：
 
 ```bash
 ./build.sh         # 调 mvn install
 ./push.sh          # 调 mvn deploy
-python add_javadoc.py         # 给指定类补 Javadoc
-python fix_pkg.py             # 批量修正包名
-python fix_unicode_escapes.py # 修正 Unicode 转义
 ```
 
 ---
@@ -349,10 +342,10 @@ python fix_unicode_escapes.py # 修正 Unicode 转义
 | 并发     | `ThreadUtil` / `NameThreadFactory` / `ThreadLocalMapUtil`              | 线程工具                                 |
 | 加密     | `Base64Utils` / `DESUtils` / `MD5Utils` / `RsaUtil` / `HMAC`           | 常用加密                                 |
 | 转换     | `Converters` / `ConvertCaller`                                         | 类型转换                                 |
-| 网络     | `NetClient` / `NetServer` / `NetworkUtil` / `UrlUtil`                  | 网络工具                                 |
+| 网络     | `NetworkUtil` / `UrlUtil`                                              | 网络工具                                 |
 | 异常     | `BaseException` / `BusinessException` / `ExceptionUtil`                | 统一异常                                 |
 | 分页     | `PageRequest` / `PaginationResponse`                                   | 通用分页                                 |
-| 通用响应   | `BaseResponse` / `Result` / `ResultCode`                               | 统一返回结构                               |
+| 通用响应   | `BaseResponse` / `Result`                                              | 统一返回结构                               |
 
 **快速示例：**
 
@@ -389,14 +382,16 @@ boolean blank = StringUtil.isBlank("  ");       // true
 **示例：**
 
 ```java
-MemoryCache<String, Object> cache = CacheBuilder.newBuilder()
+import java.time.Duration;
+
+MemoryCache<String, Object> cache = CacheBuilder.<String, Object>newBuilder()
     .maximumSize(1000)
-    .expireAfterWrite(5, TimeUnit.MINUTES)
+    .expireAfterWrite(Duration.ofMinutes(5))
     .removalListener((k, v, cause) -> System.out.println("evicted: " + k))
     .build();
 
 cache.put("k", "v");
-String v = cache.getIfPresent("k");
+String v = (String) cache.get("k");      // null if expired/evicted
 cache.invalidate("k");
 ```
 
@@ -1063,8 +1058,8 @@ z-util-ml / z-util-math / z-util-workflow / z-util-http / z-util-crawler
 - **构建顺序**：修改了某个子模块后，建议使用 `mvn -pl <module> -am install` 一起构建依赖。
 - **依赖检查**：定期执行 `mvn dependency:analyze` 排查未声明或多余依赖。
 - **代码风格**：遵循通用 Java 编码规范；可启用 IDE 的 Checkstyle / Spotless（如需可后续加入）。
-- **AI 协作约定**：见 [CLAUDE.md](./CLAUDE.md)；项目笔记见 [note.md](./note.md)。
-- **辅助脚本**：`build.sh` / `push.sh` / `add_javadoc.py` / `fix_pkg.py` / `fix_unicode_escapes.py`。
+- **AI 协作约定**：见 [CLAUDE.md](./CLAUDE.md)。
+- **辅助脚本**：`build.sh`（本地 install）、`push.sh`（本地 deploy）。
 
 ---
 
