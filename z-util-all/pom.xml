@@ -83,11 +83,6 @@
             </dependency>
             <dependency>
                 <groupId>com.zifang</groupId>
-                <artifactId>z-util-zex</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.zifang</groupId>
                 <artifactId>z-util-http</artifactId>
                 <version>${revision}</version>
             </dependency>
