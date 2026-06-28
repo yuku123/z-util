@@ -1,12 +1,11 @@
 package com.zifang.util.workflow.json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.zifang.util.json.JsonUtil;
 import com.zifang.util.workflow.config.WorkflowConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,20 +13,13 @@ import java.nio.file.Paths;
 /**
  * 工作流配置JSON序列化器。
  * <p>
- * 使用Jackson库实现WorkflowConfiguration与JSON格式之间的相互转换。
+ * 使用JsonUtil实现WorkflowConfiguration与JSON格式之间的相互转换。
  * 支持将配置序列化为JSON字符串或文件，以及从JSON字符串或文件反序列化。
  *
  * @see WorkflowConfiguration
- * @see ObjectMapper
+ * @see JsonUtil
  */
 public class WorkflowConfigurationSerializer {
-
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    static {
-        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-    }
 
     /**
      * Serialize WorkflowConfiguration to JSON string
@@ -36,11 +28,7 @@ public class WorkflowConfigurationSerializer {
      * @return JSON string representation
      */
     public String toJson(WorkflowConfiguration config) {
-        try {
-            return objectMapper.writeValueAsString(config);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to serialize WorkflowConfiguration to JSON", e);
-        }
+        return JsonUtil.toJson(config);
     }
 
     /**
@@ -50,11 +38,7 @@ public class WorkflowConfigurationSerializer {
      * @return WorkflowConfiguration instance
      */
     public WorkflowConfiguration fromJson(String json) {
-        try {
-            return objectMapper.readValue(json, WorkflowConfiguration.class);
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to deserialize WorkflowConfiguration from JSON", e);
-        }
+        return JsonUtil.fromJson(json, WorkflowConfiguration.class);
     }
 
     /**
@@ -67,7 +51,7 @@ public class WorkflowConfigurationSerializer {
         try {
             Path path = Paths.get(file.toURI());
             Files.createDirectories(path.getParent());
-            objectMapper.writeValue(file, config);
+            Files.write(path, JsonUtil.toJson(config).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException("Failed to write WorkflowConfiguration to file: " + file.getAbsolutePath(), e);
         }
@@ -81,7 +65,7 @@ public class WorkflowConfigurationSerializer {
      */
     public WorkflowConfiguration fromJsonFile(File file) {
         try {
-            return objectMapper.readValue(file, WorkflowConfiguration.class);
+            return JsonUtil.fromJson(new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8), WorkflowConfiguration.class);
         } catch (IOException e) {
             throw new RuntimeException("Failed to read WorkflowConfiguration from file: " + file.getAbsolutePath(), e);
         }

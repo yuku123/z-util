@@ -21,8 +21,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
+            <groupId>com.zifang</groupId>
+            <artifactId>z-util-parser-json</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
