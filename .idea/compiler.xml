@@ -31,7 +31,6 @@
         <module name="z-util-media" />
         <module name="z-util-ch" />
         <module name="z-util-office" />
-        <module name="z-util-zex" />
         <module name="z-util-cli" />
         <module name="z-util-parser-toml" />
         <module name="z-util-expr-sql" />
@@ -161,6 +160,7 @@
       <module name="z-util-trace" target="1.8" />
       <module name="z-util-xml" target="1.8" />
       <module name="z-util-yaml" target="1.8" />
+      <module name="z-util-zex" target="1.8" />
       <module name="z-wf" target="1.8" />
       <module name="z-wf-client" target="1.8" />
       <module name="z-wf-core" target="1.8" />

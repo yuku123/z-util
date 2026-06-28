@@ -1,37 +1,46 @@
 # z-util-cache
 
-纯内存缓存模块，对标 Google Guava Cache，支持 TTL 自动过期 + LRU 淘汰。
+纯内存缓存模块，对标 Google Guava Cache / Caffeine，支持 TTL 自动过期 + LRU/W-TinyLFU 淘汰。
 
 ## Features
 
 - **MemoryCache** — 纯内存 KV 缓存，线程安全
     - 支持 TTL（过期时间）
-    - 支持 LRU 淘汰策略（最大容量限制）
+    - 支持 LRU / W-TinyLFU 淘汰策略（最大容量限制）
     - 支持统计：hit/miss/evict
+- **CacheBuilder** — 链式构建缓存实例（推荐入口）
 - **CacheManager** — 多级缓存管理，支持缓存命名空间
-- **CacheFactory** — 工厂模式创建缓存实例
+- **LoadingCache / LoadingMemoryCache** — 自动加载语义
+- **装饰器**：BoundedCache / ForwardingCache / MeteredCache / NullCache / TransactionalCache
+- **CountMinSketch** — 频率估计（W-TinyLFU 内部使用）
 
 ## Quick Start
 
 ```java
-MemoryCache<String, Object> cache = CacheFactory.create()
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+MemoryCache<String, Object> cache = CacheBuilder.<String, Object>newBuilder()
+    .name("demo-cache")
     .maximumSize(1000)
-    .expireAfterWrite(5, TimeUnit.MINUTES)
+    .expireAfterWrite(Duration.ofMinutes(5))
     .build();
 
 cache.put("key", "value");
 Object val = cache.get("key");          // null if expired/evicted
+Object compute = cache.get("k2", k -> "computed-" + k);  // 不存在时自动计算
 cache.invalidate("key");
 ```
 
-## Export/Import
+## LoadingCache
 
 ```java
-// 持久化到文件
-cache.exportToFile("cache.dat");
+LoadingCache<String, User> loadingCache = CacheBuilder.<String, User>newBuilder()
+    .maximumSize(10_000)
+    .expireAfterWrite(Duration.ofHours(1))
+    .build(key -> userDao.findById(key));   // CacheLoader
 
-// 从文件恢复
-MemoryCache<String, Object> restored = MemoryCache.importFromFile("cache.dat");
+User user = loadingCache.get("user-123");  // 首次自动加载，后续走缓存
 ```
 
 ## Maven
