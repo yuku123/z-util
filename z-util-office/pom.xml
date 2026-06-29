@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>fontbox</artifactId>
-            <version>2.0.31</version>
+            <version>3.0.7</version>
         </dependency>
         <!-- jempbox 已在 pdfbox 2.0+ 中移除（被 fontbox/preflight 替代），无需再单独声明 -->
         <dependency>
