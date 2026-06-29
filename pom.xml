@@ -389,7 +389,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-expression</artifactId>
-                <version>5.3.39</version>
+                <version>7.0.8</version>
             </dependency>
 
             <!-- github-api (升级到 1.321) -->
