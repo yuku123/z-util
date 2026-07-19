@@ -212,7 +212,7 @@ public class U {
         CTOnOff onoffnull = CTOnOff.Factory.newInstance();
         ctStyle.setUnhideWhenUsed(onoffnull); // style shows up in the formats bar
         ctStyle.setQFormat(onoffnull); // style defines a heading of the given level
-        CTPPr ppr = CTPPr.Factory.newInstance();
+        CTPPrGeneral ppr = CTPPrGeneral.Factory.newInstance();
         ppr.setOutlineLvl(indentNumber);
         ctStyle.setPPr(ppr);
 
@@ -257,7 +257,7 @@ public class U {
         ctStyle.setQFormat(onoffnull);
 
         // style defines a heading of the given level
-        CTPPr ppr = CTPPr.Factory.newInstance();
+        CTPPrGeneral ppr = CTPPrGeneral.Factory.newInstance();
         ppr.setOutlineLvl(indentNumber);
         ctStyle.setPPr(ppr);
 
@@ -274,14 +274,14 @@ public class U {
 
 
         CTRPr rpr = CTRPr.Factory.newInstance();
-        rpr.setRFonts(fonts);
-        rpr.setSz(size);
-        rpr.setSzCs(size2);
+        rpr.setRFontsArray(new CTFonts[]{fonts});
+        rpr.setSzArray(new CTHpsMeasure[]{size});
+        rpr.setSzCsArray(new CTHpsMeasure[]{size2});
 
 
         CTColor color = CTColor.Factory.newInstance();
         color.setVal(hexToBytes(hexColor));
-        rpr.setColor(color);
+        rpr.setColorArray(new CTColor[]{color});
         style.getCTStyle().setRPr(rpr);
         // is a null op if already defined
 
