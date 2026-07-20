@@ -496,7 +496,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version> <!-- 使用最新稳定版 -->
+                <version>3.4.0</version> <!-- 使用最新稳定版 -->
                 <executions>
                     <execution>
                         <id>attach-sources</id>
