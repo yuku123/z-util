@@ -46,12 +46,7 @@ public class BytesJavaFileObject extends SimpleJavaFileObject {
         return bos;
     }
 
-    @Override
-    /**
-     * finalize方法。
-     */
-    protected void finalize() throws Throwable {
-        super.finalize();
+    public void close() throws IOException {
         bos.close();
     }
 }

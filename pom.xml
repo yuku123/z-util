@@ -124,12 +124,6 @@
             </dependency>
 
             <dependency>
-                <groupId>com.zifang</groupId>
-                <artifactId>z-util-all</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j-impl</artifactId>
                 <version>2.26.0</version>

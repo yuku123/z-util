@@ -7,21 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * JSON数组模型，表示一个JSON数组（有序的元素列表）。
- * <p>
- * 实现了Iterable接口，可以直接迭代遍历数组元素。
- *
- * @author zifang
- * @see JsonObject
- */
+public class JsonArray implements Iterable<Object> {
 
-/**
- * JsonArray类。
- */
-public class JsonArray implements Iterable {
-
-    private List list = new ArrayList();
+    private List<Object> list = new ArrayList<>();
 
     /**
      * 向数组中添加一个元素。

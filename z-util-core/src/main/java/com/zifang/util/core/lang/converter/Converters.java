@@ -5,10 +5,10 @@ import com.zifang.util.core.lang.converter.converters.DefaultConverter;
 import com.zifang.util.core.lang.reflect.ClassParser;
 import com.zifang.util.core.lang.reflect.ClassParserFactory;
 import com.zifang.util.core.lang.tuples.Pair;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -152,14 +152,18 @@ public class Converters {
         try {
             ClassParser classParser = new ClassParserFactory().getInstance(converter.getClass());
             Type type = classParser.getGenericType(IConverter.class);
-            if (type instanceof ParameterizedTypeImpl) {
-                ParameterizedTypeImpl parameterizedType = (ParameterizedTypeImpl) type;
+            if (type instanceof ParameterizedType) {
+                ParameterizedType parameterizedType = (ParameterizedType) type;
                 Type[] types = parameterizedType.getActualTypeArguments();
 
-                Pair<Class<?>, Class<?>> pair = new Pair<>(
-                        types[0] instanceof Class ? (Class<?>) types[0] : ((ParameterizedTypeImpl) types[0]).getRawType(),
-                        types[1] instanceof Class ? (Class<?>) types[1] : ((ParameterizedTypeImpl) types[1]).getRawType()
-                );
+                Class<?> fromType = types[0] instanceof Class
+                        ? (Class<?>) types[0]
+                        : (Class<?>) ((ParameterizedType) types[0]).getRawType();
+                Class<?> targetType = types[1] instanceof Class
+                        ? (Class<?>) types[1]
+                        : (Class<?>) ((ParameterizedType) types[1]).getRawType();
+
+                Pair<Class<?>, Class<?>> pair = new Pair<>(fromType, targetType);
                 Method method = converter.getClass().getDeclaredMethod(
                         "to",
                         pair.getA(),

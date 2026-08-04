@@ -58,7 +58,7 @@ public class MemoryCache<K, V> implements Cache<K, V> {
         this.expiry = b.getExpiry();
         this.listeners = Collections.unmodifiableSet(new java.util.LinkedHashSet<>(b.getListeners()));
         int cap = (int) Math.min(b.getInitialCapacity(), Integer.MAX_VALUE);
-        this.data = new LinkedHashMap<>(cap, 0.75f, true);
+        this.data = new LinkedHashMap<K, Node<K, V>>(cap, 0.75f, true);
         // 清理间隔 = max(1s, min(expire)/4)
         long minExp = Math.min(
                 expireAfterWriteNanos < 0 ? Long.MAX_VALUE : expireAfterWriteNanos,

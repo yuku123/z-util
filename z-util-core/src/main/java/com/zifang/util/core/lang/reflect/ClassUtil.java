@@ -12,8 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.net.*;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -38,14 +36,7 @@ public class ClassUtil {
     public static String METHOD_GET_PREFIX = "get";
     public static String METHOD_IS_PREFIX = "is";
     public static String METHOD_SET_PREFIX = "set";
-    private static ReflectUtilSecurityManager SECURITY_MANAGER;
-
     static {
-        try {
-            SECURITY_MANAGER = new ReflectUtilSecurityManager();
-        } catch (Exception ex) {
-            SECURITY_MANAGER = null;
-        }
     }
 
     /**
@@ -305,13 +296,8 @@ public class ClassUtil {
      */
     public static void forceAccess(AccessibleObject accObject) {
         try {
-            if (System.getSecurityManager() == null)
+            if (!accObject.isAccessible()) {
                 accObject.setAccessible(true);
-            else {
-                AccessController.doPrivileged((PrivilegedAction) () -> {
-                    accObject.setAccessible(true);
-                    return null;
-                });
             }
         } catch (SecurityException sex) {
             // ignore
@@ -654,18 +640,8 @@ public class ClassUtil {
      * <li><code>new Throwable().getStackTrace()[callStackDepth]</code></li>
      * <li><code>Thread.currentThread().getStackTrace()[callStackDepth]</code> (the slowest)</li>
      * </ul>
-     * <p>
-     * In case when usage of <code>SecurityManager</code> is not allowed,
-     * this method fails back to the second implementation.
-     * <p>
-     * Note that original <code>Reflection.getCallerClass</code> is way faster
-     * then any emulation.
      */
     public static Class getCallerClass(int framesToSkip) {
-        if (SECURITY_MANAGER != null) {
-            return SECURITY_MANAGER.getCallerClass(framesToSkip);
-        }
-
         StackTraceElement[] stackTraceElements = new Throwable().getStackTrace();
 
         if (framesToSkip >= 2) {
@@ -1031,17 +1007,5 @@ public class ClassUtil {
      */
     public static URI toURI(String location) throws URISyntaxException {
         return new URI(location.replace(" ", "%20"));
-    }
-
-    private static class ReflectUtilSecurityManager extends SecurityManager {
-        /**
-         * getCallerClass方法。
-         * * @param callStackDepth int类型参数
-         *
-         * @return Class类型返回值
-         */
-        public Class getCallerClass(int callStackDepth) {
-            return getClassContext()[callStackDepth + 1];
-        }
     }
 }

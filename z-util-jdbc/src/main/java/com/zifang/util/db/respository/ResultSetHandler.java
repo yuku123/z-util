@@ -1,7 +1,6 @@
 package com.zifang.util.db.respository;
 
 import com.zifang.util.core.lang.converter.Converters;
-import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import javax.persistence.Column;
 import java.lang.reflect.Field;
@@ -57,18 +56,17 @@ public class ResultSetHandler {
 
         resultSetMetaData = resultSet.getMetaData();
 
-        // 是泛型类
         if (targetType instanceof ParameterizedType) {
             if (((ParameterizedType) targetType).getRawType() == List.class) {
-                Type type = ((ParameterizedTypeImpl) targetType).getActualTypeArguments()[0];
+                Type type = ((ParameterizedType) targetType).getActualTypeArguments()[0];
                 if (type instanceof ParameterizedType) {
-                    Class clazz = ((ParameterizedTypeImpl) type).getRawType();
+                    Class<?> clazz = (Class<?>) ((ParameterizedType) type).getRawType();
                     if (clazz == Map.class) {
                         List<Map<String, Object>> list = fetch(resultSet);
                         return list;
                     }
                 } else {
-                    Class clazz = (Class) ((ParameterizedTypeImpl) targetType).getActualTypeArguments()[0];
+                    Class<?> clazz = (Class<?>) ((ParameterizedType) targetType).getActualTypeArguments()[0];
                     List<Map<String, Object>> list = fetch(resultSet);
                     List<Object> o = transformBatch(list, clazz);
                     return o;

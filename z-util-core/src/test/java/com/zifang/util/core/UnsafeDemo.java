@@ -1,96 +1,88 @@
 package com.zifang.util.core;
 
-import com.zifang.util.core.util.UnsafeUtil;
 import org.junit.Test;
-import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 
-/**
- * show unsafe 实力类都能帮助我们干什么事情
- * <p>
- * 1. 实例化一个类
- * 2. 修改私有字段的值
- * 3. 使用堆外内存
- * 4. CompareAndSwap操作
- * 5. park/unpark
- * 当一个线程正在等待某个操作时，JVM调用Unsafe的park()方法来阻塞此线程
- * 当阻塞中的线程需要再次运行时，JVM调用Unsafe的unpark()方法来唤醒此线程
- */
-
-/**
- * UnsafeDemo类。
- */
 public class UnsafeDemo {
 
     private static long offset;
     private volatile int count = 0;
 
     @Test
-    //只会分配内存给这个类，而不会去调用构造方法，因此打印出来age为1
-    /**
-     * createInstanceByUnsafe方法。
-     */
     public void createInstanceByUnsafe() throws InstantiationException {
-        Unsafe unsafe = UnsafeUtil.getUnsageInstance();
-        User user2 = (User) unsafe.allocateInstance(User.class);
-        System.out.println(user2.age);
+        try {
+            Class<?> unsafeClass = Class.forName("sun.misc.Unsafe");
+            Field unsafeField = unsafeClass.getDeclaredField("theUnsafe");
+            unsafeField.setAccessible(true);
+            Object unsafe = unsafeField.get(null);
+            
+            java.lang.reflect.Method allocateInstance = unsafeClass.getMethod("allocateInstance", Class.class);
+            User user2 = (User) allocateInstance.invoke(unsafe, User.class);
+            System.out.println(user2.age);
+        } catch (Exception e) {
+            System.out.println("sun.misc.Unsafe not available: " + e.getMessage());
+        }
     }
 
-
     @Test
-    //只会分配内存给这个类，而不会去调用构造方法，因此打印出来age为1
-    /**
-     * modifyInstanceFieldByUnsafe方法。
-     */
     public void modifyInstanceFieldByUnsafe() throws InstantiationException, NoSuchFieldException {
-        Unsafe unsafe = UnsafeUtil.getUnsageInstance();
-        User user = new User();
-        Field age = user.getClass().getDeclaredField("age");
-        unsafe.putInt(user, unsafe.objectFieldOffset(age), 20);
+        try {
+            Class<?> unsafeClass = Class.forName("sun.misc.Unsafe");
+            Field unsafeField = unsafeClass.getDeclaredField("theUnsafe");
+            unsafeField.setAccessible(true);
+            Object unsafe = unsafeField.get(null);
 
-        // 打印20
-        System.out.println(user.getAge());
+            User user = new User();
+            Field age = user.getClass().getDeclaredField("age");
+            
+            java.lang.reflect.Method objectFieldOffset = unsafeClass.getMethod("objectFieldOffset", Field.class);
+            long fieldOffset = (Long) objectFieldOffset.invoke(unsafe, age);
+            
+            java.lang.reflect.Method putInt = unsafeClass.getMethod("putInt", Object.class, long.class, int.class);
+            putInt.invoke(unsafe, user, fieldOffset, 20);
+
+            System.out.println(user.getAge());
+        } catch (Exception e) {
+            System.out.println("sun.misc.Unsafe not available: " + e.getMessage());
+        }
     }
-
 
     @Test
-    //只会分配内存给这个类，而不会去调用构造方法，因此打印出来age为1
-    /**
-     * cas方法。
-     */
     public void cas() throws InstantiationException, NoSuchFieldException {
-        Unsafe unsafe = UnsafeUtil.getUnsageInstance();
-        offset = unsafe.objectFieldOffset(UnsafeDemo.class.getDeclaredField("count"));
+        try {
+            Class<?> unsafeClass = Class.forName("sun.misc.Unsafe");
+            Field unsafeField = unsafeClass.getDeclaredField("theUnsafe");
+            unsafeField.setAccessible(true);
+            Object unsafe = unsafeField.get(null);
+            
+            java.lang.reflect.Method objectFieldOffset = unsafeClass.getMethod("objectFieldOffset", Field.class);
+            offset = (Long) objectFieldOffset.invoke(unsafe, UnsafeDemo.class.getDeclaredField("count"));
+        } catch (Exception e) {
+            System.out.println("sun.misc.Unsafe not available: " + e.getMessage());
+        }
     }
 
-    /**
-     * increment方法。
-     * * @param unsafe Unsafe类型参数
-     */
-    public void increment(Unsafe unsafe) {
-        int before = count;
-        // 失败了就重试直到成功为止
-        while (!unsafe.compareAndSwapInt(this, offset, before, before + 1)) {
-            before = count;
+    public void increment(Object unsafe) {
+        try {
+            Class<?> unsafeClass = unsafe.getClass();
+            int before = count;
+            java.lang.reflect.Method compareAndSwapInt = unsafeClass.getMethod("compareAndSwapInt", Object.class, long.class, int.class, int.class);
+            while (!(Boolean) compareAndSwapInt.invoke(unsafe, this, offset, before, before + 1)) {
+                before = count;
+            }
+        } catch (Exception e) {
+            System.out.println("sun.misc.Unsafe not available: " + e.getMessage());
         }
     }
 
     public static class User {
         int age;
 
-        /**
-         * User方法。
-         */
         public User() {
             this.age = 10;
         }
 
-        /**
-         * getAge方法。
-         *
-         * @return int类型返回值
-         */
         public int getAge() {
             return age;
         }

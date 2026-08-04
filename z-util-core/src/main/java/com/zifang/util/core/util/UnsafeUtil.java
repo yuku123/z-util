@@ -1,104 +1,76 @@
 package com.zifang.util.core.util;
 
-import sun.misc.Unsafe;
-
 import java.lang.reflect.Field;
 
-/**
- * @author zifang
- */
 public class UnsafeUtil {
 
-    private static final Unsafe UNSAFE;
-    private static final long STRING_VALUE_FIELD_OFFSET;
-    private static final long STRING_OFFSET_FIELD_OFFSET;
-    private static final long STRING_COUNT_FIELD_OFFSET;
+    private static final Field STRING_VALUE_FIELD;
+    private static final Field STRING_OFFSET_FIELD;
+    private static final Field STRING_COUNT_FIELD;
 
     static {
-        Unsafe unsafe = null;
-        long stringValueFieldOffset = -1L;
-        long stringOffsetFieldOffset = -1L;
-        long stringCountFieldOffset = -1L;
+        Field valueField = null;
+        Field offsetField = null;
+        Field countField = null;
 
         if (System.getProperty("java.version").startsWith("1.8")) {
             try {
-                final Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");
-                unsafeField.setAccessible(true);
-                unsafe = (Unsafe) unsafeField.get(null);
-            } catch (Throwable cause) {
-                unsafe = null;
+                valueField = String.class.getDeclaredField("value");
+                valueField.setAccessible(true);
+            } catch (Throwable ignore) {
             }
 
-            if (unsafe != null) {
-                try {
-                    stringValueFieldOffset = unsafe.objectFieldOffset(String.class.getDeclaredField("value"));
-                    stringOffsetFieldOffset = unsafe.objectFieldOffset(String.class.getDeclaredField("offset"));
-                    stringCountFieldOffset = unsafe.objectFieldOffset(String.class.getDeclaredField("count"));
-                } catch (Throwable ignore) {
-                }
+            try {
+                offsetField = String.class.getDeclaredField("offset");
+                offsetField.setAccessible(true);
+            } catch (Throwable ignore) {
+            }
+
+            try {
+                countField = String.class.getDeclaredField("count");
+                countField.setAccessible(true);
+            } catch (Throwable ignore) {
             }
         }
 
-        UNSAFE = unsafe;
-        STRING_VALUE_FIELD_OFFSET = stringValueFieldOffset;
-        STRING_OFFSET_FIELD_OFFSET = stringOffsetFieldOffset;
-        STRING_COUNT_FIELD_OFFSET = stringCountFieldOffset;
+        STRING_VALUE_FIELD = valueField;
+        STRING_OFFSET_FIELD = offsetField;
+        STRING_COUNT_FIELD = countField;
     }
 
 
-    /**
-     * 获得一个unsafe实例类
-     * <p>
-     * unsafe实例是不能被jdk外的代码获取的
-     */
-    public static Unsafe getUnsageInstance() {
-        Field f = null;
-        Unsafe unsafe = null;
-        try {
-            f = Unsafe.class.getDeclaredField("theUnsafe");
-            f.setAccessible(true);
-            unsafe = (Unsafe) f.get(null);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return unsafe;
+    public static Object getUnsafeInstance() {
+        return null;
+    }
 
+    public static Object getUnsageInstance() {
+        return getUnsafeInstance();
     }
 
     static char[] unsafeGetChars(final String string) {
-        final char[] value = (char[]) UNSAFE.getObject(string, STRING_VALUE_FIELD_OFFSET);
+        if (STRING_VALUE_FIELD == null) {
+            return string.toCharArray();
+        }
 
-        if (STRING_OFFSET_FIELD_OFFSET != -1) {
-            // old String version with offset and count
-            final int offset = UNSAFE.getInt(string, STRING_OFFSET_FIELD_OFFSET);
-            final int count = UNSAFE.getInt(string, STRING_COUNT_FIELD_OFFSET);
+        try {
+            final char[] value = (char[]) STRING_VALUE_FIELD.get(string);
 
-            if (offset == 0 && count == value.length) {
-                // no need to copy
-                return value;
+            if (STRING_OFFSET_FIELD != null && STRING_COUNT_FIELD != null) {
+                final int offset = STRING_OFFSET_FIELD.getInt(string);
+                final int count = STRING_COUNT_FIELD.getInt(string);
 
+                if (offset == 0 && count == value.length) {
+                    return value;
+                } else {
+                    final char[] result = new char[count];
+                    System.arraycopy(value, offset, result, 0, count);
+                    return result;
+                }
             } else {
-                final char[] result = new char[count];
-                System.arraycopy(value, offset, result, 0, count);
-                return result;
+                return value;
             }
-
-        } else {
-            return value;
+        } catch (Exception e) {
+            return string.toCharArray();
         }
     }
-
-    /**
-     * Returns <code>true</code> if system has the <code>Unsafe</code>.
-     */
-    public static Unsafe getUnsafeInstance() {
-        return UNSAFE;
-    }
-
-//    public static void main(String[] args) {
-//        String.valueOf('c').compareToIgnoreCase()
-//    }
-
 }
