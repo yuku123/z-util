@@ -388,7 +388,7 @@
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>1.22.2</version>
+                <version>1.23.1</version>
             </dependency>
 
             <!-- github-api (升级到 1.321) -->
