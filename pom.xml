@@ -58,7 +58,7 @@
         <compile.version>8</compile.version>
 
         <!-- ==================== 第三方依赖版本集中管理 ==================== -->
-        <log4j.version>2.26.0</log4j.version>
+        <log4j.version>2.26.1</log4j.version>
         <slf4j.version>2.0.16</slf4j.version>
         <junit.version>5.11.4</junit.version>
         <javax.inject.version>1</javax.inject.version>
