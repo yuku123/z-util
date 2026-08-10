@@ -5,21 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.zifang</groupId>
+        <groupId>io.github.yuku123</groupId>
         <artifactId>z-util</artifactId>
-        <version>${revision}</version>
+        <version>1.0.4-SNAPSHOT</version>
     </parent>
 
     <artifactId>z-util-cli</artifactId>
     <packaging>jar</packaging>
 
-    <name>z-util-cli</name>
+    <name>z-util :: cli (POSIX/GNU/Basic/Default CLI parser + OptionGroup + HelpFormatter)</name>
     <description>Command line parsing and help formatting, full coverage of Apache Commons CLI capabilities
     </description>
 
     <dependencies>
         <dependency>
-            <groupId>com.zifang</groupId>
+            <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-core</artifactId>
         </dependency>
         <dependency>

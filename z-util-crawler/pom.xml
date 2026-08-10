@@ -4,14 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>z-util</artifactId>
-        <groupId>com.zifang</groupId>
-        <version>${revision}</version>
+        <groupId>io.github.yuku123</groupId>
+        <version>1.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <name>z-util :: crawler (browser rendering + HTML/JSON parsing + CUA agent planning)</name>
+
     <artifactId>z-util-crawler</artifactId>
-    <version>${revision}</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <dependencies>
         <!--

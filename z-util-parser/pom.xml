@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>z-util</artifactId>
-        <groupId>com.zifang</groupId>
-        <version>${revision}</version>
+        <groupId>io.github.yuku123</groupId>
+        <version>1.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-parser</artifactId>
     <packaging>pom</packaging>
-    <version>${revision}</version>
-    <name>z-util-parser</name>
+    <version>1.0.4-SNAPSHOT</version>
+    <name>z-util :: parser (multi-format parser aggregator: json/xml/yaml/csv/ini/properties/proto/toml)</name>
     <description>静态文件解析分支：JSON、XML、YAML、Properties、INI、CSV、TOML、Proto</description>
 
     <modules>

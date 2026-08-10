@@ -5,14 +5,14 @@
 
     <parent>
         <artifactId>z-util</artifactId>
-        <groupId>com.zifang</groupId>
-        <version>${revision}</version>
+        <groupId>io.github.yuku123</groupId>
+        <version>1.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>z-util-zex</artifactId>
-    <version>${revision}</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <dependencies>
         <!--
@@ -23,13 +23,13 @@
         -->
 
         <dependency>
-            <groupId>com.zifang</groupId>
+            <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-proxy</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.zifang</groupId>
+            <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-http</artifactId>
-            <version>${revision}</version>
+            <version>1.0.4-SNAPSHOT</version>
         </dependency>
 
         <!-- Disruptor（z-util-zex.disrupt 实战示例） -->

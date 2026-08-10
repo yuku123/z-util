@@ -4,14 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>z-util</artifactId>
-        <groupId>com.zifang</groupId>
-        <version>${revision}</version>
+        <groupId>io.github.yuku123</groupId>
+        <version>1.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <name>z-util :: http (annotation-style HTTP client + curl parser + simple HTTP server + Netty IM samples)</name>
+
     <artifactId>z-util-http</artifactId>
-    <version>${revision}</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <dependencies>
         <!-- OkHttp HTTP 客户端 -->
@@ -47,9 +49,9 @@
 
         <!-- JSON 处理 -->
         <dependency>
-            <groupId>com.zifang</groupId>
+            <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-parser-json</artifactId>
-            <version>${revision}</version>
+            <version>1.0.4-SNAPSHOT</version>
         </dependency>
 
         <!-- JAXB API (Java 8+ 需要单独引入) -->
@@ -61,7 +63,7 @@
 
         <!-- 内部依赖 -->
         <dependency>
-            <groupId>com.zifang</groupId>
+            <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-proxy</artifactId>
         </dependency>
 

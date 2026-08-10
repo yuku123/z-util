@@ -3,15 +3,17 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <name>z-util :: ch (Chinese utilities: pinyin/ID-card/money)</name>
     <parent>
-        <groupId>com.zifang</groupId>
+        <groupId>io.github.yuku123</groupId>
         <artifactId>z-util</artifactId>
-        <version>${revision}</version>
+        <version>1.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>z-util-ch</artifactId>
-    <version>${revision}</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

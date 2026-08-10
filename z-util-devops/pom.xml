@@ -4,22 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>z-util</artifactId>
-        <groupId>com.zifang</groupId>
-        <version>${revision}</version>
+        <groupId>io.github.yuku123</groupId>
+        <version>1.0.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <name>z-util :: devops (Docker client + Git (JGit/Shell) + GitHub API + Nexus)</name>
+
     <artifactId>z-util-devops</artifactId>
-    <version>${revision}</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <dependencies>
 
         <!-- z-util-core 提供 StringUtil / ArchUtils 等基础工具 -->
         <dependency>
-            <groupId>com.zifang</groupId>
+            <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-core</artifactId>
-            <version>${revision}</version>
+            <version>1.0.4-SNAPSHOT</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.kohsuke/github-api -->
@@ -49,9 +51,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.zifang</groupId>
+            <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-parser-json</artifactId>
-            <version>${revision}</version>
+            <version>1.0.4-SNAPSHOT</version>
         </dependency>
 
         <dependency>

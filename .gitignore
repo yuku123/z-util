@@ -21,3 +21,20 @@
 .idea
 # opencode tmp
 .opencode/
+
+# ============================================================
+# Maven Central 发布相关：本地凭证 / GPG 密钥环 / staging
+# ============================================================
+
+# 本地凭证（Central Portal User Token + GPG passphrase）
+.env
+.env.local
+.env.*
+
+# GPG 密钥环（用 GNUPGHOME 指向 z-util/.gnupg，避免污染 ~/.gnupg）
+/.gnupg/
+
+# Maven 中央发布插件临时目录
+/target/central-staging/
+/target/central-publishing/
+/target/central-deferred/

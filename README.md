@@ -167,7 +167,7 @@ z-util/
 
 ```xml
 <dependency>
-    <groupId>com.zifang</groupId>
+    <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-all</artifactId>
     <version>1.0.2-SNAPSHOT</version>
     <type>pom</type>
@@ -179,7 +179,7 @@ z-util/
 
 ```xml
 <dependency>
-    <groupId>com.zifang</groupId>
+    <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-all</artifactId>
     <version>1.0.2-SNAPSHOT</version>
 </dependency>
@@ -190,28 +190,28 @@ z-util/
 ```xml
 <!-- 基础工具，几乎所有场景都需要 -->
 <dependency>
-    <groupId>com.zifang</groupId>
+    <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-core</artifactId>
     <version>1.0.2-SNAPSHOT</version>
 </dependency>
 
 <!-- 例如：纯内存缓存 -->
 <dependency>
-    <groupId>com.zifang</groupId>
+    <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-cache</artifactId>
     <version>1.0.2-SNAPSHOT</version>
 </dependency>
 
 <!-- 例如：分布式 ID -->
 <dependency>
-    <groupId>com.zifang</groupId>
+    <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-distribute</artifactId>
     <version>1.0.2-SNAPSHOT</version>
 </dependency>
 
 <!-- 例如：JSON 解析（自研 ANTLR 版） -->
 <dependency>
-    <groupId>com.zifang</groupId>
+    <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-parser-json</artifactId>
     <version>1.0.2-SNAPSHOT</version>
 </dependency>
