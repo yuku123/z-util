@@ -5,14 +5,14 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <name>z-util :: dsl (self-made lexer/parser/AST framework with ANTLR g4 dynamic loading)</name>
     <artifactId>z-util-dsl</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
 
     <dependencies>
         <dependency>

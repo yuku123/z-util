@@ -5,13 +5,13 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <name>z-util :: visualization (Swing charts: bar/line/network + algorithm visualizers)</name>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
 
     <artifactId>z-util-visualization</artifactId>
 
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-ml</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
+            <version>1.0.4</version>
         </dependency>
     </dependencies>
 

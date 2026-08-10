@@ -5,7 +5,7 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,7 @@
     <name>z-util :: source (class file bytecode parser/generator + source code generator)</name>
 
     <artifactId>z-util-source</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
 
     <dependencies>
         <!-- slf4j + log4j2  -->

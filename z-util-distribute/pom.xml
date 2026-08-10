@@ -5,7 +5,7 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,7 @@
     <name>z-util :: distribute (Snowflake / Segment / NanoId / UUID v7 / SystemClock)</name>
 
     <artifactId>z-util-distribute</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
 
     <dependencies>
         <dependency>

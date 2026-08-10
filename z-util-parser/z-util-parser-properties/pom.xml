@@ -5,21 +5,21 @@
     <parent>
         <artifactId>z-util-parser</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <name>z-util :: parser :: properties (.properties file parser, ANTLR based)</name>
     <artifactId>z-util-parser-properties</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
     <description>Java Properties 文件解析器，支持标准 JDK Properties 格式</description>
 
     <dependencies>
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-dsl</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
+            <version>1.0.4</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

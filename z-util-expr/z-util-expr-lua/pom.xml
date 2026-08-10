@@ -5,14 +5,14 @@
     <parent>
         <artifactId>z-util-expr</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <name>z-util :: expr :: lua (Lua script executor)</name>
     <artifactId>z-util-expr-lua</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
     <description>Lua 脚本执行器，基于纯 Java Luaj 实现</description>
 
     <dependencies>

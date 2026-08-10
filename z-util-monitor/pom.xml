@@ -5,7 +5,7 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4-SNAPSHOT</version>
+        <version>1.0.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,7 @@
     <name>z-util :: monitor (JVM/thread-pool/OS/network monitoring + metrics + HTML/JSON exporter)</name>
 
     <artifactId>z-util-monitor</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
 
     <dependencies>
         <dependency>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-parser-json</artifactId>
-            <version>1.0.4-SNAPSHOT</version>
+            <version>1.0.4</version>
         </dependency>
 
         <dependency>
