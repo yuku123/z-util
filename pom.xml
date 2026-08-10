@@ -87,7 +87,7 @@
         <poi.version>5.5.1</poi.version>
         <docx4j.version>6.1.2</docx4j.version>
         <selenium.version>3.141.59</selenium.version>
-        <webdrivermanager.version>3.8.1</webdrivermanager.version>
+        <webdrivermanager.version>6.1.0</webdrivermanager.version>
         <github-api.version>1.330</github-api.version>
         <gitlab4j.version>5.2.0</gitlab4j.version>
         <xalan.version>2.7.3</xalan.version>
