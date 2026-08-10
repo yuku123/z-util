@@ -2,16 +2,21 @@
 
 > 一个面向日常 Java 开发的多模块工具库集合 —— 目标是把零散的「轮子」以 Maven 多模块的方式沉淀下来，按需引用、按需升级。
 
-[![Maven](https://img.shields.io/badge/Maven-3.6%2B-blue.svg)](https://maven.apache.org/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.yuku123/z-util-all.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.yuku123/z-util-all)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 [![JDK](https://img.shields.io/badge/JDK-8%2B-orange.svg)](https://adoptium.net/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](#许可证)
+[![Maven](https://img.shields.io/badge/Maven-3.6%2B-blue.svg)](https://maven.apache.org/)
+[![Modules](https://img.shields.io/badge/modules-30+-purple.svg)](./项目地图)
 
-`z-util` 是一组 **Maven 多模块** 的 Java 工具库，当前版本 `1.0.2-SNAPSHOT`，由统一的父 POM
-管理版本与依赖。每个子模块都专注于一个领域，相互之间保持低耦合：
+`z-util` 是一组 **Maven 多模块** 的 Java 工具库，当前稳定版 **`1.0.3`**（开发线 `1.0.4-SNAPSHOT`），
+由统一的父 POM 管理版本与依赖。每个子模块都专注于一个领域，相互之间保持低耦合：
 
 - 可以 **整体引入** `z-util-all`，一次性拿到所有能力；
 - 也可以 **按需引入** 某一个子模块，最小化依赖体积；
 - 还可以把部分子模块当作 **学习样例**，研究对应主题的工程实现。
+
+> **最新发布**：[`1.0.3`](https://central.sonatype.com/artifact/io.github.yuku123/z-util-all/1.0.3)
+> · GPG 签名验证通过 · deployment `056e55d3-a424-403f-9639-377a0472c4ce`
 
 ---
 
@@ -79,7 +84,10 @@ z-util/
 ├── pom.xml                 # 父 POM（统一版本、依赖、插件）
 ├── README.md               # 本文件
 ├── CLAUDE.md               # 给 AI 助手的协作约定
-├── build.sh / push.sh      # 本地构建/发布脚本
+├── 发布指引.md               # 通用 Maven Central 发布指引（AI / 工程师）
+├── RELEASE_TO_MAVEN_CENTRAL.md  # z-util 特定发布手册
+├── deploy_maven_center.sh  # 一键发布到 Maven Central（publish/verify/gpg-init/readme）
+├── install-settings.sh     # 写入 ~/.m2/settings.xml 的 central server
 ├── .github/workflows/      # GitHub Actions 发布流水线
 ├── z-util-core/            # 基础工具（集合/字符串/JWT/IO/并发/网络...）
 ├── z-util-cache/           # 缓存
@@ -153,9 +161,9 @@ z-util/
 
 - **JDK**：8 及以上
 - **Maven**：3.6 及以上
-- **网络**：能访问 `https://maven.pkg.github.com/yuku123/z-maven-repo`（用于发布与拉取 GitHub Packages）
+- **网络**：能访问 `https://repo1.maven.org/maven2/`（拉取 Maven Central 依赖）
 
-> 项目使用 `flatten-maven-plugin` 生成 CI 友好的 POM，并通过 `maven-source-plugin` 在 `install` 阶段自动附加源码包。
+> 项目使用 `flatten-maven-plugin` 生成 CI 友好的 POM，并通过 `maven-source-plugin` 在 `verify` 阶段自动附加源码包（保证 `mvn deploy` 时同步带 `*-sources.jar` / `*-javadoc.jar` / `*.asc` 签名）。
 
 ---
 
@@ -169,7 +177,7 @@ z-util/
 <dependency>
     <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-all</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
     <type>pom</type>
     <scope>import</scope>
 </dependency>
@@ -181,7 +189,7 @@ z-util/
 <dependency>
     <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-all</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
@@ -192,33 +200,35 @@ z-util/
 <dependency>
     <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-core</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
 </dependency>
 
 <!-- 例如：纯内存缓存 -->
 <dependency>
     <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-cache</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
 </dependency>
 
 <!-- 例如：分布式 ID -->
 <dependency>
     <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-distribute</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
 </dependency>
 
 <!-- 例如：JSON 解析（自研 ANTLR 版） -->
 <dependency>
     <groupId>io.github.yuku123</groupId>
     <artifactId>z-util-parser-json</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
-> 提示：父 POM 已在 `dependencyManagement` 中统一维护了 `com.zifang:z-util-*` 的版本号，如果你把父 POM 也 import
+> 提示：父 POM 已在 `dependencyManagement` 中统一维护了 `io.github.yuku123:z-util-*` 的版本号，如果你把父 POM 也 import
 > 进来，子模块里可以省略 `<version>`。
+>
+> 完整版本时间线与发布历史：见 [CHANGELOG](./CHANGELOG) 与 [GitHub Releases](https://github.com/yuku123/z-util/releases)。
 
 ---
 
@@ -275,18 +285,24 @@ mvn -pl z-util-it -Pit test
 通过 `versions-maven-plugin` 一键升级：
 
 ```bash
-mvn versions:set -DnewVersion=1.0.3-SNAPSHOT
+mvn versions:set -DnewVersion=1.0.4-SNAPSHOT
 ```
 
 修改完后可以执行 `mvn versions:commit` 提交，或 `mvn versions:revert` 回退。
+
+> 发布新版本时改回稳定版号（如 `1.0.4`），同时把代码切回 `1.0.5-SNAPSHOT` 继续开发。
+> 完整发布流程见 [RELEASE_TO_MAVEN_CENTRAL.md](./RELEASE_TO_MAVEN_CENTRAL.md)。
 
 ### 辅助脚本
 
 仓库根目录提供了以下本地脚本：
 
 ```bash
-./build.sh         # 调 mvn install
-./push.sh          # 调 mvn deploy
+./deploy_maven_center.sh gpg-init   # 首次：生成 GPG 密钥并写入 .env
+./deploy_maven_center.sh publish    # 实际发布到 Maven Central
+./deploy_maven_center.sh verify     # 验证 Maven Central 同步状态
+./deploy_maven_center.sh readme     # 打印发布指引摘要
+./install-settings.sh               # 写入 ~/.m2/settings.xml 的 central server
 ```
 
 ---
@@ -817,7 +833,7 @@ String text = PdtExtractor.extract(pdfFile);
 - **`SystemClock`** — 高性能系统时钟（解决 `System.currentTimeMillis()` 性能问题）
 
 ```java
-SnowflakeIdWorker id = new SnowflakeIdWorker(workerId: 1, datacenterId: 1);
+SnowflakeIdWorker id = new SnowflakeIdWorker(1L, 1L);
 long next = id.nextId();
 ```
 
@@ -1003,9 +1019,67 @@ z-util-ml / z-util-math / z-util-workflow / z-util-http / z-util-crawler
 
 ---
 
-## 发布到 GitHub Packages
+## 发布与分发
 
-父 POM 已配置 `distributionManagement` 指向 GitHub Packages：
+`z-util` 通过两条渠道分发：
+
+| 渠道 | 仓库地址 | 适用场景 |
+|------|---------|---------|
+| **Maven Central**（主） | https://repo1.maven.org/maven2/io/github/yuku123/ | 对外发布，所有人可直接拉取 |
+| **GitHub Packages**（备） | https://maven.pkg.github.com/yuku123/z-maven-repo | 内部预发 / CI 临时验证 |
+
+### Maven Central 一键发布（推荐）
+
+仓库内置 `deploy_maven_center.sh` 一键脚本，封装所有凭证加载、GPG 签名、bundle 上传与轮询：
+
+```bash
+# 1) 首次：生成 GPG 密钥并写入 ./.env（只做一次）
+./deploy_maven_center.sh gpg-init
+
+# 2) 升版本号到稳定版
+mvn versions:set -DnewVersion=1.0.4
+mvn versions:commit
+
+# 3) 真发（**必须在你自己的 macOS 终端**，不走 sandbox）
+./deploy_maven_center.sh publish
+
+# 4) 5~15 分钟后验证
+./deploy_maven_center.sh verify
+
+# 5) 改回 SNAPSHOT 继续开发
+mvn versions:set -DnewVersion=1.0.5-SNAPSHOT
+mvn versions:commit
+```
+
+**典型输出**：
+```
+[INFO] Uploaded bundle successfully, deployment name: Deployment,
+       deploymentId: 056e55d3-a424-403f-9639-377a0472c4ce.
+       Deployment will publish automatically
+[INFO] BUILD SUCCESS
+```
+
+### 发布前置（必须人工，AI 助手无法代办）
+
+1. **注册 Sonatype Central Portal** — https://central.sonatype.com/ → Sign in with GitHub
+2. **生成 User Token** — Profile → Generate User Token，把 Username + Secret 写到 `~/.env`
+3. **namespace 验证** — `io.github.yuku123` 用 GitHub Pages 验证（5 分钟过审）
+4. **GPG 密钥** — `brew install gnupg` 然后跑 `gpg-init` 子命令
+
+> ⚠️ **凭证安全**：`CENTRAL_TOKEN` / `CENTRAL_GPG_PASSPHRASE` 是长期 API 凭证，**绝对不要贴到对话里**。
+> 已通过 `.gitignore` 排除 `.env` 和 `.gnupg/`，但仍要妥善保管。
+
+### 发布链路要点
+
+- **POM 元数据**：父 POM 已包含 `name`/`description`/`licenses`/`developers`/`scm`（Maven Central 强制要求）
+- **GPG 签名**：所有 jar / pom 用 ED25519 签名（`9D064F0E20AC7385`）
+- **三件套**：每个模块自动生成 `*.jar` + `*-sources.jar` + `*-javadoc.jar`
+- **跳过模块**：`z-util-all`（聚合 pom）/ `z-util-it`（集成测试）/ `z-util-zex`（练习场，不发布）
+- **超时配置**：`waitMaxTime=1800`（30 分钟）防 mvn 提前放弃
+
+### GitHub Packages（备选仓库）
+
+如需内部预发或 CI 临时验证，父 POM 同时配置了 GitHub Packages `distributionManagement`：
 
 ```xml
 <distributionManagement>
@@ -1016,69 +1090,201 @@ z-util-ml / z-util-math / z-util-workflow / z-util-http / z-util-crawler
 </distributionManagement>
 ```
 
-### 本地发布
+发布到 GitHub Packages 需要在 `~/.m2/settings.xml` 配置 `github` server：
 
-1. 在 GitHub 中创建一个有 `write:packages` 权限的 PAT。
-2. 配置环境变量 `MAVEN_GITHUB_TOKEN` / `GITHUB_TOKEN`。
-3. 把 token 写入本地 `~/.m2/settings.xml`：
+```xml
+<settings>
+  <servers>
+    <server>
+      <id>github</id>
+      <username>你的 GitHub 用户名</username>
+      <password>${env.MAVEN_GITHUB_TOKEN}</password>
+    </server>
+  </servers>
+</settings>
+```
 
-   ```xml
-   <settings>
-     <servers>
-       <server>
-         <id>github</id>
-         <username>你的 GitHub 用户名</username>
-         <password>${MAVEN_GITHUB_TOKEN}</password>
-       </server>
-     </servers>
-   </settings>
-   ```
+发布命令：
 
-4. 执行：
-
-   ```bash
-   mvn clean deploy
-   ```
-
-### 通过 CI 发布
-
-仓库内置两个 GitHub Actions 工作流（见 [.github/workflows/](./.github/workflows/)）：
-
-- `maven-publish.yml` — Release 触发，自动发布到 GitHub Packages
-- `publish-github-packages.yml` — push main/master 或 `v*.*.*` tag 或手动触发
+```bash
+mvn clean deploy
+```
 
 > GitHub 2023+ 默认 `GITHUB_TOKEN` 是只读，写 Packages 必须在 workflow 中显式声明 `permissions: packages: write`。
+
+### 详细发布文档
+
+- **通用发布指引（AI / 工程师都能从零开始）**：见 [发布指引.md](./发布指引.md)
+- **z-util 特定操作手册**：见 [RELEASE_TO_MAVEN_CENTRAL.md](./RELEASE_TO_MAVEN_CENTRAL.md)
 
 ---
 
 ## 开发约定
 
 - **依赖复用**：所有公共版本号统一在父 `pom.xml` 的 `dependencyManagement` / `build` 节点；子模块新增依赖请优先复用。
-- **版本号**：所有子模块的 `<version>` 用 `${util.version}`，不要硬编码。
+- **版本号**：所有子模块的 `<version>` 用 `${revision}`，不要硬编码。
 - **构建顺序**：修改了某个子模块后，建议使用 `mvn -pl <module> -am install` 一起构建依赖。
 - **依赖检查**：定期执行 `mvn dependency:analyze` 排查未声明或多余依赖。
 - **代码风格**：遵循通用 Java 编码规范；可启用 IDE 的 Checkstyle / Spotless（如需可后续加入）。
 - **AI 协作约定**：见 [CLAUDE.md](./CLAUDE.md)。
-- **辅助脚本**：`build.sh`（本地 install）、`push.sh`（本地 deploy）。
+- **辅助脚本**：`deploy_maven_center.sh`（publish/verify/gpg-init/readme 子命令），凭证隔离在 `.env`。
 
 ---
 
 ## 常见问题
 
+### 构建与运行
+
 1. **构建失败 / 编译错误**
     - 确认 Maven 3.6+、JDK 8+
-    - 删除 `~/.m2/repository/com/zifang` 后重新 `mvn install`
+    - 删除 `~/.m2/repository/io/github/yuku123` 后重新 `mvn install`
 2. **某个测试一直挂起**
     - 一些 `*Test` 用例依赖网络 / 数据库，先 `mvn -DskipTests=true install`
 3. **集成测试想跑**
     - `mvn -pl z-util-it -Pit test`
 4. **依赖冲突**
     - 父 POM 的 `dependencyManagement` 已固定主流第三方版本，子模块中尽量 **不写版本号** 来复用。
-5. **GitHub Packages 401 / 403**
+
+### Maven Central 发布
+
+5. **`Component with package url '...' already exists`**
+    - 之前失败 publish 的残骸留在 Central Portal。先到 https://central.sonatype.com/publishing/deployments
+      把 FAILED 的 deployment `Drop` 掉，或直接升版本号（如 `1.0.3` → `1.0.4`）绕开冲突。
+6. **mvn deploy 在 z-util-ioc 失败（5 分钟就放弃）**
+    - `waitMaxTime` 默认 30 分钟就够，但某些模块（聚合 pom 的 staging）可能慢。
+    - 已配置 `waitMaxTime=1800`（30 分钟），不会 5 分钟就放弃。
+    - **必须在用户自己 macOS 终端跑**，sandbox 限制 64KB 出站 POST，157MB bundle 必然失败。
+7. **`name equals artifactId` 验证失败**
+    - 子模块 `<name>` 不能等于 `<artifactId>`。应该写成 `"z-util :: core (描述)"` 这种形式。
+8. **GPG 签名验证失败**
+    - 公钥需上传到 keys.openpgp.org（`gpg --keyserver hkps://keys.openpgp.org --send-keys $KEY_ID`）
+    - 同步需要 30 分钟 ~ 24 小时。
+9. **Central Portal 401 Unauthorized**
+    - 用 `Authorization: UserToken base64(username:secret)` 头，不是 `Bearer xxx`。
+    - `<server><id>central</id>` 必须与 POM `<publishingServerId>` 一致。
+
+### GitHub Packages
+
+10. **GitHub Packages 401 / 403**
     - 检查 PAT 是否带 `write:packages`；Maven `<server>` id 必须是 `github` 与 POM 中一致。
+
+---
+
+## 项目状态
+
+| 维度 | 状态 |
+|------|------|
+| **最新发布** | `1.0.3`（2026-08-10，已发布到 Maven Central） |
+| **开发线** | `1.0.4-SNAPSHOT` |
+| **依赖的 Java** | JDK 8+ |
+| **依赖的 Maven** | 3.6+ |
+| **CI / CD** | GitHub Actions + Maven Central Portal |
+| **安全公告** | GitHub Dependabot 自动扫描 |
+| **License** | MIT |
+| **维护者** | yuku123（单人项目，欢迎贡献） |
+
+### 版本路线
+
+| 版本 | 状态 | 说明 |
+|------|------|------|
+| `0.x` | 历史 | 原 `com.zifang` 内部版本，未对外发布 |
+| `1.0.2` | 仅 metadata | sandbox 早期试发，缺 jar/sources/javadoc |
+| **`1.0.3`** | **当前稳定** | 38 模块全部 PUBLISHED，含 GPG 签名 |
+| `1.0.4-SNAPSHOT` | 开发中 | 持续迭代 |
+
+---
+
+## 安装
+
+### Maven（Maven Central 推荐）
+
+```xml
+<dependency>
+    <groupId>io.github.yuku123</groupId>
+    <artifactId>z-util-core</artifactId>
+    <version>1.0.3</version>
+</dependency>
+```
+
+如使用 Maven Central 主仓库，无需任何额外配置。Maven 默认即从 `repo1.maven.org` 拉取。
+
+### Gradle
+
+```gradle
+dependencies {
+    implementation 'io.github.yuku123:z-util-core:1.0.3'
+}
+```
+
+### SBT
+
+```scala
+libraryDependencies += "io.github.yuku123" % "z-util-core" % "1.0.3"
+```
+
+### 验证安装
+
+```bash
+# 直接从 Maven Central 下载验证
+curl -I https://repo1.maven.org/maven2/io/github/yuku123/z-util-core/1.0.3/z-util-core-1.0.3.jar
+
+# 验证 GPG 签名
+curl -O https://repo1.maven.org/maven2/io/github/yuku123/z-util-core/1.0.3/z-util-core-1.0.3.jar
+curl -O https://repo1.maven.org/maven2/io/github/yuku123/z-util-core/1.0.3/z-util-core-1.0.3.jar.asc
+gpg --verify z-util-core-1.0.3.jar.asc z-util-core-1.0.3.jar
+# 预期：Good signature from "yuku123 <1340947819@qq.com>"
+```
+
+---
+
+## 贡献
+
+欢迎以任何形式参与贡献：
+
+- **提 Issue**：报告 Bug / 提出功能建议 / 询问用法
+- **发 PR**：修复 Bug / 添加新功能 / 改进文档
+- **完善示例**：各模块的 README 与测试用例
+- **分享使用案例**：你的项目用了哪些模块，怎么用的
+
+### 提 PR 流程
+
+1. Fork 仓库到你的 GitHub 账号
+2. 新建分支：`git checkout -b feature/your-feature`
+3. 提交改动：`git commit -m "feat: 描述你的改动"`
+4. Push 到你的 fork：`git push origin feature/your-feature`
+5. 在 GitHub 创建 Pull Request
+
+### 开发规范
+
+- 保持子模块间低耦合，新增功能优先放在合适的子模块
+- 公共工具类放 `z-util-core`；领域工具（如 ML / 爬虫）放对应专业模块
+- 第三方依赖走父 POM 的 `dependencyManagement`，子模块不写 `<version>`
+- 提交前跑一次 `./deploy_maven_center.sh readme` 看发布链路是否完整
+
+---
+
+## 致谢
+
+`z-util` 的很多实现参考了以下开源项目：
+
+| 项目 | 用途 |
+|------|------|
+| [ANTLR](https://www.antlr.org/) | 多格式解析器（JSON / XML / YAML / CSV / TOML 等）的语法框架 |
+| [Apache POI / PDFBox / Docx4j](https://poi.apache.org/) | Office 文档读写与转换 |
+| [OkHttp](https://square.github.io/okhttp/) | HTTP 客户端底层 |
+| [Netty](https://netty.io/) | IM 示例 / 网络编程 |
+| [Guava](https://github.com/google/guava) | 集合 / 缓存 / 并发设计参考 |
+| [Selenium](https://www.selenium.dev/) | 浏览器自动化 |
+| [JGit](https://www.eclipse.org/jgit/) | Git 操作 |
+| [刘汝佳《算法竞赛入门经典》](https://github.com/liurujia/) | Swing 算法可视化样例 |
+| 《码出高效》《Java 并发编程实战》等 | 设计模式与编码规范 |
+
+也感谢所有提交 Issue、PR 和使用 `z-util` 的同学。
 
 ---
 
 ## 许可证
 
-本仓库如未特别声明，按 **MIT License** 处理。子模块内可能包含参考实现的来源注释，使用前请遵守对应来源的协议。
+本仓库采用 **MIT License** — 见 [LICENSE](./LICENSE) 文件。
+
+子模块内可能包含参考实现的来源注释，使用前请遵守对应来源的协议。
