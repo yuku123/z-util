@@ -254,6 +254,13 @@ public class JsonUtil {
             return (T) Boolean.valueOf(toBoolean(parsed));
         }
 
+        // 枚举（兼容"枚举值字符串"格式，直接传 "GET"）：让接口更友好
+        if (targetType instanceof Class && ((Class<?>) targetType).isEnum() && parsed instanceof String) {
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            T enumValue = (T) Enum.valueOf((Class<Enum>) ((Class<?>) targetType).asSubclass(Enum.class), (String) parsed);
+            return enumValue;
+        }
+
         // List<T>
         if (targetType instanceof java.lang.reflect.ParameterizedType) {
             java.lang.reflect.ParameterizedType pt = (java.lang.reflect.ParameterizedType) targetType;
@@ -319,8 +326,6 @@ public class JsonUtil {
             if (clazz.isEnum()) {
                 Object nameVal = obj.get("name");
                 if (nameVal == null) {
-                    // 兼容旧的"枚举值字符串"格式（直接传 "GET"）：JsonObject 不暴露 values()，
-                    // 这里保持严格模式，要求 JSON 中必须含 "name" 字段。
                     throw new RuntimeException("Enum name not found in JSON: " + obj);
                 }
                 @SuppressWarnings({"unchecked", "rawtypes"})

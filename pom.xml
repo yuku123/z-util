@@ -178,7 +178,7 @@
 
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-slf4j-impl</artifactId>
+                <artifactId>log4j-slf4j2-impl</artifactId>
                 <version>2.26.0</version>
             </dependency>
 
@@ -252,7 +252,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.2.23</version>
+                <version>1.2.24</version>
             </dependency>
 
             <dependency>
@@ -264,7 +264,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>32.1.2-jre</version>
+                <version>33.6.0-jre</version>
             </dependency>
 
             <dependency>
@@ -354,7 +354,7 @@
             <dependency>
                 <groupId>com.sun.mail</groupId>
                 <artifactId>javax.mail</artifactId>
-                <version>1.5.6</version>
+                <version>1.6.2</version>
             </dependency>
 
             <!-- Apache Antlr (修复 CVE-2023-48728 等解析漏洞) -->
@@ -368,7 +368,7 @@
             <dependency>
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
-                <version>3.30.2-GA</version>
+                <version>3.32.0-GA</version>
             </dependency>
 
             <!-- JOL (Java Object Layout) -->
@@ -389,24 +389,24 @@
             <dependency>
                 <groupId>org.apache.pdfbox</groupId>
                 <artifactId>pdfbox</artifactId>
-                <version>2.0.31</version>
+                <version>3.0.8</version>
             </dependency>
 
             <!-- Apache POI (升级到 5.4.0，修复 CVE-2022-26336 等历史 OOB 漏洞；保持 poi-ooxml-schemas 与 poi 一致) -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi</artifactId>
-                <version>4.1.2</version>
+                <version>5.5.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
-                <version>4.1.2</version>
+                <version>5.5.1</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml-schemas</artifactId>
-                <version>4.1.2</version>
+                <version>5.5.1</version>
             </dependency>
 
             <!-- docx4j (升级到 6.1.2，修复 CVE-2021-23920 / XML 外部实体漏洞) -->
@@ -441,7 +441,7 @@
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>1.22.2</version>
+                <version>1.23.1</version>
             </dependency>
 
             <!-- github-api (升级到 1.321) -->
@@ -512,7 +512,7 @@
             <dependency>
                 <groupId>com.squareup.okio</groupId>
                 <artifactId>okio</artifactId>
-                <version>3.6.0</version>
+                <version>3.18.1</version>
             </dependency>
 
         </dependencies>

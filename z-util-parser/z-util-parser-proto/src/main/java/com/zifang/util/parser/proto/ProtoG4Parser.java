@@ -159,7 +159,7 @@ public class ProtoG4Parser {
         int j = i + 1;
         while (j < tokens.size() && !"SEMI".equals(tokens.get(j).getTokenName())) {
             if ("STRING_LITERAL".equals(tokens.get(j).getTokenName())) {
-                doc.getImports().add(unquote(tokens.get(j).getText()));
+                doc.addImport(unquote(tokens.get(j).getText()));
             }
             j++;
         }
@@ -245,8 +245,8 @@ public class ProtoG4Parser {
         }
         // j 指向 EQUALS
         if (j + 3 < tokens.size()
-                && "IDENTIFIER".equals(tokens.get(j + 1).getTokenName())
-                && "INT_LITERAL".equals(tokens.get(j + 2).getTokenName())) {
+                && "INT_LITERAL".equals(tokens.get(j + 1).getTokenName())
+                && "SEMI".equals(tokens.get(j + 2).getTokenName())) {
             // 但上面的 type 已经把 field name 也吸进去了！需要回退
             // 简单处理：如果 typeBuilder 以 IDENTIFIER 结尾，那最后一段就是 field name
             // 找到最后一个点之后的段作为 field name
@@ -254,9 +254,9 @@ public class ProtoG4Parser {
             int lastDot = typeStr.lastIndexOf('.');
             String actualType = lastDot >= 0 ? typeStr.substring(0, lastDot) : "";
             String fieldName = lastDot >= 0 ? typeStr.substring(lastDot + 1) : typeStr;
-            int tag = Integer.parseInt(tokens.get(j + 2).getText());
+            int tag = Integer.parseInt(tokens.get(j + 1).getText());
             message.addField(new ProtoField(actualType, fieldName, tag, repeated));
-            return j + 4; // skip EQUALS IDENTIFIER INT_LITERAL SEMI
+            return j + 4; // skip EQUALS INT_LITERAL SEMI + 1
         }
         return j + 1;
     }

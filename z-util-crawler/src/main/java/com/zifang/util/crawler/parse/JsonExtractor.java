@@ -16,6 +16,9 @@ public class JsonExtractor {
     private JsonExtractor() {}
 
     public static String extract(String jsonString, String jsonPath) {
+        if (jsonString == null || jsonPath == null) {
+            throw new NullPointerException("jsonString and jsonPath must not be null");
+        }
         try {
             Object value = navigatePath(jsonString, jsonPath);
             return value != null ? value.toString() : null;
@@ -25,6 +28,9 @@ public class JsonExtractor {
     }
 
     public static List<String> extractAll(String jsonString, String jsonPath) {
+        if (jsonString == null || jsonPath == null) {
+            throw new NullPointerException("jsonString and jsonPath must not be null");
+        }
         List<String> results = new ArrayList<>();
         try {
             Object value = navigatePath(jsonString, jsonPath);

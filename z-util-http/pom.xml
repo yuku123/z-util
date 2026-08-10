@@ -47,6 +47,12 @@
             <artifactId>netty-all</artifactId>
         </dependency>
 
+        <!-- SLF4J 日志门面（HttpExecutor 用 LoggerFactory） -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
         <!-- JSON 处理 -->
         <dependency>
             <groupId>io.github.yuku123</groupId>
@@ -65,6 +71,12 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-proxy</artifactId>
+        </dependency>
+
+        <!-- 基础工具（DedaoC 等 dedao 抓取 demo 测试需要 FileUtil） -->
+        <dependency>
+            <groupId>io.github.yuku123</groupId>
+            <artifactId>z-util-core</artifactId>
         </dependency>
 
         <!-- 测试框架 -->
