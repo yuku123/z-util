@@ -1,4 +1,4 @@
-package com.zifang.util.it;
+package com.zifang.util.core.resilience;
 
 import com.zifang.util.core.ratelimit.RateLimiter;
 import com.zifang.util.core.ratelimit.TokenBucketRateLimiter;
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  * <p>
  * 模拟外部 RPC 调用：每个保护层独立可关，组合抗雪崩。
  */
-public class E2E_ResilienceCompositionTest {
+public class ResilienceCompositionIT {
 
     @Test
     public void testRateLimiter_throttlesExcess() {

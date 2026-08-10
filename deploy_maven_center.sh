@@ -150,7 +150,7 @@ cmd_publish() {
 
     mvn -B deploy \
         -Pcentral \
-        -pl '!z-util-all,!z-util-it' \
+        -pl '!z-util-all' \
         -DskipTests \
         -Dgpg.passphrase="$CENTRAL_GPG_PASSPHRASE" \
         2>&1 | tee /tmp/z-util-deploy.log | tail -100
@@ -240,7 +240,7 @@ cmd_readme() {
   ✗ 不要在 sandbox 跑 mvn deploy（64KB 限制 → 必然失败）
   ✗ 不要跳过 javadoc 或 GPG 测试（Central 强制要求）
   ✗ 不要重发同名版本号（FAILED 残骸会占坐标）
-  ✓ 用 -pl '!z-util-all,!z-util-it' 跳过聚合 pom
+  ✓ 用 -pl '!z-util-all' 跳过聚合 pom
   ✓ waitMaxTime=1800（30 分钟）防 mvn 提前放弃
   ✓ 每次都升版本号（z-util-all 等聚合 pom 引用具体版本号）
 

@@ -1,4 +1,4 @@
-package com.zifang.util.it;
+package com.zifang.util.db;
 
 import com.zifang.util.db.lock.DbDistributedLock;
 import com.zifang.util.distributes.sequence.NanoId;
@@ -32,7 +32,7 @@ import static org.junit.Assert.*;
  * <p>
  * z-opc 替换 aspectj / hutool / jedis / redisson 后的纯自研栈演示。
  */
-public class E2E_OrderCreationTest {
+public class OrderCreationIT {
 
     private static JdbcDataSource DS;
 

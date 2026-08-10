@@ -1,4 +1,4 @@
-package com.zifang.util.it;
+package com.zifang.util.cache;
 
 import com.zifang.util.cache.Cache;
 import com.zifang.util.cache.CacheBuilder;
@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
  * <p>
  * 之前 z-ctc-audit 用 {@code io.jsonwebtoken}，现在用 z-util-jwt 自研。
  */
-public class E2E_JwtAuthTest {
+public class JwtAuthIT {
 
     @Test
     public void testFullJwtLifecycle() {

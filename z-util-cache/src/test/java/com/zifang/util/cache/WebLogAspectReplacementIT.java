@@ -1,4 +1,4 @@
-package com.zifang.util.it;
+package com.zifang.util.cache;
 
 import com.zifang.util.aop.Advise;
 import com.zifang.util.aop.Intercept;
@@ -43,7 +43,7 @@ import static org.junit.Assert.*;
  * <h3>z-util 自研版（无 aspectj）</h3>
  * 业务方法加 {@code @Intercept(WebLogAdvise.class)}，再 {@code ProxyFactory.wrap} 即可。
  */
-public class E2E_WebLogAspectReplacementTest {
+public class WebLogAspectReplacementIT {
 
     @Test
     public void testWebLogAspect_withTraceAndMeter() {

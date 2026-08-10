@@ -111,7 +111,6 @@
         <module>z-util-cache</module>
         <module>z-util-ioc</module>
         <module>z-util-aop</module>
-        <module>z-util-it</module>
 
         <module>z-util-all</module>
     </modules>

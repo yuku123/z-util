@@ -48,7 +48,7 @@ z-util 相比典型 Java 项目有以下特殊点：
 | **多模块结构** | 41 个 Maven 模块（25 个发布 + 8 个聚合 pom + z-util-zex 沙盒） |
 | **版本管理** | 父 POM 用 `<revision>` property，子模块用 `${revision}` |
 | **GPG 密钥** | KEY_ID = `9D064F0E20AC7385`（yuku123@qq.com，已上传 keys.openpgp.org） |
-| **跳过模块** | `z-util-zex`（沙盒）、`z-util-all`（聚合 pom，deploy 时间戳冲突）、`z-util-it`（集成测试） |
+| **跳过模块** | `z-util-zex`（沙盒）、`z-util-all`（聚合 pom，deploy 时间戳冲突） |
 | **凭证隔离** | `.env` + `.gnupg/`（项目本地），全部 `.gitignore` 排除 |
 
 ---
@@ -80,13 +80,12 @@ z-util 相比典型 Java 项目有以下特殊点：
 
 ## 跳过哪些模块（已配置）
 
-`deploy_maven_center.sh` 默认 `-pl '!z-util-all,!z-util-it'`：
+`deploy_maven_center.sh` 默认 `-pl '!z-util-all'`：
 
 | 模块 | 原因 |
 |------|------|
 | `z-util-zex` | 沙盒模块，仅做 playground，从根 `<modules>` 排除 |
 | `z-util-all` | 聚合 pom（`packaging=pom`），其 `dependencyManagement` 引用其他模块的 SNAPSHOT 时间戳版本号。deploy 时 mvn 找不到这些 jar，导致"Could not find artifact xxx" 失败 |
-| `z-util-it` | 集成测试模块（默认 `-Pit` profile 才启用），依赖其他模块的 sources.jar，中央发布插件 staging 时序问题 |
 
 ---
 

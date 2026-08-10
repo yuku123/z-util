@@ -23,6 +23,18 @@
             <artifactId>z-util-core</artifactId>
         </dependency>
 
+        <!--
+            IT 测试需要 z-util-aop：
+            - WebLogAspectReplacementIT 用 @Advise / @Intercept / ProxyFactory
+            通过 z-util-core 传递依赖可见，但显式声明便于阅读。
+            保持 test scope：不污染 cache 模块的运行时依赖。
+        -->
+        <dependency>
+            <groupId>io.github.yuku123</groupId>
+            <artifactId>z-util-aop</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Test dependencies -->
         <dependency>
             <groupId>junit</groupId>

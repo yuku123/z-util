@@ -54,7 +54,6 @@
     - [z-util-cli（命令行解析）](#z-util-cli命令行解析)
     - [z-util-ch（中文工具）](#z-util-ch中文工具)
     - [z-util-zex（练习场）](#z-util-zex练习场)
-    - [z-util-it（集成测试）](#z-util-it集成测试)
     - [z-util-all（聚合入口）](#z-util-all聚合入口)
 - [架构与设计](#架构与设计)
 - [发布到 GitHub Packages](#发布到-github-packages)
@@ -114,8 +113,7 @@ z-util/
 ├── z-util-cli/             # 命令行解析
 ├── z-util-ch/              # 中文工具
 ├── z-util-zex/             # 练习/实验场
-├── z-util-it/              # 集成测试
-└── z-util-all/             # 聚合 pom（一次性引入全部）
+├── z-util-all/             # 聚合 pom（一次性引入全部）
 ```
 
 ---
@@ -152,7 +150,6 @@ z-util/
 | CLI  | [z-util-cli](./z-util-cli)                     | POSIX/GNU/Basic/Default 解析、OptionGroup、HelpFormatter                                                   |
 | 中文   | [z-util-ch](./z-util-ch)                       | 拼音、身份证、金额大写                                                                                            |
 | 练习   | [z-util-zex](./z-util-zex)                     | LeetCode、排序、字节码、Guava 实战、并发样例                                                                          |
-| 集成   | [z-util-it](./z-util-it)                       | 端到端集成测试（默认 profile 跳过，`-Pit` 开启）                                                                       |
 | 聚合   | [z-util-all](./z-util-all)                     | `pom` 形式聚合，import 即用                                                                                   |
 
 ---
@@ -270,14 +267,6 @@ mvn test -Dtest=TestClassName#testMethod
 
 # 仅在指定模块跑测试
 mvn -pl z-util-math test
-```
-
-### 运行集成测试（`z-util-it`）
-
-`z-util-it` 默认 **不跑**（避免污染日常 build，被锁/IO/时序拖慢），需要时显式打开：
-
-```bash
-mvn -pl z-util-it -Pit test
 ```
 
 ### 升级版本号
@@ -903,17 +892,6 @@ String upper = MoneyUtil.toChineseUpper(1234.56);          // "壹仟贰佰叁�
 
 ---
 
-### z-util-it（集成测试）
-
-> 跨子模块的端到端验证（依赖 `z-util-core` / `z-util-cache` / `z-util-aop` / `z-util-distribute` / `z-util-jdbc` + H2）。
-> 默认 profile 关闭测试，使用 `-Pit` 开启：
-
-```bash
-mvn -pl z-util-it -Pit test
-```
-
----
-
 ### z-util-all（聚合入口）
 
 > 纯 `pom` 模块，把所有 `z-util-*` 放进 `dependencyManagement`。
@@ -1074,7 +1052,7 @@ mvn versions:commit
 - **POM 元数据**：父 POM 已包含 `name`/`description`/`licenses`/`developers`/`scm`（Maven Central 强制要求）
 - **GPG 签名**：所有 jar / pom 用 ED25519 签名（`9D064F0E20AC7385`）
 - **三件套**：每个模块自动生成 `*.jar` + `*-sources.jar` + `*-javadoc.jar`
-- **跳过模块**：`z-util-all`（聚合 pom）/ `z-util-it`（集成测试）/ `z-util-zex`（练习场，不发布）
+- **跳过模块**：`z-util-all`（聚合 pom）/ `z-util-zex`（练习场，不发布）
 - **超时配置**：`waitMaxTime=1800`（30 分钟）防 mvn 提前放弃
 
 ### GitHub Packages（备选仓库）
@@ -1141,7 +1119,7 @@ mvn clean deploy
 2. **某个测试一直挂起**
     - 一些 `*Test` 用例依赖网络 / 数据库，先 `mvn -DskipTests=true install`
 3. **集成测试想跑**
-    - `mvn -pl z-util-it -Pit test`
+    - `mvn test -pl <module>`
 4. **依赖冲突**
     - 父 POM 的 `dependencyManagement` 已固定主流第三方版本，子模块中尽量 **不写版本号** 来复用。
 
