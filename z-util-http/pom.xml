@@ -5,7 +5,7 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,6 @@
     <name>z-util :: http (annotation-style HTTP client + curl parser + simple HTTP server + Netty IM samples)</name>
 
     <artifactId>z-util-http</artifactId>
-    <version>1.0.4</version>
 
     <dependencies>
         <!-- OkHttp HTTP 客户端 -->
@@ -26,19 +25,6 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp-sse</artifactId>
-        </dependency>
-
-        <!-- Apache HttpClient -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-
-        <!-- Apache HttpComponents MIME (用于 multipart 上传) -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <!-- Netty 通信框架 -->
@@ -57,7 +43,7 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-parser-json</artifactId>
-            <version>1.0.4</version>
+            <version>${revision}</version>
         </dependency>
 
         <!-- JAXB API (Java 8+ 需要单独引入) -->
@@ -81,8 +67,8 @@
 
         <!-- 测试框架 -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

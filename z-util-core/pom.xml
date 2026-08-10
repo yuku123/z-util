@@ -5,7 +5,7 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,6 @@
     <name>z-util :: core (base utilities: collection/string/io/concurrent/crypto/jwt/limiter/breaker/scheduler)</name>
 
     <artifactId>z-util-core</artifactId>
-    <version>1.0.4</version>
 
     <dependencies>
         <!--
@@ -38,14 +37,14 @@
 
         <!--测试-->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -63,7 +62,7 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-parser-json</artifactId>
-            <version>1.0.4</version>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
@@ -82,14 +81,12 @@
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>1.5.6</version>
         </dependency>
 
         <!-- LogContext / LoggableAdvise 依赖（trace + aop 内部模块） -->
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-aop</artifactId>
-            <version>1.0.4</version>
         </dependency>
 
     </dependencies>

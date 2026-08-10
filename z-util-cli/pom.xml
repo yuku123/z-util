@@ -7,7 +7,7 @@
     <parent>
         <groupId>io.github.yuku123</groupId>
         <artifactId>z-util</artifactId>
-        <version>1.0.4</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>z-util-cli</artifactId>
@@ -23,8 +23,8 @@
             <artifactId>z-util-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -8,12 +8,11 @@
     <parent>
         <groupId>io.github.yuku123</groupId>
         <artifactId>z-util</artifactId>
-        <version>1.0.4</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>z-util-ch</artifactId>
-    <version>1.0.4</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -28,8 +27,8 @@
             <version>2.5.1</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

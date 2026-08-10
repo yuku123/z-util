@@ -5,7 +5,7 @@
     <parent>
         <artifactId>z-util</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,6 @@
     <name>z-util :: devops (Docker client + Git (JGit/Shell) + GitHub API + Nexus)</name>
 
     <artifactId>z-util-devops</artifactId>
-    <version>1.0.4</version>
 
     <dependencies>
 
@@ -21,20 +20,17 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-core</artifactId>
-            <version>1.0.4</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.kohsuke/github-api -->
         <dependency>
             <groupId>org.kohsuke</groupId>
             <artifactId>github-api</artifactId>
-            <version>1.330</version>
         </dependency>
 
         <dependency>
             <groupId>org.gitlab4j</groupId>
             <artifactId>gitlab4j-api</artifactId>
-            <version>5.2.0</version>
         </dependency>
 
         <!-- OkHttp：用于替换 unirest-java（unirest 1.4.9 内置 httpclient 4.5.4 有 CVE-2020-13956） -->
@@ -53,12 +49,13 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-parser-json</artifactId>
-            <version>1.0.4</version>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

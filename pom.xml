@@ -7,7 +7,7 @@
     <groupId>io.github.yuku123</groupId>
     <artifactId>z-util</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.4</version>
+    <version>${revision}</version>
 
     <!-- ============================================================== -->
     <!-- Maven Central 必需的 POM 元数据（缺一不可）                          -->
@@ -56,7 +56,41 @@
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
         <compile.version>8</compile.version>
-        <junit.version>4.12</junit.version>
+
+        <!-- ==================== 第三方依赖版本集中管理 ==================== -->
+        <log4j.version>2.26.0</log4j.version>
+        <slf4j.version>2.0.16</slf4j.version>
+        <junit.version>5.11.4</junit.version>
+        <javax.inject.version>1</javax.inject.version>
+        <javax.annotation.version>1.3.2</javax.annotation.version>
+        <validation.version>2.0.1.Final</validation.version>
+        <javax.mail.version>1.6.2</javax.mail.version>
+        <servlet.version>3.1.0</servlet.version>
+        <jaxb.version>2.3.1</jaxb.version>
+        <jaxb.impl.version>2.3.9</jaxb.impl.version>
+        <jaxb.core.version>2.3.0.1</jaxb.core.version>
+        <druid.version>1.2.24</druid.version>
+        <mongo.version>3.12.14</mongo.version>
+        <commons-pool2.version>2.13.1</commons-pool2.version>
+        <guava.version>33.6.0-jre</guava.version>
+        <cglib.version>3.3.0</cglib.version>
+        <gson.version>2.14.0</gson.version>
+        <jackson.version>2.18.9</jackson.version>
+        <okhttp.version>4.12.0</okhttp.version>
+        <netty.version>4.1.136.Final</netty.version>
+        <antlr.version>4.13.1</antlr.version>
+        <jsoup.version>1.23.1</jsoup.version>
+        <javassist.version>3.32.0-GA</javassist.version>
+        <jol.version>0.17</jol.version>
+        <javaparser.version>3.28.2</javaparser.version>
+        <pdfbox.version>3.0.8</pdfbox.version>
+        <poi.version>5.5.1</poi.version>
+        <docx4j.version>6.1.2</docx4j.version>
+        <selenium.version>3.141.59</selenium.version>
+        <webdrivermanager.version>3.8.1</webdrivermanager.version>
+        <github-api.version>1.330</github-api.version>
+        <gitlab4j.version>5.2.0</gitlab4j.version>
+        <xalan.version>2.7.3</xalan.version>
 
         <!-- Central Portal 上传凭证（由环境变量 CENTRAL_USERNAME / CENTRAL_TOKEN 注入） -->
         <centralPortalUrl>https://central.sonatype.com</centralPortalUrl>
@@ -64,26 +98,6 @@
         <!-- 跳过 GPG 签名（本地 dry-run 时打开；真发 Central 时保持 false） -->
         <central.gpg.skip>false</central.gpg.skip>
     </properties>
-
-    <!-- 默认走 GitHub Packages；`mvn deploy -Pcentral` 时走 Maven Central -->
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/yuku123/z-maven-repo</url>
-        </repository>
-        <snapshotRepository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/yuku123/z-maven-repo</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-    <!-- GitHub Packages 仓库认证（使用环境变量 MAVEN_GITHUB_TOKEN / GITHUB_TOKEN） -->
-    <repositories>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/yuku123/z-maven-repo</url>
-        </repository>
-    </repositories>
 
     <modules>
         <module>z-util-core</module>
@@ -106,12 +120,10 @@
         <module>z-util-proxy</module>
         <module>z-util-ch</module>
         <module>z-util-cli</module>
-
         <module>z-util-validation</module>
         <module>z-util-cache</module>
         <module>z-util-ioc</module>
         <module>z-util-aop</module>
-
         <module>z-util-all</module>
     </modules>
 
@@ -120,176 +132,139 @@
             <dependency>
                 <groupId>io.github.yuku123</groupId>
                 <artifactId>z-util-all</artifactId>
-                <version>1.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-core</artifactId>
-                <version>1.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-monitor</artifactId>
-                <version>1.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-distribute</artifactId>
-                <version>1.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-cache</artifactId>
-                <version>1.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-aop</artifactId>
-                <version>1.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-jdbc</artifactId>
-                <version>1.0.4</version>
-            </dependency>
-            <dependency>
-                <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-xml</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-math</artifactId>
-                <version>1.0.4</version>
+                <artifactId>z-util-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-monitor</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-distribute</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-cache</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-aop</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-jdbc</artifactId>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.yuku123</groupId>
-                <artifactId>z-util-expression</artifactId>
+                <artifactId>z-util-math</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>io.github.yuku123</groupId>
                 <artifactId>z-util-proxy</artifactId>
-                <version>1.0.4</version>
+                <version>${revision}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-slf4j2-impl</artifactId>
-                <version>2.26.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>2.26.0</version>
+                <version>${log4j.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
-                <version>2.26.0</version>
+                <version>${log4j.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>2.0.16</version>
+                <version>${slf4j.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-1.2-api</artifactId>
-                <version>2.26.0</version>
-            </dependency>
 
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.13.2</version>
-                <scope>compile</scope>
-            </dependency>
-
+            <!-- JUnit 5 全家桶（API + 注解 + 引擎），新测试统一用这个 -->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.11.4</version>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
 
+            <!-- Vintage Engine：让老 JUnit 4 测试（@Test org.junit.Test）在 JUnit 5 平台上跑 -->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>5.11.4</version>
+                <groupId>org.junit.vintage</groupId>
+                <artifactId>junit-vintage-engine</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
                 <groupId>javax.inject</groupId>
                 <artifactId>javax.inject</artifactId>
-                <version>1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.lmax</groupId>
-                <artifactId>disruptor</artifactId>
-                <version>3.2.1</version>
+                <version>${javax.inject.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>javax.annotation</groupId>
                 <artifactId>javax.annotation-api</artifactId>
-                <version>1.3.2</version>
+                <version>${javax.annotation.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>javax.validation</groupId>
                 <artifactId>validation-api</artifactId>
-                <version>2.0.1.Final</version>
+                <version>${validation.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.2.24</version>
+                <version>${druid.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
-                <version>2.13.1</version>
+                <version>${commons-pool2.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>33.6.0-jre</version>
+                <version>${guava.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
-                <version>3.3.0</version>
+                <version>${cglib.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <version>${servlet.version}</version>
                 <scope>provided</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
-                <version>2.18.9</version>
-                <scope>compile</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-core</artifactId>
-                <version>2.18.6</version>
+                <version>${jackson.version}</version>
                 <scope>compile</scope>
             </dependency>
 
@@ -297,41 +272,34 @@
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
-                <version>4.12.0</version>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp-sse</artifactId>
-                <version>4.12.0</version>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <!-- Netty 网络框架 -->
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
-                <version>4.1.136.Final</version>
-            </dependency>
-
-            <!-- Apache HttpClient -->
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpclient</artifactId>
-                <version>4.5.14</version>
+                <version>${netty.version}</version>
             </dependency>
 
             <!-- JAXB API：提供 javax.xml.bind 相关注解 -->
             <dependency>
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
-                <version>2.3.1</version>
+                <version>${jaxb.version}</version>
             </dependency>
 
             <!-- JAXB 实现：提供具体的 XML 绑定功能 -->
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-impl</artifactId>
-                <version>2.3.9</version>
+                <version>${jaxb.impl.version}</version>
                 <scope>runtime</scope>
             </dependency>
 
@@ -339,179 +307,141 @@
             <dependency>
                 <groupId>com.sun.xml.bind</groupId>
                 <artifactId>jaxb-core</artifactId>
-                <version>2.3.0.1</version>
-            </dependency>
-
-            <!-- 激活 JAXB 注解处理器（可选，根据编译需求） -->
-            <dependency>
-                <groupId>com.sun.activation</groupId>
-                <artifactId>javax.activation</artifactId>
-                <version>1.2.0</version>
+                <version>${jaxb.core.version}</version>
             </dependency>
 
             <!-- Mail (迁移自已弃用的 javax.mail:mail 1.4.7，修复 CVE-2007-4566 / CVE-2019-10086 等历史漏洞) -->
             <dependency>
                 <groupId>com.sun.mail</groupId>
                 <artifactId>javax.mail</artifactId>
-                <version>1.6.2</version>
+                <version>${javax.mail.version}</version>
             </dependency>
 
             <!-- Apache Antlr (修复 CVE-2023-48728 等解析漏洞) -->
             <dependency>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-runtime</artifactId>
-                <version>4.13.1</version>
+                <version>${antlr.version}</version>
             </dependency>
 
             <!-- Javassist (高版本默认开启 module 支持，修复 Java 17+ 兼容性) -->
             <dependency>
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
-                <version>3.32.0-GA</version>
+                <version>${javassist.version}</version>
             </dependency>
 
             <!-- JOL (Java Object Layout) -->
             <dependency>
                 <groupId>org.openjdk.jol</groupId>
                 <artifactId>jol-core</artifactId>
-                <version>0.17</version>
+                <version>${jol.version}</version>
             </dependency>
 
             <!-- JavaParser (修复 GHSA-7jpf-6353-jpw9 / GHSA-3q4w-fp89-2g7c 等解析漏洞) -->
             <dependency>
                 <groupId>com.github.javaparser</groupId>
                 <artifactId>javaparser-symbol-solver-core</artifactId>
-                <version>3.28.2</version>
+                <version>${javaparser.version}</version>
             </dependency>
 
-            <!-- Apache PDFBox (升级到 3.0.6，修复 CVE-2022-28284 等高危 RCE) -->
+            <!-- Apache PDFBox (升级到 3.0.8，修复 CVE-2022-28284 等高危 RCE) -->
             <dependency>
                 <groupId>org.apache.pdfbox</groupId>
                 <artifactId>pdfbox</artifactId>
-                <version>3.0.8</version>
+                <version>${pdfbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>fontbox</artifactId>
+                <version>${pdfbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>xmpbox</artifactId>
+                <version>${pdfbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>preflight</artifactId>
+                <version>${pdfbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pdfbox</groupId>
+                <artifactId>pdfbox-tools</artifactId>
+                <version>${pdfbox.version}</version>
             </dependency>
 
-            <!-- Apache POI (升级到 5.4.0，修复 CVE-2022-26336 等历史 OOB 漏洞；保持 poi-ooxml-schemas 与 poi 一致) -->
+            <!-- Apache POI (升级到 5.5.1，修复 CVE-2022-26336 等历史 OOB 漏洞；保持 poi-ooxml-full 与 poi 一致) -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi</artifactId>
-                <version>5.5.1</version>
+                <version>${poi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
-                <version>5.5.1</version>
+                <version>${poi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml-schemas</artifactId>
-                <version>5.5.1</version>
+                <artifactId>poi-ooxml-full</artifactId>
+                <version>${poi.version}</version>
             </dependency>
 
             <!-- docx4j (升级到 6.1.2，修复 CVE-2021-23920 / XML 外部实体漏洞) -->
             <dependency>
                 <groupId>org.docx4j</groupId>
                 <artifactId>docx4j</artifactId>
-                <version>6.1.2</version>
+                <version>${docx4j.version}</version>
             </dependency>
 
             <!-- MongoDB Java Driver (升级到 3.12.x 末班车，4.x/5.x 是 jakarta，API 变化大) -->
             <dependency>
                 <groupId>org.mongodb</groupId>
                 <artifactId>mongo-java-driver</artifactId>
-                <version>3.12.14</version>
+                <version>${mongo.version}</version>
             </dependency>
 
             <!-- Selenium (停留在 3.141.59 末班车，4.x 是 W3C 协议且 API 重写) -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>3.141.59</version>
+                <version>${selenium.version}</version>
             </dependency>
 
             <!-- WebDriverManager (3.x 末班车，支持 Java 8 + selenium 3.x) -->
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>
                 <artifactId>webdrivermanager</artifactId>
-                <version>3.8.1</version>
+                <version>${webdrivermanager.version}</version>
             </dependency>
 
-            <!-- jsoup (1.18.x 修复 CVE-2024-46506 等) -->
+            <!-- jsoup (1.23.x 修复 CVE-2024-46506 等) -->
             <dependency>
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
-                <version>1.23.1</version>
+                <version>${jsoup.version}</version>
             </dependency>
 
             <!-- github-api (升级到 1.321) -->
             <dependency>
                 <groupId>org.kohsuke</groupId>
                 <artifactId>github-api</artifactId>
-                <version>1.330</version>
+                <version>${github-api.version}</version>
             </dependency>
 
             <!-- gitlab4j-api (5.2.0 是 Java 8 末班车) -->
             <dependency>
                 <groupId>org.gitlab4j</groupId>
                 <artifactId>gitlab4j-api</artifactId>
-                <version>5.2.0</version>
+                <version>${gitlab4j.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.httpcomponents</groupId>
-                <artifactId>httpmime</artifactId>
-                <version>4.5.14</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-compress</artifactId>
-                <version>1.28.0</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.22.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.20.0</version>
-            </dependency>
             <dependency>
                 <groupId>xalan</groupId>
-                <artifactId>xalan</artifactId>
-                <version>2.7.3</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.xmlgraphics</groupId>
-                <artifactId>xmlgraphics-commons</artifactId>
-                <version>2.11</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.plexus</groupId>
-                <artifactId>plexus-utils</artifactId>
-                <version>3.6.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.ant</groupId>
-                <artifactId>ant</artifactId>
-                <version>1.10.17</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.protobuf</groupId>
-                <artifactId>protobuf-java</artifactId>
-                <version>3.25.5</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.14.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okio</groupId>
-                <artifactId>okio</artifactId>
-                <version>3.18.1</version>
+                <artifactId>serializer</artifactId>
+                <version>${xalan.version}</version>
             </dependency>
 
         </dependencies>

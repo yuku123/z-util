@@ -5,19 +5,18 @@
     <parent>
         <artifactId>z-util-expr</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <name>z-util :: expr :: sql (SQL parser + function registry)</name>
     <artifactId>z-util-expr-sql</artifactId>
-    <version>1.0.4</version>
     <description>SQL 语句解析器</description>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

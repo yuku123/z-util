@@ -5,7 +5,7 @@
     <parent>
         <artifactId>z-util-expr</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,6 @@
     <name>z-util :: expr :: js (self-made JS engine + PlayScript reference)</name>
 
     <artifactId>z-util-expr-js</artifactId>
-    <version>1.0.4</version>
 
     <properties>
         <file.encoding>UTF-8</file.encoding>
@@ -86,7 +85,7 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-dsl</artifactId>
-            <version>1.0.4</version>
+            <version>${revision}</version>
         </dependency>
 
     </dependencies>

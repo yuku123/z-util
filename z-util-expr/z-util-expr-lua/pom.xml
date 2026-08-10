@@ -5,14 +5,13 @@
     <parent>
         <artifactId>z-util-expr</artifactId>
         <groupId>io.github.yuku123</groupId>
-        <version>1.0.4</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <name>z-util :: expr :: lua (Lua script executor)</name>
     <artifactId>z-util-expr-lua</artifactId>
-    <version>1.0.4</version>
     <description>Lua 脚本执行器，基于纯 Java Luaj 实现</description>
 
     <dependencies>
@@ -22,8 +21,8 @@
             <version>3.0.1</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
