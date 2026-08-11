@@ -261,6 +261,18 @@
                 <scope>compile</scope>
             </dependency>
 
+            <!-- 强制升级 transitive jackson-core 到修复版本（部分依赖会拉入旧版） -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
             <!-- OkHttp HTTP 客户端 -->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
