@@ -28,9 +28,11 @@
             <artifactId>github-api</artifactId>
         </dependency>
 
+        <!-- GitLab4j: GitLab API 客户端（5.2.0 是 Java 8 末班车） -->
         <dependency>
             <groupId>org.gitlab4j</groupId>
             <artifactId>gitlab4j-api</artifactId>
+            <version>5.2.0</version>
         </dependency>
 
         <!-- OkHttp：用于替换 unirest-java（unirest 1.4.9 内置 httpclient 4.5.4 有 CVE-2020-13956） -->

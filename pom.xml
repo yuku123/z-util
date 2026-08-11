@@ -84,10 +84,7 @@
         <javaparser.version>3.28.2</javaparser.version>
         <pdfbox.version>3.0.8</pdfbox.version>
         <poi.version>5.5.1</poi.version>
-        <docx4j.version>6.1.2</docx4j.version>
         <github-api.version>1.330</github-api.version>
-        <gitlab4j.version>5.2.0</gitlab4j.version>
-        <xalan.version>2.7.3</xalan.version>
 
         <!-- Central Portal 上传凭证（由环境变量 CENTRAL_USERNAME / CENTRAL_TOKEN 注入） -->
         <centralPortalUrl>https://central.sonatype.com</centralPortalUrl>
@@ -362,12 +359,6 @@
                 <artifactId>preflight</artifactId>
                 <version>${pdfbox.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.pdfbox</groupId>
-                <artifactId>pdfbox-tools</artifactId>
-                <version>${pdfbox.version}</version>
-            </dependency>
-
             <!-- Apache POI (升级到 5.5.1，修复 CVE-2022-26336 等历史 OOB 漏洞；保持 poi-ooxml-full 与 poi 一致) -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
@@ -385,12 +376,6 @@
                 <version>${poi.version}</version>
             </dependency>
 
-            <!-- docx4j (升级到 6.1.2，修复 CVE-2021-23920 / XML 外部实体漏洞) -->
-            <dependency>
-                <groupId>org.docx4j</groupId>
-                <artifactId>docx4j</artifactId>
-                <version>${docx4j.version}</version>
-            </dependency>
 
             <!-- jsoup (1.23.x 修复 CVE-2024-46506 等) -->
             <dependency>
@@ -404,19 +389,6 @@
                 <groupId>org.kohsuke</groupId>
                 <artifactId>github-api</artifactId>
                 <version>${github-api.version}</version>
-            </dependency>
-
-            <!-- gitlab4j-api (5.2.0 是 Java 8 末班车) -->
-            <dependency>
-                <groupId>org.gitlab4j</groupId>
-                <artifactId>gitlab4j-api</artifactId>
-                <version>${gitlab4j.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>xalan</groupId>
-                <artifactId>serializer</artifactId>
-                <version>${xalan.version}</version>
             </dependency>
 
         </dependencies>
