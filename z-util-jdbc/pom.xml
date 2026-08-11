@@ -55,11 +55,16 @@
             <artifactId>antlr4-runtime</artifactId>
         </dependency>
 
-        <!-- Test -->
+        <!-- Test: H2 in-memory database + JUnit 4 via Vintage Engine -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>2.2.224</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
