@@ -85,6 +85,7 @@
         <pdfbox.version>3.0.8</pdfbox.version>
         <poi.version>5.5.1</poi.version>
         <github-api.version>1.330</github-api.version>
+        <protobuf-java.version>3.25.5</protobuf-java.version>
 
         <!-- Central Portal 上传凭证（由环境变量 CENTRAL_USERNAME / CENTRAL_TOKEN 注入） -->
         <centralPortalUrl>https://central.sonatype.com</centralPortalUrl>
@@ -401,6 +402,13 @@
                 <groupId>org.kohsuke</groupId>
                 <artifactId>github-api</artifactId>
                 <version>${github-api.version}</version>
+            </dependency>
+
+            <!-- 强制升级 transitive protobuf-java（mysql-connector-j 拉入旧版） -->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf-java.version}</version>
             </dependency>
 
         </dependencies>
