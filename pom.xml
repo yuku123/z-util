@@ -58,7 +58,7 @@
         <compile.version>8</compile.version>
 
         <!-- ==================== 第三方依赖版本集中管理 ==================== -->
-        <log4j.version>2.26.0</log4j.version>
+        <log4j.version>2.26.1</log4j.version>
         <slf4j.version>2.0.16</slf4j.version>
         <junit.version>5.11.4</junit.version>
         <javax.inject.version>1</javax.inject.version>
@@ -70,7 +70,6 @@
         <jaxb.impl.version>2.3.9</jaxb.impl.version>
         <jaxb.core.version>2.3.0.1</jaxb.core.version>
         <druid.version>1.2.24</druid.version>
-        <mongo.version>3.12.14</mongo.version>
         <commons-pool2.version>2.13.1</commons-pool2.version>
         <guava.version>33.6.0-jre</guava.version>
         <cglib.version>3.3.0</cglib.version>
@@ -78,7 +77,7 @@
         <jackson.version>2.18.9</jackson.version>
         <okhttp.version>4.12.0</okhttp.version>
         <netty.version>4.1.136.Final</netty.version>
-        <antlr.version>4.13.1</antlr.version>
+        <antlr.version>4.13.2</antlr.version>
         <jsoup.version>1.23.1</jsoup.version>
         <javassist.version>3.32.0-GA</javassist.version>
         <jol.version>0.17</jol.version>
@@ -86,8 +85,6 @@
         <pdfbox.version>3.0.8</pdfbox.version>
         <poi.version>5.5.1</poi.version>
         <docx4j.version>6.1.2</docx4j.version>
-        <selenium.version>3.141.59</selenium.version>
-        <webdrivermanager.version>3.8.1</webdrivermanager.version>
         <github-api.version>1.330</github-api.version>
         <gitlab4j.version>5.2.0</gitlab4j.version>
         <xalan.version>2.7.3</xalan.version>
@@ -106,7 +103,6 @@
         <module>z-util-dsl</module>
         <module>z-util-parser</module>
         <module>z-util-expr</module>
-        <module>z-util-crawler</module>
         <module>z-util-workflow</module>
         <module>z-util-visualization</module>
         <module>z-util-jdbc</module>
@@ -394,27 +390,6 @@
                 <groupId>org.docx4j</groupId>
                 <artifactId>docx4j</artifactId>
                 <version>${docx4j.version}</version>
-            </dependency>
-
-            <!-- MongoDB Java Driver (升级到 3.12.x 末班车，4.x/5.x 是 jakarta，API 变化大) -->
-            <dependency>
-                <groupId>org.mongodb</groupId>
-                <artifactId>mongo-java-driver</artifactId>
-                <version>${mongo.version}</version>
-            </dependency>
-
-            <!-- Selenium (停留在 3.141.59 末班车，4.x 是 W3C 协议且 API 重写) -->
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-java</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-
-            <!-- WebDriverManager (3.x 末班车，支持 Java 8 + selenium 3.x) -->
-            <dependency>
-                <groupId>io.github.bonigarcia</groupId>
-                <artifactId>webdrivermanager</artifactId>
-                <version>${webdrivermanager.version}</version>
             </dependency>
 
             <!-- jsoup (1.23.x 修复 CVE-2024-46506 等) -->

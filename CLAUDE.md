@@ -50,7 +50,7 @@ mvn test -Dtest=TestClassName#testMethod
 |----------|--------------------------------------------------------------------------------|
 | Core     | `util-core` - Base utilities and common classes                                |
 | Data     | `util-jdbc`, `util-expression` - Data processing                               |
-| Web      | `util-http`, `util-crawler`, `util-proxy` - Web utilities                      |
+| Web      | `util-http`, `util-proxy` - Web utilities                      |
 | Compute  | `util-math`, `util-ai`, `util-llm` - Computation and AI                        |
 | Media    | `util-media`, `util-office`, `util-visualization` - Media processing           |
 | System   | `util-monitor`, `util-devops`, `util-distribute`, `util-source` - System tools |
