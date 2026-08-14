@@ -53,6 +53,12 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
+        <!-- Jackson JSR310 模块：支持 java.time 序列化 (LocalDate/LocalDateTime/Instant) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>javax.inject</groupId>

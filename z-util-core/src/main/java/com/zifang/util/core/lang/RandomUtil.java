@@ -207,6 +207,59 @@ public class RandomUtil {
         return result.toUpperCase();
     }
 
+    /**
+     * 生成 32 位紧凑 UUID（去除横线）。
+     * <p>
+     * 等价于 {@code UUID.randomUUID().toString().replace("-", "")}。
+     * <p>
+     * 示例：{@code uuidCompact() -> "550e8400e29b41d4a716446655440000"}
+     *
+     * @return 32 位十六进制字符串（无横线）
+     */
+    public static String uuidCompact() {
+        return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    /**
+     * 生成指定长度的 UUID 短码（十六进制字符）。
+     * <p>
+     * 等价于 {@code UUID.randomUUID().toString().replace("-", "").substring(0, len)}。
+     * 当 len &gt; 32 时，返回完整 32 位紧凑 UUID。
+     *
+     * @param len 期望返回的字符长度，范围 [1, 32]
+     * @return 指定长度的十六进制字符串
+     * @throws IllegalArgumentException 当 len &lt; 1 时
+     */
+    public static String uuidShort(int len) {
+        if (len < 1) {
+            throw new IllegalArgumentException("uuidShort length must be >= 1, got " + len);
+        }
+        String compact = uuidCompact();
+        return len >= compact.length() ? compact : compact.substring(0, len);
+    }
+
+    /**
+     * 生成带前缀的 UUID 短码。
+     * <p>
+     * 格式：{@code "{prefix}-{shortUuid}"}，例如 {@code "agent-550e8400"}。
+     * 当 prefix 为 null 或空时，返回纯短码（等价于 {@link #uuidShort(int)}）。
+     *
+     * @param prefix 业务前缀，例如 {@code "agent"}、{@code "user"}；可为 null
+     * @param len    短码部分长度，范围 [1, 32]
+     * @return 带前缀的短码字符串
+     * @throws IllegalArgumentException 当 len &lt; 1 时
+     */
+    public static String uuidWithPrefix(String prefix, int len) {
+        if (len < 1) {
+            throw new IllegalArgumentException("uuidWithPrefix length must be >= 1, got " + len);
+        }
+        String shortUuid = uuidShort(len);
+        if (prefix == null || prefix.isEmpty()) {
+            return shortUuid;
+        }
+        return prefix + "-" + shortUuid;
+    }
+
 
     /**
      * 从指定的数组中按照指定比例返回指定的随机元素

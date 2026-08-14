@@ -14,15 +14,21 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * File utility class providing common file operations.
@@ -2220,5 +2226,197 @@ public class FileUtil {
         } catch (IOException e) {
             logger.error("Failed to generate file: {}", filePath, e);
         }
+    }
+
+    // ==================== NIO Path Operations (统一 Files.walk 便捷方法) ====================
+
+    /**
+     * 递归列出目录下所有文件（仅文件，不含目录）。
+     * <p>
+     * 等价于
+     * <pre>{@code
+     * try (Stream<Path> walk = Files.walk(dir)) {
+     *     return walk.filter(Files::isRegularFile).collect(Collectors.toList());
+     * }
+     * }</pre>
+     * <p>
+     * 当 {@code dir} 不存在或不是目录时，返回空列表（不抛异常）。
+     *
+     * @param dir 目录路径
+     * @return 所有子文件的 {@link Path} 列表
+     */
+    public static List<Path> listFiles(Path dir) {
+        List<Path> result = new ArrayList<>();
+        if (dir == null || !Files.isDirectory(dir)) {
+            return result;
+        }
+        try (Stream<Path> walk = Files.walk(dir)) {
+            walk.filter(Files::isRegularFile).forEach(result::add);
+        } catch (IOException e) {
+            logger.error("Failed to list files under directory: {}", dir, e);
+        }
+        return result;
+    }
+
+    /**
+     * 递归列出目录下所有 {@link File}（仅文件，不含目录）。
+     *
+     * @param dir 目录
+     * @return 所有子文件的 {@link File} 列表
+     */
+    public static List<File> listFilesAsFile(Path dir) {
+        List<File> result = new ArrayList<>();
+        if (dir == null || !Files.isDirectory(dir)) {
+            return result;
+        }
+        try (Stream<Path> walk = Files.walk(dir)) {
+            walk.filter(Files::isRegularFile).forEach(p -> result.add(p.toFile()));
+        } catch (IOException e) {
+            logger.error("Failed to list files under directory: {}", dir, e);
+        }
+        return result;
+    }
+
+    /**
+     * 递归删除目录或文件。
+     * <p>
+     * 等价于 {@link #deleteDirectory(File)}，但接受 {@link Path} 类型。
+     * 删除失败会记录 error 日志并继续，不抛异常。
+     *
+     * @param path 目录或文件路径
+     * @return true 如果整个路径树被成功删除（即使部分子项删除失败也算"尝试了删除"）
+     */
+    public static boolean deleteRecursively(Path path) {
+        if (path == null || !Files.exists(path)) {
+            return false;
+        }
+        try (Stream<Path> walk = Files.walk(path)) {
+            walk.sorted(Comparator.reverseOrder()).forEach(p -> {
+                try {
+                    Files.delete(p);
+                } catch (IOException e) {
+                    logger.error("Failed to delete path: {}", p, e);
+                }
+            });
+            return true;
+        } catch (IOException e) {
+            logger.error("Failed to walk directory for deletion: {}", path, e);
+            return false;
+        }
+    }
+
+    /**
+     * 递归复制目录或文件。
+     * <p>
+     * 等价于
+     * <pre>{@code
+     * try (Stream<Path> walk = Files.walk(source)) {
+     *     for (Path src : walk.toArray(Path[]::new)) {
+     *         Path dest = target.resolve(source.relativize(src).toString());
+     *         Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
+     *     }
+     * }
+     * }</pre>
+     * <p>
+     * 当 {@code target} 不存在时会自动创建父目录。
+     *
+     * @param source 源路径（文件或目录）
+     * @param target 目标路径（文件或目录）
+     * @return true 如果复制成功（所有子项都被处理），false 如果有异常
+     */
+    public static boolean copyRecursively(Path source, Path target) {
+        if (source == null || target == null) {
+            return false;
+        }
+        if (!Files.exists(source)) {
+            logger.error("Source path does not exist: {}", source);
+            return false;
+        }
+        try {
+            if (Files.isDirectory(source)) {
+                Files.createDirectories(target);
+                try (Stream<Path> walk = Files.walk(source)) {
+                    Path[] paths = walk.toArray(Path[]::new);
+                    for (Path src : paths) {
+                        Path dest = target.resolve(source.relativize(src).toString());
+                        if (Files.isDirectory(src)) {
+                            Files.createDirectories(dest);
+                        } else {
+                            Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING);
+                        }
+                    }
+                }
+            } else {
+                if (target.getParent() != null) {
+                    Files.createDirectories(target.getParent());
+                }
+                Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+            }
+            return true;
+        } catch (IOException e) {
+            logger.error("Failed to copy {} to {}", source, target, e);
+            return false;
+        }
+    }
+
+    /**
+     * 计算目录总大小（所有文件的字节数之和）。
+     *
+     * @param dir 目录路径
+     * @return 总字节数；当目录不存在或读取失败时返回 0
+     */
+    public static long sizeOfDirectory(Path dir) {
+        if (dir == null || !Files.isDirectory(dir)) {
+            return 0L;
+        }
+        try (Stream<Path> walk = Files.walk(dir)) {
+            return walk.filter(Files::isRegularFile)
+                    .mapToLong(p -> {
+                        try {
+                            return Files.size(p);
+                        } catch (IOException e) {
+                            return 0L;
+                        }
+                    })
+                    .sum();
+        } catch (IOException e) {
+            logger.error("Failed to compute size of directory: {}", dir, e);
+            return 0L;
+        }
+    }
+
+    /**
+     * 递归查找扩展名匹配的文件。
+     *
+     * @param dir       目录路径
+     * @param extensions 扩展名列表（不含点，如 {@code "java"}、{@code "xml"}）；大小写不敏感
+     * @return 匹配的文件路径列表
+     */
+    public static List<Path> findByExtension(Path dir, String... extensions) {
+        List<Path> result = new ArrayList<>();
+        if (dir == null || !Files.isDirectory(dir) || extensions == null || extensions.length == 0) {
+            return result;
+        }
+        Set<String> lowerExts = new HashSet<>();
+        for (String ext : extensions) {
+            if (ext != null) {
+                lowerExts.add(ext.toLowerCase());
+            }
+        }
+        try (Stream<Path> walk = Files.walk(dir)) {
+            walk.filter(Files::isRegularFile).forEach(p -> {
+                String fileName = p.getFileName().toString().toLowerCase();
+                int dotIdx = fileName.lastIndexOf('.');
+                if (dotIdx >= 0 && dotIdx < fileName.length() - 1) {
+                    String ext = fileName.substring(dotIdx + 1);
+                    if (lowerExts.contains(ext)) {
+                        result.add(p);
+                    }
+                }
+            });
+        } catch (IOException e) {
+            logger.error("Failed to find files by extension in directory: {}", dir, e);
+        }
+        return result;
     }
 }
