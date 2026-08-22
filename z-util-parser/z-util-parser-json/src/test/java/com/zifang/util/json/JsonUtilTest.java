@@ -372,6 +372,270 @@ public class JsonUtilTest {
         assertTrue(json.contains("\\n"));
     }
 
+    // ==================== 字符串级便捷操作 ====================
+
+    @Test
+    /**
+     * testGetString方法。
+     */
+    public void testGetString() {
+        String json = "{\"name\":\"tom\",\"age\":18,\"male\":true}";
+        assertEquals("tom", JsonUtil.getString(json, "name"));
+        // 数字值返回其JSON表示
+        assertEquals("18", JsonUtil.getString(json, "age"));
+        // 键不存在
+        assertNull(JsonUtil.getString(json, "missing"));
+        // null/空白时视为空对象
+        assertNull(JsonUtil.getString(null, "name"));
+        assertNull(JsonUtil.getString("  ", "name"));
+    }
+
+    @Test
+    /**
+     * testGetInteger方法。
+     */
+    public void testGetInteger() {
+        String json = "{\"a\":18,\"b\":\"20\",\"c\":\"12.5\",\"d\":\"abc\"}";
+        assertEquals(Integer.valueOf(18), JsonUtil.getInteger(json, "a"));
+        assertEquals(Integer.valueOf(20), JsonUtil.getInteger(json, "b"));
+        assertEquals(Integer.valueOf(12), JsonUtil.getInteger(json, "c"));
+        assertNull(JsonUtil.getInteger(json, "d"));
+        assertNull(JsonUtil.getInteger(json, "missing"));
+    }
+
+    @Test
+    /**
+     * testGetLongAndDouble方法。
+     */
+    public void testGetLongAndDouble() {
+        String json = "{\"a\":10000000000,\"b\":\"123\",\"c\":3.14,\"d\":\"2.5\"}";
+        assertEquals(Long.valueOf(10000000000L), JsonUtil.getLong(json, "a"));
+        assertEquals(Long.valueOf(123L), JsonUtil.getLong(json, "b"));
+        assertEquals(Double.valueOf(3.14), JsonUtil.getDouble(json, "c"));
+        assertEquals(Double.valueOf(2.5), JsonUtil.getDouble(json, "d"));
+        assertNull(JsonUtil.getLong("{\"a\":\"x\"}", "a"));
+        assertNull(JsonUtil.getDouble("{\"a\":\"x\"}", "a"));
+    }
+
+    @Test
+    /**
+     * testGetBoolean方法。
+     */
+    public void testGetBoolean() {
+        String json = "{\"a\":true,\"b\":\"false\",\"c\":\"yes\"}";
+        assertEquals(Boolean.TRUE, JsonUtil.getBoolean(json, "a"));
+        assertEquals(Boolean.FALSE, JsonUtil.getBoolean(json, "b"));
+        assertNull(JsonUtil.getBoolean(json, "c"));
+        assertNull(JsonUtil.getBoolean(json, "missing"));
+    }
+
+    @Test
+    /**
+     * testGetBooleanWithDefault方法。
+     */
+    public void testGetBooleanWithDefault() {
+        String json = "{\"a\":true,\"c\":\"yes\"}";
+        // 正常解析时返回解析值
+        assertEquals(Boolean.TRUE, JsonUtil.getBoolean(json, "a", Boolean.FALSE));
+        // 键不存在时返回默认值
+        assertEquals(Boolean.FALSE, JsonUtil.getBoolean(json, "missing", Boolean.FALSE));
+        // 值无法解析时返回默认值
+        assertEquals(Boolean.TRUE, JsonUtil.getBoolean(json, "c", Boolean.TRUE));
+        // json为null时返回默认值
+        assertEquals(Boolean.TRUE, JsonUtil.getBoolean(null, "a", Boolean.TRUE));
+    }
+
+    @Test
+    /**
+     * testGetObjectAndList方法。
+     */
+    public void testGetObjectAndList() {
+        String json = "{\"person\":{\"name\":\"tom\",\"age\":18},\"tags\":[\"a\",\"b\"]}";
+        Person person = JsonUtil.getObject(json, "person", Person.class);
+        assertNotNull(person);
+        assertEquals("tom", person.name);
+        assertEquals(18, person.age);
+
+        List<String> tags = JsonUtil.getList(json, "tags", String.class);
+        assertEquals(Arrays.asList("a", "b"), tags);
+
+        // 非数组值返回null
+        assertNull(JsonUtil.getList(json, "person", Person.class));
+        assertNull(JsonUtil.getObject(json, "missing", Person.class));
+    }
+
+    @Test
+    /**
+     * testUpdateJson方法。
+     */
+    public void testUpdateJson() {
+        String json = "{\"a\":1,\"b\":\"x\"}";
+        // 覆盖已有键（键顺序不保证，语义断言）
+        String updated = JsonUtil.updateJson(json, "a", 2);
+        assertEquals(Integer.valueOf(2), JsonUtil.getInteger(updated, "a"));
+        assertEquals("x", JsonUtil.getString(updated, "b"));
+        // 新增键
+        updated = JsonUtil.updateJson(json, "c", true);
+        assertEquals(Integer.valueOf(1), JsonUtil.getInteger(updated, "a"));
+        assertEquals("x", JsonUtil.getString(updated, "b"));
+        assertEquals(Boolean.TRUE, JsonUtil.getBoolean(updated, "c"));
+        // 空JSON视为空对象
+        assertEquals("{\"a\":1}", JsonUtil.updateJson(null, "a", 1));
+        // 写入POJO
+        updated = JsonUtil.updateJson("{}", "p", new Person("tom", 18));
+        Person p = JsonUtil.getObject(updated, "p", Person.class);
+        assertEquals("tom", p.name);
+        assertEquals(18, p.age);
+        // 写入集合
+        assertEquals("{\"list\":[1,2]}", JsonUtil.updateJson("{}", "list", Arrays.asList(1, 2)));
+    }
+
+    @Test
+    /**
+     * testCombineJsonString方法。
+     */
+    public void testCombineJsonString() {
+        String a = "{\"a\":1,\"b\":\"x\"}";
+        String b = "{\"b\":\"y\",\"c\":3}";
+        // 后者覆盖前者同名键（键顺序不保证，语义断言）
+        String merged = JsonUtil.combineJsonString(a, b);
+        assertEquals(Integer.valueOf(1), JsonUtil.getInteger(merged, "a"));
+        assertEquals("y", JsonUtil.getString(merged, "b"));
+        assertEquals(Integer.valueOf(3), JsonUtil.getInteger(merged, "c"));
+        // 任一为空直接返回另一个
+        assertEquals(b, JsonUtil.combineJsonString(null, b));
+        assertEquals(a, JsonUtil.combineJsonString(a, null));
+        assertEquals(a, JsonUtil.combineJsonString(a, "  "));
+    }
+
+    @Test
+    /**
+     * testParseQuietly方法。
+     */
+    public void testParseQuietly() {
+        // 合法输入正常返回
+        JsonObject obj = JsonUtil.parseObjectQuietly("{\"a\":1}");
+        assertNotNull(obj);
+        assertEquals(Integer.valueOf(1), JsonUtil.getInteger("{\"a\":1}", "a"));
+        // 非法格式返回null而不抛异常
+        assertNull(JsonUtil.parseObjectQuietly("{invalid}"));
+        assertNull(JsonUtil.parseArrayQuietly("[1,2"));
+        // null/空白保持原有宽容行为
+        assertEquals(0, JsonUtil.parseObjectQuietly(null).size());
+        assertEquals(0, JsonUtil.parseArrayQuietly(" ").size());
+    }
+
+    @Test
+    /**
+     * testFromJsonQuietly方法。
+     */
+    public void testFromJsonQuietly() {
+        // 合法输入正常返回
+        Person p = JsonUtil.fromJsonQuietly("{\"name\":\"tom\",\"age\":18}", Person.class);
+        assertNotNull(p);
+        assertEquals("tom", p.name);
+        // 非法格式返回null而不抛异常
+        assertNull(JsonUtil.fromJsonQuietly("not a json", Person.class));
+        // null/空白返回null
+        assertNull(JsonUtil.fromJsonQuietly(null, Person.class));
+        // 序列化宽容
+        assertEquals("\"中文\"", JsonUtil.toJsonQuietly("中文"));
+    }
+
+    @Test
+    /**
+     * testFromMap方法。
+     */
+    public void testFromMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "tom");
+        map.put("age", 18);
+        Person p = JsonUtil.fromMap(map, Person.class);
+        assertNotNull(p);
+        assertEquals("tom", p.name);
+        assertEquals(18, p.age);
+        // null返回null
+        assertNull(JsonUtil.fromMap(null, Person.class));
+    }
+
+    @Test
+    /**
+     * testToJsonWithLongAsString方法。
+     */
+    public void testToJsonWithLongAsString() {
+        // 顶层Long转字符串
+        assertEquals("\"123\"", JsonUtil.toJsonWithLongAsString(123L));
+        // 非Long类型不受影响
+        assertEquals("45", JsonUtil.toJsonWithLongAsString(45));
+        assertEquals("\"abc\"", JsonUtil.toJsonWithLongAsString("abc"));
+        // Map嵌套中的Long
+        Map<String, Object> map = new LinkedHashMap<>();
+        map.put("id", 123456789012345L);
+        map.put("name", "tom");
+        String json = JsonUtil.toJsonWithLongAsString(map);
+        // Long序列化为带引号的字符串
+        assertTrue(json.contains("\"id\":\"123456789012345\""));
+        assertEquals("tom", JsonUtil.getString(json, "name"));
+        // POJO字段中的Long
+        LongHolder holder = new LongHolder();
+        holder.id = 9876543210L;
+        holder.name = "x";
+        holder.count = 5;
+        String pojoJson = JsonUtil.toJsonWithLongAsString(holder);
+        assertTrue(pojoJson.contains("\"id\":\"9876543210\""));
+        assertEquals("x", JsonUtil.getString(pojoJson, "name"));
+        assertEquals(Integer.valueOf(5), JsonUtil.getInteger(pojoJson, "count"));
+        // 开关用完即复位，普通序列化不受影响
+        assertEquals("123", JsonUtil.toJson(123L));
+        // null入参
+        assertEquals("null", JsonUtil.toJsonWithLongAsString(null));
+    }
+
+    @Test
+    /**
+     * testRemoveJson方法。
+     */
+    public void testRemoveJson() {
+        // 移除已有键
+        assertEquals("{\"b\":2}", JsonUtil.removeJson("{\"a\":1,\"b\":2}", "a"));
+        // 键不存在时内容不变
+        assertEquals("{\"a\":1}", JsonUtil.removeJson("{\"a\":1}", "z"));
+        // null/空白视为空对象
+        assertEquals("{}", JsonUtil.removeJson(null, "a"));
+        // 嵌套对象整体作为顶层键被移除
+        assertEquals("{\"b\":1}", JsonUtil.removeJson("{\"a\":{\"x\":1},\"b\":1}", "a"));
+    }
+
+    @Test
+    /**
+     * testGetUndeclaredFields方法。
+     */
+    public void testGetUndeclaredFields() {
+        // 未声明的字段进入结果
+        Map<String, Object> extra = JsonUtil.getUndeclaredFields(
+                "{\"name\":\"tom\",\"age\":18,\"extra\":\"x\",\"flag\":true}", Person.class);
+        assertEquals(2, extra.size());
+        assertEquals("x", extra.get("extra"));
+        assertEquals(Boolean.TRUE, extra.get("flag"));
+        // 全部已声明时返回空Map
+        assertTrue(JsonUtil.getUndeclaredFields(
+                "{\"name\":\"tom\",\"age\":18}", Person.class).isEmpty());
+        // null入参返回空Map
+        assertTrue(JsonUtil.getUndeclaredFields(null, Person.class).isEmpty());
+        assertTrue(JsonUtil.getUndeclaredFields("{\"a\":1}", null).isEmpty());
+        // 非法json返回空Map
+        assertTrue(JsonUtil.getUndeclaredFields("not-json", Person.class).isEmpty());
+    }
+
+    /**
+     * Long字段测试用POJO。
+     */
+    public static class LongHolder {
+        public Long id;
+        public String name;
+        public int count;
+    }
+
     public static class Person {
         public String name;
         public int age;

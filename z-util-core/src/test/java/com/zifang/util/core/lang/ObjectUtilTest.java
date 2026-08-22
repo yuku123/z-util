@@ -130,6 +130,86 @@ public class ObjectUtilTest {
         assertEquals(original, cloned);
     }
 
+    // --- isEmpty / isNotEmpty ---
+
+    @Test
+    /**
+     * testIsEmpty_WithVariousTypes方法。
+     */
+    public void testIsEmpty_WithVariousTypes() {
+        assertTrue(ObjectUtil.isEmpty(null));
+        assertTrue(ObjectUtil.isEmpty(""));
+        assertTrue(ObjectUtil.isEmpty(new ArrayList<String>()));
+        assertTrue(ObjectUtil.isEmpty(new java.util.HashMap<String, String>()));
+        assertTrue(ObjectUtil.isEmpty(new int[0]));
+        // 非空输入
+        assertFalse(ObjectUtil.isEmpty("a"));
+        assertFalse(ObjectUtil.isEmpty(Arrays.asList(1)));
+        assertFalse(ObjectUtil.isEmpty(new int[]{1}));
+        // 非集合类型仅判断null
+        assertFalse(ObjectUtil.isEmpty(0));
+        // isNotEmpty取反
+        assertTrue(ObjectUtil.isNotEmpty("a"));
+        assertFalse(ObjectUtil.isNotEmpty(""));
+    }
+
+    @Test
+    /**
+     * testIsAllEmpty_WithVariousArgs方法。
+     */
+    public void testIsAllEmpty_WithVariousArgs() {
+        assertTrue(ObjectUtil.isAllEmpty());
+        assertTrue(ObjectUtil.isAllEmpty(null, "", new ArrayList<String>()));
+        assertFalse(ObjectUtil.isAllEmpty(null, "a"));
+        assertFalse(ObjectUtil.isAllEmpty("a", "b"));
+    }
+
+    @Test
+    /**
+     * testIsAllNotEmpty_WithVariousArgs方法。
+     */
+    public void testIsAllNotEmpty_WithVariousArgs() {
+        assertFalse(ObjectUtil.isAllNotEmpty());
+        assertTrue(ObjectUtil.isAllNotEmpty("a", Arrays.asList(1), new int[]{1}));
+        assertFalse(ObjectUtil.isAllNotEmpty("a", null));
+        assertFalse(ObjectUtil.isAllNotEmpty("a", ""));
+    }
+
+    @Test
+    /**
+     * testEqualsAny方法。
+     */
+    public void testEqualsAny() {
+        // 匹配任一候选
+        assertTrue(ObjectUtil.equalsAny(2, 1, 2, 3));
+        // 不匹配
+        assertFalse(ObjectUtil.equalsAny(5, 1, 2, 3));
+        // null与null相等
+        assertTrue(ObjectUtil.equalsAny(null, null, 1));
+        // 目标null不匹配非null候选
+        assertFalse(ObjectUtil.equalsAny(null, 1, 2));
+        // 候选为null或空
+        assertFalse(ObjectUtil.equalsAny(1));
+        assertFalse(ObjectUtil.equalsAny(1, (Integer[]) null));
+        // 字符串
+        assertTrue(ObjectUtil.equalsAny("b", "a", "b"));
+    }
+
+    @Test
+    /**
+     * testGetIfNotNull方法。
+     */
+    public void testGetIfNotNull() {
+        // 对象非null时执行取值函数
+        assertEquals(Integer.valueOf(3), ObjectUtil.getIfNotNull("abc", String::length));
+        // 对象为null时返回null
+        assertNull(ObjectUtil.getIfNotNull((String) null, String::length));
+        // 对象为null时返回默认值
+        assertEquals(Integer.valueOf(0), ObjectUtil.getIfNotNull((String) null, String::length, 0));
+        // 对象非null时默认值不生效
+        assertEquals(Integer.valueOf(3), ObjectUtil.getIfNotNull("abc", String::length, 0));
+    }
+
     // Helper class for testing
     static class TestSerializable implements Serializable {
         private static final long serialVersionUID = 1L;

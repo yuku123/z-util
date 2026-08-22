@@ -5,7 +5,9 @@ import com.zifang.util.core.time.converter.TimeConverter;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * java.time.LocalDate 工具类
@@ -612,5 +614,50 @@ public class LocalDateUtil {
      */
     public static LocalDate fromInstant(Instant instant) {
         return TimeConverter.toLocalDate(instant);
+    }
+
+    /**
+     * listDatesBetween方法。
+     * 列出起止日期之间的每一天（含两端）
+     *
+     * @param start LocalDate类型参数，开始日期（含）
+     * @param end   LocalDate类型参数，结束日期（含）
+     * @return static List<LocalDate>类型返回值，按自然顺序排列；起止任一为null或start晚于end时返回空列表
+     */
+    public static List<LocalDate> listDatesBetween(LocalDate start, LocalDate end) {
+        List<LocalDate> dates = new ArrayList<>();
+        if (start == null || end == null || start.isAfter(end)) {
+            return dates;
+        }
+        for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
+            dates.add(d);
+        }
+        return dates;
+    }
+
+    /**
+     * age方法。
+     * 计算出生日期相对指定日期的周岁年龄
+     *
+     * @param birthDate     LocalDate类型参数，出生日期
+     * @param referenceDate LocalDate类型参数，参照日期
+     * @return static int类型返回值，周岁年龄；任一参数为null或出生日期晚于参照日期时返回0
+     */
+    public static int age(LocalDate birthDate, LocalDate referenceDate) {
+        if (birthDate == null || referenceDate == null || birthDate.isAfter(referenceDate)) {
+            return 0;
+        }
+        return (int) birthDate.until(referenceDate, java.time.temporal.ChronoUnit.YEARS);
+    }
+
+    /**
+     * age方法。
+     * 计算出生日期相对当前日期的周岁年龄
+     *
+     * @param birthDate LocalDate类型参数，出生日期
+     * @return static int类型返回值，周岁年龄；为null时返回0
+     */
+    public static int age(LocalDate birthDate) {
+        return age(birthDate, LocalDate.now());
     }
 }

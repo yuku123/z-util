@@ -381,4 +381,23 @@ public class RandomUtilTest {
         assertEquals(10, result.length());
         assertTrue(result.matches("\\d+"));
     }
+
+    // --- uuidBase64 ---
+
+    @Test
+    /**
+     * testUuidBase64方法。
+     */
+    public void testUuidBase64() {
+        String result = RandomUtil.uuidBase64();
+        // 16字节Base64编码固定为24字符，尾部含补位符
+        assertEquals(24, result.length());
+        assertTrue(result.endsWith("=="));
+        // 仅包含Base64字符与补位符
+        assertTrue(result.matches("[A-Za-z0-9+/]+=="));
+        // 解码后应还原为16字节
+        assertEquals(16, java.util.Base64.getDecoder().decode(result).length);
+        // 多次生成互不相同
+        assertNotEquals(result, RandomUtil.uuidBase64());
+    }
 }

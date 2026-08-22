@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
 
@@ -420,5 +421,39 @@ public class MapUtilTest {
         map.put("key2", null);
         Map<String, String> result = MapUtil.trimValue(map);
         assertSame(map, result);
+    }
+
+    @Test
+    /**
+     * testGetCacheFirst方法。
+     */
+    public void testGetCacheFirst() {
+        Map<String, Integer> cache = new HashMap<>();
+        cache.put("a", 1);
+        AtomicInteger loadCount = new AtomicInteger();
+        // 命中缓存不触发加载
+        assertEquals(Integer.valueOf(1), MapUtil.getCacheFirst(cache, "a", k -> {
+            loadCount.incrementAndGet();
+            return 99;
+        }));
+        assertEquals(0, loadCount.get());
+        // 未命中时加载并写回缓存
+        assertEquals(Integer.valueOf(2), MapUtil.getCacheFirst(cache, "b", k -> {
+            loadCount.incrementAndGet();
+            return 2;
+        }));
+        assertEquals(1, loadCount.get());
+        assertEquals(Integer.valueOf(2), cache.get("b"));
+        // 第二次命中缓存
+        assertEquals(Integer.valueOf(2), MapUtil.getCacheFirst(cache, "b", k -> {
+            loadCount.incrementAndGet();
+            return 99;
+        }));
+        assertEquals(1, loadCount.get());
+        // 加载返回null时不写缓存
+        assertNull(MapUtil.getCacheFirst(cache, "c", k -> null));
+        assertFalse(cache.containsKey("c"));
+        // map为null时直接加载
+        assertEquals(Integer.valueOf(5), MapUtil.getCacheFirst(null, "x", k -> 5));
     }
 }

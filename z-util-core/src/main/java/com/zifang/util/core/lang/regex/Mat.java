@@ -21,6 +21,8 @@ public class Mat {
     private static final Pattern ID_CARD_PATTERN = Pattern.compile(
             "^[1-9]\\d{5}(18|19|20)\\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\\d|3[01])\\d{3}[\\dXx]$");
 
+    private static final Pattern PASSPORT_PATTERN = Pattern.compile("^[a-zA-Z0-9]{5,17}$");
+
     private Mat() {
     }
 
@@ -117,6 +119,13 @@ public class Mat {
      */
     public static boolean isIdCard(String input) {
         return isMatch(input, ID_CARD_PATTERN);
+    }
+
+    /**
+     * 验证护照号格式（5-17位字母或数字）。
+     */
+    public static boolean isPassport(String input) {
+        return isMatch(input, PASSPORT_PATTERN);
     }
 
     /**

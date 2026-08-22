@@ -10,7 +10,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -195,5 +197,27 @@ public class Converters {
      */
     public static <F, T> T to(Object value, Class<T> clazz) {
         return findConverter((Class<F>) value.getClass(), clazz).to((F) value);
+    }
+
+    /**
+     * 将Object安全地转换为指定元素类型的List。
+     * <p>
+     * 泛型擦除后无法直接强转 List&lt;T&gt;，本方法逐元素以目标类型做 cast：
+     * 当 value 本身是 List 时，逐个元素转换后返回新列表；
+     * 当 value 不是 List 或为 null 时返回空列表。
+     *
+     * @param value 待转换对象，通常是泛型擦除后的列表
+     * @param clazz 目标元素类型
+     * @param <T>   目标元素类型
+     * @return 转换后的列表；元素类型不兼容时会抛出 ClassCastException
+     */
+    public static <T> List<T> castList(Object value, Class<T> clazz) {
+        List<T> result = new ArrayList<>();
+        if (value instanceof List<?>) {
+            for (Object item : (List<?>) value) {
+                result.add(clazz.cast(item));
+            }
+        }
+        return result;
     }
 }

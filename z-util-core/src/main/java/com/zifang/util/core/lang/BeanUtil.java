@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -129,6 +131,72 @@ public class BeanUtil {
             log.warn("getProperty failed for property '{}' on {}", name, obj == null ? null : obj.getClass(), e);
         }
         return null;
+    }
+
+    /**
+     * 将 source 对象中的非空属性值覆盖到 target 对象的同名属性上，
+     * source 中为 null 的属性保持 target 原值不变，用于两个同类型对象的属性合并。
+     * <p>
+     * 遍历 source 类（含父类）的全部声明字段并跳过静态字段；
+     * 仅当 source 侧字段取值非 null 时写入 target。
+     *
+     * @param sourceBean 提取属性值的对象；为 null 时不做任何修改
+     * @param targetBean 被覆盖合并的对象；为 null 时直接返回 null
+     * @param <T>        对象类型
+     * @return 合并后的 targetBean
+     */
+    public static <T> T combineObject(T sourceBean, T targetBean) {
+        if (sourceBean == null || targetBean == null) {
+            return targetBean;
+        }
+        for (Class<?> clazz = sourceBean.getClass(); clazz != null && clazz != Object.class; clazz = clazz.getSuperclass()) {
+            for (Field field : clazz.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers())) {
+                    continue;
+                }
+                try {
+                    field.setAccessible(true);
+                    Object value = field.get(sourceBean);
+                    if (value != null) {
+                        field.set(targetBean, value);
+                    }
+                } catch (IllegalAccessException | IllegalArgumentException e) {
+                    log.warn("combineObject skip field '{}' on {}", field.getName(), sourceBean.getClass(), e);
+                }
+            }
+        }
+        return targetBean;
+    }
+
+    /**
+     * 判断对象的所有实例字段取值是否全部为 null。
+     * <p>
+     * 遍历对象类层次（含父类）的全部声明字段并跳过静态字段；
+     * 只要存在一个非 null 取值即返回 false。常用于判断一个条件对象是否未携带任何条件。
+     *
+     * @param bean 待判断对象
+     * @return 对象为 null 或全部字段为 null 时返回 true；存在任一非 null 字段返回 false
+     */
+    public static boolean isAllFieldValueNull(Object bean) {
+        if (bean == null) {
+            return true;
+        }
+        for (Class<?> clazz = bean.getClass(); clazz != null && clazz != Object.class; clazz = clazz.getSuperclass()) {
+            for (Field field : clazz.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers())) {
+                    continue;
+                }
+                try {
+                    field.setAccessible(true);
+                    if (field.get(bean) != null) {
+                        return false;
+                    }
+                } catch (IllegalAccessException | IllegalArgumentException e) {
+                    log.warn("isAllFieldValueNull skip field '{}' on {}", field.getName(), bean.getClass(), e);
+                }
+            }
+        }
+        return true;
     }
 
     /**

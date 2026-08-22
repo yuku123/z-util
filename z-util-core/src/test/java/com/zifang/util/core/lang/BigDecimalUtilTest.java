@@ -619,4 +619,48 @@ public class BigDecimalUtilTest {
         String result = BigDecimalUtil.bigDecimal2String(null, 2);
         assertNull(result);
     }
+
+    // --- max / min ---
+
+    @Test
+    /**
+     * testMax_WithVariadicArgs方法。
+     */
+    public void testMax_WithVariadicArgs() {
+        assertEquals(0, BigDecimalUtil.max(new BigDecimal("3"),
+                new BigDecimal("1"), new BigDecimal("5"), new BigDecimal("4")).compareTo(new BigDecimal("5")));
+        // 含null视为0
+        assertEquals(0, BigDecimalUtil.max(new BigDecimal("-1"), null, new BigDecimal("-2")).compareTo(BigDecimal.ZERO));
+        // 全部null返回0
+        assertEquals(0, BigDecimalUtil.max(null, (BigDecimal[]) null).compareTo(BigDecimal.ZERO));
+    }
+
+    @Test
+    /**
+     * testMin_WithVariadicArgs方法。
+     */
+    public void testMin_WithVariadicArgs() {
+        assertEquals(0, BigDecimalUtil.min(new BigDecimal("3"),
+                new BigDecimal("1"), new BigDecimal("5"), new BigDecimal("4")).compareTo(new BigDecimal("1")));
+        // 含null视为0
+        assertEquals(0, BigDecimalUtil.min(new BigDecimal("1"), null, new BigDecimal("2")).compareTo(BigDecimal.ZERO));
+        // 全部null返回0
+        assertEquals(0, BigDecimalUtil.min(null, (BigDecimal[]) null).compareTo(BigDecimal.ZERO));
+    }
+
+    @Test
+    /**
+     * testStripTrailingZeros方法。
+     */
+    public void testStripTrailingZeros() {
+        assertEquals("1.1", BigDecimalUtil.stripTrailingZeros(new BigDecimal("1.100")));
+        assertEquals("2", BigDecimalUtil.stripTrailingZeros(new BigDecimal("2.000")));
+        // 整数不会出现科学计数法
+        assertEquals("100", BigDecimalUtil.stripTrailingZeros(new BigDecimal("100.00")));
+        assertEquals("3.14", BigDecimalUtil.stripTrailingZeros(new BigDecimal("3.1400")));
+        // 无尾零时原样返回
+        assertEquals("0.5", BigDecimalUtil.stripTrailingZeros(new BigDecimal("0.5")));
+        // null入参
+        assertNull(BigDecimalUtil.stripTrailingZeros(null));
+    }
 }

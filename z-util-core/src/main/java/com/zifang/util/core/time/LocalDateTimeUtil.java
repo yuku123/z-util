@@ -5,7 +5,9 @@ import com.zifang.util.core.time.converter.TimeConverter;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * java.time.LocalDateTime 工具类
@@ -157,6 +159,62 @@ public class LocalDateTimeUtil {
      */
     public static LocalDateTime todayEnd() {
         return LocalDate.now().atTime(LocalTime.MAX);
+    }
+
+    /**
+     * dayStart方法。
+     * 获取指定时间所在天的开始时间（00:00:00）
+     *
+     * @param dateTime LocalDateTime类型参数
+     * @return static LocalDateTime类型返回值，dateTime为null时返回null
+     */
+    public static LocalDateTime dayStart(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        return dateTime.toLocalDate().atStartOfDay();
+    }
+
+    /**
+     * dayEnd方法。
+     * 获取指定时间所在天的结束时间（23:59:59.999999999）
+     *
+     * @param dateTime LocalDateTime类型参数
+     * @return static LocalDateTime类型返回值，dateTime为null时返回null
+     */
+    public static LocalDateTime dayEnd(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        return dateTime.toLocalDate().atTime(LocalTime.MAX);
+    }
+
+    /**
+     * minuteStart方法。
+     * 获取指定时间所在分钟的开始（秒与纳秒归零）
+     *
+     * @param dateTime LocalDateTime类型参数
+     * @return static LocalDateTime类型返回值，dateTime为null时返回null
+     */
+    public static LocalDateTime minuteStart(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        return dateTime.withSecond(0).withNano(0);
+    }
+
+    /**
+     * minuteEnd方法。
+     * 获取指定时间所在分钟的结束（秒置为59，纳秒归零）
+     *
+     * @param dateTime LocalDateTime类型参数
+     * @return static LocalDateTime类型返回值，dateTime为null时返回null
+     */
+    public static LocalDateTime minuteEnd(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        return dateTime.withSecond(59).withNano(0);
     }
 
     /**
@@ -409,6 +467,70 @@ public class LocalDateTimeUtil {
      */
     public static LocalDateTime lastDayOfWeek(LocalDateTime dateTime) {
         return dateTime.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+    }
+
+    /**
+     * quarterStart方法。
+     * 获取指定时间所在季度的开始时间（季度首月1日 00:00:00）
+     *
+     * @param dateTime LocalDateTime类型参数
+     * @return static LocalDateTime类型返回值，dateTime为null时返回null
+     */
+    public static LocalDateTime quarterStart(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        Month firstMonthOfQuarter = dateTime.getMonth().firstMonthOfQuarter();
+        return LocalDate.of(dateTime.getYear(), firstMonthOfQuarter, 1).atStartOfDay();
+    }
+
+    /**
+     * quarterEnd方法。
+     * 获取指定时间所在季度的结束时间（季度末月最后一日 23:59:59.999999999）
+     *
+     * @param dateTime LocalDateTime类型参数
+     * @return static LocalDateTime类型返回值，dateTime为null时返回null
+     */
+    public static LocalDateTime quarterEnd(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        Month lastMonthOfQuarter = dateTime.getMonth().firstMonthOfQuarter().plus(2);
+        LocalDate lastDay = LocalDate.of(dateTime.getYear(), lastMonthOfQuarter, 1)
+                .with(TemporalAdjusters.lastDayOfMonth());
+        return lastDay.atTime(LocalTime.MAX);
+    }
+
+    /**
+     * halfYearStart方法。
+     * 获取指定时间所在半年的开始时间（1月或7月1日 00:00:00）
+     *
+     * @param dateTime LocalDateTime类型参数
+     * @return static LocalDateTime类型返回值，dateTime为null时返回null
+     */
+    public static LocalDateTime halfYearStart(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        Month firstMonthOfHalfYear = dateTime.getMonthValue() > 6 ? Month.JULY : Month.JANUARY;
+        return LocalDate.of(dateTime.getYear(), firstMonthOfHalfYear, 1).atStartOfDay();
+    }
+
+    /**
+     * halfYearEnd方法。
+     * 获取指定时间所在半年的结束时间（6月或12月最后一日 23:59:59.999999999）
+     *
+     * @param dateTime LocalDateTime类型参数
+     * @return static LocalDateTime类型返回值，dateTime为null时返回null
+     */
+    public static LocalDateTime halfYearEnd(LocalDateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
+        Month lastMonthOfHalfYear = dateTime.getMonthValue() > 6 ? Month.DECEMBER : Month.JUNE;
+        LocalDate lastDay = LocalDate.of(dateTime.getYear(), lastMonthOfHalfYear, 1)
+                .with(TemporalAdjusters.lastDayOfMonth());
+        return lastDay.atTime(LocalTime.MAX);
     }
 
     /**
@@ -817,5 +939,24 @@ public class LocalDateTimeUtil {
      */
     public static LocalDateTime fromZonedDateTime(ZonedDateTime zonedDateTime) {
         return TimeConverter.toLocalDateTime(zonedDateTime);
+    }
+
+    /**
+     * listDateTimesBetween方法。
+     * 列出起止时间之间每天的同一时刻（按天步进，含两端）
+     *
+     * @param start LocalDateTime类型参数，开始时间（含）
+     * @param end   LocalDateTime类型参数，结束时间（含）
+     * @return static List<LocalDateTime>类型返回值，按自然顺序排列；起止任一为null或start晚于end时返回空列表
+     */
+    public static List<LocalDateTime> listDateTimesBetween(LocalDateTime start, LocalDateTime end) {
+        List<LocalDateTime> dateTimes = new ArrayList<>();
+        if (start == null || end == null || start.isAfter(end)) {
+            return dateTimes;
+        }
+        for (LocalDateTime dt = start; !dt.isAfter(end); dt = dt.plusDays(1)) {
+            dateTimes.add(dt);
+        }
+        return dateTimes;
     }
 }

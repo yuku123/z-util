@@ -38,6 +38,14 @@
             <artifactId>z-util-core</artifactId>
         </dependency>
 
+        <!-- MyBatis 分页插件（MyBatisPageInterceptor） -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.16</version>
+            <optional>true</optional>
+        </dependency>
+
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-proxy</artifactId>

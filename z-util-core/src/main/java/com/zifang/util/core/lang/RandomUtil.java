@@ -1,5 +1,6 @@
 package com.zifang.util.core.lang;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
@@ -218,6 +219,29 @@ public class RandomUtil {
      */
     public static String uuidCompact() {
         return UUID.randomUUID().toString().replace("-", "");
+    }
+
+    /**
+     * 生成 Base64 编码的紧凑 UUID。
+     * <p>
+     * 将随机 UUID 的 128 位按大端序拆为 16 字节后整体进行 Base64 编码，
+     * 得到 24 个字符（尾部含 {@code "=="} 补位符），比 32 位十六进制表示更短，
+     * 适合用于对长度敏感的随机标识场景。
+     * <p>
+     * 示例：{@code uuidBase64() -> "aGVsbG8gd29ybGQhMTIzNA=="}
+     *
+     * @return 24 位 Base64 字符串
+     */
+    public static String uuidBase64() {
+        UUID uuid = UUID.randomUUID();
+        long msb = uuid.getMostSignificantBits();
+        long lsb = uuid.getLeastSignificantBits();
+        byte[] buffer = new byte[16];
+        for (int i = 0; i < 8; i++) {
+            buffer[i] = (byte) ((msb >>> 8 * (7 - i)) & 0xFF);
+            buffer[i + 8] = (byte) ((lsb >>> 8 * (7 - i)) & 0xFF);
+        }
+        return Base64.getEncoder().encodeToString(buffer);
     }
 
     /**

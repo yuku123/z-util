@@ -6,6 +6,7 @@ import com.zifang.util.core.lang.primitive.LongUtil;
 import com.zifang.util.core.lang.primitive.ShortUtil;
 
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * @author: zifang
@@ -284,6 +285,35 @@ public class MapUtil {
             sourceMap.remove(key);
         }
         return sourceMap;
+    }
+
+    /**
+     * 缓存优先取值：先从Map中取值，命中非空直接返回；
+     * 未命中时执行加载函数，加载结果非空时写回Map缓存。
+     * <p>
+     * 与{@code Map.computeIfAbsent}的区别：加载函数返回null时不写入缓存，
+     * 后续调用可再次触发加载。
+     *
+     * @param map    缓存Map，为null时直接执行加载函数且不缓存
+     * @param key    缓存key
+     * @param loader 缓存未命中时的加载函数
+     * @param <K>    key类型
+     * @param <V>    value类型
+     * @return 缓存或加载的值，可能为null
+     */
+    public static <K, V> V getCacheFirst(Map<K, V> map, K key, Function<K, V> loader) {
+        if (map == null) {
+            return loader.apply(key);
+        }
+        V value = map.get(key);
+        if (value != null) {
+            return value;
+        }
+        value = loader.apply(key);
+        if (value != null) {
+            map.put(key, value);
+        }
+        return value;
     }
 
 }

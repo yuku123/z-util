@@ -466,4 +466,66 @@ public class BigDecimalUtil {
         }
         return null;
     }
+
+    /**
+     * 取多个数中的最大值，null视为0
+     *
+     * @param v1 第一个数
+     * @param v2 其余数
+     * @return 最大值；全部为null时返回0
+     */
+    public static BigDecimal max(BigDecimal v1, BigDecimal... v2) {
+        BigDecimal result = v1 == null ? BigDecimal.ZERO : v1;
+        if (v2 == null) {
+            return result;
+        }
+        for (BigDecimal v : v2) {
+            BigDecimal item = v == null ? BigDecimal.ZERO : v;
+            if (item.compareTo(result) > 0) {
+                result = item;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 取多个数中的最小值，null视为0
+     *
+     * @param v1 第一个数
+     * @param v2 其余数
+     * @return 最小值；全部为null时返回0
+     */
+    public static BigDecimal min(BigDecimal v1, BigDecimal... v2) {
+        BigDecimal result = v1 == null ? BigDecimal.ZERO : v1;
+        if (v2 == null) {
+            return result;
+        }
+        for (BigDecimal v : v2) {
+            BigDecimal item = v == null ? BigDecimal.ZERO : v;
+            if (item.compareTo(result) < 0) {
+                result = item;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 去掉小数末尾多余的0并转为字符串
+     * <p>
+     * 例如：1.100 → "1.1"，2.000 → "2"，100.00 → "1E+2"形式会转为普通计数法。
+     *
+     * @param num 待处理数字
+     * @return 去掉尾零后的字符串；num为null时返回null
+     */
+    public static String stripTrailingZeros(BigDecimal num) {
+        if (num == null) {
+            return null;
+        }
+        BigDecimal stripped = num.stripTrailingZeros();
+        // stripTrailingZeros对整数可能产生科学计数法（如100 → 1E+2），转回普通表示
+        if (stripped.scale() < 0) {
+            stripped = stripped.setScale(0, java.math.BigDecimal.ROUND_HALF_UP);
+        }
+        return stripped.toPlainString();
+    }
 }

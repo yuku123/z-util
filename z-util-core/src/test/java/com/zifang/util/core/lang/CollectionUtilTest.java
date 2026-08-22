@@ -3,6 +3,7 @@ package com.zifang.util.core.lang;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -706,5 +707,72 @@ public class CollectionUtilTest {
         Map<String, Object> map = new HashMap<>();
         map.put("longKey", 9223372036854775807L);
         assertEquals(Long.valueOf(9223372036854775807L), CollectionUtil.parseLongValue(map, "longKey"));
+    }
+
+    @Test
+    /**
+     * testGroupingByNullSafe_WithNullKeys方法。分组键为 null 时归入同一分组而不抛异常。
+     */
+    public void testGroupingByNullSafe_WithNullKeys() {
+        List<String> data = Arrays.asList("apple", "banana", "avocado", null, "blueberry");
+        Map<Character, List<String>> grouped = data.stream()
+                .collect(CollectionUtil.groupingByNullSafe(s -> s == null ? null : s.charAt(0)));
+        assertEquals(3, grouped.size());
+        assertEquals(Arrays.asList("apple", "avocado"), grouped.get('a'));
+        assertEquals(Arrays.asList("banana", "blueberry"), grouped.get('b'));
+        assertEquals(Collections.singletonList(null), grouped.get(null));
+    }
+
+    @Test
+    /**
+     * testGroupingByNullSafe_WithNoNullKeys方法。无 null 键时行为与 groupingBy 一致。
+     */
+    public void testGroupingByNullSafe_WithNoNullKeys() {
+        List<String> data = Arrays.asList("a1", "b1", "a2");
+        Map<Character, List<String>> grouped = data.stream()
+                .collect(CollectionUtil.groupingByNullSafe(s -> s.charAt(0)));
+        assertEquals(2, grouped.size());
+        assertEquals(Arrays.asList("a1", "a2"), grouped.get('a'));
+        assertEquals(Collections.singletonList("b1"), grouped.get('b'));
+    }
+
+    @Test
+    /**
+     * testGroup_WithComparator方法。按比较器等价关系分组并保持出现顺序。
+     */
+    public void testGroup_WithComparator() {
+        List<String> data = Arrays.asList("ab", "xyz", "cd", "abcd", "efg");
+        List<List<String>> groups = CollectionUtil.group(data, Comparator.comparingInt(String::length));
+        assertEquals(3, groups.size());
+        assertEquals(Arrays.asList("ab", "cd"), groups.get(0));
+        assertEquals(Arrays.asList("xyz", "efg"), groups.get(1));
+        assertEquals(Collections.singletonList("abcd"), groups.get(2));
+    }
+
+    @Test
+    /**
+     * testGroup_WithNullOrEmptyData方法。null 或空列表返回空结果。
+     */
+    public void testGroup_WithNullOrEmptyData() {
+        assertTrue(CollectionUtil.group(null, Comparator.comparingInt(String::length)).isEmpty());
+        assertTrue(CollectionUtil.group(new ArrayList<String>(), Comparator.comparingInt(String::length)).isEmpty());
+    }
+
+    @Test
+    /**
+     * testDistinctByKey方法。按键去重保留首次出现，null 键视为同一键。
+     */
+    public void testDistinctByKey() {
+        List<String[]> data = Arrays.asList(
+                new String[]{"a", "1"}, new String[]{"b", "2"},
+                new String[]{"a", "3"}, new String[]{null, "4"}, new String[]{null, "5"});
+        List<String[]> distinct = data.stream()
+                .filter(CollectionUtil.distinctByKey(arr -> arr[0]))
+                .collect(Collectors.toList());
+        assertEquals(3, distinct.size());
+        assertEquals("a", distinct.get(0)[0]);
+        assertEquals("b", distinct.get(1)[0]);
+        assertNull(distinct.get(2)[0]);
+        assertEquals("4", distinct.get(2)[1]);
     }
 }

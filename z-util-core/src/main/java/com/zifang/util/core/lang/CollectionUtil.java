@@ -6,7 +6,12 @@ import com.zifang.util.core.lang.primitive.LongUtil;
 import com.zifang.util.core.lang.primitive.ShortUtil;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import static com.zifang.util.core.lang.MapUtil.MAX_POWER_OF_TWO;
 
@@ -543,6 +548,81 @@ public class CollectionUtil {
             return defaultValue;
         }
         return map.get(key);
+    }
+
+    /**
+     * distinctByKey 的 null 键哨兵，ConcurrentHashMap 的键集合不允许 null，以哨兵代替参与去重
+     */
+    private static final Object NULL_KEY = new Object();
+
+    /**
+     * groupingByNullSafe方法。支持分组键为 null 的分组收集器。
+     * JDK 标准的 Collectors.groupingBy 在分组键为 null 时抛出 NullPointerException，
+     * 本方法将 null 键与普通键一样处理，归入同一分组。
+     *
+     * @param classifier 分组键提取函数，允许返回 null
+     * @param <T>        流元素类型
+     * @param <K>        分组键类型
+     * @return 分组结果收集器，键为分组键（可为 null），值为该组元素列表
+     */
+    public static <T, K> Collector<T, ?, Map<K, List<T>>> groupingByNullSafe(Function<? super T, ? extends K> classifier) {
+        return Collectors.toMap(classifier, Collections::singletonList,
+                (List<T> oldList, List<T> newElement) -> {
+                    List<T> newList = new ArrayList<>(oldList.size() + 1);
+                    newList.addAll(oldList);
+                    newList.addAll(newElement);
+                    return newList;
+                });
+    }
+
+    /**
+     * group方法。按比较器定义的等价关系将元素分组。
+     * 与 groupingBy 不同，无需提取分组键，只要比较器判定两元素相等（返回 0）即归入同组，
+     * 分组与组内元素均保持原列表中的出现顺序。
+     *
+     * @param data       元素列表，null 或空列表返回空结果
+     * @param comparator 比较器
+     * @param <T>        元素类型
+     * @return 分组结果，每组为等价元素列表
+     */
+    public static <T> List<List<T>> group(List<T> data, Comparator<? super T> comparator) {
+        List<List<T>> result = new ArrayList<>();
+        if (isEmpty(data)) {
+            return result;
+        }
+        for (T element : data) {
+            boolean merged = false;
+            for (List<T> group : result) {
+                if (comparator.compare(element, group.get(0)) == 0) {
+                    group.add(element);
+                    merged = true;
+                    break;
+                }
+            }
+            if (!merged) {
+                List<T> newGroup = new ArrayList<>();
+                newGroup.add(element);
+                result.add(newGroup);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * distinctByKey方法。构造按提取键去重的 Predicate，配合 stream 的 filter 使用。
+     * 与 stream 的 distinct 不同，可按元素的业务键去重并保留首次出现的元素；
+     * 键为 null 的元素视为同一键，保留首个。
+     *
+     * @param keyExtractor 去重键提取函数
+     * @param <T>          元素类型
+     * @return 有状态的去重 Predicate（仅适用于单次顺序流，勿复用）
+     */
+    public static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+        Set<Object> seen = ConcurrentHashMap.newKeySet();
+        return t -> {
+            Object key = keyExtractor.apply(t);
+            return seen.add(key == null ? NULL_KEY : key);
+        };
     }
 
 

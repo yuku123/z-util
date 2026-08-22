@@ -40,6 +40,7 @@ public class StringUtil {
     private static final Supplier<String> NULL_STRING_MSG_SUPPLIER = () -> "'value' should be not null.";
     private static final String[] EMPTY_ARRAY = new String[0];
     private static final char SEPARATOR = '_';
+    private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("\\$\\{([^}]+)}");
 
     /**
      * Checks if a String is not empty (not null and not blank).
@@ -581,6 +582,67 @@ public class StringUtil {
             result = result.replace(m.group(), params[paramNumber]);
         }
         return result;
+    }
+
+    /**
+     * 按顺序将参数填入"{}"占位符
+     * <p>
+     * 与日志框架的占位符风格一致：占位符按出现顺序依次取参数，多余的参数忽略，
+     * 参数不足时剩余占位符保持原样。占位符不支持转义。
+     *
+     * @param message 带占位符的模板字符串，为null时返回null
+     * @param args    占位符替换值
+     * @return 格式化后的字符串
+     */
+    public static String formatPlaceholder(String message, Object... args) {
+        if (message == null) {
+            return null;
+        }
+        if (args == null || args.length == 0) {
+            return message;
+        }
+        StringBuilder sb = new StringBuilder(message.length() + 16);
+        int argIndex = 0;
+        int i = 0;
+        int len = message.length();
+        while (i < len) {
+            char c = message.charAt(i);
+            if (c == '{' && i + 1 < len && message.charAt(i + 1) == '}' && argIndex < args.length) {
+                sb.append(args[argIndex++]);
+                i += 2;
+            } else {
+                sb.append(c);
+                i++;
+            }
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 将模板字符串中"${key}"形式的命名占位符替换为参数映射中的对应值
+     * <p>
+     * 占位符以 Map 的 key 命名，例如模板 "user=${name}" 在参数 {name=alice} 作用下
+     * 得到 "user=alice"。映射中不存在对应 key 或取值为 null 时，该占位符保持原样；
+     * 不匹配占位符规则的内容原样保留。
+     *
+     * @param template 带命名占位符的模板字符串，为null时返回null
+     * @param params   占位符名到替换值的映射
+     * @return 替换后的字符串
+     */
+    public static String replacePlaceholder(String template, Map<String, Object> params) {
+        if (template == null || template.isEmpty() || params == null || params.isEmpty()) {
+            return template;
+        }
+        Matcher matcher = PLACEHOLDER_PATTERN.matcher(template);
+        StringBuffer sb = new StringBuffer(template.length() + 16);
+        while (matcher.find()) {
+            Object value = params.get(matcher.group(1));
+            if (value != null) {
+                matcher.appendReplacement(sb, Matcher.quoteReplacement(String.valueOf(value)));
+            }
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
 

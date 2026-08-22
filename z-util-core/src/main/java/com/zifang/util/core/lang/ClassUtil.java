@@ -1,7 +1,14 @@
 package com.zifang.util.core.lang;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * @author: zifang
@@ -245,6 +252,118 @@ public class ClassUtil {
         }
         buf.append(")");
         return buf.toString();
+    }
+
+    /**
+     * 通过无参构造函数创建实例
+     *
+     * @param clazz 目标类，为null时抛出异常
+     * @param <T>   目标类型
+     * @return 新实例
+     * @throws RuntimeException 类型为null、无无参构造函数或构造不可访问时抛出
+     */
+    public static <T> T newInstance(Class<T> clazz) {
+        if (clazz == null) {
+            throw new RuntimeException("Create new instance of null class failed");
+        }
+        try {
+            return clazz.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException("Create new instance of " + clazz.getName()
+                    + " failed: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 扫描指定包下的所有类（含子包）
+     * <p>
+     * 同时支持目录形式的类路径和jar包形式，无法加载的类（依赖缺失、访问受限等）会被跳过。
+     *
+     * @param packageName 包名，如"com.example.pkg"
+     * @return 扫描到的类列表；包不存在时返回空列表
+     * @throws RuntimeException 类路径资源读取失败时抛出
+     */
+    public static List<Class<?>> scanClasses(String packageName) {
+        List<Class<?>> classes = new ArrayList<>();
+        if (packageName == null || packageName.isEmpty()) {
+            return classes;
+        }
+        String path = packageName.replace('.', '/');
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        if (classLoader == null) {
+            classLoader = ClassUtil.class.getClassLoader();
+        }
+        try {
+            Enumeration<URL> resources = classLoader.getResources(path);
+            while (resources.hasMoreElements()) {
+                URL url = resources.nextElement();
+                if ("file".equals(url.getProtocol())) {
+                    scanDirectory(new File(url.toURI()), packageName, classes);
+                } else if ("jar".equals(url.getProtocol())) {
+                    scanJar(url, path, classes);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Scan classes of package " + packageName
+                    + " failed: " + e.getMessage(), e);
+        }
+        return classes;
+    }
+
+    /**
+     * 递归扫描目录形式的类路径
+     */
+    private static void scanDirectory(File dir, String packageName, List<Class<?>> classes) {
+        File[] files = dir.listFiles();
+        if (files == null) {
+            return;
+        }
+        for (File file : files) {
+            if (file.isDirectory()) {
+                scanDirectory(file, packageName + "." + file.getName(), classes);
+            } else if (file.getName().endsWith(".class")) {
+                String className = packageName + "."
+                        + file.getName().substring(0, file.getName().length() - ".class".length());
+                addClassIfLoadable(className, classes);
+            }
+        }
+    }
+
+    /**
+     * 扫描jar包形式的类路径，剥离"file:...!"前缀后打开jar
+     */
+    private static void scanJar(URL url, String path, List<Class<?>> classes) throws IOException {
+        String jarPath = url.getPath();
+        if (jarPath.startsWith("file:")) {
+            jarPath = jarPath.substring("file:".length());
+        }
+        int exclamationIndex = jarPath.indexOf('!');
+        if (exclamationIndex >= 0) {
+            jarPath = jarPath.substring(0, exclamationIndex);
+        }
+        try (JarFile jar = new JarFile(URLDecoder.decode(jarPath, "UTF-8"))) {
+            Enumeration<JarEntry> entries = jar.entries();
+            while (entries.hasMoreElements()) {
+                JarEntry entry = entries.nextElement();
+                String name = entry.getName();
+                if (!entry.isDirectory() && name.startsWith(path) && name.endsWith(".class")) {
+                    String className = name.substring(0, name.length() - ".class".length())
+                            .replace('/', '.');
+                    addClassIfLoadable(className, classes);
+                }
+            }
+        }
+    }
+
+    /**
+     * 加载类并加入结果，无法加载时静默跳过
+     */
+    private static void addClassIfLoadable(String className, List<Class<?>> classes) {
+        try {
+            classes.add(Class.forName(className, false, Thread.currentThread().getContextClassLoader()));
+        } catch (Throwable ignore) {
+            // 依赖缺失或不可访问的类跳过
+        }
     }
 
 }

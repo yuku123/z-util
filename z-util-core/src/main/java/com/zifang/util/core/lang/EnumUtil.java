@@ -2,6 +2,7 @@ package com.zifang.util.core.lang;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * 枚举工具类。
@@ -64,5 +65,27 @@ public class EnumUtil {
      */
     public static <E extends Enum<E>> E[] getEnumValues(Class<E> enumClass) {
         return enumClass.getEnumConstants();
+    }
+
+    /**
+     * 根据枚举属性值查找枚举实例。
+     * <p>
+     * 遍历枚举的所有实例，将属性提取函数的结果与给定值按 equals 比较，
+     * 返回首个匹配的枚举实例；常用于按 code/name 等自定义属性反查枚举。
+     *
+     * @param enumClass       枚举类
+     * @param attributeMapper 枚举属性提取函数
+     * @param value           目标属性值，null 时不匹配任何枚举
+     * @param <E>             枚举类型
+     * @return 首个匹配的枚举实例；不存在匹配或入参非法时返回 null
+     */
+    public static <E extends Enum<E>, V> E query(Class<E> enumClass, Function<E, V> attributeMapper, Object value) {
+        if (enumClass == null || attributeMapper == null || value == null) {
+            return null;
+        }
+        return Arrays.stream(enumClass.getEnumConstants())
+                .filter(e -> value.equals(attributeMapper.apply(e)))
+                .findFirst()
+                .orElse(null);
     }
 }

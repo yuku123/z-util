@@ -1,5 +1,8 @@
 package com.zifang.util.ch;
 
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -33,15 +36,37 @@ public class IdcardUtil {
     private static int[] power = {7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
 
     /**
+     * 省份代码与名称的映射，用于根据地址码前两位查询省份
+     */
+    private static final Map<String, String> PROVINCE_CODE_MAP = new HashMap<>();
+
+    static {
+        for (String entry : PROVINCE_CODES) {
+            int idx = entry.indexOf(':');
+            PROVINCE_CODE_MAP.put(entry.substring(0, idx), entry.substring(idx + 1));
+        }
+    }
+
+    /**
      * 验证身份证是否合法
      * <p>
-     * 该方法验证传入的身份证号码是否合法，目前仅支持18位身份证的验证。
+     * 该方法验证传入的身份证号码是否合法，支持15位和18位身份证的验证。
+     * 15位身份证验证省份与出生日期；18位身份证在省份、出生日期基础上额外验证校验位。
      *
      * @param idcard 待验证的身份证号码
      * @return 如果身份证合法返回true，否则返回false
      */
     public static boolean isValidatedAllIdcard(String idcard) {
-        return isValidate18Idcard(idcard);
+        if (idcard == null || idcard.isEmpty()) {
+            return false;
+        }
+        if (idcard.length() == 15) {
+            return validate15Idcard(idcard);
+        }
+        if (idcard.length() == 18) {
+            return isValidate18Idcard(idcard);
+        }
+        return false;
     }
 
     /**
@@ -70,6 +95,9 @@ public class IdcardUtil {
      * @return 如果是合法的身份证返回true，否则返回false
      */
     public static boolean isValidate18Idcard(String idcard) {
+        if (idcard == null) {
+            return false;
+        }
         // 非18位为假
         if (idcard.length() != 18) {
             return false;
@@ -78,30 +106,31 @@ public class IdcardUtil {
         String idcard17 = idcard.substring(0, 17);
         // 获取第18位
         String idcard18Code = idcard.substring(17, 18);
-        char[] c = null;
-        String checkCode = "";
-        // 是否都为数字
-        if (isDigital(idcard17)) {
-            c = idcard17.toCharArray();
-        } else {
+
+        // 前17位全部为数字
+        if (!isDigital(idcard17)) {
             return false;
         }
 
-        if (null != c) {
-            int[] bit = new int[idcard17.length()];
-            bit = converCharToInt(c);
-            int sum17 = 0;
-            sum17 = getPowerSum(bit);
-            // 将和值与11取模得到余数进行校验码判断
-            checkCode = getCheckCodeBySum(sum17);
-            if (null == checkCode) {
-                return false;
-            }
-            // 将身份证的第18位与算出来的校码进行匹配，不相等就为假
-            return idcard18Code.equalsIgnoreCase(checkCode);
+        // 校验省份代码
+        if (!checkProvinceCode(idcard.substring(0, 2))) {
+            return false;
         }
 
-        return true;
+        // 校验出生日期（第7~14位，yyyyMMdd）
+        if (!isValidBirthday(idcard.substring(6, 14), false)) {
+            return false;
+        }
+
+        int[] bit = converCharToInt(idcard17.toCharArray());
+        int sum17 = getPowerSum(bit);
+        // 将和值与11取模得到余数进行校验码判断
+        String checkCode = getCheckCodeBySum(sum17);
+        if (null == checkCode) {
+            return false;
+        }
+        // 将身份证的第18位与算出来的校码进行匹配，不相等就为假
+        return idcard18Code.equalsIgnoreCase(checkCode);
     }
 
     /**
@@ -115,6 +144,143 @@ public class IdcardUtil {
      */
     public static boolean is18Idcard(String idcard) {
         return Pattern.matches("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([\\d|x|X]{1})$", idcard);
+    }
+
+    /**
+     * 判断15位身份证的合法性
+     * <p>
+     * 15位身份证号码由六位数字地址码、六位数字出生日期码（年份为两位）和三位数字顺序码组成。
+     * 校验内容包括：位数、是否全为数字、省份代码、出生日期。
+     *
+     * @param idcard 待验证的15位身份证号码
+     * @return 如果是合法的15位身份证返回true，否则返回false
+     */
+    public static boolean validate15Idcard(String idcard) {
+        if (idcard == null) {
+            return false;
+        }
+        // 非15位为假
+        if (idcard.length() != 15) {
+            return false;
+        }
+        // 15位全部为数字
+        if (!isDigital(idcard)) {
+            return false;
+        }
+        // 校验省份代码
+        if (!checkProvinceCode(idcard.substring(0, 2))) {
+            return false;
+        }
+        // 校验出生日期（第7~12位，yyMMdd，15位身份证年份均视为19xx年）
+        return isValidBirthday(idcard.substring(6, 12), true);
+    }
+
+    /**
+     * 将15位身份证号码转换为18位身份证号码
+     * <p>
+     * 转换规则：在六位地址码后将两位年份扩展为四位（补"19"前缀），
+     * 再在末尾追加根据前17位计算出的校验码。
+     *
+     * @param idcard 15位身份证号码
+     * @return 转换后的18位身份证号码；如果输入不是合法的15位号码则返回null
+     */
+    public static String convert15To18(String idcard) {
+        if (!validate15Idcard(idcard)) {
+            return null;
+        }
+        // 年份两位扩展为四位：15位身份证签发于2000年之前，统一补19前缀
+        String idcard17 = idcard.substring(0, 6) + "19" + idcard.substring(6) ;
+        int sum17 = getPowerSum(converCharToInt(idcard17.toCharArray()));
+        String checkCode = getCheckCodeBySum(sum17);
+        if (null == checkCode) {
+            return null;
+        }
+        return idcard17 + checkCode;
+    }
+
+    /**
+     * 从身份证号码中提取出生日期
+     * <p>
+     * 18位身份证取第7~14位（yyyyMMdd）；15位身份证取第7~12位（yyMMdd，视为19xx年）。
+     *
+     * @param idcard 身份证号码（15位或18位）
+     * @return 出生日期字符串，格式为yyyy-MM-dd；无法解析时返回null
+     */
+    public static String getBirthday(String idcard) {
+        if (idcard == null) {
+            return null;
+        }
+        if (idcard.length() == 18) {
+            String raw = idcard.substring(6, 14);
+            if (!isValidBirthday(raw, false)) {
+                return null;
+            }
+            return raw.substring(0, 4) + "-" + raw.substring(4, 6) + "-" + raw.substring(6, 8);
+        }
+        if (idcard.length() == 15) {
+            String raw = idcard.substring(6, 12);
+            if (!isValidBirthday(raw, true)) {
+                return null;
+            }
+            return "19" + raw.substring(0, 2) + "-" + raw.substring(2, 4) + "-" + raw.substring(4, 6);
+        }
+        return null;
+    }
+
+    /**
+     * 从身份证号码中提取省份名称
+     *
+     * @param idcard 身份证号码（15位或18位）
+     * @return 省份名称；地址码无法识别时返回null
+     */
+    public static String getProvince(String idcard) {
+        if (idcard == null || (idcard.length() != 15 && idcard.length() != 18)) {
+            return null;
+        }
+        return PROVINCE_CODE_MAP.get(idcard.substring(0, 2));
+    }
+
+    /**
+     * 校验省份代码是否在省份代码表中
+     *
+     * @param provinceCode 两位省份代码
+     * @return 合法返回true，否则返回false
+     */
+    private static boolean checkProvinceCode(String provinceCode) {
+        return PROVINCE_CODE_MAP.containsKey(provinceCode);
+    }
+
+    /**
+     * 校验出生日期段是否为真实存在的日期
+     *
+     * @param birthday    出生日期段字符串
+     * @param twoDigitYear true表示年份为两位（yyMMdd），false表示年份为四位（yyyyMMdd）
+     * @return 日期合法返回true，否则返回false
+     */
+    private static boolean isValidBirthday(String birthday, boolean twoDigitYear) {
+        try {
+            int year;
+            int begin = 0;
+            if (twoDigitYear) {
+                year = 1900 + Integer.parseInt(birthday.substring(0, 2));
+                begin = 2;
+            } else {
+                year = Integer.parseInt(birthday.substring(0, 4));
+                begin = 4;
+            }
+            int month = Integer.parseInt(birthday.substring(begin, begin + 2));
+            int day = Integer.parseInt(birthday.substring(begin + 2, begin + 4));
+
+            // 采用严格模式，月份、日期越界（如02月31日）会抛出异常
+            Calendar calendar = Calendar.getInstance();
+            calendar.clear();
+            calendar.setLenient(false);
+            calendar.set(year, month - 1, day);
+            calendar.getTime();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -217,18 +383,25 @@ public class IdcardUtil {
     /**
      * 从身份证号码中获取性别标识
      * <p>
-     * 根据身份证号码的第15位（15位身份证）或第17位（18位身份证）判断性别。
+     * 根据身份证号码的顺序码末位判断性别：15位身份证取第15位，18位身份证取第17位。
      * 奇数表示男性，偶数表示女性。
      *
      * @param idno 身份证号码（15位或18位）
      * @return 性别标识，1表示男性，0表示女性
      */
     public static int getUserSex(String idno) {
-        String sex = "1";
-        if (idno != null) {
-            if (idno.length() > 15) {
-                sex = idno.substring(16, 17);
-            }
+        if (idno == null) {
+            return 1;
+        }
+        String sex;
+        if (idno.length() > 15) {
+            // 18位：第17位（索引16）
+            sex = idno.substring(16, 17);
+        } else if (idno.length() == 15) {
+            // 15位：第15位（索引14）
+            sex = idno.substring(14, 15);
+        } else {
+            sex = "1";
         }
 
         return Integer.parseInt(sex) % 2 == 0 ? 0 : 1;

@@ -2,6 +2,9 @@ package com.zifang.util.core.lang;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -315,5 +318,55 @@ public class ClassUtilTest {
     public void testArgumentTypesToString_WithEmptyArray() {
         String result = ClassUtil.argumentTypesToString(new Class[]{});
         assertEquals("()", result);
+    }
+
+    @Test
+    /**
+     * testNewInstance_WithDefaultConstructor方法。
+     */
+    public void testNewInstance_WithDefaultConstructor() {
+        ArrayList<String> list = ClassUtil.newInstance(ArrayList.class);
+        assertNotNull(list);
+        assertTrue(list.isEmpty());
+    }
+
+    @Test(expected = RuntimeException.class)
+    /**
+     * testNewInstance_WithNullClass方法。
+     */
+    public void testNewInstance_WithNullClass() {
+        ClassUtil.newInstance(null);
+    }
+
+    @Test(expected = RuntimeException.class)
+    /**
+     * testNewInstance_WithNoDefaultConstructor方法。
+     */
+    public void testNewInstance_WithNoDefaultConstructor() {
+        // Integer无无参构造函数
+        ClassUtil.newInstance(Integer.class);
+    }
+
+    @Test
+    /**
+     * testScanClasses_WithDirectoryPackage方法。
+     */
+    public void testScanClasses_WithDirectoryPackage() {
+        // 测试环境为目录类路径，扫描lang包应包含StringUtil
+        List<Class<?>> classes = ClassUtil.scanClasses("com.zifang.util.core.lang");
+        assertTrue(classes.contains(StringUtil.class));
+        assertTrue(classes.contains(ClassUtil.class));
+    }
+
+    @Test
+    /**
+     * testScanClasses_WithInvalidInput方法。
+     */
+    public void testScanClasses_WithInvalidInput() {
+        // 不存在的包返回空列表
+        assertTrue(ClassUtil.scanClasses("com.zifang.util.core.notexist").isEmpty());
+        // null/空包名返回空列表
+        assertTrue(ClassUtil.scanClasses(null).isEmpty());
+        assertTrue(ClassUtil.scanClasses("").isEmpty());
     }
 }

@@ -2,8 +2,11 @@ package com.zifang.util.core.lang;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.*;
 
 /**
  * StringUtilTest类。
@@ -642,5 +645,79 @@ public class StringUtilTest {
         // 11011000  001111011  10111000  1001110
         System.out.println(StringUtil.binEncode("\uD83D\uDC4E"));
 
+    }
+
+    // --- formatPlaceholder ---
+
+    @Test
+    /**
+     * testFormatPlaceholder_WithOrderedArgs方法。
+     */
+    public void testFormatPlaceholder_WithOrderedArgs() {
+        assertEquals("a-b-c", StringUtil.formatPlaceholder("{}-{}-{}", "a", "b", "c"));
+        assertEquals("name=tom,age=18", StringUtil.formatPlaceholder("name={},age={}", "tom", 18));
+    }
+
+    @Test
+    /**
+     * testFormatPlaceholder_WithInsufficientArgs方法。
+     */
+    public void testFormatPlaceholder_WithInsufficientArgs() {
+        // 参数不足时剩余占位符保持原样，多余参数忽略
+        assertEquals("a-{}", StringUtil.formatPlaceholder("{}-{}", "a"));
+        assertEquals("a", StringUtil.formatPlaceholder("{}", "a", "b"));
+    }
+
+    @Test
+    /**
+     * testFormatPlaceholder_WithNullAndEmpty方法。
+     */
+    public void testFormatPlaceholder_WithNullAndEmpty() {
+        assertNull(StringUtil.formatPlaceholder(null, "a"));
+        assertEquals("template", StringUtil.formatPlaceholder("template"));
+        assertEquals("template", StringUtil.formatPlaceholder("template", (Object[]) null));
+        assertEquals("null", StringUtil.formatPlaceholder("{}", (Object) null));
+    }
+
+    // --- replacePlaceholder ---
+
+    @Test
+    /**
+     * testReplacePlaceholder_WithNamedParams方法。
+     */
+    public void testReplacePlaceholder_WithNamedParams() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "alice");
+        params.put("city", "shanghai");
+        assertEquals("user=alice,city=shanghai", StringUtil.replacePlaceholder("user=${name},city=${city}", params));
+        // 同名占位符全部替换
+        assertEquals("alice-alice", StringUtil.replacePlaceholder("${name}-${name}", params));
+    }
+
+    @Test
+    /**
+     * testReplacePlaceholder_MissingKeyKept方法。
+     */
+    public void testReplacePlaceholder_MissingKeyKept() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "alice");
+        // 映射中不存在的 key 与取值为 null 的 key 均保持原样
+        assertEquals("alice-${missing}", StringUtil.replacePlaceholder("${name}-${missing}", params));
+        params.put("nil", null);
+        assertEquals("${nil}", StringUtil.replacePlaceholder("${nil}", params));
+    }
+
+    @Test
+    /**
+     * testReplacePlaceholder_WithNullAndEmpty方法。
+     */
+    public void testReplacePlaceholder_WithNullAndEmpty() {
+        assertNull(StringUtil.replacePlaceholder(null, null));
+        assertEquals("template", StringUtil.replacePlaceholder("template", null));
+        Map<String, Object> params = new HashMap<>();
+        assertEquals("template", StringUtil.replacePlaceholder("template", params));
+        params.put("name", "alice");
+        // 替换值中的特殊字符不作为正则解释
+        assertEquals("a$b.c", StringUtil.replacePlaceholder("${v}", Collections.singletonMap("v", "a$b.c")));
     }
 }

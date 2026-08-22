@@ -55,6 +55,13 @@ public class JsonUtil {
     private static final ThreadLocal<Set<Object>> SERIALIZE_VISITED =
             ThreadLocal.withInitial(() -> Collections.newSetFromMap(new IdentityHashMap<>()));
 
+    /**
+     * 全局 Long 转字符串序列化开关，仅对未显式指定序列化器的字段生效。
+     * <p>用 {@link ThreadLocal} 隔离并发调用，{@link #toJsonWithLongAsString} 用完即复位。</p>
+     */
+    private static final ThreadLocal<Boolean> LONG_AS_STRING_MODE =
+            ThreadLocal.withInitial(() -> Boolean.FALSE);
+
     private static class FieldMeta {
         final Field field;
         final String jsonName;           // 序列化后的 JSON 属性名
@@ -109,7 +116,12 @@ public class JsonUtil {
         try {
             if (t instanceof JsonObject || t instanceof JsonArray) return t.toString();
             if (t instanceof String) return "\"" + escapeString((String) t) + "\"";
-            if (t instanceof Number || t instanceof Boolean) return String.valueOf(t);
+            if (t instanceof Number || t instanceof Boolean) {
+                if (t instanceof Long && LONG_AS_STRING_MODE.get()) {
+                    return "\"" + t + "\"";
+                }
+                return String.valueOf(t);
+            }
             if (t instanceof Date) return String.valueOf(((Date) t).getTime());
             if (t instanceof Collection) return solveList((Collection<?>) t);
             if (t instanceof Map) return solveMap((Map<?, ?>) t);
@@ -126,6 +138,26 @@ public class JsonUtil {
         return prettyPrint(toJson(t), 0);
     }
 
+    /**
+     * 全局 Long 转字符串序列化：对象中所有 Long（含嵌套集合/Map/POJO字段）序列化为字符串。
+     * <p>
+     * 避免 JavaScript 处理超过 2^53-1 的整数时丢失精度。
+     * 与字段级注解 {@code @JsonSerialize(using=KeepLongSerializer.class)} 的区别：
+     * 注解需要逐字段标注，本方法对整个对象的所有 Long 生效；
+     * 已显式指定序列化器的字段仍以注解为准。
+     *
+     * @param value 待序列化对象
+     * @return JSON字符串；value为null时返回"null"
+     */
+    public static String toJsonWithLongAsString(Object value) {
+        LONG_AS_STRING_MODE.set(Boolean.TRUE);
+        try {
+            return toJson(value);
+        } finally {
+            LONG_AS_STRING_MODE.set(Boolean.FALSE);
+        }
+    }
+
     // ==================== 反序列化 ====================
 
     public static <T> T fromJson(String jsonStr, TypeReference<T> typeRef) {
@@ -138,6 +170,461 @@ public class JsonUtil {
         if (jsonStr == null || jsonStr.trim().isEmpty()) return null;
         Object parsed = PARSER.fromJSON(jsonStr.trim());
         return convertValue(parsed, clazz);
+    }
+
+    // ==================== 字符串级便捷操作 ====================
+
+    /**
+     * 从JSON字符串中获取指定键的字符串值
+     * <p>
+     * 值为字符串时原样返回；值为数字、布尔、对象或数组时返回其JSON表示。
+     *
+     * @param json JSON字符串，为null或空白时视为空对象
+     * @param key  键名
+     * @return 字符串值；键不存在时返回null
+     */
+    public static String getString(String json, String key) {
+        Object value = parseLenient(json).get(key);
+        if (value == null) {
+            return null;
+        }
+        return value instanceof String ? (String) value : toJson(value);
+    }
+
+    /**
+     * 从JSON字符串中获取指定键的Integer值
+     *
+     * @param json JSON字符串，为null或空白时视为空对象
+     * @param key  键名
+     * @return Integer值；值不是数字或数字字符串时返回null
+     */
+    public static Integer getInteger(String json, String key) {
+        return toIntegerOrNull(parseLenient(json).get(key));
+    }
+
+    /**
+     * 从JSON字符串中获取指定键的Long值
+     *
+     * @param json JSON字符串，为null或空白时视为空对象
+     * @param key  键名
+     * @return Long值；值不是数字或数字字符串时返回null
+     */
+    public static Long getLong(String json, String key) {
+        return toLongOrNull(parseLenient(json).get(key));
+    }
+
+    /**
+     * 从JSON字符串中获取指定键的Double值
+     *
+     * @param json JSON字符串，为null或空白时视为空对象
+     * @param key  键名
+     * @return Double值；值不是数字或数字字符串时返回null
+     */
+    public static Double getDouble(String json, String key) {
+        return toDoubleOrNull(parseLenient(json).get(key));
+    }
+
+    /**
+     * 从JSON字符串中获取指定键的Boolean值
+     *
+     * @param json JSON字符串，为null或空白时视为空对象
+     * @param key  键名
+     * @return Boolean值；值不是布尔或布尔字符串（true/false，忽略大小写）时返回null
+     */
+    public static Boolean getBoolean(String json, String key) {
+        return toBooleanOrNull(parseLenient(json).get(key));
+    }
+
+    /**
+     * 从JSON字符串中获取指定键的Boolean值，键不存在或无法解析时返回默认值
+     *
+     * @param json         JSON字符串，为null或空白时视为空对象
+     * @param key          键名
+     * @param defaultValue 键不存在或值无法解析时的默认返回值
+     * @return Boolean值；解析失败时返回defaultValue
+     */
+    public static Boolean getBoolean(String json, String key, Boolean defaultValue) {
+        Boolean value = toBooleanOrNull(parseLenient(json).get(key));
+        return value == null ? defaultValue : value;
+    }
+
+    /**
+     * 从JSON字符串中获取指定键的嵌套值并转换为指定类型
+     *
+     * @param json  JSON字符串，为null或空白时视为空对象
+     * @param key   键名
+     * @param clazz 目标类型
+     * @param <T>   目标类型
+     * @return 转换结果；键不存在或无法转换时返回null
+     */
+    public static <T> T getObject(String json, String key, Class<T> clazz) {
+        Object value = parseLenient(json).get(key);
+        if (value == null) {
+            return null;
+        }
+        return convertValue(value, clazz);
+    }
+
+    /**
+     * 从JSON字符串中获取指定键的数组值并逐项转换为指定类型
+     *
+     * @param json  JSON字符串，为null或空白时视为空对象
+     * @param key   键名
+     * @param clazz 数组元素目标类型
+     * @param <T>   数组元素目标类型
+     * @return 转换后的列表；值不是数组时返回null
+     */
+    public static <T> List<T> getList(String json, String key, Class<T> clazz) {
+        Object value = parseLenient(json).get(key);
+        if (!(value instanceof JsonArray)) {
+            return null;
+        }
+        List<T> result = new ArrayList<>();
+        for (Object item : (JsonArray) value) {
+            result.add(convertValue(item, clazz));
+        }
+        return result;
+    }
+
+    /**
+     * 更新JSON字符串中指定键的值并返回新的JSON字符串
+     * <p>
+     * 原JSON为null或空白时视为空对象；键不存在时新增，存在时覆盖。
+     *
+     * @param json  原JSON字符串
+     * @param key   键名
+     * @param value 新值，支持基本类型、String、Map、Collection、POJO等
+     * @return 更新后的紧凑JSON字符串
+     */
+    public static String updateJson(String json, String key, Object value) {
+        JsonObject jsonObject = parseLenient(json);
+        jsonObject.put(key, normalizeValue(value));
+        return compactJson(jsonObject);
+    }
+
+    /**
+     * 合并两个JSON字符串
+     * <p>
+     * 后者的同名键覆盖前者；任一为null或空白时直接返回另一个。
+     *
+     * @param jsonA 第一个JSON字符串
+     * @param jsonB 第二个JSON字符串，其键值覆盖前者
+     * @return 合并后的紧凑JSON字符串
+     */
+    public static String combineJsonString(String jsonA, String jsonB) {
+        if (jsonA == null || jsonA.trim().isEmpty()) {
+            return jsonB;
+        }
+        if (jsonB == null || jsonB.trim().isEmpty()) {
+            return jsonA;
+        }
+        JsonObject merged = parseObject(jsonA);
+        for (Map.Entry<String, Object> entry : parseObject(jsonB).getAllKeyValue()) {
+            merged.put(entry.getKey(), entry.getValue());
+        }
+        return compactJson(merged);
+    }
+
+    /**
+     * 移除JSON字符串中指定键后返回新JSON字符串
+     *
+     * @param json 原JSON字符串，为null或空白时视为空对象
+     * @param key  待移除的键
+     * @return 移除后的紧凑JSON字符串；key不存在时返回原内容
+     */
+    public static String removeJson(String json, String key) {
+        JsonObject jsonObject = parseLenient(json);
+        jsonObject.remove(key);
+        return compactJson(jsonObject);
+    }
+
+    /**
+     * 提取JSON字符串中未被指定类声明的字段，组装为Map
+     * <p>
+     * 遍历JSON中的键，剔除目标类（含父类）已声明的字段名，剩余键值对入结果。
+     * 典型用途：从携带扩展字段的JSON中分离出类外字段。
+     *
+     * @param json        JSON字符串，为null或空白时返回空Map
+     * @param targetClass 目标类，为null时返回空Map
+     * @return 未被类声明的字段Map，保持JSON中的键顺序
+     */
+    public static Map<String, Object> getUndeclaredFields(String json, Class<?> targetClass) {
+        Map<String, Object> result = new LinkedHashMap<>();
+        if (json == null || json.trim().isEmpty() || targetClass == null) {
+            return result;
+        }
+        Set<String> declaredFieldNames = new HashSet<>();
+        for (Class<?> clazz = targetClass; clazz != null && clazz != Object.class; clazz = clazz.getSuperclass()) {
+            for (Field field : clazz.getDeclaredFields()) {
+                declaredFieldNames.add(field.getName());
+            }
+        }
+        JsonObject jsonObject;
+        try {
+            jsonObject = parseObject(json);
+        } catch (RuntimeException e) {
+            return result;
+        }
+        for (Map.Entry<String, Object> entry : jsonObject.getAllKeyValue()) {
+            if (!declaredFieldNames.contains(entry.getKey())) {
+                result.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return result;
+    }
+
+    // ==================== 宽容解析与Map转换 ====================
+
+    /**
+     * 解析JSON字符串为JsonObject，解析失败时返回null而不抛出异常
+     *
+     * @param json JSON字符串，为null或空白时返回空对象
+     * @return JsonObject；格式非法时返回null
+     */
+    public static JsonObject parseObjectQuietly(String json) {
+        try {
+            return parseObject(json);
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 解析JSON字符串为JsonArray，解析失败时返回null而不抛出异常
+     *
+     * @param json JSON字符串，为null或空白时返回空数组
+     * @return JsonArray；格式非法时返回null
+     */
+    public static JsonArray parseArrayQuietly(String json) {
+        try {
+            return parseArray(json);
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 反序列化，解析或转换失败时返回null而不抛出异常
+     *
+     * @param jsonStr JSON字符串
+     * @param clazz   目标类型
+     * @param <T>     目标类型
+     * @return 反序列化结果；失败时返回null
+     */
+    public static <T> T fromJsonQuietly(String jsonStr, Class<T> clazz) {
+        try {
+            return fromJson(jsonStr, clazz);
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 反序列化，解析或转换失败时返回null而不抛出异常
+     *
+     * @param jsonStr JSON字符串
+     * @param typeRef 目标类型引用
+     * @param <T>     目标类型
+     * @return 反序列化结果；失败时返回null
+     */
+    public static <T> T fromJsonQuietly(String jsonStr, TypeReference<T> typeRef) {
+        try {
+            return fromJson(jsonStr, typeRef);
+        } catch (RuntimeException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 序列化，失败时返回"null"而不抛出异常
+     *
+     * @param value 待序列化对象
+     * @return JSON字符串；失败时返回"null"
+     */
+    public static String toJsonQuietly(Object value) {
+        try {
+            return toJson(value);
+        } catch (RuntimeException e) {
+            return "null";
+        }
+    }
+
+    /**
+     * 将Map转换为指定类型的对象
+     * <p>
+     * 先将Map序列化为JSON再反序列化为目标类型，键名与目标类型字段名匹配。
+     *
+     * @param map  源Map，为null时返回null
+     * @param clazz 目标类型
+     * @param <T>  目标类型
+     * @return 转换结果
+     */
+    public static <T> T fromMap(Map<?, ?> map, Class<T> clazz) {
+        if (map == null) {
+            return null;
+        }
+        return fromJson(toJson(map), clazz);
+    }
+
+    /**
+     * 宽松解析JSON字符串：null或空白时返回空对象而不是抛出异常
+     *
+     * @param json JSON字符串
+     * @return JsonObject
+     */
+    private static JsonObject parseLenient(String json) {
+        if (json == null || json.trim().isEmpty()) {
+            return new JsonObject();
+        }
+        return parseObject(json);
+    }
+
+    /**
+     * 将待写入的值规范化为JSON模型支持的类型
+     *
+     * @param value 原始值
+     * @return 基本类型/String/JsonObject/JsonArray之一
+     */
+    private static Object normalizeValue(Object value) {
+        if (value == null || value instanceof String || value instanceof Number
+                || value instanceof Boolean || value instanceof JsonObject || value instanceof JsonArray) {
+            return value;
+        }
+        if (value instanceof Collection || value.getClass().isArray()) {
+            return parseArray(toJson(value));
+        }
+        return parseObject(toJson(value));
+    }
+
+    /**
+     * 值转Integer，支持Number与数字字符串
+     */
+    private static Integer toIntegerOrNull(Object value) {
+        if (value instanceof Number) {
+            return ((Number) value).intValue();
+        }
+        if (value instanceof String) {
+            try {
+                return Integer.parseInt(((String) value).trim());
+            } catch (NumberFormatException e) {
+                try {
+                    return (int) Double.parseDouble(((String) value).trim());
+                } catch (NumberFormatException e2) {
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 值转Long，支持Number与数字字符串
+     */
+    private static Long toLongOrNull(Object value) {
+        if (value instanceof Number) {
+            return ((Number) value).longValue();
+        }
+        if (value instanceof String) {
+            try {
+                return Long.parseLong(((String) value).trim());
+            } catch (NumberFormatException e) {
+                try {
+                    return (long) Double.parseDouble(((String) value).trim());
+                } catch (NumberFormatException e2) {
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 值转Double，支持Number与数字字符串
+     */
+    private static Double toDoubleOrNull(Object value) {
+        if (value instanceof Number) {
+            return ((Number) value).doubleValue();
+        }
+        if (value instanceof String) {
+            try {
+                return Double.parseDouble(((String) value).trim());
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 值转Boolean，支持Boolean与布尔字符串
+     */
+    private static Boolean toBooleanOrNull(Object value) {
+        if (value instanceof Boolean) {
+            return (Boolean) value;
+        }
+        if (value instanceof String) {
+            String text = ((String) value).trim();
+            if ("true".equalsIgnoreCase(text)) {
+                return Boolean.TRUE;
+            }
+            if ("false".equalsIgnoreCase(text)) {
+                return Boolean.FALSE;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 将JsonObject序列化为紧凑JSON字符串（无缩进换行）
+     *
+     * @param jsonObject JsonObject
+     * @return 紧凑JSON字符串
+     */
+    private static String compactJson(JsonObject jsonObject) {
+        List<Map.Entry<String, Object>> entries = jsonObject.getAllKeyValue();
+        StringBuilder sb = new StringBuilder("{");
+        for (int i = 0; i < entries.size(); i++) {
+            if (i > 0) {
+                sb.append(",");
+            }
+            Map.Entry<String, Object> entry = entries.get(i);
+            sb.append("\"").append(escapeString(entry.getKey())).append("\":");
+            sb.append(compactValue(entry.getValue()));
+        }
+        return sb.append("}").toString();
+    }
+
+    /**
+     * 将JsonArray序列化为紧凑JSON字符串
+     *
+     * @param jsonArray JsonArray
+     * @return 紧凑JSON字符串
+     */
+    private static String compactArray(JsonArray jsonArray) {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < jsonArray.size(); i++) {
+            if (i > 0) {
+                sb.append(",");
+            }
+            sb.append(compactValue(jsonArray.get(i)));
+        }
+        return sb.append("]").toString();
+    }
+
+    /**
+     * 将任意JSON模型值序列化为紧凑JSON片段
+     *
+     * @param value JsonObject/JsonArray/基本类型/null
+     * @return 紧凑JSON片段
+     */
+    private static String compactValue(Object value) {
+        if (value instanceof JsonObject) {
+            return compactJson((JsonObject) value);
+        }
+        if (value instanceof JsonArray) {
+            return compactArray((JsonArray) value);
+        }
+        return toJson(value);
     }
 
     // ==================== 序列化内部实现 ====================
