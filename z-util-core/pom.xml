@@ -26,6 +26,12 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
+        <!-- BouncyCastle：SM4 等国密算法支持 -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+        </dependency>
+
         <!-- SLF4J -> log4j 2.x 实现 -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

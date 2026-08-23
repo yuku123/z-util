@@ -2,8 +2,11 @@ package com.zifang.util.core.io.archive;
 
 import java.io.*;
 import java.util.Enumeration;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -14,6 +17,7 @@ import java.util.zip.ZipOutputStream;
  *   <li>将文件或文件夹压缩为 ZIP 格式</li>
  *   <li>解压 ZIP 文件到指定目录</li>
  *   <li>压缩单个文件到指定 ZIP 包</li>
+ *   <li>内存中压缩/解压字节数据（不落盘）</li>
  * </ul>
  * <p>
  * 示例用法：
@@ -166,6 +170,89 @@ public class ZipUtil {
                 }
             }
         }
+    }
+
+    /**
+     * 将字节数据压缩为单条目 ZIP 字节数组
+     * <p>
+     * 在内存中完成压缩，不产生磁盘文件，适合字节报文的打包场景。
+     *
+     * @param entryName 条目在 ZIP 包中的名称（不能为空）
+     * @param data      要压缩的数据（不能为空）
+     * @return ZIP 格式的字节数组
+     * @throws IllegalArgumentException 如果 entryName 或 data 为空
+     * @throws RuntimeException         如果压缩过程中发生 IO 错误
+     */
+    public static byte[] zipBytes(String entryName, byte[] data) {
+        if (entryName == null || entryName.isEmpty()) {
+            throw new IllegalArgumentException("entryName must not be empty");
+        }
+        if (data == null) {
+            throw new IllegalArgumentException("data must not be null");
+        }
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try (ZipOutputStream zos = new ZipOutputStream(bos)) {
+            zos.putNextEntry(new ZipEntry(entryName));
+            zos.write(data);
+            zos.closeEntry();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        return bos.toByteArray();
+    }
+
+    /**
+     * 解压 ZIP 字节数组的第一个文件条目
+     * <p>
+     * 适用于单文件 ZIP 报文的还原，目录条目会被跳过。
+     *
+     * @param zipBytes ZIP 格式的字节数组（不能为空）
+     * @return 第一个文件条目的内容；无文件条目时返回 null
+     * @throws IllegalArgumentException 如果 zipBytes 为空
+     * @throws RuntimeException         如果解压过程中发生 IO 错误
+     */
+    public static byte[] unzipFirstEntry(byte[] zipBytes) {
+        Map<String, byte[]> all = unzipAllEntries(zipBytes);
+        for (byte[] value : all.values()) {
+            return value;
+        }
+        return null;
+    }
+
+    /**
+     * 解压 ZIP 字节数组的全部文件条目
+     * <p>
+     * 在内存中完成解压，返回条目名到内容的映射（按 ZIP 内顺序），
+     * 目录条目会被跳过。
+     *
+     * @param zipBytes ZIP 格式的字节数组（不能为空）
+     * @return 条目名 -> 内容的映射（无文件条目时为空 Map）
+     * @throws IllegalArgumentException 如果 zipBytes 为空
+     * @throws RuntimeException         如果解压过程中发生 IO 错误
+     */
+    public static Map<String, byte[]> unzipAllEntries(byte[] zipBytes) {
+        if (zipBytes == null) {
+            throw new IllegalArgumentException("zipBytes must not be null");
+        }
+        Map<String, byte[]> result = new LinkedHashMap<>();
+        try (ZipInputStream zis = new ZipInputStream(new ByteArrayInputStream(zipBytes))) {
+            ZipEntry entry;
+            while ((entry = zis.getNextEntry()) != null) {
+                if (entry.isDirectory()) {
+                    continue;
+                }
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[BUFFER_SIZE];
+                int len;
+                while ((len = zis.read(buffer)) != -1) {
+                    bos.write(buffer, 0, len);
+                }
+                result.put(entry.getName(), bos.toByteArray());
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        return result;
     }
 
     /**

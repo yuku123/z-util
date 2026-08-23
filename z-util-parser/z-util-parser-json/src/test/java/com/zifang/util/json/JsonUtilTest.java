@@ -447,6 +447,65 @@ public class JsonUtilTest {
 
     @Test
     /**
+     * testGetStringWithDefault方法。
+     */
+    public void testGetStringWithDefault() {
+        String json = "{\"name\":\"tom\",\"age\":18}";
+        // 正常解析时返回解析值
+        assertEquals("tom", JsonUtil.getString(json, "name", "default"));
+        // 非字符串值返回其JSON表示
+        assertEquals("18", JsonUtil.getString(json, "age", "default"));
+        // 键不存在时返回默认值
+        assertEquals("default", JsonUtil.getString(json, "missing", "default"));
+        // json为null时返回默认值
+        assertEquals("default", JsonUtil.getString(null, "name", "default"));
+        // json为空白时返回默认值
+        assertEquals("default", JsonUtil.getString("  ", "name", "default"));
+    }
+
+    @Test
+    /**
+     * testGetIntegerWithDefault方法。
+     */
+    public void testGetIntegerWithDefault() {
+        String json = "{\"a\":18,\"b\":\"20\",\"c\":\"xyz\"}";
+        // 正常解析时返回解析值
+        assertEquals(Integer.valueOf(18), JsonUtil.getInteger(json, "a", 0));
+        // 数字字符串可解析
+        assertEquals(Integer.valueOf(20), JsonUtil.getInteger(json, "b", 0));
+        // 值无法解析时返回默认值
+        assertEquals(Integer.valueOf(0), JsonUtil.getInteger(json, "c", 0));
+        // 键不存在时返回默认值
+        assertEquals(Integer.valueOf(0), JsonUtil.getInteger(json, "missing", 0));
+        // json为null时返回默认值
+        assertEquals(Integer.valueOf(0), JsonUtil.getInteger(null, "a", 0));
+    }
+
+    @Test
+    /**
+     * testParseToMap方法。JSON对象字符串安全解析为Map。
+     */
+    public void testParseToMap() {
+        // 正常对象解析
+        Map<String, Object> map = JsonUtil.parseToMap("{\"name\":\"tom\",\"age\":18}");
+        assertEquals(2, map.size());
+        assertEquals("tom", map.get("name"));
+        assertEquals(Integer.valueOf(18), map.get("age"));
+        // json为null/空白返回空Map
+        assertTrue(JsonUtil.parseToMap(null).isEmpty());
+        assertTrue(JsonUtil.parseToMap("  ").isEmpty());
+        // 解析失败返回空Map
+        assertTrue(JsonUtil.parseToMap("xx").isEmpty());
+        // 非对象结构返回空Map
+        assertTrue(JsonUtil.parseToMap("[1,2]").isEmpty());
+        // 字面量null返回空Map
+        assertTrue(JsonUtil.parseToMap("null").isEmpty());
+        // 空对象返回空Map
+        assertTrue(JsonUtil.parseToMap("{}").isEmpty());
+    }
+
+    @Test
+    /**
      * testGetObjectAndList方法。
      */
     public void testGetObjectAndList() {

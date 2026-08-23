@@ -11,8 +11,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 提供Bean的相关操作
@@ -169,6 +174,117 @@ public class BeanUtil {
     }
 
     /**
+     * 将 source 对象的同名属性值拷贝到 targetClass 新建实例上（跨类型属性拷贝）。
+     * <p>
+     * 常用于 DTO/DO/VO 等同构字段对象之间的转换；
+     * 仅拷贝名称相同且类型兼容（含基本类型与包装类归一）的实例字段，静态字段不参与。
+     *
+     * @param source     提取属性值的对象；为 null 时返回 null
+     * @param targetClass 目标类型；为 null 或无法实例化时返回 null
+     * @param <T>        目标对象类型
+     * @return 拷贝完成的目标实例
+     */
+    public static <T> T copyProperties(Object source, Class<T> targetClass) {
+        if (source == null || targetClass == null) {
+            return null;
+        }
+        try {
+            T target = targetClass.newInstance();
+            return copyProperties(source, target);
+        } catch (InstantiationException | IllegalAccessException e) {
+            log.warn("copyProperties new instance failed on {}", targetClass, e);
+            return null;
+        }
+    }
+
+    /**
+     * 将 source 对象的同名属性值拷贝到 target 实例上（跨类型属性拷贝）。
+     * <p>
+     * 仅拷贝名称相同且类型兼容（含基本类型与包装类归一）的实例字段，静态字段不参与；
+     * 遍历两侧类层次（含父类），无法访问或不兼容的字段跳过并降级告警。
+     *
+     * @param source 提取属性值的对象；为 null 时不做任何修改
+     * @param target 被写入属性的目标实例；为 null 时直接返回 null
+     * @param <T>    目标对象类型
+     * @return 拷贝完成后的 target 实例
+     */
+    public static <T> T copyProperties(Object source, T target) {
+        if (source == null || target == null) {
+            return target;
+        }
+        Map<String, Field> targetFields = new HashMap<>();
+        for (Class<?> clazz = target.getClass(); clazz != null && clazz != Object.class; clazz = clazz.getSuperclass()) {
+            for (Field field : clazz.getDeclaredFields()) {
+                if (!Modifier.isStatic(field.getModifiers())) {
+                    targetFields.putIfAbsent(field.getName(), field);
+                }
+            }
+        }
+        for (Class<?> clazz = source.getClass(); clazz != null && clazz != Object.class; clazz = clazz.getSuperclass()) {
+            for (Field field : clazz.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers())) {
+                    continue;
+                }
+                Field targetField = targetFields.get(field.getName());
+                if (targetField == null || !isFieldTypeCompatible(field.getType(), targetField.getType())) {
+                    continue;
+                }
+                try {
+                    field.setAccessible(true);
+                    targetField.setAccessible(true);
+                    targetField.set(target, field.get(source));
+                } catch (IllegalAccessException | IllegalArgumentException e) {
+                    log.warn("copyProperties skip field '{}' on {}", field.getName(), source.getClass(), e);
+                }
+            }
+        }
+        return target;
+    }
+
+    /**
+     * 判断源字段类型可否安全赋给目标字段类型（基本类型按包装类归一后判断）。
+     */
+    private static boolean isFieldTypeCompatible(Class<?> sourceType, Class<?> targetType) {
+        Class<?> wrappedSource = wrapPrimitive(sourceType);
+        Class<?> wrappedTarget = wrapPrimitive(targetType);
+        return wrappedTarget.isAssignableFrom(wrappedSource);
+    }
+
+    /**
+     * 基本类型归一为对应包装类。
+     */
+    private static Class<?> wrapPrimitive(Class<?> type) {
+        if (!type.isPrimitive()) {
+            return type;
+        }
+        if (type == int.class) {
+            return Integer.class;
+        }
+        if (type == long.class) {
+            return Long.class;
+        }
+        if (type == double.class) {
+            return Double.class;
+        }
+        if (type == float.class) {
+            return Float.class;
+        }
+        if (type == boolean.class) {
+            return Boolean.class;
+        }
+        if (type == byte.class) {
+            return Byte.class;
+        }
+        if (type == short.class) {
+            return Short.class;
+        }
+        if (type == char.class) {
+            return Character.class;
+        }
+        return type;
+    }
+
+    /**
      * 判断对象的所有实例字段取值是否全部为 null。
      * <p>
      * 遍历对象类层次（含父类）的全部声明字段并跳过静态字段；
@@ -197,6 +313,121 @@ public class BeanUtil {
             }
         }
         return true;
+    }
+
+    /**
+     * 比较两个同类型对象的实例字段取值差异，返回差异字段列表。
+     * <p>
+     * 遍历对象类层次（含父类）的全部声明字段并跳过静态字段；
+     * 值等价规则：双 null 相等、单 null 不相等、String 忽略首尾空白后相等视为等价、
+     * BigDecimal 按 compareTo 数值等价（如 2.0 与 2.00 视为相等）、其余按 Objects.equals 比较。
+     *
+     * @param oldBean 旧对象，不允许为 null
+     * @param newBean 新对象，不允许为 null
+     * @return 差异字段列表，无差异时为空列表
+     */
+    public static List<FieldDiff> diff(Object oldBean, Object newBean) {
+        if (oldBean == null || newBean == null) {
+            throw new IllegalArgumentException("oldBean and newBean must not be null");
+        }
+        List<FieldDiff> diffs = new ArrayList<>();
+        for (Class<?> clazz = oldBean.getClass(); clazz != null && clazz != Object.class; clazz = clazz.getSuperclass()) {
+            for (Field field : clazz.getDeclaredFields()) {
+                if (Modifier.isStatic(field.getModifiers())) {
+                    continue;
+                }
+                try {
+                    field.setAccessible(true);
+                    Object oldValue = field.get(oldBean);
+                    Object newValue = field.get(newBean);
+                    if (!isFieldValueEquals(oldValue, newValue)) {
+                        diffs.add(new FieldDiff(field.getName(), oldValue, newValue));
+                    }
+                } catch (IllegalAccessException | IllegalArgumentException e) {
+                    log.warn("diff skip field '{}' on {}", field.getName(), oldBean.getClass(), e);
+                }
+            }
+        }
+        return diffs;
+    }
+
+    /**
+     * 判断两个对象的所有实例字段取值是否全部等价。
+     * <p>
+     * 两个对象均为 null 视为相同；仅一侧为 null 视为不同；
+     * 其余情况等价于 {@link #diff(Object, Object)} 结果为空。
+     *
+     * @param oldBean 旧对象
+     * @param newBean 新对象
+     * @return 字段全部等价时返回 true
+     */
+    public static boolean isSame(Object oldBean, Object newBean) {
+        if (oldBean == null && newBean == null) {
+            return true;
+        }
+        if (oldBean == null || newBean == null) {
+            return false;
+        }
+        return diff(oldBean, newBean).isEmpty();
+    }
+
+    /**
+     * 判断两个字段取值在语义上是否等价。
+     */
+    private static boolean isFieldValueEquals(Object oldValue, Object newValue) {
+        if (oldValue == null && newValue == null) {
+            return true;
+        }
+        if (oldValue == null || newValue == null) {
+            return false;
+        }
+        if (oldValue instanceof String && newValue instanceof String) {
+            return ((String) oldValue).trim().equals(((String) newValue).trim());
+        }
+        if (oldValue instanceof BigDecimal && newValue instanceof BigDecimal) {
+            return ((BigDecimal) oldValue).compareTo((BigDecimal) newValue) == 0;
+        }
+        return Objects.equals(oldValue, newValue);
+    }
+
+    /**
+     * 字段差异描述：字段名与新旧取值。
+     */
+    public static class FieldDiff {
+
+        private final String fieldName;
+        private final Object oldValue;
+        private final Object newValue;
+
+        /**
+         * 构造一个字段差异记录。
+         *
+         * @param fieldName 字段名
+         * @param oldValue  旧取值
+         * @param newValue  新取值
+         */
+        public FieldDiff(String fieldName, Object oldValue, Object newValue) {
+            this.fieldName = fieldName;
+            this.oldValue = oldValue;
+            this.newValue = newValue;
+        }
+
+        public String getFieldName() {
+            return fieldName;
+        }
+
+        public Object getOldValue() {
+            return oldValue;
+        }
+
+        public Object getNewValue() {
+            return newValue;
+        }
+
+        @Override
+        public String toString() {
+            return fieldName + ": " + oldValue + " -> " + newValue;
+        }
     }
 
     /**

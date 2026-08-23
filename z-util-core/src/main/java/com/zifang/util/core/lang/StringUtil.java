@@ -645,6 +645,44 @@ public class StringUtil {
         return sb.toString();
     }
 
+    /**
+     * 将模板字符串中自定义前后缀包裹的命名占位符替换为参数映射中的对应值
+     * <p>
+     * 前后缀由调用方指定，例如 prefix="$"、suffix="$" 时模板 "a=$name$" 在参数 {name=bob}
+     * 作用下得到 "a=bob"。映射中不存在对应 key 或取值为 null 时，该占位符保持原样；
+     * 后缀缺失（找不到成对前后缀）时剩余内容原样保留。
+     *
+     * @param template 带命名占位符的模板字符串，为null时返回null
+     * @param params   占位符名到替换值的映射
+     * @param prefix   占位符前缀，为null或空串时返回模板原样
+     * @param suffix   占位符后缀，为null或空串时返回模板原样
+     * @return 替换后的字符串
+     */
+    public static String replacePlaceholder(String template, Map<String, ?> params, String prefix, String suffix) {
+        if (template == null || template.isEmpty() || params == null || params.isEmpty()
+                || prefix == null || prefix.isEmpty() || suffix == null || suffix.isEmpty()) {
+            return template;
+        }
+        StringBuilder sb = new StringBuilder(template);
+        int startIndex = sb.indexOf(prefix);
+        while (startIndex != -1) {
+            int endIndex = sb.indexOf(suffix, startIndex + prefix.length());
+            if (endIndex == -1) {
+                break;
+            }
+            String key = sb.substring(startIndex + prefix.length(), endIndex);
+            Object value = params.get(key);
+            if (value != null) {
+                String replacement = String.valueOf(value);
+                sb.replace(startIndex, endIndex + suffix.length(), replacement);
+                startIndex = sb.indexOf(prefix, startIndex + replacement.length());
+            } else {
+                startIndex = sb.indexOf(prefix, endIndex + suffix.length());
+            }
+        }
+        return sb.toString();
+    }
+
 
     /**
      * The indexOf() method returns the index within the calling String of the first occurrence of the specified value, starting the search at fromIndex.
@@ -2016,6 +2054,26 @@ public class StringUtil {
      */
     public static boolean isEmpty(CharSequence cs) {
         return cs == null || cs.length() == 0;
+    }
+
+    /**
+     * 判断字符串中是否包含中文字符（CJK 统一表意符号区间 U+4E00 至 U+9FA5）。
+     *
+     * @param cs 待检查的字符串，为 null 或空白时返回 false
+     * @return 只要包含一个中文字符即返回 true，否则返回 false
+     */
+    public static boolean isContainChinese(CharSequence cs) {
+        if (cs == null) {
+            return false;
+        }
+        int sz = cs.length();
+        for (int i = 0; i < sz; i++) {
+            char c = cs.charAt(i);
+            if (c >= '\u4e00' && c <= '\u9fa5') {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

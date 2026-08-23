@@ -4,10 +4,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -223,5 +225,93 @@ public class ZipUtilTest {
      */
     public void testUnZipNonExistentZip() throws Exception {
         ZipUtil.unZip("/non/existent.zip", tempBaseDir.getPath());
+    }
+
+    // ==================== zipBytes / unzipFirstEntry / unzipAllEntries ====================
+
+    @Test
+    /**
+     * testZipBytesRoundTrip方法。
+     */
+    public void testZipBytesRoundTrip() {
+        byte[] data = "hello in-memory zip".getBytes(StandardCharsets.UTF_8);
+        byte[] zipped = ZipUtil.zipBytes("entry.txt", data);
+        assertTrue(zipped.length > 0);
+
+        byte[] restored = ZipUtil.unzipFirstEntry(zipped);
+        assertArrayEquals(data, restored);
+    }
+
+    @Test
+    /**
+     * testZipBytesEmptyData方法。
+     */
+    public void testZipBytesEmptyData() {
+        byte[] zipped = ZipUtil.zipBytes("empty.txt", new byte[0]);
+        byte[] restored = ZipUtil.unzipFirstEntry(zipped);
+        assertNotNull(restored);
+        assertEquals(0, restored.length);
+    }
+
+    @Test
+    /**
+     * testZipBytesAndUnzipAllEntriesNullArguments方法。
+     */
+    public void testZipBytesAndUnzipAllEntriesNullArguments() {
+        try {
+            ZipUtil.zipBytes(null, new byte[1]);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException expected) {
+            // expected
+        }
+        try {
+            ZipUtil.zipBytes("a.txt", null);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException expected) {
+            // expected
+        }
+        try {
+            ZipUtil.unzipAllEntries(null);
+            fail("expected IllegalArgumentException");
+        } catch (IllegalArgumentException expected) {
+            // expected
+        }
+    }
+
+    @Test
+    /**
+     * testUnzipAllEntriesMultiple方法。
+     */
+    public void testUnzipAllEntriesMultiple() throws Exception {
+        ByteArrayOutputStream zipBuffer = new ByteArrayOutputStream();
+        try (ZipOutputStream zos = new ZipOutputStream(zipBuffer)) {
+            zos.putNextEntry(new ZipEntry("first.txt"));
+            zos.write("one".getBytes(StandardCharsets.UTF_8));
+            zos.closeEntry();
+            zos.putNextEntry(new ZipEntry("dir/"));
+            zos.closeEntry();
+            zos.putNextEntry(new ZipEntry("second.txt"));
+            zos.write("two".getBytes(StandardCharsets.UTF_8));
+            zos.closeEntry();
+        }
+
+        Map<String, byte[]> entries = ZipUtil.unzipAllEntries(zipBuffer.toByteArray());
+        assertEquals(2, entries.size());
+        assertEquals("one", new String(entries.get("first.txt"), StandardCharsets.UTF_8));
+        assertEquals("two", new String(entries.get("second.txt"), StandardCharsets.UTF_8));
+        assertFalse(entries.containsKey("dir/"));
+    }
+
+    @Test
+    /**
+     * testUnzipFirstEntryOfEmptyZip方法。
+     */
+    public void testUnzipFirstEntryOfEmptyZip() throws Exception {
+        ByteArrayOutputStream zipBuffer = new ByteArrayOutputStream();
+        try (ZipOutputStream zos = new ZipOutputStream(zipBuffer)) {
+            // empty zip
+        }
+        byte[] result = ZipUtil.unzipFirstEntry(zipBuffer.toByteArray());
+        assertNull(result);
     }
 }

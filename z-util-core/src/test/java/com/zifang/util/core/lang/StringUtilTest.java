@@ -720,4 +720,52 @@ public class StringUtilTest {
         // 替换值中的特殊字符不作为正则解释
         assertEquals("a$b.c", StringUtil.replacePlaceholder("${v}", Collections.singletonMap("v", "a$b.c")));
     }
+
+    @Test
+    /**
+     * testReplacePlaceholder_CustomPrefixSuffix方法。自定义前后缀占位符替换。
+     */
+    public void testReplacePlaceholder_CustomPrefixSuffix() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", "alice");
+        params.put("city", "shanghai");
+        // 默认风格 ${} 可由自定义前后缀表达
+        assertEquals("user=alice,city=shanghai",
+                StringUtil.replacePlaceholder("user=${name},city=${city}", params, "${", "}"));
+        // 单字符前后缀 $
+        assertEquals("a=bob", StringUtil.replacePlaceholder("a=$name$", Collections.singletonMap("name", "bob"), "$", "$"));
+        // 同一模板多次替换与缺 key 保留原样
+        assertEquals("alice-alice-${missing}",
+                StringUtil.replacePlaceholder("${name}-${name}-${missing}", params, "${", "}"));
+        // null 值占位符保留原样
+        Map<String, Object> withNull = new HashMap<>();
+        withNull.put("nil", null);
+        assertEquals("keep ${nil}", StringUtil.replacePlaceholder("keep ${nil}", withNull, "${", "}"));
+        // 后缀缺失时剩余内容原样保留
+        assertEquals("alice ${unclosed", StringUtil.replacePlaceholder("${name} ${unclosed", params, "${", "}"));
+        // 前后缀为 null 或空串时返回模板原样
+        assertEquals("${name}", StringUtil.replacePlaceholder("${name}", params, null, "}"));
+        assertEquals("${name}", StringUtil.replacePlaceholder("${name}", params, "", "}"));
+        assertEquals("${name}", StringUtil.replacePlaceholder("${name}", params, "${", ""));
+        // template 为 null 或 params 为空返回原样
+        assertNull(StringUtil.replacePlaceholder(null, params, "${", "}"));
+        assertEquals("${name}", StringUtil.replacePlaceholder("${name}", new HashMap<String, Object>(), "${", "}"));
+        // 替换值中包含前后缀字符时不被二次替换
+        assertEquals("x$y", StringUtil.replacePlaceholder("$v$", Collections.singletonMap("v", "x$y"), "$", "$"));
+    }
+
+    @Test
+    /**
+     * testIsContainChinese方法。包含中文字符即返回 true，纯 ASCII/空白/null 返回 false。
+     */
+    public void testIsContainChinese() {
+        assertTrue(StringUtil.isContainChinese("中文"));
+        assertTrue(StringUtil.isContainChinese("abc中123"));
+        assertTrue(StringUtil.isContainChinese("。标点含汉字“测”"));
+        assertFalse(StringUtil.isContainChinese("abc 123"));
+        assertFalse(StringUtil.isContainChinese(""));
+        assertFalse(StringUtil.isContainChinese(null));
+        // 中文标点不在 CJK 统一表意符号区间，不视为汉字
+        assertFalse(StringUtil.isContainChinese("。，！"));
+    }
 }

@@ -22,6 +22,35 @@ public class IntegerUtil {
     }
 
     /**
+     * toIntegerOrNull方法。
+     * 宽松安全转换：null、空串、"null"（忽略大小写）或无法解析的内容返回 null，不抛异常；
+     * Number 类型直接取 intValue，数字字符串（含负号）按十进制解析。
+     *
+     * @param value 待转换值
+     * @return Integer类型返回值，无法转换时为 null
+     */
+    public static Integer toIntegerOrNull(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Integer) {
+            return (Integer) value;
+        }
+        if (value instanceof Number) {
+            return ((Number) value).intValue();
+        }
+        String str = value.toString().trim();
+        if (str.isEmpty() || "null".equalsIgnoreCase(str)) {
+            return null;
+        }
+        try {
+            return Integer.valueOf(str);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+    }
+
+    /**
      * parseIntegerOrDefault方法。
      * * @param object Object类型参数
      *

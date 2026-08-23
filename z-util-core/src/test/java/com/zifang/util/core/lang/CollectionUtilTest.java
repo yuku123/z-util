@@ -775,4 +775,175 @@ public class CollectionUtilTest {
         assertNull(distinct.get(2)[0]);
         assertEquals("4", distinct.get(2)[1]);
     }
+
+    @Test
+    /**
+     * testPage方法。正常分页取指定页元素，末页不满时返回剩余全部。
+     */
+    public void testPage() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        assertEquals(Arrays.asList(1, 2, 3), CollectionUtil.page(list, 1, 3));
+        assertEquals(Arrays.asList(4, 5, 6), CollectionUtil.page(list, 2, 3));
+        assertEquals(Collections.singletonList(7), CollectionUtil.page(list, 3, 3));
+        assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7), CollectionUtil.page(list, 1, 10));
+    }
+
+    @Test
+    /**
+     * testPage_OutOfRangeOrIllegalArgs方法。页码越界、每页条数非法、空集合返回空列表；页码小于1按第1页。
+     */
+    public void testPage_OutOfRangeOrIllegalArgs() {
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        assertTrue(CollectionUtil.page(list, 4, 3).isEmpty());
+        assertTrue(CollectionUtil.page(list, 1, 0).isEmpty());
+        assertTrue(CollectionUtil.page(null, 1, 2).isEmpty());
+        assertTrue(CollectionUtil.page(new ArrayList<Integer>(), 1, 2).isEmpty());
+        assertEquals(Arrays.asList(1, 2), CollectionUtil.page(list, 0, 2));
+        assertEquals(Arrays.asList(-1, 0), CollectionUtil.page(Arrays.asList(-1, 0, 1), -5, 2));
+    }
+
+    @Test
+    /**
+     * testPage_ReturnsNewList方法。返回新列表，修改不影响原集合。
+     */
+    public void testPage_ReturnsNewList() {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+        List<Integer> page = CollectionUtil.page(list, 1, 2);
+        page.set(0, 99);
+        assertEquals(Integer.valueOf(1), list.get(0));
+    }
+
+    @Test
+    /**
+     * testPartition方法。整表按固定大小切分，末批为剩余元素。
+     */
+    public void testPartition() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        List<List<Integer>> partitions = CollectionUtil.partition(list, 2);
+        assertEquals(3, partitions.size());
+        assertEquals(Arrays.asList(1, 2), partitions.get(0));
+        assertEquals(Arrays.asList(3, 4), partitions.get(1));
+        assertEquals(Arrays.asList(5), partitions.get(2));
+
+        // 整除场景
+        List<List<Integer>> exact = CollectionUtil.partition(Arrays.asList(1, 2, 3, 4), 2);
+        assertEquals(2, exact.size());
+        assertEquals(Arrays.asList(3, 4), exact.get(1));
+
+        // size 大于列表长度时整表为一批
+        List<List<Integer>> single = CollectionUtil.partition(Arrays.asList(1, 2), 10);
+        assertEquals(1, single.size());
+        assertEquals(Arrays.asList(1, 2), single.get(0));
+    }
+
+    @Test
+    /**
+     * testPartition_EdgeCases方法。null/空列表返回空，非法 size 抛异常，子列表为拷贝。
+     */
+    public void testPartition_EdgeCases() {
+        assertTrue(CollectionUtil.partition(null, 2).isEmpty());
+        assertTrue(CollectionUtil.partition(new ArrayList<Integer>(), 2).isEmpty());
+        try {
+            CollectionUtil.partition(Arrays.asList(1, 2), 0);
+            fail("expected IllegalArgumentException for size 0");
+        } catch (IllegalArgumentException ignored) {
+            // 预期
+        }
+        // 子列表为拷贝，修改不影响原集合
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3));
+        List<List<Integer>> partitions = CollectionUtil.partition(list, 3);
+        partitions.get(0).set(0, 99);
+        assertEquals(Integer.valueOf(1), list.get(0));
+    }
+
+    @Test
+    /**
+     * testPartitionAsStream方法。流形态返回各批。
+     */
+    public void testPartitionAsStream() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        List<List<Integer>> collected = CollectionUtil.partitionAsStream(list, 2)
+                .collect(Collectors.toList());
+        assertEquals(3, collected.size());
+        assertEquals(Arrays.asList(5), collected.get(2));
+        assertEquals(0, CollectionUtil.partitionAsStream(null, 2).count());
+    }
+
+    @Test
+    /**
+     * testProcessInBatches方法。分批处理全部元素，处理器返回 false 时中断。
+     */
+    public void testProcessInBatches() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        final List<Integer> seen = new ArrayList<>();
+        int processed = CollectionUtil.processInBatches(list, 2, new CollectionUtil.BatchProcessor<Integer>() {
+            @Override
+            public boolean process(List<Integer> batch, int processedCount) {
+                seen.addAll(batch);
+                return true;
+            }
+        });
+        assertEquals(5, processed);
+        assertEquals(Arrays.asList(1, 2, 3, 4, 5), seen);
+
+        // 第二批中断：中断批不计入返回值，processedCount 为当前批之前累计数
+        final List<Integer> counts = new ArrayList<>();
+        int partial = CollectionUtil.processInBatches(list, 2, new CollectionUtil.BatchProcessor<Integer>() {
+            @Override
+            public boolean process(List<Integer> batch, int processedCount) {
+                counts.add(processedCount);
+                return counts.size() < 2;
+            }
+        });
+        assertEquals(2, partial);
+        assertEquals(Arrays.asList(0, 2), counts);
+    }
+
+    @Test
+    /**
+     * testProcessInBatches_EdgeCases方法。空列表返回 0，非法参数抛异常。
+     */
+    public void testProcessInBatches_EdgeCases() {
+        assertEquals(0, CollectionUtil.processInBatches(null, 2, new CollectionUtil.BatchProcessor<Integer>() {
+            @Override
+            public boolean process(List<Integer> batch, int processedCount) {
+                return true;
+            }
+        }));
+        try {
+            CollectionUtil.processInBatches(Arrays.asList(1), 0, new CollectionUtil.BatchProcessor<Integer>() {
+                @Override
+                public boolean process(List<Integer> batch, int processedCount) {
+                    return true;
+                }
+            });
+            fail("expected IllegalArgumentException for size 0");
+        } catch (IllegalArgumentException ignored) {
+            // 预期
+        }
+        try {
+            CollectionUtil.processInBatches(Arrays.asList(1), 2, null);
+            fail("expected IllegalArgumentException for null processor");
+        } catch (IllegalArgumentException ignored) {
+            // 预期
+        }
+    }
+
+    @Test
+    /**
+     * testBatchCount方法。批数向上取整，非正参数边界。
+     */
+    public void testBatchCount() {
+        assertEquals(3, CollectionUtil.batchCount(5, 2));
+        assertEquals(2, CollectionUtil.batchCount(4, 2));
+        assertEquals(1, CollectionUtil.batchCount(3, 10));
+        assertEquals(0, CollectionUtil.batchCount(0, 2));
+        assertEquals(0, CollectionUtil.batchCount(-1, 2));
+        try {
+            CollectionUtil.batchCount(5, 0);
+            fail("expected IllegalArgumentException for batchSize 0");
+        } catch (IllegalArgumentException ignored) {
+            // 预期
+        }
+    }
 }

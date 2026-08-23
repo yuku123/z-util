@@ -103,4 +103,42 @@ public class MoneyUtilTest {
     public void testNumber2CNMontrayInvalidInput() {
         MoneyUtil.number2CNMontray("abc");
     }
+
+    @Test
+    /**
+     * testYuanToCents方法。
+     */
+    public void testYuanToCents() {
+        assertEquals(Long.valueOf(123456L), MoneyUtil.yuanToCents(new BigDecimal("1234.56")));
+        assertEquals(Long.valueOf(100L), MoneyUtil.yuanToCents(new BigDecimal("1")));
+        assertEquals(Long.valueOf(0L), MoneyUtil.yuanToCents(BigDecimal.ZERO));
+        // null 视为 0
+        assertEquals(Long.valueOf(0L), MoneyUtil.yuanToCents(null));
+        // 负数与两位小数
+        assertEquals(Long.valueOf(-100L), MoneyUtil.yuanToCents(new BigDecimal("-1")));
+        assertEquals(Long.valueOf(120L), MoneyUtil.yuanToCents(new BigDecimal("1.20")));
+    }
+
+    @Test
+    /**
+     * testCentsToYuan方法。
+     */
+    public void testCentsToYuan() {
+        assertEquals(new BigDecimal("12.34"), MoneyUtil.centsToYuan(1234L));
+        assertEquals(new BigDecimal("1.00"), MoneyUtil.centsToYuan(100L));
+        assertEquals(BigDecimal.ZERO, MoneyUtil.centsToYuan(null));
+        assertEquals(new BigDecimal("0.05"), MoneyUtil.centsToYuan(5L));
+        // 负数
+        assertEquals(new BigDecimal("-1.00"), MoneyUtil.centsToYuan(-100L));
+    }
+
+    @Test
+    /**
+     * testYuanCentsRoundTrip方法。
+     */
+    public void testYuanCentsRoundTrip() {
+        // 两位小数金额往返无损
+        BigDecimal yuan = new BigDecimal("987654.32");
+        assertEquals(yuan, MoneyUtil.centsToYuan(MoneyUtil.yuanToCents(yuan)));
+    }
 }

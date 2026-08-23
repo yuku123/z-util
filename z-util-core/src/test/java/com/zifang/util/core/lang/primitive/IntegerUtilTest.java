@@ -96,6 +96,43 @@ public class IntegerUtilTest {
 
     @Test
     /**
+     * toIntegerOrNull_safeCases方法：不可转换输入统一返回 null 不抛异常。
+     */
+    public void toIntegerOrNull_safeCases() {
+        assertNull(IntegerUtil.toIntegerOrNull(null));
+        assertNull(IntegerUtil.toIntegerOrNull(""));
+        assertNull(IntegerUtil.toIntegerOrNull("   "));
+        assertNull(IntegerUtil.toIntegerOrNull("null"));
+        assertNull(IntegerUtil.toIntegerOrNull("NULL"));
+        assertNull(IntegerUtil.toIntegerOrNull("abc"));
+        assertNull(IntegerUtil.toIntegerOrNull("12.5"));
+        assertNull(IntegerUtil.toIntegerOrNull("1 2"));
+    }
+
+    @Test
+    /**
+     * toIntegerOrNull_numberTypes方法：Number 家族直接取 intValue。
+     */
+    public void toIntegerOrNull_numberTypes() {
+        assertEquals(Integer.valueOf(7), IntegerUtil.toIntegerOrNull(Integer.valueOf(7)));
+        assertEquals(Integer.valueOf(100), IntegerUtil.toIntegerOrNull(Long.valueOf(100)));
+        assertEquals(Integer.valueOf(3), IntegerUtil.toIntegerOrNull(Double.valueOf(3.9)));
+        assertEquals(Integer.valueOf(9), IntegerUtil.toIntegerOrNull(Short.valueOf((short) 9)));
+        assertEquals(Integer.valueOf(5), IntegerUtil.toIntegerOrNull(Float.valueOf(5.1f)));
+    }
+
+    @Test
+    /**
+     * toIntegerOrNull_stringCases方法：数字字符串（含负号与首尾空白）按十进制解析。
+     */
+    public void toIntegerOrNull_stringCases() {
+        assertEquals(Integer.valueOf(123), IntegerUtil.toIntegerOrNull("123"));
+        assertEquals(Integer.valueOf(-456), IntegerUtil.toIntegerOrNull(" -456 "));
+        assertEquals(Integer.valueOf(7), IntegerUtil.toIntegerOrNull("+7"));
+    }
+
+    @Test
+    /**
      * saturatedCast_justBeyondBounds方法。
      */
     public void saturatedCast_justBeyondBounds() {

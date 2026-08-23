@@ -330,4 +330,32 @@ public class MoneyUtil {
         return head + s.replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$",
                 "零元整");
     }
+
+    /**
+     * yuanToCents方法。
+     * 元转分：金额乘以 100 后取整数部分。
+     *
+     * @param yuan 元为单位的金额，null 视为 0
+     * @return Long类型返回值，分为单位的金额
+     */
+    public static Long yuanToCents(BigDecimal yuan) {
+        if (yuan == null) {
+            return 0L;
+        }
+        return yuan.multiply(new BigDecimal("100")).longValue();
+    }
+
+    /**
+     * centsToYuan方法。
+     * 分转元：金额除以 100，保留 2 位小数（四舍五入）。
+     *
+     * @param cents 分为单位的金额，null 视为 0
+     * @return BigDecimal类型返回值，元为单位的金额
+     */
+    public static BigDecimal centsToYuan(Long cents) {
+        if (cents == null) {
+            return BigDecimal.ZERO;
+        }
+        return new BigDecimal(cents).divide(new BigDecimal("100"), 2, RoundingMode.HALF_UP);
+    }
 }

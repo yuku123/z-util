@@ -101,6 +101,31 @@ public class JsonUtil {
         throw new JsonTypeException("JSON is not an array: " + json);
     }
 
+    /**
+     * 将JSON对象字符串安全解析为Map。
+     * <p>
+     * json为null、空白、解析失败、非对象结构或字面量null时返回空Map，不抛出异常，
+     * 适用于扩展字段、配置串等来源不可信的场景。
+     *
+     * @param json JSON字符串
+     * @return 键值映射；解析失败时返回空Map
+     */
+    public static Map<String, Object> parseToMap(String json) {
+        Map<String, Object> result = new HashMap<>();
+        if (json == null || json.trim().isEmpty()) {
+            return result;
+        }
+        try {
+            JsonObject jsonObject = parseObject(json);
+            for (Map.Entry<String, Object> entry : jsonObject.getAllKeyValue()) {
+                result.put(entry.getKey(), entry.getValue());
+            }
+        } catch (Exception e) {
+            // 解析失败保持空Map
+        }
+        return result;
+    }
+
     // ==================== 序列化 ====================
 
     public static <T> String toJson(T t) {
@@ -192,6 +217,19 @@ public class JsonUtil {
     }
 
     /**
+     * 从JSON字符串中获取指定键的String值，键不存在时返回默认值
+     *
+     * @param json         JSON字符串，为null或空白时视为空对象
+     * @param key          键名
+     * @param defaultValue 键不存在时的默认返回值
+     * @return 字符串值；键不存在时返回defaultValue
+     */
+    public static String getString(String json, String key, String defaultValue) {
+        String value = getString(json, key);
+        return value == null ? defaultValue : value;
+    }
+
+    /**
      * 从JSON字符串中获取指定键的Integer值
      *
      * @param json JSON字符串，为null或空白时视为空对象
@@ -200,6 +238,19 @@ public class JsonUtil {
      */
     public static Integer getInteger(String json, String key) {
         return toIntegerOrNull(parseLenient(json).get(key));
+    }
+
+    /**
+     * 从JSON字符串中获取指定键的Integer值，键不存在或无法解析时返回默认值
+     *
+     * @param json         JSON字符串，为null或空白时视为空对象
+     * @param key          键名
+     * @param defaultValue 键不存在或值无法解析时的默认返回值
+     * @return Integer值；解析失败时返回defaultValue
+     */
+    public static Integer getInteger(String json, String key, Integer defaultValue) {
+        Integer value = toIntegerOrNull(parseLenient(json).get(key));
+        return value == null ? defaultValue : value;
     }
 
     /**

@@ -12,6 +12,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.zifang.util.core.lang.MapUtil.MAX_POWER_OF_TWO;
 
@@ -623,6 +624,132 @@ public class CollectionUtil {
             Object key = keyExtractor.apply(t);
             return seen.add(key == null ? NULL_KEY : key);
         };
+    }
+
+    /**
+     * page方法。对列表做内存分页，返回第 pageNum 页（页码从 1 开始）的 pageSize 条元素。
+     * 页码越界、集合为空或每页条数非法时返回空列表；返回结果为新列表，修改不影响原集合。
+     *
+     * @param list     待分页的列表，为 null 或空时返回空列表
+     * @param pageNum  页码，从 1 开始，小于 1 时按第 1 页处理
+     * @param pageSize 每页条数，小于等于 0 时返回空列表
+     * @param <T>      元素类型
+     * @return 当前页元素组成的新列表
+     */
+    public static <T> List<T> page(List<T> list, int pageNum, int pageSize) {
+        if (isEmpty(list) || pageSize <= 0) {
+            return new ArrayList<>();
+        }
+        int fromIndex = (Math.max(pageNum, 1) - 1) * pageSize;
+        int total = list.size();
+        if (fromIndex >= total) {
+            return new ArrayList<>();
+        }
+        int toIndex = Math.min(fromIndex + pageSize, total);
+        return new ArrayList<>(list.subList(fromIndex, toIndex));
+    }
+
+    /**
+     * partition方法。将列表按固定大小切分为多个子列表（整表切分）。
+     * 最后一批为剩余元素；返回结果与各子列表均为新列表，修改不影响原集合。
+     *
+     * @param list 待切分的列表，为 null 或空时返回空列表
+     * @param size 每个子列表的大小，小于等于 0 时抛出 IllegalArgumentException
+     * @param <T>  元素类型
+     * @return 子列表组成的新列表
+     */
+    public static <T> List<List<T>> partition(List<T> list, int size) {
+        if (size <= 0) {
+            throw new IllegalArgumentException("size must be positive: " + size);
+        }
+        List<List<T>> partitions = new ArrayList<>();
+        if (isEmpty(list)) {
+            return partitions;
+        }
+        int total = list.size();
+        for (int i = 0; i < total; i += size) {
+            partitions.add(new ArrayList<>(list.subList(i, Math.min(i + size, total))));
+        }
+        return partitions;
+    }
+
+    /**
+     * partitionAsStream方法。将列表按固定大小切分并以流的形式返回各批。
+     *
+     * @param list 待切分的列表，为 null 或空时返回空流
+     * @param size 每批的大小，小于等于 0 时抛出 IllegalArgumentException
+     * @param <T>  元素类型
+     * @return 各批组成的流
+     */
+    public static <T> Stream<List<T>> partitionAsStream(List<T> list, int size) {
+        return partition(list, size).stream();
+    }
+
+    /**
+     * processInBatches方法。将列表按固定大小分批交给处理器处理，返回已处理的元素个数。
+     * 处理器返回 false 时中断后续批次；已处理计数为当前批之前累计的元素个数。
+     *
+     * @param list      待处理的列表，为 null 或空时返回 0
+     * @param size      每批的大小，小于等于 0 时抛出 IllegalArgumentException
+     * @param processor 批处理器，为 null 时抛出 IllegalArgumentException
+     * @param <T>       元素类型
+     * @return 已处理的元素个数
+     */
+    public static <T> int processInBatches(List<T> list, int size, BatchProcessor<T> processor) {
+        if (size <= 0) {
+            throw new IllegalArgumentException("size must be positive: " + size);
+        }
+        if (processor == null) {
+            throw new IllegalArgumentException("processor must not be null");
+        }
+        if (isEmpty(list)) {
+            return 0;
+        }
+        int total = list.size();
+        int processedCount = 0;
+        for (int i = 0; i < total; i += size) {
+            List<T> batch = list.subList(i, Math.min(i + size, total));
+            if (!processor.process(batch, processedCount)) {
+                break;
+            }
+            processedCount += batch.size();
+        }
+        return processedCount;
+    }
+
+    /**
+     * batchCount方法。计算按固定批大小组批时的批数（向上取整）。
+     *
+     * @param totalSize 元素总个数，小于等于 0 时返回 0
+     * @param batchSize 批大小，小于等于 0 时抛出 IllegalArgumentException
+     * @return 批数
+     */
+    public static int batchCount(int totalSize, int batchSize) {
+        if (batchSize <= 0) {
+            throw new IllegalArgumentException("batchSize must be positive: " + batchSize);
+        }
+        if (totalSize <= 0) {
+            return 0;
+        }
+        return (totalSize + batchSize - 1) / batchSize;
+    }
+
+    /**
+     * BatchProcessor接口。批处理器，process 返回 false 时中断后续批次。
+     *
+     * @param <T> 元素类型
+     */
+    @FunctionalInterface
+    public interface BatchProcessor<T> {
+
+        /**
+         * process方法。处理单个批次。
+         *
+         * @param batch         当前批元素
+         * @param processedCount 当前批之前累计已处理的元素个数
+         * @return boolean类型返回值，返回 false 时中断后续批次
+         */
+        boolean process(List<T> batch, int processedCount);
     }
 
 
