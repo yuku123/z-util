@@ -15,22 +15,6 @@
     <artifactId>z-util-core</artifactId>
 
     <dependencies>
-        <!--
-            自研调度器（基于 ScheduledThreadPoolExecutor + 自研 Cron 解析器），
-            不再需要 quartz。
-        -->
-
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
-        </dependency>
-
-        <!-- BouncyCastle：SM4 等国密算法支持 -->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-        </dependency>
 
         <!-- SLF4J -> log4j 2.x 实现 -->
         <dependency>

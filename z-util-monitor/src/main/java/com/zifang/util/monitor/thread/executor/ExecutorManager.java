@@ -1,6 +1,6 @@
 package com.zifang.util.monitor.thread.executor;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.zifang.util.core.lang.concurrency.NameThreadFactory;
 import com.zifang.util.monitor.thread.MonitorManager;
 import com.zifang.util.monitor.thread.Monitorable;
 import org.slf4j.Logger;
@@ -70,7 +70,7 @@ public class ExecutorManager {
             FixedMonitorableExecutor threadPoolExecutor = new FixedMonitorableExecutor(
                     threadPoolConfigUnit,
                     new LinkedBlockingQueue<Runnable>(),
-                    new ThreadFactoryBuilder().setNameFormat(threadPoolConfigUnit.getPoolName() + "-%d").build());
+                    new NameThreadFactory().setNameFormat(threadPoolConfigUnit.getPoolName() + "-%d").build());
             //将线程池保存起来。
             threadPoolMap.put(threadPoolConfigUnit.getPoolName(), threadPoolExecutor);
             //将每个监控周期的被监控组件组合成一个map

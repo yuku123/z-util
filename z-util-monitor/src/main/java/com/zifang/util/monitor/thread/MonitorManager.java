@@ -1,6 +1,6 @@
 package com.zifang.util.monitor.thread;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.zifang.util.core.lang.concurrency.NameThreadFactory;
 import com.zifang.util.monitor.thread.task.MonitorTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +56,7 @@ public class MonitorManager {
         //为每个监控周期新建一个定时任务线程池。
         for (Map.Entry<Long, List<Monitorable>> entry : monitorAggregation.entrySet()) {
             ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(
-                    new ThreadFactoryBuilder().setNameFormat("monitor-thread-%d").build());
+                    new NameThreadFactory().setNameFormat("monitor-thread-%d").build());
             scheduledExecutorService.scheduleAtFixedRate(new MonitorTask(entry.getValue()),
                     entry.getKey(), entry.getKey(), TimeUnit.MILLISECONDS);
             scheduledExecutorServiceList.add(scheduledExecutorService);
