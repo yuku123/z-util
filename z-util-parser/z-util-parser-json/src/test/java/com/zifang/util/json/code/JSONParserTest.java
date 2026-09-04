@@ -231,6 +231,59 @@ public class JSONParserTest {
         assertEquals("射手", obj.get("type"));
     }
 
+    // ===== 字符串中的转义序列 (regression for g4 [.] vs . bug) =====
+
+    @Test
+    public void testParseEscapedNewline() throws Exception {
+        JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"a\": \"line1\\nline2\"}");
+        assertEquals("line1\nline2", obj.get("a"));
+    }
+
+    @Test
+    public void testParseEscapedTab() throws Exception {
+        JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"a\": \"col1\\tcol2\"}");
+        assertEquals("col1\tcol2", obj.get("a"));
+    }
+
+    @Test
+    public void testParseEscapedQuote() throws Exception {
+        JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"a\": \"say \\\"hi\\\"\"}");
+        assertEquals("say \"hi\"", obj.get("a"));
+    }
+
+    @Test
+    public void testParseEscapedBackslash() throws Exception {
+        JsonObject obj = (JsonObject) jsonParser.fromJSON("{\"a\": \"C:\\\\Users\\\\test\"}");
+        assertEquals("C:\\Users\\test", obj.get("a"));
+    }
+
+    @Test
+    public void testParseEscapedUnicode() throws Exception {
+        // 构造 JSON 字面量：用 char 拼装避免 Java 编译器在源码层把 unicode 转义吃掉
+        // 目标 JSON: {"a": "\u4e2d\u6587 text"}
+        StringBuilder sb = new StringBuilder("{\"a\": \"");
+        sb.append("\\u4e2d\\u6587 text");
+        sb.append("\"}");
+        JsonObject obj = (JsonObject) jsonParser.fromJSON(sb.toString());
+        assertEquals("中文 text", obj.get("a"));
+    }
+
+    @Test
+    public void testParseMixedEscapesInNestedStructure() throws Exception {
+        // 模拟 z-team chat-test 场景的 configJson 形态
+        String json = "{\"agents\": [{\"role\": \"developer\", \"refId\": \"agent_assistant\","
+                + "\"default\": true, \"position\": \"A\","
+                + "\"description\": \"line1\\nline2\\twith tab\"}],"
+                + "\"welcomeMessage\": \"hello {{name}}\\n\"}";
+        JsonObject obj = (JsonObject) jsonParser.fromJSON(json);
+        JsonArray agents = obj.getJsonArray("agents");
+        assertEquals(1, agents.size());
+        JsonObject agent = agents.getJsonObject(0);
+        assertEquals("developer", agent.get("role"));
+        assertEquals("line1\nline2\twith tab", agent.get("description"));
+        assertEquals("hello {{name}}\n", obj.get("welcomeMessage"));
+    }
+
     // ===== getJsonObject / getJsonArray 异常 =====
 
     @Test(expected = IllegalArgumentException.class)

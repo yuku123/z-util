@@ -15,6 +15,6 @@ Bool: 'true' | 'false';
 
 Number: '-'? [0-9]+ ('.' [0-9]+)? ([eE] [+-]? [0-9]+)?;
 
-StringLiteral: '"' (~["\\\r\n] | '\\' [.])* '"';
+StringLiteral: '"' (~["\\\r\n] | '\\' .)* '"';
 
 AnyChar: .;

@@ -225,15 +225,15 @@ public class JSONParser {
             if ("StringLiteral".equals(child.getType())) {
                 String t = child.getText();
                 if (t != null && t.length() >= 2) {
-                    // 去掉首尾引号
-                    return t.substring(1, t.length() - 1);
+                    // 去掉首尾引号 + 反转义 JSON 转义序列
+                    return unescapeJsonString(t.substring(1, t.length() - 1));
                 }
             }
         }
         // fallback：直接用 text
         String t = stringNode.getText();
         if (t != null && t.length() >= 2) {
-            return t.substring(1, t.length() - 1);
+            return unescapeJsonString(t.substring(1, t.length() - 1));
         }
         return t;
     }
@@ -270,9 +270,9 @@ public class JSONParser {
                 break;
             case "string":
             case "StringLiteral":
-                // 去掉引号
+                // 去掉引号 + 反转义 JSON 转义序列
                 if (text.length() >= 2 && text.startsWith("\"") && text.endsWith("\"")) {
-                    return text.substring(1, text.length() - 1);
+                    return unescapeJsonString(text.substring(1, text.length() - 1));
                 }
                 return text;
             case "terminal":
@@ -285,5 +285,76 @@ public class JSONParser {
                 break;
         }
         return text;
+    }
+
+    /**
+     * 反转义 JSON 字符串内容。
+     * <p>支持标准的 JSON 字符串转义序列（含 Unicode escape 和 UTF-16 代理对）。
+     * <p>遇到无法识别的转义序列时保留原样（与多数 JSON 库一致）。
+     */
+    private String unescapeJsonString(String s) {
+        if (s == null || s.indexOf('\\') < 0) {
+            return s;
+        }
+        StringBuilder sb = new StringBuilder(s.length());
+        int i = 0;
+        while (i < s.length()) {
+            char c = s.charAt(i);
+            if (c != '\\' || i + 1 >= s.length()) {
+                sb.append(c);
+                i++;
+                continue;
+            }
+            char next = s.charAt(i + 1);
+            switch (next) {
+                case '"':  sb.append('"');  i += 2; break;
+                case '\\': sb.append('\\'); i += 2; break;
+                case '/':  sb.append('/');  i += 2; break;
+                case 'b':  sb.append('\b'); i += 2; break;
+                case 'f':  sb.append('\f'); i += 2; break;
+                case 'n':  sb.append('\n'); i += 2; break;
+                case 'r':  sb.append('\r'); i += 2; break;
+                case 't':  sb.append('\t'); i += 2; break;
+                case 'u':
+                    if (i + 5 < s.length()) {
+                        String hex = s.substring(i + 2, i + 6);
+                        int cp;
+                        try {
+                            cp = Integer.parseInt(hex, 16);
+                        } catch (NumberFormatException ex) {
+                            sb.append(c).append(next);
+                            i += 2;
+                            break;
+                        }
+                        // 高位代理：合并后续的 low surrogate 形成 supplementary code point
+                        if (Character.isHighSurrogate((char) cp)
+                                && i + 11 < s.length()
+                                && s.charAt(i + 6) == '\\' && s.charAt(i + 7) == 'u') {
+                            String lowHex = s.substring(i + 8, i + 12);
+                            try {
+                                int low = Integer.parseInt(lowHex, 16);
+                                if (Character.isLowSurrogate((char) low)) {
+                                    sb.appendCodePoint(Character.toCodePoint((char) cp, (char) low));
+                                    i += 12;
+                                    break;
+                                }
+                            } catch (NumberFormatException ignored) {
+                            }
+                        }
+                        sb.append((char) cp);
+                        i += 6;
+                    } else {
+                        // 末尾残缺 unicode escape 不足 4 位：原样保留
+                        sb.append(c).append(next);
+                        i += 2;
+                    }
+                    break;
+                default:
+                    // 未知转义：保留 \ 与下一字符
+                    sb.append(c).append(next);
+                    i += 2;
+            }
+        }
+        return sb.toString();
     }
 }
