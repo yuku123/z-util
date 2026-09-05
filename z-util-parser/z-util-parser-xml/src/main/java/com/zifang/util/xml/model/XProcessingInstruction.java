@@ -5,10 +5,6 @@ package com.zifang.util.xml.model;
  *
  * @author zifang
  */
-
-/**
- * XProcessingInstruction类。
- */
 public class XProcessingInstruction implements XNode {
 
     private final String target;

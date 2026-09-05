@@ -17,10 +17,6 @@ import java.util.Map;
  *
  * @author zifang
  */
-
-/**
- * XElement类。
- */
 public class XElement implements XNode {
 
     private String name;
@@ -219,11 +215,6 @@ public class XElement implements XNode {
         this.parent = parent;
     }
 
-    // ===== 便捷查找 =====
-
-    /**
-     * 获取直接子元素（不含文本、注释等）。
-     */
     /**
      * getChildElements方法。
      *

@@ -43,6 +43,8 @@ public class DynamicLexer implements Lexer {
     private int nextTypeId;
     // 解析结果
     private List<Token> tokens;
+    // 是否保留空白（关闭词法层对 ' '、'\t'、'\r' 的预跳过，默认 false 保持向后兼容）
+    private boolean preserveWhitespace;
 
     /**
      * DynamicLexer方法。
@@ -453,6 +455,30 @@ public class DynamicLexer implements Lexer {
         this.column = 1;
     }
 
+    /**
+     * 设置是否在词法阶段预跳过空白字符（' '、'\t'、'\r'）。
+     * <p>
+     * 默认 false：行为与历史版本一致，词法层在每次取 token 前会跳过空白，
+     * 适合 JSON / YAML / INI / Properties 等以行为单位的格式。
+     * <p>
+     * 设置为 true：关闭预跳过，由 G4 词法规则自行决定如何处理空白，
+     * 适合需要保留文本中原始空白（如 XML 文本节点前后空格）的场景。
+     *
+     * @param preserve 是否保留空白
+     */
+    public void setPreserveWhitespace(boolean preserve) {
+        this.preserveWhitespace = preserve;
+    }
+
+    /**
+     * 当前是否启用保留空白模式。
+     *
+     * @return 是否在词法层保留空白
+     */
+    public boolean isPreserveWhitespace() {
+        return preserveWhitespace;
+    }
+
     @Override
     /**
      * setInput方法。
@@ -500,16 +526,20 @@ public class DynamicLexer implements Lexer {
      * 获取下一个Token
      */
     private Token nextToken() {
-        // 跳过空白字符（不包括换行符 LF，换行符留给词法规则匹配）
-        while (pos < chars.length && isWhitespace(chars[pos])) {
-            if (chars[pos] == '\n') {
-                // 永远不会进来：isWhitespace 不再匹配 \n
-                line++;
-                column = 1;
-            } else {
-                column++;
+        // 跳过空白字符（不包括换行符 LF，换行符留给词法规则匹配）。
+        // 当调用方开启 preserveWhitespace 时（如 XML），跳过该循环以便 G4
+        // 词法规则捕获完整的文本内容（含前后空格）。
+        if (!preserveWhitespace) {
+            while (pos < chars.length && isWhitespace(chars[pos])) {
+                if (chars[pos] == '\n') {
+                    // 永远不会进来：isWhitespace 不再匹配 \n
+                    line++;
+                    column = 1;
+                } else {
+                    column++;
+                }
+                pos++;
             }
-            pos++;
         }
 
         if (pos >= chars.length) {

@@ -1,15 +1,11 @@
 package com.zifang.util.xml;
 
 import com.zifang.util.xml.model.*;
-import com.zifang.util.xml.parser.XmlParser;
-import com.zifang.util.xml.tokenizer.CharReader;
-import com.zifang.util.xml.tokenizer.TokenList;
-import com.zifang.util.xml.tokenizer.Tokenizer;
+import com.zifang.util.xml.parser.XmlG4Parser;
 import com.zifang.util.xml.util.XPathQuery;
 import com.zifang.util.xml.util.XmlFormatter;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.List;
 
 /**
@@ -17,7 +13,7 @@ import java.util.List;
  * <p>
  * 特性:
  * <ul>
- *   <li>零 XML 依赖：纯手写 tokenizer + 递归下降解析器</li>
+ *   <li>基于 G4 DSL 动态词法（XmlLexer.g4 + DynamicLexer）</li>
  *   <li>支持 XML 声明、命名空间（保留前缀）、CDATA、注释、处理指令</li>
  *   <li>支持实体引用解码：&amp; &lt; &gt; &quot; &apos; &#nnn; &#xnnn;</li>
  *   <li>XPath 查询支持：路径、属性过滤、位置索引、通配符</li>
@@ -56,11 +52,7 @@ public class XmlUtil {
         if (xml == null || xml.trim().isEmpty()) {
             throw new IllegalArgumentException("XML string cannot be null or empty");
         }
-        CharReader charReader = new CharReader(new StringReader(xml));
-        Tokenizer tokenizer = new Tokenizer();
-        TokenList tokens = tokenizer.tokenize(charReader);
-        XmlParser parser = new XmlParser();
-        return parser.parse(tokens);
+        return new XmlG4Parser().parse(xml);
     }
 
     /**

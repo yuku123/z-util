@@ -18,4 +18,14 @@ public class XmlParseException extends RuntimeException {
     public XmlParseException(String message) {
         super(message);
     }
+
+    /**
+     * 带原始异常的构造方法。
+     *
+     * @param message 异常描述
+     * @param cause   原始异常
+     */
+    public XmlParseException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

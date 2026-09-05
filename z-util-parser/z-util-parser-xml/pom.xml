@@ -18,6 +18,7 @@
         <dependency>
             <groupId>io.github.yuku123</groupId>
             <artifactId>z-util-core</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.github.yuku123</groupId>

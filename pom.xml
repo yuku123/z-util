@@ -259,7 +259,6 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${jackson.version}</version>
-                <scope>compile</scope>
             </dependency>
 
             <!-- 强制升级 transitive jackson-core 到修复版本（部分依赖会拉入旧版） -->
