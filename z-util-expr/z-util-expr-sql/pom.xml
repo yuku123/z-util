@@ -10,10 +10,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <name>z-util :: expr :: sql (SQL parser + function registry)</name>
+    <name>z-util :: expr :: sql (SQL expression engine + virtual table)</name>
     <artifactId>z-util-expr-sql</artifactId>
-    <description>SQL 语句解析器</description>
+    <description>内存 SQL 引擎：G4 词法 + 虚拟表查询</description>
     <dependencies>
+        <dependency>
+            <groupId>io.github.yuku123</groupId>
+            <artifactId>z-util-dsl</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.yuku123</groupId>
+            <artifactId>z-util-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
