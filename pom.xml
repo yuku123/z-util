@@ -117,6 +117,7 @@
         <module>z-util-cache</module>
         <module>z-util-ioc</module>
         <module>z-util-aop</module>
+        <module>z-util-serialize</module>
         <module>z-util-all</module>
     </modules>
 
@@ -135,6 +136,31 @@
             <dependency>
                 <groupId>io.github.yuku123</groupId>
                 <artifactId>z-util-monitor</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-serialize</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-serialize-schema</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-serialize-core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-serialize-codegen</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.yuku123</groupId>
+                <artifactId>z-util-serialize-formats</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
