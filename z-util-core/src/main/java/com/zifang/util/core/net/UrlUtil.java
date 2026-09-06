@@ -24,7 +24,7 @@ import java.util.Map;
  * String decoded = UrlUtil.decode("hello%20world");
  *
  * // 获取参数值
- * String name = UrlUtil.getParamValue("http://example.com?name=张三", "name");
+ * String name = UrlUtil.getParamValue("<a href="http://example.com?name=">...</a>张三", "name");
  *
  * // 添加/修改参数
  * String newUrl = UrlUtil.setParam("http://example.com", "name", "李四");
@@ -268,7 +268,7 @@ public class UrlUtil {
             String[] paramValues = request.getParameterValues(paramName);
             if (paramValues != null && paramValues.length > 0) {
                 // 单值参数直接取第一个，非空值存入
-                if (paramValues.length == 1 && paramValues[0].length() > 0) {
+                if (paramValues.length == 1 && !paramValues[0].isEmpty()) {
                     params.put(paramName, paramValues[0]);
                 } else if (paramValues.length > 1) {
                     // 多值参数用逗号连接
@@ -298,28 +298,28 @@ public class UrlUtil {
 
         Map<String, String> result = new HashMap<>();
         String name = null;
-        String value = null;
+        StringBuilder value = null;
         int len = query.length();
 
         for (int i = 0; i < len; i++) {
             char c = query.charAt(i);
             if (c == split2) {
-                value = "";
+                value = new StringBuilder();
             } else if (c == split1) {
                 if (name != null && value != null) {
-                    putValue(result, name, value, dupLink);
+                    putValue(result, name, value.toString(), dupLink);
                 }
                 name = null;
                 value = null;
             } else if (value != null) {
-                value += c;
+                value.append(c);
             } else {
                 name = (name != null) ? name + c : "" + c;
             }
         }
 
         if (name != null && value != null) {
-            putValue(result, name, value, dupLink);
+            putValue(result, name, value.toString(), dupLink);
         }
 
         return result;
@@ -509,10 +509,6 @@ public class UrlUtil {
          * @return URL 字符串
          */
         @Override
-        /**
-         * toString方法。
-         * @return String类型返回值
-         */
         public String toString() {
             return url.toString();
         }

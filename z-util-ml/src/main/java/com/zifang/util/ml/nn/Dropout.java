@@ -81,11 +81,6 @@ public class Dropout extends Module {
     }
 
     @Override
-    /**
-     * backward方法。
-     *      * @param gradOutput NdArray类型参数
-     * @return NdArray类型返回值
-     */
     public NdArray backward(NdArray gradOutput) {
         // During training: dL/dx = dL/dy * mask (scaled)
         // During inference: dL/dx = dL/dy * (1-p)

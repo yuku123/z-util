@@ -1,10 +1,7 @@
 package com.zifang.util.core.meta;
 
 /**
- * @author: zifang
- * @time: 2021-07-29 10:49:00
- * @description: copy from com.alibaba.nacos.spring.util.Tuple
- * @version: JDK 1.8
+ * @author zifang
  */
 public class Tuple<A, B> {
 
